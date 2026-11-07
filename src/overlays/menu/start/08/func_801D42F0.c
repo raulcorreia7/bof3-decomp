@@ -16,14 +16,14 @@ MATCH void func_801D42F0(void) {
     items  = &D_801C893C[D_8014850E][D_80148510];
     counts = &D_801C8950[D_8014850E][D_80148510];
     TEXT_SetVariable(0, 0xC, (const u8*)&g_Items[*items]);
-    g_MenuPanelTasks[11].unk_10 = 0x19;
-    D_801485DC                  = 1;
-    D_801485E0                  = 0xB6;
-    sel                         = &D_80148656;
-    D_801485E2                  = *sel * 0x36 + 0x3E;
-    count                       = Party_CountOrder(PARTY_ORDER_FIELD);
-    input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    old                         = *sel;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x19;
+    D_801485DC                                            = 1;
+    D_801485E0                                            = 0xB6;
+    sel                                                   = &D_80148656;
+    D_801485E2                                            = *sel * 0x36 + 0x3E;
+    count                                                 = Party_CountOrder(PARTY_ORDER_FIELD);
+    input                                                 = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    old                                                   = *sel;
     if (input & PADLup) {
         *sel = old - 1;
         if (*sel < 0) {

@@ -57,7 +57,7 @@ MATCH u8 func_801DB04C(void) {
             g_PartyBattleOrder[i] = reserve;
         }
     }
-    /* FAKE: retail reads g_MenuPanelTasks[12].unk_0A as u8[]. */
+    /* FAKE: retail reads g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A as u8[]. */
     for (i = 0; i < ((u8*)&D_801484EA)[0]; i++) {
         if (D_801ED690[i] == reserve) {
             D_801ED690[i] = member;

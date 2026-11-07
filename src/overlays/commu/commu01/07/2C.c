@@ -37,8 +37,35 @@ MATCH void func_801D1328(void) {
 
 INCLUDE_ASM(func_801D1364);
 
-/* hint: the pressed-button branch with the confirm and cancel masks is 4 bytes over (0x14C against 0x148); first differing instruction: lui v1,0x8014 at +0x0, because retail loads g_InputPressed before the mask and keeps &g_SceneEventSelection in s0 across the two func_801D36FC calls. */
-INCLUDE_ASM(func_801D1630);
+MATCH void func_801D1630(void) {
+    u16 x;
+    s16 y;
+    s32 result;
+    u8* selection;
+
+    result = 0;
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        func_801D47C4();
+        func_801D49C4();
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        result = func_801D482C(1);
+        if (result & 0xFF) {
+            D_801D4E0C = 0xB5;
+        }
+    } else {
+        func_801D3B0C(&D_801D4E28);
+        func_801D4AAC(&D_801D4E28);
+    }
+    func_801D3038();
+    selection = &g_SceneEventSelection;
+    func_801D36FC(*selection, 1);
+    func_801D36FC(D_801D4E28, 0);
+    if (!(result & 0xFF)) {
+        func_801D4694(&x, &y, *selection, D_801D4E24);
+        func_801D3984((s16)(x + 4), y, 1);
+        func_801D28A4(0xA0, 0x3E, func_801D3AA0(*selection, (D_801D4E24 - 1) & 0xFF) & 0xFF, 1);
+    }
+}
 
 INCLUDE_ASM(func_801D1778);
 

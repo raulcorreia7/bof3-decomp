@@ -8,8 +8,15 @@
 #include <stdio.h>
 
 /* The save-image buffer the card writer clears and then checksums. */
-#define SAVE_IMAGE_ADDR 0x800C1A00u
-#define g_SceneFlags    ((void*)g_SceneFlags)
+#define SAVE_IMAGE_ADDR               0x800C1A00u
+
+/* Panel slots of the start menu, by the role the modes assigned to them give. */
+#define MENU_START_PANEL_DESCRIPTION  11 /* header bar with the selected entry's description */
+#define MENU_START_PANEL_COMMANDS     12 /* command row */
+#define MENU_START_PANEL_ITEMS        13 /* item list */
+#define MENU_START_PANEL_CURSOR_FRAME 19 /* frame drawn around the cursor */
+#define MENU_START_PANEL_CURSOR       21 /* pointing-hand cursor */
+#define g_SceneFlags                  ((void*)g_SceneFlags)
 
 /* Draw the scene timer sprite and count down; on zero advance the cue counter.
  * A bare statement macro: the member declares `timer` and `count`. Kept: tested
@@ -226,11 +233,16 @@ extern u8              D_801D0DC4[4];
 extern u8              s_RowCaptionTags[24];
 extern char            g_SaveFileNameFormat[];
 extern char            D_801D0F14[];
+
 /* The party records the New Game screen starts from. */
-extern Character       D_801EB514[7];
-extern Character       D_801EB990;
-extern u8              D_801EBA34[][2];
-extern u8              s_CampMenuPanelIds[8];
+typedef struct WillpowerCurve {
+    u8 level_divisor;
+    u8 base;
+} WillpowerCurve;
+
+extern Character      g_StartCharacters[CHAR_INDEX_COUNT];
+extern WillpowerCurve g_StartWillpowerCurves[CHAR_INDEX_COUNT];
+extern u8             s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
 #define MENU_START_STEP_COUNT          9
 #define MENU_START_STEP2_COUNT         11
@@ -683,8 +695,10 @@ extern u8        D_80181B1A;
 extern s32       Item_Count(u8 category, u8 item, u8 mode);
 extern u8*       D_801C8940;
 extern u8*       D_801C8944;
-extern char      D_801D0C50[8];
-extern char      D_801D0C58[8];
+/* D_801D0C50 */
+extern char      g_MenuCurrentValueFormat[8];
+/* D_801D0C58 */
+extern char      g_MenuMaxValueFormat[8];
 extern char      g_MenuClockFormat[];
 extern u8        D_801D0E20[];
 extern s32       D_801D0E28;

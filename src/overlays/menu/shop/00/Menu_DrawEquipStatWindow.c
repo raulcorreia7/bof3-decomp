@@ -34,7 +34,8 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
             break;
     }
     present = ((Item_GetEquipability(category, item_id) >> character_index) ^ 1) & 1;
-    UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, 108, 48, present, g_WindowStyle);
+    UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, MENU_EQUIP_STAT_WINDOW_WIDTH, MENU_EQUIP_STAT_WINDOW_HEIGHT,
+                  present, g_WindowStyle);
     clut = 0;
     if (present == 0) {
         Char_PreviewEquip(character_index, (equip_slot - 1) & BYTE_MASK, item_id, flags, values);

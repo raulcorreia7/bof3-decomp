@@ -19,19 +19,19 @@ NON_MATCHING void func_801D8390(void) {
     u8   count;
 
     Menu_DrawClutStrip(D_80144953);
-    panel                       = &D_801484CC;
-    *panel                      = 0x17;
-    *((u8*)panel + 0x110)       = 1;
-    g_MenuPanelTasks[19].unk_0B = 1;
-    g_MenuPanelTasks[21].active = 1;
-    slot                        = (u8*)panel + 0xA4;
-    D_801485E0                  = g_MenuPanelTasks[4].pos.x;
-    D_801485E2                  = g_MenuPanelTasks[4].pos.y + g_MenuPanelTasks[16].unk_0A * 0x36;
-    g_MenuPanelTasks[21].pos.x  = g_MenuPanelTasks[16].pos.x + 0x2A;
-    g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[16].pos.y + 7;
-    pad                         = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    g_MenuPanelTasks[16].flags  = 0xFF;
-    count                       = Party_CountOrder(PARTY_ORDER_FIELD);
+    panel                                                  = &D_801484CC;
+    *panel                                                 = 0x17;
+    *((u8*)panel + 0x110)                                  = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active       = 1;
+    slot                                                   = (u8*)panel + 0xA4;
+    D_801485E0                                             = g_MenuPanelTasks[4].pos.x;
+    D_801485E2                                      = g_MenuPanelTasks[4].pos.y + g_MenuPanelTasks[16].unk_0A * 0x36;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x = g_MenuPanelTasks[16].pos.x + 0x2A;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = g_MenuPanelTasks[16].pos.y + 7;
+    pad                                             = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    g_MenuPanelTasks[16].flags                      = 0xFF;
+    count                                           = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         g_MenuPanelTasks[16].unk_0A -= 1;

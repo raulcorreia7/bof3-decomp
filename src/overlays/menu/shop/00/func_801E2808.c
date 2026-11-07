@@ -7,7 +7,8 @@
 
 MATCH void func_801E2808(void) {
     g_ShopPanel0StateFuncs[g_MenuCurrentPanel->state]();
-    Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 0x118, 0x13, g_WindowStyle);
+    Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                       g_WindowStyle);
     if (ICON_CURSOR != 0) {
         WinDrawCueText((g_MenuCurrentPanel->pos.x + 7), (g_MenuCurrentPanel->pos.y + 3), (u16)ICON_CURSOR);
         if (ICON_CURSOR == 0x36 || (u16)(ICON_CURSOR - 0x49) < 2 || ICON_CURSOR == 0x52) {

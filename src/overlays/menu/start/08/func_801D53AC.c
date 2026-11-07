@@ -10,14 +10,15 @@ NON_MATCHING void func_801D53AC(void) {
     u8  old;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].pos.y  = (u16)g_MenuPanelTasks[12].pos.y + 4;
-    g_MenuPanelTasks[13].flags  = 1;
-    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[12].pos.x + (s8)D_801ED620 * 0x30;
-    g_MenuPanelTasks[12].unk_0B = 0xFF;
-    g_MenuPanelTasks[11].unk_10 = D_801EC440[(s8)D_801ED620];
-    pressed                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
-    old                         = D_801ED620;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags   = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x =
+        (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B    = 0xFF;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = D_801EC440[(s8)D_801ED620];
+    pressed = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    old     = D_801ED620;
     if (pressed & PADLleft) {
         D_801ED620 = old - 1;
         if ((s8)(old - 1) < 0) {
@@ -37,9 +38,9 @@ NON_MATCHING void func_801D53AC(void) {
         u8* step;
 
         SND_PlayCue(EMI_CUE_ID(1, 4));
-        step                        = &D_80148651;
-        g_MenuPanelTasks[21].active = 0;
-        g_MenuPanelTasks[12].unk_0B = D_801ED620;
+        step                                               = &D_80148651;
+        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active   = 0;
+        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED620;
         *step += 1;
         return;
     }
@@ -48,13 +49,13 @@ NON_MATCHING void func_801D53AC(void) {
 
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        step                        = &D_80148651;
-        g_MenuPanelTasks[11].state  = 1;
-        g_MenuPanelTasks[12].state  = 1;
-        g_MenuPanelTasks[13].state  = 1;
-        D_801485DC                  = 0;
-        g_MenuPanelTasks[21].active = 0;
-        D_80148654                  = 0;
+        step                                                 = &D_80148651;
+        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
+        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;
+        D_801485DC                                           = 0;
+        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
+        D_80148654                                           = 0;
         *step += 5;
     }
 }

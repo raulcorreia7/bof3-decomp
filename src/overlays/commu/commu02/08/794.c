@@ -74,6 +74,7 @@ MATCH void func_801D1938(void) {
 INCLUDE_ASM(func_801D1A50);
 
 /* blocker: loop register allocation; first diff: +0x44 index load before the counter. */
+/* hint: the slot-counter loop (x kept as a 16.16 running value, D_801DB0C4 as u8) is 8 bytes over (0x138 against 0x130); first differing instruction: sw ra,28(sp) at +0xC, because the 0x200000 step is hoisted into s2 where retail reloads it inside the loop. */
 INCLUDE_ASM(func_801D1D68);
 
 INCLUDE_ASM(func_801D1E98);
@@ -473,9 +474,73 @@ MATCH void func_801D5E94(void) {
     }
 }
 
-INCLUDE_ASM(func_801D5F7C);
+MATCH void func_801D5F7C(void) {
+    s32 pressed;
 
-INCLUDE_ASM(func_801D6124);
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        D_801DB0C8 = 0xF1;
+        SND_PlayCue(0x104);
+        D_801DB0B8 = 0;
+        D_801F294D += 1;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(0x106);
+        D_801F294D = 8;
+    } else {
+        pressed = INPUT_GetRepeatedButtons(g_InputPressed & 0xA000);
+        if (pressed & 0xFFFF) {
+            SND_PlayCue(0x100);
+        }
+        if (pressed & 0x8000) {
+            D_801DB0B4 -= 1;
+            if ((s8)D_801DB0B4 < 0) {
+                D_801DB0B4 = Fairy_VillageCountFairies() - 1;
+            }
+        } else if (pressed & 0x2000) {
+            D_801DB0B4 += 1;
+            if ((s8)D_801DB0B4 >= (Fairy_VillageCountFairies() & 0xFF)) {
+                D_801DB0B4 = 0;
+            }
+        }
+    }
+    func_801D812C();
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D8058(0x4A, 0x64);
+    func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 0);
+}
+
+MATCH void func_801D6124(void) {
+    u16 cue;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801DB0B8 == 1) {
+            cue = 0x104;
+            goto play_cue;
+        }
+        D_801DB0C8 = -1;
+        SND_PlayCue(0x104);
+        SND_PlayCue(0x102);
+        D_801DB0C4 = 0;
+        D_801F294D += 1;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        cue = 0x106;
+    play_cue:
+        D_801DB0C8 = 0xF0;
+        SND_PlayCue(cue);
+        D_801F294D -= 1;
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+        D_801DB0B8 ^= 1;
+        SND_PlayCue(0x100);
+    }
+    if (D_801DB0C8 != 0xFFFF) {
+        func_801D812C();
+        if (D_801DB0C8 == 0xF1) {
+            Menu_DrawCursorSprite(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
+        }
+        func_801D8058(0x4A, 0x64);
+        func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 1);
+    }
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+}
 
 MATCH void func_801D62C8(void) {
     s8 step;
@@ -597,7 +662,39 @@ INCLUDE_ASM(func_801D6D18);
 
 INCLUDE_ASM(func_801D6E70);
 
-INCLUDE_ASM(func_801D708C);
+MATCH void func_801D708C(void) {
+    u16 cue;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801DB0B8 == 1) {
+            cue = 0x104;
+            goto play_cue;
+        }
+        D_801DB0C8 = -1;
+        SND_PlayCue(0x104);
+        SND_PlayCue(0x102);
+        D_801DB0C4 = 0;
+        D_801F294D += 1;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        cue = 0x106;
+    play_cue:
+        D_801DB0C8 = 0xF0;
+        SND_PlayCue(cue);
+        D_801F294D -= 1;
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+        D_801DB0B8 ^= 1;
+        SND_PlayCue(0x100);
+    }
+    if (D_801DB0C8 != 0xFFFF) {
+        func_801D812C();
+        if (D_801DB0C8 == 0xF1) {
+            Menu_DrawCursorSprite(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
+        }
+    }
+    func_801D9210();
+    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & 0xFFFF, 0,
+                  6);
+}
 
 INCLUDE_ASM(func_801D7234);
 
