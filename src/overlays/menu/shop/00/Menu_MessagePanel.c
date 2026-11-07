@@ -3,7 +3,7 @@
 /* File-local declarations: the shared fill-style byte, the panel state handler
  * table and the icon draw helpers owned by this target or the executable. */
 
-#define ICON_CURSOR ((s16)g_MenuCurrentPanel->unk_10)
+#define ICON_CURSOR ((s16)g_MenuCurrentPanel->u.message.id)
 
 MATCH void Menu_MessagePanel(void) {
     g_ShopMessageStates[g_MenuCurrentPanel->state]();

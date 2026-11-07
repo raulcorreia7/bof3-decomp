@@ -9,11 +9,11 @@ MATCH void func_80159580(void) {
     MenuPanelTask* task;
     s32            count;
 
-    count        = 0;
-    task         = (MenuPanelTask*)g_MenuCurrentPanel;
-    task->unk_10 = (task->unk_10 - task->unk_14);
-    task->pos.x  = (task->pos.x + (s16)task->unk_14 / 2);
-    if ((task->unk_10 << 0x10) < 0) {
+    count              = 0;
+    task               = (MenuPanelTask*)g_MenuCurrentPanel;
+    task->u.grow.width = (task->u.grow.width - task->u.grow.step_x);
+    task->pos.x        = (task->pos.x + (s16)task->u.grow.step_x / 2);
+    if ((task->u.grow.width << 0x10) < 0) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 2) {
@@ -30,12 +30,12 @@ MATCH void func_80159580(void) {
                 break;
         }
         count++;
-        g_MenuCurrentPanel->unk_10 = 0;
+        g_MenuCurrentPanel->u.grow.width = 0;
     }
-    task         = (MenuPanelTask*)g_MenuCurrentPanel;
-    task->unk_12 = (task->unk_12 - task->unk_16);
-    task->pos.y  = (task->pos.y + (s16)task->unk_16 / 2);
-    if ((task->unk_12 << 0x10) < 0) {
+    task                = (MenuPanelTask*)g_MenuCurrentPanel;
+    task->u.grow.height = (task->u.grow.height - task->u.grow.step_y);
+    task->pos.y         = (task->pos.y + (s16)task->u.grow.step_y / 2);
+    if ((task->u.grow.height << 0x10) < 0) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 2) {
@@ -52,7 +52,7 @@ MATCH void func_80159580(void) {
                 break;
         }
         count++;
-        g_MenuCurrentPanel->unk_12 = 0;
+        g_MenuCurrentPanel->u.grow.height = 0;
     }
     if ((count & BYTE_MASK) == 2) {
         g_MenuCurrentPanel->state++;
@@ -60,7 +60,7 @@ MATCH void func_80159580(void) {
     }
     if (!(g_MenuCurrentPanel->flags & 1)) {
         func_80159FA0((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4,
-                      (g_MenuCurrentPanel->unk_10 >> 4), (g_MenuCurrentPanel->unk_12 >> 4));
+                      (g_MenuCurrentPanel->u.grow.width >> 4), (g_MenuCurrentPanel->u.grow.height >> 4));
     }
     if (g_MenuCurrentPanel->mode == 0) {
         UI_UpdateLayout();

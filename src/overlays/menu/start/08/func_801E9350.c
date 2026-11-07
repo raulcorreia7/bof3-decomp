@@ -19,7 +19,7 @@ MATCH void func_801E9350(void) {
         }
     }
     cur  = g_MenuCurrentPanel->unk_0A;
-    grow = g_MenuCurrentPanel->unk_10;
+    grow = g_MenuCurrentPanel->u.icons.grow;
     func_801644D8(s_CampMenuPanelIds[(u8)cur], (g_MenuCurrentPanel->pos.x + cur * 0x10 - grow) & HALF_MASK,
                   (g_MenuCurrentPanel->pos.y - grow) & HALF_MASK, (grow * 2 + 0x10) & BYTE_MASK,
                   (grow * 2 + 0x10) & BYTE_MASK,

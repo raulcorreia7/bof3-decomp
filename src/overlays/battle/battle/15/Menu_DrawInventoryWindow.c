@@ -24,7 +24,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     s32  title_x;
 
     UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 153, 130, task->unk_09, g_WindowStyle);
-    first  = func_801AFD10(&task->unk_0B, &scroll_y, &scroll_rows, (u8*)&task->unk_12);
+    first  = func_801AFD10(&task->unk_0B, &scroll_y, &scroll_rows, (u8*)&task->u.list.scroll);
     y      = task->pos.y + (s8)scroll_y;
     ids    = D_801C893C[task->unk_0A] + first;
     counts = D_801C8950[task->unk_0A] + first;
@@ -73,14 +73,16 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 122, -(task->unk_09 != 0) & MENU_SHADE_DIM, g_UiFormatBuffer);
 
     UI_DrawSpriteRun(task->pos.x, task->pos.y,
-                     (task->unk_10 & MENU_LIST_FLAG_TAB_2) ? s_BattleAbilityLine1FlagRun : s_BattleAbilityLine1Run, 1);
+                     (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? s_BattleAbilityLine1FlagRun : s_BattleAbilityLine1Run,
+                     1);
     UI_DrawSpriteRun(task->pos.x, task->pos.y,
-                     (task->unk_10 & MENU_LIST_FLAG_TAB_1) ? s_BattleAbilityLine2FlagRun : s_BattleAbilityLine2Run, 1);
-    tabs = task->unk_10;
+                     (task->u.list.tabs & MENU_LIST_FLAG_TAB_1) ? s_BattleAbilityLine2FlagRun : s_BattleAbilityLine2Run,
+                     1);
+    tabs = task->u.list.tabs;
     if ((tabs & MENU_LIST_FRAME_MASK) == 0) {
-        task->unk_10 = 0;
+        task->u.list.tabs = 0;
     } else {
-        task->unk_10 = tabs - MENU_LIST_FRAME_STEP;
+        task->u.list.tabs = tabs - MENU_LIST_FRAME_STEP;
     }
 
     for (i = 0; i < 10; i++) {

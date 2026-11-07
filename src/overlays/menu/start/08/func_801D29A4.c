@@ -34,7 +34,7 @@ MATCH void func_801D29A4(void) {
     panel->active                                           = 1;
     panel->pos.x                                            = 0x14;
     D_801484C2                                              = -0x14;
-    panel->unk_10                                           = 0;
+    panel->u.addr.unk_10                                    = 0;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].handler = 6;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].mode    = MENU_START_MODE_CURSOR_FRAME;
     panel += 8;
