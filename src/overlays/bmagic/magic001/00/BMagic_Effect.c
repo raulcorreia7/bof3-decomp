@@ -124,6 +124,7 @@ MATCH void func_801EF518(void) {
     }
 }
 
+/* Blocker: retail keeps an 8-byte frame (addiu sp,-8) and loads the -0x80 sentinel after the lb; a signed s8 phase local gives no frame and the constant is hoisted to the top. */
 INCLUDE_ASM(func_801EF5CC);
 
 #include "overlays/bmagic/Effect_RampTintAndFinish.h"
