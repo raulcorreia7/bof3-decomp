@@ -333,7 +333,15 @@ MATCH void func_801F9C00(void) {
     SND_PlayCue(EMI_CUE_ID(2, 5));
 }
 
-INCLUDE_ASM(func_801F9C58);
+MATCH void func_801F9C58(void) {
+    g_Task->pos.y.fixed += 0x10000;
+    g_Task->pos.z.fixed += g_Task->vz;
+    g_Task->vz -= 0x200000;
+    func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
+    if (g_Task->pos.x.fixed == 0xF0000) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F9CE0(void) {
     Actor* work;
@@ -347,7 +355,15 @@ MATCH void func_801F9CE0(void) {
     SND_PlayCue(EMI_CUE_ID(2, 10));
 }
 
-INCLUDE_ASM(func_801F9D30);
+MATCH void func_801F9D30(void) {
+    g_Task->pos.y.fixed += 0x10000;
+    g_Task->pos.z.fixed += g_Task->vz;
+    g_Task->vz -= 0x200000;
+    func_801F9F8C(&g_Task->pos, 0x20, 8, 4);
+    if (g_Task->pos.y.fixed > 0x18FFFF) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_Task);
