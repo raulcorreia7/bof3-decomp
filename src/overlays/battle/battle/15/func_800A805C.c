@@ -7,19 +7,17 @@ u8 func_800A82A0(u8 selection_id); /* extern */
  * retrying once with the pair swapped.
  */
 MATCH u8 func_800A805C(void) {
-    u8  slots[PARTY_SLOT_COUNT];
-    u8  count; /* collected flag count; the swap below reuses its storage */
-    u8  slot;
-    u8  tries;
-    u32 offset;
+    u8 slots[PARTY_SLOT_COUNT];
+    u8 count; /* collected flag count; the swap below reuses its storage */
+    u8 slot;
+    u8 tries;
 
     count = 0;
     slot  = 0;
     do {
         if (LOBU(g_BattleActiveBattler) != slot) {
             if (Battle_SlotIsBlocked(slot) == 0) {
-                offset       = slot * BATTLE_PARTY_STRIDE;
-                slots[count] = D_80145F09[offset];
+                slots[count] = g_BattlePartyBattlers[slot].chr.character_id;
                 count++;
             }
         }
