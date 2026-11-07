@@ -254,6 +254,7 @@ MATCH void func_801F00A8(void) {
     EFFECT_RAMP_TINT_AND_FINISH();
 }
 
+/* Blocker: GTE path (PushMatrix, RotTrans, RotMatrix) with a stack-built vector set and a z-span halfword from g_BattleSelectedActor or g_BattleEffectBattler by header.step; needs the matrix helpers before a draft. */
 INCLUDE_ASM(func_801F014C);
 
 INCLUDE_ASM(func_801F0238);
