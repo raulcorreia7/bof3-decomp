@@ -330,7 +330,7 @@ segments:
       - [0x143C8, c, func_801E4FC8]
       - [0x14544, .data, T_801E5144]
       - [0x145D4, .data, data_801E51D4]
-      - [0x146C4, .data, D_801E52C4]
+      - [0x146C4, .data, g_ShopStep3Funcs]
       - [0x14784, .data, data_801E5384]
       - [0x1480C, .data, data_801E540C]
       - [0x14B38, .data, data_801E5738]
