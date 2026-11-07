@@ -3616,6 +3616,7 @@ g_Actors = { addr = 0x80146888, size = 0x1170, source = "Actor_FindFree returns 
 g_AreaFocusY = { addr = 0x80147A90, source = "Actor_PlaceAtFocus copies it to the actor y position and func_801F6168 uses it as the scroll target" }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "game/00 func_801A17A0 stores the current field row (D_80146884) at the end of a script command world04/area153/175 read it as the record" }
 g_ScriptState = { addr = 0x80148210, type = "GameScriptState", source = "game/00 func_801A8D38 stores the sub record it steps world areas update its +0x07/+0x0A" }
+g_AreaDrawState = { addr = 0x8014832C, size = 0x4, alias = true, source = "Area_DrawScene clears both counts, Area_AddActor increments the first, and Area_DrawActors reads it with g_AreaDrawFlags; the globals keep their own rows" }
 g_AreaDrawFlags = { addr = 0x8014832E, source = "draw-pass flag word, its bits select the sorted, negative-depth, cell-layer and primitive passes (include/sys/gameui.h)" }
 g_MenuPanelTasks = { addr = 0x80148330, source = "22 slots, g_MenuCurrentPanel points into it" }
 g_BattleMessageState = { addr = 0x801483C3, type = "u8", source = "battle message/effect window state 1 queued (func_801D31FC.c 6, func_801D3304.c 27), 2 closing (func_801E51DC.c 20, func_8009704C.c 151), 0 idle (func_801DE698.c 18) read by the" }
