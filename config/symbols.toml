@@ -464,12 +464,14 @@ Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the eff
 Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 
 ["emi/bmagic/magic073/03"]
+Effect_BrightenPaletteThenStep = { addr = 0x801EF3D4, type = "func", source = "increments the selected palette fade RGB offsets each tick and advances the effect step when the effect ticker ends" }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF4E4, type = "func", source = "reloads the effect timer and advances the effect step while the effect ticker is under 5" }
 g_BMagicEffectFuncs = { addr = 0x801F0668, source = "the module dispatcher indexes it with the shared spad step byte" }
 D_801F21F0 = { addr = 0x801F21F0, source = "func_801EF724 loads this word as the task-work pointer" }
 
 ["emi/bmagic/magic074/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEF50, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_BrightenPaletteThenStep = { addr = 0x801EF3C0, type = "func", source = "increments the selected palette fade RGB offsets each tick and advances the effect step when the effect ticker ends" }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF4D0, type = "func", source = "reloads the effect timer and advances the effect step while the effect ticker is under 5" }
 g_BMagicEffectFuncs = { addr = 0x801F0554, source = "the module dispatcher indexes it with the shared spad step byte" }
 D_801F20DC = { addr = 0x801F20DC, source = "func_801EF710 loads this word as the task-work pointer" }
