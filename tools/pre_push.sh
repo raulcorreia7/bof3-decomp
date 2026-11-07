@@ -3,7 +3,7 @@
 #
 #   tools/pre_push.sh [BASE_REF]          or    meson compile -C build/meson pre-push
 #
-# Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, include-asm, format-check,
+# Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, externs, include-asm, format-check,
 # meson test, typeloss, quality (no touched file gets worse), subsystems (rewrites the debt table of docs/subsystems.md; commit the result). BASE_REF is what the work is compared with; it defaults to the newest of
 # public/main, origin/main and main. Each log is build/pre-push/<check>.log. Format first with
 # `meson compile -C build/meson format`.
@@ -65,6 +65,7 @@ else
 	echo "skip  check-plain (no toolchains/gcc-2.7.2-psx)"
 fi
 start check-tree tools/check_tree.sh
+start externs tools/check_externs.sh "$ref"
 start include-asm tools/check_asm.sh "$ref"
 start format-check tools/format.sh --check
 start test meson test -C "$bld" --no-rebuild --print-errorlogs

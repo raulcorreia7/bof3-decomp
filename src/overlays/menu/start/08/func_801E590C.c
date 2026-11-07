@@ -1,8 +1,5 @@
 #include "start_08.h"
 
-extern s8 D_801ED7FC;            /* local: s8 read; a sibling copy is u8 */
-extern s8 g_MenuStartReturnStep; /* local: s8 read; a sibling copy is u8 */
-
 MATCH void func_801E590C(void) {
     u8 count;
 
