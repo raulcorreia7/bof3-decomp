@@ -1,0 +1,15 @@
+/* Takes the first free record of the sparkle pool and marks it in use; returns
+ * its index, or GAME_NONE when the pool is full. One definition shared by the
+ * bmagic overlays; every change here must verify every member. */
+/* func_801F0000 (magic070), func_801F0000 (magic071), func_801F0000 (magic072) */
+MATCH u8 func_801F0000(void) {
+    u8 i;
+
+    for (i = 0; i < EFFECT_SPARKLE_COUNT; i++) {
+        if (!(D_801F01B4[i].header.flags & 1)) {
+            D_801F01B4[i].header.flags |= 1;
+            return i;
+        }
+    }
+    return GAME_NONE;
+}
