@@ -96,7 +96,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     }
     val10 = g_UiFormatBuffer;
     val10 = g_UiFormatBuffer;
-    TEXT_Format(g_UiFormatBuffer, D_801D0C50, character->hp);
+    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, character->hp);
     UI_DrawGlyphString((s16)(val7 + 22), (s16)(val2 + 31), val9, g_UiFormatBuffer);
     if (!(val4 & BYTE_MASK)) {
         val9 = (character->fatigue != 0) * 4;
@@ -105,7 +105,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     }
     val10 = g_UiFormatBuffer;
     val10 = g_UiFormatBuffer;
-    TEXT_Format(g_UiFormatBuffer, D_801D0C58, character->stats.max_hp);
+    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, character->stats.max_hp);
     UI_DrawGlyphString((s16)(val7 + 22), (s16)(val2 + 31), val9, g_UiFormatBuffer);
     tmp0 = val4 & BYTE_MASK;
     val9 = -(tmp0 != 0) & 7;
@@ -122,7 +122,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     }
     val1 = (s16)g_UiFormatBuffer;
     val1 = (s16)g_UiFormatBuffer;
-    TEXT_Format(val1, D_801D0C50, character->ap);
+    TEXT_Format(val1, g_MenuCurrentValueFormat, character->ap);
     val5 = val7 + 0x16;
     val5 <<= 0x10;
     val5  = val5 >> 0x10;
@@ -131,7 +131,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     val10 = (u8*)((s32)val10 >> 0x10);
     UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
     val9 = -((val4 & BYTE_MASK) != 0) & 7;
-    TEXT_Format(val1, D_801D0C58, character->stats.max_ap);
+    TEXT_Format(val1, g_MenuMaxValueFormat, character->stats.max_ap);
     UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
     UI_DrawSpriteRun((s16)val7, val2, &D_801EC598, 0);
     func_801DD6D0((val7 + 0x14) & HALF_MASK, (val2 + 0x12) & HALF_MASK, character_index, character->level,

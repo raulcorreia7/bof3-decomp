@@ -97,6 +97,7 @@ INCLUDE_ASM(func_801EF74C);
 
 INCLUDE_ASM(func_801EFA78);
 
+/* blocker: candidate loads g_Task.y into v0 where retail uses v1; first diff: lw v1,56(a1) at 0x801EFDF4. */
 INCLUDE_ASM(func_801EFDD4);
 
 /* func_801EFE38 */

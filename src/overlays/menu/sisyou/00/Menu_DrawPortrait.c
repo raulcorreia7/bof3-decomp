@@ -16,7 +16,7 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
         (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
         sprite_id = 0xB;
     }
-    entry = &D_801D4058[sprite_id & BYTE_MASK];
+    entry = &g_MenuPortraitAtlas[sprite_id & BYTE_MASK];
 
     tpage = getTPage(0, 0, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);

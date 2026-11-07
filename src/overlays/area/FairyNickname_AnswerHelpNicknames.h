@@ -5,7 +5,7 @@ MATCH void FairyNickname_AnswerHelpNicknames(void) {
     if (MENU_SELECTION_IDLE()) {
         MESSAGE_REQUEST_CLEAR();
     } else {
-        g_MessageRequest                   = 0xF7;
+        g_MessageRequest                   = FAIRY_MESSAGE_NICKNAME_GOODBYE;
         g_ScriptWorkRecord->callback_index = 0xFF;
     }
 }

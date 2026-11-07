@@ -54,7 +54,21 @@ INCLUDE_ASM(func_801EEFF4);
 /* blocker: timer and unk_20 load order; first diff: lbu a1 against v0 at 0x801EF0B0. */
 INCLUDE_ASM(func_801EF0A4);
 
-INCLUDE_ASM(func_801EF108);
+MATCH void func_801EF108(void) {
+    PartyBattler* work;
+    u8            timer;
+
+    g_Task->param.unk_0B--;
+    work         = g_Task;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->unk_20 += work->timer;
+    work->unk_14 += work->unk_20;
+    if (timer == 0) {
+        g_BattleEffectBattler->param.unk_0B--;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(BMagic_DrawBurnSprites);
 

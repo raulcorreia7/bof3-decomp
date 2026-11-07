@@ -6,7 +6,7 @@ MATCH void FairyCopyShop_AnswerChooseOther(void) {
         MESSAGE_REQUEST_CLEAR();
         D_801F294D = 0;
     } else {
-        g_MessageRequest = 0x5F;
+        g_MessageRequest = FAIRY_MESSAGE_COPY_SHOP_DECLINED;
         D_801F294C++;
     }
 }

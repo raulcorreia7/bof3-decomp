@@ -5,7 +5,7 @@ MATCH void FairyCasino_AnswerHighLowKeepPlaying(void) {
     if (MENU_SELECTION_IDLE()) {
         MESSAGE_REQUEST_CLEAR();
     } else {
-        g_MessageRequest = 0x77;
+        g_MessageRequest = FAIRY_MESSAGE_HIGH_LOW_QUIT;
         D_801F294D       = 0xA;
     }
 }
