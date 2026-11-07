@@ -36,6 +36,7 @@ INCLUDE_ASM(func_801CE7B8);
 
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
+/* hint: the work-pointer store of the 2 and 1 results shares one tail with the result held in v0 (g_Task loaded before the li in the jump delay slot); every C form folds the constant into each branch. The body is 4 bytes over. */
 INCLUDE_ASM(func_801CEC28);
 
 INCLUDE_ASM(func_801CEE34);

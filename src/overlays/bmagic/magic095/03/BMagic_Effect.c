@@ -8,7 +8,29 @@ INCLUDE_ASM(func_801EEC18);
 
 INCLUDE_ASM(func_801EEC9C);
 
-INCLUDE_ASM(func_801EEE60);
+MATCH void func_801EEE60(void) {
+    u32           slot;
+    PartyBattler* battler;
+    s32           timer;
+
+    func_801EFDDC();
+    if (g_Task->timer == 0xC) {
+        slot = LOBU(g_BattleTargetSelector);
+        if (slot < BATTLE_PARTY_SLOT_COUNT) {
+            battler = &g_BattlePartyBattlers[slot];
+        } else {
+            battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+        }
+        GFX_FreePaletteFadeTarget(battler);
+        GFX_AllocPaletteFade(battler, 6, 4, 8, 0);
+        func_800A9610(g_BattleTargetSelector, 0x200);
+    }
+    timer         = g_Task->timer + 1;
+    g_Task->timer = timer;
+    if ((timer & 0xFF) == 0x10) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801EEF64(void) {
     u8 counter;
