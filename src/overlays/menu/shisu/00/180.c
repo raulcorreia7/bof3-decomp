@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The shisu overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D80(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStepFuncs, D_80148650);
+    SYS_DISPATCH_BYTE(g_MenuStatusStates, D_80148650);
 }
 
 MATCH void func_801D0DBC(void) {

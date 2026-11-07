@@ -258,7 +258,7 @@ MATCH void func_801F0D34(void) {
 }
 
 MATCH void func_801F0D64(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectFuncs, 2, g_Task);
+    SYS_DISPATCH_TASK(g_BMagicEffectModes, 2, g_Task);
 }
 
 #include "overlays/bmagic/Effect_ClearTimerNextStep.h"

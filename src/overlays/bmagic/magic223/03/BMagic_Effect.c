@@ -14,11 +14,11 @@ INCLUDE_ASM(func_801EED18);
 INCLUDE_ASM(func_801EEFB4);
 
 MATCH void func_801EF00C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 MATCH void func_801EF050(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 2, g_Task);
+    SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 2, g_Task);
     if (g_Task->header.flags != 0) {
         func_801EF1E8();
     }

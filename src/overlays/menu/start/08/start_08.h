@@ -261,7 +261,7 @@ extern u8              s_CampMenuPanelIds[8];
 #define MENU_START_PANEL20_STATE_COUNT 3
 
 /* D_801EC35C */
-extern Callback g_MenuStartStepFuncs[MENU_START_STEP_COUNT];
+extern Callback g_MenuStartStates[MENU_START_STEP_COUNT];
 extern Callback D_801EC380[];
 extern u8       D_801EC38C[];
 /* D_801EC394 */
@@ -317,7 +317,7 @@ extern s32 (*D_801ED224[])(u8 caster_index, u8 target_index, u8 use_battle_recor
 extern s32 (*D_801ED24C[])(u8 save_slot, u8 record_value);
 extern u8       g_SaveRecordTypeCommands[92];
 /* D_801ED330 */
-extern Callback g_MenuStartPanelFuncs[MENU_START_PANEL_COUNT];
+extern Callback g_MenuStartPanelModes[MENU_START_PANEL_COUNT];
 /* D_801ED384 */
 extern Callback g_MenuStartPanel0StateFuncs[MENU_START_PANEL0_STATE_COUNT];
 /* D_801ED3B0 */
@@ -401,7 +401,7 @@ extern u8       s_SkillOrderCursors[4][4];
 extern u8       s_SkillOrderGroups[4][6];
 extern u8       s_SkillOrderKinds[3][6];
 extern Callback g_MenuCampSubFuncs[5];
-extern Callback g_MenuCampFuncs[5];
+extern Callback g_MenuCampSubstates[5];
 
 /* The name entry command labels, the grid's dot string and the control window's sprite table. */
 /* D_801ED1B8 */
@@ -686,6 +686,7 @@ extern void      func_801D2C7C(void);
 void             func_801D2D74(void);
 void             func_801D4884(void);
 void             func_801D667C(void);
+void             Menu_PreviewStrongestEquipment(u8 character);
 void             func_801D71EC(void);
 void             func_801D9664(void);
 void             func_801D96D4(void);

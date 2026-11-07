@@ -224,6 +224,7 @@ INCLUDE_ASM(func_801FDA90);
 
 INCLUDE_ASM(func_801FDB1C);
 
+/* m2c draft: 10 differing; first diff beqz v0 at 0x801FDBC0 (candidate bnez). */
 INCLUDE_ASM(func_801FDBA8);
 
 /* blocker: return 1 materialized before the store constants; first diff: +0x28 li v1,20 against li v0,1. */

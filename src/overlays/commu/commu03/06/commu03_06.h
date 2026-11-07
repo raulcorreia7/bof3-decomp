@@ -14,7 +14,7 @@ extern OverlayHeader D_801D0C00;
 #define COMMU03_STEP2_COUNT 4
 
 /* D_801D18C8 */
-extern Callback g_Commu03StepFuncs[COMMU03_STEP_COUNT];
+extern Callback g_Commu03States[COMMU03_STEP_COUNT];
 /* D_801D18D4 */
 extern Callback g_Commu03Step0Funcs[COMMU03_STEP0_COUNT];
 /* D_801D18DC */

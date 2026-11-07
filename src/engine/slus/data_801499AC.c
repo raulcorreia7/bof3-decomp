@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const u32 g_UiLocalModeFuncs[21] = {
+const u32 g_UiLocalModes[21] = {
     (u32)func_8014EDF0,
     (u32)func_8014EE18,
     (u32)func_8014EE40,

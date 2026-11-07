@@ -5,5 +5,5 @@
  * Master_ApplyMaster, indexed by the step byte g_MasterStep. */
 
 MATCH void Master_DispatchMenu(void) {
-    SYS_DISPATCH_BYTE(g_MasterMenuFuncs, g_MasterStep);
+    SYS_DISPATCH_BYTE(g_MasterMenuStates, g_MasterStep);
 }

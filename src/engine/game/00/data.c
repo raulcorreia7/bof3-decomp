@@ -30,26 +30,26 @@ Callback g_GameStates[12] = {
     (Callback)Game_RunCameraLookState,  (Callback)Game_RunShopState,       (Callback)Game_RunFishingState,
     (Callback)Game_RunAbilityMenuState, (Callback)Game_RunStatusMenuState, (Callback)Game_RunSceneCameraState};
 
-Callback g_GameEntryHandlers[3] = {(Callback)func_80197620, (Callback)func_80199368, (Callback)func_801976EC};
+Callback g_GameMenuSubstates[3] = {(Callback)func_80197620, (Callback)func_80199368, (Callback)func_801976EC};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameModeHandlers[8] = {(Callback)func_80197A60, (Callback)func_80197AA4, (Callback)func_80197C1C,
+Callback g_GameBattleSubstates[8] = {(Callback)func_80197A60, (Callback)func_80197AA4, (Callback)func_80197C1C,
                                   (Callback)func_80197C94, (Callback)func_80197E54, (Callback)func_801D1014,
                                   (Callback)func_80197EFC, (Callback)func_80197F48};
 
 Offset2DB s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
-Callback g_GameStateHandlers[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)func_801983D8};
+Callback g_GameShopSubstates[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)func_801983D8};
 
-Callback g_GameSubstateHandlers[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
+Callback g_GameFishingSubstates[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
                                       (Callback)func_801E0C20};
 
 Callback g_MenuAbilityOpen[3] = {(Callback)func_80198780, (Callback)func_801993F0, (Callback)func_8019883C};
 
 Callback g_MenuStatusOpen[3] = {(Callback)func_80198940, (Callback)func_80199418, (Callback)func_801989FC};
 
-Callback g_GameFlowHandlers[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
+Callback g_GameSceneCameraSubstates[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
 
 u8 s_MenuLine1Run[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
@@ -59,16 +59,16 @@ u8 s_MenuLine1FlagRun[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x2D, 0x02, 0x00, 0x0
 
 u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2E, 0x00, 0x00, 0xFF};
 
-Callback g_MenuPanelHandlers[5] = {(Callback)func_801995A4, (Callback)Menu_DrawPanelCursor, (Callback)func_801996A8,
+Callback g_MenuPanelModes[5] = {(Callback)func_801995A4, (Callback)Menu_DrawPanelCursor, (Callback)func_801996A8,
                                    (Callback)func_8019977C, (Callback)func_8019986C};
 
-Callback g_MenuPanelStateHandlers[3] = {(Callback)func_8019959C, (Callback)func_801995F8, (Callback)func_80199638};
+Callback g_MenuPanelStates[3] = {(Callback)func_8019959C, (Callback)func_801995F8, (Callback)func_80199638};
 
-Callback g_MenuOptionHandlers[3] = {(Callback)func_8019959C, (Callback)func_801996FC, (Callback)Menu_SlidePanelLeft};
+Callback g_MenuOptionStates[3] = {(Callback)func_8019959C, (Callback)func_801996FC, (Callback)Menu_SlidePanelLeft};
 
-Callback g_MenuActionHandlers[3] = {(Callback)func_8019959C, (Callback)func_801997EC, (Callback)func_8019982C};
+Callback g_MenuActionStates[3] = {(Callback)func_8019959C, (Callback)func_801997EC, (Callback)func_8019982C};
 
-Callback g_MenuTaskHandlers[4] = {(Callback)func_8019959C, (Callback)func_80199938, (Callback)func_80199978,
+Callback g_MenuTaskStates[4] = {(Callback)func_8019959C, (Callback)func_80199938, (Callback)func_80199978,
                                   (Callback)func_801999B8};
 
 char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
@@ -77,7 +77,7 @@ char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "
 u8* D_801C7C5C[5] = {(u8*)&D_801C7C34[0][0], (u8*)&D_801C7C34[1][0], (u8*)&D_801C7C34[2][0], (u8*)&D_801C7C34[3][0],
                      (u8*)&D_801C7C34[4][0]};
 
-Callback g_ActorHandlers[187] = {
+Callback g_ActorTypes[187] = {
     (Callback)func_8019A210, (Callback)func_801F6DC0, (Callback)func_801D0C98,        (Callback)func_801D1B10,
     (Callback)func_8019AB5C, (Callback)func_801D20C8, (Callback)func_8019A3B8,        (Callback)func_801F70F0,
     (Callback)func_801F7440, (Callback)func_801F7A18, (Callback)func_801D2978,        (Callback)func_801F8748,
@@ -514,7 +514,7 @@ volatile VitalItem g_VitalItems[VITAL_ITEM_COUNT] = {{"Nothing", 0x4000, 0},
                                                      {"Old" T_SP "Passport", 0x41C2, 0},
                                                      {"Fountain" T_SP "Pen", 0x41C5, 0}};
 
-volatile Weapon g_Weapons[WEAPON_COUNT] = {
+Weapon g_Weapons[WEAPON_COUNT] = {
     {{"Nothing", 0, 0x00}, 0, 0, 0, 0, 0, 0, 0x4000, 0},
     {{"Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, 1, 0, 1, 1, 4, 0, 0x4033, 50},
     {{"BallockKnife", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, 1, 0, 1, 1, 6, 0, 0x4034, 100},
@@ -599,7 +599,7 @@ volatile Weapon g_Weapons[WEAPON_COUNT] = {
     {{"Ghostbuster", EQUIP_MOMO, 0x00}, 1, ELEM_HOLY, 1, 5, 155, 0, 0x40C4, 22000},
     {{"Beast" T_SP "Spear", EQUIP_GARR, 0x00}, 1, 0, 15, 6, 150, 0, 0x40C5, 20000}};
 
-volatile Armor g_Armors[ARMOR_COUNT] = {
+Armor g_Armors[ARMOR_COUNT] = {
     {{"Nothing", 0, 0x00}, ARMOR_TYPE_NOTHING, 0, 0, 0, 0x4000, 0},
     {{"Clothing", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 3, 2, 0, 0x4077, 50},
     {{"LeatherArmor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 4, 4, 0, 0x4078, 180},

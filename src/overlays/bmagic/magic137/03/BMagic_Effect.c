@@ -20,7 +20,7 @@ MATCH void func_801EEF64(void) {
 }
 
 MATCH void func_801EEFD4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 MATCH void func_801EF018(void) {
@@ -77,7 +77,7 @@ INCLUDE_ASM(func_801EF3B0);
 INCLUDE_ASM(func_801EF4C4);
 
 MATCH void func_801EFC58(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
     if (g_Task->header.flags != 0) {
         func_801EFDF8();
     }

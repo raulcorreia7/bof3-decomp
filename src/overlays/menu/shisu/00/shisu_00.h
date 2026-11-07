@@ -35,7 +35,7 @@ extern char          D_801D0D7C[];
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step byte. */
 /* D_801D96DC */
-extern Callback g_MenuStatusStepFuncs[MENU_STATUS_STEP_COUNT];
+extern Callback g_MenuStatusStates[MENU_STATUS_STEP_COUNT];
 /* D_801D96F0 */
 extern Callback g_MenuStatusStep1Funcs[MENU_STATUS_STEP1_COUNT];
 /* D_801D96F8 */
