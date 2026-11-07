@@ -33,7 +33,7 @@ MATCH void func_801D7444(void) {
             *prev = count - 1;
         }
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (g_Characters[D_80145FCC[(s8)D_80148656][0]].inoculations != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             D_8014865B = 1;
@@ -46,7 +46,7 @@ MATCH void func_801D7444(void) {
             D_80148651 += 1;
         }
     }
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_8014865B = 0xF;
         D_80148651 = 6;

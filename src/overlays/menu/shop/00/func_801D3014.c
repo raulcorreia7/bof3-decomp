@@ -19,7 +19,7 @@ MATCH void func_801D3014(void) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         *toggle ^= 1;
     }
-    if (*pad & D_80145AC2) {
+    if (*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (*toggle != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             wallet  = &g_Zenny;
@@ -41,7 +41,7 @@ MATCH void func_801D3014(void) {
         *counter -= 2;
         return;
     }
-    if (*pad & D_80145AC4) {
+    if (*pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_80148652 -= 2;
     }

@@ -115,7 +115,7 @@ MATCH void func_801D3174(void) {
     if (((MenuChoicePanel*)base)->confirm_gate != 0) {
         return;
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (*row != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             if (D_801ED618 == 0) {
@@ -163,7 +163,7 @@ MATCH void func_801D3174(void) {
         fail:
             SND_PlayCue(EMI_CUE_ID(1, 7));
         }
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         count = &D_80148651;
         *count -= 1;

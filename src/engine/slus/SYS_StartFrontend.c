@@ -29,7 +29,7 @@ MATCH void SYS_StartFrontend(void) {
     for (i = 0; i < SAVE_BLOCK_SIZE; i++)
         *clear++ = 0;
     j                         = 0;
-    dst                       = &g_InputMasks;
+    dst                       = g_InputMasks;
     src                       = D_8017F56C;
     g_EmiLoadedCharacterIndex = 0xFF;
     g_GameFlags               = 0;

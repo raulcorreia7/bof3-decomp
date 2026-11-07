@@ -22,7 +22,7 @@ MATCH void func_801B0C88(void) {
     }
     if (!(g_GameFlags & 0x200)) {
         flag = D_80144956;
-        if (D_8014625C & D_80145AB6) {
+        if (D_8014625C & g_InputMasks[INPUT_SLOT_INTERACT]) {
             if ((flag ^ 1) == 0) {
                 /* confirm pressed with the flag set: use mode 3 */
                 goto store3;

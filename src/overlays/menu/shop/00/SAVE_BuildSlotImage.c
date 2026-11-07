@@ -73,7 +73,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     j                              = 0;
     do {
         j                                        = n;
-        *(u16*)((j * 2) + (&D_801448D8 + 0xCBC)) = (u16)(&g_InputMasks)[j];
+        *(u16*)((j * 2) + (&D_801448D8 + 0xCBC)) = (u16)g_InputMasks[j];
         n                                        = n + 1;
     } while ((u32)n < 9U);
     work     = (u8*)&g_SaveData;

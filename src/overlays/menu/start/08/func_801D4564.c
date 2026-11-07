@@ -64,7 +64,7 @@ NON_MATCHING void func_801D4564(void) {
     if (g_MenuPanelTasks[13].unk_0C != D_80148504.group_cursor) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if ((D_80148504.confirm_gate == 0) && (D_80145AC4 & g_InputPressed)) {
+    if ((D_80148504.confirm_gate == 0) && (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed)) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_80148504.group               = 0U;
         D_80148504.group_cursor        = 0xFFU;
