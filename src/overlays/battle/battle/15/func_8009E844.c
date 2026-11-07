@@ -2,7 +2,6 @@
 
 /* Base halfwords, one u16 per 0x140-byte player row. */
 /* Value halfwords, one u16 per 0x140-byte player row. */
-extern u16 D_80145F20[][160];
 
 MATCH void func_8009E844(void) {
     volatile u8* slot;
@@ -16,7 +15,7 @@ MATCH void func_8009E844(void) {
         if ((RANDOM_MASK(3) != 0) && ((base & 0x4000) != 0)) {
             battler = LOBU(*slot);
             if (BATTLER_IS_PLAYER(battler)) {
-                g_BattleTargetRecord->hp_change = (-D_80145F20[battler][0] >> 2);
+                g_BattleTargetRecord->hp_change = (-g_BattlePartyBattlers[battler].chr.stats.max_hp >> 2);
                 /* FAKE: retail keeps the selection store before the counter update. */
                 MATCH_FAKE_BARRIER();
                 g_BattleLivingPartyCount++;

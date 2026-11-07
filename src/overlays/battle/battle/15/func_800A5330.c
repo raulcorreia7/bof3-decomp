@@ -45,7 +45,7 @@ NON_MATCHING void func_800A5330(void) {
         func_801DE60C(0, 1, 1, 0, GAME_NONE, Resource_GetText(BLANK_TEXT));
     }
 
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         if (g_BattleGeneCount[0] != 0) {
             g_BattleGeneCount[0]--;
             gene                                                           = g_BattleGenes[g_BattleGeneCount[0]];
@@ -62,7 +62,7 @@ NON_MATCHING void func_800A5330(void) {
         return;
     }
 
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (PANEL_CURSOR[GENE_CURSOR_ROW] != GAME_NONE) {
             cell = &D_800B7070[PANEL_CURSOR[GENE_CURSOR_ROW]][PANEL_CURSOR[GENE_CURSOR_COLUMN]];
             if (*cell == 0) {

@@ -507,7 +507,6 @@ extern s32                   D_80145EC4;
 extern u8                    D_80145F09[];
 extern u8                    D_80145F12[];
 /* Battler base halfwords, one u16 per 0x140-byte player row. */
-extern volatile u16          D_80145F18[][160];
 extern u16                   D_80145FAA[];
 extern u8                    D_80145FB2;
 extern volatile BattlePlayerDamageStatus D_80145FB4[];
@@ -1020,8 +1019,9 @@ static inline void BattleSelectionDelta(s32 mode) {
 
     ctx = (BattleSelectionContext*)&g_BattleTarget;
     if (ctx->sel < 3u) {
-        value                                                      = func_800A4294(mode);
-        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change = (s16)(value - D_80145F18[ctx->sel][7]);
+        value = func_800A4294(mode);
+        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
+            (s16)(value - g_BattlePartyBattlers[ctx->sel].chr.stats.defense);
     } else {
         value                                                      = func_800A4294(mode);
         (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change = (s16)(value - D_801EB6C4[ctx->sel - 3u][9]);
