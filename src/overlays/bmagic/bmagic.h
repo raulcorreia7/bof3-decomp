@@ -176,6 +176,9 @@ typedef struct BMagicEffectWork {
     /* 0x28 */ PartyBattler* battler;
 } BMagicEffectWork;
 
+/* header.flags bit of a BMagicEffectWork slot that is running. */
+#define BMAGIC_EFFECT_IN_USE 0x01
+
 ASSERT_SIZE(BMagicEffectWork, 0x2C);
 
 ASSERT_OFFSET(BMagicEffectWork, unk_03, 0x03);
