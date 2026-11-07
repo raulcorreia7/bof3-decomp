@@ -27,7 +27,7 @@ MATCH void UI_HandleStartButton(void) {
                             *timer = 1u;
                             *state = 2u;
                         } else if ((g_UiPopupRequest & WIN_POPUP_PENDING_MASK) == WIN_POPUP_PENDING_OPEN) {
-                            UI_SetMode(0);
+                            UI_SetMode(UI_MODE_FADE_OUT);
                             SND_StartSelectionEffect();
                             SND_PlayCue(EMI_CUE_ID(1, 5));
                             *front_gate = 0u;
