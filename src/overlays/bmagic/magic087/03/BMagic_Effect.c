@@ -62,6 +62,7 @@ MATCH void func_801EF958(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);
 }
 
+/* blocker: the step table D_801F0530 (Callback per header.step) has no symbol row in this image; needs: type. */
 INCLUDE_ASM(func_801EF99C);
 
 MATCH void func_801EFA2C(void) {
