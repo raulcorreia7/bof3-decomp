@@ -103,13 +103,13 @@ ASSERT_SIZE(AreaPartySpeed, 0x140);
 
 /* The current mode work record; battle points it at a g_BattlePartyBattlers row. */
 /* D_80146250 */
-extern GameState*    g_GameState; /* 0x80146250 */
+extern GameState*     g_GameState; /* 0x80146250 */
 /* D_80145FBB */
-extern AreaPartyMode D_80145FBB[]; /* 0x80145FBB */
+extern AreaPartyMode  D_80145FBB[]; /* 0x80145FBB */
 /* D_80145FAC */
 extern AreaPartySpeed g_AreaPartySpeed[]; /* 0x80145FAC */
 /* The scenario record the overlays switch on. */
 /* D_80146870 */
-extern SceneState    g_SceneState; /* 0x80146870 */
+extern SceneState     g_SceneState; /* 0x80146870 */
 
 #endif
