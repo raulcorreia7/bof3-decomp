@@ -21,15 +21,15 @@ NON_MATCHING void func_801DA474(void) {
     val4 = &D_80144953;
     val4 = &D_80144953;
     Menu_DrawClutStrip(*val4);
-    flag                        = &D_801485DC;
-    *flag                       = 0;
-    g_MenuPanelTasks[20].active = 0;
-    tmp1                        = (D_80148658[0] * 8) + (D_80148659 * 0x10);
-    D_801485E0                  = FIELD(u16, &D_801EC548, tmp1);
-    D_801485E2                  = FIELD(u16, &D_801EC54A, tmp1);
-    *flag                       = 1;
-    g_MenuPanelTasks[19].unk_0B = 1;
-    g_MenuPanelTasks[19].unk_0A = FIELD(s32, &D_801EC54C, tmp1);
+    flag                                                   = &D_801485DC;
+    *flag                                                  = 0;
+    g_MenuPanelTasks[20].active                            = 0;
+    tmp1                                                   = (D_80148658[0] * 8) + (D_80148659 * 0x10);
+    D_801485E0                                             = FIELD(u16, &D_801EC548, tmp1);
+    D_801485E2                                             = FIELD(u16, &D_801EC54A, tmp1);
+    *flag                                                  = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = FIELD(s32, &D_801EC54C, tmp1);
     if ((s8)D_8014865D != 0x7F) {
         tmp0                        = ((s8)D_8014865A * 8) + ((s8)D_8014865D * 0x10);
         g_MenuPanelTasks[20].pos.x  = FIELD(u16, &D_801EC548, tmp0);
@@ -44,10 +44,10 @@ NON_MATCHING void func_801DA474(void) {
         TEXT_SetVariable(0U, 5U, (g_CharSlot[D_801ED69C] * 0xA4) + (&D_80144953 + 0x15));
         val1 = 0x61;
     }
-    g_MenuPanelTasks[11].unk_10 = val1;
-    input_bits                  = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    tmp4                        = Party_CountOrder(PARTY_ORDER_FIELD);
-    if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[12].unk_0A != 0)) {
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = val1;
+    input_bits = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    tmp4       = Party_CountOrder(PARTY_ORDER_FIELD);
+    if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A != 0)) {
         D_80148658[0] = (u8)D_80148658[0] ^ 1;
     }
     if (D_80148658[0] == 0) {
@@ -56,8 +56,8 @@ NON_MATCHING void func_801DA474(void) {
             goto block_12; /* retail branch */
         }
     } else {
-        val2 = g_MenuPanelTasks[12].unk_0A - 1;
-        if ((g_MenuPanelTasks[12].unk_0A - 1) < D_80148659) {
+        val2 = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1;
+        if ((g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1) < D_80148659) {
         block_12:
             D_80148659 = val2;
         }
@@ -68,7 +68,7 @@ NON_MATCHING void func_801DA474(void) {
         if (tmp2 & 0x80) {
             val3 = tmp4 - 1;
             if (D_80148658[0] != 0) {
-                val3 = g_MenuPanelTasks[12].unk_0A - 1;
+                val3 = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1;
             }
             D_80148659 = val3;
         }
@@ -79,7 +79,7 @@ NON_MATCHING void func_801DA474(void) {
             if (((tmp4 & BYTE_MASK) - 1) < tmp3) {
                 goto block_23; /* retail branch */
             }
-        } else if ((g_MenuPanelTasks[12].unk_0A - 1) < tmp3) {
+        } else if ((g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1) < tmp3) {
         block_23:
             D_80148659 = 0;
         }
@@ -114,10 +114,10 @@ NON_MATCHING void func_801DA474(void) {
             D_8014865D = 0x7F;
             return;
         }
-        D_80148654                  = 5;
-        D_801485DC                  = 0;
-        g_MenuPanelTasks[20].active = 0;
-        g_MenuPanelTasks[12].state  = 1;
+        D_80148654                                        = 5;
+        D_801485DC                                        = 0;
+        g_MenuPanelTasks[20].active                       = 0;
+        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state = 1;
         D_80148652 += 1;
     }
 }

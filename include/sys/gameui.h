@@ -41,16 +41,35 @@ extern AreaDrawState g_AreaDrawState;
 /* retail addresses */
 
 /* The menu header bar every screen draws at the top: geometry in pixels, y at its resting row. */
-#define MENU_HEADER_X           0x14
-#define MENU_HEADER_Y           0x12
-#define MENU_HEADER_WIDTH       0x118
-#define MENU_HEADER_HEIGHT      0x13
+#define MENU_HEADER_X                 0x14
+#define MENU_HEADER_Y                 0x12
+#define MENU_HEADER_WIDTH             0x118
+#define MENU_HEADER_HEIGHT            0x13
+#define MENU_HEADER_SHORT_WIDTH       0x48
+
+/* Sizes of the framed windows the menu overlays draw with UI_DrawWindow. */
+#define MENU_CHARACTER_WINDOW_WIDTH   125
+#define MENU_CHARACTER_WINDOW_HEIGHT  48
+#define MENU_EQUIP_STAT_WINDOW_WIDTH  108
+#define MENU_EQUIP_STAT_WINDOW_HEIGHT 48
+#define MENU_ZENNY_WINDOW_WIDTH       101
+#define MENU_ZENNY_WINDOW_HEIGHT      16
+#define MENU_PLAY_TIME_WINDOW_WIDTH   85
+#define MENU_PLAY_TIME_WINDOW_HEIGHT  16
+#define MENU_INVENTORY_WINDOW_WIDTH   153
+#define MENU_INVENTORY_WINDOW_HEIGHT  154
+#define MENU_INVENTORY_TOP_HEIGHT     20
+#define MENU_INVENTORY_BOTTOM_HEIGHT  8
+#define MENU_STAT_WINDOW_WIDTH        148
+#define MENU_STAT_WINDOW_HEIGHT       45
+#define MENU_SAVE_SLOT_WINDOW_WIDTH   200
+#define MENU_SAVE_SLOT_WINDOW_HEIGHT  48
 
 /* The requested message id: 0xFFFF means no message. ResourceRequestMessage
  * stores a message index in the slot and Message_StartRequest reads the slot as that
  * index; the player's menu choice at g_MessageChoice decides the index. */
-#define MESSAGE_NONE            0xFFFF
-#define MESSAGE_REQUEST_CLEAR() (g_MessageRequest = MESSAGE_NONE)
+#define MESSAGE_NONE                  0xFFFF
+#define MESSAGE_REQUEST_CLEAR()       (g_MessageRequest = MESSAGE_NONE)
 
 /* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
  * while no answer is selected, nonzero once the player picks one. */
