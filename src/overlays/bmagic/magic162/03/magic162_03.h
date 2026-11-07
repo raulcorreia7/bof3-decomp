@@ -15,4 +15,14 @@ extern BMagicEffectWork D_801F01B0[];
 #define BMAGIC_EFFECT_SLOTS D_801F01B0
 #define BMAGIC_EFFECT_COUNT 128
 
+/* The sparkle kind this image spawns: it picks the count and the launch delay. */
+#define EFFECT_SPARKLE_KIND 4
+
+/* The number of sparkles each kind spawns. */
+extern u8 D_801F0194[];
+/* The launch delay between each group of four sparkles, per kind. */
+extern u8 D_801F019C[];
+
+u32 BMagic_AllocEffect(void);
+
 #endif
