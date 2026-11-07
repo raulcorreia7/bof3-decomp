@@ -48,6 +48,7 @@ MATCH void BMagic_UpdateBurnSprites(void) {
     }
 }
 
+/* Retail keeps the battler in v1 and the task in a0; the draft (--dec form, timer 2, unk_14 zero) is one instruction short at the 0x14 bnez, the reg order differs. */
 INCLUDE_ASM(func_801EEFF4);
 
 /* blocker: sum register; first diff: lw a0,0x20($v1) (retail) against lw v0,0x20($v1). */
