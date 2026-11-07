@@ -175,20 +175,30 @@ extern AreaMapBundle g_AreaMapBundle;
  * scenario script owns the field. */
 typedef enum GameFlags {
     GAME_FLAG_SCROLL_LOCK   = 1 << 3,
-    GAME_FLAG_RUN_LOCK      = 1 << 6,
+    GAME_FLAG_MENU_LOCK     = 1 << 6,
     GAME_FLAG_SCRIPT_ACTIVE = 1 << 8,
 } GameFlags;
 
 typedef enum AreaWalkFlags {
-    AREA_WALK_BUSY_ALL      = (1 << 0) | (1 << 1) | (1 << 2),
-    AREA_WALK_ENTRY_ACTIVE  = 1 << 3,
-    AREA_WALK_ACCEPT_LOCK   = 1 << 4,
-    AREA_WALK_ENTRY_PENDING = 1 << 6,
-    AREA_WALK_STEP_ACTIVE   = 1 << 10,
-    AREA_WALK_RUN_ACTIVE    = 1 << 11,
-    AREA_WALK_TRANSITION    = 1 << 12,
-    AREA_WALK_MAP_LOADING   = 1 << 15,
+    AREA_WALK_BUSY_ALL             = (1 << 0) | (1 << 1) | (1 << 2),
+    AREA_WALK_ENTRY_ACTIVE         = 1 << 3,
+    AREA_WALK_ACCEPT_LOCK          = 1 << 4,
+    AREA_WALK_ENTRY_PENDING        = 1 << 6,
+    AREA_WALK_LEADER_SWITCH_ACTIVE = 1 << 10,
+    AREA_WALK_MENU_ACTIVE          = 1 << 11,
+    AREA_WALK_TRANSITION           = 1 << 12,
+    AREA_WALK_MAP_LOADING          = 1 << 15,
 } AreaWalkFlags;
+
+/* Modes of the field task (g_Task->header.mode) that the pad requests start. */
+typedef enum FieldTaskMode {
+    FIELD_TASK_MODE_LEADER_SWITCH   = 3,
+    FIELD_TASK_MODE_MENU            = 4,
+    FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
+} FieldTaskMode;
+
+/* g_GameState->mode_12B while the character field action runs. */
+#define GAME_PANEL_MODE_PERSONAL_ACTION 8
 
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by
  * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.

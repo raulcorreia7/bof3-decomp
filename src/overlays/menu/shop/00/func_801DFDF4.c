@@ -22,7 +22,7 @@ MATCH void func_801DFDF4(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         *toggle ^= 1;
     }
-    if (*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             SND_PlayCue(EMI_CUE_ID(1, 2));
@@ -67,7 +67,7 @@ MATCH void func_801DFDF4(void) {
         D_80148651 -= 1;
         return;
     }
-    if (*pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_80148651 -= 1;
     }

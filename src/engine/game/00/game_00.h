@@ -22,8 +22,6 @@
 
 /* Fixed retail addresses the units dereference. */
 #define ENCOUNTER_TABLE_BASE   0x800E4000u /* formations and enemy records (@source: wiki:formats/area) */
-#define GAME_PALETTE_STAGE     0x80035600u /* 0x40-byte palette staging entries; GFX_StagePalette copies them out */
-#define GAME_PALETTE_MIRROR    0x80039600u /* GAME_PALETTE_STAGE + 0x4000, GFX_StagePalette's second copy */
 #define GAME_AREA_ID_ADDR      0x80143F00  /* the u16 world id; MEM reads it non-volatile to match retail */
 #define AREA_MESSAGE_REQUEST   0xD8        /* the message Message_RunAreaMessage starts */
 
@@ -915,15 +913,18 @@ u8      func_801B4494(u8 wanted_code);
 u8      func_801B44DC(u8 wanted_code);
 u8      func_801B4D7C(u8 wanted_code);
 bool    func_801B544C(void);
-bool    func_801B55C0(void);
-s32     func_801B5684(void);
+/* func_801B55C0 */
+bool    Party_CanSwitchLeader(void);
+/* func_801B5684 */
+s32     Game_RequestLeaderSwitch(void);
 s32     func_801B5758(void);
 s32     func_801B5884(void);
 s32     func_801B5910(void);
 s8      func_801B5AE4(s32 route_index, s32 route_flags);
 void    func_801B5BDC(u8 route_index);
 void*   func_801B5C54(void);
-s32     func_801B5EBC(void);
+/* func_801B5EBC */
+s32     Game_RequestPersonalAction(void);
 bool    func_801B5F68(s32 selection_kind);
 s32     func_801B6044(void);
 void    func_801B60DC(s32 actor_index);

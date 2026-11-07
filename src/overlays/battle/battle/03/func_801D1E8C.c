@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: tried the first-draft body with the volatile g_InputMasks[INPUT_SLOT_CONFIRM] view and one-member struct views for
+/* nonmatching unmeasured: tried the first-draft body with the volatile g_InputMasks[BATTLE_INPUT_CONFIRM] view and one-member struct views for
  * the pad rows (62.12%). residual: retail keeps s5/s6 live across the draw calls (frame 0x30 against our 0x28) and the
  * body is 20 bytes short. resume: a source shape whose pad cursor and state base stay live across the calls. */
 #ifdef NON_MATCHING
@@ -28,7 +28,7 @@ NON_MATCHING void func_801D1E8C(void) {
     if (*state != 0) {
         --*state;
     }
-    if ((g_InputMasks[INPUT_SLOT_CANCEL] & *pad) && ((s8)g_BattleCommandCount != 0)) {
+    if ((g_InputMasks[BATTLE_INPUT_CANCEL] & *pad) && ((s8)g_BattleCommandCount != 0)) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         temp_v0_50           = (u8)g_BattleCommandCount - 1;
         g_BattleCommandCount = temp_v0_50;
@@ -50,7 +50,7 @@ NON_MATCHING void func_801D1E8C(void) {
         FIELD(u8, g_BattleMessageSlot, 0x119u)  = 0U;
         return;
     }
-    if (g_InputMasks[INPUT_SLOT_CONFIRM] & *pad) {
+    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad) {
         if (((u32)(g_BattlePanelSlot - 2) < 2U) && (D_801EB4D8->action_flags.value & 2)) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;

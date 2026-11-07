@@ -61,7 +61,7 @@ MATCH void func_801D8DC8(void) {
     if (old != panel->unk_0B) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_80148597                  = 1;
         g_MenuPanelTasks[21].active = 0;
