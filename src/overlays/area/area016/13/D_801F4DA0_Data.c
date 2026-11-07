@@ -166,7 +166,7 @@ u8 D_801F50E4[28] = {
 
 /* Step handlers. */
 Callback D_801F5100[5] = {
-    func_801F3060, func_801F30EC, func_801F3224, func_801F32A0, Actor_ShrinkAndFinish,
+    func_801F3060, func_801F30EC, func_801F3224, func_801F32A0, Actor_ZoomOut,
 };
 
 Callback D_801F5114[2] = {

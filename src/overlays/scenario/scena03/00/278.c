@@ -153,7 +153,7 @@ MATCH void func_801F754C(void) {
     slots[0x11][1] = 1;
 }
 
-#include "shared/Actor_UnhideAndFinishAtZero.h"
+#include "shared/Actor_Reveal.h"
 
 MATCH void Actor_FreePaletteFades_801F7A14(void) {
     u8** slots;
@@ -332,7 +332,7 @@ MATCH void func_801F85FC(void) {
     SYS_DISPATCH_TASK(D_801FCFAC, 1, g_Task);
 }
 
-#include "shared/Actor_ProjectFocusAndStep.h"
+#include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F8710(void) {
     u8**   slots;

@@ -6,7 +6,7 @@
  * must verify every member.
  */
 /* func_801F2C48 (area032), func_801F8640 (scena03) */
-MATCH void Actor_ProjectFocusAndStep(void) {
+MATCH void Actor_TrackFocus(void) {
     SVECTOR* vertex;
     u16*     screen;
     long     depth;

@@ -2529,7 +2529,7 @@ Scene_DrawBands = { addr = 0x801D165C, type = "func", source = "Draws 17 depth s
 Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
 
 ["emi/scenario/sce15ef2/00"]
-Scene_ClearScanBarsAndAdvance = { addr = 0x801D0DE8, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
+Scene_EndScan = { addr = 0x801D0DE8, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Scene_DrawScanBar = { addr = 0x801D1414, type = "func", source = "Draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity." }
 Scene_ClearScanBars = { addr = 0x801D15B0, type = "func", source = "Clears the in-use byte of each of the 16 scan bars." }
 Scene_ClaimScanBar = { addr = 0x801D15DC, type = "func", source = "Marks the first free of the 16 scan bars in use and resets its state byte." }
@@ -2537,7 +2537,7 @@ Scene_StepScanBars = { addr = 0x801D1624, type = "func", source = "Steps and dra
 Scene_DrawRedGradient = { addr = 0x801D19A8, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
 
 ["emi/scenario/sce15ef3/00"]
-Scene_ClearScanBarsAndAdvance = { addr = 0x801D15CC, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
+Scene_EndScan = { addr = 0x801D15CC, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Area_FindFreeSpriteRow = { addr = 0x801D171C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
 Scene_DrawRedGradient = { addr = 0x801D1BAC, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
 Scene_DrawScanBar = { addr = 0x801D2424, type = "func", source = "Draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity." }
@@ -2561,9 +2561,9 @@ Scene_RemoveRei = { addr = 0x801FE198, type = "func", source = "Removes characte
 
 ["emi/scenario/scena03/00"]
 Actor_FreePaletteFades = { addr = 0x801F7334, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
-Actor_UnhideAndFinishAtZero = { addr = 0x801F78E0, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
+Actor_Reveal = { addr = 0x801F78E0, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
 Actor_FreePaletteFades_801F7A14 = { addr = 0x801F7A14, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work; same bytes as Actor_FreePaletteFades at 0x801F7334." }
-Actor_ProjectFocusAndStep = { addr = 0x801F8640, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
+Actor_TrackFocus = { addr = 0x801F8640, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
 GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "Starts the area message of the given index, switches the game state to 2 and sets the script-active flag." }
 Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "Removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes." }
@@ -2587,13 +2587,13 @@ Scene_RemovePeco = { addr = 0x801FE30C, type = "func", source = "Removes charact
 Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes." }
 
 ["emi/scenario/scena07/00"]
-Actor_WaitAndStep = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
+Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_PartySize and joins the three with Party_JoinMember." }
 Scene_SetPartyRyuYoungNinaYoungGarr = { addr = 0x801FDB80, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Garr, empties g_PartySize and joins the three in that order with Party_JoinMember." }
 
 ["emi/scenario/scena08/00"]
-Actor_WaitAndStep = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
+Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes." }
 
@@ -2743,7 +2743,7 @@ Area_ResetCameraOffsetY = { addr = 0x801F2D5C, type = "func", source = "Zeroes g
 ["emi/world00/area016/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
-Actor_ShrinkAndFinish = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it ends the shrink and resets its scratch state." }
+Actor_ZoomOut = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it ends the shrink and resets its scratch state." }
 Actor_CenterOnScreen = { addr = 0x801F3400, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F3460, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F350C, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
@@ -2867,16 +2867,16 @@ g_FishingNewRecord = { addr = 0x801E3214, source = "set by Fishing_CatchRecord w
 
 ["emi/world00/area032/13"]
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "Appends the current primitive to one ordering-table head and advances the shared primitive cursor while the requested byte count fits the active buffer." }
-Actor_ProjectFocusAndStep = { addr = 0x801F2C48, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
+Actor_TrackFocus = { addr = 0x801F2C48, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
 GFX_DrawShadedDisc = { addr = 0x801F2F04, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
-Actor_UnhideAndFinishAtZero = { addr = 0x801F3480, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
+Actor_Reveal = { addr = 0x801F3480, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
 Actor_FreePaletteFades = { addr = 0x801F35B4, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
 Message_Clear = { addr = 0x801F36A0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 
 ["emi/world00/area033/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
-Actor_ShrinkAndFinish = { addr = 0x801F3294, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_ZoomOut = { addr = 0x801F3294, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_CenterOnScreen = { addr = 0x801F3334, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F3394, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F3440, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
@@ -2937,7 +2937,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world01/area045/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
-Actor_ShrinkAndFinish = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_ZoomOut = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_CenterOnScreen = { addr = 0x801F3400, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F3460, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F350C, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
@@ -3038,8 +3038,8 @@ Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls ra
 ["emi/world01/area065/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
-Actor_GrowAndSetStep3 = { addr = 0x801F325C, type = "func", source = "Centres the actor, grows the scale at offset 0x40 by 0x2000 each frame and counts the timer at byte 0x09 down; when it reaches 0 it clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
-Actor_ShrinkAndFinish = { addr = 0x801F3398, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_ZoomIn = { addr = 0x801F325C, type = "func", source = "Centres the actor, grows the scale at offset 0x40 by 0x2000 each frame and counts the timer at byte 0x09 down; when it reaches 0 it clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
+Actor_ZoomOut = { addr = 0x801F3398, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_CenterOnScreen = { addr = 0x801F3438, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F3498, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F3544, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
@@ -3145,8 +3145,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world02/area087/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
-Actor_GrowAndSetStep3 = { addr = 0x801F3258, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
-Actor_ShrinkAndFinish = { addr = 0x801F3394, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_ZoomIn = { addr = 0x801F3258, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
+Actor_ZoomOut = { addr = 0x801F3394, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_CenterOnScreen = { addr = 0x801F3434, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F3494, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F3540, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
@@ -3168,8 +3168,8 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4770, type = "func", source = "Calls
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 AngleAverage12 = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 Message_ClearOnCancel = { addr = 0x801F3764, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
-Actor_GrowAndSetStep3 = { addr = 0x801F3D88, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
-Actor_ShrinkAndFinish = { addr = 0x801F3EC4, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_ZoomIn = { addr = 0x801F3D88, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
+Actor_ZoomOut = { addr = 0x801F3EC4, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_CenterOnScreen = { addr = 0x801F3F64, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F3FC4, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F4070, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
@@ -3250,8 +3250,8 @@ Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "Returns
 ["emi/world02/area104/14"]
 Message_RunAreaMessage = { addr = 0x801F2F0C, type = "func", source = "Starts message 4 with Message_StartAreaMessage, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the D_801448EB state." }
 Area_InitSceneActor = { addr = 0x801F3124, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x158, sets byte 0x29 to 5, clears byte 0x2A and the tint bytes and sets header.mode (byte 0x01) to 1." }
-Actor_GrowAndSetStep3 = { addr = 0x801F32E8, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
-Actor_ShrinkAndFinish = { addr = 0x801F3424, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_ZoomIn = { addr = 0x801F32E8, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
+Actor_ZoomOut = { addr = 0x801F3424, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_CenterOnScreen = { addr = 0x801F34C4, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F3524, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F35D0, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
@@ -3500,7 +3500,7 @@ Message_SetAnswerMessage = { addr = 0x801F2CB0, type = "func", source = "Stores 
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 WorldMap_StartScene = { addr = 0x801F2FD0, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x1D1, sets byte 0x29 to 5, clears bytes 0x2A and 0x5D to 0x5F and sets header.mode (byte 0x01) to 1." }
-Actor_ShrinkAndFinish = { addr = 0x801F32D0, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_ZoomOut = { addr = 0x801F32D0, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_CenterOnScreen = { addr = 0x801F3370, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
 Actor_NextStep = { addr = 0x801F33D0, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F347C, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
