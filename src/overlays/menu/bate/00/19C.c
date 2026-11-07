@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The bate overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D9C(void) {
-    SYS_DISPATCH_BYTE(D_801D86E0, D_80148650);
+    SYS_DISPATCH_BYTE(g_MenuBateStepFuncs, D_80148650);
 }
 
 MATCH void func_801D0DD8(void) {
@@ -24,11 +24,11 @@ MATCH void func_801D0E04(void) {
 }
 
 MATCH void func_801D0E38(void) {
-    SYS_DISPATCH_BYTE(D_801D8700, D_80148651);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Funcs, D_80148651);
 }
 
 MATCH void func_801D0E74(void) {
-    SYS_DISPATCH_BYTE(D_801D870C, D_80148652);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub0Funcs, D_80148652);
 }
 
 MATCH void func_801D0EB0(void) {
@@ -57,7 +57,7 @@ MATCH void func_801D0F70(void) {
 }
 
 MATCH void func_801D0FF8(void) {
-    SYS_DISPATCH_BYTE(D_801D8718, D_80148652);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub1Funcs, D_80148652);
     Menu_DrawClutStrip(D_80144953);
 }
 
