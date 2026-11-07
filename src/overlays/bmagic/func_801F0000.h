@@ -6,8 +6,8 @@ MATCH u8 func_801F0000(void) {
     u8 i;
 
     for (i = 0; i < EFFECT_SPARKLE_COUNT; i++) {
-        if (!(D_801F01B4[i].header.flags & 1)) {
-            D_801F01B4[i].header.flags |= 1;
+        if (!(D_801F01B4[i].header.flags & EFFECT_SPARKLE_IN_USE)) {
+            D_801F01B4[i].header.flags |= EFFECT_SPARKLE_IN_USE;
             return i;
         }
     }

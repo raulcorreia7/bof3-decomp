@@ -33,12 +33,12 @@ MATCH void func_801EED38(void) {
             D_801F01B4[sparkle_index].header.mode = 0;
             D_801F01B4[sparkle_index].header.step = 0;
             D_801F01B4[sparkle_index].battler     = owner;
-            D_801F01B4[sparkle_index].unk_03      = rand() & 3;
+            D_801F01B4[sparkle_index].unk_03      = RANDOM_MASK(3);
             D_801F01B4[sparkle_index].unk_04      = g_Task->unk_04;
             D_801F01B4[sparkle_index].unk_07      = i;
             D_801F01B4[sparkle_index].timer_05    = D_801F01A0[g_Task->unk_04] * (i >> 2) + 1;
             g_Task->unk_0B++;
         }
     }
-    SND_PlayCue(0x100);
+    SND_PlayCue(EMI_CUE_ID(1, 0));
 }
