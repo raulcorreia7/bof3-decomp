@@ -38,7 +38,7 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & COMBATANT_FLAG_CHARGING) {
         D_80145F24[party_slot][0] = D_80145F24[party_slot][0] * 3;
     }
-    if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & 0x1000) {
+    if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & COMBATANT_FLAG_SELECTION_BONUS) {
         u16 total;
         u16 bonus;
 
