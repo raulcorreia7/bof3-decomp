@@ -18,7 +18,6 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D3A24(void) {
-    s32 battler_offset;
     s32 rec;
     u8  chr_master;
     u8  diff;
@@ -31,16 +30,15 @@ NON_MATCHING void func_801D3A24(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    battler_offset = g_MasterMenuCursor * BATTLE_PARTY_STRIDE;
-    rec            = D_80145FCC.bytes[battler_offset];
-    chr_master     = g_Characters[rec].master_id;
+    rec        = g_BattlePartyBattlers[g_MasterMenuCursor].character_index;
+    chr_master = g_Characters[rec].master_id;
     if (chr_master == g_SceneEventSelection) {
         diff = g_Characters[rec].level - g_Characters[rec].master_level;
         switch (chr_master) {
             case MASTER_BAIS:
                 if (diff >= 3 && !(g_MasterRewardFlags & (1 << CHAR_INDEX_TEEPO))) {
                     g_MasterRewardFlags |= 1 << CHAR_INDEX_TEEPO;
-                    func_801D39CC(D_80145FCC.bytes[battler_offset]);
+                    func_801D39CC(g_BattlePartyBattlers[g_MasterMenuCursor].character_index);
                     done = 1;
                 }
                 break;
@@ -49,7 +47,7 @@ NON_MATCHING void func_801D3A24(void) {
                     if (SYS_TestFlag(&g_SceneEventSelection + 0x63B, 0x6C) == 0) {
                         if (Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_CUPIDS_LYRE, 1, 0) & BYTE_MASK) {
                             SYS_SetFlag(&g_SceneEventSelection + 0x63B, 0x6C);
-                            func_801D39CC(D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE]);
+                            func_801D39CC(g_BattlePartyBattlers[g_MasterMenuCursor].character_index);
                             done = 1;
                         }
                     }
@@ -58,14 +56,14 @@ NON_MATCHING void func_801D3A24(void) {
             case MASTER_LEE:
                 if (diff >= 3 && !(g_MasterRewardFlags & (1 << CHAR_INDEX_REI))) {
                     g_MasterRewardFlags |= 1 << CHAR_INDEX_REI;
-                    func_801D39CC(D_80145FCC.bytes[battler_offset]);
+                    func_801D39CC(g_BattlePartyBattlers[g_MasterMenuCursor].character_index);
                     done = 1;
                 }
                 break;
             case MASTER_WYNN:
                 if (diff >= 3 && !(g_MasterRewardFlags & (1 << CHAR_INDEX_MOMO))) {
                     g_MasterRewardFlags |= 1 << CHAR_INDEX_MOMO;
-                    func_801D39CC(D_80145FCC.bytes[battler_offset]);
+                    func_801D39CC(g_BattlePartyBattlers[g_MasterMenuCursor].character_index);
                     done = 1;
                 }
                 break;
@@ -78,11 +76,11 @@ NON_MATCHING void func_801D3A24(void) {
                     if (((u32*)(&g_SceneEventSelection + 0x693))[skill >> 5] & (1 << (skill& 0x1F))) {
                         continue;
                     }
-                    if (!(Char_AddAbility(skill, D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE], 0, 0) &
+                    if (!(Char_AddAbility(skill, g_BattlePartyBattlers[g_MasterMenuCursor].character_index, 0, 0) &
                           0xFF)) {
                         continue;
                     }
-                    func_801D39CC(D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE]);
+                    func_801D39CC(g_BattlePartyBattlers[g_MasterMenuCursor].character_index);
                     for (k = 0; k < 12; k++) {
                         D_801490F8[k] =
                             ((const u8*)(g_Abilities))[g_MasterSkills[g_SceneEventSelection][i / 2].ability * 0x14 + k];
