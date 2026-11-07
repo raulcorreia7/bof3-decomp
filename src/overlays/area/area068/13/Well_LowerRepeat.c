@@ -1,0 +1,6 @@
+#include "area068_13.h"
+
+/* func_801F2F98 */
+MATCH void Well_LowerRepeat(void) {
+    WELL_TICK_LOWER(WELL_CUE_LOWER_END_REPEAT, WELL_MODE_LOWER_READY, WELL_MODE_LOWER_COUNT);
+}

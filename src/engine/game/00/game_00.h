@@ -262,7 +262,6 @@ extern volatile u32       D_80143F0C; /* 0x80143F0C */
 extern s16                D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
 extern s16                D_80143F1A; /* 0x80143F1A */
 extern volatile u8        g_GameRequestKind;
-extern s16                D_80143F22;
 extern s16                D_80143F26; /* integer half of g_EncounterOriginX */
 extern s16                D_80143F2A; /* integer half of g_EncounterOriginY */
 /* Scene step byte, countdown halfword and the slot index cached in the
@@ -300,7 +299,6 @@ extern u32                D_80145EDC; /* 0x80145EDC */
 extern u8                 D_80145F00; /* 0x80145F00 */
 extern u8                 D_80145F09; /* 0x80145F09 */
 extern u8                 D_80145FA8; /* 0x80145FA8 */
-extern u8                 D_80145FAC;
 extern u8                 D_80145FB4[];
 extern u16                D_80145FB8; /* 0x80145FB8 */
 extern u8                 D_80145FD1;

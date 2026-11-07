@@ -1,17 +1,4 @@
-#include "shared/etc.h"
-
-extern u8  D_801484BD;
-extern u8  D_801484BE;
-extern u8  D_801484BF;
-extern s16 D_801484C0;
-extern s16 D_801484C2;
-extern s16 D_801484CC;
-extern u8  D_801485B9;
-extern u8  D_801485BA;
-extern s16 D_801485BC;
-extern s16 D_801485BE;
-extern u8  D_80148654;
-extern u8  D_801ED68C;
+#include "start_08.h"
 
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 92.47%. resume: a lever or header
  * fix that closes the first mismatch. */

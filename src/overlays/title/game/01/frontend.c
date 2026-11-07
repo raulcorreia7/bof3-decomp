@@ -39,7 +39,7 @@ MATCH void Game_BeginTitle(void) { /* func_801D0C90 */
 
     GFX_ResetPalette();
     g_GfxPalettePending += 1u;
-    SND_PlayBGM(0x8Du, 100u, 8u);
+    SND_PlayBGM(BGM_TITLE, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
 
     state                   = g_UiTitleState;
     g_UiTitleFadePhase      = 1u;
