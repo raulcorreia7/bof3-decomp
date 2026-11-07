@@ -7,16 +7,21 @@
 #include "shared/etc.h"
 
 extern OverlayHeader D_801D0C00;
-/* The overlay's step and sub-step handler pools. The tables overlap: each entry
- * stub starts at its own offset into the same run of callbacks, so the counts
- * stay open until a data pass proves each reader's range. */
-extern Callback      D_801D4BCC[];
-extern Callback      D_801D4BD8[];
-extern Callback      D_801D4BE4[];
-extern Callback      D_801D4BEC[];
-extern u8            D_801D4DF4;
-extern u8            D_801D4DF8;
-extern u8            D_801D4DFC;
+/* Entries of the handler tables. */
+#define COMMU01_STEP_COUNT       3
+#define COMMU01_STEP2_COUNT      3
+#define COMMU01_STEP2_SUB1_COUNT 6
+
+/* D_801D4BCC */
+extern Callback g_Commu01StepFuncs[COMMU01_STEP_COUNT];
+/* D_801D4BD8 */
+extern Callback g_Commu01Step2Funcs[COMMU01_STEP2_COUNT];
+extern Callback D_801D4BE4[];
+/* D_801D4BEC */
+extern Callback g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
+extern u8       D_801D4DF4;
+extern u8       D_801D4DF8;
+extern u8       D_801D4DFC;
 
 extern u8  D_801D4E00;
 extern u8  D_801D4E04;

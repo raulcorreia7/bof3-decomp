@@ -7,13 +7,15 @@
 #include "shared/etc.h"
 
 extern OverlayHeader D_801D0C00;
-/* The overlay's step and sub-step handler pools; the tables are views into one
- * callback run, so the counts stay open until a data pass proves each range.
- * After the step, the entry redraws the menu panels while the game state is
- * still zero. */
-extern Callback      D_801D1750[];
-extern Callback      D_801D1758[];
-extern u8            D_801D1774;
+/* Entries of the handler tables. */
+#define COMMU04_STEP_COUNT  2
+#define COMMU04_STEP0_COUNT 7
+
+/* D_801D1750 */
+extern Callback g_Commu04StepFuncs[COMMU04_STEP_COUNT];
+/* D_801D1758 */
+extern Callback g_Commu04Step0Funcs[COMMU04_STEP0_COUNT];
+extern u8       D_801D1774;
 
 /* The overlay's state byte the guarded step advances. */
 

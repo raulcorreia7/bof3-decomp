@@ -75,13 +75,18 @@ extern Callback g_MenuBateStep2Sub2Funcs[MENU_BATE_STEP2_SUB2_COUNT];
 extern Callback g_MenuBateStep3Funcs[MENU_BATE_STEP3_COUNT];
 /* D_801D8770 */
 extern Callback g_MenuBateStep3Sub0Funcs[MENU_BATE_STEP3_SUB0_COUNT];
-extern u8       D_801D893C[];
-extern u8       D_801D8954[];
-extern u8       D_801D896C[];
-extern u8       D_801D8978[];
+/* D_801D893C */
+extern u8       g_MenuListTab2OffSprites[];
+/* D_801D8954 */
+extern u8       g_MenuListTab2OnSprites[];
+/* D_801D896C */
+extern u8       g_MenuListTab1OffSprites[];
+/* D_801D8978 */
+extern u8       g_MenuListTab1OnSprites[];
 extern u8       D_801D8A3C[];
 extern u8       D_801D8B84[];
-extern u8*      D_801D8E80[];
+/* D_801D8E80 */
+extern u8*      g_MenuAbilityListNames[];
 extern u8       D_801D8EE0[5];
 
 typedef struct BateState {
@@ -102,9 +107,11 @@ s32  Char_GetExpForLevel(s32 character, s32 level);
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 
-void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value,
+                   u8 sprite_flag);
 
-void func_801D73B4(MenuListPanel* panel);
+/* func_801D73B4 */
+void Menu_DrawAbilityList(MenuListPanel* panel);
 
 s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 

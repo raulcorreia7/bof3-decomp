@@ -19,7 +19,7 @@ MATCH void func_801D143C(void) {
 }
 
 MATCH void func_801D14D0(void) {
-    SYS_DISPATCH_BYTE(D_801DAC20, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event0Step1Sub3Funcs, D_801F294E);
 }
 
 MATCH void func_801D150C(void) {
@@ -167,7 +167,7 @@ MATCH void func_801D25CC(void) {
             D_801F294D += 1;
         }
     } else if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBGM(D_801DB0CC, 0x64, 8);
+        SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
     }
@@ -213,11 +213,11 @@ INCLUDE_ASM(func_801D3184);
 INCLUDE_ASM(func_801D32A0);
 
 MATCH void func_801D3568(void) {
-    SYS_DISPATCH_BYTE(D_801DACB8, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event1StepFuncs, D_801F294C);
 }
 
 MATCH void func_801D35A4(void) {
-    SYS_DISPATCH_BYTE(D_801DACC4, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event1Step0Funcs, D_801F294D);
 }
 
 /* needs: u8 view of const g_SelectionCues and D_80181EBB; first diff: 0x801D35E0 lui v1 against v0. */
@@ -225,7 +225,7 @@ INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {
     if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBGM(0x94, 0x64, 8);
+        SND_PlayBGM(BGM_COMMU02, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         Message_StartAreaMessage(0x7F);
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
@@ -259,11 +259,11 @@ MATCH void func_801D3700(void) {
 }
 
 MATCH void func_801D37EC(void) {
-    SYS_DISPATCH_BYTE(D_801DACD4, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event1Step1Funcs, D_801F294D);
 }
 
 MATCH void func_801D3828(void) {
-    SYS_DISPATCH_BYTE(D_801DACF8, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event1Step1Sub0Funcs, D_801F294E);
 }
 
 INCLUDE_ASM(func_801D3864);
@@ -336,7 +336,7 @@ MATCH void func_801D4840(void) {
             D_801F294D += 1;
         }
     } else if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBGM(D_801DB0CC, 0x64, 8);
+        SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
     }
@@ -351,11 +351,11 @@ INCLUDE_ASM(func_801D4EA4);
 INCLUDE_ASM(func_801D4F88);
 
 MATCH void func_801D5034(void) {
-    SYS_DISPATCH_BYTE(D_801DAD68, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event2StepFuncs, D_801F294C);
 }
 
 MATCH void func_801D5070(void) {
-    SYS_DISPATCH_BYTE(D_801DAD74, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event2Step0Funcs, D_801F294D);
 }
 
 MATCH void func_801D50AC(void) {
@@ -366,7 +366,7 @@ MATCH void func_801D50AC(void) {
 INCLUDE_ASM(func_801D50E4);
 
 MATCH void func_801D5194(void) {
-    SYS_DISPATCH_BYTE(D_801DAD7C, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event2Step1Funcs, D_801F294D);
 }
 
 INCLUDE_ASM(func_801D51D0);
@@ -393,7 +393,7 @@ MATCH void func_801D5978(void) {
             CallbackWait(1U);
             goto loop_2;
         }
-        SND_PlayBGM(D_801DB0CC, 0x64, 8);
+        SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         g_AreaDrawFlags = 0x1F;
         UI_SetMode(1U);
         D_801F294D += 1;
@@ -430,7 +430,7 @@ MATCH s32 func_801D5AD0(s32 limit) {
 INCLUDE_ASM(func_801D5B2C);
 
 MATCH void func_801D5D5C(void) {
-    SYS_DISPATCH_BYTE(D_801DADEC, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event3StepFuncs, D_801F294C);
 }
 
 MATCH void func_801D5D98(void) {
@@ -444,7 +444,7 @@ MATCH void func_801D5D98(void) {
 }
 
 MATCH void func_801D5DF4(void) {
-    SYS_DISPATCH_BYTE(D_801DAE00, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Funcs, D_801F294D);
 }
 
 MATCH void func_801D5E30(void) {
@@ -508,7 +508,7 @@ MATCH void func_801D6390(void) {
 }
 
 MATCH void func_801D640C(void) {
-    SYS_DISPATCH_BYTE(D_801DAE24, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub6Funcs, D_801F294E);
 }
 
 INCLUDE_ASM(func_801D6448);
@@ -535,7 +535,7 @@ MATCH void func_801D6574(void) {
 }
 
 MATCH void func_801D65F8(void) {
-    SYS_DISPATCH_BYTE(D_801DAE30, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub7Funcs, D_801F294E);
 }
 
 INCLUDE_ASM(func_801D6634);
@@ -590,7 +590,7 @@ MATCH void func_801D6BE4(void) {
 }
 
 MATCH void func_801D6CDC(void) {
-    SYS_DISPATCH_BYTE(D_801DAE44, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Funcs, D_801F294D);
 }
 
 INCLUDE_ASM(func_801D6D18);
@@ -617,7 +617,7 @@ MATCH void func_801D73F8(void) {
 }
 
 MATCH void func_801D7474(void) {
-    SYS_DISPATCH_BYTE(D_801DAE68, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub6Funcs, D_801F294E);
 }
 
 INCLUDE_ASM(func_801D74B0);
@@ -644,7 +644,7 @@ MATCH void func_801D75DC(void) {
 }
 
 MATCH void func_801D7660(void) {
-    SYS_DISPATCH_BYTE(D_801DAE74, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub7Funcs, D_801F294E);
 }
 
 INCLUDE_ASM(func_801D769C);
