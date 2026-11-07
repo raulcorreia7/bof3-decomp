@@ -136,12 +136,12 @@ ASSERT_SIZE(MenuListSource, 2);
  * is not proven; 0x24 is the last proven cell, the names pointer. */
 typedef struct MenuListPanel {
     u8             pad_00[4];
-    UPoint2D       pos;      /* 0x04 */
-    u8             unk_08;   /* 0x08 the ability list passes it to func_801AF5B0 */
-    u8             flags;    /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
-    MenuListSource source;   /* 0x0A */
-    u8             unk_0C;   /* 0x0C a row the drawer draws an icon for */
-    u8             selected; /* 0x0D the selected row; the drawer shades it 2 */
+    UPoint2D       pos;         /* 0x04 */
+    u8             use_context; /* 0x08 the ability list passes it to func_801AF5B0: 1 outside battle, 2 in battle */
+    u8             flags;       /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
+    MenuListSource source;      /* 0x0A */
+    u8             unk_0C;      /* 0x0C a row the drawer draws an icon for */
+    u8             selected;    /* 0x0D the selected row; the drawer shades it 2 */
     u8             pad_0E[2];
     s16            unk_10; /* 0x10 tested against zero for the extra frame marks */
     u8             pad_12[0xE];

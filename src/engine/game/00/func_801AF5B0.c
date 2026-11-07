@@ -2,7 +2,7 @@
 
 /* nonmatching unmeasured: tried regalloc: first-compare tail layout; andi placement vs retail. */
 #ifdef NON_MATCHING
-NON_MATCHING s32 func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind) {
+NON_MATCHING u8 func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind) {
     MATCH_REG(s32, ch, "s1");
     /* FAKE: pin the argument roles to retail s1, s2 and s3. */
     MATCH_REG(s32, kind, "s2");

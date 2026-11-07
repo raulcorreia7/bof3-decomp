@@ -51,43 +51,43 @@ extern u8            D_801D0D98[];
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step bytes. */
 /* D_801D86E0 */
-extern Callback    g_MenuBateStepFuncs[MENU_BATE_STEP_COUNT];
-extern s8          D_801D86F0;
-extern u8          g_MenuLabelAgility[];
+extern Callback g_MenuBateStepFuncs[MENU_BATE_STEP_COUNT];
+extern s8       D_801D86F0;
+extern u8       g_MenuLabelAgility[];
 /* D_801D8B38 */
-extern u8          g_MenuEquipRowIcons[];
+extern u8       g_MenuEquipRowIcons[];
 /* D_801D8B40 */
-extern u8          g_MenuLabelEquip[];
-extern u8          g_MenuPortraitAtlas[];
+extern u8       g_MenuLabelEquip[];
+extern u8       g_MenuPortraitAtlas[];
 /* D_801D8700 */
-extern Callback    g_MenuBateStep2Funcs[MENU_BATE_STEP2_COUNT];
-extern u8          MENU_CAPTION_ICON[];
-extern u8          MENU_CLOCK_COLON[];
-extern u8*         g_MenuCommandLabels[];
-extern u8          g_MenuCommandRows[][5];
+extern Callback g_MenuBateStep2Funcs[MENU_BATE_STEP2_COUNT];
+extern u8       MENU_CAPTION_ICON[];
+extern u8       MENU_CLOCK_COLON[];
+extern u8*      g_MenuCommandLabels[];
+extern u8       g_MenuCommandRows[][5];
 /* D_801D870C */
-extern Callback    g_MenuBateStep2Sub0Funcs[MENU_BATE_STEP2_SUB0_COUNT];
+extern Callback g_MenuBateStep2Sub0Funcs[MENU_BATE_STEP2_SUB0_COUNT];
 /* D_801D8718 */
-extern Callback    g_MenuBateStep2Sub1Funcs[MENU_BATE_STEP2_SUB1_COUNT];
+extern Callback g_MenuBateStep2Sub1Funcs[MENU_BATE_STEP2_SUB1_COUNT];
 /* D_801D8720 */
-extern Callback    g_MenuBateStep2Sub2Funcs[MENU_BATE_STEP2_SUB2_COUNT];
+extern Callback g_MenuBateStep2Sub2Funcs[MENU_BATE_STEP2_SUB2_COUNT];
 /* D_801D8764 */
-extern Callback    g_MenuBateStep3Funcs[MENU_BATE_STEP3_COUNT];
+extern Callback g_MenuBateStep3Funcs[MENU_BATE_STEP3_COUNT];
 /* D_801D8770 */
-extern Callback    g_MenuBateStep3Sub0Funcs[MENU_BATE_STEP3_SUB0_COUNT];
+extern Callback g_MenuBateStep3Sub0Funcs[MENU_BATE_STEP3_SUB0_COUNT];
 /* D_801D893C */
-extern u8          g_MenuListTab2OffSprites[];
+extern u8       g_MenuListTab2OffSprites[];
 /* D_801D8954 */
-extern u8          g_MenuListTab2OnSprites[];
+extern u8       g_MenuListTab2OnSprites[];
 /* D_801D896C */
-extern u8          g_MenuListTab1OffSprites[];
+extern u8       g_MenuListTab1OffSprites[];
 /* D_801D8978 */
-extern u8          g_MenuListTab1OnSprites[];
-extern u8          D_801D8A3C[];
-extern u8          D_801D8B84[];
+extern u8       g_MenuListTab1OnSprites[];
+extern u8       D_801D8A3C[];
+extern u8       D_801D8B84[];
 /* D_801D8E80 */
-extern const char* g_MenuAbilityListNames[];
-extern u8          D_801D8EE0[5];
+extern u8*      g_MenuAbilityListNames[];
+extern u8       D_801D8EE0[5];
 
 typedef struct BateState {
     u8 unk_00;
@@ -107,7 +107,8 @@ s32  Char_GetExpForLevel(s32 character, s32 level);
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 
-void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value,
+                   u8 sprite_flag);
 
 /* func_801D73B4 */
 void Menu_DrawAbilityList(MenuListPanel* panel);

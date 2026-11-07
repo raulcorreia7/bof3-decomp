@@ -14,12 +14,12 @@ const char *D_801E5B48[5] = {
     D_801E5B40,
 };
 
-char D_801E5B5C[8] = "HEAL";
-char D_801E5B64[8] = "ASSIST";
-char D_801E5B6C[8] = "ATTACK";
-char D_801E5B74[8] = "SKILL";
+u8 D_801E5B5C[8] = "HEAL";
+u8 D_801E5B64[8] = "ASSIST";
+u8 D_801E5B6C[8] = "ATTACK";
+u8 D_801E5B74[8] = "SKILL";
 
-const char *g_MenuAbilityListNames[4] = {
+u8 *g_MenuAbilityListNames[4] = {
     D_801E5B5C,
     D_801E5B64,
     D_801E5B6C,
