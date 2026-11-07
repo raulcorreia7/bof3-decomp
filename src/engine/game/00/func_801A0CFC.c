@@ -9,7 +9,7 @@ MATCH void func_801A0CFC(Actor* entity) {
 
     saved = g_Task->direction_08;
     D_801C83BC[g_Task->header.step](entity, 0, 1);
-    if (g_Task->unk_09 != 0) {
+    if (g_Task->timer != 0) {
         func_801A253C(entity);
         return;
     }
@@ -21,7 +21,7 @@ MATCH void func_801A0CFC(Actor* entity) {
         }
         if (D_801C83BC[g_Task->header.step](entity, param, 2) != 0) {
             value = ((s32 (*)(Actor*))func_801A2C94)(entity);
-            if (g_Task->unk_09 != 0) {
+            if (g_Task->timer != 0) {
                 entity->unk_7B = (RANDOM_MASK(3) + 3);
             }
         } else {
@@ -32,7 +32,7 @@ MATCH void func_801A0CFC(Actor* entity) {
         value = ((s32 (*)(Actor*, s32))func_801A2ED4)(entity, 1);
         entity->unk_7B -= 1;
     }
-    if (((value & BYTE_MASK) != GAME_NONE) && (g_Task->unk_09 != 0)) {
+    if (((value & BYTE_MASK) != GAME_NONE) && (g_Task->timer != 0)) {
         g_Task->unk_03       = g_Task->header.mode;
         g_Task->header.mode  = 0x0A;
         entity->unk_79       = (value & 7);
@@ -46,7 +46,7 @@ MATCH void func_801A0CFC(Actor* entity) {
         }
         g_Task->direction_08 = saved;
     } else {
-        g_Task->unk_09       = 0;
+        g_Task->timer        = 0;
         g_Task->direction_08 = saved;
     }
     func_801A2AE4(entity, saved);

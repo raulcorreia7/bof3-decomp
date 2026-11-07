@@ -4,8 +4,8 @@ MATCH s32 func_801F2CE4(void) {
     u8  tick;
     s32 x;
 
-    tick           = g_Task->unk_09;
-    g_Task->unk_09 = tick + 1;
+    tick          = g_Task->timer;
+    g_Task->timer = tick + 1;
     if (tick == 0) {
         SND_PlayCue(0x200);
     }
@@ -14,7 +14,7 @@ MATCH s32 func_801F2CE4(void) {
     x                   = g_Task->pos.x.fixed + TO_COORD(1);
     g_Task->pos.x.fixed = x;
     if (x == TO_COORD(23)) {
-        g_Task->unk_09 = 0x20;
+        g_Task->timer = 0x20;
         g_Task->header.mode++;
     }
 }

@@ -80,12 +80,12 @@ MATCH void func_801BC000(void) {
                     Actor_RequestScript((g_Task->direction_08 + 8) & BYTE_MASK);
                     if (g_GameState->slot_index_79 == 2) {
                         tmp10 = g_Task;
-                        tmp3  = tmp10->unk_09;
+                        tmp3  = tmp10->timer;
                         Area_ReadHeight(tmp10->pos.x.fixed + (tmp10->vx * tmp3),
                                         tmp10->pos.y.fixed + (tmp10->vy * tmp3));
                     }
-                    tmp11         = g_Task;
-                    tmp11->unk_09 = (tmp11->unk_09 - 1);
+                    tmp11        = g_Task;
+                    tmp11->timer = (tmp11->timer - 1);
                     func_801B0DFC();
                     g_GameState->mode_12B.s8_value = 1;
                     tmp6                           = g_Task;

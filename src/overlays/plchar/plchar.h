@@ -45,9 +45,9 @@
         }                                                                             \
         g_Task->header.step++;                                                        \
     } else {                                                                          \
-        g_Task->unk_09--;                                                             \
-        if (g_Task->unk_09 == 0) {                                                    \
-            g_Task->unk_09       = 2;                                                 \
+        g_Task->timer--;                                                              \
+        if (g_Task->timer == 0) {                                                     \
+            g_Task->timer        = 2;                                                 \
             g_Task->direction_08 = g_Task->direction_08 + g_Task->param.turn_step;    \
             g_Task->direction_08 &= 7;                                                \
             Actor_RequestScript(g_Task->direction_08);                                \
@@ -68,7 +68,7 @@
         g_Task->param.turn_step = Actor_GetTurnStep(FACING_BACK);                            \
         g_Task->unk_03          = FACING_BACK;                                               \
     }                                                                                        \
-    g_Task->unk_09 = 2;                                                                      \
+    g_Task->timer = 2;                                                                       \
     g_Task->header.step++
 
 #define CHAR_LAUNCH_SCRIPT_PC 10

@@ -17,7 +17,7 @@ MATCH void func_801F345C(void) {
     next_y                  = D_801F35C1[index];
     state                   = check->header.step;
     COORD_INT(check->pos.z) = -0x80;
-    check->unk_30           = 0x100;
+    check->screen_y         = 0x100;
     COORD_INT(check->pos.y) = next_y;
     check->header.step      = state + 1;
 }

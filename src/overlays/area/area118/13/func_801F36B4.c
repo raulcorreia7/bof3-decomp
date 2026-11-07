@@ -3,8 +3,8 @@
 MATCH void func_801F36B4(void) {
     u16 count;
 
-    count          = g_Task->unk_30 + 0x20;
-    g_Task->unk_30 = count;
+    count            = g_Task->screen_y + 0x20;
+    g_Task->screen_y = count;
     if ((s16)count >= 0) {
         func_801F33A4();
         if (g_Task->header.step == 2) {

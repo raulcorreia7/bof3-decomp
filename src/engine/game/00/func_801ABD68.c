@@ -21,7 +21,7 @@ MATCH u8 func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas) {
     dz    = dist - COORD_INT(work2->pos.z);
     if (FIELD(u8, deltas, 0x4u) != 0) {
         count          = count ? count : 1;
-        work2->unk_09  = count;
+        work2->timer   = count;
         g_Task->unk_0A = count + 1;
         work3          = g_Task;
         work3->header.flags |= ACTOR_FLAG_STEP_MOVE;

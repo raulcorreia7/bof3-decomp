@@ -5,13 +5,13 @@ MATCH void func_800C1E7C(void) {
     u8     delay;
 
     work  = (Actor*)g_Task;
-    delay = work->unk_09;
+    delay = work->timer;
     if (delay != 0xFF) {
         if (delay == 0) {
             SND_PlayCue(0x603);
-            ((Actor*)g_Task)->unk_09 = 0xFF;
+            ((Actor*)g_Task)->timer = 0xFF;
         } else {
-            work->unk_09 = delay - 1;
+            work->timer = delay - 1;
         }
     }
     func_8014D978();

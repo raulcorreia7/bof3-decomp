@@ -116,7 +116,7 @@ MATCH void func_801F7BEC(void) {
     Actor* actor;
 
     actor              = g_Task;
-    actor->unk_2E      = 0;
+    actor->screen_x    = 0;
     actor->header.mode = actor->header.mode + 1;
     SND_PlayCue(EMI_CUE_ID(2, 21));
 }

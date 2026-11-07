@@ -5,8 +5,8 @@ MATCH void func_801F3578(void) {
     u8     mode;
 
     scratch = (Actor*)g_Task;
-    scratch->unk_2E -= 0x10;
-    if ((s16)scratch->unk_2E < -0x2F) {
+    scratch->screen_x -= 0x10;
+    if ((s16)scratch->screen_x < -0x2F) {
         scratch->header.step = 0;
     }
 
@@ -16,5 +16,5 @@ MATCH void func_801F3578(void) {
         scratch->header.step = mode;
     }
 
-    Area_DrawHud(0x10, ((Actor*)g_Task)->unk_2E);
+    Area_DrawHud(0x10, ((Actor*)g_Task)->screen_x);
 }

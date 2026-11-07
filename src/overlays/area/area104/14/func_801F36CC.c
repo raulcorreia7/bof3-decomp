@@ -1,8 +1,8 @@
 #include "area104_14.h"
 
 MATCH void func_801F36CC(void) {
-    g_Task->unk_2E -= 0x10;
-    if ((s16)g_Task->unk_2E < -0x2F) {
+    g_Task->screen_x -= 0x10;
+    if ((s16)g_Task->screen_x < -0x2F) {
         g_Task->header.step = 0;
     }
 
@@ -10,5 +10,5 @@ MATCH void func_801F36CC(void) {
         g_Task->header.step = 1;
     }
 
-    Area_DrawHud(0x10, g_Task->unk_2E);
+    Area_DrawHud(0x10, g_Task->screen_x);
 }

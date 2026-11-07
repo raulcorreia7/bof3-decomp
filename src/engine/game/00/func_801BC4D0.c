@@ -10,18 +10,18 @@ MATCH s32 func_801BC4D0(void) {
     saved = g_Task->direction_08;
     kind  = func_801B9598();
     if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
-        g_Task->unk_09 = 0x20;
+        g_Task->timer = 0x20;
     } else {
-        g_Task->unk_09 = 0x10;
+        g_Task->timer = 0x10;
     }
-    rate           = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
-    g_Task->unk_09 = (g_Task->unk_09 / (rate & BYTE_MASK));
+    rate          = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
+    g_Task->timer = (g_Task->timer / (rate & BYTE_MASK));
     if (g_Task->state_70.byte == 0) {
-        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->unk_09;
-        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->unk_09;
+        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->timer;
+        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->timer;
     } else {
-        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->unk_09 * 2;
-        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->unk_09 * 2;
+        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->timer * 2;
+        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->timer * 2;
     }
     switch (kind & BYTE_MASK) {
         case 0:

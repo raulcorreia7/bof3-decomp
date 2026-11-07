@@ -16,7 +16,7 @@ MATCH void func_801D9D38(void) {
     *(u32*)((u8*)g_Task + 0x18) = 0;
     *(u32*)((u8*)g_Task + 0x1C) = 0;
     *(u32*)((u8*)g_Task + 0x20) = 0;
-    g_Task->unk_09              = 0;
+    g_Task->timer               = 0;
 
     mode = (D_80145026 && D_80145028) ? 0 : 6;
     func_801DDE94(mode);
