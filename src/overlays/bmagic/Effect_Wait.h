@@ -1,7 +1,7 @@
 /* Raises the ticker and counts the timer down; at zero advances the step. Every change here must verify every member.
 */
 /* func_801EF3E4 (magic099), func_801F1318 (magic151) */
-MATCH void Effect_CountDownTimerRaiseTicker(void) {
+MATCH void Effect_Wait(void) {
     PartyBattler* work;
 
     work = g_Task;

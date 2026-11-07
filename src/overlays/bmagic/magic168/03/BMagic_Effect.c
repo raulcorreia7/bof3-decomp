@@ -14,7 +14,7 @@ INCLUDE_ASM(func_801EED38);
 
 #include "overlays/bmagic/Effect_NextStep.h"
 
-#include "overlays/bmagic/Effect_DarkenPaletteThenMode.h"
+#include "overlays/bmagic/Effect_FadePaletteOut.h"
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 

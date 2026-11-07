@@ -26,7 +26,7 @@ INCLUDE_ASM(func_801EF310);
 #define BMAGIC_CAMERA_SWING_TICKS 0x3C
 #include "overlays/bmagic/Effect_SwingCameraAngle.h"
 
-#include "../../Effect_CountDownAndSetTint.h"
+#include "../../Effect_StartTint.h"
 
 MATCH void func_801EF698(void) {
     u8 timer_next;

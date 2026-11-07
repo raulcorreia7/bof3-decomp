@@ -93,7 +93,7 @@ MATCH void func_801EFC58(void) {
 
 INCLUDE_ASM(func_801EFDF8);
 
-#include "../../Effect_DispatchHandlerSlot2.h"
+#include "../../Effect_DispatchStep.h"
 
 MATCH void func_801F001C(void) {
     g_Task->param.phase = 0;
@@ -104,7 +104,7 @@ MATCH void func_801F001C(void) {
     g_Task->header.step++;
 }
 
-#include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"
+#include "overlays/bmagic/Effect_AddActor.h"
 
 MATCH void func_801F00D8(void) {
     func_801E5988();

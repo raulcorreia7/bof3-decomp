@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-#include "overlays/bmagic/Effect_MarkTargetDamagedOnTickerZero.h"
+#include "overlays/bmagic/Effect_Hit.h"
 
 #include "shared/Effect_StartPlaying.h"
 

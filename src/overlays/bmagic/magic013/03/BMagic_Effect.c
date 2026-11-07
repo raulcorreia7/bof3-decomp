@@ -8,7 +8,7 @@ INCLUDE_ASM(func_801EEC14);
 
 INCLUDE_ASM(func_801EED28);
 
-#include "overlays/bmagic/Effect_NextStepWhileTickUnderTwo.h"
+#include "overlays/bmagic/Effect_Pause.h"
 
 MATCH void func_801EEEA0(void) {
     u8*           selector;

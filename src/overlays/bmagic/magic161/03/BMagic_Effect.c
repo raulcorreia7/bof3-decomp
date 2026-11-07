@@ -32,7 +32,7 @@ MATCH void func_801EEF80(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
+#include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801EF06C(void) {
     u8 temp_v0;
