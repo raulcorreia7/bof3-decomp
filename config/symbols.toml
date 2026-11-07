@@ -1632,7 +1632,6 @@ D_801CD568 = { addr = 0x801CD568, size = 0x8 }
 D_801CD570 = { addr = 0x801CD570, size = 0x14 }
 D_801CD584 = { addr = 0x801CD584, size = 0x38 }
 s_EntitySpawnOffsets = { addr = 0x801CD5BC, size = 0x64, source = "func_801C6BB4 searches 49 spawn positions from these s8 x, y pairs around the party" }
-D_801CD5BD = { addr = 0x801CD5BD, size = 0x1, alias = true }
 D_801CD620 = { addr = 0x801CD620, size = 0x120 }
 D_801CD740 = { addr = 0x801CD740, size = 0x30 }
 s_EntitySpawnChances = { addr = 0x801CD770, size = 0x8, source = "func_801C6AEC keeps an entity when a random roll is within this per-slot chance" }

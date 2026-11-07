@@ -2538,11 +2538,17 @@ u8 D_801CD584[56] = {0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x02, 0x01,
                      0x02, 0x03, 0x00, 0x00, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x00, 0x00, 0x04, 0x03,
                      0x00, 0x00, 0x03, 0x04, 0x00, 0x00, 0x04, 0x03, 0x03, 0x04, 0x04, 0x04, 0x00, 0x00};
 
-s8 s_EntitySpawnOffsets[100] = {
-    0,  0,  -1, -1, 0,  -1, 1, -1, 1, 0,  1, 1,  0, 1,  -1, 1,  -1, 0,  -2, -2, -1, -2, 0,  -2, 1,
-    -2, 2,  -2, 2,  -1, 2,  0, 2,  1, 2,  2, 1,  2, 0,  2,  -1, 2,  -2, 2,  -2, 1,  -2, 0,  -2, -1,
-    -3, -3, -2, -3, -1, -3, 0, -3, 1, -3, 2, -3, 3, -3, 3,  -2, 3,  -1, 3,  0,  3,  1,  3,  2,  3,
-    3,  2,  3,  1,  3,  0,  3, -1, 3, -2, 3, -3, 3, -3, 2,  -3, 1,  -3, 0,  -3, -1, -3, -2, 0,  0,
+GameDelta s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT] = {
+    GAME_PAIR(0, 0), GAME_PAIR(-1, -1), GAME_PAIR(0, -1), GAME_PAIR(1, -1), GAME_PAIR(1, 0),
+    GAME_PAIR(1, 1), GAME_PAIR(0, 1), GAME_PAIR(-1, 1), GAME_PAIR(-1, 0), GAME_PAIR(-2, -2),
+    GAME_PAIR(-1, -2), GAME_PAIR(0, -2), GAME_PAIR(1, -2), GAME_PAIR(2, -2), GAME_PAIR(2, -1),
+    GAME_PAIR(2, 0), GAME_PAIR(2, 1), GAME_PAIR(2, 2), GAME_PAIR(1, 2), GAME_PAIR(0, 2),
+    GAME_PAIR(-1, 2), GAME_PAIR(-2, 2), GAME_PAIR(-2, 1), GAME_PAIR(-2, 0), GAME_PAIR(-2, -1),
+    GAME_PAIR(-3, -3), GAME_PAIR(-2, -3), GAME_PAIR(-1, -3), GAME_PAIR(0, -3), GAME_PAIR(1, -3),
+    GAME_PAIR(2, -3), GAME_PAIR(3, -3), GAME_PAIR(3, -2), GAME_PAIR(3, -1), GAME_PAIR(3, 0),
+    GAME_PAIR(3, 1), GAME_PAIR(3, 2), GAME_PAIR(3, 3), GAME_PAIR(2, 3), GAME_PAIR(1, 3),
+    GAME_PAIR(0, 3), GAME_PAIR(-1, 3), GAME_PAIR(-2, 3), GAME_PAIR(-3, 3), GAME_PAIR(-3, 2),
+    GAME_PAIR(-3, 1), GAME_PAIR(-3, 0), GAME_PAIR(-3, -1), GAME_PAIR(-3, -2), GAME_PAIR(0, 0),
 };
 
 Point2DL D_801CD620[36] = {

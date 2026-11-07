@@ -304,8 +304,6 @@ extern Callback  D_801CD568[2];
 extern Callback  D_801CD570[5];
 extern u8        D_801CD584[56];
 /* D_801CD5BC */
-extern s8        s_EntitySpawnOffsets[100];
-extern s8        D_801CD5BD[];
 /* D_801CD770 */
 extern u8        s_EntitySpawnChances[8];
 /* D_801CD78C */
