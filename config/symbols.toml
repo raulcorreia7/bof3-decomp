@@ -29,19 +29,19 @@ Battle_WaitUIMode = { addr = 0x801D1AB4, type = "func", source = "Holds the batt
 Battle_InitPanels = { addr = 0x801D1AE8, type = "func", source = "Sets the battle panel widths." }
 Battle_EnterIntro = { addr = 0x801D1B94, type = "func", source = "Arms the intro panel and advances the battle mode once the loader is ready." }
 Battle_PickTarget = { addr = 0x801D3844, type = "func", source = "Picks the target of an ability." }
-Battle_StreamEndOverlay = { addr = 0x801D6A14, type = "func", source = "Loads the battle end overlay." }
+Battle_StreamEndOverlay = { addr = 0x801D6A14, type = "func", source = "Finishes the battle setup pass: returns while a party battler has COMBATANT_FLAG_FORM_EFFECT_PLAYING, steps g_BattleSubStep back when g_BattleRowCursor differs from g_BattlePartyCount, otherwise on no defeat revives or cures each party battler, sets g_BattleStep to 2 or 1 by the result flags and starts the EMI_SLOT_BATL_END load." }
 Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the party's battle state back to the field characters." }
-Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws an enemy name panel." }
+Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws the 0x4B-pixel name panel of enemy slot minus 3 at (x, y) in the window style colour, with the enemy name text when func_801DA69C allows it and an icon in place when its unk_7F is 1." }
 Battle_DrawNumber = { addr = 0x801D9684, type = "func", source = "Draws a number with digit sprites." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, type = "func", source = "Tells whether a battler slot can not be selected." }
 Battle_FindSelectableSlotForward = { addr = 0x801DB5CC, type = "func", source = "Finds a selectable battler slot at or after the start, wrapping around." }
 Battle_FindSelectableSlotBackward = { addr = 0x801DB6F4, type = "func", source = "Finds a selectable battler slot at or before the start, wrapping around." }
 Battle_ApplyDamage = { addr = 0x801DBB78, type = "func", source = "Applies one hit to a target." }
 Battle_CalcDamage = { addr = 0x801DC044, type = "func", source = "Calculates damage for one hit." }
-Battle_RollBaseDamage = { addr = 0x801DCAD8, type = "func", source = "Rolls base damage for a hit." }
+Battle_RollBaseDamage = { addr = 0x801DCAD8, type = "func", source = "Rolls the base damage of a hit from the attack value D_801EC30C minus the target defence, clamped at 0 and plus RANDOM_MASK(1); for an enemy attacker on a party target it adds a level-scaled bonus picked by s_BattleDamageBandDivisors, then passes the result through func_801DCD50." }
 Battle_SetSlotPending = { addr = 0x801DE190, type = "func", source = "Marks a battler action as pending." }
 Battle_ClearSlotPending = { addr = 0x801DE1B0, type = "func", source = "Clears a battler's pending action." }
-Battle_RunEvents = { addr = 0x801DE43C, type = "func", source = "Runs active battle events." }
+Battle_RunEvents = { addr = 0x801DE43C, type = "func", source = "Clears g_BattleEventFlags, then over two passes (group 0, then 1) walks the 8 twelve-byte g_BattleEventSlots and calls handlers[unk_01] for each slot whose unk_00 is set, unk_03 equals the pass and whose unk_01 bit is clear in g_BattleEventFlags, after storing the slot index in the scratchpad." }
 BattleStageSelectionRingRecord = { addr = 0x801DE8C0, type = "func", source = "Appends a record to the battle selection ring." }
 BattleStageAttackNameMessage = { addr = 0x801DE94C, type = "func", source = "Copies an action name into the message staging area." }
 Battle_SetTextPartyName = { addr = 0x801DE9A8, type = "func", source = "Sets the party battler name for battle messages." }
@@ -66,29 +66,29 @@ g_BattleLevelThresholds = { addr = 0x801EAF88, source = "Battler level threshold
 s_BattleDamageBandDivisors = { addr = 0x801EAF94, source = "Damage divisors for each damage band." }
 s_BattleStatusRecoveryPenalties = { addr = 0x801EAFF4, source = "Chance penalties for recovering from a status, per status." }
 s_BattleStatusRecoveryChances = { addr = 0x801EAFFC, source = "Chances to recover from a status, per status." }
-s_BattleActionNames = { addr = 0x801EB000, source = "Battle action names." }
+s_BattleActionNames = { addr = 0x801EB000, source = "The 12 action names of 13 characters that BattleStageAttackNameMessage copies into the battle message by action index." }
 g_BattlePanelOffsets = { addr = 0x801EB0B0, source = "Battle panel positions." }
-D_801EB0B1 = { addr = 0x801EB0B1, alias = true, source = "Odd bytes of the battle panel offsets." }
+D_801EB0B1 = { addr = 0x801EB0B1, alias = true, source = "Position offsets by party character (8 bytes each) and facing (2 bytes each) that func_801D3624 adds to the target position." }
 s_BattlePanelYOffsets = { addr = 0x801EB108, source = "Battle panel vertical positions." }
 s_BattleCharacterSprites = { addr = 0x801EB18C, source = "Battle sprite step ids per party character." }
 g_BattleTaskFuncs = { addr = 0x801EB1B4, source = "Battle task state handlers." }
-s_BattleCharacterStepIds = { addr = 0x801EB230, source = "Battle character step IDs." }
+s_BattleCharacterStepIds = { addr = 0x801EB230, source = "Step id of each character (0x28 entries) that func_801E16B4 stores in the task byte 0x09 by character_id." }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "Target weights for a party with two active members." }
 s_BattleFullPartyTargetWeights = { addr = 0x801EB39C, source = "Target weights for a party with three active members." }
 s_BattleBattlerStepIds = { addr = 0x801EB494, source = "Step ids of the battlers." }
 g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn, set with g_BattleMessageSlot in func_801D1D10 (emi/battle/battle/03 owns the cell); the target pickers write command.target, command.type and command.id, func_801D251C sets the defending damage flag" }
 g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "Enemy whose battle script is running." }
-g_BattleEventSlots = { addr = 0x801EB4F0, source = "Active battle event slots." }
+g_BattleEventSlots = { addr = 0x801EB4F0, source = "Twelve-byte slots of the queued battle events; Battle_RunEvents runs the slot of each active event." }
 D_801EB4F0 = { addr = 0x801EB4F0, alias = true, source = "Battle event slots." }
-D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "byte 1 of each g_BattleEventSlots row, 1 use in func_801DE560; the row cast there changes the bytes" }
-D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "word at +4 of each g_BattleEventSlots row, 4 uses in func_801DE560, func_801E9538 and func_801EA650" }
-D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "byte at +0xA of each g_BattleEventSlots row, 3 uses in func_801DE560, func_801E9538 and func_801EA650" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Enemy battlers in the current battle." }
-g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Current battle message slot." }
-s_BattleBattlerTemplates = { addr = 0x801EBF20, source = "Battle battler templates." }
+D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "Event kind of each battle event slot, stored when func_801DE560 queues the event." }
+D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "Message text pointer of each battle event slot, drawn by the battle event panels." }
+D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "Text style argument of each battle event slot, zeroed when queued and passed to UI_DrawText by the event panels." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; func_801D1D10 sets it to the acting party battler." }
+s_BattleBattlerTemplates = { addr = 0x801EBF20, source = "Work row templates of the party battlers: func_801E8684 copies row n into g_BattlePartyBattlers[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }
 s_BattleBattlerTemplateTails = { addr = 0x801EC048, source = "tail of the three 0x140-byte work-row templates, word 0 at +0x128 of each row is the active mask func_801E7B34 tests" }
-g_BattleEffects = { addr = 0x801EC330, source = "Queued battle effects." }
+g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 
 ["emi/battle/battle/15"]
@@ -138,7 +138,7 @@ s_BattlePanelValueRun = { addr = 0x800B6DDC, source = "Sprite run for the battle
 s_BattlePanelUseLabel = { addr = 0x800B6F3C, source = "Label for the use entry of a battle panel." }
 s_BattlePanelEquipLabel = { addr = 0x800B6F40, source = "Label for the equip entry of a battle panel." }
 s_BattleEquipment = { addr = 0x800B6F50, source = "The six equipment item ids of the battle panel character: weapon, shield, helmet, armor and two accessories." }
-D_801454F4 = { addr = 0x801454F4, source = "Byte table indexed by the source slot offset in func_80097EC0" }
+D_801454F4 = { addr = 0x801454F4, source = "Group index of each battle selection row, 3 bytes per row, row number D_8014857A." }
 D_80145F04 = { addr = 0x80145F04 }
 D_80145F2A = { addr = 0x80145F2A, size = 0x2, source = "Halfword cell written by func_800A4458 and read by func_8009F010" }
 D_801461CA = { addr = 0x801461CA }
@@ -147,8 +147,8 @@ D_801462F0_state = { addr = 0x801462F0, alias = true }
 g_BattleActiveBattler_nv = { addr = 0x80146374, alias = true }
 g_BattleTarget_nv = { addr = 0x80146394, alias = true }
 g_BattleSelectionHead = { addr = 0x80148570, alias = true }
-D_801485DD = { addr = 0x801485DD, size = 0x1, source = "Work byte, the selection setup stores 8 in it" }
-D_80148656 = { addr = 0x80148656, size = 0x1, source = "Message slot byte, func_80096FBC stores the slot and func_80097574 reads it" }
+D_801485DD = { addr = 0x801485DD, size = 0x1, source = "Set to 8 when a battle selection starts." }
+D_80148656 = { addr = 0x80148656, size = 0x1, source = "Party slot of the battler whose message the battle shows; the field menu line draw also uses it as an index into g_PartyFieldOrder." }
 D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
 g_BattleEnemies = { addr = 0x801EB2E8, source = "The enemy battlers." }
 g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn; the emi/battle/battle/15 target-selection handlers read it for command.target and the action and damage flags (set by emi/battle/battle/03)" }
@@ -364,7 +364,7 @@ g_BMagicEffectModes = { addr = 0x801F0550, source = "Handlers of magic053 (Lavab
 
 ["emi/bmagic/magic054/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_MarkTargetDamagedOnTickerZero = { addr = 0x801EF05C, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the selected targets (func_800A9820) and advances header.mode (byte 0x01) in magic054 (Howling)." }
 Effect_StartPlaying = { addr = 0x801EF0B8, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic054 (Howling)." }
 Effect_CountDownAndPlay = { addr = 0x801EF0EC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic054 (Howling)." }
@@ -629,7 +629,7 @@ Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "Sets the a
 
 ["emi/bmagic/magic092/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_StartOnZeroTick = { addr = 0x801EEFB4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic092 (Fireblast)." }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF350, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the effect ticker (byte 0x0B) is set in magic092 (Fireblast)." }
 Effect_SetActorMatrix = { addr = 0x801EF4D0, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic092 (Fireblast)." }
@@ -644,7 +644,7 @@ g_BMagicEffectModes = { addr = 0x801F07BC, source = "Handlers of magic092 (Fireb
 
 ["emi/bmagic/magic093/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_SetActorMatrix = { addr = 0x801EF7AC, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic093 (Inferno)." }
 BMagic_AllocEffect = { addr = 0x801F05BC, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic093 (Inferno)." }
 Actor_Clear = { addr = 0x801F0620, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
@@ -671,7 +671,7 @@ g_BMagicEffectModes = { addr = 0x801F04A8, source = "Handlers of magic096 (Blizz
 
 ["emi/bmagic/magic097/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic097 (Jolt)." }
 Effect_CountDownAndPickRandom = { addr = 0x801EF114, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero picks a random ticker (byte 0x0B) below 16, clears the timer and counter (byte 0x0A) and advances header.step (byte 0x02) in magic097 (Jolt)." }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF488, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect counter (byte 0x0A) down by two; at zero lowers the active battler's ticker and clears the effect in magic097 (Jolt)." }
@@ -680,7 +680,7 @@ g_BMagicEffectModes = { addr = 0x801F0AC0, source = "Handlers of magic097 (Jolt)
 
 ["emi/bmagic/magic098/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic098 (Lightning)." }
 Effect_CountDownAndPickRandom = { addr = 0x801EF124, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero picks a random ticker (byte 0x0B) below 16, clears the timer and counter (byte 0x0A) and advances header.step (byte 0x02) in magic098 (Lightning)." }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF498, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect counter (byte 0x0A) down by two; at zero lowers the active battler's ticker and clears the effect in magic098 (Lightning)." }
@@ -1940,8 +1940,8 @@ MENU_CLUT_STRIP_CELLS = { addr = 0x801D9D4C, source = "Cell rectangles that Menu
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D9E44, source = "Entry offset of each clut strip palette, indexed by the clut index." }
 g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "Item ids the status menu counts into held[] (four items) and passes to Item_Remove when one is used." }
-D_801DA0B4 = { addr = 0x801DA0B4, source = "func_801D2C50 increments this word by 0x20" }
-D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_801D2F68 increments this word by 0x20" }
+D_801DA0B4 = { addr = 0x801DA0B4, source = "12-bit turn angle of a status menu display: each frame adds 0x20, and a stop snaps it to a multiple of 0x40." }
+D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu display: each frame adds or subtracts 0x20, and a stop snaps it to a multiple of 0x40." }
 
 ["emi/etc/shop/00"]
 g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory; the start overlay uses the same address as SAVE_IMAGE_ADDR." }
@@ -3299,7 +3299,7 @@ Actor_RunAreaStep = { addr = 0x801F3638, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F366C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Message_SelectAnswer = { addr = 0x801F3870, type = "func", source = "Sets g_MessageRequest to 0x14 when g_MessageChoice is nonzero, otherwise to 0x13." }
 Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
-g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
+g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world02/area113/13"]
 g_MasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
@@ -3456,7 +3456,7 @@ Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F3C74, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Script_SkipInstructionForSlot7 = { addr = 0x801F3D38, type = "func", source = "Adds 3 to the script cursor when g_GameState leader_id is CHAR_ID_RYU_ADULT." }
 Actor_SnapToGround = { addr = 0x801F3F48, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
-g_PartyMemberMessages = { addr = 0x801F52FC, size = 0xC, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
+g_PartyMemberMessages = { addr = 0x801F52FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area144/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3464,7 +3464,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world03/area145/14"]
 Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Message_ShowParty = { addr = 0x801F403C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
-g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
+g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area146/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3487,7 +3487,7 @@ Area_ClearSceneFlag46AndResetMode = { addr = 0x801F39A4, type = "func", source =
 Actor_PlaceAtFocus = { addr = 0x801F39D4, type = "func", source = "Copies D_80147A8C, g_AreaFocusY and D_80147A94 into the actor position at bytes 0x34, 0x38 and 0x3C." }
 Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "Sets g_MessageRequest to 6 when g_MessageChoice is nonzero, otherwise to 4." }
-g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
+g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area149/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3673,7 +3673,7 @@ Actor_SlideScreenX = { addr = 0x801F4458, type = "func", source = "Adds ACTOR_SC
 Actor_SlideScreenDown16 = { addr = 0x801F4570, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
 Area_Update = { addr = 0x801F45E0, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 Message_ShowParty = { addr = 0x801F48C4, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
-g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
+g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world04/area174/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -4088,13 +4088,13 @@ Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "Stores 
 ["emi/world04/area196/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ShowParty = { addr = 0x801F3F90, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
-g_PartyMemberMessages = { addr = 0x801F42F4, size = 0x18, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
+g_PartyMemberMessages = { addr = 0x801F42F4, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world04/area197/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ShowParty = { addr = 0x801F39E0, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Script_SkipInstructionForSlot7 = { addr = 0x801F4124, type = "func", source = "Adds 3 to the script cursor when g_GameState leader_id is CHAR_ID_RYU_ADULT." }
-g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Messages shown for each party member." }
+g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world04/area198/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
