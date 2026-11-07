@@ -209,8 +209,16 @@ typedef enum InputSlot {
 #define FIELD_INPUT_SWITCH_LEADER   INPUT_SLOT_CHANGE
 #define FIELD_INPUT_PERSONAL_ACTION INPUT_SLOT_ACTION
 
-/* World map: X enters the location under the party. */
+/* World map: X enters the location under the party; the triangle shows a short
+ * text guide to the current location; the areas that run the world map variant
+ * read the run and view buttons too. */
 #define WORLD_INPUT_ENTER           INPUT_SLOT_SPEAK
+#define WORLD_INPUT_RUN             INPUT_SLOT_MOVE
+#define WORLD_INPUT_VIEW            INPUT_SLOT_VIEW
+#define WORLD_INPUT_LOCATION_GUIDE  INPUT_SLOT_ACTION
+
+/* Message window: holding the talk button prints text at the fast step. */
+#define MESSAGE_INPUT_SPEED_UP      INPUT_SLOT_SPEAK
 
 #define MENU_INPUT_CONFIRM          INPUT_SLOT_CONFIRM
 #define MENU_INPUT_CANCEL           INPUT_SLOT_CANCEL

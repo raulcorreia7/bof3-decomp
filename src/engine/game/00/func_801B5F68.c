@@ -4,7 +4,7 @@ MATCH bool func_801B5F68(s32 selection_kind) {
     s32 kind;
     s8  result;
 
-    kind = g_GameState->slot_index_79;
+    kind = g_GameState->leader_id;
     if (kind != 3 && kind != 6)
         return false;
     if (!(g_Task->direction_08 & 1))

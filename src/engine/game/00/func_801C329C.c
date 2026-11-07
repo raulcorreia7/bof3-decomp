@@ -53,7 +53,7 @@ MATCH void func_801C329C(void) {
                     } while (index < (s16)total);
                 }
             } else {
-                if ((Char_LoseHP(1, g_GameState->slot_index_79) & HALF_MASK) != 0) {
+                if ((Char_LoseHP(1, g_GameState->leader_id) & HALF_MASK) != 0) {
                     found = 1;
                 }
             }
