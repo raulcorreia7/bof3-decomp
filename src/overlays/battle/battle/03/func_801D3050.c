@@ -15,7 +15,7 @@ MATCH void func_801D3050(void) {
             s32 row;
 
             row                   = *battler - 3;
-            g_TextVariables[0][i] = D_801EB6A4[row][i];
+            g_TextVariables[0][i] = g_BattleEnemyBattlers[row].name[i];
             i++;
         } while (i < 8);
         func_801D9484();
