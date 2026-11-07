@@ -32,7 +32,7 @@ INCLUDE_ASM(func_801CE7B8);
 
 #include "overlays/plchar/Char_AdvancePaletteScript.h"
 
-#include "overlays/plchar/Char_SelectScriptAndStep.h"
+#include "overlays/plchar/Char_StartFacingScript.h"
 
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
