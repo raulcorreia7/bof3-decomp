@@ -18,25 +18,25 @@ MATCH void func_801D2CA4(void) {
         do {
             /* FAKE: shift form avoids the phantom stack slot * 0x140
              * allocates. */
-            g_TextVariables[0][i] = g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].name[i];
+            g_TextVariables[0][i] = g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].name[i];
             i += 1;
         } while (i < 5);
-        D_801490DD                                                              = 0;
-        edp                                                                     = &g_SceneEventSelection;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].master_id = *edp;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].master_level =
-            g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[0] =
+        D_801490DD                                                                        = 0;
+        edp                                                                               = &g_SceneEventSelection;
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].master_id = *edp;
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].master_level =
+            g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].level;
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].level_up_modifiers[0] =
             g_MasterStats[*edp].hp_bonus;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[1] =
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].level_up_modifiers[1] =
             g_MasterStats[*edp].ap_bonus;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[2] =
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].level_up_modifiers[2] =
             g_MasterStats[*edp].power_bonus;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[3] =
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].level_up_modifiers[3] =
             g_MasterStats[*edp].defense_bonus;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[4] =
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].level_up_modifiers[4] =
             g_MasterStats[*edp].agility_bonus;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[5] =
+        g_Characters[g_BattlePartyBattlers[g_MasterMenuCursor].character_index].level_up_modifiers[5] =
             g_MasterStats[*edp].intellect_bonus;
         Message_StartAreaMessage((s16)(g_MasterMessageIds[*edp] + MASTER_MESSAGE_ENROLLED));
         g_GameStateIndex = GAME_REQUEST_MESSAGE;

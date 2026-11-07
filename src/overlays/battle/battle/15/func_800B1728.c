@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-s32 func_801AFA1C(void*, u8, s16, s16, s32, s32, s32);
-
 /* Draws the battle command list: copies the command page, draws up to three rows with the affordability color
  * and the price text, and the cursor box.
  */
@@ -21,7 +19,7 @@ MATCH void func_800B1728(void) {
     for (i = 0; (i & BYTE_MASK) < 12U; i++) {
         D_800B70B8[i & BYTE_MASK] = D_80145518[i & BYTE_MASK].gate_03 + 1;
     }
-    func_801AFA1C(&D_800B70B8, ((BattlePanelByteCells*)(void*)g_MenuCurrentPanel)->scale,
+    func_801AFA1C(D_800B70B8, ((BattlePanelByteCells*)(void*)g_MenuCurrentPanel)->scale,
                   (g_MenuCurrentPanel->pos.x + 0x80), (g_MenuCurrentPanel->pos.y + 0x18), 3,
                   ((BattlePanelByteCells*)(void*)g_MenuCurrentPanel)->rows, 0x5C);
     for (i = 0; (i & BYTE_MASK) < 3U; i++) {
