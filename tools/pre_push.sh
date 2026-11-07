@@ -4,8 +4,8 @@
 #   tools/pre_push.sh [BASE_REF]          or    meson compile -C build/meson pre-push
 #
 # Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, include-asm, format-check,
-# meson test, typeloss, quality (no touched file gets worse). BASE_REF is what the work is compared with; it defaults to the newer of
-# public/main and origin/main. Each log is build/pre-push/<check>.log. Format first with
+# meson test, typeloss, quality (no touched file gets worse), subsystems (rewrites the debt table of docs/subsystems.md; commit the result). BASE_REF is what the work is compared with; it defaults to the newest of
+# public/main, origin/main and main. Each log is build/pre-push/<check>.log. Format first with
 # `meson compile -C build/meson format`.
 set -u
 cd "$(dirname "$0")/.." || exit 2
@@ -15,12 +15,8 @@ mkdir -p "$logs"
 
 ref=${1:-}
 if [ -z "$ref" ]; then
-	for candidate in refs/remotes/public/main refs/remotes/origin/main; do
-		git rev-parse --verify --quiet "$candidate^{commit}" >/dev/null || continue
-		if [ -z "$ref" ] || git merge-base --is-ancestor "$ref" "$candidate"; then
-			ref=$candidate
-		fi
-	done
+	. tools/lib/baseref.sh
+	ref=$(newest_base_ref)
 fi
 [ -n "$ref" ] || { echo "pre-push: no public/main or origin/main to compare with" >&2; exit 1; }
 
@@ -74,6 +70,7 @@ start format-check tools/format.sh --check
 start test meson test -C "$bld" --no-rebuild --print-errorlogs
 start typeloss python3 tools/typeloss.py "$ref" HEAD
 start quality python3 tools/quality.py --diff "$ref"
+start subsystems python3 tools/quality.py --markdown
 wait
 
 for name in $names; do

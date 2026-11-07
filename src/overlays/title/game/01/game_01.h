@@ -33,7 +33,6 @@ typedef struct GameUIBannerState {
 
 extern volatile u16 D_80143B40;
 extern volatile u16 D_80143C2A;
-extern volatile u32 g_UiPopupRequest;
 /* Address symbols name the first record's interior fields. */
 extern const u16    D_801D1C6E;
 extern const u16    D_801D1C70;

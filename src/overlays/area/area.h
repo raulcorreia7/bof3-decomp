@@ -153,7 +153,7 @@ void Actor_StopMoving(void);
 void Area_ClearWorkColumn(void);
 u8*  Area_FindFreeWorkRow(void);
 void Area_InitSpin(void* spin);
-void Area_StepChargeGauge(void);
+void Area_StepRunGauge(void);
 void Area_ClaimSpawnSlot(void);
 s32  Area_StepSpawnSlots(void);
 void Area_DrawSpawnSlot(AreaSpawnSlot* slot);

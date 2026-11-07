@@ -82,7 +82,6 @@ enum {
     SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
 };
 
-extern u16             g_GameAreaId;
 extern u8              D_80144F57;
 extern u16             D_80145594[];
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];

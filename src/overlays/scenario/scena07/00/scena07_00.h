@@ -49,7 +49,6 @@ extern u8 D_801FDFC8;
 s32 func_801F85D8(void);
 s32 func_801F9EFC(void);
 
-extern u16      g_GameAreaId;
 extern s8       D_80146874;
 extern u8       D_80146875;
 extern Callback D_801FDD14[];

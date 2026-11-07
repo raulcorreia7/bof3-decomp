@@ -23,74 +23,70 @@
 #include "slus/facing.h"
 #include <strings.h>
 
-extern s8           D_801448EA[1];
+extern s8          D_801448EA[1];
 /* D_801448FC */
-extern volatile u16 g_SaveAreaId; /* 0x801448FC */
 /* D_801448FF */
-extern volatile u8  g_SaveEntryFacing; /* 0x801448FF */
 /* D_80144900 */
-extern volatile u32 g_SaveEntryX; /* 0x80144900 */
 /* D_80144904 */
-extern volatile u32 g_SaveEntryY; /* 0x80144904 */
 /* The game state the overlay tests. */
-extern u32          D_80145034; /* 0x80145034 */
-extern u32          D_80145038;
-extern u8           D_8014504A;
-extern u8           D_8014554C[]; /* 0x8014554C */
-extern u8           D_8014554F[];
-extern u8           D_801455C3;
-extern u8           D_801455C4;
-extern u8           D_801455C5;
-extern s32          D_80145EC4; /* 0x80145EC4 */
-extern u8           D_8014842D;
-extern u8           D_8014842E;
-extern u8           D_8014842F;
-extern u16          D_80148430;
-extern s16          D_80148432;
-extern s8           D_80148451;
-extern s8           D_80148452;
-extern u8           D_80148453;
-extern s16          D_80148454;
-extern s16          D_80148456;
-extern s8           D_80148475;
-extern s8           D_80148476;
-extern s16          D_80148478;
-extern s16          D_8014847A;
-extern s8           D_8014847E;
-extern s8           D_8014847F;
-extern s8           D_80148499;
-extern s8           D_8014849A;
-extern s16          D_8014849C;
-extern s16          D_8014849E;
-extern s8           D_80148600;
-extern u16          D_80148604;
-extern u16          D_80148606;
-extern u8           D_8014860A;
-extern u8           D_8014860B;
-extern u8           D_80148655;
-extern s8           D_8014865B;
-extern u8           D_8014865D;
-extern u8           D_80148661;
-extern u8           D_80148698;
-extern u8           D_8014869C;
-extern u8           D_8014869D;
-extern AbilityCost  D_801CA71A[];
+extern u32         D_80145034; /* 0x80145034 */
+extern u32         D_80145038;
+extern u8          D_8014504A;
+extern u8          D_8014554C[]; /* 0x8014554C */
+extern u8          D_8014554F[];
+extern u8          D_801455C3;
+extern u8          D_801455C4;
+extern u8          D_801455C5;
+extern s32         D_80145EC4; /* 0x80145EC4 */
+extern u8          D_8014842D;
+extern u8          D_8014842E;
+extern u8          D_8014842F;
+extern u16         D_80148430;
+extern s16         D_80148432;
+extern s8          D_80148451;
+extern s8          D_80148452;
+extern u8          D_80148453;
+extern s16         D_80148454;
+extern s16         D_80148456;
+extern s8          D_80148475;
+extern s8          D_80148476;
+extern s16         D_80148478;
+extern s16         D_8014847A;
+extern s8          D_8014847E;
+extern s8          D_8014847F;
+extern s8          D_80148499;
+extern s8          D_8014849A;
+extern s16         D_8014849C;
+extern s16         D_8014849E;
+extern s8          D_80148600;
+extern u16         D_80148604;
+extern u16         D_80148606;
+extern u8          D_8014860A;
+extern u8          D_8014860B;
+extern u8          D_80148655;
+extern s8          D_8014865B;
+extern u8          D_8014865D;
+extern u8          D_80148661;
+extern u8          D_80148698;
+extern u8          D_8014869C;
+extern u8          D_8014869D;
+extern AbilityCost D_801CA71A[];
 /* D_801EC628 */
-extern u8           MENU_STAT_GLYPH_0[44];
+extern u8          MENU_STAT_GLYPH_0[44];
 /* D_801EC654 */
-extern u8           MENU_STAT_GLYPH_1[12];
+extern u8          MENU_STAT_GLYPH_1[12];
 /* D_801EC660 */
-extern u8           MENU_STAT_GLYPH_2[24];
+extern u8          MENU_STAT_GLYPH_2[24];
 /* D_801EC678 */
-extern u8           MENU_CAPTION_GLYPH_0[12];
+extern u8          MENU_CAPTION_GLYPH_0[12];
 /* D_801EC684 */
-extern u8           MENU_CAPTION_GLYPH_1[12];
+extern u8          MENU_CAPTION_GLYPH_1[12];
 /* D_801EC940 */
-extern u8           g_MenuLabelPower[4];
+extern u8          g_MenuLabelPower[4];
 /* D_801EC944 */
-extern u8           g_MenuLabelDefense[4];
+extern u8          g_MenuLabelDefense[4];
 /* D_801EC948 */
-extern u8           g_MenuLabelIntellect[4];
+extern u8          g_MenuLabelIntellect[4];
 
 /* D_801E5A24 (shop), D_801ECB40 (start) */
 extern UvRect      MENU_CLUT_STRIP_CELLS[];

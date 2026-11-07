@@ -3,7 +3,7 @@
 MATCH void func_801F2C74(void) {
     Actor* actor;
 
-    if (g_GameState->slot_index_79 == 2) {
+    if (g_GameState->leader_id == CHAR_ID_GARR) {
         actor = g_Task;
         actor->pos.x.fixed += COORD_HALF;
     }
