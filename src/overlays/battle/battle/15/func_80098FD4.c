@@ -5,7 +5,7 @@ MATCH void func_80098FD4(void) {
     u8* group;
 
     SND_PlayCue(EMI_CUE_ID(1, 4));
-    cursor                          = &D_8014857C;
+    cursor                          = &g_MenuPanelTasks[16].unk_0C;
     group                           = cursor - 2;
     g_BattleSelectionLatch          = 0u;
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ITEM;
