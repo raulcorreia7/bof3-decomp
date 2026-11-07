@@ -100,7 +100,13 @@ INCLUDE_ASM(func_801FA6BC);
 
 INCLUDE_ASM(func_801FA98C);
 
-INCLUDE_ASM(func_801FC220);
+MATCH void func_801FC220(void) {
+    if (D_801FE9DC != 0) {
+        s8 step                  = D_801FE94C[g_FrameCount & 3];
+        g_AreaCameraRefreshCount = 2;
+        g_AreaCameraOffsetY += step * 4;
+    }
+}
 
 INCLUDE_ASM(func_801FC280);
 
