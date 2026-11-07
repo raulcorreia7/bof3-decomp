@@ -29,7 +29,7 @@ MATCH void func_801D61C0(void) {
         next = i + 1;
         i    = next;
     } while (next < 4);
-    UI_SetMode(0);
+    UI_SetMode(UI_MODE_FADE_OUT);
     {
         u8* state;
 

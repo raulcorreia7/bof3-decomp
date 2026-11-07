@@ -37,7 +37,7 @@ MATCH void func_801D0E4C(void) {
 MATCH void func_801D0E88(void) {
     u8* counter;
 
-    UI_SetMode(3);
+    UI_SetMode(UI_MODE_FAST_FADE_IN);
     func_801D1D1C();
     counter = &D_80148651;
     *counter += 1;

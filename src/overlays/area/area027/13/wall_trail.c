@@ -261,7 +261,7 @@ u8 D_801F3ACC[4760] = {
 };
 
 MATCH void func_801F2C30(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
+    SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
 }
 
 MATCH void func_801F2C74(void) {
@@ -395,7 +395,7 @@ MATCH void func_801F304C(AreaTrail* trail) {
 }
 
 MATCH void func_801F3120(void) {
-    SYS_DISPATCH_BYTE(D_801F3ABC, TASK_BYTES[0x2]);
+    SYS_DISPATCH_BYTE(D_801F3ABC, g_Task->header.step);
 }
 
 MATCH void func_801F3164(void) {

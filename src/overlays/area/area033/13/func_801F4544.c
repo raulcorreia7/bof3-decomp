@@ -24,5 +24,5 @@ MATCH void func_801F4544(void) {
     map_offset                                                      = D_801F4CB0[0x19 + row_offset] * D_80104000;
     *(g_AreaCellCodes + map_offset + D_801F4CB0[0x18 + row_offset]) = 0xA0;
     Actor_SelectScript(0);
-    TASK_BYTES[1] = 1;
+    g_Task->header.mode = 1;
 }

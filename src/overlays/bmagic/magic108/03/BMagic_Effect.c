@@ -11,16 +11,16 @@ MATCH void func_801EEC04(void) {
 
 MATCH void func_801EEC5C(void) {
     PartyBattler* src;
-    u32           offset;
+    u32           slot;
 
-    src                                      = g_BattleSelectedActor;
-    offset                                   = (Battle_AllocEffect(1, 0x1A) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-    FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
-    FIELD(u8, D_801EC338, offset)            = src->facing;
-    FIELD(Coord, D_801EC364, offset)         = src->pos.x.fixed;
-    FIELD(Coord, D_801EC368, offset)         = src->pos.y.fixed;
-    FIELD(Coord, D_801EC36C, offset)         = src->pos.z;
-    g_Task->param.unk_0B                     = 0;
+    src                                = g_BattleSelectedActor;
+    slot                               = Battle_AllocEffect(1, 0x1A) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].unk_08       = src->facing;
+    g_BattleEffects[slot].pos.x.fixed  = src->pos.x.fixed;
+    g_BattleEffects[slot].pos.y.fixed  = src->pos.y.fixed;
+    g_BattleEffects[slot].pos.z        = src->pos.z;
+    g_Task->param.unk_0B               = 0;
     g_Task->header.mode += 1;
 }
 
