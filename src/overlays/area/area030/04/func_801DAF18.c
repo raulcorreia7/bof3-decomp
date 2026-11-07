@@ -10,7 +10,7 @@ MATCH void func_801DAF18(void) {
     D_801440B1 = 0;
     D_80144199 = (counter + 1);
 
-    g_AreaScrollTargetY = *(u32*)(D_801468C0 + D_801E3208 * 152);
+    g_AreaScrollTargetY = *(u32*)(D_801468C0 + g_FishingHookedFish * 152);
     SND_StartDecrescendo(0, 0, 0x64, 8);
     D_80144125 = 7;
     FISHING_STATE->sub_index_03 += 1;

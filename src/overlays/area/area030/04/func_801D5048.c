@@ -49,7 +49,7 @@ draw:
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + FISHING_ICON_X, FISHING_ICON_Y, 0xFF);
         func_801E1004(0xFF, 0, FISHING_STATE->step_timer_09);
     }
-    func_801E1320(0xB0, FISHING_STATE->step_timer_09 * FISHING_ROW_STEP + FISHING_ROW_ORIGIN_X);
+    Fishing_DrawRank(0xB0, FISHING_STATE->step_timer_09 * FISHING_ROW_STEP + FISHING_ROW_ORIGIN_X);
     func_801E162C(8, FISHING_STATE->step_timer_09 * FISHING_ROW_STEP + FISHING_ROW_ORIGIN_Y, 0xFFFF);
     if (FISHING_STATE->step_timer_09 == 4) {
         if (FISHING_STATE->saved_index_0B == 0) {

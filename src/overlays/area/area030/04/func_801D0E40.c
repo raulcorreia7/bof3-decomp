@@ -4,5 +4,5 @@
  * 0x02, then opens dialog 0xC at the work area's halfword 0x10. */
 MATCH void func_801D0E40(void) {
     D_801E1CE8[FISHING_STATE->mode_index_02]();
-    func_801D159C(0xC, FISHING_STATE->cursor_10);
+    Fishing_DrawHud(0xC, FISHING_STATE->cursor_10);
 }

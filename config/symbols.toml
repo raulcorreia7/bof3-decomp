@@ -2652,6 +2652,72 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: 
 g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
 
+["emi/world00/area030/04"]
+g_FishingLure = { addr = 0x80145026, source = "accessory id of the equipped lure; its row is the 0x14-byte entry of the lure table that g_FishingLureRow points at" }
+g_FishingLureQty = { addr = 0x80145027, source = "number of equipped lures held" }
+g_FishingRod = { addr = 0x80145028, source = "accessory id of the equipped rod; its row is the 0x0A-byte entry of the rod table that g_FishingRodRow points at" }
+g_FishingRankIcons = { addr = 0x801D0C3C, source = "13 rank rows (Novice through THE FISH) that Fishing_DrawRank indexes by rank: icon id, x offset and the two plus-mark flags" }
+Fishing_DrawHud = { addr = 0x801D159C, type = "func", source = "draws the fishing HUD: the cast and line panel with the lure's distance from the shore in two digits (flashing at 50 or more while reeling) and the depth gauge" }
+Fishing_DrawDepthGauge = { addr = 0x801D195C, type = "func", source = "draws the depth gauge: the lure's height over the pond floor as a bar with a cursor, and the lure's depth marker in mode 4" }
+Fishing_CastGaugeRun = { addr = 0x801D1B10, type = "func", source = "runs the cast power gauge actor: g_FishingCastGaugeStates[handler_index_01]" }
+Fishing_CastGaugeInit = { addr = 0x801D1B54, type = "func", source = "cast gauge step 1: clears the gauge and loads its sweep speed (step_delta_18) from the rod's cast power speed" }
+Fishing_DrawGaugeFill = { addr = 0x801D1B88, type = "func", source = "draws a gauge bar of the given width as two green gradient quads" }
+Fishing_CastGaugeSweep = { addr = 0x801D1CF0, type = "func", source = "cast gauge step 2: moves the gauge (pos_x_0C) 0..255 by step_delta_18 as the rod's sweep direction sets (bounce, one way, accelerating), draws it, and steps on at phase 3" }
+Fishing_LureRun = { addr = 0x801D20C8, type = "func", source = "runs the lure actor: g_FishingLureStates[handler_index_01]" }
+Fishing_LureCast = { addr = 0x801D210C, type = "func", source = "lure step 1: starts the lure at the cast position with a distance from the rod's max distance and the gauge power, and loads the flight steps" }
+Fishing_LureFly = { addr = 0x801D23F4, type = "func", source = "lure step 2: moves the lure along the cast arc until its y reaches the target, then plays the splash cue and steps on" }
+Fishing_LureSettle = { addr = 0x801D25F0, type = "func", source = "lure step 3: waits for the splash animation to end, then plays the float script and steps on" }
+Fishing_LureFloat = { addr = 0x801D2648, type = "func", source = "lure step 4: lets the lure bob and drift on the water, picks its script from the drift direction and ticks the lure's counter_07" }
+Fishing_LureHooked = { addr = 0x801D28DC, type = "func", source = "lure step 5: puts the lure at the hooked fish's position (g_FishingHookedFish) and picks its script from the line direction" }
+Fishing_ReelGaugeRun = { addr = 0x801D2BF0, type = "func", source = "runs the reel gauge actor: g_FishingReelGaugeStates[handler_index_01]" }
+Fishing_DrawFishArrow = { addr = 0x801D2C34, type = "func", source = "draws the 16x8 arrow of the hooked fish on the reel gauge, flipped by its direction" }
+Fishing_ReelGaugeInit = { addr = 0x801D2D74, type = "func", source = "reel gauge step 1: clears the gauge timers and the cursor and steps on" }
+Fishing_ReelGaugeUpdate = { addr = 0x801D2DC4, type = "func", source = "reel gauge step 2: draws the gauge and its cursor of the rod's reel cursor size, drifts the cursor (origin_y_30) toward the hooked fish and sounds the warning cue while the fish marker is outside it" }
+Fishing_DrawReelCursor = { addr = 0x801D3244, type = "func", source = "draws the reel cursor strip of the given width, flashing red when enabled" }
+Fishing_PromptRun = { addr = 0x801D35CC, type = "func", source = "runs the prompt bar actor: g_FishingPromptStates[handler_index_01], and frees it when the fishing state is not 0 and below 4" }
+Fishing_PromptSlideIn = { addr = 0x801D3684, type = "func", source = "prompt bar step 2: moves the bar down to its row (origin_y_30 0x12)" }
+Fishing_PromptSlideOut = { addr = 0x801D3938, type = "func", source = "prompt bar step 7: moves the bar up out of view, then goes to idle (or step 1 while counter_07 is set)" }
+Fishing_DataRun = { addr = 0x801D42A0, type = "func", source = "runs the Data page actor: g_FishingDataStates[handler_index_01]" }
+Fishing_DataNextFish = { addr = 0x801D4884, type = "func", source = "Data page step: finds the next recorded fish in g_FishBestCatch (key_3E) and starts the page slide" }
+Fishing_SceneRun = { addr = 0x801D9B14, type = "func", source = "runs the fishing scene: g_FishingSceneModes[mode_index_02]" }
+Fishing_EntryRun = { addr = 0x801D9B58, type = "func", source = "scene mode 0: runs g_FishingEntryStates[sub_index_03]" }
+Fishing_ReadyRun = { addr = 0x801D9CF4, type = "func", source = "scene mode 1: runs g_FishingReadyStates[sub_index_03]" }
+Fishing_ChooseAction = { addr = 0x801D9E40, type = "func", source = "ready step 2: Triangle starts the quit prompt, Square opens the gear menu (mode 9), X casts (mode 2) when a lure and rod are equipped and otherwise opens the gear menu, L1 enters mode 10" }
+Fishing_CastRun = { addr = 0x801DA5B4, type = "func", source = "scene mode 2: runs g_FishingCastStates[sub_index_03]" }
+Fishing_CastInput = { addr = 0x801DA638, type = "func", source = "cast step 1: FISHING_INPUT_CAST throws the lure (sub step 2) and FISHING_INPUT_CANCEL goes back to the ready mode" }
+Fishing_HookedRun = { addr = 0x801DAED4, type = "func", source = "scene mode 4: runs g_FishingHookedStates[sub_index_03]" }
+Fishing_HookedReel = { addr = 0x801DB140, type = "func", source = "hooked step 2: reads the pad while a fish is on the line: Left and Down pull to the left, Up and Right to the right, Circle-down pulls hard, by the rod's cursor speeds, and ends the fight at the shore (lure y above 0x3E8000)" }
+Fishing_CatchRecord = { addr = 0x801DB554, type = "func", source = "hooked step 3: raises the species' g_FishBestCatch length to the catch's roll_90 when longer and sets g_FishingNewRecord" }
+Fishing_CatchPage = { addr = 0x801DBBAC, type = "func", source = "hooked step 9: draws the catch page of g_FishingHookedFish and on confirm adds the fish item (fish id + 0x38) to the bag, or sets the failure message" }
+Fishing_SelectGear = { addr = 0x801DDE2C, type = "func", source = "points g_FishingLureRow and g_FishingRodRow at the rows of the equipped lure (g_FishingLure) and rod (g_FishingRod) when each is set" }
+Fishing_SpawnFish = { addr = 0x801DE1C0, type = "func", source = "fills the pond's fish rows: per species the g_FishSpawnCounts count, rolls each fish's length (roll_90) up to the species maximum and sets stamina and stamina_max from the species stamina scaled by length" }
+Fishing_UpdateFish = { addr = 0x801DE4AC, type = "func", source = "runs g_FishModes[mode] for each of the 30 live pond fish rows, then sets the fish's blend bytes (0x5D..0x5F) from its depth" }
+Fishing_FishAppear = { addr = 0x801DE5EC, type = "func", source = "fish mode 0: opens the species scene, picks a random facing and position in the pond and a depth, then steps the fish to swim" }
+Fishing_FishSwim = { addr = 0x801DE82C, type = "func", source = "fish mode 1: every 16 frames rolls the fish's heading (counter_08) and depth step, keeps it above the pond floor, and sends it to mode 3 when Fishing_LureInRange is true" }
+Fishing_FishStaminaAdd = { addr = 0x801E026C, type = "func", source = "adds delta to the fish row's ext.fishing.stamina, clamped to 0 and stamina_max" }
+Fishing_LureInRange = { addr = 0x801E0680, type = "func", source = "true when the lure (actor slot 0) is in mode 4 with no fish hooked and the fish at the work position is within the lure row's reach; otherwise puts the fish back to its swim step" }
+Fishing_CatchScore = { addr = 0x801E0ABC, type = "func", source = "score of one fish catch: the species row's maximum score (+0x12) scaled by length over the species maximum length (+0x0F), full score from the maximum length up" }
+Fishing_TotalScore = { addr = 0x801E0B6C, type = "func", source = "the player's fishing points: sums Fishing_CatchScore over the 32 g_FishBestCatch lengths" }
+Fishing_DrawRank = { addr = 0x801E1320, type = "func", source = "draws the rank panel: picks the rank row of g_FishingRankIcons by the total fishing points against the rank score bounds at 0x801D0C70 and prints the points in five digits" }
+g_FishingCastGaugeStates = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
+g_FishingLureStates = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
+g_FishingReelGaugeStates = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }
+g_FishingPromptSets = { addr = 0x801E1F20, source = "prompt ids of each prompt set (cue_index_06): up to three prompts, 0xFF ends the list, the last byte says whether a follow-up bar is spawned" }
+g_FishingPromptStates = { addr = 0x801E1F44, source = "prompt bar steps: idle, init, slide in, first prompt, show, hold, wait, slide out, ready, scroll text, expand, button, close" }
+g_FishingDataStates = { addr = 0x801E1F78, source = "Data page steps: idle, init and the fish page, rank and cursor steps" }
+g_FishingSceneModes = { addr = 0x801E21E0, source = "fishing scene modes: entry, ready, cast, 3, hooked, 5 to 8, gear menu, 10 and 11" }
+g_FishingEntryStates = { addr = 0x801E2210, source = "entry steps: settle the lure at the pond edge, wait for the window effect, wait for the fade" }
+g_FishingReadyStates = { addr = 0x801E221C, source = "ready steps: init, wait, choose action and the prompt and panel steps" }
+g_FishingCastStates = { addr = 0x801E2248, source = "cast steps: start, input, wait for the throw animation, steer the lure" }
+g_FishingHookedStates = { addr = 0x801E2268, source = "hooked steps: start, bite, reel, record, results and the catch page" }
+g_FishModes = { addr = 0x801E2314, source = "handlers of a pond fish row by its mode byte (0x01): appear, swim, and the later modes" }
+g_FishSpecies = { addr = 0x801E2AC8, source = "fish species rows of 0x24 bytes indexed by fish id: scene id (+0), stamina (+0x0E), maximum length (+0x0F) and maximum score (+0x12); the item id of a catch is the fish id plus 0x38" }
+g_FishSpawnCounts = { addr = 0x801E2DF4, source = "how many fish of each species Fishing_SpawnFish puts in a pond: 0x17 bytes per pond, indexed by g_GameContextKind" }
+g_FishingHookedFish = { addr = 0x801E3208, source = "pond row index of the fish on the line, 0xFF while none is hooked" }
+g_FishingRodRow = { addr = 0x801E320C, source = "the equipped rod's row of the rod table, set by Fishing_SelectGear" }
+g_FishingLureRow = { addr = 0x801E3210, source = "the equipped lure's row of the lure table, set by Fishing_SelectGear" }
+g_FishingNewRecord = { addr = 0x801E3214, source = "set by Fishing_CatchRecord when a catch is longer than the species' g_FishBestCatch length, cleared when the catch page is confirmed" }
+
 ["emi/world00/area032/13"]
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "appends the current primitive to one OT head - marker_work's cell draw calls it" }
 Actor_ProjectFocusAndStep = { addr = 0x801F2C48, type = "func", source = "projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index" }
