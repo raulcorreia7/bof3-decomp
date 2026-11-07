@@ -67,6 +67,7 @@ INCLUDE_ASM(func_801EEF50);
 
 INCLUDE_ASM(func_801EF0B8);
 
+/* blocker: D_801EB6AC (0x78-stride table indexed by g_BattleTargetSelector - 3) and D_80144FA0 have no symbol row in this image; needs: type. */
 INCLUDE_ASM(func_801EF118);
 
 INCLUDE_ASM(func_801EF174);
