@@ -5,8 +5,8 @@ MATCH void func_801F3938(void) {
     u32    pos[3];
 
     work   = g_Task;
-    pos[0] = FIELD(u32, work, 0x34);
-    pos[1] = FIELD(u32, work, 0x38);
-    pos[2] = FIELD(u32, work, 0x3C);
+    pos[0] = work->pos.x.fixed;
+    pos[1] = work->pos.y.fixed;
+    pos[2] = work->pos.z.fixed;
     func_801F3980(pos);
 }
