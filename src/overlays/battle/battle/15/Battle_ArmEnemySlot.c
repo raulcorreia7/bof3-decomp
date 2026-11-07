@@ -19,7 +19,6 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     EnemyBattler* enemy;
     u16           unit_id;
     s32           unit_offset;
-    s32           enemy_offset;
 
     enemy = &g_BattleEnemyBattlers[slot & BYTE_MASK];
     TASK_SET(enemy);
@@ -63,11 +62,10 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     COORD_INT(enemy->pos.z)              = Area_SampleHeight(enemy->pos, y);
     enemy->unk_2B                        = 0;
     Area_FindSceneRecord(FIELD(u16, &D_800E405E, unit_offset));
-    enemy_offset                          = (slot & BYTE_MASK) * BATTLE_ENEMY_STRIDE;
-    FIELD(u16, &D_801EB6BA, enemy_offset) = FIELD(u16, &D_800E405E, unit_offset);
+    g_BattleEnemyBattlers[slot & BYTE_MASK].unk_8A = FIELD(u16, &D_800E405E, unit_offset);
     Battle_LoadEnemyBattler(slot & BYTE_MASK, unit & BYTE_MASK);
     func_800AD0A8(slot & BYTE_MASK, unit & HALF_MASK);
-    FIELD(u8, &D_801EB6AF, enemy_offset) = func_800AD044(FIELD(u8, &D_800E4050, unit_offset));
+    g_BattleEnemyBattlers[slot & BYTE_MASK].unk_7F = func_800AD044(FIELD(u8, &D_800E4050, unit_offset));
     g_BattleEnemyCount += 1;
 }
 #else

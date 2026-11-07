@@ -20,10 +20,11 @@ MATCH void func_800A17A4(void) {
         func_800A9BD8(ACTIVE_BATTLER);
     } else {
         for (i = 0; i < 8; i++) {
-            D_801EB730[ACTIVE_BATTLER - 3].pad_08[i] = 0;
+            ENEMY_COMBATANT(ACTIVE_BATTLER).stat_multipliers[i] = 0;
         }
-        D_801EB730[ACTIVE_BATTLER - 3].flags &= ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
-        D_801EB730[ACTIVE_BATTLER - 3].flags_04 &= 0xFFFBC43F;
+        ENEMY_COMBATANT(ACTIVE_BATTLER).turn.damage_flags.value &=
+            ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
+        ENEMY_COMBATANT(ACTIVE_BATTLER).turn.action_flags.value &= 0xFFFBC43F;
         func_800A9BD8(ACTIVE_BATTLER);
     }
 }
