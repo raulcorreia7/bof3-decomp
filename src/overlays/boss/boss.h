@@ -13,7 +13,7 @@
 /* A boss module's head. The rest of the head is the per-boss callback block
  * measured from each image's own bytes. */
 typedef struct BossModule {
-    EmiModuleId id; /* 0x00; 0x11E-0x140 */
+    EMIModuleId id; /* 0x00; 0x11E-0x140 */
 } BossModule;
 
 ASSERT_SIZE(BossModule, 4);

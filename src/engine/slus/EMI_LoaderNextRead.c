@@ -5,7 +5,7 @@
  * stream flag skips a type below 6.
  */
 MATCH s32 EMI_LoaderNextRead(u8 slot) {
-    volatile EmiTocEntry* toc_entry;
+    volatile EMITocEntry* toc_entry;
     s32                   result;
     u32                   first_sector;
 
