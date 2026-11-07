@@ -747,6 +747,7 @@ Effect_SetActorMatrix = { addr = 0x801EEFCC, type = "func", source = "Sets the a
 g_BMagicEffectModes = { addr = 0x801EFCBC, source = "Handlers of magic101 (Typhoon), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic102/03"]
+D_1F800034_U16 = { addr = 0x1F800034, type = "u16", alias = true }
 Area_DrawGroundSceneSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_DrawSceneSprite, with its depth from Area_SampleHeight under its origin, so the sprite stands on the ground." }
 
 ["emi/bmagic/magic103/03"]

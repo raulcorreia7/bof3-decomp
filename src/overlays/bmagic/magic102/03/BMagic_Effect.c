@@ -180,13 +180,11 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     D_1F800014->vx = ((origin_x - 0x80) << 7) + FIELD(s8, record, 7) * 2;
     D_1F800014->vy = ((origin_y - 0x80) << 7) + FIELD(s8, record, 6) * 2;
     D_1F800014->vz = -Area_SampleHeight((D_1F800014->vx + 0x4000) << 9, (D_1F800014->vy + 0x4000) << 9) / 2;
-    /* FAKE: retail reads D_1F800034 as u16[]. */
-    z              = RotTransPers(D_1F800014, (long*)((u16*)D_1F800034), &depth, &flag);
-    if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
+    z              = RotTransPers(D_1F800014, (long*)D_1F800034_U16, &depth, &flag);
+    if (((u32)(D_1F800034_U16[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
     }
-    /* FAKE: retail reads D_1F800034 as u16[]. */
-    if (((u32)(((u16*)D_1F800034)[1] + 0x96) & HALF_MASK) >= 0x1C3) {
+    if (((u32)(D_1F800034_U16[1] + 0x96) & HALF_MASK) >= 0x1C3) {
         return;
     }
     i = 0;
@@ -206,13 +204,11 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     SetShadeTex(prim, 0);
     /* FAKE: integer address arithmetic keeps the retail add order and reuses the index register. */
     frame    = (u8*)((i << 3) + ((n << 2) + (s32)record));
-    /* FAKE: retail reads D_1F800034 as u16[]. */
-    x        = ((u16*)D_1F800034)[0] - FIELD(s8, frame, 8) * 0x465 / z;
+    x        = D_1F800034_U16[0] - FIELD(s8, frame, 8) * 0x465 / z;
     prim->x0 = prim->x2 = x;
     x += (s8)(FIELD(u32, frame, 8) >> 8) * 0x465 / z;
     prim->x1 = prim->x3 = x;
-    /* FAKE: retail reads D_1F800034 as u16[]. */
-    y                   = ((u16*)D_1F800034)[1] - FIELD(s8, frame, 0xA) * 0x465 / z;
+    y                   = D_1F800034_U16[1] - FIELD(s8, frame, 0xA) * 0x465 / z;
     prim->y0 = prim->y1 = y;
     y += FIELD(s8, frame, 0xB) * 0x465 / z;
     prim->y2 = prim->y3 = y;
