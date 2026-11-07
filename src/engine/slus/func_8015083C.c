@@ -63,7 +63,7 @@ NON_MATCHING void func_8015083C(void) {
                 v                 = g_CharSlot[g_BattlePartyBattlers[0].chr.character_id];
                 loop              = 0;
                 chan[3]           = 6;
-                CHAN_CURSOR(chan) = (u8*)&D_80144967 + v * 0xA4;
+                CHAN_CURSOR(chan) = (u8*)&D_80144967 + v * PARTY_RECORD_STRIDE;
                 break;
             case 4:
                 loop              = 0;
@@ -73,7 +73,7 @@ NON_MATCHING void func_8015083C(void) {
                 CHAN_RETURN(chan) = t;
                 v                 = *D_801490B0;
                 chan[3]           = 6;
-                CHAN_CURSOR(chan) = (u8*)&D_80144967 + v * 0xA4;
+                CHAN_CURSOR(chan) = (u8*)&D_80144967 + v * PARTY_RECORD_STRIDE;
                 break;
             case 5:
             case 0xC:
