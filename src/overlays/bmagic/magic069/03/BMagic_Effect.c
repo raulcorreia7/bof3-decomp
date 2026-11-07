@@ -37,30 +37,30 @@ MATCH void func_801EF034(void) {
 }
 
 MATCH void func_801EF0C4(void) {
-    s32 temp_v0;
+    s32 step_next;
 
-    temp_v0        = g_Task->unk_0C - 1;
-    g_Task->unk_0C = temp_v0;
-    g_Task->unk_2E.half -= temp_v0;
+    step_next      = g_Task->unk_0C - 1;
+    g_Task->unk_0C = step_next;
+    g_Task->unk_2E.half -= step_next;
     if (g_Task->unk_0C == 0) {
-        if (g_Task->unk_0B == 0) {
+        if (g_Task->param.unk_0B == 0) {
             SND_QueueSelectionFx(0x103);
             g_Task->header.step += 1;
             return;
         }
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }
 
 MATCH void func_801EF15C(void) {
-    u8 temp_v1;
+    u8 count;
 
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x10) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x10) {
         func_801F0274();
-        g_Task->unk_0B = 0;
+        g_Task->param.unk_0B = 0;
         g_Task->header.step += 1;
     }
 }
@@ -69,20 +69,20 @@ MATCH void func_801EF1D0(void) {
     u8 value;
     u8 value2;
 
-    if (g_Task->unk_0B != 0) {
+    if (g_Task->param.unk_0B != 0) {
         value          = g_Task->unk_09 + 4;
         g_Task->unk_09 = value;
         if ((value & 0xFF) == 0x10) {
-            g_Task->unk_0B = 0;
+            g_Task->param.unk_0B = 0;
         }
     } else {
         value2         = g_Task->unk_09 - 2;
         g_Task->unk_09 = value2;
         if (!(value2 & 0xFF)) {
-            g_Task->unk_0B = 1;
+            g_Task->param.unk_0B = 1;
         }
     }
-    if (D_801EB4E0->unk_0B == 1) {
+    if (D_801EB4E0->param.unk_0B == 1) {
         SND_QueueSelectionFx(0x101);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
@@ -97,7 +97,7 @@ MATCH void func_801EF2AC(void) {
     next        = work->timer - 2;
     work->timer = next;
     if (next == 8) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->param.unk_0B--;
         func_801E5988();
     }
 }
@@ -127,7 +127,7 @@ MATCH void func_801EF4C0(void) {
     g_Task->unk_0C = count;
     g_Task->unk_2E.half += count;
     if (g_Task->unk_0C == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();
     }
 }

@@ -12,7 +12,7 @@
    func_801EF2D8 (magic168), func_801EEDD8 (magic172), func_801EED90 (magic173), func_801EEDB8 (magic218), func_801EEFC4
    (magic219), func_801EEF18 (magic220), func_801EEE80 (magic222), func_801EF278 (magic225), func_801EEFA4 (magic226) */
 MATCH void Effect_PlayOnZeroTick(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();

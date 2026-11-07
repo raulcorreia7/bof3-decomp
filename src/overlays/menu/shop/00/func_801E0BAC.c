@@ -64,7 +64,7 @@ NON_MATCHING void func_801E0BAC(void) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
     if (D_801483CD == 0) {
-        if (D_80145AC2 & g_InputPressed) {
+        if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
             if (D_801483CC == GAME_NONE) {
                 if (D_8014546C[D_801483CB] != 0) {
                     SND_PlayCue(EMI_CUE_ID(1, 3));
@@ -80,7 +80,7 @@ NON_MATCHING void func_801E0BAC(void) {
             D_801483CC             = 0xFFU;
             return;
         }
-        if (D_80145AC4 & g_InputPressed) {
+        if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
             if (D_801483CC == GAME_NONE) {
                 D_801483EF = 0xFF;

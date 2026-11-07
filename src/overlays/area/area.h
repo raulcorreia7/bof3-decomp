@@ -142,8 +142,8 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     selection = table[index];
     result    = func_8015CB18(kind, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        battler         = (PartyBattler*)g_Task;
-        battler->unk_0B = (u8)result;
+        battler               = (PartyBattler*)g_Task;
+        battler->param.unk_0B = (u8)result;
     }
 }
 

@@ -2,7 +2,7 @@
 MATCH void Char_UpdateLinkedFacing(void) {
     u8 timer;
 
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->unk_03 = 2;
         return;
@@ -11,11 +11,11 @@ MATCH void Char_UpdateLinkedFacing(void) {
     if (timer != 0) {
         g_Task->unk_0A = timer - 1;
         if (g_Task->unk_0A == 0) {
-            g_ActorSlots[g_Task->param.unk_0B].unk_08 = g_Task->direction_08;
+            g_ActorSlots[g_Task->param.actor_slot].unk_08 = g_Task->direction_08;
             if (g_Task->option_flags == 0) {
                 g_Task->option_flags = 1;
             }
-            g_ActorSlots[g_Task->param.unk_0B].unk_0A = g_Task->option_flags;
+            g_ActorSlots[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
             SND_PlayCue(0x10BU);
         }
     }

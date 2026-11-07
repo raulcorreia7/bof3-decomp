@@ -6,7 +6,7 @@ MATCH void func_801F2D1C(void) {
 
     g_Task->param.actor_slot = Actor_FindFreeSlot();
     index                    = g_Task->param.actor_slot;
-    if (index != 0xFF) {
+    if (index != GAME_NONE) {
         slot               = &g_ActorSlots[index];
         slot->header.flags = 1;
         slot->type         = 0x51;

@@ -6,7 +6,7 @@ MATCH void Effect_SelectTargetAndAdvance(void) {
 
     actor = &g_BattleSelectedActor;
     GFX_FreePaletteFadeTarget(*actor);
-    g_Task->unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
-    g_Task->unk_09 = 0;
+    g_Task->param.unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
+    g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
 }

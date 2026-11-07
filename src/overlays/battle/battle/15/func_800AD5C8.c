@@ -9,7 +9,7 @@ MATCH void func_800AD5C8(void) {
     i = 0;
     if (g_BattleGeneCount[0] != 0) {
         work  = (PartyBattler*)g_Task;
-        count = work->unk_0B;
+        count = work->param.unk_0B;
         base  = (u16*)(&D_80148628);
         do {
             if (g_BattleGenes[i] == count) {

@@ -6,7 +6,7 @@ target's rows, one row per name:
     ["exe/slus_004_22"]
     SND_PlayCue = { addr = 0x8015DF18, type = "func", source = "..." }
 
-A row takes ``addr`` (required), ``type`` and ``size`` (Splat attributes), ``source`` (the evidence),
+A row takes ``addr`` (required), ``type`` and ``size`` (Splat attributes), ``source`` (what the symbol is or does),
 and ``alias`` (a name only the link reads; Splat never sees it, and it may sit inside another
 row). :func:`generate` writes two files per target
 into ``build/symbols``: ``<target>.splat`` for Splat and ``<target>.link`` for the link.

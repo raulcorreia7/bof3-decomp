@@ -48,10 +48,10 @@ MATCH void func_801EF154(void) {
     if (count != 0) {
         g_Task->unk_09 = count - 1;
     }
-    if (g_Task->unk_0B == 0x80) {
+    if (g_Task->param.unk_0B == 0x80) {
         GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
-        BATTLE_ACTIVE_WORK->unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();
     }
 }

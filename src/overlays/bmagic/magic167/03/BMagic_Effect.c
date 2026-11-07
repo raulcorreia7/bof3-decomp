@@ -62,7 +62,7 @@ MATCH void func_801EFA70(void) {
 MATCH void func_801EFACC(void) {
     u8 timer;
 
-    g_Task->unk_0B += 2;
+    g_Task->param.unk_0B += 2;
     g_Task->unk_09 += 1;
     timer = g_Task->timer;
     if (timer < 0x10U) {
@@ -74,7 +74,7 @@ MATCH void func_801EFACC(void) {
 }
 
 MATCH void func_801EFB5C(void) {
-    g_Task->unk_0B += 2;
+    g_Task->param.unk_0B += 2;
     g_Task->unk_09 += 1;
     g_Task->timer -= 1;
     if (g_Task->unk_09 == 0x28) {
@@ -90,7 +90,7 @@ MATCH void func_801EFBE4(void) {
     next        = work->timer + 1;
     work->timer = next;
     if (next == 0x18) {
-        D_801EB4E0->unk_0B--;
+        D_801EB4E0->param.unk_0B--;
         func_801E5988();
     }
 }

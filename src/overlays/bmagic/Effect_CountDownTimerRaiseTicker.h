@@ -5,7 +5,7 @@ MATCH void Effect_CountDownTimerRaiseTicker(void) {
     PartyBattler* work;
 
     work = g_Task;
-    work->unk_0B++;
+    work->param.unk_0B++;
     work = g_Task;
     work->unk_09--;
     if (work->unk_09 == 0) {

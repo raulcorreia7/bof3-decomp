@@ -85,7 +85,6 @@ enum {
 extern u16             g_GameAreaId;
 extern u8              D_80144F57;
 extern u16             D_80145594[];
-extern s16             D_80145ABE;
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8              D_80148480;
 extern u8              D_8014849B;
@@ -250,12 +249,8 @@ extern u8       s_PartyCharacterIds[3];
 extern u8       D_801ED613[];
 extern s8       D_801ED618;
 extern u8       D_801ED620;
-extern u8       D_801ED63C;
-extern u8       D_801ED63D;
-extern u8       D_801ED63E;
-extern u8       D_801ED63F;
-extern u8       D_801ED640;
-extern u8       D_801ED641;
+/* D_801ED63C */
+extern u8       g_EquipPreview[EQUIP_SLOT_COUNT];
 extern s8       D_801ED648;
 /* The start overlay's slot rows (three bytes per slot) and its byte table;
  * every reader indexes or walks them as bytes. */

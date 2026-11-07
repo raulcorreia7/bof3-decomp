@@ -60,7 +60,7 @@ MATCH void func_801EF0F0(void) {
     count          = g_Task->unk_5D - 1;
     g_Task->unk_5D = count;
     if ((count << 0x18) == 0) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

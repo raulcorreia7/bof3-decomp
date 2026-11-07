@@ -48,7 +48,7 @@ MATCH void func_801D163C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
     D_8014845C = g_ShopStockIndex;
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         pick               = D_8018E7CC + g_ShopStockIndex * 2;
         g_ShopItemCategory = pick[1];
         g_ShopItemId       = pick[2];
@@ -74,7 +74,7 @@ MATCH void func_801D163C(void) {
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 7));
         }
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             g_MenuPanelTasks[i + 3].state = 1;

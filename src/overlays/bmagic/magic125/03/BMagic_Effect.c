@@ -98,7 +98,7 @@ MATCH void func_801EFAB0(void) {
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
         if (!(counter & 0xFF)) {
-            BATTLE_ACTIVE_WORK->unk_0B -= 1;
+            BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
             func_801E5988();
         }
     }

@@ -88,8 +88,8 @@ MATCH void func_801EFD24(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B = 1;
-        g_Task->header.step        = g_Task->header.step + 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B = 1;
+        g_Task->header.step              = g_Task->header.step + 1;
     }
 }
 
@@ -105,8 +105,8 @@ MATCH void func_801EFD80(void) {
 }
 
 MATCH void func_801EFDC0(void) {
-    if (g_Task->unk_0B == 0) {
-        D_801EB4E0->unk_0B = 2;
+    if (g_Task->param.unk_0B == 0) {
+        D_801EB4E0->param.unk_0B = 2;
         func_801E5988();
     }
 }
@@ -126,17 +126,17 @@ MATCH void func_801EFE90(void) {
     PartyBattler* actor = D_801EB4E0;
     s32           z;
 
-    work->pos.x.fixed = actor->pos.x.fixed;
-    work->pos.y.fixed = actor->pos.y.fixed;
-    z                 = actor->pos.z.fixed;
-    work->unk_5D      = 0x10;
-    work->pos.z.fixed = z;
-    g_Task->unk_5E    = 0x10;
-    g_Task->unk_5F    = 0x24;
-    g_Task->unk_04    = 0;
-    g_Task->unk_0B    = 0;
-    g_Task->unk_09    = 0;
-    g_Task->timer     = 0x1E;
+    work->pos.x.fixed    = actor->pos.x.fixed;
+    work->pos.y.fixed    = actor->pos.y.fixed;
+    z                    = actor->pos.z.fixed;
+    work->unk_5D         = 0x10;
+    work->pos.z.fixed    = z;
+    g_Task->unk_5E       = 0x10;
+    g_Task->unk_5F       = 0x24;
+    g_Task->unk_04       = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0x1E;
     g_Task->header.step += 1;
 }
 
@@ -165,17 +165,17 @@ MATCH void func_801F00E8(void) {
 }
 
 MATCH void func_801F013C(void) {
-    s8 temp_v0;
-    u8 temp_v0_2;
+    s8 count;
+    u8 count_next;
 
-    temp_v0 = g_Task->unk_5D;
-    if (temp_v0 != 0) {
-        g_Task->unk_5D = temp_v0 - 1;
+    count = g_Task->unk_5D;
+    if (count != 0) {
+        g_Task->unk_5D = count - 1;
     }
-    temp_v0_2      = g_Task->unk_5E - 1;
-    g_Task->unk_5E = temp_v0_2;
-    if ((temp_v0_2 << 0x18) == 0) {
-        D_801EB4E0->unk_0B -= 1;
+    count_next     = g_Task->unk_5E - 1;
+    g_Task->unk_5E = count_next;
+    if ((count_next << 0x18) == 0) {
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -192,26 +192,26 @@ MATCH void func_801F0BA8(void) {
     PartyBattler* work;
     s32           value;
 
-    g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-    g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-    g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
-    value               = rand() & 0x1F;
-    work                = g_Task;
-    work->unk_5D        = 0x10;
-    work->unk_0C        = value;
-    g_Task->unk_0B      = 0;
-    g_Task->unk_09      = 0;
-    g_Task->timer       = 4;
+    g_Task->pos.x.fixed  = D_801EB4E0->pos.x.fixed;
+    g_Task->pos.y.fixed  = D_801EB4E0->pos.y.fixed;
+    g_Task->pos.z.fixed  = D_801EB4E0->pos.z.fixed;
+    value                = RANDOM_MASK(0x1F);
+    work                 = g_Task;
+    work->unk_5D         = 0x10;
+    work->unk_0C         = value;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 4;
     g_Task->header.step += 1;
 }
 
 MATCH void func_801F0C50(void) {
-    u8 temp_v0;
+    u8 timer_next;
 
-    temp_v0       = g_Task->timer + 4;
-    g_Task->timer = temp_v0;
-    if ((temp_v0 & 0xFF) >= 0x20U) {
-        g_Task->unk_0B = 1;
+    timer_next    = g_Task->timer + 4;
+    g_Task->timer = timer_next;
+    if ((timer_next & BYTE_MASK) >= 0x20U) {
+        g_Task->param.unk_0B = 1;
         g_Task->header.step += 1;
     }
 }
@@ -224,8 +224,8 @@ MATCH void func_801F0CB0(void) {
     timer        = work->unk_5D - 2;
     work->unk_5D = timer;
     if (timer == 0) {
-        work         = D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+        work               = D_801EB4E0;
+        work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }
 }
@@ -235,23 +235,23 @@ INCLUDE_ASM(func_801F0D0C);
 INCLUDE_ASM(func_801F10E8);
 
 MATCH void func_801F11E0(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-        g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
-        g_Task->unk_0B      = rand() & 0xF;
-        g_Task->unk_09      = 0;
-        g_Task->timer       = 0;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        g_Task->pos.x.fixed  = D_801EB4E0->pos.x.fixed;
+        g_Task->pos.y.fixed  = D_801EB4E0->pos.y.fixed;
+        g_Task->pos.z.fixed  = D_801EB4E0->pos.z.fixed;
+        g_Task->param.unk_0B = RANDOM_MASK(0xF);
+        g_Task->unk_09       = 0;
+        g_Task->timer        = 0;
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F129C(void) {
-    g_Task->unk_0B += 1;
+    g_Task->param.unk_0B += 1;
     g_Task->timer += 4;
     if (g_Task->timer == 0x10) {
         g_Task->unk_09 = 8;

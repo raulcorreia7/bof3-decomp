@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEEF4);
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
 MATCH void func_801EF0A4(void) {
-    if (g_Task->unk_0B == 0xFF) {
+    if (g_Task->param.unk_0B == 0xFF) {
         D_8014637C->unk_29 = 4;
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
@@ -61,16 +61,16 @@ MATCH void func_801EF324(void) {
 MATCH void func_801EF388(void) {
     s32 phase;
 
-    g_Task->unk_0B = (g_Task->unk_0B - 1) & 0x3F;
-    phase          = g_Task->unk_1C + 2;
-    g_Task->unk_1C = phase;
+    g_Task->param.unk_0B = (g_Task->param.unk_0B - 1) & 0x3F;
+    phase                = g_Task->unk_1C + 2;
+    g_Task->unk_1C       = phase;
     if (phase == 0x80) {
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF3E0(void) {
-    g_Task->unk_0B = (g_Task->unk_0B - 1) & 0x3F;
+    g_Task->param.unk_0B = (g_Task->param.unk_0B - 1) & 0x3F;
     g_Task->unk_1C -= 2;
     g_Task->unk_20 -= 2;
     if (g_Task->unk_1C == 0x20) {
@@ -82,7 +82,7 @@ MATCH void func_801EF44C(void) {
     g_Task->unk_1C -= 1;
     g_Task->unk_20 -= 2;
     if (g_Task->unk_1C == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B = 0xFF;
+        BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
         func_801E5988();
     }
 }

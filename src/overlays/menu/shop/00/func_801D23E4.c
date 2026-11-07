@@ -27,14 +27,14 @@ MATCH void func_801D23E4(void) {
         TEXT_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
         D_80148340 = 0x3A;
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         cursor = &D_80148656;
         Shop_Equip(g_CharSlot[g_PartyFieldOrder[(s8)*cursor]], (selection + (D_801E6054 + 0xFF)) & BYTE_MASK,
                    g_ShopItemId);
         Char_RebuildStats(&g_Characters[g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]]);
         D_80148652 += 1;
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         for (index = 0; index < Party_CountOrder(PARTY_ORDER_FIELD); index++) {
             if (index == (s8)D_80148656) {

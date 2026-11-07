@@ -37,7 +37,7 @@ NON_MATCHING void func_801D40D8(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         *label ^= 1;
     }
-    if (D_80145AC2 & *pad) {
+    if (g_InputMasks[INPUT_SLOT_CONFIRM] & *pad) {
         if (*label != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             records[g_MenuPanelTasks[13].unk_0A][g_MenuPanelTasks[13].unk_0C]    = 0;
@@ -50,7 +50,7 @@ NON_MATCHING void func_801D40D8(void) {
         *(s8*)((u8*)flag - 0x113) = -1;
         return;
     }
-    if (D_80145AC4 & *pad) {
+    if (g_InputMasks[INPUT_SLOT_CANCEL] & *pad) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         *(s8*)((u8*)flag - 0x113) = -1;
         D_80148651 -= 3;

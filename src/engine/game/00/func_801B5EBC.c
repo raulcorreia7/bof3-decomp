@@ -8,7 +8,7 @@ MATCH s32 func_801B5EBC(void) {
         return 0;
     if (kind == 9 || kind == 10)
         return 0;
-    if (!(g_InputPressed & D_80145AC0))
+    if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_6]))
         return 0;
     if (g_GameRequestFlags & 1)
         return 0;

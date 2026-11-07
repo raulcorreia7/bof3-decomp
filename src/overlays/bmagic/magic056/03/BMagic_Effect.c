@@ -42,14 +42,14 @@ MATCH void func_801EF2DC(void) {
 }
 
 MATCH void func_801EF37C(void) {
-    u8 temp_v0;
+    u8 count;
 
     SP_REF(s16, 0u) = (g_Task->unk_09 * 4) + 0x120;
     g_Task->timer += 1;
-    temp_v0        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & 0xFF) == 0x28) {
-        D_801EB4E0->unk_0B -= 1;
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x28) {
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -149,12 +149,12 @@ MATCH void func_801F042C(void) {
 INCLUDE_ASM(func_801F04EC);
 
 MATCH void func_801F0658(void) {
-    if (D_801EB4E0->unk_0B == 1) {
+    if (D_801EB4E0->param.unk_0B == 1) {
         g_Task->unk_5D += 0x10;
         g_Task->unk_5E += 0x10;
         g_Task->unk_5F += 0x10;
         if ((s8)g_Task->unk_5D == 0) {
-            D_801EB4E0->unk_0B -= 1;
+            D_801EB4E0->param.unk_0B -= 1;
             g_Task->header.step += 1;
         }
     }
