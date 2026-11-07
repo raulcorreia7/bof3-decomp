@@ -42,7 +42,17 @@ MATCH void func_801EEF00(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF78);
+MATCH void func_801EEF78(void) {
+    g_Task->pos.x.fixed  = g_AreaScrollTargetX + 0xFFEE0000;
+    g_Task->pos.y.fixed  = g_AreaScrollTargetY + 0x880000;
+    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->param.unk_0B = 0x1A;
+    g_Task->unk_09       = 0x10;
+    g_Task->unk_10       = 0;
+    g_Task->unk_14       = 0xF0;
+    g_Task->header.step++;
+}
+
 
 MATCH void func_801EEFF8(void) {
     PartyBattler* work = g_Task;
