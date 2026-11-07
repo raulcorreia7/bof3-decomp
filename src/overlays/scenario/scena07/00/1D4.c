@@ -276,7 +276,7 @@ INCLUDE_ASM(func_801F85D8);
 
 INCLUDE_ASM(func_801F86BC);
 
-#include "overlays/scenario/Actor_WaitAndStep.h"
+#include "overlays/scenario/Actor_Wait.h"
 
 /* blocker: 0x40000 constant register; first diff: lui v0,4 (retail) against a0 or a1 (candidate). */
 INCLUDE_ASM(func_801F8764);

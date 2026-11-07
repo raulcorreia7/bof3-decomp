@@ -4,7 +4,7 @@
  * area overlays; every change here must verify every member.
  */
 /* func_801F325C (area065), func_801F3258 (area087), func_801F3D88 (area088), func_801F32E8 (area104) */
-MATCH void Actor_GrowAndSetStep3(void) {
+MATCH void Actor_ZoomIn(void) {
     Actor* scratch;
     Actor* scratch2;
     u8     timer;
