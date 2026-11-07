@@ -1337,6 +1337,13 @@ Menu_DrawClutStrip = { addr = 0x801D627C, type = "func", source = "draws the fiv
 Menu_DrawFilledPanel = { addr = 0x801D6470, type = "func", source = "fills a menu panel and draws its tiled border" }
 Menu_DrawWindowFrame = { addr = 0x801D674C, type = "func", source = "draws a window frame of width x height cells of 8 pixels from stretched border sprites and four corner sprites; the option, shop and start panel callers pass the cell counts" }
 Menu_DrawPanelFrame = { addr = 0x801D78A8, type = "func", source = "draws the tiled border of a menu panel, called by Shop_DrawItems in emi/etc/shop/00" }
+g_MenuBateStepFuncs = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
+g_MenuBateStep2Funcs = { addr = 0x801D8700, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuBateStep2Sub0Funcs = { addr = 0x801D870C, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuBateStep2Sub1Funcs = { addr = 0x801D8718, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuBateStep2Sub2Funcs = { addr = 0x801D8720, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuBateStep3Funcs = { addr = 0x801D8764, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuBateStep3Sub0Funcs = { addr = 0x801D8770, source = "handler table: dispatched through the table position of its owning step function" }
 MENU_STAT_GLYPH_0 = { addr = 0x801D8810, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_0 in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_1 = { addr = 0x801D883C, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_1 in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_2 = { addr = 0x801D8848, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_2 in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
@@ -1714,7 +1721,14 @@ Menu_DrawEquipStatWindow = { addr = 0x801D6EF0, type = "func", source = "draws t
 Menu_DrawFilledPanel = { addr = 0x801D7418, type = "func", source = "fills a menu panel and draws its tiled border, the same body as the shop and bate overlays" }
 Menu_DrawWindowFrame = { addr = 0x801D76F4, type = "func", source = "draws a window frame of width x height cells of 8 pixels from stretched border sprites and four corner sprites; the option, shop and start panel callers pass the cell counts" }
 Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "draws the tiled border of a menu panel, called by Shop_DrawItems in emi/etc/shop/00" }
+g_MenuStatusStepFuncs = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
+g_MenuStatusStep1Funcs = { addr = 0x801D96F0, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuStatusStep2Funcs = { addr = 0x801D9700, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuStatusStep2Sub2Funcs = { addr = 0x801D970C, source = "handler table: dispatched through the table position of its owning step function" }
 g_MenuStatusTaskFuncs = { addr = 0x801D974C, source = "the task-state handler table SYS_DISPATCH_TASK dispatches in emi/etc/shisu/00" }
+g_MenuStatusTask2StateFuncs = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
+g_MenuStatusTask3StateFuncs = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
 MENU_STAT_GLYPH_0 = { addr = 0x801D9834, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_0 in emi/etc/shisu/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_1 = { addr = 0x801D9860, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_1 in emi/etc/shisu/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_2 = { addr = 0x801D986C, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_2 in emi/etc/shisu/00 (twin rule, decomp/layout#shared-bodies)" }
@@ -1833,6 +1847,21 @@ g_ShopStep9Funcs = { addr = 0x801E5D3C, source = "handler table: dispatched thro
 g_ShopStep9Sub0Funcs = { addr = 0x801E5D48, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep9Sub1Funcs = { addr = 0x801E5D50, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep9Sub2Funcs = { addr = 0x801E5D5C, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopPanelFuncs = { addr = 0x801E5D68, source = "the Shop panel handlers, indexed by the panel task mode; the dispatcher of each is one entry" }
+g_ShopPanel0StateFuncs = { addr = 0x801E5DB4, source = "the state handlers of panel mode 0, indexed by the panel task state" }
+g_ShopPanel2StateFuncs = { addr = 0x801E5DC0, source = "the state handlers of panel mode 2, indexed by the panel task state" }
+g_ShopPanel1StateFuncs = { addr = 0x801E5DCC, source = "the state handlers of panel mode 1, indexed by the panel task state" }
+g_ShopPanel5StateFuncs = { addr = 0x801E5DDC, source = "the state handlers of panel mode 5, indexed by the panel task state" }
+g_ShopPanel6StateFuncs = { addr = 0x801E5DF0, source = "the state handlers of panel mode 6, indexed by the panel task state" }
+g_ShopPanel7StateFuncs = { addr = 0x801E5DFC, source = "the state handlers of panel mode 7, indexed by the panel task state" }
+g_ShopPanel9StateFuncs = { addr = 0x801E5E2C, source = "the state handlers of panel mode 9, indexed by the panel task state" }
+g_ShopPanel11StateFuncs = { addr = 0x801E5E48, source = "the state handlers of panel mode 11, indexed by the panel task state" }
+g_ShopPanel12StateFuncs = { addr = 0x801E5E5C, source = "the state handlers of panel mode 12, indexed by the panel task state" }
+g_ShopPanel13StateFuncs = { addr = 0x801E5E70, source = "the state handlers of panel mode 13, indexed by the panel task state" }
+g_ShopPanel15StateFuncs = { addr = 0x801E5F14, source = "the state handlers of panel mode 15, indexed by the panel task state" }
+g_ShopPanel16StateFuncs = { addr = 0x801E5F24, source = "the state handlers of panel mode 16, indexed by the panel task state" }
+g_ShopPanel17StateFuncs = { addr = 0x801E5F30, source = "the state handlers of panel mode 17, indexed by the panel task state" }
+g_ShopPanel18StateFuncs = { addr = 0x801E5F3C, source = "the state handlers of panel mode 18, indexed by the panel task state" }
 g_ShopStockIndex = { addr = 0x801E6044, source = "read:func_801D163C@0x801D163C indexes the shop stock rows at D_8018E7CC (count byte, then category and item pairs) with it and wraps it at the count" }
 g_ShopItemCategory = { addr = 0x801E6048, source = "read:func_801D1D60@0x801D1D60 passes it as the Item_Add and Item_GetKind category; func_801D163C@0x801D163C loads it from the shop stock row" }
 g_ShopItemId = { addr = 0x801E604C, source = "read:func_801D1D60@0x801D1D60 passes it as the Item_Add item; func_801D163C@0x801D163C loads it from the shop stock row" }
@@ -1857,7 +1886,7 @@ Menu_DrawHeaderBar = { addr = 0x801D1E54, type = "func", source = "four callers 
 Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "draws a 40x48 portrait from the panel atlas record D_801D4058[sprite_id]" }
 Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 Master_DispatchMenu = { addr = 0x801D25D8, type = "func", source = "dispatches g_MasterMenuFuncs by the panel step byte D_801D4285, etc/game/00 runs it each frame" }
-Master_ApplyMaster = { addr = 0x801D3ED0, type = "func", source = "writes the master value D_801D4270[D_801448ED] into the party record at D_80146889 + slot * 0x98 and closes the panel" }
+Master_ApplyMaster = { addr = 0x801D3ED0, type = "func", source = "writes the actor mode g_MasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel" }
 g_MenuLabelPower = { addr = 0x801D4038, source = "retail text Pwr, drawn beside the power stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelDefense = { addr = 0x801D403C, source = "retail text Def, drawn beside the defense stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801D4040, source = "retail text Int, drawn beside the intellect stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
@@ -1871,6 +1900,7 @@ g_MasterStep2Funcs = { addr = 0x801D4204, source = "sub-handler table dispatched
 g_MasterStep3Funcs = { addr = 0x801D421C, source = "sub-handler table dispatched by func_801D2BE8, entry 3 of g_MasterMenuFuncs" }
 g_MasterStep4Funcs = { addr = 0x801D4240, source = "sub-handler table dispatched by func_801D32D4, entry 4 of g_MasterMenuFuncs" }
 g_MasterStep5Funcs = { addr = 0x801D4264, source = "sub-handler table dispatched by func_801D3924, entry 5 of g_MasterMenuFuncs" }
+g_MasterActorModes = { addr = 0x801D4270, type = "u8", size = 0x14, source = "the actor mode Master_ApplyMaster writes for each MasterId; GAME_NONE leaves it" }
 g_MasterBannerLock = { addr = 0x801D4284, source = "set when the info banner owns the panel" }
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
@@ -1963,6 +1993,25 @@ s_CampMenuState = { addr = 0x801ED100, source = "func_801E4670, func_801E4744 an
 s_PanelIconSelectors = { addr = 0x801ED1D8, source = "func_801E7210 reads the three selector bytes per panel slot from this table" }
 s_PanelIconValues = { addr = 0x801ED1F0, source = "func_801E7210 fills the panel icon bytes from this value table" }
 g_SaveRecordTypeCommands = { addr = 0x801ED2D4, source = "func_801E8C9C picks the record-kind handler through this table" }
+g_MenuStartPanelFuncs = { addr = 0x801ED330, source = "the MenuStart panel handlers, indexed by the panel task mode; the dispatcher of each is one entry" }
+g_MenuStartPanel0StateFuncs = { addr = 0x801ED384, source = "the state handlers of panel mode 0, indexed by the panel task state" }
+g_MenuStartPanel1StateFuncs = { addr = 0x801ED3B0, source = "the state handlers of panel mode 1, indexed by the panel task state" }
+g_MenuStartPanel2StateFuncs = { addr = 0x801ED3BC, source = "the state handlers of panel mode 2, indexed by the panel task state" }
+g_MenuStartPanel3StateFuncs = { addr = 0x801ED3C8, source = "the state handlers of panel mode 3, indexed by the panel task state" }
+g_MenuStartPanel4StateFuncs = { addr = 0x801ED3D4, source = "the state handlers of panel mode 4, indexed by the panel task state" }
+g_MenuStartPanel5StateFuncs = { addr = 0x801ED3E0, source = "the state handlers of panel mode 5, indexed by the panel task state" }
+g_MenuStartPanel6StateFuncs = { addr = 0x801ED3FC, source = "the state handlers of panel mode 6, indexed by the panel task state" }
+g_MenuStartPanel7StateFuncs = { addr = 0x801ED408, source = "the state handlers of panel mode 7, indexed by the panel task state" }
+g_MenuStartPanel8StateFuncs = { addr = 0x801ED414, source = "the state handlers of panel mode 8, indexed by the panel task state" }
+g_MenuStartPanel9StateFuncs = { addr = 0x801ED420, source = "the state handlers of panel mode 9, indexed by the panel task state" }
+g_MenuStartPanel11StateFuncs = { addr = 0x801ED43C, source = "the state handlers of panel mode 11, indexed by the panel task state" }
+g_MenuStartPanel12StateFuncs = { addr = 0x801ED448, source = "the state handlers of panel mode 12, indexed by the panel task state" }
+g_MenuStartPanel13StateFuncs = { addr = 0x801ED45C, source = "the state handlers of panel mode 13, indexed by the panel task state" }
+g_MenuStartPanel16StateFuncs = { addr = 0x801ED58C, source = "the state handlers of panel mode 16, indexed by the panel task state" }
+g_MenuStartPanel17StateFuncs = { addr = 0x801ED5A0, source = "the state handlers of panel mode 17, indexed by the panel task state" }
+g_MenuStartPanel18StateFuncs = { addr = 0x801ED5B4, source = "the state handlers of panel mode 18, indexed by the panel task state" }
+g_MenuStartPanel19StateFuncs = { addr = 0x801ED5C8, source = "the state handlers of panel mode 19, indexed by the panel task state" }
+g_MenuStartPanel20StateFuncs = { addr = 0x801ED5E4, source = "the state handlers of panel mode 20, indexed by the panel task state" }
 s_PartyCharacterIds = { addr = 0x801ED610, source = "func_801D177C and func_801D21F4 keep the three party character ids here" }
 g_EquipPreview = { addr = 0x801ED63C, source = "func_801D6FBC copies a character's six equip ids here and replaces the slot being tried; func_801D6E6C commits it" }
 g_MenuStartTimer = { addr = 0x801ED7F0, source = "read:func_801E5BCC@0x801E5BCC counts it up to 4 as the slide offset of SAVE_DrawSlots; func_801E5E30@0x801E5E30 counts it down to 0 and then restores the step" }
