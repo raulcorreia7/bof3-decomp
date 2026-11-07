@@ -35,7 +35,7 @@ INCLUDE_ASM(func_801EF460);
 MATCH void func_801EF5FC(void) {
     u8 counter;
 
-    if (BATTLE_ACTIVE_WORK->unk_0B == 1) {
+    if (BATTLE_ACTIVE_WORK->param.unk_0B == 1) {
         func_8014DAEC();
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
@@ -87,7 +87,7 @@ MATCH void func_801EF8B4(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }

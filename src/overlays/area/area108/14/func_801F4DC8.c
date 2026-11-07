@@ -6,7 +6,7 @@ MATCH void func_801F4DC8(void) {
 
     g_Task->param.actor_slot = Actor_FindFreeSlot();
     index                    = g_Task->param.actor_slot;
-    if (index != 0xFF) {
+    if (index != GAME_NONE) {
         slot               = &g_ActorSlots[index];
         slot->pos.x.fixed  = TO_COORD(21) + COORD_HALF;
         slot->header.flags = 1;

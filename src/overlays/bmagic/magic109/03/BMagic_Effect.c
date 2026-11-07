@@ -32,17 +32,17 @@ MATCH void func_801EEF30(void) {
         g_Task->header.mode += 1;
     }
     func_801EF0F8(g_Task->unk_64);
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         raised_offset  = g_Task->unk_64 + 8;
         g_Task->unk_64 = raised_offset;
         if (raised_offset >= 0x80) {
-            g_Task->unk_0B = 1;
+            g_Task->param.unk_0B = 1;
         }
     } else {
         lowered_offset = g_Task->unk_64 - 8;
         g_Task->unk_64 = lowered_offset;
         if (lowered_offset < -0x7F) {
-            g_Task->unk_0B = 0;
+            g_Task->param.unk_0B = 0;
         }
     }
 }
@@ -60,17 +60,17 @@ MATCH void func_801EF008(void) {
         return;
     }
     func_801EF0F8(g_Task->unk_64);
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         offset         = g_Task->unk_64 + 8;
         g_Task->unk_64 = offset;
         if (offset >= 0x80) {
-            g_Task->unk_0B = 1;
+            g_Task->param.unk_0B = 1;
         }
     } else {
         offset         = g_Task->unk_64 - 8;
         g_Task->unk_64 = offset;
         if (offset < -0x7F) {
-            g_Task->unk_0B = 0;
+            g_Task->param.unk_0B = 0;
         }
     }
 }

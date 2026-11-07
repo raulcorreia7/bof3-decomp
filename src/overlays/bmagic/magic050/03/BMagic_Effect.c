@@ -71,7 +71,7 @@ MATCH void func_801EF138(void) {
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->param.unk_0B--;
         func_801E5988();
     }
 }

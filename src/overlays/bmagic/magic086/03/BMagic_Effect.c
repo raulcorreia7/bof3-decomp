@@ -12,7 +12,7 @@ MATCH void func_801EEE44(void) {
     PartyBattler* battler;
 
     battler = g_BattleSelectedActor;
-    if (g_Task->unk_0B == 1) {
+    if (g_Task->param.unk_0B == 1) {
         GFX_FreePaletteFadeTarget(battler);
         g_Task->timer  = GFX_AllocPaletteFade(battler, 1, 1, 1, 0);
         g_Task->unk_09 = 0x10;
@@ -26,7 +26,7 @@ MATCH void func_801EEFF0(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->unk_0B == 2) {
+    if (work->param.unk_0B == 2) {
         work->header.mode = (work->header.mode + 1);
     }
 }
@@ -63,7 +63,7 @@ MATCH void func_801EF3A0(void) {
     PartyBattler* work;
 
     active = BATTLE_ACTIVE_WORK;
-    if (active->unk_0B == 2) {
+    if (active->param.unk_0B == 2) {
         work              = g_Task;
         work->header.step = work->header.step + 1;
     }
@@ -94,13 +94,13 @@ MATCH void func_801EF70C(void) {
 
 /* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
 MATCH void func_801EF7D4(void) {
-    u8 temp_v0;
+    u8 count;
 
     g_Task->timer += 1;
-    temp_v0        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & 0xFF) == 0x18) {
-        D_801EB4E0->unk_0B = 1;
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x18) {
+        D_801EB4E0->param.unk_0B = 1;
         g_Task->header.step += 1;
     }
 }
@@ -121,23 +121,23 @@ MATCH void func_801EF8EC(void) {
     g_Task->unk_09 -= 1;
     g_Task->timer -= 1;
     if (g_Task->unk_09 == 0x10) {
-        D_801EB4E0->unk_0B = 2;
+        D_801EB4E0->param.unk_0B = 2;
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF974(void) {
-    u8 temp_v0;
-    u8 temp_v0_2;
+    u8 count;
+    u8 timer_next;
 
-    temp_v0 = g_Task->unk_09;
-    if (temp_v0 != 0) {
-        g_Task->unk_09 = temp_v0 - 1;
+    count = g_Task->unk_09;
+    if (count != 0) {
+        g_Task->unk_09 = count - 1;
     }
-    temp_v0_2     = g_Task->timer - 1;
-    g_Task->timer = temp_v0_2;
-    if (!(temp_v0_2 & 0xFF)) {
-        D_801EB4E0->unk_0B = 0xFF;
+    timer_next    = g_Task->timer - 1;
+    g_Task->timer = timer_next;
+    if (!(timer_next & BYTE_MASK)) {
+        D_801EB4E0->param.unk_0B = 0xFF;
         func_801E5988();
     }
 }

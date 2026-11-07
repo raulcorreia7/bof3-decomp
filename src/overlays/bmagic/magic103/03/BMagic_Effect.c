@@ -52,14 +52,14 @@ MATCH void func_801EEFF4(void) {
 }
 
 MATCH void func_801EF094(void) {
-    u8 temp_v0;
+    u8 count;
 
     SP_REF(s16, 0u) = (g_Task->unk_09 * 4) + 0xC0;
     g_Task->timer += 1;
-    temp_v0        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & 0xFF) == 0x28) {
-        D_801EB4E0->unk_0B -= 1;
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x28) {
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -85,9 +85,9 @@ MATCH void func_801EFB88(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         work              = g_Task;
-        work->pos.x.fixed = g_BattleSelectedActor->pos.x.fixed + D_801F07AC[work->unk_0B].x;
-        work->pos.y.fixed = g_BattleSelectedActor->pos.y.fixed + D_801F07AC[work->unk_0B].y;
-        work->pos.z.fixed = g_BattleSelectedActor->pos.z.fixed + D_801F07AC[work->unk_0B].z;
+        work->pos.x.fixed = g_BattleSelectedActor->pos.x.fixed + D_801F07AC[work->param.unk_0B].x;
+        work->pos.y.fixed = g_BattleSelectedActor->pos.y.fixed + D_801F07AC[work->param.unk_0B].y;
+        work->pos.z.fixed = g_BattleSelectedActor->pos.z.fixed + D_801F07AC[work->param.unk_0B].z;
         work->unk_09      = 0;
         g_Task->timer     = 0;
         g_Task->header.step += 1;
@@ -133,7 +133,7 @@ MATCH void func_801EFD74(void) {
     counter       = g_Task->timer - 1;
     g_Task->timer = counter;
     if (!(counter & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

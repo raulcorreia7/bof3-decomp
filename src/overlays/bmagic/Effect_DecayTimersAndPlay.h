@@ -4,12 +4,12 @@
  * must verify every member. */
 /* func_801EEEA8 (magic055), func_801EEEA8 (magic091) */
 MATCH void Effect_DecayTimersAndPlay(void) {
-    if (g_Task->unk_0B < 4u) {
+    if (g_Task->param.unk_0B < 4u) {
         if (g_Task->unk_09 != 0) {
             g_Task->unk_09--;
         }
     }
-    if (g_Task->unk_0B < 3u) {
+    if (g_Task->param.unk_0B < 3u) {
         if (g_Task->timer != 0) {
             g_Task->timer--;
         }

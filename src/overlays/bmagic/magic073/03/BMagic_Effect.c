@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED18);
 MATCH void func_801EEF50(void) {
     u16* flags;
 
-    if (g_Task->unk_0B == 0 && func_801F04A4() == 0) {
+    if (g_Task->param.unk_0B == 0 && func_801F04A4() == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }
@@ -39,8 +39,8 @@ INCLUDE_ASM(func_801EF3D4);
 INCLUDE_ASM(func_801EF52C);
 
 MATCH void func_801EF6B8(void) {
-    if (g_Task->unk_0B == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B -= 1;
+    if (g_Task->param.unk_0B == 0) {
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_800A9820(g_Task->unk_04);
         func_801E5988();
     }

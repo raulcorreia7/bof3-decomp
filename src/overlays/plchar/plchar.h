@@ -48,7 +48,7 @@
         g_Task->unk_09--;                                                             \
         if (g_Task->unk_09 == 0) {                                                    \
             g_Task->unk_09       = 2;                                                 \
-            g_Task->direction_08 = g_Task->direction_08 + g_Task->param.unk_0B;       \
+            g_Task->direction_08 = g_Task->direction_08 + g_Task->param.turn_step;    \
             g_Task->direction_08 &= 7;                                                \
             Actor_RequestScript(g_Task->direction_08);                                \
         }                                                                             \
@@ -62,11 +62,11 @@
  * verify every member image. */
 #define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                            \
     if (abs(g_Task->direction_08 - FACING_BACK) > abs(g_Task->direction_08 - FACING_AWAY)) { \
-        g_Task->param.unk_0B = Actor_GetTurnStep(FACING_AWAY);                               \
-        g_Task->unk_03       = FACING_AWAY;                                                  \
+        g_Task->param.turn_step = Actor_GetTurnStep(FACING_AWAY);                            \
+        g_Task->unk_03          = FACING_AWAY;                                               \
     } else {                                                                                 \
-        g_Task->param.unk_0B = Actor_GetTurnStep(FACING_BACK);                               \
-        g_Task->unk_03       = FACING_BACK;                                                  \
+        g_Task->param.turn_step = Actor_GetTurnStep(FACING_BACK);                            \
+        g_Task->unk_03          = FACING_BACK;                                               \
     }                                                                                        \
     g_Task->unk_09 = 2;                                                                      \
     g_Task->header.step++

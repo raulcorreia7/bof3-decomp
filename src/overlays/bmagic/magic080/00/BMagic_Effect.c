@@ -16,20 +16,20 @@ INCLUDE_ASM(func_801EEC5C);
 /* The two handlers read the variant byte already loaded in a0, so the calls pass no argument: a
  * call with an argument adds a zero-extension the retail code folds away. */
 MATCH void func_801EECE4(void) {
-    u8 temp_a0;
-    u8 temp_v0;
+    u8 ticks;
+    u8 count;
 
     func_800AF764();
-    temp_a0 = g_Task->unk_0B;
+    ticks = g_Task->param.unk_0B;
     g_Task->unk_2E.half -= 0x24;
-    if (temp_a0 != 0) {
+    if (ticks != 0) {
         func_801EEF5C();
     } else {
         func_801EED94();
     }
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();

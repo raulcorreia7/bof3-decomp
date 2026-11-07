@@ -17,7 +17,7 @@ MATCH void func_801EEED8(void) {
     g_Task     = D_801EB4E0;
     func_8014D978();
     g_Task = saved_work;
-    if (saved_work->unk_0B == 0) {
+    if (saved_work->param.unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();

@@ -32,8 +32,8 @@ MATCH void func_801EF4F0(void) {
     timer        = work->unk_5D - 1;
     work->unk_5D = timer;
     if (timer == 0) {
-        work         = D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+        work               = D_801EB4E0;
+        work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }
 }
@@ -56,14 +56,14 @@ MATCH void func_801F00D4(void) {
     if (!(value3 & 0xFF)) {
         g_Task->unk_14      = 0x40000;
         g_Task->unk_20      = 0x20000;
-        value2              = (rand() & 0xF) + 0x1C;
-        value               = (g_Task->unk_0B & 0x1F) << 7;
+        value2              = RANDOM_MASK(0xF) + 0x1C;
+        value               = (g_Task->param.unk_0B & 0x1F) << 7;
         g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed + (rsin(value) * value2);
         g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed + (rcos(value) * value2);
         g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
-        g_Task->unk_5D      = (rand() & 7) + 5;
-        g_Task->unk_5E      = (rand() & 7) + 5;
-        g_Task->unk_5F      = (rand() & 7) + 5;
+        g_Task->unk_5D      = RANDOM_MASK(7) + 5;
+        g_Task->unk_5E      = RANDOM_MASK(7) + 5;
+        g_Task->unk_5F      = RANDOM_MASK(7) + 5;
         g_Task->unk_09      = 0x10;
         g_Task->timer       = 0x10;
         g_Task->header.step += 1;
@@ -90,7 +90,7 @@ MATCH void func_801F029C(void) {
     work->unk_14        = value;
     work->pos.z.fixed += value;
     if (timer == 0) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         Actor_Clear();
     }
 }

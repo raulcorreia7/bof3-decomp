@@ -27,7 +27,7 @@ MATCH void func_801EEC5C(void) {
     FIELD(s32, D_801EC368, offset)           = g_AreaScrollTargetY;
     FIELD(s32, D_801EC36C, offset)           = work->pos.z.fixed + 0x04000000;
     SND_QueueSelectionFx(0x100);
-    g_Task->unk_0B = 0;
+    g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
 }
 
@@ -50,9 +50,9 @@ MATCH void func_801EEDA0(void) {
 }
 
 MATCH void func_801EEE50(void) {
-    g_Task->unk_0B = 0;
-    g_Task->unk_09 = 0;
-    g_Task->timer  = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0;
     g_Task->header.mode++;
 }
 
@@ -72,8 +72,8 @@ MATCH void func_801EEF5C(void) {
     g_Task->unk_09 = g_Task->unk_09 + 1;
     g_Task->timer  = g_Task->timer - 1;
     if (g_Task->timer == 0) {
-        active         = BATTLE_ACTIVE_WORK;
-        active->unk_0B = 255;
+        active               = BATTLE_ACTIVE_WORK;
+        active->param.unk_0B = 255;
         func_801E5988();
     }
 }
