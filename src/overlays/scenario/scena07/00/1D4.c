@@ -95,13 +95,7 @@ INCLUDE_ASM(func_801F70F8);
 INCLUDE_ASM(func_801F71C0);
 
 MATCH void func_801F724C(void) {
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
-    D_800E4C1E += 6;
-    if (--g_Task->timer == 0) {
-        g_Task->timer = 0x20;
-        g_Task->header.step++;
-    }
+    SCENA07_PANEL_BRIGHTEN_STEP();
 }
 
 MATCH void func_801F72E0(void) {
@@ -221,7 +215,9 @@ MATCH void func_801F7EF8(void) {
 
 INCLUDE_ASM(func_801F7FA4);
 
-INCLUDE_ASM(func_801F805C);
+MATCH void func_801F805C(void) {
+    SCENA07_PANEL_BRIGHTEN_STEP();
+}
 
 MATCH void func_801F80F0(void) {
     SCENA07_PANEL_FADE_STEP();
