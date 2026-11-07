@@ -1,20 +1,21 @@
 #include "area068_13.h"
 
-MATCH void func_801F3304(void) {
+/* func_801F3304 */
+MATCH void Well_StepSwish(void) {
     Actor* work;
 
-    if (++D_801F4E10 >= 8) {
+    if (++g_WellSwishStep >= WELL_SWISH_STEPS) {
         work        = g_Task;
         g_GameState = (GameState*)g_BattlePartyBattlers;
         TASK_SET(g_BattlePartyBattlers);
         D_80145EC8 &= 0xFFFFF000;
         D_80145EC4 &= 0xFFFFF000;
         g_Task            = work;
-        work->header.mode = 0xF;
-        D_801F4E04        = 0;
-        D_801F4E10        = 0;
+        work->header.mode = WELL_MODE_RAISE_BEGIN;
+        g_WellPressCount  = 0;
+        g_WellSwishStep   = 0;
     } else {
-        switch (D_801F4E14) {
+        switch (g_WellSwishButtons) {
             case 0x1000:
             case 0x3000:
                 work        = g_Task;
@@ -48,6 +49,6 @@ MATCH void func_801F3304(void) {
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = 0xB;
+        g_Task->header.mode = WELL_MODE_SWISH_INPUT;
     }
 }
