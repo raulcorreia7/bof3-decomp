@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-/* The header spells g_MenuPanelTasks[21].x a plain s16; this unit keeps the volatile
+/* The header spells g_MenuPanelTasks[MENU_START_PANEL_CURSOR].x a plain s16; this unit keeps the volatile
  * qualifier because the two adjacent halfword stores then keep the retail's
  * order and its measured bytes (58.33% against 57.74% without it). */
 extern volatile s16 D_80148628;
@@ -19,17 +19,18 @@ NON_MATCHING void func_801D7314(void) {
     u8  tmp5;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[16].unk_08 = 0;
-    tmp1                        = *(&D_801EC488 + ((s8)D_801ED648 * 4));
-    g_MenuPanelTasks[21].active = 1;
-    tmp0                        = (u16)g_MenuPanelTasks[12].pos.y + 4;
-    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[12].pos.x + ((s8)D_801ED648 * 0x30);
-    g_MenuPanelTasks[21].pos.y  = tmp0;
-    g_MenuPanelTasks[12].unk_0B = 0xFF;
-    g_MenuPanelTasks[11].unk_10 = (s16)tmp1;
-    tmp2                        = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
-    tmp3                        = D_801ED648;
-    tmp4                        = tmp3 - 1;
+    g_MenuPanelTasks[16].unk_08                      = 0;
+    tmp1                                             = *(&D_801EC488 + ((s8)D_801ED648 * 4));
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    tmp0                                             = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x =
+        (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + ((s8)D_801ED648 * 0x30);
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y       = tmp0;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B    = 0xFF;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = (s16)tmp1;
+    tmp2 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    tmp3 = D_801ED648;
+    tmp4 = tmp3 - 1;
     if (tmp2 & PADLleft) {
         D_801ED648 = tmp4;
         val0       = tmp2 & PADLright;
@@ -54,7 +55,7 @@ NON_MATCHING void func_801D7314(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
-        g_MenuPanelTasks[12].unk_0B = D_801ED648;
+        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED648;
         SND_PlayCue(EMI_CUE_ID(1, 4));
         switch ((s8)D_801ED648) { /* irregular */
             case 1:
@@ -77,11 +78,11 @@ NON_MATCHING void func_801D7314(void) {
     } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        g_MenuPanelTasks[11].state  = 1;
-        g_MenuPanelTasks[12].state  = 1;
-        g_BattleChoicePhase         = 1;
-        g_MenuPanelTasks[21].active = 0;
-        D_80148654                  = 5;
+        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
+        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
+        g_BattleChoicePhase                                  = 1;
+        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
+        D_80148654                                           = 5;
         D_80148651 += 6;
     }
 }

@@ -15,17 +15,17 @@ MATCH void func_801D7E4C(void) {
 
     u8* flag;
     Menu_DrawClutStrip(D_80144953);
-    state = g_MenuPanelTasks[13].state;
+    state = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].state;
     flag  = &D_80148624;
     latch = flag - 0x48;
     *flag = 0;
     if (state == 0) {
-        x                           = g_MenuPanelTasks[13].pos.x;
-        y                           = D_80148658[0] * 0x36;
-        *latch                      = 1;
-        g_MenuPanelTasks[19].unk_0B = 1;
-        D_801485E0                  = x;
-        D_801485E2                  = g_MenuPanelTasks[13].pos.y + y;
+        x                                                      = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x;
+        y                                                      = D_80148658[0] * 0x36;
+        *latch                                                 = 1;
+        g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
+        D_801485E0                                             = x;
+        D_801485E2                                             = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + y;
     } else {
         *latch = 0;
     }
@@ -51,7 +51,7 @@ MATCH void func_801D7E4C(void) {
     TEXT_SetVariable(0, 0xC,
                      (const u8*)&g_Abilities[Party_GetAbilities(
                          g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0)[g_MenuPanelTasks[16].unk_0C]]);
-    g_MenuPanelTasks[11].unk_10 = 0x30;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x30;
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         /* D_8014857A stays its own symbol: a g_MenuPanelTasks[16] view shifts the base registers */
         result = func_801E7D20(
