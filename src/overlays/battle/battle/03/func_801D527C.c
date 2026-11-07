@@ -18,7 +18,7 @@ MATCH bool func_801D527C(void) {
                 g_BattlePartyBattlers[slot].counter_136       = 0;
                 g_BattlePartyBattlers[slot].unk_04            = 0;
                 g_BattlePartyBattlers[slot].unk_03            = 0;
-                g_BattlePartyBattlers[slot].turn.action_flags.value &= ~0x4000;
+                g_BattlePartyBattlers[slot].turn.action_flags.value &= ~COMBATANT_FLAG_CHARGING;
                 g_BattlePartyBattlers[slot].turn.hp_change = g_BattlePartyBattlers[slot].chr.hp;
                 Battle_SetSlotPending(slot);
             }

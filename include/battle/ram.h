@@ -255,5 +255,7 @@ extern PartyBattler* D_801EB4E0;
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
+/* Enemy battler work record (stride 0x118, indexed by slot - 3). */
+extern EnemyBattler  g_BattleEnemyBattlers[];
 
 #endif

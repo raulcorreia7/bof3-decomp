@@ -36,7 +36,7 @@ NON_MATCHING void func_801D1E8C(void) {
         temp_v0_66              = &g_BattlePartyBattlers[D_801462F6[temp_v0_50]];
         g_BattleMessageSlot     = &temp_v0_66->header.flags;
         temp_v0_66->header.mode = 2;
-        temp_v0_66->turn.action_flags.value &= ~4;
+        temp_v0_66->turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
         if (FIELD(u8, g_BattleMessageSlot, 0x119u) == 5) {
             temp_v1_80 = FIELD(s32, g_BattleMessageSlot, 0x124u);
             if (!(temp_v1_80 & 0x4000)) {
@@ -51,7 +51,8 @@ NON_MATCHING void func_801D1E8C(void) {
         return;
     }
     if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad) {
-        if (((u32)(g_BattlePanelSlot - 2) < 2U) && (D_801EB4D8->action_flags.value & 2)) {
+        if (((u32)(g_BattlePanelSlot - 2) < 2U) &&
+            (g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }
@@ -93,7 +94,8 @@ NON_MATCHING void func_801D1E8C(void) {
                 SND_PlayCue(EMI_CUE_ID(1, 1));
                 if (*(u8*)(&g_BattlePanelEntry) == (var_s1 + 1)) {
                     if (*(u8*)((u8*)(&g_BattlePanelEntry) + -1) != 0) {
-                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(D_801EB4D8->action_flags.value & 2)) {
+                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) ||
+                            !(g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
                             temp_a0_239                                    = var_s0 + 1;
                             FIELD(s8, (&D_8014837B), 0x24u)                = 2;
                             *(u8*)(&D_8014837B)                            = 2;

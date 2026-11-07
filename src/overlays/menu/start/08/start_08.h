@@ -322,6 +322,7 @@ extern s8       g_MenuStartTimer;
 extern u8       D_801ED7F4;
 extern u8       D_801ED7F8;
 /* D_801ED860 */
+extern u8       g_MenuStartReturnStep;
 extern u8       g_MenuStartStep;
 extern u8       D_801ED864;
 extern u8       D_801ED868;
@@ -336,6 +337,14 @@ extern u8       s_SkillOrderGroups[4][6];
 extern u8       s_SkillOrderKinds[3][6];
 extern Callback g_MenuCampSubFuncs[5];
 extern Callback g_MenuCampFuncs[5];
+
+/* The name entry command labels, the grid's dot string and the control window's sprite table. */
+/* D_801ED1B8 */
+extern u8* g_NameEntryCommandLabels[];
+/* D_801ED1D4 */
+extern u8* g_NameEntryGridDot;
+/* D_801ED05C */
+extern u8  g_NameEntryControlsFrame[];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
@@ -461,7 +470,8 @@ void        SAVE_RunLoadRestore(void);
 void        Camp_EnterMainLoop(void);
 extern void func_801E6388(s32 overlay_x, s32 overlay_y);
 extern void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
-extern s32  func_801E6784(u8 page, s32 x, s32 y);
+/* func_801E6784 */
+extern s32  Start_DrawNameEntryControls(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
 extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
@@ -616,6 +626,7 @@ void             func_801D9664(void);
 void             func_801D96D4(void);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
 s32              func_801DAE14(u16);
+void             Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void             func_801DE5D4(u8, u16, u16, s32, s32, MenuPanelTask*);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);
 void             func_801E6D88(s32 prompt_x);
@@ -666,6 +677,10 @@ extern s8        D_801ED678;
 extern s8        D_801ED67C;
 extern u8        D_801ED69C;
 extern s32       D_801ED878;
+extern u8        D_801ED7FC;
+extern s8        D_801ED66C;
+extern u8        D_801ED105;
+extern u8        D_801485B8;
 void             func_801EA1F0(MenuPanelTask* task);
 
 /* Pick the party record the record index selects: record 0 is the saved

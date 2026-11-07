@@ -232,7 +232,7 @@ typedef union BattlerFlags {
 
 /* One battler's turn: the command it queued, the HP and AP the hit deals, the
  * target state bits and counter, and the damage and action flag words. Both
- * battler records embed it as `turn`; D_801EB4D8 and g_BattleTargetRecord
+ * battler records embed it as `turn`; g_BattleActorTurn and g_BattleTargetRecord
  * point at it. */
 typedef struct BattleTurn {
     BattleCommandSlot command;
@@ -560,13 +560,17 @@ ASSERT_OFFSET(PartyBattler, character_index, 0x13C);
  * marks a damage row present; bit 12 skips the action gate; bit 15 counters;
  * bit 16 zeroes damage and the HP-bar numerator. */
 typedef enum BattleBattlerDamageFlags {
-    COMBATANT_FLAG_DAMAGED            = 1 << 6,
-    COMBATANT_FLAG_DAMAGE_NUMBER      = 1 << 7,
-    COMBATANT_FLAG_HURT_REACTION      = 1 << 8,
-    COMBATANT_FLAG_DAMAGE_ROW_PRESENT = 1 << 9,
-    COMBATANT_FLAG_SKIP_ACTION_STEP   = 1 << 12,
-    COMBATANT_FLAG_REPRISAL           = 1 << 15,
-    COMBATANT_FLAG_DAMAGE_IMMUNE      = 1 << 16,
+    COMBATANT_FLAG_COMMAND_ENTERED     = 1 << 0,
+    COMBATANT_FLAG_DEFENDING           = 1 << 1,
+    COMBATANT_FLAG_WILLPOWER_SURVIVED  = 1 << 2,
+    COMBATANT_FLAG_DAMAGED             = 1 << 6,
+    COMBATANT_FLAG_DAMAGE_NUMBER       = 1 << 7,
+    COMBATANT_FLAG_HURT_REACTION       = 1 << 8,
+    COMBATANT_FLAG_DAMAGE_ROW_PRESENT  = 1 << 9,
+    COMBATANT_FLAG_SKIP_ACTION_STEP    = 1 << 12,
+    COMBATANT_FLAG_FORM_EFFECT_PLAYING = 1 << 13,
+    COMBATANT_FLAG_REPRISAL            = 1 << 15,
+    COMBATANT_FLAG_DAMAGE_IMMUNE       = 1 << 16,
 } BattleBattlerDamageFlags;
 
 /* The action/pending word: `action_flags` of the enemy row, `action_flags` of the
@@ -575,15 +579,23 @@ typedef enum BattleBattlerDamageFlags {
  * boost; bit 9 halves the damage; bits 11 and 13 zero the holy and fire
  * resistance; bit 14 charges the action; bit 15 marks a preemptive turn. */
 typedef enum BattleBattlerActionFlags {
-    COMBATANT_FLAG_MODE_HANDLER_ACTION = 1 << 3,
-    COMBATANT_FLAG_SUPPRESSION_EXEMPT  = 1 << 4,
-    COMBATANT_FLAG_POWER_BOOST         = 1 << 6,
-    COMBATANT_FLAG_DAMAGE_HALVED       = 1 << 9,
-    COMBATANT_FLAG_HOLY_RESIST_ZERO    = 1 << 11,
-    COMBATANT_FLAG_SELECTION_BONUS     = 1 << 12,
-    COMBATANT_FLAG_FIRE_RESIST_ZERO    = 1 << 13,
-    COMBATANT_FLAG_CHARGING            = 1 << 14,
-    COMBATANT_FLAG_PREEMPTIVE_TURN     = 1 << 15,
+    COMBATANT_FLAG_DRAGON_FORM_QUEUED        = 1 << 0,
+    COMBATANT_FLAG_DRAGON_FORM               = 1 << 1,
+    COMBATANT_FLAG_ABILITY_ALT_POSE          = 1 << 2,
+    COMBATANT_FLAG_MODE_HANDLER_ACTION       = 1 << 3,
+    COMBATANT_FLAG_SUPPRESSION_EXEMPT        = 1 << 4,
+    COMBATANT_FLAG_POWER_BOOST               = 1 << 6,
+    COMBATANT_FLAG_MEDITATION                = 1 << 7,
+    COMBATANT_FLAG_ALWAYS_HITS               = 1 << 8,
+    COMBATANT_FLAG_SELECT_EXCLUDED           = 1 << 10,
+    COMBATANT_FLAG_DAMAGE_HALVED             = 1 << 9,
+    COMBATANT_FLAG_HOLY_RESIST_ZERO          = 1 << 11,
+    COMBATANT_FLAG_SELECTION_BONUS           = 1 << 12,
+    COMBATANT_FLAG_FIRE_RESIST_ZERO          = 1 << 13,
+    COMBATANT_FLAG_CHARGING                  = 1 << 14,
+    COMBATANT_FLAG_PREEMPTIVE_TURN           = 1 << 15,
+    COMBATANT_FLAG_DRAGON_FORM_CURSOR_LOCKED = 1 << 17,
+    COMBATANT_FLAG_SELECTED                  = 1 << 18,
 } BattleBattlerActionFlags;
 
 /* The three mode work records; g_GameState points at the current one. */

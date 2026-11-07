@@ -1,7 +1,6 @@
 #include "start_08.h"
 
 /* Start-overlay state bytes and the prompt bank this unit walks. */
-extern u8 D_801ED105;
 
 extern void Menu_DrawPortrait(u16 overlay_x, u16 overlay_y, u8 sprite_id, u8 shade);
 
