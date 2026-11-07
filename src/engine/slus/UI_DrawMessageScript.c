@@ -74,7 +74,7 @@ MATCH void UI_DrawMessageScript(void) {
                     flags |= 1;
                     saved = p;
                     count = 6;
-                    p     = (u8*)&D_80144967 + g_CharSlot[D_80145F09] * 0xA4;
+                    p     = (u8*)&D_80144967 + g_CharSlot[g_BattlePartyBattlers[0].chr.character_id] * 0xA4;
                     break;
                 case STRING_INSERT:
                     flags |= 1;
