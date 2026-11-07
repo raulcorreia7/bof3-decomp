@@ -144,7 +144,6 @@ MATCH void func_801F0294(void) {
     }
 }
 
-
 MATCH void func_801F0330(void) {
     g_Task->scale.x = 0x10000;
     g_Task->scale.y = 0x10000;

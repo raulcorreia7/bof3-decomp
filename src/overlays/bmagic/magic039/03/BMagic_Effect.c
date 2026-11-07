@@ -42,7 +42,6 @@ MATCH void func_801EEFA8(void) {
     }
 }
 
-
 MATCH void func_801EF070(void) {
     PartyBattler* src;
 

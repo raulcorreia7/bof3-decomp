@@ -47,7 +47,6 @@ MATCH void func_801EF910(void) {
     }
 }
 
-
 #include "overlays/bmagic/Effect_SetDuration.h"
 
 /* blocker: branch over the g_BattleActionId < 0x85 test; first diff: 0x801EFA18. */

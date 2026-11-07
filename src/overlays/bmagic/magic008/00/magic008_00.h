@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BattleHandlerTable4 D_801EEC04;
-extern BMagicEffectFuncs D_801EEC58;
+extern BMagicEffectFuncs   D_801EEC58;
 
 extern BattleHandlerTable3 D_801EEC14;
 extern BattleHandlerTable4 D_801EEC20;
