@@ -20,7 +20,7 @@ MATCH s32 func_801C520C(void) {
     sumY    = FIELD(s32, route, 0x38u) + (g_FacingStepY[index] * step);
     targetY = sumY;
     if (FIELD(s16, route, 0x3Eu) < Area_ReadHeight(sumX, sumY)) {
-        COORD_INT(g_Task->pos.z) = (s16)((u16)COORD_INT(g_Task->pos.z) + D_80181B88[g_GameState->slot_index_79]);
+        COORD_INT(g_Task->pos.z) = (s16)((u16)COORD_INT(g_Task->pos.z) + D_80181B88[g_GameState->leader_id]);
     } else {
         COORD_INT(g_Task->pos.z) = Area_ReadHeight(targetX, targetY);
         transitionId             = 0x3F;
