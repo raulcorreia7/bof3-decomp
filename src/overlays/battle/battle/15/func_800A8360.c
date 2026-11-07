@@ -1,5 +1,6 @@
 #include "battle_15.h"
 
+/* D_8014857x stay address views here: a g_MenuPanelTasks[16] view changes the register allocation. */
 MATCH void func_800A8360(void) {
     volatile u8* work;
     volatile u8* work_base;
