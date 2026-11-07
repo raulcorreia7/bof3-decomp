@@ -40,8 +40,8 @@ NON_MATCHING void func_8009704C(void) {
     }
     sel        = (BattleSelectionScratch*)((u8*)&g_BattleChoicePhase - 3);
     D_801485DC = 1u;
-    D_801485E0 = D_80148574 + 7u;
-    D_801485E2 = D_80148576 + ((D_8014857C - D_80148580) * 13 + 0x1A);
+    D_801485E0 = g_MenuPanelTasks[16].pos.x + 7u;
+    D_801485E2 = g_MenuPanelTasks[16].pos.y + ((D_8014857C - D_80148580) * 13 + 0x1A);
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value &
          (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {

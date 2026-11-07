@@ -39,6 +39,7 @@ MATCH void func_8009B03C(void) {
     /* FAKE: block boundary keeps the second store base-relative off the pinned base. */
     ORDER_FENCE();
     *latch             = one;
+    /* D_80148574 and D_80148576 stay address symbols here: a g_MenuPanelTasks[16] view changes the code. */
     saved_x            = D_80148574;
     D_80148597         = one;
     saved_y            = D_80148576;

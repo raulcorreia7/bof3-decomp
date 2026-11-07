@@ -8,6 +8,7 @@ MATCH void func_8009A518(void) {
     mode                   = 2;
     g_BattleSelectionLatch = 0;
     g_BattleChoicePhase    = mode;
+    /* D_80148574 stays an address symbol here: a g_MenuPanelTasks[16] view changes the code. */
     D_80148574             = -200;
     g_BattleStep           = 4;
     g_BattleSubStep        = mode;

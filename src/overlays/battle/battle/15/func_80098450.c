@@ -24,8 +24,8 @@ MATCH void func_80098450(void) {
     g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value &= 0xBFFFu;
     if (*phase == 0u) {
         D_801485DC = 1u;
-        D_801485E0 = (D_80148574 + 7);
-        D_801485E2 = (D_80148576 + ((D_8014857C - D_8014857B) * 0xD + 0x1A));
+        D_801485E0 = (g_MenuPanelTasks[16].pos.x + 7);
+        D_801485E2 = (g_MenuPanelTasks[16].pos.y + ((D_8014857C - D_8014857B) * 0xD + 0x1A));
     }
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
@@ -97,8 +97,8 @@ MATCH void func_80098450(void) {
         g_BattleUIStep = 6u;
         D_8014862E     = 0u;
         D_801483C0     = 0u;
-        D_80148628     = (D_80148574 + 0x20);
-        D_8014862A     = (D_80148576 - 0x16);
+        D_80148628     = (g_MenuPanelTasks[16].pos.x + 0x20);
+        D_8014862A     = (g_MenuPanelTasks[16].pos.y - 0x16);
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {

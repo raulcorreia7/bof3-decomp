@@ -18,6 +18,7 @@ MATCH void func_800A8360(void) {
         g_BattleChoicePhase = 2u;
         D_8014857D          = 0xFFu;
     ORDER_LOCK_END;
+    /* D_80148574 and D_80148576 stay address symbols here: a g_MenuPanelTasks[16] view changes the code. */
     D_80148574 = -0xAA;
     D_80148571 = eight;
     D_8014857A = 0u;
