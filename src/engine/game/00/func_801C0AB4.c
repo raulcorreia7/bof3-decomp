@@ -37,7 +37,7 @@ MATCH void func_801C0AB4(void) {
                         D_80145E93[off] = 0;
                         D_80145E94[off] = 0;
                         ((u8*)g_Game.members)[off + 0x12C] &= 0xFD;
-                        g_AreaWalkFlags &= ~(AREA_WALK_BUSY(*count));
+                        g_AreaWalkFlags &= ~(BIT(*count));
                     }
                     off += BATTLE_PARTY_STRIDE;
                     index += 1;

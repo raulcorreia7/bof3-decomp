@@ -14,8 +14,8 @@ MATCH void Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value) {
     do {
         if (g_UiFormatBuffer[i] != ' ') {
             g_UiFormatBuffer[i] -= '0';
-            prim       = (SPRT*)g_GfxPrimCursor;
-            prim->clut = GetClut(palette * 16, STAGE_PALETTE_Y);
+            prim = (SPRT*)g_GfxPrimCursor;
+            setClut(prim, palette * 16, STAGE_PALETTE_Y);
             setRGB0(prim, 128, 128, 128);
             setXY0(prim, x, y);
             setUV0(prim, (g_UiFormatBuffer[i] * 8) - 80, 208);

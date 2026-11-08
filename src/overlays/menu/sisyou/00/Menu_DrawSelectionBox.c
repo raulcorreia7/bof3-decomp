@@ -1,6 +1,6 @@
 #include "sisyou_00.h"
 
-MATCH void MenuDrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u8 mask) {
+MATCH void Menu_DrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u8 mask) {
     LINE_F3* line3;
     LINE_F4* line4;
     u8       rgb[3];

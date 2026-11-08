@@ -328,9 +328,7 @@ MATCH void func_801F318C(s16 radius) {
     Area_ProjectPoint(pos, &point);
 
     do {
-        primitive = (POLY_G3*)g_GfxPrimCursor;
-        SetPolyG3(primitive);
-        SetSemiTrans(primitive, 1);
+        primitive = GFX_BeginPolyG3(1);
         setXY2(primitive, (u16)center.vx, (u16)center.vy, (u16)point.vx, (u16)point.vy);
 
         angle += 128;

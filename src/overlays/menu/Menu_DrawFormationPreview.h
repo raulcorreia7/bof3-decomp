@@ -64,12 +64,12 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
     /* The arrow brightens toward the front. */
     poly = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(poly);
-    poly->x0 = x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[0][0];
-    poly->y0 = y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[0][1];
-    poly->x1 = x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[1][0];
-    poly->y1 = y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[1][1];
-    poly->x2 = x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[2][0];
-    poly->y2 = y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[2][1];
+    setXY3(poly, x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[0][0],
+           y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[0][1],
+           x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[1][0],
+           y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[1][1],
+           x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[2][0],
+           y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[2][1]);
     poly->r0 = poly->g0 = g_MenuFormationArrowTurned[0][1] * 8 - 97;
     poly->b0            = 0;
     poly->r1 = poly->g1 = g_MenuFormationArrowTurned[1][1] * 8 - 97;

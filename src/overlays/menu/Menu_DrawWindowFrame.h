@@ -21,7 +21,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setXY0(sprite, x + 16, y);
     setUV0(sprite, 0, 0);
     setWH(sprite, (width - 4) * 8, 8);
-    sprite->clut = GetClut(176, STAGE_PALETTE_Y + 1);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 128, 128, 128);
     GFX_AddPrim(1, sizeof(SPRT));
 
@@ -37,7 +37,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setXY0(sprite, x + 16, y + (height - 1) * 8);
     setUV0(sprite, 0, 0);
     setWH(sprite, (width - 4) * 8, 8);
-    sprite->clut = GetClut(176, STAGE_PALETTE_Y + 1);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 128, 128, 128);
     GFX_AddPrim(1, sizeof(SPRT));
 
@@ -53,7 +53,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setXY0(sprite, x, y + 16);
     setUV0(sprite, 0, 0);
     setWH(sprite, 8, (height - 4) * 8);
-    sprite->clut = GetClut(176, STAGE_PALETTE_Y + 1);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 128, 128, 128);
     GFX_AddPrim(1, sizeof(SPRT));
 
@@ -69,7 +69,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setXY0(sprite, x + (width - 1) * 8, y + 16);
     setUV0(sprite, 0, 0);
     setWH(sprite, 8, (height - 4) * 8);
-    sprite->clut = GetClut(176, STAGE_PALETTE_Y + 1);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 128, 128, 128);
     GFX_AddPrim(1, sizeof(SPRT));
 
@@ -85,7 +85,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setXY0(sprite, x + 8, y + 8);
     setUV0(sprite, 0, 0);
     setWH(sprite, (width - 2) * 8, (height - 2) * 8);
-    sprite->clut = GetClut(176, STAGE_PALETTE_Y + 1);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 128, 128, 128);
     GFX_AddPrim(1, sizeof(SPRT));
 

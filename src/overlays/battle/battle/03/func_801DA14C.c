@@ -28,8 +28,8 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     *(volatile u16*)&primitive->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     palette_index &= BYTE_MASK;
     /* FAKE: retail reads g_WindowStyle as s8. */
-    primitive->clut = GetClut((((*(s8*)&g_WindowStyle) * 2) + palette_index) * 16, STAGE_PALETTE_Y + 1);
-    start_x         = x;
+    setClut(primitive, (((*(s8*)&g_WindowStyle) * 2) + palette_index) * 16, STAGE_PALETTE_Y + 1);
+    start_x = x;
     setRGB0(primitive, 0x80, 0x80, 0x80);
     start_y = y;
     x += 4;

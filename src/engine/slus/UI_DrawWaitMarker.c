@@ -11,7 +11,7 @@ MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
         GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
         prim = (SPRT*)g_GfxPrimCursor;
         SetSprt(prim);
-        prim->clut = GetClut(192, STAGE_PALETTE_Y);
+        setClut(prim, 192, STAGE_PALETTE_Y);
         setRGB0(prim, 128, 128, 128);
         setWH(prim, 8, 8);
         setXY0(prim, x, y);

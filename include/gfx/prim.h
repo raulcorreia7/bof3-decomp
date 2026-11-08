@@ -86,4 +86,20 @@ static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     return sprt;
 }
 
+/* Begin a poly on the shared cursor, with semi-transparency `semi_trans`, and return it. The caller sets its
+ * points, colours and texture, then queues it with GFX_AddPrim. */
+static inline POLY_G3* GFX_BeginPolyG3(s32 semi_trans) {
+    POLY_G3* prim = (POLY_G3*)g_GfxPrimCursor;
+    SetPolyG3(prim);
+    SetSemiTrans(prim, semi_trans);
+    return prim;
+}
+
+static inline POLY_G4* GFX_BeginPolyG4(s32 semi_trans) {
+    POLY_G4* prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, semi_trans);
+    return prim;
+}
+
 #endif

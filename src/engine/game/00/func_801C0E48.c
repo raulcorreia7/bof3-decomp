@@ -27,7 +27,7 @@ MATCH s32 func_801C0E48(void) {
             } else {
                 result = 1;
             }
-            g_AreaWalkFlags &= ~(AREA_WALK_BUSY(D_80146262));
+            g_AreaWalkFlags &= ~(BIT(D_80146262));
         }
     }
     if (result) {

@@ -125,7 +125,7 @@ probe_headers = []
 foreach h : headers
   parts = h.split('/')
   if parts[0] == 'include'
-    if parts[1] != 'psyq' and h != 'include/match/include_asm.h'
+    if parts[1] != 'psyq'
       probe_headers += h
     endif
   elif h == 'src/shared/etc.h'

@@ -29,10 +29,9 @@ extern BMagicEffectFuncs     D_801EEC04;
 void                         func_801EF338(void);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
-#define EFFECT_SPARKLE_TASK     D_801F17B0
-#define EFFECT_SPARKLE_ROW_MASK 0x1F
-#define EFFECT_SPARKLE_OFFSET() (D_801F00B8[EFFECT_SPARKLE_TASK->unk_07 & EFFECT_SPARKLE_ROW_MASK])
-#define EFFECT_SPARKLE_RISE     D_801F01A4
+#define EFFECT_SPARKLE_TASK    D_801F17B0
+#define EFFECT_SPARKLE_OFFSETS D_801F00B8
+#define EFFECT_SPARKLE_RISE    D_801F01A4
 extern Point2D D_801F00B8[];
 extern u8      D_801F01A4[];
 

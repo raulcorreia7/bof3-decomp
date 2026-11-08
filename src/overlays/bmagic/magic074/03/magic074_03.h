@@ -29,10 +29,9 @@ void                 func_801EFBE4(u16 angle, u16 radius);
 void                 func_801EFE18(u16 angle, u16 radius);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
-#define EFFECT_SPARKLE_TASK     D_801F20DC
-#define EFFECT_SPARKLE_ROW_MASK 0x1F
-#define EFFECT_SPARKLE_OFFSET() (D_801F0490[EFFECT_SPARKLE_TASK->unk_07 & EFFECT_SPARKLE_ROW_MASK])
-#define EFFECT_SPARKLE_RISE     D_801F0550
+#define EFFECT_SPARKLE_TASK    D_801F20DC
+#define EFFECT_SPARKLE_OFFSETS D_801F0490
+#define EFFECT_SPARKLE_RISE    D_801F0550
 extern Point2D D_801F0490[];
 extern u8      D_801F0550[];
 

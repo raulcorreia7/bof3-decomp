@@ -48,7 +48,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     stack_20 = target_y;
     tmp8     = g_Task;
     stack_18 = target_x;
-    if ((*(u8*)(tmp8) & 0x80) && !((g_Game.flags | g_Game.walk_flags) & AREA_WALK_BUSY(0)) && !(D_80145FBC & 1)) {
+    if ((*(u8*)(tmp8) & 0x80) && !((g_Game.flags | g_Game.walk_flags) & BIT(0)) && !(D_80145FBC & 1)) {
         val9  = FIELD(s32, tmp8, 0x34u);
         val2  = FIELD(s32, tmp8, 0x38u);
         tmp6  = val9 - target_x;
