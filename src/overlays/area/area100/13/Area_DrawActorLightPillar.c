@@ -1,6 +1,7 @@
-#include "area112_13.h"
+#include "area100_13.h"
 
-MATCH void func_801F3EA4(void) {
+/* func_801F3D28 */
+MATCH void Area_DrawActorLightPillar(void) {
     s32    pos[3];
     Actor* work = g_Task;
 

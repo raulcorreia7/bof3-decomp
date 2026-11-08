@@ -3674,6 +3674,7 @@ Area_AddCameraOffsetY4 = { addr = 0x801F3630, type = "func", source = "Adds 4 to
 Area_SubCameraOffsetY4 = { addr = 0x801F3658, type = "func", source = "Subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F3680, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Actor_SnapToGround = { addr = 0x801F3CDC, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawActorLightPillar = { addr = 0x801F3D28, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F3D70, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world02/area102/13"]
@@ -3724,6 +3725,9 @@ Area_DrawScreenTint = { addr = 0x801F3BA0, type = "func", source = "Draws a semi
 GFX_DrawShadedDisc = { addr = 0x801F3D90, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
 Message_ClearRequest = { addr = 0x801F4320, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
 Message_Clear = { addr = 0x801F4360, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
+Area_ReserveActorSlot = { addr = 0x801F4D60, type = "func", source = "finds a free actor slot or backs up the script" }
+Area_PauseBGM = { addr = 0x801F4EBC, type = "func", source = "pauses the BGM" }
+Area_ResumeBGM = { addr = 0x801F4EE4, type = "func", source = "resumes the BGM" }
 
 ["emi/world02/area109/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3742,6 +3746,7 @@ Actor_RunAreaStep = { addr = 0x801F3638, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F366C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Message_SelectAnswer = { addr = 0x801F3870, type = "func", source = "Sets g_MessageRequest to 0x14 when g_MessageChoice is nonzero, otherwise to 0x13." }
 Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawActorLightPillar = { addr = 0x801F3EA4, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F3EEC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
@@ -3783,9 +3788,11 @@ World_UpdateClouds = { addr = 0x801F4768, type = "func", source = "Drifts the cl
 g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
 g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_EnterWyndiaBasementTeleport = { addr = 0x801F2D54, type = "func", source = "warps to the Wyndia basement teleporter" }
 Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawActorLightPillar = { addr = 0x801F2F30, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F2F78, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world03/area117/13"]
@@ -3867,6 +3874,10 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world03/area130/13"]
 Area_DrawSpinTriangle = { addr = 0x801F2E30, type = "func", source = "Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin." }
 Area_InitSpin = { addr = 0x801F30D0, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
+Area_StopSequence = { addr = 0x801F373C, type = "func", source = "stops the sequence" }
+Area_PlaySequence = { addr = 0x801F3760, type = "func", source = "plays the sequence" }
+Area_FadeOutSequence = { addr = 0x801F378C, type = "func", source = "fades out the sequence" }
+Area_PlaySequence2 = { addr = 0x801F37B8, type = "func", source = "plays the sequence" }
 Item_AddSeaCharts = { addr = 0x801F3C7C, type = "func", source = "Gives the player the Sea Charts." }
 
 ["emi/world03/area132/13"]
