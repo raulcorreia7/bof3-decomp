@@ -9,7 +9,7 @@ MATCH void func_801F4DE0(void) {
     screen_x       = work->screen_x + 0xA;
     work->screen_x = screen_x;
     if ((s16)screen_x >= 0x191) {
-        counter = &D_80146875;
+        counter = &g_SceneState.step_05;
         *counter += 1;
         work->header.mode = 2;
     }

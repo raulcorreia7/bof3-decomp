@@ -2,25 +2,8 @@
 
 /* Each access reloads the work cell: the stores go through its pointer, which
  * the compiler must assume may alias the cell. */
+#include "overlays/area/Area_StartCellActor.h"
+
 MATCH void func_801F4640(void) {
-    s32 row_offset;
-    s32 map_offset;
-
-    if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS || (g_SceneState.flags_01 & 1)) {
-        Actor_Clear();
-        return;
-    }
-    Game_FindAreaHandler();
-    Area_FindSceneRecord(0x205);
-
-    g_Task->unk_48       = 0;
-    g_Task->active_flags = 0;
-    g_Task->unk_2A       = 0;
-    ACTOR_CLEAR_TINT();
-
-    row_offset                                               = g_Task->param.unk_0B * 4;
-    map_offset                                               = D_801F4DD5[row_offset] * g_AreaMapBundle.width;
-    *(g_AreaCellCodes + map_offset + D_801F4DD4[row_offset]) = 0xA0;
-    Actor_SelectScript(0);
-    g_Task->header.mode = 1;
+    AREA_START_CELL_ACTOR(D_801F4DD4, D_801F4DD5);
 }

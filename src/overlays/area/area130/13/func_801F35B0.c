@@ -6,9 +6,9 @@ MATCH void func_801F35B0(void) {
         case 0:
             g_SceneState.step_05  = 0xA;
             *g_ScriptVars         = 0;
-            D_80146865            = 0;
-            D_80146866            = 0;
-            D_80146867            = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
             g_SceneState.state_04 = 6;
             break;
         case 1:
