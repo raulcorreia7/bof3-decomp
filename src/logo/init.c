@@ -3,7 +3,7 @@
 
 /* func_801CE760 */
 MATCH void Logo_Init(s32 work_base, u_long disc_lba) { /* func_801CE760 */
-    volatile u8 scratch[0x30];
+    volatile u8 scratch[48];
 
     (void)scratch;
     D_801EB448 = work_base + 0x2D00;
