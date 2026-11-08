@@ -87,10 +87,9 @@ src/overlays/boss/boss001/13/Boss_FinishDefeat_800C1900.c	Boss_FinishDefeat_800C
 src/overlays/boss/boss018/16/Boss_EndEntrance_800C1ADC.c	Boss_EndEntrance_800C1ADC
 src/overlays/commu/commu00/00/D_801EEC44_Data.c	D_801EEC44_Data
 src/overlays/commu/commu00/00/D_801F24FC_Data.c	D_801F24FC_Data
-src/overlays/commu/commu00/00/Fairy_VillageBuildJobs.c	D_801F24FC_Data
+src/overlays/commu/commu00/00/Fairy_StartJobs.c	D_801F24FC_Data
 src/overlays/commu/commu00/00/commu00_00.h	D_801F24FC_Data
 src/overlays/commu/commu00/00/func_801F1110.c	D_801F24FC_Data
-src/overlays/commu/commu02/08/794.c	Commu_AdvanceStep_801D7E30
 src/overlays/menu/shop/00/data_801E5DB4.c	unk_801E6004
 src/overlays/plchar/plp012/00/C.c	Char_RunStepScript_801CF610
 src/overlays/plchar/plp012/00/C.c	Char_StartTurn_801CF544

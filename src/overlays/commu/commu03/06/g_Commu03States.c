@@ -1,6 +1,6 @@
 #include "commu03_06.h"
 
-void Commu_AdvanceStep(void);
+void Fairy_AdvanceStep(void);
 void func_801D0C80(void);
 void func_801D0CBC(void);
 void func_801D0D60(void);
@@ -15,7 +15,7 @@ void func_801D1184(void);
 Callback    g_Commu03States[3]     = {func_801D0C80, func_801D0DEC, func_801D1058};
 Callback    g_Commu03Step0Funcs[2] = {func_801D0CBC, func_801D0D60};
 Callback    g_Commu03Step1Funcs[2] = {func_801D0E28, func_801D1000};
-Callback    g_Commu03Step2Funcs[4] = {func_801D1094, func_801D1124, func_801D1184, Commu_AdvanceStep};
+Callback    g_Commu03Step2Funcs[4] = {func_801D1094, func_801D1124, func_801D1184, Fairy_AdvanceStep};
 static char s_gap_801D18F4[4]      = ">>>";
 static u8   s_gap_801D18F8[8]      = {
     0x81, 0x00, 0x00, 0x00, 0x82, 0x00, 0x00, 0x00,

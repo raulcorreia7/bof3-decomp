@@ -1,7 +1,7 @@
 /* Adds one to g_SceneEventStep unless the game is in state 2. One definition
  * shared by the commu overlays; every change here must verify every member. */
 /* func_801D5A9C (commu02/08), func_801D1670 (commu04/06), func_801D121C (commu03/06); the second copy in commu02/08,
-   Commu_AdvanceStep_801D7E30, uses the statements macro */
+   Fairy_AdvanceStep2, uses the statements macro */
 #define COMMU_ADVANCE_STEP()                            \
     do {                                                \
         u8* state;                                      \
@@ -12,6 +12,6 @@
         }                                               \
     } while (0)
 
-MATCH void Commu_AdvanceStep(void) {
+MATCH void Fairy_AdvanceStep(void) {
     COMMU_ADVANCE_STEP();
 }

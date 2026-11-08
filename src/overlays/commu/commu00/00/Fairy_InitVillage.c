@@ -4,14 +4,14 @@
  * schedule before the raw store that retail keeps ahead of them. */
 /* ABI view: the callee truncates its count to u8, but this caller keeps the
  * word result (`move` before the explicit & 0xFF) as retail does. */
-extern s32 Fairy_VillageCountFairies(void);
+extern s32 Fairy_CountFairies(void);
 
-MATCH void Fairy_VillageInit(void) {
+MATCH void Fairy_InitVillage(void) {
     s32 active_count;
     s32 i;
 
     if (g_GameAreaId != D_80143F04) {
-        active_count = Fairy_VillageCountFairies();
+        active_count = Fairy_CountFairies();
         func_801F03D0();
         active_count &= BYTE_MASK;
         D_80145E44                      = 0;
@@ -34,7 +34,7 @@ MATCH void Fairy_VillageInit(void) {
             D_801455BC = g_BattleCount;
             D_801455C0 = g_GameAreaId;
         } else {
-            Fairy_VillageQueueRooms();
+            Fairy_AddRooms();
             func_801EF110(active_count);
             func_801EF214();
             func_801EF398();
@@ -46,5 +46,5 @@ MATCH void Fairy_VillageInit(void) {
             func_801F0320();
         }
     }
-    Fairy_VillageBuildJobs();
+    Fairy_StartJobs();
 }

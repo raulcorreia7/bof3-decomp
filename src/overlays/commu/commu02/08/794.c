@@ -414,7 +414,7 @@ MATCH void func_801D5A48(void) {
     }
 }
 
-#include "overlays/commu/Commu_AdvanceStep.h"
+#include "overlays/commu/Fairy_AdvanceStep.h"
 
 MATCH s32 func_801D5AD0(s32 limit) {
     s32 var_s1;
@@ -495,11 +495,11 @@ MATCH void func_801D5F7C(void) {
         if (pressed & 0x8000) {
             D_801DB0B4 -= 1;
             if ((s8)D_801DB0B4 < 0) {
-                D_801DB0B4 = Fairy_VillageCountFairies() - 1;
+                D_801DB0B4 = Fairy_CountFairies() - 1;
             }
         } else if (pressed & 0x2000) {
             D_801DB0B4 += 1;
-            if ((s8)D_801DB0B4 >= (Fairy_VillageCountFairies() & 0xFF)) {
+            if ((s8)D_801DB0B4 >= (Fairy_CountFairies() & 0xFF)) {
                 D_801DB0B4 = 0;
             }
         }
@@ -792,11 +792,11 @@ MATCH void func_801D7DD4(void) {
 }
 
 /* func_801D7E30 */
-MATCH void Commu_AdvanceStep_801D7E30(void) {
+MATCH void Fairy_AdvanceStep2(void) {
     COMMU_ADVANCE_STEP();
 }
 
-#include "overlays/commu/Fairy_VillageCountFairies.h"
+#include "overlays/commu/Fairy_CountFairies.h"
 
 INCLUDE_ASM(func_801D7EA0);
 

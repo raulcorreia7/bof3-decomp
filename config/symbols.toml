@@ -1695,11 +1695,11 @@ g_MenuEquipChoiceCounts = { addr = 0x801D8FC8, source = "the held counts of the 
 ["emi/etc/commu00/00"]
 # Fairy table extents; the types are in include/game/fairy.h.
 g_FairyGifts = { addr = 0x801EEC48, source = "Fairy_GrantGift copies the FairyGift table" }
-Fairy_VillageInit = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
-Fairy_VillageQueueRooms = { addr = 0x801EEDF8, type = "func", source = "Queues the fairy village room of kind 4 and of kind 5 into D_80145E60 once each, for the areas between D_801455C0 and g_GameAreaId, then stores g_GameAreaId into D_801455C0." }
+Fairy_InitVillage = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_AddRooms = { addr = 0x801EEDF8, type = "func", source = "Queues the fairy village room of kind 4 and of kind 5 into D_80145E60 once each, for the areas between D_801455C0 and g_GameAreaId, then stores g_GameAreaId into D_801455C0." }
 Fairy_JoinVillage = { addr = 0x801F00D4, type = "func", source = "Adds one fairy to the village: takes the first inactive g_FairyJobs row from a random start below 60, sets active to 1 and type to FAIRY_JOB_IDLE, stamps progress_anchor with g_BattleCount, copies the fairy 5-byte name and queues the row index." }
-Fairy_VillageCountFairies = { addr = 0x801F02E4, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
-Fairy_VillageBuildJobs = { addr = 0x801F0534, type = "func", source = "Builds one village actor per active fairy of g_FairyJobs: an idle fairy runs func_801F0BF4 and func_801F0718, a type below FAIRY_JOB_HUNT func_801F08D8, and FAIRY_JOB_CLEAR and FAIRY_JOB_BUILD fairies get a random label from 0xB6 or 0xBC (0xCD or 0xCE in the late and dolphin areas)." }
+Fairy_CountFairies = { addr = 0x801F02E4, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
+Fairy_StartJobs = { addr = 0x801F0534, type = "func", source = "Builds one village actor per active fairy of g_FairyJobs: an idle fairy runs func_801F0BF4 and func_801F0718, a type below FAIRY_JOB_HUNT func_801F08D8, and FAIRY_JOB_CLEAR and FAIRY_JOB_BUILD fairies get a random label from 0xB6 or 0xBC (0xCD or 0xCE in the late and dolphin areas)." }
 Fairy_ShowPlayRecordMessage = { addr = 0x801F1318, type = "func", source = "Formats the play clock hours and minutes, g_BattleCount and D_80145030 into text variables 0 to 3, starts area message FAIRY_MESSAGE_PLAY_RECORD and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Scene_ClearEventState = { addr = 0x801F1684, type = "func", source = "Ends the scene event: clears the script-active flag, sets g_SceneEventMode to SCENE_EVENT_NONE and zeroes g_SceneEventStep and g_SceneEventSelection." }
 Fairy_GrantGift = { addr = 0x801F18F8, type = "func", source = "Gives the selected fairy gift: counts the battles since progress_anchor against the 20 g_FairyGifts thresholds, adds the item of the highest threshold reached and starts area message FAIRY_MESSAGE_GIFT_RECEIVED, or message FAIRY_MESSAGE_NO_GIFT_YET below the first; resets progress_anchor to g_BattleCount when the item is added." }
@@ -1723,9 +1723,9 @@ g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "6 handlers of sub-step 
 
 ["emi/etc/commu02/08"]
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu02 scene: dispatches on the step byte D_801F294C through g_Commu02Event0States." }
-Commu_AdvanceStep = { addr = 0x801D5A9C, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
-Commu_AdvanceStep_801D7E30 = { addr = 0x801D7E30, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Commu_AdvanceStep." }
-Fairy_VillageCountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
+Fairy_AdvanceStep = { addr = 0x801D5A9C, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+Fairy_AdvanceStep2 = { addr = 0x801D7E30, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_AdvanceStep." }
+Fairy_CountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D9AC8, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
@@ -1752,7 +1752,7 @@ g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas recor
 
 ["emi/etc/commu03/06"]
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
-Commu_AdvanceStep = { addr = 0x801D121C, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+Fairy_AdvanceStep = { addr = 0x801D121C, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
 g_Commu03States = { addr = 0x801D18C8, source = "the 3 step handlers of the commu03 scene, called by func_801D0C44 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu03Step0Funcs = { addr = 0x801D18D4, source = "2 sub-step handlers of step 0 of the commu03 scene, called by func_801D0C80 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
 g_Commu03Step1Funcs = { addr = 0x801D18DC, source = "2 sub-step handlers of step 1 of the commu03 scene, called by func_801D0DEC (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
@@ -1760,7 +1760,7 @@ g_Commu03Step2Funcs = { addr = 0x801D18E4, source = "4 sub-step handlers of step
 
 ["emi/etc/commu04/06"]
 func_801D0C04 = { addr = 0x801D0C04, type = "func", source = "Entry of the commu04 scene: dispatches on the step byte D_801F294C through the D_801D1750 handlers, then refreshes the panels when the game state is 0." }
-Commu_AdvanceStep = { addr = 0x801D1670, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+Fairy_AdvanceStep = { addr = 0x801D1670, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
 g_Commu04States = { addr = 0x801D1750, source = "the 2 step handlers of the commu04 scene, called by func_801D0C04 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu04Step0Funcs = { addr = 0x801D1758, source = "7 sub-step handlers of step 0 of the commu04 scene, called by func_801D0C5C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
 
@@ -4055,7 +4055,7 @@ Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3EB4, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area176/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4088,7 +4088,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area177/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4121,7 +4121,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area178/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4154,7 +4154,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area179/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4187,7 +4187,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area180/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4220,7 +4220,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area181/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4253,7 +4253,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area182/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4286,7 +4286,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area183/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4319,7 +4319,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area184/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4352,7 +4352,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area185/13"]
-Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
@@ -4764,7 +4764,7 @@ g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "Ground height unde
 g_ActorSlots = { addr = 0x80143FC8, size = 0x910, source = "The actor slots." }
 g_SaveData = { addr = 0x801448D8, size = 0x10B0, alias = true, source = "The save data." }
 g_SceneEventMode = { addr = 0x801448EB, type = "s8", source = "Current scene event." }
-g_SceneEventStep = { addr = 0x801448EC, type = "s8", source = "Commu_AdvanceStep adds one to it, Fish_LocationMessage steps it from 0 to 1, Scene_ClearEventState clears it" }
+g_SceneEventStep = { addr = 0x801448EC, type = "s8", source = "Fairy_AdvanceStep adds one to it, Fish_LocationMessage steps it from 0 to 1, Scene_ClearEventState clears it" }
 g_SceneEventSelection = { addr = 0x801448ED, type = "u8", source = "The entry the scene event works on: the fairy job index in Fairy_GrantGift and Fairy_RollExploreReward, the master id in the sisyou menu, a copy of active_ui[5] in the commu00 cursor functions." }
 g_SavedScriptVars = { addr = 0x801448F8, size = 0x4, source = "Script variables kept in the save." }
 g_SaveAreaId = { addr = 0x801448FC, type = "u16", source = "Area where the game was saved." }

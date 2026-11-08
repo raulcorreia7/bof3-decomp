@@ -65,7 +65,7 @@ extern u8  D_801F3418[];
 
 /* The scenario state byte the request writes. */
 
-void Fairy_VillageInit(void);
+void Fairy_InitVillage(void);
 /* The overlay's frame update; the bounds checks and origin step run it. */
 /* func_801F30D4 (area158), func_801F30D4 (area160), func_801F30D4 (area161), func_801F30D4 (area162), func_801F30D4
    (area163), func_801F30D4 (area164), func_801F30D4 (area165), func_801F30D4 (area166), func_801F30E8 (area169),

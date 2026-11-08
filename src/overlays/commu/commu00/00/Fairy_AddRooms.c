@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-MATCH void Fairy_VillageQueueRooms(void) {
+MATCH void Fairy_AddRooms(void) {
     s32 flags;
     s32 index;
     s32 kind;

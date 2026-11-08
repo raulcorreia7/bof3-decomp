@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-MATCH void Fairy_VillageBuildJobs(void) {
+MATCH void Fairy_StartJobs(void) {
     s32 record;
     s32 task;
     u8  kind;

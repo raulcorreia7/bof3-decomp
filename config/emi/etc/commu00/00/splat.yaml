@@ -18,8 +18,8 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x44, .data, D_801EEC44_Data]
-      - [0xA4, c, Fairy_VillageInit]
-      - [0x1F8, c, Fairy_VillageQueueRooms]
+      - [0xA4, c, Fairy_InitVillage]
+      - [0x1F8, c, Fairy_AddRooms]
       - [0x2F0, c, func_801EEEF0]
       - [0x510, c, func_801EF110]
       - [0x614, c, func_801EF214]
@@ -30,10 +30,10 @@ segments:
       - [0x12A8, c, func_801EFEA8]
       - [0x14D4, c, Fairy_JoinVillage]
       - [0x15F4, c, func_801F01F4]
-      - [0x16E4, c, Fairy_VillageCountFairies]
+      - [0x16E4, c, Fairy_CountFairies]
       - [0x1720, c, func_801F0320]
       - [0x17D0, c, func_801F03D0]
-      - [0x1934, c, Fairy_VillageBuildJobs]
+      - [0x1934, c, Fairy_StartJobs]
       - [0x1B18, c, func_801F0718]
       - [0x1CD8, c, func_801F08D8]
   # Placement: .text resumes after another section in the retail bytes; one segment would group both .text runs.
