@@ -9,7 +9,7 @@ MATCH void func_801EF1B8(void) {
     g_Task->param.unk_0B += 2;
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
-    if ((timer & 0xFF) == 0x10) {
+    if ((timer & BYTE_MASK) == 0x10) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
         func_801E5988();
     }

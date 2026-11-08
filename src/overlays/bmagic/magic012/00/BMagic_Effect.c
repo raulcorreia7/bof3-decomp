@@ -25,7 +25,7 @@ MATCH void func_801EF080(void) {
 
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
-    if (!(value & 0xFF)) {
+    if (!(value & BYTE_MASK)) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0x20000;
         g_Task->unk_10 = 0;
@@ -70,7 +70,7 @@ MATCH void func_801EF4B8(void) {
     u8  ready;
 
     ready = 0;
-    if (func_801DB524(g_Task->unk_03) & 0xFF) {
+    if (func_801DB524(g_Task->unk_03) & BYTE_MASK) {
         g_Task->header.step = 0xA;
         return;
     }

@@ -63,7 +63,7 @@ MATCH void func_801EF21C(void) {
 
     temp_v1        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 8) {
+    if ((temp_v1 & BYTE_MASK) == 8) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }
@@ -76,7 +76,7 @@ MATCH void func_801EF27C(void) {
     g_Task->timer += 1;
     temp_v0        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & 0xFF) == 0x10) {
+    if ((temp_v0 & BYTE_MASK) == 0x10) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }

@@ -7,7 +7,7 @@ MATCH void Effect_StartTint(void) {
 
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;

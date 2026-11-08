@@ -36,7 +36,7 @@ MATCH void func_801EF2DC(void) {
     SP_REF(s16, 0) = g_Task->unk_09 * 0x1C;
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0xC) {
+    if ((counter & BYTE_MASK) == 0xC) {
         g_Task->header.step += 1;
     }
 }
@@ -142,7 +142,7 @@ MATCH void func_801F042C(void) {
     func_8014D978();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;

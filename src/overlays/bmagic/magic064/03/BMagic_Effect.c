@@ -37,7 +37,7 @@ MATCH void func_801EEE1C(void) {
 
     battler = g_Task;
     g_Task  = &g_Game.members[g_BattleActiveBattler];
-    if (!(func_8014DAEC() & 0xFF)) {
+    if (!(func_8014DAEC() & BYTE_MASK)) {
         g_Task          = battler;
         battler->unk_09 = 0x10;
         return;
@@ -78,8 +78,8 @@ MATCH void func_801EF2A4(void) {
 
     battler = g_Task;
     g_Task  = &g_Game.members[g_BattleActiveBattler];
-    func_801F0EEC(1, 2, (0x80 - battler->unk_09) & 0xFF);
-    func_801F0EEC(0, 1, (0x80 - battler->unk_09) & 0xFF);
+    func_801F0EEC(1, 2, (0x80 - battler->unk_09) & BYTE_MASK);
+    func_801F0EEC(0, 1, (0x80 - battler->unk_09) & BYTE_MASK);
     func_801F0EEC(3, 2, battler->unk_09);
     func_801F0EEC(2, 1, battler->unk_09);
     g_Task = battler;
@@ -106,7 +106,7 @@ MATCH void func_801EF570(void) {
 
     battler = g_Task;
     g_Task  = &g_Game.members[g_BattleActiveBattler];
-    if (!(func_8014DAEC() & 0xFF)) {
+    if (!(func_8014DAEC() & BYTE_MASK)) {
         g_Task = battler;
         return;
     }
@@ -247,7 +247,7 @@ MATCH void func_801F0C38(void) {
 MATCH void func_801F0CBC(void) {
     Actor_RequestScript(g_Task->param.unk_0B);
     do {
-    } while (!(func_8014DAEC() & 0xFF));
+    } while (!(func_8014DAEC() & BYTE_MASK));
     g_Task->header.step += 1;
 }
 
