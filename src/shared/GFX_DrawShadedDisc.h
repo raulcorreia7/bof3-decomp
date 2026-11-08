@@ -10,8 +10,7 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
     u16      other;
     s32      scale;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
-    GFX_AddPrim(1u, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(1u, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     angle = 0;
     do {
         packet = (POLY_G3*)g_GfxPrimCursor;

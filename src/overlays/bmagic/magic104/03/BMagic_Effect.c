@@ -120,11 +120,9 @@ INCLUDE_ASM(func_801EFB2C);
 INCLUDE_ASM(func_801EFE34);
 
 MATCH void func_801F020C(void) {
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
-    GFX_AddPrim(4, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(4, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5);
     SYS_DISPATCH_BYTE(D_801F0900, g_Task->header.step);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
-    GFX_AddPrim(4, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(4, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5);
 }
 
 MATCH void func_801F02F4(void) {

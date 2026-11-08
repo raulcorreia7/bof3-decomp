@@ -149,8 +149,7 @@ INCLUDE_ASM(func_801EFA48);
 
 /* func_801EFC98 */
 MATCH void BMagic_DrawDarkRing(void) {
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(2, getTPage(0, 2, 320, 256));
     D_1F800000.view.effect.params[0] = g_Task->unk_14;
     D_1F800000.view.effect.params[1] = g_Task->unk_14 + 0x80;
     D_1F800000.view.effect.params[2] = g_Task->unk_09 * 4;

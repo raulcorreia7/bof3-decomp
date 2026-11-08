@@ -340,8 +340,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     long     flag;
     s32      i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    GFX_AddPrim(4, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
     GLOW_RING_INNER  = g_Task->unk_14;
     GLOW_RING_OUTER  = g_Task->unk_14 + 0x40;
     GLOW_RING_SHADE  = g_Task->unk_09 * 15;
@@ -382,8 +381,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     long     flag;
     s32      i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    GFX_AddPrim(4, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
     GLOW_RING_INNER  = g_Task->unk_14 + 0x40;
     GLOW_RING_OUTER  = g_Task->unk_14 + 0x80;
     GLOW_RING_SHADE  = g_Task->unk_09 * 15;

@@ -76,8 +76,7 @@ MATCH void func_801D218C(void) {
     if (i < D_1F80000C) {
         cell = d + 1;
         do {
-            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(1, 1, 320, 256), 0);
-            GFX_AddPrim(2, sizeof(DR_MODE));
+            GFX_AddDitheredDrawMode(2, getTPage(1, 1, 320, 256));
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
             SetSemiTrans(primitive, 1);

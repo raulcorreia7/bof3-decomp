@@ -4,8 +4,7 @@
 
 /* func_801EFA30 (magic053), func_801EFA64 (magic226) */
 MATCH void BMagic_DrawDarkRing(void) {
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(5, getTPage(0, 2, 320, 256));
     D_1F800000.view.effect.params[0] = g_Task->param.unk_0B;
     D_1F800000.view.effect.params[1] = g_Task->param.unk_0B * 2;
     D_1F800000.view.effect.params[5] = g_Task->timer * 4;

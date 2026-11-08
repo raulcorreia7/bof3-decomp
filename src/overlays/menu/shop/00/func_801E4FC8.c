@@ -15,8 +15,7 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
     entry = &g_ShopPortraitAtlas[atlas_index & BYTE_MASK];
 
     tpage = getTPage(0, 0, 896, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(1, tpage);
 
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);

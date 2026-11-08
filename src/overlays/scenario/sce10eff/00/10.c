@@ -298,8 +298,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     i           = 1;
     cell        = &D_1F800004;
     ramp        = cell + 1;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(2, tpage);
     radius_base = (s16)radius;
     do {
         work    = g_Task;

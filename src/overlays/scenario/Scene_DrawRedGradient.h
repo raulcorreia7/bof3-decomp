@@ -2,8 +2,7 @@
 MATCH void Scene_DrawRedGradient(s8 red) {
     POLY_G4* prim;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x380, 0x100) & 0xFFFF, NULL);
-    GFX_AddPrim(7U, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(7U, GetTPage(0, 1, 0x380, 0x100) & 0xFFFF);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 0);

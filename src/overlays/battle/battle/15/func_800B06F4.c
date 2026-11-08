@@ -11,9 +11,7 @@ MATCH void func_800B06F4(s16 x, s16 y, u8 width, u8 height) {
     u8  i;
     u8  j;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0,
-                GetTPage(0, 0, BATTLE_PANEL_TEXTURE_X, BATTLE_PANEL_TEXTURE_Y) & HALF_MASK, NULL);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddDrawMode(GetTPage(0, 0, BATTLE_PANEL_TEXTURE_X, BATTLE_PANEL_TEXTURE_Y) & HALF_MASK);
 
     for (i = 1; i < height - 1; i++) {
         for (j = 1; j < width - 1; j++) {

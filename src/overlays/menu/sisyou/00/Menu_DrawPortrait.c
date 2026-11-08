@@ -19,8 +19,7 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     entry = &g_MenuPortraitAtlas[sprite_id & BYTE_MASK];
 
     tpage = getTPage(0, 0, 896, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(1, tpage);
 
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);

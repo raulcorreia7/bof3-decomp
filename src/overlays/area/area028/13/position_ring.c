@@ -273,8 +273,7 @@ MATCH void func_801F3060(void) {
     s16 scale;
 
     Area_SetCameraMatrix(scratch);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(3u, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(3u, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     D_801F3E00 = MEM_PTR(AreaSlotWork, AREA_WORK);
     i          = 0u;
@@ -313,8 +312,7 @@ MATCH void func_801F318C(s16 radius) {
     s32      angle = 65408;
     s8       i     = 0;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
-    GFX_AddPrim(3u, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(3u, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     Area_SetCameraMatrix(scratch);
 
     pos[0] = g_Task->pos.x.fixed;

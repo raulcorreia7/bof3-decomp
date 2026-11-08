@@ -46,8 +46,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
             mode = BATTLE_PANEL_MODE_DIM;
         }
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, NULL);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(2, mode);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     panel = (BattlePanelGeometry*)BATTLE_WORK;

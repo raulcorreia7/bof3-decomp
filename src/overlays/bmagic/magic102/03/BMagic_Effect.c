@@ -54,6 +54,7 @@ MATCH void func_801F016C(ScenePart* parts, s32 shift_x, s32 shift_y) {
         rec = &parts[1];
         do {
             mode = getTPage(1, rec[4].color.tpage, 320, 256);
+            /* Written out: GFX_AddDitheredDrawMode moves the g_AreaDrawMode load. */
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, NULL);
             GFX_AddPrim(g_AreaDrawMode, sizeof(DR_MODE));
             prim = (POLY_G4*)g_GfxPrimCursor;
