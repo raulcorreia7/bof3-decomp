@@ -13,11 +13,9 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
     GFX_AddDitheredDrawMode(1u, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     angle = 0;
     do {
-        packet = (POLY_G3*)g_GfxPrimCursor;
-        SetPolyG3(packet);
-        SetSemiTrans(packet, 1);
-        next  = angle + 128;
-        other = (next & ANGLE_MASK);
+        packet = GFX_BeginPolyG3(1);
+        next   = angle + 128;
+        other  = (next & ANGLE_MASK);
         setXY2(packet, x, y, (s16)(x + ((radius * rcos((u16)angle)) >> 0x0C)),
                (s16)(y + ((radius * rsin((u16)angle)) >> 0x0C)));
         packet->x2 = (s16)(x + ((radius * rcos((u16)other)) >> 0x0C));

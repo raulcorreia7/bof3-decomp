@@ -34,9 +34,7 @@ MATCH void func_801F31E8(Point3DL* pos, s32 height) {
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
-        prim = (POLY_G4*)g_GfxPrimCursor;
-        SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
+        prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx,
                outer.vy);
         setRGB0(prim, shade, shade, shade);
