@@ -6206,7 +6206,7 @@ Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the
 ["emi/battle/batl_end/00"]
 Battle_InitVictoryMenu = { addr = 0x801EEFCC, type = "func", source = "Resets the victory menu cursor and UI state and advances the battle UI when data is ready." }
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
-Battle_DrawResultZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny amount on the battle result screen." }
+Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny amount on the battle victory screen." }
 
 ["emi/battle/batl_ovr/00"]
 Battle_InitOverlay = { addr = 0x801EEC40, type = "func", source = "Sets the battle overlay UI mode and palette, then advances the step." }
