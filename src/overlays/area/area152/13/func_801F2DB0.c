@@ -17,15 +17,15 @@ MATCH void func_801F2DB0(void) {
     /* The step stores re-read the work cell: the compiler must assume a call
      * may have changed it. */
     if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA1) {
-        TASK_BYTES[0x0B] = 1;
+        g_Task->param.unk_0B = 1;
     } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA0) {
-        TASK_BYTES[0x0B] = 2;
+        g_Task->param.unk_0B = 2;
     } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xAE) {
-        TASK_BYTES[0x0B] = 3;
+        g_Task->param.unk_0B = 3;
     } else if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
-        TASK_BYTES[0x0B] = 4;
+        g_Task->param.unk_0B = 4;
     } else {
-        TASK_BYTES[0x0B] = 0;
+        g_Task->param.unk_0B = 0;
     }
 
     ((void (**)(void))(D_801F4C3C + 0x11C))[g_Task->header.mode]();

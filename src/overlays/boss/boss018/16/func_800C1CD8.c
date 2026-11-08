@@ -1,7 +1,8 @@
 #include "boss018_16.h"
+#include "area/spad.h"
 
 MATCH void func_800C1CD8(void) {
-    if (TASK_BYTES[5] == 4) {
+    if (g_Task->unk_05 == 4) {
         if (SYS_TestFlag(g_SceneFlags, 0x34)) {
             g_BattleCurrentEnemy->script = D_800C2C68;
         } else {
@@ -14,5 +15,5 @@ MATCH void func_800C1CD8(void) {
             g_BattleCurrentEnemy->script = D_800C2C74;
         }
     }
-    D_800C2D60[TASK_BYTES[1]]();
+    D_800C2D60[g_Task->header.mode]();
 }

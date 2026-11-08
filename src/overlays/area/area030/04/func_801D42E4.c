@@ -10,8 +10,8 @@ MATCH void func_801D42E4(void) {
     g_Task->direction_08 = FACING_UP_LEFT;
     g_Task->unk_06       = 0;
     g_Task->option_flags = 0x80;
-    TASK_BYTES[0x09]     = 4;
-    TASK_BYTES[0x0A]     = 0;
+    g_Task->timer        = 4;
+    g_Task->unk_0A       = 0;
 
     work                 = FISHING_STATE;
     work->saved_index_0B = 0;

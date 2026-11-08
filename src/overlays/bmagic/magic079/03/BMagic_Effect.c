@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC04(void) {
     Callback table[2] = {func_801EEC5C, func_801EED38};
 
-    table[TASK_BYTES[1]]();
+    table[g_Task->header.mode]();
 }
 
 MATCH void func_801EEC5C(void) {

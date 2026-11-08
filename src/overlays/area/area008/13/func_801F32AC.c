@@ -9,7 +9,7 @@ MATCH void func_801F32AC(void) {
         return;
     }
     if (g_ScriptVars[2] == 1) {
-        index = TASK_BYTES[0x0B];
+        index = g_Task->param.unk_0B;
         e     = &g_Actors[index];
         e->header.flags &= ~ACTOR_FLAG_HIDDEN;
         g_Task->header.mode = 2;

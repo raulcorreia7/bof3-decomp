@@ -11,10 +11,10 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
 
     delta                       = D_80181B00[mode * 2];
     /* FAKE: the scratchpad cell is stored through a volatile halfword view, as retail. */
-    *(volatile s16*)&D_1F800000 = (FIELD(s16, g_Task, 0x36u) + ((delta == 1) ? 2 : delta));
+    *(volatile s16*)&D_1F800000 = (g_Task->pos.x.part.integer + ((delta == 1) ? 2 : delta));
 
     delta      = D_80181B01[mode * 2];
-    D_1F800002 = (FIELD(s16, g_Task, 0x3Au) + ((delta == 1) ? 2 : delta));
+    D_1F800002 = (g_Task->pos.y.part.integer + ((delta == 1) ? 2 : delta));
 
     index = mode;
     if ((index == 1) || (index == 5)) {

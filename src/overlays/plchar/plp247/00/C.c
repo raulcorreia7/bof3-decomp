@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CFAFC[TASK_BYTES[2]]();
+    D_801CFAFC[g_Task->header.step]();
 }
 
 #include "overlays/plchar/Char_StartTurnGarr.h"
