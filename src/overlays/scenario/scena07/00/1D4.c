@@ -304,7 +304,7 @@ MATCH u8 func_801F85D8(void) {
         }
         i++;
         rec += SCRATCH_ROW_STRIDE;
-    } while ((u32)(i & 0xFF) < 8);
+    } while ((u32)(i & BYTE_MASK) < 8);
     return active;
 }
 
