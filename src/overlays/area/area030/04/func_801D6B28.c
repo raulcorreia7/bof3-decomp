@@ -18,17 +18,17 @@ MATCH void func_801D6B28(s8 panel_kind) {
         FishingState* pair;
         s32           value;
 
-        work   = (FishingState*)TASK_BYTES;
+        work   = (FishingState*)g_Task;
         value  = work->pos_x_0C;
         left_x = (value < 57) ? 57 : ((value >= 122) ? 121 : value);
 
-        shown          = (FishingState*)TASK_BYTES;
+        shown          = (FishingState*)g_Task;
         work->pos_x_0C = left_x;
 
         value   = shown->cursor_10;
         right_x = (value < 65) ? 65 : ((value >= 149) ? 148 : value);
 
-        pair             = (FishingState*)TASK_BYTES;
+        pair             = (FishingState*)g_Task;
         shown->cursor_10 = right_x;
 
         if ((pair->cursor_10 < pair->pos_x_0C) || (pair->pos_x_0C + 0x20 < pair->cursor_10)) {

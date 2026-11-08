@@ -155,7 +155,7 @@ extern void  Area_RefreshCellGrid(void);
 /* func_8015477C */
 s16          Area_SampleHeight(s32 x, s32 y);
 /* func_80154ABC */
-s16          func_80154ABC(s32 x, s32 y, u8 mode);
+s32          func_80154ABC(s32 x, s32 y, u8 mode);
 /* func_80154ED0 */
 extern void  Area_EnableHeightOffset(void);
 /* func_80154F28 */

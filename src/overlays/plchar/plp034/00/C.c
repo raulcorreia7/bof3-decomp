@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801D02F4[TASK_BYTES[2]]();
+    D_801D02F4[g_Task->header.step]();
 }
 
 INCLUDE_ASM(func_801CE448);

@@ -42,7 +42,7 @@ MATCH void func_801EF3D8(void) {
         g_Task->param.unk_0B += 1;
         g_Task->timer += 1;
         func_800AF764();
-        func_801F02B0();
+        Effect_RecordTrail();
     }
     timer = g_Task->timer;
     if ((timer & BYTE_MASK) == 8) {
@@ -51,37 +51,18 @@ MATCH void func_801EF3D8(void) {
     }
 }
 
-MATCH void func_801EF484(void) {
-    u8 timer;
-
-    func_801F03A0();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
-    if (timer == 0) {
-        BMAGIC_TICK_EFFECT_WORK();
-        func_801E5988();
-    }
-}
+/* func_801EF484 */
+#include "overlays/bmagic/Effect_FinishTrail.h"
 
 INCLUDE_ASM(func_801EF4EC);
 
 INCLUDE_ASM(func_801EFA34);
 
-MATCH void func_801F02B0(void) {
-    s32 i;
+/* func_801F02B0 */
+#include "overlays/bmagic/Effect_RecordTrail.h"
 
-    BMAGIC_SHIFT_TRAIL(D_801F09B0)
-    D_801F09B0[g_Task->unk_04][g_Task->param.unk_0B].x = g_Task->unk_2E.half;
-    D_801F09B0[g_Task->unk_04][g_Task->param.unk_0B].y = g_Task->unk_30.half;
-}
-
-MATCH void func_801F03A0(void) {
-    s32 i;
-
-    BMAGIC_SHIFT_TRAIL(D_801F09B0)
-    D_801F09B0[g_Task->unk_04][g_Task->param.unk_0B].x = -1;
-    D_801F09B0[g_Task->unk_04][g_Task->param.unk_0B].y = -1;
-}
+/* func_801F03A0 */
+#include "overlays/bmagic/Effect_ClearTrail.h"
 
 MATCH void func_801F0488(void) {
     g_ScriptBank = 0x800C3800;

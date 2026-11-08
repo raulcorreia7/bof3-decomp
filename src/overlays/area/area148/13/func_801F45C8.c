@@ -1,9 +1,6 @@
 #include "area148_13.h"
 
 MATCH void func_801F45C8(void) {
-    u8* work;
-
-    work                   = TASK_BYTES;
-    FIELD(s32, work, 0x0C) = g_FacingOffsets[work[8]].x << 1;
-    FIELD(s32, work, 0x10) = g_FacingOffsets[work[8]].y << 1;
+    g_Task->vx = g_FacingOffsets[g_Task->direction_08].x << 1;
+    g_Task->vy = g_FacingOffsets[g_Task->direction_08].y << 1;
 }

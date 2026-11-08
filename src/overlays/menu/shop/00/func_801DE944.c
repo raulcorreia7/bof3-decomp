@@ -1,4 +1,5 @@
 #include "shop_00.h"
+#include "area/spad.h"
 #include "area/map.h"
 
 /* Refreshes the status-panel rows and the field-camera scroll: fills the row
@@ -35,12 +36,12 @@ MATCH void func_801DE944(void) {
             do {
                 TASK_SET(((u8*)g_Game.members + row));
                 func_801C1254(FIELD(u8, &g_Game.members[0].chr.character_id, row), i);
-                Actor_SelectScript(TASK_BYTES[8]);
+                Actor_SelectScript(g_Task->direction_08);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
-                    TASK_BYTES[2] = 0;
-                    TASK_BYTES[3] = 0;
-                    TASK_BYTES[4] = 0;
+                    g_Task->header.step = 0;
+                    g_Task->unk_03      = 0;
+                    g_Task->unk_04      = 0;
                 }
                 row += BATTLE_PARTY_STRIDE;
                 i++;
@@ -60,13 +61,13 @@ MATCH void func_801DE944(void) {
         g_Game.party_size        = 1;
         g_Game.members[0].slot   = 0;
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
-        TASK_BYTES[0x48]         = 0;
+        g_Task->unk_48           = 0;
         func_801C1254(g_Game.members[0].chr.character_id, 0);
-        Actor_SelectScript(TASK_BYTES[8]);
+        Actor_SelectScript(g_Task->direction_08);
         ACTOR_SET_MODE(0);
-        TASK_BYTES[2] = 0;
-        TASK_BYTES[3] = 0;
-        TASK_BYTES[4] = 0;
+        g_Task->header.step = 0;
+        g_Task->unk_03      = 0;
+        g_Task->unk_04      = 0;
     }
     if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         i = 0;
