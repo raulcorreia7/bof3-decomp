@@ -59,7 +59,7 @@ MATCH void func_801EF0D4(void) {
 
     timer          = g_Task->unk_09 + 2;
     g_Task->unk_09 = timer;
-    if ((timer & BYTE_MASK) == 0x10) {
+    if ((timer & BYTE_MASK) == 16) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }
