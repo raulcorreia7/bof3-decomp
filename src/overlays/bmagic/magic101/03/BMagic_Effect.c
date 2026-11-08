@@ -114,11 +114,11 @@ NON_MATCHING void func_801EF3DC(void) {
     g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
         g_Task->facing       = g_BattleEffectBattler->facing;
-        g_Task->pos.x.raw    = g_BattleEffectBattler->pos.x.raw;
+        g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
         angle                = g_Task->unk_04;
-        g_Task->pos.y.raw    = g_BattleEffectBattler->pos.y.raw;
+        g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
         g_Task->param.unk_0B = angle * 4 & 0x3F;
-        g_Task->pos.z.raw    = g_BattleEffectBattler->pos.z.raw + 0x01800000;
+        g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed + 0x01800000;
         value                = D_801EFCC0[g_Task->unk_04];
         g_Task->unk_10       = 0x60;
         angle                = g_Task->unk_04;

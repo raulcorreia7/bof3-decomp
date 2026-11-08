@@ -20,11 +20,11 @@ NON_MATCHING void func_801EEC70(void) {
 
     src                  = BATTLE_ACTIVE_WORK;
     g_Task->facing       = src->facing;
-    g_Task->pos.x.raw    = src->pos.x.raw;
-    g_Task->pos.y.raw    = src->pos.y.raw;
-    span                 = g_BattleSelectedActor->pos.z.raw;
+    g_Task->pos.x.fixed  = src->pos.x.fixed;
+    g_Task->pos.y.fixed  = src->pos.y.fixed;
+    span                 = g_BattleSelectedActor->pos.z.fixed;
     g_Task->unk_09       = 0;
-    g_Task->pos.z.raw    = span;
+    g_Task->pos.z.fixed  = span;
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
     offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
@@ -139,12 +139,12 @@ NON_MATCHING void func_801EF8E8(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (work->pos.x.raw >> 9) - 0x4000;
-    pos.vy = (work->pos.y.raw >> 9) - 0x4000;
+    pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
     if (work->header.step < 3) {
         height = -COORD_INT(work->pos.z);
     } else {
-        height = -(s16)Area_SampleHeight(work->pos.x.raw, work->pos.y.raw);
+        height = -(s16)Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
     }
     pos.vz = height / 2;
     RotTransMatrix(&pos, matrix, &flags);
