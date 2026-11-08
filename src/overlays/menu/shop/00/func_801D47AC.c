@@ -6,7 +6,7 @@ MATCH void func_801D47AC(void) {
     u8  count;
 
     MENU_DRAW_HEADER();
-    WinDrawCueText(28, 22, D_801E60EC + 0x85);
+    WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, D_801E60EC + 0x85);
     g_SaveCardPort = 0;
     SAVE_AccessFile(0, 0, 0, 0, 0);
     first_status   = g_SaveCardStatus;

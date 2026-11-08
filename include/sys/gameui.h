@@ -51,6 +51,14 @@ extern AreaDrawState g_AreaDrawState;
 #define MENU_DRAW_HEADER()                                                                                 \
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle)
 
+/* Where the shop and save screens put their prompt line, the Zenny window and the save slot list. */
+#define MENU_PROMPT_X       28
+#define MENU_PROMPT_Y       22
+#define MENU_ZENNY_WINDOW_X 98
+#define MENU_ZENNY_WINDOW_Y 40
+#define SAVE_SLOTS_X        32
+#define SAVE_SLOTS_Y        48
+
 /* The rows of the equip stat window, top to bottom. */
 typedef enum EquipStatRow {
     EQUIP_STAT_ROW_POWER   = 0,

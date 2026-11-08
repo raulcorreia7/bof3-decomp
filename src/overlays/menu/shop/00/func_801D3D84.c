@@ -9,8 +9,8 @@ MATCH void func_801D3D84(void) {
     func_801D6D6C(0x6E, 0x4C);
     MENU_DRAW_HEADER();
     if (D_8014865C != -1) {
-        WinDrawCueText(28, 22, 0xA1);
-        Menu_DrawZennyWindow(0x62, 0x28, 0, g_Zenny);
+        WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0xA1);
+        Menu_DrawZennyWindow(MENU_ZENNY_WINDOW_X, MENU_ZENNY_WINDOW_Y, 0, g_Zenny);
     }
     prev = D_801E60F0;
     if (g_InputPressed & PADLup) {

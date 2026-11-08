@@ -22,7 +22,7 @@ MATCH void func_801E5C68(void) {
             D_801ED7FC = 0xF;
             break;
         case SAVE_STATUS_LOADED:
-            SAVE_DrawSlots(0x20, 0x30, 0U);
+            SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             D_801ED7FC            = 0xB;
             g_MenuStartReturnStep = 0xF;
             break;
