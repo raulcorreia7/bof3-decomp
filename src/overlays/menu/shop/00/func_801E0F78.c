@@ -20,25 +20,25 @@ NON_MATCHING void func_801E0F78(void) {
             D_801E6264[D_801E6258++] = count;
         }
     }
-    g_MenuPanelTasks[0].unk_00[1] = 7;
-    D_80148332                    = 0;
-    g_MenuPanelTasks[0].state     = 2;
-    g_MenuPanelTasks[0].unk_00[0] = 1;
-    D_80148334                    = 0x14;
-    D_8014835F                    = 0xFF;
-    D_80148358                    = 0x70;
-    D_80148336                    = -0x14;
-    D_8014835A                    = -0x14;
-    D_8014833A[0].kind_00         = 0;
-    D_80148355                    = 7;
-    D_80148356                    = 2;
-    D_80148357                    = 2;
-    D_80148354                    = 1;
-    D_8014835E                    = 4;
-    D_80148625                    = 7;
-    D_80148626                    = 3;
-    D_8014862E                    = 4;
-    D_80148624                    = 0;
+    g_MenuPanelTasks[0].handler = 7;
+    D_80148332                  = 0;
+    g_MenuPanelTasks[0].state   = 2;
+    g_MenuPanelTasks[0].active  = 1;
+    D_80148334                  = 0x14;
+    D_8014835F                  = 0xFF;
+    D_80148358                  = 0x70;
+    D_80148336                  = -0x14;
+    D_8014835A                  = -0x14;
+    D_8014833A[0].kind_00       = 0;
+    D_80148355                  = 7;
+    D_80148356                  = 2;
+    D_80148357                  = 2;
+    D_80148354                  = 1;
+    D_8014835E                  = 4;
+    D_80148625                  = 7;
+    D_80148626                  = 3;
+    D_8014862E                  = 4;
+    D_80148624                  = 0;
     if (!(Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) & BYTE_MASK)) {
         D_8014840A = 0x12;
         D_8014840C = BATTLE_PARTY_STRIDE;

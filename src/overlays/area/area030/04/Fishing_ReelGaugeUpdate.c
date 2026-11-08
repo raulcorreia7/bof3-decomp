@@ -35,21 +35,21 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     func_801E0C80(0, 2);
     func_801E0DCC(0x11, 2, 135, 180);
     work = g_Task;
-    if ((work->unk_10 == 0) && ((origin_y = work->unk_30, limit = *(&D_80146892 + (g_FishingHookedFish * 0x98)),
-                                 step = g_FishingRodRow->byte_03 * 4, (((origin_y + step + 12) < limit) != 0)) ||
-                                (limit < ((origin_y - step) - 12)))) {
-        timer = work->unk_09;
+    if ((work->vy == 0) && ((origin_y = work->screen_y, limit = *(&D_80146892 + (g_FishingHookedFish * 0x98)),
+                             step = g_FishingRodRow->byte_03 * 4, (((origin_y + step + 12) < limit) != 0)) ||
+                            (limit < ((origin_y - step) - 12)))) {
+        timer = work->timer;
         if (timer >= 0xFU) {
             if (limit < origin_y) {
-                work->unk_10 = -1;
+                work->vy = -1;
             } else if (origin_y < limit) {
-                work->unk_10 = 1;
+                work->vy = 1;
             }
         } else {
-            work->unk_09 = (u8)(timer + 1);
+            work->timer = (u8)(timer + 1);
         }
     } else {
-        work->unk_09 = 0U;
+        work->timer = 0U;
     }
     work_row                    = g_Task;
     origin_y_now                = (u16)(FIELD(s16, work_row, 0x30u)) + FIELD(s32, work_row, 0x10u);

@@ -46,8 +46,8 @@ NON_MATCHING void func_801B1E24(void) {
             }
             if (!(rows->flags_12C & 1) && prev != 0) {
                 index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
-                result = func_801B1B2C(rows->pos.x.raw + (s_EntityPlacementOffsets[index] << 15),
-                                       rows->pos.y.raw + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed_70);
+                result = func_801B1B2C(rows->x + (s_EntityPlacementOffsets[index] << 15),
+                                       rows->y + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed_70);
                 if (((result & BYTE_MASK) != 0) &&
                     ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((BattleWorkSlot*)g_Task)->speed_70) & 0xFF) !=
                      0)) {
@@ -57,8 +57,7 @@ NON_MATCHING void func_801B1E24(void) {
                       0xFF)) {
                     goto next; /* fallback position rejected: next row */
                 }
-            } else if (!(func_801B1B2C(rows->pos.x.raw, rows->pos.y.raw, value & BYTE_MASK, row->speed_70) &
-                         BYTE_MASK)) {
+            } else if (!(func_801B1B2C(rows->x, rows->y, value & BYTE_MASK, row->speed_70) & BYTE_MASK)) {
                 goto next; /* fallback position rejected: next row */
             }
         found:
@@ -79,7 +78,7 @@ NON_MATCHING void func_801B1E24(void) {
     offset = BATTLE_PARTY_STRIDE;
     while (i < g_PartySize) {
         if (D_80145E91[offset] == 3) {
-            state = g_Task->flags_02 + 1;
+            state = g_Task->header.step + 1;
             goto store; /* row not in state 3: keep the incremented state */
         }
         i++;
@@ -87,7 +86,7 @@ NON_MATCHING void func_801B1E24(void) {
     }
     state = 4;
 store:
-    g_Task->flags_02 = state;
+    g_Task->header.step = state;
 }
 #else
 INCLUDE_ASM(func_801B1E24);

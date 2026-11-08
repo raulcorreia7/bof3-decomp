@@ -39,17 +39,17 @@ NON_MATCHING void func_800AB910(void) {
         off_y                            = FIELD(u16, work, 0x2Eu);
         off_x                            = FIELD(u16, work, 0x30u);
         off_z                            = FIELD(u16, work, 0x32u);
-        flags                            = g_GameState->leader_id;
+        flags                            = FIELD(u8, g_GameState, 0x79u);
         g_BattleEffects[(u8)slot].unk_32 = off_z;
         stage                            = work[0x08];
         g_BattleEffects[(u8)slot].unk_2E = off_y + (s8)g_BattlePanelOffsets[stage * 2 + flags * 8];
         g_BattleEffects[(u8)slot].unk_30 = off_x + (s8)(g_BattlePanelOffsets + 1)[stage * 2 + flags * 8];
-        g_BattleEffects[(u8)slot].unk_08 = g_BattlePartyBattlers[unit].unk_08;
+        g_BattleEffects[(u8)slot].unk_08 = g_BattlePartyBattlers[unit].facing;
     } else {
         off_y                            = FIELD(u16, work, 0x2Eu);
         off_x                            = FIELD(u16, work, 0x30u);
         off_z                            = FIELD(u16, work, 0x32u);
-        flags                            = g_GameState->leader_id;
+        flags                            = FIELD(u8, g_GameState, 0x79u);
         g_BattleEffects[(u8)slot].unk_32 = off_z;
         g_BattleEffects[(u8)slot].unk_2E = off_y + g_BattleCurrentEnemy->panel_offset_x;
         g_BattleEffects[(u8)slot].unk_30 = off_x + g_BattleCurrentEnemy->panel_offset_y;

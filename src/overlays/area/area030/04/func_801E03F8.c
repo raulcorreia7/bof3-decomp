@@ -17,14 +17,14 @@ NON_MATCHING void func_801E03F8(void) {
     u8  entry_face;
     u8  row_facing;
 
-    FISHING_STATE->pos_x_0C  = g_FacingOffsets[FISHING_STATE->counter_08].pos.x.raw;
-    FISHING_STATE->cursor_10 = g_FacingOffsets[FISHING_STATE->counter_08].pos.y.raw;
+    FISHING_STATE->pos_x_0C  = g_FacingOffsets[FISHING_STATE->counter_08].x;
+    FISHING_STATE->cursor_10 = g_FacingOffsets[FISHING_STATE->counter_08].y;
     direction                = FISHING_STATE->counter_08;
     if (direction == 2 || direction == 6) {
         FISHING_STATE->pos_x_0C  = FISHING_STATE->pos_x_0C * 2;
         FISHING_STATE->cursor_10 = FISHING_STATE->cursor_10 * 2;
     }
-    pos_x = FISHING_STATE->motion_34.pos.pos.x.raw;
+    pos_x = FISHING_STATE->motion_34.unk_34;
     if (pos_x <= TO_COORD(8)) {
         FISHING_STATE->pos_x_0C = ABS(FISHING_STATE->pos_x_0C);
     } else if (pos_x > 0x13FFFF) {
@@ -65,13 +65,13 @@ NON_MATCHING void func_801E03F8(void) {
         }
     }
     for (index = 0; index < 8; index++) {
-        vx    = g_FacingOffsets[index].pos.x.raw;
+        vx    = g_FacingOffsets[index].x;
         value = vx;
         value = ABS(value);
         if (value < 0x401) {
             vx = vx * 2;
         }
-        vy    = g_FacingOffsets[index].pos.y.raw;
+        vy    = g_FacingOffsets[index].y;
         value = vy;
         value = ABS(value);
         if (value < 0x401) {

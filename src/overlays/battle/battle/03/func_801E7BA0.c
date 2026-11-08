@@ -102,7 +102,7 @@ NON_MATCHING void func_801E7BA0(void) {
         *(D_80145E92 + ((g_Task)->slot * 0x140))     = 4;
         *(D_80145E93 + ((g_Task)->slot * 0x140))     = 4;
         *(D_80145E94 + ((g_Task)->slot * 0x140))     = 1;
-        g_BattlePartyBattlers[(g_Task)->slot].unk_08 = g_BattlePartyBattlers[temp_v1_191].unk_08;
+        g_BattlePartyBattlers[(g_Task)->slot].facing = g_BattlePartyBattlers[temp_v1_191].facing;
         *(&D_80145ED8 + ((g_Task)->slot * 0x140))    = 2;
         temp_a0_288                                  = g_Task;
         *(&D_80145ED0 + (temp_a0_288->slot * 0x140)) = 0;
@@ -150,7 +150,7 @@ NON_MATCHING void func_801E7BA0(void) {
         temp_v0_532                                   = temp_a1_528 * BATTLE_PARTY_STRIDE;
         g_MenuPanelTasks[temp_a1_528 + 0xD].unk_0C    = (u8)((s32)(g_BattlePartyBattlers[temp_a1_528].chr.ap * 0x37) /
                                                              (s32)g_BattlePartyBattlers[temp_a1_528].chr.stats.max_ap);
-        Actor_SelectScript(((g_Task)->unk_08 + 4) & BYTE_MASK);
+        Actor_SelectScript(((g_Task)->facing + 4) & BYTE_MASK);
         GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
         func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
         GFX_UploadPaletteRows();

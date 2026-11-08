@@ -36,7 +36,7 @@ NON_MATCHING void func_801DA9DC(void) {
         return;
     }
     if (Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed) >=
-        COORD_INT(g_ActorSlots[0].depth)) {
+        COORD_INT(g_ActorSlots[0].pos.z)) {
         chance = g_FishingLureRow->unk_11;
         if ((RANDOM_MASK(0xF) < chance) && !(g_FrameCount & 0xF)) {
             g_ActorSlots[0].scene_step = 0;
@@ -51,7 +51,7 @@ NON_MATCHING void func_801DA9DC(void) {
             FISHING_STATE->sub_index_03  = 0U;
             return;
         }
-        COORD_INT(g_ActorSlots[0].depth) = Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed);
+        COORD_INT(g_ActorSlots[0].pos.z) = Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed);
         goto box_16; /* joins the common update calls */
     }
 box_16:
@@ -96,7 +96,7 @@ box_16:
                     g_ActorSlots[0].scene_step = 0;
                     g_ActorSlots[0].selection  = 0;
                     limit                      = 3;
-                    g_ActorSlots[0].unk_14     = g_FishingLureRow->flags;
+                    g_ActorSlots[0].unk_14     = g_FishingLureRow->unk_00;
                     D_801E31F8                 = 0;
                 }
             }

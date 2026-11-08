@@ -32,16 +32,16 @@ NON_MATCHING void func_801D9BDC(void) {
     *(u8*)(&D_801485DC) = 0;
     if (D_801ED678 != 0x7F) {
         tmp2                                                   = (D_801ED67C * 3) + D_801ED678;
-        D_801485E0                                             = D_801EC4D0[tmp2].flags;
+        D_801485E0                                             = D_801EC4D0[tmp2].unk_00;
         *(u8*)(&D_801485DC)                                    = 1;
-        D_801485E2                                             = D_801EC4D0[tmp2].step;
+        D_801485E2                                             = D_801EC4D0[tmp2].unk_02;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[tmp2].unk_04 + 1;
     }
     tmp3                            = ((s8)D_801ED66C * 3) + D_801ED668;
-    g_MenuPanelTasks[20].pos.x      = D_801EC4D0[tmp3].flags;
+    g_MenuPanelTasks[20].pos.x      = D_801EC4D0[tmp3].unk_00;
     FIELD(s8, (&D_801485DC), 0x24u) = 1;
-    g_MenuPanelTasks[20].pos.y      = D_801EC4D0[tmp3].step;
+    g_MenuPanelTasks[20].pos.y      = D_801EC4D0[tmp3].unk_02;
     val8                            = 0;
     g_MenuPanelTasks[20].unk_0B     = 1;
     g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;

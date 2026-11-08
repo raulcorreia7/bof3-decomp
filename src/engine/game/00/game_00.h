@@ -403,9 +403,10 @@ extern u8                 D_80181B28[]; /* 0x80181B28 */
 extern s16                D_80181B70[]; /* 0x80181B70 */
 extern u32      D_80181CA8[60]; /* 0x80181CA8 - the 60-word table the exe defines at src/engine/slus/data_80181CA8.c */
 extern s32      D_80181CAC;
-extern u8       D_80181E40[]; /* 0x80181E40 */
-extern u8       D_80181E44[]; /* 0x80181E44 */
-extern u8       D_8018214C[]; /* 0x8018214C */
+extern u8       D_80181E40[];          /* 0x80181E40 */
+extern u8       D_80181E44[];          /* 0x80181E44 */
+extern u8       D_8018214C[];          /* 0x8018214C */
+extern u8       s_ScriptCopyBlock[16]; /* 0x8018216C */
 /* D_8018217C */
 extern u8       g_AreaScriptTests; /* 0x8018217C */
 extern TailFunc D_801821C0[];

@@ -169,7 +169,7 @@ NON_MATCHING void func_801E4744(void) {
                     tmp1                  = val3 >> 0x18;
                     tmp6                  = val8 + 1;
                     val8                  = tmp6;
-                    s_CampMenuState[tmp1] = g_Characters[tmp1];
+                    s_CampMenuState[tmp1] = g_Characters[0].name[tmp1];
                     val3                  = val8 << 0x18;
                 } while (tmp6 < 5);
                 val9 = 0;
@@ -193,11 +193,11 @@ NON_MATCHING void func_801E4744(void) {
             }
             val5 = 0 << 0x18;
             do {
-                tmp3               = val5 >> 0x18;
-                tmp7               = val9 + 1;
-                val9               = tmp7;
-                g_Characters[tmp3] = s_CampMenuState[tmp3];
-                val5               = val9 << 0x18;
+                tmp3                       = val5 >> 0x18;
+                tmp7                       = val9 + 1;
+                val9                       = tmp7;
+                g_Characters[0].name[tmp3] = s_CampMenuState[tmp3];
+                val5                       = val9 << 0x18;
             } while (tmp7 < 5);
             UI_SetMode(UI_MODE_FADE_OUT);
             g_MenuStartStep += 1;
