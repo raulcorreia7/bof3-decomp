@@ -107,15 +107,18 @@ meson compile -C build/meson format pre-push    # or tools/pre_push.sh [BASE_REF
 `build/pre-push/`. It compares with the newer of `public/main` and `origin/main`. Without a disc
 Meson has no `check`; `pre-push` skips it. Each check:
 
-| Check                    | Fails when                                                                  |
-| ------------------------ | --------------------------------------------------------------------------- |
-| `check`, `check-<image>` | an image differs from its retail SHA-1                                      |
-| `check-headers`          | a public header does not compile alone                                      |
-| `check-tree`             | a tracked file is game data or over 1 MiB                                   |
-| `include-asm`            | there are more `INCLUDE_ASM` lines than on `main`, in total or in one image |
-| `format-check`           | C, Python, TOML or Markdown differs from the formatter                      |
-| `meson test`             | a tool test fails                                                           |
-| `typeloss`               | a rename, move or retype weakens a type                                     |
+| Check                    | Fails when                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------ |
+| `check`, `check-<image>` | an image differs from its retail SHA-1                                         |
+| `check-headers`          | a public header does not compile alone                                         |
+| `check-tree`             | a tracked file is game data or over 1 MiB                                      |
+| `include-asm`            | there are more `INCLUDE_ASM` lines than on `main`, in total or in one image    |
+| `externs`                | a `.c` file gains an `extern` line                                             |
+| `addrs`                  | a symbol address that `config/symbols.toml` records on `main` is gone          |
+| `format-check`           | C, Python, TOML or Markdown differs from the formatter                         |
+| `meson test`             | a tool test fails                                                              |
+| `typeloss`               | a rename, move or retype weakens a type                                        |
+| `quality`                | a touched file gains casts, matching aids, `func_`/`D_` names or pasted bodies |
 
 The disc-free checks run in CI on every push and pull request through the same entry. A match score,
 an analyzer opinion or a decompiler draft is a lead; only `check` proves bytes. For parallel work,
