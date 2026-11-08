@@ -23,13 +23,13 @@ extern u8 D_801F0194[];
 /* The launch delay between each group of four sparkles, per kind. */
 extern u8 D_801F019C[];
 
-u32                      BMagic_AllocEffect(void);
-extern EffectStepFuncs3  D_801EEC1C;
-void                     func_801EFCD8(void);
-void                     func_801EF80C(u16 angle, u16 radius);
-void                     func_801EFA40(u16 angle, u16 radius);
-extern BMagicEffectFuncs D_801EEC04;
-void                     func_801EF338(void);
+u32                          BMagic_AllocEffect(void);
+extern BMagicEffectWorkSteps D_801EEC1C;
+void                         func_801EFCD8(void);
+void                         func_801EF80C(u16 angle, u16 radius);
+void                         func_801EFA40(u16 angle, u16 radius);
+extern BMagicEffectFuncs     D_801EEC04;
+void                         func_801EF338(void);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
 #define EFFECT_SPARKLE_TASK     D_801F17B0

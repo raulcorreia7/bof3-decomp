@@ -7,7 +7,13 @@
 
 extern Callback D_801EFAA8[];
 
-extern EffectStepFuncs3 D_801EEC10;
+#define MAGIC111_STEP_COUNT 3
+
+typedef struct Magic111Steps {
+    Callback steps[MAGIC111_STEP_COUNT];
+} Magic111Steps;
+
+extern Magic111Steps D_801EEC10;
 
 extern Callback D_801EFAB8[];
 

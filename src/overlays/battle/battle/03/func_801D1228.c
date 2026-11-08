@@ -146,7 +146,7 @@ NON_MATCHING void func_801D1228(void) {
         index = slot & BYTE_MASK;
     } while ((u32)(slot & BYTE_MASK) < 0x10U);
     if (g_BattleEncounter != 0) {
-        g_BossBattleEventHook(6U);
+        g_BossBattleEventHook(BOSS_EVENT_BATTLE_RESET);
     }
     g_BattleStep += 1;
 }

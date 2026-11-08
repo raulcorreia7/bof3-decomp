@@ -74,7 +74,7 @@ BattleEffectStage3Funcs g_BattleEffectStage3Funcs = {
 };
 
 /* 0x801D0EF4 */
-EffectStepFuncs5 D_801D0EF4 = {
+BattleNumberEffectSteps D_801D0EF4 = {
     (Callback)func_801E5E2C, (Callback)func_801E6088, (Callback)func_801E60DC,
     (Callback)func_801E6154, (Callback)func_801E61F0,
 };

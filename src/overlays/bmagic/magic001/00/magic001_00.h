@@ -11,9 +11,15 @@ typedef struct Magic001Steps {
     Callback handlers[MAGIC001_STEP_COUNT];
 } Magic001Steps;
 
-extern Magic001Steps    D_801EEC10;
-extern u8               g_BattleActiveBattler;
-extern EffectStepFuncs3 D_801EEC3C;
+#define MAGIC001_SECOND_STEP_COUNT 3
+
+typedef struct Magic001SecondSteps {
+    Callback steps[MAGIC001_SECOND_STEP_COUNT];
+} Magic001SecondSteps;
+
+extern Magic001Steps       D_801EEC10;
+extern u8                  g_BattleActiveBattler;
+extern Magic001SecondSteps D_801EEC3C;
 
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->param.unk_0B == 0) {

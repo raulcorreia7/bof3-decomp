@@ -5,11 +5,17 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs3 D_801EEC10;
+#define MAGIC046_STEP_COUNT 3
 
-extern EffectStepFuncs3 D_801EEC1C;
+typedef struct Magic046Steps {
+    Callback steps[MAGIC046_STEP_COUNT];
+} Magic046Steps;
+
+extern EffectDispatchSteps D_801EEC10;
+
+extern Magic046Steps D_801EEC1C;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BattleEffect     D_801EFF3C[];
+extern BattleEffect  D_801EFF3C[];
 #define BMAGIC_EFFECT_SLOTS D_801EFF3C
 #define BMAGIC_EFFECT_COUNT BATTLE_EFFECT_COUNT
 

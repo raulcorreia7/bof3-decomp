@@ -15,10 +15,10 @@ MATCH void func_801EEDE0(void) {
 }
 
 MATCH void func_801EEE38(void) {
-    EffectStepFuncs5 handlers;
+    Magic151Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_TASK(handlers.handlers, 3, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
 MATCH void func_801EEEA8(void) {
@@ -54,10 +54,10 @@ MATCH void func_801EF2A0(void) {
 }
 
 MATCH void func_801EF318(void) {
-    EffectStepFuncs5 handlers;
+    Magic151Steps handlers;
 
     handlers = D_801EEC24;
-    SYS_DISPATCH_TASK(handlers.handlers, 3, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
 INCLUDE_ASM(func_801EF388);
