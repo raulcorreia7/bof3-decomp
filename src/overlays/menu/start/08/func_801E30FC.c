@@ -1,7 +1,7 @@
 #include "start_08.h"
 
 MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
-    u8 data[0x18];
+    u8 data[24];
     /* FAKE: retail keeps the row y in s0. */
     FAKE_REG(u16, y, "s0");
 

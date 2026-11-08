@@ -4,7 +4,7 @@
  * the handlers take the type first. */
 
 MATCH void Fairy_GrantGift(void) {
-    FairyGift buf[0x14];
+    FairyGift buf[20];
     u8*       src;
     s32       i;
     s32       j;

@@ -4,8 +4,8 @@
 typedef s8 (*SaveProbe)(s32, s32, s32, s32, s32);
 
 MATCH void func_801D5894(void) {
-    char date_label[0x18];
-    char save_name[0x40];
+    char date_label[24];
+    char save_name[64];
 
     g_SaveSlotCount = 3;
     MENU_DRAW_HEADER();

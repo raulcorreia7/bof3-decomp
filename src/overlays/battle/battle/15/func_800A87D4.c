@@ -2,7 +2,7 @@
 
 /* The 0x74 bytes of the work record that a queued slot copies. */
 typedef struct BattleWorkImage {
-    u32 words[0x1D];
+    u32 words[29];
 } BattleWorkImage;
 
 /* Copies the battle work record into a queued slot and arms the active actor. */
