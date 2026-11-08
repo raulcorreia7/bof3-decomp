@@ -10,19 +10,19 @@
  */
 /* func_801F3AA8 (area098/13), func_801F3598 (area188/13) */
 MATCH void Area_UpdateSpawn(void) {
-    u8 temp_v0;
-    u8 temp_v1;
+    u8 timer;
+    u8 frame;
 
-    temp_v1        = g_Task->unk_06;
-    g_Task->unk_06 = temp_v1 + 1;
-    if (!(temp_v1 & 3)) {
+    frame          = g_Task->unk_06;
+    g_Task->unk_06 = frame + 1;
+    if (!(frame & 3)) {
         Area_ClaimSpawnSlot();
     }
     AREA_SPAWN_TICK();
     Area_UpdateSpawnSlots();
-    temp_v0       = g_Task->timer - 1;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (!(timer & 0xFF)) {
         s32 x;
         s32 y;
         s32 z;

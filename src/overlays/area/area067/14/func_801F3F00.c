@@ -1,15 +1,15 @@
 #include "area067_14.h"
 
 MATCH void func_801F3F00(void) {
-    ActorSlot* temp_v0;
-    s32        temp_v1;
+    ActorSlot* actor;
+    s32        slot;
 
-    temp_v1 = Actor_FindFreeSlot() & 0xFF;
-    if (temp_v1 != 0xFF) {
-        temp_v0               = &g_ActorSlots[temp_v1];
-        temp_v0->header.flags = 1;
-        temp_v0->type         = 0x2D;
-        temp_v0->pos.x.fixed  = g_Task->pos.x.fixed;
-        temp_v0->pos.y.fixed  = g_Task->pos.y.fixed;
+    slot = Actor_FindFreeSlot() & 0xFF;
+    if (slot != 0xFF) {
+        actor               = &g_ActorSlots[slot];
+        actor->header.flags = 1;
+        actor->type         = 0x2D;
+        actor->pos.x.fixed  = g_Task->pos.x.fixed;
+        actor->pos.y.fixed  = g_Task->pos.y.fixed;
     }
 }
