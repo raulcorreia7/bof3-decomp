@@ -33,6 +33,8 @@ u8          func_801E3160(void);
 /* func_801E54EC */
 void        Battle_DefeatEnemy(void);
 void        func_801E567C(void);
-void        func_801E5704(void);
+/* func_801E5704 */
+void        Battle_TriggerCritical(void);
+/* func_801EF318 */
 extern void func_801EF318(void);
 #endif

@@ -19,7 +19,7 @@ MATCH void func_801D238C(void) {
         (*count)++;
     }
     func_801D750C(D_80148358, D_8014835A);
-    func_801D9900();
+    Battle_DrawDimOverlay();
     for (panel_index = 0; panel_index < 7; panel_index++) {
         func_801D8450(panel_index);
         func_801644D8(panel_index, s_BattlePanelOffsets[panel_index][0] + 0x88,

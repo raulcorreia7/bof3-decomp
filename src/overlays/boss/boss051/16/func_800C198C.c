@@ -2,7 +2,7 @@
 
 MATCH void func_800C198C(void) {
     if (g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) {
-        func_801E5704();
+        Battle_TriggerCritical();
         func_801E567C();
     }
 }

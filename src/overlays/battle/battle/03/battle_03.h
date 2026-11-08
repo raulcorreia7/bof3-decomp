@@ -717,7 +717,8 @@ void         func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value);
 /* func_801D9684 */
 void         Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value);
 void         func_801D9804(s32 x, s32 y, s32 clut_index, s32 glyph_index);
-void         func_801D9900(void);
+/* func_801D9900 */
+void         Battle_DrawDimOverlay(void);
 void         func_801D99AC(s16 x, s16 y, u8 template_index);
 void         func_801D9AB4(s16 x, s16 y, s32 shape_index, s32 shade);
 void         func_801D9C80(s16 x, s16 y, u8 template_index, u8 shade);

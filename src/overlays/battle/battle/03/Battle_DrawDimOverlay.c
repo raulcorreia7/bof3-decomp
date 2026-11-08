@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D9900(void) {
+/* func_801D9900 */
+MATCH void Battle_DrawDimOverlay(void) {
     TILE* tile;
 
     GFX_AddDrawMode(GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y));
