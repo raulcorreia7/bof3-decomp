@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EECF0(void) {
-    Magic008Steps handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -47,7 +47,7 @@ MATCH void func_801EF324(void) {
 }
 
 MATCH void func_801EF384(void) {
-    Magic008Steps handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC20;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -68,7 +68,7 @@ MATCH void Effect_StartPlaying_801EF728(void) {
 }
 
 MATCH void func_801EF75C(void) {
-    Magic008Steps handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC30;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -270,7 +270,7 @@ MATCH void func_801F08C4(void) {
 }
 
 MATCH void func_801F0964(void) {
-    Magic008Steps handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC84;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
