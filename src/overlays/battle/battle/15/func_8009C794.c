@@ -17,7 +17,7 @@ MATCH s32 func_8009C794(s32 skip_slot, s32 row_index) {
             if (battler[0x34] == 0x63) {
                 return 0;
             }
-            if (Battle_EnemyEventFired(&g_BattleEnemyBattlers[row], index) == 0) {
+            if (Battle_EnemyEventTriggered(&g_BattleEnemyBattlers[row], index) == 0) {
                 return 0;
             }
         }

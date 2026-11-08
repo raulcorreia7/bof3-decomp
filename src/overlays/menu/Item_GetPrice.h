@@ -1,10 +1,13 @@
-/* Read the u16 value of one entry from the four per-kind row tables. One
+/* Read the u16 value of one entry from the four item category tables. One
  * definition shared by the shop, start, Bate and Shisu overlays; each overlay
  * includes this file where the function sits.
  */
 /* func_801D4F1C (bate), func_801D5EC4 (shisu), func_801DA9C4 (shop), func_801DDEBC (start) */
-MATCH u16 Item_GetPrice(s32 category, s32 item_id) {
-    switch (category & BYTE_MASK) {
+MATCH u16 Item_GetPrice(ItemCategory category, s32 item_id) {
+    s32 category_byte;
+
+    category_byte = category;
+    switch (category_byte & BYTE_MASK) {
         case ITEM_CAT_ITEM:
         default:
             return *(u16*)(&D_801C8974 + ((item_id & BYTE_MASK) * 0x12));

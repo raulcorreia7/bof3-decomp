@@ -5,14 +5,16 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* Seven step handlers: the copy at D_801EECAC reads seven words, the eighth slot is unused. */
-typedef struct BMagicStepTable7 {
-    Callback handlers[7];
-} BMagicStepTable7;
+#define MAGIC008_EARLY_STEP_COUNT 7
+#define MAGIC008_STEP_COUNT       10
 
-typedef struct BMagicStepTable10 {
-    Callback handlers[10];
-} BMagicStepTable10;
+typedef struct Magic008EarlySteps {
+    Callback handlers[MAGIC008_EARLY_STEP_COUNT];
+} Magic008EarlySteps;
+
+typedef struct Magic008Steps {
+    Callback handlers[MAGIC008_STEP_COUNT];
+} Magic008Steps;
 
 extern EffectStepFuncs4  D_801EEC04;
 extern BMagicEffectFuncs D_801EEC58;
@@ -26,7 +28,7 @@ extern EffectStepFuncs3  D_801EEC4C;
 extern EffectStepFuncs4  D_801EEC84;
 extern BMagicEffectFuncs D_801EEC94;
 
-extern BMagicStepTable7  D_801EECAC;
-extern BMagicStepTable10 D_801EECC8;
+extern Magic008EarlySteps D_801EECAC;
+extern Magic008Steps      D_801EECC8;
 
 #endif

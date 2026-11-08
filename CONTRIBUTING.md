@@ -114,6 +114,7 @@ Meson has no `check`; `pre-push` skips it. Each check:
 | `check-tree`             | a tracked file is game data or over 1 MiB                                              |
 | `include-asm`            | there are more `INCLUDE_ASM` lines than on `main`, in total or in one image            |
 | `externs`                | a `.c` file gains an `extern` line                                                     |
+| `markers`                | a function definition in `src/` lacks exactly one `MATCH` or `NON_MATCHING` marker     |
 | `names`                  | a new name in `include/` or `src/` carries an 8-digit address, or a listed one is gone |
 | `addrs`                  | a symbol address that `config/symbols.toml` records on `main` is gone                  |
 | `format-check`           | C, Python, TOML or Markdown differs from the formatter                                 |

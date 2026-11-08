@@ -73,7 +73,7 @@ MATCH void func_801E3C14(void) {
     pending = &g_BattlePendingStatus;
     g_BattleCurrentEnemy->status |= *pending;
     *pending = 0;
-    Battle_FireEnemyEvents();
+    Battle_TriggerEnemyEvents();
     tail_work = g_BattleCurrentEnemy;
     if (tail_work->turn.hp_change > 0) {
         if (tail_work->hp == 0) {

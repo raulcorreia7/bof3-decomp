@@ -189,11 +189,11 @@ typedef struct BattleHandlerQuad {
  * table holds four packets per enemy kind record, at the kind record's +0x34.
  *
  * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
- * (Battle_FireEnemyEvents), its +0x01 with `lbu` and switches on it (Battle_ApplyEnemyEvent),
+ * (Battle_TriggerEnemyEvents), its +0x01 with `lbu` and switches on it (Battle_ApplyEnemyEvent),
  * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
  * and its +0x08..+0x0F with `lbu` (Battle_ApplyEnemyEvent). */
 typedef struct BattleEventPacket {
-    u8  kind;        /* +0x00 the kind Battle_FireEnemyEvents switches on to pick the trigger test */
+    u8  kind;        /* +0x00 the kind Battle_TriggerEnemyEvents switches on to pick the trigger test */
     u8  effect_kind; /* +0x01 the kind Battle_ApplyEnemyEvent switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
@@ -212,8 +212,8 @@ ASSERT_OFFSET(BattleEventPacket, unk_04, 0x04);
 ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
 
-/* What makes an event packet fire (BattleEventPacket.kind). The once-only kinds fire at most once per
- * battle; the REPEAT kinds fire at every hit. */
+/* What makes an event packet trigger (BattleEventPacket.kind). The once-only kinds trigger at most once per
+ * battle; the REPEAT kinds trigger at every hit. */
 typedef enum BattleEventTrigger {
     BATTLE_EVENT_HIT_FIRE             = 0,
     BATTLE_EVENT_HIT_FROST            = 1,
@@ -814,8 +814,7 @@ extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
-                   s32 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 /* func_801DB5CC */
 u8   Battle_FindSelectableSlotForward(s32 start_slot);
@@ -852,8 +851,8 @@ void        func_8009B03C(void);
 void        func_8009B160(void);
 /* func_8009C994 */
 extern void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* event);
-extern u8   Battle_EnemyEventFired(volatile EnemyBattler* enemy, s32 bit_index);
-extern void Battle_SetEnemyEventFired(EnemyBattler* enemy, s32 bit, u8 set);
+extern u8   Battle_EnemyEventTriggered(volatile EnemyBattler* enemy, s32 bit_index);
+extern void Battle_SetEnemyEventTriggered(EnemyBattler* enemy, s32 bit, u8 set);
 extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
 s32         func_800A4FD8(void);
 s32         func_800A5D00(void);
