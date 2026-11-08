@@ -12,7 +12,7 @@ MATCH void func_801D3A64(void) {
         Battle_CancelTurn(g_Battle.active_battler);
         BATTLE_ACTIVE_PARTY.header.mode = 2;
         BATTLE_ACTIVE_PARTY.header.step = 0;
-        g_Battle.phase.mode             = 3;
+        g_Battle.phase.mode             = BATTLE_MODE_TURNS;
         g_Battle.phase.step             = 0;
         g_Battle.phase.sub_step         = 0;
         return;

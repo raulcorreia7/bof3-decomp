@@ -6,7 +6,7 @@ MATCH void Battle_DispatchMode(void) {
 
     handlers = g_BattlePhases;
     if (g_Battle.encounter != 0) {
-        if (g_Battle.phase.mode != 0) {
+        if (g_Battle.phase.mode != BATTLE_MODE_ENTRANCE) {
             g_Battle.boss_event_hook(BOSS_EVENT_TICK);
         }
     }

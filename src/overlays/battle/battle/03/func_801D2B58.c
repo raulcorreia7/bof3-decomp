@@ -135,7 +135,7 @@ NON_MATCHING void func_801D2B58(void) {
         } while (1);
     }
 done:
-    g_Battle.phase.mode = 4;
+    g_Battle.phase.mode = BATTLE_MODE_ROUND_END;
     g_Battle.phase.step = 0;
 }
 #else

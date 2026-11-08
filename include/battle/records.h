@@ -848,11 +848,22 @@ ASSERT_OFFSET(BattleOutcome, drop_count, 0x03);
 ASSERT_OFFSET(BattleOutcome, reward_exp, 0x08);
 ASSERT_OFFSET(BattleOutcome, drops, 0x10);
 
+/* The battle modes, the rows of g_BattlePhases: set-up and entrance once, then rounds of commands, turn order,
+ * actions and round end, then the result. */
+typedef enum BattleMode {
+    BATTLE_MODE_ENTRANCE   = 0,
+    BATTLE_MODE_COMMANDS   = 1,
+    BATTLE_MODE_TURN_SETUP = 2,
+    BATTLE_MODE_TURNS      = 3,
+    BATTLE_MODE_ROUND_END  = 4,
+    BATTLE_MODE_RESULT     = 5,
+} BattleMode;
+
 /* The battle's phase tuple at 0x801462E0: the mode selects the g_BattlePhases handler, the step runs inside it and
  * the sub-step inside the step. BattleSetEnding writes the three bytes together; the intro and panel code reset
  * step and sub-step together and advance the mode through one base. */
 typedef struct BattlePhase {
-    u8 mode;     /* 0x00 */
+    u8 mode;     /* 0x00 BattleMode */
     u8 step;     /* 0x01 */
     u8 sub_step; /* 0x02 */
 } BattlePhase;

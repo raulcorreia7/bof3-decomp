@@ -22,7 +22,7 @@ MATCH void func_801DF3F8(void) {
         work->unk_5E = 0;
         work->unk_5D = 0;
     }
-    if ((g_Battle.phase.mode == 1) && (g_Battle.phase.step >= 2U)) {
+    if ((g_Battle.phase.mode == BATTLE_MODE_COMMANDS) && (g_Battle.phase.step >= 2U)) {
         PartyMember* work;
 
         if (g_Game.current->chr.character_id != g_Game.members[D_801462EE].chr.character_id) {
@@ -37,7 +37,7 @@ MATCH void func_801DF3F8(void) {
         work->unk_5E = offset;
         work->unk_5D = offset;
     }
-    if (g_Battle.phase.mode != 5) {
+    if (g_Battle.phase.mode != BATTLE_MODE_RESULT) {
         PartyMember* battler = g_Game.current;
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {

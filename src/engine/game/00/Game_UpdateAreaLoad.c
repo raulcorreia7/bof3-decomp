@@ -19,7 +19,7 @@ MATCH void Game_UpdateAreaLoad(void) {
     func_8019FAA0(context_seed, context_a, context_b, context_kind);
 
     if (g_GameRequestFlags & 8u) {
-        g_GameEntryState = 8u;
+        g_GameEntryState = GAME_STATE_FISHING;
         return;
     }
 
@@ -49,6 +49,6 @@ MATCH void Game_UpdateAreaLoad(void) {
 
     final_world_flags = g_AreaWalkFlags;
     g_GameStateIndex  = GAME_REQUEST_IDLE;
-    g_GameEntryState  = 2u;
+    g_GameEntryState  = GAME_STATE_FIELD;
     g_Game.walk_flags = final_world_flags & ~AREA_WALK_ENTRY_PENDING;
 }
