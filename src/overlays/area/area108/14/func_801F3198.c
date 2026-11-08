@@ -1,19 +1,7 @@
 #include "area108_14.h"
 
-MATCH void func_801F3198(void) {
-    AreaSprite* work;
-    u8          count;
-    u8          tick;
+#include "overlays/area/AREA_SPRITE_DRIFT_STEP.h"
 
-    work = (AreaSprite*)D_801F63EC;
-    tick = (work->flags_03 - 1u);
-    work->origin.x += work->normal.vx;
-    work->origin.y += work->normal.vy;
-    work->flags_03 = tick;
-    work->origin.z += work->normal.vz;
-    count                               = (((AreaSprite*)D_801F63EC)->flags_02 - 1u);
-    ((AreaSprite*)D_801F63EC)->flags_02 = count;
-    if (!(count & BYTE_MASK)) {
-        ((AreaSprite*)D_801F63EC)->flags = 0u;
-    }
+MATCH void func_801F3198(void) {
+    AREA_SPRITE_DRIFT_STEP(D_801F63EC);
 }
