@@ -2172,6 +2172,7 @@ Shop_Equip = { addr = 0x801D3828, type = "func", source = "Swaps one equipment s
 SAVE_DispatchState = { addr = 0x801D46A4, type = "func", source = "Runs the save state handler selected by D_80148652 from the 21-entry table D_801E530C." }
 SAVE_DrawSlots = { addr = 0x801D67B0, type = "func", source = "Draws the visible rows of the shop stock list from g_SaveSlotFirst for g_SaveSlotCount rows, and the panel header." }
 SAVE_BuildSlotImage = { addr = 0x801D69E0, type = "func", source = "Builds the save image at D_801448D8: copies g_SceneState, the party order and the five-byte name, sums the image and stores the sum in D_800C1A70." }
+SAVE_FormatSlotInfo = { addr = 0x801D7080, type = "func", source = "Formats the play time and leader level line of a save slot." }
 Menu_SwapBytes = { addr = 0x801D7E08, type = "func", source = "Swaps the two bytes that two pointers address; the shop callers pass entries of the party order D_80144F5A and of D_801E6244." }
 Menu_DrawCharacterWindow = { addr = 0x801D826C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D86D4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
@@ -2409,6 +2410,7 @@ Menu_DrawClutStrip = { addr = 0x801DF21C, type = "func", source = "Draws the fiv
 Menu_DrawFilledPanel = { addr = 0x801DF410, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
 Menu_DrawWindowFrame = { addr = 0x801DF6EC, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
 Menu_DrawInventoryWindow = { addr = 0x801DFBF4, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
+Menu_DrawAbilitiesPanel = { addr = 0x801E0354, type = "func", source = "Draws the ability list window with cost and element." }
 Menu_DrawPanelFrame = { addr = 0x801E0848, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 Menu_DrawEquipChoiceWindow = { addr = 0x801E0A70, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 SAVE_DrawSlot = { addr = 0x801E11A8, type = "func", source = "Draws one row of the save file list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
@@ -2422,9 +2424,11 @@ Menu_DrawNameEntryGrid = { addr = 0x801E6490, type = "func", source = "Draws the
 Menu_DrawNameEntryControls = { addr = 0x801E6784, type = "func", source = "draws the name entry screen's command window: the OK, Del, Next and Back labels with the button icon beside each, the footer icons and the dot grid, framed by g_NameEntryControlsFrame" }
 SAVE_DrawSlots = { addr = 0x801E6C68, type = "func", source = "Draws the visible rows of the save file list and the panel header." }
 Menu_CharacterPanel = { addr = 0x801E8D60, type = "func", source = "panel mode 0 of the start menu: the character window with its portrait" }
+Menu_DrawCharacterPanel = { addr = 0x801E8DB4, type = "func", source = "Draws the character window and its icon." }
 Menu_ZennyPanel = { addr = 0x801E9140, type = "func", source = "panel mode 1 of the start menu: the zenny window" }
 Menu_PlayTimePanel = { addr = 0x801E9224, type = "func", source = "panel mode 2 of the start menu: the play time window" }
 Menu_CampIconsPanel = { addr = 0x801E9304, type = "func", source = "panel mode 3 of the start menu: the row of seven camp menu icons, the selected one grown" }
+Menu_DrawCampIcons = { addr = 0x801E9350, type = "func", source = "Draws the seven camp icons, the selected one enlarged." }
 Menu_TitlePanel = { addr = 0x801E9554, type = "func", source = "panel mode 4 of the start menu: the short header bar with a text label" }
 Menu_StatsPanel = { addr = 0x801E96CC, type = "func", source = "panel mode 5 of the start menu: the character stat panel" }
 Menu_EquipmentPanel = { addr = 0x801E98F8, type = "func", source = "panel mode 6 of the start menu: the equipment window" }

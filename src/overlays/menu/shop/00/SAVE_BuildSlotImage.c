@@ -56,7 +56,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     u8* src_text;
     u8* work;
 
-    func_801D7080();
+    SAVE_FormatSlotInfo();
     func_801EF27C(1, 0x13, g_UiFormatBuffer);
     *(ShopStateHeader*)&D_801448D8 = *(ShopStateHeader*)&g_SceneState;
     j                              = 0;

@@ -1,6 +1,7 @@
 #include "shop_00.h"
 
-MATCH void func_801D7080(void) {
+/* func_801D7080 */
+MATCH void SAVE_FormatSlotInfo(void) {
     u8 i;
 
     for (i = 0; i < 64; i++) {
