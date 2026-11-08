@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801CEA94);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-#include "overlays/plchar/Char_ProbeCellSpawn10.h"
+#include "overlays/plchar/Char_ProbeCellSpawn.h"
 
 #include "overlays/plchar/Char_SpawnActor.h"
 

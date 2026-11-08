@@ -11,6 +11,9 @@
 #include "overlays/plchar/plchar.h"
 #include "area/spad.h"
 
+/* The cue id multiplier of this image's rare spawn cue. */
+#define CHAR_SPAWN_CUE_SCALE 10
+
 /* The tail callback table's entry count in this image. */
 #define PLCHAR_STEP_TABLE_COUNT 22
 
