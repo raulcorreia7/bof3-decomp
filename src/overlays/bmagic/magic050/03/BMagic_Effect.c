@@ -15,8 +15,8 @@ MATCH void func_801EEDF8(void) {
     u8  timer_next;
 
     timer = g_Task->unk_09;
-    if (timer != 0x10) {
-        if (timer < 0x11) {
+    if (timer != 16) {
+        if (timer < 17) {
             cue = 0x101;
             if (timer != 8) {
             } else {
@@ -24,7 +24,7 @@ MATCH void func_801EEDF8(void) {
             }
         } else {
             cue = 0x101;
-            if (timer != 0x18) {
+            if (timer != 24) {
             } else {
                 goto block_7;
             }
@@ -36,7 +36,7 @@ MATCH void func_801EEDF8(void) {
     }
     timer_next     = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer_next;
-    if ((timer_next & BYTE_MASK) == 0x19) {
+    if ((timer_next & BYTE_MASK) == 25) {
         g_Task->header.mode += 1;
     }
 }

@@ -16,7 +16,7 @@ MATCH void func_801EF44C(void) {
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 0x3E;
+        g_Task->timer       = 62;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

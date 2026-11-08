@@ -70,14 +70,14 @@ MATCH void func_801EF2D8(void) {
     func_801EF430(g_Task);
     g_Task->param.unk_0B = 0xB;
     g_Task->unk_09       = 0;
-    g_Task->timer        = 0x80;
+    g_Task->timer        = 128;
     g_Task->header.step += 1;
 }
 
 MATCH void func_801EF388(void) {
     g_Task->param.unk_0B -= 1;
     g_Task->unk_09 += g_Task->param.unk_0B;
-    g_Task->timer -= 0xC;
+    g_Task->timer -= 12;
     if (g_Task->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();

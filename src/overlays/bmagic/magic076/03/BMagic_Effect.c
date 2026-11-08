@@ -63,7 +63,7 @@ MATCH void func_801EF3F4(void) {
         work->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         work->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x00C00000;
         g_Task->unk_09    = 0;
-        g_Task->timer     = 0x3C;
+        g_Task->timer     = 60;
         g_Task->header.step++;
     }
 }

@@ -287,7 +287,7 @@ MATCH void func_801F0F2C(void) {
     g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + speed;
     if (g_Task->unk_14 < 0) {
         timer = g_Task->unk_09;
-        if (timer < 0x14) {
+        if (timer < 20) {
             g_Task->unk_09 = timer + 1;
         }
     } else if (g_FrameCount & 1) {

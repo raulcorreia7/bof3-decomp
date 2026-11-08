@@ -54,7 +54,7 @@ extern u8 D_801FDFC8;
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
     D_800E4C1E += 6;                           \
     if (--g_Task->timer == 0) {                \
-        g_Task->timer = 0x20;                  \
+        g_Task->timer = 32;                    \
         g_Task->header.step++;                 \
     }
 u8 func_801F85D8(void);

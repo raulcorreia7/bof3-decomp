@@ -86,7 +86,7 @@ MATCH void func_801EF44C(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
-        g_Task->timer = 0x40;
+        g_Task->timer = 64;
         g_Task->header.step += 1;
     }
 }

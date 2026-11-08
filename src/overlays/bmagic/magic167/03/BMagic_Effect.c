@@ -65,7 +65,7 @@ MATCH void func_801EFA70(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->timer       = 0x1;
+        g_Task->timer       = 1;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

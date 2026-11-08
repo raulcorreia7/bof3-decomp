@@ -21,7 +21,7 @@ MATCH void func_801EF08C(void) {
 
     count = g_Task->unk_09;
     if ((count & BYTE_MASK) == 0xC) {
-        g_Task->timer = 0xF;
+        g_Task->timer = 15;
         g_Task->header.step += 1;
         return;
     }
@@ -47,7 +47,7 @@ MATCH void func_801EF12C(void) {
         target += 0x3F;
     }
     if (dir == (target >> 6)) {
-        g_Task->timer = 0xF;
+        g_Task->timer = 15;
         g_Task->header.step += 1;
     }
 }
@@ -140,7 +140,7 @@ MATCH void func_801F014C(void) {
     func_800AF2B4(g_BattleEffectBattler, 0x30);
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + 0x10;
     if (func_800AF5FC(g_BattleEffectBattler, 0x1C000) != 0) {
-        g_Task->timer = 0x1E;
+        g_Task->timer = 30;
         g_Task->header.step += 1;
     }
 }

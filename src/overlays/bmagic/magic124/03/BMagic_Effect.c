@@ -48,7 +48,7 @@ MATCH void func_801EF588(void) {
 }
 
 MATCH void func_801EF5D8(void) {
-    g_Task->timer = 0x10 + (rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4 >> 12);
+    g_Task->timer = 16 + (rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4 >> 12);
     g_Task->unk_0C++;
     if (g_Task->unk_0C == 0x10) {
         g_Task->header.step++;
@@ -58,7 +58,7 @@ MATCH void func_801EF5D8(void) {
 MATCH void func_801EF654(void) {
     u8 timer;
 
-    g_Task->timer  = ((rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4) >> 0xC) + 0x10;
+    g_Task->timer  = ((rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4) >> 0xC) + 16;
     timer          = g_Task->unk_09 - 2;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {

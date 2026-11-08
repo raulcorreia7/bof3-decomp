@@ -89,7 +89,7 @@ MATCH void func_801F71DC(void) {
 
 MATCH void func_801F7248(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        g_Task->timer       = 0x1E;
+        g_Task->timer       = 30;
         g_Task->header.mode = 2;
     }
     func_801F7484();
@@ -103,7 +103,7 @@ MATCH void func_801F72A0(void) {
         g_Task->tint.bytes.unk_5E += 2;
         g_Task->tint.bytes.unk_5F += 2;
     } else {
-        g_Task->timer       = 0x1E;
+        g_Task->timer       = 30;
         g_Task->header.mode = 3;
     }
     func_801F7484();
@@ -185,7 +185,7 @@ MATCH void func_801F763C(void) {
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 1;
     GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
     GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
-    g_Task->timer       = 0x20;
+    g_Task->timer       = 32;
     g_Task->header.mode = 1;
 }
 

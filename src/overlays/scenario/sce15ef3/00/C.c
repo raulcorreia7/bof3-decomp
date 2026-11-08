@@ -126,7 +126,7 @@ MATCH void func_801D1420(void) {
 }
 
 MATCH void func_801D1460(void) {
-    g_Task->timer += 0x10;
+    g_Task->timer += 16;
     if (g_Task->timer == 0) {
         func_801D23AC(0xFF);
         g_Task->header.mode += 1;
@@ -136,7 +136,7 @@ MATCH void func_801D1460(void) {
 }
 
 MATCH void func_801D14DC(void) {
-    g_Task->timer -= 0x10;
+    g_Task->timer -= 16;
     if (g_AreaDrawFlags != 0) {
         func_801D23AC(g_Task->timer);
     }

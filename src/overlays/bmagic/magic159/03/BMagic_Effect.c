@@ -62,7 +62,7 @@ MATCH void func_801EEFC4(void) {
 
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
-    if (timer > 0x20) {
+    if (timer > 32) {
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

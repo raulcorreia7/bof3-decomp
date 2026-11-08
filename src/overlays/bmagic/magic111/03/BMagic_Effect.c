@@ -74,7 +74,7 @@ MATCH void func_801EF1D4(void) {
     g_Task->unk_0C = start;
     g_Task->unk_10 = start + 0x1F;
     g_Task->unk_09 = 0;
-    g_Task->timer  = 0x3C;
+    g_Task->timer  = 60;
     g_Task->header.step += 1;
 }
 

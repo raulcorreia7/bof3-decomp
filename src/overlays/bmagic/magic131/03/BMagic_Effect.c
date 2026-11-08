@@ -121,7 +121,7 @@ MATCH void func_801EFF48(void) {
             g_Task->unk_1C = -1;
         }
         g_Task->unk_09 = 0;
-        g_Task->timer  = 0x1E;
+        g_Task->timer  = 30;
         g_Task->header.step += 1;
     }
 }

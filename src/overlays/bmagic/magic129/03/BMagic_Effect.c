@@ -90,7 +90,7 @@ MATCH void func_801F00D4(void) {
         g_Task->unk_5E      = RANDOM_MASK(7) + 5;
         g_Task->unk_5F      = RANDOM_MASK(7) + 5;
         g_Task->unk_09      = 0x10;
-        g_Task->timer       = 0x10;
+        g_Task->timer       = 16;
         g_Task->header.step += 1;
     }
 }

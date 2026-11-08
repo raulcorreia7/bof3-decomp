@@ -28,7 +28,7 @@ MATCH void func_801EF134(void) {
     u16 item;
 
     if (D_801EC2E4 == 0) {
-        if (g_Task->timer == 0x38) {
+        if (g_Task->timer == 56) {
             item = g_Task->unk_2C.half;
             BMagic_SetTextItemName(item & BYTE_MASK, item >> 8);
         }

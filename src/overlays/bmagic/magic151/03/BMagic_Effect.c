@@ -136,7 +136,7 @@ MATCH void func_801EFE90(void) {
     g_Task->unk_04       = 0;
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
-    g_Task->timer        = 0x1E;
+    g_Task->timer        = 30;
     g_Task->header.step += 1;
 }
 
@@ -253,7 +253,7 @@ MATCH void func_801F11E0(void) {
 MATCH void func_801F129C(void) {
     g_Task->param.unk_0B += 1;
     g_Task->timer += 4;
-    if (g_Task->timer == 0x10) {
+    if (g_Task->timer == 16) {
         g_Task->unk_09 = 8;
         g_Task->header.step += 1;
     }

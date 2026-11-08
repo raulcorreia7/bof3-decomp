@@ -76,7 +76,7 @@ MATCH void func_801EF530(void) {
     g_Task->unk_2B    = 1;
     Actor_SelectScript(1);
     g_Task->unk_09 = 0xE;
-    g_Task->timer  = 0xC;
+    g_Task->timer  = 12;
     g_Task->header.step += 1;
 }
 

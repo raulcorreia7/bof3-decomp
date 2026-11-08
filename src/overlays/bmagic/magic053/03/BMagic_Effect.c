@@ -133,7 +133,7 @@ MATCH void func_801EFE1C(void) {
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
     g_Task->unk_09      = 8;
-    g_Task->timer       = 0x10;
+    g_Task->timer       = 16;
     g_Task->header.step += 1;
 }
 
