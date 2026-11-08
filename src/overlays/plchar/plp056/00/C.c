@@ -89,8 +89,7 @@ MATCH void func_801D0244(void) {
     SYS_DISPATCH_TASK(D_801D08B0, 3, g_Task);
 }
 
-/* func_801D0288 */
-MATCH void Char_RequestFacingScript(void) {
+MATCH void func_801D0288(void) {
     func_801D066C();
     Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
     g_Task->unk_0A = 0xB;
