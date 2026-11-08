@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     PartyMember* work;

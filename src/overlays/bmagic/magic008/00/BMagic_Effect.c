@@ -61,7 +61,7 @@ MATCH void func_801EF6AC(void) {
     EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
 }
 
-MATCH void Effect_StartPlaying_801EF728(void) {
+MATCH void Effect_StartPlaying3(void) {
     u16* flags;
 
     BATTLE_RAISE_EFFECT_PLAYING();
@@ -84,7 +84,7 @@ MATCH void func_801EF9D4(void) {
     }
 }
 
-MATCH void Effect_StartPlaying_801EFA40(void) {
+MATCH void Effect_StartPlaying5(void) {
     u16* flags;
 
     BATTLE_RAISE_EFFECT_PLAYING();
@@ -107,7 +107,7 @@ MATCH void func_801EFC90(void) {
     }
 }
 
-MATCH void Effect_StartPlaying_801EFCFC(void) {
+MATCH void Effect_StartPlaying7(void) {
     u16* flags;
 
     BATTLE_RAISE_EFFECT_PLAYING();
@@ -427,7 +427,7 @@ MATCH void func_801F1708(void) {
     }
 }
 
-MATCH void Effect_ReloadTimerAndStep_801F17BC(void) {
+MATCH void Effect_ReloadTimerAndStep2(void) {
     BMAGIC_RELOAD_TIMER_AND_STEP();
 }
 

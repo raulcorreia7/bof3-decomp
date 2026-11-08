@@ -5,7 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 INCLUDE_ASM(func_801EEC70);
 
@@ -156,7 +156,7 @@ MATCH void func_801F0070(void) {
     }
 }
 
-MATCH void Effect_SetActorMatrix_801F0168(void) {
+MATCH void Effect_SetActorMatrix3(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;

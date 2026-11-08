@@ -34,7 +34,7 @@ MATCH void func_801EF594(void) {
     EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
 }
 
-MATCH void Effect_StartPlaying_801EF610(void) {
+MATCH void Effect_StartPlaying2(void) {
     u16* flags;
 
     BATTLE_RAISE_EFFECT_PLAYING();
@@ -57,7 +57,7 @@ MATCH void func_801EF93C(void) {
     }
 }
 
-MATCH void Effect_StartPlaying_801EF9B0(void) {
+MATCH void Effect_StartPlaying4(void) {
     u16* flags;
 
     BATTLE_RAISE_EFFECT_PLAYING();

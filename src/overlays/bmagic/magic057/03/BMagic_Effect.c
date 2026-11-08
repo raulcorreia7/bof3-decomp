@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 /* func_801EEC50 */
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 MATCH void func_801EECB0(void) {
     g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;

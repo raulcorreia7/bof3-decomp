@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 INCLUDE_ASM(func_801EEC70);
 
@@ -75,7 +75,7 @@ MATCH void func_801EF3DC(void) {
     }
 }
 
-MATCH void Effect_CountDownTimerStep_801EF42C(void) {
+MATCH void Effect_CountDownTimerStep2(void) {
     BMAGIC_COUNT_DOWN_TIMER_STEP();
 }
 

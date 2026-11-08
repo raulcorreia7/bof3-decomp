@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 /* Structurally complete; the candidate keeps the loop counter in t-regs and CSEs the work
  * reload, retail keeps them in $s0/$s1 and reloads g_Task each iteration (75 vs 67

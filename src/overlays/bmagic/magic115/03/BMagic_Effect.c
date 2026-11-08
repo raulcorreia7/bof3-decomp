@@ -90,6 +90,6 @@ MATCH void func_801EF7F4(void) {
     g_Task->header.step += 1;
 }
 
-MATCH void Effect_TickDownAndClear_801EF888(void) {
+MATCH void Effect_TickDownAndClear2(void) {
     EFFECT_TICK_DOWN_AND_CLEAR();
 }

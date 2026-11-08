@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 /* Blocker: copies 16 halfwords from 0x80036C00 to 0x8003AC00 (unnamed data, no table yet) and swaps the scratchpad work pointer to g_BattleEffectBattler around func_8014D978. */
 INCLUDE_ASM(func_801EEC88);

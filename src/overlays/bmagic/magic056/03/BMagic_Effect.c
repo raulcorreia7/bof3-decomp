@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 INCLUDE_ASM(func_801EEC94);
 
@@ -67,7 +67,7 @@ MATCH void func_801EFA50(void) {
     }
 }
 
-MATCH void Effect_CopyBattlerCoords_801EFAD8(void) {
+MATCH void Effect_CopyBattlerCoords2(void) {
     BMAGIC_COPY_BATTLER_COORDS();
 }
 

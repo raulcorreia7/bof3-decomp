@@ -7,9 +7,9 @@
    func_801EEC10 (magic216), func_801EEC10 (magic222), func_801EEC18 (magic002), func_801EEC1C (magic052), func_801EEC1C
    (magic111), func_801EEC1C (magic137), func_801EEC20 (magic040), func_801EEC24 (magic096), func_801EEC24 (magic161),
    func_801EEC28 (magic138), func_801EEC34 (magic039), func_801EEC34 (magic056), func_801EEC38 (magic017), func_801EEC50
-   (magic151), func_801EEC64 (magic001), BMagic_RunStep (magic050), BMagic_RunStep (magic057), BMagic_RunStep (magic064)
+   (magic151), func_801EEC64 (magic001), BMagic_DispatchMode (magic050), BMagic_DispatchMode (magic057), BMagic_DispatchMode (magic064)
 */
-MATCH void BMagic_RunStep(void) {
+MATCH void BMagic_DispatchMode(void) {
     MagicModuleSteps handlers;
 
     handlers = D_801EEC00.steps;

@@ -268,7 +268,7 @@ MATCH void func_801EFE88(void) {
     }
 }
 
-MATCH void Effect_CountUpAndStep_801EFF08(void) {
+MATCH void Effect_CountUpAndStep2(void) {
     BMAGIC_COUNT_UP_AND_STEP();
 }
 

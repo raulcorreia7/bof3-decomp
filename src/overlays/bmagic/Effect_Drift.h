@@ -1,7 +1,7 @@
 /* Moves the effect's actor one drift step and releases the ticker when the timer runs out. Every change here must
    verify every member. */
 /* func_801EF59C (magic067), func_801EF2C4 (magic137) */
-MATCH void Effect_DriftStep(void) {
+MATCH void Effect_Drift(void) {
     PartyMember* work;
     u8           timer;
     u8           ticks;

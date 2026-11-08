@@ -1,7 +1,7 @@
 /* Counts the effect timer (work byte 0x09) down; at zero it advances the effect
  * step (work byte 0x02). One definition shared by the bmagic effect modules;
  * every change here must verify every member. */
-/* Effect_CountDownTimerStep (magic088, magic096, magic110, magic113, magic130), Effect_CountDownTimerStep_801EF42C
+/* Effect_CountDownTimerStep (magic088, magic096, magic110, magic113, magic130), Effect_CountDownTimerStep2
    (magic130) */
 /* The statements of Effect_CountDownTimerStep. */
 #define BMAGIC_COUNT_DOWN_TIMER_STEP()                     \

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 INCLUDE_ASM(func_801EEC7C);
 
@@ -102,7 +102,7 @@ MATCH void func_801EF870(void) {
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 
-MATCH void Effect_TickOnTimerZero_801EF914(void) {
+MATCH void Effect_TickOnTimerZero2(void) {
     PartyMember* work;
 
     BMAGIC_TICK_ON_TIMER_ZERO(2);

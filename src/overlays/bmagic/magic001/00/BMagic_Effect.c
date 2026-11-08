@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 INCLUDE_ASM(func_801EECC4);
 
@@ -154,7 +154,7 @@ MATCH void func_801EFA14(void) {
     BMagic_ClearWorkFlagsAndStep();
 }
 
-MATCH void Effect_StartPlaying_801EFA84(void) {
+MATCH void Effect_StartPlaying6(void) {
     u16* flags;
 
     BATTLE_RAISE_EFFECT_PLAYING();

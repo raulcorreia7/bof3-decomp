@@ -233,7 +233,7 @@ MATCH void func_801F0C4C(void) {
     }
 }
 
-MATCH void Effect_CountDownAndStep_801F0C98(void) {
+MATCH void Effect_CountDownAndStep2(void) {
     BMAGIC_COUNT_DOWN_AND_STEP();
 }
 
@@ -251,7 +251,7 @@ MATCH void func_801F0CE4(void) {
     }
 }
 
-MATCH void Effect_SetActorMatrix_801F0D44(void) {
+MATCH void Effect_SetActorMatrix4(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;

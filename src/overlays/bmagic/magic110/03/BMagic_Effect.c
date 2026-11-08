@@ -180,7 +180,7 @@ MATCH void func_801F00D8(void) {
     }
 }
 
-MATCH void Effect_SetActorMatrix_801F0138(void) {
+MATCH void Effect_SetActorMatrix2(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;

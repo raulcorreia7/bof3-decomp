@@ -77,7 +77,7 @@ MATCH void func_801EF4F4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_DriftStep.h"
+#include "overlays/bmagic/Effect_Drift.h"
 
 INCLUDE_ASM(func_801EF688);
 

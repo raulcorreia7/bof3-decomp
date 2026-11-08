@@ -100,6 +100,6 @@ INCLUDE_ASM(func_801EF608);
 
 INCLUDE_ASM(func_801EF724);
 
-MATCH void Effect_TickDownAndClear_801EF8A4(void) {
+MATCH void Effect_TickDownAndClear3(void) {
     EFFECT_TICK_DOWN_AND_CLEAR();
 }

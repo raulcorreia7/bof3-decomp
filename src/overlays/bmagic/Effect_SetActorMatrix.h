@@ -9,8 +9,8 @@
    (magic103), func_801EF998 (magic110), func_801EF440 (magic113), func_801EF60C (magic118), func_801F0BF8 (magic120),
    func_801EF1A8 (magic125), func_801EF118 (magic126), func_801F0604 (magic131), func_801EF1E4 (magic144), func_801F01BC
    (magic151), func_801EF228 (magic167), func_801EF1A0 (magic218), func_801F0284 (magic220), func_801EF7CC (magic222),
-   func_801F0724 (magic226), Effect_SetActorMatrix_801F0138 (magic110), Effect_SetActorMatrix_801F0D44 (magic131),
-   Effect_SetActorMatrix_801F1DC0 (magic151), Effect_SetActorMatrix_801F0168 (magic222) */
+   func_801F0724 (magic226), Effect_SetActorMatrix2 (magic110), Effect_SetActorMatrix4 (magic131),
+   Effect_SetActorMatrix5 (magic151), Effect_SetActorMatrix3 (magic222) */
 MATCH void Effect_SetActorMatrix(void) {
     SVECTOR pos;
     SVECTOR rot;

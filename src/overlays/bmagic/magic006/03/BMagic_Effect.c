@@ -179,7 +179,7 @@ MATCH void func_801F05F4(void) {
 
 #include "overlays/bmagic/Effect_NextStepOnLastTick.h"
 
-MATCH void Effect_TickOnTimerZero_801F0684(void) {
+MATCH void Effect_TickOnTimerZero3(void) {
     PartyMember* work;
 
     BMAGIC_TICK_ON_TIMER_ZERO(EFFECT_TIMER_TICK);

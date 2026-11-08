@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/BMagic_DispatchMode.h"
 
 INCLUDE_ASM(func_801EEC7C);
 
@@ -71,7 +71,7 @@ MATCH void func_801EF21C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_DriftStep.h"
+#include "overlays/bmagic/Effect_Drift.h"
 
 INCLUDE_ASM(func_801EF3B0);
 

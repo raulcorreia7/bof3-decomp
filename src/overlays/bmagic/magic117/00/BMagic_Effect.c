@@ -28,6 +28,6 @@ INCLUDE_ASM(func_801EF0F8);
 
 INCLUDE_ASM(func_801EF20C);
 
-MATCH void Effect_PlayOnce_801EF344(void) {
+MATCH void Effect_PlayOnce2(void) {
     BATTLE_PLAY_ONCE();
 }
