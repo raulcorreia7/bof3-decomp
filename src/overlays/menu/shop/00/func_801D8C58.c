@@ -20,9 +20,9 @@ NON_MATCHING void func_801D8C58(s16 x, s16 y, u8 index, u8 flag) {
         tx = x + 0x26;
     }
     if (flag == 0) {
-        UI_DrawText(tx, y + 7, 0, 0xFF, &D_801E5844);
+        UI_DrawText(tx, y + 7, 0, TEXT_LENGTH_MAX, &D_801E5844);
     } else {
-        UI_DrawText(tx, y + 7, 0, 0xFF, &D_801E5848);
+        UI_DrawText(tx, y + 7, 0, TEXT_LENGTH_MAX, &D_801E5848);
     }
     if (flag == 0) {
         value = FIELD(s32, slot, 0x8);

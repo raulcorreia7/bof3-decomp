@@ -13,9 +13,9 @@ MATCH void Menu_SortAbilityStockByCostDescending(void) {
     u8  nxt;
 
     Menu_PackAbilityStock();
-    for (i = 0; i < 127; i++) {
+    for (i = 0; i < ABILITY_STOCK_SLOT_COUNT - 1; i++) {
         row = D_8014546C;
-        for (j = 0; j < 127 - i; j++) {
+        for (j = 0; j < ABILITY_STOCK_SLOT_COUNT - 1 - i; j++) {
             cur = *row;
             if (cur != 0) {
                 nxt = *(row + 1);

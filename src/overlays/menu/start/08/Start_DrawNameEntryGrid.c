@@ -26,16 +26,16 @@ NON_MATCHING void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
         for (col = 0; col < 12; col++) {
             if (col == 10 && row >= 3) {
                 switch (*cell) {
-                    case 1:
+                    case NAME_ENTRY_NEXT:
                         UI_DrawText(x, y, 4, 5, labels.next);
                         break;
-                    case 2:
+                    case NAME_ENTRY_BACK:
                         UI_DrawText(x, y, 4, 5, labels.back);
                         break;
-                    case 3:
+                    case NAME_ENTRY_QUIT:
                         UI_DrawText(x, y, 2, 5, labels.quit);
                         break;
-                    case 4:
+                    case NAME_ENTRY_START:
                         UI_DrawText(x, y, 2, 5, labels.start);
                         break;
                 }

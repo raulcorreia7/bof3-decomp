@@ -90,7 +90,7 @@ NON_MATCHING void func_801E4744(void) {
         val10 = (D_801ED7E8 * 0x60) + (((s8)D_801ED7E4 * 0xC) + D_801ECDBC) + (s8)D_801ED7E0;
         tmp15 = *val10;
         switch (tmp15) { /* irregular */
-            case 1:
+            case NAME_ENTRY_NEXT:
                 if ((u8)D_801ED7DC < 4U) {
                     SND_PlayCue(EMI_CUE_ID(1, 3));
                     val11 = D_801ED7DC + 1;
@@ -101,19 +101,19 @@ NON_MATCHING void func_801E4744(void) {
                     SND_PlayCue(EMI_CUE_ID(1, 7));
                 }
                 break;
-            case 2:
+            case NAME_ENTRY_BACK:
                 if (D_801ED7DC != 0) {
                     SND_PlayCue(EMI_CUE_ID(1, 3));
                     val11 = D_801ED7DC - 1;
                     goto block_45; /* retail branch */
                 }
                 goto block_41; /* retail branch */
-            case 3:
+            case NAME_ENTRY_QUIT:
                 SND_PlayCue(EMI_CUE_ID(1, 3));
                 g_MenuStartStep     = 0;
                 g_GameEntrySubstate = 1;
                 break;
-            case 4:
+            case NAME_ENTRY_START:
                 g_InputPressed |= PADstart;
                 break;
             default:

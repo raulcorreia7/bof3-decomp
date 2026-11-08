@@ -15,10 +15,10 @@ MATCH void func_801D5114(void) {
     func_801D4A44();
     kind = D_80148504.group;
     mask = 1 << g_CharSlot[g_PartyFieldOrder[D_80148656]];
-    for (i = 0; i < 127; i++) {
+    for (i = 0; i < INV_SLOTS_PER_CATEGORY - 1; i++) {
         left  = D_801C893C[kind];
         right = D_801C8950[kind];
-        for (j = 0; j < 127 - i; j++) {
+        for (j = 0; j < INV_SLOTS_PER_CATEGORY - 1 - i; j++) {
             if (left[0] != 0 && left[1] != 0 && (mask & Item_GetEquipability(kind, left[0])) == 0 &&
                 (mask & Item_GetEquipability(kind, left[1])) != 0) {
                 Menu_SwapBytes(left, left + 1);
