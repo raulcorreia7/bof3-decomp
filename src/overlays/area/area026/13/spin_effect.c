@@ -366,12 +366,12 @@ MATCH void func_801F2C48(void) {
     s32    v1;
     s32    v2;
 
-    work         = (Actor*)g_Task;
+    work         = g_Task;
     v0           = work->pos.x.fixed;
     v1           = work->pos.y.fixed;
     v2           = work->pos.z.fixed;
     work->timer  = 0xA;
-    work2        = (Actor*)g_Task;
+    work2        = g_Task;
     work->unk_1C = 0;
     work->vx     = v0;
     work->vy     = v1;
@@ -387,15 +387,15 @@ MATCH void func_801F2C94(void) {
     Actor* work3;
     u8     count;
 
-    work = (Actor*)g_Task;
+    work = g_Task;
     func_801F2D5C(&work->vx, work->unk_1C);
-    work2 = (Actor*)g_Task;
+    work2 = g_Task;
     work->unk_1C += 0x1199;
     count        = (work2->timer - 1);
     work2->timer = count;
     if (count == 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
-        work3 = (Actor*)g_Task;
+        work3 = g_Task;
         work3->header.mode++;
     }
 }
@@ -550,7 +550,7 @@ MATCH void func_801F32B8(void) {
     selection = D_801F4CE0[index];
     result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        work               = (Actor*)g_Task;
+        work               = g_Task;
         work->param.unk_0B = result;
     }
 }

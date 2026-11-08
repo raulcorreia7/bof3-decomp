@@ -3,7 +3,7 @@
 MATCH void func_801F2EA8(void) {
     Actor* work;
 
-    work = (Actor*)g_Task;
+    work = g_Task;
     if (work->unk_0A != 0) {
         work->pos.x.fixed += D_801F4C84[work->unk_0A & 0xF] << 11;
         work->pos.y.fixed -= D_801F4C84[work->unk_0A & 0xF] << 11;
