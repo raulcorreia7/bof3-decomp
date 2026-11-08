@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* 51.52%; branch@+0x000C: pointer setup and the 3-byte search loop diverge. */
+/* A barrier after the party bytes moves the first difference to +0x18; indexed and pinned loops also differ. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     s32       i;
