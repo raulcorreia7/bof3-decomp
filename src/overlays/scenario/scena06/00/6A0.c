@@ -332,7 +332,7 @@ MATCH void func_801FE198(void) {
     Party_JoinMember(CHAR_ID_GARR);
 }
 
-MATCH void Scene_JoinNina_801FE1D4(void) {
+MATCH void Scene_JoinNina3(void) {
     SCENE_JOIN_NINA();
 }
 

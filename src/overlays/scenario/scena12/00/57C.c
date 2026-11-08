@@ -307,14 +307,14 @@ INCLUDE_ASM(func_801FCD58);
 
 #include "overlays/scenario/Scene_JoinMomo.h"
 
-MATCH void Scene_JoinAdultNinaAndMomo_801FCEB4(void) {
+MATCH void Scene_JoinAdultNinaMomo3(void) {
     SCENE_JOIN_ADULT_NINA_AND_MOMO();
 }
 
 /* func_801FCF00 */
 #include "overlays/scenario/Scene_JoinMomoWithGarr.h"
 
-MATCH void Scene_JoinMomo_801FCF44(void) {
+MATCH void Scene_JoinMomo3(void) {
     SCENE_JOIN_MOMO();
 }
 
