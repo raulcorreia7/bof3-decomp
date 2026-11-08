@@ -11,6 +11,6 @@ extern s32 D_80145EC4;
 
 extern u8 D_801F3684[];
 
-void func_801F2F3C(void* arg0, void* arg1);
+void func_801F2F3C(s32 arg0, s32 arg1);
 
 #endif

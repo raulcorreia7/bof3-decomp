@@ -62,6 +62,24 @@ def test_type_loss_keys_address_names_by_folder(
     assert set(after) == {"func_80000000@src/b"}
 
 
+def test_type_loss_allows_only_the_recorded_integer_correction(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = "src/overlays/area/area075/13/area075_13.h"
+    old = {path: "void func_801F2E64(void* arg0, s32 arg1);"}
+    new = {path: "void func_801F2E64(s32 arg0, s32 arg1);"}
+    monkeypatch.setattr(
+        typeloss, "sources", lambda rev: iter((old if rev == "old" else new).items())
+    )
+    assert typeloss.main(["old", "new"]) == 0
+    new[path] = "void func_801F2E64(u32 arg0, s32 arg1);"
+    assert typeloss.main(["old", "new"]) == 1
+    new[path] = (
+        "void func_801F2E64(s32 arg0, s32 arg1);\nvoid func_801F2E64(u32 arg0, s32 arg1);"
+    )
+    assert typeloss.main(["old", "new"]) == 1
+
+
 def test_a_prototype_that_differs_from_its_definition_is_a_problem() -> None:
     tree = decls.Tree(
         {
