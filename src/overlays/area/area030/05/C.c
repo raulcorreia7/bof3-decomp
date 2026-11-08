@@ -433,7 +433,7 @@ MATCH u8 func_800F65A8(s32 slot, s32 amount) {
     u8  value;
     u8(*limit)[8];
 
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         value = D_801E2F7E[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i];
         if (value == GAME_NONE) {
             return false;
@@ -472,7 +472,7 @@ MATCH void func_800F6730(void) {
     if ((s8)s_ListCursor & 0x80) {
         return;
     }
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] == GAME_NONE) {
             break;
         }
@@ -609,7 +609,7 @@ MATCH void func_800F7100(void) {
     s32           list_index;
     unsigned char new_var;
     u8*           p;
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         list_index = D_801E3134[g_GameContextKind][(s8)s_ListCursor];
         if (D_801E2F7E[list_index][i] == GAME_NONE) {
             break;

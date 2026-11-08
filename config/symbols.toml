@@ -95,7 +95,7 @@ D_801EB4F0 = { addr = 0x801EB4F0, alias = true, source = "Battle event slots." }
 D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "Event kind of each battle event slot, stored when func_801DE560 queues the event." }
 D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "Message text pointer of each battle event slot, drawn by the battle event panels." }
 D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "Text style argument of each battle event slot, zeroed when queued and passed to UI_DrawText by the event panels." }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; func_801D1D10 sets it to the acting party battler." }
 s_BattleBattlerTemplates = { addr = 0x801EBF20, type = "PartyBattler", size = 0x3C0, source = "Work row templates of the party battlers: func_801E8684 copies row n into g_BattlePartyBattlers[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }
 g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
@@ -407,7 +407,7 @@ g_BMagicEffectModes = { addr = 0x801F0550, source = "Handlers of magic053 (Lavab
 
 ["emi/bmagic/magic054/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_Hit = { addr = 0x801EF05C, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the selected targets (func_800A9820) and advances header.mode (byte 0x01) in magic054 (Howling)." }
 Effect_StartPlaying = { addr = 0x801EF0B8, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic054 (Howling)." }
 Effect_CountDownAndPlay = { addr = 0x801EF0EC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic054 (Howling)." }
@@ -695,7 +695,7 @@ D_801EFC64 = { addr = 0x801EFC64, source = "Mode handlers of the magic091 effect
 
 ["emi/bmagic/magic092/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_StartOnZeroTick = { addr = 0x801EEFB4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic092 (Fireblast)." }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF350, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the effect ticker (byte 0x0B) is set in magic092 (Fireblast)." }
 Effect_SetActorMatrix = { addr = 0x801EF4D0, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic092 (Fireblast)." }
@@ -712,7 +712,7 @@ D_801F07D8 = { addr = 0x801F07D8, source = "Second step handlers of the magic092
 
 ["emi/bmagic/magic093/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_SetActorMatrix = { addr = 0x801EF7AC, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic093 (Inferno)." }
 BMagic_AllocEffect = { addr = 0x801F05BC, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic093 (Inferno)." }
 Actor_Clear = { addr = 0x801F0620, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
@@ -745,7 +745,7 @@ g_BMagicEffectModes = { addr = 0x801F04A8, source = "Handlers of magic096 (Blizz
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic097 (Jolt)." }
 Effect_CountDownAndPickRandom = { addr = 0x801EF114, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero picks a random ticker (byte 0x0B) below 16, clears the timer and counter (byte 0x0A) and advances header.step (byte 0x02) in magic097 (Jolt)." }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF488, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect counter (byte 0x0A) down by two; at zero lowers the active battler's ticker and clears the effect in magic097 (Jolt)." }
@@ -755,7 +755,7 @@ g_BMagicEffectModes = { addr = 0x801F0AC0, source = "Handlers of magic097 (Jolt)
 
 ["emi/bmagic/magic098/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic098 (Lightning)." }
 Effect_CountDownAndPickRandom = { addr = 0x801EF124, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero picks a random ticker (byte 0x0B) below 16, clears the timer and counter (byte 0x0A) and advances header.step (byte 0x02) in magic098 (Lightning)." }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF498, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect counter (byte 0x0A) down by two; at zero lowers the active battler's ticker and clears the effect in magic098 (Lightning)." }
@@ -1663,7 +1663,7 @@ g_MenuEquipChoiceCounts = { addr = 0x801D8FC8, source = "the held counts of the 
 ["emi/etc/commu00/00"]
 # Fairy table extents; the types are in include/game/fairy.h.
 g_FairyGifts = { addr = 0x801EEC48, source = "Fairy_GrantGift copies the FairyGift table" }
-Fairy_VillageInit = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_SLOT_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_VillageInit = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 Fairy_VillageQueueRooms = { addr = 0x801EEDF8, type = "func", source = "Queues the fairy village room of kind 4 and of kind 5 into D_80145E60 once each, for the areas between D_801455C0 and g_GameAreaId, then stores g_GameAreaId into D_801455C0." }
 Fairy_JoinVillage = { addr = 0x801F00D4, type = "func", source = "Adds one fairy to the village: takes the first inactive g_FairyJobs row from a random start below 60, sets active to 1 and type to FAIRY_JOB_IDLE, stamps progress_anchor with g_BattleCount, copies the fairy 5-byte name and queues the row index." }
 Fairy_VillageCountFairies = { addr = 0x801F02E4, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
@@ -4788,10 +4788,11 @@ g_BattlePanelWidths = { addr = 0x801462FC, source = "Widths of the battle panel 
 g_BattleCommandCount = { addr = 0x80146303, type = "u8", source = "Number of queued battle commands." }
 g_BattleSurprise = { addr = 0x80146324, type = "u8", source = "Surprise state of the battle." }
 g_BattleOptions = { addr = 0x80146325, type = "u8", source = "Battle option flags." }
+g_BattleDrops = { addr = 0x80146326, alias = true, source = "BattleDrops view of the battle outcome bytes: escape attempts, the drop count, and the dropped item ids and counts that Battle_RollEnemyDrops fills; g_BattleResult, g_BattleEventFlags and the reward words sit inside it." }
 g_BattleResult = { addr = 0x80146328, type = "u8", source = "Battle result flags." }
 g_BattleEventFlags = { addr = 0x80146329, type = "u8", source = "Flags of the battle events that fired." }
-g_BattleSpoilsExp = { addr = 0x8014632C, type = "u32", source = "Experience gained in the battle." }
-g_BattleSpoilsZenny = { addr = 0x80146330, type = "s32", source = "Zenny gained in the battle." }
+g_BattleRewardExp = { addr = 0x8014632C, type = "u32", source = "Experience gained in the battle." }
+g_BattleRewardZenny = { addr = 0x80146330, type = "s32", source = "Zenny gained in the battle." }
 g_BattleActiveBattler = { addr = 0x80146374, type = "u8", source = "Slot of the acting battler." }
 g_BattleActionType = { addr = 0x80146375, type = "u8", source = "Type of the chosen battle action." }
 g_BattleAction = { addr = 0x80146380, type = "BattleAction", source = "The current battle action." }

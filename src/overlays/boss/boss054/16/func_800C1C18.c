@@ -12,7 +12,7 @@ MATCH void func_800C1C18(void) {
             return;
         }
         slot = *selector;
-        if (slot < BATTLE_PARTY_SLOT_COUNT) {
+        if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
             step = g_BattlePartyBattlers[slot].header.mode;
         } else {
             step = ENEMY_COMBATANT(slot).header.mode;

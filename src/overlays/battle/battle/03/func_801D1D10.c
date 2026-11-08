@@ -21,7 +21,7 @@ NON_MATCHING void func_801D1D10(void) {
             g_InputHeld = 0;
         if (*cursor < 3) {
             slot = cursor;
-            for (; *slot < BATTLE_PARTY_SLOT_COUNT; ((u8*)slot)[0] += 1) {
+            for (; *slot < BATTLE_PARTY_CHARACTERS_COUNT; ((u8*)slot)[0] += 1) {
                 id    = D_801462F6[*slot];
                 index = id & BYTE_MASK;
                 if (index != GAME_NONE) {

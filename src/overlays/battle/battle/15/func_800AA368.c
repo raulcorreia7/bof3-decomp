@@ -14,7 +14,7 @@
  * count so it wins s2 over the active-count local, or a longer search over source rewrites. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AA368(void) {
-    u8            candidates[BATTLE_PARTY_SLOT_COUNT];
+    u8            candidates[BATTLE_PARTY_CHARACTERS_COUNT];
     u8            count;
     u8            slot;
     u8            pick;
@@ -28,7 +28,7 @@ NON_MATCHING s32 func_800AA368(void) {
     active = g_BattleTargetSelector;
     if (active & 0xC0) {
         count = 0;
-        for (slot = 0; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
+        for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
             if (mask != 0) {
                 allowed = func_800AA5F4(slot);
                 if (allowed) {
@@ -44,7 +44,7 @@ NON_MATCHING s32 func_800AA368(void) {
             }
         }
     } else {
-        if (active < BATTLE_PARTY_SLOT_COUNT) {
+        if (active < BATTLE_PARTY_CHARACTERS_COUNT) {
             slot = active;
             if (mask != 0) {
                 allowed = func_800AA5F4(slot);
@@ -63,7 +63,7 @@ NON_MATCHING s32 func_800AA368(void) {
             }
         }
         count = 0;
-        for (slot = 0; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
+        for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
             if (mask != 0) {
                 allowed = func_800AA5F4(slot);
                 if (allowed) {

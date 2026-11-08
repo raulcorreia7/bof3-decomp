@@ -4,7 +4,7 @@
 MATCH void Battle_UpdatePartyActors(void) {
     u8 index;
 
-    for (index = 0; index < BATTLE_PARTY_SLOT_COUNT; index++) {
+    for (index = 0; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
         PartyBattler* battle_work;
 
         battle_work = &g_BattlePartyBattlers[index];

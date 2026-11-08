@@ -6,7 +6,7 @@
 MATCH u8 func_801E0E0C(void) {
     u8 index;
 
-    for (index = 0u; index < BATTLE_PARTY_SLOT_COUNT; index += 1u) {
+    for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index += 1u) {
         u16 flags_80;
 
         if (!ACTOR_IN_USE(g_BattlePartyBattlers[index])) {

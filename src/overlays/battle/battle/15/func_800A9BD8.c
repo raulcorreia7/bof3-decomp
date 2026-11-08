@@ -6,10 +6,10 @@
  * copy the resistances and apply the row's doubling and zeroing flags.
  */
 MATCH void func_800A9BD8(u8 slot) {
-    if (slot < BATTLE_PARTY_SLOT_COUNT) {
+    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         func_800A9FC4((BattlePanelRecord*)&D_80145F04[slot * BATTLE_PARTY_STRIDE], slot);
     } else {
-        slot -= BATTLE_PARTY_SLOT_COUNT;
+        slot -= BATTLE_PARTY_CHARACTERS_COUNT;
 
         g_BattleEnemyBattlers[slot].stats.power = func_801DE0AC(
             g_BattleEnemyBattlers[slot].base.power, (g_BattleEnemyBattlers[slot].stat_multipliers[0] * 2) + 100);

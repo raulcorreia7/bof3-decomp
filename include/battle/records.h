@@ -373,8 +373,8 @@ typedef struct EnemyBattler {
     u8          unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
     u16         event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u16         status;      /* +0x82 StatusFlags; Battle_DefeatEnemy sets STATUS_KO when the enemy leaves the field */
-    u16         zenny;       /* +0x84 banked in the spoils by Battle_DefeatEnemy */
-    u16         exp;         /* +0x86 banked in the spoils by Battle_DefeatEnemy */
+    u16         zenny;       /* +0x84 added to the battle reward by Battle_DefeatEnemy */
+    u16         exp;         /* +0x86 added to the battle reward by Battle_DefeatEnemy */
     u16         level;       /* +0x88 the turn-order ranking and the base damage read it */
     u16         unk_8A;      /* +0x8A set from the area scene record when the slot is armed */
     u8          skills[8];   /* +0x8C the bytes func_8009C994 copies the event packet's tail into */

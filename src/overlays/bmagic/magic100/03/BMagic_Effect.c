@@ -79,7 +79,7 @@ MATCH void func_801EF0D8(void) {
     u8            timer;
 
     slot = LOBU(g_BattleTargetSelector);
-    if (slot < BATTLE_PARTY_SLOT_COUNT) {
+    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         battler = &g_BattlePartyBattlers[slot];
     } else {
         battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
