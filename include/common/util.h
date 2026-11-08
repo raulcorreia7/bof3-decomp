@@ -8,14 +8,14 @@
 
 /* The byte value that means no slot, index or result in a byte field. It is
  * compared, never used as a mask. */
-#define GAME_NONE      0xFF
+#define GAME_NONE                0xFF
 
 /* The low byte and low halfword of a value: `x & BYTE_MASK`. A mask, never a sentinel (GAME_NONE). */
-#define BYTE_MASK      0xFF
-#define HALF_MASK      0xFFFF
+#define BYTE_MASK                0xFF
+#define HALF_MASK                0xFFFF
 
 /* The number of values a byte id can take. */
-#define BYTE_VALUE_COUNT 256
+#define BYTE_VALUE_COUNT         256
 
 /* Bit arrays of u32 words, one bit per id: bit `i` is bit `i % 32` of word `i / 32`. */
 #define BIT_ARRAY_WORDS(bits)    ((bits) / 32)
@@ -23,12 +23,12 @@
 #define BIT_ARRAY_SET(words, i)  ((words)[(i) >> 5] |= 1 << ((i) & 0x1F))
 
 /* The element count of an array declared in scope. */
-#define ARRAY_COUNT(a) (sizeof(a) / sizeof((a)[0]))
+#define ARRAY_COUNT(a)           (sizeof(a) / sizeof((a)[0]))
 
 /* Bits and arithmetic. BIT is a signed int like the open-coded `1 << n`. */
-#define BIT(n)         (1 << (n))
-#define MIN(a, b)      (((a) < (b)) ? (a) : (b))
-#define MAX(a, b)      (((a) > (b)) ? (a) : (b))
+#define BIT(n)                   (1 << (n))
+#define MIN(a, b)                (((a) < (b)) ? (a) : (b))
+#define MAX(a, b)                (((a) > (b)) ? (a) : (b))
 
 /* The same ABS as PsyQ <abs.h>; whichever header comes first defines it. */
 #ifndef ABS
