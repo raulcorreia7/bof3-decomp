@@ -3,7 +3,8 @@
 Every function and data address found so far stays findable: a rename keeps its row's
 `addr`, and a global folded into a record keeps its old address as an `alias = true` row
 whose `source` names the member that holds it now. The check compares (target, addr) pairs,
-so renames, retypes and moved rows pass; only a vanished address fails.
+so renames, retypes and moved rows pass; only a vanished address fails. REF is reduced to its
+merge base with HEAD, so rows that landed on REF after the branch point are not counted as lost.
 
 Usage: python3 tools/check_addrs.py REF [HEAD]
 """
@@ -30,7 +31,8 @@ def main(argv):
         print(__doc__.strip(), file=sys.stderr)
         return 2
     ref, head = argv[1], argv[2] if len(argv) == 3 else "HEAD"
-    before, after = addresses(ref), addresses(head)
+    base = subprocess.check_output(["git", "merge-base", ref, head], text=True).strip()
+    before, after = addresses(base), addresses(head)
     lost = sorted(key for key in before if key not in after)
     for target, addr in lost:
         print(

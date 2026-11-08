@@ -23,7 +23,7 @@ MATCH void func_801E8DD8(void) {
             offset_y = D_801EB109[g_BattlePartyBattlers[row].chr.character_id * 2u];
         }
         dst->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_Task->depth    = *(u16*)(((u8*)g_BattleEffectBattler + 0x32u));
+        g_Task->depth    = g_BattleEffectBattler->depth;
     } else {
         row = slot[5];
         row -= 3;

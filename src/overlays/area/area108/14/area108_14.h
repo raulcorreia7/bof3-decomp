@@ -37,7 +37,9 @@ u8   func_801F321C(void);
 void func_801F3BA0(void);
 void func_801F3C84(void);
 
-void func_801F55F0(s32);
+extern Point2D D_801F63DC[];
+
+void func_801F55F0(u8 raise);
 
 s32  func_801F3034(void);
 void func_801F34B8(void);

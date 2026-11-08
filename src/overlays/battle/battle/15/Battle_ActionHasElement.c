@@ -5,7 +5,8 @@
  * canonical g_BattleActionType shares the first sample's `lui` and is 12 bytes shorter.
  */
 
-MATCH u8 func_8009C8AC(u16 required_mask) {
+/* func_8009C8AC */
+MATCH u8 Battle_ActionHasElement(u16 required_mask) {
     u32 action_type;
     u32 slot;
 

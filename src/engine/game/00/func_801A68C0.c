@@ -50,13 +50,13 @@ MATCH void func_801A68C0(u8* script) {
     g_Task->unk_18            = 0;
     FIELD(s32, g_Task, 0x70u) = FIELD(u8, g_Task->range_54.table, 0x2u);
 
-    rows[*counter].unk_88                         = 0;
-    rows[*counter].unk_84                         = 0;
-    FIELD(s32, D_80146908, *counter * ACTOR_SIZE) = 0;
-    FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE) = script[0xA];
-    FIELD(u8, D_80146900, *counter * ACTOR_SIZE)  = script[6];
-    FIELD(u16, D_80146904, *counter * ACTOR_SIZE) = script[0xD] | (script[0xC] << 8);
-    FIELD(u8, D_8014691C, *counter * ACTOR_SIZE)  = 0x7F;
+    rows[*counter].unk_88                               = 0;
+    rows[*counter].walk_dest_y                          = 0;
+    FIELD(s32, g_ActorWalkDestX, *counter * ACTOR_SIZE) = 0;
+    FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE)       = script[0xA];
+    FIELD(u8, D_80146900, *counter * ACTOR_SIZE)        = script[6];
+    FIELD(u16, D_80146904, *counter * ACTOR_SIZE)       = script[0xD] | (script[0xC] << 8);
+    FIELD(u8, D_8014691C, *counter * ACTOR_SIZE)        = 0x7F;
 
     func_801A4990(script + 8);
 
