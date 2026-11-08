@@ -13,9 +13,8 @@ MATCH void Actor_TrackFocus(void) {
     long     flag;
     long     result;
     u16      other;
-    u8**     slots;
-    u8*      work;
-    u8*      item;
+    Actor*   work;
+    Actor*   item;
 
     vertex                 = D_1F800014;
     screen                 = D_1F800034;
@@ -23,14 +22,12 @@ MATCH void Actor_TrackFocus(void) {
     SP_REF(s16, 0x16)      = (s16)((D_80145EC8 >> 9) - 0x4000);
     SP_REF(s16, 0x18)      = (s16)((-D_80145ECE) / 2);
     result                 = RotTransPers(vertex, (long*)screen, &depth, &flag);
-    slots                  = SP_PTR(u8*, 0u);
-    work                   = slots[0x11];
-    FIELD(s32, work, 0x60) = result;
+    work                   = g_Task;
+    work->unk_60           = result;
     FIELD(u16, work, 0x2E) = screen[0];
     other                  = SP_REF(u16, 0x36);
-    work[9]                = 0;
-    slots                  = SP_PTR(u8*, 0u);
-    item                   = slots[0x11];
+    work->timer            = 0;
+    item                   = g_Task;
     FIELD(u16, work, 0x30) = other;
-    item[1] += 1;
+    item->header.mode += 1;
 }

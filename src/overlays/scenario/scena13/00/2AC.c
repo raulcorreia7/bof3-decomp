@@ -145,7 +145,6 @@ MATCH void func_801F75F8(void) {
 }
 
 MATCH void func_801F763C(void) {
-    u8** slots;
     u8*  work;
     u8*  data;
     u8*  cell;
@@ -153,53 +152,41 @@ MATCH void func_801F763C(void) {
     u32  cell3;
     s16* scratch;
 
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][3] = Actor_FindFree();
-    slots          = SP_PTR(u8*, 0u);
-    if (slots[0x11][3] == GAME_NONE) {
+    g_Task->unk_03 = Actor_FindFree();
+    if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    slots[0x11][4]                        = Actor_FindFree();
-    slots                                 = SP_PTR(u8*, 0u);
-    if (slots[0x11][4] == GAME_NONE) {
-        slots                                 = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].header.flags = 0;
+    g_Actors[g_Task->unk_03].header.flags = 1;
+    g_Task->unk_04                        = Actor_FindFree();
+    if (g_Task->unk_04 == GAME_NONE) {
+        g_Actors[g_Task->unk_03].header.flags = 0;
         return;
     }
 
     scratch                               = (s16*)D_1F800000;
     data                                  = (u8*)D_801FBF20;
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    work                                  = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags = 1;
+    work                                  = (u8*)g_Task;
     *scratch                              = work[3];
     func_801A4D54(data);
     *scratch = work[4];
     func_801A4D54(data);
-    slots[0x11] = work;
+    SP_REF(u8*, 0x44) = work;
 
     g_Actors[work[3]].pos.y.fixed -= TO_COORD(1);
     g_Actors[work[4]].pos.y.fixed += TO_COORD(1);
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots                                     = SP_PTR(u8*, 0u);
-    cell                                      = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    cell                                      = (u8*)g_Task;
     cell4                                     = cell[4];
     cell3                                     = cell[3];
     FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 1;
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 1;
     GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
     GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][9] = 0x20;
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][1] = 1;
+    g_Task->timer       = 0x20;
+    g_Task->header.mode = 1;
 }
 
 INCLUDE_ASM(func_801F7958);

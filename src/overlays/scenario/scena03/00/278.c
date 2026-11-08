@@ -12,7 +12,6 @@ MATCH void func_801F6E78(void) {
 }
 
 MATCH void func_801F6EB4(void) {
-    u8** slots;
     u8*  work;
     u8*  data;
     u8*  cell;
@@ -20,57 +19,45 @@ MATCH void func_801F6EB4(void) {
     u32  cell3;
     s16* scratch;
 
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][3] = Actor_FindFree();
-    slots          = SP_PTR(u8*, 0u);
-    if (slots[0x11][3] == GAME_NONE) {
+    g_Task->unk_03 = Actor_FindFree();
+    if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    slots[0x11][4]                        = Actor_FindFree();
-    slots                                 = SP_PTR(u8*, 0u);
-    if (slots[0x11][4] == GAME_NONE) {
-        slots                                 = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].header.flags = 0;
+    g_Actors[g_Task->unk_03].header.flags = 1;
+    g_Task->unk_04                        = Actor_FindFree();
+    if (g_Task->unk_04 == GAME_NONE) {
+        g_Actors[g_Task->unk_03].header.flags = 0;
         return;
     }
 
     scratch                               = (s16*)D_1F800000;
     data                                  = (u8*)D_801FCF30;
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    work                                  = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags = 1;
+    work                                  = (u8*)g_Task;
     *scratch                              = work[3];
     func_801A65A0(data);
     Actor_BeginScript(0x61, 0xC);
     *scratch = work[4];
     func_801A65A0(data);
     Actor_BeginScript(0x61, 0xC);
-    slots[0x11] = work;
+    SP_REF(u8*, 0x44) = work;
 
     g_Actors[work[3]].pos.x.fixed += ONE;
     g_Actors[work[3]].pos.y.fixed -= ONE;
     g_Actors[work[4]].pos.x.fixed -= ONE;
     g_Actors[work[4]].pos.y.fixed += ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots                                     = SP_PTR(u8*, 0u);
-    cell                                      = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    cell                                      = (u8*)g_Task;
     cell4                                     = cell[4];
     cell3                                     = cell[3];
     FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 0;
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 0;
     GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
     GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][9] = 4;
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][1] = 1;
+    g_Task->timer       = 4;
+    g_Task->header.mode = 1;
 }
 
 MATCH void func_801F7260(void) {
@@ -115,7 +102,6 @@ MATCH void func_801F7508(void) {
 }
 
 MATCH void func_801F754C(void) {
-    u8** slots;
     u8*  work;
     u8*  data;
     u8*  cell;
@@ -123,62 +109,48 @@ MATCH void func_801F754C(void) {
     u32  cell3;
     s16* scratch;
 
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][3] = Actor_FindFree();
-    slots          = SP_PTR(u8*, 0u);
-    if (slots[0x11][3] == GAME_NONE) {
+    g_Task->unk_03 = Actor_FindFree();
+    if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    slots[0x11][4]                        = Actor_FindFree();
-    slots                                 = SP_PTR(u8*, 0u);
-    if (slots[0x11][4] == GAME_NONE) {
-        slots                                 = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].header.flags = 0;
+    g_Actors[g_Task->unk_03].header.flags = 1;
+    g_Task->unk_04                        = Actor_FindFree();
+    if (g_Task->unk_04 == GAME_NONE) {
+        g_Actors[g_Task->unk_03].header.flags = 0;
         return;
     }
 
     scratch                               = (s16*)D_1F800000;
     data                                  = (u8*)D_801FCF5C;
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    work                                  = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags = 1;
+    work                                  = (u8*)g_Task;
     *scratch                              = work[3];
     func_801A4D54(data);
     *scratch = work[4];
     func_801A4D54(data);
-    slots[0x11] = work;
+    SP_REF(u8*, 0x44) = work;
 
     g_Actors[work[3]].pos.x.fixed -= ONE;
     g_Actors[work[3]].pos.y.fixed += ONE;
     g_Actors[work[4]].pos.x.fixed += ONE;
     g_Actors[work[4]].pos.y.fixed -= ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots                                     = SP_PTR(u8*, 0u);
-    cell                                      = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    cell                                      = (u8*)g_Task;
     cell4                                     = cell[4];
     cell3                                     = cell[3];
     FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 0;
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 0;
     GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
     GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][9] = 4;
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][1] = 1;
+    g_Task->timer       = 4;
+    g_Task->header.mode = 1;
 }
 
 #include "shared/Actor_Reveal.h"
 
 MATCH void Actor_FreePaletteFades2(void) {
-    u8** slots;
-
     ACTOR_FREE_PALETTE_FADES();
 }
 
