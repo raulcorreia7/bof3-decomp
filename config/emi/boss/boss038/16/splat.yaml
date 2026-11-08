@@ -19,8 +19,8 @@ segments:
       - [0x12C, c, func_800C192C]
       - [0x134, c, func_800C1934]
       - [0x13C, c, func_800C193C]
-      - [0x180, c, func_800C1980]
-      - [0x1E4, c, func_800C19E4]
+      - [0x180, c, Boss_SetEnemyScript]
+      - [0x1E4, c, Boss_EnemyScriptMode]
       - [0x21C, c, func_800C1A1C]
       - [0x224, c, func_800C1A24]
       - [0x22C, c, func_800C1A2C]
@@ -39,8 +39,8 @@ segments:
     vram: 0x800C1C10
     align: 4
     subsegments:
-      - [0x410, bin, D_800C1C10]
-      - [0x41C, bin, D_800C1C1C]
+      - [0x410, bin, g_BossEnemyScript]
+      - [0x41C, bin, g_BossEnemyActionTable]
       - [0x424, bin, D_800C1C24]
       - [0x454, bin, D_800C1C54]
       - [0x460, bin, D_800C1C60]

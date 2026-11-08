@@ -16,7 +16,7 @@ segments:
       - [0x204, c, func_801F2E04]
       - [0x25C, c, func_801F2E5C]
       - [0x304, c, func_801F2F04]
-      - [0x3D4, c, func_801F2FD4]
+      - [0x3D4, c, Actor_FreePalette]
       - [0x3FC, c, func_801F2FFC]
       - [0x59C, c, func_801F319C]
       - [0x788, c, func_801F3388]

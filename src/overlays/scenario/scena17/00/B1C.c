@@ -466,14 +466,7 @@ MATCH void func_801F8844(void) {
     CallbackReplace(Scene_RunSaveMenu);
 }
 
-MATCH void func_801F887C(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801F97D8[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH s32 func_801F88BC(void) {
     return 0;

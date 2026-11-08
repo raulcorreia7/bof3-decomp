@@ -76,14 +76,7 @@ INCLUDE_ASM(func_801FA9C8);
 MATCH void func_801FB374(void) {
 }
 
-MATCH void func_801FB37C(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FC468[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 /* Starts the area message `message`: the area overlay's own lookup (func_801F326C
  * for the second desert camp, func_801F37AC otherwise) maps it to a message index. */

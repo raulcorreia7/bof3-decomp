@@ -20,6 +20,8 @@
  * carries a FAKE comment. */
 
 #include "common/fixed.h"
+#include "common/handler.h"
+#include "psx/mem.h"
 #include "common/vector.h"
 #include "slus/facing.h"
 #include "types.h"
@@ -36,8 +38,14 @@
 /* Set the scratchpad actor's mode: the byte SYS_DISPATCH_TASK dispatches on. */
 #define ACTOR_SET_MODE(mode) (TASK_BYTES[1] = (mode))
 
+/* Run the scratchpad actor's handler for its mode, the first or the second of two. A statement macro: the
+ * inline form does not match. Use it as the first statement of a function body. */
+#define ACTOR_RUN_MODE_HANDLER(first, second) \
+    Callback table[2] = {first, second};      \
+    table[g_Task->header.mode]()
+
 /* Clear the actor's step: the current mode starts again at step 0. */
-#define ACTOR_CLEAR_STEP()   (g_Task->header.step = 0)
+#define ACTOR_CLEAR_STEP() (g_Task->header.step = 0)
 
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */

@@ -31,6 +31,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, alias = true }
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", alias = true }
+Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", alias = true }
 g_BattleSelections = { addr = 0x800B65F8, alias = true }
 g_BattleActionType_nv = { addr = 0x80146375, alias = true }
 g_BattlePhases = { addr = 0x801D0C04, source = "Battle mode handlers, one per battle mode." }
@@ -115,6 +116,16 @@ g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (str
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 
 ["emi/battle/battle/15"]
+Battle_IsAbilityLocked = { addr = 0x80097574, type = "func", source = "returns true when the selected ability cannot be used in battle" }
+Battle_HalveDamage = { addr = 0x8009F320, type = "func", source = "sets the damage-halved action flag on the current target" }
+Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the reprisal damage flag on the active battler" }
+Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
+Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
+Battle_LoadDraArchive = { addr = 0x800A4700, type = "func", source = "Loads the BATL_DRA archive when no choice phase is pending and advances ui_state; step 0 of the D_800B4CAC battle UI step table. The archive's job is not proven, so the name keeps the disc label." }
+Battle_StartAbilityPose = { addr = 0x800A581C, type = "func", source = "Step 2 of the ability panel step table D_800B4D00: plays common cue 4, sets D_80148627 to 2 and COMBATANT_FLAG_ABILITY_ALT_POSE on the active row, and advances ui_state." }
+Battle_LoadScriptedEncounter = { addr = 0x800ABBE0, type = "func", source = "Loads the encounter enemies with Battle_LoadEncounterEnemies and runs the setup handler D_800B5108[g_Battle.encounter]; func_800ABBA4 calls it when BATTLE_IS_SCRIPTED and func_800ABC30 otherwise." }
+Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
+Battle_DrawInventoryPanel = { addr = 0x800B2104, type = "func", source = "runs the panel state handler and draws the inventory window" }
 Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells whether the running ability or the attacker's weapon carries any element of the mask and the current enemy took a nonzero hp change." }
 Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
 Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
@@ -1484,7 +1495,7 @@ Boss_EndBattle = { addr = 0x800C2F74, type = "func", source = "Ends the boss bat
 
 ["emi/boss/boss028/16"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-func_800C1AA0 = { addr = 0x800C1AA0, type = "func", source = "When func_801E30F8 returns nonzero raises BATTLE_STATE_EFFECT_PLAYING and runs Battle_TriggerCritical and func_801E567C in boss028." }
+Boss_RaiseEffectPlaying = { addr = 0x800C1AA0, type = "func", source = "raises BATTLE_STATE_EFFECT_PLAYING and runs Battle_TriggerCritical and func_801E567C when func_801E30F8 is ready in boss028" }
 Boss_InstallBattleHooks = { addr = 0x800C1B40, type = "func", source = "Installs the boss battle hooks of boss028: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1B78, type = "func", source = "Handles the boss battle events of boss028: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C1B80, type = "func", source = "Chooses how the boss battle of boss028 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 30, runs func_801DDED8; otherwise runs func_801DDF00." }
@@ -1559,10 +1570,14 @@ Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss bat
 
 ["emi/boss/boss038/16"]
 Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads the area enemy record enemy_index into the EnemyBattler row of battle slot slot." }
+Boss_SetEnemyScript = { addr = 0x800C1980, type = "func", source = "sets boss038 enemy script, mode handler and action table and starts task mode 2" }
+Boss_EnemyScriptMode = { addr = 0x800C19E4, type = "func", source = "boss038 enemy script mode handler" }
 Boss_InstallBattleHooks = { addr = 0x800C1B7C, type = "func", source = "Installs the boss battle hooks of boss038: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1BB4, type = "func", source = "Handles the boss battle events of boss038: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C1BBC, type = "func", source = "Chooses how the boss battle of boss038 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
 Boss_EndBattle = { addr = 0x800C1C08, type = "func", source = "Ends the boss battle of boss038: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+g_BossEnemyScript = { addr = 0x800C1C10, source = "boss038 enemy script data" }
+g_BossEnemyActionTable = { addr = 0x800C1C1C, source = "boss038 enemy action table" }
 
 ["emi/boss/boss040/16"]
 Boss_InitEnemy2 = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss040: points its script at D_800C1B1C, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C1B28, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
@@ -1603,6 +1618,10 @@ Boss_EndBattle = { addr = 0x800C19A0, type = "func", source = "Ends the boss bat
 Effect_PlayOnce = { addr = 0x800C1AEC, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in the boss050 battle." }
 
 ["emi/boss/boss051/16"]
+Boss_SetEnemyScript = { addr = 0x800C1858, type = "func", source = "sets boss051 enemy script, mode handler and action table and starts task mode 2" }
+Boss_EnemyScriptMode = { addr = 0x800C19C4, type = "func", source = "boss051 enemy script mode handler" }
+g_BossEnemyScript = { addr = 0x800C1DB0, source = "boss051 enemy script data" }
+g_BossEnemyActionTable = { addr = 0x800C1DBC, source = "boss051 enemy action table" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Boss_InstallBattleHooks = { addr = 0x800C1A14, type = "func", source = "Installs the boss battle hooks of boss051: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1A4C, type = "func", source = "Handles the boss battle events of boss051: ignores every event mode and returns 0." }
@@ -1627,8 +1646,8 @@ Boss_EndBattle = { addr = 0x800C19BC, type = "func", source = "Ends the boss bat
 Effect_StartPlaying = { addr = 0x800C1CFC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in the boss054 battle." }
 
 ["emi/boss/boss055/16"]
+Boss_RaiseEffectPlaying = { addr = 0x800C1BF0, type = "func", source = "raises BATTLE_STATE_EFFECT_PLAYING and runs Battle_TriggerCritical and func_801E567C when func_801E30F8 is ready in boss055" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-func_800C1BF0 = { addr = 0x800C1BF0, type = "func", source = "When func_801E30F8 returns nonzero raises BATTLE_STATE_EFFECT_PLAYING and runs Battle_TriggerCritical and func_801E567C in boss055." }
 Boss_InstallBattleHooks = { addr = 0x800C24A0, type = "func", source = "Installs the boss battle hooks of boss055: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C24D8, type = "func", source = "Handles the boss battle events of boss055: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C24E0, type = "func", source = "Chooses how the boss battle of boss055 ends: g_BattleChooseEndingHook runs it from Battle_LoadEndOverlay once the battle result is set; the body is not decompiled." }
@@ -1643,7 +1662,14 @@ g_MenuFormations = { addr = 0x801D0C50, size = 0xC8, source = "The ten formation
 g_MenuFormationOrder = { addr = 0x801D0D18, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D5C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+g_SaveSlotLevelFormat = { addr = 0x801D0D80, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0D84, source = "Format of the play time on a save slot row." }
+g_SaveSlotTimeColon = { addr = 0x801D0D90, source = "Colon glyphs between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0D94, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0D98, source = "Label of memory card port 2 in the port tabs." }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (g_MenuStep.step) through g_MenuBateStates." }
+Menu_ResetPanels = { addr = 0x801D0E04, type = "func", source = "resets menu panel tasks and advances the game entry substate" }
+Menu_StartFadeIn = { addr = 0x801D0EB0, type = "func", source = "sets fast fade-in mode and advances the menu step state" }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D2F64, type = "func", source = "Draws the equipment panel of character record_index in the Bate menu: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
@@ -1675,6 +1701,8 @@ Menu_DrawInventoryWindow = { addr = 0x801D6C54, type = "func", source = "Draws t
 Menu_DrawAbilityList = { addr = 0x801D73B4, type = "func", source = "draws the ability list panel of the shop and bate overlays: ten abilities with cost and level, the list name and the frame" }
 Menu_DrawPanelFrame = { addr = 0x801D78A8, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 Menu_DrawEquipChoiceWindow = { addr = 0x801D7AD0, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+SAVE_DrawSlotRow = { addr = 0x801D8208, type = "func", source = "Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window." }
+SAVE_DrawPortTabs = { addr = 0x801D8508, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
 g_MenuBateStates = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
 g_MenuBateStep2Funcs = { addr = 0x801D8700, source = "3 sub-step handlers of step 2 of the Bate menu, called by func_801D0E38 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuBateStep2Sub0Funcs = { addr = 0x801D870C, source = "3 handlers of sub-step 0 of step 2 of the Bate menu, called by func_801D0E74 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
@@ -1702,6 +1730,7 @@ g_MenuInventoryTab1OnSprites = { addr = 0x801D8960, source = "the sprite run of 
 g_MenuListTab1OffSprites = { addr = 0x801D896C, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801D8978, source = "the sprite run of the list panel's first tab while its flag is set" }
 g_MenuEquipStatSprites = { addr = 0x801D89E0, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
+g_SaveSlotFrameSprites = { addr = 0x801D8A3C, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801D8B28, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D8B2C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801D8B30, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -1810,8 +1839,11 @@ Game_FinishCameraLook = { addr = 0x801981D4, type = "func", source = "Ends the c
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
 Game_CallAreaHandler = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table D_801C86F8 and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenarioHandler." }
 UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
+Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task mode FIELD_TASK_MODE_LEADER_SWITCH (slot 3 of D_801CD0AC): runs the leader-switch step table D_801CD0FC, which Game_RequestLeaderSwitch starts" }
+Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
 Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
+Actor_Move = { addr = 0x801C57B4, source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
 Area_PickEncounter = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
 Area_RollEncounterEnemies = { addr = 0x801C6AEC, type = "func", source = "Copies the 8 enemy ids of the chosen encounter into the encounter list and keeps each by a random roll against its spawn chance in s_EntitySpawnChances; returns how many stayed. Called by Area_BuildEncounter." }
@@ -2114,6 +2146,11 @@ g_MenuFormations = { addr = 0x801D0C34, size = 0xC8, source = "The ten formation
 g_MenuFormationOrder = { addr = 0x801D0CFC, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0D00, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D40, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+g_SaveSlotLevelFormat = { addr = 0x801D0D64, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0D68, source = "Format of the play time on a save slot row." }
+g_SaveSlotTimeColon = { addr = 0x801D0D74, source = "Colon glyphs between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0D78, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0D7C, source = "Label of memory card port 2 in the port tabs." }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte g_MenuStep.step through the D_801D96DC handlers." }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
@@ -2146,6 +2183,8 @@ Menu_DrawWindowFrame = { addr = 0x801D76F4, type = "func", source = "Draws a win
 Menu_DrawInventoryWindow = { addr = 0x801D7BFC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 Menu_DrawEquipChoiceWindow = { addr = 0x801D8A78, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+SAVE_DrawSlotRow = { addr = 0x801D91B0, type = "func", source = "Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window." }
+SAVE_DrawPortTabs = { addr = 0x801D94B0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
 g_MenuStatusStates = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
 g_MenuStatusStep1Funcs = { addr = 0x801D96F0, source = "2 sub-step handlers of step 1 of the status menu, called by func_801D0E4C (the step 1 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of step 3 of the status menu, called by func_801D0F24 (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
@@ -2172,6 +2211,7 @@ g_MenuInventoryTab1OffSprites = { addr = 0x801D996C, source = "the sprite run of
 g_MenuListTab2OnSprites = { addr = 0x801D9978, source = "the sprite run of the list panel's second tab while its flag is set" }
 g_MenuInventoryTab1OnSprites = { addr = 0x801D9984, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuEquipStatSprites = { addr = 0x801D9A04, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
+g_SaveSlotFrameSprites = { addr = 0x801D9A60, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801D9B4C, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D9B50, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801D9B54, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -2204,6 +2244,11 @@ D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu d
 g_SaveSlotLevelFormat = { addr = 0x801D0E44, source = "Format of the level on a save slot row." }
 g_SaveSlotTimeFormat = { addr = 0x801D0E48, source = "Format of the play time on a save slot row: hours and minutes." }
 g_SaveSlotTimeColon = { addr = 0x801D0E54, source = "The colon drawn between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0E58, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0E5C, source = "Label of memory card port 2 in the port tabs." }
+SAVE_DrawPortTabs = { addr = 0x801DDFB0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
+Shop_StartFadeIn = { addr = 0x801DE3C8, type = "func", source = "Starts the fast UI fade in once the window effect is idle and advances the shop step state; Menu_StartFadeIn does the same in the Bate menu." }
+Shop_DrawCuePanel = { addr = 0x801E4DF4, type = "func", source = "draws the shop cue text panel window and frame" }
 g_SaveSlotFrameSprites = { addr = 0x801E5738, source = "Sprite run of a save slot row frame." }
 g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory; the start overlay uses the same address as SAVE_IMAGE_ADDR." }
 g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
@@ -2390,6 +2435,8 @@ Menu_DrawHeaderBar = { addr = 0x801D1E54, type = "func", source = "Draws the win
 Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
 Menu_UpdateMaster = { addr = 0x801D25D8, type = "func", source = "Runs the g_MasterMenuStates handler selected by the panel step byte g_MenuMasterStep; the game overlay runs it each frame." }
+Master_StartOffer = { addr = 0x801D27C8, type = "func", source = "starts the master skill offer message in the sisyou menu" }
+Master_StartFarewell = { addr = 0x801D2B64, source = "Starts the master's farewell message (g_MenuMasterMessageIds + MASTER_MESSAGE_FAREWELL) once and moves the master menu to step 6; the last entry of g_MenuMasterStep2Funcs, which starts with Master_StartOffer." }
 Menu_ApplyMasterMode = { addr = 0x801D3ED0, type = "func", source = "Writes the actor mode g_MenuMasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel." }
 g_MenuLabelPower = { addr = 0x801D4038, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D403C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
@@ -2418,6 +2465,9 @@ g_SaveSlotLevelFormat = { addr = 0x801D0DAC, source = "Format of the level on a 
 g_SaveSlotTimeFormat = { addr = 0x801D0DB0, source = "Format of the play time on a save slot row: hours and minutes." }
 g_SaveSlotTimeColon = { addr = 0x801D0DBC, source = "The colon drawn between the hours and minutes of a save slot row." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
+Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "runs the current camp substate handler and draws the area scene in the start menu" }
+Item_Revive = { addr = 0x801E8270, source = "Item effect that revives a character: sets the field or party record's HP to 1 and clears status 0x4000 through Char_ClearStatus; returns 3 when Char_ClearStatus returns 0, else 0." }
+Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears poison status from all field party members in the start menu item effects" }
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
 g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
@@ -2906,8 +2956,14 @@ Scene_UpdateEffectState = { addr = 0x801D0E9C, type = "func", source = "Entry 2 
 Scene_EffectSetMatrix = { addr = 0x801D0EE0, type = "func", source = "Builds the rotated and translated matrix for the scratchpad projected vertex of the sce10eff effect." }
 Scene_DrawBands = { addr = 0x801D165C, type = "func", source = "Draws 17 depth slices of semi-transparent gradient strips from the scratchpad vertices of the sce10eff effect; the y of each follows a sine of a nibble-stepped angle scaled by a radius plus a masked random jitter. Called after Scene_EffectSetMatrix." }
 
+["emi/scenario/sce15ef0/00"]
+Scene_DispatchEntity = { addr = 0x801D0C0C, type = "func", source = "dispatches a scene entity by its callback index" }
+g_SceneEntityDispatch = { addr = 0x801D1F88, source = "scenario entity dispatch table" }
+
 ["emi/scenario/sce15ef1/00"]
+Scene_DispatchEntity = { addr = 0x801D0C0C, type = "func", source = "dispatches a scene entity by its callback index" }
 Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
+g_SceneEntityDispatch = { addr = 0x801D3918, source = "scenario entity dispatch table" }
 
 ["emi/scenario/sce15ef2/00"]
 Scene_EndScan = { addr = 0x801D0DE8, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
@@ -2918,6 +2974,7 @@ Scene_UpdateScanBars = { addr = 0x801D1624, type = "func", source = "Steps and d
 Scene_DrawRedGradient = { addr = 0x801D19A8, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
 
 ["emi/scenario/sce15ef3/00"]
+Scene_DispatchEntity = { addr = 0x801D0C0C, type = "func", source = "dispatches a scene entity by its callback index" }
 Scene_EndScan = { addr = 0x801D15CC, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Area_FindFreeSpriteRow = { addr = 0x801D171C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
 Scene_DrawRedGradient = { addr = 0x801D1BAC, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
@@ -2925,12 +2982,14 @@ Scene_DrawScanBar = { addr = 0x801D2424, type = "func", source = "Draws one scan
 Scene_ClearScanBars = { addr = 0x801D25C0, type = "func", source = "Clears the in-use byte of each of the 16 scan bars." }
 Scene_ClaimScanBar = { addr = 0x801D25EC, type = "func", source = "Marks the first free of the 16 scan bars in use and resets its state byte." }
 Scene_UpdateScanBars = { addr = 0x801D2634, type = "func", source = "Steps and draws the 16 scan bars: state 0 sets half height 4 and y to the argument, state 1 waits, state 2 lowers y by 8 per call and frees the bar once y is negative; returns 1 when a bar is live." }
+g_SceneEntityDispatch = { addr = 0x801D27C0, source = "scenario entity dispatch table" }
 
 ["emi/scenario/scena00/00"]
 Scene_DrawTriangle = { addr = 0x801F85A8, type = "func", source = "draws one grey triangle at the scene origin: size sets the first vertex, angle_x, angle_y and angle_z rotate it, and the apex is 0x4F rotated from it" }
 Scene_DispatchActor = { addr = 0x801FC7D0, type = "func", source = "Entry_04 of the scena00 handler block, dispatches the entity through D_801FCA84 by byte 0x7A of the entity record." }
 Scene_CheckStepTrigger = { addr = 0x801FC818, type = "func", source = "Entry_08 of the scena00 handler block: Area_IsStepBlocked passes its handler_x and a nonzero result blocks the step; it starts scripted scenes by g_SceneState.state_04 at x 0x2B in area 2 and x 0x14 in area 24." }
 Scene_ClearParty = { addr = 0x801FC8FC, type = "func", source = "Resets the party to Whelp: streams the Whelp EMI family, sets the field and battle orders to 0xFF and g_Game.party_size to 0, sets the low three bits of the menu flags and joins CHAR_ID_WHELP with Party_JoinMember." }
+s_SceneActorDispatch = { addr = 0x801FCA84, source = "scenario actor dispatch table" }
 g_SceneFx = { addr = 0x801FCA90, source = "Func_801FC01C seeds and func_801FC3A0 steps the 30 slot by 12 cell sample effect." }
 
 ["emi/scenario/scena01/00"]
@@ -2946,20 +3005,33 @@ Party_JoinRei = { addr = 0x801FE178, type = "func", source = "Adds Rei to the pa
 Scene_RemoveRei = { addr = 0x801FE198, type = "func", source = "Removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 
 ["emi/scenario/scena03/00"]
+Scene_DispatchEntity = { addr = 0x801F6E78, type = "func", source = "dispatches a scene entity by its callback index" }
 Actor_FreePaletteFades = { addr = 0x801F7334, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
 Actor_Reveal = { addr = 0x801F78E0, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
 Actor_FreePaletteFades2 = { addr = 0x801F7A14, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work; same bytes as Actor_FreePaletteFades at 0x801F7334." }
 Actor_TrackFocus = { addr = 0x801F8640, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
 GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
+Scene_DispatchActor = { addr = 0x801FC46C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "Starts the area message of the given index, switches the game state to 2 and sets the script-active flag." }
 Party_JoinNinaYoung = { addr = 0x801FCEDC, type = "func", source = "Adds Nina Young to the party." }
 Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "Removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+g_SceneEntityDispatch = { addr = 0x801FCF24, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FD00C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena04/00"]
+Scene_DispatchEntity = { addr = 0x801F6D08, type = "func", source = "dispatches a scene entity by its callback index" }
+Scene_DispatchActor = { addr = 0x801F9D48, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "Starts the area message of the given index, switches the game state to 2 and sets the script-active flag." }
+Scene_DispatchByPosition = { addr = 0x801FA010, type = "func", source = "dispatches a scene handler by position index" }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FA12C, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneEntityDispatch = { addr = 0x801FA180, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FA224, source = "scenario actor dispatch table" }
+g_ScenePositionTable = { addr = 0x801FA228, source = "scene position lookup table" }
+g_ScenePositionDispatch = { addr = 0x801FA230, source = "scene position dispatch handlers" }
 
 ["emi/scenario/scena05/00"]
+Scene_DispatchEntity = { addr = 0x801F7400, type = "func", source = "dispatches a scene entity by its callback index" }
+Scene_DispatchActor = { addr = 0x801FCA58, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinMomoNinaPeco = { addr = 0x801FD298, type = "func", source = "builds battlers and joins Momo, young Nina and Peco to the party for the scene" }
 Party_JoinNinaYoung = { addr = 0x801FD30C, type = "func", source = "Adds Nina Young to the party." }
 Party_JoinMomo = { addr = 0x801FD32C, type = "func", source = "Adds Momo to the party." }
@@ -2972,8 +3044,11 @@ Scene_RemoveNina = { addr = 0x801FD508, type = "func", source = "Removes charact
 Scene_RemoveMomo = { addr = 0x801FD530, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemovePeco = { addr = 0x801FD558, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveRyuYoung = { addr = 0x801FD580, type = "func", source = "removes young Ryu from the party and restages party palettes" }
+g_SceneEntityDispatch = { addr = 0x801FD5A8, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FD644, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena06/00"]
+Scene_DispatchActor = { addr = 0x801FCDD0, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Party_JoinMomo = { addr = 0x801FE11C, type = "func", source = "Adds Momo to the party." }
 Party_JoinPeco = { addr = 0x801FE13C, type = "func", source = "Adds Peco to the party." }
 Scene_JoinNina = { addr = 0x801FE15C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina." }
@@ -2981,24 +3056,38 @@ Scene_JoinNina3 = { addr = 0x801FE1D4, type = "func", source = "Streams the part
 Scene_RemoveGarr = { addr = 0x801FE2E4, type = "func", source = "Removes character 2 (CHAR_ID_GARR) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemovePeco = { addr = 0x801FE30C, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+g_SceneActorDispatch = { addr = 0x801FE42C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena07/00"]
+Scene_DispatchEntity = { addr = 0x801F6DD4, type = "func", source = "dispatches a scene entity by its callback index" }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+Scene_DispatchActor = { addr = 0x801FD3BC, type = "func", source = "dispatches a scenario actor to its callback handler" }
+Scene_DispatchByPosition = { addr = 0x801FDA98, type = "func", source = "dispatches a scene handler by position index" }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_JoinMember." }
 Scene_SetPartyRyuYoungNinaYoungGarr = { addr = 0x801FDB80, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Garr, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
+g_SceneEntityDispatch = { addr = 0x801FDD14, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FDF8C, source = "scenario actor dispatch table" }
+g_ScenePositionTable = { addr = 0x801FDFA0, source = "scene position lookup table" }
+g_ScenePositionDispatch = { addr = 0x801FDFA8, source = "scene position dispatch handlers" }
 
 ["emi/scenario/scena08/00"]
+Scene_DispatchEntity = { addr = 0x801F6F50, type = "func", source = "dispatches a scene entity by its callback index" }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+Scene_DispatchActor = { addr = 0x801FE018, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyWhelp = { addr = 0x801FE698, type = "func", source = "clears the party, streams archives and joins the Whelp with party palettes for the scene" }
 Scene_SetPartyRyuAdult = { addr = 0x801FE6DC, type = "func", source = "clears the party and joins adult Ryu for the scene" }
 Party_JoinGarr = { addr = 0x801FE740, type = "func", source = "Adds Garr to the party." }
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
 Party_RemoveGarr = { addr = 0x801FE874, type = "func", source = "Removes Garr from the party." }
+g_SceneEntityDispatch = { addr = 0x801FE894, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE9C0, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena09/00"]
+Scene_DispatchEntity = { addr = 0x801F7364, type = "func", source = "dispatches a scene entity by its callback index" }
 Scene_ClearWorkRows = { addr = 0x801F7574, type = "func", source = "clears 32 work rows at 0x800E5000 plus the task slot offset, zeroing each row header" }
+Scene_DispatchActor = { addr = 0x801FC5E4, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FDD7C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinMomo = { addr = 0x801FDDC8, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinAdultNina = { addr = 0x801FDE0C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
@@ -3012,16 +3101,23 @@ Scene_StashPartyExceptRyuAdult = { addr = 0x801FE234, type = "func", source = "C
 Scene_RemoveMomo = { addr = 0x801FE30C, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemovePeco = { addr = 0x801FE334, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveRyuAdult = { addr = 0x801FE35C, type = "func", source = "removes adult Ryu from the party and restages the party palettes" }
+g_SceneEntityDispatch = { addr = 0x801FE384, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE434, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena10/00"]
+Scene_DispatchEntity = { addr = 0x801F6F70, type = "func", source = "dispatches a scene entity by its callback index" }
+Scene_DispatchActor = { addr = 0x801FD464, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size and joins the three in that order with Party_JoinMember, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult." }
 Party_JoinNinaAdult = { addr = 0x801FE3F8, type = "func", source = "Adds Nina Adult to the party." }
 Party_JoinMomo = { addr = 0x801FE418, type = "func", source = "Adds Momo to the party." }
 Scene_RebuildRyuGarrParty = { addr = 0x801FE4F0, type = "func", source = "Clears the three party slots of D_80144908, keeps the last id that is neither adult Ryu (7) nor Garr (2), adult Nina (8) when none is, streams the EMI family for Ryu, Garr and that id and joins all three." }
 Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "Copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs Party_LoadPalettes." }
+g_SceneEntityDispatch = { addr = 0x801FE80C, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE97C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena11/00"]
+Scene_DispatchActor = { addr = 0x801FA5B8, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FAB74, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinAdultNina = { addr = 0x801FABC0, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinMomo = { addr = 0x801FAC04, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
@@ -3036,9 +3132,12 @@ Scene_RemoveGarr = { addr = 0x801FAE20, type = "func", source = "Removes charact
 Scene_RemovePeco = { addr = 0x801FAE48, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveMomo = { addr = 0x801FAE70, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveAdultNina = { addr = 0x801FAE98, type = "func", source = "Removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+g_SceneActorDispatch = { addr = 0x801FAF24, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena12/00"]
+Scene_DispatchEntity = { addr = 0x801F717C, type = "func", source = "dispatches a scene entity by its callback index" }
 Menu_DrawHeaderBar = { addr = 0x801F765C, type = "func", source = "Draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952)." }
+Scene_DispatchActor = { addr = 0x801FC574, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FCDE0, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinAdultNina = { addr = 0x801FCE2C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinMomo = { addr = 0x801FCE70, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
@@ -3053,33 +3152,45 @@ Scene_RemoveGarr = { addr = 0x801FD0D8, type = "func", source = "Removes charact
 Scene_RemovePeco = { addr = 0x801FD100, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveMomo = { addr = 0x801FD128, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveAdultNina = { addr = 0x801FD150, type = "func", source = "Removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+g_SceneEntityDispatch = { addr = 0x801FD178, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FD1EC, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena13/00"]
+Scene_DispatchEntity = { addr = 0x801F6EAC, type = "func", source = "dispatches a scene entity by its callback index" }
 Area_DrawScreenTint = { addr = 0x801F6FF8, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Scene_DrawScreenTint = { addr = 0x801F7484, type = "func", source = "draws the scene screen tint layer through Screen_DrawTintLayer" }
 Scene_ReleaseActors = { addr = 0x801F7C24, type = "func", source = "clears two task-linked actor slots, frees their palette fade targets and clears the actor" }
 GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "Copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending." }
 Scene_RestorePalette = { addr = 0x801FB164, type = "func", source = "copies 16 palette words from 0x80033800 to the graphics palette destination and marks the palette pending" }
+Scene_DispatchActor = { addr = 0x801FB350, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultPecoMomo = { addr = 0x801FBB78, type = "func", source = "Streams the EMI family for adult Ryu, Momo and Peco, empties g_Game.party_size and joins adult Ryu, Peco then Momo with Party_JoinMember; the join order differs from the stream order." }
 Scene_LoadPartyRyuAdult = { addr = 0x801FBC88, type = "func", source = "loads the adult Ryu, Momo and Nina archives, empties the party and joins adult Ryu" }
 Scene_SetPartyRyuAdultMomoNinaAdult = { addr = 0x801FBD84, type = "func", source = "Streams the EMI family for adult Ryu, Momo and adult Nina, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
 Scene_JoinRei = { addr = 0x801FBE98, type = "func", source = "joins Rei to the party and restages the party palettes" }
 Scene_JoinGarr = { addr = 0x801FBEC0, type = "func", source = "joins Garr to the party and restages the party palettes" }
+g_SceneEntityDispatch = { addr = 0x801FBEF0, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FBFB8, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena14/00"]
+Scene_DispatchActor = { addr = 0x801FB37C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultReiNinaAdult = { addr = 0x801FBD2C, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size and joins adult Ryu, Rei then adult Nina with Party_JoinMember, without the palette restage and in a different join order than Scene_SetPartyRyuAdultNinaAdultRei." }
 Scene_SetPartyRyuAdultReiPeco = { addr = 0x801FBD78, type = "func", source = "Streams the EMI family for adult Ryu, Rei and Peco, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
 Scene_SetPartyRyuAdultMomoPeco = { addr = 0x801FBDC4, type = "func", source = "Streams the EMI family for adult Ryu, Momo and Peco, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
 Scene_SetPartyRyuAdultGarrPeco = { addr = 0x801FC020, type = "func", source = "Streams the EMI family for adult Ryu, Garr and Peco, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FC074, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FC22C, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+g_SceneActorDispatch = { addr = 0x801FC468, source = "scenario actor dispatch table" }
 ["emi/scenario/scena15/00"]
+Scene_DispatchEntity = { addr = 0x801F6F40, type = "func", source = "dispatches a scene entity by its callback index" }
 Scene_InitTaskArea = { addr = 0x801F6F7C, type = "func", source = "sets the task screen position and timer, clears the work column and advances the task mode" }
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "Clears one byte of each row in the actor window." }
 Scene_ClearActor = { addr = 0x801F9000, type = "func", source = "clears the current actor" }
+Scene_DispatchActor = { addr = 0x801FDD80, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowEntityMessage = { addr = 0x801FDDC0, type = "func", source = "starts the entity callback-indexed area message for the current desert camp area and enters the message state" }
 Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Garr, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+g_SceneEntityDispatch = { addr = 0x801FE57C, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE6EC, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena16/00"]
 GFX_CopyPaletteCapped = { addr = 0x801F83B0, type = "func", source = "Copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending." }
@@ -3089,16 +3200,22 @@ Scene_ClearParty = { addr = 0x801F84AC, type = "func", source = "Resets the part
 Scene_EnterSaveArea = { addr = 0x801F7750, type = "func", source = "resets the palette, enables area drawing and requests the end-game save area, then advances the scene mode" }
 Scene_StartEndingXa = { addr = 0x801F80CC, type = "func", source = "starts XA stream 8, resets the stream counters and advances the scene step" }
 Scene_WaitEndingXa = { addr = 0x801F8110, type = "func", source = "waits for the ending XA stream and scene ready state, then starts the long fade out and advances the scene step" }
+Scene_DispatchActor = { addr = 0x801F887C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_RunSaveMenu = { addr = 0x801F9490, type = "func", source = "replaces the callback with a loop that resets menu panel tasks and dispatches the save menu step table" }
 Scene_UpdateSaveMenu = { addr = 0x801F9654, type = "func", source = "updates menu panel tasks and dispatches the shop step" }
 Scene_ExitToTitle = { addr = 0x801F967C, type = "func", source = "clears scene script variables, exits sound and replaces the callback with the frontend start" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801F97D8, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena18/00"]
+Scene_DispatchActor = { addr = 0x801F6CAC, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D04, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801F6D7C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena19/00"]
+Scene_DispatchActor = { addr = 0x801F6D10, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D68, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801F6DE0, source = "scenario actor dispatch table" }
 
 ["emi/world00/area000/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3301,6 +3418,8 @@ g_FishingNewRecord = { addr = 0x801E3214, source = "set by Fishing_CatchRecord w
 ["emi/world00/area032/13"]
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "Appends the current primitive to one ordering-table head and advances the shared primitive cursor while the requested byte count fits the active buffer." }
 Actor_TrackFocus = { addr = 0x801F2C48, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
+Area_ShrinkDisc = { addr = 0x801F2E64, type = "func", source = "Step 3 of the s_WorkStates table in marker_work.c, after the grow step func_801F2D18 and the hold step func_801F2DAC: draws the shaded disc at the task's screen position with the timer as radius, counts the radius down and advances the mode when it goes negative." }
+Scene_ClearActor = { addr = 0x801F2EE4, type = "func", source = "Last used step of the s_WorkStates table in marker_work.c: calls Actor_Clear to remove the running actor; the same body as Scene_ClearActor in scena15 and many other images." }
 GFX_DrawShadedDisc = { addr = 0x801F2F04, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
 Actor_Reveal = { addr = 0x801F3480, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
 Actor_FreePaletteFades = { addr = 0x801F35B4, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
@@ -3357,6 +3476,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SetCameraZOffset = { addr = 0x801F2D18, type = "func", source = "Sets g_AreaCameraOffsetZ to -0x100, the Z shift of the camera, and g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetZ = { addr = 0x801F2D38, type = "func", source = "Zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_PauseBGM = { addr = 0x801F2E9C, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_PauseBGM; the same body is Area_PauseBGM in area057, area108 and area145." }
+func_801F2F68 = { addr = 0x801F2F68, type = "func", source = "Calls SND_FadeOutSequence(0, 0, 4, 30); area130 has the same call with effect id 1 as Area_FadeOutSequence, so one name would cover two bodies and no role word is proven." }
 
 ["emi/world01/area040/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3412,6 +3533,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world01/area049/13"]
 Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
+func_80117C38 = { addr = 0x80117C38, type = "func", source = "Adds 1 to header.step of the running task (Scene_AdvanceActorState); the same body is unnamed in magic064, scena07 (four times), area108 (twice) and area197, so no shared name fits." }
 
 ["emi/world01/area049/14"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3452,6 +3574,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world01/area057/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_SetAnswerMessage = { addr = 0x801F2C04, type = "func", source = "Stores the message id the answer table D_801F4AFC holds for the menu choice g_MessageChoice in g_MessageRequest." }
+Area_PauseBGM = { addr = 0x801F2D30, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_PauseBGM; the same body is Area_PauseBGM in area039, area108 and area145." }
+Area_ResumeBGM = { addr = 0x801F2D58, type = "func", source = "Resumes the BGM of g_SndBGMId through SND_ResumeBGM; the same body is Area_ResumeBGM in area108 and area145." }
 
 ["emi/world01/area058/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3571,9 +3695,12 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world02/area077/14"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+GFX_AddBlendDrawMode = { addr = 0x801F3198, type = "func", source = "Adds a draw mode for the given blend mode on the texture page at VRAM 960,0 (GetTPage, GFX_AddDrawMode); called by func_801F36E8 before it draws a 64x64 area effect." }
+Actor_InitSlot = { addr = 0x801F61F0, type = "func", source = "finds a free actor slot and sets its flags and type (called by func_801F6084 and func_801F60A4)" }
 Area_DrawSpinTriangle = { addr = 0x801F47C8, type = "func", source = "Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin." }
 Area_InitSpin = { addr = 0x801F4A68, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
 Message_SetAnswerMessage = { addr = 0x801F59DC, type = "func", source = "Stores the message id the answer table D_801F6B1C holds for the menu choice g_MessageChoice in g_MessageRequest." }
+Area_TakeFlameChrysm = { addr = 0x801F5BAC, type = "func", source = "Removes one Flame Chrysm from the inventory through Item_Remove; no C caller, it is reached through the area077 script tables." }
 Area_AddCameraOffsetY20 = { addr = 0x801F5DC0, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F5DE8, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 
@@ -3601,6 +3728,7 @@ Area_ClearWorkColumn = { addr = 0x801F3910, type = "func", source = "Zeroes byte
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area085/13"]
+Actor_FreePalette = { addr = 0x801F3BA4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area198." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_DrawScreenTint = { addr = 0x801F2ED8, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Actor_FreePaletteFades = { addr = 0x801F36B4, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
@@ -3982,6 +4110,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world03/area145/14"]
 Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Message_ShowParty = { addr = 0x801F403C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
+Area_PauseBGM = { addr = 0x801F434C, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_PauseBGM; the same body as Area_PauseBGM in area039, area057 and area108." }
+Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "Resumes the BGM of g_SndBGMId through SND_ResumeBGM; the same body as Area_ResumeBGM in area057 and area108." }
 g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area146/13"]
@@ -4651,6 +4781,7 @@ g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Tag and mess
 ["emi/world04/area198/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F2E5C, type = "func", source = "Starts an actor script from the area table." }
+Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area085." }
 Area_FreePaletteOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
 
@@ -5359,6 +5490,8 @@ Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area ma
 Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }
 Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
 Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
+Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
+UI_DrawTextRows = { addr = 0x8015A170, source = "Draws each row of the message window up to g_MessageWindow.last_row through UI_DrawTextAt, carrying the text cursor from row to row." }
 UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
@@ -5373,6 +5506,7 @@ Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "Tests a scene
 Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene event flag." }
 Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
 Game_IsScenarioAtLeast = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
+func_8015B83C = { addr = 0x8015B83C, type = "func", source = "Entry of the script condition table data_8018214C: tests bit **cursor of the D_80145548 mask, whose owner is not proven." }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
@@ -6204,4 +6338,5 @@ Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives th
 Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny reward of the battle victory screen: formats g_Zenny with TEXT_Format and draws the amount and its caption; the second entry of the table in func_801F097C." }
 
 ["emi/battle/batl_ovr/00"]
+Battle_StartGameOver = { addr = 0x801EEC40, type = "func", source = "Step 0 of the BATL_OVR (battle defeat) step table that ends in Battle_UpdateGameOver: sets UI mode 0x13, copies palette 0x1A and advances ui_step." }
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }

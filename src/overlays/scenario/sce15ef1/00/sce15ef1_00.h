@@ -22,7 +22,8 @@ extern Callback D_801D397C[];
 /* One of the sixteen effect slots at D_801D39A8. */
 #define EFFECT_SLOT_COUNT 16
 
-extern Callback D_801D3918[];
+/* D_801D3918 */
+extern Callback g_SceneEntityDispatch[];
 
 extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
 

@@ -324,7 +324,7 @@ static u8 s_gap_801ECD1C[996] = {
     0x00, 0xFF, 0x00, 0x00,
 };
 u8 s_CampMenuState[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00};
-Callback g_MenuCampSubstates[5] = {func_801E3EC4, func_801E4024, func_801E462C, func_801E4ED4, Menu_ExitCamp};
+Callback g_MenuCampSubstates[5] = {func_801E3EC4, func_801E4024, Menu_UpdateCamp, func_801E4ED4, Menu_ExitCamp};
 Callback D_801ED11C[7] = {func_801E4060, func_801E40A0, func_801E411C, func_801E4288, func_801E4318, func_801E441C, func_801E45CC};
 Callback D_801ED138[4] = {func_801E4670, func_801E46F8, func_801E4744, func_801E4E8C};
 static u8 s_gap_801ED148[68] = {
