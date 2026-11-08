@@ -12,8 +12,7 @@ typedef struct PanelTail {
     u8 bytes[7];
 } PanelTail;
 
-/* 76.7%; first difference at the prologue: retail saves s5 (sel live across the three calls, frame 0xC0), ours uses
-   frame 0xB8. */
+/* 76.7%; delayed index, volatile selector and delayed mask tried; first diff 0x801E2E90, frame 0xB8 vs 0xC0. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     MenuPanelRows table;

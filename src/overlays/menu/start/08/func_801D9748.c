@@ -1,7 +1,6 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 92.47%. resume: a lever or header
- * fix that closes the first mismatch. */
+/* 92.47%; delayed initialization, signed counter and do-while tried; first diff 0x801D974C, counter setup. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D9748(void) {
     volatile u8*   record;
