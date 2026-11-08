@@ -29,7 +29,7 @@ MATCH void func_80156E00(u8* unit, s32 x, s32 y) {
     }
     col  = g_AreaGridColCursor + (col / 2 + one);
     col  = (col >= AREA_CELL_GRID_COLS) ? (col - AREA_CELL_GRID_COLS) : col;
-    cell = g_AreaCells[row][col].prim_id & 0xFFF;
+    cell = g_AreaCells[row][col].prim_id & AREA_CELL_PRIM_MASK;
     if (cell != 0) {
         Area_DrawCellQuad(unit[3] - 0x10, cell);
     }

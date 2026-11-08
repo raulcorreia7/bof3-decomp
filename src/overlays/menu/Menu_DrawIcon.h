@@ -14,7 +14,7 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     setWH(sprt, 16, 8);
     sprt->clut = STAGE_PALETTE_CLUT;
     if ((shade_mode & BYTE_MASK) == 0) {
-        sprt->r0 = sprt->g0 = sprt->b0 = 128;
+        sprt->r0 = sprt->g0 = sprt->b0 = GFX_COLOR_NEUTRAL;
     } else {
         sprt->r0 = sprt->g0 = sprt->b0 = 16;
     }

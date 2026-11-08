@@ -15,7 +15,7 @@ MATCH void func_801DA078(s32 x, s32 y, s32 u_index) {
     sprite    = (SPRT*)g_GfxPrimCursor;
     setWH(sprite, 16, 8);
     sprite->clut = STAGE_PALETTE_CLUT;
-    setRGB0(sprite, 128, 128, 128);
+    setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     sprite->v0 = 216;
     sprite->u0 = texture_u;
     setXY0(sprite, x, y);

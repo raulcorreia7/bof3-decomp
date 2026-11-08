@@ -43,6 +43,9 @@ ASSERT_SIZE(UvRect, 0x4);
 #define FONT_TPAGE_X                 960
 #define FONT_TPAGE_Y                 0
 
+/* A textured primitive's colour channel that leaves the texel unchanged (128 is 1.0 in the PSX modulation). */
+#define GFX_COLOR_NEUTRAL            128
+
 /* Color packing. */
 #define PSX_COLOR_R(c)               ((u16)(c) & 0x1Fu)
 #define PSX_COLOR_G(c)               (((u16)(c) >> 5) & 0x1Fu)
@@ -87,7 +90,7 @@ static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     SPRT* sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
     SetSemiTrans(sprt, 1);
-    setRGB0(sprt, 128, 128, 128);
+    setRGB0(sprt, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     setXY0(sprt, x, y);
     sprt->clut = clut;
     return sprt;

@@ -30,7 +30,7 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     /* FAKE: retail reads g_WindowStyle as s8. */
     setClut(primitive, (((*(s8*)&g_WindowStyle) * 2) + palette_index) * 16, STAGE_PALETTE_Y + 1);
     start_x = x;
-    setRGB0(primitive, 128, 128, 128);
+    setRGB0(primitive, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     start_y = y;
     x += 4;
     y += 4;
