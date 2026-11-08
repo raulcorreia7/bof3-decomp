@@ -48,29 +48,29 @@ NON_MATCHING void func_80167428(void) {
         } else {
             g_AreaCameraHeightStep = 0;
         }
-        g_GameState->counter_11C  = 3;
-        tmp12                     = g_Task;
-        *(u8*)(tmp12)             = (u8)(*(u8*)(tmp12) | 0x40);
-        FIELD(s8, (g_Task), 0x1u) = 3;
+        FIELD(s8, g_GameState, 0x11Cu) = 3;
+        tmp12                          = g_Task;
+        *(u8*)(tmp12)                  = (u8)(*(u8*)(tmp12) | 0x40);
+        FIELD(s8, (g_Task), 0x1u)      = 3;
         return;
     }
     if (g_InputMasks[FIELD_INPUT_VIEW] & D_8014625C) {
-        g_GameState->counter_11C = 3;
+        FIELD(s8, g_GameState, 0x11Cu) = 3;
         g_GameEntrySubstate += 1;
         FIELD(s8, (g_Task), 0x1u) = 1;
         FIELD(s8, (g_Task), 0x2u) = 0;
         return;
     }
     if (!(func_801B59B4() & BYTE_MASK)) {
-        g_GameState->counter_11C  = 3;
-        tmp9                      = g_Task;
-        FIELD(u8, tmp9, 0x9u)     = 0U;
-        FIELD(s32, tmp9, 0xCu)    = 0;
-        FIELD(s32, tmp9, 0x10u)   = 0;
-        FIELD(s32, tmp9, 0x14u)   = 0;
-        g_AreaCameraStep          = 0;
-        g_AreaCameraHeightStep    = 0;
-        FIELD(s8, (g_Task), 0x1u) = 1;
+        FIELD(s8, g_GameState, 0x11Cu) = 3;
+        tmp9                           = g_Task;
+        FIELD(u8, tmp9, 0x9u)          = 0U;
+        FIELD(s32, tmp9, 0xCu)         = 0;
+        FIELD(s32, tmp9, 0x10u)        = 0;
+        FIELD(s32, tmp9, 0x14u)        = 0;
+        g_AreaCameraStep               = 0;
+        g_AreaCameraHeightStep         = 0;
+        FIELD(s8, (g_Task), 0x1u)      = 1;
         return;
     }
     if (!(func_801B0E44() & BYTE_MASK)) {
@@ -110,7 +110,7 @@ NON_MATCHING void func_80167428(void) {
             block_29:
                 val5 = 3;
             }
-            g_GameState->counter_11C = val5;
+            FIELD(s8, g_GameState, 0x11Cu) = val5;
             func_801C24D0();
             func_801C4C48();
             tmp11                  = g_Task;
@@ -119,9 +119,9 @@ NON_MATCHING void func_80167428(void) {
             val4 = 2;
         }
     } else {
-        g_GameState->counter_11C  = 3;
-        FIELD(u8, (g_Task), 0x9u) = 0U;
-        val4                      = 1;
+        FIELD(s8, g_GameState, 0x11Cu) = 3;
+        FIELD(u8, (g_Task), 0x9u)      = 0U;
+        val4                           = 1;
     }
     FIELD(s8, (g_Task), 0x1u) = val4;
     g_GameStateIndex          = GAME_REQUEST_SCENE_CAMERA;

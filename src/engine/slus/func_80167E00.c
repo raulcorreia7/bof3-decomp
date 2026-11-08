@@ -46,7 +46,7 @@ NON_MATCHING void func_80167E00(void) {
         slot   = index & BYTE_MASK;
         entity = (EntitySlot*)((u8*)g_Actors + slot * ACTOR_SIZE);
         g_Task = entity;
-        if (ACTOR_IN_USE(*entity)) {
+        if (entity->flags & ACTOR_FLAG_IN_USE) {
             if (entity->unk_06 != 9) {
                 if (entity->flags_24 & 0x10) {
                     entity->unk_29 = four;

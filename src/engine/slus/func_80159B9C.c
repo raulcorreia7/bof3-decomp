@@ -6,9 +6,7 @@
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header
  * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
-NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
-    s16       w;
-    s16       h;
+NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     s16       x1 = x;
     s16       y1 = y;
     s16       x2;
@@ -34,8 +32,8 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
-    rect->pos.x.raw = 0;
-    rect->pos.y.raw = 240;
+    rect->x = 0;
+    rect->y = 240;
     setWH(rect, 16, 16);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), rect);
     GFX_AddPrim(1, 0xC);
@@ -57,8 +55,8 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
-    rect->pos.x.raw = 0;
-    rect->pos.y.raw = 0;
+    rect->x = 0;
+    rect->y = 0;
     setWH(rect, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 320, 0), rect);
     GFX_AddPrim(1, 0xC);
