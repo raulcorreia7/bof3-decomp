@@ -68,16 +68,16 @@ MATCH void func_801EEEE4(void) {
 }
 
 MATCH void func_801EEF34(void) {
-    u8 temp_a0;
-    u8 temp_v1;
+    u8 count;
+    u8 value;
 
-    temp_a0 = g_Task->unk_09;
-    if ((temp_a0 & BYTE_MASK) != 0x20) {
-        g_Task->unk_09 = temp_a0 + 1;
+    count = g_Task->unk_09;
+    if ((count & BYTE_MASK) != 0x20) {
+        g_Task->unk_09 = count + 1;
     }
-    temp_v1       = g_Task->timer - 1;
-    g_Task->timer = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 0x30) {
+    value         = g_Task->timer - 1;
+    g_Task->timer = value;
+    if ((value & BYTE_MASK) == 0x30) {
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
@@ -151,16 +151,16 @@ MATCH void func_801EF1DC(void) {
 }
 
 MATCH void func_801EF23C(void) {
-    u8 temp_v0;
-    u8 temp_v1;
+    u8 count;
+    u8 value;
 
-    temp_v0 = g_Task->unk_09;
-    if (temp_v0 != 0) {
-        g_Task->unk_09 = temp_v0 - 1;
+    count = g_Task->unk_09;
+    if (count != 0) {
+        g_Task->unk_09 = count - 1;
     }
-    temp_v1       = g_Task->timer + 1;
-    g_Task->timer = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 0x80) {
+    value         = g_Task->timer + 1;
+    g_Task->timer = value;
+    if ((value & BYTE_MASK) == 0x80) {
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
     }

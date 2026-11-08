@@ -10,22 +10,22 @@ INCLUDE_ASM(func_801EEC44);
 INCLUDE_ASM(func_801EEDA0);
 
 MATCH void func_801EEE84(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0       = g_Task->timer + 1;
-    g_Task->timer = temp_v0;
-    if ((temp_v0 & BYTE_MASK) >= 0x21U) {
+    count         = g_Task->timer + 1;
+    g_Task->timer = count;
+    if ((count & BYTE_MASK) >= 0x21U) {
         g_Task->header.mode += 1;
         g_Task->unk_09 = 0;
     }
 }
 
 MATCH void func_801EEEE4(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & BYTE_MASK) >= 0x21U) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) >= 0x21U) {
         g_Task->header.mode += 1;
         g_Task->unk_09 = 0;
     }
@@ -34,11 +34,11 @@ MATCH void func_801EEEE4(void) {
 INCLUDE_ASM(func_801EEF44);
 
 MATCH void func_801EEFFC(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         g_Task->header.mode += 1;
         return;
     }
@@ -46,11 +46,11 @@ MATCH void func_801EEFFC(void) {
 }
 
 MATCH void func_801EF060(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0       = g_Task->timer - 1;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count         = g_Task->timer - 1;
+    g_Task->timer = count;
+    if (!(count & BYTE_MASK)) {
         g_Task->header.mode += 1;
         g_Task->unk_09 = 0x40;
     }

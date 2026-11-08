@@ -156,11 +156,11 @@ MATCH void func_801F0038(void) {
 #include "overlays/bmagic/Effect_NextStepOnLastTick.h"
 
 MATCH void func_801F0100(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         g_Task->unk_14 = 0x20;
         g_Task->unk_20 = -1;
         g_Task->header.step += 1;
@@ -168,11 +168,11 @@ MATCH void func_801F0100(void) {
 }
 
 MATCH void func_801F0154(void) {
-    s32 temp_a1;
+    s32 dz;
 
-    temp_a1                  = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14           = temp_a1;
-    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + temp_a1;
+    dz                       = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14           = dz;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + dz;
     if (g_Task->unk_14 < -0x10) {
         func_801E5988();
     }

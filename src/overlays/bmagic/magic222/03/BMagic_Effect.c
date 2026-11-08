@@ -117,13 +117,13 @@ MATCH void func_801EFDEC(void) {
 
 MATCH void func_801EFE74(void) {
     s32  r;
-    s32  temp_v1;
+    s32  phase;
     s16* angle = &D_1F800004;
 
     r                   = rand();
-    temp_v1             = g_Task->param.unk_0B;
+    phase               = g_Task->param.unk_0B;
     g_Task->unk_0C      = (r & 7) + 8;
-    *angle              = temp_v1 << 9;
+    *angle              = phase << 9;
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(*angle) * g_Task->unk_0C);
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
