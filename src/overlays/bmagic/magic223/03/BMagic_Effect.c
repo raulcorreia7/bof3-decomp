@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC10);
+#include "overlays/bmagic/func_801EEC10_3.h"
 
 INCLUDE_ASM(func_801EED18);
 
