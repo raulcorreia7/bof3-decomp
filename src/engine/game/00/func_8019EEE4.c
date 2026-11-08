@@ -51,9 +51,9 @@ MATCH u8 func_8019EEE4(void) {
         if (roll >= 0xD) {
             g_Task->param.unk_0B = 2;
             if (roll == 0xF) {
-                func_801B5E58(0xA);
+                Game_RewardZenny(0xA);
             } else {
-                func_801B5E58(5);
+                Game_RewardZenny(5);
             }
             index = (s8)Actor_FindFreeSlot();
             if (index != -1) {

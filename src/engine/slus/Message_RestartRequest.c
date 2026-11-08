@@ -4,7 +4,8 @@
  * byte g_MessageStateTimer with 0x10, re-initialises the shared record through
  * Message_StartRequest, and toggles bit 2 of the shared selection word g_UiWindowChannel.
  */
-MATCH void func_8015142C(void) {
+/* func_8015142C */
+MATCH void Message_RestartRequest(void) {
     if (g_MenuPanelTasks[0].state == 2) {
         g_MessageStateTimer[0] = 0x10;
         Message_StartRequest();

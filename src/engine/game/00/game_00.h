@@ -611,10 +611,13 @@ void    Area_RunFrame(void);
 void    func_80199230(void);
 void    func_801992B8(void);
 void    func_80199308(void);
-void    func_80199368(void);
+/* func_80199368 */
+void    Game_UpdateMenuFrame(void);
 void    func_80199398(void);
-void    func_801993F0(void);
-void    func_80199418(void);
+/* func_801993F0 */
+void    Game_RunAbilityMenuFrame(void);
+/* func_80199418 */
+void    Game_RunStatusMenuFrame(void);
 void    func_8019959C(void);
 void    func_801995A4(void);
 void    func_801995F8(void);
@@ -629,7 +632,8 @@ void    func_80199938(void);
 void    func_80199978(void);
 void    func_801999B8(void);
 void    func_801999F8(MenuPanelTask* task);
-u8*     func_8019A1D4(void);
+/* func_8019A1D4 */
+u8*     Game_GetAreaMapPoints(void);
 void    func_8019A210(void);
 void    func_8019A258(void);
 void    func_8019A2A0(void);
@@ -774,10 +778,12 @@ u8      func_801A2ED4(Actor* entity, u8 route_step);
 void    func_801A3080(Actor* actor, s32 facing);
 void    func_801A3410(void* work_index);
 void    func_801A3594(void);
-void    func_801A35D8(void);
+/* func_801A35D8 */
+void    Game_StartFadeWhite(void);
 void    func_801A3648(void);
 void    func_801A37D4(void);
-void    func_801A3818(void);
+/* func_801A3818 */
+void    Game_StartFadeBlack(void);
 void    func_801A386C(void);
 bool    func_801A3AC8(Actor* record);
 void    func_801A3B7C(Actor* entity);

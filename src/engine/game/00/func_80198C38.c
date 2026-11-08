@@ -7,6 +7,6 @@ MATCH void func_80198C38(u8 wait_steps) {
             CallbackWait(1);
             break;
         }
-        func_80199368();
+        Game_UpdateMenuFrame();
     } while (WINDOW_EFFECT_BUSY());
 }

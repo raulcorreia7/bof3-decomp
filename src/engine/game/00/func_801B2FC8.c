@@ -29,7 +29,7 @@ MATCH void func_801B2FC8(void) {
                     SYS_SetFlag(marks, sel->index_04);
                 }
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-                func_801B5E58((FIELD(u16, sel, 0x4u) >> 8) * 0x28);
+                Game_RewardZenny((FIELD(u16, sel, 0x4u) >> 8) * 0x28);
                 /* the text row reports through its own resource; skip the dispatch */
                 goto state;
             }

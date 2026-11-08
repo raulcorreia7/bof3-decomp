@@ -18,7 +18,7 @@ const Table8 D_80149A7C = {{
     UI_HandleChoiceInput,
     func_80151334,
     Message_DispatchAnswerStep,
-    func_8015142C,
+    Message_RestartRequest,
     func_80151480,
 }};
 

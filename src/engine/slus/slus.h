@@ -1106,7 +1106,8 @@ void        func_8015115C(void);
 void        func_801511C8(void);
 void        func_80151334(void);
 void        Message_DispatchAnswerStep(void);
-void        func_8015142C(void);
+/* func_8015142C */
+void        Message_RestartRequest(void);
 void        func_80151480(void);
 void        Message_StartRequest(void);
 void        func_80151538(void);

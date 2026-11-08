@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_80199368(void) {
+/* func_80199368 */
+MATCH void Game_UpdateMenuFrame(void) {
     Game_UpdateScenario();
     Menu_DispatchStep();
     Menu_UpdatePanelTasks();

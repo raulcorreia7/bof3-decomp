@@ -26,7 +26,7 @@ MATCH void func_801B3768(void) {
         selector = packed;
         low      = selector;
         if (low == GAME_NONE) {
-            func_801B5E58((high & BYTE_MASK) * 0x28);
+            Game_RewardZenny((high & BYTE_MASK) * 0x28);
             current_kind = g_Actors[g_Game.current->status.field.slot_12D].unk_05;
             if (current_kind != low) {
                 SYS_SetFlag(D_80144FC4, current_kind);

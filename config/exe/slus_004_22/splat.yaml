@@ -223,7 +223,7 @@ segments:
       - [0xBB210, c, UI_HandleChoiceInput]
       - [0xBB334, c, func_80151334]
       - [0xBB36C, c, Message_DispatchAnswerStep]
-      - [0xBB42C, c, func_8015142C]
+      - [0xBB42C, c, Message_RestartRequest]
       - [0xBB480, c, func_80151480]
       - [0xBB4D0, c, Message_StartRequest]
       - [0xBB538, c, func_80151538]

@@ -1790,8 +1790,15 @@ g_Commu05States = { addr = 0x801D1950, source = "the 3 step handlers of the comm
 ["emi/etc/game/00"]
 Game_FinishCameraLook = { addr = 0x801981D4, type = "func", source = "Ends the camera look once the area camera angle reaches its resting pitch -682 and ANGLE_45 yaw: returns the game request to idle. Called by Game_UpdateCameraLook." }
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
+Game_UpdateMenuFrame = { addr = 0x80199368, type = "func", source = "g_GameMenuSubstates handler: runs Game_UpdateScenario, Menu_DispatchStep and Menu_UpdatePanelTasks while the menu overlay is active (between load and return)" }
+Game_RunAbilityMenuFrame = { addr = 0x801993F0, type = "func", source = "g_MenuAbilityOpen substate handler: runs the Bate (ability) menu entry dispatch and Menu_UpdatePanelTasks while the ability menu is active" }
+Game_RunStatusMenuFrame = { addr = 0x80199418, type = "func", source = "g_MenuStatusOpen substate handler: runs the Shisu (status) menu entry dispatch and Menu_UpdatePanelTasks while the status menu is active" }
+Game_GetAreaMapPoints = { addr = 0x8019A1D4, type = "func", source = "returns the current area handler's map point rows (x,y,context seed,kind); func_801B690C searches them by actor cell and Fishing_ShowLocation walks the same rows" }
+Game_StartFadeWhite = { addr = 0x801A35D8, type = "func", source = "starts a white palette fade on the current task/actor (GFX_AllocPaletteFade 0x1F,0x1F,0x1F), clears ACTOR_FLAG_HIDDEN; D_801C8434 step 0, paired with func_801A3648" }
+Game_StartFadeBlack = { addr = 0x801A3818, type = "func", source = "starts a black palette fade on the current task/actor (GFX_AllocPaletteFade 0,0,0); D_801C843C step 0, paired with func_801A386C" }
 Game_CallAreaHandler = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table D_801C86F8 and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenarioHandler." }
 UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
+Game_RewardZenny = { addr = 0x801B5E58, type = "func", source = "plays the reward cue, formats and shows the zenny message, adds zenny to the party (Char_ProbeCellSpawn, func_801B2FC8, func_8019EEE4)" }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
 Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
@@ -2400,6 +2407,8 @@ g_SaveSlotLevelFormat = { addr = 0x801D0DAC, source = "Format of the level on a 
 g_SaveSlotTimeFormat = { addr = 0x801D0DB0, source = "Format of the play time on a save slot row: hours and minutes." }
 g_SaveSlotTimeColon = { addr = 0x801D0DBC, source = "The colon drawn between the hours and minutes of a save slot row." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
+Menu_UpdateCampFrame = { addr = 0x801E462C, type = "func", source = "g_MenuCampSubstates handler: dispatches D_801ED138[g_MenuStartStep] and draws Area_DrawScene for the camp menu" }
+Menu_EquipChoicePanel = { addr = 0x801EA7EC, type = "func", source = "g_MenuStartPanelModes handler: runs the equip choice panel state and draws Menu_DrawEquipChoiceWindow" }
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
 g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
@@ -2632,6 +2641,7 @@ Char_FaceFreeDirection = { addr = 0x801CF7B4, type = "func", source = "Steps dir
 Char_AdvancePaletteScript = { addr = 0x801CFB00, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 1 stages the palette of byte 0x05, phase 2 selects the script of direction_08 once func_8014DAEC reports ready; ends and clears the panel mode when g_GameStateIndex is GAME_REQUEST_IDLE." }
 Char_StartFacingScript = { addr = 0x801CFC30, type = "func", source = "Selects the script of direction_08 once func_8014DAEC reports ready and adds 1 to byte 0x03." }
 Char_ClearSlotRefIfUnused = { addr = 0x801CFC90, type = "func", source = "When the actor slot in byte 0x06 is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears byte 0x06 and lowers byte 0x03 by 2." }
+PlChar_RequestFacingScript = { addr = 0x801D0060, type = "func", source = "sets up player char state and requests the facing-direction script ((direction-1)/2 + 0x42), advancing to substate B/1" }
 Char_ClearModeIfUnused = { addr = 0x801D0204, type = "func", source = "When the actor slot in param.actor_slot is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears the marker at byte 0x2B and the panel mode byte; always runs func_8014D978." }
 
 ["emi/plchar/plp025/00"]
@@ -2732,6 +2742,7 @@ Char_FaceFreeDirection = { addr = 0x801CEEB0, type = "func", source = "Steps dir
 Char_AdvancePaletteScript = { addr = 0x801CF1FC, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 1 stages the palette of byte 0x05, phase 2 selects the script of direction_08 once func_8014DAEC reports ready; ends and clears the panel mode when g_GameStateIndex is GAME_REQUEST_IDLE." }
 Char_StartFacingScript = { addr = 0x801CF32C, type = "func", source = "Selects the script of direction_08 once func_8014DAEC reports ready and adds 1 to byte 0x03." }
 Char_ClearSlotRefIfUnused = { addr = 0x801CF38C, type = "func", source = "When the actor slot in byte 0x06 is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears byte 0x06 and lowers byte 0x03 by 2." }
+PlChar_RequestFacingScript = { addr = 0x801CF75C, type = "func", source = "sets up player char state and requests the facing-direction script ((direction-1)/2 + 0x42), advancing to substate B/1" }
 Char_ClearModeIfUnused = { addr = 0x801CF900, type = "func", source = "When the actor slot in param.actor_slot is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears the marker at byte 0x2B and the panel mode byte; always runs func_8014D978." }
 Char_StartNearestFacingTurn = { addr = 0x801CFCE8, type = "func", source = "Starts the turn to the nearer of facings 3 and 5: stores it in byte 0x03 and its func_801B2D00 sign in param.turn_step, sets timer to 2 and advances header.step; in scenario 15 only clears the panel mode byte." }
 Char_RunStepScriptRyuAdult = { addr = 0x801CFDDC, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of adult Ryu, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
@@ -2836,6 +2847,7 @@ Char_FaceFreeDirection = { addr = 0x801CECB4, type = "func", source = "Steps dir
 Char_AdvancePaletteScript = { addr = 0x801CF000, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 1 stages the palette of byte 0x05, phase 2 selects the script of direction_08 once func_8014DAEC reports ready; ends and clears the panel mode when g_GameStateIndex is GAME_REQUEST_IDLE." }
 Char_StartFacingScript = { addr = 0x801CF130, type = "func", source = "Selects the script of direction_08 once func_8014DAEC reports ready and adds 1 to byte 0x03." }
 Char_ClearSlotRefIfUnused = { addr = 0x801CF190, type = "func", source = "When the actor slot in byte 0x06 is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears byte 0x06 and lowers byte 0x03 by 2." }
+PlChar_RequestFacingScript = { addr = 0x801CF560, type = "func", source = "sets up player char state and requests the facing-direction script ((direction-1)/2 + 0x42), advancing to substate B/1" }
 Char_ClearModeIfUnused = { addr = 0x801CF704, type = "func", source = "When the actor slot in param.actor_slot is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears the marker at byte 0x2B and the panel mode byte; always runs func_8014D978." }
 Char_StartNearestFacingTurn = { addr = 0x801CFAEC, type = "func", source = "Starts the turn to the nearer of facings 3 and 5: stores it in byte 0x03 and its func_801B2D00 sign in param.turn_step, sets timer to 2 and advances header.step; in scenario 15 only clears the panel mode byte." }
 Char_RunStepScriptRyuAdult = { addr = 0x801CFBE0, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of adult Ryu, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
@@ -5270,6 +5282,7 @@ Message_DispatchState = { addr = 0x801507BC, type = "func", source = "Runs the h
 UI_TickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
 UI_HandleChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
 Message_DispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
+Message_RestartRequest = { addr = 0x8015142C, type = "func", source = "when the message panel owner state is 2, resets timer, re-initializes via Message_StartRequest and toggles the selection flag (data_80149A5C callback)" }
 Message_StartRequest = { addr = 0x801514D0, type = "func", source = "Starts the requested message." }
 UI_ClosePanel = { addr = 0x801515A8, type = "func", source = "Clears the panel index - arms panel 1 mode 0 and advances the front-end step." }
 UI_ScrollChoice = { addr = 0x80151628, type = "func", source = "Moves the choice cursor." }

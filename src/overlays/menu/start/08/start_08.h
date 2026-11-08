@@ -569,7 +569,8 @@ void        func_801E4288(void);
 void        func_801E4318(void);
 void        func_801E441C(void);
 void        func_801E45CC(void);
-void        func_801E462C(void);
+/* func_801E462C */
+void        Menu_UpdateCampFrame(void);
 void        func_801E4670(void);
 void        func_801E46F8(void);
 void        func_801E4744(void);
@@ -680,7 +681,8 @@ void        func_801EA6EC(void);
 void        func_801EA72C(void);
 void        func_801EA76C(void);
 void        func_801EA7AC(void);
-void        func_801EA7EC(void);
+/* func_801EA7EC */
+void        Menu_EquipChoicePanel(void);
 void        func_801EA840(void);
 void        func_801EA880(void);
 void        func_801EA8C0(void);

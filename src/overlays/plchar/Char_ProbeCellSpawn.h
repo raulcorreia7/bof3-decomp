@@ -22,7 +22,7 @@ MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
                 if ((g_GameRequestFlags & 6) && !(RANDOM_MASK(3))) {
                     spawn_cue = (spawn_cue & BYTE_MASK) * CHAR_SPAWN_CUE_SCALE;
                 }
-                func_801B5E58(spawn_cue & BYTE_MASK);
+                Game_RewardZenny(spawn_cue & BYTE_MASK);
                 Char_SpawnActor(1, x, y);
             }
             g_Task->param.unk_0B = 1;

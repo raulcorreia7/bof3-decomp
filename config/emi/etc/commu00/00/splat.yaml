@@ -55,7 +55,7 @@ segments:
       - [0x2510, c, func_801F1110]
       - [0x2604, c, func_801F1204]
       - [0x2654, c, func_801F1254]
-      - [0x2694, c, func_801F1294]
+      - [0x2694, c, Commu_StartFairyEvent]
       - [0x26C8, c, func_801F12C8]
       - [0x2718, c, Fairy_ShowPlayRecordMessage]
       - [0x27B8, c, func_801F13B8]

@@ -6,7 +6,7 @@ MATCH void Game_ReturnFromMenu(void) {
     u8* request;
     u8* pending;
 
-    func_80199368();
+    Game_UpdateMenuFrame();
     UI_SetMode(2u);
     func_80198C38(0u);
     CallbackWait(1u);

@@ -30,7 +30,7 @@ Callback g_GameStates[12] = {
     (Callback)Game_UpdateCameraLook,  (Callback)Game_UpdateShop,       (Callback)Game_UpdateFishing,
     (Callback)Game_UpdateAbilityMenu, (Callback)Game_UpdateStatusMenu, (Callback)Game_UpdateSceneCamera};
 
-Callback g_GameMenuSubstates[3] = {(Callback)Game_LoadMenuOverlay, (Callback)func_80199368, (Callback)Game_ReturnFromMenu};
+Callback g_GameMenuSubstates[3] = {(Callback)Game_LoadMenuOverlay, (Callback)Game_UpdateMenuFrame, (Callback)Game_ReturnFromMenu};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
@@ -45,9 +45,9 @@ Callback g_GameShopSubstates[3] = {(Callback)Game_LoadShopOverlay, (Callback)fun
 Callback g_GameFishingSubstates[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
                                       (Callback)func_801E0C20};
 
-Callback g_MenuAbilityOpen[3] = {(Callback)Game_LoadAbilityMenu, (Callback)func_801993F0, (Callback)Game_ReturnFromAbilityMenu};
+Callback g_MenuAbilityOpen[3] = {(Callback)Game_LoadAbilityMenu, (Callback)Game_RunAbilityMenuFrame, (Callback)Game_ReturnFromAbilityMenu};
 
-Callback g_MenuStatusOpen[3] = {(Callback)Game_LoadStatusMenu, (Callback)func_80199418, (Callback)Game_ReturnFromStatusMenu};
+Callback g_MenuStatusOpen[3] = {(Callback)Game_LoadStatusMenu, (Callback)Game_RunStatusMenuFrame, (Callback)Game_ReturnFromStatusMenu};
 
 Callback g_GameSceneCameraSubstates[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
 
@@ -251,9 +251,9 @@ u16 D_801C8424[8] = {
     0x0600, 0x0800, 0x0A00, 0x0C00, 0x0E00, 0x0000, 0x0200, 0x0400,
 };
 
-Callback D_801C8434[2] = {(Callback)func_801A35D8, (Callback)func_801A3648};
+Callback D_801C8434[2] = {(Callback)Game_StartFadeWhite, (Callback)func_801A3648};
 
-Callback D_801C843C[2] = {(Callback)func_801A3818, (Callback)func_801A386C};
+Callback D_801C843C[2] = {(Callback)Game_StartFadeBlack, (Callback)func_801A386C};
 
 u8 s_ScriptOpcodeLengths[16] = {0x11, 0x10, 0x13, 0x12, 0x11, 0x12, 0x10, 0x11,
                                 0x0C, 0x0D, 0x0E, 0x0E, 0x02, 0x04, 0x07, 0x00};
