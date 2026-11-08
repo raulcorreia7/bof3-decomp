@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include "menu/draw.h"
 
-/* The fishing shop messages: indexes into the message bank the pond loads at
- * AREA_MESSAGE_BANK (the AREA030, AREA089 and AREA129 payload). */
+/* The fishing shop messages: indexes into the message table the pond loads at
+ * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
 typedef enum FishingShopMessageId {
     FISHING_SHOP_MSG_CONFIRM_ALL      = 69,
     FISHING_SHOP_MSG_CONFIRM_ITEM     = 70,

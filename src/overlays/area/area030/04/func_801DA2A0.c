@@ -29,6 +29,6 @@ MATCH void func_801DA2A0(void) {
         func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH,
                       MENU_HEADER_HEIGHT, 0);
         UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 0xFFU,
-                    MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, FISHING_MSG_QUIT_PROMPT));
+                    MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
     }
 }

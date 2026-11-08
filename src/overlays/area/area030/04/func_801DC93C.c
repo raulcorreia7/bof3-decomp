@@ -97,7 +97,7 @@ NON_MATCHING void func_801DC93C(void) {
                 } else {
                     message_id = FISHING_MSG_HOW_TO_FISH;
                 block_39:
-                    UI_DrawText(29, 20, 0, 0xFFU, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, message_id));
+                    UI_DrawText(29, 20, 0, 0xFFU, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
                 }
                 break;
             case 0:

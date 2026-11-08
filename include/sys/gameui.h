@@ -54,15 +54,15 @@ typedef enum EquipStatRow {
     EQUIP_STAT_ROW_AGILITY = 2,
 } EquipStatRow;
 
-/* A message bank: a u16 table of byte offsets from the bank start, then the
- * records. An area loads its bank at AREA_MESSAGE_BANK; a message id is the
- * table index. */
-typedef struct MessageBank {
+/* A message table (the wiki calls this a message bank): u16 byte offsets from
+ * the table start, then the records. An area loads its table at
+ * AREA_MESSAGE_TABLE; a message id is the offset index. */
+typedef struct MessageTable {
     u16 offsets[1];
-} MessageBank;
+} MessageTable;
 
-#define AREA_MESSAGE_BANK             ((MessageBank*)0x80010000)
-#define MESSAGE_BANK_TEXT(bank, id)   ((u8*)(bank) + (bank)->offsets[id])
+#define AREA_MESSAGE_TABLE            ((MessageTable*)0x80010000)
+#define MESSAGE_TABLE_TEXT(table, id) ((u8*)(table) + (table)->offsets[id])
 
 /* The most bytes of a text record UI_DrawText draws. */
 #define TEXT_LENGTH_MAX               0xFF

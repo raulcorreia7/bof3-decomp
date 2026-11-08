@@ -14,8 +14,8 @@
 #define FISHING_ROW          ((Actor*)g_CurrentActor)
 #define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishSpecies)[(index)])
 
-/* The fishing messages: indexes into the message bank the pond loads at
- * AREA_MESSAGE_BANK (the AREA030, AREA089 and AREA129 payload). */
+/* The fishing messages: indexes into the message table the pond loads at
+ * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
 typedef enum FishingMessageId {
     FISHING_MSG_CAUTION          = 60,
     FISHING_MSG_FISH             = 61,

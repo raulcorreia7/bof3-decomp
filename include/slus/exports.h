@@ -21,7 +21,7 @@ typedef enum SceneEventMode {
     SCENE_EVENT_SHOP_SAVE = 10,
 } SceneEventMode;
 
-/* The area message bank offset the HUD value text reads (AREA_MESSAGE_BANK slot 4). */
+/* The area message table offset the HUD value text reads (AREA_MESSAGE_TABLE slot 4). */
 extern u16           D_80010008;
 /* 0x80143xxx: shared area and UI state. */
 extern u8            D_80142CC4[];
