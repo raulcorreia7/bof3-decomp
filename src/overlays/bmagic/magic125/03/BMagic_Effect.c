@@ -66,7 +66,8 @@ MATCH void func_801EEFF8(void) {
     }
 }
 
-MATCH void func_801EF0F8(void) {
+/* func_801EF0F8 */
+MATCH void Effect_Rise(void) {
     PartyMember* work  = g_Task;
     u8           timer = work->timer - 1;
     work->timer        = timer;

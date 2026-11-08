@@ -16,11 +16,11 @@ MATCH void func_801D4B60(void) {
     if (fish != 0) {
         func_801E1004(key & BYTE_MASK, fish, 0);
         func_801E0F4C(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E);
-        func_801E162C(8, FISHING_CATCH_ROW_Y, FISHING_STATE->bounce_3C.half.key_3E);
+        Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, FISHING_STATE->bounce_3C.half.key_3E);
     } else {
         func_801E1004(0xFF, 0, 0);
         func_801E0F4C(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, 0xFF);
-        func_801E162C(8, FISHING_CATCH_ROW_Y, 0xFFFF);
+        Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 0xFFFF);
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
     func_801D7B64();

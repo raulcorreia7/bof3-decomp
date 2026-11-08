@@ -24,10 +24,10 @@ MATCH void func_801DBD6C(void) {
     state = work->saved_index_0B;
     if (state == 1) {
         cue = 0x43;
-        func_801E162C(8, work->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
+        Fishing_DrawIconRow(8, work->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
     } else if (state == 2) {
         cue = 0x42;
-        func_801E162C(8, work->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
+        Fishing_DrawIconRow(8, work->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
     }
 
     work = FISHING_STATE;

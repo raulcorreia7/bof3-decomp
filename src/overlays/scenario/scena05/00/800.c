@@ -399,7 +399,8 @@ MATCH s32 func_801FD208(void) {
     SCENA05_START_SCENE(0x25, 0x19);
 }
 
-MATCH void func_801FD298(void) {
+/* func_801FD298 */
+MATCH void Scene_JoinMomoNinaPeco(void) {
     g_Characters[g_CharSlot[6]].unk_07 |= 1;
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -468,7 +469,8 @@ MATCH void func_801FD4D8(void) {
 
 #include "overlays/scenario/Scene_RemovePeco.h"
 
-MATCH void func_801FD580(void) {
+/* func_801FD580 */
+MATCH void Scene_RemoveRyuYoung(void) {
     Party_RemoveMember(CHAR_ID_RYU_YOUNG);
     Party_LoadPalettes();
 }
