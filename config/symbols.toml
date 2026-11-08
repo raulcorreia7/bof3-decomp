@@ -4779,6 +4779,7 @@ g_Scenario2Flags = { addr = 0x80144E98, type = "u8", source = "Scene flag words 
 g_SceneEventFlags = { addr = 0x80144F28, type = "u8", source = "Scene event flags." }
 g_Zenny = { addr = 0x80144F50, size = 0x4, source = "Party_SpendZenny subtracts from it when the balance covers the price, Party_AddZenny adds to it and clamps it at 9999999, and every shop panel prints it as the money held" }
 g_PartyFormation = { addr = 0x80144F58, source = "Party formation." }
+g_PartyMenuFlags = { addr = 0x80144F59, size = 0x1, source = "Menu flags of the party: the shop tests bit 3 (0x08), bit 4 (0x10) and bit 5 (0x20) to enable the item classes 11, 13 and 14." }
 g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "Party order in the field." }
 g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "Party order in battle." }
 g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AddAbility, and battle/15 sets it when a party member learns an enemy skill." }
@@ -4786,6 +4787,9 @@ g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per en
 g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
 g_FishBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }
 g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "Index of the last loaded EMI character." }
+g_FishingLure = { addr = 0x80145026, source = "Accessory id of the equipped lure; Item_Count counts it with the held accessories." }
+g_FishingLureQty = { addr = 0x80145027, source = "Number of equipped lures held; Item_Count adds it to the lure's item count." }
+g_FishingRod = { addr = 0x80145028, source = "Accessory id of the equipped rod; Item_Count counts it with the held accessories." }
 g_SndBGMId = { addr = 0x80145029, source = "Id of the background music being played." }
 g_BattleCount = { addr = 0x8014502C, source = "Number of battles fought." }
 g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Item ids of each inventory category." }

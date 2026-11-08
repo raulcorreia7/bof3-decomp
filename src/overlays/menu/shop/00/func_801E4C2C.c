@@ -7,16 +7,16 @@ MATCH s32 func_801E4C2C(s32 item_class) {
 
     switch (item_class & BYTE_MASK) {
         case 11:
-            enabled = MEM(u8, PARTY_FLAGS) & 8;
+            enabled = g_PartyMenuFlags & 8;
             break;
         case 12:
             enabled = SYS_TestFlag(g_SceneEventFlags, 0x6C);
             break;
         case 13:
-            enabled = MEM(u8, PARTY_FLAGS) & 0x10;
+            enabled = g_PartyMenuFlags & 0x10;
             break;
         case 14:
-            enabled = MEM(u8, PARTY_FLAGS) & 0x20;
+            enabled = g_PartyMenuFlags & 0x20;
             break;
         default:
             /* Other classes scan the entry list after the flag tests. */

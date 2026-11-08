@@ -362,12 +362,6 @@ extern u8                    D_8014428B;
 extern u16                   D_801442AC;
 extern u16                   D_801442BC;
 extern u16                   D_801442BE;
-/* D_80145026 */
-extern u8                    g_FishingLure;
-/* D_80145027 */
-extern u8                    g_FishingLureQty;
-/* D_80145028 */
-extern u8                    g_FishingRod;
 extern u8                    D_801454EC[];
 extern s32                   D_80145EC4;
 extern u8                    D_80145ED9;

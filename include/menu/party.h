@@ -4,7 +4,6 @@
 #include "common/vector.h"
 #include "types.h"
 
-#define PARTY_FORMATION         0x80144F58u
 #define PARTY_FLAGS             0x80144F59u
 
 #define PARTY_FIELD_ORDER_BASE  0x80144F5Au

@@ -25,9 +25,9 @@
  * here. Record fields come from @source: wiki:data/field#fairy-village-and-fishing.
  */
 
-#define FISHING_LURE                       0x80145026u
-#define FISHING_LURE_QTY                   0x80145027u /* lures held; func_8016628C adds it to the lure's item count */
-#define FISHING_ROD                        0x80145028u
+extern u8 g_FishingLure;
+extern u8 g_FishingLureQty; /* lures held; Item_Count adds it to the lure's item count */
+extern u8 g_FishingRod;
 
 #define FISHING_ROD_TABLE                  0x801E2748u
 #define FISHING_LURE_TABLE                 0x801E2720u
