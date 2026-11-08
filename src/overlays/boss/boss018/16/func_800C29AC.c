@@ -1,4 +1,5 @@
 #include "boss018_16.h"
 
-/* tried: typed map/cell records with do/for loops, grouped columns and FIELD plus a row barrier; first diff 0x800C29B0: lui t1,0x8010 instead of sll a0,a0,1; source address hoists out of the row loop. */
+/* tried: nested 2x2 loops copying table entries to 0x80104030-indexed area
+ * using local tables and 0x80104000; prologue/indexing/register layout differs */
 INCLUDE_ASM(func_800C29AC);
