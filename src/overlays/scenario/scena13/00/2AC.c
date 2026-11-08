@@ -47,7 +47,7 @@ MATCH void func_801F6FD0(void) {
 
 #include "overlays/area/Screen_DrawTint.h"
 
-SCREEN_TINT_BODY(Screen_DrawTint, 5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF))
+SCREEN_TINT_BODY(Screen_DrawTint, 5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF));
 
 MATCH void func_801F70DC(void) {
     Actor* actor;
@@ -119,7 +119,7 @@ MATCH void func_801F7444(void) {
     func_801F7568();
 }
 
-SCREEN_TINT_BODY(func_801F7484, 5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF))
+SCREEN_TINT_BODY(func_801F7484, 5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF));
 
 MATCH void func_801F7568(void) {
     Actor* work;
