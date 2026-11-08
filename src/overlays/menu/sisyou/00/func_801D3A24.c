@@ -73,7 +73,7 @@ NON_MATCHING void func_801D3A24(void) {
                         continue;
                     }
                     skill = g_MasterSkills[g_SceneEventSelection][i / 2].ability;
-                    if (((u32*)(&g_SceneEventSelection + 0x693))[skill >> 5] & (1 << (skill& 0x1F))) {
+                    if (BIT_ARRAY_TEST(g_LearnedAbilities, skill)) {
                         continue;
                     }
                     if (!(Char_AddAbility(skill, g_BattlePartyBattlers[g_MasterMenuCursor].character_index, 0, 0) &
@@ -88,7 +88,7 @@ NON_MATCHING void func_801D3A24(void) {
                     done       = 1;
                     D_80149104 = 0;
                     skill      = g_MasterSkills[g_SceneEventSelection][i / 2].ability;
-                    ((u32*)(&g_SceneEventSelection + 0x693))[skill >> 5] |= 1 << (skill & 0x1F);
+                    BIT_ARRAY_SET(g_LearnedAbilities, skill);
                     break;
                 }
                 break;

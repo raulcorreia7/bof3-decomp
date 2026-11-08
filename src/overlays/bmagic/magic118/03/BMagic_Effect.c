@@ -60,7 +60,7 @@ MATCH void func_801EF0A4(void) {
     work->unk_20 = sum;
     work->unk_14 += sum;
     work->unk_09 -= 2;
-    if (g_Task->unk_09 == 0x10) {
+    if (g_Task->unk_09 == 16) {
         g_Task->header.mode++;
     }
 }

@@ -19,4 +19,8 @@ void            func_801EF7FC(void);
 void            func_801F04BC(void);
 extern Callback D_801F07E8[];
 
+/* The pixels func_801F0260 moves the effect each frame: toward the side param.unk_0B picks, and up. */
+#define MAGIC092_STEP_X 16
+#define MAGIC092_RISE_Y 12
+
 #endif

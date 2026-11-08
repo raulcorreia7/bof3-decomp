@@ -70,7 +70,7 @@ MATCH void Effect_MarkTargetIdentified(void) {
     u8 id;
 
     id = ENEMY_COMBATANT(g_BattleTargetSelector).enemy_id.byte.kind;
-    g_IdentifiedEnemies[id >> 5] |= 1 << (id & 0x1F);
+    BIT_ARRAY_SET(g_IdentifiedEnemies, id);
 }
 
 /* Whether the bit of the targeted enemy's id is set in g_IdentifiedEnemies. */
@@ -78,7 +78,7 @@ MATCH bool Effect_TargetIsIdentified(void) {
     u8 id;
 
     id = ENEMY_COMBATANT(g_BattleTargetSelector).enemy_id.byte.kind;
-    return (g_IdentifiedEnemies[id >> 5] & (1 << (id & 0x1F))) != 0;
+    return BIT_ARRAY_TEST(g_IdentifiedEnemies, id) != 0;
 }
 
 INCLUDE_ASM(func_801EF174);

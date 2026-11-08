@@ -108,13 +108,13 @@ MATCH void func_801F0260(void) {
         func_800AF764();
         work = g_Task;
         if (work->param.unk_0B == 1) {
-            x = work->unk_2E.half - 0x10;
+            x = work->unk_2E.half - MAGIC092_STEP_X;
             y = work->unk_30.half;
         } else {
-            x = work->unk_2E.half + 0x10;
+            x = work->unk_2E.half + MAGIC092_STEP_X;
             y = work->unk_30.half;
         }
-        y -= 0xC;
+        y -= MAGIC092_RISE_Y;
         work->unk_2E.half = x;
         work->unk_30.half = y;
         func_801F04BC();

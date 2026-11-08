@@ -498,7 +498,6 @@ extern u16                    D_800E405E;
 extern u16                    D_800E4068;
 /* Playable-character record rows are byte-addressed; each typed row is 0xA4 bytes. */
 extern volatile u32           D_80144F60[];
-extern volatile u32           D_80144F80[];
 extern u8                     D_801454FD; /* plain: func_80098450 stores it outside the volatile order */
 extern volatile u8            D_801454FE;
 extern volatile u8            D_801454FF;

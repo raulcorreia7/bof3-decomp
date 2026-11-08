@@ -22,16 +22,16 @@ INCLUDE_ASM(func_801EF160);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-/* Whether the queued ability counts: every ability but ids 0x4C and 0xB4. */
+/* Whether the queued action is an ability other than Raise Dead (the spell or the skill). */
 MATCH u8 func_801EF2E8(void) {
     if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
         switch (LOHU(g_BattleActionId)) {
-            case 0x4C:
-            case 0xB4:
+            case ABILITY_RAISE_DEAD:
+            case ABILITY_RAISE_DEAD_SKILL:
                 return 0;
             default:
                 return 1;
-            case 0x4D:
+            case ABILITY_RESURRECT:
                 return 1;
         }
     }

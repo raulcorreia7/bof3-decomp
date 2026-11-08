@@ -4781,6 +4781,7 @@ g_Zenny = { addr = 0x80144F50, size = 0x4, source = "Party_SpendZenny subtracts 
 g_PartyFormation = { addr = 0x80144F58, source = "Party formation." }
 g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "Party order in the field." }
 g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "Party order in battle." }
+g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AddAbility, and battle/15 sets it when a party member learns an enemy skill." }
 g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per enemy kind byte (256 bits): Identify sets the bit of the targeted enemy and the identified test reads it." }
 g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
 g_FishBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }

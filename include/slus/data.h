@@ -40,8 +40,10 @@ extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
 extern u8          g_PartyFormation;
 extern u8          g_PartyBattleOrder[];
-/* D_80144FA0: one bit per enemy kind byte, 256 bits. */
-extern u32         g_IdentifiedEnemies[8];
+/* One bit per ability id: set once a party member has learned the ability, from a master or by watching an enemy. */
+extern u32         g_LearnedAbilities[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];
+/* One bit per enemy kind byte: set once Identify has examined that kind. */
+extern u32         g_IdentifiedEnemies[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];
 extern u32         D_80145040;
 extern u32         D_80145044;
 /* The abilities the shop offers, packed to the front. */

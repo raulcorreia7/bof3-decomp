@@ -14,6 +14,14 @@
 #define BYTE_MASK      0xFF
 #define HALF_MASK      0xFFFF
 
+/* The number of values a byte id can take. */
+#define BYTE_VALUE_COUNT 256
+
+/* Bit arrays of u32 words, one bit per id: bit `i` is bit `i % 32` of word `i / 32`. */
+#define BIT_ARRAY_WORDS(bits)    ((bits) / 32)
+#define BIT_ARRAY_TEST(words, i) ((words)[(i) >> 5] & (1 << ((i) & 0x1F)))
+#define BIT_ARRAY_SET(words, i)  ((words)[(i) >> 5] |= 1 << ((i) & 0x1F))
+
 /* The element count of an array declared in scope. */
 #define ARRAY_COUNT(a) (sizeof(a) / sizeof((a)[0]))
 
