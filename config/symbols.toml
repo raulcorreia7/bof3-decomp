@@ -3108,6 +3108,8 @@ Actor_SpawnFlock = { addr = 0x801F41BC, type = "func", source = "Every 1024 fram
 Actor_StartFlying = { addr = 0x801F42F8, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
 Actor_Fly = { addr = 0x801F4528, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+g_FlockVelocity = { addr = 0x801F51B8, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F51C8, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 
 ["emi/world00/area018/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3232,6 +3234,8 @@ Actor_FreePaletteFades = { addr = 0x801F35B4, type = "func", source = "Frees the
 Message_Clear = { addr = 0x801F36A0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 
 ["emi/world00/area033/13"]
+g_FlockVelocity = { addr = 0x801F501C, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F502C, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 g_WorldCloudTexture = { addr = 0x801F503C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
@@ -3300,6 +3304,8 @@ Message_SetAnswerMessage = { addr = 0x801F3D90, type = "func", source = "Stores 
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world01/area045/13"]
+g_FlockVelocity = { addr = 0x801F53F0, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F5400, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 g_WorldCloudTexture = { addr = 0x801F5410, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
@@ -3409,6 +3415,8 @@ g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted act
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area065/13"]
+g_FlockVelocity = { addr = 0x801F532C, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F533C, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 g_WorldCloudTexture = { addr = 0x801F534C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
@@ -3525,6 +3533,8 @@ Actor_FreePaletteFades = { addr = 0x801F36B4, type = "func", source = "Frees the
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area087/13"]
+g_FlockVelocity = { addr = 0x801F57EC, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F57FC, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 g_WorldCloudTexture = { addr = 0x801F580C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
@@ -3552,6 +3562,8 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4770, type = "func", source = "Calls
 World_UpdateClouds = { addr = 0x801F4798, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world02/area088/13"]
+g_FlockVelocity = { addr = 0x801F6258, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F6268, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 g_WorldCloudTexture = { addr = 0x801F6278, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3911,6 +3923,8 @@ Actor_PlaceAtFocus = { addr = 0x801F2EC4, type = "func", source = "Copies D_8014
 Message_SetAnswerMessage = { addr = 0x801F2CB0, type = "func", source = "Stores the message id the answer table D_801F3808 holds for the menu choice g_MessageChoice in g_MessageRequest." }
 
 ["emi/world03/area151/13"]
+g_FlockVelocity = { addr = 0x801F54E4, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F54F4, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 g_WorldCloudTexture = { addr = 0x801F5504, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
@@ -3935,6 +3949,8 @@ Area_StepStreamSetDrawMode = { addr = 0x801F46AC, type = "func", source = "Calls
 World_UpdateClouds = { addr = 0x801F46D4, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world04/area152/13"]
+g_FlockVelocity = { addr = 0x801F4E10, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F4E20, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 g_WorldCloudTexture = { addr = 0x801F4E30, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }

@@ -215,16 +215,14 @@ Callback D_801F51AC[3] = {
 };
 
 /* Spawn offsets selected by the work byte at +0x08. */
-UPoint2D D_801F51B8[4] = {
+UPoint2D g_FlockVelocity[4] = {
     {0, SPAWN_OFFSET_BACK},
     {SPAWN_OFFSET_BACK, 0},
     {0, SPAWN_OFFSET_FORWARD},
     {SPAWN_OFFSET_FORWARD, 0},
 };
 
-u8 D_801F51C8[8] = {
-    0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01,
-};
+u8 g_FlockScript[4][2] = { { 0x00, 0x00 }, { 0x00, 0x01 }, { 0x01, 0x00 }, { 0x01, 0x01 } };
 
 Callback D_801F51D0[2] = {
     func_801F4610,
