@@ -50,6 +50,6 @@ MATCH void func_801C0AB4(void) {
     if ((flag != 0) && (D_80146262 == g_Game.party_size)) {
         Area_ClearCellPalette(D_80146266, D_8014626A);
         D_80146260 = 0;
-        g_AreaWalkFlags &= ~AREA_WALK_ACCEPT_LOCK;
+        g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
     }
 }

@@ -55,7 +55,7 @@ MATCH void func_801B146C(void) {
                 return;
             }
             if (g_Game.walk_flags & 0x2000) {
-                g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
+                g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
                 func_801B5BDC(g_Task->direction_08);
                 goto block_46; /* re-arm the frame flags */
             }
