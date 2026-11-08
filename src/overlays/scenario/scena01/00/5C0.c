@@ -353,7 +353,8 @@ MATCH void func_801FE1B0(void) {
     Party_JoinMember(CHAR_ID_REI);
 }
 
-MATCH void func_801FE224(void) {
+/* func_801FE224 */
+MATCH void Party_JoinRei(void) {
     Party_JoinMember(CHAR_ID_REI);
 }
 

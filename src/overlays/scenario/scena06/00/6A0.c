@@ -316,11 +316,13 @@ MATCH void func_801FE0D0(void) {
     Party_LoadPalettes();
 }
 
-MATCH void func_801FE11C(void) {
+/* func_801FE11C */
+MATCH void Party_JoinMomo(void) {
     Party_JoinMember(CHAR_ID_MOMO);
 }
 
-MATCH void func_801FE13C(void) {
+/* func_801FE13C */
+MATCH void Party_JoinPeco(void) {
     Party_JoinMember(CHAR_ID_PECO);
 }
 

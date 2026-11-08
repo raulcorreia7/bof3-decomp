@@ -407,19 +407,23 @@ MATCH void func_801FD298(void) {
     Party_JoinMember(CHAR_ID_PECO);
 }
 
-MATCH void func_801FD30C(void) {
+/* func_801FD30C */
+MATCH void Party_JoinNinaYoung(void) {
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
-MATCH void func_801FD32C(void) {
+/* func_801FD32C */
+MATCH void Party_JoinMomo(void) {
     Party_JoinMember(CHAR_ID_MOMO);
 }
 
-MATCH void func_801FD34C(void) {
+/* func_801FD34C */
+MATCH void Party_JoinPeco(void) {
     Party_JoinMember(CHAR_ID_PECO);
 }
 
-MATCH void func_801FD36C(void) {
+/* func_801FD36C */
+MATCH void Party_JoinRyuYoung(void) {
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 
@@ -441,7 +445,8 @@ MATCH void func_801FD404(void) {
     Party_JoinMember(CHAR_ID_PECO);
 }
 
-MATCH void func_801FD440(void) {
+/* func_801FD440 */
+MATCH void Party_JoinGarr(void) {
     Party_JoinMember(CHAR_ID_GARR);
 }
 

@@ -241,11 +241,13 @@ MATCH void func_801FE360(void) {
     Party_JoinMember(CHAR_ID_MOMO);
 }
 
-MATCH void func_801FE3F8(void) {
+/* func_801FE3F8 */
+MATCH void Party_JoinNinaAdult(void) {
     Party_JoinMember(CHAR_ID_NINA_ADULT);
 }
 
-MATCH void func_801FE418(void) {
+/* func_801FE418 */
+MATCH void Party_JoinMomo(void) {
     Party_JoinMember(CHAR_ID_MOMO);
 }
 

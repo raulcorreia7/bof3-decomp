@@ -541,7 +541,8 @@ MATCH void func_801FD6FC(u8 character) {
 
 INCLUDE_ASM(func_801FD780);
 
-MATCH void func_801FE178(void) {
+/* func_801FE178 */
+MATCH void Party_JoinRei(void) {
     Party_JoinMember(CHAR_ID_REI);
 }
 

@@ -574,7 +574,8 @@ MATCH void func_801FE6DC(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
 }
 
-MATCH void func_801FE740(void) {
+/* func_801FE740 */
+MATCH void Party_JoinGarr(void) {
     Party_JoinMember(CHAR_ID_GARR);
 }
 
@@ -601,6 +602,7 @@ MATCH void func_801FE840(void) {
     func_801FE800();
 }
 
-MATCH void func_801FE874(void) {
+/* func_801FE874 */
+MATCH void Party_RemoveGarr(void) {
     Party_RemoveMember(CHAR_ID_GARR);
 }

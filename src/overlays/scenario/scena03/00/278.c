@@ -688,7 +688,8 @@ MATCH void func_801FCE6C(void) {
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 
-MATCH void func_801FCEDC(void) {
+/* func_801FCEDC */
+MATCH void Party_JoinNinaYoung(void) {
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
