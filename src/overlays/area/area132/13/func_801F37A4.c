@@ -1,17 +1,16 @@
 #include "area132_13.h"
 
-MATCH void func_801F37A4(s32 arg0) {
-    Actor* spad;
-    u8*    ptr = (u8*)arg0;
+MATCH void func_801F37A4(u8* effect) {
+    Actor* work = g_Task;
 
-    spad           = g_Task;
-    ((s32*)ptr)[1] = spad->pos.x.fixed;
-    ((s32*)ptr)[2] = spad->pos.y.fixed;
-    ((s32*)ptr)[3] = ((s32*)spad)[0x3C / 4];
-    ptr[0]         = 1;
-    *(u16*)(ptr + 0x14) = 0x80;
-    ptr[3]         = 0x40;
-    ptr[0x16]      = 7;
-    ptr[1]         = 0;
-    ptr[2]         = 0x20;
+    /* FAKE: the effect record has no proven type yet. */
+    FIELD(s32, effect, 0x04) = work->pos.x.fixed;
+    FIELD(s32, effect, 0x08) = work->pos.y.fixed;
+    FIELD(s32, effect, 0x0C) = work->pos.z.fixed;
+    effect[0]                = 1;
+    FIELD(u16, effect, 0x14) = 128;
+    effect[3]                = 64;
+    effect[0x16]             = 7;
+    effect[1]                = 0;
+    effect[2]                = 32;
 }
