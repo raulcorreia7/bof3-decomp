@@ -328,8 +328,8 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             setRGB2(primitive, cell[1], cell[1], cell[1]);
             setRGB3(primitive, shade, cell[1], 1);
         }
-        RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8), (long*)(((u8*)primitive) + 0x10),
-                      (long*)(((u8*)primitive) + 0x18), (long*)(((u8*)primitive) + 0x20), &depth, &flag);
+        RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
+                      (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
         if (primitive->y2 > 0) {
             GFX_AddPrim(2, 0x24);
             D_1F800014[0].vy -= band_height;
@@ -348,9 +348,8 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
                 setRGB2(primitive, shade, ramp[0], 1);
                 setRGB3(primitive, 1, 1, 1);
             }
-            RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8),
-                          (long*)(((u8*)primitive) + 0x10), (long*)(((u8*)primitive) + 0x18),
-                          (long*)(((u8*)primitive) + 0x20), &depth, &flag);
+            RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
+                          (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(2, 0x24);
             D_1F800014[0].vy += ((s16)band_height) * 2;
             D_1F800014[1].vy += ((s16)band_height) * 2;
@@ -368,9 +367,8 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
                 setRGB2(primitive, shade, ramp[0], 1);
                 setRGB3(primitive, ramp[0], ramp[0], ramp[0]);
             }
-            RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8),
-                          (long*)(((u8*)primitive) + 0x10), (long*)(((u8*)primitive) + 0x18),
-                          (long*)(((u8*)primitive) + 0x20), &depth, &flag);
+            RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
+                          (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(2, 0x24);
             D_1F800014[0].vy += band_height;
             D_1F800014[1].vy += band_height;
@@ -388,9 +386,8 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
                 setRGB2(primitive, 1, 1, 1);
                 setRGB3(primitive, shade, ramp[0], 1);
             }
-            RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8),
-                          (long*)(((u8*)primitive) + 0x10), (long*)(((u8*)primitive) + 0x18),
-                          (long*)(((u8*)primitive) + 0x20), &depth, &flag);
+            RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
+                          (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(2, 0x24);
             D_1F800014[0].vy -= ((s16)band_height) * 2;
         }
