@@ -24,7 +24,7 @@ MATCH void func_801EEEDC(void) {
     func_801EF148();
     if (g_FrameCount & 1) {
         timer = g_Task->timer;
-        if (timer < 0x10U) {
+        if (timer < 16U) {
             g_Task->timer = timer + 2;
         }
         count          = g_Task->unk_09 + 1;

@@ -28,7 +28,7 @@ MATCH void func_801E6E54(void) {
         work->scale.x        = 0x10000;
         work->unk_18         = 0x666;
         work->unk_0C         = 0;
-        work->timer          = 0x3C;
+        work->timer          = 60;
         func_801E8DD8();
         Actor_SelectScript(s_BattleBattlerStepIds[index]);
         work              = g_Task;
