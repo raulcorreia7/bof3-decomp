@@ -2,11 +2,11 @@
 
 MATCH void func_800C1A4C(void) {
     u8* result;
-    u8  temp_v0;
+    u8  timer;
 
-    temp_v0                        = ((PartyMember*)g_Task)->unk_09 - 1;
-    ((PartyMember*)g_Task)->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    timer                          = ((PartyMember*)g_Task)->unk_09 - 1;
+    ((PartyMember*)g_Task)->unk_09 = timer;
+    if (!(timer & 0xFF)) {
         Area_FindSceneRecord(0x5F);
         if (g_Battle.encounter == 5) {
             ((PartyMember*)g_Task)->unk_2A = 0;

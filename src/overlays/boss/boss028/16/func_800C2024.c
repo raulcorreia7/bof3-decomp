@@ -1,7 +1,7 @@
 #include "boss028_16.h"
 
 MATCH void func_800C2024(void) {
-    s32 temp_a1;
+    s32 y;
 
     ((PartyMember*)g_Task)->unk_24 = 0;
     ((PartyMember*)g_Task)->unk_2A = 0;
@@ -10,8 +10,8 @@ MATCH void func_800C2024(void) {
     Area_FindSceneRecord(0x15C);
     Actor_SelectScript(6U);
     ((PartyMember*)g_Task)->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed;
-    temp_a1                                  = g_BattleEffectBattler->pos.y.fixed;
-    ((PartyMember*)g_Task)->pos.y.fixed      = temp_a1;
-    COORD_INT(((PartyMember*)g_Task)->pos.z) = Area_SampleHeight(((PartyMember*)g_Task)->pos.x.fixed, temp_a1);
+    y                                        = g_BattleEffectBattler->pos.y.fixed;
+    ((PartyMember*)g_Task)->pos.y.fixed      = y;
+    COORD_INT(((PartyMember*)g_Task)->pos.z) = Area_SampleHeight(((PartyMember*)g_Task)->pos.x.fixed, y);
     ((PartyMember*)g_Task)->header.step += 1;
 }

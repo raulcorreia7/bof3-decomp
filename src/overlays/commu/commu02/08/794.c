@@ -23,19 +23,19 @@ MATCH void func_801D14D0(void) {
 }
 
 MATCH void func_801D150C(void) {
-    s32 var_v1;
-    s8* var_v0;
+    s32 i;
+    s8* ptr;
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        var_v1 = 9;
-        var_v0 = &D_801DB093;
+        i   = 9;
+        ptr = &D_801DB093;
         do {
-            *var_v0 = 0;
-            var_v1 -= 1;
-            var_v0 -= 1;
-        } while (var_v1 >= 0);
+            *ptr = 0;
+            i -= 1;
+            ptr -= 1;
+        } while (i >= 0);
         func_801D2870();
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 3;
@@ -52,13 +52,13 @@ INCLUDE_ASM(func_801D1774);
 INCLUDE_ASM(func_801D184C);
 
 MATCH void func_801D1938(void) {
-    s8 temp_v1;
+    s8 count;
     u8 check;
 
     func_801D2794(9, 1, 0);
-    temp_v1    = D_801DB0C4 - 1;
-    D_801DB0C4 = temp_v1;
-    func_801D2AC4(0x58, 0x44 - ((temp_v1 & 0xFF) * 0x1E), 0, 0);
+    count      = D_801DB0C4 - 1;
+    D_801DB0C4 = count;
+    func_801D2AC4(0x58, 0x44 - ((count & 0xFF) * 0x1E), 0, 0);
     func_801D2AC4(0x88, 0x44 - ((u8)D_801DB0C4 * 0x1E), 1, 0);
     func_801D2AC4(0xB8, 0x44 - ((u8)D_801DB0C4 * 0x1E), 2, 0);
     func_801D3184(0x26, 0x10);
@@ -158,20 +158,20 @@ MATCH void func_801D24A8(void) {
 }
 
 MATCH void func_801D25CC(void) {
-    s32 temp_v0;
-    u8* temp_v1;
+    s32 bgm_offset;
+    u8* step;
 
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            temp_v0 = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
+            bgm_offset = g_SndBGMId * 4;
+            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
     } else if (EMI_IsReady() != 0) {
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-        temp_v1  = &g_SceneEventStep;
-        *temp_v1 = *temp_v1 + 1;
+        step  = &g_SceneEventStep;
+        *step = *step + 1;
     }
 }
 
@@ -244,12 +244,12 @@ MATCH void func_801D36A8(void) {
 }
 
 MATCH void func_801D3700(void) {
-    s8 temp_v1;
+    s8 count;
     u8 check;
 
-    temp_v1    = D_801DB0C4 - 1;
-    D_801DB0C4 = temp_v1;
-    func_801D4AE0(0x10 - ((temp_v1 & 0xFF) * 0x1E), 0x18, 0);
+    count      = D_801DB0C4 - 1;
+    D_801DB0C4 = count;
+    func_801D4AE0(0x10 - ((count & 0xFF) * 0x1E), 0x18, 0);
     func_801D3184(((u8)D_801DB0C4 * 0x1E) + 0xCC, 0x10);
     func_801D32A0(((u8)D_801DB0C4 * 0x1E) + 0xCC, 0x3C, 0);
     func_801D2CF8(0x68, 0x40 - ((u8)D_801DB0C4 * 0x1E), 0xFF);
@@ -327,20 +327,20 @@ INCLUDE_ASM(func_801D437C);
 INCLUDE_ASM(func_801D448C);
 
 MATCH void func_801D4840(void) {
-    s32 temp_v0;
-    u8* temp_v1;
+    s32 bgm_offset;
+    u8* step;
 
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            temp_v0 = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
+            bgm_offset = g_SndBGMId * 4;
+            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
     } else if (EMI_IsReady() != 0) {
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-        temp_v1  = &g_SceneEventStep;
-        *temp_v1 = *temp_v1 + 1;
+        step  = &g_SceneEventStep;
+        *step = *step + 1;
     }
 }
 
@@ -417,17 +417,17 @@ MATCH void func_801D5A48(void) {
 #include "overlays/commu/Fairy_EndCommuScene.h"
 
 MATCH s32 func_801D5AD0(s32 limit) {
-    s32 var_s1;
+    s32 roll;
 
-    var_s1 = RANDOM_MASK(0x7F);
+    roll = RANDOM_MASK(0x7F);
     FAKE_ORDER_LOCK_BEGIN
     loop_1:
-        if ((var_s1 & 0xFF) >= (u32)(limit & 0xFF)) {
-            var_s1 -= RANDOM_MASK(0xF);
+        if ((roll & 0xFF) >= (u32)(limit & 0xFF)) {
+            roll -= RANDOM_MASK(0xF);
             goto loop_1;
         }
     FAKE_ORDER_LOCK_END;
-    return var_s1 & 0xFF;
+    return roll & 0xFF;
 }
 
 INCLUDE_ASM(func_801D5B2C);
