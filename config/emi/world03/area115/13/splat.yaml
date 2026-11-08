@@ -37,7 +37,7 @@ segments:
       - [0x1578, c, func_801F4178]
       - [0x15BC, c, Actor_SpawnRandomGroup]
       - [0x16F8, c, func_801F42F8]
-      - [0x1928, c, Actor_Walk]
+      - [0x1928, c, Actor_Move]
       - [0x19CC, c, func_801F45CC]
       - [0x1A10, c, func_801F4610]
       - [0x1B40, c, Area_StepStreamSetDrawMode]

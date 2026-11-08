@@ -37,7 +37,7 @@ segments:
       - [0x1388, c, Area_DrawHudBanner]
       - [0x1438, c, func_801F4038]
       - [0x147C, c, func_801F407C]
-      - [0x15B8, c, Actor_StartWalk]
+      - [0x15B8, c, Actor_StartWalking]
       - [0x17E8, c, func_801F43E8]
       - [0x188C, c, func_801F448C]
       - [0x18D0, c, func_801F44D0]
