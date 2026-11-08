@@ -1,4 +1,4 @@
 #include "area163_13.h"
 
 /* func_801F30D4 */
-INCLUDE_ASM(Area_Update);
+#include "overlays/area/Area_UpdateFloorQuad.h"
