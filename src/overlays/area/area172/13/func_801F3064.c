@@ -10,7 +10,7 @@ MATCH void func_801F3064(void) {
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
     if (!(mode & 0xFF)) {
-        g_Task->timer = 0x40;
+        g_Task->timer = 64;
         g_Task->header.mode += 1;
     }
 }

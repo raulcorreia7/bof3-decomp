@@ -370,7 +370,7 @@ MATCH void func_801F2C48(void) {
     v0           = work->pos.x.fixed;
     v1           = work->pos.y.fixed;
     v2           = work->pos.z.fixed;
-    work->timer  = 0xA;
+    work->timer  = 10;
     work2        = g_Task;
     work->unk_1C = 0;
     work->vx     = v0;

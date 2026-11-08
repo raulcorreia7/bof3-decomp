@@ -12,6 +12,6 @@ MATCH void func_801F45A0(void) {
     work->vy      = sample_y;
     work->vz      = Area_SampleHeight(work->vx, sample_y) << 0x10;
     work->unk_1C  = 0;
-    g_Task->timer = 0xA;
+    g_Task->timer = 10;
     g_Task->header.mode += 1;
 }

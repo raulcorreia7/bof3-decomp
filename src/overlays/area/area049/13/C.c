@@ -44,7 +44,7 @@ MATCH void func_80117610(void) {
 MATCH void func_8011765C(void) {
     g_GameFlags |= GAME_FLAG_MENU_LOCK;
     func_801172D0();
-    ((Actor*)g_Task)->timer = 0xB4;
+    ((Actor*)g_Task)->timer = 180;
     ((Actor*)g_Task)->header.mode += 1;
 }
 
@@ -84,10 +84,10 @@ MATCH void func_80117DF0(void) {
     if (!(g_FrameCount & 1)) {
         ((Actor*)g_Task)->timer += 1;
     }
-    if (((Actor*)g_Task)->timer >= 0x80U) {
+    if (((Actor*)g_Task)->timer >= 128U) {
         Actor_Clear();
     }
-    func_80117E78(0x80 - ((Actor*)g_Task)->timer, 0);
+    func_80117E78(128 - ((Actor*)g_Task)->timer, 0);
 }
 
 INCLUDE_ASM(func_80117E78);

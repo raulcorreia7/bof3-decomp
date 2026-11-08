@@ -10,6 +10,6 @@ MATCH void func_801F364C(void) {
     }
     func_801F44B4();
     Area_UpdateSpawnSlots();
-    g_Task->timer = 0x20;
+    g_Task->timer = 32;
     g_Task->header.mode += 1;
 }
