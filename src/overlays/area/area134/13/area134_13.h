@@ -6,7 +6,7 @@
 
 #include "common/vector.h"
 #include "overlays/area/world03.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 typedef struct AreaSprite {
     u8       unk_00[3];

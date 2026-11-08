@@ -1,7 +1,7 @@
 #ifndef WORLD_ADVANCE_WHEN_PARTY_NEAR_H
 #define WORLD_ADVANCE_WHEN_PARTY_NEAR_H
 
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* Advance the work state when the party position is inside the work cell. */
 static inline void World_AdvanceWhenPartyNear(void) {

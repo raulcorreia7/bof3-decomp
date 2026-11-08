@@ -2,7 +2,7 @@
 #define GAME_RECORDS_H
 
 #include "types.h"
-#include "work/task.h"
+#include "sys/task.h"
 #include "common/fixed.h"
 #include "common/vector.h"
 
@@ -15,7 +15,7 @@
  * by Actor_FindFreeSlot, filled by Actor_Create and Char_SpawnActor, and
  * cleared by Actor_Free(s). The frontend cues, the staged scene objects and
  * the area030 fishing actors all use the same rows. The position words are the
- * same 16.16 coordinates as the field actor's (work/actor.h): the
+ * same 16.16 coordinates as the field actor's (sys/actor.h): the
  * ground height from Area_SampleHeight sits in the halfword at +0x3E.
  *
  * The allocator's result is the actor slot. Callers test it against 0xFF for none. No retail string names the table. */

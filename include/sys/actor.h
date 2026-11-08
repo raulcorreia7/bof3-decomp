@@ -1,5 +1,5 @@
-#ifndef WORK_ACTOR_H
-#define WORK_ACTOR_H
+#ifndef SYS_ACTOR_H
+#define SYS_ACTOR_H
 
 /* The field actor table at 0x80146888: 30 rows of 0x98 bytes, one per map
  * object or interaction slot in the current area. Every overlay reads the same
@@ -23,7 +23,7 @@
 #include "common/vector.h"
 #include "slus/facing.h"
 #include "types.h"
-#include "work/task.h"
+#include "sys/task.h"
 
 /* The record's size, its stride in the table and the table's row count. */
 #define ACTOR_SIZE           0x98

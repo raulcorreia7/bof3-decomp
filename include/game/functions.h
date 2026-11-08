@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "area/map.h"
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "psx/psyq.h"
 
 /* The resident game overlay's functions the other images call, in address order. */

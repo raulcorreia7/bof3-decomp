@@ -1,5 +1,5 @@
 #include "area041_13.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH void func_801F3E80(void) {
     g_Task->vx = 0x4000;

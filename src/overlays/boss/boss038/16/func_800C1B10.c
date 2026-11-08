@@ -1,5 +1,5 @@
 #include "boss038_16.h"
-#include "work/state.h"
+#include "scenario/state.h"
 
 MATCH void func_800C1B10(void) {
     if (g_Battle.outcome.result & BATTLE_RESULT_VICTORY) {

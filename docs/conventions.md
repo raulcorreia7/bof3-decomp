@@ -1389,7 +1389,7 @@ void      EMI_Init(void);   /* code in a format header */
 | Domain                  | Headers                                                                                             | Owns                                                                           |
 | ----------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | System: kernel          | `include/sys/{intr,math,sched,scene}.h`                                                             | interrupt callbacks, scheduling, system math routines                          |
-| System: tasks           | `include/work/*.h`                                                                                  | task state shared across images                                                |
+| System: tasks           | `include/sys/{actor,task}.h`                                                                        | task state shared across images                                                |
 | System: memory          | `include/sys/scratchpad.h`, `include/psx/mem.h`                                                     | RAM-backed system records, scratchpad views, memory-map access                 |
 | System: CD and files    | `include/sys/cd.h`                                                                                  | CD command, file and stream state                                              |
 | Graphics                | `include/gfx/*.h`                                                                                   | drawing primitives, VRAM records, graphics state                               |
@@ -1398,7 +1398,7 @@ void      EMI_Init(void);   /* code in a format header */
 | Text                    | `include/game/{encoding,text}.h`                                                                    | text encodings, control codes, text records                                    |
 | Game records            | `include/game/*.h`                                                                                  | shared database records: items, abilities, characters, enemies, genes, fairies |
 | Menu                    | `include/menu/*.h`, `include/sys/gameui.h`                                                          | menu panels, inventory, party selection, saves, shops                          |
-| Area                    | `include/area/*.h`, `include/world/*.h`                                                             | area tasks, maps, area data                                                    |
+| Area                    | `include/area/*.h`                                                                                  | area tasks, maps, area data                                                    |
 | Battle                  | `include/battle/*.h`                                                                                | battle handlers, actors, work records, battle state                            |
 | Scene                   | `include/scenario/*.h`                                                                              | scene steps and effects shared across images                                   |
 | Overlay loading         | `include/sys/{emi,exe,loader_tail}.h`, `include/etc/overlay.h`                                      | EMI and executable loading, overlay tables                                     |
@@ -1411,17 +1411,17 @@ A header in `include/` includes only its own folder and lower layers, so the inc
 cycle at file or folder level. A name a higher layer owns is reached through that layer's header
 or moves down to the lowest layer that covers its users ([lowest scope wins](#lowest-scope-wins)).
 
-| Layer | Folders and headers                   |
-| ----- | ------------------------------------- |
-| L0    | `psyq`                                |
-| L1    | `types.h`                             |
-| L2    | `common/`, `audio`, `psx`, `match`    |
-| L3    | `sys`, `gfx`, `area`, `work`, `world` |
-| L4    | `common.h`, `etc`, `menu`             |
-| L5    | `game`, `scenario`                    |
-| L6    | `battle`                              |
-| L7    | `slus`                                |
-| L8    | `game.h`                              |
+| Layer | Folders and headers                |
+| ----- | ---------------------------------- |
+| L0    | `psyq`                             |
+| L1    | `types.h`                          |
+| L2    | `common/`, `audio`, `psx`, `match` |
+| L3    | `sys`, `gfx`, `area`               |
+| L4    | `common.h`, `etc`, `menu`          |
+| L5    | `game`, `scenario`                 |
+| L6    | `battle`                           |
+| L7    | `slus`                             |
+| L8    | `game.h`                           |
 
 `game.h` stays small: the base and the headers every group needs. A group header
 (`src/overlays/<group>/<group>.h`, `src/shared/etc.h`, `src/engine/slus/slus.h`) includes `game.h`
@@ -1437,7 +1437,7 @@ Retail RAM address literals stay out of C and headers; hardware registers, the s
 BIOS addresses and format offsets stay as defines.
 
 A named global lives in the header of the system that owns it, beside the code that reads and
-writes it: `g_SndBGMId` in the sound runtime header, `g_Battle.state` in `battle/ram.h`. Each system
+writes it: `g_SndBGMId` in the sound runtime header, `g_Battle.state` in `battle/records.h`. Each system
 header stays self-contained. An executable word with no name yet is declared at the lowest scope that
 covers its users ([lowest scope wins](#lowest-scope-wins)); one that several families read is in
 `include/slus/data.h` or `include/slus/functions.h`, in address order. The change that names one moves

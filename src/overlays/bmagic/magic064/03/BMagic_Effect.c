@@ -319,7 +319,7 @@ MATCH void func_801F12B8(s32 px, s32 py, u8* out) {
     y = g_AreaTileOriginY + px / 2 - py;
 
     if (x > 0) {
-        buffer = MEM_PTR(u8, 0x80104000u); /* the map bundle, include/world/area.h */
+        buffer = MEM_PTR(u8, 0x80104000u); /* the map bundle, include/area/area.h */
         width  = buffer[0];
         if (x < width - 1) {
             if (y > 0) {

@@ -5,7 +5,7 @@
  * reads one includes this file. */
 
 #include "game.h"
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "sys/exe.h"
 #include "battle/functions.h"
 #include <memory.h>

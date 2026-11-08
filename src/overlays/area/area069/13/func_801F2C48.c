@@ -1,5 +1,5 @@
 #include "area069_13.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH void func_801F2C48(void) {
     TASK_BYTES[0x0A] = 0x40;

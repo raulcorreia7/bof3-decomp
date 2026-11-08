@@ -3,7 +3,7 @@
 
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/area/world00.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 #include <rand.h>
 #include <stdio.h>
 

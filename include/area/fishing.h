@@ -11,7 +11,7 @@
  * | caught-fish bytes | `0x80144FE4` | 1 byte | — | `emi/world00/area030/04@0x801D5048`, `@0x801D4884`, `@0x801DB554` |
  *
  * "Pond" is the community word for the array (bof3-notes), not a retail string. The pond rows are the actor rows: the
- * table at `0x80146888` is the 30-row entity table (`include/work/actor.h`), and the fishing code reads the stamina,
+ * table at `0x80146888` is the 30-row entity table (`include/sys/actor.h`), and the fishing code reads the stamina,
  * facing and fish bytes of its rows.
  */
 

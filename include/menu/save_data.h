@@ -1,5 +1,5 @@
-#ifndef WORK_SAVE_H
-#define WORK_SAVE_H
+#ifndef MENU_SAVE_DATA_H
+#define MENU_SAVE_DATA_H
 
 #include "types.h"
 #include "area/fishing.h"
@@ -8,7 +8,7 @@
 #include "menu/clock.h"
 #include "menu/inventory.h"
 #include "menu/party.h"
-#include "work/state.h"
+#include "scenario/state.h"
 
 /* The persistent block: 4,272 bytes. */
 #define SAVE_BLOCK_SIZE 0x10B0u

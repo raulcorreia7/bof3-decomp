@@ -2,7 +2,7 @@
 #define MENU_SAVE_H
 
 #include "types.h"
-#include "work/save.h"
+#include "menu/save_data.h"
 
 /*
  * Save-image frame and its checksum.

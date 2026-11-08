@@ -7,7 +7,7 @@
 #include "common/vector.h"
 #include "overlays/area/AreaSprite.h"
 #include "overlays/area/world02.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 #include <rand.h>
 
 /* The variant byte the cancel path stores in the game-overlay state. */

@@ -5,8 +5,8 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "work/area_spad.h"
-#include "battle/ram.h"
+#include "area/spad.h"
+#include "battle/records.h"
 
 extern u8       D_80146865;
 extern u8       D_80146874;

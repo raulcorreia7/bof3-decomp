@@ -4,7 +4,7 @@
 #include "psx/psyq.h"
 #include "types.h"
 #include "common/util.h"
-#include "world/area.h"
+#include "area/area.h"
 
 /* Set: the battle end does not stop the BGM or the sound sequences. */
 #define BATTLE_OPT_KEEP_BGM 0x40

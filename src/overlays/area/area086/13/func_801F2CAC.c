@@ -1,5 +1,5 @@
 #include "area086_13.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH void func_801F2CAC(void) {
     if (SYS_TestFlag(g_SceneEventFlags, COORD_FRAC(g_Task->pos.x)) != 0) {

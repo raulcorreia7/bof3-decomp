@@ -5,7 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 #define g_ScanBars ((ScanBar*)(AREA_WORK + 0x18A0))
 

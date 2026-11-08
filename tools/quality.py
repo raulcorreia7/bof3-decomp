@@ -54,7 +54,7 @@ PER_FUNCTION = ("addr", "names")
 TOTALS = ("casts", "harmful", "pasted")
 SUBSYSTEMS = (
     ("Executable", "src/engine/slus"),
-    ("Game tables", "src/engine/game"),
+    ("Game", "src/engine/game"),
     ("Logo", "src/logo"),
     ("Shared bodies", "src/shared"),
     ("Area", "src/overlays/area"),

@@ -1,5 +1,5 @@
-#ifndef WORK_STATE_H
-#define WORK_STATE_H
+#ifndef SCENARIO_STATE_H
+#define SCENARIO_STATE_H
 
 #include "battle/records.h"
 #include "types.h"

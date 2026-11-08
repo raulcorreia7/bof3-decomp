@@ -1,5 +1,5 @@
 #include "area107_13.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH void func_801F2D4C(void) {
     Actor* work;

@@ -1,5 +1,5 @@
 #include "boss001_13.h"
-#include "work/state.h"
+#include "scenario/state.h"
 
 /* func_800C1FF8 */
 MATCH void Boss_ChooseBattleEnding(void) {

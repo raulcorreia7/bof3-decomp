@@ -4,10 +4,10 @@
 /* The world03/area119/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "work/actor.h"
-#include "world/area.h"
+#include "sys/actor.h"
+#include "area/area.h"
 #include "overlays/area/world03.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 #include <rand.h>
 
 #define g_SceneFlags ((void*)g_SceneFlags)

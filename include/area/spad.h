@@ -1,5 +1,5 @@
-#ifndef WORK_AREA_SPAD_H
-#define WORK_AREA_SPAD_H
+#ifndef AREA_SPAD_H
+#define AREA_SPAD_H
 
 /* The field, plchar, world and scenario overlays read the entity row that the
  * scratchpad cell at 0x1F800044 points to through this view. A unit that must
@@ -7,7 +7,7 @@
  * global by name at each use is what re-materializes lui+lw per read. */
 
 #include "psx/mem.h"
-#include "work/actor.h"
+#include "sys/actor.h"
 
 #define g_Task ((Actor*)g_Task)
 

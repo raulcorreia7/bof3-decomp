@@ -6,7 +6,7 @@
 
 #include "game.h"
 #include "sys/cd.h"
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "menu/panel.h"
 #include "scenario/effect.h"
 #include "sys/exe.h"

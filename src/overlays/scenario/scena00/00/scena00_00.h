@@ -4,7 +4,7 @@
 #define GAME_SCRATCH_BASE_SCALAR
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 #include "common/util.h"
 
 /* Scene_DrawTriangle: the third vertex is `size` rotated by this angle

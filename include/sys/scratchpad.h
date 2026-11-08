@@ -4,8 +4,8 @@
 /* Every overlay lands its own work pointer in the cell at 0x1F800044, so each view types that cell with the
  * mode's work-area tag. The tags are incomplete here and are completed by the target that owns them:
  * battle/battle/03 and battle/battle/15 (struct PartyMember), the area overlays (struct Actor,
- * work/actor.h), the scenario overlays (struct SceneBandEffect) and the commu overlays (struct
- * CommunicationTaskSlot). Area code reads the cell through work/area_spad.h; the area view below only
+ * sys/actor.h), the scenario overlays (struct SceneBandEffect) and the commu overlays (struct
+ * CommunicationTaskSlot). Area code reads the cell through area/spad.h; the area view below only
  * types the pointer cell itself.
  *
  * Volatility is a per-access property, not part of the layout: code that must reload the cell on every

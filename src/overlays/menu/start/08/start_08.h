@@ -4,7 +4,7 @@
 #include "game/character.h"
 #include "menu/party.h"
 #include "shared/etc.h"
-#include "work/save.h"
+#include "menu/save_data.h"
 #include <string.h>
 #include <stdio.h>
 

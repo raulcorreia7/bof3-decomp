@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/boss/boss.h"
-#include "battle/ram.h"
+#include "battle/records.h"
 
 extern Callback D_800C1804[];
 extern u8       D_800C1B34[];

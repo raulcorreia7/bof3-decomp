@@ -6,7 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 #include "shared/WorldSpin.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 #define AREA_SPIN_RADIUS     16
 #define AREA_SPIN_PITCH      (RANDOM_MASK(0x7FF) - 0x400)

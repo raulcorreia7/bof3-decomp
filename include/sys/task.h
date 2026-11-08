@@ -1,5 +1,5 @@
-#ifndef WORK_TASK_H
-#define WORK_TASK_H
+#ifndef SYS_TASK_H
+#define SYS_TASK_H
 
 #include "types.h"
 

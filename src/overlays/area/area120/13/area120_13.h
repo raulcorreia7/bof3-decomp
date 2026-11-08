@@ -4,9 +4,9 @@
 /* The world03/area120/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "overlays/area/world03.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 extern u8 D_801F43B8[];
 

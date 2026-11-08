@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world02.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* The per-slot tag compared with the battle row byte. */
 

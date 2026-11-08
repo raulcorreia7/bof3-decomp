@@ -6,7 +6,7 @@
 
 #include "overlays/boss/boss.h"
 #include "overlays/battle/battle.h"
-#include "battle/ram.h"
+#include "battle/records.h"
 
 typedef struct Boss054Funcs {
     Callback handlers[10];

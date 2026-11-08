@@ -6,7 +6,7 @@
  * the file. */
 
 #include "overlays/area/world00.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* Reset sentinel stored to g_MessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF

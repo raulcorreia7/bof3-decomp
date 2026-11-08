@@ -9,7 +9,7 @@
 #define CHARACTER_FACING_BACK FACING_UP
 
 #include "overlays/plchar/plchar.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* The tail callback table's entry count in this image. */
 #define PLCHAR_STEP_TABLE_COUNT 22

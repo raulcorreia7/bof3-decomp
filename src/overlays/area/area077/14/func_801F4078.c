@@ -1,5 +1,5 @@
 #include "area077_14.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH void func_801F4078(void) {
     /* FAKE: retail reserves 16 bytes of unused stack. */

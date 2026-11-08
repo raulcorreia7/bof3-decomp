@@ -6,7 +6,7 @@
  * the file. */
 
 #include "game/character.h"
-#include "battle/ram.h"
+#include "battle/records.h"
 #include "shared/etc.h"
 #include <stdio.h>
 

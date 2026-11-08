@@ -1,5 +1,5 @@
 #include "area047_13.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH void func_801F2C6C(void) {
     s32 remaining;

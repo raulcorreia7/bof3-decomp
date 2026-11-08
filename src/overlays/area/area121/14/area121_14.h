@@ -5,9 +5,9 @@
  * and its data. Only this image includes the file. */
 
 #include "common/vector.h"
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "overlays/area/world03.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 #include <rand.h>
 
 extern SVECTOR  D_1F800014[];

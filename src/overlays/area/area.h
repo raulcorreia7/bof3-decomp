@@ -10,7 +10,7 @@
 #include "sys/scene.h"
 #include "gfx/vram.h"
 #include "area/fishing.h"
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "menu/inventory.h"
 #include "menu/panel.h"
 #include "menu/party.h"

@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* The party position in 16.16 fixed point. */
 extern s32 D_80145EC4;

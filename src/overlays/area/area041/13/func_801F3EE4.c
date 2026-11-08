@@ -1,5 +1,5 @@
 #include "area041_13.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH void func_801F3EE4(void) {
     func_801F4118();

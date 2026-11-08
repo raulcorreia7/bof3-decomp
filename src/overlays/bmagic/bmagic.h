@@ -8,7 +8,7 @@
 #include "game.h"
 #include "gfx/prim.h"
 #include "overlays/battle/battle.h"
-#include "work/task.h"
+#include "sys/task.h"
 
 #define BMAGIC_PHASE_ANGLE(phase) ((phase) << 6)
 #define BMAGIC_PHASE_MASK         0x3F

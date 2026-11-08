@@ -1,5 +1,5 @@
 #include "area041_13.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 MATCH s32 func_801F3F68(void) {
     Actor* actor;

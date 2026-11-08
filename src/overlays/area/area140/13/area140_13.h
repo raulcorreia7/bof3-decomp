@@ -4,9 +4,9 @@
 /* The world03/area140/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "overlays/area/world03.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 /* The shared flag word the release path clears a bit of. */

@@ -1,5 +1,5 @@
-#ifndef WORLD_AREA_H
-#define WORLD_AREA_H
+#ifndef AREA_AREA_H
+#define AREA_AREA_H
 
 /* A world area: the map bundle the area program loads at 0x80104000 (grid
  * dimensions, per-cell corner heights, tile rectangles, the per-cell byte-code

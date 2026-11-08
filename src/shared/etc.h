@@ -9,7 +9,7 @@
 #include "sys/exe.h"
 #include "sys/scene.h"
 #include "area/map.h"
-#include "work/actor.h"
+#include "sys/actor.h"
 #include "etc/overlay.h"
 #include "menu/clock.h"
 #include "menu/draw.h"

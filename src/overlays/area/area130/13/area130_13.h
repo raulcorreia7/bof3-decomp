@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 #include "shared/WorldSpin.h"
 

@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world01.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 extern SVECTOR D_1F800014[];
 extern s32     D_80145EC4[];

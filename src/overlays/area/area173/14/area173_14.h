@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x30

@@ -22,8 +22,8 @@
 #include "menu/save.h"
 #include "slus/facing.h"
 #include "slus/part.h"
-#include "work/area_spad.h"
-#include "work/save.h"
+#include "area/spad.h"
+#include "menu/save_data.h"
 #include <stdio.h>
 #include "common/util.h"
 #include <memory.h>

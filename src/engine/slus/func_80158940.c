@@ -1,5 +1,5 @@
 #include "engine/slus/slus.h"
-#include "battle/ram.h"
+#include "battle/records.h"
 
 /* marks the layer and marker bytes of every entry whose rectangle
  * contains one of the three layer points or the base point.

@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world01.h"
-#include "work/area_spad.h"
+#include "area/spad.h"
 
 /* Frames without a press before a well minigame phase ends, and steps of the bucket swish. */
 #define WELL_IDLE_FRAMES_MAX    0x1C
