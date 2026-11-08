@@ -104,7 +104,7 @@ MATCH void func_801EFD94(void) {
     }
 }
 
-void func_801EFE1C(void) {
+MATCH void func_801EFE1C(void) {
     s32  r;
     s32  temp_v1;
     s16* angle = &D_1F800004;

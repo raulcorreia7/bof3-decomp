@@ -1,6 +1,6 @@
 #include "area098_13.h"
 
-void func_801F35B0(void) {
+MATCH void func_801F35B0(void) {
     Actor* task;
     s32    count;
 

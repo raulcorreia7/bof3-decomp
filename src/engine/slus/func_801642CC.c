@@ -10,9 +10,7 @@
  * This non-ABI multi-entry restore tail has no C89 function equivalent.
  * MODEL: keep the no-op C89 model below and count this separately from C.
  */
-#if BOF3_USE_ASM
-MATCH INCLUDE_ASM(func_801642CC);
-#else
+#ifdef NON_MATCHING
 /* INFERRED C model: shared restore tail of the resumable decoder.
  * reloads the outer caller's $s1-$s7 from the context spill area at
  * 0x800327A0 + 0x20..0x3C and returns through the return address parked in
@@ -23,7 +21,9 @@ MATCH INCLUDE_ASM(func_801642CC);
  * plus the return, and a C epilogue is compiler-owned, so the model has no
  * statements of its own.
  */
-void func_801642CC(void) {
+NON_MATCHING void func_801642CC(void) {
     /* Register restore and return; see the comment above. */
 }
+#else
+INCLUDE_ASM(func_801642CC);
 #endif

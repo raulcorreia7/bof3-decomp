@@ -258,7 +258,9 @@
  * inline at the start of its own definition line (`MATCH void func_...`,
  * `NON_MATCHING void func_...`), so tree state is greppable. MATCH marks a
  * compiled definition; NON_MATCHING marks a draft under `#ifdef NON_MATCHING`
- * whose `#else` links the split assembly.
+ * whose `#else` links the split assembly. No definition is exempt: a PsyQ stub such as
+ * `__main` carries MATCH, and only a `static inline` helper in a header goes without.
+ * `INCLUDE_ASM` lines take no marker. `tools/check_markers.py` enforces the rule.
  *
  * The draft build passes `-DNON_MATCHING`; the marker then expands to nothing so
  * the draft definition compiles. Without the flag the branch is skipped, which

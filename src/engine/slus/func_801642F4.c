@@ -12,9 +12,7 @@
  * function (ten callers in the battle and shop overlays).
  * MODEL: keep the C89 semantic model below and count separately from C matches.
  */
-#if BOF3_USE_ASM
-MATCH INCLUDE_ASM(func_801642F4);
-#else
+#ifdef NON_MATCHING
 /* INFERRED C model: stream copy kernel.
  * copies count bytes forward, byte by byte, from src to dst, so an
  * overlapping range replicates the back-reference pattern, and returns the
@@ -27,7 +25,7 @@ MATCH INCLUDE_ASM(func_801642F4);
  * costs no loop. That register convention and the computed entry are why the
  * function stays assembly.
  */
-u8* func_801642F4(u8* dst, const u8* src, u32 count) {
+NON_MATCHING u8* func_801642F4(u8* dst, const u8* src, u32 count) {
     u32 n;
 
     while (count >= 32) {
@@ -41,4 +39,6 @@ u8* func_801642F4(u8* dst, const u8* src, u32 count) {
     }
     return dst;
 }
+#else
+INCLUDE_ASM(func_801642F4);
 #endif

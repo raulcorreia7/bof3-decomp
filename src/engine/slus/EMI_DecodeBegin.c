@@ -13,9 +13,7 @@
  * branch until C89 matches or provenance supplies proof; the model below
  * documents the inferred behavior.
  */
-#if BOF3_USE_ASM
-MATCH INCLUDE_ASM(EMI_DecodeBegin);
-#else
+#ifdef NON_MATCHING
 /* INFERRED C model: initialises the resumable stream decoder described by
  * EMI_DecodeStep.
  * records the decompression destination, points the input cursor 6
@@ -26,7 +24,7 @@ MATCH INCLUDE_ASM(EMI_DecodeBegin);
  * field through `ori` li-form addresses; C89 cannot hold a fixed address in a
  * register across the stores.
  */
-void EMI_DecodeBegin(u8* dst) {
+NON_MATCHING void EMI_DecodeBegin(u8* dst) {
     EMIDecodeContext* ctx;
 
     ctx             = D_800327A0;
@@ -37,4 +35,6 @@ void EMI_DecodeBegin(u8* dst) {
     ctx->state      = 0;
     ctx->unk0C      = 0;
 }
+#else
+INCLUDE_ASM(EMI_DecodeBegin);
 #endif
