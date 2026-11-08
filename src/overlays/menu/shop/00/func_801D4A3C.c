@@ -9,7 +9,7 @@ MATCH void func_801D4A3C(void) {
 
     MENU_DRAW_HEADER();
     WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x98);
-    SAVE_DrawPortTabs(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
+    SAVE_DrawPortTabs(98, 76, D_801E60F8, g_SaveCardPort, 1);
     prev      = g_SaveCardPort;
     prev_byte = prev;
     if ((g_InputPressed & (PADLup | PADLdown)) != 0) {

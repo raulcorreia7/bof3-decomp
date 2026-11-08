@@ -21,7 +21,7 @@ MATCH void func_801D5E88(void) {
         case SAVE_WAIT_SCAN:
             MENU_DRAW_HEADER();
             WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, D_801E60EC + 0x85);
-            SAVE_DrawPortTabs(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
+            SAVE_DrawPortTabs(98, 76, D_801E60F8, g_SaveCardPort, 1);
             break;
     }
     /* Pointer form: retail keeps one base register across the count load and
