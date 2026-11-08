@@ -23,6 +23,7 @@ MATCH s32 func_801EFEA8(void) {
 
     group_number      = 1;
     battle_count_ptr  = &g_BattleCount;
+    /* The first room's progress anchor, save offset 0xED4; a g_SaveData member changes the code size. */
     timer_ptr         = (u32*)((u8*)battle_count_ptr + 0x780);
     group_byte_offset = 0;
     do {

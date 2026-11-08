@@ -344,8 +344,8 @@ extern s32                D_801468C4;
 extern u8                 D_801468FF;
 extern u8                 D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
 extern u16                D_80146904[30][0x4C];               /* 0x80146904 */
-extern s32                D_80146908[30][0x26];               /* 0x80146908 */
-extern s32                D_8014690C[30][0x26];               /* 0x8014690C */
+extern s32                g_ActorWalkDestX[30][0x26];         /* 0x80146908 */
+extern s32                g_ActorWalkDestY[30][0x26];         /* 0x8014690C */
 extern s32                D_80146910[30][0x26];               /* 0x80146910 */
 extern u16                D_80146914;
 extern u16                D_80146918[][ACTOR_SIZE / 2];

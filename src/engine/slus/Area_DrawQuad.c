@@ -28,7 +28,7 @@ MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
             gte_ldv0(&verts[0]);
             gte_rtps();
             prim = (POLY_FT4*)g_GfxPrimCursor;
-            gte_stsxy((s16*)((u8*)prim + 8));
+            gte_stsxy(&prim->x0);
             if (((u16)(prim->x0 + 0x3B) < 0x1B7) && ((u16)(prim->y0 + 0x95) < 0x1C1)) {
                 SetPolyFT4(prim);
                 SetShadeTex(prim, 0);
@@ -41,7 +41,7 @@ MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
                 func_80155560(rec[4].raw, prim, 1);
                 gte_rtpt();
                 GFX_AddPrim((rec[4].raw & 0x40000000) ? 7 : 4, 0x28);
-                gte_stsxy3((s16*)((u8*)prim + 0x10), (s16*)((u8*)prim + 0x18), (s16*)((u8*)prim + 0x20));
+                gte_stsxy3(&prim->x1, &prim->x2, &prim->x3);
             }
             n += 5;
         } while (n != parts->head.count);

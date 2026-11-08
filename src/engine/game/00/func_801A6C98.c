@@ -70,8 +70,8 @@ MATCH void func_801A6C98(u8* record) {
     index                           = data->unk_0B;
     entry                           = &D_80147A58[index];
     entry->unk_88                   = 0;
-    entry->unk_84                   = 0;
-    D_80147A58[index].unk_80        = 0;
+    entry->walk_dest_y              = 0;
+    D_80147A58[index].walk_dest_x   = 0;
     D_80147A58[data->unk_0B].unk_77 = data->unk_0A;
     D_80147A58[data->unk_0B].unk_78 = data->unk_06;
     D_80147A58[data->unk_0B].unk_7C = (data->unk_0D | (data->unk_0C << 8));

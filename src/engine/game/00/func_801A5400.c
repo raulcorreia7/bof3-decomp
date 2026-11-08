@@ -22,12 +22,12 @@ MATCH void func_801A5400(u8* script) {
         FIELD(u16, counter, 0x2u) = data[0x2] | (data[0x1] << 8);
         func_801A4AA8();
         Area_FindSceneRecord(FIELD(u16, counter, 0x2u));
-        g_Task->header.flags    = ACTOR_FLAG_IN_USE;
-        coord_record            = g_Task;
-        D_80146908[*counter][0] = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
+        g_Task->header.flags          = ACTOR_FLAG_IN_USE;
+        coord_record                  = g_Task;
+        g_ActorWalkDestX[*counter][0] = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
-        D_8014690C[*counter][0] = coord_record->pos.y.fixed = (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
+        g_ActorWalkDestY[*counter][0] = coord_record->pos.y.fixed = (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
         *D_80146910[*counter]         = 0;
