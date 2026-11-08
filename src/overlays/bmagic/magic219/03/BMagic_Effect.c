@@ -18,7 +18,7 @@ MATCH void func_801EEC14(void) {
             saved_battler         = g_BattleEffectBattler;
             g_Task                = (PartyMember*)&D_801EFA14[i];
             g_BattleEffectBattler = D_801EFA14[i].target.party;
-            func_801EF024();
+            BMagic_DispatchMode();
             g_BattleEffectBattler = saved_battler;
             g_Task                = saved_task;
         }
@@ -43,7 +43,8 @@ MATCH void func_801EEF54(void) {
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EF024(void) {
+/* func_801EF024 */
+MATCH void BMagic_DispatchMode(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
