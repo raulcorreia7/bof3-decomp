@@ -11,8 +11,8 @@ segments:
       - [0x4, c, Message_SetAnswerMessage]
       - [0x30, c, func_801F2C30]
       - [0xB0, c, func_801F2CB0]
-      - [0x130, c, func_801F2D30]
-      - [0x158, c, func_801F2D58]
+      - [0x130, c, SND_PauseCurrentBGM]
+      - [0x158, c, SND_ResumeCurrentBGM]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code
