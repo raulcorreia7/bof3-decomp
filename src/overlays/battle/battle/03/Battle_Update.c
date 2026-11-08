@@ -6,13 +6,13 @@ MATCH void Battle_Update(void) {
 
     if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_MenuPanelTasks[0].active == 0) || (g_Battle.phase.mode == 5)) &&
         ((g_Battle.outcome.event_flags & 2) == 0 || (g_Battle.phase.mode == 5))) {
-        Battle_DispatchMode();
+        Battle_UpdateMode();
     }
-    Battle_RunParty();
-    Battle_RunEnemies();
-    Battle_RunEvents();
+    Battle_UpdateParty();
+    Battle_UpdateEnemies();
+    Battle_UpdateEvents();
     Area_StepCamera();
-    Battle_RunEffects();
+    Battle_UpdateEffects();
     Battle_UpdatePartyActors();
     Battle_UpdateEnemyActors();
     if (g_Battle.encounter != 0) {

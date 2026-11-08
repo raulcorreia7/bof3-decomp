@@ -4,7 +4,7 @@
  * from its stage tables.
  */
 /* func_801D1828 */
-MATCH void Battle_ReserveStagePanels(void) {
+MATCH void Battle_OpenPanels(void) {
     u8* group;
     u8  slot;
     u8  battler;
@@ -23,10 +23,10 @@ MATCH void Battle_ReserveStagePanels(void) {
     D_80148332[slot].y_04    = -0x16;
     group                    = &g_Battle.outcome.surprise;
     if (*group == 1) {
-        BattleStageSelectionRingRecord(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_PARTY));
+        Battle_AddMessage(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_PARTY));
     }
     if (*group == 2) {
-        BattleStageSelectionRingRecord(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
+        Battle_AddMessage(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
     }
     for (battler = 0; battler < BATTLE_PARTY_CHARACTERS_COUNT; battler++) {
         if (ACTOR_IN_USE(g_Game.members[battler])) {

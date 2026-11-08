@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801D112C */
-MATCH void Battle_DispatchMode(void) {
+MATCH void Battle_UpdateMode(void) {
     BattlePhases handlers;
 
     handlers = g_BattlePhases;

@@ -5,7 +5,7 @@
  * front end to the EMI loader.
  */
 /* func_801D6A14 */
-MATCH void Battle_StreamEndOverlay(void) {
+MATCH void Battle_LoadEndOverlay(void) {
     u8  i;
     u8* step;
 

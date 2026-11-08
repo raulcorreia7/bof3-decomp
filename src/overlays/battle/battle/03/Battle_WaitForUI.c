@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801D1AB4 */
-MATCH void Battle_WaitUIMode(void) {
+MATCH void Battle_WaitForUI(void) {
     u8* counter;
 
     if (D_80148357 == 1) {
