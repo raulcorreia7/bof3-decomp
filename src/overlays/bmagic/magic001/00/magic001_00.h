@@ -7,8 +7,10 @@
 
 extern u8 g_BattleActiveBattler;
 
+#define MAGIC001_STEP_COUNT 3
+
 typedef struct Magic001Steps {
-    Callback steps[3];
+    Callback steps[MAGIC001_STEP_COUNT];
 } Magic001Steps;
 
 extern Magic001Steps D_801EEC3C;

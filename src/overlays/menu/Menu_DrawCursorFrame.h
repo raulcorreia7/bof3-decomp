@@ -24,7 +24,7 @@ MATCH void Menu_DrawCursorFrame(u16 x, u16 y, s32 width, s32 height, u8 color, s
         base = 0xFF;
     }
 
-    for (bit = 1, i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++, bit <<= 1) {
+    for (bit = 1, i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++, bit <<= 1) {
         if (bit & mask) {
             rgb[i] = base;
         } else {

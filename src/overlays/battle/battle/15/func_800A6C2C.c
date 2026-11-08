@@ -20,7 +20,7 @@ MATCH u8 func_800A6C2C(void) {
             }
             row++;
         }
-        for (slot = 0; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
+        for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
             if ((func_800A6CF8(row, slot) & BYTE_MASK) == 0) {
                 break;
             }

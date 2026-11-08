@@ -189,11 +189,11 @@ typedef struct BattleHandlerQuad {
  * table holds four packets per enemy kind record, at the kind record's +0x34.
  *
  * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
- * (Battle_FireEnemyEvents), its +0x01 with `lbu` and switches on it (Battle_ApplyEnemyEvent),
+ * (Battle_TriggerEnemyEvents), its +0x01 with `lbu` and switches on it (Battle_ApplyEnemyEvent),
  * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
  * and its +0x08..+0x0F with `lbu` (Battle_ApplyEnemyEvent). */
 typedef struct BattleEventPacket {
-    u8  kind;        /* +0x00 the kind Battle_FireEnemyEvents switches on to pick the trigger test */
+    u8  kind;        /* +0x00 the kind Battle_TriggerEnemyEvents switches on to pick the trigger test */
     u8  effect_kind; /* +0x01 the kind Battle_ApplyEnemyEvent switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
@@ -212,8 +212,8 @@ ASSERT_OFFSET(BattleEventPacket, unk_04, 0x04);
 ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
 
-/* What makes an event packet fire (BattleEventPacket.kind). The once-only kinds fire at most once per
- * battle; the REPEAT kinds fire at every hit. */
+/* What makes an event packet trigger (BattleEventPacket.kind). The once-only kinds trigger at most once per
+ * battle; the REPEAT kinds trigger at every hit. */
 typedef enum BattleEventTrigger {
     BATTLE_EVENT_HIT_FIRE             = 0,
     BATTLE_EVENT_HIT_FROST            = 1,
@@ -325,181 +325,195 @@ typedef struct BattleEnemyRecord {
  * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
 extern u32 g_BattleWorkCell;
 
+#define BATTLE_EFFECT_STEP_COUNT 3
+
 typedef struct BattleEffectSteps {
-    Callback steps[3];
+    Callback steps[BATTLE_EFFECT_STEP_COUNT];
 } BattleEffectSteps;
 
-typedef struct Panel800969E4Modes {
-    Callback modes[5];
-} Panel800969E4Modes;
+#define BATTLE_MENU_PANEL_MODE_COUNT 5
 
-typedef struct Panel800969F8States {
-    Callback states[3];
-} Panel800969F8States;
+typedef struct BattleMenuPanelModes {
+    Callback modes[BATTLE_MENU_PANEL_MODE_COUNT];
+} BattleMenuPanelModes;
 
-typedef struct Panel80096A08States {
-    Callback states[3];
-} Panel80096A08States;
+#define BATTLE_MENU_PANEL0_STATE_COUNT 3
 
-typedef struct Panel80096A14States {
-    Callback states[5];
-} Panel80096A14States;
+typedef struct BattleMenuPanel0States {
+    Callback states[BATTLE_MENU_PANEL0_STATE_COUNT];
+} BattleMenuPanel0States;
 
-typedef struct Panel80096A34States {
-    Callback states[3];
-} Panel80096A34States;
+#define BATTLE_MENU_PANEL1_STATE_COUNT 3
 
-typedef struct Panel80096A40States {
-    Callback states[3];
-} Panel80096A40States;
+typedef struct BattleMenuPanel1States {
+    Callback states[BATTLE_MENU_PANEL1_STATE_COUNT];
+} BattleMenuPanel1States;
 
-extern BattleEffectSteps     D_80096994;
-extern BattleEffectSteps     D_800969A0;
-extern BattleEffectSteps     D_800969AC;
-extern BattleEffectSteps     D_800969B8;
-extern Panel800969E4Modes    D_800969E4;
-extern Panel800969F8States   D_800969F8;
-extern volatile u8           D_80096A04[4];
-extern Panel80096A08States   D_80096A08;
-extern Panel80096A14States   D_80096A14;
+#define BATTLE_MENU_PANEL2_STATE_COUNT 5
+
+typedef struct BattleMenuPanel2States {
+    Callback states[BATTLE_MENU_PANEL2_STATE_COUNT];
+} BattleMenuPanel2States;
+
+#define BATTLE_MENU_PANEL3_STATE_COUNT 3
+
+typedef struct BattleMenuPanel3States {
+    Callback states[BATTLE_MENU_PANEL3_STATE_COUNT];
+} BattleMenuPanel3States;
+
+#define BATTLE_MENU_PANEL4_STATE_COUNT 3
+
+typedef struct BattleMenuPanel4States {
+    Callback states[BATTLE_MENU_PANEL4_STATE_COUNT];
+} BattleMenuPanel4States;
+
+extern BattleEffectSteps      D_80096994;
+extern BattleEffectSteps      D_800969A0;
+extern BattleEffectSteps      D_800969AC;
+extern BattleEffectSteps      D_800969B8;
+extern BattleMenuPanelModes   D_800969E4;
+extern BattleMenuPanel0States D_800969F8;
+extern volatile u8            D_80096A04[4];
+extern BattleMenuPanel1States D_80096A08;
+extern BattleMenuPanel2States D_80096A14;
 /* Main-executable battle state consumed by target-local lifts. */
-extern char                  D_80096A2C[];
-extern Panel80096A34States   D_80096A34;
-extern Panel80096A40States   D_80096A40;
-extern Callback              func_800B43B8[];
-extern Callback              D_800B43D4[17];
-extern Callback              D_800B4418[4];
-extern Callback              D_800B4428[12];
-extern Callback              D_800B4458[5];
-extern Callback              D_800B446C[4];
-extern Callback              D_800B447C[4];
-extern Callback              D_800B448C[5];
-extern Callback              D_800B44A0[];
-extern u8                    D_800B44B0[];
-extern u8                    D_800B44B8[];
-extern Callback              D_800B44C8[3];
-extern Callback              D_800B44D4[4];
-extern Callback              D_800B44E4[];
-extern u8                    g_BattleEscapeThresholds[];
-extern s8                    D_800B4924[];
-extern u16                   D_800B492C[16];
+extern char                   D_80096A2C[];
+extern BattleMenuPanel3States D_80096A34;
+extern BattleMenuPanel4States D_80096A40;
+extern Callback               func_800B43B8[];
+extern Callback               D_800B43D4[17];
+extern Callback               D_800B4418[4];
+extern Callback               D_800B4428[12];
+extern Callback               D_800B4458[5];
+extern Callback               D_800B446C[4];
+extern Callback               D_800B447C[4];
+extern Callback               D_800B448C[5];
+extern Callback               D_800B44A0[];
+extern u8                     D_800B44B0[];
+extern u8                     D_800B44B8[];
+extern Callback               D_800B44C8[3];
+extern Callback               D_800B44D4[4];
+extern Callback               D_800B44E4[];
+extern u8                     g_BattleEscapeThresholds[];
+extern s8                     D_800B4924[];
+extern u16                    D_800B492C[16];
 /* Overlay data and routines the sources use; names are the retail addresses. */
-extern s16                   D_800B494C[8];
-extern s16                   D_800B495C[8];
-extern s16                   D_800B496C[8];
-extern s16                   D_800B497C[8];
-extern s16                   D_800B498C[400];
-extern s32                   D_800B4C90;
-extern Callback              D_800B4CAC[7];
-extern Callback              D_800B4CC8[2];
-extern Callback              D_800B4CD0[5];
-extern Callback              D_800B4CE4[7];
-extern Callback              D_800B4D00[5];
-extern Callback              D_800B4D14[7];
-extern Callback              D_800B4D30[];
+extern s16                    D_800B494C[8];
+extern s16                    D_800B495C[8];
+extern s16                    D_800B496C[8];
+extern s16                    D_800B497C[8];
+extern s16                    D_800B498C[400];
+extern s32                    D_800B4C90;
+extern Callback               D_800B4CAC[7];
+extern Callback               D_800B4CC8[2];
+extern Callback               D_800B4CD0[5];
+extern Callback               D_800B4CE4[7];
+extern Callback               D_800B4D00[5];
+extern Callback               D_800B4D14[7];
+extern Callback               D_800B4D30[];
 /* D_800B4E94 */
-extern u8                    s_BattleAffinityLevelBonus[5];
-extern u8                    D_800B4E99[5];
-extern u8                    D_800B4E9E[5];
-extern Callback              D_800B50B0[7];
-extern Callback              D_800B50CC[2];
-extern Callback              D_800B50D4[];
-extern u8                    D_800B50DC[];
-extern u8                    D_800B50E4[];
-extern u16                   D_800B50EC[][7];
-extern Callback              D_800B5108[];
+extern u8                     s_BattleAffinityLevelBonus[5];
+extern u8                     D_800B4E99[5];
+extern u8                     D_800B4E9E[5];
+extern Callback               D_800B50B0[7];
+extern Callback               D_800B50CC[2];
+extern Callback               D_800B50D4[];
+extern u8                     D_800B50DC[];
+extern u8                     D_800B50E4[];
+extern u16                    D_800B50EC[][7];
+extern Callback               D_800B5108[];
 /* D_800B65F8 */
-extern BattleSelection       g_BattleSelections[];
-extern BattleSelectionAction D_800B65FC[];
-extern u8                    D_800B6BF0[];
-extern Callback              D_800B6BF4[];
+extern BattleSelection        g_BattleSelections[];
+extern BattleSelectionAction  D_800B65FC[];
+extern u8                     D_800B6BF0[];
+extern Callback               D_800B6BF4[];
 /* D_800B6C04 */
-extern u8                    g_BattlePanelUV[];
+extern u8                     g_BattlePanelUV[];
 /* D_800B6C28 */
-extern u8                    s_BattleCellRowCount[8];
+extern u8                     s_BattleCellRowCount[8];
 /* D_800B6C30 */
-extern u8                    s_BattleCellRowDivisor[8];
+extern u8                     s_BattleCellRowDivisor[8];
 /* D_800B6C38 */
-extern u8                    s_BattleCellRowScale[8];
-extern u8                    D_800B6C40[12];
-extern u8                    D_800B6C4C[28];
-extern u8                    D_800B6C68[12];
-extern u8                    D_800B6C74[28];
-extern BattleLocalOffsetPair D_800B6C90[7];
-extern u8                    D_800B6D00[28];
-extern volatile u32          D_800B6D1C[1];
-extern volatile u16          D_800B6D20[4];
-extern volatile u16          D_800B6D28[4];
-extern volatile u16          D_800B6D30[28];
-extern s32                   D_800B6D44;
-extern s32                   D_800B6D50;
+extern u8                     s_BattleCellRowScale[8];
+extern u8                     D_800B6C40[12];
+extern u8                     D_800B6C4C[28];
+extern u8                     D_800B6C68[12];
+extern u8                     D_800B6C74[28];
+extern BattleLocalOffsetPair  D_800B6C90[7];
+extern u8                     D_800B6D00[28];
+extern volatile u32           D_800B6D1C[1];
+extern volatile u16           D_800B6D20[4];
+extern volatile u16           D_800B6D28[4];
+extern volatile u16           D_800B6D30[28];
+extern s32                    D_800B6D44;
+extern s32                    D_800B6D50;
 /* D_800B6D5C */
-extern u8                    s_BattleFrameTitles[2][5];
+extern u8                     s_BattleFrameTitles[2][5];
 /* D_800B6D68 */
-extern u8                    s_BattleAbilityIcon[25];
+extern u8                     s_BattleAbilityIcon[25];
 /* D_800B6D84 */
-extern u8                    s_BattleAbilityLine1Run[12];
+extern u8                     s_BattleAbilityLine1Run[12];
 /* D_800B6D90 */
-extern u8                    s_BattleAbilityLine2Run[12];
+extern u8                     s_BattleAbilityLine2Run[12];
 /* D_800B6D9C */
-extern u8                    s_BattleAbilityLine1FlagRun[12];
+extern u8                     s_BattleAbilityLine1FlagRun[12];
 /* D_800B6DA8 */
-extern u8                    s_BattleAbilityLine2FlagRun[12];
+extern u8                     s_BattleAbilityLine2FlagRun[12];
 /* The panel slots' palette and sprite blocks; func_800B4220 hands their
  * addresses to func_8014F800 and UI_DrawSpriteRun. */
 /* D_800B6DCC */
-extern u8                    s_BattlePanelSelectedMarker[6];
+extern u8                     s_BattlePanelSelectedMarker[6];
 /* D_800B6DD4 */
-extern u8                    s_BattlePanelUnselectedMarker[6];
+extern u8                     s_BattlePanelUnselectedMarker[6];
 /* D_800B6DDC */
-extern u8                    s_BattlePanelValueRun[42];
-extern Callback              D_800B6E08[6];
-extern Callback              D_800B6E20[5];
-extern Callback              D_800B6E34[3];
-extern Callback              D_800B6E40[4];
-extern Callback              D_800B6E50[];
-extern s32                   D_800B6EC4;
-extern s32                   D_800B6ED4;
+extern u8                     s_BattlePanelValueRun[42];
+extern Callback               D_800B6E08[6];
+extern Callback               D_800B6E20[5];
+extern Callback               D_800B6E34[3];
+extern Callback               D_800B6E40[4];
+extern Callback               D_800B6E50[];
+extern s32                    D_800B6EC4;
+extern s32                    D_800B6ED4;
 /* D_800B6F3C */
-extern char                  s_BattlePanelUseLabel[4];
+extern char                   s_BattlePanelUseLabel[4];
 /* D_800B6F40 */
-extern char                  s_BattlePanelEquipLabel[5];
+extern char                   s_BattlePanelEquipLabel[5];
 /* D_800B6F50 */
-extern u8                    s_BattleEquipment[6];
-extern u8                    D_800B6F58;
-extern u8                    D_800B6F5C;
-extern s8                    D_800B6F60;
-extern s8                    D_800B6F61;
-extern s8                    D_800B6F62;
-extern s8                    D_800B6F63;
-extern s8                    D_800B6F64;
-extern s8                    D_800B6F69;
-extern s8                    D_800B6F6B;
-extern s8                    D_800B6F6C;
-extern u8                    D_800B7070[][6]; /* Flag bytes read back by the panel: one u8 per table entry. */
-extern u8                    D_800B7088[][2]; /* Flag bytes cleared at a two-byte stride. */
-extern u8                    D_800B70B8[];
-extern u8                    D_800E4050;
-extern u16                   D_800E405E;
-extern u16                   D_800E4068;
+extern u8                     s_BattleEquipment[6];
+extern u8                     D_800B6F58;
+extern u8                     D_800B6F5C;
+extern s8                     D_800B6F60;
+extern s8                     D_800B6F61;
+extern s8                     D_800B6F62;
+extern s8                     D_800B6F63;
+extern s8                     D_800B6F64;
+extern s8                     D_800B6F69;
+extern s8                     D_800B6F6B;
+extern s8                     D_800B6F6C;
+extern u8                     D_800B7070[][6]; /* Flag bytes read back by the panel: one u8 per table entry. */
+extern u8                     D_800B7088[][2]; /* Flag bytes cleared at a two-byte stride. */
+extern u8                     D_800B70B8[];
+extern u8                     D_800E4050;
+extern u16                    D_800E405E;
+extern u16                    D_800E4068;
 /* Playable-character record rows are byte-addressed; each typed row is 0xA4 bytes. */
-extern volatile u32          D_80144F60[];
-extern volatile u32          D_80144F80[];
-extern u8                    D_801454FD; /* plain: func_80098450 stores it outside the volatile order */
-extern volatile u8           D_801454FE;
-extern volatile u8           D_801454FF;
+extern volatile u32           D_80144F60[];
+extern volatile u32           D_80144F80[];
+extern u8                     D_801454FD; /* plain: func_80098450 stores it outside the volatile order */
+extern volatile u8            D_801454FE;
+extern volatile u8            D_801454FF;
 /* D_80145500 */
-extern BattleSlot            g_BattleTargetRows[];
-extern BattleSlot            D_80145518[];
-extern u8                    D_8014551B;
+extern BattleSlot             g_BattleTargetRows[];
+extern BattleSlot             D_80145518[];
+extern u8                     D_8014551B;
 /* State byte (+0x01) of each player row (stride 0x140) and enemy row
  * (stride 0x118), indexed by byte offset. */
-extern s32                   D_80145EC4;
+extern s32                    D_80145EC4;
 /* Byte-addressed player rows: the first byte of each 0x140-byte work row holds
  * the battler's stored character id. */
 /* Battler base halfwords, one u16 per 0x140-byte player row. */
-extern u16                   D_80145FAA[];
-extern u8                    D_80145FB2;
+extern u16                    D_80145FAA[];
+extern u8                     D_80145FB2;
 extern volatile BattlePlayerDamageStatus D_80145FB4[];
 /* Selection row table: player rows for slots 0-2, indexed by battler slot. */
 extern BattleSelectionPlayer             D_80145FB8[];
@@ -843,8 +857,7 @@ extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
-                   s32 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 /* func_801DB5CC */
 u8   Battle_FindSelectableSlotForward(s32 start_slot);
@@ -881,8 +894,8 @@ void        func_8009B03C(void);
 void        func_8009B160(void);
 /* func_8009C994 */
 extern void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* event);
-extern u8   Battle_EnemyEventFired(volatile EnemyBattler* enemy, s32 bit_index);
-extern void Battle_SetEnemyEventFired(EnemyBattler* enemy, s32 bit, u8 set);
+extern u8   Battle_EnemyEventTriggered(volatile EnemyBattler* enemy, s32 bit_index);
+extern void Battle_SetEnemyEventTriggered(EnemyBattler* enemy, s32 bit, u8 set);
 extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
 s32         func_800A4FD8(void);
 s32         func_800A5D00(void);

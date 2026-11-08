@@ -19,16 +19,16 @@ extern s32 D_1F800004;
 
 /* The bolt point D_1F800014, also read as halfwords, and the scratch words of the bolt: the segment length, the
  * swing angle, the flicker and the segment count. */
-extern SVECTOR           D_1F800014[];
-extern s16               D_1F800014_HALF[];
-extern s16               D_1F800016;
-extern s16               D_1F800018;
-extern s32               D_1F800008;
-extern s32               D_1F80000C;
-extern Func801EEC18Steps D_801EEC04;
-extern Callback          D_801F09A0[4];
-extern Callback          D_801F09B0[4];
-extern Callback          D_801F09C0[4];
+extern SVECTOR             D_1F800014[];
+extern s16                 D_1F800014_HALF[];
+extern s16                 D_1F800016;
+extern s16                 D_1F800018;
+extern s32                 D_1F800008;
+extern s32                 D_1F80000C;
+extern Magic068SharedSteps D_801EEC04;
+extern Callback            D_801F09A0[4];
+extern Callback            D_801F09B0[4];
+extern Callback            D_801F09C0[4];
 
 /* Advance the effect timer: one step of the counter, reloading the work cell on
  * every store. */

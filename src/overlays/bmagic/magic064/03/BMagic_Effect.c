@@ -135,14 +135,14 @@ MATCH void func_801EF5FC(void) {
 INCLUDE_ASM(func_801EF69C);
 
 MATCH void func_801EF78C(void) {
-    Magic064Steps801EEC40 table;
+    Magic064Steps table;
 
     table = D_801EEC40;
     SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
 MATCH void func_801EF7F8(void) {
-    Magic064Steps801EEC50 handlers;
+    Magic064SecondSteps handlers;
 
     handlers = D_801EEC50;
     handlers.steps[g_Task->header.step]();
@@ -235,7 +235,7 @@ INCLUDE_ASM(func_801F05A4);
 INCLUDE_ASM(func_801F0B8C);
 
 MATCH void func_801F0C38(void) {
-    Magic064Steps801EEC50 handlers;
+    Magic064SecondSteps handlers;
 
     handlers = D_801EEC70;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);

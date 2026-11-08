@@ -4,11 +4,11 @@
  * two bars and sets or clears its 0x2000 bit from the gauge fraction.
  */
 MATCH void func_801E9B18(void) {
-    Panel801D0FE0States handlers;
-    u16                 flags;
-    u32                 offset;
-    u32                 slot;
-    u8*                 row;
+    BattlePanel5States handlers;
+    u16                flags;
+    u32                offset;
+    u32                slot;
+    u8*                row;
 
     handlers = D_801D0FE0;
     handlers.states[BATTLE_PANEL_TASK->state]();

@@ -12,8 +12,10 @@ extern u8 D_801EC331[];
 
 extern u8 D_801EC334[];
 
+#define MAGIC101_STEP_COUNT 5
+
 typedef struct Magic101Steps {
-    Callback steps[5];
+    Callback steps[MAGIC101_STEP_COUNT];
 } Magic101Steps;
 
 extern Magic101Steps D_801EEC04;

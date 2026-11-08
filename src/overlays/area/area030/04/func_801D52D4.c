@@ -13,7 +13,7 @@ MATCH void func_801D52D4(void) {
     if (D_80145E93[0] >= 3) {
         mask = (1u << g_Task->unk_06) & BYTE_MASK;
     }
-    func_801D7C10(0x58, 0x28, mask);
+    func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 
     g_Task->direction_08   = FACING_UP_LEFT;
     work                   = FISHING_STATE;

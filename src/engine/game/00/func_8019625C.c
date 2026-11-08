@@ -25,7 +25,7 @@ NON_MATCHING void func_8019625C(void) {
     MATCH_REG(s8, blue, "$8");
     u8 high_bit;
 
-    for (entry_index = 0; entry_index < 32; entry_index++) {
+    for (entry_index = 0; entry_index < PALETTE_FADE_COUNT; entry_index++) {
         entry = &g_PaletteFades[entry_index];
         if ((entry->flags & PALETTE_FADE_ACTIVE) != 0u) {
             value             = entry->saved_byte;

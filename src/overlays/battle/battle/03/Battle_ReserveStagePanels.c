@@ -28,7 +28,7 @@ MATCH void Battle_ReserveStagePanels(void) {
     if (*group == 2) {
         BattleStageSelectionRingRecord(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
     }
-    for (battler = 0; battler < BATTLE_PARTY_SLOT_COUNT; battler++) {
+    for (battler = 0; battler < BATTLE_PARTY_CHARACTERS_COUNT; battler++) {
         if (ACTOR_IN_USE(g_BattlePartyBattlers[battler])) {
             Menu_ArmPanelTask((battler + 0xD) & BYTE_MASK, 3);
             D_80148332[battler + 0xD].mode_00 = 5;

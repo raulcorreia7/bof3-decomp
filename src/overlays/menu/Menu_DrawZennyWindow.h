@@ -19,7 +19,7 @@ MATCH void Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_kind, s32 ca
     TEXT_Format(g_UiFormatBuffer, g_MenuZennyFormat, caption_value);
     y += 4;
     UI_DrawAsciiString((s16)(panel_x + 20), y, 0, g_UiFormatBuffer);
-    UI_DrawText(panel_x + 76, y, 0, 0xFF, MENU_CAPTION_ICON);
+    UI_DrawText(panel_x + 76, y, 0, TEXT_LENGTH_MAX, MENU_CAPTION_ICON);
     UI_DrawSpriteRun((s16)panel_x, (s16)(scaled_y >> 16), MENU_CAPTION_GLYPH_0, 0);
     for (i = 0; i < 11; i++) {
         UI_DrawSpriteRun((s16)(base_x + (i * 8)), (s16)(scaled_y >> 16), MENU_CAPTION_GLYPH_1, 0);

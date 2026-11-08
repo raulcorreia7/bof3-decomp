@@ -12,7 +12,7 @@ MATCH void func_801E77F0(void) {
     g_SaveSlots[1].source_index = 0xFF;
     *first                      = 0xFF;
     row                         = (MenuListRow*)((u8*)&g_SaveSlots[0].source_index - 0x15);
-    for (j = 0; j < BATTLE_PARTY_SLOT_COUNT; j++) {
+    for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
         i = 0;
         if (g_SaveSlotCount != 0) {
             do {

@@ -5,18 +5,22 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-typedef struct Magic067Steps801EEC04 {
-    Callback steps[5];
-} Magic067Steps801EEC04;
+#define MAGIC067_STEP_COUNT 5
 
-typedef struct Magic067Steps801EEC18 {
-    Callback steps[3];
-} Magic067Steps801EEC18;
+typedef struct Magic067Steps {
+    Callback steps[MAGIC067_STEP_COUNT];
+} Magic067Steps;
 
-extern Magic067Steps801EEC04 D_801EEC04;
-extern Magic067Steps801EEC18 D_801EEC18;
-extern Callback              D_801F04C8[];
-extern Callback              D_801F04D8[];
+#define MAGIC067_SECOND_STEP_COUNT 3
+
+typedef struct Magic067SecondSteps {
+    Callback steps[MAGIC067_SECOND_STEP_COUNT];
+} Magic067SecondSteps;
+
+extern Magic067Steps       D_801EEC04;
+extern Magic067SecondSteps D_801EEC18;
+extern Callback            D_801F04C8[];
+extern Callback            D_801F04D8[];
 
 void func_801EF688(void);
 void func_801EF79C(void);

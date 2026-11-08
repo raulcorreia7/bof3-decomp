@@ -42,7 +42,7 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
              BYTE_MASK) &&
             (task->unk_08 != ITEM_CAT_ARMOR ||
              task->unk_09 - EQUIP_SLOT_SHIELD ==
-                 (Item_GetKind(ITEM_CAT_ARMOR, *ids) & BYTE_MASK) - ARMOR_TYPE_SHIELD)) {
+                 (Item_GetIcon(ITEM_CAT_ARMOR, *ids) & BYTE_MASK) - ARMOR_TYPE_SHIELD)) {
             choices++;
             g_MenuEquipChoiceIds[i]    = *ids;
             g_MenuEquipChoiceCounts[i] = *counts;

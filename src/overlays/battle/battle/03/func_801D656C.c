@@ -40,7 +40,7 @@ MATCH void func_801D656C(void) {
             EMI_LoaderStreamInitSlot(EMI_SLOT_COMN_SE);
         }
         func_801DB494();
-        for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+        for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (!Battle_SlotIsBlocked(i)) {
                 g_BattlePartyBattlers[i].header.mode = 2;
             }

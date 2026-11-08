@@ -15,7 +15,7 @@ MATCH void func_801D277C(void) {
     D_8014839F            = 2;
     D_8014837B            = 2;
     g_BattleEventSlots[0] = 0;
-    for (; (index & BYTE_MASK) < BATTLE_PARTY_SLOT_COUNT; index++) {
+    for (; (index & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
         slot = index;
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) != 0) {
             continue;

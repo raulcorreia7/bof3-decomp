@@ -61,13 +61,13 @@ MATCH void func_801D6128(void) {
         }
         work->cue_index_06 = frame_value;
     }
-    func_801D1744(0xEC, 0x70, 1);
-    func_801D1818(0xEC, 0x80, 1);
+    func_801D1744(236, 112, 1);
+    func_801D1818(236, 128, 1);
     func_801E0C80(0, 1);
-    func_801E0DCC(0x14, 1, 0xE4, 0x68);
+    func_801E0DCC(0x14, 1, 228, 104);
     last = BANNER_INDEX;
     last -= 1;
     if (D_801E2026[last * 3] != 0) {
-        func_801D18CC(0xFC, BANNER_FRAME + 0x70, 1);
+        func_801D18CC(252, BANNER_FRAME + 112, 1);
     }
 }

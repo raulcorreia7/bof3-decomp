@@ -35,6 +35,24 @@ typedef enum ArmorType {
     ARMOR_TYPE_BODY    = 4,
 } ArmorType;
 
+/* The kind of a weapon, armor or accessory record (Item_GetKind): it selects the icon the item list draws. Armor
+ * records hold their ArmorType; accessory kinds 10 and 11 are the fishing lures and rods, which no equipment slot
+ * holds. No record has kind ITEM_KIND_UNUSED. */
+typedef enum ItemKind {
+    ITEM_KIND_ITEM         = 0,
+    ITEM_KIND_WEAPON       = 1,
+    ITEM_KIND_SHIELD       = ARMOR_TYPE_SHIELD,
+    ITEM_KIND_HELMET       = ARMOR_TYPE_HELMET,
+    ITEM_KIND_ARMOR        = ARMOR_TYPE_BODY,
+    ITEM_KIND_ACCESSORY    = 5,
+    ITEM_KIND_FISHING_LURE = 10,
+    ITEM_KIND_FISHING_ROD  = 11,
+    ITEM_KIND_UNUSED       = 12,
+} ItemKind;
+
+/* The equipment slot that holds an item of kind ITEM_KIND_WEAPON..ITEM_KIND_ACCESSORY. */
+#define EQUIP_SLOT_OF_KIND(kind) ((kind) - 1)
+
 /* The armor type that fits equipment slot EQUIP_SLOT_SHIELD..EQUIP_SLOT_ARMOR. */
 #define ARMOR_TYPE_OF_SLOT(slot) ((slot) + 1)
 
@@ -67,7 +85,7 @@ ASSERT_OFFSET(VitalItem, name, 0x00);
 typedef struct Item {
     u8  name[ITEM_NAME_LENGTH];
     u8  flags;       /* ItemFlags */
-    u8  kind;        /* low nibble selects the icon via Item_GetKind */
+    u8  icon;        /* low nibble selects the icon */
     u16 description; /* Item_GetDescription, category ITEM_CAT_ITEM */
     u16 price;
 } Item;
@@ -76,6 +94,7 @@ ASSERT_OFFSET(Item, description, 0x0E);
 ASSERT_SIZE(Item, ITEM_STRIDE);
 ASSERT_OFFSET(Item, name, 0x00);
 ASSERT_OFFSET(Item, flags, 0x0c);
+ASSERT_OFFSET(Item, icon, 0x0d);
 ASSERT_OFFSET(Item, price, 0x10);
 
 /* The run Weapon, Armor and Accessory open with. */
@@ -89,7 +108,7 @@ ASSERT_SIZE(ItemHeader, 0x0E);
 
 typedef struct Weapon {
     ItemHeader header;
-    u8         kind;    /* low nibble selects the icon in func_801AF800 via Item_GetKind */
+    u8         icon;    /* low nibble selects the icon */
     u8         element; /* ElementFlags */
     u8         weight;
     u8         sound; /* cue-table index in battle/battle/15 func_800AB834 and func_800AB910 */
@@ -102,6 +121,7 @@ typedef struct Weapon {
 ASSERT_OFFSET(Weapon, description, 0x14);
 ASSERT_SIZE(Weapon, WEAPON_STRIDE);
 ASSERT_OFFSET(Weapon, header, 0x00);
+ASSERT_OFFSET(Weapon, icon, 0x0e);
 ASSERT_OFFSET(Weapon, element, 0x0f);
 ASSERT_OFFSET(Weapon, weight, 0x10);
 ASSERT_OFFSET(Weapon, power, 0x12);
@@ -127,7 +147,7 @@ ASSERT_OFFSET(Armor, price, 0x14);
 
 typedef struct Accessory {
     ItemHeader header;
-    u8         kind; /* low nibble selects the icon in func_801AF800 via Item_GetKind */
+    u8         icon; /* low nibble selects the icon */
     u8         weight;
     u16        description; /* Item_GetDescription, category ITEM_CAT_ACCESSORY */
     u16        price;
@@ -136,6 +156,7 @@ typedef struct Accessory {
 ASSERT_OFFSET(Accessory, description, 0x10);
 ASSERT_SIZE(Accessory, ACCESSORY_STRIDE);
 ASSERT_OFFSET(Accessory, header, 0x00);
+ASSERT_OFFSET(Accessory, icon, 0x0e);
 ASSERT_OFFSET(Accessory, weight, 0x0f);
 ASSERT_OFFSET(Accessory, price, 0x12);
 

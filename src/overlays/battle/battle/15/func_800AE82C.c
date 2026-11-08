@@ -14,7 +14,7 @@ MATCH void func_800AE82C(void) {
     if (count == 0) {
         row_work = BATTLE_WORK;
         slot     = row_work->param.unk_0B;
-        if (slot < BATTLE_PARTY_SLOT_COUNT) {
+        if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
             row_work->pos.x.fixed = g_BattlePartyBattlers[slot].pos.x.fixed;
             row_work->pos.y.fixed = g_BattlePartyBattlers[row_work->param.unk_0B].pos.y.fixed;
             value                 = g_BattlePartyBattlers[row_work->param.unk_0B].pos.z.fixed;

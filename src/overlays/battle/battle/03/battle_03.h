@@ -270,61 +270,89 @@ extern s8               D_801D0C78[];
 extern DamageSpread     D_801D0C7C;
 
 /* D_801D0C84 */
+#define BATTLE_EVENT_STEP_COUNT 5
+
 typedef struct BattleEventSteps {
-    Callback events[5];
+    Callback events[BATTLE_EVENT_STEP_COUNT];
 } BattleEventSteps;
 
+#define BATTLE_NUMBER_EFFECT_STEP_COUNT 5
+
 typedef struct BattleNumberEffectSteps {
-    Callback steps[5];
+    Callback steps[BATTLE_NUMBER_EFFECT_STEP_COUNT];
 } BattleNumberEffectSteps;
 
-typedef struct Effect801D0F20Steps {
-    Callback steps[3];
-} Effect801D0F20Steps;
+#define BATTLE_EFFECT0_STEP_COUNT 3
 
-typedef struct Effect801D0F2CSteps {
-    Callback steps[3];
-} Effect801D0F2CSteps;
+typedef struct BattleEffect0Steps {
+    Callback steps[BATTLE_EFFECT0_STEP_COUNT];
+} BattleEffect0Steps;
 
-typedef struct Effect801D0F38Steps {
-    Callback steps[3];
-} Effect801D0F38Steps;
+#define BATTLE_EFFECT1_STEP_COUNT 3
 
-typedef struct Effect801D0F44Steps {
-    Callback steps[5];
-} Effect801D0F44Steps;
+typedef struct BattleEffect1Steps {
+    Callback steps[BATTLE_EFFECT1_STEP_COUNT];
+} BattleEffect1Steps;
 
-typedef struct Effect801D0F58Steps {
-    Callback steps[5];
-} Effect801D0F58Steps;
+#define BATTLE_EFFECT2_STEP_COUNT 3
 
-typedef struct Panel801D0FA0States {
-    Callback states[3];
-} Panel801D0FA0States;
+typedef struct BattleEffect2Steps {
+    Callback steps[BATTLE_EFFECT2_STEP_COUNT];
+} BattleEffect2Steps;
 
-typedef struct Panel801D0FACStates {
-    Callback states[3];
-} Panel801D0FACStates;
+#define BATTLE_EFFECT3_STEP_COUNT 5
 
-typedef struct Panel801D0FB8States {
-    Callback states[3];
-} Panel801D0FB8States;
+typedef struct BattleEffect3Steps {
+    Callback steps[BATTLE_EFFECT3_STEP_COUNT];
+} BattleEffect3Steps;
 
-typedef struct Panel801D0FC4States {
-    Callback states[3];
-} Panel801D0FC4States;
+#define BATTLE_EFFECT4_STEP_COUNT 5
 
-typedef struct Panel801D0FE0States {
-    Callback states[3];
-} Panel801D0FE0States;
+typedef struct BattleEffect4Steps {
+    Callback steps[BATTLE_EFFECT4_STEP_COUNT];
+} BattleEffect4Steps;
 
-typedef struct Panel801D0FF8States {
-    Callback states[3];
-} Panel801D0FF8States;
+#define BATTLE_PANEL0_STATE_COUNT 3
 
-typedef struct Panel801D1004States {
-    Callback states[4];
-} Panel801D1004States;
+typedef struct BattlePanel0States {
+    Callback states[BATTLE_PANEL0_STATE_COUNT];
+} BattlePanel0States;
+
+#define BATTLE_PANEL1_STATE_COUNT 3
+
+typedef struct BattlePanel1States {
+    Callback states[BATTLE_PANEL1_STATE_COUNT];
+} BattlePanel1States;
+
+#define BATTLE_PANEL2_STATE_COUNT 3
+
+typedef struct BattlePanel2States {
+    Callback states[BATTLE_PANEL2_STATE_COUNT];
+} BattlePanel2States;
+
+#define BATTLE_PANEL3_STATE_COUNT 3
+
+typedef struct BattlePanel3States {
+    Callback states[BATTLE_PANEL3_STATE_COUNT];
+} BattlePanel3States;
+
+#define BATTLE_PANEL5_STATE_COUNT 3
+
+typedef struct BattlePanel5States {
+    Callback states[BATTLE_PANEL5_STATE_COUNT];
+} BattlePanel5States;
+
+#define BATTLE_PANEL6_STATE_COUNT 3
+
+typedef struct BattlePanel6States {
+    Callback states[BATTLE_PANEL6_STATE_COUNT];
+} BattlePanel6States;
+
+#define BATTLE_PANEL7_STATE_COUNT 4
+
+typedef struct BattlePanel7States {
+    Callback states[BATTLE_PANEL7_STATE_COUNT];
+} BattlePanel7States;
 
 extern BattleEventSteps          g_BattleEvents;
 /* D_801D0C98 */
@@ -339,26 +367,26 @@ extern BattleEffectStage1Funcs   g_BattleEffectStage1Funcs;
 /* D_801D0ED4 */
 extern BattleEffectStage3Funcs   g_BattleEffectStage3Funcs;
 extern BattleNumberEffectSteps   D_801D0EF4;
-extern Effect801D0F20Steps       D_801D0F20;
-extern Effect801D0F2CSteps       D_801D0F2C;
-extern Effect801D0F38Steps       D_801D0F38;
-extern Effect801D0F44Steps       D_801D0F44;
-extern Effect801D0F58Steps       D_801D0F58;
+extern BattleEffect0Steps        D_801D0F20;
+extern BattleEffect1Steps        D_801D0F2C;
+extern BattleEffect2Steps        D_801D0F38;
+extern BattleEffect3Steps        D_801D0F44;
+extern BattleEffect4Steps        D_801D0F58;
 extern BattleSavedPreviewFuncs   D_801D0F6C;
 /* D_801D0F80 */
 extern BattlePanelFuncs          g_BattlePanelFuncs;
-extern Panel801D0FA0States       D_801D0FA0;
-extern Panel801D0FACStates       D_801D0FAC;
-extern Panel801D0FB8States       D_801D0FB8;
-extern Panel801D0FC4States       D_801D0FC4;
+extern BattlePanel0States        D_801D0FA0;
+extern BattlePanel1States        D_801D0FAC;
+extern BattlePanel2States        D_801D0FB8;
+extern BattlePanel3States        D_801D0FC4;
 /* The panel's four state handlers; func_801E960C copies them to the stack
  * before the indexed call. */
 extern Callback                  D_801D0FD0[4];
-extern Panel801D0FE0States       D_801D0FE0;
+extern BattlePanel5States        D_801D0FE0;
 /* D_801D0FEC */
 extern BattlePanelTaskForwarders g_BattlePanelTaskForwarders;
-extern Panel801D0FF8States       D_801D0FF8;
-extern Panel801D1004States       D_801D1004;
+extern BattlePanel6States        D_801D0FF8;
+extern BattlePanel7States        D_801D1004;
 extern Callback                  D_801EABB8[];
 extern s32                       D_801EABCC;
 extern Callback                  D_801EABD8[];
@@ -491,7 +519,7 @@ extern u8               D_801EB4FA[][12];
 extern BattleRank       D_801EB550[];
 extern u8               D_801EB5B0[];
 /* D_801EBF20 */
-extern PartyBattler     s_BattleBattlerTemplates[BATTLE_PARTY_SLOT_COUNT]; /* Alternate local work entries. */
+extern PartyBattler     s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT]; /* Alternate local work entries. */
 extern u8               D_801EB6D0[];
 extern u8               D_801EBF04;
 extern s32              D_801EBFA0;
@@ -505,7 +533,7 @@ void          func_800980A8(void);
 void          func_8009834C(void);
 void          func_8009B274(void);
 /* func_8009BBE8 */
-void          Battle_FireEnemyEvents(void);
+void          Battle_TriggerEnemyEvents(void);
 void          func_8009BFC4(void);
 void          func_8009D198(void);
 u16           func_800A2AE0(u8 arg0);

@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* rolls the current enemy's two drop rows: a row with an item and rate passes when its g_BattleDropChances chance is
- * at least RANDOM_MASK(0xFF); a passing item bumps its spoils count or is appended with count 1 (at most 15 entries),
+ * at least RANDOM_MASK(0xFF); a passing item bumps its drop count or is appended with count 1 (at most 15 entries),
  * and the row's item is cleared.
  */
 /* func_801E531C */
@@ -14,17 +14,17 @@ MATCH void Battle_RollEnemyDrops(void) {
     for (i = 0; i < 2; i++) {
         if (g_BattleCurrentEnemy->drops[i].item != 0 && g_BattleCurrentEnemy->drops[i].rate != 0) {
             if (chances.chance[g_BattleCurrentEnemy->drops[i].rate] >= (rand() & BYTE_MASK)) {
-                for (j = 0; j < D_80146326.count; j++) {
-                    if (D_80146326.items[j] == g_BattleCurrentEnemy->drops[i].item) {
-                        D_80146326.counts[j]++;
+                for (j = 0; j < g_BattleDrops.count; j++) {
+                    if (g_BattleDrops.items[j] == g_BattleCurrentEnemy->drops[i].item) {
+                        g_BattleDrops.item_counts[j]++;
                         g_BattleCurrentEnemy->drops[i].item = 0;
                         goto next; /* the item is already listed */
                     }
                 }
-                D_80146326.items[D_80146326.count]  = g_BattleCurrentEnemy->drops[i].item;
-                D_80146326.counts[D_80146326.count] = 1;
-                if (D_80146326.count < BATTLE_SPOILS_COUNT_MAX) {
-                    D_80146326.count++;
+                g_BattleDrops.items[g_BattleDrops.count]       = g_BattleCurrentEnemy->drops[i].item;
+                g_BattleDrops.item_counts[g_BattleDrops.count] = 1;
+                if (g_BattleDrops.count < BATTLE_DROP_COUNT_MAX) {
+                    g_BattleDrops.count++;
                 }
                 g_BattleCurrentEnemy->drops[i].item = 0;
             }

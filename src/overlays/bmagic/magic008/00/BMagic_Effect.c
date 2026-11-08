@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EECF0(void) {
-    Magic008Steps801EEC04 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -26,7 +26,7 @@ MATCH void func_801EEF6C(void) {
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF058(void) {
-    Magic008Steps801EEC14 handlers;
+    Magic008SecondSteps handlers;
 
     handlers = D_801EEC14;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -47,7 +47,7 @@ MATCH void func_801EF324(void) {
 }
 
 MATCH void func_801EF384(void) {
-    Magic008Steps801EEC04 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC20;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -68,7 +68,7 @@ MATCH void Effect_StartPlaying_801EF728(void) {
 }
 
 MATCH void func_801EF75C(void) {
-    Magic008Steps801EEC04 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC30;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -91,7 +91,7 @@ MATCH void Effect_StartPlaying_801EFA40(void) {
 }
 
 MATCH void func_801EFA74(void) {
-    Magic008Steps801EEC14 handlers;
+    Magic008SecondSteps handlers;
 
     handlers = D_801EEC40;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -114,7 +114,7 @@ MATCH void Effect_StartPlaying_801EFCFC(void) {
 }
 
 MATCH void func_801EFD30(void) {
-    Magic008Steps801EEC14 handlers;
+    Magic008SecondSteps handlers;
 
     handlers = D_801EEC4C;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
@@ -206,7 +206,15 @@ MATCH void func_801F0548(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F0568);
+MATCH void func_801F0568(void) {
+    Magic008ThirdSteps handlers;
+
+    handlers = D_801EEC70;
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
 
 // hint: retail keeps the 1 constant in v1 across unk_5C/unk_2B and loads each -128 and scale constant at its own store; ours hoists them into temps.
 INCLUDE_ASM(func_801F05FC);
@@ -262,7 +270,7 @@ MATCH void func_801F08C4(void) {
 }
 
 MATCH void func_801F0964(void) {
-    Magic008Steps801EEC04 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC84;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
@@ -369,7 +377,15 @@ MATCH void func_801F1274(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F1294);
+MATCH void func_801F1294(void) {
+    Magic008EarlySteps handlers;
+
+    handlers = D_801EECAC;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 
@@ -401,7 +417,15 @@ MATCH void func_801F16E8(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F1708);
+MATCH void func_801F1708(void) {
+    Magic008Steps handlers;
+
+    handlers = D_801EECC8;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
 
 MATCH void Effect_ReloadTimerAndStep_801F17BC(void) {
     BMAGIC_RELOAD_TIMER_AND_STEP();

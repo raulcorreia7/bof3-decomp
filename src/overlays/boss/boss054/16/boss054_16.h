@@ -17,8 +17,10 @@ ASSERT_OFFSET(Boss054Funcs, handlers, 0x00);
 
 extern Boss054Funcs D_800C1804;
 
+#define BOSS054_EFFECT_STEP_COUNT 3
+
 typedef struct Boss054EffectSteps {
-    Callback steps[3];
+    Callback steps[BOSS054_EFFECT_STEP_COUNT];
 } Boss054EffectSteps;
 
 extern Boss054EffectSteps D_800C182C;

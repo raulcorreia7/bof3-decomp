@@ -5,8 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 /* The overlay's three entry points. @source: read:Scene_RunEffect@0x801D0C10 */
+#define SCENE10_EFFECT_STEP_COUNT 3
+
 typedef struct Scene10EffectSteps {
-    Callback steps[3];
+    Callback steps[SCENE10_EFFECT_STEP_COUNT];
 } Scene10EffectSteps;
 
 static Scene10EffectSteps D_801D0C04 = {

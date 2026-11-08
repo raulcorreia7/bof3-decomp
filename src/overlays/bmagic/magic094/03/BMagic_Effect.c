@@ -54,7 +54,7 @@ MATCH void func_801EEF7C(void) {
     g_Task->unk_09 = step;
     if (step == 0x10) {
         slot = LOBU(g_BattleTargetSelector);
-        if (slot < BATTLE_PARTY_SLOT_COUNT) {
+        if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
             battler = &g_BattlePartyBattlers[slot];
         } else {
             battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);

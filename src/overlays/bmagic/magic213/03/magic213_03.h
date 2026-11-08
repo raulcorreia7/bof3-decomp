@@ -9,7 +9,10 @@ extern Callback     D_801EF8A4[];
 extern Callback     D_801EF8B4[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801EF8C0[];
-#define BMAGIC_EFFECT_SLOTS D_801EF8C0
-#define BMAGIC_EFFECT_COUNT 64
+#define BMAGIC_EFFECT_SLOTS         D_801EF8C0
+#define BMAGIC_EFFECT_COUNT         64
+#define BMAGIC_EFFECT_START_HANDLER Effect_StartOnZeroTick
+#define BMAGIC_EFFECT_SLOT_STEP     func_801EF4E0
+void func_801EED04(void);
 
 #endif

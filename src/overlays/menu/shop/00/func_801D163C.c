@@ -20,7 +20,7 @@ MATCH void func_801D163C(void) {
     panels                     = &g_MenuPanelTasks[3];
     for (; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
         panel         = (MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)panels);
-        panel->unk_0B = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
+        panel->unk_0B = Item_GetIcon(g_ShopItemCategory, g_ShopItemId);
         panel->unk_0C = g_ShopItemId;
     }
     g_MenuPanelTasks[0].u.message.id = Item_GetDescription(g_ShopItemCategory, g_ShopItemId);

@@ -42,7 +42,7 @@ NON_MATCHING void func_801F03D0(void) {
                 value -= RANDOM_MASK(0xF);
             }
             candidate = (u8)value + 0x9B;
-            for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+            for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 if (candidate == D_801F2930[row][i]) {
                     break;
                 }

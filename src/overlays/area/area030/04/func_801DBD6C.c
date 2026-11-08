@@ -13,21 +13,21 @@ MATCH void func_801DBD6C(void) {
     work                = FISHING_STATE;
     work->step_timer_09 = (work->step_timer_09 - 1);
 
-    func_801E0ED0(0, 0x4E);
-    func_801E0F4C(0x80, 0x5B, D_8014688E[g_FishingHookedFish * 0x98]);
+    func_801E0ED0(0, FISHING_CATCH_BAR_Y);
+    func_801E0F4C(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
 
     offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
-    Fishing_DrawRank(0xB0, 0x9C);
+    Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
 
     work  = FISHING_STATE;
     state = work->saved_index_0B;
     if (state == 1) {
         cue = 0x43;
-        func_801E162C(8, work->step_timer_09 * 0x1E + 0x94, cue);
+        func_801E162C(8, work->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
     } else if (state == 2) {
         cue = 0x42;
-        func_801E162C(8, work->step_timer_09 * 0x1E + 0x94, cue);
+        func_801E162C(8, work->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
     }
 
     work = FISHING_STATE;

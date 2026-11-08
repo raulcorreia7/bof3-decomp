@@ -5,25 +5,31 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-typedef struct Magic015Steps801EEC04 {
-    Callback steps[4];
-} Magic015Steps801EEC04;
+#define MAGIC015_STEP_COUNT 4
 
-typedef struct Magic015Steps801EEC54 {
-    Callback steps[5];
-} Magic015Steps801EEC54;
+typedef struct Magic015Steps {
+    Callback steps[MAGIC015_STEP_COUNT];
+} Magic015Steps;
 
-typedef struct Magic015Steps801EEC34 {
-    Callback steps[8];
-} Magic015Steps801EEC34;
+#define MAGIC015_THIRD_STEP_COUNT 5
 
-extern Magic015Steps801EEC04 D_801EEC04;
+typedef struct Magic015ThirdSteps {
+    Callback steps[MAGIC015_THIRD_STEP_COUNT];
+} Magic015ThirdSteps;
 
-extern Magic015Steps801EEC04 D_801EEC14;
-extern Magic015Steps801EEC04 D_801EEC24;
-extern Magic015Steps801EEC54 D_801EEC54;
-extern Magic015Steps801EEC34 D_801EEC34;
-extern u8                    g_BattleActiveBattler;
+#define MAGIC015_SECOND_STEP_COUNT 8
+
+typedef struct Magic015SecondSteps {
+    Callback steps[MAGIC015_SECOND_STEP_COUNT];
+} Magic015SecondSteps;
+
+extern Magic015Steps D_801EEC04;
+
+extern Magic015Steps       D_801EEC14;
+extern Magic015Steps       D_801EEC24;
+extern Magic015ThirdSteps  D_801EEC54;
+extern Magic015SecondSteps D_801EEC34;
+extern u8                  g_BattleActiveBattler;
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the
  * fade is done, moves the effect onto that battler and advances. One body shared

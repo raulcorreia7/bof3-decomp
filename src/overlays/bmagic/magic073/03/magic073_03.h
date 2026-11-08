@@ -20,13 +20,23 @@ extern BMagicEffectWork D_801F0670[];
 #define BMAGIC_EFFECT_SLOTS D_801F0670
 #define BMAGIC_EFFECT_COUNT 160
 
+#define MAGIC073_STEP_COUNT 3
+
 typedef struct Magic073Steps {
-    Callback steps[3];
+    Callback steps[MAGIC073_STEP_COUNT];
 } Magic073Steps;
 
 extern Magic073Steps D_801EEC1C;
 void                 func_801F00C4(void);
 void                 func_801EFBF8(u16 angle, u16 radius);
 void                 func_801EFE2C(u16 angle, u16 radius);
+
+/* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
+#define EFFECT_SPARKLE_TASK     D_801F21F0
+#define EFFECT_SPARKLE_ROW_MASK 0x1F
+#define EFFECT_SPARKLE_OFFSET() (D_801F05A4[EFFECT_SPARKLE_TASK->unk_07 & EFFECT_SPARKLE_ROW_MASK])
+#define EFFECT_SPARKLE_RISE     D_801F0664
+extern Point2D D_801F05A4[];
+extern u8      D_801F0664[];
 
 #endif

@@ -12,7 +12,7 @@ MATCH void func_801D4D8C(void) {
     u8  right_id;
 
     func_801D4A44();
-    for (ring = 0; (u32)(ring & BYTE_MASK) < 127; ring += 1) {
+    for (ring = 0; (u32)(ring & BYTE_MASK) < INV_SLOTS_PER_CATEGORY - 1; ring += 1) {
         left  = g_InventoryIds[1];
         out   = g_InventoryIds[1] + 0x200;
         limit = 0x7F - (ring & BYTE_MASK);

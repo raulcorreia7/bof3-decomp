@@ -10,13 +10,13 @@ MATCH void func_801DC0CC(void) {
     s32           offset;
     u16           cue;
 
-    func_801E0ED0(0, 0x4E);
-    func_801E0F4C(0x80, 0x5B, D_8014688E[g_FishingHookedFish * 0x98]);
+    func_801E0ED0(0, FISHING_CATCH_BAR_Y);
+    func_801E0F4C(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
 
     offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
-    Fishing_DrawRank(0xB0, 0x9C);
-    func_801E162C(8, 0x94, 0x44);
+    Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
+    func_801E162C(8, FISHING_CATCH_ROW_Y, 0x44);
 
     if ((g_InputPressed & (PADLup | PADLdown)) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
@@ -37,7 +37,7 @@ MATCH void func_801DC0CC(void) {
         work               = FISHING_STATE;
         work->sub_index_03 = (work->sub_index_03 + 1);
     }
-    Menu_DrawCursorSprite(0x20, FISHING_STATE->cue_index_06 * 0xC + 0xB6, 0);
+    Menu_DrawCursorSprite(32, FISHING_STATE->cue_index_06 * 12 + 182, 0);
     func_8014D978();
     func_801E16DC();
 }

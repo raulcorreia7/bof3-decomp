@@ -12,17 +12,21 @@ extern BMagicEffectFuncs D_801EEC04;
 
 extern s16 D_1F800008;
 
-typedef struct Magic006Steps801EEC1C {
-    Callback steps[3];
-} Magic006Steps801EEC1C;
+#define MAGIC006_STEP_COUNT 3
 
-typedef struct Magic006Steps801EEC28 {
-    Callback steps[4];
-} Magic006Steps801EEC28;
+typedef struct Magic006Steps {
+    Callback steps[MAGIC006_STEP_COUNT];
+} Magic006Steps;
 
-extern Magic006Steps801EEC1C D_801EEC1C;
+#define MAGIC006_SECOND_STEP_COUNT 4
 
-extern Magic006Steps801EEC28 D_801EEC28;
+typedef struct Magic006SecondSteps {
+    Callback steps[MAGIC006_SECOND_STEP_COUNT];
+} Magic006SecondSteps;
+
+extern Magic006Steps D_801EEC1C;
+
+extern Magic006SecondSteps D_801EEC28;
 
 void func_801EEC90(void);
 

@@ -5,8 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+#define MAGIC118_STEP_COUNT 5
+
 typedef struct Magic118Steps {
-    Callback steps[5];
+    Callback steps[MAGIC118_STEP_COUNT];
 } Magic118Steps;
 
 extern Magic118Steps D_801EEC04;

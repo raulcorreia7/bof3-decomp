@@ -9,10 +9,14 @@ extern u8  D_801EC2E4;
 /* The scratchpad base read as a halfword: the radius the range test uses. */
 extern s16 D_1F800000_HALF;
 
+#define MAGIC058_STEP_COUNT 3
+
 typedef struct Magic058Steps {
-    Callback steps[3];
+    Callback steps[MAGIC058_STEP_COUNT];
 } Magic058Steps;
 
+extern Magic058Steps D_801EEC04;
+void                 func_801EF36C(void);
 extern Magic058Steps D_801EEC10;
 extern Magic058Steps D_801EEC1C;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */

@@ -90,7 +90,7 @@ MATCH void func_801EF2CC(void) {
 }
 
 MATCH void func_801EF324(void) {
-    Magic003Steps801EEC04 handlers;
+    Magic003Steps handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
@@ -199,7 +199,7 @@ MATCH void func_801EF6CC(void) {
 }
 
 MATCH void func_801EF708(void) {
-    Magic003Steps801EEC18 handlers;
+    Magic003SecondSteps handlers;
 
     handlers = D_801EEC18;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);

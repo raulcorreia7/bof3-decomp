@@ -158,6 +158,14 @@ typedef struct StartLabel {
 
 extern StartLabel D_801ECD24[];
 
+/* The command cells of the name entry grid, beside the letter cells (0 is an empty cell). */
+typedef enum NameEntryCommand {
+    NAME_ENTRY_NEXT  = 1,
+    NAME_ENTRY_BACK  = 2,
+    NAME_ENTRY_QUIT  = 3,
+    NAME_ENTRY_START = 4,
+} NameEntryCommand;
+
 /* The four command labels of the grid ("Next", "Back", "Quit", "Start"), five characters each. */
 typedef struct NameEntryLabels {
     u8 next[5];
@@ -463,7 +471,7 @@ extern u8  g_NameEntryControlsFrame[];
 extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern s16  Char_AddStat(u16* value, s16 delta);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
-bool        func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
+bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 s32         func_801B6470(u8 arg0);
 void        func_801C1254(s32 ability_id, s32 save_slot);
 /* The start overlay's handler tables call these functions. */
@@ -533,7 +541,7 @@ extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
 void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
-void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 equip_slot, u8 item_id);
+void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id);
 void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
@@ -590,7 +598,7 @@ extern s32  Start_DrawNameEntryControls(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
 extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
-s32         func_801E8C9C(u8 save_slot, u8 record_kind, u8 record_value);
+s32         func_801E8C9C(u8 save_slot, u8 item_id, u8 record_value);
 void        func_801E8D58(void);
 /* func_801E8D60 */
 void        Menu_CharacterPanel(void);
@@ -838,8 +846,7 @@ extern u8              g_MenuFormationFrameMiddle[];
 extern u8              g_MenuFormationFrameRight[];
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
-                   s32 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 

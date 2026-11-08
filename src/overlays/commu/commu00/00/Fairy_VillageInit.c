@@ -18,7 +18,7 @@ MATCH void Fairy_VillageInit(void) {
         g_FairyVillagePendingQueueCount = 0;
         g_FairyVillageUpdateCount       = 0;
         if (active_count == 0) {
-            for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+            for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 Fairy_JoinVillage();
             }
             D_801455C2 = 0xA;

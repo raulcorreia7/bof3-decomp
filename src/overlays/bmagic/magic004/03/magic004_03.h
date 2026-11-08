@@ -5,10 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Func801EEC28Steps D_801EEC04;
+extern Magic004SharedSteps D_801EEC04;
+
+#define MAGIC004_STEP_COUNT 4
 
 typedef struct Magic004Steps {
-    Callback steps[4];
+    Callback steps[MAGIC004_STEP_COUNT];
 } Magic004Steps;
 
 extern Magic004Steps D_801EEC18;

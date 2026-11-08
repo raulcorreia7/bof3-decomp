@@ -18,7 +18,7 @@ MATCH s32 func_801C63B0(void) {
     count = Party_CountOrder(PARTY_ORDER_BATTLE);
     slot  = D_801CD944;
     i     = 0;
-    for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         s_PartySlotOrder[i] = i;
         slot->active        = 0;
         if ((g_CharSlot[g_PartyBattleOrder[i]] == 2) || (g_CharSlot[g_PartyBattleOrder[i]] == 6)) {
@@ -41,7 +41,7 @@ MATCH s32 func_801C63B0(void) {
         }
     }
     if (swapped) {
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < ARRAY_COUNT(s_EncounterOriginNudges); i++) {
             x = g_EncounterOriginX + s_EncounterOriginNudges[i].x;
             y = g_EncounterOriginY + s_EncounterOriginNudges[i].y;
             if (((func_801C7518(x, y, 1) & BYTE_MASK) != 0) &&

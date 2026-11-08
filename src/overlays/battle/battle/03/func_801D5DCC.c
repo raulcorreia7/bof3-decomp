@@ -8,7 +8,7 @@ MATCH u8 func_801D5DCC(void) {
     u8  slot;
     s16 delta;
 
-    for (slot = 0; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
+    for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
         if (!(func_801D64C4(slot) & BYTE_MASK)) {
             g_BattlePartyBattlers[slot].turn.hp_change = 0;
             g_BattlePartyBattlers[slot].turn.ap_change = 0;

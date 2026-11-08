@@ -9,15 +9,15 @@ MATCH void func_801DCCF4(void) {
     if ((u8)(D_80144281 - 3) < 2) {
         value      = D_80144287 & 0x7F;
         D_80144287 = value;
-        Menu_DrawCursorSprite(0x1C, ((value << 4) + 0x58), 0);
+        Menu_DrawCursorSprite(28, ((value << 4) + 88), 0);
 
         record          = FISHING_STATE;
         record->flag_04 = (record->flag_04 + 1);
     }
 
     if ((D_80144287 & 1) == 0) {
-        UI_DrawText(0x1D, 0x14, 0, 0xFF, (u8*)(MEM(u16, 0x800100A2u) + 0x80010000u));
+        UI_DrawText(29, 20, 0, 0xFF, (u8*)(MEM(u16, 0x800100A2u) + 0x80010000u));
     } else {
-        UI_DrawText(0x1D, 0x14, 0, 0xFF, (u8*)(MEM(u16, 0x800100A4u) + 0x80010000u));
+        UI_DrawText(29, 20, 0, 0xFF, (u8*)(MEM(u16, 0x800100A4u) + 0x80010000u));
     }
 }

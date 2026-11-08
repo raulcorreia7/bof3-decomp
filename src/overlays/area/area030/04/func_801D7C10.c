@@ -19,7 +19,7 @@ NON_MATCHING void func_801D7C10(s32 arg0, s32 arg1, s32 arg2) {
 
     mask = arg2 & BYTE_MASK;
     x    = arg0;
-    for (i = 0; i < 3; i++, x += 0x30) {
+    for (i = 0; i < 3; i++, x += 48) {
         slot  = &slots[i];
         *slot = (mask >> i) & 1;
         func_801D7D68(x, arg1, *slot);
@@ -30,8 +30,8 @@ NON_MATCHING void func_801D7C10(s32 arg0, s32 arg1, s32 arg2) {
     seven = 7;
     strip = &D_801E21C0;
     UI_DrawText((s16)(arg0 + 6), (s16)(arg1 + 4), (seven - slots[0] * 7) & BYTE_MASK, 4, strip);
-    UI_DrawText((s16)(arg0 + 0x36), (s16)(arg1 + 4), (seven - slots[1] * 7) & BYTE_MASK, 4, (strip + 4));
-    UI_DrawText((s16)(arg0 + 0x66), (s16)(arg1 + 4), (seven - slots[2] * 7) & BYTE_MASK, 4, (strip + 8));
+    UI_DrawText((s16)(arg0 + 54), (s16)(arg1 + 4), (seven - slots[1] * 7) & BYTE_MASK, 4, (strip + 4));
+    UI_DrawText((s16)(arg0 + 102), (s16)(arg1 + 4), (seven - slots[2] * 7) & BYTE_MASK, 4, (strip + 8));
 }
 #else
 INCLUDE_ASM(func_801D7C10);

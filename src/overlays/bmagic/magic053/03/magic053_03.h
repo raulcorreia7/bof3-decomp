@@ -16,8 +16,10 @@ void func_801F01C0(void);
 void Actor_Clear(void);
 void func_801EFD50(void);
 
+#define MAGIC053_STEP_COUNT 3
+
 typedef struct Magic053Steps {
-    Callback steps[3];
+    Callback steps[MAGIC053_STEP_COUNT];
 } Magic053Steps;
 
 extern Magic053Steps D_801EEC04;

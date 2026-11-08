@@ -7,8 +7,8 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
     u8  end;
     s32 last;
 
-    for (row = 0; row < 4; row++) {
-        for (column = 0; column < 16; column++) {
+    for (row = 0; row < PALETTE_MAP_ROWS; row++) {
+        for (column = 0; column < PALETTE_MAP_COLUMNS; column++) {
             map = D_80145D54[row];
             if (map[column] == 0xFFu) {
                 SP_REF(u8, 0x00u) = row;

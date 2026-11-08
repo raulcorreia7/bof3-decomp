@@ -17,7 +17,7 @@ MATCH void func_801EECB0(void) {
 }
 
 MATCH void func_801EED2C(void) {
-    Magic057Steps801EEC10 table;
+    Magic057Steps table;
 
     table = D_801EEC10;
     SYS_DISPATCH_TASK(table.steps, 2, g_Task);
@@ -71,14 +71,14 @@ MATCH void func_801EEFEC(void) {
 }
 
 MATCH void func_801EF02C(void) {
-    Magic057Steps801EEC20 handlers;
+    Magic057SecondSteps handlers;
 
     handlers = D_801EEC20;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 MATCH void func_801EF08C(void) {
-    Magic057Steps801EEC20 handlers;
+    Magic057SecondSteps handlers;
 
     handlers     = D_801EEC2C;
     g_ScriptBank = 0x800C3800;
@@ -104,7 +104,7 @@ MATCH void func_801EF528(void) {
 }
 
 MATCH void func_801EF55C(void) {
-    Magic057Steps801EEC20 handlers;
+    Magic057SecondSteps handlers;
 
     handlers = D_801EEC38;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
@@ -148,7 +148,7 @@ MATCH void func_801EF81C(void) {
 }
 
 MATCH void func_801EF83C(void) {
-    Magic057Steps801EEC20 handlers;
+    Magic057SecondSteps handlers;
 
     handlers     = D_801EEC44;
     g_ScriptBank = 0x800C3800;

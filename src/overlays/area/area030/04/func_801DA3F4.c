@@ -9,7 +9,7 @@ MATCH void func_801DA3F4(void) {
     record                = FISHING_STATE;
     record->step_timer_09 = (record->step_timer_09 - 1);
 
-    func_801E19CC((s16)(FISHING_STATE->step_timer_09 * 80 + 0x44), 0x4E);
+    func_801E19CC((s16)(FISHING_STATE->step_timer_09 * 80 + 68), 78);
 
     record = FISHING_STATE;
     if (record->step_timer_09 == 0) {

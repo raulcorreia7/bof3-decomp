@@ -1,4 +1,4 @@
 #include "logo/logo.h"
 
-void __main(void) {
+MATCH void __main(void) {
 }

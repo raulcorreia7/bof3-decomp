@@ -12,8 +12,10 @@ extern BattleEffect D_801F05D8[];
 #define BMAGIC_EFFECT_COUNT 64
 void func_801EFF40(void);
 
+#define MAGIC129_STEP_COUNT 3
+
 typedef struct Magic129Steps {
-    Callback steps[3];
+    Callback steps[MAGIC129_STEP_COUNT];
 } Magic129Steps;
 
 extern Magic129Steps D_801EEC04;

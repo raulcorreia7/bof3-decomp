@@ -26,7 +26,7 @@ NON_MATCHING s32 func_800A8F58(void) {
     count = 0;
     if (g_BattleTargetSelector & BATTLE_TARGET_BOTH_SIDES) {
         if (g_BattleTargetSelector & BATTLE_TARGET_PARTY_SIDE) {
-            for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+            for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
                     off = i * BATTLE_PARTY_STRIDE;
                     if (g_BattlePartyBattlers[i].chr.stats.resistances[RES_INDEX_DEATH] < 6) {

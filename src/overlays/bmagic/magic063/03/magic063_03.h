@@ -5,8 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+#define MAGIC063_STEP_COUNT 5
+
 typedef struct Magic063Steps {
-    Callback steps[5];
+    Callback steps[MAGIC063_STEP_COUNT];
 } Magic063Steps;
 
 extern Magic063Steps D_801EEC04;

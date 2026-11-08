@@ -17,7 +17,7 @@ MATCH void func_801D4B44(void) {
         mirror = row + 0x200;
         j      = 0;
         if (127 - (i & BYTE_MASK) > 0) {
-            n   = 127 - (i & BYTE_MASK);
+            n   = INV_SLOTS_PER_CATEGORY - 1 - (i & BYTE_MASK);
             nxt = row + 1;
             do {
                 c0 = *row;
@@ -35,5 +35,5 @@ MATCH void func_801D4B44(void) {
             } while (j < n);
         }
         i++;
-    } while (i < 127);
+    } while (i < INV_SLOTS_PER_CATEGORY - 1);
 }

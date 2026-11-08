@@ -6,25 +6,31 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* The twelve step callbacks at D_801EEC10, copied to the stack and indexed by the work state byte. */
+#define BMAGIC064_STEP_COUNT 12
+
 typedef struct BMagic064Steps {
-    Callback handlers[12];
+    Callback handlers[BMAGIC064_STEP_COUNT];
 } BMagic064Steps;
 
 extern u8             g_BattleActiveBattler;
 extern BMagic064Steps D_801EEC10;
 
-typedef struct Magic064Steps801EEC40 {
-    Callback steps[4];
-} Magic064Steps801EEC40;
+#define MAGIC064_STEP_COUNT 4
 
-typedef struct Magic064Steps801EEC50 {
-    Callback steps[3];
-} Magic064Steps801EEC50;
+typedef struct Magic064Steps {
+    Callback steps[MAGIC064_STEP_COUNT];
+} Magic064Steps;
 
-extern Magic064Steps801EEC40 D_801EEC40;
-extern Magic064Steps801EEC50 D_801EEC50;
-extern Magic064Steps801EEC50 D_801EEC70;
-extern void*                 D_801F28B4;
+#define MAGIC064_SECOND_STEP_COUNT 3
+
+typedef struct Magic064SecondSteps {
+    Callback steps[MAGIC064_SECOND_STEP_COUNT];
+} Magic064SecondSteps;
+
+extern Magic064Steps       D_801EEC40;
+extern Magic064SecondSteps D_801EEC50;
+extern Magic064SecondSteps D_801EEC70;
+extern void*               D_801F28B4;
 
 void func_801EF8F4(void);
 void func_801F001C(void);

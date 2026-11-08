@@ -10,7 +10,7 @@ static u8 D_800F721C[16] = {
     0x13, 0x13, 0x80, 0x5D, 0x6F, 0x65, 0x60, 0x6F, 0x12, 0x05, 0x8E, 0x6D, 0x5C, 0x83, 0x13, 0xA1,
 };
 
-/* Kind table indexed by Item_GetKind in func_800F7094. */
+/* Sprite id by item icon, read through Item_GetIcon in func_800F7094. */
 static u8 D_800F722C[16] = {
     0x06, 0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x06, 0x06, 0x06, 0x06, 0x14, 0x15, 0x16, 0x00, 0x00, 0x00,
 };
@@ -433,7 +433,7 @@ MATCH u8 func_800F65A8(s32 slot, s32 amount) {
     u8  value;
     u8(*limit)[8];
 
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         value = D_801E2F7E[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i];
         if (value == GAME_NONE) {
             return false;
@@ -472,7 +472,7 @@ MATCH void func_800F6730(void) {
     if ((s8)s_ListCursor & 0x80) {
         return;
     }
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] == GAME_NONE) {
             break;
         }
@@ -597,10 +597,10 @@ MATCH void func_800F6EE0(u16 x, u16 y) {
     func_801E0DCC(0x38, 1, (x + 0x84), (y + 0x34));
 }
 
-MATCH void func_800F7094(s32 x, s32 y, s32 kind, s32 value, u8 selected) {
-    kind &= BYTE_MASK;
-    if (kind != 0) {
-        func_801AEA80((u16)x, (u16)y, D_800F722C[Item_GetKind(value & BYTE_MASK, kind) & BYTE_MASK], selected);
+MATCH void func_800F7094(s32 x, s32 y, s32 item_id, s32 category, u8 selected) {
+    item_id &= BYTE_MASK;
+    if (item_id != 0) {
+        func_801AEA80((u16)x, (u16)y, D_800F722C[Item_GetIcon(category & BYTE_MASK, item_id) & BYTE_MASK], selected);
     }
 }
 
@@ -609,7 +609,7 @@ MATCH void func_800F7100(void) {
     s32           list_index;
     unsigned char new_var;
     u8*           p;
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         list_index = D_801E3134[g_GameContextKind][(s8)s_ListCursor];
         if (D_801E2F7E[list_index][i] == GAME_NONE) {
             break;

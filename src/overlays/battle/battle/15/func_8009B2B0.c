@@ -15,7 +15,7 @@ MATCH void func_8009B2B0(void) {
     u8  counter;
     u32 divisor;
 
-    counter_byte  = &D_80146326.attempts;
+    counter_byte  = &g_BattleDrops.attempts;
     player_sum    = 0;
     enemy_sum     = 0;
     counter       = *counter_byte + 1;

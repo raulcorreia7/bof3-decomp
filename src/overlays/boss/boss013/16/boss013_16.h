@@ -26,6 +26,10 @@ extern u8           D_80146322;
 extern u8           g_BattleActiveBattler;
 extern u8           D_80181B11;
 extern PartyBattler D_801EB860;
+extern u8           D_800C25D8;
+extern u16          D_800C2608;
+extern u8           D_800C25E4;
+extern u16          D_800C2610;
 
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss013/16] of config/symbols.toml. */
@@ -35,5 +39,9 @@ void func_800C2348(void);
 void func_800C243C(void);
 
 void func_801C1254(s32 ability_id, s32 party_slot);
+
+void func_800C18FC(s32 mode);
+
+void func_800C1B14(s32 mode);
 
 #endif

@@ -195,7 +195,7 @@ MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {
     if (row != NULL) {
         GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
         Menu_DrawPanelIcon((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, 480), 128);
-        for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+        for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);
             if (icon != GAME_NONE) {
                 Menu_DrawPortrait((u16)(left + 0x56 + i * 0x29), (u16)(y + 2), icon, 0);
@@ -234,16 +234,16 @@ MATCH void func_801D8508(s16 x, s16 y, u32 flags, u8 row, u8 variant) {
     }
     texture = Resource_GetText(shade);
     left    = (x + 6);
-    UI_DrawText((x + 42), (y + 7), 0, 0xFF, texture);
+    UI_DrawText((x + 42), (y + 7), 0, TEXT_LENGTH_MAX, texture);
 
-    color = (flags & 1) ? 0 : 7;
-    UI_DrawText(left, (y + 25), color, 0xFF, Resource_GetText(0x85));
+    color = (flags & MENU_LIST_FLAG_TAB_1) ? MENU_SHADE_NORMAL : MENU_SHADE_DIM;
+    UI_DrawText(left, (y + 25), color, TEXT_LENGTH_MAX, Resource_GetText(0x85));
     right  = (x + 94);
     text_y = (y + 25);
     UI_DrawAsciiString(right, text_y, color, &D_801D0D94);
 
-    color = (flags & 2) ? 0 : 7;
-    UI_DrawText(left, (y + 41), color, 0xFF, Resource_GetText(0x85));
+    color = (flags & MENU_LIST_FLAG_TAB_2) ? MENU_SHADE_NORMAL : MENU_SHADE_DIM;
+    UI_DrawText(left, (y + 41), color, TEXT_LENGTH_MAX, Resource_GetText(0x85));
     text_y = (y + 41);
     UI_DrawAsciiString(right, text_y, color, &D_801D0D98);
 

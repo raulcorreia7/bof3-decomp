@@ -15,7 +15,7 @@ MATCH void Party_InitDefaults(void) {
     u8 index;
     u8 willpower;
 
-    for (index = 0; index < 7; index++) {
+    for (index = 0; index < CHAR_INDEX_WHELP; index++) {
         RECORDS[index] = g_StartCharacters[index];
         willpower      = (g_Characters[index].level << 4) / g_StartWillpowerCurves[index].level_divisor +
                          g_StartWillpowerCurves[index].base;

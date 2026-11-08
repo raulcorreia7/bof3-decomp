@@ -10,25 +10,41 @@
 #include "game/item.h"
 #include <stdio.h>
 
-#define FISHING_STATE        ((FishingState*)g_Task)
-#define FISHING_ROW          ((Actor*)g_CurrentActor)
-#define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishSpecies)[(index)])
+#define FISHING_STATE             ((FishingState*)g_Task)
+#define FISHING_ROW               ((Actor*)g_CurrentActor)
+#define FISHING_ENTRY(index)      (&((FishingSceneCue*)g_FishSpecies)[(index)])
 
 /* The main-executable text bank at 0x80010000. D_80010000[] is its u16
  * record-offset table; the panel draws pass `0x80010000 + offset` to
  * func_8014F800, which hands it to func_8014F84C as the text record. */
-#define FISHING_TEXT_BANK    0x80010000
-#define g_CurrentActor       ((u8*)g_CurrentActor)
+#define FISHING_TEXT_BANK         0x80010000
+#define g_CurrentActor            ((u8*)g_CurrentActor)
 
 /* The fish species the pond holds: the fish items from ITEM_JELLYFISH to ITEM_MACKEREL. */
-#define FISHING_FISH_SPECIES (ITEM_MACKEREL - ITEM_JELLYFISH + 1)
+#define FISHING_FISH_SPECIES      (ITEM_MACKEREL - ITEM_JELLYFISH + 1)
 
 /* The pond camera follows the lure between these heights (16.16 cells); a
  * hooked fish out of the water is at FISHING_CATCH_HEIGHT. */
-#define FISHING_CAMERA_Y_MIN TO_COORD(21)
-#define FISHING_CAMERA_Y_MAX TO_COORD(60)
-#define FISHING_CATCH_HEIGHT TO_COORD_HALF(62)
-#define g_AreaScrollTargetY  (*(u32*)&g_AreaScrollTargetY)
+#define FISHING_CAMERA_Y_MIN      TO_COORD(21)
+#define FISHING_CAMERA_Y_MAX      TO_COORD(60)
+#define FISHING_CATCH_HEIGHT      TO_COORD_HALF(62)
+
+#define FISHING_HEADER_SLIDE_STEP 16
+#define FISHING_SHOP_COLUMNS_X    88
+#define FISHING_SHOP_COLUMNS_Y    40
+#define FISHING_SHOP_SLIDE_STEP   45
+#define FISHING_EQUIP_PANEL_X     16
+#define FISHING_ITEM_PANEL_X      164
+#define FISHING_PANEL_CONTENT_Y   64
+#define FISHING_CATCH_BAR_Y       78
+#define FISHING_CATCH_ICON_X      128
+#define FISHING_CATCH_ICON_Y      91
+#define FISHING_CATCH_ICON_STEP   48
+#define FISHING_CATCH_RANK_X      176
+#define FISHING_CATCH_RANK_Y      156
+#define FISHING_CATCH_ROW_Y       148
+#define FISHING_CATCH_ROW_STEP    30
+#define g_AreaScrollTargetY       (*(u32*)&g_AreaScrollTargetY)
 
 /* The motion word at 0x34 is loaded as a whole, and 0x36 is its upper half. */
 typedef union FishingMotion {
@@ -790,12 +806,12 @@ static inline void FishingDrawCue(u8 accessoryCue) {
         record = FISHING_STATE;
         mask   = BIT(record->cue_index_06) & BYTE_MASK;
     }
-    func_801D7C10(0x58, 0x28, mask);
-    func_801D88E0(0x10, 0x40);
+    func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
+    func_801D88E0(FISHING_EQUIP_PANEL_X, FISHING_PANEL_CONTENT_Y);
     if (accessoryCue) {
-        func_801D8364(0xA4, 0x40);
+        func_801D8364(FISHING_ITEM_PANEL_X, FISHING_PANEL_CONTENT_Y);
     } else {
-        func_801D7EB0(0xA4, 0x40);
+        func_801D7EB0(FISHING_ITEM_PANEL_X, FISHING_PANEL_CONTENT_Y);
     }
 }
 

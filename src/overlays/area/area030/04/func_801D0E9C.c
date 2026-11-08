@@ -18,5 +18,5 @@ MATCH void func_801D0E9C(void) {
         sub->mode_index_02          = 0;
         FISHING_STATE->sub_index_03 = 0;
     }
-    Fishing_DrawHud(0xC, FISHING_STATE->cursor_10);
+    Fishing_DrawHud(12, FISHING_STATE->cursor_10);
 }

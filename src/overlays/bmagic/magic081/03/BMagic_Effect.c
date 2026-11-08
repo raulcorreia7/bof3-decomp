@@ -41,7 +41,7 @@ MATCH void func_801EF014(void) {
 }
 
 MATCH void func_801EF058(void) {
-    Magic081Steps801EEC14 handlers;
+    Magic081Steps handlers;
 
     handlers = D_801EEC14;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
@@ -62,7 +62,7 @@ MATCH void func_801EF2F0(void) {
 }
 
 MATCH void func_801EF330(void) {
-    Magic081Steps801EEC20 handlers;
+    Magic081SecondSteps handlers;
 
     handlers = D_801EEC20;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);

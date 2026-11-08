@@ -1,13 +1,15 @@
 #include "batl_end_00.h"
 
-typedef struct Panel801EEC28Modes {
-    Callback modes[6];
-} Panel801EEC28Modes;
+#define BATL_END_PANEL_MODE_COUNT 6
 
-extern Panel801EEC28Modes D_801EEC28;
+typedef struct BatlEndPanelModes {
+    Callback modes[BATL_END_PANEL_MODE_COUNT];
+} BatlEndPanelModes;
+
+extern BatlEndPanelModes D_801EEC28;
 
 MATCH void func_801EFD98(void) {
-    Panel801EEC28Modes handlers = D_801EEC28;
+    BatlEndPanelModes handlers = D_801EEC28;
 
     handlers.modes[g_MenuCurrentPanel->mode]();
 }

@@ -28,9 +28,9 @@ MATCH void func_801D5D88(void) {
     }
     Area_AddActor();
     func_801E0C80(0, 1);
-    func_801E0DCC(0x15, 1, 0x32, 0x7A);
-    func_801E0DCC(0x16, 1, 0xBC, 0x7A);
-    func_801E0DCC(0x10, 1, 0x36, 0x80);
+    func_801E0DCC(0x15, 1, 50, 122);
+    func_801E0DCC(0x16, 1, 188, 122);
+    func_801E0DCC(0x10, 1, 54, 128);
     work     = FISHING_STATE;
     previous = work->step_index_0A - 1;
     mode     = D_801E200A[previous * 3];
@@ -49,8 +49,8 @@ MATCH void func_801D5D88(void) {
     } else if (mode == 1 && !(g_FrameCount & 1)) {
         work->cue_index_06 = work->cue_index_06 + 1;
     }
-    Fishing_DrawGaugeFill(0x39, 0x97, FISHING_STATE->pos_x_0C, 1);
+    Fishing_DrawGaugeFill(57, 151, FISHING_STATE->pos_x_0C, 1);
     TEXT_Format(g_UiFormatBuffer, D_801D0C04, FISHING_STATE->cue_index_06);
-    UI_DrawAsciiString(0xAC, 0x94, 0, g_UiFormatBuffer);
+    UI_DrawAsciiString(172, 148, 0, g_UiFormatBuffer);
     Area_AddActor();
 }

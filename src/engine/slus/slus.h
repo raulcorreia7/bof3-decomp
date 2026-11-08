@@ -83,10 +83,21 @@
     *record = word;                                                                                   \
     func_801576FC((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4 + (word & HALF_MASK) * 4)
 
-/* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0, fills one more slot per
- * layer on the next voices (wrapping at 24), then lets an alias bank supply the tone and voice. One body for the
- * members of banks 0, 4, 5 and 6; every change here must verify every member. */
-#define SLUS_READ_BANK_CUE(bank, cues, tones)                                                                 \
+/* One alias arm of a cue reader: the tone table and the cue table of the bank `alias`. */
+#define SLUS_CUE_ALIAS_ARM(alias, tones, cues)   \
+    case alias:                                  \
+        D_8018B314 = CUE_TONE(tones)->min;       \
+        D_8018B320 = CUE_TONE(tones)->shift;     \
+        D_8018B32C = CUE_TONE(tones)->pan;       \
+        D_8018B324 = CUE_TONE(tones)->vol;       \
+        D_8018B328 = CUE_TONE(tones)->vol;       \
+        D_8018B318 = (cues)[D_8018B404 * 4 + 3]; \
+        break;
+
+/* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0 and fills one more slot per
+ * layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows
+ * lets another bank supply the tone and voice. Every change here must verify every member. */
+#define SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)                                                            \
     s32 cue;                                                                                                  \
     s16 program;                                                                                              \
     s16 tone;                                                                                                 \
@@ -154,35 +165,18 @@
                 }                                                                                             \
                 break;                                                                                        \
         }                                                                                                     \
-    }                                                                                                         \
-    if (D_8018B3E0 != 0) {                                                                                    \
-        D_8018B30C = D_8018B3E0 & EMI_CUE_ALIAS_MASK;                                                         \
-        switch (D_8018B30C) {                                                                                 \
-            case 1:                                                                                           \
-                D_8018B314 = CUE_TONE(D_80148A1C)->min;                                                       \
-                D_8018B320 = CUE_TONE(D_80148A1C)->shift;                                                     \
-                D_8018B32C = CUE_TONE(D_80148A1C)->pan;                                                       \
-                D_8018B324 = CUE_TONE(D_80148A1C)->vol;                                                       \
-                D_8018B328 = CUE_TONE(D_80148A1C)->vol;                                                       \
-                D_8018B318 = D_8014871C[D_8018B404 * 4 + 3];                                                  \
-                break;                                                                                        \
-            case 2:                                                                                           \
-                D_8018B314 = CUE_TONE(D_80148A20)->min;                                                       \
-                D_8018B320 = CUE_TONE(D_80148A20)->shift;                                                     \
-                D_8018B32C = CUE_TONE(D_80148A20)->pan;                                                       \
-                D_8018B324 = CUE_TONE(D_80148A20)->vol;                                                       \
-                D_8018B328 = CUE_TONE(D_80148A20)->vol;                                                       \
-                D_8018B318 = D_80148798[D_8018B404 * 4 + 3];                                                  \
-                break;                                                                                        \
-            case 3:                                                                                           \
-                D_8018B314 = CUE_TONE(D_80148A24)->min;                                                       \
-                D_8018B320 = CUE_TONE(D_80148A24)->shift;                                                     \
-                D_8018B32C = CUE_TONE(D_80148A24)->pan;                                                       \
-                D_8018B324 = CUE_TONE(D_80148A24)->vol;                                                       \
-                D_8018B328 = CUE_TONE(D_80148A24)->vol;                                                       \
-                D_8018B318 = D_80148814[D_8018B404 * 4 + 3];                                                  \
-                break;                                                                                        \
-        }                                                                                                     \
+    }
+
+/* The cue reader of banks 0, 4, 5 and 6, whose alias banks are 1 to 3. */
+#define SLUS_READ_BANK_CUE(bank, cues, tones)             \
+    SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)            \
+    if (D_8018B3E0 != 0) {                                \
+        D_8018B30C = D_8018B3E0 & EMI_CUE_ALIAS_MASK;     \
+        switch (D_8018B30C) {                             \
+            SLUS_CUE_ALIAS_ARM(1, D_80148A1C, D_8014871C) \
+            SLUS_CUE_ALIAS_ARM(2, D_80148A20, D_80148798) \
+            SLUS_CUE_ALIAS_ARM(3, D_80148A24, D_80148814) \
+        }                                                 \
     }
 
 /* Types. */

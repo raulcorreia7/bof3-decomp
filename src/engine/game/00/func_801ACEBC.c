@@ -1,8 +1,8 @@
 #include "game_00.h"
 
 MATCH void func_801ACEBC(void) {
-    Actor*              work;
-    Actor80195ED4States table;
+    Actor*                work;
+    FieldSearchSpotStates table;
 
     work  = g_Task;
     table = D_80195ED4;
