@@ -320,18 +320,18 @@ MATCH void func_801F3844(void) {
     work->header.flags |= 0x20;
     work = g_Task;
     work->header.flags &= 0xBF;
-    g_Task->tint.bytes.flags = 1;
-    slot                     = g_Task;
+    g_Task->tint.bytes.flags       = 1;
+    slot                           = g_Task;
     slot->tint.signed_bytes.unk_5F = -0x80;
     slot->tint.signed_bytes.unk_5E = -0x80;
     slot->tint.signed_bytes.unk_5D = -0x80;
-    work  = g_Task;
-    value = 0x2000;
-    work->vx           = value;
-    value              = work->pos.x.fixed;
-    work->unk_04       = 1;
-    base               = g_CurrentActor;
-    work->pos.x.fixed  = value + 0x2000;
+    work                           = g_Task;
+    value                          = 0x2000;
+    work->vx                       = value;
+    value                          = work->pos.x.fixed;
+    work->unk_04                   = 1;
+    base                           = g_CurrentActor;
+    work->pos.x.fixed              = value + 0x2000;
     base->unk_7E -= 2;
 }
 
