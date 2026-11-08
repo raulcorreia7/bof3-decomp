@@ -18,7 +18,7 @@ MATCH void func_801D4378(void) {
         }
     }
     if (FISHING_STATE->saved_index_0B == 0) {
-        func_801D9534(MENU_HEADER_X, (0x12 - FISHING_STATE->step_timer_09 * 0x10) & 0xFFFE, MENU_HEADER_WIDTH,
+        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - FISHING_STATE->step_timer_09 * 16) & 0xFFFE, MENU_HEADER_WIDTH,
                       MENU_HEADER_HEIGHT, 0);
         func_801D7C10((u16)(FISHING_STATE->step_timer_09 * 0x2D + 0x58), 0x28, 0);
     } else {
