@@ -6,6 +6,7 @@
 /* nonmatching 48.78%: branch@+0x0030; the retail merges both direction arms into one pos store through v0 and
  * keeps D_801490BA and D_801490BB as lui/at accesses, while this source pointerizes them. resume: a source shape
  * that keeps the symbols unpointerized. */
+/* Reversing the blink cases and adding store barriers leave the exit jump different at +0x30. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80151C00(void) {
     s8  pos;
