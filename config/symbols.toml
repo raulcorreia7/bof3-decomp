@@ -1466,7 +1466,7 @@ Boss_EndBattle = { addr = 0x800C2F74, type = "func", source = "Ends the boss bat
 
 ["emi/boss/boss028/16"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-func_800C1AA0 = { addr = 0x800C1AA0, type = "func", source = "When func_801E30F8 returns nonzero raises BATTLE_STATE_EFFECT_PLAYING and runs func_801E5704 and func_801E567C in boss028." }
+Boss_RaiseEffectPlaying = { addr = 0x800C1AA0, type = "func", source = "raises BATTLE_STATE_EFFECT_PLAYING and runs effect helpers when func_801E30F8 is ready in boss028" }
 Boss_InstallBattleHooks = { addr = 0x800C1B40, type = "func", source = "Installs the boss battle hooks of boss028: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1B78, type = "func", source = "Handles the boss battle events of boss028: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C1B80, type = "func", source = "Chooses how the boss battle of boss028 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 30, runs func_801DDED8; otherwise runs func_801DDF00." }
@@ -1609,8 +1609,8 @@ Boss_EndBattle = { addr = 0x800C19BC, type = "func", source = "Ends the boss bat
 Effect_StartPlaying = { addr = 0x800C1CFC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in the boss054 battle." }
 
 ["emi/boss/boss055/16"]
+Boss_RaiseEffectPlaying = { addr = 0x800C1BF0, type = "func", source = "raises BATTLE_STATE_EFFECT_PLAYING and runs effect helpers when func_801E30F8 is ready in boss055" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-func_800C1BF0 = { addr = 0x800C1BF0, type = "func", source = "When func_801E30F8 returns nonzero raises BATTLE_STATE_EFFECT_PLAYING and runs func_801E5704 and func_801E567C in boss055." }
 Boss_InstallBattleHooks = { addr = 0x800C24A0, type = "func", source = "Installs the boss battle hooks of boss055: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C24D8, type = "func", source = "Handles the boss battle events of boss055: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C24E0, type = "func", source = "Chooses how the boss battle of boss055 ends: g_BattleChooseEndingHook runs it from Battle_LoadEndOverlay once the battle result is set; the body is not decompiled." }
