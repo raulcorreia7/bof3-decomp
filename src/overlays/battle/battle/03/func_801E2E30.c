@@ -22,7 +22,7 @@ MATCH u8 func_801E2E30(void) {
                     total += s_BattlePartialPartyTargetWeights[g_PartyFormation][index];
                 }
             }
-            pick = rand() % total;
+            pick = RANDOM_MOD(total);
             for (index = 0; index < BATTLE_TWO_TARGET_COUNT; index++) {
                 if (Battle_SlotIsBlocked(index)) {
                     continue;
@@ -39,7 +39,7 @@ MATCH u8 func_801E2E30(void) {
                     total += s_BattleFullPartyTargetWeights[g_PartyFormation][index];
                 }
             }
-            pick = rand() % total;
+            pick = RANDOM_MOD(total);
             for (index = 0; index < BATTLE_THREE_TARGET_COUNT; index++) {
                 if (Battle_SlotIsBlocked(index)) {
                     continue;

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801976EC(void) {
+MATCH void Game_ReturnFromMenu(void) {
     u8  sp10;
     u8  sp11;
     u8* request;

@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-MATCH void func_801F222C(void) {
+MATCH void Fairy_LoadCommu04(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
         EMI_LoadArchive(EMI_SLOT_COMMU04);

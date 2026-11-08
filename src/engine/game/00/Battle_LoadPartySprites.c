@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_80197AA4(void) {
+MATCH void Battle_LoadPartySprites(void) {
     u8            ready;
     volatile u16* coord_a;
     s32           sum;

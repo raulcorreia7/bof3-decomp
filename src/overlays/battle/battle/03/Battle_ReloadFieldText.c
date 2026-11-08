@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void func_801D71E0(void) {
+MATCH void Battle_ReloadFieldText(void) {
     /* FAKE: volatile-drop cast lets the scheduler hoist the
      * epilogue load above the store. */
     u8* state = (u8*)&g_Battle.phase.sub_step;

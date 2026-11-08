@@ -3,6 +3,9 @@
 The rule is in include/match/match.h: every lifted function starts its definition with one
 marker. ``MATCH`` marks a body that compiles in the default build. ``NON_MATCHING`` marks a
 draft, which must sit under ``#ifdef NON_MATCHING`` with its ``INCLUDE_ASM`` in the ``#else``.
+``HAND_ASM`` marks the C equivalent of a function the original programmer wrote in assembly. It
+sits under ``#ifdef NON_MATCHING`` like a draft, is required for every function in
+``asm/*/hand/`` and is allowed nowhere else. Status markers never take a ``FAKE:`` note.
 The one exception is a ``static inline`` helper in a header, which is not a lifted function. PsyQ
 stubs such as ``__main`` carry ``MATCH`` like any other definition.
 
@@ -22,7 +25,8 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-MARKERS = ("MATCH", "NON_MATCHING")
+MARKERS = ("MATCH", "NON_MATCHING", "HAND_ASM")
+DRAFT_MARKERS = ("NON_MATCHING", "HAND_ASM")
 TOKEN = re.compile(
     r"""
       (?P<comment>/\*.*?\*/|//[^\n]*)
@@ -99,10 +103,10 @@ def check_text(text: str, path: str = "<text>") -> list[Violation]:
                     "the marker must be the first token of the definition",
                 )
             )
-        elif head[0][0] == "NON_MATCHING" and head[0][2] != "draft":
+        elif head[0][0] in DRAFT_MARKERS and head[0][2] != "draft":
             found.append(
                 Violation(
-                    path, where, name, "NON_MATCHING outside `#ifdef NON_MATCHING`"
+                    path, where, name, f"{head[0][0]} outside `#ifdef NON_MATCHING`"
                 )
             )
         elif head[0][0] == "MATCH" and head[0][2] == "draft":
@@ -202,9 +206,54 @@ def tracked_sources() -> list[str]:
     return out.split()
 
 
+def hand_functions(hand_files: list[str]) -> set[str]:
+    """The function names of the files in asm/*/hand/."""
+    return {Path(f).stem for f in hand_files}
+
+
+def check_hand_units(hand_files: list[str], sources: dict[str, str]) -> list[Violation]:
+    """HAND_ASM is required on every asm/*/hand/ function and allowed on no other."""
+    hand = hand_functions(hand_files)
+    marked: set[str] = set()
+    found: list[Violation] = []
+    for path, text in sources.items():
+        for m in re.finditer(r"^HAND_ASM\b[^;{]*?\b(\w+)\s*\(", text, re.M):
+            marked.add(m.group(1))
+            if m.group(1) not in hand:
+                line = text.count("\n", 0, m.start()) + 1
+                found.append(
+                    Violation(
+                        path,
+                        line,
+                        m.group(1),
+                        "HAND_ASM on a function with no asm/*/hand/ file",
+                    )
+                )
+    for name in sorted(hand - marked):
+        found.append(
+            Violation("asm/hand", 1, name, "hand-written assembly without HAND_ASM")
+        )
+    return found
+
+
+def tracked_hand_files() -> list[str]:
+    out = subprocess.run(
+        ["git", "ls-files", "asm/**/hand/*.s"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    return out.split()
+
+
 def main(argv: list[str]) -> int:
     paths = argv or tracked_sources()
     problems: list[Violation] = []
+    if not argv:
+        sources = {
+            p: Path(p).read_text(encoding="utf-8", errors="ignore") for p in paths
+        }
+        problems += check_hand_units(tracked_hand_files(), sources)
     for path in paths:
         problems += check_text(
             Path(path).read_text(encoding="utf-8", errors="ignore"), path

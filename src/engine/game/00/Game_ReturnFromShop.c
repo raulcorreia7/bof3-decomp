@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801983D8(void) {
+MATCH void Game_ReturnFromShop(void) {
     g_EmiStreamFlags = 0x20;
     EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_IsReady() == 0) {

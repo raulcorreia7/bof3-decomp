@@ -628,9 +628,9 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     dst   = (AreaVertex*)rotated;
     state = (AreaTransform*)transform;
 
-    state->rotation.vx = rand() & 0xFC0;
-    state->rotation.vy = rand() & 0xFC0;
-    state->rotation.vz = rand() & 0xFC0;
+    state->rotation.vx = RANDOM_MASK(0xFC0);
+    state->rotation.vy = RANDOM_MASK(0xFC0);
+    state->rotation.vz = RANDOM_MASK(0xFC0);
     RotMatrix(&state->rotation, &matrix);
     matrix.t[0] = 0;
     matrix.t[1] = 0;

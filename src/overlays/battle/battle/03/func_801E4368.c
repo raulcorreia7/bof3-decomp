@@ -18,7 +18,7 @@ MATCH u8 func_801E4368(void) {
         if ((BATTLE_CURRENT_ENEMY_PTR->turn.damage_flags.value & COMBATANT_FLAG_REPRISAL) != 0u) {
             return 1u;
         }
-        if ((rand() % 100) < 0x46) {
+        if ((RANDOM_PERCENT()) < 0x46) {
             return 1u;
         }
     }

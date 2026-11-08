@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void func_801D7234(void) {
+MATCH void Battle_ReloadMusicBank(void) {
     u32          action;
     u8           unk_02;
     u8           unk_03;
@@ -15,19 +15,19 @@ MATCH void func_801D7234(void) {
             SND_StopAllSequences();
             action = g_SndBGMId;
             if (action != 0xFFu) {
-                unk_02 = D_80181EB8[action].sep_slot;
+                unk_02 = g_BGMTracks[action].sep_slot;
                 state  = g_EmiStreamFlags;
                 /* FAKE: retail loads the state cell before the flags byte. */
                 MATCH_FAKE_BARRIER();
                 flag             = g_Battle.outcome.result;
                 D_80146855       = unk_02;
-                unk_03           = D_80181EB8[action].sequence;
+                unk_03           = g_BGMTracks[action].sequence;
                 g_EmiStreamFlags = state | 0x20u;
                 D_80146856       = unk_03;
                 if ((flag & 0x10u) != 0u) {
                     g_EmiStreamFlags = state | 0x60u;
                 }
-                template_id = D_80181EB8[action].bank_slot;
+                template_id = g_BGMTracks[action].bank_slot;
                 D_801463B0  = template_id;
                 EMI_LoadArchive(template_id);
             } else {

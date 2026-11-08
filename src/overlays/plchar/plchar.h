@@ -85,13 +85,13 @@
     if (cell == 0xF2) {                                                    \
         if ((Actor_FindFreeSlot() & BYTE_MASK) != GAME_NONE) {             \
             Char_SpawnActor(0, x, y);                                      \
-            roll = rand() & 0xF;                                           \
+            roll = RANDOM_MASK(0xF);                                       \
             if (roll >= 13) {                                              \
                 spawn_cue = 5;                                             \
                 if (roll < 15) {                                           \
                     spawn_cue = 2;                                         \
                 }                                                          \
-                if ((g_GameRequestFlags & 6) && !(rand() & 3)) {           \
+                if ((g_GameRequestFlags & 6) && !(RANDOM_MASK(3))) {       \
                     spawn_cue = (spawn_cue & BYTE_MASK) * 20;              \
                 }                                                          \
                 func_801B5E58(spawn_cue & BYTE_MASK);                      \
@@ -137,7 +137,7 @@ void Area_ClearCell(s32 x, s32 y);
     cell = Area_GetCellCode(x, y);                                         \
     if ((u8)(cell + 0x10) < 2 || (cell & BYTE_MASK) == 0xF4) {             \
         CALLEE(0, x, y, cell & BYTE_MASK);                                 \
-        if ((rand() & 7) >= 6) {                                           \
+        if ((RANDOM_MASK(7)) >= 6) {                                       \
             CALLEE(4, x, y, cell & BYTE_MASK);                             \
         }                                                                  \
         SND_PlayCue(EMI_CUE_ID(1, 11));                                    \
@@ -146,7 +146,7 @@ void Area_ClearCell(s32 x, s32 y);
     if ((u8)(cell + 0xA) < 2) {                                            \
         CALLEE(0, x, y, cell & BYTE_MASK);                                 \
         SND_PlayCue(EMI_CUE_ID(1, 11));                                    \
-        roll = rand() & 0xF;                                               \
+        roll = RANDOM_MASK(0xF);                                           \
         if (roll < 7) {                                                    \
             CALLEE(3, x, y, cell & BYTE_MASK);                             \
             record = Item_GetRecord(ITEM_CAT_ITEM, ITEM_BERRIES);          \

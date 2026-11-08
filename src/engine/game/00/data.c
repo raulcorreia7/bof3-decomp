@@ -30,24 +30,24 @@ Callback g_GameStates[12] = {
     (Callback)Game_RunCameraLookState,  (Callback)Game_RunShopState,       (Callback)Game_RunFishingState,
     (Callback)Game_RunAbilityMenuState, (Callback)Game_RunStatusMenuState, (Callback)Game_RunSceneCameraState};
 
-Callback g_GameMenuSubstates[3] = {(Callback)func_80197620, (Callback)func_80199368, (Callback)func_801976EC};
+Callback g_GameMenuSubstates[3] = {(Callback)Game_LoadMenuOverlay, (Callback)func_80199368, (Callback)Game_ReturnFromMenu};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameBattleSubstates[8] = {(Callback)func_80197A60, (Callback)func_80197AA4, (Callback)func_80197C1C,
-                                  (Callback)func_80197C94, (Callback)func_80197E54, (Callback)func_801D1014,
+Callback g_GameBattleSubstates[8] = {(Callback)func_80197A60, (Callback)Battle_LoadPartySprites, (Callback)func_80197C1C,
+                                  (Callback)Battle_LoadBattleArchive, (Callback)func_80197E54, (Callback)func_801D1014,
                                   (Callback)func_80197EFC, (Callback)func_80197F48};
 
 Offset2DB s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
-Callback g_GameShopSubstates[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)func_801983D8};
+Callback g_GameShopSubstates[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)Game_ReturnFromShop};
 
 Callback g_GameFishingSubstates[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
                                       (Callback)func_801E0C20};
 
-Callback g_MenuAbilityOpen[3] = {(Callback)func_80198780, (Callback)func_801993F0, (Callback)func_8019883C};
+Callback g_MenuAbilityOpen[3] = {(Callback)Game_LoadAbilityMenu, (Callback)func_801993F0, (Callback)Game_ReturnFromAbilityMenu};
 
-Callback g_MenuStatusOpen[3] = {(Callback)func_80198940, (Callback)func_80199418, (Callback)func_801989FC};
+Callback g_MenuStatusOpen[3] = {(Callback)Game_LoadStatusMenu, (Callback)func_80199418, (Callback)Game_ReturnFromStatusMenu};
 
 Callback g_GameSceneCameraSubstates[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
 
@@ -2372,7 +2372,7 @@ u8 s_BattleModeRecords[224] = {
     0x02, 0x07, 0x23, 0x07, 0x02, 0x07, 0x1F, 0x07, 0x02, 0x06, 0x24, 0x27, 0x02, 0x07, 0x25,
 };
 
-u16 D_801CD86C[42] = {0x0006, 0x01B4, 0x01B5, 0x01B6, 0x01B3, 0x01B7, 0x01B8, 0x01B9, 0x01BA, 0x01BB, 0x01BC,
+u16 g_BossArchiveSlots[42] = {0x0006, 0x01B4, 0x01B5, 0x01B6, 0x01B3, 0x01B7, 0x01B8, 0x01B9, 0x01BA, 0x01BB, 0x01BC,
                       0x01BD, 0x01BE, 0x01BF, 0x01C0, 0x01C1, 0x01C2, 0x01C3, 0x01C4, 0x01C5, 0x01C6, 0x01C7,
                       0x01C8, 0x01C9, 0x01CA, 0x01CB, 0x01CC, 0x01CD, 0x01CE, 0x01CF, 0x01D0, 0x01D1, 0x01D5,
                       0x01D6, 0x01D7, 0x01D8, 0x01D9, 0x01DA, 0x01D2, 0x01D3, 0x01D4, 0xFFFF};

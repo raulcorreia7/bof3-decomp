@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void func_801D6F28(void) {
+MATCH void Battle_ReloadPartyBank(void) {
     u8 i;
 
     i = 0u;

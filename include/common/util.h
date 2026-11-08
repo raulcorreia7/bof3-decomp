@@ -38,6 +38,12 @@
 /* A random value below the next power of two: the mask must be 2^n - 1. */
 #define RANDOM_MASK(mask) (rand() & (mask))
 
+/* A random value from 0 to count - 1; rand() % count, which compiles apart from a mask. */
+#define RANDOM_MOD(count) (rand() % (count))
+
+/* A percentage roll from 0 to 99, tested against a chance in percent. */
+#define RANDOM_PERCENT()  RANDOM_MOD(100)
+
 /* LO/HI name the little-endian half or byte of the object: the expansion is
  * the same cast-and-dereference expression the retail code compiles. The
  * argument stays addressable, so these are lvalues. */

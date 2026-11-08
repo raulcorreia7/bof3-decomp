@@ -327,7 +327,7 @@ extern u8        s_EntitySpawnChances[8];
 extern u8        s_BattleModeRecords[224];
 extern u8        D_801CD78D[];
 extern u8        D_801CD78F[];
-extern u16       D_801CD86C[42];
+extern u16       g_BossArchiveSlots[42];
 extern u8        D_801CD8C0;
 extern u8        D_801CD8C4;
 extern u8        D_801CD8C8;

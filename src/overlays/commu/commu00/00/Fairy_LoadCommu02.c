@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-MATCH void func_801F1EB0(void) {
+MATCH void Fairy_LoadCommu02(void) {
     g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
     if (g_SceneEventSelection == 3) {
         EMI_LoadArchive(EMI_SLOT_COMMU02B);

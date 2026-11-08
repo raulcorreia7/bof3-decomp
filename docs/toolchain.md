@@ -196,7 +196,7 @@ Known compiler residuals:
 | Unit                                                                                    | State                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `exe/slus_004_22@0x80162B08`                                                            | The zero-slot arm loads `v0 = 1`, and GCC's delay-slot reorganization moves the common return into the jump delay slot. The pinned GCC's raw assembly contains the `li`, so maspsx and ASPSX do not cause it. |
-| SLUS stream decoder: `func_80164028`, `func_80164064`, `func_801642CC`, `func_801642F4` | No exact C match in 56 candidate profiles each for GCC 2.8.0, 2.8.1 and 2.95.2. The `.c` files link the split assembly and keep the C89 model behind `BOF3_USE_ASM`, with a `PROFILE:` comment.               |
+| SLUS stream decoder: `func_80164028`, `func_80164064`, `func_801642CC`, `func_801642F4` | No exact C match in 56 candidate profiles each for GCC 2.8.0, 2.8.1 and 2.95.2. The `.c` files link the split assembly and keep the C89 model behind `HAND_ASM`.                                              |
 
 ### Compiler wrapper
 
@@ -325,8 +325,8 @@ compiled objects, so `check` and the image bytes do not change.
 | `categories`           | The same figures per category; `game` is the game's own code only                  |
 
 Authored assembly is assembly in the original. A unit under `asm/<target>/hand/` has the
-`hand-asm` category and no C comparison: it counts complete only with its `FAKE: proven
-asm-original` note, and the `game` category never includes it. A `#ifdef NON_MATCHING <model> #else INCLUDE_ASM` function, with no `hand/` unit links the split
+`hand-asm` category and no C comparison: it counts complete only with a `HAND_ASM`
+function, and the `game` category never includes it. A `#ifdef NON_MATCHING <model> #else INCLUDE_ASM` function with no `hand/` unit links the split
 assembly like any `INCLUDE_ASM` function and scores 0% until its model matches. An SDK member scores against its PsyQ library object, not
 against C.
 

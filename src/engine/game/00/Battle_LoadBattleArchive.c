@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_80197C94(void) {
+MATCH void Battle_LoadBattleArchive(void) {
     u16* state;
     u16  counter;
     u32  arg;
@@ -23,7 +23,7 @@ MATCH void func_80197C94(void) {
     D_80146856 = 0;
     D_80146855 = 0;
     if (g_Battle.encounter != 0) {
-        arg = D_801CD86C[D_801CD78F[g_Battle.encounter * 4]];
+        arg = g_BossArchiveSlots[D_801CD78F[g_Battle.encounter * 4]];
     } else if (g_SceneState.scenario_id < 8) {
         arg = 6;
     } else {
