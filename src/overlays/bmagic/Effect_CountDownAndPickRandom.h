@@ -7,7 +7,7 @@ MATCH void Effect_CountDownAndPickRandom(void) {
 
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
-    if (!(counter & 0xFF)) {
+    if (!(counter & BYTE_MASK)) {
         g_Task->param.unk_0B = RANDOM_MASK(0xF);
         g_Task->unk_09       = 0;
         g_Task->timer        = 0;

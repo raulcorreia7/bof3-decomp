@@ -13,7 +13,7 @@ MATCH void func_801EEEAC(void) {
 
     temp_v1        = g_Task->unk_09 + 2;
     g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x54) {
+    if ((temp_v1 & BYTE_MASK) == 0x54) {
         g_Task->header.mode += 1;
         g_Task->timer = 0x40;
     }

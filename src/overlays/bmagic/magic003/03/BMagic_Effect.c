@@ -17,7 +17,7 @@ MATCH void func_801EEDAC(void) {
     func_801F0164(1);
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->unk_09 = 0x1E;
         g_Task->header.mode += 1;
     }
@@ -30,7 +30,7 @@ MATCH void func_801EEE28(void) {
     func_801F0164(2);
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->unk_09 = 0xA;
         g_Task->header.mode += 1;
     }
@@ -73,7 +73,7 @@ MATCH void func_801EF0A8(void) {
     func_801F0164(0);
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->header.mode += 1;
     }
 }
@@ -120,7 +120,7 @@ MATCH void func_801EF3C8(void) {
 
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         temp_x          = g_Task->pos.x.fixed;
         temp_a1         = g_Task->pos.y.fixed;
         temp_a2         = g_Task->pos.z.fixed;
@@ -142,7 +142,7 @@ MATCH void func_801EF478(void) {
     u8  value2;
 
     value2 = g_Task->unk_09;
-    value  = value2 & 0xFF;
+    value  = value2 & BYTE_MASK;
     if (value != 0) {
         if (value != 0xFF) {
             g_Task->unk_09 = value2 - 1;
@@ -169,7 +169,7 @@ MATCH void func_801EF578(void) {
     u8  value2;
 
     value2 = g_Task->unk_09;
-    value  = value2 & 0xFF;
+    value  = value2 & BYTE_MASK;
     if (value != 0) {
         if (value != 0xFF) {
             g_Task->unk_09 = value2 - 1;

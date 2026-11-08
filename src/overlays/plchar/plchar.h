@@ -74,52 +74,52 @@
 /* The cell probe of the plchar programs that react to map cells 0xF2 and 0xF8 with the
  * shared Char_SpawnActor: 0xF2 spawns a field record (and sometimes a second) and
  * 0xF8 hands out the item 0x56. Every change here must verify every member image. */
-#define CHAR_PROBE_CELL_SPAWN()                                  \
-    s32 cell;                                                    \
-    s32 i;                                                       \
-    u32 roll;                                                    \
-    s32 spawn_cue;                                               \
-    u8* record;                                                  \
-                                                                 \
-    cell = Area_GetCellCode(x, y) & BYTE_MASK;                   \
-    if (cell == 0xF2) {                                          \
-        if ((Actor_FindFreeSlot() & BYTE_MASK) != GAME_NONE) {   \
-            Char_SpawnActor(0, x, y);                            \
-            roll = rand() & 0xF;                                 \
-            if (roll >= 13) {                                    \
-                spawn_cue = 5;                                   \
-                if (roll < 15) {                                 \
-                    spawn_cue = 2;                               \
-                }                                                \
-                if ((g_GameRequestFlags & 6) && !(rand() & 3)) { \
-                    spawn_cue = (spawn_cue & BYTE_MASK) * 20;    \
-                }                                                \
-                func_801B5E58(spawn_cue & BYTE_MASK);            \
-                Char_SpawnActor(1, x, y);                        \
-            }                                                    \
-            g_Task->param.unk_0B = 1;                            \
-        }                                                        \
-        Area_ClearCell(x, y);                                    \
-        return 1;                                                \
-    }                                                            \
-    if (cell == 0xF8) {                                          \
-        Char_SpawnActor(0, x, y);                                \
-        record = Item_GetRecord(ITEM_CAT_ITEM, 0x56);            \
-        for (i = 0; i < 12; i++) {                               \
-            g_TextVariables[0][i] = record[i];                   \
-        }                                                        \
-        D_801490E4[0] = 0;                                       \
-        if (Item_Add(ITEM_CAT_ITEM, 0x56, 1, 0) & BYTE_MASK) {   \
-            SND_PlayCue(0x106);                                  \
-            Resource_RequestArea(2);                             \
-        } else {                                                 \
-            Resource_RequestArea(3);                             \
-        }                                                        \
-        g_GameStateIndex     = 2;                                \
-        g_Task->param.unk_0B = 1;                                \
-        Area_ClearCell(x, y);                                    \
-        return 1;                                                \
-    }                                                            \
+#define CHAR_PROBE_CELL_SPAWN()                                            \
+    s32 cell;                                                              \
+    s32 i;                                                                 \
+    u32 roll;                                                              \
+    s32 spawn_cue;                                                         \
+    u8* record;                                                            \
+                                                                           \
+    cell = Area_GetCellCode(x, y) & BYTE_MASK;                             \
+    if (cell == 0xF2) {                                                    \
+        if ((Actor_FindFreeSlot() & BYTE_MASK) != GAME_NONE) {             \
+            Char_SpawnActor(0, x, y);                                      \
+            roll = rand() & 0xF;                                           \
+            if (roll >= 13) {                                              \
+                spawn_cue = 5;                                             \
+                if (roll < 15) {                                           \
+                    spawn_cue = 2;                                         \
+                }                                                          \
+                if ((g_GameRequestFlags & 6) && !(rand() & 3)) {           \
+                    spawn_cue = (spawn_cue & BYTE_MASK) * 20;              \
+                }                                                          \
+                func_801B5E58(spawn_cue & BYTE_MASK);                      \
+                Char_SpawnActor(1, x, y);                                  \
+            }                                                              \
+            g_Task->param.unk_0B = 1;                                      \
+        }                                                                  \
+        Area_ClearCell(x, y);                                              \
+        return 1;                                                          \
+    }                                                                      \
+    if (cell == 0xF8) {                                                    \
+        Char_SpawnActor(0, x, y);                                          \
+        record = Item_GetRecord(ITEM_CAT_ITEM, ITEM_HORSERADISH);          \
+        for (i = 0; i < 12; i++) {                                         \
+            g_TextVariables[0][i] = record[i];                             \
+        }                                                                  \
+        D_801490E4[0] = 0;                                                 \
+        if (Item_Add(ITEM_CAT_ITEM, ITEM_HORSERADISH, 1, 0) & BYTE_MASK) { \
+            SND_PlayCue(EMI_CUE_ID(1, 6));                                 \
+            Resource_RequestArea(2);                                       \
+        } else {                                                           \
+            Resource_RequestArea(3);                                       \
+        }                                                                  \
+        g_GameStateIndex     = 2;                                          \
+        g_Task->param.unk_0B = 1;                                          \
+        Area_ClearCell(x, y);                                              \
+        return 1;                                                          \
+    }                                                                      \
     return 0
 
 void Char_SpawnActor(s32 arg0, s32 arg1, s32 arg2);
@@ -128,50 +128,50 @@ void Area_ClearCell(s32 x, s32 y);
 /* The cell-code probe shared by the plchar character programs: the three cell codes
  * that react start the image's own effect spawner CALLEE. Every change here must
  * verify every member image. */
-#define CHAR_PROBE_CELL_CODE(CALLEE)                               \
-    s32 cell;                                                      \
-    s32 i;                                                         \
-    u32 roll;                                                      \
-    u8* record;                                                    \
-                                                                   \
-    cell = Area_GetCellCode(x, y);                                 \
-    if ((u8)(cell + 0x10) < 2 || (cell & BYTE_MASK) == 0xF4) {     \
-        CALLEE(0, x, y, cell & BYTE_MASK);                         \
-        if ((rand() & 7) >= 6) {                                   \
-            CALLEE(4, x, y, cell & BYTE_MASK);                     \
-        }                                                          \
-        SND_PlayCue(0x10B);                                        \
-        return 1;                                                  \
-    }                                                              \
-    if ((u8)(cell + 0xA) < 2) {                                    \
-        CALLEE(0, x, y, cell & BYTE_MASK);                         \
-        SND_PlayCue(0x10B);                                        \
-        roll = rand() & 0xF;                                       \
-        if (roll < 7) {                                            \
-            CALLEE(3, x, y, cell & BYTE_MASK);                     \
-            record = Item_GetRecord(ITEM_CAT_ITEM, 0x29);          \
-            for (i = 0; i < 12; i++) {                             \
-                g_TextVariables[0][i] = record[i];                 \
-            }                                                      \
-            D_801490E4[0] = 0;                                     \
-            if (Item_Add(ITEM_CAT_ITEM, 0x29, 1, 0) & BYTE_MASK) { \
-                SND_PlayCue(0x106);                                \
-                Resource_RequestArea(2);                           \
-            } else {                                               \
-                Resource_RequestArea(3);                           \
-            }                                                      \
-            g_Task->param.unk_0B = 2;                              \
-        } else if (roll >= 12) {                                   \
-            CALLEE(2, x, y, cell & BYTE_MASK);                     \
-            func_801C308C(0);                                      \
-            Char_LoseHP(1, g_Game.current->chr.character_id);      \
-            Resource_RequestArea(0xD9);                            \
-            g_GameStateIndex     = 2;                              \
-            g_Task->param.unk_0B = 1;                              \
-        }                                                          \
-        g_GameStateIndex = 2;                                      \
-        return 1;                                                  \
-    }                                                              \
+#define CHAR_PROBE_CELL_CODE(CALLEE)                                       \
+    s32 cell;                                                              \
+    s32 i;                                                                 \
+    u32 roll;                                                              \
+    u8* record;                                                            \
+                                                                           \
+    cell = Area_GetCellCode(x, y);                                         \
+    if ((u8)(cell + 0x10) < 2 || (cell & BYTE_MASK) == 0xF4) {             \
+        CALLEE(0, x, y, cell & BYTE_MASK);                                 \
+        if ((rand() & 7) >= 6) {                                           \
+            CALLEE(4, x, y, cell & BYTE_MASK);                             \
+        }                                                                  \
+        SND_PlayCue(EMI_CUE_ID(1, 11));                                    \
+        return 1;                                                          \
+    }                                                                      \
+    if ((u8)(cell + 0xA) < 2) {                                            \
+        CALLEE(0, x, y, cell & BYTE_MASK);                                 \
+        SND_PlayCue(EMI_CUE_ID(1, 11));                                    \
+        roll = rand() & 0xF;                                               \
+        if (roll < 7) {                                                    \
+            CALLEE(3, x, y, cell & BYTE_MASK);                             \
+            record = Item_GetRecord(ITEM_CAT_ITEM, ITEM_BERRIES);          \
+            for (i = 0; i < 12; i++) {                                     \
+                g_TextVariables[0][i] = record[i];                         \
+            }                                                              \
+            D_801490E4[0] = 0;                                             \
+            if (Item_Add(ITEM_CAT_ITEM, ITEM_BERRIES, 1, 0) & BYTE_MASK) { \
+                SND_PlayCue(EMI_CUE_ID(1, 6));                             \
+                Resource_RequestArea(2);                                   \
+            } else {                                                       \
+                Resource_RequestArea(3);                                   \
+            }                                                              \
+            g_Task->param.unk_0B = 2;                                      \
+        } else if (roll >= 12) {                                           \
+            CALLEE(2, x, y, cell & BYTE_MASK);                             \
+            func_801C308C(0);                                              \
+            Char_LoseHP(1, g_Game.current->chr.character_id);              \
+            Resource_RequestArea(0xD9);                                    \
+            g_GameStateIndex     = 2;                                      \
+            g_Task->param.unk_0B = 1;                                      \
+        }                                                                  \
+        g_GameStateIndex = 2;                                              \
+        return 1;                                                          \
+    }                                                                      \
     return 0;
 
 #define CHAR_LAUNCH_SCRIPT_PC 10

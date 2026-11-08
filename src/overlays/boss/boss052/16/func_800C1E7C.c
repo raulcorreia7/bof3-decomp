@@ -8,7 +8,7 @@ MATCH void func_800C1E7C(void) {
     delay = work->timer;
     if (delay != 0xFF) {
         if (delay == 0) {
-            SND_PlayCue(0x603);
+            SND_PlayCue(EMI_CUE_ID(6, 3));
             ((Actor*)g_Task)->timer = 0xFF;
         } else {
             work->timer = delay - 1;

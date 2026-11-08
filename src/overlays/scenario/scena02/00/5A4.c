@@ -207,7 +207,7 @@ MATCH void func_801FC308(u8 actor_id) {
 }
 
 MATCH void func_801FC3B4(s32 actor_id) {
-    SCENA02_TRIGGER_BEHIND_X(actor_id & 0xFF, TO_COORD(4) + COORD_HALF, TO_COORD(1) + COORD_HALF);
+    SCENA02_TRIGGER_BEHIND_X(actor_id & BYTE_MASK, TO_COORD(4) + COORD_HALF, TO_COORD(1) + COORD_HALF);
 }
 
 MATCH void func_801FC46C(u8 actor_id) {
@@ -215,11 +215,11 @@ MATCH void func_801FC46C(u8 actor_id) {
 }
 
 MATCH void func_801FC518(s32 actor_id) {
-    SCENA02_TRIGGER_BAND_Y(actor_id & 0xFF, TO_COORD(2) + COORD_HALF, TO_COORD(2), TO_COORD(4));
+    SCENA02_TRIGGER_BAND_Y(actor_id & BYTE_MASK, TO_COORD(2) + COORD_HALF, TO_COORD(2), TO_COORD(4));
 }
 
 MATCH void func_801FC5D0(s32 actor_id) {
-    SCENA02_TRIGGER_BAND_Y(actor_id & 0xFF, TO_COORD(1) + COORD_HALF, TO_COORD(1), TO_COORD(3));
+    SCENA02_TRIGGER_BAND_Y(actor_id & BYTE_MASK, TO_COORD(1) + COORD_HALF, TO_COORD(1), TO_COORD(3));
 }
 
 MATCH void func_801FC688(u8 actor_id) {
@@ -296,7 +296,7 @@ MATCH void func_801FCBDC(s32 arg0) {
     state = &D_80146865;
     switch (*state) {
         case 0:
-            amount                   = arg0 & 0xFF;
+            amount                   = arg0 & BYTE_MASK;
             g_AreaCameraRefreshCount = 2;
             frame                    = D_80146867 + 1;
             D_80146867               = frame;
@@ -312,7 +312,7 @@ MATCH void func_801FCBDC(s32 arg0) {
             }
             return;
         case 1:
-            amount_2                 = arg0 & 0xFF;
+            amount_2                 = arg0 & BYTE_MASK;
             g_AreaCameraRefreshCount = 2;
             frame_2                  = D_80146867 + 1;
             D_80146867               = frame_2;

@@ -45,7 +45,7 @@ MATCH void func_801EF3D8(void) {
         func_801F02B0();
     }
     timer = g_Task->timer;
-    if ((timer & 0xFF) == 8) {
+    if ((timer & BYTE_MASK) == 8) {
         g_Task->unk_09 = timer;
         g_Task->header.step += 1;
     }

@@ -513,7 +513,7 @@ MATCH ActorSlot* func_801FD610(u8 mode) {
     ActorSlot* slot;
     s32        index;
 
-    index = Actor_FindFreeSlot() & 0xFF;
+    index = Actor_FindFreeSlot() & BYTE_MASK;
     slot  = &g_ActorSlots[index];
     if (index != 0xFF) {
         slot->header.flags = 1;

@@ -12,6 +12,7 @@
  * and lbu %lo(D_801E2AD2)($at) at 0x801DE61C and 0x801DE6B4). resume: a source shape that keeps the table base out of a
  * callee-saved register and drops the frame to the retail's 0x18. */
 /* func_801DE5EC */
+/* A volatile cue pointer first differs at +0x28 and produces a 0x208-byte body instead of 0x240. */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_FishAppear(void) {
     s16 limit;

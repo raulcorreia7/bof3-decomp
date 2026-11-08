@@ -28,7 +28,7 @@ MATCH s32 Logo_DrawFrame(void) { /* func_801CEA98 */
     D_801EB468   = size;
     DecDCTReset(1);
     DecDCTin(((u_long**)&D_801EB44C)[D_801EB458], 1);
-    DecDCTout(D_801EB444, 0xB40);
+    DecDCTout(D_801EB444, 2880);
     next       = (D_801EB458 == 0);
     next_buf   = ((u_long**)&D_801EB44C)[next];
     D_801EB458 = next;
@@ -73,7 +73,7 @@ MATCH void Logo_DecodeSlice(void) { /* func_801CECA4 */
     LoadImage(&D_801EB45C, D_801EB444);
     D_801EB45C.x += 0x18;
     if (D_801EB45C.x < 0x1E0) {
-        DecDCTout(D_801EB444, 0xB40);
+        DecDCTout(D_801EB444, 2880);
         D_801EB46C = 1;
     } else {
         D_801EB46C = 0;

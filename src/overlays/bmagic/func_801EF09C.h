@@ -9,7 +9,7 @@ MATCH void func_801EF09C(void) {
     g_Task->timer += 2;
     counter        = g_Task->unk_09 - 2;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0x10) {
+    if ((counter & BYTE_MASK) == 0x10) {
         g_Task->header.mode += 1;
     }
 }

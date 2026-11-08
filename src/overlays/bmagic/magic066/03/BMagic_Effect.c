@@ -133,7 +133,7 @@ MATCH void func_801EF930(void) {
     func_801EF984();
     temp_v1        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x80) {
+    if ((temp_v1 & BYTE_MASK) == 0x80) {
         func_801E5988();
     }
 }
