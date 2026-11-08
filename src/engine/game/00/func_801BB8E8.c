@@ -4,7 +4,7 @@ MATCH void func_801BB8E8(u8 arg_a, u8 arg_b, u8 arg_c) {
     Actor* work;
     u8     current;
 
-    work    = (Actor*)SCRATCH_WORK;
+    work    = g_Task;
     current = work->direction_08;
 
     if (current & 1) {
