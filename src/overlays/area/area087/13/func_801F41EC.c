@@ -1,3 +1,3 @@
 #include "area087_13.h"
 
-#include "overlays/area/Actor_SpawnRandomGroup.h"
+#include "overlays/area/Actor_SpawnFlock.h"

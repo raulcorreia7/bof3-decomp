@@ -11,7 +11,7 @@
 
 #define AREA_SCENE_RECORD    0xF
 
-/* Signed spawn offsets (Actor_StartWalking) as u16 words: 0x2000 and -0x2000. */
+/* Signed spawn offsets (Actor_StartFlying) as u16 words: 0x2000 and -0x2000. */
 #define SPAWN_OFFSET_FORWARD 0x2000u
 #define SPAWN_OFFSET_BACK    0xE000u
 
@@ -69,11 +69,11 @@ void func_801F3928(void);
 /* func_801F3B00 */
 void func_801F40C4(s16 x, s16 y);
 /* func_801F41BC */
-void Actor_SpawnRandomGroup(void);
+void Actor_SpawnFlock(void);
 /* func_801F42F8 */
-void Actor_StartWalking(void);
+void Actor_StartFlying(void);
 /* func_801F4528 */
-void Actor_Move(void);
+void Actor_Fly(void);
 void func_801F4610(void);
 void Area_StepStreamSetDrawMode(void);
 

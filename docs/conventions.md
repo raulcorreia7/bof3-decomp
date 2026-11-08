@@ -552,7 +552,7 @@ the `CAPCOM Mar 26 1998` build stamp), so their words are the disc labels. Order
 name: the developer labels, then the retail text and data (the player's words), then the reference
 notes, then what the code visibly does. A label whose meaning is unproven stays a tag until its
 code shows it. When the larger purpose is unknown, a name for what the code visibly does in game
-terms passes (`Actor_Move`, `Effect_CountDownTimer`). Without even that, keep the address
+terms passes (`Actor_Fly`, `Effect_CountDownTimer`). Without even that, keep the address
 name or `unk_<OFF>`: a mechanical name is worse than none, because it looks finished.
 
 Names are English. A label in romaji or shorthand becomes the English word it stands for

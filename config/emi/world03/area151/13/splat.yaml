@@ -36,7 +36,7 @@ segments:
       - [0x1434, c, Area_DrawHudBanner]
       - [0x14E4, c, func_801F40E4]
       - [0x1528, c, func_801F4128]
-      - [0x1664, c, Actor_StartWalking]
+      - [0x1664, c, Actor_StartFlying]
       - [0x1894, c, func_801F4494]
       - [0x1938, c, func_801F4538]
       - [0x197C, c, func_801F457C]

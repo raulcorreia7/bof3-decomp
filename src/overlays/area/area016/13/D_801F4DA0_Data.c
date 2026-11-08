@@ -209,9 +209,9 @@ WorldMapMarker D_801F5194[6] = {
 // clang-format on
 
 Callback D_801F51AC[3] = {
-    Actor_SpawnRandomGroup,
-    Actor_StartWalking,
-    Actor_Move,
+    Actor_SpawnFlock,
+    Actor_StartFlying,
+    Actor_Fly,
 };
 
 /* Spawn offsets selected by the work byte at +0x08. */
