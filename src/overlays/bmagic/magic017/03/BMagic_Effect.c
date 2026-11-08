@@ -23,7 +23,15 @@ MATCH void func_801EF014(void) {
 }
 
 /* hint: the eight-entry copy into a local EffectStepFuncs8 is unrolled by the candidate; first differing instruction is the addiu t0,a2,32 at +0x14 (retail runs the copy as a 16-byte loop with bne). */
-INCLUDE_ASM(func_801EF058);
+MATCH void func_801EF058(void) {
+    Magic017Steps handlers;
+
+    handlers = D_801EEC10;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+    }
+}
 
 /* blocker: work pointer reload; first diff: +0xB0 lui v1,0x1f80 (retail reloads g_Task for the unk_27 store and again before the call) against a0 held across both (candidate). */
 INCLUDE_ASM(func_801EF11C);

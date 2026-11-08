@@ -59,7 +59,13 @@ MATCH void func_801EFAD4(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EFAF4);
+MATCH void func_801EFAF4(void) {
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15, NULL);
+    GFX_AddPrim(3, 0xC);
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801EFE60, g_Task->header.step);
+    g_ScriptBank = 0x800D3800;
+}
 
 #include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
 

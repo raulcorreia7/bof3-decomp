@@ -177,6 +177,7 @@ g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the
 
 ["emi/bmagic/magic001/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic001Steps", source = "Eleven step handlers of magic001, copied to the stack and run by header.step (byte 0x02) from func_801EF01C." }
 BMagic_RunStep = { addr = 0x801EEC64, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic001 (Nue Stomp, Jump)." }
 Effect_StartPlaying = { addr = 0x801EEFA4, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
 Effect_StartPlaying_801EFA84 = { addr = 0x801EFA84, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
@@ -204,6 +205,7 @@ Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "Adv
 D_801EFE40 = { addr = 0x801EFE40, source = "Sound cue id per effect index of the magic004 effect, read by func_801EF158 with the effect's unk_04 index." }
 g_BMagicEffectModes = { addr = 0x801EFE58, source = "Handlers of magic004 (ThundrStrike), run by header.mode (byte 0x01)." }
 
+D_801EFE60 = { addr = 0x801EFE60, source = "Step handlers of magic004, run by header.step (byte 0x02) from func_801EFAF4." }
 ["emi/bmagic/magic006/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEDA4, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic006 (Mind Sword)." }
@@ -275,7 +277,7 @@ g_BMagicEffectModes = { addr = 0x801F1630, source = "Handlers of magic015 (Flyin
 
 ["emi/bmagic/magic017/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC10 = { addr = 0x801EEC10, type = "EffectStepFuncs8", source = "Step handlers of magic017 (Astral Warp, Shadowwalk), run by header.step (byte 0x02) from func_801EF058; the eight Callback slots are copied to a local table first." }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic017Steps", source = "Step handlers of magic017 (Astral Warp, Shadowwalk), run by header.step (byte 0x02) from func_801EF058; the eight Callback slots are copied to a local table first." }
 BMagic_RunStep = { addr = 0x801EEC38, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic017 (Astral Warp, Shadowwalk)." }
 Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF68, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (func_800AEF98), clears its busy flag and advances header.mode (byte 0x01) in magic017 (Astral Warp, Shadowwalk)." }
 g_BMagicEffectModes = { addr = 0x801EF990, source = "Handlers of magic017 (Astral Warp, Shadowwalk), run by header.mode (byte 0x01)." }
@@ -987,6 +989,7 @@ Effect_CountDownTimerStep_801EF42C = { addr = 0x801EF42C, type = "func", source 
 Effect_CountDownAndFinish = { addr = 0x801EF478, type = "func", source = "Counts the effect counter (byte 0x0A) down; at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic130 (Venom)." }
 g_BMagicEffectModes = { addr = 0x801EFA44, source = "Handlers of magic130 (Venom), run by header.mode (byte 0x01)." }
 
+D_801EFA5C = { addr = 0x801EFA5C, source = "Step handlers of magic130, run by header.step (byte 0x02) from func_801EF284." }
 D_801EFA6C = { addr = 0x801EFA6C, source = "Halfword table of magic130, indexed by the battler param byte 0x0B; added to the effect position unk_30 when the effect is set up." }
 ["emi/bmagic/magic131/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
