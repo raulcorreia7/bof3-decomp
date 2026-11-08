@@ -124,7 +124,8 @@ MATCH void func_801F00A0(void) {
     }
 }
 
-MATCH void func_801F00EC(void) {
+/* func_801F00EC */
+MATCH void Effect_PlayCueAtTick(void) {
     u8 count;
 
     count = g_Task->unk_09;
@@ -145,7 +146,8 @@ MATCH void func_801F014C(void) {
     }
 }
 
-MATCH void func_801F01D0(void) {
+/* func_801F01D0 */
+MATCH void Effect_PlayCueOnTimeout(void) {
     PartyMember* work;
 
     work        = g_Task;

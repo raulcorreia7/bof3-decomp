@@ -58,7 +58,8 @@ MATCH void func_801EF4AC(void) {
     func_801EF9E0();
 }
 
-MATCH void func_801EF550(void) {
+/* func_801EF550 */
+MATCH void Effect_ClearEffect(void) {
     BATTLE_ACTIVE_WORK->param.unk_0B--;
     Actor_Clear();
 }

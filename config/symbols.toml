@@ -631,6 +631,7 @@ g_BMagicEffectModes = { addr = 0x801F0488, source = "Handlers of magic076, run b
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnIdleTick = { addr = 0x801EEE84, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic078 (Leech Power)." }
 Effect_CountDownAndStep = { addr = 0x801EF0E0, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic078 (Leech Power)." }
+Effect_ApproachTarget = { addr = 0x801F014C, type = "func", source = "Moves toward the battle effect target and raises z, advancing the step when arrival is reached." }
 Effect_SetActorMatrix = { addr = 0x801F07C8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic078 (Leech Power)." }
 g_BMagicEffectModes = { addr = 0x801F0878, source = "Handlers of magic078 (Leech Power), run by header.mode (byte 0x01)." }
 
@@ -4588,6 +4589,7 @@ Area_CloseTalk = { addr = 0x801F2E44, type = "func", source = "Reactivates the s
 
 ["emi/world04/area193/13"]
 Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "Stores the message id the answer table D_801F39FC holds for the menu choice g_MessageChoice in g_MessageRequest." }
+Area_RefillWaterJugs = { addr = 0x801F2CFC, type = "func", source = "Refills the water jug to 16 on menu choice 1 and plays the item cue (area193 message choice handler)." }
 
 ["emi/world04/area196/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -4603,6 +4605,7 @@ g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Tag and mess
 ["emi/world04/area198/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F2E5C, type = "func", source = "Starts an actor script from the area table." }
+Area_FreePaletteOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
 
 ["emi/world04/area199/13"]
