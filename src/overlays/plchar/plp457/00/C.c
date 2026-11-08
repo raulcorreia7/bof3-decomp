@@ -8,9 +8,7 @@ MATCH void func_801CE404(void) {
     D_801CF900[TASK_BYTES[2]]();
 }
 
-MATCH void Char_StartTurn(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurn.h"
 
 #include "overlays/plchar/Char_RunStepScript.h"
 
@@ -22,13 +20,9 @@ MATCH void func_801CE620(void) {
     SYS_DISPATCH_TASK(D_801CF90C, 2, g_Task);
 }
 
-MATCH void Char_StartTurnMomo(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurnMomo.h"
 
-MATCH void Char_RunStepScriptMomo(void) {
-    CHAR_RUN_STEP_CASES(CHARACTER_FACING_AWAY, 0x41, CHARACTER_FACING_BACK, 0x40);
-}
+#include "overlays/plchar/Char_RunStepScriptMomo.h"
 
 MATCH void func_801CE82C(void) {
     SYS_DISPATCH_TASK(D_801CF918, 2, g_Task);
@@ -46,9 +40,7 @@ MATCH void func_801CEC1C(void) {
 
 #include "../../Char_StartNearestFacingTurn.h"
 
-MATCH void Char_RunStepScriptRyuAdult(void) {
-    CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_RunStepScriptRyuAdult.h"
 
 MATCH void func_801CEE50(void) {
     SYS_DISPATCH_TASK(D_801CF930, 2, g_Task);

@@ -34,9 +34,7 @@ MATCH void func_801CF12C(void) {
 
 #include "overlays/plchar/Char_StartTurn.h"
 
-MATCH void Char_RunStepScriptTeepo(void) {
-    CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
-}
+#include "overlays/plchar/Char_RunStepScriptTeepo.h"
 
 MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801D0318, 2, g_Task);

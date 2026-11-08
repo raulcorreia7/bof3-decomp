@@ -8,13 +8,9 @@ MATCH void func_801CE404(void) {
     D_801CF900[TASK_BYTES[2]]();
 }
 
-MATCH void Char_StartTurn(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurn.h"
 
-MATCH void Char_RunStepScriptGarr(void) {
-    CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
-}
+#include "overlays/plchar/Char_RunStepScriptGarr.h"
 
 MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801CF90C, 2, g_Task);

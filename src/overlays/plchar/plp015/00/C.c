@@ -48,10 +48,7 @@ MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801CFBB0, 2, g_Task);
 }
 
-/* This copy turns between facings 3 and 5; the image's own are the header's. */
-MATCH void Char_StartTurnMomo(void) {
-    CHAR_START_TURN(3, 5);
-}
+#include "overlays/plchar/Char_StartTurnMomo.h"
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */

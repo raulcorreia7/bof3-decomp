@@ -52,9 +52,7 @@ MATCH void func_801CF728(void) {
     SYS_DISPATCH_TASK(D_801D0888, 2, g_Task);
 }
 
-MATCH void Char_StartTurnPeco(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurnPeco.h"
 
 #include "overlays/plchar/Char_RunStepScript.h"
 

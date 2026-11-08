@@ -56,9 +56,7 @@ MATCH void func_801CF924(void) {
     SYS_DISPATCH_TASK(D_801CFFD4, 2, g_Task);
 }
 
-MATCH void Char_StartTurnMomo(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurnMomo.h"
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
