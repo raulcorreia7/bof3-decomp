@@ -120,7 +120,12 @@ MATCH void func_801EFEB8(void) {
 
 INCLUDE_ASM(func_801EFF84);
 
-INCLUDE_ASM(func_801F00A0);
+MATCH void func_801F00A0(void) {
+    if (g_Task->unk_4C->param.unk_0B == 1) {
+        g_Task->timer = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F00EC(void) {
     u8 temp_a0;
@@ -154,8 +159,17 @@ MATCH void func_801F01D0(void) {
     }
 }
 
-/* blocker: unk_4C is an s32 in PartyBattler, but retail dereferences it as a battler (byte 0xB); first diff: lw s0 0x4C is typed s32 at 0x801F024C. */
-INCLUDE_ASM(func_801F0230);
+MATCH void func_801F0230(void) {
+    PartyBattler* linked;
+
+    linked = g_Task->unk_4C;
+    func_800AF2B4(g_BattleEffectBattler, 8);
+    if (func_800AF5FC(g_BattleEffectBattler, 0x4000) != 0) {
+        linked->param.unk_0B = 2;
+        g_Task->timer        = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F02B4(void) {
     u8 timer;
