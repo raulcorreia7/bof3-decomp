@@ -30,7 +30,7 @@ MATCH void func_801EF268(void) {
 }
 
 MATCH void func_801EF270(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF2B4);

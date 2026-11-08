@@ -4,5 +4,5 @@ MATCH void func_800C2FFC(void) {
     Callback steps[3];
 
     memcpy(steps, D_800C184C, sizeof(steps));
-    steps[TASK_BYTES[2]]();
+    steps[g_Task->header.step]();
 }

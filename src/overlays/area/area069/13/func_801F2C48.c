@@ -2,7 +2,7 @@
 #include "area/spad.h"
 
 MATCH void func_801F2C48(void) {
-    TASK_BYTES[0x0A] = 0x40;
-    TASK_BYTES[0x04] = 1;
+    g_Task->unk_0A = 0x40;
+    g_Task->unk_04 = 1;
     g_Game.current->u.field.unk_122 -= 2;
 }

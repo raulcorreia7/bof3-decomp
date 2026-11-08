@@ -17,8 +17,8 @@ MATCH void Area_RequestRestartOnContextChange(void) {
                 goto tail; /* skips the arming stores: run the step only */
             }
         }
-        TASK_BYTES[0x48]    = 2;
-        TASK_BYTES[0x09]    = 8;
+        g_Task->unk_48      = 2;
+        g_Task->timer       = 8;
         g_Task->header.mode = 4;
     }
 tail:
