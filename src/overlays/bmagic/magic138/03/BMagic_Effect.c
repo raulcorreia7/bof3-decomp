@@ -51,11 +51,11 @@ MATCH void func_801EF50C(void) {
 
 /* blocker: constant register; first diff: 0x801EF554 (retail holds 0x800F0800 in v0 and g_Task in v1). */
 MATCH void func_801EF52C(void) {
-    EffectStepFuncs3 handlers;
+    Magic138Steps handlers;
 
     handlers     = D_801EEC1C;
     g_ScriptBank = 0x800F0800;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }
