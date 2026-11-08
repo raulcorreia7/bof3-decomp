@@ -118,7 +118,7 @@ def host(
         CC, "-std=gnu99", "-O1", "-w", "-DNON_MATCHING", f"-DHOST_WINDOW={request.param}u",
         f"-I{HOST}", f"-I{ROOT}/include", str(HOST / "lz77_host.c"), *map(str, UNITS), "-o", str(exe),
     ]  # fmt: skip
-    subprocess.run(cmd, check=True, capture_output=True, text=True)
+    subprocess.run(cmd, check=True, check=False, capture_output=True, text=True)
     return exe
 
 
@@ -127,7 +127,7 @@ def run_decode(host: Path, tmp_path: Path, payload: bytes) -> bytes:
     src, dst = tmp_path / "in.bin", tmp_path / "out.bin"
     src.write_bytes(payload)
     done = subprocess.run(
-        [str(host), "decode", str(src), str(dst)], capture_output=True, text=True
+        [str(host), "decode", str(src), str(dst)], check=False, capture_output=True, text=True
     )
     assert done.returncode == 0, done.stderr
     STATES.update(int(word) for word in done.stdout.split())
@@ -136,7 +136,7 @@ def run_decode(host: Path, tmp_path: Path, payload: bytes) -> bytes:
 
 def test_copy_kernel_is_a_forward_copy(host: Path) -> None:
     assert (
-        subprocess.run([str(host), "copy"], capture_output=True, text=True).returncode
+        subprocess.run([str(host), "copy"], check=False, capture_output=True, text=True).returncode
         == 0
     )
 
