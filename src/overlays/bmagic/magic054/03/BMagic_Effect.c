@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC2C(void) {
-    BattleHandlerTable4 table;
+    EffectStepFuncs4 table;
 
     table = D_801EEC04;
     SYS_DISPATCH_TASK(table.handlers, 1, g_Task);

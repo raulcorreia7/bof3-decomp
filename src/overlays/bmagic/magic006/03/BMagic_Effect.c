@@ -91,7 +91,7 @@ INCLUDE_ASM(func_801EF478);
 INCLUDE_ASM(func_801EFB6C);
 
 MATCH void func_801F0064(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC1C;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
@@ -142,7 +142,7 @@ MATCH void func_801F020C(void) {
 INCLUDE_ASM(func_801F0308);
 
 MATCH void func_801F04F4(void) {
-    BattleHandlerTable4 handlers;
+    EffectStepFuncs4 handlers;
 
     handlers = D_801EEC28;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);

@@ -9,10 +9,10 @@ extern u8  D_801EC2E4;
 /* The scratchpad base read as a halfword: the radius the range test uses. */
 extern s16 D_1F800000_HALF;
 
-extern BattleHandlerTable3 D_801EEC10;
-extern BattleHandlerTable3 D_801EEC1C;
+extern EffectStepFuncs3 D_801EEC10;
+extern EffectStepFuncs3 D_801EEC1C;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BattleEffect        D_801EFEF4[];
+extern BattleEffect     D_801EFEF4[];
 #define BMAGIC_EFFECT_SLOTS D_801EFEF4
 #define BMAGIC_EFFECT_COUNT 36
 

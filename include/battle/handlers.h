@@ -3,41 +3,65 @@
 
 #include "common/handler.h"
 
-/* The copy sizes are data reads, not model arithmetic: func_801E6AA0 takes
- * three words out of D_801D0F38 (`lw 0x0/0x4/0x8` then three `sw`), and the run
- * at D_801D0C84 holds five pointers before `+0x14` turns into 0x03020100 data.
- * D_801D0F38 itself is a longer table (twelve pointers measured before it
- * stops), so that extern types a copy, not the whole table. */
-#define BATTLE_HANDLER_TABLE3_SIZE 0x0c
-#define BATTLE_HANDLER_TABLE4_SIZE 0x10
-#define BATTLE_HANDLER_TABLE5_SIZE 0x14
-#define BATTLE_HANDLER_TABLE8_SIZE 0x20
-
 /* func_801D656C treats 0xFF as pending; battle/battle/03 passes modes 0-6. */
 typedef u8 (*BossBattleEventFunc)(u32 mode);
 
-/* Callback-table views the battle code copies and indexes: three to five
- * Callback slots. */
-typedef struct BattleHandlerTable3 {
+/* The step routines of a battle effect, run by the effect's header.mode or
+ * header.step. Retail copies the whole list to the stack before the indexed
+ * call, so each length is its own type. */
+typedef struct EffectStepFuncs3 {
     Callback handlers[3];
-} BattleHandlerTable3;
+} EffectStepFuncs3;
 
-typedef struct BattleHandlerTable4 {
+typedef struct EffectStepFuncs4 {
     Callback handlers[4];
-} BattleHandlerTable4;
+} EffectStepFuncs4;
 
-typedef struct BattleHandlerTable5 {
+typedef struct EffectStepFuncs5 {
     Callback handlers[5];
-} BattleHandlerTable5;
+} EffectStepFuncs5;
 
-typedef struct BattleHandlerTable8 {
+typedef struct EffectStepFuncs8 {
     Callback handlers[8];
-} BattleHandlerTable8;
+} EffectStepFuncs8;
 
-ASSERT_SIZE(BattleHandlerTable3, BATTLE_HANDLER_TABLE3_SIZE);
-ASSERT_SIZE(BattleHandlerTable4, BATTLE_HANDLER_TABLE4_SIZE);
-ASSERT_SIZE(BattleHandlerTable5, BATTLE_HANDLER_TABLE5_SIZE);
-ASSERT_SIZE(BattleHandlerTable8, BATTLE_HANDLER_TABLE8_SIZE);
+/* The state routines of a battle menu panel, selected by the panel's state. */
+typedef struct BattlePanelStateFuncs3 {
+    Callback handlers[3];
+} BattlePanelStateFuncs3;
+
+typedef struct BattlePanelStateFuncs4 {
+    Callback handlers[4];
+} BattlePanelStateFuncs4;
+
+typedef struct BattlePanelStateFuncs5 {
+    Callback handlers[5];
+} BattlePanelStateFuncs5;
+
+/* The mode routines of a battle menu panel, selected by the panel's mode. */
+typedef struct BattlePanelModeFuncs5 {
+    Callback handlers[5];
+} BattlePanelModeFuncs5;
+
+typedef struct BattlePanelModeFuncs6 {
+    Callback handlers[6];
+} BattlePanelModeFuncs6;
+
+/* The routines of the battle event kinds Battle_RunEvents dispatches. */
+typedef struct BattleEventFuncs {
+    Callback handlers[5];
+} BattleEventFuncs;
+
+ASSERT_SIZE(EffectStepFuncs3, 3 * sizeof(Callback));
+ASSERT_SIZE(EffectStepFuncs4, 4 * sizeof(Callback));
+ASSERT_SIZE(EffectStepFuncs5, 5 * sizeof(Callback));
+ASSERT_SIZE(EffectStepFuncs8, 8 * sizeof(Callback));
+ASSERT_SIZE(BattlePanelStateFuncs3, 3 * sizeof(Callback));
+ASSERT_SIZE(BattlePanelStateFuncs4, 4 * sizeof(Callback));
+ASSERT_SIZE(BattlePanelStateFuncs5, 5 * sizeof(Callback));
+ASSERT_SIZE(BattlePanelModeFuncs5, 5 * sizeof(Callback));
+ASSERT_SIZE(BattlePanelModeFuncs6, 6 * sizeof(Callback));
+ASSERT_SIZE(BattleEventFuncs, 5 * sizeof(Callback));
 
 void        func_800AC844(u8 entry_id);
 void        func_800AC934(u8 entry_id);

@@ -5,13 +5,13 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 /* The overlay's three entry points. @source: read:Scene_RunEffect@0x801D0C10 */
-static BattleHandlerTable3 D_801D0C04 = {
+static EffectStepFuncs3 D_801D0C04 = {
     {Scene_EffectBegin, Scene_EffectEnd, Scene_EffectRunState},
 };
 
 /* func_801D0C10 */
 MATCH void Scene_RunEffect(void) { /* func_801D0C10 */
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801D0C04;
     handlers.handlers[TASK_BYTES[1]]();

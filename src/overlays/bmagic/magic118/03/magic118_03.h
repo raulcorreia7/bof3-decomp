@@ -5,8 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable5 D_801EEC04;
-extern Callback            D_801EFCD4[];
+extern EffectStepFuncs5 D_801EEC04;
+extern Callback         D_801EFCD4[];
 
 /* func_801EF194 */
 void BMagic_DrawBurnSprites(void);

@@ -22,7 +22,7 @@ MATCH void func_801EF014(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-/* hint: the eight-entry copy into a local BattleHandlerTable8 is unrolled by the candidate; first differing instruction is the addiu t0,a2,32 at +0x14 (retail runs the copy as a 16-byte loop with bne). */
+/* hint: the eight-entry copy into a local EffectStepFuncs8 is unrolled by the candidate; first differing instruction is the addiu t0,a2,32 at +0x14 (retail runs the copy as a 16-byte loop with bne). */
 INCLUDE_ASM(func_801EF058);
 
 /* blocker: work pointer reload; first diff: +0xB0 lui v1,0x1f80 (retail reloads g_Task for the unk_27 store and again before the call) against a0 held across both (candidate). */

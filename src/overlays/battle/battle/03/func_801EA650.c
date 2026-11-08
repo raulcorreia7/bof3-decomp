@@ -1,8 +1,8 @@
 #include "battle_03.h"
 
 MATCH void func_801EA650(void) {
-    BattleHandlerTable3 handlers;
-    u8                  index;
+    BattlePanelStateFuncs3 handlers;
+    u8                     index;
 
     handlers = D_801D0FF8;
     handlers.handlers[g_MenuCurrentPanel->state]();

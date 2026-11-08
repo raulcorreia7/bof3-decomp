@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EECF0(void) {
-    BattleHandlerTable4 handlers;
+    EffectStepFuncs4 handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
@@ -26,7 +26,7 @@ MATCH void func_801EEF6C(void) {
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF058(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC14;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
@@ -47,7 +47,7 @@ MATCH void func_801EF324(void) {
 }
 
 MATCH void func_801EF384(void) {
-    BattleHandlerTable4 handlers;
+    EffectStepFuncs4 handlers;
 
     handlers = D_801EEC20;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
@@ -68,7 +68,7 @@ MATCH void Effect_StartPlaying_801EF728(void) {
 }
 
 MATCH void func_801EF75C(void) {
-    BattleHandlerTable4 handlers;
+    EffectStepFuncs4 handlers;
 
     handlers = D_801EEC30;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
@@ -91,7 +91,7 @@ MATCH void Effect_StartPlaying_801EFA40(void) {
 }
 
 MATCH void func_801EFA74(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC40;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
@@ -114,7 +114,7 @@ MATCH void Effect_StartPlaying_801EFCFC(void) {
 }
 
 MATCH void func_801EFD30(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC4C;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
@@ -262,7 +262,7 @@ MATCH void func_801F08C4(void) {
 }
 
 MATCH void func_801F0964(void) {
-    BattleHandlerTable4 handlers;
+    EffectStepFuncs4 handlers;
 
     handlers = D_801EEC84;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);

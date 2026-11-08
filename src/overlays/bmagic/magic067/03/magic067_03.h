@@ -5,10 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable5 D_801EEC04;
-extern BattleHandlerTable3 D_801EEC18;
-extern Callback            D_801F04C8[];
-extern Callback            D_801F04D8[];
+extern EffectStepFuncs5 D_801EEC04;
+extern EffectStepFuncs3 D_801EEC18;
+extern Callback         D_801F04C8[];
+extern Callback         D_801F04D8[];
 
 void func_801EF688(void);
 void func_801EF79C(void);
