@@ -48,7 +48,7 @@ MATCH void func_801EF200(void) {
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
-    if ((timer & 0xFF) == 0) {
+    if ((timer & BYTE_MASK) == 0) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = -0x80000;
         g_Task->unk_10 = -0xF0000;

@@ -61,7 +61,7 @@ INCLUDE_ASM(func_801F74E0);
 
 MATCH void func_801F757C(void) {
     func_801F8534();
-    g_Task->script_pc += rand() & 0xFF;
+    g_Task->script_pc += rand() & BYTE_MASK;
     if (g_ScriptVars[0] == 0xB) {
         g_Task->unk_5A = 0x20;
         g_Task->header.mode += 1;
@@ -197,10 +197,10 @@ MATCH void func_801F81F4(u16 arg0) {
 
     count = 0x40;
     do {
-        index = count & 0xFF;
+        index = count & BYTE_MASK;
         count -= 1;
         D_801FE9EC[index] = D_801FE9EC[index - 1];
-    } while (count & 0xFF);
+    } while (count & BYTE_MASK);
     D_801FE9EC[0] = arg0;
 }
 
@@ -531,7 +531,7 @@ MATCH void func_801FE12C(void) {
         }
         index += 1;
         item += 1;
-    } while ((index & 0xFF) < 0x20U);
+    } while ((index & BYTE_MASK) < 0x20U);
 }
 
 MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
