@@ -9,7 +9,7 @@ MATCH void SND_XaStateWaitSync(void) {
     *base = 0;
     /* Result buffer is D_80146824; aggregate layout unrecovered. */
     if (CdSync(1, (u8*)base + 8) != CdlNoIntr) {
-        g_EmiServiceState = 6;
+        g_EmiServiceState = SND_XA_STATE_PAUSE;
         *base             = 0;
     }
 }
