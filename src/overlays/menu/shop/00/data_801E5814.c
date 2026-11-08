@@ -103,8 +103,8 @@ u8 g_MenuCommandRows[][5] = {
     {0x02, 0x14, 0x16, 0x00, 0x00},
 };
 
-u8 D_801E59F0[24] = "Pwr" T_END T_END T_END "Def" T_END T_END T_END "Int" T_END T_END T_END "Agl";
+u8 g_MenuEquipCompareLabels[24] = "Pwr" T_END T_END T_END "Def" T_END T_END T_END "Int" T_END T_END T_END "Agl";
 
-u8 D_801E5A08[8] = {0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x0C, 0x00, 0x00};
+u8 g_MenuEquipSlotIcons[8] = {0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x0C, 0x00, 0x00};
 
 u8 g_MenuEquipStatLabels[20] = "Pwr" T_END T_END T_END "Def" T_END T_END T_END "Agl";
