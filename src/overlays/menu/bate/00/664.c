@@ -115,6 +115,7 @@ INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Shop_DrawEquipment.h"
 
+/* hint: x needs two homes (raw s5, sign-extended s1 after the window call) and base pointer s0 = &g_WindowStyle; frame 0x50 vs 0x38. */
 INCLUDE_ASM(func_801D31B0);
 
 #include "overlays/menu/Menu_DrawCursorFrame.h"
