@@ -1,3 +1,16 @@
 #include "area085_13.h"
 
-INCLUDE_ASM(func_801F39F4);
+MATCH void func_801F39F4(void) {
+    u8 slot;
+
+    g_Task->param.actor_slot = Actor_FindFreeSlot();
+    slot                     = g_Task->param.actor_slot;
+    if (slot != GAME_NONE) {
+        g_ActorSlots[slot].header.flags             = 1;
+        g_ActorSlots[g_Task->param.actor_slot].type = 0x47;
+        g_ActorSlots[g_Task->param.actor_slot].link = 0;
+        SND_PlayCue(0x200U);
+        return;
+    }
+    g_ScriptState->cursor -= 2;
+}
