@@ -42,7 +42,7 @@ typedef struct SaveData {
     /* 0x072 */ u8              unk_72[8];    /* holds g_SndMono at 0x79, read through volatile views */
     /* 0x07A */ u8              window_style; /* the last argument of UI_DrawWindow */
     /* 0x07B */ u8              unk_7B[0x15];
-    /* 0x090 */ Character       characters[PARTY_RECORD_COUNT];
+    /* 0x090 */ Character       characters[CHARACTER_COUNT];
     /* 0x5B0 */ u8              scene_flag_words[0xA0]; /* eight bytes per scenario */
     /* 0x650 */ u8              scene_event_flags[0x28];
     /* 0x678 */ u32             zenny;

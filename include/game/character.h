@@ -102,7 +102,7 @@ typedef enum CharacterIndex {
     CHAR_INDEX_MOMO  = 5,
     CHAR_INDEX_PECO  = 6,
     CHAR_INDEX_WHELP = 7,
-    CHAR_INDEX_COUNT = 8,
+    CHARACTER_COUNT  = 8,
 } CharacterIndex;
 
 /* Stored character id. The party-order arrays hold these values, not record
@@ -311,7 +311,7 @@ ASSERT_OFFSET(CharacterBankSection, palette_offset, 0x04);
 /* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
  * indexes it through the g_CharSlot slot of a stored character id. */
 /* D_80144968 */
-extern Character   g_Characters[PARTY_RECORD_COUNT];
+extern Character   g_Characters[CHARACTER_COUNT];
 /* D_801CB8DC */
 extern LevelGrowth g_LevelGrowth[LEVEL_GROWTH_CHARACTER_COUNT][LEVEL_GROWTH_LEVEL_COUNT];
 

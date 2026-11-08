@@ -15,7 +15,7 @@ NON_MATCHING void func_801E0F78(void) {
     u8 count;
 
     D_801E6258 = 0;
-    for (count = 0; count < PARTY_RECORD_COUNT; count++) {
+    for (count = 0; count < CHARACTER_COUNT; count++) {
         if (g_Characters[count].unk_07 & 1) {
             D_801E6264[D_801E6258++] = count;
         }
