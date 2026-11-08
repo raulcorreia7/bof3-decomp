@@ -441,6 +441,7 @@ MATCH s32 func_801FC690(void) {
 
 /* blocker: both constants need v1; first diff: li v1,30 at 0x801FC6D4. */
 INCLUDE_ASM(func_801FC6C4);
+
 INCLUDE_ASM(func_801FC704);
 
 MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {

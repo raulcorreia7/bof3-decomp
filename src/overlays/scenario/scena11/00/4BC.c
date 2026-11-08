@@ -12,12 +12,52 @@ MATCH void func_801F70BC(void) {
     g_AreaCameraRefreshCount = 2;
 }
 
-/* blocker: scratchpad base addressing; first diff: +0x00, size 0xB0 against 0x74. */
-INCLUDE_ASM(func_801F7104);
+MATCH s32 func_801F7104(void) {
+    s32 mode;
 
-INCLUDE_ASM(func_801F7178);
+    D_801481F8.x             = 0;
+    D_801481F8.y             = 0;
+    D_801481F8.z             = 0;
+    D_801481E8.x             = g_AreaCameraAngle.vx << 16;
+    D_801481E8.y             = g_AreaCameraAngle.vy << 16;
+    D_801481E8.z             = g_AreaCameraAngle.vz << 16;
+    g_AreaCameraRefreshCount = g_Task->timer;
+    mode                     = 1;
+    g_Task->header.mode      = mode;
+    return mode;
+}
 
-INCLUDE_ASM(func_801F7200);
+MATCH void func_801F7178(void) {
+    u16 angle;
+    s16 scroll;
+
+    angle                = (u16)g_AreaCameraAngle.vy;
+    scroll               = angle + 244;
+    g_AreaCameraAngle.vy = angle + 4;
+    Area_AdvanceScroll(scroll);
+    if (g_AreaCameraAngle.vy >= 241) {
+        if (g_GameStateIndex == 0) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+        }
+        g_Task->header.mode = 2;
+    }
+}
+
+MATCH void func_801F7200(void) {
+    u16 angle;
+    s16 scroll;
+
+    angle                = (u16)g_AreaCameraAngle.vy;
+    scroll               = angle + 236;
+    g_AreaCameraAngle.vy = angle - 4;
+    Area_AdvanceScroll(scroll);
+    if (g_AreaCameraAngle.vy < -240) {
+        if (g_GameStateIndex == 0) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+        }
+        g_Task->header.mode = 1;
+    }
+}
 
 MATCH void func_801F7288(void) {
     SYS_DISPATCH_BYTE(D_801FAEF0, D_80146872);
@@ -39,7 +79,35 @@ MATCH void func_801F7784(void) {
 
 INCLUDE_ASM(func_801F778C);
 
-INCLUDE_ASM(func_801F7BFC);
+MATCH void func_801F7BFC(void) {
+    u8* state;
+    s32 next;
+
+    state = &g_SceneState.step_05;
+    switch (*state) {
+        case 0:
+            if (g_GameStateIndex == 2) {
+                break;
+            }
+            next            = 1;
+            g_ScriptVars[0] = next;
+            func_801BE1B0(0);
+            *state = next;
+            break;
+        case 1:
+            if (g_ScriptVars[0] != 3) {
+                break;
+            }
+            SYS_SetFlag(g_SceneFlags, 5);
+            Game_ClearScriptActive();
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            *state                = 0;
+            g_SceneState.state_04 = 0;
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F7CC8);
 

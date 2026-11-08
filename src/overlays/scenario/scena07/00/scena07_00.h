@@ -72,6 +72,8 @@ extern u8       D_80144EB8[];
 extern u8       g_ScenePositionTable;
 /* D_801FDFA8 */
 extern Callback g_ScenePositionDispatch[];
+extern void (*D_801FDDF0[])(u8* row);
+void func_801F81D4(u8* row);
 
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
