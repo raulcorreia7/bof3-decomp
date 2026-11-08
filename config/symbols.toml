@@ -3324,6 +3324,7 @@ Area_EnterWyndiaTeleporter = { addr = 0x801F2C04, type = "func", source = "warps
 Actor_RunAreaStep = { addr = 0x801F2C30, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLinkedLightPillar = { addr = 0x801F2DA8, type = "func", source = "Draws a light pillar at the position of the actor the scratchpad link cell (byte 0x44) points to." }
 Area_DrawLightPillar = { addr = 0x801F2DF0, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world00/area037/13"]
@@ -3445,6 +3446,7 @@ Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "Sets g_Me
 Actor_RunAreaStep = { addr = 0x801F2D5C, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2E80, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F3014, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLinkedLightPillar = { addr = 0x801F3060, type = "func", source = "Draws a light pillar at the position of the actor the scratchpad link cell (byte 0x44) points to." }
 Area_DrawLightPillar = { addr = 0x801F30A8, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world01/area060/13"]

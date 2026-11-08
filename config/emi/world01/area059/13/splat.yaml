@@ -21,7 +21,7 @@ segments:
       - [0x334, c, func_801F2F34]
       - [0x3D0, c, func_801F2FD0]
       - [0x414, c, Actor_SnapToGround]
-      - [0x460, c, func_801F3060]
+      - [0x460, c, Area_DrawLinkedLightPillar]
       - [0x4A8, c, Area_DrawLightPillar]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
