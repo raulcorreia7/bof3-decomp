@@ -482,7 +482,7 @@ game name is tagged or starts with `g_` or `s_`. The only untagged names are the
 | Thing                 | Name                                                                           |
 | --------------------- | ------------------------------------------------------------------------------ |
 | Character id          | `character_id` (`CHAR_ID_*`, 11 values with forms)                             |
-| Character data        | `Character`, `g_Characters[CHAR_COUNT]`, `g_CharSlot[id]`                      |
+| Character data        | `Character`, `g_Characters[CHARACTER_COUNT]`, `g_CharSlot[id]`                 |
 | Party order           | `Party_` owns order: `g_PartyFieldOrder`, `g_PartyBattleOrder`, `g_PartyCount` |
 | Battle participants   | `Battler`; `PartyBattler`, `EnemyBattler`                                      |
 | Enemy definition      | `Enemy` (the BENEMY definition)                                                |

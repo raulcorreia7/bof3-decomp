@@ -20,15 +20,16 @@ Find the job in the table, read its reference, run its chain. Each chain ends in
 
 ## Jobs
 
-| Job                                                | Reference                          | Chain                                                                                        |
-| -------------------------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------- |
-| match a function                                   | [match](references/match.md)       | match → name (each landed function whose callers, reads or constants give evidence) → review |
-| polish matched C, twins, repeated code, a constant | [refactor](references/refactor.md) | refactor → review                                                                            |
-| names                                              | [name](references/name.md)         | name → refactor (share the twins a name unlocks) → review                                    |
-| types                                              | [refactor](references/refactor.md) | refactor → name → review                                                                     |
-| tools, build files, docs, prompts                  | [tool](references/tool.md)         | tool → review                                                                                |
-| a question about the retail bytes                  | [research](references/research.md) | research alone                                                                               |
-| a diff or landed range                             | [review](references/review.md)     | review alone                                                                                 |
+| Job                                                | Reference                                   | Chain                                                                                        |
+| -------------------------------------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| match a function                                   | [match](references/match.md)                | match → name (each landed function whose callers, reads or constants give evidence) → review |
+| polish matched C, twins, repeated code, a constant | [refactor](references/refactor.md)          | refactor → review                                                                            |
+| names                                              | [name](references/name.md)                  | name → refactor (share the twins a name unlocks) → review                                    |
+| types                                              | [refactor](references/refactor.md)          | refactor → name → review                                                                     |
+| tools, build files, docs, prompts                  | [tool](references/tool.md)                  | tool → review                                                                                |
+| a question about the retail bytes                  | [research](references/research.md)          | research alone                                                                               |
+| a diff or landed range                             | [review](references/review.md)              | review alone                                                                                 |
+| a pull request                                     | [review](references/review.md#pull-request) | review (quality pass, then pull request) alone                                               |
 
 ## Flow
 
