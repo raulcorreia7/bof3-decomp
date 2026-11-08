@@ -38,7 +38,7 @@ segments:
       - [0x13F8, c, func_801F3FF8]
       - [0x14AC, c, func_801F40AC]
       - [0x14F0, c, func_801F40F0]
-      - [0x162C, c, func_801F422C]
+      - [0x162C, c, Actor_BeginMoveByVelocity]
       - [0x185C, c, func_801F445C]
       - [0x1900, c, func_801F4500]
       - [0x1944, c, func_801F4544]

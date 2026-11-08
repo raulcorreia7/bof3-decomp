@@ -210,7 +210,7 @@ WorldMapMarker D_801F5194[6] = {
 
 Callback D_801F51AC[3] = {
     Actor_SpawnRandomGroup,
-    func_801F42F8,
+    Actor_BeginMoveByVelocity,
     Actor_MoveByVelocity,
 };
 

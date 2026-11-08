@@ -50,7 +50,7 @@ segments:
       - [0x2028, c, Area_DrawHudBanner]
       - [0x20D8, c, func_801F4CD8]
       - [0x211C, c, func_801F4D1C]
-      - [0x2258, c, func_801F4E58]
+      - [0x2258, c, Actor_BeginMoveByVelocity]
       - [0x2488, c, Actor_MoveByVelocity]
       - [0x252C, c, func_801F512C]
       - [0x2570, c, func_801F5170]

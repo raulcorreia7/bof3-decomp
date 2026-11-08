@@ -11,7 +11,7 @@
 
 #define AREA_SCENE_RECORD    0xF
 
-/* Signed spawn offsets (func_801F42F8) as u16 words: 0x2000 and -0x2000. */
+/* Signed spawn offsets (Actor_BeginMoveByVelocity) as u16 words: 0x2000 and -0x2000. */
 #define SPAWN_OFFSET_FORWARD 0x2000u
 #define SPAWN_OFFSET_BACK    0xE000u
 
@@ -70,7 +70,8 @@ void func_801F3928(void);
 void func_801F40C4(s16 x, s16 y);
 /* func_801F41BC */
 void Actor_SpawnRandomGroup(void);
-void func_801F42F8(void);
+/* func_801F42F8 */
+void Actor_BeginMoveByVelocity(void);
 /* func_801F4528 */
 void Actor_MoveByVelocity(void);
 void func_801F4610(void);

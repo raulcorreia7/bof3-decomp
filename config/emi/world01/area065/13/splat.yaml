@@ -37,7 +37,7 @@ segments:
       - [0x14FC, c, func_801F40FC]
       - [0x15B0, c, func_801F41B0]
       - [0x15F4, c, Actor_SpawnRandomGroup]
-      - [0x1730, c, func_801F4330]
+      - [0x1730, c, Actor_BeginMoveByVelocity]
       - [0x1960, c, Actor_MoveByVelocity]
       - [0x1A04, c, func_801F4604]
       - [0x1A48, c, func_801F4648]

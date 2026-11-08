@@ -37,7 +37,7 @@ segments:
       - [0x14F8, c, Area_DrawHudBanner]
       - [0x15A8, c, func_801F41A8]
       - [0x15EC, c, func_801F41EC]
-      - [0x1728, c, func_801F4328]
+      - [0x1728, c, Actor_BeginMoveByVelocity]
       - [0x1958, c, Actor_MoveByVelocity]
       - [0x19FC, c, func_801F45FC]
       - [0x1A40, c, func_801F4640]
