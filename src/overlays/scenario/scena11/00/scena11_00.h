@@ -19,4 +19,7 @@ extern Callback  D_801FAEF0[];
 extern Callback  D_801FAEFC[];
 extern SceneFunc D_801FAF24[];
 
+extern Point3DL D_801481E8;
+extern Point3DL D_801481F8;
+
 #endif

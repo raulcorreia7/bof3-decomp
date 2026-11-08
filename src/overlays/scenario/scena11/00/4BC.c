@@ -12,7 +12,20 @@ MATCH void func_801F70BC(void) {
     g_AreaCameraRefreshCount = 2;
 }
 
-INCLUDE_ASM(func_801F7104);
+MATCH s32 func_801F7104(void) {
+    s32 mode;
+
+    D_801481F8.x = 0;
+    D_801481F8.y = 0;
+    D_801481F8.z = 0;
+    D_801481E8.x = g_AreaCameraAngle.vx << 16;
+    D_801481E8.y = g_AreaCameraAngle.vy << 16;
+    D_801481E8.z = g_AreaCameraAngle.vz << 16;
+    g_AreaCameraRefreshCount = g_Task->timer;
+    mode = 1;
+    g_Task->header.mode = mode;
+    return mode;
+}
 
 INCLUDE_ASM(func_801F7178);
 
