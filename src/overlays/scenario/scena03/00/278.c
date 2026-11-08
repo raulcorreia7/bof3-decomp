@@ -458,7 +458,7 @@ MATCH s32 func_801FC5A4(void) {
     if ((D_80144EA2 & 0xF) == 0xF) {
         Game_SetScriptActive();
         g_SceneState.step_05  = 6;
-        g_SceneState.timer_06 = 0x1E;
+        g_SceneState.timer_06 = 30;
         return 1;
     }
     return 0;
