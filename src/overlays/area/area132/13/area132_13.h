@@ -15,8 +15,8 @@ extern Callback D_801F3DF8[];
 extern Callback D_801F3E00[];
 extern u8*      D_801F4A88;
 
-void func_801F37A4(s32 arg0);
-s32  func_801F3800(void);
+void func_801F37A4(u8* effect);
+u8*  func_801F3800(void);
 u8   func_801F38B0(void);
 
 #endif

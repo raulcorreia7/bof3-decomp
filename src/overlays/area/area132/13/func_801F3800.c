@@ -1,6 +1,6 @@
 #include "area132_13.h"
 
-MATCH s32 func_801F3800(void) {
+MATCH u8* func_801F3800(void) {
     u8 i;
 
     D_801F4A88 = MEM_PTR(u8, AREA_WORK);

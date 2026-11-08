@@ -20,7 +20,7 @@ MATCH bool func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach) {
             slot = fields[-7];
             if (!(func_801C7498(pos_x, pos_y, *(s32*)(fields - 4), *(s32*)(fields), probe_reach & BYTE_MASK,
                                 ENCOUNTER_ENEMIES[slot].reach) &
-                  0xFF)) {
+                  BYTE_MASK)) {
                 return 0;
             }
             fields += 0xC;

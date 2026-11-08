@@ -19,6 +19,6 @@ MATCH void func_801B31F0(void) {
         if (kind != GAME_NONE) {
             Game_DispatchScenarioRecord(&record);
         }
-        SCRATCH_WORK->header.step = 2;
+        g_Task->header.step = 2;
     }
 }

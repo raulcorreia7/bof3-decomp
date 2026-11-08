@@ -8,9 +8,9 @@ MATCH void func_801A061C(void) {
     index = 0;
 
     do {
-        entity       = (Actor*)((u8*)g_Actors + ((index & BYTE_MASK) * ACTOR_SIZE));
-        SCRATCH_WORK = entity;
-        kind         = entity->unk_06;
+        entity = (Actor*)((u8*)g_Actors + ((index & BYTE_MASK) * ACTOR_SIZE));
+        g_Task = entity;
+        kind   = entity->unk_06;
 
         if (kind >= 8 || kind == 7) {
             if (ACTOR_IN_USE(*entity)) {
