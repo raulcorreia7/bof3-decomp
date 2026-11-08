@@ -86,7 +86,8 @@ MATCH void func_801F7FC4(void) {
     SYS_DISPATCH_BYTE(D_801FE29C, D_80146872);
 }
 
-MATCH void func_801F8000(void) {
+/* func_801F8000 */
+MATCH void Scene_EnterCedarWoods(void) {
     func_801C1DF0(0);
     Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, TO_COORD(87), TO_COORD(4), FACING_LEFT);
     *D_80144E90          = 0;
@@ -336,7 +337,8 @@ MATCH s32 func_801FE0A4(void) {
     return 1;
 }
 
-MATCH void func_801FE10C(void) {
+/* func_801FE10C */
+MATCH void Scene_InitOpeningParty(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     EMI_LoadPartyArchives(CHAR_ID_RYU_PAJAMAS, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_Game.party_size                        = 0;
@@ -359,3 +361,4 @@ MATCH void Party_JoinRei(void) {
 }
 
 #include "overlays/scenario/Scene_RemoveRei.h"
+

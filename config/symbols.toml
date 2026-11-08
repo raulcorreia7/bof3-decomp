@@ -2917,6 +2917,8 @@ g_SceneFx = { addr = 0x801FCA90, source = "Func_801FC01C seeds and func_801FC3A0
 
 ["emi/scenario/scena01/00"]
 Area_ClearWorkColumn = { addr = 0x801F7AB8, type = "func", source = "Clears one byte of each row in the actor window." }
+Scene_EnterCedarWoods = { addr = 0x801F8000, type = "func", source = "requests the area change to Cedar Woods before Nue and resets scene script state in scena01" }
+Scene_InitOpeningParty = { addr = 0x801FE10C, type = "func", source = "loads Ryu pajamas, Teepo, and Rei archives and joins Ryu pajamas as the opening party in scena01" }
 Party_JoinRei = { addr = 0x801FE224, type = "func", source = "Adds Rei to the party." }
 Scene_RemoveRei = { addr = 0x801FE244, type = "func", source = "Removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 
