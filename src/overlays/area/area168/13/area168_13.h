@@ -41,6 +41,7 @@ extern s32 D_80145EC4;
 /* The payload's data after the last function; the per-state handler tables
  * start at 0xC. */
 extern u8 D_801F4B2C[];
+extern u8 D_801F4B30[];
 
 /* The game-overlay state bytes the cancel path resets. */
 #endif
