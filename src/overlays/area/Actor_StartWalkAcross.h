@@ -1,6 +1,6 @@
 /* The step after Actor_SpawnRandomGroup: gives the spawned actor a velocity from
  * its facing, backs its position off along it and selects the walk script for
- * that facing. Members: Actor_BeginMoveByVelocity in area016, 033, 045, 065, 087,
+ * that facing. Members: Actor_StartWalkAcross in area016, 033, 045, 065, 087,
  * 088, 151 and 152. Every change here must verify every member. */
 
 /* `steps` is the image's table of velocity per facing; `scripts` and `script_slots` are
@@ -8,7 +8,7 @@
  * as a member's whole body after it declares `u8** slots`, `Actor* scratch`, `u16 value`,
  * `u8* cell` and `u16 y`: an inline grows the stack frame by 16 bytes and a do/while
  * block by 8. */
-#define ACTOR_BEGIN_MOVE(steps, scripts, script_slots)                                                                 \
+#define ACTOR_START_WALK_ACROSS(steps, scripts, script_slots)                                                          \
     Area_FindSceneRecord(0x46);                                                                                        \
                                                                                                                        \
     slots             = SP_PTR(u8*, 0u);                                                                               \
