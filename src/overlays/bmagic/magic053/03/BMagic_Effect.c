@@ -73,7 +73,7 @@ MATCH void func_801EF5C0(void) {
     *state         = var_v0;
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_AreaCameraAngle.vx = -0x2AAU;
         g_Task->header.step += 1;
     }
@@ -86,7 +86,7 @@ MATCH void func_801EF674(void) {
     if (temp_v0 != 0) {
         g_Task->timer = temp_v0 - 2;
     }
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         g_Task->header.step += 1;
     }
 }

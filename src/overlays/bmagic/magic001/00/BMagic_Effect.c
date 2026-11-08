@@ -37,7 +37,7 @@ MATCH void func_801EF0E8(void) {
 }
 
 MATCH void func_801EF164(void) {
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 0);
         func_801E257C(g_BattleActiveBattler, 0xBU);
         g_Task->unk_14 = 0x100;
@@ -121,7 +121,7 @@ MATCH void func_801EF468(void) {
 }
 
 MATCH void func_801EF518(void) {
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         func_800A9820(g_BattleTargetSelector);
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
@@ -192,7 +192,7 @@ MATCH void func_801EFD28(void) {
     }
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         func_800AFC98(2, 0);
         SND_QueueSelectionFx(0x203);
         g_Task->unk_14 = 0x40;
@@ -225,7 +225,7 @@ MATCH void func_801EFE38(void) {
     }
     value2         = g_Task->unk_09 - 1;
     g_Task->unk_09 = value2;
-    if (!(value2 & 0xFF)) {
+    if (!(value2 & BYTE_MASK)) {
         g_Task->header.step += 1;
     }
 }

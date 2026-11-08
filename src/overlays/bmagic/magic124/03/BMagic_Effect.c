@@ -61,7 +61,7 @@ MATCH void func_801EF654(void) {
     g_Task->timer  = ((rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4) >> 0xC) + 0x10;
     timer          = g_Task->unk_09 - 2;
     g_Task->unk_09 = timer;
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Actor_Clear();
     }

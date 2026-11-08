@@ -222,10 +222,10 @@ MATCH void func_801F08B4(void) {
 MATCH void func_801F0A80(void) {
     u8 value;
 
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         value          = g_Task->unk_09 + 1;
         g_Task->unk_09 = value;
-        if ((value & 0xFF) >= 3U) {
+        if ((value & BYTE_MASK) >= 3U) {
             g_BattleEffectBattler->param.unk_0B += 1;
             func_801E5988();
             return;

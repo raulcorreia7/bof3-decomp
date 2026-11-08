@@ -75,7 +75,7 @@ MATCH void func_801EF078(void) {
     }
     temp_v1_2      = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v1_2;
-    if ((temp_v1_2 & 0xFF) == 0x10) {
+    if ((temp_v1_2 & BYTE_MASK) == 0x10) {
         g_Task->unk_09 = 0;
         g_Task->header.mode += 1;
     }

@@ -14,7 +14,7 @@ MATCH void func_801EEE84(void) {
 
     temp_v0       = g_Task->timer + 1;
     g_Task->timer = temp_v0;
-    if ((temp_v0 & 0xFF) >= 0x21U) {
+    if ((temp_v0 & BYTE_MASK) >= 0x21U) {
         g_Task->header.mode += 1;
         g_Task->unk_09 = 0;
     }
@@ -25,7 +25,7 @@ MATCH void func_801EEEE4(void) {
 
     temp_v0        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & 0xFF) >= 0x21U) {
+    if ((temp_v0 & BYTE_MASK) >= 0x21U) {
         g_Task->header.mode += 1;
         g_Task->unk_09 = 0;
     }
@@ -38,7 +38,7 @@ MATCH void func_801EEFFC(void) {
 
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->header.mode += 1;
         return;
     }
@@ -50,7 +50,7 @@ MATCH void func_801EF060(void) {
 
     temp_v0       = g_Task->timer - 1;
     g_Task->timer = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->header.mode += 1;
         g_Task->unk_09 = 0x40;
     }

@@ -63,7 +63,7 @@ MATCH void func_801EF884(void) {
     PopMatrix();
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->unk_09 = 0xF;
         g_Task->header.step += 1;
     }
