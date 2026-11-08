@@ -15,7 +15,7 @@ MATCH void func_801F3F80(void) {
     selection = D_801F4644[index];
     result    = func_8015CC00(3, 0, selection, x, y, g_Game.members[0].pos.z.fixed);
     if ((u8)result != GAME_NONE) {
-        work      = TASK_BYTES;
+        work      = (u8*)g_Task;
         work[0xB] = result;
     }
 }
