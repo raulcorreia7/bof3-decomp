@@ -111,5 +111,8 @@ extern AreaPartySpeed g_AreaPartySpeed[]; /* 0x80145FAC */
 /* The scenario record the overlays switch on. */
 /* D_80146870 */
 extern SceneState     g_SceneState; /* 0x80146870 */
+/* state_04 and step_05 as one halfword (step in the high byte); area085 and
+ * area105 compare the pair with one lhu. */
+#define SCENE_PROGRESS (*(u16*)&g_SceneState.state_04)
 
 #endif
