@@ -9,6 +9,9 @@
 /* The scratchpad work area is a PartyMember record in this image. */
 #define g_Task ((PartyMember*)g_Task)
 
+#include "game/enemy.h"
+#include "overlays/battle/battle.h"
+
 extern Callback D_800C1804[];
 extern u8       D_800C1DB0[];
 extern u16      D_800C1DBC[];

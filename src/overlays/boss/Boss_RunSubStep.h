@@ -5,5 +5,5 @@ MATCH void Boss_RunSubStep(void) {
     Callback steps[3];
 
     memcpy(steps, D_800C1804, sizeof(steps));
-    steps[TASK_BYTES[2]]();
+    steps[g_Task->header.step]();
 }

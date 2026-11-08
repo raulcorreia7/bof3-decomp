@@ -1,4 +1,5 @@
 #include "area049_13.h"
+#include "area/spad.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -61,7 +62,7 @@ INCLUDE_ASM(func_80117864);
 INCLUDE_ASM(func_80117900);
 
 MATCH void func_80117A30(void) {
-    SYS_DISPATCH_BYTE(D_801181AC, TASK_BYTES[0x2]);
+    SYS_DISPATCH_BYTE(D_801181AC, g_Task->header.step);
 }
 
 INCLUDE_ASM(func_80117A74);
@@ -71,7 +72,7 @@ INCLUDE_ASM(func_80117ACC);
 INCLUDE_ASM(func_80117B60);
 
 MATCH void func_80117BF4(void) {
-    SYS_DISPATCH_BYTE(D_801181B4, TASK_BYTES[0x2]);
+    SYS_DISPATCH_BYTE(D_801181B4, g_Task->header.step);
 }
 
 MATCH void func_80117C38(void) {

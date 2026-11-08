@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEEC8);
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EF010(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 /* func_801EF054 */
@@ -47,12 +47,7 @@ MATCH void func_801EF270(void) {
 
 INCLUDE_ASM(BMagic_DrawWhelpBreath);
 
-MATCH void func_801EFD20(void) {
-    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
-    g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_BYTE(D_801F0CC4, g_Task->header.step);
-    g_ScriptBank = 0x800D3800;
-}
+#include "overlays/bmagic/BMagic_RunStep.h"
 
 INCLUDE_ASM(func_801EFDD4);
 

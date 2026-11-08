@@ -1,4 +1,5 @@
 #include "boss012_16.h"
+#include "area/spad.h"
 
 MATCH void func_800C1A90(void) {
     EnemyBattler* work;
@@ -7,8 +8,8 @@ MATCH void func_800C1A90(void) {
     Battle_DefeatEnemy();
     work = g_BattleCurrentEnemy;
     work->turn.damage_flags.value |= COMBATANT_FLAG_SKIP_ACTION_STEP;
-    TASK_BYTES[0] &= ~ACTOR_FLAG_HIDDEN;
+    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     ACTOR_SET_MODE(3);
-    TASK_BYTES[2] = 0;
-    TASK_BYTES[3] = 0;
+    g_Task->header.step = 0;
+    g_Task->unk_03      = 0;
 }
