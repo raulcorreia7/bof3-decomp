@@ -42,7 +42,7 @@ MATCH void func_801D4E70(void) {
         }
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
-    func_801E162C(8, FISHING_CATCH_ROW_Y, 0xFFFF);
+    Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 0xFFFF);
     func_801D7B64();
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;

@@ -16,7 +16,7 @@ MATCH void func_801DC0CC(void) {
     offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
-    func_801E162C(8, FISHING_CATCH_ROW_Y, 0x44);
+    Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 0x44);
 
     if ((g_InputPressed & (PADLup | PADLdown)) != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));

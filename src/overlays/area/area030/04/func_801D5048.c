@@ -37,7 +37,7 @@ draw:
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X,
                      FISHING_STATE->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_RANK_Y);
-    func_801E162C(8, FISHING_STATE->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, 0xFFFF);
+    Fishing_DrawIconRow(8, FISHING_STATE->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, 0xFFFF);
     if (FISHING_STATE->step_timer_09 == 4) {
         if (FISHING_STATE->saved_index_0B == 0) {
             FISHING_STATE->handler_index_01 = 0;
