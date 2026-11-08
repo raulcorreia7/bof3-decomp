@@ -10,7 +10,7 @@ MATCH void func_800C1F24(void) {
     func_801C1254(1, 1);
     g_Task->unk_29               = 4;
     g_BattleCurrentEnemy->script = &D_800C25FC;
-    Actor_SelectScript((g_Task->facing + 4) & 0xFF);
+    Actor_SelectScript((g_Task->facing + 4) & BYTE_MASK);
     flags = &g_Battle.boss_flags;
     *flags |= 0x40;
 }

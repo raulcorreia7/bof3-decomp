@@ -23,7 +23,7 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
     dst     = (u8*)D_801459FC;
     ring    = SP_PTR(u8, 0);
     count   = rect.w * rect.h * 2;
-    for (i = 0x1ED; i >= 0; i--) {
+    for (i = 493; i >= 0; i--) {
         ring[i] = 0;
     }
     r     = 0x1EE;

@@ -52,7 +52,7 @@ MATCH void func_801EF0F0(void) {
 
     if (g_FrameCount & 1) {
         timer = g_Task->timer;
-        if (timer < 0x20U) {
+        if (timer < 32U) {
             g_Task->timer = timer + 1;
         }
     }
