@@ -20,7 +20,7 @@ extern u8 D_801F38C0[];
 /* The published field work row and the state byte the reset writes. */
 
 /* The cell lookup the selection pass runs. */
-u16  func_801F33E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+u16  func_801F33E4(s32 base, s32 arg1, s32 row, s32 mode);
 /* The selection pass this image's update entry runs. */
 void func_801F3444(void);
 
