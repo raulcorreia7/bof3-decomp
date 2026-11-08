@@ -147,6 +147,54 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     }
 }
 
+/* Whether a step to (x, y) enters the trigger band that starts at `first_row`: with the scene ready it clears
+ * the first script variable and runs script entry 0, which starts the area scene and blocks the step. */
+static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
+    if (D_80143F03 == 2 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && (u32)((x >> 16) - 70) < 3U) {
+        if ((u32)((y >> 16) - first_row) < 3U &&
+            (g_BattlePartyBattlers[0].facing == FACING_UP_LEFT || (u32)(g_BattlePartyBattlers[0].facing - 6) < 2U)) {
+            *g_ScriptVars = 0;
+            func_801BE1B0(0);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+/* Store the step the cell code under the party leader's next position selects, then run it from `steps`.
+ * A plain-block statement macro: as an inline the function is longer, and `do { } while (0)` adds an
+ * instruction. */
+#define AREA_STEP_BY_CELL_CODE(steps)                                                                     \
+    {                                                                                                     \
+        s32    x;                                                                                         \
+        s32    y;                                                                                         \
+        s32    scaled;                                                                                    \
+        Actor* scratch;                                                                                   \
+                                                                                                          \
+        scaled = g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09;                       \
+        x      = (D_80145EC4[0] + scaled) >> 16;                                                          \
+        y      = (D_80145EC8 + g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09) >> 16;  \
+                                                                                                          \
+        scratch     = g_Task;                                                                             \
+        scratch->vx = x;                                                                                  \
+        scratch->vy = y;                                                                                  \
+                                                                                                          \
+        /* The step stores re-read the work cell: the compiler must assume a call may have changed it. */ \
+        if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA1) {                                               \
+            g_Task->param.unk_0B = 1;                                                                     \
+        } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA0) {                                        \
+            g_Task->param.unk_0B = 2;                                                                     \
+        } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xAE) {                                        \
+            g_Task->param.unk_0B = 3;                                                                     \
+        } else if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {                                              \
+            g_Task->param.unk_0B = 4;                                                                     \
+        } else {                                                                                          \
+            g_Task->param.unk_0B = 0;                                                                     \
+        }                                                                                                 \
+                                                                                                          \
+        steps[g_Task->header.mode]();                                                                     \
+    }
+
 void Area_DrawHud(s16 x, s16 y);
 
 void Actor_StopMoving(void);
