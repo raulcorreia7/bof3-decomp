@@ -533,7 +533,7 @@ segments:
       - [0xCF8DC, c, Char_ApplyArmor]
       - [0xCFB3C, c, Char_ApplyAccessories]
       - [0xCFD48, c, Item_GetRecord]
-      - [0xCFE04, c, Item_GetKind]
+      - [0xCFE04, c, Item_GetIcon]
       - [0xCFEC0, c, Item_GetEquipability]
       - [0xCFF68, c, Item_GetFlags]
       - [0xD0034, c, Item_GetPower]

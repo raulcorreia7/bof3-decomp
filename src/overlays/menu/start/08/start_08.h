@@ -471,7 +471,7 @@ extern u8  g_NameEntryControlsFrame[];
 extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern s16  Char_AddStat(u16* value, s16 delta);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
-bool        func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
+bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 s32         func_801B6470(u8 arg0);
 void        func_801C1254(s32 ability_id, s32 save_slot);
 /* The start overlay's handler tables call these functions. */
@@ -598,7 +598,7 @@ extern s32  Start_DrawNameEntryControls(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
 extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
-s32         func_801E8C9C(u8 save_slot, u8 record_kind, u8 record_value);
+s32         func_801E8C9C(u8 save_slot, u8 item_id, u8 record_value);
 void        func_801E8D58(void);
 /* func_801E8D60 */
 void        Menu_CharacterPanel(void);
@@ -846,8 +846,7 @@ extern u8              g_MenuFormationFrameMiddle[];
 extern u8              g_MenuFormationFrameRight[];
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
-                   s32 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 
