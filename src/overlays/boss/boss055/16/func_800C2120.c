@@ -2,5 +2,5 @@
 
 MATCH void func_800C2120(void) {
     func_801E3160();
-    TASK_BYTES[2]++;
+    g_Task->header.step++;
 }

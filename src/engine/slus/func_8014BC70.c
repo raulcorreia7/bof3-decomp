@@ -197,7 +197,7 @@ NON_MATCHING void func_8014BC70(void) {
                                 entry = (u8*)D_80147D08[i].work;
                                 TASK_SET(entry);
                                 CatPrim(D_801459D0[entry[0x29]], D_80147D08[i].primitive);
-                                D_801459D0[TASK_BYTES[0x29]] = (u32*)D_80147D08[i].primitive;
+                                D_801459D0[g_Task->draw_layer] = (u32*)D_80147D08[i].primitive;
                             }
                         }
                         i = (s8)(i + 1);
