@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_80198CAC(void) {
+/* func_80198CAC */
+MATCH void Game_UpdateClock(void) {
     GameClock* clock;
     GameClock* timer1;
     GameClock* timer2;

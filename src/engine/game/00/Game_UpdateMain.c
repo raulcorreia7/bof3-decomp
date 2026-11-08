@@ -19,7 +19,7 @@ MATCH void Game_UpdateMain(void) {
     while (1) {
         callbacks = g_GameStates;
         callbacks[GAME_SEL_STATE->state]();
-        func_80198CAC();
+        Game_UpdateClock();
         CallbackWait(1u);
     }
 }

@@ -602,7 +602,8 @@ void    func_80198B44(void);
 void    func_80198B6C(void);
 void    func_80198BC4(u32 wait_steps);
 void    func_80198C38(u8 wait_steps);
-void    func_80198CAC(void);
+/* func_80198CAC */
+void    Game_UpdateClock(void);
 void    func_80198F1C(void);
 void    func_801990D0(void);
 void    Area_RunFrame(void);
@@ -869,7 +870,8 @@ void    func_801ADAC0(s8 actor_slot);
 s8      func_801ADC98(void);
 void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
-u8*     func_801AF270(u8 sprite_id, u8 flags);
+/* func_801AF270 */
+u8*     UI_GetSpriteRect(u8 sprite_id, u8 flags);
 void    UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool    func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
@@ -1126,7 +1128,8 @@ s32   func_801C63B0(void);
 s32   func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection);
 s32   func_801C6888(s32 entity_index);
 s32   func_801C69C8(s32 record_index);
-s32   func_801C6A7C(void);
+/* func_801C6A7C */
+s32   Area_PickEncounter(void);
 s32   func_801C6AEC(s32 candidate_id);
 s32   func_801C6BB4(void);
 s32   func_801C6DCC(void);

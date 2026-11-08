@@ -25,7 +25,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
         g_EncounterOriginX = g_AreaScrollTargetX & 0xFFFF8000;
         g_EncounterOriginY = g_AreaScrollTargetY & 0xFFFF8000;
     }
-    D_801CD8CC = ((func_801C6A7C() & BYTE_MASK) * 9) + ENCOUNTER_TABLE_BASE;
+    D_801CD8CC = ((Area_PickEncounter() & BYTE_MASK) * 9) + ENCOUNTER_TABLE_BASE;
     D_801CD8C0 = func_801C6AEC(D_801CD8CC);
     if (!(D_801CD8C0 & BYTE_MASK)) {
         return 0;
