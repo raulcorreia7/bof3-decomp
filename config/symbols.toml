@@ -3338,6 +3338,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SetCameraZOffset = { addr = 0x801F2D18, type = "func", source = "Sets g_AreaCameraOffsetZ to -0x100, the Z shift of the camera, and g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetZ = { addr = 0x801F2D38, type = "func", source = "Zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_PauseBGM = { addr = 0x801F2E9C, type = "func", source = "pauses area BGM via SND_PauseBGM(g_SndBGMId); same body pattern as area108/145" }
 
 ["emi/world01/area040/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3433,6 +3434,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world01/area057/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_SetAnswerMessage = { addr = 0x801F2C04, type = "func", source = "Stores the message id the answer table D_801F4AFC holds for the menu choice g_MessageChoice in g_MessageRequest." }
+Area_PauseBGM = { addr = 0x801F2D30, type = "func", source = "pauses area BGM via SND_PauseBGM(g_SndBGMId); same body pattern as area108/145" }
+Area_ResumeBGM = { addr = 0x801F2D58, type = "func", source = "resumes area BGM via SND_ResumeBGM(g_SndBGMId); same body pattern as area108/145" }
 
 ["emi/world01/area058/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3707,6 +3710,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world02/area103/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "resumes area BGM via SND_ResumeBGM(g_SndBGMId); same body as area145/14 step callback" }
 Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "Returns the first index 0 to 2 of D_801F5D64 whose tag equals byte 0 of a battle party row, 0xFF when none match; func_801F560C calls it." }
 
 ["emi/world02/area104/14"]
@@ -3961,6 +3965,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world03/area145/14"]
 Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Message_ShowParty = { addr = 0x801F403C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
+Area_PauseBGM = { addr = 0x801F434C, type = "func", source = "pauses area BGM via SND_PauseBGM(g_SndBGMId); step callback matching area108 Area_PauseBGM" }
+Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "resumes area BGM via SND_ResumeBGM(g_SndBGMId); step callback matching area108 Area_ResumeBGM" }
 g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area146/13"]

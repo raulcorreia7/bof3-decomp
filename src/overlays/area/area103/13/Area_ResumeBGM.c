@@ -1,6 +1,7 @@
 #include "area103_13.h"
 
-MATCH void func_801F4374(void) {
+/* func_801F4374 */
+MATCH void Area_ResumeBGM(void) {
     g_Task->pos.x.fixed      = TO_COORD(67);
     g_Task->pos.y.fixed      = TO_COORD(26);
     COORD_INT(g_Task->pos.z) = -0x100;
