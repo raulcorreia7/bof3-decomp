@@ -1,4 +1,5 @@
 #include "scena15_00.h"
+#include "shared/Area_DrawScreenTint.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -125,7 +126,9 @@ MATCH void func_801F7920(void) {
 MATCH void func_801F79BC(void) {
 }
 
-INCLUDE_ASM(func_801F79C4);
+MATCH void func_801F79C4(void) {
+    Screen_DrawTintLayer(3, (GetTPage(0, 2, 960, 0) & HALF_MASK));
+}
 
 MATCH void func_801F7AA8(void) {
     SYS_DISPATCH_TASK(D_801FE5A0, 1, g_Task);
