@@ -29,7 +29,4 @@ void func_801CEE34(s32 kind, s32 x, s32 y, s32 code);
 s32  func_801CF1A4(void);
 void func_801CF348(void);
 
-#define PLCHAR_CHECK_FACING func_801CF1A4
-#define PLCHAR_PREPARE_TURN func_801CF348
-
 #endif

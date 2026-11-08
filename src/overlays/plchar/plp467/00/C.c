@@ -36,7 +36,9 @@ MATCH void func_801CE890(void) {
     SYS_DISPATCH_TASK(D_801D03CC, 3, g_Task);
 }
 
-#include "overlays/plchar/Char_FaceFreeDirection.h"
+MATCH void Char_FaceFreeDirection(void) {
+    CHAR_FACE_FREE_DIRECTION(func_801CF3C0, func_801CF564);
+}
 
 INCLUDE_ASM(func_801CE9D4);
 

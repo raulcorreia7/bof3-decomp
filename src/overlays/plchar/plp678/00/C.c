@@ -26,7 +26,9 @@ MATCH void func_801CE674(void) {
 }
 
 /* func_801CE6B8 */
-#include "overlays/plchar/Char_FaceFreeDirection.h"
+MATCH void Char_FaceFreeDirection(void) {
+    CHAR_FACE_FREE_DIRECTION(func_801CF1A4, func_801CF348);
+}
 
 INCLUDE_ASM(func_801CE7B8);
 
