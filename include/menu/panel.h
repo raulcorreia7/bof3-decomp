@@ -272,10 +272,8 @@ static inline void MenuDrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 co
 
     icon = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(icon);
-    icon->x0   = x;
-    icon->y0   = y;
-    icon->u0   = (u8)(u * 8);
-    icon->v0   = (u8)(v * 8);
+    setXY0(icon, x, y);
+    setUV0(icon, (u8)(u * 8), (u8)(v * 8));
     icon->clut = clut;
     icon->b0   = color;
     icon->g0   = color;

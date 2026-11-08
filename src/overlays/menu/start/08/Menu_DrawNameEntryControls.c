@@ -77,13 +77,11 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
     SetSemiTrans(sprite, 0);
-    sprite->x0   = x + CONTROLS_SPRITE_X;
-    sprite->y0   = y + CONTROLS_SPRITE_Y;
-    sprite->u0   = rect[0];
-    sprite->v0   = rect[1];
-    sprite->w    = rect[2];
-    sprite->h    = rect[3];
-    sprite->clut = GetClut(CONTROLS_SPRITE_CLUT_X, CONTROLS_SPRITE_CLUT_Y);
+    setXY0(sprite, x + CONTROLS_SPRITE_X, y + CONTROLS_SPRITE_Y);
+    setUV0(sprite, rect[0], rect[1]);
+    sprite->w = rect[2];
+    sprite->h = rect[3];
+    setClut(sprite, CONTROLS_SPRITE_CLUT_X, CONTROLS_SPRITE_CLUT_Y);
     setRGB0(sprite, CONTROLS_SPRITE_SHADE, CONTROLS_SPRITE_SHADE, CONTROLS_SPRITE_SHADE);
     GFX_AddPrim(1, sizeof(SPRT));
 

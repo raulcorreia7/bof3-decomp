@@ -41,14 +41,8 @@ MATCH void Area_DrawLightPillar(s32* pos) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = last_inner.vx;
-        prim->y0 = last_inner.vy;
-        prim->x1 = last_outer.vx;
-        prim->y1 = last_outer.vy;
-        prim->x2 = inner.vx;
-        prim->y2 = inner.vy;
-        prim->x3 = outer.vx;
-        prim->y3 = outer.vy;
+        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx,
+               outer.vy);
         setRGB0(prim, shade, shade, shade);
         setRGB1(prim, shade, shade, shade);
         if ((u8)(i - 4) >= 8) {
