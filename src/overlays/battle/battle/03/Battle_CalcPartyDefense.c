@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH u32 func_801DCCB0(void) {
+/* func_801DCCB0 */
+MATCH u32 Battle_CalcPartyDefense(void) {
     u32 total;
     u32 i;
     u32 sum;

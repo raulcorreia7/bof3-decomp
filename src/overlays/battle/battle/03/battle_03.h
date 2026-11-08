@@ -741,7 +741,8 @@ u32          Battle_ApplyDamage(u8 attacker, u8 target);
 u32          func_801DC73C(s16 damage, u32 battler_index, u32 target_index);
 u32          func_801DC894(s16 damage, u8 attacker, u8 target);
 u32          Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction);
-u32          func_801DCCB0(void);
+/* func_801DCCB0 */
+u32          Battle_CalcPartyDefense(void);
 u32          func_801DCD50(u32 unused, u8 battler_index, s32 damage_value);
 void         func_801DCEF8(u32 battler_index);
 void         func_801DD08C(void);
@@ -850,7 +851,8 @@ void         Battle_UpdateEnemyActors(void);
 void         func_801E25E0(u8 arg0);
 void         func_801E2948(s8 enemy_index);
 u8           Battle_PickEnemyTarget(u8 enemy_index);
-u8           func_801E2CA4(void);
+/* func_801E2CA4 */
+u8           Battle_PickLowestHpTarget(void);
 /* bytes, caller passes a byte index, no sign extension */
 u8           func_801E2D4C(u8 slot_offset);
 u8           func_801E2D90(u8 slot_offset);

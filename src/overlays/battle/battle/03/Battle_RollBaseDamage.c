@@ -18,7 +18,7 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction) {
         s32 base = D_801EC30C;
 
         if (skip_reduction == 0)
-            damage = base - (func_801DCCB0() & HALF_MASK);
+            damage = base - (Battle_CalcPartyDefense() & HALF_MASK);
         else
             damage = base;
         if (damage < 0)

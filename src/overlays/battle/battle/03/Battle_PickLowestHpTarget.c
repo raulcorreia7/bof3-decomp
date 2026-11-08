@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH u8 func_801E2CA4(void) {
+/* func_801E2CA4 */
+MATCH u8 Battle_PickLowestHpTarget(void) {
     u8  result;
     u16 best;
     u8  slot;

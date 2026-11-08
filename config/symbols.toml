@@ -4,6 +4,8 @@
 
 ["emi/battle/battle/03"]
 g_BGMTracks = { addr = 0x80181EB8, size = 0x294, source = "Music tracks: the BGM archive slot, SEP package and sequence of each track id." }
+Battle_CalcPartyDefense = { addr = 0x801DCCB0, type = "func", source = "Averages the party defense for the damage reduction." }
+Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Returns the selectable battler with the lowest hp." }
 s_BattleBattlerTemplateTails = { addr = 0x801EC048, alias = true, source = "row 0 turn.action_flags of s_BattleBattlerTemplates (+0x128); the tail global folded into the PartyMember rows in #503" }
 g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it; the turn_order member of g_Battle.", alias = true }
 g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back; the turn_cursor member of g_Battle.", alias = true }
