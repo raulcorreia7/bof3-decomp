@@ -43,8 +43,6 @@ void Area_Update(void);
 extern WorldMapMarker D_801F54C0[6];
 #define AREA_HUD_MASK_TABLE D_801F54C0
 
-#include "overlays/area/World_UpdateCloudLayer.h"
-
-extern WorldCloudTexture g_WorldCloudTexture;
+#include "overlays/area/world_cloud.h"
 
 #endif

@@ -1,5 +1,3 @@
 #include "area152_13.h"
 
-MATCH void World_UpdateClouds(void) {
-    WORLD_UPDATE_CLOUD_LAYER(g_WorldCloudTexture);
-}
+#include "overlays/area/World_UpdateClouds.h"

@@ -37,8 +37,6 @@ void Area_Update(void);
 
 /* The value of area update step in the shared Area_Update body. */
 
-#include "overlays/area/World_UpdateCloudLayer.h"
-
-extern WorldCloudTexture g_WorldCloudTexture;
+#include "overlays/area/world_cloud.h"
 
 #endif

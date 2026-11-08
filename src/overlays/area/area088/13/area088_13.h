@@ -58,8 +58,6 @@ void func_801F3258(u8* window);
 
 extern u8 D_801F6171[];
 
-#include "overlays/area/World_UpdateCloudLayer.h"
-
-extern WorldCloudTexture g_WorldCloudTexture;
+#include "overlays/area/world_cloud.h"
 
 #endif
