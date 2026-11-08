@@ -74,8 +74,17 @@ MATCH void func_801EF8CC(void) {
 
 INCLUDE_ASM(func_801EF9F0);
 
-#define BMAGIC_DARK_RING_SHADE (s8) g_Task->unk_5D
 #include "overlays/bmagic/BMagic_DrawDarkRing.h"
+
+/* func_801EFC40 */
+MATCH void BMagic_DrawDarkRing(void) {
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
+    GFX_AddPrim(5, 0xC);
+    D_1F800000.view.effect.params[0] = g_Task->param.unk_0B;
+    D_1F800000.view.effect.params[1] = g_Task->param.unk_0B * 2;
+    D_1F800000.view.effect.params[5] = (s8)g_Task->unk_5D * 4;
+    BMAGIC_DRAW_DARK_RING_QUADS(5, 5);
+}
 
 MATCH void func_801EFF60(void) {
     SYS_DISPATCH_TASK(D_801F0700, 1, g_Task);
