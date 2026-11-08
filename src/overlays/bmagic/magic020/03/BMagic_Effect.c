@@ -120,8 +120,8 @@ MATCH void func_801EF720(void) {
     g_Task->unk_5E -= 8;
     g_Task->unk_5F -= 8;
     if ((s8)g_Task->unk_5D == -0x80) {
-        work              = g_Task;
-        source            = BATTLE_ACTIVE_WORK;
+        work   = g_Task;
+        source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
     }
@@ -160,14 +160,14 @@ MATCH void func_801EF928(void) {
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        g_Task->unk_5C    = 1;
-        g_Task->unk_5D    = -((g_Task->param.unk_0B + 1) * 0x14);
-        g_Task->unk_5E    = -((g_Task->param.unk_0B + 1) * 0x14);
-        g_Task->unk_5F    = -((g_Task->param.unk_0B + 1) * 0x14);
-        g_Task->unk_2B    = 0;
-        g_Task->unk_27    = g_BattleEffectBattler->unk_27;
-        work              = g_Task;
-        source            = BATTLE_ACTIVE_WORK;
+        g_Task->unk_5C = 1;
+        g_Task->unk_5D = -((g_Task->param.unk_0B + 1) * 0x14);
+        g_Task->unk_5E = -((g_Task->param.unk_0B + 1) * 0x14);
+        g_Task->unk_5F = -((g_Task->param.unk_0B + 1) * 0x14);
+        g_Task->unk_2B = 0;
+        g_Task->unk_27 = g_BattleEffectBattler->unk_27;
+        work           = g_Task;
+        source         = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
     }

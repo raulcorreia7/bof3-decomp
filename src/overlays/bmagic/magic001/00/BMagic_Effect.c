@@ -249,8 +249,8 @@ MATCH void func_801EFFCC(void) {
         g_Task->timer = temp_v0_2 - 2;
     }
     if ((s8)g_Task->unk_5D == -0x80) {
-        work              = g_Task;
-        source            = BATTLE_ACTIVE_WORK;
+        work   = g_Task;
+        source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
     }

@@ -95,10 +95,10 @@ MATCH void func_801D19C8(void) {
     slot = D_801D39A8;
     for (i = 0; i < EFFECT_SLOT_COUNT; slot++, i++) {
         if (slot->active == 0) {
-            slot->active        = 1;
-            slot->unk_01        = 0;
-            slot->life_02       = 0x10;
-            actor               = g_Task;
+            slot->active  = 1;
+            slot->unk_01  = 0;
+            slot->life_02 = 0x10;
+            actor         = g_Task;
             WorldPos_Copy(&slot->pos, &actor->pos);
             slot->radius_14     = 0x100;
             slot->core_shade_16 = 0x60;

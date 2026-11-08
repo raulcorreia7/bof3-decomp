@@ -18,8 +18,8 @@ MATCH void func_800AE574(void) {
         return;
     }
 
-    source              = g_BattleEffectBattler;
-    second              = (PartyBattler*)g_Task;
+    source = g_BattleEffectBattler;
+    second = (PartyBattler*)g_Task;
     WorldPos_Copy(&second->pos, &source->pos);
     func_800AF764();
 

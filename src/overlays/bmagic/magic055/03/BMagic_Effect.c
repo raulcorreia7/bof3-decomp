@@ -16,9 +16,9 @@ MATCH void func_801EECCC(void) {
     u16*          src;
     u16*          dst;
 
-    actor              = g_BattleSelectedActor;
-    g_Task->facing     = actor->facing;
-    task               = g_Task;
+    actor          = g_BattleSelectedActor;
+    g_Task->facing = actor->facing;
+    task           = g_Task;
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0, anchor = 1; i < 6; i++) {
