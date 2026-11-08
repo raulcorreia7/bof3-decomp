@@ -23,7 +23,7 @@ MATCH void func_801EEFBC(void) {
         func_8014D290();
         Effect_SetActiveActorMatrix();
         func_801EF9F0();
-        func_801EFC40();
+        BMagic_DrawDarkRing();
         PopMatrix();
     }
     g_ScriptBank = AREA_SCRIPT_BANK;
@@ -74,7 +74,8 @@ MATCH void func_801EF8CC(void) {
 
 INCLUDE_ASM(func_801EF9F0);
 
-INCLUDE_ASM(func_801EFC40);
+#define BMAGIC_DARK_RING_SHADE (s8) g_Task->unk_5D
+#include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
 MATCH void func_801EFF60(void) {
     SYS_DISPATCH_TASK(D_801F0700, 1, g_Task);

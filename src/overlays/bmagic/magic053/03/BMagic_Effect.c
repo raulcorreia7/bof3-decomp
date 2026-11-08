@@ -45,7 +45,7 @@ MATCH void func_801EF0A8(void) {
                 func_8014D290();
                 Effect_SetActiveActorMatrix();
                 func_801EF7E0();
-                func_801EFA30();
+                BMagic_DrawDarkRing();
                 PopMatrix();
             }
         }
@@ -105,7 +105,7 @@ MATCH void func_801EF6D8(void) {
 
 INCLUDE_ASM(func_801EF7E0);
 
-INCLUDE_ASM(func_801EFA30);
+#include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
 MATCH void func_801EFD50(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);

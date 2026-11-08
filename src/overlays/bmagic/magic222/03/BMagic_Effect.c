@@ -59,7 +59,7 @@ MATCH void func_801EF5A4(void) {
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF87C();
-        func_801EFACC();
+        BMagic_DrawDarkRing();
         PopMatrix();
     }
 }
@@ -97,7 +97,10 @@ MATCH void func_801EF6C8(void) {
 
 INCLUDE_ASM(func_801EF87C);
 
-INCLUDE_ASM(func_801EFACC);
+#define BMAGIC_DARK_RING_INNER g_Task->unk_14
+#define BMAGIC_DARK_RING_OUTER (g_Task->unk_14 * 2)
+#define BMAGIC_DARK_RING_SHADE g_Task->unk_09
+#include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
 MATCH void func_801EFDEC(void) {
     SYS_DISPATCH_BYTE(D_801F0D8C, g_Task->header.step);
