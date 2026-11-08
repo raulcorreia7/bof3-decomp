@@ -23,6 +23,6 @@ MATCH void func_801E19CC(s32 x, s32 y) {
         func_801E0DCC(0x31, 1, (sx + 8 + i * 8), (sy + 64));
     }
     func_801E0DCC(0x32, 1, (sx + 176), (sy + 64));
-    UI_DrawText((sx + 62), (sy + 6), 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_80010078));
-    UI_DrawText((sx + 6), (sy + 25), 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_80010082));
+    UI_DrawText((sx + 62), (sy + 6), 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_CAUTION));
+    UI_DrawText((sx + 6), (sy + 25), 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_TOO_MANY_ITEMS));
 }

@@ -10,14 +10,28 @@
 #include "game/item.h"
 #include <stdio.h>
 
-#define FISHING_STATE             ((FishingState*)g_Task)
-#define FISHING_ROW               ((Actor*)g_CurrentActor)
-#define FISHING_ENTRY(index)      (&((FishingSceneCue*)g_FishSpecies)[(index)])
+#define FISHING_STATE        ((FishingState*)g_Task)
+#define FISHING_ROW          ((Actor*)g_CurrentActor)
+#define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishSpecies)[(index)])
 
-/* The main-executable text bank at 0x80010000. D_80010000[] is its u16
- * record-offset table; the panel draws pass `0x80010000 + offset` to
- * func_8014F800, which hands it to func_8014F84C as the text record. */
-#define FISHING_TEXT_BANK         0x80010000
+/* The fishing messages: indexes into the message table the pond loads at
+ * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
+typedef enum FishingMessageId {
+    FISHING_MSG_CAUTION          = 60,
+    FISHING_MSG_FISH             = 61,
+    FISHING_MSG_RETRY            = 62,
+    FISHING_MSG_EXIT             = 63,
+    FISHING_MSG_QUIT_PROMPT      = 64,
+    FISHING_MSG_TOO_MANY_ITEMS   = 65,
+    FISHING_MSG_EQUIP_ROD_LURE   = 80,
+    FISHING_MSG_EQUIP_ROD        = 81,
+    FISHING_MSG_EQUIP_LURE       = 82,
+    FISHING_MSG_DATA_TITLE       = 96,
+    FISHING_MSG_DATA_PAGE_HINT   = 97,
+    FISHING_MSG_HOW_TO_FISH      = 111,
+    FISHING_MSG_HOW_TO_PAGE_HINT = 112,
+} FishingMessageId;
+
 #define g_CurrentActor            ((u8*)g_CurrentActor)
 
 /* The fish species the pond holds: the fish items from ITEM_JELLYFISH to ITEM_MACKEREL. */
@@ -319,20 +333,6 @@ typedef struct FishingThresholdData {
     u16 thresholds[13];
 } FishingThresholdData;
 
-extern u16                   D_80010000[];
-extern u16                   D_80010078;
-extern u16                   D_8001007A;
-extern u16                   D_8001007C;
-extern u16                   D_8001007E;
-extern u16                   D_80010080;
-extern u16                   D_80010082;
-extern u16                   D_800100A0;
-extern u16                   D_800100A2;
-extern u16                   D_800100A4;
-extern u16                   D_800100C0;
-extern u16                   D_800100C2;
-extern u16                   D_800100DE;
-extern u16                   D_800100E0;
 extern s16                   D_800396C0;
 extern s16                   D_800396FE;
 extern u8                    D_800F724C;

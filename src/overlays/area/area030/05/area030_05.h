@@ -9,6 +9,21 @@
 #include <stdio.h>
 #include "menu/draw.h"
 
+/* The fishing shop messages: indexes into the message table the pond loads at
+ * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
+typedef enum FishingShopMessageId {
+    FISHING_SHOP_MSG_CONFIRM_ALL      = 69,
+    FISHING_SHOP_MSG_CONFIRM_ITEM     = 70,
+    FISHING_SHOP_MSG_TRADE_ITEM_LABEL = 71,
+    FISHING_SHOP_MSG_NEEDED_LABEL     = 72,
+    FISHING_SHOP_MSG_OWNED_LABEL      = 73,
+    FISHING_SHOP_MSG_YES_NO           = 74,
+    FISHING_SHOP_MSG_NONE_OWNED       = 75,
+    FISHING_SHOP_MSG_NONE_EQUIPPED    = 76,
+    FISHING_SHOP_MSG_TOO_GREEDY       = 77,
+    FISHING_SHOP_MSG_QUANTITY_PROMPT  = 78,
+} FishingShopMessageId;
+
 /* Work-cost row: two cost bytes followed by two three-byte runs. */
 typedef struct AreaCost {
     u8 cost_00;

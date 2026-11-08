@@ -1,8 +1,8 @@
 #include "area030_04.h"
 
 /* Runs the area-030 command menu: cursor movement, cancel/confirm buttons, command cycling and the selected
- * page color. */
-/* nonmatching unmeasured: tried opcode@+0x0: entry pad/color selection block and the command-cycle switch do not
+ * page title. */
+/* nonmatching unmeasured: tried opcode@+0x0: entry pad/title selection block and the command-cycle switch do not
  * reproduce the retail prologue and case layout; menu logic is in place. resume: rebuild the switch as the retail case
  * 0/1/default order and re-check the pad mask split. */
 #ifdef NON_MATCHING
@@ -11,7 +11,7 @@ NON_MATCHING void func_801DC93C(void) {
     s32 row_mod;
     s32 cmd;
     s8  frame;
-    u16 color;
+    u16 message_id;
     u8  frame_now;
     u8  cursor;
     u8  next;
@@ -95,16 +95,16 @@ NON_MATCHING void func_801DC93C(void) {
             default:
                 if (row_mod != frame_now) {
                 } else {
-                    color = D_800100DE;
+                    message_id = FISHING_MSG_HOW_TO_FISH;
                 block_39:
-                    UI_DrawText(29, 20, 0, 0xFFU, color + FISHING_TEXT_BANK);
+                    UI_DrawText(29, 20, 0, 0xFFU, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
                 }
                 break;
             case 0:
-                color = D_800100A0;
+                message_id = FISHING_MSG_EQUIP_ROD_LURE;
                 goto block_39; /* shared selection join */
             case 1:
-                color = D_800100C0;
+                message_id = FISHING_MSG_DATA_TITLE;
                 goto block_39; /* shared selection join */
         }
         Menu_DrawCursorSprite((D_80144286 * 48) + 88, 46U, 0);

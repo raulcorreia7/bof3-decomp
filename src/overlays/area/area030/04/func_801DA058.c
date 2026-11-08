@@ -4,7 +4,7 @@
  * 0x50-scaled row it selects to func_801E1758 with 0x56; when that byte reaches
  * zero it sets the byte at +0x6 to 1 and increments the byte at +0x3; the frame
  * then redraws through func_801E16DC, func_801D9534 and func_8014F800 (the
- * D_80010080-based address). */
+ * quit prompt message). */
 MATCH void func_801DA058(void) {
     FISHING_STATE->step_timer_09 = (FISHING_STATE->step_timer_09 - 1);
     func_801E1758((s16)((FISHING_STATE->step_timer_09 * 0x50) + 0x6C), 0x56);
@@ -15,5 +15,6 @@ MATCH void func_801DA058(void) {
     func_801E16DC();
     func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH,
                   MENU_HEADER_HEIGHT, 0U);
-    UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 0xFFU, (u8*)(FISHING_TEXT_BANK + D_80010080));
+    UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 0xFFU,
+                MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
 }
