@@ -65,6 +65,23 @@ typedef enum EquipSlot {
 
 #define EQUIP_SLOT_COUNT 6
 
+/* The stats Char_PreviewEquip compares, in its order (not the order of Stats). */
+typedef enum EquipPreviewStat {
+    EQUIP_PREVIEW_POWER     = 0,
+    EQUIP_PREVIEW_DEFENSE   = 1,
+    EQUIP_PREVIEW_INTELLECT = 2,
+    EQUIP_PREVIEW_AGILITY   = 3,
+} EquipPreviewStat;
+
+#define EQUIP_PREVIEW_STAT_COUNT 4
+
+/* How a previewed stat compares with the current one; also its text shade. */
+typedef enum EquipPreviewChange {
+    EQUIP_PREVIEW_SAME   = 0,
+    EQUIP_PREVIEW_LOWER  = 2,
+    EQUIP_PREVIEW_HIGHER = 3,
+} EquipPreviewChange;
+
 /* Which party-order array a call reads: the walking order g_PartyFieldOrder or the
  * battle order g_PartyBattleOrder, three character ids each, 0xFF for an empty
  * position. Party_CountOrder and Party_BuildBattlers take it as their mode. */

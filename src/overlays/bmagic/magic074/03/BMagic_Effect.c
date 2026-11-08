@@ -69,7 +69,7 @@ MATCH void func_801EF754(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF850);
+#include "overlays/bmagic/Effect_LaunchSparkle.h"
 
 MATCH void func_801EFA50(void) {
     s32 wave;

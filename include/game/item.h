@@ -35,6 +35,24 @@ typedef enum ArmorType {
     ARMOR_TYPE_BODY    = 4,
 } ArmorType;
 
+/* The kind of a weapon, armor or accessory record (Item_GetKind): it selects the icon the item list draws. Armor
+ * records hold their ArmorType; accessory kinds 10 and 11 are the fishing lures and rods, which no equipment slot
+ * holds. No record has kind ITEM_KIND_UNUSED. */
+typedef enum ItemKind {
+    ITEM_KIND_ITEM         = 0,
+    ITEM_KIND_WEAPON       = 1,
+    ITEM_KIND_SHIELD       = ARMOR_TYPE_SHIELD,
+    ITEM_KIND_HELMET       = ARMOR_TYPE_HELMET,
+    ITEM_KIND_ARMOR        = ARMOR_TYPE_BODY,
+    ITEM_KIND_ACCESSORY    = 5,
+    ITEM_KIND_FISHING_LURE = 10,
+    ITEM_KIND_FISHING_ROD  = 11,
+    ITEM_KIND_UNUSED       = 12,
+} ItemKind;
+
+/* The equipment slot that holds an item of kind ITEM_KIND_WEAPON..ITEM_KIND_ACCESSORY. */
+#define EQUIP_SLOT_OF_KIND(kind) ((kind) - 1)
+
 /* The armor type that fits equipment slot EQUIP_SLOT_SHIELD..EQUIP_SLOT_ARMOR. */
 #define ARMOR_TYPE_OF_SLOT(slot) ((slot) + 1)
 
