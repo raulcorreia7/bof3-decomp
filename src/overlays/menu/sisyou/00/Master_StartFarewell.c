@@ -1,6 +1,7 @@
 #include "sisyou_00.h"
 
-MATCH void func_801D2B64(void) {
+/* func_801D2B64 */
+MATCH void Master_StartFarewell(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state == 2) {

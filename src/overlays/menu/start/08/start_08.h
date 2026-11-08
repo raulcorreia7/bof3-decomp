@@ -569,7 +569,8 @@ void        func_801E4288(void);
 void        func_801E4318(void);
 void        func_801E441C(void);
 void        func_801E45CC(void);
-void        func_801E462C(void);
+/* func_801E462C */
+void        Menu_RunCampStep(void);
 void        func_801E4670(void);
 void        func_801E46F8(void);
 void        func_801E4744(void);
