@@ -55,13 +55,7 @@ typedef enum EquipStatRow {
 } EquipStatRow;
 
 /* The most bytes of a text record UI_DrawText draws. */
-#define TEXT_LENGTH_MAX 0xFF
-||||||| parent of 079bf9312 (style(menu): write the header bar geometry in decimal pixels)
-#define MENU_HEADER_X                 0x14
-#define MENU_HEADER_Y                 0x12
-#define MENU_HEADER_WIDTH             0x118
-#define MENU_HEADER_HEIGHT            0x13
-#define MENU_HEADER_SHORT_WIDTH       0x48
+#define TEXT_LENGTH_MAX               0xFF
 
 /* Sizes of the framed windows the menu overlays draw with UI_DrawWindow. */
 #define MENU_CHARACTER_WINDOW_WIDTH   125
@@ -99,12 +93,12 @@ typedef enum EquipStatRow {
 #define MESSAGE_NONE                  0xFFFF
 #define MESSAGE_REQUEST_CLEAR()       (g_MessageRequest = MESSAGE_NONE)
 
-    /* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
+/* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
  * while no answer is selected, nonzero once the player picks one. */
-    /* An alias byte of g_MessageWindow.selection_index: the area overlays read it as a plain byte, and the
+/* An alias byte of g_MessageWindow.selection_index: the area overlays read it as a plain byte, and the
  * member access changes their code. */
-    /* D_801490C7 */
-    extern s8 g_MessageChoice;
+/* D_801490C7 */
+extern s8 g_MessageChoice;
 #define MENU_SELECTION_IDLE()  (g_MessageChoice == 0)
 #define MENU_SELECTION_ARMED() (g_MessageChoice != 0)
 
