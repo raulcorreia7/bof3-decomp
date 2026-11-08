@@ -9,7 +9,7 @@ MATCH void func_801D23E4(void) {
     u8* cursor;
     u8* step;
 
-    selection  = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
+    selection  = Item_GetIcon(g_ShopItemCategory, g_ShopItemId);
     index      = selection;
     D_80148624 = 1;
     D_80148628 = D_8014840C + 6;

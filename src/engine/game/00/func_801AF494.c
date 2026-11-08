@@ -1,19 +1,19 @@
 #include "game_00.h"
 
-MATCH bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index) {
+MATCH bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id) {
     u8 index;
 
-    if (record_index == 0) {
+    if (item_id == 0) {
         return false;
     }
-    switch (predicate_kind) {
+    switch (test) {
         case 0:
             return true;
         case 1:
-            if (record_kind != 0) {
+            if (category != ITEM_CAT_ITEM) {
                 return false;
             }
-            index = record_index;
+            index = item_id;
             if ((g_Items[index].flags & 1) == 0) {
                 return false;
             }
@@ -26,19 +26,19 @@ MATCH bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 re
             }
             return false;
         case 2:
-            if (Item_GetFlags(record_kind, record_index) & 2) {
+            if (Item_GetFlags(category, item_id) & 2) {
                 /* record bit 1 set */
                 goto ret1;
             }
             return false;
         case 3:
-            if ((Item_GetFlags(record_kind, record_index) & 8) == 0) {
+            if ((Item_GetFlags(category, item_id) & 8) == 0) {
                 /* record bit 3 clear */
                 goto ret1;
             }
             return false;
         case 4:
-            if (((Item_GetEquipability(record_kind, record_index) & BYTE_MASK) >> record_bit) & 1) {
+            if (((Item_GetEquipability(category, item_id) & BYTE_MASK) >> character_id) & 1) {
                 /* selected record bit set */
                 goto ret1;
             }

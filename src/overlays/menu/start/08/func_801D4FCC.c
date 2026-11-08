@@ -15,7 +15,7 @@ MATCH void func_801D4FCC(void) {
         mirror = D_801C8950[group];
         for (j = 0; j < INV_SLOTS_PER_CATEGORY - 1 - i; ids++, mirror++, j++) {
             if (ids[0] != 0 && ids[1] != 0) {
-                if ((u8)Item_GetKind(group, ids[0]) > (u8)Item_GetKind(group, ids[1])) {
+                if ((u8)Item_GetIcon(group, ids[0]) > (u8)Item_GetIcon(group, ids[1])) {
                     Menu_SwapBytes(ids, ids + 1);
                     Menu_SwapBytes(mirror, mirror + 1);
                 }

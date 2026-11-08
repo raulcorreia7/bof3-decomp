@@ -41,7 +41,7 @@ MATCH void Shop_DrawItems(MenuListPanel* panel) {
         group    = entry[1];
         item     = entry[2];
         price    = Shop_ApplyPercent(Item_GetPrice(group, item), panel->source.items.price_percent);
-        icon     = Item_GetKind(group, item);
+        icon     = Item_GetIcon(group, item);
         resource = Item_GetRecord(group, item);
         if (panel->source.items.dimmed != 0 || g_Zenny < price) {
             color = MENU_SHADE_DIM;
