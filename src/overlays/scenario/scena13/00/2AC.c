@@ -45,10 +45,10 @@ MATCH void func_801F6FD0(void) {
     func_801F70DC();
 }
 
-#include "overlays/area/Screen_DrawTint.h"
+#include "shared/Screen_DrawTint.h"
 
 MATCH void Screen_DrawTint(void) {
-    Screen_DrawTintLayer(5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF));
+    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & 0xFFFF));
 }
 
 MATCH void func_801F70DC(void) {
@@ -122,7 +122,7 @@ MATCH void func_801F7444(void) {
 }
 
 MATCH void func_801F7484(void) {
-    Screen_DrawTintLayer(5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF));
+    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & 0xFFFF));
 }
 
 MATCH void func_801F7568(void) {

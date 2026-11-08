@@ -67,7 +67,7 @@ MATCH s32 Start_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     top  = y;
 
     /* The window. */
-    GFX_AddDitheredDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     UI_DrawWindow(x + CONTROLS_WINDOW_INSET, y + CONTROLS_WINDOW_INSET, CONTROLS_WINDOW_WIDTH, CONTROLS_WINDOW_HEIGHT,
                   0, g_WindowStyle);
 

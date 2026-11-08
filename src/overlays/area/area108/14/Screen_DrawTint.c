@@ -1,7 +1,7 @@
 #include "area108_14.h"
 
-#include "overlays/area/Screen_DrawTint.h"
+#include "shared/Screen_DrawTint.h"
 
 MATCH void Screen_DrawTint(void) {
-    Screen_DrawTintLayer(5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF));
+    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & 0xFFFF));
 }

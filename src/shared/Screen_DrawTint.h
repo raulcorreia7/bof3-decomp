@@ -4,8 +4,7 @@ static inline void Screen_DrawTintLayer(u32 layer, s32 tpage) {
     TILE* tile;
     u8    blue;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
-    GFX_AddPrim(layer, 0xCU);
+    GFX_AddDitheredDrawMode(layer, tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     tile->r0 = g_Task->tint.bytes.unk_5D;
@@ -18,5 +17,5 @@ static inline void Screen_DrawTintLayer(u32 layer, s32 tpage) {
     tile->b0 = blue;
     SetSemiTrans(tile, 1);
     SetShadeTex(tile, 0);
-    GFX_AddPrim(layer, 0x10U);
+    GFX_AddPrim(layer, sizeof(TILE));
 }
