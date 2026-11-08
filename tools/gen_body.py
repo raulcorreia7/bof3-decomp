@@ -13,7 +13,7 @@ Shapes (`shapes` prints the counts):
                  constant stores to named globals between them
     store-seq    no call; constant stores to named globals only
     spad         straight-line code through the work pointer at 0x1F800044, no branch
-    dispatch     one table call through `jalr`
+    dispatch     one table call through `jalr` (a body is not written: SKIP)
     straight     other branch-free code
     branch       everything else
 
@@ -380,31 +380,110 @@ class Tree:
                 return m.group(1)
         return None
 
-    def members(self, type_name: str, files: list[str]) -> dict[int, tuple[str, int]]:
-        """Return ``{offset: (member, width)}`` of a struct whose members carry their offset."""
-        for name in files + [n for n in tracked_headers(self.root) if n not in files]:
-            m = re.search(
-                r"typedef struct \w*\s*\{(.*?)\}\s*" + type_name + r"\s*;",
-                self.read(name),
-                re.S,
-            )
-            if m:
-                return self.parse(m.group(1), files)
-        return {}
+    def members(
+        self, type_name: str, files: list[str]
+    ) -> dict[int, list[tuple[str, int]]]:
+        """Return ``{offset: [(member path, width)]}`` of a work struct.
 
-    def parse(self, body: str, files: list[str]) -> dict[int, tuple[str, int]]:
-        out = {}
-        for line in body.splitlines():
-            m = re.match(r"\s*(\w+)\s+(\w+)\s*;\s*(?:/\*\s*\+?(0x[0-9A-Fa-f]+))?", line)
-            if not m:
-                continue
-            typ, name, note = m.groups()
-            width = self.SCALAR.get(typ) or self.alias(typ, files)
-            off = re.search(r"_([0-9A-F]{2})$", name)
-            where = int(note, 16) if note else int(off.group(1), 16) if off else None
-            if width and where is not None:
-                out[where] = (name, width)
+        Nested structs and unions are flattened into dotted paths (``header.step``,
+        ``pos.x.fixed``), so a union offers every width it holds, first declared first.
+        """
+        found = self.flatten(type_name, files)
+        out: dict[int, list[tuple[str, int]]] = {}
+        for where, path, width in found[2] if found else []:
+            out.setdefault(where, []).append((path, width))
         return out
+
+    def aggregate(self, name: str, files: list[str]) -> tuple[str, str] | None:
+        """Return ``(struct or union, body)`` of ``typedef struct/union ... { body } name;``."""
+        for src in files + [n for n in tracked_headers(self.root) if n not in files]:
+            text = self.read(src)
+            for m in re.finditer(r"\}\s*" + re.escape(name) + r"\s*;", text):
+                depth, i = 0, m.start()
+                while i >= 0:
+                    depth += (text[i] == "}") - (text[i] == "{")
+                    if depth == 0:
+                        break
+                    i -= 1
+                head = re.search(r"typedef\s+(struct|union)\s*\w*\s*$", text[:i])
+                if head:
+                    return head.group(1), text[i + 1 : m.start()]
+        return None
+
+    def flatten(
+        self, name: str, files: list[str], seen: tuple[str, ...] = ()
+    ) -> tuple[int, int, list[tuple[int, str, int]]] | None:
+        """Return ``(size, alignment, [(offset, path, width)])`` of a named struct or union."""
+        if name in seen:
+            return None
+        for src in files + [n for n in tracked_headers(self.root) if n not in files]:
+            alias = re.search(r"typedef\s+(\w+)\s+" + name + r"\s*;", self.read(src))
+            if alias and alias.group(1) not in ("struct", "union", "enum"):
+                return self.flatten(alias.group(1), files, seen + (name,))
+        agg = self.aggregate(name, files)
+        return self.fields(*agg, files, seen + (name,)) if agg else None
+
+    def fields(
+        self, kind: str, body: str, files: list[str], seen: tuple[str, ...]
+    ) -> tuple[int, int, list[tuple[int, str, int]]] | None:
+        """Lay out one struct or union body: scalar, pointer, nested and array members."""
+        # An offset note after a member (``u8 x; /* 0x04 */``) replaces the running offset.
+        body = re.sub(
+            r";[ \t]*/\*\s*\+?(0x[0-9A-Fa-f]+)\b.*?\*/", r" @\1;", body, flags=re.S
+        )
+        body = re.sub(r"/\*.*?\*/|//[^\n]*", "", body, flags=re.S)
+        decls, depth, start = [], 0, 0
+        for i, ch in enumerate(body):
+            depth += (ch == "{") - (ch == "}")
+            if ch == ";" and depth == 0:
+                decls.append(body[start:i].strip())
+                start = i + 1
+        off, size, align, rows = 0, 0, 1, []
+        for decl in filter(None, decls):
+            at = re.search(r"\s@(0x[0-9A-Fa-f]+)$", decl)
+            decl = re.sub(r"\s@0x[0-9A-Fa-f]+$", "", decl)
+            nested = re.fullmatch(
+                r"(struct|union)\s*\w*\s*\{(.*)\}\s*(\w+)", decl, re.S
+            )
+            plain = re.fullmatch(r"(\w+)\s*(\*?)\s*(\w+)\s*(?:\[(\w+)\])?", decl)
+            if nested:
+                inner = self.fields(nested.group(1), nested.group(2), files, seen)
+                label, count = nested.group(3), 1
+            elif plain:
+                typ, star, label = plain.group(1), plain.group(2), plain.group(3)
+                count = 1 if not plain.group(4) else self.count(plain.group(4))
+                width = 4 if star else self.SCALAR.get(typ) or self.alias(typ, files)
+                inner = (
+                    (width, width, [(0, "", width)])
+                    if width
+                    else self.flatten(typ, files, seen)
+                )
+            else:
+                continue
+            if not inner or not count:
+                continue  # a type this lifter cannot size: its offsets stay unnamed
+            width, unit, parts = inner
+            top = (
+                len(seen) == 1
+            )  # offset notes and suffixes are offsets in the whole record
+            suffix = top and re.search(r"_([0-9A-F]{2})$", label)
+            note = at.group(1) if at and top else None
+            where = (
+                int(note, 16)
+                if note
+                else int(suffix.group(1), 16)
+                if suffix and kind == "struct"
+                else -(-off // unit) * unit
+                if kind == "struct"
+                else 0
+            )
+            if count == 1:
+                for o, path, w in parts:
+                    rows.append((where + o, f"{label}.{path}" if path else label, w))
+            off = where + width * count
+            size = max(size, off)
+            align = max(align, unit)
+        return -(-size // align) * align, align, rows
 
     def alias(self, typ: str, files: list[str]) -> int | None:
         for name in files + tracked_headers(self.root):
@@ -601,15 +680,22 @@ def global_text(name: str, ctx: dict, width: int) -> str:
     )
     if found:
         base, _, holder = found
-        decl = re.compile(r"\b(\w+)\s+" + re.escape(holder) + r"\s*\[")
+        decl = re.compile(r"\b(\w+)\s+" + re.escape(holder) + r"\s*(\[|;)")
         files, tree = ctx["files"], ctx["tree"]
-        kind = next(
-            (d.group(1) for f in files if (d := decl.search(tree.read(f)))), None
-        )
-        if kind and (tree.SCALAR.get(kind) or tree.alias(kind, files)) == width:
-            rel = int(m.group(1), 16) - base
-            if rel % width == 0:
-                return f"{holder}[{rel // width}]"
+        hit = next((d for f in files if (d := decl.search(tree.read(f)))), None)
+        kind, rel = hit and hit.group(1), int(m.group(1), 16) - base
+        if kind and hit.group(2) == "[":
+            if (tree.SCALAR.get(kind) or tree.alias(kind, files)) == width:
+                if rel % width == 0:
+                    return f"{holder}[{rel // width}]"
+        elif kind:
+            # A word of a record (``GameState g_Game``): write the member that sits there.
+            flat = tree.flatten(kind, files)
+            path = flat and next(
+                (p for o, p, w in flat[2] if o == rel and w == width), None
+            )
+            if path:
+                return f"{holder}.{path}"
     return name + "[0]" if ctx["tree"].declared(ctx["files"], name) == "array" else name
 
 
@@ -670,8 +756,8 @@ def element(name: str, index: tuple, width: int, ctx: dict) -> str:
 
 
 def member(offset: int, width: int, ctx: dict) -> str:
-    row = ctx["members"].get(offset)
-    if not row or row[1] != width:
+    row = next((r for r in ctx["members"].get(offset, []) if r[1] == width), None)
+    if not row:
         raise Unsupported(f"no {width}-byte member at 0x{offset:X}")
     return f"g_Task->{row[0]}"
 
@@ -816,8 +902,13 @@ def body_for(f: Func, tree: Tree, names: Names) -> tuple[str, list[tuple[str, in
         for e in lifted.events
         for s, w in names_used(e)
         if not tree.declared(files, s.removesuffix("[]"))
-        and not names.container(
-            f.image, int(s[2:10], 16) if re.match(r"D_[0-9A-F]{8}", s) else 0
+        # A word inside a record or array is written as that member or element.
+        and (
+            global_text(s, ctx, w) == s
+            if not s.endswith("[]")
+            else not names.container(
+                f.image, int(s[2:10], 16) if re.match(r"D_[0-9A-F]{8}", s) else 0
+            )
         )
     ]
     kind = "void"
@@ -914,10 +1005,9 @@ def apply(items: list[Item], tree: Tree, shared: str | None) -> list[str]:
         )
         if result.returncode:
             restore(saved)
-            tail = " | ".join(
-                x.strip()
-                for x in (result.stdout + result.stderr).strip().splitlines()[-2:]
-            )
+            lines = (result.stdout + result.stderr).strip().splitlines()
+            errors = [x for x in lines if re.search(r"\.[ch]:\d+: (?!warning)", x)]
+            tail = " | ".join(x.strip() for x in (errors or lines)[:2])
             return [f"FAIL {f.ref} {f.name}: {tail[:200]}"]
         out.append(f"EXACT {f.ref} {f.name} in {f.src}")
     return out
