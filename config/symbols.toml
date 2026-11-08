@@ -2430,6 +2430,7 @@ g_SaveSlotTimeFormat = { addr = 0x801D0DB0, source = "Format of the play time on
 g_SaveSlotTimeColon = { addr = 0x801D0DBC, source = "The colon drawn between the hours and minutes of a save slot row." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
 Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "runs the current camp substate handler and draws the area scene in the start menu" }
+Item_Revive = { addr = 0x801E8270, source = "Item effect that revives a character: sets the field or party record's HP to 1 and clears status 0x4000 through Char_ClearStatus; returns 3 when the status was cleared, else 0." }
 Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears poison status from all field party members in the start menu item effects" }
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
