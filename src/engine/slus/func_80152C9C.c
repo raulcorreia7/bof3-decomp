@@ -9,8 +9,8 @@ MATCH void func_80152C9C(void) {
     AreaCell* cell;
 
     row = g_AreaGridRowCursor;
-    for (index = 0; index < 56; index++) {
-        row  = (row == 55) ? 0 : row + 1;
+    for (index = 0; index < AREA_CELL_GRID_ROWS; index++) {
+        row  = (row == AREA_CELL_GRID_ROWS - 1) ? 0 : row + 1;
         cell = &g_AreaCells[row][g_AreaGridColCursor];
         Area_RequestCellRows(cell);
         Area_ProbeCell(index, -1, cell);

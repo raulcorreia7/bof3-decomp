@@ -13,4 +13,6 @@ typedef struct Magic138Steps {
 
 extern Magic138Steps D_801EEC10;
 
+extern EffectStepFuncs3 D_801EEC1C;
+
 #endif

@@ -11,5 +11,5 @@ MATCH void func_801F3264(void) {
         g_GameStateIndex    = GAME_REQUEST_MESSAGE;
         g_Task->header.mode = 2;
     }
-    func_801F3438();
+    Screen_DrawTint();
 }

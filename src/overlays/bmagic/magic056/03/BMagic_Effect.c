@@ -90,7 +90,15 @@ MATCH void func_801EFB38(void) {
 
 INCLUDE_ASM(func_801EFC74);
 
-INCLUDE_ASM(func_801EFF28);
+MATCH void func_801EFF28(void) {
+    Magic056Steps handlers;
+
+    handlers = D_801EEC10;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+    }
+}
 
 MATCH void func_801EFFE8(void) {
     g_Task->unk_27 = BATTLE_ACTIVE_WORK->unk_27;

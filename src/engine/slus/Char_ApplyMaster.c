@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* runs the update script selected by arg[0x1B]: each entry is an
- * (opcode, operand) pair applied to one counter slot, 0x0E ends it.
+ * (opcode, operand) pair applied to one counter slot, MASTER_MOD_END ends it.
  */
 MATCH void Char_ApplyMaster(u8* arg) {
     u8* pc;
@@ -16,52 +16,52 @@ MATCH void Char_ApplyMaster(u8* arg) {
         return;
     }
     op = *pc;
-    if ((op & BYTE_MASK) == 0x0E) {
+    if ((op & BYTE_MASK) == MASTER_MOD_END) {
         return;
     }
     val = pc + 1;
     do {
         switch (op & BYTE_MASK) {
-            case 0:
+            case RES_INDEX_FIRE:
                 Char_AddResistance(arg + 0x2B, (s8)*val);
                 break;
-            case 1:
+            case RES_INDEX_FROST:
                 Char_AddResistance(arg + 0x2C, (s8)*val);
                 break;
-            case 2:
+            case RES_INDEX_ELECTRIC:
                 Char_AddResistance(arg + 0x2D, (s8)*val);
                 break;
-            case 3:
+            case RES_INDEX_EARTH:
                 Char_AddResistance(arg + 0x2E, (s8)*val);
                 break;
-            case 4:
+            case RES_INDEX_WIND:
                 Char_AddResistance(arg + 0x2F, (s8)*val);
                 break;
-            case 5:
+            case RES_INDEX_HOLY:
                 Char_AddResistance(arg + 0x30, (s8)*val);
                 break;
-            case 6:
+            case RES_INDEX_PSIONIC:
                 Char_AddResistance(arg + 0x31, (s8)*val);
                 break;
-            case 7:
+            case RES_INDEX_STATUS:
                 Char_AddResistance(arg + 0x32, (s8)*val);
                 break;
-            case 8:
+            case RES_INDEX_DEATH:
                 Char_AddResistance(arg + 0x33, (s8)*val);
                 break;
-            case 9:
+            case MASTER_MOD_SURPRISE_CHANCE:
                 Char_AddPercent(arg + 0x34, *val);
                 break;
-            case 10:
+            case MASTER_MOD_REPRISAL_CHANCE:
                 Char_AddPercent(arg + 0x35, *val);
                 break;
-            case 11:
+            case MASTER_MOD_CRITICAL_CHANCE:
                 Char_AddPercent(arg + 0x36, *val);
                 break;
-            case 12:
+            case MASTER_MOD_EVASION:
                 Char_AddPercent(arg + 0x37, *val);
                 break;
-            case 13:
+            case MASTER_MOD_ACCURACY:
                 Char_AddPercent(arg + 0x38, *val);
                 break;
             default:
@@ -70,5 +70,5 @@ MATCH void Char_ApplyMaster(u8* arg) {
         pc += 2;
         val += 2;
         op = *pc;
-    } while ((op & BYTE_MASK) != 0x0E);
+    } while ((op & BYTE_MASK) != MASTER_MOD_END);
 }

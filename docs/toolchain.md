@@ -56,7 +56,7 @@ The game is not in this repository. Dump your own US disc (a Redump-verified CUE
 tracks); setup checks each track against [`config/disc.toml`](#disc-manifest) and never uploads it.
 
 Without a disc (`tools/setup.sh --dev --no-payloads --no-sdk`) you can edit code and docs, and run `format`,
-`format-check`, `check-tree`, `externs`, `include-asm`, `markers`, `addrs`, `check-headers`, `typeloss`, `quality` and `meson test`. You cannot build an
+`format-check`, `check-tree`, `externs`, `include-asm`, `markers`, `names`, `addrs`, `check-headers`, `typeloss`, `quality` and `meson test`. You cannot build an
 image, check bytes, read the split assembly, write the report or use `bin/rz` and `bin/coddog`:
 all of them need the extracted retail data. Matching a function needs the disc.
 

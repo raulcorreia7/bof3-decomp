@@ -19,6 +19,7 @@ extern u8       D_801F4DBC[];
 extern Callback D_801F4DC4[];
 
 void func_801F390C(void);
+void func_801F3740(void);
 
 extern Callback D_801F4DCC[];
 extern u8       D_801F4DDC[];

@@ -24,4 +24,6 @@ typedef struct Magic053Steps {
 
 extern Magic053Steps D_801EEC04;
 
+extern Callback D_801F0554[];
+
 #endif

@@ -14,7 +14,7 @@ MATCH void GFX_ResetPaletteFades(void) {
         g_PaletteFades[entry].flags = 0;
     }
 
-    for (row = 0; row < 4; row++) {
+    for (row = 0; row < PALETTE_MAP_ROWS; row++) {
         column = 0;
         map    = D_80145D54[row];
         do {

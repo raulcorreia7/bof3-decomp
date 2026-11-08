@@ -14,11 +14,11 @@ MATCH void func_80152D9C(void) {
         rotCol = g_AreaGridColCursor + 1;
     }
     rotRow = g_AreaGridRowCursor;
-    for (row = 0; row < 56; row++) {
+    for (row = 0; row < AREA_CELL_GRID_ROWS; row++) {
         rotRow = (rotRow == AREA_CELL_GRID_ROWS - 1) ? 0 : rotRow + 1;
         cell   = &g_AreaCells[rotRow][rotCol];
         Area_RequestCellRows(cell);
-        Area_ProbeCell(row, 28, cell);
+        Area_ProbeCell(row, AREA_CELL_GRID_COLS, cell);
     }
     g_AreaGridColCursor = rotCol;
     g_AreaTileOriginX++;
