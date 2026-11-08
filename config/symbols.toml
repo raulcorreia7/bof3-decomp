@@ -3011,7 +3011,7 @@ Party_RemoveGarr = { addr = 0x801FE874, type = "func", source = "Removes Garr fr
 ["emi/scenario/scena09/00"]
 Scene_ClearWorkRows = { addr = 0x801F7574, type = "func", source = "clears 32 work rows at 0x800E5000 plus the task slot offset, zeroing each row header" }
 Scene_JoinAdultNinaWithGarr = { addr = 0x801FDCF4, type = "func", source = "loads RyuAdult/NinaAdult/Garr archives, builds field battlers, joins adult Nina and reloads palettes (scena09)" }
-Scene_JoinGarrWithNina = { addr = 0x801FDD38, type = "func", source = "loads RyuAdult/NinaAdult/Garr archives, builds field battlers, joins Garr and reloads palettes (scena09)" }
+Scene_JoinGarrWithAdultNina = { addr = 0x801FDD38, type = "func", source = "loads RyuAdult/NinaAdult/Garr archives, builds field battlers, joins Garr and reloads palettes (scena09)" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FDD7C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinMomo = { addr = 0x801FDDC8, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinAdultNina = { addr = 0x801FDE0C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
@@ -3022,7 +3022,7 @@ Scene_JoinMomoWithPeco = { addr = 0x801FDF10, type = "func", source = "loads Ryu
 Scene_RebuildRyuGarrParty = { addr = 0x801FDF54, type = "func", source = "Clears the three party slots of D_80144908, keeps the last id that is neither adult Ryu (7) nor Garr (2), adult Nina (8) when none is, streams the EMI family for Ryu, Garr and that id and joins all three." }
 Scene_JoinAdultNinaWithRei = { addr = 0x801FE014, type = "func", source = "loads RyuAdult/Rei/NinaAdult archives, builds field battlers, joins adult Nina and reloads palettes (scena09)" }
 Scene_JoinReiAdultNina = { addr = 0x801FE058, type = "func", source = "loads RyuAdult/Rei/NinaAdult archives, builds field battlers, joins Rei and adult Nina, reloads palettes (scena09)" }
-Scene_JoinReiWithNina = { addr = 0x801FE0A4, type = "func", source = "loads RyuAdult/Rei/NinaAdult archives, builds field battlers, joins Rei and reloads palettes (scena09)" }
+Scene_JoinReiWithAdultNina = { addr = 0x801FE0A4, type = "func", source = "loads RyuAdult/Rei/NinaAdult archives, builds field battlers, joins Rei and reloads palettes (scena09)" }
 Scene_JoinRyuAdult = { addr = 0x801FE0E8, type = "func", source = "loads RyuAdult/Rei/NinaAdult archives, builds field battlers, joins adult Ryu and reloads palettes (scena09)" }
 Scene_RemoveRei = { addr = 0x801FE12C, type = "func", source = "Removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveReiGarr = { addr = 0x801FE154, type = "func", source = "removes Rei and Garr from the party and reloads palettes (scena09)" }

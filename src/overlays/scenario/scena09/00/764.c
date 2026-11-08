@@ -534,7 +534,7 @@ MATCH void Scene_JoinAdultNinaWithGarr(void) {
 }
 
 /* func_801FDD38 */
-MATCH void Scene_JoinGarrWithNina(void) {
+MATCH void Scene_JoinGarrWithAdultNina(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
@@ -585,7 +585,7 @@ MATCH void Scene_JoinReiAdultNina(void) {
 }
 
 /* func_801FE0A4 */
-MATCH void Scene_JoinReiWithNina(void) {
+MATCH void Scene_JoinReiWithAdultNina(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_REI);
