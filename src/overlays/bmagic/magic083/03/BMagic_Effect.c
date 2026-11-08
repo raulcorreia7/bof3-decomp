@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC04);
+#include "overlays/bmagic/func_801EEC04_2.h"
 
 INCLUDE_ASM(func_801EED04);
 
@@ -174,6 +174,7 @@ MATCH void func_801F01F8(void) {
     }
 }
 
+/* hint: 3-image twin (magic062 00EC, 082 0260, 083 038C): spiral position update; everything matches except the s16 radius cell at 0x1F800000: retail uses a separate lui per access, a cast view of D_1F800000 hoists the base into s1 (needs an s16 alias symbol for 0x1F800000, scratch draft b26-magic062.c) */
 INCLUDE_ASM(func_801F038C);
 
 INCLUDE_ASM(func_801F050C);

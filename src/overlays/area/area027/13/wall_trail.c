@@ -509,8 +509,8 @@ MATCH POLY_FT4* func_801F3480(const Point3D* point, s32 angle, u32 texture) {
     VOL(s16, quad[1].vy) = 0;
     VOL(s16, quad[3].vz) = 0;
     VOL(s16, quad[2].vz) = 0;
-    RotTransPers4(quad, quad + 1, quad + 2, quad + 3, (long*)((u8*)primitive + 8), (long*)((u8*)primitive + 0x10),
-                  (long*)((u8*)primitive + 0x18), (long*)((u8*)primitive + 0x20), &depth, &flag);
+    RotTransPers4(quad, quad + 1, quad + 2, quad + 3, (long*)&primitive->x0, (long*)&primitive->x1,
+                  (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
 
     PopMatrix();
 

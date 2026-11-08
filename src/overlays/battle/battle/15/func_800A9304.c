@@ -7,7 +7,7 @@
  * through the target's volatile g_BattleActionType makes the compiler materialize
  * the zero-extension of every byte load (`andi rX,rX,0xFF`), which retail does
  * not carry; this distinct, non-volatile symbol keeps the retail `lbu` shape.
- * FAKE: non-volatile alias of g_BattleActionType (same idiom as func_8009C8AC).
+ * FAKE: non-volatile alias of g_BattleActionType (same idiom as Battle_ActionHasElement).
  */
 
 /* Non-volatile alias for the result byte at 0x80146384, used by the slot store

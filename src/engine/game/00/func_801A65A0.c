@@ -23,11 +23,11 @@ MATCH void func_801A65A0(u8* script) {
         if (script[4] != 0) {
             coord_x |= 0x8000;
         }
-        work->pos.x.fixed       = coord_x;
-        D_80146908[*counter][0] = coord_x;
+        work->pos.x.fixed             = coord_x;
+        g_ActorWalkDestX[*counter][0] = coord_x;
         /* FAKE: barrier pins the x store before the y loads. */
         MATCH_BARRIER();
-        D_8014690C[*counter][0] = work->pos.y.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
+        g_ActorWalkDestY[*counter][0] = work->pos.y.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
         D_80146910[*counter][0]  = 0;

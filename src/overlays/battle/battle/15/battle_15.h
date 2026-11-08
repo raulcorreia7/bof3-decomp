@@ -189,17 +189,17 @@ typedef struct BattleHandlerQuad {
  * table holds four packets per enemy kind record, at the kind record's +0x34.
  *
  * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
- * (Battle_TestAICondition), its +0x01 with `lbu` and switches on it (func_8009C994),
+ * (Battle_FireEnemyEvents), its +0x01 with `lbu` and switches on it (Battle_ApplyEnemyEvent),
  * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
- * and its +0x08..+0x0F with `lbu` (func_8009C994). */
+ * and its +0x08..+0x0F with `lbu` (Battle_ApplyEnemyEvent). */
 typedef struct BattleEventPacket {
-    u8  kind;        /* +0x00 the kind Battle_TestAICondition switches on to pick the trigger test */
-    u8  effect_kind; /* +0x01 the kind func_8009C994 switches on to pick the record update */
+    u8  kind;        /* +0x00 the kind Battle_FireEnemyEvents switches on to pick the trigger test */
+    u8  effect_kind; /* +0x01 the kind Battle_ApplyEnemyEvent switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
     u8  unk_04;      /* +0x04 the byte copied to the work row's +0x7E */
     u8  pad_05;
-    s16 panel_id;  /* +0x06 the panel id; func_8009C994 stores it in the panel-owner table */
+    s16 panel_id;  /* +0x06 the panel id; Battle_ApplyEnemyEvent stores it in the panel-owner table */
     u8  unk_08[8]; /* +0x08 the eight bytes copied to the work row's +0x8C */
 } BattleEventPacket;
 
@@ -211,6 +211,41 @@ ASSERT_OFFSET(BattleEventPacket, value, 0x03);
 ASSERT_OFFSET(BattleEventPacket, unk_04, 0x04);
 ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
+
+/* What makes an event packet fire (BattleEventPacket.kind). The once-only kinds fire at most once per
+ * battle; the REPEAT kinds fire at every hit. */
+typedef enum BattleEventTrigger {
+    BATTLE_EVENT_HIT_FIRE             = 0,
+    BATTLE_EVENT_HIT_FROST            = 1,
+    BATTLE_EVENT_HIT_ELECTRIC         = 2,
+    BATTLE_EVENT_HIT_EARTH            = 3,
+    BATTLE_EVENT_HIT_WIND             = 4,
+    BATTLE_EVENT_HIT_HOLY             = 5,
+    BATTLE_EVENT_HIT_PSIONIC          = 6,
+    BATTLE_EVENT_HIT_DEATH            = 7,
+    BATTLE_EVENT_HIT_STATUS           = 8,
+    BATTLE_EVENT_HIT_BY_ABILITY       = 9,
+    BATTLE_EVENT_HIT_BY_ATTACK        = 10,
+    BATTLE_EVENT_BLINDED              = 22,
+    BATTLE_EVENT_POISONED             = 23,
+    BATTLE_EVENT_NO_DROP              = 24,
+    BATTLE_EVENT_REPEAT_HIT_FIRE      = 33,
+    BATTLE_EVENT_REPEAT_HIT_FROST     = 34,
+    BATTLE_EVENT_REPEAT_HIT_ELECTRIC  = 35,
+    BATTLE_EVENT_REPEAT_HIT_BY_ATTACK = 36,
+    BATTLE_EVENT_LETHAL_HIT           = 37,
+} BattleEventTrigger;
+
+/* The enemy record of the encounter block from its event packets (+0x34) on: ENEMY_AI_COUNT packets, then the rest of
+ * the Enemy record. The address view of the cell that Enemy.ai covers; retail addresses it as a constant. */
+typedef struct BattleEnemyEvents {
+    BattleEventPacket packets[ENEMY_AI_COUNT];
+    u8                unk_40[ENEMY_STRIDE - ENEMY_AI_COUNT * sizeof(BattleEventPacket)];
+} BattleEnemyEvents;
+
+ASSERT_SIZE(BattleEnemyEvents, ENEMY_STRIDE);
+
+#define BATTLE_ENEMY_EVENTS MEM_PTR(BattleEnemyEvents, 0x800E407Cu)
 
 /* The player battler's panel record (D_80145F04, stride 0x140): the panel
  * block of the local battler row, whose +0x74 the record's address is.
@@ -619,7 +654,8 @@ void        func_8009B794(void);
 void        func_8009B828(void);
 void        func_8009B964(void);
 s32         func_8009BACC(s32 diff);
-u8          func_8009C8AC(u16 required_mask);
+/* func_8009C8AC */
+u8          Battle_ActionHasElement(u16 required_mask);
 void        func_8009CCBC(void* battler, s32 rate_type, s32 rate_percent);
 void        func_8009CF80(u8* record, s32 index, s32 new_value);
 void        func_8009CFEC(void);
@@ -814,9 +850,10 @@ void        func_80097EC0(void);
 extern void func_8009AAE8(void);
 void        func_8009B03C(void);
 void        func_8009B160(void);
-extern void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event);
-extern u8   Battle_Unk0E1BitTest(volatile EnemyBattler* enemy, s32 bit_index);
-extern void Battle_Unk0E1BitModify(EnemyBattler* enemy, s32 bit, u8 set);
+/* func_8009C994 */
+extern void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* event);
+extern u8   Battle_EnemyEventFired(volatile EnemyBattler* enemy, s32 bit_index);
+extern void Battle_SetEnemyEventFired(EnemyBattler* enemy, s32 bit, u8 set);
 extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
 s32         func_800A4FD8(void);
 s32         func_800A5D00(void);

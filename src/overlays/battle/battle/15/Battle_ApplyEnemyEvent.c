@@ -4,7 +4,8 @@
  * dispatches the per-kind record updates, then copies the packet's eight tail
  * bytes.
  */
-MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
+/* func_8009C994 */
+MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* event) {
     EnemyBattler* work;
     u8*           saved;
     u32           mask;

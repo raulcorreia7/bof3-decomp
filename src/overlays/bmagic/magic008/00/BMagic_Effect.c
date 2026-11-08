@@ -206,7 +206,15 @@ MATCH void func_801F0548(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F0568);
+MATCH void func_801F0568(void) {
+    EffectStepFuncs5 handlers;
+
+    handlers = D_801EEC70;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
 
 // hint: retail keeps the 1 constant in v1 across unk_5C/unk_2B and loads each -128 and scale constant at its own store; ours hoists them into temps.
 INCLUDE_ASM(func_801F05FC);
@@ -369,7 +377,15 @@ MATCH void func_801F1274(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F1294);
+MATCH void func_801F1294(void) {
+    BMagicStepTable7 handlers;
+
+    handlers = D_801EECAC;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 
@@ -401,7 +417,15 @@ MATCH void func_801F16E8(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F1708);
+MATCH void func_801F1708(void) {
+    BMagicStepTable10 handlers;
+
+    handlers = D_801EECC8;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
 
 MATCH void Effect_ReloadTimerAndStep_801F17BC(void) {
     BMAGIC_RELOAD_TIMER_AND_STEP();

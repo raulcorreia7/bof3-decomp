@@ -450,7 +450,7 @@ void          func_800980A8(void);
 void          func_8009834C(void);
 void          func_8009B274(void);
 /* func_8009BBE8 */
-void          Battle_TestAICondition(void);
+void          Battle_FireEnemyEvents(void);
 void          func_8009BFC4(void);
 void          func_8009D198(void);
 u16           func_800A2AE0(u8 arg0);
