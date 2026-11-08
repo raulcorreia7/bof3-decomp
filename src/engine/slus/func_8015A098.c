@@ -32,7 +32,7 @@ MATCH void func_8015A098(void) {
             cursor = UI_DrawTextAt((*(u16*)((u8*)&D_8017F960 + table_offset) + ((s16)panel->pos.x >> 4)) & HALF_MASK,
                                    (*(u16*)((u8*)&D_8017F962 + table_offset) + ((s16)panel->pos.y >> 4) +
                                     *(s16*)((u8*)&D_8017F964 + table_offset) * i) &
-                                       0xFFFF,
+                                       HALF_MASK,
                                    cursor);
             i++;
         } while (rowp->count >= i);
