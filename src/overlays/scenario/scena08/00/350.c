@@ -562,7 +562,7 @@ block_7:
 INCLUDE_ASM(func_801FE2A0);
 
 MATCH void func_801FE698(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_WHELP);
     Party_StagePalettes();
@@ -579,7 +579,7 @@ MATCH void func_801FE740(void) {
 }
 
 MATCH void func_801FE760(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_REI, 0);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
@@ -597,7 +597,7 @@ MATCH void func_801FE800(void) {
 }
 
 MATCH void func_801FE840(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0U);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0U);
     func_801FE800();
 }
 

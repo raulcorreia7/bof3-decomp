@@ -309,51 +309,51 @@ void        SND_ResumeBGM(s32 cue_id);
 /* func_80161DC8 */
 void        SND_InstallSequenceFuncs(void);
 /* func_80161F58 */
-void        EMI_LoaderInit(void);
+void        EMI_Init(void);
 /* func_80161FDC */
-void        EMI_LoaderStreamInitSlot(u32 emi_id);
+void        EMI_LoadArchive(u32 emi_id);
 /* func_80162160 */
-DiscLba     EMI_LoaderSlotLba(EMISlotId emi_id);
+DiscLba     EMI_GetArchiveSector(EMISlotId emi_id);
 /* func_80162178 */
-void        EMI_LoaderBeginRead(void);
+void        EMI_StartArchive(void);
 /* func_801621E8 */
-void        EMI_OnCDSync(s32 status, u8* result);
+void        EMI_CdOnSync(s32 status, u8* result);
 /* func_80162230 */
-void        EMI_OnCDReady(u8 status, u8* result);
+void        EMI_CdOnReady(u8 status, u8* result);
 /* func_80162C14 */
-void        EMI_LoaderCopySector(void);
+void        EMI_CopySectorData(void);
 /* func_80162CD8 */
-void        EMI_LoaderEndStream(void);
+void        EMI_EndArchive(void);
 /* func_80162D00 */
-s32         EMI_LoaderIsReady(void);
+s32         EMI_IsReady(void);
 /* func_80162D18 */
-void        EMI_LoaderRunCD(void);
+void        EMI_CdUpdate(void);
 /* func_80162D9C */
-void        EMI_LoaderIdle(void);
+void        EMI_CdIdle(void);
 /* func_80162DA4 */
-void        EMI_LoaderSetCDSpeed(void);
+void        EMI_CdSetSpeed(void);
 /* func_80162E18 */
-void        EMI_LoaderSeekCD(void);
+void        EMI_CdSeek(void);
 /* func_80162E70 */
-void        EMI_LoaderFinishSeek(void);
+void        EMI_CdOnSeek(void);
 /* func_80162E98 */
-void        EMI_LoaderStartRead(void);
+void        EMI_CdRead(void);
 /* func_80162F04 */
-void        EMI_LoaderFinishRead(void);
+void        EMI_CdOnRead(void);
 /* func_80162F34 */
-void        EMI_LoaderPauseCD(void);
+void        EMI_CdPause(void);
 /* func_80162F88 */
-void        EMI_LoaderFinishPause(void);
+void        EMI_CdOnPause(void);
 /* func_8016305C */
-void        EMI_LoaderServiceStream(void);
+void        EMI_UpdateStream(void);
 /* func_80163238 */
-void        EMI_LoaderReadSector(void);
+void        EMI_DecompressSector(void);
 /* func_8016327C */
-void        EMI_LoaderStageSector(void);
+void        EMI_CopySectorToScratchpad(void);
 /* func_80163378 */
-void        EMI_LoaderUploadSector(void);
+void        EMI_UploadSectorImage(void);
 /* func_80163418 */
-void        EMI_LoaderTransferVabBody(void);
+void        EMI_UploadVabBody(void);
 /* func_801636A0 */
 void        SND_StartXAStream(s32 key, s32 unused);
 /* func_80163744 */
@@ -389,9 +389,9 @@ void        SND_SetCDVolume(u8 volume);
 /* func_80163F50 */
 void        SND_FadeCDVolume(s32 level);
 /* func_80164028 */
-void        EMI_DecodeBegin(u8* dst);
+void        LZ77_DecodeBegin(u8* dst);
 /* func_80164064 */
-s32         EMI_DecodeStep(void);
+s32         LZ77_DecodeStep(void);
 /* Main-exe functions called by this overlay. */
 /* func_801644D8 */
 s32         func_801644D8(s32 arg0, s32 x, s32 y, s32 width, s32 height, s32 shade);
@@ -462,9 +462,9 @@ s32        Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */
 void       Party_ClearBattlerState(s32 character_index);
 /* func_80166E88 */
-void       EMI_LoaderStreamFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
+void       EMI_LoadPartyArchives(u8 member_a, u8 member_b, u8 member_c, u8 family);
 /* func_8016728C */
-void       EMI_StreamFamilyArchive(u8 index, u8 family);
+void       EMI_GetArchiveId(u8 index, u8 family);
 /* func_80167344 */
 void       Area_DispatchScene(void);
 /* func_801673AC */

@@ -7,9 +7,9 @@
 
 /* One audio bank record of the main executable's EMI loader (seven records at
  * 0x8014677C): where the VAB header sits, where the cue table and the sequence
- * package go, and the bank's VAB id. EMI_LoaderLoadVabBody reads source,
+ * package go, and the bank's VAB id. EMI_LoadVabBody reads source,
  * resource_id and spu_address as the three SsVabOpenHeadSticky arguments;
- * EMI_LoaderLoadVabCues and EMI_LoaderLoadSequence copy to destination and
+ * EMI_LoadSoundCues and EMI_LoadSequence copy to destination and
  * sequence_buffer. */
 typedef struct EMIBank {
     u32 spu_address;     /* 0x00 SPU sound-buffer address, SsVabOpenHeadSticky argument 3 */

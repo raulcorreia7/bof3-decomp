@@ -1019,7 +1019,7 @@ MATCH void func_801F9178(void) {
         }
     }
     g_GameFlags |= GAME_FLAG_MENU_LOCK;
-    while (EMI_LoaderIsReady() == 0) {
+    while (EMI_IsReady() == 0) {
         CallbackWait(1U);
     }
     g_ScriptVarsReq.word = 0;
@@ -1161,7 +1161,7 @@ MATCH void func_801F9868(void) {
                 if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
                     SND_RequestBGM(3);
                 loop_10:
-                    if (EMI_LoaderIsReady() == 0) {
+                    if (EMI_IsReady() == 0) {
                         CallbackWait(1U);
                         goto loop_10;
                     }
@@ -1731,7 +1731,7 @@ MATCH void func_801FA7D8(void) {
             break;
 
         case 12:
-            if ((g_ScriptVarsReq.byte == 4u) && (EMI_LoaderIsReady() != 0)) {
+            if ((g_ScriptVarsReq.byte == 4u) && (EMI_IsReady() != 0)) {
                 SND_PlayBGM(3u, 0x69, 8);
                 g_SceneState.step_05 = 0xDu;
                 return;

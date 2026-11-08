@@ -55,7 +55,7 @@ MATCH void func_801F7924(void) {
 }
 
 MATCH void func_801F79AC(void) {
-    if ((g_UiWindowEffectBusy == 0) && (EMI_LoaderIsReady() != 0)) {
+    if ((g_UiWindowEffectBusy == 0) && (EMI_IsReady() != 0)) {
         D_80146875 = 0x5A;
         D_80146874 += 1;
     }
@@ -387,7 +387,7 @@ MATCH void func_801F8404(void) {
 INCLUDE_ASM(func_801F8480);
 
 /* nonmatching: timer D_80146875 counts up; at 0x80 it sets D_80146867 = 0x3C, the timer to 0x1E, D_801F9DD8 = 0, steps
-   D_80146874, starts EMI_LoaderStreamInitSlot(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and
+   D_80146874, starts EMI_LoadArchive(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and
    func_801F8B10(0x4B0, 0x80). Candidate is 8 bytes short (first differing instruction: bnez at +0x28 targets +0x78
    against +0x70): retail sets a0, a1 and a2 inside the branch and ends it with j, and sets only a1 on the other path.
 */
@@ -403,7 +403,7 @@ MATCH void func_801F84F4(void) {
         *timer     = 0x1E;
         D_801F9DD8 = 0;
         D_80146874 += 1;
-        EMI_LoaderStreamInitSlot(0x260);
+        EMI_LoadArchive(0x260);
         func_801F8FAC(0xE0, 0xBE, 0x80, 1);
     } else {
         func_801F8FAC(0xE0, 0xBE, value, 1);

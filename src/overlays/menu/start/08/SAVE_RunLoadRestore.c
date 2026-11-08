@@ -22,12 +22,12 @@ MATCH void SAVE_RunLoadRestore(void) {
             g_InputMasks[INPUT_SLOT_UNUSED]  = PADselect;
         }
         g_Game.party_size = Party_CountOrder(PARTY_ORDER_FIELD);
-        EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
-        while (EMI_LoaderIsReady() == 0) {
+        EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
+        while (EMI_IsReady() == 0) {
             CallbackWait(1);
         }
-        EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
-        while (EMI_LoaderIsReady() == 0) {
+        EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+        while (EMI_IsReady() == 0) {
             CallbackWait(1);
         }
         Party_BuildBattlers(PARTY_ORDER_FIELD);
@@ -45,7 +45,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         g_ScriptVars[2] = g_SavedScriptVars[2];
         g_ScriptVars[3] = g_SavedScriptVars[3];
         Scene_RequestOverlay();
-        while (EMI_LoaderIsReady() == 0) {
+        while (EMI_IsReady() == 0) {
             CallbackWait(1);
         }
         g_GameEntrySubstate = 4;

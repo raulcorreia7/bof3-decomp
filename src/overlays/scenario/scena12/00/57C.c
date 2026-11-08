@@ -325,7 +325,7 @@ MATCH void Scene_JoinMomo_801FCF44(void) {
 #include "overlays/scenario/Scene_JoinReiAndGarr.h"
 
 MATCH void func_801FD064(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
     Party_JoinMember(CHAR_ID_MOMO);

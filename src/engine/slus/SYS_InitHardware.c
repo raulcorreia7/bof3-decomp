@@ -5,7 +5,7 @@
  */
 MATCH void SYS_InitHardware(void) {
     ResetCallback();
-    EMI_LoaderInit();
+    EMI_Init();
 
     if (g_SysHardwareInitialized == 0) {
         VSync(0);

@@ -29,7 +29,7 @@ MATCH void func_8009B488(void) {
     } else {
         g_AreaCameraHeightStep = 0;
     }
-    EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_SE);
+    EMI_LoadArchive(EMI_SLOT_BATL_SE);
     index = 5;
     if (g_Game.members[0].u.turn.command.type == BATTLE_COMMAND_ITEM) {
         func_801DDE7C(D_80145FB2, g_Game.members[0].u.turn.command.id);

@@ -14,6 +14,6 @@ MATCH void func_801E75B0(void) {
             slot = 0x23D;
         }
     }
-    EMI_LoaderStreamInitSlot(slot);
+    EMI_LoadArchive(slot);
     g_Task->header.mode++;
 }

@@ -9,6 +9,6 @@ MATCH void func_801D71E0(void) {
     func_801DD8AC(1);
     func_801DD8AC(2);
     Menu_ResetPanelTasks();
-    EMI_LoaderStreamInitSlot(EMI_SLOT_AFLDKWA);
+    EMI_LoadArchive(EMI_SLOT_AFLDKWA);
     *state = *state + 1;
 }

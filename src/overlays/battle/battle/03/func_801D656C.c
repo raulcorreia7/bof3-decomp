@@ -37,7 +37,7 @@ MATCH void func_801D656C(void) {
             }
             g_Battle.panel_widths[0] = 8;
             g_Battle.panel_slot      = 0;
-            EMI_LoaderStreamInitSlot(EMI_SLOT_COMN_SE);
+            EMI_LoadArchive(EMI_SLOT_COMN_SE);
         }
         func_801DB494();
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
