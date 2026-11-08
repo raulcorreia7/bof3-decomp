@@ -37,8 +37,8 @@ extern Callback  D_801FA210[];
 extern s8        D_801FA220[];
 /* D_801FA224 */
 extern SceneFunc g_SceneActorDispatch[];
-extern u8        D_801FA228;
-extern Callback  D_801FA230[];
+extern u8        g_ScenePositionTable;
+extern Callback  g_ScenePositionDispatch[];
 
 void func_801F7EC0();
 

@@ -290,19 +290,7 @@ INCLUDE_ASM(func_801F9DF4);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-MATCH s32 func_801FA010(s32 x, s32 y) {
-    s8  index;
-    s32 result;
-
-    index = func_801A7AD8(&D_801FA228, 1, x, y);
-    if (index >= 0) {
-        SYS_DISPATCH_BYTE(D_801FA230, index);
-        result = 1;
-    } else {
-        result = -1;
-    }
-    return result;
-}
+#include "overlays/scenario/Scene_DispatchByPosition.h"
 
 MATCH void func_801FA074(void) {
     Game_SetScriptActive();

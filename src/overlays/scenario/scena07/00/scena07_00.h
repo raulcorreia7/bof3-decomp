@@ -70,8 +70,8 @@ extern u8       D_80144EB8[];
 extern u8       D_80146865;
 extern u8       D_80146866;
 extern u8       D_80146867;
-extern u8       D_801FDFA0;
-extern Callback D_801FDFA8[];
+extern u8       g_ScenePositionTable;
+extern Callback g_ScenePositionDispatch[];
 
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 

@@ -543,19 +543,7 @@ MATCH bool func_801FDA34(void) {
     return 0;
 }
 
-MATCH s32 func_801FDA98(s32 x, s32 y) {
-    s8  index;
-    s32 result;
-
-    index = func_801A7AD8(&D_801FDFA0, 1, x, y);
-    if (index >= 0) {
-        SYS_DISPATCH_BYTE(D_801FDFA8, index);
-        result = 1;
-    } else {
-        result = -1;
-    }
-    return result;
-}
+#include "overlays/scenario/Scene_DispatchByPosition.h"
 
 MATCH void func_801FDAFC(void) {
     Game_SetScriptActive();
