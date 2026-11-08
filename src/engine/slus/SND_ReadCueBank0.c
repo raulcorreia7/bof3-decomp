@@ -5,5 +5,5 @@
  * an alias bank supply the tone and voice. */
 /* func_8015E994 */
 MATCH void SND_ReadCueBank0(void) {
-    SLUS_READ_BANK_CUE(0, D_801486A0, D_80148A18);
+    SLUS_READ_BANK_CUE(0, g_SndBankCues[0], g_SndBankHeaders[0]);
 }

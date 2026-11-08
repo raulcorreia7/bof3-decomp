@@ -13,7 +13,7 @@ NON_MATCHING void EMI_LoaderTransferVabBody(void) {
 
     /* The table rows are 0x14 bytes; the retail body reaches each field with
      * byte offsets from the table base (the bank records + field). */
-    vab = (u8*)&D_8014677C[0].sequence_buffer;
+    vab = (u8*)&g_EmiBanks[0].sequence_buffer;
 
     slot = (s32*)((u8*)&D_80146488 + 48) + D_80146488;
     if (*slot != -1) {

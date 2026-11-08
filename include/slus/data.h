@@ -40,6 +40,8 @@ extern u8          g_AutoRun;
 extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
 extern u8          g_PartyFormation;
+/* D_80144F59 */
+extern u8          g_PartyMenuFlags;
 extern u8          g_PartyBattleOrder[];
 /* One bit per ability id: set once a party member has learned the ability, from a master or by watching an enemy. */
 extern u32         g_LearnedAbilities[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];

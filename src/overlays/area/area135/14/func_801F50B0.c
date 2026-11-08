@@ -8,10 +8,10 @@ MATCH void func_801F50B0(void) {
     u8  selection;
     s32 result;
 
-    TASK_SET((u8*)g_Game.members);
-    index     = *(u8*)(PARTY_FIELD_ORDER_BASE + 1);
-    y         = g_Game.members[0].unk_30.signed_half;
-    x         = g_Game.members[0].unk_2E.signed_half;
+    TASK_SET((u8*)g_BattlePartyBattlers);
+    index     = g_PartyFieldOrder[1];
+    y         = g_BattlePartyBattlers[0].unk_30.signed_half;
+    x         = g_BattlePartyBattlers[0].unk_2E.signed_half;
     selection = D_801F626C[index];
     result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != 0xFF) {

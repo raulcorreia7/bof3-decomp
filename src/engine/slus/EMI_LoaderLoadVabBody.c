@@ -10,10 +10,10 @@ MATCH void EMI_LoaderLoadVabBody(void) {
 
     if (EMI_LOADER_STEP == 0) {
         SpuSetTransferMode(SPU_TRANSFER_BY_DMA);
-        SsVabClose(D_8014677C[D_80146483].resource_id);
+        SsVabClose(g_EmiBanks[D_80146483].resource_id);
         entry_index = D_80146483;
-        if (SsVabOpenHeadSticky((unsigned char*)D_8014677C[entry_index].source, D_8014677C[entry_index].resource_id,
-                                D_8014677C[entry_index].spu_address) == -1) {
+        if (SsVabOpenHeadSticky((unsigned char*)g_EmiBanks[entry_index].source, g_EmiBanks[entry_index].resource_id,
+                                g_EmiBanks[entry_index].spu_address) == -1) {
             g_EmiReadStatus  = 2;
             g_EmiStreamState = 0;
             return;

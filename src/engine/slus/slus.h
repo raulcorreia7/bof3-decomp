@@ -46,7 +46,7 @@
 #define MAP_ZONE_LIST_COUNT   200                  /* lists in g_EncounterZones, one per map index */
 #define MAP_ZONE_SIZE         0x08
 /* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
- * the VAB header at `vab_header` (one of the words D_80148A18-D_80148A30). */
+ * the VAB header at `vab_header` (a word of g_SndBankHeaders). */
 #define CUE_TONE(vab_header)  ((VagAtr*)(D_8018B40C + (vab_header)))
 #define g_SceneRecord         (*(RecordKey*)&g_SceneState)
 #define g_CurrentActor        ((u8*)g_CurrentActor)
@@ -167,15 +167,15 @@
     }
 
 /* The cue reader of banks 0, 4, 5 and 6, whose alias banks are 1 to 3. */
-#define SLUS_READ_BANK_CUE(bank, cues, tones)             \
-    SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)            \
-    if (D_8018B3E0 != 0) {                                \
-        D_8018B30C = D_8018B3E0 & EMI_CUE_ALIAS_MASK;     \
-        switch (D_8018B30C) {                             \
-            SLUS_CUE_ALIAS_ARM(1, D_80148A1C, D_8014871C) \
-            SLUS_CUE_ALIAS_ARM(2, D_80148A20, D_80148798) \
-            SLUS_CUE_ALIAS_ARM(3, D_80148A24, D_80148814) \
-        }                                                 \
+#define SLUS_READ_BANK_CUE(bank, cues, tones)                            \
+    SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)                           \
+    if (D_8018B3E0 != 0) {                                               \
+        D_8018B30C = D_8018B3E0 & EMI_CUE_ALIAS_MASK;                    \
+        switch (D_8018B30C) {                                            \
+            SLUS_CUE_ALIAS_ARM(1, g_SndBankHeaders[1], g_SndBankCues[1]) \
+            SLUS_CUE_ALIAS_ARM(2, g_SndBankHeaders[2], g_SndBankCues[2]) \
+            SLUS_CUE_ALIAS_ARM(3, g_SndBankHeaders[3], g_SndBankCues[3]) \
+        }                                                                \
     }
 
 /* Types. */
@@ -360,7 +360,7 @@ typedef struct {
 
 ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
-/* The bank record table at D_8014677C seen from its second symbol, 0x80146780 (EMIBank + 4):
+/* The bank records at g_EmiBanks seen from its second symbol, 0x80146780 (EMIBank + 4):
  * EMI_LoaderLoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed
  * EMIBank access moves their register allocation. */
 typedef struct EMIAudioLink {
@@ -518,8 +518,10 @@ extern u8                          D_80146498[];
 extern volatile u8                 g_EmiRingStates[];
 extern s32                         D_80146518[];
 extern u32                         g_EmiSlotSectors[];
-extern EMIBank                     D_8014677C[];
+extern EMIBank                     g_EmiBanks[7];
 extern volatile EMIAudioLink       D_80146780[];
+/* FAKE: SND_SetBankLayout stores the bank records, headers and cue tables through their own symbols;
+ * the g_EmiBanks, g_SndBankHeaders and g_SndBankCues views share one base register and shrink it. */
 extern u8*                         D_80146784;
 extern u32                         D_80146788[];
 extern s16                         D_8014678C;
@@ -553,6 +555,27 @@ extern s32                         D_801467F8;
 extern u8*                         D_801467FC;
 extern s32                         D_80146800;
 extern u16                         D_80146804;
+extern u8                          D_801486A0[];
+extern u8                          D_8014871C[];
+extern u8                          D_80148798[];
+extern u8                          D_80148814[];
+extern u8                          D_80148890[];
+extern u8                          D_8014890C[];
+extern u8                          D_80148988[];
+extern s32                         D_80148A18;
+extern s32                         D_80148A1C;
+extern s32                         D_80148A20;
+extern s32                         D_80148A24;
+extern s32                         D_80148A28;
+extern s32                         D_80148A2C;
+extern s32                         D_80148A30;
+extern s32                         D_80148A34;
+extern s32                         D_80148A38;
+extern s32                         D_80148A3C;
+extern s32                         D_80148A40;
+extern s32                         D_80148A44;
+extern s32                         D_80148A48;
+extern s32                         D_80148A4C;
 extern volatile u32                g_EmiSectorCursor;
 extern s32                         D_8014680C;
 extern s32                         D_80146810;
@@ -600,31 +623,13 @@ extern s32                         D_8014828C[];
 extern u8                          D_80148331[];
 extern u8                          D_80148332[];
 extern u8                          D_8014865B;
-extern u8                          D_801486A0[];
-extern u8                          D_8014871C[];
-extern u8                          D_80148798[];
-extern u8                          D_80148814[];
-extern u8                          D_80148890[];
-extern u8                          D_8014890C[];
-extern u8                          D_80148988[];
+extern u8                          g_SndBankCues[7][124];
 extern u16                         D_80148A04;
 extern u16                         D_80148A06;
 extern u16                         D_80148A0C;
 extern u16                         D_80148A0E;
-extern s32                         D_80148A18;
-extern s32                         D_80148A1C;
-extern s32                         D_80148A20;
-extern s32                         D_80148A24;
-extern s32                         D_80148A28;
-extern s32                         D_80148A2C;
-extern s32                         D_80148A30;
-extern s32                         D_80148A34;
-extern s32                         D_80148A38;
-extern s32                         D_80148A3C;
-extern s32                         D_80148A40;
-extern s32                         D_80148A44;
-extern s32                         D_80148A48;
-extern s32                         D_80148A4C;
+extern s32                         g_SndBankHeaders[7];
+extern s32                         g_SndBankSequences[7];
 extern u8                          g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 extern u16                         D_80149010[];
 extern u16                         D_80149040[];
@@ -722,7 +727,7 @@ extern u8                          D_80182175;
 extern u8                          D_80182176;
 extern u8                          D_80182177;
 extern s32                         D_801821D0;
-/* The readers resolve a tone through `D_80148A18 + 4*bank`: one header pointer
+/* The readers resolve a tone through `g_SndBankHeaders[bank]`: one header pointer
  * per bank, installed by `SND_SetBankLayout` (`0x80161808`). The reader indexes
  * the header at `0x820 + 512*program + 32*tone` and copies the tone's volume,
  * pan, pitch tune and min note into voice state.

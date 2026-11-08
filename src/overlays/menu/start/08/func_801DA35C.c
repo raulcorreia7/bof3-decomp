@@ -15,7 +15,7 @@ MATCH void func_801DA35C(void) {
     *timer    = remaining;
     if (remaining == 0) {
         index = 0;
-        panel_data += 0x607; /* the party order table at PARTY_FIELD_ORDER_BASE */
+        panel_data += 0x607;
     loop_2:
         if (index < Party_CountOrder(PARTY_ORDER_FIELD)) {
             row = (MenuPanelTask*)&D_801483C0 + index;
