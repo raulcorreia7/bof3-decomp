@@ -13,7 +13,7 @@ MATCH void func_801A3A08(void) {
     } else if (work->unk_06 == 4) {
         goto dispatch; /* Retail shares one dispatch tail for both mode tests. */
     }
-    if ((((Actor*)g_CurrentActor)->unk_94 & 0x7F) != 0x7F) {
+    if (((g_CurrentActor)->unk_94 & 0x7F) != 0x7F) {
     dispatch:
         func_801ACE10(g_Game.members[0].chr.character_id);
     } else {

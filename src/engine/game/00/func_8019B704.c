@@ -61,7 +61,7 @@ NON_MATCHING void func_8019B704(void) {
             g_AreaCameraHeightStep = (s16)((temp - (s16)g_AreaCameraHeight) / 20);
         }
         g_AreaCameraStep = 0x40;
-        g_Task->timer    = 0x14;
+        g_Task->timer    = 20;
     }
     dist = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (dist < (s16)COORD_INT(g_Task->pos.z)) {

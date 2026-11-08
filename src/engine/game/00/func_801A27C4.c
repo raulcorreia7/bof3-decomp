@@ -15,7 +15,7 @@ MATCH void func_801A27C4(Actor* entity) {
             if ((func_801A1AE4(entity) & BYTE_MASK) != 0) {
                 continue;
             }
-            if ((g_Task->header.mode == 3 || g_Task->unk_03 == 3) && (func_801A1A58((Actor*)entity) & BYTE_MASK) == 0) {
+            if ((g_Task->header.mode == 3 || g_Task->unk_03 == 3) && (func_801A1A58(entity) & BYTE_MASK) == 0) {
                 continue;
             }
             break;

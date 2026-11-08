@@ -28,7 +28,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
     x        = 0;
     for (row = 0; row < 5; row++) {
         entry = &g_MenuClutStripEntries[g_MenuClutStripPalettes[index]];
-        for (pair = 0; pair < 2; pair++, x += 0x20) {
+        for (pair = 0; pair < 2; pair++, x += 32) {
             y     = 0;
             shade = 0x80;
             do {

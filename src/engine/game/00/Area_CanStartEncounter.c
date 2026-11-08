@@ -38,7 +38,7 @@ MATCH s32 Area_CanStartEncounter(void) {
         }
     }
     if (!(g_GameRequestFlags & 1)) {
-        work   = (Actor*)SCRATCH_WORK;
+        work   = g_Task;
         ok     = Area_BuildEncounter(4, 0);
         g_Task = work;
         if (ok != 0) {

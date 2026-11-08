@@ -17,7 +17,7 @@ MATCH void func_801C3154(void) {
 
     if ((g_Game.current->status.field.flags_12C.u8_value & 8) != 0) {
         index    = 1;
-        work     = SCRATCH_WORK;
+        work     = g_Task;
         base_dst = AREA_PALETTE_WORK;
         base_src = PALETTE_BANK_SRC;
         do {

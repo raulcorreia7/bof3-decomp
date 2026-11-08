@@ -72,7 +72,7 @@ MATCH void func_801EF228(void) {
 
 MATCH void func_801EF278(void) {
     g_Task->timer += 8;
-    if (g_Task->timer >= 0x81U) {
+    if (g_Task->timer >= 129U) {
         g_Task->header.step += 1;
     }
 }
