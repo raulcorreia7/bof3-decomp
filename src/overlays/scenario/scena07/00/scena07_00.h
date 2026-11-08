@@ -24,11 +24,15 @@ extern Callback  D_801FDDB4[];
 extern Callback  D_801FDDC0[];
 extern Callback  D_801FDDC8[];
 extern Callback  D_801FDDD0[];
+extern Callback  D_801FDDF0[];
 extern Callback  D_801FDE10[];
 extern Callback  D_801FDE1C[];
 extern u8        D_801FDE88[4];
 extern SceneFunc D_801FDF8C[];
 extern u8        D_801FDFC4;
+
+void func_801AFE18(void* arg0);
+void func_801F81D4(void* arg0);
 
 u8*       func_801F8394(void);
 void      func_801F83D0(u8* row);

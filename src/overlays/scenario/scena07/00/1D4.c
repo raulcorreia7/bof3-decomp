@@ -283,7 +283,31 @@ INCLUDE_ASM(func_801F83D0);
 
 INCLUDE_ASM(func_801F8478);
 
-INCLUDE_ASM(func_801F85D8);
+MATCH u8 func_801F85D8(void) {
+    u16 tpage;
+    u8  active;
+    u8* rec;
+    s32 i;
+    u8  buf[0x20];
+
+    active = 0;
+    tpage  = GetTPage(0, 1, 0x3C0, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(1, 0xC);
+    func_801AFE18(buf);
+    rec = (u8*)0x800E4800;
+    i   = 0;
+    do {
+        if (rec[0] != 0) {
+            ((void (*)(void*))D_801FDDF0[rec[1]])(rec);
+            active = 1;
+            func_801F81D4(rec);
+        }
+        i++;
+        rec += 0x1C;
+    } while ((u32)(i & 0xFF) < 8);
+    return active;
+}
 
 /* Hint: operates on a0 as a byte record (bytes 0x02, 0x03, 0x01, 0x04 and a flag at D_801FDFC4); the record type is not declared, so the draft needs it first. */
 INCLUDE_ASM(func_801F86BC);
