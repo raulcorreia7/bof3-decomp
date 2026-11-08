@@ -33,8 +33,8 @@ void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y);
 
 extern void func_801F54B8(void);
 
-void func_801F61F0(s32 type);
+void Actor_InitSlot(s32 type);
 
-void func_801F3198(u8 blend_mode);
+void GFX_AddBlendDrawMode(u8 blend_mode);
 
 #endif

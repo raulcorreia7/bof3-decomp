@@ -4,7 +4,8 @@
  * UI_DrawTextAt, passing 0x3A as the first argument and threading each returned
  * cursor into the next call.
  */
-MATCH void func_8015A170(void) {
+/* func_8015A170 */
+MATCH void UI_DrawTextRows(void) {
     u8* cursor;
     s32 i;
 

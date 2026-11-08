@@ -17,7 +17,7 @@ MATCH s32 func_801C5474(void) {
         return 1;
     }
     work->timer = (countdown - 1);
-    func_801C57B4();
+    Actor_Move();
     state = g_Task;
     if (state->timer == state->unk_0A) {
         GFX_LoadPalette(((state->unk_05 << 6) + GAME_PALETTE_STAGE), 0);

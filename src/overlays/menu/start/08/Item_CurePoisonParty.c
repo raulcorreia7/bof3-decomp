@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-MATCH s32 func_801E8A70(s32 slot_count, u8 record_index) {
+MATCH s32 Item_CurePoisonParty(s32 slot_count, u8 record_index) {
     u8  i;
     s32 changed;
 

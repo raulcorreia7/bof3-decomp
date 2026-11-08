@@ -17,7 +17,7 @@ segments:
       - [0x24C, c, func_801EEE4C]
       - [0x2E0, c, func_801EEEE0]
       - [0x314, c, func_801EEF14]
-      - [0x3CC, c, func_801EEFCC]
+      - [0x3CC, c, Battle_WaitVictoryLoad]
       - [0x418, c, func_801EF018]
       - [0x454, c, func_801EF054]
       - [0x540, c, func_801EF140]
@@ -38,7 +38,7 @@ segments:
       - [0x1BE0, c, func_801F07E0]
       - [0x1D7C, c, func_801F097C]
       - [0x1DD4, c, func_801F09D4]
-      - [0x1DF4, c, func_801F09F4]
+      - [0x1DF4, c, Battle_DrawVictoryZenny]
       - [0x1E74, c, func_801F0A74]
       - [0x1FB0, c, func_801F0BB0]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

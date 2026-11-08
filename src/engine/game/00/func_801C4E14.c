@@ -12,7 +12,7 @@ MATCH s32 func_801C4E14(void) {
     inactive  = 0;
     if (countdown != 0) {
         work->timer = (countdown - 1);
-        func_801C57B4();
+        Actor_Move();
         state = g_Task;
         if (state->timer == state->unk_0A) {
             region                                            = state->unk_05;
