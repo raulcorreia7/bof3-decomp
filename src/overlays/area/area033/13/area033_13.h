@@ -47,8 +47,6 @@ void func_801F35C0(void);
 
 void func_801F3FF8(s16 x, s16 y);
 
-#include "overlays/area/World_UpdateCloudLayer.h"
-
-extern WorldCloudTexture g_WorldCloudTexture;
+#include "overlays/area/world_cloud.h"
 
 #endif
