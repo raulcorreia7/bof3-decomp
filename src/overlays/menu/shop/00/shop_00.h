@@ -184,7 +184,9 @@ extern char        g_MenuClockFormat[];
 extern char        g_SaveSlotLevelFormat[];
 extern char        g_SaveSlotTimeFormat[];
 extern char        g_SaveSlotTimeColon[];
+/* D_801D0E58 */
 extern char        g_SaveCardPortLabelFirst[];
+/* D_801D0E5C */
 extern char        g_SaveCardPortLabelSecond[];
 extern char        D_801D0E60[];
 extern char        D_801D0E64[];

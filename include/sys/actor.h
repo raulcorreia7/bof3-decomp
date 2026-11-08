@@ -42,7 +42,7 @@
  * inline form does not match. Use it as the first statement of a function body. */
 #define ACTOR_RUN_MODE_HANDLER(first, second) \
     Callback table[2] = {first, second};      \
-    table[TASK_BYTES[1]]()
+    table[g_Task->header.mode]()
 
 /* Clear the actor's step: the current mode starts again at step 0. */
 #define ACTOR_CLEAR_STEP() (g_Task->header.step = 0)

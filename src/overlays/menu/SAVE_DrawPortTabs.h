@@ -1,7 +1,7 @@
 /* Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port. One definition
  * shared by the Bate, Shisu and Shop overlays; each image defines its own g_SaveCardPortLabelFirst and
  * g_SaveCardPortLabelSecond. Every change here must verify every member. */
-/* SAVE_DrawPortTabs (Bate 0x801D8508, Shisu 0x801D94B0, Shop 0x801DDFB0) */
+/* func_801D8508 (bate), func_801D94B0 (shisu), func_801DDFB0 (shop) */
 MATCH void SAVE_DrawPortTabs(s16 x, s16 y, u32 flags, u8 row, u8 variant) {
     s16 left;
     s16 right;

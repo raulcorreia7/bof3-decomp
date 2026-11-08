@@ -2948,7 +2948,7 @@ Scene_DrawTriangle = { addr = 0x801F85A8, type = "func", source = "draws one gre
 Scene_DispatchActor = { addr = 0x801FC7D0, type = "func", source = "Entry_04 of the scena00 handler block, dispatches the entity through D_801FCA84 by byte 0x7A of the entity record." }
 Scene_CheckStepTrigger = { addr = 0x801FC818, type = "func", source = "Entry_08 of the scena00 handler block: Area_IsStepBlocked passes its handler_x and a nonzero result blocks the step; it starts scripted scenes by g_SceneState.state_04 at x 0x2B in area 2 and x 0x14 in area 24." }
 Scene_ClearParty = { addr = 0x801FC8FC, type = "func", source = "Resets the party to Whelp: streams the Whelp EMI family, sets the field and battle orders to 0xFF and g_Game.party_size to 0, sets the low three bits of the menu flags and joins CHAR_ID_WHELP with Party_JoinMember." }
-g_SceneActorDispatch = { addr = 0x801FCA84, source = "scenario actor dispatch table" }
+s_SceneActorDispatch = { addr = 0x801FCA84, source = "scenario actor dispatch table" }
 g_SceneFx = { addr = 0x801FCA90, source = "Func_801FC01C seeds and func_801FC3A0 steps the 30 slot by 12 cell sample effect." }
 
 ["emi/scenario/scena01/00"]
