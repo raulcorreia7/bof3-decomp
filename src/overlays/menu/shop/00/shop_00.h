@@ -560,7 +560,8 @@ void func_801D6CE4(u8 row_index, u8* source_record);
 void func_801D6D6C(s32 strip_x, s32 strip_y);
 void func_801D6E94(void);
 void func_801D6F00(void);
-void func_801D7080(void);
+/* func_801D7080 */
+void SAVE_FormatSlotInfo(void);
 void func_801D7208(void);
 void func_801D7344(void);
 void func_801D7380(void);

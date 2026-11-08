@@ -43,14 +43,18 @@ extern u8 D_80144F5F;
 
 s32 func_8019601C();
 
-extern u8  D_80146874;
-extern u8  D_80146875;
-extern u16 D_80146876;
+extern u8       D_80146874;
+extern u8       D_80146875;
+extern u16      D_80146876;
+extern u8       D_801FD030;
+extern Callback D_801FD038[];
 
 s8 func_801FCD1C(void);
 
 void func_801F8170(s32 arg0);
 
 void func_801F7FFC(s32 arg0);
+
+s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
 #endif

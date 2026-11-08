@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-/* 92.47%; delayed initialization, signed counter and do-while tried; first diff 0x801D974C, counter setup. */
+/* nonmatching: first diff 0x801D974C, `i = 0` lands after the record address; retail also loads the 6 for both panel handlers into v1 right after the loop. Delayed init, signed counter, do-while, for, row pointer and chained handler stores tried; LOH(pos.y) fixes the -20 constant. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D9748(void) {
     volatile u8*   record;
@@ -15,7 +15,7 @@ NON_MATCHING void func_801D9748(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
     record[0]                                                   = 1;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 0x14;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = -0x14;
+    LOH(g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y)   = -0x14;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     while (i < 2) {
         rows[i].handler = 6;
@@ -30,7 +30,7 @@ NON_MATCHING void func_801D9748(void) {
     g_BattleItemRow                                   = 7;
     g_MenuPanelTasks[18].unk_0B                       = 0xFF;
     g_MenuPanelTasks[18].pos.x                        = 0x70;
-    g_MenuPanelTasks[18].pos.y                        = -0x14;
+    LOH(g_MenuPanelTasks[18].pos.y)                   = -0x14;
     g_MenuPanelTasks[18].handler                      = 6;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].handler = 6;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].mode    = MENU_START_MODE_CURSOR;

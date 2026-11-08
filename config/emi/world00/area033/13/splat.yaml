@@ -15,8 +15,8 @@ segments:
       - [0x220, c, func_801F2E20]
       - [0x394, c, func_801F2F94]
       - [0x420, c, func_801F3020]
-      - [0x558, c, func_801F3158]
-      - [0x5D4, c, func_801F31D4]
+      - [0x558, c, Actor_ZoomIn]
+      - [0x5D4, c, Area_RequestRestartOnContextChange]
       - [0x694, c, func_801F3294]
       - [0x734, c, Actor_CenterOnScreen]
       - [0x750, c, func_801F3350]
@@ -26,7 +26,7 @@ segments:
       - [0x840, c, Actor_SlideScreenLeft]
       - [0x890, c, Actor_SlideScreenX]
       - [0x8EC, c, Area_Update]
-      - [0x93C, c, func_801F353C]
+      - [0x93C, c, Area_SlideHudBannerLeft]
       - [0x9C0, c, func_801F35C0]
       - [0xA04, c, Actor_SetScreenBottom]
       - [0xA84, c, func_801F3684]
@@ -43,7 +43,7 @@ segments:
       - [0x1900, c, func_801F4500]
       - [0x1944, c, func_801F4544]
       - [0x1A74, c, Area_StepStreamSetDrawMode]
-      - [0x1A9C, c, func_801F469C]
+      - [0x1A9C, c, World_UpdateClouds]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

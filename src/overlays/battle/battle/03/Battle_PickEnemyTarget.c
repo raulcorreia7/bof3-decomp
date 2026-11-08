@@ -72,7 +72,7 @@ NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
                 return index + 3;
             }
             if (!(targeting_flags & ABILITY_TARGET_OPPONENT)) {
-                return func_801E2CA4();
+                return Battle_PickLowestHpTarget();
             }
             if (flags & 0x10) {
                 return func_801E2D90(index);
