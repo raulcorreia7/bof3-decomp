@@ -35,6 +35,6 @@ MATCH void UI_ResetMessage(void) {
     D_801490B9             = 0;
     D_801490C8             = 0;
     D_801490B8[0]          = 0;
-    Menu_ArmPanelTask(0U, 0U);
+    Menu_OpenPanelTask(0U, 0U);
     g_MenuPanelTasks[0].layer = 2;
 }

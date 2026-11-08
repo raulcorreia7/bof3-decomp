@@ -27,7 +27,7 @@ MATCH void func_801D543C(void) {
         case SAVE_STATUS_NO_FILE:
             MENU_DRAW_HEADER();
             panel_timer = 8;
-            UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_NO_SAVE_FILE));
+            UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(GAME_TEXT_NO_SAVE_FILE));
             func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
             g_SaveSlotCount             = 3;
             D_801E60FC                  = 0xF;
@@ -46,7 +46,7 @@ MATCH void func_801D543C(void) {
         case SAVE_STATUS_SAVED:
             MENU_DRAW_HEADER();
             panel_timer = 0xB;
-            UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_SAVE_COMPLETE));
+            UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(GAME_TEXT_SAVE_COMPLETE));
             SAVE_DrawSlots(0x20, 0x30, 0U);
             D_801E6080 = 1;
             D_801E6110 = 1;
@@ -54,7 +54,7 @@ MATCH void func_801D543C(void) {
         case SAVE_STATUS_FORMATTED:
             MENU_DRAW_HEADER();
             panel_timer = 8;
-            UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_INIT_COMPLETE));
+            UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(GAME_TEXT_INIT_COMPLETE));
             func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
             g_SaveSlotCount             = 3;
             D_801E60FC                  = 0xF;
@@ -67,7 +67,7 @@ MATCH void func_801D543C(void) {
         case SAVE_STATUS_CREATED:
             MENU_DRAW_HEADER();
             panel_timer = 0xB;
-            UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(0x96));
+            UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(0x96));
             SAVE_DrawSlots(0x20, 0x30, 0U);
             D_801E6080 = 1;
             D_801E6110 = 1;
@@ -75,7 +75,7 @@ MATCH void func_801D543C(void) {
         case 11:
             MENU_DRAW_HEADER();
             panel_timer = 8;
-            UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(0x8BU));
+            UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(0x8BU));
             SAVE_DrawSlots(0x20, 0x30, 0U);
             break;
         default:
@@ -84,7 +84,7 @@ MATCH void func_801D543C(void) {
     }
     if (resource != 0) {
         MENU_DRAW_HEADER();
-        UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(resource + 0x85));
+        UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(resource + 0x85));
     }
     if ((g_InputPressed != 0) ||
         (((g_SaveCardStatus == SAVE_STATUS_CREATED) || (g_SaveCardStatus == SAVE_STATUS_SAVED)) &&

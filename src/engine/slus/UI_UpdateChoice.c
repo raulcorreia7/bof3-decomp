@@ -5,7 +5,7 @@
  * halfword g_MessageChoiceTimer down unless it is 0xFFFF, and clears g_MessageChoiceMode when the
  * count reaches zero.
  */
-MATCH void UI_RunChoiceStep(void) {
+MATCH void UI_UpdateChoice(void) {
     Table2 table = {{func_801519F8, func_80151A48}};
 
     table.handlers[g_MessageChoiceStep]();

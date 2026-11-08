@@ -13,7 +13,7 @@ MATCH void func_80152C9C(void) {
         row  = (row == AREA_CELL_GRID_ROWS - 1) ? 0 : row + 1;
         cell = &g_AreaCells[row][g_AreaGridColCursor];
         Area_RequestCellRows(cell);
-        Area_ProbeCell(index, -1, cell);
+        Area_GetCell(index, -1, cell);
     }
     g_AreaGridColCursor = (g_AreaGridColCursor != 0) ? g_AreaGridColCursor - 1 : AREA_CELL_GRID_COLS - 1;
     g_AreaTileOriginX--;

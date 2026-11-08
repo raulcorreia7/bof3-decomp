@@ -256,7 +256,7 @@ INCLUDE_ASM(func_801FE438);
 MATCH void func_801FE5B0(void) {
     g_Characters[g_CharSlot[5]].unk_07 &= 254;
     Party_RemoveMember(CHAR_ID_MOMO);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 #include "overlays/scenario/Scene_RemoveMomo.h"

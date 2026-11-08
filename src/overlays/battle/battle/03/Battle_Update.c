@@ -11,7 +11,7 @@ MATCH void Battle_Update(void) {
     Battle_UpdateParty();
     Battle_UpdateEnemies();
     Battle_UpdateEvents();
-    Area_StepCamera();
+    Area_UpdateCamera();
     Battle_UpdateEffects();
     Battle_UpdatePartyActors();
     Battle_UpdateEnemyActors();
@@ -20,10 +20,10 @@ MATCH void Battle_Update(void) {
     } else {
         func_801A061C();
     }
-    Area_RunParty();
+    Area_UpdateParty();
     Actor_DispatchAll();
     GFX_UpdatePaletteAnimations();
     func_8019625C();
-    Menu_RunPanelTasks();
+    Menu_UpdatePanelTasks();
     Area_DrawScene();
 }

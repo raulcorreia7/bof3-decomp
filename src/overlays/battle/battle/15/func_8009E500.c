@@ -12,7 +12,7 @@ NON_MATCHING void func_8009E500(void) {
     u16 limit;
     if (!(func_800A3A10(g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
-            if (g_Game.members[g_Battle.target].turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            if (g_Game.members[g_Battle.target].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 g_Battle.target_record->ap_change = 0;
             } else {
                 g_Battle.target_record->ap_change = g_Game.members[g_Battle.target].chr.ap / 5;

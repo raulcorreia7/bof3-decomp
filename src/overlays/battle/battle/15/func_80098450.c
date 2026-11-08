@@ -84,10 +84,9 @@ MATCH void func_80098450(void) {
     if (old_cursor != panel->group_cursor) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    handle =
-        Resource_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A,
-                                             D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
-                         HALF_MASK);
+    handle = Message_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A,
+                                                 D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
+                             HALF_MASK);
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = handle;
     if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_gate != 0) {
         return;

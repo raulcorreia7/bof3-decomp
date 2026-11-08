@@ -58,6 +58,6 @@ MATCH void SAVE_RunLoadRestore(void) {
         Menu_DrawClutStrip(D_80144953);
         MENU_DRAW_HEADER();
         SAVE_DrawSlots(0x20, 0x30, 0U);
-        UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(0xB1));
+        UI_DrawText(28, 21, 0, 0xFFU, Message_GetText(0xB1));
     }
 }

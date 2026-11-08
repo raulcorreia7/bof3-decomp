@@ -56,11 +56,11 @@ loop_6:
                 func_801AEA80((val0->pos.x + 7) & HALF_MASK, (val1 + 2) & HALF_MASK, 6, 1);
                 tmp0 = val1;
                 val1 -= 2;
-                UI_DrawText((s16)(val0->pos.x + 17), tmp0, 7, 0xFFU, Resource_GetText(*(&D_801ED878 + val5) + 0x4171));
+                UI_DrawText((s16)(val0->pos.x + 17), tmp0, 7, 0xFFU, Message_GetText(*(&D_801ED878 + val5) + 0x4171));
                 val2 = val1 + 2;
             }
             func_801AEA80((val0->pos.x + 7) & HALF_MASK, val2 & HALF_MASK, 6, 0);
-            UI_DrawText((s16)(val0->pos.x + 17), val1, 0, 0xFFU, Resource_GetText(*(&D_801ED878 + val5) + 0x4171));
+            UI_DrawText((s16)(val0->pos.x + 17), val1, 0, 0xFFU, Message_GetText(*(&D_801ED878 + val5) + 0x4171));
             if (val0->unk_0B == val5) {
                 val1 = val2;
             }

@@ -9,7 +9,7 @@ MATCH void func_8019C664(void) {
     func_8019EE10();
     g_Task->unk_27 = 0x7B;
     Actor_SelectScript(((u8)g_Task->direction_08 >> 1) + 0x4A);
-    GFX_StagePalette(GAME_PALETTE_STAGE + 0xC0, 1);
+    GFX_LoadPalette(GAME_PALETTE_STAGE + 0xC0, 1);
     work                    = g_Task;
     FIELD(s32, work, 0x34u) = (s32)D_80145EC4;
     work->pos.y.fixed       = (s32)D_80145EC8;

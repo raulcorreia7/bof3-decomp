@@ -4,7 +4,7 @@
  * the cursor offsets g_AreaGridRowCursor/g_AreaGridColCursor; returns the low 12 bits of the cell prim_id of the
  * rotated g_AreaCells entry. */
 
-MATCH s32 Area_ProbeCellId(s32 x, s32 y) {
+MATCH s32 Area_GetCellId(s32 x, s32 y) {
     s32 dx;
     s32 dy;
     s32 row;

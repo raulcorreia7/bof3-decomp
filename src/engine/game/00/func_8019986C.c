@@ -9,7 +9,7 @@ MATCH void func_8019986C(void) {
                   (s32)GAME_WINDOW_STYLE);
     value = (s16)g_MenuCurrentPanel->u.message.id;
     if (value != 0) {
-        color = Resource_GetText((u32)(u16)value);
+        color = Message_GetText((u32)(u16)value);
         UI_DrawText((s16)(g_MenuCurrentPanel->pos.x + 7), (s16)(g_MenuCurrentPanel->pos.y + 3), 0, 0xFF, color);
     }
 }

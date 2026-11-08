@@ -4,7 +4,7 @@
  * update, local state update, audio cue flush, and controller poll. */
 
 MATCH void func_801E0C40(void) {
-    Area_StepCamera();
+    Area_UpdateCamera();
     func_801BDAB8();
     func_801E09B4();
     Actor_DispatchAll();

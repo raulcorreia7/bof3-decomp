@@ -15,7 +15,7 @@ MATCH void func_800A47AC(void) {
     u8(*flags)[6];
     u32 shifted_mask;
 
-    Menu_ArmPanelTask(0x15, 5);
+    Menu_OpenPanelTask(0x15, 5);
     menu_id    = 0x11;
     D_80148628 = 0x142;
     D_80148626 = 0;
@@ -24,7 +24,7 @@ MATCH void func_800A47AC(void) {
     D_8014862E = 0;
     /* FAKE: hold second argument. */
     FAKE_BARRIER();
-    Menu_ArmPanelTask(menu_id, 5);
+    Menu_OpenPanelTask(menu_id, 5);
     D_80148596 = 1;
     D_80148597 = 0;
     SND_PlayCue(EMI_CUE_ID(1, 2));

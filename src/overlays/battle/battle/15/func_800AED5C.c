@@ -7,6 +7,7 @@ typedef struct BattleRecordHead {
 
 extern u8 D_80145F20[];
 
+/* NON_MATCHING: reloaded context, volatile context and typed saved pointer tried; first diff 0x800AED60, base load. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AED5C(s32 arg0, u32 battler_index) {
     BattleSelectionContext* ctx;
@@ -24,7 +25,7 @@ NON_MATCHING s32 func_800AED5C(s32 arg0, u32 battler_index) {
     if (BATTLER_IS_PLAYER(sel)) {
         src         = &D_80145F20[sel * BATTLE_PARTY_STRIDE];
         ctx->sel    = battler_index;
-        ctx->record = (s16*)&g_Game.members[sel].turn.command.target;
+        ctx->record = (s16*)&g_Game.members[sel].u.turn.command.target;
     } else {
         ctx->record = (s16*)&D_801EB3DC[sel * BATTLE_ENEMY_STRIDE];
         src         = (u8*)&ENEMY_COMBATANT(sel).stats;

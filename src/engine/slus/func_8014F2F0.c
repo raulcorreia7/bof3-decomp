@@ -21,7 +21,7 @@ MATCH void func_8014F2F0(void) {
     g_AreaCameraRefreshCount = 2;
 
     do {
-        GFX_StepScreenFade(&level, -0x400, 1, 0U, 2U);
+        GFX_UpdateScreenFade(&level, -0x400, 1, 0U, 2U);
         CallbackWait(1U);
         iteration++;
     } while (iteration < 5);
@@ -31,7 +31,7 @@ MATCH void func_8014F2F0(void) {
     next_position = position + 2;
     for (;;) {
         if (active_result == 0) {
-            result = GFX_StepScreenFade(&level, -0x400, 1, 0U, 2U);
+            result = GFX_UpdateScreenFade(&level, -0x400, 1, 0U, 2U);
         }
 
         first_coordinate         = *position;

@@ -121,7 +121,7 @@ typedef struct Ability {
     u8  power;
     u8  element;       /* ElementFlags */
     u8  ability_flags; /* AbilityFlags */
-    u16 description;   /* battle/battle/15 func_8009704C passes this resource ID to Resource_GetText */
+    u16 description;   /* battle/battle/15 func_8009704C passes this resource ID to Message_GetText */
 } Ability;
 
 ASSERT_OFFSET(Ability, description, 0x12);

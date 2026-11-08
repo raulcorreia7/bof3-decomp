@@ -9,7 +9,7 @@ MATCH void SYS_Main(void) {
     __main();
     g_SysHardwareInitialized = 0;
     SYS_InitRuntime();
-    SYS_RunLogo();
+    SYS_StartLogo();
     DrawSyncCallback(SYS_CaptureDrawTime);
     CallbackRegister(0, SYS_StartFrontend);
 
@@ -19,7 +19,7 @@ MATCH void SYS_Main(void) {
         PutDispEnv((DISPENV*)g_GfxCurrentDisplayFrame);
         PutDrawEnv((DRAWENV*)(g_GfxCurrentDisplayFrame + 0x14));
         GFX_UploadPalette();
-        GFX_RunTransferQueue();
+        GFX_UpdateTransferQueue();
         DrawOTag((u_long*)(g_GfxCurrentDisplayFrame + 0x8C));
         SYS_UpdateKeyState();
         SND_UpdateVoiceStatus();

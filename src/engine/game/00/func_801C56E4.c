@@ -12,7 +12,7 @@ MATCH void func_801C56E4(void) {
         index = 0x3A;
     }
     Actor_RequestScript(index);
-    GFX_StagePalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+    GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
     Actor_ClearVelocity();
     state               = g_Task;
     state->gravity      = -8;

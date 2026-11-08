@@ -24,7 +24,7 @@ MATCH void func_801D23E4(void) {
             SND_PlayCue(EMI_CUE_ID(1, 0));
         }
     } else {
-        TEXT_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
+        Message_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
         D_80148340 = 0x3A;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {

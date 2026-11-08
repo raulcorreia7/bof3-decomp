@@ -11,7 +11,7 @@ NON_MATCHING void func_801D20D0(void) {
     u8* cursor;
     s8  i;
 
-    TEXT_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
+    Message_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
     cursor                            = &D_80148656;
     g_MenuPanelTasks[0].u.addr.unk_10 = 0x4B;
     g_MenuPanelTasks[21].active       = 0;

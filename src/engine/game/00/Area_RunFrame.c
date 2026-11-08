@@ -5,8 +5,8 @@ MATCH void Area_RunFrame(void) {
     func_8015A7E8();
     func_80199440();
     func_801A06D8();
-    Area_StepCamera();
-    Area_RunParty();
+    Area_UpdateCamera();
+    Area_UpdateParty();
     func_801BDAB8();
     func_801A0514();
     Actor_DispatchAll();

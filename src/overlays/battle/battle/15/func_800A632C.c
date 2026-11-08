@@ -8,7 +8,7 @@ MATCH void func_800A632C(void) {
     u8*           page_counter;
     u16*          effect_flag;
 
-    value                                    = Resource_GetText(0x62);
+    value                                    = Message_GetText(0x62);
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = value;
     pad_state                                = &g_InputPressed;
     decoded                                  = INPUT_REPEATED(*pad_state, (PADLright | PADLleft));

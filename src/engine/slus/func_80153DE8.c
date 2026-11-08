@@ -89,7 +89,7 @@ NON_MATCHING void func_80153DE8(void) {
     for (row = 0; row < AREA_CELL_GRID_ROWS; row++) {
         for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
             g_AreaCells[row][col].prim_id = 0;
-            Area_ProbeCell(row, col, &g_AreaCells[row][col]);
+            Area_GetCell(row, col, &g_AreaCells[row][col]);
         }
     }
     order = &g_AreaCellPrimFreeIds[0x3FF];

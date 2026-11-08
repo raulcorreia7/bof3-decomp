@@ -7,7 +7,7 @@ MATCH void func_801984E8(void) {
     *ptr_503C = *ptr_503C + 1;
     func_801DE1C0();
     UI_SetMode(1u);
-    Area_StepCamera();
+    Area_UpdateCamera();
     Area_DrawScene();
     rect.w = 64;
     rect.x = 0;

@@ -10,6 +10,6 @@ MATCH void func_801F4288(void) {
     }
     D_801490E4[0] = 0;
     Item_VitalAdd(VITAL_ITEM_KEY);
-    Resource_RequestArea(2);
+    Message_Request(2);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
 }

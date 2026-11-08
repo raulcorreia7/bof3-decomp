@@ -113,7 +113,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                         order++;
                         GFX_FreePaletteFadeTarget(g_Task);
                         g_Task->unk_27 = (g_Task->unk_05 + 0x78);
-                        GFX_StagePalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+                        GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
                     }
                     mask += BATTLE_PARTY_STRIDE;
                     work += BATTLE_PARTY_STRIDE;

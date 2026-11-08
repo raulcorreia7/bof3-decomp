@@ -174,7 +174,7 @@ MATCH void func_801FBF18(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 MATCH void func_801FBFA8(void) {
@@ -183,7 +183,7 @@ MATCH void func_801FBFA8(void) {
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
-    Party_StagePalettes();
+    Party_LoadPalettes();
     g_PartyBattleOrder[0] = 7;
     D_80144F5E            = 8;
     D_80144F5F            = 5;
@@ -201,7 +201,7 @@ MATCH void func_801FC0C8(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(*D_80144908);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 /* blocker: frame 0x20 against 0x18; first diff: +0x0 addiu sp,sp,-32. */
@@ -211,7 +211,7 @@ MATCH void func_801FC1E8(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuAdultNinaAdultRei.h"
@@ -231,7 +231,7 @@ MATCH void func_801FC280(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(character);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 INCLUDE_ASM(func_801FC328);

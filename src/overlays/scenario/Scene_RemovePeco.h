@@ -4,5 +4,5 @@
    (scena12) */
 MATCH void Scene_RemovePeco(void) {
     Party_RemoveMember(CHAR_ID_PECO);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }

@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801D0C04(void) {
     g_Commu04States[D_801F294C]();
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-        Menu_RunPanelTasks();
+        Menu_UpdatePanelTasks();
     }
 }
 

@@ -14,7 +14,7 @@ volatile u8* func_800AC754(u8 entry_id);
 /* Functions. */
 /* Retail functions (one declaration each). */
 /* func_8014AEE0 */
-void         SYS_RunLogo(void);
+void         SYS_StartLogo(void);
 /* func_8014AFC0 */
 void         SYS_UpdateKeyState(void);
 /* func_8014B020 */
@@ -98,9 +98,9 @@ void         GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
 /* func_8014E5A0 */
 void         GFX_AddPrim(u32 ot_index, u32 primitive_size);
 /* func_8014E640 */
-s32          INPUT_GetRepeatedButtons(s32 button_mask);
+s32          PAD_GetRepeatedButtons(s32 button_mask);
 /* func_8014E6D0 */
-void         GFX_RunTransferQueue(void);
+void         GFX_UpdateTransferQueue(void);
 /* func_8014EA80 */
 void         SYS_StartFrontend(void);
 /* func_8014EC64 */
@@ -108,7 +108,7 @@ void         SYS_EnterFrontend(void);
 /* func_8014ECAC */
 void         UI_SetMode(u16 local_mode);
 /* func_8014F704 */
-s32          GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
+s32          GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
 /* func_8014F800 */
 void         UI_DrawText(s16 x, s16 y, s32 flag, u32 color, u8* text);
 /* func_8014F84C */
@@ -126,9 +126,9 @@ void         SYS_CopyString(u8* dst, u8* src, s32 limit);
 /* func_80150224 */
 void         Message_StartAreaMessage(s32 message_index);
 /* func_80150284 */
-void         Resource_RequestArea(s32 request_id);
+void         Message_Request(s32 request_id);
 /* func_801502D0 */
-u8*          Resource_GetText(u32 resource_id);
+u8*          Message_GetText(u32 resource_id);
 /* func_80150304 */
 void         UI_ResetMessage(void);
 /* func_801503E0 */
@@ -144,11 +144,11 @@ void         UI_ClosePanel(void);
 /* func_80151628 */
 void         UI_ScrollChoice(void);
 /* func_8015196C */
-void         UI_RunChoiceStep(void);
+void         UI_UpdateChoice(void);
 /* func_801526F4 */
 extern void  UI_DrawWaitMarker(s16 x, s16 y);
 /* func_801527E4 */
-extern void  Area_StepCamera(void);
+extern void  Area_UpdateCamera(void);
 void         func_80153DE8(void);
 /* func_80154698 */
 extern void  Area_RefreshCellGrid(void);
@@ -173,7 +173,7 @@ s32          Area_SetCellPalette(s32 x, s32 y);
 s32          Area_ClearCellPalette(s32 x, s32 y);
 extern s32   func_80155560(u32 part_word, void* prim, s32 mode);
 /* func_801558F0 */
-s32          Area_ProbeCellId(s32 x, s32 y);
+s32          Area_GetCellId(s32 x, s32 y);
 /* func_801559AC */
 POLY_FT4*    Area_FindCellQuad(s32 column, s32 row);
 /* func_80155A08 */
@@ -211,14 +211,14 @@ void         Area_DrawGouraudQuad(u32* record);
 /* func_80158B24 */
 void         Area_IndexCells(void);
 /* func_80158C80 */
-void         Menu_RunPanelTasks(void);
+void         Menu_UpdatePanelTasks(void);
 void         func_80158E20(void);
 /* func_80158DB8 */
-s32          Menu_ArmPanelTask(u8 menu_id, u8 handler);
+s32          Menu_OpenPanelTask(u8 menu_id, u8 handler);
 /* func_80158E50 */
 void         Menu_ResetPanelTasks(void);
 /* func_8015A758 */
-void         Area_RunParty(void);
+void         Area_UpdateParty(void);
 void         func_8015B410(void* matrix);
 void         func_8015B4B0(void* matrix);
 s8           func_8015B4F4(s32 code);
@@ -361,7 +361,7 @@ void        SND_ResolveXAStream(s32 stream_id);
 /* func_80163858 */
 void        SND_StoreXASyncResult(s32 intr, u8* result);
 /* func_801638B0 */
-void        SND_ServiceXA(void);
+void        SND_UpdateXA(void);
 /* func_801639B8 */
 void        SND_XaStateIdle(void);
 /* func_801639D0 */
@@ -432,7 +432,7 @@ bool        Item_VitalHas(s32 item_id);
 /* func_80166180 */
 s32         Item_VitalAdd(u8 item_id);
 /* func_8016620C */
-void        TEXT_SetVariable(u8 slot, u8 length, const u8* text);
+void        Message_SetVariable(u8 slot, u8 length, const u8* text);
 /* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))
@@ -452,11 +452,11 @@ s32 Item_GetDescription(s32 category, s32 item_id);
 u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
 u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
-/* 0x40-byte palette staging entries; GFX_StagePalette copies them out, the second copy lands 0x4000 above. */
+/* 0x40-byte palette staging entries; GFX_LoadPalette copies them out, the second copy lands 0x4000 above. */
 #define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
 #define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)
 /* func_80166C48 */
-void       GFX_StagePalette(u8* dst, s32 field);
+void       GFX_LoadPalette(u8* dst, s32 field);
 /* func_80166CB0 */
 s32        Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */

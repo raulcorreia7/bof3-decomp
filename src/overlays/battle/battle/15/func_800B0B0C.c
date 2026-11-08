@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* nonmatching: first difference +0x0004; retail keeps base_x in s5, the loop counter in s4 and y pre-shifted in s6, ours rotates the saved registers. */
+/* NON_MATCHING: pinned x, nonvolatile y and signed loop counter tried; first diff 0x800B0B10, saved registers. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800B0B0C(s16 base_x, s16 base_y) {
     volatile u16 y_value;

@@ -42,7 +42,7 @@ MATCH void Menu_DrawStatPanel(s16 panel_x, s16 panel_y, u8 palette_index) {
     UI_DrawGlyphString(x78, y17, 0, g_UiFormatBuffer);
     if (entryp->master_id != GAME_NONE) {
         x30 = entryp->master_id + 0x111;
-        TEXT_SetVariable(0, 8, Resource_GetText(x30));
+        Message_SetVariable(0, 8, Message_GetText(x30));
         WinDrawCueText(xb, panel_y + 34, 0x34);
     }
     UI_DrawSpriteRun(panel_x, panel_y, D_801D3FE8, 0);

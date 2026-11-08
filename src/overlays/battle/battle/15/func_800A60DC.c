@@ -12,7 +12,7 @@ MATCH void func_800A60DC(void) {
     u16  cursor_total;
     u8   state;
     u8*  resource;
-    resource                                 = Resource_GetText(0x61);
+    resource                                 = Message_GetText(0x61);
     pad_state                                = &g_InputPressed;
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = resource;
     input                                    = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));

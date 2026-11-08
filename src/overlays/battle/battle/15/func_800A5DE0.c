@@ -4,7 +4,7 @@ MATCH void func_800A5DE0(void) {
     u8* counter;
     u8  count;
 
-    Menu_ArmPanelTask(0x15, 5);
+    Menu_OpenPanelTask(0x15, 5);
     D_80148628 = -190;
     D_8014862A = 0x3F;
     D_80148626 = 0;

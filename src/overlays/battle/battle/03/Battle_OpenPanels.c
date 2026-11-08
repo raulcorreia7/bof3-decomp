@@ -16,21 +16,21 @@ MATCH void Battle_OpenPanels(void) {
 
     D_801EBF04               = 0;
     D_801EC328               = 0;
-    slot                     = Menu_ArmPanelTask(0x14, 3) & BYTE_MASK;
+    slot                     = Menu_OpenPanelTask(0x14, 3) & BYTE_MASK;
     D_80148332[slot].mode_00 = 7;
     D_80148332[slot].x_02    = 0x14;
     D_80148332[slot].unk_01  = 0;
     D_80148332[slot].y_04    = -0x16;
     group                    = &g_Battle.outcome.surprise;
     if (*group == 1) {
-        Battle_AddMessage(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_PARTY));
+        Battle_AddMessage(2, 0x30, Message_GetText(BATTLE_TEXT_INITIATIVE_PARTY));
     }
     if (*group == 2) {
-        Battle_AddMessage(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
+        Battle_AddMessage(2, 0x30, Message_GetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
     }
     for (battler = 0; battler < BATTLE_PARTY_CHARACTERS_COUNT; battler++) {
         if (ACTOR_IN_USE(g_Game.members[battler])) {
-            Menu_ArmPanelTask((battler + 0xD) & BYTE_MASK, 3);
+            Menu_OpenPanelTask((battler + 0xD) & BYTE_MASK, 3);
             D_80148332[battler + 0xD].mode_00 = 5;
             D_80148332[0xD + battler].unk_01  = 0;
             /* FAKE: barrier keeps the row-byte load after the two panel byte stores. */

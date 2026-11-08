@@ -21,7 +21,7 @@ MATCH void func_80152E94(void) {
             } else {
                 base = -3;
             }
-            Area_ProbeCell(base, col, cell);
+            Area_GetCell(base, col, cell);
         }
         g_AreaGridRowCursor = (g_AreaGridRowCursor != 0) ? g_AreaGridRowCursor - 1 : AREA_CELL_GRID_ROWS - 1;
     }

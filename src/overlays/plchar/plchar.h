@@ -111,9 +111,9 @@
         D_801490E4[0] = 0;                                                 \
         if (Item_Add(ITEM_CAT_ITEM, ITEM_HORSERADISH, 1, 0) & BYTE_MASK) { \
             SND_PlayCue(EMI_CUE_ID(1, 6));                                 \
-            Resource_RequestArea(2);                                       \
+            Message_Request(2);                                            \
         } else {                                                           \
-            Resource_RequestArea(3);                                       \
+            Message_Request(3);                                            \
         }                                                                  \
         g_GameStateIndex     = 2;                                          \
         g_Task->param.unk_0B = 1;                                          \
@@ -156,16 +156,16 @@ void Area_ClearCell(s32 x, s32 y);
             D_801490E4[0] = 0;                                             \
             if (Item_Add(ITEM_CAT_ITEM, ITEM_BERRIES, 1, 0) & BYTE_MASK) { \
                 SND_PlayCue(EMI_CUE_ID(1, 6));                             \
-                Resource_RequestArea(2);                                   \
+                Message_Request(2);                                        \
             } else {                                                       \
-                Resource_RequestArea(3);                                   \
+                Message_Request(3);                                        \
             }                                                              \
             g_Task->param.unk_0B = 2;                                      \
         } else if (roll >= 12) {                                           \
             CALLEE(2, x, y, cell & BYTE_MASK);                             \
             func_801C308C(0);                                              \
             Char_LoseHP(1, g_Game.current->chr.character_id);              \
-            Resource_RequestArea(0xD9);                                    \
+            Message_Request(0xD9);                                         \
             g_GameStateIndex     = 2;                                      \
             g_Task->param.unk_0B = 1;                                      \
         }                                                                  \

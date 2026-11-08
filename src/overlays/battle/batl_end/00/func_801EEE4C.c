@@ -1,7 +1,7 @@
 #include "batl_end_00.h"
 
 MATCH void func_801EEE4C(void) {
-    Menu_ArmPanelTask(1, 4);
+    Menu_OpenPanelTask(1, 4);
 
     D_80148356 = 4;
     D_80148357 = 0;

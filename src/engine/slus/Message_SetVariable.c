@@ -9,7 +9,7 @@
  * `slot` and NUL-terminates the copy; a length of 32 or more is clamped to 31
  * so the terminator still fits the slot.
  */
-MATCH void TEXT_SetVariable(u8 slot, u8 length, const u8* text) {
+MATCH void Message_SetVariable(u8 slot, u8 length, const u8* text) {
     u8 i;
 
     if (length >= 0x20) {

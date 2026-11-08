@@ -15,7 +15,7 @@ MATCH void func_801D42F0(void) {
     Menu_DrawClutStrip(D_80144953);
     items  = &D_801C893C[D_8014850E][D_80148510];
     counts = &D_801C8950[D_8014850E][D_80148510];
-    TEXT_SetVariable(0, 0xC, (const u8*)&g_Items[*items]);
+    Message_SetVariable(0, 0xC, (const u8*)&g_Items[*items]);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x19;
     D_801485DC                                                  = 1;
     D_801485E0                                                  = 0xB6;

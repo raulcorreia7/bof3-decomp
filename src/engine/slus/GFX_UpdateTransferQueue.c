@@ -4,7 +4,7 @@
  * halves and a record whose kind routes the upload through func_8014E7F8,
  * func_8014E8FC or LoadImage; the queue count is cleared afterwards.
  */
-MATCH void GFX_RunTransferQueue(void) {
+MATCH void GFX_UpdateTransferQueue(void) {
     RECT rect;
     u16* table1;
     u16* table2;

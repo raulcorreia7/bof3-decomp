@@ -65,7 +65,7 @@
 #define BATTLE_LEARNING_DIFFICULTY_TABLE  0x800B50DCu
 /* Four-byte function pointers, indexed by accessory id - 1 (bound 0x17). */
 #define BATTLE_ACCESSORY_CALL_TABLE       0x80149EC8u
-/* The 0x40-stride action blocks GFX_StagePalette copies an action step into, one
+/* The 0x40-stride action blocks GFX_LoadPalette copies an action step into, one
  * per battler slot (index << 6). */
 #define BATTLE_ACTION_BLOCK_TABLE         0x80035600u
 /* The encounter block: formations and 0x88-stride enemy records from +0x48 (ENCOUNTER_ENEMIES in game/enemy.h). Block

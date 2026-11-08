@@ -5,7 +5,7 @@ MATCH void func_800A602C(void) {
     u8  count;
 
     g_BattlePanelMode = 3;
-    Menu_ArmPanelTask(0x13, 5);
+    Menu_OpenPanelTask(0x13, 5);
     D_801485DE = 4;
     D_801485DF = 0;
     D_801485E0 = 0x15B;

@@ -18,7 +18,7 @@ MATCH void func_801D3AE4(void) {
         D_8014865B = 1;
         D_80148652 = next + 1;
         if (D_8014865C != -1) {
-            Resource_RequestArea(0xD1);
+            Message_Request(0xD1);
         }
     }
 }

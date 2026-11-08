@@ -12,6 +12,6 @@ MATCH void Game_RunCampMenuLoop(void) {
         callbacks = g_GameCampMenuLoad;
         CallbackWait(1u);
         callbacks[g_GameEntryState]();
-        Menu_RunPanelTasks();
+        Menu_UpdatePanelTasks();
     }
 }

@@ -4,5 +4,5 @@
 /* func_801FE20C (scena09), func_801FAE98 (scena11), func_801FD150 (scena12) */
 MATCH void Scene_RemoveAdultNina(void) {
     Party_RemoveMember(CHAR_ID_NINA_ADULT);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }

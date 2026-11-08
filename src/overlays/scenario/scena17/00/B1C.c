@@ -548,7 +548,7 @@ MATCH void func_801F9490(void) {
 INCLUDE_ASM(func_801F9504);
 
 MATCH void func_801F9654(void) {
-    Menu_RunPanelTasks();
+    Menu_UpdatePanelTasks();
     Shop_DispatchStep();
 }
 

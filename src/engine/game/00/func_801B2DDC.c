@@ -23,7 +23,7 @@ MATCH void func_801B2DDC(void) {
     if (((value & 0x8000) != 0) && ((kind = FIELD(u8, sel, 6u)) != GAME_NONE)) {
         switch (kind) {
             case 0:
-                Resource_RequestArea(value & 0xFFF);
+                Message_Request(value & 0xFFF);
                 break;
             case 1:
                 Message_StartAreaMessage(value & 0xFFF);
@@ -46,7 +46,7 @@ MATCH void func_801B2DDC(void) {
         }
         g_Task->header.step++;
     } else {
-        Resource_RequestArea(0);
+        Message_Request(0);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_Task->header.step++;

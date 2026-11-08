@@ -32,7 +32,7 @@
 
 /* Fixed retail addresses the units dereference. */
 #define SCENE_TABLE_BASE    0x800E3800u /* scene table: a u32 count, then AreaActorDef entries */
-#define RESOURCE_TABLE_BASE 0x8001A000u /* resource id table. @source: read:Resource_GetText@0x801502D0 */
+#define RESOURCE_TABLE_BASE 0x8001A000u /* resource id table. @source: read:Message_GetText@0x801502D0 */
 #define RESOURCE_ID_GROUP_WORD(id)                                                                                     \
     (((id) >> 12) & 0xC)                           /* byte offset of the group base word: id bits 14 and 15 times 4 */
 #define RESOURCE_ID_INDEX(id) ((id) & 0x3FFF)      /* index into the group's u16 offset table */
@@ -436,7 +436,7 @@ extern EMIDecodeContext D_800327A0[];
 extern u8               D_800E3800;
 
 /* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
- * Area_ProbeCell stores) and its row in g_AreaCellPrims (0 = none). */
+ * Area_GetCell stores) and its row in g_AreaCellPrims (0 = none). */
 typedef struct AreaCell {
     u8  tile_x;
     u8  tile_y;
@@ -1147,7 +1147,7 @@ void        func_80152FB0(void);
 extern s32  func_801530D0(void);
 extern void func_80153CC4(u32 unused);
 extern void func_80153D34(void);
-extern void Area_ProbeCell(s32 px, s32 py, AreaCell* out);
+extern void Area_GetCell(s32 px, s32 py, AreaCell* out);
 extern s32  Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
 extern u16  Area_AllocCellPrimRow(void);
 extern void Area_RequestCellRows(AreaCell* entry);

@@ -13,7 +13,7 @@ MATCH void func_801E5E30(void) {
             SAVE_DrawSlots(0x20, 0x30, 0U);
             break;
     }
-    UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(D_801ED7FC + 0xA6));
+    UI_DrawText(28, 21, 0, 0xFFU, Message_GetText(D_801ED7FC + 0xA6));
     g_MenuStartTimer -= 1;
     if (g_MenuStartTimer == 0) {
         g_MenuStartStep = g_MenuStartReturnStep;

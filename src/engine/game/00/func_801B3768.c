@@ -19,7 +19,7 @@ MATCH void func_801B3768(void) {
     u32*   spawn_count;
 
     if (SYS_TestFlag(D_80144FC4, g_Actors[g_Game.current->status.field.slot_12D].unk_05) != 0) {
-        Resource_RequestArea(1);
+        Message_Request(1);
     } else {
         packed   = g_Actors[g_Game.current->status.field.slot_12D].unk_18;
         high     = packed >> 8;
@@ -47,12 +47,12 @@ MATCH void func_801B3768(void) {
                     SYS_SetFlag(D_80144FC4, kind);
                 }
                 SND_PlayCue(EMI_CUE_ID(1, 6));
-                Resource_RequestArea(GAME_TEXT_SEARCH_FOUND);
+                Message_Request(GAME_TEXT_SEARCH_FOUND);
                 /* Retail increments through a pointer here; a plain `+= 1` merges with the tail above. */
                 spawn_count = &D_80145038;
                 *spawn_count += 1;
             } else {
-                Resource_RequestArea(GAME_TEXT_SEARCH_NO_ROOM);
+                Message_Request(GAME_TEXT_SEARCH_NO_ROOM);
             }
         }
         actor_slot = g_Game.current->status.field.slot_12D;

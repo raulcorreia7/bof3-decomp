@@ -488,7 +488,7 @@ MATCH void func_801D5F7C(void) {
         SND_PlayCue(0x106);
         D_801F294D = 8;
     } else {
-        pressed = INPUT_GetRepeatedButtons(g_InputPressed & 0xA000);
+        pressed = PAD_GetRepeatedButtons(g_InputPressed & 0xA000);
         if (pressed & 0xFFFF) {
             SND_PlayCue(0x100);
         }
@@ -529,7 +529,7 @@ MATCH void func_801D6124(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(0x100);
     }
@@ -683,7 +683,7 @@ MATCH void func_801D708C(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(0x100);
     }

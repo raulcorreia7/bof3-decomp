@@ -15,7 +15,7 @@ MATCH void func_80152FB0(void) {
         for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
             rotCol = (rotCol == AREA_CELL_GRID_COLS - 1) ? 0 : rotCol + 1;
             Area_RequestCellRows(&g_AreaCells[rotRow][rotCol]);
-            Area_ProbeCell(row + AREA_CELL_GRID_ROWS, col, &g_AreaCells[rotRow][rotCol]);
+            Area_GetCell(row + AREA_CELL_GRID_ROWS, col, &g_AreaCells[rotRow][rotCol]);
         }
         g_AreaGridRowCursor = rotRow;
     }
