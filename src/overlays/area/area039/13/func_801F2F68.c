@@ -1,6 +1,5 @@
 #include "area039_13.h"
 
-/* func_801F2F68 */
-MATCH void Area_FadeOutSequence(void) {
+MATCH void func_801F2F68(void) {
     SND_FadeOutSequence(0U, 0, 4, 30);
 }

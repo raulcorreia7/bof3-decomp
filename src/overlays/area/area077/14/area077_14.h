@@ -36,6 +36,6 @@ extern void func_801F54B8(void);
 void func_801F61F0(s32 type);
 
 /* func_801F3198 */
-void Area_SetBlendDrawMode(u8 blend_mode);
+void GFX_AddBlendDrawMode(u8 blend_mode);
 
 #endif

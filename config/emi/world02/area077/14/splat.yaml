@@ -14,7 +14,7 @@ segments:
       - [0x2C0, c, func_801F2EC0]
       - [0x47C, c, func_801F307C]
       - [0x4E8, c, func_801F30E8]
-      - [0x598, c, Area_SetBlendDrawMode]
+      - [0x598, c, GFX_AddBlendDrawMode]
       - [0x5EC, c, func_801F31EC]
       - [0x9E0, c, func_801F35E0]
       - [0xAE8, c, func_801F36E8]

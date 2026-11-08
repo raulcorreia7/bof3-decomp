@@ -1,5 +1,6 @@
 #include "area145_14.h"
 
-MATCH void func_801F4374(void) {
+/* func_801F4374 */
+MATCH void Area_ResumeBGM(void) {
     SND_ResumeBGM(g_SndBGMId);
 }
