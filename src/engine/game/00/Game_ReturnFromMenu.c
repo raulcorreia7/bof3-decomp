@@ -1,8 +1,8 @@
 #include "game_00.h"
 
 MATCH void Game_ReturnFromMenu(void) {
-    u8  sp10;
-    u8  sp11;
+    u8  sep_index;
+    u8  seq_index;
     u8* request;
     u8* pending;
 
@@ -31,8 +31,8 @@ MATCH void Game_ReturnFromMenu(void) {
     }
     UI_SetMode(3u);
     func_80198BC4(1u);
-    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sp10, &sp11) & BYTE_MASK)) {
-        SND_FadeInSequence(sp10, sp11, 0x14, 0x10);
+    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sep_index, &seq_index) & BYTE_MASK)) {
+        SND_FadeInSequence(sep_index, seq_index, 0x14, 0x10);
     }
     request = &D_8014869C;
     if (*request != 0u) {
