@@ -12,7 +12,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_80096800]
-      - [0x4, .rodata, Battle_FireEnemyEvents]
+      - [0x4, .rodata, Battle_TriggerEnemyEvents]
       - [0x9C, .rodata, func_8009BFC4]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2
@@ -142,11 +142,11 @@ segments:
       - [0x51A0, c, func_8009B9A0]
       - [0x527C, c, func_8009BA7C]
       - [0x52CC, c, func_8009BACC]
-      - [0x53E8, c, Battle_FireEnemyEvents]
+      - [0x53E8, c, Battle_TriggerEnemyEvents]
       - [0x57C4, c, func_8009BFC4]
       - [0x5F94, c, func_8009C794]
-      - [0x6068, c, Battle_EnemyEventFired]
-      - [0x607C, c, Battle_SetEnemyEventFired]
+      - [0x6068, c, Battle_EnemyEventTriggered]
+      - [0x607C, c, Battle_SetEnemyEventTriggered]
       - [0x60AC, c, Battle_ActionHasElement]
       - [0x6194, c, Battle_ApplyEnemyEvent]
       - [0x64BC, c, func_8009CCBC]
