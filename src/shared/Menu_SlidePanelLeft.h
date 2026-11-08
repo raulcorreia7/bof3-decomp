@@ -1,4 +1,4 @@
-/* Slide the master panel 0x20 left and clamp its x at 0x98. The statements of
+/* Slide the master panel 32 pixels left and clamp its x at 152. The statements of
  * the battle, game and start overlay members; every change here must verify
  * every member. Members: func_800B254C (battle), func_8019973C (game),
  * func_801EA070 (start), and the start copy Menu_SlidePanelLeft2.
@@ -9,9 +9,9 @@
         MenuPanelTask* task = g_MenuCurrentPanel; \
         s16            val;                       \
                                                   \
-        val         = task->pos.x - 0x20;         \
+        val         = task->pos.x - 32;           \
         task->pos.x = val;                        \
-        if (val < 0x98) {                         \
+        if (val < 152) {                          \
             task->pos.x = 152;                    \
             task->state = 0;                      \
         }                                         \

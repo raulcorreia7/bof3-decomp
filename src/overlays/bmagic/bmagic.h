@@ -11,7 +11,7 @@
 #include "work/task.h"
 
 #define BMAGIC_PHASE_ANGLE(phase) ((phase) << 6)
-#define BMAGIC_ANGLE_PHASE(angle) (((angle) >> 6) & 0x3F)
+#define BMAGIC_PHASE_MASK         0x3F
 
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
@@ -58,21 +58,21 @@
  * unk_0A; unk_06 drops every fourth frame; at timer_05 zero the effect steps
  * and CLEAR (the image's work-clearing function) runs. A statement macro: the
  * member declares u16 phase and u8 timer. */
-#define BMAGIC_SWAY_EFFECT_WORK(WORK, CLEAR)                                \
-    phase            = (WORK)->phase_0C + 1;                                \
-    (WORK)->phase_0C = phase;                                               \
-    phase            = phase & 0x3F;                                        \
-    SP_REF(s16, 6)   = phase << 6;                                          \
-    (WORK)->unk_20   = (WORK)->unk_08 + ((rsin(phase << 6) * 0x18) >> 0xC); \
-    (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                     \
-    if ((g_FrameCount & 3) == 0) {                                          \
-        (WORK)->unk_06 = (WORK)->unk_06 - 1;                                \
-    }                                                                       \
-    timer            = (WORK)->timer_05 - 1;                                \
-    (WORK)->timer_05 = timer;                                               \
-    if (timer == 0) {                                                       \
-        g_BattleEffectBattler->param.unk_0B -= 1;                           \
-        CLEAR();                                                            \
+#define BMAGIC_SWAY_EFFECT_WORK(WORK, CLEAR)                                              \
+    phase            = (WORK)->phase_0C + 1;                                              \
+    (WORK)->phase_0C = phase;                                                             \
+    phase            = phase & BMAGIC_PHASE_MASK;                                         \
+    SP_REF(s16, 6)   = BMAGIC_PHASE_ANGLE(phase);                                         \
+    (WORK)->unk_20   = (WORK)->unk_08 + FIXED_MUL(rsin(BMAGIC_PHASE_ANGLE(phase)), 0x18); \
+    (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                   \
+    if ((g_FrameCount & 3) == 0) {                                                        \
+        (WORK)->unk_06 = (WORK)->unk_06 - 1;                                              \
+    }                                                                                     \
+    timer            = (WORK)->timer_05 - 1;                                              \
+    (WORK)->timer_05 = timer;                                                             \
+    if (timer == 0) {                                                                     \
+        g_BattleEffectBattler->param.unk_0B -= 1;                                         \
+        CLEAR();                                                                          \
     }
 
 /* The sway-advance step of the effect work record WORK points to: phase_0C
@@ -82,17 +82,17 @@
  * count reaches unk_07. A statement macro: the member declares s32 wave, u16
  * phase and u8 tick. The rsin argument keeps its (s16) truncation: the wave is
  * passed twice and the second, recomputed shift lands in the call's delay slot. */
-#define BMAGIC_SWAY_ADVANCE_WORK(WORK)                                                 \
-    phase            = (WORK)->phase_0C + 1;                                           \
-    (WORK)->phase_0C = phase;                                                          \
-    wave             = phase & 0x3F;                                                   \
-    SP_REF(s16, 6)   = (s16)(wave << 6);                                               \
-    (WORK)->unk_20   = (WORK)->unk_08 + ((s32)(rsin((s16)(wave << 6)) * 0x18) >> 0xC); \
-    tick             = (WORK)->unk_06 + 1;                                             \
-    (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                \
-    (WORK)->unk_06   = tick;                                                           \
-    if ((tick & BYTE_MASK) == (WORK)->unk_07) {                                        \
-        (WORK)->header.step += 1;                                                      \
+#define BMAGIC_SWAY_ADVANCE_WORK(WORK)                                                             \
+    phase            = (WORK)->phase_0C + 1;                                                       \
+    (WORK)->phase_0C = phase;                                                                      \
+    wave             = phase & BMAGIC_PHASE_MASK;                                                  \
+    SP_REF(s16, 6)   = (s16)BMAGIC_PHASE_ANGLE(wave);                                              \
+    (WORK)->unk_20   = (WORK)->unk_08 + FIXED_MUL((s32)rsin((s16)BMAGIC_PHASE_ANGLE(wave)), 0x18); \
+    tick             = (WORK)->unk_06 + 1;                                                         \
+    (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                            \
+    (WORK)->unk_06   = tick;                                                                       \
+    if ((tick & BYTE_MASK) == (WORK)->unk_07) {                                                    \
+        (WORK)->header.step += 1;                                                                  \
     }
 
 /* One remembered position of an effect's trail. */

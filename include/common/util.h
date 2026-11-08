@@ -19,8 +19,8 @@
 
 /* Bit arrays of u32 words, one bit per id: bit `i` is bit `i % 32` of word `i / 32`. */
 #define BIT_ARRAY_WORDS(bits)    ((bits) / 32)
-#define BIT_ARRAY_TEST(words, i) ((words)[(i) >> 5] & (1 << ((i) & 0x1F)))
-#define BIT_ARRAY_SET(words, i)  ((words)[(i) >> 5] |= 1 << ((i) & 0x1F))
+#define BIT_ARRAY_TEST(words, i) ((words)[(i) >> 5] & BIT((i) & 0x1F))
+#define BIT_ARRAY_SET(words, i)  ((words)[(i) >> 5] |= BIT((i) & 0x1F))
 
 /* The element count of an array declared in scope. */
 #define ARRAY_COUNT(a)           (sizeof(a) / sizeof((a)[0]))
@@ -30,7 +30,7 @@
 #define MIN(a, b)                (((a) < (b)) ? (a) : (b))
 #define MAX(a, b)                (((a) > (b)) ? (a) : (b))
 
-/* The same ABS as PsyQ <abs.h>; whichever header comes first defines it. */
+/* The same ABS as PsyQ <abs.h>. Not abs(): ABS(a - b) recomputes the difference on the negative path, abs() negates it. */
 #ifndef ABS
 #define ABS(x) (((x) >= 0) ? (x) : (-(x)))
 #endif

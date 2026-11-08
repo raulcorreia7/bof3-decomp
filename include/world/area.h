@@ -50,13 +50,6 @@
 /* A scenario script owns the field while the active bit is set. */
 #define GAME_SCRIPT_ACTIVE()             (g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE)
 
-/* Word bits of D_8014625A, the world entry/step busy word. Bits 0-2 mark party
- * slots still busy with an entry; bit 3 is set when an entry starts; bit 4
- * blocks accept input; bit 6 is set before a map entry runs; bit 10 is set
- * while a step runs; bit 11 is set while the run input is held; bit 12 is set
- * while the party changes tile; bit 15 is set during a full map reload. */
-#define AREA_WALK_BUSY(n)                (1 << (n))
-
 #define AREA_MAP_CELL_RECORD_SIZE        0x04
 
 #define AREA_TILE_RECT_SIZE              0x04
@@ -180,6 +173,7 @@ typedef enum GameFlags {
     GAME_FLAG_SCRIPT_ACTIVE = 1 << 8,
 } GameFlags;
 
+/* The world entry/step busy word. Bit n of the low three marks party slot n still busy with an entry. */
 typedef enum AreaWalkFlags {
     AREA_WALK_BUSY_ALL             = (1 << 0) | (1 << 1) | (1 << 2),
     AREA_WALK_ENTRY_ACTIVE         = 1 << 3,
