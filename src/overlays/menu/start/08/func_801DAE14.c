@@ -20,7 +20,7 @@ NON_MATCHING void func_801DAE14(u16 buttons) {
     flags  = &D_801484EA;
     *flags = 0;
     offset = 0;
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < PARTY_RECORD_COUNT; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
             for (index = 0; index < (count & BYTE_MASK); index++) {
                 if (g_Characters[i].character_id == g_PartyFieldOrder[index]) {

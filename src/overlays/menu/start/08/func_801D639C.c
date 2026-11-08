@@ -15,29 +15,29 @@ MATCH void func_801D639C(void) {
     choice += 0x15;
     record = (g_CharSlot[g_PartyFieldOrder[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]] * 0xA4) + choice;
     switch (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A) {
-        case 0:
+        case EQUIP_SLOT_WEAPON:
         default:
-            group_index = 1;
+            group_index = ITEM_CAT_WEAPON;
             choice      = record + 0xE;
             break;
-        case 1:
-            group_index = 2;
+        case EQUIP_SLOT_SHIELD:
+            group_index = ITEM_CAT_ARMOR;
             choice      = record + 0xF;
             break;
-        case 2:
-            group_index = 2;
+        case EQUIP_SLOT_HELMET:
+            group_index = ITEM_CAT_ARMOR;
             choice      = record + 0x10;
             break;
-        case 3:
-            group_index = 2;
+        case EQUIP_SLOT_ARMOR:
+            group_index = ITEM_CAT_ARMOR;
             choice      = record + 0x11;
             break;
-        case 4:
-            group_index = 3;
+        case EQUIP_SLOT_ACCESSORY_1:
+            group_index = ITEM_CAT_ACCESSORY;
             choice      = record + 0x12;
             break;
-        case 5:
-            group_index = 3;
+        case EQUIP_SLOT_ACCESSORY_2:
+            group_index = ITEM_CAT_ACCESSORY;
             choice      = record + 0x13;
             break;
     }

@@ -40,13 +40,13 @@ MATCH void func_801E1710(MenuPanelTask* task) {
         name_width = 5;
     }
     UI_DrawText((task->pos.x - (u32)((u8)name_width * 6 - 72)), (task->pos.y + 7), 0, 5, record);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->flags & 2) ? D_801E5C90 : (u8*)&D_801E5C78, 1);
-    UI_DrawSpriteRun(task->pos.x - 8, task->pos.y, (task->flags & 1) ? D_801E5CB4 : D_801E5CA8, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->flags & MENU_LIST_FLAG_TAB_2) ? D_801E5C90 : (u8*)&D_801E5C78, 1);
+    UI_DrawSpriteRun(task->pos.x - 8, task->pos.y, (task->flags & MENU_LIST_FLAG_TAB_1) ? D_801E5CB4 : D_801E5CA8, 1);
     flags = task->flags;
-    if (!(flags & 0xF0)) {
+    if (!(flags & MENU_LIST_FRAME_MASK)) {
         task->flags = 0;
     } else {
-        task->flags = flags - 0x10;
+        task->flags = flags - MENU_LIST_FRAME_STEP;
     }
     for (n = 0; n < 9; n++) {
         UI_DrawSprite(task->pos.x + (n + 5) * 8, task->pos.y, 1, 1);

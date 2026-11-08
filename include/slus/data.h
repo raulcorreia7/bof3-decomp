@@ -42,9 +42,12 @@ extern u8          g_PartyFormation;
 extern u8          g_PartyBattleOrder[];
 extern u32         D_80145040;
 extern u32         D_80145044;
-extern u8          D_8014546C[];
-extern u8          D_801454F4[][3];
-extern u32         D_80145548;
+/* The abilities the shop offers, packed to the front. */
+#define ABILITY_STOCK_SLOT_COUNT 128
+
+extern u8  D_8014546C[ABILITY_STOCK_SLOT_COUNT];
+extern u8  D_801454F4[][3];
+extern u32 D_80145548;
 /* A unit that must re-read the cell after every store (etc/game/00) defines
  * GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
 #ifdef GRAPHICS_PALETTE_PENDING_VOLATILE
