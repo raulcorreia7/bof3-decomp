@@ -301,7 +301,7 @@ MATCH s32 func_801FCD38(void) {
 /* Hint: a draft drops the stores of D_80146865 and D_80146867 to zero before the step store; the retail order is ScriptVars, 865, 867, 875, 874. */
 INCLUDE_ASM(func_801FCD58);
 
-#include "overlays/scenario/Scene_JoinAdultNinaAndMomo.h"
+#include "overlays/scenario/Scene_JoinAdultNinaMomo.h"
 
 #include "overlays/scenario/Scene_JoinAdultNina.h"
 
@@ -318,11 +318,11 @@ MATCH void Scene_JoinMomo_801FCF44(void) {
     SCENE_JOIN_MOMO();
 }
 
-#include "overlays/scenario/Scene_JoinMomoAndPeco.h"
+#include "overlays/scenario/Scene_JoinMomoPeco.h"
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 
-#include "overlays/scenario/Scene_JoinReiAndGarr.h"
+#include "overlays/scenario/Scene_JoinReiGarr.h"
 
 MATCH void func_801FD064(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);

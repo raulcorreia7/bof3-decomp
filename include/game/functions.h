@@ -87,7 +87,7 @@ void  func_801A4D54(u8* script);
 /* func_801A7704 */
 void  Scene_Start(u8 scenario_index);
 /* func_801A7804 */
-void  Scene_RequestOverlay(void);
+void  Scene_LoadOverlay(void);
 /* func_801A782C */
 void  Game_UpdateScenario(void);
 /* func_801A7878 */
@@ -101,7 +101,7 @@ void  Game_UpdateScene(void);
 /* func_801A7C2C */
 void  Scene_ResetEventState(void);
 /* func_801A7CAC */
-void  Scene_RunEventHandler(void);
+void  Scene_UpdateEvent(void);
 /* func_801A86D4 */
 void  Scene_DispatchObject(void* record);
 /* func_801ABBA8 */

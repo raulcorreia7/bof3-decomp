@@ -259,28 +259,28 @@ MATCH s32 func_801FAB6C(void) {
     return -1;
 }
 
-#include "overlays/scenario/Scene_JoinAdultNinaAndMomo.h"
+#include "overlays/scenario/Scene_JoinAdultNinaMomo.h"
 
 #include "overlays/scenario/Scene_JoinAdultNina.h"
 
 #include "overlays/scenario/Scene_JoinMomo.h"
 
-MATCH void Scene_JoinAdultNinaAndMomo_801FAC48(void) {
+MATCH void Scene_JoinAdultNinaMomo2(void) {
     SCENE_JOIN_ADULT_NINA_AND_MOMO();
 }
 
 /* func_801FAC94 */
 #include "overlays/scenario/Scene_JoinMomoWithGarr.h"
 
-MATCH void Scene_JoinMomo_801FACD8(void) {
+MATCH void Scene_JoinMomo2(void) {
     SCENE_JOIN_MOMO();
 }
 
-#include "overlays/scenario/Scene_JoinMomoAndPeco.h"
+#include "overlays/scenario/Scene_JoinMomoPeco.h"
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 
-#include "overlays/scenario/Scene_JoinReiAndGarr.h"
+#include "overlays/scenario/Scene_JoinReiGarr.h"
 
 #include "overlays/scenario/Scene_RemoveRei.h"
 

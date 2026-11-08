@@ -1,6 +1,6 @@
 #include "sce10eff_00.h"
 
-/* The state table Scene_EffectRunState dispatches through; the word after its last
+/* The state table Scene_UpdateEffectState dispatches through; the word after its last
  * entry holds the work pointer Scene_EffectBegin publishes. */
 Callback D_801D2708[15] = {
     func_801D0FAC, func_801D1218, func_801D1D58, func_801D1034, func_801D10C8,

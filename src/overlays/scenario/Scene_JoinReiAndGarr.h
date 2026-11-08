@@ -2,7 +2,7 @@
  * party and restage the party palettes. One definition shared by the scenario
  * programs; every change here must verify every member. */
 /* func_801FADAC (scena11), func_801FD018 (scena12) */
-MATCH void Scene_JoinReiAndGarr(void) {
+MATCH void Scene_JoinReiGarr(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_REI);

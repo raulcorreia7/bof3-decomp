@@ -208,4 +208,4 @@ INCLUDE_ASM(Scene_DrawScanBar);
 #include "overlays/scenario/Scene_ClaimScanBar.h"
 
 /* blocker: case constant 1 kept in v0; first diff: +0x8C. */
-INCLUDE_ASM(Scene_StepScanBars);
+INCLUDE_ASM(Scene_UpdateScanBars);

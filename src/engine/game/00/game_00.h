@@ -815,7 +815,7 @@ void    func_801A7CE8(void);
 void    Menu_OpenMaster(void);
 void    Message_RunAreaMessage(void);
 void    func_801A7E54(void);
-void    Scene_RunShopSaveEvent(void);
+void    Scene_StartShopSave(void);
 void    func_801A839C(void);
 void    func_801A83DC(void);
 void    func_801A852C(void);

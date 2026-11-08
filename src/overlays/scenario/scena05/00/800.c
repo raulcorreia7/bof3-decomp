@@ -447,7 +447,7 @@ MATCH void func_801FD440(void) {
 
 #include "overlays/scenario/Scene_JoinNina.h"
 
-MATCH void Scene_JoinNina_801FD49C(void) {
+MATCH void Scene_JoinNina2(void) {
     SCENE_JOIN_NINA();
 }
 

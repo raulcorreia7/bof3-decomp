@@ -176,7 +176,7 @@ MATCH void func_801F754C(void) {
 
 #include "shared/Actor_Reveal.h"
 
-MATCH void Actor_FreePaletteFades_801F7A14(void) {
+MATCH void Actor_FreePaletteFades2(void) {
     u8** slots;
 
     ACTOR_FREE_PALETTE_FADES();

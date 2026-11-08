@@ -137,11 +137,7 @@ src/overlays/plchar/plp678/00/C.c	Char_RunStepScript_801D0218
 src/overlays/plchar/plp678/00/C.c	Char_StartTurn_801D014C
 src/overlays/scenario/Scene_ClearParty.h	EFFECT_BANK_80140000
 src/overlays/scenario/scena00/00/8.c	D_801FC980_Tables
-src/overlays/scenario/scena03/00/278.c	Actor_FreePaletteFades_801F7A14
-src/overlays/scenario/scena05/00/800.c	Scene_JoinNina_801FD49C
 src/overlays/scenario/scena06/00/6A0.c	Scene_JoinNina_801FE1D4
-src/overlays/scenario/scena11/00/4BC.c	Scene_JoinAdultNinaAndMomo_801FAC48
-src/overlays/scenario/scena11/00/4BC.c	Scene_JoinMomo_801FACD8
 src/overlays/scenario/scena12/00/57C.c	Scene_JoinAdultNinaAndMomo_801FCEB4
 src/overlays/scenario/scena12/00/57C.c	Scene_JoinMomo_801FCF44
 src/overlays/scenario/scena16/00/scena16_00.h	SCENA16_D_80010004

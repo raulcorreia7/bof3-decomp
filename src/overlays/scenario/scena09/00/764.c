@@ -538,7 +538,7 @@ MATCH void func_801FDD38(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_JoinAdultNinaAndMomo.h"
+#include "overlays/scenario/Scene_JoinAdultNinaMomo.h"
 
 #include "overlays/scenario/Scene_JoinMomo.h"
 
@@ -550,7 +550,7 @@ MATCH void func_801FDE50(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_JoinMomoAndPeco.h"
+#include "overlays/scenario/Scene_JoinMomoPeco.h"
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 

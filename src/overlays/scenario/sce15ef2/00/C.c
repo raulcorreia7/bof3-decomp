@@ -64,7 +64,7 @@ MATCH void func_801D0DA4(void) {
 INCLUDE_ASM(func_801D0E30);
 
 MATCH void func_801D0EC4(void) {
-    if (!(Scene_StepScanBars(0xF0) & BYTE_MASK)) {
+    if (!(Scene_UpdateScanBars(0xF0) & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -144,7 +144,7 @@ INCLUDE_ASM(Scene_DrawScanBar);
 #include "overlays/scenario/Scene_ClaimScanBar.h"
 
 /* blocker: case constant 1 kept in v0; first diff: +0x8C. */
-INCLUDE_ASM(Scene_StepScanBars);
+INCLUDE_ASM(Scene_UpdateScanBars);
 
 INCLUDE_ASM(func_801D17A0);
 

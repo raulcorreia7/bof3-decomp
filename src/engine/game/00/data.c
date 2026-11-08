@@ -265,7 +265,7 @@ SceneSlots* g_SceneScenes[20] = {
     (SceneSlots*)&D_801FD1A4, (SceneSlots*)&D_801FBF34, (SceneSlots*)&D_801FC404, (SceneSlots*)&D_801FE5F4,
     (SceneSlots*)&D_801F8538, (SceneSlots*)&D_801F9728, (SceneSlots*)&D_801F6D58, (SceneSlots*)&D_801F6DBC};
 
-Callback g_SceneStates[2] = {(Callback)Scene_ResetEventState, (Callback)Scene_RunEventHandler};
+Callback g_SceneStates[2] = {(Callback)Scene_ResetEventState, (Callback)Scene_UpdateEvent};
 
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -273,7 +273,7 @@ u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
 Callback g_SceneEvents[64] = {
     (Callback)func_801A7CE8,        (Callback)func_801F37E4, (Callback)func_801F394C,          (Callback)func_801F4B60,
     (Callback)Menu_OpenMaster, (Callback)func_801A7E54, (Callback)Message_RunAreaMessage, (Callback)func_801F4378,
-    (Callback)func_801F34A0,        (Callback)func_801F3740, (Callback)Scene_RunShopSaveEvent, (Callback)func_801F2C04,
+    (Callback)func_801F34A0,        (Callback)func_801F3740, (Callback)Scene_StartShopSave, (Callback)func_801F2C04,
     (Callback)func_801F50F0,        (Callback)func_801F2C04, (Callback)func_801F16BC,          (Callback)func_801F3F34,
     (Callback)func_801F3254,        (Callback)func_801F3EE8, (Callback)func_801F529C,          (Callback)func_801F3198,
     (Callback)func_801F45EC,        (Callback)func_801F18BC, (Callback)func_801F1B8C,          (Callback)func_801F1E74,
