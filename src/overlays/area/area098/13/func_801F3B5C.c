@@ -1,15 +1,7 @@
 #include "area098_13.h"
 
-MATCH void func_801F3B5C(void) {
-    u8 count;
+#include "overlays/area/Area_SpawnSlotStep.h"
 
-    count          = g_Task->unk_06;
-    g_Task->unk_06 = count + 1;
-    if ((count & 3) == 0) {
-        Area_ClaimSpawnSlot();
-    }
-    func_801F5940();
-    Area_UpdateSpawnSlots();
-    g_Task->timer = 32;
-    g_Task->header.mode += 1;
+MATCH void func_801F3B5C(void) {
+    AREA_SPAWN_SLOT_STEP(func_801F5940);
 }

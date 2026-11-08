@@ -21,16 +21,12 @@ extern u8 D_801F507C[];
 
 /* The overlay's flag word. */
 
-extern void func_801F2DF4(s32 arg0);
+extern void func_801F2DF4(s32 blend_mode);
 void        func_801F4060(s16 step);
 void        func_801F47F0(void);
 void        func_801F4E8C(s32 x, s32 y);
 
 extern u8 D_80144EF8[];
-
-extern u8 D_80146874;
-
-extern u8 D_80146875;
 
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180

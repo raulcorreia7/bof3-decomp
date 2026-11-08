@@ -164,7 +164,7 @@ MATCH void func_801D25CC(void) {
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
+            SND_StopSequence(g_SelectionCues[bgm_offset], g_SelectionCues[bgm_offset + 1]);
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
@@ -333,7 +333,7 @@ MATCH void func_801D4840(void) {
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
+            SND_StopSequence(g_SelectionCues[bgm_offset], g_SelectionCues[bgm_offset + 1]);
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
@@ -389,7 +389,7 @@ MATCH void func_801D5978(void) {
 
     if (g_UiWindowEffectBusy == 0) {
         offset = g_SndBGMId * 4;
-        SND_StopSequence(*(g_SelectionCues + offset), *(D_80181EBB + offset));
+        SND_StopSequence(g_SelectionCues[offset], g_SelectionCues[offset + 1]);
         SND_RequestBGM(D_801DB0CC);
     loop_2:
         if (EMI_IsReady() == 0) {

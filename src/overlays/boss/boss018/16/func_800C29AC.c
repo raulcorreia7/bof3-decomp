@@ -1,5 +1,4 @@
 #include "boss018_16.h"
 
-/* tried: nested 2x2 loops copying table entries to 0x80104030-indexed area
- * using local tables and 0x80104000; prologue/indexing/register layout differs */
+/* blocker: nested 2x2 table copy into the 0x80104030 word area; first diff: prologue, then indexing and register order. */
 INCLUDE_ASM(func_800C29AC);
