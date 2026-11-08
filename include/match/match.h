@@ -184,7 +184,7 @@
 
 /*
  * Status markers. They expand to nothing and tag the construct for readers and
- * the build; they are not MATCH_FAKE_* helpers and never need a `FAKE:` note.
+ * the build; they are not FAKE_* helpers and never need a `FAKE:` note.
  *
  *   MATCH         this C is the original: it compiles to the retail bytes.
  *   NON_MATCHING  a C draft under `#ifdef NON_MATCHING`; the split assembly in
