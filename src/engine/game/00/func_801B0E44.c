@@ -17,9 +17,9 @@ NON_MATCHING s32 func_801B0E44(void) {
     saved_dir = g_Task->direction_08;
     result    = func_801B9598();
     if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
-        g_Task->timer = 0x20;
+        g_Task->timer = 32;
     } else {
-        g_Task->timer = 0x10;
+        g_Task->timer = 16;
     }
     divisor       = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
     g_Task->timer = (u8)(g_Task->timer / (u32)(divisor & BYTE_MASK));

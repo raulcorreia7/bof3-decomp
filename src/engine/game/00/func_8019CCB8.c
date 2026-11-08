@@ -20,7 +20,7 @@ MATCH void func_8019CCB8(void) {
             g_Task->direction_08 = g_Game.members[0].facing;
             g_Task->vx           = g_FacingOffsets[g_Task->direction_08].x * 2;
             g_Task->vy           = g_FacingOffsets[g_Task->direction_08].y * 2;
-            g_Task->timer        = 0x10;
+            g_Task->timer        = 16;
             step                 = g_Task->timer;
             move_x               = g_Task->pos.x.fixed;
             move_y               = g_Task->pos.y.fixed;
