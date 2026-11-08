@@ -151,7 +151,7 @@ NON_MATCHING void func_801E7BA0(void) {
         g_MenuPanelTasks[temp_a1_528 + 0xD].unk_0C =
             (u8)((s32)(g_Game.members[temp_a1_528].chr.ap * 0x37) / (s32)g_Game.members[temp_a1_528].chr.stats.max_ap);
         Actor_SelectScript(((g_Task)->facing + 4) & BYTE_MASK);
-        GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
+        GFX_LoadPalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
         func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
         GFX_UploadPaletteRows();
         if (*(u16*)(&g_Battle.state) & BATTLE_STATE_RELOAD_PARTY) {

@@ -329,7 +329,7 @@ MATCH void func_801FD064(void) {
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
     Party_JoinMember(CHAR_ID_MOMO);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 #include "overlays/scenario/Scene_RemoveRei.h"

@@ -26,7 +26,7 @@ MATCH void func_801B26E0(void) {
         for (i = 1; i < g_PartySize; i++) {
             TASK_SET(&g_Game.members[i]);
             if (g_Task->header.mode == 3) {
-                GFX_StagePalette(GAME_PALETTE_STAGE + (g_Task->unk_05 << 6), 0);
+                GFX_LoadPalette(GAME_PALETTE_STAGE + (g_Task->unk_05 << 6), 0);
                 g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                 ACTOR_CLEAR_TINT();
                 g_Task->tint.bytes.flags = 0;

@@ -7,5 +7,5 @@ MATCH void Scene_JoinReiAndGarr(void) {
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(CHAR_ID_GARR);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }

@@ -28,7 +28,7 @@
  * func_801C1254 stores the selected section's address in the scratchpad work
  * record at +0x4C. A section starts with a count and the offset of its palette
  * table; the table is a list of offsets, each to CHARACTER_PALETTE_COLORS
- * 16-bit colors, which GFX_StagePalette copies to two VRAM staging rows. */
+ * 16-bit colors, which GFX_LoadPalette copies to two VRAM staging rows. */
 #define CHARACTER_BANK_SECTION_COUNT 3
 #define CHARACTER_PALETTE_COLORS     32
 

@@ -53,5 +53,5 @@ found:
     g_Task->tint.bytes.unk_5E  = 0;
     g_Task->tint.bytes.unk_5F  = 0;
     g_Task->tint.bytes.flags   = 0;
-    GFX_StagePalette((slot * 0x40) + GAME_PALETTE_STAGE, 0);
+    GFX_LoadPalette((slot * 0x40) + GAME_PALETTE_STAGE, 0);
 }

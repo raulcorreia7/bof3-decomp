@@ -12,7 +12,7 @@ MATCH void func_801D4E74(void) {
     MENU_DRAW_HEADER();
     WinDrawCueText(28, 22, 0x9D);
     SAVE_DrawSlots(0x20, 0x30, 1);
-    buttons = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    buttons = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     prev    = g_SaveSlotFirst;
     if ((buttons & PADLup) != 0) {
         index           = prev - 1;

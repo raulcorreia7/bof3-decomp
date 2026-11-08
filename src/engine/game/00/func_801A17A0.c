@@ -26,7 +26,7 @@ MATCH s32 func_801A17A0(u8* entry_record) {
     if ((mode & 0x2000) == 0) {
         Message_StartAreaMessage((s16)mode);
     } else {
-        Resource_RequestArea(mode & 0xFFF);
+        Message_Request(mode & 0xFFF);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
 stored:

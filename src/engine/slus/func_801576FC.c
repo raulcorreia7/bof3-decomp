@@ -67,7 +67,7 @@ NON_MATCHING void func_801576FC(u8* record) {
                 case 1: /* switch 1 */
                 block_13:
                     val0 = ((u32) * (u32*)(val9) >> 0x14) & 0xF;
-                    tmp2 = Area_ProbeCellId((s32)tmp6, tmp1);
+                    tmp2 = Area_GetCellId((s32)tmp6, tmp1);
                     if (tmp2 != 0) {
                         switch (val0) { /* switch 2; irregular */
                             case 0:     /* switch 2 */

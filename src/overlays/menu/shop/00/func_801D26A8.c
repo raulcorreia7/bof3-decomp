@@ -6,7 +6,7 @@ MATCH void func_801D26A8(void) {
     u8* state;
 
     block = Item_GetRecord(g_ShopItemCategory, g_ShopItemId);
-    TEXT_SetVariable(0, 0xC, block);
+    Message_SetVariable(0, 0xC, block);
     D_80148340 = 0x4D;
     D_80148624 = 0;
     if (g_InputPressed != 0) {

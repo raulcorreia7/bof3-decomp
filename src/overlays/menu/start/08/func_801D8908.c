@@ -30,7 +30,7 @@ MATCH void func_801D8908(void) {
     pick  = index + g_MenuPanelTasks[16].unk_0C;
     kind  = *pick;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = *(u16*)(D_801CA71E + kind * START08_KIND_STRIDE);
-    buttons = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    buttons = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     value   = g_MenuPanelTasks[16].unk_0C;
     if (buttons & PADLup) {
         if (value != 0) {

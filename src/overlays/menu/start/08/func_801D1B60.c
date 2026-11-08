@@ -26,7 +26,7 @@ MATCH void func_801D1B60(void) {
         g_MenuPanelTasks[9].unk_0C = 1;
     }
     TASK_SET(saved_work);
-    input = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    input = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
     if (input & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_80148654 = 0;

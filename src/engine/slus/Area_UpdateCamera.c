@@ -4,7 +4,7 @@
  * calls one of the four edge refills), then rebuilds the rotation, view translation and projection matrix.
  */
 /* func_801527E4 */
-MATCH void Area_StepCamera(void) {
+MATCH void Area_UpdateCamera(void) {
     SVECTOR view;
     VECTOR  trans;
     s32     dist;

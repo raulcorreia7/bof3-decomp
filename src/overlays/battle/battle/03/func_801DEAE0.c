@@ -30,5 +30,5 @@ MATCH void func_801DEAE0(void) {
     CLOBBER_A2();
     /* FAKE: keeps a3 staged before arg4. */
     CLOBBER_A3();
-    func_801DE60C(0u, 2u, 0u, 0u, 0xFFu, Resource_GetText(x));
+    func_801DE60C(0u, 2u, 0u, 0u, 0xFFu, Message_GetText(x));
 }

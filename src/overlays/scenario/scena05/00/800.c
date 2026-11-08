@@ -454,7 +454,7 @@ MATCH void Scene_JoinNina_801FD49C(void) {
 MATCH void func_801FD4D8(void) {
     Party_RemoveMember(CHAR_ID_MOMO);
     Party_RemoveMember(CHAR_ID_NINA_YOUNG);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 #include "overlays/scenario/Scene_RemoveNina.h"
@@ -465,5 +465,5 @@ MATCH void func_801FD4D8(void) {
 
 MATCH void func_801FD580(void) {
     Party_RemoveMember(CHAR_ID_RYU_YOUNG);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }

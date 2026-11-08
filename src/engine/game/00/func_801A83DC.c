@@ -14,9 +14,9 @@ MATCH void func_801A83DC(void) {
                  * bonebreak timers); base+offset keeps the s0-reuse addiu, absolute form regresses
                  * bytes. */
                 SYS_SetFlag(state + 0xC5C, g_SceneEventSelection);
-                strncpy((char*)g_TextVariables[0], (char*)Resource_GetText((g_SceneEventSelection + 0x4172)), 8);
+                strncpy((char*)g_TextVariables[0], (char*)Message_GetText((g_SceneEventSelection + 0x4172)), 8);
                 D_801490E0 = 0;
-                Resource_RequestArea(0xFA);
+                Message_Request(0xFA);
                 *game_state = GAME_REQUEST_MESSAGE;
                 if (g_SndBGMId != GAME_NONE) {
                     SND_PauseBGM(g_SndBGMId);

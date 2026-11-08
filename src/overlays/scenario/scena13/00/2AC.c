@@ -347,7 +347,7 @@ MATCH void func_801FBBC4(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 MATCH void func_801FBC88(void) {
@@ -390,17 +390,17 @@ MATCH void func_801FBDD8(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 MATCH void func_801FBE98(void) {
     Party_JoinMember(CHAR_ID_REI);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 MATCH void func_801FBEC0(void) {
     Party_JoinMember(CHAR_ID_GARR);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 MATCH void func_801FBEE8(void) {

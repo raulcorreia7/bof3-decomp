@@ -38,7 +38,7 @@ MATCH void func_801D3304(void) {
     }
     if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_Battle.action_id].mask & 0x400)) {
         func_801D9484();
-        func_801DE560(2, 0, 0, 0x2D, Resource_GetText(0x37));
+        func_801DE560(2, 0, 0, 0x2D, Message_GetText(0x37));
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
         return;
@@ -55,7 +55,7 @@ MATCH void func_801D3304(void) {
     }
     if (row < D_801463C8) {
         func_801D9484();
-        func_801DE560(2, 0, 0, 0x2D, Resource_GetText(0x36));
+        func_801DE560(2, 0, 0, 0x2D, Message_GetText(0x36));
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
         return;

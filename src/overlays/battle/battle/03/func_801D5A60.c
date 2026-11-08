@@ -30,7 +30,7 @@ MATCH u8 func_801D5A60(void) {
             Battle_SetTextEnemyName(last_index);
             event_id = 0x28u;
         }
-        text = Resource_GetText(event_id);
+        text = Message_GetText(event_id);
         func_801DE560(2u, 0u, 0u, 0x2Du, text);
         return true;
     }

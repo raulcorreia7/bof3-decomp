@@ -565,7 +565,7 @@ MATCH void func_801FE698(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_WHELP);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 MATCH void func_801FE6DC(void) {
@@ -583,7 +583,7 @@ MATCH void func_801FE760(void) {
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuAdultGarrNinaAdult.h"
@@ -593,7 +593,7 @@ MATCH void func_801FE800(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
     Party_JoinMember(CHAR_ID_REI);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }
 
 MATCH void func_801FE840(void) {

@@ -3,7 +3,7 @@
 /* copies 0x20 halfwords of the selected record field into dst and dst +
  * 0x4000, then marks the copy complete.
  */
-MATCH void GFX_StagePalette(u8* dst, s32 field) {
+MATCH void GFX_LoadPalette(u8* dst, s32 field) {
     u8* record;
     u8* table;
     u8* src;

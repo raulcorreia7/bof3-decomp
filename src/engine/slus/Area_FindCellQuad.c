@@ -8,7 +8,7 @@ MATCH POLY_FT4* Area_FindCellQuad(s32 column, s32 row) {
     POLY_FT4* primitive;
     s32       index;
 
-    index = Area_ProbeCellId(column, row);
+    index = Area_GetCellId(column, row);
     if (index == 0) {
         primitive = 0;
     } else {

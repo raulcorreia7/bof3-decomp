@@ -34,11 +34,11 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     row++;
     UI_DrawText((s16)((x + 32) - icon * 4), (s16)(y + 1), 0, 6U, row);
     if (index != 1) {
-        Resource_GetText((index + 0xCA));
+        Message_GetText((index + 0xCA));
     } else if (sel[4] == 0) {
-        Resource_GetText((index + 0xCA) & HALF_MASK);
+        Message_GetText((index + 0xCA) & HALF_MASK);
     } else {
-        Resource_GetText(0xD0);
+        Message_GetText(0xD0);
     }
 
     line = (LINE_F2*)g_GfxPrimCursor;

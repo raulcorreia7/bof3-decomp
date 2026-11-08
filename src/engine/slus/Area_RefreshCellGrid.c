@@ -15,7 +15,7 @@ MATCH void Area_RefreshCellGrid(void) {
         rotRow = (rotRow == AREA_CELL_GRID_ROWS - 1) ? 0 : rotRow + 1;
         for (col = 0, rotCol = g_AreaGridColCursor; col < AREA_CELL_GRID_COLS; col++) {
             rotCol = (rotCol == AREA_CELL_GRID_COLS - 1) ? 0 : rotCol + 1;
-            Area_ProbeCell(row, col, &g_AreaCells[rotRow][rotCol]);
+            Area_GetCell(row, col, &g_AreaCells[rotRow][rotCol]);
         }
     }
     Area_IndexCells();

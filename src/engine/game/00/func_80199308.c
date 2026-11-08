@@ -2,9 +2,9 @@
 
 MATCH void func_80199308(void) {
     func_80199440();
-    Area_StepCamera();
+    Area_UpdateCamera();
     func_80167910();
-    Area_RunParty();
+    Area_UpdateParty();
     func_801BDAB8();
     func_80167E00();
     Actor_DispatchAll();

@@ -16,7 +16,7 @@ MATCH void func_801F5708(void) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         goto done;
     }
-    Resource_RequestArea(request);
+    Message_Request(request);
 done:
     func_801BE1B0(0xD);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;

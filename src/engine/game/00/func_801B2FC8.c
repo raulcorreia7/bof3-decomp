@@ -49,7 +49,7 @@ MATCH void func_801B2FC8(void) {
                 resource = 3;
             }
         }
-        Resource_RequestArea(resource);
+        Message_Request(resource);
     state:
         g_GameStateIndex    = GAME_REQUEST_MESSAGE;
         g_Task->header.step = 2;

@@ -39,12 +39,12 @@ MATCH void func_801D409C(void) {
                 for (index = 0; index < 12; index++) {
                     D_801490F8[index] = ability[ENEMY_COMBATANT(*battler).turn.command.id].name[index];
                 }
-                Battle_AddMessage(1, 0, Resource_GetText(BATTLE_TEXT_LEARNED));
+                Battle_AddMessage(1, 0, Message_GetText(BATTLE_TEXT_LEARNED));
                 return;
             }
             if (g_Game.members[*state - 1].u.turn.damage_flags.value & COMBATANT_FLAG_UNK_3) {
                 g_Game.members[*state - 1].u.turn.damage_flags.value &= clear_flag;
-                Battle_AddMessage(1, 0, Resource_GetText(BATTLE_TEXT_CANT_LEARN));
+                Battle_AddMessage(1, 0, Message_GetText(BATTLE_TEXT_CANT_LEARN));
                 return;
             }
         } while (g_Battle.row_cursor < 3);

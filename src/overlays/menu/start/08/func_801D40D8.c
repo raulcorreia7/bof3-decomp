@@ -11,9 +11,9 @@ NON_MATCHING void func_801D40D8(void) {
 
     Menu_DrawClutStrip(D_80144953);
     flag = &D_80148624;
-    TEXT_SetVariable(0, 0xC,
-                     Item_GetRecord(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A,
-                                    D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]));
+    Message_SetVariable(0, 0xC,
+                        Item_GetRecord(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A,
+                                       D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]));
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x1A;
     label                                                       = &D_8014865B;
     *flag                                                       = 1;

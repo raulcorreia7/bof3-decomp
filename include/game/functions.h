@@ -168,9 +168,9 @@ s32   func_801BE1B0(u32 index);
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 mode);
-/* Party_StagePalettes */
+/* Party_LoadPalettes */
 /* func_801C1630 */
-void  Party_StagePalettes(void);
+void  Party_LoadPalettes(void);
 /* func_801C187C */
 s32   Party_JoinMember(s32 char_id);
 /* Party_RemoveMember */

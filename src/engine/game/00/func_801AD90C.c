@@ -9,7 +9,7 @@ MATCH void func_801AD90C(void) {
         msgId = s_SceneMessages[spad->unk_04];
         if (msgId != 0) {
             TEXT_Format(&g_TextVariables[0], D_80195F0C, msgId);
-            Resource_RequestArea(5);
+            Message_Request(5);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             g_Task->unk_04   = 4U;
             return;

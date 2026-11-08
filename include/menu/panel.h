@@ -212,7 +212,7 @@ typedef struct MenuPanelAddr {
  * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
     u8       active;  /* set to open the panel, cleared to close it */
-    u8       handler; /* Menu_RunPanelTasks calls g_MenuPanels.handlers[handler] */
+    u8       handler; /* Menu_UpdatePanelTasks calls g_MenuPanels.handlers[handler] */
     u8       mode; /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
     u8       state;
     /* x and y are screen positions. Most readers load them with lhu; the slide

@@ -11,7 +11,7 @@ MATCH void func_801D446C(void) {
         g_InputRepeatButtons = 0;
         g_InputRepeatDelay   = 0;
         if (D_8014865C != -1) {
-            Resource_RequestArea(0xD5);
+            Message_Request(0xD5);
         }
         for (i = 0; i < 4; i++) {
             if (D_801E6100[i] != 0) {

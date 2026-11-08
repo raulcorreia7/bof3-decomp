@@ -5,9 +5,9 @@ include/slus/exports.h	PTR_s_INTERRRUPT_8017f508
 include/slus/exports.h	s__LOGO_LOGO_EXE_1_80149800
 include/sys/loader_tail.h	Rec8_80181E40
 src/engine/game/00/func_801C2018.c	EFFECT_BANK_80140000
-src/engine/slus/SYS_RunLogo.c	s__LOGO_LOGO_EXE_1_80149800
 src/engine/slus/SYS_ShowException.c	PTR_s_EXCEPTION_8017f504
 src/engine/slus/SYS_ShowException.c	PTR_s_INTERRRUPT_8017f508
+src/engine/slus/SYS_StartLogo.c	s__LOGO_LOGO_EXE_1_80149800
 src/engine/slus/data_80149800.c	s__LOGO_LOGO_EXE_1_80149800
 src/engine/slus/data_8017F53C.c	Rec_8017F5B4
 src/engine/slus/data_80181CA8.c	Rec8_80181E40

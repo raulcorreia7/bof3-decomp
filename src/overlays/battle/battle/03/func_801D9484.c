@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801D9484(void) {
-    Menu_ArmPanelTask(0u, 3u);
+    Menu_OpenPanelTask(0u, 3u);
     D_80148332[0].mode_00 = 6;
     D_80148332[0].x_02    = 0x14;
     D_80148332[0].unk_01  = 0;

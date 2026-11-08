@@ -43,7 +43,7 @@ NON_MATCHING void func_8009704C(void) {
     D_801485E0 = g_MenuPanelTasks[16].pos.x + 7u;
     D_801485E2 =
         g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].u.addr.unk_10) * 13 + 0x1A);
-    trigger = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
+    trigger = PAD_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value &
          (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
@@ -113,7 +113,7 @@ NON_MATCHING void func_8009704C(void) {
     group                      = (BattleSelectionGroup*)sel;
     entry                      = Party_GetAbilities(message[0], group->index, 1);
     kind                       = entry[group->cursor];
-    handle                     = Resource_GetText(*(u16*)(D_801CA71E + kind * 0x14));
+    handle                     = Message_GetText(*(u16*)(D_801CA71E + kind * 0x14));
     ring_index                 = (D_801EC328 - 1) & 0xF;
     D_801EB5B4[ring_index * 2] = handle;
     if (g_MenuPanelTasks[16].u.addr.unk_12 != 0) {

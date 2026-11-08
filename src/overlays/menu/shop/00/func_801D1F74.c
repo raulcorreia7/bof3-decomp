@@ -10,7 +10,7 @@ MATCH void func_801D1F74(void) {
     block = Item_GetRecord(g_ShopItemCategory, g_ShopItemId);
     mode  = &D_8014865B;
     pad   = &g_InputPressed;
-    TEXT_SetVariable(0, 0xC, block);
+    Message_SetVariable(0, 0xC, block);
     D_80148340 = 0x4A;
     D_80148624 = 1;
     D_80148628 = D_80148334 + (1 - *mode) * 32 + 0xDE;

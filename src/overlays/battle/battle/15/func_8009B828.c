@@ -28,7 +28,7 @@ MATCH void func_8009B828(void) {
             i++;
         }
         func_801D9484();
-        func_801DE560(2, 0, 0, 0x2D, Resource_GetText(0xF));
+        func_801DE560(2, 0, 0, 0x2D, Message_GetText(0xF));
         g_BattleMode    = 3;
         g_BattleStep    = 0;
         g_BattleSubStep = 0;

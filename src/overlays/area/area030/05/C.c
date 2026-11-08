@@ -70,7 +70,7 @@ MATCH void func_800F51BC(void) {
     s32 r;
     u8  total;
 
-    r = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    r = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     if ((r & PADLup) != 0) {
         s_ListCursor -= 1;
         if ((s8)s_ListCursor < 0) {
@@ -129,7 +129,7 @@ MATCH void func_800F550C(void) {
     u8  s3;
 
     s0 = 0;
-    switch (INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & HALF_MASK) {
+    switch (PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & HALF_MASK) {
         case 0x2000:
             s0 = 1;
             break;

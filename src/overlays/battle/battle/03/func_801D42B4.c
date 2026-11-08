@@ -11,7 +11,7 @@ MATCH void func_801D42B4(void) {
             for (i = 0; i < ENEMY_NAME_LENGTH; i++) {
                 g_TextVariables[0][i] = g_BattleEnemyBattlers[D_801ED9B0[D_801EB5A8 - 1].owner_index].name[i];
             }
-            Battle_AddMessage(1, 0, Resource_GetText(D_801ED9B0[D_801EB5A8 - 1].panel_id));
+            Battle_AddMessage(1, 0, Message_GetText(D_801ED9B0[D_801EB5A8 - 1].panel_id));
             D_801EB5A8 -= 1;
         } else {
             g_Battle.phase.step     = 4;

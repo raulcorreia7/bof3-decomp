@@ -29,7 +29,7 @@ MATCH void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order) {
     }
     step       = delta16;
     blend_mode = 1;
-    while ((GFX_StepScreenFade(&level, step, semi_trans_copy & BYTE_MASK, order_copy & BYTE_MASK, blend_mode) &
+    while ((GFX_UpdateScreenFade(&level, step, semi_trans_copy & BYTE_MASK, order_copy & BYTE_MASK, blend_mode) &
             BYTE_MASK) == 0) {
         CallbackWait(1);
     }

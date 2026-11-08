@@ -781,7 +781,7 @@ segments:
       - [0x2B79C, c, func_801C0F9C]
       - [0x2BA54, c, func_801C1254]
       - [0x2BC00, c, Party_BuildBattlers]
-      - [0x2BE30, c, Party_StagePalettes]
+      - [0x2BE30, c, Party_LoadPalettes]
       - [0x2BEB8, c, func_801C16B8]
       - [0x2C040, c, func_801C1840]
       - [0x2C07C, c, Party_JoinMember]

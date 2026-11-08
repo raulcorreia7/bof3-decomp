@@ -33,7 +33,7 @@ NON_MATCHING void func_80099B74(void) {
     if (D_8014862E == 0) {
         resource = 0x30;
     }
-    resource_id                                                = Resource_GetText(resource);
+    resource_id                                                = Message_GetText(resource);
     D_801EB5B4[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) * 2] = resource_id;
     pad_state                                                  = &g_InputPressed;
     pad                                                        = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
@@ -59,7 +59,7 @@ NON_MATCHING void func_80099B74(void) {
                 *(volatile u16*)&g_BattleTargetCursorCol;
             choice                        = *(volatile u16*)&g_BattleTargetCursorCol;
             g_BattleActorTurn->command.id = choice;
-            resource_id = Resource_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
+            resource_id = Message_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
             BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) = resource_id;
             D_80148597                                                               = 2;
             g_BattlePanelMode                                                        = 1;

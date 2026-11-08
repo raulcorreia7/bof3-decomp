@@ -4,5 +4,5 @@
    (scena12) */
 MATCH void Scene_RemoveRei(void) {
     Party_RemoveMember(CHAR_ID_REI);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }

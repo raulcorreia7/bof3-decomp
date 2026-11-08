@@ -25,7 +25,7 @@ MATCH void func_80099568(void) {
     } else {
         D_801485DC = 0;
     }
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Resource_GetText(D_8014862E == 0 ? 0x30 : 0x32);
+    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(D_8014862E == 0 ? 0x30 : 0x32);
     input                                    = &g_InputPressed;
     trigger                                  = INPUT_REPEATED(*input, (PADLup | PADLdown));
     held                                     = *input;

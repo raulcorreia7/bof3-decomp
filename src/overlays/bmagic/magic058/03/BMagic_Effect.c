@@ -29,7 +29,7 @@ INCLUDE_ASM(func_801EED30);
 
 MATCH void func_801EEE78(void) {
     if (g_Task->param.unk_0B == 0) {
-        func_801DE8C0(1, 0x3C, Resource_GetText(0x14U));
+        func_801DE8C0(1, 0x3C, Message_GetText(0x14U));
         g_Task->header.mode += 1;
     }
 }

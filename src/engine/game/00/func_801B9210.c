@@ -6,7 +6,7 @@ MATCH void func_801B9210(void) {
     s32 v;
 
     if (g_Task->tint.bytes.flags != 0) {
-        GFX_StagePalette((GAME_PALETTE_STAGE + (g_Task->unk_05 << 6)), 0);
+        GFX_LoadPalette((GAME_PALETTE_STAGE + (g_Task->unk_05 << 6)), 0);
         g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->tint.bytes.flags = 0;
         ACTOR_CLEAR_TINT();

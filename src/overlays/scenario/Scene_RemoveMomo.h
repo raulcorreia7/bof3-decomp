@@ -4,5 +4,5 @@
    (scena11), func_801FD128 (scena12) */
 MATCH void Scene_RemoveMomo(void) {
     Party_RemoveMember(CHAR_ID_MOMO);
-    Party_StagePalettes();
+    Party_LoadPalettes();
 }

@@ -5,7 +5,7 @@
  * u16 offset into that group.
  */
 /* func_801502D0 */
-MATCH u8* Resource_GetText(u32 resource_id) { /* func_801502D0 */
+MATCH u8* Message_GetText(u32 resource_id) { /* func_801502D0 */
     u8*           base;
     volatile u32* entry;
     u8*           ptr;

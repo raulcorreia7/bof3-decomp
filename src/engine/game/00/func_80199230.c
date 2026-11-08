@@ -2,13 +2,13 @@
 
 MATCH void func_80199230(void) {
     Game_RunScenarioEntry();
-    Menu_RunPanelTasks();
+    Menu_UpdatePanelTasks();
     func_801C57F4();
     func_8015A7E8();
     func_80199440();
     func_801A06D8();
-    Area_StepCamera();
-    Area_RunParty();
+    Area_UpdateCamera();
+    Area_UpdateParty();
     func_801BDAB8();
     func_801A0514();
     Actor_DispatchAll();

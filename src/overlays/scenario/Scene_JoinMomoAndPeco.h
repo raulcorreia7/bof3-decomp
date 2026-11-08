@@ -7,7 +7,7 @@
     Party_BuildBattlers(PARTY_ORDER_FIELD);                                   \
     Party_JoinMember(CHAR_ID_MOMO);                                           \
     Party_JoinMember(CHAR_ID_PECO);                                           \
-    Party_StagePalettes()
+    Party_LoadPalettes()
 
 MATCH void Scene_JoinMomoAndPeco(void) {
     SCENE_JOIN_MOMO_AND_PECO();
