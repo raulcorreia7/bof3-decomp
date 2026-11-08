@@ -62,8 +62,8 @@ MATCH void Fishing_CastGaugeSweep(void) {
         }
     }
     func_801E0C80(0, 2);
-    func_801E0DCC(0x10, 2, 0x87, 0xB4);
-    Fishing_DrawGaugeFill(0x88, 0xCB, ((FISHING_STATE->pos_x_0C * 0x60) / 255), 2);
+    func_801E0DCC(0x10, 2, 135, 180);
+    Fishing_DrawGaugeFill(136, 203, ((FISHING_STATE->pos_x_0C * 96) / 255), 2);
     if (D_80145E92[0] == 3) {
         FISHING_STATE->origin_x_2E = 0xB8;
         FISHING_STATE->origin_y_30 = 0xD1;

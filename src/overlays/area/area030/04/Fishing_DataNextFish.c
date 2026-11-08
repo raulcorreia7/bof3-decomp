@@ -38,7 +38,7 @@ loop:
     if (D_80145E93[0] >= 3) {
         mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
     }
-    func_801D7C10(0x58, 0x28, mask);
+    func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
     FISHING_STATE->step_timer_09 = 4;
     FISHING_STATE->handler_index_01 += 1;
 }

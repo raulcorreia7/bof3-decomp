@@ -21,7 +21,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 0xF2, 0x9F, 0xF0, (s32)g_WindowStyle);
+    UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 242, 159, 0xF0, (s32)g_WindowStyle);
     if (FISHING_STATE->counter_08 != 0) {
         if (FISHING_STATE->step_timer_09 == 0) {
             health = FISHING_STATE->bounce_3C.half.unk_3C;
@@ -74,12 +74,12 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
         }
     }
     bar_slot = (u8)FISHING_STATE->step_index_0A;
-    bar_y    = panel_y + 0x19;
+    bar_y    = panel_y + 25;
     if (bar_slot != 0) {
         if (FISHING_STATE->counter_08 == 1) {
-            bar_y = (s16)(panel_y + ((bar_slot * 3) + 0xC));
+            bar_y = (s16)(panel_y + ((bar_slot * 3) + 12));
         } else {
-            bar_y = (s16)(panel_y - ((bar_slot * 3) - 0x19));
+            bar_y = (s16)(panel_y - ((bar_slot * 3) - 25));
         }
         bar_count = 10;
     } else {
@@ -99,18 +99,17 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                 bar_index = 0;
             }
             count += 1;
-            bar_y += 0xD;
+            bar_y += 13;
         } while (count < bar_count);
     }
-    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 0xF2, 0xE, 0, (s32)g_WindowStyle);
-    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 0x94) & HALF_MASK, 0xF2, 0xB, 0x30, (s32)g_WindowStyle);
+    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, (s32)g_WindowStyle);
+    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, 0x30, (s32)g_WindowStyle);
     health = FISHING_STATE->bounce_3C.half.unk_3C;
-    UI_DrawText((s16)(panel_x + 0x3D), (s16)(panel_y + 6), 0, 0xFFU,
-                ((u8*)&D_80010000 + D_80010000[D_801E2114[health]]));
+    UI_DrawText((s16)(panel_x + 61), (s16)(panel_y + 6), 0, 0xFFU, ((u8*)&D_80010000 + D_80010000[D_801E2114[health]]));
     func_801D7784((u16)panel_x, (u16)panel_y);
     text = (u8*)g_UiFormatBuffer;
     TEXT_Format(text, D_801D0C08, health + 1);
-    UI_DrawGlyphString((s16)(panel_x + 0xCA), (s16)(panel_y + 0x92), 0U, text);
+    UI_DrawGlyphString((s16)(panel_x + 202), (s16)(panel_y + 146), 0U, text);
 }
 #else
 INCLUDE_ASM(func_801D72E4);
