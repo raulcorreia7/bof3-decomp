@@ -76,8 +76,9 @@ run_target('pre-push', command: [tools / 'pre_push.sh'])
 
 # pytest is in the dev group: tools/setup.sh --dev installs it.
 if fs.exists(root / '.venv/bin/pytest')
+  # The suite compiles the hand-asm C models natively, which takes longer than Meson's 30 s default on CI runners.
   test('tools', find_program(root / '.venv/bin/pytest'), args: ['-q'],
-    workdir: root)
+    workdir: root, timeout: 180)
 else
   # `meson test` with no test defined exits 0, so a missing pytest must fail it.
   message('Tool tests cannot run: pytest is missing. Run tools/setup.sh --dev, then meson setup --reconfigure build/meson')
