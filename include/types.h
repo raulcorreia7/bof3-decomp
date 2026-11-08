@@ -27,7 +27,9 @@
 #define ASSERT_OFFSET(type, member, expected_offset) \
     STATIC_ASSERT(DECOMP_JOIN(type, DECOMP_JOIN(_offset_, member)), DECOMP_OFFSETOF(type, member) == (expected_offset))
 
-#ifndef __cplusplus
+/* PsyQ has no boolean type; the game returns flags as an int. C23 and C++ define bool,
+ * true and false themselves, so this is only for older C. */
+#if !defined(__cplusplus) && (!defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L)
 enum {
     false,
     true
