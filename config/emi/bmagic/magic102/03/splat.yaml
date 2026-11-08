@@ -22,7 +22,7 @@ segments:
       - [0x209C, bin, D_801F0C9C]
       - [0x20BC, bin, D_801F0CBC]
       - [0x20C0, bin, D_801F0CC0]
-      - [0x20C4, bin, D_801F0CC4]
+      - [0x20C4, bin, BMagic_Pad_801F0CC4]
       - [0x20C8, bin, D_801F0CC8]
       - [0x20CC, bin, D_801F0CCC]
       - [0x21CC, bin, D_801F0DCC]

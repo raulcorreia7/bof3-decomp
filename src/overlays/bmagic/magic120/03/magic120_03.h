@@ -11,7 +11,6 @@ void BMagic_DrawWhelpBreath(void);
 void func_801F0274(void);
 void func_801F08AC(void);
 
-/* D_801F0CC4 */
 extern Callback BMagic_StepTable[];
 
 #endif
