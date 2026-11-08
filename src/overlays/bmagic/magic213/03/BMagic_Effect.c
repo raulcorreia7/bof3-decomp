@@ -6,7 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC04_2.h"
 
-
 INCLUDE_ASM(func_801EED04);
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"

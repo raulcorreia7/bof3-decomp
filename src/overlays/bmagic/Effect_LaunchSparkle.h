@@ -6,7 +6,7 @@ MATCH void Effect_LaunchSparkle(void) {
     PartyBattler* battler;
 
     if (--EFFECT_SPARKLE_TASK->timer_05 == 0) {
-        battler            = g_BattleEffectBattler;
+        battler                     = g_BattleEffectBattler;
         EFFECT_SPARKLE_TASK->pos.x  = battler->pos.x;
         EFFECT_SPARKLE_TASK->pos.y  = battler->pos.y;
         EFFECT_SPARKLE_TASK->pos.z  = battler->pos.z;
