@@ -38,4 +38,8 @@ extern u8            D_801F5268[]; /* the "Manillo" text at +0x10 */
 void func_801F40FC(s16 x, s16 y);
 void Area_Update(void);
 
+#include "overlays/area/World_UpdateCloudLayer.h"
+
+extern WorldCloudTexture g_WorldCloudTexture;
+
 #endif
