@@ -110,7 +110,7 @@
         }                                                                  \
         D_801490E4[0] = 0;                                                 \
         if (Item_Add(ITEM_CAT_ITEM, ITEM_HORSERADISH, 1, 0) & BYTE_MASK) { \
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));                                 \
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));                   \
             Message_Request(2);                                            \
         } else {                                                           \
             Message_Request(3);                                            \
@@ -140,12 +140,12 @@ void Area_ClearCell(s32 x, s32 y);
         if ((RANDOM_MASK(7)) >= 6) {                                       \
             CALLEE(4, x, y, cell & BYTE_MASK);                             \
         }                                                                  \
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));                                    \
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));                      \
         return 1;                                                          \
     }                                                                      \
     if ((u8)(cell + 0xA) < 2) {                                            \
         CALLEE(0, x, y, cell & BYTE_MASK);                                 \
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));                                    \
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));                      \
         roll = RANDOM_MASK(0xF);                                           \
         if (roll < 7) {                                                    \
             CALLEE(3, x, y, cell & BYTE_MASK);                             \
@@ -155,7 +155,7 @@ void Area_ClearCell(s32 x, s32 y);
             }                                                              \
             D_801490E4[0] = 0;                                             \
             if (Item_Add(ITEM_CAT_ITEM, ITEM_BERRIES, 1, 0) & BYTE_MASK) { \
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));                             \
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));               \
                 Message_Request(2);                                        \
             } else {                                                       \
                 Message_Request(3);                                        \

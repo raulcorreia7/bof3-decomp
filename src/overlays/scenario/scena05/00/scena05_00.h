@@ -22,7 +22,7 @@ extern u16 D_80146876;
     Game_SetScriptActive();                                                         \
     D_80146866 = 0;                                                                 \
     D_80146867 = 0;                                                                 \
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));                                                  \
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));                                      \
     D_80146875 = timer;                                                             \
     D_80146876 = 0;                                                                 \
     return 1

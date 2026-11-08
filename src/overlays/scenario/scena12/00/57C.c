@@ -47,7 +47,7 @@ MATCH void func_801F71FC(void) {
             count = 0;                                                                              \
             value += 1;                                                                             \
             if (SYS_TestFlag(g_SceneFlags, 0x14) != 0) {                                            \
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 10));                                                     \
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 10));                                         \
             }                                                                                       \
         }                                                                                           \
         bits = high << 15;                                                                          \

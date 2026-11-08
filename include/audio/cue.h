@@ -19,22 +19,22 @@
 
 #include "types.h"
 
-#define EMI_CUE_RECORD_SIZE   0x04
+#define EMI_CUE_RECORD_SIZE  0x04
 
 /* The field masks the seven bank readers apply to a cue record. */
-#define EMI_CUE_ALIAS_MASK    0x07
-#define EMI_CUE_PROGRAM_MASK  0x7F
-#define EMI_CUE_COMPARE_MASK  0x0F
-#define EMI_CUE_VOICE_MASK    0x1F
-#define EMI_CUE_LAYER_MASK    0x60
+#define EMI_CUE_ALIAS_MASK   0x07
+#define EMI_CUE_PROGRAM_MASK 0x7F
+#define EMI_CUE_COMPARE_MASK 0x0F
+#define EMI_CUE_VOICE_MASK   0x1F
+#define EMI_CUE_LAYER_MASK   0x60
 
 /* The sound banks, by what each holds. Banks 3 to 5 hold the party character
  * forms and have no cue site. */
 typedef enum SNDBank {
-    SND_BANK_MUSIC = 0,
+    SND_BANK_MUSIC  = 0,
     SND_BANK_COMMON = 1,
-    SND_BANK_AREA = 2,
-    SND_BANK_ENEMY = 6,
+    SND_BANK_AREA   = 2,
+    SND_BANK_ENEMY  = 6,
 } SNDBank;
 
 /* The cue id: bank in bits 8-11, record index in bits 0-7. */
