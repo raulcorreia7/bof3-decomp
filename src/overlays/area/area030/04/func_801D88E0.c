@@ -29,7 +29,7 @@ NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
     func_801D8D70((u16)panel_x, (u16)panel_y);
     UI_DrawText((s16)(panel_x + 51), (s16)(panel_y + 7), 0, 5U, (&D_801E21D4));
     x0              = panel_x;
-    accessory_flags = g_Task->unk_07;
+    accessory_flags = g_Task->option_flags;
     y0              = panel_y;
     if (accessory_flags & 0x80) {
         icon_x = panel_x + 16;
@@ -66,7 +66,8 @@ NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
             panel_x = (s16)g_Accessories;
             UI_DrawText((s16)icon_x, (s16)icon_y, 7, 0xCU, (g_FishingRod * 0x14) + panel_x);
             func_800F7094((s32)slot_x, (s16)icon_y, g_FishingRod, 3, 0);
-            UI_DrawText((s16)icon_x, (s16)(panel_y + 24), (s32)(g_Task->unk_07), 0xCU, (g_FishingRod * 0x14) + panel_x);
+            UI_DrawText((s16)icon_x, (s16)(panel_y + 24), (s32)(g_Task->option_flags), 0xCU,
+                        (g_FishingRod * 0x14) + panel_x);
             func_800F7094((s32)slot_x, (s16)(panel_y + 44), g_FishingLure, 3, 0);
             last_x       = icon_x;
             last_y       = panel_y + 42;
@@ -91,7 +92,7 @@ NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
             func_800F7094((s32)slot_x, (s16)icon_y, g_FishingLure, 3, 0);
             last_x       = icon_x;
             last_y       = panel_y + 40;
-            last_palette = g_Task->unk_07 & ACTOR_OPT_KEEP_FACING;
+            last_palette = g_Task->option_flags & ACTOR_OPT_KEEP_FACING;
         }
     }
     UI_DrawText((s16)last_x, last_y, last_palette, 0xCU, 0);

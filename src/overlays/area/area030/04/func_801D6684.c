@@ -35,7 +35,7 @@ NON_MATCHING void func_801D6684(void) {
     spad0 = g_Task;
     if (FIELD(u8, spad0, 0xAu) != 0) {
         func_801D2034(0xD4, 0x8A, 0U, (FIELD(u8, spad0, 0xBu) + 1) & BYTE_MASK);
-        page = g_Task->unk_09 / 12;
+        page = g_Task->timer / 12;
     } else {
         FIELD(u8, spad0, 0x9u) = (u8)(FIELD(u8, spad0, 0x9u) + 1);
         spad5                  = g_Task;
@@ -46,7 +46,7 @@ NON_MATCHING void func_801D6684(void) {
     }
     row = 0;
     if ((g_Task->unk_0A == 0) && (*((g_Task->param.unk_0B * 8) + &D_801E2050 + (page & BYTE_MASK)) == 1) &&
-        ((u32)((g_Task->unk_09 % 12) & BYTE_MASK) < 0xAU)) {
+        ((u32)((g_Task->timer % 12) & BYTE_MASK) < 0xAU)) {
         func_8014D978();
     }
     word_ptr   = &D_801E2070;
