@@ -210,7 +210,7 @@ MATCH void func_801F0568(void) {
     Magic008ThirdSteps handlers;
 
     handlers = D_801EEC70;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }

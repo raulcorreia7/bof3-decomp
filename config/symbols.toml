@@ -217,7 +217,7 @@ g_BMagicEffectModes = { addr = 0x801F0A24, source = "Handlers of magic006 (Mind 
 ["emi/bmagic/magic008/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC58 = { addr = 0x801EEC58, source = "Six step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0294." }
-D_801EEC70 = { addr = 0x801EEC70, type = "EffectStepFuncs5", source = "Five step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0568." }
+D_801EEC70 = { addr = 0x801EEC70, type = "Magic008ThirdSteps", source = "Five step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0568." }
 D_801EECAC = { addr = 0x801EECAC, type = "Magic008EarlySteps", source = "Seven step handlers of the magic008 effect, run by header.step (byte 0x02) from func_801F1294." }
 D_801EECC8 = { addr = 0x801EECC8, type = "Magic008Steps", source = "Ten step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F1708." }
 Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }

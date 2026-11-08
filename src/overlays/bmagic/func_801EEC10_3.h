@@ -3,10 +3,10 @@
  * overlays; every change here must verify every member. */
 /* func_801EEC10 (magic220), func_801EEC10 (magic223), func_801EEC10 (magic226) */
 MATCH void func_801EEC10(void) {
-    EffectStepFuncs3 handlers = D_801EEC04;
-    PartyBattler*    saved_task;
-    PartyBattler*    saved_battler;
-    u8               i;
+    Magic220SharedSteps handlers = D_801EEC04;
+    PartyBattler*       saved_task;
+    PartyBattler*       saved_battler;
+    u8                  i;
 
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
 

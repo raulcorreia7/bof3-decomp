@@ -40,7 +40,13 @@ typedef struct SparkleEffectSteps {
     Callback steps[SPARKLE_EFFECT_STEP_COUNT];
 } SparkleEffectSteps;
 
-/* The owners of these lists are not told apart yet; each type keeps the address of the shared function that runs it. */
+/* One step list per shared dispatcher; the type takes the lowest-numbered spell of the images that include it. */
+#define MAGIC220_SHARED_STEP_COUNT 3
+
+typedef struct Magic220SharedSteps {
+    Callback handlers[MAGIC220_SHARED_STEP_COUNT];
+} Magic220SharedSteps;
+
 #define MAGIC010_SHARED_STEP_COUNT 4
 
 typedef struct Magic010SharedSteps {
