@@ -665,7 +665,19 @@ MATCH s32 func_801FCCDC(void) {
 INCLUDE_ASM(func_801FCD1C);
 
 /* needs: D_801FD030 and D_801FD038 declarations. */
-INCLUDE_ASM(func_801FCDB4);
+MATCH s32 func_801FCDB4(s32 arg0, s32 arg1) {
+    s8  index;
+    s32 result;
+
+    index = func_801A7AD8(&D_801FD030, 1, arg0, arg1);
+    if (index >= 0) {
+        SYS_DISPATCH_BYTE(D_801FD038, index);
+        result = 1;
+    } else {
+        result = -1;
+    }
+    return result;
+}
 
 MATCH void func_801FCE18(void) {
     Message_StartAreaMessage(25);

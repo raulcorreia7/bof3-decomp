@@ -10,7 +10,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EED0C);
 
-MATCH void func_801EEE20(void) {
+/* func_801EEE20 */
+MATCH void Effect_FadePaletteOut(void) {
     g_PaletteFades[MAGIC010_TASK->timer].offset.red--;
     g_PaletteFades[MAGIC010_TASK->timer].offset.green--;
     g_PaletteFades[MAGIC010_TASK->timer].offset.blue--;

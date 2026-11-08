@@ -25,7 +25,7 @@ segments:
       - [0x944, c, Actor_SlideScreenLeft]
       - [0x994, c, Actor_SlideScreenX]
       - [0x9F0, c, Area_Update]
-      - [0xA40, c, func_801F3640]
+      - [0xA40, c, Area_SlideHudBannerLeft]
       - [0xAC4, c, func_801F36C4]
       - [0xB08, c, Actor_SetScreenBottom]
       - [0xB88, c, func_801F3788]

@@ -73,7 +73,7 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
 
     /* The panel sprite. */
     GFX_AddDrawMode(GetTPage(0, 0, CONTROLS_SPRITE_TPAGE_X, CONTROLS_SPRITE_TPAGE_Y));
-    rect   = func_801AF270(CONTROLS_SPRITE_ID, 1);
+    rect   = UI_GetSpriteRect(CONTROLS_SPRITE_ID, 1);
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
     SetSemiTrans(sprite, 0);
