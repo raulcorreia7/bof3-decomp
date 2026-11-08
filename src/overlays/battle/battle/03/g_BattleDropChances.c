@@ -10,7 +10,7 @@ DropChances g_BattleDropChances = {
 };
 
 /* 0x801D0CC0: the queued slot's mode (+0x06, stored by Battle_AllocEffect)
- * selects one of these four stage handlers; Battle_RunEffects copies the
+ * selects one of these four stage handlers; Battle_UpdateEffects copies the
  * table and dispatches for every active slot. */
 /* D_801D0CC0 */
 BattleEffectStages g_BattleEffectStages = {

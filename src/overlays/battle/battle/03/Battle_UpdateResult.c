@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
 /* func_801D6774 */
-MATCH void Battle_RunResult(void) {
+MATCH void Battle_UpdateResult(void) {
     D_801EACD4[g_Battle.phase.step]();
 }

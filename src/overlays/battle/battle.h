@@ -25,7 +25,7 @@
  * 0x801EAF3C (enemy scores also add a random value), then sorts the
  * BattleRank rows at 0x801EB550 high to low. Each battler runs its step
  * handler from D_801EB120 (party) or its row's handler (enemy); actions are
- * queued in the 48 slots at 0x801EC330 and dispatched by Battle_RunEffects
+ * queued in the 48 slots at 0x801EC330 and dispatched by Battle_UpdateEffects
  * (0x801E5824) through the handler table at 0x801D0CC0.
  *
  * One hit is Battle_CalcDamage (0x801DC044): the attacker's element or the
