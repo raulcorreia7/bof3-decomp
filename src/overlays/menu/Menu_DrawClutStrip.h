@@ -19,10 +19,10 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
     u8 pair;
 
     GFX_AddDrawMode(GetTPage(0, 0, 832, 256));
-    cluts[0] = GetClut(48, 482);
-    cluts[1] = GetClut(80, 482);
-    cluts[2] = GetClut(64, 482);
-    cluts[3] = GetClut(96, 482);
+    cluts[0] = GetClut(48, STAGE_PALETTE_Y + 2);
+    cluts[1] = GetClut(80, STAGE_PALETTE_Y + 2);
+    cluts[2] = GetClut(64, STAGE_PALETTE_Y + 2);
+    cluts[3] = GetClut(96, STAGE_PALETTE_Y + 2);
     index    = clut_index & BYTE_MASK;
     clut     = (u16*)((index << 1) + (u32)cluts);
     x        = 0;

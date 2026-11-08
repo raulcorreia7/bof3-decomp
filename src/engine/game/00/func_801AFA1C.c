@@ -77,7 +77,7 @@ NON_MATCHING void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
     FIELD(s16, val5, 0x1Au) = tmp1;
     FIELD(s16, val5, 0x22u) = tmp1;
     FIELD(u16, val5, 0x16u) = GetTPage(0, 0, 832, 256);
-    FIELD(u16, val5, 0xEu)  = GetClut(176, 481);
+    FIELD(u16, val5, 0xEu)  = GetClut(176, STAGE_PALETTE_Y + 1);
     FIELD(u8, val5, 0x4u)   = 0x80;
     FIELD(u8, val5, 0x5u)   = 0x80;
     FIELD(u8, val5, 0x6u)   = 0x80;

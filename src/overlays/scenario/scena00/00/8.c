@@ -130,7 +130,7 @@ MATCH void func_801F6E48(void) {
     poly->x2    = x2 - 8;
     poly->y3    = y;
     poly->y2    = y;
-    poly->clut  = GetClut(176, 483);
+    poly->clut  = GetClut(176, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
     setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
@@ -892,7 +892,7 @@ MATCH void func_801F8BCC(void) {
             SCN_EFFECT->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
     setRGB0(prim, SCN_EFFECT->color_r, SCN_EFFECT->color_g, SCN_EFFECT->color_b);
-    prim->clut  = GetClut(160, 483);
+    prim->clut  = GetClut(160, STAGE_PALETTE_Y + 3);
     prim->tpage = GetTPage(0, 1, 704, 256);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, 1);
@@ -963,7 +963,7 @@ MATCH void func_801F8D90(void) {
     poly->y3 = poly->y2;
     g_Task   = work;
 
-    poly->clut  = GetClut(176, 483);
+    poly->clut  = GetClut(176, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
     setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,

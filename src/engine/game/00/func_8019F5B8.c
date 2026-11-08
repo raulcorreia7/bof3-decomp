@@ -16,7 +16,7 @@ MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
         if (ch != ' ') {
             g_UiFormatBuffer[index & BYTE_MASK] = ch - '0';
             sprt                                = (SPRT*)g_GfxPrimCursor;
-            sprt->clut                          = GetClut(palette * 16, 480);
+            sprt->clut                          = GetClut(palette * 16, STAGE_PALETTE_Y);
             setRGB0(sprt, 0x80, 0x80, 0x80);
             setXY0(sprt, x, y);
             setUV0(sprt, g_UiFormatBuffer[index & BYTE_MASK] * 8 - 80, 208);

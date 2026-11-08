@@ -186,7 +186,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             }
 
             quad->ft4.tpage = tpage;
-            quad->ft4.clut  = GetClut(piece->clut * 16, 483);
+            quad->ft4.clut  = GetClut(piece->clut * 16, STAGE_PALETTE_Y + 3);
             SetSemiTrans(p, (abr >> 6) & 1);
 
             i++;

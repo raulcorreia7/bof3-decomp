@@ -53,7 +53,7 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
                 icon = 0x13;
             }
             GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
-            Menu_DrawPanelIcon(left + 81, top + 26 + i * 13 + 2, icon, 0x1C, GetClut(0, 0x1E0), 0x80);
+            Menu_DrawPanelIcon(left + 81, top + 26 + i * 13 + 2, icon, 0x1C, GetClut(0, STAGE_PALETTE_Y), 0x80);
             TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, compare.values[i]);
             UI_DrawGlyphString(left + 89, top + 26 + i * 13 + 2, compare.flags[i], g_UiFormatBuffer);
         }

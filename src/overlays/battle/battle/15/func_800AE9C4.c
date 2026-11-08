@@ -23,7 +23,7 @@ ASSERT_OFFSET(BattlePanelGeometry, origin, 0x2E);
 #define BATTLE_PANEL_TPAGE_X    0x380
 #define BATTLE_PANEL_TPAGE_Y    0x100
 #define BATTLE_PANEL_CLUT_X     0x10
-#define BATTLE_PANEL_CLUT_Y     0x1FA
+#define BATTLE_PANEL_CLUT_Y     (STAGE_PALETTE_Y + 26)
 /* The draw mode's texture window: the lit and the dim panel palette. */
 #define BATTLE_PANEL_MODE_LIT   0x25
 #define BATTLE_PANEL_MODE_DIM   0x15

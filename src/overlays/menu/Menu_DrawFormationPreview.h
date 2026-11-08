@@ -122,7 +122,7 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
     for (i = 0; i < members; i++) {
         Menu_DrawPanelIcon(x + FORMATION_PREVIEW_CENTER_X + g_MenuFormationSpots[i][0] - 4,
                            y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationSpots[i][1] - 8, (u8)(order.members[i] + 3),
-                           0x1E, GetClut(16, 480), shade[i]);
+                           0x1E, GetClut(16, STAGE_PALETTE_Y), shade[i]);
     }
 
     UI_DrawSpriteRun(x, y, g_MenuFormationFrameLeft, 0);

@@ -12,5 +12,5 @@ MATCH void func_801E8DB4(MenuPanelTask* task) {
     }
     GFX_AddDrawMode(0xF);
     Menu_DrawPanelIcon((task->pos.x + 9) & HALF_MASK, (task->pos.y + 5) & HALF_MASK, (task->unk_0A + 3) & BYTE_MASK,
-                       0x1E, (GetClut(16, 480) & HALF_MASK), 128);
+                       0x1E, (GetClut(16, STAGE_PALETTE_Y) & HALF_MASK), 128);
 }

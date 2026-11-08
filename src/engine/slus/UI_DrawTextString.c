@@ -19,7 +19,7 @@ MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* t
     left = x;
     str  = (u8*)text;
     func_8014FC00(0);
-    clut  = (flags & 0xF) | 0x7800;
+    clut  = (flags & 0xF) | STAGE_PALETTE_CLUT;
     index = ((u32)flags & 0xF0) >> 3;
     c     = *str;
     /* FAKE: the non-const read keeps the retail load order of the table bytes. */
