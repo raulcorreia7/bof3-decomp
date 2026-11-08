@@ -1,6 +1,7 @@
 #include "area151_13.h"
 
-MATCH void func_801F3898(void) {
+/* func_801F3898 */
+MATCH void Area_StepHudBannerDown(void) {
     Actor* scratch;
     /* FAKE: value pinned to v0. */
     s32    armed;

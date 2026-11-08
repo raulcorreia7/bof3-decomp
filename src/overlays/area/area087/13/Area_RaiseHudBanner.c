@@ -1,6 +1,7 @@
 #include "area087_13.h"
 
-MATCH void func_801F3784(void) {
+/* func_801F3784 */
+MATCH void Area_RaiseHudBanner(void) {
     g_Task->screen_y -= 0xA;
     if ((s16)g_Task->screen_y < 0xC9) {
         g_Task->unk_03++;

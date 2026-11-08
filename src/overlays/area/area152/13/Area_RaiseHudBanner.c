@@ -1,6 +1,7 @@
 #include "area152_13.h"
 
-MATCH void func_801F3614(void) {
+/* func_801F3614 */
+MATCH void Area_RaiseHudBanner(void) {
     Actor* scratch;
 
     scratch = g_Task;

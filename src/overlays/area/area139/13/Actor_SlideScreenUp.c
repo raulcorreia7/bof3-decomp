@@ -1,6 +1,7 @@
 #include "area139_13.h"
 
-MATCH void func_801F3F14(void) {
+/* func_801F3F14 */
+MATCH void Actor_SlideScreenUp(void) {
     Actor* work;
 
     work = (Actor*)g_Task;

@@ -1,6 +1,7 @@
 #include "area139_13.h"
 
-MATCH void func_801F3DA8(void) {
+/* func_801F3DA8 */
+MATCH void Actor_SlideScreenOffBottom(void) {
     u8* work;
 
     work                   = (u8*)g_Task;

@@ -1,6 +1,7 @@
 #include "area033_13.h"
 
-MATCH void func_801F3158(void) {
+/* func_801F3158 */
+MATCH void Actor_ZoomIn(void) {
     u8* work;
     u8* work2;
     u8  timer;
