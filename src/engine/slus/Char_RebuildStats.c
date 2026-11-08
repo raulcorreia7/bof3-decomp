@@ -58,7 +58,7 @@ MATCH void Char_RebuildStats(Character* record) {
         Char_AddResistance(&record->stats.resistances[8], 2);
     }
 
-    for (index = 0; index < PARTY_RECORD_COUNT; index++) {
+    for (index = 0; index < CHARACTER_COUNT; index++) {
         if (record == &g_Characters[index]) {
             entry = D_8014866C + index * 5;
             if (record->stats.surprise_chance != 0) {
