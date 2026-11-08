@@ -2,6 +2,8 @@
 
 #include "overlays/area/World_UpdateCloudLayer.h"
 
+extern WorldCloudTexture g_WorldCloudTexture;
+
 MATCH void World_UpdateClouds(void) {
-    WORLD_UPDATE_CLOUD_LAYER(D_801F5020, D_801F5024, D_801F5028);
+    WORLD_UPDATE_CLOUD_LAYER(g_WorldCloudTexture);
 }

@@ -3231,6 +3231,7 @@ Actor_FreePaletteFades = { addr = 0x801F35B4, type = "func", source = "Frees the
 Message_Clear = { addr = 0x801F36A0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 
 ["emi/world00/area033/13"]
+g_WorldCloudTexture = { addr = 0x801F503C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomIn = { addr = 0x801F3158, type = "func", source = "Centres the actor, grows the scale at offset 0x40 by 0x2000 each frame and counts the timer at byte 0x09 down; when it reaches 0 it clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
@@ -3297,6 +3298,7 @@ Message_SetAnswerMessage = { addr = 0x801F3D90, type = "func", source = "Stores 
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world01/area045/13"]
+g_WorldCloudTexture = { addr = 0x801F5410, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomOut = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
@@ -3404,6 +3406,7 @@ g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted act
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area065/13"]
+g_WorldCloudTexture = { addr = 0x801F534C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomIn = { addr = 0x801F325C, type = "func", source = "Centres the actor, grows the scale at offset 0x40 by 0x2000 each frame and counts the timer at byte 0x09 down; when it reaches 0 it clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
@@ -3518,6 +3521,7 @@ Actor_FreePaletteFades = { addr = 0x801F36B4, type = "func", source = "Frees the
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area087/13"]
+g_WorldCloudTexture = { addr = 0x801F580C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomIn = { addr = 0x801F3258, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
@@ -3543,6 +3547,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4770, type = "func", source = "Calls
 World_UpdateClouds = { addr = 0x801F4798, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world02/area088/13"]
+g_WorldCloudTexture = { addr = 0x801F6278, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 AngleAverage12 = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
@@ -3697,6 +3702,7 @@ g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the mas
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world03/area115/13"]
+g_WorldCloudTexture = { addr = 0x801F5020, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Area_SlideActorDown = { addr = 0x801F3228, type = "func", source = "Centres the actor and moves its scale at +0x40 up by 0x2000 each frame while counting byte 0x09 down; at 0 clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
@@ -3899,6 +3905,7 @@ Actor_PlaceAtFocus = { addr = 0x801F2EC4, type = "func", source = "Copies D_8014
 Message_SetAnswerMessage = { addr = 0x801F2CB0, type = "func", source = "Stores the message id the answer table D_801F3808 holds for the menu choice g_MessageChoice in g_MessageRequest." }
 
 ["emi/world03/area151/13"]
+g_WorldCloudTexture = { addr = 0x801F5504, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 WorldMap_StartScene = { addr = 0x801F2FD0, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x1D1, sets byte 0x29 to 5, clears bytes 0x2A and 0x5D to 0x5F and sets header.mode (byte 0x01) to 1." }
@@ -3921,6 +3928,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F46AC, type = "func", source = "Calls
 World_UpdateClouds = { addr = 0x801F46D4, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world04/area152/13"]
+g_WorldCloudTexture = { addr = 0x801F4E30, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 WorldMap_StartScene = { addr = 0x801F2F24, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x1D1, sets byte 0x29 to 5, clears bytes 0x2A and 0x5D to 0x5F and sets header.mode (byte 0x01) to 1." }

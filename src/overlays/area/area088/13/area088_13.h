@@ -57,8 +57,5 @@ void func_801F2F28(u8* window);
 void func_801F3258(u8* window);
 
 extern u8 D_801F6171[];
-extern u8 D_801F6280[2];
-extern u8 D_801F6278[4];
-extern u8 D_801F627C[4];
 
 #endif
