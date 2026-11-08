@@ -117,7 +117,7 @@ MATCH void func_801F7BA8(void) {
     work->pos.y.fixed += TO_COORD(1);
     work->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 0x10;
+        g_Task->timer       = 16;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -133,7 +133,7 @@ MATCH void func_801F7C98(void) {
     work->pos.y.fixed -= TO_COORD(1);
     work->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 0x80;
+        g_Task->timer       = 128;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -312,7 +312,7 @@ MATCH void func_801F986C(void) {
 
 /* Stores 60 in timer and increments mode of the current task. */
 MATCH void func_801F98B0(void) {
-    g_Task->timer = 0x3C;
+    g_Task->timer = 60;
     g_Task->header.mode++;
 }
 

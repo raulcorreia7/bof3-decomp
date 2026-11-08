@@ -93,7 +93,7 @@ MATCH void func_801F71C0(void) {
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
     if (--g_Task->timer == 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
-        g_Task->timer = 0x20;
+        g_Task->timer = 32;
         g_Task->header.step++;
     }
 }
@@ -215,7 +215,7 @@ MATCH void func_801F7EF8(void) {
     g_Task->pos.y.fixed += g_Task->vy;
     g_Task->pos.z.fixed += g_Task->vz;
     if (g_Task->pos.x.fixed == g_Task->unk_18 && g_Task->pos.y.fixed == g_Task->unk_1C) {
-        g_Task->timer = 0x2F;
+        g_Task->timer = 47;
         g_Task->header.step++;
     }
 }

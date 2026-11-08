@@ -9,6 +9,7 @@ MATCH void func_800C1848(void) {
     g_Task->header.mode = 2;
     func_8014D978();
     if (SYS_TestFlag(g_SceneFlags, 2) != 0) {
-        Battle_LoadEnemyBattler((g_BattleCurrentEnemy->slot - 3) & 0xFF, func_800AC704(ENEMY_ID_AMMONITE_ALT) & 0xFF);
+        Battle_LoadEnemyBattler((g_BattleCurrentEnemy->slot - 3) & BYTE_MASK,
+                                func_800AC704(ENEMY_ID_AMMONITE_ALT) & BYTE_MASK);
     }
 }

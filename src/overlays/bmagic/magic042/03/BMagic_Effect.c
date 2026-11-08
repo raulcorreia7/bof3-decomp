@@ -75,7 +75,7 @@ MATCH void func_801EF090(void) {
     g_Task->unk_09 += 4;
     timer         = g_Task->timer + 4;
     g_Task->timer = timer;
-    if ((timer & BYTE_MASK) == 0x20) {
+    if ((timer & BYTE_MASK) == 32) {
         g_Task->header.step += 1;
     }
 }
