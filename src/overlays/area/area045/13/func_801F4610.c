@@ -21,7 +21,7 @@ MATCH void func_801F4610(void) {
     TASK_BYTES[0x5F]     = 0;
 
     row_offset = TASK_BYTES[0x0B] * 4;
-    map_offset = D_801F4D7C[0x29 + row_offset] * ((AreaMapBundle*)&D_80104000)->width_00;
+    map_offset = D_801F4D7C[0x29 + row_offset] * g_AreaMapBundle.width;
     *(g_AreaCellCodes + map_offset + D_801F4D7C[0x28 + row_offset]) = 0xA0;
     Actor_SelectScript(0);
     g_Task->header.mode = 1;

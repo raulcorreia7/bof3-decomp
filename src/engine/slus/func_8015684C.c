@@ -49,7 +49,7 @@ NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     y0    = t2 | 0x40;
     v2.vy = y0;
     v0.vy = y0;
-    cell  = (MapCell*)((cell_x * 4) + ((ay * g_AreaMapBundle.width_00 * 4) + (MAP_BUNDLE_BASE + 0x30)));
+    cell  = (MapCell*)((cell_x * 4) + ((ay * g_AreaMapBundle.width * 4) + (MAP_BUNDLE_BASE + 0x30)));
     x1    = t1 | 0x40;
     v3.vx = x1;
     v1.vx = x1;

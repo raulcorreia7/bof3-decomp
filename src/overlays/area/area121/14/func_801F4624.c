@@ -19,7 +19,7 @@ MATCH void func_801F4624(void) {
     ACTOR_CLEAR_TINT();
 
     row_offset                                               = g_Task->param.unk_0B * 4;
-    map_offset                                               = D_801F64E9[row_offset] * D_80104000;
+    map_offset                                               = D_801F64E9[row_offset] * g_AreaMapBundle.width;
     *(g_AreaCellCodes + map_offset + D_801F64E8[row_offset]) = 0xA0;
     Actor_SelectScript(0);
     g_Task->header.mode = 1;

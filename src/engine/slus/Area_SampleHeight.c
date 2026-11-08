@@ -41,7 +41,7 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     bad  = ((u32)tmp8 >> 0x1F);
     bad |= (tmp8 >= (s32)mw);
     bad |= ((u32)tmp9 >> 0x1F);
-    bad |= (tmp9 >= (s32)g_AreaMapBundle.height_01);
+    bad |= (tmp9 >= (s32)g_AreaMapBundle.height);
     if (bad != 0) {
         return 0;
     }

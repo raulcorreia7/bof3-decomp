@@ -14,11 +14,11 @@ MATCH s32 Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot) {
     u16            id;
 
     map  = (AreaMapBundle*)MAP_BUNDLE_BASE;
-    cell = *(u16*)(column * 2 + (row * map->width_00 * 2 + map->grid_off4_02 * 4) + (u32)map);
+    cell = *(u16*)(column * 2 + (row * map->width * 2 + map->grid_off4_02 * 4) + (u32)map);
     if (cell == 0) {
         return 0;
     }
-    entry  = (u8*)(map->grid_off4_02 * 4 + (((map->width_00 * map->height_01 + 1) / 2) * 4 + (u32)map) + cell * 4);
+    entry  = (u8*)(map->grid_off4_02 * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + cell * 4);
     value  = *(u32*)entry;
     result = ((value & 0x40000000) >> 15) | (value & 0x4000);
     func_80155560(value, &context[slot], 1);

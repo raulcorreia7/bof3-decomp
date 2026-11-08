@@ -158,6 +158,7 @@ ASSERT_SIZE(ActorExt, 0x04);
 
 typedef union ActorParam {
     u8 unk_0B;
+    u8 cloud_layer;     /* the world-map cloud layer; two less is its texture row */
     u8 actor_slot;      /* the g_ActorSlots row a helper actor was spawned in */
     u8 party_index;     /* the party row the actor follows */
     u8 scene_record_id; /* the scene record Area_FindSceneRecord selects */

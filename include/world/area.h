@@ -88,6 +88,10 @@
 #define AREA_PALETTE_UNIT          0x40u  /* one CLUT entry */
 #define AREA_PALETTE_ROW           0x200u /* one upload row (32 rows) */
 
+/* The area view space: a cell is 0x80 units wide and cell 128 sits on the origin;
+ * a cell's centre is half a cell past its corner. */
+#define AREA_CELL_ORIGIN           0x4000
+#define AREA_CELL_HALF             0x40
 #define MAP_BUNDLE_BASE            0x80104000u /* the map bundle */
 
 /* The payload-head id convention: an area program is 52 + area, an auxiliary
@@ -131,8 +135,8 @@
  * `@0x80158B24`, `@0x8015507C`, `@0x80155B40`; the grid readers live in
  * emi/etc/game/00 (`@0x8019C4F0`, `@0x8019C794`, `@0x8019EC20`). */
 typedef struct AreaMapBundle {
-    u8  width_00;              /* 0x00 - grid width in cells */
-    u8  height_01;             /* 0x01 */
+    u8  width;                 /* 0x00 - grid width in cells */
+    u8  height;                /* 0x01 */
     u16 grid_off4_02;          /* 0x02 - cell grid, 4-byte units:
                                 *        (0x30 + width*height*4 + align4(width*height)) / 4 */
     u16 bank_offsets_04[4][2]; /* 0x04-0x13 - [selector][bank], A then B */
@@ -157,6 +161,9 @@ typedef struct AreaMapBundle {
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
+ASSERT_OFFSET(AreaMapBundle, width, 0x00);
+ASSERT_OFFSET(AreaMapBundle, height, 0x01);
+ASSERT_OFFSET(AreaMapBundle, grid_off4_02, 0x02);
 ASSERT_OFFSET(AreaMapBundle, bank_offsets_04, 0x04);
 ASSERT_OFFSET(AreaMapBundle, byte_code_off4_14, 0x14);
 ASSERT_OFFSET(AreaMapBundle, list_base_20, 0x20);

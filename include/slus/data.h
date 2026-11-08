@@ -4,6 +4,7 @@
 #include "psx/psyq.h"
 #include "types.h"
 #include "common/util.h"
+#include "world/area.h"
 
 /* Set: the battle end does not stop the BGM or the sound sequences. */
 #define BATTLE_OPT_KEEP_BGM 0x40
@@ -13,9 +14,6 @@ extern s32         D_80033A08;
 /* Main-executable RAM state that has no name yet. */
 /* retail addresses */
 extern u16         D_800C1A70;
-extern u8          D_80104000;
-extern u8          D_80104001;
-extern u16         D_80104002;
 extern volatile u8 D_80140000[];
 extern u8          D_80143BB0;
 extern u16         D_80143F04;

@@ -73,7 +73,7 @@ NON_MATCHING s32 func_801530D0(void) {
     if (g_AreaSceneMode == 0x23) {
         D_1F80000C = 0;
     }
-    sp20       = &g_AreaMapBundle.width_00;
+    sp20       = &g_AreaMapBundle.width;
     sp40       = -0x30;
     sp10_row   = g_AreaGridRowCursor;
     sp48       = 0;
@@ -103,8 +103,8 @@ NON_MATCHING s32 func_801530D0(void) {
                     Area_RequestCellRows((AreaCell*)s0);
                     D_8014933A |= 1;
                 } else {
-                    D_1F800014[0].vx           = (s0[0] << 7) - 0x4040;
-                    D_1F800014[0].vy           = (s0[1] << 7) - 0x4040;
+                    D_1F800014[0].vx           = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    D_1F800014[0].vy           = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
                     rec                        = (s8*)((MAP_BUNDLE_BASE + 0x30) + s0[1] * *sp20 * 4 + s0[0] * 4);
                     *(s8**)(D_1F800000 + 0x10) = rec;
                     D_1F800014[0].vz           = -(rec[0] * 0x10);
@@ -199,13 +199,12 @@ NON_MATCHING s32 func_801530D0(void) {
                                 link                 = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
                                 *(u32*)(link + 8)    = *(u32*)(pkt2 + 0x20);
                                 *(u32*)(link + 0x10) = *(u32*)(pkt2 + 0x10);
-                                D_1F800014[0].vx     = (s0[0] << 7) - 0x3FC0;
-                                D_1F800014[0].vy     = ((s0[1] - 0x80) << 7) - 0x40;
-                                rec =
-                                    (s8*)((MAP_BUNDLE_BASE + 0x34) + s0[1] * g_AreaMapBundle.width_00 * 4 + s0[0] * 4);
+                                D_1F800014[0].vx     = (s0[0] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                D_1F800014[0].vy     = ((s0[1] - 0x80) << 7) - AREA_CELL_HALF;
+                                rec = (s8*)((MAP_BUNDLE_BASE + 0x34) + s0[1] * g_AreaMapBundle.width * 4 + s0[0] * 4);
                                 *(s8**)(D_1F800000 + 0x10) = rec;
                                 D_1F800014[1].vx           = D_1F800014[0].vx;
-                                D_1F800014[1].vy           = ((s0[1] - 0x80) << 7) + 0x40;
+                                D_1F800014[1].vy           = ((s0[1] - 0x80) << 7) + AREA_CELL_HALF;
                                 D_1F800014[0].vz           = -(rec[0] * 0x10);
                                 D_1F800014[1].vz           = -(rec[2] * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
@@ -218,12 +217,12 @@ NON_MATCHING s32 func_801530D0(void) {
                                 link                 = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
                                 *(u32*)(link + 8)    = *(u32*)(pkt2 + 0x18);
                                 *(u32*)(link + 0x10) = *(u32*)(pkt2 + 0x20);
-                                D_1F800014[0].vx     = ((s0[0] - 0x80) << 7) - 0x40;
-                                D_1F800014[0].vy     = (s0[1] << 7) - 0x3FC0;
-                                rec = (s8*)((MAP_BUNDLE_BASE + 0x30) + (s0[1] + 1) * g_AreaMapBundle.width_00 * 4 +
+                                D_1F800014[0].vx     = ((s0[0] - 0x80) << 7) - AREA_CELL_HALF;
+                                D_1F800014[0].vy     = (s0[1] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                rec = (s8*)((MAP_BUNDLE_BASE + 0x30) + (s0[1] + 1) * g_AreaMapBundle.width * 4 +
                                             s0[0] * 4);
                                 *(s8**)(D_1F800000 + 0x10) = rec;
-                                D_1F800014[1].vx           = ((s0[0] - 0x80) << 7) + 0x40;
+                                D_1F800014[1].vx           = ((s0[0] - 0x80) << 7) + AREA_CELL_HALF;
                                 D_1F800014[1].vy           = D_1F800014[0].vy;
                                 D_1F800014[0].vz           = -(rec[0] * 0x10);
                                 D_1F800014[1].vz           = -(rec[1] * 0x10);
