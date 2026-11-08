@@ -8,7 +8,7 @@ MATCH s32 Party_HasSkill(s32 item_id) {
     u8  i;
     u8  j;
 
-    for (j = 0; j < 7; j++) {
+    for (j = 0; j < CHAR_INDEX_WHELP; j++) {
         row = g_Characters[0].abilities.skill + j * sizeof(Character);
         for (i = 0; i < CHARACTER_ABILITY_COUNT; i++) {
             if (*row == (item_id & BYTE_MASK)) {
@@ -18,7 +18,7 @@ MATCH s32 Party_HasSkill(s32 item_id) {
         }
     }
     row = D_8014546C;
-    for (i = 0; i < 128; i++) {
+    for (i = 0; i < ABILITY_STOCK_SLOT_COUNT; i++) {
         if (*row == (item_id & BYTE_MASK)) {
             return 1;
         }

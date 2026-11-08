@@ -28,7 +28,8 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
 
     Menu_DrawFilledPanel(x, y, MENU_EQUIPMENT_PANEL_WIDTH, MENU_EQUIPMENT_PANEL_HEIGHT);
     record = &g_Characters[record_index];
-    UI_DrawText((s16)(x + MENU_EQUIPMENT_CAPTION_X), (s16)(y + MENU_EQUIPMENT_CAPTION_Y), 0, 0xFF, g_MenuLabelEquip);
+    UI_DrawText((s16)(x + MENU_EQUIPMENT_CAPTION_X), (s16)(y + MENU_EQUIPMENT_CAPTION_Y), 0, TEXT_LENGTH_MAX,
+                g_MenuLabelEquip);
     func_801644D8(0, (s32)(u16)(x + MENU_EQUIPMENT_EMBLEM_X), (s32)(u16)(y + MENU_EQUIPMENT_EMBLEM_Y),
                   MENU_EQUIPMENT_EMBLEM_SIZE, MENU_EQUIPMENT_EMBLEM_SIZE, 0x80);
 

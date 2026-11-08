@@ -267,14 +267,16 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     x = panel->pos.x + 0x4E;
     UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 0x10,
                 D_801D9EA4[panel->group_first]);
+    UI_DrawSpriteRun(
+        panel->pos.x, panel->pos.y,
+        (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y,
-                     (FIELD(u8, panel, 0x9u) & 2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
-    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & 1) ? D_801D999C : D_801D9990, 1);
+                     (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, 1);
     flags = FIELD(u8, panel, 0x9u);
-    if (!(flags & 0xF0)) {
+    if (!(flags & MENU_LIST_FRAME_MASK)) {
         FIELD(u8, panel, 0x9u) = 0;
     } else {
-        FIELD(u8, panel, 0x9u) = flags - 0x10;
+        FIELD(u8, panel, 0x9u) = flags - MENU_LIST_FRAME_STEP;
     }
     for (n = 0; n < 10; n++) {
         UI_DrawSprite(panel->pos.x + (n + 5) * 8, panel->pos.y, 1, 1);
@@ -354,16 +356,16 @@ MATCH void func_801D94B0(s16 x, s16 y, u32 flags, u8 row, u8 variant) {
     }
     texture = Resource_GetText(shade);
     left    = (x + 6);
-    UI_DrawText((x + 42), (y + 7), 0, 0xFF, texture);
+    UI_DrawText((x + 42), (y + 7), 0, TEXT_LENGTH_MAX, texture);
 
-    color = (flags & 1) ? 0 : 7;
-    UI_DrawText(left, (y + 25), color, 0xFF, Resource_GetText(0x85));
+    color = (flags & MENU_LIST_FLAG_TAB_1) ? MENU_SHADE_NORMAL : MENU_SHADE_DIM;
+    UI_DrawText(left, (y + 25), color, TEXT_LENGTH_MAX, Resource_GetText(0x85));
     right  = (x + 94);
     text_y = (y + 25);
     UI_DrawAsciiString(right, text_y, color, &D_801D0D78);
 
-    color = (flags & 2) ? 0 : 7;
-    UI_DrawText(left, (y + 41), color, 0xFF, Resource_GetText(0x85));
+    color = (flags & MENU_LIST_FLAG_TAB_2) ? MENU_SHADE_NORMAL : MENU_SHADE_DIM;
+    UI_DrawText(left, (y + 41), color, TEXT_LENGTH_MAX, Resource_GetText(0x85));
     text_y = (y + 41);
     UI_DrawAsciiString(right, text_y, color, &D_801D0D7C);
 

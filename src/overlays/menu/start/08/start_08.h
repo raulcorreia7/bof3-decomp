@@ -158,6 +158,14 @@ typedef struct StartLabel {
 
 extern StartLabel D_801ECD24[];
 
+/* The command cells of the name entry grid, beside the letter cells (0 is an empty cell). */
+typedef enum NameEntryCommand {
+    NAME_ENTRY_NEXT  = 1,
+    NAME_ENTRY_BACK  = 2,
+    NAME_ENTRY_QUIT  = 3,
+    NAME_ENTRY_START = 4,
+} NameEntryCommand;
+
 /* The four command labels of the grid ("Next", "Back", "Quit", "Start"), five characters each. */
 typedef struct NameEntryLabels {
     u8 next[5];

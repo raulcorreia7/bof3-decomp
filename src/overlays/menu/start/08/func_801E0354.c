@@ -46,10 +46,10 @@ MATCH void func_801E0354(MenuPanelTask* task) {
     UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 1) ? g_MenuListTab1OnSprites : g_MenuListTab1OffSprites,
                      1);
     flags = task->unk_09;
-    if (!(flags & 0xF0)) {
+    if (!(flags & MENU_LIST_FRAME_MASK)) {
         task->unk_09 = 0;
     } else {
-        task->unk_09 = flags - 0x10;
+        task->unk_09 = flags - MENU_LIST_FRAME_STEP;
     }
     for (n = 0; n < 10; n++) {
         UI_DrawSprite(task->pos.x + (n + 5) * 8, task->pos.y, 1, 1);

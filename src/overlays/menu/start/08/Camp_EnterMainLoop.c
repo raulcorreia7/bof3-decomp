@@ -5,7 +5,7 @@ MATCH void Camp_EnterMainLoop(void) {
     u8   i;
 
     if (WINDOW_EFFECT_IDLE()) {
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < PARTY_RECORD_COUNT; i++) {
             func_801E7210(i);
             Char_RebuildStats(&g_Characters[i]);
         }
