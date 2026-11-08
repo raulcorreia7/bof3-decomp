@@ -19,8 +19,7 @@ MATCH void func_801EF004(void) {
 }
 
 INCLUDE_ASM(func_801EF048);
-
-/* nonmatching: same body as Effect_FadePaletteIn, but retail has no stack frame; the shared body links one (+4 bytes, first difference at +0xE4). */
+/* Hint: template_edit needs image-local Ctx declaration; candidate compiled but differs throughout (6.3%, stack frame +4, first diff +0xE4) (not attempted; missing type). */
 INCLUDE_ASM(func_801EF23C);
 
 INCLUDE_ASM(func_801EF348);

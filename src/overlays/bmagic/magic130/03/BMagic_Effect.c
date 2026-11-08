@@ -16,6 +16,7 @@ MATCH void func_801EEED4(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
+/* Hint: template route needs image constants D_801EFDE8/D_801EFDE0 (not declared); not attempted due to missing constants/declarations. */
 INCLUDE_ASM(func_801EEF18);
 
 /* blocker: work pointer lifetime; first diff: lui v1 at +0x20. */

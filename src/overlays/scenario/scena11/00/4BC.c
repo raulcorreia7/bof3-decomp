@@ -12,6 +12,10 @@ MATCH void func_801F70BC(void) {
     g_AreaCameraRefreshCount = 2;
 }
 
+/* Hint: copies camera angle/DA/DC into D_801481E8/EC/F0 (<<16), clears
+ * D_801481F4/F8/FC/48200, inits scratchpad 0x1F800080 block (0, angle+0x400,
+ * 0x4000,0,1,0x1000,0x180). Tried absolute and base+offset scratchpad writes;
+ * first diff at +0x0, size 0xB0 vs 0x74 (scratchpad base addressing). */
 INCLUDE_ASM(func_801F7104);
 
 INCLUDE_ASM(func_801F7178);

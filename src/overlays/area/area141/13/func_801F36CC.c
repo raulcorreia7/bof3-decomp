@@ -4,7 +4,7 @@ MATCH void func_801F36CC(void) {
     Actor* task;
     s8     one;
 
-    task                           = g_Task;
+    task = g_Task;
     task->header.flags |= 0x20;
     task                           = g_Task;
     task->tint.signed_bytes.unk_5F = -0x3C;

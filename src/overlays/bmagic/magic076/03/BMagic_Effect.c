@@ -18,6 +18,7 @@ MATCH void Effect_NextStep(void) {
     BMagic_AdvanceEffectStep(1);
 }
 
+/* Hint: template_diff needs D_801EF540/D_801EF544; prev INJECT_INLINE_ASM -O1 matched until +0x144 (extra sll, table base in a1), size 0x12C vs 0x128 (not attempted). */
 INCLUDE_ASM(func_801EF160);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"

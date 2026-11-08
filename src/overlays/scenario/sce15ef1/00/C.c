@@ -224,7 +224,7 @@ MATCH void func_801D2B64(void) {
     SYS_DISPATCH_TASK(D_801D396C, 1, g_Task);
 }
 
-/* blocker: work pointer reload; first diff: +0x08 lui v0,0x1f80. */
+/* Hint: spad/camera init; needs camera transform/record/image rect/buffer decls. Blocker: work pointer reload, first diff +0x08 lui v0,0x1f80 (tried none; missing types). */
 INCLUDE_ASM(func_801D2BA8);
 
 INCLUDE_ASM(func_801D2C00);

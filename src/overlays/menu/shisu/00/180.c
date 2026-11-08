@@ -175,7 +175,7 @@ MATCH void func_801D1CA4(void) {
     g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
 }
 
-/* blocker: store constant order; first diff: +0x00 li v0,20. */
+/* Hint: needs record types and D_801DB0B0 decl; blocker menu table/global ptr setup, first diff +0x54 addiu v1,sp,56 (not attempted; missing types). */
 INCLUDE_ASM(func_801D1D1C);
 
 MATCH void func_801D1E34(void) {

@@ -491,7 +491,9 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
-/* blocker: both constants need v1; first diff: li v1,30 at 0x801FC6D4. */
+/* Hint: call-seq sets D_80146876=0x1E (sh), D_80146874=7, D_80146875=0 after
+ * Game_SetScriptActive(), returns 0. Both constants (0x1E,7) need v1 in retail;
+ * GCC picks v0. Tried literals and temp reuse; first diff li v1/v0 at 0x801FC6D4. */
 INCLUDE_ASM(func_801FC6C4);
 INCLUDE_ASM(func_801FC704);
 

@@ -65,6 +65,7 @@ MATCH void func_801D0EAC(void) {
     SYS_DISPATCH_TASK(D_801D27D8, 1, g_Task);
 }
 
+/* Hint: 0x20000 constant hoisted into s4; blocker first diff +0x10 sw ra,64(sp) (not attempted; constant hoist/regalloc). */
 INCLUDE_ASM(func_801D0EF0);
 
 INCLUDE_ASM(func_801D0F94);
