@@ -5,9 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    Callback table[2] = {func_801EEC5C, func_801EECE4};
-
-    table[TASK_BYTES[1]]();
+    ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EECE4);
 }
 
 /* blocker: target-Y load schedule; first diff: lui v1,0x1f80 at 0x801EEC5C. */

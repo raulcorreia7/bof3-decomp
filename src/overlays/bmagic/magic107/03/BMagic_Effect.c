@@ -5,9 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    Callback table[2] = {func_801EEC5C, func_801EED40};
-
-    table[TASK_BYTES[1]]();
+    ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EED40);
 }
 
 /* The g_Task base for the span read must be fetched before the D_801EC364 store and the
