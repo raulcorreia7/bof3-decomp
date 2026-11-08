@@ -93,7 +93,11 @@ RAW_CAST = re.compile(
 # A byte-pointer local (`u8* panel`), whose constant indexes are unnamed members.
 # A byte-pointer local, declared plainly or through a register pin (`FAKE_REG(u8*, p, "v0")`).
 BYTE_LOCAL = re.compile(r"\b[us]8\s*\*\s*,?\s*(\w+)\s*[;=,)]")
-HARMFUL = re.compile(r"\b(?:FAKE_REG|FAKE_OPAQUE|FAKE_USE|FAKE_CLOBBER_\w+)\b")
+# The pre-rename spellings stay in the pattern so a base revision counts the same aids.
+HARMFUL = re.compile(
+    r"\b(?:FAKE_REG|FAKE_OPAQUE|FAKE_USE|FAKE_CLOBBER_\w+"
+    r"|MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
+)
 NOTE = re.compile(r"FAKE:")
 # A local declaration (`u8 i`, `Actor* actor = g_CurrentActor`) and a statement-macro call.
 DECL = re.compile(
