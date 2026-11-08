@@ -193,7 +193,7 @@ segments:
       - [0xC1B8, c, Menu_DrawFormationPreview]
       - [0xC904, c, Menu_DrawIcon]
       - [0xCA18, c, Menu_DrawPanelIcon]
-      - [0xCAD0, c, func_801DD6D0]
+      - [0xCAD0, c, Menu_DrawExperienceLine]
       - [0xCBEC, c, Menu_DrawZennyWindow]
       - [0xCD74, c, Menu_DrawPlayTimeWindow]
       - [0xCF70, c, Menu_ToggleOption]

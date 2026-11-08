@@ -2165,6 +2165,10 @@ D_801DA0B4 = { addr = 0x801DA0B4, source = "12-bit turn angle of a status menu d
 D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu display: each frame adds or subtracts 0x20, and a stop snaps it to a multiple of 0x40." }
 
 ["emi/etc/shop/00"]
+g_SaveSlotLevelFormat = { addr = 0x801D0E44, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0E48, source = "Format of the play time on a save slot row: hours and minutes." }
+g_SaveSlotTimeColon = { addr = 0x801D0E54, source = "The colon drawn between the hours and minutes of a save slot row." }
+g_SaveSlotFrameSprites = { addr = 0x801E5738, source = "Sprite run of a save slot row frame." }
 g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory; the start overlay uses the same address as SAVE_IMAGE_ADDR." }
 g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuCurrentValueFormat = { addr = 0x801D0CE8, source = "Format of the current value of an HP or AP pair: the character window prints hp or ap through it, then the maximum through g_MenuMaxValueFormat." }
@@ -2374,6 +2378,10 @@ g_MenuMasterScrollOffset = { addr = 0x801D4289, source = "Scroll offset of the m
 g_MenuMasterCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock rows" }
 
 ["emi/etc/start/08"]
+g_SaveSlotLevelFormat = { addr = 0x801D0DAC, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0DB0, source = "Format of the play time on a save slot row: hours and minutes." }
+g_SaveSlotTimeColon = { addr = 0x801D0DBC, source = "The colon drawn between the hours and minutes of a save slot row." }
+g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
 g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuCurrentValueFormat = { addr = 0x801D0C50, source = "Format of the current value of an HP or AP pair: the character window prints hp or ap through it, then the maximum through g_MenuMaxValueFormat." }
@@ -2407,6 +2415,7 @@ Menu_DrawEquipment = { addr = 0x801DCAEC, type = "func", source = "Draws the equ
 Menu_DrawFormationPreview = { addr = 0x801DCDB8, type = "func", source = "Draws the formation preview of the party formation menu: the formation's name, its ground arrow and its members' icons, turned by angle, sorted back to front, members whose blink bit is set pulsing." }
 Menu_DrawIcon = { addr = 0x801DD504, type = "func", source = "Draws a 16x8 menu icon from column icon_column of row 216 of the icon atlas at sprite_x, sprite_y, dark (0x10) when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801DD618, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
+Menu_DrawExperienceLine = { addr = 0x801DD6D0, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
 Menu_DrawZennyWindow = { addr = 0x801DD7EC, type = "func", source = "Draws the zenny window at panel_x, panel_y: the caption_value printed through g_MenuZennyFormat, the zenny icon and the caption glyph runs." }
 Menu_DrawPlayTimeWindow = { addr = 0x801DD974, type = "func", source = "Draws the play time window at panel_x, panel_y: hours and minutes of g_PlayClock and a colon that shows while g_PlayClock.thirtieths is below 15, then the clock caption and glyph runs." }
 Menu_ToggleOption = { addr = 0x801DDB70, type = "func", source = "Runs the option toggle of the menu: the cursor sits at a position set by flag D_8014865B, left or right flips the flag, Cancel clears it and returns true, Confirm keeps it and returns true." }

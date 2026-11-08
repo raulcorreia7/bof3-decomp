@@ -251,9 +251,9 @@ extern char            g_MenuStatFormat[4];
 extern char            g_MenuZennyFormat[4];
 /* D_801D0C74 */
 extern char            g_MenuNextExpBlank[];
-extern char            D_801D0DAC[];
-extern char            D_801D0DB0[];
-extern u8              D_801D0DBC[4];
+extern char            g_SaveSlotLevelFormat[];
+extern char            g_SaveSlotTimeFormat[];
+extern char            g_SaveSlotTimeColon[4];
 extern u8              D_801D0DC0[4];
 extern u8              D_801D0DC4[4];
 extern u8              s_RowCaptionTags[24];
@@ -345,7 +345,7 @@ extern u8       g_MenuInventoryTab1OnSprites[];
 extern u8       g_MenuListTab1OffSprites[];
 /* D_801EC790 */
 extern u8       g_MenuListTab1OnSprites[];
-extern u8       D_801EC854[];
+extern u8       g_SaveSlotFrameSprites[];
 extern u8       g_MenuLabelAgility[4];
 extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
 extern u8       g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Shop_DrawEquipment */
@@ -551,7 +551,7 @@ extern void Menu_DrawAbilitiesPanel(MenuPanelTask* task);
 extern void Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
-void        SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry);
+void        SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
 void        func_801E18D0(void);
 void        func_801E1C20(void);
 void        func_801E206C(void);
