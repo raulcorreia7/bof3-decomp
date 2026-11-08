@@ -25,4 +25,5 @@ MATCH void SCREEN_TINT_FUNC(void) {
     SetShadeTex(tile, 0);
     GFX_AddPrim(SCREEN_TINT_LAYER, 0x10U);
 }
+
 #undef SCREEN_TINT_FUNC
