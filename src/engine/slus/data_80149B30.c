@@ -10,7 +10,7 @@ const struct CallbackTable5 D_80149B3C = {{
     func_8015920C,
     func_80159510,
     func_80159580,
-    func_801598B8,
+    Menu_ClosePanel,
 }};
 const struct CallbackTable5 D_80149B50 = {{
     func_80159964,

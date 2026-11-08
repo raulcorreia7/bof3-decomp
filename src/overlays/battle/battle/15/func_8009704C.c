@@ -133,7 +133,7 @@ NON_MATCHING void func_8009704C(void) {
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         BattleTurn* turn;
 
-        if ((func_80097574() & BYTE_MASK) != 0) {
+        if ((Battle_IsAbilityLocked() & BYTE_MASK) != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
