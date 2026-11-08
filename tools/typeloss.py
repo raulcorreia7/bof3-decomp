@@ -35,6 +35,69 @@ WEAK = frozenset("s32 u32 int void u16 s16 u8 s8 char unsigned signed".split())
 NEUTRAL = WEAK | {"const", "volatile", "struct"}
 
 
+# Retail callees read these arguments as integers.
+PROTO_INTEGER_CORRECTIONS = {
+    # Masks and shifts the first argument before subtraction.
+    "func_801F2E64@src/overlays/area/area075/13": (
+        "void* arg0, s32 arg1",
+        "s32 arg0, s32 arg1",
+    ),
+    # Compares, shifts and increments the first argument.
+    "func_801F46C8@src/overlays/area/area082/13": (
+        "void* arg0, s32 arg1, s32 arg2, s32 arg3",
+        "s32 arg0, s32 arg1, s32 arg2, s32 arg3",
+    ),
+    # Masks and multiplies the first argument.
+    "func_801F2ED4@src/overlays/area/area091/13": (
+        "void* arg0, s32 arg1",
+        "s32 arg0, s32 arg1",
+    ),
+    # Stores the first argument as halfwords and adds to the second.
+    "func_801F2F3C@src/overlays/area/area095/13": (
+        "void* arg0, void* arg1",
+        "s32 arg0, s32 arg1",
+    ),
+    # Stores the first argument as halfwords and adds to the second.
+    "func_801F2ECC@src/overlays/area/area096/13": (
+        "void* arg0, void* arg1",
+        "s32 arg0, s32 arg1",
+    ),
+    # Stores the third argument as color bytes.
+    "func_801F48E8@src/overlays/area/area098/13": (
+        "void* arg0, void* arg1, void* arg2",
+        "void* arg0, void* arg1, s32 arg2",
+    ),
+    # Multiplies and shifts the first argument.
+    "func_801F5174@src/overlays/area/area103/13": (
+        "void* arg0, s32 arg1",
+        "s32 arg0, s32 arg1",
+    ),
+    # Shifts and multiplies the first argument.
+    "func_801F53F0@src/overlays/area/area103/13": ("void* arg0", "s32 arg0"),
+    # Shifts the first argument to index tables.
+    "func_801F3950@src/overlays/area/area140/13": (
+        "void* arg0, s32 arg1",
+        "s32 arg0, s32 arg1",
+    ),
+    # Sign-extends the third argument as a halfword.
+    "func_801F36DC@src/overlays/area/area175/13": (
+        "s32 arg0, s32 arg1, void* arg2",
+        "s32 arg0, s32 arg1, s32 arg2",
+    ),
+    # Masks and multiplies the first argument.
+    "func_801F0550@src/overlays/bmagic/magic003/03": ("void* arg0", "s32 arg0"),
+    # Masks the first argument to select a value.
+    "func_801F04D4@src/overlays/bmagic/magic114/03": ("void* arg0", "s32 arg0"),
+    # Stores the third argument as color bytes.
+    "func_801D1678@src/overlays/scenario/sce15ef1/00": (
+        "void* arg0, void* arg1, void* arg2",
+        "void* arg0, void* arg1, s32 arg2",
+    ),
+    # Masks the first argument to a byte.
+    "func_801F7678@src/overlays/scenario/scena01/00": ("void* arg0", "s32 arg0"),
+}
+
+
 def sources(rev: str) -> Iterator[tuple[str, str]]:
     """Yield ``(path, text)`` for each C file of ``rev``."""
     if rev == "WORK":
@@ -126,6 +189,12 @@ def main(argv: list[str] | None = None) -> int:
         (n, sorted(fa[n])[:2], sorted(fb[n])[:2])
         for n in fa
         if n in fb
+        and not (
+            n in PROTO_INTEGER_CORRECTIONS
+            and len(fa[n]) == len(fb[n]) == 1
+            and any(x[1] == PROTO_INTEGER_CORRECTIONS[n][0] for x in fa[n])
+            and any(x[1] == PROTO_INTEGER_CORRECTIONS[n][1] for x in fb[n])
+        )
         and max(strength(x[1]) for x in fb[n]) < max(strength(x[1]) for x in fa[n])
     ]
     gone = [n for n in fa if n not in fb and not n.startswith("func_")]
