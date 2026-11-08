@@ -101,51 +101,10 @@ MATCH void func_801F7508(void) {
     SYS_DISPATCH_TASK(D_801FCF50, 1, g_Task);
 }
 
+#include "overlays/Actor_StartFadePair.h"
+
 MATCH void func_801F754C(void) {
-    u8*  work;
-    u8*  data;
-    u8*  cell;
-    u8   cell4;
-    u32  cell3;
-    s16* scratch;
-
-    g_Task->unk_03 = Actor_FindFree();
-    if (g_Task->unk_03 == GAME_NONE) {
-        return;
-    }
-
-    g_Actors[g_Task->unk_03].header.flags = 1;
-    g_Task->unk_04                        = Actor_FindFree();
-    if (g_Task->unk_04 == GAME_NONE) {
-        g_Actors[g_Task->unk_03].header.flags = 0;
-        return;
-    }
-
-    scratch                               = (s16*)D_1F800000;
-    data                                  = (u8*)D_801FCF5C;
-    g_Actors[g_Task->unk_04].header.flags = 1;
-    work                                  = (u8*)g_Task;
-    *scratch                              = work[3];
-    func_801A4D54(data);
-    *scratch = work[4];
-    func_801A4D54(data);
-    SP_REF(u8*, 0x44) = work;
-
-    g_Actors[work[3]].pos.x.fixed -= ONE;
-    g_Actors[work[3]].pos.y.fixed += ONE;
-    g_Actors[work[4]].pos.x.fixed += ONE;
-    g_Actors[work[4]].pos.y.fixed -= ONE;
-    g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    cell                                      = (u8*)g_Task;
-    cell4                                     = cell[4];
-    cell3                                     = cell[3];
-    FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 0;
-    FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 0;
-    GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
-    GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
-    g_Task->timer       = 4;
-    g_Task->header.mode = 1;
+    ACTOR_START_FADE_PAIR(D_801FCF5C);
 }
 
 #include "shared/Actor_Reveal.h"
@@ -457,8 +416,8 @@ MATCH void func_801FC578(void* entity, void* flags) {
 MATCH s32 func_801FC5A4(void) {
     if ((D_80144EA2 & 0xF) == 0xF) {
         Game_SetScriptActive();
-        D_80146875 = 6;
-        D_80146876 = 0x1E;
+        g_SceneState.step_05  = 6;
+        g_SceneState.timer_06 = 30;
         return 1;
     }
     return 0;
@@ -485,14 +444,15 @@ MATCH s32 func_801FC690(void) {
     FAKE_REG(s32, action, "v1");
 
     Game_SetScriptActive();
-    action     = 6;
-    D_80146874 = action;
-    D_80146875 = 0;
+    action                = 6;
+    g_SceneState.state_04 = action;
+    g_SceneState.step_05  = 0;
     return 0;
 }
 
 /* blocker: both constants need v1; first diff: li v1,30 at 0x801FC6D4. */
 INCLUDE_ASM(func_801FC6C4);
+
 INCLUDE_ASM(func_801FC704);
 
 MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
@@ -510,7 +470,7 @@ MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
             if (arg1 == TO_COORD(4)) {
                 var_v0 = 1;
             block_9:
-                D_80146874 = var_v0;
+                g_SceneState.state_04 = var_v0;
             }
         }
     }
@@ -522,8 +482,8 @@ MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
         if (((arg1 >> 0x10) - 7) < 2U) {
             if (arg0 == TO_COORD(92)) {
                 SYS_SetFlag(g_SceneFlags, 7U);
-                D_80146874 = 3;
-                D_80146875 = 0xA;
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 0xA;
                 return 1;
             }
             return 0;
@@ -537,8 +497,8 @@ MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x15) == 0) {
         if (arg1 == TO_COORD(65) + COORD_HALF) {
             if (((arg0 >> 0x10) - 32) < 4U) {
-                D_80146874 = 4;
-                D_80146875 = 5;
+                g_SceneState.state_04 = 4;
+                g_SceneState.step_05  = 5;
                 return Scene_ShowMessage(0x33);
             }
             return 0;
@@ -567,8 +527,8 @@ MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
         if (arg1 == TO_COORD(76) + COORD_HALF) {
             if (((arg0 >> 0x10) - 31) < 2U) {
             block_9:
-                D_80146874 = 5;
-                D_80146875 = 0;
+                g_SceneState.state_04 = 5;
+                g_SceneState.step_05  = 0;
                 return Scene_ShowMessage(0x12);
             }
             /* Duplicate return node #11. Try simplifying control flow for better match */
@@ -584,8 +544,8 @@ MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x1A) != 0) {
         if ((arg0 >> 0x10) == 21) {
             if (((arg1 >> 0x10) - 52) < 2U) {
-                D_80146874 = 5;
-                D_80146875 = 0x10;
+                g_SceneState.state_04 = 5;
+                g_SceneState.step_05  = 0x10;
                 return Scene_ShowMessage(0x1F);
             }
         }
@@ -625,9 +585,9 @@ MATCH void func_801FCE18(void) {
     Message_StartAreaMessage(25);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     Game_SetScriptActive();
-    D_80146876 = 30;
-    D_80146874 = 7;
-    D_80146875 = 0;
+    g_SceneState.timer_06 = 30;
+    g_SceneState.state_04 = 7;
+    g_SceneState.step_05  = 0;
 }
 
 MATCH void func_801FCE6C(void) {
