@@ -436,7 +436,7 @@ extern u8               D_801EB4FA[][12];
 extern BattleRank       D_801EB550[];
 extern u8               D_801EB5B0[];
 /* D_801EBF20 */
-extern PartyBattler     s_BattleBattlerTemplates[BATTLE_PARTY_SLOT_COUNT]; /* Alternate local work entries. */
+extern PartyBattler     s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT]; /* Alternate local work entries. */
 extern u8               D_801EB6D0[];
 extern u8               D_801EBF04;
 extern s32              D_801EBFA0;

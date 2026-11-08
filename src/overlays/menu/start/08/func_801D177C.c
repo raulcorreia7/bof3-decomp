@@ -13,7 +13,7 @@ MATCH void func_801D177C(void) {
     D_80148669 = 0;
     D_80148668 = 0;
     D_80148665 = 0;
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         ((s8*)&D_80148668)[i] = 0;
     }
     for (i = 0; i < g_PartySize; i++) {
@@ -25,7 +25,7 @@ MATCH void func_801D177C(void) {
         D_801ED613[i]          = g_PartyBattleOrder[i];
         i++;
     }
-    for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         s_PartyCharacterIds[i] = 0xFF;
         D_801ED613[i]          = 0xFF;
     }
@@ -44,7 +44,7 @@ MATCH void func_801D177C(void) {
         s_ChoiceMenuCursors[i] = 0;
         s_ChoiceMenuValues[i]  = 0;
     }
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         u8* row;
 
         j   = 0;
@@ -53,7 +53,7 @@ MATCH void func_801D177C(void) {
             row[j] = 0;
         }
     }
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         u8* row0;
         u8* row1;
 

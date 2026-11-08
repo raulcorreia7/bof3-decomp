@@ -7,7 +7,7 @@ MATCH u8 func_800AB68C(u8 excluded_slot) {
     s32 random_value;
 
     count = 0u;
-    for (slot = 0u; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
+    for (slot = 0u; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
         if ((Battle_SlotIsBlocked(slot) == 0u) && (excluded_slot != slot)) {
             choices[count] = slot;
             count += 1u;

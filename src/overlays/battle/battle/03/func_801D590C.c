@@ -7,7 +7,7 @@ MATCH u8 func_801D590C(void) {
 
     count      = 0u;
     last_index = 0u;
-    for (index = 0u; index < BATTLE_PARTY_SLOT_COUNT; index++) {
+    for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
         if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_BattlePartyBattlers[index], STATUS_CONFUSED))) {
             if (func_801DDCB4(index) != 0u) {
                 last_index                                = index;

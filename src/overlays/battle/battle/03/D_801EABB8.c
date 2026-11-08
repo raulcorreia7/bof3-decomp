@@ -625,7 +625,7 @@ static u8 s_gap_801EBF0C[0x14] = {0};
 /* D_801EBF20 */
 /* The party battler rows func_801E8684 copies into g_BattlePartyBattlers; func_801E7B34 and func_801D6818 read
  * their header.flags and turn.action_flags. */
-PartyBattler s_BattleBattlerTemplates[BATTLE_PARTY_SLOT_COUNT] = {0};
+PartyBattler s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT] = {0};
 
 /* 0x801EC2E0 */
 static u8 s_gap_801EC2E0[0x50] = {0};

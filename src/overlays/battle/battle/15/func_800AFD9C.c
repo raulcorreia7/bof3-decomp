@@ -28,7 +28,7 @@ MATCH void func_800AFD9C(void) {
                 }
             }
         } else {
-            for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+            for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 if (Battle_SlotIsBlocked(i & BYTE_MASK) == 0) {
                     count++;
                     sum_x += g_BattlePartyBattlers[i].pos.x.fixed >> 9;

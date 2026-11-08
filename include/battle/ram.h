@@ -17,7 +17,7 @@
  * (hex).
  */
 
-#define BATTLE_SPOILS_SIZE 0x3E
+#define BATTLE_DROPS_SIZE 0x3E
 
 /* Raise a bit in the battle state word. A bare statement macro: the member
  * declares `flags` and runs the follow-up the bit starts. Kept: as an inline
@@ -30,12 +30,12 @@
 /* The party rows 0-2 and enemy rows 3-10 share one battler index space. */
 #define COMBATANT_COUNT                   11
 /* The drop list cap Battle_RollEnemyDrops walks. */
-#define BATTLE_SPOILS_COUNT_MAX           15
+#define BATTLE_DROP_COUNT_MAX           15
 
 /* func_801DB434 reads six threshold bytes per row. */
 #define BATTLE_LEVEL_THRESHOLD_COUNT      6u
 
-#define BATTLE_PARTY_SLOT_COUNT           3 /* player slots 0-2; enemy slots start at 3 */
+#define BATTLE_PARTY_CHARACTERS_COUNT           3 /* player slots 0-2; enemy slots start at 3 */
 #define BATTLE_PARTY_STRIDE               0x140
 #define BATTLE_ENEMY_STRIDE               0x118
 #define BATTLE_EFFECT_STRIDE              0x78
@@ -75,9 +75,9 @@
 /* The enemy battler row for a battler slot: enemy slots begin after the party
  * slots, so slot 3 is the first enemy row. An lvalue, so reads, writes and
  * member access all use it. */
-#define ENEMY_COMBATANT(slot)             (g_BattleEnemyBattlers[(slot) - BATTLE_PARTY_SLOT_COUNT])
+#define ENEMY_COMBATANT(slot)             (g_BattleEnemyBattlers[(slot) - BATTLE_PARTY_CHARACTERS_COUNT])
 /* A battler slot on the player side: slots 0-2 are the party rows. */
-#define BATTLER_IS_PLAYER(slot)           ((slot) < BATTLE_PARTY_SLOT_COUNT)
+#define BATTLER_IS_PLAYER(slot)           ((slot) < BATTLE_PARTY_CHARACTERS_COUNT)
 
 /* The battle ended with the party's victory: the result bit the ending step
  * sets when no enemy is left. */
@@ -95,21 +95,21 @@
  * EFFECT_LOADING is held from the action's effect stream request
  * (EMI_LoaderStreamInitSlot) until the loader is ready (func_801D3F6C). */
 
-/* The battle spoils record at 0x80146326: the base byte is the escape-attempt
+/* The battle drop list at 0x80146326: the base byte is the escape-attempt
  * counter the battle/battle/15 units read, the count of listed drops sits at +0x01,
  * the dropped item ids at +0x0E and their counts at +0x2E (Battle_RollEnemyDrops). */
-typedef struct Spoils {
+typedef struct BattleDrops {
     u8  attempts; /* +0x00 escape attempts; battle/battle/15 reads this byte */
     u8  count;    /* +0x01 listed drops, capped at 15 */
     u8  pad_02[0xC];
     u16 items[16];  /* +0x0E dropped item ids */
-    u8  counts[16]; /* +0x2E drops of each id */
-} Spoils;
+    u8  item_counts[16]; /* +0x2E drops of each id */
+} BattleDrops;
 
-ASSERT_SIZE(Spoils, BATTLE_SPOILS_SIZE);
-ASSERT_OFFSET(Spoils, count, 0x01);
-ASSERT_OFFSET(Spoils, items, 0x0E);
-ASSERT_OFFSET(Spoils, counts, 0x2E);
+ASSERT_SIZE(BattleDrops, BATTLE_DROPS_SIZE);
+ASSERT_OFFSET(BattleDrops, count, 0x01);
+ASSERT_OFFSET(BattleDrops, items, 0x0E);
+ASSERT_OFFSET(BattleDrops, item_counts, 0x2E);
 
 /* The battle's phase tuple at 0x801462E0: the mode selects the g_BattlePhases handler, the step runs inside it and
  * the sub-step inside the step. BattleSetEnding writes the three bytes together; the intro and panel code reset
@@ -192,11 +192,11 @@ extern u8 g_BattleCommandCount;
 #endif
 /* D_80146324 */
 extern u8     g_BattleSurprise;
-extern Spoils D_80146326;
+extern BattleDrops g_BattleDrops;
 /* D_8014632C */
-extern u32    g_BattleSpoilsExp;
+extern u32    g_BattleRewardExp;
 /* D_80146330 */
-extern s32    g_BattleSpoilsZenny;
+extern s32    g_BattleRewardZenny;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {

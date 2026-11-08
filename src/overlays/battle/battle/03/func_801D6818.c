@@ -20,7 +20,7 @@ MATCH void func_801D6818(void) {
                         slot                               = (u8)Battle_AllocEffect(0u, 0xBu);
                         g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];
                     } else {
-                        for (index = 0u; index < BATTLE_PARTY_SLOT_COUNT; index++) {
+                        for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
                             s_BattleBattlerTemplates[index].turn.action_flags.value &=
                                 ~COMBATANT_FLAG_DRAGON_FORM_QUEUED;
                         }

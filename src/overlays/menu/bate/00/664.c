@@ -195,7 +195,7 @@ MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {
     if (row != NULL) {
         GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
         Menu_DrawPanelIcon((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, 480), 128);
-        for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+        for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);
             if (icon != GAME_NONE) {
                 Menu_DrawPortrait((u16)(left + 0x56 + i * 0x29), (u16)(y + 2), icon, 0);

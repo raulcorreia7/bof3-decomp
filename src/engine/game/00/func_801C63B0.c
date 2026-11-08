@@ -18,7 +18,7 @@ MATCH s32 func_801C63B0(void) {
     count = Party_CountOrder(PARTY_ORDER_BATTLE);
     slot  = D_801CD944;
     i     = 0;
-    for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         s_PartySlotOrder[i] = i;
         slot->active        = 0;
         if ((g_CharSlot[g_PartyBattleOrder[i]] == 2) || (g_CharSlot[g_PartyBattleOrder[i]] == 6)) {

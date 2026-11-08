@@ -8,7 +8,7 @@ MATCH void func_800A26F0(void) {
     u8 slot;
 
     func_800A3F28();
-    for (slot = 0u; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
+    for (slot = 0u; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0u) {
             g_BattlePartyBattlers[g_BattleTarget].turn.action_flags.value &= ~COMBATANT_FLAG_SELECTED;
         }
