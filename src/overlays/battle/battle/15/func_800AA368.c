@@ -80,7 +80,7 @@ NON_MATCHING s32 func_800AA368(void) {
         }
     }
     if (count != 0) {
-        pick                                   = candidates[RANDOM_BELOW(count)];
+        pick                                   = candidates[RANDOM_MOD(count)];
         D_80145E91[pick * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
         g_Game.members[pick].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
         return 1;

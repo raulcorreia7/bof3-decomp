@@ -1537,7 +1537,7 @@ MATCH void func_801FA7D8(void) {
     s32  delta;
 
     if (((g_SceneState.step_05 - 4) < 3U) && ((g_FrameCount & 0xFu) == 0u)) {
-        bit             = (1 << (RANDOM_BELOW(3)));
+        bit             = (1 << (RANDOM_MOD(3)));
         g_ScriptVars[3] = bit;
         if ((bit & BYTE_MASK) >= 2u) {
             D_80146866 += 0x10;

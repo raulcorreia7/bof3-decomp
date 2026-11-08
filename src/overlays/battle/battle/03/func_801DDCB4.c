@@ -41,5 +41,5 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     }
 
     limit = 10000 - rt[state] * 50;
-    return (RANDOM_BELOW(10000) <= limit) ? 1u : 0u;
+    return (RANDOM_MOD(10000) <= limit) ? 1u : 0u;
 }

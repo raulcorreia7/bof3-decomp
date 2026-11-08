@@ -22,5 +22,5 @@ MATCH s32 func_800AA5F4(s32 slot) {
     } else {
         slot = D_800B50E4[D_801CA719[g_BattleAction->unk_02 * 0x14] >> 4];
     }
-    return ((RANDOM_BELOW(slot)) & BYTE_MASK) == 0;
+    return ((RANDOM_MOD(slot)) & BYTE_MASK) == 0;
 }
