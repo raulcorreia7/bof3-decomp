@@ -3,8 +3,8 @@
  */
 /* func_801EF1F0, func_801EFFBC */
 MATCH void Effect_DispatchStep(void) {
-    EffectStepFuncs3 handlers;
+    EffectDispatchSteps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }

@@ -23,7 +23,7 @@ DamageSpread D_801D0C7C = {
 
 /* 0x801D0C84 */
 /* D_801D0C84 */
-BattleEventFuncs g_BattleEvents = {
+BattleEventSteps g_BattleEvents = {
     (Callback)func_801DE690, (Callback)func_801DE698, (Callback)func_801DE754,
     (Callback)func_801DE690, (Callback)func_801DE7FC,
 };

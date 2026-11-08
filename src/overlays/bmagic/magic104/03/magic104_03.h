@@ -5,10 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs4 D_801EEC04;
-extern Callback         D_801F08F0[];
+extern Magic010SharedSteps D_801EEC04;
+extern Callback            D_801F08F0[];
 /* The step handlers the draw step dispatches. */
-extern Callback         D_801F0900[];
+extern Callback            D_801F0900[];
 
 void func_801EF370(void);
 void func_801EFA54(void);

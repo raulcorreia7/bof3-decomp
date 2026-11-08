@@ -13,8 +13,15 @@ extern BattleEffect D_801EF9F4[];
 #define BMAGIC_EFFECT_SLOTS D_801EF9F4
 #define BMAGIC_EFFECT_COUNT 64
 
-void                    func_801EF604(void);
-void                    func_801EF2FC(void);
-extern EffectStepFuncs3 D_801EEC04;
+void func_801EF604(void);
+void func_801EF2FC(void);
+
+#define MAGIC146_STEP_COUNT 3
+
+typedef struct Magic146Steps {
+    Callback steps[MAGIC146_STEP_COUNT];
+} Magic146Steps;
+
+extern Magic146Steps D_801EEC04;
 
 #endif

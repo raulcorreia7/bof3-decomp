@@ -16,10 +16,10 @@ INCLUDE_ASM(func_801EEE40);
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF000(void) {
-    EffectStepFuncs4 handlers;
+    Magic117Steps handlers;
 
     handlers = D_801EEC14;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 #include "overlays/bmagic/Effect_StartPaletteFade.h"

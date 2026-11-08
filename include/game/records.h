@@ -39,7 +39,6 @@
 #define ENEMY_AI_COUNT                 4
 #define ENCOUNTER_ENEMY_COUNT          8
 
-#define PARTY_RECORD_COUNT             8
 #define MASTER_COUNT                   17
 #define DRAGON_POINTER_COUNT           10
 

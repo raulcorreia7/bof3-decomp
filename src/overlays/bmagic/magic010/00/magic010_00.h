@@ -17,5 +17,5 @@ typedef struct Magic010Task {
 #define MAGIC010_TASK ((Magic010Task*)g_Task)
 
 /* Battle flag and the request hand-off these overlays toggle. */
-extern EffectStepFuncs4 D_801EEC04;
+extern Magic010SharedSteps D_801EEC04;
 #endif

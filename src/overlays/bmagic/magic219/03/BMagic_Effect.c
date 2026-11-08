@@ -5,12 +5,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC14(void) {
-    EffectStepFuncs4 handlers = D_801EEC04;
-    PartyBattler*    saved_task;
-    PartyBattler*    saved_battler;
-    u8               i;
+    Magic219Steps handlers = D_801EEC04;
+    PartyBattler* saved_task;
+    PartyBattler* saved_battler;
+    u8            i;
 
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (D_801EFA14[i].header.flags & BMAGIC_EFFECT_IN_USE) {

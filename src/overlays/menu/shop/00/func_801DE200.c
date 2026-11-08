@@ -56,7 +56,7 @@ MATCH void func_801DE200(void) {
         }
         record += 0xA4;
         record_offset += 0xA4;
-    } while ((s32)record < (s32)&g_Characters[PARTY_RECORD_COUNT].character_id);
+    } while ((s32)record < (s32)&g_Characters[CHARACTER_COUNT].character_id);
     party_count = count & BYTE_MASK;
     marked      = 0;
     if (party_count > 0) {

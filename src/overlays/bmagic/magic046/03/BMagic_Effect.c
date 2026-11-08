@@ -34,10 +34,10 @@ MATCH void func_801EEF70(void) {
 
 MATCH void func_801EEFB4(void) {
     /* Retail dispatches a stack copy of the handlers. */
-    EffectStepFuncs3 handlers;
+    MagicModuleSteps handlers;
 
     handlers = D_801EEC00.steps;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
 MATCH void func_801EF014(void) {
@@ -80,10 +80,10 @@ MATCH void func_801EF304(void) {
 
 MATCH void func_801EF324(void) {
     /* Retail dispatches a stack copy of the handlers. */
-    EffectStepFuncs3 handlers;
+    Magic046Steps handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_801EFB90();
         func_801EFC48();

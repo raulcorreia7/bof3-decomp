@@ -10,8 +10,8 @@
    (magic151), func_801EEC64 (magic001), BMagic_RunStep (magic050), BMagic_RunStep (magic057), BMagic_RunStep (magic064)
 */
 MATCH void BMagic_RunStep(void) {
-    EffectStepFuncs3 handlers;
+    MagicModuleSteps handlers;
 
     handlers = D_801EEC00.steps;
-    handlers.handlers[g_Task->header.mode]();
+    handlers.steps[g_Task->header.mode]();
 }

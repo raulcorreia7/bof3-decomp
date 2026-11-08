@@ -2,4 +2,6 @@
 
 #include "overlays/area/Screen_DrawTint.h"
 
-SCREEN_TINT_BODY(Screen_DrawTint, 5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF));
+MATCH void Screen_DrawTint(void) {
+    Screen_DrawTintLayer(5U, (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF));
+}

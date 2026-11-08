@@ -7,9 +7,21 @@
 
 extern BMagicEffectFuncs D_801EEC04;
 
-extern EffectStepFuncs3 D_801EEC1C;
+#define MAGIC041_STEP_COUNT 3
 
-extern EffectStepFuncs4 D_801EEC28;
+typedef struct Magic041Steps {
+    Callback steps[MAGIC041_STEP_COUNT];
+} Magic041Steps;
+
+#define MAGIC041_SECOND_STEP_COUNT 4
+
+typedef struct Magic041SecondSteps {
+    Callback steps[MAGIC041_SECOND_STEP_COUNT];
+} Magic041SecondSteps;
+
+extern Magic041Steps D_801EEC1C;
+
+extern Magic041SecondSteps D_801EEC28;
 
 void func_801EF670(void);
 

@@ -10,10 +10,23 @@ extern BMagicEffectFuncs D_801EEC04;
 /* The amount Effect_CountDownTimer adds to the effect work byte 9. */
 #define EFFECT_TIMER_STEP 8
 
-extern s16              D_1F800008;
-extern EffectStepFuncs3 D_801EEC1C;
+extern s16 D_1F800008;
 
-extern EffectStepFuncs4 D_801EEC28;
+#define MAGIC006_STEP_COUNT 3
+
+typedef struct Magic006Steps {
+    Callback steps[MAGIC006_STEP_COUNT];
+} Magic006Steps;
+
+#define MAGIC006_SECOND_STEP_COUNT 4
+
+typedef struct Magic006SecondSteps {
+    Callback steps[MAGIC006_SECOND_STEP_COUNT];
+} Magic006SecondSteps;
+
+extern Magic006Steps D_801EEC1C;
+
+extern Magic006SecondSteps D_801EEC28;
 
 void func_801EEC90(void);
 

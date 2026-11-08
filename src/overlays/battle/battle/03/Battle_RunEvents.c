@@ -2,7 +2,7 @@
 
 /* func_801DE43C */
 MATCH void Battle_RunEvents(void) {
-    BattleEventFuncs handlers;
+    BattleEventSteps handlers;
     u8               group;
     s8               event_slot;
     BattleEventSlot* slot;
@@ -17,7 +17,7 @@ MATCH void Battle_RunEvents(void) {
             if ((slot->unk_00 != 0u) && (slot->unk_03 == group) && ((slot->unk_01 & g_BattleEventFlags) == 0u)) {
                 sp                       = SPAD(0u);
                 sp->view.battle.state_00 = event_slot;
-                handlers.handlers[slot->unk_01]();
+                handlers.events[slot->unk_01]();
             }
         }
     }

@@ -24,10 +24,10 @@ MATCH void func_801EEFF8(void) {
 }
 
 MATCH void func_801EF03C(void) {
-    EffectStepFuncs3 handlers;
+    Magic111Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }

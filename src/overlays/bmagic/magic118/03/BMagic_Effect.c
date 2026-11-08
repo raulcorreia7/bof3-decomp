@@ -6,10 +6,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* func_801EEC18 */
 MATCH void BMagic_UpdateBurn(void) {
-    EffectStepFuncs5 handlers;
+    Magic118Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         Effect_SetActorMatrix();
         BMagic_DrawBurnFlameQuads();

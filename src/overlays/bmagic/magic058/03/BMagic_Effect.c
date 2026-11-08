@@ -5,12 +5,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC28(void) {
-    EffectStepFuncs3 handlers = D_801EEC04;
-    PartyBattler*    saved_task;
-    PartyBattler*    saved_battler;
-    u8               i;
+    Magic058Steps handlers = D_801EEC04;
+    PartyBattler* saved_task;
+    PartyBattler* saved_battler;
+    u8            i;
 
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -47,10 +47,10 @@ MATCH void func_801EEF30(void) {
 }
 
 MATCH void func_801EEF74(void) {
-    EffectStepFuncs3 handlers;
+    Magic058Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF74C();
@@ -84,10 +84,10 @@ MATCH void func_801EF36C(void) {
 }
 
 MATCH void func_801EF3B0(void) {
-    EffectStepFuncs3 handlers;
+    Magic058Steps handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFA78();

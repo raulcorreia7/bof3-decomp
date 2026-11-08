@@ -37,7 +37,7 @@ MATCH void func_801D0EDC(void) {
         row->status = flags;
         count++;
         row++;
-    } while ((u8)count < PARTY_RECORD_COUNT);
+    } while ((u8)count < CHARACTER_COUNT);
 
     D_80148651 = 0;
     D_80148652 = 0;
