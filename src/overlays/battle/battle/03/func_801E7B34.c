@@ -7,7 +7,7 @@ MATCH u8 func_801E7B34(void) {
         if ((s_BattleBattlerTemplates[index].header.flags & 1u) == 0u) {
             return false;
         }
-        if ((s_BattleBattlerTemplates[index].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
+        if ((s_BattleBattlerTemplates[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
             return true;
         }
     }

@@ -19,10 +19,10 @@ MATCH u8 func_801DB844(u32 battler_index) {
             return false;
         }
         if (g_BattleActionLock != 0u &&
-            (g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
+            (g_BattlePartyBattlers[index].u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
             return false;
         }
-        if ((g_BattlePartyBattlers[index].turn.action_flags.value &
+        if ((g_BattlePartyBattlers[index].u.turn.action_flags.value &
              (COMBATANT_FLAG_DRAGON_FORM_QUEUED | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_DRAGON_FORM_BERSERK)) !=
             0u) {
             return false;

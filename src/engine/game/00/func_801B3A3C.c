@@ -13,7 +13,7 @@ MATCH void func_801B3A3C(void) {
         return;
     }
     if (g_MessageRequest == 3u) {
-        off = g_GameState->slot_12D * ACTOR_SIZE;
+        off = g_GameState->status.field.slot_12D * ACTOR_SIZE;
         if (!(FIELD(u8, D_80146893, off) & 1u)) {
             saved = g_Task;
             TASK_SET(((u8*)g_Actors + off));
@@ -21,7 +21,7 @@ MATCH void func_801B3A3C(void) {
             g_Task = saved;
         }
     } else {
-        off = g_GameState->slot_12D * ACTOR_SIZE;
+        off = g_GameState->status.field.slot_12D * ACTOR_SIZE;
         if (FIELD(u8, D_80146893, off) & 1u) {
             FIELD(u8, g_Actors, off) = 0u;
         } else if ((FIELD(u16, D_801468BC, off) == 0u) && (FIELD(u16, D_801468C0, off) == 0u)) {

@@ -26,7 +26,7 @@ MATCH void Char_AdvanceScript(void) {
         }
     }
     if (done & BYTE_MASK) {
-        g_Task->unk_2B                 = 0;
-        g_GameState->mode_12B.u8_value = 0;
+        g_Task->unk_2B                         = 0;
+        g_GameState->u.field.mode_12B.u8_value = 0;
     }
 }

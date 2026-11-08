@@ -15,7 +15,7 @@ MATCH void func_800AB570(s32 battler_index) {
     } else {
         result = Battle_FindSelectableSlotForward(RANDOM_MASK(7) + 3);
     }
-    g_BattleTargetSelector                         = result;
-    g_BattlePartyBattlers[index].turn.command.type = BATTLE_COMMAND_ATTACK;
-    g_BattleActionType                             = BATTLE_ACTION_ATTACK;
+    g_BattleTargetSelector                           = result;
+    g_BattlePartyBattlers[index].u.turn.command.type = BATTLE_COMMAND_ATTACK;
+    g_BattleActionType                               = BATTLE_ACTION_ATTACK;
 }

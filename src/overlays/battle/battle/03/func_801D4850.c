@@ -12,12 +12,12 @@ MATCH void func_801D4850(void) {
     if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != ABILITY_FOCUS)) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             {
-                u32 flags = BATTLE_ACTIVE_PARTY.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST;
+                u32 flags = BATTLE_ACTIVE_PARTY.u.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST;
                 clr       = 0xFFFFFFBFu;
 
                 if (flags != 0u) {
                     BATTLE_ACTIVE_PARTY.focus_counter = 0u;
-                    BATTLE_ACTIVE_PARTY.turn.action_flags.value &= clr;
+                    BATTLE_ACTIVE_PARTY.u.turn.action_flags.value &= clr;
                 }
             }
         } else {
@@ -40,12 +40,12 @@ MATCH void func_801D4850(void) {
     if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != ABILITY_MEDITATION)) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             {
-                u32 flags = BATTLE_ACTIVE_PARTY.turn.action_flags.value & COMBATANT_FLAG_MEDITATION;
+                u32 flags = BATTLE_ACTIVE_PARTY.u.turn.action_flags.value & COMBATANT_FLAG_MEDITATION;
                 clr       = 0xFFFFFF7Fu;
 
                 if (flags != 0u) {
                     BATTLE_ACTIVE_PARTY.unk_139 = 0u;
-                    BATTLE_ACTIVE_PARTY.turn.action_flags.value &= clr;
+                    BATTLE_ACTIVE_PARTY.u.turn.action_flags.value &= clr;
                 }
             }
         } else {

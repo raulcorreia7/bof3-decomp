@@ -10,15 +10,15 @@ MATCH s32 func_801BD938(void) {
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
         return 0;
     }
-    index = g_GameState->slot_13C;
+    index = g_GameState->character_index;
     if (g_Characters[index].status & STATUS_CONFUSED) {
         return 0;
     }
-    g_GameState->step_12A.u8_value++;
-    if (g_GameState->step_12A.u8_value < 0xF1U) {
+    g_GameState->u.field.step_12A.u8_value++;
+    if (g_GameState->u.field.step_12A.u8_value < 0xF1U) {
         return 0;
     }
-    g_GameState->step_12A.u8_value = 0;
+    g_GameState->u.field.step_12A.u8_value = 0;
     if (D_80145FBB[0].mode == 9) {
         return 0;
     }
@@ -27,7 +27,7 @@ MATCH s32 func_801BD938(void) {
         return 0;
     }
     if (slot == (RANDOM_MASK(1) + 1)) {
-        g_GameState->mode_12B.u8_value = 9;
+        g_GameState->u.field.mode_12B.u8_value = 9;
         Actor_RequestScript(g_Task->direction_08);
         g_Task->timer       = 2;
         g_Task->header.mode = 6;

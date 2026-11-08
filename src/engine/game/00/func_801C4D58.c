@@ -6,7 +6,7 @@ MATCH void func_801C4D58(void) {
     Actor* reload;
     s32    doubled;
 
-    g_GameState->counter_11C.s8_value = (FIELD(s32, g_Task, 0x70u) + 2);
+    g_GameState->u.field.counter_11C.s8_value = (FIELD(s32, g_Task, 0x70u) + 2);
     func_801C2538();
     work          = g_Task;
     doubled       = work->timer * 2;

@@ -23,7 +23,7 @@ NON_MATCHING s32 func_801BC760(void) {
     u8            dir;
     u8            count;
     u8            cnt2;
-    GameState*    saved;
+    PartyBattler* saved;
 
     dir    = g_Task->direction_08;
     goal_x = D_80145EC4 + (g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09);
@@ -84,8 +84,8 @@ NON_MATCHING s32 func_801BC760(void) {
     } else {
         count = 5;
     }
-    g_GameState->counter_11C.s8_value = count;
-    cnt2                              = g_GameState->counter_11C.s8_value;
+    g_GameState->u.field.counter_11C.s8_value = count;
+    cnt2                                      = g_GameState->u.field.counter_11C.s8_value;
     if (cnt2 >= 3U) {
         if (cnt2 >= 6U) {
             cnt2 = 5;
@@ -93,7 +93,7 @@ NON_MATCHING s32 func_801BC760(void) {
     } else {
         cnt2 = 3;
     }
-    g_GameState->counter_11C.s8_value = cnt2;
+    g_GameState->u.field.counter_11C.s8_value = cnt2;
     func_801BD290(near_a, near_b, (s8*)g_Task + 8);
     result = func_801BC4D0();
     if ((result & BYTE_MASK) != 1) {
@@ -116,7 +116,7 @@ NON_MATCHING s32 func_801BC760(void) {
     if (!((g_GameFlags | g_AreaWalkFlags) & AREA_WALK_BUSY(0))) {
         if (*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN) {
             saved       = g_GameState;
-            g_GameState = (GameState*)g_BattlePartyBattlers;
+            g_GameState = g_BattlePartyBattlers;
             near_a      = (D_80145EC4 + (g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09)) & ~0x7FFF;
             near_b      = (D_80145EC8 + (g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09)) & ~0x7FFF;
             if (!(func_801C3E40(near_a, near_b, g_Task->state_70.byte, Area_ReadHeight(near_a, near_b)) & BYTE_MASK)) {
@@ -124,8 +124,8 @@ NON_MATCHING s32 func_801BC760(void) {
                 *(u8*)g_Task |= ACTOR_FLAG_HIDDEN;
                 g_Task->pos.x.fixed = near_a;
                 g_Task->pos.y.fixed = near_b;
-                g_GameState->flags_12C.s8_value &= 0xFE;
-                g_GameState->flags_12C.s8_value |= (D_80145FBC & 1);
+                g_GameState->status.field.flags_12C.s8_value &= 0xFE;
+                g_GameState->status.field.flags_12C.s8_value |= (D_80145FBC & 1);
                 COORD_INT(g_Task->pos.z) = Area_ReadHeight(near_a, near_b);
                 g_Task->unk_29           = g_BattlePartyBattlers[0].unk_29;
                 FIELD(s8, g_Task, 0x1u)  = 2;

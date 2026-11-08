@@ -45,7 +45,7 @@ found:
     off  = 0;
     do {
         rec         = (u8*)g_BattlePartyBattlers + off;
-        g_GameState = (GameState*)rec;
+        g_GameState = rec;
         TASK_SET(rec);
         kind  = rec[0x13C];
         flags = g_Characters[kind].status;
@@ -82,7 +82,7 @@ phase2:
         index       = 0;
         phase2_base = (u8*)g_BattlePartyBattlers + off;
         phase2_rec  = phase2_base;
-        g_GameState = (GameState*)phase2_rec;
+        g_GameState = phase2_rec;
         TASK_SET(phase2_rec);
         do {
             base                   = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);

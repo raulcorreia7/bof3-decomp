@@ -26,7 +26,7 @@ MATCH void func_801DFCB4(void) {
     slot                                   = g_Task->slot;
     self                                   = g_GameState;
     D_8014639C                             = g_Task;
-    g_BattleTargetRecord                   = &self->turn;
+    g_BattleTargetRecord                   = &self->u.turn;
     g_BattleTarget                         = slot;
     /* Plain pointer stores, not field stores: retail keeps each one ahead
      * of the next g_BattleTargetRecord reload. */
@@ -38,7 +38,7 @@ MATCH void func_801DFCB4(void) {
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;
     }
-    if (stats_work->turn.damage_flags.value & COMBATANT_FLAG_COMMAND_ENTERED) {
+    if (stats_work->u.turn.damage_flags.value & COMBATANT_FLAG_COMMAND_ENTERED) {
         D_801EC303 = (D_801EC303 + 25 >= 100) ? 100 : D_801EC303 + 25;
     }
     switch (LOBU(g_BattleActionType)) {
@@ -51,11 +51,11 @@ MATCH void func_801DFCB4(void) {
             break;
     }
     lock_work = g_GameState;
-    if ((lock_work->turn.target_flags & BATTLE_HIT_HP) && lock_work->turn.hp_change == 0) {
+    if ((lock_work->u.turn.target_flags & BATTLE_HIT_HP) && lock_work->u.turn.hp_change == 0) {
         g_Task->header.step = 3;
         return;
     }
-    if (!(g_GameState->turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
+    if (!(g_GameState->u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
         switch (LOBU(g_BattleActionType)) {
             case BATTLE_ACTION_ITEM:
                 if (!(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & BYTE_MASK) & 4)) {
@@ -73,25 +73,25 @@ MATCH void func_801DFCB4(void) {
         }
     }
     hit_work = g_GameState;
-    if (hit_work->turn.target_flags & BATTLE_HIT_HP) {
-        func_800AAC88(hit_work->turn.hp_change, g_Task->slot);
+    if (hit_work->u.turn.target_flags & BATTLE_HIT_HP) {
+        func_800AAC88(hit_work->u.turn.hp_change, g_Task->slot);
         hit_work = g_GameState;
     }
-    if (hit_work->turn.target_flags & BATTLE_HIT_AP) {
-        func_800AAEBC(hit_work->turn.ap_change, g_Task->slot);
+    if (hit_work->u.turn.target_flags & BATTLE_HIT_AP) {
+        func_800AAEBC(hit_work->u.turn.ap_change, g_Task->slot);
     }
     pending   = &g_BattlePendingStatus;
     tail_work = g_GameState;
     tail_work->chr.status |= *pending;
     *pending = 0;
-    if (tail_work->turn.hp_change > 0) {
+    if (tail_work->u.turn.hp_change > 0) {
         if (tail_work->chr.hp == 0) {
-            if (tail_work->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
+            if (tail_work->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
                 tail_work->chr.status |= STATUS_KO;
             } else {
                 tail_work->chr.status = STATUS_KO;
             }
-            if (!(g_GameState->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+            if (!(g_GameState->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
                 func_801DD858(1);
             }
             GFX_FreePaletteFadeTarget(g_Task);
@@ -100,7 +100,7 @@ MATCH void func_801DFCB4(void) {
         }
     }
     check_work = g_GameState;
-    if (check_work->turn.hp_change < 0 || check_work->turn.ap_change < 0) {
+    if (check_work->u.turn.hp_change < 0 || check_work->u.turn.ap_change < 0) {
         SND_QueueSelectionFx(0x206);
     }
     if (!(g_BattleState & BATTLE_STATE_DAMAGE_APPLIED)) {

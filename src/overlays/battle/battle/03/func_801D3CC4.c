@@ -8,7 +8,7 @@ MATCH void func_801D3CC4(void) {
     u8 i;
 
     for (i = 0; (i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; i += 1) {
-        if (((g_BattlePartyBattlers[i].turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
+        if (((g_BattlePartyBattlers[i].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
             (g_BattlePartyBattlers[i].header.mode != 6)) {
             g_BattlePartyBattlers[i].header.mode = 6;
             g_BattlePartyBattlers[i].header.step = 0;

@@ -6,7 +6,7 @@ MATCH void Char_PollScriptRequest(void) {
             g_Task->option_flags = 0;
         }
     } else if ((func_8014DAEC() & BYTE_MASK) && (g_ActorSlots[g_Task->param.actor_slot].header.flags == 0)) {
-        g_Task->unk_2B                 = 0;
-        g_GameState->mode_12B.s8_value = 0;
+        g_Task->unk_2B                         = 0;
+        g_GameState->u.field.mode_12B.s8_value = 0;
     }
 }

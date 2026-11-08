@@ -18,8 +18,8 @@ MATCH void func_801E7778(void) {
     } else {
         work->unk_48 = 0;
         index        = g_BattleEffectBattler->slot;
-        value        = g_BattlePartyBattlers[index].turn.damage_flags.value & ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
-        g_BattlePartyBattlers[index].turn.damage_flags.value = value;
+        value        = g_BattlePartyBattlers[index].u.turn.damage_flags.value & ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+        g_BattlePartyBattlers[index].u.turn.damage_flags.value = value;
         func_801E5988();
     }
 }

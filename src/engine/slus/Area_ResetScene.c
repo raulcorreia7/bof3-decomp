@@ -8,14 +8,14 @@ MATCH void Area_ResetScene(void) {
     Actor*        work;
     PartyBattler* mode_work;
 
-    work                             = g_Task;
-    mode_work                        = g_GameState;
-    g_AreaCameraStep                 = 0;
-    g_AreaCameraHeightStep           = 0;
-    work->vx                         = 0;
-    work->vy                         = 0;
-    work->vz                         = 0;
-    *(u8*)&mode_work->turn.hp_change = 3; /* FAKE: retail stores the byte. */
+    work                               = g_Task;
+    mode_work                          = g_GameState;
+    g_AreaCameraStep                   = 0;
+    g_AreaCameraHeightStep             = 0;
+    work->vx                           = 0;
+    work->vy                           = 0;
+    work->vz                           = 0;
+    *(u8*)&mode_work->u.turn.hp_change = 3; /* FAKE: retail stores the byte. */
     if (D_8014625C & INPUT_DIRECTIONAL) {
         func_80167428();
     } else {

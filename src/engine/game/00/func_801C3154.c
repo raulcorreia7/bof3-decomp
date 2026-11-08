@@ -15,7 +15,7 @@ MATCH void func_801C3154(void) {
     s32             off;
     u8              sel;
 
-    if ((g_GameState->flags_12C.u8_value & 8) != 0) {
+    if ((g_GameState->status.field.flags_12C.u8_value & 8) != 0) {
         index    = 1;
         work     = SCRATCH_WORK;
         base_dst = AREA_PALETTE_WORK;
@@ -30,6 +30,6 @@ MATCH void func_801C3154(void) {
             *(u16*)(off + (row + addr_dst)) = *(const u16*)(off + (row + (page + base_src)));
         } while (index < 32);
         g_GfxPalettePending = 1;
-        g_GameState->flags_12C.u8_value &= 0xF7u;
+        g_GameState->status.field.flags_12C.u8_value &= 0xF7u;
     }
 }

@@ -4,6 +4,6 @@ MATCH void func_801B6FDC(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    g_GameState->flags_118 &= 0xDFu;
+    g_GameState->u.field.flags_118 &= 0xDFu;
     g_Task->unk_03 = 0;
 }

@@ -9,7 +9,7 @@ MATCH void func_800A2120(void) {
     func_800A3F28();
     battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
-        g_BattlePartyBattlers[battler].turn.action_flags.value |= COMBATANT_FLAG_SELECTION_BONUS;
+        g_BattlePartyBattlers[battler].u.turn.action_flags.value |= COMBATANT_FLAG_SELECTION_BONUS;
     } else {
         ENEMY_COMBATANT(battler).turn.action_flags.value |= COMBATANT_FLAG_SELECTION_BONUS;
     }

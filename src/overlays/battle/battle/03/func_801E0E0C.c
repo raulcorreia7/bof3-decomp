@@ -16,10 +16,10 @@ MATCH u8 func_801E0E0C(void) {
         if ((flags_80 & (STATUS_PARALYZED | STATUS_KO)) == 0u) {
             return 0u;
         }
-        if ((g_BattlePartyBattlers[index].turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) != 0u) {
+        if ((g_BattlePartyBattlers[index].u.turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) != 0u) {
             return 0u;
         }
-        if ((g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) {
+        if ((g_BattlePartyBattlers[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) {
             return 0u;
         }
         if ((flags_80 & STATUS_KO) != 0u) {

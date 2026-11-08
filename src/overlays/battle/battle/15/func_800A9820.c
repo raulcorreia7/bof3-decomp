@@ -13,7 +13,7 @@ MATCH void func_800A9820(u8 selector) {
             for (i = 0; (u32)(i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 index = i & BYTE_MASK;
                 if ((Battle_SlotIsBlocked(index) & BYTE_MASK) == 0) {
-                    g_BattlePartyBattlers[index].turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
+                    g_BattlePartyBattlers[index].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
                 }
             }
         }
@@ -28,7 +28,7 @@ MATCH void func_800A9820(u8 selector) {
     } else {
         index = selector & BYTE_MASK;
         if (index < 3U) {
-            g_BattlePartyBattlers[index].turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
+            g_BattlePartyBattlers[index].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
             return;
         }
         ENEMY_COMBATANT(index).turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;

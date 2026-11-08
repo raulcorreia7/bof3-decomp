@@ -9,7 +9,7 @@ MATCH void Char_StartFacingTurn(void) {
     s32 to_away;
 
     if (g_SceneState.scenario_id == 15) {
-        g_GameState->mode_12B.s8_value = 0;
+        g_GameState->u.field.mode_12B.s8_value = 0;
     } else {
         to_back = g_Task->direction_08 - FACING_RIGHT;
         to_back = ABS(to_back);

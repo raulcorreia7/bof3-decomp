@@ -25,7 +25,7 @@ MATCH void Char_AdvancePaletteScript(void) {
         done = 1;
     }
     if (done & 0xFF) {
-        g_Task->unk_2B                 = 0;
-        g_GameState->mode_12B.s8_value = 0;
+        g_Task->unk_2B                         = 0;
+        g_GameState->u.field.mode_12B.s8_value = 0;
     }
 }

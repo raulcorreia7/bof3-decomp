@@ -44,9 +44,9 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
         func_801DDFEC(selection_kind);
         g_BattleEffects[selection_kind].arg.sway = 0;
         if (selection_kind < 3) {
-            g_BattlePartyBattlers[selection_kind].turn.command.type = 0;
-            g_BattlePartyBattlers[selection_kind].turn.damage_flags.volatile_value &= ~2;
-            g_BattlePartyBattlers[selection_kind].turn.action_flags.volatile_value &= ~4;
+            g_BattlePartyBattlers[selection_kind].u.turn.command.type = 0;
+            g_BattlePartyBattlers[selection_kind].u.turn.damage_flags.volatile_value &= ~2;
+            g_BattlePartyBattlers[selection_kind].u.turn.action_flags.volatile_value &= ~4;
         } else {
             ENEMY_COMBATANT(selection_kind).turn.command.type = 0;
             ENEMY_COMBATANT(selection_kind).turn.damage_flags.value &= ~2;

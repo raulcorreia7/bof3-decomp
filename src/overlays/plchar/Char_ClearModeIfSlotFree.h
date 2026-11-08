@@ -5,7 +5,7 @@
  */
 MATCH void Char_ClearModeIfSlotFree(void) {
     if (g_ActorSlots[g_Task->param.actor_slot].header.flags == 0) {
-        g_GameState->mode_12B.s8_value = 0;
+        g_GameState->u.field.mode_12B.s8_value = 0;
     }
     func_8014D978();
 }

@@ -57,11 +57,11 @@ MATCH s32 func_801CF448(s16 x, s16 y) {
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801CF858(void) {
-    g_GameState->mode_12B.s8_value = 0;
+    g_GameState->u.field.mode_12B.s8_value = 0;
 }
 
 MATCH void func_801CF868(void) {
-    g_GameState->mode_12B.s8_value = 0;
+    g_GameState->u.field.mode_12B.s8_value = 0;
 }
 
 MATCH void func_801CF878(void) {

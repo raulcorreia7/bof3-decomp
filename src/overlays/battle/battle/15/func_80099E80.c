@@ -4,7 +4,7 @@ MATCH void func_80099E80(void) {
     u16 packed;
     s32 flags;
 
-    packed = g_BattlePartyBattlers[g_BattleMessageSlot[5] & BYTE_MASK].turn.command.id;
+    packed = g_BattlePartyBattlers[g_BattleMessageSlot[5] & BYTE_MASK].u.turn.command.id;
     flags  = Item_GetFlags(packed >> 8, packed & BYTE_MASK);
     if ((flags & 0x40) != 0) {
         if ((flags & 0x10) != 0) {

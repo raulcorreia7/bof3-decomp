@@ -7,7 +7,7 @@ MATCH s32 func_800A99AC(void) {
     u8 i;
 
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-        if (ACTOR_IN_USE(g_BattlePartyBattlers[i]) && (g_BattlePartyBattlers[i].turn.damage_flags.value &
+        if (ACTOR_IN_USE(g_BattlePartyBattlers[i]) && (g_BattlePartyBattlers[i].u.turn.damage_flags.value &
                                                        (COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 |
                                                         COMBATANT_FLAG_DAMAGED | COMBATANT_FLAG_DAMAGE_NUMBER)) != 0u) {
             return 1;

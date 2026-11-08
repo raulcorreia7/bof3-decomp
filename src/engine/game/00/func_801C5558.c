@@ -32,7 +32,7 @@ MATCH void func_801C5558(void) {
     offs_y = g_FacingSteps[route].y * step;
     result = Area_ReadHeight(work->pos.x.fixed + offs_x, work->pos.y.fixed + offs_y);
 
-    threshold = D_80181B70[g_GameState->leader_id];
+    threshold = D_80181B70[g_GameState->chr.character_id];
 
     work = g_Task;
     if ((s16)COORD_INT(work->pos.z) >= result - threshold) {

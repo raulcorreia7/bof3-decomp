@@ -16,7 +16,7 @@ MATCH s32 func_800AA8FC(void) {
         slot = i;
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0) {
             off   = slot * BATTLE_PARTY_STRIDE;
-            flags = g_BattlePartyBattlers[slot].turn.damage_flags.value;
+            flags = g_BattlePartyBattlers[slot].u.turn.damage_flags.value;
             if (flags & 8) {
                 if ((func_800AA874((u8)g_BattleAction->unk_02) & BYTE_MASK) == 0) {
                     kind = g_BattleAction->unk_02;
@@ -29,7 +29,7 @@ MATCH s32 func_800AA8FC(void) {
                     result = 1;
                 }
             } else {
-                g_BattlePartyBattlers[slot].turn.damage_flags.value = flags & ~8;
+                g_BattlePartyBattlers[slot].u.turn.damage_flags.value = flags & ~8;
             }
         }
     }

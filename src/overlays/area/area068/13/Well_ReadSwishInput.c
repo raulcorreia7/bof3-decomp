@@ -16,7 +16,7 @@ MATCH void Well_ReadSwishInput(void) {
             case 0x1000:
             case 0x3000:
                 work        = g_Task;
-                g_GameState = (GameState*)g_BattlePartyBattlers;
+                g_GameState = g_BattlePartyBattlers;
                 TASK_SET(g_BattlePartyBattlers);
                 D_80145EC8 -= 0x800;
                 g_Task = work;
@@ -24,7 +24,7 @@ MATCH void Well_ReadSwishInput(void) {
             case 0x2000:
             case 0x6000:
                 work        = g_Task;
-                g_GameState = (GameState*)g_BattlePartyBattlers;
+                g_GameState = g_BattlePartyBattlers;
                 TASK_SET(g_BattlePartyBattlers);
                 D_80145EC4 += 0x800;
                 g_Task = work;
@@ -32,7 +32,7 @@ MATCH void Well_ReadSwishInput(void) {
             case 0x4000:
             case 0xC000:
                 work        = g_Task;
-                g_GameState = (GameState*)g_BattlePartyBattlers;
+                g_GameState = g_BattlePartyBattlers;
                 TASK_SET(g_BattlePartyBattlers);
                 D_80145EC8 += 0x800;
                 g_Task = work;
@@ -40,7 +40,7 @@ MATCH void Well_ReadSwishInput(void) {
             case 0x8000:
             case 0x9000:
                 work        = g_Task;
-                g_GameState = (GameState*)g_BattlePartyBattlers;
+                g_GameState = g_BattlePartyBattlers;
                 TASK_SET(g_BattlePartyBattlers);
                 D_80145EC4 -= 0x800;
                 g_Task = work;

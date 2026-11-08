@@ -41,7 +41,7 @@ MATCH void func_801DF3F8(void) {
         PartyBattler* battler = g_GameState;
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {
-            if (battler->turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
+            if (battler->u.turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
                 PartyBattler* work = g_Task;
                 s8            level;
 
@@ -61,7 +61,7 @@ MATCH void func_801DF3F8(void) {
                 g_BattleEffects[slot].arg.sway = level;
                 if (level < -11) {
                 confuse_flip:
-                    g_GameState->turn.damage_flags.value ^= 0x800;
+                    g_GameState->u.turn.damage_flags.value ^= 0x800;
                 }
             }
             actor = g_Task;
@@ -75,7 +75,7 @@ MATCH void func_801DF3F8(void) {
             }
         }
     } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) &&
-               (g_GameState->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+               (g_GameState->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
         PartyBattler* work = g_Task;
 
         s32 x = g_EncounterOriginX;
@@ -90,7 +90,7 @@ MATCH void func_801DF3F8(void) {
     store_coord_y:
         actor->pos.y.fixed = y_pos;
     }
-    if (!(g_GameState->turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
+    if (!(g_GameState->u.turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
         func_801DEDE4();
     }
 }

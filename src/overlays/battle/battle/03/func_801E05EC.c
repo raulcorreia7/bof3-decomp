@@ -13,8 +13,8 @@ MATCH void func_801E05EC(void) {
     work = g_Task;
     if (work->timer == 0) {
         battle = g_GameState;
-        if (battle->turn.target_flags & BATTLE_HIT_HP_LANDED) {
-            func_800AAC88(battle->turn.hp_change, work->slot);
+        if (battle->u.turn.target_flags & BATTLE_HIT_HP_LANDED) {
+            func_800AAC88(battle->u.turn.hp_change, work->slot);
         } else {
             slot                               = Battle_AllocEffect(0U, 1U) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_Task;

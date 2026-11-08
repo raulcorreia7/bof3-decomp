@@ -35,7 +35,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         }
         for (i = 0; i < count; i++) {
             if (g_Characters[g_CharSlot[g_PartyFieldOrder[i]]].status & STATUS_POISONED) {
-                g_BattlePartyBattlers[0].turn.command.target = 0xA;
+                g_BattlePartyBattlers[0].u.turn.command.target = 0xA;
                 break;
             }
         }

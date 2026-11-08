@@ -1,6 +1,7 @@
 #ifndef WORK_STATE_H
 #define WORK_STATE_H
 
+#include "battle/records.h"
 #include "types.h"
 
 /* Copied whole from the save image 0x801448D8 by etc/start/08 SAVE_RunLoadRestore.
@@ -36,53 +37,7 @@ ASSERT_OFFSET(SceneState, state_04, 0x04);
 ASSERT_OFFSET(SceneState, step_05, 0x05);
 ASSERT_OFFSET(SceneState, timer_06, 0x06);
 
-typedef union GameStateCounter {
-    s8 s8_value;
-    u8 u8_value;
-} GameStateCounter;
-
-typedef struct GameState {
-    /* 0x00 */ u8                pad_00[0x79];
-    /* 0x79 */ u8                leader_id; /* CharacterId of the party leader */
-    /* 0x7A */ u8                pad_7A[0x9E];
-    /* 0x118 */ u8               flags_118;     /* bit 0x80 restores the saved word */
-    /* 0x119 */ u8               countdown_119; /* frame countdown, reloaded with 0x28 or 0x0A */
-    /* 0x11A */ u8               pad_11A[0x2];
-    /* 0x11C */ GameStateCounter counter_11C; /* panel step counter */
-    /* 0x11D */ u8               pad_11D[0x1];
-    /* 0x11E */ u8               kind_11E;  /* record kind */
-    /* 0x11F */ u8               wait_11F;  /* shared wait countdown */
-    /* 0x120 */ u16              value_120; /* copied into the record's 0x7C */
-    /* 0x122 */ u16              unk_122;   /* lowered by 2 per step; @source: write:func_801F3B9C@0x801F3B9C */
-    /* 0x124 */ u32              index_124; /* slot index passed to the selector */
-    /* 0x128 */ u8               pad_128[0x2];
-    /* 0x12A */ GameStateCounter step_12A;
-    /* 0x12B */ GameStateCounter mode_12B;  /* panel mode */
-    /* 0x12C */ GameStateCounter flags_12C; /* bit 0x01/0x08 gate the entry check */
-    /* 0x12D */ u8               slot_12D;  /* entity slot index */
-    /* 0x12E */ u8               pad_12E[0xE];
-    /* 0x13C */ u8               slot_13C; /* ability record index */
-    /* 0x13D */ u8               unk_13D;  /* the palette fade index; @source: write:func_801AAB00@0x801AAB00 */
-} GameState;
-
-ASSERT_SIZE(GameState, 0x140);
-ASSERT_OFFSET(GameState, leader_id, 0x79);
-ASSERT_OFFSET(GameState, flags_118, 0x118);
-ASSERT_OFFSET(GameState, countdown_119, 0x119);
-ASSERT_OFFSET(GameState, counter_11C, 0x11C);
-ASSERT_OFFSET(GameState, kind_11E, 0x11E);
-ASSERT_OFFSET(GameState, wait_11F, 0x11F);
-ASSERT_OFFSET(GameState, value_120, 0x120);
-ASSERT_OFFSET(GameState, unk_122, 0x122);
-ASSERT_OFFSET(GameState, index_124, 0x124);
-ASSERT_OFFSET(GameState, step_12A, 0x12A);
-ASSERT_OFFSET(GameState, mode_12B, 0x12B);
-ASSERT_OFFSET(GameState, flags_12C, 0x12C);
-ASSERT_OFFSET(GameState, slot_12D, 0x12D);
-ASSERT_OFFSET(GameState, slot_13C, 0x13C);
-ASSERT_OFFSET(GameState, unk_13D, 0x13D);
-
-/* The mode and flag bytes (GameState +0x12B and +0x12C) of each mode work
+/* The mode and flag bytes (FieldModeWork mode_12B and flags_12C) of each mode work
  * record, addressed from the first record's mode byte at a 0x140 stride. */
 typedef struct AreaPartyMode {
     u8 mode;
@@ -92,18 +47,15 @@ typedef struct AreaPartyMode {
 
 ASSERT_SIZE(AreaPartyMode, 0x140);
 
-/* The movement speed level (GameState +0x11C, an index into g_RouteSpeedScale) of each mode work
+/* The movement speed level (FieldModeWork counter_11C, an index into g_RouteSpeedScale) of each mode work
  * record, addressed from the first record's level byte at a 0x140 stride. */
 typedef struct AreaPartySpeed {
-    GameStateCounter level;
-    u8               pad_01[0x13F];
+    PanelCounter level;
+    u8           pad_01[0x13F];
 } AreaPartySpeed;
 
 ASSERT_SIZE(AreaPartySpeed, 0x140);
 
-/* The current mode work record; battle points it at a g_BattlePartyBattlers row. */
-/* D_80146250 */
-extern GameState*     g_GameState; /* 0x80146250 */
 /* D_80145FBB */
 extern AreaPartyMode  D_80145FBB[]; /* 0x80145FBB */
 /* D_80145FAC */

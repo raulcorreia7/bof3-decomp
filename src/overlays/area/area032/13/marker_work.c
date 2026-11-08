@@ -327,7 +327,7 @@ MATCH void func_801F3728(void) {
     value                    = ((Actor*)work)->pos.x.fixed;
     work[4]                  = flag;
     next                     = work + 0xC;
-    counter                  = &g_GameState->unk_122;
+    counter                  = &g_GameState->u.field.unk_122;
     value += *(s32*)next;
     ((Actor*)work)->pos.x.fixed = value;
     *counter -= 2;
@@ -338,9 +338,9 @@ MATCH void func_801F378C(void) {
     u16    counter;
 
     if ((func_801C29A0(8) & BYTE_MASK) == 0) {
-        counter              = (g_GameState->unk_122 - 2);
-        slot                 = SP_REF(Actor*, 0x44);
-        g_GameState->unk_122 = counter;
+        counter                      = (g_GameState->u.field.unk_122 - 2);
+        slot                         = SP_REF(Actor*, 0x44);
+        g_GameState->u.field.unk_122 = counter;
         slot->pos.x.fixed += slot->vx;
         return;
     }

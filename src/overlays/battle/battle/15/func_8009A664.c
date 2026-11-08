@@ -3,7 +3,7 @@
 MATCH void func_8009A664(void) {
     u16 entry;
 
-    entry = g_BattlePartyBattlers[g_BattleMessageSlot[5]].turn.command.id;
+    entry = g_BattlePartyBattlers[g_BattleMessageSlot[5]].u.turn.command.id;
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         g_BattleUIState = 3;
         return;

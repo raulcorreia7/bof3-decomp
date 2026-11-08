@@ -5,8 +5,8 @@
 /* func_801F51F0 (area104), func_801F5734 (area121) */
 MATCH void Area_UpdatePanelRun(void) {
     if ((g_InputHeld & g_InputMasks[WORLD_INPUT_RUN]) && g_Task->param.unk_0B < 0x40) {
-        g_GameState->counter_11C.u8_value = 4;
+        g_GameState->u.field.counter_11C.u8_value = 4;
     } else {
-        g_GameState->counter_11C.u8_value = 3;
+        g_GameState->u.field.counter_11C.u8_value = 3;
     }
 }

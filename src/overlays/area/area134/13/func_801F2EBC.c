@@ -7,7 +7,7 @@ MATCH void func_801F2EBC(void) {
 
     work        = g_Task;
     g_Task      = g_Actors;
-    g_GameState = (GameState*)g_BattlePartyBattlers;
+    g_GameState = g_BattlePartyBattlers;
     g_Task      = work;
     TASK_SET(g_BattlePartyBattlers);
     g_Task = work;

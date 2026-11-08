@@ -12,7 +12,7 @@ MATCH void Battle_StreamEndOverlay(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            if ((g_BattlePartyBattlers[i].turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
+            if ((g_BattlePartyBattlers[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
                 return;
             }
             i += 1u;

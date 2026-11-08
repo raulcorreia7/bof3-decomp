@@ -475,6 +475,45 @@ typedef union BattlerParam {
 
 ASSERT_SIZE(BattlerParam, 1);
 
+/* A one-byte counter that field code reads signed or unsigned. */
+typedef union PanelCounter {
+    s8 s8_value;
+    u8 u8_value;
+} PanelCounter;
+
+/* The field's view of the 0x14 bytes where a battle row keeps its queued turn: the menu and scene code reuse them
+ * as panel and mode counters while no battle runs. */
+typedef struct FieldModeWork {
+    u8           flags_118;     /* 0x00 bit 0x80 restores the saved word */
+    u8           countdown_119; /* 0x01 frame countdown, reloaded with 0x28 or 0x0A */
+    u8           pad_02[2];
+    PanelCounter counter_11C; /* 0x04 panel step counter */
+    u8           pad_05;
+    u8           kind_11E;  /* 0x06 record kind */
+    u8           wait_11F;  /* 0x07 shared wait countdown */
+    u16          value_120; /* 0x08 copied into the record's 0x7C */
+    u16          unk_122;   /* 0x0A lowered by 2 per step; @source: write:func_801F3B9C@0x801F3B9C */
+    u32          index_124; /* 0x0C slot index passed to the selector */
+    u8           pad_10[2];
+    PanelCounter step_12A; /* 0x12 */
+    PanelCounter mode_12B; /* 0x13 panel mode */
+} FieldModeWork;
+
+ASSERT_SIZE(FieldModeWork, 0x14);
+ASSERT_OFFSET(FieldModeWork, counter_11C, 0x04);
+ASSERT_OFFSET(FieldModeWork, value_120, 0x08);
+ASSERT_OFFSET(FieldModeWork, index_124, 0x0C);
+ASSERT_OFFSET(FieldModeWork, mode_12B, 0x13);
+
+/* The field's view of the eight cells after the turn: the flags that gate the entry check and the entity slot. */
+typedef struct FieldEntryWork {
+    PanelCounter flags_12C; /* 0x00 bit 0x01/0x08 gate the entry check */
+    u8           slot_12D;  /* 0x01 entity slot index */
+    u8           pad_02[6];
+} FieldEntryWork;
+
+ASSERT_SIZE(FieldEntryWork, 0x08);
+
 /* Local battler work table (stride 0x140 at 0x80145E90), shared by the battle overlays. */
 typedef struct PartyBattler {
     TaskHeader           header; /* 0x00 */
@@ -520,29 +559,41 @@ typedef struct PartyBattler {
     u8                   unk_5D;
     u8                   unk_5E;
     u8                   unk_5F;
-    s32        unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
-    s32        unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
-    u8         pad_68[8];
-    u8         unk_70;
-    u8         pad_71[3];
+    s32       unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
+    s32       unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
+    u8        pad_68[8];
+    u8        unk_70;
+    u8        pad_71[3];
     /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
      * 0xA4-byte character record to this offset. */
-    Character  chr;
-    BattleTurn turn; /* +0x118 the action the player has queued and its outcome */
-    u8         unk_12C[8];
-    u16        unk_134;
-    u8         counter_136;
-    u8         counter_137;
-    u8         focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
-    u8         unk_139;
-    u8         unk_13A[2];
-    u8         character_index; /* +0x13C the Character slot this battler was built from */
-    u8         pad_13D[3];
+    Character chr;
+
+    /* +0x118 battle keeps the action the player has queued and its outcome; the field reuses the bytes as counters */
+    union {
+        BattleTurn    turn;
+        FieldModeWork field;
+    } u;
+
+    /* +0x12C battle clears all eight cells when the battler falls; the field names two of them */
+    union {
+        u8             unk_12C[8];
+        FieldEntryWork field;
+    } status;
+
+    u16 unk_134;
+    u8  counter_136;
+    u8  counter_137;
+    u8  focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
+    u8  unk_139;
+    u8  unk_13A[2];
+    u8  character_index; /* +0x13C the Character slot this battler was built from */
+    u8  unk_13D;         /* the palette fade index; @source: write:func_801AAB00@0x801AAB00 */
+    u8  pad_13E[2];
 } PartyBattler;
 
 ASSERT_SIZE(PartyBattler, 0x140);
 ASSERT_OFFSET(PartyBattler, slot, 0x05);
-ASSERT_OFFSET(PartyBattler, turn, 0x118);
+ASSERT_OFFSET(PartyBattler, u, 0x118);
 /* The four bytes at +0x08 as one word; the bmagic tests mask it. */
 #define PARTY_BATTLER_WORD_08(battler) (*(u32*)&(battler)->facing)
 
@@ -559,7 +610,7 @@ ASSERT_OFFSET(PartyBattler, unk_2C, 0x2C);
 ASSERT_OFFSET(PartyBattler, depth, 0x32);
 ASSERT_OFFSET(PartyBattler, pos, 0x34);
 ASSERT_OFFSET(PartyBattler, chr, 0x74);
-ASSERT_OFFSET(PartyBattler, unk_12C, 0x12C);
+ASSERT_OFFSET(PartyBattler, status, 0x12C);
 ASSERT_OFFSET(PartyBattler, unk_13A, 0x13A);
 ASSERT_OFFSET(PartyBattler, focus_counter, 0x138);
 ASSERT_OFFSET(PartyBattler, character_index, 0x13C);
@@ -629,9 +680,12 @@ typedef enum BattleHitFlags {
     BATTLE_HIT_AP_LANDED = 1 << 5,
 } BattleHitFlags;
 
-/* The three mode work records; g_GameState points at the current one. */
+/* The three mode work records. */
 /* D_80145E90 */
 extern PartyBattler    g_BattlePartyBattlers[3];
+/* The current mode work record: field and battle code point it at one g_BattlePartyBattlers row. */
+/* D_80146250 */
+extern PartyBattler*   g_GameState; /* 0x80146250 */
 /* The mode byte of each 0x24-byte owner record; the kind byte sits at +0x07. */
 extern u8              D_80148333[];
 extern BattleOwnerKind D_8014833A[];

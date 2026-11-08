@@ -11,7 +11,7 @@ MATCH s32 func_801F4D24(void) {
     func_801C24D0();
     g_Task->timer -= 1;
     func_801B0DFC();
-    g_GameState->mode_12B.s8_value = 1;
-    g_Task->header.step            = 1;
+    g_GameState->u.field.mode_12B.s8_value = 1;
+    g_Task->header.step                    = 1;
     return 1;
 }

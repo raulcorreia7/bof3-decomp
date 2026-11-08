@@ -30,15 +30,15 @@ MATCH void func_801C329C(void) {
             } while (index < (s16)total);
         }
     } else {
-        if (g_Characters[g_GameState->slot_13C].status & STATUS_POISONED) {
+        if (g_Characters[g_GameState->character_index].status & STATUS_POISONED) {
             found = 1;
         }
     }
     if ((found & BYTE_MASK) != 0) {
-        g_GameState->flags_118--;
+        g_GameState->u.field.flags_118--;
         found = 0;
-        if (g_GameState->flags_118 == 0) {
-            g_GameState->flags_118 = 0x0A;
+        if (g_GameState->u.field.flags_118 == 0) {
+            g_GameState->u.field.flags_118 = 0x0A;
             func_801C308C(1);
             if (g_GameRequestFlags & 1) {
                 index = 0;
@@ -53,7 +53,7 @@ MATCH void func_801C329C(void) {
                     } while (index < (s16)total);
                 }
             } else {
-                if ((Char_LoseHP(1, g_GameState->leader_id) & HALF_MASK) != 0) {
+                if ((Char_LoseHP(1, g_GameState->chr.character_id) & HALF_MASK) != 0) {
                     found = 1;
                 }
             }

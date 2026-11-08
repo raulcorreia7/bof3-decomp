@@ -20,7 +20,7 @@ MATCH void func_801B26E0(void) {
             i++;
         } while (i < g_PartySize);
     }
-    g_GameState = (GameState*)g_BattlePartyBattlers;
+    g_GameState = g_BattlePartyBattlers;
     TASK_SET(g_BattlePartyBattlers);
     if (g_BattlePartyBattlers[0].unk_09 == 0) {
         for (i = 1; i < g_PartySize; i++) {

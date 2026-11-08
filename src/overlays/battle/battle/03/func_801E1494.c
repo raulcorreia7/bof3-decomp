@@ -12,7 +12,7 @@ MATCH void func_801E1494(void) {
 
     PartyBattler* work;
     work  = g_GameState;
-    value = work->turn.hp_change;
+    value = work->u.turn.hp_change;
     if (work->chr.hp <= value) {
         work->chr.status = STATUS_KO;
         work->chr.hp     = 0;
@@ -24,7 +24,7 @@ MATCH void func_801E1494(void) {
             SND_QueueSelectionFx(0x206);
         }
         entry         = g_GameState;
-        amount        = entry->chr.hp - entry->turn.hp_change;
+        amount        = entry->chr.hp - entry->u.turn.hp_change;
         cap           = entry->chr.stats.max_hp;
         entry->chr.hp = amount;
         if (cap < amount) {
@@ -32,12 +32,12 @@ MATCH void func_801E1494(void) {
         }
     }
     work = g_GameState;
-    if (work->turn.target_flags & BATTLE_HIT_HP) {
-        func_800AAC88(work->turn.hp_change, g_Task->slot);
+    if (work->u.turn.target_flags & BATTLE_HIT_HP) {
+        func_800AAC88(work->u.turn.hp_change, g_Task->slot);
         work = g_GameState;
     }
-    if (work->turn.target_flags & BATTLE_HIT_AP) {
-        func_800AAEBC(work->turn.ap_change, g_Task->slot);
+    if (work->u.turn.target_flags & BATTLE_HIT_AP) {
+        func_800AAEBC(work->u.turn.ap_change, g_Task->slot);
     }
     func_801DEDE4();
     g_Task->unk_03 = g_Task->unk_03 + 1;

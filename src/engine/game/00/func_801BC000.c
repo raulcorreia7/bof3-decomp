@@ -72,13 +72,13 @@ MATCH void func_801BC000(void) {
                         Actor_RequestScript(g_Task->direction_08);
                         goto block_26; /* retail branch */
                     }
-                    if (!(g_Characters[g_GameState->slot_13C].status & STATUS_CONFUSED)) {
-                        g_GameState->step_12A.s8_value = 0;
+                    if (!(g_Characters[g_GameState->character_index].status & STATUS_CONFUSED)) {
+                        g_GameState->u.field.step_12A.s8_value = 0;
                     }
                     func_801C2538();
                     func_801C4C48();
                     Actor_RequestScript((g_Task->direction_08 + 8) & BYTE_MASK);
-                    if (g_GameState->leader_id == CHAR_ID_GARR) {
+                    if (g_GameState->chr.character_id == CHAR_ID_GARR) {
                         tmp10 = g_Task;
                         tmp3  = tmp10->timer;
                         Area_ReadHeight(tmp10->pos.x.fixed + (tmp10->vx * tmp3),
@@ -87,33 +87,33 @@ MATCH void func_801BC000(void) {
                     tmp11        = g_Task;
                     tmp11->timer = (tmp11->timer - 1);
                     func_801B0DFC();
-                    g_GameState->mode_12B.s8_value = 1;
-                    tmp6                           = g_Task;
-                    tmp6->header.step              = 1;
+                    g_GameState->u.field.mode_12B.s8_value = 1;
+                    tmp6                                   = g_Task;
+                    tmp6->header.step                      = 1;
                     return;
                 case_b:
                     Actor_ClearVelocity();
                     Actor_RequestScript(g_Task->direction_08);
-                    g_GameState->mode_12B.s8_value = 0;
+                    g_GameState->u.field.mode_12B.s8_value = 0;
                 block_26:
                     tmp7              = g_Task;
                     tmp7->header.step = 0;
                     return;
                 case_5:
-                    g_GameState->counter_11C.s8_value = 3;
+                    g_GameState->u.field.counter_11C.s8_value = 3;
                     Actor_RequestScript(g_Task->direction_08);
-                    g_GameState->mode_12B.s8_value = 4;
-                    g_Task->header.mode            = 2;
-                    tmp8                           = g_Task;
-                    tmp8->header.step              = 3;
+                    g_GameState->u.field.mode_12B.s8_value = 4;
+                    g_Task->header.mode                    = 2;
+                    tmp8                                   = g_Task;
+                    tmp8->header.step                      = 3;
                     return;
                 case_6:
-                    g_GameState->counter_11C.s8_value = 3;
+                    g_GameState->u.field.counter_11C.s8_value = 3;
                     Actor_RequestScript(g_Task->direction_08);
-                    g_GameState->mode_12B.s8_value = 3;
-                    g_Task->header.mode            = FIELD_TASK_MODE_CLIMB;
-                    tmp12                          = g_Task;
-                    tmp4                           = tmp12->direction_08;
+                    g_GameState->u.field.mode_12B.s8_value = 3;
+                    g_Task->header.mode                    = FIELD_TASK_MODE_CLIMB;
+                    tmp12                                  = g_Task;
+                    tmp4                                   = tmp12->direction_08;
                     if ((tmp4 == 1) || (tmp4 == 7)) {
                         tmp12->header.step = 0;
                         return;

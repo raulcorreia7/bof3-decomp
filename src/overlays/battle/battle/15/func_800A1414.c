@@ -8,7 +8,7 @@ MATCH void func_800A1414(void) {
     func_800A3F28();
     battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
-        g_BattlePartyBattlers[battler].turn.damage_flags.value |= COMBATANT_FLAG_REPRISAL;
+        g_BattlePartyBattlers[battler].u.turn.damage_flags.value |= COMBATANT_FLAG_REPRISAL;
         return;
     }
     ENEMY_COMBATANT(battler).turn.damage_flags.value |= COMBATANT_FLAG_REPRISAL;

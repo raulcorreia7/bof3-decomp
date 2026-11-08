@@ -11,11 +11,11 @@ MATCH void func_801E0788(void) {
     func_801DDFEC(g_Task->slot);
     Battle_CancelTurn(g_Task->slot);
     w = g_GameState;
-    if (w->turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) {
+    if (w->u.turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) {
         g_Task->unk_09 = 30;
         g_Task->unk_03 = 1;
         g_Task->unk_04 = 0;
-    } else if (w->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
+    } else if (w->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
         half = &g_BattleState;
         if ((*half & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half &= 0xBFFF;
@@ -36,11 +36,11 @@ MATCH void func_801E0788(void) {
     } else {
         VOL(u8, g_BattleLivingPartyCount) -= 1;
         for (i = 0; (u8)i < 8; i++) {
-            g_GameState->unk_12C[(u8)i] = 0;
+            g_GameState->status.unk_12C[(u8)i] = 0;
         }
-        w2               = g_GameState;
-        w2->turn.counter = 0;
-        w2->turn.action_flags.value &=
+        w2                 = g_GameState;
+        w2->u.turn.counter = 0;
+        w2->u.turn.action_flags.value &=
             ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO |
               COMBATANT_FLAG_SELECTION_BONUS | COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING |
               COMBATANT_FLAG_SELECTED);
@@ -56,17 +56,17 @@ MATCH void func_801E0788(void) {
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half2 &= 0xBFFF;
         }
-        if (g_GameState->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) {
+        if (g_GameState->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) {
             g_Task->unk_03 = 4;
         } else {
             Battle_ClearSlotPending(g_Task->slot);
             w = g_GameState;
             flags =
-                w->turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
-            w->turn.damage_flags.value = flags & ~0x200;
-            g_Task->header.mode        = 3;
-            g_Task->header.step        = 0;
-            g_Task->unk_03             = 0;
+                w->u.turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
+            w->u.turn.damage_flags.value = flags & ~0x200;
+            g_Task->header.mode          = 3;
+            g_Task->header.step          = 0;
+            g_Task->unk_03               = 0;
         }
     }
     func_801DEDE4();

@@ -22,7 +22,7 @@ MATCH s32 func_801C4FE0(void) {
     moved   = 0;
 
     result = Area_ReadHeight(x, y);
-    slot   = g_GameState->leader_id;
+    slot   = g_GameState->chr.character_id;
     if (result - D_80181B70[slot] < counter) {
         COORD_INT(g_Task->pos.z) -= D_80181B88[slot];
     } else {

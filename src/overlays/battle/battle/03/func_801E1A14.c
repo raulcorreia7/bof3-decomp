@@ -7,12 +7,12 @@ MATCH void func_801E1A14(void) {
 
     expected = 4;
     work     = g_GameState;
-    if (work->turn.command.type == expected) {
+    if (work->u.turn.command.type == expected) {
         work->chr.ap = work->chr.ap - D_801463C8;
     }
     battle_flags = &g_BattleState;
     *battle_flags |= 0x800;
-    g_GameState->turn.command.type = 0;
+    g_GameState->u.turn.command.type = 0;
     if ((D_801CA71C[g_BattleActionId].mask & 0x800u) != 0u) {
         g_Task->header.step += 1;
     } else {

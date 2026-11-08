@@ -12,7 +12,7 @@ MATCH void func_800A15DC(void) {
     func_800A3F28();
     battlerPtr = &g_BattleActiveBattler;
     if ((battler = LOBU(*battlerPtr)) < 3U) {
-        g_BattlePartyBattlers[battler].turn.action_flags.value |= COMBATANT_FLAG_MEDITATION;
+        g_BattlePartyBattlers[battler].u.turn.action_flags.value |= COMBATANT_FLAG_MEDITATION;
         playerIndex = *battlerPtr;
         counter     = g_BattlePartyBattlers[playerIndex].unk_139;
         if (counter < 2U) {

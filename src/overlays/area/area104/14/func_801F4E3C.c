@@ -37,7 +37,7 @@ MATCH void func_801F4E3C(void) {
                 return;
             }
         }
-        g_GameState->mode_12B.s8_value = 0;
+        g_GameState->u.field.mode_12B.s8_value = 0;
     }
 
     g_Task->header.step = 0;

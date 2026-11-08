@@ -17,7 +17,7 @@ MATCH void func_801BF448(void) {
         do {
             i           = 0;
             rec         = (u8*)g_BattlePartyBattlers + rec_off;
-            g_GameState = (GameState*)rec;
+            g_GameState = rec;
             TASK_SET(rec);
             key = rec[0x79];
             while (1) {
@@ -33,7 +33,7 @@ MATCH void func_801BF448(void) {
             work                   = g_Task;
             work->param.unk_0B     = 0;
             COORD_INT(work->pos.z) = val;
-            if ((g_Characters[g_GameState->slot_13C].status & STATUS_KO) != 0)
+            if ((g_Characters[g_GameState->character_index].status & STATUS_KO) != 0)
                 Actor_SelectScript((g_BattleScrollDir + 0x1C));
             else
                 Actor_SelectScript(g_BattleScrollDir);

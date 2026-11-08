@@ -23,7 +23,7 @@ MATCH void func_801B146C(void) {
     Actor* work_j;
     Actor* work_k;
 
-    if (g_GameState->counter_11C.u8_value == 4) {
+    if (g_GameState->u.field.counter_11C.u8_value == 4) {
         work_a     = g_Task;
         work_count = work_a->option_flags;
         if (work_count < 0x11U) {
@@ -32,7 +32,7 @@ MATCH void func_801B146C(void) {
     } else {
         g_Task->option_flags = 0U;
     }
-    level_flag = g_GameState->counter_11C.u8_value;
+    level_flag = g_GameState->u.field.counter_11C.u8_value;
     if (!(g_GameRequestFlags & 1)) {
         func_801C3828();
     }
@@ -113,7 +113,7 @@ MATCH void func_801B146C(void) {
         g_AreaCameraHeightStep = 0;
         if (!(g_GameRequestFlags & 1) && !(g_AreaWalkFlags & (0x20 | AREA_WALK_ENTRY_PENDING))) {
             if (Area_CanStartEncounter() & BYTE_MASK) {
-                g_GameState->counter_11C.u8_value = 3U;
+                g_GameState->u.field.counter_11C.u8_value = 3U;
                 Actor_RequestScript(g_Task->direction_08);
                 g_AreaWalkFlags |= AREA_WALK_TRANSITION;
                 g_Task->header.mode = 5;
@@ -123,7 +123,7 @@ MATCH void func_801B146C(void) {
             goto block_38; /* the request was not made */
         }
     block_38:
-        g_GameState->counter_11C.u8_value = 3U;
+        g_GameState->u.field.counter_11C.u8_value = 3U;
         if (!(Game_RequestRockKick(level_flag) & BYTE_MASK)) {
             work_k = g_Task;
             if (((s32 (*)(s32, s32))func_801A79A4)(work_k->pos.x.fixed, work_k->pos.y.fixed) != 0) {
@@ -137,7 +137,7 @@ MATCH void func_801B146C(void) {
                 return;
             }
             func_801B5BDC(g_Task->direction_08);
-            g_GameState->mode_12B.u8_value = 0;
+            g_GameState->u.field.mode_12B.u8_value = 0;
         block_46:
             g_Task->header.step = 1;
         block_end:;

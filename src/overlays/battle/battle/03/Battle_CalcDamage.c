@@ -24,11 +24,11 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         *(u16*)D_1F800000 = element;
     }
     if (BATTLER_IS_PLAYER(attacker)) {
-        if (g_BattlePartyBattlers[attacker].turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
+        if (g_BattlePartyBattlers[attacker].u.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
             power = &D_801EC30C;
             *power += (*power * g_BattlePartyBattlers[attacker].focus_counter) >> 1;
             g_BattlePartyBattlers[attacker].focus_counter = 0;
-            g_BattlePartyBattlers[attacker].turn.action_flags.value &= ~COMBATANT_FLAG_POWER_BOOST;
+            g_BattlePartyBattlers[attacker].u.turn.action_flags.value &= ~COMBATANT_FLAG_POWER_BOOST;
         }
     } else if (ENEMY_COMBATANT(attacker).turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
         power                             = &D_801EC30C;
@@ -53,7 +53,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     }
     if (BATTLER_IS_PLAYER(target)) {
         status = g_BattlePartyBattlers[target].chr.status;
-        flags  = g_BattlePartyBattlers[target].turn.damage_flags.value;
+        flags  = g_BattlePartyBattlers[target].u.turn.damage_flags.value;
     } else {
         status = ENEMY_COMBATANT(target).status;
         flags  = ENEMY_COMBATANT(target).turn.damage_flags.value;
@@ -63,7 +63,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
             *(volatile s16*)&D_801463DA |= 0x40;
             if (BATTLER_IS_PLAYER(target)) {
                 func_800A36F0(g_BattlePartyBattlers[target].slot, 0x40);
-                g_BattlePartyBattlers[target].turn.counter = 0;
+                g_BattlePartyBattlers[target].u.turn.counter = 0;
             } else {
                 func_800A36F0(ENEMY_COMBATANT(target).slot, 0x40);
                 ENEMY_COMBATANT(target).turn.counter = 0;
@@ -76,7 +76,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
             *(volatile s16*)&D_801463DA |= 0x20;
             if (BATTLER_IS_PLAYER(target)) {
                 func_800A36F0(g_BattlePartyBattlers[target].slot, 0x20);
-                g_BattlePartyBattlers[target].turn.counter = 0;
+                g_BattlePartyBattlers[target].u.turn.counter = 0;
             } else {
                 func_800A36F0(ENEMY_COMBATANT(target).slot, 0x20);
                 ENEMY_COMBATANT(target).turn.counter = 0;
@@ -112,7 +112,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         damage = 1;
     }
     if (BATTLER_IS_PLAYER(target)) {
-        if (g_BattlePartyBattlers[target].turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_BattlePartyBattlers[target].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             damage = 0;
         }
     } else if (ENEMY_COMBATANT(target).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {

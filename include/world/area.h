@@ -199,13 +199,13 @@ typedef enum FieldTaskMode {
     FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
 } FieldTaskMode;
 
-/* g_GameState->mode_12B while the character field action runs. */
+/* g_GameState->u.field.mode_12B while the character field action runs. */
 #define GAME_PANEL_MODE_PERSONAL_ACTION 8
 
 /* Garr pushes after walking this many frames against an object. */
 #define GARR_PUSH_HOLD_FRAMES           0x10
 
-/* g_GameState->counter_11C, the walk speed index: Teepo and Peco act on a rock only at the run index. */
+/* g_GameState->u.field.counter_11C, the walk speed index: Teepo and Peco act on a rock only at the run index. */
 #define FIELD_SPEED_RUN                 4
 
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by

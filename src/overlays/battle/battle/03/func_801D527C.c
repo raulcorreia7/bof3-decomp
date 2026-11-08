@@ -9,17 +9,17 @@ MATCH bool func_801D527C(void) {
     count = 0;
     for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
         if (func_801D64C4(slot) == 0) {
-            if ((g_BattlePartyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_CHARGING) &&
+            if ((g_BattlePartyBattlers[slot].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) &&
                 (g_BattlePartyBattlers[slot].counter_136 == 3)) {
                 count++;
-                g_BattlePartyBattlers[slot].header.mode       = 6;
-                g_BattlePartyBattlers[slot].header.step       = 5;
-                g_BattlePartyBattlers[slot].turn.target_flags = 0x11;
-                g_BattlePartyBattlers[slot].counter_136       = 0;
-                g_BattlePartyBattlers[slot].unk_04            = 0;
-                g_BattlePartyBattlers[slot].unk_03            = 0;
-                g_BattlePartyBattlers[slot].turn.action_flags.value &= ~COMBATANT_FLAG_CHARGING;
-                g_BattlePartyBattlers[slot].turn.hp_change = g_BattlePartyBattlers[slot].chr.hp;
+                g_BattlePartyBattlers[slot].header.mode         = 6;
+                g_BattlePartyBattlers[slot].header.step         = 5;
+                g_BattlePartyBattlers[slot].u.turn.target_flags = 0x11;
+                g_BattlePartyBattlers[slot].counter_136         = 0;
+                g_BattlePartyBattlers[slot].unk_04              = 0;
+                g_BattlePartyBattlers[slot].unk_03              = 0;
+                g_BattlePartyBattlers[slot].u.turn.action_flags.value &= ~COMBATANT_FLAG_CHARGING;
+                g_BattlePartyBattlers[slot].u.turn.hp_change = g_BattlePartyBattlers[slot].chr.hp;
                 Battle_SetSlotPending(slot);
             }
         }

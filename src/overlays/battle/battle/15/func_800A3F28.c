@@ -17,8 +17,8 @@ MATCH void func_800A3F28(void) {
     battler_index = LOBU(g_BattleTarget);
     *pFlag        = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler_index)) {
-        g_BattlePartyBattlers[battler_index].turn.damage_flags.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
-        g_BattlePartyBattlers[g_BattleTarget].turn.target_flags &= ~BATTLE_HIT_HP;
+        g_BattlePartyBattlers[battler_index].u.turn.damage_flags.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
+        g_BattlePartyBattlers[g_BattleTarget].u.turn.target_flags &= ~BATTLE_HIT_HP;
     } else {
         ENEMY_COMBATANT(battler_index).turn.damage_flags.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
         ENEMY_COMBATANT(g_BattleTarget).turn.target_flags &= ~0x1u;

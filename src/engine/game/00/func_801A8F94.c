@@ -136,7 +136,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         state->cursor += 4;
                         break;
                     case 15:
-                        left = s_TalkMessageIds[base[state->cursor + 1] * 11 + g_GameState->leader_id];
+                        left = s_TalkMessageIds[base[state->cursor + 1] * 11 + g_GameState->chr.character_id];
                         state->flag_00 |= 0x40;
                         g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)

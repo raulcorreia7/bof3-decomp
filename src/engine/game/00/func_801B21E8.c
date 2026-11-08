@@ -37,7 +37,7 @@ NON_MATCHING void func_801B21E8(void) {
     STACK_PADS(u8, 8);
 
     val3  = 3;
-    val14 = g_GameState->flags_12C.u8_value;
+    val14 = g_GameState->status.field.flags_12C.u8_value;
     if (D_80145FD1 == 3) {
         Party_SwapBattlerRows(0, 1, 1);
         if (g_PartySize == 3) {
@@ -65,13 +65,13 @@ NON_MATCHING void func_801B21E8(void) {
                 g_Task      = tmp5;
                 g_GameState = tmp5;
                 func_801C1254(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
-                g_GameState->flags_12C.u8_value = val14;
-                if (g_GameState->flags_12C.u8_value & 1) {
+                g_GameState->status.field.flags_12C.u8_value = val14;
+                if (g_GameState->status.field.flags_12C.u8_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;
                 }
                 val11 = (u8*)g_Characters;
                 val12 = (u8*)g_GameState + 0x74;
-                val11 += g_CharSlot[g_GameState->leader_id] * 0xA4;
+                val11 += g_CharSlot[g_GameState->chr.character_id] * 0xA4;
                 tmp11 = val11 + 0xA0;
                 do {
                     FIELD(s32, val12, 0)    = FIELD(s32, val11, 0);
@@ -81,9 +81,9 @@ NON_MATCHING void func_801B21E8(void) {
                     val11 += 0x10;
                     val12 += 0x10;
                 } while (val11 != tmp11);
-                *val12                  = *val11;
-                g_GameState->slot_13C   = (u8)g_CharSlot[g_GameState->leader_id];
-                g_PartyFieldOrder[val4] = g_GameState->leader_id;
+                *val12                       = *val11;
+                g_GameState->character_index = (u8)g_CharSlot[g_GameState->chr.character_id];
+                g_PartyFieldOrder[val4]      = g_GameState->chr.character_id;
                 if (val4 != 0) {
                     func_801C2438();
                     tmp6                            = g_Task;
@@ -129,7 +129,7 @@ NON_MATCHING void func_801B21E8(void) {
         } while (val4 < (s32)g_PartySize);
     }
     TASK_SET(g_BattlePartyBattlers);
-    g_GameState      = (GameState*)g_BattlePartyBattlers;
+    g_GameState      = g_BattlePartyBattlers;
     g_AreaCameraStep = 0x20;
     tmp3             = g_AreaScrollTargetX - D_80145EC4;
     val7             = tmp3;

@@ -13,9 +13,9 @@ MATCH void func_801B31F0(void) {
     u8         kind;
 
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        kind          = g_GameState->kind_11E;
+        kind          = g_GameState->u.field.kind_11E;
         record.unk_7A = kind;
-        record.unk_7C = g_GameState->value_120;
+        record.unk_7C = g_GameState->u.field.value_120;
         if (kind != GAME_NONE) {
             Game_DispatchScenarioRecord(&record);
         }

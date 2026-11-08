@@ -426,7 +426,7 @@ usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, 
 
 | Today                                       | Becomes                                                                             |
 | ------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `BattlePanelRecord`, `GameStateRecord`      | `BattlePanel`, `GameState`                                                          |
+| `BattlePanelRecord`, `GameStateRecord`      | `BattlePanel`, `PartyBattler`                                                       |
 | `BattleActorRecord`, `PartyRow`             | `Battler`, `PartyBattler`                                                           |
 | `g_BATTLE_TargetRecord`, cast at every use  | a `BattlePanelTask*` named for whose panel it holds                                 |
 | members `flags_12C`, `slot_12D`, `state_01` | the role, offset in the comment: `/* 0x12D */ u8 unk_12D;` until the role is proven |

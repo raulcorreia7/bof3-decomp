@@ -36,7 +36,7 @@ MATCH s32 func_801C0E48(void) {
         next   = count + 1;
         record = &((u8*)g_BattlePartyBattlers)[count * BATTLE_PARTY_STRIDE];
         TASK_SET(record);
-        g_GameState = (GameState*)record;
+        g_GameState = record;
         *state      = next;
         if (g_PartySize != 1) {
             if (next == g_PartySize) {

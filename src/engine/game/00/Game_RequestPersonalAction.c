@@ -4,7 +4,7 @@
 MATCH s32 Game_RequestPersonalAction(void) {
     u8 kind;
 
-    kind = g_GameState->leader_id;
+    kind = g_GameState->chr.character_id;
     if (kind == CHAR_ID_GARR || kind == CHAR_ID_REI)
         return 0;
     if (kind == CHAR_ID_RYU_PAJAMAS || kind == CHAR_ID_WHELP)
@@ -15,6 +15,6 @@ MATCH s32 Game_RequestPersonalAction(void) {
         return 0;
     g_Task->header.mode = FIELD_TASK_MODE_PERSONAL_ACTION;
     ACTOR_CLEAR_STEP();
-    g_GameState->mode_12B.u8_value = GAME_PANEL_MODE_PERSONAL_ACTION;
+    g_GameState->u.field.mode_12B.u8_value = GAME_PANEL_MODE_PERSONAL_ACTION;
     return 1;
 }

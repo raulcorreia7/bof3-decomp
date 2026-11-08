@@ -5,7 +5,7 @@ MATCH void func_801B3690(void) {
 
     hint = g_EmiLoadedCharacterIndex;
     g_PersonalActions[hint & 0x7F]();
-    if (g_GameState->mode_12B.u8_value == 0) {
+    if (g_GameState->u.field.mode_12B.u8_value == 0) {
         Actor_RequestScript(g_Task->direction_08);
         Party_ClearBattlerState(0);
         g_Task->header.mode = 1;

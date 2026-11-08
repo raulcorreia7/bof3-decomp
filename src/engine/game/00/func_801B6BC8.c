@@ -6,21 +6,21 @@ MATCH void func_801B6BC8(void) {
     u8     flags;
     u8     delay;
 
-    delay = g_GameState->countdown_119;
+    delay = g_GameState->u.field.countdown_119;
     if (delay != 0) {
-        g_GameState->countdown_119 = (delay - 1);
+        g_GameState->u.field.countdown_119 = (delay - 1);
         return;
     }
-    sel = func_801A8D38(&g_GameState->flags_118, g_GameState->index_124);
+    sel = func_801A8D38(&g_GameState->u.field.flags_118, g_GameState->u.field.index_124);
     if (sel != GAME_NONE) {
-        flags = g_GameState->flags_118;
+        flags = g_GameState->u.field.flags_118;
         if (flags & 8) {
-            g_GameState->flags_118 = (flags & 0xF7);
+            g_GameState->u.field.flags_118 = (flags & 0xF7);
             if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             }
             Actor_RequestScript(g_Task->direction_08);
-            g_GameState->flags_12C.u8_value &= 0xFB;
+            g_GameState->status.field.flags_12C.u8_value &= 0xFB;
             func_801C3204();
             g_Task->header.mode = 1;
             ACTOR_CLEAR_STEP();
@@ -40,7 +40,7 @@ MATCH void func_801B6BC8(void) {
                 return;
             }
         }
-        flags = g_GameState->flags_118;
+        flags = g_GameState->u.field.flags_118;
         if (flags & 2) {
             g_Task->direction_08 = sel;
             func_801C2438();
@@ -62,9 +62,9 @@ MATCH void func_801B6BC8(void) {
         }
         work = g_Task;
         if (work->timer != 0) {
-            delay = g_GameState->wait_11F;
+            delay = g_GameState->u.field.wait_11F;
             if (delay != 0) {
-                g_GameState->wait_11F = (delay - 1);
+                g_GameState->u.field.wait_11F = (delay - 1);
             }
             g_Task->direction_08 = sel;
             g_Task->unk_03       = 2;
@@ -75,7 +75,7 @@ MATCH void func_801B6BC8(void) {
             work->direction_08 = sel;
             g_Task->unk_03     = 1;
         }
-        if ((g_GameState->flags_118 & 0x40) == 0) {
+        if ((g_GameState->u.field.flags_118 & 0x40) == 0) {
             Actor_RequestScript(sel);
         }
     }

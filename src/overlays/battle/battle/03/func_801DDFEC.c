@@ -15,14 +15,14 @@ MATCH void func_801DDFEC(u32 battler_index) {
     body:
         battler = g_BattleTurnOrder[index & BYTE_MASK];
         if (battler == (battler_index & BYTE_MASK)) {
-            if (g_BattlePartyBattlers[battler].turn.command.type != BATTLE_COMMAND_ITEM) {
+            if (g_BattlePartyBattlers[battler].u.turn.command.type != BATTLE_COMMAND_ITEM) {
                 return;
             }
-            substate = g_BattlePartyBattlers[battler].turn.command.id;
+            substate = g_BattlePartyBattlers[battler].u.turn.command.id;
             if ((substate >> 8) != 0u) {
                 return;
             }
-            func_801DDE7C(g_BattlePartyBattlers[battler].turn.choice, substate);
+            func_801DDE7C(g_BattlePartyBattlers[battler].u.turn.choice, substate);
             return;
         }
         index += 1u;

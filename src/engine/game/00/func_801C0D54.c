@@ -15,6 +15,6 @@ MATCH void func_801C0D54(void) {
         g_Task->header.mode = 2;
         g_Task->header.step = 3;
         g_Task->unk_03      = 3;
-        g_GameState->flags_12C.u8_value &= 0xFD;
+        g_GameState->status.field.flags_12C.u8_value &= 0xFD;
     }
 }

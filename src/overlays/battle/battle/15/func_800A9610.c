@@ -18,7 +18,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
 
                     offset             = slot * BATTLE_PARTY_STRIDE;
                     D_80145E91[offset] = 0xB;
-                    g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value |= player_flags;
+                    g_BattlePartyBattlers[slot].u.turn.damage_flags.volatile_value |= player_flags;
                     Battle_SetSlotPending(slot);
                 }
                 i++;
@@ -46,7 +46,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
                 battler            = slot;
                 offset             = battler * BATTLE_PARTY_STRIDE;
                 D_80145E91[offset] = 0xB;
-                g_BattlePartyBattlers[battler].turn.damage_flags.volatile_value |= flags;
+                g_BattlePartyBattlers[battler].u.turn.damage_flags.volatile_value |= flags;
                 Battle_SetSlotPending(battler);
             } else {
                 battler                              = slot;

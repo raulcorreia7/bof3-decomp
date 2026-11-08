@@ -37,7 +37,7 @@ MATCH void func_801D3624(void) {
             work                  = &g_BattlePartyBattlers[kind_index];
             g_BattleSelectedActor = work;
             /* Retail builds this pointer as base + 0x118 + row * 0x140. */
-            D_80146390            = &g_BattlePartyBattlers[kind_index].turn.command;
+            D_80146390            = &g_BattlePartyBattlers[kind_index].u.turn.command;
             D_80146386 =
                 work->unk_2E.half +
                 g_BattlePanelOffsets[g_BattlePartyBattlers[kind_index].chr.character_id * 8 + work->facing * 2];

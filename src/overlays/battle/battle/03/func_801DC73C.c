@@ -54,6 +54,6 @@ after_enemy:
     return (s32)damage;
 
 clear:
-    g_BattlePartyBattlers[index & BYTE_MASK].turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
+    g_BattlePartyBattlers[index & BYTE_MASK].u.turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
     return 0u;
 }

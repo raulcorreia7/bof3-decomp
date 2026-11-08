@@ -18,7 +18,7 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
 
     id = battler_index & BYTE_MASK;
     if (id < 3u) {
-        counter = g_BattlePartyBattlers[id].turn.counter & BYTE_MASK;
+        counter = g_BattlePartyBattlers[id].u.turn.counter & BYTE_MASK;
     } else {
         counter = ENEMY_COMBATANT(id).turn.counter & BYTE_MASK;
     }

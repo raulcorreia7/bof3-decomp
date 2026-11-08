@@ -22,7 +22,7 @@ MATCH void func_800A5164(void) {
 
     func_800A82F8();
     g_BattlePanelMode = 2;
-    BATTLE_ACTIVE_ROW->turn.action_flags.volatile_value |= COMBATANT_FLAG_ABILITY_ALT_POSE;
+    BATTLE_ACTIVE_ROW->u.turn.action_flags.volatile_value |= COMBATANT_FLAG_ABILITY_ALT_POSE;
     counter  = (u8*)&g_BattleUIState;
     *counter = *counter + 1;
 }

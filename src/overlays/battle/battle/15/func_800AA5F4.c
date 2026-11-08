@@ -5,10 +5,10 @@ MATCH s32 func_800AA5F4(s32 slot) {
     if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
         return 0;
     }
-    if (!(g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value & COMBATANT_FLAG_COMMAND_ENTERED)) {
+    if (!(g_BattlePartyBattlers[slot].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_COMMAND_ENTERED)) {
         return 0;
     }
-    if (g_BattlePartyBattlers[slot].turn.command.target != LOBU(g_BattleActiveBattler)) {
+    if (g_BattlePartyBattlers[slot].u.turn.command.target != LOBU(g_BattleActiveBattler)) {
         return 0;
     }
     if (func_800AA874(*(u8*)&g_BattleAction->unk_02) & BYTE_MASK) {

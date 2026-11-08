@@ -40,8 +40,8 @@ MATCH s32 func_801BDF08(void) {
         }
     }
     if (found != 0) {
-        g_GameState->counter_11C.u8_value = 3;
-        g_Task->timer                     = 0;
+        g_GameState->u.field.counter_11C.u8_value = 3;
+        g_Task->timer                             = 0;
     }
     return found;
 }

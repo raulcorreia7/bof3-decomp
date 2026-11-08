@@ -55,23 +55,23 @@
 /* Pick the battler's step rule row from the flagged, player and enemy tables.
  * Kept: as an inline the enemy table pointer loads into $a0 before the branch
  * (first instruction differs in both members). */
-#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                                                       \
-    do {                                                                                                       \
-        u32 row;                                                                                               \
-        u8  battler;                                                                                           \
-        u8  result;                                                                                            \
-        battler = *(u8*)&g_BattleActiveBattler;                                                                \
-        if (battler < 3u) {                                                                                    \
-            if ((g_BattlePartyBattlers[battler].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
-                result = flagged[g_DragonForm];                                                                \
-            } else {                                                                                           \
-                result = player[g_BattlePartyBattlers[battler].chr.character_id];                              \
-            }                                                                                                  \
-        } else {                                                                                               \
-            row    = (u32)battler - 3u;                                                                        \
-            result = enemy[(u32)g_BattleEnemyBattlers[row].kind * 0x88u];                                      \
-        }                                                                                                      \
-        return result;                                                                                         \
+#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                                                         \
+    do {                                                                                                         \
+        u32 row;                                                                                                 \
+        u8  battler;                                                                                             \
+        u8  result;                                                                                              \
+        battler = *(u8*)&g_BattleActiveBattler;                                                                  \
+        if (battler < 3u) {                                                                                      \
+            if ((g_BattlePartyBattlers[battler].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
+                result = flagged[g_DragonForm];                                                                  \
+            } else {                                                                                             \
+                result = player[g_BattlePartyBattlers[battler].chr.character_id];                                \
+            }                                                                                                    \
+        } else {                                                                                                 \
+            row    = (u32)battler - 3u;                                                                          \
+            result = enemy[(u32)g_BattleEnemyBattlers[row].kind * 0x88u];                                        \
+        }                                                                                                        \
+        return result;                                                                                           \
     } while (0)
 
 /* The party formation g_PartyFormation (0x80144F58): func_800AAA74 applies its stat changes. */
@@ -1045,7 +1045,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
         mode = *(u8*)&g_BattleTarget;
         if (mode < 3u) {
-            g_BattlePartyBattlers[mode].turn.action_flags.value |= flag;
+            g_BattlePartyBattlers[mode].u.turn.action_flags.value |= flag;
         } else {
             ENEMY_COMBATANT(mode).turn.action_flags.value |= flag;
         }

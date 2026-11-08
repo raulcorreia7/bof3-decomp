@@ -8,7 +8,7 @@ MATCH void func_8009F320(void) {
     func_800A3F28();
 
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
-        g_BattlePartyBattlers[g_BattleTarget].turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
+        g_BattlePartyBattlers[g_BattleTarget].u.turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
         return;
     }
 

@@ -13,5 +13,5 @@ MATCH void func_801F32C8(void) {
     actor->vy               = 0;
     actor->vz               = 0;
     actor->gravity          = -8;
-    g_GameState->unk_122 -= 2;
+    g_GameState->u.field.unk_122 -= 2;
 }

@@ -21,7 +21,7 @@ NON_MATCHING s32 func_801B0E44(void) {
     } else {
         g_Task->timer = 0x10;
     }
-    divisor       = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
+    divisor       = g_RouteSpeedScale[g_GameState->u.field.counter_11C.u8_value];
     g_Task->timer = (u8)(g_Task->timer / (u32)(divisor & BYTE_MASK));
     if (g_Task->state_70.byte == 0) {
         SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * divisor * g_Task->timer;

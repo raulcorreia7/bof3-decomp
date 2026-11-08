@@ -22,16 +22,16 @@ NON_MATCHING u8 func_801BF11C(void) {
     g_EncounterOriginY = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_BattleScrollDir].dy << 16);
     for (i = 0; i < g_PartySize; i++) {
         work        = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
-        g_GameState = (GameState*)work;
+        g_GameState = work;
         TASK_SET(work);
         if (g_Task->param.unk_0B == 0) {
             if (func_801C29A0(8) & BYTE_MASK) {
                 for (order = 0; order < 3; order++) {
-                    if (g_PartyBattleOrder[order] == g_GameState->leader_id) {
+                    if (g_PartyBattleOrder[order] == g_GameState->chr.character_id) {
                         break;
                     }
                 }
-                g_GameState->flags_12C.u8_value &= 0xFE;
+                g_GameState->status.field.flags_12C.u8_value &= 0xFE;
                 g_Task->unk_29           = g_AreaDrawMode;
                 g_Task->pos.x            = g_EncounterParty[order].x;
                 g_Task->pos.y            = g_EncounterParty[order].y;

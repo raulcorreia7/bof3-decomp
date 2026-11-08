@@ -14,7 +14,7 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
 
     if (battler_index < 3u) {
         g_BattleEffects[action_slot].target.party = &g_BattlePartyBattlers[battler_index];
-        target_flags                              = g_BattlePartyBattlers[battler_index].turn.target_flags;
+        target_flags                              = g_BattlePartyBattlers[battler_index].u.turn.target_flags;
     } else {
         g_BattleEffects[action_slot].target.enemy = (EnemyBattler*)g_BattleEnemies + battler_index;
         target_flags                              = ENEMY_COMBATANT(battler_index).turn.target_flags;
