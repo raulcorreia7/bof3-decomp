@@ -19,8 +19,8 @@ MATCH void func_800AFD9C(void) {
     flags    = g_BattleTargetSelector;
     if ((flags & 0xC0) != 0xC0) {
         if (flags & 0x40) {
-            for (i = 0; i < 8; i++) {
-                if (Battle_SlotIsBlocked((i + 3) & BYTE_MASK) == 0) {
+            for (i = 0; i < ENCOUNTER_ENEMY_COUNT; i++) {
+                if (Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) == 0) {
                     count++;
                     sum_x += g_BattleEnemyBattlers[i].pos.x.fixed >> 9;
                     sum_y += g_BattleEnemyBattlers[i].pos.y.fixed >> 9;

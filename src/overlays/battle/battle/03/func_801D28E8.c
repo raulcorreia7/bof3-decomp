@@ -8,7 +8,7 @@ MATCH void func_801D28E8(void) {
             for (i = 0; i < 32; i++) {
                 g_TextVariables[0][i] = 0;
             }
-            for (i = 0; i < 8; i++) {
+            for (i = 0; i < ENEMY_NAME_LENGTH; i++) {
                 g_TextVariables[0][i] = g_BattleEnemyBattlers[D_801ED9B0[D_801EB5A8 - 1].owner_index].name[i];
             }
             BattleStageSelectionRingRecord(1, 0, Resource_GetText(D_801ED9B0[D_801EB5A8 - 1].panel_id));
