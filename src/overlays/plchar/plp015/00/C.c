@@ -49,7 +49,7 @@ MATCH void func_801CF500(void) {
 }
 
 /* This copy turns between facings 3 and 5; the image's own are the header's. */
-MATCH void Char_StartTurn6(void) {
+MATCH void Char_StartTurnMomo(void) {
     CHAR_START_TURN(3, 5);
 }
 

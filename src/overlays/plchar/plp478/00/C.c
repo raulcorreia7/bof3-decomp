@@ -24,7 +24,7 @@ MATCH void func_801CE620(void) {
 
 #include "overlays/plchar/Char_StartFacingTurn.h"
 
-MATCH void Char_RunStepScript4(void) {
+MATCH void Char_RunStepScriptRyuAdult(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
@@ -51,11 +51,11 @@ MATCH void func_801CF27C(void) {
     SYS_DISPATCH_TASK(D_801CF6FC, 2, g_Task);
 }
 
-MATCH void Char_StartTurn5(void) {
+MATCH void Char_StartTurnNinaAdult(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-MATCH void Char_RunStepScript8(void) {
+MATCH void Char_RunStepScriptNinaAdult(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
 }
 

@@ -27,6 +27,9 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find twins in one image                  | `bin/coddog match <target> <func> -t 0.95`                               | [coddog](../docs/toolchain.md#coddog)                     |
 | Find alike functions across images       | `tools/dups.py near`                                                     | [duplicates](#duplicates-and-names)                       |
 | List same-name groups and split names    | `tools/dups.py shared-names`, `tools/dups.py split-names`                | same                                                      |
+| Find repeated instruction runs in functions | `tools/chunks.py -w 24 -o chunks.tsv`                                 | [duplicates](#duplicates-and-names)                       |
+| Mark each run asm, shared or pasted      | `tools/classify.py chunks.tsv out.tsv`                                   | same                                                      |
+| Find repeated C bodies in the source     | `ripwire src --clones`                                                   | same                                                      |
 | Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/conventions.md#rename-steps)       |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
@@ -105,6 +108,9 @@ each assembly function; `near --full` writes one row per assembly function with 
 and `diff_count`, the instructions that differ (jump targets ignored), cheapest first. `shared-names`
 lists one name that several bodies use, worst first. `split-names` lists byte-equal bodies that carry
 several names. All print tab-separated rows.
+`chunks.py` finds instruction runs (immediates masked) that recur in three or more functions; `classify.py`
+marks each member asm, shared (a header body or a call) or pasted, so the rows left are the copies to
+fold. `ripwire src --clones` lists token-normalized duplicate C bodies.
 
 ## Signatures
 
