@@ -31,7 +31,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     if (val8 == 0) {
         val2 = 0xE0;
     }
-    val7->clut = GetClut(val2, 480);
+    val7->clut = GetClut(val2, STAGE_PALETTE_Y);
     val3       = 0x80;
     tmp2       = val1 + (val5 & BYTE_MASK);
     tmp4       = val0 + 7;
@@ -55,7 +55,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     val7 = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(val7);
     val7->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    val7->clut  = GetClut(176, 480);
+    val7->clut  = GetClut(176, STAGE_PALETTE_Y);
     setRGB0(val7, 0x80, 0x80, 0x80);
     tmp0     = val1 + (val5 & BYTE_MASK);
     tmp3     = (val6 & BYTE_MASK) + tmp0;

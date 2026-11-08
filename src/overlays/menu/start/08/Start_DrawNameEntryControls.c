@@ -15,7 +15,7 @@
 #define CONTROLS_SPRITE_TPAGE_X   0x340
 #define CONTROLS_SPRITE_TPAGE_Y   0x100
 #define CONTROLS_SPRITE_CLUT_X    0xC0
-#define CONTROLS_SPRITE_CLUT_Y    0x1E1
+#define CONTROLS_SPRITE_CLUT_Y    (STAGE_PALETTE_Y + 1)
 
 /* One row per command label; the footer icons take the row after them. */
 #define CONTROLS_ROW_Y            6
@@ -47,7 +47,7 @@
 #define CONTROLS_ICON_PAIR_V      2
 
 /* The icon palettes on the menu CLUT row, and the icon and sprite brightness. */
-#define MENU_ICON_CLUT_Y          0x1E0
+#define MENU_ICON_CLUT_Y          STAGE_PALETTE_Y
 #define CONTROLS_BUTTON_CLUT_X    0x30
 #define CONTROLS_ICON_SHADE       0x7F
 #define CONTROLS_SPRITE_SHADE     0x80

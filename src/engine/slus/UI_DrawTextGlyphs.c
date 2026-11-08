@@ -21,7 +21,7 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
     count   = len;
     saved   = 0;
     func_8014FC00(0);
-    clut   = (flags & 0xF) | 0x7800;
+    clut   = (flags & 0xF) | STAGE_PALETTE_CLUT;
     index  = (flags & 0xF0) >> 3;
     shade  = g_NumberRowShades[index];
     height = 0xC - g_NumberRowShades[index + 1];
@@ -32,11 +32,11 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
                 str++;
                 saved   = palette;
                 palette = *str;
-                clut    = (palette & 0xF) | 0x7800;
+                clut    = (palette & 0xF) | STAGE_PALETTE_CLUT;
                 break;
             case STRING_NOCOLOR:
                 palette = saved;
-                clut    = (palette & 0xF) | 0x7800;
+                clut    = (palette & 0xF) | STAGE_PALETTE_CLUT;
                 break;
             case STRING_NEWLINE:
                 D_80145ACA = D_80145ACE;

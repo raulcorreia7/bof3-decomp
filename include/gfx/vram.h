@@ -14,6 +14,11 @@
 #define GRAPHICS_CHUNK_W_16BPP    32
 #define GRAPHICS_CHUNK_H          32
 
+/* The stage palette: 32 CLUT rows of 256 words at VRAM (0, 480), uploaded by GFX_UploadPalette
+ * (@source: wiki:systems/rendering). Text CLUT words are 0x7800 | column, the first row. */
+#define STAGE_PALETTE_Y           480
+#define STAGE_PALETTE_CLUT        0x7800
+
 /* CLUT (0, 494) the area sprite draws share (@source: wiki:formats/assets). */
 #define WORLD_SPRITE_CLUT         0x7B80
 

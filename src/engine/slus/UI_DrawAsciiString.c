@@ -24,7 +24,7 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
         MATCH_FAKE_PIN(s32, attr, "s0");
         attr = flags;
         func_8014FC00(0);
-        color = ((attr & 0x3F) | 0x7800);
+        color = ((attr & 0x3F) | STAGE_PALETTE_CLUT);
     }
     x0     = x;
     shade  = 0x80;

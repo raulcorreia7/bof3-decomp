@@ -25,7 +25,7 @@ MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
     func_8014FC00(0);
     sprite  = g_GfxPrimCursor;
     cl      = cl & 0x3Fu;
-    color   = (cl | 0x7800u);
+    color   = (cl | STAGE_PALETTE_CLUT);
     start_x = X;
     do {
         cc = *p;

@@ -12,7 +12,7 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     GFX_AddDrawMode(tpage);
     sprt = (SPRT*)g_GfxPrimCursor;
     setWH(sprt, 16, 8);
-    sprt->clut = 0x7800;
+    sprt->clut = STAGE_PALETTE_CLUT;
     if ((shade_mode & BYTE_MASK) == 0) {
         sprt->r0 = sprt->g0 = sprt->b0 = 0x80;
     } else {

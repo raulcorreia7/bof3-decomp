@@ -41,7 +41,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     poly = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(poly);
     poly->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    poly->clut  = GetClut(((s8)g_WindowStyle << 5) | 0x10, 481);
+    poly->clut  = GetClut(((s8)g_WindowStyle << 5) | 0x10, STAGE_PALETTE_Y + 1);
     x2          = x + w;
     y2          = y + h;
     setRGB0(poly, 255, 255, 255);

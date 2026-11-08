@@ -16,9 +16,9 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     setWH(sprt, rect[2], rect[3]);
 
     if (!(flags & 2)) {
-        sprt->clut = GetClut(176, 481);
+        sprt->clut = GetClut(176, STAGE_PALETTE_Y + 1);
     } else {
-        sprt->clut = GetClut(128, 482);
+        sprt->clut = GetClut(128, STAGE_PALETTE_Y + 2);
     }
 
     setRGB0(sprt, 128, 128, 128);

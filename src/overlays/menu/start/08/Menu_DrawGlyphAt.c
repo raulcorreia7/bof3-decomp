@@ -90,7 +90,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
         tmp19     = *val12;
         setRGB0(val11, 128, 128, 128);
         val11->v3 = (s8)((((tmp19 / 21) & BYTE_MASK) * 0xC) + 0xC);
-        val10     = GetClut((stack_18 & 0xF) * 16, 480);
+        val10     = GetClut((stack_18 & 0xF) * 16, STAGE_PALETTE_Y);
         val5      = 0x100;
         goto block_16; /* retail branch */
     }
@@ -146,7 +146,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
     setRGB0(val11, 128, 128, 128);
     val11->v3 = (s8)((((*val12 + 0x64) / 21) * 0xC) + 0xC);
 block_15:
-    val10 = GetClut(val4, 480);
+    val10 = GetClut(val4, STAGE_PALETTE_Y);
     val5  = 0;
 block_16:
     val11->clut  = val10;

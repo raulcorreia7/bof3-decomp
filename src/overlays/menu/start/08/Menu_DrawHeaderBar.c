@@ -81,7 +81,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     FIELD(u16, val7, 0x1Au) = (u16)(FIELD(u16, val7, 0x1Au) - 3);
     FIELD(u8, val7, 0xDu)   = (u8)(FIELD(u8, val7, 0xDu) + 2);
     FIELD(u8, val7, 0x1Du)  = (u8)(FIELD(u8, val7, 0x1Du) - 3);
-    FIELD(u16, val7, 0xEu)  = GetClut(val1, 481);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
     stack_40                = stack_28 + 1;
     val3                    = (u16)stack_40;
     if (GetGraphType() != 1) {
@@ -115,7 +115,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     FIELD(s16, val7, 0x4u)  = 0xAC;
     FIELD(s8, val7, 0x5u)   = 0xAC;
     FIELD(s16, val7, 0x6u)  = 0xAC;
-    FIELD(u16, val7, 0xEu)  = GetClut(val1, 481);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
     stack_38                = (u16)stack_48;
     if (GetGraphType() != 1) {
         GetGraphType();
@@ -148,7 +148,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     FIELD(s16, val7, 0x4u)  = 0xAC;
     FIELD(s8, val7, 0x5u)   = 0xAC;
     FIELD(s16, val7, 0x6u)  = 0xAC;
-    FIELD(u16, val7, 0xEu)  = GetClut(val1, 481);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
     if (GetGraphType() != 1) {
         GetGraphType();
     }
@@ -184,7 +184,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     FIELD(u8, val7, 0x15u)  = (u8)(FIELD(u8, val7, 0x15u) + 2);
     FIELD(u8, val7, 0x1Du)  = (u8)(FIELD(u8, val7, 0x1Du) - 1);
     FIELD(u8, val7, 0x25u)  = (u8)(FIELD(u8, val7, 0x25u) - 3);
-    FIELD(u16, val7, 0xEu)  = GetClut(val1, 481);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
     if (GetGraphType() != 1) {
         GetGraphType();
     }
