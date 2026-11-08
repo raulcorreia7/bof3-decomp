@@ -533,7 +533,7 @@ extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
 void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
-void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 equip_slot, u8 item_id);
+void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id);
 void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);

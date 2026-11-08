@@ -41,18 +41,36 @@ extern AreaDrawState g_AreaDrawState;
 /* retail addresses */
 
 /* The menu header bar every screen draws at the top: geometry in pixels, y at its resting row. */
-#define MENU_HEADER_X                 0x14
-#define MENU_HEADER_Y                 0x12
-#define MENU_HEADER_WIDTH             0x118
-#define MENU_HEADER_HEIGHT            0x13
-#define MENU_HEADER_SHORT_WIDTH       0x48
+#define MENU_HEADER_X           0x14
+#define MENU_HEADER_Y           0x12
+#define MENU_HEADER_WIDTH       0x118
+#define MENU_HEADER_HEIGHT      0x13
+#define MENU_HEADER_SHORT_WIDTH 0x48
+
+/* The rows of the equip stat window, top to bottom. */
+typedef enum EquipStatRow {
+    EQUIP_STAT_ROW_POWER   = 0,
+    EQUIP_STAT_ROW_DEFENSE = 1,
+    EQUIP_STAT_ROW_AGILITY = 2,
+} EquipStatRow;
+
+/* The most bytes of a text record UI_DrawText draws. */
+#define TEXT_LENGTH_MAX               0xFF
 
 /* Sizes of the framed windows the menu overlays draw with UI_DrawWindow. */
 #define MENU_CHARACTER_WINDOW_WIDTH   125
 #define MENU_CHARACTER_WINDOW_HEIGHT  48
 #define MENU_EQUIP_STAT_WINDOW_WIDTH  108
 #define MENU_EQUIP_STAT_WINDOW_HEIGHT 48
-#define MENU_EQUIP_STAT_ROWS          3 /* power, defense and agility */
+#define MENU_EQUIP_STAT_ROWS          3  /* power, defense and agility */
+#define MENU_EQUIP_STAT_INSET         3  /* window offset from the panel origin */
+#define MENU_EQUIP_STAT_VALUE_X       44 /* stat value column, from the panel origin */
+#define MENU_EQUIP_STAT_VALUE_Y       8  /* first stat value row */
+#define MENU_EQUIP_STAT_LABEL_X       5
+#define MENU_EQUIP_STAT_LABEL_Y       6
+#define MENU_EQUIP_STAT_ROW_HEIGHT    15
+#define MENU_EQUIP_STAT_PORTRAIT_X    70
+#define MENU_EQUIP_STAT_PORTRAIT_Y    2
 #define MENU_EQUIP_STAT_LABEL_SIZE    6 /* bytes per label of g_MenuEquipStatLabels */
 #define MENU_ZENNY_WINDOW_WIDTH       101
 #define MENU_ZENNY_WINDOW_HEIGHT      16
