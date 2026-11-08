@@ -458,7 +458,7 @@ MATCH s32 func_801FC5A4(void) {
     if ((D_80144EA2 & 0xF) == 0xF) {
         Game_SetScriptActive();
         g_SceneState.step_05  = 6;
-        g_SceneState.timer_06 = 0x1E;
+        g_SceneState.timer_06 = 30;
         return 1;
     }
     return 0;
@@ -491,9 +491,7 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
-/* Hint: call-seq sets g_SceneState.timer_06=0x1E (sh), g_SceneState.state_04=7, g_SceneState.step_05=0 after
- * Game_SetScriptActive(), returns 0. Both constants (0x1E,7) need v1 in retail;
- * GCC picks v0. Tried literals and temp reuse; first diff li v1/v0 at 0x801FC6D4. */
+/* blocker: both constants need v1; first diff: li v1,30 at 0x801FC6D4. */
 INCLUDE_ASM(func_801FC6C4);
 INCLUDE_ASM(func_801FC704);
 

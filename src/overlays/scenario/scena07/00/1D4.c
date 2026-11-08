@@ -163,10 +163,7 @@ MATCH void func_801F79EC(void) {
     SYS_DISPATCH_TASK(D_801FDDB4, 2, g_Task);
 }
 
-/* Hint: sets g_Task pos.x/y from D_80145EC4/EC8, stores D_80145EC8 to pos.y
- * again in Area_SampleHeight delay slot, stores (height<<16) to pos.z in
- * func_801F8358 delay slot, sets unk_06=1, vx=0x28, step++. Tried task/g_Task
- * reload patterns and preload order; first diff at +0x0 (load order/prologue). */
+/* blocker: position setup load order; first diff: +0x00 (prologue). */
 INCLUDE_ASM(func_801F7A30);
 
 INCLUDE_ASM(func_801F7AB0);
@@ -189,10 +186,7 @@ MATCH void func_801F7D28(void) {
     SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Task);
 }
 
-/* Hint: sets g_Task pos.x/y from D_80145EC4/EC8, stores D_80145EC8 to pos.y
- * again in Area_SampleHeight delay slot, stores (height<<16) to pos.z in
- * func_801FA01C delay slot, sets vx=0x78, step++. Tried task/g_Task reload and
- * preload order; blocked by load order and unit offset shift while 7A30 differs. */
+/* blocker: same position setup as func_801F7A30; first diff: +0x00 (load order). */
 INCLUDE_ASM(func_801F7D6C);
 
 MATCH void func_801F7DDC(void) {

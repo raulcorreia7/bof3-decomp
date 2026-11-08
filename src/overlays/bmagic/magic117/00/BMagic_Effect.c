@@ -26,7 +26,6 @@ MATCH void func_801EF000(void) {
 
 INCLUDE_ASM(func_801EF0F8);
 
-/* Hint: template_edit shape close; extra nop and loop-slot reload remain at +0x128, size 0x13C vs 0x138 (not attempted; scheduling/reload). */
 INCLUDE_ASM(func_801EF20C);
 
 MATCH void Effect_PlayOnce2(void) {

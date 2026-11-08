@@ -10,7 +10,6 @@ MATCH void func_801F6F70(void) {
     D_801FE80C[entity[1]]();
 }
 
-/* Hint: m2c candidate compiled under game_00+scene context but 0.0% text match; blocker g_Task reinterpretation/step type or call context (not attempted; wrong context). */
 INCLUDE_ASM(func_801F6FAC);
 
 INCLUDE_ASM(func_801F7068);

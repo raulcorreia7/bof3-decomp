@@ -4,7 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* Hint: template_diff ptr/slot alias; differs throughout despite swapped read shape (not attempted; alias/struct shape). */
 INCLUDE_ASM(func_801EEC14);
 
 INCLUDE_ASM(func_801EED28);

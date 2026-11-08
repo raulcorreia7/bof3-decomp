@@ -10,7 +10,7 @@ MATCH void func_801EEC04(void) {
     table[TASK_BYTES[1]]();
 }
 
-/* Hint: target-Y load schedule differs; blocker first diff +0x08 lui v1,0x1f80 vs lui v0,0x8015 (not attempted; register schedule). */
+/* blocker: target-Y load schedule; first diff: lui v1,0x1f80 at 0x801EEC5C. */
 INCLUDE_ASM(func_801EEC5C);
 
 /* The two handlers read the variant byte already loaded in a0, so the calls pass no argument: a

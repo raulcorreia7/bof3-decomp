@@ -222,10 +222,7 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1Step0Funcs, D_801F294D);
 }
 
-/* Hint: saves g_SndBGMId to D_801DB0CC, stops cue/seq via
- * g_SelectionCues[id * 4] and the byte after it, requests BGM 0x94, increments
- * D_801F294D. Tried local id and D_801DB0CC forms; diff from +0x0 (v1/v0 for
- * g_SndBGMId), size 0x70 vs 0x6C. */
+/* needs: u8 view of const g_SelectionCues and D_80181EBB; first diff: 0x801D35E0 lui v1 against v0. */
 INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {
