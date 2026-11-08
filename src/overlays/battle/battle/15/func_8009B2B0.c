@@ -15,41 +15,41 @@ MATCH void func_8009B2B0(void) {
     u8  counter;
     u32 divisor;
 
-    counter_byte  = &g_BattleOutcome.attempts;
+    counter_byte  = &g_Battle.outcome.attempts;
     player_sum    = 0;
     enemy_sum     = 0;
     counter       = *counter_byte + 1;
     *counter_byte = counter;
-    if (g_BattleEncounter != 0) {
-        g_BattleUIStep = g_BattleUIStep + 1;
+    if (g_Battle.encounter != 0) {
+        g_Battle.ui_step = g_Battle.ui_step + 1;
     } else if (counter >= 3) {
-        g_BattleUIStep = 2;
+        g_Battle.ui_step = 2;
     } else {
         for (slot = 3; slot < COMBATANT_COUNT; slot++) {
             if (Battle_SlotIsBlocked(slot) == 0) {
                 enemy_sum += g_BattleEnemyBattlers[slot].stats.agility;
             }
         }
-        divisor = g_BattleLivingEnemyCount;
+        divisor = g_Battle.living_enemy_count;
         enemy_sum /= divisor;
 
-        for (slot = 0; slot < (*(u8*)&g_BattlePartyCount); slot++) {
+        for (slot = 0; slot < (*(u8*)&g_Battle.party_count); slot++) {
             if (Battle_SlotIsBlocked(slot) == 0) {
                 player_sum += g_Game.members[slot].chr.stats.agility;
             }
         }
-        player_sum /= g_BattleLivingPartyCount;
+        player_sum /= g_Battle.living_party_count;
 
         roll = func_8009BACC(player_sum - enemy_sum) & BYTE_MASK;
         if (roll >= RANDOM_MASK(0x3F)) {
             /* FAKE: keeps roll live across the compare so the slt result takes v0 as in retail; pure C best 98.06%,
              * no source spelling of the compare moves the result register. */
             MATCH_FAKE_USE(roll);
-            g_BattleUIStep = 2;
-        } else if (g_BattleOutcome.surprise == 1) {
-            g_BattleUIStep = 2;
+            g_Battle.ui_step = 2;
+        } else if (g_Battle.outcome.surprise == 1) {
+            g_Battle.ui_step = 2;
         } else {
-            g_BattleUIStep = 1;
+            g_Battle.ui_step = 1;
         }
     }
 }

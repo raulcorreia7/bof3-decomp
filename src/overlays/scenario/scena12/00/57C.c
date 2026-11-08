@@ -23,36 +23,36 @@ MATCH void func_801F71FC(void) {
     actor->header.step = actor->header.step + 1;
 }
 
-#define SCENA12_STEP_COUNTER()                                                            \
-    {                                                                                     \
-        s32    bits;                                                                      \
-        u16    value;                                                                     \
-        u32    high;                                                                      \
-        u32    count;                                                                     \
-        Actor* actor;                                                                     \
-                                                                                          \
-        if (*g_ScriptVars == 1) {                                                         \
-            Actor_Clear();                                                                \
-            return;                                                                       \
-        }                                                                                 \
-        high = (u16)D_801FD288.half >> 0xF;                                               \
-        if ((u32)(D_801FD288.half & 0xFF) >= 0xC8U) {                                     \
-            actor = g_Task;                                                               \
-            actor->header.step += 1;                                                      \
-            return;                                                                       \
-        }                                                                                 \
-        count = ((u32)(D_801FD288.half & 0x7F00) >> 8) + 1;                               \
-        value = D_801FD288.half;                                                          \
-        if (((high & 0xFF) == 0 && count >= 30) || ((high & 0xFF) != 0 && count >= 40)) { \
-            count = 0;                                                                    \
-            value += 1;                                                                   \
-            if (SYS_TestFlag(g_SceneFlags, 0x14) != 0) {                                  \
-                SND_PlayCue(EMI_CUE_ID(2, 10));                                           \
-            }                                                                             \
-        }                                                                                 \
-        bits = high << 15;                                                                \
-        bits |= count << 8;                                                               \
-        D_801FD288.half = (value & 0xFF) | bits;                                          \
+#define SCENA12_STEP_COUNTER()                                                                      \
+    {                                                                                               \
+        s32    bits;                                                                                \
+        u16    value;                                                                               \
+        u32    high;                                                                                \
+        u32    count;                                                                               \
+        Actor* actor;                                                                               \
+                                                                                                    \
+        if (*g_ScriptVars == 1) {                                                                   \
+            Actor_Clear();                                                                          \
+            return;                                                                                 \
+        }                                                                                           \
+        high = (u16)D_801FD288.half >> 0xF;                                                         \
+        if ((u32)(D_801FD288.half & BYTE_MASK) >= 0xC8U) {                                          \
+            actor = g_Task;                                                                         \
+            actor->header.step += 1;                                                                \
+            return;                                                                                 \
+        }                                                                                           \
+        count = ((u32)(D_801FD288.half & 0x7F00) >> 8) + 1;                                         \
+        value = D_801FD288.half;                                                                    \
+        if (((high & BYTE_MASK) == 0 && count >= 30) || ((high & BYTE_MASK) != 0 && count >= 40)) { \
+            count = 0;                                                                              \
+            value += 1;                                                                             \
+            if (SYS_TestFlag(g_SceneFlags, 0x14) != 0) {                                            \
+                SND_PlayCue(EMI_CUE_ID(2, 10));                                                     \
+            }                                                                                       \
+        }                                                                                           \
+        bits = high << 15;                                                                          \
+        bits |= count << 8;                                                                         \
+        D_801FD288.half = (value & BYTE_MASK) | bits;                                               \
     }
 
 MATCH void func_801F7240(void) {
@@ -325,7 +325,7 @@ MATCH void Scene_JoinMomo_801FCF44(void) {
 #include "overlays/scenario/Scene_JoinReiAndGarr.h"
 
 MATCH void func_801FD064(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
     Party_JoinMember(CHAR_ID_MOMO);

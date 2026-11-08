@@ -4,6 +4,7 @@
 /* Shared battle RAM layout: work-record bases and strides, call tables, ring and kind records
  * (@source: wiki:data/battle#where-the-records-are) */
 
+#include "battle/handlers.h"
 #include "battle/records.h"
 #include "psx/mem.h"
 #include "types.h"
@@ -24,7 +25,7 @@
  * the member loses its 24-byte frame (first instruction differs in 17 members);
  * the do/while form moves bytes. */
 #define BATTLE_RAISE_STATE(flag) \
-    flags = &g_BattleState;      \
+    flags = &g_Battle.state;     \
     *flags |= (flag)
 
 /* The party rows 0-2 and enemy rows 3-10 share one battler index space. */
@@ -80,7 +81,7 @@
 
 /* The battle ended with the party's victory: the result bit the ending step
  * sets when no enemy is left. */
-#define BATTLE_IS_VICTORY()               (g_BattleOutcome.result & BATTLE_RESULT_VICTORY)
+#define BATTLE_IS_VICTORY()               (g_Battle.outcome.result & BATTLE_RESULT_VICTORY)
 
 #define BATTLE_SELECTION_RECORD_HANDLE(i) MEM(u8* volatile, 0x801EB5B4u + (u32)(i) * BATTLE_RING_STRIDE)
 
@@ -92,7 +93,7 @@
  * to that battler, and the answer's own ending step sets REPRISAL_DONE so the
  * answer is not itself answered (func_801E020C, func_801E414C, func_801D43EC).
  * EFFECT_LOADING is held from the action's effect stream request
- * (EMI_LoaderStreamInitSlot) until the loader is ready (func_801D3F6C). */
+ * (EMI_LoadArchive) until the loader is ready (func_801D3F6C). */
 
 /* The items a battle drops: ids and how many of each. Battle_RollEnemyDrops fills it. */
 typedef struct BattleDrops {
@@ -136,10 +137,7 @@ ASSERT_SIZE(BattlePhase, 3);
 ASSERT_OFFSET(BattlePhase, step, 0x01);
 ASSERT_OFFSET(BattlePhase, sub_step, 0x02);
 
-/* D_801462E0 */
-extern BattlePhase g_BattlePhase;
-
-/* The battle state word g_BattleState, read and written by both battle overlays
+/* The battle state word g_Battle.state, read and written by both battle overlays
  * and the boss/bmagic handlers. Bit 3 (0x0008) is set by func_801D277C and
  * func_8009B828 and cleared by func_801D656C; no reader is known, so
  * it has no member. */
@@ -183,45 +181,137 @@ extern u8           D_80146229;
 extern u16          D_8014622A;
 extern u8           D_80146232;
 extern s16          D_801462AA;
-/* D_801462E5 */
+/* FAKE: g_Battle.row_cursor as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleRowCursor;
-/* D_801462ED */
-extern u8           g_BattleBossFlags;
 extern u8           D_801462EE;
-/* D_801462F1 */
+/* FAKE: g_Battle.living_party_count as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleLivingPartyCount;
-/* D_80146303. A unit that reads it as volatile (battle/battle/15) defines
- * BATTLE_COMMAND_COUNT_VOLATILE before its first include. Retail loads it signed
- * in battle/battle/03 func_801D1E8C and func_801D25A0 and unsigned elsewhere. */
-#ifdef BATTLE_COMMAND_COUNT_VOLATILE
-extern volatile u8 g_BattleCommandCount;
-#else
-extern u8 g_BattleCommandCount;
-#endif
-/* D_80146324 */
+
+/* The Accession gene picker's cursor: row (-1 on the confirm line) and column. */
+typedef struct GeneCursor {
+    s8 row;
+    u8 column;
+} GeneCursor;
+
+ASSERT_SIZE(GeneCursor, 2);
+
+/* The battle's state at 0x801462E0, from the phase tuple to the pending status. */
+typedef struct BattleState {
+    /* 0x00 */ BattlePhase phase;
+    /* 0x03 */ u8          ui_step;  /* step of the battle UI */
+    /* 0x04 */ u8          ui_state; /* index of the battle UI state handler */
+    /* 0x05 */ u8          row_cursor;
+    /* 0x06 */ union {
+        u8         panel_entry; /* the selected entry of the battle panel */
+        GeneCursor gene;        /* the gene picker's cursor in Accession */
+    } cursor;
+
+    /* 0x08 */ u16           state; /* BattleStateFlags */
+    /* 0x0A */ u8            encounter;
+    /* 0x0B */ u8            unk_0B;
+    /* 0x0C */ u8            scroll_dir;
+    /* 0x0D */ u8            boss_flags;
+    /* 0x0E */ u8            unk_0E;
+    /* 0x0F */ u8            selection_latch;
+    /* 0x10 */ u8            party_count;
+    /* 0x11 */ u8            living_party_count;
+    /* 0x12 */ u8            enemy_count;
+    /* 0x13 */ u8            living_enemy_count;
+    /* 0x14 */ u8            panel_slot;
+    /* 0x15 */ u8            unk_15[7];
+    /* 0x1C */ u8            panel_widths[7];
+    /* 0x23 */ u8            command_count;
+    /* 0x24 */ u8            unk_24[8];
+    /* 0x2C */ u8            turn_order[11];
+    /* 0x37 */ u8            unk_37[11];
+    /* 0x42 */ u8            turn_cursor;
+    /* 0x43 */ u8            turn_count;
+    /* 0x44 */ BattleOutcome outcome;
+    /* 0x84 */ u8            unk_84[16];
+    /* 0x94 */ u8            active_battler;
+    /* 0x95 */ u8            action_type;
+    /* 0x96 */ u8            unk_96[10];
+    /* 0xA0 */ BattleAction* action;
+    /* 0xA4 */ u8            target_selector;
+    /* 0xA5 */ u8            unk_A5[7];
+    /* 0xAC */ PartyMember*  selected_actor;
+    /* 0xB0 */ u8            unk_B0[4];
+    /* 0xB4 */ u8            target;
+    /* 0xB5 */ u8            unk_B5[11];
+    /* 0xC0 */ BattleTurn*   target_record;
+    /* 0xC4 */ Callback      choose_ending_hook;
+    /* 0xC8 */ Callback      end_hook;
+    /* 0xCC */ BossEventFunc boss_event_hook;
+    /* 0xD0 */ u8            unk_D0[16];
+    /* 0xE0 */ u16           action_id;
+    /* 0xE2 */ u8            unk_E2[2];
+    /* 0xE4 */ u8            genes[3];
+    /* 0xE7 */ u8            gene_count;
+    /* 0xE8 */ u8            unk_E8;
+    /* 0xE9 */ u8            dragon_form;
+    /* 0xEA */ u8            unk_EA[4];
+    /* 0xEE */ u8            action_lock;
+    /* 0xEF */ u8            unk_EF[9];
+    /* 0xF8 */ u16           pending_status;
+    /* 0xFA */ u8            unk_FA[6];
+} BattleState;
+
+ASSERT_SIZE(BattleState, 0x100);
+ASSERT_OFFSET(BattleState, phase, 0x00);
+ASSERT_OFFSET(BattleState, ui_step, 0x03);
+ASSERT_OFFSET(BattleState, cursor, 0x06);
+ASSERT_OFFSET(BattleState, state, 0x08);
+ASSERT_OFFSET(BattleState, encounter, 0x0A);
+ASSERT_OFFSET(BattleState, party_count, 0x10);
+ASSERT_OFFSET(BattleState, panel_slot, 0x14);
+ASSERT_OFFSET(BattleState, panel_widths, 0x1C);
+ASSERT_OFFSET(BattleState, command_count, 0x23);
+ASSERT_OFFSET(BattleState, turn_order, 0x2C);
+ASSERT_OFFSET(BattleState, turn_cursor, 0x42);
+ASSERT_OFFSET(BattleState, outcome, 0x44);
+ASSERT_OFFSET(BattleState, active_battler, 0x94);
+ASSERT_OFFSET(BattleState, action, 0xA0);
+ASSERT_OFFSET(BattleState, target_selector, 0xA4);
+ASSERT_OFFSET(BattleState, selected_actor, 0xAC);
+ASSERT_OFFSET(BattleState, target, 0xB4);
+ASSERT_OFFSET(BattleState, target_record, 0xC0);
+ASSERT_OFFSET(BattleState, choose_ending_hook, 0xC4);
+ASSERT_OFFSET(BattleState, boss_event_hook, 0xCC);
+ASSERT_OFFSET(BattleState, action_id, 0xE0);
+ASSERT_OFFSET(BattleState, genes, 0xE4);
+ASSERT_OFFSET(BattleState, gene_count, 0xE7);
+ASSERT_OFFSET(BattleState, dragon_form, 0xE9);
+ASSERT_OFFSET(BattleState, action_lock, 0xEE);
+ASSERT_OFFSET(BattleState, pending_status, 0xF8);
+
+/* D_801462E0 */
+extern BattleState g_Battle;
+
+/* FAKE: the phase and the outcome of g_Battle as globals of their own; the functions that take the address of one
+ * of their bytes match only with a separate symbol. */
 extern BattleOutcome g_BattleOutcome;
-/* FAKE: g_BattleOutcome.result as a plain byte; the functions that set a bit in it (boss endings, func_801E51DC) match only with this base. */
-extern u8            g_BattleResult;
+
+/* FAKE: g_Battle.outcome.result as a plain byte; the functions that set a bit in it (boss endings, func_801E51DC) match only with this base. */
+extern u8 g_BattleResult;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {
     BATTLE_ACTION_NONE    = 0,
     BATTLE_ACTION_ATTACK  = 1, /* a plain attack: Battle_ApplyDamage */
-    BATTLE_ACTION_ABILITY = 4, /* g_BattleActionId indexes the ability table D_801CA71C */
-    BATTLE_ACTION_ITEM    = 5, /* g_BattleActionId is category << 8 | item id */
+    BATTLE_ACTION_ABILITY = 4, /* g_Battle.action_id indexes the ability table D_801CA71C */
+    BATTLE_ACTION_ITEM    = 5, /* g_Battle.action_id is category << 8 | item id */
 };
 
-/* D_80146375 */
-extern volatile u8   g_BattleActionType;
 extern u16           D_80146386;
 extern u16           D_8014638A;
 /* The selected battler's row (D_8014638C), stored by func_801D3624. */
+/* FAKE: g_Battle.selected_actor as a global of its own; the sites that use it match only with a separate symbol. */
 extern PartyMember*  g_BattleSelectedActor;
 extern void*         D_80146390;
 extern s32           D_8014639C;
 extern u16           D_801463B2;
 extern u8            D_801463B9;
-/* D_801463C0 */
+/* FAKE: g_Battle.action_id as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u16  g_BattleActionId;
 extern u16           D_801463C2;
 extern u8            D_801463C8;
@@ -242,8 +332,6 @@ extern u8            D_801484BC;
 extern u8            D_801484E0;
 extern u16           D_801485A4;
 extern s16           D_801485D6;
-/* D_801EAF3C */
-extern u16           g_BattlePendingStatus;
 extern volatile u16  g_BattleTurnPriorityMultipliers[6];
 /* D_801EAF88 */
 extern volatile u8   g_BattleLevelThresholds[12];

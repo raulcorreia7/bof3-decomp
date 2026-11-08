@@ -51,7 +51,7 @@ MATCH void func_801EF068(void) {
         temp_v0_2      = g_Task->unk_09 - 1;
         g_Task->unk_09 = temp_v0_2;
         if (!(temp_v0_2 & BYTE_MASK)) {
-            func_800A9820(g_BattleTargetSelector);
+            func_800A9820(g_Battle.target_selector);
             g_Task->header.mode += 1;
         }
     }

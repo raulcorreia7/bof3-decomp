@@ -112,7 +112,7 @@ NON_MATCHING void func_801BFB34(void) {
             val5 += BATTLE_PARTY_STRIDE;
         } while (val4 < (s32)g_Game.party_size);
     }
-    if (!(g_BattleOutcome.options & 0x80)) {
+    if (!(g_Battle.outcome.options & 0x80)) {
         val4 = 0;
         if ((s32)g_Game.party_size > 0) {
             val5 = 0;
@@ -120,7 +120,7 @@ NON_MATCHING void func_801BFB34(void) {
             tmp5                     = (u8*)g_Game.members + val5;
             g_Game.current           = tmp5;
             g_Task                   = tmp5;
-            FIELD(u8, tmp5, 0x8u)    = (u8)s_RouteIndexByMode[g_BattleScrollDir];
+            FIELD(u8, tmp5, 0x8u)    = (u8)s_RouteIndexByMode[g_Battle.scroll_dir];
             FIELD(s8, g_Task, 0x29u) = 6;
             if (val4 != 0) {
                 FIELD(s8, g_Task, 0x7u) = 0;

@@ -13,7 +13,7 @@ MATCH u8 func_801DD448(void) {
     u16           gate_flags;
     u8            threshold;
 
-    gate       = &g_BattleState;
+    gate       = &g_Battle.state;
     gate_flags = *gate;
     if ((gate_flags & BATTLE_STATE_REPRISAL_PENDING) != 0u) {
         *gate = gate_flags & ~BATTLE_STATE_REPRISAL_PENDING;
@@ -24,17 +24,17 @@ MATCH u8 func_801DD448(void) {
     if ((work->u.turn.damage_flags.value & COMBATANT_FLAG_COMMAND_ENTERED) != 0u) {
         return 0u;
     }
-    if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+    if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
         return 0u;
     }
     if (HAS_STATUS(*work, 0x4864u)) {
         return 0u;
     }
-    if ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) && (LOHU(g_BattleActionId) == ABILITY_TIMED_BLOW)) {
+    if ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) && (LOHU(g_Battle.action_id) == ABILITY_TIMED_BLOW)) {
         return 0u;
     }
 
-    if ((g_BattleActionLock != 0u) &&
+    if ((g_Battle.action_lock != 0u) &&
         ((g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
         return 0u;
     }

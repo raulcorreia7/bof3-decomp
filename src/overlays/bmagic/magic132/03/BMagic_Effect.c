@@ -17,8 +17,8 @@ INCLUDE_ASM(func_801EEEF4);
 MATCH void func_801EF0A4(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         D_8014637C->unk_29 = 4;
-        func_800A9820(g_BattleTargetSelector);
-        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
+        func_800A9820(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }
@@ -48,7 +48,7 @@ MATCH void func_801EF200(void) {
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
-    if ((timer & 0xFF) == 0) {
+    if ((timer & BYTE_MASK) == 0) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = -0x80000;
         g_Task->unk_10 = -0xF0000;

@@ -30,7 +30,7 @@ MATCH void func_801EED68(void) {
 MATCH void func_801EEE00(void) {
     u8 temp_v0;
 
-    if (g_BattleTargetSelector < 3U) {
+    if (g_Battle.target_selector < 3U) {
         func_801EF174();
     } else {
         func_801EF2DC();
@@ -43,7 +43,7 @@ MATCH void func_801EEE00(void) {
 }
 
 MATCH void func_801EEE84(void) {
-    if (g_BattleTargetSelector < 3) {
+    if (g_Battle.target_selector < 3) {
         func_801EF174();
     } else {
         func_801EF2DC();
@@ -69,7 +69,7 @@ INCLUDE_ASM(func_801EEF50);
 MATCH void Effect_MarkTargetIdentified(void) {
     u8 id;
 
-    id = ENEMY_COMBATANT(g_BattleTargetSelector).enemy_id.byte.kind;
+    id = ENEMY_COMBATANT(g_Battle.target_selector).enemy_id.byte.kind;
     BIT_ARRAY_SET(g_IdentifiedEnemies, id);
 }
 
@@ -77,7 +77,7 @@ MATCH void Effect_MarkTargetIdentified(void) {
 MATCH bool Effect_TargetIsIdentified(void) {
     u8 id;
 
-    id = ENEMY_COMBATANT(g_BattleTargetSelector).enemy_id.byte.kind;
+    id = ENEMY_COMBATANT(g_Battle.target_selector).enemy_id.byte.kind;
     return BIT_ARRAY_TEST(g_IdentifiedEnemies, id) != 0;
 }
 
@@ -188,7 +188,7 @@ MATCH void func_801F07E8(void) {
 MATCH void func_801F082C(void) {
     PartyMember** actor;
 
-    actor = &g_BattleSelectedActor;
+    actor = &g_Battle.selected_actor;
     GFX_FreePaletteFadeTarget(*actor);
     g_Task->param.unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
     g_Task->unk_09       = 0;

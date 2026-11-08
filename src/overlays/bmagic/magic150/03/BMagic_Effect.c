@@ -37,10 +37,10 @@ MATCH void func_801EEEC4(void) {
     func_801EF254();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         g_Task->unk_09 = 4;
         g_Task->header.mode += 1;
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         SND_PlayCue(0x102U);
     }
 }
@@ -53,7 +53,7 @@ INCLUDE_ASM(func_801EEF80);
 INCLUDE_ASM(func_801EF040);
 
 MATCH void func_801EF254(void) {
-    GFX_AddDrawMode(GetTPage(0, 1, 0x2C0, 0x100) & 0xFFFF);
+    GFX_AddDrawMode(GetTPage(0, 1, 0x2C0, 0x100) & HALF_MASK);
     func_801AFE18();
     func_801EF040();
     func_801EF4E0();

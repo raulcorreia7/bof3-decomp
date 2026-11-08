@@ -4,9 +4,9 @@ u8 func_801D527C(void);
 u8 func_801D62D8(void);
 
 MATCH void func_801D5024(void) {
-    switch (g_BattleSubStep) {
+    switch (g_Battle.phase.sub_step) {
         case 0: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D527C() != 0) {
@@ -16,7 +16,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 2: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D54F8() != 0) {
@@ -25,7 +25,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 3: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D5658() != 0) {
@@ -34,7 +34,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 4: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D57AC() != 0) {
@@ -43,7 +43,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 5: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D590C() != 0) {
@@ -52,7 +52,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 6: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D5A60() != 0) {
@@ -61,7 +61,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 7: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D5BC0() != 0) {
@@ -71,7 +71,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 9: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D5DCC() != 0) {
@@ -81,7 +81,7 @@ MATCH void func_801D5024(void) {
         }
         /* fall through */
         case 11: {
-            u8* counter = &g_BattleSubStep;
+            u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
             if (func_801D62D8() != 0) {
@@ -102,8 +102,8 @@ MATCH void func_801D5024(void) {
                 battle_flags = g_BattleState;
                 counter += 1;
                 battle_flags &= 0xFFFB;
-                g_BattleState   = battle_flags;
-                g_BattleSubStep = counter;
+                g_Battle.state          = battle_flags;
+                g_Battle.phase.sub_step = counter;
             }
             return;
         }
@@ -113,7 +113,7 @@ MATCH void func_801D5024(void) {
             {
                 u8* step;
 
-                step = &g_BattleStep;
+                step = &g_Battle.phase.step;
                 *step += 1;
             }
             return;

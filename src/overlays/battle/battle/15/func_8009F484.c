@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 MATCH void func_8009F484(void) {
-    g_BattleActionType = BATTLE_ACTION_ABILITY;
-    g_BattleActionId   = ABILITY_SIROCCO;
+    g_Battle.action_type = BATTLE_ACTION_ABILITY;
+    g_Battle.action_id   = ABILITY_SIROCCO;
     func_8009DCC8();
 }

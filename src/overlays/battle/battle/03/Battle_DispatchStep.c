@@ -4,5 +4,5 @@
 MATCH void Battle_DispatchStep(void) {
     Callback handlers[2] = {func_801D1228, Battle_DispatchEntrance};
 
-    handlers[g_BattleStep]();
+    handlers[g_Battle.phase.step]();
 }

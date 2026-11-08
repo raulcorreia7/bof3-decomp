@@ -9,11 +9,11 @@ MATCH s32 func_800A6CF8(u8 selection_id, u8 column_index) {
     if (value == GAME_NONE) {
         return 1;
     }
-    count = g_BattleGeneCount[0];
+    count = g_Battle.gene_count;
     index = 0;
     if (count != 0) {
         do {
-            if (g_BattleGenes[index] == value) {
+            if (g_Battle.genes[index] == value) {
                 return 1;
             }
             index++;

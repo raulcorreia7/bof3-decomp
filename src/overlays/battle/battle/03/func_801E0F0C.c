@@ -2,7 +2,7 @@
 
 /* ticks the scratch work's step counter at +0x9; on step 0 it resets the battle bar, clears the +0x80
  * re-arm flag, halves +0x8C, fills a 0x78-stride effect record (Battle_AllocEffect, flags 1 and 6), queues cue
- * 0x206 and, when g_BattleOutcome.event_flags is clear, runs the cleanup calls and advances the battle work.
+ * 0x206 and, when g_Battle.outcome.event_flags is clear, runs the cleanup calls and advances the battle work.
  */
 MATCH void func_801E0F0C(void) {
     PartyMember* spad;
@@ -33,7 +33,7 @@ MATCH void func_801E0F0C(void) {
         g_BattleEffects[slot].target.party = spad;
         Actor_SelectScript((spad2->facing + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
-        if (g_BattleOutcome.event_flags == 0) {
+        if (g_Battle.outcome.event_flags == 0) {
             func_801D9484();
             Battle_SetTextPartyName(g_Task->slot);
             func_801DEBC4(0, g_Game.current->chr.character_id);

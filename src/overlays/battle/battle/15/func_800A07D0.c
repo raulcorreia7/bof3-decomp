@@ -14,7 +14,7 @@ MATCH void func_800A07D0(void) {
     u32                     index;
 
     func_800A3F28();
-    ctx           = (BattleSelectionContext*)&g_BattleTarget;
+    ctx           = (BattleSelectionContext*)&g_Battle.target;
     index         = ctx->sel - 3u;
     first         = g_BattleEnemyBattlers[index].zenny;
     second        = g_BattleEnemyBattlers[index].exp;

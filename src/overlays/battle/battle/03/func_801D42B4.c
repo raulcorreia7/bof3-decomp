@@ -14,8 +14,8 @@ MATCH void func_801D42B4(void) {
             BattleStageSelectionRingRecord(1, 0, Resource_GetText(D_801ED9B0[D_801EB5A8 - 1].panel_id));
             D_801EB5A8 -= 1;
         } else {
-            g_BattleStep    = 4;
-            g_BattleSubStep = 0;
+            g_Battle.phase.step     = 4;
+            g_Battle.phase.sub_step = 0;
         }
     }
 }

@@ -207,7 +207,7 @@ MATCH void func_801F7B10(void) {
     actor->tint.halves.unk_5E += 1;
     value         = g_Task->timer - 1;
     g_Task->timer = value;
-    if (!(value & 0xFF)) {
+    if (!(value & BYTE_MASK)) {
         g_Task->timer = 8;
         g_Task->header.mode += 1;
     }
@@ -225,7 +225,7 @@ MATCH void func_801F7BB0(void) {
     actor->script_pc += 4;
     value         = g_Task->timer - 1;
     g_Task->timer = value;
-    if (!(value & 0xFF)) {
+    if (!(value & BYTE_MASK)) {
         g_Task->timer = 8;
         g_Task->header.mode += 1;
     }
@@ -240,7 +240,7 @@ MATCH void func_801F7C50(void) {
     func_801F8170(temp_s0);
     temp_v0       = g_Task->timer - 1;
     g_Task->timer = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->timer = 0x80;
         g_Task->header.mode += 1;
     }
@@ -259,7 +259,7 @@ MATCH void func_801F7CE0(void) {
     work->tint.halves.unk_5C -= 0x40;
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
-    if (!(remaining & 0xFF)) {
+    if (!(remaining & BYTE_MASK)) {
         g_Task->header.mode += 1;
     }
 }
@@ -319,7 +319,7 @@ MATCH void func_801F8370(void) {
     u8         temp_v0_2;
 
     if (g_Task->timer & 4) {
-        temp_v1 = func_8019601C() & 0xFF;
+        temp_v1 = func_8019601C() & BYTE_MASK;
         if (temp_v1 != 0xFF) {
             temp_v0               = &g_ActorSlots[temp_v1];
             temp_v0->header.flags = 1;
@@ -328,7 +328,7 @@ MATCH void func_801F8370(void) {
     }
     temp_v0_2     = g_Task->timer - 1;
     g_Task->timer = temp_v0_2;
-    if (!(temp_v0_2 & 0xFF)) {
+    if (!(temp_v0_2 & BYTE_MASK)) {
         g_Task->header.mode += 1;
     }
 }
@@ -528,7 +528,7 @@ MATCH void func_801FC5FC(void) {
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     SND_PauseBGM(g_SndBGMId);
     SND_StartXAStream(2, 1);
-    while (!(SND_IsXAIdle() & 0xFF)) {
+    while (!(SND_IsXAIdle() & BYTE_MASK)) {
         func_801992B8();
         CallbackWait(1U);
     }
@@ -677,7 +677,7 @@ MATCH void func_801FCE18(void) {
 }
 
 MATCH void func_801FCE6C(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
     g_PartyFieldOrder[0]  = 255;
     D_80144F5B            = 255;
     D_80144F5C            = 255;

@@ -16,7 +16,7 @@ MATCH void func_801EEFE0(void) {
     if (g_Task->param.unk_0B == 0) {
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
-        if (!(timer & 0xFF)) {
+        if (!(timer & BYTE_MASK)) {
             g_Task->header.mode += 1;
         }
     }
@@ -64,7 +64,7 @@ INCLUDE_ASM(func_801EF688);
 MATCH void func_801EF7D0(void) {
     if (g_Task->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        if (func_801DB524(g_Task->unk_04) & 0xFF) {
+        if (func_801DB524(g_Task->unk_04) & BYTE_MASK) {
             func_800A9820(g_Task->unk_04);
         }
         func_801E5988();

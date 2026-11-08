@@ -1,8 +1,6 @@
 #ifndef OVERLAY_BATTLE_BATTLE_15_H
 #define OVERLAY_BATTLE_BATTLE_15_H
 
-#define BATTLE_COMMAND_COUNT_VOLATILE
-
 /* The battle/battle/15 overlay's local declarations: the command, step and damage
  * dispatch tables, the actor views it shares with battle/battle/03 and the prototypes
  * its units use. The common records are in battle/records.h; only this image
@@ -59,10 +57,10 @@
         u32 row;                                                                                          \
         u8  battler;                                                                                      \
         u8  result;                                                                                       \
-        battler = *(u8*)&g_BattleActiveBattler;                                                           \
+        battler = *(u8*)&g_Battle.active_battler;                                                         \
         if (battler < 3u) {                                                                               \
             if ((g_Game.members[battler].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
-                result = flagged[g_DragonForm];                                                           \
+                result = flagged[g_Battle.dragon_form];                                                   \
             } else {                                                                                      \
                 result = player[g_Game.members[battler].chr.character_id];                                \
             }                                                                                             \
@@ -83,13 +81,13 @@ typedef enum PartyFormation {
     PARTY_FORMATION_REFUGE  = 0x05, /* battle/battle/03 func_801D5DCC tests g_PartyFormation == 5 */
 } PartyFormation;
 
-/* The selection byte g_BattleRowCursor: bit 7 marks an active selection, the low
+/* The selection byte g_Battle.row_cursor: bit 7 marks an active selection, the low
  * seven bits are its slot. */
 typedef enum BattleSelectionFlags {
     BATTLE_SELECTION_ACTIVE = 1 << 7,
 } BattleSelectionFlags;
 
-/* Record behind the g_BattleAction cell; +0x02 is the action id. */
+/* Record behind the g_Battle.action cell; +0x02 is the action id. */
 typedef struct BattleSelectionAction {
     Callback handler;
     u32      unk_04;
@@ -525,114 +523,99 @@ extern s8                                D_80145FC3;
 extern u8                                D_801460E9;
 extern u16                               D_801460EA;
 extern u8                                D_801460F2;
-/* D_801462E3 */
+/* FAKE: g_Battle.ui_step as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8                       g_BattleUIStep;
 extern volatile u8                       D_801462E7;
 
-/* The Accession gene picker's cursor over g_BattlePanelEntry (row) and D_801462E7 (column). */
-typedef struct GeneCursor {
-    s8 row;
-    u8 column;
-} GeneCursor;
-
-extern volatile GeneCursor  g_GeneCursor;
-/* D_801462F0 */
-extern volatile u8          g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
-/* D_8014630C */
-extern u8                   g_BattleTurnOrder[];
 extern BattleSelectionState D_801462F0_state;
-/* D_80146374 */
+/* FAKE: g_Battle.active_battler as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8          g_BattleActiveBattler;
 /* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols.toml (this image's
  * table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for one cell use them; a cast of the
  * canonical symbol merges the pair and changes the bytes. */
 extern u8                   g_BattleActiveBattler_nv;
-/* D_80146394 */
+/* FAKE: g_Battle.target as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8          g_BattleTarget;
 extern u8                   g_BattleTarget_nv;
-/* D_801463A0 */
-extern BattleTurn* volatile g_BattleTargetRecord;
-extern u16                 D_801463B4;
-/* D_801463C4 */
-extern u8                  g_BattleGenes[];
-extern u8                  D_801463D6;
+extern u16                  D_801463B4;
+extern u8                   D_801463D6;
 /* D_801463D8 */
 /* D_80148570 */
-extern volatile u8         g_BattleChoicePanel[];
+extern volatile u8          g_BattleChoicePanel[];
 /* First byte of g_BattleChoicePanel (0x80148570). The original stores it
  * through a scalar symbol, which emits the direct %lo store form; indexing the
  * array symbol would materialize its address in a register instead. */
 /* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
  * direct %lo store form. */
-extern volatile u8         g_BattleSelectionHead;
-extern u8                  D_80148571;
-extern u8                  D_80148572;
-extern u16                 D_80148576;
-extern s16                 D_80148582;
-extern u8                  D_80148594;
-extern u8                  D_80148595;
-extern u8                  D_80148596;
-extern u16                 D_80148598;
-extern u16                 D_8014859A;
-extern u8                  D_8014859D;
-extern u8                  D_801485A1;
-extern volatile u8         D_801485B8;
-extern s8                  D_801485B9;
-extern s8                  D_801485BA;
-extern s16                 D_801485BC;
-extern s16                 D_801485BE;
-extern s8                  D_801485C5;
-extern s16                 D_801485CA;
-extern u8*                 D_801485D8;
-extern volatile u8         D_801485DD;
-extern volatile u8         D_801485DE;
-extern volatile u8         D_801485DF;
-extern volatile u16        D_801485EC;
-extern s16                 D_801485EE;
-extern volatile s16        D_80148628;
-extern volatile u16        D_8014862A;
-extern volatile u8         D_8014862F;
-extern volatile u8         D_80148654;
-extern u8                  D_80148656;
+extern volatile u8          g_BattleSelectionHead;
+extern u8                   D_80148571;
+extern u8                   D_80148572;
+extern u16                  D_80148576;
+extern s16                  D_80148582;
+extern u8                   D_80148594;
+extern u8                   D_80148595;
+extern u8                   D_80148596;
+extern u16                  D_80148598;
+extern u16                  D_8014859A;
+extern u8                   D_8014859D;
+extern u8                   D_801485A1;
+extern volatile u8          D_801485B8;
+extern s8                   D_801485B9;
+extern s8                   D_801485BA;
+extern s16                  D_801485BC;
+extern s16                  D_801485BE;
+extern s8                   D_801485C5;
+extern s16                  D_801485CA;
+extern u8*                  D_801485D8;
+extern volatile u8          D_801485DD;
+extern volatile u8          D_801485DE;
+extern volatile u8          D_801485DF;
+extern volatile u16         D_801485EC;
+extern s16                  D_801485EE;
+extern volatile s16         D_80148628;
+extern volatile u16         D_8014862A;
+extern volatile u8          D_8014862F;
+extern volatile u8          D_80148654;
+extern u8                   D_80148656;
 /* Proven game-RAM base for battle state (0x80140000). func_800A4458 already
  * references it through a local extern of this exact type. */
 /* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes
  * D_801EB5B4 + ((D_801EC328 - 1) & 0xF) * 8). */
-extern volatile u8         D_80150000[];
-extern u8*                 D_801C893C[];
-extern u8*                 D_801C8950[];
-extern u8*                 g_MenuInventoryTitles[5];
-extern char                g_MenuInventoryCountFormat[];
-extern u8                  D_801C90ED[];
+extern volatile u8          D_80150000[];
+extern u8*                  D_801C893C[];
+extern u8*                  D_801C8950[];
+extern u8*                  g_MenuInventoryTitles[5];
+extern char                 g_MenuInventoryCountFormat[];
+extern u8                   D_801C90ED[];
 /* Selection-kind table base; byte 0 of each stride-0x14 entry holds the flags.
  */
 /* Selection-kind flag table base: byte 0 of the kind entry holds the flags. */
-extern u8                  D_801CA718[];
-extern u8                  D_801CA719[];
-extern u8                  D_801CAF13;
-extern u8                  D_801CD78E[];
-extern u32                 D_801EB082;
-extern u8                  D_801EB3DC[];
+extern u8                   D_801CA718[];
+extern u8                   D_801CA719[];
+extern u8                   D_801CAF13;
+extern u8                   D_801CD78E[];
+extern u32                  D_801EB082;
+extern u8                   D_801EB3DC[];
 /* Battler base halfwords, one u16 per 0x118-byte enemy row. */
-extern u8                  D_801EBEFA; /* Nine-slot affinity mirror in the high battle block. */
-extern u8                  D_801EBEFB;
-extern u8                  D_801EBEFC;
-extern u8                  D_801EBEFD;
-extern u8                  D_801EBEFE;
-extern u8                  D_801EBEFF;
-extern u8                  D_801EBF00;
-extern u8                  D_801EBF01;
-extern u8                  D_801EBF02;
+extern u8                   D_801EBEFA; /* Nine-slot affinity mirror in the high battle block. */
+extern u8                   D_801EBEFB;
+extern u8                   D_801EBEFC;
+extern u8                   D_801EBEFD;
+extern u8                   D_801EBEFE;
+extern u8                   D_801EBEFF;
+extern u8                   D_801EBF00;
+extern u8                   D_801EBF01;
+extern u8                   D_801EBF02;
 /* Alternate local work entries (stride 0x140) and their paired status words. */
-extern u8                  D_801EC2E8[];
-extern volatile s16        D_801EC2EE;
-extern volatile u16        D_801EC2F2;
-extern volatile u16        D_801EC30C;
-extern u16                 D_801EC30E;
-extern volatile u16        D_801EC310;
-extern volatile u16        D_801EC312;
+extern u8                   D_801EC2E8[];
+extern volatile s16         D_801EC2EE;
+extern volatile u16         D_801EC2F2;
+extern volatile u16         D_801EC30C;
+extern u16                  D_801EC30E;
+extern volatile u16         D_801EC310;
+extern volatile u16         D_801EC312;
 /* D_801EC364 */
-extern BattleTemplateStats g_BattleTemplateStats[]; /* 0x801EC364 */
+extern BattleTemplateStats  g_BattleTemplateStats[]; /* 0x801EC364 */
 
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
@@ -907,8 +890,8 @@ extern u8   g_BattleUIStep_nv;
 static inline void BattleApplyHalfDamage(s32 anim) {
     s32 half;
 
-    half = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, BATTLE_ELEMENT_FROM_WEAPON) / 2;
-    g_BattleTargetRecord->hp_change = half;
+    half = Battle_CalcDamage(g_Battle.active_battler, g_Battle.target, BATTLE_ELEMENT_FROM_WEAPON) / 2;
+    g_Battle.target_record->hp_change = half;
     if (half != 0) {
         func_800A4238(anim);
     }
@@ -996,7 +979,7 @@ static inline u8 BattleRollHitChance(u8 selection_kind, s16 (*hit_rate)(s32, s32
     rate = *(u16*)&D_801EC2F2;
     rate = BATTLE_HIT_RATE_BASE - (rate / 5);
     CLAMP_MIN(rate, BATTLE_HIT_RATE_MIN);
-    temp = hit_rate((s32)(selection_kind & BYTE_MASK), (s32)(D_801CA71C[g_BattleActionId].mask & ELEM_ALL));
+    temp = hit_rate((s32)(selection_kind & BYTE_MASK), (s32)(D_801CA71C[g_Battle.action_id].mask & ELEM_ALL));
     if (temp == -1) {
         ret = 0;
     } else {
@@ -1015,18 +998,18 @@ static inline void BattleSelectionDelta(s32 mode) {
     BattleTurn* result;
     u16         value;
 
-    ctx = (BattleSelectionContext*)&g_BattleTarget;
+    ctx = (BattleSelectionContext*)&g_Battle.target;
     if (ctx->sel < 3u) {
         value = func_800A4294(mode);
-        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
+        (*(volatile BattleTurn**)&g_Battle.target_record)->hp_change =
             (s16)(value - g_Game.members[ctx->sel].chr.stats.defense);
     } else {
         value = func_800A4294(mode);
-        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
+        (*(volatile BattleTurn**)&g_Battle.target_record)->hp_change =
             (s16)(value - ENEMY_COMBATANT(ctx->sel).stats.defense);
     }
 
-    result = g_BattleTargetRecord;
+    result = g_Battle.target_record;
     if (result->hp_change < 0) {
         result->hp_change = 0;
     }
@@ -1041,21 +1024,21 @@ static inline void BattleSetSelectionFlag(u32 flag) {
      * delay-slot constant in $v1 while $v0 stayed free. */
     MATCH_REG(u8, one, "v0");
 
-    if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
-        mode = *(u8*)&g_BattleTarget;
+    if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
+        mode = *(u8*)&g_Battle.target;
         if (mode < 3u) {
             g_Game.members[mode].u.turn.action_flags.value |= flag;
         } else {
             ENEMY_COMBATANT(mode).turn.action_flags.value |= flag;
         }
-        func_800A9BD8(g_BattleTarget);
+        func_800A9BD8(g_Battle.target);
     } else {
-        record               = *(BattleTurn**)&g_BattleTargetRecord;
+        record               = *(BattleTurn**)&g_Battle.target_record;
         /* FAKE: volatile-drop cell read keeps the constant load ahead of
          * the pointer load, so the branch delay slot takes it. */
         one                  = 1;
         record->target_flags = one;
-        func_800AAC88(0, g_BattleTarget);
+        func_800AAC88(0, g_Battle.target);
     }
     func_800A3F28();
 }

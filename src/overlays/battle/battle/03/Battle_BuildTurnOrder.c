@@ -81,12 +81,12 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
         index += 1u;
     }
 
-    g_BattleTurnCount = (u8)count;
+    g_Battle.turn_count = (u8)count;
     if ((u8)count > 1u) {
         left = 0u;
-        while ((u8)left < g_BattleTurnCount - 1) {
+        while ((u8)left < g_Battle.turn_count - 1) {
             right = left + 1u;
-            while ((u8)right < g_BattleTurnCount) {
+            while ((u8)right < g_Battle.turn_count) {
                 if (D_801EB550[(u8)left].value < D_801EB550[(u8)right].value) {
                     BattleRank temp;
 
@@ -102,17 +102,17 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
 
     index = 0u;
     while ((u8)index < 11u) {
-        g_BattleTurnOrder[index] = 0xFFu;
+        g_Battle.turn_order[index] = 0xFFu;
         index += 1u;
     }
 
     index = 0u;
-    while ((u8)index < g_BattleTurnCount) {
-        g_BattleTurnOrder[index] = (u8)D_801EB550[(u8)index].index;
+    while ((u8)index < g_Battle.turn_count) {
+        g_Battle.turn_order[index] = (u8)D_801EB550[(u8)index].index;
         index += 1u;
     }
 
-    g_BattleTurnCursor = 0u;
+    g_Battle.turn_cursor = 0u;
 }
 #else
 INCLUDE_ASM(Battle_BuildTurnOrder);

@@ -28,7 +28,7 @@ MATCH void func_801D3CC4(void) {
         }
     }
     if (((func_800A99AC() & BYTE_MASK) == 0) && (D_801463C2 == 0) &&
-        ((g_BattleState & BATTLE_STATE_EFFECT_PLAYING) != 0)) {
-        g_BattleSubStep += 1;
+        ((g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) != 0)) {
+        g_Battle.phase.sub_step += 1;
     }
 }

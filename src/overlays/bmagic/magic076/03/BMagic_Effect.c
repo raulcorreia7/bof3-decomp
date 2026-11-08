@@ -24,8 +24,8 @@ INCLUDE_ASM(func_801EF160);
 
 /* Whether the queued action is an ability other than Raise Dead (the spell or the skill). */
 MATCH u8 func_801EF2E8(void) {
-    if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
-        switch (LOHU(g_BattleActionId)) {
+    if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) {
+        switch (LOHU(g_Battle.action_id)) {
             case ABILITY_RAISE_DEAD:
             case ABILITY_RAISE_DEAD_SKILL:
                 return 0;

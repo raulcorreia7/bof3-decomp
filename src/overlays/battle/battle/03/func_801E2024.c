@@ -13,7 +13,7 @@ MATCH void func_801E2024(void) {
         if ((func_800A8F58() & BYTE_MASK) == 0) {
             chance = g_Game.current->chr.stats.critical_chance;
             if ((RANDOM_PERCENT()) < chance) {
-                gate = &g_BattleState;
+                gate = &g_Battle.state;
                 *gate |= 0x80;
                 func_801DD858(3);
             } else {

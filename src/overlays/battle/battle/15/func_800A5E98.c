@@ -7,15 +7,15 @@ MATCH void func_800A5E98(void) {
     u8* slot;
     u8* counter;
 
-    g_BattleGeneCount[0] = 0;
-    i                    = 0;
+    g_Battle.gene_count = 0;
+    i                   = 0;
     do {
         row   = *(s16*)&D_801485EC + FIELD(s16, (&D_801485EC), 0x2u);
         slot  = (u8*)&D_80145518[row];
         value = slot[i & BYTE_MASK];
         if (value != GAME_NONE) {
-            g_BattleGenes[i & BYTE_MASK] = value;
-            g_BattleGeneCount[0]         = g_BattleGeneCount[0] + 1;
+            g_Battle.genes[i & BYTE_MASK] = value;
+            g_Battle.gene_count           = g_Battle.gene_count + 1;
         }
         i = i + 1;
     } while ((i & BYTE_MASK) < 3U);
@@ -24,6 +24,6 @@ MATCH void func_800A5E98(void) {
     SND_PlayCue(EMI_CUE_ID(1, 4));
     D_801485DF = 2;
     BATTLE_ACTIVE_ROW->u.turn.action_flags.volatile_value |= COMBATANT_FLAG_ABILITY_ALT_POSE;
-    counter  = (u8*)&g_BattleUIState;
+    counter  = (u8*)&g_Battle.ui_state;
     *counter = *counter + 1;
 }

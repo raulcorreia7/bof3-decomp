@@ -25,7 +25,7 @@ MATCH void func_801EF488(void) {
     s32          i;
     s32          slot;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         i = 0;
         if (g_Game.party_size != 0) {
             do {
@@ -84,7 +84,7 @@ MATCH void func_801EFBF8(void) {
     func_8014D978();
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         Actor_SelectScript(1U);
         g_Task->unk_09 = 0x29;
         g_Task->header.step += 1;
@@ -107,8 +107,8 @@ MATCH void func_801EFF48(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9820(g_BattleTargetSelector);
-        direction = LOBU(g_BattleScrollDir);
+        func_800A9820(g_Battle.target_selector);
+        direction = LOBU(g_Battle.scroll_dir);
         if (direction == 0 || direction == 3) {
             g_Task->unk_0C = 8;
             g_Task->unk_10 = -1;
@@ -161,7 +161,7 @@ MATCH void func_801F0100(void) {
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 
 MATCH void func_801F01F8(void) {
-    if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_LoaderIsReady() != 0)) {
+    if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_IsReady() != 0)) {
         g_Task->timer = 8;
         g_Task->header.step += 1;
     }

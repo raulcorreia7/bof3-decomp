@@ -9,7 +9,7 @@ MATCH void func_800C19C0(void) {
     g_Task->header.mode = 3;
     g_Task->header.step = 0;
     g_Task->unk_03      = 0;
-    if (g_BattleEncounter == 0x19) {
+    if (g_Battle.encounter == 0x19) {
         g_MenuPanelMode = 2;
         Message_StartAreaMessage(0x20);
     }

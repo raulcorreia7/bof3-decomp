@@ -29,7 +29,6 @@ extern Magic015Steps       D_801EEC14;
 extern Magic015Steps       D_801EEC24;
 extern Magic015ThirdSteps  D_801EEC54;
 extern Magic015SecondSteps D_801EEC34;
-extern u8                  g_BattleActiveBattler;
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the
  * fade is done, moves the effect onto that battler and advances. One body shared

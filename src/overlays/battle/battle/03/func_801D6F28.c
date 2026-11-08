@@ -12,7 +12,7 @@ MATCH void func_801D6F28(void) {
             i += 1u;
         } while (i < g_BattlePartyCount);
     }
-    if (g_BattleRowCursor != g_BattlePartyCount) {
+    if (g_Battle.row_cursor != g_Battle.party_count) {
         g_BattleSubStep -= 1u;
         return;
     }
@@ -23,7 +23,7 @@ MATCH void func_801D6F28(void) {
             func_800A36F0(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
             GFX_FreePaletteFadeTarget(&g_Game.members[i]);
             i += 1u;
-        } while (i < g_BattlePartyCount);
+        } while (i < g_Battle.party_count);
     }
     for (i = 0u; i < g_BattlePartyCount; i++) {
         if (ACTOR_IN_USE(g_Game.members[i])) {
@@ -34,9 +34,9 @@ MATCH void func_801D6F28(void) {
             Actor_StageScriptRecord(work->unk_4B, (u16)(half - 2u), (u8*)0x800F0800u, 0x1800);
         }
     }
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     {
-        volatile u8* state = &g_BattleSubStep;
+        volatile u8* state = &g_Battle.phase.sub_step;
 
         *state += 1u;
     }

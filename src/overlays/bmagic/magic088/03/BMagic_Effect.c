@@ -13,7 +13,7 @@ MATCH void func_801EEEF4(void) {
     PartyMember* battler;
     u8           value;
 
-    battler        = g_BattleSelectedActor;
+    battler        = g_Battle.selected_actor;
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & BYTE_MASK)) {
@@ -51,8 +51,8 @@ INCLUDE_ASM(func_801EF1AC);
 MATCH s32 func_801EF34C(void) {
     s32 result;
 
-    if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
-        switch (LOHU(g_BattleActionId)) {
+    if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) {
+        switch (LOHU(g_Battle.action_id)) {
             case ABILITY_WEAKEN:
             case 0xC0:
                 result = 0;
@@ -71,9 +71,9 @@ MATCH s32 func_801EF34C(void) {
                 result = 3;
                 break;
         }
-    } else if (LOHU(g_BattleActionId) == 0x112) {
-        g_BattleActionId = ABILITY_WEAKEN;
-        result           = 0;
+    } else if (LOHU(g_Battle.action_id) == 0x112) {
+        g_Battle.action_id = ABILITY_WEAKEN;
+        result             = 0;
     } else {
         result = 3;
     }

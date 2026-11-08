@@ -13,7 +13,7 @@ MATCH void func_801DD08C(void) {
     u8 index;
 
     index = 0u;
-    while (index < VOL(u8, g_BattlePartyCount)) {
+    while (index < VOL(u8, g_Battle.party_count)) {
         u32                  work_offset;
         u8                   template_index;
         BattleTemplateBlock* src;

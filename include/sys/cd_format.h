@@ -61,7 +61,7 @@ typedef enum EMISlotId {
     EMI_SLOT_AREA         = 0x2AB,
 } EMISlotId;
 
-/* The family argument of EMI_StreamFamilyArchive selects the numbered series that the
+/* The family argument of EMI_GetArchiveId selects the numbered series that the
  * index counts into. */
 typedef enum EMIFamily {
     EMI_FAMILY_PL   = 0,

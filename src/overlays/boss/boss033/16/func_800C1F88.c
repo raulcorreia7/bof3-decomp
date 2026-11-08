@@ -9,15 +9,15 @@ MATCH void func_800C1F88(void) {
     if (FIELD(s32, work, 0x3C) < FIELD(s32, work, 0x20)) {
         FIELD(s32, work, 0x3C) = FIELD(s32, work, 0x3C) + 0x01000000;
     } else {
-        if (g_BattleTargetSelector >= 3u) {
-            FIELD(s32, work, 0x34) = g_AreaScrollTargetX + ((s8*)D_800B44C0)[g_BattleScrollDir * 2];
-            offset                 = g_BattleScrollDir * 2;
+        if (g_Battle.target_selector >= 3u) {
+            FIELD(s32, work, 0x34) = g_AreaScrollTargetX + ((s8*)D_800B44C0)[g_Battle.scroll_dir * 2];
+            offset                 = g_Battle.scroll_dir * 2;
         } else {
             FIELD(u8, work, 0x8) ^= 2u;
-            value                  = g_AreaScrollTargetX + ((s8*)D_800B44C0)[(g_BattleScrollDir ^ 2) * 2];
+            value                  = g_AreaScrollTargetX + ((s8*)D_800B44C0)[(g_Battle.scroll_dir ^ 2) * 2];
             work                   = TASK_BYTES;
             FIELD(s32, work, 0x34) = value;
-            offset                 = (g_BattleScrollDir ^ 2) * 2;
+            offset                 = (g_Battle.scroll_dir ^ 2) * 2;
         }
         FIELD(s32, work, 0x38) = g_AreaScrollTargetY + ((s8*)D_800B44C0)[offset + 1];
         Actor_SelectScript(4);

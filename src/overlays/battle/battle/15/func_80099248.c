@@ -5,11 +5,11 @@ MATCH void func_80099248(void) {
 
     held = g_InputPressed;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        g_BattleUIState = 3u;
+        g_Battle.ui_state = 3u;
         return;
     }
     if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        g_BattleUIState = 2u;
+        g_Battle.ui_state = 2u;
         return;
     }
     if ((INPUT_REPEATED(held, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) == 0) {

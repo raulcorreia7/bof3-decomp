@@ -6,9 +6,9 @@ MATCH void func_800ABC30(void) {
     s32 loop_count;
     s32 count;
 
-    loop_count         = 0;
-    count              = 0;
-    g_BattleEnemyCount = 0;
+    loop_count           = 0;
+    count                = 0;
+    g_Battle.enemy_count = 0;
     do {
         if (D_801463DC[loop_count & BYTE_MASK].active != 0) {
             Battle_ArmEnemySlot(count & BYTE_MASK, D_801463DC[loop_count & BYTE_MASK].id,
@@ -17,5 +17,5 @@ MATCH void func_800ABC30(void) {
         }
         loop_count += 1;
     } while ((loop_count & BYTE_MASK) < 8u);
-    g_BattleLivingEnemyCount = g_BattleEnemyCount;
+    g_Battle.living_enemy_count = g_Battle.enemy_count;
 }

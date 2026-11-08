@@ -20,42 +20,42 @@ NON_MATCHING void func_801D1228(void) {
     s16 flags;
 
     func_801DE804();
-    slot                     = 0;
-    g_BattleLivingPartyCount = 0;
-    if (g_BattlePartyCount != 0) {
+    slot                        = 0;
+    g_Battle.living_party_count = 0;
+    if (g_Battle.party_count != 0) {
         do {
             if (!(Battle_SlotIsBlocked(slot & BYTE_MASK) & BYTE_MASK)) {
-                g_BattleLivingPartyCount += 1;
+                g_Battle.living_party_count += 1;
             }
             slot += 1;
-        } while ((u32)(slot & BYTE_MASK) < (u8)g_BattlePartyCount);
+        } while ((u32)(slot & BYTE_MASK) < (u8)g_Battle.party_count);
     }
-    work_row                     = (u8*)g_Game.members;
-    *g_BattlePanelWidths         = 8;
-    g_BattleMessageSlot          = work_row;
-    g_BattleRowCursor            = 0;
-    g_BattlePanelEntry           = 0;
-    D_801462E7                   = 0;
-    g_BattlePanelSlot            = 0;
-    g_BattleState                = 0;
-    g_BattleOutcome.result       = 0;
-    D_801463D0                   = 1;
-    g_BattleOutcome.reward_zenny = 0;
-    g_BattleOutcome.reward_exp   = 0;
-    g_BattleOutcome.attempts     = 0;
-    g_BattleBossFlags            = 0;
-    D_801463BA                   = 0;
-    g_BattlePendingStatus        = 0;
-    g_BattleOutcome.drop_count   = 0;
-    D_801463C2                   = 0;
-    D_801463CB                   = 0;
-    D_801463CA                   = 0;
-    g_BattleActionLock           = 0;
-    D_801463D7                   = 0;
-    g_BattleSelectionLatch       = 0;
-    g_DragonForm                 = 0;
-    g_AreaCameraHeightStep       = 0;
-    slot                         = 0;
+    work_row                      = (u8*)g_Game.members;
+    *g_Battle.panel_widths        = 8;
+    g_BattleMessageSlot           = work_row;
+    g_Battle.row_cursor           = 0;
+    g_Battle.cursor.panel_entry   = 0;
+    D_801462E7                    = 0;
+    g_Battle.panel_slot           = 0;
+    g_Battle.state                = 0;
+    g_Battle.outcome.result       = 0;
+    D_801463D0                    = 1;
+    g_Battle.outcome.reward_zenny = 0;
+    g_Battle.outcome.reward_exp   = 0;
+    g_Battle.outcome.attempts     = 0;
+    g_Battle.boss_flags           = 0;
+    D_801463BA                    = 0;
+    g_Battle.pending_status       = 0;
+    g_Battle.outcome.drop_count   = 0;
+    D_801463C2                    = 0;
+    D_801463CB                    = 0;
+    D_801463CA                    = 0;
+    g_Battle.action_lock          = 0;
+    D_801463D7                    = 0;
+    g_Battle.selection_latch      = 0;
+    g_Battle.dragon_form          = 0;
+    g_AreaCameraHeightStep        = 0;
+    slot                          = 0;
     func_800ABBA4();
     func_801E5A38();
     func_801DDB7C();
@@ -127,7 +127,7 @@ NON_MATCHING void func_801D1228(void) {
                 g_Task = g_Game.members + row_offset;
                 goto found; /* joins the shared work-pointer exit */
             }
-        } else if (!(Battle_SlotIsBlocked((u32)slot) & BYTE_MASK) && (g_BattleEncounter != 37)) {
+        } else if (!(Battle_SlotIsBlocked((u32)slot) & BYTE_MASK) && (g_Battle.encounter != 37)) {
             g_Task = (((((s32)(((s32)slot * 8) + slot) * 4) - slot) * 8) + g_BattleEnemies);
         found: /* the live battler's work pointer */
             GFX_UploadPaletteRows();
@@ -135,8 +135,8 @@ NON_MATCHING void func_801D1228(void) {
         slot += 1;
     } while ((u32)(slot & BYTE_MASK) < 0xBU);
     slot = 0;
-    if (g_BattleEncounter == 0) {
-        EMI_LoaderStreamInitSlot(g_GameAreaId + EMI_SLOT_ENEMY);
+    if (g_Battle.encounter == 0) {
+        EMI_LoadArchive(g_GameAreaId + EMI_SLOT_ENEMY);
         slot = 0;
     }
     index = slot & BYTE_MASK;
@@ -145,10 +145,10 @@ NON_MATCHING void func_801D1228(void) {
         slot += 1;
         index = slot & BYTE_MASK;
     } while ((u32)(slot & BYTE_MASK) < 0x10U);
-    if (g_BattleEncounter != 0) {
-        g_BossBattleEventHook(BOSS_EVENT_BATTLE_RESET);
+    if (g_Battle.encounter != 0) {
+        g_Battle.boss_event_hook(BOSS_EVENT_BATTLE_RESET);
     }
-    g_BattleStep += 1;
+    g_Battle.phase.step += 1;
 }
 #else
 INCLUDE_ASM(func_801D1228);

@@ -6,8 +6,8 @@
 /* Battle-selection cells. Read through plain byte views: each site reads
  * the cell exactly once, so the volatile qualification battle_15.h carries
  * is not needed and would block byte-load folding. */
-#define SEL_MODE     (*MEM_PTR(u8, &g_BattleUIStep))
-#define SEL_SUBSTATE (*MEM_PTR(s8, &g_BattlePanelEntry))
+#define SEL_MODE     (*MEM_PTR(u8, &g_Battle.ui_step))
+#define SEL_SUBSTATE (*MEM_PTR(s8, &g_Battle.cursor.panel_entry))
 #define SEL_SLOT     (*MEM_PTR(u8, &D_801462E7))
 
 MATCH void func_800B0498(void) {

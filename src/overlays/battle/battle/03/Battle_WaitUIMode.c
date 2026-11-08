@@ -5,9 +5,9 @@ MATCH void Battle_WaitUIMode(void) {
     u8* counter;
 
     if (D_80148357 == 1) {
-        /* Retail materialises &g_BattleSubStep once and reads and writes the
+        /* Retail materialises &g_Battle.phase.sub_step once and reads and writes the
          * sub-step byte through it; a direct `+= 1` repeats lui. */
-        counter = &g_BattleSubStep;
+        counter = &g_Battle.phase.sub_step;
         *counter += 1;
     }
 }

@@ -9,7 +9,7 @@ MATCH void func_800A602C(void) {
     D_801485DE = 4;
     D_801485DF = 0;
     D_801485E0 = 0x15B;
-    counter    = (u8*)&g_BattleUIState;
+    counter    = (u8*)&g_Battle.ui_state;
     count      = *counter;
     D_801485E2 = 0x3F;
     D_801485EC = 0;

@@ -2,5 +2,5 @@
 
 /* func_801D6774 */
 MATCH void Battle_RunResult(void) {
-    D_801EACD4[g_BattleStep]();
+    D_801EACD4[g_Battle.phase.step]();
 }

@@ -15,13 +15,13 @@ MATCH void func_800AD4D4(void) {
     work->unk_2E.half = D_80148628 + (remainder * 0x1E + 0x13);
     work->unk_30.half = (second / 3 * 16 & 0x1FE0) + (0x30 + D_8014862A);
     index             = 0;
-    if (g_BattleGeneCount[0] != 0) {
+    if (g_Battle.gene_count != 0) {
         do {
             ptr = (PartyMember*)g_Task;
-            if (g_BattleGenes[index] == ptr->param.unk_0B) {
+            if (g_Battle.genes[index] == ptr->param.unk_0B) {
                 ptr->header.step += 1;
             }
             index++;
-        } while (index < g_BattleGeneCount[0]);
+        } while (index < g_Battle.gene_count);
     }
 }

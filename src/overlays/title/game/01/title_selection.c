@@ -73,7 +73,7 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
         return;
     }
 
-    if (EMI_LoaderIsReady() && g_UiWindowEffectBusy == 0u && (g_InputPressed & INPUT_ACTION_BUTTONS) != 0u) {
+    if (EMI_IsReady() && g_UiWindowEffectBusy == 0u && (g_InputPressed & INPUT_ACTION_BUTTONS) != 0u) {
         u8  sel;
         u16 bank;
         g_SceneState.state_04 = 1u;

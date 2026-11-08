@@ -52,7 +52,7 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     ((EnemyBattler*)g_Task)->unk_5C      = 0;
     ((EnemyBattler*)g_Task)->unk_06      = 0;
     ((EnemyBattler*)g_Task)->unk_07      = 0;
-    ((EnemyBattler*)g_Task)->unk_08      = g_BattleScrollDir ^ 2;
+    ((EnemyBattler*)g_Task)->unk_08      = g_Battle.scroll_dir ^ 2;
     ((EnemyBattler*)g_Task)->unk_48      = 0;
     ((EnemyBattler*)g_Task)->unk_4B      = 0xFF;
     enemy                                = (EnemyBattler*)g_Task;
@@ -66,7 +66,7 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     Battle_LoadEnemyBattler(slot & BYTE_MASK, unit & BYTE_MASK);
     func_800AD0A8(slot & BYTE_MASK, unit & HALF_MASK);
     g_BattleEnemyBattlers[slot & BYTE_MASK].unk_7F = func_800AD044(FIELD(u8, &D_800E4050, unit_offset));
-    g_BattleEnemyCount += 1;
+    g_Battle.enemy_count += 1;
 }
 #else
 INCLUDE_ASM(Battle_ArmEnemySlot);

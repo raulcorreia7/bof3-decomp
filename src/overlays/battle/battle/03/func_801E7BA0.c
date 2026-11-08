@@ -37,24 +37,24 @@ NON_MATCHING void func_801E7BA0(void) {
     void*        temp_t0_202;
     void*        var_a2_201;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         GFX_FreePaletteFadeTarget(&g_Game.members[g_BattleEffectBattler->slot]);
-        if (*(u16*)(&g_BattleState) & BATTLE_STATE_RELOAD_PARTY) {
-            g_BattleLivingPartyCount = 0;
-            g_BattlePartyCount       = D_801463CF;
-            var_s0                   = 0;
+        if (*(u16*)(&g_Battle.state) & BATTLE_STATE_RELOAD_PARTY) {
+            g_Battle.living_party_count = 0;
+            g_Battle.party_count        = D_801463CF;
+            var_s0                      = 0;
             if (D_801463CF != 0) {
                 var_v0_49 = 0 & BYTE_MASK;
                 do {
                     if (!(*(&D_801EBFA0 + (var_v0_49 * BATTLE_PARTY_STRIDE)) & 0x4000)) {
-                        FIELD(u8, (&g_BattleState), 0x9u) = (u8)(FIELD(u8, (&g_BattleState), 0x9u) + 1);
+                        FIELD(u8, (&g_Battle.state), 0x9u) = (u8)(FIELD(u8, (&g_Battle.state), 0x9u) + 1);
                     }
                     var_s0 += 1;
                     var_v0_49 = var_s0 & BYTE_MASK;
-                } while ((u32)(var_s0 & BYTE_MASK) < (u8)FIELD(u8, (&g_BattleState), 0x8u));
+                } while ((u32)(var_s0 & BYTE_MASK) < (u8)FIELD(u8, (&g_Battle.state), 0x8u));
             }
-            D_8014835E = g_BattlePartyCount;
-            temp_v0_76 = g_BattlePartyCount & BYTE_MASK;
+            D_8014835E = g_Battle.party_count;
+            temp_v0_76 = g_Battle.party_count & BYTE_MASK;
             D_80148358 = (s16) * (&D_801EB4BF + temp_v0_76);
             var_s0     = 1;
             if (temp_v0_76 > 1U) {
@@ -65,7 +65,7 @@ NON_MATCHING void func_801E7BA0(void) {
                     var_s0 += 1;
                     g_BattleEffects[Battle_AllocEffect(0U, 0x11U) & BYTE_MASK].target.party =
                         &g_Game.members[temp_a0_92];
-                } while ((u32)(var_s0 & BYTE_MASK) < (u8)g_BattlePartyCount);
+                } while ((u32)(var_s0 & BYTE_MASK) < (u8)g_Battle.party_count);
             }
         }
         var_s1 = SP_PTR(PartyMember, 0x0);
@@ -154,7 +154,7 @@ NON_MATCHING void func_801E7BA0(void) {
         GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
         func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
         GFX_UploadPaletteRows();
-        if (*(u16*)(&g_BattleState) & BATTLE_STATE_RELOAD_PARTY) {
+        if (*(u16*)(&g_Battle.state) & BATTLE_STATE_RELOAD_PARTY) {
             *D_801454F5 = D_801463D4;
             *D_801454F6 = D_801463D5;
         } else {
@@ -162,7 +162,7 @@ NON_MATCHING void func_801E7BA0(void) {
             *(D_801454F6 + ((g_Task)->slot * 3)) = D_801463D5;
         }
         g_Task = var_s1;
-        *(u16*)(&g_BattleState) &= ~BATTLE_STATE_RELOAD_PARTY;
+        *(u16*)(&g_Battle.state) &= ~BATTLE_STATE_RELOAD_PARTY;
         var_s1->header.mode += 1;
     }
 }

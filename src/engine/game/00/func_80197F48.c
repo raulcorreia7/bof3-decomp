@@ -7,16 +7,16 @@ MATCH void func_80197F48(void) {
     u32 i;
 
     changed = 0;
-    if (g_AreaCameraMoving == 0 && EMI_LoaderIsReady() != 0) {
+    if (g_AreaCameraMoving == 0 && EMI_IsReady() != 0) {
         g_AreaDrawMode = 6;
         Party_BuildBattlers(PARTY_ORDER_FIELD);
         func_801BFB34();
-        flags      = &g_BattleOutcome.options;
+        flags      = &g_Battle.outcome.options;
         D_80143F22 = 0;
         if ((*flags & 2) == 0) {
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         }
-        if ((*flags & 0x40) == 0 && (g_BattleOutcome.result & BATTLE_RESULT_NO_BGM) == 0 && g_SndBGMId != 0xFF) {
+        if ((*flags & 0x40) == 0 && (g_Battle.outcome.result & BATTLE_RESULT_NO_BGM) == 0 && g_SndBGMId != 0xFF) {
             for (i = 0; i < 1376; i++) {
                 D_80148A50[i] = D_8018E268[i];
             }
@@ -28,8 +28,8 @@ MATCH void func_80197F48(void) {
             SND_FadeInSequence((u16)(s8)(u8)g_SelectionFxVoices[g_SelectionCues[*sel << 2]], D_80181EBB[*sel << 2],
                                0x64, 8);
         }
-        g_BattleOutcome.options = 0;
-        g_BattleEncounter       = 0;
+        g_Battle.outcome.options = 0;
+        g_Battle.encounter       = 0;
         Area_RollEncounterThreshold(0);
         func_801C2018();
         changed = 1;

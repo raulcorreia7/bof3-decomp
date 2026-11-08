@@ -84,7 +84,7 @@ MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
     s32 pulse;
     s32 pulse_counter;
 
-    tpage = getTPage(0, 1, 960, 0);
+    tpage = getTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddDrawMode(tpage);
     primitive = GFX_BuildGlyphPrimitive(262, 130, 1, 1, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);

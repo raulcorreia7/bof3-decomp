@@ -19,8 +19,8 @@ MATCH void SYS_StartFrontend(void) {
     CallbackWait(1U);
     SND_Init();
     SND_SetBankLayout(0U);
-    EMI_LoaderStreamInitSlot(EMI_SLOT_FIRST);
-    while (EMI_LoaderIsReady() == 0)
+    EMI_LoadArchive(EMI_SLOT_FIRST);
+    while (EMI_IsReady() == 0)
         CallbackWait(1U);
     SsUtSetReverbDepth(0x28, 0x28);
     SsSetRVol(0x28, 0x28);

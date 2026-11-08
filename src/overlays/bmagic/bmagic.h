@@ -39,17 +39,17 @@
  * A statement macro: the member declares u32 slot, u8* selector and
  * PartyMember* battler. */
 #define BMAGIC_RELEASE_TARGET_AND_PLAY()                                        \
-    slot = LOBU(g_BattleTargetSelector);                                        \
+    slot = LOBU(g_Battle.target_selector);                                      \
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                 \
         battler = &g_Game.members[slot];                                        \
     } else {                                                                    \
         battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE); \
     }                                                                           \
     func_80196718(battler);                                                     \
-    selector = (u8*)&g_BattleTargetSelector;                                    \
+    selector = (u8*)&g_Battle.target_selector;                                  \
     func_800AF814(*selector);                                                   \
     func_800A9820(*selector);                                                   \
-    g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;                               \
+    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
     func_801E5988()
 
 /* The sway step of the effect work record WORK points to: phase_0C advances and

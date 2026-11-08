@@ -54,7 +54,7 @@ MATCH void func_801D1094(void) {
 }
 
 MATCH void func_801D1124(void) {
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         SND_PlayBGM(D_801D1944, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         D_801D1948 = 0;
         D_801F294D += 1;

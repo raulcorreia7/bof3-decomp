@@ -22,7 +22,7 @@ NON_MATCHING void func_800A0EC4(void) {
     u32        rate;
     u8*        state;
 
-    state = &g_BattleActiveBattler;
+    state = &g_Battle.active_battler;
     if (*state < 3U) {
         record_index = (&g_Game.members[0].character_index)[(*state * BATTLE_PARTY_STRIDE)];
         timer        = g_Characters[record_index].fatigue;
@@ -34,7 +34,7 @@ NON_MATCHING void func_800A0EC4(void) {
         Char_RebuildStats(((&g_Game.members[0].character_index)[(*state * BATTLE_PARTY_STRIDE)] * 0xA4) +
                           (u8*)&g_Characters);
         index = 0;
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             do {
                 row_offset = index * BATTLE_PARTY_STRIDE;
                 cell = (Character*)(((&g_Game.members[0].character_index)[row_offset] * 0xA4) + (u8*)&g_Characters);
@@ -54,26 +54,26 @@ NON_MATCHING void func_800A0EC4(void) {
                 ((s32*)&dest->base.max_hp)[5] = ((s32*)&cell->stats.max_hp)[5];
                 ((s32*)&dest->base.max_hp)[6] = ((s32*)&cell->stats.max_hp)[6];
                 ((s32*)&dest->base.max_hp)[7] = ((s32*)&cell->stats.max_hp)[7];
-            } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         index = 0;
         func_800AAA74();
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             do {
                 row_offset                           = index * BATTLE_PARTY_STRIDE;
                 dest                                 = (Character*)(row_offset + D_80145F20);
                 *(BattleStatBlockPart*)(dest + 0)    = *(BattleStatBlockPart*)(row_offset + (D_80145F20 + 0x20));
                 *(BattleStatBlockPart*)(dest + 0x10) = *(BattleStatBlockPart*)(row_offset + (D_80145F20 + 0x30));
                 index++;
-            } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         index = 0;
         func_800A4458();
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             do {
                 func_800A9BD8(index & BYTE_MASK);
                 index++;
-            } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
     } else {
         member = *state - 3;
@@ -91,13 +91,13 @@ NON_MATCHING void func_800A0EC4(void) {
             }
         }
     }
-    if (!(func_800A3A10(*(u8*)&g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
-        if ((u8)g_BattleTarget < 3U) {
-            value = g_Game.members[g_BattleTarget].chr.hp;
+    if (!(func_800A3A10(*(u8*)&g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
+        if ((u8)g_Battle.target < 3U) {
+            value = g_Game.members[g_Battle.target].chr.hp;
         } else {
-            value = ENEMY_COMBATANT(g_BattleTarget).hp;
+            value = ENEMY_COMBATANT(g_Battle.target).hp;
         }
-        g_BattleTargetRecord->hp_change = (s16)(value - 1);
+        g_Battle.target_record->hp_change = (s16)(value - 1);
     }
 }
 #else

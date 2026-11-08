@@ -54,11 +54,11 @@ MATCH void Battle_TriggerEnemyEvents(void) {
                 BATTLE_TRIGGER_ENEMY_EVENT_ONCE(Battle_ActionHasElement(ELEM_STATUS));
                 break;
             case BATTLE_EVENT_HIT_BY_ABILITY:
-                BATTLE_TRIGGER_ENEMY_EVENT_ONCE(LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY &&
+                BATTLE_TRIGGER_ENEMY_EVENT_ONCE(LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY &&
                                                 g_BattleCurrentEnemy->turn.hp_change != 0);
                 break;
             case BATTLE_EVENT_HIT_BY_ATTACK:
-                BATTLE_TRIGGER_ENEMY_EVENT_ONCE(LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK &&
+                BATTLE_TRIGGER_ENEMY_EVENT_ONCE(LOBU(g_Battle.action_type) == BATTLE_ACTION_ATTACK &&
                                                 g_BattleCurrentEnemy->turn.hp_change != 0);
                 break;
             case BATTLE_EVENT_BLINDED:
@@ -80,7 +80,7 @@ MATCH void Battle_TriggerEnemyEvents(void) {
                 BATTLE_TRIGGER_ENEMY_EVENT(Battle_ActionHasElement(ELEM_ELECTRIC));
                 break;
             case BATTLE_EVENT_REPEAT_HIT_BY_ATTACK:
-                BATTLE_TRIGGER_ENEMY_EVENT(LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK &&
+                BATTLE_TRIGGER_ENEMY_EVENT(LOBU(g_Battle.action_type) == BATTLE_ACTION_ATTACK &&
                                            g_BattleCurrentEnemy->turn.hp_change != 0);
                 break;
             case BATTLE_EVENT_LETHAL_HIT:

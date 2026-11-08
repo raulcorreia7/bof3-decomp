@@ -14,7 +14,7 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     /* FAKE: holds the effect_1 copy to the retail s0 home. */
     MATCH_FAKE_PIN(s32, other, "s0");
 
-    kind  = *(u8*)&g_BattleActiveBattler;
+    kind  = *(u8*)&g_Battle.active_battler;
     sel   = effect_0;
     other = effect_1;
     if (kind < 3u) {
@@ -26,7 +26,7 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
         if ((u8)other != 0u) {
             func_801DD858((u8)other);
         }
-    } else if (g_BattleEncounter != 0u) {
+    } else if (g_Battle.encounter != 0u) {
         func_801E52F0(*ENEMY_COMBATANT(kind).unk_E8);
     } else {
         SND_QueueSelectionFx((ENEMY_COMBATANT(kind).kind * 2u) | 0x600u);

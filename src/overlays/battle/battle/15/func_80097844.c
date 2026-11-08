@@ -8,11 +8,11 @@ MATCH void func_80097844(void) {
 
     held = g_InputPressed;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        g_BattleUIState = 4u;
+        g_Battle.ui_state = 4u;
         return;
     }
     if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        g_BattleUIState = 3u;
+        g_Battle.ui_state = 3u;
         return;
     }
     /* FAKE: plain read of the message-slot selector: the volatile qualifier
@@ -23,18 +23,18 @@ MATCH void func_80097844(void) {
     if ((D_801CA718[entry[g_MenuPanelTasks[16].unk_0C] * 0x14] & ABILITY_TARGET_BOTH_SIDES) != 0u &&
         (trigger & (PADLup | PADLdown)) != 0) {
         g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(0);
-        *(u8*)&g_BattleUIState += 1u;
+        *(u8*)&g_Battle.ui_state += 1u;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         return;
     }
     if ((trigger & PADLright) != 0) {
         g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
+            func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if ((trigger & PADLleft) != 0) {
         g_BattleActorTurn->command.target = Battle_FindSelectableSlotBackward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
+            func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

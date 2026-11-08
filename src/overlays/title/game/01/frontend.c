@@ -31,9 +31,9 @@ MATCH void Game_BeginTitle(void) { /* func_801D0C90 */
     u16 state;
 
     SND_SetBankLayout(2u);
-    EMI_LoaderStreamInitSlot(EMI_SLOT_DEMO);
+    EMI_LoadArchive(EMI_SLOT_DEMO);
 
-    while (!EMI_LoaderIsReady()) {
+    while (!EMI_IsReady()) {
         CallbackWait(1u);
     }
 

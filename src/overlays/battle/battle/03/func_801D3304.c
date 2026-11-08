@@ -11,15 +11,15 @@ MATCH void func_801D3304(void) {
     {
         u16* battle_half;
 
-        battle_half  = (u16*)&g_BattleActionId;
-        *battle_half = g_BattleAction->unk_02;
+        battle_half  = (u16*)&g_Battle.action_id;
+        *battle_half = g_Battle.action->unk_02;
         if (func_800A9A84() & BYTE_MASK) {
-            Battle_CancelTurn(g_BattleActiveBattler);
+            Battle_CancelTurn(g_Battle.active_battler);
             BATTLE_ACTIVE_PARTY.header.mode = 2;
             BATTLE_ACTIVE_PARTY.header.step = 0;
-            g_BattleMode                    = 3;
-            g_BattleStep                    = 0;
-            g_BattleSubStep                 = 0;
+            g_Battle.phase.mode             = 3;
+            g_Battle.phase.step             = 0;
+            g_Battle.phase.sub_step         = 0;
             return;
         }
         if (*battle_half != 0x97) {
@@ -29,26 +29,26 @@ MATCH void func_801D3304(void) {
             func_801DE560(1, 1, 0, 0x3C, (u8*)&D_80149298);
         }
     }
-    if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+    if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
         row  = BATTLE_ACTIVE_PARTY.chr.ap;
         flag = BATTLE_ACTIVE_PARTY.chr.status;
     } else {
-        row  = ENEMY_COMBATANT(g_BattleActiveBattler).ap;
-        flag = ENEMY_COMBATANT(g_BattleActiveBattler).status;
+        row  = ENEMY_COMBATANT(g_Battle.active_battler).ap;
+        flag = ENEMY_COMBATANT(g_Battle.active_battler).status;
     }
-    if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_BattleActionId].mask & 0x400)) {
+    if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_Battle.action_id].mask & 0x400)) {
         func_801D9484();
         func_801DE560(2, 0, 0, 0x2D, Resource_GetText(0x37));
-        g_BattleStep    = 0;
-        g_BattleSubStep = 0;
+        g_Battle.phase.step     = 0;
+        g_Battle.phase.sub_step = 0;
         return;
     }
-    action = *(u16*)&g_BattleActionId;
+    action = *(u16*)&g_Battle.action_id;
     if (action != 0x97) {
-        if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
             D_801463C8 = Char_GetAbilityCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);
         } else {
-            D_801463C8 = Char_GetAbilityCost(ENEMY_COMBATANT(g_BattleActiveBattler).slot, action & BYTE_MASK, 1);
+            D_801463C8 = Char_GetAbilityCost(ENEMY_COMBATANT(g_Battle.active_battler).slot, action & BYTE_MASK, 1);
         }
     } else {
         D_801463C8 = D_801463B8[0];
@@ -56,13 +56,13 @@ MATCH void func_801D3304(void) {
     if (row < D_801463C8) {
         func_801D9484();
         func_801DE560(2, 0, 0, 0x2D, Resource_GetText(0x36));
-        g_BattleStep    = 0;
-        g_BattleSubStep = 0;
+        g_Battle.phase.step     = 0;
+        g_Battle.phase.sub_step = 0;
         return;
     }
-    g_BattleRowCursor = 0;
+    g_Battle.row_cursor = 0;
     if (!(func_800AA368() & BYTE_MASK)) {
-        g_BattleState |= 0x20;
+        g_Battle.state |= 0x20;
     }
-    g_BattleUIStep += 1;
+    g_Battle.ui_step += 1;
 }

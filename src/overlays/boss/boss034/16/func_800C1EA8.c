@@ -8,7 +8,7 @@ MATCH void func_800C1EA8(void) {
             D_800C2778 = i;
         }
     }
-    g_BattleChooseEndingHook = func_800C20A8;
-    g_BattleEndHook          = func_800C22D0;
-    g_BossBattleEventHook    = func_800C1F30;
+    g_Battle.choose_ending_hook = func_800C20A8;
+    g_Battle.end_hook           = func_800C22D0;
+    g_Battle.boss_event_hook    = func_800C1F30;
 }

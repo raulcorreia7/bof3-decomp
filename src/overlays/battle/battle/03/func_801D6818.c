@@ -7,7 +7,7 @@ MATCH void func_801D6818(void) {
     u8 index;
     u8 slot;
 
-    if (BATTLE_PARTY_CURSOR < g_BattlePartyCount) {
+    if (BATTLE_PARTY_CURSOR < g_Battle.party_count) {
         do {
             if (Battle_SlotIsBlocked(BATTLE_PARTY_CURSOR) == 0u) {
                 if (((g_Game.members[BATTLE_PARTY_CURSOR].u.turn.action_flags.value &
@@ -32,7 +32,7 @@ MATCH void func_801D6818(void) {
                 }
             }
             BATTLE_PARTY_CURSOR += 1u;
-        } while (BATTLE_PARTY_CURSOR < g_BattlePartyCount);
+        } while (BATTLE_PARTY_CURSOR < g_Battle.party_count);
     }
     BATTLE_ENTRANCE_STEP += 1u;
 }

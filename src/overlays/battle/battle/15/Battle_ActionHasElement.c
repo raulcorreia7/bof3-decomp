@@ -2,7 +2,7 @@
 
 /* FAKE: the second sample of the action-type byte is a non-volatile read through
  * g_BattleActionType_nv. Retail issues a separate %hi/%lo load for it; the
- * canonical g_BattleActionType shares the first sample's `lui` and is 12 bytes shorter.
+ * canonical g_Battle.action_type shares the first sample's `lui` and is 12 bytes shorter.
  */
 
 /* func_8009C8AC */
@@ -13,14 +13,14 @@ MATCH u8 Battle_ActionHasElement(u16 required_mask) {
     if (g_BattleCurrentEnemy->turn.hp_change == 0)
         return false;
 
-    action_type = LOBU(g_BattleActionType);
+    action_type = LOBU(g_Battle.action_type);
     if (action_type == BATTLE_ACTION_ABILITY) {
-        if (D_801CA71C[g_BattleActionId].mask & required_mask)
+        if (D_801CA71C[g_Battle.action_id].mask & required_mask)
             return true;
         action_type = g_BattleActionType_nv;
     }
     if (action_type == BATTLE_ACTION_ATTACK) {
-        slot = LOBU(g_BattleActiveBattler);
+        slot = LOBU(g_Battle.active_battler);
         if (!BATTLER_IS_PLAYER(slot))
             return false;
         if (required_mask & ELEM_DEATH)

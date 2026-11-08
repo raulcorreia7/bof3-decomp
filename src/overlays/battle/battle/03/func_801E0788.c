@@ -16,7 +16,7 @@ MATCH void func_801E0788(void) {
         g_Task->unk_03 = 1;
         g_Task->unk_04 = 0;
     } else if (w->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
-        half = &g_BattleState;
+        half = &g_Battle.state;
         if ((*half & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half &= 0xBFFF;
         }
@@ -34,7 +34,7 @@ MATCH void func_801E0788(void) {
         g_Task->unk_09                          = 30;
         g_Task->unk_03                          = 5;
     } else {
-        VOL(u8, g_BattleLivingPartyCount) -= 1;
+        VOL(u8, g_Battle.living_party_count) -= 1;
         for (i = 0; (u8)i < 8; i++) {
             g_Game.current->status.unk_12C[(u8)i] = 0;
         }
@@ -49,10 +49,10 @@ MATCH void func_801E0788(void) {
         g_Game.current->focus_counter = 0;
         g_Game.current->unk_139       = 0;
         func_800A9BD8(g_Task->slot);
-        if ((func_801E0E0C() & BYTE_MASK) || (g_BattleLivingPartyCount == 0)) {
-            VOL(u8, g_BattleOutcome.result) |= BATTLE_RESULT_DEFEAT;
+        if ((func_801E0E0C() & BYTE_MASK) || (g_Battle.living_party_count == 0)) {
+            VOL(u8, g_Battle.outcome.result) |= BATTLE_RESULT_DEFEAT;
         }
-        half2 = &g_BattleState;
+        half2 = &g_Battle.state;
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half2 &= 0xBFFF;
         }

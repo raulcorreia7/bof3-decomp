@@ -57,8 +57,8 @@
     }                                             \
     CallbackWait(1u);                             \
     CallbackWait(1u);                             \
-    EMI_LoaderStreamInitSlot(slot);               \
-    while (EMI_LoaderIsReady() == 0) {            \
+    EMI_LoadArchive(slot);                        \
+    while (EMI_IsReady() == 0) {                  \
         CallbackWait(1u);                         \
     }                                             \
     GFX_CopyPalette(1u);                          \
@@ -351,10 +351,6 @@ extern u8                 D_8014626C;
 extern u8                 D_8014626E;
 extern u8                 D_8014626F;
 extern u8                 D_80146270;
-extern u8                 g_BattleUIStep;
-extern u8                 g_BattleUIState;
-extern u8                 g_BattleScrollDir;
-extern u8                 g_BattlePartyCount;
 extern u8                 D_80146855;
 extern u8                 D_80146856;
 extern u16                D_80146878;
@@ -1541,8 +1537,8 @@ static inline void GameRunMapLoadHandshake(void) {
     CallbackWait(1U);
     CallbackWait(1U);
     g_EmiStreamFlags = 0x20;
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
-    while (EMI_LoaderIsReady() == 0) {
+    EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    while (EMI_IsReady() == 0) {
         CallbackWait(1U);
     }
     UI_SetMode(3U);

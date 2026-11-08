@@ -6,7 +6,7 @@
 MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
     u8 threshold;
 
-    if (g_BattleState & BATTLE_STATE_CRITICAL) {
+    if (g_Battle.state & BATTLE_STATE_CRITICAL) {
         return damage;
     }
     if (BATTLER_IS_PLAYER(attacker)) {

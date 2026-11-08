@@ -9,7 +9,7 @@ MATCH void func_801D277C(void) {
 
     Battle_BuildTurnOrder();
     index = 0;
-    if ((g_BattleState & BATTLE_STATE_COMMAND_ARMED) == 0) {
+    if ((g_Battle.state & BATTLE_STATE_COMMAND_ARMED) == 0) {
         g_BattleMessageState = 2;
     }
     D_8014839F            = 2;
@@ -34,11 +34,11 @@ MATCH void func_801D277C(void) {
             g_Game.members[slot].u.turn.damage_flags.value = flags & ~0x4000;
         }
     }
-    half_flags = &g_BattleState;
+    half_flags = &g_Battle.state;
     *half_flags |= 8;
     func_8009BFC4();
     if ((*half_flags & BATTLE_STATE_COMMAND_ARMED) == 0) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_SE);
+        EMI_LoadArchive(EMI_SLOT_BATL_SE);
     }
-    g_BattleStep += 1;
+    g_Battle.phase.step += 1;
 }

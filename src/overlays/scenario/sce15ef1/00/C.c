@@ -21,7 +21,7 @@ MATCH void func_801D0CC0(void) {
     func_801D147C(&g_Task->unk_64, (s16)screen_x, 6);
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
-    if (!(mode & 0xFF)) {
+    if (!(mode & BYTE_MASK)) {
         g_Task->timer = 0x40;
         g_Task->header.mode += 1;
     }
@@ -33,7 +33,7 @@ MATCH void func_801D0D54(void) {
     func_801D147C(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
-    if (!(mode & 0xFF)) {
+    if (!(mode & BYTE_MASK)) {
         g_Task->timer = 0x20;
         g_Task->header.mode += 1;
     }
@@ -67,7 +67,7 @@ MATCH void func_801D13F4(void) {
     func_801D1678(&g_Task->unk_18, &g_Task->pos.x, g_Task->unk_03);
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
-    if (!(remaining & 0xFF)) {
+    if (!(remaining & BYTE_MASK)) {
         Actor_Clear();
     }
 }

@@ -110,7 +110,7 @@ while (i < 3) { Party_ResetMember(i); i++; }
 
 | Thing                                    | Form                        | Example                                 |
 | ---------------------------------------- | --------------------------- | --------------------------------------- |
-| system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_LoaderInit`         |
+| system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_Init`               |
 | game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`        |
 | global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`         |
 | file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                   |
@@ -1377,7 +1377,7 @@ ASSERT_SIZE(EMIEntry, 0x8);
 typedef struct EMIEntry { u32 size; u32 offset; } EMIEntry;
 
 extern u8 g_EmiLoaderState;       /* runtime state in a format header */
-void      EMI_LoaderInit(void);   /* code in a format header */
+void      EMI_Init(void);   /* code in a format header */
 ```
 
 ### Domains
@@ -1433,7 +1433,7 @@ Retail RAM address literals stay out of C and headers; hardware registers, the s
 BIOS addresses and format offsets stay as defines.
 
 A named global lives in the header of the system that owns it, beside the code that reads and
-writes it: `g_SndBGMId` in the sound runtime header, `g_BattleState` in `battle/ram.h`. Each system
+writes it: `g_SndBGMId` in the sound runtime header, `g_Battle.state` in `battle/ram.h`. Each system
 header stays self-contained. An executable word with no name yet is declared at the lowest scope that
 covers its users ([lowest scope wins](#lowest-scope-wins)); one that several families read is in
 `include/slus/data.h` or `include/slus/functions.h`, in address order. The change that names one moves

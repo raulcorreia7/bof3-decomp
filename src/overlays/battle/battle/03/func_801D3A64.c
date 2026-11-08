@@ -6,21 +6,21 @@
 MATCH void func_801D3A64(void) {
     u16 packed;
 
-    g_BattleActionId = g_BattleAction->unk_02;
+    g_Battle.action_id = g_Battle.action->unk_02;
     if ((func_800A9B44() & BYTE_MASK) != 0) {
-        func_801DDFEC(g_BattleActiveBattler);
-        Battle_CancelTurn(g_BattleActiveBattler);
+        func_801DDFEC(g_Battle.active_battler);
+        Battle_CancelTurn(g_Battle.active_battler);
         BATTLE_ACTIVE_PARTY.header.mode = 2;
         BATTLE_ACTIVE_PARTY.header.step = 0;
-        g_BattleMode                    = 3;
-        g_BattleStep                    = 0;
-        g_BattleSubStep                 = 0;
+        g_Battle.phase.mode             = 3;
+        g_Battle.phase.step             = 0;
+        g_Battle.phase.sub_step         = 0;
         return;
     }
-    packed = g_BattleAction->unk_02;
+    packed = g_Battle.action->unk_02;
     SYS_CopyString((u8*)&D_80149298, Item_GetRecord(packed >> 8, packed & BYTE_MASK), 0xC);
     func_801DE560(1, 1, 0, 0x1E, (u8*)&D_80149298);
-    g_BattleRowCursor    = 0;
+    g_Battle.row_cursor  = 0;
     g_BattleMessageState = 1;
-    g_BattleUIStep += 1;
+    g_Battle.ui_step += 1;
 }

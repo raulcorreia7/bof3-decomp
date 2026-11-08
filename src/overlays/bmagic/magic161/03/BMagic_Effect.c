@@ -40,9 +40,9 @@ MATCH void func_801EF06C(void) {
     func_8014DAEC();
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         func_800AFC98(2, 4);
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
 }
@@ -51,7 +51,7 @@ MATCH void func_801EF0E8(void) {
     u8 count;
 
     count = g_Task->unk_09;
-    if ((count & 0xFF) == 0x10) {
+    if ((count & BYTE_MASK) == 0x10) {
         SND_QueueSelectionFx(0x100);
         g_Task->header.step += 1;
     } else {

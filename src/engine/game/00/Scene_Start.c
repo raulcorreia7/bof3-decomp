@@ -25,7 +25,7 @@ MATCH void Scene_Start(u8 scenario_index) {
     ready_phase            = GAME_REQUEST_AREA_CHANGE;
     Scene_RequestOverlay();
 
-    while (!EMI_LoaderIsReady()) {
+    while (!EMI_IsReady()) {
         if ((g_GameAreaId != none_sel) && (g_GameStateIndex != ready_phase)) {
             func_801992B8();
         }

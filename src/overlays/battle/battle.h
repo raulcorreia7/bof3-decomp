@@ -47,7 +47,7 @@ ASSERT_SIZE(BattleModule, 4);
 
 /* Camera scroll step per direction: func_8009B488, func_8009B700, func_8009B794
  * and func_800A8678 add one entry to the x/y phase scroll words, indexed by
- * g_BattleScrollDir. */
+ * g_Battle.scroll_dir. */
 typedef struct BattleScrollDelta {
     s8 x;
     s8 y;
@@ -65,18 +65,8 @@ extern u8*                          D_800B6AB0[];
 extern u8                           D_801454F5[];
 extern u8                           D_801454F6[];
 extern u8                           D_80145FA8[];
-/* D_801462E4 */
+/* FAKE: g_Battle.ui_state as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8                  g_BattleUIState;
-/* D_801462E6 */
-extern volatile u8                  g_BattlePanelEntry;
-/* D_801462EC */
-extern volatile u8                  g_BattleScrollDir;
-/* D_801462F3 */
-extern u8                           g_BattleLivingEnemyCount;
-/* D_80146322 */
-extern volatile u8                  g_BattleTurnCursor;
-/* D_80146323 */
-extern volatile u8                  g_BattleTurnCount;
 /* Main-executable battle-selection cell consumed by the countdown arm. */
 extern u8                           g_BattleActionType_nv;
 extern u8                           D_801463B8[];

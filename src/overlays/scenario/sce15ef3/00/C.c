@@ -52,7 +52,7 @@ MATCH void func_801D0D7C(void) {
 }
 
 MATCH void func_801D0DAC(void) {
-    Scene_DrawRedGradient(-(g_Task->timer << 5) & 0xFF);
+    Scene_DrawRedGradient(-(g_Task->timer << 5) & BYTE_MASK);
     if (--g_Task->timer == 0) {
         g_Task->timer = 8;
         g_Task->header.mode += 1;

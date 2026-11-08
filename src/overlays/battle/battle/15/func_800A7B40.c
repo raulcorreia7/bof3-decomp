@@ -5,7 +5,7 @@ MATCH s32 func_800A7B40(u8 combination, u8 count) {
     u8  limit;
     u8  i;
 
-    rec   = D_80145F04 + g_BattleActiveBattler * BATTLE_PARTY_STRIDE;
+    rec   = D_80145F04 + g_Battle.active_battler * BATTLE_PARTY_STRIDE;
     limit = count;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         u8 j;

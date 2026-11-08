@@ -18,11 +18,11 @@ MATCH void Battle_StreamEndOverlay(void) {
             i += 1u;
         } while (i < g_BattlePartyCount);
     }
-    if (g_BattleRowCursor != g_BattlePartyCount) {
+    if (g_BattleRowCursor != g_Battle.party_count) {
         g_BattleSubStep -= 1u;
         return;
     }
-    if ((g_BattleOutcome.result & BATTLE_RESULT_DEFEAT) == 0u) {
+    if ((g_Battle.outcome.result & BATTLE_RESULT_DEFEAT) == 0u) {
         i = 0u;
         if (i < g_BattleRowCursor) {
             do {
@@ -39,28 +39,28 @@ MATCH void Battle_StreamEndOverlay(void) {
                 GFX_FreePaletteFadeTarget(work);
                 func_801DDFEC(i);
                 i += 1u;
-            } while (i < g_BattlePartyCount);
+            } while (i < g_Battle.party_count);
         }
-        g_BattleActionLock = 0u;
+        g_Battle.action_lock = 0u;
     }
-    if (g_BattleEncounter == 0u) {
-        u8 flags = g_BattleOutcome.result;
+    if (g_Battle.encounter == 0u) {
+        u8 flags = g_Battle.outcome.result;
 
         if ((flags & 1u) != 0u) {
-            g_BattleStep = 2u;
+            g_Battle.phase.step = 2u;
         }
         if ((flags & BATTLE_RESULT_VICTORY) != 0u) {
-            g_BattleStep = 1u;
+            g_Battle.phase.step = 1u;
         }
     }
     g_BattleChooseEndingHook();
     SND_SetBankLayout(0u);
-    step = &g_BattleStep;
+    step = &g_Battle.phase.step;
     if (*step == 1u) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_END);
+        EMI_LoadArchive(EMI_SLOT_BATL_END);
     }
     if (*step == 2u) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_OVR);
+        EMI_LoadArchive(EMI_SLOT_BATL_OVR);
     }
-    g_BattleSubStep = 0u;
+    g_Battle.phase.sub_step = 0u;
 }

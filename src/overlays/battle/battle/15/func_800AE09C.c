@@ -7,8 +7,8 @@ MATCH void func_800AE09C(void) {
 
     count = TASK_BYTES[9];
     if (count == 0) {
-        func_800A9820(g_BattleTargetSelector);
-        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
+        func_800A9820(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     } else {
         TASK_BYTES[9] = count - 1;

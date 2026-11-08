@@ -18,7 +18,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
         if (HAS_STATUS(g_Game.members[index], 0x4964u)) {
             return false;
         }
-        if (g_BattleActionLock != 0u &&
+        if (g_Battle.action_lock != 0u &&
             (g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
             return false;
         }
@@ -28,7 +28,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
             return false;
         }
         group = 2u;
-        if (g_BattleOutcome.surprise != group && g_BattleOutcome.surprise != 3u) {
+        if (g_Battle.outcome.surprise != group && g_Battle.outcome.surprise != 3u) {
             return true;
         }
     } else {
@@ -41,7 +41,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
              (STATUS_PARALYZED | STATUS_CONFUSED | STATUS_SLEEPING | STATUS_UNK_8 | STATUS_KO)) != 0u) {
             return false;
         }
-        if (g_BattleActionLock != 0u &&
+        if (g_Battle.action_lock != 0u &&
             (g_BattleEnemyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
             return false;
         }
@@ -49,7 +49,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
             return false;
         }
         group = 1u;
-        if (g_BattleOutcome.surprise != group && g_BattleOutcome.surprise != 3u) {
+        if (g_Battle.outcome.surprise != group && g_Battle.outcome.surprise != 3u) {
             return true;
         }
     }

@@ -18,17 +18,17 @@ NON_MATCHING void func_801D43EC(void) {
     s32* block74;
     s32* block84;
 
-    battle_flags = &g_BattleState;
+    battle_flags = &g_Battle.state;
     if ((*battle_flags & 4) && (D_801463C2 == 0)) {
         *battle_flags &= 0xD7FB;
-        g_BattleStep    = 0;
-        g_BattleSubStep = 0;
-        if (g_BattleEncounter != 0) {
-            g_BossBattleEventHook(BOSS_EVENT_RESTART_BEGIN);
+        g_Battle.phase.step     = 0;
+        g_Battle.phase.sub_step = 0;
+        if (g_Battle.encounter != 0) {
+            g_Battle.boss_event_hook(BOSS_EVENT_RESTART_BEGIN);
         }
-        if (g_BattleOutcome.result != 0) {
-            g_BattleMode = 4;
-            g_BattleStep = 2;
+        if (g_Battle.outcome.result != 0) {
+            g_Battle.phase.mode = 4;
+            g_Battle.phase.step = 2;
             return;
         }
         func_801D4850();
@@ -36,22 +36,22 @@ NON_MATCHING void func_801D43EC(void) {
             *battle_flags &= ~BATTLE_STATE_REPRISAL_DONE;
         }
         if (*battle_flags & BATTLE_STATE_REPRISAL_PENDING) {
-            block74            = (s32*)&g_BattleActiveBattler;
-            block84            = (s32*)&g_BattleTargetSelector;
-            saved0             = block74[0];
-            saved1             = block74[1];
-            saved2             = block74[2];
-            saved3             = block74[3];
-            block74[0]         = block84[0];
-            block74[1]         = block84[1];
-            block74[2]         = block84[2];
-            block74[3]         = block84[3];
-            block84[0]         = saved0;
-            block84[1]         = saved1;
-            block84[2]         = saved2;
-            block84[3]         = saved3;
-            g_BattleActionType = BATTLE_ACTION_ATTACK;
-            index              = g_BattleActiveBattler;
+            block74              = (s32*)&g_Battle.active_battler;
+            block84              = (s32*)&g_Battle.target_selector;
+            saved0               = block74[0];
+            saved1               = block74[1];
+            saved2               = block74[2];
+            saved3               = block74[3];
+            block74[0]           = block84[0];
+            block74[1]           = block84[1];
+            block74[2]           = block84[2];
+            block74[3]           = block84[3];
+            block84[0]           = saved0;
+            block84[1]           = saved1;
+            block84[2]           = saved2;
+            block84[3]           = saved3;
+            g_Battle.action_type = BATTLE_ACTION_ATTACK;
+            index                = g_Battle.active_battler;
             if ((u8)index < 3U) {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);
                 flags                         = g_Game.members[index].turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
@@ -65,12 +65,12 @@ NON_MATCHING void func_801D43EC(void) {
             } else {
                 func_801DE560(1, 0, 0, 0xF, (u8*)&D_801EB04E);
             }
-            g_BattleMessageState = 1;
-            g_BattleStep         = 0;
-            g_BattleSubStep      = 1;
+            g_BattleMessageState    = 1;
+            g_Battle.phase.step     = 0;
+            g_Battle.phase.sub_step = 1;
         }
-        if (g_BattleEncounter != 0) {
-            g_BossBattleEventHook(BOSS_EVENT_RESTART_END);
+        if (g_Battle.encounter != 0) {
+            g_Battle.boss_event_hook(BOSS_EVENT_RESTART_END);
         }
     }
 }

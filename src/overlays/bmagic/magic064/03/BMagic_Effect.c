@@ -23,7 +23,7 @@ MATCH void func_801EED7C(void) {
     PartyMember* battler;
 
     saved   = g_Task;
-    battler = &g_Game.members[g_BattleActiveBattler];
+    battler = &g_Game.members[g_Battle.active_battler];
     g_Task  = battler;
     Actor_RequestScript((battler->facing + 0x38) & BYTE_MASK);
     g_Task = saved;
@@ -36,7 +36,7 @@ MATCH void func_801EEE1C(void) {
     PartyMember* battler;
 
     battler = g_Task;
-    g_Task  = &g_Game.members[g_BattleActiveBattler];
+    g_Task  = &g_Game.members[g_Battle.active_battler];
     if (!(func_8014DAEC() & BYTE_MASK)) {
         g_Task          = battler;
         battler->unk_09 = 0x10;
@@ -77,7 +77,7 @@ MATCH void func_801EF2A4(void) {
     u32          value;
 
     battler = g_Task;
-    g_Task  = &g_Game.members[g_BattleActiveBattler];
+    g_Task  = &g_Game.members[g_Battle.active_battler];
     func_801F0EEC(1, 2, (0x80 - battler->unk_09) & BYTE_MASK);
     func_801F0EEC(0, 1, (0x80 - battler->unk_09) & BYTE_MASK);
     func_801F0EEC(3, 2, battler->unk_09);
@@ -94,18 +94,18 @@ MATCH void func_801EF2A4(void) {
             value = 0x241;
         }
     }
-    EMI_LoaderStreamInitSlot(value);
+    EMI_LoadArchive(value);
     g_Task->header.step += 1;
 }
 
-/* hint: with u8* active = &g_BattleActiveBattler and party = g_Game.members every instruction matches except retail's li a1,2 after the s2 address setup (2 slots late) at +0x8. */
+/* hint: with u8* active = &g_Battle.active_battler and party = g_Game.members every instruction matches except retail's li a1,2 after the s2 address setup (2 slots late) at +0x8. */
 INCLUDE_ASM(func_801EF3C8);
 
 MATCH void func_801EF570(void) {
     PartyMember* battler;
 
     battler = g_Task;
-    g_Task  = &g_Game.members[g_BattleActiveBattler];
+    g_Task  = &g_Game.members[g_Battle.active_battler];
     if (!(func_8014DAEC() & BYTE_MASK)) {
         g_Task = battler;
         return;

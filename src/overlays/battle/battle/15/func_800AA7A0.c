@@ -14,7 +14,7 @@ MATCH s32 func_800AA7A0(u8 slot) {
     if ((g_Game.members[slot].u.turn.damage_flags.value & COMBATANT_FLAG_COMMAND_ENTERED) == 0) {
         return 0;
     }
-    if (g_Game.members[slot].u.turn.command.target != *(u8*)&g_BattleActiveBattler) {
+    if (g_Game.members[slot].u.turn.command.target != *(u8*)&g_Battle.active_battler) {
         return 0;
     }
     sub = func_800AA8A4(slot);

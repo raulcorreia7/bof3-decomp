@@ -3,7 +3,7 @@
 MATCH u8 func_801E2D4C(u8 slot_offset) {
     u8 value;
 
-    if (g_BattleLivingEnemyCount == 1u) {
+    if (g_Battle.living_enemy_count == 1u) {
         value = func_801E2E30();
     } else {
         value = Battle_PickRandomTarget((slot_offset + 3));

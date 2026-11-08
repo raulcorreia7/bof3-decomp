@@ -40,7 +40,7 @@ MATCH void func_801EF324(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         func_800AFC54();
         func_800AEF98(4, 0);
-        battle_flags = &g_BattleState;
+        battle_flags = &g_Battle.state;
         *battle_flags |= 4;
         func_801E5988();
     }
@@ -127,7 +127,7 @@ INCLUDE_ASM(func_801F0018);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH u32 func_801F0230(void) {
-    return LOHU(g_BattleActionId) == 7 ? 7 : 0xFF;
+    return LOHU(g_Battle.action_id) == 7 ? 7 : 0xFF;
 }
 
 MATCH void func_801F0250(void) {
@@ -173,7 +173,7 @@ MATCH void func_801F03FC(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         func_800AFC98(2, 4);
         g_Task->header.step += 1;
     }
@@ -240,7 +240,7 @@ MATCH void func_801F07D4(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
@@ -301,7 +301,7 @@ MATCH void func_801F0A20(void) {
 
 MATCH void func_801F0AC8(void) {
     if (func_8014DAEC() & BYTE_MASK) {
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
@@ -312,7 +312,7 @@ MATCH void func_801F0B44(void) {
     u16* battle_half;
 
     if (g_Task->unk_09 < 0xCU) {
-        battle_half = (u16*)&g_BattleActionId;
+        battle_half = (u16*)&g_Battle.action_id;
         if (*battle_half != 0xA4) {
             Effect_DrawScreenFade();
         }
@@ -397,7 +397,7 @@ MATCH void func_801F1384(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & BYTE_MASK)) {
         func_800AFC98(2, 0);
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
 }
@@ -439,7 +439,7 @@ MATCH void func_801F1804(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & BYTE_MASK)) {
         func_800AFC98(2, 0);
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
 }

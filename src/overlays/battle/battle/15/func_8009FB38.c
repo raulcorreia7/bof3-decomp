@@ -16,14 +16,14 @@ NON_MATCHING void func_8009FB38(void) {
     u8           battler;
     u8           template_index;
     func_800A3F28();
-    selected_battler_address = (u8*)(&g_BattleTarget);
+    selected_battler_address = (u8*)(&g_Battle.target);
     battler                  = *selected_battler_address;
     if (battler < 3U) {
         template_index = g_Game.members[battler].character_index;
         stat_base      = g_Characters;
         Char_RebuildStats((u8*)(&stat_base[template_index]));
         row_index = 0;
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             dst_base     = D_80145F04;
             src_base     = stat_base;
             active_count = (volatile u8*)(selected_battler_address - 0xA4);
@@ -43,7 +43,7 @@ NON_MATCHING void func_8009FB38(void) {
             } while (((u32)(row_index & BYTE_MASK)) < (*active_count));
         }
         func_800AAA74();
-        active_count = &g_BattlePartyCount;
+        active_count = &g_Battle.party_count;
         ORDER_LOCK_BEGIN
             for (row_index = 0; ((u32)(row_index & BYTE_MASK)) < (*active_count); row_index++) {
                 row_offset = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
@@ -52,11 +52,11 @@ NON_MATCHING void func_8009FB38(void) {
             row_index = 0;
         ORDER_LOCK_END;
         func_800A4458();
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             do {
                 func_800A9BD8(row_index);
                 row_index++;
-            } while (((u32)(row_index & BYTE_MASK)) < g_BattlePartyCount);
+            } while (((u32)(row_index & BYTE_MASK)) < g_Battle.party_count);
         }
     }
 }

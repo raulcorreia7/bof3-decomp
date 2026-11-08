@@ -34,9 +34,9 @@ MATCH void func_801BF448(void) {
             work->param.unk_0B     = 0;
             COORD_INT(work->pos.z) = val;
             if ((g_Characters[g_GameState->character_index].status & STATUS_KO) != 0)
-                Actor_SelectScript((g_BattleScrollDir + 0x1C));
+                Actor_SelectScript((g_Battle.scroll_dir + 0x1C));
             else
-                Actor_SelectScript(g_BattleScrollDir);
+                Actor_SelectScript(g_Battle.scroll_dir);
             tab += 8;
             rec_off += BATTLE_PARTY_STRIDE;
         } while (++count < g_Game.party_size);

@@ -8,5 +8,5 @@ MATCH void Battle_DispatchEntrance(void) {
     BattleEntrances handlers;
 
     handlers = g_BattleEntrances;
-    handlers.handlers[g_BattleSubStep]();
+    handlers.handlers[g_Battle.phase.sub_step]();
 }
