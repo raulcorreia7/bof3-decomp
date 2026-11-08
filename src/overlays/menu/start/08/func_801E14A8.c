@@ -12,10 +12,10 @@ MATCH void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active) {
     color    = -((flags & 1) == 0) & 7;
     resource = Resource_GetText(0x85);
     col      = x + 6;
-    UI_DrawText(col, (y + 25), color, 0xFF, resource);
+    UI_DrawText(col, (y + 25), color, TEXT_LENGTH_MAX, resource);
     UI_DrawAsciiString((x + 94), (y + 25), color, D_801D0DC0);
     color = -((flags & 2) == 0) & 7;
-    UI_DrawText(col, (y + 41), color, 0xFF, Resource_GetText(0x85));
+    UI_DrawText(col, (y + 41), color, TEXT_LENGTH_MAX, Resource_GetText(0x85));
     UI_DrawAsciiString((x + 94), (y + 41), color, D_801D0DC4);
     Menu_DrawCursorSprite((x + 8) & HALF_MASK, (((row & BYTE_MASK) * 0x10) + y + 0x1C) & HALF_MASK, 0);
 }

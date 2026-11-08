@@ -35,9 +35,9 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     gx  = xpos + 8;
     do {
         if (((((u8*)&g_Characters[0].inoculations)[rec] >> (u8)i) & 1) || (u8)i == cursor) {
-            UI_DrawText(gx, row_y, 2, 0xFF, Resource_GetText((i & BYTE_MASK) + 0xDE));
+            UI_DrawText(gx, row_y, 2, TEXT_LENGTH_MAX, Resource_GetText((i & BYTE_MASK) + 0xDE));
         } else {
-            UI_DrawText(gx, row_y, sel & BYTE_MASK, 0xFF, Resource_GetText((i & BYTE_MASK) + 0xDE));
+            UI_DrawText(gx, row_y, sel & BYTE_MASK, TEXT_LENGTH_MAX, Resource_GetText((i & BYTE_MASK) + 0xDE));
         }
         TEXT_Format(g_UiFormatBuffer, D_801D0CDC, value & HALF_MASK);
         g_UiFormatBuffer[3] = 0x60;
