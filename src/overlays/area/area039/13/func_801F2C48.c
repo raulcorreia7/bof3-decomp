@@ -4,5 +4,5 @@
 MATCH void func_801F2C48(void) {
     TASK_BYTES[0x0A] = 0x40;
     TASK_BYTES[0x04] = 1;
-    *(u16*)((u8*)g_CurrentActor + 0x7E) -= 2;
+    g_CurrentActor->unk_7E -= 2;
 }

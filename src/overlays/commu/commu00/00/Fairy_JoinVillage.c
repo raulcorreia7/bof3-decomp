@@ -19,6 +19,7 @@ MATCH void Fairy_JoinVillage(void) {
     }
     one       = 1;
     count_ptr = &g_BattleCount;
+    /* The job names sit at save offset 0xF10; a g_SaveData member changes the code size. */
     dst       = (u8*)count_ptr + 0x7BC;
     src       = g_Fairies[0];
     for (;;) {
