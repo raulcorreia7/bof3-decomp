@@ -1,14 +1,14 @@
 #include "battle_15.h"
 
 MATCH void func_800AD4D4(void) {
-    volatile PartyBattler* work;
-    PartyBattler*          ptr;
-    u32                    first;
-    u32                    second;
-    u8                     remainder;
-    u8                     index;
+    volatile PartyMember* work;
+    PartyMember*          ptr;
+    u32                   first;
+    u32                   second;
+    u8                    remainder;
+    u8                    index;
 
-    work              = (PartyBattler*)g_Task;
+    work              = (PartyMember*)g_Task;
     first             = work->param.unk_0B;
     second            = work->param.unk_0B;
     remainder         = (u8)first % 6;
@@ -17,7 +17,7 @@ MATCH void func_800AD4D4(void) {
     index             = 0;
     if (g_BattleGeneCount[0] != 0) {
         do {
-            ptr = (PartyBattler*)g_Task;
+            ptr = (PartyMember*)g_Task;
             if (g_BattleGenes[index] == ptr->param.unk_0B) {
                 ptr->header.step += 1;
             }

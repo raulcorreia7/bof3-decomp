@@ -4,7 +4,7 @@
 extern s32 func_801B6470(s32 arg0, s32 arg1);
 
 /* nonmatching unmeasured: tried scheduler order of loads in the 0x800 path and the shared 8019FA28 call tail
- * (g_GameContextKind lbu a3 lands above the g_AreaWalkFlags lhu); 80.24%. */
+ * (g_GameContextKind lbu a3 lands above the g_Game.walk_flags lhu); 80.24%. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801B6674(void) {
     s32 temp;
@@ -19,7 +19,7 @@ NON_MATCHING s32 func_801B6674(void) {
     if (g_InputPressed & g_InputMasks[WORLD_INPUT_ENTER]) {
         if ((temp & BYTE_MASK) != 0xAE) {
             if ((temp & 0xF0) != 0xA0) {
-                if ((g_AreaWalkFlags & AREA_WALK_TRANSITION) == 0) {
+                if ((g_Game.walk_flags & AREA_WALK_TRANSITION) == 0) {
                     return 0;
                 }
             }
@@ -27,7 +27,7 @@ NON_MATCHING s32 func_801B6674(void) {
                 func_801B5BDC(g_Task->direction_08);
             }
             func_801B690C();
-            g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
+            g_Game.walk_flags &= ~AREA_WALK_TRANSITION;
             Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             return 1;
         }
@@ -52,7 +52,7 @@ NON_MATCHING s32 func_801B6674(void) {
             func_801B5BDC(g_Task->direction_08);
         }
         D_8014504A += 1;
-        g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
+        g_Game.walk_flags &= ~AREA_WALK_TRANSITION;
         D_80145048 = g_GameAreaId;
         D_80145044 = g_Task->pos.y.fixed;
         D_80145040 = g_Task->pos.x.fixed;

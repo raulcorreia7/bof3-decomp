@@ -5,12 +5,12 @@
  * presentation at substate 2.
  */
 MATCH void func_801E13B8(void) {
-    PartyBattler*          work;
-    volatile PartyBattler* cell;
-    u32                    flags;
-    u32                    masked;
+    PartyMember*          work;
+    volatile PartyMember* cell;
+    u32                   flags;
+    u32                   masked;
 
-    work  = g_GameState;
+    work  = g_Game.current;
     flags = work->u.turn.damage_flags.value;
     if ((flags & 0x2000u) == 0u) {
         cell   = g_Task;

@@ -13,8 +13,7 @@ MATCH void func_800AB834(void) {
     row     = LOBU(g_BattleState) >> 7;
     battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
-        SND_PlayCue(
-            D_800B50EC[LOBU(g_BattleState) >> 7][D_801C90ED[g_BattlePartyBattlers[battler].chr.equip.weapon * 0x18]]);
+        SND_PlayCue(D_800B50EC[LOBU(g_BattleState) >> 7][D_801C90ED[g_Game.members[battler].chr.equip.weapon * 0x18]]);
     } else {
         /* FAKE: the out-of-range all-ones mask is an identity, but its overflow flag
          * stops fold from distributing (battler - 3) * 0x118, so the index is

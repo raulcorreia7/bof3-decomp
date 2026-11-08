@@ -10,7 +10,7 @@ MATCH s16 func_800A3060(u8 battler_index, u16 rule_mask) {
     value = 0;
     if (BATTLER_IS_PLAYER(battler_index)) {
         if (rule_mask & 0x20u) {
-            index = g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_INDEX_HOLY];
+            index = g_Game.members[battler_index].chr.stats.resistances[RES_INDEX_HOLY];
             value = D_800B496C[index];
         }
     } else if (rule_mask & 0x20u) {

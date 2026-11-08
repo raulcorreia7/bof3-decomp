@@ -1,9 +1,9 @@
 #include "battle_15.h"
 
 MATCH void func_800AE474(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
-    work = (PartyBattler*)g_Task;
+    work = (PartyMember*)g_Task;
     work->unk_09++;
     if (work->unk_09 == 0) {
         func_801E5988();

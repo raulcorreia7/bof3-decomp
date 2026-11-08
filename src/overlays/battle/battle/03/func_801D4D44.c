@@ -8,31 +8,31 @@ MATCH void func_801D4D44(void) {
     u8                     index;
     u32                    clr;
     u32                    enemy_index;
-    volatile PartyBattler* local_table;
+    volatile PartyMember*  local_table;
     volatile EnemyBattler* enemy_table;
 
     index       = 0u;
-    local_table = g_BattlePartyBattlers;
+    local_table = g_Game.members;
     do {
         if (func_801D64C4(index) == 0u) {
-            if ((g_BattlePartyBattlers[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
-                u8 loaded = g_BattlePartyBattlers[index].counter_136;
+            if ((g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
+                u8 loaded = g_Game.members[index].counter_136;
                 u8 count  = loaded;
                 if (count < 6u) {
                     count += 1u;
                     local_table[index].counter_136 = count;
                 }
             }
-            if (HAS_STATUS(g_BattlePartyBattlers[index], 0x800u)) {
-                u8 loaded = g_BattlePartyBattlers[index].counter_137;
+            if (HAS_STATUS(g_Game.members[index], 0x800u)) {
+                u8 loaded = g_Game.members[index].counter_137;
                 u8 count  = loaded;
                 if (count < 6u) {
                     count += 1u;
                     local_table[index].counter_137 = count;
                 }
             }
-            if ((g_BattlePartyBattlers[index].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) != 0u) {
-                u8 loaded = g_BattlePartyBattlers[index].counter_136;
+            if ((g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) != 0u) {
+                u8 loaded = g_Game.members[index].counter_136;
                 u8 count  = loaded;
                 if (count < 3u) {
                     count += 1u;
@@ -73,7 +73,7 @@ MATCH void func_801D4D44(void) {
                 clr   = 0xFFFFFFEFu;
                 do {
                     if (Battle_SlotIsBlocked(index) == 0u) {
-                        g_BattlePartyBattlers[index].u.turn.action_flags.value &= clr;
+                        g_Game.members[index].u.turn.action_flags.value &= clr;
                     }
                     index += 1u;
                 } while (index < 3u);

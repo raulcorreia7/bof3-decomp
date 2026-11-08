@@ -4,14 +4,14 @@
  * master record slot 3 (the three preceding slots are the party members). */
 
 MATCH void func_801DDB7C(void) {
-    PartyBattler* work;
+    PartyMember*  work;
     EnemyBattler* enemy;
     u8            index;
 
     index = 0u;
     while (index < 3u) {
-        if (ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
-            work = &g_BattlePartyBattlers[index];
+        if (ACTOR_IN_USE(g_Game.members[index])) {
+            work = &g_Game.members[index];
             TASK_SET((work));
             g_GameState = work;
             func_801DDAF0();

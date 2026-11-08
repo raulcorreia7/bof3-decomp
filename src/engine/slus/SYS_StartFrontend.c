@@ -32,8 +32,8 @@ MATCH void SYS_StartFrontend(void) {
     dst                       = g_InputMasks;
     src                       = D_8017F56C;
     g_EmiLoadedCharacterIndex = 0xFF;
-    g_GameFlags               = 0;
-    g_AreaWalkFlags           = 0;
+    g_Game.flags              = 0;
+    g_Game.walk_flags         = 0;
     D_80144950                = 1;
     g_SndMono                 = 0;
     g_WindowStyle             = 0;

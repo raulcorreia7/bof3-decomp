@@ -1,9 +1,9 @@
 #include "battle_15.h"
 
-MATCH void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode) {
-    PartyBattler* dst;
+MATCH void func_800AC870(s32 entry_id, PartyMember* source_record, s32 mode) {
+    PartyMember* dst;
 
-    dst = (PartyBattler*)func_800AC754(entry_id & BYTE_MASK);
+    dst = (PartyMember*)func_800AC754(entry_id & BYTE_MASK);
     switch (mode & BYTE_MASK) {
         case 0:
             dst->unk_4B = source_record->unk_4B;

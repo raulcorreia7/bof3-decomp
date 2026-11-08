@@ -546,8 +546,8 @@ MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
 MATCH s32 func_801FDA34(void) {
     u8 i;
 
-    for (i = 0; i < g_PartySize; i++) {
-        if (g_BattlePartyBattlers[i].chr.character_id == 2) {
+    for (i = 0; i < g_Game.party_size; i++) {
+        if (g_Game.members[i].chr.character_id == 2) {
             return 1;
         }
     }

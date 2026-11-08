@@ -4,7 +4,7 @@ MATCH void func_801C0CDC(void) {
     u8  state;
     s32 mode;
 
-    state = g_BattlePartyBattlers[D_80146262].facing;
+    state = g_Game.members[D_80146262].facing;
     if (state == 5 || state == 3) {
         mode = 2;
     } else {

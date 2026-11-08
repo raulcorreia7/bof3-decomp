@@ -32,17 +32,17 @@ NON_MATCHING void func_801B1E24(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    base  = (u8*)&g_BattlePartyBattlers[0].facing;
+    base  = (u8*)&g_Game.members[0].facing;
     value = *base;
     i     = 0;
-    if (g_PartySize != 0) {
+    if (g_Game.party_size != 0) {
         rows = (BattleWorkSlot*)(base - 8);
         row  = rows;
         do {
             TASK_SET(row);
             prev = i - 1;
             if (prev < 0) {
-                prev = g_PartySize - 1;
+                prev = g_Game.party_size - 1;
             }
             if (!(rows->flags_12C & 1) && prev != 0) {
                 index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
@@ -70,13 +70,13 @@ NON_MATCHING void func_801B1E24(void) {
         next:
             i++;
             row++;
-        } while (i < g_PartySize);
+        } while (i < g_Game.party_size);
     }
 
     i = 1;
-    TASK_SET(g_BattlePartyBattlers);
+    TASK_SET(g_Game.members);
     offset = BATTLE_PARTY_STRIDE;
-    while (i < g_PartySize) {
+    while (i < g_Game.party_size) {
         if (D_80145E91[offset] == 3) {
             state = g_Task->header.step + 1;
             goto store; /* row not in state 3: keep the incremented state */

@@ -5,13 +5,13 @@
  * +0x120 flag bits and advances the scratch work step.
  */
 MATCH void func_801E1494(void) {
-    s16           value;
-    u16           amount;
-    u16           cap;
-    PartyBattler* entry;
+    s16          value;
+    u16          amount;
+    u16          cap;
+    PartyMember* entry;
 
-    PartyBattler* work;
-    work  = g_GameState;
+    PartyMember* work;
+    work  = g_Game.current;
     value = work->u.turn.hp_change;
     if (work->chr.hp <= value) {
         work->chr.status = STATUS_KO;
@@ -23,7 +23,7 @@ MATCH void func_801E1494(void) {
         } else {
             SND_QueueSelectionFx(0x206);
         }
-        entry         = g_GameState;
+        entry         = g_Game.current;
         amount        = entry->chr.hp - entry->u.turn.hp_change;
         cap           = entry->chr.stats.max_hp;
         entry->chr.hp = amount;
@@ -34,7 +34,7 @@ MATCH void func_801E1494(void) {
     work = g_GameState;
     if (work->u.turn.target_flags & BATTLE_HIT_HP) {
         func_800AAC88(work->u.turn.hp_change, g_Task->slot);
-        work = g_GameState;
+        work = g_Game.current;
     }
     if (work->u.turn.target_flags & BATTLE_HIT_AP) {
         func_800AAEBC(work->u.turn.ap_change, g_Task->slot);

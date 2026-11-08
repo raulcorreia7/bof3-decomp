@@ -10,5 +10,5 @@ MATCH void func_800C2680(void) {
     for (i = 0; i < g_PartySize; i++) {
         g_PartyBattleOrder[i] = D_801FE4EC[i];
     }
-    g_PartySize = 3;
+    g_Game.party_size = 3;
 }

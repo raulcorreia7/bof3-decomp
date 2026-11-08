@@ -13,7 +13,7 @@ MATCH s32 func_8019C028(void) {
             goto fail; /* the other slot is the same slot */
         }
         if (other != 0) {
-            g_BattlePartyBattlers[other].header.step = 1;
+            g_Game.members[other].header.step = 1;
         }
     }
     g_Task->header.mode = 4;

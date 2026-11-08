@@ -2,7 +2,7 @@
    member. */
 /* func_801EF114 (magic040), func_801EFC28 (magic126) */
 MATCH void Effect_CountUpTimersAndStep(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->unk_09++;

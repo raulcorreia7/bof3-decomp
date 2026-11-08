@@ -11,7 +11,7 @@ MATCH void func_8019EC20(void) {
         0) {
         if (func_8019EEE4()) {
             func_8019EE10();
-            ((Actor*)g_Task)->unk_27 = g_BattlePartyBattlers[0].unk_27;
+            ((Actor*)g_Task)->unk_27 = g_Game.members[0].unk_27;
             Actor_SelectScript(0x4A);
             SND_PlayCue(EMI_CUE_ID(1, 14));
             ((Actor*)g_Task)->header.mode++;

@@ -7,7 +7,7 @@ MATCH void Party_ResetBattlers(void) {
 
     index = 0;
     while ((index & BYTE_MASK) < 3U) {
-        g_BattlePartyBattlers[index & BYTE_MASK].header.flags = 0;
+        g_Game.members[index & BYTE_MASK].header.flags = 0;
         Party_ClearBattlerState(index & BYTE_MASK);
         index++;
     }

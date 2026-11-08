@@ -23,7 +23,7 @@ MATCH void func_801E9B18(void) {
     /* The chr.status view changes the schedule and size, so the flags keep the D_80145F10 address view. */
     slot   = BATTLE_PANEL_TASK->cell_0A.slot;
     offset = slot * BATTLE_PARTY_STRIDE;
-    if (g_BattlePartyBattlers[slot].chr.hp < (g_BattlePartyBattlers[slot].chr.stats.max_hp >> 2)) {
+    if (g_Game.members[slot].chr.hp < (g_Game.members[slot].chr.stats.max_hp >> 2)) {
         flags = *(u16*)(D_80145F10 + offset) | 0x2000;
     } else {
         flags = *(u16*)(D_80145F10 + offset) & 0xDFFF;

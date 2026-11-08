@@ -10,7 +10,7 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
     u32 saved_work;
 
     if (BATTLER_IS_PLAYER(battler_index)) {
-        status = g_BattlePartyBattlers[battler_index].chr.status;
+        status = g_Game.members[battler_index].chr.status;
     } else {
         status = ENEMY_COMBATANT(battler_index).status;
     }
@@ -49,9 +49,9 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
         status &= ~STATUS_CONFUSED;
         slot = battler_index;
         if (BATTLER_IS_PLAYER(battler_index)) {
-            g_BattlePartyBattlers[slot].pos.x.fixed = g_BattleTemplateStats[slot].defence[0];
-            g_BattlePartyBattlers[slot].pos.y.fixed = g_BattleTemplateStats[slot].defence[1];
-            g_BattlePartyBattlers[slot].pos.z.fixed = g_BattleTemplateStats[slot].defence[2];
+            g_Game.members[slot].pos.x.fixed = g_BattleTemplateStats[slot].defence[0];
+            g_Game.members[slot].pos.y.fixed = g_BattleTemplateStats[slot].defence[1];
+            g_Game.members[slot].pos.z.fixed = g_BattleTemplateStats[slot].defence[2];
         } else {
             ENEMY_COMBATANT(slot).pos.x.fixed = g_BattleTemplateStats[slot].defence[0];
             ENEMY_COMBATANT(slot).pos.y.fixed = g_BattleTemplateStats[slot].defence[1];
@@ -61,12 +61,12 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
 
     if (BATTLER_IS_PLAYER(battler_index)) {
         volatile u8* battler;
-        battler = (u8*)(&g_BattlePartyBattlers[battler_index]);
+        battler = (u8*)(&g_Game.members[battler_index]);
         GFX_FreePaletteFadeTarget(battler);
-        saved_work                                      = g_BattleWorkCell;
-        g_BattlePartyBattlers[battler_index].chr.status = status;
-        g_BattleWorkCell                                = battler;
-        func_801DDAB4(g_BattlePartyBattlers[battler_index].chr.status);
+        saved_work                               = g_BattleWorkCell;
+        g_Game.members[battler_index].chr.status = status;
+        g_BattleWorkCell                         = battler;
+        func_801DDAB4(g_Game.members[battler_index].chr.status);
     } else {
         volatile u8* battler;
         battler = (u8*)(&((volatile BattleEnemyRecord*)g_BattleEnemies)[battler_index]);

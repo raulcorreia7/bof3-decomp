@@ -7,8 +7,8 @@ MATCH void func_801DB494(void) {
 
     index = 0u;
     while (index < 3u) {
-        g_BattlePartyBattlers[index].u.turn.command.type       = 0u;
-        g_BattlePartyBattlers[index].u.turn.damage_flags.value = 0u;
+        g_Game.members[index].u.turn.command.type       = 0u;
+        g_Game.members[index].u.turn.damage_flags.value = 0u;
         index += 1u;
     }
 

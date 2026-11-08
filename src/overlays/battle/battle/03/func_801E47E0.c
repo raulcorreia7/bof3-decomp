@@ -4,7 +4,7 @@
  * +0x18 while signed +0x40 is at most 0x13FFF; otherwise sets byte +0x03 to 2.
  */
 MATCH void func_801E47E0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if ((s32)work->scale.x <= 0x13FFF) {

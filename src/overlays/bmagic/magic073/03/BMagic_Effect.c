@@ -5,8 +5,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC28(void) {
-    PartyBattler* saved;
-    u8            i;
+    PartyMember* saved;
+    u8           i;
 
     BMagic_DispatchTaskPair(func_801EED18, func_801EEF50);
 
@@ -124,7 +124,7 @@ MATCH u8 func_801F04A4(void) {
     } while ((u32)(i & 0xFF) < 8);
     i = 0;
     do {
-        if (!(func_801DB524(i & 0xFF) & 0xFF) && g_BattlePartyBattlers[i & 0xFF].header.mode == 6) {
+        if (!(func_801DB524(i & 0xFF) & 0xFF) && g_Game.members[i & 0xFF].header.mode == 6) {
             count++;
         }
         i++;

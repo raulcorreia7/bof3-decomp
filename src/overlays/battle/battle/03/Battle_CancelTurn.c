@@ -8,9 +8,9 @@ MATCH void Battle_CancelTurn(u8 battler_index) {
     u8 index;
 
     if (BATTLER_IS_PLAYER(battler_index)) {
-        g_BattlePartyBattlers[battler_index].u.turn.damage_flags.value &= ~COMBATANT_FLAG_DEFENDING;
-        g_BattlePartyBattlers[battler_index].u.turn.command.type = 0u;
-        g_BattlePartyBattlers[battler_index].u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
+        g_Game.members[battler_index].u.turn.damage_flags.value &= ~COMBATANT_FLAG_DEFENDING;
+        g_Game.members[battler_index].u.turn.command.type = 0u;
+        g_Game.members[battler_index].u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
     } else {
         u32 f                                                  = ENEMY_COMBATANT(battler_index).turn.damage_flags.value;
         ENEMY_COMBATANT(battler_index).turn.command.type       = 0u;

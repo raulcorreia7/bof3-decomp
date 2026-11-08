@@ -1,8 +1,8 @@
 #include "battle_03.h"
 
 MATCH void func_801E6A54(void) {
-    volatile PartyBattler* work;
-    u8                     value;
+    volatile PartyMember* work;
+    u8                    value;
 
     ScratchPad* sp;
 

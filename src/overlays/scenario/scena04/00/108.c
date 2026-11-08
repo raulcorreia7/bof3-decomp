@@ -330,7 +330,7 @@ MATCH void func_801FA0B4(void) {
     g_PartyBattleOrder[0] = 255;
     D_80144F5E            = 255;
     D_80144F5F            = 255;
-    g_PartySize           = 0;
+    g_Game.party_size     = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }

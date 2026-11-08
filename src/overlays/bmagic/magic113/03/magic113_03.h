@@ -13,8 +13,8 @@
 
 /* Count the effect timer up and finish the effect at 12. */
 static inline void Effect_CountUpTimer(void) {
-    PartyBattler* work;
-    u8            next;
+    PartyMember* work;
+    u8           next;
 
     work        = g_Task;
     next        = work->timer + 1;

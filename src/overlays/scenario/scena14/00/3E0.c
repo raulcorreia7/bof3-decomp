@@ -151,7 +151,7 @@ INCLUDE_ASM(func_801FB84C);
 
 MATCH void Scene_JoinPartyRyuAdultReiNinaAdult(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
@@ -170,7 +170,7 @@ INCLUDE_ASM(func_801FBE10);
 MATCH void func_801FBF18(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
@@ -179,7 +179,7 @@ MATCH void func_801FBF18(void) {
 
 MATCH void func_801FBFA8(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -197,7 +197,7 @@ MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {
 
 MATCH void func_801FC0C8(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, *D_80144908, 0U);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(*D_80144908);
@@ -209,7 +209,7 @@ INCLUDE_ASM(func_801FC130);
 
 MATCH void func_801FC1E8(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_StagePalettes();
 }
@@ -227,7 +227,7 @@ MATCH void func_801FC280(void) {
         }
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, character, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(character);

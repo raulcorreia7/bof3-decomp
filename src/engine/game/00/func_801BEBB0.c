@@ -27,15 +27,15 @@ MATCH void func_801BEBB0(void) {
     do {
         while ((random = RANDOM_MASK(0x7F)) >= 101) {
         }
-        if (slot < g_PartySize) {
+        if (slot < g_Game.party_size) {
             if (g_Characters[g_CharSlot[g_PartyFieldOrder[slot]]].stats.surprise_chance >= random) {
                 id = Actor_FindFreeSlot();
                 if (id != GAME_NONE) {
                     g_ActorSlots[id].header.flags = one;
                     g_ActorSlots[id].type         = 6;
                     g_ActorSlots[id].unk_06       = one;
-                    g_ActorSlots[id].unk_2E       = *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset);
-                    g_ActorSlots[id].unk_30       = *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset + 2);
+                    g_ActorSlots[id].unk_2E       = *(u16*)(((u8*)&g_Game.members[0].unk_2E) + offset);
+                    g_ActorSlots[id].unk_30       = *(u16*)(((u8*)&g_Game.members[0].unk_2E) + offset + 2);
                     g_ActorSlots[id].scene_step   = s_BattleStartOffsets[row[0]][0];
                     g_ActorSlots[id].selection    = s_BattleStartOffsets[row[0]][1];
                     /* FAKE: keeps the selection store ahead of the work-row id store (retail order). */

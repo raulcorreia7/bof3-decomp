@@ -8,7 +8,7 @@ MATCH u8 func_801E8FA8(void) {
 
     field = &g_BattleEffectBattler->slot;
     if (*field < 3) {
-        mask = g_BattlePartyBattlers[*field].chr.status;
+        mask = g_Game.members[*field].chr.status;
     } else {
         mask = ENEMY_COMBATANT(*field).status;
     }

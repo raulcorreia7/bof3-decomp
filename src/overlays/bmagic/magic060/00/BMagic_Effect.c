@@ -14,8 +14,8 @@ MATCH void func_801EEC34(void) {
 INCLUDE_ASM(func_801EECA4);
 
 MATCH void func_801EED68(void) {
-    u32           slot;
-    PartyBattler* work;
+    u32          slot;
+    PartyMember* work;
 
     if (g_Task->param.unk_0B == 2) {
         slot                               = Battle_AllocEffect(1, 0x12) & BYTE_MASK;
@@ -122,9 +122,9 @@ MATCH void func_801F0030(void) {
 }
 
 MATCH void func_801F0090(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
-    work = (PartyBattler*)g_BattleEffectBattler;
+    work = (PartyMember*)g_BattleEffectBattler;
     if (work->param.unk_0B == 0x83) {
         g_Task->header.step++;
     }
@@ -160,16 +160,16 @@ MATCH void func_801F031C(void) {
 }
 
 MATCH void func_801F037C(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
-    work = (PartyBattler*)g_BattleEffectBattler;
+    work = (PartyMember*)g_BattleEffectBattler;
     if (work->param.unk_0B == 0x83) {
         g_Task->header.step++;
     }
 }
 
 MATCH void func_801F03BC(void) {
-    PartyBattler* active;
+    PartyMember* active;
 
     g_Task->unk_09 = g_Task->unk_09 - 2;
     if (g_Task->unk_09 == 0) {
@@ -186,7 +186,7 @@ MATCH void func_801F07E8(void) {
 }
 
 MATCH void func_801F082C(void) {
-    PartyBattler** actor;
+    PartyMember** actor;
 
     actor = &g_BattleSelectedActor;
     GFX_FreePaletteFadeTarget(*actor);

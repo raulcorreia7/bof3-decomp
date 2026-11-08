@@ -11,12 +11,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
  * instructions). Permuter tried: best 2030, 23 errors (2400 iterations). */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC70(void) {
-    PartyBattler* src;
-    PartyBattler* work;
-    u32           slot;
-    u32           counter;
-    u32           value;
-    s32           span;
+    PartyMember* src;
+    PartyMember* work;
+    u32          slot;
+    u32          counter;
+    u32          value;
+    s32          span;
 
     src                  = BATTLE_ACTIVE_WORK;
     g_Task->facing       = src->facing;
@@ -74,15 +74,15 @@ MATCH void func_801EEE9C(void) {
 INCLUDE_ASM(func_801EEF3C);
 
 MATCH void func_801EF0D8(void) {
-    u32           slot;
-    PartyBattler* battler;
-    u8            timer;
+    u32          slot;
+    PartyMember* battler;
+    u8           timer;
 
     slot = LOBU(g_BattleTargetSelector);
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-        battler = &g_BattlePartyBattlers[slot];
+        battler = &g_Game.members[slot];
     } else {
-        battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+        battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
     if (g_Task->param.unk_0B & 1) {
         g_Task->unk_20 = (g_Task->unk_20 + 0x200) & 0xFFF;
@@ -124,12 +124,12 @@ INCLUDE_ASM(func_801EF4E8);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF8E8(void) {
-    SVECTOR       pos;
-    SVECTOR       rot;
-    MATRIX        matrix;
-    long          flags;
-    s32           height;
-    PartyBattler* work;
+    SVECTOR      pos;
+    SVECTOR      rot;
+    MATRIX       matrix;
+    long         flags;
+    s32          height;
+    PartyMember* work;
 
     PushMatrix();
     work   = g_Task;

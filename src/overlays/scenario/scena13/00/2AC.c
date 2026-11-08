@@ -134,8 +134,8 @@ MATCH void func_801F7568(void) {
     g_Task        = actor;
     actor->unk_29 = 2;
     func_8014D290();
-    TASK_SET(g_BattlePartyBattlers);
-    g_BattlePartyBattlers[0].unk_29 = 2;
+    TASK_SET(g_Game.members);
+    g_Game.members[0].unk_29 = 2;
     func_8014D290();
     g_Task = work;
 }
@@ -328,7 +328,7 @@ INCLUDE_ASM(func_801FBA34);
 
 MATCH void Scene_JoinPartyRyuAdultPecoMomo(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_PECO, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_PECO);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -345,14 +345,14 @@ MATCH void func_801FBBC4(void) {
         Party_RemoveMember(D_80144908[slot]);
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_StagePalettes();
 }
 
 MATCH void func_801FBC88(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0U);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
 }
 
@@ -364,7 +364,7 @@ MATCH void func_801FBCC4(void) {
         ids[slot] = D_80144908[slot];
     }
     EMI_LoaderStreamFamily(ids[0], ids[1], ids[2], 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(ids[0]);
     Party_JoinMember(ids[1]);
     Party_JoinMember(ids[2]);
@@ -382,13 +382,13 @@ MATCH void func_801FBDD8(void) {
     u8 slot;
 
     for (slot = 0; slot < 3; slot++) {
-        ids[slot] = g_BattlePartyBattlers[slot].chr.character_id;
+        ids[slot] = g_Game.members[slot].chr.character_id;
     }
     for (slot = 0; slot < 3; slot++) {
         Party_RemoveMember(ids[slot]);
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_StagePalettes();
 }

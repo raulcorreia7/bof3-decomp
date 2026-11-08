@@ -5,8 +5,8 @@
  */
 
 MATCH void func_801DF8AC(void) {
-    PartyBattler* battle_work = g_GameState;
-    Callback      handler;
+    PartyMember* battle_work = g_Game.current;
+    Callback     handler;
 
     if ((battle_work->u.turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
         handler = D_801EB188[0];

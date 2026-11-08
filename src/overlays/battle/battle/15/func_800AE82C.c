@@ -1,12 +1,12 @@
 #include "battle_15.h"
 
 MATCH void func_800AE82C(void) {
-    PartyBattler* work;
-    PartyBattler* row_work;
-    PartyBattler* tail_work;
-    u32           slot;
-    u8            count;
-    s32           value;
+    PartyMember* work;
+    PartyMember* row_work;
+    PartyMember* tail_work;
+    u32          slot;
+    u8           count;
+    s32          value;
 
     work         = BATTLE_WORK;
     count        = work->unk_09 - 1;
@@ -15,9 +15,9 @@ MATCH void func_800AE82C(void) {
         row_work = BATTLE_WORK;
         slot     = row_work->param.unk_0B;
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-            row_work->pos.x.fixed = g_BattlePartyBattlers[slot].pos.x.fixed;
-            row_work->pos.y.fixed = g_BattlePartyBattlers[row_work->param.unk_0B].pos.y.fixed;
-            value                 = g_BattlePartyBattlers[row_work->param.unk_0B].pos.z.fixed;
+            row_work->pos.x.fixed = g_Game.members[slot].pos.x.fixed;
+            row_work->pos.y.fixed = g_Game.members[row_work->param.unk_0B].pos.y.fixed;
+            value                 = g_Game.members[row_work->param.unk_0B].pos.z.fixed;
         } else {
             row_work->pos.x.fixed = ENEMY_COMBATANT(row_work->param.unk_0B).pos.x.fixed;
             row_work->pos.y.fixed = ENEMY_COMBATANT(row_work->param.unk_0B).pos.y.fixed;

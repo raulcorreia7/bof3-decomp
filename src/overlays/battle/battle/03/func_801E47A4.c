@@ -1,10 +1,10 @@
 #include "battle_03.h"
 
 MATCH void func_801E47A4(void) {
-    PartyBattler** scratch_slots;
-    PartyBattler*  work;
+    PartyMember** scratch_slots;
+    PartyMember*  work;
 
-    scratch_slots = SP_PTR(PartyBattler*, 0u);
+    scratch_slots = SP_PTR(PartyMember*, 0u);
     work          = scratch_slots[0x11];
     work->unk_48  = 2;
     work          = scratch_slots[0x11];

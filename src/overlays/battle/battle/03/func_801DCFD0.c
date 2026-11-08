@@ -17,11 +17,11 @@ MATCH void func_801DCFD0(void) {
     u8                 row;
 
     index = 0;
-    if (g_PartySize != 0) {
+    if (g_Game.party_size != 0) {
         do {
             row         = index & BYTE_MASK;
             slot_offset = row * BATTLE_PARTY_STRIDE;
-            dst         = (BattleRecordChunk*)(&g_Characters[g_BattlePartyBattlers[row].character_index]);
+            dst         = (BattleRecordChunk*)(&g_Characters[g_Game.members[row].character_index]);
             src         = (BattleRecordChunk*)(D_80145F04 + slot_offset);
             end         = (BattleRecordChunk*)(((u8*)src) + 0xA0u);
             do {

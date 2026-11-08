@@ -21,7 +21,7 @@ MATCH void func_801D9D38(void) {
     mode = (g_FishingLure && g_FishingRod) ? 0 : 6;
     func_801DDE94(mode);
 
-    if (g_GameState->chr.character_id == CHAR_ID_RYU_YOUNG) {
+    if (g_Game.current->chr.character_id == CHAR_ID_RYU_YOUNG) {
         Actor_BeginScript(0xA, 2);
     } else {
         Actor_SelectScript(0xB);

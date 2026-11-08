@@ -2,7 +2,7 @@
 */
 /* func_801EF3E4 (magic099), func_801F1318 (magic151) */
 MATCH void Effect_Wait(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->param.unk_0B++;

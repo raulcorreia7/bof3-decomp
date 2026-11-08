@@ -1,8 +1,8 @@
 /* Marks the selected battlers pending. Every change must verify every member. */
 /* func_801EF2EC (magic120), func_801EF1C4 (magic122) */
 MATCH void Effect_CountUpTimerCallSelector(void) {
-    PartyBattler* work;
-    u8            timer;
+    PartyMember* work;
+    u8           timer;
 
     work               = g_Task;
     work->param.unk_0B = work->param.unk_0B - 1;

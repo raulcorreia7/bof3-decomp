@@ -7,6 +7,6 @@ MATCH void Boss_ChooseBattleEnding(void) {
     } else {
         g_ScriptVars[0] = 0x32;
         func_801DDF28();
-        g_BattlePartyOrder = 3;
+        g_Game.battle_order = 3;
     }
 }

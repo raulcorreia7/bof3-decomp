@@ -2,9 +2,9 @@
    verify every member. */
 /* func_801EF59C (magic067), func_801EF2C4 (magic137) */
 MATCH void Effect_DriftStep(void) {
-    PartyBattler* work;
-    u8            timer;
-    u8            ticks;
+    PartyMember* work;
+    u8           timer;
+    u8           ticks;
 
     ticks               = g_Task->param.phase + 1;
     g_Task->param.phase = ticks + (g_Task->unk_09 >> 6);

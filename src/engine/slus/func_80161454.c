@@ -34,7 +34,7 @@ NON_MATCHING void func_80161454(u32 index) {
     Actor* work;
 
     val3 = 0;
-    if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {
+    if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
         work = g_Task;
         tmp0 = (s16)work->screen_y;
         val0 = (tmp0 + 0x40) * 0x2C;

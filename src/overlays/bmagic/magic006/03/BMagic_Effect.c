@@ -32,8 +32,8 @@ MATCH void func_801EEE48(void) {
 }
 
 MATCH void func_801EEF28(void) {
-    PartyBattler* battler;
-    u8            value;
+    PartyMember* battler;
+    u8           value;
 
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
@@ -56,8 +56,8 @@ MATCH void func_801EEF28(void) {
 }
 
 MATCH void func_801EF04C(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
 
     work->unk_14 += 0x80;
 
@@ -70,7 +70,7 @@ MATCH void func_801EF04C(void) {
 }
 
 MATCH void func_801EF0B8(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;
@@ -102,11 +102,11 @@ MATCH void func_801F0064(void) {
 }
 
 MATCH void func_801F0100(void) {
-    PartyBattler* actor;
-    PartyBattler* work;
-    s16*          angle_cell;
-    u8            count;
-    u8            phase;
+    PartyMember* actor;
+    PartyMember* work;
+    s16*         angle_cell;
+    u8           count;
+    u8           phase;
 
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -157,7 +157,7 @@ MATCH void func_801F04F4(void) {
 }
 
 MATCH void func_801F05A4(void) {
-    PartyBattler* src;
+    PartyMember* src;
 
     src                 = g_BattleSelectedActor;
     g_Task->pos.x.fixed = src->pos.x.fixed;
@@ -180,7 +180,7 @@ MATCH void func_801F05F4(void) {
 #include "overlays/bmagic/Effect_NextStepOnLastTick.h"
 
 MATCH void Effect_TickOnTimerZero_801F0684(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     BMAGIC_TICK_ON_TIMER_ZERO(EFFECT_TIMER_TICK);
 }

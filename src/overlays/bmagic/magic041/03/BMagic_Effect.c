@@ -9,8 +9,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EECB0);
 
 MATCH void func_801EEE14(void) {
-    u8             temp_v0;
-    PartyBattler** selected;
+    u8            temp_v0;
+    PartyMember** selected;
 
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
@@ -47,8 +47,8 @@ MATCH void func_801EF1D4(void) {
 }
 
 MATCH void func_801EF27C(void) {
-    PartyBattler* src;
-    PartyBattler* dst;
+    PartyMember* src;
+    PartyMember* dst;
 
     if (--g_Task->unk_09 == 0) {
         src              = g_BattleEffectBattler;
@@ -73,9 +73,9 @@ MATCH void func_801EF308(void) {
 }
 
 MATCH void func_801EF358(void) {
-    PartyBattler* work;
-    PartyBattler* active;
-    u8            count;
+    PartyMember* work;
+    PartyMember* active;
+    u8           count;
 
     work = g_Task;
     work->unk_09 += 4;
@@ -102,9 +102,9 @@ MATCH void func_801EF3D0(void) {
 }
 
 MATCH void func_801EF484(void) {
-    PartyBattler* src;
+    PartyMember* src;
 
-    src                 = (PartyBattler*)g_BattleEffectBattler;
+    src                 = (PartyMember*)g_BattleEffectBattler;
     g_Task->pos.x.fixed = src->pos.x.fixed;
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;

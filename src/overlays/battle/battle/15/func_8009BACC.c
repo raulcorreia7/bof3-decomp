@@ -24,7 +24,7 @@ MATCH s32 func_8009BACC(s32 diff) {
         result += 8;
     }
     for (slot = 0; slot < g_BattlePartyCount; slot++) {
-        if (!Battle_SlotIsBlocked(slot) && HAS_STATUS(g_BattlePartyBattlers[slot], 0x2000)) {
+        if (!Battle_SlotIsBlocked(slot) && HAS_STATUS(g_Game.members[slot], 0x2000)) {
             result += 8;
             break;
         }

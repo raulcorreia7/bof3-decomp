@@ -61,7 +61,7 @@ MATCH void func_801EF43C(void) {
 }
 
 MATCH void func_801EF4A8(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     func_8014D978();
     work = g_Task;
@@ -83,9 +83,8 @@ MATCH void func_801EF534(void) {
             value2                                     = g_Task->param.unk_0B;
             g_BattleEnemyBattlers[value2].header.flags = g_BattleEnemyBattlers[value2].header.flags & 0xBF;
         } else {
-            value = g_Task->param.unk_0B;
-            g_BattlePartyBattlers[value].header.flags =
-                g_BattlePartyBattlers[value].header.flags & ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+            value                              = g_Task->param.unk_0B;
+            g_Game.members[value].header.flags = g_Game.members[value].header.flags & ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
         g_Task->header.step += 1;
     }

@@ -1,17 +1,17 @@
 #include "battle_15.h"
 
 MATCH void func_800A8A28(void) {
-    volatile u8*  battler;
-    PartyBattler* work;
-    u8            index;
-    s32           delta_x;
-    s32           delta_y;
-    s32           delta_z;
+    volatile u8* battler;
+    PartyMember* work;
+    u8           index;
+    s32          delta_x;
+    s32          delta_y;
+    s32          delta_z;
 
     if ((func_801DEE4C() & BYTE_MASK) != 0) {
         battler = &g_BattleActiveBattler;
         index   = *battler;
-        work    = (PartyBattler*)g_Task;
+        work    = (PartyMember*)g_Task;
         delta_x = *(s32*)((u8*)&D_80145EC4 + index * BATTLE_PARTY_STRIDE) - work->pos.x.fixed;
         if (delta_x < 0) {
             delta_x += 0xF;

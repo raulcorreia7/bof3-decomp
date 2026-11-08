@@ -26,7 +26,7 @@ MATCH void Game_ResetGameState(void) {
     g_BattleEncounter       = 0u;
     D_80146880              = 0u;
     D_80146881              = 0u;
-    g_AreaWalkFlags         = world_flags | (0x4000u | AREA_WALK_ENTRY_PENDING);
+    g_Game.walk_flags       = world_flags | (0x4000u | AREA_WALK_ENTRY_PENDING);
     Game_RequestAreaChange(area_id, entry_x, entry_y, entry_facing);
 
     if (*(u32*)&g_PlayClock != 0u) {

@@ -5,6 +5,6 @@ MATCH void func_800C1BA8(void) {
 
     slot                               = Battle_AllocEffect(1, 0x5D) & BYTE_MASK;
     g_BattleEffects[slot].target.party = g_Task;
-    ((PartyBattler*)g_Task)->timer += 1;
-    ((PartyBattler*)g_Task)->header.mode += 1;
+    ((PartyMember*)g_Task)->timer += 1;
+    ((PartyMember*)g_Task)->header.mode += 1;
 }

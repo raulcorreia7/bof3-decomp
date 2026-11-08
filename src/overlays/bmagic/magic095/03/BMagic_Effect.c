@@ -10,17 +10,17 @@ INCLUDE_ASM(func_801EEC18);
 INCLUDE_ASM(func_801EEC9C);
 
 MATCH void func_801EEE60(void) {
-    u32           slot;
-    PartyBattler* battler;
-    s32           timer;
+    u32          slot;
+    PartyMember* battler;
+    s32          timer;
 
     func_801EFDDC();
     if (g_Task->timer == 0xC) {
         slot = LOBU(g_BattleTargetSelector);
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-            battler = &g_BattlePartyBattlers[slot];
+            battler = &g_Game.members[slot];
         } else {
-            battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+            battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
         }
         GFX_FreePaletteFadeTarget(battler);
         GFX_AllocPaletteFade(battler, 6, 4, 8, 0);
@@ -63,10 +63,10 @@ MATCH void func_801EEFFC(void) {
 }
 
 MATCH void func_801EF070(void) {
-    u8            timer;
-    u32           slot;
-    u8*           selector;
-    PartyBattler* battler;
+    u8           timer;
+    u32          slot;
+    u8*          selector;
+    PartyMember* battler;
 
     func_801EFDDC();
     timer         = g_Task->timer - 1;

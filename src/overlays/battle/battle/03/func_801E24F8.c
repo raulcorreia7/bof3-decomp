@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801E24F8(u32 enemy_index, u32 script_index) {
-    volatile PartyBattler* saved_work;
+    volatile PartyMember*  saved_work;
     volatile EnemyBattler* saved_enemy;
     volatile EnemyBattler* enemy;
 

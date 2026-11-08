@@ -12,15 +12,15 @@ MATCH void func_801BD394(void) {
     u8     flag;
 
     flag = 0;
-    if (((g_BattlePartyBattlers[0].chr.character_id == 3) || (g_BattlePartyBattlers[0].chr.character_id == 6)) &&
-        ((*(u32*)g_BattlePartyBattlers & 0xFFFF00) == 0x10A00)) {
+    if (((g_Game.members[0].chr.character_id == 3) || (g_Game.members[0].chr.character_id == 6)) &&
+        ((*(u32*)g_Game.members & 0xFFFF00) == 0x10A00)) {
         flag = 1;
     }
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
         flag = 1;
     }
     work  = g_Task;
-    slot  = (Actor*)((u8*)g_BattlePartyBattlers + work->unk_06 * BATTLE_PARTY_STRIDE);
+    slot  = (Actor*)((u8*)g_Game.members + work->unk_06 * BATTLE_PARTY_STRIDE);
     count = slot->timer;
     x     = slot->pos.x.fixed + slot->vx * count;
     y     = slot->pos.y.fixed + slot->vy * count;
@@ -39,12 +39,12 @@ MATCH void func_801BD394(void) {
             flag = 1;
         }
     }
-    if ((g_AreaWalkFlags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_MENU_ACTIVE | AREA_WALK_TRANSITION)) || flag) {
-        g_GameState->u.field.mode_12B.u8_value = 0;
+    if ((g_Game.walk_flags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_MENU_ACTIVE | AREA_WALK_TRANSITION)) || flag) {
+        g_Game.current->u.field.mode_12B.u8_value = 0;
     } else {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
-    if (g_GameState->u.field.mode_12B.u8_value == 0) {
+    if (g_Game.current->u.field.mode_12B.u8_value == 0) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->timer = 0;
         Party_ClearBattlerState(g_Task->unk_05);

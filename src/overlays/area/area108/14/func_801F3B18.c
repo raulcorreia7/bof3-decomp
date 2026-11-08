@@ -5,7 +5,7 @@ MATCH void func_801F3B18(void) {
     u8     i;
 
     for (i = 0; i < g_PartySize; i++) {
-        TASK_SET(&g_BattlePartyBattlers[i]);
+        TASK_SET(&g_Game.members[i]);
         g_Task->unk_29 = 6;
     }
     g_Task = saved;

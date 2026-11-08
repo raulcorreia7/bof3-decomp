@@ -5,8 +5,8 @@ MATCH s32 func_801EF6C0(void) {
 
     for (slot = 0; slot < g_BattlePartyCount; slot++) {
         if (func_801DB524(slot) == 0) {
-            if ((g_BattlePartyBattlers[slot].chr.equip.accessories[0] == ACCESSORY_MIDAS_STONE) ||
-                (g_BattlePartyBattlers[slot].chr.equip.accessories[1] == ACCESSORY_MIDAS_STONE)) {
+            if ((g_Game.members[slot].chr.equip.accessories[0] == ACCESSORY_MIDAS_STONE) ||
+                (g_Game.members[slot].chr.equip.accessories[1] == ACCESSORY_MIDAS_STONE)) {
                 return 1;
             }
         }

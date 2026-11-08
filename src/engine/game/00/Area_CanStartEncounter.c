@@ -9,7 +9,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     s32    x;
     s32    dy;
 
-    if (g_GameFlags & 0x20) {
+    if (g_Game.flags & 0x20) {
         D_80145FB8 = 0;
     }
     if (FIELD(u8, func_801B3C3C(D_80145EC6, D_80145ECA), 0x4u) == 0) {
@@ -18,7 +18,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (D_80145FB8 == 0) {
         return 0;
     }
-    if (g_AreaPartySpeed[0].level.u8_value < 4) {
+    if (g_Game.members[0].u.field.counter_11C.u8_value < 4) {
         value = ((u16)D_80143F22 * 7) / 10;
     } else {
         value = (u16)D_80143F22;
@@ -26,14 +26,14 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (value < D_80145FB8) {
         return 0;
     }
-    if (g_BattlePartyBattlers[0].status.field.flags_12C.u8_value & 1) {
+    if (g_Game.members[0].status.field.flags_12C.u8_value & 1) {
         return 0;
     }
     if (!(g_GameRequestFlags & 1) && D_80143EFC >= 0xF1) {
         return 0;
     }
-    for (i = 0; i < g_PartySize; i++) {
-        if (g_BattlePartyBattlers[i].header.flags & ACTOR_FLAG_HIDDEN) {
+    for (i = 0; i < g_Game.party_size; i++) {
+        if (g_Game.members[i].header.flags & ACTOR_FLAG_HIDDEN) {
             return 0;
         }
     }
@@ -42,7 +42,7 @@ MATCH s32 Area_CanStartEncounter(void) {
         ok     = Area_BuildEncounter(4, 0);
         g_Task = work;
         if (ok != 0) {
-            for (i = 0; i < g_PartySize; i++) {
+            for (i = 0; i < g_Game.party_size; i++) {
                 ok = func_801C472C(g_EncounterParty[i].x.fixed, g_EncounterParty[i].y.fixed,
                                    D_80181B1C[g_PartyBattleOrder[i]], 0x10, 1);
                 if (ok == 0) {

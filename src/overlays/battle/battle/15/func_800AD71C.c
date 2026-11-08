@@ -1,9 +1,9 @@
 #include "battle_15.h"
 
 MATCH void func_800AD71C(void) {
-    volatile PartyBattler* record;
-    s16                    label;
-    u8                     count;
+    volatile PartyMember* record;
+    s16                   label;
+    u8                    count;
 
     BATTLE_WORK->unk_29 = 1;
     BATTLE_WORK->unk_25 = 0x1E;
@@ -12,16 +12,16 @@ MATCH void func_800AD71C(void) {
     BATTLE_WORK->unk_27 = 0x1B;
     BATTLE_WORK->unk_28 = 1;
     {
-        PartyBattler* record;
-        PartyBattler* other;
+        PartyMember* record;
+        PartyMember* other;
 
-        record                     = (PartyBattler*)g_Task;
+        record                     = (PartyMember*)g_Task;
         record->unk_2B             = 0;
-        other                      = (PartyBattler*)g_Task;
+        other                      = (PartyMember*)g_Task;
         record->unk_2C.signed_half = 2;
         other->unk_2A              = 0;
     }
-    record              = (PartyBattler*)g_Task;
+    record              = (PartyMember*)g_Task;
     record->pos.z.fixed = 0;
     record->unk_2E.half = D_80148628 + 0x14;
     count               = record->header.mode;

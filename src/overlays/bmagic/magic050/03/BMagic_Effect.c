@@ -62,8 +62,8 @@ INCLUDE_ASM(func_801EEFDC);
 #include "../../Effect_CountUpTimerByTwoAndStep.h"
 
 MATCH void func_801EF138(void) {
-    PartyBattler* work;
-    u8            count;
+    PartyMember* work;
+    u8           count;
 
     work = g_Task;
     work->timer++;

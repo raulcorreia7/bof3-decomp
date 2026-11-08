@@ -83,8 +83,8 @@ MATCH void func_801EF27C(void) {
 }
 
 MATCH void func_801EF2F8(void) {
-    PartyBattler* work;
-    PartyBattler* active;
+    PartyMember* work;
+    PartyMember* active;
 
     work         = g_Task;
     work->timer  = work->timer + 1;
@@ -126,7 +126,7 @@ MATCH void func_801F020C(void) {
 }
 
 MATCH void func_801F02F4(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->timer == 0) {
@@ -139,8 +139,8 @@ MATCH void func_801F02F4(void) {
 }
 
 MATCH void func_801F034C(void) {
-    PartyBattler* work;
-    u8            next;
+    PartyMember* work;
+    u8           next;
 
     func_801EFA54();
     func_801F03C4();

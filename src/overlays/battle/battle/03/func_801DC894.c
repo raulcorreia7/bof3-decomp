@@ -10,7 +10,7 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
         return damage;
     }
     if (BATTLER_IS_PLAYER(attacker)) {
-        if (HAS_STATUS(g_BattlePartyBattlers[attacker], STATUS_BLIND) && RANDOM_MASK(2)) {
+        if (HAS_STATUS(g_Game.members[attacker], STATUS_BLIND) && RANDOM_MASK(2)) {
             ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
             return 0;
         }
@@ -18,7 +18,7 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
         ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
         return 0;
     }
-    if (attacker < 3 && (g_BattlePartyBattlers[attacker].u.turn.action_flags.value & COMBATANT_FLAG_ALWAYS_HITS)) {
+    if (attacker < 3 && (g_Game.members[attacker].u.turn.action_flags.value & COMBATANT_FLAG_ALWAYS_HITS)) {
         return damage;
     }
     if ((ENEMY_COMBATANT(target).event_flags & ENEMY_EVENT_EVADE) && (rand() & 2)) {

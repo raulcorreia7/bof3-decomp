@@ -45,7 +45,7 @@ MATCH void func_801EF268(void) {
 #include "../../Effect_CountUpWorkByteAndStep.h"
 
 MATCH void func_801EF324(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (++work->unk_0C == 0x2E) {

@@ -1,7 +1,7 @@
 #include "boss001_13.h"
 
 MATCH void func_800C1CE4(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     func_801E2314(4);
     work       = g_Task;

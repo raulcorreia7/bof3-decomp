@@ -6,8 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 MATCH void func_801EEC28(void) {
     Magic058Steps handlers = D_801EEC04;
-    PartyBattler* saved_task;
-    PartyBattler* saved_battler;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
     u8            i;
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
@@ -16,7 +16,7 @@ MATCH void func_801EEC28(void) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyBattler*)&BMAGIC_EFFECT_SLOTS[i];
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
             g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
             func_801EF36C();
             g_BattleEffectBattler = saved_battler;
@@ -59,9 +59,9 @@ MATCH void func_801EEF74(void) {
 }
 
 MATCH void func_801EF008(void) {
-    PartyBattler* work;
-    PartyBattler* actor;
-    s32           z;
+    PartyMember* work;
+    PartyMember* actor;
+    s32          z;
 
     g_Task->facing    = g_BattleEffectBattler->facing;
     work              = g_Task;
@@ -98,7 +98,7 @@ MATCH void func_801EF3B0(void) {
 INCLUDE_ASM(func_801EF454);
 
 MATCH void func_801EF5D4(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work         = g_Task;
     work->unk_0C = work->unk_0C + work->unk_18;

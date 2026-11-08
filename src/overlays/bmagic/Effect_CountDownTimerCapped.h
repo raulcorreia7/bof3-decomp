@@ -4,11 +4,11 @@
  * verify every member. */
 /* Effect_CountDownTimerCapped (magic056, magic103) */
 MATCH void Effect_CountDownTimerCapped(void) {
-    PartyBattler* first;
-    PartyBattler* work;
-    PartyBattler* active;
-    u8            timer;
-    u8            count;
+    PartyMember* first;
+    PartyMember* work;
+    PartyMember* active;
+    u8           timer;
+    u8           count;
 
     first = g_Task;
     timer = first->unk_09;

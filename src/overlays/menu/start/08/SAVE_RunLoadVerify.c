@@ -34,7 +34,7 @@ MATCH void SAVE_RunLoadVerify(void) {
                 sum += *src++;
                 dst++;
             }
-            g_GameFlags = D_80145025;
+            g_Game.flags = D_80145025;
             if ((sum & SAVE_CHECKSUM_MASK) != stored) {
                 SND_PlayCue(EMI_CUE_ID(1, 7));
                 g_SaveCardStatus = SAVE_STATUS_BAD_CHECKSUM;

@@ -9,9 +9,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC70);
 
 MATCH void func_801EEDB8(void) {
-    u8            timer;
-    u32           slot;
-    PartyBattler* work;
+    u8           timer;
+    u32          slot;
+    PartyMember* work;
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
@@ -54,8 +54,8 @@ MATCH void func_801EEF78(void) {
 }
 
 MATCH void func_801EEFF8(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
 
     work->pos.y.fixed += 0xFFFF4000;
 

@@ -1,14 +1,14 @@
 #include "battle_15.h"
 
 MATCH void func_800AD5C8(void) {
-    PartyBattler* work;
+    PartyMember*  work;
     u8            count;
     u8            i;
     volatile u16* base;
 
     i = 0;
     if (g_BattleGeneCount[0] != 0) {
-        work  = (PartyBattler*)g_Task;
+        work  = (PartyMember*)g_Task;
         count = work->param.unk_0B;
         base  = (u16*)(&D_80148628);
         do {

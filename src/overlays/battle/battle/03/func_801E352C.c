@@ -1,10 +1,10 @@
 #include "battle_03.h"
 
 MATCH void func_801E352C(void) {
-    PartyBattler* work;
-    PartyBattler* work2;
-    s32           y;
-    s16           value;
+    PartyMember* work;
+    PartyMember* work2;
+    s32          y;
+    s16          value;
 
     func_801E30F8();
     work = g_Task;

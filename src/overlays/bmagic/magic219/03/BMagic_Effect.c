@@ -6,8 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 MATCH void func_801EEC14(void) {
     Magic219Steps handlers = D_801EEC04;
-    PartyBattler* saved_task;
-    PartyBattler* saved_battler;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
     u8            i;
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
@@ -16,7 +16,7 @@ MATCH void func_801EEC14(void) {
         if (D_801EFA14[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyBattler*)&D_801EFA14[i];
+            g_Task                = (PartyMember*)&D_801EFA14[i];
             g_BattleEffectBattler = D_801EFA14[i].target.party;
             func_801EF024();
             g_BattleEffectBattler = saved_battler;
@@ -64,7 +64,7 @@ INCLUDE_ASM(func_801EF118);
 INCLUDE_ASM(func_801EF3CC);
 
 MATCH void func_801EF530(void) {
-    PartyBattler* work = g_Task;
+    PartyMember* work = g_Task;
 
     work->unk_25      = 0x1D;
     work->pos.x.fixed = work->unk_0C;

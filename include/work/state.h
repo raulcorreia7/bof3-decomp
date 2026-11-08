@@ -37,32 +37,9 @@ ASSERT_OFFSET(SceneState, state_04, 0x04);
 ASSERT_OFFSET(SceneState, step_05, 0x05);
 ASSERT_OFFSET(SceneState, timer_06, 0x06);
 
-/* The mode and flag bytes (FieldModeWork mode_12B and flags_12C) of each mode work
- * record, addressed from the first record's mode byte at a 0x140 stride. */
-typedef struct AreaPartyMode {
-    u8 mode;
-    u8 flags;
-    u8 pad_02[0x13E];
-} AreaPartyMode;
-
-ASSERT_SIZE(AreaPartyMode, 0x140);
-
-/* The movement speed level (FieldModeWork counter_11C, an index into g_RouteSpeedScale) of each mode work
- * record, addressed from the first record's level byte at a 0x140 stride. */
-typedef struct AreaPartySpeed {
-    PanelCounter level;
-    u8           pad_01[0x13F];
-} AreaPartySpeed;
-
-ASSERT_SIZE(AreaPartySpeed, 0x140);
-
-/* D_80145FBB */
-extern AreaPartyMode  D_80145FBB[]; /* 0x80145FBB */
-/* D_80145FAC */
-extern AreaPartySpeed g_AreaPartySpeed[]; /* 0x80145FAC */
 /* The scenario record the overlays switch on. */
 /* D_80146870 */
-extern SceneState     g_SceneState; /* 0x80146870 */
+extern SceneState g_SceneState; /* 0x80146870 */
 /* state_04 and step_05 as one halfword (step in the high byte); area085 and
  * area105 compare the pair with one lhu. */
 #define SCENE_PROGRESS (*(u16*)&g_SceneState.state_04)

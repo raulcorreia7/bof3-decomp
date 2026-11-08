@@ -54,7 +54,7 @@ NON_MATCHING void func_801D43EC(void) {
             index              = g_BattleActiveBattler;
             if ((u8)index < 3U) {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);
-                flags = g_BattlePartyBattlers[index].turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
+                flags                         = g_Game.members[index].turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
             } else {
                 /* The party side reads the same block three bytes in; one address keeps both reads alike. */
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_801EB6D0 + 3);

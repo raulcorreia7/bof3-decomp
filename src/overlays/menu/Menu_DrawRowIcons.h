@@ -10,7 +10,7 @@ MATCH void Menu_DrawRowIcons(u8* row_record, s32 palette_index) {
     UI_DrawWindow(*(u16*)(row_record + 4), *(u16*)(row_record + 6), 139, 159, (palette_index + 0xF0) & BYTE_MASK,
                   g_WindowStyle);
     Menu_DrawEquipment(*(u16*)(row_record + 4), *(u16*)(row_record + 6),
-                       g_BattlePartyBattlers[row_record[0xC]].character_index, palette);
-    Menu_DrawItemRow(*(u16*)(row_record + 4), *(u16*)(row_record + 6),
-                     g_BattlePartyBattlers[row_record[0xC]].character_index, palette);
+                       g_Game.members[row_record[0xC]].character_index, palette);
+    Menu_DrawItemRow(*(u16*)(row_record + 4), *(u16*)(row_record + 6), g_Game.members[row_record[0xC]].character_index,
+                     palette);
 }

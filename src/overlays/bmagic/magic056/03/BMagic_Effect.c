@@ -72,7 +72,7 @@ MATCH void Effect_CopyBattlerCoords_801EFAD8(void) {
 }
 
 MATCH void func_801EFB38(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->timer += 2;
@@ -108,8 +108,8 @@ MATCH void func_801EFFE8(void) {
 #include "overlays/bmagic/Effect_PrimeTintOnScriptReady.h"
 
 MATCH void func_801F00C8(void) {
-    PartyBattler* work;
-    PartyBattler* source;
+    PartyMember* work;
+    PartyMember* source;
 
     g_Task->unk_5D -= 16;
     g_Task->unk_5E -= 16;

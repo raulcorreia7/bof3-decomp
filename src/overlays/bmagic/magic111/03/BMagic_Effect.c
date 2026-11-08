@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EEC7C);
 MATCH void func_801EEF44(void) {
     if (g_Task->param.unk_0B == 0) {
         func_800AEF98(4, 0);
-        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         func_800A9820(g_BattleTargetSelector);
         g_Task->header.mode += 1;
     }
@@ -34,7 +34,7 @@ MATCH void func_801EF03C(void) {
 }
 
 MATCH void func_801EF0C0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work              = g_Task;
     work->unk_29      = 2;
@@ -43,10 +43,10 @@ MATCH void func_801EF0C0(void) {
 }
 
 MATCH void func_801EF0F0(void) {
-    u8            step;
-    PartyBattler* work;
+    u8           step;
+    PartyMember* work;
 
-    work = (PartyBattler*)g_BattleEffectBattler;
+    work = (PartyMember*)g_BattleEffectBattler;
     step = work->param.unk_0B;
     if (step < 2) {
         work->param.unk_0B  = step - 1;
@@ -103,7 +103,7 @@ MATCH void func_801EF870(void) {
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 
 MATCH void Effect_TickOnTimerZero_801EF914(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     BMAGIC_TICK_ON_TIMER_ZERO(2);
 }

@@ -11,9 +11,9 @@ INCLUDE_ASM(func_801EED28);
 #include "overlays/bmagic/Effect_Pause.h"
 
 MATCH void func_801EEEA0(void) {
-    u8*           selector;
-    u32           slot;
-    PartyBattler* work;
+    u8*          selector;
+    u32          slot;
+    PartyMember* work;
 
     selector = (u8*)&g_BattleTargetSelector;
     if (!(Battle_SlotIsBlocked(*selector) & 0xFF) && (func_800AED5C(1, *selector) & 0xFF)) {
@@ -56,8 +56,8 @@ INCLUDE_ASM(func_801EF1F0);
 INCLUDE_ASM(func_801EF36C);
 
 MATCH void func_801EF484(void) {
-    PartyBattler* work;
-    PartyBattler* active;
+    PartyMember* work;
+    PartyMember* active;
 
     work = g_Task;
     if (work->param.unk_0B == 0) {

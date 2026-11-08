@@ -1,7 +1,7 @@
 #include "boss051_16.h"
 
 MATCH void func_800C1CE4(void) {
-    PartyBattler* saved;
+    PartyMember* saved;
 
     saved  = g_Task;
     g_Task = g_BattleEffectBattler;

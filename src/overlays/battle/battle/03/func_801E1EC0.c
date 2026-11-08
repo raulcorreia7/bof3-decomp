@@ -8,11 +8,11 @@ typedef struct WorkChunk {
 } WorkChunk;
 
 MATCH void func_801E1EC0(void) {
-    u32                    effect_slot;
-    WorkChunk*             src;
-    WorkChunk*             dst;
-    WorkChunk*             end;
-    volatile PartyBattler* work;
+    u32                   effect_slot;
+    WorkChunk*            src;
+    WorkChunk*            dst;
+    WorkChunk*            end;
+    volatile PartyMember* work;
 
     effect_slot = Battle_AllocEffect(0, 0xF);
     dst         = (WorkChunk*)&g_BattleEffects[effect_slot & BYTE_MASK];
@@ -34,8 +34,8 @@ MATCH void func_801E1EC0(void) {
     g_BattleEffects[effect_slot & BYTE_MASK].unk_0B        = effect_slot;
     g_BattleEffects[effect_slot & BYTE_MASK].target.party  = g_Task;
     g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
-    g_Task->unk_09                     = 0x10;
-    g_Task->timer                      = 0x10;
-    work                               = g_Task;
-    ((PartyBattler*)work)->header.step = (((PartyBattler*)work)->header.step + 1);
+    g_Task->unk_09                    = 0x10;
+    g_Task->timer                     = 0x10;
+    work                              = g_Task;
+    ((PartyMember*)work)->header.step = (((PartyMember*)work)->header.step + 1);
 }

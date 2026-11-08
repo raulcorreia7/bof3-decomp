@@ -4,21 +4,21 @@
 /* func_800A8EB8 (battle), func_800C26A4 (boss033) */
 MATCH void Effect_ShakeScreen(void) {
     {
-        PartyBattler* work;
+        PartyMember* work;
 
-        work         = (PartyBattler*)g_Task;
+        work         = (PartyMember*)g_Task;
         work->unk_5D = -(work->param.unk_0B * 16);
-        work         = (PartyBattler*)g_Task;
+        work         = (PartyMember*)g_Task;
         work->unk_5F = -(work->param.unk_0B * 16);
-        work         = (PartyBattler*)g_Task;
+        work         = (PartyMember*)g_Task;
         work->unk_5E = -(work->param.unk_0B * 16);
     }
     func_8014DAEC();
     {
-        PartyBattler* work;
-        u8            old;
+        PartyMember* work;
+        u8           old;
 
-        work         = (PartyBattler*)g_Task;
+        work         = (PartyMember*)g_Task;
         old          = work->unk_09;
         work->unk_09 = old + 255;
         if (old == 0) {

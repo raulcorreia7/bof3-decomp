@@ -22,11 +22,11 @@ MATCH s32 func_801C4FE0(void) {
     moved   = 0;
 
     result = Area_ReadHeight(x, y);
-    slot   = g_GameState->chr.character_id;
+    slot   = g_Game.current->chr.character_id;
     if (result - D_80181B70[slot] < counter) {
         COORD_INT(g_Task->pos.z) -= D_80181B88[slot];
     } else {
-        COORD_INT(g_Task->pos.z) = Area_ReadHeight(x, y) - D_80181B70[FIELD(volatile u8, g_GameState, 0x79u)];
+        COORD_INT(g_Task->pos.z) = Area_ReadHeight(x, y) - D_80181B70[FIELD(volatile u8, g_Game.current, 0x79u)];
         if (g_Task->direction_08 == FACING_LEFT) {
             Actor_RequestScript(0x3C);
         } else {
@@ -35,7 +35,8 @@ MATCH s32 func_801C4FE0(void) {
         moved = 1;
     }
 
-    if (g_Task->unk_05 == 0 && !((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+    if (g_Task->unk_05 == 0 &&
+        !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_AdvanceScroll((s16)COORD_INT(g_Task->pos.z));
     }
     if (!(g_FrameCount & 3)) {

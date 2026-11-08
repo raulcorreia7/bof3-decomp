@@ -7,7 +7,7 @@ MATCH s32 Game_RequestMenuOnInput(void) {
     if ((g_InputPressed & g_InputMasks[FIELD_INPUT_MENU]) == 0) {
         return 0;
     }
-    if (g_GameFlags & GAME_FLAG_MENU_LOCK) {
+    if (g_Game.flags & GAME_FLAG_MENU_LOCK) {
         return 0;
     }
     SND_PlayCue(EMI_CUE_ID(1, 5));

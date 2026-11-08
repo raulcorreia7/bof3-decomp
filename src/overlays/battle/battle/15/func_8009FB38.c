@@ -19,7 +19,7 @@ NON_MATCHING void func_8009FB38(void) {
     selected_battler_address = (u8*)(&g_BattleTarget);
     battler                  = *selected_battler_address;
     if (battler < 3U) {
-        template_index = g_BattlePartyBattlers[battler].character_index;
+        template_index = g_Game.members[battler].character_index;
         stat_base      = g_Characters;
         Char_RebuildStats((u8*)(&stat_base[template_index]));
         row_index = 0;
@@ -28,10 +28,10 @@ NON_MATCHING void func_8009FB38(void) {
             src_base     = stat_base;
             active_count = (volatile u8*)(selected_battler_address - 0xA4);
             do {
-                row_offset = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
-                src     = (Character*)(((&g_BattlePartyBattlers[0].character_index)[row_offset] * PARTY_RECORD_STRIDE) +
-                                       ((u8*)src_base));
-                dst_row = dst_base + row_offset;
+                row_offset    = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
+                src           = (Character*)(((&g_Game.members[0].character_index)[row_offset] * PARTY_RECORD_STRIDE) +
+                                             ((u8*)src_base));
+                dst_row       = dst_base + row_offset;
                 dst_row[0x0E] = src->equip.weapon;
                 dst_row[0x0F] = src->equip.shield;
                 dst_row[0x10] = src->equip.helmet;

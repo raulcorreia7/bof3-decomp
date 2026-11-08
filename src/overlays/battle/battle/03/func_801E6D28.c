@@ -18,7 +18,7 @@ MATCH void func_801E6D28(void) {
         }
         field     = &g_BattleEffectBattler->slot;
         index     = *field;
-        row_flags = &g_BattlePartyBattlers[index].chr.status;
+        row_flags = &g_Game.members[index].chr.status;
         flags     = *row_flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
     } else {
         if ((Battle_SlotIsBlocked(index) & BYTE_MASK) != 0) {

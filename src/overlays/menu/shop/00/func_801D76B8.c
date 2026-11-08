@@ -26,7 +26,7 @@ MATCH void func_801D76B8(void) {
         }
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        id = g_BattlePartyBattlers[(s8)D_80148656].character_index;
+        id = g_Game.members[(s8)D_80148656].character_index;
         if (g_Zenny < (g_Characters[id].level * 10)) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             D_8014865B = 0xB;

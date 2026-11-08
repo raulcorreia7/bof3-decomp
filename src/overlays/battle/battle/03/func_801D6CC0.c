@@ -1,14 +1,14 @@
 #include "battle_03.h"
 
 MATCH void func_801D6CC0(void) {
-    if (ACTOR_IN_USE(g_BattlePartyBattlers[0])) {
-        g_BattlePartyBattlers[0].header.mode = 2u;
+    if (ACTOR_IN_USE(g_Game.members[0])) {
+        g_Game.members[0].header.mode = 2u;
     }
-    if (ACTOR_IN_USE(g_BattlePartyBattlers[1])) {
-        g_BattlePartyBattlers[1].header.mode = 2u;
+    if (ACTOR_IN_USE(g_Game.members[1])) {
+        g_Game.members[1].header.mode = 2u;
     }
-    if (ACTOR_IN_USE(g_BattlePartyBattlers[2])) {
-        g_BattlePartyBattlers[2].header.mode = 2u;
+    if (ACTOR_IN_USE(g_Game.members[2])) {
+        g_Game.members[2].header.mode = 2u;
     }
     if ((g_BattleOutcome.options & BATTLE_OPT_KEEP_BGM) == 0u) {
         SND_StopAllSequences();

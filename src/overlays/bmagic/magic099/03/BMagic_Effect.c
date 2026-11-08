@@ -19,7 +19,7 @@ MATCH void func_801EEE70(void) {
 }
 
 MATCH void func_801EEF98(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->param.unk_0B != 0) {
@@ -74,9 +74,9 @@ MATCH void func_801EF374(void) {
 #include "overlays/bmagic/Effect_Wait.h"
 
 MATCH void func_801EF44C(void) {
-    PartyBattler* work;
-    PartyBattler* active;
-    u8            count;
+    PartyMember* work;
+    PartyMember* active;
+    u8           count;
 
     work = g_Task;
     work->param.unk_0B++;
@@ -91,7 +91,7 @@ MATCH void func_801EF44C(void) {
 }
 
 MATCH void func_801EF4C4(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     D_801F09B0[work->header.step]();
@@ -105,11 +105,11 @@ MATCH void func_801EF4C4(void) {
 }
 
 MATCH void func_801EF554(void) {
-    PartyBattler* work;
-    s32           temp;
-    s32           angle;
-    s32*          angle_cell;
-    s32           velocity;
+    PartyMember* work;
+    s32          temp;
+    s32          angle;
+    s32*         angle_cell;
+    s32          velocity;
 
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
@@ -142,11 +142,11 @@ MATCH void func_801EF6C4(void) {
 }
 
 MATCH void func_801EF7D8(void) {
-    PartyBattler* work;
-    s32           counter;
-    s32           angle;
-    s32*          angle_cell;
-    s32           velocity;
+    PartyMember* work;
+    s32          counter;
+    s32          angle;
+    s32*         angle_cell;
+    s32          velocity;
 
     g_Task->param.unk_0B++;
 
@@ -185,11 +185,11 @@ MATCH void func_801F0008(void) {
 }
 
 MATCH void func_801F0090(void) {
-    PartyBattler* work;
-    s32           counter;
-    s32           angle;
-    s32*          angle_cell;
-    s32           velocity;
+    PartyMember* work;
+    s32          counter;
+    s32          angle;
+    s32*         angle_cell;
+    s32          velocity;
 
     g_Task->param.unk_0B = RANDOM_MASK(0xF);
     g_Task->unk_09       = 0;
@@ -214,7 +214,7 @@ MATCH void func_801F0090(void) {
 }
 
 MATCH void func_801F01AC(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->timer < 16) {
@@ -231,12 +231,12 @@ MATCH void func_801F0200(void) {
 }
 
 MATCH void func_801F0314(void) {
-    PartyBattler* work;
-    PartyBattler* scratch;
-    s32           counter;
-    s32           angle;
-    s32*          angle_cell;
-    s32           velocity;
+    PartyMember* work;
+    PartyMember* scratch;
+    s32          counter;
+    s32          angle;
+    s32*         angle_cell;
+    s32          velocity;
 
     g_Task->param.unk_0B++;
 

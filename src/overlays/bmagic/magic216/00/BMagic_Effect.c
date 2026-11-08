@@ -7,9 +7,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/BMagic_RunStep.h"
 
 MATCH void func_801EEC70(void) {
-    PartyBattler* work;
-    PartyBattler* actor;
-    s32           z;
+    PartyMember* work;
+    PartyMember* actor;
+    s32          z;
 
     g_Task->facing     = g_BattleEffectBattler->facing;
     work               = g_Task;

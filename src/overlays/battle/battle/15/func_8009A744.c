@@ -41,7 +41,7 @@ NON_MATCHING void func_8009A744(void) {
     if (g_BattlePartyCount != 0) {
         i = 0;
         do {
-            cell      = &g_Characters[g_BattlePartyBattlers[i].character_index];
+            cell      = &g_Characters[g_Game.members[i].character_index];
             row       = D_80145F04 + i * BATTLE_PARTY_STRIDE;
             row[0x0E] = cell[0x0E];
             row[0x0F] = cell[0x0F];
@@ -58,7 +58,7 @@ NON_MATCHING void func_8009A744(void) {
     j = 0;
     do {
         row = D_80145F20 + j * BATTLE_PARTY_STRIDE;
-        if (ACTOR_IN_USE(g_BattlePartyBattlers[j])) {
+        if (ACTOR_IN_USE(g_Game.members[j])) {
             memcpy(&row[0x00], &row[0x20], 0x20);
         }
         j++;

@@ -41,9 +41,9 @@ MATCH void func_801EF524(void) {
 }
 
 MATCH void func_801EF5BC(void) {
-    s32           angle;
-    u8            count;
-    PartyBattler* work;
+    s32          angle;
+    u8           count;
+    PartyMember* work;
 
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -73,10 +73,10 @@ MATCH void func_801EF5BC(void) {
 }
 
 MATCH void func_801EF7A0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     if (func_8014DAEC() != 0u) {
-        work               = (PartyBattler*)g_BattleEffectBattler;
+        work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();
     }

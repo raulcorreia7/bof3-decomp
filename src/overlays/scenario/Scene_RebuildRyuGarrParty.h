@@ -19,7 +19,7 @@ MATCH void Scene_RebuildRyuGarrParty(void) {
         D_80144908[slot & BYTE_MASK] = 0;
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, character & BYTE_MASK, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
     Party_JoinMember(character & BYTE_MASK);

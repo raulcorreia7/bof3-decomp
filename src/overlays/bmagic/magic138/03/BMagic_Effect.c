@@ -12,7 +12,7 @@ INCLUDE_ASM(func_801EEC88);
 INCLUDE_ASM(func_801EED60);
 
 MATCH void func_801EEED8(void) {
-    PartyBattler* saved_work;
+    PartyMember* saved_work;
 
     saved_work = g_Task;
     g_Task     = g_BattleEffectBattler;
@@ -63,7 +63,7 @@ MATCH void func_801EF52C(void) {
 }
 
 MATCH void func_801EF5D0(void) {
-    PartyBattler* work;
+    PartyMember* work;
     g_Task->unk_29    = 0;
     g_Task->unk_25    = 0x1D;
     g_Task->unk_26    = 0;

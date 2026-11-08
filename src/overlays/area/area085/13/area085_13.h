@@ -9,10 +9,10 @@
 
 #define g_CurrentActor ((void*)g_CurrentActor)
 
-extern PartyBattler D_801469B8;
-extern u8           D_801F3D2C[];
-extern Callback     D_801F3D40[];
-extern u8           D_801F4330[];
+extern PartyMember D_801469B8;
+extern u8          D_801F3D2C[];
+extern Callback    D_801F3D40[];
+extern u8          D_801F4330[];
 
 void func_801F2FCC(void);
 void func_801F3C3C(s32 delta);

@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801DDAF0(void) {
-    PartyBattler*          work_a;
-    volatile PartyBattler* work_b;
-    u32                    index;
+    PartyMember*          work_a;
+    volatile PartyMember* work_b;
+    u32                   index;
 
     index                               = Battle_AllocEffect(0u, 6u) & BYTE_MASK;
     work_a                              = g_Task;

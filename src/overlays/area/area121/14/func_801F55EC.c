@@ -1,7 +1,7 @@
 #include "area121_14.h"
 
 MATCH s32 func_801F55EC(void) {
-    if (g_GameFlags & 0x2000) {
+    if (g_Game.flags & 0x2000) {
         return 0;
     }
     if ((D_8014625C & g_InputMasks[WORLD_INPUT_VIEW]) == 0) {

@@ -26,13 +26,13 @@ NON_MATCHING void func_801D1D10(void) {
                 index = id & BYTE_MASK;
                 if (index != GAME_NONE) {
                     ((u8*)slot)[-0x15] = id;
-                    if (!HAS_STATUS(g_BattlePartyBattlers[index], STATUS_CONFUSED) &&
-                        !(g_BattlePartyBattlers[index].turn.action_flags.volatile_value &
+                    if (!HAS_STATUS(g_Game.members[index], STATUS_CONFUSED) &&
+                        !(g_Game.members[index].turn.action_flags.volatile_value &
                           (COMBATANT_FLAG_DRAGON_FORM_QUEUED | COMBATANT_FLAG_CHARGING |
                            COMBATANT_FLAG_DRAGON_FORM_BERSERK))) {
-                        g_BattleMessageSlot = (u8*)&g_BattlePartyBattlers[index];
-                        g_BattleActorTurn   = &g_BattlePartyBattlers[index].turn.command;
-                        BattleStageMessageResource((s32)&g_BattlePartyBattlers[index]);
+                        g_BattleMessageSlot = (u8*)&g_Game.members[index];
+                        g_BattleActorTurn   = &g_Game.members[index].turn.command;
+                        BattleStageMessageResource((s32)&g_Game.members[index]);
                         ((u8*)slot)[-0x22] += 1;
                         flag        = &g_BattleMessageState;
                         *flag       = 1;

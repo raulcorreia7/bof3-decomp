@@ -33,10 +33,10 @@ INCLUDE_ASM(func_801EEF80);
 INCLUDE_ASM(func_801EF118);
 
 MATCH void func_801EF2B0(void) {
-    s32           angle;
-    s32           dz;
-    u8            count;
-    PartyBattler* task;
+    s32          angle;
+    s32          dz;
+    u8           count;
+    PartyMember* task;
 
     if (g_FrameCount & 1) {
         func_8014D978();

@@ -20,7 +20,7 @@ MATCH void func_800A14B4(void) {
     p    = &g_BattleActiveBattler;
     slot = LOBU(p[0]);
     if (BATTLER_IS_PLAYER(slot)) {
-        g_BattlePartyBattlers[slot].u.turn.action_flags.volatile_value |= COMBATANT_FLAG_POWER_BOOST;
+        g_Game.members[slot].u.turn.action_flags.volatile_value |= COMBATANT_FLAG_POWER_BOOST;
         index = *p * BATTLE_PARTY_STRIDE;
         count = (&D_80145FC8)[index];
         if (count < 2u) {

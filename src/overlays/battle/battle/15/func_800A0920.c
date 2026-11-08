@@ -10,7 +10,7 @@ MATCH void func_800A0920(void) {
     u32 slot;
 
     func_800A3F28();
-    g_BattlePartyBattlers[g_BattleTarget].u.turn.action_flags.volatile_value |= COMBATANT_FLAG_SUPPRESSION_EXEMPT;
+    g_Game.members[g_BattleTarget].u.turn.action_flags.volatile_value |= COMBATANT_FLAG_SUPPRESSION_EXEMPT;
     base               = g_BattleTurnCursor - 1;
     g_BattleActionLock = 4;
     slot               = base & BYTE_MASK;

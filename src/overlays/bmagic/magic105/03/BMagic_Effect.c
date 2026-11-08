@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC14(void) {
-    PartyBattler* saved_work;
-    PartyBattler* saved_active;
-    PartyBattler* swap;
-    s32           count;
+    PartyMember* saved_work;
+    PartyMember* saved_active;
+    PartyMember* swap;
+    s32          count;
 
     BMagic_DispatchTaskPair(func_801EED1C, Effect_PlayOnZeroTick);
     count = 0;
@@ -17,7 +17,7 @@ MATCH void func_801EEC14(void) {
             saved_work            = g_Task;
             saved_active          = g_BattleEffectBattler;
             swap                  = BMAGIC_EFFECT_SLOTS[(u8)count].target.party;
-            g_Task                = MEM_PTR(PartyBattler, &BMAGIC_EFFECT_SLOTS[(u8)count]);
+            g_Task                = MEM_PTR(PartyMember, &BMAGIC_EFFECT_SLOTS[(u8)count]);
             g_BattleEffectBattler = swap;
             func_801EF880();
             func_801EFCF0();
@@ -49,8 +49,8 @@ MATCH void func_801EEFBC(void) {
 }
 
 MATCH void func_801EF06C(void) {
-    PartyBattler* src;
-    PartyBattler* work;
+    PartyMember* src;
+    PartyMember* work;
     STACK_PADS(u8, 8);
 
     src                = BATTLE_ACTIVE_WORK;
@@ -107,10 +107,10 @@ MATCH void func_801EF8C4(void) {
 }
 
 MATCH void func_801EF930(void) {
-    u16*          cell;
-    s8            tint;
-    s32           height;
-    PartyBattler* work;
+    u16*         cell;
+    s8           tint;
+    s32          height;
+    PartyMember* work;
 
     cell                                = &D_1F800000.view.area.entry_data;
     *cell                               = ((u32)(rsin(g_Task->unk_09 << 6) * 3) >> 4);

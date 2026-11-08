@@ -1,8 +1,5 @@
 #include "game_00.h"
 
-/* Byte +0x13C of battle local work record 0 (PARTY_COMBATANT_BASE + 0x13C);
- * record i's copy is 0x140 bytes further per index. */
-
 MATCH void func_801BDBC4(void) {
     s32 i;
     s32 offset;
@@ -12,11 +9,11 @@ MATCH void func_801BDBC4(void) {
     found = 0;
     if (g_GameRequestFlags & 1) {
         i = 0;
-        if (i < g_PartySize) {
-            count  = g_PartySize;
+        if (i < g_Game.party_size) {
+            count  = g_Game.party_size;
             offset = 0;
         loop:
-            if (g_Characters[(&g_BattlePartyBattlers[0].character_index)[offset]].status & STATUS_CONFUSED) {
+            if (g_Characters[(&g_Game.members[0].character_index)[offset]].status & STATUS_CONFUSED) {
                 found = 1;
             }
             i++;
@@ -26,7 +23,7 @@ MATCH void func_801BDBC4(void) {
                 goto loop;
             }
         }
-    } else if (g_Characters[g_BattlePartyBattlers[0].character_index].status & STATUS_CONFUSED) {
+    } else if (g_Characters[g_Game.members[0].character_index].status & STATUS_CONFUSED) {
         found = 1;
     }
     if (found != 0) {

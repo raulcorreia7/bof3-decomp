@@ -15,7 +15,7 @@ MATCH void func_801E61F0(void) {
     if (count == 0) {
         index = D_801EC2E0->target.party->slot;
         if (index < 3) {
-            g_BattlePartyBattlers[index].u.turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_NUMBER;
+            g_Game.members[index].u.turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_NUMBER;
         } else {
             ENEMY_COMBATANT(index).turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_NUMBER;
         }

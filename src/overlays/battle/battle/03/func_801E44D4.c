@@ -4,7 +4,7 @@
  * selects local work mode 4, runs the battle update, posts event 0x205 and advances the local substate.
  */
 MATCH void func_801E44D4(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work                                     = g_Task;
     BATTLE_CURRENT_ENEMY_PTR->turn.hp_change = 0;

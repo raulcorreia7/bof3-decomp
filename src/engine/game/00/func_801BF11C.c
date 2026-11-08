@@ -20,18 +20,18 @@ NON_MATCHING u8 func_801BF11C(void) {
     }
     g_EncounterOriginX = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_BattleScrollDir].dx << 16);
     g_EncounterOriginY = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_BattleScrollDir].dy << 16);
-    for (i = 0; i < g_PartySize; i++) {
-        work        = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
-        g_GameState = work;
+    for (i = 0; i < g_Game.party_size; i++) {
+        work           = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
+        g_Game.current = work;
         TASK_SET(work);
         if (g_Task->param.unk_0B == 0) {
             if (func_801C29A0(8) & BYTE_MASK) {
                 for (order = 0; order < 3; order++) {
-                    if (g_PartyBattleOrder[order] == g_GameState->chr.character_id) {
+                    if (g_PartyBattleOrder[order] == g_Game.current->chr.character_id) {
                         break;
                     }
                 }
-                g_GameState->status.field.flags_12C.u8_value &= 0xFE;
+                g_Game.current->status.field.flags_12C.u8_value &= 0xFE;
                 g_Task->unk_29           = g_AreaDrawMode;
                 g_Task->pos.x            = g_EncounterParty[order].x;
                 g_Task->pos.y            = g_EncounterParty[order].y;
@@ -57,7 +57,7 @@ NON_MATCHING u8 func_801BF11C(void) {
         }
         func_8014D978();
     }
-    for (i = 0; i < g_PartySize; i++) {
+    for (i = 0; i < g_Game.party_size; i++) {
         offset = i * BATTLE_PARTY_STRIDE;
         if ((&D_80145E9B)[offset] != 2) {
             return 0;

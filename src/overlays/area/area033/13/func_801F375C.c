@@ -18,7 +18,7 @@ MATCH void func_801F375C(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         goto bump;
     }
-    if ((g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE) == 0) {
+    if ((g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE) == 0) {
         goto done;
     }
 bump:

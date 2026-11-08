@@ -9,7 +9,7 @@ MATCH void Area_ResetScene(void) {
     func_801C2BEC();
     if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {
         Actor_ClearVelocity();
-        g_GameState->u.field.counter_11C.s8_value = 3;
+        g_Game.current->u.field.counter_11C.s8_value = 3;
         func_801BC000();
         work = g_Task;
         if ((work->vx == 0) && (work->vy == 0) && (work->header.mode == 1)) {

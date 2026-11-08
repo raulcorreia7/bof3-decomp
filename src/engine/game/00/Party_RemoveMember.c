@@ -24,9 +24,9 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
 
     func_801C1840();
     slot = 0;
-    if ((s32)g_PartySize > 0) {
+    if ((s32)g_Game.party_size > 0) {
         key   = character_id & BYTE_MASK;
-        limit = g_PartySize;
+        limit = g_Game.party_size;
     search1:
         if (g_PartyBattleOrder[slot] == key)
             goto found1;
@@ -36,7 +36,7 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
     found1:;
     }
     g_PartyBattleOrder[slot] = 0xFF;
-    if (slot < (s32)g_PartySize - 1) {
+    if (slot < (s32)g_Game.party_size - 1) {
         cur  = &D_80144F5E[slot];
         prev = cur - 1;
         do {
@@ -47,12 +47,12 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
             cur++;
             slot++;
             prev++;
-        } while (slot < (s32)g_PartySize - 1);
+        } while (slot < (s32)g_Game.party_size - 1);
     }
     slot = 0;
-    if ((s32)g_PartySize > 0) {
+    if ((s32)g_Game.party_size > 0) {
         key   = character_id & BYTE_MASK;
-        limit = g_PartySize;
+        limit = g_Game.party_size;
     search2:
         if (g_PartyFieldOrder[slot] == key)
             goto found2;
@@ -62,13 +62,13 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
     found2:;
     }
     g_PartyFieldOrder[slot] = 0xFF;
-    if ((s32)g_PartySize - 1 > 0) {
+    if ((s32)g_Game.party_size - 1 > 0) {
         slot = 0;
         off  = 0;
         code = 0x78;
         frac = 0;
-        src  = &((u8*)g_BattlePartyBattlers)[BATTLE_PARTY_STRIDE];
-        dst  = (u8*)g_BattlePartyBattlers;
+        src  = &((u8*)g_Game.members)[BATTLE_PARTY_STRIDE];
+        dst  = (u8*)g_Game.members;
         do {
             if ((&D_80144EE2)[code] == GAME_NONE) {
                 TASK_SET(dst);
@@ -90,8 +90,8 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
                 g_Task->unk_26 = (u8)frac;
                 g_Task->unk_27 = (u8)code;
                 g_Task->unk_4B = 0xFF;
-                (&g_BattlePartyBattlers[0].character_index)[off] =
-                    g_CharSlot[FIELD(u8, &g_BattlePartyBattlers[0].chr.character_id, off)];
+                (&g_Game.members[0].character_index)[off] =
+                    g_CharSlot[FIELD(u8, &g_Game.members[0].chr.character_id, off)];
             }
             off += BATTLE_PARTY_STRIDE;
             code++;
@@ -99,21 +99,21 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
             src += BATTLE_PARTY_STRIDE;
             slot++;
             dst += BATTLE_PARTY_STRIDE;
-        } while (slot < (s32)g_PartySize - 1);
+        } while (slot < (s32)g_Game.party_size - 1);
     }
-    ((u8*)g_BattlePartyBattlers)[((s32)g_PartySize - 1) * BATTLE_PARTY_STRIDE] = 0;
-    Party_ClearBattlerState(((s32)g_PartySize - 1) & BYTE_MASK);
-    if (g_PartySize == 3) {
+    ((u8*)g_Game.members)[((s32)g_Game.party_size - 1) * BATTLE_PARTY_STRIDE] = 0;
+    Party_ClearBattlerState(((s32)g_Game.party_size - 1) & BYTE_MASK);
+    if (g_Game.party_size == 3) {
         if (g_PartyFormation >= 3u)
             g_PartyFormation = 0;
         else
             goto tail;
     } else {
     tail:
-        if (g_PartySize == 2)
+        if (g_Game.party_size == 2)
             g_PartyFormation = 0;
     }
-    g_PartySize = (u8)((s32)g_PartySize - 1);
+    g_Game.party_size = (u8)((s32)g_Game.party_size - 1);
 }
 #else
 INCLUDE_ASM(Party_RemoveMember);

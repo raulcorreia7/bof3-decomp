@@ -28,19 +28,19 @@ extern SceneFunc D_801FE97C[];
 
 /* The party lookups of 370.c: return the value paired with the first id in `ids` that a party member
  * holds, else `none`. The members differ only in table and count. Every change must verify every member. */
-#define SCENA10_PARTY_LOOKUP(count, ids, values, none)                               \
-    do {                                                                             \
-        u8 slot;                                                                     \
-        u8 member;                                                                   \
-                                                                                     \
-        for (slot = 0; slot < (count); slot++) {                                     \
-            for (member = 0; member < g_PartySize; member++) {                       \
-                if (g_BattlePartyBattlers[member].chr.character_id == (ids)[slot]) { \
-                    return (values)[slot];                                           \
-                }                                                                    \
-            }                                                                        \
-        }                                                                            \
-        return (none);                                                               \
+#define SCENA10_PARTY_LOOKUP(count, ids, values, none)                        \
+    do {                                                                      \
+        u8 slot;                                                              \
+        u8 member;                                                            \
+                                                                              \
+        for (slot = 0; slot < (count); slot++) {                              \
+            for (member = 0; member < g_Game.party_size; member++) {          \
+                if (g_Game.members[member].chr.character_id == (ids)[slot]) { \
+                    return (values)[slot];                                    \
+                }                                                             \
+            }                                                                 \
+        }                                                                     \
+        return (none);                                                        \
     } while (0)
 
 void func_801F6FAC(void);

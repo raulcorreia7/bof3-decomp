@@ -8,8 +8,8 @@ MATCH void func_800A22CC(void) {
     battler_index_cell = &g_BattleActiveBattler;
     battler_index      = LOBU(*battler_index_cell);
     if (BATTLER_IS_PLAYER(battler_index)) {
-        g_BattlePartyBattlers[battler_index].u.turn.action_flags.volatile_value |= COMBATANT_FLAG_CHARGING;
-        g_BattlePartyBattlers[*battler_index_cell].counter_136 = 0;
+        g_Game.members[battler_index].u.turn.action_flags.volatile_value |= COMBATANT_FLAG_CHARGING;
+        g_Game.members[*battler_index_cell].counter_136 = 0;
     } else {
         ENEMY_COMBATANT(battler_index).turn.action_flags.value |= COMBATANT_FLAG_CHARGING;
         ENEMY_COMBATANT(*battler_index_cell).unk_112 = 0;

@@ -75,11 +75,11 @@ MATCH void func_801F6EB4(void) {
 
 MATCH void func_801F7260(void) {
     if (g_Task->timer != 0) {
-        g_BattlePartyBattlers->header.flags |= 0x40;
+        g_Game.members->header.flags |= 0x40;
         g_Task->timer -= 1;
         return;
     }
-    g_BattlePartyBattlers->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+    g_Game.members->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Actors[g_Task->unk_03].header.flags = 0;
     g_Actors[g_Task->unk_04].header.flags = 0;
     g_Task->header.mode                   = 2;
@@ -684,7 +684,7 @@ MATCH void func_801FCE6C(void) {
     g_PartyBattleOrder[0] = 255;
     D_80144F5E[0]         = 255;
     D_80144F5F            = 255;
-    g_PartySize           = 0;
+    g_Game.party_size     = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 

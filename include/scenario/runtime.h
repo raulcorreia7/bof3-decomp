@@ -14,7 +14,7 @@
 #define SCENE_SET_PARTY(a, b, c)            \
     {                                       \
         EMI_LoaderStreamFamily(a, b, c, 0); \
-        g_PartySize = 0;                    \
+        g_Game.party_size = 0;              \
         Party_JoinMember(a);                \
         Party_JoinMember(b);                \
         Party_JoinMember(c);                \
@@ -25,7 +25,7 @@
 #define SCENE_SET_PARTY_NO_RESTAGE(a, b, c) \
     {                                       \
         EMI_LoaderStreamFamily(a, b, c, 0); \
-        g_PartySize = 0;                    \
+        g_Game.party_size = 0;              \
         Party_JoinMember(a);                \
         Party_JoinMember(b);                \
         Party_JoinMember(c);                \

@@ -27,35 +27,35 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
     kind    = command & 0xC0;
     count   = command & 0xF;
     if (kind == 0) {
-        if (g_PartySize != count)
+        if (g_Game.party_size != count)
             return 1;
         values = SP_PTR(u8, 0x00);
         slots  = SP_PTR(u8, 0x04);
         taken  = SP_PTR(u8, 0x08);
-        for (i = 0; i < g_PartySize; i++)
+        for (i = 0; i < g_Game.party_size; i++)
             taken[i] = g_PartyFieldOrder[i];
         for (i = 0; i < count; i++) {
             if (ids[i] == 0x80) {
-                for (j = 0; j < g_PartySize && taken[j] == GAME_NONE; j++) {
+                for (j = 0; j < g_Game.party_size && taken[j] == GAME_NONE; j++) {
                 }
-                if (j == g_PartySize)
+                if (j == g_Game.party_size)
                     continue;
             } else {
-                for (j = 0; j < g_PartySize; j++) {
-                    row = (Actor*)((u8*)g_BattlePartyBattlers + j * BATTLE_PARTY_STRIDE);
+                for (j = 0; j < g_Game.party_size; j++) {
+                    row = (Actor*)((u8*)g_Game.members + j * BATTLE_PARTY_STRIDE);
                     if (row->unk_79 == ids[i])
                         break;
                 }
-                if (j == g_PartySize)
+                if (j == g_Game.party_size)
                     return 1;
             }
-            row       = (Actor*)((u8*)g_BattlePartyBattlers + j * BATTLE_PARTY_STRIDE);
+            row       = (Actor*)((u8*)g_Game.members + j * BATTLE_PARTY_STRIDE);
             values[i] = (u8)row->unk_2C;
             slots[i]  = (u8)j;
             taken[j]  = 0xFF;
         }
         for (i = 0; i < count; i++) {
-            row                  = (Actor*)((u8*)g_BattlePartyBattlers + slots[i] * BATTLE_PARTY_STRIDE);
+            row                  = (Actor*)((u8*)g_Game.members + slots[i] * BATTLE_PARTY_STRIDE);
             g_PartyFieldOrder[i] = row->unk_79;
         }
         for (i = 0; i + 1 < count; i++) {
@@ -72,19 +72,19 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
         }
         ids += count;
     } else if (kind == 0x80) {
-        if (g_PartySize < count)
+        if (g_Game.party_size < count)
             return 1;
     }
     cursor = ids;
     ids += count;
-    func_801BE574(g_PartySize, cursor);
+    func_801BE574(g_Game.party_size, cursor);
     flags = command & 0x30;
     if (flags & 0x20)
-        g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+        g_Game.flags |= GAME_FLAG_SCROLL_LOCK;
     if (flags == 0x30)
         func_801C601C(*ids);
-    g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
-    g_AreaWalkFlags |= AREA_WALK_MAP_LOADING;
+    g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
+    g_Game.walk_flags |= AREA_WALK_MAP_LOADING;
     return 0;
 }
 #else

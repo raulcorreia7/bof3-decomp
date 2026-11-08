@@ -4,7 +4,7 @@ MATCH void func_801F360C(void) {
     ActorSlot* actor_slot;
     s32        actor_index;
 
-    if (g_BattlePartyBattlers[0].chr.character_id == 5) {
+    if (g_Game.members[0].chr.character_id == 5) {
         actor_index = func_8019601C() & 0xFF;
         if (actor_index != 0xFF) {
             actor_slot               = &g_ActorSlots[actor_index];

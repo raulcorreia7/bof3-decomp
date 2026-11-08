@@ -8,12 +8,12 @@ MATCH void func_801D3CC4(void) {
     u8 i;
 
     for (i = 0; (i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; i += 1) {
-        if (((g_BattlePartyBattlers[i].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
-            (g_BattlePartyBattlers[i].header.mode != 6)) {
-            g_BattlePartyBattlers[i].header.mode = 6;
-            g_BattlePartyBattlers[i].header.step = 0;
-            g_BattlePartyBattlers[i].unk_03      = 0;
-            g_BattlePartyBattlers[i].unk_04      = 0;
+        if (((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
+            (g_Game.members[i].header.mode != 6)) {
+            g_Game.members[i].header.mode = 6;
+            g_Game.members[i].header.step = 0;
+            g_Game.members[i].unk_03      = 0;
+            g_Game.members[i].unk_04      = 0;
             Battle_SetSlotPending(i);
         }
     }

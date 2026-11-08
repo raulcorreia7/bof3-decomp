@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801E2120(void) {
-    volatile PartyBattler* work;
-    volatile u16*          gate;
-    u16                    half;
+    volatile PartyMember* work;
+    volatile u16*         gate;
+    u16                   half;
 
     work = g_Task;
     if ((work->header.flags & ACTOR_FLAG_HIDDEN) == 0u) {

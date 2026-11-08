@@ -30,7 +30,7 @@ NON_MATCHING void func_801D1228(void) {
             slot += 1;
         } while ((u32)(slot & BYTE_MASK) < (u8)g_BattlePartyCount);
     }
-    work_row                     = (u8*)g_BattlePartyBattlers;
+    work_row                     = (u8*)g_Game.members;
     *g_BattlePanelWidths         = 8;
     g_BattleMessageSlot          = work_row;
     g_BattleRowCursor            = 0;
@@ -65,7 +65,7 @@ NON_MATCHING void func_801D1228(void) {
     do {
         row_offset = index * BATTLE_PARTY_STRIDE;
         src        = work_row + 0x90 + row_offset;
-        if (ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
+        if (ACTOR_IN_USE(g_Game.members[index])) {
             dest                                 = work_row + 0xB0 + row_offset;
             *(BattleStatBlockPart*)(dest)        = *(BattleStatBlockPart*)(src);
             *(BattleStatBlockPart*)(dest + 0x10) = *(BattleStatBlockPart*)(src + 0x10);
@@ -74,19 +74,19 @@ NON_MATCHING void func_801D1228(void) {
             } else {
                 flags = (s16)(*(u16*)(D_80145F10 + row_offset) & 0xDFFF);
             }
-            *(u16*)(D_80145F10 + row_offset)                     = flags;
-            count                                                = 0;
-            index                                                = slot & BYTE_MASK;
-            src                                                  = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
-            g_BattlePartyBattlers[index].turn.damage_flags.value = 0;
-            g_BattlePartyBattlers[index].turn.action_flags.volatile_value = 0;
-            g_BattlePartyBattlers[index].turn.command.type                = 0;
-            *(u8*)(&D_80145FB1 + index * 0x140)                           = 0;
-            *(u8*)(&D_80145FC6 + index * 0x140)                           = 0;
-            *(u8*)(&D_80145FC7 + index * 0x140)                           = 0;
-            *(u8*)(&D_80145FC8 + index * 0x140)                           = 0;
-            *(u8*)(&D_80145FC9 + index * 0x140)                           = 0;
-            count                                                         = 0;
+            *(u16*)(D_80145F10 + row_offset)                       = flags;
+            count                                                  = 0;
+            index                                                  = slot & BYTE_MASK;
+            src                                                    = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
+            g_Game.members[index].turn.damage_flags.value          = 0;
+            g_Game.members[index].turn.action_flags.volatile_value = 0;
+            g_Game.members[index].turn.command.type                = 0;
+            *(u8*)(&D_80145FB1 + index * 0x140)                    = 0;
+            *(u8*)(&D_80145FC6 + index * 0x140)                    = 0;
+            *(u8*)(&D_80145FC7 + index * 0x140)                    = 0;
+            *(u8*)(&D_80145FC8 + index * 0x140)                    = 0;
+            *(u8*)(&D_80145FC9 + index * 0x140)                    = 0;
+            count                                                  = 0;
             do {
                 *(work_row + 0x12C + index * 0x140 + count) = 0;
                 count += 1;
@@ -101,7 +101,7 @@ NON_MATCHING void func_801D1228(void) {
     do {
         row_offset = index * BATTLE_PARTY_STRIDE;
         dest       = D_80145F20 + row_offset;
-        if (ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
+        if (ACTOR_IN_USE(g_Game.members[index])) {
             src                                  = D_80145F20 + 0x20 + row_offset;
             *(BattleStatBlockPart*)(dest)        = *(BattleStatBlockPart*)(src);
             *(BattleStatBlockPart*)(dest + 0x10) = *(BattleStatBlockPart*)(src + 0x10);
@@ -123,8 +123,8 @@ NON_MATCHING void func_801D1228(void) {
     do {
         if ((u32)slot < 3U) {
             row_offset = (((s32)slot * 4) + slot) << 6;
-            if (ACTOR_IN_USE(g_BattlePartyBattlers[slot])) {
-                g_Task = g_BattlePartyBattlers + row_offset;
+            if (ACTOR_IN_USE(g_Game.members[slot])) {
+                g_Task = g_Game.members + row_offset;
                 goto found; /* joins the shared work-pointer exit */
             }
         } else if (!(Battle_SlotIsBlocked((u32)slot) & BYTE_MASK) && (g_BattleEncounter != 37)) {

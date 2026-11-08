@@ -19,7 +19,7 @@ MATCH void func_8009F010(void) {
 
     index = LOBU(g_BattleActiveBattler);
     if (index < 3) {
-        value = g_BattlePartyBattlers[index].chr.stats.intellect;
+        value = g_Game.members[index].chr.stats.intellect;
     } else {
         enemy_index = index - 3;
         value       = g_BattleEnemyBattlers[enemy_index].stats.intellect;

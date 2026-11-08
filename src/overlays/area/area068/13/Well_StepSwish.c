@@ -6,8 +6,8 @@ MATCH void Well_StepSwish(void) {
 
     if (++g_WellSwishStep >= WELL_SWISH_STEPS) {
         work        = g_Task;
-        g_GameState = g_BattlePartyBattlers;
-        TASK_SET(g_BattlePartyBattlers);
+        g_GameState = g_Game.members;
+        TASK_SET(g_Game.members);
         D_80145EC8 &= 0xFFFFF000;
         D_80145EC4 &= 0xFFFFF000;
         g_Task            = work;
@@ -19,32 +19,32 @@ MATCH void Well_StepSwish(void) {
             case 0x1000:
             case 0x3000:
                 work        = g_Task;
-                g_GameState = g_BattlePartyBattlers;
-                TASK_SET(g_BattlePartyBattlers);
+                g_GameState = g_Game.members;
+                TASK_SET(g_Game.members);
                 D_80145EC8 += 0x800;
                 g_Task = work;
                 break;
             case 0x2000:
             case 0x6000:
                 work        = g_Task;
-                g_GameState = g_BattlePartyBattlers;
-                TASK_SET(g_BattlePartyBattlers);
+                g_GameState = g_Game.members;
+                TASK_SET(g_Game.members);
                 D_80145EC4 -= 0x800;
                 g_Task = work;
                 break;
             case 0x4000:
             case 0xC000:
                 work        = g_Task;
-                g_GameState = g_BattlePartyBattlers;
-                TASK_SET(g_BattlePartyBattlers);
+                g_GameState = g_Game.members;
+                TASK_SET(g_Game.members);
                 D_80145EC8 -= 0x800;
                 g_Task = work;
                 break;
             case 0x8000:
             case 0x9000:
                 work        = g_Task;
-                g_GameState = g_BattlePartyBattlers;
-                TASK_SET(g_BattlePartyBattlers);
+                g_GameState = g_Game.members;
+                TASK_SET(g_Game.members);
                 D_80145EC4 += 0x800;
                 g_Task = work;
                 break;

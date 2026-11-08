@@ -15,38 +15,38 @@ MATCH s32 func_801D62D8(void) {
     index = 0;
     do {
         if (!(func_801D64C4(index) & BYTE_MASK)) {
-            flags = g_BattlePartyBattlers[index].u.turn.action_flags.volatile_value;
+            flags = g_Game.members[index].u.turn.action_flags.volatile_value;
             if (flags & 2) {
                 if (flags & 0x20) {
                     /* retail shares this clear block */
                     goto clear;
                 }
-                countdown = g_BattlePartyBattlers[index].chr.ap;
+                countdown = g_Game.members[index].chr.ap;
                 if ((s32)countdown < ((s32)(*D_801463B8 + 1) >> 1)) {
-                    g_BattlePartyBattlers[index].header.mode = 6;
-                    g_BattlePartyBattlers[index].header.step = 4;
-                    g_BattlePartyBattlers[index].unk_03      = 4;
+                    g_Game.members[index].header.mode = 6;
+                    g_Game.members[index].header.step = 4;
+                    g_Game.members[index].unk_03      = 4;
                     Battle_SetSlotPending(index);
                     count += 1;
                 } else {
-                    g_BattlePartyBattlers[index].u.turn.hp_change = 0;
-                    g_BattlePartyBattlers[index].u.turn.ap_change = 0;
-                    g_BattlePartyBattlers[index].chr.ap -= (*D_801463B8 + 1) >> 1;
-                    step                                          = (*D_801463B8 + 1) >> 1;
-                    g_BattlePartyBattlers[index].u.turn.ap_change = step;
+                    g_Game.members[index].u.turn.hp_change = 0;
+                    g_Game.members[index].u.turn.ap_change = 0;
+                    g_Game.members[index].chr.ap -= (*D_801463B8 + 1) >> 1;
+                    step                                   = (*D_801463B8 + 1) >> 1;
+                    g_Game.members[index].u.turn.ap_change = step;
                     if (step != 0) {
-                        g_BattlePartyBattlers[index].header.step         = 5;
-                        g_BattlePartyBattlers[index].header.mode         = 6;
-                        g_BattlePartyBattlers[index].unk_04              = 0;
-                        g_BattlePartyBattlers[index].unk_03              = 0;
-                        g_BattlePartyBattlers[index].u.turn.target_flags = 2;
+                        g_Game.members[index].header.step         = 5;
+                        g_Game.members[index].header.mode         = 6;
+                        g_Game.members[index].unk_04              = 0;
+                        g_Game.members[index].unk_03              = 0;
+                        g_Game.members[index].u.turn.target_flags = 2;
                         Battle_SetSlotPending(index);
                         count += 1;
                     }
                 }
             } else {
             clear:
-                g_BattlePartyBattlers[index].u.turn.action_flags.volatile_value &= ~COMBATANT_FLAG_ACTION_UNK_5;
+                g_Game.members[index].u.turn.action_flags.volatile_value &= ~COMBATANT_FLAG_ACTION_UNK_5;
             }
         }
         index += 1;

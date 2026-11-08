@@ -13,13 +13,13 @@ MATCH void func_801E9FDC(void) {
 
     panel        = g_MenuCurrentPanel;
     index        = panel->unk_0A;
-    b0           = g_BattlePartyBattlers[index].facing;
-    b1           = g_BattlePartyBattlers[index].chr.character_id;
-    panel->pos.x = g_BattlePartyBattlers[index].unk_2E.signed_half + *(s8*)&g_BattlePanelOffsets[b1 * 8 + b0 * 2] +
+    b0           = g_Game.members[index].facing;
+    b1           = g_Game.members[index].chr.character_id;
+    panel->pos.x = g_Game.members[index].unk_2E.signed_half + *(s8*)&g_BattlePanelOffsets[b1 * 8 + b0 * 2] +
                    (b0 == 0 || b0 == 3 ? D_801EAEA4[0] : D_801EAEA4[2]);
 
     *(s16*)&g_MenuCurrentPanel->pos.y =
-        g_BattlePartyBattlers[g_MenuCurrentPanel->unk_0A].unk_30.half + g_BattlePanelOffsets[b1 * 8 + b0 * 2 + 1] + 12;
+        g_Game.members[g_MenuCurrentPanel->unk_0A].unk_30.half + g_BattlePanelOffsets[b1 * 8 + b0 * 2 + 1] + 12;
 
     if (g_BattleSelectionLatch != 0) {
         flags = g_BattleActorTurn->command.target;

@@ -37,7 +37,7 @@ NON_MATCHING void func_80158940(void* obj) {
     base = &D_801462A0;
     for (entry_index = 0; entry_index < entry_count; entry_index++) {
         layer        = 0;
-        flag         = &g_BattlePartyBattlers[0].unk_29;
+        flag         = &g_Game.members[0].unk_29;
         marker       = flag + 0x103;
         x            = *cursor >> 24;
         y            = *cursor >> 16;

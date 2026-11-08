@@ -14,7 +14,7 @@ MATCH void func_8009DBA4(void) {
     MATCH_FAKE_BARRIER();
     index = (*(u8*)&g_BattleTarget);
     if (index < 3u) {
-        base = g_BattlePartyBattlers[index].chr.hp;
+        base = g_Game.members[index].chr.hp;
     } else {
         base = ENEMY_COMBATANT(index).hp;
     }

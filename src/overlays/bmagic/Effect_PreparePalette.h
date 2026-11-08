@@ -4,7 +4,7 @@ enum {
 
 /* Prepares the selected battler palette. Every change must verify every member. */
 MATCH void Effect_PreparePalette(void) {
-    PartyBattler** selected;
+    PartyMember** selected;
 
     if (--g_Task->unk_09 == 0) {
         selected = &g_BattleSelectedActor;

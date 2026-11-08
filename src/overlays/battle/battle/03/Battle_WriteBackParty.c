@@ -20,8 +20,8 @@ MATCH void Battle_WriteBackParty(void) {
         do {
             index = i & BYTE_MASK;
             off   = index * BATTLE_PARTY_STRIDE;
-            if ((g_BattlePartyBattlers[index].chr.status & STATUS_KO) != 0u) {
-                rec                         = g_BattlePartyBattlers[index].character_index;
+            if ((g_Game.members[index].chr.status & STATUS_KO) != 0u) {
+                rec                         = g_Game.members[index].character_index;
                 value                       = g_Characters[rec].fatigue;
                 g_Characters[rec].hp        = 1;
                 g_Characters[rec].willpower = 1;

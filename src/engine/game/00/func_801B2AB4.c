@@ -9,7 +9,7 @@ MATCH void func_801B2AB4(void) {
         func_801BEBB0();
     } else {
         index = 1;
-        if (index < g_PartySize) {
+        if (index < g_Game.party_size) {
             state  = 5;
             offset = BATTLE_PARTY_STRIDE;
             do {
@@ -17,7 +17,7 @@ MATCH void func_801B2AB4(void) {
                 D_80145E91[offset] = state;
                 offset += BATTLE_PARTY_STRIDE;
                 index++;
-            } while (index < g_PartySize);
+            } while (index < g_Game.party_size);
         }
         g_Task->param.unk_0B = 0xFF;
     }

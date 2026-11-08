@@ -7,9 +7,9 @@ MATCH void func_801F2DE8(void) {
 
     work        = g_Task;
     g_Task      = g_Actors;
-    g_GameState = g_BattlePartyBattlers;
+    g_GameState = g_Game.members;
     g_Task      = work;
-    TASK_SET(g_BattlePartyBattlers);
+    TASK_SET(g_Game.members);
     g_Task = work;
     if (FIELD(s32, D_801468BC, 0) >= D_80145EC4) {
         work->header.mode = 0xD;

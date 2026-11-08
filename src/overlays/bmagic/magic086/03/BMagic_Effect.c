@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC94);
 
 MATCH void func_801EEE44(void) {
-    PartyBattler* battler;
+    PartyMember* battler;
 
     battler = g_BattleSelectedActor;
     if (g_Task->param.unk_0B == 1) {
@@ -23,7 +23,7 @@ MATCH void func_801EEE44(void) {
 #include "overlays/bmagic/Effect_BrightenPalette.h"
 
 MATCH void func_801EEFF0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->param.unk_0B == 2) {
@@ -59,8 +59,8 @@ MATCH void func_801EF334(void) {
 }
 
 MATCH void func_801EF3A0(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 2) {

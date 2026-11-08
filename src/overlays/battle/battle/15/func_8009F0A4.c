@@ -26,8 +26,7 @@ MATCH void func_8009F0A4(void) {
     slot       = (*(u8*)&g_BattleActiveBattler);
     *flags     = flag_value | BATTLE_STATE_DAMAGE_APPLIED;
     if (slot < 3u) {
-        action = *(u16*)((u8*)&g_Characters[0].base.power +
-                         (g_CharSlot[g_BattlePartyBattlers[slot].chr.character_id] * 0xA4));
+        action = *(u16*)((u8*)&g_Characters[0].base.power + (g_CharSlot[g_Game.members[slot].chr.character_id] * 0xA4));
     } else {
         row    = slot - 3;
         action = g_BattleEnemyBattlers[row].base.power;

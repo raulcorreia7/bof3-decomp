@@ -1,10 +1,10 @@
 #include "boss051_16.h"
 
 MATCH void func_800C1BF0(void) {
-    PartyBattler* battler;
-    s32           value;
-    u8            value2;
-    u8            value3;
+    PartyMember* battler;
+    s32          value;
+    u8           value2;
+    u8           value3;
 
     battler = g_Task;
     g_Task  = g_BattleEffectBattler;

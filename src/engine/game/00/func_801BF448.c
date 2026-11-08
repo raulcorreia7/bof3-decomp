@@ -11,12 +11,12 @@ MATCH void func_801BF448(void) {
     Actor* work;
 
     count = 0;
-    if (count < g_PartySize) {
+    if (count < g_Game.party_size) {
         tab     = 0;
         rec_off = 0;
         do {
             i           = 0;
-            rec         = (u8*)g_BattlePartyBattlers + rec_off;
+            rec         = (u8*)g_Game.members + rec_off;
             g_GameState = rec;
             TASK_SET(rec);
             key = rec[0x79];
@@ -39,6 +39,6 @@ MATCH void func_801BF448(void) {
                 Actor_SelectScript(g_BattleScrollDir);
             tab += 8;
             rec_off += BATTLE_PARTY_STRIDE;
-        } while (++count < g_PartySize);
+        } while (++count < g_Game.party_size);
     }
 }

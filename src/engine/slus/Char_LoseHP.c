@@ -5,9 +5,9 @@
  * returns the clamped mode as 16 bits.
  */
 MATCH s32 Char_LoseHP(s32 mode, s32 index) {
-    PartyBattler* block;
-    u16           count;
-    s32           slot;
+    PartyMember* block;
+    u16          count;
+    s32          slot;
 
     slot  = g_CharSlot[(u8)index];
     count = g_Characters[slot].hp;

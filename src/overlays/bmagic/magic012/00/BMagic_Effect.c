@@ -43,10 +43,10 @@ MATCH void func_801EF080(void) {
 INCLUDE_ASM(func_801EF188);
 
 MATCH void func_801EF3C4(void) {
-    s32           angle;
-    s32           dz;
-    u8            count;
-    PartyBattler* task;
+    s32          angle;
+    s32          dz;
+    u8           count;
+    PartyMember* task;
 
     g_Task->timer += 1;
     g_Task->pos.x.fixed += (rsin(g_Task->unk_0C) << 13) >> 12;
@@ -78,7 +78,7 @@ MATCH void func_801EF4B8(void) {
     if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
         mode = g_BattleEnemyBattlers[g_Task->unk_04].header.mode;
     } else {
-        mode = g_BattlePartyBattlers[g_Task->unk_04].header.mode;
+        mode = g_Game.members[g_Task->unk_04].header.mode;
     }
 
     if (mode != 6) {

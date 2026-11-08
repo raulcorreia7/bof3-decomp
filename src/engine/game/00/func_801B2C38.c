@@ -2,11 +2,11 @@
 
 MATCH void func_801B2C38(void) {
     if (D_8014625C != 0) {
-        g_GameState->u.field.mode_12B.u8_value = 0U;
+        g_Game.current->u.field.mode_12B.u8_value = 0U;
     } else {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
-    if (g_GameState->u.field.mode_12B.u8_value == 0) {
+    if (g_Game.current->u.field.mode_12B.u8_value == 0) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->timer = 0;
         Party_ClearBattlerState(0);

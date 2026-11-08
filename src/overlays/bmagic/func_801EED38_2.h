@@ -4,10 +4,10 @@
  * tables D_801F0194 and D_801F019C. Every change here must verify every member. */
 /* func_801EED38 (magic162), func_801EED38 (magic168) */
 MATCH void func_801EED38(void) {
-    PartyBattler* battler;
-    PartyBattler* owner;
-    u8            i;
-    u8            sparkle_index;
+    PartyMember* battler;
+    PartyMember* owner;
+    u8           i;
+    u8           sparkle_index;
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         BMAGIC_EFFECT_SLOTS[i].header.flags = 0;

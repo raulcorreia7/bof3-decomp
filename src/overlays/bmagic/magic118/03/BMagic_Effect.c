@@ -52,8 +52,8 @@ MATCH void BMagic_UpdateBurnSprites(void) {
 INCLUDE_ASM(func_801EEFF4);
 
 MATCH void func_801EF0A4(void) {
-    PartyBattler* work;
-    s32           sum;
+    PartyMember* work;
+    s32          sum;
 
     work         = g_Task;
     sum          = work->unk_20 + work->timer;
@@ -66,8 +66,8 @@ MATCH void func_801EF0A4(void) {
 }
 
 MATCH void func_801EF108(void) {
-    PartyBattler* work;
-    u8            timer;
+    PartyMember* work;
+    u8           timer;
 
     g_Task->param.unk_0B--;
     work         = g_Task;

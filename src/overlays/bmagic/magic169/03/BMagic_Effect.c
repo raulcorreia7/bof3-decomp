@@ -39,14 +39,14 @@ MATCH void func_801EF254(void) {
 INCLUDE_ASM(func_801EF2CC);
 
 MATCH void func_801EF444(void) {
-    PartyBattler* battler;
-    u8            timer;
-    PartyBattler* work;
+    PartyMember* battler;
+    u8           timer;
+    PartyMember* work;
 
     work         = g_Task;
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
-    battler      = &g_BattlePartyBattlers[work->unk_04];
+    battler      = &g_Game.members[work->unk_04];
     if (!(timer & BYTE_MASK)) {
         GFX_FreePaletteFadeTarget(battler);
         g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);

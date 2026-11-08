@@ -8,7 +8,7 @@ MATCH void Battle_UpdateEnemyActors(void) {
     for (i = 0; i < 8u; i++) {
         if (g_BattleEnemyBattlers[i].header.flags != 0u) {
             enemy = &g_BattleEnemyBattlers[i];
-            TASK_SET((PartyBattler*)enemy);
+            TASK_SET((PartyMember*)enemy);
             BATTLE_CURRENT_ENEMY_PTR = enemy;
             func_8014D290();
         }

@@ -8,14 +8,14 @@ MATCH u8 func_801D5658(void) {
     count      = 0u;
     last_index = 0u;
     for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
-        if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_BattlePartyBattlers[index], STATUS_SLEEPING))) {
+        if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_Game.members[index], STATUS_SLEEPING))) {
             if (func_801DDCB4(index) != 0u) {
-                last_index                                  = index;
-                g_BattlePartyBattlers[index].u.turn.counter = 0u;
-                g_BattlePartyBattlers[index].chr.status &= ~STATUS_SLEEPING;
+                last_index                           = index;
+                g_Game.members[index].u.turn.counter = 0u;
+                g_Game.members[index].chr.status &= ~STATUS_SLEEPING;
                 count += 1u;
             } else {
-                g_BattlePartyBattlers[index].u.turn.counter += 1u;
+                g_Game.members[index].u.turn.counter += 1u;
             }
         }
     }

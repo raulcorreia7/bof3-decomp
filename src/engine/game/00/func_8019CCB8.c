@@ -17,7 +17,7 @@ MATCH void func_8019CCB8(void) {
             goto block_9; /* shared tail */
         }
         if (g_Task->param.unk_0B != 0) {
-            g_Task->direction_08 = g_BattlePartyBattlers[0].facing;
+            g_Task->direction_08 = g_Game.members[0].facing;
             g_Task->vx           = g_FacingOffsets[g_Task->direction_08].x * 2;
             g_Task->vy           = g_FacingOffsets[g_Task->direction_08].y * 2;
             g_Task->timer        = 0x10;

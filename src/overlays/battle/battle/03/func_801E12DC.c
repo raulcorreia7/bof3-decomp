@@ -4,19 +4,19 @@
  * pointer in the slot the route state selects and advances the work byte at 0x04.
  */
 MATCH void func_801E12DC(void) {
-    PartyBattler* work;
-    PartyBattler* slot_work;
-    u8            i;
-    u32           slot;
+    PartyMember* work;
+    PartyMember* slot_work;
+    u8           i;
+    u32          slot;
 
     i = 0;
     while (i < g_BattlePartyCount) {
-        if ((g_BattlePartyBattlers[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
+        if ((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
             return;
         }
         i++;
     }
-    work = g_GameState;
+    work = g_Game.current;
     work->u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
     if (work->chr.character_id == CHAR_ID_REI) {
         slot = Battle_AllocEffect(0, 0xB) & BYTE_MASK;

@@ -13,34 +13,34 @@ MATCH void func_800A68A4(void) {
          * held in s1 from entry. */
         volatile u8* loop_battler = &g_BattleActiveBattler;
         for (; i < 8; i++) {
-            g_BattlePartyBattlers[*loop_battler].status.unk_12C[i] = 0;
+            g_Game.members[*loop_battler].status.unk_12C[i] = 0;
         }
     }
     battler = &g_BattleActiveBattler;
-    g_BattlePartyBattlers[*battler].u.turn.damage_flags.volatile_value &=
+    g_Game.members[*battler].u.turn.damage_flags.volatile_value &=
         ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
-    g_BattlePartyBattlers[*battler].u.turn.action_flags.volatile_value &=
+    g_Game.members[*battler].u.turn.action_flags.volatile_value &=
         ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO |
           COMBATANT_FLAG_SELECTION_BONUS | COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING |
           COMBATANT_FLAG_SELECTED);
     func_800A9BD8(*battler);
-    index      = *battler;
-    flags      = g_BattlePartyBattlers[index].u.turn.action_flags.volatile_value;
-    D_800B6F58 = 0;
-    D_800B6F5C = 0;
-    g_BattlePartyBattlers[index].u.turn.action_flags.volatile_value = flags | COMBATANT_FLAG_DRAGON_FORM;
-    slot                                                            = func_800A6C2C();
+    index                                                    = *battler;
+    flags                                                    = g_Game.members[index].u.turn.action_flags.volatile_value;
+    D_800B6F58                                               = 0;
+    D_800B6F5C                                               = 0;
+    g_Game.members[index].u.turn.action_flags.volatile_value = flags | COMBATANT_FLAG_DRAGON_FORM;
+    slot                                                     = func_800A6C2C();
     if (slot != GAME_NONE) {
         func_800A7C14(slot);
         D_800B6F58 = slot + 4;
         if ((u8)(slot + 4) == DRAGON_FORM_BERSERK_KAISER) {
-            g_BattlePartyBattlers[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_BERSERK;
+            g_Game.members[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_BERSERK;
         }
         if (D_800B6F58 == DRAGON_FORM_FAILURE_KAISER) {
-            g_BattlePartyBattlers[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
+            g_Game.members[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
         }
         if (D_800B6F58 == DRAGON_FORM_TRUE_KAISER) {
-            g_BattlePartyBattlers[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
+            g_Game.members[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
         }
     } else {
         func_800A6E14(0xFF);

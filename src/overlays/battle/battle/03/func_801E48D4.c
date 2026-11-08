@@ -4,8 +4,8 @@
  * and +0x1C into +0x10, then re-arms the effect when +0x44 went negative.
  */
 MATCH void func_801E48D4(void) {
-    PartyBattler* work;
-    s32           timer;
+    PartyMember* work;
+    s32          timer;
 
     work = g_Task;
     work->scale.y += work->unk_10;

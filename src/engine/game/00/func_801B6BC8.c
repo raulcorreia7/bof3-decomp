@@ -20,7 +20,7 @@ MATCH void func_801B6BC8(void) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             }
             Actor_RequestScript(g_Task->direction_08);
-            g_GameState->status.field.flags_12C.u8_value &= 0xFB;
+            g_Game.current->status.field.flags_12C.u8_value &= 0xFB;
             func_801C3204();
             g_Task->header.mode = 1;
             ACTOR_CLEAR_STEP();
@@ -75,7 +75,7 @@ MATCH void func_801B6BC8(void) {
             work->direction_08 = sel;
             g_Task->unk_03     = 1;
         }
-        if ((g_GameState->u.field.flags_118 & 0x40) == 0) {
+        if ((g_Game.current->u.field.flags_118 & 0x40) == 0) {
             Actor_RequestScript(sel);
         }
     }

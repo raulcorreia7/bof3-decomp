@@ -1,9 +1,9 @@
 #include "boss033_16.h"
 
 MATCH void func_800C244C(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
-    work = (PartyBattler*)g_Task;
+    work = (PartyMember*)g_Task;
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     COORD_INT(work->pos.z) += work->unk_14;

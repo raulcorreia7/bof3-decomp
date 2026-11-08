@@ -22,7 +22,7 @@ NON_MATCHING void func_800AB910(void) {
         if (flags & 2) {
             state = 7;
         } else {
-            state = g_Weapons[g_BattlePartyBattlers[target].chr.equip.weapon].sound;
+            state = g_Weapons[g_Game.members[target].chr.equip.weapon].sound;
         }
     } else {
         flags = FIELD(u32, D_80146390, 0xCu);
@@ -39,17 +39,17 @@ NON_MATCHING void func_800AB910(void) {
         off_y                            = FIELD(u16, work, 0x2Eu);
         off_x                            = FIELD(u16, work, 0x30u);
         off_z                            = FIELD(u16, work, 0x32u);
-        flags                            = FIELD(u8, g_GameState, 0x79u);
+        flags                            = FIELD(u8, g_Game.current, 0x79u);
         g_BattleEffects[(u8)slot].unk_32 = off_z;
         stage                            = work[0x08];
         g_BattleEffects[(u8)slot].unk_2E = off_y + (s8)g_BattlePanelOffsets[stage * 2 + flags * 8];
         g_BattleEffects[(u8)slot].unk_30 = off_x + (s8)(g_BattlePanelOffsets + 1)[stage * 2 + flags * 8];
-        g_BattleEffects[(u8)slot].unk_08 = g_BattlePartyBattlers[unit].facing;
+        g_BattleEffects[(u8)slot].unk_08 = g_Game.members[unit].facing;
     } else {
         off_y                            = FIELD(u16, work, 0x2Eu);
         off_x                            = FIELD(u16, work, 0x30u);
         off_z                            = FIELD(u16, work, 0x32u);
-        flags                            = FIELD(u8, g_GameState, 0x79u);
+        flags                            = FIELD(u8, g_Game.current, 0x79u);
         g_BattleEffects[(u8)slot].unk_32 = off_z;
         g_BattleEffects[(u8)slot].unk_2E = off_y + g_BattleCurrentEnemy->panel_offset_x;
         g_BattleEffects[(u8)slot].unk_30 = off_x + g_BattleCurrentEnemy->panel_offset_y;

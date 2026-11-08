@@ -20,7 +20,7 @@ MATCH s32 func_801BDF08(void) {
     step_y = g_FacingStepY[work->direction_08 * 2];
     pos_x  = work->pos.x.fixed + step_x;
     pos_y  = work->pos.y.fixed + step_y;
-    if (g_GameFlags & 0x1000) {
+    if (g_Game.flags & 0x1000) {
         pos_x += step_x;
         pos_y += step_y;
     }
@@ -40,8 +40,8 @@ MATCH s32 func_801BDF08(void) {
         }
     }
     if (found != 0) {
-        g_GameState->u.field.counter_11C.u8_value = 3;
-        g_Task->timer                             = 0;
+        g_Game.current->u.field.counter_11C.u8_value = 3;
+        g_Task->timer                                = 0;
     }
     return found;
 }

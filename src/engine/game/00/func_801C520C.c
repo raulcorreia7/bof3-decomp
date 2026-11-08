@@ -20,7 +20,7 @@ MATCH s32 func_801C520C(void) {
     sumY    = FIELD(s32, route, 0x38u) + (g_FacingStepY[index] * step);
     targetY = sumY;
     if (FIELD(s16, route, 0x3Eu) < Area_ReadHeight(sumX, sumY)) {
-        COORD_INT(g_Task->pos.z) = (s16)((u16)COORD_INT(g_Task->pos.z) + D_80181B88[g_GameState->chr.character_id]);
+        COORD_INT(g_Task->pos.z) = (s16)((u16)COORD_INT(g_Task->pos.z) + D_80181B88[g_Game.current->chr.character_id]);
     } else {
         COORD_INT(g_Task->pos.z) = Area_ReadHeight(targetX, targetY);
         transitionId             = 0x3F;
@@ -31,7 +31,7 @@ MATCH s32 func_801C520C(void) {
         Actor_RequestScript(transitionId);
     }
     if ((g_Task->unk_05 == 0) &&
-        !((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+        !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_AdvanceScroll(COORD_INT(g_Task->pos.z));
     }
     if (!(g_FrameCount & 3)) {

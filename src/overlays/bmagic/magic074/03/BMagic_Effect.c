@@ -5,8 +5,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC28(void) {
-    PartyBattler* saved;
-    u8            i;
+    PartyMember* saved;
+    u8           i;
 
     BMagic_DispatchTaskPair(func_801EED18, Effect_StartOnZeroTick);
 

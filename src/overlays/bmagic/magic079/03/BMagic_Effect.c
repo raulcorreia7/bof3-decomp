@@ -11,9 +11,9 @@ MATCH void func_801EEC04(void) {
 }
 
 MATCH void func_801EEC5C(void) {
-    u8            i;
-    u32           slot;
-    PartyBattler* work;
+    u8           i;
+    u32          slot;
+    PartyMember* work;
 
     g_Task->param.unk_0B = 0;
     for (i = 0; i < 4; i++) {
@@ -55,8 +55,8 @@ MATCH void func_801EEE64(void) {
 }
 
 MATCH void func_801EEEE4(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
 
     work->pos.z.part.integer -= 0x40;
 
@@ -100,7 +100,7 @@ MATCH void func_801EEFB8(void) {
 }
 
 MATCH void func_801EF048(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work               = g_Task;
     work->timer        = work->timer - 1;
@@ -137,8 +137,8 @@ MATCH void func_801EF130(void) {
 }
 
 MATCH void func_801EF1DC(void) {
-    PartyBattler* work;
-    u8            timer;
+    PartyMember* work;
+    u8           timer;
 
     work  = g_Task;
     timer = work->unk_09 - 1;
@@ -183,7 +183,7 @@ MATCH void func_801EF2BC(void) {
 }
 
 MATCH void func_801EF348(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work               = g_Task;
     work->timer        = work->timer + 1;
@@ -208,7 +208,7 @@ MATCH void func_801EFBEC(void) {
 }
 
 MATCH void func_801EFC74(void) {
-    PartyBattler* src;
+    PartyMember* src;
 
     src                 = g_BattleSelectedActor;
     g_Task->pos.x.fixed = src->pos.x.fixed;
@@ -229,8 +229,8 @@ MATCH void func_801EFD2C(void) {
 }
 
 MATCH void func_801EFD84(void) {
-    PartyBattler* work;
-    PartyBattler* active;
+    PartyMember* work;
+    PartyMember* active;
 
     work         = g_Task;
     work->timer  = work->timer - 1;
@@ -253,8 +253,8 @@ MATCH void func_801EFE00(void) {
 }
 
 MATCH void func_801EFE88(void) {
-    PartyBattler* src;
-    u8            timer;
+    PartyMember* src;
+    u8           timer;
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
@@ -280,8 +280,8 @@ MATCH void func_801EFF58(void) {
 }
 
 MATCH void func_801EFFB0(void) {
-    PartyBattler* work;
-    PartyBattler* active;
+    PartyMember* work;
+    PartyMember* active;
 
     work         = g_Task;
     work->timer  = work->timer + 1;

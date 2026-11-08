@@ -10,9 +10,9 @@ INCLUDE_ASM(func_801EECE0);
 INCLUDE_ASM(func_801EEE24);
 
 MATCH void func_801EF000(void) {
-    u32           slot;
-    PartyBattler* work;
-    u8            facing;
+    u32          slot;
+    PartyMember* work;
+    u8           facing;
 
     if (g_Task->param.unk_0B == 3) {
         slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
@@ -42,7 +42,7 @@ MATCH void func_801EF35C(void) {
 }
 
 MATCH void func_801EF3A0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->param.unk_0B == 0x80) {
@@ -82,8 +82,8 @@ MATCH void func_801EF844(void) {
 }
 
 MATCH void func_801EF8A4(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 132) {
@@ -119,8 +119,8 @@ MATCH void func_801EFCA0(void) {
 }
 
 MATCH void func_801EFD00(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 132) {
@@ -163,8 +163,8 @@ MATCH void func_801F0218(void) {
 }
 
 MATCH void func_801F026C(void) {
-    PartyBattler* work;
-    u8            next;
+    PartyMember* work;
+    u8           next;
 
     work        = g_Task;
     next        = work->timer + 1;
@@ -183,8 +183,8 @@ INCLUDE_ASM(func_801F0764);
 
 /* blocker: self-copy semantics; first diff: coordinate loads reversed at 0x801F08C4. */
 MATCH void func_801F08B4(void) {
-    PartyBattler* task;
-    s8            tint;
+    PartyMember* task;
+    s8           tint;
 
     g_Task->pos.x.fixed        = g_Task->pos.x.fixed;
     g_Task->pos.y.fixed        = g_Task->pos.y.fixed;

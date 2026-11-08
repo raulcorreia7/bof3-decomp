@@ -12,7 +12,7 @@
 MATCH void func_801D3624(void) {
     u16* setup_flags;
     /* FAKE: allocator tie, row pointer in a1. */
-    MATCH_FAKE_PIN(PartyBattler*, work, "a1");
+    MATCH_FAKE_PIN(PartyMember*, work, "a1");
     u32 row_offset;
     u8  kind_index;
     u16 mode;
@@ -34,18 +34,17 @@ MATCH void func_801D3624(void) {
         kind_index             = kind;
         g_BattleTargetSelector = kind;
         if (kind_index < 3) {
-            work                  = &g_BattlePartyBattlers[kind_index];
+            work                  = &g_Game.members[kind_index];
             g_BattleSelectedActor = work;
             /* Retail builds this pointer as base + 0x118 + row * 0x140. */
-            D_80146390            = &g_BattlePartyBattlers[kind_index].u.turn.command;
-            D_80146386 =
-                work->unk_2E.half +
-                g_BattlePanelOffsets[g_BattlePartyBattlers[kind_index].chr.character_id * 8 + work->facing * 2];
-            D_80146388 = work->unk_30.half +
-                         D_801EB0B1[g_BattlePartyBattlers[kind_index].chr.character_id * 8 + work->facing * 2];
+            D_80146390            = &g_Game.members[kind_index].u.turn.command;
+            D_80146386 = work->unk_2E.half +
+                         g_BattlePanelOffsets[g_Game.members[kind_index].chr.character_id * 8 + work->facing * 2];
+            D_80146388 =
+                work->unk_30.half + D_801EB0B1[g_Game.members[kind_index].chr.character_id * 8 + work->facing * 2];
         } else {
             row_offset            = kind_index * 0x118;
-            work                  = (PartyBattler*)(g_BattleEnemies + row_offset);
+            work                  = (PartyMember*)(g_BattleEnemies + row_offset);
             D_80146390            = g_BattleEnemies + 0xF4 + row_offset;
             g_BattleSelectedActor = work;
             D_80146386            = work->unk_2E.half + ENEMY_COMBATANT(kind_index).panel_offset_x;

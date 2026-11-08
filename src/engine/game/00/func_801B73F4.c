@@ -9,6 +9,6 @@ MATCH void func_801B73F4(void) {
     } else {
         Actor_RequestScript(0x39);
     }
-    g_GameState->u.field.counter_11C.u8_value = 3;
-    g_Task->unk_03                            = 1;
+    g_Game.current->u.field.counter_11C.u8_value = 3;
+    g_Task->unk_03                               = 1;
 }

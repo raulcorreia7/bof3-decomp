@@ -38,7 +38,7 @@ MATCH u8 func_801DB058(void) {
     index = 0u;
     while ((u8)index < 3u) {
         if ((func_801DB9E4((u8)index) != 0u) && (func_801DB3A0((u8)index, total, maximum) != 0u)) {
-            g_BattlePartyBattlers[(u8)index].u.turn.action_flags.value |= COMBATANT_FLAG_PREEMPTIVE_TURN;
+            g_Game.members[(u8)index].u.turn.action_flags.value |= COMBATANT_FLAG_PREEMPTIVE_TURN;
             count += 1u;
         }
         index += 1u;
@@ -56,7 +56,7 @@ MATCH u8 func_801DB058(void) {
         if (func_801DB2F8((u8)index) != 0u) {
             u16 value;
 
-            value = g_BattlePartyBattlers[(u8)index].chr.stats.agility;
+            value = g_Game.members[(u8)index].chr.stats.agility;
             total += value;
             CLAMP_MIN(maximum, value);
             count += 1u;

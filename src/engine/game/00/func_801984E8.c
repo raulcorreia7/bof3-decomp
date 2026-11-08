@@ -23,7 +23,7 @@ MATCH void func_801984E8(void) {
         u16 tmp_625A = g_AreaWalkFlags;
         tmp_3B92 += 1;
         tmp_625A &= 0xFFBF;
-        g_AreaWalkFlags     = tmp_625A;
+        g_Game.walk_flags   = tmp_625A;
         g_GameEntrySubstate = tmp_3B92;
     }
 }

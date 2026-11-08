@@ -29,7 +29,7 @@ MATCH void func_801C16B8(void) {
 
     /* Signed gate: retail tests the party byte with blez. */
     count = 0;
-    if ((s16)g_PartySize > 0) {
+    if ((s16)g_Game.party_size > 0) {
         src_base = g_Characters;
         dst_base = D_80145F04;
         dst_off  = 0;

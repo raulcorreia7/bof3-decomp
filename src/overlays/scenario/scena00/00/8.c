@@ -2071,7 +2071,7 @@ MATCH void func_801FB744(void) {
 /* Advances the scena00 transition sequence, handling input, camera state and audio cues. */
 MATCH void func_801FB924(void) {
     u16* counter;
-    /* FAKE: keep the g_BattlePartyBattlers[0].unk_24 address for its masked load/store. */
+    /* FAKE: keep the g_Game.members[0].unk_24 address for its masked load/store. */
     u8*  flags;
     /* FAKE: hold the g_PartyY base before g_AreaFocusY. */
     u32* base;
@@ -2223,8 +2223,8 @@ MATCH void func_801FB924(void) {
         case 9:
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
-                flags           = &g_BattlePartyBattlers[0].unk_24;
-                g_GameFlags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_MENU_LOCK);
+                flags           = &g_Game.members[0].unk_24;
+                g_Game.flags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_MENU_LOCK);
                 *flags &= 0xDF;
                 Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, TO_COORD(87), TO_COORD(4), FACING_LEFT);
                 Scene_RequestChapterAdvance();

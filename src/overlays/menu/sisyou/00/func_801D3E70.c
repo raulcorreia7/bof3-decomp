@@ -7,7 +7,7 @@ MATCH void func_801D3E70(void) {
         return;
     }
     g_MasterMenuCursor++;
-    if ((g_MasterMenuCursor & BYTE_MASK) < g_PartySize) {
+    if ((g_MasterMenuCursor & BYTE_MASK) < g_Game.party_size) {
         g_MasterSubStep = 1;
     } else {
         g_MasterStep    = 2;

@@ -4,7 +4,7 @@
  * global battle substates.
  */
 MATCH void func_801DF3B8(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     func_801DEFE4();
     func_801DEDE4();

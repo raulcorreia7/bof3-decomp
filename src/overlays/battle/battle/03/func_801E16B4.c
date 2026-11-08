@@ -1,11 +1,11 @@
 #include "battle_03.h"
 
 MATCH void func_801E16B4(void) {
-    u8            state;
-    PartyBattler* work;
+    u8           state;
+    PartyMember* work;
 
     if (EMI_LoaderIsReady() != 0) {
-        work  = g_GameState;
+        work  = g_Game.current;
         state = work->u.turn.command.type;
         if (state == 4) {
             if (!(work->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
@@ -25,7 +25,7 @@ MATCH void func_801E16B4(void) {
             g_Task->unk_09 = 0;
         }
         if (!(D_801CA71C[g_BattleActionId].mask & 0x800)) {
-            work = g_GameState;
+            work = g_Game.current;
             if (work->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
                 g_Task->unk_09 = D_801EB23C[g_DragonForm];
             } else {

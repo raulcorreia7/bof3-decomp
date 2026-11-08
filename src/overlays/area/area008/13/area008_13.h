@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 #define WORLD00_AREA008_SCRATCH_PTR SP_REF(volatile Actor*, 0x44u)
-#define WORLD00_AREA008_STATE_PTR   (*(volatile Actor**)&g_GameState)
+#define WORLD00_AREA008_STATE_PTR   (*(volatile Actor**)&g_Game.current)
 #define g_CurrentActor              (*(s32*)&g_CurrentActor)
 
 /* The world overlay's reading of the shared field work row. */

@@ -4,14 +4,14 @@
  * follow-up when the message flag allows it and advances the step byte.
  */
 MATCH void func_801E1888(void) {
-    PartyBattler* work;
-    u8            count;
+    PartyMember* work;
+    u8           count;
 
     work  = g_Task;
     count = work->unk_09;
     if (count == 0) {
         func_801DD858(5);
-        if ((g_GameState->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) &&
+        if ((g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) &&
             ((g_DragonForm & BYTE_MASK) != 4) && ((u32)((short)g_DragonForm - 7) >= 2)) {
             func_801DD858(3);
         }

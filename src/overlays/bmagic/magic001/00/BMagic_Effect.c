@@ -50,8 +50,8 @@ MATCH void func_801EF164(void) {
 INCLUDE_ASM(func_801EF1CC);
 
 MATCH void func_801EF280(void) {
-    PartyBattler* work;
-    u8            timer;
+    PartyMember* work;
+    u8           timer;
 
     work         = g_Task;
     timer        = work->unk_09 - 1;
@@ -75,7 +75,7 @@ MATCH void func_801EF324(void) {
 }
 
 MATCH void func_801EF37C(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     func_8014DAEC();
     func_8014DAEC();
@@ -91,11 +91,11 @@ MATCH void func_801EF37C(void) {
 }
 
 MATCH void func_801EF408(void) {
-    PartyBattler* work  = g_Task;
-    u8            timer = work->timer - 1;
-    s32           value = work->unk_14 + work->unk_20;
-    work->timer         = timer;
-    work->unk_14        = value;
+    PartyMember* work  = g_Task;
+    u8           timer = work->timer - 1;
+    s32          value = work->unk_14 + work->unk_20;
+    work->timer        = timer;
+    work->unk_14       = value;
     COORD_INT(work->pos.z) += value;
     if (timer == 0) {
         g_Task->header.step += 1;
@@ -233,10 +233,10 @@ MATCH void func_801EFE38(void) {
 #include "overlays/bmagic/Effect_PrimeTintOnScriptReady.h"
 
 MATCH void func_801EFFCC(void) {
-    PartyBattler* work;
-    PartyBattler* source;
-    s8            temp_v0;
-    u8            temp_v0_2;
+    PartyMember* work;
+    PartyMember* source;
+    s8           temp_v0;
+    u8           temp_v0_2;
 
     temp_v0 = g_Task->unk_5D;
     if (temp_v0 != -0x80) {

@@ -10,16 +10,16 @@
  * advances the step.
  */
 MATCH void func_801DFCB4(void) {
-    PartyBattler* self;
-    PartyBattler* stats_work;
-    PartyBattler* lock_work;
-    PartyBattler* hit_work;
-    PartyBattler* tail_work;
-    PartyBattler* check_work;
-    u8            slot;
-    u8            action_type;
-    s16*          pending;
-    u16*          flags;
+    PartyMember* self;
+    PartyMember* stats_work;
+    PartyMember* lock_work;
+    PartyMember* hit_work;
+    PartyMember* tail_work;
+    PartyMember* check_work;
+    u8           slot;
+    u8           action_type;
+    s16*         pending;
+    u16*         flags;
 
     D_801463DA                             = 0;
     g_BattlePendingStatus                  = 0;
@@ -33,8 +33,8 @@ MATCH void func_801DFCB4(void) {
     *(s16*)((u8*)self + 0x11C)             = 0;
     *(s16*)((u32)g_BattleTargetRecord + 6) = 0;
     *((u8*)g_BattleTargetRecord + 8)       = 0;
-    D_801EC2E8                             = *(BattleStatBlock*)&g_GameState->chr.stats.max_hp;
-    stats_work                             = g_GameState;
+    D_801EC2E8                             = *(BattleStatBlock*)&g_Game.current->chr.stats.max_hp;
+    stats_work                             = g_Game.current;
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;
     }
@@ -50,12 +50,12 @@ MATCH void func_801DFCB4(void) {
             func_8009D198();
             break;
     }
-    lock_work = g_GameState;
+    lock_work = g_Game.current;
     if ((lock_work->u.turn.target_flags & BATTLE_HIT_HP) && lock_work->u.turn.hp_change == 0) {
         g_Task->header.step = 3;
         return;
     }
-    if (!(g_GameState->u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
+    if (!(g_Game.current->u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
         switch (LOBU(g_BattleActionType)) {
             case BATTLE_ACTION_ITEM:
                 if (!(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & BYTE_MASK) & 4)) {
@@ -75,13 +75,13 @@ MATCH void func_801DFCB4(void) {
     hit_work = g_GameState;
     if (hit_work->u.turn.target_flags & BATTLE_HIT_HP) {
         func_800AAC88(hit_work->u.turn.hp_change, g_Task->slot);
-        hit_work = g_GameState;
+        hit_work = g_Game.current;
     }
     if (hit_work->u.turn.target_flags & BATTLE_HIT_AP) {
         func_800AAEBC(hit_work->u.turn.ap_change, g_Task->slot);
     }
     pending   = &g_BattlePendingStatus;
-    tail_work = g_GameState;
+    tail_work = g_Game.current;
     tail_work->chr.status |= *pending;
     *pending = 0;
     if (tail_work->u.turn.hp_change > 0) {
@@ -91,7 +91,7 @@ MATCH void func_801DFCB4(void) {
             } else {
                 tail_work->chr.status = STATUS_KO;
             }
-            if (!(g_GameState->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+            if (!(g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
                 func_801DD858(1);
             }
             GFX_FreePaletteFadeTarget(g_Task);
@@ -99,7 +99,7 @@ MATCH void func_801DFCB4(void) {
             func_801DD858(0);
         }
     }
-    check_work = g_GameState;
+    check_work = g_Game.current;
     if (check_work->u.turn.hp_change < 0 || check_work->u.turn.ap_change < 0) {
         SND_QueueSelectionFx(0x206);
     }

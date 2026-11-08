@@ -13,5 +13,5 @@ MATCH s32 func_801F3F68(void) {
         g_Task->unk_0A = 8;
         g_Task->unk_04 = 3;
     }
-    g_GameState->u.field.unk_122 -= 2;
+    g_Game.current->u.field.unk_122 -= 2;
 }

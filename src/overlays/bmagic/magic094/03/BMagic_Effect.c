@@ -14,9 +14,9 @@ INCLUDE_ASM(func_801EEC5C);
 
 /* Copies the selected actor's unk_2E and unk_30 - 0x10; at unk_0B 0xFF releases the target and plays. */
 MATCH void func_801EED60(void) {
-    u32           slot;
-    u8*           selector;
-    PartyBattler* battler;
+    u32          slot;
+    u8*          selector;
+    PartyMember* battler;
 
     g_Task->unk_2E.half = g_BattleSelectedActor->unk_2E.half;
     g_Task->unk_30.half = g_BattleSelectedActor->unk_30.half - 0x10;
@@ -44,9 +44,9 @@ MATCH void func_801EEF1C(void) {
 }
 
 MATCH void func_801EEF7C(void) {
-    u32           slot;
-    u8            step;
-    PartyBattler* battler;
+    u32          slot;
+    u8           step;
+    PartyMember* battler;
 
     g_Task->timer++;
     step           = g_Task->unk_09 + 1;
@@ -54,9 +54,9 @@ MATCH void func_801EEF7C(void) {
     if (step == 0x10) {
         slot = LOBU(g_BattleTargetSelector);
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-            battler = &g_BattlePartyBattlers[slot];
+            battler = &g_Game.members[slot];
         } else {
-            battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+            battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
         }
         func_80196718(battler);
         func_8019651C(battler, 6, 4, 8, 0);

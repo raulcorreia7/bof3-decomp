@@ -22,5 +22,5 @@ MATCH s32 func_800A4FD8(void) {
     if (slot_02 != GAME_NONE) {
         sum += D_800B4C7C[slot_02];
     }
-    return g_BattlePartyBattlers[g_BattleMessageSlot[5]].chr.ap >= (sum & BYTE_MASK);
+    return g_Game.members[g_BattleMessageSlot[5]].chr.ap >= (sum & BYTE_MASK);
 }

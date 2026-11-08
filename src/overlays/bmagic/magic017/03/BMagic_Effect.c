@@ -42,8 +42,8 @@ INCLUDE_ASM(func_801EF248);
 INCLUDE_ASM(func_801EF300);
 
 MATCH void func_801EF460(void) {
-    PartyBattler* task;
-    u8            timer;
+    PartyMember* task;
+    u8           timer;
 
     task = g_Task;
     task->pos.x.fixed += task->unk_0C;

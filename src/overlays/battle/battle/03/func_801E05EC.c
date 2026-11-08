@@ -5,14 +5,14 @@
  * countdown and runs the next step.
  */
 MATCH void func_801E05EC(void) {
-    u32           slot;
-    PartyBattler* work;
-    PartyBattler* increment_work;
-    PartyBattler* battle;
+    u32          slot;
+    PartyMember* work;
+    PartyMember* increment_work;
+    PartyMember* battle;
 
     work = g_Task;
     if (work->timer == 0) {
-        battle = g_GameState;
+        battle = g_Game.current;
         if (battle->u.turn.target_flags & BATTLE_HIT_HP_LANDED) {
             func_800AAC88(battle->u.turn.hp_change, work->slot);
         } else {

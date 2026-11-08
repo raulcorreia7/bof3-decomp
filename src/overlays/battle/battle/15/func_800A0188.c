@@ -11,7 +11,7 @@ MATCH void func_800A0188(void) {
     MATCH_FAKE_BARRIER();
     mode = LOBU(g_BattleTarget);
     if (mode < 3u) {
-        base = g_BattlePartyBattlers[mode].chr.hp;
+        base = g_Game.members[mode].chr.hp;
     } else {
         base = ENEMY_COMBATANT(mode).hp;
     }

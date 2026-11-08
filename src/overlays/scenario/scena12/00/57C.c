@@ -283,7 +283,7 @@ MATCH s32 func_801FCCBC(void) {
     D_80146865      = 0;
     D_80146866      = 0;
     D_80146867      = 0;
-    if (g_BattlePartyBattlers[0].chr.character_id != 5) {
+    if (g_Game.members[0].chr.character_id != 5) {
         D_80146875 = 0;
         D_80146874 = 5;
         return 1;

@@ -43,7 +43,7 @@ MATCH void func_801EEF08(void) {
 }
 
 MATCH void func_801EEFB8(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->param.unk_0B++;
@@ -56,7 +56,7 @@ MATCH void func_801EEFB8(void) {
 }
 
 MATCH void func_801EF024(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->param.unk_0B++;

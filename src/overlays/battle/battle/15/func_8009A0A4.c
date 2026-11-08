@@ -6,7 +6,7 @@ MATCH void func_8009A0A4(void) {
     volatile u8* dest;
     u8           value;
 
-    kind_index = g_BattlePartyBattlers[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
+    kind_index = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         g_BattleUIState = 4;
         return;

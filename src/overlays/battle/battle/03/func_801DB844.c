@@ -12,17 +12,17 @@ MATCH u8 func_801DB844(u32 battler_index) {
     index = battler_index & BYTE_MASK;
     if (index < 3u) {
         offset = index * 320u;
-        if (!ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
+        if (!ACTOR_IN_USE(g_Game.members[index])) {
             return false;
         }
-        if (HAS_STATUS(g_BattlePartyBattlers[index], 0x4964u)) {
+        if (HAS_STATUS(g_Game.members[index], 0x4964u)) {
             return false;
         }
         if (g_BattleActionLock != 0u &&
-            (g_BattlePartyBattlers[index].u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
+            (g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
             return false;
         }
-        if ((g_BattlePartyBattlers[index].u.turn.action_flags.value &
+        if ((g_Game.members[index].u.turn.action_flags.value &
              (COMBATANT_FLAG_DRAGON_FORM_QUEUED | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_DRAGON_FORM_BERSERK)) !=
             0u) {
             return false;

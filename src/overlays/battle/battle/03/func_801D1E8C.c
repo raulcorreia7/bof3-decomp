@@ -5,23 +5,23 @@
  * body is 20 bytes short. resume: a source shape whose pad cursor and state base stay live across the calls. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1E8C(void) {
-    PartyBattler* temp_v0_66;
-    u8*           state;
-    u16*          pad;
-    s32           temp_v1_80;
-    s32           var_s0;
-    s32           var_s1;
-    s32           var_v0_199;
-    s32           var_v0_210;
-    s8            temp_a0_239;
-    s8            temp_v0_50;
-    u16*          var_s5;
-    u16           temp_v1_206;
-    u8*           var_s2;
-    u8*           var_s3;
-    u8*           var_s4;
-    u8*           var_s6;
-    u8            var_v0_215;
+    PartyMember* temp_v0_66;
+    u8*          state;
+    u16*         pad;
+    s32          temp_v1_80;
+    s32          var_s0;
+    s32          var_s1;
+    s32          var_v0_199;
+    s32          var_v0_210;
+    s8           temp_a0_239;
+    s8           temp_v0_50;
+    u16*         var_s5;
+    u16          temp_v1_206;
+    u8*          var_s2;
+    u8*          var_s3;
+    u8*          var_s4;
+    u8*          var_s6;
+    u8           var_v0_215;
 
     state = &g_BattleRowCursor;
     pad   = &g_InputPressed;
@@ -33,7 +33,7 @@ NON_MATCHING void func_801D1E8C(void) {
         temp_v0_50           = (u8)g_BattleCommandCount - 1;
         g_BattleCommandCount = temp_v0_50;
         g_BattleStep -= 1;
-        temp_v0_66              = &g_BattlePartyBattlers[D_801462F6[temp_v0_50]];
+        temp_v0_66              = &g_Game.members[D_801462F6[temp_v0_50]];
         g_BattleMessageSlot     = &temp_v0_66->header.flags;
         temp_v0_66->header.mode = 2;
         temp_v0_66->turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;

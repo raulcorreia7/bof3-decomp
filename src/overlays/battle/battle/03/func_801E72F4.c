@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801E72F4(void) {
-    PartyBattler* scratch;
+    PartyMember* scratch;
 
     g_Task->header.flags = (g_BattleEffectBattler->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT);
     g_Task->unk_48       = g_BattleEffectBattler->unk_48;

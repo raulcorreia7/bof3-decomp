@@ -31,7 +31,7 @@ MATCH void func_801E6FB0(void) {
     }
     slot = g_BattleEffectBattler->slot;
     if (BATTLER_IS_PLAYER(slot)) {
-        flags = g_BattlePartyBattlers[slot].chr.status;
+        flags = g_Game.members[slot].chr.status;
     } else {
         row   = slot - 3;
         flags = g_BattleEnemyBattlers[row].status;

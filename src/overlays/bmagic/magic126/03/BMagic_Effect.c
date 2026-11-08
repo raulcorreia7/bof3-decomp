@@ -5,16 +5,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    PartyBattler* saved;
-    PartyBattler* swap;
-    s32           count;
+    PartyMember* saved;
+    PartyMember* swap;
+    s32          count;
 
     BMagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
     count = 0;
     do {
         if (D_801F12BC[(u8)count << 5] & 1) {
             saved                 = g_BattleEffectBattler;
-            swap                  = FIELD(PartyBattler*, D_801F12D8, (u8)count << 5);
+            swap                  = FIELD(PartyMember*, D_801F12D8, (u8)count << 5);
             D_801F22BC            = D_801F12BC + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801F091C();
@@ -164,10 +164,10 @@ MATCH void func_801EFAF4(void) {
 }
 
 MATCH void func_801EFB74(void) {
-    u8            timer = g_Task->unk_09 - 1;
-    PartyBattler* work;
-    PartyBattler* actor;
-    s32           z;
+    u8           timer = g_Task->unk_09 - 1;
+    PartyMember* work;
+    PartyMember* actor;
+    s32          z;
 
     g_Task->unk_09 = timer;
     if (timer == 0) {
@@ -292,9 +292,9 @@ MATCH void func_801F116C(void) {
 }
 
 MATCH void func_801F11AC(void) {
-    PartyBattler* work;
-    s16           vec[3];
-    TILE_1*       primitive;
+    PartyMember* work;
+    s16          vec[3];
+    TILE_1*      primitive;
 
     work      = D_801F22BC;
     vec[0]    = (work->unk_10 >> 9) - 0x4000;

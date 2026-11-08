@@ -9,10 +9,10 @@ MATCH u8 Battle_SlotIsBlocked(u32 slot) {
     index = slot & BYTE_MASK;
     if (index < 3u) {
         offset = index * 320u;
-        if ((g_BattlePartyBattlers[index].header.flags & PARTY_BATTLER_FLAG_OCCUPIED) == 0) {
+        if ((g_Game.members[index].header.flags & PARTY_MEMBER_FLAG_OCCUPIED) == 0) {
             return true;
         }
-        if (HAS_STATUS(g_BattlePartyBattlers[index], STATUS_KO)) {
+        if (HAS_STATUS(g_Game.members[index], STATUS_KO)) {
             return true;
         }
     } else {

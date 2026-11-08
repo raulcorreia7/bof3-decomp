@@ -13,7 +13,7 @@ MATCH s32 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode) {
     if (mode == 0) {
         record = &g_Characters[character_index];
     } else {
-        record = &g_BattlePartyBattlers[character_index].chr;
+        record = &g_Game.members[character_index].chr;
     }
     switch (ability_type) {
         case ABILITY_TYPE_HEAL:

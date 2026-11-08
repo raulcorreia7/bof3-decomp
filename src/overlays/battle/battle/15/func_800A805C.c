@@ -17,7 +17,7 @@ MATCH u8 func_800A805C(void) {
     do {
         if (LOBU(g_BattleActiveBattler) != slot) {
             if (Battle_SlotIsBlocked(slot) == 0) {
-                slots[count] = g_BattlePartyBattlers[slot].chr.character_id;
+                slots[count] = g_Game.members[slot].chr.character_id;
                 count++;
             }
         }

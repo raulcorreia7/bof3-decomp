@@ -42,7 +42,6 @@
 #define BATTLE_RING_STRIDE                0x08
 #define BATTLE_KIND_STRIDE                0x14
 
-#define PARTY_COMBATANT_BASE              0x80145E90u
 #define ENEMY_COMBATANT_BASE              0x801EB630u
 #define BATTLE_EFFECT_BASE                0x801EC330u
 
@@ -85,7 +84,7 @@
 
 #define BATTLE_SELECTION_RECORD_HANDLE(i) MEM(u8* volatile, 0x801EB5B4u + (u32)(i) * BATTLE_RING_STRIDE)
 
-#define BATTLE_ACTIVE_WORK                ((PartyBattler*)g_BattleEffectBattler)
+#define BATTLE_ACTIVE_WORK                ((PartyMember*)g_BattleEffectBattler)
 
 /* A hit's target answers with a reprisal when its reprisal roll passes
  * (Character.stats.reprisal_chance, or the enemy's event_flags bit 2): the hit's
@@ -183,10 +182,6 @@ extern s32          D_80145A04;
 extern u8           D_80146229;
 extern u16          D_8014622A;
 extern u8           D_80146232;
-/* Stock count owned by the main executable. */
-extern u8           g_PartySize;
-/* D_80146255 */
-extern u8           g_BattlePartyOrder;
 extern s16          D_801462AA;
 /* D_801462E5 */
 extern u8           g_BattleRowCursor;
@@ -221,7 +216,7 @@ extern volatile u8   g_BattleActionType;
 extern u16           D_80146386;
 extern u16           D_8014638A;
 /* The selected battler's row (D_8014638C), stored by func_801D3624. */
-extern PartyBattler* g_BattleSelectedActor;
+extern PartyMember*  g_BattleSelectedActor;
 extern void*         D_80146390;
 extern s32           D_8014639C;
 extern u16           D_801463B2;
@@ -259,7 +254,7 @@ extern u8            g_BattleEnemies[];
  * overlays advance through the effect steps. It is a non-volatile view on
  * purpose: some retail stores rely on the plain form, for example the counter
  * store in the return-jump delay slot of func_801E8D04. */
-extern PartyBattler* g_BattleEffectBattler;
+extern PartyMember*  g_BattleEffectBattler;
 /* The current battler's enemy work row (the row at ENEMY_COMBATANT_BASE that
  * the battle mode is running). battle/battle/03 stores it when it arms a slot
  * (func_801E2170) and battle/battle/15 reads its cells (Battle_TriggerEnemyEvents). */

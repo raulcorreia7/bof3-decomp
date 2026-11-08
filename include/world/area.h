@@ -48,7 +48,7 @@
 #define WORLD_BUNDLE_RECORD_OPCODE_MASK  0x7F
 
 /* A scenario script owns the field while the active bit is set. */
-#define GAME_SCRIPT_ACTIVE()             (g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE)
+#define GAME_SCRIPT_ACTIVE()             (g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE)
 
 /* Word bits of D_8014625A, the world entry/step busy word. Bits 0-2 mark party
  * slots still busy with an entry; bit 3 is set when an entry starts; bit 4
@@ -199,13 +199,13 @@ typedef enum FieldTaskMode {
     FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
 } FieldTaskMode;
 
-/* g_GameState->u.field.mode_12B while the character field action runs. */
+/* g_Game.current->u.field.mode_12B while the character field action runs. */
 #define GAME_PANEL_MODE_PERSONAL_ACTION 8
 
 /* Garr pushes after walking this many frames against an object. */
 #define GARR_PUSH_HOLD_FRAMES           0x10
 
-/* g_GameState->u.field.counter_11C, the walk speed index: Teepo and Peco act on a rock only at the run index. */
+/* g_Game.current->u.field.counter_11C, the walk speed index: Teepo and Peco act on a rock only at the run index. */
 #define FIELD_SPEED_RUN                 4
 
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by

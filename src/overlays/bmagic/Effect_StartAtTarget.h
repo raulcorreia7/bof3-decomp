@@ -3,9 +3,9 @@
    step (work byte 0x02). One definition shared by the bmagic effect modules; every change here must verify every
    member. */
 MATCH void Effect_StartAtTarget(void) {
-    PartyBattler* work;
-    PartyBattler* actor;
-    s32           z;
+    PartyMember* work;
+    PartyMember* actor;
+    s32          z;
 
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     work              = g_Task;

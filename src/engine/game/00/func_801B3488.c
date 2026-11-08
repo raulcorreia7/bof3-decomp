@@ -9,7 +9,7 @@ MATCH void func_801B3488(void) {
     } else if (D_8014625C & g_InputMasks[FIELD_INPUT_INTERACT]) {
         func_801C56E4();
     }
-    if (!((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+    if (!((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_AdvanceScroll(COORD_INT(((Actor*)SCRATCH_WORK)->pos.z));
         func_801C2710();
     }

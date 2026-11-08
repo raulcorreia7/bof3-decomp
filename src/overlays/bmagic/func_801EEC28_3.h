@@ -4,7 +4,7 @@
 /* func_801EEC28 (magic162), func_801EEC28 (magic168) */
 MATCH void func_801EEC28(void) {
     BMagicEffectFuncs handlers;
-    PartyBattler*     active;
+    PartyMember*      active;
     u8                i;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);

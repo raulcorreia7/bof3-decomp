@@ -17,7 +17,7 @@
 
 /* The battle system as the two battle overlays implement it. A battle keeps a
  * 0x140-byte local work row per party member and a 0x118-byte enemy row
- * (PartyBattler, EnemyBattler in records.h); both carry the action block,
+ * (PartyMember, EnemyBattler in records.h); both carry the action block,
  * the HP/AP change cells and the status word the result screens read.
  *
  * Turn order is a ranking pass: func_801DAAE4 scores each active battler from

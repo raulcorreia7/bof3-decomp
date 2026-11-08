@@ -16,20 +16,20 @@ MATCH s32 func_800AA8FC(void) {
         slot = i;
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0) {
             off   = slot * BATTLE_PARTY_STRIDE;
-            flags = g_BattlePartyBattlers[slot].u.turn.damage_flags.value;
+            flags = g_Game.members[slot].u.turn.damage_flags.value;
             if (flags & 8) {
                 if ((func_800AA874((u8)g_BattleAction->unk_02) & BYTE_MASK) == 0) {
                     kind = g_BattleAction->unk_02;
                     if (D_801CA71C[kind].mask & 0x200) {
                         Char_AddAbility(kind, slot, 0, 1);
-                        Char_AddAbility(g_BattleAction->unk_02, (&g_BattlePartyBattlers[0].character_index)[off], 0, 0);
+                        Char_AddAbility(g_BattleAction->unk_02, (&g_Game.members[0].character_index)[off], 0, 0);
                         kind = g_BattleAction->unk_02;
                         BIT_ARRAY_SET(g_LearnedAbilities, kind);
                     }
                     result = 1;
                 }
             } else {
-                g_BattlePartyBattlers[slot].u.turn.damage_flags.value = flags & ~8;
+                g_Game.members[slot].u.turn.damage_flags.value = flags & ~8;
             }
         }
     }

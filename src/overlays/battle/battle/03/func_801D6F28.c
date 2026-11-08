@@ -6,7 +6,7 @@ MATCH void func_801D6F28(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            if ((g_BattlePartyBattlers[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
+            if ((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
                 return;
             }
             i += 1u;
@@ -20,15 +20,15 @@ MATCH void func_801D6F28(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            func_800A36F0(i, g_BattlePartyBattlers[i].chr.status & STATUS_CURE_MASK);
-            GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[i]);
+            func_800A36F0(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
+            GFX_FreePaletteFadeTarget(&g_Game.members[i]);
             i += 1u;
         } while (i < g_BattlePartyCount);
     }
     for (i = 0u; i < g_BattlePartyCount; i++) {
-        if (ACTOR_IN_USE(g_BattlePartyBattlers[i])) {
-            PartyBattler* work = &g_BattlePartyBattlers[i];
-            u16           half = work->unk_58;
+        if (ACTOR_IN_USE(g_Game.members[i])) {
+            PartyMember* work = &g_Game.members[i];
+            u16          half = work->unk_58;
 
             g_Task = work;
             Actor_StageScriptRecord(work->unk_4B, (u16)(half - 2u), (u8*)0x800F0800u, 0x1800);

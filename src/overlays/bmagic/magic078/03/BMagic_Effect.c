@@ -94,11 +94,11 @@ INCLUDE_ASM(func_801EF318);
 INCLUDE_ASM(func_801EFE14);
 
 MATCH void func_801EFEB8(void) {
-    PartyBattler* work;
-    SVECTOR       pos;
-    SVECTOR       rot;
-    MATRIX        matrix;
-    long          flags;
+    PartyMember* work;
+    SVECTOR      pos;
+    SVECTOR      rot;
+    MATRIX       matrix;
+    long         flags;
 
     PushMatrix();
     work   = g_Task;
@@ -146,7 +146,7 @@ MATCH void func_801F014C(void) {
 }
 
 MATCH void func_801F01D0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work        = g_Task;
     work->timer = work->timer - 1;
@@ -157,7 +157,7 @@ MATCH void func_801F01D0(void) {
 }
 
 MATCH void func_801F0230(void) {
-    PartyBattler* linked;
+    PartyMember* linked;
 
     linked = g_Task->unk_4C;
     func_800AF2B4(g_BattleEffectBattler, 8);

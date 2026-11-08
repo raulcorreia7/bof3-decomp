@@ -10,7 +10,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
 
     mode = (*(u8*)&g_BattleActiveBattler);
     if (mode < 3u) {
-        base = g_BattlePartyBattlers[mode].chr.hp;
+        base = g_Game.members[mode].chr.hp;
     } else {
         base = ENEMY_COMBATANT(mode).hp;
     }
@@ -24,7 +24,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
     battler = (*(u8*)&g_BattleTarget);
     base    = BATTLER_IS_PLAYER(battler);
     if (base) {
-        if (g_BattlePartyBattlers[battler].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_Game.members[battler].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             return 0;
         }
     } else {

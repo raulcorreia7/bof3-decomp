@@ -10,7 +10,7 @@ MATCH void Effect_ReplaceSlotPaletteFade(void) {
 
     slot = g_Task->unk_04;
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-        battler = &g_BattlePartyBattlers[slot];
+        battler = &g_Game.members[slot];
     } else {
         battler = &g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT];
     }

@@ -6,8 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 MATCH void func_801EEC10(void) {
     Magic129Steps handlers = D_801EEC04;
-    PartyBattler* saved_task;
-    PartyBattler* saved_battler;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
     u8            i;
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
@@ -16,7 +16,7 @@ MATCH void func_801EEC10(void) {
         if (D_801F05D8[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyBattler*)&D_801F05D8[i];
+            g_Task                = (PartyMember*)&D_801F05D8[i];
             g_BattleEffectBattler = D_801F05D8[i].target.party;
             func_801EFF40();
             g_BattleEffectBattler = saved_battler;
@@ -50,8 +50,8 @@ INCLUDE_ASM(func_801EF058);
 INCLUDE_ASM(func_801EF3DC);
 
 MATCH void func_801EF4F0(void) {
-    PartyBattler* work;
-    s8            timer;
+    PartyMember* work;
+    s8           timer;
 
     work         = g_Task;
     timer        = work->unk_5D - 1;
@@ -96,11 +96,11 @@ MATCH void func_801F00D4(void) {
 }
 
 MATCH void func_801F023C(void) {
-    PartyBattler* work  = g_Task;
-    u8            timer = work->unk_09 - 1;
-    s32           value = work->unk_14 + work->unk_20;
-    work->unk_09        = timer;
-    work->unk_14        = value;
+    PartyMember* work  = g_Task;
+    u8           timer = work->unk_09 - 1;
+    s32          value = work->unk_14 + work->unk_20;
+    work->unk_09       = timer;
+    work->unk_14       = value;
     work->pos.z.fixed += value;
     if (timer == 0) {
         g_Task->header.step += 1;
@@ -108,11 +108,11 @@ MATCH void func_801F023C(void) {
 }
 
 MATCH void func_801F029C(void) {
-    PartyBattler* work  = g_Task;
-    u8            timer = work->timer - 1;
-    s32           value = work->unk_14 + work->unk_20;
-    work->timer         = timer;
-    work->unk_14        = value;
+    PartyMember* work  = g_Task;
+    u8           timer = work->timer - 1;
+    s32          value = work->unk_14 + work->unk_20;
+    work->timer        = timer;
+    work->unk_14       = value;
     work->pos.z.fixed += value;
     if (timer == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;

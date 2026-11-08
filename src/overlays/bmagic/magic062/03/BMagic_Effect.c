@@ -70,10 +70,10 @@ MATCH void func_801EFBBC(void) {
 INCLUDE_ASM(func_801EFC4C);
 
 MATCH void func_801EFD80(void) {
-    s32           timer;
-    s32           vel;
-    PartyBattler* task;
-    PartyBattler* reset;
+    s32          timer;
+    s32          vel;
+    PartyMember* task;
+    PartyMember* reset;
 
     func_800AF764();
     func_801F0910((rand() & 3) | 0x18);
@@ -99,9 +99,9 @@ MATCH void func_801EFD80(void) {
 }
 
 MATCH void func_801EFE74(void) {
-    s32           timer;
-    s32           vel;
-    PartyBattler* task;
+    s32          timer;
+    s32          vel;
+    PartyMember* task;
 
     func_800AF764();
     func_801F0910((rand() & 3) | 0x18);

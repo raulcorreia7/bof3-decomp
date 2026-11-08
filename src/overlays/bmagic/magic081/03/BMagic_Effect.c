@@ -9,7 +9,7 @@ INCLUDE_ASM(CardAccessFile);
 INCLUDE_ASM(func_801EED44);
 
 MATCH void func_801EEE74(void) {
-    PartyBattler* saved;
+    PartyMember* saved;
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
@@ -23,7 +23,7 @@ MATCH void func_801EEE74(void) {
 INCLUDE_ASM(func_801EEEDC);
 
 MATCH void func_801EEF88(void) {
-    PartyBattler* saved_work;
+    PartyMember* saved_work;
 
     saved_work = g_Task;
     g_Task     = D_801EC2E0->target.party;

@@ -36,10 +36,10 @@ MATCH void func_801EF018(void) {
 INCLUDE_ASM(func_801EF090);
 
 MATCH void func_801EF174(void) {
-    PartyBattler* work = g_Task;
-    u8            count;
-    u8            phase = work->param.phase;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           count;
+    u8           phase = work->param.phase;
+    u8           timer;
     phase += 1;
     timer             = work->unk_09;
     work->param.phase = phase + (timer >> 6);
@@ -54,10 +54,10 @@ MATCH void func_801EF174(void) {
 }
 
 MATCH void func_801EF21C(void) {
-    PartyBattler* work = g_Task;
-    u8            count;
-    u8            phase = work->param.phase;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           count;
+    u8           phase = work->param.phase;
+    u8           timer;
     phase += 1;
     timer             = work->unk_09;
     work->param.phase = phase + (timer >> 6);

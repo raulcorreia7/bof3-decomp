@@ -51,13 +51,13 @@ case_2:
         return 0;
     if ((*(const u16*)(D_80145F10 + character_offset) & 0x10u) != 0u && (*(const u16*)(ability + 0x10) & 0x400u) != 0u)
         return 0;
-    if ((u8)kind == ABILITY_DISEMBOWEL && g_BattlePartyBattlers[(u8)ch].chr.fatigue >= 5u)
+    if ((u8)kind == ABILITY_DISEMBOWEL && g_Game.members[(u8)ch].chr.fatigue >= 5u)
         return 0;
     if ((u8)kind == ABILITY_BONEBREAK && *(u32*)&g_GameBonebreakTimer != 0u)
         return 0;
     if ((u8)kind == ABILITY_CELERITY && *(u32*)&g_GameCelerityTimer != 0u)
         return 0;
-    if ((u8)kind == ABILITY_TRUMP && g_BattlePartyBattlers[(u8)ch].chr.ap != 0u)
+    if ((u8)kind == ABILITY_TRUMP && g_Game.members[(u8)ch].chr.ap != 0u)
         return 0;
     if ((u8)kind == ABILITY_ACCESSION && g_BattleEncounter == 37u)
         return 0;

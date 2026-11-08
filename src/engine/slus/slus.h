@@ -48,7 +48,6 @@
 /* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (one of the words D_80148A18-D_80148A30). */
 #define CUE_TONE(vab_header)  ((VagAtr*)(D_8018B40C + (vab_header)))
-#define g_GameState           g_GameState
 #define g_SceneRecord         (*(RecordKey*)&g_SceneState)
 #define g_CurrentActor        ((u8*)g_CurrentActor)
 

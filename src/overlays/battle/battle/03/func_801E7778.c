@@ -4,11 +4,11 @@
  * velocity or resets the step and clears the selected record's pending flag.
  */
 MATCH void func_801E7778(void) {
-    PartyBattler* work;
-    u8            flag;
-    u32           index;
-    u32           step;
-    u32           value;
+    PartyMember* work;
+    u8           flag;
+    u32          index;
+    u32          step;
+    u32          value;
 
     g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
     work = g_BattleEffectBattler;
@@ -18,8 +18,8 @@ MATCH void func_801E7778(void) {
     } else {
         work->unk_48 = 0;
         index        = g_BattleEffectBattler->slot;
-        value        = g_BattlePartyBattlers[index].u.turn.damage_flags.value & ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
-        g_BattlePartyBattlers[index].u.turn.damage_flags.value = value;
+        value        = g_Game.members[index].u.turn.damage_flags.value & ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+        g_Game.members[index].u.turn.damage_flags.value = value;
         func_801E5988();
     }
 }

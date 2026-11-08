@@ -43,9 +43,9 @@ MATCH void func_801EEFA8(void) {
 }
 
 MATCH void func_801EF070(void) {
-    PartyBattler* src;
+    PartyMember* src;
 
-    src                 = (PartyBattler*)g_BattleEffectBattler;
+    src                 = (PartyMember*)g_BattleEffectBattler;
     g_Task->pos.x.fixed = src->pos.x.fixed;
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;
@@ -66,8 +66,8 @@ MATCH void func_801EF0D4(void) {
 }
 
 MATCH void func_801EF134(void) {
-    u8             timer_next;
-    PartyBattler** selected;
+    u8            timer_next;
+    PartyMember** selected;
 
     g_Task->unk_09 += 1;
     timer_next    = g_Task->timer + 2;

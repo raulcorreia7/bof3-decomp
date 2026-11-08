@@ -13,11 +13,11 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
     g_EncounterOriginY = work_index;
     g_BattleScrollDir  = mode;
     count              = 0;
-    if (count < g_PartySize) {
+    if (count < g_Game.party_size) {
         offset = 0;
         do {
             kind        = 0;
-            record      = (u8*)g_BattlePartyBattlers + offset;
+            record      = (u8*)g_Game.members + offset;
             g_GameState = record;
             TASK_SET(record);
             key = record[0x79];
@@ -38,6 +38,6 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             Actor_RequestScript(g_Task->direction_08);
             offset += BATTLE_PARTY_STRIDE;
             count += 1;
-        } while (count < g_PartySize);
+        } while (count < g_Game.party_size);
     }
 }

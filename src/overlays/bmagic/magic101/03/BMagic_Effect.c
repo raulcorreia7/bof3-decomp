@@ -29,14 +29,14 @@ NON_MATCHING void func_801EECCC(void) {
 
     if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
         if (g_BattleActiveBattler >= BATTLE_PARTY_CHARACTERS_COUNT) {
-            facing = ((PartyBattler*)D_8014637C)->facing;
+            facing = ((PartyMember*)D_8014637C)->facing;
             goto have_facing;
         }
     } else if (g_BattleActiveBattler < BATTLE_PARTY_CHARACTERS_COUNT) {
-        facing = ((PartyBattler*)D_8014637C)->facing;
+        facing = ((PartyMember*)D_8014637C)->facing;
         goto have_facing;
     }
-    facing = ((PartyBattler*)D_8014637C)->facing ^ 0x2;
+    facing = ((PartyMember*)D_8014637C)->facing ^ 0x2;
 have_facing:
     g_Task->facing = facing;
     func_800AFD9C();
@@ -140,8 +140,8 @@ INCLUDE_ASM(func_801EF4DC);
 INCLUDE_ASM(func_801EF580);
 
 MATCH void func_801EF690(void) {
-    u8            counter;
-    PartyBattler* work;
+    u8           counter;
+    PartyMember* work;
 
     g_Task->param.unk_0B += 4;
     work = g_Task;
@@ -154,9 +154,9 @@ MATCH void func_801EF690(void) {
 }
 
 MATCH void func_801EF700(void) {
-    u8            counter;
-    s32           value;
-    PartyBattler* work;
+    u8           counter;
+    s32          value;
+    PartyMember* work;
 
     g_Task->param.unk_0B += g_Task->timer >> 1;
     work         = g_Task;

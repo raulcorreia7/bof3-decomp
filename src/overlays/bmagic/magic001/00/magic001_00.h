@@ -24,7 +24,7 @@ extern Magic001SecondSteps D_801EEC3C;
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->param.unk_0B == 0) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         g_Task->header.mode += 1;
     }
 }

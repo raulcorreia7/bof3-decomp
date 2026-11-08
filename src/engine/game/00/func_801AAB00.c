@@ -22,8 +22,8 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                 g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2],
                                                               (code + CUR(sub))[3], (code + CUR(sub))[4]);
             } else {
-                g_GameState->unk_13D = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2],
-                                                            (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_Game.current->unk_13D = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2],
+                                                               (code + CUR(sub))[3], (code + CUR(sub))[4]);
             }
             CUR(sub) += 4;
             break;
@@ -36,10 +36,10 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                 g_PaletteFades[g_CurrentActor->unk_93].offset.green += (code + CUR(sub))[2];
                 slot = g_CurrentActor->unk_93;
             } else {
-                slot = g_GameState->unk_13D;
+                slot = g_Game.current->unk_13D;
                 g_PaletteFades[slot].offset.red += (code + CUR(sub))[1];
-                g_PaletteFades[g_GameState->unk_13D].offset.green += (code + CUR(sub))[2];
-                slot = g_GameState->unk_13D;
+                g_PaletteFades[g_Game.current->unk_13D].offset.green += (code + CUR(sub))[2];
+                slot = g_Game.current->unk_13D;
             }
             g_PaletteFades[slot].offset.blue += (code + CUR(sub))[3];
             CUR(sub) += 3;
@@ -51,10 +51,10 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                 g_PaletteFades[g_CurrentActor->unk_93].offset.green -= (code + CUR(sub))[2];
                 slot = g_CurrentActor->unk_93;
             } else {
-                slot = g_GameState->unk_13D;
+                slot = g_Game.current->unk_13D;
                 g_PaletteFades[slot].offset.red -= (code + CUR(sub))[1];
-                g_PaletteFades[g_GameState->unk_13D].offset.green -= (code + CUR(sub))[2];
-                slot = g_GameState->unk_13D;
+                g_PaletteFades[g_Game.current->unk_13D].offset.green -= (code + CUR(sub))[2];
+                slot = g_Game.current->unk_13D;
             }
             g_PaletteFades[slot].offset.blue -= (code + CUR(sub))[3];
             CUR(sub) += 3;
@@ -142,7 +142,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             break;
         case 0xCE:
             cur  = g_Task->direction_08 & 7;
-            want = g_BattlePartyBattlers[0].facing ^ 4;
+            want = g_Game.members[0].facing ^ 4;
             if (cur != want) {
                 val = cur + 1;
                 if (((want - cur) << 0x18) <= 0) {

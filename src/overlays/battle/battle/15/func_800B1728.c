@@ -38,7 +38,7 @@ MATCH void func_800B1728(void) {
             }
             line_y = row << 5;
             clut   = 0;
-            if (g_BattlePartyBattlers[BATTLE_ACTIVE_ROW->slot].chr.ap < sum) {
+            if (g_Game.members[BATTLE_ACTIVE_ROW->slot].chr.ap < sum) {
                 clut = 7;
             }
             func_800B1DAC((g_MenuCurrentPanel->pos.x + 0x10), (g_MenuCurrentPanel->pos.y + (line_y + 0x18)),

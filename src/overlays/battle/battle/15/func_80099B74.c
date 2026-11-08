@@ -53,8 +53,8 @@ NON_MATCHING void func_80099B74(void) {
         if (g_BattleTargetCursorCol != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             slot = FIELD(u8, g_BattleMessageSlot, 0x5u);
-            g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value =
-                g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value | COMBATANT_FLAG_UNK_14;
+            g_Game.members[slot].turn.damage_flags.volatile_value =
+                g_Game.members[slot].turn.damage_flags.volatile_value | COMBATANT_FLAG_UNK_14;
             *(u16*)((u8*)D_80145FAA + FIELD(u8, g_BattleMessageSlot, 0x5u) * BATTLE_PARTY_STRIDE) =
                 *(volatile u16*)&g_BattleTargetCursorCol;
             choice                        = *(volatile u16*)&g_BattleTargetCursorCol;

@@ -6,8 +6,8 @@ MATCH void func_800AB570(s32 battler_index) {
     u8 result;
 
     index = battler_index & BYTE_MASK;
-    value = g_BattlePartyBattlers[index].counter_136;
-    if ((s8)g_BattlePartyBattlers[index].counter_136 >= 6) {
+    value = g_Game.members[index].counter_136;
+    if ((s8)g_Game.members[index].counter_136 >= 6) {
         value = 5;
     }
     if ((rand() % 20) < (s8)value && g_BattleLivingPartyCount != 1) {
@@ -15,7 +15,7 @@ MATCH void func_800AB570(s32 battler_index) {
     } else {
         result = Battle_FindSelectableSlotForward(RANDOM_MASK(7) + 3);
     }
-    g_BattleTargetSelector                           = result;
-    g_BattlePartyBattlers[index].u.turn.command.type = BATTLE_COMMAND_ATTACK;
-    g_BattleActionType                               = BATTLE_ACTION_ATTACK;
+    g_BattleTargetSelector                    = result;
+    g_Game.members[index].u.turn.command.type = BATTLE_COMMAND_ATTACK;
+    g_BattleActionType                        = BATTLE_ACTION_ATTACK;
 }

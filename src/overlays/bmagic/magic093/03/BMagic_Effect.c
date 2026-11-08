@@ -12,7 +12,7 @@ INCLUDE_ASM(func_801EED04);
 MATCH void func_801EF02C(void) {
     u16* flags;
 
-    if ((PARTY_BATTLER_WORD_08(g_Task) & 0xFF00FF00u) == 0) {
+    if ((PARTY_MEMBER_WORD_08(g_Task) & 0xFF00FF00u) == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }
@@ -37,7 +37,7 @@ MATCH void func_801EF264(void) {
             func_800AF814((g_Task->unk_03 + 3) & 0xFF);
         } else {
             func_800A9820(g_Task->unk_03);
-            GFX_FreePaletteFadeTarget((EnemyBattler*)&g_BattlePartyBattlers[g_Task->unk_03]);
+            GFX_FreePaletteFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
             func_800AF814(g_Task->unk_03);
         }
         g_Task->header.step += 1;
@@ -60,8 +60,8 @@ INCLUDE_ASM(func_801EF4C8);
 INCLUDE_ASM(func_801EF600);
 
 MATCH void func_801EF710(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 8) {
@@ -71,12 +71,12 @@ MATCH void func_801EF710(void) {
 }
 
 MATCH void func_801EF750(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
-        work               = (PartyBattler*)g_BattleEffectBattler;
+        work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();
     }
@@ -109,7 +109,7 @@ MATCH void func_801F00A0(void) {
 }
 
 MATCH void func_801F00F0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->unk_09 += 2;

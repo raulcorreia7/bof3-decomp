@@ -6,7 +6,7 @@ MATCH void func_801BFAC4(void) {
 
     i = 0;
     while (i < g_PartySize) {
-        work        = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
+        work        = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
         g_GameState = work;
         TASK_SET(work);
         func_8014D978();

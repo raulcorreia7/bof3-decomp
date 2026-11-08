@@ -5,7 +5,7 @@
  * slot word plus level << 9; calls func_801E30F8 unless bit 0x1000 of unk_100 is set.
  */
 MATCH void func_801E3638(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     D_801EB3FC[g_Task->header.step]();
     if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {

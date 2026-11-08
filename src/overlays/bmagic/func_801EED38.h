@@ -4,10 +4,10 @@
  * overlays; every change here must verify every member. */
 /* func_801EED38 (magic070), func_801EED38 (magic071), func_801EED38 (magic072) */
 MATCH void func_801EED38(void) {
-    PartyBattler* battler;
-    PartyBattler* owner;
-    u8            i;
-    u8            sparkle_index;
+    PartyMember* battler;
+    PartyMember* owner;
+    u8           i;
+    u8           sparkle_index;
 
     for (i = 0; i < EFFECT_SPARKLE_COUNT; i++) {
         D_801F01B4[i].header.flags = 0;

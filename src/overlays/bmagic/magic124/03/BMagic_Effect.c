@@ -87,7 +87,7 @@ MATCH void func_801F028C(void) {
 }
 
 MATCH void func_801F02FC(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->timer += 2;
@@ -100,8 +100,8 @@ MATCH void func_801F02FC(void) {
 }
 
 MATCH void func_801F0368(void) {
-    PartyBattler* work;
-    u8            count;
+    PartyMember* work;
+    u8           count;
 
     work = g_Task;
     work->timer++;

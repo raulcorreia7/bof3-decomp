@@ -76,16 +76,16 @@ MATCH void func_801F77F8(void) {
 }
 
 MATCH void func_801F783C(void) {
-    Actor*        work;
-    PartyBattler* battler;
-    s32           i;
-    s8            tint;
+    Actor*       work;
+    PartyMember* battler;
+    s32          i;
+    s8           tint;
 
     work = g_Task;
     i    = 0;
     if (g_PartySize != 0) {
         do {
-            battler = &g_BattlePartyBattlers[i & BYTE_MASK];
+            battler = &g_Game.members[i & BYTE_MASK];
             TASK_SET(battler);
             battler->unk_29 = 3;
             func_8014D290();
@@ -165,15 +165,15 @@ MATCH void func_801F8488(void) {
 /* The statements of func_801F84CC and func_801F87F8, byte-identical twins: set +0x29 of every party battler row to 3,
  * clear the three tint bytes of the current work and move it to step 1. Each member declares work and i. Every change
  * here must verify both members. */
-#define SCENA15_PARTY_SETUP()                \
-    work = g_Task;                           \
-    for (i = 0; i < g_PartySize; i++) {      \
-        g_BattlePartyBattlers[i].unk_29 = 3; \
-    }                                        \
-    g_Task                  = work;          \
-    work->tint.bytes.unk_5F = 0;             \
-    work->tint.bytes.unk_5E = 0;             \
-    work->tint.bytes.unk_5D = 0;             \
+#define SCENA15_PARTY_SETUP()           \
+    work = g_Task;                      \
+    for (i = 0; i < g_PartySize; i++) { \
+        g_Game.members[i].unk_29 = 3;   \
+    }                                   \
+    g_Task                  = work;     \
+    work->tint.bytes.unk_5F = 0;        \
+    work->tint.bytes.unk_5E = 0;        \
+    work->tint.bytes.unk_5D = 0;        \
     g_Task->header.mode     = 1
 
 MATCH void func_801F84CC(void) {

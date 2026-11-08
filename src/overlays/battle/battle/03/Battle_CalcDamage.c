@@ -16,7 +16,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     spread = D_801D0C7C;
     if (element == BATTLE_ELEMENT_FROM_WEAPON) {
         if (BATTLER_IS_PLAYER(attacker)) {
-            *(u16*)D_1F800000 = g_Weapons[g_BattlePartyBattlers[attacker].chr.equip.weapon].element;
+            *(u16*)D_1F800000 = g_Weapons[g_Game.members[attacker].chr.equip.weapon].element;
         } else {
             *(u16*)D_1F800000 = 0;
         }
@@ -24,11 +24,11 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         *(u16*)D_1F800000 = element;
     }
     if (BATTLER_IS_PLAYER(attacker)) {
-        if (g_BattlePartyBattlers[attacker].u.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
+        if (g_Game.members[attacker].u.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
             power = &D_801EC30C;
-            *power += (*power * g_BattlePartyBattlers[attacker].focus_counter) >> 1;
-            g_BattlePartyBattlers[attacker].focus_counter = 0;
-            g_BattlePartyBattlers[attacker].u.turn.action_flags.value &= ~COMBATANT_FLAG_POWER_BOOST;
+            *power += (*power * g_Game.members[attacker].focus_counter) >> 1;
+            g_Game.members[attacker].focus_counter = 0;
+            g_Game.members[attacker].u.turn.action_flags.value &= ~COMBATANT_FLAG_POWER_BOOST;
         }
     } else if (ENEMY_COMBATANT(attacker).turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
         power                             = &D_801EC30C;
@@ -38,22 +38,22 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     }
     damage = Battle_RollBaseDamage(attacker, target, 0);
     if (BATTLER_IS_PLAYER(attacker) && !BATTLER_IS_PLAYER(target)) {
-        if ((g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DEMONSBANE ||
-             g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_HOLY_AVENGER ||
-             g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_ARIES_SPEAR) &&
+        if ((g_Game.members[attacker].chr.equip.weapon == WEAPON_DEMONSBANE ||
+             g_Game.members[attacker].chr.equip.weapon == WEAPON_HOLY_AVENGER ||
+             g_Game.members[attacker].chr.equip.weapon == WEAPON_ARIES_SPEAR) &&
             ENEMY_COMBATANT(target).enemy_id.byte.family == ENEMY_FAMILY_DEMON) {
             damage *= 2;
         }
-        if ((g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DRAGON_BLADE ||
-             g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DRAGON_SPEAR ||
-             g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DRAGONFANG) &&
+        if ((g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGON_BLADE ||
+             g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGON_SPEAR ||
+             g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGONFANG) &&
             ENEMY_COMBATANT(target).enemy_id.byte.family == ENEMY_FAMILY_DRAGON) {
             damage *= 2;
         }
     }
     if (BATTLER_IS_PLAYER(target)) {
-        status = g_BattlePartyBattlers[target].chr.status;
-        flags  = g_BattlePartyBattlers[target].u.turn.damage_flags.value;
+        status = g_Game.members[target].chr.status;
+        flags  = g_Game.members[target].u.turn.damage_flags.value;
     } else {
         status = ENEMY_COMBATANT(target).status;
         flags  = ENEMY_COMBATANT(target).turn.damage_flags.value;
@@ -62,8 +62,8 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         if (status & STATUS_SLEEPING) {
             *(volatile s16*)&D_801463DA |= 0x40;
             if (BATTLER_IS_PLAYER(target)) {
-                func_800A36F0(g_BattlePartyBattlers[target].slot, 0x40);
-                g_BattlePartyBattlers[target].u.turn.counter = 0;
+                func_800A36F0(g_Game.members[target].slot, 0x40);
+                g_Game.members[target].u.turn.counter = 0;
             } else {
                 func_800A36F0(ENEMY_COMBATANT(target).slot, 0x40);
                 ENEMY_COMBATANT(target).turn.counter = 0;
@@ -75,8 +75,8 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         if (status & STATUS_CONFUSED) {
             *(volatile s16*)&D_801463DA |= 0x20;
             if (BATTLER_IS_PLAYER(target)) {
-                func_800A36F0(g_BattlePartyBattlers[target].slot, 0x20);
-                g_BattlePartyBattlers[target].u.turn.counter = 0;
+                func_800A36F0(g_Game.members[target].slot, 0x20);
+                g_Game.members[target].u.turn.counter = 0;
             } else {
                 func_800A36F0(ENEMY_COMBATANT(target).slot, 0x20);
                 ENEMY_COMBATANT(target).turn.counter = 0;
@@ -112,7 +112,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         damage = 1;
     }
     if (BATTLER_IS_PLAYER(target)) {
-        if (g_BattlePartyBattlers[target].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_Game.members[target].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             damage = 0;
         }
     } else if (ENEMY_COMBATANT(target).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {

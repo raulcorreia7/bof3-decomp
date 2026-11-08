@@ -10,13 +10,13 @@ MATCH void func_801C2E34(u8 index) {
 
     table = D_80195FF8;
     entry = (u8*)table.entries + index * 3;
-    Char_LoseHP(entry[0], g_GameState->chr.character_id);
-    Char_SpendAP(entry[1], g_GameState->chr.character_id);
+    Char_LoseHP(entry[0], g_Game.current->chr.character_id);
+    Char_SpendAP(entry[1], g_Game.current->chr.character_id);
     if (entry[2] & 0x80) {
-        g_GameState->u.field.flags_118 = 0x0A;
+        g_Game.current->u.field.flags_118 = 0x0A;
     }
     if (entry[2] & 0x20) {
-        g_GameState->u.field.countdown_119 = 0x28;
+        g_Game.current->u.field.countdown_119 = 0x28;
     }
     record_index1 = g_GameState->character_index;
     if ((u32)(g_Characters[record_index1].stats.max_hp >> 2) >= g_Characters[record_index1].hp) {

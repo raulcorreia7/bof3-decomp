@@ -4,7 +4,7 @@
  * local work timers and counters and enters substate 1.
  */
 MATCH void func_801E3334(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     func_801E2314(0);

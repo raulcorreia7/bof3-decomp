@@ -2,7 +2,7 @@
 
 MATCH void func_801E15CC(void) {
     func_801DEDE4();
-    if (HAS_STATUS(*g_GameState, STATUS_KO)) {
+    if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
         g_Task->header.mode = 6;
         g_Task->header.step = 4;
     } else {

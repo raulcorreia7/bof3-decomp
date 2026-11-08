@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801E4B2C(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     if (EMI_LoaderIsReady() != 0) {
         if (((EnemyBattler*)g_BattleCurrentEnemy)->turn.command.type == BATTLE_COMMAND_ABILITY) {

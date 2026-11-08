@@ -20,9 +20,9 @@ void            func_801EFD5C(void);
 void            func_801F06AC(void);
 void            func_801F091C(void);
 
-void                 func_801F0ED0(void);
-void                 func_801F11AC(void);
-extern PartyBattler* D_801F22BC;
+void                func_801F0ED0(void);
+void                func_801F11AC(void);
+extern PartyMember* D_801F22BC;
 
 void BMagic_DrawGlowRingInner(void);
 

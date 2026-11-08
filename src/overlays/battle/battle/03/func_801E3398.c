@@ -5,7 +5,7 @@
  * battle update.
  */
 MATCH void func_801E3398(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if ((s32)work->scale.x <= 0xFFFF) {

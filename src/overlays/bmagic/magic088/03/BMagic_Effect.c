@@ -10,8 +10,8 @@ INCLUDE_ASM(func_801EEC20);
 INCLUDE_ASM(func_801EECA4);
 
 MATCH void func_801EEEF4(void) {
-    PartyBattler* battler;
-    u8            value;
+    PartyMember* battler;
+    u8           value;
 
     battler        = g_BattleSelectedActor;
     value          = g_Task->unk_09 - 1;
@@ -129,7 +129,7 @@ MATCH void func_801EFA2C(void) {
 }
 
 MATCH void func_801EFA94(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work         = g_Task;
     work->unk_09 = work->unk_09 - 2;

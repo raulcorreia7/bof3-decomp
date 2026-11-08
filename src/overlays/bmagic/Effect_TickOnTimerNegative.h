@@ -4,8 +4,8 @@
  * bmagic effect modules; every change here must verify every member. */
 /* func_801F0650 (magic126), func_801EF770 (magic172) */
 MATCH void Effect_TickOnTimerNegative(void) {
-    PartyBattler* work;
-    s8            timer;
+    PartyMember* work;
+    s8           timer;
 
     work         = g_Task;
     timer        = work->unk_09 - 2;

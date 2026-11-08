@@ -13,12 +13,12 @@ MATCH void func_801D3148(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    for (i = 0; i < g_PartySize; i++) {
-        if (g_Characters[g_BattlePartyBattlers[i].character_index].master_id != g_SceneEventSelection) {
+    for (i = 0; i < g_Game.party_size; i++) {
+        if (g_Characters[g_Game.members[i].character_index].master_id != g_SceneEventSelection) {
             break;
         }
     }
-    if (i < g_PartySize) {
+    if (i < g_Game.party_size) {
         g_MasterSubStep = 0;
         return;
     }

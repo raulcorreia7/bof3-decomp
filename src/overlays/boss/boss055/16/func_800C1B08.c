@@ -3,10 +3,10 @@
 MATCH void func_800C1B08(void) {
     u8 timer;
 
-    timer                           = ((PartyBattler*)g_Task)->unk_09 - 1;
-    ((PartyBattler*)g_Task)->unk_09 = timer;
+    timer                          = ((PartyMember*)g_Task)->unk_09 - 1;
+    ((PartyMember*)g_Task)->unk_09 = timer;
     if (timer == 0) {
         func_801E52F0(*g_BattleCurrentEnemy->unk_E8);
     }
-    ((PartyBattler*)g_Task)->param.unk_0B = 0;
+    ((PartyMember*)g_Task)->param.unk_0B = 0;
 }

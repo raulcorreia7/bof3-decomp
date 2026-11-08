@@ -164,7 +164,7 @@ void Area_ClearCell(s32 x, s32 y);
         } else if (roll >= 12) {                                   \
             CALLEE(2, x, y, cell & BYTE_MASK);                     \
             func_801C308C(0);                                      \
-            Char_LoseHP(1, g_GameState->chr.character_id);         \
+            Char_LoseHP(1, g_Game.current->chr.character_id);      \
             Resource_RequestArea(0xD9);                            \
             g_GameStateIndex     = 2;                              \
             g_Task->param.unk_0B = 1;                              \

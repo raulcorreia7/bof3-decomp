@@ -5,9 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    PartyBattler* saved_task;
-    PartyBattler* saved_battler;
-    u8            i;
+    PartyMember* saved_task;
+    PartyMember* saved_battler;
+    u8           i;
 
     BMagic_DispatchTaskPair(func_801EED04, Effect_PlayOnZeroTick);
 
@@ -15,7 +15,7 @@ MATCH void func_801EEC04(void) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyBattler*)&BMAGIC_EFFECT_SLOTS[i];
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
             g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
             func_801EFB48();
             g_BattleEffectBattler = saved_battler;
@@ -67,9 +67,9 @@ MATCH void func_801EEFF8(void) {
 }
 
 MATCH void func_801EF0F8(void) {
-    PartyBattler* work  = g_Task;
-    u8            timer = work->timer - 1;
-    work->timer         = timer;
+    PartyMember* work  = g_Task;
+    u8           timer = work->timer - 1;
+    work->timer        = timer;
     work->pos.z.fixed += TO_COORD(-128);
     if (timer == 0) {
         g_Task->header.step += 1;
@@ -77,8 +77,8 @@ MATCH void func_801EF0F8(void) {
 }
 
 MATCH void func_801EF148(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
 
     work->unk_14 += 0x20;
 

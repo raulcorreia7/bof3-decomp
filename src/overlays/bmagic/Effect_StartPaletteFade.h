@@ -2,7 +2,7 @@
    (work byte 0x0B), clears the effect timer (work byte 0x09) and advances the effect step (work byte 0x01). One
    definition shared by the bmagic effect modules; every change here must verify every member. */
 MATCH void Effect_StartPaletteFade(void) {
-    PartyBattler** actor;
+    PartyMember** actor;
 
     actor = &g_BattleSelectedActor;
     GFX_FreePaletteFadeTarget(*actor);

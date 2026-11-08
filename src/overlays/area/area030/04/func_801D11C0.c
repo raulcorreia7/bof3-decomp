@@ -13,7 +13,7 @@ MATCH void func_801D11C0(void) {
     if (g_AreaTargetCellY >= 0x39) {
         g_Task->header.step = 3;
     }
-    g_Task->unk_2A              = g_BattlePartyBattlers[0].unk_2A;
+    g_Task->unk_2A              = g_Game.members[0].unk_2A;
     g_Task->unk_49              = D_80145ED9;
     g_Task->unk_4A              = D_80145EDA;
     g_Task->unk_4B              = D_80145EDB;

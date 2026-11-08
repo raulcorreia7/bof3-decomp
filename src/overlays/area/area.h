@@ -128,21 +128,21 @@ extern Callback D_801F5804[];
  * look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the
  * battler's unk_0B. Every change here must verify every member. */
 static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
-    PartyBattler* battler;
-    u8            index;
-    s16           y;
-    s16           x;
-    u8            selection;
-    s32           result;
+    PartyMember* battler;
+    u8           index;
+    s16          y;
+    s16          x;
+    u8           selection;
+    s32          result;
 
-    TASK_SET(&g_BattlePartyBattlers[slot]);
+    TASK_SET(&g_Game.members[slot]);
     index     = g_PartyFieldOrder[slot];
-    y         = g_BattlePartyBattlers[slot].unk_30.signed_half;
-    x         = g_BattlePartyBattlers[slot].unk_2E.signed_half;
+    y         = g_Game.members[slot].unk_30.signed_half;
+    x         = g_Game.members[slot].unk_2E.signed_half;
     selection = table[index];
     result    = func_8015CB18(kind, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        battler               = (PartyBattler*)g_Task;
+        battler               = (PartyMember*)g_Task;
         battler->param.unk_0B = (u8)result;
     }
 }
@@ -152,7 +152,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
 static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
     if (D_80143F03 == 2 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && (u32)((x >> 16) - 70) < 3U) {
         if ((u32)((y >> 16) - first_row) < 3U &&
-            (g_BattlePartyBattlers[0].facing == FACING_UP_LEFT || (u32)(g_BattlePartyBattlers[0].facing - 6) < 2U)) {
+            (g_Game.members[0].facing == FACING_UP_LEFT || (u32)(g_Game.members[0].facing - 6) < 2U)) {
             *g_ScriptVars = 0;
             func_801BE1B0(0);
             return 1;
@@ -171,9 +171,9 @@ static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
         s32    scaled;                                                                                    \
         Actor* scratch;                                                                                   \
                                                                                                           \
-        scaled = g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09;                       \
+        scaled = g_Game.members[0].unk_0C * g_Game.members[0].unk_09;                                     \
         x      = (D_80145EC4[0] + scaled) >> 16;                                                          \
-        y      = (D_80145EC8 + g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09) >> 16;  \
+        y      = (D_80145EC8 + g_Game.members[0].unk_10 * g_Game.members[0].unk_09) >> 16;                \
                                                                                                           \
         scratch     = g_Task;                                                                             \
         scratch->vx = x;                                                                                  \
@@ -186,7 +186,7 @@ static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
             g_Task->param.unk_0B = 2;                                                                     \
         } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xAE) {                                        \
             g_Task->param.unk_0B = 3;                                                                     \
-        } else if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {                                              \
+        } else if (g_Game.walk_flags & AREA_WALK_TRANSITION) {                                            \
             g_Task->param.unk_0B = 4;                                                                     \
         } else {                                                                                          \
             g_Task->param.unk_0B = 0;                                                                     \

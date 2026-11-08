@@ -5,11 +5,11 @@
  * 0x206 and, when g_BattleOutcome.event_flags is clear, runs the cleanup calls and advances the battle work.
  */
 MATCH void func_801E0F0C(void) {
-    PartyBattler* spad;
-    PartyBattler* spad2;
-    PartyBattler* work;
-    s32           count;
-    u32           slot;
+    PartyMember* spad;
+    PartyMember* spad2;
+    PartyMember* work;
+    s32          count;
+    u32          slot;
     /* FAKE: retail materializes the bar reset constant in v1. */
     MATCH_REG(s16, one, "v1");
     /* FAKE: retail materializes the +0x124 mask in a3. */
@@ -18,7 +18,7 @@ MATCH void func_801E0F0C(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0) {
-        work         = g_GameState;
+        work         = g_Game.current;
         one          = 1;
         mask         = ~4;
         work->chr.hp = one;
@@ -36,7 +36,7 @@ MATCH void func_801E0F0C(void) {
         if (g_BattleOutcome.event_flags == 0) {
             func_801D9484();
             Battle_SetTextPartyName(g_Task->slot);
-            func_801DEBC4(0, g_GameState->chr.character_id);
+            func_801DEBC4(0, g_Game.current->chr.character_id);
         }
         g_Task->unk_03 = 2;
         func_801DEDE4();

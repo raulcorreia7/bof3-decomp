@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* nonmatching unmeasured: tried 72.01%: u8 record copy base, pointer locals val13/val0 for D_80145FBC/D_1F800008;
- * remaining: record-copy loop biv form (retail lw 0..0xc from a2), D_80146111 compare against g_PartySize reg not const
+ * remaining: record-copy loop biv form (retail lw 0..0xc from a2), D_80146111 compare against g_Game.party_size reg not const
  * 3, hoisted lui a0 base. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B21E8(void) {
@@ -37,21 +37,21 @@ NON_MATCHING void func_801B21E8(void) {
     STACK_PADS(u8, 8);
 
     val3  = 3;
-    val14 = g_GameState->status.field.flags_12C.u8_value;
+    val14 = g_Game.current->status.field.flags_12C.u8_value;
     if (D_80145FD1 == 3) {
         Party_SwapBattlerRows(0, 1, 1);
-        if (g_PartySize == 3) {
+        if (g_Game.party_size == 3) {
             if (D_80146111 == 3) {
                 Party_SwapBattlerRows(1, 2, 1);
             }
         }
-    } else if (g_PartySize == 3) {
-        if (D_80146111 == g_PartySize) {
+    } else if (g_Game.party_size == 3) {
+        if (D_80146111 == g_Game.party_size) {
             Party_SwapBattlerRows(0, 2, 1);
         }
     }
     val4 = 0;
-    cnt  = g_PartySize;
+    cnt  = g_Game.party_size;
     if (cnt > 0) {
         val13 = &D_80145FBC;
         val13 = &D_80145FBC;
@@ -61,17 +61,17 @@ NON_MATCHING void func_801B21E8(void) {
         val5  = 0;
         do {
             if (D_80145E91[val5] == 3) {
-                tmp5        = (u8*)g_BattlePartyBattlers + val5;
-                g_Task      = tmp5;
-                g_GameState = tmp5;
+                tmp5           = (u8*)g_Game.members + val5;
+                g_Task         = tmp5;
+                g_Game.current = tmp5;
                 func_801C1254(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
-                g_GameState->status.field.flags_12C.u8_value = val14;
-                if (g_GameState->status.field.flags_12C.u8_value & 1) {
+                g_Game.current->status.field.flags_12C.u8_value = val14;
+                if (g_Game.current->status.field.flags_12C.u8_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;
                 }
                 val11 = (u8*)g_Characters;
-                val12 = (u8*)g_GameState + 0x74;
-                val11 += g_CharSlot[g_GameState->chr.character_id] * 0xA4;
+                val12 = (u8*)g_Game.current + 0x74;
+                val11 += g_CharSlot[g_Game.current->chr.character_id] * 0xA4;
                 tmp11 = val11 + 0xA0;
                 do {
                     FIELD(s32, val12, 0)    = FIELD(s32, val11, 0);
@@ -81,15 +81,15 @@ NON_MATCHING void func_801B21E8(void) {
                     val11 += 0x10;
                     val12 += 0x10;
                 } while (val11 != tmp11);
-                *val12                       = *val11;
-                g_GameState->character_index = (u8)g_CharSlot[g_GameState->chr.character_id];
-                g_PartyFieldOrder[val4]      = g_GameState->chr.character_id;
+                *val12                          = *val11;
+                g_Game.current->character_index = (u8)g_CharSlot[g_Game.current->chr.character_id];
+                g_PartyFieldOrder[val4]         = g_Game.current->chr.character_id;
                 if (val4 != 0) {
                     func_801C2438();
                     tmp6                            = g_Task;
                     *(u8*)(tmp6)                    = (u8)(*(u8*)(tmp6) & 0xBF);
                     g_Task->tint.signed_bytes.flags = 1;
-                    g_Task->direction_08            = (u8)(g_BattlePartyBattlers[0].facing ^ 4);
+                    g_Task->direction_08            = (u8)(g_Game.members[0].facing ^ 4);
                 }
                 if (!(*val13 & 1) && (val4 != 0)) {
                     tmp4  = g_Task;
@@ -126,10 +126,10 @@ NON_MATCHING void func_801B21E8(void) {
             val6 += 2;
             val4 += 1;
             val5 += BATTLE_PARTY_STRIDE;
-        } while (val4 < (s32)g_PartySize);
+        } while (val4 < (s32)g_Game.party_size);
     }
-    TASK_SET(g_BattlePartyBattlers);
-    g_GameState      = g_BattlePartyBattlers;
+    TASK_SET(g_Game.members);
+    g_Game.current   = g_Game.members;
     g_AreaCameraStep = 0x20;
     tmp3             = g_AreaScrollTargetX - D_80145EC4;
     val7             = tmp3;

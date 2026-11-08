@@ -31,8 +31,8 @@ MATCH void func_8009B488(void) {
     }
     EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_SE);
     index = 5;
-    if (g_BattlePartyBattlers[0].u.turn.command.type == BATTLE_COMMAND_ITEM) {
-        func_801DDE7C(D_80145FB2, g_BattlePartyBattlers[0].u.turn.command.id);
+    if (g_Game.members[0].u.turn.command.type == BATTLE_COMMAND_ITEM) {
+        func_801DDE7C(D_80145FB2, g_Game.members[0].u.turn.command.id);
     }
     if (D_801460E9 == 5) {
         func_801DDE7C(D_801460F2, D_801460EA);
@@ -45,13 +45,13 @@ MATCH void func_8009B488(void) {
         do {
             index = count & BYTE_MASK;
             if (!(Battle_SlotIsBlocked(index) & BYTE_MASK)) {
-                g_BattlePartyBattlers[index].u.turn.command.type = 0;
-                g_BattlePartyBattlers[index].header.mode         = 2;
-                state                                            = g_BattlePartyBattlers[index].facing;
-                g_BattlePartyBattlers[index].header.step         = 0;
-                g_BattlePartyBattlers[index].unk_03              = 0;
-                g_BattlePartyBattlers[index].unk_04              = 0;
-                g_BattlePartyBattlers[index].facing              = state ^ 2;
+                g_Game.members[index].u.turn.command.type = 0;
+                g_Game.members[index].header.mode         = 2;
+                state                                     = g_Game.members[index].facing;
+                g_Game.members[index].header.step         = 0;
+                g_Game.members[index].unk_03              = 0;
+                g_Game.members[index].unk_04              = 0;
+                g_Game.members[index].facing              = state ^ 2;
             }
             count++;
         } while ((u32)(count & BYTE_MASK) < g_BattlePartyCount);

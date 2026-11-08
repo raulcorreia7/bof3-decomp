@@ -20,7 +20,7 @@ MATCH void func_801D9B9C(void) {
     state    = FISHING_STATE;
     distance = Area_SampleHeight(state->motion_34.unk_34, state->y_38.pos_y);
 
-    panel                                = g_GameState;
+    panel                                = g_Game.current;
     FISHING_STATE->bounce_3C.half.key_3E = distance;
     flag                                 = panel[0x79];
     if (flag == 0) {

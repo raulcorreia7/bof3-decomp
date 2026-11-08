@@ -1,7 +1,7 @@
 #include "boss013_16.h"
 
 MATCH void func_800C1DF4(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->header.flags & 0x80) {

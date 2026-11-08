@@ -46,7 +46,7 @@
 
 /* The active battler's row. Each battle overlay declares the active-battler
  * byte itself, so the macro expands where it is used. */
-#define BATTLE_ACTIVE_PARTY          (g_BattlePartyBattlers[g_BattleActiveBattler])
+#define BATTLE_ACTIVE_PARTY          (g_Game.members[g_BattleActiveBattler])
 
 /* The action a battler has queued: whom it targets, what kind it is (examine 0, attack 1, defend 2, ability 4, item 5)
  * and the ability or item id. */
@@ -157,7 +157,7 @@ typedef union BattleTargetIndex {
 
 /* What a queued effect acts on: a party or enemy battler, another effect, or a payload address. */
 typedef union BattleEffectTarget {
-    struct PartyBattler* party;
+    struct PartyMember*  party;
     struct EnemyBattler* enemy;
     struct BattleEffect* effect;
     u8*                  bytes;
@@ -463,10 +463,10 @@ typedef struct BattleOwnerKind {
 
 ASSERT_SIZE(BattleOwnerKind, 0x24);
 
-typedef enum PartyBattlerFlags {
-    PARTY_BATTLER_FLAG_OCCUPIED     = 1 << 0,
-    PARTY_BATTLER_FLAG_HANDLER_BUSY = 1 << 6,
-} PartyBattlerFlags;
+typedef enum PartyMemberFlags {
+    PARTY_MEMBER_FLAG_OCCUPIED     = 1 << 0,
+    PARTY_MEMBER_FLAG_HANDLER_BUSY = 1 << 6,
+} PartyMemberFlags;
 
 typedef union BattlerParam {
     u8 unk_0B;
@@ -514,51 +514,52 @@ typedef struct FieldEntryWork {
 
 ASSERT_SIZE(FieldEntryWork, 0x08);
 
-/* Local battler work table (stride 0x140 at 0x80145E90), shared by the battle overlays. */
-typedef struct PartyBattler {
-    TaskHeader           header; /* 0x00 */
-    u8                   unk_03;
-    u8                   unk_04;
-    u8                   slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */
-    u8                   pad_06;
-    u8                   unk_07;
-    u8                   facing; /* +0x08 the direction the battler faces */
-    u8                   unk_09;
-    u8                   timer; /* +0x0A frame counter */
-    BattlerParam         param;
-    s32                  unk_0C;
-    s32                  unk_10;
-    s32                  unk_14; /* +0x14 the 32-bit cell both overlays read */
-    s32                  unk_18;
-    s32                  unk_1C; /* +0x1C battle/battle/03's cell; battle/battle/15 leaves it padded */
-    s32                  unk_20; /* +0x20 the 32-bit cell both overlays read */
-    u8                   unk_24;
-    u8                   unk_25;
-    u8                   unk_26;
-    u8                   unk_27;
-    u8                   unk_28;
-    s8                   unk_29; /* +0x29 the byte both overlays read */
-    s8                   unk_2A; /* +0x2A the byte both overlays read */
-    s8                   unk_2B; /* +0x2B the byte both overlays read */
-    BattleScreenCoord    unk_2C; /* +0x2C the halfword both overlays read */
-    BattleScreenCoord    unk_2E; /* +0x2E the field overlays read it signed */
-    BattleScreenCoord    unk_30; /* +0x30 the field overlays read it signed */
-    u16                  depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
-    WorldPos             pos;
-    SpriteScale          scale;  /* +0x40 16.16, 0x10000 at setup */
-    u8                   unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u8                   unk_49;
-    u8                   unk_4A;
-    u8                   unk_4B;
-    struct PartyBattler* unk_4C; /* +0x4C a linked battle task; magic078 hands its phase to it through param */
-    s32                  unk_50;
-    s32                  unk_54;
-    u16                  unk_58;
-    u16                  unk_5A;
-    u8                   unk_5C;
-    u8                   unk_5D;
-    u8                   unk_5E;
-    u8                   unk_5F;
+/* One party member's live work record: the task header, a copy of the member's Character and the state the field and
+ * the battle keep in it. */
+typedef struct PartyMember {
+    TaskHeader          header; /* 0x00 */
+    u8                  unk_03;
+    u8                  unk_04;
+    u8                  slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */
+    u8                  pad_06;
+    u8                  unk_07;
+    u8                  facing; /* +0x08 the direction the battler faces */
+    u8                  unk_09;
+    u8                  timer; /* +0x0A frame counter */
+    BattlerParam        param;
+    s32                 unk_0C;
+    s32                 unk_10;
+    s32                 unk_14; /* +0x14 the 32-bit cell both overlays read */
+    s32                 unk_18;
+    s32                 unk_1C; /* +0x1C battle/battle/03's cell; battle/battle/15 leaves it padded */
+    s32                 unk_20; /* +0x20 the 32-bit cell both overlays read */
+    u8                  unk_24;
+    u8                  unk_25;
+    u8                  unk_26;
+    u8                  unk_27;
+    u8                  unk_28;
+    s8                  unk_29; /* +0x29 the byte both overlays read */
+    s8                  unk_2A; /* +0x2A the byte both overlays read */
+    s8                  unk_2B; /* +0x2B the byte both overlays read */
+    BattleScreenCoord   unk_2C; /* +0x2C the halfword both overlays read */
+    BattleScreenCoord   unk_2E; /* +0x2E the field overlays read it signed */
+    BattleScreenCoord   unk_30; /* +0x30 the field overlays read it signed */
+    u16                 depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
+    WorldPos            pos;
+    SpriteScale         scale;  /* +0x40 16.16, 0x10000 at setup */
+    u8                  unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u8                  unk_49;
+    u8                  unk_4A;
+    u8                  unk_4B;
+    struct PartyMember* unk_4C; /* +0x4C a linked battle task; magic078 hands its phase to it through param */
+    s32                 unk_50;
+    s32                 unk_54;
+    u16                 unk_58;
+    u16                 unk_5A;
+    u8                  unk_5C;
+    u8                  unk_5D;
+    u8                  unk_5E;
+    u8                  unk_5F;
     s32       unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
     s32       unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
     u8        pad_68[8];
@@ -589,31 +590,31 @@ typedef struct PartyBattler {
     u8  character_index; /* +0x13C the Character slot this battler was built from */
     u8  unk_13D;         /* the palette fade index; @source: write:func_801AAB00@0x801AAB00 */
     u8  pad_13E[2];
-} PartyBattler;
+} PartyMember;
 
-ASSERT_SIZE(PartyBattler, 0x140);
-ASSERT_OFFSET(PartyBattler, slot, 0x05);
-ASSERT_OFFSET(PartyBattler, u, 0x118);
+ASSERT_SIZE(PartyMember, 0x140);
+ASSERT_OFFSET(PartyMember, slot, 0x05);
+ASSERT_OFFSET(PartyMember, u, 0x118);
 /* The four bytes at +0x08 as one word; the bmagic tests mask it. */
-#define PARTY_BATTLER_WORD_08(battler) (*(u32*)&(battler)->facing)
+#define PARTY_MEMBER_WORD_08(battler) (*(u32*)&(battler)->facing)
 
-ASSERT_OFFSET(PartyBattler, facing, 0x08);
-ASSERT_OFFSET(PartyBattler, unk_09, 0x09);
-ASSERT_OFFSET(PartyBattler, timer, 0x0A);
-ASSERT_OFFSET(PartyBattler, param, 0x0B);
-ASSERT_OFFSET(PartyBattler, unk_14, 0x14);
-ASSERT_OFFSET(PartyBattler, unk_20, 0x20);
-ASSERT_OFFSET(PartyBattler, unk_60, 0x60);
-ASSERT_OFFSET(PartyBattler, unk_70, 0x70);
-ASSERT_OFFSET(PartyBattler, unk_29, 0x29);
-ASSERT_OFFSET(PartyBattler, unk_2C, 0x2C);
-ASSERT_OFFSET(PartyBattler, depth, 0x32);
-ASSERT_OFFSET(PartyBattler, pos, 0x34);
-ASSERT_OFFSET(PartyBattler, chr, 0x74);
-ASSERT_OFFSET(PartyBattler, status, 0x12C);
-ASSERT_OFFSET(PartyBattler, unk_13A, 0x13A);
-ASSERT_OFFSET(PartyBattler, focus_counter, 0x138);
-ASSERT_OFFSET(PartyBattler, character_index, 0x13C);
+ASSERT_OFFSET(PartyMember, facing, 0x08);
+ASSERT_OFFSET(PartyMember, unk_09, 0x09);
+ASSERT_OFFSET(PartyMember, timer, 0x0A);
+ASSERT_OFFSET(PartyMember, param, 0x0B);
+ASSERT_OFFSET(PartyMember, unk_14, 0x14);
+ASSERT_OFFSET(PartyMember, unk_20, 0x20);
+ASSERT_OFFSET(PartyMember, unk_60, 0x60);
+ASSERT_OFFSET(PartyMember, unk_70, 0x70);
+ASSERT_OFFSET(PartyMember, unk_29, 0x29);
+ASSERT_OFFSET(PartyMember, unk_2C, 0x2C);
+ASSERT_OFFSET(PartyMember, depth, 0x32);
+ASSERT_OFFSET(PartyMember, pos, 0x34);
+ASSERT_OFFSET(PartyMember, chr, 0x74);
+ASSERT_OFFSET(PartyMember, status, 0x12C);
+ASSERT_OFFSET(PartyMember, unk_13A, 0x13A);
+ASSERT_OFFSET(PartyMember, focus_counter, 0x138);
+ASSERT_OFFSET(PartyMember, character_index, 0x13C);
 
 /* The damage/status word: `damage_flags` of the enemy row, `damage_flags` of the
  * player row. Bit 6 marks a marked damage target; bit 7 runs the popup digits
@@ -680,12 +681,39 @@ typedef enum BattleHitFlags {
     BATTLE_HIT_AP_LANDED = 1 << 5,
 } BattleHitFlags;
 
-/* The three mode work records. */
+/* The game's party state at 0x80145E90: the three party members, the one the running mode points at, the party
+ * size and order, and the game and walk flags. */
+typedef struct GameState {
+    /* 0x000 */ PartyMember  members[3];
+    /* 0x3C0 */ PartyMember* current; /* field and battle code point it at one of members */
+    /* 0x3C4 */ u8           party_size;
+    /* 0x3C5 */ u8           battle_order; /* party order command list applied when play resumes */
+    /* 0x3C6 */ u8           unk_3C6[2];
+    /* 0x3C8 */ u16          flags;
+    /* 0x3CA */ u16          walk_flags;
+    /* 0x3CC */ u8           unk_3CC[0x50];
+} GameState;
+
+ASSERT_SIZE(GameState, 0x41C);
+ASSERT_OFFSET(GameState, current, 0x3C0);
+ASSERT_OFFSET(GameState, party_size, 0x3C4);
+ASSERT_OFFSET(GameState, battle_order, 0x3C5);
+ASSERT_OFFSET(GameState, unk_3C6, 0x3C6);
+ASSERT_OFFSET(GameState, flags, 0x3C8);
+ASSERT_OFFSET(GameState, walk_flags, 0x3CA);
+ASSERT_OFFSET(GameState, unk_3CC, 0x3CC);
+
 /* D_80145E90 */
-extern PartyBattler    g_BattlePartyBattlers[3];
-/* The current mode work record: field and battle code point it at one g_BattlePartyBattlers row. */
-/* D_80146250 */
-extern PartyBattler*   g_GameState; /* 0x80146250 */
+extern GameState g_Game;
+
+/* FAKE: the members of g_Game as globals of their own. A function that touches one of them beside other globals
+ * matches only when the compiler sees a separate symbol for it, and some sites read it through another width. */
+extern PartyMember*    g_GameState;
+extern PartyMember     g_BattlePartyBattlers[3];
+extern u8              g_PartySize;
+extern u8              g_BattlePartyOrder;
+extern u16             g_GameFlags;
+extern u16             g_AreaWalkFlags;
 /* The mode byte of each 0x24-byte owner record; the kind byte sits at +0x07. */
 extern u8              D_80148333[];
 extern BattleOwnerKind D_8014833A[];

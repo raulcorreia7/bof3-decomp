@@ -20,25 +20,25 @@ INCLUDE_ASM(func_801EF1C0);
 INCLUDE_ASM(func_801EF3D0);
 
 MATCH void func_801EF488(void) {
-    PartyBattler* prev;
-    PartyBattler* battler;
-    s32           i;
-    s32           slot;
+    PartyMember* prev;
+    PartyMember* battler;
+    s32          i;
+    s32          slot;
 
     if (EMI_LoaderIsReady() != 0) {
         i = 0;
-        if (g_PartySize != 0) {
+        if (g_Game.party_size != 0) {
             do {
-                slot                                     = i & BYTE_MASK;
-                g_BattlePartyBattlers[slot].header.flags = 1;
-                prev                                     = g_Task;
-                battler                                  = &g_BattlePartyBattlers[slot];
-                g_Task                                   = battler;
+                slot                              = i & BYTE_MASK;
+                g_Game.members[slot].header.flags = 1;
+                prev                              = g_Task;
+                battler                           = &g_Game.members[slot];
+                g_Task                            = battler;
                 Actor_SelectScript((battler->facing + 4) & BYTE_MASK);
-                if (g_BattlePartyBattlers[slot].chr.status & 0x2080) {
+                if (g_Game.members[slot].chr.status & 0x2080) {
                     Actor_SelectScript((g_Task->facing + 0x18) & BYTE_MASK);
                 }
-                if (g_BattlePartyBattlers[slot].chr.status & 0x800) {
+                if (g_Game.members[slot].chr.status & 0x800) {
                     Actor_SelectScript((g_Task->facing + 0x30) & BYTE_MASK);
                 }
                 if (func_801DB524(slot) & BYTE_MASK) {
@@ -65,8 +65,8 @@ INCLUDE_ASM(func_801EF7FC);
 INCLUDE_ASM(func_801EFA68);
 
 MATCH void func_801EFB64(void) {
-    PartyBattler* work  = g_Task;
-    u8            timer = work->unk_09 - 1;
+    PartyMember* work  = g_Task;
+    u8           timer = work->unk_09 - 1;
     work->unk_0C += work->unk_18;
     work->unk_09 = timer;
     work->unk_10 += work->unk_1C;
@@ -127,9 +127,9 @@ MATCH void func_801EFF48(void) {
 }
 
 MATCH void func_801F0034(void) {
-    u8            timer;
-    u8            count;
-    PartyBattler* work;
+    u8           timer;
+    u8           count;
+    PartyMember* work;
 
     if (g_FrameCount & 1) {
         count = g_Task->unk_09;
@@ -190,9 +190,9 @@ MATCH void func_801F053C(void) {
 }
 
 MATCH void func_801F058C(void) {
-    PartyBattler* work;
-    PartyBattler* active;
-    s8            count;
+    PartyMember* work;
+    PartyMember* active;
+    s8           count;
 
     work = g_Task;
     work->unk_09 += 2;
@@ -238,8 +238,8 @@ MATCH void Effect_CountDownAndStep_801F0C98(void) {
 }
 
 MATCH void func_801F0CE4(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
 
     work->unk_14 += 0x10;
 
@@ -311,9 +311,9 @@ MATCH void func_801F1AC4(void) {
 }
 
 MATCH void func_801F1B14(void) {
-    PartyBattler* work;
-    s16           vec[3];
-    TILE_1*       primitive;
+    PartyMember* work;
+    s16          vec[3];
+    TILE_1*      primitive;
 
     work      = D_801F24E0;
     vec[0]    = (work->unk_14 >> 9) - 0x4000;

@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801EF6B0);
 MATCH void func_801EF93C(void) {
     if (g_Task->param.unk_0B == 0) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
         g_Task->header.mode += 1;
     }
@@ -111,12 +111,12 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
-/* blocker: the halfword at +0x3E (the z-span halfword, upper half of pos.z) has no PartyBattler member; needs: type. */
+/* blocker: the halfword at +0x3E (the z-span halfword, upper half of pos.z) has no PartyMember member; needs: type. */
 INCLUDE_ASM(func_801EFDE8);
 
 MATCH void func_801EFE84(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
 
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
@@ -183,9 +183,9 @@ INCLUDE_ASM(func_801F0248);
 INCLUDE_ASM(func_801F0334);
 
 MATCH void func_801F045C(void) {
-    PartyBattler* task;
-    s8            tint;
-    u8            timer;
+    PartyMember* task;
+    s8           tint;
+    u8           timer;
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
@@ -216,9 +216,9 @@ MATCH void func_801F045C(void) {
 INCLUDE_ASM(func_801F0570);
 
 MATCH void func_801F0654(void) {
-    PartyBattler* task;
-    s8            tint;
-    u8            timer;
+    PartyMember* task;
+    s8           tint;
+    u8           timer;
 
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;

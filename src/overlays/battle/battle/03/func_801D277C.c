@@ -20,18 +20,18 @@ MATCH void func_801D277C(void) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) != 0) {
             continue;
         }
-        if (g_BattlePartyBattlers[slot].u.turn.command.type != BATTLE_COMMAND_ITEM) {
+        if (g_Game.members[slot].u.turn.command.type != BATTLE_COMMAND_ITEM) {
             continue;
         }
-        rank = g_BattlePartyBattlers[slot].u.turn.command.id;
+        rank = g_Game.members[slot].u.turn.command.id;
         if ((rank >> 8) == 0) {
             continue;
         }
-        flags = g_BattlePartyBattlers[slot].u.turn.damage_flags.value;
+        flags = g_Game.members[slot].u.turn.damage_flags.value;
         if (!(flags & 0x4000)) {
             func_801DDE7C(D_80145FB2[slot * BATTLE_PARTY_STRIDE], rank);
         } else {
-            g_BattlePartyBattlers[slot].u.turn.damage_flags.value = flags & ~0x4000;
+            g_Game.members[slot].u.turn.damage_flags.value = flags & ~0x4000;
         }
     }
     half_flags = &g_BattleState;

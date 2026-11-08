@@ -6,8 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 MATCH void func_801EEC10(void) {
     Magic146Steps handlers = D_801EEC04;
-    PartyBattler* saved_task;
-    PartyBattler* saved_battler;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
     u8            i;
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
@@ -16,7 +16,7 @@ MATCH void func_801EEC10(void) {
         if (D_801EF9F4[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyBattler*)&D_801EF9F4[i];
+            g_Task                = (PartyMember*)&D_801EF9F4[i];
             g_BattleEffectBattler = D_801EF9F4[i].target.party;
             func_801EF2FC();
             g_BattleEffectBattler = saved_battler;
@@ -59,9 +59,9 @@ INCLUDE_ASM(func_801EF3B8);
 #include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
 
 MATCH void func_801EF58C(void) {
-    PartyBattler* work;
-    PartyBattler* active;
-    u8            count;
+    PartyMember* work;
+    PartyMember* active;
+    u8           count;
 
     work = g_Task;
     work->unk_09++;

@@ -1,17 +1,17 @@
 #include "boss033_16.h"
 
 MATCH void func_800C2310(void) {
-    volatile u8*  battler;
-    PartyBattler* work;
-    u8            index;
-    s32           delta_x;
-    s32           delta_y;
-    s32           delta_z;
+    volatile u8* battler;
+    PartyMember* work;
+    u8           index;
+    s32          delta_x;
+    s32          delta_y;
+    s32          delta_z;
 
     if ((func_8014DAEC() & BYTE_MASK) != 0) {
         battler = &g_BattleActiveBattler;
         index   = *battler;
-        work    = (PartyBattler*)g_Task;
+        work    = (PartyMember*)g_Task;
         delta_x = g_BattleEnemyBattlers[index - 3].pos.x.fixed - work->pos.x.fixed;
         if (delta_x < 0) {
             delta_x += 0xF;

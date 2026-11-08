@@ -12,7 +12,7 @@ MATCH void func_801B207C(void) {
     Actor_SelectScript(g_Task->direction_08);
     frames = g_Task->timer;
     for (i = 1; i < g_PartySize; i++) {
-        work   = (Actor*)((u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE);
+        work   = (Actor*)((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE);
         g_Task = work;
         awake  = 3;
         limit  = -(frames << 5);
@@ -22,8 +22,8 @@ MATCH void func_801B207C(void) {
             g_Task->tint.bytes.unk_5F = g_Task->tint.bytes.unk_5D;
         }
     }
-    TASK_SET(g_BattlePartyBattlers);
-    if (g_BattlePartyBattlers[0].unk_09 == 4) {
-        ((PartyBattler*)g_BattlePartyBattlers)[0].header.step += 1;
+    TASK_SET(g_Game.members);
+    if (g_Game.members[0].unk_09 == 4) {
+        ((PartyMember*)g_Game.members)[0].header.step += 1;
     }
 }

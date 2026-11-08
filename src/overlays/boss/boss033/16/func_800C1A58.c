@@ -3,11 +3,11 @@
 MATCH void func_800C1A58(void) {
     u8 timer;
 
-    timer                          = ((PartyBattler*)g_Task)->timer - 1;
-    ((PartyBattler*)g_Task)->timer = timer;
+    timer                         = ((PartyMember*)g_Task)->timer - 1;
+    ((PartyMember*)g_Task)->timer = timer;
     if (!(timer & 0xFF)) {
         func_801E52F0(*g_BattleCurrentEnemy->unk_E8);
         func_801E52F0((*g_BattleCurrentEnemy->unk_E8 + 4) & 0xFFFF);
-        ((PartyBattler*)g_Task)->header.step += 1;
+        ((PartyMember*)g_Task)->header.step += 1;
     }
 }

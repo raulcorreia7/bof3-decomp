@@ -19,7 +19,7 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     enabled = style & BYTE_MASK;
     UI_DrawWindow(x + 3, y + 3, 158, 112, 0, enabled);
     Menu_DrawPanelFrame(x, y, 0x12, 0xD);
-    item  = g_BattlePartyBattlers[slot].character_index;
+    item  = g_Game.members[slot].character_index;
     value = g_Characters[item].level * 10;
     xpos  = x;
     row_y = y + 6;

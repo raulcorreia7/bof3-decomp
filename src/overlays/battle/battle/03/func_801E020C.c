@@ -8,11 +8,11 @@
  * the retreat; otherwise it re-arms the gate from the kind and flag records and reseeds the step and tint fields.
  */
 MATCH void func_801E020C(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     func_801DEE4C();
     work = g_Task;
-    if ((work->header.step != 3) && (HAS_STATUS(*g_GameState, STATUS_KO))) {
+    if ((work->header.step != 3) && (HAS_STATUS(*g_Game.current, STATUS_KO))) {
         /* FAKE: half pointer; the direct global scores 97.37%. */
         u16* half;
         half = &g_BattleState;
@@ -40,7 +40,7 @@ MATCH void func_801E020C(void) {
             *half = (*half & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         }
         Battle_ClearSlotPending(g_Task->slot);
-        g_GameState->u.turn.damage_flags.value &=
+        g_Game.current->u.turn.damage_flags.value &=
             ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
@@ -48,7 +48,7 @@ MATCH void func_801E020C(void) {
             flag = &g_BattleOutcome.result;
             *flag |= 1;
         }
-        g_GameState->u.turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
+        g_Game.current->u.turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
         g_Task->header.mode = 2;
         g_Task->header.step = 0;
     }

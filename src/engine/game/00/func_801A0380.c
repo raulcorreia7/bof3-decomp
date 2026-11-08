@@ -13,7 +13,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    if (g_GameFlags & 0x80) {
+    if (g_Game.flags & 0x80) {
         result = g_SndBGMId;
     } else {
         record = func_801A0490(x, y, kind);

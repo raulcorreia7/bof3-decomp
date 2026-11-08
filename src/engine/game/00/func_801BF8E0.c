@@ -22,7 +22,7 @@ MATCH void func_801BF8E0(void) {
     STACK_PADS(u8, 16);
 
     index = 0;
-    limit = g_PartySize;
+    limit = g_Game.party_size;
     if (limit > 0) {
         count = limit;
         src   = 0;
@@ -38,14 +38,14 @@ MATCH void func_801BF8E0(void) {
         } while (index < count);
     }
     index = 0;
-    limit = g_PartySize;
+    limit = g_Game.party_size;
     if (limit > 0) {
         key = g_PartyFieldOrder[0];
         /* src doubles as the bound: retail keeps both in a0 (a separate local 89.26%). */
         src = limit;
         dst = 0;
     loop:
-        if (key != FIELD(u8, &g_BattlePartyBattlers[0].chr.character_id, dst)) {
+        if (key != FIELD(u8, &g_Game.members[0].chr.character_id, dst)) {
             index++;
             dst += BATTLE_PARTY_STRIDE;
             if (index < src) {

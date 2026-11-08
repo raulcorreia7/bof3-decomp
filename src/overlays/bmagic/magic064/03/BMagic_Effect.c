@@ -19,11 +19,11 @@ MATCH void func_801EECFC(void) {
 }
 
 MATCH void func_801EED7C(void) {
-    PartyBattler* saved;
-    PartyBattler* battler;
+    PartyMember* saved;
+    PartyMember* battler;
 
     saved   = g_Task;
-    battler = &g_BattlePartyBattlers[g_BattleActiveBattler];
+    battler = &g_Game.members[g_BattleActiveBattler];
     g_Task  = battler;
     Actor_RequestScript((battler->facing + 0x38) & BYTE_MASK);
     g_Task = saved;
@@ -33,10 +33,10 @@ MATCH void func_801EED7C(void) {
 }
 
 MATCH void func_801EEE1C(void) {
-    PartyBattler* battler;
+    PartyMember* battler;
 
     battler = g_Task;
-    g_Task  = &g_BattlePartyBattlers[g_BattleActiveBattler];
+    g_Task  = &g_Game.members[g_BattleActiveBattler];
     if (!(func_8014DAEC() & 0xFF)) {
         g_Task          = battler;
         battler->unk_09 = 0x10;
@@ -64,7 +64,7 @@ MATCH void func_801EF20C(void) {
         return;
     }
     GFX_FreePaletteFadeTarget(g_BattleEffectBattler);
-    g_BattleEffectBattler->header.flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;
 }
@@ -73,11 +73,11 @@ MATCH void func_801EF29C(void) {
 }
 
 MATCH void func_801EF2A4(void) {
-    PartyBattler* battler;
-    u32           value;
+    PartyMember* battler;
+    u32          value;
 
     battler = g_Task;
-    g_Task  = &g_BattlePartyBattlers[g_BattleActiveBattler];
+    g_Task  = &g_Game.members[g_BattleActiveBattler];
     func_801F0EEC(1, 2, (0x80 - battler->unk_09) & 0xFF);
     func_801F0EEC(0, 1, (0x80 - battler->unk_09) & 0xFF);
     func_801F0EEC(3, 2, battler->unk_09);
@@ -98,14 +98,14 @@ MATCH void func_801EF2A4(void) {
     g_Task->header.step += 1;
 }
 
-/* hint: with u8* active = &g_BattleActiveBattler and party = g_BattlePartyBattlers every instruction matches except retail's li a1,2 after the s2 address setup (2 slots late) at +0x8. */
+/* hint: with u8* active = &g_BattleActiveBattler and party = g_Game.members every instruction matches except retail's li a1,2 after the s2 address setup (2 slots late) at +0x8. */
 INCLUDE_ASM(func_801EF3C8);
 
 MATCH void func_801EF570(void) {
-    PartyBattler* battler;
+    PartyMember* battler;
 
     battler = g_Task;
-    g_Task  = &g_BattlePartyBattlers[g_BattleActiveBattler];
+    g_Task  = &g_Game.members[g_BattleActiveBattler];
     if (!(func_8014DAEC() & 0xFF)) {
         g_Task = battler;
         return;
@@ -115,7 +115,7 @@ MATCH void func_801EF570(void) {
 }
 
 MATCH void func_801EF5FC(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (!(work->param.unk_0B & 1)) {
@@ -267,8 +267,8 @@ MATCH void func_801F0D64(void) {
 #include "overlays/bmagic/Effect_ClearTimerNextStep.h"
 
 MATCH void func_801F0DD8(void) {
-    PartyBattler* work;
-    s8            counter;
+    PartyMember* work;
+    s8           counter;
 
     work         = g_Task;
     counter      = work->unk_09 - 1;
@@ -280,8 +280,8 @@ MATCH void func_801F0DD8(void) {
 }
 
 MATCH void func_801F0E50(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->header.step == 10) {
@@ -291,7 +291,7 @@ MATCH void func_801F0E50(void) {
 }
 
 MATCH void func_801F0E90(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->unk_09++;

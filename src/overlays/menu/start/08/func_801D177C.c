@@ -16,7 +16,7 @@ MATCH void func_801D177C(void) {
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         ((s8*)&D_80148668)[i] = 0;
     }
-    for (i = 0; i < g_PartySize; i++) {
+    for (i = 0; i < g_Game.party_size; i++) {
         Char_RebuildStats(&g_Characters[g_CharSlot[g_PartyFieldOrder[i]]]);
     }
     i = 0;

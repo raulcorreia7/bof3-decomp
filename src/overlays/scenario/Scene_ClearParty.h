@@ -14,7 +14,7 @@ MATCH void Scene_ClearParty(void) {
     EFFECT_BANK_80140000->battle_order[0] = 0xFFu;
     EFFECT_BANK_80140000->battle_order[1] = 0xFFu;
     EFFECT_BANK_80140000->battle_order[2] = 0xFFu;
-    g_PartySize                           = 0u;
+    g_Game.party_size                     = 0u;
     /* FAKE: statement boundary keeps a0=10 in the jal delay slot. */
     ORDER_LOCK(EFFECT_BANK_80140000->menu_flags = (u8)(flags | 7u));
     Party_JoinMember(CHAR_ID_WHELP);

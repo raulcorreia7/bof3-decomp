@@ -7,7 +7,7 @@ MATCH void Battle_RunEffects(void) {
     BattleEffectStages handlers;
     Callback*          funcs;
     BattleEffect*      effect;
-    PartyBattler*      target;
+    PartyMember*       target;
     s32                i;
 
     handlers = g_BattleEffectStages;

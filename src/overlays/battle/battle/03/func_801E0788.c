@@ -1,16 +1,16 @@
 #include "battle_03.h"
 
 MATCH void func_801E0788(void) {
-    PartyBattler* w;
-    PartyBattler* w2;
-    u32           flags;
-    s32           i;
-    u16*          half;
-    u16*          half2;
+    PartyMember* w;
+    PartyMember* w2;
+    u32          flags;
+    s32          i;
+    u16*         half;
+    u16*         half2;
 
     func_801DDFEC(g_Task->slot);
     Battle_CancelTurn(g_Task->slot);
-    w = g_GameState;
+    w = g_Game.current;
     if (w->u.turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) {
         g_Task->unk_09 = 30;
         g_Task->unk_03 = 1;
@@ -36,18 +36,18 @@ MATCH void func_801E0788(void) {
     } else {
         VOL(u8, g_BattleLivingPartyCount) -= 1;
         for (i = 0; (u8)i < 8; i++) {
-            g_GameState->status.unk_12C[(u8)i] = 0;
+            g_Game.current->status.unk_12C[(u8)i] = 0;
         }
-        w2                 = g_GameState;
+        w2                 = g_Game.current;
         w2->u.turn.counter = 0;
         w2->u.turn.action_flags.value &=
             ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO |
               COMBATANT_FLAG_SELECTION_BONUS | COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING |
               COMBATANT_FLAG_SELECTED);
-        g_GameState->counter_136   = 0;
-        g_GameState->counter_137   = 0;
-        g_GameState->focus_counter = 0;
-        g_GameState->unk_139       = 0;
+        g_GameState->counter_136      = 0;
+        g_Game.current->counter_137   = 0;
+        g_Game.current->focus_counter = 0;
+        g_Game.current->unk_139       = 0;
         func_800A9BD8(g_Task->slot);
         if ((func_801E0E0C() & BYTE_MASK) || (g_BattleLivingPartyCount == 0)) {
             VOL(u8, g_BattleOutcome.result) |= BATTLE_RESULT_DEFEAT;
@@ -56,11 +56,11 @@ MATCH void func_801E0788(void) {
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half2 &= 0xBFFF;
         }
-        if (g_GameState->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) {
+        if (g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) {
             g_Task->unk_03 = 4;
         } else {
             Battle_ClearSlotPending(g_Task->slot);
-            w = g_GameState;
+            w = g_Game.current;
             flags =
                 w->u.turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
             w->u.turn.damage_flags.value = flags & ~0x200;

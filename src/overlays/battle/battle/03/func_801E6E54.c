@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801E6E54(void) {
-    PartyBattler* work;
+    PartyMember* work;
     /* FAKE: Pin the fresh work pointer to a0. */
-    MATCH_FAKE_PIN(PartyBattler*, next, "a0");
+    MATCH_FAKE_PIN(PartyMember*, next, "a0");
     s32 index;
     u8  slot;
 

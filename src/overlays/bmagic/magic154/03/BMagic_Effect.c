@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEE94);
 MATCH void func_801EEFE0(void) {
     if (g_Task->unk_09 == 0) {
         func_800AEF98(4, 0);
-        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         func_800A9610(g_BattleTargetSelector, 0x10U);
         g_Task->header.mode += 1;
     }
@@ -60,8 +60,8 @@ MATCH void func_801EF1EC(void) {
 }
 
 MATCH void func_801EF380(void) {
-    PartyBattler* work;
-    u8            count;
+    PartyMember* work;
+    u8           count;
 
     work = g_Task;
     work->scale.x += 0x4000;
@@ -74,8 +74,8 @@ MATCH void func_801EF380(void) {
 }
 
 MATCH void func_801EF3E4(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
     work->scale.x -= 0x4000;
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;

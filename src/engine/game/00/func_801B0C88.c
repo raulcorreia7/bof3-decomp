@@ -20,7 +20,7 @@ MATCH void func_801B0C88(void) {
             index++;
         } while (index < (total & BYTE_MASK));
     }
-    if (!(g_GameFlags & 0x200)) {
+    if (!(g_Game.flags & 0x200)) {
         flag = g_AutoRun;
         if (D_8014625C & g_InputMasks[FIELD_INPUT_RUN]) {
             if ((flag ^ 1) == 0) {
@@ -34,11 +34,11 @@ MATCH void func_801B0C88(void) {
             }
         }
     check_button:
-        if (!(g_AreaWalkFlags & 0x20)) {
-            g_GameState->u.field.counter_11C.s8_value = 4;
+        if (!(g_Game.walk_flags & 0x20)) {
+            g_Game.current->u.field.counter_11C.s8_value = 4;
             return;
         }
     store3:
-        g_GameState->u.field.counter_11C.s8_value = 3;
+        g_Game.current->u.field.counter_11C.s8_value = 3;
     }
 }

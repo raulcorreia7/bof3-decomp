@@ -24,7 +24,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | `snake_case` locals, parameters and members: `item_id`, `party_slot`                              | Hungarian or camelCase: `pItem`, `nCount`, `itemId`           |
 | Name the role: `BattlePanel`, `coord_x`                                                           | Name the storage: `BattlePanelRecord`, `half_3A`, `ByteView`  |
 | Acronyms keep their capitals: `EnemyAIBlock`, `Char_RestoreHP`, `SYS_ReadCD`                      | Mixed case: `EnemyAiBlock`, `Char_RestoreHp`, `SYS_ReadCd`    |
-| A type is an English noun phrase: `EnemyBattler`, `PartyBattler`                                  | The tag on a type: `BattlerEnemy`, `BattlerParty`             |
+| A type is an English noun phrase: `EnemyBattler`, `PartyMember`                                   | The tag on a type: `BattlerEnemy`, `BattlerParty`             |
 | A slot is a filled position (`party_slot`); a fixed table position is an index (`CharacterIndex`) | `CharacterSlot` for the record array's position               |
 | An id is the value the game stores to identify a thing (`item_id`, `CharacterId`)                 | `slot_id`, `item_index` for the stored value                  |
 | A fixed array position is an index (`element_index`); never abbreviate it                         | `idx`, `slot_index`, `element_slot`                           |
@@ -108,17 +108,17 @@ while (i < 3) { Party_ResetMember(i); i++; }
 
 ### Register
 
-| Thing                                    | Form                        | Example                                  |
-| ---------------------------------------- | --------------------------- | ---------------------------------------- |
-| system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_LoaderInit`          |
-| game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`         |
-| global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`          |
-| file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                    |
-| type                                     | PascalCase, no tag, no `_t` | `Battler`, `PartyBattler`, `ScreenPoint` |
-| constant, enum value, macro              | `TAG_UPPER_SNAKE`           | `BATTLE_ACTOR_MAX`, `SYS_DISPATCH_BYTE`  |
-| generic helper (`include/common/util.h`) | untagged capitals           | `ABS`, `MIN`, `CLAMP`, `BYTE_MASK`       |
-| local, parameter, member                 | `snake_case`                | `item_id`, `party_slot`, `hp`            |
-| SDK, BIOS, hardware                      | unchanged                   | `CdControl`, `PADLup`, `GPU_GP0`         |
+| Thing                                    | Form                        | Example                                 |
+| ---------------------------------------- | --------------------------- | --------------------------------------- |
+| system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_LoaderInit`         |
+| game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`        |
+| global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`         |
+| file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                   |
+| type                                     | PascalCase, no tag, no `_t` | `Battler`, `PartyMember`, `ScreenPoint` |
+| constant, enum value, macro              | `TAG_UPPER_SNAKE`           | `BATTLE_ACTOR_MAX`, `SYS_DISPATCH_BYTE` |
+| generic helper (`include/common/util.h`) | untagged capitals           | `ABS`, `MIN`, `CLAMP`, `BYTE_MASK`      |
+| local, parameter, member                 | `snake_case`                | `item_id`, `party_slot`, `hp`           |
+| SDK, BIOS, hardware                      | unchanged                   | `CdControl`, `PADLup`, `GPU_GP0`        |
 
 Whole words, one spelling per concept across every image. A name is a game or engine name, as a game
 programmer of the era would write it: `BattleEffect`, `EncounterTable`, `g_Party`, `timer`. It never
@@ -345,11 +345,11 @@ reads the members together, copies them as a unit, or a shared type already name
 
 ```c
 typedef struct BattlePosition { Coord x; Coord y; Coord z; } BattlePosition;  /* a point */
-typedef struct PartyBattler {
+typedef struct PartyMember {
     u8 flags, mode, step;       /* the task header */
     BattlePosition pos;         /* copied whole by Effect_CopyBattlerCoords */
     union { u8 byte[4]; u32 word; } cell;  /* only when two readers see the same bytes in two roles */
-} PartyBattler;
+} PartyMember;
 ```
 
 **Don't**
@@ -426,8 +426,8 @@ usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, 
 
 | Today                                       | Becomes                                                                             |
 | ------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `BattlePanelRecord`, `GameStateRecord`      | `BattlePanel`, `PartyBattler`                                                       |
-| `BattleActorRecord`, `PartyRow`             | `Battler`, `PartyBattler`                                                           |
+| `BattlePanelRecord`, `GameStateRecord`      | `BattlePanel`, `PartyMember`                                                        |
+| `BattleActorRecord`, `PartyRow`             | `Battler`, `PartyMember`                                                            |
 | `g_BATTLE_TargetRecord`, cast at every use  | a `BattlePanelTask*` named for whose panel it holds                                 |
 | members `flags_12C`, `slot_12D`, `state_01` | the role, offset in the comment: `/* 0x12D */ u8 unk_12D;` until the role is proven |
 
@@ -484,7 +484,7 @@ game name is tagged or starts with `g_` or `s_`. The only untagged names are the
 | Character id          | `character_id` (`CHAR_ID_*`, 11 values with forms)                             |
 | Character data        | `Character`, `g_Characters[CHARACTER_COUNT]`, `g_CharSlot[id]`                 |
 | Party order           | `Party_` owns order: `g_PartyFieldOrder`, `g_PartyBattleOrder`, `g_PartyCount` |
-| Battle participants   | `Battler`; `PartyBattler`, `EnemyBattler`                                      |
+| Battle participants   | `Battler`; `PartyMember`, `EnemyBattler`                                       |
 | Enemy definition      | `Enemy` (the BENEMY definition)                                                |
 | Script-driven object  | `Actor`, `ACTOR_*`                                                             |
 | Field programs        | `PlChar_`                                                                      |
@@ -1122,7 +1122,7 @@ Which form a twin group takes: [shared bodies](#shared-bodies).
 
 ```c
 /* Whether the party battler can act this turn: alive and awake. */
-static inline bool Battle_CanAct(PartyBattler* battler) {
+static inline bool Battle_CanAct(PartyMember* battler) {
     return battler->chr.hp != 0 && !HAS_STATUS(*battler, STATUS_SLEEPING);
 }
 ```

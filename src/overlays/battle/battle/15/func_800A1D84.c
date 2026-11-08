@@ -42,18 +42,18 @@ NON_MATCHING void func_800A1D84(void) {
     row_index = *active;
     if (row_index < BATTLE_ACTIVE_ROW_COUNT) {
         row_offset   = row_index * BATTLE_PARTY_STRIDE;
-        record_index = (&g_BattlePartyBattlers[0].character_index)[row_offset];
+        record_index = (&g_Game.members[0].character_index)[row_offset];
         timer        = g_Characters[record_index].fatigue;
         if (timer < BATTLE_TIMER_MAX) {
             g_Characters[record_index].fatigue = timer + 1;
             row_offset                         = *active * BATTLE_PARTY_STRIDE;
             D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
         }
-        Char_RebuildStats(&g_Characters[g_BattlePartyBattlers[*active].character_index]);
+        Char_RebuildStats(&g_Characters[g_Game.members[*active].character_index]);
         i = 0;
         if (g_BattlePartyCount != 0) {
             do {
-                cell       = &g_Characters[g_BattlePartyBattlers[i].character_index];
+                cell       = &g_Characters[g_Game.members[i].character_index];
                 dest       = i * BATTLE_PARTY_STRIDE + D_80145F04;
                 dest[0x0E] = cell[0x0E];
                 dest[0x0F] = cell[0x0F];

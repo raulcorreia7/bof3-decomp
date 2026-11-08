@@ -1,10 +1,10 @@
 #include "battle_15.h"
 
 MATCH void func_800ADE6C(void) {
-    PartyBattler* work;
-    BattleSlot*   rows;
-    BattleSlot*   row;
-    s32           slot;
+    PartyMember* work;
+    BattleSlot*  rows;
+    BattleSlot*  row;
+    s32          slot;
 
     if ((g_MenuPanelTasks[19].active & 1) == 0) {
         BATTLE_WORK->header.mode = 2;

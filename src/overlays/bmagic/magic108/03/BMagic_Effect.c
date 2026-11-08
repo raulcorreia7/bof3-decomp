@@ -10,8 +10,8 @@ MATCH void func_801EEC04(void) {
 }
 
 MATCH void func_801EEC5C(void) {
-    PartyBattler* src;
-    u32           slot;
+    PartyMember* src;
+    u32          slot;
 
     src                                = g_BattleSelectedActor;
     slot                               = Battle_AllocEffect(1, 0x1A) & BYTE_MASK;
@@ -39,8 +39,8 @@ MATCH void func_801EED7C(void) {
 }
 
 MATCH void func_801EEE0C(void) {
-    PartyBattler* battler;
-    u32           slot;
+    PartyMember* battler;
+    u32          slot;
 
     g_Task->unk_0C = 0x20000;
     g_Task->unk_10 = 0;
@@ -54,9 +54,9 @@ MATCH void func_801EEE0C(void) {
     MATCH_FAKE_BARRIER(); /* FAKE: keeps the g_BattleActiveBattler read below the coord copy stores */
     slot = g_BattleActiveBattler;
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-        battler = &g_BattlePartyBattlers[slot];
+        battler = &g_Game.members[slot];
     } else {
-        battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+        battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
     g_Task->pos.x.fixed  = battler->pos.x.fixed;
     g_Task->pos.y.fixed  = battler->pos.y.fixed;

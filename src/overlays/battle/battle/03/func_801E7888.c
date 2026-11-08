@@ -4,11 +4,11 @@
  * the shared battle work counter forward.
  */
 MATCH void func_801E7888(void) {
-    PartyBattler* work;
-    u8            selection;
+    PartyMember* work;
+    u8           selection;
 
     selection = g_BattleEffectBattler->slot;
-    g_BattlePartyBattlers[selection].u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+    g_Game.members[selection].u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
     g_BattleEffectBattler->unk_48 = 2u;
     work                          = g_Task;
     work->header.mode++;

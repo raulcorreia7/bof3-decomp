@@ -41,7 +41,7 @@ MATCH void func_801D10AC(u32 message_id) {
     count = g_PartySize;
     i     = 0;
     if (count > 0) {
-        entryp = &g_BattlePartyBattlers[0].character_index;
+        entryp = &g_Game.members[0].character_index;
         y      = MASTER_MENU_ROW_TOP;
         do {
             Master_DrawPartyRow(MASTER_MENU_ROW_X, y, *entryp, i);
@@ -49,7 +49,7 @@ MATCH void func_801D10AC(u32 message_id) {
             entryp += BATTLE_PARTY_STRIDE;
             y += MASTER_MENU_ROW_PITCH;
             i++;
-        } while (i < g_PartySize);
+        } while (i < g_Game.party_size);
     }
 
     MenuDrawSelectionBox(MASTER_MENU_ROW_X, (g_MasterMenuCursor * MASTER_MENU_ROW_PITCH + MASTER_MENU_ROW_TOP) & 0xFFFE,

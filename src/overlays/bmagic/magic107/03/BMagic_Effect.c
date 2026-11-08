@@ -13,19 +13,19 @@ MATCH void func_801EEC04(void) {
 /* The g_Task base for the span read must be fetched before the D_801EC364 store and the
  * z member read kept in place; both inline reads or an early span local shift the reload. */
 MATCH void func_801EEC5C(void) {
-    PartyBattler* work;
-    s32           scroll_x;
-    u32           offset;
+    PartyMember* work;
+    s32          scroll_x;
+    u32          offset;
 
     func_800AFD9C();
-    offset                                   = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-    FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
-    FIELD(u8, D_801EC338, offset)            = ((PartyBattler*)D_8014637C)->facing;
-    scroll_x                                 = g_AreaScrollTargetX;
-    work                                     = g_Task;
-    FIELD(s32, D_801EC364, offset)           = scroll_x;
-    FIELD(s32, D_801EC368, offset)           = g_AreaScrollTargetY;
-    FIELD(s32, D_801EC36C, offset)           = work->pos.z.fixed + 0x04000000;
+    offset                                  = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    FIELD(PartyMember*, D_801EC3A4, offset) = g_Task;
+    FIELD(u8, D_801EC338, offset)           = ((PartyMember*)D_8014637C)->facing;
+    scroll_x                                = g_AreaScrollTargetX;
+    work                                    = g_Task;
+    FIELD(s32, D_801EC364, offset)          = scroll_x;
+    FIELD(s32, D_801EC368, offset)          = g_AreaScrollTargetY;
+    FIELD(s32, D_801EC36C, offset)          = work->pos.z.fixed + 0x04000000;
     SND_QueueSelectionFx(0x100);
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
@@ -67,7 +67,7 @@ MATCH void func_801EEEA0(void) {
 #include "overlays/bmagic/Effect_AdvanceOnTick.h"
 
 MATCH void func_801EEF5C(void) {
-    PartyBattler* active;
+    PartyMember* active;
 
     g_Task->unk_09 = g_Task->unk_09 + 1;
     g_Task->timer  = g_Task->timer - 1;

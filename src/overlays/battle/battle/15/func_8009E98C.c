@@ -11,7 +11,7 @@ MATCH void func_8009E98C(void) {
     state   = &g_BattleTarget;
     battler = LOBU(*state);
     if (battler < 3u) {
-        if (HAS_STATUS(g_BattlePartyBattlers[battler], STATUS_KO)) {
+        if (HAS_STATUS(g_Game.members[battler], STATUS_KO)) {
             ORDER_LOCK(selection = -0x2710);
             g_BattleTargetRecord->hp_change = selection;
             /* FAKE: retail schedules the call arguments after the count store. */

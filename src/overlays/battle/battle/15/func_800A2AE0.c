@@ -6,23 +6,23 @@ MATCH s16 func_800A2AE0(u8 battler_index, u16 element_mask) {
 
     if (BATTLER_IS_PLAYER(battler_index)) {
         if (element_mask & ELEM_FIRE) {
-            element_index = g_BattlePartyBattlers[battler_index].chr.stats.resistances[0];
+            element_index = g_Game.members[battler_index].chr.stats.resistances[0];
             result += (s16)D_800B492C[8u + element_index];
         }
         if (element_mask & ELEM_FROST) {
-            element_index = g_BattlePartyBattlers[battler_index].chr.stats.resistances[1];
+            element_index = g_Game.members[battler_index].chr.stats.resistances[1];
             result += (s16)D_800B492C[8u + element_index];
         }
         if (element_mask & ELEM_ELECTRIC) {
-            element_index = g_BattlePartyBattlers[battler_index].chr.stats.resistances[2];
+            element_index = g_Game.members[battler_index].chr.stats.resistances[2];
             result += (s16)D_800B492C[8u + element_index];
         }
         if (element_mask & ELEM_EARTH) {
-            element_index = g_BattlePartyBattlers[battler_index].chr.stats.resistances[3];
+            element_index = g_Game.members[battler_index].chr.stats.resistances[3];
             result += (s16)D_800B492C[8u + element_index];
         }
         if (element_mask & ELEM_WIND) {
-            element_index = g_BattlePartyBattlers[battler_index].chr.stats.resistances[4];
+            element_index = g_Game.members[battler_index].chr.stats.resistances[4];
             result += (s16)D_800B492C[8u + element_index];
         }
     } else {

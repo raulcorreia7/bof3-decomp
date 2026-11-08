@@ -29,8 +29,7 @@ MATCH u32 func_801DCD50(u32 unused, u8 battler_index, s32 damage_value) {
     }
     if ((*scratch & 0x20u) != 0u) {
         if (BATTLER_IS_PLAYER(battler_index)) {
-            damage =
-                (damage * D_801EAFC0[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_INDEX_HOLY]]) / 100;
+            damage = (damage * D_801EAFC0[g_Game.members[battler_index].chr.stats.resistances[RES_INDEX_HOLY]]) / 100;
         } else {
             slot   = battler_index - 3u;
             damage = (damage * D_801EAFC0[g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_HOLY]]) / 100;

@@ -3,5 +3,5 @@
 MATCH void func_801F3B5C(void) {
     TASK_BYTES[0x0A] = 0x10;
     TASK_BYTES[0x04] = 1;
-    g_GameState->u.field.unk_122 -= 2;
+    g_Game.current->u.field.unk_122 -= 2;
 }

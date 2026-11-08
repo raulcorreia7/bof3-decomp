@@ -5,9 +5,9 @@
  * modules; every change here must verify every member. */
 /* func_801EEFFC (magic055), func_801EEFFC (magic091) */
 MATCH void Effect_FollowTarget(void) {
-    u8            timer;
-    PartyBattler* src;
-    PartyBattler* work;
+    u8           timer;
+    PartyMember* src;
+    PartyMember* work;
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;

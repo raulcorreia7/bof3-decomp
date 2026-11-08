@@ -12,7 +12,7 @@ MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode) {
     if ((mode & BYTE_MASK) == 0) {
         record = &g_Characters[i];
     } else {
-        record = &g_BattlePartyBattlers[i].chr;
+        record = &g_Game.members[i].chr;
     }
     switch (D_801CA719[ability_id & BYTE_MASK].value & 0x3) {
         default:

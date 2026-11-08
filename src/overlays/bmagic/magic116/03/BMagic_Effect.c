@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/func_801EEC14.h"
 
 MATCH void func_801EEC80(void) {
-    PartyBattler* saved_work;
+    PartyMember* saved_work;
 
     g_Task->pos.x.fixed = D_801EC2E0->target.party->pos.x.fixed;
     g_Task->pos.y.fixed = D_801EC2E0->target.party->pos.y.fixed;
@@ -21,7 +21,7 @@ MATCH void func_801EEC80(void) {
 }
 
 MATCH void func_801EED2C(void) {
-    PartyBattler* saved;
+    PartyMember* saved;
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;

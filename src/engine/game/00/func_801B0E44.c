@@ -21,7 +21,7 @@ NON_MATCHING s32 func_801B0E44(void) {
     } else {
         g_Task->timer = 0x10;
     }
-    divisor       = g_RouteSpeedScale[g_GameState->u.field.counter_11C.u8_value];
+    divisor       = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
     g_Task->timer = (u8)(g_Task->timer / (u32)(divisor & BYTE_MASK));
     if (g_Task->state_70.byte == 0) {
         SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * divisor * g_Task->timer;
@@ -46,7 +46,7 @@ NON_MATCHING s32 func_801B0E44(void) {
             if (((u8*)pos2)[-8] != 0) {
                 if ((s16)result >= 0x41) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) &&
-                        (g_Task == (void*)g_BattlePartyBattlers)) {
+                        (g_Task == (void*)g_Game.members)) {
                         if (Area_SetCellPalette(D_80145EC6, D_80145ECA) & BYTE_MASK) {
                             SND_PlayCue(D_801CD0F4[((u8*)pos2)[-7]]);
                             Actor_RequestScript((g_Task->direction_08 >> 1) + 0x10);
@@ -77,7 +77,7 @@ NON_MATCHING s32 func_801B0E44(void) {
                 return 0;
             }
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
-            g_AreaWalkFlags |= 0x20 | AREA_WALK_ENTRY_PENDING;
+            g_Game.walk_flags |= 0x20 | AREA_WALK_ENTRY_PENDING;
             return 0;
         case 3:
             pos3   = (s32*)&D_1F800008;
@@ -95,14 +95,14 @@ NON_MATCHING s32 func_801B0E44(void) {
         case 4:
             func_801B13BC();
             if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
-                g_AreaWalkFlags |= 0x80 | AREA_WALK_ENTRY_PENDING;
+                g_Game.walk_flags |= 0x80 | AREA_WALK_ENTRY_PENDING;
                 return 2;
             }
             return 1;
         case 5:
             func_801B13BC();
             if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
-                g_AreaWalkFlags |= 0x100 | AREA_WALK_ENTRY_PENDING;
+                g_Game.walk_flags |= 0x100 | AREA_WALK_ENTRY_PENDING;
                 return 3;
             }
             return 1;

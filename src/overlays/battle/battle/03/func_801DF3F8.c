@@ -4,28 +4,28 @@
  * the sprite vector from the pose tables.
  */
 MATCH void func_801DF3F8(void) {
-    PartyBattler* actor;
-    s32           y_pos;
-    s8            offset;
-    u8            mode;
-    u8            slot;
+    PartyMember* actor;
+    s32          y_pos;
+    s8           offset;
+    u8           mode;
+    u8           slot;
 
     {
-        PartyBattler* work = g_Task;
+        PartyMember* work = g_Task;
 
         D_801EB154[work->header.step]();
     }
     {
-        PartyBattler* work = g_Task;
+        PartyMember* work = g_Task;
 
         work->unk_5F = 0;
         work->unk_5E = 0;
         work->unk_5D = 0;
     }
     if ((g_BattleMode == 1) && (g_BattleStep >= 2U)) {
-        PartyBattler* work;
+        PartyMember* work;
 
-        if (g_GameState->chr.character_id != g_BattlePartyBattlers[D_801462EE].chr.character_id) {
+        if (g_Game.current->chr.character_id != g_Game.members[D_801462EE].chr.character_id) {
             offset       = -0x1E;
             work         = g_Task;
             work->unk_5F = offset;
@@ -38,12 +38,12 @@ MATCH void func_801DF3F8(void) {
         work->unk_5D = offset;
     }
     if (g_BattleMode != 5) {
-        PartyBattler* battler = g_GameState;
+        PartyMember* battler = g_Game.current;
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {
             if (battler->u.turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
-                PartyBattler* work = g_Task;
-                s8            level;
+                PartyMember* work = g_Task;
+                s8           level;
 
                 slot                           = work->slot;
                 level                          = g_BattleEffects[slot].arg.sway + 1;
@@ -53,15 +53,15 @@ MATCH void func_801DF3F8(void) {
                     goto confuse_flip;
                 }
             } else {
-                PartyBattler* work = g_Task;
-                s8            level;
+                PartyMember* work = g_Task;
+                s8           level;
 
                 slot                           = work->slot;
                 level                          = g_BattleEffects[slot].arg.sway - 1;
                 g_BattleEffects[slot].arg.sway = level;
                 if (level < -11) {
                 confuse_flip:
-                    g_GameState->u.turn.damage_flags.value ^= 0x800;
+                    g_Game.current->u.turn.damage_flags.value ^= 0x800;
                 }
             }
             actor = g_Task;
@@ -75,8 +75,8 @@ MATCH void func_801DF3F8(void) {
             }
         }
     } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) &&
-               (g_GameState->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
-        PartyBattler* work = g_Task;
+               (g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+        PartyMember* work = g_Task;
 
         s32 x = g_EncounterOriginX;
         s32 y = g_EncounterOriginY;
@@ -90,7 +90,7 @@ MATCH void func_801DF3F8(void) {
     store_coord_y:
         actor->pos.y.fixed = y_pos;
     }
-    if (!(g_GameState->u.turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
+    if (!(g_Game.current->u.turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
         func_801DEDE4();
     }
 }

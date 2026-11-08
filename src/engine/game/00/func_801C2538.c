@@ -9,7 +9,7 @@ MATCH void func_801C2538(void) {
     s16 result;
 
     /* Step size from route kind; rate from the shared selector bundle. */
-    rate = g_RouteSpeedScale[g_GameState->u.field.counter_11C.u8_value];
+    rate = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
     if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
         step          = 0x20;
         g_Task->timer = step;
@@ -18,7 +18,7 @@ MATCH void func_801C2538(void) {
         g_Task->timer = step;
     }
     g_Task->timer = (g_Task->timer / (rate & BYTE_MASK));
-    if ((g_GameFlags & 0x1000) != 0) {
+    if ((g_Game.flags & 0x1000) != 0) {
         g_Task->timer *= 2;
     }
     g_Task->vx = g_FacingOffsets[g_Task->direction_08].x * rate;

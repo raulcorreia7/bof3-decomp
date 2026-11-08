@@ -26,7 +26,7 @@ MATCH void func_801EEF0C(void) {
 }
 
 MATCH void func_801EEF94(void) {
-    PartyBattler* src;
+    PartyMember* src;
 
     src                      = g_BattleSelectedActor;
     g_Task->pos.x.fixed      = src->pos.x.fixed;
@@ -78,8 +78,8 @@ MATCH void func_801EFB10(void) {
 }
 
 MATCH void func_801EFB88(void) {
-    PartyBattler* work;
-    u8            timer;
+    PartyMember* work;
+    u8           timer;
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
@@ -107,9 +107,9 @@ MATCH void func_801EFC70(void) {
 }
 
 MATCH void func_801EFCF4(void) {
-    PartyBattler* work;
-    u8            counter;
-    s32           drop;
+    PartyMember* work;
+    u8           counter;
+    s32          drop;
 
     func_800AF764();
     work         = g_Task;
@@ -150,7 +150,7 @@ MATCH void func_801F02BC(void) {
 }
 
 MATCH void func_801F0344(void) {
-    PartyBattler* src;
+    PartyMember* src;
 
     src                 = g_BattleSelectedActor;
     g_Task->pos.x.fixed = src->pos.x.fixed;
@@ -162,7 +162,7 @@ MATCH void func_801F0344(void) {
 }
 
 MATCH void func_801F03A4(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->timer += 2;

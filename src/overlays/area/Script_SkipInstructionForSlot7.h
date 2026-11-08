@@ -3,7 +3,7 @@
  */
 /* func_801F3D38, func_801F4124 */
 MATCH void Script_SkipInstructionForSlot7(void) {
-    if (g_GameState->chr.character_id == CHAR_ID_RYU_ADULT) {
+    if (g_Game.current->chr.character_id == CHAR_ID_RYU_ADULT) {
         g_ScriptState->cursor = (u16)(g_ScriptState->cursor + 3);
     }
 }

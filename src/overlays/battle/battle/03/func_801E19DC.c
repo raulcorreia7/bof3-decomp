@@ -5,7 +5,7 @@
  * pointer cell at 0x1F800044.
  */
 MATCH void func_801E19DC(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     func_801DEE4C();
     work = g_Task;

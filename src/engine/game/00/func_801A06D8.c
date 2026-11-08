@@ -8,7 +8,7 @@ MATCH u32 func_801A06D8(void) {
     u8     j;
     u8     flags;
 
-    result = g_AreaWalkFlags & AREA_WALK_LEADER_SWITCH_ACTIVE;
+    result = g_Game.walk_flags & AREA_WALK_LEADER_SWITCH_ACTIVE;
     if (result == 0) {
         for (i = 0; i < ENTITY_MAX; i++) {
             row            = &g_Actors[i];
@@ -24,7 +24,7 @@ MATCH u32 func_801A06D8(void) {
                         !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_Actors[i].unk_79 = g_Task->direction_08 & 7;
                         if (!(g_Task->option_flags & ACTOR_OPT_KEEP_FACING)) {
-                            g_Task->direction_08 = (g_BattlePartyBattlers[0].facing ^ 4) & 7;
+                            g_Task->direction_08 = (g_Game.members[0].facing ^ 4) & 7;
                             func_8015BAC4(g_Task->direction_08);
                         } else {
                             func_8015BAC4(g_Task->direction_08 & 7);

@@ -4,7 +4,7 @@ MATCH void func_801E50C0(void) {
     u8 countdown;
 
     {
-        PartyBattler* work;
+        PartyMember* work;
 
         work      = g_Task;
         countdown = work->unk_09;
@@ -19,7 +19,7 @@ MATCH void func_801E50C0(void) {
                 g_Task->unk_5F -= 0x10;
 
                 {
-                    PartyBattler* motion_work;
+                    PartyMember* motion_work;
 
                     motion_work = g_Task;
                     motion_work->unk_0C += motion_work->unk_18;

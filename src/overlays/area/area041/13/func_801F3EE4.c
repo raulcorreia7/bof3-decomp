@@ -8,5 +8,5 @@ MATCH void func_801F3EE4(void) {
         g_Task->unk_0A = 8;
         g_Task->unk_04 = 2;
     }
-    g_GameState->u.field.unk_122 -= 2;
+    g_Game.current->u.field.unk_122 -= 2;
 }

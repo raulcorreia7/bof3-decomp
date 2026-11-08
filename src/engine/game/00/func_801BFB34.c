@@ -30,7 +30,7 @@ NON_MATCHING void func_801BFB34(void) {
     STACK_PADS(u8, 56);
 
     val4  = 0;
-    cnt_a = g_PartySize;
+    cnt_a = g_Game.party_size;
     if (cnt_a > 0) {
         val0 = (s32*)&D_1F800000;
         val9 = 0;
@@ -43,7 +43,7 @@ NON_MATCHING void func_801BFB34(void) {
         } while (val4 < cnt_a);
     }
     val4  = 0;
-    cnt_a = g_PartySize;
+    cnt_a = g_Game.party_size;
     if (cnt_a != 0) {
         val3 = 0;
         do {
@@ -52,7 +52,7 @@ NON_MATCHING void func_801BFB34(void) {
             if (tmp3 > 0) {
             loop_7:
                 val7 = val10 * 4;
-                if (FIELD(u8, &g_BattlePartyBattlers[0].chr.character_id, val3) != g_PartyBattleOrder[val10]) {
+                if (FIELD(u8, &g_Game.members[0].chr.character_id, val3) != g_PartyBattleOrder[val10]) {
                     val10 += 1;
                     if (val10 >= tmp3) {
                         goto block_9; /* retail branch */
@@ -66,11 +66,11 @@ NON_MATCHING void func_801BFB34(void) {
             val4 += 1;
             FIELD(s32, &D_80145EC4, val3) = FIELD(s32, &D_1F800000, val7);
             val3 += BATTLE_PARTY_STRIDE;
-            cnt_a = g_PartySize;
+            cnt_a = g_Game.party_size;
         } while (val4 < cnt_a);
     }
     val4  = 0;
-    cnt_b = g_PartySize;
+    cnt_b = g_Game.party_size;
     if (cnt_b > 0) {
         val1  = (s32*)&D_1F800000;
         val11 = 0;
@@ -82,7 +82,7 @@ NON_MATCHING void func_801BFB34(void) {
             val1 += 1;
         } while (val4 < cnt_b);
     }
-    tmp7 = g_PartySize;
+    tmp7 = g_Game.party_size;
     val4 = 0;
     if (tmp7 != 0) {
         val2 = &D_1F800000;
@@ -94,7 +94,7 @@ NON_MATCHING void func_801BFB34(void) {
             if (tmp1 > 0) {
             loop_18:
                 val6 = val8 * 4;
-                if (FIELD(u8, &g_BattlePartyBattlers[0].chr.character_id, val5) != g_PartyBattleOrder[val8]) {
+                if (FIELD(u8, &g_Game.members[0].chr.character_id, val5) != g_PartyBattleOrder[val8]) {
                     val8 += 1;
                     if (val8 >= tmp1) {
                         goto block_20; /* retail branch */
@@ -110,15 +110,15 @@ NON_MATCHING void func_801BFB34(void) {
             val4 += 1;
             FIELD(s16, &D_80145ECE, val5) = Area_ReadHeight(FIELD(s32, &D_80145EC4, val5), tmp0);
             val5 += BATTLE_PARTY_STRIDE;
-        } while (val4 < (s32)g_PartySize);
+        } while (val4 < (s32)g_Game.party_size);
     }
     if (!(g_BattleOutcome.options & 0x80)) {
         val4 = 0;
-        if ((s32)g_PartySize > 0) {
+        if ((s32)g_Game.party_size > 0) {
             val5 = 0;
         loop_25:
-            tmp5                     = (u8*)g_BattlePartyBattlers + val5;
-            g_GameState              = tmp5;
+            tmp5                     = (u8*)g_Game.members + val5;
+            g_Game.current           = tmp5;
             g_Task                   = tmp5;
             FIELD(u8, tmp5, 0x8u)    = (u8)s_RouteIndexByMode[g_BattleScrollDir];
             FIELD(s8, g_Task, 0x29u) = 6;
@@ -131,12 +131,12 @@ NON_MATCHING void func_801BFB34(void) {
             func_801C3204();
             val4 += 1;
             Actor_SelectScript(g_Task->direction_08);
-            if (val4 < (s32)g_PartySize) {
+            if (val4 < (s32)g_Game.party_size) {
                 goto loop_25; /* retail branch */
             }
         }
     } else {
-        func_801BE1B0((u32)g_BattlePartyOrder);
+        func_801BE1B0((u32)g_Game.battle_order);
         func_80199440();
     }
 }

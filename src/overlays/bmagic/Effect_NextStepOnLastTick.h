@@ -3,8 +3,8 @@
  * verify every member. */
 /* func_801EF524 (magic041), func_801F0644 (magic006) */
 MATCH void Effect_NextStepOnLastTick(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 1) {

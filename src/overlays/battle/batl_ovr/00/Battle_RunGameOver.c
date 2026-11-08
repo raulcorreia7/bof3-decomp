@@ -7,7 +7,7 @@ MATCH void Battle_RunGameOver(void) {
     func_801EF3B4(0x80);
 
     if (WINDOW_EFFECT_IDLE()) {
-        u8* row = (u8*)g_BattlePartyBattlers;
+        u8* row = (u8*)g_Game.members;
 
         GFX_FreePaletteFadeTarget(row);
         GFX_FreePaletteFadeTarget(row + BATTLE_PARTY_STRIDE);

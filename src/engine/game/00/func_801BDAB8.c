@@ -6,8 +6,8 @@ MATCH void func_801BDAB8(void) {
 
     for (index = g_PartySize - 1; index >= 0; index--) {
         off = index * BATTLE_PARTY_STRIDE;
-        if ((((u8*)g_BattlePartyBattlers)[off] & 0x40) == 0) {
-            TASK_SET(((u8*)g_BattlePartyBattlers + off));
+        if ((((u8*)g_Game.members)[off] & 0x40) == 0) {
+            TASK_SET(((u8*)g_Game.members + off));
             if (g_GameStateIndex == GAME_REQUEST_BATTLE) {
                 Area_SetDrawMode();
             } else {

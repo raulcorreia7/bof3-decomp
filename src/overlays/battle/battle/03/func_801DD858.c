@@ -7,5 +7,5 @@ MATCH void func_801DD858(u32 effect_index) {
     effect_index &= BYTE_MASK;
     base = D_801EAFD0;
     addr = base + effect_index * 6u;
-    SND_PlayCue(*(u16*)((g_GameState->unk_2C.half * 2u + addr)));
+    SND_PlayCue(*(u16*)((g_Game.current->unk_2C.half * 2u + addr)));
 }

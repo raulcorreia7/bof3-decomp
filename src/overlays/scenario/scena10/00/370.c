@@ -217,8 +217,8 @@ INCLUDE_ASM(func_801FE00C);
 MATCH s32 func_801FE2B0(void) {
     u8 i;
 
-    for (i = 0; i < g_PartySize; i++) {
-        if (g_BattlePartyBattlers[i].chr.character_id == CHAR_ID_GARR) {
+    for (i = 0; i < g_Game.party_size; i++) {
+        if (g_Game.members[i].chr.character_id == CHAR_ID_GARR) {
             return 1;
         }
     }
@@ -232,11 +232,11 @@ MATCH void Scene_JoinPartyRyuAdultGarrNinaAdult(void) {
 MATCH void func_801FE360(void) {
     u8 i;
 
-    for (i = 0; i < g_PartySize; i++) {
-        Party_RemoveMember(g_BattlePartyBattlers[i].chr.character_id);
+    for (i = 0; i < g_Game.party_size; i++) {
+        Party_RemoveMember(g_Game.members[i].chr.character_id);
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_MOMO);
 }

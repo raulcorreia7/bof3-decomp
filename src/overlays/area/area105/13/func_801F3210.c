@@ -5,8 +5,8 @@ MATCH s32 func_801F3210(s32 x, s32 y) {
 
     if (g_SceneState.scenario_id < 0xA) {
         if (D_80143F03 == 0) {
-            facing        = g_BattlePartyBattlers[0].facing;
-            SP_REF(u8, 0) = g_BattlePartyBattlers[0].facing;
+            facing        = g_Game.members[0].facing;
+            SP_REF(u8, 0) = g_Game.members[0].facing;
             if (facing >= 2U) {
                 if (facing != FACING_UP_RIGHT) {
                     if ((y >> 16) >= 30) {

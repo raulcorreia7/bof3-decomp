@@ -59,7 +59,7 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp28;
     void*  tmp29;
 
-    if ((0x400 & g_GameFlags) ||
+    if ((0x400 & g_Game.flags) ||
         ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
         return 1;
     }

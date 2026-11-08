@@ -5,10 +5,10 @@
 
 /* Per-route walk-completion threshold table in main-exe data, indexed by the
  * current map's route byte in the shared scenario state block at
- * g_GameState+0x79. */
+ * g_Game.current+0x79. */
 
 /* Per-route walk-completion threshold table, indexed by the current map's
- * route byte in the shared scenario state block at g_GameState+0x79. */
+ * route byte in the shared scenario state block at g_Game.current+0x79. */
 
 MATCH void func_801C5558(void) {
     Actor* work;
@@ -32,7 +32,7 @@ MATCH void func_801C5558(void) {
     offs_y = g_FacingSteps[route].y * step;
     result = Area_ReadHeight(work->pos.x.fixed + offs_x, work->pos.y.fixed + offs_y);
 
-    threshold = D_80181B70[g_GameState->chr.character_id];
+    threshold = D_80181B70[g_Game.current->chr.character_id];
 
     work = g_Task;
     if ((s16)COORD_INT(work->pos.z) >= result - threshold) {

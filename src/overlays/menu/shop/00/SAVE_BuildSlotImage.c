@@ -68,7 +68,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     g_SaveEntryX                   = (u32)D_80145EC4;
     g_SaveEntryY                   = (u32)D_80145EC8;
     g_SaveAreaId                   = g_GameAreaId;
-    g_SaveEntryFacing              = g_BattlePartyBattlers[0].facing;
+    g_SaveEntryFacing              = g_Game.members[0].facing;
     n                              = 0;
     j                              = 0;
     do {
@@ -110,7 +110,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     src                                = g_SceneEventFlags - 0x650;
     i                                  = 0;
     SHOP_WORK_RECORD(0xCA0u)->field_14 = SYS_TestFlag(g_SceneEventFlags, 0x92U);
-    D_80145025                         = (u8)g_GameFlags;
+    D_80145025                         = (u8)g_Game.flags;
     do {
         i += 1;
         count = i & HALF_MASK;

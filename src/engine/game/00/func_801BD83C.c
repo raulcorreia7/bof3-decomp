@@ -11,7 +11,7 @@ MATCH void func_801BD83C(void) {
     s32 value;
 
     offset   = g_Task->unk_06 * BATTLE_PARTY_STRIDE;
-    mode     = ((u8*)D_80145FBB)[offset];
+    mode     = (&g_Game.members[0].u.field.mode_12B.u8_value)[offset];
     screen_y = FIELD(u16, &D_80145ECE, offset);
     if (mode == 3) {
         value = COORD_INT(g_Task->pos.z);

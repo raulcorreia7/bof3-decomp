@@ -11,11 +11,11 @@ MATCH void func_801F37C0(void) {
         return;
     }
     for (i = 0; i < g_PartySize; i++) {
-        if (g_BattlePartyBattlers[i].chr.character_id == CHAR_ID_GARR) {
+        if (g_Game.members[i].chr.character_id == CHAR_ID_GARR) {
             work              = g_Task;
-            work->pos.x.fixed = g_BattlePartyBattlers[i].pos.x.fixed;
-            work->pos.y.fixed = g_BattlePartyBattlers[i].pos.y.fixed;
-            work->pos.z.fixed = g_BattlePartyBattlers[i].pos.z.fixed;
+            work->pos.x.fixed = g_Game.members[i].pos.x.fixed;
+            work->pos.y.fixed = g_Game.members[i].pos.y.fixed;
+            work->pos.z.fixed = g_Game.members[i].pos.z.fixed;
         }
     }
     g_ScriptState->cursor -= 2;

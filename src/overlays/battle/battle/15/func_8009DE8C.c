@@ -11,7 +11,7 @@ MATCH void func_8009DE8C(void) {
     ctx = (BattleSelectionContext*)&g_BattleTarget;
     sel = ctx->sel;
     if (BATTLER_IS_PLAYER(sel)) {
-        g_BattleTargetRecord->hp_change = -g_BattlePartyBattlers[sel].chr.stats.max_hp;
+        g_BattleTargetRecord->hp_change = -g_Game.members[sel].chr.stats.max_hp;
     } else {
         value = ENEMY_COMBATANT(sel).stats.max_hp;
         if (value == 0xFFFFu) {

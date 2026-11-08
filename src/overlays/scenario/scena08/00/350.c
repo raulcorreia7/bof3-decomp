@@ -563,14 +563,14 @@ INCLUDE_ASM(func_801FE2A0);
 
 MATCH void func_801FE698(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_WHELP);
     Party_StagePalettes();
 }
 
 MATCH void func_801FE6DC(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
 }
 
@@ -580,7 +580,7 @@ MATCH void func_801FE740(void) {
 
 MATCH void func_801FE760(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_REI, 0);
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
     Party_StagePalettes();
@@ -589,7 +589,7 @@ MATCH void func_801FE760(void) {
 #include "overlays/scenario/Scene_SetPartyRyuAdultGarrNinaAdult.h"
 
 MATCH void func_801FE800(void) {
-    g_PartySize = 0;
+    g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
     Party_JoinMember(CHAR_ID_REI);

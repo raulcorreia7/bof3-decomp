@@ -21,7 +21,7 @@ MATCH void func_80098450(void) {
         return;
     }
     slot = g_BattleMessageSlot[5];
-    g_BattlePartyBattlers[slot].u.turn.damage_flags.volatile_value &= 0xBFFFu;
+    g_Game.members[slot].u.turn.damage_flags.volatile_value &= 0xBFFFu;
     if (*phase == 0u) {
         D_801485DC = 1u;
         D_801485E0 = (g_MenuPanelTasks[16].pos.x + 7);

@@ -10,11 +10,11 @@ MATCH void func_801BEDD0(void) {
     if (count <= index) {
         return;
     }
-    work = (u8*)g_BattlePartyBattlers + index * BATTLE_PARTY_STRIDE;
+    work = (u8*)g_Game.members + index * BATTLE_PARTY_STRIDE;
     do {
         TASK_SET(work);
         g_Task->param.unk_0B = Actor_GetTurnStep(s_RouteIndexByMode[g_BattleScrollDir]);
         work += BATTLE_PARTY_STRIDE;
         index += 1;
-    } while (index < g_PartySize);
+    } while (index < g_Game.party_size);
 }

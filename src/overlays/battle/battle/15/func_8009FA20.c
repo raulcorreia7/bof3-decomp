@@ -11,7 +11,7 @@ MATCH void func_8009FA20(void) {
 
     battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
-        value = g_BattlePartyBattlers[battler].chr.stats.power;
+        value = g_Game.members[battler].chr.stats.power;
     } else {
         enemy_index = battler - 3u;
         value       = g_BattleEnemyBattlers[enemy_index].stats.power;

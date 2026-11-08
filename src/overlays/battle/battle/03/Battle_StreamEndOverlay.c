@@ -12,7 +12,7 @@ MATCH void Battle_StreamEndOverlay(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            if ((g_BattlePartyBattlers[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
+            if ((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
                 return;
             }
             i += 1u;
@@ -26,16 +26,16 @@ MATCH void Battle_StreamEndOverlay(void) {
         i = 0u;
         if (i < g_BattleRowCursor) {
             do {
-                PartyBattler* work = &g_BattlePartyBattlers[i];
+                PartyMember* work = &g_Game.members[i];
 
                 g_Task = work;
-                if (HAS_STATUS(g_BattlePartyBattlers[i], 0x800u)) {
-                    g_BattlePartyBattlers[i].chr.hp        = g_BattlePartyBattlers[i].chr.stats.max_hp;
-                    g_BattlePartyBattlers[i].chr.ap        = g_BattlePartyBattlers[i].chr.stats.max_ap;
-                    g_BattlePartyBattlers[i].chr.willpower = g_BattlePartyBattlers[i].chr.stats.willpower;
-                    func_800A36F0(i, g_BattlePartyBattlers[i].chr.status & ~STATUS_KO);
+                if (HAS_STATUS(g_Game.members[i], 0x800u)) {
+                    g_Game.members[i].chr.hp        = g_Game.members[i].chr.stats.max_hp;
+                    g_Game.members[i].chr.ap        = g_Game.members[i].chr.stats.max_ap;
+                    g_Game.members[i].chr.willpower = g_Game.members[i].chr.stats.willpower;
+                    func_800A36F0(i, g_Game.members[i].chr.status & ~STATUS_KO);
                 }
-                func_800A36F0(i, g_BattlePartyBattlers[i].chr.status & STATUS_CURE_MASK);
+                func_800A36F0(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
                 GFX_FreePaletteFadeTarget(work);
                 func_801DDFEC(i);
                 i += 1u;

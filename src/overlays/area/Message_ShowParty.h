@@ -5,13 +5,13 @@
  * Every change here must verify every member address. Kept: the slot literal
  * folds into the g_PartyMemberMessages address; as an inline it stays in a
  * register (tested), and the body returns from the member. */
-#define WORLD_SHOW_PARTY_MESSAGE(slot, i, j)                                                          \
-    for (i = 0; i < PARTY_MEMBER_MESSAGE_COUNT; i++) {                                                \
-        for (j = 0; j < g_PartySize; j++) {                                                           \
-            if (g_BattlePartyBattlers[j].chr.character_id == g_PartyMemberMessages[(slot)].tags[i]) { \
-                Message_StartAreaMessage(g_PartyMemberMessages[(slot)].messages[i]);                  \
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;                                              \
-                return;                                                                               \
-            }                                                                                         \
-        }                                                                                             \
+#define WORLD_SHOW_PARTY_MESSAGE(slot, i, j)                                                   \
+    for (i = 0; i < PARTY_MEMBER_MESSAGE_COUNT; i++) {                                         \
+        for (j = 0; j < g_Game.party_size; j++) {                                              \
+            if (g_Game.members[j].chr.character_id == g_PartyMemberMessages[(slot)].tags[i]) { \
+                Message_StartAreaMessage(g_PartyMemberMessages[(slot)].messages[i]);           \
+                g_GameStateIndex = GAME_REQUEST_MESSAGE;                                       \
+                return;                                                                        \
+            }                                                                                  \
+        }                                                                                      \
     }

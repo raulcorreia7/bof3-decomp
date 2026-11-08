@@ -24,12 +24,12 @@
  * battle/battle/03 overlay; the call sites in this target fix the parameter roles
  * named in the prototypes below. */
 /* Typed view of the scratchpad work area; each use reloads the cell. */
-#define BATTLE_WORK                    ((PartyBattler*)g_Task)
+#define BATTLE_WORK                    ((PartyMember*)g_Task)
 
 /* The actor's target slot, signed, moved by one step before the wrap helper clamps it. */
 #define ACTOR_TARGET_STEP(delta)       ((s8)g_BattleActorTurn->command.target + (delta))
 #define BATTLE_ACTIVE_MESSAGE_SLOT_PTR (*(volatile void**)&g_BattleMessageSlot)
-#define BATTLE_ACTIVE_ROW              ((PartyBattler*)g_BattleMessageSlot)
+#define BATTLE_ACTIVE_ROW              ((PartyMember*)g_BattleMessageSlot)
 /* Fixed-address bases, tables, and rodata pointers. The raw literals live only
  * here; function bodies reference these named accessors. */
 #define BATTLE_LOCK_RAM_BASE           D_80150000
@@ -49,29 +49,28 @@
 #define BATTLE_HIT_THRESHOLD_MAX       100
 #define BATTLE_HIT_RATE_BASE           125
 #define BATTLE_HIT_RATE_MIN            50
-#define g_GameState                    ((volatile u32)g_GameState)
 #define g_AreaScrollTargetY            (*(u32*)&g_AreaScrollTargetY)
 
 /* Pick the battler's step rule row from the flagged, player and enemy tables.
  * Kept: as an inline the enemy table pointer loads into $a0 before the branch
  * (first instruction differs in both members). */
-#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                                                         \
-    do {                                                                                                         \
-        u32 row;                                                                                                 \
-        u8  battler;                                                                                             \
-        u8  result;                                                                                              \
-        battler = *(u8*)&g_BattleActiveBattler;                                                                  \
-        if (battler < 3u) {                                                                                      \
-            if ((g_BattlePartyBattlers[battler].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
-                result = flagged[g_DragonForm];                                                                  \
-            } else {                                                                                             \
-                result = player[g_BattlePartyBattlers[battler].chr.character_id];                                \
-            }                                                                                                    \
-        } else {                                                                                                 \
-            row    = (u32)battler - 3u;                                                                          \
-            result = enemy[(u32)g_BattleEnemyBattlers[row].kind * 0x88u];                                        \
-        }                                                                                                        \
-        return result;                                                                                           \
+#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                                                  \
+    do {                                                                                                  \
+        u32 row;                                                                                          \
+        u8  battler;                                                                                      \
+        u8  result;                                                                                       \
+        battler = *(u8*)&g_BattleActiveBattler;                                                           \
+        if (battler < 3u) {                                                                               \
+            if ((g_Game.members[battler].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
+                result = flagged[g_DragonForm];                                                           \
+            } else {                                                                                      \
+                result = player[g_Game.members[battler].chr.character_id];                                \
+            }                                                                                             \
+        } else {                                                                                          \
+            row    = (u32)battler - 3u;                                                                   \
+            result = enemy[(u32)g_BattleEnemyBattlers[row].kind * 0x88u];                                 \
+        }                                                                                                 \
+        return result;                                                                                    \
     } while (0)
 
 /* The party formation g_PartyFormation (0x80144F58): func_800AAA74 applies its stat changes. */
@@ -148,7 +147,7 @@ typedef struct BattleStatDisplayTemplate {
 
 ASSERT_SIZE(BattleStatDisplayTemplate, 0x18);
 
-/* Battle-local work row (stride 0x140 at g_BattlePartyBattlers). Offsets 0x24..0x4B
+/* Battle-local work row (stride 0x140 at g_Game.members). Offsets 0x24..0x4B
  * are the g_Task stores in func_800ADD44 (retail asm byte/half/word
  * widths, matching its exact twin func_800ADA4C). +0x120/+0x124/+0x128 alias
  * D_80145FB0 (u8), D_80145FB4[i].flags (u32) and D_80145FB8[i].flags
@@ -940,7 +939,7 @@ static inline s32 BattleCompareStatusByte(s32 battler_index, s32 compare_value, 
 
     result = 1;
     if ((u32)(battler_index & BYTE_MASK) < 3U) {
-        entry  = (u8*)(g_GameState);
+        entry  = (u8*)(g_Game.current);
         result = (*(entry + offset)) != (compare_value & BYTE_MASK);
     }
     return result;
@@ -949,10 +948,10 @@ static inline s32 BattleCompareStatusByte(s32 battler_index, s32 compare_value, 
 /* Run the handler the spad step byte selects out of the caller's table. */
 static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     BattleEffectSteps handlers;
-    PartyBattler*     work;
+    PartyMember*      work;
 
     handlers     = *table;
-    work         = (PartyBattler*)g_Task;
+    work         = (PartyMember*)g_Task;
     g_ScriptBank = 0x800F0800;
     ((Callback*)&handlers)[work->header.mode]();
     g_ScriptBank = 0x800D3800;
@@ -1020,7 +1019,7 @@ static inline void BattleSelectionDelta(s32 mode) {
     if (ctx->sel < 3u) {
         value = func_800A4294(mode);
         (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
-            (s16)(value - g_BattlePartyBattlers[ctx->sel].chr.stats.defense);
+            (s16)(value - g_Game.members[ctx->sel].chr.stats.defense);
     } else {
         value = func_800A4294(mode);
         (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
@@ -1045,7 +1044,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
         mode = *(u8*)&g_BattleTarget;
         if (mode < 3u) {
-            g_BattlePartyBattlers[mode].u.turn.action_flags.value |= flag;
+            g_Game.members[mode].u.turn.action_flags.value |= flag;
         } else {
             ENEMY_COMBATANT(mode).turn.action_flags.value |= flag;
         }
@@ -1064,11 +1063,11 @@ static inline void BattleSetSelectionFlag(u32 flag) {
 /* Run the handler-quad row at offset with the spad step. */
 static inline void BattleRunHandlerQuad(s32 offset) {
     BattleHandlerQuad handlers;
-    PartyBattler*     work;
+    PartyMember*      work;
 
     handlers = *(BattleHandlerQuad*)((Callback*)&D_800969B8 + offset);
     handlers.handlers[BATTLE_WORK->header.mode]();
-    work = (PartyBattler*)g_Task;
+    work = (PartyMember*)g_Task;
     if ((work->header.flags != 0u) && (work->header.mode != 0u)) {
         func_800AE9C4(work->unk_04);
     }

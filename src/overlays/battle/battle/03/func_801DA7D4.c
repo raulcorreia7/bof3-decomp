@@ -52,12 +52,12 @@ NON_MATCHING void func_801DA7D4(void) {
     i   = 0;
     do {
         if ((D_801463BA == 0) ||
-            (g_BattlePartyBattlers[i].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
+            (g_Game.members[i].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
             if (func_801DB844(i) & BYTE_MASK) {
                 total        = sum;
                 entry        = &entries[total];
                 entry->index = (s16)i;
-                entry->value = g_BattlePartyBattlers[i].chr.stats.agility;
+                entry->value = g_Game.members[i].chr.stats.agility;
                 sum++;
             }
         }

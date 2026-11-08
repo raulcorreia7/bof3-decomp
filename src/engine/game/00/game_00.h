@@ -81,12 +81,12 @@
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                       \
-    if ((g_GameFlags & 0x400) == 0) {                                                                                \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                    \
+    if ((g_Game.flags & 0x400) == 0) {                                                                               \
         if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != \
             0) {                                                                                                     \
             g_Task->header.mode = 2;                                                                                 \
-            g_Task->header.step = flags;                                                                             \
+            g_Task->header.step = new_step;                                                                          \
             g_Task->unk_03      = 0;                                                                                 \
             g_Task->unk_04      = 0;                                                                                 \
             return 1;                                                                                                \
@@ -1593,9 +1593,9 @@ static inline void Game_RollAreaSetup(s32 actor_slot) {
 
     choice = (u32)RANDOM_MASK(0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        func_8015BAC4((u8)((g_BattlePartyBattlers[0].facing ^ 4) & 7));
+        func_8015BAC4((u8)((g_Game.members[0].facing ^ 4) & 7));
     }
-    g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
+    g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((g_CurrentActor->unk_94 & 0x80) == 0) {
         g_CurrentActor->unk_94 |= 0x80;
         switch ((u8)choice) {

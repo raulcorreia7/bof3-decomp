@@ -1,8 +1,8 @@
 #include "boss008_16.h"
 
 MATCH void func_800C1AB4(void) {
-    PartyBattler* work;
-    PartyBattler* spad;
+    PartyMember* work;
+    PartyMember* spad;
 
     func_800C236C(g_Task->unk_09);
     work = g_Task;

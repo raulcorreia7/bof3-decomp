@@ -15,7 +15,7 @@ MATCH void Char_StartTurn(void) {
 #include "overlays/plchar/Char_RunStepScript.h"
 
 MATCH void func_801CE610(void) {
-    g_GameState->u.field.mode_12B.s8_value = 0;
+    g_Game.current->u.field.mode_12B.s8_value = 0;
 }
 
 MATCH void func_801CE620(void) {

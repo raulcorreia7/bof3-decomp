@@ -51,8 +51,8 @@ MATCH void func_801EF374(void) {
 }
 
 MATCH void func_801EF3F4(void) {
-    PartyBattler* work;
-    u8            timer;
+    PartyMember* work;
+    u8           timer;
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;

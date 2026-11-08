@@ -1,10 +1,10 @@
 #include "battle_03.h"
 
 MATCH void func_801E04B0(void) {
-    PartyBattler* enemy_work;
-    PartyBattler* work;
+    PartyMember* enemy_work;
+    PartyMember* work;
 
-    enemy_work = g_GameState;
+    enemy_work = g_Game.current;
     if (HAS_STATUS(*enemy_work, STATUS_KO)) {
         g_Task->unk_03 = 2;
         g_Task->timer  = 0;

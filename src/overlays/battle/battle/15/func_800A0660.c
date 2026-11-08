@@ -8,8 +8,8 @@ MATCH void func_800A0660(void) {
 
     slot = (*(u8*)&g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(slot)) {
-        saved = g_BattlePartyBattlers[slot].chr.status & STATUS_BLIND;
-        g_BattlePartyBattlers[slot].chr.status &= ~STATUS_BLIND;
+        saved = g_Game.members[slot].chr.status & STATUS_BLIND;
+        g_Game.members[slot].chr.status &= ~STATUS_BLIND;
     } else {
         saved = ENEMY_COMBATANT(slot).status & STATUS_BLIND;
         ENEMY_COMBATANT(slot).status &= ~STATUS_BLIND;
@@ -21,7 +21,7 @@ MATCH void func_800A0660(void) {
     g_BattleTargetRecord->hp_change = Battle_CalcDamage(slot, kind, BATTLE_ELEMENT_FROM_WEAPON) / 2;
     slot                            = *battler;
     if (BATTLER_IS_PLAYER(slot)) {
-        g_BattlePartyBattlers[slot].chr.status |= saved;
+        g_Game.members[slot].chr.status |= saved;
         return;
     }
     ENEMY_COMBATANT(slot).status |= saved;

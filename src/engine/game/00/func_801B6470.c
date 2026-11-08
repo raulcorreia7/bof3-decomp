@@ -10,12 +10,12 @@ MATCH s32 func_801B6470(void) {
     s32 x;
     s32 y;
 
-    if ((g_GameFlags & 0x4000) == 0 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
+    if ((g_Game.flags & 0x4000) == 0 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
         if (LOHU(g_GameAreaId) != AREA_ID_DESERT_OF_DEATH_MAP) {
             if ((func_801B6610(D_80145EC6, D_80145ECA) & BYTE_MASK) != 0) {
                 return 0;
             }
-            if ((g_AreaWalkFlags & AREA_WALK_TRANSITION) != 0) {
+            if ((g_Game.walk_flags & AREA_WALK_TRANSITION) != 0) {
                 return 0;
             }
             world_id = MEM(u16, GAME_AREA_ID_ADDR);

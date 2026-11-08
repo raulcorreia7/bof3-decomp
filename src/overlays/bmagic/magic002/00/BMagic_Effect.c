@@ -21,8 +21,8 @@ MATCH void func_801EEE64(void) {
 }
 
 MATCH void func_801EEEBC(void) {
-    PartyBattler* work;
-    PartyBattler* draw;
+    PartyMember* work;
+    PartyMember* draw;
 
     work = g_Task;
     work->unk_14 += 0x100;

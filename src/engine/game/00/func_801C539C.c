@@ -9,7 +9,7 @@ MATCH bool func_801C539C(void) {
     if (!(func_8014DAEC() & BYTE_MASK)) {
         return false;
     }
-    g_GameState->u.field.counter_11C.s8_value = (FIELD(s32, g_Task, 0x70u) + 2);
+    g_Game.current->u.field.counter_11C.s8_value = (FIELD(s32, g_Task, 0x70u) + 2);
     func_801C2538();
     work          = g_Task;
     doubled       = work->timer * 2;

@@ -1,7 +1,7 @@
 #include "area172_13.h"
 
 MATCH void func_801F2D98(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;

@@ -10,12 +10,12 @@ MATCH void Game_RunAreaLoadState(void) {
     u8  request_kind;
     s32 pending_world;
 
-    context_seed    = g_GameContextSeed;
-    context_a       = g_GameEntryPosX;
-    world_flags     = g_AreaWalkFlags;
-    context_b       = g_GameEntryPosY;
-    context_kind    = g_GameContextKind;
-    g_AreaWalkFlags = world_flags & ~AREA_WALK_ENTRY_ACTIVE;
+    context_seed      = g_GameContextSeed;
+    context_a         = g_GameEntryPosX;
+    world_flags       = g_AreaWalkFlags;
+    context_b         = g_GameEntryPosY;
+    context_kind      = g_GameContextKind;
+    g_Game.walk_flags = world_flags & ~AREA_WALK_ENTRY_ACTIVE;
     func_8019FAA0(context_seed, context_a, context_b, context_kind);
 
     if (g_GameRequestFlags & 8u) {
@@ -50,5 +50,5 @@ MATCH void Game_RunAreaLoadState(void) {
     final_world_flags = g_AreaWalkFlags;
     g_GameStateIndex  = GAME_REQUEST_IDLE;
     g_GameEntryState  = 2u;
-    g_AreaWalkFlags   = final_world_flags & ~AREA_WALK_ENTRY_PENDING;
+    g_Game.walk_flags = final_world_flags & ~AREA_WALK_ENTRY_PENDING;
 }

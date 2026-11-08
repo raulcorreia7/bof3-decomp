@@ -15,7 +15,7 @@ MATCH void func_801A3A08(void) {
     }
     if ((((Actor*)g_CurrentActor)->unk_94 & 0x7F) != 0x7F) {
     dispatch:
-        func_801ACE10(g_BattlePartyBattlers[0].chr.character_id);
+        func_801ACE10(g_Game.members[0].chr.character_id);
     } else {
         GAME_WORK_AREA_PTR->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
     }

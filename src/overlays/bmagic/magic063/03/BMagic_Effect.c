@@ -5,16 +5,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC18(void) {
-    PartyBattler* saved;
-    PartyBattler* swap;
-    s32           count;
+    PartyMember* saved;
+    PartyMember* swap;
+    s32          count;
 
     BMagic_DispatchTaskPair(func_801EECF8, Effect_StartOnZeroTick);
     count = 0;
     do {
         if (D_801F0454[(u8)count << 5] & 1) {
             saved                 = g_BattleEffectBattler;
-            swap                  = FIELD(PartyBattler*, D_801F0470, (u8)count << 5);
+            swap                  = FIELD(PartyMember*, D_801F0470, (u8)count << 5);
             D_801F1054            = D_801F0454 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EF340();

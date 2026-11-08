@@ -2,7 +2,7 @@
 
 MATCH void Boss_ChooseBattleEnding3(void) {
     if (g_BattleOutcome.result & BATTLE_RESULT_DEFEAT) {
-        g_BattlePartyOrder = 7;
+        g_Game.battle_order = 7;
         g_BattleOutcome.options |= 0x80;
         func_801DDF28();
         g_SceneState.step_05 = 0x32;

@@ -33,7 +33,7 @@ extern Callback            D_801F09C0[4];
 /* Advance the effect timer: one step of the counter, reloading the work cell on
  * every store. */
 static inline void BattleEffectTimerStep(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
@@ -52,9 +52,9 @@ static inline void BattleEffectTimerStep(void) {
  * depth in the scratchpad pair, then add the cos/sin velocities to the
  * projected position. */
 static inline void MagicOrbitProjectionStep(s32 depth) {
-    PartyBattler* work;
-    s32           counter;
-    s32           angle;
+    PartyMember* work;
+    s32          counter;
+    s32          angle;
     /* FAKE: retail keeps the angle cell in $s0 across both scratchpad stores;
      * without the pin GCC rematerialises its address and the function measured
      * 0x8 short. */

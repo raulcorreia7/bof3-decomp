@@ -5,8 +5,8 @@ MATCH void func_8019F384(void) {
 
     g_Task->timer -= 1;
     offset = g_Task->param.party_index * BATTLE_PARTY_STRIDE;
-    func_8019F5B8(*(s16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset),
-                  (s16)(*(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_30) + offset) + (u16)COORD_INT(g_Task->pos.y)),
+    func_8019F5B8(*(s16*)(((u8*)&g_Game.members[0].unk_2E) + offset),
+                  (s16)(*(u16*)(((u8*)&g_Game.members[0].unk_30) + offset) + (u16)COORD_INT(g_Task->pos.y)),
                   g_Task->unk_06, g_Task->unk_27);
     if (g_Task->timer == 0) {
         g_Task->header.mode += 1;

@@ -10,7 +10,7 @@ MATCH void func_8009E07C(void) {
 
     battler = LOBU(g_BattleTarget);
     if (battler < 3u) {
-        status = g_BattlePartyBattlers[battler].chr.status & STATUS_KO;
+        status = g_Game.members[battler].chr.status & STATUS_KO;
     } else {
         battler -= 3;
         status = g_BattleEnemyBattlers[battler].status & STATUS_KO;

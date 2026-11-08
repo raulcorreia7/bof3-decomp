@@ -5,7 +5,7 @@ MATCH s32 func_801C2BEC(void) {
     GameSlots table;
     u8        index;
 
-    flags = g_GameFlags;
+    flags = g_Game.flags;
 
     table = D_80195FEC;
     if (flags & 0x400) {

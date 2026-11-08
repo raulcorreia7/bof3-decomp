@@ -47,10 +47,10 @@ MATCH void func_801EF4A0(void) {
 }
 
 MATCH void func_801EF530(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     if (g_Task->param.unk_0B == 0x80) {
-        work               = (PartyBattler*)g_BattleEffectBattler;
+        work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }
@@ -96,12 +96,12 @@ MATCH void func_801EFA2C(void) {
 INCLUDE_ASM(func_801EFAD4);
 
 MATCH void func_801EFCA0(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 130) {
-        work              = SP_REF(PartyBattler*, 0x44u);
+        work              = SP_REF(PartyMember*, 0x44u);
         work->header.step = work->header.step + 1;
     }
 }

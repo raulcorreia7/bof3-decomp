@@ -101,8 +101,8 @@ INCLUDE_ASM(func_801F055C);
 INCLUDE_ASM(func_801F061C);
 
 MATCH void func_801F068C(void) {
-    PartyBattler* battler;
-    PartyBattler* task;
+    PartyMember* battler;
+    PartyMember* task;
 
     g_Task->unk_09 += 1;
     g_Task->timer -= 2;

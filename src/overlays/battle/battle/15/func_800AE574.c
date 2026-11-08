@@ -3,23 +3,23 @@
 MATCH void func_800AE574(void) {
     /* FAKE: retail keeps the projected-frame pointer in v0. */
     MATCH_FAKE_PIN(u8*, third, "v0");
-    PartyBattler* first;
-    PartyBattler* second;
-    PartyBattler* flag;
-    PartyBattler* last;
-    PartyBattler* source;
-    u8            next;
-    u16           height;
-    u16           base;
+    PartyMember* first;
+    PartyMember* second;
+    PartyMember* flag;
+    PartyMember* last;
+    PartyMember* source;
+    u8           next;
+    u16          height;
+    u16          base;
 
-    first = (PartyBattler*)g_Task;
+    first = (PartyMember*)g_Task;
     first->unk_09--;
     if (first->unk_09 != 0) {
         return;
     }
 
     source = g_BattleEffectBattler;
-    second = (PartyBattler*)g_Task;
+    second = (PartyMember*)g_Task;
     WorldPos_Copy(&second->pos, &source->pos);
     func_800AF764();
 
@@ -35,11 +35,11 @@ MATCH void func_800AE574(void) {
     third[9] = 0;
     height -= 0x18;
     FIELD(u16, third, 0x2E) = height;
-    flag                    = (PartyBattler*)g_Task;
+    flag                    = (PartyMember*)g_Task;
     base -= next;
     FIELD(u16, third, 0x30) = base;
     flag->timer             = 1;
 
-    last              = (PartyBattler*)g_Task;
+    last              = (PartyMember*)g_Task;
     last->header.mode = (last->header.mode + 1);
 }

@@ -37,19 +37,19 @@
  * below BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row), tell the battle UI and
  * the effect player about the selector, then raise the effect-playing state.
  * A statement macro: the member declares u32 slot, u8* selector and
- * PartyBattler* battler. */
-#define BMAGIC_RELEASE_TARGET_AND_PLAY()                                         \
-    slot = LOBU(g_BattleTargetSelector);                                         \
-    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                  \
-        battler = &g_BattlePartyBattlers[slot];                                  \
-    } else {                                                                     \
-        battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE); \
-    }                                                                            \
-    func_80196718(battler);                                                      \
-    selector = (u8*)&g_BattleTargetSelector;                                     \
-    func_800AF814(*selector);                                                    \
-    func_800A9820(*selector);                                                    \
-    g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;                                \
+ * PartyMember* battler. */
+#define BMAGIC_RELEASE_TARGET_AND_PLAY()                                        \
+    slot = LOBU(g_BattleTargetSelector);                                        \
+    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                 \
+        battler = &g_Game.members[slot];                                        \
+    } else {                                                                    \
+        battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE); \
+    }                                                                           \
+    func_80196718(battler);                                                     \
+    selector = (u8*)&g_BattleTargetSelector;                                    \
+    func_800AF814(*selector);                                                   \
+    func_800A9820(*selector);                                                   \
+    g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;                               \
     func_801E5988()
 
 /* The sway step of the effect work record WORK points to: phase_0C advances and
@@ -120,11 +120,11 @@ typedef Point2D TrailPoint;
 #define BMAGIC_DISPATCH_STEP_HANDLERS(table, field) \
     handlers = (table);                             \
     handlers.handlers[g_Task->field]()
-#define g_Task ((PartyBattler*)g_Task)
+#define g_Task ((PartyMember*)g_Task)
 
 /* Go to the effect's next step. */
 static inline void BMagic_NextStep(void) {
-    PartyBattler* work = g_Task;
+    PartyMember* work = g_Task;
 
     work->header.step = (u8)(work->header.step + 1);
 }
@@ -148,9 +148,9 @@ static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
 /* Add `step` to the work counter, count the effect timer down and finish the
  * effect at zero. */
 static inline void BMagic_CountDownEffectTimer(u8 step) {
-    PartyBattler* work;
-    PartyBattler* active;
-    u8            count;
+    PartyMember* work;
+    PartyMember* active;
+    u8           count;
 
     work = g_Task;
     work->unk_09 += step;
@@ -167,7 +167,7 @@ static inline void BMagic_CountDownEffectTimer(u8 step) {
 /* Go to the next effect mode and reload the work timer while the ticker is
  * under `limit`. */
 static inline void BMagic_AdvanceEffectStep(u8 limit) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->param.unk_0B < limit) {
@@ -206,21 +206,21 @@ ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
  * func_801EF33C dispatches on mode. magic070-072 keep a pool of them, one
  * record per sparkle. */
 typedef struct BMagicEffectWork {
-    /* 0x00 */ TaskHeader    header;
-    /* 0x03 */ u8            unk_03;
-    /* 0x04 */ u8            unk_04;
-    /* 0x05 */ u8            timer_05;
-    /* 0x06 */ u8            unk_06;
-    /* 0x07 */ u8            unk_07;
-    /* 0x08 */ u16           unk_08;
-    /* 0x0A */ u16           unk_0A;
-    /* 0x0C */ u16           phase_0C;
-    /* 0x0E */ u8            pad_0E[6];
-    /* 0x14 */ WorldPos      pos;
-    /* 0x20 */ s16           unk_20;
-    /* 0x22 */ u16           unk_22;
-    /* 0x24 */ u8            pad_24[4];
-    /* 0x28 */ PartyBattler* battler;
+    /* 0x00 */ TaskHeader   header;
+    /* 0x03 */ u8           unk_03;
+    /* 0x04 */ u8           unk_04;
+    /* 0x05 */ u8           timer_05;
+    /* 0x06 */ u8           unk_06;
+    /* 0x07 */ u8           unk_07;
+    /* 0x08 */ u16          unk_08;
+    /* 0x0A */ u16          unk_0A;
+    /* 0x0C */ u16          phase_0C;
+    /* 0x0E */ u8           pad_0E[6];
+    /* 0x14 */ WorldPos     pos;
+    /* 0x20 */ s16          unk_20;
+    /* 0x22 */ u16          unk_22;
+    /* 0x24 */ u8           pad_24[4];
+    /* 0x28 */ PartyMember* battler;
 } BMagicEffectWork;
 
 /* header.flags bit of a BMagicEffectWork slot that is running. */

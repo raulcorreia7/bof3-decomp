@@ -58,9 +58,9 @@ SPAD_HI = re.compile(r"\(0x1F800044 >> 16\)")
 SPAD_LO = re.compile(r"\(0x1F800044 & 0xFFFF\)")
 SPAD_CAST = re.compile(r"\(\(?(?:volatile\s+)?(\w+)\s*\*\)\s*g_Task\b")
 SPAD_TYPES = (  # image prefix -> work record, for a context that never casts the cell
-    ("emi/battle/", "PartyBattler"),
-    ("emi/bmagic/", "PartyBattler"),
-    ("emi/boss/", "PartyBattler"),
+    ("emi/battle/", "PartyMember"),
+    ("emi/bmagic/", "PartyMember"),
+    ("emi/boss/", "PartyMember"),
     ("emi/scenario/", "SceneBandEffect"),
     ("emi/etc/commu", "CommunicationTaskSlot"),
     ("emi/", "Actor"),

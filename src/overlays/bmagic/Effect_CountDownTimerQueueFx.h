@@ -2,7 +2,7 @@
    member. */
 /* func_801EEDB0 (magic048), func_801EEE20 (magic222) */
 MATCH void Effect_CountDownTimerQueueFx(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;

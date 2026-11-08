@@ -9,7 +9,7 @@ MATCH void func_801E71EC(void) {
         field = &g_BattleEffectBattler->slot;
         index = *field;
         if (index < 3) {
-            flags = g_BattlePartyBattlers[index].chr.status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
+            flags = g_Game.members[index].chr.status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
         } else {
             flags = ENEMY_COMBATANT(index).status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
         }

@@ -2,7 +2,7 @@
 
 MATCH void func_801F3EB8(void) {
     g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
-    if ((g_CharSlot[g_BattlePartyBattlers[0].chr.character_id] == 1) && (SYS_TestFlag(g_SceneEventFlags, 0x12) == 0)) {
+    if ((g_CharSlot[g_Game.members[0].chr.character_id] == 1) && (SYS_TestFlag(g_SceneEventFlags, 0x12) == 0)) {
         SYS_SetFlag(g_SceneEventFlags, 0x12U);
         func_801F4188();
         if (SYS_TestFlag(g_SceneEventFlags, 0xB) == 0) {

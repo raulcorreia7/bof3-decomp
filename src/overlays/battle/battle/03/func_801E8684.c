@@ -1,41 +1,41 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: tried the 0x140-byte panel copy as one struct assignment through a PartyBattler view of
+/* nonmatching unmeasured: tried the 0x140-byte panel copy as one struct assignment through a PartyMember view of
  * D_801EBF20, which gives retail's aligned four-word loop instead of the first-draft word-by-word body (65.62%).
  * residual: the body is 80 bytes short and keeps s1-s3 saved where retail saves only s0. resume: a body whose per-field
  * writes re-read g_Task like the retail sequence and need no crossing temporaries. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E8684(void) {
-    PartyBattler* temp_a0_112;
-    PartyBattler* temp_a0_233;
-    PartyBattler* temp_a1_173;
-    PartyBattler* temp_a1_282;
-    PartyBattler* temp_v1_420;
-    PartyBattler* var_s0;
-    s32           temp_a0_187;
-    s32           temp_a0_216;
-    s32           temp_a0_259;
-    s32           temp_v0_163;
-    s32           temp_v0_318;
-    s32           temp_v0_356;
-    s32           temp_v1_126;
-    s32           var_a1_247;
-    u8            temp_a0_284;
-    u8            temp_a0_299;
-    u8            temp_a1_314;
-    u8            temp_a1_352;
-    u8            temp_v0_135;
-    u8            temp_v0_147;
-    u8            temp_v1_190;
-    u8            temp_v1_31;
+    PartyMember* temp_a0_112;
+    PartyMember* temp_a0_233;
+    PartyMember* temp_a1_173;
+    PartyMember* temp_a1_282;
+    PartyMember* temp_v1_420;
+    PartyMember* var_s0;
+    s32          temp_a0_187;
+    s32          temp_a0_216;
+    s32          temp_a0_259;
+    s32          temp_v0_163;
+    s32          temp_v0_318;
+    s32          temp_v0_356;
+    s32          temp_v1_126;
+    s32          var_a1_247;
+    u8           temp_a0_284;
+    u8           temp_a0_299;
+    u8           temp_a1_314;
+    u8           temp_a1_352;
+    u8           temp_v0_135;
+    u8           temp_v0_147;
+    u8           temp_v1_190;
+    u8           temp_v1_31;
 
-    var_s0 = SP_PTR(PartyBattler, 0x0);
+    var_s0 = SP_PTR(PartyMember, 0x0);
     var_s0 = g_Task;
     TASK_SET(g_BattleEffectBattler);
-    g_GameState                                  = &g_BattlePartyBattlers[g_BattleEffectBattler->slot];
+    g_Game.current                               = &g_Game.members[g_BattleEffectBattler->slot];
     temp_v1_31                                   = g_BattleEffectBattler->slot;
     g_BattleEffectBattler->scale.x               = 0;
-    g_BattlePartyBattlers[temp_v1_31]            = s_BattleBattlerTemplates[temp_v1_31];
+    g_Game.members[temp_v1_31]                   = s_BattleBattlerTemplates[temp_v1_31];
     *(D_80145E91 + ((g_Task)->slot * 0x140))     = 6;
     *(D_80145E92 + ((g_Task)->slot * 0x140))     = 4;
     *(D_80145E93 + ((g_Task)->slot * 0x140))     = 4;
@@ -54,17 +54,17 @@ NON_MATCHING void func_801E8684(void) {
     g_BattleEffects[temp_a1_173->slot].pos.z.fixed =
         Area_SampleHeight(g_BattleEffects[temp_v0_163].pos.x.fixed, g_BattleEffects[temp_v0_163].pos.y.fixed) << 0x10;
     temp_a0_187 = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
-    temp_v1_190 = g_BattlePartyBattlers[temp_a1_173->slot].chr.level;
+    temp_v1_190 = g_Game.members[temp_a1_173->slot].chr.level;
     if ((temp_v1_190 == 7) || (temp_v1_190 == 0)) {
-        g_BattlePartyBattlers[temp_a1_173->slot].chr.ap     = D_801EB4C8;
-        g_BattlePartyBattlers[temp_a1_173->slot].chr.status = D_801EB4CC;
-        temp_a0_216                                         = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
-        g_BattlePartyBattlers[temp_a1_173->slot].chr.fatigue =
-            g_Characters[(&g_BattlePartyBattlers[0].character_index)[temp_a0_216]].fatigue;
-        temp_a0_233                                                               = g_Task;
-        *(&D_80145FB4 + (temp_a0_233->slot * 0x140))                              = D_801EB4D0;
-        var_a1_247                                                                = 0;
-        g_BattlePartyBattlers[temp_a0_233->slot].turn.action_flags.volatile_value = D_801EB4D4;
+        g_Game.members[temp_a1_173->slot].chr.ap     = D_801EB4C8;
+        g_Game.members[temp_a1_173->slot].chr.status = D_801EB4CC;
+        temp_a0_216                                  = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
+        g_Game.members[temp_a1_173->slot].chr.fatigue =
+            g_Characters[(&g_Game.members[0].character_index)[temp_a0_216]].fatigue;
+        temp_a0_233                                                        = g_Task;
+        *(&D_80145FB4 + (temp_a0_233->slot * 0x140))                       = D_801EB4D0;
+        var_a1_247                                                         = 0;
+        g_Game.members[temp_a0_233->slot].turn.action_flags.volatile_value = D_801EB4D4;
         do {
             temp_a0_259 = var_a1_247 & BYTE_MASK;
             var_a1_247 += 1;
@@ -75,17 +75,17 @@ NON_MATCHING void func_801E8684(void) {
     func_800A9BD8((g_Task)->slot);
     temp_a1_282                                   = g_Task;
     temp_a0_284                                   = temp_a1_282->slot;
-    *(&D_80148344 + ((temp_a0_284 + 0xD) * 0x24)) = g_BattlePartyBattlers[temp_a0_284].chr.hp;
+    *(&D_80148344 + ((temp_a0_284 + 0xD) * 0x24)) = g_Game.members[temp_a0_284].chr.hp;
     temp_a0_299                                   = temp_a1_282->slot;
-    *(&D_80148346 + ((temp_a0_299 + 0xD) * 0x24)) = g_BattlePartyBattlers[temp_a0_299].chr.ap;
+    *(&D_80148346 + ((temp_a0_299 + 0xD) * 0x24)) = g_Game.members[temp_a0_299].chr.ap;
     temp_a1_314                                   = temp_a1_282->slot;
     temp_v0_318                                   = temp_a1_314 * BATTLE_PARTY_STRIDE;
-    *(&D_8014833B + ((temp_a1_314 + 0xD) * 0x24)) = (s8)((s32)(g_BattlePartyBattlers[temp_a1_314].chr.hp * 0x37) /
-                                                         (s32)g_BattlePartyBattlers[temp_a1_314].chr.stats.max_hp);
-    temp_a1_352                                   = (g_Task)->slot;
-    temp_v0_356                                   = temp_a1_352 * BATTLE_PARTY_STRIDE;
-    g_MenuPanelTasks[temp_a1_352 + 0xD].unk_0C    = (u8)((s32)(g_BattlePartyBattlers[temp_a1_352].chr.ap * 0x37) /
-                                                         (s32)g_BattlePartyBattlers[temp_a1_352].chr.stats.max_ap);
+    *(&D_8014833B + ((temp_a1_314 + 0xD) * 0x24)) =
+        (s8)((s32)(g_Game.members[temp_a1_314].chr.hp * 0x37) / (s32)g_Game.members[temp_a1_314].chr.stats.max_hp);
+    temp_a1_352 = (g_Task)->slot;
+    temp_v0_356 = temp_a1_352 * BATTLE_PARTY_STRIDE;
+    g_MenuPanelTasks[temp_a1_352 + 0xD].unk_0C =
+        (u8)((s32)(g_Game.members[temp_a1_352].chr.ap * 0x37) / (s32)g_Game.members[temp_a1_352].chr.stats.max_ap);
     Actor_SelectScript(((g_Task)->facing + 4) & BYTE_MASK);
     GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
     func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));

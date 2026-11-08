@@ -1,11 +1,11 @@
 #include "battle_15.h"
 
 MATCH void func_800ADA4C(void) {
-    PartyBattler* work;
+    PartyMember* work;
     /* FAKE: retail holds the armed work pointer in a0. */
-    MATCH_REG(PartyBattler*, next, "a0");
+    MATCH_REG(PartyMember*, next, "a0");
     /* FAKE: retail holds the queued work pointer in a1 for the slot lookup. */
-    MATCH_REG(PartyBattler*, slotp, "a1");
+    MATCH_REG(PartyMember*, slotp, "a1");
     u8*  base;
     s16* pair;
     u8*  row;
@@ -17,14 +17,14 @@ MATCH void func_800ADA4C(void) {
     BATTLE_WORK->unk_24      = 0x80;
     BATTLE_WORK->unk_27      = 0x1B;
     BATTLE_WORK->unk_28      = 1;
-    work                     = (PartyBattler*)g_Task;
+    work                     = (PartyMember*)g_Task;
     work->unk_2B             = 0;
-    next                     = (PartyBattler*)g_Task;
+    next                     = (PartyMember*)g_Task;
     work->unk_2C.signed_half = 2;
     next->unk_2A             = 0;
-    work                     = (PartyBattler*)g_Task;
+    work                     = (PartyMember*)g_Task;
     work->unk_4B             = 0xFF;
-    slotp                    = (PartyBattler*)g_Task;
+    slotp                    = (PartyMember*)g_Task;
     work->pos.z.fixed        = 0;
     pair                     = &D_801485CA;
     base                     = (u8*)g_BattleTargetRows;
@@ -34,6 +34,6 @@ MATCH void func_800ADA4C(void) {
         Actor_SelectScript(slot);
     }
     D_801485D6        = *pair;
-    work              = (PartyBattler*)g_Task;
+    work              = (PartyMember*)g_Task;
     work->header.mode = work->header.mode + 1;
 }

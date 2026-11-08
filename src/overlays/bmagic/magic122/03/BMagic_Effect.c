@@ -30,7 +30,7 @@ MATCH void func_801EEEA0(void) {
 INCLUDE_ASM(func_801EEF2C);
 
 MATCH void func_801EF158(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->timer += 3;

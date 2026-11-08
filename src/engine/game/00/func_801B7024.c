@@ -5,7 +5,7 @@ MATCH void func_801B7024(void) {
 
     if ((u8)func_801C29A0(4) == 0)
         return;
-    flags                          = g_GameState->u.field.flags_118;
-    g_GameState->u.field.flags_118 = (flags & 0xFD);
-    g_Task->unk_03                 = 1;
+    flags                             = g_Game.current->u.field.flags_118;
+    g_Game.current->u.field.flags_118 = (flags & 0xFD);
+    g_Task->unk_03                    = 1;
 }

@@ -5,9 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    PartyBattler* saved_task;
-    PartyBattler* saved_battler;
-    u8            i;
+    PartyMember* saved_task;
+    PartyMember* saved_battler;
+    u8           i;
 
     BMagic_DispatchTaskPair(func_801EED0C, func_801EF118);
     func_800AF764();
@@ -16,7 +16,7 @@ MATCH void func_801EEC04(void) {
         if (D_801F0694[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyBattler*)&D_801F0694[i];
+            g_Task                = (PartyMember*)&D_801F0694[i];
             g_BattleEffectBattler = D_801F0694[i].target.party;
             func_801EFE48();
             g_BattleEffectBattler = saved_battler;
@@ -45,7 +45,7 @@ MATCH void func_801EF4C4(void) {
 }
 
 MATCH void func_801EF504(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->unk_09++;
@@ -73,14 +73,14 @@ MATCH void Effect_CountDownTimer(void) {
 }
 
 MATCH void func_801EF638(void) {
-    PartyBattler* src;
-    SVECTOR       pos;
-    SVECTOR       rot;
-    MATRIX        matrix;
-    long          flags;
+    PartyMember* src;
+    SVECTOR      pos;
+    SVECTOR      rot;
+    MATRIX       matrix;
+    long         flags;
 
     PushMatrix();
-    src                      = (PartyBattler*)g_BattleEffectBattler;
+    src                      = (PartyMember*)g_BattleEffectBattler;
     rot.vx                   = 0;
     rot.vy                   = 0;
     rot.vz                   = 0;
@@ -111,7 +111,7 @@ MATCH void func_801F0018(void) {
 }
 
 MATCH void func_801F0070(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->unk_09++;
@@ -134,8 +134,8 @@ MATCH void func_801F00DC(void) {
 }
 
 MATCH void func_801F012C(void) {
-    PartyBattler* work;
-    u8            count;
+    PartyMember* work;
+    u8           count;
 
     work = g_Task;
     work->unk_09++;

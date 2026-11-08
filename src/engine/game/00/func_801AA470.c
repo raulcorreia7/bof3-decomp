@@ -97,7 +97,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             FIELD(u8, sub, 0x6u) = slot;
             return value;
         case 0xD8:
-            g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
+            g_Game.flags &= ~GAME_FLAG_SCROLL_LOCK;
             *(u8*)sub |= 8;
             return value;
         case 0xD9:

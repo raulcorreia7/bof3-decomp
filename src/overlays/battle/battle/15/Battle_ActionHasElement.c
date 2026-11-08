@@ -25,7 +25,7 @@ MATCH u8 Battle_ActionHasElement(u16 required_mask) {
             return false;
         if (required_mask & ELEM_DEATH)
             return false;
-        if (g_Weapons[g_BattlePartyBattlers[slot].chr.equip.weapon].element & required_mask)
+        if (g_Weapons[g_Game.members[slot].chr.equip.weapon].element & required_mask)
             return true;
     }
     return false;

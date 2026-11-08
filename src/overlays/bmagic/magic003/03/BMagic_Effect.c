@@ -200,8 +200,8 @@ MATCH void func_801EF644(void) {
 }
 
 MATCH void func_801EF6CC(void) {
-    PartyBattler* work;
-    u8            step;
+    PartyMember* work;
+    u8           step;
 
     work = BATTLE_ACTIVE_WORK;
     step = work->param.unk_0B;
@@ -262,11 +262,11 @@ INCLUDE_ASM(func_801EFAE0);
 INCLUDE_ASM(func_801EFB8C);
 
 MATCH void func_801EFCF8(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     func_8014DAEC();
     if (func_8014DAEC() != 0u) {
-        work               = (PartyBattler*)g_BattleEffectBattler;
+        work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();
     }

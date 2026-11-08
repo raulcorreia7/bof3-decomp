@@ -15,7 +15,7 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
     Area_DrawHudSprite((s16)x, (s16)y, 0);
 
     type = Area_GetCellCode(g_AreaTargetCellX, g_AreaTargetCellY);
-    if ((u8)(type + 0x60) >= 2 && (u8)type != 0xAE && (g_AreaWalkFlags & AREA_WALK_TRANSITION) == 0) {
+    if ((u8)(type + 0x60) >= 2 && (u8)type != 0xAE && (g_Game.walk_flags & AREA_WALK_TRANSITION) == 0) {
         Area_DrawHudSprite((s16)(x + 0x30), (s16)y, 1);
         for (i = 0; i < 6; i++) {
             if (g_InputMasks[FIELD_INPUT_INTERACT] & AREA_HUD_MASK_TABLE[i].mask) {
@@ -49,8 +49,9 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
         }
     }
 
-    if ((func_801B6610(g_AreaTargetCellX, g_AreaTargetCellY) & BYTE_MASK) || (g_AreaWalkFlags & AREA_WALK_TRANSITION) ||
-        (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) == 0xC || (g_GameFlags & 0x4000)) {
+    if ((func_801B6610(g_AreaTargetCellX, g_AreaTargetCellY) & BYTE_MASK) ||
+        (g_Game.walk_flags & AREA_WALK_TRANSITION) || (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) == 0xC ||
+        (g_Game.flags & 0x4000)) {
         Area_DrawHudSprite((s16)(x + 0x30), (s16)(y + 0x18), 3);
     }
     Area_DrawGradientDiamond(x + 0x18, y + 0x18);

@@ -21,7 +21,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             g_InputMasks[INPUT_SLOT_CANCEL]  = PADRup;
             g_InputMasks[INPUT_SLOT_UNUSED]  = PADselect;
         }
-        g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
+        g_Game.party_size = Party_CountOrder(PARTY_ORDER_FIELD);
         EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);

@@ -9,8 +9,8 @@ MATCH u8 func_801BF78C(void) {
     if (g_BattleOutcome.options & 0x10) {
         return 1;
     }
-    for (i = 0; i < g_PartySize; i++) {
-        work        = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
+    for (i = 0; i < g_Game.party_size; i++) {
+        work        = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
         g_GameState = work;
         TASK_SET(work);
         for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
@@ -22,7 +22,7 @@ MATCH u8 func_801BF78C(void) {
             g_Task->param.unk_0B = 1;
         }
     }
-    for (i = 0; i < g_PartySize; i++) {
+    for (i = 0; i < g_Game.party_size; i++) {
         off = i * BATTLE_PARTY_STRIDE;
         if ((&D_80145E9B)[off] != 1) {
             return 0;

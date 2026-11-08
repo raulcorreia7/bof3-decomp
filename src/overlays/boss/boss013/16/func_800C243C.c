@@ -28,10 +28,10 @@ MATCH void func_800C243C(void) {
         g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
     }
     func_801C1DF0(1);
-    g_BattlePartyBattlers[1].header.flags |= 0x40;
+    g_Game.members[1].header.flags |= 0x40;
     if (*g_ScriptVars == 0x14) {
-        g_BattlePartyOrder = 6;
+        g_Game.battle_order = 6;
     } else {
-        g_BattlePartyOrder = 7;
+        g_Game.battle_order = 7;
     }
 }

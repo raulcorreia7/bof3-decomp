@@ -9,7 +9,7 @@ MATCH void func_8019F840(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    if (!(g_AreaWalkFlags & AREA_WALK_LEADER_SWITCH_ACTIVE)) {
+    if (!(g_Game.walk_flags & AREA_WALK_LEADER_SWITCH_ACTIVE)) {
         if (LOHU(g_GameAreaId) == AREA_ID_PLANT) {
             func_801F2DCC();
         } else if (LOHU(g_GameAreaId) == AREA_ID_HIDDEN_FACTORY_ENTRANCE) {
@@ -21,7 +21,7 @@ MATCH void func_8019F840(void) {
         } else if (LOHU(g_GameAreaId) == AREA_ID_MYRIA_STATION_PLANT_ROOM) {
             func_801F3868();
         }
-        if ((s16)g_PartySize > 0) {
+        if ((s16)g_Game.party_size > 0) {
             i      = 0;
             offset = 0;
             do {

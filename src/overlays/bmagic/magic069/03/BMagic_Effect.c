@@ -21,8 +21,8 @@ MATCH void func_801EEE90(void) {
 INCLUDE_ASM(func_801EEED4);
 
 MATCH void func_801EF034(void) {
-    PartyBattler* src;
-    PartyBattler* dst;
+    PartyMember* src;
+    PartyMember* dst;
 
     if (--g_Task->unk_09 == 0) {
         dst              = g_Task;
@@ -90,8 +90,8 @@ MATCH void func_801EF1D0(void) {
 }
 
 MATCH void func_801EF2AC(void) {
-    PartyBattler* work;
-    u8            next;
+    PartyMember* work;
+    u8           next;
 
     work        = g_Task;
     next        = work->timer - 2;
@@ -113,8 +113,8 @@ MATCH void func_801EF30C(void) {
 }
 
 MATCH void func_801EF430(void) {
-    PartyBattler* src;
-    PartyBattler* dst;
+    PartyMember* src;
+    PartyMember* dst;
 
     if (--g_Task->unk_09 == 0) {
         dst              = g_Task;

@@ -5,11 +5,11 @@
  * field of D_8014625C is set) or arms the work flag byte at +0x01.
  */
 MATCH void Area_ResetScene(void) {
-    Actor*        work;
-    PartyBattler* mode_work;
+    Actor*       work;
+    PartyMember* mode_work;
 
     work                               = g_Task;
-    mode_work                          = g_GameState;
+    mode_work                          = g_Game.current;
     g_AreaCameraStep                   = 0;
     g_AreaCameraHeightStep             = 0;
     work->vx                           = 0;

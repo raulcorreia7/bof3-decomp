@@ -60,7 +60,7 @@ NON_MATCHING void func_8015083C(void) {
             case 3:
                 g_UiWindowChannel |= FRONTEND_FLAG_TIMER_ACTIVE;
                 CHAN_RETURN(chan) = CHAN_CURSOR(chan);
-                v                 = g_CharSlot[g_BattlePartyBattlers[0].chr.character_id];
+                v                 = g_CharSlot[g_Game.members[0].chr.character_id];
                 loop              = 0;
                 chan[3]           = 6;
                 CHAN_CURSOR(chan) = (u8*)&D_80144967 + v * PARTY_RECORD_STRIDE;

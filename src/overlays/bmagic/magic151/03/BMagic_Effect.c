@@ -22,11 +22,11 @@ MATCH void func_801EEE38(void) {
 }
 
 MATCH void func_801EEEA8(void) {
-    PartyBattler* saved_work;
-    PartyBattler* battler;
+    PartyMember* saved_work;
+    PartyMember* battler;
 
     saved_work = g_Task;
-    battler    = &g_BattlePartyBattlers[g_BattleActiveBattler];
+    battler    = &g_Game.members[g_BattleActiveBattler];
     g_Task     = battler;
     Actor_RequestScript((battler->facing + 0x3C) & 0xFF);
     g_Task = saved_work;
@@ -40,13 +40,13 @@ INCLUDE_ASM(func_801EF070);
 INCLUDE_ASM(func_801EF138);
 
 MATCH void func_801EF2A0(void) {
-    PartyBattler* saved_work;
-    PartyBattler* battler;
+    PartyMember* saved_work;
+    PartyMember* battler;
 
     saved_work = g_Task;
-    battler    = &g_BattlePartyBattlers[g_BattleActiveBattler];
+    battler    = &g_Game.members[g_BattleActiveBattler];
     g_Task     = battler;
-    battler->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+    battler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task = saved_work;
     saved_work->header.mode += 1;
     g_Task->header.step = 0;
@@ -94,12 +94,12 @@ MATCH void func_801EFD24(void) {
 }
 
 MATCH void func_801EFD80(void) {
-    PartyBattler* active;
-    PartyBattler* work;
+    PartyMember* active;
+    PartyMember* work;
 
     active = BATTLE_ACTIVE_WORK;
     if (active->header.mode == 2) {
-        work              = SP_REF(PartyBattler*, 0x44u);
+        work              = SP_REF(PartyMember*, 0x44u);
         work->header.step = work->header.step + 1;
     }
 }
@@ -122,9 +122,9 @@ MATCH void func_801EFE00(void) {
 }
 
 MATCH void func_801EFE90(void) {
-    PartyBattler* work  = g_Task;
-    PartyBattler* actor = g_BattleEffectBattler;
-    s32           z;
+    PartyMember* work  = g_Task;
+    PartyMember* actor = g_BattleEffectBattler;
+    s32          z;
 
     work->pos.x.fixed    = actor->pos.x.fixed;
     work->pos.y.fixed    = actor->pos.y.fixed;
@@ -189,8 +189,8 @@ INCLUDE_ASM(func_801F0648);
 INCLUDE_ASM(func_801F0AC8);
 
 MATCH void func_801F0BA8(void) {
-    PartyBattler* work;
-    s32           value;
+    PartyMember* work;
+    s32          value;
 
     g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
     g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
@@ -217,8 +217,8 @@ MATCH void func_801F0C50(void) {
 }
 
 MATCH void func_801F0CB0(void) {
-    PartyBattler* work;
-    s8            timer;
+    PartyMember* work;
+    s8           timer;
 
     work         = g_Task;
     timer        = work->unk_5D - 2;
@@ -278,9 +278,9 @@ MATCH void func_801F1C3C(void) {
 }
 
 MATCH void func_801F1CCC(void) {
-    PartyBattler* work  = g_Task;
-    PartyBattler* actor = g_BattleEffectBattler;
-    s32           z;
+    PartyMember* work  = g_Task;
+    PartyMember* actor = g_BattleEffectBattler;
+    s32          z;
 
     work->pos.x.fixed = actor->pos.x.fixed;
     work->pos.y.fixed = actor->pos.y.fixed;
@@ -292,8 +292,8 @@ MATCH void func_801F1CCC(void) {
 }
 
 MATCH void func_801F1D28(void) {
-    PartyBattler* work;
-    s32           value;
+    PartyMember* work;
+    s32          value;
 
     work         = g_Task;
     value        = work->unk_14 + 0x80;
@@ -305,8 +305,8 @@ MATCH void func_801F1D28(void) {
 
 /* Best 7 differences: lui a0 at 0x801F1D60; adjust register allocation. */
 MATCH void func_801F1D60(void) {
-    PartyBattler* work = g_Task;
-    u8            timer;
+    PartyMember* work = g_Task;
+    u8           timer;
 
     work->unk_14 += 0x20;
 

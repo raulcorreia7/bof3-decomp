@@ -11,7 +11,7 @@ MATCH u8 Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode) {
     if (mode == 0) {
         record = &g_Characters[character_index];
     } else {
-        record = &g_BattlePartyBattlers[character_index].chr;
+        record = &g_Game.members[character_index].chr;
     }
 
     value = D_801CA71A[ability_kind * 0x14];

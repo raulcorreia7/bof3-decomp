@@ -11,11 +11,11 @@ MATCH void func_8009E844(void) {
     slot    = &g_BattleTarget;
     battler = LOBU(*slot);
     if (BATTLER_IS_PLAYER(battler)) {
-        base = g_BattlePartyBattlers[battler].chr.status;
+        base = g_Game.members[battler].chr.status;
         if ((RANDOM_MASK(3) != 0) && ((base & 0x4000) != 0)) {
             battler = LOBU(*slot);
             if (BATTLER_IS_PLAYER(battler)) {
-                g_BattleTargetRecord->hp_change = (-g_BattlePartyBattlers[battler].chr.stats.max_hp >> 2);
+                g_BattleTargetRecord->hp_change = (-g_Game.members[battler].chr.stats.max_hp >> 2);
                 /* FAKE: retail keeps the selection store before the counter update. */
                 MATCH_FAKE_BARRIER();
                 g_BattleLivingPartyCount++;

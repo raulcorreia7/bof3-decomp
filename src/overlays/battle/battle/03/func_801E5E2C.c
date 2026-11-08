@@ -6,7 +6,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E5E2C(void) {
     BattleEffect* slot;
-    PartyBattler* source;
+    PartyMember*  source;
     s32           digits;
     s32           divisor;
     u8            kind;
@@ -42,7 +42,7 @@ loop:
     }
     kind = slot->target.party->slot;
     if (kind < 3) {
-        g_BattlePartyBattlers[kind].turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
+        g_Game.members[kind].turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
     } else {
         ENEMY_COMBATANT(kind).turn.damage_flags.value |= 0x80;
     }

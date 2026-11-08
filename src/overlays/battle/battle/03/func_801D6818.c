@@ -10,22 +10,21 @@ MATCH void func_801D6818(void) {
     if (BATTLE_PARTY_CURSOR < g_BattlePartyCount) {
         do {
             if (Battle_SlotIsBlocked(BATTLE_PARTY_CURSOR) == 0u) {
-                if (((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].u.turn.action_flags.value &
+                if (((g_Game.members[BATTLE_PARTY_CURSOR].u.turn.action_flags.value &
                       COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) ||
-                    ((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].u.turn.action_flags.value &
-                      COMBATANT_FLAG_DRAGON_FORM) != 0u)) {
-                    g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].u.turn.damage_flags.value |=
-                        COMBATANT_FLAG_FORM_EFFECT_PLAYING;
-                    if (g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].chr.character_id == CHAR_ID_REI) {
+                    ((g_Game.members[BATTLE_PARTY_CURSOR].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) !=
+                     0u)) {
+                    g_Game.members[BATTLE_PARTY_CURSOR].u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+                    if (g_Game.members[BATTLE_PARTY_CURSOR].chr.character_id == CHAR_ID_REI) {
                         slot                               = (u8)Battle_AllocEffect(0u, 0xBu);
-                        g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];
+                        g_BattleEffects[slot].target.party = &g_Game.members[BATTLE_PARTY_CURSOR];
                     } else {
                         for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
                             s_BattleBattlerTemplates[index].u.turn.action_flags.value &=
                                 ~COMBATANT_FLAG_DRAGON_FORM_QUEUED;
                         }
                         slot                               = (u8)Battle_AllocEffect(0u, 0xCu);
-                        g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];
+                        g_BattleEffects[slot].target.party = &g_Game.members[BATTLE_PARTY_CURSOR];
                     }
                     BATTLE_PARTY_CURSOR += 1u;
                     BATTLE_ENTRANCE_STEP += 1u;

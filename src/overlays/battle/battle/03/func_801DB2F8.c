@@ -8,10 +8,10 @@ MATCH u8 func_801DB2F8(u32 battler_index) {
     index = battler_index & BYTE_MASK;
     if (index < 3u) {
         offset = index * 320u;
-        if (!ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
+        if (!ACTOR_IN_USE(g_Game.members[index])) {
             return false;
         }
-        if (HAS_STATUS(g_BattlePartyBattlers[index], 0x4944u)) {
+        if (HAS_STATUS(g_Game.members[index], 0x4944u)) {
             return false;
         }
     } else {

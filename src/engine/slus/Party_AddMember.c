@@ -17,8 +17,8 @@ MATCH s32 Party_AddMember(u8 char_id) {
     g_Characters[char_rec].unk_07 = g_Characters[char_rec].unk_07 | 0x3;
     i                             = 0;
     if (g_PartySize < PARTY_SLOT_COUNT) {
-        g_PartyFieldOrder[g_PartySize]  = char_id;
-        g_PartyBattleOrder[g_PartySize] = char_id;
+        g_PartyFieldOrder[g_PartySize]        = char_id;
+        g_PartyBattleOrder[g_Game.party_size] = char_id;
         g_PartySize++;
         return 1;
     }

@@ -4,8 +4,8 @@
  * otherwise delegates to the second EXE-side readiness helper.
  */
 MATCH u8 func_801DEE4C(void) {
-    volatile PartyBattler* battle_work = g_GameState;
-    volatile u8*           global_base = ((volatile u8*)&D_80140000);
+    volatile PartyMember* battle_work = g_Game.current;
+    volatile u8*          global_base = ((volatile u8*)&D_80140000);
 
     if (HAS_STATUS(*battle_work, STATUS_PARALYZED)) {
         return 1u;

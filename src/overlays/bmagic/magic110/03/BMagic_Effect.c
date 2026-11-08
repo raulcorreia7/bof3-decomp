@@ -80,7 +80,7 @@ MATCH void func_801EF43C(void) {
 INCLUDE_ASM(func_801EF528);
 
 MATCH void func_801EF648(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     g_Task->unk_2E.half = (rand() & 3) + 0x9F;
     work                = g_Task;
@@ -129,7 +129,7 @@ MATCH void func_801EF7B4(void) {
 INCLUDE_ASM(func_801EF844);
 
 MATCH void func_801EF8C0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if ((work->unk_14 += 0x40) == 0xC00) {
@@ -169,7 +169,7 @@ MATCH void func_801EFFB8(void) {
 INCLUDE_ASM(func_801F0040);
 
 MATCH void func_801F00D8(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work         = g_Task;
     work->unk_09 = work->unk_09 + 2;

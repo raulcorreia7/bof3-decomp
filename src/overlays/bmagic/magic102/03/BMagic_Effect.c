@@ -11,8 +11,8 @@ INCLUDE_ASM(func_801EEC80);
 /* Counts this effect's steps; at the tick limit it re-arms the counter, steps
  * the magic, and flips the area camera's vertical offset with the frame parity. */
 MATCH void func_801EF218(void) {
-    PartyBattler* work;
-    u8            tick;
+    PartyMember* work;
+    u8           tick;
 
     work         = g_Task;
     tick         = work->unk_09 + EFFECT_TICK_INCREMENT;

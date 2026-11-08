@@ -23,7 +23,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
     pad  = *padp;
 
     if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        item = g_BattlePartyBattlers[g_MasterMenuCursor].character_index;
+        item = g_Game.members[g_MasterMenuCursor].character_index;
         if (g_Characters[item].master_id == g_SceneEventSelection) {
             if ((confirm & BYTE_MASK) == 0) {
                 goto play_stop; /* both row-state cases share this exit */
@@ -48,12 +48,12 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
         if (trig & PADLup) {
             sel = g_MasterMenuCursor;
             if (sel == 0) {
-                sel = g_PartySize;
+                sel = g_Game.party_size;
             }
             g_MasterMenuCursor = sel - 1;
             SND_PlayCue(EMI_CUE_ID(1, 0));
         } else if (trig & PADLdown) {
-            if ((g_MasterMenuCursor & BYTE_MASK) == g_PartySize - 1) {
+            if ((g_MasterMenuCursor & BYTE_MASK) == g_Game.party_size - 1) {
                 g_MasterMenuCursor = 0;
             } else {
                 g_MasterMenuCursor = g_MasterMenuCursor + 1;
@@ -65,7 +65,7 @@ after_input:
     count = g_PartySize;
     i     = 0;
     if (count > 0) {
-        entryp = &g_BattlePartyBattlers[0].character_index;
+        entryp = &g_Game.members[0].character_index;
         y      = MASTER_MENU_ROW_TOP;
         do {
             Master_DrawPartyRow(MASTER_MENU_ROW_X, y, *entryp, i);
@@ -73,7 +73,7 @@ after_input:
             entryp += BATTLE_PARTY_STRIDE;
             y += MASTER_MENU_ROW_PITCH;
             i++;
-        } while (i < g_PartySize);
+        } while (i < g_Game.party_size);
     }
 
     MenuDrawSelectionBox(MASTER_MENU_ROW_X, (g_MasterMenuCursor * MASTER_MENU_ROW_PITCH + MASTER_MENU_ROW_TOP) & 0xFFFE,

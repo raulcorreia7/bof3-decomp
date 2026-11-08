@@ -49,14 +49,14 @@ NON_MATCHING s32 func_800AA368(void) {
             if (mask != 0) {
                 allowed = func_800AA5F4(slot);
                 if (allowed) {
-                    g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+                    g_Game.members[slot].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
                     D_80145E91[slot * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
                     return 1;
                 }
             } else {
                 allowed = func_800AA7A0(slot);
                 if (allowed) {
-                    g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+                    g_Game.members[slot].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
                     D_80145E91[slot * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
                     return 1;
                 }
@@ -82,7 +82,7 @@ NON_MATCHING s32 func_800AA368(void) {
     if (count != 0) {
         pick                                   = candidates[rand() % count];
         D_80145E91[pick * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
-        g_BattlePartyBattlers[pick].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+        g_Game.members[pick].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
         return 1;
     }
     return 0;

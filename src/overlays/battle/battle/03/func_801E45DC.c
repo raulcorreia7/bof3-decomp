@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801E45DC(void) {
-    PartyBattler* work;
-    u32           slot;
-    u8            count;
+    PartyMember* work;
+    u32          slot;
+    u8           count;
 
     work        = g_Task;
     count       = work->timer - 1;

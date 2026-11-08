@@ -3,9 +3,9 @@
  * shared by the bmagic effect modules; every change here must verify every member. */
 /* func_801F03DC (magic092), func_801F00F0 (magic144) */
 MATCH void Effect_StepOnTickFlag(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
-    work = (PartyBattler*)g_BattleEffectBattler;
+    work = (PartyMember*)g_BattleEffectBattler;
     if ((work->param.unk_0B & 0x80) != 0) {
         g_Task->header.step = g_Task->header.step + 1;
     }

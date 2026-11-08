@@ -8,14 +8,14 @@ MATCH u8 func_801D54F8(void) {
     count      = 0u;
     last_index = 0u;
     for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
-        if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_BattlePartyBattlers[index], 0x800u)) &&
-            (g_BattlePartyBattlers[index].counter_137 == 5u)) {
+        if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_Game.members[index], 0x800u)) &&
+            (g_Game.members[index].counter_137 == 5u)) {
             last_index = index;
             count += 1u;
-            g_BattlePartyBattlers[index].counter_137   = 0u;
-            g_BattlePartyBattlers[index].chr.hp        = g_BattlePartyBattlers[index].chr.stats.max_hp;
-            g_BattlePartyBattlers[index].chr.ap        = g_BattlePartyBattlers[index].chr.stats.max_ap;
-            g_BattlePartyBattlers[index].chr.willpower = g_BattlePartyBattlers[index].chr.stats.willpower;
+            g_Game.members[index].counter_137   = 0u;
+            g_Game.members[index].chr.hp        = g_Game.members[index].chr.stats.max_hp;
+            g_Game.members[index].chr.ap        = g_Game.members[index].chr.stats.max_ap;
+            g_Game.members[index].chr.willpower = g_Game.members[index].chr.stats.willpower;
             func_800A36F0(index, 0x8FFu);
         }
     }

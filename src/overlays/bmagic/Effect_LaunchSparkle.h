@@ -3,7 +3,7 @@
  * One definition shared by the bmagic overlays; every change here must verify every member. */
 /* Effect_LaunchSparkle (magic070, magic071, magic072, magic073, magic074, magic162, magic168) */
 MATCH void Effect_LaunchSparkle(void) {
-    PartyBattler* battler;
+    PartyMember* battler;
 
     if (--EFFECT_SPARKLE_TASK->timer_05 == 0) {
         battler                     = g_BattleEffectBattler;

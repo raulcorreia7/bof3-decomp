@@ -29,8 +29,8 @@ MATCH void func_801EEE28(void) {
 }
 
 MATCH void func_801EEEC8(void) {
-    PartyBattler* src;
-    PartyBattler* dst;
+    PartyMember* src;
+    PartyMember* dst;
 
     if (--g_Task->unk_09 == 0) {
         src              = g_BattleEffectBattler;
@@ -45,7 +45,7 @@ MATCH void func_801EEEC8(void) {
 }
 
 MATCH void func_801EEF58(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->unk_09++;
@@ -68,9 +68,9 @@ MATCH void func_801EEFC4(void) {
 }
 
 MATCH void func_801EF014(void) {
-    PartyBattler* work;
-    PartyBattler* active;
-    u8            count;
+    PartyMember* work;
+    PartyMember* active;
+    u8           count;
 
     work = g_Task;
     work->unk_09++;

@@ -5,9 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    PartyBattler* saved_task;
-    PartyBattler* saved_battler;
-    u8            i;
+    PartyMember* saved_task;
+    PartyMember* saved_battler;
+    u8           i;
 
     BMagic_DispatchTaskPair(func_801EED04, Effect_StartOnZeroTick);
 
@@ -15,7 +15,7 @@ MATCH void func_801EEC04(void) {
         if (D_801F07F8[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyBattler*)&D_801F07F8[i];
+            g_Task                = (PartyMember*)&D_801F07F8[i];
             g_BattleEffectBattler = D_801F07F8[i].target.party;
             func_801EF7FC();
             g_BattleEffectBattler = saved_battler;
@@ -61,7 +61,7 @@ MATCH void func_801EF388(void) {
             func_800AF814((g_Task->unk_03 + 3) & BYTE_MASK);
             func_800A9820((g_Task->unk_03 + 3) & BYTE_MASK);
         } else {
-            GFX_FreePaletteFadeTarget((EnemyBattler*)&g_BattlePartyBattlers[g_Task->unk_03]);
+            GFX_FreePaletteFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
             func_800AF814(g_Task->unk_03);
             func_800A9820(g_Task->unk_03);
         }
@@ -99,9 +99,9 @@ MATCH void func_801EF940(void) {
 INCLUDE_ASM(func_801EFB04);
 
 MATCH void func_801F0260(void) {
-    PartyBattler* work;
-    u16           x;
-    u16           y;
+    PartyMember* work;
+    u16          x;
+    u16          y;
 
     SYS_DISPATCH_BYTE(D_801F07E8, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {

@@ -9,27 +9,27 @@ MATCH u8 func_801E0E0C(void) {
     for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index += 1u) {
         u16 flags_80;
 
-        if (!ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
+        if (!ACTOR_IN_USE(g_Game.members[index])) {
             continue;
         }
-        flags_80 = g_BattlePartyBattlers[index].chr.status;
+        flags_80 = g_Game.members[index].chr.status;
         if ((flags_80 & (STATUS_PARALYZED | STATUS_KO)) == 0u) {
             return 0u;
         }
-        if ((g_BattlePartyBattlers[index].u.turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) != 0u) {
+        if ((g_Game.members[index].u.turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) != 0u) {
             return 0u;
         }
-        if ((g_BattlePartyBattlers[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) {
+        if ((g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) {
             return 0u;
         }
         if ((flags_80 & STATUS_KO) != 0u) {
-            if (g_BattlePartyBattlers[index].chr.equip.accessories[0] == ACCESSORY_SOUL_GEM) {
+            if (g_Game.members[index].chr.equip.accessories[0] == ACCESSORY_SOUL_GEM) {
                 return 0u;
             }
-            if (g_BattlePartyBattlers[index].chr.equip.accessories[1] == ACCESSORY_SOUL_GEM) {
+            if (g_Game.members[index].chr.equip.accessories[1] == ACCESSORY_SOUL_GEM) {
                 return 0u;
             }
-            if (g_BattlePartyBattlers[index].chr.equip.armor == ARMOR_MANLY_CLOTHES) {
+            if (g_Game.members[index].chr.equip.armor == ARMOR_MANLY_CLOTHES) {
                 return 0u;
             }
         }

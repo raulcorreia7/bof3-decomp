@@ -24,8 +24,8 @@ MATCH void func_801EED2C(void) {
 }
 
 MATCH void func_801EED98(void) {
-    PartyBattler* temp_s0;
-    s32           slot;
+    PartyMember* temp_s0;
+    s32          slot;
 
     SND_QueueSelectionFx(0x101);
     SND_QueueSelectionFx(0x102);
@@ -41,7 +41,7 @@ MATCH void func_801EED98(void) {
 }
 
 MATCH void func_801EEE50(void) {
-    PartyBattler* temp_s0;
+    PartyMember* temp_s0;
 
     temp_s0 = g_Task;
     g_Task  = D_801EC2E0->target.party;
@@ -96,9 +96,9 @@ INCLUDE_ASM(func_801EF134);
 INCLUDE_ASM(func_801EF3C4);
 
 MATCH void func_801EF528(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
-    work        = (PartyBattler*)g_BattleEffectBattler;
+    work        = (PartyMember*)g_BattleEffectBattler;
     work->timer = work->timer + 1;
     func_801E5988();
 }
@@ -122,7 +122,7 @@ MATCH void func_801EF5BC(void) {
 INCLUDE_ASM(func_801EF620);
 
 MATCH void func_801EF7A0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->unk_10 >= -2) {
@@ -133,7 +133,7 @@ MATCH void func_801EF7A0(void) {
 }
 
 MATCH void func_801EF7E0(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     if (work->unk_10 < 0) {
@@ -160,10 +160,10 @@ MATCH void func_801EF83C(void) {
 }
 
 MATCH void func_801EF900(void) {
-    PartyBattler* work;
-    s16           temp_v0;
-    s32           temp_a0;
-    s8            tone;
+    PartyMember* work;
+    s16          temp_v0;
+    s32          temp_a0;
+    s8           tone;
 
     g_Task->pos.x.fixed    = g_BattleEffectBattler->pos.x.fixed - 1;
     g_Task->pos.y.fixed    = g_BattleEffectBattler->pos.y.fixed - 1;

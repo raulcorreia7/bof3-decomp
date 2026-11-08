@@ -6,30 +6,30 @@
 
 #include "overlays/boss/boss.h"
 
-/* The scratchpad work area is a PartyBattler record in this image. */
-#define g_Task ((PartyBattler*)g_Task)
+/* The scratchpad work area is a PartyMember record in this image. */
+#define g_Task ((PartyMember*)g_Task)
 
-extern u8           D_800C25F0[];
-extern u8           D_800C25FC;
-extern u16          D_800C2618[];
-extern Callback     D_800C2620[];
-extern Callback     D_800C2650[];
-extern Callback     D_800C265C[];
-extern Callback     D_800C268C[];
-extern Callback     D_800C2698[];
-extern Callback     D_800C26C8[];
-extern Callback     D_800C26D4[];
-extern u8           D_800C26E0;
-extern u8           D_80146322;
+extern u8          D_800C25F0[];
+extern u8          D_800C25FC;
+extern u16         D_800C2618[];
+extern Callback    D_800C2620[];
+extern Callback    D_800C2650[];
+extern Callback    D_800C265C[];
+extern Callback    D_800C268C[];
+extern Callback    D_800C2698[];
+extern Callback    D_800C26C8[];
+extern Callback    D_800C26D4[];
+extern u8          D_800C26E0;
+extern u8          D_80146322;
 /* The selection-kind byte: battle/ram.h names the cell as g_BattleActiveBattler but
  * declares only the 6375 byte. */
-extern u8           g_BattleActiveBattler;
-extern u8           D_80181B11;
-extern PartyBattler D_801EB860;
-extern u8           D_800C25D8;
-extern u16          D_800C2608;
-extern u8           D_800C25E4;
-extern u16          D_800C2610;
+extern u8          g_BattleActiveBattler;
+extern u8          D_80181B11;
+extern PartyMember D_801EB860;
+extern u8          D_800C25D8;
+extern u16         D_800C2608;
+extern u8          D_800C25E4;
+extern u16         D_800C2610;
 
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss013/16] of config/symbols.toml. */

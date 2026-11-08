@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/BMagic_RunStep.h"
 
 MATCH void func_801EEC7C(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     g_Task->unk_09    = 8;
     g_Task->timer     = 4;
@@ -44,9 +44,9 @@ MATCH void func_801EEEE0(void) {
 }
 
 MATCH void func_801EEF84(void) {
-    PartyBattler* work;
-    s32           var_a0;
-    u8            temp_v0;
+    PartyMember* work;
+    s32          var_a0;
+    u8           temp_v0;
 
     g_Task->unk_29    = 0;
     g_Task->unk_25    = 0x1D;
@@ -73,7 +73,7 @@ MATCH void func_801EEF84(void) {
 }
 
 MATCH void func_801EF070(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     if (func_8014D978() != 0u) {
         work              = g_Task;

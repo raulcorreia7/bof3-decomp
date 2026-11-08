@@ -48,7 +48,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     stack_20 = target_y;
     tmp8     = g_Task;
     stack_18 = target_x;
-    if ((*(u8*)(tmp8) & 0x80) && !((g_GameFlags | g_AreaWalkFlags) & AREA_WALK_BUSY(0)) && !(D_80145FBC & 1)) {
+    if ((*(u8*)(tmp8) & 0x80) && !((g_Game.flags | g_Game.walk_flags) & AREA_WALK_BUSY(0)) && !(D_80145FBC & 1)) {
         val9  = FIELD(s32, tmp8, 0x34u);
         val2  = FIELD(s32, tmp8, 0x38u);
         tmp6  = val9 - target_x;
@@ -186,8 +186,8 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             } else {
             block_39:
                 if (func_801C6FD4(FIELD(s16, tmp9, 0x36u), FIELD(s16, tmp9, 0x3Au)) & BYTE_MASK) {
-                    g_GameState->status.field.flags_12C.u8_value =
-                        (u8)(g_GameState->status.field.flags_12C.u8_value & 0xFE);
+                    g_Game.current->status.field.flags_12C.u8_value =
+                        (u8)(g_Game.current->status.field.flags_12C.u8_value & 0xFE);
                     g_Task->unk_29       = (u8)g_AreaDrawMode;
                     g_Task->direction_08 = (u8)stack_10;
                 } else {

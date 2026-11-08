@@ -94,8 +94,8 @@ MATCH void func_801EFB5C(void) {
 }
 
 MATCH void func_801EFBE4(void) {
-    PartyBattler* work;
-    u8            next;
+    PartyMember* work;
+    u8           next;
 
     work        = g_Task;
     next        = work->timer + 1;

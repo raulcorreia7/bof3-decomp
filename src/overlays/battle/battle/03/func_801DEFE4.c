@@ -4,14 +4,14 @@
  * into the battle script bank, or arms the record already staged.
  */
 MATCH void func_801DEFE4(void) {
-    PartyBattler* work;
-    PartyBattler* battler;
-    u16           flags;
-    u8            state;
+    PartyMember* work;
+    PartyMember* battler;
+    u16          flags;
+    u8           state;
 
     if (g_BattleOutcome.options & 0x20) {
         if ((g_BattleMode == 5) && BATTLE_IS_VICTORY()) {
-            if (HAS_STATUS(*g_GameState, STATUS_KO)) {
+            if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
                 Actor_SwitchScript(g_Task->facing + 0x1C, (u8*)0x800F0800U, 0x1800);
             } else {
                 Actor_SwitchScript(g_Task->unk_4B, (u8*)0x800F0800U, 0x1800);
@@ -19,7 +19,7 @@ MATCH void func_801DEFE4(void) {
             return;
         }
     } else if ((g_BattleMode == 5) && BATTLE_IS_VICTORY()) {
-        if (HAS_STATUS(*g_GameState, STATUS_KO)) {
+        if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
             Actor_SwitchScript(g_Task->facing + 0x1C, (u8*)0x800F0800U, 0x1800);
         } else {
             Actor_SwitchScript(g_Task->facing + 0x20, (u8*)0x800F0800U, 0x1800);
@@ -27,7 +27,7 @@ MATCH void func_801DEFE4(void) {
         return;
     }
 
-    work  = g_GameState;
+    work  = g_Game.current;
     flags = work->chr.status;
     if (flags & STATUS_KO) {
         Actor_RequestScript(g_Task->facing + 0x1C);
@@ -57,7 +57,7 @@ MATCH void func_801DEFE4(void) {
     state = work->u.turn.command.type;
     switch (state) {
         case 0:
-            if (HAS_STATUS(*g_GameState, 0x20C0)) {
+            if (HAS_STATUS(*g_Game.current, 0x20C0)) {
                 Actor_RequestScript(g_Task->facing + 0x18);
             } else {
                 Actor_RequestScript(g_Task->facing + 0x4);
@@ -70,7 +70,7 @@ MATCH void func_801DEFE4(void) {
             Actor_RequestScript(g_Task->facing + 0x14);
             return;
         case 4:
-            battler = g_GameState;
+            battler = g_Game.current;
             if (battler->u.turn.action_flags.value & COMBATANT_FLAG_ABILITY_ALT_POSE) {
                 Actor_RequestScript(g_Task->facing + 0x38);
             } else if (D_801CA71C[battler->u.turn.command.id].mask & 0x800) {

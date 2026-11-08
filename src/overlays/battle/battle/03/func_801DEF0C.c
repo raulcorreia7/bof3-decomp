@@ -5,9 +5,9 @@
  * bytes.
  */
 MATCH void func_801DEF0C(void) {
-    volatile PartyBattler* work;
-    volatile PartyBattler* out;
-    volatile PartyBattler* tail;
+    volatile PartyMember* work;
+    volatile PartyMember* out;
+    volatile PartyMember* tail;
 
     work                     = g_Task;
     work->unk_29             = 4;

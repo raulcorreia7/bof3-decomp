@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801E347C(void) {
-    PartyBattler* work;
-    s32           old38;
-    s32           old34;
+    PartyMember* work;
+    s32          old38;
+    s32          old34;
 
     work = g_Task;
     work->header.flags &= ~ACTOR_FLAG_HIDDEN;
@@ -27,7 +27,7 @@ MATCH void func_801E347C(void) {
         g_Task->unk_0C = 0x8000;
         g_Task->unk_10 = 0;
         depth -= dx;
-        ((volatile PartyBattler*)g_Task)->pos.x.fixed = depth;
+        ((volatile PartyMember*)g_Task)->pos.x.fixed = depth;
         depth -= dy;
         work              = g_Task;
         work->pos.x.fixed = depth;

@@ -26,7 +26,7 @@ MATCH void func_801EF234(void) {
 MATCH void func_801EF2A8(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
         g_Task->header.mode += 1;
     }
@@ -50,8 +50,8 @@ MATCH void func_801EF3DC(void) {
 }
 
 MATCH void func_801EF498(void) {
-    PartyBattler* work;
-    s32           z;
+    PartyMember* work;
+    s32          z;
 
     g_Task->unk_27    = g_BattleEffectBattler->unk_27;
     g_Task->unk_2B    = 1;
@@ -65,7 +65,7 @@ MATCH void func_801EF498(void) {
 }
 
 MATCH void func_801EF518(void) {
-    PartyBattler** selected;
+    PartyMember** selected;
 
     selected = &g_BattleSelectedActor;
     func_800AF2B4(*selected, 0x60);
@@ -113,8 +113,8 @@ MATCH void func_801EF678(void) {
 }
 
 MATCH void func_801EF720(void) {
-    PartyBattler* work;
-    PartyBattler* source;
+    PartyMember* work;
+    PartyMember* source;
 
     g_Task->unk_5D -= 8;
     g_Task->unk_5E -= 8;
@@ -152,9 +152,9 @@ MATCH void func_801EF894(void) {
 }
 
 MATCH void func_801EF928(void) {
-    PartyBattler* work;
-    PartyBattler* source;
-    u8            count;
+    PartyMember* work;
+    PartyMember* source;
+    u8           count;
 
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -174,7 +174,7 @@ MATCH void func_801EF928(void) {
 }
 
 MATCH void func_801EFA70(void) {
-    PartyBattler** selected;
+    PartyMember** selected;
 
     selected = &g_BattleSelectedActor;
     func_800AF2B4(*selected, 0x60);

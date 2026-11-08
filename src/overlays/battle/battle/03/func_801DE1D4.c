@@ -14,16 +14,16 @@ NON_MATCHING void func_801DE1D4(void) {
 
     for (index = 0; index < COMBATANT_COUNT; index++) {
         if (index < 3) {
-            if (!ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
+            if (!ACTOR_IN_USE(g_Game.members[index])) {
                 continue;
             }
-            if (g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
+            if (g_Game.members[index].turn.action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
                 continue;
             }
             slot = Battle_AllocEffect(0, 7);
-            memcpy(&g_BattleEffects[(u8)slot], &g_BattlePartyBattlers[index], 0x74);
-            g_BattleEffects[(u8)slot].target.party  = &g_BattlePartyBattlers[index];
-            g_Task                                  = &g_BattlePartyBattlers[index];
+            memcpy(&g_BattleEffects[(u8)slot], &g_Game.members[index], 0x74);
+            g_BattleEffects[(u8)slot].target.party  = &g_Game.members[index];
+            g_Task                                  = &g_Game.members[index];
             g_BattleEffects[(u8)slot].handler_index = 7;
             g_BattleEffects[(u8)slot].unk_06        = 0;
             g_BattleEffects[(u8)slot].header.mode   = 0;

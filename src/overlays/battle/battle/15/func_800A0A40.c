@@ -19,7 +19,7 @@ MATCH void func_800A0A40(void) {
         /* FAKE: the destination slot is volatile: without it the scheduler sinks
          * the store past the volatile index reload and the load-delay `nop` the
          * original emits disappears. */
-        base                                                    = g_BattlePartyBattlers[battler_index].chr.hp;
+        base                                                    = g_Game.members[battler_index].chr.hp;
         /* FAKE: volatile-drop keeps the original load and store order. */
         ((volatile BattleTurn*)g_BattleTargetRecord)->hp_change = base - 1;
         BATTLE_ACTIVE_PARTY.chr.hp                              = 1;

@@ -28,7 +28,7 @@ MATCH s8 func_801A7AD8(u8* entry, u8 count, u8 x, u8 y) {
         found:
             kind = entry[3] & 0xF;
             /* The literal address reloads the work-row byte on every test;
-             * the g_BattlePartyBattlers[0].facing symbol is hoisted out of the loops by loop.c. */
+             * the g_Game.members[0].facing symbol is hoisted out of the loops by loop.c. */
             if (kind == 8 || kind == MEM(u8, 0x80145E98u)) {
                 return i;
             }

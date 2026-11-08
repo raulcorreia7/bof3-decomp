@@ -14,12 +14,12 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
     maximum = 0u;
     index   = 0u;
     while ((u8)index < 3u) {
-        if ((D_801463BA == 0u) || ((g_BattlePartyBattlers[(u8)index].turn.action_flags.volatile_value &
-                                    COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+        if ((D_801463BA == 0u) ||
+            ((g_Game.members[(u8)index].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 u16 value;
 
-                value = g_BattlePartyBattlers[(u8)index].chr.stats.agility;
+                value = g_Game.members[(u8)index].chr.stats.agility;
                 total += value;
                 CLAMP_MIN(maximum, value);
             }
@@ -30,32 +30,33 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
     count = 0u;
     index = 0u;
     while ((u8)index < 3u) {
-        if ((D_801463BA == 0u) || ((g_BattlePartyBattlers[(u8)index].turn.action_flags.volatile_value &
-                                    COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+        if ((D_801463BA == 0u) ||
+            ((g_Game.members[(u8)index].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 s16 score;
                 s32 mode;
 
                 D_801EB550[(u8)count].index = (u8)index;
                 D_801EB550[(u8)count].value = 0;
-                if (g_BattlePartyBattlers[(u8)index].turn.command.type == BATTLE_COMMAND_ABILITY) {
-                    mode = D_801CA718[g_BattlePartyBattlers[(u8)index].turn.command.id][1];
+                if (g_Game.members[(u8)index].turn.command.type == BATTLE_COMMAND_ABILITY) {
+                    mode = D_801CA718[g_Game.members[(u8)index].turn.command.id][1];
                     if (mode == 1 || mode == 3) {
                         D_801EB550[(u8)count].value = 2;
                     } else if (mode == 0) {
                         D_801EB550[(u8)count].value = 4;
                     }
                 }
-                if (g_BattlePartyBattlers[(u8)index].turn.command.type == BATTLE_COMMAND_ITEM) {
+                if (g_Game.members[(u8)index].turn.command.type == BATTLE_COMMAND_ITEM) {
                     D_801EB550[(u8)count].value = 1;
                 }
-                score                       = D_801EB550[(u8)count].value;
-                score                       = (s16)(score * g_BattleTurnPriorityMultipliers[(u8)func_801DB434(
-                                                                g_BattlePartyBattlers[(u8)index].chr.level, 1u)]) /
-                                              100;
+                score = D_801EB550[(u8)count].value;
+                score =
+                    (s16)(score *
+                          g_BattleTurnPriorityMultipliers[(u8)func_801DB434(g_Game.members[(u8)index].chr.level, 1u)]) /
+                    100;
                 D_801EB550[(u8)count].value = score;
                 count += 1u;
-                D_801EB550[(u8)count - 1u].value = score + g_BattlePartyBattlers[(u8)index].chr.stats.agility;
+                D_801EB550[(u8)count - 1u].value = score + g_Game.members[(u8)index].chr.stats.agility;
             }
         }
         index += 1u;

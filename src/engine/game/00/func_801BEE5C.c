@@ -24,7 +24,7 @@ MATCH s32 func_801BEE5C(void) {
     STACK_PADS(u8, 24);
 
     slot          = 0;
-    initial_count = g_PartySize;
+    initial_count = g_Game.party_size;
     if (initial_count <= 0)
         goto phase2; /* no active slot to update, stage the idle records */
     count = initial_count;
@@ -37,15 +37,15 @@ scan_loop:
     if (slot < count)
         goto scan_loop; /* the next record is still active */
 found:
-    if (slot >= g_PartySize)
+    if (slot >= g_Game.party_size)
         goto phase2; /* no live record within the capacity */
-    if (g_PartySize == 0)
+    if (g_Game.party_size == 0)
         return 0;
     slot = 0;
     off  = 0;
     do {
-        rec         = (u8*)g_BattlePartyBattlers + off;
-        g_GameState = rec;
+        rec            = (u8*)g_Game.members + off;
+        g_Game.current = rec;
         TASK_SET(rec);
         kind  = rec[0x13C];
         flags = g_Characters[kind].status;
@@ -66,12 +66,12 @@ found:
             func_8014D978();
         }
         off += BATTLE_PARTY_STRIDE;
-    } while (++slot < g_PartySize);
+    } while (++slot < g_Game.party_size);
     return 0;
 phase2:
     if ((g_BattleOutcome.options & 4) != 0)
         return 1;
-    phase2_count = g_PartySize;
+    phase2_count = g_Game.party_size;
     slot         = 0;
     if (phase2_count <= 0)
         return 1;
@@ -80,7 +80,7 @@ phase2:
     off = 0;
     do {
         index       = 0;
-        phase2_base = (u8*)g_BattlePartyBattlers + off;
+        phase2_base = (u8*)g_Game.members + off;
         phase2_rec  = phase2_base;
         g_GameState = phase2_rec;
         TASK_SET(phase2_rec);
@@ -99,6 +99,6 @@ phase2:
         g_Task->tint.bytes.unk_5F = neg;
         g_Task->tint.bytes.flags  = 1;
         slot++;
-    } while (slot < g_PartySize);
+    } while (slot < g_Game.party_size);
     return 1;
 }

@@ -588,7 +588,7 @@ BattleTurn* g_BattleActorTurn = 0;
 BattleEventSlot* D_801EB4DC = 0;
 
 /* 0x801EB4E0 */
-PartyBattler* g_BattleEffectBattler = 0;
+PartyMember* g_BattleEffectBattler = 0;
 
 /* 0x801EB4E4 */
 static u8 s_gap_801EB4E4[0x6C] = {0};
@@ -623,9 +623,9 @@ static u8 s_gap_801EBF0C[0x14] = {0};
 
 /* 0x801EBF20 */
 /* D_801EBF20 */
-/* The party battler rows func_801E8684 copies into g_BattlePartyBattlers; func_801E7B34 and func_801D6818 read
+/* The party battler rows func_801E8684 copies into g_Game.members; func_801E7B34 and func_801D6818 read
  * their header.flags and turn.action_flags. */
-PartyBattler s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT] = {0};
+PartyMember s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT] = {0};
 
 /* 0x801EC2E0 */
 static u8 s_gap_801EC2E0[0x50] = {0};

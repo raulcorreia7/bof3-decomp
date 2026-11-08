@@ -10,10 +10,10 @@ MATCH bool Party_CanSwitchLeader(void) {
 
     s32 key_offset;
     index = 1;
-    if (((g_GameFlags | g_AreaWalkFlags) & AREA_WALK_BUSY_ALL) != 0) {
+    if (((g_Game.flags | g_Game.walk_flags) & AREA_WALK_BUSY_ALL) != 0) {
         return false;
     }
-    count = g_PartySize;
+    count = g_Game.party_size;
     if (index >= count) {
         return true;
     }

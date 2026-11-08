@@ -63,8 +63,8 @@ MATCH void func_801EF5A4(void) {
 }
 
 MATCH void func_801EF634(void) {
-    PartyBattler* src;
-    PartyBattler* dst;
+    PartyMember* src;
+    PartyMember* dst;
 
     if (--g_Task->unk_09 == 0) {
         src              = g_BattleEffectBattler;
@@ -118,10 +118,10 @@ MATCH void func_801EFDEC(void) {
 INCLUDE_ASM(func_801EFE74);
 
 MATCH void func_801EFF7C(void) {
-    PartyBattler* task;
-    s16*          angle_cell;
-    s32           direction;
-    s32           velocity;
+    PartyMember* task;
+    s16*         angle_cell;
+    s32          direction;
+    s32          velocity;
 
     task       = g_Task;
     angle_cell = &D_1F800004;
@@ -192,7 +192,7 @@ MATCH void func_801F066C(void) {
 }
 
 MATCH void func_801F06C8(void) {
-    PartyBattler* work;
+    PartyMember* work;
 
     work = g_Task;
     work->param.unk_0B += 4;
@@ -205,9 +205,9 @@ MATCH void func_801F06C8(void) {
 }
 
 MATCH void func_801F0730(void) {
-    PartyBattler* work;
-    PartyBattler* active;
-    u8            count;
+    PartyMember* work;
+    PartyMember* active;
+    u8           count;
 
     work = g_Task;
     work->param.unk_0B += 4;

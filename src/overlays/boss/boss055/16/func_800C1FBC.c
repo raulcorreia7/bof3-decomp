@@ -3,15 +3,15 @@
 MATCH void func_800C1FBC(void) {
     u8 count;
 
-    ((PartyBattler*)g_Task)->param.unk_0B = 0;
-    count                                 = ((PartyBattler*)g_Task)->unk_09;
+    ((PartyMember*)g_Task)->param.unk_0B = 0;
+    count                                = ((PartyMember*)g_Task)->unk_09;
     if (count == 0) {
         if ((D_801463BE == 3) || (D_801463BE == 5)) {
             SND_PlayCue(0x602U);
         }
-        ((PartyBattler*)g_Task)->header.step += 1;
+        ((PartyMember*)g_Task)->header.step += 1;
     } else {
-        ((PartyBattler*)g_Task)->unk_09 = count - 1;
+        ((PartyMember*)g_Task)->unk_09 = count - 1;
     }
     func_801E3160();
 }

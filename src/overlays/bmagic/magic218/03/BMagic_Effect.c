@@ -28,8 +28,8 @@ MATCH void func_801EEE5C(void) {
 }
 
 MATCH void func_801EEEE4(void) {
-    PartyBattler* src;
-    PartyBattler* dst;
+    PartyMember* src;
+    PartyMember* dst;
 
     if (--g_Task->unk_09 == 0) {
         src              = BATTLE_ACTIVE_WORK;

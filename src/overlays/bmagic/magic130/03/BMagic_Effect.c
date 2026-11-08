@@ -52,8 +52,8 @@ MATCH void func_801EF284(void) {
 }
 
 MATCH void func_801EF354(void) {
-    PartyBattler* task;
-    u16           value;
+    PartyMember* task;
+    u16          value;
 
     task              = g_Task;
     task->unk_2E.half = task->param.unk_0B * 26 + 0x98;

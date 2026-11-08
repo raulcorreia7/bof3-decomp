@@ -1,8 +1,8 @@
 #include "battle_03.h"
 
 MATCH void func_801E4C7C(void) {
-    PartyBattler* work;
-    u8            count;
+    PartyMember* work;
+    u8           count;
 
     work  = g_Task;
     count = work->unk_09;

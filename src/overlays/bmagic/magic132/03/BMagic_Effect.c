@@ -70,8 +70,8 @@ MATCH void func_801EF200(void) {
 }
 
 MATCH void func_801EF324(void) {
-    PartyBattler* work;
-    u8            count;
+    PartyMember* work;
+    u8           count;
 
     work         = g_Task;
     count        = work->unk_09 - 1;

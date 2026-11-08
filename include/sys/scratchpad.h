@@ -3,7 +3,7 @@
 
 /* Every overlay lands its own work pointer in the cell at 0x1F800044, so each view types that cell with the
  * mode's work-area tag. The tags are incomplete here and are completed by the target that owns them:
- * battle/battle/03 and battle/battle/15 (struct PartyBattler), the area overlays (struct Actor,
+ * battle/battle/03 and battle/battle/15 (struct PartyMember), the area overlays (struct Actor,
  * work/actor.h), the scenario overlays (struct SceneBandEffect) and the commu overlays (struct
  * CommunicationTaskSlot). Area code reads the cell through work/area_spad.h; the area view below only
  * types the pointer cell itself.
@@ -29,11 +29,11 @@ ASSERT_OFFSET(ScratchPadVector, vectors, 0x14);
 /* Battle overlays: bytes 0-2 stage the current local-work byte 9 (func_801E6A54), byte 0 advances the
  * slot index (written by func_801DE43C, read by func_801DE754). Byte 0x03 has no battle access yet. */
 typedef struct ScratchPadBattle {
-    u8                   state_00;     /* 0x00 */
-    u8                   state_01;     /* 0x01 */
-    u8                   state_02;     /* 0x02 */
-    u8                   pad_03[0x41]; /* 0x03 */
-    struct PartyBattler* work_ptr;     /* 0x44 */
+    u8                  state_00;     /* 0x00 */
+    u8                  state_01;     /* 0x01 */
+    u8                  state_02;     /* 0x02 */
+    u8                  pad_03[0x41]; /* 0x03 */
+    struct PartyMember* work_ptr;     /* 0x44 */
 } ScratchPadBattle;
 
 #define SCRATCH_PAD_BATTLE_VIEW_SIZE 0x48

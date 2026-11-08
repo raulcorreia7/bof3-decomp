@@ -44,10 +44,10 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
     byte = table[state->index_0A];
     switch (byte) {
         case ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE:
-            g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
+            g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
             break;
         case ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE:
-            g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
+            g_Game.flags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             break;
         case ACTOR_SCRIPT_STAGE_FADE_WHITE:
             state->flags |= ACTOR_FLAG_FADE_WHITE;
@@ -104,10 +104,10 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
         }
         case ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX:
             if (Actor_GetType() == 1) {
-                entry                          = g_AreaLoads[g_GameAreaId];
-                byte                           = table[state->index_0A + 1];
-                list                           = *(u32**)((u8*)entry + 0x18);
-                g_GameState->u.field.index_124 = list[byte];
+                entry                             = g_AreaLoads[g_GameAreaId];
+                byte                              = table[state->index_0A + 1];
+                list                              = *(u32**)((u8*)entry + 0x18);
+                g_Game.current->u.field.index_124 = list[byte];
             } else {
                 state->unk_03 = table[state->index_0A + 1];
             }
@@ -137,7 +137,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             volatile Actor* work;
 
             flag               = table[state->index_0A + 1];
-            slot               = g_GameState->chr.character_id;
+            slot               = g_Game.current->chr.character_id;
             work               = SCRATCH_WORK;
             work->param.unk_0B = func_8015CC00(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]],
                                                work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed);

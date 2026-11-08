@@ -1,11 +1,11 @@
 #include "battle_15.h"
 
 MATCH void func_800AD434(void) {
-    PartyBattler* work;
-    Callback      funcs[2] = {func_800AD4D4, func_800AD5C8};
-    u8            two;
+    PartyMember* work;
+    Callback     funcs[2] = {func_800AD4D4, func_800AD5C8};
+    u8           two;
 
-    work = (PartyBattler*)g_Task;
+    work = (PartyMember*)g_Task;
     funcs[work->header.step]();
     two = 2u;
     if (!(D_80148624 & 1)) {

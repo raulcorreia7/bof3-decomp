@@ -7,14 +7,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/Effect_DrawActor.h"
 
 MATCH void func_801EECCC(void) {
-    u32           i;
-    u8            slot;
-    s8            anchor;
-    PartyBattler* actor;
-    PartyBattler* task;
-    PartyBattler* work;
-    u16*          src;
-    u16*          dst;
+    u32          i;
+    u8           slot;
+    s8           anchor;
+    PartyMember* actor;
+    PartyMember* task;
+    PartyMember* work;
+    u16*         src;
+    u16*         dst;
 
     actor          = g_BattleSelectedActor;
     g_Task->facing = actor->facing;
