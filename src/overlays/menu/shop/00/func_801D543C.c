@@ -93,6 +93,6 @@ MATCH void func_801D543C(void) {
         if ((g_SaveCardStatus != SAVE_STATUS_SAVED) && (g_SaveCardStatus != SAVE_STATUS_CREATED)) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         }
-        D_80148652 = panel_timer;
+        g_MenuStep.state = panel_timer;
     }
 }

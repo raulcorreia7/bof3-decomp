@@ -14,12 +14,12 @@ MATCH void func_801D7380(void) {
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        D_80148656 = 0;
-        *timer     = 0;
-        D_80148655 = 0;
-        D_8014865F = 0;
-        D_80148652 = 0;
-        state      = D_80148651;
-        D_80148651 = state + 1;
+        D_80148656          = 0;
+        *timer              = 0;
+        D_80148655          = 0;
+        D_8014865F          = 0;
+        g_MenuStep.state    = 0;
+        state               = g_MenuStep.sub_step;
+        g_MenuStep.sub_step = state + 1;
     }
 }

@@ -57,13 +57,13 @@ NON_MATCHING void func_801D1A90(void) {
         if (g_ShopItemCount != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             D_8014865B = 1;
-            D_80148652 += 1;
+            g_MenuStep.state += 1;
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        (*(s8*)&D_80148652)--;
+        (*(s8*)&g_MenuStep.state)--;
     }
 }
 #else

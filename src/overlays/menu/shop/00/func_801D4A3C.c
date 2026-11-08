@@ -25,7 +25,7 @@ MATCH void func_801D4A3C(void) {
     pad = &g_InputPressed;
     if ((*pad & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         D_801E60EC = SAVE_WAIT_SCAN;
-        mode       = &D_80148652;
+        mode       = &g_MenuStep.state;
         count      = *mode;
         *mode      = 0x13;
         D_80148654 = 2;
@@ -34,7 +34,7 @@ MATCH void func_801D4A3C(void) {
     }
     if ((*pad & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        D_801E6080 = 1;
-        D_80148652 = 6;
+        D_801E6080       = 1;
+        g_MenuStep.state = 6;
     }
 }

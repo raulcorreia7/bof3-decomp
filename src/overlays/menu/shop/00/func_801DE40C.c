@@ -6,9 +6,9 @@ MATCH void func_801DE40C(void) {
 
     func_801DF6A8();
     if (WINDOW_EFFECT_IDLE()) {
-        counter    = &D_80148651;
-        count      = *counter;
-        D_80148652 = 0;
-        *counter   = count + 2;
+        counter          = &g_MenuStep.sub_step;
+        count            = *counter;
+        g_MenuStep.state = 0;
+        *counter         = count + 2;
     }
 }

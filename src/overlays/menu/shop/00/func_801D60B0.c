@@ -14,8 +14,8 @@ MATCH void func_801D60B0(void) {
     count++;
     *counter = count;
     if (count == 5) {
-        D_80148650 = 1;
-        D_80148651 = 0;
+        g_MenuStep.step     = 1;
+        g_MenuStep.sub_step = 0;
         if (g_GameRequestFlags == 0x40 || g_GameAreaId == AREA_ID_BLACK_SHIP ||
             g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP || g_GameAreaId == AREA_ID_DESERT_ENTRANCE_CAMP) {
             D_8014865C = D_8014865F;

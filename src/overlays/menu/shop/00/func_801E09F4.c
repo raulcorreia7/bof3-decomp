@@ -37,7 +37,7 @@ MATCH void func_801E09F4(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         raw = D_801483EE & BYTE_MASK;
         if (raw == 0) {
-            flag       = &D_80148652;
+            flag       = &g_MenuStep.state;
             count      = *flag;
             D_801483EF = D_801483EE;
             *flag      = count + 1;
@@ -49,7 +49,7 @@ MATCH void func_801E09F4(void) {
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        flag2                = &D_80148651;
+        flag2                = &g_MenuStep.sub_step;
         D_801483E4           = 0;
         count2               = *flag2;
         g_BattleMessageState = 4;

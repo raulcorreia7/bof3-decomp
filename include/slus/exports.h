@@ -13,6 +13,16 @@
 #include "common/handler.h"
 #include "sys/sched.h"
 
+/* The menu, shop and start overlays dispatch on the step, then the sub-step and
+ * the state within it. */
+typedef struct MenuStep {
+    u8 step;
+    u8 sub_step;
+    u8 state;
+} MenuStep;
+
+ASSERT_SIZE(MenuStep, 3);
+
 /* The g_SceneEvents handlers with a known role; the other handlers stay numeric. */
 typedef enum SceneEventMode {
     SCENE_EVENT_NONE      = 0,
@@ -179,7 +189,12 @@ extern volatile u16   D_801485E2;
 extern volatile u8    D_8014862E;
 /* D_8014864C */
 extern u8             g_MenuPanelMode;
+extern MenuStep       g_MenuStep;
+/* FAKE: retail reads the three bytes as separate symbols; where the shared base
+ * of g_MenuStep changes the code, the shop and start overlays keep these. */
 extern u8             D_80148650;
+extern u8             D_80148651;
+extern u8             D_80148652;
 extern u8             D_8014866C[];
 extern u8             D_80148A50[];
 /* D_80148FC0 */

@@ -59,20 +59,20 @@ NON_MATCHING void func_801D7314(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         switch ((s8)D_801ED648) { /* irregular */
             case 1:
-                D_80148652 = 0;
-                D_80148651 += 5;
+                g_MenuStep.state = 0;
+                g_MenuStep.sub_step += 5;
                 return;
             case 3:
                 g_BattleChoicePhase = 1;
                 D_80148654          = 7;
-                D_80148652          = 0;
-                D_80148651 += 7;
+                g_MenuStep.state    = 0;
+                g_MenuStep.sub_step += 7;
                 return;
             case 2:
                 g_MenuPanelTasks[16].unk_0B = 3;
                 /* fallthrough */
             default:
-                D_80148651 += 1;
+                g_MenuStep.sub_step += 1;
                 return;
         }
     } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
@@ -83,7 +83,7 @@ NON_MATCHING void func_801D7314(void) {
         g_BattleChoicePhase                                  = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
         D_80148654                                           = 5;
-        D_80148651 += 6;
+        g_MenuStep.sub_step += 6;
     }
 }
 #else

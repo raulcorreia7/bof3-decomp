@@ -63,5 +63,5 @@ MATCH void func_801D62DC(void) {
         func_80153DE8();
         Area_RunSetupStream(*g_AreaLoads[g_GameAreaId]);
     }
-    (*(s8*)&D_80148651)++;
+    (*(s8*)&g_MenuStep.sub_step)++;
 }

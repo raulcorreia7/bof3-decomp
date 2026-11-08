@@ -4,6 +4,7 @@
 #include "common/vector.h"
 #include "gfx/prim.h"
 #include "psx/psyq.h"
+#include "slus/exports.h"
 #include "types.h"
 
 /* The menu system: a screen is a set of panel task records animated into place,
@@ -260,8 +261,6 @@ extern s16            D_801485FA;
 /* Panel-task block bytes 0x80148648..0x80148652; read by etc/game/00 and etc/shop/00. */
 /* D_80148648 */
 extern MenuPanelTask* g_MenuCurrentPanel;
-extern u8             D_80148651;
-extern u8             D_80148652;
 extern s8             D_8014865C;
 extern u8             D_80148699;
 

@@ -21,10 +21,10 @@ MATCH void func_801D26A8(void) {
         }
         D_8014840B = 1;
         if ((Item_Count(g_ShopItemCategory, g_ShopItemId, 0) & HALF_MASK) != 0) {
-            state = &D_80148652;
+            state = &g_MenuStep.state;
             *state -= 2;
         } else {
-            state = &D_80148652;
+            state = &g_MenuStep.state;
             *state -= 6;
         }
     }

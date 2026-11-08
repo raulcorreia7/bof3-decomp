@@ -108,6 +108,6 @@ MATCH void func_801DE944(void) {
         func_80153DE8();
     }
     UI_SetMode(UI_MODE_FAST_FADE_IN);
-    step = &D_80148652;
+    step = &g_MenuStep.state;
     (*step)++;
 }

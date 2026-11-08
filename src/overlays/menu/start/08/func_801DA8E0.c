@@ -12,7 +12,7 @@ MATCH void func_801DA8E0(void) {
             g_MenuPanelTasks[i + 4].unk_0C = 0;
             i++;
         }
-        timer = &D_80148651;
+        timer = &g_MenuStep.sub_step;
         *timer -= 2;
     }
 }

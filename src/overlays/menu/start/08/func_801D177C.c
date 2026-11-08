@@ -68,11 +68,11 @@ MATCH void func_801D177C(void) {
     D_801ED891 = 0;
     D_801ED890 = 0;
     if (D_80148660 == 1) {
-        D_80148650 = 5;
-        D_80148651 = 5;
+        g_MenuStep.step     = 5;
+        g_MenuStep.sub_step = 5;
     } else {
         func_801D1FDC();
-        D_80148651 = 0;
-        D_80148650++;
+        g_MenuStep.sub_step = 0;
+        g_MenuStep.step++;
     }
 }

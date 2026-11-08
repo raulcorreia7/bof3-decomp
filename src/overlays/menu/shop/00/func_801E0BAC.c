@@ -84,7 +84,7 @@ NON_MATCHING void func_801E0BAC(void) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             if (D_801483CC == GAME_NONE) {
                 D_801483EF = 0xFF;
-                D_80148652 -= 1;
+                g_MenuStep.state -= 1;
                 return;
             }
             D_801483CC = 0xFF;

@@ -314,14 +314,10 @@ MATCH void func_801F986C(void) {
     SYS_DISPATCH_TASK(D_801FE910, 1, g_Task);
 }
 
-/* Stores 60 in byte 9 and increments byte 1 of the scratchpad buffer at slots[0x11]. */
+/* Stores 60 in timer and increments mode of the current task. */
 MATCH void func_801F98B0(void) {
-    u8** slots;
-
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][9] = 0x3C;
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][1]++;
+    g_Task->timer = 0x3C;
+    g_Task->header.mode++;
 }
 
 MATCH void func_801F98E0(void) {

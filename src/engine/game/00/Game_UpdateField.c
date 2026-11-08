@@ -53,26 +53,26 @@ MATCH void Game_UpdateField(void) {
             break;
         }
         case GAME_REQUEST_SHOP:
-            D_80148650          = 6;
+            g_MenuStep.step     = 6;
             D_8014865C          = -1;
-            D_80148651          = 0;
-            D_80148652          = 0;
+            g_MenuStep.sub_step = 0;
+            g_MenuStep.state    = 0;
             g_GameEntryState    = 7;
             g_GameEntrySubstate = 0;
             break;
         case GAME_REQUEST_ABILITY_MENU:
             g_GameEntryState    = 9;
             g_GameEntrySubstate = 0;
-            D_80148650          = 0;
-            D_80148651          = 0;
-            D_80148652          = 0;
+            g_MenuStep.step     = 0;
+            g_MenuStep.sub_step = 0;
+            g_MenuStep.state    = 0;
             break;
         case GAME_REQUEST_STATUS_MENU:
             g_GameEntryState    = 10;
             g_GameEntrySubstate = 0;
-            D_80148650          = 0;
-            D_80148651          = 0;
-            D_80148652          = 0;
+            g_MenuStep.step     = 0;
+            g_MenuStep.sub_step = 0;
+            g_MenuStep.state    = 0;
             break;
         case GAME_REQUEST_SCENE_CAMERA:
             D_8014626C       = 1;

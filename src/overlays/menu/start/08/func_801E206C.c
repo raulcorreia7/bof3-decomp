@@ -69,12 +69,12 @@ NON_MATCHING void func_801E206C(void) {
         }
     } else if (bits & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
-        D_80148655 = 7;
-        D_80148652 = D_80148652 - 1;
+        D_80148655       = 7;
+        g_MenuStep.state = g_MenuStep.state - 1;
     } else if (bits & PADstart) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        D_80148655 = 0;
-        D_80148652 = D_80148652 - 2;
+        D_80148655       = 0;
+        g_MenuStep.state = g_MenuStep.state - 2;
     }
 }
 #else

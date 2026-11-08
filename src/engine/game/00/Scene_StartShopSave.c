@@ -45,7 +45,7 @@ MATCH void Scene_StartShopSave(void) {
             D_8014865C       = -2;
             D_80148698       = 1;
             g_GameEntryState = 7;
-            D_80148650       = 0;
+            g_MenuStep.step  = 0;
             D_80148699       = 0;
             g_SceneEventStep = 7;
             break;
@@ -103,7 +103,7 @@ MATCH void Scene_StartShopSave(void) {
             D_8014865C       = -2;
             D_80148698       = 1;
             g_GameEntryState = 7;
-            D_80148650       = 0;
+            g_MenuStep.step  = 0;
             D_80148699       = 0;
             g_SceneEventStep = 6;
             break;

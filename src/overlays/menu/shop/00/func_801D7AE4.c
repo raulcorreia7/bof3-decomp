@@ -8,9 +8,9 @@ MATCH void func_801D7AE4(void) {
     count      = D_80148654 + 1;
     D_80148654 = count;
     if (count == 7) {
-        D_80148654 = 0;
-        D_80148650 = 1;
-        D_80148651 = 0;
-        D_80148652 = 0;
+        D_80148654          = 0;
+        g_MenuStep.step     = 1;
+        g_MenuStep.sub_step = 0;
+        g_MenuStep.state    = 0;
     }
 }

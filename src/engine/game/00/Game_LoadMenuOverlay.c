@@ -11,7 +11,7 @@ MATCH void Game_LoadMenuOverlay(void) {
     GFX_CopyPalette(1u);
     GFX_CopyPalette(2u);
     g_GfxPalettePending = 1u;
-    D_80148650          = 0u;
+    g_MenuStep.step     = 0u;
     D_80148654          = 3;
     /* FAKE: keep the mode argument in the call delay slot. */
     FAKE_ORDER_LOCK(UI_SetMode(3));

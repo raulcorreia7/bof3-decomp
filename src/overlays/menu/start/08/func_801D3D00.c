@@ -84,7 +84,7 @@ MATCH void func_801D3D00(void) {
         } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             if (panel->drawn_cursor == GAME_NONE) {
-                state_counter  = &D_80148652;
+                state_counter  = &g_MenuStep.state;
                 *state_counter = *state_counter - 1;
                 return;
             }

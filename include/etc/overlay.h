@@ -11,7 +11,7 @@
  * Each overlay then begins with a step entry: load the shared step byte, index
  * the overlay's handler table and tail-call the handler. commu01..05 dispatch
  * on the commu step byte D_801F294C that commu00 owns; shisu and bate dispatch
- * on the menu step byte D_80148650. The handler tables and step bytes stay in
+ * on the menu step byte g_MenuStep.step. The handler tables and step bytes stay in
  * each image's own header. */
 
 typedef struct OverlayHeader {

@@ -5,7 +5,7 @@ MATCH void func_801D46E0(void) {
     u8  count;
 
     MENU_DRAW_HEADER();
-    counter  = &D_80148652;
+    counter  = &g_MenuStep.state;
     count    = *counter;
     *counter = count + 1;
 }

@@ -16,9 +16,9 @@ MATCH s32 func_801E8BA0(void) {
     counter_byte = counter_address;
     /* FAKE: keep saved pointer live. */
     FAKE_USE(counter_byte);
-    global_counter = &g_GameEntrySubstate;
-    D_80148651     = 0xA;
-    *counter_byte  = 0xB9;
+    global_counter      = &g_GameEntrySubstate;
+    g_MenuStep.sub_step = 0xA;
+    *counter_byte       = 0xB9;
     *global_counter += 1;
     do {
         if (SYS_TestFlag(bitset, bit_index) != 0) {

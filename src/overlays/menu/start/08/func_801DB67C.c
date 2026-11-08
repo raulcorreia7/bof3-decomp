@@ -20,8 +20,8 @@ MATCH void func_801DB67C(void) {
     g_MenuPanelTasks[9].state  = 2;
     g_MenuPanelTasks[10].state = 2;
     D_80148654                 = 0;
-    D_80148650                 = 1;
-    D_80148651                 = 0;
-    D_80148652                 = 0;
+    g_MenuStep.step            = 1;
+    g_MenuStep.sub_step        = 0;
+    g_MenuStep.state           = 0;
     D_80148655                 = D_801ED6A0;
 }
