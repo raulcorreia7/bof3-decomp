@@ -1,5 +1,5 @@
 /* Sets the step kind from the cell under the lead party member's next position (1, 2 or 3 for cell codes 0xA1, 0xA0
- * or 0xAE, 4 for a walk transition, else 0), then runs the handler of the current mode. One definition shared by the
+ * or 0xAE, 4 for a walk transition, else 0), then runs the handler of the current mode. A statement macro shared by the
  * area overlays; every change here must verify every member. */
 /* AREA_RUN_CELL_KIND_STEP (area065 0x801F2F24, area087 0x801F2F20, area088 0x801F3A50, area115 0x801F2EF0, area121
  * 0x801F2F04) */
