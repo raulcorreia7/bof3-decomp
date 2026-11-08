@@ -1,6 +1,7 @@
 #include "area152_13.h"
 
-MATCH void func_801F3164(void) {
+/* func_801F3164 */
+MATCH void Area_RequestRestartOnContextChange(void) {
     u8* scratch;
     u8  step;
 

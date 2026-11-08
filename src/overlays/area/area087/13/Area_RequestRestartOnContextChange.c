@@ -1,6 +1,7 @@
 #include "area087_13.h"
 
-MATCH void func_801F32D4(void) {
+/* func_801F32D4 */
+MATCH void Area_RequestRestartOnContextChange(void) {
     Actor* scratch;
     u8     step;
 

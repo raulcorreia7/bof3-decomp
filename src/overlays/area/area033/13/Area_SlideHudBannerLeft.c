@@ -1,6 +1,7 @@
-#include "area065_13.h"
+#include "area033_13.h"
 
-MATCH void func_801F3640(void) {
+/* func_801F353C */
+MATCH void Area_SlideHudBannerLeft(void) {
     Actor* scratch;
     u8     mode;
 

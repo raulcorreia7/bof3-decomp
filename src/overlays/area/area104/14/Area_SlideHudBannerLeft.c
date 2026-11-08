@@ -1,6 +1,7 @@
 #include "area104_14.h"
 
-MATCH void func_801F36CC(void) {
+/* func_801F36CC */
+MATCH void Area_SlideHudBannerLeft(void) {
     g_Task->screen_x -= 0x10;
     if ((s16)g_Task->screen_x < -0x2F) {
         g_Task->header.step = 0;
