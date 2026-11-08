@@ -35,7 +35,7 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
     setRGB0(primitive, 72, 32, 0);
     primitive->x2 = primitive->x0;
     primitive->x3 = primitive->x1;
-    GFX_AddPrim(4, 0x18);
+    GFX_AddPrim(4, sizeof(POLY_F4));
 
     if (g_ActorSlots[0].header.mode == 4) {
         y = 180;

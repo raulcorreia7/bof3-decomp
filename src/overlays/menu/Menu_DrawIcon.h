@@ -24,5 +24,5 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     setXY0(sprt, sprite_x, sprite_y);
     SetSprt(sprt);
     SetSemiTrans(sprt, 1);
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

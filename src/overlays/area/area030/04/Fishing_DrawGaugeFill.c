@@ -21,7 +21,7 @@ MATCH void Fishing_DrawGaugeFill(s16 quad_x, s16 quad_y, s16 quad_width, u8 corn
     primitive->x3 = primitive->x1;
     primitive->y2 = primitive->y0 + 4;
     primitive->y3 = primitive->y2;
-    GFX_AddPrim(corner_shade & BYTE_MASK, 0x24);
+    GFX_AddPrim(corner_shade & BYTE_MASK, sizeof(POLY_G4));
 
     primitive = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(primitive);
@@ -36,5 +36,5 @@ MATCH void Fishing_DrawGaugeFill(s16 quad_x, s16 quad_y, s16 quad_width, u8 corn
     primitive->x3 = primitive->x1;
     primitive->y2 = primitive->y0 + 4;
     primitive->y3 = primitive->y2;
-    GFX_AddPrim(corner_shade & BYTE_MASK, 0x24);
+    GFX_AddPrim(corner_shade & BYTE_MASK, sizeof(POLY_G4));
 }

@@ -27,7 +27,7 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
                 tpage = 0x95;
             }
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
-            GFX_AddPrim(7, 0xC);
+            GFX_AddPrim(7, sizeof(DR_MODE));
             primitive = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(primitive);
             SetSemiTrans(primitive, 0);
@@ -41,7 +41,7 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
                     primitive->b1 = (*(u32*)src >> 7) & 0xF8);
             setRGB2(primitive, primitive->r3 = (*(u16*)(src + 2) & 0x1F) * 8, primitive->g3 = (*(u32*)src >> 18) & 0xF8,
                     primitive->b3 = (*(u32*)src >> 23) & 0xF8);
-            GFX_AddPrim(7, 0x24);
+            GFX_AddPrim(7, sizeof(POLY_G4));
         }
     }
 }

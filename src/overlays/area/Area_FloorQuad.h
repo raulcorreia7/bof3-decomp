@@ -16,7 +16,7 @@ extern SVECTOR D_1F800014[];
         s32       x1;                                                                                   \
                                                                                                         \
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 320, 256), NULL);                   \
-        GFX_AddPrim(6, 0xC);                                                                            \
+        GFX_AddPrim(6, sizeof(DR_MODE));                                                                \
         prim = (POLY_FT4*)g_GfxPrimCursor;                                                              \
         SetPolyFT4(prim);                                                                               \
         SetShadeTex(prim, 0);                                                                           \
@@ -46,5 +46,5 @@ extern SVECTOR D_1F800014[];
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, \
                       (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);             \
         func_80155560((sprite), prim, 1);                                                               \
-        GFX_AddPrim(6, 0x28);                                                                           \
+        GFX_AddPrim(6, sizeof(POLY_FT4));                                                               \
     } while (0)

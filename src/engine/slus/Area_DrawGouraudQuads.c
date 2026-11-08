@@ -28,7 +28,7 @@ MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
         do {
             mode = getTPage(1, rec[4].color.tpage, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, NULL);
-            GFX_AddPrim(g_AreaDrawMode, 0xC);
+            GFX_AddPrim(g_AreaDrawMode, sizeof(DR_MODE));
             prim = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
             for (i = 0; i < 4; i++, rec++, n++) {
@@ -48,10 +48,10 @@ MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
             setRGB3(prim, (rec[0].raw >> 16), (rec[0].raw >> 8), rec[0].raw);
             rec++;
             n += 4;
-            GFX_AddPrim(g_AreaDrawMode, 0x24);
+            GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_G4));
         } while (n != parts->head.count);
     }
     mode = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
-    GFX_AddPrim(g_AreaDrawMode, 0xC);
+    GFX_AddPrim(g_AreaDrawMode, sizeof(DR_MODE));
 }

@@ -23,5 +23,5 @@ MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 kind, u8 level, u32 exp) {
     }
     line->y1 = y;
     setRGB0(line, 0x80, 0, 0);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(LINE_F2));
 }

@@ -11,5 +11,5 @@ MATCH void func_800B1DAC(s16 x, s16 y, u8 sprite_arg) {
     setUV0(sprt, (s_BattleAbilityIcon[sprite_arg] % 6) * 40, (s_BattleAbilityIcon[sprite_arg] / 6) * 24);
     setWH(sprt, 40, 24);
     SetSprt(sprt);
-    GFX_AddPrim(1U, 0x14U);
+    GFX_AddPrim(1U, sizeof(SPRT));
 }

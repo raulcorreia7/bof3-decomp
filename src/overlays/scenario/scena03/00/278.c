@@ -101,7 +101,7 @@ MATCH void func_801F73BC(void) {
         g_Task->header.mode++;
         g_Task->unk_29 = 0;
         g_Task->timer  = g_Task->header.mode;
-        GFX_AddPrim(g_Task->unk_29, 0x18);
+        GFX_AddPrim(g_Task->unk_29, sizeof(DR_MOVE));
         if (g_Task->header.mode == 4) {
             func_80196070();
         }

@@ -33,7 +33,7 @@ MATCH void MenuDrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u
     y_corner = y + 4;
     setXY3(line3, x_corner, y, x, y_corner, x, y_bottom);
     setRGB0(line3, rgb[2], rgb[1], rgb[0]);
-    GFX_AddPrim(1, 0x18);
+    GFX_AddPrim(1, sizeof(LINE_F3));
 
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
@@ -46,5 +46,5 @@ MATCH void MenuDrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u
     line4->y2 = y_bottom;
     line4->x1 = (line4->x2 = x + width - 1);
     setRGB0(line4, rgb[2], rgb[1], rgb[0]);
-    GFX_AddPrim(1, 0x1C);
+    GFX_AddPrim(1, sizeof(LINE_F4));
 }

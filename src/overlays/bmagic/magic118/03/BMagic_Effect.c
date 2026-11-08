@@ -100,7 +100,7 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
     s32      i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
-    GFX_AddPrim(5, 0xC);
+    GFX_AddPrim(5, sizeof(DR_MODE));
     DARK_RING_INNER  = 0x80;
     DARK_RING_OUTER  = 0xC0;
     DARK_RING_SHADE  = g_Task->unk_09 * 6;
@@ -130,10 +130,10 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, DARK_RING_SHADE, DARK_RING_SHADE, DARK_RING_SHADE);
         setRGB3(prim, DARK_RING_SHADE, DARK_RING_SHADE, DARK_RING_SHADE);
-        GFX_AddPrim(5, 0x24);
+        GFX_AddPrim(5, sizeof(POLY_G4));
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, 320, 256), 0);
-    GFX_AddPrim(5, 0xC);
+    GFX_AddPrim(5, sizeof(DR_MODE));
 }
 
 INCLUDE_ASM(BMagic_DrawBurnFlameTris);

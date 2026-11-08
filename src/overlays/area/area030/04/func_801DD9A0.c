@@ -51,7 +51,7 @@ MATCH void func_801DD9A0(void) {
             line->x1 = sxy[0];
             line->y1 = sxy[1];
             setRGB0(line, gray, gray, gray);
-            GFX_AddPrim(2U, 0x10U);
+            GFX_AddPrim(2U, sizeof(LINE_F2));
             line_offset += TO_COORD(10);
         } while (i < 6);
     }

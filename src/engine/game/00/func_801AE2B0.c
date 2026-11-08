@@ -33,5 +33,5 @@ MATCH void func_801AE2B0(s16 quad_x, s16 quad_y, s32 quad_width, s32 quad_height
     prim->y2      = height_plus_1 + y;
     prim->x3      = width_plus_1 + x;
     prim->y3      = height_plus_1 + y;
-    GFX_AddPrim(1, 0x18);
+    GFX_AddPrim(1, sizeof(POLY_F4));
 }

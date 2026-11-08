@@ -20,7 +20,7 @@ MATCH void func_801E6E18(s16 x, s16 y, s32 row, s32 shade, u8 blend) {
         sprite->clut = GetClut(0, 491);
         setRGB0(sprite, shade * 2, shade * 2, shade * 2);
         SetSemiTrans(sprite, blend);
-        GFX_AddPrim(1, 0x14);
+        GFX_AddPrim(1, sizeof(SPRT));
     }
     GFX_AddDrawMode(GetTPage(0, 1, 896, 0) & HALF_MASK);
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -32,5 +32,5 @@ MATCH void func_801E6E18(s16 x, s16 y, s32 row, s32 shade, u8 blend) {
     sprite->clut = GetClut(32, 483);
     setRGB0(sprite, gray, gray, gray);
     SetSemiTrans(sprite, blend);
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

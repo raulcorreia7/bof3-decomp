@@ -68,7 +68,7 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                         p->tpage = 0x2B;
                     }
                 }
-                GFX_AddPrim(order, 0x28);
+                GFX_AddPrim(order, sizeof(POLY_FT4));
                 p++;
             }
             for (j = 0; j < 4; j++) {

@@ -501,7 +501,7 @@ MATCH void func_801F8EF0(void) {
     setRGB0(prim, 0, 0, 0);
     setXY0(prim, 0, 0);
     setWH(prim, width, height);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 
     prim = (TILE*)g_GfxPrimCursor;
     setlen(prim, len);
@@ -509,7 +509,7 @@ MATCH void func_801F8EF0(void) {
     setRGB0(prim, 0, 0, 0);
     setXY0(prim, 0, 0xD2);
     setWH(prim, width, height);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 }
 
 INCLUDE_ASM(func_801F8FAC);
@@ -528,7 +528,7 @@ MATCH void func_801F9160(s16 x, s16 y) {
     setXY0(prim, x, y);
     prim->u0 = 0;
     setWH(prim, 0x58, 0x12);
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }
 
 INCLUDE_ASM(func_801F91F0);

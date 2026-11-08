@@ -119,7 +119,7 @@ NON_MATCHING void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
             tmp1 = D_8017F8E0[val6];
             val6 += 1;
             func_80155560((u32)tmp1, val7, 1);
-            GFX_AddPrim((u32)g_AreaDrawMode, 0x28U);
+            GFX_AddPrim((u32)g_AreaDrawMode, sizeof(POLY_FT4));
         } while (val3 > 0);
     }
 }

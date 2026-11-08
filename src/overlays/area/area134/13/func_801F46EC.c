@@ -32,5 +32,5 @@ MATCH void func_801F46EC(const void* sprite) {
     primitive->g0    = shade;
     primitive->r0    = shade;
 
-    GFX_AddPrim(1u, 0x28u);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
 }

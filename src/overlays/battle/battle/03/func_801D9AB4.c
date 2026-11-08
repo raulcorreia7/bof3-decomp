@@ -18,5 +18,5 @@ MATCH void func_801D9AB4(s16 x, s16 y, s32 shape_index, s32 shade) {
             PSX_COLOR_G(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + (((*selector * 2) + shade) << 5))) << 3,
             PSX_COLOR_B(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + (((*selector * 2) + shade) << 5))) << 3);
     SetSemiTrans(prim, shade);
-    GFX_AddPrim(1, 0x18);
+    GFX_AddPrim(1, sizeof(POLY_F4));
 }

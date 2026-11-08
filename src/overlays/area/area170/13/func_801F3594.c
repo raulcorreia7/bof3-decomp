@@ -18,5 +18,5 @@ MATCH void func_801F3594(s16 x0, s16 y0, u16 x1, u16 y1, u16 x2, u16 y2, u16 x3,
     prim->r0 = r;
     prim->g0 = g;
     prim->b0 = b;
-    GFX_AddPrim(2, 0x18);
+    GFX_AddPrim(2, sizeof(POLY_F4));
 }

@@ -9,5 +9,5 @@ MATCH void func_801E0C80(s32 graphic, s32 layer) {
                      D_801E238C[(graphic & BYTE_MASK) << 2], D_801E2390[(graphic & BYTE_MASK) << 2]);
 
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim((u8)layer, 0x0C);
+    GFX_AddPrim((u8)layer, sizeof(DR_MODE));
 }

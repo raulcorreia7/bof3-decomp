@@ -14,5 +14,5 @@ MATCH void func_801D9804(s32 x, s32 y, s32 clut_index, s32 glyph_index) {
     setXY0(packet, x, y);
     setWH(packet, 24, 8);
     SetSprt(packet);
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

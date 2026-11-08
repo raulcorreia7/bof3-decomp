@@ -56,7 +56,7 @@ NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
                     4)));
         SetPolyFT4((POLY_FT4*)g_GfxPrimCursor);
         SetSemiTrans(g_GfxPrimCursor, 1);
-        GFX_AddPrim(1U, 0x28U);
+        GFX_AddPrim(1U, sizeof(POLY_FT4));
     }
     g_MessageWindow.text.x += (u16)g_MessageWindow.cue_counter;
 }

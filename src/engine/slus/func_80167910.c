@@ -58,9 +58,9 @@ MATCH void func_80167910(void) {
     poly->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     poly->clut  = 0x7802;
     if (!(g_Task->param.unk_0B & 1)) {
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0x28);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
     } else {
-        GFX_AddPrim(3, 0x28);
+        GFX_AddPrim(3, sizeof(POLY_FT4));
     }
     PushMatrix();
     axis.vx = 0;
@@ -83,9 +83,9 @@ MATCH void func_80167910(void) {
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
     if (!(g_Task->param.unk_0B & 1)) {
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     } else {
-        GFX_AddPrim(3, 0xC);
+        GFX_AddPrim(3, sizeof(DR_MODE));
     }
     if (g_FrameCount & 8) {
         radius = (s16)(0x38 - ((~((u32)g_FrameCount >> 1) & 3) * 2));
@@ -119,9 +119,9 @@ MATCH void func_80167910(void) {
         prim[0x15] = 0;
         prim[0x16] = 0;
         if (!(g_Task->param.unk_0B & 1)) {
-            Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0x1C);
+            Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_G3));
         } else {
-            GFX_AddPrim(3, 0x1C);
+            GFX_AddPrim(3, sizeof(POLY_G3));
         }
     }
     PopMatrix();

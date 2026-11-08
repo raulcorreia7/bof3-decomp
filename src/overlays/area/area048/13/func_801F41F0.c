@@ -11,5 +11,5 @@ MATCH void func_801F41F0(s32 arg0, s32 arg1) {
     rect.w = 8;
     rect.h = 0x78;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, base, 0x160);
-    GFX_AddPrim(6U, 0x18U);
+    GFX_AddPrim(6U, sizeof(DR_MOVE));
 }

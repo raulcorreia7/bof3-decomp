@@ -14,5 +14,5 @@ MATCH void func_801E16DC(void) {
     setXY0(primitive, 0, 0);
     setWH(primitive, 320, 240);
     SetSemiTrans(primitive, 1);
-    GFX_AddPrim(2, 0x10);
+    GFX_AddPrim(2, sizeof(TILE));
 }

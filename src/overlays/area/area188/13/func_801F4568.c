@@ -13,5 +13,5 @@ MATCH void func_801F4568(s32* pos_a, s32* pos_b, u8 shade) {
     prim->x1 = (u16)xy.vx;
     prim->y1 = (u16)xy.vy;
     setRGB0(prim, shade, shade, 0);
-    GFX_AddPrim(2, 0x10);
+    GFX_AddPrim(2, sizeof(LINE_F2));
 }

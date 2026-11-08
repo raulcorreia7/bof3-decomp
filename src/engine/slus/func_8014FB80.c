@@ -13,5 +13,5 @@ MATCH void func_8014FB80(s16 x, s16 y, u16 clut, u8 shade) {
     setXY0(position, x, y + shade);
     SetSprt(position);
     SetSemiTrans((SPRT*)g_GfxPrimCursor, 1);
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

@@ -48,7 +48,7 @@ NON_MATCHING void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
                 FIELD(u16, val5, 0xAu) = (u16)(val1 + (((s32)(val7 * val2) / val3) + 3));
                 FIELD(u16, val5, 0xEu) =
                     (u16)((val1 + (((s32)(val7 * (val2 + 1)) / val3) + 3)) - FIELD(u16, val5, 0xAu));
-                GFX_AddPrim(1U, 0x10U);
+                GFX_AddPrim(1U, sizeof(TILE));
             }
             val4 += 1;
         } while ((u32)(val4 & HALF_MASK) < val6);
@@ -81,7 +81,7 @@ NON_MATCHING void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
     FIELD(u8, val5, 0x4u)   = 0x80;
     FIELD(u8, val5, 0x5u)   = 0x80;
     FIELD(u8, val5, 0x6u)   = 0x80;
-    GFX_AddPrim(1U, 0x28U);
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801AFA1C);

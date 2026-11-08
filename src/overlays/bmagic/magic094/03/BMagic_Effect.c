@@ -34,7 +34,7 @@ MATCH void func_801EEE4C(void) {
         PopMatrix();
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15, 0);
-    GFX_AddPrim(3, 0xC);
+    GFX_AddPrim(3, sizeof(DR_MODE));
 }
 
 MATCH void func_801EEF1C(void) {

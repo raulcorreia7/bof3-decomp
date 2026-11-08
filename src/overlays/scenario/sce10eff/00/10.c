@@ -299,7 +299,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     cell        = &D_1F800004;
     ramp        = cell + 1;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, 0x0C);
+    GFX_AddPrim(2, sizeof(DR_MODE));
     radius_base = (s16)radius;
     do {
         work    = g_Task;
@@ -337,7 +337,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
         RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
                       (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
         if (primitive->y2 > 0) {
-            GFX_AddPrim(2, 0x24);
+            GFX_AddPrim(2, sizeof(POLY_G4));
             D_1F800014[0].vy -= band_height;
             D_1F800014[1].vy -= band_height;
             D_1F800014[2].vy -= band_height;
@@ -356,7 +356,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
                           (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
-            GFX_AddPrim(2, 0x24);
+            GFX_AddPrim(2, sizeof(POLY_G4));
             D_1F800014[0].vy += ((s16)band_height) * 2;
             D_1F800014[1].vy += ((s16)band_height) * 2;
             D_1F800014[2].vy += ((s16)band_height) * 2;
@@ -375,7 +375,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
                           (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
-            GFX_AddPrim(2, 0x24);
+            GFX_AddPrim(2, sizeof(POLY_G4));
             D_1F800014[0].vy += band_height;
             D_1F800014[1].vy += band_height;
             D_1F800014[2].vy += band_height;
@@ -394,7 +394,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1,
                           (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
-            GFX_AddPrim(2, 0x24);
+            GFX_AddPrim(2, sizeof(POLY_G4));
             D_1F800014[0].vy -= ((s16)band_height) * 2;
         }
         i++;

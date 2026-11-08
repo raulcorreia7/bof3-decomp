@@ -11,5 +11,5 @@ MATCH void func_801DA5A8(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b) {
     primitive->unk_0C = x1;
     primitive->unk_0E = y1;
     SetSemiTrans(primitive, 1);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(LINE_F2));
 }

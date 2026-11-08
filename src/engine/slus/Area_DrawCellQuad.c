@@ -34,6 +34,6 @@ MATCH void Area_DrawCellQuad(s32 mask, s32 index) {
         /* FAKE: the constant address form keeps the retail base materialization (the symbol form changes it). */
         color                 = ((AreaMapBundle*)MAP_BUNDLE_BASE)->color_1A + (mask >> 3);
         setRGB0(primitive, ((*color & 0x1F) * 8), ((*color >> 2) & 0xF8), ((*color >> 7) & 0xF8));
-        GFX_AddPrim(g_AreaDrawMode, 0x18);
+        GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_F4));
     }
 }

@@ -8,5 +8,5 @@ MATCH void func_801F3850(void) {
     rect.w = 16;
     rect.h = 32;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x198, 0x120);
-    GFX_AddPrim(2, 0x18);
+    GFX_AddPrim(2, sizeof(DR_MOVE));
 }

@@ -46,6 +46,6 @@ extern SVECTOR D_1F800014[];
                     D_1F800000.view.effect.params[(shade_slot)]);                                                   \
             setRGB3(prim, D_1F800000.view.effect.params[(shade_slot)], D_1F800000.view.effect.params[(shade_slot)], \
                     D_1F800000.view.effect.params[(shade_slot)]);                                                   \
-            GFX_AddPrim((layer), 0x24);                                                                             \
+            GFX_AddPrim((layer), sizeof(POLY_G4));                                                                  \
         }                                                                                                           \
     } while (0)

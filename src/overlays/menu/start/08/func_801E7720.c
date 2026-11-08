@@ -14,5 +14,5 @@ MATCH void func_801E7720(s16 tile_x, s8 tile_kind) {
     tile->b0 = tile_kind;
     tile->g0 = tile_kind;
     tile->r0 = tile_kind;
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 }

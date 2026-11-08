@@ -20,5 +20,5 @@ MATCH void func_801D1744(s16 panel_x, s16 panel_y, u8 column_shade) {
     setRGB1(primitive, 0x64, 0x64, 0x80);
     setRGB2(primitive, 0, 0, 0x50);
     setRGB3(primitive, 0, 0, 0x50);
-    GFX_AddPrim(column_shade, 0x24);
+    GFX_AddPrim(column_shade, sizeof(POLY_G4));
 }

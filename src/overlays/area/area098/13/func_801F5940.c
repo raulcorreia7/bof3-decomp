@@ -7,7 +7,7 @@ MATCH void func_801F5940(void) {
     s32    i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x380, 0x100), 0);
-    GFX_AddPrim(2, 0xC);
+    GFX_AddPrim(2, sizeof(DR_MODE));
     Area_SetCameraMatrix(&matrix);
     spin  = 0x800E48C0;
     i     = 0;

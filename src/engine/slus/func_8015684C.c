@@ -65,7 +65,7 @@ NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     RotTransPers4(&v0, &v1, &v2, &v3, (s32*)(prim + 8), (s32*)(prim + 0x10), (s32*)(prim + 0x18), (s32*)(prim + 0x20),
                   &p, &flag);
     func_80155560(0xB1800110u, prim, 1);
-    GFX_AddPrim(state, 0x28);
+    GFX_AddPrim(state, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_8015684C);

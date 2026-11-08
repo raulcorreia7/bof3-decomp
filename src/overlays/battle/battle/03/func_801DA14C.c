@@ -46,5 +46,5 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     primitive->u3 = (D_801EAF2C[palette_offset] + D_801EAF2E[palette_offset]);
     primitive->v3 = (D_801EAF2F[palette_offset] + (D_801EAF2D[palette_offset] - v_delta));
     SetSemiTrans(primitive, palette_index);
-    GFX_AddPrim(1U, 0x28U);
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
 }

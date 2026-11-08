@@ -11,5 +11,5 @@ MATCH void func_801D18CC(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     primitive->clut = getClut(0, 489);
     setXY0(primitive, sprite_x, sprite_y);
     setUV0(primitive, 184, 72);
-    GFX_AddPrim(icon_index, 0x10);
+    GFX_AddPrim(icon_index, sizeof(SPRT_8));
 }

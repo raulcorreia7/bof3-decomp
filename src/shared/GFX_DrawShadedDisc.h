@@ -11,7 +11,7 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
     s32      scale;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
-    GFX_AddPrim(1u, 0x0Cu);
+    GFX_AddPrim(1u, sizeof(DR_MODE));
     angle = 0;
     do {
         packet = (POLY_G3*)g_GfxPrimCursor;
@@ -27,7 +27,7 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
         setRGB1(packet, rim_shade, rim_shade, rim_shade);
         setRGB2(packet, rim_shade, rim_shade, rim_shade);
         packet->y2 = (s16)(y + ((radius * scale) >> 0x0C));
-        GFX_AddPrim(1u, 0x1Cu);
+        GFX_AddPrim(1u, sizeof(POLY_G3));
         angle = next;
     } while ((u16)angle < ONE);
 }

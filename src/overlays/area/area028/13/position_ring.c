@@ -222,7 +222,7 @@ MATCH void func_801F2D3C(void) {
     setXY0(prim, D_801F3E00->screen.x, D_801F3E00->screen.y);
     shade    = -0x40 - (D_801F3E00->scale - 0x80) * 0xC0 / 512;
     prim->b0 = (prim->g0 = (prim->r0 = shade));
-    GFX_AddPrim(3u, 0x0Cu);
+    GFX_AddPrim(3u, sizeof(TILE_1));
 }
 
 #undef WORLD_RING_HALFWORD
@@ -274,7 +274,7 @@ MATCH void func_801F3060(void) {
 
     Area_SetCameraMatrix(scratch);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(3u, 0x0Cu);
+    GFX_AddPrim(3u, sizeof(DR_MODE));
 
     D_801F3E00 = MEM_PTR(AreaSlotWork, AREA_WORK);
     i          = 0u;
@@ -314,7 +314,7 @@ MATCH void func_801F318C(s16 radius) {
     s8       i     = 0;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
-    GFX_AddPrim(3u, 0x0Cu);
+    GFX_AddPrim(3u, sizeof(DR_MODE));
     Area_SetCameraMatrix(scratch);
 
     pos[0] = g_Task->pos.x.fixed;
@@ -349,7 +349,7 @@ MATCH void func_801F318C(s16 radius) {
         setRGB1(primitive, 0u, 0u, 0u);
         setRGB2(primitive, 0u, 0u, 0u);
 
-        GFX_AddPrim(3u, 0x1Cu);
+        GFX_AddPrim(3u, sizeof(POLY_G3));
         i += 1;
     } while (i < 32);
 }

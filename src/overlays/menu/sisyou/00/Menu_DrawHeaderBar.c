@@ -30,7 +30,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     texture_window->x = 0;
     setWH(texture_window, 16, 16);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
@@ -61,7 +61,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     width_plus_1    = width + 1;
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1, 0x28);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
     half_width = (s16)((((u16)width_plus_1) - 4) >> 1);
     half_inner = half_width;
     primitive  = (POLY_FT4*)g_GfxPrimCursor;
@@ -75,7 +75,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, 481);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1, 0x28);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
     odd_width_u16 = (u16)odd_width;
     primitive     = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -95,7 +95,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, 481);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1, 0x28);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
@@ -125,14 +125,14 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, 481);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1, 0x28);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
     texture_window    = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor   = (u8*)(texture_window + 1);
     texture_window->x = 0;
     texture_window->y = 0;
     setWH(texture_window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
     func_801AEBA0((s16)(x + 2), (s16)(y + 2), (s16)(width - 4), (s16)(height - 4), 0);
 }
 #else

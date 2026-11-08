@@ -3,7 +3,7 @@ MATCH void Effect_DrawScreenFade(void) {
     POLY_G4* prim;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35, NULL);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddPrim(1U, sizeof(DR_MODE));
     prim  = (POLY_G4*)g_GfxPrimCursor;
     shade = g_Task->unk_09 * 0x10;
     SetPolyG4(prim);
@@ -13,7 +13,7 @@ MATCH void Effect_DrawScreenFade(void) {
     setRGB1(prim, 0x80, 0x80, 0x80);
     setRGB2(prim, shade, shade, shade);
     setRGB3(prim, shade, shade, shade);
-    GFX_AddPrim(1U, 0x24U);
+    GFX_AddPrim(1U, sizeof(POLY_G4));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -22,7 +22,7 @@ MATCH void Effect_DrawScreenFade(void) {
     setRGB1(prim, shade, shade, shade);
     setRGB2(prim, 0x80, 0x80, 0x80);
     setRGB3(prim, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1U, 0x24U);
+    GFX_AddPrim(1U, sizeof(POLY_G4));
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15, NULL);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddPrim(1U, sizeof(DR_MODE));
 }

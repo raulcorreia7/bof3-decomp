@@ -20,7 +20,7 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
 
     tpage = getTPage(0, 0, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
 
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
@@ -46,5 +46,5 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     clut = getClut(entry->clut_x, entry->clut_y + 0x1E0);
     setWH(sprt, 40, 48);
     sprt->clut = clut;
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

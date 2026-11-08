@@ -68,7 +68,7 @@ NON_MATCHING void func_801F4768(void) {
     RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
     func_80155560(width | 0xBB509100, prim, 1);
-    GFX_AddPrim(4, 0x28);
+    GFX_AddPrim(4, sizeof(POLY_FT4));
 
     for (row = 0; row < (2 - width) * 4 + 1; row++) {
         for (col = 0; col < (2 - width) * 4; col++) {

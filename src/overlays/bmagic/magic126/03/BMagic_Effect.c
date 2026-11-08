@@ -77,7 +77,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     s32      i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    GFX_AddPrim(5, 0xC);
+    GFX_AddPrim(5, sizeof(DR_MODE));
     GLOW_RING_INNER  = g_Task->timer * 2;
     GLOW_RING_OUTER  = g_Task->timer * 3 + (rand() & 3);
     GLOW_RING_RED    = g_Task->unk_09 * 15;
@@ -109,7 +109,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB3(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
-        GFX_AddPrim(5, 0x24);
+        GFX_AddPrim(5, sizeof(POLY_G4));
     }
 }
 
@@ -121,7 +121,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     s32      i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    GFX_AddPrim(5, 0xC);
+    GFX_AddPrim(5, sizeof(DR_MODE));
     GLOW_RING_INNER  = g_Task->timer;
     GLOW_RING_OUTER  = g_Task->timer * 2;
     GLOW_RING_RED    = g_Task->unk_09 * 15;
@@ -153,7 +153,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
         setRGB1(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
-        GFX_AddPrim(5, 0x24);
+        GFX_AddPrim(5, sizeof(POLY_G4));
     }
 }
 

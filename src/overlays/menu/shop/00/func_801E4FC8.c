@@ -16,7 +16,7 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
 
     tpage = getTPage(0, 0, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
 
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
@@ -41,5 +41,5 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
     clut = getClut(entry->clut_x, entry->clut_y + 0x1E0);
     setWH(sprt, 36, 40);
     sprt->clut = clut;
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

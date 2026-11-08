@@ -16,5 +16,5 @@ MATCH void func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 s
     setRGB0(tile, (color >> 7) & 0xF8, (color >> 2) & 0xF8, (packed_color & 0x1F) * 8);
     tile->h = v;
     SetSemiTrans(tile, semi_trans);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 }

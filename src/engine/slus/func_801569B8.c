@@ -75,7 +75,7 @@ NON_MATCHING void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
         val1 -= 0x40;
         val6 += 8;
         val3 += 1;
-        GFX_AddPrim((u32)g_AreaDrawMode, 0x28U);
+        GFX_AddPrim((u32)g_AreaDrawMode, sizeof(POLY_FT4));
     } while (val3 < 8);
 }
 #else

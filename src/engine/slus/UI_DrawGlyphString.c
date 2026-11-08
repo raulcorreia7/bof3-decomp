@@ -56,7 +56,7 @@ MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
             *((s16*)(sprite + 0xA)) = Y;
             SetSprt8((SPRT_8*)sprite);
             SetSemiTrans(sprite, 1);
-            GFX_AddPrim(1, 0x10);
+            GFX_AddPrim(1, sizeof(SPRT_8));
             sprite = g_GfxPrimCursor;
         }
         p += 1;

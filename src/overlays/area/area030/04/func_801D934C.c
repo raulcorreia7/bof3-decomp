@@ -49,7 +49,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     FIELD(s8, val8, 0x6u)   = (s8)val2;
     FIELD(u16, val8, 0xCu)  = (u16)stack_20;
     SetSemiTrans(val8, 1);
-    GFX_AddPrim(2U, 0x18U);
+    GFX_AddPrim(2U, sizeof(POLY_F4));
     val8 = &g_GfxPrimCursor;
     val8 = (u8**)g_GfxPrimCursor;
     SetTile((TILE*)val8);
@@ -61,7 +61,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     FIELD(s8, val8, 0x6u)  = (s8)val2;
     FIELD(u16, val8, 0xEu) = (u16)(stack_10 - 4);
     SetSemiTrans(val8, 1);
-    GFX_AddPrim(2U, 0x10U);
+    GFX_AddPrim(2U, sizeof(TILE));
     val8 = &g_GfxPrimCursor;
     val8 = (u8**)g_GfxPrimCursor;
     SetPolyF4((POLY_F4*)val8);
@@ -79,7 +79,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     FIELD(s8, val8, 0x5u)   = (s8)val7;
     FIELD(s8, val8, 0x6u)   = (s8)val2;
     SetSemiTrans(val8, 1);
-    GFX_AddPrim(2U, 0x18U);
+    GFX_AddPrim(2U, sizeof(POLY_F4));
 }
 #else
 INCLUDE_ASM(func_801D934C);

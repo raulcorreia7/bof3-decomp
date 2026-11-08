@@ -38,6 +38,6 @@ MATCH void Fishing_DrawReelCursor(s16 panel_x, s16 panel_y, u8 panel_width, s8 u
         setXY0(prim, x, y);
         prim->w = w;
         setRGB0(prim, 255, 0, 0);
-        GFX_AddPrim(layer, 0x10);
+        GFX_AddPrim(layer, sizeof(TILE));
     }
 }

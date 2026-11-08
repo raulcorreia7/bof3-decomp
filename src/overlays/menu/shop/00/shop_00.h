@@ -759,7 +759,7 @@ static inline void MenuClearScreenTile(void) {
     setXY0(prim, 0, 0);
     prim->h = 240;
     setRGB0(prim, 0, 0, 0);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 }
 
 #endif

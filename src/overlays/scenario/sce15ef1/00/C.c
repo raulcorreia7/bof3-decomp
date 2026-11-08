@@ -184,7 +184,7 @@ MATCH void func_801D1CD4(const void* spin) {
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0, 0, 0);
 
-    GFX_AddPrim(2u, 0x1Cu);
+    GFX_AddPrim(2u, sizeof(POLY_G3));
 }
 
 #include "shared/Area_InitSpin.h"

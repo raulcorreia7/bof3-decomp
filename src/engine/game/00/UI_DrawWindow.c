@@ -19,7 +19,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     texture_window->x = 0;
     setWH(texture_window, 16, 16);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -46,23 +46,23 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     }
     primitive->clut  = GetClut(clut_x, clut_y);
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1, 0x28);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
     primitive++;
     if (width < 256) {
         *primitive = primitive[-1];
         setXY4(primitive, x + 4, y, x - 4 + width, y, x + 4, y + height, x - 4 + width, y + height);
         setUV4(primitive, 0, 0, width - 8, 0, 0, height, width - 8, height);
-        GFX_AddPrim(1, 0x28);
+        GFX_AddPrim(1, sizeof(POLY_FT4));
     } else {
         *primitive = primitive[-1];
         setXY4(primitive, x + 4, y, x + (width >> 1), y, x + 4, y + height, x + (width >> 1), y + height);
         setUV4(primitive, 0, 0, (width >> 1) - 4, 0, 0, height, (width >> 1) - 4, height);
-        GFX_AddPrim(1, 0x28);
+        GFX_AddPrim(1, sizeof(POLY_FT4));
         primitive++;
         *primitive = primitive[-1];
         setXY4(primitive, x + (width >> 1), y, (x + (width >> 1)) + ((width >> 1) - 4), y, x + (width >> 1), y + height,
                (x + (width >> 1)) + ((width >> 1) - 4), y + height);
-        GFX_AddPrim(1, 0x28);
+        GFX_AddPrim(1, sizeof(POLY_FT4));
     }
     primitive++;
     *primitive = primitive[-1];
@@ -77,7 +77,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
         primitive->y3 -= 4;
         primitive->v3 -= 4;
     }
-    GFX_AddPrim(1, 0x28);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
 
     texture_window    = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor   = (u8*)(texture_window + 1);
@@ -86,5 +86,5 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     texture_window->h = 256;
     texture_window->w = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
 }

@@ -22,5 +22,5 @@ MATCH void UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray) 
     SetLineF2(primitive);
     setRGB0(primitive, color, color, color);
     setXY2(primitive, x0, y0, x1, y1);
-    GFX_AddPrim(1u, 0x10u);
+    GFX_AddPrim(1u, sizeof(LINE_F2));
 }

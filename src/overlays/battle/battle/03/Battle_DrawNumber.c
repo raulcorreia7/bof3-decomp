@@ -21,7 +21,7 @@ MATCH void Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value) {
             setUV0(prim, (g_UiFormatBuffer[i] * 8) - 80, 208);
             setWH(prim, 8, 8);
             SetSprt(prim);
-            GFX_AddPrim(1, 0x14);
+            GFX_AddPrim(1, sizeof(SPRT));
         }
         x += 8;
     } while (g_UiFormatBuffer[++i] != 0);

@@ -74,7 +74,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     FIELD(s8, prim, 0x4u)  = 0x80;
     FIELD(s8, prim, 0x5u)  = 0x80;
     FIELD(s8, prim, 0x6u)  = 0x80;
-    GFX_AddPrim(2U, 0x10U);
+    GFX_AddPrim(2U, sizeof(LINE_F2));
     work_now     = g_Task;
     row_flags    = g_FishingRodRow->byte_03;
     span         = row_flags * 8;
@@ -105,7 +105,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
         FIELD(s8, prim, 0x4u)  = 0x80;
         FIELD(s8, prim, 0x5u)  = 0;
         FIELD(s8, prim, 0x6u)  = 0;
-        GFX_AddPrim(2U, 0x10U);
+        GFX_AddPrim(2U, sizeof(LINE_F2));
         if (marker_top >= 144) {
             marker_clamp = marker_top;
             if (marker_top >= 229) {

@@ -20,5 +20,5 @@ MATCH void func_801DD6D0(s16 x, s16 y, u8 kind, u8 level, u32 exp) {
     }
     line->y1 = y;
     setRGB0(line, 128, 0, 0);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(LINE_F2));
 }

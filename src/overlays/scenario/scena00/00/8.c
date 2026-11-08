@@ -140,7 +140,7 @@ MATCH void func_801F6E48(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x28);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, sizeof(POLY_FT4));
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;
@@ -165,7 +165,7 @@ MATCH void func_801F7134(s32 chapter_id) {
 
     tpage = getTPage(1, 2, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(g_Task->unk_29, 0xC);
+    GFX_AddPrim(g_Task->unk_29, sizeof(DR_MODE));
 
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
@@ -176,7 +176,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);
-    GFX_AddPrim(g_Task->unk_29, 0x14);
+    GFX_AddPrim(g_Task->unk_29, sizeof(SPRT));
 }
 
 MATCH void func_801F7264(void) {
@@ -897,7 +897,7 @@ MATCH void func_801F8BCC(void) {
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, 1);
     if (g_AreaDrawFlags != 0) {
-        GFX_AddPrim(3U, 0x28U);
+        GFX_AddPrim(3U, sizeof(POLY_FT4));
     }
 }
 
@@ -974,7 +974,7 @@ MATCH void func_801F8D90(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x28);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, sizeof(POLY_FT4));
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;

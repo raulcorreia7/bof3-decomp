@@ -14,7 +14,7 @@ MATCH void func_801984E8(void) {
     rect.h = 120;
     rect.y = (g_FrameBufferIndex * 240) + 80;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
-    GFX_AddPrim(5u, 0x18u);
+    GFX_AddPrim(5u, sizeof(DR_MOVE));
     func_801E0BD0();
     D_80143F22       = 0;
     g_GameStateIndex = GAME_REQUEST_IDLE;

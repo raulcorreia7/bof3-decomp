@@ -13,5 +13,5 @@ MATCH void func_801D99AC(s16 x, s16 y, u8 template_index) {
     *(u16*)&tile->h = D_801EAE52[template_index * 2];
     setRGB0(tile, SP_REF(u8, 0), SP_REF(u8, 1), SP_REF(u8, 2));
     SetSemiTrans(tile, 1);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 }

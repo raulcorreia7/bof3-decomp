@@ -3,7 +3,7 @@ MATCH void Scene_DrawRedGradient(s8 red) {
     POLY_G4* prim;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x380, 0x100) & 0xFFFF, NULL);
-    GFX_AddPrim(7U, 0xCU);
+    GFX_AddPrim(7U, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 0);
@@ -12,7 +12,7 @@ MATCH void Scene_DrawRedGradient(s8 red) {
     setRGB1(prim, 0, 0, 0);
     setRGB2(prim, red, 0, 0);
     setRGB3(prim, red, 0, 0);
-    GFX_AddPrim(7U, 0x24U);
+    GFX_AddPrim(7U, sizeof(POLY_G4));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 0);
@@ -21,5 +21,5 @@ MATCH void Scene_DrawRedGradient(s8 red) {
     setRGB1(prim, red, 0, 0);
     setRGB2(prim, 0, 0, 0);
     setRGB3(prim, 0, 0, 0);
-    GFX_AddPrim(7U, 0x24U);
+    GFX_AddPrim(7U, sizeof(POLY_G4));
 }

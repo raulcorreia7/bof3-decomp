@@ -29,5 +29,5 @@ MATCH void func_801F2FC4(const void* sprite) {
     primitive->tpage = GetTPage(0, 1, 704, 256);
     setRGB0(primitive, VOL(u8, work->flags_03), (VOL(u8, work->flags_03) >> 2) * 3, VOL(u8, work->flags_03) >> 1);
 
-    Area_AddCellPrim(VOL(s32, work->origin.x), VOL(s32, work->origin.y), 3, 0x28);
+    Area_AddCellPrim(VOL(s32, work->origin.x), VOL(s32, work->origin.y), 3, sizeof(POLY_FT4));
 }

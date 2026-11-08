@@ -16,5 +16,5 @@ MATCH void func_801DA328(s16 x, s16 y, u8 u, u8 v, u8 clut_x) {
     sprite->u0 = u;
     setXY0(sprite, x, y);
     SetSprt(sprite);
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

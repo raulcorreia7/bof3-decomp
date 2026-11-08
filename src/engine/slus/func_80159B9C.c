@@ -28,7 +28,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     tile->h = h + 1;
     setRGB0(tile, 0, 0, 0);
     SetSemiTrans(tile, 1);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
@@ -36,7 +36,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     rect->y = 240;
     setWH(rect, 16, 16);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), rect);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
 
     poly = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(poly);
@@ -51,7 +51,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     setXY4(poly, x1, y1, x2, y1, x1, y2, x2, y2);
     setUV4(poly, 0, 0, w, 0, 0, h, w, h);
     SetSemiTrans(poly, 1);
-    GFX_AddPrim(1, 0x34);
+    GFX_AddPrim(1, sizeof(POLY_GT4));
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
@@ -59,7 +59,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     rect->y = 0;
     setWH(rect, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 320, 0), rect);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
 
     line = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line);
@@ -67,7 +67,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     y1 = y - 1;
     setRGB0(line, 200, 200, 200);
     setXY4(line, x1, y1, x2 + 1, y1, x2 + 1, y2 + 1, x1, y2 + 1);
-    GFX_AddPrim(1, 0x1C);
+    GFX_AddPrim(1, sizeof(LINE_F4));
 
     UI_DrawLine(x1, y1, x1, y2 + 1, 0xC8);
     x3 = x - 2;

@@ -11,5 +11,5 @@ MATCH void GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 bl
     setXY2(line, x0, y0, x1, y1);
     setRGB0(line, r, g, b);
     SetSemiTrans(line, 1);
-    GFX_AddPrim(1U, 0x10U);
+    GFX_AddPrim(1U, sizeof(LINE_F2));
 }

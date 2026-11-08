@@ -69,7 +69,7 @@ MATCH void UI_DrawChoicePrompt(void) { /* func_801D11E4 */
 
     if (g_AreaDrawFlags != 0u && LOBU(g_UiPopupRequest) != 0u) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 832, 256), 0);
-        GFX_AddPrim(2, 12);
+        GFX_AddPrim(2, sizeof(DR_MODE));
         GFX_BuildGlyphPrimitive(192, 4, 10, 2, 0);
     }
 }
@@ -91,13 +91,13 @@ MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
 
     tpage = getTPage(1, 1, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(2, 12);
+    GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(12, 200, 8, 2, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);
 
     tpage = getTPage(1, 1, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(2, 12);
+    GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(12, 212, 19, 2, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);
     primitive = GFX_BuildGlyphPrimitive(172, 212, 9, 2, selected);
@@ -128,7 +128,7 @@ MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D1
     if (selected != 0u) {
         tpage = getTPage(1, 2, 576, 256);
         GFX_SET_DRAW_MODE(tpage);
-        GFX_AddPrim(2, 12);
+        GFX_AddPrim(2, sizeof(DR_MODE));
         primitive = GFX_BuildGlyphPrimitive(x, y, 15, 2, 1);
         GFX_SetPrimitiveAlpha(primitive, alpha);
         primitive = GFX_BuildGlyphPrimitive((s16)(x + 224), y, 16, 2, 1);
@@ -137,7 +137,7 @@ MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D1
 
     tpage = getTPage(1, 1, 576, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(2, 12);
+    GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(x, y, 4, 2, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);
     primitive = GFX_BuildGlyphPrimitive((s16)(x + 224), y, 5, 2, selected);
@@ -154,7 +154,7 @@ MATCH void UI_DrawIconPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D16
 
     tpage = getTPage(1, 1, 704, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(2, 12);
+    GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(x, y, 2, 2, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);
     primitive = GFX_BuildGlyphPrimitive((s16)(x + 240), (s16)(y + 112), 3, 2, selected);
@@ -181,7 +181,7 @@ MATCH u8* GFX_BuildGlyphPrimitive(s32 x, s32 y, s32 glyph, s32 palette, u8 flags
     setUV0(sprite, *(u16*)(((u8*)D_801D1C6C + geom)), *(u16*)(((u8*)&D_801D1C6E + geom)));
     setWH(sprite, *(u16*)(((u8*)&D_801D1C70 + geom)), *(u16*)(((u8*)&D_801D1C72 + geom)));
     sprite->clut = (*(u16*)(((u8*)&D_801D1C74 + geom)) << 6);
-    GFX_AddPrim((u8)palette, 20);
+    GFX_AddPrim((u8)palette, sizeof(SPRT));
     return primitive;
 }
 
@@ -276,7 +276,7 @@ MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
                                       : ((marker & 0x3FF) >> 6) | 0x80;
         GFX_SET_DRAW_MODE(flags);
 
-        GFX_AddPrim(2, 12);
+        GFX_AddPrim(2, sizeof(DR_MODE));
         primitive    = GFX_BuildGlyphPrimitive((s16)x, 24, (u8)(i + 11), 2, 0);
         primitive[4] = *alpha;
         primitive[5] = *alpha;

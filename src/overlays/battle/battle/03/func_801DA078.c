@@ -20,5 +20,5 @@ MATCH void func_801DA078(s32 x, s32 y, s32 u_index) {
     sprite->u0 = texture_u;
     setXY0(sprite, x, y);
     SetSprt(sprite);
-    GFX_AddPrim(1, 0x14);
+    GFX_AddPrim(1, sizeof(SPRT));
 }

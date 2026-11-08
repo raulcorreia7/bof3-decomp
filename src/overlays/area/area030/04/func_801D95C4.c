@@ -28,7 +28,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     prim->y2 = y;
     setRGB0(prim, r, g, b);
     SetSemiTrans(prim, 1);
-    GFX_AddPrim(2, 0x18);
+    GFX_AddPrim(2, sizeof(LINE_F3));
 
     func_801E0C80(shade != 0 ? 6 : 7, 2);
     prim = (LINE_F3*)g_GfxPrimCursor;
@@ -39,7 +39,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     prim->y2 = (prim->y1 = y);
     setRGB0(prim, r, g, b);
     SetSemiTrans(prim, 1);
-    GFX_AddPrim(2, 0x18);
+    GFX_AddPrim(2, sizeof(LINE_F3));
 }
 #else
 INCLUDE_ASM(func_801D95C4);

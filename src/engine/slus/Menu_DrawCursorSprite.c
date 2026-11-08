@@ -7,7 +7,7 @@ MATCH void Menu_DrawCursorSprite(u16 x, u16 y, s32 unused) {
     SPRT* sprite;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 0x3C0, 0), (RECT*)0);
-    GFX_AddPrim(0, 0xC);
+    GFX_AddPrim(0, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x - 22, y + 2);
@@ -15,5 +15,5 @@ MATCH void Menu_DrawCursorSprite(u16 x, u16 y, s32 unused) {
     setWH(sprite, 24, 12);
     setRGB0(sprite, 128, 128, 128);
     sprite->clut = 0x7802;
-    GFX_AddPrim(0, 0x14);
+    GFX_AddPrim(0, sizeof(SPRT));
 }

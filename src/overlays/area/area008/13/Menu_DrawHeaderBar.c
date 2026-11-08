@@ -31,7 +31,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     setWH(texture_window, 16, 16);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
-    GFX_AddPrim(1u, 0x0Cu);
+    GFX_AddPrim(1u, sizeof(DR_MODE));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -64,7 +64,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     width_plus_1    = (s32)(width + 1);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, 0x28u);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     /* FAKE: pin signed shift matches original sra computation. */
     r_s1 = (s32)(u16)width_plus_1;
@@ -83,7 +83,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, 481);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, 0x28u);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -101,7 +101,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, 481);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, 0x28u);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -130,7 +130,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, 481);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, 0x28u);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     texture_window    = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor   = (u8*)(texture_window + 1);
@@ -139,7 +139,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     setWH(texture_window, 256, 256);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
-    GFX_AddPrim(1u, 0x0Cu);
+    GFX_AddPrim(1u, sizeof(DR_MODE));
     func_801AEBA0((s16)r_s8, (s16)((s32)(u16)y + 2), (s16)(width - 4), (s16)(height - 4), 0);
 }
 #else

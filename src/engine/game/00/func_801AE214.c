@@ -28,5 +28,5 @@ MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode)
     line->x1 = (x + delta);
     line->y1 = y;
     line->y0 = y;
-    GFX_AddPrim(1U, 0x10U);
+    GFX_AddPrim(1U, sizeof(LINE_F2));
 }

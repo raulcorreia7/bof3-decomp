@@ -33,5 +33,5 @@ MATCH void func_801D799C(s16 x, s16 y, u8 height, u8 style) {
     prim->v2   = prim->v0 + D_801E218C[style].v_span;
     prim->v3   = prim->v2;
     setRGB0(prim, 128, 128, 128);
-    GFX_AddPrim(1, 0x28);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
 }

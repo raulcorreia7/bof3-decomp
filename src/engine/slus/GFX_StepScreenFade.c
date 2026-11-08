@@ -13,7 +13,7 @@ MATCH s32 GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, 
     tpage = GetTPage(1, blend_mode, 320, 0);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)0);
-    GFX_AddPrim(order & BYTE_MASK, 0xC);
+    GFX_AddPrim(order & BYTE_MASK, sizeof(DR_MODE));
     sprite = g_GfxPrimCursor;
     SetTile((TILE*)sprite);
     mask                  = semi_trans & BYTE_MASK;
@@ -26,7 +26,7 @@ MATCH s32 GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, 
     sprite[0x5]           = shade;
     sprite[0x4]           = shade;
     SetSemiTrans(sprite, mask);
-    GFX_AddPrim(order & BYTE_MASK, 0x10);
+    GFX_AddPrim(order & BYTE_MASK, sizeof(TILE));
     sum = *level + delta;
     {
         s32 result = (((u32)sum << 16) >> 31);

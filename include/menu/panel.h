@@ -281,7 +281,7 @@ static inline void MenuDrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 co
     icon->g0   = color;
     icon->r0   = color;
     SetSemiTrans(icon, 0);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(SPRT_8));
 }
 
 #endif

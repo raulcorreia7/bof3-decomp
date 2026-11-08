@@ -4,7 +4,7 @@ MATCH void func_801F2D18(void) {
     POLY_G4* prim;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(2, 2, 0x140, 0x140) & 0xFFFF, NULL);
-    GFX_AddPrim(6U, 0xCU);
+    GFX_AddPrim(6U, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     prim->r0 = prim->r1 = 0;
@@ -15,7 +15,7 @@ MATCH void func_801F2D18(void) {
     prim->b2 = prim->b3 = 0;
     setXY4(prim, 0, 0, 0x140, 0, 0, 0x140, 0x140, 0x140);
     SetSemiTrans((POLY_G4*)g_GfxPrimCursor, 1);
-    GFX_AddPrim(2U, 0x24U);
+    GFX_AddPrim(2U, sizeof(POLY_G4));
     if (g_ScriptVars[0] == 1) {
         func_80196070();
     }

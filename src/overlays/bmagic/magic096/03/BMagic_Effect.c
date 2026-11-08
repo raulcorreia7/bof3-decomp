@@ -91,7 +91,7 @@ MATCH void BMagic_DrawGlowRing(void) {
     s32      i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, 0xC);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     GLOW_RING_INNER  = g_Task->timer * 16 + 16;
     GLOW_RING_OUTER  = g_Task->timer * 16 + 0x80;
     GLOW_RING_RED    = g_Task->timer * 9;
@@ -121,7 +121,7 @@ MATCH void BMagic_DrawGlowRing(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_RED);
         setRGB3(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_RED);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, 0x24);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
 

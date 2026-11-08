@@ -15,5 +15,5 @@ MATCH void func_801AE984(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 dimm
     setXY0(sprite, (sprite_x + 1), sprite_y);
     setUV0(sprite, (((texture_index & BYTE_MASK) * 8) - 56), 248);
     sprite->clut = GetClut(192, 480);
-    GFX_AddPrim(1U, 0x10U);
+    GFX_AddPrim(1U, sizeof(SPRT_8));
 }

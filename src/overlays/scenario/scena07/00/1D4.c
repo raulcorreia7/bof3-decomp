@@ -297,14 +297,14 @@ MATCH void func_801F8804(u8 shade) {
     TILE* tile;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(1, 0x0C);
+    GFX_AddPrim(1, sizeof(DR_MODE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, 0, 0);
     setWH(tile, 320, 240);
     setRGB0(tile, shade, shade, shade);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(1, sizeof(TILE));
 }
 
 /* needs: table record type. */

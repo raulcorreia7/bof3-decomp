@@ -40,7 +40,7 @@ MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
                 gte_ldv3c(&verts[1]);
                 func_80155560(rec[4].raw, prim, 1);
                 gte_rtpt();
-                GFX_AddPrim((rec[4].raw & 0x40000000) ? 7 : 4, 0x28);
+                GFX_AddPrim((rec[4].raw & 0x40000000) ? 7 : 4, sizeof(POLY_FT4));
                 gte_stsxy3(&prim->x1, &prim->x2, &prim->x3);
             }
             n += 5;

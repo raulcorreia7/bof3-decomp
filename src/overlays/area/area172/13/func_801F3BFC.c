@@ -50,5 +50,5 @@ MATCH void func_801F3BFC(const void* spin) {
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0, 0, 0);
 
-    GFX_AddPrim(1u, 0x1Cu);
+    GFX_AddPrim(1u, sizeof(POLY_G3));
 }

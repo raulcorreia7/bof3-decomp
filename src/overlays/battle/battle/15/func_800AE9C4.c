@@ -47,7 +47,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
         }
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, NULL);
-    GFX_AddPrim(2, 0xC);
+    GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     panel = (BattlePanelGeometry*)BATTLE_WORK;
@@ -66,7 +66,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((BattlePanelGeometry*)BATTLE_WORK)->height + ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, 1, 1, 1);
-    GFX_AddPrim(2, 0x28);
+    GFX_AddPrim(2, sizeof(POLY_FT4));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     panel2 = (BattlePanelGeometry*)BATTLE_WORK;
@@ -84,5 +84,5 @@ MATCH void func_800AE9C4(u8 texture_index) {
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((BattlePanelGeometry*)BATTLE_WORK)->height + ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, 128, 128, 128);
-    GFX_AddPrim(2, 0x28);
+    GFX_AddPrim(2, sizeof(POLY_FT4));
 }

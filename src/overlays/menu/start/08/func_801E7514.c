@@ -18,5 +18,5 @@ MATCH void func_801E7514(s32 x, s32 y, s32 icon, s32 palette) {
     setUV0(sprite, *(u16*)((u8*)D_801ED1FC + geom), *(u16*)((u8*)D_801ED1FE + geom));
     setWH(sprite, *(u16*)((u8*)D_801ED200 + geom), *(u16*)((u8*)D_801ED202 + geom));
     sprite->clut = (*(u16*)((u8*)D_801ED204 + geom) << 6);
-    GFX_AddPrim((u8)palette, 20);
+    GFX_AddPrim((u8)palette, sizeof(SPRT));
 }

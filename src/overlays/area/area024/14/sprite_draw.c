@@ -424,7 +424,7 @@ MATCH void func_801F2DF8(const void* sprite) {
     primitive->tpage = GetTPage(0, 1, 704, 256);
     setRGB0(primitive, VOL(u8, work->flags_03), VOL(u8, work->flags_03), VOL(u8, work->flags_03));
 
-    Area_AddCellPrim(VOL(s32, work->origin.x), VOL(s32, work->origin.y), 2, 0x28);
+    Area_AddCellPrim(VOL(s32, work->origin.x), VOL(s32, work->origin.y), 2, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F2FD4(void* sprite) {
@@ -723,7 +723,7 @@ MATCH void func_801F3944(const void* spin) {
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0, 0, 0);
 
-    GFX_AddPrim(1u, 0x1Cu);
+    GFX_AddPrim(1u, sizeof(POLY_G3));
 }
 
 MATCH void func_801F3BE4(void* spin) {
@@ -868,7 +868,7 @@ MATCH s32 func_801F3E48(u8 shade) {
 
         if (func_801F4158((DVECTOR*)&prim->x0, (DVECTOR*)&prim->x1, (DVECTOR*)&prim->x2) > 0 ||
             func_801F4158((DVECTOR*)&prim->x2, (DVECTOR*)&prim->x3, (DVECTOR*)&prim->x0) > 0) {
-            GFX_AddPrim(1u, 0x1Cu);
+            GFX_AddPrim(1u, sizeof(LINE_F4));
         }
         i++;
     }

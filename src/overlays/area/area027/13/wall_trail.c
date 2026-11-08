@@ -372,7 +372,7 @@ MATCH void func_801F2F0C(const void* arg0) {
         red = MIN(red, 0xFFu);
         setRGB1(primitive, red, 0u, 0u);
 
-        GFX_AddPrim(1u, 0x14u);
+        GFX_AddPrim(1u, sizeof(LINE_G2));
         i += 1u;
     } while (i < 31u);
 }
@@ -459,7 +459,7 @@ MATCH void func_801F33A8(void) {
     u = TO_COORD(70) + COORD_HALF;
     v = TO_COORD(71) + COORD_HALF;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 320, 256), 0);
-    Area_AddCellPrim(u, v, -1, 0xC);
+    Area_AddCellPrim(u, v, -1, sizeof(DR_MODE));
     point[0] = ((u >> 9) - 0x4000);
     point[1] = ((v >> 9) - 0x4000);
     point[2] = 0;

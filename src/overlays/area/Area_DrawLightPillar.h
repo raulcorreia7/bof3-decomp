@@ -37,7 +37,7 @@ MATCH void Area_DrawLightPillar(s32* pos) {
         Area_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
-        Area_AddCellPrim(point[0], point[1], 0, 0xC);
+        Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -58,8 +58,8 @@ MATCH void Area_DrawLightPillar(s32* pos) {
         }
         setRGB2(prim, shade, shade, shade);
         setRGB3(prim, shade, shade, shade);
-        Area_AddCellPrim(point[0], point[1], 0, 0x24);
+        Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_G4));
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0), 0);
-        Area_AddCellPrim(point[0], point[1], 0, 0xC);
+        Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
     }
 }

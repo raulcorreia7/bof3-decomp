@@ -38,5 +38,5 @@ MATCH void Fishing_DrawFishArrow(s16 x, s16 y, s8 flip, u8 ot_index) {
     primitive->v2 = primitive->v0 + 8;
     primitive->v3 = primitive->v2;
 
-    GFX_AddPrim(ot_index & BYTE_MASK, 0x28);
+    GFX_AddPrim(ot_index & BYTE_MASK, sizeof(POLY_FT4));
 }

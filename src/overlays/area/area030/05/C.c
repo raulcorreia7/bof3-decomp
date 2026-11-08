@@ -326,7 +326,7 @@ MATCH void func_800F5E44(void) {
     ((RECT*)cursor)->w = 32;
     tpage              = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)cursor);
-    GFX_AddPrim(7, 0xC);
+    GFX_AddPrim(7, sizeof(DR_MODE));
     for (i = 0; i < 2; i++) {
         s32 quad_tpage;
 
@@ -345,7 +345,7 @@ MATCH void func_800F5E44(void) {
         setRGB0(((POLY_FT4*)cursor), 0x40, 0x40, 0x40);
         ((POLY_FT4*)cursor)->x2 = ((POLY_FT4*)cursor)->x0;
         ((POLY_FT4*)cursor)->x3 = ((POLY_FT4*)cursor)->x1;
-        GFX_AddPrim(7, 0x28);
+        GFX_AddPrim(7, sizeof(POLY_FT4));
     }
     cursor             = g_GfxPrimCursor;
     g_GfxPrimCursor    = cursor + 8;
@@ -355,7 +355,7 @@ MATCH void func_800F5E44(void) {
     ((RECT*)cursor)->w = 256;
     tpage              = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)cursor);
-    GFX_AddPrim(7, 0xC);
+    GFX_AddPrim(7, sizeof(DR_MODE));
 }
 
 MATCH void func_800F606C(s32 arg0) {
