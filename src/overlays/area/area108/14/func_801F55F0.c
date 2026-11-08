@@ -1,6 +1,6 @@
 #include "area108_14.h"
 
-void func_801F55F0(u8 raise) {
+MATCH void func_801F55F0(u8 raise) {
     u8  i;
     s16 x;
     s16 y;

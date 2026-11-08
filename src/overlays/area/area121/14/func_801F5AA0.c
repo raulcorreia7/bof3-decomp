@@ -1,6 +1,6 @@
 #include "area121_14.h"
 
-void func_801F5AA0(s16 x, s16 y, u8 row) {
+MATCH void func_801F5AA0(s16 x, s16 y, u8 row) {
     SPRT* sprite;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 768, 256), NULL);
