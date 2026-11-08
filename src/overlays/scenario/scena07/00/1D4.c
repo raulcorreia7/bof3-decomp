@@ -286,14 +286,14 @@ INCLUDE_ASM(func_801F83D0);
 INCLUDE_ASM(func_801F8478);
 
 MATCH u8 func_801F85D8(void) {
-    u8  active;
-    u8* rec;
-    s32 i;
-    u8  buf[0x20];
+    u8     active;
+    u8*    rec;
+    s32    i;
+    MATRIX matrix;
 
     active = 0;
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(buf);
+    Area_SetCameraMatrix(&matrix);
     rec = MEM_PTR(u8, AREA_WORK);
     i   = 0;
     do {
