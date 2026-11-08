@@ -13,7 +13,7 @@ MATCH void func_800AB570(s32 battler_index) {
     if ((rand() % 20) < (s8)value && g_Battle.living_party_count != 1) {
         result = func_800AB68C(index);
     } else {
-        result = Battle_FindNextTarget(RANDOM_MASK(7) + 3);
+        result = Battle_TargetNext(RANDOM_MASK(7) + 3);
     }
     g_Battle.target_selector                  = result;
     g_Game.members[index].u.turn.command.type = BATTLE_COMMAND_ATTACK;

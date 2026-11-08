@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801DB5CC */
-MATCH u32 Battle_FindNextTarget(u32 start_slot) {
+MATCH u32 Battle_TargetNext(u32 start_slot) {
     u8 i;
     u8 slot;
 

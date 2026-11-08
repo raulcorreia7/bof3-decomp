@@ -4,7 +4,7 @@
  * and dispatches the entry the sub-step byte 0x801462E2 selects.
  */
 /* func_801D17C4 */
-MATCH void Battle_UpdateEntrance(void) {
+MATCH void Battle_DispatchEntrance(void) {
     BattleEntrances handlers;
 
     handlers = g_BattleEntrances;

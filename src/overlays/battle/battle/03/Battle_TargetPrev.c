@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801DB6F4 */
-MATCH u8 Battle_FindPrevTarget(u8 slot) {
+MATCH u8 Battle_TargetPrev(u8 slot) {
     s8 index;
     s8 wrap;
     u8 candidate;

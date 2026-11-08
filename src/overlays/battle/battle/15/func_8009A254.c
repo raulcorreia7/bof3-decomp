@@ -17,7 +17,7 @@ MATCH void func_8009A254(void) {
     input = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     if (input & (PADLup | PADLdown)) {
         if (Item_GetFlags(slot_data >> 8, slot_data & BYTE_MASK) & 0x80) {
-            g_BattleActorTurn->command.target = Battle_FindNextTarget(3);
+            g_BattleActorTurn->command.target = Battle_TargetNext(3);
             {
                 u8* state = (u8*)&g_Battle.ui_state;
 
@@ -32,7 +32,7 @@ MATCH void func_8009A254(void) {
             g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1));
         } else {
             g_BattleActorTurn->command.target =
-                Battle_FindNextTarget(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
+                Battle_TargetNext(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
@@ -41,7 +41,7 @@ MATCH void func_8009A254(void) {
             g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1));
         } else {
             g_BattleActorTurn->command.target =
-                Battle_FindPrevTarget(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
+                Battle_TargetPrev(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }

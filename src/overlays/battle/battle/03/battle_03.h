@@ -600,12 +600,12 @@ void         func_800C2FF4(void);
 /* func_801D1014 */
 void         Battle_Update(void);
 /* func_801D112C */
-void         Battle_UpdateMode(void);
+void         Battle_DispatchMode(void);
 /* func_801D11D8 */
-void         Battle_UpdateStep(void);
+void         Battle_DispatchStep(void);
 extern void  func_801D1228(void);
 /* func_801D17C4 */
-void         Battle_UpdateEntrance(void);
+void         Battle_DispatchEntrance(void);
 extern void  Battle_OpenPanels(void);
 /* func_801D1AB4 */
 void         Battle_WaitForUI(void);

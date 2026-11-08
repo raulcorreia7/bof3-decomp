@@ -837,9 +837,9 @@ void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_st
 void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 /* func_801DB5CC */
-u8   Battle_FindNextTarget(s32 start_slot);
+u8   Battle_TargetNext(s32 start_slot);
 /* func_801DB6F4 */
-u8   Battle_FindPrevTarget(u8 slot);
+u8   Battle_TargetPrev(u8 slot);
 s32  func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
 /* The panel scale helper lives in battle/battle/03 (src/overlays/battle/battle/03/
  * func_801DE0AC.c). Its retail body multiplies $a0 by $a1 and reads no other

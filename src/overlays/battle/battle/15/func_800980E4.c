@@ -4,7 +4,7 @@ MATCH void func_800980E4(void) {
     u8  result;
     u8* game_ram;
 
-    result                            = Battle_FindNextTarget(3);
+    result                            = Battle_TargetNext(3);
     g_BattleActorTurn->command.target = result;
 
     Battle_SetTextActionName(2, 0);

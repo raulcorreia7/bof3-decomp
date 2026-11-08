@@ -22,7 +22,7 @@ MATCH void func_800979E4(void) {
     entry   = Party_GetAbilities(message[0], g_MenuPanelTasks[16].unk_0B, 1);
     if ((D_801CA718[entry[g_MenuPanelTasks[16].unk_0C] * 0x14] & ABILITY_TARGET_BOTH_SIDES) != 0u &&
         (trigger & (PADLup | PADLdown)) != 0) {
-        g_BattleActorTurn->command.target = Battle_FindNextTarget(3);
+        g_BattleActorTurn->command.target = Battle_TargetNext(3);
         *(u8*)&g_Battle.ui_state -= 1u;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         return;
@@ -32,7 +32,7 @@ MATCH void func_800979E4(void) {
             g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1));
         } else {
             g_BattleActorTurn->command.target =
-                Battle_FindNextTarget(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
+                Battle_TargetNext(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
@@ -41,7 +41,7 @@ MATCH void func_800979E4(void) {
             g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1));
         } else {
             g_BattleActorTurn->command.target =
-                Battle_FindPrevTarget(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
+                Battle_TargetPrev(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }

@@ -32,9 +32,9 @@ g_BattleEffectStage3Funcs = { addr = 0x801D0ED4, source = "Battle effect handler
 g_BattlePanelFuncs = { addr = 0x801D0F80, source = "Battle panel update handlers." }
 g_BattlePanelTaskForwarders = { addr = 0x801D0FEC, source = "Forwarders that hand a battle panel task its arguments." }
 Battle_Update = { addr = 0x801D1014, type = "func", source = "Runs one frame of battle." }
-Battle_UpdateMode = { addr = 0x801D112C, type = "func", source = "Runs the current battle mode." }
-Battle_UpdateStep = { addr = 0x801D11D8, type = "func", source = "Runs the current battle step." }
-Battle_UpdateEntrance = { addr = 0x801D17C4, type = "func", source = "Runs the current battle entrance step." }
+Battle_DispatchMode = { addr = 0x801D112C, type = "func", source = "Runs the current battle mode." }
+Battle_DispatchStep = { addr = 0x801D11D8, type = "func", source = "Runs the current battle step." }
+Battle_DispatchEntrance = { addr = 0x801D17C4, type = "func", source = "Runs the current battle entrance step." }
 Battle_OpenPanels = { addr = 0x801D1828, type = "func", source = "Reserves battle stage panels for active battlers." }
 Battle_WaitForUI = { addr = 0x801D1AB4, type = "func", source = "Holds the battle entrance until the UI is ready." }
 Battle_InitPanels = { addr = 0x801D1AE8, type = "func", source = "Sets the battle panel widths." }
@@ -45,8 +45,8 @@ Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the
 Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws the 0x4B-pixel name panel of enemy slot minus 3 at (x, y) in the window style colour, with the enemy name text when func_801DA69C allows it and an icon in place when its unk_7F is 1." }
 Battle_DrawNumber = { addr = 0x801D9684, type = "func", source = "Draws a number with digit sprites." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, type = "func", source = "Tells whether a battler slot can not be selected." }
-Battle_FindNextTarget = { addr = 0x801DB5CC, type = "func", source = "Finds a selectable battler slot at or after the start, wrapping around." }
-Battle_FindPrevTarget = { addr = 0x801DB6F4, type = "func", source = "Finds a selectable battler slot at or before the start, wrapping around." }
+Battle_TargetNext = { addr = 0x801DB5CC, type = "func", source = "Finds a selectable battler slot at or after the start, wrapping around." }
+Battle_TargetPrev = { addr = 0x801DB6F4, type = "func", source = "Finds a selectable battler slot at or before the start, wrapping around." }
 Battle_ApplyDamage = { addr = 0x801DBB78, type = "func", source = "Applies one hit to a target." }
 Battle_CalcDamage = { addr = 0x801DC044, type = "func", source = "Calculates damage for one hit." }
 Battle_RollBaseDamage = { addr = 0x801DCAD8, type = "func", source = "Rolls the base damage of a hit from the attack value D_801EC30C minus the target defence, clamped at 0 and plus RANDOM_MASK(1); for an enemy attacker on a party target it adds a level-scaled bonus picked by s_BattleDamageBandDivisors, then passes the result through func_801DCD50." }
