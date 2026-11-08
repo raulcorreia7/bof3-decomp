@@ -54,10 +54,10 @@ MATCH void func_800AE9C4(u8 texture_index) {
            panel->origin.x + 1, panel->origin.y + (panel->height + 1), panel->origin.x + 0x31,
            panel->origin.y + (panel->height + 1));
     primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
-    primitive->clut  = GetClut(BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
+    setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The texture entry is read through the table symbol at every use: the retail
      * code materializes the table address again for each access. */
-    tex_offset       = texture_index * BATTLE_PANEL_TEX_STRIDE;
+    tex_offset = texture_index * BATTLE_PANEL_TEX_STRIDE;
     setUV4(primitive, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x,
@@ -73,7 +73,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
            panel2->origin.x, panel2->origin.y + panel2->height, panel2->origin.x + BATTLE_PANEL_WIDTH,
            panel2->origin.y + panel2->height);
     primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
-    primitive->clut  = GetClut(BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
+    setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The second texture block reads the work record again for its last row, the
      * way the retail code reloads the scratchpad work pointer there. */
     setUV4(primitive, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y,

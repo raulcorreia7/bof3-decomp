@@ -3104,9 +3104,12 @@ Actor_SetScreenBottom = { addr = 0x801F36D0, type = "func", source = "Sets the a
 Area_DrawHudSprite = { addr = 0x801F39D8, type = "func", source = "Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; Area_DrawHud calls it with ids 0 to 3 and the WorldMapMarker step." }
 Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
-Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "Spawns one to three actor records of random kind at the focus point and sets their distance." }
-Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Actor_SpawnFlock = { addr = 0x801F41BC, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F42F8, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
+Actor_Fly = { addr = 0x801F4528, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+g_FlockVelocity = { addr = 0x801F51B8, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F51C8, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
 
 ["emi/world00/area018/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3231,6 +3234,9 @@ Actor_FreePaletteFades = { addr = 0x801F35B4, type = "func", source = "Frees the
 Message_Clear = { addr = 0x801F36A0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 
 ["emi/world00/area033/13"]
+g_FlockVelocity = { addr = 0x801F501C, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F502C, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
+g_WorldCloudTexture = { addr = 0x801F503C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomIn = { addr = 0x801F3158, type = "func", source = "Centres the actor, grows the scale at offset 0x40 by 0x2000 each frame and counts the timer at byte 0x09 down; when it reaches 0 it clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
@@ -3246,7 +3252,8 @@ Actor_SetScreenBottom = { addr = 0x801F3604, type = "func", source = "Sets the a
 Area_DrawHudSprite = { addr = 0x801F390C, type = "func", source = "Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; Area_DrawHud calls it with ids 0 to 3 and the WorldMapMarker step." }
 Area_DrawHud = { addr = 0x801F3A34, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3E00, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
-Actor_SpawnRandomGroup = { addr = 0x801F40F0, type = "func", source = "Spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area033)." }
+Actor_SpawnFlock = { addr = 0x801F40F0, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F422C, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4674, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F469C, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
@@ -3297,6 +3304,9 @@ Message_SetAnswerMessage = { addr = 0x801F3D90, type = "func", source = "Stores 
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world01/area045/13"]
+g_FlockVelocity = { addr = 0x801F53F0, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F5400, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
+g_WorldCloudTexture = { addr = 0x801F5410, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomOut = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
@@ -3310,8 +3320,9 @@ Area_DrawHudSprite = { addr = 0x801F39D8, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudValue = { addr = 0x801F40C4, type = "func", source = "Draws HUD sprites 4 and 5 side by side at x, y and x + 0x80 with Area_DrawHudSprite and the value text at their corner, when any g_AreaDrawFlags bit of the sorted, negative depth or appended primitives is set." }
-Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "Spawns one to three actor records of random kind at the focus point and sets their distance." }
-Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Actor_SpawnFlock = { addr = 0x801F41BC, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F42F8, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
+Actor_Fly = { addr = 0x801F4528, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F4768, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
@@ -3404,6 +3415,9 @@ g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted act
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area065/13"]
+g_FlockVelocity = { addr = 0x801F532C, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F533C, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
+g_WorldCloudTexture = { addr = 0x801F534C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomIn = { addr = 0x801F325C, type = "func", source = "Centres the actor, grows the scale at offset 0x40 by 0x2000 each frame and counts the timer at byte 0x09 down; when it reaches 0 it clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
@@ -3419,8 +3433,9 @@ Area_DrawHudSprite = { addr = 0x801F3A10, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F3B38, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3F04, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudValue = { addr = 0x801F40FC, type = "func", source = "Draws HUD sprites 4 and 5 side by side at x, y and x + 0x80 with Area_DrawHudSprite and the value text at their corner, when any g_AreaDrawFlags bit of the sorted, negative depth or appended primitives is set." }
-Actor_SpawnRandomGroup = { addr = 0x801F41F4, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
-Actor_MoveByVelocity = { addr = 0x801F4560, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Actor_SpawnFlock = { addr = 0x801F41F4, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F4330, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
+Actor_Fly = { addr = 0x801F4560, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4778, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F47A0, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
@@ -3518,6 +3533,9 @@ Actor_FreePaletteFades = { addr = 0x801F36B4, type = "func", source = "Frees the
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area087/13"]
+g_FlockVelocity = { addr = 0x801F57EC, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F57FC, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
+g_WorldCloudTexture = { addr = 0x801F580C, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Actor_ZoomIn = { addr = 0x801F3258, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
@@ -3537,12 +3555,16 @@ Area_DrawHudSprite = { addr = 0x801F3A0C, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F3B34, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3F00, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudBanner = { addr = 0x801F40F8, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
-Actor_SpawnRandomGroup = { addr = 0x801F41EC, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
-Actor_MoveByVelocity = { addr = 0x801F4558, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Actor_SpawnFlock = { addr = 0x801F41EC, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F4328, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
+Actor_Fly = { addr = 0x801F4558, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4770, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F4798, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world02/area088/13"]
+g_FlockVelocity = { addr = 0x801F6258, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F6268, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
+g_WorldCloudTexture = { addr = 0x801F6278, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 AngleAverage12 = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
@@ -3564,8 +3586,9 @@ Area_DrawHudSprite = { addr = 0x801F453C, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F4664, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F4A30, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudBanner = { addr = 0x801F4C28, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
-Actor_SpawnRandomGroup = { addr = 0x801F4D1C, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
-Actor_MoveByVelocity = { addr = 0x801F5088, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Actor_SpawnFlock = { addr = 0x801F4D1C, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F4E58, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
+Actor_Fly = { addr = 0x801F5088, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F52A0, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F52C8, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
@@ -3697,6 +3720,7 @@ g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the mas
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world03/area115/13"]
+g_WorldCloudTexture = { addr = 0x801F5020, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Area_SlideActorDown = { addr = 0x801F3228, type = "func", source = "Centres the actor and moves its scale at +0x40 up by 0x2000 each frame while counting byte 0x09 down; at 0 clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
@@ -3716,8 +3740,8 @@ Area_DrawHudSprite = { addr = 0x801F39DC, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F3B04, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3ED0, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudBanner = { addr = 0x801F40C8, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
-Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
-Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Actor_SpawnFlock = { addr = 0x801F41BC, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_Fly = { addr = 0x801F4528, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F4768, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
@@ -3767,8 +3791,8 @@ Area_DrawHudSprite = { addr = 0x801F39F0, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F3B18, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3EE4, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudBanner = { addr = 0x801F40DC, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
-Actor_SpawnRandomGroup = { addr = 0x801F41D0, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
-Actor_MoveByVelocity = { addr = 0x801F453C, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Actor_SpawnFlock = { addr = 0x801F41D0, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_Fly = { addr = 0x801F453C, type = "func", source = "Flies the flock member by its velocity each frame and runs the area projection; frees it once header.flags bit 0x80 is set after it was seen clear (it has left the screen)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4754, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 Actor_FacingToward = { addr = 0x801F4F78, type = "func", source = "Returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)." }
 Game_RequestMenuOnInput = { addr = 0x801F5578, type = "func", source = "When the FIELD_INPUT_MENU button is pressed and GAME_FLAG_MENU_LOCK is clear: plays cue EMI_CUE_ID(1, 5), sets g_GameStateIndex to GAME_REQUEST_MENU, clears the actor step and returns 1; otherwise returns 0." }
@@ -3899,6 +3923,9 @@ Actor_PlaceAtFocus = { addr = 0x801F2EC4, type = "func", source = "Copies D_8014
 Message_SetAnswerMessage = { addr = 0x801F2CB0, type = "func", source = "Stores the message id the answer table D_801F3808 holds for the menu choice g_MessageChoice in g_MessageRequest." }
 
 ["emi/world03/area151/13"]
+g_FlockVelocity = { addr = 0x801F54E4, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F54F4, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
+g_WorldCloudTexture = { addr = 0x801F5504, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 WorldMap_StartScene = { addr = 0x801F2FD0, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x1D1, sets byte 0x29 to 5, clears bytes 0x2A and 0x5D to 0x5F and sets header.mode (byte 0x01) to 1." }
@@ -3916,11 +3943,15 @@ Area_DrawHudSprite = { addr = 0x801F3948, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F3A70, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3E3C, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudBanner = { addr = 0x801F4034, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
-Actor_SpawnRandomGroup = { addr = 0x801F4128, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
+Actor_SpawnFlock = { addr = 0x801F4128, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F4264, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
 Area_StepStreamSetDrawMode = { addr = 0x801F46AC, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F46D4, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world04/area152/13"]
+g_FlockVelocity = { addr = 0x801F4E10, source = "Velocity per facing of the world map flock (x, y), read by Actor_StartFlying." }
+g_FlockScript = { addr = 0x801F4E20, source = "Script and script slot per facing of the world map flock, two bytes each; read by Actor_StartFlying." }
+g_WorldCloudTexture = { addr = 0x801F4E30, source = "Texture window of the cloud layer per layer width: u origins, v origins, then cell sizes, 4 bytes each; read by World_UpdateClouds." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 WorldMap_StartScene = { addr = 0x801F2F24, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x1D1, sets byte 0x29 to 5, clears bytes 0x2A and 0x5D to 0x5F and sets header.mode (byte 0x01) to 1." }
@@ -3940,7 +3971,8 @@ Area_DrawHudSprite = { addr = 0x801F389C, type = "func", source = "Draws one spr
 Area_DrawHud = { addr = 0x801F39C4, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3D90, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Area_DrawHudBanner = { addr = 0x801F3F88, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
-Actor_SpawnRandomGroup = { addr = 0x801F407C, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
+Actor_SpawnFlock = { addr = 0x801F407C, type = "func", source = "Every 1024 frames, spawns a flock of up to three actors (type 0x16) at the focus point, 0x400 above the ground, with one random facing of four." }
+Actor_StartFlying = { addr = 0x801F41B8, type = "func", source = "Gives each flock member a velocity from its facing and backs it off along it so the flock enters from out of view, members 1 and 2 two cells to either side; selects the script for that facing. Step after Actor_SpawnFlock; Actor_Fly follows." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4600, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 World_UpdateClouds = { addr = 0x801F4628, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 

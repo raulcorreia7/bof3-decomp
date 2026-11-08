@@ -353,9 +353,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;
     for (i = 1; i <= 64; i++) {
-        prim = (POLY_G4*)g_GfxPrimCursor;
-        SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
+        prim             = GFX_BeginPolyG4(1);
         D_1F800014[0].vx = D_1F800014[1].vx;
         D_1F800014[0].vy = D_1F800014[1].vy;
         D_1F800014[1].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_OUTER);
@@ -394,9 +392,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;
     for (i = 1; i <= 64; i++) {
-        prim = (POLY_G4*)g_GfxPrimCursor;
-        SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
+        prim             = GFX_BeginPolyG4(1);
         D_1F800014[0].vx = D_1F800014[1].vx;
         D_1F800014[0].vy = D_1F800014[1].vy;
         D_1F800014[1].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_OUTER);

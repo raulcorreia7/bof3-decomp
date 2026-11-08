@@ -11,8 +11,7 @@ static inline void Screen_DrawTintLayer(u32 layer, s32 tpage) {
     tile->g0 = g_Task->tint.bytes.unk_5E;
     blue     = g_Task->tint.bytes.unk_5F;
     tile->w  = SCREEN_WIDTH;
-    tile->x0 = 0;
-    tile->y0 = 0;
+    setXY0(tile, 0, 0);
     tile->h  = SCREEN_HEIGHT;
     tile->b0 = blue;
     SetSemiTrans(tile, 1);

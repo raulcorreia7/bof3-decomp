@@ -23,10 +23,11 @@ extern u8       D_801F5772[];
 extern u8       D_801F5773[];
 extern Callback D_801F57E0[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-extern UPoint2D D_801F57EC[];
+/* D_801F57EC */
+extern UPoint2D g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
-extern u8       D_801F57FC[];
-extern u8       D_801F57FD[];
+/* D_801F57FC */
+extern u8       g_FlockScript[4][2];
 
 void func_801F34FC(void);
 /* func_801F35EC */
@@ -41,10 +42,11 @@ extern WorldMapMarker D_801F57C8[6];
 
 extern u16 D_801F55D8[9][16];
 extern u8  D_801F5718[28];
-extern u8  D_801F5814[2];
-extern u8  D_801F580C[4];
-extern u8  D_801F5810[4];
 extern u8  D_801F5719[]; /* the record-selector byte at +1 */
 extern u8  D_801F5728[]; /* the "Manillo" text at +0x10 */
+
+#include "overlays/area/World_UpdateCloudLayer.h"
+
+extern WorldCloudTexture g_WorldCloudTexture;
 
 #endif

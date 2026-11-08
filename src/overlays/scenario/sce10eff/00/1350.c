@@ -115,9 +115,7 @@ MATCH void func_801D240C(void) {
     GFX_AddPrim(2, sizeof(DR_MODE));
 
     do {
-        primitive = (POLY_G3*)g_GfxPrimCursor;
-        SetPolyG3(primitive);
-        SetSemiTrans(primitive, 1);
+        primitive = GFX_BeginPolyG3(1);
 
         setXY0(primitive, g_Task->origin.x, g_Task->origin.y);
         angle         = i << 9;

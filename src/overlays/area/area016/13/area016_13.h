@@ -11,7 +11,7 @@
 
 #define AREA_SCENE_RECORD    0xF
 
-/* Signed spawn offsets (func_801F42F8) as u16 words: 0x2000 and -0x2000. */
+/* Signed spawn offsets (Actor_StartFlying) as u16 words: 0x2000 and -0x2000. */
 #define SPAWN_OFFSET_FORWARD 0x2000u
 #define SPAWN_OFFSET_BACK    0xE000u
 
@@ -40,9 +40,10 @@ extern u8            D_801F513C[88];
 extern WorldMapMarker D_801F5194[6];
 #define AREA_HUD_MASK_TABLE D_801F5194
 extern Callback D_801F51AC[3];
-extern UPoint2D D_801F51B8[4];
-extern u8       D_801F51C8[8];
-extern u8       D_801F51C9[]; /* the second byte of each D_801F51C8 pair */
+/* D_801F51B8 */
+extern UPoint2D g_FlockVelocity[4];
+/* D_801F51C8 */
+extern u8       g_FlockScript[4][2];
 extern Callback D_801F51D0[2];
 extern u8       D_801F51D8[4];
 extern u8       D_801F51DC[4];
@@ -69,10 +70,11 @@ void func_801F3928(void);
 /* func_801F3B00 */
 void func_801F40C4(s16 x, s16 y);
 /* func_801F41BC */
-void Actor_SpawnRandomGroup(void);
-void func_801F42F8(void);
+void Actor_SpawnFlock(void);
+/* func_801F42F8 */
+void Actor_StartFlying(void);
 /* func_801F4528 */
-void Actor_MoveByVelocity(void);
+void Actor_Fly(void);
 void func_801F4610(void);
 void Area_StepStreamSetDrawMode(void);
 

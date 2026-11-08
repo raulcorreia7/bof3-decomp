@@ -25,10 +25,11 @@ extern u8       D_801F61DE[];
 extern u8       D_801F61DF[];
 extern Callback D_801F624C[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-extern UPoint2D D_801F6258[];
+/* D_801F6258 */
+extern UPoint2D g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
-extern u8       D_801F6268[];
-extern u8       D_801F6269[];
+/* D_801F6268 */
+extern u8       g_FlockScript[4][2];
 extern Callback D_801F6270[];
 
 void func_801F402C(void);
@@ -57,8 +58,9 @@ void func_801F2F28(u8* window);
 void func_801F3258(u8* window);
 
 extern u8 D_801F6171[];
-extern u8 D_801F6280[2];
-extern u8 D_801F6278[4];
-extern u8 D_801F627C[4];
+
+#include "overlays/area/World_UpdateCloudLayer.h"
+
+extern WorldCloudTexture g_WorldCloudTexture;
 
 #endif
