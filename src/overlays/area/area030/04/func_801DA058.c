@@ -13,8 +13,8 @@ MATCH void func_801DA058(void) {
         FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 + 1);
     }
     func_801E16DC();
-    func_801D9534(MENU_HEADER_X, (0x12 - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH,
+    func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH,
                   MENU_HEADER_HEIGHT, 0U);
-    UI_DrawText(0x1D, 0x15 - (FISHING_STATE->step_timer_09 * 8), 0, 0xFFU,
+    UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 0xFFU,
                 MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, FISHING_MSG_QUIT_PROMPT));
 }

@@ -9,4 +9,6 @@ extern EffectStepFuncs5 D_801EEC04;
 extern EffectStepFuncs4 D_801EEC18;
 extern u16              D_801EFE40[];
 
+extern Callback D_801EFE60[];
+
 #endif

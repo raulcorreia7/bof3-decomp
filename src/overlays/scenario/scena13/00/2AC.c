@@ -36,40 +36,16 @@ MATCH void func_801F6F24(void) {
     } else {
         g_Task->header.mode = 2;
     }
-    func_801F6FF8();
+    Screen_DrawTint();
     func_801F70DC();
 }
 
 MATCH void func_801F6FD0(void) {
-    func_801F6FF8();
+    Screen_DrawTint();
     func_801F70DC();
 }
 
-#define SCENA13_DRAW_TINT()                                                                    \
-    {                                                                                          \
-        TILE* tile;                                                                            \
-        u8    blue;                                                                            \
-                                                                                               \
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, 0x3C0, 0) & 0xFFFF, NULL); \
-        GFX_AddPrim(5U, 0xCU);                                                                 \
-        tile = (TILE*)g_GfxPrimCursor;                                                         \
-        SetTile(tile);                                                                         \
-        tile->r0 = g_Task->tint.bytes.unk_5D;                                                  \
-        tile->g0 = g_Task->tint.bytes.unk_5E;                                                  \
-        blue     = g_Task->tint.bytes.unk_5F;                                                  \
-        tile->w  = 0x140;                                                                      \
-        tile->x0 = 0;                                                                          \
-        tile->y0 = 0;                                                                          \
-        tile->h  = 0xF0;                                                                       \
-        tile->b0 = blue;                                                                       \
-        SetSemiTrans(tile, 1);                                                                 \
-        SetShadeTex(tile, 0);                                                                  \
-        GFX_AddPrim(5U, 0x10U);                                                                \
-    }
-
-MATCH void func_801F6FF8(void) {
-    SCENA13_DRAW_TINT();
-}
+#include "overlays/area/Screen_DrawTint.h"
 
 MATCH void func_801F70DC(void) {
     Actor* actor;
@@ -141,9 +117,8 @@ MATCH void func_801F7444(void) {
     func_801F7568();
 }
 
-MATCH void func_801F7484(void) {
-    SCENA13_DRAW_TINT();
-}
+#define SCREEN_TINT_FUNC func_801F7484
+#include "overlays/area/Screen_DrawTint.h"
 
 MATCH void func_801F7568(void) {
     Actor* work;

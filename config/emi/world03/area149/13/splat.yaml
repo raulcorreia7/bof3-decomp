@@ -13,7 +13,7 @@ segments:
       - [0xB4, c, func_801F2CB4]
       - [0xD4, c, func_801F2CD4]
       - [0x1AC, c, func_801F2DAC]
-      - [0x1E0, c, func_801F2DE0]
+      - [0x1E0, c, Screen_DrawTint]
       - [0x2C4, c, Actor_PlaceAtFocus]
       - [0x2FC, c, func_801F2EFC]
       - [0x340, c, func_801F2F40]

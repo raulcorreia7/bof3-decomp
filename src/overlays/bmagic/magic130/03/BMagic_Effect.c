@@ -42,7 +42,15 @@ MATCH void func_801EF1E0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF284);
+MATCH void func_801EF284(void) {
+    SYS_DISPATCH_BYTE(D_801EFA5C, g_Task->header.step);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35, NULL);
+    GFX_AddPrim(2, 0xC);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_801EF4D4();
+        func_801EF730();
+    }
+}
 
 MATCH void func_801EF354(void) {
     PartyBattler* task;
