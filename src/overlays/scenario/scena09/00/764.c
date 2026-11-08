@@ -501,7 +501,7 @@ MATCH s32 func_801FDB1C(void) {
 MATCH s32 func_801FDBA8(void) {
     if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
         SYS_SetFlag(g_SceneFlags, 0x3D);
-        SND_PlayCue(0x203);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
         return 1;
     }
 

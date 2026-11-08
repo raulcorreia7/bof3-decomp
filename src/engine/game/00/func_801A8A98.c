@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801A8A98(s32 candidate_x, s32 candidate_y) {
+MATCH bool func_801A8A98(s32 candidate_x, s32 candidate_y) {
     s32 value;
     u8* buf;
 

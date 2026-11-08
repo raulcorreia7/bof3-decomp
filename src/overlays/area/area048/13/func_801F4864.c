@@ -9,6 +9,6 @@ MATCH void func_801F4864(void) {
         if (*counter < 8U) {
             *counter += 1;
         }
-        SND_PlayCue(0x20DU);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0D));
     }
 }

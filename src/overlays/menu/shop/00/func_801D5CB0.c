@@ -7,7 +7,7 @@ MATCH void func_801D5CB0(void) {
     SAVE_AccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus == CARD_EVENT_OK || g_SaveCardStatus == CARD_EVENT_NEW) {
         if (func_801EF200() != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             g_SaveCardStatus = SAVE_STATUS_FORMAT_FAILED;
         } else {
             g_SaveCardStatus = SAVE_STATUS_FORMATTED;

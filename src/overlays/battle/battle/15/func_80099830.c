@@ -67,19 +67,19 @@ NON_MATCHING void func_80099830(void) {
         }
     }
     if (g_BattleListCursor != FIELD(u8, row_base, 0xBu)) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     choice = (u8*)D_801485A1;
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] =
         Message_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
     if (g_InputMasks[BATTLE_INPUT_CANCEL] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */
     }
     func_8009AAE8();
     if (g_InputMasks[BATTLE_INPUT_CONFIRM] & g_InputPressed) {
         if (choice != NULL) {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             func_8009A744();
         block_33:
             g_BattleListCursor = 0xFF;
@@ -88,7 +88,7 @@ NON_MATCHING void func_80099830(void) {
             g_Battle.ui_state -= 1;
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
     }
 }
 #else

@@ -282,7 +282,7 @@ MATCH void func_801F2C74(void) {
         dst += 0x26;
         i++;
     } while ((i & BYTE_MASK) < 3u);
-    SND_PlayCue(EMI_CUE_ID(2, 6));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
     g_Task->timer = 0x40;
     g_Task->header.mode++;
 }

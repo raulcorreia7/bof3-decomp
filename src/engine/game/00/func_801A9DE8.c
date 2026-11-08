@@ -203,7 +203,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
         }
         queue_cue:
             if (result != 0)
-                SND_PlayCue(EMI_CUE_ID(1, 3));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             return value;
         case ACTOR_SCRIPT_MOTION_WAIT:
             state->index_0A--;

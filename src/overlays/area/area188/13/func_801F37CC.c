@@ -14,7 +14,7 @@ MATCH void func_801F37CC(void) {
     func_801F3ADC(&g_Task->unk_18, &g_Task->pos.x, 0x40);
     if (*g_ScriptVars == 3) {
         if (g_Task->timer == 0x10) {
-            SND_PlayCue(EMI_CUE_ID(2, 0x16));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x16));
         }
         mode          = g_Task->timer - 1;
         g_Task->timer = mode;

@@ -17,7 +17,7 @@ extern Callback D_8011819C[];
 extern Callback D_801181AC[];
 extern Callback D_801181B4[];
 
-s32  func_80117410();
+u8   func_80117410();
 void func_80117900(void);
 
 void func_801172D0(void);

@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-MATCH s32 func_801D70EC(void) {
+MATCH bool func_801D70EC(void) {
     s32 record;
 
     record                            = g_CharSlot[g_PartyFieldOrder[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]];

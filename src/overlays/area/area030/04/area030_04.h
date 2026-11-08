@@ -750,7 +750,7 @@ void func_801E01DC(void);
 void func_801E023C(void);
 /* func_801E026C */
 void Fishing_FishStaminaAdd(s8 delta);
-s32  func_801E02D4(u8 current_byte, u8 target_byte);
+bool func_801E02D4(u8 current_byte, u8 target_byte);
 void func_801E0394(void);
 void func_801E03F8(void);
 /* func_801E0680 */
@@ -772,7 +772,7 @@ void func_801E16DC(void);
 void func_801E1758(s32 x, s32 y);
 void func_801E19CC(s32 x, s32 y);
 /* func_801E1C10 */
-s32  Fishing_FishStacksFull(void);
+bool Fishing_FishStacksFull(void);
 void func_801E1C7C(void);
 
 /* When the AREA030 state byte is 3, arm the selection cue and advance the
@@ -781,7 +781,7 @@ static inline void WorldAdvanceFishingSubState(u8 subState) {
     if (D_80144199 == 3) {
         SND_StopSequence(0, 1);
         SND_PlayBGM(0x28, 0x64, 8);
-        SND_PlayCue(EMI_CUE_ID(2, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         func_801DDE94(subState);
         FISHING_STATE->sub_index_03 += 1;
     }

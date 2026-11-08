@@ -5,6 +5,6 @@ MATCH void func_801F4F28(void) {
     func_801F5428(0x10001805);
     if (g_ScriptVars[0] == 0x35) {
         g_Task->header.step++;
-        SND_PlayCue(0x201);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
     }
 }

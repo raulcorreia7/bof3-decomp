@@ -1,8 +1,8 @@
 #include "shop_00.h"
 
-char D_801D0E44[4] = "%2d";
-char D_801D0E48[12] = "%02d %02d";
-char D_801D0E54[4] = "  :";
+char g_SaveSlotLevelFormat[4] = "%2d";
+char g_SaveSlotTimeFormat[12] = "%02d %02d";
+char g_SaveSlotTimeColon[4] = "  :";
 char D_801D0E58[4] = "1";
 char D_801D0E5C[4] = "2";
 char D_801D0E60[4] = "%d";

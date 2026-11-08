@@ -23,18 +23,18 @@ NON_MATCHING void func_801D40D8(void) {
     pad                                             = &g_InputPressed;
     records                                         = D_801C893C;
     if (*pad & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         *label ^= 1;
     }
     if (g_InputMasks[MENU_INPUT_CONFIRM] & *pad) {
         if (*label != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 4));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
             records[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C] =
                 0;
             D_801C8950[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]
                       [g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C] = 0;
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         }
         D_80148651 -= 3;
         /* FAKE: retail reaches the neighbouring flag through the record base. */
@@ -42,7 +42,7 @@ NON_MATCHING void func_801D40D8(void) {
         return;
     }
     if (g_InputMasks[MENU_INPUT_CANCEL] & *pad) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         *(s8*)((u8*)flag - 0x113) = -1;
         D_80148651 -= 3;
     }

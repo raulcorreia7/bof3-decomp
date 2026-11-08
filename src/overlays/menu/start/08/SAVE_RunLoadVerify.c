@@ -16,7 +16,7 @@ MATCH void SAVE_RunLoadVerify(void) {
     SAVE_DrawSlots(0x20, 0x30, 0);
     SAVE_AccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus != CARD_EVENT_OK) {
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
     } else {
         clear = MEM_PTR(u32, SAVE_IMAGE_ADDR);
         for (i = 0; i < 1792; i++) {
@@ -36,7 +36,7 @@ MATCH void SAVE_RunLoadVerify(void) {
             }
             g_Game.flags = D_80145025;
             if ((sum & SAVE_CHECKSUM_MASK) != stored) {
-                SND_PlayCue(EMI_CUE_ID(1, 7));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 g_SaveCardStatus = SAVE_STATUS_BAD_CHECKSUM;
             } else {
                 if (g_SndMono == 0) {

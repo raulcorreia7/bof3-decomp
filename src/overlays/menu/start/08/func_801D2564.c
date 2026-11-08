@@ -43,13 +43,13 @@ MATCH void func_801D2564(void) {
         }
     }
     if (old_selection != D_80148656) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     pad_state   = &g_InputPressed;
     pad_buttons = *pad_state;
     if (pad_buttons & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlayCue(EMI_CUE_ID(1, 3));
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         func_801D2AC8();
         D_801485DC = 0;
         D_80148654 = 8;
@@ -61,8 +61,8 @@ MATCH void func_801D2564(void) {
     if (pad_buttons & g_InputMasks[MENU_INPUT_CANCEL]) {
         s32 i;
 
-        SND_PlayCue(EMI_CUE_ID(1, 6));
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
             g_MenuPanelTasks[i + 12].state = 1;

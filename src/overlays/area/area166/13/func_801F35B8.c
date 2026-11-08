@@ -7,7 +7,7 @@ MATCH void func_801F35B8(void) {
     g_Task->screen_y = screen_y;
     if ((screen_y << 0x10) >= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlayCue(EMI_CUE_ID(2, 1));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
         }
         g_Task->header.step += 1;
     }

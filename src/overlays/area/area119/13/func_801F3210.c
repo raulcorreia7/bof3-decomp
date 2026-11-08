@@ -12,7 +12,7 @@ MATCH void func_801F3210(void) {
         }
         g_Task->header.step = 1;
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlayCue(0x201);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
         }
     }
     func_801F3324();

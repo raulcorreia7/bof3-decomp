@@ -14,7 +14,7 @@ MATCH u8 Menu_ToggleOption(void) {
     Menu_DrawCursorSprite((u16)(((0x1F - (*flag * 4)) * 8) + 0x1B), 0x18, 0);
     pad = g_InputPressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         *flag = 0;
         return true;
     }
@@ -27,7 +27,7 @@ MATCH u8 Menu_ToggleOption(void) {
         return true;
     }
     if (pad & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         *flag = (u8)*flag ^ 1;
     }
     return false;

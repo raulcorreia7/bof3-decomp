@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_8019C028(void) {
+MATCH bool func_8019C028(void) {
     s8 slot;
     s8 other;
 

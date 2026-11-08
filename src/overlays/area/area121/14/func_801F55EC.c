@@ -1,6 +1,6 @@
 #include "area121_14.h"
 
-MATCH s32 func_801F55EC(void) {
+MATCH bool func_801F55EC(void) {
     if (g_Game.flags & 0x2000) {
         return 0;
     }

@@ -41,7 +41,7 @@ MATCH void func_801EEEC4(void) {
         g_Task->unk_09 = 4;
         g_Task->header.mode += 1;
         func_800A9820(g_Battle.target_selector);
-        SND_PlayCue(0x102U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
     }
 }
 

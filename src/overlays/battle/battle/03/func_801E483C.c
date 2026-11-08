@@ -4,7 +4,7 @@ MATCH void func_801E483C(void) {
     volatile u8*          global;
     volatile PartyMember* work;
 
-    SND_PlayCue(EMI_CUE_ID(2, 4));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
     global = (u8*)(EFFECT_BANK_80140000);
     if (global[0x62EAu] != 0u) {
         func_801E52F0(*(u16*)((*(u32*)(((u32)g_BattleCurrentEnemy + 0xE8u)) + 6u)));

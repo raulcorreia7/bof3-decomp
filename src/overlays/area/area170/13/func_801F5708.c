@@ -13,7 +13,7 @@ MATCH void func_801F5708(void) {
         SYS_SetFlag(g_SceneEventFlags, 0x79);
         Actor_SelectScript(1);
         Message_StartAreaMessage(0x22);
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         goto done;
     }
     Message_Request(request);

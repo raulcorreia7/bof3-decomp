@@ -61,27 +61,27 @@ NON_MATCHING void func_801E0BAC(void) {
     }
     cursor_ptr = &D_801483CB;
     if (old != *cursor_ptr) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
         if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
             if (D_801483CC == GAME_NONE) {
                 if (D_8014546C[D_801483CB] != 0) {
-                    SND_PlayCue(EMI_CUE_ID(1, 3));
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     D_801483CC = (u8)D_801483CB;
                     return;
                 }
-                SND_PlayCue(EMI_CUE_ID(1, 7));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 return;
             }
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             D_8014546C[D_801483CC] = D_8014546C[D_801483CB];
             D_8014546C[D_801483CB] = D_8014546C[D_801483CC];
             D_801483CC             = 0xFFU;
             return;
         }
         if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
-            SND_PlayCue(EMI_CUE_ID(1, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             if (D_801483CC == GAME_NONE) {
                 D_801483EF = 0xFF;
                 D_80148652 -= 1;

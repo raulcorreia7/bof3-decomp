@@ -206,6 +206,6 @@ void Area_ClaimSpawnSlot(void);
 s32  Area_UpdateSpawnSlots(void);
 void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 void Area_EndTurn(void);
-s32  Area_StartTurn(s32 direction, s32 previous);
+u8   Area_StartTurn(s32 direction, s32 previous);
 
 #endif

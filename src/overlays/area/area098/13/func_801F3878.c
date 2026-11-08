@@ -12,6 +12,6 @@ MATCH void func_801F3878(void) {
     if (!(remaining & 0xFF)) {
         g_Task->timer = 0x80;
         g_Task->header.mode += 1;
-        SND_PlayCue(0x209U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x09));
     }
 }

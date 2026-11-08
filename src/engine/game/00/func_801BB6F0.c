@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801BB6F0(s32 command) {
+MATCH bool func_801BB6F0(s32 command) {
     u32 value;
     u8  route;
 

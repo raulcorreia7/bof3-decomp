@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1) {
+MATCH bool func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1) {
     s16 tmp;
     s16 dx;
     s16 dy;

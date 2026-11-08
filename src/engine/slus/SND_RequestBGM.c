@@ -3,7 +3,7 @@
 /* starts the sound entry when the requested selection disagrees with the
  * active one, or when no selection is active.
  */
-MATCH s32 SND_RequestBGM(s32 requested) {
+MATCH bool SND_RequestBGM(s32 requested) {
     u8  current;
     u16 value;
 

@@ -24,7 +24,7 @@ MATCH void Fishing_FishSwim(void) {
                     D_801E3200 = 1;
                     Area_FindSceneRecord(*(u16*)(D_801E2ACA + work->cue_index_06 * sizeof(FishingSceneCue)));
                     if (!(*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN)) {
-                        SND_PlayCue(EMI_CUE_ID(2, 6));
+                        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
                     }
                     FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                     FISHING_STATE->state_2A   = 0;

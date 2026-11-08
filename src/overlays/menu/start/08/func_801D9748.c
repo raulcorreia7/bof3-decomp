@@ -37,7 +37,7 @@ NON_MATCHING void func_801D9748(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active  = 0;
     Menu_DrawClutStrip(D_80144953);
     D_801ED68C = 0;
-    SND_PlayCue(EMI_CUE_ID(1, 2));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     D_80148654 = 5;
     D_80148652 = 0;
     D_80148651 += 1;

@@ -3,7 +3,7 @@
 /* Callee entry at 0x801C71C4 writes one word through out and
  * returns the incoming pointer (caller ignores the result). */
 
-MATCH s32 func_801C7064(s32 x, s32 y, s32 reach, s32 height) {
+MATCH bool func_801C7064(s32 x, s32 y, s32 reach, s32 height) {
     u16 halves[2];
     s32 step;
     s32 prev;

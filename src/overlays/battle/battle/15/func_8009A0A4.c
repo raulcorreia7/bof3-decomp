@@ -26,18 +26,18 @@ MATCH void func_8009A0A4(void) {
             dest  = &g_Battle.ui_state;
             value = *dest + 1;
             *dest = value;
-            SND_PlayCue(EMI_CUE_ID(1, 1));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             return;
         }
     }
     if ((buttons & PADLright) != 0) {
         g_BattleActorTurn->command.target =
             Battle_TargetNext(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if (buttons & PADLleft) {
         g_BattleActorTurn->command.target =
             Battle_TargetPrev(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
 }

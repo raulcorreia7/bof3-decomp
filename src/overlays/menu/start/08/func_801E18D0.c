@@ -16,7 +16,7 @@ MATCH void func_801E18D0(void) {
     Menu_DrawCursorSprite((((s8)D_80148655 * 0x30) + 0x76) & 0xFFFE, 0x2A, 0);
     pressed = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     if (pressed & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         /* Retail reads this byte signed for the toggle test. */
         if (*(s8*)&D_80148655 == 0) {
             D_80148655 = 1;
@@ -25,13 +25,13 @@ MATCH void func_801E18D0(void) {
         }
     }
     if (pressed & PADLup) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148655 = 7;
         D_80148652 += 1;
         return;
     }
     if (pressed & PADLdown) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148655 = 2;
         D_80148652 += 1;
         return;
@@ -41,15 +41,15 @@ MATCH void func_801E18D0(void) {
 
         if (*mode == 0) {
             if (g_GameEntryState != 2) {
-                SND_PlayCue(EMI_CUE_ID(1, 6));
-                SND_PlayCue(EMI_CUE_ID(1, 2));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
             }
             D_80148653 = 0;
             D_80148654 = 0;
             D_80148652 += 3;
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         func_801E2668((u8)*mode, 0x70, 0x26);
         Menu_DrawCursorSprite(((*mode * 0x30) + 0x76) & 0xFFFE, 0x2A, 0);
         D_80144950                      = 1;
@@ -78,8 +78,8 @@ MATCH void func_801E18D0(void) {
     return;
 advance:
     if (g_GameEntryState != 2) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     }
     D_80148654 = 0;
     D_80148653 = 0;

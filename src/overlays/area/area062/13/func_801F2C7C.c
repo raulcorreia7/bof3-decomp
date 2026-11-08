@@ -9,7 +9,7 @@ MATCH void func_801F2C7C(void) {
     switch (*state) {
         case 0:
             g_ScriptVars[0] = 0xA;
-            SND_PlayCue(0x10D);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x0D));
             *state = 1;
             break;
 
@@ -21,7 +21,7 @@ MATCH void func_801F2C7C(void) {
                 }
                 D_801490E4[0] = 0;
                 if (Item_Add(0, 0x59, 1, 0) & 0xFF) {
-                    SND_PlayCue(0x106);
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
                     Message_Request(2);
                     SYS_SetFlag(g_SceneEventFlags, 0x68);
                 } else {

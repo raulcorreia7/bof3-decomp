@@ -8,7 +8,7 @@ MATCH void func_801E441C(void) {
     if (g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) {
         if ((D_801ED86C != 0) && (g_InputPressed & (PADLup | PADLdown))) {
             D_801ED7EC ^= 1;
-            SND_PlayCue(EMI_CUE_ID(1, 1));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         }
         if (D_801ED7EC != 0) {
             D_801ED864 += 8;
@@ -28,7 +28,7 @@ MATCH void func_801E441C(void) {
         if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) || (g_InputPressed & PADstart)) {
             UI_SetMode(UI_MODE_FADE_OUT);
             g_MenuStartStep += 1;
-            SND_PlayCue(EMI_CUE_ID(1, 5));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 5));
         }
     }
 }

@@ -47,7 +47,7 @@ NON_MATCHING void func_8009704C(void) {
     if ((g_BattleActorTurn->action_flags.value &
          (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 1));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             g_MenuPanelTasks[16].unk_09 = 0x32u;
             cursor                      = g_MenuPanelTasks[16].unk_0B - 1;
             g_MenuPanelTasks[16].unk_0B = cursor;
@@ -55,7 +55,7 @@ NON_MATCHING void func_8009704C(void) {
                 g_MenuPanelTasks[16].unk_0B = 3u;
             }
         } else if ((trigger & PADLright) != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 1));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             g_MenuPanelTasks[16].unk_09 = 0x31u;
             cursor                      = g_MenuPanelTasks[16].unk_0B + 1;
             g_MenuPanelTasks[16].unk_0B = cursor;
@@ -105,7 +105,7 @@ NON_MATCHING void func_8009704C(void) {
         }
     }
     if (cursor != sel->cursor_index) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     message                    = (u8*)&D_80148656;
     /* The group index/cursor pair sits 0xB bytes into the same scratch block. */
@@ -126,7 +126,7 @@ NON_MATCHING void func_8009704C(void) {
         ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
         D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         *(volatile u8*)&g_Battle.ui_step += 1;
         return;
     }
@@ -134,10 +134,10 @@ NON_MATCHING void func_8009704C(void) {
         BattleTurn* turn;
 
         if ((func_80097574() & BYTE_MASK) != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
         D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;

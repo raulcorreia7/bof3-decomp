@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-MATCH s32 func_800A6CF8(u8 selection_id, u8 column_index) {
+MATCH bool func_800A6CF8(u8 selection_id, u8 column_index) {
     u8 value;
     u8 count;
     u8 index;

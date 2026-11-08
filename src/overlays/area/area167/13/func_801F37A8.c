@@ -3,7 +3,7 @@
 MATCH void func_801F37A8(void) {
     if (g_AreaSceneMode == 0x20) {
         if (g_GameStateIndex == 0) {
-            SND_PlayCue(0x200);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
         }
         g_Task->header.step += 1;
     }
@@ -13,7 +13,7 @@ MATCH void func_801F37A8(void) {
             if (abs(D_80145EC8 - ((s32)COORD_INT(g_Task->pos.y) << 16)) <= TO_COORD(1) ||
                 abs(D_80145EC8 - (((s32)COORD_INT(g_Task->pos.y) + 1) << 16)) <= TO_COORD(1)) {
                 if (g_GameStateIndex == 0) {
-                    SND_PlayCue(0x200);
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
                 }
                 g_Task->header.step += 1;
             }

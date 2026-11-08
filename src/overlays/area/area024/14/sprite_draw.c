@@ -364,9 +364,9 @@ MATCH void func_801F2CB0(void) {
     func_801F3E48(((Area024Scratch*)g_Task)->step_count);
     ((Area024Scratch*)g_Task)->step_count = (((Area024Scratch*)g_Task)->step_count + 2u);
     if (((Area024Scratch*)g_Task)->step_count >= 0x80u) {
-        SND_PlayCue(EMI_CUE_ID(2, 6));
-        SND_PlayCue(EMI_CUE_ID(2, 14));
-        SND_PlayCue(EMI_CUE_ID(2, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         ((Area024Scratch*)g_Task)->step_count = 0;
         ((Area024Scratch*)g_Task)->dispatch++;
     }

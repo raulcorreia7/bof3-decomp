@@ -135,8 +135,8 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     TEXT_Format(val1, g_MenuMaxValueFormat, character->stats.max_ap);
     UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
     UI_DrawSpriteRun((s16)val7, val2, &D_801EC598, 0);
-    func_801DD6D0((val7 + 0x14) & HALF_MASK, (val2 + 0x12) & HALF_MASK, character_index, character->level,
-                  character->exp);
+    Menu_DrawExperienceLine((val7 + 0x14) & HALF_MASK, (val2 + 0x12) & HALF_MASK, character_index, character->level,
+                            character->exp);
 }
 #else
 /* blocker: register homes (py in s2, shaded byte in s3). */

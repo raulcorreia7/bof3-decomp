@@ -49,12 +49,12 @@ MATCH void func_801CF500(void) {
 }
 
 /* This copy turns between facings 3 and 5; the image's own are the header's. */
-MATCH void Char_StartTurn6(void) {
+MATCH void Char_StartTurnPeco(void) {
     CHAR_START_TURN(3, 5);
 }
 
 /* The second route step script in this image turns between directions 3 and 5. */
-MATCH void Char_RunStepScript10(void) {
+MATCH void Char_RunStepScriptPeco(void) {
     CHAR_RUN_STEP_SCRIPT(3, 5);
 }
 

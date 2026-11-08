@@ -31,29 +31,29 @@ NON_MATCHING void func_801E032C(void) {
         }
     }
     if (previous != D_801483A7) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     D_801483A8 = 0xFF;
     cell       = &g_Characters[D_801483A6].abilities.skill[D_801483A7];
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         D_801483A8 = (u8)D_801483A7;
         D_80148652 += 1;
         return;
     }
     if (g_InputPressed & PADRleft) {
         if (*cell != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             Char_AddAbility(*cell, 0, 1, 0);
             *cell = 0;
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         return;
     }
     if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(1, 2));
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_8014837B           = 2;
         D_8014839F           = 4;
         D_801483A8           = 0xFF;

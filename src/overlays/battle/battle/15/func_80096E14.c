@@ -3,7 +3,7 @@
 MATCH void func_80096E14(void) {
     u8 counter;
 
-    SND_PlayCue(EMI_CUE_ID(1, 4));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     g_Battle.selection_latch        = 0;
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ATTACK;
 

@@ -32,7 +32,7 @@ NON_MATCHING void func_801D20D0(void) {
     }
     cursor = &D_80148656;
     if ((s8)old != (s8)*cursor) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if ((Item_GetEquipability(g_ShopItemCategory, g_ShopItemId) >> g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]) &
@@ -51,16 +51,16 @@ NON_MATCHING void func_801D20D0(void) {
             *(s16*)&D_8014840C = -0x96;
             D_8014840E         = 0x74;
             D_80148412         = D_80148656;
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             D_80148600 = 0;
             D_801E6054 = 0;
             D_80148654 = 5;
             D_80148652 += 1;
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148600 = 0;
         D_80148652 -= 4;
     }

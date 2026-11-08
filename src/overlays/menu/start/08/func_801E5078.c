@@ -36,7 +36,7 @@ MATCH void func_801E5078(void) {
         g_SaveCardPort = port;
         D_801ED870     = 2;
     } else {
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         g_SaveCardStatus = SAVE_STATUS_NO_CARD;
         g_MenuStartStep  = 0xD;
         D_801ED870       = 0;

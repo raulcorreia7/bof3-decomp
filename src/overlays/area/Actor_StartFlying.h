@@ -1,62 +1,53 @@
-/* The step after Actor_SpawnFlock: gives each flock member a velocity from its
- * facing, backs it off along it so the flock enters from out of view (members 1
- * and 2 two cells to either side) and selects the script for that facing. Members: Actor_StartFlying in area016, 033, 045, 065, 087,
- * 088, 151 and 152. Every change here must verify every member. */
+/* Gives each flock member a velocity from its facing, backs it off along it so the flock
+ * enters from out of view (members 1 and 2 two cells to either side) and selects the
+ * script for that facing; Actor_Fly follows. One definition shared by the world area
+ * overlays: each member image defines its own g_FlockVelocity and g_FlockScript.
+ * Every change here must verify every member. */
+MATCH void Actor_StartFlying(void) {
+    Actor* scratch;
+    u16    value;
+    u16    y;
 
-/* `steps` is the image's table of velocity per facing; `scripts` and `script_slots` are
- * the first and second bytes of its script pairs per facing. A bare statement macro, used
- * as a member's whole body after it declares `u8** slots`, `Actor* scratch`, `u16 value`,
- * `u8* cell` and `u16 y`: an inline grows the stack frame by 16 bytes and a do/while
- * block by 8. */
-#define ACTOR_START_FLYING(steps, scripts, script_slots)                                                               \
-    Area_FindSceneRecord(0x46);                                                                                        \
-                                                                                                                       \
-    slots             = SP_PTR(u8*, 0u);                                                                               \
-    slots[0x11][0x48] = 0;                                                                                             \
-    slots             = SP_PTR(u8*, 0u);                                                                               \
-    slots[0x11][0x24] = 0;                                                                                             \
-    slots             = SP_PTR(u8*, 0u);                                                                               \
-    slots[0x11][0x29] = 5;                                                                                             \
-                                                                                                                       \
-    slots                = SP_PTR(u8*, 0u);                                                                            \
-    scratch              = (Actor*)slots[0x11];                                                                        \
-    scratch->vx          = (s16)(steps)[scratch->direction_08].x;                                                      \
-    scratch->vy          = (s16)(steps)[scratch->direction_08].y;                                                      \
-    scratch->pos.x.fixed = D_80145EC4[0];                                                                              \
-    scratch->pos.y.fixed = D_80145EC4[1];                                                                              \
-                                                                                                                       \
-    if (scratch->unk_06 != 0) {                                                                                        \
-        COORD_INT(scratch->pos.x) -= (s32)((steps)[scratch->direction_08].x << 16) >> 29;                              \
-        value                     = COORD_INT(scratch->pos.y) - ((s32)((steps)[scratch->direction_08].y << 16) >> 29); \
-        COORD_INT(scratch->pos.y) = value;                                                                             \
-        if (scratch->unk_06 == 1) {                                                                                    \
-            if (scratch->vx == 0) {                                                                                    \
-                COORD_INT(scratch->pos.x) += 2;                                                                        \
-            } else {                                                                                                   \
-                COORD_INT(scratch->pos.y) = value + 2;                                                                 \
-            }                                                                                                          \
-        } else {                                                                                                       \
-            if (scratch->vx == 0) {                                                                                    \
-                COORD_INT(scratch->pos.x) -= 2;                                                                        \
-            } else {                                                                                                   \
-                COORD_INT(scratch->pos.y) = value - 2;                                                                 \
-            }                                                                                                          \
-        }                                                                                                              \
-    }                                                                                                                  \
-                                                                                                                       \
-    slots   = SP_PTR(u8*, 0u);                                                                                         \
-    scratch = (Actor*)slots[0x11];                                                                                     \
-    COORD_INT(scratch->pos.x) -= (s32)((steps)[scratch->direction_08].x << 16) >> 25;                                  \
-    y                         = COORD_INT(scratch->pos.y) - ((s32)((steps)[scratch->direction_08].y << 16) >> 25);     \
-    scratch->param.unk_0B     = 0;                                                                                     \
-    slots                     = SP_PTR(u8*, 0u);                                                                       \
-    cell                      = slots[0x11];                                                                           \
-    COORD_INT(scratch->pos.y) = y;                                                                                     \
-    cell[1] += 1;                                                                                                      \
-                                                                                                                       \
-    slots = SP_PTR(u8*, 0u);                                                                                           \
-    Actor_SelectScript((scripts)[slots[0x11][8] * 2]);                                                                 \
-                                                                                                                       \
-    slots             = SP_PTR(u8*, 0u);                                                                               \
-    slots[0x11][0x2A] = (script_slots)[slots[0x11][8] * 2];                                                            \
+    Area_FindSceneRecord(0x46);
+
+    g_Task->unk_48       = 0;
+    g_Task->active_flags = 0;
+    g_Task->unk_29       = 5;
+
+    scratch              = g_Task;
+    scratch->vx          = (s16)g_FlockVelocity[scratch->direction_08].x;
+    scratch->vy          = (s16)g_FlockVelocity[scratch->direction_08].y;
+    scratch->pos.x.fixed = D_80145EC4[0];
+    scratch->pos.y.fixed = D_80145EC4[1];
+
+    if (scratch->unk_06 != 0) {
+        COORD_INT(scratch->pos.x) -= (s32)(g_FlockVelocity[scratch->direction_08].x << 16) >> 29;
+        value = COORD_INT(scratch->pos.y) - ((s32)(g_FlockVelocity[scratch->direction_08].y << 16) >> 29);
+        COORD_INT(scratch->pos.y) = value;
+        if (scratch->unk_06 == 1) {
+            if (scratch->vx == 0) {
+                COORD_INT(scratch->pos.x) += 2;
+            } else {
+                COORD_INT(scratch->pos.y) = value + 2;
+            }
+        } else {
+            if (scratch->vx == 0) {
+                COORD_INT(scratch->pos.x) -= 2;
+            } else {
+                COORD_INT(scratch->pos.y) = value - 2;
+            }
+        }
+    }
+
+    scratch = g_Task;
+    COORD_INT(scratch->pos.x) -= (s32)(g_FlockVelocity[scratch->direction_08].x << 16) >> 25;
+    y                     = COORD_INT(scratch->pos.y) - ((s32)(g_FlockVelocity[scratch->direction_08].y << 16) >> 25);
+    scratch->param.unk_0B = 0;
+    COORD_INT(scratch->pos.y) = y;
+    g_Task->header.mode++;
+
+    Actor_SelectScript(g_FlockScript[g_Task->direction_08][0]);
+
+    g_Task->unk_2A = g_FlockScript[g_Task->direction_08][1];
     func_8014D290();
+}

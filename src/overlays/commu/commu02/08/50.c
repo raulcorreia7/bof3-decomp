@@ -34,7 +34,7 @@ MATCH void func_801D0DE0(void) {
 
     if (D_801F294E == 0) {
         D_801DB0C4 = 4;
-        SND_PlayCue(0x102U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
         D_801F294E += 1;
         return;
     }

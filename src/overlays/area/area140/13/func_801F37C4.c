@@ -15,7 +15,7 @@ MATCH void func_801F37C4(void) {
                             (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         g_Task->header.step += 1;
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlayCue(0x205U);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x05));
         }
         func_801F3950(g_Task->direction_08, COORD_INT(g_Task->pos.z));
     }

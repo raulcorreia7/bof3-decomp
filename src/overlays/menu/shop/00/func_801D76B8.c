@@ -13,14 +13,14 @@ MATCH void func_801D76B8(void) {
     Menu_DrawCursorSprite(0x9B, (s8)*cursor * 0xD + 0x44, 0);
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         (*cursor)++;
         if ((s8)*cursor >= 8) {
             *cursor = 0;
         }
     }
     if (input & PADLup) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         if (--(*(s8*)&D_8014865D) < 0) {
             *(s8*)&D_8014865D = 7;
         }
@@ -28,19 +28,19 @@ MATCH void func_801D76B8(void) {
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         id = g_Game.members[(s8)D_80148656].character_index;
         if (g_Zenny < (g_Characters[id].level * 10)) {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             D_8014865B = 0xB;
             D_8014865F = 0xC;
             D_80148654 = 0x3C;
             D_80148651 += 5;
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 4));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
             D_8014865B = 0;
             D_80148651 += 1;
         }
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         (*(s8*)&D_80148651)--;
     }
 }

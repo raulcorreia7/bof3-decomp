@@ -40,9 +40,10 @@ extern u8            D_801F513C[88];
 extern WorldMapMarker D_801F5194[6];
 #define AREA_HUD_MASK_TABLE D_801F5194
 extern Callback D_801F51AC[3];
-extern UPoint2D D_801F51B8[4];
-extern u8       D_801F51C8[8];
-extern u8       D_801F51C9[]; /* the second byte of each D_801F51C8 pair */
+/* D_801F51B8 */
+extern UPoint2D g_FlockVelocity[4];
+/* D_801F51C8 */
+extern u8       g_FlockScript[4][2];
 extern Callback D_801F51D0[2];
 extern u8       D_801F51D8[4];
 extern u8       D_801F51DC[4];

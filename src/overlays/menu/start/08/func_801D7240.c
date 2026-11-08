@@ -15,7 +15,7 @@ MATCH void func_801D7240(void) {
 
     Menu_DrawClutStrip(D_80144953);
     func_801D9110();
-    SND_PlayCue(EMI_CUE_ID(1, 2));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     /* Volatile on the timer and the latched byte keeps the retail store order:
      * plain loads are hoisted above the timer store. */
     D_80148654 = 5;

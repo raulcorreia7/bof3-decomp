@@ -12,6 +12,6 @@ MATCH s32 func_801F2C04(void) {
         SYS_SetFlag(D_80144EA0, 8);
     }
     if (g_MessageChoice != 2) {
-        SND_PlayCue(0x208);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x08));
     }
 }

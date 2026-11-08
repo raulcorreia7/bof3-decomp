@@ -673,7 +673,7 @@ void        func_8009B700(void);
 void        func_8009B794(void);
 void        func_8009B828(void);
 void        func_8009B964(void);
-s32         func_8009BACC(s32 diff);
+u8          func_8009BACC(s32 diff);
 /* func_8009C8AC */
 u8          Battle_ActionHasElement(u16 required_mask);
 void        func_8009CCBC(void* battler, s32 rate_type, s32 rate_percent);
@@ -692,7 +692,7 @@ s16         func_800A2EF0(u8 battler_index, u16 element_mask);
 s32         func_800A30E8(u8 unused, u8 battler_index);
 void        func_800A31E0(u8 selection_kind, u16 input_mask);
 bool        func_800A3638(s32 battler_index, s32 compare_value);
-s32         func_800A36BC(s32 battler_index, s32 compare_value);
+u8          func_800A36BC(s32 battler_index, s32 compare_value);
 u16         func_800A36F0(u8 battler_index, u16 flags);
 extern void func_800A39B4(s16 delta, u8 battler_index);
 u8          func_800A3A10(u8 battler_index, u8 selection_kind);
@@ -734,7 +734,7 @@ void        func_800A5E54(void);
 void        func_800A5E98(void);
 void        func_800A5F80(void);
 void        func_800A5FF0(void);
-s32         func_800A6CF8(u8 selection_id, u8 column_index);
+bool        func_800A6CF8(u8 selection_id, u8 column_index);
 u8          func_800A6D84(void);
 void        func_800A6E14(u8 value);
 void        func_800A7C14(u8 slot);
@@ -754,8 +754,8 @@ void        func_800A8CC8(void);
 void        func_800A8D3C(void);
 extern u32  func_800AA874(u32 bit_index);
 bool        func_800AA8A4(s32 battler_index);
-s32         func_800AB470(u8 battler_index);
-s32         func_800AB4BC(s32 kind_index);
+bool        func_800AB470(u8 battler_index);
+bool        func_800AB4BC(s32 kind_index);
 void        func_800AB570(s32 battler_index);
 u8          func_800AB68C(u8 excluded_slot);
 extern void func_800ABBE0(void);
@@ -864,7 +864,7 @@ void Actor_SelectScript_keep_a1(u32 selector, u32 payload);
 #else
 #define Actor_SelectScript_keep_a1(selector, payload) Actor_SelectScript(selector)
 #endif
-s32         func_80097574(void);
+bool        func_80097574(void);
 void        func_80097EC0(void);
 extern void func_8009AAE8(void);
 void        func_8009B03C(void);
@@ -874,13 +874,13 @@ extern void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* ev
 extern u8   Battle_EnemyEventTriggered(volatile EnemyBattler* enemy, s32 bit_index);
 extern void Battle_SetEnemyEventTriggered(EnemyBattler* enemy, s32 bit, u8 set);
 extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
-s32         func_800A4FD8(void);
-s32         func_800A5D00(void);
+bool        func_800A4FD8(void);
+bool        func_800A5D00(void);
 u8          func_800A6C2C(void);
 s32         func_800A7B40(u8 combination, u8 count);
 void        func_800A9FC4(BattlePanelRecord* rec, s32 slot);
-s32         func_800AA5F4(s32 slot);
-s32         func_800AA7A0(u8 slot);
+bool        func_800AA5F4(s32 slot);
+bool        func_800AA7A0(u8 slot);
 extern u32  func_800AD044(u32 bit_index);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
 s32         func_801DDE7C(u8 index, u16 packed_value);
@@ -1066,7 +1066,7 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 
 u8 func_800A40D0(u8 battler_index);
 
-s32 func_800AED5C(s32 arg0, u32 battler_index);
+u8 func_800AED5C(s32 arg0, u32 battler_index);
 
 u8 Battle_SlotIsBlocked(u8 slot);
 

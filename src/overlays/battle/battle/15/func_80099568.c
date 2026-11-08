@@ -3,7 +3,7 @@
 /* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
  * direct %lo store form instead of materializing the array address. */
 
-s32 func_8009AC18(void);
+bool func_8009AC18(void);
 
 MATCH void func_80099568(void) {
     /* FAKE: stack_scratch reserves the retail 0x28 frame; no instruction
@@ -30,7 +30,7 @@ MATCH void func_80099568(void) {
     trigger                                  = INPUT_REPEATED(*input, (PADLup | PADLdown));
     held                                     = *input;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         g_BattlePanelMode          = 1;
         g_BattleChoicePhase        = 3;
         g_BattleSelectionHead      = 1;
@@ -46,14 +46,14 @@ MATCH void func_80099568(void) {
     }
     if ((held & PADRleft) != 0u) {
         if ((func_8009AC18() & BYTE_MASK) != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         return;
     }
     if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         cursor_value       = D_8014859E;
         D_8014859C         = 0;
         D_801485A1         = 0;
@@ -67,14 +67,14 @@ MATCH void func_80099568(void) {
         return;
     }
     if ((trigger & PADLup) != 0) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         g_BattleItemRow = g_BattleItemRow - 1;
         if ((s8)g_BattleItemRow < 0) {
             g_BattleItemRow = 5;
         }
     }
     if ((trigger & PADLdown) != 0) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         MEM(u8, (u32)&g_BattleItemRow) += 1;
         if ((s8)MEM(u8, (u32)&g_BattleItemRow) >= 6) {
             MEM(u8, (u32)&g_BattleItemRow) = 0;

@@ -67,7 +67,7 @@ NON_MATCHING void func_801E05E0(void) {
     }
     cursor_ptr = &D_801483CB;
     if (old != *cursor_ptr) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
         if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
@@ -80,7 +80,7 @@ NON_MATCHING void func_801E05E0(void) {
                 cue                    = 0x103;
                 goto block_32; /* shared confirm join */
             }
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
         cue = 0x106;

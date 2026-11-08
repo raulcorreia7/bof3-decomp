@@ -247,7 +247,7 @@ MATCH u8* func_801F8B14(void) {
 
 INCLUDE_ASM(func_801F8B50);
 
-MATCH s32 func_801F8BF8(void) {
+MATCH u8 func_801F8BF8(void) {
     u8  i;
     s32 live;
     u8* slot;
@@ -327,8 +327,8 @@ MATCH void func_801F98E0(void) {
         g_Task->pos.z = 0x2C00000;
         g_Task->vz    = 0x800000;
         g_Task->header.mode += 1;
-        SND_PlayCue(0x202);
-        SND_PlayCue(0x203);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
     }
 }
 
@@ -349,8 +349,8 @@ MATCH void func_801F9C00(void) {
     work->pos.z.fixed = TO_COORD(2048);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlayCue(EMI_CUE_ID(2, 4));
-    SND_PlayCue(EMI_CUE_ID(2, 5));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
 }
 
 MATCH void func_801F9C58(void) {
@@ -372,7 +372,7 @@ MATCH void func_801F9CE0(void) {
     work->pos.z.fixed = TO_COORD(1536);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlayCue(EMI_CUE_ID(2, 10));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 10));
 }
 
 MATCH void func_801F9D30(void) {

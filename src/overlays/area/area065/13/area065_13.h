@@ -18,10 +18,11 @@ extern u8       D_801F5290[];
 extern u8       D_801F52A0[];
 extern u8       D_801F5320[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-extern UPoint2D D_801F532C[];
+/* D_801F532C */
+extern UPoint2D g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
-extern u8       D_801F533C[];
-extern u8       D_801F533D[];
+/* D_801F533C */
+extern u8       g_FlockScript[4][2];
 extern u8       D_801F5344[];
 
 /* The value of area update step in the shared Area_Update body. */
@@ -38,8 +39,6 @@ extern u8            D_801F5268[]; /* the "Manillo" text at +0x10 */
 void func_801F40FC(s16 x, s16 y);
 void Area_Update(void);
 
-#include "overlays/area/World_UpdateCloudLayer.h"
-
-extern WorldCloudTexture g_WorldCloudTexture;
+#include "overlays/area/world_cloud.h"
 
 #endif

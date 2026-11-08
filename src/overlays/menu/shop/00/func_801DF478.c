@@ -29,7 +29,7 @@ MATCH s32 func_801DF478(void) {
     if (((u8*)&g_Characters[0].unk_07)[record_off] & 2) {
         return standby_id;
     }
-    SND_PlayCue(EMI_CUE_ID(1, 3));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
     for (slot = 0; slot < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); slot++) {
         if (g_PartyFieldOrder[slot] == field_id) {
             g_PartyFieldOrder[slot] = standby_id;

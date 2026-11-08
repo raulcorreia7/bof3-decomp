@@ -50,14 +50,14 @@ MATCH void func_801D639C(void) {
               (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A * 0xD + 0x57));
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         next_slot                                       = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = next_slot;
         if ((u32)(next_slot & BYTE_MASK) >= 6U) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 1;
         }
     } else if (input & PADLup) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         prev_slot                                       = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = prev_slot;
         if (!(prev_slot & BYTE_MASK)) {
@@ -67,17 +67,17 @@ MATCH void func_801D639C(void) {
     slot_flag = func_801D70EC() & BYTE_MASK;
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (slot_flag != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             Item_Add(group_index, *choice, 1, 0);
             *choice = 0;
             Char_RebuildStats((Character*)record);
             func_801D6E6C();
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active       = 0;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A        = 0xFF;

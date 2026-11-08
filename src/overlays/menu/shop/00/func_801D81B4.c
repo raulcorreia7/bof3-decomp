@@ -1,6 +1,6 @@
 #include "shop_00.h"
 
-MATCH s32 func_801D81B4(u8* cursor_byte, s32 palette_index) {
+MATCH u8 func_801D81B4(u8* cursor_byte, s32 palette_index) {
     u8* counter;
     u8  count;
 

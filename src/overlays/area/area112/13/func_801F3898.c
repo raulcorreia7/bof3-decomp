@@ -11,6 +11,6 @@ MATCH void func_801F3898(void) {
         SYS_ClearFlag(g_SceneEventFlags, 0x39U);
         SYS_ClearFlag(g_SceneEventFlags, 0x3AU);
         SYS_ClearFlag(g_SceneEventFlags, 0x3BU);
-        SND_PlayCue(0x200U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
     }
 }

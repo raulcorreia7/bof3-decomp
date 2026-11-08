@@ -15,6 +15,6 @@ MATCH void func_801F3CDC(void) {
         g_Task->unk_03 = 0x80;
         g_Task->timer  = 8;
         g_Task->header.mode += 1;
-        SND_PlayCue(0x208U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x08));
     }
 }

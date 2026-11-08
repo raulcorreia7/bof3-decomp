@@ -45,24 +45,24 @@ MATCH void func_801D8908(void) {
     entry  = table + g_MenuPanelTasks[16].unk_0B;
     *entry = g_MenuPanelTasks[16].unk_0C;
     if (value != rec->cursor) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (rec->swap_cursor == GAME_NONE) {
             if (*(Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor)) {
-                SND_PlayCue(EMI_CUE_ID(1, 3));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                 rec->swap_cursor = rec->cursor;
             } else {
-                SND_PlayCue(EMI_CUE_ID(1, 7));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             }
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             cursor = Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->swap_cursor;
             Menu_SwapBytes3(cursor, Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor);
             rec->swap_cursor = 0xFF;
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         if (rec->swap_cursor == GAME_NONE) {
             D_80148652 -= 1;
         } else {

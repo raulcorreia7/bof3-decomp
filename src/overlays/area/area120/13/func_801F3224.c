@@ -9,6 +9,6 @@ MATCH void func_801F3224(void) {
         *row = 3;
         row += 0xC;
     }
-    SND_PlayCue(0x200);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
     g_Task->header.mode++;
 }

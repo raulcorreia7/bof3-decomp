@@ -134,9 +134,17 @@ def macro_body(body: str) -> bool:
     return len(rest) == 1 and bool(MACRO_CALL.fullmatch(rest[0]))
 
 
+ADDR_TOKEN = re.compile(r"\b(?:D|func|jtbl)_[0-9A-F]{8}\b")
+
+
 def shape(name: str, body: str) -> str:
-    """Return the body with its own name and spacing removed, the key twins share."""
-    return re.sub(r"\s+", " ", body.replace(name, "@")).strip()
+    """Return the body with its own name, address names and spacing removed, the key twins share.
+
+    Two copies that differ only in the ``D_<ADDR>`` or ``func_<ADDR>`` they name (each image's own
+    table) share a key, the way ripwire's type-2 clones do.
+    """
+    body = ADDR_TOKEN.sub("$A", body.replace(name, "@"))
+    return re.sub(r"\s+", " ", body).strip()
 
 
 def image_of(path: str) -> str:

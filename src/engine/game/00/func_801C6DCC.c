@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C6DCC(void) {
+MATCH bool func_801C6DCC(void) {
     s16             outer;
     s16             inner;
     u8              flag;

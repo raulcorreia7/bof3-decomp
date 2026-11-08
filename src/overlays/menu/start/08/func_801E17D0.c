@@ -5,7 +5,7 @@ MATCH void func_801E17D0(void) {
 
     D_80148655 = 0;
     if (D_80148654 == 5) {
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     }
     Menu_DrawClutStrip(D_80144953);
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - D_80148654 * 0x10) & 0xFFF0, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,

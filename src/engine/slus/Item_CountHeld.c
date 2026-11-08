@@ -2,7 +2,7 @@
 
 /* counts the non-zero bytes of the selected inventory record slot.
  */
-MATCH s32 Item_CountHeld(u32 category) {
+MATCH u8 Item_CountHeld(u32 category) {
     u8* p;
     u8  count;
     u8  index;

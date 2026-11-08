@@ -14,6 +14,6 @@ extern Callback D_801D1B2C[];
 extern Callback D_801D1B48[];
 
 /* func_801D1624 */
-s32 Scene_UpdateScanBars(s32 y);
+u8 Scene_UpdateScanBars(s32 y);
 
 #endif

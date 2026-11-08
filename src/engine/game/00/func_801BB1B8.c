@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* The retail code never reads $a0; the caller's argument is a leftover register value kept in the prototype. */
-MATCH s32 func_801BB1B8(void) {
+MATCH bool func_801BB1B8(void) {
     u8 mode;
 
     mode = SP_REF(u8, 0x8);

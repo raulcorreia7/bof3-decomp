@@ -13,17 +13,17 @@ MATCH void func_801DA168(void) {
     func_801E1758(108, 86);
 
     if ((*pad & (PADLup | PADLdown)) != 0) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         work               = FISHING_STATE;
         work->cue_index_06 = (work->cue_index_06 ^ 1);
     }
 
     if ((*pad & (PADRup | PADRdown)) != 0) {
         if ((*pad & PADRup) != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             FISHING_STATE->cue_index_06 = 1;
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         }
         work               = FISHING_STATE;
         work->sub_index_03 = (work->sub_index_03 + 1);

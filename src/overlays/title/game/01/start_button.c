@@ -29,7 +29,7 @@ MATCH void UI_HandleStartButton(void) {
                         } else if ((g_UiPopupRequest & WIN_POPUP_PENDING_MASK) == WIN_POPUP_PENDING_OPEN) {
                             UI_SetMode(UI_MODE_FADE_OUT);
                             SND_StartSelectionEffect();
-                            SND_PlayCue(EMI_CUE_ID(1, 5));
+                            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 5));
                             *front_gate = 0u;
                             *state      = 7u;
                         }

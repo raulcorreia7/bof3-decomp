@@ -26,7 +26,7 @@ NON_MATCHING void func_80099364(void) {
     *panel = 0xFFu;
     held   = g_InputPressed;
     if ((held & (PADLright | PADLleft)) != 0u) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         D_8014862E ^= 1u;
     }
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
@@ -35,7 +35,7 @@ NON_MATCHING void func_80099364(void) {
         g_Battle.phase.sub_step = 2u;
         g_Battle.ui_step        = 1u;
     } else if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         *panel = D_8014862E;
         if (D_8014862E == 0u) {
             func_8009B160();
@@ -47,7 +47,7 @@ NON_MATCHING void func_80099364(void) {
             g_Battle.ui_state += 1u;
         }
     } else if ((held & PADLdown) != 0u) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148624              = 0u;
         D_801483C0              = 1u;
         g_Battle.phase.sub_step = 2u;

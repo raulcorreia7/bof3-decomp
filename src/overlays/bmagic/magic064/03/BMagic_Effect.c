@@ -27,7 +27,7 @@ MATCH void func_801EED7C(void) {
     g_Task  = battler;
     Actor_RequestScript((battler->facing + 0x38) & BYTE_MASK);
     g_Task = saved;
-    SND_PlayCue(0x100U);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     g_Task->param.unk_0B = 0;
     g_Task->header.step += 1;
 }

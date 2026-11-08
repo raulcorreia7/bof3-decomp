@@ -32,12 +32,12 @@ NON_MATCHING void func_801D53AC(void) {
         }
     }
     if ((s8)old != (s8)D_801ED620) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         step                                               = &D_80148651;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active   = 0;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED620;
@@ -47,8 +47,8 @@ NON_MATCHING void func_801D53AC(void) {
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         u8* step;
 
-        SND_PlayCue(EMI_CUE_ID(1, 2));
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         step                                                 = &D_80148651;
         g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;

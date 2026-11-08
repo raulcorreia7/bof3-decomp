@@ -171,7 +171,7 @@ MATCH void func_801F2DAC(void) {
 
     GFX_DrawShadedDisc(g_Task->screen_x, g_Task->screen_y, (g_Task->timer & 1) | 0x3C, 0x80, 0);
     if (g_Task->timer == 0xD7) {
-        SND_PlayCue(EMI_CUE_ID(2, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
     }
     count         = (g_Task->timer - 1);
     g_Task->timer = count;

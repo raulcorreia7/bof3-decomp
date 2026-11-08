@@ -118,7 +118,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
         Fishing_DrawFishArrow((s16)prim, 203, (s8)((u32) ~*(&D_80146898 + (g_FishingHookedFish * 0x98)) >> 0x1F), 2U);
         if ((D_80145E92 == 4) && (*(&D_8014688C + (g_FishingHookedFish * 0x98)) != 3) &&
             ((marker_y < (s32)prim) || ((s32)prim < line_y)) && !(g_FrameCount & 0xF)) {
-            SND_PlayCue(EMI_CUE_ID(2, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 7));
         }
     }
 }

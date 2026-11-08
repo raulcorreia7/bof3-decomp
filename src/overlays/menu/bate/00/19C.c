@@ -74,7 +74,7 @@ MATCH void func_801D1044(void) {
     D_8014835F = 0xFF;
     D_80148361 = 1;
     if (pressed != 0) {
-        SND_PlayCue(0x101);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
         D_8014835E ^= 3;
     }
     D_80148339 = D_8014835E;
@@ -88,14 +88,14 @@ MATCH void func_801D1044(void) {
     D_80148388 = Item_GetDescription(category, *item);
     D_801483AC = 0xDC;
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlayCue(0x103);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x03));
         step       = &D_80148652;
         D_8014833B = D_8014833A->kind_00;
         D_8014835F = D_8014835E;
         (*step)++;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(0x106);
-        SND_PlayCue(0x102);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
         *D_80148333 = 1;
         D_80148357  = 1;
         D_8014837B  = 1;

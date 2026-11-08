@@ -27,7 +27,7 @@ MATCH void func_800A47AC(void) {
     Menu_OpenPanelTask(menu_id, 5);
     D_80148596 = 1;
     D_80148597 = 0;
-    SND_PlayCue(EMI_CUE_ID(1, 2));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     row   = 0;
     flags = D_800B7070;
     mask  = &D_80145548;

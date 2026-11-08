@@ -189,8 +189,8 @@ MATCH void func_801F7188(void) {
         SCENA16_D_80143C30 = 0u;
         g_AreaDrawFlags    = 0u;
         func_801F845C();
-        SND_PlayCue(EMI_CUE_ID(2, 19));
-        SND_PlayCue(EMI_CUE_ID(2, 20));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 19));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 20));
         sel_ptr   = &g_SndBGMId;
         selection = *sel_ptr;
 

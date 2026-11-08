@@ -27,7 +27,7 @@ MATCH void func_801D3D84(void) {
         }
     }
     if (prev != D_801E60F0) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         mode       = D_801E60F0;
@@ -37,23 +37,23 @@ MATCH void func_801D3D84(void) {
             rate = &D_80148699;
             gold = &g_Zenny;
             if (*gold >= *rate * 10) {
-                SND_PlayCue(EMI_CUE_ID(1, 4));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
                 *gold -= *rate * 10;
                 D_80148652 += 2;
                 return;
             }
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             D_80148652 += 1;
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         D_80148652 += 2;
         return;
     }
     if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) == 0) {
         return;
     }
-    SND_PlayCue(EMI_CUE_ID(1, 6));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
     D_80148654 = 0;
     D_801E60F4 = 1;
     D_80148652 += 2;

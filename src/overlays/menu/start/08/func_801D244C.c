@@ -8,5 +8,5 @@ MATCH void func_801D244C(void) {
     D_80148656 = 0;
     D_80148654 = 8;
     D_80148651 += 1;
-    SND_PlayCue(EMI_CUE_ID(1, 2));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
 }

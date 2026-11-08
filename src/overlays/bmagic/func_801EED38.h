@@ -40,5 +40,5 @@ MATCH void func_801EED38(void) {
             g_Task->param.unk_0B++;
         }
     }
-    SND_PlayCue(EMI_CUE_ID(1, 0));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }

@@ -23,7 +23,7 @@ MATCH void func_80098DC4(void) {
              0x80u) != 0u) {
             g_BattleActorTurn->command.target = Battle_TargetNext(3);
             *(u8*)&g_Battle.ui_state -= 1u;
-            SND_PlayCue(EMI_CUE_ID(1, 1));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             return;
         }
     }
@@ -34,7 +34,7 @@ MATCH void func_80098DC4(void) {
             g_BattleActorTurn->command.target =
                 Battle_TargetNext(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         }
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if ((trigger & PADLleft) != 0) {
         if ((func_8009AF7C() & BYTE_MASK) != 0u) {
@@ -43,6 +43,6 @@ MATCH void func_80098DC4(void) {
             g_BattleActorTurn->command.target =
                 Battle_TargetPrev(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         }
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
 }

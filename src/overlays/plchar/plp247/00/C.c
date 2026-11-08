@@ -8,11 +8,11 @@ MATCH void func_801CE404(void) {
     D_801CFAFC[TASK_BYTES[2]]();
 }
 
-MATCH void Char_StartTurn2(void) {
+MATCH void Char_StartTurnGarr(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-MATCH void Char_RunStepScript2(void) {
+MATCH void Char_RunStepScriptGarr(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
 }
 
@@ -50,7 +50,7 @@ MATCH void func_801CEE18(void) {
 
 #include "overlays/plchar/Char_StartFacingTurn.h"
 
-MATCH void Char_RunStepScript6(void) {
+MATCH void Char_RunStepScriptRyuAdult(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 

@@ -14,7 +14,7 @@ MATCH void Fishing_CastInput(void) {
 
     if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         D_801440C8 = 0;
-        SND_PlayCue(EMI_CUE_ID(2, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));
         D_801E31FC = 0xFF;
         D_801E31F8 = 0xFF;
         Actor_RequestScript(2);

@@ -8,7 +8,7 @@ extern u8 D_80145F20[];
  * retail indexes the symbol per iteration; object is 120 bytes short on the byte-copy blocks. resume: index
  * D_80145FCC/D_80145F04 per use and keep the full FIELD copy sequence per row. */
 #ifdef NON_MATCHING
-NON_MATCHING s32 func_8009AC18(void) {
+NON_MATCHING bool func_8009AC18(void) {
     u8* slots[6];
     u8* base;
     u8* row;
