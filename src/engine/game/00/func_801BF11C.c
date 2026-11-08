@@ -1,38 +1,38 @@
 #include "game_00.h"
 
-/* nonmatching: one instruction differs. The palette copy loop (0x801BF31C) adds src and j*2 as `addu v0,v0,v1` in retail
- * and `addu v0,v1,v0` here. Tried: index and pointer operand orders, 0x60 + j, (src + 0x60)[j], j[src], src/dst
- * declaration and assignment order, src folded to `+ 0x60`, bank and j as u32, bank as `* 0x40`, an inline src
- * expression, 10 min permuter. The party scan needs `offset = i * BATTLE_PARTY_STRIDE` as a local. */
-#ifdef NON_MATCHING
-NON_MATCHING u8 func_801BF11C(void) {
-    u8*  work;
-    s32  i;
-    s32  j;
-    s32  offset;
-    u8   order;
-    s32  bank;
-    u16* dst;
-    u16* src;
+MATCH u8 func_801BF11C(void) {
+    PartyMember* work;
+    s32          i;
+    s32          j;
+    s32          offset;
+    u8           order;
+    s32          bank;
+    u16*         dst;
+    u16*         src;
+    Actor*       actor;
+    u16          color;
+    s32          palette_offset;
 
     if (g_Battle.outcome.options & 4) {
         return 1;
     }
+
     g_EncounterOriginX = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_Battle.scroll_dir].dx << 16);
     g_EncounterOriginY = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_Battle.scroll_dir].dy << 16);
+
     for (i = 0; i < g_Game.party_size; i++) {
-        work           = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
+        work           = &g_Game.members[i];
         g_Game.current = work;
         TASK_SET(work);
         if (g_Task->param.unk_0B == 0) {
             if (func_801C29A0(8) & BYTE_MASK) {
-                for (order = 0; order < 3; order++) {
+                for (order = 0; order < PARTY_SLOT_COUNT; order++) {
                     if (g_PartyBattleOrder[order] == g_Game.current->chr.character_id) {
                         break;
                     }
                 }
                 g_Game.current->status.field.flags_12C.u8_value &= 0xFE;
-                g_Task->unk_29           = g_AreaDrawMode;
+                g_Task->draw_layer       = g_AreaDrawMode;
                 g_Task->pos.x            = g_EncounterParty[order].x;
                 g_Task->pos.y            = g_EncounterParty[order].y;
                 COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
@@ -41,11 +41,16 @@ NON_MATCHING u8 func_801BF11C(void) {
             }
         } else if (g_Task->param.unk_0B == 1) {
             if (func_801C2894(8) & BYTE_MASK) {
-                for (j = 0; j < 0x20; j++) {
-                    bank   = g_Task->unk_05 << 6;
-                    dst    = MEM_PTR(u16, 0x80039600u + bank);
-                    src    = MEM_PTR(u16, 0x80035600u + bank);
-                    dst[j] = src[j + 0x60];
+                /* CLEANUP: typed palette indexing reverses the source addition operands. */
+                actor = g_Task;
+                for (j = 0; j < 32; j++) {
+                    bank           = actor->unk_05 << 6;
+                    dst            = (u16*)(GAME_PALETTE_MIRROR + bank);
+                    src            = (u16*)(GAME_PALETTE_STAGE + bank);
+                    palette_offset = j << 1;
+                    color          = *(u16*)((u8*)src + palette_offset + 0xC0);
+                    palette_offset += (s32)dst;
+                    *(u16*)palette_offset = color;
                 }
                 g_GfxPalettePending = 1;
                 g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
@@ -57,14 +62,13 @@ NON_MATCHING u8 func_801BF11C(void) {
         }
         func_8014D978();
     }
+
     for (i = 0; i < g_Game.party_size; i++) {
         offset = i * BATTLE_PARTY_STRIDE;
         if ((&D_80145E9B)[offset] != 2) {
             return 0;
         }
     }
+
     return 1;
 }
-#else
-INCLUDE_ASM(func_801BF11C);
-#endif
