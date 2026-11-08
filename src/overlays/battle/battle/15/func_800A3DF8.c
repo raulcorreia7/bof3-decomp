@@ -17,7 +17,7 @@ MATCH u8 func_800A3DF8(u8 battler_index, u8 selection_kind) {
     rate = *(u16*)&D_801EC2F2;
     rate = BATTLE_HIT_RATE_BASE - (rate / 5);
     CLAMP_MIN(rate, BATTLE_HIT_RATE_MIN);
-    temp = func_800A2D70((selection_kind & BYTE_MASK), 0x80);
+    temp = func_800A2D70((selection_kind & BYTE_MASK), ELEM_STATUS);
     if (temp == -1) {
         ret = 0;
     } else {

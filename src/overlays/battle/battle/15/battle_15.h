@@ -923,7 +923,7 @@ static inline u8 BattleRollHitChance(u8 selection_kind, s16 (*hit_rate)(s32, s32
     rate = *(u16*)&D_801EC2F2;
     rate = BATTLE_HIT_RATE_BASE - (rate / 5);
     CLAMP_MIN(rate, BATTLE_HIT_RATE_MIN);
-    temp = hit_rate((s32)(selection_kind & BYTE_MASK), (s32)(D_801CA71C[g_BattleActionId].mask & 0x1FF));
+    temp = hit_rate((s32)(selection_kind & BYTE_MASK), (s32)(D_801CA71C[g_BattleActionId].mask & ELEM_ALL));
     if (temp == -1) {
         ret = 0;
     } else {
