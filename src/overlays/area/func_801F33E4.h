@@ -1,7 +1,7 @@
 /* One definition shared by the ten world04 area request overlays
  * (emi/world04/area176/13 through emi/world04/area185/13) at 0x801F33E4;
  * every change here must verify every member address. */
-MATCH s32 func_801F33E4(s32 entry_x, s32 entry_y) {
+MATCH u16 func_801F33E4(s32 entry_x, s32 entry_y) {
     u8* flag;
 
     if ((u32)((entry_x >> 16) - 65) < 4 && (u32)((entry_y >> 16) - 20) < 4) {

@@ -170,7 +170,7 @@ void         Area_StoreHeight(s32 x, s32 y, u8 value);
 /* func_8015507C */
 s32          Area_SetCellPalette(s32 x, s32 y);
 /* func_80155218 */
-s32          Area_ClearCellPalette(s32 x, s32 y);
+u8           Area_ClearCellPalette(s32 x, s32 y);
 extern s32   func_80155560(u32 part_word, void* prim, s32 mode);
 /* func_801558F0 */
 s32          Area_GetCellId(s32 x, s32 y);
@@ -214,7 +214,7 @@ void         Area_IndexCells(void);
 void         Menu_UpdatePanelTasks(void);
 void         func_80158E20(void);
 /* func_80158DB8 */
-s32          Menu_OpenPanelTask(u8 menu_id, u8 handler);
+u8           Menu_OpenPanelTask(u8 menu_id, u8 handler);
 /* func_80158E50 */
 void         Menu_ResetPanelTasks(void);
 /* func_8015A758 */
@@ -234,13 +234,13 @@ extern void  func_8015BAC4(u8 selector);
 /* func_8015B5F4 */
 void         SYS_ToggleFlag(void* bits, u8 bit_index);
 /* func_8015BC14 */
-s32          Area_StepCameraX(s16 target, s8 step);
+u8           Area_StepCameraX(s16 target, s8 step);
 /* func_8015BD14 */
-s32          Area_StepCameraY(s16 target, s8 step);
+u8           Area_StepCameraY(s16 target, s8 step);
 /* func_8015BE10 */
-s32          Area_StepCameraZ(s16 target, s8 step);
+u8           Area_StepCameraZ(s16 target, s8 step);
 /* func_8015BEA0 */
-s32          Area_StepCameraAngle(s32 degrees, s8 duration);
+bool         Area_StepCameraAngle(s32 degrees, s8 duration);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
 /* func_8015C088 */
@@ -285,7 +285,7 @@ void        SND_FadeOutSequence(u32 effect_group, s32 effect_id, s32 cue_level, 
 /* func_8015D5D8 */
 void        SND_StopAllSequences(void);
 /* func_8015D660 */
-s32         SND_FindFreeFxVoice(u8* out_index, u8* out_seq);
+bool        SND_FindFreeFxVoice(u8* out_index, u8* out_seq);
 /* func_8015D71C */
 extern void SND_QueueSelectionFx(s32 cue_id);
 /* func_8015D7C8 */
@@ -297,7 +297,7 @@ void        SND_SetBankLayout(u32 layout_bank);
 /* func_80161B24 */
 void        SND_StartBGM(u8 bgm_id, u8 cue_level, u8 cue_shape);
 /* func_80161BBC */
-s32         SND_RequestBGM(s32 requested);
+bool        SND_RequestBGM(s32 requested);
 /* func_80161C20 */
 void        SND_PlayBGM(s32 selection_id, s32 cue_level, s32 cue_shape);
 /* func_80161CD0 */
@@ -325,7 +325,7 @@ void        EMI_CopySectorData(void);
 /* func_80162CD8 */
 void        EMI_EndArchive(void);
 /* func_80162D00 */
-s32         EMI_IsReady(void);
+bool        EMI_IsReady(void);
 /* func_80162D18 */
 void        EMI_CdUpdate(void);
 /* func_80162D9C */
@@ -383,7 +383,7 @@ void        SND_XaStateWaitSync(void);
 /* func_80163E88 */
 bool        SND_HasXACDError(void);
 /* func_80163EA0 */
-s32         SND_IsXAIdle(void);
+u8          SND_IsXAIdle(void);
 /* func_80163EB0 */
 void        SND_SetCDVolume(u8 volume);
 /* func_80163F50 */
@@ -437,21 +437,21 @@ void        Message_SetVariable(u8 slot, u8 length, const u8* text);
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))
 /* func_80166438 */
-s32 Item_CountHeld(u32 category);
+u8   Item_CountHeld(u32 category);
 /* func_801664A0 */
-s32 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
+u8   Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
 /* func_801665A0 */
-u8  Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
+u8   Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
 /* func_8016663C */
-s32 Party_SpendZenny(u32 amount, s32 unused);
+bool Party_SpendZenny(u32 amount, s32 unused);
 /* func_8016666C */
-s32 Party_AddZenny(s32 amount, s32 skip_earned);
+s32  Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_801666C8 */
-s32 Item_GetDescription(s32 category, s32 item_id);
+s32  Item_GetDescription(s32 category, s32 item_id);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
-u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
+u8*  Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
-u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
+u8*  Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* 0x40-byte palette staging entries; GFX_LoadPalette copies them out, the second copy lands 0x4000 above. */
 #define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
 #define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)
@@ -474,7 +474,7 @@ void       Area_SyncScrollHeight(void);
 /* func_80167FDC */
 void       Char_AddHP(s32 amount, u8 char_id);
 /* func_8016813C */
-s32        Char_LoseHP(s32 mode, s32 index);
+u16        Char_LoseHP(s32 mode, s32 index);
 /* func_80168248 */
 s32        Char_SpendAP(s32 requested, s32 character_id);
 /* The libsnd internals have no header in this tree; s16 arguments as retail passes them. */

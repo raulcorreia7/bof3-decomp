@@ -41,7 +41,7 @@ segments:
       - [0x14DC, c, Area_DrawHudBanner]
       - [0x158C, c, func_801F418C]
       - [0x15D0, c, Actor_SpawnFlock]
-      - [0x170C, c, func_801F430C]
+      - [0x170C, c, Actor_StartFlying]
       - [0x193C, c, Actor_Fly]
       - [0x19E0, c, func_801F45E0]
       - [0x1A24, c, func_801F4624]

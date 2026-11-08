@@ -57,8 +57,8 @@ extern u8 D_801FDFC8;
         g_Task->timer = 0x20;                  \
         g_Task->header.step++;                 \
     }
-s32 func_801F85D8(void);
-s32 func_801F9EFC(void);
+u8 func_801F85D8(void);
+u8 func_801F9EFC(void);
 
 extern s8       D_80146874;
 extern u8       D_80146875;

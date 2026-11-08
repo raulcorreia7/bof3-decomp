@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-MATCH s32 func_800AB470(u8 battler_index) {
+MATCH bool func_800AB470(u8 battler_index) {
     u16 value;
 
     value = g_Game.members[battler_index].u.turn.command.id;

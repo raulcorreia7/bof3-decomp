@@ -3,7 +3,7 @@
  * no direction is held. One definition shared by the area overlays. Every change here
  * must verify every member address. */
 /* func_801F5140 (area104/14), func_801F5684 (area121/14) */
-MATCH s32 Actor_TurnByPad(void) {
+MATCH bool Actor_TurnByPad(void) {
     if (g_InputHeld & 0x4000) {
         g_Task->direction_08 ^= 4;
     } else if (g_InputHeld & 0x2000) {

@@ -3,7 +3,7 @@
 /* reports whether the current character may select the kind stored in
  * the active selection-scratch entry.
  */
-MATCH s32 func_80097574(void) {
+MATCH bool func_80097574(void) {
     u8* slot = (u8*)&D_80148656;
     u8* entry;
 

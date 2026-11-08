@@ -22,11 +22,11 @@ MATCH void func_801CE620(void) {
     SYS_DISPATCH_TASK(D_801CF90C, 2, g_Task);
 }
 
-MATCH void Char_StartTurn3(void) {
+MATCH void Char_StartTurnMomo(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-MATCH void Char_RunStepScript3(void) {
+MATCH void Char_RunStepScriptMomo(void) {
     CHAR_RUN_STEP_CASES(CHARACTER_FACING_AWAY, 0x41, CHARACTER_FACING_BACK, 0x40);
 }
 
@@ -46,7 +46,7 @@ MATCH void func_801CEC1C(void) {
 
 #include "../../Char_StartNearestFacingTurn.h"
 
-MATCH void Char_RunStepScript5(void) {
+MATCH void Char_RunStepScriptRyuAdult(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 

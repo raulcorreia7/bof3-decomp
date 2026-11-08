@@ -214,7 +214,7 @@ INCLUDE_ASM(func_801FDB14);
 
 INCLUDE_ASM(func_801FE00C);
 
-MATCH s32 func_801FE2B0(void) {
+MATCH bool func_801FE2B0(void) {
     u8 i;
 
     for (i = 0; i < g_Game.party_size; i++) {

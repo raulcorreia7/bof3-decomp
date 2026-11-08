@@ -247,7 +247,7 @@ MATCH u8* func_801F8B14(void) {
 
 INCLUDE_ASM(func_801F8B50);
 
-MATCH s32 func_801F8BF8(void) {
+MATCH u8 func_801F8BF8(void) {
     u8  i;
     s32 live;
     u8* slot;

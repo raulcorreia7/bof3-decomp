@@ -29,9 +29,8 @@ extern s8       D_80146866;
 extern s8       D_80146874;
 extern s8       D_80146875;
 extern Callback D_801F6870[];
-extern UPoint2D D_801F687C[];
-extern u8       D_801F688C[];
-extern u8       D_801F688D[]; /* the script-argument byte at +1 */
+extern UPoint2D g_FlockVelocity[4];
+extern u8       g_FlockScript[4][2];
 extern Callback D_801F6894[];
 extern Callback D_801F689C[];
 
@@ -44,7 +43,7 @@ void func_801F5B90(void);
 
 s32 func_801A79A4(s32, s32);
 
-s32 func_801F5028(s32, s32, s32);
+u8 func_801F5028(s32, s32, s32);
 
 void func_801F5C7C(void);
 

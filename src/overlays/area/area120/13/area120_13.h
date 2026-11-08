@@ -15,7 +15,7 @@ extern u16 D_801F43BC;
 extern u16 D_801F43BE;
 
 void func_801F35B8(void);
-s32  func_801F36B0(void);
+u8   func_801F36B0(void);
 
 extern u8 D_801F43E4;
 

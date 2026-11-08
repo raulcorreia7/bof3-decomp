@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection) {
+MATCH bool func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection) {
     u8* entry;
     s32 arg2b;
     s32 index;

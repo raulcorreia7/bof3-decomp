@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801A1AE4(Actor* arg) {
+MATCH bool func_801A1AE4(Actor* arg) {
     u8  route;
     s32 pos_x;
     s32 pos_y;

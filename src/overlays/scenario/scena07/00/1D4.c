@@ -543,7 +543,7 @@ MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
     return 0;
 }
 
-MATCH s32 func_801FDA34(void) {
+MATCH bool func_801FDA34(void) {
     u8 i;
 
     for (i = 0; i < g_Game.party_size; i++) {

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag) {
+MATCH bool func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag) {
     s32 i;
 
     i = 0;

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach) {
+MATCH bool func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach) {
     s32             index;
     s32             count;
     s32             probe_reach;

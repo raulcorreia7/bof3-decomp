@@ -38,7 +38,7 @@ extern s8 g_GameRequestKind;
 
 s32 func_801A79A4(s32 handler_x, s32 handler_y);
 
-s32 func_801F4AE4(s32, s32, s32);
+u8 func_801F4AE4(s32, s32, s32);
 
 void func_801F656C(void);
 

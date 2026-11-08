@@ -3,7 +3,7 @@
 /* selects one ability panel by kind (or the shared default table),
  * then counts its nonzero entries.
  */
-MATCH s32 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode) {
+MATCH u8 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode) {
     Character* record;
     u8*        table;
     u8         length;

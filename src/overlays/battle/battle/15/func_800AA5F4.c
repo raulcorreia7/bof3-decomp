@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-MATCH s32 func_800AA5F4(s32 slot) {
+MATCH bool func_800AA5F4(s32 slot) {
     slot &= BYTE_MASK;
     if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
         return 0;
