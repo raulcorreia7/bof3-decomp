@@ -222,7 +222,7 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1Step0Funcs, D_801F294D);
 }
 
-/* needs: u8 view of const g_SelectionCues and D_80181EBB; first diff: 0x801D35E0 lui v1 against v0. */
+/* needs: u8 view of const g_SelectionCues and g_SelectionSequences; first diff: 0x801D35E0 lui v1 against v0. */
 INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {

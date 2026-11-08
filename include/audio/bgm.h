@@ -24,7 +24,7 @@
 typedef struct BGMTrack {
     u16 bank_slot; /* 0x00 loader slot id of the music archive */
     u8  sep_slot;  /* 0x02 SEP package index, g_SelectionCues */
-    u8  sequence;  /* 0x03 sequence number in the package, D_80181EBB */
+    u8  sequence;  /* 0x03 sequence number in the package, g_SelectionSequences */
 } BGMTrack;
 
 ASSERT_SIZE(BGMTrack, BGM_TRACK_SIZE);

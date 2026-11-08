@@ -12,7 +12,7 @@ MATCH void func_801985C8(void) {
     }
     selection = g_SndBGMId;
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
-        SND_StartDecrescendo(g_SelectionCues[selection * 4], D_80181EBB[selection * 4], 100, 16);
+        SND_StartDecrescendo(g_SelectionCues[selection * 4], g_SelectionSequences[selection * 4], 100, 16);
     }
     UI_SetMode(0);
     while (WINDOW_EFFECT_BUSY()) {
@@ -22,7 +22,7 @@ MATCH void func_801985C8(void) {
     Game_RequestAreaChange(*(u16*)&D_80143F04, *(u32*)&D_80143F08, *(u32*)&D_80143F0C, FACING_DOWN_RIGHT);
     selection = g_SndBGMId;
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
-        SND_StopSequence(g_SelectionCues[selection * 4], D_80181EBB[selection * 4]);
+        SND_StopSequence(g_SelectionCues[selection * 4], g_SelectionSequences[selection * 4]);
     }
     g_GameEntryState    = GAME_STATE_AREA_LOAD;
     g_GameEntrySubstate = 0;
