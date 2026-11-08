@@ -4,7 +4,26 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC14);
+MATCH void func_801EEC14(void) {
+    Magic225Steps handlers = D_801EEC04;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
+    u8            i;
+
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (D_801F03BC[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyMember*)&D_801F03BC[i];
+            g_BattleEffectBattler = D_801F03BC[i].target.party;
+            func_801EFE0C();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED28);
 
