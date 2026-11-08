@@ -60,7 +60,7 @@ MATCH void func_801EFAD4(void) {
 }
 
 MATCH void func_801EFAF4(void) {
-    GFX_AddDitheredDrawMode(3, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15);
+    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
     g_ScriptBank = 0x800C3800;
     SYS_DISPATCH_BYTE(D_801EFE60, g_Task->header.step);
     g_ScriptBank = 0x800D3800;
