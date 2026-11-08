@@ -1,3 +1,5 @@
 #include "area035_13.h"
 
-INCLUDE_ASM(func_801F2C74);
+MATCH void func_801F2C74(void) {
+    Area_BeginChoiceScript(2);
+}
