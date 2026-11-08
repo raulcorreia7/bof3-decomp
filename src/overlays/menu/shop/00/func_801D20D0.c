@@ -12,15 +12,15 @@ NON_MATCHING void func_801D20D0(void) {
     s8  i;
 
     TEXT_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
-    cursor                         = &D_80148656;
-    g_MenuPanelTasks[0].unk_10     = 0x4B;
-    g_MenuPanelTasks[21].unk_00[0] = 0;
-    g_MenuPanelTasks[20].unk_00[0] = 1;
-    D_80148604                     = g_MenuPanelTasks[(s8)*cursor + 3].pos.x.raw;
-    D_80148606                     = g_MenuPanelTasks[(s8)*cursor + 3].pos.y.raw;
-    count                          = Party_CountOrder(PARTY_ORDER_FIELD);
-    buttons                        = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    old                            = *cursor;
+    cursor                            = &D_80148656;
+    g_MenuPanelTasks[0].u.addr.unk_10 = 0x4B;
+    g_MenuPanelTasks[21].active       = 0;
+    g_MenuPanelTasks[20].active       = 1;
+    D_80148604                        = g_MenuPanelTasks[(s8)*cursor + 3].pos.x;
+    D_80148606                        = g_MenuPanelTasks[(s8)*cursor + 3].pos.y;
+    count                             = Party_CountOrder(PARTY_ORDER_FIELD);
+    buttons                           = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    old                               = *cursor;
     if (buttons & PADLup) {
         if ((s8)(*cursor = old - 1) < 0) {
             *cursor = count - 1;

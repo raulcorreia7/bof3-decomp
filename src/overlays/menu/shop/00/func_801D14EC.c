@@ -12,16 +12,16 @@ NON_MATCHING void func_801D14EC(void) {
     if (D_801E6058 != 0) {
         i = 0;
         while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
-            panel            = &g_MenuPanelTasks[i + 3];
-            panel->pos.y.raw = i * 54 + 62;
-            panel->unk_0A    = i;
-            panel->pos.x.raw = -150;
-            panel->unk_00[0] = 1;
-            panel->unk_00[1] = 7;
-            panel->unk_00[2] = 5;
-            panel->state     = 2;
-            panel->unk_0B    = 0;
-            panel->unk_0C    = 0;
+            panel          = &g_MenuPanelTasks[i + 3];
+            panel->pos.y   = i * 54 + 62;
+            panel->unk_0A  = i;
+            panel->pos.x   = -150;
+            panel->active  = 1;
+            panel->handler = 7;
+            panel->mode    = 5;
+            panel->state   = 2;
+            panel->unk_0B  = 0;
+            panel->unk_0C  = 0;
             i++;
         }
     }

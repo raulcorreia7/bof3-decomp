@@ -22,12 +22,12 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     u16       odd_width_u16;
     s16       base_x;
     s16       edge_x;
-    left                      = (u16)x;
-    top                       = (u16)y;
-    texture_window            = (RECT*)g_GfxPrimCursor;
-    g_GfxPrimCursor           = (u8*)(texture_window + 1);
-    texture_window->pos.y.raw = 240;
-    texture_window->pos.x.raw = 0;
+    left              = (u16)x;
+    top               = (u16)y;
+    texture_window    = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor   = (u8*)(texture_window + 1);
+    texture_window->y = 240;
+    texture_window->x = 0;
     setWH(texture_window, 16, 16);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, 0xC);
@@ -126,10 +126,10 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
-    texture_window            = (RECT*)g_GfxPrimCursor;
-    g_GfxPrimCursor           = (u8*)(texture_window + 1);
-    texture_window->pos.x.raw = 0;
-    texture_window->pos.y.raw = 0;
+    texture_window    = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor   = (u8*)(texture_window + 1);
+    texture_window->x = 0;
+    texture_window->y = 0;
     setWH(texture_window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, 0xC);
