@@ -42,7 +42,7 @@ NON_MATCHING void func_801D1228(void) {
     D_801463D0             = 1;
     g_BattleRewardZenny    = 0;
     g_BattleRewardExp      = 0;
-    g_BattleDrops.attempts    = 0;
+    g_BattleDrops.attempts = 0;
     g_BattleBossFlags      = 0;
     D_801463BA             = 0;
     g_BattlePendingStatus  = 0;

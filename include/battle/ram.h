@@ -30,12 +30,12 @@
 /* The party rows 0-2 and enemy rows 3-10 share one battler index space. */
 #define COMBATANT_COUNT                   11
 /* The drop list cap Battle_RollEnemyDrops walks. */
-#define BATTLE_DROP_COUNT_MAX           15
+#define BATTLE_DROP_COUNT_MAX             15
 
 /* func_801DB434 reads six threshold bytes per row. */
 #define BATTLE_LEVEL_THRESHOLD_COUNT      6u
 
-#define BATTLE_PARTY_CHARACTERS_COUNT           3 /* player slots 0-2; enemy slots start at 3 */
+#define BATTLE_PARTY_CHARACTERS_COUNT     3 /* player slots 0-2; enemy slots start at 3 */
 #define BATTLE_PARTY_STRIDE               0x140
 #define BATTLE_ENEMY_STRIDE               0x118
 #define BATTLE_EFFECT_STRIDE              0x78
@@ -102,7 +102,7 @@ typedef struct BattleDrops {
     u8  attempts; /* +0x00 escape attempts; battle/battle/15 reads this byte */
     u8  count;    /* +0x01 listed drops, capped at 15 */
     u8  pad_02[0xC];
-    u16 items[16];  /* +0x0E dropped item ids */
+    u16 items[16];       /* +0x0E dropped item ids */
     u8  item_counts[16]; /* +0x2E drops of each id */
 } BattleDrops;
 
@@ -191,12 +191,12 @@ extern volatile u8 g_BattleCommandCount;
 extern u8 g_BattleCommandCount;
 #endif
 /* D_80146324 */
-extern u8     g_BattleSurprise;
+extern u8          g_BattleSurprise;
 extern BattleDrops g_BattleDrops;
 /* D_8014632C */
-extern u32    g_BattleRewardExp;
+extern u32         g_BattleRewardExp;
 /* D_80146330 */
-extern s32    g_BattleRewardZenny;
+extern s32         g_BattleRewardZenny;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {

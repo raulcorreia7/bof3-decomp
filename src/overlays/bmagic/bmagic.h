@@ -43,7 +43,7 @@
  * PartyBattler* battler. */
 #define BMAGIC_RELEASE_TARGET_AND_PLAY()                                         \
     slot = LOBU(g_BattleTargetSelector);                                         \
-    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                        \
+    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                  \
         battler = &g_BattlePartyBattlers[slot];                                  \
     } else {                                                                     \
         battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE); \

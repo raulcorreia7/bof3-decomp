@@ -21,7 +21,7 @@ MATCH void Battle_RollEnemyDrops(void) {
                         goto next; /* the item is already listed */
                     }
                 }
-                g_BattleDrops.items[g_BattleDrops.count]  = g_BattleCurrentEnemy->drops[i].item;
+                g_BattleDrops.items[g_BattleDrops.count]       = g_BattleCurrentEnemy->drops[i].item;
                 g_BattleDrops.item_counts[g_BattleDrops.count] = 1;
                 if (g_BattleDrops.count < BATTLE_DROP_COUNT_MAX) {
                     g_BattleDrops.count++;
