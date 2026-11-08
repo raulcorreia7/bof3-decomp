@@ -2,9 +2,9 @@
 
 void func_801DAC1C(void);
 
-/* nonmatching: 10 rows. Both loops schedule `i++` (addiu s0,s0,1) before the row address; retail forms the address first
- * (first row 0x801DAAE0, again at 0x801DAB34 where the panel base and offset take v0/v1 the other way round). Tried:
- * for, while and do-while forms, a typed panel pointer against an indexed byte pointer, 7 min permuter. */
+/* nonmatching: one row differs. The cursor-frame loop adds the row offset and `rows` as `addu v1,v1,a2` in retail and
+ * `addu v1,a2,v1` here (0x801DAAEC). `panel = &rows[i]; i++;` before the stores fixed the other nine rows. Tried:
+ * i + rows, rows + i, &i[rows], the 0x120 base inline in the loop (loses the shared base register). */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAA68(void) {
     u8*            record;
@@ -25,11 +25,12 @@ NON_MATCHING void func_801DAA68(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 0x10;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     while (i < 2) {
-        rows[i].handler = 6;
-        rows[i].mode    = MENU_START_MODE_CURSOR_FRAME;
-        rows[i].active  = 0;
-        rows[i].unk_0A  = 0;
+        panel = &rows[i];
         i++;
+        panel->handler = 6;
+        panel->mode    = MENU_START_MODE_CURSOR_FRAME;
+        panel->active  = 0;
+        panel->unk_0A  = 0;
     }
 
     i = 0;
