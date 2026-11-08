@@ -16,7 +16,7 @@ MATCH void func_801D0DD8(void) {
 }
 
 /* func_801D0E04 */
-MATCH void MenuBate_ResetPanels(void) {
+MATCH void Menu_ResetPanels(void) {
     u16* count;
 
     Menu_ResetPanelTasks();
@@ -33,7 +33,7 @@ MATCH void func_801D0E74(void) {
 }
 
 /* func_801D0EB0 */
-MATCH void MenuBate_StartFadeIn(void) {
+MATCH void Menu_StartFadeIn(void) {
     u8* count;
 
     UI_SetMode(UI_MODE_FAST_FADE_IN);

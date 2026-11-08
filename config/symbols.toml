@@ -1635,8 +1635,8 @@ g_MenuFormationOrder = { addr = 0x801D0D18, source = "Starting member order of t
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D5C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (g_MenuStep.step) through g_MenuBateStates." }
-MenuBate_ResetPanels = { addr = 0x801D0E04, type = "func", source = "resets menu panel tasks and advances the game entry substate" }
-MenuBate_StartFadeIn = { addr = 0x801D0EB0, type = "func", source = "sets fast fade-in mode and advances the menu step state" }
+Menu_ResetPanels = { addr = 0x801D0E04, type = "func", source = "resets menu panel tasks and advances the game entry substate" }
+Menu_StartFadeIn = { addr = 0x801D0EB0, type = "func", source = "sets fast fade-in mode and advances the menu step state" }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D2F64, type = "func", source = "Draws the equipment panel of character record_index in the Bate menu: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
