@@ -34,6 +34,29 @@ extern Callback D_800C21BC[];
 extern Callback D_800C26CC[];
 extern Callback D_800C26FC[];
 
+/* Point the current boss enemy at its script, mode handler and action table, then start task mode 2. */
+static inline void Boss_StartEnemyScript(u8* script, ModeFunc handler, u16* steps) {
+    EnemyBattler* work;
+
+    work = g_BattleCurrentEnemy;
+    EnemyBattler_SetScript(work, script, handler, steps);
+    ACTOR_SET_MODE(2);
+    func_8014D978();
+}
+
+/* Boss_StartEnemyScript for a boss whose handler also runs the combatant's action. */
+static inline void Boss_StartEnemyScriptAction(u8* script, ModeFunc handler, u16* steps) {
+    EnemyBattler* work;
+
+    work         = g_BattleCurrentEnemy;
+    work->script = script;
+    work->unk_E4 = handler;
+    work->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
+    work->unk_E8 = steps;
+    ACTOR_SET_MODE(2);
+    func_8014D978();
+}
+
 void func_800AC870(s32 entry_id, PartyMember* source_record, s32 mode);
 void func_800C1978(s32 mode);
 void func_800C1998(s32 mode);
