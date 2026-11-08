@@ -3,7 +3,7 @@
  */
 /* func_801EF1F0, func_801EFFBC */
 MATCH void Effect_DispatchStep(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC10;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);

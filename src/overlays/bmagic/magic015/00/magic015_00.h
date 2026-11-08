@@ -5,13 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable4 D_801EEC04;
+extern EffectStepFuncs4 D_801EEC04;
 
-extern BattleHandlerTable4 D_801EEC14;
-extern BattleHandlerTable4 D_801EEC24;
-extern BattleHandlerTable5 D_801EEC54;
-extern BattleHandlerTable8 D_801EEC34;
-extern u8                  g_BattleActiveBattler;
+extern EffectStepFuncs4 D_801EEC14;
+extern EffectStepFuncs4 D_801EEC24;
+extern EffectStepFuncs5 D_801EEC54;
+extern EffectStepFuncs8 D_801EEC34;
+extern u8               g_BattleActiveBattler;
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the
  * fade is done, moves the effect onto that battler and advances. One body shared

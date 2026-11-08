@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-GameHandlerTable6 D_80195F44 = {
+ActorStateFuncs6 D_80195F44 = {
     func_801AD734,
     func_801AD90C,
     func_801AD90C,

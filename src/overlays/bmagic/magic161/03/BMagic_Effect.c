@@ -23,7 +23,7 @@ MATCH s32 func_801EEF3C(void) {
 }
 
 MATCH void func_801EEF80(void) {
-    BattleHandlerTable5 handlers;
+    EffectStepFuncs5 handlers;
 
     handlers = D_801EEC10;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);

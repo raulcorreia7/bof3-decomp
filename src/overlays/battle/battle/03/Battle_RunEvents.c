@@ -2,11 +2,11 @@
 
 /* func_801DE43C */
 MATCH void Battle_RunEvents(void) {
-    BattleHandlerTable5 handlers;
-    u8                  group;
-    s8                  event_slot;
-    BattleEventSlot*    slot;
-    ScratchPad*         sp;
+    BattleEventFuncs handlers;
+    u8               group;
+    s8               event_slot;
+    BattleEventSlot* slot;
+    ScratchPad*      sp;
 
     handlers           = g_BattleEvents;
     g_BattleEventFlags = 0u;

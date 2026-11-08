@@ -5,15 +5,15 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable4 D_801EEC04;
-extern BMagicEffectFuncs   D_801EEC58;
+extern EffectStepFuncs4  D_801EEC04;
+extern BMagicEffectFuncs D_801EEC58;
 
-extern BattleHandlerTable3 D_801EEC14;
-extern BattleHandlerTable4 D_801EEC20;
-extern BattleHandlerTable4 D_801EEC30;
-extern BattleHandlerTable3 D_801EEC40;
-extern BattleHandlerTable3 D_801EEC4C;
-extern BattleHandlerTable4 D_801EEC84;
-extern BMagicEffectFuncs   D_801EEC94;
+extern EffectStepFuncs3  D_801EEC14;
+extern EffectStepFuncs4  D_801EEC20;
+extern EffectStepFuncs4  D_801EEC30;
+extern EffectStepFuncs3  D_801EEC40;
+extern EffectStepFuncs3  D_801EEC4C;
+extern EffectStepFuncs4  D_801EEC84;
+extern BMagicEffectFuncs D_801EEC94;
 
 #endif

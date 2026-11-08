@@ -8,7 +8,7 @@ void Effect_SetActorMatrix(void);
 void func_801EF9E4(void);
 
 MATCH void Effect_DrawActor(void) {
-    BattleHandlerTable3 handlers = D_801EEC04;
+    EffectStepFuncs3 handlers = D_801EEC04;
 
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
     if (g_Task->header.flags != 0) {

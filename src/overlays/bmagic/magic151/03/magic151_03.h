@@ -5,9 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8                  g_BattleActiveBattler;
-extern BattleHandlerTable5 D_801EEC10;
-extern BattleHandlerTable5 D_801EEC24;
+extern u8               g_BattleActiveBattler;
+extern EffectStepFuncs5 D_801EEC10;
+extern EffectStepFuncs5 D_801EEC24;
 
 extern BMagicEffectFuncs D_801EEC38;
 void                     func_801F026C(void);

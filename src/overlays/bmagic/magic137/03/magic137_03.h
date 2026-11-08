@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 #include "sys/exe.h"
 
-extern BattleHandlerTable3 D_801EEC10;
+extern EffectStepFuncs3 D_801EEC10;
 
 void func_801EF3B0(void);
 

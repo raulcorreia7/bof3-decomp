@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801E5CA4(void) {
-    BattleHandlerTable5 handlers;
-    BattleEffect*       slot;
-    BattleEffect*       work;
+    EffectStepFuncs5 handlers;
+    BattleEffect*    slot;
+    BattleEffect*    work;
 
     handlers = D_801D0EF4;
     handlers.handlers[D_801EC2E0->header.mode]();

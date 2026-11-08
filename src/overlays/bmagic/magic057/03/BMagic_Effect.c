@@ -17,7 +17,7 @@ MATCH void func_801EECB0(void) {
 }
 
 MATCH void func_801EED2C(void) {
-    BattleHandlerTable4 table;
+    EffectStepFuncs4 table;
 
     table = D_801EEC10;
     SYS_DISPATCH_TASK(table.handlers, 2, g_Task);
@@ -71,14 +71,14 @@ MATCH void func_801EEFEC(void) {
 }
 
 MATCH void func_801EF02C(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC20;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
 }
 
 MATCH void func_801EF08C(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers     = D_801EEC2C;
     g_ScriptBank = 0x800C3800;
@@ -104,7 +104,7 @@ MATCH void func_801EF528(void) {
 }
 
 MATCH void func_801EF55C(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC38;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
@@ -148,7 +148,7 @@ MATCH void func_801EF81C(void) {
 }
 
 MATCH void func_801EF83C(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers     = D_801EEC44;
     g_ScriptBank = 0x800C3800;

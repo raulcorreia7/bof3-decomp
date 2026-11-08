@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC18(void) {
-    BattleHandlerTable5 handlers;
+    EffectStepFuncs5 handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
