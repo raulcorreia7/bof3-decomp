@@ -59,8 +59,14 @@ MATCH void func_801EF254(void) {
     func_801EF4E0();
 }
 
-/* blocker: the argument is a record with s32 at 0x00 and DVECTOR cells at 0x10, 0x14 and 0x18 passed to Area_ProjectPoint; needs: type (no record type in this image). */
-INCLUDE_ASM(func_801EF2C0);
+/* Projects the point and the points half a unit to its left and right to the screen. */
+MATCH void func_801EF2C0(ProjectedSpan* span) {
+    Area_ProjectPoint(span->pos, &span->screen[1]);
+    span->pos[0] -= 0x8000;
+    Area_ProjectPoint(span->pos, &span->screen[0]);
+    span->pos[0] += 0x10000;
+    Area_ProjectPoint(span->pos, &span->screen[2]);
+}
 
 INCLUDE_ASM(func_801EF324);
 
