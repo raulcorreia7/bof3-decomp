@@ -23,7 +23,7 @@ segments:
       - [0x9B0, c, AngleAverage12]
       - [0xA00, c, func_801F3600]
       - [0xB64, c, Message_ClearOnCancel]
-      - [0xB98, c, Fish_LocationMessage]
+      - [0xB98, c, Fishing_ShowLocation]
       - [0xE50, c, func_801F3A50]
       - [0xFC4, c, func_801F3BC4]
       - [0x1050, c, func_801F3C50]

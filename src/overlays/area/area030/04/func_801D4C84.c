@@ -1,7 +1,7 @@
 #include "area030_04.h"
 
 /* Advances the area panel's slide step (unk_09) and draws the fish
- * page for fish unk_3E: its g_FishBestCatch record byte, or id 0xFF and 0 while
+ * page for fish unk_3E: its g_FishingBestCatch record byte, or id 0xFF and 0 while
  * that byte is 0, with the title sliding left in mode 0 (unk_08) and right
  * otherwise; at step 4 it makes unk_3C the current fish and advances unk_01. */
 MATCH void func_801D4C84(void) {
@@ -9,14 +9,14 @@ MATCH void func_801D4C84(void) {
 
     FISHING_STATE->step_timer_09++;
     func_801E0ED0(0, FISHING_CATCH_BAR_Y);
-    if (g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
+    if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
         func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK,
-                      g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E], 0);
+                      g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E], 0);
     } else {
         func_801E1004(0xFF, 0, 0);
     }
     if (FISHING_STATE->counter_08 == 0) {
-        if (g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
+        if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
             func_801E0F4C(FISHING_CATCH_ICON_X - FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP,
                           FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E);
         } else {
@@ -24,7 +24,7 @@ MATCH void func_801D4C84(void) {
                           FISHING_CATCH_ICON_Y, 0xFF);
         }
     } else {
-        if (g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
+        if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
             func_801E0F4C(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X,
                           FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E);
         } else {

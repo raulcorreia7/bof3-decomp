@@ -112,7 +112,7 @@ Callback g_ActorTypes[187] = {
     (Callback)func_801F30C8, (Callback)func_801F2CF8, (Callback)func_801F427C,        (Callback)func_801F2C64,
     (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F3560,
     (Callback)func_801F3E0C, (Callback)func_801F7198, (Callback)func_801F75F8,        (Callback)func_801F2C04,
-    (Callback)func_801F2C04, (Callback)func_801F77F8, (Callback)Fish_LocationMessage, (Callback)func_801F2C04,
+    (Callback)func_801F2C04, (Callback)func_801F77F8, (Callback)Fishing_ShowLocation, (Callback)func_801F2C04,
     (Callback)func_801F2DA4, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F2C04,
     (Callback)func_801F41D0, (Callback)func_801F2C80, (Callback)func_8019B284,        (Callback)func_801F4344,
     (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2E20,        (Callback)func_801F2FF0,
@@ -291,10 +291,10 @@ Callback g_SceneEvents[64] = {
 u8 s_SceneStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 
 Callback D_801C85C4[11] = {
-    (Callback)Fish_LocationMessage, (Callback)func_801F2D18,        (Callback)Fish_LocationMessage,
+    (Callback)Fishing_ShowLocation, (Callback)func_801F2D18,        (Callback)Fishing_ShowLocation,
     (Callback)func_801F2C6C,        (Callback)func_801F2C6C,        (Callback)func_801F3798,
-    (Callback)func_801F2F0C,        (Callback)Fish_LocationMessage, (Callback)func_801F2E1C,
-    (Callback)Fish_LocationMessage, (Callback)func_801F2CA8};
+    (Callback)func_801F2F0C,        (Callback)Fishing_ShowLocation, (Callback)func_801F2E1C,
+    (Callback)Fishing_ShowLocation, (Callback)func_801F2CA8};
 
 SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F2D28, (SceneFunc)func_801A8714, (SceneFunc)&D_801F1294,   (SceneFunc)&D_801F1318,
@@ -2140,7 +2140,7 @@ s8 s_EntityPlacementOffsets[32] = {
 
 Callback D_801CD0AC[15] = {(Callback)func_801B016C, (Callback)func_801B0320, (Callback)func_801B69C0,
                            (Callback)func_801B1AE8, (Callback)func_801B29BC, (Callback)func_801B2A70,
-                           (Callback)func_801B2C38, (Callback)func_801B2D90, (Callback)Field_Climb,
+                           (Callback)func_801B2C38, (Callback)func_801B2D90, (Callback)Area_Climb,
                            (Callback)func_801D9B14, (Callback)func_801B3690, (Callback)func_801B371C,
                            (Callback)func_801B3BFC, (Callback)func_801F4D9C, (Callback)func_801C22D8};
 
@@ -2158,13 +2158,13 @@ Callback D_801CD118[2] = {(Callback)func_801B2AB4, (Callback)func_801B2B6C};
 Callback D_801CD120[4] = {(Callback)func_801B2DDC, (Callback)func_801B2FC8, (Callback)func_801B315C,
                           (Callback)func_801B31F0};
 
-Callback g_FieldClimbSteps[4] = {(Callback)func_801B32A4, (Callback)Field_ClimbMount, (Callback)func_801B3488,
-                          (Callback)Field_ClimbDismount};
+Callback g_AreaClimbSteps[4] = {(Callback)func_801B32A4, (Callback)Area_ClimbMount, (Callback)func_801B3488,
+                          (Callback)Area_ClimbDismount};
 
-Callback g_FieldClimbMountSteps[5] = {(Callback)func_801B3314, (Callback)func_801B3388, (Callback)func_801B33C4,
+Callback g_AreaClimbMountSteps[5] = {(Callback)func_801B3314, (Callback)func_801B3388, (Callback)func_801B33C4,
                           (Callback)func_801B3400, (Callback)func_801B343C};
 
-Callback g_FieldClimbDismountSteps[4] = {(Callback)func_801B3584, (Callback)func_801B35B0, (Callback)func_801B35EC,
+Callback g_AreaClimbDismountSteps[4] = {(Callback)func_801B3584, (Callback)func_801B35B0, (Callback)func_801B35EC,
                           (Callback)func_801B3670};
 
 Callback g_PersonalActions[19] = {
@@ -2266,8 +2266,8 @@ Callback D_801CD404[15] = {(Callback)func_801BBE98,
 
 Callback D_801CD440[2] = {(Callback)func_801BC000, (Callback)Area_StepSceneTimer};
 
-Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)Field_ClimbMount, (Callback)func_801BD83C,
-                          (Callback)Field_ClimbDismount};
+Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)Area_ClimbMount, (Callback)func_801BD83C,
+                          (Callback)Area_ClimbDismount};
 
 Offset2DB s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
     {-CAMERA_SCROLL_STEP, 0},

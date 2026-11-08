@@ -12,7 +12,7 @@
 
 #define FISHING_STATE        ((FishingState*)g_Task)
 #define FISHING_ROW          ((Actor*)g_CurrentActor)
-#define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishSpecies)[(index)])
+#define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishingSpecies)[(index)])
 
 /* The fishing messages: indexes into the message table the pond loads at
  * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
@@ -217,7 +217,7 @@ typedef struct FishingState {
 ASSERT_OFFSET(FishingState, y_38, 0x38);
 STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.half.slot_3A) == 0x3A);
 
-/* The 0x24-byte fishing scene cue rows at g_FishSpecies, indexed by the work's
+/* The 0x24-byte fishing scene cue rows at g_FishingSpecies, indexed by the work's
  * cue_index_06 and selected by the g_FishingPromptSets queue table. value_00 is the
  * scene id func_8014DD3C resolves; count_0A limits the spawn facing. The rest
  * is not modelled. */
@@ -463,7 +463,7 @@ extern Callback              D_801E22E4[];
 extern Callback              D_801E22F0[];
 extern Callback              D_801E22FC[];
 extern Callback              D_801E2304[];
-extern void (*g_FishModes[])(void);
+extern void (*g_FishingFishStates[])(void);
 extern u8                    D_801E2330[];
 extern u8                    D_801E2331[];
 extern Callback              D_801E2340[];
@@ -482,7 +482,7 @@ extern u8                    D_801E28F4[];
 extern s8                    D_801E28F8[];
 extern u8                    D_801E2AB8[];
 /* D_801E2AC8 */
-extern u8                    g_FishSpecies[];
+extern u8                    g_FishingSpecies[];
 extern u8                    D_801E2ACA[];
 extern u8                    D_801E2AD2[];
 extern u8                    D_801E2AD3[];
@@ -490,7 +490,7 @@ extern u8                    D_801E2AD5[];
 extern u8                    D_801E2AD7[];
 extern u8                    D_801E2ADA[];
 /* D_801E2DF4 */
-extern s8                    g_FishSpawnCounts[];
+extern s8                    g_FishingSpawnCounts[];
 extern u8                    D_801E3044[30][8];
 extern FishingCompanionCells D_801E3134;
 extern u8                    D_801E31E0[];

@@ -22,7 +22,7 @@ MATCH void Fishing_DataNextFish(void) {
     scan                          = record;
 loop:
     index = scan->bounce_3C.half.key_3E;
-    if (g_FishBestCatch[index] == 0) {
+    if (g_FishingBestCatch[index] == 0) {
         next                        = index + 1;
         scan->bounce_3C.half.key_3E = next;
         if (next >= 0x20) {

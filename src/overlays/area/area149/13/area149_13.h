@@ -23,7 +23,7 @@ extern Callback D_801F4580[];
 /* The intro-controller state byte the request steps advance. */
 
 /* The overlay's companion step the wrapper enters. */
-void Screen_DrawTint(void);
+void Area_DrawScreenTint(void);
 /* The sprite-span step the handler enters. */
 void func_801F3140(s32 span);
 

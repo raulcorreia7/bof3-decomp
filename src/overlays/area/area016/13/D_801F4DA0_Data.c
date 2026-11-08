@@ -1,7 +1,7 @@
 #include "area016_13.h"
 
 /* The first three rows are the fishing spots: x, y, the fishing area (AREA_ID_FISHING_YRAAL) and the spot selector
- * Fish_LocationMessage matches against D_801F50E4; it walks the rows until x and y equal the party cell. func_801F4610
+ * Fishing_ShowLocation matches against D_801F50E4; it walks the rows until x and y equal the party cell. func_801F4610
  * marks the cell of the row chosen by the work byte 0x0B. The rows after them hold other records at the same stride
  * (the stage readers and map scripts); none is proven to be a node or link graph. */
 WorldMapPoint D_801F4DA0[137] = {

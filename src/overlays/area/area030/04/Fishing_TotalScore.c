@@ -9,8 +9,8 @@ MATCH s32 Fishing_TotalScore(void) {
 
     total = 0;
     for (i = 0; i < 32; i++) {
-        if (g_FishBestCatch[i] != 0) {
-            total += Fishing_CatchScore(i, g_FishBestCatch[i]);
+        if (g_FishingBestCatch[i] != 0) {
+            total += Fishing_CatchScore(i, g_FishingBestCatch[i]);
         }
     }
     return total & HALF_MASK;

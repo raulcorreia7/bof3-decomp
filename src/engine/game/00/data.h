@@ -86,7 +86,7 @@ ASSERT_OFFSET(PartySlot, key, 0x1);
 /* 0x1C-byte front-end handler row. Game_FindAreaHandler returns the row whose key
  * byte at +0x18 matches the current world state; the handlers sit at +0, +4,
  * +8, +0x0C and +0x10, and +0x14 points to the area's map points, four-byte rows (x, y,
- * context seed, context kind) that func_801B690C searches for the actor cell; Fish_LocationMessage walks the same
+ * context seed, context kind) that func_801B690C searches for the actor cell; Fishing_ShowLocation walks the same
  * rows. The only reader of the member is func_8019A1D4; the rows are written by the data initialiser only. */
 typedef struct AreaHandler {
     Callback handler_00;

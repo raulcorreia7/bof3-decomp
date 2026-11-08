@@ -13,7 +13,7 @@ segments:
       - [0x100, c, func_801F2D00]
       - [0x1BC, c, func_801F2DBC]
       - [0x214, c, func_801F2E14]
-      - [0x234, c, Screen_DrawTint]
+      - [0x234, c, Area_DrawScreenTint]
       - [0x318, c, func_801F2F18]
       - [0x340, c, func_801F2F40]
       - [0x394, c, func_801F2F94]

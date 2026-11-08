@@ -9,7 +9,7 @@ MATCH void func_801F3920(void) {
     y                = D_1F800034[1];
     g_Task->screen_y = y;
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)y, (s16)g_Task->unk_18, 0xFF, g_Task->tint.bytes.flags);
-    Screen_DrawTint();
+    Area_DrawScreenTint();
     func_801F3C84();
     task = g_Task;
     task->tint.bytes.flags -= 2;

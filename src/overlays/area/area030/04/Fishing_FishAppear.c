@@ -8,7 +8,7 @@
 /* nonmatching unmeasured: tried the bounce count in a local (68.75); the negated scale in a local (66.21); the unsigned
  * facing comparison with a count local (74.31); the area-table entry taken as a pointer instead of a 0x24-byte rvalue
  * (74.31, byte-identical, so the rvalue was never the frame's cause). The candidate's frame is 0x28 where the retail's
- * is 0x18, and it keeps the table base in s0 where the retail rematerialises it per access (lhu %lo(g_FishSpecies)($at)
+ * is 0x18, and it keeps the table base in s0 where the retail rematerialises it per access (lhu %lo(g_FishingSpecies)($at)
  * and lbu %lo(D_801E2AD2)($at) at 0x801DE61C and 0x801DE6B4). resume: a source shape that keeps the table base out of a
  * callee-saved register and drops the frame to the retail's 0x18. */
 /* func_801DE5EC */

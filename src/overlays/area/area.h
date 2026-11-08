@@ -62,7 +62,7 @@ void            func_801F2C14(void);
 void            func_801F2C18(void);
 void            func_801F2C30(void);
 /* func_801F2C38 */
-void            Fish_LocationMessage(void);
+void            Fishing_ShowLocation(void);
 void            func_801F2C48(void);
 void            func_801F2C5C(void);
 s32             Area_CheckStepTrigger(s32 x, s32 y);
@@ -201,11 +201,11 @@ void Actor_StopMoving(void);
 void Area_ClearWorkColumn(void);
 u8*  Area_FindFreeWorkRow(void);
 void Area_InitSpin(void* spin);
-void Area_StepRunGauge(void);
+void Area_UpdateRunGauge(void);
 void Area_ClaimSpawnSlot(void);
-s32  Area_StepSpawnSlots(void);
+s32  Area_UpdateSpawnSlots(void);
 void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
-void Area_FinishTurnStep(void);
-s32  Area_BeginTurnStep(s32 direction, s32 previous);
+void Area_EndTurn(void);
+s32  Area_StartTurn(s32 direction, s32 previous);
 
 #endif

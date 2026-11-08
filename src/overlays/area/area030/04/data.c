@@ -342,7 +342,7 @@ Callback D_801E2304[4] = {
     (Callback)func_801DDC0C, (Callback)func_801DDC54, (Callback)func_801DDCB8,
     (Callback)func_801DDCF8,
 };
-void (*g_FishModes[7])(void) = {
+void (*g_FishingFishStates[7])(void) = {
     (void (*)(void))Fishing_FishAppear, (void (*)(void))Fishing_FishSwim, (void (*)(void))func_801DEBC4,
     (void (*)(void))func_801DECDC, (void (*)(void))func_801DF334, (void (*)(void))func_801DFFA8,
     (void (*)(void))func_801E00E0,
@@ -521,7 +521,7 @@ u8 D_801E2AB8[16] = {
     0x04, 0x00, 0x08, 0x10,
 };
 /* The 0x24-byte area cue rows; D_801E2ACA..D_801E2ADA name columns inside. */
-u8 g_FishSpecies[812] = {
+u8 g_FishingSpecies[812] = {
     0x04, 0x02, 0xE6, 0x02, 0x00, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x03,
     0x10, 0x00, 0x1E, 0x1E, 0x01, 0x00, 0x64, 0x00, 0x08, 0x10, 0x00, 0x10,
     0x08, 0x10, 0x00, 0x10, 0x00, 0x04, 0x10, 0x10, 0x08, 0x00, 0x10, 0x10,
@@ -591,7 +591,7 @@ u8 g_FishSpecies[812] = {
     0xBC, 0x01, 0xBA, 0x01, 0x09, 0x09, 0x09, 0x09, 0x00, 0x09, 0x01, 0x03,
     0x10, 0x00, 0x1E, 0xC8, 0x00, 0x00, 0xF4, 0x01,
 };
-s8 g_FishSpawnCounts[592] = {
+s8 g_FishingSpawnCounts[592] = {
     10, 6, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     10, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0,

@@ -33,7 +33,7 @@ extern void (*D_801F5FBC[])(void* slot);
 extern u8 D_801F6510;
 extern u8 D_801F6514;
 
-/* The per-image spawn step Area_AdvanceSpawnTimer runs between the slot claim and the slot pass. */
+/* The per-image spawn step Area_UpdateSpawn runs between the slot claim and the slot pass. */
 #define AREA_SPAWN_TICK             func_801F5940
 
 #define AREA_SPAWN_SLOT_LIFE        0x10

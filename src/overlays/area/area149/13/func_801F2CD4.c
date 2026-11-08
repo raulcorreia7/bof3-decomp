@@ -19,5 +19,5 @@ MATCH void func_801F2CD4(void) {
         g_Task->header.mode = 3;
     }
     g_AreaCameraRefreshCount = 2;
-    Screen_DrawTint();
+    Area_DrawScreenTint();
 }

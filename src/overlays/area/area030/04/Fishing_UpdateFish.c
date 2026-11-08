@@ -3,7 +3,7 @@
 /* Walks the 30 state records (stride 0x98) at g_Actors; for every
  * live record it publishes the record pointer to the scratch work slot
  * g_Task and to g_CurrentActor, dispatches through the handler table
- * g_FishModes with the record's type byte, then rebuilds the record's blend byte
+ * g_FishingFishStates with the record's type byte, then rebuilds the record's blend byte
  * 0x5D from flag 0x20 and the signed halfword 0x3E and copies it to 0x5E and
  * 0x5F. */
 /* func_801DE4AC */
@@ -14,7 +14,7 @@ MATCH void Fishing_UpdateFish(void) {
     s32 base;
 
     i     = 0;
-    table = g_FishModes;
+    table = g_FishingFishStates;
     base  = -0x40;
     off   = 0;
     for (; i < 30; i++, off += 0x98) {

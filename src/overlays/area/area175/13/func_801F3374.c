@@ -9,5 +9,5 @@ MATCH void func_801F3374(void) {
     } else {
         g_Task->header.mode = 4;
     }
-    Screen_DrawTint();
+    Area_DrawScreenTint();
 }

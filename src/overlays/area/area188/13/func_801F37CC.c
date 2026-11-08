@@ -9,7 +9,7 @@ MATCH void func_801F37CC(void) {
     if (!(count & 3)) {
         Area_ClaimSpawnSlot();
     }
-    Area_StepSpawnSlots();
+    Area_UpdateSpawnSlots();
     func_801F44B4();
     func_801F3ADC(&g_Task->unk_18, &g_Task->pos.x, 0x40);
     if (*g_ScriptVars == 3) {

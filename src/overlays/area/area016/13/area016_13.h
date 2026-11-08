@@ -26,7 +26,7 @@ extern s32           D_80145EC4[];
 extern WorldMapKey   D_801F4D7C[9];
 extern WorldMapPoint D_801F4DA0[137];
 /* Key rows: column 0 is matched against g_GameContextSeed; column g_SceneState is
- * the value Fish_LocationMessage passes on. */
+ * the value Fishing_ShowLocation passes on. */
 extern u16           D_801F4FC4[9][16];
 extern u8            D_801F50E4[28];
 extern u8            D_801F50E5[]; /* the record-selector byte at +1 */

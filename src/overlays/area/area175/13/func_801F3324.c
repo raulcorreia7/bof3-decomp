@@ -5,5 +5,5 @@ MATCH void func_801F3324(void) {
         g_Task->timer       = 0x10;
         g_Task->header.mode = 3;
     }
-    Screen_DrawTint();
+    Area_DrawScreenTint();
 }

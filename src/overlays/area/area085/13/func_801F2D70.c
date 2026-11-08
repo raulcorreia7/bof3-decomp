@@ -10,6 +10,6 @@ MATCH void func_801F2D70(void) {
         g_Task->timer       = 0xC;
         g_Task->header.mode = 3;
     }
-    Screen_DrawTint();
+    Area_DrawScreenTint();
     func_801F2FCC();
 }

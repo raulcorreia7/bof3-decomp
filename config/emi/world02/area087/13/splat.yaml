@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, g_AreaModuleId]
       - [0x4, c, Message_ClearOnCancel]
-      - [0x38, c, Fish_LocationMessage]
+      - [0x38, c, Fishing_ShowLocation]
       - [0x6C, c, func_801F2C6C]
       - [0x320, c, func_801F2F20]
       - [0x494, c, func_801F3094]

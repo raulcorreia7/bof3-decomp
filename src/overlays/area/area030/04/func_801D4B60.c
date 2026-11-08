@@ -12,7 +12,7 @@ MATCH void func_801D4B60(void) {
 
     func_801E0ED0(0, FISHING_CATCH_BAR_Y);
     key  = FISHING_STATE->bounce_3C.half.key_3E;
-    fish = g_FishBestCatch[key];
+    fish = g_FishingBestCatch[key];
     if (fish != 0) {
         func_801E1004(key & BYTE_MASK, fish, 0);
         func_801E0F4C(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E);

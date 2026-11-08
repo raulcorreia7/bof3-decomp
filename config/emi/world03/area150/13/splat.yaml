@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, D_801F2C00]
-      - [0x38, c, Fish_LocationMessage]
+      - [0x38, c, Fishing_ShowLocation]
       - [0xB0, c, Message_SetAnswerMessage]
       - [0xDC, c, func_801F2CDC]
       - [0x10C, c, func_801F2D0C]

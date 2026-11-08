@@ -32,7 +32,7 @@ extern s8 D_801F5378[];
 /* Fairy_InitVillage in the commu overlay at the same address. */
 void func_801EECA4(void);
 
-void Screen_DrawTint(void);
+void Area_DrawScreenTint(void);
 void func_801F36DC(s32 arg0, s32 arg1, s32 arg2);
 
 #endif

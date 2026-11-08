@@ -36,18 +36,18 @@ MATCH void func_801F6F24(void) {
     } else {
         g_Task->header.mode = 2;
     }
-    Screen_DrawTint();
+    Area_DrawScreenTint();
     func_801F70DC();
 }
 
 MATCH void func_801F6FD0(void) {
-    Screen_DrawTint();
+    Area_DrawScreenTint();
     func_801F70DC();
 }
 
-#include "shared/Screen_DrawTint.h"
+#include "shared/Area_DrawScreenTint.h"
 
-MATCH void Screen_DrawTint(void) {
+MATCH void Area_DrawScreenTint(void) {
     Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & HALF_MASK));
 }
 

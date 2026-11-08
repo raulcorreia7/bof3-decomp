@@ -11,9 +11,9 @@ MATCH void Fishing_CatchRecord(void) {
     if (D_80144199 == 4) {
         value = g_Actors[g_FishingHookedFish].unk_06;
         limit = g_Actors[g_FishingHookedFish].roll_90;
-        if (g_FishBestCatch[value] < limit) {
-            g_FishBestCatch[value] = limit;
-            g_FishingNewRecord     = 1;
+        if (g_FishingBestCatch[value] < limit) {
+            g_FishingBestCatch[value] = limit;
+            g_FishingNewRecord        = 1;
         }
 
         SND_PlayCue(EMI_CUE_ID(1, 2));

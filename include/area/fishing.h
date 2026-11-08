@@ -81,6 +81,6 @@ ASSERT_OFFSET(FishingLure, reeling_float_04, FISHING_LURE_REELING_FLOAT_OFFSET);
 ASSERT_OFFSET(FishingLure, sideways_float_08, FISHING_LURE_SIDEWAYS_FLOAT_OFFSET);
 
 /* D_80144FE4 */
-extern u8 g_FishBestCatch[FISHING_RECORD_COUNT];
+extern u8 g_FishingBestCatch[FISHING_RECORD_COUNT];
 
 #endif
