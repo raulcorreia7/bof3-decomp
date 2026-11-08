@@ -90,10 +90,7 @@ MATCH void func_801D0244(void) {
 }
 
 MATCH void func_801D0288(void) {
-    func_801D066C();
-    Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
-    g_Task->unk_0A = 0xB;
-    g_Task->unk_03 = 1;
+    CHAR_START_FACING_TURN(func_801D066C);
 }
 
 INCLUDE_ASM(func_801D02F4);

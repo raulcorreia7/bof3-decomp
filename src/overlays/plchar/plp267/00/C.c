@@ -68,10 +68,7 @@ MATCH void func_801CF718(void) {
 }
 
 MATCH void func_801CF75C(void) {
-    func_801CFB40();
-    Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
-    g_Task->unk_0A = 0xB;
-    g_Task->unk_03 = 1;
+    CHAR_START_FACING_TURN(func_801CFB40);
 }
 
 INCLUDE_ASM(func_801CF7C8);
