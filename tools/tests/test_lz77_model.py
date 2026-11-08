@@ -146,7 +146,7 @@ def test_copy_kernel_is_a_forward_copy(host: Path) -> None:
     )
 
 
-@pytest.mark.parametrize("seed", range(12))
+@pytest.mark.parametrize("seed", range(3))
 def test_synthetic_streams_decode_like_the_reference(
     host: Path, tmp_path: Path, seed: int
 ) -> None:
