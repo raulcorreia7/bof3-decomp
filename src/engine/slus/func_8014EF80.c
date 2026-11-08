@@ -9,7 +9,7 @@ MATCH void func_8014EF80(void) {
     u16* coordinates;
     u16  value;
     /* FAKE: allocator picks the countdown cell first; retail reuses v0 as the coordinate accumulator. */
-    MATCH_FAKE_PIN(u16, coordinate, "v0");
+    FAKE_REG(u16, coordinate, "v0");
     u16 countdown;
 
     flag        = 2;

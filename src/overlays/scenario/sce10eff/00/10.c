@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* The overlay's three entry points. @source: read:Scene_RunEffect@0x801D0C10 */
+/* The overlay's three entry points. @source: read:Scene_UpdateEffect@0x801D0C10 */
 #define SCENE10_EFFECT_STEP_COUNT 3
 
 typedef struct SceneEffect10Steps {
@@ -12,11 +12,11 @@ typedef struct SceneEffect10Steps {
 } SceneEffect10Steps;
 
 static SceneEffect10Steps D_801D0C04 = {
-    {Scene_EffectBegin, Scene_EffectEnd, Scene_EffectRunState},
+    {Scene_EffectBegin, Scene_EffectEnd, Scene_UpdateEffectState},
 };
 
 /* func_801D0C10 */
-MATCH void Scene_RunEffect(void) { /* func_801D0C10 */
+MATCH void Scene_UpdateEffect(void) { /* func_801D0C10 */
     SceneEffect10Steps handlers;
 
     handlers = D_801D0C04;
@@ -74,7 +74,7 @@ MATCH void Scene_EffectEnd(void) { /* func_801D0E64 */
 }
 
 /* func_801D0E9C */
-MATCH void Scene_EffectRunState(void) { /* func_801D0E9C */
+MATCH void Scene_UpdateEffectState(void) { /* func_801D0E9C */
     D_801D2708[g_Task->state]();
 }
 

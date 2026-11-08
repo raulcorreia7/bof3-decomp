@@ -10,14 +10,14 @@
  */
 MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     /* FAKE: keep the masked bit in a2. */
-    MATCH_FAKE_PIN(s32, mode_bit, "a2");
+    FAKE_REG(s32, mode_bit, "a2");
     /* FAKE: keep the shifted flags in a3. */
-    MATCH_FAKE_PIN(s32, mode_flags, "a3");
+    FAKE_REG(s32, mode_flags, "a3");
     /* FAKE: keep the shifted byte in v0. */
-    MATCH_FAKE_PIN(s32, draw_value, "v0");
+    FAKE_REG(s32, draw_value, "v0");
     s32 mode_bits;
     /* FAKE: reuse the retail a0 value for input, pointer, and output. */
-    MATCH_FAKE_PIN(s32, scratch, "a0");
+    FAKE_REG(s32, scratch, "a0");
     s32         packed;
     Actor*      work;
     s32         delta;
@@ -50,7 +50,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         draw_value = ((u32)packed >> 4) << 8;
         mode_bits  = draw_value & 0x100;
         /* FAKE: hide the masked bit's range so the shift stays arithmetic. */
-        MATCH_FAKE_OPAQUE(mode_bits);
+        FAKE_OPAQUE(mode_bits);
         mode_bit   = mode_bits >> 4;
         packed     = packed & 0xF;
         draw_value = draw_value & 0x200;

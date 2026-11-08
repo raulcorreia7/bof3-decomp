@@ -8,7 +8,7 @@ usage() {
 }
 [ "$#" -ge 1 ] || usage
 [ -x "$root/toolchains/rizin/bin/rizin" ] || {
-    echo "bin/rz: rizin is missing; install it as docs/toolchain.md#matching-aids says" >&2
+    echo "bin/rz: rizin is missing; install it as docs/toolchain.md#matching-tools says" >&2
     exit 127
 }
 if [ "$1" = raw ]; then

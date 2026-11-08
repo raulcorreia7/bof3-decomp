@@ -9,14 +9,14 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     MATRIX matrix;
     long   depth;
     long   flag;
-    /* FAKE: MATCH_REG pins the scratch base to the retail s1 load. */
-    MATCH_REG(SVECTOR*, scratch, "s1");
+    /* FAKE: FAKE_REG pins the scratch base to the retail s1 load. */
+    FAKE_REG(SVECTOR*, scratch, "s1");
     SVECTOR* q1;
     SVECTOR* q2;
     SVECTOR* q3;
     s16      vx0;
     /* FAKE: pins the hoisted first-pair loads to the retail v1/v0. */
-    MATCH_REG(s16, vy0, "v0");
+    FAKE_REG(s16, vy0, "v0");
     u32 primitive;
 
     PushMatrix();
@@ -51,34 +51,34 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     RotTransPers4(scratch, scratch + 1, scratch + 2, scratch + 3, (long*)(primitive + 8), (long*)(primitive + 0x10),
                   (long*)(primitive + 0x18), (long*)(primitive + 0x20), &depth, &flag);
 
-    vx0 = *MATCH_VOLATILE_PTR(s16, (primitive + 8));
+    vx0 = *FAKE_VOLATILE_PTR(s16, (primitive + 8));
 
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0xC))  = 0x80u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0xC))  = 0x80u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0xE))  = 0x80u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0xE))  = 0x80u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x14)) = 0x80u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0x14)) = 0x80u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x16)) = 0x80u;
-    vy0                                         = *MATCH_VOLATILE_PTR(s16, (primitive + 10));
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0x16)) = 0x80u;
+    vy0                                        = *FAKE_VOLATILE_PTR(s16, (primitive + 10));
 
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 4))    = 0xFFu;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 4))    = 0xFFu;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 5))    = 0u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 5))    = 0u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 6))    = 0u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 6))    = 0u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0xD))  = 0u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0xD))  = 0u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x15)) = 0u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0x15)) = 0u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x1C)) = 0u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0x1C)) = 0u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x1D)) = 0u;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0x1D)) = 0u;
     /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x1E)) = 0xFFu;
+    *FAKE_VOLATILE_PTR(u8, (primitive + 0x1E)) = 0xFFu;
 
     setXY4(((POLY_G4*)primitive), (s16)(vx0 - 0x9E) + x, (s16)(vy0 - 0x76) + y,
            (s16)((s16)((POLY_G4*)primitive)->x1 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y1 - 0x76) + y,

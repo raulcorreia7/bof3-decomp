@@ -10,7 +10,7 @@ MATCH void func_801F3AA0(void) {
     } else {
         func_801BE1B0(4U);
         g_ScriptWorkRecord->header.flags = 0;
-        ORDER_FENCE(); /* FAKE: the order fence keeps the value store in retail's schedule. */
+        FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the value store in retail's schedule. */
         value = 0x28;
     }
     D_80146865 = value;

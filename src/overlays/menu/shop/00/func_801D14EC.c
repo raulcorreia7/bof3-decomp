@@ -8,7 +8,7 @@ MATCH void func_801D14EC(void) {
         MenuPanelTask* panel;
 
         /* FAKE: an unset panel live at the loop head fixes retail's temp registers; pure C best 73 differing rows. */
-        MATCH_FAKE_USE(panel);
+        FAKE_USE(panel);
         i = 0;
         while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
             panel             = &g_MenuPanelTasks[i + 3];

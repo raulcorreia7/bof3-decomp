@@ -8,7 +8,7 @@ MATCH void func_801F5B24(void) {
     count = work->unk_0A;
     if (count == 0) {
         work->pos.x.fixed = D_80145EC4;
-        MATCH_FAKE_BARRIER(); /* FAKE: keeps the y and z loads below the x store */
+        FAKE_BARRIER(); /* FAKE: keeps the y and z loads below the x store */
         work->pos.y.fixed = D_80145EC8;
         work->pos.z.fixed = D_80145ECC + TO_COORD(128);
         func_801F5BB0(work);

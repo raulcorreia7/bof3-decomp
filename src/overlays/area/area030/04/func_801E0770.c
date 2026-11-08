@@ -8,12 +8,12 @@ MATCH s32 func_801E0770(void) {
     FishingState* work;
     s32           d;
     /* FAKE: retail keeps the z delta in $v0. */
-    MATCH_REG(s32, dz, "v0");
+    FAKE_REG(s32, dz, "v0");
     /* FAKE: retail keeps the y anchor in $a0. */
-    MATCH_REG(s32, anchor, "a0");
+    FAKE_REG(s32, anchor, "a0");
     s32 limit;
     /* FAKE: retail holds the failure status in $v0 across the guard chain. */
-    MATCH_REG(s32, result, "v0");
+    FAKE_REG(s32, result, "v0");
 
     result = 0;
     if (4 != g_ActorSlots[0].header.mode) {

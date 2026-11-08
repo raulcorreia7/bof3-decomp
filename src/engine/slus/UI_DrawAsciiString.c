@@ -7,7 +7,7 @@
 MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
     /* FAKE: the two pins reproduce retail's callee-saved assignment; the logic
      * alone lets the allocator pick different saved registers. */
-    MATCH_FAKE_PIN(SPRT*, sprite, "s1"); /* FAKE: sprite cursor */
+    FAKE_REG(SPRT*, sprite, "s1"); /* FAKE: sprite cursor */
     u8* str;
     s16 x;
     s16 y;
@@ -21,7 +21,7 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
     y   = top + 1;
     {
         /* FAKE: the attribute copy shares s0 with the divisor constant. */
-        MATCH_FAKE_PIN(s32, attr, "s0");
+        FAKE_REG(s32, attr, "s0");
         attr = flags;
         func_8014FC00(0);
         color = ((attr & 0x3F) | STAGE_PALETTE_CLUT);

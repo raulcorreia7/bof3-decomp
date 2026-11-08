@@ -10,5 +10,5 @@ For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and
 Define `MATCHING` and supply the required declarations
 in the scratch context. The scenario `sce10eff/00` uses the additional flags
 `-fno-cse-follow-jumps -fno-cse-skip-blocks`. `build/meson/emit/cflags.txt` holds the flags the
-project build uses. A scratch is a comparison aid; `meson compile -C build/meson check` verifies the
+project build uses. A scratch is a comparison tool; `meson compile -C build/meson check` verifies the
 project build.

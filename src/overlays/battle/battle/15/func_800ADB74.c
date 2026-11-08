@@ -24,7 +24,7 @@ MATCH void func_800ADB74(void) {
     if (slot != GAME_NONE) {
         Actor_RequestScript(slot);
         /* FAKE: opaque slot so CSE cannot fold the second test. */
-        MATCH_FAKE_OPAQUE(slot);
+        FAKE_OPAQUE(slot);
     }
     if (slot != GAME_NONE) {
         func_8014D978();

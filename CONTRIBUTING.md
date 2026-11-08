@@ -120,7 +120,7 @@ Meson has no `check`; `pre-push` skips it. Each check:
 | `format-check`           | C, Python, TOML or Markdown differs from the formatter                                 |
 | `meson test`             | a tool test fails                                                                      |
 | `typeloss`               | a rename, move or retype weakens a type                                                |
-| `quality`                | a touched file gains casts, matching aids, `func_`/`D_` names or pasted bodies         |
+| `quality`                | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies          |
 
 The disc-free checks run in CI on every push and pull request through the same entry. A match score,
 an analyzer opinion or a decompiler draft is a lead; only `check` proves bytes. For parallel work,

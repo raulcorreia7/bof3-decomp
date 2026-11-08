@@ -10,7 +10,7 @@ MATCH void func_801D0C88(void) {
     u8* entryp;
     u16 y;
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     g_MenuMasterScrollOffset -= 1;
     row   = 0;

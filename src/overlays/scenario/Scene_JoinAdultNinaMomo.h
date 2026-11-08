@@ -9,6 +9,6 @@
     Party_JoinMember(CHAR_ID_MOMO);                                                 \
     Party_LoadPalettes()
 
-MATCH void Scene_JoinAdultNinaAndMomo(void) {
+MATCH void Scene_JoinAdultNinaMomo(void) {
     SCENE_JOIN_ADULT_NINA_AND_MOMO();
 }

@@ -3,10 +3,10 @@
 MATCH s32 func_801A246C(s32 value_a, s32 value_b, s32 flag_bits) {
     /* FAKE: retail keeps the original flag_bits in a3 across the bit-0 test; the
      * allocator coalesces the copy without the pin. */
-    MATCH_REG(s32, saved, "a3");
+    FAKE_REG(s32, saved, "a3");
     /* FAKE: retail computes the merged bit-1 test into v0 so both branch delay
      * slots carry it; the allocator otherwise places it in a3. */
-    MATCH_REG(s32, flags, "v0");
+    FAKE_REG(s32, flags, "v0");
     u8  value;
     u8* work;
 

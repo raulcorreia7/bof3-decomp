@@ -5,14 +5,14 @@
  */
 MATCH void func_800A0C68(void) {
     /* FAKE: retail reserves 8 stack bytes that no statement uses. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     u8* p;
     u8* base;
     s32 total;
-    MATCH_REG(u8, i, "s2");
+    FAKE_REG(u8, i, "s2");
     s32 weight;
     /* FAKE: pin the divided increment to retail v0. */
-    MATCH_REG(s32, value, "v0");
+    FAKE_REG(s32, value, "v0");
 
     p     = (u8*)&D_801463D6;
     i     = 0;

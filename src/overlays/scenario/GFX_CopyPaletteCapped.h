@@ -7,7 +7,7 @@
 MATCH void GFX_CopyPaletteCapped(u32 intensity) {
     s32 component_index;
     /* FAKE: Pin merged accumulator to $a3. */
-    MATCH_REG(u32, merged, "a3");
+    FAKE_REG(u32, merged, "a3");
     u32                 packed;
     const u16*          src;
     s32                 color;

@@ -223,7 +223,7 @@ MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
      * does (the swap the RESIDUAL note records). Candidate's predecessor note:
      * "a source shape that keeps i's live range at 98 insns while making
      * `i = 0` the first insn after the branch". */
-    ORDER_LOCK(i = 0);
+    FAKE_ORDER_LOCK(i = 0);
     state                 = (GameUIBannerState*)((phase_addr - 15));
     /* FAKE: retail materialises the loop's constant 1 between the state and
      * alpha computations (`+0x3c addiu s5,zero,1` between `+0x38 addiu

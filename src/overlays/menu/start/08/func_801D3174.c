@@ -33,7 +33,7 @@ MATCH void func_801D3174(void) {
         Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     pad = g_InputPressed;
     /* FAKE: keeps the pad load ahead of the panel stores. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
     offset = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;

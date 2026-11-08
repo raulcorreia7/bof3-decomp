@@ -8,7 +8,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     s16  last_y;
     s16  panel_x;
     s16  panel_y;

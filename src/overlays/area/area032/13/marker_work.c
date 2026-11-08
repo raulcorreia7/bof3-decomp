@@ -318,7 +318,7 @@ MATCH void func_801F3728(void) {
     u8   flag;
     /* FAKE: pin the reloaded cell pointer to v1 (retail's second
      * g_Task load lands in $v1; allocator picks $v0 without it). */
-    MATCH_REG(u8*, work, "$3");
+    FAKE_REG(u8*, work, "$3");
 
     func_801C2438();
     flag                     = 1;
@@ -353,7 +353,7 @@ MATCH void func_801F3800(void) {
 
 MATCH void func_801F3844(void) {
     /* FAKE: v1 pin keeps slot pointer live; unpinned spills to a1. */
-    MATCH_REG(u8*, work, "v1");
+    FAKE_REG(u8*, work, "v1");
     u8**   slots;
     s8*    swords;
     s32    value;

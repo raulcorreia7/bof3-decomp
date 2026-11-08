@@ -16,11 +16,11 @@ MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_de
         COORD_INT(g_Task->pos.z) = (u16)limit;
         Area_AdvanceScroll(limit);
         /* FAKE: the single-pass block homes flags in s1 and entry in s2. */
-        ORDER_LOCK_BEGIN
+        FAKE_ORDER_LOCK_BEGIN
             if (flags & 2) {
                 g_Task->unk_04 = 0;
             }
-        ORDER_LOCK_END;
+        FAKE_ORDER_LOCK_END;
     }
     if (g_Task->unk_0A == 0) {
         if (g_Task->param.unk_0B != 0) {

@@ -6,7 +6,7 @@
 NON_MATCHING u8 func_801B9F08(u8 arg0, u8 arg1, s8 arg2) {
     u8 buffer[3];
     /* FAKE: retail frame reserves 32 bytes no statement uses. */
-    STACK_PADS(u8, 32);
+    FAKE_STACK_PADS(u8, 32);
     s32 tmp0;
     s32 tmp1;
     s32 tmp2;

@@ -8,7 +8,7 @@ MATCH s32 func_801BB86C(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 p
     s32 work[4];
     s32 value;
     /* FAKE: result pinned to v0. */
-    MATCH_REG(s32, result, "v0");
+    FAKE_REG(s32, result, "v0");
 
     (void)work;
     value  = ((s32 (*)(s32, s32, u8, s16))Area_ReadStepHeight)(((from_x0 + from_x1) << 16) >> 1,

@@ -16,6 +16,6 @@ MATCH void func_801F2DC8(void) {
     table            = *(struct MessageSelections*)D_801F2C04;
     g_MessageRequest = table.pair[selection].first;
     /* FAKE: Retail stores the first field before it loads the second. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     g_SceneEventStep = table.pair[selection].second;
 }

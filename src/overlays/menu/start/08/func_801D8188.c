@@ -3,7 +3,7 @@
 MATCH void func_801D8188(void) {
     u8* slot = &D_80148624;
     /* FAKE: branch-select byte pinned to s0; gcc swaps s0/s1 without it (94.78%). */
-    MATCH_FAKE_PIN(s8*, toggle, "s0");
+    FAKE_REG(s8*, toggle, "s0");
     u16* key;
     u8*  count;
     s16  bar;
@@ -11,7 +11,7 @@ MATCH void func_801D8188(void) {
 
     Menu_DrawClutStrip(D_80144953);
     /* FAKE: hides slot's constant so the bar read stays s1-relative; pure form 87.93%. */
-    MATCH_FAKE_OPAQUE(slot);
+    FAKE_OPAQUE(slot);
     bar                                                         = *(u16*)(slot - 0x164);
     *slot                                                       = 1;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x31;

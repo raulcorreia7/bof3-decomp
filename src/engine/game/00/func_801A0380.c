@@ -11,7 +11,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
     u8* table;
     s32 index;
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     if (g_Game.flags & 0x80) {
         result = g_SndBGMId;
@@ -23,7 +23,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
             index = record[6] << 3;
             count = D_80181E44[index];
             /* FAKE: statement boundary keeps the retail register order and schedule. */
-            ORDER_LOCK(done = 0);
+            FAKE_ORDER_LOCK(done = 0);
             entry = *(u8**)(D_80181E40 + index);
             if (count > 0) {
                 table  = g_SceneFlagWords;

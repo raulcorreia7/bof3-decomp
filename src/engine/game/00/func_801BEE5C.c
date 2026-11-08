@@ -14,14 +14,14 @@ MATCH s32 func_801BEE5C(void) {
     u8* rec;
     u8* phase2_rec;
     /* FAKE: pin base to v0 for copy. */
-    MATCH_FAKE_PIN(u8*, phase2_base, "v0");
+    FAKE_REG(u8*, phase2_base, "v0");
     u8*  tbl;
     u8*  base;
     u16* source_row;
     u16* destination_row;
     s32  neg;
     /* FAKE: unused frame, 24 bytes. */
-    STACK_PADS(u8, 24);
+    FAKE_STACK_PADS(u8, 24);
 
     slot          = 0;
     initial_count = g_Game.party_size;

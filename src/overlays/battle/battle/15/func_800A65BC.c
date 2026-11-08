@@ -3,7 +3,7 @@
 MATCH void func_800A65BC(void) {
     /* FAKE: retail keeps the cursor pair base in a2 for every access; cse folds the +2 word into
      * g_BattleTargetCursorCol+2. */
-    MATCH_FAKE_PIN(u16*, cursor_words, "a2");
+    FAKE_REG(u16*, cursor_words, "a2");
     s16  cursor_col;
     s16  cursor_row;
     u16  cursor_total;
@@ -41,7 +41,7 @@ MATCH void func_800A65BC(void) {
     }
     cursor_words = (u16*)&g_BattleTargetCursorCol;
     /* FAKE: hides the constant base from cse so the row word stays 2(a2). */
-    MATCH_FAKE_OPAQUE(cursor_words);
+    FAKE_OPAQUE(cursor_words);
     cursor_col   = cursor_words[0];
     cursor_row   = cursor_words[1];
     cursor_total = cursor_col + cursor_row;

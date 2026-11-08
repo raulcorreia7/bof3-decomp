@@ -23,7 +23,7 @@ MATCH void Scene_Start(u8 scenario_index) {
     *(u32*)(base + index8) = 0u;
     g_SceneFlags           = (u32*)(base + (state->scenario_id * 8));
     ready_phase            = GAME_REQUEST_AREA_CHANGE;
-    Scene_RequestOverlay();
+    Scene_LoadOverlay();
 
     while (!EMI_IsReady()) {
         if ((g_GameAreaId != none_sel) && (g_GameStateIndex != ready_phase)) {

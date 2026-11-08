@@ -16,7 +16,7 @@ Metrics, counted inside ``MATCH`` function bodies unless noted:
               per-function ratchet also counts raw width casts and constant indexes into a
               byte-pointer local (``panel[0x10]``) the same way
 - ``casts``   lines with a raw width cast: ``*(u8 *)p``, ``((u8 *)p)[n]``, ``(u8 *)p + 0x10``
-- ``harmful`` ``MATCH_FAKE_PIN``, ``MATCH_REG``, ``MATCH_FAKE_OPAQUE``, ``MATCH_FAKE_USE``, ``CLOBBER_*``
+- ``harmful`` ``FAKE_REG``, ``FAKE_OPAQUE``, ``FAKE_USE``, ``FAKE_CLOBBER_*``
 - ``notes``   ``FAKE:`` notes (whole file)
 - ``pasted``  functions with two or more statements whose name and body also stand in a ``.c``
               file of another image: one ``Name.h`` is the rule (docs/conventions.md, Shared bodies)
@@ -35,7 +35,7 @@ not touch never counts, so old debt never blocks. ``BASE`` is compared at its me
 ``--to``, so work that landed on ``BASE`` since the branch point never counts as a regression.
 
 A commit message line ``Quality-Allowed: <path> <metric>`` accepts one metric rise in one file,
-for a matching aid that is the best try after the plain forms failed (keep its ``FAKE:`` note).
+for a fake helper that is the best try after the plain forms failed (keep its ``FAKE:`` note).
 """
 
 from __future__ import annotations
@@ -91,10 +91,12 @@ RAW_CAST = re.compile(
     rf"|\(\s*{WIDTH}\)\s*\w+\s*\+\s*(?:0x)?[0-9]"  # (u8 *)p + 0x10
 )
 # A byte-pointer local (`u8* panel`), whose constant indexes are unnamed members.
-# A byte-pointer local, declared plainly or through a register pin (`MATCH_REG(u8*, p, "v0")`).
+# A byte-pointer local, declared plainly or through a register pin (`FAKE_REG(u8*, p, "v0")`).
 BYTE_LOCAL = re.compile(r"\b[us]8\s*\*\s*,?\s*(\w+)\s*[;=,)]")
+# The pre-rename spellings stay in the pattern so a base revision counts the same helpers.
 HARMFUL = re.compile(
-    r"\b(?:MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
+    r"\b(?:FAKE_REG|FAKE_OPAQUE|FAKE_USE|FAKE_CLOBBER_\w+"
+    r"|MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
 )
 NOTE = re.compile(r"FAKE:")
 # A local declaration (`u8 i`, `Actor* actor = g_CurrentActor`) and a statement-macro call.

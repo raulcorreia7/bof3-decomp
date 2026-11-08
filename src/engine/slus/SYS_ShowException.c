@@ -30,7 +30,7 @@ MATCH void SYS_ShowException(void) {
 
     exception_code = exception_frame[0x26];
     /* FAKE: pins the code spill before the PC load. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     exception_pc = (const u32*)exception_frame[0x22];
 
     ExitCriticalSection();

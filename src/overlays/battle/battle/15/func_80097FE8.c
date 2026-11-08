@@ -2,7 +2,7 @@
 
 MATCH void func_80097FE8(void) {
     /* FAKE: retail keeps the work base live in a0 for the ending 0x6C store. */
-    MATCH_REG(volatile u8*, work, "a0");
+    FAKE_REG(volatile u8*, work, "a0");
     volatile u8*         message_slot;
     volatile BattleTurn* actor_turn;
     u32                  active_selection_flags;
@@ -29,7 +29,7 @@ MATCH void func_80097FE8(void) {
     VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 2u);
     D_80148656                          = message_slot[5];
     /* FAKE: alias keeps the work base in the register. */
-    MATCH_FAKE_OPAQUE(work);
+    FAKE_OPAQUE(work);
     work[0x6C] = 0u;
     D_801485DD = eight;
     D_801485DE = 0u;

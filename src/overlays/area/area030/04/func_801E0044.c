@@ -10,7 +10,7 @@ MATCH void func_801E0044(void) {
     u8            timer;
     u8            state;
     /* FAKE: retail reuses v0 as the halfword accumulator. */
-    MATCH_FAKE_PIN(u16, value, "v0");
+    FAKE_REG(u16, value, "v0");
     FishingState* ended;
 
     work                   = FISHING_STATE;

@@ -31,7 +31,7 @@ MATCH void func_801DCFD0(void) {
             } while (src != end);
             /* Copy the final word after the 0xA0-byte row sequence. */
             /* FAKE: the order lock holds this store in place; without it the match is 63.83%. */
-            ORDER_LOCK(*((s32*)dst) = *((s32*)src));
+            FAKE_ORDER_LOCK(*((s32*)dst) = *((s32*)src));
             index += 1;
         } while (((index & BYTE_MASK)) < (g_PartySize));
     }

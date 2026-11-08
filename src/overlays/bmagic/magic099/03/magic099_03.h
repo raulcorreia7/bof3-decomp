@@ -58,7 +58,7 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     /* FAKE: retail keeps the angle cell in $s0 across both scratchpad stores;
      * without the pin GCC rematerialises its address and the function measured
      * 0x8 short. */
-    MATCH_REG(s32*, angle_cell, "s0");
+    FAKE_REG(s32*, angle_cell, "s0");
     s32 velocity;
 
     g_Task->param.unk_0B++;

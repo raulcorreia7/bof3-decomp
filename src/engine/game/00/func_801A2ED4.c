@@ -9,9 +9,9 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
     u8  i;
     u8  route;
     /* FAKE: retail keeps the x coordinate in a0. */
-    MATCH_REG(s32, wx, "a0");
+    FAKE_REG(s32, wx, "a0");
     /* FAKE: retail keeps the y coordinate in v0. */
-    MATCH_REG(s32, wy, "v0");
+    FAKE_REG(s32, wy, "v0");
     const s32* px;
     s32*       py;
     s32        dx;
@@ -40,7 +40,7 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
             dx = wx + *px;
             dy = wy + *py;
             /* FAKE: retail forms the y sum before the x subtraction. */
-            MATCH_FAKE_USE(dy);
+            FAKE_USE(dy);
             dx -= target_x;
             dx = ABS(dx);
             dy -= target_y;

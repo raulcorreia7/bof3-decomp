@@ -13,7 +13,7 @@ MATCH void func_80164EF8(s32 index, u8* patch, u8* flags, u16* values) {
     u16*      loc[4];
     s32*      src;
     /* FAKE: retail computes the record base in v0. */
-    MATCH_REG(s32*, record, "v0");
+    FAKE_REG(s32*, record, "v0");
     s32* dst;
     s32* end;
     u8   i;

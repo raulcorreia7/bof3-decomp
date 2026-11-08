@@ -8,7 +8,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     Ability* ability_obj;
     u8*      kinds;
     u8       row_offset;

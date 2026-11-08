@@ -6,7 +6,7 @@ MATCH void func_801B0C88(void) {
     u8  sel;
     s32 flag;
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     total = Party_CountOrder(PARTY_ORDER_FIELD);
     index = 0;

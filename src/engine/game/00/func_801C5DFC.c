@@ -19,7 +19,7 @@ MATCH void func_801C5DFC(u8 route_index) {
     x = g_PartyX + g_FacingOffsets[route_index].x * ((u8*)g_RouteSpeedScale)[D_80143FC0] * scale * D_80143FC3;
     /* FAKE: a const view lets the scheduler hoist the y table load above the x
      * store; the retail build keeps it after. */
-    ORDER_LOCK(g_PartyX = x);
+    FAKE_ORDER_LOCK(g_PartyX = x);
     y = g_PartyY + g_FacingOffsets[route_index].y * ((u8*)g_RouteSpeedScale)[D_80143FC0] * scale * D_80143FC3;
     g_AreaScrollTargetX = x;
     g_PartyY            = y;

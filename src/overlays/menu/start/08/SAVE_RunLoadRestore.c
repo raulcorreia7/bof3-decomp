@@ -44,7 +44,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         g_ScriptVars[1] = g_SavedScriptVars[1];
         g_ScriptVars[2] = g_SavedScriptVars[2];
         g_ScriptVars[3] = g_SavedScriptVars[3];
-        Scene_RequestOverlay();
+        Scene_LoadOverlay();
         while (EMI_IsReady() == 0) {
             CallbackWait(1);
         }

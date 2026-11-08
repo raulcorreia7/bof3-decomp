@@ -6,6 +6,6 @@ MATCH s32 func_801F2C04(void) {
     MESSAGE_REQUEST_CLEAR();
     FIELD(s32, record, 0x18U) = AREA_SELECTION_FIRST[g_MessageChoice * 2];
     /* FAKE: retail reloads the selection after the 0x18 store. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     FIELD(s32, record, 0x1CU) = AREA_SELECTION_SECOND[g_MessageChoice * 2];
 }

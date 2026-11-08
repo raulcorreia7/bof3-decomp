@@ -27,7 +27,7 @@ MATCH void func_801D6CB0(void) {
     direction = 1;
     if (D_801E207C[FISHING_STATE->step_index_0A - 1].delta_y < 0) {
         /* FAKE: keeps GCC from turning the flag into sge (nor/srl); 7 pure-C spellings stayed at 96.24%. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         direction = 0;
     }
     func_801D6B28(direction);

@@ -84,10 +84,10 @@ extern Callback         D_801D2724[];
 extern Callback         D_801D2734[];
 extern SceneBandEffect* D_801D2744;
 
-void Scene_RunEffect(void);
+void Scene_UpdateEffect(void);
 void Scene_EffectBegin(void);
 void Scene_EffectEnd(void);
-void Scene_EffectRunState(void);
+void Scene_UpdateEffectState(void);
 void Scene_EffectSetMatrix(void);
 void func_801D0FAC(void);
 void func_801D1034(void);

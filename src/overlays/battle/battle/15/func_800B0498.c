@@ -18,7 +18,7 @@ MATCH void func_800B0498(void) {
     s32* panel_sink = &panel_home;
     s32  substate_row;
     /* FAKE: pin shared fourth argument in a3. */
-    MATCH_REG(s32, row, "a3");
+    FAKE_REG(s32, row, "a3");
     func_800B06F4(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_08,
                   g_MenuCurrentPanel->unk_09);
 

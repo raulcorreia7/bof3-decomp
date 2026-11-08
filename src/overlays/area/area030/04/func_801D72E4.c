@@ -19,7 +19,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     s32 member;
     u8* text;
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 242, 159, 0xF0, (s32)g_WindowStyle);
     if (FISHING_STATE->counter_08 != 0) {

@@ -19,7 +19,7 @@ MATCH void func_800A5AE4(void) {
     u16 cursor_sum;
     /* FAKE: cursor base pinned to a2 so the page word loads as 2(a2); pure C folds it into the constant address
      * D_801485EE (72.73%). */
-    MATCH_FAKE_PIN(BattleMenuCursor*, cursor, "a2");
+    FAKE_REG(BattleMenuCursor*, cursor, "a2");
     u16* pad_state;
     u16  pad_bits;
     s32  input;
@@ -50,7 +50,7 @@ MATCH void func_800A5AE4(void) {
 
     cursor = (BattleMenuCursor*)&D_801485EC;
     /* FAKE: hides the constant base from cse; with the pin it keeps 2(a2) (pure-C best 72.73%). */
-    MATCH_FAKE_OPAQUE(cursor);
+    FAKE_OPAQUE(cursor);
     cursor_index = cursor->index;
     cursor_page  = cursor->page;
     cursor_sum   = cursor_index + cursor_page;

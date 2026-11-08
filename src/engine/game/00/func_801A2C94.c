@@ -28,8 +28,8 @@ MATCH u8 func_801A2C94(Actor* actor) {
             }
             if ((route & 7) != (status & BYTE_MASK)) {
                 /* FAKE: basic-block boundary pins handler status. */
-                /* FAKE: ORDER_LOCK keeps this statement in place; without it the match is 93.06%. */
-                ORDER_LOCK(g_Task->direction_08 = status);
+                /* FAKE: FAKE_ORDER_LOCK keeps this statement in place; without it the match is 93.06%. */
+                FAKE_ORDER_LOCK(g_Task->direction_08 = status);
                 entity->interaction_flags |= ACTOR_FLAG_MOVING;
             }
             return g_Task->direction_08;

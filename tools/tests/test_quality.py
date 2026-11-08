@@ -40,13 +40,13 @@ def test_byte_views_count_as_unnamed() -> None:
 
 
 def test_a_pinned_byte_local_counts_like_a_plain_one() -> None:
-    pinned = 'MATCH_REG(u8*, entity, "v0");\nD_801D3918[entity[1]]();\n'
+    pinned = 'FAKE_REG(u8*, entity, "v0");\nD_801D3918[entity[1]]();\n'
     plain = "u8* entity;\nD_801D3918[entity[1]]();\n"
     assert quality.unnamed(pinned) == quality.unnamed(plain) == 2
 
 
 def test_comments_hide_names_and_notes_count_whole_file() -> None:
-    text = "/* FAKE: pin. */\nMATCH void F(void) {\n    /* D_801EF000 *(u8 *)p */\n    MATCH_FAKE_PIN(x);\n}\n"
+    text = "/* FAKE: pin. */\nMATCH void F(void) {\n    /* D_801EF000 *(u8 *)p */\n    FAKE_REG(x);\n}\n"
     found = row(text)
     assert (found["names"], found["casts"], found["harmful"], found["notes"]) == (
         0,

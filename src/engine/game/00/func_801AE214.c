@@ -12,7 +12,7 @@ MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode)
     x    = line_x;
     y    = line_y;
     /* FAKE: the order lock holds this run in place; without it the match is 97.44%. */
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
         delta = line_length;
         SetLineF2(line);
         mode  = line_mode;
@@ -22,7 +22,7 @@ MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode)
         }
         line->r0 = color;
         line->g0 = color;
-    ORDER_LOCK_END;
+    FAKE_ORDER_LOCK_END;
     line->b0 = color;
     line->x0 = x;
     line->x1 = (x + delta);

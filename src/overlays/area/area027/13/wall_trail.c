@@ -293,7 +293,7 @@ MATCH void func_801F2D5C(void) {
     s32  outer;
     /* FAKE: s0 base pin plus non-volatile radius store fill delay slot.
      */
-    MATCH_REG(volatile s32*, fld, "s0");
+    FAKE_REG(volatile s32*, fld, "s0");
     s32 x;
     s32 z;
     u16 y;

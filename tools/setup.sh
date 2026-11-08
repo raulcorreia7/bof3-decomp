@@ -4,7 +4,7 @@
 #   tools/setup.sh [--dev] [--matching] [--no-payloads] [--no-sdk]
 #
 #   --dev          also install pytest and Ruff
-#   --matching     also install the matching aids and their submodules (implies --dev)
+#   --matching     also install the matching tools and their submodules (implies --dev)
 #   --no-payloads  skip the retail media; the disc-free checks still work
 #   --no-sdk       skip the PsyQ 3.7 library objects; the toolchain and tracked headers remain
 #

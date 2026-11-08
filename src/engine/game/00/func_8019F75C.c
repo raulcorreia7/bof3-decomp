@@ -2,7 +2,7 @@
 
 MATCH void func_8019F75C(void) {
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     u8* dst;
     s32 index;
     s32 limit;

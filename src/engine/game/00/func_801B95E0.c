@@ -20,7 +20,7 @@ NON_MATCHING s32 func_801B95E0(void) {
     s32 v;
     s32 ret;
     /* FAKE: retail's frame is 8 bytes larger than the statements need. */
-    STACK_PADS(s32, 8);
+    FAKE_STACK_PADS(s32, 8);
 
     if (g_Game.flags & 0x400) {
         return 1;

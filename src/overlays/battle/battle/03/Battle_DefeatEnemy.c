@@ -9,7 +9,7 @@ MATCH void Battle_DefeatEnemy(void) {
     g_Task->header.flags = g_Task->header.flags | ACTOR_FLAG_HIDDEN;
     acc                  = &g_Battle.outcome.reward_exp;
     *acc += g_BattleCurrentEnemy->exp;
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
         g_Battle.outcome.reward_zenny += g_BattleCurrentEnemy->zenny;
         g_BattleCurrentEnemy->status |= STATUS_KO;
         g_BattleCurrentEnemy->zenny = 0;
@@ -31,6 +31,6 @@ MATCH void Battle_DefeatEnemy(void) {
         Battle_ClearSlotPending(g_Task->slot);
         g_Task->header.mode = 2;
         g_Task->header.step = 0;
-    ORDER_LOCK_END;
+    FAKE_ORDER_LOCK_END;
     g_Task->unk_03 = 0;
 }

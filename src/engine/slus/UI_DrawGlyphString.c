@@ -6,7 +6,7 @@
 MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
     s16 start_x;
     /* FAKE: retail keeps the CLUT argument in s0 across the calls. */
-    MATCH_REG(u32, cl, "s0");
+    FAKE_REG(u32, cl, "s0");
     s16 X;
     s16 Y;
     s32 t1;

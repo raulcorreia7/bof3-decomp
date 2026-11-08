@@ -19,10 +19,10 @@ MATCH void func_801D2564(void) {
     selection       = &D_80148656;
     selection_index = *selection;
     /* FAKE: preserve flag store after selection read. */
-    ORDER_LOCK(D_801485DC = 1);
+    FAKE_ORDER_LOCK(D_801485DC = 1);
     D_801485E0 = g_MenuPanelTasks[selection_index + 4].pos.x;
     /* FAKE: preserve first table store order. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     D_801485E2 = g_MenuPanelTasks[selection_index + 4].pos.y;
     Message_SetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
@@ -55,7 +55,7 @@ MATCH void func_801D2564(void) {
         D_80148654 = 8;
         D_80148651 += 1;
         /* FAKE: keep pad reload after state updates. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         pad_buttons = *pad_state;
     }
     if (pad_buttons & g_InputMasks[MENU_INPUT_CANCEL]) {

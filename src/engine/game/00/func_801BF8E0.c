@@ -8,7 +8,7 @@ MATCH void func_801BF8E0(void) {
     s32 src;
     s32 dst;
     /* FAKE: dx pinned to a0, retail's register for the x delta; pure-C best 81.82%. */
-    MATCH_REG(s32, dx, "a0");
+    FAKE_REG(s32, dx, "a0");
     s32  dy;
     s32  row;
     s16  ret;
@@ -19,7 +19,7 @@ MATCH void func_801BF8E0(void) {
     s32  y;
     u8   key;
     /* FAKE: retail frame reserves 16 bytes no statement uses; pure-C best 95.04%. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
 
     index = 0;
     limit = g_Game.party_size;

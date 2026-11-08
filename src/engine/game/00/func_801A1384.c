@@ -20,7 +20,7 @@ MATCH void func_801A1384(void* entity) {
     mode = rec[0x78];
     rate = g_RouteSpeedScale[mode];
     if (rec[0x7B] == 0) {
-        ORDER_LOCK(sub = rec + 0x74); /* FAKE: order lock holds the pointer setup. */
+        FAKE_ORDER_LOCK(sub = rec + 0x74); /* FAKE: order lock holds the pointer setup. */
         if (mode != 0) {
             sel = func_801A8D38(sub, (*(s32**)((u8*)g_AreaLoads[g_GameAreaId] + 0x10))[rec[0x77]]);
             if (rec[0x75] != 0) {

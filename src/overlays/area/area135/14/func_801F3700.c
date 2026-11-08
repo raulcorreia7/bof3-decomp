@@ -2,7 +2,7 @@
 
 MATCH void func_801F3700(void) {
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     s32 sample_w;
     s32 sample_h;
     s16 x;

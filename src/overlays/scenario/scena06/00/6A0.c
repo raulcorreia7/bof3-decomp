@@ -10,7 +10,7 @@ MATCH void func_801F72A0(void) {
 
     /* FAKE: without the block the scheduler hoists the index shift above the
        ra store (84.46%); the lock restores the retail order (99.85%). */
-    ORDER_LOCK(D_801FE3D8[index]());
+    FAKE_ORDER_LOCK(D_801FE3D8[index]());
 }
 
 MATCH void func_801F72D4(void) {
@@ -332,7 +332,7 @@ MATCH void func_801FE198(void) {
     Party_JoinMember(CHAR_ID_GARR);
 }
 
-MATCH void Scene_JoinNina_801FE1D4(void) {
+MATCH void Scene_JoinNina3(void) {
     SCENE_JOIN_NINA();
 }
 

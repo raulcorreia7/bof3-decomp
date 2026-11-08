@@ -3,11 +3,11 @@
 MATCH void func_800AFAB8(u8* record) {
     u8 slot;
     /* FAKE: retail keeps the frame index in v1. */
-    MATCH_REG(u32, index, "v1");
+    FAKE_REG(u32, index, "v1");
     /* FAKE: retail keeps the divisor in v0. */
-    MATCH_REG(u32, divisor, "v0");
+    FAKE_REG(u32, divisor, "v0");
     /* FAKE: retail keeps the quotient in a3. */
-    MATCH_REG(u32, quotient, "a3");
+    FAKE_REG(u32, quotient, "a3");
     u8            flags;
     u8            scale;
     u32           remainder;

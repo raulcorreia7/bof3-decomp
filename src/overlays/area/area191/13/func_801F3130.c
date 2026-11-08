@@ -9,7 +9,7 @@ MATCH void func_801F3130(void) {
     work = g_CurrentActor;
     work->unk_7E++;
     /* FAKE: retail keeps the request stores below the actor store. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     D_80146874 = 2;
     D_80146875 = 0x19;
 }

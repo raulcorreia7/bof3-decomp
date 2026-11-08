@@ -3,7 +3,7 @@
 MATCH s32 func_801F2D70(void) {
     /* FAKE: the two byte stores take v1; the global header order otherwise
      * hands the constants v0. */
-    MATCH_REG(s32, value, "v1");
+    FAKE_REG(s32, value, "v1");
 
     Game_SetScriptActive();
     value                 = 4;

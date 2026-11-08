@@ -21,7 +21,7 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 | `splat64[mips]`, `spimdisasm`                                | Split and disassembly                              | `tools/setup.sh`                                                 | game build             |
 | `maspsx`                                                     | ASPSX emulation                                    | `third_party/` submodule, set up by `tools/setup.sh`             | game build             |
 | `decomp-permuter`, `asm-differ`, `m2c`                       | Permuter, differ, decompiler                       | `third_party/` submodules, set up by `tools/setup.sh --matching` | matching               |
-| `coddog`, `objdiff-cli`, `rizin`                             | Twin search, function diff and report, disassembly | [matching aids](#matching-aids)                                  | matching, analysis     |
+| `coddog`, `objdiff-cli`, `rizin`                             | Twin search, function diff and report, disassembly | [matching tools](#matching-tools)                                | matching, analysis     |
 
 ## Setup
 
@@ -35,7 +35,7 @@ script is safe to run again; each step checks its result first. It runs:
 1. `git submodule update --init` for the submodules the options need. Clone without
    `--recurse-submodules`: it would also fetch the `references/` citations and `tools/bof3-tools`.
 2. `uv sync --locked`: the base Python groups, plus pytest and Ruff with `--dev`, plus the matching
-   aids with `--matching`.
+   tools with `--matching`.
 3. The pinned GCC 2.7.2 PSX compiler, the object parser and the PSn00b binutils, each checked by
    SHA-256, and `tools/psyq.sh`, which stages PsyQ 3.7 (skipped with `--no-sdk`).
 4. `tools/setup.py`: builds the `tools/bof3-tools` extractor, checks the tracks, extracts the disc
@@ -82,7 +82,7 @@ A file of an XA stream (`BIN/*_XA/*.STR`) keeps its raw 2336-byte sectors, so it
 those of the extracted file. `tools/disc.py manifest --cue <file.cue>` writes the manifest again from a
 dump and its extracted folder; run it only for a new release of the disc.
 
-### Matching aids
+### Matching tools
 
 `bin/coddog`, `objdiff-cli` and `bin/rz` need these pinned releases (Linux x86_64). Put
 `~/.local/bin` on `PATH`:
@@ -303,7 +303,7 @@ use the same source and flags.
 ### objdiff
 
 `report` first writes `build/meson/objdiff.json`: one unit per compiled C source, with each target
-object assembled from the split asm. It needs `objdiff-cli` ([matching aids](#matching-aids)).
+object assembled from the split asm. It needs `objdiff-cli` ([matching tools](#matching-tools)).
 
 | Need              | Command                                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------------------- |

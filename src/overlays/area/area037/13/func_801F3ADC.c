@@ -2,7 +2,7 @@
 
 MATCH s32 func_801F3ADC(void) {
     /* FAKE: retail materializes the action code in v1. */
-    MATCH_REG(s32, action, "v1");
+    FAKE_REG(s32, action, "v1");
 
     Game_SetScriptActive();
     action                = 4;

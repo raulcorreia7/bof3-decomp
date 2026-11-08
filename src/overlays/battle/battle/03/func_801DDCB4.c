@@ -14,7 +14,7 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     s32 r100;
     u8* rt;
     /* FAKE: retail keeps the enemy row index in v0 and scales it in v1. */
-    MATCH_REG(u32, enemy_index, "v0");
+    FAKE_REG(u32, enemy_index, "v0");
 
     id = battler_index & BYTE_MASK;
     if (id < 3u) {

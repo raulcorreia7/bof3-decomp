@@ -31,9 +31,9 @@ MATCH void func_801DD08C(void) {
             dst++;
         } while (src != end);
         *(u32*)dst = *(u32*)src;
-        /* FAKE: MATCH_BARRIER holds the trailing-word copy before the increment;
+        /* FAKE: FAKE_BARRIER holds the trailing-word copy before the increment;
          * without it the load-delay nop slot is filled by the increment. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         index++;
     }
 }

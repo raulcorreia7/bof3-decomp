@@ -28,7 +28,7 @@ MATCH void func_801D4850(void) {
 
                 if (flags != 0u) {
                     /* FAKE: retail keeps the enemy index in v1. */
-                    MATCH_REG(u32, eindex, "v1");
+                    FAKE_REG(u32, eindex, "v1");
 
                     ENEMY_COMBATANT(g_Battle.active_battler).unk_114 = 0u;
                     eindex                                           = g_Battle.active_battler;
@@ -57,7 +57,7 @@ MATCH void func_801D4850(void) {
 
                 if (flags != 0u) {
                     /* FAKE: retail keeps the enemy index in v1. */
-                    MATCH_REG(u32, eindex, "v1");
+                    FAKE_REG(u32, eindex, "v1");
 
                     ENEMY_COMBATANT(g_Battle.active_battler).unk_115 = 0u;
                     eindex                                           = g_Battle.active_battler;

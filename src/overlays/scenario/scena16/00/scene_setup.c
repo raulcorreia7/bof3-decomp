@@ -500,7 +500,7 @@ MATCH void func_801F7790(void) {
         s32* other;
         s32* plane;
         /* FAKE: the mode constant ties with the pointer at v0/v1. */
-        MATCH_REG(u32, mode, "v1");
+        FAKE_REG(u32, mode, "v1");
         mode               = 0x6200u;
         SCENA16_D_80149314 = mode;
         pos                = &SCENA16_D_8014930C;

@@ -30,7 +30,7 @@ NON_MATCHING void func_801B1E24(void) {
     u8              value;
     u8*             base;
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     base  = (u8*)&g_Game.members[0].facing;
     value = *base;

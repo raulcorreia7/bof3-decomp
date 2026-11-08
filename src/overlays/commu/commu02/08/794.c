@@ -420,13 +420,13 @@ MATCH s32 func_801D5AD0(s32 limit) {
     s32 var_s1;
 
     var_s1 = RANDOM_MASK(0x7F);
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
     loop_1:
         if ((var_s1 & 0xFF) >= (u32)(limit & 0xFF)) {
             var_s1 -= RANDOM_MASK(0xF);
             goto loop_1;
         }
-    ORDER_LOCK_END;
+    FAKE_ORDER_LOCK_END;
     return var_s1 & 0xFF;
 }
 

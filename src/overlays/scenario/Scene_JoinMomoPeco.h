@@ -9,6 +9,6 @@
     Party_JoinMember(CHAR_ID_PECO);                                           \
     Party_LoadPalettes()
 
-MATCH void Scene_JoinMomoAndPeco(void) {
+MATCH void Scene_JoinMomoPeco(void) {
     SCENE_JOIN_MOMO_AND_PECO();
 }

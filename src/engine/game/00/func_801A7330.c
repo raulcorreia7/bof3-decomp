@@ -32,11 +32,11 @@ MATCH void func_801A7330(const volatile u8* data) {
     work                           = g_Task;
     g_Actors[*counter].walk_dest_x = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read before the shadow store. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
 
     g_Actors[*counter].walk_dest_y = (work->pos.y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read against merging. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
 
     g_Actors[*counter].unk_88 = 0;
 
@@ -47,7 +47,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     COORD_INT(w2->pos.z) = (u16)dist;
     ACTOR_CLEAR_STEP();
     /* FAKE: barrier pins the flags store before the route-index load. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
 
     g_Task->direction_08 = data[0] & 0xF;
     g_Task->unk_06       = data[0] >> 4;
@@ -70,7 +70,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     rec                       = g_Task;
     g_Actors[*counter].unk_7C = 0;
     /* FAKE: lock keeps the packed store ahead of the record stores. */
-    ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);
+    FAKE_ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);
     g_Task->unk_05       = data[8];
     g_Task->param.unk_0B = data[0xC];
     g_Task->unk_2A       = (g_Task->option_flags >> 4) & 1;
