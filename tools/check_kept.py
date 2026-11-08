@@ -190,6 +190,16 @@ def enum_value(node: dict) -> int | None:
     return None
 
 
+def owned_tag(typedef: dict) -> str | None:
+    """The id of the record a typedef defines in place: clang 18 wraps it in an ElaboratedType."""
+    for child in typedef.get("inner", []):
+        if "ownedTagDecl" in child:
+            return child["ownedTagDecl"].get("id")
+        if child.get("isTagOwned"):
+            return child.get("decl", {}).get("id")
+    return None
+
+
 def parse_layouts(text: str) -> tuple[dict[str, list[Member]], dict[str, int]]:
     """Record name -> its members at every depth, with absolute offsets, from -fdump-record-layouts."""
     layouts: dict[str, list[Member]] = {}
@@ -280,10 +290,9 @@ def run_clang(tree: Path, unit: str, wanted: set[str]) -> Entities:
                 anonymous[node["id"]] = f"{tag} (unnamed at {file}:{line}:{col})"
         elif kind == "TypedefDecl" and name:
             found.typedefs[name] = node.get("type", {}).get("qualType", "")
-            for child in node.get("inner", []):
-                decl = child.get("decl", {})
-                if child.get("isTagOwned") and decl.get("id") in anonymous:
-                    record_keys[anonymous[decl["id"]]] = name
+            owned = owned_tag(node)
+            if owned in anonymous:
+                record_keys[anonymous[owned]] = name
         elif kind == "EnumDecl":
             value = -1
             for child in node.get("inner", []):
