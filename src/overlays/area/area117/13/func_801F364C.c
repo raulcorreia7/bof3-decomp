@@ -5,5 +5,5 @@ MATCH void func_801F364C(void) {
         g_Task->timer = 9;
         g_Task->header.step++;
     }
-    func_801F3884(0, 0x40);
+    func_801F3884(0, 64);
 }
