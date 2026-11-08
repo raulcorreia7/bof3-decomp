@@ -14,7 +14,7 @@ MATCH s32 func_800A30E8(u8 unused, u8 battler_index) {
     s32 damage;
 
     rate   = D_801EC312 + 100;
-    power  = D_801CA71B[g_BattleActionId * 0x14];
+    power  = D_801CA71B[g_Battle.action_id * 0x14];
     scale  = rate * 100;
     damage = (power * scale) / 100u;
 

@@ -11,7 +11,7 @@ MATCH void func_801D25A0(void) {
 
     g_BattleMessageState = 2;
     i                    = 0;
-    if ((s8)g_BattleCommandCount > 0) {
+    if ((s8)g_Battle.command_count > 0) {
         do {
             rank = D_801462F6[i & BYTE_MASK];
             if ((rank != GAME_NONE) && ((Battle_SlotIsBlocked(rank) & BYTE_MASK) == 0)) {
@@ -20,21 +20,21 @@ MATCH void func_801D25A0(void) {
                 }
             }
             i += 1;
-        } while ((i & BYTE_MASK) < (s8)g_BattleCommandCount);
+        } while ((i & BYTE_MASK) < (s8)g_Battle.command_count);
     }
     i = 0;
-    if (g_BattlePartyCount != 0) {
+    if (g_Battle.party_count != 0) {
         do {
             if (((Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK) == 0) &&
-                ((g_BattleActionLock == 0) || ((g_Game.members[i & BYTE_MASK].u.turn.action_flags.value &
-                                                COMBATANT_FLAG_SUPPRESSION_EXEMPT) != 0))) {
+                ((g_Battle.action_lock == 0) || ((g_Game.members[i & BYTE_MASK].u.turn.action_flags.value &
+                                                  COMBATANT_FLAG_SUPPRESSION_EXEMPT) != 0))) {
                 g_Game.members[i & BYTE_MASK].header.mode = 2;
             }
             i += 1;
-        } while ((u32)(i & BYTE_MASK) < g_BattlePartyCount);
+        } while ((u32)(i & BYTE_MASK) < g_Battle.party_count);
     }
     BATTLE_RAISE_STATE(BATTLE_STATE_COMMAND_ARMED);
     EMI_LoadArchive(EMI_SLOT_BATL_SE);
-    g_BattleStep    = 0;
-    g_BattleSubStep = 0;
+    g_Battle.phase.step     = 0;
+    g_Battle.phase.sub_step = 0;
 }

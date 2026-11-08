@@ -14,7 +14,7 @@ NON_MATCHING void func_801E0B64(void) {
     s32  i;
 
     Char_RebuildStats(&g_Characters[g_Game.current->unk_13A[2]]);
-    for (slot = 0; slot < g_BattlePartyCount; slot++) {
+    for (slot = 0; slot < g_Battle.party_count; slot++) {
         src = &g_Characters[g_Game.members[slot].character_index];
         dst = &D_80145F04[slot * BATTLE_PARTY_STRIDE];
         for (i = 14; i < 20; i++) {
@@ -27,7 +27,7 @@ NON_MATCHING void func_801E0B64(void) {
         }
     }
     func_800AAA74();
-    for (slot = 0; slot < g_BattlePartyCount; slot++) {
+    for (slot = 0; slot < g_Battle.party_count; slot++) {
         dst      = &D_80145F20[slot * BATTLE_PARTY_STRIDE];
         src      = dst + 0x20;
         dst_word = (u32*)dst;
@@ -37,7 +37,7 @@ NON_MATCHING void func_801E0B64(void) {
         }
     }
     func_800A4458();
-    for (slot = 0; slot < g_BattlePartyCount; slot++) {
+    for (slot = 0; slot < g_Battle.party_count; slot++) {
         func_800A9BD8(slot);
     }
 }

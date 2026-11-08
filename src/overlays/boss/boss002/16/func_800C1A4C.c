@@ -10,7 +10,7 @@ MATCH void func_800C1A4C(void) {
     remaining = work->hp - work->turn.hp_change;
     limit     = work->stats.max_hp >> 2;
     if (!((s32)limit < remaining)) {
-        flags = &g_BattleBossFlags;
+        flags = &g_Battle.boss_flags;
         *flags |= 1;
         work->hp = 0xFFFF;
     }

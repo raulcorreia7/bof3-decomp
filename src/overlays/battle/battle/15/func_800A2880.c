@@ -24,7 +24,7 @@ MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_
         multiplier = 50;
     }
     damage    = (damage * multiplier) / 100u;
-    rule_mask = D_801CA71C[g_BattleActionId].mask & ELEM_ALL;
+    rule_mask = D_801CA71C[g_Battle.action_id].mask & ELEM_ALL;
     if (rule_mask != 0) {
         if (element_flag != 0) {
             element_mod = func_800A2EF0(battler_index, rule_mask);
@@ -37,7 +37,7 @@ MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_
     roll   = RANDOM_MASK(7);
     damage = (damage * D_800B492C[roll]) / 10000;
 
-    if ((BATTLER_IS_PLAYER(g_BattleTarget)) && (g_PartyFormation == 2) && (damage > 0)) {
+    if ((BATTLER_IS_PLAYER(g_Battle.target)) && (g_PartyFormation == 2) && (damage > 0)) {
         damage -= damage >> 2;
     }
 

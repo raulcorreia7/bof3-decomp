@@ -21,9 +21,8 @@ extern Callback    D_800C26C8[];
 extern Callback    D_800C26D4[];
 extern u8          D_800C26E0;
 extern u8          D_80146322;
-/* The selection-kind byte: battle/ram.h names the cell as g_BattleActiveBattler but
+/* The selection-kind byte: battle/ram.h names the cell as g_Battle.active_battler but
  * declares only the 6375 byte. */
-extern u8          g_BattleActiveBattler;
 extern u8          D_80181B11;
 extern PartyMember D_801EB860;
 extern u8          D_800C25D8;

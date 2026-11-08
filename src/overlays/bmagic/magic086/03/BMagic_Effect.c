@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EEC94);
 MATCH void func_801EEE44(void) {
     PartyMember* battler;
 
-    battler = g_BattleSelectedActor;
+    battler = g_Battle.selected_actor;
     if (g_Task->param.unk_0B == 1) {
         GFX_FreePaletteFadeTarget(battler);
         g_Task->timer  = GFX_AllocPaletteFade(battler, 1, 1, 1, 0);

@@ -9,33 +9,33 @@ MATCH void func_801D4B38(void) {
     u8* state;
 
     state = (u8*)&D_801463BA;
-    if (*state == 0 && g_BattleActionLock == 0) {
+    if (*state == 0 && g_Battle.action_lock == 0) {
         action = func_801DB058();
         switch (action) {
             case 0:
                 *state = 0;
                 break;
             case 3:
-                if (g_BattleOutcome.surprise == 2) {
+                if (g_Battle.outcome.surprise == 2) {
                     *state = 2;
-                    g_BattleSubStep += 1;
+                    g_Battle.phase.sub_step += 1;
                     return;
                 }
                 *state = 3;
-                g_BattleSubStep += 1;
+                g_Battle.phase.sub_step += 1;
                 return;
             case 1:
-                if (g_BattleOutcome.surprise == 2) {
+                if (g_Battle.outcome.surprise == 2) {
                     *state = 0;
-                    g_BattleSubStep += 1;
+                    g_Battle.phase.sub_step += 1;
                     break;
                 }
                 *state = 1;
-                g_BattleSubStep += 1;
+                g_Battle.phase.sub_step += 1;
                 return;
             case 2:
                 *state = 2;
-                g_BattleSubStep += 1;
+                g_Battle.phase.sub_step += 1;
                 return;
         }
     }
@@ -48,6 +48,6 @@ MATCH void func_801D4B38(void) {
     D_801463BA = 0;
     D_801463D0 += 1;
     func_801D4D44();
-    g_BattleSubStep = 0;
-    g_BattleStep += 1;
+    g_Battle.phase.sub_step = 0;
+    g_Battle.phase.step += 1;
 }

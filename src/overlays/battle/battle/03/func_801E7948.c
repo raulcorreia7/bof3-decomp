@@ -10,7 +10,7 @@
 MATCH void func_801E7948(void) {
     u32 slot;
 
-    if (g_BattleState & BATTLE_STATE_RELOAD_PARTY) {
+    if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
         if (func_801E7B34() & BYTE_MASK) {
             if (g_EmiLoadedCharacterIndex == 7) {
                 slot = 0x205;

@@ -12,7 +12,7 @@ NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1) {
     s32 status;
     mode = arg0;
     slot = arg1;
-    if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         selector = D_800B6BF0[arg0 & 3];
         slot     = arg1 + 3;
     } else {

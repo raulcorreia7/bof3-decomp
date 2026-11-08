@@ -10,7 +10,7 @@ MATCH void func_80197C94(void) {
     func_801BF448();
     func_801A06D8();
     func_801992B8();
-    if ((g_BattleOutcome.options & BATTLE_OPT_KEEP_BGM) == 0) {
+    if ((g_Battle.outcome.options & BATTLE_OPT_KEEP_BGM) == 0) {
         if (g_SndBGMId != GAME_NONE) {
             SsSepPause(g_SelectionFxVoices[g_SelectionCues[g_SndBGMId * 4]], D_80181EBB[g_SndBGMId * 4]);
             for (i = 0; i < 1376; i++) {
@@ -22,8 +22,8 @@ MATCH void func_80197C94(void) {
     }
     D_80146856 = 0;
     D_80146855 = 0;
-    if (g_BattleEncounter != 0) {
-        arg = D_801CD86C[D_801CD78F[g_BattleEncounter * 4]];
+    if (g_Battle.encounter != 0) {
+        arg = D_801CD86C[D_801CD78F[g_Battle.encounter * 4]];
     } else if (g_SceneState.scenario_id < 8) {
         arg = 6;
     } else {
@@ -31,14 +31,14 @@ MATCH void func_80197C94(void) {
     }
     EMI_LoadArchive(arg);
     Menu_ResetPanelTasks();
-    state                       = &g_GameEntrySubstate;
-    counter                     = *state;
-    g_BattleOutcome.event_flags = 0;
-    g_BattleState               = 0;
-    g_BattleMode                = 0;
-    g_BattleStep                = 0;
-    g_BattleSubStep             = 0;
-    g_BattleUIStep              = 0;
-    g_BattleUIState             = 0;
-    *state                      = counter + 1;
+    state                        = &g_GameEntrySubstate;
+    counter                      = *state;
+    g_Battle.outcome.event_flags = 0;
+    g_Battle.state               = 0;
+    g_Battle.phase.mode          = 0;
+    g_Battle.phase.step          = 0;
+    g_Battle.phase.sub_step      = 0;
+    g_Battle.ui_step             = 0;
+    g_Battle.ui_state            = 0;
+    *state                       = counter + 1;
 }

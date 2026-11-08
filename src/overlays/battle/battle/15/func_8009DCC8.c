@@ -8,9 +8,9 @@ MATCH void func_8009DCC8(void) {
     u8  selection_kind;
     u8  base_value;
 
-    index                           = g_BattleActionId;
-    battler_index                   = *(u8*)(void*)&g_BattleActiveBattler;
-    selection_kind                  = *(u8*)(void*)&g_BattleTarget;
-    base_value                      = D_801CA71B[4 * (5 * index)];
-    g_BattleTargetRecord->hp_change = func_800A2880(battler_index, selection_kind, base_value, 0);
+    index                             = g_Battle.action_id;
+    battler_index                     = *(u8*)(void*)&g_Battle.active_battler;
+    selection_kind                    = *(u8*)(void*)&g_Battle.target;
+    base_value                        = D_801CA71B[4 * (5 * index)];
+    g_Battle.target_record->hp_change = func_800A2880(battler_index, selection_kind, base_value, 0);
 }

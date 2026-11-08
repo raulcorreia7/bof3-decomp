@@ -1433,7 +1433,7 @@ Retail RAM address literals stay out of C and headers; hardware registers, the s
 BIOS addresses and format offsets stay as defines.
 
 A named global lives in the header of the system that owns it, beside the code that reads and
-writes it: `g_SndBGMId` in the sound runtime header, `g_BattleState` in `battle/ram.h`. Each system
+writes it: `g_SndBGMId` in the sound runtime header, `g_Battle.state` in `battle/ram.h`. Each system
 header stays self-contained. An executable word with no name yet is declared at the lowest scope that
 covers its users ([lowest scope wins](#lowest-scope-wins)); one that several families read is in
 `include/slus/data.h` or `include/slus/functions.h`, in address order. The change that names one moves

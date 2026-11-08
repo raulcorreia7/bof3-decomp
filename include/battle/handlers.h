@@ -3,7 +3,7 @@
 
 #include "common/handler.h"
 
-/* The moments of a boss encounter at which battle/battle/03 calls the boss overlay's g_BossBattleEventHook. */
+/* The moments of a boss encounter at which battle/battle/03 calls the boss overlay's g_Battle.boss_event_hook. */
 typedef enum BossEvent {
     BOSS_EVENT_RESTART_BEGIN,  /* the battle restarts */
     BOSS_EVENT_ACTION_START,   /* a chosen action begins */

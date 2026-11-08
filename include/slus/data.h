@@ -74,20 +74,20 @@ extern s32 D_80145ECC;
 extern s16 D_80145ECE;
 extern u8  D_80145ED8;
 extern u8  D_80145EDB;
-/* Player battle-record copies (stride 0x140), selected by g_BattleActiveBattler. */
+/* Player battle-record copies (stride 0x140), selected by g_Battle.active_battler. */
 extern u16 g_InputRepeatDelay;
 extern u16 g_InputRepeatButtons;
 extern u8  D_80145F04[];
 extern u8  D_80145F10[];
 extern u16 D_80145F1A[];
 extern s8  D_80145FBC;
-/* D_801462E0 */
+/* FAKE: g_Battle.phase.mode as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8  g_BattleMode;
-/* D_801462E1 */
+/* FAKE: g_Battle.phase.step as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8  g_BattleStep;
-/* D_801462E2 */
+/* FAKE: g_Battle.phase.sub_step as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8  g_BattleSubStep;
-/* D_801462E8 */
+/* FAKE: g_Battle.state as a global of its own; the sites that use it match only with a separate symbol. */
 extern u16 g_BattleState;
 /* The bytes the battle code index; the bmagic images that copy its record
  * define BATTLE_PARTY_CELL_RECORD before their first include. */
@@ -96,7 +96,7 @@ extern struct PartyMember* D_8014637C;
 #else
 extern u8* D_8014637C;
 #endif
-/* D_80146384 */
+/* FAKE: g_Battle.target_selector as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8   g_BattleTargetSelector;
 /* D_80146854 */
 extern u8            g_EmiStreamFlags;

@@ -3,15 +3,15 @@
 MATCH void func_800A0898(void) {
     BattleTurn* record;
 
-    ((volatile BattleTurn*)g_BattleTargetRecord)->hp_change = 0;
-    if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
+    ((volatile BattleTurn*)g_Battle.target_record)->hp_change = 0;
+    if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
         func_800A3F28();
-        func_801DDFEC(g_BattleTarget);
-        func_801DD14C(g_BattleTarget);
+        func_801DDFEC(g_Battle.target);
+        func_801DD14C(g_Battle.target);
         return;
     }
     /* FAKE: volatile-drop cell read keeps the constant load ahead of
      * the pointer load, so the branch delay slot takes it. */
-    record               = *(BattleTurn**)&g_BattleTargetRecord;
+    record               = *(BattleTurn**)&g_Battle.target_record;
     record->target_flags = 1;
 }

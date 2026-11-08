@@ -12,31 +12,31 @@ MATCH void func_801D656C(void) {
             return;
         }
     }
-    if (g_BattleEncounter != 0 && g_BossBattleEventHook(BOSS_EVENT_TURN_END) == BOSS_EVENT_PENDING) {
+    if (g_Battle.encounter != 0 && g_Battle.boss_event_hook(BOSS_EVENT_TURN_END) == BOSS_EVENT_PENDING) {
         return;
     }
-    if (g_BattleOutcome.result != 0) {
-        D_80148354    = 0;
-        D_801483C0    = 0;
-        D_80148378[0] = 0;
-        D_801484E0    = 0;
-        D_801484BC    = 0;
-        D_80148498    = 0;
-        D_80148474    = 0;
-        D_80148450    = 0;
-        D_8014842C    = 0;
-        D_80148408    = 0;
-        D_801483E4    = 0;
-        g_BattleMode  = 5;
-        g_BattleStep  = 0;
-        g_BattleState &= ~BATTLE_STATE_COMMAND_ARMED;
+    if (g_Battle.outcome.result != 0) {
+        D_80148354          = 0;
+        D_801483C0          = 0;
+        D_80148378[0]       = 0;
+        D_801484E0          = 0;
+        D_801484BC          = 0;
+        D_80148498          = 0;
+        D_80148474          = 0;
+        D_80148450          = 0;
+        D_8014842C          = 0;
+        D_80148408          = 0;
+        D_801483E4          = 0;
+        g_Battle.phase.mode = 5;
+        g_Battle.phase.step = 0;
+        g_Battle.state &= ~BATTLE_STATE_COMMAND_ARMED;
     } else {
-        if (!(g_BattleState & BATTLE_STATE_COMMAND_ARMED)) {
+        if (!(g_Battle.state & BATTLE_STATE_COMMAND_ARMED)) {
             for (i = 1; i < 7; i++) {
-                g_BattlePanelWidths[i] = 0;
+                g_Battle.panel_widths[i] = 0;
             }
-            g_BattlePanelWidths[0] = 8;
-            g_BattlePanelSlot      = 0;
+            g_Battle.panel_widths[0] = 8;
+            g_Battle.panel_slot      = 0;
             EMI_LoadArchive(EMI_SLOT_COMN_SE);
         }
         func_801DB494();
@@ -45,10 +45,10 @@ MATCH void func_801D656C(void) {
                 g_Game.members[i].header.mode = 2;
             }
         }
-        g_BattleOutcome.surprise = 0;
-        g_BattleMode             = 1;
-        g_BattleStep             = 0;
-        g_BattleSubStep          = 0;
-        g_BattleState &= 0xFFF7;
+        g_Battle.outcome.surprise = 0;
+        g_Battle.phase.mode       = 1;
+        g_Battle.phase.step       = 0;
+        g_Battle.phase.sub_step   = 0;
+        g_Battle.state &= 0xFFF7;
     }
 }

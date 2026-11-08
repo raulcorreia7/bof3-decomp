@@ -18,9 +18,9 @@ MATCH void Battle_CancelTurn(u8 battler_index) {
     }
 
     index = 0u;
-    while (index < *(&g_BattleTurnCount)) {
-        if (battler_index == g_BattleTurnOrder[index]) {
-            g_BattleTurnOrder[index] = 0xFFu;
+    while (index < *(&g_Battle.turn_count)) {
+        if (battler_index == g_Battle.turn_order[index]) {
+            g_Battle.turn_order[index] = 0xFFu;
         }
         index += 1u;
     }

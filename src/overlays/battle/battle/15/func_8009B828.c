@@ -3,7 +3,7 @@
 /* arms every idle battler slot and starts the battle phase when the
  * battle scene has not been entered yet.
  */
-/* FAKE: retail reads g_BattleState as volatile. */
+/* FAKE: retail reads g_Battle.state as volatile. */
 MATCH void func_8009B828(void) {
     u8 i;
     u8 flags;
@@ -14,7 +14,7 @@ MATCH void func_8009B828(void) {
         /* FAKE: keeps i = 0 beside the call so it fills the jal delay slot;
          * pure-C best 91.25%, without this barrier 97.47%. */
         MATCH_BARRIER();
-        while (i < g_BattlePartyCount) {
+        while (i < g_Battle.party_count) {
             if (!Battle_SlotIsBlocked(i)) {
                 flags                         = g_Game.members[i].facing;
                 g_Game.members[i].header.mode = 2;
@@ -34,6 +34,6 @@ MATCH void func_8009B828(void) {
         g_BattleSubStep = 0;
         g_BattleUIStep  = 0;
         g_BattleUIState = 0;
-        LOHU(*(volatile u16*)&g_BattleState) |= 8;
+        LOHU(*(volatile u16*)&g_Battle.state) |= 8;
     }
 }

@@ -11,7 +11,7 @@ MATCH void func_800A5244(void) {
         g_BattleSelectionHead = 0;
         D_801485DC            = 0;
         EMI_LoadArchive(EMI_SLOT_BATL_RE2);
-        g_BattleUIStep  = 4;
-        g_BattleUIState = 3;
+        g_Battle.ui_step  = 4;
+        g_Battle.ui_state = 3;
     }
 }

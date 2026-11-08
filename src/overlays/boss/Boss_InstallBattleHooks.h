@@ -1,5 +1,5 @@
 /* Publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into
- * g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook. One definition shared by the boss overlays;
+ * g_Battle.choose_ending_hook, g_Battle.end_hook and g_Battle.boss_event_hook. One definition shared by the boss overlays;
  * each includes this file where the function sits. */
 /* func_800C18F0 (boss015), func_800C18F0 (boss029), func_800C18FC (boss037), func_800C18FC (boss042), func_800C1908
    (boss050), func_800C1930 (boss054), func_800C1984 (boss023), func_800C19C4 (boss017), func_800C19C8 (boss031),
@@ -10,7 +10,7 @@
    func_800C1D78 (boss036), func_800C1E50 (boss001), func_800C1F9C (boss008), func_800C200C (boss013), func_800C2114
    (boss018), func_800C2340 (boss034), func_800C24A0 (boss055), func_800C2B60 (boss025) */
 MATCH void Boss_InstallBattleHooks(void) {
-    g_BattleChooseEndingHook = Boss_ChooseBattleEnding;
-    g_BattleEndHook          = Boss_EndBattle;
-    g_BossBattleEventHook    = Boss_HandleBattleEvent;
+    g_Battle.choose_ending_hook = Boss_ChooseBattleEnding;
+    g_Battle.end_hook           = Boss_EndBattle;
+    g_Battle.boss_event_hook    = Boss_HandleBattleEvent;
 }

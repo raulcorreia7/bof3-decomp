@@ -23,7 +23,7 @@ MATCH u8 func_801D5DCC(void) {
             if (g_Game.members[slot].chr.character_id == CHAR_ID_RYU_ADULT ||
                 g_Game.members[slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
                 if (g_Game.members[slot].u.turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM) {
-                    if (g_DragonForm == 0x12) {
+                    if (g_Battle.dragon_form == 0x12) {
                         g_Game.members[slot].u.turn.hp_change -= (g_Game.members[slot].chr.stats.max_hp + 10) / 20;
                     }
                 }

@@ -30,8 +30,8 @@ MATCH void func_801EECE4(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        func_800A9820(g_BattleTargetSelector);
-        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
+        func_800A9820(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }

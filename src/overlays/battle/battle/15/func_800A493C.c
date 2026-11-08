@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 MATCH void func_800A493C(void) {
-    u8*  state     = &g_BattleRowCursor;
+    u8*  state     = &g_Battle.row_cursor;
     u16* pad_state = &g_InputPressed;
     s32  trigger;
     u16  held;
@@ -11,12 +11,12 @@ MATCH void func_800A493C(void) {
     held                                     = *pad_state;
     if (held & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        g_BattleUIState += 2;
+        g_Battle.ui_state += 2;
         return;
     }
     if (held & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
-        g_BattleUIState += 1;
+        g_Battle.ui_state += 1;
         return;
     }
     if (trigger & PADLright) {
@@ -30,7 +30,7 @@ MATCH void func_800A493C(void) {
     if (trigger & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         *state = 1;
-        g_BattleUIState += 1;
+        g_Battle.ui_state += 1;
         return;
     }
     if ((s8)*state < 0) {

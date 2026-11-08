@@ -23,7 +23,7 @@ MATCH void func_800AAA74(void) {
             Char_AddPercent(&g_Game.members[0].chr.base.reprisal_chance, g_Game.members[0].chr.base.reprisal_chance);
             return;
         case PARTY_FORMATION_DEFENSE:
-            if (g_BattlePartyCount != 0u) {
+            if (g_Battle.party_count != 0u) {
                 slot = 0u;
                 do {
                     if (Battle_SlotIsBlocked(slot) == 0u) {
@@ -31,11 +31,11 @@ MATCH void func_800AAA74(void) {
                                      -((g_Game.members[slot].chr.base.agility >> 2u)));
                     }
                     slot += 1u;
-                } while (slot < g_BattlePartyCount);
+                } while (slot < g_Battle.party_count);
             }
             return;
         case PARTY_FORMATION_CHAIN:
-            if (g_BattlePartyCount != 0u) {
+            if (g_Battle.party_count != 0u) {
                 slot = 0u;
                 do {
                     if (Battle_SlotIsBlocked(slot) == 0u) {
@@ -47,7 +47,7 @@ MATCH void func_800AAA74(void) {
                         Char_AddStat(&g_Game.members[slot].chr.base.defense, -((value >> 1u)));
                     }
                     slot += 1u;
-                } while (slot < g_BattlePartyCount);
+                } while (slot < g_Battle.party_count);
             }
             break;
         case PARTY_FORMATION_MAGIC:

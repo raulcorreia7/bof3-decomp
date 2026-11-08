@@ -12,7 +12,7 @@ MATCH void func_801E927C(void) {
     u8 yoff;
 
     for (i = 0; i < 5; i++) {
-        size = g_BattlePanelWidths[i];
+        size = g_Battle.panel_widths[i];
         xoff = s_BattlePanelOffsets[i][0];
         yoff = s_BattlePanelOffsets[i][1];
         func_801644D8(i, (u16)((size >> 1) + (g_MenuCurrentPanel->pos.x + xoff)),
@@ -20,11 +20,11 @@ MATCH void func_801E927C(void) {
                       0x80);
     }
     i = 0;
-    if (g_BattlePanelWidths[0] == 0) {
+    if (g_Battle.panel_widths[0] == 0) {
         g_MenuCurrentPanel->state++;
     } else {
         do {
-            g_BattlePanelWidths[i]--;
+            g_Battle.panel_widths[i]--;
             i++;
         } while (i < 7);
     }

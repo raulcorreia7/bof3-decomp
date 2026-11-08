@@ -8,13 +8,13 @@ MATCH u32 func_801DCCB0(void) {
 
     total = 0;
     i     = 0;
-    if (g_BattlePartyCount != 0u) {
+    if (g_Battle.party_count != 0u) {
         do {
             total += g_Game.members[i & BYTE_MASK].chr.stats.defense;
             i = i + 1u;
-        } while ((i & BYTE_MASK) < g_BattlePartyCount);
+        } while ((i & BYTE_MASK) < g_Battle.party_count);
     }
     half = total;
-    sum  = half / g_BattlePartyCount;
+    sum  = half / g_Battle.party_count;
     return (sum + D_801EC2EE) >> 1u;
 }

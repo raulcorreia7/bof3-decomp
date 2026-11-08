@@ -5,7 +5,7 @@ MATCH void func_801DD29C(void) {
     s8* r;
     u8  v;
 
-    p = &g_BattleCommandCount;
+    p = &g_Battle.command_count;
     if (*p < 3) {
         r = p;
         while (*r < 3) {

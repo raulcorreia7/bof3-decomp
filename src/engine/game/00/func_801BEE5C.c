@@ -54,7 +54,7 @@ found:
             g_Task->param.unk_0B = 0;
         } else {
             sel = rec[0x08];
-            if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_BattleScrollDir]) {
+            if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_Battle.scroll_dir]) {
                 if (rec[0x0B] != 0) {
                     Actor_StageScriptRecord(sel, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
                     g_Task->param.unk_0B = 0;
@@ -69,7 +69,7 @@ found:
     } while (++slot < g_Game.party_size);
     return 0;
 phase2:
-    if ((g_BattleOutcome.options & 4) != 0)
+    if ((g_Battle.outcome.options & 4) != 0)
         return 1;
     phase2_count = g_Game.party_size;
     slot         = 0;

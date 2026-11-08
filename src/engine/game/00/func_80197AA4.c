@@ -17,10 +17,10 @@ MATCH void func_80197AA4(void) {
     func_801992B8();
     if (ready != 0) {
         SND_SetBankLayout(1);
-        flags = &g_BattleOutcome.options;
+        flags = &g_Battle.outcome.options;
         if ((*flags & 1) == 0) {
             coord_a  = (volatile u16*)&g_AreaTargetCellX;
-            index    = g_BattleScrollDir;
+            index    = g_Battle.scroll_dir;
             *coord_a = *coord_a + s_BattleScrollCellSteps[index].dx;
             dy       = s_BattleScrollCellSteps[index].dy;
             MATCH_BARRIER(); /* FAKE: keeps the delta load before the span math. */
@@ -33,7 +33,7 @@ MATCH void func_80197AA4(void) {
             *coord_b               = sum;
         }
         if ((*flags & 0x10) == 0) {
-            if (g_BattleScrollDir & 2) {
+            if (g_Battle.scroll_dir & 2) {
                 EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLU);
             } else {
                 EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLD);
@@ -43,7 +43,7 @@ MATCH void func_80197AA4(void) {
         count                    = *state;
         g_AreaDrawMode           = 4;
         g_AreaCameraRefreshCount = 2;
-        D_8014933F               = g_BattleScrollDir & 1;
+        D_8014933F               = g_Battle.scroll_dir & 1;
         count++;
         *state = count;
     }

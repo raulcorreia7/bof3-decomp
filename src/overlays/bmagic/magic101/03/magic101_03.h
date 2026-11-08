@@ -5,8 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8 g_BattleActiveBattler;
-
 #define MAGIC101_STEP_COUNT 5
 
 typedef struct Magic101Steps {

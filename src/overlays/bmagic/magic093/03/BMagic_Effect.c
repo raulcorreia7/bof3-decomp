@@ -31,7 +31,7 @@ INCLUDE_ASM(func_801EF108);
 
 MATCH void func_801EF264(void) {
     if (g_BattleEffectBattler->param.unk_0B < 8U) {
-        if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             func_800A9820((g_Task->unk_03 + 3) & BYTE_MASK);
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
             func_800AF814((g_Task->unk_03 + 3) & BYTE_MASK);

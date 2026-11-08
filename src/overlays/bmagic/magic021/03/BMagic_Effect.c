@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801EF104);
 
 MATCH void func_801EF208(void) {
     if (func_8014DAEC() != 0u) {
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

@@ -7,7 +7,7 @@ MATCH void func_800C2158(void) {
     if (g_BattleCurrentEnemy->turn.command.type == BATTLE_COMMAND_ABILITY) {
         g_BattleCurrentEnemy->ap -= D_801463C8;
     }
-    state = &g_BattleState;
+    state = &g_Battle.state;
     *state |= 0x800;
     g_BattleCurrentEnemy->turn.command.type = 0;
     ((PartyMember*)g_Task)->header.step += 1;

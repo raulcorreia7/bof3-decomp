@@ -7,9 +7,9 @@ MATCH void func_80097DC0(void) {
 
     held = g_InputPressed;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        g_BattleUIState = 3u;
+        g_Battle.ui_state = 3u;
     } else if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        g_BattleUIState = 2u;
+        g_Battle.ui_state = 2u;
     } else if ((INPUT_REPEATED(held, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) != 0) {
         /* FAKE: plain read of the message-slot selector: the volatile qualifier
          * makes the scheduler fill the branch delay slot and shifts the call. */

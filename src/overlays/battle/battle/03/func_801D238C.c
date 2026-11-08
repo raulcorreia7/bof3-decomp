@@ -9,10 +9,10 @@ MATCH void func_801D238C(void) {
     u8 panel_index;
 
     if ((g_InputHeld & PADselect) == 0) {
-        /* FAKE: the address-held counter; `g_BattleSubStep += 1` scores 93.44%. */
+        /* FAKE: the address-held counter; `g_Battle.phase.sub_step += 1` scores 93.44%. */
         u8* count;
 
-        count      = &g_BattleSubStep;
+        count      = &g_Battle.phase.sub_step;
         D_8014837B = 1;
         D_80148357 = 1;
         D_8014839F = 1;

@@ -5,7 +5,7 @@ MATCH void func_800C1A78(void) {
     g_BattleCurrentEnemy->unk_E4 = func_800C1B14;
     g_BattleCurrentEnemy->unk_E8 = &D_800C2610;
     g_Task->header.mode          = 2;
-    if (g_BattleEncounter == 0xD) {
+    if (g_Battle.encounter == 0xD) {
         g_BattleCurrentEnemy->base.max_hp  = 0xFFFF;
         g_BattleCurrentEnemy->stats.max_hp = 0xFFFF;
         g_BattleCurrentEnemy->hp           = 0xFFFF;

@@ -18,7 +18,6 @@ typedef struct Magic001SecondSteps {
 } Magic001SecondSteps;
 
 extern Magic001Steps       D_801EEC10;
-extern u8                  g_BattleActiveBattler;
 extern Magic001SecondSteps D_801EEC3C;
 
 static inline void BMagic_ClearWorkFlagsAndStep(void) {

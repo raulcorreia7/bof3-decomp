@@ -7,7 +7,7 @@ MATCH void func_800A39B4(s16 delta, u8 battler_index) {
     s8  result;
 
     /* FAKE: volatile-drop cell read. */
-    record = *(s8**)&g_BattleTargetRecord + battler_index;
+    record = *(s8**)&g_Battle.target_record + battler_index;
     value  = record[0x14];
     total  = value + delta;
     if (total >= 51) {

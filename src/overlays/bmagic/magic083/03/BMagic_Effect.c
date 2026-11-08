@@ -11,8 +11,8 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH s32 func_801EF0CC(void) {
-    if (*((u8*)&g_BattleActionType) != BATTLE_ACTION_ABILITY && *((u16*)&g_BattleActionId) == 0x136) {
-        g_BattleActionId = ABILITY_SHIELD;
+    if (*((u8*)&g_Battle.action_type) != BATTLE_ACTION_ABILITY && *((u16*)&g_Battle.action_id) == 0x136) {
+        g_Battle.action_id = ABILITY_SHIELD;
     }
     return 0;
 }
@@ -38,7 +38,7 @@ MATCH void func_801EF1DC(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             battler = &g_BattleEnemyBattlers[g_Task->unk_03];
         } else {
             battler = &g_Game.members[g_Task->unk_03];

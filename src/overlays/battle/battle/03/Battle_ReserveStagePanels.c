@@ -21,7 +21,7 @@ MATCH void Battle_ReserveStagePanels(void) {
     D_80148332[slot].x_02    = 0x14;
     D_80148332[slot].unk_01  = 0;
     D_80148332[slot].y_04    = -0x16;
-    group                    = &g_BattleOutcome.surprise;
+    group                    = &g_Battle.outcome.surprise;
     if (*group == 1) {
         BattleStageSelectionRingRecord(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_PARTY));
     }
@@ -38,7 +38,7 @@ MATCH void Battle_ReserveStagePanels(void) {
             first                          = g_Game.members[battler].facing;
             index                          = first * 2 + g_Game.members[battler].chr.character_id * 8;
             panel_x                        = g_Game.members[battler].unk_2E.half + g_BattlePanelOffsets[index];
-            panel_x                        = D_801EAEA4[(g_BattleScrollDir & 0xFE) ^ 2] + panel_x;
+            panel_x                        = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 2] + panel_x;
             D_80148332[battler + 0xD].x_02 = panel_x;
             /* The y lookup reloads the row bytes; the x store may have changed them. */
             index   = g_Game.members[battler].facing * 2 + g_Game.members[battler].chr.character_id * 8;
@@ -51,6 +51,6 @@ MATCH void Battle_ReserveStagePanels(void) {
     }
     func_801D9304(0);
     func_800AC964();
-    counter = &g_BattleSubStep;
+    counter = &g_Battle.phase.sub_step;
     *counter += 1;
 }

@@ -1,7 +1,7 @@
 #include "batl_end_00.h"
 
 MATCH void func_801EECD0(void) {
-    u32* pool = &g_BattleOutcome.reward_exp;
+    u32* pool = &g_Battle.outcome.reward_exp;
     u8   count;
 
     if (*pool != 0 && (count = func_801EEDA8()) != 0) {
@@ -9,8 +9,8 @@ MATCH void func_801EECD0(void) {
     } else {
         *pool = 0;
     }
-    TEXT_Format(g_TextVariables, D_801EEC04, g_BattleOutcome.reward_exp);
+    TEXT_Format(g_TextVariables, D_801EEC04, g_Battle.outcome.reward_exp);
     D_801EB4F4 = Resource_GetText(5);
     EMI_GetArchiveId(g_EmiLoadedCharacterIndex & 0x7F, 0);
-    g_BattleUIState += 1;
+    g_Battle.ui_state += 1;
 }

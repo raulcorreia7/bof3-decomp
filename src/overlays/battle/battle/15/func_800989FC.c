@@ -7,9 +7,9 @@ MATCH void func_800989FC(void) {
                           D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]);
     if ((flags & 0x40u) != 0u) {
         if ((flags & 0x10u) != 0u) {
-            g_BattleUIStep = 5u;
+            g_Battle.ui_step = 5u;
         } else {
-            g_BattleUIStep = 4u;
+            g_Battle.ui_step = 4u;
         }
         return;
     }
@@ -24,6 +24,6 @@ MATCH void func_800989FC(void) {
     } else {
         g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
     }
-    g_BattleUIStep  = 4u;
-    g_BattleUIState = 3u;
+    g_Battle.ui_step  = 4u;
+    g_Battle.ui_state = 3u;
 }

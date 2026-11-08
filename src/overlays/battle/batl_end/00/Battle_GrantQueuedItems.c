@@ -22,9 +22,9 @@ MATCH void Battle_GrantQueuedItems(void) {
             Item_Add(item >> 8, item & BYTE_MASK, D_80146327.levels[slot], 0);
         }
 
-        g_BattleStep    = 4;
-        g_BattleSubStep = 0;
-        g_BattleUIStep  = 0;
-        g_BattleUIState = 0;
+        g_Battle.phase.step     = 4;
+        g_Battle.phase.sub_step = 0;
+        g_Battle.ui_step        = 0;
+        g_Battle.ui_state       = 0;
     }
 }

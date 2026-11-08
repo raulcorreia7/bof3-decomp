@@ -34,15 +34,15 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
     GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     var_s0 = var_s2 << 0x10;
     var_s0 = (s16)var_s2;
-    func_801D9AB4(var_s0, (s16)var_s3, ((g_BattlePartyCount * 2) + 0xA) & 0xFE, 1);
-    func_801D9AB4(var_s0, (s16)(var_s3 + 0x18), ((g_BattlePartyCount * 2) + 0xB) & BYTE_MASK, 1);
-    func_801D9C80(var_s0, (s16)(var_s3 + 2), (g_BattlePartyCount + 0xD) & BYTE_MASK, 1U);
+    func_801D9AB4(var_s0, (s16)var_s3, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);
+    func_801D9AB4(var_s0, (s16)(var_s3 + 0x18), ((g_Battle.party_count * 2) + 0xB) & BYTE_MASK, 1);
+    func_801D9C80(var_s0, (s16)(var_s3 + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1U);
     var_s4     = var_s2;
     var_s5     = 0;
     temp_v0_81 = *(((g_WindowStyle << 6) | 0x20) + &D_80033A08);
     var_s6     = var_s3;
     temp_v0_85 = temp_v0_81 & HALF_MASK;
-    if (g_BattlePartyCount != 0) {
+    if (g_Battle.party_count != 0) {
         var_s3 += 0xE;
         var_s7 = (s16)var_s3;
         var_fp = (temp_v0_85 >> 7) & 0xF8 & BYTE_MASK;
@@ -116,7 +116,7 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
             func_801DA4B4((s16)var_s2, (s16)var_s1, (s16)var_s2, var_s0, (u8)sp28, (u8)sp30, (u8)var_fp);
             func_801DA4B4((s16)var_s3, var_s0, (s16)var_s2, var_s0, (u8)sp28, (u8)sp30, (u8)var_fp);
             var_s4 += 0x5E;
-        } while ((u32)(var_s5 & BYTE_MASK) < (u8)g_BattlePartyCount);
+        } while ((u32)(var_s5 & BYTE_MASK) < (u8)g_Battle.party_count);
     }
 }
 #else

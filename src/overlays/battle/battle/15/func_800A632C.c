@@ -15,7 +15,7 @@ MATCH void func_800A632C(void) {
     pad                                      = *pad_state;
     if ((pad & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        page_counter = (u8*)&g_BattleUIState;
+        page_counter = (u8*)&g_Battle.ui_state;
         *page_counter -= 1;
         return;
     }

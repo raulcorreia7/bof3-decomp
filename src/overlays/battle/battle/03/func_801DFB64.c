@@ -5,11 +5,11 @@ MATCH void func_801DFB64(void) {
     u16           half;
 
     if (func_801DEE4C() != 0u) {
-        gate = &g_BattleState;
+        gate = &g_Battle.state;
         if ((*gate & BATTLE_STATE_CRITICAL) != 0u) {
             Battle_AllocEffect(0, 2);
         }
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         half        = (*gate | BATTLE_STATE_EFFECT_PLAYING);
         *(u16*)gate = half;
         func_801E1DD4();

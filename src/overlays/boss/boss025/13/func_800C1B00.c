@@ -1,7 +1,7 @@
 #include "boss025_13.h"
 
 MATCH void func_800C1B00(void) {
-    u16* flags = &g_BattleState;
+    u16* flags = &g_Battle.state;
 
     if ((*flags & BATTLE_STATE_WINDOW_BUSY) && WINDOW_EFFECT_IDLE()) {
         func_800AC844(0);

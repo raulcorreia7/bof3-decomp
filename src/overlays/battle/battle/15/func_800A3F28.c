@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* FAKE: LOBU reads the volatile g_BattleTarget as a plain byte; the volatile load
+/* FAKE: LOBU reads the volatile g_Battle.target as a plain byte; the volatile load
  * would need an extra mask for the index arithmetic. */
 
 /* sets the battler-dirty flag, then marks the active battler's
@@ -12,15 +12,15 @@ MATCH void func_800A3F28(void) {
     volatile u16* pFlag;
     u16           flag;
 
-    pFlag         = &g_BattleState;
+    pFlag         = &g_Battle.state;
     flag          = *pFlag;
-    battler_index = LOBU(g_BattleTarget);
+    battler_index = LOBU(g_Battle.target);
     *pFlag        = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler_index)) {
         g_Game.members[battler_index].u.turn.damage_flags.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
-        g_Game.members[g_BattleTarget].u.turn.target_flags &= ~BATTLE_HIT_HP;
+        g_Game.members[g_Battle.target].u.turn.target_flags &= ~BATTLE_HIT_HP;
     } else {
         ENEMY_COMBATANT(battler_index).turn.damage_flags.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
-        ENEMY_COMBATANT(g_BattleTarget).turn.target_flags &= ~0x1u;
+        ENEMY_COMBATANT(g_Battle.target).turn.target_flags &= ~0x1u;
     }
 }

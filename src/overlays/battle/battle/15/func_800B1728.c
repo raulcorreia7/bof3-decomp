@@ -53,7 +53,7 @@ MATCH void func_800B1728(void) {
                                g_UiFormatBuffer);
         }
     }
-    if ((*(u8*)&g_BattleUIStep != 6) || (*(u8*)&g_BattleUIState != 5)) {
+    if ((*(u8*)&g_Battle.ui_step != 6) || (*(u8*)&g_Battle.ui_state != 5)) {
         Menu_DrawCursorSprite(
             (g_MenuCurrentPanel->pos.x + 7) & HALF_MASK,
             (g_MenuCurrentPanel->pos.y + 0x20 + *(s16*)&g_MenuCurrentPanel->u.battle.cursor * 32) & HALF_MASK, 0);

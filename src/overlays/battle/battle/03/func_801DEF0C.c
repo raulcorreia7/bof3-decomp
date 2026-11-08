@@ -18,7 +18,7 @@ MATCH void func_801DEF0C(void) {
     work->unk_18             = 0;
     work->unk_1C             = 0;
     work->unk_20             = 0;
-    out->facing              = g_BattleScrollDir;
+    out->facing              = g_Battle.scroll_dir;
     g_Task->unk_48           = 0;
     tail                     = g_Task;
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(tail->pos.x.fixed, tail->pos.y.fixed);

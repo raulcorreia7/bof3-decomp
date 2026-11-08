@@ -6,15 +6,15 @@
 MATCH void func_801D4028(void) {
     u8 next;
 
-    if ((g_BattleState & BATTLE_STATE_EFFECT_PLAYING) != 0) {
+    if ((g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) != 0) {
         if (D_801463C2 == 0) {
             if ((func_800AA8FC() & BYTE_MASK) != 0) {
-                g_BattleRowCursor = 0;
-                next              = g_BattleSubStep + 1;
+                g_Battle.row_cursor = 0;
+                next                = g_Battle.phase.sub_step + 1;
             } else {
                 next = 2;
             }
-            g_BattleSubStep = next;
+            g_Battle.phase.sub_step = next;
         }
     }
 }

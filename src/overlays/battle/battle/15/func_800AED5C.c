@@ -17,7 +17,7 @@ NON_MATCHING s32 func_800AED5C(s32 arg0, u32 battler_index) {
     u32                     saved_ptr;
     s32                     result;
 
-    ctx       = (BattleSelectionContext*)&g_BattleTarget;
+    ctx       = (BattleSelectionContext*)&g_Battle.target;
     saved_sel = ctx->sel;
     saved_ptr = (u32)ctx->record;
     sel       = battler_index & BYTE_MASK;

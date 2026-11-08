@@ -42,7 +42,7 @@ MATCH void func_801EF06C(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & BYTE_MASK)) {
         func_800AFC98(2, 4);
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
 }

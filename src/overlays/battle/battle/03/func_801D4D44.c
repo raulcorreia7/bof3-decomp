@@ -63,7 +63,7 @@ MATCH void func_801D4D44(void) {
     {
         /* FAKE: volatile-drop pointer keeps the countdown cell address
          * in one register across the read and the write. */
-        u8* countdown = (u8*)&g_BattleActionLock;
+        u8* countdown = (u8*)&g_Battle.action_lock;
         u8  count     = *countdown;
 
         if (count != 0u) {

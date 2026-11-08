@@ -5,7 +5,7 @@ MATCH void func_800A0000(void) {
     u8  flags;
 
     func_800A3F28();
-    index = g_BattleTarget - 3;
+    index = g_Battle.target - 3;
     if (g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].rate != 0) {
         flags = g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].flags;
         if (!(flags & 1)) {
