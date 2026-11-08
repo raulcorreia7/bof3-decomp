@@ -8,7 +8,7 @@ MATCH void func_801F4508(void) {
     b    = slot;
     if (b != 0xFF) {
         g_Actors[b].header.flags = 1;
-        *(u16*)0x1F800000        = b;
+        SP_REF(u16, 0)           = b;
         func_801A65A0(D_801F4DFC);
         Actor_BeginScript(3, 0);
     }
