@@ -1818,6 +1818,7 @@ Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task 
 Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
 Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
+Actor_Move = { addr = 0x801C57B4, source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
 Area_PickEncounter = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
 Area_RollEncounterEnemies = { addr = 0x801C6AEC, type = "func", source = "Copies the 8 enemy ids of the chosen encounter into the encounter list and keeps each by a random roll against its spawn chance in s_EntitySpawnChances; returns how many stayed. Called by Area_BuildEncounter." }
@@ -2399,6 +2400,7 @@ Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "Draws a 40x48 
 Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
 Menu_UpdateMaster = { addr = 0x801D25D8, type = "func", source = "Runs the g_MasterMenuStates handler selected by the panel step byte g_MenuMasterStep; the game overlay runs it each frame." }
 Master_StartOffer = { addr = 0x801D27C8, type = "func", source = "starts the master skill offer message in the sisyou menu" }
+Master_StartFarewell = { addr = 0x801D2B64, source = "Starts the master's farewell message (g_MenuMasterMessageIds + MASTER_MESSAGE_FAREWELL) once and moves the master menu to step 6; the last entry of g_MenuMasterStep2Funcs, which starts with Master_StartOffer." }
 Menu_ApplyMasterMode = { addr = 0x801D3ED0, type = "func", source = "Writes the actor mode g_MenuMasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel." }
 g_MenuLabelPower = { addr = 0x801D4038, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D403C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
@@ -5377,6 +5379,7 @@ Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the m
 Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
 Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
 Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
+UI_DrawTextRows = { addr = 0x8015A170, source = "Draws each row of the message window up to g_MessageWindow.last_row through UI_DrawTextAt, carrying the text cursor from row to row." }
 UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }

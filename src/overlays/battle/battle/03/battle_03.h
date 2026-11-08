@@ -553,7 +553,7 @@ s32          func_800AE108(u8 battler_index, s32 work_ptr);
 void         Battle_LoadSelectionEffect(s32 selection_index); /* defined by the battle/battle/15 chain */
 extern s32   D_80145FB4;
 /* func_800AE260 */
-s32          Battle_AllocActionEffect(u16 selection, s32 payload);
+void         Battle_AllocActionEffect(u16 selection, u32 payload);
 void         func_800AE2D4(u32 selection);
 void         func_800AE34C(void);
 void         func_800AE4D0(void);
