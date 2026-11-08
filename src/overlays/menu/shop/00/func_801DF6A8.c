@@ -13,7 +13,7 @@ NON_MATCHING void func_801DF6A8(void) {
 
     Menu_DrawClutStrip(D_80144953);
     count = Party_CountOrder(PARTY_ORDER_FIELD);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    MENU_DRAW_HEADER();
     if (count != 0) {
         slot = 0;
         do {

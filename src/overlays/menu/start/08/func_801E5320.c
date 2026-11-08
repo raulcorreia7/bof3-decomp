@@ -7,7 +7,7 @@ MATCH void func_801E5320(void) {
     u8   count;
 
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    MENU_DRAW_HEADER();
     WinDrawCueText(28, 21, 0xAA);
     func_801E14A8(0x62, 0x4C, D_801ED870, g_SaveCardPort, 0);
     prev      = g_SaveCardPort;

@@ -3,9 +3,7 @@
 MATCH void func_801F3054(void) {
     MESSAGE_REQUEST_CLEAR();
     if (g_MessageChoice == 1) {
-        Game_SetScriptActive();
-        g_SceneEventMode = 0x35;
-        g_SceneEventStep = 0x1E;
+        Scene_StartEvent(0x35, 0x1E);
     } else if (g_MessageChoice == 2) {
         Game_SetScriptActive();
         g_SceneState.state_04 = 1;

@@ -3,7 +3,7 @@
 MATCH void func_801D446C(void) {
     s16 i;
 
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    MENU_DRAW_HEADER();
     if (WINDOW_EFFECT_IDLE()) {
         func_801D68D0(1);
         D_8014865B           = 1;

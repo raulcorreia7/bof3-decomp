@@ -2,7 +2,7 @@
 
 MATCH void func_801E5E30(void) {
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    MENU_DRAW_HEADER();
     switch (D_801ED7FC) {
         case 0:
             break;

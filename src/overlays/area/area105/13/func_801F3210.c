@@ -10,9 +10,7 @@ MATCH s32 func_801F3210(s32 x, s32 y) {
             if (facing >= 2U) {
                 if (facing != FACING_UP_RIGHT) {
                     if ((y >> 16) >= 30) {
-                        Game_SetScriptActive();
-                        g_SceneEventMode = 0x3D;
-                        g_SceneEventStep = 0;
+                        Scene_StartEvent(0x3D, 0);
                         return 1;
                     }
                     return 0;
