@@ -1,10 +1,10 @@
 #include "area016_13.h"
 
+/* nonmatching: 5 instructions; retail schedules `subu v1,t1,t0` (x_low) before the y shift. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F4768(void) {
-    Actor*    frame;
-    POLY_FT4* primitive;
-    POLY_FT4* source;
+    POLY_FT4* prim;
+    POLY_FT4* cell;
     SVECTOR*  quad;
     SVECTOR*  q1;
     SVECTOR*  q2;
@@ -12,134 +12,100 @@ NON_MATCHING void func_801F4768(void) {
     long      depth;
     long      flag;
     s32       width;
+    s32       size;
     s32       row;
     s32       col;
-    s32       offset;
     s32       x_low;
     s32       y_low;
     s32       x_high;
     s32       y_high;
-    s32       uv;
-    s32       tpage;
 
-    frame = g_Task;
-    if (frame->flags_02 == 0) {
-        COORD_INT(frame->pos.y) += (g_FrameCount & 0xF);
-        frame->flags_02 = (u8)(frame->flags_02 + 1);
+    if (g_Task->header.step == 0) {
+        COORD_INT(g_Task->pos.y) += g_FrameCount & 0xF;
+        g_Task->header.step++;
     }
-
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
 
-    frame = g_Task;
-    width = frame->param.unk_0B - 2;
-    frame->pos.y.fixed += 0x800 + (width << 10);
-    if ((D_80104001 + 8) < COORD_INT(frame->pos.y)) {
-        COORD_INT(frame->pos.y) = -8;
+    width = g_Task->param.unk_0B - 2;
+    g_Task->pos.y.fixed += 0x800 + (width << 10);
+    if (D_80104001 + 8 < COORD_INT(g_Task->pos.y)) {
+        COORD_INT(g_Task->pos.y) = -8;
     }
 
-    frame = g_Task;
-    if ((abs(g_AreaTargetCellX - COORD_INT(frame->pos.x)) < 0x1A) ||
-        (abs(g_AreaTargetCellY - COORD_INT(frame->pos.y)) < 0x1A)) {
-        primitive = (POLY_FT4*)g_GfxPrimCursor;
-        row       = 0;
-        SetPolyFT4(primitive);
-        SetShadeTex(primitive, 0);
+    if (abs(g_AreaTargetCellX - COORD_INT(g_Task->pos.x)) >= 0x1A &&
+        abs(g_AreaTargetCellY - COORD_INT(g_Task->pos.y)) >= 0x1A) {
+        return;
+    }
 
-        quad     = D_1F800014;
-        q1       = quad + 1;
-        q2       = quad + 2;
-        q3       = quad + 3;
-        quad->vz = -0x300;
-        q1->vz   = -0x300;
-        q2->vz   = -0x300;
-        q3->vz   = -0x300;
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    SetShadeTex(prim, 0);
+    quad     = D_1F800014;
+    q1       = quad + 1;
+    q2       = quad + 2;
+    q3       = quad + 3;
+    size     = ((2 - width) << 8) + abs(0xF - (g_FrameCount & 0x1F));
+    x_high   = (g_Task->pos.x.fixed >> 9) - 0x3FC0;
+    y_high   = (g_Task->pos.y.fixed >> 9) - 0x3FC0;
+    quad->vz = -0x300;
+    q1->vz   = -0x300;
+    q2->vz   = -0x300;
+    q3->vz   = -0x300;
+    x_low    = x_high - size;
+    y_low    = y_high - size;
+    x_high += size;
+    y_high += size;
+    quad->vx = x_low;
+    quad->vy = y_low;
+    q1->vx   = x_high;
+    q1->vy   = y_low;
+    q2->vx   = x_low;
+    q2->vy   = y_high;
+    q3->vx   = x_high;
+    q3->vy   = y_high;
+    RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                  &flag);
+    func_80155560(width | 0xBB509100, prim, 1);
+    GFX_AddPrim(4, 0x28);
 
-        frame  = g_Task;
-        offset = (2 - width) << 8;
-        offset += abs(0xF - (g_FrameCount & 0x1F));
-        x_high = (frame->pos.x.fixed >> 9) - 0x3FC0;
-        y_high = ((s32)frame->pos.y.fixed >> 9) - 0x3FC0;
-        x_low  = x_high - offset;
-        y_low  = y_high - offset;
-        x_high += offset;
-        y_high += offset;
-        quad->vx = x_low;
-        quad->vy = y_low;
-        q1->vx   = x_high;
-        q1->vy   = y_low;
-        q2->vx   = x_low;
-        q2->vy   = y_high;
-        q3->vx   = x_high;
-        q3->vy   = y_high;
-
-        RotTransPers4(quad, q1, q2, q3, (long*)((u8*)primitive + 8), (long*)((u8*)primitive + 0x10),
-                      (long*)((u8*)primitive + 0x18), (long*)((u8*)primitive + 0x20), &depth, &flag);
-
-        func_80155560((u32)width | 0xBB509100u, primitive, 1);
-        GFX_AddPrim(4, 0x28);
-
-        for (row = 0; row < (2 - width) * 4 + 1; row++) {
-            for (col = 0; col < (2 - width) * 4; col++) {
-                frame  = g_Task;
-                source = Area_FindCellQuad(COORD_INT(frame->pos.x) - 2 + width + col,
-                                           COORD_INT(frame->pos.y) - 2 + width + row);
-                if (source != NULL) {
-                    primitive = (POLY_FT4*)g_GfxPrimCursor;
-                    SetPolyFT4(primitive);
-                    SetShadeTex(primitive, 0);
-                    SetSemiTrans(primitive, 1);
-
-                    primitive->x0   = *(const u32*)&source->x0;
-                    primitive->x1   = *(const u32*)&source->x1;
-                    primitive->x2   = *(const u32*)&source->x2;
-                    primitive->clut = 0x78CB;
-                    primitive->x3   = *(const u32*)&source->x3;
-
-                    tpage            = getTPage(0, 2, 704, 256);
-                    primitive->tpage = (u16)tpage;
-                    setRGB0(primitive, 0x28, 0x28, 0x28);
-
-                    primitive->u0 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
-                    uv            = D_801F51E0[width] * COORD_FRAC(g_Task->pos.y);
-                    if (uv < 0) {
-                        uv += 0xFFFF;
-                    }
-                    primitive->v0 = (u8)((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16));
-
-                    primitive->u1 = (u8)(D_801F51E0[width] + (D_801F51D8[width] + col * D_801F51E0[width]));
-                    uv            = D_801F51E0[width] * COORD_FRAC(g_Task->pos.y);
-                    if (uv < 0) {
-                        uv += 0xFFFF;
-                    }
-                    primitive->v1 = (u8)((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16));
-
-                    primitive->u2 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->pos.y);
-                    if (uv < 0) {
-                        uv += 0xFFFF;
-                    }
-                    primitive->v2 =
-                        (u8)(D_801F51E0[width] + ((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16)));
-
-                    primitive->u3 = (u8)(D_801F51E0[width] + (D_801F51D8[width] + col * D_801F51E0[width]));
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->pos.y);
-                    if (uv < 0) {
-                        uv += 0xFFFF;
-                    }
-                    primitive->v3 =
-                        (u8)(D_801F51E0[width] + ((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16)));
-
-                    frame = g_Task;
-                    Area_AddCellPrim((COORD_INT(frame->pos.x) - 2 + width + col) << 16,
-                                     (COORD_INT(frame->pos.y) - 2 + width + row) << 16, 1, 0x28);
-                }
+    for (row = 0; row < (2 - width) * 4 + 1; row++) {
+        for (col = 0; col < (2 - width) * 4; col++) {
+            cell = Area_FindCellQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col,
+                                     COORD_INT(g_Task->pos.y) - (2 - width) + row);
+            if (cell == NULL) {
+                continue;
             }
+            prim = (POLY_FT4*)g_GfxPrimCursor;
+            SetPolyFT4(prim);
+            SetShadeTex(prim, 0);
+            SetSemiTrans(prim, 1);
+            *(u32*)&prim->x0 = *(u32*)&cell->x0;
+            *(u32*)&prim->x1 = *(u32*)&cell->x1;
+            *(u32*)&prim->x2 = *(u32*)&cell->x2;
+            *(u32*)&prim->x3 = *(u32*)&cell->x3;
+            prim->clut       = 0x78CB;
+            prim->tpage      = getTPage(0, 2, 704, 256);
+            setRGB0(prim, 0x28, 0x28, 0x28);
+            prim->u0 = D_801F51D8[width] + col * D_801F51E0[width];
+            prim->v0 =
+                D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
+            prim->u1 = D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col);
+            prim->v1 =
+                D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
+            prim->u2 = D_801F51D8[width] + col * D_801F51E0[width];
+            prim->v2 = D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] -
+                                                D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
+            prim->u3 = D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col);
+            prim->v3 = D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] -
+                                                D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
+            Area_AddCellPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16,
+                             (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
         }
     }
 }
 #else
-/* blocker: register allocation; first diff: lui a1 against t0. */
+/* blocker: schedule of the vertex corners; first diff: subu v1,t1,t0 at 0x801F495C. */
 INCLUDE_ASM(func_801F4768);
 #endif
