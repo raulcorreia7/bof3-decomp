@@ -16,7 +16,7 @@ MATCH void func_801E7000(void) {
     Menu_DrawWindowFrame(0x12, 0x61, 0x24, 0x11);
     Menu_DrawNameEntryGrid(D_801ED7E8, 0x18, 0x67);
     g_Task->timer = g_Task->timer + 1;
-    if (g_Task->timer >= 0xA) {
+    if (g_Task->timer >= 10) {
         g_Task->timer  = 0;
         g_Task->unk_06 = (g_Task->unk_06 + 1) & 7;
         Actor_SelectScript((g_Task->unk_06 + 8) & BYTE_MASK);
