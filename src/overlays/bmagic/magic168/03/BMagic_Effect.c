@@ -12,8 +12,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_BrightenPalette.h"
 
-#include "overlays/bmagic/Effect_NextStep.h"
-
 /* func_801EF158 */
 MATCH void Effect_NextStep(void) {
     BMagic_AdvanceEffectStep(5);

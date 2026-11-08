@@ -14,8 +14,6 @@ INCLUDE_ASM(func_801EED48);
 #include "overlays/bmagic/Effect_BrightenPalette.h"
 
 /* func_801EF11C */
-#include "overlays/bmagic/Effect_NextStep.h"
-
 MATCH void Effect_NextStep(void) {
     BMagic_AdvanceEffectStep(1);
 }
