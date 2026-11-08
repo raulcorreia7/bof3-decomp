@@ -6,7 +6,7 @@
 
 /* func_801DA5B4 */
 MATCH void Fishing_CastRun(void) {
-    u8*      work    = TASK_BYTES;
+    u8*      work    = (u8*)g_Task;
     Callback handler = g_FishingCastStates[work[3]];
     handler();
 }

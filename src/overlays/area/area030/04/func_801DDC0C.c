@@ -7,7 +7,7 @@ MATCH void func_801DDC0C(void) {
 
     if (D_80144125 == 0) {
         UI_SetMode(0);
-        spad_ptr = TASK_BYTES;
+        spad_ptr = (u8*)g_Task;
         spad_ptr[3] += 1;
     }
 }

@@ -265,7 +265,7 @@ MATCH void func_801F363C(void) {
 #include "overlays/area/Message_Clear.h"
 
 MATCH void func_801F36E4(void) {
-    SYS_DISPATCH_BYTE(D_801F4900, TASK_BYTES[0x4]);
+    SYS_DISPATCH_BYTE(D_801F4900, g_Task->unk_04);
 }
 
 MATCH void func_801F3728(void) {
@@ -305,7 +305,7 @@ MATCH void func_801F378C(void) {
 }
 
 MATCH void func_801F3800(void) {
-    SYS_DISPATCH_BYTE(D_801F4908, TASK_BYTES[0x4]);
+    SYS_DISPATCH_BYTE(D_801F4908, g_Task->unk_04);
 }
 
 MATCH void func_801F3844(void) {

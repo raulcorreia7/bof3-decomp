@@ -6,7 +6,7 @@
 
 /* func_801D9B58 */
 MATCH void Fishing_EntryRun(void) {
-    u8*      work    = TASK_BYTES;
+    u8*      work    = (u8*)g_Task;
     Callback handler = g_FishingEntryStates[work[3]];
     handler();
 }

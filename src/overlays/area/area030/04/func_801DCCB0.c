@@ -5,7 +5,7 @@
 #include "area030_04.h"
 
 MATCH void func_801DCCB0(void) {
-    u8*      work    = TASK_BYTES;
+    u8*      work    = (u8*)g_Task;
     Callback handler = D_801E22F0[work[4]];
     handler();
 }

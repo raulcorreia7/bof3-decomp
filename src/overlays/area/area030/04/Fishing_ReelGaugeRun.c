@@ -8,7 +8,7 @@ MATCH void Fishing_ReelGaugeRun(void) {
     u8*      work;
     Callback handler;
 
-    work    = TASK_BYTES;
+    work    = (u8*)g_Task;
     handler = g_FishingReelGaugeStates[work[1]];
     handler();
 }

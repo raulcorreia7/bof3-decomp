@@ -7,7 +7,7 @@ MATCH void func_801DC838(void) {
     Callback handler;
 
     func_801E16DC();
-    work    = TASK_BYTES;
+    work    = (u8*)g_Task;
     handler = D_801E22D0[work[3]];
     handler();
 }
