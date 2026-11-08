@@ -53,7 +53,7 @@ segments:
       - [0x2B38, c, func_801F5738]
       - [0x2B78, c, func_801F5778]
       - [0x2BB4, c, func_801F57B4]
-      - [0x2BFC, c, func_801F57FC]
+      - [0x2BFC, c, Actor_SetGroundHeight]
       - [0x2C34, c, func_801F5834]
       - [0x2CF4, c, func_801F58F4]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

@@ -1,6 +1,7 @@
 #include "area148_13.h"
 
-MATCH void func_801F4544(void) {
+/* func_801F4544 */
+MATCH void Area_SampleForwardHeight(void) {
     s32 y;
 
     (g_Task)->unk_18  = (g_Task)->pos.x.fixed + (g_FacingSteps[(g_Task)->direction_08].x * 5);

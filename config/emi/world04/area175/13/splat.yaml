@@ -27,7 +27,7 @@ segments:
       - [0x628, c, func_801F3228]
       - [0x664, c, func_801F3264]
       - [0x724, c, func_801F3324]
-      - [0x774, c, func_801F3374]
+      - [0x774, c, Area_FadeOutScreenTint]
       - [0x818, c, func_801F3418]
       - [0x838, c, Area_DrawScreenTint]
       - [0x92C, c, func_801F352C]

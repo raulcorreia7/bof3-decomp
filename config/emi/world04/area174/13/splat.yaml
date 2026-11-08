@@ -46,7 +46,7 @@ segments:
       - [0x1EB4, c, func_801F4AB4]
       - [0x1F0C, c, func_801F4B0C]
       - [0x2068, c, func_801F4C68]
-      - [0x211C, c, func_801F4D1C]
+      - [0x211C, c, Area_FreePaletteOnAreaChange]
       - [0x2154, c, func_801F4D54]
       - [0x2190, c, func_801F4D90]
       - [0x2328, c, Scene_WaitEmi]

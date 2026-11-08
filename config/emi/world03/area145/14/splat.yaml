@@ -36,7 +36,7 @@ segments:
       - [0x1500, c, func_801F4100]
       - [0x15C4, c, func_801F41C4]
       - [0x1688, c, func_801F4288]
-      - [0x1704, c, func_801F4304]
+      - [0x1704, c, Area_SkipIfHasKey]
       - [0x174C, c, Area_PauseBGM]
       - [0x1774, c, Area_ResumeBGM]
       - [0x179C, c, func_801F439C]
