@@ -74,7 +74,7 @@
 /* The cell probe of the plchar programs that react to map cells 0xF2 and 0xF8 with the
  * shared Char_SpawnActor: 0xF2 spawns a field record (and sometimes a second) and
  * 0xF8 hands out the item 0x56. Every change here must verify every member image. */
-#define CHAR_PROBE_CELL_SPAWN()                                            \
+#define CHAR_PROBE_CELL_SPAWN(CUE_SCALE)                                   \
     s32 cell;                                                              \
     s32 i;                                                                 \
     u32 roll;                                                              \
@@ -92,7 +92,7 @@
                     spawn_cue = 2;                                         \
                 }                                                          \
                 if ((g_GameRequestFlags & 6) && !(RANDOM_MASK(3))) {       \
-                    spawn_cue = (spawn_cue & BYTE_MASK) * 20;              \
+                    spawn_cue = (spawn_cue & BYTE_MASK) * CUE_SCALE;       \
                 }                                                          \
                 func_801B5E58(spawn_cue & BYTE_MASK);                      \
                 Char_SpawnActor(1, x, y);                                  \
