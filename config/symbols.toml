@@ -3952,6 +3952,7 @@ Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F3C74, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Area_SkipScriptIfAdultRyu = { addr = 0x801F3D38, type = "func", source = "Entry slot 14 of the 18-pointer area script-call table; adds 3 to the script cursor when g_Game.current chr.character_id is CHAR_ID_RYU_ADULT." }
 Actor_SnapToGround = { addr = 0x801F3F48, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawActorLightPillar = { addr = 0x801F3F94, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F3FDC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F52FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
@@ -3967,6 +3968,7 @@ g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and mess
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_RunAreaStep = { addr = 0x801F2C34, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Actor_SnapToGround = { addr = 0x801F2DD4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawActorLightPillar = { addr = 0x801F2E20, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F2E68, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world03/area147/13"]
