@@ -78,10 +78,7 @@ MATCH void func_801EF6A8(void) {
     pos.vy = (src->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -(COORD_INT(src->pos.z) + 0x200) / 2;
     RotTransMatrix(&pos, matrix, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2(&g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
+    Camera_SetModelMatrix(&rot, &matrix);
 }
 
 MATCH void func_801EF774(void) {

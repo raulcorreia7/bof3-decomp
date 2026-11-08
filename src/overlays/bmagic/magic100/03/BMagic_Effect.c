@@ -117,10 +117,7 @@ MATCH void func_801EF434(void) {
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -(COORD_INT(g_Task->pos.z) + 0x100) / 2;
     RotTransMatrix(&pos, matrix, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2(&g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
+    Camera_SetModelMatrix(&rot, &matrix);
 }
 
 INCLUDE_ASM(func_801EF4E8);
@@ -148,10 +145,7 @@ NON_MATCHING void func_801EF8E8(void) {
     }
     pos.vz = height / 2;
     RotTransMatrix(&pos, matrix, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2(&g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
+    Camera_SetModelMatrix(&rot, &matrix);
 }
 #else
 INCLUDE_ASM(func_801EF8E8);

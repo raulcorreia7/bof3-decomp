@@ -96,10 +96,7 @@ MATCH void func_801EF52C(void) {
     pos.vy = (FIELD(s32, D_801F05F8, 0x14) >> 9) - 0x4000;
     pos.vz = -FIELD(s16, D_801F05F8, 0x1A) / 2;
     RotTransMatrix(&pos, matrix, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2(&g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
+    Camera_SetModelMatrix(&rot, &matrix);
 }
 
 INCLUDE_ASM(func_801EF5F4);

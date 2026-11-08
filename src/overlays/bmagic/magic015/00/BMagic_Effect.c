@@ -340,10 +340,7 @@ MATCH void func_801F1250(void) {
     height = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     pos.vz = -height / 2;
     RotTransMatrix(&pos, matrix, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2(&g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
+    Camera_SetModelMatrix(&rot, &matrix);
 }
 
 MATCH void func_801F131C(void) {

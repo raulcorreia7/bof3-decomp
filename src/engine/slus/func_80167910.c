@@ -70,10 +70,7 @@ MATCH void func_80167910(void) {
     rot.vy  = (s16)((g_Task->pos.y.fixed >> 9) - 0x4000);
     rot.vz  = (s16)(-COORD_INT(g_Task->pos.z) / 2);
     RotTransMatrix(&rot, mtx, &flag);
-    RotMatrix(&axis, &mtx);
-    MulMatrix2(&g_CameraMatrix, &mtx);
-    SetRotMatrix(&mtx);
-    SetTransMatrix(&mtx);
+    Camera_SetModelMatrix(&axis, &mtx);
     if (GetGraphType() == 1) {
         mode = 0x12E;
     } else if (GetGraphType() == 2) {

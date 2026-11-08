@@ -90,14 +90,7 @@ MATCH void func_801EF2F0(void) {
     rot.vz = 0;
     rot.vy = 0;
     rot.vx = 0;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -COORD_INT(g_Task->pos.z) / 2;
-    RotTransMatrix(&pos, matrix, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2(&g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
 INCLUDE_ASM(func_801EF3A0);

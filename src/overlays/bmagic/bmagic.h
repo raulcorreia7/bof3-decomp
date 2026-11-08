@@ -21,10 +21,7 @@
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000; \
     pos.vz = -COORD_INT((SPAN_WORK)->pos.z) / 2;  \
     RotTransMatrix(&pos, matrix, &flags);         \
-    RotMatrix(&rot, &matrix);                     \
-    MulMatrix2(&g_CameraMatrix, &matrix);         \
-    SetRotMatrix(&matrix);                        \
-    SetTransMatrix(&matrix)
+    Camera_SetModelMatrix(&rot, &matrix)
 
 /* The statements of Effect_SetActorMatrix with a zero rotation. */
 #define BMAGIC_SET_ACTOR_MATRIX_SPAN(SPAN_WORK) \

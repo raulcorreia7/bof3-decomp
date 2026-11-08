@@ -125,6 +125,16 @@ extern u8            D_80148626;
 extern volatile u8   D_80148627;
 /* D_801492E8 */
 extern MATRIX        g_CameraMatrix;
+
+/* Load the GTE with `matrix`, rotated by `rot` and viewed through the camera:
+ * the model matrix a 3D effect or scene part draws with. */
+static inline void Camera_SetModelMatrix(SVECTOR* rot, MATRIX* matrix) {
+    RotMatrix(rot, matrix);
+    MulMatrix2(&g_CameraMatrix, matrix);
+    SetRotMatrix(matrix);
+    SetTransMatrix(matrix);
+}
+
 /* D_80149308 */
 /* A unit that must re-read the target after storing it defines
  * AREA_SCROLL_TARGET_VOLATILE before its first include. */
