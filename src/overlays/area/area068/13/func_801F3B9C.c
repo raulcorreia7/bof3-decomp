@@ -10,6 +10,6 @@ MATCH void func_801F3B9C(void) {
         work->unk_0A -= 1;
         g_GameState->u.field.unk_122 -= 2;
     } else {
-        ((u8*)work)[0x04] = 0;
+        work->unk_04 = 0;
     }
 }

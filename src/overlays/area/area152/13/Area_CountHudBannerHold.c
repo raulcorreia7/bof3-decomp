@@ -5,15 +5,15 @@ MATCH void Area_CountHudBannerHold(void) {
     Actor* scratch;
 
     scratch = g_Task;
-    if (((u8*)scratch)[0xB] == 0) {
-        ((u8*)scratch)[9]++;
+    if (scratch->param.unk_0B == 0) {
+        scratch->timer++;
         scratch = g_Task;
-        if (((u8*)scratch)[9] >= 0x5A) {
-            ((u8*)scratch)[0xB]++;
+        if (scratch->timer >= 0x5A) {
+            scratch->param.unk_0B++;
         }
     }
 
-    if (D_801454F2 != 0 && TASK_BYTES[0x0B] != 0) {
+    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
         goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -23,7 +23,7 @@ MATCH void Area_CountHudBannerHold(void) {
         goto done;
     }
 bump:
-    TASK_BYTES[0x03]++;
+    g_Task->unk_03++;
 done:
     Area_DrawHudBanner(0x5C, g_Task->screen_y);
 }
