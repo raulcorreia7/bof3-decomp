@@ -1,6 +1,6 @@
 name: ci
 
-# Disc-free checks: format, shell lint, headers, tree and tool tests. The byte-exact `check` runs locally.
+# Disc-free checks: `tools/pre_push.sh` without `check` (format, headers, tree, externs, addresses, type loss, quality and tool tests). The byte-exact `check` runs locally.
 
 on:
   push:

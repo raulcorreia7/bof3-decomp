@@ -62,11 +62,11 @@ After you add a `hand/` file, a header or a `NON_MATCHING` marker, run
 
 ## Gates
 
-| Check             | Command                       | Pass                                              |
-| ----------------- | ----------------------------- | ------------------------------------------------- |
-| One image's bytes | `check-<image>`               | `sha1sum -c` accepts the linked payload           |
-| Every image       | `check`                       | every image matches                               |
-| Hygiene           | `format-check`, `include-asm` | format passes; `INCLUDE_ASM` not above merge base |
+| Check             | Command                                | Pass                                                                        |
+| ----------------- | -------------------------------------- | --------------------------------------------------------------------------- |
+| One image's bytes | `check-<image>`                        | `sha1sum -c` accepts the linked payload                                     |
+| Every image       | `check`                                | every image matches                                                         |
+| Hygiene           | `format-check`, `include-asm`, `addrs` | format passes; `INCLUDE_ASM` not above merge base; no recorded address lost |
 
 A failed build or an unsupported flag is a failure, never a match. A percentage only ranks work.
 
