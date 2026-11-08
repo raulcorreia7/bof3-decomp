@@ -12,7 +12,7 @@ MATCH s32 func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s
     s32        cost;
 
     if (use_battle_record & BYTE_MASK) {
-        record = (Character*)&D_80145F04[(character_index & BYTE_MASK) * BATTLE_PARTY_STRIDE];
+        record = &g_BattlePartyBattlers[character_index & BYTE_MASK].chr;
     } else {
         record = &g_Characters[character_index & BYTE_MASK];
     }

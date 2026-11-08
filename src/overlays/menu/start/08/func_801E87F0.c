@@ -10,7 +10,7 @@ MATCH s32 func_801E87F0(s32 record_index, s32 use_battle_record) {
     if ((use_battle_record & BYTE_MASK) == 0) {
         rec = &g_Characters[record_index & BYTE_MASK];
     } else {
-        rec = (Character*)&D_80145F04[(record_index & BYTE_MASK) * BATTLE_PARTY_STRIDE];
+        rec = &g_BattlePartyBattlers[record_index & BYTE_MASK].chr;
     }
     limit = rec->stats.max_hp;
     cur   = rec->hp;
