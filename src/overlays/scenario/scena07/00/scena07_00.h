@@ -9,7 +9,7 @@
 #define SCRATCH_ROW_STRIDE 0x1C
 #define SCRATCH_ROW_OFFSET 0x00
 
-void            func_801F3C3C(s32 arg0);
+void            func_801F3C3C(s32 value);
 void            func_801F8358(void);
 extern u16      D_800E4C1E;
 extern s8       D_80144EC0;
