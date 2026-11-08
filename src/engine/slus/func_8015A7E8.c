@@ -34,6 +34,6 @@ MATCH void func_8015A7E8(void) {
             func_801A3A08();
             continue;
         }
-        D_801C83D8[TASK_BYTES[1]]((u8*)((i & BYTE_MASK) * ACTOR_SIZE + (u32)base));
+        D_801C83D8[g_Task->header.mode]((u8*)((i & BYTE_MASK) * ACTOR_SIZE + (u32)base));
     }
 }

@@ -11,7 +11,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
     FishingState* back;
     s32           speed;
 
-    work  = (FishingState*)TASK_BYTES;
+    work  = (FishingState*)g_Task;
     speed = work->step_delta_18;
     if (speed != 0) {
         switch (g_FishingRodRow->byte_01) {
@@ -21,7 +21,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
                     work->pos_x_0C      = 0xFF;
                     work->step_delta_18 = -work->step_delta_18;
                 } else {
-                    back = (FishingState*)TASK_BYTES;
+                    back = (FishingState*)g_Task;
                     if ((s32)back->step_delta_18 < 0 && back->pos_x_0C <= 0) {
                         back->pos_x_0C      = 0;
                         back->step_delta_18 = -back->step_delta_18;
@@ -47,7 +47,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
                 } else {
                     work->cursor_10 = work->cursor_10 + speed;
                 }
-                fresh           = (FishingState*)TASK_BYTES;
+                fresh           = (FishingState*)g_Task;
                 fresh->pos_x_0C = fresh->pos_x_0C + fresh->cursor_10;
                 if (fresh->cursor_10 > 0) {
                     if (fresh->pos_x_0C >= 0xFF) {
