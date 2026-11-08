@@ -4,7 +4,9 @@ void func_801DAC1C(void);
 
 /* nonmatching: one row differs. The cursor-frame loop adds the row offset and `rows` as `addu v1,v1,a2` in retail and
  * `addu v1,a2,v1` here (0x801DAAEC). `panel = &rows[i]; i++;` before the stores fixed the other nine rows. Tried:
- * i + rows, rows + i, &i[rows], the 0x120 base inline in the loop (loses the shared base register). */
+ * i + rows, rows + i, &i[rows], &rows[i++], an index copy local (s32 and u8), i & 0xFF, (s32)i, the 0x120 base inline
+ * in the loop (loses the shared base register), rows as &g_MenuPanelTasks[n]. Only
+ * `(MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)rows)` matches, and it adds two casts. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAA68(void) {
     u8*            record;

@@ -40,6 +40,8 @@ extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
 extern u8          g_PartyFormation;
 extern u8          g_PartyBattleOrder[];
+/* D_80144FA0: one bit per enemy kind byte, 256 bits. */
+extern u32         g_IdentifiedEnemies[8];
 extern u32         D_80145040;
 extern u32         D_80145044;
 /* The abilities the shop offers, packed to the front. */

@@ -98,7 +98,28 @@ MATCH void func_801EF940(void) {
 
 INCLUDE_ASM(func_801EFB04);
 
-INCLUDE_ASM(func_801F0260);
+MATCH void func_801F0260(void) {
+    PartyBattler* work;
+    u16           x;
+    u16           y;
+
+    SYS_DISPATCH_BYTE(D_801F07E8, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_800AF764();
+        work = g_Task;
+        if (work->param.unk_0B == 1) {
+            x = work->unk_2E.half - 0x10;
+            y = work->unk_30.half;
+        } else {
+            x = work->unk_2E.half + 0x10;
+            y = work->unk_30.half;
+        }
+        y -= 0xC;
+        work->unk_2E.half = x;
+        work->unk_30.half = y;
+        func_801F04BC();
+    }
+}
 
 #include "overlays/bmagic/Effect_AppearAtTarget.h"
 

@@ -51,9 +51,19 @@ MATCH void BMagic_UpdateBurnSprites(void) {
 /* Retail keeps the battler in v1 and the task in a0; the draft (--dec form, timer 2, unk_14 zero) is one instruction short at the 0x14 bnez, the reg order differs. */
 INCLUDE_ASM(func_801EEFF4);
 
-/* blocker: sum register; first diff: lw a0,0x20($v1) (retail) against lw v0,0x20($v1). */
-/* blocker: timer and unk_20 load order; first diff: lbu a1 against v0 at 0x801EF0B0. */
-INCLUDE_ASM(func_801EF0A4);
+MATCH void func_801EF0A4(void) {
+    PartyBattler* work;
+    s32           sum;
+
+    work         = g_Task;
+    sum          = work->unk_20 + work->timer;
+    work->unk_20 = sum;
+    work->unk_14 += sum;
+    work->unk_09 -= 2;
+    if (g_Task->unk_09 == 0x10) {
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EF108(void) {
     PartyBattler* work;
