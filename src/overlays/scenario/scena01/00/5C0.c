@@ -346,7 +346,8 @@ MATCH void Scene_InitOpeningParty(void) {
     Party_JoinMember(CHAR_ID_RYU_PAJAMAS);
 }
 
-MATCH void func_801FE1B0(void) {
+/* func_801FE1B0 */
+MATCH void Scene_SetPartyRyuTeepoRei(void) {
     g_Characters[g_CharSlot[0]].character_id = CHAR_ID_RYU_YOUNG;
     EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
