@@ -366,6 +366,8 @@ extern GameSlotWordColumn D_801468B8[];
 extern u8                 D_801468BE[]; /* 0x801468BE */
 extern u8                 D_801468C2[]; /* 0x801468C2 */
 extern s32                D_801468C4;
+/* FAKE: column views of g_Actors for the spawn functions (+0x77 unk_77, +0x78 unk_78, +0x8C ext, +0x94 unk_94).
+ * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
 extern u8                 D_801468FF;
 extern u8                 D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
 /* FAKE: column views of g_Actors for func_801A65A0 and func_801A68C0, the only forms that match them. */
