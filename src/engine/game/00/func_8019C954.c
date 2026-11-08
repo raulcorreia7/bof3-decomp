@@ -16,7 +16,7 @@ MATCH void func_8019C954(void) {
     g_Task->unk_26       = 0;
     g_Task->unk_4C       = record->unk_4C;
     g_Task->unk_2B       = 1;
-    g_Task->unk_29       = record->unk_29;
+    g_Task->draw_layer   = record->draw_layer;
     g_Task->unk_48       = 0;
     {
         u8* work;

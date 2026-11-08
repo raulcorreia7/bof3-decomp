@@ -28,8 +28,8 @@ MATCH void func_8019A3FC(void) {
     work->screen_y     = (total - delta);
     other->unk_2A      = 0;
 
-    work         = g_Task;
-    work->unk_29 = 2;
+    work             = g_Task;
+    work->draw_layer = 2;
 
     if (g_Task->unk_06 == 3) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

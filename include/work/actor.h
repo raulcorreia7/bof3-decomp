@@ -193,7 +193,7 @@ typedef struct Actor {
     u8             unk_26;            /* 0x26 */
     u8             unk_27;            /* 0x27 */
     u8             unk_28;            /* 0x28 */
-    u8             unk_29;            /* 0x29 */
+    u8             draw_layer;        /* 0x29 - the ordering-table layer GFX_AddPrim files its primitives in */
     u8             unk_2A;            /* 0x2A */
     u8             unk_2B;            /* 0x2B */
     u16            unk_2C;            /* 0x2C */

@@ -12,7 +12,7 @@ MATCH void Actor_StartFlying(void) {
 
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;
-    g_Task->unk_29       = 5;
+    g_Task->draw_layer   = 5;
 
     scratch              = g_Task;
     scratch->vx          = (s16)g_FlockVelocity[scratch->direction_08].x;

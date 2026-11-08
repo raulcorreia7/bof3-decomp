@@ -12,7 +12,7 @@ MATCH void func_801F3C84(void) {
         actor = &g_Actors[i];
         TASK_SET(actor);
         if (actor->header.flags & 1) {
-            actor->unk_29 = 5;
+            actor->draw_layer = 5;
             func_8014D290();
         }
     }

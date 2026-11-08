@@ -16,6 +16,6 @@ MATCH void func_8015A944(void) {
         state = g_AreaDrawMode;
     }
 
-    work->unk_29 = state;
+    work->draw_layer = state;
     func_8015A9A4();
 }

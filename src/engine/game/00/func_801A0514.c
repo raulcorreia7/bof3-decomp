@@ -18,9 +18,9 @@ MATCH void func_801A0514(void) {
         if (ACTOR_IN_USE(*entity)) {
             if (entity->unk_06 != 9) {
                 if (entity->active_flags & 0x10) {
-                    entity->unk_29 = 4;
+                    entity->draw_layer = 4;
                 } else {
-                    entity->unk_29 = g_AreaDrawMode;
+                    entity->draw_layer = g_AreaDrawMode;
                 }
 
                 goto block_7; /* the slot's state byte is already set */

@@ -99,9 +99,9 @@ MATCH void func_801F73BC(void) {
         rect.h = 0x28;
         SetDrawMove(prim, &rect, D_801FCF40 / 4 + 0x2C0, D_801FCF42 + 0x100);
         g_Task->header.mode++;
-        g_Task->unk_29 = 0;
-        g_Task->timer  = g_Task->header.mode;
-        GFX_AddPrim(g_Task->unk_29, sizeof(DR_MOVE));
+        g_Task->draw_layer = 0;
+        g_Task->timer      = g_Task->header.mode;
+        GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MOVE));
         if (g_Task->header.mode == 4) {
             func_80196070();
         }

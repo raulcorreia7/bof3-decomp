@@ -165,7 +165,7 @@ MATCH void func_801F7134(s32 chapter_id) {
 
     tpage = getTPage(1, 2, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(g_Task->unk_29, sizeof(DR_MODE));
+    GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MODE));
 
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
@@ -176,7 +176,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);
-    GFX_AddPrim(g_Task->unk_29, sizeof(SPRT));
+    GFX_AddPrim(g_Task->draw_layer, sizeof(SPRT));
 }
 
 MATCH void func_801F7264(void) {
@@ -676,7 +676,7 @@ MATCH void func_801F8360(void) {
         setRGB1(prim, shade, shade, shade);
         setRGB2(prim, shade, shade, shade);
         SetSemiTrans(prim, 1);
-        GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
+        GFX_AddPrim(g_Task->draw_layer, sizeof(POLY_G3));
         PopMatrix();
         i = i + 1;
         SCN_EFFECT->angle.z += 170;
@@ -742,7 +742,7 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);
     setRGB2(prim, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2);
     SetSemiTrans(prim, 1);
-    GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
+    GFX_AddPrim(g_Task->draw_layer, sizeof(POLY_G3));
     PopMatrix();
 
     *(SceneRotation*)&g_Task->unk_64 = saved;
