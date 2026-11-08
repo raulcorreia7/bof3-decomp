@@ -17,7 +17,7 @@ MATCH void func_801E09F4(void) {
     if (buttons & PADLup) {
         u8 next;
 
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         next       = D_801483EE - 1;
         D_801483EE = next;
         if ((s8)next < 0) {
@@ -26,7 +26,7 @@ MATCH void func_801E09F4(void) {
     } else if (buttons & PADLdown) {
         u8 next;
 
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         next       = D_801483EE + 1;
         D_801483EE = next;
         if ((next & BYTE_MASK) >= 3U) {
@@ -34,7 +34,7 @@ MATCH void func_801E09F4(void) {
         }
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         raw = D_801483EE & BYTE_MASK;
         if (raw == 0) {
             flag       = &D_80148652;
@@ -47,8 +47,8 @@ MATCH void func_801E09F4(void) {
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 2));
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         flag2                = &D_80148651;
         D_801483E4           = 0;
         count2               = *flag2;

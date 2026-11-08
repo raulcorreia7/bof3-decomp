@@ -132,7 +132,7 @@ MATCH void func_801FB300(void) {
     if (*step == 0) {
         Party_AddZenny(0x32, 0);
         SYS_SetFlag(g_SceneFlags, 0x23);
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         Game_ClearScriptActive();
         *step                 = 0;
         g_SceneState.state_04 = 0;
@@ -249,19 +249,19 @@ MATCH void func_801FC7E4(void) {
 MATCH void func_801FC9CC(void) {
     if (g_PartyFieldOrder[0] == 0 || g_PartyFieldOrder[0] == 3) {
         if ((u32)((u16)D_80145EC6 - 0x44) < 2 && D_80145ECA == 0x3F && D_80145EDB == 0x42 && D_80145E98 == 1) {
-            SND_PlayCue(0x20B);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
             D_80146875 = 0x1E;
             D_80146874 = 0x1A;
         }
         if (D_80145EC6 == 0x46) {
             if (D_80145ECA == 0x3E && D_80145EDB == 0x45 && D_80145E98 == 7) {
-                SND_PlayCue(0x20B);
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
                 D_80146875 = 0x1E;
                 D_80146874 = 0x1A;
             }
         }
         if (D_80145EC6 == 0x44 && D_80145ECA == 0x3E && D_80145EDB == 0x43 && D_80145E98 == 3) {
-            SND_PlayCue(0x20B);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
             D_80146875 = 0x1E;
             D_80146874 = 0x1A;
         }
@@ -283,7 +283,7 @@ MATCH void func_801FCB94(void) {
     D_80146866      = 0;
     D_80146867      = 0;
     D_80146875      = 0;
-    SND_PlayCue(EMI_CUE_ID(2, 2));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
 }
 
 MATCH void func_801FCBDC(s32 arg0) {
@@ -447,7 +447,7 @@ MATCH void func_801FD450(void) {
     Game_SetScriptActive();
     g_SceneState.step_05  = 0xF;
     g_SceneState.state_04 = 0x10;
-    SND_PlayCue(EMI_CUE_ID(1, 6));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
 }
 
 MATCH void func_801FD490(void) {
@@ -502,7 +502,7 @@ MATCH void func_801FD5FC(void) {
     g_ScriptVars[2]       = 0;
     g_ScriptVars[3]       = 0;
     g_SceneState.state_04 = 25;
-    SND_PlayCue(EMI_CUE_ID(1, 6));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
 }
 
 MATCH void func_801FD65C(void) {

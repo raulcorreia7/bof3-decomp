@@ -12,7 +12,7 @@ MATCH void func_801F3010(void) {
     WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
     TASK_SET(&g_BattlePartyBattlers[1]);
     D_801460E8 |= 0x40;
-    SND_PlayCue(EMI_CUE_ID(2, 14));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 14));
     Actor_SelectScript(0x57);
     g_Task                = previous;
     previous->header.mode = 7;

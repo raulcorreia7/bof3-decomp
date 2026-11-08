@@ -31,7 +31,7 @@ MATCH void func_80098450(void) {
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if ((trigger & PADLleft) != 0) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         g_MenuPanelTasks[16].u.message.id = 0x32;
         D_8014857A -= 1;
         if ((s8)D_8014857A < 0) {
@@ -39,7 +39,7 @@ MATCH void func_80098450(void) {
         }
     } else if ((trigger & PADLright) != 0) {
         g_MenuPanelTasks[16].u.message.id = 0x31;
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         D_8014857A += 1;
         if (D_8014857A >= 4u) {
             g_MenuPanelTasks[16].unk_0A = 0;
@@ -82,7 +82,7 @@ MATCH void func_80098450(void) {
         }
     }
     if (old_cursor != panel->group_cursor) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     handle = Message_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A,
                                                  D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
@@ -92,7 +92,7 @@ MATCH void func_80098450(void) {
         return;
     }
     if ((trigger & PADLup) != 0 && old_cursor == 0u) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148625       = 8u;
         D_80148626       = 5u;
         D_80148624       = 1u;
@@ -112,7 +112,7 @@ MATCH void func_80098450(void) {
         D_801454FE                               = g_MenuPanelTasks[16].unk_0B;
         D_801454FF                               = g_MenuPanelTasks[16].unk_0C;
         g_BattleMessageSlot[0x119]               = 0u;
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         *(u8*)&g_Battle.ui_step += 1u;
         return;
     }
@@ -122,13 +122,13 @@ MATCH void func_80098450(void) {
         g_BattleActorTurn->command.id = value;
         if ((func_801AF494(g_MenuPanelTasks[16].unk_08, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) &
              BYTE_MASK) == 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
         D_801454FD = D_8014857A;
         D_801454FE = g_MenuPanelTasks[16].unk_0B;
         D_801454FF = g_MenuPanelTasks[16].unk_0C;
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         g_BattleChoicePhase = 1u;
         D_801485DC          = 0u;
         g_Battle.ui_step    = 3u;

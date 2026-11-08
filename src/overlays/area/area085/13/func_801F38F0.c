@@ -9,7 +9,7 @@ MATCH void func_801F38F0(void) {
         g_ActorSlots[slot].header.flags             = 1;
         g_ActorSlots[g_Task->param.actor_slot].type = 0x47;
         g_ActorSlots[g_Task->param.actor_slot].link = 1;
-        SND_PlayCue(0x200U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
         return;
     }
     g_ScriptState->cursor -= 2;

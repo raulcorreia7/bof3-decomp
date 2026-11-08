@@ -25,14 +25,14 @@ NON_MATCHING void func_801D8680(void) {
     tmp0 = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     val1 = g_MenuPanelTasks[16].unk_0B == 3;
     if (tmp0 & PADLup) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         tmp3                        = g_MenuPanelTasks[18].unk_0B - 1;
         g_MenuPanelTasks[18].unk_0B = tmp3;
         if (tmp3 & 0x80) {
             g_MenuPanelTasks[18].unk_0B = *(&D_801EC4A4 + ((val1 & BYTE_MASK) * 6)) - 1;
         }
     } else if (tmp0 & PADLdown) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         tmp2                        = g_MenuPanelTasks[18].unk_0B + 1;
         g_MenuPanelTasks[18].unk_0B = tmp2;
         if ((*(&D_801EC4A4 + ((val1 & BYTE_MASK) * 6)) - 1) < (tmp2 & BYTE_MASK)) {
@@ -40,7 +40,7 @@ NON_MATCHING void func_801D8680(void) {
         }
     }
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         tmp1 = FIELD(u8, (((val1 & BYTE_MASK) * 6) + &D_801EC4A4 + FIELD(u8, (val0), 0xB)), 0x1u);
         if (tmp1 != 0) {
             func_801D9304((s32)tmp1);
@@ -52,7 +52,7 @@ NON_MATCHING void func_801D8680(void) {
         return;
     }
     if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         FIELD(s8, (&D_801484CC), 0xECu) = 0;
         D_80148652 -= 1;
     }

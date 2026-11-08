@@ -51,7 +51,7 @@ MATCH void func_801D0FEC(void) {
     func_801D1A60();
     g_Task->timer = 0x20;
     g_Task->header.mode += 1;
-    SND_PlayCue(0x209);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x09));
 }
 
 INCLUDE_ASM(func_801D106C);

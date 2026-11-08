@@ -48,7 +48,7 @@ MATCH u8 func_801DB04C(void) {
     if (g_Characters[g_CharSlot[reserve]].unk_07 & 2) {
         return reserve;
     }
-    SND_PlayCue(EMI_CUE_ID(1, 3));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
     for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
         if (g_PartyFieldOrder[i] == member) {
             g_PartyFieldOrder[i] = reserve;

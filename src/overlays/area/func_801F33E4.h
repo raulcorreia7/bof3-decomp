@@ -8,7 +8,7 @@ MATCH s32 func_801F33E4(s32 entry_x, s32 entry_y) {
         flag = &D_801455C7;
         if (*flag != 0) {
             *flag = 0;
-            SND_PlayCue(EMI_CUE_ID(2, 12));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
             Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
         }
     } else {

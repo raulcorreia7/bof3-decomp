@@ -7,7 +7,7 @@ MATCH void func_801F40D8(void) {
     scratch->screen_y -= 0x10;
     if ((s16)scratch->screen_y <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlayCue(EMI_CUE_ID(2, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         }
         scratch              = g_Task;
         scratch->header.step = 1;

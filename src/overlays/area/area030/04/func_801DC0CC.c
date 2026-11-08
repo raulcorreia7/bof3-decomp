@@ -19,13 +19,13 @@ MATCH void func_801DC0CC(void) {
     func_801E162C(8, FISHING_CATCH_ROW_Y, 0x44);
 
     if ((g_InputPressed & (PADLup | PADLdown)) != 0) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         work               = FISHING_STATE;
         work->cue_index_06 = (work->cue_index_06 ^ 1);
     } else if ((g_InputPressed & PADRdown) != 0) {
         cue = 0x103;
         SND_PlayCue(cue);
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         work               = FISHING_STATE;
         work->sub_index_03 = (work->sub_index_03 + 1);
     } else if ((g_InputPressed & PADRup) != 0) {
@@ -33,7 +33,7 @@ MATCH void func_801DC0CC(void) {
         work               = FISHING_STATE;
         work->cue_index_06 = 1;
         SND_PlayCue(cue);
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         work               = FISHING_STATE;
         work->sub_index_03 = (work->sub_index_03 + 1);
     }

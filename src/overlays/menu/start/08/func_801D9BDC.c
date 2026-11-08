@@ -67,7 +67,7 @@ NON_MATCHING void func_801D9BDC(void) {
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         *(u8*)(&D_801485DC) = 0;
         if (D_801ED668 != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 4));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
             D_801ED678 = 0x7F;
             D_801ED67C = 0x7F;
             D_801ED670 = (s8)(u8)D_801ED668;
@@ -75,11 +75,11 @@ NON_MATCHING void func_801D9BDC(void) {
             D_801ED660 = (u8)D_801ED668;
             D_801ED664 = D_801ED66C;
         } else if (D_801ED678 == 0x7F) {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             D_801ED678 = (s8)(u8)D_801ED668;
             D_801ED67C = (s8)D_801ED66C;
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 4));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
             Menu_SwapBytes4(&g_PartyBattleOrder[(s8)D_801ED66C], &g_PartyBattleOrder[D_801ED67C]);
             if ((s8)D_801ED66C != D_801ED67C) {
                 D_801ED660 = (u8)(s8)D_801ED66C;
@@ -88,7 +88,7 @@ NON_MATCHING void func_801D9BDC(void) {
             goto block_20; /* retail branch */
         }
     } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         *(u8*)(&D_801485DC)         = 0;
         g_MenuPanelTasks[20].active = 0;
         if (D_801ED678 != 0x7F) {
@@ -98,7 +98,7 @@ NON_MATCHING void func_801D9BDC(void) {
         } else if (D_80148660 != 1) {
             D_80148654       = 0;
             g_PartyFormation = ((u8)D_801ED674 * 2) + ((u8)D_801ED670 - 1);
-            SND_PlayCue(EMI_CUE_ID(1, 2));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
             val7 = 0;
             val3 = 0 << 0x18;
             do {
@@ -163,7 +163,7 @@ NON_MATCHING void func_801D9BDC(void) {
         } while (*(((s8)D_801ED66C * 3) + D_801ED680 + D_801ED668) == 0);
     }
     if (((val4 >> 0x18) != D_801ED668) || ((s8)val11 != (s8)D_801ED66C)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     g_PartyFormation = ((u8)D_801ED670 + ((u8)D_801ED674 * 2)) - 1;
 }

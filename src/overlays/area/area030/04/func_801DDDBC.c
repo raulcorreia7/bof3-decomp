@@ -5,7 +5,7 @@
  * byte, then runs the shared world update. */
 MATCH void func_801DDDBC(void) {
     Actor_RequestScript(9);
-    SND_PlayCue(EMI_CUE_ID(2, 4));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
     D_80144125 = 7;
     D_8014419E = 3;
     D_80144199 += 1;

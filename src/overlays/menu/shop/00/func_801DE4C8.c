@@ -51,11 +51,11 @@ NON_MATCHING void func_801DE4C8(void) {
         }
     }
     if (prev_side != D_80148658 || prev_index != D_80148659) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         if (D_8014865A == 0x7F) {
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             D_8014865A = D_80148658;
             D_8014865D = D_80148659;
             return;
@@ -68,7 +68,7 @@ NON_MATCHING void func_801DE4C8(void) {
         return;
     }
     if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         if (D_8014865A != 0x7F) {
             D_8014865A = 0x7F;
             D_8014865D = 0x7F;

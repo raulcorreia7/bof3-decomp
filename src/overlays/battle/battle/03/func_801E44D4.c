@@ -13,6 +13,6 @@ MATCH void func_801E44D4(void) {
     func_801DD350(work);
     g_Task->timer = 4;
     func_801E30F8();
-    SND_PlayCue(EMI_CUE_ID(2, 5));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
     g_Task->unk_03 += 1;
 }

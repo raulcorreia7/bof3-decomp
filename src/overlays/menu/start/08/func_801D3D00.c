@@ -62,27 +62,27 @@ MATCH void func_801D3D00(void) {
     s_ChoiceMenuCursors[panel->group] = panel->group_cursor;
     s_ChoiceMenuValues[panel->group]  = panel->group_first;
     if (cursor != panel->group_cursor) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (panel->confirm_gate == 0) {
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (panel->drawn_cursor == GAME_NONE) {
-                SND_PlayCue(EMI_CUE_ID(1, 3));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                 if (D_801C893C[panel->group][panel->group_cursor] != 0) {
                     panel->drawn_cursor = panel->group_cursor;
                     return;
                 }
-                SND_PlayCue(EMI_CUE_ID(1, 7));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 return;
             }
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             Menu_SwapBytes(&D_801C893C[panel->group][panel->drawn_cursor],
                            &D_801C893C[panel->group][panel->group_cursor]);
             Menu_SwapBytes(&D_801C8950[panel->group][panel->drawn_cursor],
                            &D_801C8950[panel->group][panel->group_cursor]);
             panel->drawn_cursor = 0xFF;
         } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlayCue(EMI_CUE_ID(1, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             if (panel->drawn_cursor == GAME_NONE) {
                 state_counter  = &D_80148652;
                 *state_counter = *state_counter - 1;

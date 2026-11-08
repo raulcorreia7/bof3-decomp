@@ -10,7 +10,7 @@ MATCH void func_801D8CC8(void) {
         func_801D9664();
         g_BattleListCursor          = D_801ED891;
         g_MenuPanelTasks[17].unk_0A = D_801ED890;
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         *counter = 7;
         D_80148652 += 1;
     }

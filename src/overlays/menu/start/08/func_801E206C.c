@@ -23,7 +23,7 @@ NON_MATCHING void func_801E206C(void) {
     Menu_DrawCursorSprite(0xB0, (((s8)D_80148655 - 8) * 0x12 + 0x6A) & 0xFFFE, 0);
     sel = g_InputPressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
     if (sel != 0) {
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         g_InputMasks[INPUT_SLOT_SPEAK] &= ~(PADL2 | PADR2);
         g_InputMasks[INPUT_SLOT_CONFIRM] &= ~(PADL2 | PADR2);
         i = 0;
@@ -54,25 +54,25 @@ NON_MATCHING void func_801E206C(void) {
     bits = g_InputPressed;
     keys = PAD_GetRepeatedButtons(bits & INPUT_DIRECTIONAL);
     if (keys & PADLup) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148655 = D_80148655 - 1;
         if ((s8)D_80148655 < 8) {
-            SND_PlayCue(EMI_CUE_ID(1, 0));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
             D_80148655 = 0xD;
         }
     } else if (keys & PADLdown) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148655 = D_80148655 + 1;
         if ((s8)D_80148655 >= 0xE) {
-            SND_PlayCue(EMI_CUE_ID(1, 0));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
             D_80148655 = 8;
         }
     } else if (bits & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         D_80148655 = 7;
         D_80148652 = D_80148652 - 1;
     } else if (bits & PADstart) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148655 = 0;
         D_80148652 = D_80148652 - 2;
     }

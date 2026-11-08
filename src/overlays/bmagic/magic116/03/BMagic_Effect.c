@@ -29,7 +29,7 @@ MATCH void func_801EED2C(void) {
         g_Task        = saved;
         saved->unk_09 = 0x78;
         g_Task->header.mode++;
-        SND_PlayCue(0x100);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     }
     g_Task = saved;
 }

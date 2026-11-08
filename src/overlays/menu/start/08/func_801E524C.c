@@ -4,7 +4,7 @@ MATCH void func_801E524C(void) {
     s8 count;
 
     if (g_MenuStartTimer == 4) {
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     }
     Menu_DrawClutStrip(D_80144953);
     MENU_DRAW_HEADER();

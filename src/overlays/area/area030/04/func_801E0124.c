@@ -6,7 +6,7 @@ MATCH void func_801E0124(void) {
     FishingState* record;
 
     FISHING_STATE->bounce_3C.unk_3C = 0;
-    SND_PlayCue(EMI_CUE_ID(2, 6));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
 
     Area_FindSceneRecord(*(u16*)(D_801E2ACA + FISHING_STATE->cue_index_06 * 36));
 

@@ -28,6 +28,15 @@
 #define EMI_CUE_VOICE_MASK    0x1F
 #define EMI_CUE_LAYER_MASK    0x60
 
+/* The sound banks, by what each holds. Banks 3 to 5 hold the party character
+ * forms and have no cue site. */
+typedef enum SNDBank {
+    SND_BANK_MUSIC = 0,
+    SND_BANK_COMMON = 1,
+    SND_BANK_AREA = 2,
+    SND_BANK_ENEMY = 6,
+} SNDBank;
+
 /* The cue id: bank in bits 8-11, record index in bits 0-7. */
 #define EMI_CUE_ID_BANK_SHIFT 8
 #define EMI_CUE_ID_BANK_MASK  0x0F00

@@ -21,21 +21,21 @@ MATCH void func_801D23E4(void) {
         D_80148340 = 0x4C;
         if (input & (PADLup | PADLdown)) {
             D_801E6054 ^= 1;
-            SND_PlayCue(EMI_CUE_ID(1, 0));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         }
     } else {
         Message_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
         D_80148340 = 0x3A;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         cursor = &D_80148656;
         Shop_Equip(g_CharSlot[g_PartyFieldOrder[(s8)*cursor]], (selection + (D_801E6054 + 0xFF)) & BYTE_MASK,
                    g_ShopItemId);
         Char_RebuildStats(&g_Characters[g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]]);
         D_80148652 += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         for (index = 0; index < Party_CountOrder(PARTY_ORDER_FIELD); index++) {
             if (index == (s8)D_80148656) {
                 g_MenuPanelTasks[index + 3].state = 4;

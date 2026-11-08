@@ -85,7 +85,7 @@ MATCH void func_801F7050(void) {
         actor->pos.y.fixed += 0;
         actor->pos.z.fixed += actor->vz;
     }
-    SND_PlayCue(EMI_CUE_ID(2, 2));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
     g_Task->vz = -g_Task->vz;
     g_Task->header.step++;
 }
@@ -96,7 +96,7 @@ MATCH void func_801F71C0(void) {
     func_801F88B8(MEM_PTR(void, 0x800E48E0u));
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
     if (--g_Task->timer == 0) {
-        SND_PlayCue(0x203);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
         g_Task->timer = 0x20;
         g_Task->header.step++;
     }
@@ -207,7 +207,7 @@ MATCH void func_801F7E68(void) {
         func_801F88B8(MEM_PTR(void, 0x800E48E0u));
     }
     if (g_Task->unk_06 != 0) {
-        SND_PlayCue(EMI_CUE_ID(2, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
     }
     g_Task->header.step++;
 }

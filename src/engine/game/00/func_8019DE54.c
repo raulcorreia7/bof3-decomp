@@ -20,7 +20,7 @@ MATCH void func_8019DE54(void) {
             g_ActorSlots[index].pos.z.fixed  = work->pos.z.fixed;
         }
     }
-    SND_PlayCue(EMI_CUE_ID(1, 12));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 12));
     if (g_Task->param.unk_0B != 0) {
         g_AreaCameraRefreshCount = 3;
         g_AreaCameraOffsetZ      = (g_AreaCameraOffsetZ - 0x80);

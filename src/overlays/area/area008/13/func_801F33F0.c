@@ -18,7 +18,7 @@ MATCH void func_801F33F0(void) {
 
         g_ScriptVars[1] = 2;
         *flag           = next;
-        SND_PlayCue(EMI_CUE_ID(2, 13));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
         if (((Actor*)g_Task)->script_pc < 5u) {
             D_80146876[0] = 0xFF;
         }

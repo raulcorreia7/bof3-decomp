@@ -10,7 +10,7 @@ MATCH void func_801E496C(void) {
         g_BattleCurrentEnemy->status = STATUS_KO;
     } else {
         if (g_BattleCurrentEnemy->turn.hp_change < 0) {
-            SND_PlayCue(EMI_CUE_ID(2, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
         }
         remainder                = g_BattleCurrentEnemy->hp - g_BattleCurrentEnemy->turn.hp_change;
         cap                      = g_BattleCurrentEnemy->stats.max_hp;

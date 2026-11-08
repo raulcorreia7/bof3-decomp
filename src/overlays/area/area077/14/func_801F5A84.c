@@ -2,5 +2,5 @@
 
 MATCH void func_801F5A84(void) {
     g_AreaSceneMode = 0;
-    SND_PlayCue(EMI_CUE_ID(2, 2));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
 }

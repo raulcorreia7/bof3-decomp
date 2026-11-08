@@ -4,7 +4,7 @@ MATCH void func_80098FD4(void) {
     u8* cursor;
     u8* group;
 
-    SND_PlayCue(EMI_CUE_ID(1, 4));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     cursor                          = &g_MenuPanelTasks[16].unk_0C;
     group                           = cursor - 2;
     g_Battle.selection_latch        = 0u;

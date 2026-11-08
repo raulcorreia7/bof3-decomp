@@ -10,7 +10,7 @@ MATCH s32 Game_RequestMenuOnInput(void) {
     if (g_Game.flags & GAME_FLAG_MENU_LOCK) {
         return 0;
     }
-    SND_PlayCue(EMI_CUE_ID(1, 5));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 5));
     g_GameStateIndex = GAME_REQUEST_MENU;
     ACTOR_CLEAR_STEP();
     return 1;

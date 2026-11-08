@@ -36,7 +36,7 @@ MATCH void func_801D5894(void) {
         if (g_SaveCardStatus == CARD_EVENT_ERROR) {
             g_SaveCardStatus = SAVE_STATUS_WRITE_FAILED;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
     }
     D_80148652 = 0xC;
 }

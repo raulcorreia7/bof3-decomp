@@ -24,17 +24,17 @@ MATCH void func_801D10AC(u32 message_id) {
         if (g_MenuMasterBannerLock != 0) {
             handler = g_MenuMasterSubStep - 1;
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 2));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
             handler = g_MenuMasterSubStep + 1;
         }
         g_MenuMasterSubStep = handler;
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         g_MenuMasterBannerLock = 1;
         g_MenuMasterSubStep    = g_MenuMasterSubStep - 1;
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
     } else if (trig & HALF_MASK) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         g_MenuMasterBannerLock ^= 1;
     }
 

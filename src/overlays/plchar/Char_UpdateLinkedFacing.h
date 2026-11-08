@@ -16,7 +16,7 @@ MATCH void Char_UpdateLinkedFacing(void) {
                 g_Task->option_flags = 1;
             }
             g_ActorSlots[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
-            SND_PlayCue(EMI_CUE_ID(1, 11));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
         }
     }
 }

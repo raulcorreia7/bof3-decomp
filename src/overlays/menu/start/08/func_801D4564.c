@@ -66,10 +66,10 @@ NON_MATCHING void func_801D4564(void) {
     s_ChoiceMenuCursors[D_80148504.group] = D_80148504.group_cursor;
     s_ChoiceMenuValues[D_80148504.group]  = D_80148504.group_first;
     if (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C != D_80148504.group_cursor) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if ((D_80148504.confirm_gate == 0) && (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed)) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148504.group               = 0U;
         D_80148504.group_cursor        = 0xFFU;
         FIELD(s8, (&D_80148504), 0xDu) = 0xFF;

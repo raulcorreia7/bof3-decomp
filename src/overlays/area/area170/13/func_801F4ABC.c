@@ -10,12 +10,12 @@ MATCH void func_801F4ABC(void) {
     func_801F3994();
     if (D_80143F06 == 2) {
         if (D_80143F03 == 1) {
-            SND_PlayCue(0x20C);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
         }
     }
     if (D_80143F06 == 3) {
         if (D_80143F03 == 2) {
-            SND_PlayCue(0x20C);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
         }
     }
 }

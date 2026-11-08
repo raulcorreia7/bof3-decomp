@@ -11,7 +11,7 @@ MATCH void func_801F360C(void) {
             actor_slot->header.flags = ACTOR_FLAG_IN_USE;
             actor_slot->type         = 0x6C;
         }
-        SND_PlayCue(0x209U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x09));
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
         Area_SetCellCode(0xB, 0x55, 0xC0);
         Area_SetCellCode(0xC, 0x55, 0xC0);

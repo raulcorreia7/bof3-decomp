@@ -8,5 +8,5 @@ MATCH void func_801F2C5C(void) {
     actor->unk_06 = 0;
     actor->unk_32 = 0x78;
     g_Task->header.mode++;
-    SND_PlayCue(0x201);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
 }

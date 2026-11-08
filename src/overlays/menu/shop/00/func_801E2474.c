@@ -17,8 +17,8 @@ MATCH void func_801E2474(void) {
         return;
     }
     if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         D_80148357 = 2;
         D_8014837B = 1;
         D_8014839F = 1;

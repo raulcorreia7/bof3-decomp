@@ -31,7 +31,7 @@ MATCH void func_801D47AC(void) {
         g_SaveCardPort = 1;
         D_801E60F8     = 2;
     } else {
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         D_80148652 = 0xC;
         D_801E60F8 = 0;
         return;

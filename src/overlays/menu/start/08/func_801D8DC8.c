@@ -73,10 +73,10 @@ MATCH void func_801D8DC8(void) {
     D_801ED891 = g_BattleListCursor;
     D_801ED890 = g_MenuPanelTasks[17].unk_0A;
     if (old != panel->unk_0B) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148597                                       = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
         D_80148654                                       = 7;

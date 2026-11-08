@@ -21,7 +21,7 @@ MATCH void func_801B744C(void) {
             MEM(s16, 0x8014932Eu) = rate * 8;
         }
         Actor_RequestScript((g_Task->direction_08 == FACING_RIGHT) ? 0x3AU : 0x3BU);
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         g_Task->timer -= 1;
         g_Task->vz += g_Task->gravity;
         func_801B0DFC();

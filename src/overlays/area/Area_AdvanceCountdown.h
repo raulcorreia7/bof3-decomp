@@ -13,7 +13,7 @@ MATCH void Area_AdvanceCountdown(void) {
     ((Actor*)g_Task)->screen_y = count;
     if ((s16)count <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlayCue(0x201U);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
         }
         ((Actor*)g_Task)->header.step = 1;
     }

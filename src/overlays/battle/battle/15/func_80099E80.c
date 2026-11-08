@@ -13,7 +13,7 @@ MATCH void func_80099E80(void) {
             g_Battle.ui_step = 8;
         }
         g_Battle.ui_state = 0;
-        SND_PlayCue(EMI_CUE_ID(1, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         return;
     }
     if ((flags & 0x80) != 0) {

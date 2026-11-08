@@ -19,6 +19,6 @@ MATCH void func_80099248(void) {
                        D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
          0x80u) != 0u) {
         g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
 }

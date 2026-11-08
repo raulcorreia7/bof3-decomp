@@ -288,7 +288,7 @@ MATCH void func_801F7DF0(void) {
 MATCH void func_801F7E34(void) {
     void* work;
 
-    SND_PlayCue(EMI_CUE_ID(2, 9));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
     work                  = SP_REF(void*, 0x44);
     FIELD(u8, work, 0x1u) = (FIELD(u8, work, 0x1u) + 1);
 }
@@ -310,7 +310,7 @@ MATCH void func_801F82E4(void) {
 MATCH void func_801F8328(void) {
     g_Task->timer = 96;
     g_Task->header.mode++;
-    SND_PlayCue(EMI_CUE_ID(2, 4));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
 }
 
 MATCH void func_801F8370(void) {
@@ -385,7 +385,7 @@ MATCH void func_801F87A4(void) {
     GFX_DrawShadedDisc((s16)work->screen_x, (s16)work->screen_y, (work->timer & 1) | 0x3C, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     if (slots[0x11][9] == 0xD7) {
-        SND_PlayCue(EMI_CUE_ID(2, 8));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
     }
     slots  = SP_PTR(u8*, 0u);
     chk    = slots[0x11];

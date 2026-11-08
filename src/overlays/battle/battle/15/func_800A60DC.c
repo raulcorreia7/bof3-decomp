@@ -19,7 +19,7 @@ MATCH void func_800A60DC(void) {
     pad                                      = *pad_state;
 
     if (pad & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         g_Battle.ui_state = 5;
         return;
     }
@@ -31,7 +31,7 @@ MATCH void func_800A60DC(void) {
             state      = 3;
         }
         g_Battle.ui_state = state;
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     }
 
     cursor_words = (u16*)&D_801485EC;
@@ -78,6 +78,6 @@ MATCH void func_800A60DC(void) {
     }
 
     if (*(s16*)&D_801485EC + D_801485EE != cursor_total) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
 }

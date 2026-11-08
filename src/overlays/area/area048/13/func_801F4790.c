@@ -4,7 +4,7 @@ MATCH void func_801F4790(void) {
     MESSAGE_REQUEST_CLEAR();
     if (!(g_MessageChoice & 1)) {
         g_ScriptVars[0] = 0xB;
-        SND_PlayCue(0x205);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x05));
     } else {
         g_ScriptVars[0] = 1;
         Game_ClearScriptActive();

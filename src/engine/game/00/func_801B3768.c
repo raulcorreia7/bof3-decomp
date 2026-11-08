@@ -46,7 +46,7 @@ MATCH void func_801B3768(void) {
                 if (kind != GAME_NONE) {
                     SYS_SetFlag(D_80144FC4, kind);
                 }
-                SND_PlayCue(EMI_CUE_ID(1, 6));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
                 Message_Request(GAME_TEXT_SEARCH_FOUND);
                 /* Retail increments through a pointer here; a plain `+= 1` merges with the tail above. */
                 spawn_count = &D_80145038;

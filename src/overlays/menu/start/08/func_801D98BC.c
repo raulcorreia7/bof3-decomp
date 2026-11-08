@@ -20,7 +20,7 @@ MATCH void func_801D98BC(void) {
     pad                         = &g_InputPressed;
     g_MenuPanelTasks[18].unk_0B = 0xFF;
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         D_801ED68C ^= 1;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
@@ -29,11 +29,11 @@ MATCH void func_801D98BC(void) {
         } else if (g_GameRequestFlags & 1) {
             func_801DAE14(*pad);
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 2));
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
         D_80148652                                       = 0;
         D_80148654                                       = 5;
@@ -44,8 +44,8 @@ MATCH void func_801D98BC(void) {
         return;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 2));
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_BattlePanelMode                                    = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;

@@ -7,7 +7,7 @@ MATCH void func_801D4DB4(void) {
     counter = &D_80148654;
     count   = *counter;
     if (count == 4) {
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     }
     MENU_DRAW_HEADER();
     SAVE_DrawSlots((0x20 - *counter * 0x50), 0x30, 1);

@@ -3,7 +3,7 @@
 MATCH void func_8009A518(void) {
     u8 mode;
 
-    SND_PlayCue(EMI_CUE_ID(1, 6));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
     Battle_ShowMessage((void*)BATTLE_ACTIVE_MESSAGE_SLOT_PTR);
     mode                     = 2;
     g_Battle.selection_latch = 0;

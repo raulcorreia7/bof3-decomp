@@ -12,8 +12,8 @@ MATCH void func_801D27CC(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     if (D_80148654 == 0) {
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlayCue(EMI_CUE_ID(1, 6));
-            SND_PlayCue(EMI_CUE_ID(1, 2));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
             func_801D2C7C();
             D_80148654 = 8;
             D_80148651 -= 2;

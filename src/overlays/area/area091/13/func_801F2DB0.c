@@ -8,7 +8,7 @@ MATCH void func_801F2DB0(void) {
     if (Item_Count(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 0) == 0) {
         g_AreaSceneMode = 1;
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
-        SND_PlayCue(0x201U);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
         return;
     }
     Game_SetScriptActive();

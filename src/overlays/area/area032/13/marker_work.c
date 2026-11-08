@@ -187,7 +187,7 @@ MATCH void func_801F2DAC(void) {
     GFX_DrawShadedDisc(work->screen_x, work->screen_y, (work->timer & 1) | 0x3C, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     if (slots[0x11][9] == 0xD7) {
-        SND_PlayCue(EMI_CUE_ID(2, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
     }
     slots  = SP_PTR(u8*, 0u);
     chk    = slots[0x11];

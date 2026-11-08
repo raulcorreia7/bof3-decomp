@@ -43,6 +43,6 @@ MATCH void func_801B9210(void) {
     g_Task->direction_08 = saved;
     g_Task->unk_0A       = 8;
     Actor_RequestScript(g_Task->direction_08);
-    SND_PlayCue(EMI_CUE_ID(1, 8));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 8));
     g_Task->unk_03++;
 }

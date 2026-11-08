@@ -24,7 +24,7 @@ MATCH void Fishing_HookedReel(void) {
         g_ActorSlots[0].header.mode                                     = 0;
         D_8014420D                                                      = 0;
         D_80146889[g_FishingHookedFish * sizeof(FishingSelectionState)] = 6;
-        SND_PlayCue(EMI_CUE_ID(2, 3));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         SND_StopSequence(0, 1);
         SND_PlayBGM(0x2A, 0x64, 8);
         Actor_RequestScript(0xA);

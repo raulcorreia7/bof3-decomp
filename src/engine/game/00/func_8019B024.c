@@ -11,7 +11,7 @@ MATCH void func_8019B024(void) {
     if ((counter >= dist + 0x80) || (counter < dist) || (g_Task->header.flags & ACTOR_FLAG_OFFSCREEN)) {
         work = g_Task;
         work->header.mode++;
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
     }
     g_Task->pos.z.fixed += g_Task->vz;
     diff       = g_Task->vz - g_Task->gravity;

@@ -34,18 +34,18 @@ MATCH void func_800A5AE4(void) {
     pad_bits  = *pad_state;
 
     if (pad_bits & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         cue_counter  = (u8*)&g_Battle.ui_state;
         *cue_counter = *cue_counter + 1;
         return;
     }
     if (pad_bits & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (func_800A5D00() & BYTE_MASK) {
-            SND_PlayCue(EMI_CUE_ID(1, 4));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
             g_Battle.ui_state = 5;
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
     }
 
     cursor = (BattleMenuCursor*)&D_801485EC;
@@ -90,6 +90,6 @@ MATCH void func_800A5AE4(void) {
         }
     }
     if (*(s16*)&D_801485EC + D_801485EE != cursor_sum) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
 }

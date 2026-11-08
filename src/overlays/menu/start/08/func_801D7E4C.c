@@ -46,7 +46,7 @@ MATCH void func_801D7E4C(void) {
     }
     sel = (s8*)D_80148658;
     if ((s8)old != *sel) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     Message_SetVariable(0, 0xC,
                         (const u8*)&g_Abilities[Party_GetAbilities(
@@ -59,15 +59,15 @@ MATCH void func_801D7E4C(void) {
             Party_GetAbilities(D_8014857A, g_MenuPanelTasks[16].unk_0B, 0)[g_MenuPanelTasks[16].unk_0C], 0);
         D_801ED654 = result;
         if (result == 1 || result == 5) {
-            SND_PlayCue(EMI_CUE_ID(1, 9));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 9));
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 7));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
-        SND_PlayCue(EMI_CUE_ID(1, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         D_801485DC = 0;
         for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             g_MenuPanelTasks[i + 0xD].state = 9;

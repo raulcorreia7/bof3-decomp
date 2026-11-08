@@ -22,19 +22,19 @@ MATCH void func_801D8188(void) {
     key                                             = &g_InputPressed;
     slot -= 0xB4;
     if (*key & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         *toggle ^= 1;
     }
     if (*key & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 4));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
             Char_AddAbility(*(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) +
                               g_MenuPanelTasks[16].unk_0C),
                             0, 1, 0);
             *(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) +
               g_MenuPanelTasks[16].unk_0C) = 0;
         } else {
-            SND_PlayCue(EMI_CUE_ID(1, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         }
         count = &D_80148651;
         *count -= 2;
@@ -44,6 +44,6 @@ MATCH void func_801D8188(void) {
     if (*key & g_InputMasks[MENU_INPUT_CANCEL]) {
         g_MenuPanelTasks[16].flags = 0xFF;
         D_80148651 -= 2;
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
     }
 }

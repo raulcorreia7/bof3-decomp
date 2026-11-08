@@ -36,14 +36,14 @@ MATCH void func_801D28D0(void) {
     }
     buttons = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         D_8014843C = 0x32;
         panel->group--;
         if ((s8)panel->group < 0) {
             panel->group = 3;
         }
     } else if (buttons & PADLright) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         D_8014843C = 0x31;
         panel->group++;
         if (panel->group >= 4U) {
@@ -91,7 +91,7 @@ MATCH void func_801D28D0(void) {
         }
     }
     if (old_cursor != panel->group_cursor) {
-        SND_PlayCue(EMI_CUE_ID(1, 0));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (panel->confirm_gate == 0) {
         if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
@@ -99,9 +99,9 @@ MATCH void func_801D28D0(void) {
             g_ShopItemCategory = panel->group;
             D_80148628         = panel->pos.x + 7;
             D_8014862A = panel->pos.y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
-            SND_PlayCue(EMI_CUE_ID(1, 3));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             if (func_801AF494(panel->kind, 0, g_ShopItemCategory, g_ShopItemId) & BYTE_MASK) {
-                SND_PlayCue(EMI_CUE_ID(1, 3));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                 selected_cursor    = panel->group_cursor;
                 g_ShopStockIndex   = selected_cursor;
                 g_ShopItemCountMax = D_801C8950[g_ShopItemCategory][(s8)selected_cursor];
@@ -111,11 +111,11 @@ MATCH void func_801D28D0(void) {
                 *counter           = *counter + 1;
                 return;
             }
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlayCue(EMI_CUE_ID(1, 6));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             D_8014842F = 1;
             D_80148654 = 7;
             D_80148652 += 3;

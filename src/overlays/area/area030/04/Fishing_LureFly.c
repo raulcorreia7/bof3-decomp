@@ -28,7 +28,7 @@ MATCH void Fishing_LureFly(void) {
     current_y = work_a->y_38.pos_y;
     target_y  = work_a->cursor_10;
     if (current_y == target_y) {
-        SND_PlayCue(EMI_CUE_ID(2, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
         work_b                    = (FishingState*)g_Task;
         work_b->step_timer_09     = 0;
         work_c                    = (FishingState*)g_Task;

@@ -29,7 +29,7 @@ NON_MATCHING void func_801D1E8C(void) {
         --*state;
     }
     if ((g_InputMasks[BATTLE_INPUT_CANCEL] & *pad) && ((s8)g_Battle.command_count != 0)) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         temp_v0_50             = (u8)g_Battle.command_count - 1;
         g_Battle.command_count = temp_v0_50;
         g_Battle.phase.step -= 1;
@@ -53,10 +53,10 @@ NON_MATCHING void func_801D1E8C(void) {
     if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad) {
         if (((u32)(g_Battle.panel_slot - 2) < 2U) &&
             (g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
-            SND_PlayCue(EMI_CUE_ID(1, 7));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         D_8014839F          = 2;
         *(u8*)(&D_8014837B) = 2;
         g_Battle.phase.step += 2;
@@ -64,7 +64,7 @@ NON_MATCHING void func_801D1E8C(void) {
         return;
     }
     if (g_InputHeld & PADselect) {
-        SND_PlayCue(EMI_CUE_ID(1, 4));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         *(u8*)(&D_8014837B) = 2;
         D_80148357          = 2;
         D_8014839F          = 2;
@@ -91,7 +91,7 @@ NON_MATCHING void func_801D1E8C(void) {
         if (temp_v1_206 & var_s5[2]) {
             var_v0_215 = var_s0 + 1;
             if (temp_v1_206 & FIELD(u16, var_s5, 0x4u)) {
-                SND_PlayCue(EMI_CUE_ID(1, 1));
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
                 if (*(u8*)(&g_Battle.cursor.panel_entry) == (var_s1 + 1)) {
                     if (*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) != 0) {
                         if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) ||

@@ -10,7 +10,7 @@ MATCH void Actor_SlideScreenDown(void) {
     work->screen_y -= 0x20;
     if ((s16)work->screen_y <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlayCue(EMI_CUE_ID(2, 1));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
         }
         g_Task->header.step = 1;
     }

@@ -27,7 +27,7 @@ MATCH s32 func_801F2D78(s32 arg0, s32 arg1) {
         roll >>= 1;
     } while ((s32)flag_id < (s32)(D_801F2E90 + 3));
     func_8019ABB0(0xF);
-    SND_PlayCue(0x206U);
-    SND_PlayCue(0x202U);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x06));
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
     return 1;
 }

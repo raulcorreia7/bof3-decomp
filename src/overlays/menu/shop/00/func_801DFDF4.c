@@ -19,13 +19,13 @@ MATCH void func_801DFDF4(void) {
     D_80148628 = D_80148334 + (side << 5) + 0xDE;
     D_8014862A = D_80148336 + 5;
     if (*pad & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(1, 1));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         *toggle ^= 1;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
-            SND_PlayCue(EMI_CUE_ID(1, 4));
-            SND_PlayCue(EMI_CUE_ID(1, 2));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
             D_801E625C = 0;
             Item_Remove(ITEM_CAT_ITEM, ITEM_SKILL_INK, 1, 0);
             two         = 2;
@@ -63,12 +63,12 @@ MATCH void func_801DFDF4(void) {
             FAKE_ORDER_LOCK_END;
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148651 -= 1;
         return;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(1, 6));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148651 -= 1;
     }
 }
