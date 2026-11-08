@@ -21,8 +21,8 @@ MATCH void Game_LoadShopOverlay(void) {
             return;
         }
     }
-    EMI_LoaderStreamInitSlot(EMI_SLOT_SHOP);
-    while (EMI_LoaderIsReady() == 0) {
+    EMI_LoadArchive(EMI_SLOT_SHOP);
+    while (EMI_IsReady() == 0) {
         func_801992B8();
         CallbackWait(1u);
     }

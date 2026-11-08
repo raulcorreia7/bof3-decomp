@@ -32,7 +32,7 @@ MATCH void SYS_Main(void) {
 
         if ((g_InputHeld & (PADselect | PADstart)) == 0x900) {
             if (g_SysResetHoldFrames == 60) {
-                if (EMI_LoaderIsReady() != 0) {
+                if (EMI_IsReady() != 0) {
                     g_SysResetHoldFrames = 0;
                     SND_Exit();
                     CallbackStopAll();
@@ -46,7 +46,7 @@ MATCH void SYS_Main(void) {
         }
 
         CallbackRun();
-        EMI_LoaderService();
+        EMI_Update();
         g_SysLastVSync = VSync(1);
         DrawSync(0);
         SYS_SubmitFrame();

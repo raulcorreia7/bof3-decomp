@@ -37,7 +37,7 @@ NON_MATCHING void func_801E7BA0(void) {
     void*        temp_t0_202;
     void*        var_a2_201;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         GFX_FreePaletteFadeTarget(&g_Game.members[g_BattleEffectBattler->slot]);
         if (*(u16*)(&g_BattleState) & BATTLE_STATE_RELOAD_PARTY) {
             g_BattleLivingPartyCount = 0;

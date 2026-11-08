@@ -235,7 +235,7 @@ MATCH void func_801FE360(void) {
     for (i = 0; i < g_Game.party_size; i++) {
         Party_RemoveMember(g_Game.members[i].chr.character_id);
     }
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_MOMO);

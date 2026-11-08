@@ -41,8 +41,8 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     if (g_GameAreaId != area_id) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
             g_GameAreaId = area_id;
-            EMI_LoaderStreamInitSlot((u32)(area_id + EMI_SLOT_AREA));
-            while (EMI_LoaderIsReady() == 0)
+            EMI_LoadArchive((u32)(area_id + EMI_SLOT_AREA));
+            while (EMI_IsReady() == 0)
                 CallbackWait(1u);
         }
     }

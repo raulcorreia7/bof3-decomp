@@ -17,38 +17,38 @@ MATCH void func_801E7948(void) {
                 if (g_BattleEffectBattler->facing < 2) {
                     slot = 0x201;
                 }
-                EMI_LoaderStreamInitSlot(slot);
+                EMI_LoadArchive(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xD) {
                 slot = 0x206;
                 if (g_BattleEffectBattler->facing < 2) {
                     slot = 0x202;
                 }
-                EMI_LoaderStreamInitSlot(slot);
+                EMI_LoadArchive(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xE) {
                 slot = 0x207;
                 if (g_BattleEffectBattler->facing < 2) {
                     slot = 0x203;
                 }
-                EMI_LoaderStreamInitSlot(slot);
+                EMI_LoadArchive(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xF) {
                 slot = 0x208;
                 if (g_BattleEffectBattler->facing < 2) {
                     slot = 0x204;
                 }
-                EMI_LoaderStreamInitSlot(slot);
+                EMI_LoadArchive(slot);
             }
         } else if (g_BattleEffectBattler->facing < 2) {
-            EMI_LoaderStreamInitSlot(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLD);
+            EMI_LoadArchive(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLD);
         } else {
-            EMI_LoaderStreamInitSlot(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLU);
+            EMI_LoadArchive(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLU);
         }
     } else if (g_BattleEffectBattler->facing < 2) {
-        EMI_LoaderStreamInitSlot(D_800B4A64[g_EmiLoadedCharacterIndex]);
+        EMI_LoadArchive(D_800B4A64[g_EmiLoadedCharacterIndex]);
     } else {
-        EMI_LoaderStreamInitSlot(D_800B4A68[g_EmiLoadedCharacterIndex]);
+        EMI_LoadArchive(D_800B4A68[g_EmiLoadedCharacterIndex]);
     }
     g_Task->header.mode++;
 }

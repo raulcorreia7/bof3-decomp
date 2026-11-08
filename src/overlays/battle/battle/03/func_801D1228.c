@@ -136,7 +136,7 @@ NON_MATCHING void func_801D1228(void) {
     } while ((u32)(slot & BYTE_MASK) < 0xBU);
     slot = 0;
     if (g_BattleEncounter == 0) {
-        EMI_LoaderStreamInitSlot(g_GameAreaId + EMI_SLOT_ENEMY);
+        EMI_LoadArchive(g_GameAreaId + EMI_SLOT_ENEMY);
         slot = 0;
     }
     index = slot & BYTE_MASK;

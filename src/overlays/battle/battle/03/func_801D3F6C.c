@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801D3F6C(void) {
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         if (g_BattleEncounter != 0) {
             g_BossBattleEventHook(BOSS_EVENT_EFFECTS_LOADED);
         }

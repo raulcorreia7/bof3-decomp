@@ -9,7 +9,7 @@ MATCH void func_801D7234(void) {
     u16          template_id;
     volatile u8* counter;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         g_BattleEndHook();
         if ((g_BattleOutcome.options & BATTLE_OPT_KEEP_BGM) == 0u) {
             SND_StopAllSequences();
@@ -29,7 +29,7 @@ MATCH void func_801D7234(void) {
                 }
                 template_id = D_80181EB8[action].bank_slot;
                 D_801463B0  = template_id;
-                EMI_LoaderStreamInitSlot(template_id);
+                EMI_LoadArchive(template_id);
             } else {
                 g_BattleOutcome.result |= BATTLE_RESULT_NO_BGM;
             }

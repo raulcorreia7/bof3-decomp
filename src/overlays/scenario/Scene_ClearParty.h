@@ -6,7 +6,7 @@
 MATCH void Scene_ClearParty(void) {
     u8 flags;
 
-    EMI_LoaderStreamFamily(CHAR_ID_WHELP, CHAR_ID_BLANK, CHAR_ID_BLANK, 0);
+    EMI_LoadPartyArchives(CHAR_ID_WHELP, CHAR_ID_BLANK, CHAR_ID_BLANK, 0);
     flags                                 = EFFECT_BANK_80140000->menu_flags;
     EFFECT_BANK_80140000->field_order[0]  = 0xFFu;
     EFFECT_BANK_80140000->field_order[1]  = 0xFFu;

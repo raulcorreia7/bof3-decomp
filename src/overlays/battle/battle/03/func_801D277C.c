@@ -38,7 +38,7 @@ MATCH void func_801D277C(void) {
     *half_flags |= 8;
     func_8009BFC4();
     if ((*half_flags & BATTLE_STATE_COMMAND_ARMED) == 0) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_SE);
+        EMI_LoadArchive(EMI_SLOT_BATL_SE);
     }
     g_BattleStep += 1;
 }

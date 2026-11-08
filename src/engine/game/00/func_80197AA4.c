@@ -34,9 +34,9 @@ MATCH void func_80197AA4(void) {
         }
         if ((*flags & 0x10) == 0) {
             if (g_BattleScrollDir & 2) {
-                EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLU);
+                EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLU);
             } else {
-                EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLD);
+                EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLD);
             }
         }
         state                    = &g_GameEntrySubstate;

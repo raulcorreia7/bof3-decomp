@@ -34,7 +34,7 @@ MATCH void func_801D25A0(void) {
         } while ((u32)(i & BYTE_MASK) < g_BattlePartyCount);
     }
     BATTLE_RAISE_STATE(BATTLE_STATE_COMMAND_ARMED);
-    EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_SE);
+    EMI_LoadArchive(EMI_SLOT_BATL_SE);
     g_BattleStep    = 0;
     g_BattleSubStep = 0;
 }

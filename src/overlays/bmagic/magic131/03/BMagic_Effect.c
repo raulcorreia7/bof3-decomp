@@ -25,7 +25,7 @@ MATCH void func_801EF488(void) {
     s32          i;
     s32          slot;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         i = 0;
         if (g_Game.party_size != 0) {
             do {
@@ -161,7 +161,7 @@ MATCH void func_801F0100(void) {
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 
 MATCH void func_801F01F8(void) {
-    if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_LoaderIsReady() != 0)) {
+    if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_IsReady() != 0)) {
         g_Task->timer = 8;
         g_Task->header.step += 1;
     }

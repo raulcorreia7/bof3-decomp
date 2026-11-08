@@ -4,8 +4,8 @@ MATCH void func_80197620(void) {
     u8 sep_index;
     u8 seq_index;
 
-    EMI_LoaderStreamInitSlot(EMI_SLOT_STATUS);
-    while (EMI_LoaderIsReady() == 0) {
+    EMI_LoadArchive(EMI_SLOT_STATUS);
+    while (EMI_IsReady() == 0) {
         CallbackWait(1u);
     }
     GFX_CopyPalette(1u);

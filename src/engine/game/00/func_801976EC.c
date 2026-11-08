@@ -11,20 +11,20 @@ MATCH void func_801976EC(void) {
     func_80198C38(0u);
     CallbackWait(1u);
     if (D_80148661 != 0u) {
-        EMI_LoaderStreamFamily(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
-        while (EMI_LoaderIsReady() == 0) {
+        EMI_LoadPartyArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
+        while (EMI_IsReady() == 0) {
             CallbackWait(1u);
         }
         D_80148661 = 0u;
     }
     g_EmiStreamFlags = 0x20;
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
-    while (EMI_LoaderIsReady() == 0) {
+    EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    while (EMI_IsReady() == 0) {
         CallbackWait(1u);
     }
     if (g_GameRequestFlags & AREA_LOAD_FLAG_FAIRY_VILLAGE) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_COMMU00);
-        while (EMI_LoaderIsReady() == 0) {
+        EMI_LoadArchive(EMI_SLOT_COMMU00);
+        while (EMI_IsReady() == 0) {
             CallbackWait(1u);
         }
         func_801F03D0();

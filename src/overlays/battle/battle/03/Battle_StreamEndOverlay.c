@@ -57,10 +57,10 @@ MATCH void Battle_StreamEndOverlay(void) {
     SND_SetBankLayout(0u);
     step = &g_BattleStep;
     if (*step == 1u) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_END);
+        EMI_LoadArchive(EMI_SLOT_BATL_END);
     }
     if (*step == 2u) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_OVR);
+        EMI_LoadArchive(EMI_SLOT_BATL_OVR);
     }
     g_BattleSubStep = 0u;
 }

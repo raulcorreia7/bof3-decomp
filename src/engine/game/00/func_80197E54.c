@@ -7,7 +7,7 @@ MATCH void func_80197E54(void) {
     local_ready = func_801BF78C();
     func_801A06D8();
     func_801992B8();
-    if (EMI_LoaderIsReady() && local_ready) {
+    if (EMI_IsReady() && local_ready) {
         g_AreaCameraStep            = 0;
         g_BattleOutcome.event_flags = 0;
         g_BattleMode                = 0;

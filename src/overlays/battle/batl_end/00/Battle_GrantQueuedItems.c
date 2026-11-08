@@ -16,7 +16,7 @@ MATCH void Battle_GrantQueuedItems(void) {
     u8  slot;
     u16 item;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         for (slot = 0; slot < D_80146327.count; slot++) {
             item = *(u16*)&D_80146327.items[slot * 2];
             Item_Add(item >> 8, item & BYTE_MASK, D_80146327.levels[slot], 0);

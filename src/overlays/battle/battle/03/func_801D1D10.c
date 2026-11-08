@@ -15,7 +15,7 @@ NON_MATCHING void func_801D1D10(void) {
     volatile u8* flag;
     u8           id;
     u32          index;
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         cursor = &g_BattleCommandCount;
         if (*cursor == 0)
             g_InputHeld = 0;

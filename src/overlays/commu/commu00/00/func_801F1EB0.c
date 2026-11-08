@@ -3,9 +3,9 @@
 MATCH void func_801F1EB0(void) {
     g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
     if (g_SceneEventSelection == 3) {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_COMMU02B);
+        EMI_LoadArchive(EMI_SLOT_COMMU02B);
     } else {
-        EMI_LoaderStreamInitSlot(EMI_SLOT_COMMU02);
+        EMI_LoadArchive(EMI_SLOT_COMMU02);
     }
     FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;
 }

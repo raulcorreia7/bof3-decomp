@@ -7,7 +7,7 @@ MATCH void func_80197F48(void) {
     u32 i;
 
     changed = 0;
-    if (g_AreaCameraMoving == 0 && EMI_LoaderIsReady() != 0) {
+    if (g_AreaCameraMoving == 0 && EMI_IsReady() != 0) {
         g_AreaDrawMode = 6;
         Party_BuildBattlers(PARTY_ORDER_FIELD);
         func_801BFB34();
