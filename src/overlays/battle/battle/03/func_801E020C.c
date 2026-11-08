@@ -44,7 +44,7 @@ MATCH void func_801E020C(void) {
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
             volatile u8* flag;
-            flag = &g_BattleResult;
+            flag = &g_BattleOutcome.result;
             *flag |= 1;
         }
         g_GameState->turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_ROW_PRESENT;

@@ -26,7 +26,7 @@ NON_MATCHING void func_801D43EC(void) {
         if (g_BattleEncounter != 0) {
             g_BossBattleEventHook(BOSS_EVENT_RESTART_BEGIN);
         }
-        if (g_BattleResult != 0) {
+        if (g_BattleOutcome.result != 0) {
             g_BattleMode = 4;
             g_BattleStep = 2;
             return;

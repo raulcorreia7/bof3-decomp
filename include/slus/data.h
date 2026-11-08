@@ -82,12 +82,6 @@ extern u8  g_BattleStep;
 extern u8  g_BattleSubStep;
 /* D_801462E8 */
 extern u16 g_BattleState;
-/* D_80146325 */
-extern u8  g_BattleOptions;
-/* D_80146328 */
-extern u8  g_BattleResult;
-/* D_80146329 */
-extern u8  g_BattleEventFlags;
 /* The bytes the battle code index; the bmagic images that copy its record
  * define BATTLE_PARTY_CELL_RECORD before their first include. */
 #ifdef BATTLE_PARTY_CELL_RECORD

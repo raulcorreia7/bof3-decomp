@@ -17,7 +17,7 @@ MATCH void func_80197AA4(void) {
     func_801992B8();
     if (ready != 0) {
         SND_SetBankLayout(1);
-        flags = &g_BattleOptions;
+        flags = &g_BattleOutcome.options;
         if ((*flags & 1) == 0) {
             coord_a  = (volatile u16*)&g_AreaTargetCellX;
             index    = g_BattleScrollDir;

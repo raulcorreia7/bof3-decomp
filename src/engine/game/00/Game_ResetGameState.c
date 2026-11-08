@@ -15,18 +15,18 @@ MATCH void Game_ResetGameState(void) {
     world_flags  = g_AreaWalkFlags;
     /* FAKE: retail keeps the flags load ahead of the context loads. */
     MATCH_FAKE_BARRIER();
-    entry_x           = g_SaveEntryX;
-    entry_y           = g_SaveEntryY;
-    entry_facing      = g_SaveEntryFacing;
-    D_80146256        = 0u;
-    D_80143F49        = 0u;
-    D_80143F4A        = 0u;
-    D_80143F4B        = 0u;
-    g_BattleOptions   = 0u;
-    g_BattleEncounter = 0u;
-    D_80146880        = 0u;
-    D_80146881        = 0u;
-    g_AreaWalkFlags   = world_flags | (0x4000u | AREA_WALK_ENTRY_PENDING);
+    entry_x                 = g_SaveEntryX;
+    entry_y                 = g_SaveEntryY;
+    entry_facing            = g_SaveEntryFacing;
+    D_80146256              = 0u;
+    D_80143F49              = 0u;
+    D_80143F4A              = 0u;
+    D_80143F4B              = 0u;
+    g_BattleOutcome.options = 0u;
+    g_BattleEncounter       = 0u;
+    D_80146880              = 0u;
+    D_80146881              = 0u;
+    g_AreaWalkFlags         = world_flags | (0x4000u | AREA_WALK_ENTRY_PENDING);
     Game_RequestAreaChange(area_id, entry_x, entry_y, entry_facing);
 
     if (*(u32*)&g_PlayClock != 0u) {

@@ -15,7 +15,7 @@ MATCH u8 func_801DB9E4(u32 battler_index) {
         if (ACTOR_IN_USE(g_BattlePartyBattlers[index]) && !HAS_STATUS(g_BattlePartyBattlers[index], 0x4944u) &&
             (g_BattleActionLock == 0u ||
              (g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) != 0u)) {
-            value = g_BattleSurprise;
+            value = g_BattleOutcome.surprise;
             mode  = 2u;
         } else {
             return false;
@@ -27,7 +27,7 @@ MATCH u8 func_801DB9E4(u32 battler_index) {
                 0u &&
             (g_BattleActionLock == 0u ||
              (g_BattleEnemyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) != 0u)) {
-            value = g_BattleSurprise;
+            value = g_BattleOutcome.surprise;
             mode  = 1u;
         } else {
             return false;

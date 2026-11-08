@@ -14,7 +14,7 @@ NON_MATCHING u8 func_801BF11C(void) {
     u16* dst;
     u16* src;
 
-    if (g_BattleOptions & 4) {
+    if (g_BattleOutcome.options & 4) {
         return 1;
     }
     g_EncounterOriginX = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_BattleScrollDir].dx << 16);

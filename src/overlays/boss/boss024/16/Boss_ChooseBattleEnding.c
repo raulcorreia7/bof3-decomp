@@ -4,7 +4,7 @@ MATCH void Boss_ChooseBattleEnding(void) {
     volatile u8* status;
     u8           bits;
 
-    status = &g_BattleResult;
+    status = &g_BattleOutcome.result;
     bits   = *status;
     if (bits & BATTLE_RESULT_VICTORY) {
         g_ScriptVars[0] = 5;

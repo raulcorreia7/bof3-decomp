@@ -9,7 +9,7 @@ MATCH void func_801DEFE4(void) {
     u16           flags;
     u8            state;
 
-    if (g_BattleOptions & 0x20) {
+    if (g_BattleOutcome.options & 0x20) {
         if ((g_BattleMode == 5) && BATTLE_IS_VICTORY()) {
             if (HAS_STATUS(*g_GameState, STATUS_KO)) {
                 Actor_SwitchScript(g_Task->facing + 0x1C, (u8*)0x800F0800U, 0x1800);

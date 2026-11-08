@@ -8,7 +8,7 @@ MATCH void Battle_InitPanels(void) {
 
     func_801D9388(0);
     i = 0;
-    if (g_BattleSurprise >= 2u) {
+    if (g_BattleOutcome.surprise >= 2u) {
         D_8014837B = 2u;
         do {
             index                      = i & BYTE_MASK;

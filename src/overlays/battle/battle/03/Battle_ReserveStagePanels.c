@@ -21,7 +21,7 @@ MATCH void Battle_ReserveStagePanels(void) {
     D_80148332[slot].x_02    = 0x14;
     D_80148332[slot].unk_01  = 0;
     D_80148332[slot].y_04    = -0x16;
-    group                    = &g_BattleSurprise;
+    group                    = &g_BattleOutcome.surprise;
     if (*group == 1) {
         BattleStageSelectionRingRecord(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_PARTY));
     }

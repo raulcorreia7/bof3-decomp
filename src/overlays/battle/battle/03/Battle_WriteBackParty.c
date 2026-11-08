@@ -36,13 +36,13 @@ MATCH void Battle_WriteBackParty(void) {
         } while ((u32)(i & BYTE_MASK) < g_BattlePartyCount);
     }
     func_801DD08C();
-    counter            = &g_GameEntrySubstate;
-    count              = *counter;
-    g_BattleEventFlags = 0;
-    g_BattleMode       = 0;
-    g_BattleStep       = 0;
-    g_BattleSubStep    = 0;
-    g_BattleUIStep     = 0;
-    g_BattleUIState    = 0;
-    *counter           = count + 1;
+    counter                     = &g_GameEntrySubstate;
+    count                       = *counter;
+    g_BattleOutcome.event_flags = 0;
+    g_BattleMode                = 0;
+    g_BattleStep                = 0;
+    g_BattleSubStep             = 0;
+    g_BattleUIStep              = 0;
+    g_BattleUIState             = 0;
+    *counter                    = count + 1;
 }
