@@ -5,10 +5,10 @@ MATCH void func_801F39BC(void) {
     Actor* e;
     s32    index;
 
-    s = (Actor*)&g_Actors[TASK_BYTES[0x0B]];
+    s = (Actor*)&g_Actors[g_Task->param.unk_0B];
     s->header.flags |= ACTOR_FLAG_HIDDEN;
     s     = g_Task;
-    index = ((u8*)s)[0x0B];
+    index = s->param.unk_0B;
     e     = &g_Actors[index];
     TASK_SET(e);
     Actor_SelectScript(1);
