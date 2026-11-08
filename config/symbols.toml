@@ -217,7 +217,7 @@ Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "Adv
 D_801EFE40 = { addr = 0x801EFE40, source = "Sound cue id per effect index of the magic004 effect, read by func_801EF158 with the effect's unk_04 index." }
 g_BMagicEffectModes = { addr = 0x801EFE58, source = "Handlers of magic004 (ThundrStrike), run by header.mode (byte 0x01)." }
 
-BMagic_StepTable = { addr = 0x801EFE60, source = "Step handler table for magic004, dispatched by BMagic_RunStep." }
+BMagic_StepTable = { addr = 0x801EFE60, source = "Step handlers of magic004, run by header.step (byte 0x02) through BMagic_RunStep." }
 ["emi/bmagic/magic006/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEDA4, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic006 (Mind Sword)." }
@@ -377,7 +377,7 @@ Effect_RecordTrail = { addr = 0x801F02A0, type = "func", source = "Records the c
 g_BMagicEffectModes = { addr = 0x801F0A14, source = "Handlers of magic044 (Evil Eye), run by header.mode (byte 0x01)." }
 D_801F0A1C = { addr = 0x801F0A1C, source = "Step handlers of the magic044 effect (Evil Eye), run by header.step (byte 0x02) from func_801EEE44; the fourth entry is reached before the table's second half." }
 D_801F0A2C = { addr = 0x801F0A2C, source = "Step handlers of the bmagic/magic044/03 effect, run by header.step from func_801F0478." }
-BMagic_Trail = { addr = 0x801F0A38, source = "Trail position buffer for magic044, shifted by BMAGIC_SHIFT_TRAIL." }
+BMagic_Trail = { addr = 0x801F0A38, source = "Trail points of the magic044 effect, one x and y per trail slot and step, shifted each frame by BMAGIC_SHIFT_TRAIL." }
 
 ["emi/bmagic/magic045/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -944,7 +944,7 @@ Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "Sets the a
 g_BMagicEffectModes = { addr = 0x801F0CA8, source = "Handlers of magic120 (Whelp Breath), run by header.mode (byte 0x01)." }
 D_801F0CB0 = { addr = 0x801F0CB0, source = "Step handlers of the effect, run by header.step (byte 0x02) through SYS_DISPATCH_BYTE." }
 
-BMagic_StepTable = { addr = 0x801F0CC4, source = "Step handler table for magic120, dispatched by BMagic_RunStep." }
+BMagic_StepTable = { addr = 0x801F0CC4, source = "Step handlers of magic120 (Whelp Breath), run by header.step (byte 0x02) through BMagic_RunStep." }
 ["emi/bmagic/magic121/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnIdleTick = { addr = 0x801EEE08, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic121 (DragonBreath)." }
