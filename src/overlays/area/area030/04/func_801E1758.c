@@ -23,7 +23,7 @@ MATCH void func_801E1758(s32 x, s32 y) {
         func_801E0DCC(0x31, 1, sx + 8 + i * 8, sy + 56);
     }
     func_801E0DCC(0x32, 1, sx + 96, sy + 56);
-    UI_DrawText(sx + 35, sy + 6, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_8001007A));
-    UI_DrawText(sx + 10, sy + 25, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_8001007C));
-    UI_DrawText(sx + 10, sy + 41, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_8001007E));
+    UI_DrawText(sx + 35, sy + 6, 0, 0xFF, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, FISHING_MSG_FISH));
+    UI_DrawText(sx + 10, sy + 25, 0, 0xFF, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, FISHING_MSG_RETRY));
+    UI_DrawText(sx + 10, sy + 41, 0, 0xFF, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, FISHING_MSG_EXIT));
 }

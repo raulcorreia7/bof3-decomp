@@ -92,7 +92,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
         do {
             value = D_801E2120[bar_index & BYTE_MASK];
             if (value != 0xFFFF) {
-                UI_DrawText(bar_x, bar_y, 0, 0xFFU, ((u8*)&D_80010000 + D_80010000[value]));
+                UI_DrawText(bar_x, bar_y, 0, 0xFFU, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, value));
             }
             bar_index += 1;
             if ((u32)(bar_index & BYTE_MASK) >= 0x36U) {
@@ -105,7 +105,8 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, (s32)g_WindowStyle);
     UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, 0x30, (s32)g_WindowStyle);
     health = FISHING_STATE->bounce_3C.half.unk_3C;
-    UI_DrawText((s16)(panel_x + 61), (s16)(panel_y + 6), 0, 0xFFU, ((u8*)&D_80010000 + D_80010000[D_801E2114[health]]));
+    UI_DrawText((s16)(panel_x + 61), (s16)(panel_y + 6), 0, 0xFFU,
+                MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, D_801E2114[health]));
     func_801D7784((u16)panel_x, (u16)panel_y);
     text = (u8*)g_UiFormatBuffer;
     TEXT_Format(text, D_801D0C08, health + 1);

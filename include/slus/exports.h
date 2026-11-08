@@ -21,18 +21,8 @@ typedef enum SceneEventMode {
     SCENE_EVENT_SHOP_SAVE = 10,
 } SceneEventMode;
 
-/* 0x80010000: overlay text and image offsets. */
+/* The area message bank offset the HUD value text reads (AREA_MESSAGE_BANK slot 4). */
 extern u16           D_80010008;
-extern u16           D_8001008A;
-extern u16           D_8001008C;
-extern u16           D_8001008E;
-extern u16           D_80010090;
-extern u16           D_80010092;
-extern u16           D_80010094;
-extern u16           D_80010096;
-extern u16           D_80010098;
-extern u16           D_8001009A;
-extern u16           D_8001009C;
 /* 0x80143xxx: shared area and UI state. */
 extern u8            D_80142CC4[];
 /* D_80143B92 */

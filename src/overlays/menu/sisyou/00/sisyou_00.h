@@ -10,10 +10,6 @@
 #include "shared/etc.h"
 #include <stdio.h>
 
-/* The main-executable text bank at 0x80010000: the message id indexes its u16
- * record offsets and func_8014F800 draws the record. */
-#define MASTER_MENU_TEXT_BANK        0x80010000
-
 #define MASTER_MENU_HEAD_SIZE        0x18
 #define MASTER_MENU_FMT_A_SIZE       4
 #define MASTER_MENU_FMT_BC_SIZE      8

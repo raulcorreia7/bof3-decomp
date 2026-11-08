@@ -98,7 +98,7 @@ NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
     UI_DrawText((s16)(x0 + 51), (s16)(y0 + 71), 0, 5U, (&D_801E21D9));
     record_word = g_Task->unk_2C;
     if (record_word != 0xFFFF) {
-        UI_DrawText(25, 154, 0, 0xFFU, D_80010000[record_word * 2] + FISHING_TEXT_BANK);
+        UI_DrawText(25, 154, 0, 0xFFU, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, record_word * 2));
     }
 }
 #else

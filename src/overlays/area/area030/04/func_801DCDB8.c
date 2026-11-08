@@ -36,9 +36,9 @@ MATCH void func_801DCDB8(void) {
     }
 
     if (!(D_80144287 & 1)) {
-        UI_DrawText(29, 20, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_800100A2));
+        UI_DrawText(29, 20, 0, 0xFF, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, FISHING_MSG_EQUIP_ROD));
     } else {
-        UI_DrawText(29, 20, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_800100A4));
+        UI_DrawText(29, 20, 0, 0xFF, MESSAGE_BANK_TEXT(AREA_MESSAGE_BANK, FISHING_MSG_EQUIP_LURE));
     }
 
     if (!(D_80144287 & 0x80)) {
