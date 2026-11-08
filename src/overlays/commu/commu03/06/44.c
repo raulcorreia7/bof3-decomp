@@ -20,7 +20,7 @@ MATCH void func_801D0D60(void) {
 
     value      = D_801D1948 - 1;
     D_801D1948 = value;
-    func_801D1250(0x32, (s16)(0x28 - ((value & 0xFF) * 0x32)));
+    func_801D1250(0x32, (s16)(0x28 - ((value & BYTE_MASK) * 0x32)));
     if (D_801D1948 == 0) {
         D_801F294D = 0;
         D_801F294C += 1;
