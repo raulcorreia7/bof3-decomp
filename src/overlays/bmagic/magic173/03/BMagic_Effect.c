@@ -42,7 +42,7 @@ MATCH void func_801EF3D8(void) {
         g_Task->param.unk_0B += 1;
         g_Task->timer += 1;
         func_800AF764();
-        func_801F02B0();
+        Effect_RecordTrail();
     }
     timer = g_Task->timer;
     if ((timer & BYTE_MASK) == 8) {
@@ -67,13 +67,8 @@ INCLUDE_ASM(func_801EF4EC);
 
 INCLUDE_ASM(func_801EFA34);
 
-MATCH void func_801F02B0(void) {
-    s32 i;
-
-    BMAGIC_SHIFT_TRAIL(BMagic_Trail)
-    BMagic_Trail[g_Task->unk_04][g_Task->param.unk_0B].x = g_Task->unk_2E.half;
-    BMagic_Trail[g_Task->unk_04][g_Task->param.unk_0B].y = g_Task->unk_30.half;
-}
+/* func_801F02B0 */
+#include "overlays/bmagic/Effect_RecordTrail.h"
 
 /* func_801F03A0 */
 #include "overlays/bmagic/Effect_ClearTrail.h"

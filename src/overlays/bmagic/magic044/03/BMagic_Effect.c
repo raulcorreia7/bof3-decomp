@@ -51,13 +51,8 @@ INCLUDE_ASM(func_801EF4E0);
 
 INCLUDE_ASM(func_801EFA4C);
 
-MATCH void func_801F02A0(void) {
-    s32 i;
-
-    BMAGIC_SHIFT_TRAIL(BMagic_Trail)
-    BMagic_Trail[g_Task->unk_04][g_Task->param.unk_0B].x = g_Task->unk_2E.half;
-    BMagic_Trail[g_Task->unk_04][g_Task->param.unk_0B].y = g_Task->unk_30.half;
-}
+/* func_801F02A0 */
+#include "overlays/bmagic/Effect_RecordTrail.h"
 
 /* func_801F0390 */
 #include "overlays/bmagic/Effect_ClearTrail.h"
