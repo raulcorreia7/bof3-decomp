@@ -38,6 +38,7 @@ u8*       func_801F8394(void);
 void      func_801F83D0(u8* row);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);
+void      func_801FA01C(void);
 void      func_801FA38C(void);
 extern u8 D_801FDFC8;
 
