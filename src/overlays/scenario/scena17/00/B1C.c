@@ -522,7 +522,7 @@ MATCH void func_801F9160(s16 x, s16 y) {
 
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
-    setRGB0(prim, 0x80, 0x80, 0x80);
+    setRGB0(prim, 128, 128, 128);
     prim->clut = 0x7B85;
     prim->v0   = 0x40;
     setXY0(prim, x, y);

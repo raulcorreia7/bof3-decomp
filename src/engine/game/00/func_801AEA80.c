@@ -8,9 +8,9 @@ MATCH void func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shad
     sprite = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(sprite);
     if ((shade_mode & BYTE_MASK) == 0) {
-        setRGB0(sprite, 0x80, 0x80, 0x80);
+        setRGB0(sprite, 128, 128, 128);
     } else {
-        setRGB0(sprite, 0x40, 0x40, 0x40);
+        setRGB0(sprite, 64, 64, 64);
     }
 
     setXY0(sprite, sprite_x, sprite_y);

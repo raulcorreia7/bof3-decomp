@@ -35,7 +35,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     val3       = 0x80;
     tmp2       = val1 + (val5 & BYTE_MASK);
     tmp4       = val0 + 7;
-    setRGB0(val7, 0x80, 0x80, 0x80);
+    setRGB0(val7, 128, 128, 128);
     setXY4(val7, val1, val0, tmp2, val0, val1, tmp4, tmp2, tmp4);
     if (val8 == 0) {
         val3 = 0x90;
@@ -56,7 +56,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     SetPolyFT4(val7);
     val7->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     val7->clut  = GetClut(176, STAGE_PALETTE_Y);
-    setRGB0(val7, 0x80, 0x80, 0x80);
+    setRGB0(val7, 128, 128, 128);
     tmp0     = val1 + (val5 & BYTE_MASK);
     tmp3     = (val6 & BYTE_MASK) + tmp0;
     val7->x0 = tmp0;

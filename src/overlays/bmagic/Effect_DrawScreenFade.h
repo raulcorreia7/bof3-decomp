@@ -8,8 +8,8 @@ MATCH void Effect_DrawScreenFade(void) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, 0, 0, 0x13F, 0, 0, 0x78, 0x13F, 0x78);
-    setRGB0(prim, 0x80, 0x80, 0x80);
-    setRGB1(prim, 0x80, 0x80, 0x80);
+    setRGB0(prim, 128, 128, 128);
+    setRGB1(prim, 128, 128, 128);
     setRGB2(prim, shade, shade, shade);
     setRGB3(prim, shade, shade, shade);
     GFX_AddPrim(1U, sizeof(POLY_G4));
@@ -19,8 +19,8 @@ MATCH void Effect_DrawScreenFade(void) {
     setXY4(prim, 0, 0x78, 0x13F, 0x78, 0, 0x167, 0x13F, 0x167);
     setRGB0(prim, shade, shade, shade);
     setRGB1(prim, shade, shade, shade);
-    setRGB2(prim, 0x80, 0x80, 0x80);
-    setRGB3(prim, 0x80, 0x80, 0x80);
+    setRGB2(prim, 128, 128, 128);
+    setRGB3(prim, 128, 128, 128);
     GFX_AddPrim(1U, sizeof(POLY_G4));
     GFX_AddDitheredDrawMode(1U, getTPage(0, 0, 320, 256));
 }

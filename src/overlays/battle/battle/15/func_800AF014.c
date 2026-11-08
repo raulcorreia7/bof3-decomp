@@ -16,17 +16,17 @@ MATCH void func_800AF014(void) {
         prim->y3 = 239;
         prim->y2 = 239;
     }
-    prim->r3 = 0x20;
-    prim->r0 = 0x20;
-    prim->g3 = 0x20;
-    prim->g0 = 0x20;
-    prim->b3 = 0x20;
-    prim->b0 = 0x20;
-    prim->r2 = 0x80;
-    prim->r1 = 0x80;
-    prim->g2 = 0x80;
-    prim->g1 = 0x80;
-    prim->b2 = 0x80;
-    prim->b1 = 0x80;
+    prim->r3 = 32;
+    prim->r0 = 32;
+    prim->g3 = 32;
+    prim->g0 = 32;
+    prim->b3 = 32;
+    prim->b0 = 32;
+    prim->r2 = 128;
+    prim->r1 = 128;
+    prim->g2 = 128;
+    prim->g1 = 128;
+    prim->b2 = 128;
+    prim->b1 = 128;
     GFX_AddPrim(7U, sizeof(POLY_G4));
 }
