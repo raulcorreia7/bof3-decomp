@@ -217,6 +217,9 @@ g_BMagicEffectModes = { addr = 0x801F0A24, source = "Handlers of magic006 (Mind 
 ["emi/bmagic/magic008/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC58 = { addr = 0x801EEC58, source = "Six step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0294." }
+D_801EEC70 = { addr = 0x801EEC70, type = "EffectStepFuncs5", source = "Five step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0568." }
+D_801EECAC = { addr = 0x801EECAC, type = "BMagicStepTable7", source = "Seven step handlers of the magic008 effect, run by header.step (byte 0x02) from func_801F1294." }
+D_801EECC8 = { addr = 0x801EECC8, type = "BMagicStepTable10", source = "Ten step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F1708." }
 Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_PlayOnce = { addr = 0x801EF010, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartPlaying_801EF728 = { addr = 0x801EF728, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
@@ -288,6 +291,7 @@ g_BMagicEffectModes = { addr = 0x801EFEB8, source = "Handlers of magic020 (Disem
 ["emi/bmagic/magic021/03"]
 D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs3", source = "Step handlers of magic021 (Bonebreak), run by header.mode (byte 0x01) from func_801EEC28." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EEC10 = { addr = 0x801EEC10, type = "BMagicEffectFuncs", source = "Six step handlers of magic021, run by header.step (byte 0x02) from func_801EF020." }
 Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (func_800AEF98), clears its busy flag and advances header.mode (byte 0x01) in magic021 (Bonebreak)." }
 Effect_StartPlaying = { addr = 0x801EEFA8, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic021 (Bonebreak)." }
 Effect_SetDuration = { addr = 0x801EF0BC, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic021 (Bonebreak)." }
@@ -901,6 +905,7 @@ Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "Sets the a
 g_BMagicEffectModes = { addr = 0x801F0CA8, source = "Handlers of magic120 (Whelp Breath), run by header.mode (byte 0x01)." }
 D_801F0CB0 = { addr = 0x801F0CB0, source = "Step handlers of the effect, run by header.step (byte 0x02) through SYS_DISPATCH_BYTE." }
 
+D_801F0CC4 = { addr = 0x801F0CC4, source = "Step handlers of magic120 (Whelp Breath), run by header.step (byte 0x02) from func_801EFD20." }
 ["emi/bmagic/magic121/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnIdleTick = { addr = 0x801EEE08, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic121 (DragonBreath)." }

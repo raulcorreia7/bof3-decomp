@@ -14,4 +14,6 @@ void                    func_801EF7FC(void);
 void                    func_801EF534(void);
 extern EffectStepFuncs3 D_801EEC04;
 
+extern BMagicEffectFuncs D_801EEC10;
+
 #endif
