@@ -12,7 +12,7 @@ MATCH void func_801E7514(s32 x, s32 y, s32 icon, s32 palette) {
 
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
-    setRGB0(sprite, 0x20, 0x20, 0x20);
+    setRGB0(sprite, 32, 32, 32);
     geom = (u8)icon * START08_ICON_STRIDE;
     setXY0(sprite, x, y);
     setUV0(sprite, *(u16*)((u8*)D_801ED1FC + geom), *(u16*)((u8*)D_801ED1FE + geom));

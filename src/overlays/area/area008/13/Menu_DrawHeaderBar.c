@@ -47,7 +47,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     setUV0(primitive, 0u, 0u);
     primitive->v1 = 0u;
     primitive->u2 = 0u;
-    setRGB0(primitive, 0xACu, 0xACu, 0xACu);
+    setRGB0(primitive, 172, 172, 172);
     bottom_v      = (u8)(height + 1);
     bottom_y      = (s16)((s32)(u16)y + bottom_v);
     primitive->y2 = bottom_y;
@@ -79,7 +79,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     setXY4(primitive, (s16)r_s8, (s16)(u16)y, (s16)(r_s1 + r_s8), (s16)(u16)y, (s16)r_s8, bottom_y, (s16)(r_s1 + r_s8),
            bottom_y);
     setUV4(primitive, 0u, 0u, (u8)r_s4, 0u, 0u, bottom_v, (u8)r_s4, bottom_v);
-    setRGB0(primitive, 0xACu, 0xACu, 0xACu);
+    setRGB0(primitive, 172, 172, 172);
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
@@ -97,7 +97,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->x3 = (s16)(((s32)x + r_s1) + (r_s1 + odd_width + 2));
     primitive->y3 = bottom_y;
     setUV4(primitive, 0u, 0u, (u8)(r_s4 + odd_h), 0u, 0u, bottom_v, (u8)(r_s4 + odd_h), bottom_v);
-    setRGB0(primitive, 0xACu, 0xACu, 0xACu);
+    setRGB0(primitive, 172, 172, 172);
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
@@ -120,7 +120,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->u2 = 0u;
     primitive->u3 = 2u;
     primitive->v3 = bottom_v;
-    setRGB0(primitive, 0xACu, 0xACu, 0xACu);
+    setRGB0(primitive, 172, 172, 172);
     primitive->y1 += 2;
     primitive->y3 -= 3;
     primitive->y2 -= 1;

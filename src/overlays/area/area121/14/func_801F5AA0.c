@@ -12,6 +12,6 @@ MATCH void func_801F5AA0(s16 x, s16 y, u8 row) {
     setXY0(sprite, x, y);
     sprite->v0 = row * 0x20 + 0x78;
     sprite->u0 = 0;
-    setRGB0(sprite, 0x80, 0x80, 0x80);
+    setRGB0(sprite, 128, 128, 128);
     GFX_AddPrim(2, sizeof(SPRT));
 }

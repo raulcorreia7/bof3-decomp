@@ -14,9 +14,9 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     setWH(sprt, 16, 8);
     sprt->clut = STAGE_PALETTE_CLUT;
     if ((shade_mode & BYTE_MASK) == 0) {
-        sprt->r0 = sprt->g0 = sprt->b0 = 0x80;
+        sprt->r0 = sprt->g0 = sprt->b0 = 128;
     } else {
-        sprt->r0 = sprt->g0 = sprt->b0 = 0x10;
+        sprt->r0 = sprt->g0 = sprt->b0 = 16;
     }
     sprt->v0 = 216;
     u        = (icon_column & BYTE_MASK) << 4;

@@ -80,7 +80,7 @@ MATCH void func_801F4768(void) {
             *(u32*)&prim->x3 = *(u32*)&cell->x3;
             prim->clut       = 0x78CB;
             prim->tpage      = getTPage(0, 2, 704, 256);
-            setRGB0(prim, 0x28, 0x28, 0x28);
+            setRGB0(prim, 40, 40, 40);
             prim->u0 = D_801F51D8[width] + col * D_801F51E0[width];
             prim->v0 =
                 D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;

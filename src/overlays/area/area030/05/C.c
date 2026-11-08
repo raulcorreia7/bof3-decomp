@@ -342,7 +342,7 @@ MATCH void func_800F5E44(void) {
         ((POLY_FT4*)cursor)->y2    = 240;
         ((POLY_FT4*)cursor)->y3    = 240;
         setUV4(((POLY_FT4*)cursor), 0, 0, 160, 0, 0, 240, 160, 240);
-        setRGB0(((POLY_FT4*)cursor), 0x40, 0x40, 0x40);
+        setRGB0(((POLY_FT4*)cursor), 64, 64, 64);
         ((POLY_FT4*)cursor)->x2 = ((POLY_FT4*)cursor)->x0;
         ((POLY_FT4*)cursor)->x3 = ((POLY_FT4*)cursor)->x1;
         GFX_AddPrim(7, sizeof(POLY_FT4));

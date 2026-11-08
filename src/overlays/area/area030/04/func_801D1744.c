@@ -17,8 +17,8 @@ MATCH void func_801D1744(s16 panel_x, s16 panel_y, u8 column_shade) {
     primitive->y2 = primitive->y0 + 32;
     primitive->y3 = primitive->y2;
     setRGB0(primitive, 100, 100, 128);
-    setRGB1(primitive, 0x64, 0x64, 0x80);
-    setRGB2(primitive, 0, 0, 0x50);
-    setRGB3(primitive, 0, 0, 0x50);
+    setRGB1(primitive, 100, 100, 128);
+    setRGB2(primitive, 0, 0, 80);
+    setRGB3(primitive, 0, 0, 80);
     GFX_AddPrim(column_shade, sizeof(POLY_G4));
 }

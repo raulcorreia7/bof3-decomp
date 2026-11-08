@@ -22,17 +22,17 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
 
     shade = shade_mode & BYTE_MASK;
     if (shade == 0) {
-        sprt->b0 = 0x80;
-        sprt->g0 = 0x80;
-        sprt->r0 = 0x80;
+        sprt->b0 = 128;
+        sprt->g0 = 128;
+        sprt->r0 = 128;
     } else if (shade == 1) {
-        sprt->b0 = 0x30;
-        sprt->g0 = 0x30;
-        sprt->r0 = 0x30;
+        sprt->b0 = 48;
+        sprt->g0 = 48;
+        sprt->r0 = 48;
     } else {
-        sprt->g0 = 0x40;
-        sprt->r0 = 0x40;
-        sprt->b0 = 0x80;
+        sprt->g0 = 64;
+        sprt->r0 = 64;
+        sprt->b0 = 128;
     }
 
     setXY0(sprt, sprite_x, sprite_y);

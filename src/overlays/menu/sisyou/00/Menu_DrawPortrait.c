@@ -27,17 +27,17 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     shade_value = shade & BYTE_MASK;
     /* Retail writes b0, g0, r0 as one block in the first two arms. */
     if (shade_value == 0) {
-        sprt->b0 = 0x80;
-        sprt->g0 = 0x80;
-        sprt->r0 = 0x80;
+        sprt->b0 = 128;
+        sprt->g0 = 128;
+        sprt->r0 = 128;
     } else if (shade_value == 1) {
-        sprt->b0 = 0x30;
-        sprt->g0 = 0x30;
-        sprt->r0 = 0x30;
+        sprt->b0 = 48;
+        sprt->g0 = 48;
+        sprt->r0 = 48;
     } else {
-        sprt->g0 = 0x40;
-        sprt->r0 = 0x40;
-        sprt->b0 = 0x80;
+        sprt->g0 = 64;
+        sprt->r0 = 64;
+        sprt->b0 = 128;
     }
 
     setXY0(sprt, x, y);
