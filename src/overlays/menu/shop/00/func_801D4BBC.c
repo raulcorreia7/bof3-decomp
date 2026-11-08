@@ -7,7 +7,7 @@ MATCH void func_801D4BBC(void) {
 
     MENU_DRAW_HEADER();
     WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, D_801E60EC + 0x85);
-    func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
+    SAVE_DrawPortTabs(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
     SAVE_AccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus == CARD_EVENT_OK) {
         func_801D6F00();

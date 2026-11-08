@@ -1633,6 +1633,11 @@ g_MenuFormations = { addr = 0x801D0C50, size = 0xC8, source = "The ten formation
 g_MenuFormationOrder = { addr = 0x801D0D18, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D5C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+g_SaveSlotLevelFormat = { addr = 0x801D0D80, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0D84, source = "Format of the play time on a save slot row." }
+g_SaveSlotTimeColon = { addr = 0x801D0D90, source = "Colon glyphs between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0D94, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0D98, source = "Label of memory card port 2 in the port tabs." }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (g_MenuStep.step) through g_MenuBateStates." }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
@@ -1665,6 +1670,8 @@ Menu_DrawInventoryWindow = { addr = 0x801D6C54, type = "func", source = "Draws t
 Menu_DrawAbilityList = { addr = 0x801D73B4, type = "func", source = "draws the ability list panel of the shop and bate overlays: ten abilities with cost and level, the list name and the frame" }
 Menu_DrawPanelFrame = { addr = 0x801D78A8, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 Menu_DrawEquipChoiceWindow = { addr = 0x801D7AD0, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+SAVE_DrawSlotRow = { addr = 0x801D8208, type = "func", source = "Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window." }
+SAVE_DrawPortTabs = { addr = 0x801D8508, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
 g_MenuBateStates = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
 g_MenuBateStep2Funcs = { addr = 0x801D8700, source = "3 sub-step handlers of step 2 of the Bate menu, called by func_801D0E38 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuBateStep2Sub0Funcs = { addr = 0x801D870C, source = "3 handlers of sub-step 0 of step 2 of the Bate menu, called by func_801D0E74 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
@@ -1692,6 +1699,7 @@ g_MenuInventoryTab1OnSprites = { addr = 0x801D8960, source = "the sprite run of 
 g_MenuListTab1OffSprites = { addr = 0x801D896C, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801D8978, source = "the sprite run of the list panel's first tab while its flag is set" }
 g_MenuEquipStatSprites = { addr = 0x801D89E0, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
+g_SaveSlotFrameSprites = { addr = 0x801D8A3C, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801D8B28, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D8B2C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801D8B30, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -2104,6 +2112,11 @@ g_MenuFormations = { addr = 0x801D0C34, size = 0xC8, source = "The ten formation
 g_MenuFormationOrder = { addr = 0x801D0CFC, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0D00, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D40, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+g_SaveSlotLevelFormat = { addr = 0x801D0D64, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0D68, source = "Format of the play time on a save slot row." }
+g_SaveSlotTimeColon = { addr = 0x801D0D74, source = "Colon glyphs between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0D78, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0D7C, source = "Label of memory card port 2 in the port tabs." }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte g_MenuStep.step through the D_801D96DC handlers." }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
@@ -2136,6 +2149,8 @@ Menu_DrawWindowFrame = { addr = 0x801D76F4, type = "func", source = "Draws a win
 Menu_DrawInventoryWindow = { addr = 0x801D7BFC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 Menu_DrawEquipChoiceWindow = { addr = 0x801D8A78, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+SAVE_DrawSlotRow = { addr = 0x801D91B0, type = "func", source = "Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window." }
+SAVE_DrawPortTabs = { addr = 0x801D94B0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
 g_MenuStatusStates = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
 g_MenuStatusStep1Funcs = { addr = 0x801D96F0, source = "2 sub-step handlers of step 1 of the status menu, called by func_801D0E4C (the step 1 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of step 3 of the status menu, called by func_801D0F24 (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
@@ -2162,6 +2177,7 @@ g_MenuInventoryTab1OffSprites = { addr = 0x801D996C, source = "the sprite run of
 g_MenuListTab2OnSprites = { addr = 0x801D9978, source = "the sprite run of the list panel's second tab while its flag is set" }
 g_MenuInventoryTab1OnSprites = { addr = 0x801D9984, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuEquipStatSprites = { addr = 0x801D9A04, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
+g_SaveSlotFrameSprites = { addr = 0x801D9A60, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801D9B4C, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D9B50, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801D9B54, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -2194,6 +2210,9 @@ D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu d
 g_SaveSlotLevelFormat = { addr = 0x801D0E44, source = "Format of the level on a save slot row." }
 g_SaveSlotTimeFormat = { addr = 0x801D0E48, source = "Format of the play time on a save slot row: hours and minutes." }
 g_SaveSlotTimeColon = { addr = 0x801D0E54, source = "The colon drawn between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0E58, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0E5C, source = "Label of memory card port 2 in the port tabs." }
+SAVE_DrawPortTabs = { addr = 0x801DDFB0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
 g_SaveSlotFrameSprites = { addr = 0x801E5738, source = "Sprite run of a save slot row frame." }
 g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory; the start overlay uses the same address as SAVE_IMAGE_ADDR." }
 g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }

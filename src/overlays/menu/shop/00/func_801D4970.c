@@ -10,7 +10,7 @@ MATCH void func_801D4970(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
     }
     MENU_DRAW_HEADER();
-    func_801DDFB0(0x62 - *counter * 48, 0x4C, D_801E60F8, g_SaveCardPort, 1);
+    SAVE_DrawPortTabs(0x62 - *counter * 48, 0x4C, D_801E60F8, g_SaveCardPort, 1);
     count = *counter;
     count--;
     *counter = count;

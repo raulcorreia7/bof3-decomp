@@ -205,7 +205,7 @@ segments:
       - [0xC750, c, Menu_DrawPanelFrame]
       - [0xC978, c, Menu_DrawEquipChoiceWindow]
       - [0xD0B0, c, SAVE_DrawSlot]
-      - [0xD3B0, c, func_801DDFB0]
+      - [0xD3B0, c, SAVE_DrawPortTabs]
       - [0xD588, c, func_801DE188]
       - [0xD5C4, c, func_801DE1C4]
       - [0xD600, c, func_801DE200]
