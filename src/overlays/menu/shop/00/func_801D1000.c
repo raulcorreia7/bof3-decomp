@@ -1,4 +1,5 @@
 #include "shop_00.h"
+#include "area/spad.h"
 
 /* ACTOR_SIZE-byte work-area slots; the full record type belongs to emi/etc/game/00. */
 
@@ -17,7 +18,7 @@ MATCH void func_801D1000(void) {
         TASK_SET(slot);
         if ((slot[7] & 8) == 0) {
             slot[8] = slot[0x79];
-            func_8015BAC4(TASK_BYTES[8]);
+            func_8015BAC4(g_Task->direction_08);
             slot[0x74] |= 8;
         }
         slot[0x74] &= 0xDF;

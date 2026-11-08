@@ -749,7 +749,7 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 }
 
 MATCH void func_801F8748(void) {
-    D_801FC9D4[TASK_BYTES[1]]();
+    D_801FC9D4[g_Task->header.mode]();
 }
 
 MATCH void func_801F878C(void) {
