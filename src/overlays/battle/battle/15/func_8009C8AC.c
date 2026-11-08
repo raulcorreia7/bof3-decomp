@@ -22,7 +22,7 @@ MATCH u8 func_8009C8AC(u16 required_mask) {
         slot = LOBU(g_BattleActiveBattler);
         if (!BATTLER_IS_PLAYER(slot))
             return false;
-        if (required_mask & 0x100)
+        if (required_mask & ELEM_DEATH)
             return false;
         if (g_Weapons[g_BattlePartyBattlers[slot].chr.equip.weapon].element & required_mask)
             return true;

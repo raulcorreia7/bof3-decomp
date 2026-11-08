@@ -13,7 +13,7 @@ MATCH void Battle_TestAICondition(void) {
         packet = (BattleEventPacket*)(MEM_PTR(u8, 0x800E407Cu) + g_BattleCurrentEnemy->kind * 0x88u + i * 0x10u);
         switch (packet->kind) {
             case 0:
-                if (func_8009C8AC(1) != 0) {
+                if (func_8009C8AC(ELEM_FIRE) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -21,7 +21,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 1:
-                if (func_8009C8AC(2) != 0) {
+                if (func_8009C8AC(ELEM_FROST) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -29,7 +29,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 2:
-                if (func_8009C8AC(4) != 0) {
+                if (func_8009C8AC(ELEM_ELECTRIC) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -37,7 +37,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 3:
-                if (func_8009C8AC(8) != 0) {
+                if (func_8009C8AC(ELEM_EARTH) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -45,7 +45,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 4:
-                if (func_8009C8AC(0x10) != 0) {
+                if (func_8009C8AC(ELEM_WIND) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -53,7 +53,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 5:
-                if (func_8009C8AC(0x20) != 0) {
+                if (func_8009C8AC(ELEM_HOLY) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -61,7 +61,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 6:
-                if (func_8009C8AC(0x40) != 0) {
+                if (func_8009C8AC(ELEM_PSIONIC) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -69,7 +69,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 7:
-                if (func_8009C8AC(0x100) != 0) {
+                if (func_8009C8AC(ELEM_DEATH) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -77,7 +77,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 8:
-                if (func_8009C8AC(0x80) != 0) {
+                if (func_8009C8AC(ELEM_STATUS) != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -125,17 +125,17 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 33:
-                if (func_8009C8AC(1) != 0) {
+                if (func_8009C8AC(ELEM_FIRE) != 0) {
                     func_8009C994(g_BattleCurrentEnemy, packet);
                 }
                 break;
             case 34:
-                if (func_8009C8AC(2) != 0) {
+                if (func_8009C8AC(ELEM_FROST) != 0) {
                     func_8009C994(g_BattleCurrentEnemy, packet);
                 }
                 break;
             case 35:
-                if (func_8009C8AC(4) != 0) {
+                if (func_8009C8AC(ELEM_ELECTRIC) != 0) {
                     func_8009C994(g_BattleCurrentEnemy, packet);
                 }
                 break;

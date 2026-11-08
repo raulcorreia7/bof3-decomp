@@ -16,8 +16,8 @@ MATCH s16 func_800A4294(s32 input_kind) {
     }
     kind_mask    = D_801CA71C[g_BattleActionId].mask;
     mod          = 100;
-    element_mask = kind_mask & 0x1FF;
-    if ((kind_mask & 0x1Fu) != 0u) {
+    element_mask = kind_mask & ELEM_ALL;
+    if ((kind_mask & (ELEM_FIRE | ELEM_FROST | ELEM_ELECTRIC | ELEM_EARTH | ELEM_WIND)) != 0u) {
         mod = func_800A2AE0((*(u8*)&g_BattleTarget), element_mask);
     }
     mod     = (((base / input_kind) * D_800B498C[RANDOM_MASK(7)]) * mod) / 10000;
