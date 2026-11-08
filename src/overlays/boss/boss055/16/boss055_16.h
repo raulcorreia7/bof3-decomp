@@ -50,6 +50,12 @@ void func_800C2ECC(void);
 void func_800C2FA4(void);
 void func_800C3284(void);
 
+void func_800C227C(void);
 void func_800C2340(u8 arg0, u8 index, u8 value);
+
+extern u8  D_80146375;
+extern u16 D_801463C0;
+extern u8  D_801CA718[][20];
+extern Callback D_800C35D8[];
 
 #endif
