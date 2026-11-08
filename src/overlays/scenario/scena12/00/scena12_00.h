@@ -20,7 +20,8 @@ extern Callback  D_801FD190[];
 extern Callback  D_801FD198[];
 extern Callback  D_801FD1B8[];
 extern Callback  D_801FD1C4[];
-extern SceneFunc D_801FD1EC[];
+/* D_801FD1EC */
+extern SceneFunc g_SceneActorDispatch[];
 
 extern union {
     u8  bytes[4];

@@ -28,6 +28,7 @@ void Scene_ClearWorkRows(void);
 s32  func_801F75BC(void);
 void func_801F76D0(void);
 
-extern SceneFunc D_801FE434[];
+/* D_801FE434 */
+extern SceneFunc g_SceneActorDispatch[];
 
 #endif

@@ -2386,17 +2386,9 @@ MATCH void func_801FC3A0(void) {
 }
 
 /* The scenario entity-handler table, indexed by byte 0x7A of the entity record. */
-static SceneFunc D_801FCA84[] = {(SceneFunc)func_801FC810, (SceneFunc)Scene_ClearParty};
+static SceneFunc g_SceneActorDispatch[] = {(SceneFunc)func_801FC810, (SceneFunc)Scene_ClearParty};
 
-/* func_801FC7D0 */
-MATCH void Scene_DispatchActor(void* entity) { /* func_801FC7D0 */
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FCA84[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FC810(void) {
 }

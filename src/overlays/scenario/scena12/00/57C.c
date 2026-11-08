@@ -161,14 +161,7 @@ INCLUDE_ASM(func_801FAE04);
 
 INCLUDE_ASM(func_801FB864);
 
-MATCH void func_801FC574(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FD1EC[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FC5B4(void) {
 }

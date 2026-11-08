@@ -28,7 +28,8 @@ void func_801F7568(void);
 extern u8 D_801FBF78[];
 
 extern u8        D_801FBF98[];
-extern SceneFunc D_801FBFB8[];
+/* D_801FBFB8 */
+extern SceneFunc g_SceneActorDispatch[];
 
 /* Reserve two actor slots and start the same pair of scripts on them; the
  * second script sits 0x10 bytes after the first. Every change must verify

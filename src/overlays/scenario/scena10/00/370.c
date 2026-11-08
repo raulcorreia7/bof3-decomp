@@ -143,14 +143,7 @@ MATCH u16 func_801FD3C0(void) {
     SCENA10_PARTY_LOOKUP(3, D_801FE970, D_801FE974, 0xFFFF);
 }
 
-MATCH void func_801FD464(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FE97C[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FD4A4(void) {
     Game_SetScriptActive();

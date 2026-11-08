@@ -268,14 +268,7 @@ MATCH void func_801F9CFC(void) {
     g_AreaCameraHeight += offset * 4;
 }
 
-MATCH void func_801F9D48(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FA224[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH s32 func_801F9D88(void* entity, void* flags) {
     SYS_SetFlag(flags, 0);

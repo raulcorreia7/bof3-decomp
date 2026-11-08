@@ -485,14 +485,7 @@ INCLUDE_ASM(func_801FD704);
 
 INCLUDE_ASM(func_801FDF84);
 
-MATCH void func_801FE018(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FE9C0[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FE058(void) {
     g_ScriptVars[0] = 0;

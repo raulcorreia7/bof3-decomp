@@ -276,14 +276,7 @@ MATCH void Scene_RestorePalette(void) {
 
 INCLUDE_ASM(func_801FB1B4);
 
-MATCH void func_801FB350(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FBFB8[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FB390(void* entity) {
     ((Actor*)entity)->unk_7E = (((Actor*)entity)->unk_7E + 1);

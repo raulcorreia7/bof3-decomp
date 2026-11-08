@@ -2929,6 +2929,7 @@ Scene_DrawTriangle = { addr = 0x801F85A8, type = "func", source = "draws one gre
 Scene_DispatchActor = { addr = 0x801FC7D0, type = "func", source = "Entry_04 of the scena00 handler block, dispatches the entity through D_801FCA84 by byte 0x7A of the entity record." }
 Scene_CheckStepTrigger = { addr = 0x801FC818, type = "func", source = "Entry_08 of the scena00 handler block: Area_IsStepBlocked passes its handler_x and a nonzero result blocks the step; it starts scripted scenes by g_SceneState.state_04 at x 0x2B in area 2 and x 0x14 in area 24." }
 Scene_ClearParty = { addr = 0x801FC8FC, type = "func", source = "Resets the party to Whelp: streams the Whelp EMI family, sets the field and battle orders to 0xFF and g_Game.party_size to 0, sets the low three bits of the menu flags and joins CHAR_ID_WHELP with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801FCA84, source = "scenario actor dispatch table" }
 g_SceneFx = { addr = 0x801FCA90, source = "Func_801FC01C seeds and func_801FC3A0 steps the 30 slot by 12 cell sample effect." }
 
 ["emi/scenario/scena01/00"]
@@ -2950,19 +2951,24 @@ Actor_Reveal = { addr = 0x801F78E0, type = "func", source = "Keeps the actor slo
 Actor_FreePaletteFades2 = { addr = 0x801F7A14, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work; same bytes as Actor_FreePaletteFades at 0x801F7334." }
 Actor_TrackFocus = { addr = 0x801F8640, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
 GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
+Scene_DispatchActor = { addr = 0x801FC46C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "Starts the area message of the given index, switches the game state to 2 and sets the script-active flag." }
 Party_JoinNinaYoung = { addr = 0x801FCEDC, type = "func", source = "Adds Nina Young to the party." }
 Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "Removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 g_SceneEntityDispatch = { addr = 0x801FCF24, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FD00C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena04/00"]
 Scene_DispatchEntity = { addr = 0x801F6D08, type = "func", source = "dispatches a scene entity by its callback index" }
+Scene_DispatchActor = { addr = 0x801F9D48, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "Starts the area message of the given index, switches the game state to 2 and sets the script-active flag." }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FA12C, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_JoinMember." }
 g_SceneEntityDispatch = { addr = 0x801FA180, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FA224, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena05/00"]
 Scene_DispatchEntity = { addr = 0x801F7400, type = "func", source = "dispatches a scene entity by its callback index" }
+Scene_DispatchActor = { addr = 0x801FCA58, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinMomoNinaPeco = { addr = 0x801FD298, type = "func", source = "builds battlers and joins Momo, young Nina and Peco to the party for the scene" }
 Party_JoinNinaYoung = { addr = 0x801FD30C, type = "func", source = "Adds Nina Young to the party." }
 Party_JoinMomo = { addr = 0x801FD32C, type = "func", source = "Adds Momo to the party." }
@@ -2976,8 +2982,10 @@ Scene_RemoveMomo = { addr = 0x801FD530, type = "func", source = "Removes charact
 Scene_RemovePeco = { addr = 0x801FD558, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveRyuYoung = { addr = 0x801FD580, type = "func", source = "removes young Ryu from the party and restages party palettes" }
 g_SceneEntityDispatch = { addr = 0x801FD5A8, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FD644, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena06/00"]
+Scene_DispatchActor = { addr = 0x801FCDD0, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Party_JoinMomo = { addr = 0x801FE11C, type = "func", source = "Adds Momo to the party." }
 Party_JoinPeco = { addr = 0x801FE13C, type = "func", source = "Adds Peco to the party." }
 Scene_JoinNina = { addr = 0x801FE15C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina." }
@@ -2985,29 +2993,35 @@ Scene_JoinNina3 = { addr = 0x801FE1D4, type = "func", source = "Streams the part
 Scene_RemoveGarr = { addr = 0x801FE2E4, type = "func", source = "Removes character 2 (CHAR_ID_GARR) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemovePeco = { addr = 0x801FE30C, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+g_SceneActorDispatch = { addr = 0x801FE42C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena07/00"]
 Scene_DispatchEntity = { addr = 0x801F6DD4, type = "func", source = "dispatches a scene entity by its callback index" }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+Scene_DispatchActor = { addr = 0x801FD3BC, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_JoinMember." }
 Scene_SetPartyRyuYoungNinaYoungGarr = { addr = 0x801FDB80, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Garr, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
 g_SceneEntityDispatch = { addr = 0x801FDD14, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FDF8C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena08/00"]
 Scene_DispatchEntity = { addr = 0x801F6F50, type = "func", source = "dispatches a scene entity by its callback index" }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+Scene_DispatchActor = { addr = 0x801FE018, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyWhelp = { addr = 0x801FE698, type = "func", source = "clears the party, streams archives and joins the Whelp with party palettes for the scene" }
 Scene_SetPartyRyuAdult = { addr = 0x801FE6DC, type = "func", source = "clears the party and joins adult Ryu for the scene" }
 Party_JoinGarr = { addr = 0x801FE740, type = "func", source = "Adds Garr to the party." }
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
 Party_RemoveGarr = { addr = 0x801FE874, type = "func", source = "Removes Garr from the party." }
 g_SceneEntityDispatch = { addr = 0x801FE894, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE9C0, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena09/00"]
 Scene_DispatchEntity = { addr = 0x801F7364, type = "func", source = "dispatches a scene entity by its callback index" }
 Scene_ClearWorkRows = { addr = 0x801F7574, type = "func", source = "clears 32 work rows at 0x800E5000 plus the task slot offset, zeroing each row header" }
+Scene_DispatchActor = { addr = 0x801FC5E4, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FDD7C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinMomo = { addr = 0x801FDDC8, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinAdultNina = { addr = 0x801FDE0C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
@@ -3022,9 +3036,11 @@ Scene_RemoveMomo = { addr = 0x801FE30C, type = "func", source = "Removes charact
 Scene_RemovePeco = { addr = 0x801FE334, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveRyuAdult = { addr = 0x801FE35C, type = "func", source = "removes adult Ryu from the party and restages the party palettes" }
 g_SceneEntityDispatch = { addr = 0x801FE384, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE434, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena10/00"]
 Scene_DispatchEntity = { addr = 0x801F6F70, type = "func", source = "dispatches a scene entity by its callback index" }
+Scene_DispatchActor = { addr = 0x801FD464, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size and joins the three in that order with Party_JoinMember, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult." }
 Party_JoinNinaAdult = { addr = 0x801FE3F8, type = "func", source = "Adds Nina Adult to the party." }
 Party_JoinMomo = { addr = 0x801FE418, type = "func", source = "Adds Momo to the party." }
@@ -3032,8 +3048,10 @@ Scene_RebuildRyuGarrParty = { addr = 0x801FE4F0, type = "func", source = "Clears
 Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "Copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs Party_LoadPalettes." }
 g_SceneEntityDispatch = { addr = 0x801FE80C, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE97C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena11/00"]
+Scene_DispatchActor = { addr = 0x801FA5B8, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FAB74, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinAdultNina = { addr = 0x801FABC0, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinMomo = { addr = 0x801FAC04, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
@@ -3048,10 +3066,12 @@ Scene_RemoveGarr = { addr = 0x801FAE20, type = "func", source = "Removes charact
 Scene_RemovePeco = { addr = 0x801FAE48, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveMomo = { addr = 0x801FAE70, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveAdultNina = { addr = 0x801FAE98, type = "func", source = "Removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+g_SceneActorDispatch = { addr = 0x801FAF24, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena12/00"]
 Scene_DispatchEntity = { addr = 0x801F717C, type = "func", source = "dispatches a scene entity by its callback index" }
 Menu_DrawHeaderBar = { addr = 0x801F765C, type = "func", source = "Draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952)." }
+Scene_DispatchActor = { addr = 0x801FC574, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FCDE0, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinAdultNina = { addr = 0x801FCE2C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
 Scene_JoinMomo = { addr = 0x801FCE70, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_LoadPalettes." }
@@ -3067,6 +3087,7 @@ Scene_RemovePeco = { addr = 0x801FD100, type = "func", source = "Removes charact
 Scene_RemoveMomo = { addr = 0x801FD128, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_RemoveAdultNina = { addr = 0x801FD150, type = "func", source = "Removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 g_SceneEntityDispatch = { addr = 0x801FD178, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FD1EC, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena13/00"]
 Scene_DispatchEntity = { addr = 0x801F6EAC, type = "func", source = "dispatches a scene entity by its callback index" }
@@ -3075,29 +3096,35 @@ Scene_DrawScreenTint = { addr = 0x801F7484, type = "func", source = "draws the s
 Scene_ReleaseActors = { addr = 0x801F7C24, type = "func", source = "clears two task-linked actor slots, frees their palette fade targets and clears the actor" }
 GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "Copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending." }
 Scene_RestorePalette = { addr = 0x801FB164, type = "func", source = "copies 16 palette words from 0x80033800 to the graphics palette destination and marks the palette pending" }
+Scene_DispatchActor = { addr = 0x801FB350, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultPecoMomo = { addr = 0x801FBB78, type = "func", source = "Streams the EMI family for adult Ryu, Momo and Peco, empties g_Game.party_size and joins adult Ryu, Peco then Momo with Party_JoinMember; the join order differs from the stream order." }
 Scene_LoadPartyRyuAdult = { addr = 0x801FBC88, type = "func", source = "loads the adult Ryu, Momo and Nina archives, empties the party and joins adult Ryu" }
 Scene_SetPartyRyuAdultMomoNinaAdult = { addr = 0x801FBD84, type = "func", source = "Streams the EMI family for adult Ryu, Momo and adult Nina, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
 Scene_JoinRei = { addr = 0x801FBE98, type = "func", source = "joins Rei to the party and restages the party palettes" }
 Scene_JoinGarr = { addr = 0x801FBEC0, type = "func", source = "joins Garr to the party and restages the party palettes" }
 g_SceneEntityDispatch = { addr = 0x801FBEF0, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FBFB8, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena14/00"]
+Scene_DispatchActor = { addr = 0x801FB37C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultReiNinaAdult = { addr = 0x801FBD2C, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size and joins adult Ryu, Rei then adult Nina with Party_JoinMember, without the palette restage and in a different join order than Scene_SetPartyRyuAdultNinaAdultRei." }
 Scene_SetPartyRyuAdultReiPeco = { addr = 0x801FBD78, type = "func", source = "Streams the EMI family for adult Ryu, Rei and Peco, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
 Scene_SetPartyRyuAdultMomoPeco = { addr = 0x801FBDC4, type = "func", source = "Streams the EMI family for adult Ryu, Momo and Peco, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
 Scene_SetPartyRyuAdultGarrPeco = { addr = 0x801FC020, type = "func", source = "Streams the EMI family for adult Ryu, Garr and Peco, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FC074, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FC22C, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+g_SceneActorDispatch = { addr = 0x801FC468, source = "scenario actor dispatch table" }
 ["emi/scenario/scena15/00"]
 Scene_DispatchEntity = { addr = 0x801F6F40, type = "func", source = "dispatches a scene entity by its callback index" }
 Scene_InitTaskArea = { addr = 0x801F6F7C, type = "func", source = "sets the task screen position and timer, clears the work column and advances the task mode" }
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "Clears one byte of each row in the actor window." }
 Scene_ClearActor = { addr = 0x801F9000, type = "func", source = "clears the current actor" }
+Scene_DispatchActor = { addr = 0x801FDD80, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowEntityMessage = { addr = 0x801FDDC0, type = "func", source = "starts the entity callback-indexed area message for the current desert camp area and enters the message state" }
 Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Garr, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
 g_SceneEntityDispatch = { addr = 0x801FE57C, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE6EC, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena16/00"]
 GFX_CopyPaletteCapped = { addr = 0x801F83B0, type = "func", source = "Copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending." }
@@ -3107,16 +3134,22 @@ Scene_ClearParty = { addr = 0x801F84AC, type = "func", source = "Resets the part
 Scene_EnterSaveArea = { addr = 0x801F7750, type = "func", source = "resets the palette, enables area drawing and requests the end-game save area, then advances the scene mode" }
 Scene_StartEndingXa = { addr = 0x801F80CC, type = "func", source = "starts XA stream 8, resets the stream counters and advances the scene step" }
 Scene_WaitEndingXa = { addr = 0x801F8110, type = "func", source = "waits for the ending XA stream and scene ready state, then starts the long fade out and advances the scene step" }
+Scene_DispatchActor = { addr = 0x801F887C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_RunSaveMenu = { addr = 0x801F9490, type = "func", source = "replaces the callback with a loop that resets menu panel tasks and dispatches the save menu step table" }
 Scene_UpdateSaveMenu = { addr = 0x801F9654, type = "func", source = "updates menu panel tasks and dispatches the shop step" }
 Scene_ExitToTitle = { addr = 0x801F967C, type = "func", source = "clears scene script variables, exits sound and replaces the callback with the frontend start" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801F97D8, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena18/00"]
+Scene_DispatchActor = { addr = 0x801F6CAC, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D04, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801F6D7C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena19/00"]
+Scene_DispatchActor = { addr = 0x801F6D10, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D68, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801F6DE0, source = "scenario actor dispatch table" }
 
 ["emi/world00/area000/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
