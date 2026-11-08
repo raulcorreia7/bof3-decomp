@@ -4781,7 +4781,7 @@ g_BattlePanelWidths = { addr = 0x801462FC, source = "Widths of the battle panel 
 g_BattleCommandCount = { addr = 0x80146303, type = "u8", source = "Number of queued battle commands." }
 g_BattleSurprise = { addr = 0x80146324, type = "u8", source = "Surprise state of the battle." }
 g_BattleOptions = { addr = 0x80146325, type = "u8", source = "Battle option flags." }
-g_BattleDrops = { addr = 0x80146326, type = "BattleDrops", size = 0x3E, source = "Escape attempts, then the items the battle drops and how many of each; Battle_RollEnemyDrops fills it." }
+g_BattleDrops = { addr = 0x80146326, alias = true, source = "BattleDrops view of the battle outcome bytes: escape attempts, the drop count, and the dropped item ids and counts that Battle_RollEnemyDrops fills; g_BattleResult, g_BattleEventFlags and the reward words sit inside it." }
 g_BattleResult = { addr = 0x80146328, type = "u8", source = "Battle result flags." }
 g_BattleEventFlags = { addr = 0x80146329, type = "u8", source = "Flags of the battle events that fired." }
 g_BattleRewardExp = { addr = 0x8014632C, type = "u32", source = "Experience gained in the battle." }
