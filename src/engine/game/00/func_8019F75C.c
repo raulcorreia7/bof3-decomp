@@ -21,5 +21,5 @@ MATCH void func_8019F75C(void) {
     g_Task->script = MEM_PTR(u8, 0x800F0800u);
     func_8019D648();
     func_8019D9C0();
-    g_Task->timer = 0x10;
+    g_Task->timer = 16;
 }

@@ -13,9 +13,9 @@ MATCH void func_801ABBA8(void* sub, s32 route) {
     slot   = route & BYTE_MASK;
     rate   = g_RouteSpeedScale[((u8*)sub)[4]];
     if ((masked == 2) || (masked == 6)) {
-        g_Task->timer = 0x20;
+        g_Task->timer = 32;
     } else {
-        g_Task->timer = 0x10;
+        g_Task->timer = 16;
     }
     g_Task->timer = (g_Task->timer / (rate & BYTE_MASK));
     g_Task->vx    = g_FacingOffsets[slot].x * rate;
