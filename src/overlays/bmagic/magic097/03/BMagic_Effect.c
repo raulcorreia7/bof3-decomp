@@ -23,25 +23,8 @@ INCLUDE_ASM(func_801EEFC8);
 // hint: same shape as magic093 801EF108: retail holds g_Task in a0 and indexes the enemy table via v1 (base added last); enemy[idx], idx local and (u8*)base + idx*stride forms did not match
 INCLUDE_ASM(func_801EF1A4);
 
-MATCH void func_801EF324(void) {
-    u8 count;
-
-    g_Task->param.unk_0B += 1;
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
-    if (!(count & BYTE_MASK)) {
-        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            func_800A9820((g_Task->unk_03 + 3) & BYTE_MASK);
-            GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
-            func_800AF814((g_Task->unk_03 + 3) & BYTE_MASK);
-        } else {
-            func_800A9820(g_Task->unk_03);
-            GFX_FreePaletteFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
-            func_800AF814(g_Task->unk_03);
-        }
-        g_Task->header.step += 1;
-    }
-}
+/* func_801EF324 */
+#include "overlays/bmagic/Effect_ReleaseTarget.h"
 
 #include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
 

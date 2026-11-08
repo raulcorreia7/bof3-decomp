@@ -3,5 +3,5 @@
 MATCH void func_800C2CD4(void) {
     Callback steps[2] = {func_800C2D2C, func_800C2E04};
 
-    steps[TASK_BYTES[2]]();
+    steps[g_Task->header.step]();
 }

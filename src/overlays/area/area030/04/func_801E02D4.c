@@ -15,7 +15,7 @@ MATCH bool func_801E02D4(u8 current_byte, u8 target_byte) {
     /* FAKE: retail evaluates the threshold before the scratch read. */
     FAKE_BARRIER();
     /* FAKE: retail reads the byte at +0x0A signed (lb). */
-    distance = *(s8*)&TASK_BYTES[0x0A] - current_byte;
+    distance = (s8)g_Task->unk_0A - current_byte;
     distance = ABS(distance);
 
     /* FAKE: holds the masked remainder out of the abs branch delay slot. */

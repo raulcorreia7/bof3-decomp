@@ -1,4 +1,5 @@
 #include "shop_00.h"
+#include "area/spad.h"
 #include "area/map.h"
 
 /* UI-owner row field behind the scratchpad row pointer. */
@@ -46,7 +47,7 @@ MATCH void func_801D62DC(void) {
             do {
                 TASK_SET(((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE));
                 func_801C1254(g_Game.members[i].chr.character_id, i);
-                Actor_SelectScript(TASK_BYTES[8]);
+                Actor_SelectScript(g_Task->direction_08);
                 offset                           = i * 0x10 + base;
                 ((ShopSelection*)g_Task)->unk_34 = FIELD(s32, &D_801E537C, offset);
                 ((ShopSelection*)g_Task)->unk_38 = FIELD(s32, &D_801E5380, offset);

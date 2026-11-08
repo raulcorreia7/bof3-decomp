@@ -28,6 +28,6 @@ MATCH void Actor_TrackFocus(void) {
     other                  = SP_REF(u16, 0x36);
     work->timer            = 0;
     item                   = g_Task;
-    FIELD(u16, work, 0x30) = other;
+    work->screen_y         = other;
     item->header.mode += 1;
 }
