@@ -9,9 +9,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC80);
 
 MATCH void func_801EEDDC(void) {
-    D_80145BD6[g_Task->timer].red_offset   = g_Task->unk_09 * 2;
-    D_80145BD6[g_Task->timer].green_offset = g_Task->unk_09 * 2;
-    D_80145BD6[g_Task->timer].blue_offset  = g_Task->unk_09 * 2;
+    g_PaletteFades[g_Task->timer].offset.red   = g_Task->unk_09 * 2;
+    g_PaletteFades[g_Task->timer].offset.green = g_Task->unk_09 * 2;
+    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->unk_09 * 2;
     if (g_Task->unk_09 >= 6) {
         g_Task->header.mode++;
     }

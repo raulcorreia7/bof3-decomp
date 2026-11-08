@@ -30,8 +30,8 @@ MATCH void func_801EEFA0(void) {
     STACK_PADS(u8, 8);
     u8 timer;
 
-    D_80145BD4[g_Task->timer].red_offset -= 1;
-    D_80145BD4[g_Task->timer].green_offset -= 1;
+    g_PaletteFades[g_Task->timer].offset.red -= 1;
+    g_PaletteFades[g_Task->timer].offset.green -= 1;
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
