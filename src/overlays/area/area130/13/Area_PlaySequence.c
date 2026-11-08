@@ -1,5 +1,6 @@
 #include "area130_13.h"
 
-MATCH void func_801F3760(void) {
+/* func_801F3760 */
+MATCH void Area_PlaySequence(void) {
     SND_PlaySequence(0, 1, 0x64, 0x64);
 }

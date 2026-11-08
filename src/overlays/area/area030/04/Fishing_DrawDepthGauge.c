@@ -42,6 +42,6 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
         if (COORD_INT(g_ActorSlots[0].pos.z) <= 0) {
             y = 180 - COORD_INT(g_ActorSlots[0].pos.z) / 32;
         }
-        func_801D18CC((panel_x + 105), y, 2);
+        Fishing_DrawIcon((panel_x + 105), y, 2);
     }
 }

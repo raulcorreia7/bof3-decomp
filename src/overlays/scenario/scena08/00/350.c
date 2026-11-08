@@ -562,14 +562,16 @@ block_7:
 
 INCLUDE_ASM(func_801FE2A0);
 
-MATCH void func_801FE698(void) {
+/* func_801FE698 */
+MATCH void Scene_SetPartyWhelp(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_WHELP);
     Party_LoadPalettes();
 }
 
-MATCH void func_801FE6DC(void) {
+/* func_801FE6DC */
+MATCH void Scene_SetPartyRyuAdult(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);

@@ -10,7 +10,8 @@ MATCH void func_801F6F40(void) {
     D_801FE57C[entity[1]]();
 }
 
-MATCH void func_801F6F7C(void) {
+/* func_801F6F7C */
+MATCH void Scene_InitTaskArea(void) {
     Actor* work;
 
     work           = g_Task;
@@ -282,7 +283,8 @@ MATCH void func_801F8EA8(void) {
 
 INCLUDE_ASM(func_801F8F4C);
 
-MATCH void func_801F9000(void) {
+/* func_801F9000 */
+MATCH void Scene_ClearActor(void) {
     Actor_Clear();
 }
 
@@ -363,7 +365,8 @@ MATCH void func_801FDD80(void* entity) {
     handler(entity, g_SceneFlags);
 }
 
-MATCH void func_801FDDC0(void* entity) {
+/* func_801FDDC0 */
+MATCH void Scene_ShowEntityMessage(void* entity) {
     u8 message;
 
     message = D_801FE71C[((Actor*)entity)->callback_index];

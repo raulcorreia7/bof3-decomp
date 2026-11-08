@@ -92,7 +92,7 @@ MATCH void func_801F7248(void) {
         g_Task->timer       = 30;
         g_Task->header.mode = 2;
     }
-    func_801F7484();
+    Scene_DrawScreenTint();
     func_801F7568();
 }
 
@@ -106,7 +106,7 @@ MATCH void func_801F72A0(void) {
         g_Task->timer       = 30;
         g_Task->header.mode = 3;
     }
-    func_801F7484();
+    Scene_DrawScreenTint();
     func_801F7568();
 }
 
@@ -117,11 +117,12 @@ MATCH void func_801F7444(void) {
     if (g_ScriptVars[0] == 0x35) {
         Actor_Clear();
     }
-    func_801F7484();
+    Scene_DrawScreenTint();
     func_801F7568();
 }
 
-MATCH void func_801F7484(void) {
+/* func_801F7484 */
+MATCH void Scene_DrawScreenTint(void) {
     Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & HALF_MASK));
 }
 
@@ -193,7 +194,8 @@ INCLUDE_ASM(func_801F7958);
 
 INCLUDE_ASM(func_801F7A1C);
 
-MATCH void func_801F7C24(void) {
+/* func_801F7C24 */
+MATCH void Scene_ReleaseActors(void) {
     g_Actors[g_Task->unk_03].header.flags = 0;
     g_Actors[g_Task->unk_04].header.flags = 0;
     GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_03]);
@@ -264,7 +266,8 @@ INCLUDE_ASM(func_801FAFA0);
 
 #include "overlays/scenario/GFX_CopyPaletteCapped.h"
 
-MATCH void func_801FB164(void) {
+/* func_801FB164 */
+MATCH void Scene_RestorePalette(void) {
     s32 i;
 
     i = 0;
@@ -337,7 +340,8 @@ MATCH void func_801FBBC4(void) {
     Party_LoadPalettes();
 }
 
-MATCH void func_801FBC88(void) {
+/* func_801FBC88 */
+MATCH void Scene_LoadPartyRyuAdult(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0U);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
@@ -380,12 +384,14 @@ MATCH void func_801FBDD8(void) {
     Party_LoadPalettes();
 }
 
-MATCH void func_801FBE98(void) {
+/* func_801FBE98 */
+MATCH void Scene_JoinRei(void) {
     Party_JoinMember(CHAR_ID_REI);
     Party_LoadPalettes();
 }
 
-MATCH void func_801FBEC0(void) {
+/* func_801FBEC0 */
+MATCH void Scene_JoinGarr(void) {
     Party_JoinMember(CHAR_ID_GARR);
     Party_LoadPalettes();
 }

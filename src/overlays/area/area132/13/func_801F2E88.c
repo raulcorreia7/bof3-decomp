@@ -1,7 +1,7 @@
 #include "area132_13.h"
 
 MATCH void func_801F2E88(void) {
-    s32 result;
+    u8* result;
     u8  count;
 
     if (!(g_Task->timer & 3)) {

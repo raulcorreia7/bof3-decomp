@@ -68,6 +68,6 @@ MATCH void func_801D6128(void) {
     last = BANNER_INDEX;
     last -= 1;
     if (D_801E2026[last * 3] != 0) {
-        func_801D18CC(252, BANNER_FRAME + 112, 1);
+        Fishing_DrawIcon(252, BANNER_FRAME + 112, 1);
     }
 }

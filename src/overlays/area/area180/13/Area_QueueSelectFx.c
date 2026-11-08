@@ -1,5 +1,6 @@
 #include "area180_13.h"
 
-MATCH void func_801F3328(void) {
+/* func_801F3328 */
+MATCH void Area_QueueSelectFx(void) {
     SND_QueueSelectionFx(0x201);
 }

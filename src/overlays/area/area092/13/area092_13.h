@@ -6,4 +6,12 @@
 
 #include "overlays/area/world02.h"
 
+extern u16 D_801F41BC[];
+extern u16 D_801F41C0[];
+extern u8  D_80146865;
+extern u8  D_80146866;
+extern u8  D_80146867;
+extern u8  D_80146874;
+extern u8  D_80146875;
+
 #endif
