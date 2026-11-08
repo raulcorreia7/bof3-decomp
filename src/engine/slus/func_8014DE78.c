@@ -4,6 +4,7 @@
  */
 /* nonmatching unmeasured: tried other - self distance order; split dist locals; range reuse; ternary abs; row pointer.
  * resume: a form that writes each distance into the self-field register. */
+/* An s32 index and pinned range or distance change register allocation; none restores the first difference at +0x24. */
 #ifdef NON_MATCHING
 NON_MATCHING s8 func_8014DE78(void) {
     Actor* self;

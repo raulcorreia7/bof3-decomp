@@ -13,6 +13,7 @@
  * branch until C89 matches or provenance supplies proof; the model below
  * documents the inferred behavior.
  */
+/* Pinned context and scratchpad pointers produce 0x38 bytes; addiu replaces retail ori at +0x04. */
 #ifdef NON_MATCHING
 /* INFERRED C model: initialises the resumable stream decoder described by
  * EMI_DecodeStep.
