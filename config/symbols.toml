@@ -1733,9 +1733,9 @@ Actor_Clear = { addr = 0x80196070, type = "func", source = "Frees the current g_
 Actor_Free = { addr = 0x801960C0, type = "func", source = "Frees g_ActorSlots[record_index]: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
 Actor_ClearAll = { addr = 0x8019611C, type = "func", source = "Frees every one of the ACTOR_SLOT_COUNT g_ActorSlots entries; Game_StartSelectedGame calls it before the next game." }
 Actor_Create = { addr = 0x8019615C, type = "func", source = "Claims a free g_ActorSlots entry for a spawn request: sets header.flags to 1 and fills type, x and y (whole part and half cell), z from Area_SampleHeight and link from the request bytes 1 to 6; does nothing when no slot is free." }
-GFX_AllocPaletteFade = { addr = 0x8019651C, type = "func", source = "Claims the first free of 32 PaletteFade entries of D_80145BD4 for a target, fills its palette offsets and table index from the target, marks the palette cells it fades and returns its index, or 0xFF when all are active." }
-GFX_FreePaletteFade = { addr = 0x80196670, type = "func", source = "Releases one PaletteFade entry of D_80145BD4: frees its palette cells and restores the saved byte of its target." }
-GFX_FreePaletteFadeTarget = { addr = 0x80196718, type = "func", source = "Releases every PaletteFade entry of D_80145BD4 whose target is the given target." }
+GFX_AllocPaletteFade = { addr = 0x8019651C, type = "func", source = "Claims the first free of the 32 g_PaletteFades entries for a target, fills its red, green and blue offsets and table index from the target, marks the palette cells it fades and returns its index, or 0xFF when all are active." }
+GFX_FreePaletteFade = { addr = 0x80196670, type = "func", source = "Releases one g_PaletteFades entry: frees its palette cells and restores the saved byte of its target." }
+GFX_FreePaletteFadeTarget = { addr = 0x80196718, type = "func", source = "Releases every g_PaletteFades entry whose target is the given target." }
 GFX_MarkPaletteCells = { addr = 0x80196784, type = "func", source = "Marks the D_80145D54 palette cells a fade owns for a palette kind and a value, so no other fade uses them." }
 GFX_AllocPaletteCell = { addr = 0x801968BC, type = "func", source = "Returns the index of the first free palette cell of D_80145D54 for the requested palette kind." }
 GFX_FindPaletteCell = { addr = 0x80196B20, type = "func", source = "Returns the index of the palette cell of D_80145D54 that holds the given value." }
@@ -4731,6 +4731,7 @@ g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the 
 g_InputRepeatDelay = { addr = 0x80145AC6, source = "INPUT_GetRepeatedButtons reloads and decrements the repeat countdown" }
 g_InputRepeatButtons = { addr = 0x80145AC8, source = "INPUT_GetRepeatedButtons snapshots held buttons and tests them on repeat" }
 g_UiFormatBuffer = { addr = 0x80145AD4, source = "Buffer for formatted UI text." }
+g_PaletteFades = { addr = 0x80145BD4, type = "PaletteFade", size = 0x180, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
 g_SysCardSoftwareIoEvent = { addr = 0x80145E14, source = "SYS_InitCard opens SwCARD EvSpIOE and save_card.c tests it" }
 g_SysCardSoftwareTimeoutEvent = { addr = 0x80145E18, source = "SYS_InitCard opens SwCARD EvSpTIMOUT and save_card.c tests it" }
 g_SysCardSoftwareNewEvent = { addr = 0x80145E1C, source = "SYS_InitCard opens SwCARD EvSpNEW and save_card.c tests it" }
