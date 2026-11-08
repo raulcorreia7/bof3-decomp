@@ -58,5 +58,5 @@ MATCH void func_801D10AC(u32 message_id) {
                        g_WindowStyle);
     i = MASTER_MENU_TEXT_BANK + (message_id & HALF_MASK) * 2;
     UI_DrawText(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, 255, (u8*)(MEM(u16, i) + MASTER_MENU_TEXT_BANK));
-    Menu_DrawCursorSprite((g_MasterBannerLock << 5) + 0xF3, 0x15, 0);
+    Menu_DrawCursorSprite((g_MasterBannerLock << 5) + 243, 21, 0);
 }
