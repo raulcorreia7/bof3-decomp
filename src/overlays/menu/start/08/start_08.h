@@ -545,7 +545,8 @@ void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_k
 void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
-extern void func_801E0354(MenuPanelTask* task);
+/* func_801E0354 */
+extern void Menu_DrawAbilitiesPanel(MenuPanelTask* task);
 /* func_801E0A70 */
 extern void Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
@@ -602,7 +603,8 @@ s32         func_801E8C9C(u8 save_slot, u8 item_id, u8 record_value);
 void        func_801E8D58(void);
 /* func_801E8D60 */
 void        Menu_CharacterPanel(void);
-extern void func_801E8DB4(MenuPanelTask* task);
+/* func_801E8DB4 */
+extern void Menu_DrawCharacterPanel(MenuPanelTask* task);
 void        func_801E8EA8(void);
 void        func_801E8EE8(void);
 void        func_801E8F28(void);
@@ -773,7 +775,8 @@ void             func_801E6E18(s16 x, s16 y, s32 row, s32 shade, u8 blend);
 void             func_801E7000(void);
 extern s32       func_801E7348(void);
 extern void      func_801E77F0(void);
-void             func_801E9350(void);
+/* func_801E9350 */
+void             Menu_DrawCampIcons(void);
 void             func_801EAF18(void);
 void             func_801EAF58(void);
 extern u8        D_801EC3E0[]; /* 6-byte rows: entry count, then up to five entries */

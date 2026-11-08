@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH void func_801E9350(void) {
+/* func_801E9350 */
+MATCH void Menu_DrawCampIcons(void) {
     s32 i;
     u16 grow;
     u16 cur;

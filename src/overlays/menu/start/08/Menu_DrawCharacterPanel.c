@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH void func_801E8DB4(MenuPanelTask* task) {
+/* func_801E8DB4 */
+MATCH void Menu_DrawCharacterPanel(MenuPanelTask* task) {
     u8* table;
     u8* row;
 

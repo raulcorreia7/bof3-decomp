@@ -1521,6 +1521,7 @@ Boss_HandleBattleEvent2 = { addr = 0x800C1E44, type = "func", source = "Handles 
 Boss_ChooseBattleEnding2 = { addr = 0x800C1E4C, type = "func", source = "Chooses how the boss battle of boss036 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
 Boss_EndBattle2 = { addr = 0x800C1E98, type = "func", source = "Ends the boss battle of boss036 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 Boss_RunSubStep = { addr = 0x800C1EE4, type = "func", source = "Runs the sub-step handler that the actor step byte (byte 0x02) selects from the three callbacks at D_800C1804 in boss036." }
+Effect_AddActor = { addr = 0x800C1FA4, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set." }
 
 ["emi/boss/boss037/16"]
 Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss037: points its script at D_800C1990, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C199C, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
@@ -2183,6 +2184,7 @@ Shop_Equip = { addr = 0x801D3828, type = "func", source = "Swaps one equipment s
 SAVE_DispatchState = { addr = 0x801D46A4, type = "func", source = "Runs the save state handler selected by D_80148652 from the 21-entry table D_801E530C." }
 SAVE_DrawSlots = { addr = 0x801D67B0, type = "func", source = "Draws the visible rows of the shop stock list from g_SaveSlotFirst for g_SaveSlotCount rows, and the panel header." }
 SAVE_BuildSlotImage = { addr = 0x801D69E0, type = "func", source = "Builds the save image at D_801448D8: copies g_SceneState, the party order and the five-byte name, sums the image and stores the sum in D_800C1A70." }
+SAVE_FormatSlotInfo = { addr = 0x801D7080, type = "func", source = "Formats the play time and leader level line of a save slot." }
 Menu_SwapBytes = { addr = 0x801D7E08, type = "func", source = "Swaps the two bytes that two pointers address; the shop callers pass entries of the party order D_80144F5A and of D_801E6244." }
 Menu_DrawCharacterWindow = { addr = 0x801D826C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D86D4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
@@ -2420,6 +2422,7 @@ Menu_DrawClutStrip = { addr = 0x801DF21C, type = "func", source = "Draws the fiv
 Menu_DrawFilledPanel = { addr = 0x801DF410, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
 Menu_DrawWindowFrame = { addr = 0x801DF6EC, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
 Menu_DrawInventoryWindow = { addr = 0x801DFBF4, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
+Menu_DrawAbilitiesPanel = { addr = 0x801E0354, type = "func", source = "Draws the ability list window with cost and element." }
 Menu_DrawPanelFrame = { addr = 0x801E0848, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 Menu_DrawEquipChoiceWindow = { addr = 0x801E0A70, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 SAVE_DrawSlot = { addr = 0x801E11A8, type = "func", source = "Draws one row of the save file list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
@@ -2433,9 +2436,11 @@ Menu_DrawNameEntryGrid = { addr = 0x801E6490, type = "func", source = "Draws the
 Menu_DrawNameEntryControls = { addr = 0x801E6784, type = "func", source = "draws the name entry screen's command window: the OK, Del, Next and Back labels with the button icon beside each, the footer icons and the dot grid, framed by g_NameEntryControlsFrame" }
 SAVE_DrawSlots = { addr = 0x801E6C68, type = "func", source = "Draws the visible rows of the save file list and the panel header." }
 Menu_CharacterPanel = { addr = 0x801E8D60, type = "func", source = "panel mode 0 of the start menu: the character window with its portrait" }
+Menu_DrawCharacterPanel = { addr = 0x801E8DB4, type = "func", source = "Draws the character window and its icon." }
 Menu_ZennyPanel = { addr = 0x801E9140, type = "func", source = "panel mode 1 of the start menu: the zenny window" }
 Menu_PlayTimePanel = { addr = 0x801E9224, type = "func", source = "panel mode 2 of the start menu: the play time window" }
 Menu_CampIconsPanel = { addr = 0x801E9304, type = "func", source = "panel mode 3 of the start menu: the row of seven camp menu icons, the selected one grown" }
+Menu_DrawCampIcons = { addr = 0x801E9350, type = "func", source = "Draws the seven camp icons, the selected one enlarged." }
 Menu_TitlePanel = { addr = 0x801E9554, type = "func", source = "panel mode 4 of the start menu: the short header bar with a text label" }
 Menu_StatsPanel = { addr = 0x801E96CC, type = "func", source = "panel mode 5 of the start menu: the character stat panel" }
 Menu_EquipmentPanel = { addr = 0x801E98F8, type = "func", source = "panel mode 6 of the start menu: the equipment window" }
@@ -3229,6 +3234,7 @@ Area_DrawHud = { addr = 0x801F3A34, type = "func", source = "Draws the area HUD 
 Area_DrawGradientDiamond = { addr = 0x801F3E00, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
 Actor_SpawnRandomGroup = { addr = 0x801F40F0, type = "func", source = "Spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area033)." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4674, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F469C, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world00/area034/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3293,6 +3299,7 @@ Area_DrawHudValue = { addr = 0x801F40C4, type = "func", source = "Draws HUD spri
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "Spawns one to three actor records of random kind at the focus point and sets their distance." }
 Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F4768, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world01/area046/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3401,6 +3408,7 @@ Area_DrawHudValue = { addr = 0x801F40FC, type = "func", source = "Draws HUD spri
 Actor_SpawnRandomGroup = { addr = 0x801F41F4, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
 Actor_MoveByVelocity = { addr = 0x801F4560, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4778, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F47A0, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world01/area067/14"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3518,6 +3526,7 @@ Area_DrawHudBanner = { addr = 0x801F40F8, type = "func", source = "Draws the HUD
 Actor_SpawnRandomGroup = { addr = 0x801F41EC, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
 Actor_MoveByVelocity = { addr = 0x801F4558, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4770, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F4798, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world02/area088/13"]
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
@@ -3544,6 +3553,7 @@ Area_DrawHudBanner = { addr = 0x801F4C28, type = "func", source = "Draws the HUD
 Actor_SpawnRandomGroup = { addr = 0x801F4D1C, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
 Actor_MoveByVelocity = { addr = 0x801F5088, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
 Area_StepStreamSetDrawMode = { addr = 0x801F52A0, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F52C8, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world02/area090/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3695,6 +3705,7 @@ Area_DrawHudBanner = { addr = 0x801F40C8, type = "func", source = "Draws the HUD
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
 Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F4768, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world03/area116/13"]
 g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
@@ -3893,6 +3904,7 @@ Area_DrawGradientDiamond = { addr = 0x801F3E3C, type = "func", source = "Builds 
 Area_DrawHudBanner = { addr = 0x801F4034, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
 Actor_SpawnRandomGroup = { addr = 0x801F4128, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
 Area_StepStreamSetDrawMode = { addr = 0x801F46AC, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F46D4, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world04/area152/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3916,6 +3928,7 @@ Area_DrawGradientDiamond = { addr = 0x801F3D90, type = "func", source = "Builds 
 Area_DrawHudBanner = { addr = 0x801F3F88, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
 Actor_SpawnRandomGroup = { addr = 0x801F407C, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
 Area_StepStreamSetDrawMode = { addr = 0x801F4600, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+World_UpdateClouds = { addr = 0x801F4628, type = "func", source = "Drifts the cloud layer picked by the work row down the map and draws it over the map cells around it, with this image's tables of texture origin and cell size per layer." }
 
 ["emi/world04/area153/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
