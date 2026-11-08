@@ -486,13 +486,13 @@ MATCH s32 func_801F30EC(void) {
     return result;
 }
 
-#include "overlays/area/AREA_SPRITE_EXPAND_STEP.h"
+#include "overlays/area/Area_SpriteExpandStep.h"
 
 MATCH void func_801F31B4(void) {
     AREA_SPRITE_EXPAND_STEP(D_801F5B00);
 }
 
-#include "overlays/area/AREA_SPRITE_DRIFT_STEP.h"
+#include "overlays/area/Area_SpriteDriftStep.h"
 
 MATCH void func_801F3250(void) {
     AREA_SPRITE_DRIFT_STEP(D_801F5B00);
