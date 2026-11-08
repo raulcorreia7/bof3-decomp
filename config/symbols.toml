@@ -2915,6 +2915,7 @@ Scene_RemoveMomo = { addr = 0x801FD128, type = "func", source = "Removes charact
 Scene_RemoveAdultNina = { addr = 0x801FD150, type = "func", source = "Removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes." }
 
 ["emi/scenario/scena13/00"]
+Screen_DrawTint = { addr = 0x801F6FF8, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "Copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending." }
 Scene_JoinPartyRyuAdultPecoMomo = { addr = 0x801FBB78, type = "func", source = "Streams the EMI family for adult Ryu, Momo and Peco, empties g_PartySize and joins adult Ryu, Peco then Momo with Party_JoinMember; the join order differs from the stream order." }
 Scene_SetPartyRyuAdultMomoNinaAdult = { addr = 0x801FBD84, type = "func", source = "Streams the EMI family for adult Ryu, Momo and adult Nina, empties g_PartySize, joins the three in that order with Party_JoinMember and restages the party palettes." }
@@ -3563,6 +3564,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area108/14"]
+Screen_DrawTint = { addr = 0x801F3BA0, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 GFX_DrawShadedDisc = { addr = 0x801F3D90, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
 Message_ClearRequest = { addr = 0x801F4320, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
 Message_Clear = { addr = 0x801F4360, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
@@ -3779,6 +3781,7 @@ Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "Sets g_Mess
 g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area149/13"]
+Screen_DrawTint = { addr = 0x801F2DE0, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_PlaceAtFocus = { addr = 0x801F2EC4, type = "func", source = "Copies D_80147A8C, g_AreaFocusY and D_80147A94 into the actor position at bytes 0x34, 0x38 and 0x3C." }
 
@@ -4365,6 +4368,7 @@ Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "Zeroes the v
 Char_DrainFatigue = { addr = 0x801F6024, type = "func", source = "Adds 1 to the fatigue of each of the seven g_Characters while it is below 9 and rebuilds that character's stats with Char_RebuildStats." }
 
 ["emi/world04/area191/13"]
+Screen_DrawTint = { addr = 0x801F2E34, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Area_ResumeSceneAfterMessage = { addr = 0x801F2F40, type = "func", source = "Clears the message request; when the menu selection is idle sets the script-active flag, g_SceneState.state_04 to 1 and step_05 to 0x14." }
 Area_CloseTalk = { addr = 0x801F30DC, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }
 
