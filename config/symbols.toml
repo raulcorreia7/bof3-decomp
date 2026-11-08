@@ -376,7 +376,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Effect_PlayOnZeroTick = { addr = 0x801EEF10, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic046 (Firebreath)." }
 Effect_TickOnZeroTick = { addr = 0x801EF1A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic046 (Firebreath)." }
 Effect_DispatchStep = { addr = 0x801EF1F0, type = "func", source = "Runs the handler that header.step (byte 0x02) selects from the effect's handler table in magic046 (Firebreath)." }
-Effect_AddActor = { addr = 0x801EF2A8, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set in magic046 (Firebreath)." }
+Effect_AddActor = { addr = 0x801EF2A8, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set." }
 BMagic_AllocEffect = { addr = 0x801EFED0, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all effect slots are in use in magic046 (Firebreath)." }
 g_BMagicEffectModes = { addr = 0x801EFF34, source = "Handlers of magic046 (Firebreath), run by header.mode (byte 0x01)." }
 
@@ -1513,6 +1513,7 @@ Boss_HandleBattleEvent2 = { addr = 0x800C1E44, type = "func", source = "Handles 
 Boss_ChooseBattleEnding2 = { addr = 0x800C1E4C, type = "func", source = "Chooses how the boss battle of boss036 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
 Boss_EndBattle2 = { addr = 0x800C1E98, type = "func", source = "Ends the boss battle of boss036 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 Boss_RunSubStep = { addr = 0x800C1EE4, type = "func", source = "Runs the sub-step handler that the actor step byte (byte 0x02) selects from the three callbacks at D_800C1804 in boss036." }
+Effect_AddActor = { addr = 0x800C1FA4, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set." }
 
 ["emi/boss/boss037/16"]
 Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss037: points its script at D_800C1990, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C199C, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
