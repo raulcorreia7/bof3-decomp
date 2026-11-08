@@ -1,5 +1,5 @@
 #include "game_00.h"
 
-MATCH void func_8019883C(void) {
+MATCH void Game_ReturnFromAbilityMenu(void) {
     GameRunMapLoadHandshake();
 }

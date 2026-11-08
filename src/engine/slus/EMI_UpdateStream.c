@@ -44,7 +44,7 @@ MATCH void EMI_UpdateStream(void) {
             g_EmiStreamFlags = 0;
         }
     }
-    frame_counter = &D_80146490;
+    frame_counter = &g_EmiStreamIdleFrames;
     if ((s16)(*frame_counter)++ >= EMI_STREAM_TIMEOUT_FRAMES) {
         if (g_EmiStreamState == 1) {
             EMI_StartArchive();

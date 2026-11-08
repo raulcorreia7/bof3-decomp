@@ -1015,7 +1015,7 @@ segments:
       - [0xEBAC0, .rodata, data_80181AC0]
       - [0xEBC7C, .rodata, D_80181C7C]
       - [0xEBCA8, .rodata, data_80181CA8]
-      - [0xEBEB8, .rodata, D_80181EB8]
+      - [0xEBEB8, .rodata, g_BGMTracks]
       - [0xEC14C, .rodata, data_8018214C]
       - [0xEC1D0, .rodata, Actor_RunHandler]
       - [0xEC1E0, .data, data_801821E0]

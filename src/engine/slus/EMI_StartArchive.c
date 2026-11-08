@@ -8,10 +8,10 @@ MATCH void EMI_StartArchive(void) {
     s8           state;
     u32          lba;
 
-    read_progress  = &g_EmiStreamState;
-    *read_progress = 0;
-    lba            = g_EmiSectorCursor;
-    D_80146490     = 0;
+    read_progress         = &g_EmiStreamState;
+    *read_progress        = 0;
+    lba                   = g_EmiSectorCursor;
+    g_EmiStreamIdleFrames = 0;
     CdIntToPos(lba, (CdlLOC*)(&g_EmiStreamState + 0x2E4));
     D_80146492      = 3;
     g_EmiReadStatus = 0;

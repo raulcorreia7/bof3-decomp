@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-MATCH void func_801F22C8(void) {
+MATCH void Fairy_LoadCommu05(void) {
     if (D_80145E44 == 0 && g_FairyVillagePendingQueueCount == 0 && g_FairyVillageUpdateCount == 0) {
         g_SceneEventMode = SCENE_EVENT_MESSAGE;
     } else {

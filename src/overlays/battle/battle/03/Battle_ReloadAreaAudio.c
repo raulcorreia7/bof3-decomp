@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void func_801D7108(void) {
+MATCH void Battle_ReloadAreaAudio(void) {
     if (EMI_IsReady() != 0) {
         volatile u8* state = &g_Battle.phase.sub_step;
 

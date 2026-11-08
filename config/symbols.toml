@@ -3,6 +3,7 @@
 # reads. Every other symbol file is generated from this file.
 
 ["emi/battle/battle/03"]
+g_BGMTracks = { addr = 0x80181EB8, size = 0x294, source = "Music tracks: the BGM archive slot, SEP package and sequence of each track id." }
 s_BattleBattlerTemplateTails = { addr = 0x801EC048, alias = true, source = "row 0 turn.action_flags of s_BattleBattlerTemplates (+0x128); the tail global folded into the PartyMember rows in #503" }
 g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it; the turn_order member of g_Battle.", alias = true }
 g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back; the turn_cursor member of g_Battle.", alias = true }
@@ -1872,9 +1873,9 @@ s_PaletteSlotStrides = { addr = 0x801C7B00, size = 0x8, source = "Stride per pal
 g_GameCampMenuLoad = { addr = 0x801C7B08, size = 0xC, source = "3 handlers of the camp menu load, called by Game_RunCampMenuLoop in order." }
 g_GameStates = { addr = 0x801C7B14, size = 0x30, source = "12 game state handlers, called by Game_RunMainLoop and indexed by the game state." }
 g_GameMenuSubstates = { addr = 0x801C7B44, size = 0xC, source = "3 handlers of game state 3 (menu), indexed by g_GameEntrySubstate by Game_RunMenuState." }
-s_DirectionJitters = { addr = 0x801C7B50, size = 0x4, source = "Random offsets func_801976EC adds to the palette index when it picks a direction." }
+s_DirectionJitters = { addr = 0x801C7B50, size = 0x4, source = "Random offsets Game_ReturnFromMenu adds to the palette index when it picks a direction." }
 g_GameBattleSubstates = { addr = 0x801C7B54, size = 0x20, source = "8 handlers of game state 5 (battle), indexed by g_GameEntrySubstate by Game_RunBattleState." }
-s_BattleScrollCellSteps = { addr = 0x801C7B74, source = "g_BattleScrollDir selects the cell step func_80197AA4 adds to the target cell", size = 0x8 }
+s_BattleScrollCellSteps = { addr = 0x801C7B74, source = "g_BattleScrollDir selects the cell step Battle_LoadPartySprites adds to the target cell", size = 0x8 }
 g_GameShopSubstates = { addr = 0x801C7B7C, size = 0xC, source = "3 handlers of game state 7 (shop), indexed by g_GameEntrySubstate by Game_RunShopState." }
 g_GameFishingSubstates = { addr = 0x801C7B88, size = 0x10, source = "4 handlers of game state 8 (fishing), indexed by g_GameEntrySubstate by Game_RunFishingState." }
 g_MenuAbilityOpen = { addr = 0x801C7B98, size = 0xC, source = "3 handlers of game state 9 (ability menu), indexed by g_GameEntrySubstate by Game_RunAbilityMenuState." }
@@ -2021,7 +2022,7 @@ D_801CD77A = { addr = 0x801CD77A, size = 0x1, alias = true }
 s_BattleModeRecords = { addr = 0x801CD78C, size = 0xE0, source = "Four bytes per battle mode: the first is the battle options byte, and the seed is read by Battle_StartScripted and func_801BFE34." }
 D_801CD78D = { addr = 0x801CD78D, size = 0x1, alias = true }
 D_801CD78F = { addr = 0x801CD78F, size = 0x1, alias = true }
-D_801CD86C = { addr = 0x801CD86C, size = 0x54 }
+g_BossArchiveSlots = { addr = 0x801CD86C, size = 0x54 }
 D_801CD8C0 = { addr = 0x801CD8C0, size = 0x4 }
 D_801CD8C4 = { addr = 0x801CD8C4, size = 0x4 }
 D_801CD8C8 = { addr = 0x801CD8C8, size = 0x4 }
@@ -4885,6 +4886,7 @@ g_EmiStep = { addr = 0x8014646C, source = "EMI_NextEntry clears it; the payload 
 g_EmiReadStatus = { addr = 0x80146480, source = "EMI_StartArchive clears it; EMI_CdOnReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_UpdateStream tests it" }
 g_EmiNextSlot = { addr = 0x80146481, source = "EMI_LoadArchive clears it and EMI_CdOnReady passes it, then increments it, to EMI_NextEntry" }
 g_EmiRingSlot = { addr = 0x80146489, source = "Slot of the EMI sector ring." }
+g_EmiStreamIdleFrames = { addr = 0x80146490, source = "Frames since the EMI stream last made progress; EMI_StartArchive clears it and EMI_UpdateStream restarts the read at EMI_STREAM_TIMEOUT_FRAMES." }
 g_EmiStreamState = { addr = 0x80146494, source = "State of the EMI stream." }
 g_EmiRingStates = { addr = 0x801464A0, source = "EMI_CdOnReady tests bit 7 of the ring slot state; EMI_LoadToVram and EMI_LoadVabBody store 3 and 4" }
 g_EmiSlotSectors = { addr = 0x80146678, source = "Start sector of each EMI slot." }

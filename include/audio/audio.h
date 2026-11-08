@@ -11,5 +11,5 @@
  * engine's resident state. A game source reaches it through game.h. */
 
 /* D_80145029 */
-extern u8 g_SndBGMId; /* active row of the BGM selection table (D_80181EB8) */
+extern u8 g_SndBGMId; /* active row of the BGM selection table (g_BGMTracks) */
 #endif

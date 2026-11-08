@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_80197620(void) {
+MATCH void Game_LoadMenuOverlay(void) {
     u8 sep_index;
     u8 seq_index;
 
