@@ -27,8 +27,6 @@ INCLUDE_ASM(func_801EEEE8);
 
 #include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
 
-#include "overlays/bmagic/Effect_CountDownTimer.h"
-
 /* func_801EF0A0 */
 MATCH void Effect_CountDownTimer(void) {
     BMagic_CountDownEffectTimer(1);

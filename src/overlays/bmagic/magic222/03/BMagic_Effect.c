@@ -32,8 +32,6 @@ INCLUDE_ASM(func_801EEFC8);
 
 INCLUDE_ASM(func_801EF148);
 
-#include "overlays/bmagic/Effect_SwingCameraAngle.h"
-
 /* func_801EF274 */
 MATCH void Effect_SwingCameraAngle(void) {
     BMAGIC_SWING_CAMERA(22);

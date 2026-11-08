@@ -148,6 +148,56 @@ static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
     handlers[g_Task->header.mode]();
 }
 
+/* Add `step` to the work counter, count the effect timer down and finish the
+ * effect at zero. */
+static inline void BMagic_CountDownEffectTimer(u8 step) {
+    PartyBattler* work;
+    PartyBattler* active;
+    u8            count;
+
+    work = g_Task;
+    work->unk_09 += step;
+    work        = g_Task;
+    count       = work->timer - 1;
+    work->timer = count;
+    if (count == 0) {
+        active = BATTLE_ACTIVE_WORK;
+        active->param.unk_0B--;
+        func_801E5988();
+    }
+}
+
+/* Go to the next effect mode and reload the work timer while the ticker is
+ * under `limit`. */
+static inline void BMagic_AdvanceEffectStep(u8 limit) {
+    PartyBattler* work;
+
+    work = g_Task;
+    if (work->param.unk_0B < limit) {
+        work->unk_09      = 8;
+        work              = g_Task;
+        work->header.mode = work->header.mode + 1;
+    }
+}
+
+/* Swing the area camera pitch by 20 each tick, up on odd timer values and down
+ * on even ones; at zero, rest it at -60 degrees, reload the timer with
+ * `settle_ticks` and go to the next step. A statement macro: as an inline the
+ * function is two instructions longer. */
+#define BMAGIC_SWING_CAMERA(settle_ticks)          \
+    do {                                           \
+        if ((g_Task->unk_09 & 1) != 0) {           \
+            g_AreaCameraAngle.vx += 20;            \
+        } else {                                   \
+            g_AreaCameraAngle.vx -= 20;            \
+        }                                          \
+        if (--g_Task->unk_09 == 0) {               \
+            g_AreaCameraAngle.vx = -DEG(60);       \
+            g_Task->unk_09       = (settle_ticks); \
+            g_Task->header.step++;                 \
+        }                                          \
+    } while (0)
+
 typedef struct BMagicEffectFuncs {
     Callback handlers[6];
 } BMagicEffectFuncs;
