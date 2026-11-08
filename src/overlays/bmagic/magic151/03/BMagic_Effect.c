@@ -332,7 +332,7 @@ MATCH void Effect_SetActorMatrix_801F1DC0(void) {
 #define GLOW_RING_OUTER D_1F800000_HALF[2]
 #define GLOW_RING_SHADE D_1F800000_HALF[5]
 
-/* The inner half of the glow ring: a ring of 64 additive quads from the effect radius (byte 0x14 word) out
+/* The inner half of the glow ring: a ring of 64 additive quads from the effect radius (word 0x14) out
  * to 64 past it, brightest at its outer edge. */
 MATCH void BMagic_DrawGlowRingInner(void) {
     POLY_G4* prim;

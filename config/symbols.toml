@@ -962,6 +962,9 @@ Actor_Clear = { addr = 0x801F0588, type = "func", source = "Clears the effect wo
 g_BMagicEffectModes = { addr = 0x801F05D8, source = "Handlers of magic125 (DivineBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic126/03"]
+BMagic_DrawGlowRingInner = { addr = 0x801EF7A4, type = "func", source = "draws 16 additive POLY_G4 quads from the effect timer (byte 0x0A) to twice it, coloured from byte 0x09 at the outer edge, in magic126 (ShadowBreath)" }
+BMagic_DrawGlowRingOuter = { addr = 0x801EF438, type = "func", source = "draws 16 additive POLY_G4 quads from twice the effect timer (byte 0x0A) to three times it plus rand() & 3, coloured from byte 0x09 at the inner edge, in magic126 (ShadowBreath)" }
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEE70, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic126 (ShadowBreath)." }
 Effect_CopyBattlerCoords = { addr = 0x801EEFAC, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic126 (ShadowBreath)." }
