@@ -32,10 +32,6 @@ extern s8 D_801F5378[];
 /* Fairy_VillageInit in the commu overlay at the same address. */
 void func_801EECA4(void);
 
-/* The prim layer the tint is queued on. */
-#define SCREEN_TINT_LAYER 2U
-#define SCREEN_TINT_TPAGE getTPage(0, 2, 0x3C0, 0)
-
 void Screen_DrawTint(void);
 void func_801F36DC(s32 arg0, s32 arg1, s32 arg2);
 
