@@ -414,7 +414,7 @@ MATCH void func_801D5A48(void) {
     }
 }
 
-#include "overlays/commu/Fairy_AdvanceStep.h"
+#include "overlays/commu/Fairy_EndCommuScene.h"
 
 MATCH s32 func_801D5AD0(s32 limit) {
     s32 var_s1;
@@ -792,7 +792,7 @@ MATCH void func_801D7DD4(void) {
 }
 
 /* func_801D7E30 */
-MATCH void Fairy_AdvanceStep2(void) {
+MATCH void Fairy_EndCommuSceneEvent3(void) {
     COMMU_ADVANCE_STEP();
 }
 

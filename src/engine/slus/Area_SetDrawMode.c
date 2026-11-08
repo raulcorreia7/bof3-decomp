@@ -6,7 +6,7 @@
 MATCH void Area_SetDrawMode(void) {
     Actor* work;
 
-    work         = g_Task;
-    work->unk_29 = g_AreaDrawMode;
+    work             = g_Task;
+    work->draw_layer = g_AreaDrawMode;
     func_8014D290();
 }

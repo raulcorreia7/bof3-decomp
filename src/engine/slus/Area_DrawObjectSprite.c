@@ -1,10 +1,5 @@
 #include "engine/slus/slus.h"
 
-/* libgpu getTPage, and the texture-page layout of graph types 1 and 2. */
-#define getTPageStandard(tp, abr, x, y)                                                                               \
-    ((((tp) & 0x3) << 7) | (((abr) & 0x3) << 5) | (((y) & 0x100) >> 4) | (((x) & 0x3FF) >> 6) | (((y) & 0x200) << 2))
-#define getTPageN(tp, abr, x, y) ((((tp) & 0x3) << 9) | (((abr) & 0x3) << 7) | (((y) >> 3) & 0x60) | (((x) >> 6) & 0xF))
-
 /* Draws the entity of the scratchpad work record g_Task: culls it against the 0x1C0 by 0x170 screen window
  * (setting or clearing the hidden bit 0x80 of the first byte), then queues its sprite cells. Plain cells go to
  * func_8014CF9C; flipped or scaled cells become FT4 primitives here, with the size row from D_8017F53C.
@@ -51,7 +46,7 @@ MATCH void Area_DrawObjectSprite(void) {
         rect->y = 256;
         setWH(rect, 192, 256);
         SetDrawArea((DR_AREA*)(rect + 1), rect);
-        GFX_AddPrim(g_Task->unk_29, sizeof(DR_AREA));
+        GFX_AddPrim(g_Task->draw_layer, sizeof(DR_AREA));
         g_Task->screen_x += 0x340;
         y                = g_Task->screen_y + 0x10;
         g_Task->screen_y = y + (g_FrameBufferIndex ^ 1) * 0xF0;
@@ -153,16 +148,17 @@ MATCH void Area_DrawObjectSprite(void) {
             prim->b0 = tint;
             if (GetGraphType() == 1 || GetGraphType() == 2) {
                 page  = g_Task->unk_25 + bank;
-                tpage = getTPageN(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, (page / 16) << 8);
+                tpage = GFX_TPAGE_GRAPH_TYPE_1_2(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6,
+                                                 (page / 16) << 8);
             } else {
                 page  = g_Task->unk_25 + bank;
-                tpage = getTPageStandard(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6,
-                                         (page / 16) << 8);
+                tpage = GFX_TPAGE_STANDARD(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6,
+                                           (page / 16) << 8);
             }
             prim->tpage = tpage;
             prim->clut  = clut;
             SetSemiTrans(prim, (g_Task->header.flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);
-            GFX_AddPrim(g_Task->unk_29, sizeof(POLY_FT4));
+            GFX_AddPrim(g_Task->draw_layer, sizeof(POLY_FT4));
         }
     }
     if (g_Task->active_flags & 8) {
@@ -170,6 +166,6 @@ MATCH void Area_DrawObjectSprite(void) {
         g_GfxPrimCursor += sizeof(RECT);
         *rect = *(RECT*)(g_GfxCurrentDisplayFrame + 0x14);
         SetDrawArea((DR_AREA*)g_GfxPrimCursor, rect);
-        GFX_AddPrim(g_Task->unk_29, sizeof(DR_AREA));
+        GFX_AddPrim(g_Task->draw_layer, sizeof(DR_AREA));
     }
 }

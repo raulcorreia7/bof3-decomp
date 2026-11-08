@@ -75,7 +75,7 @@ MATCH void func_801D1184(void) {
     }
 }
 
-#include "overlays/commu/Fairy_AdvanceStep.h"
+#include "overlays/commu/Fairy_EndCommuScene.h"
 
 INCLUDE_ASM(func_801D1250);
 

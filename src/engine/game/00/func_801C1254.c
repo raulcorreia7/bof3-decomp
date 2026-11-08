@@ -44,7 +44,7 @@ found:
     g_Task->unk_26             = (slot * 0x50);
     g_Task->unk_2B             = D_80181B1C[key];
     work                       = g_Task;
-    work->unk_29               = g_AreaDrawMode;
+    work->draw_layer           = g_AreaDrawMode;
     value                      = FIELD(s32, work, 0x70u) & ~0xFF;
     FIELD(s32, work, 0x70u)    = value;
     next_5d                    = g_Task;
