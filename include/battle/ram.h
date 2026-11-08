@@ -252,7 +252,7 @@ extern u8            g_BattleEnemies[];
 extern PartyBattler* g_BattleEffectBattler;
 /* The current battler's enemy work row (the row at ENEMY_COMBATANT_BASE that
  * the battle mode is running). battle/battle/03 stores it when it arms a slot
- * (func_801E2170) and battle/battle/15 reads its cells (Battle_TestAICondition). */
+ * (func_801E2170) and battle/battle/15 reads its cells (Battle_FireEnemyEvents). */
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];

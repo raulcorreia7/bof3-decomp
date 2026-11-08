@@ -22,7 +22,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EF380.h"
 
-#include "overlays/bmagic/func_801EF47C.h"
+#include "overlays/bmagic/Effect_LaunchSparkle.h"
 
 #include "overlays/bmagic/func_801EF67C.h"
 

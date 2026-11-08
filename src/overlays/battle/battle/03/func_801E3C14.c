@@ -26,6 +26,8 @@ MATCH void func_801E3C14(void) {
     D_8014639C                             = g_Task;
     g_BattleTargetRecord                   = &self->turn;
     g_BattleTarget                         = slot;
+    /* Plain pointer stores, not field stores: retail keeps each one ahead
+     * of the next g_BattleTargetRecord reload. */
     *(s16*)((u8*)self + 0xF8)              = 0;
     *(s16*)((u32)g_BattleTargetRecord + 6) = 0;
     *((u8*)g_BattleTargetRecord + 8)       = 0;
@@ -71,7 +73,7 @@ MATCH void func_801E3C14(void) {
     pending = &g_BattlePendingStatus;
     g_BattleCurrentEnemy->status |= *pending;
     *pending = 0;
-    Battle_TestAICondition();
+    Battle_FireEnemyEvents();
     tail_work = g_BattleCurrentEnemy;
     if (tail_work->turn.hp_change > 0) {
         if (tail_work->hp == 0) {

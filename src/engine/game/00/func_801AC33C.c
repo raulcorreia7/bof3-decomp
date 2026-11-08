@@ -25,9 +25,9 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     reached_x                = 0;
     if ((g_Task->unk_18 + g_Task->unk_1C) == 0) {
-        g_CurrentActor->unk_80 =
+        g_CurrentActor->walk_dest_x =
             g_Task->pos.x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (arg1 & BYTE_MASK);
-        g_CurrentActor->unk_84 =
+        g_CurrentActor->walk_dest_y =
             g_Task->pos.y.fixed + (g_FacingSteps[g_Task->direction_08 & 7].y << 1) * (arg1 & BYTE_MASK);
         if ((ease_in & BYTE_MASK) != 0) {
             g_Task->unk_18 = step_x >> (arg1 & BYTE_MASK);
@@ -68,26 +68,26 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
         }
     }
     if (step_x < 0) {
-        if (!(g_Task->pos.x.fixed > g_CurrentActor->unk_80)) {
+        if (!(g_Task->pos.x.fixed > g_CurrentActor->walk_dest_x)) {
             reached_x = 1;
         }
     } else {
-        if (!(g_Task->pos.x.fixed < g_CurrentActor->unk_80)) {
+        if (!(g_Task->pos.x.fixed < g_CurrentActor->walk_dest_x)) {
             reached_x = 1;
         }
     }
     if (step_y < 0) {
-        if (!(g_Task->pos.y.fixed > g_CurrentActor->unk_84)) {
+        if (!(g_Task->pos.y.fixed > g_CurrentActor->walk_dest_y)) {
             reached_y = 1;
         }
     } else {
-        if (!(g_Task->pos.y.fixed < g_CurrentActor->unk_84)) {
+        if (!(g_Task->pos.y.fixed < g_CurrentActor->walk_dest_y)) {
             reached_y = 1;
         }
     }
     if ((reached_x & reached_y) != 0) {
-        g_Task->pos.x.fixed = g_CurrentActor->unk_80;
-        g_Task->pos.y.fixed = g_CurrentActor->unk_84;
+        g_Task->pos.x.fixed = g_CurrentActor->walk_dest_x;
+        g_Task->pos.y.fixed = g_CurrentActor->walk_dest_y;
         g_Task->vx          = step_x;
         g_Task->vy          = step_y;
         g_Task->unk_1C      = 0;
