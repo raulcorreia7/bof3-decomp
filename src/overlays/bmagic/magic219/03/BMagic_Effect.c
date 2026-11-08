@@ -49,7 +49,7 @@ MATCH void BMagic_DispatchMode(void) {
 }
 
 MATCH void func_801EF068(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801EFA04, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();

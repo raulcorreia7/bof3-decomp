@@ -100,7 +100,7 @@ MATCH void func_801EF880(void) {
 }
 
 MATCH void func_801EF8C4(void) {
-    g_ScriptBank = 0x800C3800u;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801F0078, g_Task->header.step);
     func_800AF764();
     g_ScriptBank = AREA_SCRIPT_BANK;

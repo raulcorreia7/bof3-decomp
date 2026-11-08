@@ -33,12 +33,12 @@ MATCH void func_801EEFA4(void) {
     Magic138Steps handlers;
 
     handlers     = D_801EEC10;
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1) {
         Area_AddActor();
     }
-    g_ScriptBank = 0x800D3800;
+    g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
 INCLUDE_ASM(func_801EF04C);
@@ -59,7 +59,7 @@ MATCH void func_801EF52C(void) {
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }
-    g_ScriptBank = 0x800D3800;
+    g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
 MATCH void func_801EF5D0(void) {
