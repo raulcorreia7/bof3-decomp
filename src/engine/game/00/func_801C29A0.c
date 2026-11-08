@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C29A0(s8 tuning_delta) {
+MATCH bool func_801C29A0(s8 tuning_delta) {
     s8  value;
     s16 next;
 

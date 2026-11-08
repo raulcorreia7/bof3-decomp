@@ -73,7 +73,7 @@ void  func_801A061C(void);
 /* func_801A18C8 */
 void  func_801A18C8(Actor* record);
 /* func_801A1AE4 */
-s32   func_801A1AE4(Actor* arg);
+bool  func_801A1AE4(Actor* arg);
 /* func_801A3A08 */
 void  func_801A3A08(void);
 /* func_801A3D1C */
@@ -146,11 +146,11 @@ s32   func_801B0E44(void);
 /* func_801B2D00 */
 s32   Actor_GetTurnStep(s32 selector);
 /* func_801B59B4 */
-s32   func_801B59B4(void);
+bool  func_801B59B4(void);
 /* func_801B5E58 */
 void  func_801B5E58(s32 cue_value);
 /* func_801B6610 */
-s32   func_801B6610(s16 map_x, s16 map_y);
+bool  func_801B6610(s16 map_x, s16 map_y);
 /* func_801BC400 */
 void  Area_ResetScene(void);
 /* func_801BDAB8 */
@@ -184,7 +184,7 @@ void  func_801C2438(void);
 /* func_801C24D0 */
 void  func_801C24D0(void);
 /* func_801C29A0 */
-s32   func_801C29A0(s8 tuning_delta);
+bool  func_801C29A0(s8 tuning_delta);
 /* func_801C2BEC */
 s32   func_801C2BEC(void);
 /* func_801C329C */

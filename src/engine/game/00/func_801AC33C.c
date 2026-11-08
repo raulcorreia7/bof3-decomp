@@ -2,7 +2,7 @@
 
 /* Plain scratchpad cell read; emits a fresh absolute load per use. */
 
-MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
+MATCH bool func_801AC33C(s32 ease_in, s32 arg1) {
     Actor* work;
     s32    step_x;
     s32    step_y;

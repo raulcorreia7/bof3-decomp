@@ -2,7 +2,7 @@
 
 /* The retail code never reads $a0 or $a1; the callers' arguments are leftover register values kept in the prototypes.
 */
-MATCH s32 func_801B6470(void) {
+MATCH bool func_801B6470(void) {
     u16 world_id;
     s32 index;
     s32 i;

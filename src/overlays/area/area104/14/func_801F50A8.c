@@ -1,6 +1,6 @@
 #include "area104_14.h"
 
-MATCH s32 func_801F50A8(void) {
+MATCH bool func_801F50A8(void) {
     if ((g_Game.flags & 0x2000) != 0) {
         return 0;
     }

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C6BB4(void) {
+MATCH bool func_801C6BB4(void) {
     EncounterEnemy* entry;
     Enemy*          kind;
     s16             index;

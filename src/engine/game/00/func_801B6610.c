@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801B6610(s16 map_x, s16 map_y) {
+MATCH bool func_801B6610(s16 map_x, s16 map_y) {
     s32 value;
     s32 index;
     s32 sentinel;

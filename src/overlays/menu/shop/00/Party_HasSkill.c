@@ -3,7 +3,7 @@
 /* File-local declarations: the two shop item-id tables are owned by the
  * executable overlay; this function searches them read-only. */
 
-MATCH s32 Party_HasSkill(s32 item_id) {
+MATCH bool Party_HasSkill(s32 item_id) {
     u8* row;
     u8  i;
     u8  j;

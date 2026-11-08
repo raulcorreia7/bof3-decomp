@@ -4,7 +4,7 @@
  * the slot must be free, its panel flag bit 0 set, its id equal to the active
  * selection, and the sub-check must report 0.
  */
-MATCH s32 func_800AA7A0(u8 slot) {
+MATCH bool func_800AA7A0(u8 slot) {
     s32 random_range;
     u8  sub;
 

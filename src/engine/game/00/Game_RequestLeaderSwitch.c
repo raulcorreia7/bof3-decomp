@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* func_801B5684 */
-MATCH s32 Game_RequestLeaderSwitch(void) {
+MATCH bool Game_RequestLeaderSwitch(void) {
     if (g_Game.party_size >= 2U) {
         if (!((g_Game.flags | g_Game.walk_flags) & AREA_WALK_ACCEPT_LOCK) &&
             (g_InputPressed & g_InputMasks[FIELD_INPUT_SWITCH_LEADER])) {

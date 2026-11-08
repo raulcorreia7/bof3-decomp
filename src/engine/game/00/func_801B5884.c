@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801B5884(void) {
+MATCH bool func_801B5884(void) {
     if (!(g_Game.flags & 0x2000) && (D_8014625C & g_InputMasks[FIELD_INPUT_VIEW])) {
         g_GameStateIndex = GAME_REQUEST_CAMERA_LOOK;
         func_801B5BDC(g_Task->direction_08);

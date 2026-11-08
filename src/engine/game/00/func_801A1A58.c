@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801A1A58(Actor* actor) {
+MATCH bool func_801A1A58(Actor* actor) {
     /* FAKE: entity base in a2. */
     FAKE_REG(Actor*, entity, "a2");
     /* FAKE: x delta in v0. */

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C2894(s8 tuning_delta) {
+MATCH bool func_801C2894(s8 tuning_delta) {
     /* FAKE: delta pinned to a2; retail keeps tuning_delta in a0 for block 1. */
     s8 next;
 

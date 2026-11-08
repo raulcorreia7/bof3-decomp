@@ -3,7 +3,7 @@
 /* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
  * direct %lo store form instead of materializing the array address. */
 
-s32 func_8009AC18(void);
+bool func_8009AC18(void);
 
 MATCH void func_80099568(void) {
     /* FAKE: stack_scratch reserves the retail 0x28 frame; no instruction

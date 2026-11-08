@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C7498(s32 from_x, s32 from_y, s32 to_x, s32 to_y, u8 reach, u8 other_reach) {
+MATCH bool func_801C7498(s32 from_x, s32 from_y, s32 to_x, s32 to_y, u8 reach, u8 other_reach) {
     s32 combined_limit;
     s32 extent;
     s32 delta_x;

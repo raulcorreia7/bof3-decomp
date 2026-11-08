@@ -3,7 +3,7 @@
 /* Whether every fish species is held at the stack limit: counts the item slots
  * of ITEM_JELLYFISH through ITEM_MACKEREL that are full. */
 /* func_801E1C10 */
-MATCH s32 Fishing_FishStacksFull(void) {
+MATCH bool Fishing_FishStacksFull(void) {
     s32 fish;
     s32 count;
     s32 i;

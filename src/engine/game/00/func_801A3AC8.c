@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801A3AC8(Actor* record) {
+MATCH bool func_801A3AC8(Actor* record) {
     Actor* rec;
     u8     route;
     s32    x;

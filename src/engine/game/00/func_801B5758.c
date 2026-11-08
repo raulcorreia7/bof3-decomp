@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801B5758(void) {
+MATCH bool func_801B5758(void) {
     if (g_InputPressed & g_InputMasks[FIELD_INPUT_MENU]) {
         if (!(g_Game.flags & GAME_FLAG_MENU_LOCK)) {
             SND_PlayCue(EMI_CUE_ID(1, 5));

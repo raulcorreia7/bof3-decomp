@@ -729,7 +729,7 @@ void func_801E4540(void);
 void func_801E4580(void);
 void func_801E45C0(MenuPanelTask* arg0);
 s32  func_801E4C2C(s32 item_class);
-s32  Party_HasSkill(s32 item_id);
+bool Party_HasSkill(s32 item_id);
 void func_801E4DF4(MenuPanelTask* panel_task);
 void func_801E4E9C(MenuPanelTask* panel_task);
 void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_mode);

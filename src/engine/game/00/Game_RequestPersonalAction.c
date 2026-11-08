@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* func_801B5EBC */
-MATCH s32 Game_RequestPersonalAction(void) {
+MATCH bool Game_RequestPersonalAction(void) {
     u8 kind;
 
     kind = g_Game.current->chr.character_id;

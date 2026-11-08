@@ -510,7 +510,7 @@ void        func_801D5114(void);
 extern void func_801D528C(void);
 void        func_801D52AC(void);
 void        func_801D6E6C(void);
-s32         func_801D70EC(void);
+bool        func_801D70EC(void);
 void        func_801D7204(void);
 void        func_801D8CC8(void);
 void        func_801D8D64(void);
