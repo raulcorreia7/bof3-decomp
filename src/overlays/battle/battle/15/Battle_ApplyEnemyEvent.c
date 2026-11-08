@@ -71,7 +71,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             break;
     }
     work->choice_ai = event->unk_04;
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ENEMY_SKILL_COUNT; i++) {
         work->skills[i] = event->unk_08[i];
     }
     func_800A9BD8(work->slot);
