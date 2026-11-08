@@ -1,5 +1,7 @@
 #include "scena15_00.h"
 
+#include "shared/Area_DrawScreenTint.h"
+
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
@@ -115,7 +117,7 @@ MATCH void func_801F7920(void) {
         g_Task->tint.bytes.unk_5E -= 2;
         g_Task->tint.bytes.unk_5F -= 2;
     } else {
-        counter           = &D_80146875;
+        counter           = &g_SceneState.step_05;
         *counter          = *counter + 1;
         work->header.mode = 3;
     }
@@ -126,24 +128,7 @@ MATCH void func_801F79BC(void) {
 }
 
 MATCH void func_801F79C4(void) {
-    u16   tpage;
-    TILE* tile;
-
-    tpage = GetTPage(0, 2, 0x3C0, 0);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, 0xC);
-    tile = (TILE*)g_GfxPrimCursor;
-    SetTile(tile);
-    tile->r0 = g_Task->tint.bytes.unk_5D;
-    tile->g0 = g_Task->tint.bytes.unk_5E;
-    tile->b0 = g_Task->tint.bytes.unk_5F;
-    tile->w  = 0x140;
-    tile->x0 = 0;
-    tile->y0 = 0;
-    tile->h  = 0xF0;
-    SetSemiTrans(tile, 1);
-    SetShadeTex(tile, 0);
-    GFX_AddPrim(3, 0x10);
+    Screen_DrawTintLayer(3, GetTPage(0, 2, 960, 0));
 }
 
 MATCH void func_801F7AA8(void) {
@@ -337,8 +322,8 @@ INCLUDE_ASM(func_801FCBAC);
 
 MATCH void func_801FDB84(void) {
     if (D_801FE74C == 0) {
-        D_80146865 = 1;
-        D_801FE74C = (RANDOM_MOD(38) + 42) / 2;
+        g_ScriptVars[1] = 1;
+        D_801FE74C      = (RANDOM_MOD(38) + 42) / 2;
     } else {
         D_801FE74C--;
     }
@@ -448,24 +433,24 @@ MATCH s32 func_801FE18C(s32 x, s32 y) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
             if (x > 0x43FFFF && (u32)((y >> 16) - 3) < 2) {
                 Game_SetScriptActive();
-                D_80146874 = 3;
-                D_80146875 = 0x14;
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 0x14;
             }
             return 0;
         }
         if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
             if (x <= 0x530000 && (u32)((y >> 16) - 0x2E) < 3) {
                 Game_SetScriptActive();
-                D_80146874 = 3;
-                D_80146875 = 0x1E;
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 0x1E;
             }
             return 0;
         }
         if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
             if (y <= 0x3A0000 && (u32)((x >> 16) - 0x23) < 4) {
                 Game_SetScriptActive();
-                D_80146874 = 3;
-                D_80146875 = 0x28;
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 0x28;
             }
             return 0;
         }
@@ -473,12 +458,12 @@ MATCH s32 func_801FE18C(s32 x, s32 y) {
             if (SYS_TestFlag(g_SceneFlags, 0xC) && SYS_TestFlag(g_SceneFlags, 0xE) && SYS_TestFlag(g_SceneFlags, 0xD) &&
                 SYS_TestFlag(g_SceneFlags, 0xF) && SYS_TestFlag(g_SceneFlags, 0x10)) {
                 Game_SetScriptActive();
-                D_80146874 = 5;
-                D_80146875 = 5;
+                g_SceneState.state_04 = 5;
+                g_SceneState.step_05  = 5;
             } else {
                 Game_SetScriptActive();
-                D_80146874 = 5;
-                D_80146875 = 0;
+                g_SceneState.state_04 = 5;
+                g_SceneState.step_05  = 0;
             }
         }
     }

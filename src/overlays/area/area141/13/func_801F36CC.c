@@ -5,11 +5,11 @@ MATCH void func_801F36CC(void) {
     s8     one;
 
     task = g_Task;
-    task->header.flags |= 0x20;
+    task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     task                           = g_Task;
-    task->tint.signed_bytes.unk_5F = -0x3C;
-    task->tint.signed_bytes.unk_5E = -0x3C;
-    task->tint.signed_bytes.unk_5D = -0x3C;
+    task->tint.signed_bytes.unk_5F = -60;
+    task->tint.signed_bytes.unk_5E = -60;
+    task->tint.signed_bytes.unk_5D = -60;
     one                            = 1;
     g_Task->tint.bytes.flags       = one;
     func_801F3740();

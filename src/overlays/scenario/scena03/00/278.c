@@ -457,8 +457,8 @@ MATCH void func_801FC578(void* entity, void* flags) {
 MATCH s32 func_801FC5A4(void) {
     if ((D_80144EA2 & 0xF) == 0xF) {
         Game_SetScriptActive();
-        D_80146875 = 6;
-        D_80146876 = 0x1E;
+        g_SceneState.step_05  = 6;
+        g_SceneState.timer_06 = 0x1E;
         return 1;
     }
     return 0;
@@ -485,13 +485,13 @@ MATCH s32 func_801FC690(void) {
     FAKE_REG(s32, action, "v1");
 
     Game_SetScriptActive();
-    action     = 6;
-    D_80146874 = action;
-    D_80146875 = 0;
+    action                = 6;
+    g_SceneState.state_04 = action;
+    g_SceneState.step_05  = 0;
     return 0;
 }
 
-/* Hint: call-seq sets D_80146876=0x1E (sh), D_80146874=7, D_80146875=0 after
+/* Hint: call-seq sets g_SceneState.timer_06=0x1E (sh), g_SceneState.state_04=7, g_SceneState.step_05=0 after
  * Game_SetScriptActive(), returns 0. Both constants (0x1E,7) need v1 in retail;
  * GCC picks v0. Tried literals and temp reuse; first diff li v1/v0 at 0x801FC6D4. */
 INCLUDE_ASM(func_801FC6C4);
@@ -512,7 +512,7 @@ MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
             if (arg1 == TO_COORD(4)) {
                 var_v0 = 1;
             block_9:
-                D_80146874 = var_v0;
+                g_SceneState.state_04 = var_v0;
             }
         }
     }
@@ -524,8 +524,8 @@ MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
         if (((arg1 >> 0x10) - 7) < 2U) {
             if (arg0 == TO_COORD(92)) {
                 SYS_SetFlag(g_SceneFlags, 7U);
-                D_80146874 = 3;
-                D_80146875 = 0xA;
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 0xA;
                 return 1;
             }
             return 0;
@@ -539,8 +539,8 @@ MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x15) == 0) {
         if (arg1 == TO_COORD(65) + COORD_HALF) {
             if (((arg0 >> 0x10) - 32) < 4U) {
-                D_80146874 = 4;
-                D_80146875 = 5;
+                g_SceneState.state_04 = 4;
+                g_SceneState.step_05  = 5;
                 return Scene_ShowMessage(0x33);
             }
             return 0;
@@ -569,8 +569,8 @@ MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
         if (arg1 == TO_COORD(76) + COORD_HALF) {
             if (((arg0 >> 0x10) - 31) < 2U) {
             block_9:
-                D_80146874 = 5;
-                D_80146875 = 0;
+                g_SceneState.state_04 = 5;
+                g_SceneState.step_05  = 0;
                 return Scene_ShowMessage(0x12);
             }
             /* Duplicate return node #11. Try simplifying control flow for better match */
@@ -586,8 +586,8 @@ MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x1A) != 0) {
         if ((arg0 >> 0x10) == 21) {
             if (((arg1 >> 0x10) - 52) < 2U) {
-                D_80146874 = 5;
-                D_80146875 = 0x10;
+                g_SceneState.state_04 = 5;
+                g_SceneState.step_05  = 0x10;
                 return Scene_ShowMessage(0x1F);
             }
         }
@@ -627,9 +627,9 @@ MATCH void func_801FCE18(void) {
     Message_StartAreaMessage(25);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     Game_SetScriptActive();
-    D_80146876 = 30;
-    D_80146874 = 7;
-    D_80146875 = 0;
+    g_SceneState.timer_06 = 30;
+    g_SceneState.state_04 = 7;
+    g_SceneState.step_05  = 0;
 }
 
 MATCH void func_801FCE6C(void) {

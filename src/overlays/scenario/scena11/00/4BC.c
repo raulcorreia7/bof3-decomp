@@ -12,8 +12,8 @@ MATCH void func_801F70BC(void) {
     g_AreaCameraRefreshCount = 2;
 }
 
-/* Hint: copies camera angle/DA/DC into D_801481E8/EC/F0 (<<16), clears
- * D_801481F4/F8/FC/48200, inits scratchpad 0x1F800080 block (0, angle+0x400,
+/* Hint: copies the camera angle into three resident words (<<16), clears
+ * four more, inits scratchpad 0x1F800080 block (0, angle+0x400,
  * 0x4000,0,1,0x1000,0x180). Tried absolute and base+offset scratchpad writes;
  * first diff at +0x0, size 0xB0 vs 0x74 (scratchpad base addressing). */
 INCLUDE_ASM(func_801F7104);
@@ -100,11 +100,11 @@ MATCH void func_801FA5F8(void) {
 MATCH void func_801FA600(void) {
     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
         Game_SetScriptActive();
-        D_80146865 = 0;
-        D_80146866 = 0;
-        D_80146867 = 0;
-        D_80146875 = 0;
-        D_80146874 = 2;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 2;
         SYS_SetFlag(g_SceneFlags, 5U);
     }
 }
@@ -233,21 +233,21 @@ MATCH s32 func_801FAA74(s32 y) {
             if (y <= TO_COORD(22)) {
                 if (((g_Game.members[0].facing - 6) < 2U) || (g_Game.members[0].facing == FACING_UP_LEFT)) {
                     Game_SetScriptActive();
-                    D_80146875 = 0;
-                    D_80146874 = 1;
+                    g_SceneState.step_05  = 0;
+                    g_SceneState.state_04 = 1;
                     return 1;
                 }
                 Game_SetScriptActive();
-                D_80146875 = 0x32;
-                D_80146874 = 1;
+                g_SceneState.step_05  = 0x32;
+                g_SceneState.state_04 = 1;
                 return 1;
             }
             return 0;
         }
         if (y <= TO_COORD(22)) {
             Game_SetScriptActive();
-            D_80146875 = 0x3C;
-            D_80146874 = 1;
+            g_SceneState.step_05  = 0x3C;
+            g_SceneState.state_04 = 1;
             return 1;
         }
         return 0;

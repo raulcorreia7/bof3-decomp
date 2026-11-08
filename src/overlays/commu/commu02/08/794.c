@@ -164,7 +164,7 @@ MATCH void func_801D25CC(void) {
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
+            SND_StopSequence(g_SelectionCues[bgm_offset], g_SelectionCues[bgm_offset + 1]);
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
@@ -222,9 +222,8 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1Step0Funcs, D_801F294D);
 }
 
-/* needs: u8 view of const g_SelectionCues and D_80181EBB; first diff: 0x801D35E0 lui v1 against v0. */
 /* Hint: saves g_SndBGMId to D_801DB0CC, stops cue/seq via
- * g_SelectionCues/D_80181EBB indexed by id*4, requests BGM 0x94, increments
+ * g_SelectionCues[id * 4] and the byte after it, requests BGM 0x94, increments
  * D_801F294D. Tried local id and D_801DB0CC forms; diff from +0x0 (v1/v0 for
  * g_SndBGMId), size 0x70 vs 0x6C. */
 INCLUDE_ASM(func_801D35E0);
@@ -337,7 +336,7 @@ MATCH void func_801D4840(void) {
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
+            SND_StopSequence(g_SelectionCues[bgm_offset], g_SelectionCues[bgm_offset + 1]);
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
@@ -393,7 +392,7 @@ MATCH void func_801D5978(void) {
 
     if (g_UiWindowEffectBusy == 0) {
         offset = g_SndBGMId * 4;
-        SND_StopSequence(*(g_SelectionCues + offset), *(D_80181EBB + offset));
+        SND_StopSequence(g_SelectionCues[offset], g_SelectionCues[offset + 1]);
         SND_RequestBGM(D_801DB0CC);
     loop_2:
         if (EMI_IsReady() == 0) {

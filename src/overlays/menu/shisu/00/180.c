@@ -89,10 +89,10 @@ MATCH void func_801D1018(void) {
         Item_Remove(ITEM_CAT_ITEM, 0x23U, g_MenuStatusItems.used[1], 0);
         Item_Remove(ITEM_CAT_ITEM, 0x24U, g_MenuStatusItems.used[2], 0);
         Item_Remove(ITEM_CAT_ITEM, 0x56U, g_MenuStatusItems.used[3], 0);
-        D_80146875 = 0x14;
+        g_SceneState.step_05 = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {
-            D_80146867 = 2;
+            g_ScriptVars[3] = 2;
             if (D_801DA044 < 0x5A) {
                 D_80144E5E = 0;
             } else if (D_801DA044 < 0x78) {
@@ -107,10 +107,10 @@ MATCH void func_801D1018(void) {
                 D_80144E5E = 5;
             }
         } else {
-            D_80146867 = 1;
+            g_ScriptVars[3] = 1;
         }
     } else {
-        D_80146875 = 5;
+        g_SceneState.step_05 = 5;
     }
     Menu_ResetPanelTasks();
     {
