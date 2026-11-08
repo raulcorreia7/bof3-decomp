@@ -26,7 +26,7 @@ MATCH void func_801EECCC(void) {
     for (i = 0, anchor = 1; i < 6; i++) {
         slot                               = Battle_AllocEffect(1, 0x34);
         work                               = g_Task;
-        g_BattleEffects[slot].unk_09       = anchor;
+        g_BattleEffects[slot].arg.unk_09   = anchor;
         g_BattleEffects[slot].target.party = work;
         g_Task->param.unk_0B += 1;
         anchor += 6;

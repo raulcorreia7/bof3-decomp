@@ -39,7 +39,6 @@ void Area_Update(void);
 /* The origin pan step the handler enters. */
 /* func_801F3A70 */
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F54C0[6];
 #define AREA_HUD_MASK_TABLE D_801F54C0

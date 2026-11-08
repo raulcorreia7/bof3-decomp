@@ -21,6 +21,7 @@ ASSERT_SIZE(UvRect, 0x4);
 
 /* The screen, in pixels. */
 #define SCREEN_WIDTH                 320
+#define SCREEN_HEIGHT                240
 
 /* retail addresses */
 /* First primitive arena: bank n starts at this address + n * 0x9000. */

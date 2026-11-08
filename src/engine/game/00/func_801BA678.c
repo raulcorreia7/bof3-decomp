@@ -60,7 +60,7 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp29;
 
     if ((0x400 & g_GameFlags) ||
-        ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->pos.x == 0)) && (tmp24->pos.y == 0))) {
+        ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
         return 1;
     }
     tmp12 = *(D_80181B00 + (g_Task->direction_08 * 2));

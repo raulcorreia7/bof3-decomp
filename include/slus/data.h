@@ -40,6 +40,8 @@ extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
 extern u8          g_PartyFormation;
 extern u8          g_PartyBattleOrder[];
+/* D_80144FA0: one bit per enemy kind byte, 256 bits. */
+extern u32         g_IdentifiedEnemies[8];
 extern u32         D_80145040;
 extern u32         D_80145044;
 /* The abilities the shop offers, packed to the front. */
@@ -82,12 +84,6 @@ extern u8  g_BattleStep;
 extern u8  g_BattleSubStep;
 /* D_801462E8 */
 extern u16 g_BattleState;
-/* D_80146325 */
-extern u8  g_BattleOptions;
-/* D_80146328 */
-extern u8  g_BattleResult;
-/* D_80146329 */
-extern u8  g_BattleEventFlags;
 /* The bytes the battle code index; the bmagic images that copy its record
  * define BATTLE_PARTY_CELL_RECORD before their first include. */
 #ifdef BATTLE_PARTY_CELL_RECORD

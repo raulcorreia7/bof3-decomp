@@ -25,7 +25,7 @@ NON_MATCHING s32 func_801BC760(void) {
     u8            cnt2;
     GameState*    saved;
 
-    dir    = g_Task->route_index_08;
+    dir    = g_Task->direction_08;
     goal_x = D_80145EC4 + (g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09);
     goal_y = D_80145EC8 + (g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09);
     if (D_80145FBB[g_Task->unk_05 ^ 3].mode != 9) {
@@ -56,10 +56,10 @@ NON_MATCHING s32 func_801BC760(void) {
     }
     row    = &g_BattlePartyBattlers[g_Task->unk_06];
     span   = TO_COORD(1) + COORD_HALF;
-    tgt_x  = row->pos.x.raw + (row->unk_0C * row->unk_09);
-    near_a = tgt_x - (g_FacingSteps[row->unk_08].pos.x.raw * 2);
-    tgt_y  = row->pos.y.raw + (row->unk_10 * row->unk_09);
-    near_b = tgt_y - (g_FacingSteps[row->unk_08].pos.y.raw * 2);
+    tgt_x  = row->pos.x.fixed + (row->unk_0C * row->unk_09);
+    near_a = tgt_x - (g_FacingSteps[row->facing].x * 2);
+    tgt_y  = row->pos.y.fixed + (row->unk_10 * row->unk_09);
+    near_b = tgt_y - (g_FacingSteps[row->facing].y * 2);
     if (row->unk_70 != 0) {
         span = TO_COORD(2);
     }
@@ -106,8 +106,8 @@ NON_MATCHING s32 func_801BC760(void) {
         goal_y = g_Task->pos.y.fixed - near_b;
         goal_y = ABS(goal_y);
         if ((goal_x + goal_y) < (dx + dy)) {
-            g_Task->route_index_08 = dir;
-            result                 = 1;
+            g_Task->direction_08 = dir;
+            result               = 1;
         }
         if ((result & BYTE_MASK) != 1) {
             return result & BYTE_MASK;
@@ -126,7 +126,7 @@ NON_MATCHING s32 func_801BC760(void) {
                 g_Task->pos.y.fixed = near_b;
                 g_GameState->flags_12C.s8_value &= 0xFE;
                 g_GameState->flags_12C.s8_value |= (D_80145FBC & 1);
-                COORD_INT(g_Task->depth) = Area_ReadHeight(near_a, near_b);
+                COORD_INT(g_Task->pos.z) = Area_ReadHeight(near_a, near_b);
                 g_Task->unk_29           = g_BattlePartyBattlers[0].unk_29;
                 FIELD(s8, g_Task, 0x1u)  = 2;
                 FIELD(s8, g_Task, 0x2u)  = 2;

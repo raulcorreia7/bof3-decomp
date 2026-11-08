@@ -20,7 +20,7 @@ MATCH void func_801EF000(void) {
         g_BattleEffects[slot].header.mode      = 1;
         g_BattleEffects[slot].target.party     = work;
         facing                                 = g_BattleEffectBattler->facing;
-        g_BattleEffects[slot].unk_09           = 0;
+        g_BattleEffects[slot].arg.unk_09       = 0;
         g_BattleEffects[slot].unk_0A           = 0;
         g_BattleEffects[slot].unk_08           = (facing + 2) & 3;
         g_BattleEffects[slot].pos.x            = g_Task->pos.x;
@@ -60,7 +60,15 @@ MATCH void func_801EF75C(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EF7A0);
+MATCH void func_801EF7A0(void) {
+    SYS_DISPATCH_BYTE(D_801F0BAC, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        Effect_SetActorMatrix();
+        s_Magic113OrbitRadius = D_801F0BA4[g_Task->param.unk_0B];
+        func_801EF944();
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EF844(void) {
     u8 count;

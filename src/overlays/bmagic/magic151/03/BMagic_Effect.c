@@ -15,10 +15,10 @@ MATCH void func_801EEDE0(void) {
 }
 
 MATCH void func_801EEE38(void) {
-    EffectStepFuncs5 handlers;
+    Magic151Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_TASK(handlers.handlers, 3, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
 MATCH void func_801EEEA8(void) {
@@ -54,10 +54,10 @@ MATCH void func_801EF2A0(void) {
 }
 
 MATCH void func_801EF318(void) {
-    EffectStepFuncs5 handlers;
+    Magic151Steps handlers;
 
     handlers = D_801EEC24;
-    SYS_DISPATCH_TASK(handlers.handlers, 3, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
 INCLUDE_ASM(func_801EF388);
@@ -271,8 +271,8 @@ MATCH void func_801F1C3C(void) {
     SYS_DISPATCH_BYTE(D_801F250C, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801F1DC0();
-        func_801F1E70();
-        func_801F2188();
+        BMagic_DrawGlowRingInner();
+        BMagic_DrawGlowRingOuter();
         PopMatrix();
     }
 }
@@ -327,6 +327,92 @@ MATCH void Effect_SetActorMatrix_801F1DC0(void) {
     BMAGIC_SET_ACTOR_MATRIX();
 }
 
-INCLUDE_ASM(func_801F1E70);
+/* The glow ring scratch: the inner radius, the outer radius and the shade, then the quad corners (D_1F800014). */
+#define GLOW_RING_INNER D_1F800000.view.effect.params[1]
+#define GLOW_RING_OUTER D_1F800000.view.effect.params[2]
+#define GLOW_RING_SHADE D_1F800000.view.effect.params[5]
 
-INCLUDE_ASM(func_801F2188);
+/* The inner half of the glow ring: a ring of 64 additive quads from the effect radius (word 0x14) out
+ * to 64 past it, brightest at its outer edge. */
+MATCH void BMagic_DrawGlowRingInner(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    GFX_AddPrim(4, 0xC);
+    GLOW_RING_INNER  = g_Task->unk_14;
+    GLOW_RING_OUTER  = g_Task->unk_14 + 0x40;
+    GLOW_RING_SHADE  = g_Task->unk_09 * 15;
+    D_1F800014[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
+    D_1F800014[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
+    D_1F800014[3].vx = FIXED_MUL(rsin(0), GLOW_RING_INNER);
+    D_1F800014[3].vy = FIXED_MUL(rcos(0), GLOW_RING_INNER);
+    D_1F800014[3].vz = 0;
+    D_1F800014[2].vz = 0;
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
+    for (i = 1; i <= 64; i++) {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[1].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_OUTER);
+        D_1F800014[1].vy = FIXED_MUL(rcos(i << 6), GLOW_RING_OUTER);
+        D_1F800014[2].vx = D_1F800014[3].vx;
+        D_1F800014[2].vy = D_1F800014[3].vy;
+        D_1F800014[3].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_INNER);
+        D_1F800014[3].vy = FIXED_MUL(rcos(i << 6), GLOW_RING_INNER);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
+                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB0(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
+        setRGB1(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        GFX_AddPrim(4, 0x24);
+    }
+}
+
+/* The outer half of the glow ring: the ring from 64 to 128 past the effect radius, fading out at its outer edge. */
+MATCH void BMagic_DrawGlowRingOuter(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    GFX_AddPrim(4, 0xC);
+    GLOW_RING_INNER  = g_Task->unk_14 + 0x40;
+    GLOW_RING_OUTER  = g_Task->unk_14 + 0x80;
+    GLOW_RING_SHADE  = g_Task->unk_09 * 15;
+    D_1F800014[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
+    D_1F800014[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
+    D_1F800014[3].vx = FIXED_MUL(rsin(0), GLOW_RING_INNER);
+    D_1F800014[3].vy = FIXED_MUL(rcos(0), GLOW_RING_INNER);
+    D_1F800014[3].vz = 0;
+    D_1F800014[2].vz = 0;
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
+    for (i = 1; i <= 64; i++) {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[1].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_OUTER);
+        D_1F800014[1].vy = FIXED_MUL(rcos(i << 6), GLOW_RING_OUTER);
+        D_1F800014[2].vx = D_1F800014[3].vx;
+        D_1F800014[2].vy = D_1F800014[3].vy;
+        D_1F800014[3].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_INNER);
+        D_1F800014[3].vy = FIXED_MUL(rcos(i << 6), GLOW_RING_INNER);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
+                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
+        setRGB3(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
+        GFX_AddPrim(4, 0x24);
+    }
+}

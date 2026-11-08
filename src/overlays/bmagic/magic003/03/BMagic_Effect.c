@@ -36,8 +36,21 @@ MATCH void func_801EEE28(void) {
     }
 }
 
-/* blocker: the table index is the byte at 0x0A (lbu), and g_Task has no byte member there (BMagicEffectWork.unk_0A is u16); first diff: the lbu of byte 0x0A (the table index) has no byte member to read. */
-INCLUDE_ASM(func_801EEEA4);
+MATCH void func_801EEEA4(void) {
+    u8 count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        g_Task->param.unk_0B = rand() & 3;
+        if (g_Task->timer < 16) {
+            g_Task->unk_09 = D_801F0A84[g_Task->timer];
+        } else {
+            g_Task->unk_09 = 3;
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEF4C);
 
@@ -90,10 +103,10 @@ MATCH void func_801EF2CC(void) {
 }
 
 MATCH void func_801EF324(void) {
-    EffectStepFuncs5 handlers;
+    Magic003Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Area_SetDrawMode();
     }
@@ -199,10 +212,10 @@ MATCH void func_801EF6CC(void) {
 }
 
 MATCH void func_801EF708(void) {
-    EffectStepFuncs4 handlers;
+    Magic003SecondSteps handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Area_SetDrawMode();
     }

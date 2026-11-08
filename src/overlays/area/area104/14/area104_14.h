@@ -31,7 +31,6 @@ void func_801F5738(void);
 #define AREA_MESSAGE_REQUEST 4 /* the message Message_RunAreaMessage starts */
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP     Area_DrawHud
 
 extern WorldMapMarker D_801F6AF8[6];
 #define AREA_HUD_MASK_TABLE D_801F6AF8

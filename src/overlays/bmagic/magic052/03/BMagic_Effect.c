@@ -33,10 +33,10 @@ MATCH void func_801EEE94(void) {
 }
 
 MATCH void func_801EEEE0(void) {
-    EffectStepFuncs3 handlers = D_801EEC10;
+    Magic052Steps handlers = D_801EEC10;
 
     g_ScriptBank = 0x800F0800;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }

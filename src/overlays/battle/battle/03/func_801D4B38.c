@@ -16,7 +16,7 @@ MATCH void func_801D4B38(void) {
                 *state = 0;
                 break;
             case 3:
-                if (g_BattleSurprise == 2) {
+                if (g_BattleOutcome.surprise == 2) {
                     *state = 2;
                     g_BattleSubStep += 1;
                     return;
@@ -25,7 +25,7 @@ MATCH void func_801D4B38(void) {
                 g_BattleSubStep += 1;
                 return;
             case 1:
-                if (g_BattleSurprise == 2) {
+                if (g_BattleOutcome.surprise == 2) {
                     *state = 0;
                     g_BattleSubStep += 1;
                     break;

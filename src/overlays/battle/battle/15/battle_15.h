@@ -323,20 +323,63 @@ typedef struct BattleEnemyRecord {
 /* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
  * save/restore keeps the plain word. A second name is the only form that keeps
  * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
-extern u32                    g_BattleWorkCell;
-extern EffectStepFuncs3       D_80096994;
-extern EffectStepFuncs3       D_800969A0;
-extern EffectStepFuncs3       D_800969AC;
-extern EffectStepFuncs3       D_800969B8;
-extern BattlePanelModeFuncs5  D_800969E4;
-extern BattlePanelStateFuncs3 D_800969F8;
+extern u32 g_BattleWorkCell;
+
+#define BATTLE_EFFECT_STEP_COUNT 3
+
+typedef struct BattleEffectSteps {
+    Callback steps[BATTLE_EFFECT_STEP_COUNT];
+} BattleEffectSteps;
+
+#define BATTLE_MENU_PANEL_MODE_COUNT 5
+
+typedef struct BattleMenuPanelModes {
+    Callback modes[BATTLE_MENU_PANEL_MODE_COUNT];
+} BattleMenuPanelModes;
+
+#define BATTLE_MENU_PANEL0_STATE_COUNT 3
+
+typedef struct BattleMenuPanel0States {
+    Callback states[BATTLE_MENU_PANEL0_STATE_COUNT];
+} BattleMenuPanel0States;
+
+#define BATTLE_MENU_PANEL1_STATE_COUNT 3
+
+typedef struct BattleMenuPanel1States {
+    Callback states[BATTLE_MENU_PANEL1_STATE_COUNT];
+} BattleMenuPanel1States;
+
+#define BATTLE_MENU_PANEL2_STATE_COUNT 5
+
+typedef struct BattleMenuPanel2States {
+    Callback states[BATTLE_MENU_PANEL2_STATE_COUNT];
+} BattleMenuPanel2States;
+
+#define BATTLE_MENU_PANEL3_STATE_COUNT 3
+
+typedef struct BattleMenuPanel3States {
+    Callback states[BATTLE_MENU_PANEL3_STATE_COUNT];
+} BattleMenuPanel3States;
+
+#define BATTLE_MENU_PANEL4_STATE_COUNT 3
+
+typedef struct BattleMenuPanel4States {
+    Callback states[BATTLE_MENU_PANEL4_STATE_COUNT];
+} BattleMenuPanel4States;
+
+extern BattleEffectSteps      D_80096994;
+extern BattleEffectSteps      D_800969A0;
+extern BattleEffectSteps      D_800969AC;
+extern BattleEffectSteps      D_800969B8;
+extern BattleMenuPanelModes   D_800969E4;
+extern BattleMenuPanel0States D_800969F8;
 extern volatile u8            D_80096A04[4];
-extern BattlePanelStateFuncs3 D_80096A08;
-extern BattlePanelStateFuncs5 D_80096A14;
+extern BattleMenuPanel1States D_80096A08;
+extern BattleMenuPanel2States D_80096A14;
 /* Main-executable battle state consumed by target-local lifts. */
 extern char                   D_80096A2C[];
-extern BattlePanelStateFuncs3 D_80096A34;
-extern BattlePanelStateFuncs3 D_80096A40;
+extern BattleMenuPanel3States D_80096A34;
+extern BattleMenuPanel4States D_80096A40;
 extern Callback               func_800B43B8[];
 extern Callback               D_800B43D4[17];
 extern Callback               D_800B4418[4];
@@ -590,12 +633,8 @@ extern volatile u16        D_801EC30C;
 extern u16                 D_801EC30E;
 extern volatile u16        D_801EC310;
 extern volatile u16        D_801EC312;
-extern u8                  D_801EC337[];
-extern u8                  D_801EC33B[];
-extern u8                  D_801EC357[];
 /* D_801EC364 */
 extern BattleTemplateStats g_BattleTemplateStats[]; /* 0x801EC364 */
-extern u8                  D_801EC390[];
 
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
@@ -887,9 +926,9 @@ static inline void BattleFillEffectGrid(s32 kind) {
 
     for (row = 0; (u32)(row & BYTE_MASK) < 3U; row++) {
         for (slot = 0; (u32)(slot & BYTE_MASK) < 3U; slot++) {
-            offset                         = Battle_AllocEffect(0, kind) & BYTE_MASK;
-            g_BattleEffects[offset].unk_0A = slot;
-            g_BattleEffects[offset].unk_09 = row;
+            offset                             = Battle_AllocEffect(0, kind) & BYTE_MASK;
+            g_BattleEffects[offset].unk_0A     = slot;
+            g_BattleEffects[offset].arg.unk_09 = row;
         }
     }
 }
@@ -909,9 +948,9 @@ static inline s32 BattleCompareStatusByte(s32 battler_index, s32 compare_value, 
 }
 
 /* Run the handler the spad step byte selects out of the caller's table. */
-static inline void Battle_DispatchEffect(EffectStepFuncs3* table) {
-    EffectStepFuncs3 handlers;
-    PartyBattler*    work;
+static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
+    BattleEffectSteps handlers;
+    PartyBattler*     work;
 
     handlers     = *table;
     work         = (PartyBattler*)g_Task;

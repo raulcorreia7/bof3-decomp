@@ -77,9 +77,7 @@ void func_801F4610(void);
 void Area_StepStreamSetDrawMode(void);
 
 /* The value of func 801f2eec table in the shared func_801F2EEC body. */
-#define FUNC_801F2EEC_TABLE D_801F5100
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP    Area_DrawHud
 
 #endif

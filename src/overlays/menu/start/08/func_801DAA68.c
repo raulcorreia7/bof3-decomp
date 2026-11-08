@@ -2,14 +2,17 @@
 
 void func_801DAC1C(void);
 
+/* nonmatching: one row differs. The cursor-frame loop adds the row offset and `rows` as `addu v1,v1,a2` in retail and
+ * `addu v1,a2,v1` here (0x801DAAEC). `panel = &rows[i]; i++;` before the stores fixed the other nine rows. Tried:
+ * i + rows, rows + i, &i[rows], &rows[i++], an index copy local (s32 and u8), i & 0xFF, (s32)i, the 0x120 base inline
+ * in the loop (loses the shared base register), rows as &g_MenuPanelTasks[n]. Only
+ * `(MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)rows)` matches, and it adds two casts. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAA68(void) {
     u8*            record;
     MenuPanelTask* rows;
-    u8*            panel;
+    MenuPanelTask* panel;
     u8             i;
-    u32            index;
-    u8             count;
 
     record = &D_801484BC;
     rows   = (MenuPanelTask*)(record + 0x120);
@@ -23,31 +26,28 @@ NON_MATCHING void func_801DAA68(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 0x14;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 0x10;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
-    for (i = 0; i < 2; i++) {
-        rows[i].handler = 6;
-        rows[i].mode    = MENU_START_MODE_CURSOR_FRAME;
-        rows[i].active  = 0;
-        rows[i].unk_0A  = 0;
+    while (i < 2) {
+        panel = &rows[i];
+        i++;
+        panel->handler = 6;
+        panel->mode    = MENU_START_MODE_CURSOR_FRAME;
+        panel->active  = 0;
+        panel->unk_0A  = 0;
     }
 
     i = 0;
-    for (;;) {
-        count = Party_CountOrder(PARTY_ORDER_FIELD);
-        index = i & BYTE_MASK;
-        if ((s32)index >= (u32)count) {
-            break;
-        }
-        panel      = &D_801483C0 + (index * 0x24);
-        panel[0xA] = i;
-        i += 1;
-        panel[0x1]       = 6;
-        panel[0x2]       = 0;
-        panel[0x3]       = 0;
-        panel[0x0]       = 1;
-        ((u16*)panel)[2] = 0x11;
-        ((u16*)panel)[3] = (index * 0x36) + 0x3E;
-        panel[0xB]       = 1;
-        panel[0xC]       = 0;
+    while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
+        panel          = &g_MenuPanelTasks[i + 4];
+        panel->unk_0A  = i;
+        panel->handler = 6;
+        panel->mode    = 0;
+        panel->state   = 0;
+        panel->active  = 1;
+        panel->pos.x   = 0x11;
+        panel->pos.y   = i * 54 + 62;
+        panel->unk_0B  = 1;
+        panel->unk_0C  = 0;
+        i++;
     }
 
     Menu_DrawClutStrip(D_80144953);
@@ -57,6 +57,5 @@ NON_MATCHING void func_801DAA68(void) {
     D_80148654 = 5;
 }
 #else
-/* blocker: row address formed before i++; first diff: 0x801DAAE0. */
 INCLUDE_ASM(func_801DAA68);
 #endif

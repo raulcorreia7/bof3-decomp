@@ -1,3 +1,22 @@
 #include "area085_13.h"
 
-INCLUDE_ASM(func_801F37C0);
+MATCH void func_801F37C0(void) {
+    Actor* work;
+    u8     i;
+
+    if (SCENE_PROGRESS == 0xC06) {
+        g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        func_801C1254(CHAR_ID_GARR, 2);
+        Actor_SelectScript(1);
+        return;
+    }
+    for (i = 0; i < g_PartySize; i++) {
+        if (g_BattlePartyBattlers[i].chr.character_id == CHAR_ID_GARR) {
+            work              = g_Task;
+            work->pos.x.fixed = g_BattlePartyBattlers[i].pos.x.fixed;
+            work->pos.y.fixed = g_BattlePartyBattlers[i].pos.y.fixed;
+            work->pos.z.fixed = g_BattlePartyBattlers[i].pos.z.fixed;
+        }
+    }
+    g_ScriptState->cursor -= 2;
+}

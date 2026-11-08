@@ -15,7 +15,7 @@ MATCH void func_8009B2B0(void) {
     u8  counter;
     u32 divisor;
 
-    counter_byte  = &g_BattleDrops.attempts;
+    counter_byte  = &g_BattleOutcome.attempts;
     player_sum    = 0;
     enemy_sum     = 0;
     counter       = *counter_byte + 1;
@@ -46,7 +46,7 @@ MATCH void func_8009B2B0(void) {
              * no source spelling of the compare moves the result register. */
             MATCH_FAKE_USE(roll);
             g_BattleUIStep = 2;
-        } else if (g_BattleSurprise == 1) {
+        } else if (g_BattleOutcome.surprise == 1) {
             g_BattleUIStep = 2;
         } else {
             g_BattleUIStep = 1;

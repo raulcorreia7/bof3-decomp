@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EECF0(void) {
-    EffectStepFuncs4 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EED5C);
@@ -26,10 +26,10 @@ MATCH void func_801EEF6C(void) {
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF058(void) {
-    EffectStepFuncs3 handlers;
+    Magic008SecondSteps handlers;
 
     handlers = D_801EEC14;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF0B8);
@@ -47,10 +47,10 @@ MATCH void func_801EF324(void) {
 }
 
 MATCH void func_801EF384(void) {
-    EffectStepFuncs4 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC20;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF3F0);
@@ -68,10 +68,10 @@ MATCH void Effect_StartPlaying_801EF728(void) {
 }
 
 MATCH void func_801EF75C(void) {
-    EffectStepFuncs4 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC30;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF7C8);
@@ -91,10 +91,10 @@ MATCH void Effect_StartPlaying_801EFA40(void) {
 }
 
 MATCH void func_801EFA74(void) {
-    EffectStepFuncs3 handlers;
+    Magic008SecondSteps handlers;
 
     handlers = D_801EEC40;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EFAD4);
@@ -114,10 +114,10 @@ MATCH void Effect_StartPlaying_801EFCFC(void) {
 }
 
 MATCH void func_801EFD30(void) {
-    EffectStepFuncs3 handlers;
+    Magic008SecondSteps handlers;
 
     handlers = D_801EEC4C;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EFD90);
@@ -207,10 +207,10 @@ MATCH void func_801F0548(void) {
 }
 
 MATCH void func_801F0568(void) {
-    EffectStepFuncs5 handlers;
+    Magic008ThirdSteps handlers;
 
     handlers = D_801EEC70;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }
@@ -270,10 +270,10 @@ MATCH void func_801F08C4(void) {
 }
 
 MATCH void func_801F0964(void) {
-    EffectStepFuncs4 handlers;
+    Magic008FirstSteps handlers;
 
     handlers = D_801EEC84;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
 MATCH void func_801F09D0(void) {

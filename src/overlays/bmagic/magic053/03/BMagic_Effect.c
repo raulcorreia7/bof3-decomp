@@ -5,12 +5,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC10(void) {
-    EffectStepFuncs3 handlers = D_801EEC04;
-    PartyBattler*    saved_task;
-    PartyBattler*    saved_battler;
-    u8               i;
+    Magic053Steps handlers = D_801EEC04;
+    PartyBattler* saved_task;
+    PartyBattler* saved_battler;
+    u8            i;
 
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (D_801F0578[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -45,7 +45,7 @@ MATCH void func_801EF0A8(void) {
                 func_8014D290();
                 Effect_SetActiveActorMatrix();
                 func_801EF7E0();
-                func_801EFA30();
+                BMagic_DrawDarkRing();
                 PopMatrix();
             }
         }
@@ -105,7 +105,7 @@ MATCH void func_801EF6D8(void) {
 
 INCLUDE_ASM(func_801EF7E0);
 
-INCLUDE_ASM(func_801EFA30);
+#include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
 MATCH void func_801EFD50(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);

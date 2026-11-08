@@ -266,8 +266,8 @@ typedef struct WillpowerCurve {
     u8 base;
 } WillpowerCurve;
 
-extern Character      g_StartCharacters[CHAR_INDEX_COUNT];
-extern WillpowerCurve g_StartWillpowerCurves[CHAR_INDEX_COUNT];
+extern Character      g_StartCharacters[CHARACTER_COUNT];
+extern WillpowerCurve g_StartWillpowerCurves[CHARACTER_COUNT];
 extern u8             s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
 #define MENU_START_STEP_COUNT          9
@@ -766,7 +766,7 @@ void             func_801D96D4(void);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
 void             func_801DAE14(u16 buttons);
 void             Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
-void             func_801DE5D4(u8, u16, u16, s32, s32, MenuPanelTask*);
+void             Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hide_changes, MenuPanelTask* task);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);
 void             func_801E6D88(s32 prompt_x);
 void             func_801E6E18(s16 x, s16 y, s32 row, s32 shade, u8 blend);
@@ -792,6 +792,9 @@ extern u8        MENU_CLOCK_COLON[];
 extern u8*       g_MenuCommandLabels[];  /* label id -> button text */
 extern u8        g_MenuCommandRows[][5]; /* button count, then four label ids */
 extern u8        g_MenuEquipStatLabels[];
+extern u8        g_MenuEquipCompareLabels[];
+extern u8        g_MenuEquipCompareSprites[];
+extern u8        g_MenuEquipSlotIcons[];
 extern u8        D_801ECD0C[];
 extern u8        D_801ECD14[];
 extern u8        D_801ECDAC[];

@@ -2,14 +2,14 @@
 
 /* ticks the scratch work's step counter at +0x9; on step 0 it resets the battle bar, clears the +0x80
  * re-arm flag, halves +0x8C, fills a 0x78-stride effect record (Battle_AllocEffect, flags 1 and 6), queues cue
- * 0x206 and, when g_BattleEventFlags is clear, runs the cleanup calls and advances the battle work.
+ * 0x206 and, when g_BattleOutcome.event_flags is clear, runs the cleanup calls and advances the battle work.
  */
 MATCH void func_801E0F0C(void) {
     PartyBattler* spad;
     PartyBattler* spad2;
     PartyBattler* work;
     s32           count;
-    s32           offset;
+    u32           slot;
     /* FAKE: retail materializes the bar reset constant in v1. */
     MATCH_REG(s16, one, "v1");
     /* FAKE: retail materializes the +0x124 mask in a3. */
@@ -25,15 +25,15 @@ MATCH void func_801E0F0C(void) {
         work->chr.status &= ~STATUS_KO;
         work->chr.willpower >>= 1;
         work->turn.damage_flags.value &= mask;
-        offset                       = (Battle_AllocEffect(0, 1) & BYTE_MASK) * 0x78;
-        spad                         = g_Task;
-        *(&D_801EC337 + offset)      = 1;
-        *(&D_801EC357 + offset)      = 6;
-        spad2                        = g_Task;
-        *(u32*)(D_801EC3A4 + offset) = spad;
+        slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
+        spad                               = g_Task;
+        g_BattleEffects[slot].unk_07       = 1;
+        g_BattleEffects[slot].unk_27       = 6;
+        spad2                              = g_Task;
+        g_BattleEffects[slot].target.party = spad;
         Actor_SelectScript((spad2->facing + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
-        if (g_BattleEventFlags == 0) {
+        if (g_BattleOutcome.event_flags == 0) {
             func_801D9484();
             Battle_SetTextPartyName(g_Task->slot);
             func_801DEBC4(0, g_GameState->chr.character_id);

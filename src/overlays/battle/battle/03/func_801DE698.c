@@ -7,7 +7,7 @@ MATCH void func_801DE698(void) {
 
     work = D_801EB4DC;
     if (work->unk_08 != GAME_NONE) {
-        mask = &g_BattleEventFlags;
+        mask = &g_BattleOutcome.event_flags;
         *mask |= work->unk_01;
         count        = work->unk_08 - 1;
         work->unk_08 = count;

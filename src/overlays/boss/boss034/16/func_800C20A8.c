@@ -3,7 +3,7 @@
 MATCH void func_800C20A8(void) {
     s8* ending;
 
-    if (g_BattleResult & 2) {
+    if (g_BattleOutcome.result & 2) {
         BOSS_SEND_PARTY_TO_ENDING_POSE(0)
         BOSS_SEND_PARTY_TO_ENDING_POSE(1)
         BOSS_SEND_PARTY_TO_ENDING_POSE(2)

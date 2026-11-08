@@ -17,7 +17,7 @@
  * (hex).
  */
 
-#define BATTLE_DROPS_SIZE 0x3E
+#define BATTLE_OUTCOME_SIZE 0x40
 
 /* Raise a bit in the battle state word. A bare statement macro: the member
  * declares `flags` and runs the follow-up the bit starts. Kept: as an inline
@@ -81,7 +81,7 @@
 
 /* The battle ended with the party's victory: the result bit the ending step
  * sets when no enemy is left. */
-#define BATTLE_IS_VICTORY()               (g_BattleResult & BATTLE_RESULT_VICTORY)
+#define BATTLE_IS_VICTORY()               (g_BattleOutcome.result & BATTLE_RESULT_VICTORY)
 
 #define BATTLE_SELECTION_RECORD_HANDLE(i) MEM(u8* volatile, 0x801EB5B4u + (u32)(i) * BATTLE_RING_STRIDE)
 
@@ -95,21 +95,34 @@
  * EFFECT_LOADING is held from the action's effect stream request
  * (EMI_LoaderStreamInitSlot) until the loader is ready (func_801D3F6C). */
 
-/* The battle drop list at 0x80146326: the base byte is the escape-attempt
- * counter the battle/battle/15 units read, the count of listed drops sits at +0x01,
- * the dropped item ids at +0x0E and their counts at +0x2E (Battle_RollEnemyDrops). */
+/* The items a battle drops: ids and how many of each. Battle_RollEnemyDrops fills it. */
 typedef struct BattleDrops {
-    u8  attempts; /* +0x00 escape attempts; battle/battle/15 reads this byte */
-    u8  count;    /* +0x01 listed drops, capped at 15 */
-    u8  pad_02[0xC];
-    u16 items[16];       /* +0x0E dropped item ids */
-    u8  item_counts[16]; /* +0x2E drops of each id */
+    u16 items[16];       /* 0x00 dropped item ids */
+    u8  item_counts[16]; /* 0x20 drops of each id */
 } BattleDrops;
 
-ASSERT_SIZE(BattleDrops, BATTLE_DROPS_SIZE);
-ASSERT_OFFSET(BattleDrops, count, 0x01);
-ASSERT_OFFSET(BattleDrops, items, 0x0E);
-ASSERT_OFFSET(BattleDrops, item_counts, 0x2E);
+ASSERT_SIZE(BattleDrops, 0x30);
+ASSERT_OFFSET(BattleDrops, item_counts, 0x20);
+
+/* How the battle went at 0x80146324: the surprise and option flags it started with, the escape attempts, the
+ * result and event flags, and the experience, zenny and drops it pays out. */
+typedef struct BattleOutcome {
+    u8          surprise;    /* 0x00 */
+    u8          options;     /* 0x01 battle option flags */
+    u8          attempts;    /* 0x02 escape attempts; battle/battle/15 reads this byte */
+    u8          drop_count;  /* 0x03 listed drops, capped at BATTLE_DROP_COUNT_MAX */
+    u8          result;      /* 0x04 battle result flags */
+    u8          event_flags; /* 0x05 flags of the battle events that fired */
+    u8          pad_06[2];
+    u32         reward_exp;   /* 0x08 */
+    s32         reward_zenny; /* 0x0C */
+    BattleDrops drops;        /* 0x10 */
+} BattleOutcome;
+
+ASSERT_SIZE(BattleOutcome, BATTLE_OUTCOME_SIZE);
+ASSERT_OFFSET(BattleOutcome, drop_count, 0x03);
+ASSERT_OFFSET(BattleOutcome, reward_exp, 0x08);
+ASSERT_OFFSET(BattleOutcome, drops, 0x10);
 
 /* The battle's phase tuple at 0x801462E0: the mode selects the g_BattlePhases handler, the step runs inside it and
  * the sub-step inside the step. BattleSetEnding writes the three bytes together; the intro and panel code reset
@@ -191,12 +204,9 @@ extern volatile u8 g_BattleCommandCount;
 extern u8 g_BattleCommandCount;
 #endif
 /* D_80146324 */
-extern u8          g_BattleSurprise;
-extern BattleDrops g_BattleDrops;
-/* D_8014632C */
-extern u32         g_BattleRewardExp;
-/* D_80146330 */
-extern s32         g_BattleRewardZenny;
+extern BattleOutcome g_BattleOutcome;
+/* FAKE: g_BattleOutcome.result as a plain byte; the functions that set a bit in it (boss endings, func_801E51DC) match only with this base. */
+extern u8            g_BattleResult;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {

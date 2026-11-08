@@ -164,6 +164,15 @@ typedef union BattleEffectTarget {
     u32                  address;
 } BattleEffectTarget;
 
+/* The byte a spawner sets for its effect (a start count, a grid row); on a
+ * battler's home row it is the signed sway of a confused battler, -11 to 12. */
+typedef union BattleEffectArg {
+    u8 unk_09;
+    s8 sway;
+} BattleEffectArg;
+
+ASSERT_SIZE(BattleEffectArg, 1);
+
 /* One queued action slot of the table at 0x801EC330 (stride 0x78).
  *
  * Both overlays declare g_BattleEffects as BattleEffect and read the same
@@ -178,7 +187,7 @@ typedef struct BattleEffect {
     u8                 unk_06;
     u8                 unk_07;
     u8                 unk_08;
-    u8                 unk_09;
+    BattleEffectArg    arg;
     u8                 unk_0A;
     u8                 unk_0B;
     s32                unk_0C;
@@ -468,49 +477,49 @@ ASSERT_SIZE(BattlerParam, 1);
 
 /* Local battler work table (stride 0x140 at 0x80145E90), shared by the battle overlays. */
 typedef struct PartyBattler {
-    TaskHeader        header; /* 0x00 */
-    u8                unk_03;
-    u8                unk_04;
-    u8                slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */
-    u8                pad_06;
-    u8                unk_07;
-    u8                facing; /* +0x08 the direction the battler faces */
-    u8                unk_09;
-    u8                timer; /* +0x0A frame counter */
-    BattlerParam      param;
-    s32               unk_0C;
-    s32               unk_10;
-    s32               unk_14; /* +0x14 the 32-bit cell both overlays read */
-    s32               unk_18;
-    s32               unk_1C; /* +0x1C battle/battle/03's cell; battle/battle/15 leaves it padded */
-    s32               unk_20; /* +0x20 the 32-bit cell both overlays read */
-    u8                unk_24;
-    u8                unk_25;
-    u8                unk_26;
-    u8                unk_27;
-    u8                unk_28;
-    s8                unk_29; /* +0x29 the byte both overlays read */
-    s8                unk_2A; /* +0x2A the byte both overlays read */
-    s8                unk_2B; /* +0x2B the byte both overlays read */
-    BattleScreenCoord unk_2C; /* +0x2C the halfword both overlays read */
-    BattleScreenCoord unk_2E; /* +0x2E the field overlays read it signed */
-    BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
-    u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
-    WorldPos          pos;
-    SpriteScale       scale;  /* +0x40 16.16, 0x10000 at setup */
-    u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u8                unk_49;
-    u8                unk_4A;
-    u8                unk_4B;
-    s32               unk_4C; /* +0x4C battle/battle/03's cell; battle/battle/15 leaves it padded */
-    s32               unk_50;
-    s32               unk_54;
-    u16               unk_58;
-    u16               unk_5A;
-    u8                unk_5C;
-    u8                unk_5D;
-    u8                unk_5E;
-    u8                unk_5F;
+    TaskHeader           header; /* 0x00 */
+    u8                   unk_03;
+    u8                   unk_04;
+    u8                   slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */
+    u8                   pad_06;
+    u8                   unk_07;
+    u8                   facing; /* +0x08 the direction the battler faces */
+    u8                   unk_09;
+    u8                   timer; /* +0x0A frame counter */
+    BattlerParam         param;
+    s32                  unk_0C;
+    s32                  unk_10;
+    s32                  unk_14; /* +0x14 the 32-bit cell both overlays read */
+    s32                  unk_18;
+    s32                  unk_1C; /* +0x1C battle/battle/03's cell; battle/battle/15 leaves it padded */
+    s32                  unk_20; /* +0x20 the 32-bit cell both overlays read */
+    u8                   unk_24;
+    u8                   unk_25;
+    u8                   unk_26;
+    u8                   unk_27;
+    u8                   unk_28;
+    s8                   unk_29; /* +0x29 the byte both overlays read */
+    s8                   unk_2A; /* +0x2A the byte both overlays read */
+    s8                   unk_2B; /* +0x2B the byte both overlays read */
+    BattleScreenCoord    unk_2C; /* +0x2C the halfword both overlays read */
+    BattleScreenCoord    unk_2E; /* +0x2E the field overlays read it signed */
+    BattleScreenCoord    unk_30; /* +0x30 the field overlays read it signed */
+    u16                  depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
+    WorldPos             pos;
+    SpriteScale          scale;  /* +0x40 16.16, 0x10000 at setup */
+    u8                   unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u8                   unk_49;
+    u8                   unk_4A;
+    u8                   unk_4B;
+    struct PartyBattler* unk_4C; /* +0x4C a linked battle task; magic078 hands its phase to it through param */
+    s32                  unk_50;
+    s32                  unk_54;
+    u16                  unk_58;
+    u16                  unk_5A;
+    u8                   unk_5C;
+    u8                   unk_5D;
+    u8                   unk_5E;
+    u8                   unk_5F;
     s32        unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
     s32        unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
     u8         pad_68[8];

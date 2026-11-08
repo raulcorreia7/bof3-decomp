@@ -43,7 +43,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
                 label = ((variant & BYTE_MASK) + 0xB6);
             }
 
-            D_80146904[task * ACTOR_SIZE / 2] = label;
+            g_Actors[task].unk_7C = label;
             func_801F0718(record, task);
             task++;
         } else if (kind == FAIRY_JOB_BUILD) {
@@ -59,7 +59,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
                 label = ((variant & BYTE_MASK) + 0xBC);
             }
 
-            D_80146904[task * ACTOR_SIZE / 2] = label;
+            g_Actors[task].unk_7C = label;
             func_801F0718(record, task);
             task++;
         }

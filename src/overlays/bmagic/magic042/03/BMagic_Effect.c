@@ -17,10 +17,10 @@ MATCH void func_801EEDA4(void) {
 }
 
 MATCH void func_801EEDE8(void) {
-    EffectStepFuncs5 handlers;
+    Magic042Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1 && g_Task->header.step != 0) {
         func_801EF920();
         func_801EF380(0, g_Task->unk_09);

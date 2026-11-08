@@ -7,8 +7,8 @@ MATCH void func_801E60DC(void) {
 
     slot = work = D_801EC2E0;
     slot->pos.y.fixed += TO_COORD(4);
-    count        = slot->unk_09;
-    slot->unk_09 = count + 0xFF;
+    count            = slot->arg.unk_09;
+    slot->arg.unk_09 = count + 0xFF;
     if (count == 0) {
         D_801EC2E0->header.mode += 1;
         slot         = D_801EC2E0;

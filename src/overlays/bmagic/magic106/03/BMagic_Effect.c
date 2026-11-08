@@ -60,13 +60,13 @@ NON_MATCHING void func_801EF418(void) {
 
     angle                        = (FIELD(u16, D_801F05F8, 0xE) + 0x40) & 0xFFF;
     FIELD(u16, D_801F05F8, 0xE)  = angle;
-    FIELD(s32, D_801F05F8, 0x10) = g_BattleEffectBattler->pos.x.raw + rsin(angle) * FIELD(s16, D_801F05F8, 0xC);
+    FIELD(s32, D_801F05F8, 0x10) = g_BattleEffectBattler->pos.x.fixed + rsin(angle) * FIELD(s16, D_801F05F8, 0xC);
     cosTerm                      = rcos((s16)FIELD(u16, D_801F05F8, 0xE)) * FIELD(s16, D_801F05F8, 0xC);
     counter                      = FIELD(u8, D_801F05F8, 0xB) + 1;
     spin                         = FIELD(u8, D_801F05F8, 0xA);
     FIELD(u16, D_801F05F8, 0x1A) = (u16)(FIELD(u16, D_801F05F8, 0x1A) + spin);
     FIELD(u8, D_801F05F8, 0xB)   = counter;
-    FIELD(s32, D_801F05F8, 0x14) = g_BattleEffectBattler->pos.y.raw + cosTerm;
+    FIELD(s32, D_801F05F8, 0x14) = g_BattleEffectBattler->pos.y.fixed + cosTerm;
     if (g_FrameCount & 1) {
         timer                    = FIELD(u8, D_801F05F8, 9) - 1;
         FIELD(u8, D_801F05F8, 9) = timer;

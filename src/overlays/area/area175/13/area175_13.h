@@ -8,8 +8,6 @@
 #include "work/area_spad.h"
 #include "shared/WorldSpin.h"
 
-#define AREA_SPIN_PRIM_ORDER 1
-
 #define AREA_SPIN_RADIUS     32
 #define AREA_SPIN_PITCH      RANDOM_MASK(0x3FF)
 #define AREA_SPIN_SCALE_MASK 0x7
@@ -33,10 +31,6 @@ extern s8 D_801F5378[];
 
 /* Fairy_VillageInit in the commu overlay at the same address. */
 void func_801EECA4(void);
-
-/* The prim layer the tint is queued on. */
-#define SCREEN_TINT_LAYER 2U
-#define SCREEN_TINT_TPAGE getTPage(0, 2, 0x3C0, 0)
 
 void Screen_DrawTint(void);
 void func_801F36DC(s32 arg0, s32 arg1, s32 arg2);

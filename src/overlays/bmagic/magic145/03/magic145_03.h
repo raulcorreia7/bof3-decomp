@@ -5,9 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The amount Effect_CountDownTimer adds to the effect work byte 9. */
-#define EFFECT_TIMER_STEP 1
-
 extern Callback D_801EF418[];
 void            func_801EF118(void);
 

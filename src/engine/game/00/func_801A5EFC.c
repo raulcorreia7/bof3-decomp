@@ -24,16 +24,16 @@ MATCH void func_801A5EFC(u8* script) {
 
     /* The outer shadow assignment forms the slot offset before the position
      * flag test, as retail schedules it. */
-    work                          = g_Task;
-    g_ActorWalkDestX[*counter][0] = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
+    work                           = g_Task;
+    g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
 
-    g_ActorWalkDestY[*counter][0] = work->pos.y.fixed = (script[9] << 16) | (script[8] != 0 ? 0x8000 : 0);
+    g_Actors[*counter].walk_dest_y = work->pos.y.fixed = (script[9] << 16) | (script[8] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
 
-    D_80146910[*counter][0] = 0;
+    g_Actors[*counter].unk_88 = 0;
 
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
     g_Task->header.mode      = script[0xA];
@@ -45,7 +45,7 @@ MATCH void func_801A5EFC(u8* script) {
      * so their slot offset stays byte arithmetic on the column address. */
     *(u16*)((u8*)&D_80146914 + *counter * ACTOR_SIZE) = script[4];
     *(s16*)((u8*)&D_80146916 + *counter * ACTOR_SIZE) = script[5];
-    D_80146904[*counter][0]                           = script[0xF] | (script[0xE] << 8);
+    g_Actors[*counter].unk_7C                         = script[0xF] | (script[0xE] << 8);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
     D_80146900[*counter][0] = script[0xB];

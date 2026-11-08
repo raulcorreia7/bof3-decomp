@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801D6E20(void) {
-    if ((g_BattleOptions & BATTLE_OPT_KEEP_BGM) == 0u) {
+    if ((g_BattleOutcome.options & BATTLE_OPT_KEEP_BGM) == 0u) {
         SND_StopAllSequences();
         SND_PlaySequence(0, 2, 0x64, 0x64);
     }

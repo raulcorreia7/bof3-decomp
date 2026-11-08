@@ -5,10 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
-extern u8 D_801EC331[];
-
-extern u8       D_801EC33B[];
 /* The step handlers the module runner dispatches. */
 extern Callback D_801EFDD0[];
 

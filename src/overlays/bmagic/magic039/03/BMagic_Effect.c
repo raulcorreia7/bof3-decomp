@@ -99,10 +99,10 @@ MATCH void func_801EF44C(void) {
 }
 
 MATCH void func_801EF4E4(void) {
-    EffectStepFuncs3 handlers;
+    Magic039Steps handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
         func_800AF764();
         func_801EF758();
@@ -123,6 +123,10 @@ MATCH void func_801EF690(void) {
 }
 
 #include "overlays/bmagic/Effect_CountDownTimer.h"
+
+MATCH void Effect_CountDownTimer(void) {
+    BMagic_CountDownEffectTimer(8);
+}
 
 INCLUDE_ASM(func_801EF758);
 

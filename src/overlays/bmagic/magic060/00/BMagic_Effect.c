@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC34(void) {
-    EffectStepFuncs5 handlers;
+    Magic060Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EECA4);
@@ -65,11 +65,21 @@ MATCH void func_801EEF04(void) {
 
 INCLUDE_ASM(func_801EEF50);
 
-/* blocker: same D_801EB6AC flag table as func_801EF118 (no symbol row in this image); needs: type. */
-INCLUDE_ASM(func_801EF0B8);
+/* Sets the bit of the targeted enemy's id in g_IdentifiedEnemies. */
+MATCH void Effect_MarkTargetIdentified(void) {
+    u8 id;
 
-/* blocker: D_801EB6AC (0x78-stride table indexed by g_BattleTargetSelector - 3) and D_80144FA0 have no symbol row in this image; needs: type. */
-INCLUDE_ASM(func_801EF118);
+    id = ENEMY_COMBATANT(g_BattleTargetSelector).enemy_id.byte.kind;
+    g_IdentifiedEnemies[id >> 5] |= 1 << (id & 0x1F);
+}
+
+/* Whether the bit of the targeted enemy's id is set in g_IdentifiedEnemies. */
+MATCH bool Effect_TargetIsIdentified(void) {
+    u8 id;
+
+    id = ENEMY_COMBATANT(g_BattleTargetSelector).enemy_id.byte.kind;
+    return (g_IdentifiedEnemies[id >> 5] & (1 << (id & 0x1F))) != 0;
+}
 
 INCLUDE_ASM(func_801EF174);
 

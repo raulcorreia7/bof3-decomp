@@ -16,12 +16,29 @@ INCLUDE_ASM(func_801EED48);
 /* func_801EF11C */
 #include "overlays/bmagic/Effect_NextStep.h"
 
+MATCH void Effect_NextStep(void) {
+    BMagic_AdvanceEffectStep(1);
+}
+
 INCLUDE_ASM(func_801EF160);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-/* blocker: retail tests id 0x4D first and keeps the type in v1; first diff: lui v1 against v0 at 0x801EF2E8. */
-INCLUDE_ASM(func_801EF2E8);
+/* Whether the queued ability counts: every ability but ids 0x4C and 0xB4. */
+MATCH u8 func_801EF2E8(void) {
+    if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
+        switch (LOHU(g_BattleActionId)) {
+            case 0x4C:
+            case 0xB4:
+                return 0;
+            default:
+                return 1;
+            case 0x4D:
+                return 1;
+        }
+    }
+    return 0;
+}
 
 MATCH void func_801EF330(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);

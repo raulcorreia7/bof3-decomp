@@ -4,11 +4,11 @@
  * every member. */
 /* func_801EF380 (magic070), func_801EF380 (magic071), func_801EF380 (magic072) */
 MATCH void func_801EF380(void) {
-    EffectStepFuncs3 handlers;
-    u8               radius;
+    SparkleEffectSteps handlers;
+    u8                 radius;
 
     handlers = D_801EEC1C;
-    handlers.handlers[D_801F17B4->header.step]();
+    handlers.steps[D_801F17B4->header.step]();
     if ((D_801F17B4->header.flags & EFFECT_SPARKLE_IN_USE) && D_801F17B4->header.step != 0) {
         func_801EFCDC();
         if (D_801F17B4->phase_0C & 3) {

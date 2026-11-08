@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC18(void) {
-    EffectStepFuncs5 handlers;
+    Magic101Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     if (g_Task->timer != 0 && g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF07C();
@@ -22,7 +22,7 @@ MATCH void func_801EEC18(void) {
  * diff 0x801EECE0, the side-mask test's target. Layout problem, not scheduling. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EECCC(void) {
-    u32 offset;
+    u32 slot;
     u32 counter;
     u32 wave;
     u8  facing;
@@ -46,13 +46,13 @@ have_facing:
     g_Task->header.mode += 1;
     counter = 0;
     do {
-        offset                                   = (Battle_AllocEffect(1, 0x1B) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-        wave                                     = (counter >> 2) * 3;
-        wave                                     = (wave << 2) + 1;
-        FIELD(u8, D_801EC331, offset)            = 0;
-        FIELD(u8, D_801EC334, offset)            = (u8)counter;
-        FIELD(u8, D_801EC339, offset)            = (u8)wave;
-        FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
+        slot                               = Battle_AllocEffect(1, 0x1B) & BYTE_MASK;
+        wave                               = (counter >> 2) * 3;
+        wave                               = (wave << 2) + 1;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].unk_04       = counter;
+        g_BattleEffects[slot].arg.unk_09   = wave;
+        g_BattleEffects[slot].target.party = g_Task;
         g_Task->param.unk_0B += 1;
         counter += 1;
     } while (counter < 0x10);
@@ -114,11 +114,11 @@ NON_MATCHING void func_801EF3DC(void) {
     g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
         g_Task->facing       = g_BattleEffectBattler->facing;
-        g_Task->pos.x.raw    = g_BattleEffectBattler->pos.x.raw;
+        g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
         angle                = g_Task->unk_04;
-        g_Task->pos.y.raw    = g_BattleEffectBattler->pos.y.raw;
+        g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
         g_Task->param.unk_0B = angle * 4 & 0x3F;
-        g_Task->pos.z.raw    = g_BattleEffectBattler->pos.z.raw + 0x01800000;
+        g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed + 0x01800000;
         value                = D_801EFCC0[g_Task->unk_04];
         g_Task->unk_10       = 0x60;
         angle                = g_Task->unk_04;

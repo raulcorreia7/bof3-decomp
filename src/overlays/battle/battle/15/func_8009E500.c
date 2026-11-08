@@ -22,9 +22,9 @@ NON_MATCHING void func_8009E500(void) {
         } else {
             g_BattleTargetRecord->ap_change = ENEMY_COMBATANT(g_BattleTarget).ap / 5;
         }
-        g_BattleAction->unk_08  = 2;
-        g_BattleTargetRecord[4] = 2;
-        delta                   = g_BattleTargetRecord->ap_change;
+        g_BattleAction->unk_08             = 2;
+        g_BattleTargetRecord->target_flags = 2;
+        delta                              = g_BattleTargetRecord->ap_change;
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             limit = g_BattlePartyBattlers[g_BattleActiveBattler].chr.stats.max_ap;
             if (limit < g_BattlePartyBattlers[g_BattleActiveBattler].chr.ap + delta) {
@@ -42,7 +42,7 @@ NON_MATCHING void func_8009E500(void) {
         }
         g_BattleAction->unk_08 = 0;
     } else {
-        g_BattleTargetRecord[4] = 2;
+        g_BattleTargetRecord->target_flags = 2;
     }
 }
 #else

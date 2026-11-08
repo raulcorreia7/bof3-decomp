@@ -5,7 +5,16 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs5 D_801EEC10;
-extern u8               D_801F0488[];
+extern SVECTOR D_1F800014[];
+void           BMagic_DrawGlowRing(void);
+
+#define MAGIC096_STEP_COUNT 5
+
+typedef struct Magic096Steps {
+    Callback steps[MAGIC096_STEP_COUNT];
+} Magic096Steps;
+
+extern Magic096Steps D_801EEC10;
+extern u8            D_801F0488[];
 
 #endif

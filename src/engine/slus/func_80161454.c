@@ -36,7 +36,7 @@ NON_MATCHING void func_80161454(u32 index) {
     val3 = 0;
     if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {
         work = g_Task;
-        tmp0 = (s16)work->unk_30;
+        tmp0 = (s16)work->screen_y;
         val0 = (tmp0 + 0x40) * 0x2C;
         if (tmp0 < -0x40) {
             val0 = 0;
@@ -46,7 +46,7 @@ NON_MATCHING void func_80161454(u32 index) {
         }
         val1 = val0;
         if (g_SndMono == 0) {
-            tmp1 = (s16)work->unk_2E;
+            tmp1 = (s16)work->screen_x;
             q    = tmp1 + 0x28;
             val7 = (u32)q >> 2;
             if (q < 0) {
@@ -76,7 +76,7 @@ NON_MATCHING void func_80161454(u32 index) {
         }
         if (g_SndMono == 0) {
             work = g_Task;
-            a1   = (s16)work->unk_2E - 0xA0;
+            a1   = (s16)work->screen_x - 0xA0;
             if (a1 < 0) {
                 q = (a1 * (s16)val1) / 480;
                 q = ABS(q);
@@ -98,21 +98,21 @@ NON_MATCHING void func_80161454(u32 index) {
     }
     work = g_Task;
     val4 = 8;
-    if (((s32)work->unk_70 & 0x0FFFFF00) == 0x0FFFFF00) {
+    if (((s32)work->state_70.word & 0x0FFFFF00) == 0x0FFFFF00) {
         work->header.flags = work->header.flags & 0xF7;
         work               = g_Task;
-        (s32) work->unk_70 = (s32)work->unk_70 & 0xF00000FF;
+        work->state_70.word &= 0xF00000FF;
         return;
     }
     val2 = 0x1F;
     do {
         val5 = val4 & BYTE_MASK;
-        tmp4 = ((s32)g_Task->unk_70 >> val5) & 0x1F;
+        tmp4 = ((s32)g_Task->state_70.word >> val5) & 0x1F;
         if (tmp4 != 0x1F) {
             val8 = 1 << tmp4;
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
-                work               = g_Task;
-                (s32) work->unk_70 = (s32)work->unk_70 | (0x1F << val5);
+                work = g_Task;
+                work->state_70.word |= 0x1F << val5;
             } else {
                 val3 |= val8;
             }

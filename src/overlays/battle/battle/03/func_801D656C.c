@@ -12,10 +12,10 @@ MATCH void func_801D656C(void) {
             return;
         }
     }
-    if (g_BattleEncounter != 0 && g_BossBattleEventHook(2U) == GAME_NONE) {
+    if (g_BattleEncounter != 0 && g_BossBattleEventHook(BOSS_EVENT_TURN_END) == BOSS_EVENT_PENDING) {
         return;
     }
-    if (g_BattleResult != 0) {
+    if (g_BattleOutcome.result != 0) {
         D_80148354    = 0;
         D_801483C0    = 0;
         D_80148378[0] = 0;
@@ -45,10 +45,10 @@ MATCH void func_801D656C(void) {
                 g_BattlePartyBattlers[i].header.mode = 2;
             }
         }
-        g_BattleSurprise = 0;
-        g_BattleMode     = 1;
-        g_BattleStep     = 0;
-        g_BattleSubStep  = 0;
+        g_BattleOutcome.surprise = 0;
+        g_BattleMode             = 1;
+        g_BattleStep             = 0;
+        g_BattleSubStep          = 0;
         g_BattleState &= 0xFFF7;
     }
 }

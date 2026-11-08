@@ -13,7 +13,7 @@ MATCH s32 func_8019C028(void) {
             goto fail; /* the other slot is the same slot */
         }
         if (other != 0) {
-            D_80145E92[other * BATTLE_PARTY_STRIDE] = 1;
+            g_BattlePartyBattlers[other].header.step = 1;
         }
     }
     g_Task->header.mode = 4;

@@ -81,6 +81,17 @@ ASSERT_OFFSET(ScratchPadScenario, data_ptr_10, 0x10);
 ASSERT_OFFSET(ScratchPadScenario, vectors_14, 0x14);
 ASSERT_OFFSET(ScratchPadScenario, work_ptr, 0x44);
 
+/* Battle effect draw routines (the bmagic rings): halfword parameters at 0x00, such as the ring radii and
+ * edge shades, ahead of the RotTransPers4 corner vectors at 0x14 (D_1F800014). */
+typedef struct ScratchPadEffect {
+    s16     params[10]; /* 0x00 */
+    SVECTOR vectors[4]; /* 0x14 */
+} ScratchPadEffect;
+
+#define SCRATCH_PAD_EFFECT_VIEW_SIZE 0x34
+ASSERT_SIZE(ScratchPadEffect, SCRATCH_PAD_EFFECT_VIEW_SIZE);
+ASSERT_OFFSET(ScratchPadEffect, vectors, 0x14);
+
 /* The scratchpad seen as one object: the raw byte view the loader streams through, plus one member per
  * mode. The views are prefixes (0x48 or less); the raw view is the full 1 KiB. */
 typedef union ScratchPadViews {
@@ -89,6 +100,7 @@ typedef union ScratchPadViews {
     ScratchPadArea     area;                  /* 0x000 */
     ScratchPadScenario scenario;              /* 0x000 */
     ScratchPadVector   vector;                /* 0x000 */
+    ScratchPadEffect   effect;                /* 0x000 */
 } ScratchPadViews;
 
 ASSERT_SIZE(ScratchPadViews, SCRATCH_PAD_SIZE);

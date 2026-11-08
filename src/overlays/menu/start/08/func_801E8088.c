@@ -13,7 +13,7 @@ MATCH s32 func_801E8088(s32 character_index, s32 record_index) {
     if (mode == 0) {
         record = &g_Characters[index];
     } else {
-        record = (Character*)&D_80145F04[index * BATTLE_PARTY_STRIDE];
+        record = &g_BattlePartyBattlers[index].chr;
     }
     if (record->status & (STATUS_POISONED | STATUS_CONFUSED)) {
         value |= 1;

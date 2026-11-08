@@ -87,9 +87,9 @@ NON_MATCHING void func_8019625C(void) {
             g_GfxPalettePending = 1u;
             if ((entry->flags & 0x40u) != 0u) {
                 entry->flags &= 0xBFu;
-                entry->target[0x27] = entry->step;
+                entry->target->saved_byte = entry->step;
                 if ((entry->flags & 0x80u) != 0u) {
-                    entry->target[0x24] |= 4u;
+                    entry->target->flags |= 4u;
                 }
             }
         }

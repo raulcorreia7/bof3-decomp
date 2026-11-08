@@ -5,10 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The amount Effect_CountDownTimer adds to the effect work byte 9. */
-#define EFFECT_TIMER_STEP 8
+#define MAGIC039_STEP_COUNT 3
 
-extern EffectStepFuncs3  D_801EEC28;
+typedef struct Magic039Steps {
+    Callback steps[MAGIC039_STEP_COUNT];
+} Magic039Steps;
+
+extern Magic039Steps     D_801EEC28;
 extern BMagicEffectFuncs D_801EEC10;
 
 void func_801EF758(void);

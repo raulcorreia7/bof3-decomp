@@ -42,26 +42,25 @@ loop_6:
         val7                  = val3 & BYTE_MASK;
         goto loop_6; /* retail branch */
     }
-    UI_DrawWindow((val0->pos.x.raw + 3) & HALF_MASK, (val0->pos.y.raw + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
+    UI_DrawWindow((val0->pos.x + 3) & HALF_MASK, (val0->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
                   MENU_INVENTORY_WINDOW_HEIGHT, 0, (s32)g_WindowStyle);
     val4 = func_801AFD10(&val0->unk_0A, &stack_20, &stack_21, &val0->unk_08);
     val5 = val4 & BYTE_MASK;
-    val1 = (s8)stack_20 + (val0->pos.y.raw + 0x1A);
+    val1 = (s8)stack_20 + (val0->pos.y + 0x1A);
     if (val5 < (val5 + (stack_21 + 9))) {
         val6 = val5;
     loop_9:
         if (*(&D_801ED878 + val5) != 0) {
             val2 = val1 + 2;
             if (val0->unk_0B == val5) {
-                func_801AEA80((val0->pos.x.raw + 7) & HALF_MASK, (val1 + 2) & HALF_MASK, 6, 1);
+                func_801AEA80((val0->pos.x + 7) & HALF_MASK, (val1 + 2) & HALF_MASK, 6, 1);
                 tmp0 = val1;
                 val1 -= 2;
-                UI_DrawText((s16)(val0->pos.x.raw + 17), tmp0, 7, 0xFFU,
-                            Resource_GetText(*(&D_801ED878 + val5) + 0x4171));
+                UI_DrawText((s16)(val0->pos.x + 17), tmp0, 7, 0xFFU, Resource_GetText(*(&D_801ED878 + val5) + 0x4171));
                 val2 = val1 + 2;
             }
-            func_801AEA80((val0->pos.x.raw + 7) & HALF_MASK, val2 & HALF_MASK, 6, 0);
-            UI_DrawText((s16)(val0->pos.x.raw + 17), val1, 0, 0xFFU, Resource_GetText(*(&D_801ED878 + val5) + 0x4171));
+            func_801AEA80((val0->pos.x + 7) & HALF_MASK, val2 & HALF_MASK, 6, 0);
+            UI_DrawText((s16)(val0->pos.x + 17), val1, 0, 0xFFU, Resource_GetText(*(&D_801ED878 + val5) + 0x4171));
             if (val0->unk_0B == val5) {
                 val1 = val2;
             }
@@ -77,45 +76,44 @@ loop_6:
     val4         = 0;
     flags        = &g_WindowStyle;
     val0->unk_0C = *(&D_801ED878 + val0->unk_0B);
-    UI_DrawWindow((val0->pos.x.raw + 3) & HALF_MASK, (val0->pos.y.raw + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
+    UI_DrawWindow((val0->pos.x + 3) & HALF_MASK, (val0->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
                   MENU_INVENTORY_TOP_HEIGHT, 0, (s32)*flags);
-    UI_DrawWindow((val0->pos.x.raw + 3) & HALF_MASK, (val0->pos.y.raw + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
+    UI_DrawWindow((val0->pos.x + 3) & HALF_MASK, (val0->pos.y + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
                   MENU_INVENTORY_BOTTOM_HEIGHT, 0, (s32)*flags);
     level = &D_801ED608;
-    UI_DrawText((s16)(val0->pos.x.raw - (((func_801AF20C(level) & BYTE_MASK) * 4) - 78)), (s16)(val0->pos.y.raw + 7), 0,
-                0x10U, level);
-    UI_DrawSpriteRun((s16)val0->pos.x.raw, (s16)val0->pos.y.raw, &D_801ED5F0, 1);
-    UI_DrawSpriteRun((s16)val0->pos.x.raw, (s16)val0->pos.y.raw, &D_801ED5FC, 1);
+    UI_DrawText((s16)(val0->pos.x - (((func_801AF20C(level) & BYTE_MASK) * 4) - 78)), (s16)(val0->pos.y + 7), 0, 0x10U,
+                level);
+    UI_DrawSpriteRun((s16)val0->pos.x, (s16)val0->pos.y, &D_801ED5F0, 1);
+    UI_DrawSpriteRun((s16)val0->pos.x, (s16)val0->pos.y, &D_801ED5FC, 1);
     do {
         tmp1 = val4 & BYTE_MASK;
         val4 += 1;
-        UI_DrawSprite((s16)(val0->pos.x.raw + ((tmp1 + 5) * 8)), (s16)val0->pos.y.raw, 1, 1);
+        UI_DrawSprite((s16)(val0->pos.x + ((tmp1 + 5) * 8)), (s16)val0->pos.y, 1, 1);
     } while ((u32)(val4 & BYTE_MASK) < 0xAU);
     val4 = 0;
     do {
         tmp2 = val4 & BYTE_MASK;
         val4 += 1;
-        UI_DrawSprite((s16)val0->pos.x.raw, (s16)(val0->pos.y.raw + ((tmp2 + 3) * 8)), 4, 1);
+        UI_DrawSprite((s16)val0->pos.x, (s16)(val0->pos.y + ((tmp2 + 3) * 8)), 4, 1);
     } while ((u32)(val4 & BYTE_MASK) < 0xFU);
     val4 = 0;
-    UI_DrawSprite((s16)(val0->pos.x.raw + 144), (s16)(val0->pos.y.raw + 24), 0x16, 1);
+    UI_DrawSprite((s16)(val0->pos.x + 144), (s16)(val0->pos.y + 24), 0x16, 1);
     do {
         tmp3 = val4 & BYTE_MASK;
         val4 += 1;
-        UI_DrawSprite((s16)(val0->pos.x.raw + 144), (s16)(val0->pos.y.raw + ((tmp3 + 5) * 8)), 0x17, 1);
+        UI_DrawSprite((s16)(val0->pos.x + 144), (s16)(val0->pos.y + ((tmp3 + 5) * 8)), 0x17, 1);
     } while ((u32)(val4 & BYTE_MASK) < 0xCU);
     val4 = 0;
-    UI_DrawSprite((s16)(val0->pos.x.raw + 144), (s16)(val0->pos.y.raw + 136), 0x18, 1);
-    UI_DrawSprite((s16)val0->pos.x.raw, (s16)(val0->pos.y.raw + 144), 0x19, 1);
+    UI_DrawSprite((s16)(val0->pos.x + 144), (s16)(val0->pos.y + 136), 0x18, 1);
+    UI_DrawSprite((s16)val0->pos.x, (s16)(val0->pos.y + 144), 0x19, 1);
     do {
         tmp4 = val4 & BYTE_MASK;
         val4 += 1;
-        UI_DrawSprite((s16)(val0->pos.x.raw + ((tmp4 + 1) * 8)), (s16)(val0->pos.y.raw + 144), 0x1A, 1);
+        UI_DrawSprite((s16)(val0->pos.x + ((tmp4 + 1) * 8)), (s16)(val0->pos.y + 144), 0x1A, 1);
     } while ((u32)(val4 & BYTE_MASK) < 0x11U);
-    UI_DrawSprite((s16)(val0->pos.x.raw + 8), (s16)val0->pos.y.raw, 0x32, 1);
-    UI_DrawSprite((s16)(val0->pos.x.raw + 144), (s16)val0->pos.y.raw, 0x33, 1);
-    func_801AFA1C(&D_801ED878, val0->unk_0A, (s16)(val0->pos.x.raw + 0x90), (s16)(val0->pos.y.raw + 0x18), 9, 0x12,
-                  0x74);
+    UI_DrawSprite((s16)(val0->pos.x + 8), (s16)val0->pos.y, 0x32, 1);
+    UI_DrawSprite((s16)(val0->pos.x + 144), (s16)val0->pos.y, 0x33, 1);
+    func_801AFA1C(&D_801ED878, val0->unk_0A, (s16)(val0->pos.x + 0x90), (s16)(val0->pos.y + 0x18), 9, 0x12, 0x74);
 }
 #else
 INCLUDE_ASM(func_801EAF98);

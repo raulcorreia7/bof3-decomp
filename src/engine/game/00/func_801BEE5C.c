@@ -69,7 +69,7 @@ found:
     } while (++slot < g_PartySize);
     return 0;
 phase2:
-    if ((g_BattleOptions & 4) != 0)
+    if ((g_BattleOutcome.options & 4) != 0)
         return 1;
     phase2_count = g_PartySize;
     slot         = 0;

@@ -65,14 +65,14 @@ NON_MATCHING void func_8014D290(void) {
             sort |= (g_Task->pos.y.fixed >> 15) & BYTE_MASK;
         }
     } else {
-        sort |= (((u16)COORD_INT(g_Task->depth) >> 5) & BYTE_MASK) ^ 0x80;
+        sort |= (((u16)COORD_INT(g_Task->pos.z) >> 5) & BYTE_MASK) ^ 0x80;
     }
     g_Task->unk_32 = sort;
     Actor_ReadValue();
 
     vec.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     vec.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    vec.vz = -COORD_INT(g_Task->depth) / 2;
+    vec.vz = -COORD_INT(g_Task->pos.z) / 2;
     rot    = RotTransPers(&vec, &sxy, &p, &flag);
 
     FIELD(s32, g_Task, 0x60) = rot;

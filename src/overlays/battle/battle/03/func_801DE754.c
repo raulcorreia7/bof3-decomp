@@ -8,7 +8,7 @@ MATCH void func_801DE754(void) {
     ScratchPad*      sp;
 
     panel = D_801EB4DC;
-    gate  = &g_BattleEventFlags;
+    gate  = &g_BattleOutcome.event_flags;
     *gate |= panel->unk_01;
     half = panel->unk_08;
     if (half != 0xFFu) {

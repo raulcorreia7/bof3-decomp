@@ -188,7 +188,7 @@ NON_MATCHING void func_8014BC70(void) {
                     i     = 0;
                     do {
                         if (D_80147D0C[i].depth < 0) {
-                            if (D_801483WORLD_WORK_LIST_DRAW_NEGATIVE_DEPTHE & AREA_DRAW_NEGATIVE_DEPTH) {
+                            if (g_AreaDrawFlags & AREA_DRAW_NEGATIVE_DEPTH) {
                                 TASK_SET(D_80147D08[i].primitive);
                                 Area_DrawObjectSprite();
                             }

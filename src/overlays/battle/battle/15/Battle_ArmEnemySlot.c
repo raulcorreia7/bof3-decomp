@@ -56,10 +56,10 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     ((EnemyBattler*)g_Task)->unk_48      = 0;
     ((EnemyBattler*)g_Task)->unk_4B      = 0xFF;
     enemy                                = (EnemyBattler*)g_Task;
-    enemy->pos.x.raw                     = x;
-    enemy->pos.y.raw                     = y;
+    enemy->pos.x.fixed                   = x;
+    enemy->pos.y.fixed                   = y;
     enemy                                = (EnemyBattler*)g_Task;
-    COORD_INT(enemy->pos.z)              = Area_SampleHeight(enemy->pos, y);
+    COORD_INT(enemy->pos.z)              = Area_SampleHeight(enemy->pos.x.fixed, y);
     enemy->unk_2B                        = 0;
     Area_FindSceneRecord(FIELD(u16, &D_800E405E, unit_offset));
     g_BattleEnemyBattlers[slot & BYTE_MASK].unk_8A = FIELD(u16, &D_800E405E, unit_offset);

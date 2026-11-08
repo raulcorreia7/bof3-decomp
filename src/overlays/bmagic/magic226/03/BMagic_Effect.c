@@ -25,7 +25,7 @@ MATCH void func_801EF048(void) {
         func_8014D290();
         Effect_SetActiveActorMatrix();
         func_801EF814();
-        func_801EFA64();
+        BMagic_DrawDarkRing();
         PopMatrix();
     }
     g_ScriptBank = AREA_SCRIPT_BANK;
@@ -35,8 +35,12 @@ INCLUDE_ASM(func_801EF10C);
 
 INCLUDE_ASM(func_801EF310);
 
-#define BMAGIC_CAMERA_SWING_TICKS 0x3C
 #include "overlays/bmagic/Effect_SwingCameraAngle.h"
+
+/* func_801EF540 */
+MATCH void Effect_SwingCameraAngle(void) {
+    BMAGIC_SWING_CAMERA(60);
+}
 
 #include "../../Effect_StartTint.h"
 
@@ -60,7 +64,7 @@ MATCH void func_801EF698(void) {
 
 INCLUDE_ASM(func_801EF814);
 
-INCLUDE_ASM(func_801EFA64);
+#include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
 MATCH void func_801EFD84(void) {
     SYS_DISPATCH_TASK(D_801F0C60, 1, g_Task);

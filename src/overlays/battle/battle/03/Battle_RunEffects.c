@@ -6,26 +6,23 @@
 MATCH void Battle_RunEffects(void) {
     BattleEffectStages handlers;
     Callback*          funcs;
-    u8*                slot;
-    s32                offset;
-    u32                work;
+    BattleEffect*      effect;
+    PartyBattler*      target;
     s32                i;
 
     handlers = g_BattleEffectStages;
     i        = 0;
     funcs    = handlers.handlers;
-    slot     = (u8*)g_BattleEffects;
-    offset   = 0;
+    effect   = g_BattleEffects;
     do {
-        if (((u8*)g_BattleEffects)[offset] != 0u) {
-            work       = *(u32*)(D_801EC3A4 + offset);
-            D_801EC2E0 = (BattleEffect*)slot;
-            TASK_SET((PartyBattler*)slot);
-            g_BattleEffectBattler = (PartyBattler*)(work);
-            funcs[slot[0x06]]();
+        if (g_BattleEffects[i].header.flags != 0u) {
+            target     = g_BattleEffects[i].target.party;
+            D_801EC2E0 = effect;
+            TASK_SET(effect);
+            g_BattleEffectBattler = target;
+            funcs[effect->unk_06]();
         }
-        slot += 0x78;
+        effect++;
         i += 1;
-        offset += 0x78;
     } while (i < BATTLE_EFFECT_COUNT);
 }

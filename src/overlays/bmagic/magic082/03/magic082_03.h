@@ -5,9 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The effect ticker value below which Effect_NextStep advances the step. */
-#define EFFECT_STEP_LIMIT 2
-
 extern BMagicEffectFuncs D_801EEC04;
 
 extern Callback D_801F0D1C[];

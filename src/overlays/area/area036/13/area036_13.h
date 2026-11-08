@@ -11,9 +11,8 @@ extern void (*D_801F3304[])(void);
 
 /* The scratchpad work object's loader hook. */
 /* Drains the copied position against the image's wall list. */
-void func_801F2DF0(s32* pos);
+void Area_DrawLightPillar(s32* pos);
 
 /* The first row of the trigger band in the shared Area_CheckStepTrigger body. */
-#define AREA_STEP_TRIGGER_ROW 0x23
 
 #endif

@@ -22,15 +22,17 @@ MATCH void func_801A5400(u8* script) {
         FIELD(u16, counter, 0x2u) = data[0x2] | (data[0x1] << 8);
         func_801A4AA8();
         Area_FindSceneRecord(FIELD(u16, counter, 0x2u));
-        g_Task->header.flags          = ACTOR_FLAG_IN_USE;
-        coord_record                  = g_Task;
-        g_ActorWalkDestX[*counter][0] = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
+        g_Task->header.flags           = ACTOR_FLAG_IN_USE;
+        coord_record                   = g_Task;
+        g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed =
+            (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
-        g_ActorWalkDestY[*counter][0] = coord_record->pos.y.fixed = (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
+        g_Actors[*counter].walk_dest_y = coord_record->pos.y.fixed =
+            (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
-        *D_80146910[*counter]         = 0;
+        g_Actors[*counter].unk_88     = 0;
         dist                          = Area_SampleHeight(coord_record->pos.x.fixed, coord_record->pos.y.fixed);
         dist_record                   = g_Task;
         COORD_INT(dist_record->pos.z) = dist;
@@ -38,7 +40,7 @@ MATCH void func_801A5400(u8* script) {
         g_Task->header.step           = data[0xA];
         g_Task->direction_08          = data[0] & 0xF;
         g_Task->unk_06                = data[0] >> 4;
-        D_80146904[*counter][0]       = 0xFFFF;
+        g_Actors[*counter].unk_7C     = 0xFFFF;
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
         *D_80146900[*counter] = data[0x9];

@@ -9,9 +9,8 @@
 
 extern Callback D_801F34E8[];
 
-void func_801F2F78(s32 pos[3]);
+void Area_DrawLightPillar(s32* pos);
 
 /* The first row of the trigger band in the shared Area_CheckStepTrigger body. */
-#define AREA_STEP_TRIGGER_ROW 0x33
 
 #endif
