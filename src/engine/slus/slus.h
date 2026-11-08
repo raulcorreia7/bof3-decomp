@@ -1216,8 +1216,7 @@ s32         Game_TestEventFlag(u8** cursor);
 s32         Game_HasVitalItem(u8** cursor);
 s32         Game_IsScenarioAtLeast(u8** cursor);
 s32         func_8015B7F0(u8** cursor);
-/* func_8015B83C */
-s32         Script_TestFlag(u8** cursor);
+s32         func_8015B83C(u8** cursor);
 s32         Game_IsScriptVar0Equal(u8** cursor);
 s32         Game_IsScriptVar1Equal(u8** cursor);
 s32         Game_IsScriptVar2Equal(u8** cursor);

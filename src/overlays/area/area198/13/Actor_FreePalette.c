@@ -1,5 +1,6 @@
 #include "area198_13.h"
 
-MATCH void func_801F2FD4(void) {
+/* func_801F2FD4 */
+MATCH void Actor_FreePalette(void) {
     GFX_FreePaletteSlotOwner(g_Task);
 }

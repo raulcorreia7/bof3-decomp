@@ -309,7 +309,7 @@ segments:
       - [0xDC58, c, func_800A4458]
       - [0xDE88, c, func_800A4688]
       - [0xDEC4, c, func_800A46C4]
-      - [0xDF00, c, Battle_LoadDragonArchive]
+      - [0xDF00, c, Battle_LoadDraArchive]
       - [0xDF44, c, func_800A4744]
       - [0xDFAC, c, func_800A47AC]
       - [0xE100, c, func_800A4900]

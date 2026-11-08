@@ -380,7 +380,7 @@ segments:
       - [0xC5798, c, Game_HasVitalItem]
       - [0xC57C4, c, Game_IsScenarioAtLeast]
       - [0xC57F0, c, func_8015B7F0]
-      - [0xC583C, c, Script_TestFlag]
+      - [0xC583C, c, func_8015B83C]
       - [0xC5870, c, func_8015B870]
       - [0xC598C, c, Game_IsScriptVar0Equal]
       - [0xC59B4, c, Game_IsScriptVar1Equal]

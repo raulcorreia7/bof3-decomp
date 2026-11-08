@@ -602,7 +602,7 @@ void func_801DDFB0(s16 x, s16 y, u32 flags, u8 row, u8 variant);
 void func_801DE188(void);
 void func_801DE1C4(void);
 void func_801DE200(void);
-void Shop_BeginFadeIn(void);
+void Shop_StartFadeIn(void);
 void func_801DE40C(void);
 void func_801DE45C(void);
 void func_801DE4C8(void);

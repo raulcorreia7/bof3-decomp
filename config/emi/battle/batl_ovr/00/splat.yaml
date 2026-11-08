@@ -11,7 +11,7 @@ segments:
     subsegments:
       - [0x0, bin, D_801EEC00]
       - [0xC, c, func_801EEC0C]
-      - [0x40, c, Battle_InitOverlay]
+      - [0x40, c, Battle_StartGameOver]
       - [0x7C, c, func_801EEC7C]
       - [0x2B8, c, func_801EEEB8]
       - [0x310, c, func_801EEF10]

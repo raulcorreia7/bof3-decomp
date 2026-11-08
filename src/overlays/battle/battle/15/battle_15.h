@@ -707,7 +707,7 @@ u8          func_800A4238(s32 input_mask);
 s16         func_800A4294(s32 input_kind);
 void        func_800A46C4(void);
 /* func_800A4700 */
-void        Battle_LoadDragonArchive(void);
+void        Battle_LoadDraArchive(void);
 void        func_800A4744(void);
 void        func_800A47AC(void);
 void        func_800A4900(void);

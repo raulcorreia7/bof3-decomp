@@ -5,7 +5,7 @@
  * shop_00.h. */
 
 /* func_801DE3C8 */
-MATCH void Shop_BeginFadeIn(void) {
+MATCH void Shop_StartFadeIn(void) {
     volatile u8* counter;
     u8           count;
 
