@@ -5,7 +5,7 @@
 MATCH void Menu_ResetPanelTasks(void) {
     s32 i;
 
-    for (i = 0; i < 22; i++) {
+    for (i = 0; i < MENU_PANEL_COUNT; i++) {
         g_MenuPanelTasks[i].active        = 0;
         g_MenuPanelTasks[i].handler       = 0;
         g_MenuPanelTasks[i].mode          = 0;

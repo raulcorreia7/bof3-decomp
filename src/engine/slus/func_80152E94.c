@@ -12,7 +12,7 @@ MATCH void func_80152E94(void) {
 
     for (i = 0; i < 2; i++) {
         rotCol = g_AreaGridColCursor;
-        for (col = 0; col < 28; col++) {
+        for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
             rotCol = (rotCol == AREA_CELL_GRID_COLS - 1) ? 0 : rotCol + 1;
             cell   = &g_AreaCells[g_AreaGridRowCursor][rotCol];
             Area_RequestCellRows(cell);
