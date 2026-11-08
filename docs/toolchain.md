@@ -196,7 +196,7 @@ Known compiler residuals:
 | Unit                                                                                    | State                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `exe/slus_004_22@0x80162B08`                                                            | The zero-slot arm loads `v0 = 1`, and GCC's delay-slot reorganization moves the common return into the jump delay slot. The pinned GCC's raw assembly contains the `li`, so maspsx and ASPSX do not cause it. |
-| SLUS stream decoder: `func_80164028`, `func_80164064`, `func_801642CC`, `func_801642F4` | No exact C match in 56 candidate profiles each for GCC 2.8.0, 2.8.1 and 2.95.2. The `.c` files link the split assembly and keep the C89 model behind `HAND_ASM`.               |
+| SLUS stream decoder: `func_80164028`, `func_80164064`, `func_801642CC`, `func_801642F4` | No exact C match in 56 candidate profiles each for GCC 2.8.0, 2.8.1 and 2.95.2. The `.c` files link the split assembly and keep the C89 model behind `HAND_ASM`.                                              |
 
 ### Compiler wrapper
 

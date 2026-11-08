@@ -211,9 +211,7 @@ def hand_functions(hand_files: list[str]) -> set[str]:
     return {Path(f).stem for f in hand_files}
 
 
-def check_hand_units(
-    hand_files: list[str], sources: dict[str, str]
-) -> list[Violation]:
+def check_hand_units(hand_files: list[str], sources: dict[str, str]) -> list[Violation]:
     """HAND_ASM is required on every asm/*/hand/ function and allowed on no other."""
     hand = hand_functions(hand_files)
     marked: set[str] = set()
@@ -225,11 +223,16 @@ def check_hand_units(
                 line = text.count("\n", 0, m.start()) + 1
                 found.append(
                     Violation(
-                        path, line, m.group(1), "HAND_ASM on a function with no asm/*/hand/ file"
+                        path,
+                        line,
+                        m.group(1),
+                        "HAND_ASM on a function with no asm/*/hand/ file",
                     )
                 )
     for name in sorted(hand - marked):
-        found.append(Violation("asm/hand", 1, name, "hand-written assembly without HAND_ASM"))
+        found.append(
+            Violation("asm/hand", 1, name, "hand-written assembly without HAND_ASM")
+        )
     return found
 
 

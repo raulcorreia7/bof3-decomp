@@ -99,11 +99,11 @@ it when a lift attempt learned something ([comments](conventions.md#comments)).
 Three markers expand to nothing and say what a definition is; they are not `FAKE:` helpers and
 take no `FAKE:` note ([helpers](conventions.md#helpers)).
 
-| Marker         | Meaning                                                       | Shape                                                  | Counts as           |
-| -------------- | ------------------------------------------------------------- | ------------------------------------------------------ | ------------------- |
-| `MATCH`        | this C is the original and compiles to the retail bytes       | plain definition                                       | a C match           |
-| `NON_MATCHING` | a C draft; the split assembly builds until it matches         | `#ifdef NON_MATCHING` draft, `#else INCLUDE_ASM`       | debt                |
-| `HAND_ASM`     | the original was hand-written assembly; this C is equivalent  | same shape; the `INCLUDE_ASM` is the original          | done, counted apart |
+| Marker         | Meaning                                                      | Shape                                            | Counts as           |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------ | ------------------- |
+| `MATCH`        | this C is the original and compiles to the retail bytes      | plain definition                                 | a C match           |
+| `NON_MATCHING` | a C draft; the split assembly builds until it matches        | `#ifdef NON_MATCHING` draft, `#else INCLUDE_ASM` | debt                |
+| `HAND_ASM`     | the original was hand-written assembly; this C is equivalent | same shape; the `INCLUDE_ASM` is the original    | done, counted apart |
 
 `tools/check_markers.py` requires `HAND_ASM` on every function in `asm/<target>/hand/` and allows
 it nowhere else. A `HAND_ASM` body has the same inputs, outputs and effects as the assembly and
