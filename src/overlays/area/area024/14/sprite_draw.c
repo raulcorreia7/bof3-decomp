@@ -486,39 +486,16 @@ MATCH s32 func_801F30EC(void) {
     return result;
 }
 
-MATCH void func_801F31B4(void) {
-    AreaSprite* work;
-    u8          count;
+#include "overlays/area/Area_SpriteExpandStep.h"
 
-    work           = (AreaSprite*)D_801F5B00;
-    count          = (work->flags_02 - 1u);
-    work->flags_02 = count;
-    work->origin.x += (work->normal.vx * 2);
-    work->origin.y += (work->normal.vy * 2);
-    work->origin.z += (work->normal.vz * 2);
-    work->half_size = (work->half_size + 0x80u);
-    if (!(count & BYTE_MASK)) {
-        ((AreaSprite*)D_801F5B00)->flags_02 = 0x40u;
-        ((AreaSprite*)D_801F5B00)->flags_01 = (((AreaSprite*)D_801F5B00)->flags_01 + 1u);
-    }
+MATCH void func_801F31B4(void) {
+    AREA_SPRITE_EXPAND_STEP(D_801F5B00);
 }
 
-MATCH void func_801F3250(void) {
-    AreaSprite* work;
-    u8          count;
-    u8          tick;
+#include "overlays/area/Area_SpriteDriftStep.h"
 
-    work = (AreaSprite*)D_801F5B00;
-    tick = (work->flags_03 - 1u);
-    work->origin.x += work->normal.vx;
-    work->origin.y += work->normal.vy;
-    work->flags_03 = tick;
-    work->origin.z += work->normal.vz;
-    count                               = (((AreaSprite*)D_801F5B00)->flags_02 - 1u);
-    ((AreaSprite*)D_801F5B00)->flags_02 = count;
-    if (!(count & BYTE_MASK)) {
-        ((AreaSprite*)D_801F5B00)->flags = 0u;
-    }
+MATCH void func_801F3250(void) {
+    AREA_SPRITE_DRIFT_STEP(D_801F5B00);
 }
 
 MATCH void func_801F32D4(void) {

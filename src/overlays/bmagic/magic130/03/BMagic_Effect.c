@@ -16,7 +16,14 @@ MATCH void func_801EEED4(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEF18);
+MATCH void func_801EEF18(void) {
+    g_ScriptBank = 0x800C3800;
+    D_801EFA4C[g_Task->header.step]();
+    if ((g_Task->header.flags & ACTOR_FLAG_IN_USE) && (g_Task->header.step != 0)) {
+        func_8014D290();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 /* blocker: work pointer lifetime; first diff: lui v1 at +0x20. */
 INCLUDE_ASM(func_801EEFB4);

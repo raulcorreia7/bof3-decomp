@@ -159,8 +159,6 @@ extern s32             func_801D1E60(void);
 extern void            func_801D1EE8(void);
 extern void            func_801D27BC(void);
 extern u8              D_80144FF9;
-extern s8              D_80146867;
-extern s8              D_80146875;
 extern s16             D_80148364;
 extern u8              D_8014839C;
 /* D_801DA028 */
