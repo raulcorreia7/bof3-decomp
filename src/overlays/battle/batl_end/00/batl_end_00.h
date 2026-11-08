@@ -23,6 +23,6 @@ extern Callback     D_801F0CC0[];
 extern char         D_801F0CD0[];
 extern void         func_801F09D4(void);
 /* func_801F09F4 */
-extern void         Battle_DrawResultZenny(void);
+extern void         Battle_DrawVictoryZenny(void);
 
 #endif

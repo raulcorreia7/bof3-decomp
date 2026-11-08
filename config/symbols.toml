@@ -2418,7 +2418,7 @@ g_SaveSlotLevelFormat = { addr = 0x801D0DAC, source = "Format of the level on a 
 g_SaveSlotTimeFormat = { addr = 0x801D0DB0, source = "Format of the play time on a save slot row: hours and minutes." }
 g_SaveSlotTimeColon = { addr = 0x801D0DBC, source = "The colon drawn between the hours and minutes of a save slot row." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
-Menu_RunCampStep = { addr = 0x801E462C, type = "func", source = "runs the current camp substate handler and draws the area scene in the start menu" }
+Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "runs the current camp substate handler and draws the area scene in the start menu" }
 Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears poison status from all field party members in the start menu item effects" }
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
@@ -6204,7 +6204,7 @@ Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "Adds 2 to
 Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the scene event state." }
 
 ["emi/battle/batl_end/00"]
-Battle_PrepareResult = { addr = 0x801EEFCC, type = "func", source = "Resets the result menu state after the battle result data is ready." }
+Battle_InitVictoryMenu = { addr = 0x801EEFCC, type = "func", source = "Resets the victory menu cursor and UI state and advances the battle UI when data is ready." }
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
 Battle_DrawResultZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny amount on the battle result screen." }
 

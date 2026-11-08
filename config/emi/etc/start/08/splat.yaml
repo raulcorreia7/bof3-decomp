@@ -244,7 +244,7 @@ segments:
       - [0x13718, c, func_801E4318]
       - [0x1381C, c, func_801E441C]
       - [0x139CC, c, func_801E45CC]
-      - [0x13A2C, c, Menu_RunCampStep]
+      - [0x13A2C, c, Menu_UpdateCamp]
       - [0x13A70, c, func_801E4670]
       - [0x13AF8, c, func_801E46F8]
       - [0x13B44, c, func_801E4744]
