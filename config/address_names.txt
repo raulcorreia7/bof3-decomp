@@ -18,7 +18,6 @@ src/overlays/area/area008/13/area008_13.h	WORLD00_AREA008_D_801F2C04
 src/overlays/area/area008/13/area008_13.h	WORLD00_AREA008_D_801F2C10
 src/overlays/area/area008/13/func_801F3C2C.c	WORLD00_AREA008_D_801F2C04
 src/overlays/area/area008/13/func_801F3D18.c	WORLD00_AREA008_D_801F2C10
-src/overlays/area/area016/13/area016_13.h	FUNC_801F2EEC_TABLE
 src/overlays/area/area030/05/C.c	pad_800F723D
 src/overlays/area/area030/05/C.c	pad_800F723E
 src/overlays/area/area030/05/C.c	pad_800F723F
@@ -33,14 +32,12 @@ src/overlays/area/area030/05/C.c	pad_800F724A
 src/overlays/area/area030/05/C.c	pad_800F724B
 src/overlays/area/area030/05/C.c	pad_800F724E
 src/overlays/area/area030/05/C.c	pad_800F724F
-src/overlays/area/area045/13/area045_13.h	FUNC_801F2EEC_TABLE
 src/overlays/area/area049/14/Area_ResetCameraOffsetY_801F3750.c	Area_ResetCameraOffsetY_801F3750
 src/overlays/area/area168/13/area168_13.h	func_801F4158_area168
 src/overlays/area/area168/13/func_801F3DB0.c	func_801F4158_area168
 src/overlays/area/area168/13/func_801F3F54.c	func_801F4158_area168
 src/overlays/area/area168/13/func_801F40D8.c	func_801F4158_area168
 src/overlays/area/area168/13/func_801F4158_area168.c	func_801F4158_area168
-src/overlays/area/func_801F2EEC.h	FUNC_801F2EEC_TABLE
 src/overlays/battle/battle/03/func_801D9428.c	EFFECT_BANK_80140000
 src/overlays/battle/battle/03/func_801D99AC.c	func_801D99AC_decl_guard
 src/overlays/battle/battle/03/func_801D9DBC.c	func_801D9DBC_decl_guard

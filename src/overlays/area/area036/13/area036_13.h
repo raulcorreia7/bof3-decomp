@@ -14,6 +14,5 @@ extern void (*D_801F3304[])(void);
 void Area_DrawLightPillar(s32* pos);
 
 /* The first row of the trigger band in the shared Area_CheckStepTrigger body. */
-#define AREA_STEP_TRIGGER_ROW 0x23
 
 #endif

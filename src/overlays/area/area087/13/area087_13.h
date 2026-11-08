@@ -35,7 +35,6 @@ void func_801F36C0(void);
 /* func_801F3B34 */
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F57C8[6];
 #define AREA_HUD_MASK_TABLE D_801F57C8

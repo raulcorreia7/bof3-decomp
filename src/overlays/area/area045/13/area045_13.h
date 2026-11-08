@@ -30,10 +30,8 @@ extern u8       D_801F5408[];
  * declaration. */
 
 /* The value of func 801f2eec table in the shared func_801F2EEC body. */
-#define FUNC_801F2EEC_TABLE D_801F5338
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP    Area_DrawHud
 
 extern WorldMapMarker D_801F53CC[6];
 #define AREA_HUD_MASK_TABLE D_801F53CC
