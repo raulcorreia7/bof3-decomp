@@ -122,7 +122,7 @@
     }                                                                      \
     return 0
 
-void Char_SpawnActor(s32 arg0, s32 arg1, s32 arg2);
+void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
 void Area_ClearCell(s32 x, s32 y);
 
 /* The cell-code probe shared by the plchar character programs: the three cell codes

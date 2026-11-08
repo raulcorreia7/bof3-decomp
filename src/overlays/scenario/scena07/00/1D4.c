@@ -525,12 +525,12 @@ MATCH ActorSlot* func_801FD610(u8 mode) {
 
 INCLUDE_ASM(func_801FD67C);
 
-MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
+MATCH s32 func_801FD960(s32 x, s32 y) {
     s32 value;
 
     if (g_GameAreaId == AREA_ID_MOUNT_ZUBLO_GISSHAN) {
-        if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= TO_COORD(32))) {
-            if (((arg0 >> 0x10) - 74) < 2U) {
+        if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (y <= TO_COORD(32))) {
+            if (((x >> 0x10) - 74) < 2U) {
                 Game_SetScriptActive();
                 value = g_SndBGMId * 4;
                 SND_StartDecrescendo(*(g_SelectionCues + value), *(D_80181EBB + value), 0x64, 0x20);
@@ -554,11 +554,11 @@ MATCH bool func_801FDA34(void) {
     return 0;
 }
 
-MATCH s32 func_801FDA98(s32 arg0, s32 arg1) {
+MATCH s32 func_801FDA98(s32 x, s32 y) {
     s8  index;
     s32 result;
 
-    index = func_801A7AD8(&D_801FDFA0, 1, arg0, arg1);
+    index = func_801A7AD8(&D_801FDFA0, 1, x, y);
     if (index >= 0) {
         SYS_DISPATCH_BYTE(D_801FDFA8, index);
         result = 1;

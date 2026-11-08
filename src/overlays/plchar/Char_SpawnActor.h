@@ -3,7 +3,7 @@
  * position words at +0x34/+0x38, the ground height at +0x3E and clears
  * the link byte at +0x0B. One definition shared by the plchar character
  * programs; every change here must verify every member image. */
-MATCH void Char_SpawnActor(s32 arg0, s32 arg1, s32 arg2) {
+MATCH void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y) {
     /* FAKE: retail keeps the kind in $s1 and the position words in $s2/$s3;
      * gcc-2.7.2 assigns the first two registers by live length instead. */
     FAKE_REG(s32, y, "s3");
@@ -13,9 +13,9 @@ MATCH void Char_SpawnActor(s32 arg0, s32 arg1, s32 arg2) {
     s32 x_word;
     s32 y_word;
 
-    x    = arg1;
-    y    = arg2;
-    kind = arg0;
+    x    = spawn_x;
+    y    = spawn_y;
+    kind = spawn_kind;
     slot = Actor_FindFreeSlot();
     if (slot != GAME_NONE) {
         g_ActorSlots[slot].header.flags     = 1;

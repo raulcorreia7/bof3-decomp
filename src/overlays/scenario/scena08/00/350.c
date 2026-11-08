@@ -197,7 +197,7 @@ INCLUDE_ASM(func_801F802C);
 
 INCLUDE_ASM(func_801F8108);
 
-MATCH void func_801F81F4(u16 arg0) {
+MATCH void func_801F81F4(u16 value) {
     s32 count;
     s32 index;
 
@@ -207,7 +207,7 @@ MATCH void func_801F81F4(u16 arg0) {
         count -= 1;
         D_801FE9EC[index] = D_801FE9EC[index - 1];
     } while (count & BYTE_MASK);
-    D_801FE9EC[0] = arg0;
+    D_801FE9EC[0] = value;
 }
 
 INCLUDE_ASM(func_801F823C);
@@ -536,9 +536,8 @@ MATCH void func_801FE12C(void) {
     } while ((index & BYTE_MASK) < 0x20U);
 }
 
-MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
-    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (arg0 == TO_COORD(51) + COORD_HALF) &&
-        (((arg1 >> 0x10) - 39) < 2U)) {
+MATCH s32 func_801FE170(s32 x, s32 y) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (x == TO_COORD(51) + COORD_HALF) && (((y >> 0x10) - 39) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             D_80146874 = 4;
@@ -555,7 +554,7 @@ MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
         goto block_7;
     }
 block_7:
-    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (arg0 == TO_COORD(56) + COORD_HALF) && (((arg1 >> 0x10) - 46) < 4U)) {
+    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (x == TO_COORD(56) + COORD_HALF) && (((y >> 0x10) - 46) < 4U)) {
         SYS_SetFlag(g_SceneFlags, 0x16U);
     }
     return 0;
