@@ -79,12 +79,12 @@ MATCH void func_801EFB64(void) {
 }
 
 MATCH void func_801EFBF8(void) {
-    u8 temp_v0;
+    u8 count;
 
     func_8014D978();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         Actor_SelectScript(1U);
         g_Task->unk_09 = 0x29;
         g_Task->header.step += 1;

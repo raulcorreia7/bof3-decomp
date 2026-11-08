@@ -64,13 +64,13 @@ MATCH void func_801F0008(void) {
 }
 
 MATCH void func_801F0044(void) {
-    u8 temp_v0;
+    u8 count;
 
     func_8014D978();
     func_8014D290();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         func_801E5988();
     }
 }
@@ -87,12 +87,12 @@ MATCH void func_801F009C(void) {
 }
 
 MATCH void func_801F0104(void) {
-    u8 temp_v1;
+    u8 count;
 
     func_801F0274();
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 0x70) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x70) {
         func_801E5988();
     }
 }
@@ -120,12 +120,12 @@ MATCH void func_801F01C0(void) {
 }
 
 MATCH void func_801F0224(void) {
-    u8 temp_v0;
+    u8 count;
 
     func_801F08AC();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         func_801E5988();
     }
 }

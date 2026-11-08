@@ -56,11 +56,11 @@ MATCH void func_801EF0D8(void) {
 INCLUDE_ASM(func_801EF0E0);
 
 MATCH void func_801EF20C(void) {
-    u8 temp_v0;
+    u8 timer;
 
-    temp_v0 = g_Task->unk_09;
-    if (temp_v0 != 0) {
-        g_Task->unk_09 = temp_v0 - 1;
+    timer = g_Task->unk_09;
+    if (timer != 0) {
+        g_Task->unk_09 = timer - 1;
         return;
     }
     GFX_FreePaletteFadeTarget(g_BattleEffectBattler);

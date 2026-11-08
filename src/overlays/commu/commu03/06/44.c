@@ -40,12 +40,12 @@ MATCH void func_801D1058(void) {
 }
 
 MATCH void func_801D1094(void) {
-    s32 temp_v0;
+    s32 bgm_offset;
 
     if (g_SndBGMId != BGM_NONE) {
         if (g_SndBGMId != D_801D1944) {
-            temp_v0 = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
+            bgm_offset = g_SndBGMId * 4;
+            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
         }
     }
     SND_RequestBGM(D_801D1944);

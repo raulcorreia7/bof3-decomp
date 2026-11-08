@@ -58,14 +58,14 @@ MATCH void func_801EF6B0(void) {
 #include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801EF788(void) {
-    u8 temp_a0;
-    u8 temp_v0;
+    u8 timer;
+    u8 next;
 
-    temp_a0 = g_Task->unk_09;
-    if ((temp_a0 & BYTE_MASK) != 0xFF) {
-        temp_v0        = temp_a0 - 1;
-        g_Task->unk_09 = temp_v0;
-        if (!(temp_v0 & BYTE_MASK)) {
+    timer = g_Task->unk_09;
+    if ((timer & BYTE_MASK) != 0xFF) {
+        next           = timer - 1;
+        g_Task->unk_09 = next;
+        if (!(next & BYTE_MASK)) {
             func_800AFC98(2, 5);
         }
     }

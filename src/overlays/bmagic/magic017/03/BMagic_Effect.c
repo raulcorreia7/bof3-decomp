@@ -97,11 +97,11 @@ MATCH void func_801EF694(void) {
 
 MATCH void func_801EF6EC(void) {
     s8 tone;
-    u8 temp_v0;
+    u8 timer;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         if (g_Battle.active_battler >= 3U) {
             func_801E257C(g_Battle.active_battler, 0);
         }

@@ -35,12 +35,12 @@ MATCH void func_801EEF80(void) {
 #include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801EF06C(void) {
-    u8 temp_v0;
+    u8 count;
 
     func_8014DAEC();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         func_800AFC98(2, 4);
         func_800A9820(g_Battle.target_selector);
         g_Task->header.step += 1;

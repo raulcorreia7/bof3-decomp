@@ -66,16 +66,16 @@ MATCH void func_801EEF7C(void) {
 }
 
 MATCH void func_801EF078(void) {
-    u8 temp_v1;
-    u8 temp_v1_2;
+    u8 timer;
+    u8 count;
 
-    temp_v1 = g_Task->timer;
-    if (temp_v1 < 0x10U) {
-        g_Task->timer = temp_v1 + 1;
+    timer = g_Task->timer;
+    if (timer < 0x10U) {
+        g_Task->timer = timer + 1;
     }
-    temp_v1_2      = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1_2;
-    if ((temp_v1_2 & BYTE_MASK) == 0x10) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x10) {
         g_Task->unk_09 = 0;
         g_Task->header.mode += 1;
     }

@@ -154,23 +154,23 @@ MATCH void func_801F7C6C(void) {
 /* The script counter is read and written through one materialized address (a0), so the increment
  * store lands in the jump's delay slot; a direct D_80146874 += 1 reloads the address per access. */
 MATCH void func_801F7D08(void) {
-    s32 temp_a0;
-    u8* var_a0;
+    s32 height;
+    u8* step;
 
     if (g_AreaCameraMoving == 0) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         g_AreaScrollTargetX = TO_COORD(38);
         g_AreaCameraHeightStep =
             ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
-        var_a0          = &D_80146874;
+        step            = &D_80146874;
         g_AreaSceneMode = 1;
-        *var_a0         = *var_a0 + 1;
+        *step           = *step + 1;
         return;
     }
-    temp_a0            = g_AreaCameraHeight;
-    g_AreaCameraHeight = temp_a0 + 2;
+    height             = g_AreaCameraHeight;
+    g_AreaCameraHeight = height + 2;
     if (!(g_FrameCount & 3)) {
-        g_AreaCameraHeight = temp_a0 + 3;
+        g_AreaCameraHeight = height + 3;
     }
 }
 

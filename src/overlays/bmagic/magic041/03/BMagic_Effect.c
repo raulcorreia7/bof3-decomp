@@ -9,12 +9,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EECB0);
 
 MATCH void func_801EEE14(void) {
-    u8            temp_v0;
+    u8            timer;
     PartyMember** selected;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         selected = &g_Battle.selected_actor;
         GFX_FreePaletteFadeTarget(*selected);
         g_Task->unk_09 = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);

@@ -1,14 +1,14 @@
 #include "area134_13.h"
 
 MATCH void func_801F4214(void) {
-    s32 temp_v0;
+    s32 count;
 
     if (D_801F5818 == 0) {
         Area_ClearWorkColumn();
     }
     g_Task->timer  = 0x80;
-    temp_v0        = D_801F5818 + 1;
-    D_801F5818     = temp_v0;
-    g_Task->unk_06 = temp_v0;
+    count          = D_801F5818 + 1;
+    D_801F5818     = count;
+    g_Task->unk_06 = count;
     g_Task->header.mode += 1;
 }

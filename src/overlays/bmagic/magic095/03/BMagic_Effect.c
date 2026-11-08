@@ -105,12 +105,12 @@ MATCH void func_801F0070(void) {
 }
 
 MATCH void func_801F00D8(void) {
-    u8 temp_v1;
+    u8 count;
 
     func_801F012C();
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 0x20) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x20) {
         func_801E5988();
     }
 }

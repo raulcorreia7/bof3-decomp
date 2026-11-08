@@ -28,16 +28,16 @@ MATCH void func_801EED68(void) {
 }
 
 MATCH void func_801EEE00(void) {
-    u8 temp_v0;
+    u8 timer;
 
     if (g_Battle.target_selector < 3U) {
         func_801EF174();
     } else {
         func_801EF2DC();
     }
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         g_Task->header.mode += 1;
     }
 }

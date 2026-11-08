@@ -24,15 +24,15 @@ MATCH void func_801EED2C(void) {
 }
 
 MATCH void func_801EED98(void) {
-    PartyMember* temp_s0;
+    PartyMember* work;
     s32          slot;
 
     SND_QueueSelectionFx(0x101);
     SND_QueueSelectionFx(0x102);
-    temp_s0 = g_Task;
-    g_Task  = D_801EC2E0->target.party;
+    work   = g_Task;
+    g_Task = D_801EC2E0->target.party;
     Actor_SelectScript(3U);
-    g_Task                             = temp_s0;
+    g_Task                             = work;
     slot                               = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].header.step  = 0;
@@ -41,14 +41,14 @@ MATCH void func_801EED98(void) {
 }
 
 MATCH void func_801EEE50(void) {
-    PartyMember* temp_s0;
+    PartyMember* work;
 
-    temp_s0 = g_Task;
-    g_Task  = D_801EC2E0->target.party;
+    work   = g_Task;
+    g_Task = D_801EC2E0->target.party;
     func_8014DAEC();
-    g_Task          = temp_s0;
-    temp_s0->unk_09 = 0;
-    g_Task->timer   = 0;
+    g_Task        = work;
+    work->unk_09  = 0;
+    g_Task->timer = 0;
 }
 
 /* blocker: spad cell read hoisted; first diff: lui a1,0x1f80 at 0x801EEF28. */
@@ -161,17 +161,17 @@ MATCH void func_801EF83C(void) {
 
 MATCH void func_801EF900(void) {
     PartyMember* work;
-    s16          temp_v0;
-    s32          temp_a0;
+    s16          height;
+    s32          x;
     s8           tone;
 
     g_Task->pos.x.fixed    = g_BattleEffectBattler->pos.x.fixed - 1;
     g_Task->pos.y.fixed    = g_BattleEffectBattler->pos.y.fixed - 1;
-    temp_a0                = g_Task->pos.x.fixed;
-    temp_v0                = Area_SampleHeight(temp_a0, temp_a0);
+    x                      = g_Task->pos.x.fixed;
+    height                 = Area_SampleHeight(x, x);
     work                   = g_Task;
     work->unk_25           = 0x1D;
-    COORD_INT(work->pos.z) = temp_v0;
+    COORD_INT(work->pos.z) = height;
     g_Task->unk_26         = 0;
     g_Task->unk_48         = 1;
     g_Task->unk_27         = 0xA0;
@@ -190,12 +190,12 @@ MATCH void func_801EF900(void) {
 }
 
 MATCH void func_801EFA38(void) {
-    s32 temp_a0;
+    s32 x;
 
     g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed - 1;
     g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed - 1;
-    temp_a0                  = g_Task->pos.x.fixed;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(temp_a0, temp_a0);
+    x                        = g_Task->pos.x.fixed;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(x, x);
     if (!(1 & g_BattleEffectBattler->header.flags)) {
         g_Task->header.step += 1;
     }

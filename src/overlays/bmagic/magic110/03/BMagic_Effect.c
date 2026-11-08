@@ -18,18 +18,18 @@ MATCH void func_801EEE68(void) {
 }
 
 MATCH void func_801EEEDC(void) {
-    u8 temp_v1;
-    u8 temp_v1_2;
+    u8 timer;
+    u8 count;
 
     func_801EF148();
     if (g_FrameCount & 1) {
-        temp_v1 = g_Task->timer;
-        if (temp_v1 < 0x10U) {
-            g_Task->timer = temp_v1 + 2;
+        timer = g_Task->timer;
+        if (timer < 0x10U) {
+            g_Task->timer = timer + 2;
         }
-        temp_v1_2      = g_Task->unk_09 + 1;
-        g_Task->unk_09 = temp_v1_2;
-        if ((temp_v1_2 & BYTE_MASK) == 0x10) {
+        count          = g_Task->unk_09 + 1;
+        g_Task->unk_09 = count;
+        if ((count & BYTE_MASK) == 0x10) {
             g_Task->header.mode += 1;
         }
     }
@@ -39,18 +39,18 @@ MATCH void func_801EEEDC(void) {
 INCLUDE_ASM(func_801EEF80);
 
 MATCH void func_801EF068(void) {
-    u8 temp_v0;
-    u8 temp_v0_2;
+    u8 timer;
+    u8 count;
 
     func_801EF148();
     if (!(g_FrameCount & 3)) {
-        temp_v0 = g_Task->timer;
-        if (temp_v0 != 0) {
-            g_Task->timer = temp_v0 - 1;
+        timer = g_Task->timer;
+        if (timer != 0) {
+            g_Task->timer = timer - 1;
         }
-        temp_v0_2      = g_Task->unk_09 - 1;
-        g_Task->unk_09 = temp_v0_2;
-        if (!(temp_v0_2 & BYTE_MASK)) {
+        count          = g_Task->unk_09 - 1;
+        g_Task->unk_09 = count;
+        if (!(count & BYTE_MASK)) {
             func_800A9820(g_Battle.target_selector);
             g_Task->header.mode += 1;
         }

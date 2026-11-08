@@ -95,11 +95,11 @@ MATCH void func_801EF608(void) {
 }
 
 MATCH void func_801EF678(void) {
-    u8 temp_v0;
+    u8 timer;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         s8 tone;
 
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

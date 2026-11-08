@@ -1,16 +1,16 @@
 #include "area130_13.h"
 
 MATCH void func_801F2C60(void) {
-    s32 var_s0;
-    s32 var_s1;
+    s32 i;
+    s32 work;
 
-    var_s1 = AREA_WORK;
-    var_s0 = 0;
+    work = AREA_WORK;
+    i    = 0;
     do {
-        Area_InitSpin(var_s1);
-        var_s0 += 1;
-        var_s1 += 0x2C;
-    } while ((var_s0 & 0xFF) < 0x20U);
+        Area_InitSpin(work);
+        i += 1;
+        work += 0x2C;
+    } while ((i & 0xFF) < 0x20U);
     g_Task->timer = 0;
     g_Task->header.mode += 1;
 }

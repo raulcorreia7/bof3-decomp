@@ -56,14 +56,14 @@ MATCH void func_801EF7C4(void) {
 }
 
 MATCH void func_801EF884(void) {
-    u8 temp_v0;
+    u8 count;
 
     Effect_SetActorMatrix();
     func_801EFA48();
     PopMatrix();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         g_Task->unk_09 = 0xF;
         g_Task->header.step += 1;
     }

@@ -155,11 +155,11 @@ INCLUDE_ASM(func_801EFF94);
 #include "overlays/bmagic/Effect_StepOnZeroTick.h"
 
 MATCH void func_801F00E8(void) {
-    u8 temp_v1;
+    u8 count;
 
-    temp_v1        = g_Task->unk_5D - 1;
-    g_Task->unk_5D = temp_v1;
-    if ((s8)temp_v1 == 8) {
+    count          = g_Task->unk_5D - 1;
+    g_Task->unk_5D = count;
+    if ((s8)count == 8) {
         g_Task->header.step += 1;
     }
 }

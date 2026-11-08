@@ -17,36 +17,36 @@ MATCH void func_801EEEE4(void) {
 INCLUDE_ASM(func_801EEF28);
 
 MATCH void func_801EF08C(void) {
-    u8 temp_a1;
+    u8 count;
 
-    temp_a1 = g_Task->unk_09;
-    if ((temp_a1 & BYTE_MASK) == 0xC) {
+    count = g_Task->unk_09;
+    if ((count & BYTE_MASK) == 0xC) {
         g_Task->timer = 0xF;
         g_Task->header.step += 1;
         return;
     }
-    g_Task->unk_09 = temp_a1 + 1;
+    g_Task->unk_09 = count + 1;
 }
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
 MATCH void func_801EF12C(void) {
-    s32 temp_v0;
-    s32 var_v0;
-    s32 var_v1;
+    s32 angle;
+    s32 target;
+    s32 dir;
 
-    temp_v0 = ratan2(g_Battle.selected_actor->pos.y.fixed - g_Task->pos.y.fixed,
-                     g_Battle.selected_actor->pos.x.fixed - g_Task->pos.x.fixed);
-    var_v1  = g_Task->unk_0C;
-    if (var_v1 < 0) {
-        var_v1 += 0x3F;
+    angle = ratan2(g_Battle.selected_actor->pos.y.fixed - g_Task->pos.y.fixed,
+                   g_Battle.selected_actor->pos.x.fixed - g_Task->pos.x.fixed);
+    dir   = g_Task->unk_0C;
+    if (dir < 0) {
+        dir += 0x3F;
     }
-    var_v1 >>= 6;
-    var_v0 = temp_v0 & 0xFFF;
-    if (var_v0 < 0) {
-        var_v0 += 0x3F;
+    dir >>= 6;
+    target = angle & 0xFFF;
+    if (target < 0) {
+        target += 0x3F;
     }
-    if (var_v1 == (var_v0 >> 6)) {
+    if (dir == (target >> 6)) {
         g_Task->timer = 0xF;
         g_Task->header.step += 1;
     }
@@ -125,15 +125,15 @@ MATCH void func_801F00A0(void) {
 }
 
 MATCH void func_801F00EC(void) {
-    u8 temp_a0;
+    u8 count;
 
-    temp_a0 = g_Task->unk_09;
-    if ((temp_a0 & BYTE_MASK) == 8) {
+    count = g_Task->unk_09;
+    if ((count & BYTE_MASK) == 8) {
         SND_QueueSelectionFx(0x101);
         g_Task->header.step += 1;
         return;
     }
-    g_Task->unk_09 = temp_a0 + 1;
+    g_Task->unk_09 = count + 1;
 }
 
 MATCH void func_801F014C(void) {

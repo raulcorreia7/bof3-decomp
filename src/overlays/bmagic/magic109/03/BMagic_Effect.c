@@ -9,11 +9,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC80);
 
 MATCH void func_801EEEAC(void) {
-    u8 temp_v1;
+    u8 count;
 
-    temp_v1        = g_Task->unk_09 + 2;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 0x54) {
+    count          = g_Task->unk_09 + 2;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x54) {
         g_Task->header.mode += 1;
         g_Task->timer = 0x40;
     }

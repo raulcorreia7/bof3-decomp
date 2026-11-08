@@ -11,26 +11,26 @@ INCLUDE_ASM(func_801EEC28);
 INCLUDE_ASM(func_801EED14);
 
 MATCH void func_801EEDAC(void) {
-    u8 temp_v0;
+    u8 timer;
 
     func_801F07B0(1);
     func_801F0164(1);
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         g_Task->unk_09 = 0x1E;
         g_Task->header.mode += 1;
     }
 }
 
 MATCH void func_801EEE28(void) {
-    u8 temp_v0;
+    u8 timer;
 
     func_801F07B0(2);
     func_801F0164(2);
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         g_Task->unk_09 = 0xA;
         g_Task->header.mode += 1;
     }
@@ -66,14 +66,14 @@ MATCH void func_801EF04C(void) {
 }
 
 MATCH void func_801EF0A8(void) {
-    u8 temp_v0;
+    u8 timer;
 
     func_801F07B0(0);
     func_801F0550(g_Task->timer);
     func_801F0164(0);
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         g_Task->header.mode += 1;
     }
 }
@@ -113,24 +113,24 @@ MATCH void func_801EF324(void) {
 }
 
 MATCH void func_801EF3C8(void) {
-    s32 temp_x;
-    s32 temp_a1;
-    u32 temp_a2;
-    u8  temp_v0;
+    s32 x;
+    s32 y;
+    u32 z;
+    u8  timer;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
-        temp_x          = g_Task->pos.x.fixed;
-        temp_a1         = g_Task->pos.y.fixed;
-        temp_a2         = g_Task->pos.z.fixed;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
+        x               = g_Task->pos.x.fixed;
+        y               = g_Task->pos.y.fixed;
+        z               = g_Task->pos.z.fixed;
         g_Task->unk_0C  = 0x2000;
         g_Task->unk_14  = 0x300000;
         g_Task->unk_10  = 0;
         g_Task->unk_20  = -0x80000;
-        g_Task->unk_18  = temp_x;
-        g_Task->unk_1C  = temp_a1;
-        g_Task->scale.y = temp_a2;
+        g_Task->unk_18  = x;
+        g_Task->unk_1C  = y;
+        g_Task->scale.y = z;
         func_801DD350(g_Task);
         g_Task->unk_09 = func_800AFF98();
         g_Task->header.step += 1;

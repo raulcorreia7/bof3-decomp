@@ -59,11 +59,11 @@ MATCH void func_801EF178(void) {
 }
 
 MATCH void func_801EF21C(void) {
-    u8 temp_v1;
+    u8 count;
 
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 8) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 8) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }
@@ -71,12 +71,12 @@ MATCH void func_801EF21C(void) {
 
 /* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
 MATCH void func_801EF27C(void) {
-    u8 temp_v0;
+    u8 count;
 
     g_Task->timer += 1;
-    temp_v0        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & BYTE_MASK) == 0x10) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x10) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }
