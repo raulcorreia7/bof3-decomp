@@ -6,7 +6,7 @@ MATCH void func_801B9478(void) {
     u8     countdown;
 
     if (g_Task->timer != 0) {
-        func_801C57B4();
+        Actor_Move();
         work        = g_Task;
         work->timer = (work->timer - 1);
         if (g_Task->timer == 0) {

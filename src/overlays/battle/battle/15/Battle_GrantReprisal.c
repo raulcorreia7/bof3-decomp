@@ -2,7 +2,8 @@
 
 /* sets bit 0x8000 in the damage status row for the active battler.
  */
-MATCH void func_800A1414(void) {
+/* func_800A1414 */
+MATCH void Battle_GrantReprisal(void) {
     u32 battler;
 
     func_800A3F28();

@@ -1185,7 +1185,7 @@ void        func_80159050(void);
 void        func_8015920C(void);
 void        func_80159510(void);
 void        func_80159580(void);
-void        func_801598B8(void);
+void        Menu_ClosePanel(void);
 void        func_801598F4(void);
 void        func_80159964(void);
 void        func_8015999C(void);
