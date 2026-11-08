@@ -35,7 +35,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     D_80146784                = D_801486A0;
     D_80148A34                = v;
     D_801467A0                = 1;
-    D_8014677C[0].spu_address = w;
+    g_EmiBanks[0].spu_address = w;
     size                      = FIELD(s32, g_SndBankSequenceSize, off);
     w                         = FIELD(s32, g_SndBankHeaderSize, off + 4);
     v += size;

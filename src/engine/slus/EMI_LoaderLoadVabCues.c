@@ -5,7 +5,7 @@
  */
 MATCH void EMI_LoaderLoadVabCues(void) {
     if (EMI_LOADER_STEP == 0) {
-        g_EmiLoadArg = D_8014677C[D_80146483].cue_table;
+        g_EmiLoadArg = g_EmiBanks[D_80146483].cue_table;
     }
 
     EMI_LoaderCopySector();

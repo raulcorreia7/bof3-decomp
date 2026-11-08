@@ -5,13 +5,13 @@
  * an alias bank supply the tone and voice. */
 /* func_8015EFAC */
 MATCH void SND_ReadCueBank1(void) {
-    SLUS_READ_BANK_CUE_HEAD(1, D_8014871C, D_80148A1C)
+    SLUS_READ_BANK_CUE_HEAD(1, g_SndBankCues[1], g_SndBankHeaders[1])
     if (D_8018B3E0 != 0) {
         D_8018B30C = D_8018B3E0 & EMI_CUE_ALIAS_MASK;
         switch (D_8018B30C) {
-            SLUS_CUE_ALIAS_ARM(2, D_80148A20, D_80148798)
-            SLUS_CUE_ALIAS_ARM(3, D_80148A24, D_80148814)
-            SLUS_CUE_ALIAS_ARM(4, D_80148A28, D_80148890)
+            SLUS_CUE_ALIAS_ARM(2, g_SndBankHeaders[2], g_SndBankCues[2])
+            SLUS_CUE_ALIAS_ARM(3, g_SndBankHeaders[3], g_SndBankCues[3])
+            SLUS_CUE_ALIAS_ARM(4, g_SndBankHeaders[4], g_SndBankCues[4])
         }
     }
 }
