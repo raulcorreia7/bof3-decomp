@@ -59,7 +59,7 @@ MATCH void func_801F6CCC(void) {
     g_SaveEntryX      = 0x1A0000u;
     flags             = g_GameFlags;
     g_SaveEntryY      = 0x88000u;
-    g_SaveEntryFacing = 5u;
+    g_SaveEntryFacing = FACING_DOWN;
     g_Game.flags      = (flags | GAME_FLAG_MENU_LOCK | 0x200u);
     SND_RequestBGM(6u);
 

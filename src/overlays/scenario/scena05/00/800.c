@@ -179,7 +179,7 @@ MATCH void func_801F9148(void) {
                 SYS_SetFlag(g_SceneFlags, 0x18);
                 if (SYS_TestFlag(g_SceneFlags, 0x17) == 0) {
                     D_80146866 = 4;
-                    Game_RequestAreaChange(0x4E, 0x270000, 0xAD0000, 3);
+                    Game_RequestAreaChange(0x4E, 0x270000, 0xAD0000, FACING_RIGHT);
                     g_GamePrevSelection = 0xFF;
                 }
                 if (SYS_TestFlag(g_SceneFlags, 0x16) == 0) {

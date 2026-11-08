@@ -16,7 +16,7 @@ NON_MATCHING s32 func_801B0E44(void) {
 
     saved_dir = g_Task->direction_08;
     result    = func_801B9598();
-    if ((g_Task->direction_08 == 2) || (g_Task->direction_08 == 6)) {
+    if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
         g_Task->timer = 0x20;
     } else {
         g_Task->timer = 0x10;
