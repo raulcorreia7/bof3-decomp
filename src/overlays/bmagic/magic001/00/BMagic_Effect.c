@@ -251,9 +251,7 @@ MATCH void func_801EFFCC(void) {
     if ((s8)g_Task->unk_5D == -0x80) {
         work              = g_Task;
         source            = BATTLE_ACTIVE_WORK;
-        work->pos.x.fixed = source->pos.x.fixed;
-        work->pos.y.fixed = source->pos.y.fixed;
-        work->pos.z.fixed = source->pos.z.fixed;
+        WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
     }
 }

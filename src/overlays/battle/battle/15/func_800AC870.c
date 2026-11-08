@@ -14,9 +14,7 @@ MATCH void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode) {
             dst->unk_07 |= 0x20;
             break;
         case 1:
-            dst->pos.x.fixed = source_record->pos.x.fixed;
-            dst->pos.y.fixed = source_record->pos.y.fixed;
-            dst->pos.z.fixed = source_record->pos.z.fixed;
+            WorldPos_Copy(&dst->pos, &source_record->pos);
             break;
     }
 }

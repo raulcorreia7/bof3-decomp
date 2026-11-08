@@ -49,6 +49,13 @@ typedef struct Coord3D {
 /* Where an actor or effect stands: x, y and z in 16.16 world units. */
 typedef Coord3D WorldPos;
 
+/* Move `dst` to where `src` stands, one axis at a time. */
+static inline void WorldPos_Copy(WorldPos* dst, WorldPos* src) {
+    dst->x.fixed = src->x.fixed;
+    dst->y.fixed = src->y.fixed;
+    dst->z.fixed = src->z.fixed;
+}
+
 /* A sprite's horizontal and vertical size, 16.16; 0x10000 is full size. */
 typedef Point2DL SpriteScale;
 

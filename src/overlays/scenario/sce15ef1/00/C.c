@@ -99,9 +99,7 @@ MATCH void func_801D19C8(void) {
             slot->unk_01        = 0;
             slot->life_02       = 0x10;
             actor               = g_Task;
-            slot->pos.x.fixed   = actor->pos.x.fixed;
-            slot->pos.y.fixed   = actor->pos.y.fixed;
-            slot->pos.z.fixed   = actor->pos.z.fixed;
+            WorldPos_Copy(&slot->pos, &actor->pos);
             slot->radius_14     = 0x100;
             slot->core_shade_16 = 0x60;
             slot->rim_shade_17  = 0;
