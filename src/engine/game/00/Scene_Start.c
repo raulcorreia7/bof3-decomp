@@ -32,5 +32,5 @@ MATCH void Scene_Start(u8 scenario_index) {
         CallbackWait(1u);
     }
 
-    Game_RunScenarioEntry();
+    Game_UpdateScenario();
 }

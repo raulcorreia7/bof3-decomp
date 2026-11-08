@@ -169,14 +169,14 @@ typedef enum FrontendFlags {
 extern s32 D_80143B4C;
 extern s32 D_80143B50;
 
-/* The request code that field code writes to g_GameStateIndex. Game_RunFieldState reads it after the per-frame
+/* The request code that field code writes to g_GameStateIndex. Game_UpdateField reads it after the per-frame
  * update and enters the state named in the comment. Codes 0 to 9 are all it handles. */
 typedef enum GameRequest {
     GAME_REQUEST_IDLE         = 0,
     GAME_REQUEST_MENU         = 1, /* state 3 */
     GAME_REQUEST_MESSAGE      = 2, /* state 4, the message window wait */
     GAME_REQUEST_BATTLE       = 3, /* state 5 */
-    GAME_REQUEST_CAMERA_LOOK  = 4, /* state 6, Game_RunCameraLookState: free camera orbit */
+    GAME_REQUEST_CAMERA_LOOK  = 4, /* state 6, Game_UpdateCameraLook: free camera orbit */
     GAME_REQUEST_AREA_CHANGE  = 5, /* state 1 */
     GAME_REQUEST_SHOP         = 6, /* state 7 */
     GAME_REQUEST_ABILITY_MENU = 7, /* state 9; scena06 writes it */

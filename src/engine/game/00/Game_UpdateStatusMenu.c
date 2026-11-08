@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Game_RunStatusMenuState(void) {
+MATCH void Game_UpdateStatusMenu(void) {
     Callback* handlers;
     u16       state;
 

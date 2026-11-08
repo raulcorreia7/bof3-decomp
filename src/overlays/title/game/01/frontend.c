@@ -10,7 +10,7 @@ static Callback s_TitleStates[8] = {
 /* Initializes the frontend overlay state, then runs its perpetual input,
  * state-dispatch, and render/update loop. */
 /* func_801D0C04 */
-MATCH void Game_RunTitle(void) { /* func_801D0C04 */
+MATCH void Game_UpdateTitle(void) { /* func_801D0C04 */
     g_UiTitleState    = 0u;
     g_UiTitleSubstate = 0u;
     func_8014BA04();

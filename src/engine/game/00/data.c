@@ -25,10 +25,10 @@ u8 s_PaletteSlotStrides[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0xCC, 0xCC, 0xCC};
 Callback g_GameCampMenuLoad[3] = {(Callback)Game_LoadCampMenu, (Callback)func_801E3E88, (Callback)func_801E1680};
 
 Callback g_GameStates[12] = {
-    (Callback)Game_ResetGameState,      (Callback)Game_RunAreaLoadState,   (Callback)Game_RunFieldState,
-    (Callback)Game_RunMenuState,        (Callback)func_801979D4,           (Callback)Game_RunBattleState,
-    (Callback)Game_RunCameraLookState,  (Callback)Game_RunShopState,       (Callback)Game_RunFishingState,
-    (Callback)Game_RunAbilityMenuState, (Callback)Game_RunStatusMenuState, (Callback)Game_RunSceneCameraState};
+    (Callback)Game_NewGame,      (Callback)Game_UpdateAreaLoad,   (Callback)Game_UpdateField,
+    (Callback)Game_UpdateMenu,        (Callback)func_801979D4,           (Callback)Game_UpdateBattle,
+    (Callback)Game_UpdateCameraLook,  (Callback)Game_UpdateShop,       (Callback)Game_UpdateFishing,
+    (Callback)Game_UpdateAbilityMenu, (Callback)Game_UpdateStatusMenu, (Callback)Game_UpdateSceneCamera};
 
 Callback g_GameMenuSubstates[3] = {(Callback)Game_LoadMenuOverlay, (Callback)func_80199368, (Callback)Game_ReturnFromMenu};
 

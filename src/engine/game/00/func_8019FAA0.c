@@ -84,7 +84,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
 
     SYS_ClearFlag(g_SceneEventFlags, 0x1Cu);
     g_SceneState.mode_02 = 1u;
-    Game_RunScenarioEntry();
+    Game_UpdateScenario();
     func_801C05AC();
 
     world_flags = g_Game.walk_flags;

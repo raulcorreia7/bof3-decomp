@@ -41,13 +41,13 @@ u8    GFX_StartPaletteAnimation(u8* owner, u8* source_table);
 /* func_80196D84 */
 void  GFX_StepPaletteAnimation(u8 palette_slot);
 /* func_80196F78 */
-void  Game_RunCampMenuLoop(void);
+void  Game_UpdateCampMenu(void);
 /* func_80196FFC */
 void  Game_LoadCampMenu(void);
 /* func_80197068 */
-void  Game_RunMainLoop(void);
+void  Game_UpdateMain(void);
 /* func_801970EC */
-void  Game_ResetGameState(void);
+void  Game_NewGame(void);
 /* func_80199440 */
 void  func_80199440(void);
 /* func_80199678 */
@@ -89,7 +89,7 @@ void  Scene_Start(u8 scenario_index);
 /* func_801A7804 */
 void  Scene_RequestOverlay(void);
 /* func_801A782C */
-void  Game_RunScenarioEntry(void);
+void  Game_UpdateScenario(void);
 /* func_801A7878 */
 void  Game_DispatchScenarioRecord(void* object);
 /* func_801A78F8 */
@@ -97,7 +97,7 @@ void  Scene_RequestChapterAdvance(void);
 /* func_801A7A34 */
 s8    Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1);
 /* func_801A7BF0 */
-void  Game_RunSceneUpdate(void);
+void  Game_UpdateScene(void);
 /* func_801A7C2C */
 void  Scene_ResetEventState(void);
 /* func_801A7CAC */
