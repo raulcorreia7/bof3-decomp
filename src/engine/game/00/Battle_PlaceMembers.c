@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801BF448(void) {
+/* func_801BF448 */
+MATCH void Battle_PlaceMembers(void) {
     s32    tab;
     s32    count;
     s32    rec_off;

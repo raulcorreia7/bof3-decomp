@@ -285,7 +285,8 @@ void func_801F01F4(void);
 void func_801F0320(void);
 void Fairy_StartJobs(void);
 void func_801F0718(u8 source_index, u8 task_index);
-void func_801F08D8(u8 source_index, u8 task_index);
+/* func_801F08D8 */
+void Fairy_SpawnWorker(u8 source_index, u8 task_index);
 void func_801F0BF4(u8 task_index);
 void func_801F0C6C(u8 task_index, u8 record_kind_index);
 void func_801F0D3C(u8 task_index, u8 record_kind_index);

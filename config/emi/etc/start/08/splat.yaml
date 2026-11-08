@@ -233,7 +233,7 @@ segments:
       - [0x12290, c, func_801E2E90]
       - [0x124FC, c, func_801E30FC]
       - [0x127E8, c, Menu_DrawGlyphAt]
-      - [0x13234, c, func_801E3E34]
+      - [0x13234, c, Menu_SetGlyphPage]
       - [0x13288, c, func_801E3E88]
       - [0x132C4, c, func_801E3EC4]
       - [0x13424, c, func_801E4024]

@@ -3,7 +3,8 @@
 /* lets the damage through, or blocks it and clears bit 0x10 of the target's flags,
  * by the attacker's status 0x8 roll, the target's 0x4 roll and the D_801EC324 percent roll.
  */
-MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
+/* func_801DC894 */
+MATCH u32 Battle_RollHitOnEnemy(s16 damage, u8 attacker, u8 target) {
     u8 threshold;
 
     if (g_Battle.state & BATTLE_STATE_CRITICAL) {

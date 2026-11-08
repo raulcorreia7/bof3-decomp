@@ -3,7 +3,8 @@
 /* Rate field of the battler row; the row type does not name 0x88..0xCA yet. */
 #define RATE_FIELD(offset) FIELD(u16, battler, offset)
 
-MATCH void func_8009CCBC(void* battler, s32 rate_type, s32 rate_percent) {
+/* func_8009CCBC */
+MATCH void Battle_ScaleEnemyStat(void* battler, s32 rate_type, s32 rate_percent) {
     u32 cap;
     u32 value;
     u8  percent;

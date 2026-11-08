@@ -5,7 +5,8 @@
  * work array (stride 0x140) and at record offset 0xB4 of the enemy work array
  * (stride 0x118). */
 
-MATCH u32 func_801DCD50(u32 unused, u8 battler_index, s32 damage_value) {
+/* func_801DCD50 */
+MATCH u32 Battle_ScaleDamage(u32 unused, u8 battler_index, s32 damage_value) {
     s32  value;
     s32  damage;
     u32  slot;

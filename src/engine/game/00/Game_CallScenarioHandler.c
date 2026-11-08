@@ -16,7 +16,7 @@ MATCH s8 Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1) {
         result = handler(handler_arg0, handler_arg1);
     }
     if (result < 0) {
-        result = func_801A8CB4(handler_arg0, handler_arg1);
+        result = Game_CallAreaHandler(handler_arg0, handler_arg1);
     } else {
         result = 1;
     }

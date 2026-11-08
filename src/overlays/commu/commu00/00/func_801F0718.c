@@ -8,7 +8,7 @@
  * source_index and resource_id go through the g_Task scratch pointer; the
  * unk_3A store precedes unk_38 and the unk_3E store precedes source_index. No
  * .rodata table is involved, so the jump-table alignment residual of
- * func_801F08D8 cannot apply here. */
+ * Fairy_SpawnWorker cannot apply here. */
 /* Packed coordinate pair of each task slot, reached through its own byte view
  * (slot stride 0x98, pair at +0x34/+0x38). */
 /* Per-task rows of three bytes; byte 2 is the mode selector and bytes 0-1 seed

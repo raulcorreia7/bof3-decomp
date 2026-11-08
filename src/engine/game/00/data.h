@@ -31,7 +31,7 @@ typedef struct SlotSource {
     u8 unk_03;
 } SlotSource;
 
-/* Eight-byte map hook: the map id byte and the handler at +4. func_801A8CB4
+/* Eight-byte map hook: the map id byte and the handler at +4. Game_CallAreaHandler
  * scans the rows by byte offset, because the retail loop keeps a running
  * offset instead of an index. */
 typedef struct AreaHook {
@@ -70,7 +70,7 @@ typedef struct SceneSlots {
     s8 (*entry_10)(s32, s32);
 } SceneSlots;
 
-/* Four-byte battle party slot. func_801C63B0 marks it active, stores its sort
+/* Four-byte battle party slot. Area_PlaceEncounterParty marks it active, stores its sort
  * key and orders the slots by that key. */
 typedef struct PartySlot {
     u8 active;

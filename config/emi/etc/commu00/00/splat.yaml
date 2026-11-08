@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_801EEC00]
-      - [0xC, .rodata, func_801F08D8]
+      - [0xC, .rodata, Fairy_SpawnWorker]
   # Placement: a source shared with the earlier segment must claim its sections first.
   - name: main
     type: code
@@ -35,7 +35,7 @@ segments:
       - [0x17D0, c, func_801F03D0]
       - [0x1934, c, Fairy_StartJobs]
       - [0x1B18, c, func_801F0718]
-      - [0x1CD8, c, func_801F08D8]
+      - [0x1CD8, c, Fairy_SpawnWorker]
   # Placement: .text resumes after another section in the retail bytes; one segment would group both .text runs.
   - name: text
     type: code

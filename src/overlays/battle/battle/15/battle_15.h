@@ -676,9 +676,11 @@ void        func_8009B964(void);
 u8          func_8009BACC(s32 diff);
 /* func_8009C8AC */
 u8          Battle_ActionHasElement(u16 required_mask);
-void        func_8009CCBC(void* battler, s32 rate_type, s32 rate_percent);
+/* func_8009CCBC */
+void        Battle_ScaleEnemyStat(void* battler, s32 rate_type, s32 rate_percent);
 void        func_8009CF80(u8* record, s32 index, s32 new_value);
-void        func_8009CFEC(void);
+/* func_8009CFEC */
+void        Battle_MergeEnemyPanels(void);
 void        func_8009DCC8(void);
 extern void func_8009DE18(void);
 void        func_8009DE8C(void);
@@ -881,7 +883,8 @@ s32         func_800A7B40(u8 combination, u8 count);
 void        func_800A9FC4(BattlePanelRecord* rec, s32 slot);
 bool        func_800AA5F4(s32 slot);
 bool        func_800AA7A0(u8 slot);
-extern u32  func_800AD044(u32 bit_index);
+/* func_800AD044 */
+extern u32  Battle_IsEnemyDefeated(u32 bit_index);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
 s32         func_801DDE7C(u8 index, u16 packed_value);
 extern u8   g_BattleUIStep_nv;

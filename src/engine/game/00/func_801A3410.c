@@ -6,7 +6,7 @@ MATCH void func_801A3410(void* work_index) {
     s32    delta[3];
     u8     index;
 
-    index = func_8015B4F4(FIELD(u8, g_Task, 0x18));
+    index = Actor_FindScriptSlot(FIELD(u8, g_Task, 0x18));
     work  = g_Task;
     if (work->timer == 0) {
         work->active_flags |= 0x20;

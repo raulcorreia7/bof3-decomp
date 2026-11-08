@@ -4,7 +4,7 @@ MATCH void Game_UpdateCameraLook(void) {
     if (g_GameEntrySubstate == 0) {
         func_80198F1C();
     } else {
-        func_801981D4();
+        Game_FinishCameraLook();
     }
     func_801992B8();
 }

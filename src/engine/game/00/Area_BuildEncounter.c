@@ -26,18 +26,18 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
         g_EncounterOriginY = g_AreaScrollTargetY & 0xFFFF8000;
     }
     D_801CD8CC = ((Area_PickEncounter() & BYTE_MASK) * 9) + ENCOUNTER_TABLE_BASE;
-    D_801CD8C0 = func_801C6AEC(D_801CD8CC);
+    D_801CD8C0 = Area_RollEncounterEnemies(D_801CD8CC);
     if (!(D_801CD8C0 & BYTE_MASK)) {
         return 0;
     }
     g_Battle.scroll_dir = D_801CD8C8;
     if (result & BYTE_MASK) {
-        if (!(func_801C63B0() & BYTE_MASK)) {
+        if (!(Area_PlaceEncounterParty() & BYTE_MASK)) {
             result = 0;
         }
     }
     if (result & BYTE_MASK) {
-        if ((func_801C6BB4() << 0x18) == 0) {
+        if ((Area_PlaceEncounterEnemies() << 0x18) == 0) {
             result = 0;
         }
     }
@@ -47,7 +47,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
         }
     }
     PushMatrix();
-    func_801C7244(D_801CD8C8);
+    Area_SetEncounterCamera(D_801CD8C8);
     i = 0;
 loop_16:
     if ((i & BYTE_MASK) < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {

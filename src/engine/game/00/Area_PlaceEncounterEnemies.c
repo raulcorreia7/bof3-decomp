@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH bool func_801C6BB4(void) {
+/* func_801C6BB4 */
+MATCH bool Area_PlaceEncounterEnemies(void) {
     EncounterEnemy* entry;
     Enemy*          kind;
     s16             index;

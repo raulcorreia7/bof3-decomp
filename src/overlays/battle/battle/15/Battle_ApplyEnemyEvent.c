@@ -32,7 +32,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             mask = event->selector;
             for (i = 0; i < 8; i++) {
                 if (mask & 0x80) {
-                    func_8009CCBC((u8*)work, i, event->value);
+                    Battle_ScaleEnemyStat((u8*)work, i, event->value);
                 }
                 mask <<= 1;
             }

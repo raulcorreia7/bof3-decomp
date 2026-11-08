@@ -2,7 +2,8 @@
 
 /* Variant rows: 8 record indices, 3 variants each, 3 bytes per variant. */
 
-MATCH void func_801F08D8(u8 source_index, u8 task_index) {
+/* func_801F08D8 */
+MATCH void Fairy_SpawnWorker(u8 source_index, u8 task_index) {
     u8  variant_index;
     s32 record_index;
     u8  index;

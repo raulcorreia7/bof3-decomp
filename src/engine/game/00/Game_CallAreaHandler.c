@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s8 func_801A8CB4(s32 handler_x, s32 handler_y) {
+/* func_801A8CB4 */
+MATCH s8 Game_CallAreaHandler(s32 handler_x, s32 handler_y) {
     s32 count;
     s32 offset;
     s32 cur;

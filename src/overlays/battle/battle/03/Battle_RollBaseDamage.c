@@ -44,5 +44,5 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction) {
             damage = 0;
         damage += RANDOM_MASK(1);
     }
-    return (s16)(func_801DCD50(attacker, target, damage));
+    return (s16)(Battle_ScaleDamage(attacker, target, damage));
 }

@@ -24,7 +24,7 @@ segments:
     subsegments:
       - [0x110, .data, D_80096910]
       - [0x114, .rodata, Battle_ApplyEnemyEvent]
-      - [0x134, .rodata, func_8009CCBC]
+      - [0x134, .rodata, Battle_ScaleEnemyStat]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_3
     type: code
@@ -149,9 +149,9 @@ segments:
       - [0x607C, c, Battle_SetEnemyEventTriggered]
       - [0x60AC, c, Battle_ActionHasElement]
       - [0x6194, c, Battle_ApplyEnemyEvent]
-      - [0x64BC, c, func_8009CCBC]
+      - [0x64BC, c, Battle_ScaleEnemyStat]
       - [0x6780, c, func_8009CF80]
-      - [0x67EC, c, func_8009CFEC]
+      - [0x67EC, c, Battle_MergeEnemyPanels]
       - [0x6998, c, func_8009D198]
       - [0x7294, c, func_8009DA94]
       - [0x72B4, c, func_8009DAB4]
@@ -427,8 +427,8 @@ segments:
       - [0x16164, c, func_800AC964]
       - [0x16780, c, func_800ACF80]
       - [0x167F4, c, Actor_Clear]
-      - [0x16844, c, func_800AD044]
-      - [0x16874, c, func_800AD074]
+      - [0x16844, c, Battle_IsEnemyDefeated]
+      - [0x16874, c, Battle_SetEnemyDefeated]
       - [0x168A8, c, func_800AD0A8]
       - [0x16A6C, c, func_800AD26C]
       - [0x16AEC, c, func_800AD2EC]
