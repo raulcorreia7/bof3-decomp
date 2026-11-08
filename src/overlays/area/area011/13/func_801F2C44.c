@@ -1,7 +1,7 @@
 #include "area011_13.h"
+#include "area/spad.h"
 
 MATCH void func_801F2C44(void) {
-    u8* work;
     u8  index;
     s16 y;
     s16 x;
@@ -15,7 +15,6 @@ MATCH void func_801F2C44(void) {
     selection = D_801F2D78[index];
     result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        work      = TASK_BYTES;
-        work[0xB] = result;
+        g_Task->param.unk_0B = result;
     }
 }
