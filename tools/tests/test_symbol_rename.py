@@ -201,3 +201,19 @@ def test_index_publication_failure_rolls_back_the_whole_rename(
         symbol.main(["rename", "Old", "New"])
     assert snapshot(repo) == before
     assert not (repo / ".git/index.lock").exists()
+
+
+def test_success_preserves_a_subsequent_process_index_lock(
+    repo: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    replace = symbol.os.replace
+    lock = repo / ".git/index.lock"
+
+    def publish_then_lock(source: Path, target: Path) -> None:
+        replace(source, target)
+        if target == repo / ".git/index":
+            lock.write_text("another process\n")
+
+    monkeypatch.setattr(symbol.os, "replace", publish_then_lock)
+    assert symbol.main(["rename", "Old", "New"]) == 0
+    assert lock.read_text() == "another process\n"

@@ -170,6 +170,7 @@ def apply_rename(
     lock = index.with_name(index.name + ".lock")
     # Hold Git's real index lock while git mv operates on a private copy.
     lock.open("xb").close()
+    published = False
     try:
         with tempfile.TemporaryDirectory(prefix=".symbol-rename-", dir=ROOT) as folder:
             scratch = Path(folder)
@@ -203,6 +204,7 @@ def apply_rename(
                 shutil.copyfile(private_index, lock)
                 os.chmod(lock, index.stat().st_mode)
                 os.replace(lock, index)
+                published = True
             except BaseException:
                 for _, target in moves:
                     (ROOT / target).unlink(missing_ok=True)
@@ -210,7 +212,8 @@ def apply_rename(
                     os.replace(backup, path)
                 raise
     finally:
-        lock.unlink(missing_ok=True)
+        if not published:
+            lock.unlink(missing_ok=True)
 
 
 def rename(args: argparse.Namespace) -> int:
