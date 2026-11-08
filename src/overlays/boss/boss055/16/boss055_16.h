@@ -33,7 +33,10 @@ extern Callback       D_800C35CC[];
 extern Callback       D_800C35D8[];
 extern Callback       D_800C35EC[];
 extern Callback       D_800C35F8[];
+extern u8             D_80146375;
 extern u16            D_801463BE;
+extern u16            D_801463C0;
+extern u8             D_801CA718[];
 /* D_801EB630 */
 
 void func_800C227C(void);
