@@ -518,7 +518,8 @@ MATCH void func_801F31C4(void) {
     SYS_ClearFlag(g_SceneFlags, 0x2Cu);
 }
 
-MATCH void func_801F31EC(void) {
+/* func_801F31EC */
+MATCH void Scene_GiveEgg(void) {
     Item_Add(ITEM_CAT_VITAL, VITAL_ITEM_EGG, 1, 0);
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
     SYS_SetFlag(g_SceneFlags, 0x33u);
