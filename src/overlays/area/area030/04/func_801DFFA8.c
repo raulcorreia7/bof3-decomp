@@ -4,10 +4,8 @@
  * pointed at by the non-volatile pointer cell at 0x1F800044, then calls the
  * handler stored at that index in the D_801E2340 dispatch table. */
 MATCH void func_801DFFA8(void) {
-    u8*      work;
     Callback handler;
 
-    work    = (u8*)g_Task;
-    handler = D_801E2340[work[2]];
+    handler = D_801E2340[g_Task->header.step];
     handler();
 }

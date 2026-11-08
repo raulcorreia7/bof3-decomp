@@ -6,7 +6,6 @@
 
 /* func_801D9CF4 */
 MATCH void Fishing_ReadyRun(void) {
-    u8*      work    = (u8*)g_Task;
-    Callback handler = g_FishingReadyStates[work[3]];
+    Callback handler = g_FishingReadyStates[g_Task->unk_03];
     handler();
 }

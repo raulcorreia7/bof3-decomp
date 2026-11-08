@@ -1,7 +1,6 @@
 #include "area067_14.h"
 
 MATCH void func_801F4098(void) {
-    u8* work;
     u8  index;
     s16 y;
     s16 x;
@@ -15,7 +14,6 @@ MATCH void func_801F4098(void) {
     selection = D_801F4644[index];
     result    = func_8015CC00(3, 0, selection, x, y, g_Game.members[2].pos.z.fixed);
     if ((u8)result != GAME_NONE) {
-        work      = (u8*)g_Task;
-        work[0xB] = result;
+        g_Task->param.unk_0B = result;
     }
 }

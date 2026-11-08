@@ -6,7 +6,6 @@
 
 /* func_801D9B14 */
 MATCH void Fishing_SceneRun(void) {
-    u8*      work    = (u8*)g_Task;
-    Callback handler = g_FishingSceneModes[work[2]];
+    Callback handler = g_FishingSceneModes[g_Task->header.step];
     handler();
 }

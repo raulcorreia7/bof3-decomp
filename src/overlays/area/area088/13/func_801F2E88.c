@@ -1,8 +1,5 @@
 #include "area088_13.h"
 
 MATCH void func_801F2E88(void) {
-    u8* work;
-
-    work = (u8*)g_Task;
-    work[1] += 1;
+    g_Task->header.mode += 1;
 }
