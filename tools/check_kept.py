@@ -199,7 +199,10 @@ def parse_layouts(text: str) -> tuple[dict[str, list[Member]], dict[str, int]]:
         head = LAYOUT_RECORD.match(lines[0])
         if not head:
             continue
-        name = f"{head.group(1)} {head.group(2).strip()}"
+        # Clang 18 and older write "(anonymous at", later ones "(unnamed at".
+        name = f"{head.group(1)} {head.group(2).strip()}".replace(
+            "(anonymous at ", "(unnamed at "
+        )
         members: list[Member] = []
         stack: list[tuple[int, str]] = []
         for line in lines[1:]:
@@ -239,13 +242,18 @@ def run_clang(tree: Path, unit: str, wanted: set[str]) -> Entities:
         capture_output=True,
         check=False,
     )
-    layout = subprocess.run(
-        [*flags, "-Xclang", "-fdump-record-layouts-complete"],
-        cwd=tree,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    layout = None
+    # -fdump-record-layouts-complete (clang 15+) dumps every complete record, not only the used ones.
+    for dump in ("-fdump-record-layouts-complete", "-fdump-record-layouts"):
+        layout = subprocess.run(
+            [*flags, "-Xclang", dump],
+            cwd=tree,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if "Dumping AST Record Layout" in layout.stdout:
+            break
     found = Entities()
     record_keys: dict[str, str] = {}  # layout name -> record name
     anonymous: dict[str, str] = {}  # RecordDecl id -> layout name of an unnamed record
