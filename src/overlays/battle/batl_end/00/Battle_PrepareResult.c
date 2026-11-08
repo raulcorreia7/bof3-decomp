@@ -1,6 +1,7 @@
 #include "batl_end_00.h"
 
-MATCH void func_801EEFCC(void) {
+/* func_801EEFCC */
+MATCH void Battle_PrepareResult(void) {
     if (EMI_IsReady() != 0) {
         g_Battle.row_cursor = 0;
         g_Battle.ui_state   = 0;

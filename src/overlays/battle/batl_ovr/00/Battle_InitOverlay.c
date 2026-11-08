@@ -1,6 +1,7 @@
 #include "batl_ovr_00.h"
 
-MATCH void func_801EEC40(void) {
+/* func_801EEC40 */
+MATCH void Battle_InitOverlay(void) {
     u8* counter = &g_Battle.ui_step;
 
     UI_SetMode(0x13);

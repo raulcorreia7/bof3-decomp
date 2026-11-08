@@ -1791,6 +1791,7 @@ Game_FinishCameraLook = { addr = 0x801981D4, type = "func", source = "Ends the c
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
 Game_CallAreaHandler = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table D_801C86F8 and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenarioHandler." }
 UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
+Area_EndScroll = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
 Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
@@ -5287,6 +5288,7 @@ Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area ma
 Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }
 Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
 Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
+Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
 UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
@@ -5301,6 +5303,7 @@ Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "Tests a scene
 Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene event flag." }
 Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
 Game_IsScenarioAtLeast = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
+Script_TestFlag = { addr = 0x8015B83C, type = "func", source = "Tests the game flag indexed by the script cursor byte." }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
@@ -6127,7 +6130,10 @@ Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "Adds 2 to
 Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the scene event state." }
 
 ["emi/battle/batl_end/00"]
+Battle_PrepareResult = { addr = 0x801EEFCC, type = "func", source = "Resets the result menu state after the battle result data is ready." }
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
+Battle_DrawResultZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny amount on the battle result screen." }
 
 ["emi/battle/batl_ovr/00"]
+Battle_InitOverlay = { addr = 0x801EEC40, type = "func", source = "Sets the battle overlay UI mode and palette, then advances the step." }
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }

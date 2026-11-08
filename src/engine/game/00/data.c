@@ -2149,7 +2149,7 @@ Callback D_801CD0E8[3] = {(Callback)func_801B036C, (Callback)func_801B0568, (Cal
 u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
 Callback D_801CD0FC[5] = {(Callback)func_801B1E24, (Callback)func_801B207C, (Callback)func_801B21E8,
-                          (Callback)func_801B26E0, (Callback)func_801B2950};
+                          (Callback)func_801B26E0, (Callback)Area_EndScroll};
 
 Callback D_801CD110[2] = {(Callback)func_801B2A00, (Callback)func_801B2A20};
 

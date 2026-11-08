@@ -1184,7 +1184,7 @@ void        func_80159050(void);
 void        func_8015920C(void);
 void        func_80159510(void);
 void        func_80159580(void);
-void        func_801598B8(void);
+void        Menu_ClosePanel(void);
 void        func_801598F4(void);
 void        func_80159964(void);
 void        func_8015999C(void);
@@ -1216,7 +1216,8 @@ s32         Game_TestEventFlag(u8** cursor);
 s32         Game_HasVitalItem(u8** cursor);
 s32         Game_IsScenarioAtLeast(u8** cursor);
 s32         func_8015B7F0(u8** cursor);
-s32         func_8015B83C(u8** cursor);
+/* func_8015B83C */
+s32         Script_TestFlag(u8** cursor);
 s32         Game_IsScriptVar0Equal(u8** cursor);
 s32         Game_IsScriptVar1Equal(u8** cursor);
 s32         Game_IsScriptVar2Equal(u8** cursor);

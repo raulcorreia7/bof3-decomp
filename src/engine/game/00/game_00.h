@@ -893,7 +893,8 @@ void  func_801B1E24(void);
 void  func_801B207C(void);
 void  func_801B21E8(void);
 void  func_801B26E0(void);
-void  func_801B2950(void);
+/* func_801B2950 */
+void  Area_EndScroll(void);
 void  func_801B29BC(void);
 void  func_801B2A00(void);
 void  func_801B2A20(void);
@@ -1119,7 +1120,8 @@ s32   func_801C5474(void);
 void  func_801C5558(void);
 void  func_801C5620(void);
 void  func_801C56E4(void);
-void  func_801C57B4(void);
+/* func_801C57B4 */
+void  Actor_Move(void);
 void  func_801C57F4(void);
 void  func_801C5830(void);
 void  func_801C5838(void);
