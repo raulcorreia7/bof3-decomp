@@ -116,8 +116,8 @@ Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the re
 Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
 Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
 Battle_LoadDraArchive = { addr = 0x800A4700, type = "func", source = "Loads the BATL_DRA archive when no choice phase is pending and advances ui_state; step 0 of the D_800B4CAC battle UI step table. The archive's job is not proven, so the name keeps the disc label." }
-Battle_StartAbilityPose = { addr = 0x800A581C, type = "func", source = "plays the ability cue, sets the alternate pose flag and advances the battle ui state" }
-Battle_LoadEncounter = { addr = 0x800ABBE0, type = "func", source = "loads the encounter enemies and runs the encounter setup handler" }
+Battle_StartAbilityPose = { addr = 0x800A581C, type = "func", source = "Step 2 of the ability panel step table D_800B4D00: plays common cue 4, sets D_80148627 to 2 and COMBATANT_FLAG_ABILITY_ALT_POSE on the active row, and advances ui_state." }
+Battle_LoadScriptedEncounter = { addr = 0x800ABBE0, type = "func", source = "Loads the encounter enemies with Battle_LoadEncounterEnemies and runs the setup handler D_800B5108[g_Battle.encounter]; func_800ABBA4 calls it when BATTLE_IS_SCRIPTED and func_800ABC30 otherwise." }
 Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
 Battle_DrawInventoryPanel = { addr = 0x800B2104, type = "func", source = "runs the panel state handler and draws the inventory window" }
 Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells whether the running ability or the attacker's weapon carries any element of the mask and the current enemy took a nonzero hp change." }
@@ -6205,9 +6205,9 @@ Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "Adds 2 to
 Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the scene event state." }
 
 ["emi/battle/batl_end/00"]
-Battle_InitVictoryMenu = { addr = 0x801EEFCC, type = "func", source = "Resets the victory menu cursor and UI state and advances the battle UI when data is ready." }
+Battle_WaitVictoryLoad = { addr = 0x801EEFCC, type = "func", source = "Last substate of ui_step 0 of the battle victory overlay (D_801F0CA4): waits for EMI_IsReady after func_801EECD0 requested the member archive, then resets the row cursor and ui_state and advances ui_step." }
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
-Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny amount on the battle victory screen." }
+Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny reward of the battle victory screen: formats g_Zenny with TEXT_Format and draws the amount and its caption; the second entry of the table in func_801F097C." }
 
 ["emi/battle/batl_ovr/00"]
 Battle_StartGameOver = { addr = 0x801EEC40, type = "func", source = "Step 0 of the BATL_OVR (battle defeat) step table that ends in Battle_UpdateGameOver: sets UI mode 0x13, copies palette 0x1A and advances ui_step." }

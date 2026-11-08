@@ -2,7 +2,7 @@
 
 MATCH void func_800ABBA4(void) {
     if (BATTLE_IS_SCRIPTED()) {
-        Battle_LoadEncounter();
+        Battle_LoadScriptedEncounter();
         return;
     }
     func_800ABC30();
