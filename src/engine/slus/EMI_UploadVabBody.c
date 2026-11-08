@@ -3,6 +3,7 @@
 /* advances the current loader slot through its transfer, retunes
  * the remaining byte count, and re-arms the slot state machine.
  */
+/* Typed bank fields and a cached bank pointer leave a 0x30 frame versus retail 0x20. */
 #ifdef NON_MATCHING
 NON_MATCHING void EMI_UploadVabBody(void) {
     u8*  vab;
@@ -26,7 +27,6 @@ NON_MATCHING void EMI_UploadVabBody(void) {
     }
 
     off    = D_80146488 << 11;
-    /* retail also passes the byte offset in a3; libsnd.h's three-argument prototype cannot take it */
     result = (s16)SsVabTransBodyPartly((u8*)(g_EmiRingBase + off), D_80146518[D_80146488],
                                        *(s16*)(vab + 4 + D_80146482 * 0x14));
     D_80146474 -= D_80146518[D_80146488];
