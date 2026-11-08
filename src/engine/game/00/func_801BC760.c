@@ -113,7 +113,7 @@ NON_MATCHING s32 func_801BC760(void) {
             return result & BYTE_MASK;
         }
     }
-    if (!((g_Game.flags | g_Game.walk_flags) & AREA_WALK_BUSY(0))) {
+    if (!((g_Game.flags | g_Game.walk_flags) & BIT(0))) {
         if (*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN) {
             saved          = g_Game.current;
             g_Game.current = g_Game.members;
