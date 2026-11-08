@@ -6,6 +6,7 @@
  */
 /* nonmatching 51.63%: lifted from the first draft with gte_* macros; branch order of the first loads differs. resume:
  * load order of g_AreaTileOriginX/g_AreaTileOriginY and the 0x38 reload. */
+/* Reordered coordinate assignments leave the origin load difference at +0x0C; volatile reads and a barrier alter the prologue. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015A9A4(void) {
     s16   sp10;

@@ -5,8 +5,8 @@ MATCH void func_801985C8(void) {
 
     g_EmiStreamFlags = 0x20;
     g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
-    while (EMI_LoaderIsReady() == 0) {
+    EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    while (EMI_IsReady() == 0) {
         func_801E0C40();
         CallbackWait(1);
     }

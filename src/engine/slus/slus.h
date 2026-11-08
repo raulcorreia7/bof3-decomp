@@ -202,8 +202,8 @@ ASSERT_OFFSET(MenuState, selection_index, 0x0B);
 ASSERT_OFFSET(MenuState, cue_counter, 0x0C);
 ASSERT_OFFSET(MenuState, cue_timer, 0x0E);
 
-/* Resumable stream-decoder context, shared by EMI_DecodeBegin (the initialiser)
- * and EMI_DecodeStep (the decoder), which carried identical file-local copies.
+/* Resumable stream-decoder context, shared by LZ77_DecodeBegin (the initialiser)
+ * and LZ77_DecodeStep (the decoder), which carried identical file-local copies.
  * The spill offsets and the 0x40 extent are retail reads: the decoder stores
  * s0-s7 with `sw s0..s7, 0x20..0x3C($t0)` on the context base. */
 typedef struct EMIDecodeContext {
@@ -361,7 +361,7 @@ typedef struct {
 ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
 /* The bank records at g_EmiBanks seen from its second symbol, 0x80146780 (EMIBank + 4):
- * EMI_LoaderLoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed
+ * EMI_LoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed
  * EMIBank access moves their register allocation. */
 typedef struct EMIAudioLink {
     u32 word;
@@ -685,7 +685,7 @@ extern const struct CallbackTable5 D_80149B50;
 extern const struct CallbackTable5 D_80149B64;
 extern const VECTOR                D_80149BF0;
 extern const u32                   g_EmiCDSteps[];
-extern const SystemDispatchFuncs   g_EmiSlotDrainFuncs;
+extern const SystemDispatchFuncs   g_EmiRingSlotHandlers;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];
@@ -1238,8 +1238,8 @@ extern s16  Char_AddStat(u16* value, s16 delta);
 void        Char_ApplyWeapon(void* character);
 void        Char_ApplyArmor(void* character);
 void        Char_ApplyAccessories(void* param);
-void        EMI_ArmPartyPlp(u8 member_a, u8 member_b, u8 member_c);
-void        EMI_ArmPartyFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
+void        EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c);
+void        EMI_LoadPartyData(u8 member_a, u8 member_b, u8 member_c, u8 family);
 u8          EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
 extern void func_80167428(void);
 /* func_8016BA04 */
@@ -1294,27 +1294,27 @@ void func_80154438(void);
 
 void SND_UpdateVoiceStatus(void);
 
-void EMI_LoaderReadToc(void);
+void EMI_ReadToc(void);
 
-void EMI_LoaderCopyPayload(void);
+void EMI_LoadToRam(void);
 
-void EMI_LoaderQueuePayload(void);
+void EMI_LoadCompressed(void);
 
-void EMI_LoaderLoadGraphics(void);
+void EMI_LoadToVram(void);
 
-void EMI_LoaderLoadVabHeader(void);
+void EMI_LoadVabHeader(void);
 
-void EMI_LoaderLoadVabBody(void);
+void EMI_LoadVabBody(void);
 
-void EMI_LoaderLoadVabCues(void);
+void EMI_LoadSoundCues(void);
 
-void EMI_LoaderLoadSequence(void);
+void EMI_LoadSequence(void);
 
-s32 EMI_LoaderNextRead(u8 slot);
+s32 EMI_NextEntry(u8 slot);
 
 extern u32 g_SndCueReaders[7];
 
-void EMI_LoaderService(void);
+void EMI_Update(void);
 
 s32 Char_AddResistance(u8* counter, s32 delta);
 

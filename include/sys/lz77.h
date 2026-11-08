@@ -1,7 +1,7 @@
 #ifndef SYS_LZ77_H
 #define SYS_LZ77_H
 
-/* The prefix of a packed EMI payload (entry type 1). EMI_DecodeBegin points the
+/* The prefix of a packed EMI payload (entry type 1). LZ77_DecodeBegin points the
  * decoder's input cursor LZ77_HEADER_SIZE bytes into the first scratchpad
  * sector, so the control stream starts after the prefix (@source: wiki:formats/lz77).
  * The prefix is a little-endian u32 decoded size at LZ77_SIZE_OFFSET and the

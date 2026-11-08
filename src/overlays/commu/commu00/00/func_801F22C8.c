@@ -5,7 +5,7 @@ MATCH void func_801F22C8(void) {
         g_SceneEventMode = SCENE_EVENT_MESSAGE;
     } else {
         g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
-        EMI_LoaderStreamInitSlot(EMI_SLOT_COMMU05);
+        EMI_LoadArchive(EMI_SLOT_COMMU05);
         FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;
     }
 }

@@ -1,11 +1,11 @@
 #include "battle_03.h"
 
 MATCH void func_801D7108(void) {
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         volatile u8* state = &g_Battle.phase.sub_step;
 
         g_EmiStreamFlags |= 0x20u;
-        EMI_LoaderStreamInitSlot(g_GameAreaId + EMI_SLOT_AREA);
+        EMI_LoadArchive(g_GameAreaId + EMI_SLOT_AREA);
         *state += 1u;
     }
 }

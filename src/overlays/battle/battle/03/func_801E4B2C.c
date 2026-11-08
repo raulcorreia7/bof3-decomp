@@ -3,7 +3,7 @@
 MATCH void func_801E4B2C(void) {
     PartyMember* work;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         if (((EnemyBattler*)g_BattleCurrentEnemy)->turn.command.type == BATTLE_COMMAND_ABILITY) {
             if (g_Battle.encounter != 0) {
                 if (!(func_801DDF50((((EnemyBattler*)g_BattleCurrentEnemy)->unk_F0 + 0x20) & BYTE_MASK, D_801463CD) &

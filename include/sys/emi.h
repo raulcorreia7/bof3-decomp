@@ -13,6 +13,7 @@
 
 /* Container layout, measured over all 880 US Breath of Fire III (USA) archives (@source: wiki:formats/emi#padding). */
 #define EMI_SECTOR_SIZE             0x800 /* payload alignment; also the first payload offset */
+#define EMI_STREAM_TIMEOUT_FRAMES   301   /* frames without progress before a read restarts */
 #define EMI_DATA_OFFSET             0x800u
 #define EMI_MAGIC_OFFSET            0x08 /* archive header magic offset, before the TOC at 0x10 */
 #define EMI_MAGIC_SIZE              8    /* archive header magic size; see EMI_MAGIC_STR */
@@ -60,13 +61,13 @@
 typedef enum EMIEntryType {
     EMI_ENTRY_COPY          = 0,  /* RAM payload copied to load_arg; may hold code or data */
     EMI_ENTRY_PACKED        = 1,  /* LZ77 payload (include/sys/lz77.h) decoded to load_arg */
-    EMI_ENTRY_QUEUED        = 2,  /* queued for the streaming ring with type 1 (EMI_LoaderQueuePayload) */
+    EMI_ENTRY_QUEUED        = 2,  /* queued for the streaming ring with type 1 (EMI_LoadCompressed) */
     EMI_ENTRY_GRAPHICS      = 3,  /* raw graphics upload; load_arg is the upload descriptor */
     EMI_ENTRY_VAB_HEADER    = 6,  /* VAB header; load_arg is the bank selector */
     EMI_ENTRY_VAB_BODY      = 7,  /* VAB body of the same bank */
     EMI_ENTRY_CUES          = 8,  /* one VAB bank's cue table
                                    * (@source: wiki:formats/audio#emi-type-8-cue-records) */
-    EMI_ENTRY_SEQUENCE_COPY = 9,  /* sequence-side copy with type 10 (EMI_LoaderLoadSequence) */
+    EMI_ENTRY_SEQUENCE_COPY = 9,  /* sequence-side copy with type 10 (EMI_LoadSequence) */
     EMI_ENTRY_SEQUENCE      = 10, /* SEP sequence package (include/audio/sep.h) */
 } EMIEntryType;
 
@@ -78,8 +79,8 @@ typedef enum EMIEntryType {
  * its source's id. */
 typedef u32 EMIModuleId;
 
-/* States the loader keeps in the type cell besides the entry types. EMI_LoaderNextRead sets
- * EMI_LOADER_STATE_ARCHIVE_HEADER while it reads the archive's first sector; EMI_LoaderReadToc
+/* States the loader keeps in the type cell besides the entry types. EMI_NextEntry sets
+ * EMI_LOADER_STATE_ARCHIVE_HEADER while it reads the archive's first sector; EMI_ReadToc
  * handles it. */
 typedef enum EMILoaderState {
     EMI_LOADER_STATE_ARCHIVE_HEADER = 5,

@@ -6,6 +6,6 @@ MATCH void func_800C1C44(void) {
     Actor_SelectScript(8U);
     ((PartyMember*)g_Task)->unk_24 &= 0x77;
     func_8014D978();
-    EMI_LoaderStreamInitSlot(4);
+    EMI_LoadArchive(4);
     ((PartyMember*)g_Task)->unk_03 += 1;
 }

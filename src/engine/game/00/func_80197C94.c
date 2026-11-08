@@ -29,7 +29,7 @@ MATCH void func_80197C94(void) {
     } else {
         arg = 7;
     }
-    EMI_LoaderStreamInitSlot(arg);
+    EMI_LoadArchive(arg);
     Menu_ResetPanelTasks();
     state                        = &g_GameEntrySubstate;
     counter                      = *state;

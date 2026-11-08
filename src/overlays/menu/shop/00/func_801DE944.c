@@ -24,7 +24,7 @@ MATCH void func_801DE944(void) {
     party = g_PartyFieldOrder;
     actor = &g_Game.members[0].chr.character_id;
     mode  = actor[0];
-    EMI_LoaderStreamFamily(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
+    EMI_LoadPartyArchives(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
     if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 0x77) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) ||
         g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);

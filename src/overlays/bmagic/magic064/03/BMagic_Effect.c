@@ -94,7 +94,7 @@ MATCH void func_801EF2A4(void) {
             value = 0x241;
         }
     }
-    EMI_LoaderStreamInitSlot(value);
+    EMI_LoadArchive(value);
     g_Task->header.step += 1;
 }
 

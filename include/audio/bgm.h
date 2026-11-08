@@ -17,7 +17,7 @@
 
 /* One row of the selection table at 0x80181EB8, indexed by the selection id
  * (g_SndBGMId). SND_RequestBGM compares bank_slot with the active
- * row and starts that archive through EMI_LoaderStreamInitSlot; the music
+ * row and starts that archive through EMI_LoadArchive; the music
  * archives sit at EMI_SLOT_BGM and up. The selection effects read sep_slot as
  * the index into the SEP package table g_SelectionFxVoices and sequence as the sequence
  * number inside that package (SND_StartDecrescendo, SsSepReplay). */

@@ -677,7 +677,7 @@ MATCH void func_801FCE18(void) {
 }
 
 MATCH void func_801FCE6C(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
+    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
     g_PartyFieldOrder[0]  = 255;
     D_80144F5B            = 255;
     D_80144F5C            = 255;
