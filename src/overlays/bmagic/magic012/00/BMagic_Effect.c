@@ -75,7 +75,7 @@ MATCH void func_801EF4B8(void) {
         return;
     }
 
-    if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         mode = g_BattleEnemyBattlers[g_Task->unk_04].header.mode;
     } else {
         mode = g_Game.members[g_Task->unk_04].header.mode;

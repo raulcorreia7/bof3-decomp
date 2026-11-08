@@ -16,9 +16,9 @@ MATCH void func_8009EB28(void) {
     u32 enemy;
     s16 value;
 
-    flagp   = &g_BattleState;
+    flagp   = &g_Battle.state;
     flag    = *flagp;
-    battler = (*(u8*)&g_BattleActiveBattler);
+    battler = (*(u8*)&g_Battle.active_battler);
     *flagp  = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler)) {
         base = g_Game.members[battler].chr.stats.power;
@@ -30,17 +30,17 @@ MATCH void func_8009EB28(void) {
     D_801EC30C = base;
     /* FAKE: retail stores the scaled base before materialising the next addresses. */
     MATCH_FAKE_BARRIER();
-    battlerp                        = &g_BattleActiveBattler;
-    battler_check                   = *battlerp;
-    scaledp                         = &D_801EC30C;
-    scaled                          = *scaledp;
-    shifted                         = scaled >> 2;
-    selection                       = g_BattleTarget;
-    *scaledp                        = scaled + shifted;
-    value                           = Battle_CalcDamage(battler_check, selection, BATTLE_ELEMENT_FROM_WEAPON);
-    g_BattleTargetRecord->hp_change = value;
-    if (value != 0 && (func_800A3A10(*battlerp, g_BattleTarget) & BYTE_MASK) == 0) {
-        func_801DDFEC(g_BattleTarget);
-        func_801DD14C(g_BattleTarget);
+    battlerp                          = &g_Battle.active_battler;
+    battler_check                     = *battlerp;
+    scaledp                           = &D_801EC30C;
+    scaled                            = *scaledp;
+    shifted                           = scaled >> 2;
+    selection                         = g_Battle.target;
+    *scaledp                          = scaled + shifted;
+    value                             = Battle_CalcDamage(battler_check, selection, BATTLE_ELEMENT_FROM_WEAPON);
+    g_Battle.target_record->hp_change = value;
+    if (value != 0 && (func_800A3A10(*battlerp, g_Battle.target) & BYTE_MASK) == 0) {
+        func_801DDFEC(g_Battle.target);
+        func_801DD14C(g_Battle.target);
     }
 }

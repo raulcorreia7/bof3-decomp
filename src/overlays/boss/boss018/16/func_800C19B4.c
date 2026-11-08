@@ -2,6 +2,6 @@
 
 MATCH void func_800C19B4(void) {
     if (g_Game.members[0].u.turn.command.target == 4) {
-        g_BattleTargetSelector = 5;
+        g_Battle.target_selector = 5;
     }
 }

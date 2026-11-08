@@ -9,7 +9,7 @@ MATCH void func_800A50B8(void) {
     D_80148626        = 0;
     D_80148627        = 0;
     D_8014862A        = 0x3F;
-    counter           = (u8*)&g_BattleUIState;
+    counter           = (u8*)&g_Battle.ui_state;
     count             = *counter;
     g_BattlePanelMode = 2;
     *counter          = (count + 1);

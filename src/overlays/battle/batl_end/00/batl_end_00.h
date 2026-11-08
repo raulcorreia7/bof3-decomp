@@ -4,10 +4,6 @@
 #include "overlays/battle/battle.h"
 #include <stdio.h>
 
-/* D_801462E3 */
-extern u8           g_BattleUIStep;
-/* D_801462F0 */
-extern u8           g_BattlePartyCount;
 extern volatile u16 D_801463B0;
 extern char         D_80149118[];
 extern u8*          D_801EB4F4;

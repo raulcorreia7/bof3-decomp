@@ -37,5 +37,5 @@ MATCH void func_801DD978(void) {
         }
     }
 
-    g_BattleTargetSelector = result;
+    g_Battle.target_selector = result;
 }

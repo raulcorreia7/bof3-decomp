@@ -8,11 +8,11 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
     u8  key;
     u8* record;
 
-    mode               = D_801CD78D[(work_mode & BYTE_MASK) * 4];
-    g_EncounterOriginX = work_kind;
-    g_EncounterOriginY = work_index;
-    g_BattleScrollDir  = mode;
-    count              = 0;
+    mode                = D_801CD78D[(work_mode & BYTE_MASK) * 4];
+    g_EncounterOriginX  = work_kind;
+    g_EncounterOriginY  = work_index;
+    g_Battle.scroll_dir = mode;
+    count               = 0;
     if (count < g_Game.party_size) {
         offset = 0;
         do {
@@ -34,7 +34,7 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             *(s32*)((u8*)g_EncounterParty + kind)       = g_Task->pos.x.fixed;
             *(s32*)((u8*)&g_EncounterParty[0].y + kind) = g_Task->pos.y.fixed;
             g_Task->unk_48                              = 0;
-            g_Task->direction_08                        = s_RouteIndexByMode[g_BattleScrollDir];
+            g_Task->direction_08                        = s_RouteIndexByMode[g_Battle.scroll_dir];
             Actor_RequestScript(g_Task->direction_08);
             offset += BATTLE_PARTY_STRIDE;
             count += 1;

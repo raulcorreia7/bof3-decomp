@@ -4,9 +4,9 @@ MATCH void func_800A5E54(void) {
     u8* state;
 
     if (!(D_801485DC & 1)) {
-        state           = &g_BattleRowCursor;
-        g_BattleUIStep  = 2;
-        g_BattleUIState = 0;
+        state             = &g_Battle.row_cursor;
+        g_Battle.ui_step  = 2;
+        g_Battle.ui_state = 0;
         *state &= 0x7F;
     }
 }

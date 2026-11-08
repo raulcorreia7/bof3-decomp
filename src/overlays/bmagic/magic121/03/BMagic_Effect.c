@@ -37,7 +37,7 @@ MATCH void func_801EF268(void) {
     timer                = g_Task->param.unk_0B + 1;
     g_Task->param.unk_0B = timer;
     if (timer == 8) {
-        func_800A9610(g_BattleTargetSelector, 0x10);
+        func_800A9610(g_Battle.target_selector, 0x10);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

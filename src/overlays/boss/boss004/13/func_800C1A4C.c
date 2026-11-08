@@ -8,7 +8,7 @@ MATCH void func_800C1A4C(void) {
     ((PartyMember*)g_Task)->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         Area_FindSceneRecord(0x5F);
-        if (g_BattleEncounter == 5) {
+        if (g_Battle.encounter == 5) {
             ((PartyMember*)g_Task)->unk_2A = 0;
             ((PartyMember*)g_Task)->pos.y.fixed += TO_COORD(1) + COORD_HALF;
         } else {
@@ -19,9 +19,9 @@ MATCH void func_800C1A4C(void) {
             Area_SampleHeight(((PartyMember*)g_Task)->pos.x.fixed, ((PartyMember*)g_Task)->pos.y.fixed);
         g_BattleCurrentEnemy->script = &D_800C272C;
         Actor_SelectScript(1U);
-        result = &g_BattleOutcome.result;
+        result = &g_Battle.outcome.result;
         *result |= 4;
-        g_BattleBossFlags |= 1 << ((PartyMember*)g_Task)->slot;
+        g_Battle.boss_flags |= 1 << ((PartyMember*)g_Task)->slot;
         ((PartyMember*)g_Task)->header.step += 1;
     }
     func_8014D978();

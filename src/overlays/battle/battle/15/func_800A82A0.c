@@ -4,11 +4,11 @@ MATCH bool func_800A82A0(u8 selection_id) {
     u8 count;
     u8 index;
 
-    count = g_BattleGeneCount[0];
+    count = g_Battle.gene_count;
     index = 0;
     if (count != 0) {
         do {
-            if (g_BattleGenes[index] == selection_id) {
+            if (g_Battle.genes[index] == selection_id) {
                 return true;
             }
             index++;

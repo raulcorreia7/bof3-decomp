@@ -6,7 +6,7 @@ MATCH void func_800A1704(void) {
     u8 battler;
 
     func_800A3F28();
-    battler = LOBU(g_BattleActiveBattler);
+    battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
         g_Game.members[battler].u.turn.action_flags.value |= COMBATANT_FLAG_ALWAYS_HITS;
         return;

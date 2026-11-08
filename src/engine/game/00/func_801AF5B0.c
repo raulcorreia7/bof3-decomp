@@ -59,7 +59,7 @@ case_2:
         return 0;
     if ((u8)kind == ABILITY_TRUMP && g_Game.members[(u8)ch].chr.ap != 0u)
         return 0;
-    if ((u8)kind == ABILITY_ACCESSION && g_BattleEncounter == 37u)
+    if ((u8)kind == ABILITY_ACCESSION && g_Battle.encounter == 37u)
         return 0;
     return 1;
 }

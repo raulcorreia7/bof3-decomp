@@ -16,7 +16,7 @@ MATCH void Battle_WriteBackParty(void) {
     func_800ACF80();
     i = 0;
     func_801E5A38();
-    if (g_BattlePartyCount != 0) {
+    if (g_Battle.party_count != 0) {
         do {
             index = i & BYTE_MASK;
             off   = index * BATTLE_PARTY_STRIDE;
@@ -33,16 +33,16 @@ MATCH void Battle_WriteBackParty(void) {
                 Char_RebuildStats(&g_Characters[rec]);
             }
             i += 1;
-        } while ((u32)(i & BYTE_MASK) < g_BattlePartyCount);
+        } while ((u32)(i & BYTE_MASK) < g_Battle.party_count);
     }
     func_801DD08C();
-    counter                     = &g_GameEntrySubstate;
-    count                       = *counter;
-    g_BattleOutcome.event_flags = 0;
-    g_BattleMode                = 0;
-    g_BattleStep                = 0;
-    g_BattleSubStep             = 0;
-    g_BattleUIStep              = 0;
-    g_BattleUIState             = 0;
-    *counter                    = count + 1;
+    counter                      = &g_GameEntrySubstate;
+    count                        = *counter;
+    g_Battle.outcome.event_flags = 0;
+    g_Battle.phase.mode          = 0;
+    g_Battle.phase.step          = 0;
+    g_Battle.phase.sub_step      = 0;
+    g_Battle.ui_step             = 0;
+    g_Battle.ui_state            = 0;
+    *counter                     = count + 1;
 }

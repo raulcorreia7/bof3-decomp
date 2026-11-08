@@ -6,9 +6,9 @@ MATCH void func_8009EFB8(void) {
     u16 mask;
     u8  selection_kind;
 
-    index                           = g_BattleActionId;
-    battler_index                   = g_BattleActiveBattler;
-    mask                            = D_801CA71C[index].mask & ELEM_ALL;
-    selection_kind                  = g_BattleTarget;
-    g_BattleTargetRecord->hp_change = Battle_CalcDamage(battler_index, selection_kind, mask);
+    index                             = g_Battle.action_id;
+    battler_index                     = g_Battle.active_battler;
+    mask                              = D_801CA71C[index].mask & ELEM_ALL;
+    selection_kind                    = g_Battle.target;
+    g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_kind, mask);
 }

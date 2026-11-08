@@ -6,7 +6,7 @@
 MATCH void func_800A7694(s8 affinity_0, s8 affinity_1, s8 affinity_2, s8 affinity_3, s8 affinity_4) {
     u8* rec;
 
-    rec = D_80145F04 + g_BattleActiveBattler * BATTLE_PARTY_STRIDE;
+    rec = D_80145F04 + g_Battle.active_battler * BATTLE_PARTY_STRIDE;
 
     {
         s8 index = affinity_0 + 2;

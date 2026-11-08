@@ -7,7 +7,7 @@ MATCH void func_801E6D28(void) {
     u8   index;
     u32  slot;
 
-    if ((g_BattleState & BATTLE_STATE_EFFECT_LOADING) != 0 && g_BattleEffectBattler->slot == g_BattleActiveBattler) {
+    if ((g_Battle.state & BATTLE_STATE_EFFECT_LOADING) != 0 && g_BattleEffectBattler->slot == g_Battle.active_battler) {
         return;
     }
     field = &g_BattleEffectBattler->slot;

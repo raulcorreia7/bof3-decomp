@@ -9,7 +9,7 @@ MATCH void func_80097D58(void) {
     } else {
         g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;
     }
-    g_BattleUIState        = 1;
-    g_InputRepeatButtons   = 0;
-    g_BattleSelectionLatch = 1;
+    g_Battle.ui_state        = 1;
+    g_InputRepeatButtons     = 0;
+    g_Battle.selection_latch = 1;
 }

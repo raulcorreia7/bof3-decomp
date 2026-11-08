@@ -4,13 +4,13 @@ MATCH void func_800A0244(void) {
     u8  battler;
     u16 base;
 
-    if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
-        battler = LOBU(g_BattleTarget);
+    if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
+        battler = LOBU(g_Battle.target);
         if (BATTLER_IS_PLAYER(battler)) {
             base = g_Game.members[battler].chr.hp;
         } else {
             base = ENEMY_COMBATANT(battler).hp;
         }
-        g_BattleTargetRecord->hp_change = (base >> 1);
+        g_Battle.target_record->hp_change = (base >> 1);
     }
 }

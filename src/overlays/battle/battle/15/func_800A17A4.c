@@ -2,7 +2,7 @@
 
 /* gcc 2.7.2 treats a union member as an aggregate access, so the slot byte
  * is reloaded after each row store, as in retail. */
-#define ACTIVE_BATTLER (((BattleSelectionContext*)&g_BattleTarget)->sel)
+#define ACTIVE_BATTLER (((BattleSelectionContext*)&g_Battle.target)->sel)
 
 /* clears the active battler's eight status bytes and its status flag bits, then
  * passes that battler to func_800A9BD8.

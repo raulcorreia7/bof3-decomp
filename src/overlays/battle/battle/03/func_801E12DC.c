@@ -10,7 +10,7 @@ MATCH void func_801E12DC(void) {
     u32          slot;
 
     i = 0;
-    while (i < g_BattlePartyCount) {
+    while (i < g_Battle.party_count) {
         if ((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
             return;
         }

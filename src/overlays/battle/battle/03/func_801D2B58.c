@@ -49,7 +49,7 @@ NON_MATCHING void func_801D2B58(void) {
     BattlePanelState*  row1;
     BattlePanelState*  row2;
 
-    cursor    = (u8*)&g_BattleTurnCursor;
+    cursor    = (u8*)&g_Battle.turn_cursor;
     fa8       = D_80145FA8;
     fa8_118   = D_80145FA8 - 0x118;
     fa8_88    = D_80145FA8 - 0x88;
@@ -57,8 +57,8 @@ NON_MATCHING void func_801D2B58(void) {
     eb3dc_2f4 = (u8*)&D_801EB3DC + 0x2F4;
     row1      = (BattlePanelState*)(cursor + 0x52);
     row2      = (BattlePanelState*)(cursor + 0x62);
-    if (cursor[0] < (u8)g_BattleTurnCount) {
-        table = g_BattleTurnOrder;
+    if (cursor[0] < (u8)g_Battle.turn_count) {
+        table = g_Battle.turn_order;
         do {
             value = table[cursor[0] & BYTE_MASK];
             kind  = value & BYTE_MASK;
@@ -71,7 +71,7 @@ NON_MATCHING void func_801D2B58(void) {
             }
             index = value;
             if (kind < 3U) {
-                func_800AB0B8(kind, cursor[0], &g_BattleTurnCursor);
+                func_800AB0B8(kind, cursor[0], &g_Battle.turn_cursor);
             } else {
                 func_801E25E0((index - 3) & BYTE_MASK);
             }
@@ -111,7 +111,7 @@ NON_MATCHING void func_801D2B58(void) {
             *(s32*)(D_801EC308 + 0x1C) = *(s32*)(state + 0x1C);
             row                        = row2;
             if (cursor[0] < 3U) {
-                actor         = (BattleActorRecord*)g_BattleSelectedActor;
+                actor         = (BattleActorRecord*)g_Battle.selected_actor;
                 offset        = cursor[0] * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
@@ -129,14 +129,14 @@ NON_MATCHING void func_801D2B58(void) {
             }
             row->unk_04 = (s16)(actor->unk_30 + (s8)value);
             row->unk_06 = actor->unk_32;
-            g_BattleSubStep += 1;
+            g_Battle.phase.sub_step += 1;
             cursor[0] += 1;
             return;
         } while (1);
     }
 done:
-    g_BattleMode = 4;
-    g_BattleStep = 0;
+    g_Battle.phase.mode = 4;
+    g_Battle.phase.step = 0;
 }
 #else
 INCLUDE_ASM(func_801D2B58);

@@ -6,7 +6,7 @@
 #define BATTLE_SLOT_COMMAND  0xA
 /* The local work row stride. */
 
-/* nonmatching 52.1%: tried the first draft (49.08%); g_BattleTargetSelector hoisted into a local (50.92%); callee
+/* nonmatching 52.1%: tried the first draft (49.08%); g_Battle.target_selector hoisted into a local (50.92%); callee
  * result in a temporary local (52.15%); active local removed (47.24%); tagged do-while(0) wall around the mask
  * assignment (51.53%); a register pin on mask (49.08%); a search over 7800 source rewrites, best 4650, no better shape.
  * residual is one register: retail keeps the action mask in s2 while the candidate keeps it in s3, and the branch test
@@ -23,9 +23,9 @@ NON_MATCHING s32 func_800AA368(void) {
     s32           allowed;
     BattleAction* action;
 
-    action = g_BattleAction;
+    action = g_Battle.action;
     mask   = (D_801CA71C[action->unk_02].mask >> 9) & 1;
-    active = g_BattleTargetSelector;
+    active = g_Battle.target_selector;
     if (active & 0xC0) {
         count = 0;
         for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {

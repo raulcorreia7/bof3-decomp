@@ -5,7 +5,7 @@ MATCH void func_801E71EC(void) {
     u32 flags;
     u8  index;
 
-    if ((g_BattleState & BATTLE_STATE_EFFECT_PLAYING) != 0) {
+    if ((g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) != 0) {
         field = &g_BattleEffectBattler->slot;
         index = *field;
         if (index < 3) {

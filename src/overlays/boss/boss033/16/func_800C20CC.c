@@ -31,7 +31,7 @@ MATCH void func_800C20CC(void) {
             work[0xB]--;
         }
     }
-    kind = (u8*)&g_BattleTargetSelector;
+    kind = (u8*)&g_Battle.target_selector;
     if (*kind < 3) {
         func_800AF2B4(&g_Game.members[*kind], 0x50);
         if (func_800AF5FC(&g_Game.members[*kind], 0x10000) != 0) {

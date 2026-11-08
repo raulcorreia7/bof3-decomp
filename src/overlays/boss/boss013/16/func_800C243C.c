@@ -1,13 +1,13 @@
 #include "boss013_16.h"
 
 MATCH void func_800C243C(void) {
-    if (!(g_BattleOutcome.result & BATTLE_RESULT_VICTORY)) {
-        if (!(g_BattleBossFlags & 1)) {
+    if (!(g_Battle.outcome.result & BATTLE_RESULT_VICTORY)) {
+        if (!(g_Battle.boss_flags & 1)) {
             func_800AC844(2);
             TASK_SET(func_800AC754(2));
             Area_FindSceneRecord(0xF9);
             g_Task->unk_24 &= 0xFE;
-            if (g_BattleBossFlags & 0x40) {
+            if (g_Battle.boss_flags & 0x40) {
                 Actor_SelectScript(1);
             } else {
                 Actor_BeginScript(5, 4);

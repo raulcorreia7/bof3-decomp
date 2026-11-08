@@ -18,22 +18,21 @@ typedef struct BossModule {
 
 ASSERT_SIZE(BossModule, 4);
 
-extern u8            D_800C1990[];
-extern Callback      D_800C19A4[];
-extern Callback      D_800C19D4[];
-extern Callback      D_800C1ADC[];
-extern u8            D_800C1B1C[];
-extern Callback      D_800C1B30[];
-extern Callback      D_800C1B60[];
-extern Callback      D_800C1B6C[];
-extern Callback      D_800C1B74[];
-extern Callback      D_800C1B9C[];
-extern Callback      D_800C1D2C[];
-extern Callback      D_800C1D5C[];
-extern Callback      D_800C21BC[];
-extern Callback      D_800C26CC[];
-extern Callback      D_800C26FC[];
-extern BossEventFunc g_BossBattleEventHook;
+extern u8       D_800C1990[];
+extern Callback D_800C19A4[];
+extern Callback D_800C19D4[];
+extern Callback D_800C1ADC[];
+extern u8       D_800C1B1C[];
+extern Callback D_800C1B30[];
+extern Callback D_800C1B60[];
+extern Callback D_800C1B6C[];
+extern Callback D_800C1B74[];
+extern Callback D_800C1B9C[];
+extern Callback D_800C1D2C[];
+extern Callback D_800C1D5C[];
+extern Callback D_800C21BC[];
+extern Callback D_800C26CC[];
+extern Callback D_800C26FC[];
 
 void func_800AC870(s32 entry_id, PartyMember* source_record, s32 mode);
 void func_800C1978(s32 mode);

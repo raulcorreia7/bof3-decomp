@@ -18,14 +18,14 @@ MATCH void func_801D409C(void) {
         return;
     }
 
-    state = &g_BattleRowCursor;
+    state = &g_Battle.row_cursor;
     if (*state < 3) {
         clear_flag = ~8;
         battler    = state + 0x8F;
         ability    = g_Abilities;
         do {
             (*state)++;
-            action_ref = g_BattleAction;
+            action_ref = g_Battle.action;
             mask       = D_801CA71C[action_ref->unk_02].mask;
             if (mask & 0x200) {
                 if (!(g_Game.members[*state - 1].u.turn.damage_flags.value & COMBATANT_FLAG_UNK_3)) {
@@ -47,8 +47,8 @@ MATCH void func_801D409C(void) {
                 BattleStageSelectionRingRecord(1, 0, Resource_GetText(BATTLE_TEXT_CANT_LEARN));
                 return;
             }
-        } while (g_BattleRowCursor < 3);
+        } while (g_Battle.row_cursor < 3);
     }
-    phase_byte  = &g_BattleSubStep;
+    phase_byte  = &g_Battle.phase.sub_step;
     *phase_byte = *phase_byte + 1;
 }

@@ -8,12 +8,12 @@ MATCH void func_801DDFEC(u32 battler_index) {
     if ((battler_index & BYTE_MASK) >= 3u) {
         return;
     }
-    index = g_BattleTurnCursor - 1u;
+    index = g_Battle.turn_cursor - 1u;
     /* enter the scan at its bound test */
     goto check;
     for (;;) {
     body:
-        battler = g_BattleTurnOrder[index & BYTE_MASK];
+        battler = g_Battle.turn_order[index & BYTE_MASK];
         if (battler == (battler_index & BYTE_MASK)) {
             if (g_Game.members[battler].u.turn.command.type != BATTLE_COMMAND_ITEM) {
                 return;
@@ -27,7 +27,7 @@ MATCH void func_801DDFEC(u32 battler_index) {
         }
         index += 1u;
     check:
-        if ((index & BYTE_MASK) < g_BattleTurnCount) {
+        if ((index & BYTE_MASK) < g_Battle.turn_count) {
             /* next ranked owner */
             goto body;
         }

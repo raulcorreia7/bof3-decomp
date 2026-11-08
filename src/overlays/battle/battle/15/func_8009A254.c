@@ -7,11 +7,11 @@ MATCH void func_8009A254(void) {
     /* First word of the record of the slot that owns the message panel. */
     slot_data = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        g_BattleUIState = 4;
+        g_Battle.ui_state = 4;
         return;
     }
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
-        g_BattleUIState = 3;
+        g_Battle.ui_state = 3;
         return;
     }
     input = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
@@ -19,7 +19,7 @@ MATCH void func_8009A254(void) {
         if (Item_GetFlags(slot_data >> 8, slot_data & BYTE_MASK) & 0x80) {
             g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(3);
             {
-                u8* state = (u8*)&g_BattleUIState;
+                u8* state = (u8*)&g_Battle.ui_state;
 
                 *state -= 1;
             }
@@ -29,19 +29,19 @@ MATCH void func_8009A254(void) {
     }
     if (input & PADLright) {
         if (func_8009AF7C() & BYTE_MASK) {
-            g_BattleActorTurn->command.target = func_801DD7D8(g_BattlePartyCount - 1, 0, ACTOR_TARGET_STEP(+1));
+            g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1));
         } else {
             g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(
-                func_801DD7D8(g_BattlePartyCount - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
+                func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (input & PADLleft) {
         if (func_8009AF7C() & BYTE_MASK) {
-            g_BattleActorTurn->command.target = func_801DD7D8(g_BattlePartyCount - 1, 0, ACTOR_TARGET_STEP(-1));
+            g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1));
         } else {
             g_BattleActorTurn->command.target = Battle_FindSelectableSlotBackward(
-                func_801DD7D8(g_BattlePartyCount - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
+                func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }

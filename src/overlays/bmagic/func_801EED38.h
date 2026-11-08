@@ -15,7 +15,7 @@ MATCH void func_801EED38(void) {
         D_801F01B4[i].header.step  = 0;
     }
     g_Task->unk_04 = EFFECT_SPARKLE_KIND;
-    battler        = g_BattleSelectedActor;
+    battler        = g_Battle.selected_actor;
     g_Task->facing = battler->facing;
     g_Task->pos.x  = battler->pos.x;
     g_Task->pos.y  = battler->pos.y;

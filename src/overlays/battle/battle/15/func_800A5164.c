@@ -7,15 +7,15 @@ MATCH void func_800A5164(void) {
     u8* slot;
     u8* counter;
 
-    g_BattleGeneCount[0] = 0;
-    i                    = 0;
+    g_Battle.gene_count = 0;
+    i                   = 0;
     do {
         row   = MEM(s16, (u32)&g_BattleTargetCursorCol) + FIELD(s16, (&g_BattleTargetCursorCol), 0x2u);
         slot  = (u8*)&g_BattleTargetRows[row];
         value = slot[i & BYTE_MASK];
         if (value != GAME_NONE) {
-            g_BattleGenes[i & BYTE_MASK] = value;
-            g_BattleGeneCount[0]         = g_BattleGeneCount[0] + 1;
+            g_Battle.genes[i & BYTE_MASK] = value;
+            g_Battle.gene_count           = g_Battle.gene_count + 1;
         }
         i = i + 1;
     } while ((i & BYTE_MASK) < 3U);
@@ -23,6 +23,6 @@ MATCH void func_800A5164(void) {
     func_800A82F8();
     g_BattlePanelMode = 2;
     BATTLE_ACTIVE_ROW->u.turn.action_flags.volatile_value |= COMBATANT_FLAG_ABILITY_ALT_POSE;
-    counter  = (u8*)&g_BattleUIState;
+    counter  = (u8*)&g_Battle.ui_state;
     *counter = *counter + 1;
 }

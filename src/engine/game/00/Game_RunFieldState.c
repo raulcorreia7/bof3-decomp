@@ -19,15 +19,15 @@ MATCH void Game_RunFieldState(void) {
             g_GameEntryState = 4;
             break;
         case GAME_REQUEST_BATTLE:
-            g_BattleMode        = 0;
-            g_BattleStep        = 0;
-            g_BattleSubStep     = 0;
-            D_80145E9B          = 0;
-            D_80145FDB          = 0;
-            D_8014611B          = 0;
-            counter             = &g_BattleCount;
-            g_GameEntryState    = 5;
-            g_GameEntrySubstate = 0;
+            g_Battle.phase.mode     = 0;
+            g_Battle.phase.step     = 0;
+            g_Battle.phase.sub_step = 0;
+            D_80145E9B              = 0;
+            D_80145FDB              = 0;
+            D_8014611B              = 0;
+            counter                 = &g_BattleCount;
+            g_GameEntryState        = 5;
+            g_GameEntrySubstate     = 0;
             (*counter)++;
             break;
         case GAME_REQUEST_CAMERA_LOOK:

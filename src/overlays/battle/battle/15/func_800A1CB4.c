@@ -19,6 +19,6 @@ MATCH void func_800A1CB4(void) {
                 slot++;
             } while (slot < D_801462F0_state.active_count);
         }
-        g_Game.members[g_BattleTarget].u.turn.action_flags.value &= ~COMBATANT_FLAG_SELECT_EXCLUDED;
+        g_Game.members[g_Battle.target].u.turn.action_flags.value &= ~COMBATANT_FLAG_SELECT_EXCLUDED;
     }
 }

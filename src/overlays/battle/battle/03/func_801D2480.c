@@ -3,11 +3,11 @@
 MATCH void func_801D2480(void) {
     u8 value;
 
-    value = g_BattlePanelWidths[g_BattlePanelSlot];
+    value = g_Battle.panel_widths[g_Battle.panel_slot];
     if (value < 8u) {
-        g_BattlePanelWidths[g_BattlePanelSlot] = value + 4;
+        g_Battle.panel_widths[g_Battle.panel_slot] = value + 4;
     } else {
-        g_BattleStep    = 2;
-        g_BattleSubStep = 0;
+        g_Battle.phase.step     = 2;
+        g_Battle.phase.sub_step = 0;
     }
 }

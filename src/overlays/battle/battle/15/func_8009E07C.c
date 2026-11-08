@@ -8,7 +8,7 @@ MATCH void func_8009E07C(void) {
     s32          battler;
     u16          status;
 
-    battler = LOBU(g_BattleTarget);
+    battler = LOBU(g_Battle.target);
     if (battler < 3u) {
         status = g_Game.members[battler].chr.status & STATUS_KO;
     } else {
@@ -16,15 +16,15 @@ MATCH void func_8009E07C(void) {
         status = g_BattleEnemyBattlers[battler].status & STATUS_KO;
     }
     if (status != 0) {
-        state                           = &g_BattleTarget;
-        g_BattleTargetRecord->hp_change = -1;
+        state                             = &g_Battle.target;
+        g_Battle.target_record->hp_change = -1;
         func_800A36F0(*state, 0x4000U);
         if (*state < 3u) {
-            g_BattleLivingPartyCount += 1;
+            g_Battle.living_party_count += 1;
         } else {
-            g_BattleLivingEnemyCount += 1;
+            g_Battle.living_enemy_count += 1;
         }
     } else {
-        g_BattleTargetRecord->hp_change = 0;
+        g_Battle.target_record->hp_change = 0;
     }
 }

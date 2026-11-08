@@ -30,28 +30,28 @@ NON_MATCHING void func_80099364(void) {
         D_8014862E ^= 1u;
     }
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        D_80148624      = 0u;
-        D_801483C0      = 1u;
-        g_BattleSubStep = 2u;
-        g_BattleUIStep  = 1u;
+        D_80148624              = 0u;
+        D_801483C0              = 1u;
+        g_Battle.phase.sub_step = 2u;
+        g_Battle.ui_step        = 1u;
     } else if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         *panel = D_8014862E;
         if (D_8014862E == 0u) {
             func_8009B160();
-            g_BattleUIState += 3u;
+            g_Battle.ui_state += 3u;
         } else {
             func_8009B03C();
             D_8014859D = g_BattleItemRow;
             D_801485A0 = D_801485C4;
-            g_BattleUIState += 1u;
+            g_Battle.ui_state += 1u;
         }
     } else if ((held & PADLdown) != 0u) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
-        D_80148624      = 0u;
-        D_801483C0      = 1u;
-        g_BattleSubStep = 2u;
-        g_BattleUIStep  = 1u;
+        D_80148624              = 0u;
+        D_801483C0              = 1u;
+        g_Battle.phase.sub_step = 2u;
+        g_Battle.ui_step        = 1u;
     }
 }
 #else

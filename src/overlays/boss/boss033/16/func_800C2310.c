@@ -9,7 +9,7 @@ MATCH void func_800C2310(void) {
     s32          delta_z;
 
     if ((func_8014DAEC() & BYTE_MASK) != 0) {
-        battler = &g_BattleActiveBattler;
+        battler = &g_Battle.active_battler;
         index   = *battler;
         work    = (PartyMember*)g_Task;
         delta_x = g_BattleEnemyBattlers[index - 3].pos.x.fixed - work->pos.x.fixed;

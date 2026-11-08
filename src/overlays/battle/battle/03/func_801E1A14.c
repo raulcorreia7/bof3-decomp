@@ -10,10 +10,10 @@ MATCH void func_801E1A14(void) {
     if (work->u.turn.command.type == expected) {
         work->chr.ap = work->chr.ap - D_801463C8;
     }
-    battle_flags = &g_BattleState;
+    battle_flags = &g_Battle.state;
     *battle_flags |= 0x800;
     g_Game.current->u.turn.command.type = 0;
-    if ((D_801CA71C[g_BattleActionId].mask & 0x800u) != 0u) {
+    if ((D_801CA71C[g_Battle.action_id].mask & 0x800u) != 0u) {
         g_Task->header.step += 1;
     } else {
         func_801DEE4C();

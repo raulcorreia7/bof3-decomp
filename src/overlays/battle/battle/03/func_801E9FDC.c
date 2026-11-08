@@ -21,7 +21,7 @@ MATCH void func_801E9FDC(void) {
     *(s16*)&g_MenuCurrentPanel->pos.y =
         g_Game.members[g_MenuCurrentPanel->unk_0A].unk_30.half + g_BattlePanelOffsets[b1 * 8 + b0 * 2 + 1] + 12;
 
-    if (g_BattleSelectionLatch != 0) {
+    if (g_Battle.selection_latch != 0) {
         flags = g_BattleActorTurn->command.target;
         if ((flags & 0xC0) == 0) {
             if (flags != g_MenuCurrentPanel->unk_0A) {

@@ -10,39 +10,39 @@
 NON_MATCHING void func_8009E500(void) {
     s16 delta;
     u16 limit;
-    if (!(func_800A3A10(g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
-        if (BATTLER_IS_PLAYER(g_BattleTarget)) {
-            if (g_Game.members[g_BattleTarget].turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
-                g_BattleTargetRecord->ap_change = 0;
+    if (!(func_800A3A10(g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
+        if (BATTLER_IS_PLAYER(g_Battle.target)) {
+            if (g_Game.members[g_Battle.target].turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+                g_Battle.target_record->ap_change = 0;
             } else {
-                g_BattleTargetRecord->ap_change = g_Game.members[g_BattleTarget].chr.ap / 5;
+                g_Battle.target_record->ap_change = g_Game.members[g_Battle.target].chr.ap / 5;
             }
-        } else if (ENEMY_COMBATANT(g_BattleTarget).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
-            g_BattleTargetRecord->ap_change = 0;
+        } else if (ENEMY_COMBATANT(g_Battle.target).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            g_Battle.target_record->ap_change = 0;
         } else {
-            g_BattleTargetRecord->ap_change = ENEMY_COMBATANT(g_BattleTarget).ap / 5;
+            g_Battle.target_record->ap_change = ENEMY_COMBATANT(g_Battle.target).ap / 5;
         }
-        g_BattleAction->unk_08             = 2;
-        g_BattleTargetRecord->target_flags = 2;
-        delta                              = g_BattleTargetRecord->ap_change;
-        if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
-            limit = g_Game.members[g_BattleActiveBattler].chr.stats.max_ap;
-            if (limit < g_Game.members[g_BattleActiveBattler].chr.ap + delta) {
-                g_BattleAction->unk_08 |= 8;
+        g_Battle.action->unk_08              = 2;
+        g_Battle.target_record->target_flags = 2;
+        delta                                = g_Battle.target_record->ap_change;
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
+            limit = g_Game.members[g_Battle.active_battler].chr.stats.max_ap;
+            if (limit < g_Game.members[g_Battle.active_battler].chr.ap + delta) {
+                g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_BattleActiveBattler].chr.ap, limit, delta),
-                          g_BattleActiveBattler);
+            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, limit, delta),
+                          g_Battle.active_battler);
         } else {
-            limit = ENEMY_COMBATANT(g_BattleActiveBattler).stats.max_ap;
-            if (limit < ENEMY_COMBATANT(g_BattleActiveBattler).ap + delta) {
-                g_BattleAction->unk_08 |= 8;
+            limit = ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap;
+            if (limit < ENEMY_COMBATANT(g_Battle.active_battler).ap + delta) {
+                g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_BattleActiveBattler).ap, limit, delta),
-                          g_BattleActiveBattler);
+            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, limit, delta),
+                          g_Battle.active_battler);
         }
-        g_BattleAction->unk_08 = 0;
+        g_Battle.action->unk_08 = 0;
     } else {
-        g_BattleTargetRecord->target_flags = 2;
+        g_Battle.target_record->target_flags = 2;
     }
 }
 #else

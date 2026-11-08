@@ -9,7 +9,7 @@ MATCH void func_800C1D14(void) {
     if ((enemy->stats.max_hp >> 2) < remaining) {
         return;
     }
-    flag = &g_BattleBossFlags;
+    flag = &g_Battle.boss_flags;
     *flag |= 0x1;
     enemy->hp = 0xFFFF;
 }

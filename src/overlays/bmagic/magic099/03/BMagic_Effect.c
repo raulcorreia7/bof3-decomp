@@ -13,7 +13,7 @@ MATCH void func_801EEE70(void) {
     g_PaletteFades[g_Task->timer].offset.green--;
     g_PaletteFades[g_Task->timer].offset.blue--;
     if (--g_Task->unk_09 == 0) {
-        func_800A9610(g_BattleTargetSelector, 16);
+        func_800A9610(g_Battle.target_selector, 16);
         g_Task->header.mode++;
     }
 }
@@ -33,10 +33,10 @@ MATCH void func_801EEF98(void) {
 
 MATCH void func_801EF0EC(void) {
     if (g_Task->param.unk_0B == 9) {
-        GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
-        func_800AF814(g_BattleTargetSelector);
-        func_800A9820(g_BattleTargetSelector);
-        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        func_800AF814(g_Battle.target_selector);
+        func_800A9820(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }

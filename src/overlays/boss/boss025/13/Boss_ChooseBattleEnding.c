@@ -6,7 +6,7 @@ MATCH void Boss_ChooseBattleEnding(void) {
     BOSS_SEND_PARTY_TO_ENDING_POSE(0)
     BOSS_SEND_PARTY_TO_ENDING_POSE(1)
     BOSS_SEND_PARTY_TO_ENDING_POSE(2)
-    flags = &g_BattleBossFlags;
+    flags = &g_Battle.boss_flags;
     if (*flags & 1) {
         D_80146875 = 0xF;
     }

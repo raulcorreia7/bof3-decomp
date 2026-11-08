@@ -11,12 +11,12 @@ MATCH void func_800A68A4(void) {
     {
         /* The loop's pointer must die before the first call, or the address is
          * held in s1 from entry. */
-        volatile u8* loop_battler = &g_BattleActiveBattler;
+        volatile u8* loop_battler = &g_Battle.active_battler;
         for (; i < 8; i++) {
             g_Game.members[*loop_battler].status.unk_12C[i] = 0;
         }
     }
-    battler = &g_BattleActiveBattler;
+    battler = &g_Battle.active_battler;
     g_Game.members[*battler].u.turn.damage_flags.volatile_value &=
         ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
     g_Game.members[*battler].u.turn.action_flags.volatile_value &=
@@ -52,14 +52,14 @@ MATCH void func_800A68A4(void) {
         g_BattleTargetRows[i].slot_02 = g_BattleTargetRows[i - 1].slot_02;
         g_BattleTargetRows[i].gate_03 = g_BattleTargetRows[i - 1].gate_03;
     }
-    for (i = 0; i < g_BattleGeneCount[0]; i++) {
-        FIELD(u8, &g_BattleTargetRows, i) = g_BattleGenes[i];
+    for (i = 0; i < g_Battle.gene_count; i++) {
+        FIELD(u8, &g_BattleTargetRows, i) = g_Battle.genes[i];
     }
     for (; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         FIELD(u8, &g_BattleTargetRows, i) = 0xFF;
     }
     g_BattleTargetRows[0].gate_03 = (D_800B6F5C << 5) + (D_800B6F58 & 0x1F);
-    g_DragonForm                  = D_800B6F58;
+    g_Battle.dragon_form          = D_800B6F58;
     D_801463B9                    = D_800B6F5C;
-    func_800A9BD8(g_BattleActiveBattler);
+    func_800A9BD8(g_Battle.active_battler);
 }

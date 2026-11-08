@@ -4,10 +4,10 @@
  * at +0x74 of the 0x118-byte rows indexed by (slot - 3). */
 
 /* Non-volatile alias for the selection-kind byte at 0x80146375. Reading it
- * through the target's volatile g_BattleActionType makes the compiler materialize
+ * through the target's volatile g_Battle.action_type makes the compiler materialize
  * the zero-extension of every byte load (`andi rX,rX,0xFF`), which retail does
  * not carry; this distinct, non-volatile symbol keeps the retail `lbu` shape.
- * FAKE: non-volatile alias of g_BattleActionType (same idiom as Battle_ActionHasElement).
+ * FAKE: non-volatile alias of g_Battle.action_type (same idiom as Battle_ActionHasElement).
  */
 
 /* Non-volatile alias for the result byte at 0x80146384, used by the slot store
@@ -21,14 +21,14 @@
 /* answers whether the battler slot may act: with the battle 0x4000
  *           flag set, the slot unblocked and not the current selection, an
  *           enemy slot is checked through its action row and action id. The
- *           result byte g_BattleTargetSelector receives the slot, the current selection, or
+ *           result byte g_Battle.target_selector receives the slot, the current selection, or
  *           a 0x40/0x80/0xC0 action code.
  */
 MATCH u8 func_800A9304(u8 slot) {
     s32 index;
     u8  action;
 
-    if (!(g_BattleState & BATTLE_STATE_OVER)) {
+    if (!(g_Battle.state & BATTLE_STATE_OVER)) {
         return true;
     }
     if (Battle_SlotIsBlocked(D_801463CB)) {
@@ -44,22 +44,22 @@ MATCH u8 func_800A9304(u8 slot) {
     index = slot - BATTLE_PARTY_CHARACTERS_COUNT;
     if (g_BattleEnemyBattlers[index].stats.intellect < 2 || (g_BattleEnemyBattlers[index].status & STATUS_CONFUSED) ||
         (g_BattleEnemyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
-        if ((*(u8*)&g_BattleActionType) == BATTLE_ACTION_ABILITY) {
+        if ((*(u8*)&g_Battle.action_type) == BATTLE_ACTION_ABILITY) {
             action = D_801CA718[ENEMY_COMBATANT(slot).turn.command.id * BATTLE_KIND_STRIDE];
             if (action & ABILITY_TARGET_ALL) {
                 if (!(action & ABILITY_TARGET_BOTH_SIDES)) {
                     if (D_801463CB >= BATTLE_PARTY_CHARACTERS_COUNT) {
-                        g_BattleTargetSelector = 0x80;
+                        g_Battle.target_selector = 0x80;
                     } else {
-                        g_BattleTargetSelector = 0x40;
+                        g_Battle.target_selector = 0x40;
                     }
                 } else {
-                    g_BattleTargetSelector = 0xC0;
+                    g_Battle.target_selector = 0xC0;
                 }
                 return true;
             }
             if (!(action & ABILITY_TARGET_SELECT)) {
-                (*(u8*)&g_BattleTargetSelector) = slot;
+                (*(u8*)&g_Battle.target_selector) = slot;
                 return true;
             }
         }
@@ -69,6 +69,6 @@ MATCH u8 func_800A9304(u8 slot) {
     return true;
 
 copy_selection:
-    g_BattleTargetSelector = D_801463CB;
+    g_Battle.target_selector = D_801463CB;
     return false;
 }

@@ -97,7 +97,7 @@ NON_MATCHING void func_801DA7D4(void) {
         D_801462F6[i] = 0xFF;
         i++;
     } while ((u32)i < BATTLE_COMMAND_MAX);
-    cursor  = &g_BattleCommandCount;
+    cursor  = &g_Battle.command_count;
     *cursor = 0;
     i       = 0;
     if (max & BYTE_MASK) {

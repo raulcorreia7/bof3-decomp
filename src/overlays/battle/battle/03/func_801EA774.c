@@ -5,7 +5,7 @@ MATCH void func_801EA774(void) {
     s16            state = panel->pos.y;
 
     if (state == -0x16) {
-        u8* gate = &g_BattleOutcome.event_flags;
+        u8* gate = &g_Battle.outcome.event_flags;
 
         *gate &= ~D_801EB4DC->unk_01;
         func_80158E20();

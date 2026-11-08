@@ -56,7 +56,7 @@ MATCH void func_801EF388(void) {
         g_Task->unk_09 = count - 1;
     }
     if (g_Task->param.unk_0B == 0x80) {
-        if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
             func_800AF814((g_Task->unk_03 + 3) & BYTE_MASK);
             func_800A9820((g_Task->unk_03 + 3) & BYTE_MASK);

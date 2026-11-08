@@ -9,7 +9,7 @@ MATCH void func_801E51DC(void) {
     u8           count;
 
     Battle_CancelTurn(g_Task->slot);
-    timer  = &g_BattleLivingEnemyCount;
+    timer  = &g_Battle.living_enemy_count;
     count  = *timer - 1;
     *timer = count;
     if ((count & BYTE_MASK) == 0) {

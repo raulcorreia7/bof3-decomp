@@ -2,15 +2,15 @@
 
 /* runs the shared panel update and sets the 0x200 flag on the
  * selected entry's flags_04: the local battler record while the
- * local count g_BattleActiveBattler is under 3, otherwise the enemy battler row.
+ * local count g_Battle.active_battler is under 3, otherwise the enemy battler row.
  */
 MATCH void func_8009F320(void) {
     func_800A3F28();
 
-    if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
-        g_Game.members[g_BattleTarget].u.turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
+    if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
+        g_Game.members[g_Battle.target].u.turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
         return;
     }
 
-    ENEMY_COMBATANT(g_BattleTarget).turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
+    ENEMY_COMBATANT(g_Battle.target).turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
 }

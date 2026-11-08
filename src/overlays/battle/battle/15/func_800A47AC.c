@@ -37,15 +37,15 @@ MATCH void func_800A47AC(void) {
             flags[row][col] = shifted_mask & 1;
         }
     }
-    g_InputRepeatButtons = 0;
-    g_BattleRowCursor    = 1;
-    g_BattlePanelEntry   = 0;
-    D_801462E7           = 0;
-    D_801463B2           = 0;
-    D_801463B4           = 0;
-    *g_BattleGeneCount   = 0;
-    *D_801463B8          = 0;
+    g_InputRepeatButtons        = 0;
+    g_Battle.row_cursor         = 1;
+    g_Battle.cursor.panel_entry = 0;
+    D_801462E7                  = 0;
+    D_801463B2                  = 0;
+    D_801463B4                  = 0;
+    g_Battle.gene_count         = 0;
+    *D_801463B8                 = 0;
     func_800A82F8();
-    g_BattleUIState   = 0;
+    g_Battle.ui_state = 0;
     g_BattleUIStep_nv = g_BattleUIStep_nv + 1;
 }

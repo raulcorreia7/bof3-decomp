@@ -24,7 +24,7 @@ MATCH void func_801E99AC(void) {
     y                         = g_BattleEnemyBattlers[row].unk_30 + g_BattleEnemyBattlers[row].panel_offset_y + 0xC;
     BATTLE_PANEL_TASK->y.half = y;
     func_801D8690((s16)BATTLE_PANEL_TASK->x.half, (s16)y, BATTLE_PANEL_TASK->cell_0A.slot);
-    if (g_BattleSelectionLatch != 0) {
+    if (g_Battle.selection_latch != 0) {
         slot = g_BattleActorTurn->command.target;
         if ((slot & 0xC0) == 0) {
             if (slot == BATTLE_PANEL_TASK->cell_0A.slot) {

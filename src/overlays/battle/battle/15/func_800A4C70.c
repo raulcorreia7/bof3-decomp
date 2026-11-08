@@ -19,7 +19,7 @@ MATCH void func_800A4C70(void) {
         D_801485CA                               = 0;
         D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Resource_GetText(0x59);
         count                                    = g_BattleUIState + 1;
-        state                                    = &g_BattleRowCursor;
+        state                                    = &g_Battle.row_cursor;
         *state |= 0x80;
         g_BattleUIState = count;
     }

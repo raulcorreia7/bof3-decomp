@@ -2,10 +2,10 @@
 
 /* func_801D1014 */
 MATCH void Battle_Update(void) {
-    s32 status = g_BattleState;
+    s32 status = g_Battle.state;
 
-    if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_MenuPanelTasks[0].active == 0) || (g_BattleMode == 5)) &&
-        ((g_BattleOutcome.event_flags & 2) == 0 || (g_BattleMode == 5))) {
+    if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_MenuPanelTasks[0].active == 0) || (g_Battle.phase.mode == 5)) &&
+        ((g_Battle.outcome.event_flags & 2) == 0 || (g_Battle.phase.mode == 5))) {
         Battle_DispatchMode();
     }
     Battle_RunParty();
@@ -15,7 +15,7 @@ MATCH void Battle_Update(void) {
     Battle_RunEffects();
     Battle_UpdatePartyActors();
     Battle_UpdateEnemyActors();
-    if (g_BattleEncounter != 0) {
+    if (g_Battle.encounter != 0) {
         func_801A0514();
     } else {
         func_801A061C();

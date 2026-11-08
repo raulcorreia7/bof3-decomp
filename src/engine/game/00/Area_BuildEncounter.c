@@ -30,7 +30,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     if (!(D_801CD8C0 & BYTE_MASK)) {
         return 0;
     }
-    g_BattleScrollDir = D_801CD8C8;
+    g_Battle.scroll_dir = D_801CD8C8;
     if (result & BYTE_MASK) {
         if (!(func_801C63B0() & BYTE_MASK)) {
             result = 0;

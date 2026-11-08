@@ -6,7 +6,7 @@ MATCH u8 func_801BF78C(void) {
     s32 i;
     u8  j;
 
-    if (g_BattleOutcome.options & 0x10) {
+    if (g_Battle.outcome.options & 0x10) {
         return 1;
     }
     for (i = 0; i < g_Game.party_size; i++) {
