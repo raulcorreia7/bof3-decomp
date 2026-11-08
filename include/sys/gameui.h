@@ -41,11 +41,11 @@ extern AreaDrawState g_AreaDrawState;
 /* retail addresses */
 
 /* The menu header bar every screen draws at the top: geometry in pixels, y at its resting row. */
-#define MENU_HEADER_X           0x14
-#define MENU_HEADER_Y           0x12
-#define MENU_HEADER_WIDTH       0x118
-#define MENU_HEADER_HEIGHT      0x13
-#define MENU_HEADER_SHORT_WIDTH 0x48
+#define MENU_HEADER_X           20
+#define MENU_HEADER_Y           18
+#define MENU_HEADER_WIDTH       280
+#define MENU_HEADER_HEIGHT      19
+#define MENU_HEADER_SHORT_WIDTH 72
 
 /* The rows of the equip stat window, top to bottom. */
 typedef enum EquipStatRow {
@@ -56,6 +56,12 @@ typedef enum EquipStatRow {
 
 /* The most bytes of a text record UI_DrawText draws. */
 #define TEXT_LENGTH_MAX               0xFF
+||||||| parent of 079bf9312 (style(menu): write the header bar geometry in decimal pixels)
+#define MENU_HEADER_X                 0x14
+#define MENU_HEADER_Y                 0x12
+#define MENU_HEADER_WIDTH             0x118
+#define MENU_HEADER_HEIGHT            0x13
+#define MENU_HEADER_SHORT_WIDTH       0x48
 
 /* Sizes of the framed windows the menu overlays draw with UI_DrawWindow. */
 #define MENU_CHARACTER_WINDOW_WIDTH   125
