@@ -12,7 +12,7 @@ MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
         prim = (SPRT*)g_GfxPrimCursor;
         SetSprt(prim);
         setClut(prim, 192, STAGE_PALETTE_Y);
-        setRGB0(prim, 128, 128, 128);
+        setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
         setWH(prim, 8, 8);
         setXY0(prim, x, y);
         setUV0(prim, 208, 248);

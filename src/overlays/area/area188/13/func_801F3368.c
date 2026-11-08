@@ -10,7 +10,7 @@ MATCH void func_801F3368(void) {
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
     if (!(mode & 0xFF)) {
-        g_Task->timer = 0x80;
+        g_Task->timer = 128;
         g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x14));
     }

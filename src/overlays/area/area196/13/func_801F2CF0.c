@@ -7,10 +7,10 @@ MATCH void func_801F2CF0(void) {
         g_Task->header.step += 1;
     }
     timer = g_Task->timer;
-    if (timer < 0x20U) {
+    if (timer < 32U) {
         g_Task->timer = timer + 1;
     }
-    func_801F3030(0x20 - g_Task->timer);
+    func_801F3030(32 - g_Task->timer);
     g_Task->unk_0A += 1;
     g_Task->unk_0A &= 0x3F;
     func_801F3850();

@@ -8,13 +8,9 @@ MATCH void func_801CE404(void) {
     D_801CFAB8[TASK_BYTES[2]]();
 }
 
-MATCH void Char_StartTurnMomo(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurnMomo.h"
 
-MATCH void Char_RunStepScriptMomo(void) {
-    CHAR_RUN_STEP_CASES(CHARACTER_FACING_AWAY, 0x41, CHARACTER_FACING_BACK, 0x40);
-}
+#include "overlays/plchar/Char_RunStepScriptMomo.h"
 
 MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801CFAC4, 2, g_Task);
@@ -44,10 +40,7 @@ INCLUDE_ASM(func_801CEFC4);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-/* func_801CF24C */
-MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
-    CHAR_PROBE_CELL_SPAWN(20);
-}
+#include "overlays/plchar/Char_ProbeCellSpawn.h"
 
 #include "overlays/plchar/Char_SpawnActor.h"
 
@@ -57,13 +50,9 @@ MATCH void func_801CF65C(void) {
     SYS_DISPATCH_TASK(D_801CFAE8, 2, g_Task);
 }
 
-MATCH void Char_StartTurn(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurn.h"
 
-MATCH void Char_RunStepScriptNinaAdult(void) {
-    CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
-}
+#include "overlays/plchar/Char_RunStepScriptNinaAdult.h"
 
 MATCH void func_801CF868(void) {
     SYS_DISPATCH_TASK(D_801CFAF4, 2, g_Task);

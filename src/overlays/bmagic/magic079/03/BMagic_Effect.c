@@ -50,7 +50,7 @@ MATCH void func_801EEE64(void) {
     g_Task->pos.z.fixed  = g_BattleSelectedActor->pos.z.fixed + 0x04000000;
     g_Task->param.unk_0B = 0x10;
     g_Task->unk_09       = 0x10;
-    g_Task->timer        = 0xB0;
+    g_Task->timer        = 176;
     g_Task->header.step++;
 }
 
@@ -93,7 +93,7 @@ MATCH void func_801EEFB8(void) {
     }
     timer_next    = g_Task->timer - 1;
     g_Task->timer = timer_next;
-    if ((timer_next & BYTE_MASK) == 0x10) {
+    if ((timer_next & BYTE_MASK) == 16) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
@@ -176,7 +176,7 @@ MATCH void func_801EF2BC(void) {
     }
     timer_next    = g_Task->timer + 1;
     g_Task->timer = timer_next;
-    if ((timer_next & BYTE_MASK) == 0xA0) {
+    if ((timer_next & BYTE_MASK) == 160) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
@@ -215,7 +215,7 @@ MATCH void func_801EFC74(void) {
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;
     g_Task->unk_09      = 4;
-    g_Task->timer       = 0xB0;
+    g_Task->timer       = 176;
     g_Task->header.step = g_Task->header.step + 1;
 }
 

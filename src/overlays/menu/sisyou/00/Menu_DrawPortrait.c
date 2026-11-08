@@ -27,9 +27,9 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     shade_value = shade & BYTE_MASK;
     /* Retail writes b0, g0, r0 as one block in the first two arms. */
     if (shade_value == 0) {
-        sprt->b0 = 128;
-        sprt->g0 = 128;
-        sprt->r0 = 128;
+        sprt->b0 = GFX_COLOR_NEUTRAL;
+        sprt->g0 = GFX_COLOR_NEUTRAL;
+        sprt->r0 = GFX_COLOR_NEUTRAL;
     } else if (shade_value == 1) {
         sprt->b0 = 48;
         sprt->g0 = 48;
@@ -37,7 +37,7 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     } else {
         sprt->g0 = 64;
         sprt->r0 = 64;
-        sprt->b0 = 128;
+        sprt->b0 = GFX_COLOR_NEUTRAL;
     }
 
     setXY0(sprt, x, y);

@@ -69,7 +69,7 @@ MATCH void func_801F7A08(void) {
     *timer -= 1;
     if (*timer == 0) {
         SND_PlayBGM(0x96, 0x64, 0x8);
-        *timer = 0x1E;
+        *timer = 30;
         D_80146874 += 1;
     }
     func_801F88CC(0, 0x80);
@@ -85,7 +85,7 @@ MATCH void func_801F7A84(void) {
     if (count == 0) {
         g_AreaScrollTargetX  = TO_COORD(148);
         g_AreaCameraStep     = 0x20;
-        *timer               = 0x80;
+        *timer               = 128;
         g_AreaCameraAngle.vx = -0x16A;
         g_AreaCameraAngle.vz = 0x200;
         g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
@@ -332,8 +332,8 @@ MATCH void func_801F82C0(void) {
     timer  = &D_80146875;
     value  = *timer + 1;
     *timer = value;
-    if (value == 0x32) {
-        *timer = 0x96;
+    if (value == 50) {
+        *timer = 150;
         D_80146874 += 1;
         func_801F8B10(0x1F4, 0xFF);
     } else {
@@ -349,7 +349,7 @@ MATCH void func_801F833C(void) {
     if (*timer == 0) {
         D_80146867 = 0x6E;
         D_80146874 += 1;
-        *timer = 0x46;
+        *timer = 70;
     }
     func_801F8B10(0x1F4, 0xFF);
 }
@@ -398,9 +398,9 @@ MATCH void func_801F84F4(void) {
     timer  = &D_80146875;
     value  = *timer + 1;
     *timer = value;
-    if (value >= 0x80) {
+    if (value >= 128) {
         D_80146867 = 0x3C;
-        *timer     = 0x1E;
+        *timer     = 30;
         D_801F9DD8 = 0;
         D_80146874 += 1;
         EMI_LoadArchive(0x260);

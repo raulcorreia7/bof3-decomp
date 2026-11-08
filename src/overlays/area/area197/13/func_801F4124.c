@@ -1,3 +1,3 @@
 #include "area197_13.h"
 
-#include "../../Area_SkipScriptIfAdultRyu.h"
+#include "overlays/area/Area_SkipScriptIfAdultRyu.h"

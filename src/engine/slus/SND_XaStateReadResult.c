@@ -22,7 +22,7 @@ MATCH void SND_XaStateReadResult(void) {
             value      = CdPosToInt((CdlLOC*)((u8*)counter + 6));
             D_80146814 = value;
             if (value >= D_80146810) {
-                g_EmiServiceState = 6;
+                g_EmiServiceState = SND_XA_STATE_PAUSE;
                 D_8014682E        = 0;
             }
         }

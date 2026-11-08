@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801CEA94);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-#include "overlays/plchar/Char_ProbeCellSpawn10.h"
+#include "overlays/plchar/Char_ProbeCellSpawn.h"
 
 #include "overlays/plchar/Char_SpawnActor.h"
 
@@ -48,15 +48,9 @@ MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801D065C, 2, g_Task);
 }
 
-/* This copy turns between facings 3 and 5; the image's own are the header's. */
-MATCH void Char_StartTurnPeco(void) {
-    CHAR_START_TURN(3, 5);
-}
+#include "overlays/plchar/Char_StartTurnPeco.h"
 
-/* The second route step script in this image turns between directions 3 and 5. */
-MATCH void Char_RunStepScriptPeco(void) {
-    CHAR_RUN_STEP_SCRIPT(3, 5);
-}
+#include "overlays/plchar/Char_RunStepScriptPeco.h"
 
 MATCH void func_801CF70C(void) {
     func_8014D978();

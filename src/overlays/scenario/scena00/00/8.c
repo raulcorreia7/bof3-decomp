@@ -1091,7 +1091,7 @@ MATCH void func_801F92DC(void) {
         D_80147BA4 = 3;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));
         g_SceneState.state_04 = 0xB;
-        g_SceneState.timer_06 = 0x14;
+        g_SceneState.timer_06 = 20;
         g_AreaDrawFlags       = 0;
     }
     if (g_GameAreaId == AREA_ID_TITLE_INTRO) {
@@ -1431,7 +1431,7 @@ MATCH void func_801FA27C(void) {
             }
             Message_StartAreaMessage(3);
             g_GameStateIndex      = GAME_REQUEST_MESSAGE;
-            g_SceneState.timer_06 = 0x130;
+            g_SceneState.timer_06 = 304;
             g_SceneState.step_05  = 4;
             break;
         case 4: {
@@ -1481,7 +1481,7 @@ MATCH void func_801FA27C(void) {
                 g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000[0]].layer          = 0x20;
             }
-            g_SceneState.timer_06 = 0x200;
+            g_SceneState.timer_06 = 512;
             g_SceneState.step_05  = 7;
             break;
 
@@ -1915,7 +1915,7 @@ MATCH void func_801FB204(void) {
                 g_AreaCameraAngle.vx  = -778;
                 g_AreaCameraAngle.vz  = 384;
                 g_AreaCameraOffsetZ   = 0x480;
-                g_SceneState.timer_06 = 0x1E;
+                g_SceneState.timer_06 = 30;
                 g_SceneState.step_05  = 5;
             }
             break;
@@ -1996,7 +1996,7 @@ MATCH void func_801FB67C(void) {
     switch (*state) {
         case 0:
             if (g_ScriptVars[2] == 0x71) {
-                g_SceneState.timer_06 = 0x3C;
+                g_SceneState.timer_06 = 60;
                 *state                = 2;
             }
             break;
@@ -2025,7 +2025,7 @@ MATCH void func_801FB744(void) {
     switch (*state) {
         case 0:
             if (Area_StepCameraAngle(0x2D, 0xA) == 0) {
-                g_SceneState.timer_06 = 0x32;
+                g_SceneState.timer_06 = 50;
                 *state                = 1;
             }
             break;
@@ -2061,7 +2061,7 @@ MATCH void func_801FB744(void) {
                 g_GameFlags &= 0xFF7F;
                 Game_RequestAreaChange(AREA_ID_NO_TEXT_25, TO_COORD(11) + COORD_HALF, TO_COORD(90), FACING_UP);
                 g_SceneState.state_04 = 0xB;
-                g_SceneState.timer_06 = 0x258;
+                g_SceneState.timer_06 = 600;
                 *state                = 0;
             }
             break;

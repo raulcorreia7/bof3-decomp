@@ -29,7 +29,7 @@ MATCH void func_801F6FCC(void) {
     func_801F7748();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
-        g_Task->timer       = 0x20;
+        g_Task->timer       = 32;
         g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }
@@ -41,7 +41,7 @@ MATCH void func_801F7078(void) {
     }
     func_801F7748();
     if (g_ScriptVars[0] == 0x1F) {
-        g_Task->timer       = 0xFC;
+        g_Task->timer       = 252;
         g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }

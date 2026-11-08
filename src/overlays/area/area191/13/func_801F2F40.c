@@ -1,3 +1,3 @@
 #include "area191_13.h"
 
-#include "../../Area_ResumeSceneAfterMessage.h"
+#include "overlays/area/Area_ResumeSceneAfterMessage.h"

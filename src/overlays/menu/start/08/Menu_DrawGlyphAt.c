@@ -88,7 +88,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
         tmp9      = *val12;
         val11->u3 = (s8)((((tmp9 % 21) & BYTE_MASK) * 0xC) + stack_20);
         tmp19     = *val12;
-        setRGB0(val11, 128, 128, 128);
+        setRGB0(val11, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
         val11->v3 = (s8)((((tmp19 / 21) & BYTE_MASK) * 0xC) + 0xC);
         val10     = GetClut((stack_18 & 0xF) * 16, STAGE_PALETTE_Y);
         val5      = 0x100;
@@ -131,7 +131,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
         }
         val11->v3 = (s8)((val8 * 4) + 0xC);
         val4      = (stack_18 & 0xF) * 0x10;
-        setRGB0(val11, 128, 128, 128);
+        setRGB0(val11, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
         goto block_15; /* retail branch */
     }
     val12 += 1;
@@ -143,7 +143,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
            (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC)), (s8)((((*val12 + 0x64) / 21) * 0xC) + 0xC));
     val11->u3 = (s8)((((*val12 + 0x64) % 21) * 0xC) + stack_20);
     val4      = (stack_18 & 0xF) * 0x10;
-    setRGB0(val11, 128, 128, 128);
+    setRGB0(val11, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     val11->v3 = (s8)((((*val12 + 0x64) / 21) * 0xC) + 0xC);
 block_15:
     val10 = GetClut(val4, STAGE_PALETTE_Y);

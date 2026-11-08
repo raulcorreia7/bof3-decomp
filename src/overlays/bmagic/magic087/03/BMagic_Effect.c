@@ -24,7 +24,7 @@ MATCH void func_801EF2C0(void) {
     if (g_Task->param.unk_0B == 2) {
         g_Task->unk_04 = 0;
         g_Task->unk_09 = 8;
-        g_Task->timer  = 0x10;
+        g_Task->timer  = 16;
         g_Task->header.step += 1;
     }
 }
@@ -140,7 +140,7 @@ MATCH void func_801EFE04(void) {
         g_Task->param.unk_0B = 8;
     }
     g_Task->unk_09 = 0;
-    g_Task->timer  = 0x20;
+    g_Task->timer  = 32;
     g_Task->header.step += 1;
 }
 

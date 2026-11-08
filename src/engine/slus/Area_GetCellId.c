@@ -28,5 +28,5 @@ MATCH s32 Area_GetCellId(s32 x, s32 y) {
     }
     col = g_AreaGridColCursor + (col / 2 + one);
     col = (col >= AREA_CELL_GRID_COLS) ? (col - AREA_CELL_GRID_COLS) : col;
-    return g_AreaCells[row][col].prim_id & 0xFFF;
+    return g_AreaCells[row][col].prim_id & AREA_CELL_PRIM_MASK;
 }

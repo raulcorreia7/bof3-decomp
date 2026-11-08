@@ -32,7 +32,7 @@ MATCH void func_801D0CEC(void) {
     func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
-        g_Task->timer = 0x3C;
+        g_Task->timer = 60;
         g_Task->step += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
     }
@@ -60,7 +60,7 @@ MATCH void func_801D0F44(void) {
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
-        g_Task->timer = 0x3C;
+        g_Task->timer = 60;
         g_Task->step += 1;
     }
 }
@@ -71,7 +71,7 @@ MATCH void func_801D101C(void) {
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
-        g_Task->timer = 0x3C;
+        g_Task->timer = 60;
         g_Task->step += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 14));
     }
@@ -89,7 +89,7 @@ MATCH void func_801D10C4(void) {
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
-        g_Task->timer    = 0x10;
+        g_Task->timer    = 16;
         g_Task->origin_x = 0x40;
         g_Task->step += 1;
     }

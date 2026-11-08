@@ -7,7 +7,7 @@ MATCH s32 func_801F2C9C(void) {
     g_Task->unk_2C = remaining;
     g_Task->unk_64 += 4;
     g_Task->unk_68 += 4;
-    if (!(remaining & 0xFFFF)) {
+    if (!(remaining & HALF_MASK)) {
         g_Task->unk_2C = 0x10;
         g_Task->header.mode += 1;
     }

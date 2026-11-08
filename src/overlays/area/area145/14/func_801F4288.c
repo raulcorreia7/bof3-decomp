@@ -5,7 +5,7 @@ MATCH void func_801F4288(void) {
     u8  i;
 
     record = Item_GetRecord(ITEM_CAT_VITAL, VITAL_ITEM_KEY);
-    for (i = 0; i < 0xC; i++) {
+    for (i = 0; i < 12; i++) {
         g_TextVariables[0][i] = record[i];
     }
     D_801490E4[0] = 0;

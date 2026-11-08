@@ -1,3 +1,3 @@
 #include "area041_13.h"
 
-#include "../../Area_SetCameraZOffset.h"
+#include "overlays/area/Area_SetCameraZOffset.h"

@@ -7,7 +7,7 @@
  * word takes a3 where ours takes t1. `payload = *record != 0` before the list loop took it from 14 rows to 6; two
  * FAKE_REG attempts and a 7 min permuter run did not close it; declaration order, the payload load position and
  * index, address and stepped-pointer entry forms leave the same 6 rows. */
-/* Pinning the entry and payload registers together adds an instruction; the first difference is the branch at +0x20. */
+/* Entry/payload pins separately or together change the prologue; a separate initial flag and a 5,000-iteration permuter leave +0x74 as the best first difference. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80154438(void) {
     /* FAKE: unused frame, 16 bytes. */

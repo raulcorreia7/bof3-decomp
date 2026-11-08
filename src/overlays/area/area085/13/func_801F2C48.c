@@ -3,7 +3,7 @@
 MATCH void func_801F2C48(void) {
     Actor* work;
 
-    g_Task->timer           = 0xC;
+    g_Task->timer           = 12;
     g_Task->header.mode     = 1;
     g_Task->header.step     = 0;
     work                    = g_Task;

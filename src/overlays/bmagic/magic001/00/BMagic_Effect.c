@@ -171,7 +171,7 @@ MATCH void func_801EFBEC(void) {
     g_Task->unk_14 = 0x100;
     g_Task->unk_20 = -0x10;
     g_Task->unk_09 = 0;
-    g_Task->timer  = 0x10;
+    g_Task->timer  = 16;
     g_Task->header.step += 1;
 }
 

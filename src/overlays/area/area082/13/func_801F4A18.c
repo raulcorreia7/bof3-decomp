@@ -14,7 +14,7 @@ MATCH s32 func_801F4A18(void) {
     state             = work->header.step + 1;
     work->vz          = 0x53020;
     work->unk_32      = 0;
-    work->screen_y    = 0x60;
+    work->screen_y    = 96;
     work->vy          = 0;
     work->vx          = 0;
     work->pos.x.fixed = ((x + x_offset) >> 9) - 0x4000;

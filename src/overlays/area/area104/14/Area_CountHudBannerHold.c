@@ -4,7 +4,7 @@
 MATCH void Area_CountHudBannerHold(void) {
     if (g_Task->param.unk_0B == 0) {
         g_Task->timer++;
-        if (g_Task->timer >= 0x5A) {
+        if (g_Task->timer >= 90) {
             g_Task->param.unk_0B++;
         }
     }

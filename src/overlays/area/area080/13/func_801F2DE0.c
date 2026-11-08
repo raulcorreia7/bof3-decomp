@@ -10,7 +10,7 @@ MATCH void func_801F2DE0(void) {
     remaining               = ((Actor*)g_Task)->timer - 1;
     ((Actor*)g_Task)->timer = remaining;
     if (!(remaining & 0xFF)) {
-        ((Actor*)g_Task)->timer = 0x1E;
+        ((Actor*)g_Task)->timer = 30;
         ((Actor*)g_Task)->header.mode += 1;
     }
 }

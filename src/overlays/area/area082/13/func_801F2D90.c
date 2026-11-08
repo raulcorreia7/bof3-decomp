@@ -7,7 +7,7 @@ MATCH void func_801F2D90(void) {
     g_Task->unk_2C = remaining;
     g_Task->unk_64 += 3;
     g_Task->unk_68 -= 3;
-    if (!(remaining & 0xFFFF)) {
+    if (!(remaining & HALF_MASK)) {
         g_Task->unk_2C = 0x10;
         g_Task->header.mode += 1;
     }

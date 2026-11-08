@@ -31,7 +31,7 @@ MATCH void func_801EF034(void) {
         dst->unk_2E.half = src->unk_2E.half + 0x37;
         dst->unk_30.half = src->unk_30.half - 0x10;
         dst->unk_09      = 0;
-        g_Task->timer    = 0x20;
+        g_Task->timer    = 32;
         g_Task->header.step++;
     }
 }
@@ -123,7 +123,7 @@ MATCH void func_801EF430(void) {
         dst->unk_2E.half = src->unk_2E.half - 0x37;
         dst->unk_30.half = src->unk_30.half - 0x10;
         dst->unk_09      = 0;
-        g_Task->timer    = 0x20;
+        g_Task->timer    = 32;
         g_Task->header.step++;
     }
 }
@@ -156,7 +156,7 @@ MATCH void func_801EF9C4(void) {
 
     func_801EFA84();
     timer = g_Task->timer;
-    if ((timer & BYTE_MASK) != 0x18) {
+    if ((timer & BYTE_MASK) != 24) {
         g_Task->timer = timer + 4;
     }
     counter        = g_Task->unk_09 + 1;

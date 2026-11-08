@@ -39,7 +39,7 @@ MATCH void Effect_SwingCameraAngle(void) {
 
 INCLUDE_ASM(func_801EF324);
 
-#include "../../Effect_StartTint.h"
+#include "overlays/bmagic/Effect_StartTint.h"
 
 MATCH void func_801EF4F0(void) {
     g_Task->unk_5D -= 0x10;
@@ -74,7 +74,7 @@ MATCH void func_801EF634(void) {
         dst->pos.z       = src->pos.z;
         dst->unk_14      = 0;
         dst->unk_09      = 0;
-        g_Task->timer    = 0x26;
+        g_Task->timer    = 38;
         g_Task->header.step++;
     }
 }
@@ -128,7 +128,7 @@ MATCH void func_801EFE74(void) {
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
     g_Task->unk_09      = 8;
-    g_Task->timer       = 0x10;
+    g_Task->timer       = 16;
     g_Task->header.step += 1;
 }
 
@@ -201,7 +201,7 @@ MATCH void func_801F066C(void) {
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 0x10;
+        g_Task->timer       = 16;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

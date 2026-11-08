@@ -3,7 +3,7 @@
 MATCH void func_801F2D18(void) {
     POLY_G4* prim;
 
-    GFX_AddDitheredDrawMode(6U, GetTPage(2, 2, 0x140, 0x140) & 0xFFFF);
+    GFX_AddDitheredDrawMode(6U, GetTPage(2, 2, 0x140, 0x140) & HALF_MASK);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     setRGB0(prim, prim->r1 = 0, prim->g1 = 0, prim->b1 = 0);

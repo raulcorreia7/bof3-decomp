@@ -42,7 +42,7 @@ MATCH void func_801EF268(void) {
     }
 }
 
-#include "../../Effect_CountUpWorkByteAndStep.h"
+#include "overlays/bmagic/Effect_CountUpWorkByteAndStep.h"
 
 MATCH void func_801EF324(void) {
     PartyMember* work;

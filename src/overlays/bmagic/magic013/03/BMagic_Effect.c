@@ -48,7 +48,7 @@ MATCH void func_801EF014(void) {
 
 INCLUDE_ASM(func_801EF0A4);
 
-#include "../../Effect_CountUpWorkByteAndStep.h"
+#include "overlays/bmagic/Effect_CountUpWorkByteAndStep.h"
 
 INCLUDE_ASM(func_801EF1F0);
 

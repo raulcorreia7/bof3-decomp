@@ -9,7 +9,7 @@ MATCH void func_801D9804(s32 x, s32 y, s32 clut_index, s32 glyph_index) {
     packet       = (SPRT*)g_GfxPrimCursor;
     clut         = GetClut((clut_index & BYTE_MASK) << 4, STAGE_PALETTE_Y);
     packet->clut = clut;
-    setRGB0(packet, 128, 128, 128);
+    setRGB0(packet, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     setUV0(packet, ((glyph_index & BYTE_MASK) * 24 + 104), 208);
     setXY0(packet, x, y);
     setWH(packet, 24, 8);
