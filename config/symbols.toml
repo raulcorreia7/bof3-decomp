@@ -1741,8 +1741,8 @@ g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "6 handlers of sub-step 
 
 ["emi/etc/commu02/08"]
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu02 scene: dispatches on the step byte D_801F294C through g_Commu02Event0States." }
-Fairy_AdvanceStep = { addr = 0x801D5A9C, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
-Fairy_AdvanceStep2 = { addr = 0x801D7E30, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_AdvanceStep." }
+Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
+Fairy_EndCommuSceneEvent3 = { addr = 0x801D7E30, type = "func", source = "Last slot of g_Commu02Event3States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_EndCommuScene." }
 Fairy_CountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
@@ -1770,7 +1770,7 @@ g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas recor
 
 ["emi/etc/commu03/06"]
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
-Fairy_AdvanceStep = { addr = 0x801D121C, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+Fairy_EndCommuScene = { addr = 0x801D121C, type = "func", source = "Last slot of g_Commu03Step2Funcs; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
 g_Commu03States = { addr = 0x801D18C8, source = "the 3 step handlers of the commu03 scene, called by func_801D0C44 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu03Step0Funcs = { addr = 0x801D18D4, source = "2 sub-step handlers of step 0 of the commu03 scene, called by func_801D0C80 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
 g_Commu03Step1Funcs = { addr = 0x801D18DC, source = "2 sub-step handlers of step 1 of the commu03 scene, called by func_801D0DEC (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
@@ -1778,7 +1778,7 @@ g_Commu03Step2Funcs = { addr = 0x801D18E4, source = "4 sub-step handlers of step
 
 ["emi/etc/commu04/06"]
 func_801D0C04 = { addr = 0x801D0C04, type = "func", source = "Entry of the commu04 scene: dispatches on the step byte D_801F294C through the D_801D1750 handlers, then refreshes the panels when the game state is 0." }
-Fairy_AdvanceStep = { addr = 0x801D1670, type = "func", source = "Adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+Fairy_EndCommuScene = { addr = 0x801D1670, type = "func", source = "Last slot of g_Commu04States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
 g_Commu04States = { addr = 0x801D1750, source = "the 2 step handlers of the commu04 scene, called by func_801D0C04 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu04Step0Funcs = { addr = 0x801D1758, source = "7 sub-step handlers of step 0 of the commu04 scene, called by func_801D0C5C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
 
@@ -3911,7 +3911,7 @@ Message_ClearRequest = { addr = 0x801F3B8C, type = "func", source = "Clears the 
 Message_Clear = { addr = 0x801F3BCC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Message_ShowParty = { addr = 0x801F3C74, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
-Area_SkipScriptForRyu = { addr = 0x801F3D38, type = "func", source = "Adds 3 to the script cursor when g_Game.current chr.character_id is CHAR_ID_RYU_ADULT." }
+Area_SkipScriptIfAdultRyu = { addr = 0x801F3D38, type = "func", source = "Entry slot 14 of the 18-pointer area script-call table; adds 3 to the script cursor when g_Game.current chr.character_id is CHAR_ID_RYU_ADULT." }
 Actor_SnapToGround = { addr = 0x801F3F48, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 Area_DrawLightPillar = { addr = 0x801F3FDC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F52FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
@@ -4573,7 +4573,7 @@ g_PartyMemberMessages = { addr = 0x801F42F4, size = 0x18, source = "Tag and mess
 ["emi/world04/area197/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ShowParty = { addr = 0x801F39E0, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
-Area_SkipScriptForRyu = { addr = 0x801F4124, type = "func", source = "Adds 3 to the script cursor when g_Game.current chr.character_id is CHAR_ID_RYU_ADULT." }
+Area_SkipScriptIfAdultRyu = { addr = 0x801F4124, type = "func", source = "Entry slot 9 of the 19-pointer area script-call table; adds 3 to the script cursor when g_Game.current chr.character_id is CHAR_ID_RYU_ADULT." }
 g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world04/area198/13"]
@@ -4907,7 +4907,7 @@ g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "Ground height unde
 g_ActorSlots = { addr = 0x80143FC8, size = 0x910, source = "The actor slots." }
 g_SaveData = { addr = 0x801448D8, size = 0x10B0, alias = true, source = "The save data." }
 g_SceneEventMode = { addr = 0x801448EB, type = "s8", source = "Current scene event." }
-g_SceneEventStep = { addr = 0x801448EC, type = "s8", source = "Fairy_AdvanceStep adds one to it, Fishing_ShowLocation steps it from 0 to 1, Scene_ClearEventState clears it" }
+g_SceneEventStep = { addr = 0x801448EC, type = "s8", source = "Fairy_EndCommuScene adds one to it, Fishing_ShowLocation steps it from 0 to 1, Scene_ClearEventState clears it" }
 g_SceneEventSelection = { addr = 0x801448ED, type = "u8", source = "The entry the scene event works on: the fairy job index in Fairy_GrantGift and Fairy_RollExploreReward, the master id in the sisyou menu, a copy of active_ui[5] in the commu00 cursor functions." }
 g_SavedScriptVars = { addr = 0x801448F8, size = 0x4, source = "Script variables kept in the save." }
 g_SaveAreaId = { addr = 0x801448FC, type = "u16", source = "Area where the game was saved." }
