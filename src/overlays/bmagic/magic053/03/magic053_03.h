@@ -17,4 +17,6 @@ void                    Actor_Clear(void);
 void                    func_801EFD50(void);
 extern EffectStepFuncs3 D_801EEC04;
 
+extern Callback D_801F0554[];
+
 #endif

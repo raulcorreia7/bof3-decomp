@@ -405,6 +405,7 @@ BMagic_AllocEffect = { addr = 0x801F0494, type = "func", source = "Claims the fi
 Actor_Clear = { addr = 0x801F04F8, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0550, source = "Handlers of magic053 (Lavaburst), run by header.mode (byte 0x01)." }
 
+D_801F0554 = { addr = 0x801F0554, source = "Step handlers of magic053, run by header.step (byte 0x02) from func_801EF0A8." }
 ["emi/bmagic/magic054/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
@@ -426,6 +427,7 @@ D_801EFC64 = { addr = 0x801EFC64, source = "Mode handlers of the magic055 effect
 
 ["emi/bmagic/magic056/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic056Steps", source = "Nine step handlers of magic056, copied to the stack and run by header.step (byte 0x02) from func_801EFF28." }
 BMagic_RunStep = { addr = 0x801EEC34, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic056 (Sacrifice)." }
 Effect_StartPlaying = { addr = 0x801EF17C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic056 (Sacrifice)." }
 Effect_CopyBattlerCoords = { addr = 0x801EF27C, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
@@ -1018,6 +1020,7 @@ g_BMagicEffectModes = { addr = 0x801F00F8, source = "Handlers of magic137 (Coron
 
 ["emi/bmagic/magic138/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EEC1C = { addr = 0x801EEC1C, type = "EffectStepFuncs3", source = "Step handlers of magic138 (Whelp Breath's sibling in this image), run by header.step (byte 0x02) from func_801EF52C." }
 BMagic_RunStep = { addr = 0x801EEC28, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic138 (Main Cannon)." }
 Effect_TickDownAndClear = { addr = 0x801EF6F8, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic138 (Main Cannon)." }
 g_BMagicEffectModes = { addr = 0x801EF72C, source = "Handlers of magic138 (Main Cannon), run by header.mode (byte 0x01)." }
@@ -1141,6 +1144,8 @@ Effect_StepWhileTickUnderTwo = { addr = 0x801EF410, type = "func", source = "Adv
 Effect_TickOnTimerZero = { addr = 0x801EF454, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic167 (Last Resort)." }
 g_BMagicEffectModes = { addr = 0x801F08B0, source = "Handlers of magic167 (Last Resort), run by header.mode (byte 0x01)." }
 
+D_801F08B8 = { addr = 0x801F08B8, source = "Step handlers of magic167, run by header.step (byte 0x02) from func_801EF31C." }
+D_801F08C4 = { addr = 0x801F08C4, source = "Step handlers of magic167, run by header.step (byte 0x02) from func_801EF9B8." }
 ["emi/bmagic/magic168/03"]
 D_801EEC04 = { addr = 0x801EEC04, type = "BMagicEffectFuncs", source = "Step handlers of magic168, run by header.mode (byte 0x01) from func_801EEC28." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
