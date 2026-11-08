@@ -9,9 +9,9 @@ MATCH void func_801E61F0(void) {
     u8            count;
     u8            index;
 
-    work         = D_801EC2E0;
-    count        = work->unk_09;
-    work->unk_09 = count + 0xFF;
+    work             = D_801EC2E0;
+    count            = work->arg.unk_09;
+    work->arg.unk_09 = count + 0xFF;
     if (count == 0) {
         index = D_801EC2E0->target.party->slot;
         if (index < 3) {

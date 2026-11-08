@@ -19,7 +19,7 @@ MATCH void func_801EEE74(void) {
     g_Task = saved;
 }
 
-/* blocker: D_801EC331 is indexed by a 0x78-byte record (index times 15, shifted by 3), and no record type is declared for it; the first diff is that multiply. */
+/* blocker: retail loads g_Task twice around the g_BattleEffects[slot].header.mode store (a0 for target.party, then s0); member stores let the two loads merge; first diff: lui a0 at 0x801EEF00. */
 INCLUDE_ASM(func_801EEEDC);
 
 MATCH void func_801EEF88(void) {

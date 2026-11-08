@@ -97,8 +97,6 @@ extern u8                           D_801EC328;
 #define BATTLE_EFFECT_COUNT 48
 extern u8           D_80145FC8;
 extern BattleEffect g_BattleEffects[];
-extern u8           D_801EC339[];
-extern u8           D_801EC3A4[];
 
 extern PanelOwner D_801ED9B0[];
 #endif

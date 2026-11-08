@@ -633,12 +633,8 @@ extern volatile u16        D_801EC30C;
 extern u16                 D_801EC30E;
 extern volatile u16        D_801EC310;
 extern volatile u16        D_801EC312;
-extern u8                  D_801EC337[];
-extern u8                  D_801EC33B[];
-extern u8                  D_801EC357[];
 /* D_801EC364 */
 extern BattleTemplateStats g_BattleTemplateStats[]; /* 0x801EC364 */
-extern u8                  D_801EC390[];
 
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
@@ -930,9 +926,9 @@ static inline void BattleFillEffectGrid(s32 kind) {
 
     for (row = 0; (u32)(row & BYTE_MASK) < 3U; row++) {
         for (slot = 0; (u32)(slot & BYTE_MASK) < 3U; slot++) {
-            offset                         = Battle_AllocEffect(0, kind) & BYTE_MASK;
-            g_BattleEffects[offset].unk_0A = slot;
-            g_BattleEffects[offset].unk_09 = row;
+            offset                             = Battle_AllocEffect(0, kind) & BYTE_MASK;
+            g_BattleEffects[offset].unk_0A     = slot;
+            g_BattleEffects[offset].arg.unk_09 = row;
         }
     }
 }

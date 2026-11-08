@@ -10,19 +10,19 @@ MATCH void func_801E3638(void) {
     D_801EB3FC[g_Task->header.step]();
     if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {
         if (g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
-            if ((s8)++g_BattleEffects[g_Task->slot].unk_09 >= 12) {
+            if (++g_BattleEffects[g_Task->slot].arg.sway >= 12) {
                 g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
         } else {
-            if ((s8)--g_BattleEffects[g_Task->slot].unk_09 < -11) {
+            if (--g_BattleEffects[g_Task->slot].arg.sway < -11) {
                 g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
         }
         work = g_Task;
         if (work->facing == FACING_UP || work->facing == FACING_RIGHT) {
-            work->pos.x.fixed = g_BattleEffects[work->slot].pos.x.fixed + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
+            work->pos.x.fixed = g_BattleEffects[work->slot].pos.x.fixed + (g_BattleEffects[work->slot].arg.sway << 9);
         } else {
-            work->pos.y.fixed = g_BattleEffects[work->slot].pos.y.fixed + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
+            work->pos.y.fixed = g_BattleEffects[work->slot].pos.y.fixed + (g_BattleEffects[work->slot].arg.sway << 9);
         }
     }
     if (!(g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {

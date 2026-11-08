@@ -15,10 +15,10 @@ MATCH void func_801E64B4(void) {
     slot                     = D_801EC2E0;
     g_AreaCameraRefreshCount = 2;
     slot->unk_10 += 8;
-    if (slot->unk_09 != 0) {
-        slot->unk_09 -= 1;
+    if (slot->arg.unk_09 != 0) {
+        slot->arg.unk_09 -= 1;
         return;
     }
     slot->header.mode += 1;
-    D_801EC2E0->unk_09 = 2;
+    D_801EC2E0->arg.unk_09 = 2;
 }

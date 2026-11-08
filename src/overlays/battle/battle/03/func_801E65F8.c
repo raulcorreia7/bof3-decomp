@@ -18,9 +18,9 @@ MATCH void func_801E65F8(void) {
     slot                     = D_801EC2E0;
     g_AreaCameraRefreshCount = 2;
     slot->unk_10 -= 8;
-    count = slot->unk_09;
+    count = slot->arg.unk_09;
     if (count != 0) {
-        slot->unk_09 = count - 1;
+        slot->arg.unk_09 = count - 1;
         return;
     }
     func_801E5988();

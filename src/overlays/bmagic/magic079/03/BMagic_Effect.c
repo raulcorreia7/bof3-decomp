@@ -21,7 +21,7 @@ MATCH void func_801EEC5C(void) {
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = i;
         g_BattleEffects[slot].header.step  = 0;
-        g_BattleEffects[slot].unk_09       = 0x10;
+        g_BattleEffects[slot].arg.unk_09   = 0x10;
         g_BattleEffects[slot].target.party = work;
         g_Task->param.unk_0B               = g_Task->param.unk_0B + 1;
     }

@@ -13,7 +13,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 NON_MATCHING void func_801EEC70(void) {
     PartyBattler* src;
     PartyBattler* work;
-    u32           offset;
+    u32           slot;
     u32           counter;
     u32           value;
     s32           span;
@@ -27,15 +27,15 @@ NON_MATCHING void func_801EEC70(void) {
     g_Task->pos.z.raw    = span;
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    slot    = Battle_AllocEffect(1, 0xA) & BYTE_MASK;
     counter = 0;
     value   = 1;
     do {
-        FIELD(u8, D_801EC331, offset)            = 0;
-        FIELD(u8, D_801EC33B, offset)            = (u8)counter;
-        FIELD(u8, D_801EC339, offset)            = (u8)value;
-        work                                     = g_Task;
-        FIELD(PartyBattler*, D_801EC3A4, offset) = work;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].unk_0B       = counter;
+        g_BattleEffects[slot].arg.unk_09   = value;
+        work                               = g_Task;
+        g_BattleEffects[slot].target.party = work;
         work->param.unk_0B += 1;
         counter += 1;
         value += 2;

@@ -1021,15 +1021,6 @@ extern u16         D_801EC2EE;
 extern u8          D_801EC303;
 extern u8          D_801EC308[];
 extern u16         D_801EC30C;
-/* The queued-slot companion tables, one entry per 0x78-byte queued slot: the
- * action kind, the cue byte and the two work-pointer words. The retail
- * addresses them as a base plus the slot's offset, so the declaration stays a
- * scalar base. */
-extern u8          D_801EC337;
-extern u8          D_801EC357;
-extern u8          D_801EC364[];
-extern u8          D_801EC368[];
-extern u8          D_801EC36C[];
 extern volatile u8 D_801F0000[];
 /* The effect entry points this overlay calls by their fixed address. */
 void               func_801EEEC8(void);

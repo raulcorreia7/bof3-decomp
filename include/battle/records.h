@@ -164,6 +164,15 @@ typedef union BattleEffectTarget {
     u32                  address;
 } BattleEffectTarget;
 
+/* The byte a spawner sets for its effect (a start count, a grid row); on a
+ * battler's home row it is the signed sway of a confused battler, -11 to 12. */
+typedef union BattleEffectArg {
+    u8 unk_09;
+    s8 sway;
+} BattleEffectArg;
+
+ASSERT_SIZE(BattleEffectArg, 1);
+
 /* One queued action slot of the table at 0x801EC330 (stride 0x78).
  *
  * Both overlays declare g_BattleEffects as BattleEffect and read the same
@@ -178,7 +187,7 @@ typedef struct BattleEffect {
     u8                 unk_06;
     u8                 unk_07;
     u8                 unk_08;
-    u8                 unk_09;
+    BattleEffectArg    arg;
     u8                 unk_0A;
     u8                 unk_0B;
     s32                unk_0C;
