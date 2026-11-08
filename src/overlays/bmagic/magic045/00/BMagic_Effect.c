@@ -69,7 +69,7 @@ MATCH void func_801EF40C(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-void func_801EF4A4(void) {
+MATCH void func_801EF4A4(void) {
     s8 c                       = -0x40;
     g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed;
     g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed;
