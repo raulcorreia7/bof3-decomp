@@ -10,7 +10,7 @@ MATCH void func_800AE2D4(u32 selection) {
     row   = D_800B6AB0[(selection >> 8) & BYTE_MASK];
     value = g_BattleSelections[row[selection & BYTE_MASK]].id;
     if (value != 0xFFFF) {
-        EMI_LoaderStreamInitSlot(value);
+        EMI_LoadArchive(value);
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_LOADING);
     }
 }

@@ -168,7 +168,7 @@ MATCH void func_801D25CC(void) {
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
-    } else if (EMI_LoaderIsReady() != 0) {
+    } else if (EMI_IsReady() != 0) {
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
@@ -226,7 +226,7 @@ MATCH void func_801D35A4(void) {
 INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         SND_PlayBGM(BGM_COMMU02, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         Message_StartAreaMessage(0x7F);
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
@@ -337,7 +337,7 @@ MATCH void func_801D4840(void) {
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
-    } else if (EMI_LoaderIsReady() != 0) {
+    } else if (EMI_IsReady() != 0) {
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
@@ -392,7 +392,7 @@ MATCH void func_801D5978(void) {
         SND_StopSequence(*(g_SelectionCues + offset), *(D_80181EBB + offset));
         SND_RequestBGM(D_801DB0CC);
     loop_2:
-        if (EMI_LoaderIsReady() == 0) {
+        if (EMI_IsReady() == 0) {
             CallbackWait(1U);
             goto loop_2;
         }

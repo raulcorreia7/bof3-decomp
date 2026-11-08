@@ -20,7 +20,7 @@ MATCH void func_801D3E80(void) {
         entry_index = D_800B6AB0[selection >> 8][selection & BYTE_MASK];
     check_entry:
         if (g_BattleSelections[entry_index].id != 0xFFFFu) {
-            EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_RET);
+            EMI_LoadArchive(EMI_SLOT_BATL_RET);
         }
     }
     counter = &g_Battle.phase.sub_step;

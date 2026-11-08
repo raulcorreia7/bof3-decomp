@@ -20,7 +20,7 @@ MATCH void UI_HandleStartButton(void) {
     ORDER_FENCE();
     if (*front_gate != 0u) {
         if ((g_InputPressed & INPUT_START) != 0u) {
-            if (EMI_LoaderIsReady()) {
+            if (EMI_IsReady()) {
                 if (WINDOW_EFFECT_IDLE()) {
                     if (*busy == 0u) {
                         if (*state < 3u) {

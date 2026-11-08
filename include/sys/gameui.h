@@ -129,7 +129,7 @@ extern s8 g_MessageChoice;
 
 /* A countdown timer expires when the decrement reaches zero. */
 #define TIMER_EXPIRED(timer)             (--(timer) == 0)
-/* EMI_StreamFamilyArchive packs the loaded archive's index (low 7 bits) with
+/* EMI_GetArchiveId packs the loaded archive's index (low 7 bits) with
  * the family-0 (PL) marker bit; readers mask the index off. */
 #define EMI_LOADED_INDEX_MASK            0x7F
 #define EMI_LOADED_PL                    0x80

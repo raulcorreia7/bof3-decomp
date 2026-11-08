@@ -4,7 +4,7 @@ MATCH void func_801E16B4(void) {
     u8           state;
     PartyMember* work;
 
-    if (EMI_LoaderIsReady() != 0) {
+    if (EMI_IsReady() != 0) {
         work  = g_Game.current;
         state = work->u.turn.command.type;
         if (state == 4) {

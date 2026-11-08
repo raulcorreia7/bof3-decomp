@@ -63,7 +63,7 @@ MATCH void func_801F6CCC(void) {
     g_Game.flags      = (flags | GAME_FLAG_MENU_LOCK | 0x200u);
     SND_RequestBGM(6u);
 
-    while (!EMI_LoaderIsReady()) {
+    while (!EMI_IsReady()) {
         CallbackWait(1u);
     }
 

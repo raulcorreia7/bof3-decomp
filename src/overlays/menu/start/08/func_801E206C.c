@@ -1,7 +1,6 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 59.91%. resume: a lever or header
- * fix that closes the first mismatch. */
+/* 59.91%; signed, volatile and unsigned cursor pointers tried; first diff 0x801E20B8, cursor address load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E206C(void) {
     u16 sel;

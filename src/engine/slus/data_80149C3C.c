@@ -1,22 +1,22 @@
 #include "slus.h"
 
 const u32 g_EmiCDSteps[9] = {
-    (u32)EMI_LoaderIdle,
-    (u32)EMI_LoaderSetCDSpeed,
-    (u32)EMI_LoaderSeekCD,
-    (u32)EMI_LoaderFinishSeek,
-    (u32)EMI_LoaderStartRead,
-    (u32)EMI_LoaderFinishRead,
-    (u32)EMI_LoaderPauseCD,
-    (u32)EMI_LoaderFinishPause,
-    (u32)EMI_LoaderIdle,
+    (u32)EMI_CdIdle,
+    (u32)EMI_CdSetSpeed,
+    (u32)EMI_CdSeek,
+    (u32)EMI_CdOnSeek,
+    (u32)EMI_CdRead,
+    (u32)EMI_CdOnRead,
+    (u32)EMI_CdPause,
+    (u32)EMI_CdOnPause,
+    (u32)EMI_CdIdle,
 };
 
-const SystemDispatchFuncs g_EmiSlotDrainFuncs = {{
+const SystemDispatchFuncs g_EmiRingSlotHandlers = {{
     (u32)func_80163230,
-    (u32)EMI_LoaderStageSector,
-    (u32)EMI_LoaderReadSector,
-    (u32)EMI_LoaderUploadSector,
-    (u32)EMI_LoaderTransferVabBody,
+    (u32)EMI_CopySectorToScratchpad,
+    (u32)EMI_DecompressSector,
+    (u32)EMI_UploadSectorImage,
+    (u32)EMI_UploadVabBody,
     (u32)func_80163698,
 }};

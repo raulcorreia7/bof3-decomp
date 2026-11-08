@@ -110,7 +110,7 @@ while (i < 3) { Party_ResetMember(i); i++; }
 
 | Thing                                    | Form                        | Example                                 |
 | ---------------------------------------- | --------------------------- | --------------------------------------- |
-| system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_LoaderInit`         |
+| system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_Init`               |
 | game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`        |
 | global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`         |
 | file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                   |
@@ -1381,7 +1381,7 @@ ASSERT_SIZE(EMIEntry, 0x8);
 typedef struct EMIEntry { u32 size; u32 offset; } EMIEntry;
 
 extern u8 g_EmiLoaderState;       /* runtime state in a format header */
-void      EMI_LoaderInit(void);   /* code in a format header */
+void      EMI_Init(void);   /* code in a format header */
 ```
 
 ### Domains

@@ -4,7 +4,7 @@
  * latch, while the four bytes D_801F294C..D_801F294F have no reader. */
 
 MATCH void func_801F17A4(void) {
-    if (EMI_LoaderIsReady()) {
+    if (EMI_IsReady()) {
         GFX_ResetPalette();
         g_GfxPalettePending = 1;
         D_801F294C          = 0;

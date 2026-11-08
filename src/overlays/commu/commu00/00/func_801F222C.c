@@ -3,7 +3,7 @@
 MATCH void func_801F222C(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
-        EMI_LoaderStreamInitSlot(EMI_SLOT_COMMU04);
+        EMI_LoadArchive(EMI_SLOT_COMMU04);
         FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;
     }
 }

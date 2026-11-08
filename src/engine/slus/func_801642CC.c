@@ -7,7 +7,7 @@
  * reloads the outer caller's $s1-$s7 from the context spill area at
  * 0x800327A0 + 0x20..0x3C and returns through the return address parked in
  * $s6. Entry 0x801642D0 is the same tail without the $s1 reload; the 0xFF exit
- * of EMI_DecodeStep enters there and reloads $s1 itself, which is why the tail
+ * of LZ77_DecodeStep enters there and reloads $s1 itself, which is why the tail
  * has two entry points.
  * The function has no memory effects: its entire body is the register reload
  * plus the return, and a C epilogue is compiler-owned, so the model has no

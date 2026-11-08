@@ -272,9 +272,9 @@ u32 g_XaCues[3] = {
 };
 
 u32 g_EmiEntryTypes[11] = {
-    (u32)EMI_LoaderCopyPayload, (u32)EMI_LoaderQueuePayload, (u32)EMI_LoaderQueuePayload,  (u32)EMI_LoaderLoadGraphics,
-    (u32)EMI_LoaderReadToc,     (u32)EMI_LoaderReadToc,      (u32)EMI_LoaderLoadVabHeader, (u32)EMI_LoaderLoadVabBody,
-    (u32)EMI_LoaderLoadVabCues, (u32)EMI_LoaderLoadSequence, (u32)EMI_LoaderLoadSequence,
+    (u32)EMI_LoadToRam, (u32)EMI_LoadCompressed, (u32)EMI_LoadCompressed,  (u32)EMI_LoadToVram,
+    (u32)EMI_ReadToc,     (u32)EMI_ReadToc,      (u32)EMI_LoadVabHeader, (u32)EMI_LoadVabBody,
+    (u32)EMI_LoadSoundCues, (u32)EMI_LoadSequence, (u32)EMI_LoadSequence,
 };
 
 u32 g_XaStates[55] = {
