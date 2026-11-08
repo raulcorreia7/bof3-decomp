@@ -2,7 +2,7 @@
 
 /* Returns the index of the first active live pond record with fish id 0x0A inside the player's reach, or -1.
  */
-/* nonmatching unmeasured: tried other - self distance order; split dist locals; range reuse; ternary abs; row pointer.
+/* nonmatching 22 differing rows: retail subtracts self - actor (set); the rest is register assignment. Tried split dist locals; range reuse; ternary abs; row pointer.
  * resume: a form that writes each distance into the self-field register. */
 /* An s32 index and pinned range or distance change register allocation; none restores the first difference at +0x24. */
 #ifdef NON_MATCHING
@@ -31,12 +31,12 @@ NON_MATCHING s8 func_8014DE78(void) {
             continue;
         }
         range = (s8)g_Actors[i].range_54.table[2] << 15;
-        dist  = g_Actors[i].pos.x.fixed - self->pos.x.fixed;
+        dist  = self->pos.x.fixed - g_Actors[i].pos.x.fixed;
         dist  = ABS(dist);
         if (range < dist) {
             continue;
         }
-        dist = g_Actors[i].pos.y.fixed - self->pos.y.fixed;
+        dist = self->pos.y.fixed - g_Actors[i].pos.y.fixed;
         dist = ABS(dist);
         if (range < dist) {
             continue;

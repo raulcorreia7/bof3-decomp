@@ -1,6 +1,7 @@
 #include "area104_14.h"
 
-MATCH void func_801F39EC(void) {
+/* func_801F39EC */
+MATCH void Area_StepHudBannerDown(void) {
     g_Task->screen_y += 0xA;
     if ((s16)g_Task->screen_y >= 0xF0) {
         g_Task->unk_03 = 0;

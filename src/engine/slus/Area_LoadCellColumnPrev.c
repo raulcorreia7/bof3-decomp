@@ -3,7 +3,8 @@
 /* walks one rotated column of the 56 x 28 cell grid (row cursor from g_AreaGridRowCursor wrapping at the last row,
  * column fixed at g_AreaGridColCursor), passing every cell to func_801545B4 and func_801541C0; the column cursor steps
  * back one (wrap to 0x1B) and the panel origin moves by (-1, +1). */
-MATCH void func_80152C9C(void) {
+/* func_80152C9C */
+MATCH void Area_LoadCellColumnPrev(void) {
     s32       row;
     s32       index;
     AreaCell* cell;

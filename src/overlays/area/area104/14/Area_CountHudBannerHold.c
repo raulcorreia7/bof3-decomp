@@ -1,6 +1,7 @@
 #include "area104_14.h"
 
-MATCH void func_801F38EC(void) {
+/* func_801F38EC */
+MATCH void Area_CountHudBannerHold(void) {
     if (g_Task->param.unk_0B == 0) {
         g_Task->timer++;
         if (g_Task->timer >= 0x5A) {

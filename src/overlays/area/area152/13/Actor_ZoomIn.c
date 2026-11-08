@@ -1,6 +1,7 @@
 #include "area152_13.h"
 
-MATCH void func_801F30E8(void) {
+/* func_801F30E8 */
+MATCH void Actor_ZoomIn(void) {
     u8* scratch;
     u8* check;
 
