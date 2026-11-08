@@ -1541,10 +1541,14 @@ Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss bat
 
 ["emi/boss/boss038/16"]
 Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads the area enemy record enemy_index into the EnemyBattler row of battle slot slot." }
+Boss_SetEnemyScript = { addr = 0x800C1980, type = "func", source = "sets boss038 enemy script, mode handler and action table and starts task mode 2" }
+Boss_EnemyScriptMode = { addr = 0x800C19E4, type = "func", source = "boss038 enemy script mode handler" }
 Boss_InstallBattleHooks = { addr = 0x800C1B7C, type = "func", source = "Installs the boss battle hooks of boss038: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1BB4, type = "func", source = "Handles the boss battle events of boss038: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C1BBC, type = "func", source = "Chooses how the boss battle of boss038 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
 Boss_EndBattle = { addr = 0x800C1C08, type = "func", source = "Ends the boss battle of boss038: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+g_BossEnemyScript = { addr = 0x800C1C10, source = "boss038 enemy script data" }
+g_BossEnemyActionTable = { addr = 0x800C1C1C, source = "boss038 enemy action table" }
 
 ["emi/boss/boss040/16"]
 Boss_InitEnemy2 = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss040: points its script at D_800C1B1C, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C1B28, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
@@ -1585,6 +1589,10 @@ Boss_EndBattle = { addr = 0x800C19A0, type = "func", source = "Ends the boss bat
 Effect_PlayOnce = { addr = 0x800C1AEC, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in the boss050 battle." }
 
 ["emi/boss/boss051/16"]
+Boss_SetEnemyScript = { addr = 0x800C1858, type = "func", source = "sets boss051 enemy script, mode handler and action table and starts task mode 2" }
+Boss_EnemyScriptMode = { addr = 0x800C19C4, type = "func", source = "boss051 enemy script mode handler" }
+g_BossEnemyScript = { addr = 0x800C1DB0, source = "boss051 enemy script data" }
+g_BossEnemyActionTable = { addr = 0x800C1DBC, source = "boss051 enemy action table" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Boss_InstallBattleHooks = { addr = 0x800C1A14, type = "func", source = "Installs the boss battle hooks of boss051: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1A4C, type = "func", source = "Handles the boss battle events of boss051: ignores every event mode and returns 0." }
