@@ -26,7 +26,7 @@ segments:
       - [0xB3C, c, Area_StopSequence]
       - [0xB60, c, Area_PlaySequence]
       - [0xB8C, c, Area_FadeOutSequence]
-      - [0xBB8, c, Area_PlaySequence2]
+      - [0xBB8, c, Area_PlayBGM]
       - [0xBF0, c, func_801F37F0]
       - [0xC70, c, func_801F3870]
       - [0xCF0, c, func_801F38F0]

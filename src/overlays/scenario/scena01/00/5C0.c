@@ -362,4 +362,3 @@ MATCH void Party_JoinRei(void) {
 }
 
 #include "overlays/scenario/Scene_RemoveRei.h"
-

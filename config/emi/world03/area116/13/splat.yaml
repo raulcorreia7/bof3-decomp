@@ -13,7 +13,7 @@ segments:
       - [0x9C, c, func_801F2C9C]
       - [0xCC, c, func_801F2CCC]
       - [0x110, c, func_801F2D10]
-      - [0x154, c, Area_EnterWyndiaBasementTeleport]
+      - [0x154, c, Area_EnterWyndiaTeleporter]
       - [0x180, c, Actor_RunAreaStep]
       - [0x1B4, c, Area_CheckStepTrigger]
       - [0x268, c, func_801F2E68]

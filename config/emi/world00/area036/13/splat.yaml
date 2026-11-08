@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, g_AreaModuleId]
-      - [0x4, c, Scene_UseTeleporter]
+      - [0x4, c, Area_EnterWyndiaTeleporter]
       - [0x30, c, Actor_RunAreaStep]
       - [0x64, c, Area_CheckStepTrigger]
       - [0x118, c, func_801F2D18]

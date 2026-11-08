@@ -3320,7 +3320,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world00/area036/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Scene_UseTeleporter = { addr = 0x801F2C04, type = "func", source = "warps to the Wyndia basement teleporter (scene script action)" }
+Area_EnterWyndiaTeleporter = { addr = 0x801F2C04, type = "func", source = "warps to the Wyndia basement teleporter (scene script action)" }
 Actor_RunAreaStep = { addr = 0x801F2C30, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
@@ -3813,7 +3813,7 @@ World_UpdateClouds = { addr = 0x801F4768, type = "func", source = "Drifts the cl
 g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
 g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_EnterWyndiaBasementTeleport = { addr = 0x801F2D54, type = "func", source = "warps to the Wyndia basement teleporter" }
+Area_EnterWyndiaTeleporter = { addr = 0x801F2D54, type = "func", source = "warps to the Wyndia basement teleporter" }
 Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
@@ -3902,7 +3902,7 @@ Area_InitSpin = { addr = 0x801F30D0, type = "func", source = "Starts one spin-ef
 Area_StopSequence = { addr = 0x801F373C, type = "func", source = "stops the sequence" }
 Area_PlaySequence = { addr = 0x801F3760, type = "func", source = "plays the sequence" }
 Area_FadeOutSequence = { addr = 0x801F378C, type = "func", source = "fades out the sequence" }
-Area_PlaySequence2 = { addr = 0x801F37B8, type = "func", source = "plays the sequence" }
+Area_PlayBGM = { addr = 0x801F37B8, type = "func", source = "plays the sequence" }
 Item_AddSeaCharts = { addr = 0x801F3C7C, type = "func", source = "Gives the player the Sea Charts." }
 
 ["emi/world03/area132/13"]
