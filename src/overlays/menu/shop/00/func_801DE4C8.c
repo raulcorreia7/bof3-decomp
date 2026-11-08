@@ -74,8 +74,8 @@ NON_MATCHING void func_801DE4C8(void) {
             D_8014865D = 0x7F;
             return;
         }
-        D_80148652 = 0;
-        D_80148651 += 1;
+        g_MenuStep.state = 0;
+        g_MenuStep.sub_step += 1;
         UI_SetMode(UI_MODE_FAST_FADE_OUT);
     }
 }

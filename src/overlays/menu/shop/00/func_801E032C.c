@@ -38,7 +38,7 @@ NON_MATCHING void func_801E032C(void) {
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         D_801483A8 = (u8)D_801483A7;
-        D_80148652 += 1;
+        g_MenuStep.state += 1;
         return;
     }
     if (g_InputPressed & PADRleft) {
@@ -58,7 +58,7 @@ NON_MATCHING void func_801E032C(void) {
         D_8014839F           = 4;
         D_801483A8           = 0xFF;
         g_BattleMessageState = 1;
-        D_80148652 -= 1;
+        g_MenuStep.state -= 1;
     }
 }
 #else

@@ -238,7 +238,7 @@ segments:
       - [0xF63C, c, func_801E023C]
       - [0xF66C, c, Fishing_FishStaminaAdd]
       - [0xF6D4, c, func_801E02D4]
-      - [0xF794, c, func_801E0394]
+      - [0xF794, c, Fishing_MoveFish]
       - [0xF7F8, c, func_801E03F8]
       - [0xFA80, c, Fishing_LureInRange]
       - [0xFB70, c, func_801E0770]

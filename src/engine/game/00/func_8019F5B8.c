@@ -10,7 +10,7 @@ MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
     index = 0;
     TEXT_Format(g_UiFormatBuffer, D_80195860, g_Task->unk_06);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), NULL);
-    GFX_AddPrim(g_Task->unk_29, sizeof(DR_MODE));
+    GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MODE));
     do {
         ch = g_UiFormatBuffer[index & BYTE_MASK];
         if (ch != ' ') {
@@ -22,7 +22,7 @@ MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
             setUV0(sprt, g_UiFormatBuffer[index & BYTE_MASK] * 8 - 80, 208);
             setWH(sprt, 8, 8);
             SetSprt(sprt);
-            GFX_AddPrim(g_Task->unk_29, sizeof(SPRT));
+            GFX_AddPrim(g_Task->draw_layer, sizeof(SPRT));
         }
         x += 8;
         next  = index + 1;

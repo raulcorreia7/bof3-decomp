@@ -214,6 +214,10 @@ For a source under `src/` the wrapper adds `-I<its folder>` and `-DASM_DIR`. `PS
 selects a compiler binary directly. The wrapper compiles one file for comparison; only `check`
 accepts.
 
+Objects are cached in `~/.cache/bof3-cc`, shared by every worktree and keyed on the preprocessed
+source, the arguments and the hashes of GCC, maspsx, DMPSX and `as`; `BOF3_CC_CACHE=0` turns it off,
+`BOF3_CC_CACHE_DIR` moves it.
+
 ## Inline functions and byte identity
 
 GCC 2.7.2 integrates an inline function's saved RTL, not its text: each argument is evaluated once

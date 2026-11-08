@@ -5,7 +5,7 @@ MATCH void func_801D6668(void) {
 
     if (WINDOW_EFFECT_IDLE()) {
         func_801D68D0(0);
-        state = &D_80148651;
+        state = &g_MenuStep.sub_step;
         *state += 1;
     }
 }

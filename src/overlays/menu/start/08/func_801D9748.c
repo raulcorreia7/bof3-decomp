@@ -38,9 +38,9 @@ NON_MATCHING void func_801D9748(void) {
     Menu_DrawClutStrip(D_80144953);
     D_801ED68C = 0;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
-    D_80148654 = 5;
-    D_80148652 = 0;
-    D_80148651 += 1;
+    D_80148654       = 5;
+    g_MenuStep.state = 0;
+    g_MenuStep.sub_step += 1;
 }
 #else
 INCLUDE_ASM(func_801D9748);

@@ -41,7 +41,7 @@ MATCH void func_801D334C(void) {
     D_8014843E = 0;
     D_801E6058 = 0;
     D_801E606C = 1;
-    counter    = &D_80148651;
+    counter    = &g_MenuStep.sub_step;
     *counter += 2;
-    D_80148652 = 0;
+    g_MenuStep.state = 0;
 }

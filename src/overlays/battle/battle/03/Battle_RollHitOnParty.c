@@ -6,7 +6,8 @@
 /* conditionally zeroes one local status bit after a random gate,
  * otherwise passing through the signed damage value unchanged.
  */
-MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 target_index) {
+/* func_801DC73C */
+MATCH u32 Battle_RollHitOnParty(s16 damage, u32 battler_index, u32 target_index) {
     u16 flags;
     s32 threshold;
     u32 index;

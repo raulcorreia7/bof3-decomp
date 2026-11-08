@@ -751,7 +751,8 @@ void func_801E023C(void);
 /* func_801E026C */
 void Fishing_FishStaminaAdd(s8 delta);
 bool func_801E02D4(u8 current_byte, u8 target_byte);
-void func_801E0394(void);
+/* func_801E0394 */
+void Fishing_MoveFish(void);
 void func_801E03F8(void);
 /* func_801E0680 */
 bool Fishing_LureInRange(void);

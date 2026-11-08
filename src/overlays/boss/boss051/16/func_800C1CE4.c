@@ -8,7 +8,7 @@ MATCH void func_800C1CE4(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         Actor_SelectScript(0);
         ((Actor*)g_Task)->active_flags &= 0x7F;
-        ((Actor*)g_Task)->unk_29 = 4;
+        ((Actor*)g_Task)->draw_layer = 4;
         saved->header.mode++;
     }
     g_Task = saved;

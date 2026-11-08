@@ -583,7 +583,8 @@ void    func_80197EFC(void);
 void    func_80197F48(void);
 void    Game_UpdateCameraLook(void);
 void    func_801981B4(void);
-void    func_801981D4(void);
+/* func_801981D4 */
+void    Game_FinishCameraLook(void);
 void    Game_UpdateShop(void);
 void    Game_LoadShopOverlay(void);
 void    Game_ReturnFromShop(void);
@@ -824,7 +825,8 @@ s32     func_801A8714(void);
 s8      func_801A8728(s32 entry_x, s32 entry_y);
 bool    func_801A8A98(s32 candidate_x, s32 candidate_y);
 s8      func_801A8B84(s32 handler_x, s32 handler_y);
-s8      func_801A8CB4(s32 handler_x, s32 handler_y);
+/* func_801A8CB4 */
+s8      Game_CallAreaHandler(s32 handler_x, s32 handler_y);
 u8      func_801A8D38(void* sub, s32 target);
 u8      func_801A8F94(ScriptState* state, u8* base, s32 seed);
 void    func_801A96E4(ScriptState* state, u8* base);
@@ -1050,9 +1052,11 @@ void  Party_SwapMembers(u32 slot_a, u32 slot_b, u32 skip_state);
 void  Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state);
 void  func_801BEBB0(void);
 void  func_801BEDD0(void);
-s32   func_801BEE5C(void);
+/* func_801BEE5C */
+s32   Battle_LoadPartyScripts(void);
 u8    func_801BF11C(void);
-void  func_801BF448(void);
+/* func_801BF448 */
+void  Battle_PlaceMembers(void);
 void  func_801BF5A8(s32 x, s32 y, s32 party_slot);
 u8    func_801BF78C(void);
 void  func_801BF8E0(void);
@@ -1124,14 +1128,17 @@ void  func_801C5BB8(void);
 void  func_801C5C7C(void);
 void  func_801C5CB4(void);
 void  func_801C5D68(void);
-bool  func_801C63B0(void);
+/* func_801C63B0 */
+bool  Area_PlaceEncounterParty(void);
 bool  func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection);
 s32   func_801C6888(s32 entity_index);
 s32   func_801C69C8(s32 record_index);
 /* func_801C6A7C */
 s32   Area_PickEncounter(void);
-s32   func_801C6AEC(s32 candidate_id);
-bool  func_801C6BB4(void);
+/* func_801C6AEC */
+s32   Area_RollEncounterEnemies(s32 candidate_id);
+/* func_801C6BB4 */
+bool  Area_PlaceEncounterEnemies(void);
 bool  func_801C6DCC(void);
 bool  func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach);
 u32   func_801C6FD4(s32 map_column, s32 map_row);
@@ -1139,7 +1146,8 @@ bool  func_801C7064(s32 x, s32 y, s32 reach, s32 height);
 s16   func_801C7188(s16 value);
 s32   func_801C71AC(s32 delta);
 u16*  func_801C71C4(u16* out, s32 pos_x, s32 pos_y, s32 view_height);
-void  func_801C7244(s32 mode);
+/* func_801C7244 */
+void  Area_SetEncounterCamera(s32 mode);
 bool  func_801C7498(s32 from_x, s32 from_y, s32 to_x, s32 to_y, u8 reach, u8 other_reach);
 s32   func_801C7518(s32 pos_x, s32 pos_y, s32 reach);
 bool  func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1);

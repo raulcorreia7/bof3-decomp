@@ -44,7 +44,7 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
     tmp21 = MEM(u8, (MAP_BUNDLE_BASE + 0x00));
     tmp8  = y >> 0x10;
     {
-        u8 map_h = g_AreaMapBundle.height_01;
+        u8 map_h = g_AreaMapBundle.height;
         if ((((u32)tmp7 >> 0x1F) | (tmp7 >= (s32)tmp21) | ((u32)tmp8 >> 0x1F) | (tmp8 >= (s32)map_h)) != 0) {
             SP_REF(s8, 0x0) = 0;
             return 0;

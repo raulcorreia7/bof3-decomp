@@ -30,7 +30,7 @@ MATCH void Fairy_StartJobs(void) {
             func_801F0718(record, task);
             task++;
         } else if (kind < FAIRY_JOB_HUNT) {
-            func_801F08D8(record, task);
+            Fairy_SpawnWorker(record, task);
             task++;
         } else if (kind == FAIRY_JOB_CLEAR) {
             if (g_GameAreaId >= AREA_ID_FAIRY_VILLAGE_182) {

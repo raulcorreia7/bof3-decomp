@@ -66,7 +66,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     }
     draw_value |= scratch;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, draw_value, NULL);
-    GFX_AddPrim(SPAD_CURSOR->unk_29, sizeof(DR_MODE));
+    GFX_AddPrim(SPAD_CURSOR->draw_layer, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0],
@@ -87,5 +87,5 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         sprite->x0 = (SPAD_CURSOR->screen_x - (s8)sprite_cell->x) - sprite->w;
     }
     SetSemiTrans(sprite, (SPAD_CURSOR->header.flags >> 5) & 1);
-    GFX_AddPrim(SPAD_CURSOR->unk_29, sizeof(SPRT));
+    GFX_AddPrim(SPAD_CURSOR->draw_layer, sizeof(SPRT));
 }

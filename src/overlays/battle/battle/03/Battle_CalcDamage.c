@@ -89,9 +89,9 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
             damage = 1;
         }
     } else if (BATTLER_IS_PLAYER(target)) {
-        damage = func_801DC73C(damage, attacker, target);
+        damage = Battle_RollHitOnParty(damage, attacker, target);
     } else {
-        damage = func_801DC894(damage, attacker, target);
+        damage = Battle_RollHitOnEnemy(damage, attacker, target);
     }
     if (flags & 2) {
         damage = (damage * spread.percent[RANDOM_MOD(8)]) / 100;

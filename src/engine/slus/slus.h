@@ -1116,8 +1116,10 @@ void        func_80151894(void);
 /* func_801518F4 */
 void        Message_DispatchChoiceMode(void);
 void        func_80151964(void);
-void        func_801519F8(void);
-void        func_80151A48(void);
+/* func_801519F8 */
+void        UI_NextChoice(void);
+/* func_80151A48 */
+void        UI_PrevChoice(void);
 void        func_80151A98(void);
 extern void func_80151B08(void);
 extern void func_80151B50(void);

@@ -38,7 +38,7 @@ NON_MATCHING void func_801D53AC(void) {
         u8* step;
 
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
-        step                                               = &D_80148651;
+        step                                               = &g_MenuStep.sub_step;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active   = 0;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED620;
         *step += 1;
@@ -49,7 +49,7 @@ NON_MATCHING void func_801D53AC(void) {
 
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        step                                                 = &D_80148651;
+        step                                                 = &g_MenuStep.sub_step;
         g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;

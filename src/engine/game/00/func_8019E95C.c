@@ -9,7 +9,7 @@ MATCH void func_8019E95C(void) {
         return;
     }
 
-    g_Task->unk_29       = (g_Task->unk_29 + 1);
+    g_Task->draw_layer   = (g_Task->draw_layer + 1);
     g_Task->unk_2A       = 0;
     g_Task->active_flags = 0;
     g_Task->unk_2B       = (g_Task->unk_2B + 1);

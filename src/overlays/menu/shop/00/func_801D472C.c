@@ -10,7 +10,7 @@ MATCH void func_801D472C(void) {
     D_801E6080 = 0;
     /* Pointer form: retail keeps one base register across the counter read and
      * the store, which symbol accesses would re-materialize. */
-    state      = &D_80148652;
+    state      = &g_MenuStep.state;
     count      = *state;
     *state     = 0x13;
     D_80148654 = 2;

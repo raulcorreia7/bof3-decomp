@@ -87,7 +87,7 @@ NON_MATCHING void func_801E05E0(void) {
         if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
         block_32:
             SND_PlayCue(cue);
-            D_80148652 -= 1;
+            g_MenuStep.state -= 1;
         }
     }
 }

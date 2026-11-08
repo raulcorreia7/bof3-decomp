@@ -7,10 +7,10 @@ MATCH u32 func_801C6FD4(s32 map_column, s32 map_row) {
     u16 offset;
 
     row = map_row & HALF_MASK;
-    if (((u32)(map_column & HALF_MASK) >= D_80104000) || (row >= D_80104001)) {
+    if (((u32)(map_column & HALF_MASK) >= g_AreaMapBundle.width) || (row >= g_AreaMapBundle.height)) {
         return 0;
     }
-    index  = map_column + (D_80104000 * (s16)map_row);
+    index  = map_column + (g_AreaMapBundle.width * (s16)map_row);
     tile   = index;
     offset = tile >> 1;
     if ((tile & 1) != 0) {

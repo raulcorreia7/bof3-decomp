@@ -6,6 +6,6 @@ MATCH void func_801D349C(void) {
     D_8014842F                = 1;
     D_80148624                = 0;
     D_80148654                = 5;
-    D_80148652                = 0;
-    D_80148651 += 2;
+    g_MenuStep.state          = 0;
+    g_MenuStep.sub_step += 2;
 }

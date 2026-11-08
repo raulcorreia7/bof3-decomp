@@ -738,7 +738,7 @@ s8   SAVE_AccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
 u32  func_801EF200(void);
 s32  func_801EF27C(s32, s32, u8*);
 
-/* Decrement the countdown; on zero run the panel reset and latch D_80148650. */
+/* Decrement the countdown; on zero run the panel reset and latch g_MenuStep.step. */
 static inline void MenuTickCountdown(void) {
     volatile u8* p   = &D_80148654;
     u8           val = *p - 1;
@@ -746,7 +746,7 @@ static inline void MenuTickCountdown(void) {
     *p = val;
     if (val == 0) {
         Menu_ResetPanelTasks();
-        D_80148650 = 1;
+        g_MenuStep.step = 1;
     }
 }
 

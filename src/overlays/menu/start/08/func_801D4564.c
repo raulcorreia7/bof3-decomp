@@ -73,7 +73,7 @@ NON_MATCHING void func_801D4564(void) {
         D_80148504.group               = 0U;
         D_80148504.group_cursor        = 0xFFU;
         FIELD(s8, (&D_80148504), 0xDu) = 0xFF;
-        D_80148651 -= 7;
+        g_MenuStep.sub_step -= 7;
         D_80148504.group_first = (u8)*s_ChoiceMenuValues;
     }
 }

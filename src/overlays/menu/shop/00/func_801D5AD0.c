@@ -11,13 +11,13 @@ MATCH void func_801D5AD0(void) {
         flag = &D_8014865B;
         if (*flag != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
-            count = D_80148652;
+            count = g_MenuStep.state;
             *flag = 0;
             count++;
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             count = 4;
         }
-        D_80148652 = count;
+        g_MenuStep.state = count;
     }
 }

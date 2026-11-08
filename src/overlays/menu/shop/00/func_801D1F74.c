@@ -27,11 +27,11 @@ MATCH void func_801D1F74(void) {
     } else if (*mode != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         D_80148656 = 0;
-        count      = D_80148652 + 1;
+        count      = g_MenuStep.state + 1;
         goto store; /* store the computed value */
     }
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-    count = D_80148652 - 3;
+    count = g_MenuStep.state - 3;
 store:
-    D_80148652 = count;
+    g_MenuStep.state = count;
 }

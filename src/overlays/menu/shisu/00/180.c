@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The shisu overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D80(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStates, D_80148650);
+    SYS_DISPATCH_BYTE(g_MenuStatusStates, g_MenuStep.step);
 }
 
 MATCH void func_801D0DBC(void) {
@@ -21,17 +21,17 @@ MATCH void func_801D0DBC(void) {
     g_MenuStatusItems.unk_0B  = func_801D1E60();
     func_801D27BC();
     {
-        u8* step = &D_80148650;
+        u8* step = &g_MenuStep.step;
         u8  cur  = *step;
 
-        D_80148651 = 0;
-        D_80148652 = 0;
-        *step      = cur + 1;
+        g_MenuStep.sub_step = 0;
+        g_MenuStep.state    = 0;
+        *step               = cur + 1;
     }
 }
 
 MATCH void func_801D0E4C(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStep1Funcs, D_80148651);
+    SYS_DISPATCH_BYTE(g_MenuStatusStep1Funcs, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0E88(void) {
@@ -39,23 +39,23 @@ MATCH void func_801D0E88(void) {
 
     UI_SetMode(UI_MODE_FAST_FADE_IN);
     func_801D1D1C();
-    counter = &D_80148651;
+    counter = &g_MenuStep.sub_step;
     *counter += 1;
 }
 
 MATCH void func_801D0EC4(void) {
     Menu_DrawClutStrip(D_80144953);
     if (g_UiWindowEffectBusy == 0) {
-        u8* step = &D_80148650;
+        u8* step = &g_MenuStep.step;
 
-        D_80148651 = 0;
-        D_80148364 = 0x2B;
+        g_MenuStep.sub_step = 0;
+        D_80148364          = 0x2B;
         *step += 1;
     }
 }
 
 MATCH void func_801D0F24(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStep3Funcs, D_80148651);
+    SYS_DISPATCH_BYTE(g_MenuStatusStep3Funcs, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0F60(void) {
@@ -63,7 +63,7 @@ MATCH void func_801D0F60(void) {
     UI_SetMode(2U);
     func_801D1E34();
     {
-        u8* step = &D_80148651;
+        u8* step = &g_MenuStep.sub_step;
 
         *step += 1;
     }
@@ -71,12 +71,12 @@ MATCH void func_801D0F60(void) {
 
 MATCH void func_801D0FAC(void) {
     if (g_UiWindowEffectBusy == 0) {
-        u8* step = &D_80148650;
+        u8* step = &g_MenuStep.step;
 
-        D_80148651  = 0;
-        D_80148354  = 0;
-        *D_80148378 = 0;
-        D_8014839C  = 0;
+        g_MenuStep.sub_step = 0;
+        D_80148354          = 0;
+        *D_80148378         = 0;
+        D_8014839C          = 0;
         *step += 1;
         return;
     }
@@ -122,7 +122,7 @@ MATCH void func_801D1018(void) {
 
 MATCH void func_801D11A4(void) {
     Menu_DrawClutStrip(D_80144953);
-    g_MenuStatusStep2Funcs[D_80148651]();
+    g_MenuStatusStep2Funcs[g_MenuStep.sub_step]();
 }
 
 INCLUDE_ASM(func_801D11F4);
@@ -132,7 +132,7 @@ INCLUDE_ASM(func_801D14C0);
 MATCH void func_801D1898(void) {
     Callback handler;
 
-    handler = g_MenuStatusStep2Sub2Funcs[D_80148652];
+    handler = g_MenuStatusStep2Sub2Funcs[g_MenuStep.state];
     handler();
     func_801D2C0C();
     func_801D2DA8();
@@ -142,7 +142,7 @@ MATCH void func_801D18E4(void) {
     u8* count;
     u8  value;
 
-    count      = &D_80148652;
+    count      = &g_MenuStep.state;
     value      = *count;
     D_801DA0C1 = 2;
     D_801DA049 = 2;
@@ -154,14 +154,14 @@ MATCH void func_801D1910(void) {
         D_801DA0C1 = 3;
         D_801DA049 = 3;
         {
-            u8* step = &D_80148652;
+            u8* step = &g_MenuStep.state;
 
             *step += 1;
         }
     }
 }
 
-/* blocker: late loads of D_80148652 and D_801DA0A7 sources. */
+/* blocker: late loads of g_MenuStep.state and D_801DA0A7 sources. */
 INCLUDE_ASM(func_801D1964);
 
 INCLUDE_ASM(func_801D1A20);

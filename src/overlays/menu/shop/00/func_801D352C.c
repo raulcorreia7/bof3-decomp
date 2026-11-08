@@ -8,6 +8,6 @@ MATCH void func_801D352C(void) {
     temp   = *timer - 1;
     *timer = temp;
     if (temp == 0) {
-        D_80148650 = 1;
+        g_MenuStep.step = 1;
     }
 }

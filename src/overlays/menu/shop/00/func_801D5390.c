@@ -11,9 +11,9 @@ MATCH void func_801D5390(void) {
     *cursor = step;
     if (step == 4) {
         if (D_801E6080 == 0) {
-            D_80148652 = 1;
+            g_MenuStep.state = 1;
         } else {
-            D_80148652 = 0x12;
+            g_MenuStep.state = 0x12;
         }
     }
 }

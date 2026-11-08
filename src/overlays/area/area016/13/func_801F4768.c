@@ -1,4 +1,5 @@
 #include "area016_13.h"
+#include "overlays/area/world_cloud.h"
 
 /* FAKE: the vertex stores cast to s16 inline to keep retail's add order. CLEANUP: name the vertex fields. */
 MATCH void func_801F4768(void) {
@@ -25,9 +26,9 @@ MATCH void func_801F4768(void) {
         return;
     }
 
-    width = g_Task->param.unk_0B - 2;
+    width = g_Task->param.cloud_layer - 2;
     g_Task->pos.y.fixed += 0x800 + (width << 10);
-    if (D_80104001 + 8 < COORD_INT(g_Task->pos.y)) {
+    if (g_AreaMapBundle.height + 8 < COORD_INT(g_Task->pos.y)) {
         COORD_INT(g_Task->pos.y) = -8;
     }
 
@@ -44,12 +45,12 @@ MATCH void func_801F4768(void) {
     q2       = quad + 2;
     q3       = quad + 3;
     size     = ((2 - width) << 8) + abs(0xF - (g_FrameCount & 0x1F));
-    x_high   = (g_Task->pos.x.fixed >> 9) - 0x3FC0;
-    y_high   = (g_Task->pos.y.fixed >> 9) - 0x3FC0;
-    quad->vz = -0x300;
-    q1->vz   = -0x300;
-    q2->vz   = -0x300;
-    q3->vz   = -0x300;
+    x_high   = (g_Task->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    y_high   = (g_Task->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    quad->vz = WORLD_CLOUD_DEPTH;
+    q1->vz   = WORLD_CLOUD_DEPTH;
+    q2->vz   = WORLD_CLOUD_DEPTH;
+    q3->vz   = WORLD_CLOUD_DEPTH;
     quad->vx = x_high - size;
     quad->vy = y_high - size;
     q1->vx   = x_high + size;

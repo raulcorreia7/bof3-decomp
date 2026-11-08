@@ -21,7 +21,7 @@ MATCH void func_801D51B8(void) {
             if (((SaveProbe)SAVE_AccessFile)(1, g_UiFormatBuffer, 2, SAVE_FILE_SIZE, 0) != -1) {
                 func_801D6CE4(g_SaveSlotFirst, name - 0x7A);
                 g_SaveCardStatus = SAVE_STATUS_SAVED;
-                D_80148652       = 0xC;
+                g_MenuStep.state = 0xC;
                 D_80148654       = 0x3C;
                 D_801E60F0       = 2;
                 return;
@@ -29,5 +29,5 @@ MATCH void func_801D51B8(void) {
         }
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
     }
-    D_80148652 = 0xC;
+    g_MenuStep.state = 0xC;
 }

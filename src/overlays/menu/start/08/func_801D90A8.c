@@ -10,7 +10,7 @@ MATCH void func_801D90A8(void) {
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        D_80148652 = 0;
-        D_80148651 -= 7;
+        g_MenuStep.state = 0;
+        g_MenuStep.sub_step -= 7;
     }
 }

@@ -3,5 +3,5 @@
 /* Handler table dispatched by the shop state counter. */
 
 MATCH void func_801D41B0(void) {
-    SYS_DISPATCH_BYTE(g_ShopStep3Sub2Funcs, D_80148652);
+    SYS_DISPATCH_BYTE(g_ShopStep3Sub2Funcs, g_MenuStep.state);
 }

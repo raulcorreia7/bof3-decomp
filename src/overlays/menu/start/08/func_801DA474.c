@@ -118,7 +118,7 @@ NON_MATCHING void func_801DA474(void) {
         D_801485DC                                        = 0;
         g_MenuPanelTasks[20].active                       = 0;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state = 1;
-        D_80148652 += 1;
+        g_MenuStep.state += 1;
     }
 }
 #else

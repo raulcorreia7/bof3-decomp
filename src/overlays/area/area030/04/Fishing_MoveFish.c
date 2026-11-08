@@ -3,7 +3,8 @@
 /* While the scratchpad work-object gate byte is set, decrements it
  * and integrates the object's three velocity components into its three
  * position accumulators. */
-MATCH void func_801E0394(void) {
+/* func_801E0394 */
+MATCH void Fishing_MoveFish(void) {
     FishingState* work;
 
     if (TASK_BYTES[0x09] != 0) {

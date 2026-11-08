@@ -20,7 +20,7 @@ MATCH void func_8019B3A8(void) {
 
     Area_FindSceneRecord(g_Task->param.scene_record_id);
     func_8019BF78();
-    g_Task->unk_29       = 6;
+    g_Task->draw_layer   = 6;
     g_Task->unk_48       = 1;
     g_Task->active_flags = 0;
     g_Task->unk_2A       = 0;

@@ -34,6 +34,6 @@ MATCH void func_801D14EC(void) {
     g_ShopStockIndex = 0;
     D_8014845B       = g_ShopPricePercent;
     D_80148470       = D_8018E7CC;
-    step             = &D_80148652;
+    step             = &g_MenuStep.state;
     (*step)++;
 }

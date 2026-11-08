@@ -13,7 +13,7 @@ MATCH void func_801D4BBC(void) {
         func_801D6F00();
         if (g_SaveSlotCount != 0) {
             func_801D7208();
-            mode            = &D_80148652;
+            mode            = &g_MenuStep.state;
             count           = *mode;
             g_SaveSlotCount = 3;
             g_SaveSlotFirst = 0;
@@ -24,5 +24,5 @@ MATCH void func_801D4BBC(void) {
         g_SaveCardStatus = flag ? SAVE_STATUS_NO_FILE : CARD_EVENT_CAPACITY;
     }
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
-    D_80148652 = 0xC;
+    g_MenuStep.state = 0xC;
 }

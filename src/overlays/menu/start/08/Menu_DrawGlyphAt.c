@@ -50,7 +50,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
     val7     = glyph_left;
     stack_18 = color;
     stack_20 = glyph_right;
-    func_801E3E34(0U);
+    Menu_SetGlyphPage(0U);
     val11 = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(val11);
     val1  = val2;

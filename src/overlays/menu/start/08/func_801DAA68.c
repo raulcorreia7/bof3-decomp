@@ -47,7 +47,7 @@ MATCH void func_801DAA68(void) {
 
     Menu_DrawClutStrip(D_80144953);
     func_801DAC1C();
-    D_80148651 = 2;
-    D_80148652 = 0;
-    D_80148654 = 5;
+    g_MenuStep.sub_step = 2;
+    g_MenuStep.state    = 0;
+    D_80148654          = 5;
 }

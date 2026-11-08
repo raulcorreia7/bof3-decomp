@@ -323,8 +323,8 @@ MATCH void func_801F12B8(s32 px, s32 py, u8* out) {
         width  = buffer[0];
         if (x < width - 1) {
             if (y > 0) {
-                if (y < D_80104001 - 1) {
-                    value = *(u16*)(buffer + ((D_80104002 * 4) + (x2 = x * 2) + (y * width * 2)));
+                if (y < g_AreaMapBundle.height - 1) {
+                    value = *(u16*)(buffer + ((g_AreaMapBundle.grid_off4_02 * 4) + (x2 = x * 2) + (y * width * 2)));
                     if (value != 0) {
                         out[0] = x;
                         out[1] = y;

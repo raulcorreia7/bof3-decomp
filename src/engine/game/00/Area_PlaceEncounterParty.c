@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH bool func_801C63B0(void) {
+/* func_801C63B0 */
+MATCH bool Area_PlaceEncounterParty(void) {
     u8         mode;
     u8         count;
     u8         i;

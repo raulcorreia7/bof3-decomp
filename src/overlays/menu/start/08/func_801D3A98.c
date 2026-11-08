@@ -43,12 +43,12 @@ MATCH void func_801D3A98(void) {
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags = 0xFF;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C =
             s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
-        /* D_80148652 through D_80148651: retail keeps the symbol-relative
+        /* g_MenuStep.state through g_MenuStep.sub_step: retail keeps the symbol-relative
          * address in a register for the read-modify-write. */
-        (&D_80148651)[1]++;
+        (&g_MenuStep.sub_step)[1]++;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         task->active = 0;
-        (&D_80148651)[1]--;
+        (&g_MenuStep.sub_step)[1]--;
     }
 }

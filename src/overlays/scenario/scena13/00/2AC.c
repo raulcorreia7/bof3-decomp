@@ -62,7 +62,7 @@ MATCH void func_801F70DC(void) {
         actor2 = &g_Actors[i & BYTE_MASK];
         g_Task = actor2;
         if ((actor2->header.flags & 1) && (actor2->unk_06 == 6)) {
-            actor2->unk_29 = 5;
+            actor2->draw_layer = 5;
             func_8014D290();
         }
         i += 1;
@@ -129,10 +129,10 @@ MATCH void func_801F7568(void) {
     Actor* work;
     Actor* actor;
 
-    work          = g_Task;
-    actor         = &g_Actors[work->unk_06];
-    g_Task        = actor;
-    actor->unk_29 = 2;
+    work              = g_Task;
+    actor             = &g_Actors[work->unk_06];
+    g_Task            = actor;
+    actor->draw_layer = 2;
     func_8014D290();
     TASK_SET(g_Game.members);
     g_Game.members[0].unk_29 = 2;

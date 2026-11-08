@@ -13,5 +13,5 @@ MATCH void func_801D5CB0(void) {
             g_SaveCardStatus = SAVE_STATUS_FORMATTED;
         }
     }
-    D_80148652 = 0xC;
+    g_MenuStep.state = 0xC;
 }

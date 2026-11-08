@@ -53,7 +53,7 @@ NON_MATCHING void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
         val3 = 2;
         val6 = (tmp11 - 4) * 2;
     }
-    tmp5     = val0 * g_AreaMapBundle.width_00;
+    tmp5     = val0 * g_AreaMapBundle.width;
     tmp7     = val5 * 4;
     val5     = (val5 << 7) - 0x4040;
     stack_38 = val5;
@@ -96,7 +96,7 @@ NON_MATCHING void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
                 }
             } else {
                 tmp9  = *(s8*)(val8);
-                tmp12 = val8 - (g_AreaMapBundle.width_00 * 4);
+                tmp12 = val8 - (g_AreaMapBundle.width * 4);
                 tmp6  = *(s32*)(tmp12);
                 tmp3  = (s32)(tmp6 << 8) >> 0x18;
                 val1  = tmp3 * 0x10;

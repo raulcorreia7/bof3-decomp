@@ -32,7 +32,7 @@ s32       stale_a3;
     map = (u8*)MAP_BUNDLE_BASE;
     iy  = y;
     ix  = x;
-    if (*(u16*)(iy * map[0] * 2 + D_80104002 * 4 + ix * 2 + map) == 0) {
+    if (*(u16*)(iy * map[0] * 2 + g_AreaMapBundle.grid_off4_02 * 4 + ix * 2 + map) == 0) {
         return 1;
     }
     stale_a3 &= HALF_MASK;
