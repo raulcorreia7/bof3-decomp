@@ -1098,7 +1098,7 @@ no name is both a `#define` and a declaration.
 | A whole function                            | Only where the bare statement macro also moves bytes: `<TAG>_DEFINE_<NAME>(name, values...)`; the report names the function and what moved                                                 |
 
 The compiler treats a `do { ... } while (0)` scope as a block that can steer register allocation (it
-is a benign matching aid), so a statement macro wrapped in one may move bytes. Use that form only
+is a benign fake helper), so a statement macro wrapped in one may move bytes. Use that form only
 where every use is measured identical; never `if (1) { }` or bare braces.
 
 - Named by what it builds, in `TAG_UPPER_SNAKE`. No leading underscore, no one-letter names.
@@ -1106,7 +1106,7 @@ where every use is measured identical; never `if (1) { }` or bare braces.
   statement.
 - A wrong argument count or type fails to compile; it never shifts bytes silently.
 - It lives next to the type it builds, at the lowest scope that covers its users.
-- A macro never takes code as an argument and holds no externs and no matching aids.
+- A macro never takes code as an argument and holds no externs and no fake helpers.
 - A member is never written out in full when a shared form is exact: a body the compiler compiles
   differently as an inline is a reason for the statement macro, not for a copy.
 - Near-copy macros (the same body with a different member, step, limit, value or cast) become one
@@ -1140,13 +1140,13 @@ static inline bool Battle_CanAct(PartyMember* battler) {
 These are the only spellings that carry a literal address or offset. Each is a seam to replace with
 a symbol or a member once the evidence exists.
 
-| Seam                         | Use                                                                         |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| `MEM(type, addr)`, `MEM_PTR` | a fixed RAM address with no symbol yet                                      |
-| `FIELD(type, base, off)`     | one access at an offset of a base whose type is not proven yet              |
-| `HW_REF(type, addr)`         | a hardware register (`include/psx/hw.h` names them)                         |
-| `SP*`                        | the scratchpad (`include/sys/scratchpad.h`)                                 |
-| `VOL(type, x)`               | a volatile access the hardware or a shared buffer needs; not a matching aid |
+| Seam                         | Use                                                                        |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `MEM(type, addr)`, `MEM_PTR` | a fixed RAM address with no symbol yet                                     |
+| `FIELD(type, base, off)`     | one access at an offset of a base whose type is not proven yet             |
+| `HW_REF(type, addr)`         | a hardware register (`include/psx/hw.h` names them)                        |
+| `SP*`                        | the scratchpad (`include/sys/scratchpad.h`)                                |
+| `VOL(type, x)`               | a volatile access the hardware or a shared buffer needs; not a fake helper |
 
 ### Fake-match helpers
 
@@ -1529,7 +1529,7 @@ or a type.
 
 These stay:
 
-- a `FAKE:` note on a matching aid;
+- a `FAKE:` note on a fake helper;
 - `@bug`;
 - legal text and tool directives (`clang-format off`, the `M2CTX` and `PERMUTER` guards);
 - one line above an unfinished `INCLUDE_ASM`: the blocker and the first differing instruction.

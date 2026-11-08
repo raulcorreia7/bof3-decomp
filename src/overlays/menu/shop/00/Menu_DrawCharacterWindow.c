@@ -17,7 +17,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
                   CHARACTER_BLOCK->window_style);
     x = px;
     y = py;
-    /* AID: the order lock keeps the x and y copies below the window call. */
+    /* FAKE: the order lock keeps the x and y copies below the window call. */
     FAKE_ORDER_LOCK_BEGIN
         records = (Character*)CHARACTER_BLOCK->records;
         px += 0x56;

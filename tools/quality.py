@@ -35,7 +35,7 @@ not touch never counts, so old debt never blocks. ``BASE`` is compared at its me
 ``--to``, so work that landed on ``BASE`` since the branch point never counts as a regression.
 
 A commit message line ``Quality-Allowed: <path> <metric>`` accepts one metric rise in one file,
-for a matching aid that is the best try after the plain forms failed (keep its ``FAKE:`` note).
+for a fake helper that is the best try after the plain forms failed (keep its ``FAKE:`` note).
 """
 
 from __future__ import annotations
@@ -93,7 +93,7 @@ RAW_CAST = re.compile(
 # A byte-pointer local (`u8* panel`), whose constant indexes are unnamed members.
 # A byte-pointer local, declared plainly or through a register pin (`FAKE_REG(u8*, p, "v0")`).
 BYTE_LOCAL = re.compile(r"\b[us]8\s*\*\s*,?\s*(\w+)\s*[;=,)]")
-# The pre-rename spellings stay in the pattern so a base revision counts the same aids.
+# The pre-rename spellings stay in the pattern so a base revision counts the same helpers.
 HARMFUL = re.compile(
     r"\b(?:FAKE_REG|FAKE_OPAQUE|FAKE_USE|FAKE_CLOBBER_\w+"
     r"|MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"

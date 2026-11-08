@@ -772,7 +772,7 @@ def report(config_path: Path, root: Path | None, build_dir: Path) -> int:
     )
     if found.returncode:
         raise SystemExit(
-            "no working objdiff-cli on PATH; install it as docs/toolchain.md#matching-aids says"
+            "no working objdiff-cli on PATH; install it as docs/toolchain.md#matching-tools says"
         )
     project_dir = base / cfg["project_dir"]
 
