@@ -84,35 +84,38 @@ typedef struct FormationPos {
     Coord y;
 } FormationPos;
 
-extern s32            g_EncounterOriginX;
-extern s32            g_EncounterOriginY;
-extern FormationPos   g_EncounterParty[3];
+extern s32          g_EncounterOriginX;
+extern s32          g_EncounterOriginY;
+extern FormationPos g_EncounterParty[3];
 /* D_80143F44 */
-extern u8             g_SysResetHoldFrames;
-extern u8             D_80143F50;
-extern u8             D_80143FC0;
-extern u8             D_801448D8;
-extern s8             D_801448E9;
-extern s8             g_SceneEventMode;
-extern s8             g_SceneEventStep;
-extern u8             g_SceneEventSelection;
-extern u8             g_WindowStyle;
-extern u8             g_SavedScriptVars[4];
-extern u8             D_80144955;
+extern u8           g_SysResetHoldFrames;
+extern u8           D_80143F50;
+extern u8           D_80143FC0;
+extern u8           D_801448D8;
+extern s8           D_801448E9;
+extern s8           g_SceneEventMode;
+extern s8           g_SceneEventStep;
+extern u8           g_SceneEventSelection;
+extern u8           g_WindowStyle;
+extern u8           g_SavedScriptVars[4];
+extern u8           D_80144955;
 /* D_80144E98 */
-extern u8             g_Scenario2Flags[];
+extern u8           g_Scenario2Flags[];
 /* Per-character bits (1 << CharacterIndex): the first reward of the character's
  * special master was given (set in the master menu's completion step; the
  * start-menu layout arms a choice panel for each character whose bit is set). */
-extern u8             g_MasterRewardFlags;
+extern u8           g_MasterRewardFlags;
 /* 0x80145xxx: pad state, shared text buffer and field words. */
-extern u16            D_80145048;
-extern u8             D_801454F2;
-extern u8*            D_801459F4;
+extern u16          D_80145048;
+extern u8           D_801454F2;
+extern u8*          D_801459F4;
 /* D_80145AA8 */
-extern u16            g_InputPressed;
+extern u16          g_InputPressed;
 /* Event descriptors opened by the executable's card setup. */
-extern u8             D_80145D54[][16];
+/* The palette cell map: 4 rows of 16 cells, 0xFF where a cell is free. */
+#define PALETTE_MAP_ROWS    4
+#define PALETTE_MAP_COLUMNS 16
+extern u8             D_80145D54[PALETTE_MAP_ROWS][PALETTE_MAP_COLUMNS];
 /* D_80145E14 */
 extern s32            g_SysCardSoftwareIoEvent;
 /* D_80145E18 */

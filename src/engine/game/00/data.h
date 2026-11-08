@@ -119,15 +119,16 @@ extern ShopStock            g_GameShopStock[SHOP_COUNT];
 extern UvRect               D_801CCE84[62];
 extern UvRect               D_801CCF7C[53];
 extern WorldMapBattlefields D_801CD224;
-extern WorldMapDestination  D_801CD24C[10];
-extern SlotSource           D_801CD4AC[5];
-extern Offset2DB            s_CameraScrollDeltas[CAMERA_DIR_COUNT];
-extern Offset2DB            s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
+#define WORLD_MAP_DESTINATION_COUNT 10
+extern WorldMapDestination D_801CD24C[WORLD_MAP_DESTINATION_COUNT];
+extern SlotSource          D_801CD4AC[5];
+extern Offset2DB           s_CameraScrollDeltas[CAMERA_DIR_COUNT];
+extern Offset2DB           s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
 /* D_801CD620 */
-extern Point2DL             s_EncounterEnemyOffsets[36];
+extern Point2DL            s_EncounterEnemyOffsets[36];
 /* D_801CD740 */
-extern Point2DL             s_EncounterOriginNudges[6];
-extern Point2D              D_801CD778[5];
-extern PartySlot            D_801CD944[3];
+extern Point2DL            s_EncounterOriginNudges[6];
+extern Point2D             D_801CD778[5];
+extern PartySlot           D_801CD944[3];
 
 #endif
