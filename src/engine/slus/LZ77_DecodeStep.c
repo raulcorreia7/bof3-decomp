@@ -4,7 +4,7 @@
  * the context and `jr $t4` dispatches through an absolute resume table; C89 cannot express them.
  * See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
-/* INFERRED C model: resumable stream decoder.
+/* C model, checked on the host by tools/tests/test_lz77_model.py: resumable stream decoder.
  * decodes the scratchpad window [src, limit) into ctx->dst until the
  * window runs out or the 0xFF control byte appears, saving a resume state so
  * the caller can refill the window and call again. Control bytes:
@@ -106,7 +106,7 @@ main_loop:
     }
 
 match_offset:
-    match = dst + ((((ctrl & LZ77_CONTROL_MATCH_DISTANCE_MASK) << 3) | *src++) - 0x800u);
+    match = dst - (0x800 - (((ctrl & LZ77_CONTROL_MATCH_DISTANCE_MASK) << 3) | *src++));
     len   = ctrl & LZ77_CONTROL_MATCH_LENGTH_MASK;
     if (len == 15) {
         if (src == limit) {

@@ -3,7 +3,7 @@
 /* HAND_ASM: operands in `$s4`/`$s5`/`$t3`, and `jr $t7` enters a 12-byte-stride unrolled copy block;
  * C89 cannot express the non-ABI entry or the computed resume. See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
-/* INFERRED C model: stream copy kernel.
+/* C model, checked on the host by tools/tests/test_lz77_model.py: stream copy kernel.
  * copies count bytes forward, byte by byte, from src to dst, so an
  * overlapping range replicates the back-reference pattern, and returns the
  * advanced destination.

@@ -3,7 +3,7 @@
 /* HAND_ASM: multi-entry register-restore tail (0x801642CC reloads `$s1`, 0x801642D0 skips it) over
  * caller-held `$t0` and `$s6`; C89 has no equivalent. See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
-/* INFERRED C model: shared restore tail of the resumable decoder.
+/* C model, checked on the host by tools/tests/test_lz77_model.py: shared restore tail of the resumable decoder.
  * reloads the outer caller's $s1-$s7 from the context spill area at
  * 0x800327A0 + 0x20..0x3C and returns through the return address parked in
  * $s6. Entry 0x801642D0 is the same tail without the $s1 reload; the 0xFF exit
