@@ -356,64 +356,34 @@ MATCH void func_801F85FC(void) {
 #include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F8710(void) {
-    u8**   slots;
-    Actor* work;
-    u8*    chk;
-
-    slots = SP_PTR(u8*, 0u);
-    work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc((s16)work->screen_x, (s16)work->screen_y, work->timer, 0x80, 0);
-    slots = SP_PTR(u8*, 0u);
-    slots[0x11][9] += 0x0F;
-    slots = SP_PTR(u8*, 0u);
-    chk   = slots[0x11];
-    if (chk[9] >= 0x3D) {
-        chk[9] = 0xFF;
-        slots  = SP_PTR(u8*, 0u);
-        slots[0x11][1] += 1;
+    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, g_Task->timer, 0x80, 0);
+    g_Task->timer += 0x0F;
+    if (g_Task->timer >= 0x3D) {
+        g_Task->timer = 0xFF;
+        g_Task->header.mode += 1;
     }
 }
 
 MATCH void func_801F87A4(void) {
-    u8**   slots;
-    Actor* work;
-    u8*    chk;
-    u8     count;
+    u8 count;
 
-    slots = SP_PTR(u8*, 0u);
-    work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc((s16)work->screen_x, (s16)work->screen_y, (work->timer & 1) | 0x3C, 0x80, 0);
-    slots = SP_PTR(u8*, 0u);
-    if (slots[0x11][9] == 0xD7) {
+    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, (g_Task->timer & 1) | 0x3C, 0x80, 0);
+    if (g_Task->timer == 0xD7) {
         SND_PlayCue(EMI_CUE_ID(2, 8));
     }
-    slots  = SP_PTR(u8*, 0u);
-    chk    = slots[0x11];
-    count  = (chk[9] - 1);
-    chk[9] = count;
+    count         = g_Task->timer - 1;
+    g_Task->timer = count;
     if (count == 0) {
-        slots          = SP_PTR(u8*, 0u);
-        slots[0x11][9] = 0x3C;
-        slots          = SP_PTR(u8*, 0u);
-        slots[0x11][1] += 1;
+        g_Task->timer = 0x3C;
+        g_Task->header.mode += 1;
     }
 }
 
 MATCH void func_801F885C(void) {
-    u8**   slots;
-    Actor* work;
-    s8*    chk;
-
-    slots = SP_PTR(u8*, 0u);
-    work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc((s16)work->screen_x, (s16)work->screen_y, work->timer, 0x80, 0);
-    slots = SP_PTR(u8*, 0u);
-    slots[0x11][9] -= 1;
-    slots = SP_PTR(u8*, 0u);
-    chk   = (s8*)slots[0x11];
-    if (chk[9] < 0) {
-        slots = SP_PTR(u8*, 0u);
-        slots[0x11][1] += 1;
+    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, g_Task->timer, 0x80, 0);
+    g_Task->timer -= 1;
+    if ((s8)g_Task->timer < 0) {
+        g_Task->header.mode += 1;
     }
 }
 
