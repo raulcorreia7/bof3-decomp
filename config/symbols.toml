@@ -895,6 +895,7 @@ Effect_StartPaletteFade = { addr = 0x801EF06C, type = "func", source = "Frees th
 Effect_PlayOnce_801EF344 = { addr = 0x801EF344, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic117 (Rest, Douse, Snooze)." }
 
 ["emi/bmagic/magic118/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_UpdateBurn = { addr = 0x801EEC18, type = "func", source = "per-frame update of the Burn effect: runs the step handler D_801EEC04 selects, then draws the flame quads and triangles while the effect is active" }
 BMagic_SpawnBurnFlames = { addr = 0x801EECD4, type = "func", source = "starts the Burn effect: claims eight flame effect slots with Battle_AllocEffect, each pointing at the effect work record, copies a palette row with the semi-transparent bit set and queues cue 0x100" }
