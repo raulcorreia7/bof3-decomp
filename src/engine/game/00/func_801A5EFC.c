@@ -41,11 +41,10 @@ MATCH void func_801A5EFC(u8* script) {
     g_Task->direction_08     = script[0] & 0xF;
     g_Task->unk_06           = script[0] >> 4;
 
-    /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars,
-     * so their slot offset stays byte arithmetic on the column address. */
-    *(u16*)((u8*)&D_80146914 + *counter * ACTOR_SIZE) = script[4];
-    *(s16*)((u8*)&D_80146916 + *counter * ACTOR_SIZE) = script[5];
-    g_Actors[*counter].unk_7C                         = script[0xF] | (script[0xE] << 8);
+    /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars. */
+    FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[4];
+    FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[5];
+    g_Actors[*counter].unk_7C                      = script[0xF] | (script[0xE] << 8);
     /* FAKE: forces the counter re-read before the next shadow store. */
     FAKE_BARRIER();
     D_80146900[*counter][0] = script[0xB];
