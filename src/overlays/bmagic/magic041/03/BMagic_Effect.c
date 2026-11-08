@@ -22,7 +22,18 @@ MATCH void func_801EEE14(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEEB4);
+MATCH void func_801EEEB4(void) {
+    u8 timer;
+
+    g_PaletteFades[g_Task->unk_09].offset.red += 2;
+    g_PaletteFades[g_Task->unk_09].offset.green += 1;
+    g_PaletteFades[g_Task->unk_09].offset.blue += 1;
+    timer = g_Task->timer + 1;
+    g_Task->timer = timer;
+    if (timer == 8) {
+        g_Task->header.mode++;
+    }
+}
 
 #include "overlays/bmagic/Effect_NextStepOnWorkLastTick.h"
 
