@@ -18,7 +18,7 @@ MATCH void func_80098FD4(void) {
         D_801C8950[*group][*cursor] -= 1u;
     } else {
         /* FAKE: block boundary keeps the group read base-relative off the cursor la. */
-        ORDER_FENCE();
+        FAKE_ORDER_FENCE();
         D_801C893C[*group][*cursor] = 0;
         D_801C8950[*group][*cursor] = 0;
     }

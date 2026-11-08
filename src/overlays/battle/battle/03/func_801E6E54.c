@@ -3,7 +3,7 @@
 MATCH void func_801E6E54(void) {
     PartyMember* work;
     /* FAKE: Pin the fresh work pointer to a0. */
-    MATCH_FAKE_PIN(PartyMember*, next, "a0");
+    FAKE_REG(PartyMember*, next, "a0");
     s32 index;
     u8  slot;
 

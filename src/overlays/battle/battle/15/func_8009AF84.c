@@ -4,9 +4,9 @@ MATCH void func_8009AF84(void) {
     volatile u8* work;
     u8           one;
     /* FAKE: retail holds the store constant in v1. */
-    MATCH_REG(u8, two, "v1");
+    FAKE_REG(u8, two, "v1");
     /* FAKE: retail holds the row count in a3 across both row stores. */
-    MATCH_REG(u8, eight, "a3");
+    FAKE_REG(u8, eight, "a3");
     u8 group;
     u8 page_base;
     u8 cursor;
@@ -22,7 +22,7 @@ MATCH void func_8009AF84(void) {
     page_base = D_801454FE;
     cursor    = D_801454FF;
     /* FAKE: basic-block boundary pins the row constant materialization. */
-    ORDER_LOCK(eight = 8u);
+    FAKE_ORDER_LOCK(eight = 8u);
     g_BattleChoicePanel[2] = one;
 
     g_BattleChoicePanel[0xD]            = 0xFFu;
@@ -35,7 +35,7 @@ MATCH void func_8009AF84(void) {
     g_BattleChoicePanel[0xB]            = page_base;
     g_BattleChoicePanel[0xC]            = cursor;
     /* FAKE: alias keeps the work base in the register. */
-    MATCH_FAKE_OPAQUE(work);
+    FAKE_OPAQUE(work);
     work[0x6C]                = 0u;
     g_BattleChoicePanel[0x6D] = eight;
     g_BattleChoicePanel[0x6E] = 0u;

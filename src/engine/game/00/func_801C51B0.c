@@ -12,7 +12,7 @@ MATCH void func_801C51B0(void) {
     *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (field << 6)) = 0;
     route                                            = work->direction_08;
     /* FAKE: barrier keeps saved ra from sinking below work load. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     index = 0x34;
     if (route == 7) {
         index = 0x37;

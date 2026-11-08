@@ -13,6 +13,6 @@ MATCH void Area_UpdateCameraHeight(void) {
         height -= 0x20;
     }
     g_AreaCameraHeight = height;
-    MATCH_FAKE_BARRIER(); /* FAKE: keeps the camera store above the refresh-count load */
+    FAKE_BARRIER(); /* FAKE: keeps the camera store above the refresh-count load */
     g_AreaCameraRefreshCount += 2;
 }

@@ -6,5 +6,5 @@ MATCH void func_801EEC60(void) {
 
     /* FAKE: without the block the scheduler hoists the index shift above the
        ra store (84.46%); the lock restores the retail order (99.85%). */
-    ORDER_LOCK(D_801F0C98[index]());
+    FAKE_ORDER_LOCK(D_801F0C98[index]());
 }

@@ -5,7 +5,7 @@
  */
 MATCH void EMI_LoadVabHeader(void) {
     /* FAKE: unused frame, 64 bytes. */
-    STACK_PADS(u8, 64);
+    FAKE_STACK_PADS(u8, 64);
     volatile u32* table_word;
     u32           word;
     u8            slot;
@@ -22,11 +22,11 @@ MATCH void EMI_LoadVabHeader(void) {
         D_80146483 = index;
         /* FAKE: barrier pins index store before entry lookup. */
         /* FAKE: barrier reproduces store then reload ordering. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         *table_word                 = D_80146780[(u8)index].word;
         D_80146780[(u8)index].state = 0;
         /* FAKE: keeps the owner-byte reload below both table stores. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
 
         if (g_SelectionFxVoices[D_80146483] != -1) {
             SsUtAllKeyOff(0);

@@ -4,7 +4,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     s32 result;
     /* FAKE: both loops' counter; retail keeps it in s2 while the record
      * pointers take s1/s0 (allocation only, no source shape reached it). */
-    MATCH_REG(u8, i, "s2");
+    FAKE_REG(u8, i, "s2");
     s32             x;
     s32             y;
     s32             reach;

@@ -1,6 +1,6 @@
 # Third-party tools
 
-This table lists every third-party tool and source the build, the matching aids and the references
+This table lists every third-party tool and source the build, the matching tools and the references
 use. The repository redistributes none of them except the PsyQ headers in `include/psyq/`; everything
 else is a git submodule pin, a locked package or a download checked against a sha256. Licenses come
 from each project's repository; read the upstream terms before you redistribute anything.
@@ -18,9 +18,9 @@ from each project's repository; read the upstream terms before you redistribute 
 | `m2c` | GPL-3.0 | submodule | pin only |
 | `psx_psyq_signatures` | none stated | submodule | pin only |
 | `splat64`, `spimdisasm` | MIT | Python packages locked in `uv.lock` | no |
-| `objdiff-cli` | Apache-2.0 | release download in [docs/toolchain.md](../docs/toolchain.md#matching-aids) | no |
-| `coddog` | Apache-2.0 | release download in [docs/toolchain.md](../docs/toolchain.md#matching-aids) | no |
-| `rizin` | LGPL-3.0 | release download in [docs/toolchain.md](../docs/toolchain.md#matching-aids) | no |
+| `objdiff-cli` | Apache-2.0 | release download in [docs/toolchain.md](../docs/toolchain.md#matching-tools) | no |
+| `coddog` | Apache-2.0 | release download in [docs/toolchain.md](../docs/toolchain.md#matching-tools) | no |
+| `rizin` | LGPL-3.0 | release download in [docs/toolchain.md](../docs/toolchain.md#matching-tools) | no |
 | `bof3-data-doc` | none stated: cite only | submodule under `references/` | pin only |
 | `vast-violence` | none stated: cite only | submodule under `references/` | pin only |
 | `bof3-notes` | CC-BY-SA-4.0: cite, copy no text | submodule under `references/` | pin only |

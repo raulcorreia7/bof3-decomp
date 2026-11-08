@@ -28,7 +28,7 @@ NON_MATCHING void func_801576FC(u8* record) {
     u8    tmp7;
     void* val12;
     /* FAKE: unused frame, 16 bytes. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
 
     val11 = record;
     val1  = 0;

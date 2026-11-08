@@ -3,7 +3,7 @@
 MATCH void func_801E6FB0(void) {
     u8 slot;
     /* FAKE: row index pinned to v0 so the product takes v1; pure-C best 95.10%, a 20-minute search found nothing. */
-    MATCH_REG(s32, row, "v0");
+    FAKE_REG(s32, row, "v0");
     u16 flags;
     u8  id;
 

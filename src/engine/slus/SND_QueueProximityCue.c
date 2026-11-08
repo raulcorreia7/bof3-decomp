@@ -31,7 +31,7 @@
 MATCH void SND_QueueProximityCue(s32 cue_id) {
     Actor* work;
     /* FAKE: the axis value stays in a0 across both range tests. */
-    MATCH_REG(s32, x, "a0");
+    FAKE_REG(s32, x, "a0");
     s32 y;
     s32 target;
     s32 edge;

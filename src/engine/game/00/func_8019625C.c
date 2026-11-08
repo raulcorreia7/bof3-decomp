@@ -3,7 +3,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_8019625C(void) {
     /* FAKE: pin carries entry pointer in t1. */
-    MATCH_REG(PaletteFade*, entry, "$9");
+    FAKE_REG(PaletteFade*, entry, "$9");
     s32 entry_index;
     s32 color_index;
     s32 count;
@@ -15,14 +15,14 @@ NON_MATCHING void func_8019625C(void) {
     u32 source_index;
     u32 destination_index;
     /* FAKE: pin loads palette scale into a3. */
-    MATCH_REG(u32, scale, "$7");
+    FAKE_REG(u32, scale, "$7");
     volatile u16* source;
     u16*          destination;
     u16           color;
     s8            red;
     s8            green;
     /* FAKE: pin accumulates blue channel in t0. */
-    MATCH_REG(s8, blue, "$8");
+    FAKE_REG(s8, blue, "$8");
     u8 high_bit;
 
     for (entry_index = 0; entry_index < PALETTE_FADE_COUNT; entry_index++) {

@@ -12,7 +12,7 @@ MATCH void UI_ResetMessage(void) {
 
     base = (u8*)&g_UiWindowChannel;
     /* FAKE: opaque base keeps one register for the -4..0x2A record accesses (match.h operand fake-match helper). */
-    MATCH_FAKE_OPAQUE(base);
+    FAKE_OPAQUE(base);
     base[-4]             = 0;
     g_UiWindowStep       = 0;
     g_MessageChoiceMode  = 0;

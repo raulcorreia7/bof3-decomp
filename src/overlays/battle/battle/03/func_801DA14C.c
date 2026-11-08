@@ -7,10 +7,10 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
      * swapped and refuses the in-place `x += 4` (keeps originals in the
      * s-regs, +4 in temps). Declaration order and all four profiles measured
      * no better. */
-    MATCH_REG(s16, x, "s2");
+    FAKE_REG(s16, x, "s2");
     /* FAKE: retail `move s3,a1` and in-place `addiu s3,s3,4`; gcc keeps the original in $s3
      * uncremented and puts origin_y+4 in a temp. */
-    MATCH_REG(s16, y, "s3");
+    FAKE_REG(s16, y, "s3");
     s16       start_y;
     s16       start_x;
     s32       v_delta;

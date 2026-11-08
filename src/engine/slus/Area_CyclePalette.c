@@ -20,7 +20,7 @@ MATCH void Area_CyclePalette(void) {
         kind   = header >> 24;
         tag    = 0x80;
         /* FAKE: retail reloads the 0x80 tag each record. */
-        MATCH_FAKE_OPAQUE(tag);
+        FAKE_OPAQUE(tag);
         if (kind == tag) {
             select = (g_FrameCount % (header & BYTE_MASK)) + 1;
             src    = record + 1;

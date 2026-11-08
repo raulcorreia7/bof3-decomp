@@ -5,7 +5,7 @@ MATCH s32 func_801C6A7C(void) {
     u8* base;
     s32 index;
     /* FAKE: limit pinned to v0; keeps the masked copy from folding. */
-    MATCH_REG(s32, limit, "v0");
+    FAKE_REG(s32, limit, "v0");
     s32 masked;
 
     limit = rand();

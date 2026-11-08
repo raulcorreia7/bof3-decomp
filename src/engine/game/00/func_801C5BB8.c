@@ -3,7 +3,7 @@
 MATCH void func_801C5BB8(void) {
     u8* flags;
     /* FAKE: pin scroll cell pointer to v0. */
-    MATCH_FAKE_PIN(s32*, value, "$2");
+    FAKE_REG(s32*, value, "$2");
 
     if (g_AreaCameraMoving == 0) {
         flags = &D_80143FBC;

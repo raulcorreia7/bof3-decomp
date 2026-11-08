@@ -6,7 +6,7 @@ MATCH void func_800A0378(void) {
     u32 mode;
     u16 base;
     /* FAKE: keeps the flag constant in v0 for the bnez delay slot. */
-    MATCH_FAKE_PIN(u8, flag, "v0");
+    FAKE_REG(u8, flag, "v0");
 
     if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *MEM_PTR(u8, &g_Battle.target);
@@ -19,7 +19,7 @@ MATCH void func_800A0378(void) {
     } else {
         flag = 1;
         /* FAKE: stops the scheduler sinking the flag into the load-delay slot. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         g_Battle.target_record->target_flags = flag;
     }
 }

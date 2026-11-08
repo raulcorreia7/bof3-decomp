@@ -6,7 +6,7 @@
  */
 MATCH void func_80159A90(void) {
     /* FAKE: pins panel to v1. */
-    MATCH_FAKE_PIN(MenuPanelTask*, panel, "v1");
+    FAKE_REG(MenuPanelTask*, panel, "v1");
     u8* mode;
     u16 x;
     u16 y;

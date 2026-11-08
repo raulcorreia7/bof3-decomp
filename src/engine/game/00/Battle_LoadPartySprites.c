@@ -23,7 +23,7 @@ MATCH void Battle_LoadPartySprites(void) {
             index    = g_Battle.scroll_dir;
             *coord_a = *coord_a + s_BattleScrollCellSteps[index].dx;
             dy       = s_BattleScrollCellSteps[index].dy;
-            MATCH_BARRIER(); /* FAKE: keeps the delta load before the span math. */
+            FAKE_BARRIER(); /* FAKE: keeps the delta load before the span math. */
             span                   = D_801CD954;
             g_AreaCameraStep       = 0x40;
             span                   = span - g_AreaCameraHeight;

@@ -3,9 +3,9 @@
 MATCH void func_800ADA4C(void) {
     PartyMember* work;
     /* FAKE: retail holds the armed work pointer in a0. */
-    MATCH_REG(PartyMember*, next, "a0");
+    FAKE_REG(PartyMember*, next, "a0");
     /* FAKE: retail holds the queued work pointer in a1 for the slot lookup. */
-    MATCH_REG(PartyMember*, slotp, "a1");
+    FAKE_REG(PartyMember*, slotp, "a1");
     u8*  base;
     s16* pair;
     u8*  row;

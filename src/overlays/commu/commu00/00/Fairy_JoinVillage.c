@@ -3,7 +3,7 @@
 MATCH void Fairy_JoinVillage(void) {
     u32* count_ptr;
     /* FAKE: keeps the advanced destination pointer in v1. */
-    MATCH_REG(u8*, dst, "v1");
+    FAKE_REG(u8*, dst, "v1");
     u8* src;
     u8* copy_src;
     u8* end;

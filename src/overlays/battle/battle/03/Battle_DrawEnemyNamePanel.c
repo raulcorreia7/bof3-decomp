@@ -7,7 +7,7 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
     u8  g;
     u8  b;
     /* FAKE: retail keeps panel_x in s2 and reuses one temp for the second value; no clean-C shape allocates it so. */
-    MATCH_REG(s32, panel_x, "s2");
+    FAKE_REG(s32, panel_x, "s2");
     s32 panel_y;
     s32 new_var;
 

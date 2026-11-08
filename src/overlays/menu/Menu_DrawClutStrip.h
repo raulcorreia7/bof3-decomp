@@ -13,7 +13,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
     s16     y;
     s32     index;
     /* FAKE: retail keeps the constant shade byte in s5. */
-    MATCH_REG(u8, shade, "s5");
+    FAKE_REG(u8, shade, "s5");
     u8 h;
     u8 row;
     u8 pair;

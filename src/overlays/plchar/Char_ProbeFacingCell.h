@@ -5,8 +5,8 @@
  * definition shared by the plchar character programs; every change here must
  * verify every member image. */
 MATCH s32 Char_ProbeFacingCell(void) {
-    MATCH_REG(s32, found, "v0");
-    MATCH_REG(s32, hit, "s1");
+    FAKE_REG(s32, found, "v0");
+    FAKE_REG(s32, hit, "s1");
     s32 cx;
     s32 cy;
 
@@ -16,7 +16,7 @@ MATCH s32 Char_ProbeFacingCell(void) {
     hit   = found;
     /* FAKE: retail writes the flag to $v0 and copies it to $s1; keeping the
      * probe result live stops gcc-2.7.2 from coalescing the copy. */
-    MATCH_FAKE_USE(found);
+    FAKE_USE(found);
     if ((Area_GetCellCode(cx >> 16, cy >> 16) & BYTE_MASK) == 0xF2) {
         hit = 1;
     }

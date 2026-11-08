@@ -10,7 +10,7 @@ MATCH void func_801C1254(s32 ability_id, s32 party_slot) {
     u8        hint;
     s32       slot;
     /* FAKE: retail accumulates the record value in v0. */
-    MATCH_REG(s32, value, "v0");
+    FAKE_REG(s32, value, "v0");
     Actor* first;
     u8*    next;
     Actor* next_5d;

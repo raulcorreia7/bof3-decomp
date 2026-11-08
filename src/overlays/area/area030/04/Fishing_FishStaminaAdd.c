@@ -20,9 +20,9 @@ MATCH void Fishing_FishStaminaAdd(s8 delta) {
         }
     } else {
         /* FAKE: the order lock steers regalloc */
-        ORDER_LOCK_BEGIN
+        FAKE_ORDER_LOCK_BEGIN
             result = 0;
-        ORDER_LOCK_END;
+        FAKE_ORDER_LOCK_END;
     }
     work->ext.fishing.stamina = result;
 }

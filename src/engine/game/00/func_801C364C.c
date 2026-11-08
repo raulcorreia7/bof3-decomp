@@ -12,7 +12,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
     }
     enabled = find_facing & BYTE_MASK;
     /* FAKE: holds the loop init after the gate mask. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     i = 0;
     if (enabled) {
         for (;;) {
@@ -21,7 +21,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
                                    g_Task->pos.y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(g_Task->pos.z)) &
                      0xFF;
             /* FAKE: holds the increment after the probe call. */
-            MATCH_BARRIER();
+            FAKE_BARRIER();
             i++;
             if (!result) {
                 break;

@@ -43,7 +43,7 @@ MATCH s32 SYS_LoadExec(const char* path) {
                 d->w0 = w0;
                 d->w1 = w1;
                 /* FAKE: barrier orders word-copy ahead of CD call. */
-                MATCH_BARRIER();
+                FAKE_BARRIER();
 
                 CdIntToPos(CdPosToInt(&file.pos) + 1, &file.pos);
                 CdControlB(CdlSetloc, (u_char*)&file, NULL);

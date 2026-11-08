@@ -6,12 +6,12 @@
  */
 MATCH void Area_DrawCellLayer(s32 layer) {
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     u32* packet;
     u32  entry;
     s32  col;
     /* FAKE: Retail keeps the column offset in s6 across the callback calls. */
-    MATCH_FAKE_PIN(s32, col_offset, "s6");
+    FAKE_REG(s32, col_offset, "s6");
     u16* row_base;
     u8*  base;
     u8*  record;

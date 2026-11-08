@@ -21,7 +21,7 @@ MATCH void func_801BEBB0(void) {
     *base = 0xFF;
     slot  = 0;
     /* FAKE: a local holding 1 places li s4,1 after the slot init; pure-C best 96.32%. */
-    MATCH_FAKE_HOLD(one, 1);
+    FAKE_HOLD(one, 1);
     row    = base + 0x6E;
     offset = 0;
     do {
@@ -39,7 +39,7 @@ MATCH void func_801BEBB0(void) {
                     g_ActorSlots[id].scene_step   = s_BattleStartOffsets[row[0]][0];
                     g_ActorSlots[id].selection    = s_BattleStartOffsets[row[0]][1];
                     /* FAKE: keeps the selection store ahead of the work-row id store (retail order). */
-                    MATCH_FAKE_BARRIER();
+                    FAKE_BARRIER();
                     D_80145E9B = id;
                 }
                 count++;

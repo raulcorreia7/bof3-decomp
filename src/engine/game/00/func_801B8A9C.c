@@ -4,13 +4,13 @@ MATCH void func_801B8A9C(void) {
     s16 vals[2];
     u8  route;
     /* FAKE: retail keeps the direction counter in s2. */
-    MATCH_REG(s32, count, "s2");
+    FAKE_REG(s32, count, "s2");
     /* FAKE: retail keeps the step count in v1. */
-    MATCH_REG(s32, steps, "v1");
+    FAKE_REG(s32, steps, "v1");
     s32 word;
     s32 offset;
     /* FAKE: retail keeps the work-area pointer in a1. */
-    MATCH_REG(Actor*, work, "a1");
+    FAKE_REG(Actor*, work, "a1");
     s32        pos_x;
     s32        pos_y;
     u8         index_copy;
@@ -48,13 +48,13 @@ loop_top:
             }
             if (found == 2) {
                 /* FAKE: the order lock steers regalloc */
-                ORDER_LOCK_BEGIN
+                FAKE_ORDER_LOCK_BEGIN
                     found = 1;
                     if (vals[1] < vals[0]) {
                         vals[0] = vals[1];
                         route   = index_copy;
                     }
-                ORDER_LOCK_END;
+                FAKE_ORDER_LOCK_END;
             }
         }
     }

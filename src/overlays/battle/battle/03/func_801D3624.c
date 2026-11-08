@@ -12,7 +12,7 @@
 MATCH void func_801D3624(void) {
     u16* setup_flags;
     /* FAKE: allocator tie, row pointer in a1. */
-    MATCH_FAKE_PIN(PartyMember*, work, "a1");
+    FAKE_REG(PartyMember*, work, "a1");
     u32 row_offset;
     u8  kind_index;
     u16 mode;

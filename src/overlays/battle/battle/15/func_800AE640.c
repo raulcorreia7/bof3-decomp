@@ -3,7 +3,7 @@
 MATCH void func_800AE640(void) {
     /* FAKE: Pin the battle work pointer to $a0; clean C left
      * the long-lived pointer in $a1 while $a0 stayed free. */
-    MATCH_REG(u8*, work, "a0");
+    FAKE_REG(u8*, work, "a0");
     u8  step;
     u8* tail;
     u32 counter;

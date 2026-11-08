@@ -9,18 +9,18 @@
 MATCH void SND_SetBankLayout(u32 layout_bank) {
     s32 off;
     /* FAKE: pin keeps the accumulator in v1. */
-    MATCH_FAKE_PIN(s32, v, "v1");
+    FAKE_REG(s32, v, "v1");
     /* FAKE: pin keeps the width in a0. */
-    MATCH_FAKE_PIN(s32, w, "a0");
+    FAKE_REG(s32, w, "a0");
     u8* layer2;
     /* FAKE: pin keeps the stride in v0. */
-    MATCH_FAKE_PIN(s32, size, "v0");
+    FAKE_REG(s32, size, "v0");
     /* FAKE: pin keeps the end offset in t0. */
-    MATCH_FAKE_PIN(s32, end, "t0");
+    FAKE_REG(s32, end, "t0");
     /* FAKE: pin keeps the next index in a2. */
-    MATCH_FAKE_PIN(s32, next, "a2");
+    FAKE_REG(s32, next, "a2");
     /* FAKE: pin keeps the last index in a3. */
-    MATCH_FAKE_PIN(s32, last, "a3");
+    FAKE_REG(s32, last, "a3");
 
     s32 fixed             = 0x8011A000;
     off                   = (layout_bank & BYTE_MASK) * 0x1C;
@@ -65,7 +65,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     v += size;
     w = v + w;
     /* FAKE: the order lock steers regalloc. */
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
         D_80148A24 = v;
         D_80148A40 = w;
         D_801467C4 = w;
@@ -105,7 +105,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
         D_80148A44 = end;
         D_80148A2C = next;
         D_80148A48 = last;
-    ORDER_LOCK_END;
+    FAKE_ORDER_LOCK_END;
     D_80148A30 = size;
     D_80148A4C = v;
     D_801467F4 = off;

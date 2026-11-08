@@ -24,7 +24,7 @@ MATCH void func_801D61C0(void) {
             SsSepPause(0, i);
             /* FAKE: the order fence keeps the next-value increment in
              * the cue call's delay slot. */
-            ORDER_FENCE();
+            FAKE_ORDER_FENCE();
         }
         next = i + 1;
         i    = next;

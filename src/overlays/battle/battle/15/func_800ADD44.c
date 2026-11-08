@@ -5,7 +5,7 @@
 MATCH void func_800ADD44(void) {
     volatile PartyMember* work;
     /* FAKE: retail holds the armed work pointer in a0. */
-    MATCH_REG(PartyMember*, next, "a0");
+    FAKE_REG(PartyMember*, next, "a0");
     PartyMember* slotp;
     u8*          base;
     s16*         pair;

@@ -27,11 +27,11 @@ MATCH void func_801A5400(u8* script) {
         g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed =
             (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         g_Actors[*counter].walk_dest_y = coord_record->pos.y.fixed =
             (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         g_Actors[*counter].unk_88     = 0;
         dist                          = Area_SampleHeight(coord_record->pos.x.fixed, coord_record->pos.y.fixed);
         dist_record                   = g_Task;
@@ -42,7 +42,7 @@ MATCH void func_801A5400(u8* script) {
         g_Task->unk_06                = data[0] >> 4;
         g_Actors[*counter].unk_7C     = 0xFFFF;
         /* FAKE: forces the counter re-read before the next shadow store. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         *D_80146900[*counter] = data[0x9];
         *D_8014691C[*counter] = 0x7F;
         func_801A4990(data + 0xB);

@@ -13,7 +13,7 @@ MATCH u8 func_801D5DCC(void) {
             g_Game.members[slot].u.turn.hp_change = 0;
             g_Game.members[slot].u.turn.ap_change = 0;
             /* FAKE: keeps the mode byte load after the two stores (the scheduler hoists it above them). */
-            MATCH_BARRIER();
+            FAKE_BARRIER();
             if (g_PartyFormation == 5) {
                 g_Game.members[slot].u.turn.hp_change -= 1;
             }

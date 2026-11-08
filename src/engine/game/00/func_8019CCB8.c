@@ -3,7 +3,7 @@
 MATCH void func_8019CCB8(void) {
     /* FAKE: retail frame is 0x28; the 8 bytes below the saved registers are
      * unexplained by this draft's locals. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     s32 copy_count;
     s32 copy_index;
     s32 move_x;

@@ -27,7 +27,7 @@ MATCH void func_801EEEF4(void) {
 
 MATCH void func_801EEFA0(void) {
     /* FAKE: retail keeps an 8-byte frame that no statement explains. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     u8 timer;
 
     g_PaletteFades[g_Task->timer].offset.red -= 1;

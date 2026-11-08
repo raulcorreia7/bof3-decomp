@@ -4,7 +4,7 @@
  */
 MATCH void EMI_CopySectorToScratchpad(void) {
     /* FAKE: retail keeps the CD-sector base in a0. */
-    MATCH_REG(u32, base, "a0");
+    FAKE_REG(u32, base, "a0");
     u32 i;
 
     {

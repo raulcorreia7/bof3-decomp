@@ -10,7 +10,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
     s32  trig;
     u16  pad;
     /* FAKE: unused frame, 16 bytes. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
     s32 count;
     u8  item;
     s32 sel;

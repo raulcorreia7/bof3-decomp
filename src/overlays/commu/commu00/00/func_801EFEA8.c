@@ -6,7 +6,7 @@ MATCH s32 func_801EFEA8(void) {
     s32 queue_scan_offset;
     s32 active_record_count;
     /* FAKE: retains the group byte offset in a2. */
-    MATCH_REG(s32, group_byte_offset, "a2");
+    FAKE_REG(s32, group_byte_offset, "a2");
     s32  group_number;
     s32  active_record_offset;
     s32  queue_record_index;

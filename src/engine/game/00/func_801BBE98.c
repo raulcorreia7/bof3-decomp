@@ -4,7 +4,7 @@ MATCH void func_801BBE98(void) {
     Actor* work;
     Actor* work2;
     /* FAKE: post-call reload must land in a0 for the retail schedule. */
-    MATCH_REG(Actor*, ptr, "a0");
+    FAKE_REG(Actor*, ptr, "a0");
     s16 ret;
 
     Actor_ClearVelocity();

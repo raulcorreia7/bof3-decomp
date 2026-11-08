@@ -10,9 +10,9 @@
 MATCH void func_8009EF28(void) {
     u16 flag_value;
     /* FAKE: pin the halfword address to v0. */
-    MATCH_REG(volatile u16*, half, "v0");
+    FAKE_REG(volatile u16*, half, "v0");
     /* FAKE: pin the record base to v1 in the else path. */
-    MATCH_REG(BattleTurn*, record, "v1");
+    FAKE_REG(BattleTurn*, record, "v1");
     u16 updated;
     u8  battler_index;
     u8  selection_kind;

@@ -21,7 +21,7 @@ MATCH void func_8009F1BC(void) {
     battler_index  = g_BattleActiveBattler;
     selection_kind = g_Battle.target;
     /* FAKE: keeps the kind-0x20 materialization in the jal delay slot. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     res                               = Battle_CalcDamage(battler_index, selection_kind, ELEM_HOLY);
     g_Battle.target_record->hp_change = res;
 }

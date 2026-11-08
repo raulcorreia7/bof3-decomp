@@ -11,9 +11,9 @@ MATCH u32 func_801DCD50(u32 unused, u8 battler_index, s32 damage_value) {
     u32  slot;
     u16* scratch;
     /* FAKE: pins the first flag read to a1. */
-    MATCH_REG(u16, flags, "a1");
+    FAKE_REG(u16, flags, "a1");
     /* FAKE: pins the masked flag value to v0. */
-    MATCH_REG(u16, mask, "v0");
+    FAKE_REG(u16, mask, "v0");
     s16 element;
 
     damage = damage_value << 8;

@@ -7,7 +7,7 @@ MATCH void func_801F2C48(void) {
     g_Task->pos.x.fixed = TO_COORD(1);
     g_Task->pos.y.fixed = TO_COORD(37);
     g_Task->pos.z.fixed = 0x03800000;
-    MATCH_FAKE_BARRIER(); /* FAKE: keeps the D_800E4B3E store below the work stores */
+    FAKE_BARRIER(); /* FAKE: keeps the D_800E4B3E store below the work stores */
     D_800E4B3E = 0x60;
     do {
         func_801F2F28((u8*)AREA_WORK);

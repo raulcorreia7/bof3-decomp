@@ -3,7 +3,7 @@
 MATCH void func_801DE200(void) {
     /* FAKE: retail reserves 0x18 frame bytes no statement touches (only ra at
      * 0x28 is accessed); no struct, array or argument explains them. */
-    STACK_PADS(u8, 24);
+    FAKE_STACK_PADS(u8, 24);
     s32 party_count;
     s32 search_limit;
     s32 count;
@@ -12,14 +12,14 @@ MATCH void func_801DE200(void) {
     s32 record_offset;
     /* FAKE: retail homes the inner search index in $v1; gcc 2.7.2 assigns the
      * opposite pair without a pin. */
-    MATCH_FAKE_PIN(s32, order_index, "v1");
+    FAKE_REG(s32, order_index, "v1");
     /* FAKE: retail homes the flag counter in $v1; the flag loop and the
      * standby loop share that home. */
-    MATCH_FAKE_PIN(s32, marked, "v1");
+    FAKE_REG(s32, marked, "v1");
     s32 clear_index;
     /* FAKE: retail homes the standby counter in $v1; gcc 2.7.2 assigns the pair
      * swapped. */
-    MATCH_FAKE_PIN(s32, standby_count, "v1");
+    FAKE_REG(s32, standby_count, "v1");
     u8* record;
     u8  standby_total;
     s32 limit;

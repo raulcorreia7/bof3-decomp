@@ -28,7 +28,7 @@ MATCH void func_801C308C(s32 arg) {
     } while (index < 32);
     g_GfxPalettePending = 1;
     /* FAKE: hold cue arg after store. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     SND_PlayCue(EMI_CUE_ID(1, 8));
     g_Game.current->status.field.flags_12C.u8_value |= 8;
 }

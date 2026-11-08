@@ -11,12 +11,12 @@ MATCH u8* func_801A4844(u8* script) {
     value  = script[1];
     /* FAKE: barrier keeps the script[1] load apart from the u8 copy, so the
      * raw word stays in v0 and the copy masks into s1. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     cursor = script + 2;
     param  = (u8)value;
     while (active != 0u) {
         /* FAKE: keep the dead script[1] copy live across the call in s1. */
-        MATCH_FAKE_USE(param);
+        FAKE_USE(param);
         opcode = *cursor;
         if (opcode >= 0xF0u) {
             switch (opcode - 0xF0u) {

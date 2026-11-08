@@ -2,7 +2,7 @@
 
 MATCH u32 func_800AF6B8(u32 axis_34_bound, u32 axis_38_bound, s32 packed_span, u32 extent) {
     /* FAKE: pin keeps result in v0. */
-    MATCH_REG(u32, result, "v0");
+    FAKE_REG(u32, result, "v0");
     BattleRange* work;
     u32          half_value;
     u32          span;

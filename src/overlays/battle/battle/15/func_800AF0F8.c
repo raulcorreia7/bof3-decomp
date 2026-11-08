@@ -22,7 +22,7 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, s32 base, u8 
     s32  tile_y;
     s32  addend;
     /* FAKE: retail frames 0x10 bytes; the callee base frame is 8, and no statement uses the other 8. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     tile_x = (pos_x >> 16) - g_AreaTileOriginX;
     tile_y = (pos_y >> 16) - g_AreaTileOriginY;

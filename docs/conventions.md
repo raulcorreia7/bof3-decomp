@@ -1098,7 +1098,7 @@ no name is both a `#define` and a declaration.
 | A whole function                            | Only where the bare statement macro also moves bytes: `<TAG>_DEFINE_<NAME>(name, values...)`; the report names the function and what moved                                                 |
 
 The compiler treats a `do { ... } while (0)` scope as a block that can steer register allocation (it
-is a benign matching aid), so a statement macro wrapped in one may move bytes. Use that form only
+is a benign fake helper), so a statement macro wrapped in one may move bytes. Use that form only
 where every use is measured identical; never `if (1) { }` or bare braces.
 
 - Named by what it builds, in `TAG_UPPER_SNAKE`. No leading underscore, no one-letter names.
@@ -1106,7 +1106,7 @@ where every use is measured identical; never `if (1) { }` or bare braces.
   statement.
 - A wrong argument count or type fails to compile; it never shifts bytes silently.
 - It lives next to the type it builds, at the lowest scope that covers its users.
-- A macro never takes code as an argument and holds no externs and no matching aids.
+- A macro never takes code as an argument and holds no externs and no fake helpers.
 - A member is never written out in full when a shared form is exact: a body the compiler compiles
   differently as an inline is a reason for the statement macro, not for a copy.
 - Near-copy macros (the same body with a different member, step, limit, value or cast) become one
@@ -1140,13 +1140,13 @@ static inline bool Battle_CanAct(PartyMember* battler) {
 These are the only spellings that carry a literal address or offset. Each is a seam to replace with
 a symbol or a member once the evidence exists.
 
-| Seam                         | Use                                                                         |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| `MEM(type, addr)`, `MEM_PTR` | a fixed RAM address with no symbol yet                                      |
-| `FIELD(type, base, off)`     | one access at an offset of a base whose type is not proven yet              |
-| `HW_REF(type, addr)`         | a hardware register (`include/psx/hw.h` names them)                         |
-| `SP*`                        | the scratchpad (`include/sys/scratchpad.h`)                                 |
-| `VOL(type, x)`               | a volatile access the hardware or a shared buffer needs; not a matching aid |
+| Seam                         | Use                                                                        |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `MEM(type, addr)`, `MEM_PTR` | a fixed RAM address with no symbol yet                                     |
+| `FIELD(type, base, off)`     | one access at an offset of a base whose type is not proven yet             |
+| `HW_REF(type, addr)`         | a hardware register (`include/psx/hw.h` names them)                        |
+| `SP*`                        | the scratchpad (`include/sys/scratchpad.h`)                                |
+| `VOL(type, x)`               | a volatile access the hardware or a shared buffer needs; not a fake helper |
 
 ### Fake-match helpers
 
@@ -1155,14 +1155,14 @@ behavior C cannot express; `include/match/match.h` defines them and they are ine
 matching build. Try in order: correct types and signedness, the original control flow, temporary
 lifetimes and declaration order, casts and grouping, the unit's compiler profile, then a helper.
 
-| Group   | Helpers                                                                                                                                                                                                                                 |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| benign  | `MATCH_VOLATILE`, `MATCH_VOLATILE_PTR`, `MATCH_FAKE_BARRIER`/`MATCH_BARRIER`, `ORDER_LOCK`/`ORDER_LOCK_BEGIN`…`ORDER_LOCK_END`/`ORDER_FENCE`, `STACK_PADS` (retail frame bytes nothing explains), `MATCH_FAKE_HOLD`, `NO_SIBLING_CALLS` |
-| harmful | `MATCH_FAKE_PIN`/`MATCH_REG` (register pin), `CLOBBER_*`, `MATCH_FAKE_OPAQUE`/`MATCH_FAKE_USE`                                                                                                                                          |
+| Group   | Helpers                                                                                                                                                                                       |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| benign  | `FAKE_VOLATILE_PTR`, `FAKE_BARRIER`, `FAKE_ORDER_LOCK`/`FAKE_ORDER_LOCK_BEGIN`…`FAKE_ORDER_LOCK_END`/`FAKE_ORDER_FENCE`, `FAKE_STACK_PADS` (retail frame bytes nothing explains), `FAKE_HOLD` |
+| harmful | `FAKE_REG` (register pin), `FAKE_CLOBBER_*`, `FAKE_OPAQUE`/`FAKE_USE`                                                                                                                         |
 
 Each use carries an adjacent `/* FAKE: <reason>. */`; a dummy local counts as one, and its note
-carries the best pure-C score. `ORDER_LOCK(stmt)` holds one statement; a run of statements goes
-between `ORDER_LOCK_BEGIN` and `ORDER_LOCK_END;` instead of inside the macro's argument. `ORDER_FENCE()` is the empty boundary; write it instead of a bare `do { } while (0);`. Every
+carries the best pure-C score. `FAKE_ORDER_LOCK(stmt)` holds one statement; a run of statements goes
+between `FAKE_ORDER_LOCK_BEGIN` and `FAKE_ORDER_LOCK_END;` instead of inside the macro's argument. `FAKE_ORDER_FENCE()` is the empty boundary; write it instead of a bare `do { } while (0);`. Every
 helper compiles away without `MATCHING`, and `check-plain` proves the sources build that way. Prefer benign over harmful: a pointer local, a
 recomputed address or a statement reorder usually moves the allocator before a pin does. A raw
 `__asm__`, a bare `register ... asm("reg")` or a `.word` is not source.
@@ -1211,7 +1211,7 @@ matches, use it once, measured, with its reason.
 ```c
 Battler* battler = &g_Battlers[battler_index];   /* the pointer local, not a pin, moves s1 */
 /* FAKE: retail rereads the turn counter after the call; pure C best 97.2%. */
-MATCH_VOLATILE(s32, turn) = g_BattleTurn;
+volatile s32 turn = g_BattleTurn;
 
 battler->hp -= damage;
 ```
@@ -1220,7 +1220,7 @@ battler->hp -= damage;
 
 ```c
 s32 dummy;                                 /* no FAKE: note, no measurement */
-register Battler* battler asm("s1");       /* a raw pin, not MATCH_REG */
+register Battler* battler asm("s1");       /* a raw pin, not FAKE_REG */
 
 dummy = g_BattleTurn;
 if (1) {                                   /* a scope to steer the allocator */
@@ -1529,7 +1529,7 @@ or a type.
 
 These stay:
 
-- a `FAKE:` note on a matching aid;
+- a `FAKE:` note on a fake helper;
 - `@bug`;
 - legal text and tool directives (`clang-format off`, the `M2CTX` and `PERMUTER` guards);
 - one line above an unfinished `INCLUDE_ASM`: the blocker and the first differing instruction.

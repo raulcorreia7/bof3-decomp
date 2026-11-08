@@ -5,7 +5,7 @@
  */
 MATCH void Char_ApplyWeapon(void* character) {
     /* FAKE: record base pinned to s1; the retail allocation keeps kind in s2. */
-    MATCH_REG(u8*, record, "s1");
+    FAKE_REG(u8*, record, "s1");
     u8 kind;
 
     record = character;

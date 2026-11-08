@@ -4,11 +4,11 @@ MATCH void func_8019D648(void) {
     s32 args[3];
     s32 count;
     /* FAKE: retail keeps the source row in s1. */
-    MATCH_REG(s16*, src, "s1");
+    FAKE_REG(s16*, src, "s1");
     u16* base;
     u16* dst;
     /* FAKE: retail keeps the auxiliary base in s0. */
-    MATCH_REG(u16*, aux, "s0");
+    FAKE_REG(u16*, aux, "s0");
     s32  row;
     u16* cur;
     s16* dst_next;

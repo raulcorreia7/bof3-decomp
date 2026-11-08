@@ -12,12 +12,12 @@ extern u8 D_80145F20[];
 NON_MATCHING void func_8009A744(void) {
     u8* slots[6];
     /* FAKE: the base record pointer and the slot counter take retail's s0 and s1 homes (pure-C best 46.40%). */
-    MATCH_REG(u8*, base, "s0");
+    FAKE_REG(u8*, base, "s0");
     u8* row;
     u8* cell;
     u8  value;
     /* FAKE: the slot counter takes retail's s1 home (pure-C best 46.40%). */
-    MATCH_REG(u8, i, "s1");
+    FAKE_REG(u8, i, "s1");
     u8 j;
 
     base     = &g_Characters[MEM_PTR(u8, g_CharSlot)[g_PartyBattleOrder[D_801485C4]]];

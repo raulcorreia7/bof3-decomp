@@ -9,7 +9,7 @@ MATCH void func_801DFDF4(void) {
     u8   tbl;
     u8   tbl2;
     /* FAKE: pin keeps the shared constant 2 in the retail v1 home. */
-    MATCH_REG(u8, two, "v1");
+    FAKE_REG(u8, two, "v1");
 
     toggle     = &D_8014865B;
     pad        = &g_InputPressed;
@@ -36,22 +36,22 @@ MATCH void func_801DFDF4(void) {
             tbl         = D_801E6264[D_801E625C];
             D_8014839F  = two;
             /* FAKE: the order lock steers regalloc */
-            ORDER_LOCK_BEGIN
+            FAKE_ORDER_LOCK_BEGIN
                 count      = D_80148652;
                 D_8014837C = -0x96;
-            ORDER_LOCK_END;
+            FAKE_ORDER_LOCK_END;
             /* FAKE: the order lock steers regalloc */
-            ORDER_LOCK_BEGIN
+            FAKE_ORDER_LOCK_BEGIN
                 D_8014837E = 0x74;
                 D_8014839E = 0xC;
                 ff         = 0xFF;
                 D_8014839D = 7;
                 D_8014839C = 1;
                 D_80148382 = tbl;
-            ORDER_LOCK_END;
+            FAKE_ORDER_LOCK_END;
             tbl2 = D_801E6264[D_801E625C];
             /* FAKE: the order lock steers the tail block's scheduling. */
-            ORDER_LOCK_BEGIN
+            FAKE_ORDER_LOCK_BEGIN
                 count++;
                 D_801483A8 = ff;
                 D_801483A0 = BATTLE_PARTY_STRIDE;
@@ -60,7 +60,7 @@ MATCH void func_801DFDF4(void) {
                 D_801483A2 = 0x3E;
                 D_80148652 = count;
                 D_801483A6 = tbl2;
-            ORDER_LOCK_END;
+            FAKE_ORDER_LOCK_END;
             return;
         }
         SND_PlayCue(EMI_CUE_ID(1, 6));

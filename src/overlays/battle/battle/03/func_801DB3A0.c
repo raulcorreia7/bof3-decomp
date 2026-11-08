@@ -4,7 +4,7 @@ MATCH u8 func_801DB3A0(u32 battler_index, u32 average_threshold, u32 max_thresho
     u16 value;
     int threshold;
     /* FAKE: pin the scaled row offset to v1 so the load keeps v1. */
-    MATCH_REG(u32, offset, "v1");
+    FAKE_REG(u32, offset, "v1");
 
     threshold = average_threshold & HALF_MASK;
     battler_index &= BYTE_MASK;

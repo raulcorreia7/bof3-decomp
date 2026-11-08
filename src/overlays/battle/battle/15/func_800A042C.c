@@ -6,7 +6,7 @@ MATCH void func_800A042C(void) {
     u8  battler_index;
     u8  selection_kind;
     /* FAKE: the retail enemy row index is in v0 and the offset chain in v1. */
-    MATCH_FAKE_PIN(u32, enemy_index, "v0");
+    FAKE_REG(u32, enemy_index, "v0");
 
     battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
@@ -35,6 +35,6 @@ MATCH void func_800A042C(void) {
     selection_kind = g_Battle.target;
     /* FAKE: the barrier keeps the kind materialization out of the case exits
      * so it lands last, in the jal delay slot as retail has it. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFFU);
 }

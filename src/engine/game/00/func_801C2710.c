@@ -19,6 +19,6 @@ MATCH void func_801C2710(void) {
     g_AreaScrollTargetX = ((s32*)state)[13] + ((s32*)state)[3] * state[0x09];
     g_AreaScrollTargetY = ((s32*)state)[14] + ((s32*)state)[4] * state[0x09];
     /* FAKE: barrier pins load after store. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     g_AreaCameraHeightStep = ((s32*)state)[5];
 }

@@ -12,7 +12,7 @@ NON_MATCHING s32 func_801B0E44(void) {
     s32  y;
     s32  result;
     /* FAKE: retail's frame is 16 bytes larger than the statements need. */
-    STACK_PADS(s32, 16);
+    FAKE_STACK_PADS(s32, 16);
 
     saved_dir = g_Task->direction_08;
     result    = func_801B9598();

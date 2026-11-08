@@ -2,7 +2,7 @@
 
 MATCH void func_801F38F4(void) {
     ((Actor*)g_Task)->pos.x.fixed = TO_COORD(18);
-    ORDER_FENCE(); /* FAKE: the order fence keeps the actor store ahead of the target store. */
+    FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the actor store ahead of the target store. */
     g_AreaScrollTargetX           = TO_COORD(18);
     ((Actor*)g_Task)->pos.y.fixed = TO_COORD(36);
     g_AreaScrollTargetY           = TO_COORD(36);

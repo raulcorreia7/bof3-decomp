@@ -5,11 +5,11 @@
  * in order and runs the per-record update.
  */
 MATCH void Area_DrawActors(void) {
-    MATCH_REG(s32, count, "a0"); /* FAKE: retail keeps the record count in a0. */
+    FAKE_REG(s32, count, "a0"); /* FAKE: retail keeps the record count in a0. */
     s32 i;
     s32 j;
     s32 start;
-    MATCH_REG(s32, index, "a2"); /* FAKE: retail keeps the row index in a2. */
+    FAKE_REG(s32, index, "a2"); /* FAKE: retail keeps the row index in a2. */
 
     if (g_AreaDrawFlags & AREA_DRAW_SORTED_RECORDS) {
         count = D_8014832C;

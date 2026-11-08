@@ -11,13 +11,13 @@ MATCH void func_800A8360(void) {
     one       = 1u;
     eight     = 8u;
     /* FAKE: the order lock holds this run in place; without it the match is 87.18%. */
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
         work                = work_base;
         work[0]             = one;
         D_80148572          = one;
         g_BattleChoicePhase = 2u;
         D_8014857D          = 0xFFu;
-    ORDER_LOCK_END;
+    FAKE_ORDER_LOCK_END;
     D_80148574                        = -0xAA;
     g_MenuPanelTasks[16].handler      = eight;
     g_MenuPanelTasks[16].unk_0A       = 0u;

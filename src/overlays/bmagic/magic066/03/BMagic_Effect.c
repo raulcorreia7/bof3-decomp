@@ -21,7 +21,7 @@ MATCH void func_801EEDB8(void) {
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
         /* FAKE: keeps the target selector read after the slot stores, as retail orders it. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         func_800A9610(g_Battle.target_selector, 0x20);
         g_Task->header.mode = g_Task->header.mode + 1;
     }

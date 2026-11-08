@@ -5,10 +5,10 @@ MATCH void func_800C204C(void) {
 
     result = func_801E3160();
     /* FAKE: preserves the retail nop in the call delay slot. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     if (result != 0u) {
         /* FAKE: preserves the retail nop in the branch delay slot. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         ((EnemyBattler*)g_Task)->header.mode++;
         ((EnemyBattler*)g_Task)->header.step = 0u;
     }

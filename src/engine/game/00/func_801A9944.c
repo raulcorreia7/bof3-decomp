@@ -24,7 +24,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
     u8*    target_entry_e9;
     u8*    target_entry_ea;
     /* FAKE: keep the E2 command pointer in the retail v1 register. */
-    MATCH_REG(u8*, target_entry_e2, "v1");
+    FAKE_REG(u8*, target_entry_e2, "v1");
     ScriptState* state;
 
     state        = sub;
@@ -65,7 +65,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
         case 0xE2:
             target_entry_e2 = target_bytes + state->cursor;
             /* FAKE: retain the second 16-bit load at sub+0xA. */
-            next_cursor_e2  = *MATCH_VOLATILE_PTR(u16, &state->cursor);
+            next_cursor_e2  = *FAKE_VOLATILE_PTR(u16, &state->cursor);
             high_byte       = target_entry_e2[1];
             low_byte        = target_entry_e2[2];
             next_cursor_e2  = (next_cursor_e2 + 2);

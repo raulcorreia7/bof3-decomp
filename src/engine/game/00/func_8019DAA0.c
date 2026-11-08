@@ -4,7 +4,7 @@ MATCH s32 func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count) {
     DVECTOR screen;
     u16     size[2];
     /* FAKE: retail reserves frame bytes above size[] that no statement uses. */
-    STACK_PADS(u8, 12);
+    FAKE_STACK_PADS(u8, 12);
     POLY_FT4* primitive;
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;

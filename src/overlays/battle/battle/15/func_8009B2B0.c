@@ -44,7 +44,7 @@ MATCH void func_8009B2B0(void) {
         if (roll >= RANDOM_MASK(0x3F)) {
             /* FAKE: keeps roll live across the compare so the slt result takes v0 as in retail; pure C best 98.06%,
              * no source spelling of the compare moves the result register. */
-            MATCH_FAKE_USE(roll);
+            FAKE_USE(roll);
             g_Battle.ui_step = 2;
         } else if (g_Battle.outcome.surprise == 1) {
             g_Battle.ui_step = 2;

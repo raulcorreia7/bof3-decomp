@@ -8,11 +8,11 @@ MATCH void GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot) {
     u32                       index;
     u32                       stride;
     /* FAKE: retail keeps the dividend in v1. */
-    MATCH_REG(u32, value, "v1");
+    FAKE_REG(u32, value, "v1");
     /* FAKE: retail keeps the divisor in v0. */
-    MATCH_REG(u32, divisor, "v0");
+    FAKE_REG(u32, divisor, "v0");
     /* FAKE: retail keeps the quotient in t0. */
-    MATCH_REG(u32, quotient, "t0");
+    FAKE_REG(u32, quotient, "t0");
     u32 remainder;
     u32 flags;
     u32 product;

@@ -9,7 +9,7 @@ MATCH void func_801990D0(void) {
     s16  clamp;
     u16  mirror_x_value;
     /* FAKE: pin the mirror halfword to v1 so the address keeps v0, as retail. */
-    MATCH_REG(u16, mirror_y_value, "v1");
+    FAKE_REG(u16, mirror_y_value, "v1");
 
     pos_x = &g_AreaCameraAngle.vx;
     cur   = *pos_x;

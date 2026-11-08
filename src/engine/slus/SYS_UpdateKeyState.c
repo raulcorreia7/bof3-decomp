@@ -5,10 +5,10 @@
  */
 MATCH void SYS_UpdateKeyState(void) {
     /* FAKE: pins three live values to the retail v0/v1/a1 homes. */
-    MATCH_REG(u32, pad, "v0");
-    MATCH_REG(u32, high, "v1");
+    FAKE_REG(u32, pad, "v0");
+    FAKE_REG(u32, high, "v1");
     u16 old_first;
-    MATCH_REG(u16, old_second, "a1");
+    FAKE_REG(u16, old_second, "a1");
     /* FAKE: the volatile first record keeps the retail access order. */
     volatile u16* first;
     u16*          second;
@@ -16,12 +16,12 @@ MATCH void SYS_UpdateKeyState(void) {
     pad   = PadRead(0);
     first = &D_80145AA6;
     /* FAKE: keeps the record base in one register. */
-    MATCH_FAKE_OPAQUE(first);
+    FAKE_OPAQUE(first);
     old_first = first[-1];
     first[-1] = pad;
     second    = &D_80145AAE;
     /* FAKE: keeps the record base in one register. */
-    MATCH_FAKE_OPAQUE(second);
+    FAKE_OPAQUE(second);
     old_second = second[-1];
     high       = pad >> 16;
     second[-1] = high;

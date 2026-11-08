@@ -38,9 +38,9 @@ MATCH void Fishing_ChooseAction(void) {
             }
             FISHING_STATE->mode_index_02 = 2;
             /* FAKE: the order lock steers regalloc */
-            ORDER_LOCK_BEGIN
+            FAKE_ORDER_LOCK_BEGIN
                 FISHING_STATE->sub_index_03 = 0;
-            ORDER_LOCK_END;
+            FAKE_ORDER_LOCK_END;
             break;
         case PADL1:
             D_80144125                   = 7;

@@ -12,7 +12,7 @@ the archive and checks the pinned SHA-256.
 
 `tools/setup.py` finishes setup by extracting the disc; it writes `build/`, not this directory.
 `toolchains/rizin/` holds the Rizin release that `bin/rz` runs
-([matching aids](../docs/toolchain.md#matching-aids)).
+([matching tools](../docs/toolchain.md#matching-tools)).
 
 The host tools, setup order, compiler chain and PsyQ evidence are in
 [docs/toolchain.md](../docs/toolchain.md).

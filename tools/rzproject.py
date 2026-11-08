@@ -606,7 +606,7 @@ def run_rizin(root: Path, outputs: Outputs) -> None:
     """Replay the script and fail when it does not save a complete project."""
     if not RIZIN.is_file():
         raise SystemExit(
-            f"{RIZIN}: rizin is missing; install it as docs/toolchain.md#matching-aids says"
+            f"{RIZIN}: rizin is missing; install it as docs/toolchain.md#matching-tools says"
         )
     outputs.project.unlink(missing_ok=True)
     result = subprocess.run(
