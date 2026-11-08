@@ -63,7 +63,8 @@ void        func_801DDFEC(u32 battler_index);
 s16         func_801DE0AC(s32 factor_a, s32 factor_b);
 void        Battle_SetSlotPending(u32 slot);
 void        func_801DE560(u8 event_kind, u8 arg1, u8 arg2, u8 arg3, u8* payload);
-void        func_801E52F0(u16 effect_id);
+/* func_801E52F0 */
+void        Battle_PlayEffectCue(u16 effect_id);
 /* func_801E590C */
 u32         Battle_AllocEffect(u32 mode, u32 handler_index);
 void        func_801E5988(void);

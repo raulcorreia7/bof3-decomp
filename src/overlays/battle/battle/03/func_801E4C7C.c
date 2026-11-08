@@ -8,7 +8,7 @@ MATCH void func_801E4C7C(void) {
     count = work->unk_09;
     if (count == 0) {
         if (BATTLE_IS_SCRIPTED()) {
-            func_801E52F0(g_BattleCurrentEnemy->unk_E8[1]);
+            Battle_PlayEffectCue(g_BattleCurrentEnemy->unk_E8[1]);
         } else {
             SND_PlayCue((g_BattleCurrentEnemy->kind * 2) | 0x601);
         }

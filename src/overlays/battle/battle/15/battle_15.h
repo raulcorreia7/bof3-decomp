@@ -760,7 +760,8 @@ bool        func_800AB470(u8 battler_index);
 bool        func_800AB4BC(s32 kind_index);
 void        func_800AB570(s32 battler_index);
 u8          func_800AB68C(u8 excluded_slot);
-extern void func_800ABBE0(void);
+/* func_800ABBE0 */
+extern void Battle_LoadScriptedEncounter(void);
 extern void func_800ABC30(void);
 extern void Battle_LoadEncounterEnemies(void);
 void        func_800AD0A8(s32 enemy_index, s32 unit_index);

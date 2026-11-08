@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E52F0(u16 effect_id) {
+/* func_801E52F0 */
+MATCH void Battle_PlayEffectCue(u16 effect_id) {
     u16 masked_id;
 
     masked_id = effect_id & HALF_MASK;

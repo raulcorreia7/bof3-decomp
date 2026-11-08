@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801DA408(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b) {
+/* func_801DA408 */
+MATCH void Battle_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b) {
     LINE_F2* primitive;
 
     primitive = (LINE_F2*)BATTLE_GLOBAL_WORD_598C;

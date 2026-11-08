@@ -723,7 +723,8 @@ void         func_801D9C80(s16 x, s16 y, u8 template_index, u8 shade);
 void         func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
 void         func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4);
 void         func_801DA078(s32 x, s32 y, s32 u_index);
-void         func_801DA408(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
+/* func_801DA408 */
+void         Battle_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
 void         func_801DA4B4(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
 void         func_801DA5A8(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
 u8           func_801DA69C(u32 enemy_index);

@@ -111,10 +111,10 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s3 = var_s6 & BYTE_MASK;
     var_s4 = tex_u;
     var_s2 &= BYTE_MASK;
-    func_801DA408((s16)var_s0, (s16)(var_s7 + 2), (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
-                  (u8)var_s2);
-    func_801DA408((s16)(var_fp + 2), (s16)var_s1, (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
-                  (u8)var_s2);
+    Battle_DrawLine((s16)var_s0, (s16)(var_s7 + 2), (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
+                    (u8)var_s2);
+    Battle_DrawLine((s16)(var_fp + 2), (s16)var_s1, (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
+                    (u8)var_s2);
 }
 #else
 INCLUDE_ASM(func_801D8690);

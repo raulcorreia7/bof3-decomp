@@ -111,7 +111,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     panel_bottom_y = panel_bottom_y >> 0x10;
     shadow_green   = color_g;
     shadow_blue &= BYTE_MASK;
-    func_801DA408(panel_right_x, (panel_y + 2), panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
-    func_801DA408((panel_x + 2), panel_bottom_y, panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
+    Battle_DrawLine(panel_right_x, (panel_y + 2), panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
+    Battle_DrawLine((panel_x + 2), panel_bottom_y, panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
 }
 #endif
