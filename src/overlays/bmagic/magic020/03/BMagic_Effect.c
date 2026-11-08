@@ -88,7 +88,7 @@ MATCH void func_801EF5A4(void) {
 }
 
 MATCH void func_801EF608(void) {
-    if ((BATTLE_ACTIVE_WORK->param.unk_0B == 0) && (func_8014DAEC() & 0xFF)) {
+    if ((BATTLE_ACTIVE_WORK->param.unk_0B == 0) && (func_8014DAEC() & BYTE_MASK)) {
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }
@@ -99,7 +99,7 @@ MATCH void func_801EF678(void) {
 
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         s8 tone;
 
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
@@ -193,7 +193,7 @@ INCLUDE_ASM(func_801EFAF4);
 INCLUDE_ASM(func_801EFBA0);
 
 MATCH void func_801EFD10(void) {
-    if (func_8014D978() & 0xFF) {
+    if (func_8014D978() & BYTE_MASK) {
         if (g_Task->param.unk_0B == 7) {
             func_800A9820(g_Battle.target_selector);
         }

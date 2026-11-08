@@ -18,7 +18,7 @@ MATCH void func_801EF08C(void) {
         }
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
-        if (!(counter & 0xFF)) {
+        if (!(counter & BYTE_MASK)) {
             g_Task->header.mode += 1;
         }
     }
@@ -30,7 +30,7 @@ MATCH void func_801EF134(void) {
     if (D_801EC2E4 == 0) {
         if (g_Task->timer == 0x38) {
             item = g_Task->unk_2C.half;
-            BMagic_SetTextItemName(item & 0xFF, item >> 8);
+            BMagic_SetTextItemName(item & BYTE_MASK, item >> 8);
         }
         func_801DE8C0(1, 0x1E, Resource_GetText(g_Task->timer));
         g_Task->header.mode += 1;
@@ -41,7 +41,7 @@ MATCH void func_801EF1CC(void) {
     u16* battle_flags;
 
     if (D_801EC2E4 == 0) {
-        battle_flags = &g_Battle.state;
+        battle_flags = &g_BattleState;
         *battle_flags |= 4;
         func_801E5988();
     }
@@ -76,8 +76,8 @@ MATCH void func_801EF328(void) {
 }
 
 MATCH void func_801EF394(void) {
-    if (func_8014DAEC() & 0xFF) {
-        func_800A9820(g_Battle.target_selector);
+    if (func_8014DAEC() & BYTE_MASK) {
+        func_800A9820(g_BattleTargetSelector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }

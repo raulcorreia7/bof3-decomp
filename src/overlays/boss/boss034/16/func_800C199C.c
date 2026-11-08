@@ -8,7 +8,7 @@ MATCH void func_800C199C(void) {
     if (timer == ((PartyMember*)g_Task)->timer) {
         flags = &g_Battle.boss_flags;
         if (!(*flags & 4)) {
-            SND_PlayCue(0x601U);
+            SND_PlayCue(EMI_CUE_ID(6, 1));
             *flags |= 4;
         }
         func_801D9DBC(0, 0, 0xB, 0xFFFF, 1);

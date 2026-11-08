@@ -16,7 +16,7 @@ MATCH void func_801EEEF4(void) {
     battler        = g_Battle.selected_actor;
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
-    if (!(value & 0xFF)) {
+    if (!(value & BYTE_MASK)) {
         battler->unk_5C = 1;
         GFX_FreePaletteFadeTarget(battler);
         g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);

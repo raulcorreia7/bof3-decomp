@@ -72,12 +72,12 @@ MATCH void func_801EEF34(void) {
     u8 temp_v1;
 
     temp_a0 = g_Task->unk_09;
-    if ((temp_a0 & 0xFF) != 0x20) {
+    if ((temp_a0 & BYTE_MASK) != 0x20) {
         g_Task->unk_09 = temp_a0 + 1;
     }
     temp_v1       = g_Task->timer - 1;
     g_Task->timer = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x30) {
+    if ((temp_v1 & BYTE_MASK) == 0x30) {
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
@@ -160,7 +160,7 @@ MATCH void func_801EF23C(void) {
     }
     temp_v1       = g_Task->timer + 1;
     g_Task->timer = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x80) {
+    if ((temp_v1 & BYTE_MASK) == 0x80) {
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
     }
@@ -258,7 +258,7 @@ MATCH void func_801EFE88(void) {
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         src                 = D_8014637C;
         g_Task->pos.x.fixed = src->pos.x.fixed;
         g_Task->pos.y.fixed = src->pos.y.fixed;

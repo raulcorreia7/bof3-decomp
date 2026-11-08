@@ -4,7 +4,7 @@
  */
 /* func_801EFF28 (magic001), func_801F0024 (magic056) */
 MATCH void Effect_PrimeTintOnScriptReady(void) {
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;

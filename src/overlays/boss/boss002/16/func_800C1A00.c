@@ -5,8 +5,8 @@ MATCH void func_800C1A00(void) {
 
     work = g_BattleCurrentEnemy;
     if (work->hp == 0xFFFF) {
-        g_Battle.action_type = 3;
-        TASK_BYTES[4]        = 0;
-        SND_QueueSelectionFx(0x602);
+        g_BattleActionType = 3;
+        TASK_BYTES[4]      = 0;
+        SND_QueueSelectionFx(EMI_CUE_ID(6, 2));
     }
 }

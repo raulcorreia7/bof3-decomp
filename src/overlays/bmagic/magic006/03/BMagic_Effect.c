@@ -37,7 +37,7 @@ MATCH void func_801EEF28(void) {
 
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
-    if (!(value & 0xFF)) {
+    if (!(value & BYTE_MASK)) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(128);
@@ -132,7 +132,7 @@ MATCH void func_801F020C(void) {
     }
     counter        = g_Task->unk_09 + 0x10;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0x80) {
+    if ((counter & BYTE_MASK) == 0x80) {
         g_Task->header.step += 1;
     }
 }

@@ -95,7 +95,7 @@ MATCH void func_801F0010(void) {
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
-    if ((timer & 0xFF) == 0) {
+    if ((timer & BYTE_MASK) == 0) {
         reset         = g_Task;
         reset->unk_14 = -0x10;
         reset->timer  = 8;
@@ -123,7 +123,7 @@ MATCH void func_801F0104(void) {
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
-    if ((timer & 0xFF) == 0) {
+    if ((timer & BYTE_MASK) == 0) {
         g_Task->timer = 0x1C - g_Task->param.unk_0B;
         g_Task->header.step += 1;
     }
@@ -157,7 +157,7 @@ MATCH void func_801F01F8(void) {
     if (g_Task->unk_0C == 4) {
         value4        = g_Task->timer - 1;
         g_Task->timer = value4;
-        if (!(value4 & 0xFF)) {
+        if (!(value4 & BYTE_MASK)) {
             value5 = g_Task->unk_03;
             if (!(value5 & 0xF0)) {
                 value3 = 0x102;

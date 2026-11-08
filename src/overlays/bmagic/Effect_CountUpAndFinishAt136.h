@@ -10,7 +10,7 @@ MATCH void Effect_CountUpAndFinishAt136(void) {
     g_Task->unk_04 -= 1;
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0x88) {
+    if ((counter & BYTE_MASK) == 0x88) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
         func_801E5988();
     }

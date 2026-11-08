@@ -91,7 +91,7 @@
     tick             = (WORK)->unk_06 + 1;                                             \
     (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                \
     (WORK)->unk_06   = tick;                                                           \
-    if ((tick & 0xFF) == (WORK)->unk_07) {                                             \
+    if ((tick & BYTE_MASK) == (WORK)->unk_07) {                                        \
         (WORK)->header.step += 1;                                                      \
     }
 

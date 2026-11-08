@@ -72,13 +72,13 @@ MATCH void func_801EF1D0(void) {
     if (g_Task->param.unk_0B != 0) {
         value          = g_Task->unk_09 + 4;
         g_Task->unk_09 = value;
-        if ((value & 0xFF) == 0x10) {
+        if ((value & BYTE_MASK) == 0x10) {
             g_Task->param.unk_0B = 0;
         }
     } else {
         value2         = g_Task->unk_09 - 2;
         g_Task->unk_09 = value2;
-        if (!(value2 & 0xFF)) {
+        if (!(value2 & BYTE_MASK)) {
             g_Task->param.unk_0B = 1;
         }
     }
@@ -156,12 +156,12 @@ MATCH void func_801EF9C4(void) {
 
     func_801EFA84();
     timer = g_Task->timer;
-    if ((timer & 0xFF) != 0x18) {
+    if ((timer & BYTE_MASK) != 0x18) {
         g_Task->timer = timer + 4;
     }
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0x14) {
+    if ((counter & BYTE_MASK) == 0x14) {
         g_Task->header.step += 1;
     }
 }

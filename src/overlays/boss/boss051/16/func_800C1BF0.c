@@ -14,7 +14,7 @@ MATCH void func_800C1BF0(void) {
     value  = value2 & 0xFF;
     if (value != 0xFF) {
         if (value == 0) {
-            SND_PlayCue(0x601U);
+            SND_PlayCue(EMI_CUE_ID(6, 1));
             g_Task->unk_09 = 0xFF;
         } else {
             battler->unk_09 = value2 - 1;

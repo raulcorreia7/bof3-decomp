@@ -28,7 +28,7 @@ MATCH void func_801EEE60(void) {
     }
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
-    if ((timer & 0xFF) == 0x10) {
+    if ((timer & BYTE_MASK) == 0x10) {
         g_Task->header.mode += 1;
     }
 }
@@ -41,7 +41,7 @@ MATCH void func_801EEF64(void) {
     func_801EFDDC();
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0x40) {
+    if ((counter & BYTE_MASK) == 0x40) {
         SND_QueueSelectionFx(0x101);
         SND_QueueSelectionFx(0x102);
         g_Task->unk_09 = 0x30;
@@ -98,7 +98,7 @@ MATCH void func_801F0070(void) {
     if (BATTLE_ACTIVE_WORK->header.mode == 3) {
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
-        if (!(counter & 0xFF)) {
+        if (!(counter & BYTE_MASK)) {
             g_Task->header.mode += 1;
         }
     }
@@ -110,7 +110,7 @@ MATCH void func_801F00D8(void) {
     func_801F012C();
     temp_v1        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x20) {
+    if ((temp_v1 & BYTE_MASK) == 0x20) {
         func_801E5988();
     }
 }

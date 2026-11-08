@@ -46,7 +46,7 @@ MATCH void func_801EEFF4(void) {
     SP_REF(s16, 0) = g_Task->unk_09 * 0x1C;
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0x8) {
+    if ((counter & BYTE_MASK) == 0x8) {
         g_Task->header.step += 1;
     }
 }
@@ -101,7 +101,7 @@ MATCH void func_801EFC70(void) {
     g_Task->timer += 2;
     temp_v0        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v0;
-    if ((temp_v0 & 0xFF) == 8) {
+    if ((temp_v0 & BYTE_MASK) == 8) {
         g_Task->header.step += 1;
     }
 }
@@ -117,7 +117,7 @@ MATCH void func_801EFCF4(void) {
     drop         = (VOL(u8, work->unk_09) - 8) / 2;
     work->unk_09 = counter;
     work->unk_30.half -= drop;
-    if ((counter & 0xFF) == 0x1C) {
+    if ((counter & BYTE_MASK) == 0x1C) {
         g_Task->header.step += 1;
     }
 }
@@ -127,12 +127,12 @@ MATCH void func_801EFD74(void) {
 
     func_800AF764();
     g_Task->unk_30.half -= (g_Task->unk_09 - 8) / 2;
-    if ((g_Task->unk_09 & 0xFF) != 0x2C) {
+    if ((g_Task->unk_09 & BYTE_MASK) != 0x2C) {
         g_Task->unk_09 = g_Task->unk_09 + 1;
     }
     counter       = g_Task->timer - 1;
     g_Task->timer = counter;
-    if (!(counter & 0xFF)) {
+    if (!(counter & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }

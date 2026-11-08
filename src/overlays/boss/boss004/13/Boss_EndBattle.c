@@ -1,7 +1,7 @@
 #include "boss004_13.h"
 
 MATCH void Boss_EndBattle(void) {
-    if (g_Battle.outcome.result & 1) {
+    if (g_BattleOutcome.result & BATTLE_RESULT_DEFEAT) {
         func_800AC844(0);
         func_800AC844(1);
         return;
