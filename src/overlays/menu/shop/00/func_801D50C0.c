@@ -3,7 +3,7 @@
 MATCH void func_801D50C0(void) {
     u8 count;
 
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    MENU_DRAW_HEADER();
     WinDrawCueText(28, 22, 0x9F);
     SAVE_DrawSlots(0x20, 0x30, 0);
     if ((Menu_ToggleOption() & BYTE_MASK) != 0) {

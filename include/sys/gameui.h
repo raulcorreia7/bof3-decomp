@@ -47,6 +47,10 @@ extern AreaDrawState g_AreaDrawState;
 #define MENU_HEADER_HEIGHT      19
 #define MENU_HEADER_SHORT_WIDTH 72
 
+/* Draw the menu header bar at its resting row in the player's window style. */
+#define MENU_DRAW_HEADER()                                                                                 \
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle)
+
 /* The rows of the equip stat window, top to bottom. */
 typedef enum EquipStatRow {
     EQUIP_STAT_ROW_POWER   = 0,

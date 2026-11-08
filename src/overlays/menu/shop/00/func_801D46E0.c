@@ -4,7 +4,7 @@ MATCH void func_801D46E0(void) {
     u8* counter;
     u8  count;
 
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    MENU_DRAW_HEADER();
     counter  = &D_80148652;
     count    = *counter;
     *counter = count + 1;

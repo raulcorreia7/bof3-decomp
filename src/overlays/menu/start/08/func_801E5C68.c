@@ -6,7 +6,7 @@ MATCH void func_801E5C68(void) {
 
     step = 3;
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    MENU_DRAW_HEADER();
     g_MenuStartReturnStep = 2;
     switch (g_SaveCardStatus) {
         case CARD_EVENT_TIMEOUT:
