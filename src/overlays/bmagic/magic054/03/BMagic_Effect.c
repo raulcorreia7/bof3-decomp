@@ -53,7 +53,7 @@ MATCH void func_801EF43C(void) {
     func_8014D978();
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    if (!(temp_v0 & BYTE_MASK)) {
         g_Task->unk_18 = 0x60;
         g_Task->unk_1C = -0x80;
         g_Task->header.step += 1;
@@ -78,7 +78,7 @@ MATCH void func_801EF534(void) {
     u8 value;
     u8 value2;
 
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
             value2                                     = g_Task->param.unk_0B;
             g_BattleEnemyBattlers[value2].header.flags = g_BattleEnemyBattlers[value2].header.flags & 0xBF;

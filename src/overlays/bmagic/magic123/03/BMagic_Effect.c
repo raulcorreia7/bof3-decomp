@@ -49,7 +49,7 @@ MATCH void func_801EF4AC(void) {
     g_Task->unk_09 += 1;
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         Actor_Clear();
         return;

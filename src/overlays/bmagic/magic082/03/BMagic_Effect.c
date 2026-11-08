@@ -78,7 +78,7 @@ MATCH void func_801EFEF4(void) {
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
-    if ((timer & 0xFF) == 0) {
+    if ((timer & BYTE_MASK) == 0) {
         reset         = g_Task;
         reset->unk_14 = -0x10;
         reset->timer  = 8;
@@ -106,7 +106,7 @@ MATCH void func_801EFFE8(void) {
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
-    if ((timer & 0xFF) == 0) {
+    if ((timer & BYTE_MASK) == 0) {
         g_Task->timer = 0x1C - g_Task->param.unk_0B;
         g_Task->header.step += 1;
     }
@@ -138,7 +138,7 @@ MATCH void func_801F00DC(void) {
     if (g_Task->unk_0C == 4) {
         value3        = g_Task->timer - 1;
         g_Task->timer = value3;
-        if (!(value3 & 0xFF)) {
+        if (!(value3 & BYTE_MASK)) {
             if (g_Task->param.unk_0B == 0) {
                 SND_QueueSelectionFx(0x101);
             }

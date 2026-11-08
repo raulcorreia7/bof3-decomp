@@ -62,14 +62,14 @@ MATCH void func_801EF788(void) {
     u8 temp_v0;
 
     temp_a0 = g_Task->unk_09;
-    if ((temp_a0 & 0xFF) != 0xFF) {
+    if ((temp_a0 & BYTE_MASK) != 0xFF) {
         temp_v0        = temp_a0 - 1;
         g_Task->unk_09 = temp_v0;
-        if (!(temp_v0 & 0xFF)) {
+        if (!(temp_v0 & BYTE_MASK)) {
             func_800AFC98(2, 5);
         }
     }
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         g_Task->unk_09 = 8;
         g_Task->header.step += 1;
     }

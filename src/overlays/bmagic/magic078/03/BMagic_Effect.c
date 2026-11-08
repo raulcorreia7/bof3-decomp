@@ -20,7 +20,7 @@ MATCH void func_801EF08C(void) {
     u8 temp_a1;
 
     temp_a1 = g_Task->unk_09;
-    if ((temp_a1 & 0xFF) == 0xC) {
+    if ((temp_a1 & BYTE_MASK) == 0xC) {
         g_Task->timer = 0xF;
         g_Task->header.step += 1;
         return;
@@ -128,7 +128,7 @@ MATCH void func_801F00EC(void) {
     u8 temp_a0;
 
     temp_a0 = g_Task->unk_09;
-    if ((temp_a0 & 0xFF) == 8) {
+    if ((temp_a0 & BYTE_MASK) == 8) {
         SND_QueueSelectionFx(0x101);
         g_Task->header.step += 1;
         return;

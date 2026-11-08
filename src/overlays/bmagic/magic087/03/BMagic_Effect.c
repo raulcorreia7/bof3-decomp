@@ -36,7 +36,7 @@ MATCH void func_801EF4A0(void) {
 
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
-    if ((counter & 0xFF) == 0x10) {
+    if ((counter & BYTE_MASK) == 0x10) {
         g_Task->header.step += 1;
         return;
     }
@@ -78,7 +78,7 @@ MATCH void func_801EFA2C(void) {
 
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
-    if (!(value & 0xFF)) {
+    if (!(value & BYTE_MASK)) {
         g_Task->unk_0C = 0x100;
         g_Task->unk_18 = 4;
         if (g_Task->header.mode != 0) {
@@ -111,7 +111,7 @@ MATCH void func_801EFCE0(void) {
 
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.flags = 0;
         g_Task->header.mode  = 0;
