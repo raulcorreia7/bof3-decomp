@@ -2,8 +2,7 @@
 
 /* Shows the selected battler's damage step and adjusts the HP bar.
  */
-/* nonmatching unmeasured: tried the first draft rewritten with typed HP record views and flag checks. resume: close the
- * +0x0 branch (early-return shape). */
+/* NON_MATCHING: delayed battler load, repeated load and uncached enemy tried; first diff 0x8009E248, prologue. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009E248(void) {
     s32 id;
@@ -14,7 +13,7 @@ NON_MATCHING void func_8009E248(void) {
     id = g_Battle.active_battler;
     if (!(func_800A3A10(id, g_Battle.target) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
-            if (!(g_Game.members[g_Battle.target].turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {
+            if (!(g_Game.members[g_Battle.target].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {
                 hp = g_Game.members[g_Battle.target].chr.hp;
             } else {
                 hp = 0;
