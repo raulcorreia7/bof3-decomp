@@ -1,6 +1,4 @@
 #include "boss051_16.h"
-#include "game/enemy.h"
-#include "overlays/battle/battle.h"
 
 MATCH void func_800C1900(void) {
     u8           slot;
