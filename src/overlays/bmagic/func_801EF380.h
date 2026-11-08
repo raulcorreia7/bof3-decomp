@@ -4,8 +4,8 @@
  * every member. */
 /* func_801EF380 (magic070), func_801EF380 (magic071), func_801EF380 (magic072) */
 MATCH void func_801EF380(void) {
-    BattleHandlerTable3 handlers;
-    u8                  radius;
+    EffectStepFuncs3 handlers;
+    u8               radius;
 
     handlers = D_801EEC1C;
     handlers.handlers[D_801F17B4->header.step]();

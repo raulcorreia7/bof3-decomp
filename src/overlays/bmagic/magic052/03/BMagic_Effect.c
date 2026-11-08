@@ -33,7 +33,7 @@ MATCH void func_801EEE94(void) {
 }
 
 MATCH void func_801EEEE0(void) {
-    BattleHandlerTable3 handlers = D_801EEC10;
+    EffectStepFuncs3 handlers = D_801EEC10;
 
     g_ScriptBank = 0x800F0800;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);

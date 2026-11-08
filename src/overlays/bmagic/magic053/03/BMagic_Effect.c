@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC10(void) {
-    BattleHandlerTable3 handlers = D_801EEC04;
-    PartyBattler*       saved_task;
-    PartyBattler*       saved_battler;
-    u8                  i;
+    EffectStepFuncs3 handlers = D_801EEC04;
+    PartyBattler*    saved_task;
+    PartyBattler*    saved_battler;
+    u8               i;
 
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
 

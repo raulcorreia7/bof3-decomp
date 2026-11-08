@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801E6C84(void) {
-    BattleHandlerTable5 handlers;
+    EffectStepFuncs5 handlers;
 
     handlers = D_801D0F44;
     if (g_BattleMode != 5) {

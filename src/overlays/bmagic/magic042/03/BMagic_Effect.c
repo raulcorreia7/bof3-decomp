@@ -17,7 +17,7 @@ MATCH void func_801EEDA4(void) {
 }
 
 MATCH void func_801EEDE8(void) {
-    BattleHandlerTable5 handlers;
+    EffectStepFuncs5 handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);

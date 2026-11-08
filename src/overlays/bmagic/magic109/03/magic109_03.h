@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable4 D_801EEC04;
+extern EffectStepFuncs4 D_801EEC04;
 
 void func_801EF0F8(s32 offset);
 

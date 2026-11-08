@@ -5,9 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable4 D_801EEC04;
+extern EffectStepFuncs4 D_801EEC04;
 /* The x/y speed pairs the step indexes by the work counter. */
-extern s16                 D_801F004C[];
+extern s16              D_801F004C[];
 
 void                func_801EF2F0(void);
 void                func_801EF880(void);

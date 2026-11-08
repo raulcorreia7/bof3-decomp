@@ -61,8 +61,8 @@ MATCH void func_801EF724(void) {
 }
 
 MATCH void func_801EF768(void) {
-    BattleHandlerTable3 handlers;
-    u8                  radius;
+    EffectStepFuncs3 handlers;
+    u8               radius;
 
     handlers = D_801EEC1C;
     handlers.handlers[D_801F21F0->header.step]();

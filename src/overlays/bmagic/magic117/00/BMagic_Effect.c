@@ -16,7 +16,7 @@ INCLUDE_ASM(func_801EEE40);
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF000(void) {
-    BattleHandlerTable4 handlers;
+    EffectStepFuncs4 handlers;
 
     handlers = D_801EEC14;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);

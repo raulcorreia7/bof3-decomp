@@ -6,14 +6,14 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BattleEffect* volatile D_801EC2E0;
-extern BattleHandlerTable4 D_801EEC10;
-extern BattleHandlerTable3 D_801EEC20;
+extern EffectStepFuncs4 D_801EEC10;
+extern EffectStepFuncs3 D_801EEC20;
 
-extern BattleHandlerTable3 D_801EEC2C;
+extern EffectStepFuncs3 D_801EEC2C;
 
-extern BattleHandlerTable3 D_801EEC38;
+extern EffectStepFuncs3 D_801EEC38;
 
-extern BattleHandlerTable3 D_801EEC44;
+extern EffectStepFuncs3 D_801EEC44;
 
 extern u8 D_801EFADC[];
 #endif

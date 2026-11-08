@@ -17,8 +17,8 @@ MATCH void func_801EEF48(void) {
 }
 
 MATCH void func_801EEF8C(void) {
-    BattleHandlerTable4 handlers = D_801EEC10;
-    u8                  next_09;
+    EffectStepFuncs4 handlers = D_801EEC10;
+    u8               next_09;
 
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {

@@ -5,8 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8                  g_BattleActiveBattler;
-extern BattleHandlerTable3 D_801EEC3C;
+extern u8               g_BattleActiveBattler;
+extern EffectStepFuncs3 D_801EEC3C;
 
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->param.unk_0B == 0) {
