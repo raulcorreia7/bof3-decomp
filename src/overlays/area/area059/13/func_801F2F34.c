@@ -1,7 +1,10 @@
 #include "area059_13.h"
 
 MATCH s32 func_801F2F34(void) {
-    /* CLEANUP: replace the expanded product with (-(s32)record * 0xD79435E5) >> 3. */
+    /* CLEANUP: the shift-and-subtract run is GCC's exact division of the pointer difference, so
+     * the readable form is D_80146867 = g_ScriptWorkRecord - g_Actors. That form compiles the
+     * same multiply, but its stores and registers still differ (tried plain, a shared mode local
+     * and barriers). */
     /* FAKE: the product needs the retail temporary registers. */
     MATCH_FAKE_PIN(s32, step, "v1");
     MATCH_FAKE_PIN(s32, part, "a0");
