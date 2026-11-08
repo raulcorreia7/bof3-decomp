@@ -7,7 +7,7 @@ MATCH void func_801F2E88(void) {
     if (!(g_Task->timer & 3)) {
         result = func_801F3800();
         if (result != 0) {
-            func_801F37A4(result);
+            func_801F37A4((u8*)result);
         }
     }
     func_801F38B0();
