@@ -259,9 +259,9 @@ MATCH void func_801FC7D4(void) {
     g_SceneState.state_04 = 1;
 }
 
-MATCH s32 func_801FC80C(s32 arg0) {
+MATCH s32 func_801FC80C(s32 y) {
     if ((g_GameAreaId == AREA_ID_STEEL_BEACH_MAP) && (SYS_TestFlag(g_SceneFlags, 0) != 0)) {
-        if (arg0 <= TO_COORD(22)) {
+        if (y <= TO_COORD(22)) {
             Game_SetScriptActive();
             D_80146875 = 0x3C;
             D_80146874 = 2;

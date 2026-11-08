@@ -34,7 +34,7 @@ extern u8 D_801F364E[];
 extern u8 D_801F368C[];
 extern u8 D_801F368E[];
 
-void func_801F31B0(s32 arg0);
+void func_801F31B0(s32 slot);
 s32  func_801F33B0(void);
 
 void func_801F3268(s32 arg0);

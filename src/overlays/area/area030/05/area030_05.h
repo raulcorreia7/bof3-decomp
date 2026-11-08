@@ -60,7 +60,7 @@ void func_800F5BA4(void);
 void func_800F5BE0(void);
 void func_800F5D98(void);
 void func_800F5E44(void);
-void func_800F606C(s32 arg0);
+void func_800F606C(s32 draw_all);
 void func_800F63CC(u16 x, u16 y, u8 color);
 u8   func_800F65A8(s32 slot, s32 amount);
 u8   func_800F66D4(void);
@@ -74,7 +74,7 @@ void func_800F7100(void);
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 /* func_8016628C */
 s32  Item_Count(u8 category, u8 item, u8 mode);
-void func_801D799C(s16 arg0, s16 arg1, s32 arg2, s32 arg3);
-s32  func_801D9534(s16 arg0, u16 arg1, s16 arg2, s16 arg3, s32 arg4);
+void func_801D799C(s16 x, s16 y, u8 height, u8 style);
+s32  func_801D9534(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
 
 #endif

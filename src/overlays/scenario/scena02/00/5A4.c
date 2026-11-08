@@ -286,7 +286,7 @@ MATCH void func_801FCB94(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
 }
 
-MATCH void func_801FCBDC(s32 arg0) {
+MATCH void func_801FCBDC(s32 delta) {
     u8* state;
     s32 amount;
     s32 amount_2;
@@ -296,7 +296,7 @@ MATCH void func_801FCBDC(s32 arg0) {
     state = &D_80146865;
     switch (*state) {
         case 0:
-            amount                   = arg0 & BYTE_MASK;
+            amount                   = delta & BYTE_MASK;
             g_AreaCameraRefreshCount = 2;
             frame                    = D_80146867 + 1;
             D_80146867               = frame;
@@ -312,7 +312,7 @@ MATCH void func_801FCBDC(s32 arg0) {
             }
             return;
         case 1:
-            amount_2                 = arg0 & BYTE_MASK;
+            amount_2                 = delta & BYTE_MASK;
             g_AreaCameraRefreshCount = 2;
             frame_2                  = D_80146867 + 1;
             D_80146867               = frame_2;

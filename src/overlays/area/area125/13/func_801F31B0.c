@@ -1,6 +1,6 @@
 #include "area125_13.h"
 
-MATCH void func_801F31B0(s32 arg0) {
+MATCH void func_801F31B0(s32 slot) {
     AreaSprite* sprite;
     u8          index;
     s32         x;
@@ -8,7 +8,7 @@ MATCH void func_801F31B0(s32 arg0) {
     s32         z;
     s32         w;
 
-    index  = arg0;
+    index  = slot;
     sprite = (AreaSprite*)Area_FindFreeWorkRow();
     if (sprite != NULL) {
         sprite->unk_00[0] = 1;

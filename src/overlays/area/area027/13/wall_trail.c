@@ -344,14 +344,14 @@ MATCH void func_801F2E3C(AreaTrail* trail) {
     Area_ProjectPoint(out, trail->points);
 }
 
-MATCH void func_801F2F0C(const void* arg0) {
+MATCH void func_801F2F0C(const void* trail) {
     const u8* work;
     u8        i;
     LINE_G2*  primitive;
     u16       red;
     u32       index;
 
-    work = (const u8*)arg0;
+    work = (const u8*)trail;
     GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
     i = 0u;
     do {

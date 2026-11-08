@@ -841,7 +841,7 @@ u8      func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 void    func_801ABEE0(void);
 VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind);
 void    func_801AC0A0(s8 tuning_delta);
-bool    func_801AC33C(s32 ease_in, s32 arg1);
+bool    func_801AC33C(s32 ease_in, s32 distance);
 void    func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value_18, s32 value_1C, s32 extra_value);
 u16     func_801AC8F0(ScriptState* state, u8 wanted_id, u8* base);
 void    func_801AC9D0(void);

@@ -6,7 +6,7 @@
  * declared; candidate 60.27%. resume: a source shape that reproduces the retail's cell, row and enemy-row address
  * forms. */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
+NON_MATCHING void func_801D88E0(s16 x, s16 y) {
     /* FAKE: unused frame, 8 bytes. */
     FAKE_STACK_PADS(u8, 8);
     s16  last_y;
@@ -24,8 +24,8 @@ NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
     u8*  accessory_name;
     u8   accessory_flags;
 
-    panel_x = arg0;
-    panel_y = arg1;
+    panel_x = x;
+    panel_y = y;
     func_801D8D70((u16)panel_x, (u16)panel_y);
     UI_DrawText((s16)(panel_x + 51), (s16)(panel_y + 7), 0, 5U, (&D_801E21D4));
     x0              = panel_x;

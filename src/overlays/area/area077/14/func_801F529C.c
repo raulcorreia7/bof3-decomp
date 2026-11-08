@@ -1,6 +1,6 @@
 #include "area077_14.h"
 
-MATCH void func_801F529C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+MATCH void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y) {
     u32  base;
     s32* src;
     s32* dst;
@@ -9,8 +9,8 @@ MATCH void func_801F529C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     base = 0x80037800;
     i    = 0;
-    dst  = (s32*)((arg2 << 9) + ((arg3 << 5) + base));
-    src  = (s32*)((arg0 << 9) + ((arg1 << 5) + base));
+    dst  = (s32*)((dst_x << 9) + ((dst_y << 5) + base));
+    src  = (s32*)((src_x << 9) + ((src_y << 5) + base));
     do {
         temp = *src;
         src += 1;

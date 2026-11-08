@@ -358,13 +358,13 @@ MATCH void func_800F5E44(void) {
     GFX_AddPrim(7, sizeof(DR_MODE));
 }
 
-MATCH void func_800F606C(s32 arg0) {
+MATCH void func_800F606C(s32 draw_all) {
     s32 h;
     u8  w;
     s32 i;
     int new_var;
     u8  n;
-    n = arg0 & BYTE_MASK;
+    n = draw_all & BYTE_MASK;
     func_800F63CC(0x14, 0x38, n);
     UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF,
                 MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_TRADE_ITEM_LABEL));
@@ -372,7 +372,7 @@ MATCH void func_800F606C(s32 arg0) {
         h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)],
                            ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
         w = func_800F65A8(i & BYTE_MASK, 1);
-        if ((arg0 & BYTE_MASK) != 0) {
+        if ((draw_all & BYTE_MASK) != 0) {
             UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
             func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
                           D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
