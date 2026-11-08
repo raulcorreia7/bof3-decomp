@@ -60,7 +60,8 @@ MATCH void func_801EF254(void) {
 }
 
 /* Projects the point and the points half a unit to its left and right to the screen. */
-MATCH void func_801EF2C0(ProjectedSpan* span) {
+/* func_801EF2C0 */
+MATCH void BMagic_ProjectSpan(ProjectedSpan* span) {
     Area_ProjectPoint(span->pos, &span->screen[1]);
     span->pos[0] -= COORD_HALF;
     Area_ProjectPoint(span->pos, &span->screen[0]);

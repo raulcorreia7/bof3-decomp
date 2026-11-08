@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E5768(void) {
+/* func_801E5768 */
+MATCH void Battle_HandleDesertDefeat(void) {
     if (((g_Battle.outcome.result & BATTLE_RESULT_DEFEAT) != 0u) && (D_80143F04 == AREA_ID_DESERT_OF_DEATH_MAP)) {
         g_SceneState.state_04 = 1u;
         g_SceneState.step_05  = 0x19u;

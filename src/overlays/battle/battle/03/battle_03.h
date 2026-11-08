@@ -692,7 +692,8 @@ extern void  func_801D6EAC(void);
 extern void  func_801D6EEC(void);
 extern void  Battle_ReloadPartyBank(void);
 extern void  Battle_ReloadAreaAudio(void);
-extern void  func_801D716C(void);
+/* func_801D716C */
+extern void  Battle_WaitAreaReload(void);
 extern void  func_801D71A4(void);
 extern void  Battle_ReloadFieldText(void);
 extern void  Battle_ReloadMusicBank(void);
@@ -918,7 +919,8 @@ extern void  func_801E5288(void);
 extern void  func_801E52E8(void);
 /* func_801E531C */
 void         Battle_RollEnemyDrops(void);
-void         func_801E5768(void);
+/* func_801E5768 */
+void         Battle_HandleDesertDefeat(void);
 void         func_801E57C8(void);
 /* func_801E5824 */
 void         Battle_UpdateEffects(void);

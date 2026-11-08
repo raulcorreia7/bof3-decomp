@@ -4,6 +4,7 @@
 
 ["emi/battle/battle/03"]
 g_BGMTracks = { addr = 0x80181EB8, size = 0x294, source = "Music tracks: the BGM archive slot, SEP package and sequence of each track id." }
+Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "waits for EMI after reloading area audio, then advances to battle phase step 4" }
 Battle_OpenPartyPanel = { addr = 0x801D9304, type = "func", source = "Opens panel task 1 for the party list: sizes it from the party count through D_801EAF27 and places it at x 0xF0. Called by Battle_OpenPanels." }
 Battle_RollHitOnParty = { addr = 0x801DC73C, type = "func", source = "Rolls whether an attack on a party member hits: a blind attacker misses on a random roll, otherwise the hit chance in D_801EC303 decides; a miss returns 0 and clears BATTLE_HIT_HP_LANDED in the target's turn flags. Called by Battle_CalcDamage when the target is a party member." }
 Battle_RollHitOnEnemy = { addr = 0x801DC894, type = "func", source = "Rolls whether an attack on an enemy hits: a blind attacker misses on a random roll, an always-hit attacker passes, an enemy with the evade event misses on a random roll, otherwise the hit chance in D_801EC324 decides; a miss returns 0 and clears BATTLE_HIT_HP_LANDED. Called by Battle_CalcDamage when the target is an enemy." }
@@ -11,6 +12,7 @@ Battle_CalcPartyDefense = { addr = 0x801DCCB0, type = "func", source = "Averages
 Battle_ScaleDamage = { addr = 0x801DCD50, type = "func", source = "Scales the base damage Battle_RollBaseDamage computed: a falloff for large values, the random spread D_801EAFA0, the element resistance and the holy resistance of the target; returns the result rounded to 16 bits." }
 Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Returns the selectable battler with the lowest hp." }
 Battle_PlayEffectCue = { addr = 0x801E52F0, type = "func", source = "plays an effect sound cue when the cue id is not the 0xFFFF sentinel" }
+Battle_HandleDesertDefeat = { addr = 0x801E5768, type = "func", source = "handles defeat in the Desert of Death by setting up the respawn scene" }
 s_BattleBattlerTemplateTails = { addr = 0x801EC048, alias = true, source = "row 0 turn.action_flags of s_BattleBattlerTemplates (+0x128); the tail global folded into the PartyMember rows in #503" }
 g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it; the turn_order member of g_Battle.", alias = true }
 g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back; the turn_cursor member of g_Battle.", alias = true }
@@ -114,6 +116,7 @@ Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells wh
 Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
 Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
 Battle_MergeEnemyPanels = { addr = 0x8009CFEC, type = "func", source = "Removes the entries of the enemy panel list D_801ED9B0 that repeat an enemy kind and panel id, keeping the first; called after the enemy events trigger." }
+Battle_PlayAbilityPose = { addr = 0x800A581C, type = "func", source = "plays the ability pose cue and sets the active battler's alternate pose flag" }
 Battle_LoadScriptedEncounter = { addr = 0x800ABBE0, type = "func", source = "loads encounter enemies and runs the scripted encounter handler (called from the scripted encounter path)" }
 Battle_IsEnemyDefeated = { addr = 0x800AD044, type = "func", source = "Tests the bit of an enemy kind in the bit set D_80144F60 that Battle_DefeatEnemy fills; Battle_InitEnemy stores the result in the battler's unk_7F, which the enemy name panel reads." }
 Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the bit of an enemy kind in the bit set D_80144F60; Battle_DefeatEnemy calls it and Battle_IsEnemyDefeated reads it." }

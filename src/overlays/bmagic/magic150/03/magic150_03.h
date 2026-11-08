@@ -20,7 +20,8 @@ typedef struct ProjectedSpan {
 
 void func_801EF254(void);
 u8   func_801EF8EC(void);
-void func_801EF2C0(ProjectedSpan* span);
+/* func_801EF2C0 */
+void BMagic_ProjectSpan(ProjectedSpan* span);
 
 void func_801AFE18(void);
 void func_801EF040(void);

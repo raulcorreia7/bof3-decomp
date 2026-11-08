@@ -11,7 +11,8 @@ u8          func_80097EB8(void);
 void        func_800989B4(void);
 u8          func_8009AF7C(void);
 void        func_800A4458(void);
-void        func_800A581C(void);
+/* func_800A581C */
+void        Battle_PlayAbilityPose(void);
 u8          func_800A9304(u8 slot);
 /* Stages the selection cell for the next battle step. */
 void        func_800A9820(u8 selector);
