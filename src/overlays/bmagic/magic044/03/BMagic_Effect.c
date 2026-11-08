@@ -35,17 +35,8 @@ INCLUDE_ASM(func_801EF138);
 
 INCLUDE_ASM(func_801EF320);
 
-MATCH void func_801EF478(void) {
-    u8 timer;
-
-    Effect_ClearTrail();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
-    if (timer == 0) {
-        BMAGIC_TICK_EFFECT_WORK();
-        func_801E5988();
-    }
-}
+/* func_801EF478 */
+#include "overlays/bmagic/Effect_FinishTrail.h"
 
 INCLUDE_ASM(func_801EF4E0);
 

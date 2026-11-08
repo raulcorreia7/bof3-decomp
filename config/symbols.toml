@@ -372,6 +372,7 @@ D_801EFC8C = { addr = 0x801EFC8C, source = "Step handlers of the magic043 effect
 ["emi/bmagic/magic044/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEDA0, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic044 (Evil Eye)." }
+Effect_FinishTrail = { addr = 0x801EF478, type = "func", source = "Clears the trail, counts the timer down, and finishes the effect at zero." }
 Effect_RecordTrail = { addr = 0x801F02A0, type = "func", source = "Records the current battle magic trail position." }
 g_BMagicEffectModes = { addr = 0x801F0A14, source = "Handlers of magic044 (Evil Eye), run by header.mode (byte 0x01)." }
 D_801F0A1C = { addr = 0x801F0A1C, source = "Step handlers of the magic044 effect (Evil Eye), run by header.step (byte 0x02) from func_801EEE44; the fourth entry is reached before the table's second half." }
@@ -1214,6 +1215,7 @@ g_BMagicEffectModes = { addr = 0x801F0B74, source = "Handlers of magic172 (Magic
 ["emi/bmagic/magic173/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EED90, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic173 (Intimidate)." }
+Effect_FinishTrail = { addr = 0x801EF484, type = "func", source = "Clears the trail, counts the timer down, and finishes the effect at zero." }
 Effect_RecordTrail = { addr = 0x801F02B0, type = "func", source = "Records the current battle magic trail position." }
 Effect_ClearTrail = { addr = 0x801F03A0, type = "func", source = "Clears the current battle magic trail slot." }
 Effect_TickOnTimerZero = { addr = 0x801F0700, type = "func", source = "Counts the effect timer (byte 0x09) down by 4 per frame; at zero lowers the ticker (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic173 (Intimidate)." }
