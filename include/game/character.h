@@ -165,6 +165,17 @@ typedef enum MasterId {
     MASTER_MERYLEEP  = 16,
 } MasterId;
 
+/* The operations of a master's stat modifier script, one (operation, amount) pair each, applied by
+ * Char_ApplyMaster. Operations 0 to 8 add to the resistance of that RES_INDEX_*. */
+typedef enum MasterModifier {
+    MASTER_MOD_SURPRISE_CHANCE = 9,
+    MASTER_MOD_REPRISAL_CHANCE = 10,
+    MASTER_MOD_CRITICAL_CHANCE = 11,
+    MASTER_MOD_EVASION         = 12,
+    MASTER_MOD_ACCURACY        = 13,
+    MASTER_MOD_END             = 14,
+} MasterModifier;
+
 /* The 0x20-byte stat block: the live copy at +0x1C holds the equipment and
  * buffs a battle reads; the permanent copy at +0x3C is what level-ups raise. */
 typedef struct Stats {
