@@ -25,17 +25,15 @@
  * meanings stay separate.
  */
 
-/* The statements of Menu_SwapBytes: swap the bytes two pointers address, as the
- * menu overlays swap two entries of a party order array or of the standby list.
- */
-#define MENU_SWAP_BYTES(first, second) \
-    do {                               \
-        u8 temp;                       \
-                                       \
-        temp      = *(first);          \
-        *(first)  = *(second);         \
-        *(second) = temp;              \
-    } while (0)
+/* Swap the bytes two pointers address, as the menu overlays swap two entries of a party order array or of the
+ * standby list. */
+static inline void Menu_SwapEntries(u8* first, u8* second) {
+    u8 temp;
+
+    temp    = *first;
+    *first  = *second;
+    *second = temp;
+}
 
 /* One party formation: its name as the formation menu prints it (the length is what centres it) and the screen
  * offset of each party member from the formation origin. */

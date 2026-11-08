@@ -44,7 +44,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
         primitive->y2 -= 4;
         primitive->v2 -= 4;
     }
-    primitive->clut  = GetClut(clut_x, clut_y);
+    setClut(primitive, clut_x, clut_y);
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, sizeof(POLY_FT4));
     primitive++;

@@ -30,14 +30,15 @@ extern UPoint2D D_801F5000[];
 extern u8       D_801F5010[];
 extern u8       D_801F5011[]; /* the script-argument byte at +1 */
 extern Callback D_801F5018[];
-extern u8       D_801F5028[2];
-extern u8       D_801F5020[4];
-extern u8       D_801F5024[4];
 
 void func_801F34CC(void);
 /* func_801F35BC */
 void Area_Update(void);
 
 /* The value of area update step in the shared Area_Update body. */
+
+#include "overlays/area/World_UpdateCloudLayer.h"
+
+extern WorldCloudTexture g_WorldCloudTexture;
 
 #endif

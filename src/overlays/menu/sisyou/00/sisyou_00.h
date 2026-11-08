@@ -177,7 +177,7 @@ void func_801D39CC(u32 entry);
 void func_801D3A24(void);
 void func_801D3E70(void);
 void Menu_ApplyMasterMode(void);
-void MenuDrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u8 mask);
+void Menu_DrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u8 mask);
 
 /* Request the active master's message id plus the handler's panel offset. The
  * caller passes the state pointer so its saved register matches the original. */

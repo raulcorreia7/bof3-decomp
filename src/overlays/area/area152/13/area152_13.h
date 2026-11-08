@@ -32,13 +32,14 @@ extern u8       D_801F4E21[];
 /* The value of area update step in the shared Area_Update body. */
 
 extern WorldMapMarker D_801F4DEC[6];
-extern u8             D_801F4E38[2];
-extern u8             D_801F4E30[4];
-extern u8             D_801F4E34[4];
 #define AREA_HUD_MASK_TABLE D_801F4DEC
 
 void func_801F338C(void);
 
 void func_801F3550(void);
+
+#include "overlays/area/World_UpdateCloudLayer.h"
+
+extern WorldCloudTexture g_WorldCloudTexture;
 
 #endif

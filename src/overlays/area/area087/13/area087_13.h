@@ -41,10 +41,11 @@ extern WorldMapMarker D_801F57C8[6];
 
 extern u16 D_801F55D8[9][16];
 extern u8  D_801F5718[28];
-extern u8  D_801F5814[2];
-extern u8  D_801F580C[4];
-extern u8  D_801F5810[4];
 extern u8  D_801F5719[]; /* the record-selector byte at +1 */
 extern u8  D_801F5728[]; /* the "Manillo" text at +0x10 */
+
+#include "overlays/area/World_UpdateCloudLayer.h"
+
+extern WorldCloudTexture g_WorldCloudTexture;
 
 #endif

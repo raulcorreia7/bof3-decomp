@@ -149,9 +149,7 @@
 #endif
 
 /*
- * Unmatched code/data inclusion for C source. The assembler-side set for the
- * split path lives in `include/match/include_asm.h`; this header is the one
- * game source sees. `ASM_DIR` is the image's one asm folder, passed as
+ * Unmatched code/data inclusion for C source. `ASM_DIR` is the image's one asm folder, passed as
  * `-DASM_DIR="asm/<target>"` (or its `hand` subfolder for authored assembly).
  */
 #if defined(MATCHING) && !defined(M2CTX) && !defined(PERMUTER)

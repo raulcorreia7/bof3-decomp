@@ -1,3 +1,7 @@
+/* The launch offset row of the sparkle record being updated: the table has 32 rows, selected by the sparkle index. */
+#define EFFECT_SPARKLE_ROW_MASK 0x1F
+#define EFFECT_SPARKLE_OFFSET() (EFFECT_SPARKLE_OFFSETS[EFFECT_SPARKLE_TASK->unk_07 & EFFECT_SPARKLE_ROW_MASK])
+
 /* Waits out the launch delay of the current sparkle, then places it at a random offset from the
  * screen point of its battler, picks its drift, sway phase and rise, and goes to the rise step.
  * One definition shared by the bmagic overlays; every change here must verify every member. */

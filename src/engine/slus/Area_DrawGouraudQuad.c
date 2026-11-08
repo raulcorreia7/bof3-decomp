@@ -27,9 +27,7 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
                 tpage = 0x95;
             }
             GFX_AddDitheredDrawMode(7, tpage);
-            primitive = (POLY_G4*)g_GfxPrimCursor;
-            SetPolyG4(primitive);
-            SetSemiTrans(primitive, 0);
+            primitive = GFX_BeginPolyG4(0);
             setXY4(primitive, 0, 0, 320, 0, 0, 240, 320, 240);
             if (D_8014933C != 0) {
                 src += 8;
