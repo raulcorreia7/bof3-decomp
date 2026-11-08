@@ -1243,6 +1243,10 @@ INCLUDE_ASM(Party_RestoreHp);
 #endif
 ```
 
+A function the original programmer wrote in assembly (a file in `asm/<target>/hand/`) has the same
+shape with `HAND_ASM` in place of `NON_MATCHING`: the C is its equivalent, the `INCLUDE_ASM` is the
+original and stays the build path. It is done, not debt ([markers](matching.md#status-markers)).
+
 **Don't**: commented-out or `#if 0` bodies, or a draft that replaces the assembly.
 
 ```c

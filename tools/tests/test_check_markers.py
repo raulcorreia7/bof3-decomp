@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from check_markers import check_text
+from check_markers import check_hand_units, check_text
 
 
 def problems(text: str) -> list[str]:
@@ -94,3 +94,27 @@ def test_an_old_style_definition_is_one_definition() -> None:
 def test_the_report_names_the_line_of_the_definition(line: int) -> None:
     text = "\n" * (line - 1) + "void f(void) {\n}\n"
     assert [v.line for v in check_text(text)] == [line]
+
+
+DRAFT = (
+    "#ifdef NON_MATCHING\nHAND_ASM void f(void) {\n}\n#else\nINCLUDE_ASM(f);\n#endif\n"
+)
+
+
+def test_hand_asm_sits_under_the_draft_switch() -> None:
+    assert problems(DRAFT) == []
+    assert problems("HAND_ASM void f(void) {\n}\n") == [
+        "HAND_ASM outside `#ifdef NON_MATCHING`"
+    ]
+
+
+def test_every_hand_file_needs_hand_asm_and_nothing_else_may_have_it() -> None:
+    hand = ["asm/exe/x/hand/f.s"]
+    assert check_hand_units(hand, {"a.c": DRAFT}) == []
+    assert [
+        v.problem for v in check_hand_units(hand, {"a.c": "INCLUDE_ASM(f);\n"})
+    ] == ["hand-written assembly without HAND_ASM"]
+    other = DRAFT.replace("f(", "g(")
+    assert [v.problem for v in check_hand_units(hand, {"a.c": DRAFT + other})] == [
+        "HAND_ASM on a function with no asm/*/hand/ file"
+    ]

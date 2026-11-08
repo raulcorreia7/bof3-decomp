@@ -218,7 +218,7 @@ class Project:
         return bool(self.match.search(source_text(source)))
 
     def hand_complete(self, source: Path) -> bool:
-        """Return True for a hand-written unit with the profiled origin proof."""
+        """Return True for a hand-written unit marked `HAND_ASM`."""
         text = source.read_text(encoding="utf-8", errors="replace")
         return str(self.cfg["hand_marker"]) in text
 
