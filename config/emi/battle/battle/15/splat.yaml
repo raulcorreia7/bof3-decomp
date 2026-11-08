@@ -414,7 +414,7 @@ segments:
       - [0x153E0, c, func_800ABBE0]
       - [0x15428, c, func_800ABC28]
       - [0x15430, c, func_800ABC30]
-      - [0x154E0, c, Battle_ArmEnemySlot]
+      - [0x154E0, c, Battle_InitEnemy]
       - [0x1575C, c, Battle_LoadEncounterEnemies]
       - [0x1581C, c, Battle_AddEnemy]
       - [0x15A18, c, Battle_LoadEnemyBattler]

@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801DEA64 */
-MATCH void BattleStageMessageResource(s32 message_slot) {
+MATCH void Battle_ShowMessage(s32 message_slot) {
     void* table;
 
     table = &D_801492B8;

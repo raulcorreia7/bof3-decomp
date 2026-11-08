@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801DECE0 */
-MATCH void Battle_RunParty(void) {
+MATCH void Battle_UpdateParty(void) {
     PartyMember* battle_work;
     PartyMember* next_battle_work;
 

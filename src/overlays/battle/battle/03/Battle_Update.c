@@ -8,11 +8,11 @@ MATCH void Battle_Update(void) {
         ((g_Battle.outcome.event_flags & 2) == 0 || (g_Battle.phase.mode == 5))) {
         Battle_DispatchMode();
     }
-    Battle_RunParty();
-    Battle_RunEnemies();
-    Battle_RunEvents();
+    Battle_UpdateParty();
+    Battle_UpdateEnemies();
+    Battle_UpdateEvents();
     Area_StepCamera();
-    Battle_RunEffects();
+    Battle_UpdateEffects();
     Battle_UpdatePartyActors();
     Battle_UpdateEnemyActors();
     if (g_Battle.encounter != 0) {

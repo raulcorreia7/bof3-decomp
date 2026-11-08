@@ -3,7 +3,7 @@
 /* Dispatches each active queued slot through its selected handler.
  */
 /* func_801E5824 */
-MATCH void Battle_RunEffects(void) {
+MATCH void Battle_UpdateEffects(void) {
     BattleEffectStages handlers;
     Callback*          funcs;
     BattleEffect*      effect;

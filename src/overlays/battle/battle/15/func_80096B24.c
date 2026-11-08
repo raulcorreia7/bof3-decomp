@@ -3,7 +3,7 @@
 MATCH void func_80096B24(void) {
     u8 value;
 
-    g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(3);
+    g_BattleActorTurn->command.target = Battle_TargetNext(3);
     value                             = g_BattleUIState;
     g_Battle.selection_latch          = 1;
     g_InputRepeatButtons              = 0;

@@ -1,7 +1,7 @@
 #include "batl_ovr_00.h"
 
 /* func_801EF0A8 */
-MATCH void Battle_RunGameOver(void) {
+MATCH void Battle_UpdateGameOver(void) {
     func_801EF318();
     func_801EF180(0x80);
     func_801EF3B4(0x80);
