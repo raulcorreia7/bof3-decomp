@@ -29,15 +29,15 @@ MATCH s32 func_801F7104(void) {
 
 MATCH void func_801F7178(void) {
     u16 angle;
-    s16 arg;
+    s16 scroll;
 
     angle                = (u16)g_AreaCameraAngle.vy;
-    arg                  = angle + 244;
+    scroll               = angle + 244;
     g_AreaCameraAngle.vy = angle + 4;
-    Area_AdvanceScroll(arg);
+    Area_AdvanceScroll(scroll);
     if (g_AreaCameraAngle.vy >= 241) {
         if (g_GameStateIndex == 0) {
-            SND_PlayCue(0x203);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         }
         g_Task->header.mode = 2;
     }
@@ -45,15 +45,15 @@ MATCH void func_801F7178(void) {
 
 MATCH void func_801F7200(void) {
     u16 angle;
-    s16 arg;
+    s16 scroll;
 
     angle                = (u16)g_AreaCameraAngle.vy;
-    arg                  = angle + 236;
+    scroll               = angle + 236;
     g_AreaCameraAngle.vy = angle - 4;
-    Area_AdvanceScroll(arg);
+    Area_AdvanceScroll(scroll);
     if (g_AreaCameraAngle.vy < -240) {
         if (g_GameStateIndex == 0) {
-            SND_PlayCue(0x203);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         }
         g_Task->header.mode = 1;
     }
@@ -81,18 +81,18 @@ INCLUDE_ASM(func_801F778C);
 
 MATCH void func_801F7BFC(void) {
     u8* state;
-    s32 v;
+    s32 next;
 
-    state = (u8*)&D_80146875;
+    state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
             if (g_GameStateIndex == 2) {
                 break;
             }
-            v               = 1;
-            g_ScriptVars[0] = v;
+            next            = 1;
+            g_ScriptVars[0] = next;
             func_801BE1B0(0);
-            *state = v;
+            *state = next;
             break;
         case 1:
             if (g_ScriptVars[0] != 3) {
@@ -100,11 +100,11 @@ MATCH void func_801F7BFC(void) {
             }
             SYS_SetFlag(g_SceneFlags, 5);
             Game_ClearScriptActive();
-            D_80146865 = 0;
-            D_80146866 = 0;
-            D_80146867 = 0;
-            *state     = 0;
-            D_80146874 = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            *state                = 0;
+            g_SceneState.state_04 = 0;
             break;
     }
 }
@@ -165,11 +165,11 @@ MATCH void func_801FA5F8(void) {
 MATCH void func_801FA600(void) {
     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
         Game_SetScriptActive();
-        D_80146865 = 0;
-        D_80146866 = 0;
-        D_80146867 = 0;
-        D_80146875 = 0;
-        D_80146874 = 2;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 2;
         SYS_SetFlag(g_SceneFlags, 5U);
     }
 }
@@ -298,21 +298,21 @@ MATCH s32 func_801FAA74(s32 y) {
             if (y <= TO_COORD(22)) {
                 if (((g_Game.members[0].facing - 6) < 2U) || (g_Game.members[0].facing == FACING_UP_LEFT)) {
                     Game_SetScriptActive();
-                    D_80146875 = 0;
-                    D_80146874 = 1;
+                    g_SceneState.step_05  = 0;
+                    g_SceneState.state_04 = 1;
                     return 1;
                 }
                 Game_SetScriptActive();
-                D_80146875 = 0x32;
-                D_80146874 = 1;
+                g_SceneState.step_05  = 0x32;
+                g_SceneState.state_04 = 1;
                 return 1;
             }
             return 0;
         }
         if (y <= TO_COORD(22)) {
             Game_SetScriptActive();
-            D_80146875 = 0x3C;
-            D_80146874 = 1;
+            g_SceneState.step_05  = 0x3C;
+            g_SceneState.state_04 = 1;
             return 1;
         }
         return 0;

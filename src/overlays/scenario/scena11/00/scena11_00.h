@@ -8,11 +8,6 @@
 
 #define g_Task ((Actor*)g_Task)
 
-extern s8        D_80146865;
-extern s8        D_80146866;
-extern s8        D_80146867;
-extern s8        D_80146874;
-extern s8        D_80146875;
 extern u32       D_801F6C00;
 extern Callback  D_801FAEC0[];
 extern Callback  D_801FAEF0[];
