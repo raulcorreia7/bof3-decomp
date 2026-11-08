@@ -91,10 +91,10 @@ INCLUDE_ASM(func_801EF478);
 INCLUDE_ASM(func_801EFB6C);
 
 MATCH void func_801F0064(void) {
-    EffectStepFuncs3 handlers;
+    Magic006Steps handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801F0308();
@@ -142,10 +142,10 @@ MATCH void func_801F020C(void) {
 INCLUDE_ASM(func_801F0308);
 
 MATCH void func_801F04F4(void) {
-    EffectStepFuncs4 handlers;
+    Magic006SecondSteps handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F0790();

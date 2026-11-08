@@ -4,11 +4,11 @@
  * every member. */
 /* func_801EF37C (magic162), func_801EF37C (magic168) */
 MATCH void func_801EF37C(void) {
-    EffectStepFuncs3 handlers;
-    u8               radius;
+    BMagicEffectWorkSteps handlers;
+    u8                    radius;
 
     handlers = D_801EEC1C;
-    handlers.handlers[D_801F17B0->header.step]();
+    handlers.steps[D_801F17B0->header.step]();
     if ((D_801F17B0->header.flags & BMAGIC_EFFECT_IN_USE) && D_801F17B0->header.step != 0) {
         func_801EFCD8();
         if (D_801F17B0->phase_0C & 3) {

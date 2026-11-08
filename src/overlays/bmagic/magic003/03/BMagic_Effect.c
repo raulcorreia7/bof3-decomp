@@ -90,10 +90,10 @@ MATCH void func_801EF2CC(void) {
 }
 
 MATCH void func_801EF324(void) {
-    EffectStepFuncs5 handlers;
+    Magic003Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Area_SetDrawMode();
     }
@@ -199,10 +199,10 @@ MATCH void func_801EF6CC(void) {
 }
 
 MATCH void func_801EF708(void) {
-    EffectStepFuncs4 handlers;
+    Magic003SecondSteps handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Area_SetDrawMode();
     }

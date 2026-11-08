@@ -194,7 +194,7 @@ segments:
       - [0x9E78, c, Char_GetExpForLevel]
       - [0x9EF4, c, Char_GetExpProgress]
       - [0x9F90, c, Menu_DrawHeaderBar]
-      - [0xA4DC, c, func_801DB0DC]
+      - [0xA4DC, c, Menu_DrawEquipCompareWindow]
       - [0xAD38, c, Menu_DrawRowIcons]
       - [0xADF0, c, Menu_DrawEquipStatWindow]
       - [0xB124, c, Menu_DrawClutStrip]

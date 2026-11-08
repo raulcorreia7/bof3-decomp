@@ -19,10 +19,17 @@ u8 func_801F04A4(void);
 extern BMagicEffectWork D_801F0670[];
 #define BMAGIC_EFFECT_SLOTS D_801F0670
 #define BMAGIC_EFFECT_COUNT 160
-extern EffectStepFuncs3 D_801EEC1C;
-void                    func_801F00C4(void);
-void                    func_801EFBF8(u16 angle, u16 radius);
-void                    func_801EFE2C(u16 angle, u16 radius);
+
+#define MAGIC073_STEP_COUNT 3
+
+typedef struct Magic073Steps {
+    Callback steps[MAGIC073_STEP_COUNT];
+} Magic073Steps;
+
+extern Magic073Steps D_801EEC1C;
+void                 func_801F00C4(void);
+void                 func_801EFBF8(u16 angle, u16 radius);
+void                 func_801EFE2C(u16 angle, u16 radius);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
 #define EFFECT_SPARKLE_TASK     D_801F21F0

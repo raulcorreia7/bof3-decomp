@@ -15,8 +15,8 @@ extern BattleEffect D_801EFC60[];
 #define BMAGIC_EFFECT_SLOTS     D_801EFC60
 #define BMAGIC_EFFECT_COUNT     64
 #define BMAGIC_EFFECT_SLOT_STEP func_801EF3C0
-extern EffectStepFuncs3 D_801EEC04;
-void                    func_801EF3C0(void);
-void                    func_801EF7A8(void);
+extern Magic220SharedSteps D_801EEC04;
+void                       func_801EF3C0(void);
+void                       func_801EF7A8(void);
 
 #endif

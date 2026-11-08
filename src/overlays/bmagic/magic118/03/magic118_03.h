@@ -5,8 +5,14 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs5 D_801EEC04;
-extern Callback         D_801EFCD4[];
+#define MAGIC118_STEP_COUNT 5
+
+typedef struct Magic118Steps {
+    Callback steps[MAGIC118_STEP_COUNT];
+} Magic118Steps;
+
+extern Magic118Steps D_801EEC04;
+extern Callback      D_801EFCD4[];
 
 /* func_801EF194 */
 void BMagic_DrawBurnSprites(void);

@@ -3,7 +3,7 @@
 MATCH void func_801D3F6C(void) {
     if (EMI_LoaderIsReady() != 0) {
         if (g_BattleEncounter != 0) {
-            g_BossBattleEventHook(4);
+            g_BossBattleEventHook(BOSS_EVENT_EFFECTS_LOADED);
         }
         g_BattleStep    = 3;
         g_BattleSubStep = 0;

@@ -20,16 +20,16 @@ MATCH void func_801A6F58(u8* script) {
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
-    work                          = g_Task;
-    g_ActorWalkDestX[*counter][0] = work->pos.x.fixed = (script[6] << 16) | (script[5] != 0 ? 0x8000 : 0);
+    work                           = g_Task;
+    g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[6] << 16) | (script[5] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
 
-    g_ActorWalkDestY[*counter][0] = work->pos.y.fixed = (script[8] << 16) | (script[7] != 0 ? 0x8000 : 0);
+    g_Actors[*counter].walk_dest_y = work->pos.y.fixed = (script[8] << 16) | (script[7] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
 
-    D_80146910[*counter][0] = 0;
+    g_Actors[*counter].unk_88 = 0;
 
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
     g_Task->header.mode      = script[9];
@@ -41,7 +41,7 @@ MATCH void func_801A6F58(u8* script) {
 
     FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[3];
     FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[4];
-    D_80146904[*counter][0]                        = (script[0xE] | (script[0xD] << 8));
+    g_Actors[*counter].unk_7C                      = (script[0xE] | (script[0xD] << 8));
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
     *(&D_801468FF + *counter * ACTOR_SIZE) = script[0xF];

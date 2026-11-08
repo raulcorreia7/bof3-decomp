@@ -219,7 +219,7 @@ g_BMagicEffectModes = { addr = 0x801F0A24, source = "Handlers of magic006 (Mind 
 ["emi/bmagic/magic008/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC58 = { addr = 0x801EEC58, source = "Six step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0294." }
-D_801EEC70 = { addr = 0x801EEC70, type = "EffectStepFuncs5", source = "Five step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0568." }
+D_801EEC70 = { addr = 0x801EEC70, type = "Magic008ThirdSteps", source = "Five step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0568." }
 D_801EECAC = { addr = 0x801EECAC, type = "Magic008EarlySteps", source = "Seven step handlers of the magic008 effect, run by header.step (byte 0x02) from func_801F1294." }
 D_801EECC8 = { addr = 0x801EECC8, type = "Magic008Steps", source = "Ten step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F1708." }
 Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
@@ -267,7 +267,7 @@ g_BMagicEffectModes = { addr = 0x801F03BC, source = "Handlers of magic013 (Snap)
 
 ["emi/bmagic/magic015/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC34 = { addr = 0x801EEC34, type = "EffectStepFuncs8", source = "Step handlers of magic015 (Flying Kick, Charge), run by header.step (byte 0x02) from func_801EFA28; the eight Callback slots are copied to a local table first." }
+D_801EEC34 = { addr = 0x801EEC34, type = "Magic015SecondSteps", source = "Step handlers of magic015 (Flying Kick, Charge), run by header.step (byte 0x02) from func_801EFA28; the eight Callback slots are copied to a local table first." }
 Effect_StartPlaying = { addr = 0x801EF1CC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
 Effect_PlayOnce = { addr = 0x801EF200, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic015 (Flying Kick, Charge)." }
 Effect_StartPlaying_801EF610 = { addr = 0x801EF610, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
@@ -284,14 +284,14 @@ g_BMagicEffectModes = { addr = 0x801EF990, source = "Handlers of magic017 (Astra
 
 ["emi/bmagic/magic020/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC1C = { addr = 0x801EEC1C, type = "EffectStepFuncs8", source = "Step handlers of magic020 (Disembowel), run by header.step (byte 0x02) from func_801EF3DC; the eight Callback slots are copied to a local table first." }
+D_801EEC1C = { addr = 0x801EEC1C, type = "Magic020Steps", source = "Step handlers of magic020 (Disembowel), run by header.step (byte 0x02) from func_801EF3DC; the eight Callback slots are copied to a local table first." }
 Effect_DispatchMode = { addr = 0x801EEC48, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic020 (Disembowel)." }
 Effect_StartPlaying = { addr = 0x801EF31C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic020 (Disembowel)." }
 Effect_PlayOnce = { addr = 0x801EF350, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic020 (Disembowel)." }
 g_BMagicEffectModes = { addr = 0x801EFEB8, source = "Handlers of magic020 (Disembowel), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic021/03"]
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs3", source = "Step handlers of magic021 (Bonebreak), run by header.mode (byte 0x01) from func_801EEC28." }
+D_801EEC04 = { addr = 0x801EEC04, type = "Magic021Steps", source = "Step handlers of magic021 (Bonebreak), run by header.mode (byte 0x01) from func_801EEC28." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC10 = { addr = 0x801EEC10, type = "BMagicEffectFuncs", source = "Six step handlers of magic021, run by header.step (byte 0x02) from func_801EF020." }
 Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (func_800AEF98), clears its busy flag and advances header.mode (byte 0x01) in magic021 (Bonebreak)." }
@@ -324,7 +324,7 @@ g_BMagicEffectModes = { addr = 0x801F0424, source = "Handlers of magic039 (Focus
 
 ["emi/bmagic/magic040/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC10 = { addr = 0x801EEC10, type = "EffectStepFuncs8", source = "Step handlers of magic040 (War Shout's sibling in this image), run by header.step (byte 0x02) from func_801EEF8C; the eight Callback slots are copied to a local table first." }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic040Steps", source = "Step handlers of magic040 (War Shout's sibling in this image), run by header.step (byte 0x02) from func_801EEF8C; the eight Callback slots are copied to a local table first." }
 BMagic_RunStep = { addr = 0x801EEC20, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic040 (Enlighten)." }
 Effect_StartOnZeroTick = { addr = 0x801EEEFC, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic040 (Enlighten)." }
 Effect_CountUpTimersAndStep = { addr = 0x801EF114, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up and advances header.step (byte 0x02) when the counter reaches 16 in magic040 (Enlighten)." }
@@ -344,7 +344,7 @@ Effect_SetActorMatrix = { addr = 0x801EF5C0, type = "func", source = "Sets the a
 g_BMagicEffectModes = { addr = 0x801EFD8C, source = "Handlers of magic041 (Berserk), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic042/03"]
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs5", source = "Step handlers of magic042 (Counter), run by header.step (byte 0x02) from func_801EEDE8." }
+D_801EEC04 = { addr = 0x801EEC04, type = "Magic042Steps", source = "Step handlers of magic042 (Counter), run by header.step (byte 0x02) from func_801EEDE8." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EED44, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic042 (Counter, Minds Eye)." }
 g_BMagicEffectModes = { addr = 0x801EFB70, source = "Handlers of magic042 (Counter, Minds Eye), run by header.mode (byte 0x01)." }
@@ -393,11 +393,11 @@ Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF0E8, type = "func", source = "
 g_BMagicEffectModes = { addr = 0x801EFA9C, source = "Handlers of magic050 (Pollen, Venom Breath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic052/03"]
-D_801EEC10 = { addr = 0x801EEC10, type = "EffectStepFuncs3", source = "Step handlers of magic052, run by header.step (byte 0x02) from func_801EEEE0; the three Callback slots are copied to a local table first." }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic052Steps", source = "Step handlers of magic052, run by header.step (byte 0x02) from func_801EEEE0; the three Callback slots are copied to a local table first." }
 BMagic_RunStep = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic052 (Ovum)." }
 
 ["emi/bmagic/magic053/03"]
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs3", source = "Step handlers of magic053, run by header.mode (byte 0x01) from func_801EEC10." }
+D_801EEC04 = { addr = 0x801EEC04, type = "Magic053Steps", source = "Step handlers of magic053, run by header.mode (byte 0x01) from func_801EEC10." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF9C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x10) and advances header.mode (byte 0x01) in magic053 (Lavaburst)." }
 Effect_PlayOnZeroTick = { addr = 0x801EF004, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic053 (Lavaburst)." }
@@ -421,7 +421,7 @@ g_BMagicEffectModes = { addr = 0x801EF658, source = "Handlers of magic054 (Howli
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs3", source = "Step handlers of magic055 (Shadowwalk-era effect), run by header.mode (byte 0x01) from Effect_DrawActor; the three Callback slots are copied to a local table first." }
+D_801EEC04 = { addr = 0x801EEC04, type = "ActorEffectSteps", source = "Step handlers of magic055 (Shadowwalk-era effect), run by header.mode (byte 0x01) from Effect_DrawActor; the three Callback slots are copied to a local table first." }
 Effect_DecayTimersAndPlay = { addr = 0x801EEEA8, type = "func", source = "Counts the effect timer (byte 0x09) down while the ticker (byte 0x0B) is under 4 and the counter (byte 0x0A) down while it is under 3; once the top halfword of work word 0x08 is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic055 (Ebonfire)." }
 Effect_FollowTarget = { addr = 0x801EEFFC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero copies the active battler's position into the effect, reloads the timer with 0x40, clears the counter (byte 0x0A) and ticker (byte 0x0B) and advances header.mode (byte 0x01) in magic055 (Ebonfire)." }
 Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic055 (Ebonfire)." }
@@ -494,7 +494,7 @@ D_801F1054 = { addr = 0x801F1054, source = "Work record of the magic063 sub-effe
 
 ["emi/bmagic/magic064/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC50 = { addr = 0x801EEC50, type = "EffectStepFuncs3", size = 0x0c, source = "Handler table of the magic064 effect, run by header.step (byte 0x02)." }
+D_801EEC50 = { addr = 0x801EEC50, type = "Magic064SecondSteps", size = 0x0c, source = "Handler table of the magic064 effect, run by header.step (byte 0x02)." }
 BMagic_RunStep = { addr = 0x801EEC7C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic064 (Weretiger)." }
 Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "Clears the effect timer (byte 0x09) and runs the next-step routine in magic064 (Weretiger)." }
 g_BMagicEffectModes = { addr = 0x801F1394, source = "Handlers of magic064 (Weretiger), run by header.step (byte 0x02)." }
@@ -565,7 +565,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF47C, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 
 ["emi/bmagic/magic073/03"]
-D_801EEC1C = { addr = 0x801EEC1C, type = "EffectStepFuncs3", source = "Step handlers of magic073, run by header.step (byte 0x02) from func_801EF768." }
+D_801EEC1C = { addr = 0x801EEC1C, type = "Magic073Steps", source = "Step handlers of magic073, run by header.step (byte 0x02) from func_801EF768." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 Effect_ReplaceSlotPaletteFade = { addr = 0x801EF2DC, type = "func", source = "Replaces the palette fade of the battler that the effect slot byte (0x04) names, party slots first and then enemy slots: when the effect timer (byte 0x09) reaches zero it frees the old fade, allocates a new one into the timer, restarts the effect timer at 8 and advances header.step; one body shared with the other bmagic overlays" }
@@ -578,7 +578,7 @@ g_BMagicEffectModes = { addr = 0x801F0668, source = "Handlers of magic073 (Vital
 D_801F21F0 = { addr = 0x801F21F0, source = "Work record of the magic073 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
 ["emi/bmagic/magic074/03"]
-D_801EEC1C = { addr = 0x801EEC1C, type = "EffectStepFuncs3", source = "Step handlers of magic074, run by header.step (byte 0x02) from func_801EF754." }
+D_801EEC1C = { addr = 0x801EEC1C, type = "Magic074Steps", source = "Step handlers of magic074, run by header.step (byte 0x02) from func_801EF754." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 Effect_StartOnZeroTick = { addr = 0x801EEF50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic074 (Vigor)." }
@@ -691,7 +691,7 @@ g_BMagicEffectModes = { addr = 0x801F0028, source = "Handlers of magic088 (Molas
 
 ["emi/bmagic/magic091/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs3", source = "Step handlers of magic091, run by header.mode (byte 0x01) from Effect_DrawActor; the three Callback slots are copied to a local table first." }
+D_801EEC04 = { addr = 0x801EEC04, type = "ActorEffectSteps", source = "Step handlers of magic091, run by header.mode (byte 0x01) from Effect_DrawActor; the three Callback slots are copied to a local table first." }
 Effect_DecayTimersAndPlay = { addr = 0x801EEEA8, type = "func", source = "Counts the effect timer (byte 0x09) down while the ticker (byte 0x0B) is under 4 and the counter (byte 0x0A) down while it is under 3; once the top halfword of work word 0x08 is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic091 (Flare)." }
 Effect_FollowTarget = { addr = 0x801EEFFC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero copies the active battler's position into the effect, reloads the timer with 0x40, clears the counter (byte 0x0A) and ticker (byte 0x0B) and advances header.mode (byte 0x01) in magic091 (Flare)." }
 Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic091 (Flare)." }
@@ -735,7 +735,7 @@ Effect_SetActorMatrix = { addr = 0x801EF14C, type = "func", source = "Sets the a
 
 ["emi/bmagic/magic096/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC10 = { addr = 0x801EEC10, type = "EffectStepFuncs5", source = "Step handlers of magic096, run by header.step (byte 0x02) from func_801EEEE4; the five Callback slots are copied to a local table first." }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic096Steps", source = "Step handlers of magic096, run by header.step (byte 0x02) from func_801EEEE4; the five Callback slots are copied to a local table first." }
 BMagic_RunStep = { addr = 0x801EEC24, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic096 (Blizzard)." }
 Effect_PlayOnZeroTick = { addr = 0x801EEE40, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic096 (Blizzard)." }
 Effect_CountDownTickerAndStep = { addr = 0x801EF348, type = "func", source = "Counts the effect ticker (byte 0x0B) down and advances header.step (byte 0x02) at zero in magic096 (Blizzard)." }
@@ -865,6 +865,8 @@ Effect_CountDownAndPlay = { addr = 0x801EF3D4, type = "func", source = "Counts t
 Effect_SetActorMatrix = { addr = 0x801EF440, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic113 (Noting)." }
 Effect_CountDownTimerStep = { addr = 0x801F0868, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic113 (Noting)." }
 g_BMagicEffectModes = { addr = 0x801F0B94, source = "Handlers of magic113 (Noting), run by header.mode (byte 0x01)." }
+D_801F0BA4 = { addr = 0x801F0BA4, type = "s32", source = "Per-level orbit radius values of magic113, indexed by the effect's level byte (param 0x0B); func_801EF7A0 copies one into the scratchpad radius word." }
+D_801F0BAC = { addr = 0x801F0BAC, source = "Step handlers of magic113, run by header.step (byte 0x02) from func_801EF7A0." }
 D_801F0BC0 = { addr = 0x801F0BC0, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801EFC28." }
 D_801F0BCC = { addr = 0x801F0BCC, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801F0140." }
 
@@ -968,7 +970,7 @@ Effect_TickOnTimerNegative = { addr = 0x801F0650, type = "func", source = "Count
 g_BMagicEffectModes = { addr = 0x801F125C, source = "Handlers of magic126 (ShadowBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic129/03"]
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs3", source = "Step handlers of magic129, run by header.mode (byte 0x01) from func_801EEC10." }
+D_801EEC04 = { addr = 0x801EEC04, type = "Magic129Steps", source = "Step handlers of magic129, run by header.mode (byte 0x01) from func_801EEC10." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEEB8, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x10) and advances header.mode (byte 0x01) in magic129 (Holocaust)." }
 Effect_PlayOnZeroTick = { addr = 0x801EEF20, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic129 (Holocaust)." }
@@ -1023,7 +1025,7 @@ g_BMagicEffectModes = { addr = 0x801F00F8, source = "Handlers of magic137 (Coron
 
 ["emi/bmagic/magic138/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC1C = { addr = 0x801EEC1C, type = "EffectStepFuncs3", source = "Step handlers of magic138 (Whelp Breath's sibling in this image), run by header.step (byte 0x02) from func_801EF52C." }
+D_801EEC1C = { addr = 0x801EEC1C, type = "Magic138Steps", source = "Step handlers of magic138 (Whelp Breath's sibling in this image), run by header.step (byte 0x02) from func_801EF52C." }
 BMagic_RunStep = { addr = 0x801EEC28, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic138 (Main Cannon)." }
 Effect_TickDownAndClear = { addr = 0x801EF6F8, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic138 (Main Cannon)." }
 g_BMagicEffectModes = { addr = 0x801EF72C, source = "Handlers of magic138 (Main Cannon), run by header.mode (byte 0x01)." }
@@ -1066,7 +1068,7 @@ Effect_CountDownTimer = { addr = 0x801EF0A0, type = "func", source = "Raises the
 g_BMagicEffectModes = { addr = 0x801EF414, source = "Handlers of magic145 (Noting), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic146/03"]
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs3", source = "Step handlers of magic146, run by header.mode (byte 0x01) from func_801EEC10." }
+D_801EEC04 = { addr = 0x801EEC04, type = "Magic146Steps", source = "Step handlers of magic146, run by header.mode (byte 0x01) from func_801EEC10." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_NextStepOnZeroTick = { addr = 0x801EEFD0, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is zero in magic146 (Noting)." }
 Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic146 (Noting)." }
@@ -1092,7 +1094,7 @@ g_BMagicEffectModes = { addr = 0x801F24A4, source = "Handlers of magic151 (Acces
 
 ["emi/bmagic/magic154/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC14 = { addr = 0x801EEC14, type = "EffectStepFuncs4", source = "Step handlers of magic154, run by header.step (byte 0x02) from func_801EF4B4; the four Callback slots are copied to a local table first." }
+D_801EEC14 = { addr = 0x801EEC14, type = "Magic154Steps", source = "Step handlers of magic154, run by header.step (byte 0x02) from func_801EF4B4; the four Callback slots are copied to a local table first." }
 Effect_PlayOnZeroTick = { addr = 0x801EF060, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic154 (Mighty Chop)." }
 Effect_SetDuration = { addr = 0x801EF544, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic154 (Mighty Chop)." }
 g_BMagicEffectModes = { addr = 0x801EF6CC, source = "Handlers of magic154 (Mighty Chop), run by header.mode (byte 0x01)." }
@@ -1202,7 +1204,7 @@ Effect_SetActorMatrix = { addr = 0x801EF1A0, type = "func", source = "Sets the a
 g_BMagicEffectModes = { addr = 0x801EF770, source = "Handlers of magic218 (Aura Breath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic219/03"]
-D_801EEC04 = { addr = 0x801EEC04, type = "EffectStepFuncs4", source = "Step handlers of magic219, run by header.mode (byte 0x01) from func_801EEC14." }
+D_801EEC04 = { addr = 0x801EEC04, type = "Magic219Steps", source = "Step handlers of magic219, run by header.mode (byte 0x01) from func_801EEC14." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEFC4, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic219 (Magma Breath)." }
 Effect_SetActiveActorMatrix = { addr = 0x801EF664, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler, times the camera in magic219 (Magma Breath)." }
@@ -1609,6 +1611,7 @@ Item_GetPrice = { addr = 0x801D4F1C, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801D4FD0, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801D504C, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801D50E8, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
+Menu_DrawEquipCompareWindow = { addr = 0x801D5634, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801D5E90, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801D5F48, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801D627C, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
@@ -1637,6 +1640,7 @@ g_MenuFormationFrameMiddle = { addr = 0x801D88BC, source = "Sprite run of one co
 g_MenuFormationFrameRight = { addr = 0x801D88C8, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801D88E0, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801D88F8, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuEquipCompareSprites = { addr = 0x801D8910, source = "Sprite run of the equipment compare window frame that Menu_DrawEquipCompareWindow draws over the window." }
 g_MenuListTab2OffSprites = { addr = 0x801D893C, source = "the sprite run of the list panel's second tab while its flag is clear" }
 g_MenuInventoryTab1OffSprites = { addr = 0x801D8948, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
 g_MenuListTab2OnSprites = { addr = 0x801D8954, source = "the sprite run of the list panel's second tab while its flag is set" }
@@ -1656,6 +1660,8 @@ MENU_CAPTION_ICON = { addr = 0x801D8BB4, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801D8BB8, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D8C68, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801D8CC4, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipCompareLabels = { addr = 0x801D8CF4, source = "Labels of the equipment compare window stat rows (Pwr, Def, Int, Agl), six bytes each." }
+g_MenuEquipSlotIcons = { addr = 0x801D8D0C, source = "Sprite ids of the six equipment slot icons (weapon, shield, helmet, armor, two accessories) that Menu_DrawEquipCompareWindow draws beside each item name." }
 g_MenuEquipStatLabels = { addr = 0x801D8D14, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D8D28, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
@@ -2065,6 +2071,7 @@ Item_GetPrice = { addr = 0x801D5EC4, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801D5F78, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801D5FF4, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801D6090, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
+Menu_DrawEquipCompareWindow = { addr = 0x801D65DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801D6E38, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801D6EF0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801D7224, type = "func", source = "Draws the five-row CLUT strip of 0x20-wide sprite cells; the shared body with the shop and start overlays, bound to the shisu tables." }
@@ -2093,6 +2100,7 @@ g_MenuFormationFrameMiddle = { addr = 0x801D98E0, source = "Sprite run of one co
 g_MenuFormationFrameRight = { addr = 0x801D98EC, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801D9904, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801D991C, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuEquipCompareSprites = { addr = 0x801D9934, source = "Sprite run of the equipment compare window frame that Menu_DrawEquipCompareWindow draws over the window." }
 g_MenuListTab2OffSprites = { addr = 0x801D9960, source = "the sprite run of the list panel's second tab while its flag is clear" }
 g_MenuInventoryTab1OffSprites = { addr = 0x801D996C, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
 g_MenuListTab2OnSprites = { addr = 0x801D9978, source = "the sprite run of the list panel's second tab while its flag is set" }
@@ -2110,6 +2118,8 @@ MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801D9CE8, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipCompareLabels = { addr = 0x801D9D18, source = "Labels of the equipment compare window stat rows (Pwr, Def, Int, Agl), six bytes each." }
+g_MenuEquipSlotIcons = { addr = 0x801D9D30, source = "Sprite ids of the six equipment slot icons (weapon, shield, helmet, armor, two accessories) that Menu_DrawEquipCompareWindow draws beside each item name." }
 g_MenuEquipStatLabels = { addr = 0x801D9D38, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D9D4C, source = "Cell rectangles that Menu_DrawClutStrip draws, indexed by the strip entry." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
@@ -2166,6 +2176,7 @@ Item_GetPrice = { addr = 0x801DA9C4, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801DAA78, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801DAAF4, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801DAB90, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
+Menu_DrawEquipCompareWindow = { addr = 0x801DB0DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801DB938, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801DB9F0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801DBD24, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
@@ -2220,6 +2231,7 @@ g_MenuFormationFrameMiddle = { addr = 0x801E55B8, source = "Sprite run of one co
 g_MenuFormationFrameRight = { addr = 0x801E55C4, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801E55DC, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801E55F4, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuEquipCompareSprites = { addr = 0x801E560C, source = "Sprite run of the equipment compare window frame that Menu_DrawEquipCompareWindow draws over the window." }
 g_MenuListTab2OffSprites = { addr = 0x801E5638, source = "the sprite run of the list panel's second tab while its flag is clear" }
 g_MenuInventoryTab1OffSprites = { addr = 0x801E5644, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
 g_MenuListTab2OnSprites = { addr = 0x801E5650, source = "the sprite run of the list panel's second tab while its flag is set" }
@@ -2239,6 +2251,8 @@ MENU_CAPTION_ICON = { addr = 0x801E58B0, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801E58B4, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801E5964, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801E59C0, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipCompareLabels = { addr = 0x801E59F0, source = "Labels of the equipment compare window stat rows (Pwr, Def, Int, Agl), six bytes each." }
+g_MenuEquipSlotIcons = { addr = 0x801E5A08, source = "Sprite ids of the six equipment slot icons (weapon, shield, helmet, armor, two accessories) that Menu_DrawEquipCompareWindow draws beside each item name." }
 g_MenuEquipStatLabels = { addr = 0x801E5A10, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
@@ -2370,6 +2384,7 @@ Item_GetPrice = { addr = 0x801DDEBC, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801DDF70, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801DDFEC, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801DE088, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
+Menu_DrawEquipCompareWindow = { addr = 0x801DE5D4, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801DEE30, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801DEEE8, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801DF21C, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
@@ -2425,6 +2440,7 @@ g_MenuFormationFrameMiddle = { addr = 0x801EC6D4, source = "Sprite run of one co
 g_MenuFormationFrameRight = { addr = 0x801EC6E0, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801EC6F8, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801EC710, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuEquipCompareSprites = { addr = 0x801EC728, source = "Sprite run of the equipment compare window frame that Menu_DrawEquipCompareWindow draws over the window." }
 g_MenuListTab2OffSprites = { addr = 0x801EC754, source = "the sprite run of the list panel's second tab while its flag is clear" }
 g_MenuInventoryTab1OffSprites = { addr = 0x801EC760, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
 g_MenuListTab2OnSprites = { addr = 0x801EC76C, source = "the sprite run of the list panel's second tab while its flag is set" }
@@ -2444,6 +2460,8 @@ MENU_CAPTION_ICON = { addr = 0x801EC9CC, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801EC9D0, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801ECA80, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801ECADC, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipCompareLabels = { addr = 0x801ECB0C, source = "Labels of the equipment compare window stat rows (Pwr, Def, Int, Agl), six bytes each." }
+g_MenuEquipSlotIcons = { addr = 0x801ECB24, source = "Sprite ids of the six equipment slot icons (weapon, shield, helmet, armor, two accessories) that Menu_DrawEquipCompareWindow draws beside each item name." }
 g_MenuEquipStatLabels = { addr = 0x801ECB2C, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801ECB40, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801ECBEC, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
@@ -3173,6 +3191,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 Actor_RunAreaStep = { addr = 0x801F2C30, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F2DF0, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world00/area037/13"]
 g_MasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
@@ -3288,6 +3307,7 @@ Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "Sets g_Me
 Actor_RunAreaStep = { addr = 0x801F2D5C, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2E80, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F3014, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F30A8, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world01/area060/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3523,6 +3543,7 @@ Area_AddCameraOffsetY4 = { addr = 0x801F3630, type = "func", source = "Adds 4 to
 Area_SubCameraOffsetY4 = { addr = 0x801F3658, type = "func", source = "Subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F3680, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Actor_SnapToGround = { addr = 0x801F3CDC, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F3D70, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world02/area102/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3586,6 +3607,7 @@ Actor_RunAreaStep = { addr = 0x801F3638, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F366C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Message_SelectAnswer = { addr = 0x801F3870, type = "func", source = "Sets g_MessageRequest to 0x14 when g_MessageChoice is nonzero, otherwise to 0x13." }
 Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F3EEC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world02/area113/13"]
@@ -3624,6 +3646,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F2F78, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world03/area117/13"]
 Message_ClearRequest = { addr = 0x801F3FB0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
@@ -3747,6 +3770,7 @@ Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F3C74, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Script_SkipInstructionForSlot7 = { addr = 0x801F3D38, type = "func", source = "Adds 3 to the script cursor when g_GameState leader_id is CHAR_ID_RYU_ADULT." }
 Actor_SnapToGround = { addr = 0x801F3F48, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F3FDC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F52FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area144/13"]
@@ -3761,6 +3785,7 @@ g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and mess
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_RunAreaStep = { addr = 0x801F2C34, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Actor_SnapToGround = { addr = 0x801F2DD4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F2E68, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world03/area147/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -4816,7 +4841,7 @@ g_BattleTarget = { addr = 0x80146394, type = "u8", source = "Target battler of t
 g_BattleTargetRecord = { addr = 0x801463A0, type = "BattleTurn", source = "Result cells of the target battler." }
 g_BattleChooseEndingHook = { addr = 0x801463A4, type = "Callback", source = "Hook that chooses how the battle ends." }
 g_BattleEndHook = { addr = 0x801463A8, type = "Callback", source = "Hook that runs when the battle ends." }
-g_BossBattleEventHook = { addr = 0x801463AC, type = "BossBattleEventFunc", source = "Hook that handles boss battle events." }
+g_BossBattleEventHook = { addr = 0x801463AC, type = "BossEventFunc", source = "Hook that handles boss battle events." }
 g_BattleActionId = { addr = 0x801463C0, type = "u16", source = "selected action/command id indexes D_801CA71C (src/overlays/battle/Battle_RollHitChance.h 22) and g_BattleActionSelection (func_801D3E80.c 14) written with the command id (func_8009F278.c 5)" }
 g_BattleGenes = { addr = 0x801463C4, type = "u8", size = 0x3, source = "The three genes chosen for Accession." }
 g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "Number of genes chosen for Accession." }
@@ -4850,6 +4875,8 @@ g_CurrentActor = { addr = 0x80146884, type = "Actor", source = "The current acto
 g_Actors = { addr = 0x80146888, size = 0x1170, source = "The field actors." }
 g_ActorWalkDestX = { addr = 0x80146908, size = 0x4, alias = true, source = "x of the destination func_801AC33C walks the actor to; the Actor.walk_dest_x word (byte 0x80) seen as a column of g_Actors" }
 g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of the destination func_801AC33C walks the actor to; the Actor.walk_dest_y word (byte 0x84) seen as a column of g_Actors" }
+D_80146904 = { addr = 0x80146904, size = 0x2, alias = true, source = "The Actor.unk_7C halfword (byte 0x7C) seen as a column of g_Actors" }
+D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.unk_88 word (byte 0x88) seen as a column of g_Actors" }
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
 g_ScriptState = { addr = 0x80148210, type = "GameScriptState", source = "The script state." }

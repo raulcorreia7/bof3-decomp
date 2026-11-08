@@ -18,7 +18,7 @@ extern Callback D_801F3B00[];
 
 /* The selection-arm and work-reset calls shared with the field. */
 /* The draw step that reads the three-word work position. */
-void func_801F2E68(u32* pos);
+void Area_DrawLightPillar(s32* pos);
 
 /* The focus-point projection the depth step enters. */
 #endif

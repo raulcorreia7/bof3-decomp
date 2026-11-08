@@ -10,8 +10,15 @@ extern u8 g_BattleActiveBattler;
 /* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
 extern u8 D_801EC331[];
 
-extern u8               D_801EC334[];
-extern EffectStepFuncs5 D_801EEC04;
+extern u8 D_801EC334[];
+
+#define MAGIC101_STEP_COUNT 5
+
+typedef struct Magic101Steps {
+    Callback steps[MAGIC101_STEP_COUNT];
+} Magic101Steps;
+
+extern Magic101Steps D_801EEC04;
 
 extern u16      D_801EFCC0[];
 extern u16      D_801EFCE0[];
