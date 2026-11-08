@@ -29,7 +29,7 @@ MATCH void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y) {
         UI_DrawTextString(x + 52, y + 7, 0, 0xFF, g_MenuClockColon);
     }
     UI_DrawSpriteRun(x, y, g_MenuClockCaption, 0);
-    for (i = 0, row_x = x + 0x18; i < 6; i++) {
+    for (i = 0, row_x = x + 24; i < 6; i++) {
         UI_DrawSpriteRun(row_x + i * 8, y, g_MenuCaptionMiddle, 0);
     }
     UI_DrawSpriteRun(x - 0x10, y, g_MenuCaptionRight, 0);
