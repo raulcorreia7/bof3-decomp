@@ -60,15 +60,15 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             CUR(sub) += 3;
             break;
         case 0xC3:
-            g_Task->base.unk_0C = (code + CUR(sub))[1];
-            g_Task->unk_40 += PACK24(code + CUR(sub), 2);
-            g_Task->unk_44 += PACK24(code + CUR(sub), 4);
+            LOBU(g_Task->vx) = (code + CUR(sub))[1];
+            g_Task->scale.x += PACK24(code + CUR(sub), 2);
+            g_Task->scale.y += PACK24(code + CUR(sub), 4);
             CUR(sub) += 5;
             break;
         case 0xC4:
-            g_Task->base.unk_0C = (code + CUR(sub))[1];
-            g_Task->unk_40 -= PACK24(code + CUR(sub), 2);
-            g_Task->unk_44 -= PACK24(code + CUR(sub), 4);
+            LOBU(g_Task->vx) = (code + CUR(sub))[1];
+            g_Task->scale.x -= PACK24(code + CUR(sub), 2);
+            g_Task->scale.y -= PACK24(code + CUR(sub), 4);
             CUR(sub) += 5;
             break;
         case 0xC5:
@@ -87,12 +87,12 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             CUR(sub) += 3;
             break;
         case 0xC7:
-            g_Task->base.unk_0C = 2;
-            g_Task->unk_40 += PACK24(code + CUR(sub), 1);
-            g_Task->unk_44 += PACK24(code + CUR(sub), 3);
+            LOBU(g_Task->vx) = 2;
+            g_Task->scale.x += PACK24(code + CUR(sub), 1);
+            g_Task->scale.y += PACK24(code + CUR(sub), 3);
             g_Task->pos.x.fixed += PACK24(code + CUR(sub), 5);
             g_Task->pos.y.fixed += PACK24(code + CUR(sub), 7);
-            g_Task->depth.fixed += PACK24(code + CUR(sub), 9);
+            g_Task->pos.z.fixed += PACK24(code + CUR(sub), 9);
             CUR(sub) += 0xA;
             break;
         case 0xC8:

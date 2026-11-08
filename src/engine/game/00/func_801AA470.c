@@ -36,15 +36,15 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
         done:
             return value;
         case 0xD2:
-            g_Task->unk_07 ^= 0x40;
-            if (g_Task->unk_07 & 0x40) {
+            g_Task->option_flags ^= 0x40;
+            if (g_Task->option_flags & 0x40) {
                 FIELD(s8, g_Task, 0x48u) = 0;
             } else {
                 FIELD(s8, g_Task, 0x48u) = 1;
             }
             return value;
         case 0xD3:
-            g_Task->unk_07 ^= ACTOR_OPT_NO_TARGET;
+            g_Task->option_flags ^= ACTOR_OPT_NO_TARGET;
             return value;
         case 0xD4:
             index  = &D_1F800001;
@@ -112,7 +112,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             return value;
         case 0xDB:
             Actor_ApplyVelocity();
-            COORD_INT(g_Task->depth) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+            COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
             /* fallthrough */
         case 0xDC:
             Area_SetCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
