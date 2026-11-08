@@ -14,6 +14,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_NextStep.h"
 
+/* func_801EF158 */
+MATCH void Effect_NextStep(void) {
+    BMagic_AdvanceEffectStep(5);
+}
+
 #include "overlays/bmagic/Effect_FadePaletteOut.h"
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"

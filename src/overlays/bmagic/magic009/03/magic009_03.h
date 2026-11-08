@@ -8,9 +8,6 @@
 /* The timer reloads from the second table. */
 #define EFFECT_TIMER_RELOAD func_800B0058
 
-/* The amount Effect_CountDownTimer adds to the effect work byte 9. */
-#define EFFECT_TIMER_STEP   1
-
 extern Magic004SharedSteps D_801EEC04;
 
 #define MAGIC009_STEP_COUNT 4

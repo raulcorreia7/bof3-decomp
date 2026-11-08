@@ -69,6 +69,11 @@ MATCH void func_801EF570(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimer.h"
 
+/* func_801EF5C0 */
+MATCH void Effect_CountDownTimer(void) {
+    BMagic_CountDownEffectTimer(1);
+}
+
 MATCH void func_801EF638(void) {
     PartyBattler* src;
     SVECTOR       pos;

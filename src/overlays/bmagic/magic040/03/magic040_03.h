@@ -5,9 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The amount Effect_CountDownTimer adds to the effect work byte 9. */
-#define EFFECT_TIMER_STEP   1
-
 #define MAGIC040_STEP_COUNT 4
 
 typedef struct Magic040Steps {

@@ -109,6 +109,11 @@ MATCH void func_801EFC94(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimer.h"
 
+/* func_801EFCE4 */
+MATCH void Effect_CountDownTimer(void) {
+    BMagic_CountDownEffectTimer(1);
+}
+
 INCLUDE_ASM(func_801EFD5C);
 
 MATCH void func_801F01C0(void) {

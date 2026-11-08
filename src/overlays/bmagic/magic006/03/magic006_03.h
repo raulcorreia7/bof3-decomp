@@ -7,9 +7,6 @@
 
 extern BMagicEffectFuncs D_801EEC04;
 
-/* The amount Effect_CountDownTimer adds to the effect work byte 9. */
-#define EFFECT_TIMER_STEP 8
-
 extern s16 D_1F800008;
 
 #define MAGIC006_STEP_COUNT 3
