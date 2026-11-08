@@ -92,7 +92,15 @@ MATCH void func_801F7050(void) {
 
 INCLUDE_ASM(func_801F70F8);
 
-INCLUDE_ASM(func_801F71C0);
+MATCH void func_801F71C0(void) {
+    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
+    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
+    if (--g_Task->timer == 0) {
+        SND_PlayCue(0x203);
+        g_Task->timer = 0x20;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F724C(void) {
     SCENA07_PANEL_BRIGHTEN_STEP();
@@ -148,6 +156,7 @@ MATCH void func_801F786C(void) {
 
 INCLUDE_ASM(func_801F78B0);
 
+/* Hint: pointer global D_801FDFC0 is read and written as a halfword at +0x510 and passed to func_801F9330; the record type is not declared, so the draft needs it first. */
 INCLUDE_ASM(func_801F7960);
 
 MATCH void func_801F79EC(void) {

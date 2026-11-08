@@ -47,7 +47,13 @@ MATCH void func_801EF270(void) {
 
 INCLUDE_ASM(BMagic_DrawWhelpBreath);
 
-INCLUDE_ASM(func_801EFD20);
+MATCH void func_801EFD20(void) {
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15, NULL);
+    GFX_AddPrim(3, 0xC);
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F0CC4, g_Task->header.step);
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EFDD4);
 

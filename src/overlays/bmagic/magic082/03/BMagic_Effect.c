@@ -147,6 +147,7 @@ MATCH void func_801F00DC(void) {
     }
 }
 
+/* hint: 3-image twin (magic062 00EC, 082 0260, 083 038C): spiral position update; everything matches except the s16 radius cell at 0x1F800000: retail uses a separate lui per access, a cast view of D_1F800000 hoists the base into s1 (needs an s16 alias symbol for 0x1F800000, scratch draft b26-magic062.c) */
 INCLUDE_ASM(func_801F0260);
 
 INCLUDE_ASM(func_801F03E0);

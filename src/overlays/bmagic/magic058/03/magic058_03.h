@@ -9,6 +9,8 @@ extern u8  D_801EC2E4;
 /* The scratchpad base read as a halfword: the radius the range test uses. */
 extern s16 D_1F800000_HALF;
 
+extern EffectStepFuncs3 D_801EEC04;
+void                    func_801EF36C(void);
 extern EffectStepFuncs3 D_801EEC10;
 extern EffectStepFuncs3 D_801EEC1C;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
