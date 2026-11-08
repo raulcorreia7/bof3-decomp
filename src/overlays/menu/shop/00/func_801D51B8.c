@@ -8,8 +8,8 @@ MATCH void func_801D51B8(void) {
 
     name = &g_WindowStyle;
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, *name);
-    WinDrawCueText(28, 22, D_801E60EC + 0x85);
-    SAVE_DrawSlots(0x20, 0x30, 0);
+    WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, D_801E60EC + 0x85);
+    SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
     SAVE_AccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus == CARD_EVENT_OK) {
         TEXT_Format(g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);

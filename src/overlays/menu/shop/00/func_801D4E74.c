@@ -10,8 +10,8 @@ MATCH void func_801D4E74(void) {
     u8  index;
 
     MENU_DRAW_HEADER();
-    WinDrawCueText(28, 22, 0x9D);
-    SAVE_DrawSlots(0x20, 0x30, 1);
+    WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x9D);
+    SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 1);
     buttons = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     prev    = g_SaveSlotFirst;
     if ((buttons & PADLup) != 0) {

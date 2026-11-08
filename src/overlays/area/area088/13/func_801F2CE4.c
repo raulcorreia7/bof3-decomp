@@ -14,7 +14,7 @@ MATCH s32 func_801F2CE4(void) {
     x                   = g_Task->pos.x.fixed + TO_COORD(1);
     g_Task->pos.x.fixed = x;
     if (x == TO_COORD(23)) {
-        g_Task->timer = 0x20;
+        g_Task->timer = 32;
         g_Task->header.mode++;
     }
 }

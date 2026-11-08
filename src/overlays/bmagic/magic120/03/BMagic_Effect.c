@@ -81,7 +81,7 @@ MATCH void func_801F009C(void) {
     func_801F0274();
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
-    if (timer == 0x60) {
+    if (timer == 96) {
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -103,7 +103,7 @@ MATCH void func_801F0158(void) {
     func_801F08AC();
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
-    if (timer == 0x10) {
+    if (timer == 16) {
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

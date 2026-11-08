@@ -46,7 +46,7 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     setXY0(line, (s16)(x + 63), (s16)(y + 1));
     line->x1 = (s16)(x + 63);
     line->y1 = (s16)(y + 14);
-    setRGB0(line, 128, 128, 128);
+    setRGB0(line, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(1U, sizeof(LINE_F2));
 }
 #else

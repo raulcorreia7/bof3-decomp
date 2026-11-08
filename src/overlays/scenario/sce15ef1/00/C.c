@@ -22,7 +22,7 @@ MATCH void func_801D0CC0(void) {
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        g_Task->timer = 0x40;
+        g_Task->timer = 64;
         g_Task->header.mode += 1;
     }
 }
@@ -34,7 +34,7 @@ MATCH void func_801D0D54(void) {
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        g_Task->timer = 0x20;
+        g_Task->timer = 32;
         g_Task->header.mode += 1;
     }
 }
@@ -49,7 +49,7 @@ MATCH void func_801D0FEC(void) {
     }
     func_801D2088();
     func_801D1A60();
-    g_Task->timer = 0x20;
+    g_Task->timer = 32;
     g_Task->header.mode += 1;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x09));
 }

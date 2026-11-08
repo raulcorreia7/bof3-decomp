@@ -1,5 +1,5 @@
 #!/bin/sh
-# Reject tracked retail media and files over 1 MiB. Needs no build inputs.
+# Reject tracked retail media, files over 1 MiB, and relative includes or imports. Needs no build inputs.
 set -eu
 cd "$(dirname "$0")/.."
 
@@ -11,6 +11,16 @@ if [ -n "$bad" ]; then
 	echo "check-tree: retail data or oversized files tracked:"
 	echo "$bad"
 	echo "check-tree: run: git rm --cached <file>, and keep game data under inputs/ or build/"
+	exit 1
+fi
+
+# Includes start at a root (src/ or include/), as in "overlays/area/X.h"; Python imports name the package.
+relative=$(git grep -nE '#[[:space:]]*include[[:space:]]+"\.\.?/' -- src include ':!include/psyq'
+	git grep -nE '^[[:space:]]*from \.+[A-Za-z_]* import' -- '*.py') || true
+if [ -n "$relative" ]; then
+	echo "check-tree: relative includes or imports:"
+	echo "$relative"
+	echo "check-tree: include from the source root (\"overlays/area/X.h\") and import as bof3.<module>"
 	exit 1
 fi
 echo "check-tree: ok"

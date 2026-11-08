@@ -7,7 +7,7 @@ MATCH void Area_RequestCellRows(AreaCell* entry) {
     u16 id;
     u16 value;
 
-    id = entry->prim_id & 0xFFF;
+    id = entry->prim_id & AREA_CELL_PRIM_MASK;
     if (id != 0) {
         Area_FreeCellPrimRow(id);
         entry->prim_id = 0;

@@ -48,7 +48,7 @@ MATCH void func_80167910(void) {
     poly->v1 = 155;
     poly->v0 = poly->v1 + 12;
     poly->v2 = poly->v0;
-    setRGB0(poly, 128, 128, 128);
+    setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     poly->y1    = poly->y0;
     poly->y2    = poly->y0 + 24;
     poly->y3    = poly->y2;

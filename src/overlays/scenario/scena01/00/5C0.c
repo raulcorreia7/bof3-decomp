@@ -42,7 +42,7 @@ MATCH void func_801F7480(void) {
     func_801F7C54();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
-        g_Task->timer       = 0x20;
+        g_Task->timer       = 32;
         g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }

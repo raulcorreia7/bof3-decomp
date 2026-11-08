@@ -7,7 +7,7 @@ MATCH void func_801F2CB4(void) {
         g_Task->tint.bytes.unk_5E += 4;
         g_Task->tint.bytes.unk_5F += 4;
     } else {
-        g_Task->timer       = 0xC;
+        g_Task->timer       = 12;
         g_Task->header.mode = 3;
     }
     Area_DrawScreenTint();

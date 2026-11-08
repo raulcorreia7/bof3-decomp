@@ -11,7 +11,7 @@ MATCH void SND_XaStateSeek(void) {
         /* Seek param is the word at 0x80146838 (sibling reaches it as D_80146834 +
          * 4); aggregate layout unrecovered. */
         if (CdSeekP(&D_80146824[0x14]) != 0) {
-            g_EmiServiceState = 2;
+            g_EmiServiceState = SND_XA_STATE_SEEK_RESULT;
             D_80146832        = 0;
         }
     }

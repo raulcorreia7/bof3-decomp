@@ -20,7 +20,7 @@ MATCH void func_801F342C(void) {
     cell_2          = g_Task;
     scratch         = (Actor*)cell_2;
     scratch->unk_32 = 0x140;
-    scratch->timer  = 0x10;
+    scratch->timer  = 16;
     check           = g_Task;
     scratch->vx     = 0x100;
     scratch->vy     = 0x100;

@@ -15,7 +15,7 @@ MATCH void func_801EEE60(void) {
     s32          timer;
 
     func_801EFDDC();
-    if (g_Task->timer == 0xC) {
+    if (g_Task->timer == 12) {
         slot = LOBU(g_Battle.target_selector);
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
             battler = &g_Game.members[slot];
@@ -28,7 +28,7 @@ MATCH void func_801EEE60(void) {
     }
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
-    if ((timer & BYTE_MASK) == 0x10) {
+    if ((timer & BYTE_MASK) == 16) {
         g_Task->header.mode += 1;
     }
 }

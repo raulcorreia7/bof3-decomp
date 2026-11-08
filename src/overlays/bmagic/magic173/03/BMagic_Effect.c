@@ -121,7 +121,7 @@ MATCH void func_801F0648(void) {
     func_8014DAEC();
     timer          = g_Task->unk_09 + 4;
     g_Task->unk_09 = timer;
-    if (timer == 0x10) {
+    if (timer == 16) {
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

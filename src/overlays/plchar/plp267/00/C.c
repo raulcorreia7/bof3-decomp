@@ -8,13 +8,9 @@ MATCH void func_801CE404(void) {
     D_801D0988[TASK_BYTES[2]]();
 }
 
-MATCH void Char_StartTurnGarr(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurnGarr.h"
 
-MATCH void Char_RunStepScriptGarr(void) {
-    CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
-}
+#include "overlays/plchar/Char_RunStepScriptGarr.h"
 
 MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801D0994, 2, g_Task);
@@ -34,9 +30,7 @@ MATCH void func_801CEBFC(void) {
     SYS_DISPATCH_TASK(D_801D099C, 2, g_Task);
 }
 
-MATCH void Char_StartTurn(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurn.h"
 
 #include "overlays/plchar/Char_RunStepScript.h"
 
@@ -92,11 +86,9 @@ MATCH void func_801CFCA4(void) {
     SYS_DISPATCH_TASK(D_801D09D0, 2, g_Task);
 }
 
-#include "../../Char_StartNearestFacingTurn.h"
+#include "overlays/plchar/Char_StartNearestFacingTurn.h"
 
-MATCH void Char_RunStepScriptRyuAdult(void) {
-    CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_RunStepScriptRyuAdult.h"
 
 MATCH void func_801CFED8(void) {
     SYS_DISPATCH_TASK(D_801D09DC, 2, g_Task);
@@ -108,9 +100,7 @@ INCLUDE_ASM(func_801D0268);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
-    CHAR_PROBE_CELL_SPAWN(20);
-}
+#include "overlays/plchar/Char_ProbeCellSpawn.h"
 
 #include "overlays/plchar/Char_SpawnActor.h"
 

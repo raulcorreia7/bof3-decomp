@@ -13,7 +13,7 @@ MATCH void Menu_DrawCursorSprite(u16 x, u16 y, s32 unused) {
     setXY0(sprite, x - 22, y + 2);
     setUV0(sprite, 204, 156);
     setWH(sprite, 24, 12);
-    setRGB0(sprite, 128, 128, 128);
+    setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     sprite->clut = 0x7802;
     GFX_AddPrim(0, sizeof(SPRT));
 }

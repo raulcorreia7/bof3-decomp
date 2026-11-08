@@ -8,7 +8,7 @@ MATCH void func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shad
     sprite = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(sprite);
     if ((shade_mode & BYTE_MASK) == 0) {
-        setRGB0(sprite, 128, 128, 128);
+        setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     } else {
         setRGB0(sprite, 64, 64, 64);
     }

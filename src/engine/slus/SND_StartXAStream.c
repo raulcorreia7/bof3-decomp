@@ -9,7 +9,7 @@ MATCH void SND_StartXAStream(s32 key, s32 unused) {
 
     req               = &D_80146818;
     *req              = 0;
-    g_EmiServiceState = 1;
+    g_EmiServiceState = SND_XA_STATE_SEEK;
     D_8014681A        = key;
     D_8014682F        = 0;
     D_8014682C        = 0;

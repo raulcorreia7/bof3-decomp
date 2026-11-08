@@ -5,7 +5,7 @@ MATCH void func_801F33F0(void) {
     Actor* step;
 
     work        = g_Task;
-    work->timer = 0x20;
+    work->timer = 32;
     step        = g_Task;
     work->vx    = 0;
     step->header.mode++;

@@ -69,7 +69,7 @@ MATCH void func_801EF008(void) {
     work->pos.x.fixed = actor->pos.x.fixed;
     work->pos.y.fixed = actor->pos.y.fixed;
     z                 = actor->pos.z.fixed;
-    work->timer       = 0x10;
+    work->timer       = 16;
     work->unk_0C      = 8;
     work->pos.z.fixed = z;
     g_Task->header.step += 1;

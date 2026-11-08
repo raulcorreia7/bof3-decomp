@@ -22,9 +22,9 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
 
     shade = shade_mode & BYTE_MASK;
     if (shade == 0) {
-        sprt->b0 = 128;
-        sprt->g0 = 128;
-        sprt->r0 = 128;
+        sprt->b0 = GFX_COLOR_NEUTRAL;
+        sprt->g0 = GFX_COLOR_NEUTRAL;
+        sprt->r0 = GFX_COLOR_NEUTRAL;
     } else if (shade == 1) {
         sprt->b0 = 48;
         sprt->g0 = 48;
@@ -32,7 +32,7 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
     } else {
         sprt->g0 = 64;
         sprt->r0 = 64;
-        sprt->b0 = 128;
+        sprt->b0 = GFX_COLOR_NEUTRAL;
     }
 
     setXY0(sprt, sprite_x, sprite_y);

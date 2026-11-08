@@ -8,7 +8,7 @@ MATCH void SND_XaStateRead(void) {
         /* Param is the word at 0x80146838 (sibling reaches it as D_80146824[0x14]);
          * aggregate layout unrecovered. */
         if (CdControl(CdlReadS, &D_80146834 + 4, NULL) != 0) {
-            g_EmiServiceState = 4;
+            g_EmiServiceState = SND_XA_STATE_READ_PROGRESS;
             D_8014681E        = 0;
         }
     }

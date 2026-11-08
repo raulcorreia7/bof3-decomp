@@ -22,7 +22,7 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
             packet                  = (SPRT*)g_GfxPrimCursor;
             clut                    = GetClut((clut_index & BYTE_MASK) << 4, STAGE_PALETTE_Y);
             packet->clut            = clut;
-            setRGB0(packet, 128, 128, 128);
+            setRGB0(packet, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
             setXY0(packet, x, y);
             digit      = g_UiFormatBuffer[index];
             packet->v0 = 216;

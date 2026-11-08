@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801CEA94);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-#include "overlays/plchar/Char_ProbeCellSpawn10.h"
+#include "overlays/plchar/Char_ProbeCellSpawn.h"
 
 #include "overlays/plchar/Char_SpawnActor.h"
 
@@ -49,15 +49,9 @@ MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801CFDAC, 2, g_Task);
 }
 
-/* This copy turns between facings 3 and 5; the image's own are the header's. */
-MATCH void Char_StartTurnGarr(void) {
-    CHAR_START_TURN(3, 5);
-}
+#include "overlays/plchar/Char_StartTurnGarr.h"
 
-/* This copy selects scripts 0x40 and 0x41 at facings 5 and 3; the image's own are the header's. */
-MATCH void Char_RunStepScriptGarr(void) {
-    CHAR_RUN_STEP_SCRIPT(5, 3);
-}
+#include "overlays/plchar/Char_RunStepScriptGarr.h"
 
 MATCH void func_801CF70C(void) {
     SYS_DISPATCH_TASK(D_801CFDB8, 2, g_Task);

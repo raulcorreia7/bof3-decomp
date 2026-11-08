@@ -23,7 +23,7 @@ MATCH void func_801F42F0(void) {
         if (!(D_801F58C6 & 8)) {
             D_801F58C0 = 1;
         } else {
-            *timer = 0x2710;
+            *timer = 10000;
         }
     }
 

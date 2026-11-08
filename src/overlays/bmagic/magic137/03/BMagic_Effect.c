@@ -94,7 +94,7 @@ MATCH void func_801EFC58(void) {
 
 INCLUDE_ASM(func_801EFDF8);
 
-#include "../../Effect_DispatchStep.h"
+#include "overlays/bmagic/Effect_DispatchStep.h"
 
 MATCH void func_801F001C(void) {
     g_Task->param.phase = 0;

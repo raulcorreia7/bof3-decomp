@@ -9,7 +9,7 @@ MATCH void func_801F4FD4(void) {
         func_801F53F0(value);
     }
     g_Task->timer += 1;
-    if (g_Task->timer >= 0x20U) {
+    if (g_Task->timer >= 32U) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }

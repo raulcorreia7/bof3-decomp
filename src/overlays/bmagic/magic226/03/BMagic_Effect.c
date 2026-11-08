@@ -40,7 +40,7 @@ MATCH void Effect_SwingCameraAngle(void) {
     BMAGIC_SWING_CAMERA(60);
 }
 
-#include "../../Effect_StartTint.h"
+#include "overlays/bmagic/Effect_StartTint.h"
 
 MATCH void func_801EF698(void) {
     u8 timer_next;

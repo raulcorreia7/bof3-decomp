@@ -82,6 +82,6 @@ MATCH void func_800AE9C4(u8 texture_index) {
            ((BattlePanelGeometry*)BATTLE_WORK)->height + ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((BattlePanelGeometry*)BATTLE_WORK)->height + ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y);
-    setRGB0(primitive, 128, 128, 128);
+    setRGB0(primitive, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(2, sizeof(POLY_FT4));
 }

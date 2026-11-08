@@ -435,6 +435,9 @@ extern s32              D_80010004;
 extern EMIDecodeContext D_800327A0[];
 extern u8               D_800E3800;
 
+/* The g_AreaCellPrims row bits of AreaCell.prim_id. */
+#define AREA_CELL_PRIM_MASK 0xFFF
+
 /* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
  * Area_GetCell stores) and its row in g_AreaCellPrims (0 = none). */
 typedef struct AreaCell {

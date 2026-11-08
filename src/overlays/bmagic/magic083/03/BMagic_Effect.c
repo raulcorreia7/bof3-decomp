@@ -124,7 +124,7 @@ MATCH void func_801F0104(void) {
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
     if ((timer & BYTE_MASK) == 0) {
-        g_Task->timer = 0x1C - g_Task->param.unk_0B;
+        g_Task->timer = 28 - g_Task->param.unk_0B;
         g_Task->header.step += 1;
     }
 }

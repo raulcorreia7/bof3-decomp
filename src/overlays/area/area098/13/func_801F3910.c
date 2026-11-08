@@ -7,7 +7,7 @@ MATCH void func_801F3910(void) {
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
     if (!(remaining & 0xFF)) {
-        g_Task->timer = 0x20;
+        g_Task->timer = 32;
         g_Task->header.mode += 1;
     }
 }

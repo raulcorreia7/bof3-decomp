@@ -8,7 +8,7 @@ MATCH void func_801E5674(void) {
     }
     Menu_DrawClutStrip(D_80144953);
     MENU_DRAW_HEADER();
-    SAVE_DrawSlots(0x20 - g_MenuStartTimer * 0x50, 0x30, 1);
+    SAVE_DrawSlots(SAVE_SLOTS_X - g_MenuStartTimer * 0x50, SAVE_SLOTS_Y, 1);
     count            = g_MenuStartTimer - 1;
     g_MenuStartTimer = count;
     if (count == 0) {

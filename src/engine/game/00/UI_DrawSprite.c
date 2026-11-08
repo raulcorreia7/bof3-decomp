@@ -21,6 +21,6 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
         setClut(sprt, 128, STAGE_PALETTE_Y + 2);
     }
 
-    setRGB0(sprt, 128, 128, 128);
+    setRGB0(sprt, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(1, sizeof(SPRT));
 }

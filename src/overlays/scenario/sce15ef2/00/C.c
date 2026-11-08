@@ -26,7 +26,7 @@ MATCH void func_801D0CA0(void) {
     work->vx    = work->vx + 0x10;
     work->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 0x20;
+        g_Task->timer       = 32;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
@@ -37,7 +37,7 @@ MATCH void func_801D0D00(void) {
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 0x10;
+        g_Task->timer       = 16;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
@@ -59,7 +59,7 @@ MATCH void func_801D0DA4(void) {
     SYS_DISPATCH_TASK(D_801D1B2C, 1, g_Task);
 }
 
-#include "../../Scene_EndScan.h"
+#include "overlays/scenario/Scene_EndScan.h"
 
 INCLUDE_ASM(func_801D0E30);
 
@@ -91,14 +91,14 @@ MATCH void func_801D0F9C(void) {
     work->screen_x = work->screen_x + 0x15;
     work->screen_y = work->screen_y + 9;
     if (timer == 0) {
-        g_Task->timer       = 0x5A;
+        g_Task->timer       = 90;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 MATCH void func_801D1008(void) {
     if (g_ScriptVars[0] == 9) {
-        g_Task->timer       = 0x1E;
+        g_Task->timer       = 30;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
@@ -154,4 +154,4 @@ INCLUDE_ASM(Scene_UpdateScanBars);
 
 INCLUDE_ASM(func_801D17A0);
 
-#include "../../Scene_DrawRedGradient.h"
+#include "overlays/scenario/Scene_DrawRedGradient.h"

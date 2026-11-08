@@ -47,7 +47,7 @@ MATCH void func_801D543C(void) {
             MENU_DRAW_HEADER();
             panel_timer = 0xB;
             UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(GAME_TEXT_SAVE_COMPLETE));
-            SAVE_DrawSlots(0x20, 0x30, 0U);
+            SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             D_801E6080 = 1;
             D_801E6110 = 1;
             break;
@@ -68,7 +68,7 @@ MATCH void func_801D543C(void) {
             MENU_DRAW_HEADER();
             panel_timer = 0xB;
             UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(0x96));
-            SAVE_DrawSlots(0x20, 0x30, 0U);
+            SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             D_801E6080 = 1;
             D_801E6110 = 1;
             break;
@@ -76,7 +76,7 @@ MATCH void func_801D543C(void) {
             MENU_DRAW_HEADER();
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(0x8BU));
-            SAVE_DrawSlots(0x20, 0x30, 0U);
+            SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             break;
         default:
             resource = 9;

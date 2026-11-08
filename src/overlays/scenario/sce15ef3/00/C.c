@@ -126,7 +126,7 @@ MATCH void func_801D1420(void) {
 }
 
 MATCH void func_801D1460(void) {
-    g_Task->timer += 0x10;
+    g_Task->timer += 16;
     if (g_Task->timer == 0) {
         func_801D23AC(0xFF);
         g_Task->header.mode += 1;
@@ -136,7 +136,7 @@ MATCH void func_801D1460(void) {
 }
 
 MATCH void func_801D14DC(void) {
-    g_Task->timer -= 0x10;
+    g_Task->timer -= 16;
     if (g_AreaDrawFlags != 0) {
         func_801D23AC(g_Task->timer);
     }
@@ -153,7 +153,7 @@ MATCH void func_801D1588(void) {
     SYS_DISPATCH_TASK(D_801D280C, 1, g_Task);
 }
 
-#include "../../Scene_EndScan.h"
+#include "overlays/scenario/Scene_EndScan.h"
 
 INCLUDE_ASM(func_801D1614);
 
@@ -191,7 +191,7 @@ INCLUDE_ASM(func_801D19A0);
 
 INCLUDE_ASM(func_801D1A60);
 
-#include "../../Scene_DrawRedGradient.h"
+#include "overlays/scenario/Scene_DrawRedGradient.h"
 
 INCLUDE_ASM(func_801D1D20);
 

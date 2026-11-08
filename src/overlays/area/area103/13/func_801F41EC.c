@@ -3,7 +3,7 @@
 MATCH void func_801F41EC(void) {
     s16 remaining;
 
-    if (g_Task->timer == 0xF) {
+    if (g_Task->timer == 15) {
         g_Task->timer = 0;
     }
     remaining = g_Task->unk_32;

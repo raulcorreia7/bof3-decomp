@@ -19,7 +19,7 @@ MATCH void Effect_Drift(void) {
     work->unk_09 = timer;
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
-    if (timer == 0x30) {
+    if (timer == 48) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }

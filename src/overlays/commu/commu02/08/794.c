@@ -11,7 +11,7 @@ MATCH void func_801D143C(void) {
 
     value      = D_801DB0C4 + 1;
     D_801DB0C4 = value;
-    func_801D3184(0x6E - ((value & 0xFF) * 0x28), 0x48);
+    func_801D3184(0x6E - ((value & BYTE_MASK) * 0x28), 0x48);
     func_801D32A0(0x6E - ((u8)D_801DB0C4 * 0x28), 0x74, 1);
     if ((u8)D_801DB0C4 == 4) {
         func_801D2E10();
@@ -58,7 +58,7 @@ MATCH void func_801D1938(void) {
     func_801D2794(9, 1, 0);
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
-    func_801D2AC4(0x58, 0x44 - ((count & 0xFF) * 0x1E), 0, 0);
+    func_801D2AC4(0x58, 0x44 - ((count & BYTE_MASK) * 0x1E), 0, 0);
     func_801D2AC4(0x88, 0x44 - ((u8)D_801DB0C4 * 0x1E), 1, 0);
     func_801D2AC4(0xB8, 0x44 - ((u8)D_801DB0C4 * 0x1E), 2, 0);
     func_801D3184(0x26, 0x10);
@@ -86,11 +86,11 @@ MATCH void func_801D1FE4(void) {
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
-    index = (D_801DB0B4 + 1) & 0xFF;
+    index = (D_801DB0B4 + 1) & BYTE_MASK;
     func_801D2794(index, index, D_801DB0B4);
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
         D_801F294D += 1;
     }
@@ -145,7 +145,7 @@ MATCH void func_801D24A8(void) {
         }
         step       = D_801DB0C4 + 1;
         D_801DB0C4 = step;
-        func_801D3184(0x26, 0x10 - ((step & 0xFF) * 0x14));
+        func_801D3184(0x26, 0x10 - ((step & BYTE_MASK) * 0x14));
         func_801D32A0(0xA8, 0x10 - ((u8)D_801DB0C4 * 0x14), 0);
         if ((u8)D_801DB0C4 == 4) {
             D_801F294C = 2;
@@ -182,7 +182,7 @@ MATCH s32 func_801D2750(s32 limit) {
 
     do {
         roll = RANDOM_MASK(0xF);
-    } while (roll == 0 || roll >= ((limit & 0xFF) + 1));
+    } while (roll == 0 || roll >= ((limit & BYTE_MASK) + 1));
     return roll;
 }
 
@@ -249,7 +249,7 @@ MATCH void func_801D3700(void) {
 
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
-    func_801D4AE0(0x10 - ((count & 0xFF) * 0x1E), 0x18, 0);
+    func_801D4AE0(0x10 - ((count & BYTE_MASK) * 0x1E), 0x18, 0);
     func_801D3184(((u8)D_801DB0C4 * 0x1E) + 0xCC, 0x10);
     func_801D32A0(((u8)D_801DB0C4 * 0x1E) + 0xCC, 0x3C, 0);
     func_801D2CF8(0x68, 0x40 - ((u8)D_801DB0C4 * 0x1E), 0xFF);
@@ -422,12 +422,12 @@ MATCH s32 func_801D5AD0(s32 limit) {
     roll = RANDOM_MASK(0x7F);
     FAKE_ORDER_LOCK_BEGIN
     loop_1:
-        if ((roll & 0xFF) >= (u32)(limit & 0xFF)) {
+        if ((roll & BYTE_MASK) >= (u32)(limit & BYTE_MASK)) {
             roll -= RANDOM_MASK(0xF);
             goto loop_1;
         }
     FAKE_ORDER_LOCK_END;
-    return roll & 0xFF;
+    return roll & BYTE_MASK;
 }
 
 INCLUDE_ASM(func_801D5B2C);
@@ -466,9 +466,9 @@ MATCH void func_801D5E94(void) {
 
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((count & 0xFF) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       g_WindowStyle);
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((count & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH,
+                       MENU_HEADER_HEIGHT, g_WindowStyle);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     check = D_801DB0C4;
     if (check == 0) {
@@ -489,7 +489,7 @@ MATCH void func_801D5F7C(void) {
         D_801F294D = 8;
     } else {
         pressed = PAD_GetRepeatedButtons(g_InputPressed & 0xA000);
-        if (pressed & 0xFFFF) {
+        if (pressed & HALF_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         }
         if (pressed & 0x8000) {
@@ -499,13 +499,13 @@ MATCH void func_801D5F7C(void) {
             }
         } else if (pressed & 0x2000) {
             D_801DB0B4 += 1;
-            if ((s8)D_801DB0B4 >= (Fairy_CountFairies() & 0xFF)) {
+            if ((s8)D_801DB0B4 >= (Fairy_CountFairies() & BYTE_MASK)) {
                 D_801DB0B4 = 0;
             }
         }
     }
     func_801D812C();
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64);
     func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 0);
 }
@@ -529,7 +529,7 @@ MATCH void func_801D6124(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     }
@@ -541,7 +541,7 @@ MATCH void func_801D6124(void) {
         func_801D8058(0x4A, 0x64);
         func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 1);
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D62C8(void) {
@@ -549,10 +549,10 @@ MATCH void func_801D62C8(void) {
 
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
                        g_WindowStyle);
     func_801D8058(0x4A, ((u8)D_801DB0C4 * 0x28) + 0x64);
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         D_801DB0C4 = 5;
         D_801F294D = 7;
@@ -571,7 +571,7 @@ MATCH void func_801D6390(void) {
         }
         D_801F294D = value;
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D640C(void) {
@@ -590,12 +590,12 @@ MATCH void func_801D64E0(void) {
             D_801F294E = 0;
         }
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D6574(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA8E8();
     }
@@ -608,7 +608,7 @@ MATCH void func_801D65F8(void) {
 INCLUDE_ASM(func_801D6634);
 
 MATCH void func_801D67F0(void) {
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 1);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
     func_801AE214((D_801DB0D0 * 8) + 0x4A, 0x42, 8, 0);
     func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
     func_801D9B80(0x12, 0x61, 0x24, 0x11);
@@ -619,7 +619,7 @@ MATCH void func_801D67F0(void) {
 INCLUDE_ASM(func_801D68AC);
 
 MATCH void func_801D6AC8(void) {
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 1);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 == 0) {
             D_801DB0C4 = 0;
@@ -633,7 +633,7 @@ MATCH void func_801D6AC8(void) {
 
 MATCH void func_801D6B60(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 1);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA8E8();
     }
@@ -644,9 +644,9 @@ MATCH void func_801D6BE4(void) {
 
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
                        g_WindowStyle);
-    func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {
         Message_StartAreaMessage(0xF7);
@@ -683,7 +683,7 @@ MATCH void func_801D708C(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     }
@@ -694,8 +694,8 @@ MATCH void func_801D708C(void) {
         }
     }
     func_801D9210();
-    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & 0xFFFF, 0,
-                  6);
+    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & HALF_MASK,
+                  0, 6);
 }
 
 INCLUDE_ASM(func_801D7234);
@@ -712,7 +712,7 @@ MATCH void func_801D73F8(void) {
         }
         D_801F294D = value;
     }
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 0);
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D7474(void) {
@@ -731,12 +731,12 @@ MATCH void func_801D7548(void) {
             D_801F294E = 0;
         }
     }
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 0);
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D75DC(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x28), 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 0);
+    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x28), 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA7A4();
     }
@@ -749,7 +749,7 @@ MATCH void func_801D7660(void) {
 INCLUDE_ASM(func_801D769C);
 
 MATCH void func_801D7878(void) {
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 1);
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
     func_801AE214((D_801DB0D0 * 8) + 0x5B, 0x50, 8, 0);
     func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
     func_801D9B80(0x12, 0x61, 0x24, 0x11);
@@ -760,7 +760,7 @@ MATCH void func_801D7878(void) {
 INCLUDE_ASM(func_801D7934);
 
 MATCH void func_801D7B50(void) {
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 1);
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 == 0) {
             D_801DB0C4 = 0;
@@ -774,7 +774,7 @@ MATCH void func_801D7B50(void) {
 
 MATCH void func_801D7BE8(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 1);
+    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA7A4();
     }

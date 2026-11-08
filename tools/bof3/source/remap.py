@@ -15,8 +15,8 @@ import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .ctext import mask
-from .index import OBJDUMP
+from bof3.source.ctext import mask
+from bof3.source.index import OBJDUMP
 
 JUMP_OPS = (2, 3)
 _HEADER = re.compile(r"^([0-9a-f]+) <(\S+)>:$")

@@ -15,7 +15,7 @@ MATCH void func_801EEEAC(void) {
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x54) {
         g_Task->header.mode += 1;
-        g_Task->timer = 0x40;
+        g_Task->timer = 64;
     }
     func_801EF0F8(g_Task->unk_64);
 }

@@ -17,7 +17,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
-from .ctext import read
+from bof3.source.ctext import read
 
 CACHE = "build/func_index.json.gz"
 OBJDUMP = "bin/internal/binutils/objdump"

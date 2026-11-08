@@ -213,7 +213,7 @@ MATCH void func_801F7C50(void) {
     temp_v0       = g_Task->timer - 1;
     g_Task->timer = temp_v0;
     if (!(temp_v0 & BYTE_MASK)) {
-        g_Task->timer = 0x80;
+        g_Task->timer = 128;
         g_Task->header.mode += 1;
     }
 }
@@ -329,8 +329,8 @@ MATCH void func_801F85FC(void) {
 
 MATCH void func_801F8710(void) {
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, g_Task->timer, 0x80, 0);
-    g_Task->timer += 0x0F;
-    if (g_Task->timer >= 0x3D) {
+    g_Task->timer += 15;
+    if (g_Task->timer >= 61) {
         g_Task->timer = 0xFF;
         g_Task->header.mode += 1;
     }
@@ -340,13 +340,13 @@ MATCH void func_801F87A4(void) {
     u8 count;
 
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, (g_Task->timer & 1) | 0x3C, 0x80, 0);
-    if (g_Task->timer == 0xD7) {
+    if (g_Task->timer == 215) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
     }
     count         = g_Task->timer - 1;
     g_Task->timer = count;
     if (count == 0) {
-        g_Task->timer = 0x3C;
+        g_Task->timer = 60;
         g_Task->header.mode += 1;
     }
 }

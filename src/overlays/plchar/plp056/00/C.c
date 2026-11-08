@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801CEA94);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-#include "overlays/plchar/Char_ProbeCellSpawn10.h"
+#include "overlays/plchar/Char_ProbeCellSpawn.h"
 
 #include "overlays/plchar/Char_SpawnActor.h"
 
@@ -36,7 +36,7 @@ MATCH void func_801CF12C(void) {
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
-#include "../../Char_AdvanceFacingTurn.h"
+#include "overlays/plchar/Char_AdvanceFacingTurn.h"
 
 MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801D087C, 2, g_Task);
@@ -52,9 +52,7 @@ MATCH void func_801CF728(void) {
     SYS_DISPATCH_TASK(D_801D0888, 2, g_Task);
 }
 
-MATCH void Char_StartTurnPeco(void) {
-    CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
-}
+#include "overlays/plchar/Char_StartTurnPeco.h"
 
 #include "overlays/plchar/Char_RunStepScript.h"
 

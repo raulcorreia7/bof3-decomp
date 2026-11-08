@@ -5,9 +5,9 @@ MATCH void func_800C1A58(void) {
 
     timer                         = ((PartyMember*)g_Task)->timer - 1;
     ((PartyMember*)g_Task)->timer = timer;
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         func_801E52F0(*g_BattleCurrentEnemy->unk_E8);
-        func_801E52F0((*g_BattleCurrentEnemy->unk_E8 + 4) & 0xFFFF);
+        func_801E52F0((*g_BattleCurrentEnemy->unk_E8 + 4) & HALF_MASK);
         ((PartyMember*)g_Task)->header.step += 1;
     }
 }

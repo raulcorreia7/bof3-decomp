@@ -122,7 +122,7 @@ MATCH void func_801EF8C8(void) {
     func_801EF984();
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
-    if (timer == 0x60) {
+    if (timer == 96) {
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -133,7 +133,7 @@ MATCH void func_801EF930(void) {
     func_801EF984();
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
-    if ((timer & BYTE_MASK) == 0x80) {
+    if ((timer & BYTE_MASK) == 128) {
         func_801E5988();
     }
 }

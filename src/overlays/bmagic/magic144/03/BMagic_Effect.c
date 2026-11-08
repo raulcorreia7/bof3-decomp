@@ -48,7 +48,7 @@ MATCH void func_801EF078(void) {
     PartyMember** actor;
     timer          = g_Task->unk_09 + 2;
     g_Task->unk_09 = timer;
-    if (timer == 0x10) {
+    if (timer == 16) {
         actor = &g_Battle.selected_actor;
         GFX_FreePaletteFadeTarget(*actor);
         GFX_AllocPaletteFade(*actor, -8, -8, -8, 1);

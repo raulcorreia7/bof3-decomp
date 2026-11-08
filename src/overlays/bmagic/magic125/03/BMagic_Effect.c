@@ -120,7 +120,7 @@ MATCH void func_801EF890(void) {
         g_Task->unk_14      = 0x100;
         g_Task->unk_20      = 0x21;
         g_Task->unk_09      = 0x10;
-        g_Task->timer       = 0x1E;
+        g_Task->timer       = 30;
         g_Task->header.step += 1;
     }
 }

@@ -7,13 +7,13 @@ MATCH void SND_XaStatePauseResult(void) {
 
     flag = &D_8014682E;
     if (*flag < 0) {
-        g_EmiServiceState = 6;
+        g_EmiServiceState = SND_XA_STATE_PAUSE;
         if ((((s16)D_80146820++ < 6) == 0) || (SND_HasXACDError() != 0)) {
-            g_EmiServiceState = 8;
+            g_EmiServiceState = SND_XA_STATE_WAIT_SYNC;
         }
     } else if (*flag != 0) {
         D_8014682F        = 2;
-        g_EmiServiceState = 0;
+        g_EmiServiceState = SND_XA_STATE_IDLE;
         D_8014681C        = 0;
         *flag             = 0;
         g_EmiStreamState  = 3;

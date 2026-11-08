@@ -3,7 +3,7 @@
 MATCH void func_801F465C(void) {
     s16 count;
 
-    if (g_Task->timer == 0xF) {
+    if (g_Task->timer == 15) {
         g_Task->timer = 0;
     }
     count = g_Task->unk_32;
