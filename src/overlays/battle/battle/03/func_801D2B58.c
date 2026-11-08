@@ -82,7 +82,7 @@ NON_MATCHING void func_801D2B58(void) {
                 offset        = kind * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
-                row->step =
+                row->unk_02 =
                     (s16)(actor->unk_2E + (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) +
                                                                    (g_BattlePartyBattlers[kind].chr.character_id * 8)]);
                 row->unk_04 = (s16)(actor->unk_30 +
@@ -95,7 +95,7 @@ NON_MATCHING void func_801D2B58(void) {
                 state_offset  = kind * 0x118;
                 row->work_0C  = (void*)(eb3dc + state_offset);
                 row->state_08 = (void*)(eb3dc - 0xF4 + state_offset);
-                row->step     = (s16)(actor->unk_2E + ENEMY_COMBATANT(kind).panel_offset_x);
+                row->unk_02   = (s16)(actor->unk_2E + ENEMY_COMBATANT(kind).panel_offset_x);
                 row->unk_04   = (s16)(actor->unk_30 + ENEMY_COMBATANT(kind).panel_offset_y);
                 depth         = actor->unk_32;
                 state         = eb3dc_2f4 + (kind - 3) * 0x118;
@@ -115,16 +115,16 @@ NON_MATCHING void func_801D2B58(void) {
                 offset        = cursor[0] * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
-                row->step = (s16)(actor->unk_2E +
-                                  (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) +
-                                                           (g_BattlePartyBattlers[cursor[0]].chr.character_id * 8)]);
-                value     = (g_BattlePanelOffsets +
-                             1)[(actor->unk_08 * 2) + (g_BattlePartyBattlers[cursor[0]].chr.character_id * 8)];
+                row->unk_02 = (s16)(actor->unk_2E +
+                                    (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) +
+                                                             (g_BattlePartyBattlers[cursor[0]].chr.character_id * 8)]);
+                value       = (g_BattlePanelOffsets +
+                               1)[(actor->unk_08 * 2) + (g_BattlePartyBattlers[cursor[0]].chr.character_id * 8)];
             } else {
                 state_offset  = cursor[0] * 0x118;
                 row->state_08 = (void*)(g_BattleEnemies + state_offset);
                 row->work_0C  = (void*)(D_801EB3DC + state_offset);
-                row->step     = (s16)(actor->unk_2E + ENEMY_COMBATANT(cursor[0]).panel_offset_x);
+                row->unk_02   = (s16)(actor->unk_2E + ENEMY_COMBATANT(cursor[0]).panel_offset_x);
                 value         = ENEMY_COMBATANT(cursor[0]).panel_offset_y;
             }
             row->unk_04 = (s16)(actor->unk_30 + (s8)value);

@@ -39,7 +39,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
                 D_801EB550[(u8)count].index = (u8)index;
                 D_801EB550[(u8)count].value = 0;
                 if (g_BattlePartyBattlers[(u8)index].turn.command.type == BATTLE_COMMAND_ABILITY) {
-                    mode = D_801CA719[g_BattlePartyBattlers[(u8)index].turn.command.id].value;
+                    mode = D_801CA718[g_BattlePartyBattlers[(u8)index].turn.command.id][1];
                     if (mode == 1 || mode == 3) {
                         D_801EB550[(u8)count].value = 2;
                     } else if (mode == 0) {
@@ -70,7 +70,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
                 u32 rank;
 
                 slot                        = (u8)index - 3u;
-                rank                        = func_801DB434(g_BattleEnemyBattlers[slot].unk_88, 0u);
+                rank                        = func_801DB434(g_BattleEnemyBattlers[slot].level, 0u);
                 D_801EB550[(u8)count].index = (u8)index;
                 count += 1u;
                 D_801EB550[(u8)count - 1u].value =

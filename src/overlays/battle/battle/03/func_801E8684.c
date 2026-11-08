@@ -34,7 +34,7 @@ NON_MATCHING void func_801E8684(void) {
     TASK_SET(g_BattleEffectBattler);
     g_GameState                                  = &g_BattlePartyBattlers[g_BattleEffectBattler->slot];
     temp_v1_31                                   = g_BattleEffectBattler->slot;
-    g_BattleEffectBattler->unk_40                = 0;
+    g_BattleEffectBattler->scale.x               = 0;
     g_BattlePartyBattlers[temp_v1_31]            = s_BattleBattlerTemplates[temp_v1_31];
     *(D_80145E91 + ((g_Task)->slot * 0x140))     = 6;
     *(D_80145E92 + ((g_Task)->slot * 0x140))     = 4;
@@ -86,7 +86,7 @@ NON_MATCHING void func_801E8684(void) {
     temp_v0_356                                   = temp_a1_352 * BATTLE_PARTY_STRIDE;
     g_MenuPanelTasks[temp_a1_352 + 0xD].unk_0C    = (u8)((s32)(g_BattlePartyBattlers[temp_a1_352].chr.ap * 0x37) /
                                                          (s32)g_BattlePartyBattlers[temp_a1_352].chr.stats.max_ap);
-    Actor_SelectScript(((g_Task)->unk_08 + 4) & BYTE_MASK);
+    Actor_SelectScript(((g_Task)->facing + 4) & BYTE_MASK);
     GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
     func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
     GFX_UploadPaletteRows();
