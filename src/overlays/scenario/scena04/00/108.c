@@ -103,7 +103,7 @@ MATCH void func_801F7AC8(void) {
 MATCH void func_801F7B00(void) {
     /* FAKE: unused frame, 16 bytes; `row` and `shade` also stay uninitialized
        when the frame count skips the spawn, as in retail. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
     u8* row;
     s32 shade;
     s32 height;

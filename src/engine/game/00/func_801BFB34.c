@@ -27,7 +27,7 @@ NON_MATCHING void func_801BFB34(void) {
     s32  cnt_a;
     s32  cnt_b;
     /* FAKE: unused frame, 56 bytes. */
-    STACK_PADS(u8, 56);
+    FAKE_STACK_PADS(u8, 56);
 
     val4  = 0;
     cnt_a = g_Game.party_size;

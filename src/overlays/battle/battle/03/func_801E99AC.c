@@ -20,7 +20,7 @@ MATCH void func_801E99AC(void) {
     adj           = ((kind == 0) || (kind == 3)) ? D_801EAEA4[0] : D_801EAEA4[2];
     panel->x.half = base + adj;
     /* FAKE: retail keeps the second row scan after the x store. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     y                         = g_BattleEnemyBattlers[row].unk_30 + g_BattleEnemyBattlers[row].panel_offset_y + 0xC;
     BATTLE_PANEL_TASK->y.half = y;
     func_801D8690((s16)BATTLE_PANEL_TASK->x.half, (s16)y, BATTLE_PANEL_TASK->cell_0A.slot);

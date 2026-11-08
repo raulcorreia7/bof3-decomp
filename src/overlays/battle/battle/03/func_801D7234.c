@@ -18,7 +18,7 @@ MATCH void func_801D7234(void) {
                 unk_02 = D_80181EB8[action].sep_slot;
                 state  = g_EmiStreamFlags;
                 /* FAKE: retail loads the state cell before the flags byte. */
-                MATCH_FAKE_BARRIER();
+                FAKE_BARRIER();
                 flag             = g_Battle.outcome.result;
                 D_80146855       = unk_02;
                 unk_03           = D_80181EB8[action].sequence;

@@ -25,10 +25,10 @@ MATCH void func_801DEAE0(void) {
     }
 
     /* FAKE: keeps a1 staged before arg4. */
-    CLOBBER_A1();
+    FAKE_CLOBBER_A1();
     /* FAKE: keeps a2 staged before arg4. */
-    CLOBBER_A2();
+    FAKE_CLOBBER_A2();
     /* FAKE: keeps a3 staged before arg4. */
-    CLOBBER_A3();
+    FAKE_CLOBBER_A3();
     func_801DE60C(0u, 2u, 0u, 0u, 0xFFu, Resource_GetText(x));
 }

@@ -4,7 +4,7 @@ MATCH s32 func_801D2190(void) {
     u8 value;
     u8 code;
     /* FAKE: result pinned to v0; retail keeps the return value live. */
-    MATCH_REG(s32, result, "v0");
+    FAKE_REG(s32, result, "v0");
 
     value  = Area_GetCellCode(D_80145EC6, D_80145ECA);
     code   = value & 0xF0;

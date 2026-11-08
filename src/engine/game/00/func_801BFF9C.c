@@ -6,18 +6,18 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     s32        i;
     s32        id;
     s32        off;
-    MATCH_FAKE_PIN(u8*, work, "s1"); /* FAKE: work pointer stays in s1. */
+    FAKE_REG(u8*, work, "s1"); /* FAKE: work pointer stays in s1. */
     u8* base;
     u8* order;
     u8* dst;
-    MATCH_FAKE_PIN(u8*, feed, "t1"); /* FAKE: record base reloads into t1. */
+    FAKE_REG(u8*, feed, "t1"); /* FAKE: record base reloads into t1. */
     u8* mask;
-    MATCH_FAKE_PIN(u32, addr, "v0"); /* FAKE: work base staged in v0. */
+    FAKE_REG(u32, addr, "v0"); /* FAKE: work base staged in v0. */
     u8  kind;
     s32 koff; /* FAKE: retail scales the record index before the base add. */
     /* FAKE: retail holds the three arguments in s7/fp/s6. */
     s32 z;
-    MATCH_FAKE_PIN(s32, c41, "v1"); /* FAKE: TO_COORD(65) materializes in v1. */
+    FAKE_REG(s32, c41, "v1"); /* FAKE: TO_COORD(65) materializes in v1. */
     s32 x;
     s32 y;
 
@@ -106,7 +106,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     *(Character*)dst                          = *rec;
                     if (!(g_Task->active_flags & 1)) {
                         func_801C1254(*order, i & BYTE_MASK);
-                        MATCH_FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
+                        FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
                     } else {
                         func_801C1254(*order, i & BYTE_MASK);

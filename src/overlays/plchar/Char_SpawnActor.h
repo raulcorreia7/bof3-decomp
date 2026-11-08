@@ -6,8 +6,8 @@
 MATCH void Char_SpawnActor(s32 arg0, s32 arg1, s32 arg2) {
     /* FAKE: retail keeps the kind in $s1 and the position words in $s2/$s3;
      * gcc-2.7.2 assigns the first two registers by live length instead. */
-    MATCH_REG(s32, y, "s3");
-    MATCH_REG(s32, kind, "s1");
+    FAKE_REG(s32, y, "s3");
+    FAKE_REG(s32, kind, "s1");
     s32 x;
     u8  slot;
     s32 x_word;

@@ -23,7 +23,7 @@ MATCH bool Fishing_LureInRange(void) {
             entry_byte = g_ActorSlots[0].unk_07;
             /* FAKE: keeps the unk_07 byte load ahead of the scratchpad
              * pointer load (retail +0x8C before +0x90). */
-            MATCH_BARRIER();
+            FAKE_BARRIER();
             work  = FISHING_STATE;
             range = (entry_byte - row->unk_0F + 3) & BYTE_MASK;
             /* FAKE: func_801BDD58 reads the slot through the field actor layout. */

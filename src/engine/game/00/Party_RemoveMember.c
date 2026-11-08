@@ -20,7 +20,7 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
     u32* wdst;
     u32* wend;
     /* FAKE: unused frame, 24 bytes. */
-    STACK_PADS(u8, 24);
+    FAKE_STACK_PADS(u8, 24);
 
     func_801C1840();
     slot = 0;

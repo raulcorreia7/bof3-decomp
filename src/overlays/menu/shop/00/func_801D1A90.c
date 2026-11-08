@@ -8,7 +8,7 @@ NON_MATCHING void func_801D1A90(void) {
 
     panel = &g_MenuPanelTasks[9];
     /* FAKE: the panel store stays above the pad-state read, as retail orders them. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     panel->active = 1;
     D_80148475    = 7;
     D_80148476    = 8;
@@ -68,7 +68,7 @@ NON_MATCHING void func_801D1A90(void) {
 }
 #else
 /* first difference +0x4: retail keeps &g_MenuPanelTasks[9] in v1 and reads slot 8's pos at -0x20/-0x1E twice; the
- * draft folds both reads to one absolute load. Tried: pointer local, constant indexes, ORDER_FENCE after each setup
+ * draft folds both reads to one absolute load. Tried: pointer local, constant indexes, FAKE_ORDER_FENCE after each setup
  * store, a pinned v1. */
 INCLUDE_ASM(func_801D1A90);
 #endif

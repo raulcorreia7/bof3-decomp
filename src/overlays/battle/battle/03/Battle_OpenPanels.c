@@ -34,7 +34,7 @@ MATCH void Battle_OpenPanels(void) {
             D_80148332[battler + 0xD].mode_00 = 5;
             D_80148332[0xD + battler].unk_01  = 0;
             /* FAKE: barrier keeps the row-byte load after the two panel byte stores. */
-            MATCH_BARRIER();
+            FAKE_BARRIER();
             first                          = g_Game.members[battler].facing;
             index                          = first * 2 + g_Game.members[battler].chr.character_id * 8;
             panel_x                        = g_Game.members[battler].unk_2E.half + g_BattlePanelOffsets[index];

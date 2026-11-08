@@ -2,7 +2,7 @@
 
 MATCH void Area_IndexCells(void) {
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     s16* table_base;
     s16* value;
     s16* cell;
@@ -38,7 +38,7 @@ MATCH void Area_IndexCells(void) {
         column_offset = g_AreaGridColCursor;
         do {
             /* FAKE: Reuse v1 for the x delta, difference and adjusted column. */
-            MATCH_FAKE_PIN(s32, difference, "v1");
+            FAKE_REG(s32, difference, "v1");
             s32 raw_row;
             difference = record[1] - origin_x;
             dy         = record[0] - origin_y;
@@ -48,7 +48,7 @@ MATCH void Area_IndexCells(void) {
                 {
                     s32 row_delta;
                     /* FAKE: Pin wrapped row to a0. */
-                    MATCH_FAKE_PIN(s32, table_row, "a0");
+                    FAKE_REG(s32, table_row, "a0");
                     row_delta = raw_row + 1;
                     raw_row   = row_offset + row_delta;
                     if (raw_row < AREA_CELL_GRID_ROWS) {
@@ -59,12 +59,12 @@ MATCH void Area_IndexCells(void) {
                     raw_row = table_row;
                 }
                 /* FAKE: Preserve row scheduling. */
-                MATCH_FAKE_BARRIER();
+                FAKE_BARRIER();
                 {
                     /* FAKE: Pin column step to v0 for the retail calculation. */
-                    MATCH_FAKE_PIN(s32, column_delta, "v0");
+                    FAKE_REG(s32, column_delta, "v0");
                     /* FAKE: Pin wrapped column to a0 after row use ends. */
-                    MATCH_FAKE_PIN(s32, table_column, "a0");
+                    FAKE_REG(s32, table_column, "a0");
                     column_delta = difference / 2 + 1;
                     difference   = column_offset + column_delta;
                     if (difference < AREA_CELL_GRID_COLS) {
@@ -76,7 +76,7 @@ MATCH void Area_IndexCells(void) {
                     base       = raw_row * 0x38 + (u32)table;
                     cell       = (s16*)((table_column * 2) + base);
                     /* FAKE: Preserve wrapped-index order. */
-                    MATCH_FAKE_BARRIER();
+                    FAKE_BARRIER();
                     record_index = g_AreaMapBundle.record_region_24;
                     difference += record;
                     difference -= record_index * 4;

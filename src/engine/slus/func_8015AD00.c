@@ -34,7 +34,7 @@ typedef union PanelQuadPrim {
  */
 MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     CVECTOR color;
-    STACK_PADS(VECTOR, 1); /* FAKE: retail keeps a dead 16-byte VECTOR slot at sp+0x18. */
+    FAKE_STACK_PADS(VECTOR, 1); /* FAKE: retail keeps a dead 16-byte VECTOR slot at sp+0x18. */
     VECTOR         normal;
     VECTOR         vec;
     MATRIX         light;
@@ -84,53 +84,53 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             SetPolyFT4(&quad->ft4);
 
             vv = piece->v[0][0];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             D_1F800014[0].vx = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[0][1];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x16u) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[0][2];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x18u) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[1][0];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             D_1F800014[1].vx = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[1][1];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x1Eu) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[1][2];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x20u) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[2][0];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             D_1F800014[2].vx = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[2][1];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x26u) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[2][2];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x28u) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[3][0];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             D_1F800014[3].vx = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[3][1];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x2Eu) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[3][2];
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x30u) = vv;
-            MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             normal.vx        = piece->n[0];
             normal.vy        = piece->n[1];
             normal.vz        = piece->n[2];

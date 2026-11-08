@@ -3,7 +3,7 @@
 MATCH void func_801E006C(void) {
     s32 input;
     /* FAKE: pin keeps the shared 0xFF constant in a0, so its load schedules before the other constants. */
-    MATCH_REG(s32, ff, "a0");
+    FAKE_REG(s32, ff, "a0");
 
     TEXT_SetVariable(0, 5, g_Characters[D_801E6264[D_801E625C]].name);
     D_80148340 = 0x75;

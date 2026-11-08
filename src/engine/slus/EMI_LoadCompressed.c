@@ -11,7 +11,7 @@ MATCH void EMI_LoadCompressed(void) {
     handlers        = (u32*)((flag + 0x2F));
     handlers[*flag] = g_EmiLoadArg;
     /* FAKE: barrier reproduces slot index reload ordering. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     g_EmiRingStates[*flag] = 1;
 
     if (g_EmiStep == 0) {

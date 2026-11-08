@@ -12,7 +12,7 @@ MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 target_index) {
     u32 index;
     /* FAKE: enemy-index temp in v0; clean C leaves the v0/v1 tie-break
      * swapped (retail scales in v1, keeps the index in v0). */
-    MATCH_FAKE_PIN(u32, enemy_index, "v0");
+    FAKE_REG(u32, enemy_index, "v0");
 
     index = target_index;
     if ((g_Battle.state & BATTLE_STATE_CRITICAL) != 0u) {

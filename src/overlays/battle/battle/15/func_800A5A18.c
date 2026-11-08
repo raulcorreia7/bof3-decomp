@@ -16,7 +16,7 @@ MATCH void func_800A5A18(void) {
         D_801485DF = 0;
         D_801485E2 = 0x3F;
         /* FAKE: statement boundary keeps the retail register order and schedule. */
-        ORDER_LOCK(D_801485EC = 0);
+        FAKE_ORDER_LOCK(D_801485EC = 0);
         D_801485EE                               = 0;
         D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Resource_GetText(0x63);
         count                                    = g_BattleUIState + 1;

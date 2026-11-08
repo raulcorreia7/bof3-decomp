@@ -11,9 +11,9 @@ MATCH void SYS_StartFrontend(void) {
     u16        word;
     u32        i;
     /* FAKE: retail keeps the copy count in a0. */
-    MATCH_REG(u32, j, "a0");
+    FAKE_REG(u32, j, "a0");
     /* FAKE: retail keeps the clear pointer in v1. */
-    MATCH_REG(u8*, clear, "v1");
+    FAKE_REG(u8*, clear, "v1");
 
     GFX_ClearRect(0, 0, 1024, 512);
     CallbackWait(1U);

@@ -9,7 +9,7 @@ MATCH void func_801D10AC(u32 message_id) {
     s32  trig;
     u16  pad;
     /* FAKE: unused frame, 16 bytes. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
     s32 count;
     u8  handler;
     s32 i;

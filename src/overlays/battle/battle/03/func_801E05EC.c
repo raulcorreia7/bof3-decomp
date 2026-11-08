@@ -29,11 +29,11 @@ MATCH void func_801E05EC(void) {
         u8  countdown;
         s32 position_x;
         /* FAKE: pin x delta to a1. */
-        MATCH_REG(s32, delta_x, "a1");
+        FAKE_REG(s32, delta_x, "a1");
         /* FAKE: pin y position to v1. */
-        MATCH_REG(s32, position_y, "v1");
+        FAKE_REG(s32, position_y, "v1");
         /* FAKE: pin y delta to a2. */
-        MATCH_REG(s32, delta_y, "a2");
+        FAKE_REG(s32, delta_y, "a2");
 
         /* FAKE: volatile byte view keeps the reload separate from the branch
          * test load. */

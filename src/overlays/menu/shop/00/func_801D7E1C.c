@@ -8,7 +8,7 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     s32 rec;
     /* FAKE: the retail build homes the x copy in s4 and reuses x's s2 for gx;
      * unpinned the allocator merges x and xpos into one pseudo (82.98). */
-    MATCH_REG(s32, xpos, "s4");
+    FAKE_REG(s32, xpos, "s4");
     s32 sel;
     u32 enabled;
     u32 value;

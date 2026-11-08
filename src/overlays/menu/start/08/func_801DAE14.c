@@ -9,7 +9,7 @@
 NON_MATCHING void func_801DAE14(u16 buttons) {
     s32 count;
     /* FAKE: pin keeps the row offset in the retail a3 home. */
-    MATCH_REG(s32, offset, "a3");
+    FAKE_REG(s32, offset, "a3");
     s32          i;
     s32          index;
     s32          j;

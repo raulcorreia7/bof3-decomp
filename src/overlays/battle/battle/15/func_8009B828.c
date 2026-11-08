@@ -13,7 +13,7 @@ MATCH void func_8009B828(void) {
         i = 0;
         /* FAKE: keeps i = 0 beside the call so it fills the jal delay slot;
          * pure-C best 91.25%, without this barrier 97.47%. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         while (i < g_Battle.party_count) {
             if (!Battle_SlotIsBlocked(i)) {
                 flags                         = g_Game.members[i].facing;
@@ -21,7 +21,7 @@ MATCH void func_8009B828(void) {
                 g_Game.members[i].facing      = flags ^ 2;
                 /* FAKE: keeps the slot argument move in the jal delay slot;
                  * pure-C best 91.25%, without this barrier 93.75%. */
-                MATCH_BARRIER();
+                FAKE_BARRIER();
                 func_801DDFEC(i);
                 func_801DD14C(i);
             }

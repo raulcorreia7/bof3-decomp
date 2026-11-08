@@ -23,7 +23,7 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
     u8  result;
     u32 mode;
     /* FAKE: work pointer pinned to a0, the retail home. */
-    MATCH_REG(Actor*, work, "a0");
+    FAKE_REG(Actor*, work, "a0");
 
     action = ((u8*)target)[FIELD(u16, sub, 0xAu)];
     switch (action) {

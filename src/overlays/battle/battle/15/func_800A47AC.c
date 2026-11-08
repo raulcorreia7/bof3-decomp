@@ -10,7 +10,7 @@ MATCH void func_800A47AC(void) {
     u8 row;
     u8 col;
     /* FAKE: retain early menu argument. */
-    MATCH_FAKE_PIN(s32, menu_id, "a0");
+    FAKE_REG(s32, menu_id, "a0");
     volatile u32* mask;
     u8(*flags)[6];
     u32 shifted_mask;
@@ -23,7 +23,7 @@ MATCH void func_800A47AC(void) {
     D_8014862A = 0x3F;
     D_8014862E = 0;
     /* FAKE: hold second argument. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     Menu_ArmPanelTask(menu_id, 5);
     D_80148596 = 1;
     D_80148597 = 0;

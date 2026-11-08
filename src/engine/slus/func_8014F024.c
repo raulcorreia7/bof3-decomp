@@ -40,7 +40,7 @@ MATCH void func_8014F024(void) {
         first_value -= 0xB;
         *coordinates = first_value;
         /* FAKE: keep counter load ordered. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         countdown = g_AreaCameraOffsetZ;
         second_value -= 0xB;
         coordinates[2] = second_value;

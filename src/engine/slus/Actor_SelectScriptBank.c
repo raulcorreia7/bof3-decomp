@@ -6,7 +6,7 @@
  */
 MATCH void Actor_SelectScriptBank(u32 record_index) {
     /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
     Actor* work;
     u8*    header;
     u8*    entry;

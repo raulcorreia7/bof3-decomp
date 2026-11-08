@@ -10,7 +10,7 @@ MATCH s32 func_801F2C04(void) {
         actor            = g_CurrentActor;
         g_SceneEventMode = 0x2A;
         g_SceneEventStep = 0;
-        ORDER_FENCE(); /* FAKE: the order fence keeps the unk_7E load below the byte stores. */
+        FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the unk_7E load below the byte stores. */
         actor->unk_7E += 1;
     }
 }

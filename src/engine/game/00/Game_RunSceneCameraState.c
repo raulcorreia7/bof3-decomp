@@ -6,7 +6,7 @@ MATCH void Game_RunSceneCameraState(void) {
 
     entry = &g_GameSceneCameraSubstates[g_GameEntrySubstate];
     /* FAKE: the order fence splits the schedule here. */
-    ORDER_FENCE();
+    FAKE_ORDER_FENCE();
     handler = *entry;
     handler();
 }

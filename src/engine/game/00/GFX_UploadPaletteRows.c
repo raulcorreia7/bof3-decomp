@@ -4,11 +4,11 @@ MATCH void GFX_UploadPaletteRows(void) {
     u8* work;
     u32 table_index;
     /* FAKE: retail keeps the dividend in v1. */
-    MATCH_REG(u32, value, "v1");
+    FAKE_REG(u32, value, "v1");
     /* FAKE: retail keeps the divisor in v0. */
-    MATCH_REG(u32, divisor, "v0");
+    FAKE_REG(u32, divisor, "v0");
     /* FAKE: retail keeps the quotient in a3. */
-    MATCH_REG(u32, quotient, "a3");
+    FAKE_REG(u32, quotient, "a3");
     u32           remainder;
     u32           flags;
     u32           stride;

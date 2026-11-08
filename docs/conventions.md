@@ -1155,14 +1155,14 @@ behavior C cannot express; `include/match/match.h` defines them and they are ine
 matching build. Try in order: correct types and signedness, the original control flow, temporary
 lifetimes and declaration order, casts and grouping, the unit's compiler profile, then a helper.
 
-| Group   | Helpers                                                                                                                                                                                                                                 |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| benign  | `MATCH_VOLATILE`, `MATCH_VOLATILE_PTR`, `MATCH_FAKE_BARRIER`/`MATCH_BARRIER`, `ORDER_LOCK`/`ORDER_LOCK_BEGIN`…`ORDER_LOCK_END`/`ORDER_FENCE`, `STACK_PADS` (retail frame bytes nothing explains), `MATCH_FAKE_HOLD`, `NO_SIBLING_CALLS` |
-| harmful | `MATCH_FAKE_PIN`/`MATCH_REG` (register pin), `CLOBBER_*`, `MATCH_FAKE_OPAQUE`/`MATCH_FAKE_USE`                                                                                                                                          |
+| Group   | Helpers                                                                                                                                                                                       |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| benign  | `FAKE_VOLATILE_PTR`, `FAKE_BARRIER`, `FAKE_ORDER_LOCK`/`FAKE_ORDER_LOCK_BEGIN`…`FAKE_ORDER_LOCK_END`/`FAKE_ORDER_FENCE`, `FAKE_STACK_PADS` (retail frame bytes nothing explains), `FAKE_HOLD` |
+| harmful | `FAKE_REG` (register pin), `FAKE_CLOBBER_*`, `FAKE_OPAQUE`/`FAKE_USE`                                                                                                                         |
 
 Each use carries an adjacent `/* FAKE: <reason>. */`; a dummy local counts as one, and its note
-carries the best pure-C score. `ORDER_LOCK(stmt)` holds one statement; a run of statements goes
-between `ORDER_LOCK_BEGIN` and `ORDER_LOCK_END;` instead of inside the macro's argument. `ORDER_FENCE()` is the empty boundary; write it instead of a bare `do { } while (0);`. Every
+carries the best pure-C score. `FAKE_ORDER_LOCK(stmt)` holds one statement; a run of statements goes
+between `FAKE_ORDER_LOCK_BEGIN` and `FAKE_ORDER_LOCK_END;` instead of inside the macro's argument. `FAKE_ORDER_FENCE()` is the empty boundary; write it instead of a bare `do { } while (0);`. Every
 helper compiles away without `MATCHING`, and `check-plain` proves the sources build that way. Prefer benign over harmful: a pointer local, a
 recomputed address or a statement reorder usually moves the allocator before a pin does. A raw
 `__asm__`, a bare `register ... asm("reg")` or a `.word` is not source.
@@ -1211,7 +1211,7 @@ matches, use it once, measured, with its reason.
 ```c
 Battler* battler = &g_Battlers[battler_index];   /* the pointer local, not a pin, moves s1 */
 /* FAKE: retail rereads the turn counter after the call; pure C best 97.2%. */
-MATCH_VOLATILE(s32, turn) = g_BattleTurn;
+volatile s32 turn = g_BattleTurn;
 
 battler->hp -= damage;
 ```
@@ -1220,7 +1220,7 @@ battler->hp -= damage;
 
 ```c
 s32 dummy;                                 /* no FAKE: note, no measurement */
-register Battler* battler asm("s1");       /* a raw pin, not MATCH_REG */
+register Battler* battler asm("s1");       /* a raw pin, not FAKE_REG */
 
 dummy = g_BattleTurn;
 if (1) {                                   /* a scope to steer the allocator */

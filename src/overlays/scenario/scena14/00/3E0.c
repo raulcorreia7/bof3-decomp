@@ -11,7 +11,7 @@ MATCH void func_801F6FE0(void) {
 
     /* FAKE: without the block the scheduler hoists the index shift above the
        ra store (84.46%); the lock restores the retail order (99.85%). */
-    ORDER_LOCK(D_801FC418[index]());
+    FAKE_ORDER_LOCK(D_801FC418[index]());
 }
 
 MATCH void func_801F7014(void) {
@@ -129,7 +129,7 @@ MATCH void func_801FB5A8(void* entity) {
     D_80146874 = 5;
     D_80146875 = 30;
     /* FAKE: preserve the store order. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     actor->unk_7E = actor->unk_7E + 1;
 }
 
@@ -141,7 +141,7 @@ MATCH void func_801FB5F8(void* entity) {
     D_80146874 = 7;
     D_80146875 = 30;
     /* FAKE: preserve the store order. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     actor->unk_7E = actor->unk_7E + 1;
 }
 

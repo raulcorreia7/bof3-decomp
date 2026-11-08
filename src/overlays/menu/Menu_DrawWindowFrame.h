@@ -4,7 +4,7 @@
 MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     RECT window;
     /* FAKE: retail reserves 8 bytes of frame that no statement uses. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     SPRT* sprite;
     s16   columns;
     s16   rows;

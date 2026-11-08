@@ -8,11 +8,11 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     u32 kind;
 
     /* FAKE: pins the tested byte copy. */
-    MATCH_FAKE_PIN(s32, sel, "a2");
+    FAKE_REG(s32, sel, "a2");
     /* FAKE: pins the branch test result to v0. */
-    MATCH_FAKE_PIN(s32, test, "v0");
+    FAKE_REG(s32, test, "v0");
     /* FAKE: holds the effect_1 copy to the retail s0 home. */
-    MATCH_FAKE_PIN(s32, other, "s0");
+    FAKE_REG(s32, other, "s0");
 
     kind  = *(u8*)&g_Battle.active_battler;
     sel   = effect_0;

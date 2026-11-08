@@ -51,7 +51,7 @@ MATCH void func_801EEFBC(void) {
 MATCH void func_801EF06C(void) {
     PartyMember* src;
     PartyMember* work;
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     src                = BATTLE_ACTIVE_WORK;
     work               = g_Task;

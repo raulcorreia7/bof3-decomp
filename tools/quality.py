@@ -16,7 +16,7 @@ Metrics, counted inside ``MATCH`` function bodies unless noted:
               per-function ratchet also counts raw width casts and constant indexes into a
               byte-pointer local (``panel[0x10]``) the same way
 - ``casts``   lines with a raw width cast: ``*(u8 *)p``, ``((u8 *)p)[n]``, ``(u8 *)p + 0x10``
-- ``harmful`` ``MATCH_FAKE_PIN``, ``MATCH_REG``, ``MATCH_FAKE_OPAQUE``, ``MATCH_FAKE_USE``, ``CLOBBER_*``
+- ``harmful`` ``FAKE_REG``, ``FAKE_OPAQUE``, ``FAKE_USE``, ``FAKE_CLOBBER_*``
 - ``notes``   ``FAKE:`` notes (whole file)
 - ``pasted``  functions with two or more statements whose name and body also stand in a ``.c``
               file of another image: one ``Name.h`` is the rule (docs/conventions.md, Shared bodies)
@@ -91,11 +91,9 @@ RAW_CAST = re.compile(
     rf"|\(\s*{WIDTH}\)\s*\w+\s*\+\s*(?:0x)?[0-9]"  # (u8 *)p + 0x10
 )
 # A byte-pointer local (`u8* panel`), whose constant indexes are unnamed members.
-# A byte-pointer local, declared plainly or through a register pin (`MATCH_REG(u8*, p, "v0")`).
+# A byte-pointer local, declared plainly or through a register pin (`FAKE_REG(u8*, p, "v0")`).
 BYTE_LOCAL = re.compile(r"\b[us]8\s*\*\s*,?\s*(\w+)\s*[;=,)]")
-HARMFUL = re.compile(
-    r"\b(?:MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
-)
+HARMFUL = re.compile(r"\b(?:FAKE_REG|FAKE_OPAQUE|FAKE_USE|FAKE_CLOBBER_\w+)\b")
 NOTE = re.compile(r"FAKE:")
 # A local declaration (`u8 i`, `Actor* actor = g_CurrentActor`) and a statement-macro call.
 DECL = re.compile(

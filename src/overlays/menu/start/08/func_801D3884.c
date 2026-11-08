@@ -49,7 +49,7 @@ MATCH void func_801D3884(void) {
         g_MenuPanelTasks[14].unk_0C  = 0xFF;
         state                        = &D_80148652;
         /* FAKE: scheduler hoists the state load past the stores. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         g_MenuPanelTasks[14].unk_0A = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
         *state += 1;
         return;

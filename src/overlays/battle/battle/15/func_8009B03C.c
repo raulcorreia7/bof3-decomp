@@ -11,7 +11,7 @@
  */
 MATCH void func_8009B03C(void) {
     /* FAKE: Pin base to $v1; clean C and a rewrite search left this residual */
-    MATCH_REG(volatile u8*, head, "v1");
+    FAKE_REG(volatile u8*, head, "v1");
     volatile u8* latch;
     u8*          slot;
     u8           one;
@@ -37,7 +37,7 @@ MATCH void func_8009B03C(void) {
     D_801485BE        = 0x3F;
     latch             = head - 0x24;
     /* FAKE: block boundary keeps the second store base-relative off the pinned base. */
-    ORDER_FENCE();
+    FAKE_ORDER_FENCE();
     *latch             = one;
     /* D_80148574 stays an address symbol here: a g_MenuPanelTasks[16] view changes the code. */
     saved_x            = g_MenuPanelTasks[16].pos.x;

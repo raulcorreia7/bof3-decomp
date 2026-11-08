@@ -4,7 +4,7 @@
 MATCH u8 func_801B4BE4(u8 mode, u8 code) {
     s16* cells;
     /* FAKE: allocator pin puts the loop counter in s0, as retail. */
-    MATCH_REG(s32, count, "s0");
+    FAKE_REG(s32, count, "s0");
     s32 index;
     s32 want;
     s8  delta;

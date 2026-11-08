@@ -22,7 +22,7 @@ MATCH void Fairy_RollExploreReward(void) {
         g_FairyJobs[*edp].progress_anchor = g_BattleCount;
         /* FAKE: retail keeps this arm's anchor stamp in place; the barrier
          * stops the cross-jump that merges it into the state-2 tail. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         g_FairyJobs[*edp].record_state            = 0;
         ((Actor*)FAIRY_VILLAGE_ACTIVE_UI)->unk_7C = 0x51;
     } else if (state == 2) {
@@ -58,11 +58,11 @@ MATCH void Fairy_RollExploreReward(void) {
         }
         D_801490E4[0] = 0;
         Message_StartAreaMessage(FAIRY_MESSAGE_EXPLORE_FOUND_ITEM);
-        edp_tail                                                    = &g_SceneEventSelection;
-        g_FairyJobs[*edp_tail].progress_anchor                      = g_BattleCount;
+        edp_tail                                                   = &g_SceneEventSelection;
+        g_FairyJobs[*edp_tail].progress_anchor                     = g_BattleCount;
         /* FAKE: retail reloads the index through the materialized pointer. */
-        g_FairyJobs[*MATCH_VOLATILE_PTR(u8, edp_tail)].record_state = 0;
-        ((Actor*)FAIRY_VILLAGE_ACTIVE_UI)->unk_7C                   = 0x51;
+        g_FairyJobs[*FAKE_VOLATILE_PTR(u8, edp_tail)].record_state = 0;
+        ((Actor*)FAIRY_VILLAGE_ACTIVE_UI)->unk_7C                  = 0x51;
     } else {
         /* No live state: leave the record untouched. */
         goto done;

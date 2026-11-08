@@ -21,7 +21,7 @@ MATCH void Area_StepCamera(void) {
     }
     /* FAKE: the order lock around the x step and one local for the x position, then the y distance: together they give
      * both steps the retail register homes. */
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
         value = g_AreaCameraX;
         dist  = 0x800000 - ((value + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF);
         if (dist != 0) {
@@ -35,7 +35,7 @@ MATCH void Area_StepCamera(void) {
             D_80149336 -= step_x;
             g_AreaTileRemainderY -= step_x;
         }
-    ORDER_LOCK_END;
+    FAKE_ORDER_LOCK_END;
     value = 0x800000 - (g_AreaCameraY << 8) - (g_AreaScrollTargetY & ~0x7FFF);
     if (value != 0) {
         g_AreaCameraMoving = 1;

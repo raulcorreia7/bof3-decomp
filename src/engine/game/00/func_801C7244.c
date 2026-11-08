@@ -15,7 +15,7 @@ MATCH void func_801C7244(s32 mode) {
     s32             offset_x;
     s32             offset_y;
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
-    STACK_PADS(u8, 0x10);
+    FAKE_STACK_PADS(u8, 0x10);
 
     mode_index = mode;
     count      = 0;

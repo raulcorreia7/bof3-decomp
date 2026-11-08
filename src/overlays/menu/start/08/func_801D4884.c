@@ -21,7 +21,7 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A  = 0;
     {
         /* FAKE: keep the retail byte value in $a0 across both stores. */
-        MATCH_REG(u8, byte, "a0");
+        FAKE_REG(u8, byte, "a0");
 
         byte                                               = 0xFF;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = byte;
@@ -52,6 +52,6 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].mode          = MENU_START_MODE_CURSOR;
     D_80148627                                              = 0;
     /* FAKE: keep the updated record pointer for the final store. */
-    MATCH_FAKE_OPAQUE(ptr);
+    FAKE_OPAQUE(ptr);
     ptr[0x48] = 0;
 }

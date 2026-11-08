@@ -6,7 +6,7 @@
  */
 MATCH void EMI_GetArchiveId(u8 index, u8 family) {
     /* FAKE: retail holds the switch index in a0. */
-    MATCH_REG(u8, archive_index, "a0");
+    FAKE_REG(u8, archive_index, "a0");
     u8* hint;
     u32 emi_id;
 

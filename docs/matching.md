@@ -159,7 +159,7 @@ Use the permuter late; pin a register only with a FAKE note and byte proof.
 Same instruction multiset, different order; this label wins over the others. Write commutative
 operands in retail load order, move a counter decrement into its branch, keep retail's
 load-then-store order of adjacent globals. For one unfilled delay-slot nop, one sinking store or one
-merged reread, try `MATCH_FAKE_BARRIER()` before more reorders. Several no-effect reorders mean a
+merged reread, try `FAKE_BARRIER()` before more reorders. Several no-effect reorders mean a
 priority tie.
 
 ### `compiler`

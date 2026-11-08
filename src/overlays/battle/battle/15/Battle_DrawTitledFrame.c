@@ -10,25 +10,25 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_b, u8 title_index) {
     /* FAKE: preserve the retail 0x48-byte frame; pure C is 50.49%. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     s32 y_word;
     /* FAKE: retain the x input in retail $s3; pure C measured 50.49%. */
-    MATCH_REG(s32, x16, "s3");
+    FAKE_REG(s32, x16, "s3");
     /* FAKE: retain the y input in retail $s1; pure C measured 50.49%. */
-    MATCH_REG(s32, y16, "s1");
+    FAKE_REG(s32, y16, "s1");
     /* FAKE: retain the box's x origin in retail $s7; pure C measured 50.49%. */
-    MATCH_REG(s32, origin_x, "s7");
+    FAKE_REG(s32, origin_x, "s7");
     /* FAKE: retain the box's y origin in retail $s8; pure C measured 50.49%. */
-    MATCH_REG(s16, origin_y, "fp");
+    FAKE_REG(s16, origin_y, "fp");
     /* FAKE: keep the initial frame x coordinate in retail $s2; pure C measured 50.49%. */
-    MATCH_REG(s32, box_x, "s2");
+    FAKE_REG(s32, box_x, "s2");
     /* FAKE: keep frame and coordinate temporaries in retail $s0; pure C measured 50.49%. */
-    MATCH_REG(s32, temp, "s0");
+    FAKE_REG(s32, temp, "s0");
     /* FAKE: retain the title index from the caller in retail $s5; pure C measured 50.49%. */
-    MATCH_REG(u8, style, "s5");
+    FAKE_REG(u8, style, "s5");
     s32 i;
     /* FAKE: retain the fill-byte base in retail $s4; pure C measured 50.49%. */
-    MATCH_REG(u8*, fill, "s4");
+    FAKE_REG(u8*, fill, "s4");
     s32 col_x;
     s32 col_i;
     s32 cell_i;

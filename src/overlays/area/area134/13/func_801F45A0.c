@@ -2,7 +2,7 @@
 
 MATCH void func_801F45A0(void) {
     /* FAKE: unused frame, 16 bytes. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
     Actor* work;
     s32    sample_y;
 

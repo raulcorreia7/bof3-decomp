@@ -8,8 +8,8 @@ MATCH u8* func_801A4798(u8* script) {
      * the retail order reappears with -fno-schedule-insns2, which no flag
      * profile provides (200-combo probe: no exact).
      */
-    /* FAKE: MATCH_BARRIER holds the retail store order. */
-    MATCH_BARRIER();
+    /* FAKE: FAKE_BARRIER holds the retail store order. */
+    FAKE_BARRIER();
     script += 3;
     value = *script;
     while (value != 0xFE) {

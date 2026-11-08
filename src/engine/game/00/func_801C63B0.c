@@ -12,7 +12,7 @@ MATCH s32 func_801C63B0(void) {
     s32        x;
     s32        y;
     /* FAKE: retail frame reserves 8 bytes no statement uses. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     mode  = g_PartyFormation;
     count = Party_CountOrder(PARTY_ORDER_BATTLE);

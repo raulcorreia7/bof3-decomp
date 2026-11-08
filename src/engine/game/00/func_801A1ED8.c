@@ -4,13 +4,13 @@
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     /* FAKE: register pins reproduce retail's s1/s2/s0/s3/s4 assignment; pinned 84.06%. */
-    MATCH_REG(s32, sx, "s1");
-    MATCH_REG(s32, sy, "s2");
+    FAKE_REG(s32, sx, "s1");
+    FAKE_REG(s32, sy, "s2");
     /* FAKE: pins continue the assignment from the note above. */
-    MATCH_REG(s32, result, "s0");
-    MATCH_REG(s32, s3, "s3");
+    FAKE_REG(s32, result, "s0");
+    FAKE_REG(s32, s3, "s3");
     /* FAKE: pin continues the assignment from the note above. */
-    MATCH_REG(s32, s4, "s4");
+    FAKE_REG(s32, s4, "s4");
     sx = x;
     sy = y;
     switch (route & BYTE_MASK) {

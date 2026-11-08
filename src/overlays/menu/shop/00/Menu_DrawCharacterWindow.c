@@ -18,7 +18,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     x = px;
     y = py;
     /* AID: the order lock keeps the x and y copies below the window call. */
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
         records = (Character*)CHARACTER_BLOCK->records;
         px += 0x56;
         py += 2;
@@ -26,7 +26,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
         Menu_DrawCharacterPortrait(px, py, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
         UI_DrawText(x + 20, y + 3, text_clut, 5, stats);
-    ORDER_LOCK_END;
+    FAKE_ORDER_LOCK_END;
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
     UI_DrawGlyphString(x + 22, text_y, text_clut, g_UiFormatBuffer);

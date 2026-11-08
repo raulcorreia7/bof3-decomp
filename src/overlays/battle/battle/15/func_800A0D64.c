@@ -18,7 +18,7 @@ MATCH void func_800A0D64(void) {
     base_value                        = D_801CA71B[4 * (5 * index)];
     g_Battle.target_record->hp_change = func_800A2880(g_BattleActiveBattler_nv, g_BattleTarget_nv, base_value, 0);
     /* FAKE: keeps the record store ahead of the selector read. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     battler = g_BattleTarget_nv;
     if (BATTLER_IS_PLAYER(battler)) {
         g_Battle.target_record->hp_change -= g_Game.members[battler].chr.stats.defense;

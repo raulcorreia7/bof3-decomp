@@ -19,7 +19,7 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
     s32    i;
     s32    j;
     /* FAKE: unused frame, 16 bytes. */
-    STACK_PADS(u8, 16);
+    FAKE_STACK_PADS(u8, 16);
 
     lists   = FIELD_PTR(u8*, GAME_TILE_RUN(g_GameAreaId), 0x14);
     ids     = lists[index & BYTE_MASK];

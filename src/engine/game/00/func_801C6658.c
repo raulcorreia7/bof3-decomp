@@ -5,7 +5,7 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     s32 arg2b;
     s32 index;
     /* FAKE: retail keeps cur_a in s7 while s6 carries sel. */
-    MATCH_FAKE_PIN(s32, cur_a, "s7");
+    FAKE_REG(s32, cur_a, "s7");
     s32 cur_b;
     s32 step_a;
     s32 step_b;

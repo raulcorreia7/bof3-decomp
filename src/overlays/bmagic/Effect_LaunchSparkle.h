@@ -19,7 +19,7 @@ MATCH void Effect_LaunchSparkle(void) {
         }
         EFFECT_SPARKLE_TASK->unk_22 -= EFFECT_SPARKLE_OFFSET().y + RANDOM_MASK(7);
         /* FAKE: reread the work pointer after the y store. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         EFFECT_SPARKLE_TASK->unk_08   = EFFECT_SPARKLE_TASK->unk_20;
         EFFECT_SPARKLE_TASK->unk_0A   = RANDOM_MASK(1);
         EFFECT_SPARKLE_TASK->phase_0C = rand();

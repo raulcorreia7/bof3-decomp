@@ -14,7 +14,7 @@ MATCH void Game_ResetGameState(void) {
     g_GameAreaId = 0xFFFFu;
     world_flags  = g_AreaWalkFlags;
     /* FAKE: retail keeps the flags load ahead of the context loads. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     entry_x                  = g_SaveEntryX;
     entry_y                  = g_SaveEntryY;
     entry_facing             = g_SaveEntryFacing;

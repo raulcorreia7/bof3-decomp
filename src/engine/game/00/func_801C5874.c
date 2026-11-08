@@ -72,7 +72,7 @@ MATCH void func_801C5874(void) {
         if (D_80143FC3 != 0) {
             D_80143F84 += D_80143F5C;
             /* FAKE: barrier keeps argument load below the store. */
-            MATCH_BARRIER();
+            FAKE_BARRIER();
             Area_AdvanceScroll(g_ScrollHeight);
             D_80143F4A = 1;
             return;

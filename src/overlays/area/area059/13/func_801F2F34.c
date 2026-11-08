@@ -5,15 +5,15 @@ NON_MATCHING s32 func_801F2F34(void) {
     s32 step;
     /* FAKE: pin carries the request code in a2 from the first store to the
      * g_SceneEventMode store. */
-    MATCH_FAKE_PIN(s32, request, "a2");
+    FAKE_REG(s32, request, "a2");
     Actor* record1;
     Actor* record2;
     /* FAKE: pin carries the record row in a1 so the difference recycles
      * into it (subu a1,a1,v1). */
-    MATCH_FAKE_PIN(Actor*, record, "a1");
+    FAKE_REG(Actor*, record, "a1");
     /* FAKE: pin carries the g_Actors row in v1; unpinned the address
      * materialization sinks and the schedule breaks. */
-    MATCH_FAKE_PIN(s32, base, "v1");
+    FAKE_REG(s32, base, "v1");
 
     Game_SetScriptActive();
     record1              = g_ScriptWorkRecord;
@@ -24,21 +24,21 @@ NON_MATCHING s32 func_801F2F34(void) {
     record2->unk_77      = 0;
     /* FAKE: use keeps the g_Actors row materialized before the unk_77
      * store. */
-    MATCH_FAKE_USE(base);
+    FAKE_USE(base);
     record = g_ScriptWorkRecord;
-    ORDER_LOCK_BEGIN
+    FAKE_ORDER_LOCK_BEGIN
         record->unk_7E = 0;
         record         = (Actor*)((s32)record - base);
         step           = ((s32)(-(((s32)record) * 0xD79435E5))) >> 3;
         D_80146867     = (s8)step;
         /* FAKE: barrier keeps the g_SceneEventMode/g_SceneEventSelection stores in statement
          * order after the row store. */
-        MATCH_FAKE_BARRIER();
-    ORDER_LOCK_END;
+        FAKE_BARRIER();
+    FAKE_ORDER_LOCK_END;
     step             = 5;
     g_SceneEventMode = request;
     /* FAKE: barrier keeps the g_SceneEventSelection store after the g_SceneEventMode store. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     g_SceneEventSelection = step;
     return 0;
 }

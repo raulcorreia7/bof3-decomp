@@ -9,7 +9,7 @@ MATCH void Game_WaitTitleFade(void) {
         u16 timer;
         timer = 360u;
         /* FAKE: block boundary keeps the 360 load ahead of the state read for the delay slot. */
-        ORDER_LOCK(state = g_UiTitleState);
+        FAKE_ORDER_LOCK(state = g_UiTitleState);
         g_UiTitleTimer = timer;
         g_UiTitleState = state + 1u;
     }

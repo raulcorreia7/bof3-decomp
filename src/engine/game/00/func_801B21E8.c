@@ -34,7 +34,7 @@ NON_MATCHING void func_801B21E8(void) {
     u8    val14;
     void* tmp11;
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     val3  = 3;
     val14 = g_Game.current->status.field.flags_12C.u8_value;

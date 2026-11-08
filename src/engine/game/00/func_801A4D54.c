@@ -27,11 +27,11 @@ MATCH void func_801A4D54(u8* script) {
     work                           = g_Task;
     g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
 
     g_Actors[*counter].walk_dest_y = work->pos.y.fixed = (script[9] << 16) | (script[8] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
 
     g_Actors[*counter].unk_88 = 0;
 
@@ -45,7 +45,7 @@ MATCH void func_801A4D54(u8* script) {
     FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[5];
     g_Actors[*counter].unk_7C                      = (script[0xF] | (script[0xE] << 8));
     /* FAKE: forces the counter re-read before the next shadow store. */
-    MATCH_BARRIER();
+    FAKE_BARRIER();
     *(&D_801468FF + *counter * ACTOR_SIZE) = script[0x10];
     D_80146900[*counter][0]                = script[0xB];
     D_8014691C[*counter][0]                = 0x7F;

@@ -311,7 +311,7 @@ MATCH void func_801F74EC(void) {
  * from the far corner to the row point.
  */
 MATCH void func_801F7670(void) {
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     SceneEffect*   work;
     Actor*         row;
     SceneLinePoint point;
@@ -1598,7 +1598,7 @@ MATCH void func_801FA7D8(void) {
                 break;
             }
             /* FAKE: table load after the fade decrement. */
-            ORDER_LOCK(value = D_801FCA4C[g_FrameCount & 0xFu]);
+            FAKE_ORDER_LOCK(value = D_801FCA4C[g_FrameCount & 0xFu]);
             (*fade)--;
             accum = &D_80147A96;
             goto accumulate;
@@ -1606,7 +1606,7 @@ MATCH void func_801FA7D8(void) {
 
         case 5: {
             /* FAKE: index copy stays in v0 across the schedule wall. */
-            MATCH_FAKE_PIN(s32, index_raw, "v0");
+            FAKE_REG(s32, index_raw, "v0");
 
             if (g_ScriptVarsReq.byte == 0x11u) {
                 g_SceneState.timer_06 = 0x3Cu;
@@ -1618,11 +1618,11 @@ MATCH void func_801FA7D8(void) {
             /* FAKE: the index read gets its own statement and is locked, so the scheduler cannot hoist the accum
                address above it. */
             /* FAKE: the lock holds the retail load order around the index read. */
-            ORDER_LOCK(index_raw = g_FrameCount);
+            FAKE_ORDER_LOCK(index_raw = g_FrameCount);
             accum      = &D_80147A96;
             D_80146866 = (D_80146866 - 1u);
             /* FAKE: the barrier is the schedule wall after the fade store. */
-            MATCH_BARRIER();
+            FAKE_BARRIER();
             value = D_801FCA4C[index_raw & 0xFu];
         }
         accumulate:
@@ -1630,7 +1630,7 @@ MATCH void func_801FA7D8(void) {
                 u16 acc;
 
                 /* FAKE: accumulate load before the shift. */
-                ORDER_LOCK(acc = *accum);
+                FAKE_ORDER_LOCK(acc = *accum);
                 delta  = (value << 0x18);
                 *accum = (acc + (delta >> 0x16));
                 return;
@@ -2087,7 +2087,7 @@ MATCH void func_801FB924(void) {
         base = g_PartyY;
         g_AreaFocusY[0] += TO_COORD(32);
         /* FAKE: barrier keeps the D_80147B28 load after the g_AreaFocusY store. */
-        MATCH_BARRIER();
+        FAKE_BARRIER();
         D_80147B28 += TO_COORD(32);
         base[0] += TO_COORD(32);
         Area_RefreshCellGrid();

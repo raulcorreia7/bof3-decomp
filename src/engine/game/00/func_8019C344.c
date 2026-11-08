@@ -2,15 +2,15 @@
 
 MATCH s32 func_8019C344(s32 x, s32 y) {
     /* FAKE: retail homes the x high half in $s4. */
-    MATCH_REG(s32, xh, "s4");
+    FAKE_REG(s32, xh, "s4");
     /* FAKE: retail homes the y high half in $s1. */
-    MATCH_REG(s32, yh, "s1");
+    FAKE_REG(s32, yh, "s1");
     /* FAKE: retail homes the packed probe position in $s0. */
-    MATCH_REG(s32, pos, "s0");
+    FAKE_REG(s32, pos, "s0");
     /* FAKE: retail homes the x probe argument in $a0. */
-    MATCH_REG(s32, next_x, "a0");
+    FAKE_REG(s32, next_x, "a0");
     /* FAKE: retail homes the y probe argument in $a1. */
-    MATCH_REG(s32, next_y, "a1");
+    FAKE_REG(s32, next_y, "a1");
 
     xh = x >> 16;
     yh = y >> 16;

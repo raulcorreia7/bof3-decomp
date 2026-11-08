@@ -2,7 +2,7 @@
 
 MATCH u32 func_800AF66C(BattleRange* range, u32 extent) {
     /* FAKE: pin keeps result in v0 on entry. */
-    MATCH_REG(u32, result, "v0");
+    FAKE_REG(u32, result, "v0");
     u32          value;
     u32          half_value;
     BattleRange* work;

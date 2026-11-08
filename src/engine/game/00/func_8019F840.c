@@ -7,7 +7,7 @@ MATCH void func_8019F840(void) {
     s32 i;
     s32 offset;
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
 
     if (!(g_Game.walk_flags & AREA_WALK_LEADER_SWITCH_ACTIVE)) {
         if (LOHU(g_GameAreaId) == AREA_ID_PLANT) {

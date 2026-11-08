@@ -6,7 +6,7 @@
  */
 MATCH void Actor_CopyScriptEntry(u32 entry, u8* staging, u32 length) {
     /* FAKE: unused frame, 8 bytes. */
-    STACK_PADS(u8, 8);
+    FAKE_STACK_PADS(u8, 8);
     u8* dst;
     s32 count;
     s32 size;

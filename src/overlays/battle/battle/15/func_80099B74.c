@@ -20,7 +20,7 @@ NON_MATCHING void func_80099B74(void) {
     u8*  row_p;
     u8   next;
     /* FAKE: retail reserves 0x20 unused frame bytes. */
-    STACK_PADS(u8, 0x28);
+    FAKE_STACK_PADS(u8, 0x28);
 
     if (g_BattlePanelMode == 0) {
         D_801485DC = 1;

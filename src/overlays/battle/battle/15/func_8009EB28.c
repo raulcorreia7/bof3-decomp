@@ -8,9 +8,9 @@ MATCH void func_8009EB28(void) {
     u32           battler;
     u16           base;
     /* FAKE: retail keeps the loaded scaled halfword in v0. */
-    MATCH_REG(s32, scaled, "v0");
+    FAKE_REG(s32, scaled, "v0");
     /* FAKE: retail keeps the shift result in v1. */
-    MATCH_REG(s32, shifted, "v1");
+    FAKE_REG(s32, shifted, "v1");
     u8  battler_check;
     u8  selection;
     u32 enemy;
@@ -24,12 +24,12 @@ MATCH void func_8009EB28(void) {
         base = g_Game.members[battler].chr.stats.power;
     } else {
         /* FAKE: retail computes the enemy row index in v0, the row offset in v1. */
-        MATCH_REG(u32, enemy, "v0") = battler - 3;
-        base                        = g_BattleEnemyBattlers[enemy].stats.power;
+        FAKE_REG(u32, enemy, "v0") = battler - 3;
+        base                       = g_BattleEnemyBattlers[enemy].stats.power;
     }
     D_801EC30C = base;
     /* FAKE: retail stores the scaled base before materialising the next addresses. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     battlerp                          = &g_Battle.active_battler;
     battler_check                     = *battlerp;
     scaledp                           = &D_801EC30C;

@@ -37,13 +37,13 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
         }
         if (flags & 1) {
             /* FAKE: the order lock steers regalloc */
-            ORDER_LOCK_BEGIN
+            FAKE_ORDER_LOCK_BEGIN
                 c = *src++;
                 written++;
                 *dst++    = c;
                 ring[r++] = c;
                 r &= 0x1FF;
-            ORDER_LOCK_END;
+            FAKE_ORDER_LOCK_END;
         } else {
             i   = *src++;
             len = *src++;

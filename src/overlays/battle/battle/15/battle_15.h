@@ -994,7 +994,7 @@ static inline void BattleSelectionDelta(s32 mode) {
     /* FAKE: retail keeps the cell address in $s0 across both selection calls;
      * without the pin GCC rematerialises it after each call and the function
      * measured 0xC short. */
-    MATCH_REG(BattleSelectionContext*, ctx, "s0");
+    FAKE_REG(BattleSelectionContext*, ctx, "s0");
     BattleTurn* result;
     u16         value;
 
@@ -1022,7 +1022,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     BattleTurn* record;
     /* FAKE: Pin the stored constant to $v0; clean C left the
      * delay-slot constant in $v1 while $v0 stayed free. */
-    MATCH_REG(u8, one, "v0");
+    FAKE_REG(u8, one, "v0");
 
     if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *(u8*)&g_Battle.target;

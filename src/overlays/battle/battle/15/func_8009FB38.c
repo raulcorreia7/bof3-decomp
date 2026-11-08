@@ -8,7 +8,7 @@ NON_MATCHING void func_8009FB38(void) {
     Character* src;
     u8*        dst_base;
     /* FAKE: retail keeps the row destination in a3 across the copy loop; pinned 86.89%. */
-    MATCH_REG(u8*, dst_row, "a3");
+    FAKE_REG(u8*, dst_row, "a3");
     volatile u8* active_count;
     u8*          selected_battler_address;
     s32          row_index;
@@ -44,13 +44,13 @@ NON_MATCHING void func_8009FB38(void) {
         }
         func_800AAA74();
         active_count = &g_Battle.party_count;
-        ORDER_LOCK_BEGIN
+        FAKE_ORDER_LOCK_BEGIN
             for (row_index = 0; ((u32)(row_index & BYTE_MASK)) < (*active_count); row_index++) {
                 row_offset = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
                 memcpy(&D_80145F04[row_offset + 0x1C], &D_80145F04[row_offset + 0x3C], 0x20);
             }
             row_index = 0;
-        ORDER_LOCK_END;
+        FAKE_ORDER_LOCK_END;
         func_800A4458();
         if (g_Battle.party_count != 0) {
             do {

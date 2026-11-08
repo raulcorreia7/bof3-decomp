@@ -38,7 +38,7 @@ MATCH s32 func_801C7518(s32 pos_x, s32 pos_y, s32 reach) {
         return 0;
     }
 accept:
-    MATCH_BARRIER(); /* FAKE: keep the shared return-1 block distinct from px_case's. */
+    FAKE_BARRIER(); /* FAKE: keep the shared return-1 block distinct from px_case's. */
     return 1;
 px_case:
     if (py & HALF_MASK) {
@@ -50,7 +50,7 @@ px_case:
     if (tile != index + 3) {
         return 0;
     }
-    MATCH_BARRIER(); /* FAKE: stop jump.c folding the px_case return into a setcc. */
+    FAKE_BARRIER(); /* FAKE: stop jump.c folding the px_case return into a setcc. */
     return 1;
 py_case:
     if (tile == index + 2) {

@@ -6,7 +6,7 @@
 MATCH void func_801B3A3C(void) {
     Actor* saved;
     /* FAKE: pin armed work pointer to v0 so the constant keeps v1. */
-    MATCH_REG(Actor*, work, "v0");
+    FAKE_REG(Actor*, work, "v0");
     s32 off;
 
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {

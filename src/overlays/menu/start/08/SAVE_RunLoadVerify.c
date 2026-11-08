@@ -7,7 +7,7 @@ MATCH void SAVE_RunLoadVerify(void) {
     u8*  src;
     u8*  dst;
     /* FAKE: retail keeps the byte count in a0. */
-    MATCH_REG(u16, i, "a0");
+    FAKE_REG(u16, i, "a0");
     u16 stored;
     u32 sum;
 

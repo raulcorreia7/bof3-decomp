@@ -2,7 +2,7 @@
 
 MATCH void func_800AE574(void) {
     /* FAKE: retail keeps the projected-frame pointer in v0. */
-    MATCH_FAKE_PIN(u8*, third, "v0");
+    FAKE_REG(u8*, third, "v0");
     PartyMember* first;
     PartyMember* second;
     PartyMember* flag;
@@ -26,11 +26,11 @@ MATCH void func_800AE574(void) {
     third                   = TASK_BYTES;
     FIELD(u32, third, 0x10) = -0xE;
     /* FAKE: holds the work store ahead of the field reloads. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     height = FIELD(u16, third, 0x2E);
     next   = FIELD(u8, third, 0xA);
     /* FAKE: holds the drop-byte load ahead of the base-halfword load. */
-    MATCH_FAKE_BARRIER();
+    FAKE_BARRIER();
     base     = FIELD(u16, third, 0x30);
     third[9] = 0;
     height -= 0x18;

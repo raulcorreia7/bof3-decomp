@@ -337,9 +337,9 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
 /* func_801EFB44 */
 MATCH s32 CardTransferFile(s32 fd, s32 mode, s32 size, s32 offset) { /* func_801EFB44 */
     /* FAKE: pin the countdown to $s1. */
-    MATCH_FAKE_PIN(s32, count, "s1");
+    FAKE_REG(s32, count, "s1");
     /* FAKE: pin the constant one to $s6. */
-    MATCH_FAKE_PIN(s32, one, "s6");
+    FAKE_REG(s32, one, "s6");
     s32 frame;
     s32 minus_one;
     s32 remain;

@@ -24,7 +24,7 @@ MATCH void func_801E1EC0(void) {
         dst += 1;
     } while (src != end);
     /* FAKE: hold tail store before tail. */
-    ORDER_LOCK(dst->w0 = src->w0);
+    FAKE_ORDER_LOCK(dst->w0 = src->w0);
     g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 0xF;
     g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;

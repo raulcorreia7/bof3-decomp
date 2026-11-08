@@ -11,9 +11,9 @@ MATCH void func_801E0F0C(void) {
     s32          count;
     u32          slot;
     /* FAKE: retail materializes the bar reset constant in v1. */
-    MATCH_REG(s16, one, "v1");
+    FAKE_REG(s16, one, "v1");
     /* FAKE: retail materializes the +0x124 mask in a3. */
-    MATCH_REG(s32, mask, "a3");
+    FAKE_REG(s32, mask, "a3");
 
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;

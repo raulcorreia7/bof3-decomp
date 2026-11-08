@@ -40,7 +40,7 @@ MATCH void func_8014F2F0(void) {
         first_coordinate -= 0xB;
         *position = first_coordinate;
         /* FAKE: keep offset_z load ordered. */
-        MATCH_FAKE_BARRIER();
+        FAKE_BARRIER();
         offset_z = g_AreaCameraOffsetZ;
         second_coordinate -= 0xB;
         position[2] = second_coordinate;

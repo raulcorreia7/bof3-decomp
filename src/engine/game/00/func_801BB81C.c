@@ -5,7 +5,7 @@ MATCH s32 func_801BB81C(s32 first_slot, s32 second_slot) {
     u8  value_b;
     s32 class_a;
     /* FAKE: result pinned to v0; allocator picks v1 without it. */
-    MATCH_REG(s32, result, "v0");
+    FAKE_REG(s32, result, "v0");
 
     value_a = ((u8*)&D_1F800000)[first_slot & BYTE_MASK];
     class_a = value_a & 0xF0;
