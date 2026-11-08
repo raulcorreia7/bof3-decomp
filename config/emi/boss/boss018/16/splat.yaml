@@ -21,7 +21,7 @@ segments:
       - [0x1E0, c, func_800C19E0]
       - [0x1E8, c, func_800C19E8]
       - [0x22C, c, func_800C1A2C]
-      - [0x2DC, c, Boss_EndEntrance_800C1ADC]
+      - [0x2DC, c, Boss_EndEntrance2]
       - [0x318, c, func_800C1B18]
       - [0x350, c, func_800C1B50]
       - [0x374, c, func_800C1B74]

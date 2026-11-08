@@ -15,7 +15,7 @@ segments:
       - [0x20, c, func_800C1820]
       - [0x64, c, func_800C1864]
       - [0xBC, c, func_800C18BC]
-      - [0x100, c, Boss_FinishDefeat_800C1900]
+      - [0x100, c, Boss_FinishDefeat2]
       - [0x180, c, func_800C1980]
       - [0x1C4, c, func_800C19C4]
       - [0x208, c, func_800C1A08]

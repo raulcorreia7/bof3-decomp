@@ -1296,7 +1296,7 @@ D_801F0C84 = { addr = 0x801F0C84, source = "Step handlers of the bmagic/magic226
 D_801F0C90 = { addr = 0x801F0C90, source = "Effect slot table of the magic226 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/boss/boss001/13"]
-Boss_FinishDefeat_800C1900 = { addr = 0x800C1900, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss001." }
+Boss_FinishDefeat2 = { addr = 0x800C1900, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss001." }
 Boss_FinishDefeat = { addr = 0x800C1C20, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss001." }
 Boss_InstallBattleHooks = { addr = 0x800C1E50, type = "func", source = "Installs the boss battle hooks of boss001: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1E88, type = "func", source = "Handles the boss battle events of boss001: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
@@ -1393,7 +1393,7 @@ Boss_EndBattle = { addr = 0x800C1A50, type = "func", source = "Ends the boss bat
 
 ["emi/boss/boss018/16"]
 Boss_EndEntrance = { addr = 0x800C1940, type = "func", source = "Ends the entrance of boss018: once func_8014DAEC reports the actor script ready, sets header.mode (byte 0x01) to 2." }
-Boss_EndEntrance_800C1ADC = { addr = 0x800C1ADC, type = "func", source = "Ends the entrance of boss018: once func_8014DAEC reports the actor script ready, sets header.mode (byte 0x01) to 2." }
+Boss_EndEntrance2 = { addr = 0x800C1ADC, type = "func", source = "Ends the entrance of boss018: once func_8014DAEC reports the actor script ready, sets header.mode (byte 0x01) to 2." }
 Boss_InstallBattleHooks = { addr = 0x800C2114, type = "func", source = "Installs the boss battle hooks of boss018: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C214C, type = "func", source = "Handles the boss battle events of boss018: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
 Boss_ChooseBattleEnding = { addr = 0x800C2258, type = "func", source = "Chooses how the boss battle of boss018 ends. On victory sets D_80146875 to 0x1A when bit 1 of g_BattleBossFlags is set, else to 0x1B, and runs func_801DDED8. On defeat with bit 0 of g_BattleBossFlags clear, runs func_800C2A40, sets D_80146875 to 0x1C (scene flag 0x23 clear) or 0x3A (flag 0x23 set, 0x24 clear) and runs func_801DDF28; otherwise runs func_801DDF00. Always copies four battler words to D_801FD6FC to D_801FD702." }

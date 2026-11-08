@@ -62,8 +62,6 @@ src/overlays/bmagic/magic099/03/magic099_03.h	D_1F800014_HALF
 src/overlays/bmagic/magic102/03/BMagic_Effect.c	D_1F800034_U16
 src/overlays/bmagic/magic102/03/magic102_03.h	D_1F800034_U16
 src/overlays/bmagic/magic143/03/magic143_03.h	D_1F800014_HALF
-src/overlays/boss/boss001/13/Boss_FinishDefeat_800C1900.c	Boss_FinishDefeat_800C1900
-src/overlays/boss/boss018/16/Boss_EndEntrance_800C1ADC.c	Boss_EndEntrance_800C1ADC
 src/overlays/commu/commu00/00/D_801EEC44_Data.c	D_801EEC44_Data
 src/overlays/commu/commu00/00/D_801F24FC_Data.c	D_801F24FC_Data
 src/overlays/commu/commu00/00/Fairy_StartJobs.c	D_801F24FC_Data
