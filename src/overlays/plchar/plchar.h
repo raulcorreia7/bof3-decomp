@@ -71,6 +71,15 @@
     g_Task->timer = 2;                                                                       \
     g_Task->header.step++
 
+/* Runs this image's turn preparation, requests the script of the character's current facing and sets the task to
+ * state 0xB, step 1. The body of every character's facing-turn start; each passes its preparation function. Every
+ * change here must verify every member image. */
+#define CHAR_START_FACING_TURN(PREPARE)                         \
+    PREPARE();                                                  \
+    Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42); \
+    g_Task->unk_0A = 0xB;                                       \
+    g_Task->unk_03 = 1
+
 void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
 void Area_ClearCell(s32 x, s32 y);
 

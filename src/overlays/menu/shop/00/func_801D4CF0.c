@@ -5,7 +5,7 @@ MATCH void func_801D4CF0(void) {
     u8  count;
 
     counter = &D_80148654;
-    func_801DDFB0(0x62 + *counter * 0x30, 0x4C, D_801E60F8, g_SaveCardPort, 1);
+    SAVE_DrawPortTabs(98 + *counter * 48, 76, D_801E60F8, g_SaveCardPort, 1);
     MENU_DRAW_HEADER();
     count    = *counter + 1;
     *counter = count;

@@ -36,15 +36,20 @@ extern u8            D_80148656;
 extern s8            D_80148658;
 extern u8            D_8018E244;
 extern OverlayHeader D_801D0C00;
-extern u8            D_801D0D80[];
-extern u8            D_801D0D84[];
+/* D_801D0D80 */
+extern u8            g_SaveSlotLevelFormat[];
+/* D_801D0D84 */
+extern u8            g_SaveSlotTimeFormat[];
 extern u8            g_MenuCaptionRight[];
 extern u8            g_MenuClockCaption[];
 extern u8            g_MenuCommandFrame[];
 extern u8            g_MenuCommandFrameSelected[];
-extern u8            D_801D0D90[];
-extern u8            D_801D0D94[];
-extern u8            D_801D0D98[];
+/* D_801D0D90 */
+extern u8            g_SaveSlotTimeColon[];
+/* D_801D0D94 */
+extern u8            g_SaveCardPortLabelFirst[];
+/* D_801D0D98 */
+extern u8            g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
 #define MENU_BATE_STEP_COUNT       4
 #define MENU_BATE_STEP2_COUNT      3
@@ -102,7 +107,8 @@ extern u8       g_MenuInventoryTab1OnSprites[];
 extern u8       g_MenuListTab1OffSprites[];
 /* D_801D8978 */
 extern u8       g_MenuListTab1OnSprites[];
-extern u8       D_801D8A3C[];
+/* D_801D8A3C */
+extern u8       g_SaveSlotFrameSprites[];
 extern u8       D_801D8B84[];
 /* D_801D8E80 */
 extern u8*      g_MenuAbilityListNames[];

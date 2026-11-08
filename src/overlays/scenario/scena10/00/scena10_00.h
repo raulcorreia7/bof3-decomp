@@ -9,7 +9,8 @@
 
 extern u8       D_80144908[];
 extern u32      D_801F6C00;
-extern Callback D_801FE80C[];
+/* D_801FE80C */
+extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE820[];
 extern Callback D_801FE8F4[];
 
@@ -24,7 +25,8 @@ extern u8        D_801FE95C[5];
 extern u16       D_801FE964[5];
 extern u8        D_801FE970[3];
 extern u16       D_801FE974[3];
-extern SceneFunc D_801FE97C[];
+/* D_801FE97C */
+extern SceneFunc g_SceneActorDispatch[];
 
 /* The party lookups of 370.c: return the value paired with the first id in `ids` that a party member
  * holds, else `none`. The members differ only in table and count. Every change must verify every member. */

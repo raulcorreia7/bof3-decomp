@@ -22,7 +22,7 @@ segments:
       - [0x308, c, func_800C1B08]
       - [0x36C, c, func_800C1B6C]
       - [0x3B0, c, func_800C1BB0]
-      - [0x3F0, c, func_800C1BF0]
+      - [0x3F0, c, Boss_RaiseEffectPlaying]
       - [0x440, c, func_800C1C40]
       - [0x484, c, func_800C1C84]
       - [0x4FC, c, func_800C1CFC]

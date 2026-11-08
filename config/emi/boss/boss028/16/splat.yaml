@@ -20,7 +20,7 @@ segments:
       - [0x208, c, func_800C1A08]
       - [0x210, c, func_800C1A10]
       - [0x254, c, func_800C1A54]
-      - [0x2A0, c, func_800C1AA0]
+      - [0x2A0, c, Boss_RaiseEffectPlaying]
       - [0x2F0, c, func_800C1AF0]
       - [0x328, c, func_800C1B28]
       - [0x330, c, func_800C1B30]

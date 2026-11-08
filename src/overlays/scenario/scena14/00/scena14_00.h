@@ -24,6 +24,7 @@ extern Callback D_801FC418[];
 extern Callback D_801FC424[];
 
 extern s8        D_801FC44C[];
-extern SceneFunc D_801FC468[];
+/* D_801FC468 */
+extern SceneFunc g_SceneActorDispatch[];
 
 #endif

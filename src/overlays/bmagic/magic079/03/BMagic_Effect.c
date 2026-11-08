@@ -5,9 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    Callback table[2] = {func_801EEC5C, func_801EED38};
-
-    table[g_Task->header.mode]();
+    ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EED38);
 }
 
 MATCH void func_801EEC5C(void) {

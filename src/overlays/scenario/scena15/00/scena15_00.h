@@ -9,7 +9,8 @@
 #include "battle/records.h"
 
 extern u32      D_801F6C00;
-extern Callback D_801FE57C[];
+/* D_801FE57C */
+extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE590[];
 extern Callback D_801FE5A0[];
 extern Callback D_801FE5B0[];
@@ -24,7 +25,8 @@ extern Callback  D_801FE5CC[];
 extern Callback  D_801FE66C[];
 extern Callback  D_801FE678[];
 extern s8        D_801FE6E8[];
-extern SceneFunc D_801FE6EC[];
+/* D_801FE6EC */
+extern SceneFunc g_SceneActorDispatch[];
 void             func_801F83AC(s16* out);
 void             func_801F8704(void);
 extern u8        D_801FE71C[];

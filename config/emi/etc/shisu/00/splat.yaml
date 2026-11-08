@@ -18,7 +18,7 @@ segments:
     align: 4
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
-      - [0x164, .data, D_801D0D64]
+      - [0x164, .data, g_SaveSlotLevelFormat]
       - [0x180, c, 180]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

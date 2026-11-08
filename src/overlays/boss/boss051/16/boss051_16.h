@@ -13,12 +13,15 @@
 #include "overlays/battle/battle.h"
 
 extern Callback D_800C1804[];
-extern u8       D_800C1DB0[];
-extern u16      D_800C1DBC[];
+/* D_800C1DB0 */
+extern u8       g_BossEnemyScript[];
+/* D_800C1DBC */
+extern u16      g_BossEnemyActionTable[];
 extern Callback D_800C1DC4[];
 extern Callback D_800C1DF4[];
 extern Callback D_800C1DFC[];
 
-void func_800C19C4(s32 mode);
+/* func_800C19C4 */
+void Boss_EnemyScriptMode(s32 mode);
 
 #endif

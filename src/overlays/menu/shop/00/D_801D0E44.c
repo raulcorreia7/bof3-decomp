@@ -3,8 +3,8 @@
 char g_SaveSlotLevelFormat[4] = "%2d";
 char g_SaveSlotTimeFormat[12] = "%02d %02d";
 char g_SaveSlotTimeColon[4] = "  :";
-char D_801D0E58[4] = "1";
-char D_801D0E5C[4] = "2";
+char g_SaveCardPortLabelFirst[4] = "1";
+char g_SaveCardPortLabelSecond[4] = "2";
 char D_801D0E60[4] = "%d";
 char D_801D0E64[4] = "%3d";
 char D_801D0E68[8] = "%3d/   ";

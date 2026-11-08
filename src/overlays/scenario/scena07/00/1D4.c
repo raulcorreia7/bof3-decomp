@@ -5,11 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801F6DD4(void) {
-    u8* entity;
-
-    D_801FDD14[entity[1]]();
-}
+#include "overlays/scenario/Scene_DispatchEntity.h"
 
 MATCH void func_801F6E10(void) {
     SYS_DISPATCH_TASK(D_801FDD3C, 2, g_Task);
@@ -501,14 +497,7 @@ MATCH void func_801FD35C(void) {
     }
 }
 
-MATCH void func_801FD3BC(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FDF8C[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 INCLUDE_ASM(func_801FD3FC);
 
@@ -577,19 +566,7 @@ MATCH bool func_801FDA34(void) {
     return 0;
 }
 
-MATCH s32 func_801FDA98(s32 x, s32 y) {
-    s8  index;
-    s32 result;
-
-    index = func_801A7AD8(&D_801FDFA0, 1, x, y);
-    if (index >= 0) {
-        SYS_DISPATCH_BYTE(D_801FDFA8, index);
-        result = 1;
-    } else {
-        result = -1;
-    }
-    return result;
-}
+#include "overlays/scenario/Scene_DispatchByPosition.h"
 
 MATCH void func_801FDAFC(void) {
     Game_SetScriptActive();

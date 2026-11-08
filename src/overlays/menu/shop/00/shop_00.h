@@ -184,8 +184,10 @@ extern char        g_MenuClockFormat[];
 extern char        g_SaveSlotLevelFormat[];
 extern char        g_SaveSlotTimeFormat[];
 extern char        g_SaveSlotTimeColon[];
-extern char        D_801D0E58[];
-extern char        D_801D0E5C[];
+/* D_801D0E58 */
+extern char        g_SaveCardPortLabelFirst[];
+/* D_801D0E5C */
+extern char        g_SaveCardPortLabelSecond[];
 extern char        D_801D0E60[];
 extern char        D_801D0E64[];
 extern char        D_801D0E68[];
@@ -598,7 +600,7 @@ void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */
 void Menu_DrawInventoryWindow(MenuPanelTask* arg0);
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
-void func_801DDFB0(s16 x, s16 y, u32 flags, u8 row, u8 variant);
+void SAVE_DrawPortTabs(s16 x, s16 y, u32 flags, u8 row, u8 variant);
 void func_801DE188(void);
 void func_801DE1C4(void);
 void func_801DE200(void);

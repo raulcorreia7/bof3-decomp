@@ -15,8 +15,10 @@ extern Callback D_801F3F80[];
 
 void Actor_TrackFocus(void);
 void func_801F2DAC(void);
-void func_801F2E64(void);
-void func_801F2EE4(void);
+/* func_801F2E64 */
+void Area_ShrinkDisc(void);
+/* func_801F2EE4 */
+void Scene_ClearActor(void);
 void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_shade);
 void func_801F30A8(void);
 void func_801F30EC(void);

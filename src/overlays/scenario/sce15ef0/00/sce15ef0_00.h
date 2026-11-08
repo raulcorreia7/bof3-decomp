@@ -39,7 +39,8 @@ ASSERT_OFFSET(Sce15ef0Work, pos, 0x34);
 ASSERT_OFFSET(Sce15ef0Work, color_r, 0x5D);
 
 extern u32      D_801D0C00;
-extern Callback D_801D1F88[];
+/* D_801D1F88 */
+extern Callback g_SceneEntityDispatch[];
 
 void func_801D1220(s32 value);
 void func_801D1914(s16 amount);

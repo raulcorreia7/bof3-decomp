@@ -18,5 +18,5 @@ segments:
     align: 1
     subalign: 1
     subsegments:
-      - [0x6578, bin, D_801FD178]
+      - [0x6578, bin, g_SceneEntityDispatch]
   - [0x668A]

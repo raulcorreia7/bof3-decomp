@@ -18,11 +18,16 @@ extern char          g_MenuZennyFormat[];
 /* D_801D0C2C */
 extern char          g_MenuNextExpBlank[];
 extern char          g_MenuClockFormat[];
-extern char          D_801D0D64[];
-extern char          D_801D0D68[];
-extern char          D_801D0D74[];
-extern char          D_801D0D78[];
-extern char          D_801D0D7C[];
+/* D_801D0D64 */
+extern char          g_SaveSlotLevelFormat[];
+/* D_801D0D68 */
+extern char          g_SaveSlotTimeFormat[];
+/* D_801D0D74 */
+extern u8            g_SaveSlotTimeColon[];
+/* D_801D0D78 */
+extern char          g_SaveCardPortLabelFirst[];
+/* D_801D0D7C */
+extern char          g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
 #define MENU_STATUS_STEP_COUNT        5
 #define MENU_STATUS_TASK_COUNT        7
@@ -75,7 +80,8 @@ extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
 extern u8       D_801D9990[];
 extern u8       D_801D999C[];
-extern u8       D_801D9A60[];
+/* D_801D9A60 */
+extern u8       g_SaveSlotFrameSprites[];
 extern u8       g_MenuLabelAgility[];
 /* D_801D9B5C */
 extern u8       g_MenuEquipRowIcons[];
