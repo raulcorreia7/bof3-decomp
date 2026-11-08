@@ -139,7 +139,7 @@ MATCH void func_801D3174(void) {
                         saved                                            = base[0xC];
                         D_80148656                                       = 0;
                         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
-                        counter                                          = D_80148651 + 4;
+                        counter                                          = g_MenuStep.sub_step + 4;
                         /* Both success arms converge on the commit block. */
                         goto commit;
                     }
@@ -151,11 +151,11 @@ MATCH void func_801D3174(void) {
                 if ((func_801AF494(base[8], 0, base[0xA], D_801C893C[base[0xA]][base[0xC]]) & BYTE_MASK) != 0) {
                     saved      = base[0xC];
                     D_8014865B = 0;
-                    counter    = D_80148651 + 3;
+                    counter    = g_MenuStep.sub_step + 3;
                 /* Shared tail of both selection-commit arms. */
                 commit:
-                    base[0xD]  = saved;
-                    D_80148651 = counter;
+                    base[0xD]           = saved;
+                    g_MenuStep.sub_step = counter;
                     return;
                 }
                 /* The row has no selectable entry. */
@@ -168,7 +168,7 @@ MATCH void func_801D3174(void) {
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        count = &D_80148651;
+        count = &g_MenuStep.sub_step;
         *count -= 1;
     }
 }

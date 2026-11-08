@@ -36,7 +36,7 @@ NON_MATCHING void func_801D40D8(void) {
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         }
-        D_80148651 -= 3;
+        g_MenuStep.sub_step -= 3;
         /* FAKE: retail reaches the neighbouring flag through the record base. */
         *(s8*)((u8*)flag - 0x113) = -1;
         return;
@@ -44,7 +44,7 @@ NON_MATCHING void func_801D40D8(void) {
     if (g_InputMasks[MENU_INPUT_CANCEL] & *pad) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         *(s8*)((u8*)flag - 0x113) = -1;
-        D_80148651 -= 3;
+        g_MenuStep.sub_step -= 3;
     }
 }
 #else

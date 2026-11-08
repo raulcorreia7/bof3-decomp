@@ -47,14 +47,14 @@ NON_MATCHING void func_801D8680(void) {
             return;
         }
         g_MenuPanelTasks[16].flags = 0xFF;
-        D_80148652 += 1;
+        g_MenuStep.state += 1;
         g_MenuPanelTasks[16].unk_0C = s_SkillOrderCursors[D_80148656][g_MenuPanelTasks[16].unk_0B];
         return;
     }
     if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         FIELD(s8, (&D_801484CC), 0xECu) = 0;
-        D_80148652 -= 1;
+        g_MenuStep.state -= 1;
     }
 }
 #else

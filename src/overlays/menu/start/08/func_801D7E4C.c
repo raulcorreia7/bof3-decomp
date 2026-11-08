@@ -75,7 +75,7 @@ MATCH void func_801D7E4C(void) {
         }
         g_BattleChoicePhase        = 3;
         g_MenuPanelTasks[16].flags = 0xFF;
-        latch                      = &D_80148651;
+        latch                      = &g_MenuStep.sub_step;
         (*latch)--;
     }
 }

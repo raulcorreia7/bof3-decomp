@@ -55,14 +55,14 @@ NON_MATCHING void func_801D20D0(void) {
             D_80148600 = 0;
             D_801E6054 = 0;
             D_80148654 = 5;
-            D_80148652 += 1;
+            g_MenuStep.state += 1;
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148600 = 0;
-        D_80148652 -= 4;
+        g_MenuStep.state -= 4;
     }
 }
 #else

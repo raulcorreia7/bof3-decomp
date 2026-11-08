@@ -66,7 +66,7 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
         val6 &= BYTE_MASK;
         UI_DrawText((s16)((val2 + 58) - (strlen(work.fields.strings[val6]) * 4)), (s16)(val1 - 1), 0, 0xFFU,
                     work.fields.strings[val6]);
-        if (D_80148652 != 1) {
+        if (g_MenuStep.state != 1) {
             Menu_DrawCursorSprite((val2 + 4) & HALF_MASK, val3 & HALF_MASK, 0);
         }
     } else {

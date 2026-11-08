@@ -13,7 +13,7 @@ MATCH void func_801D9B2C(void) {
             ((u8*)&D_8014833B)[((i + 4) * 9) << 2] = 1;
             i++;
         }
-        timer = &D_80148652;
+        timer = &g_MenuStep.state;
         (*timer)++;
     }
 }

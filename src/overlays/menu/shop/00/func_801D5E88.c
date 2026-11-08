@@ -30,6 +30,6 @@ MATCH void func_801D5E88(void) {
     val = *p - 1;
     *p  = val;
     if (val == 0) {
-        D_80148652 = D_801E6094;
+        g_MenuStep.state = D_801E6094;
     }
 }

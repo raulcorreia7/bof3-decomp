@@ -26,7 +26,7 @@ MATCH void func_801DA35C(void) {
             goto loop_2; /* retail back edge: a while form needs a second register (82.19%) */
         }
         /* FAKE: the counter copy keeps retail's base register; the direct store scores 94.29%. */
-        state_counter = &D_80148652;
+        state_counter = &g_MenuStep.state;
         *state_counter += 1;
     }
 }

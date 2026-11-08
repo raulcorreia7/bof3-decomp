@@ -16,8 +16,8 @@ MATCH void Menu_ExitCamp(void) {
         } else {
             CallbackReplace(Game_UpdateMain);
         }
-        D_80148652 = 0;
-        D_80148653 = 0;
-        D_80148655 = 0;
+        g_MenuStep.state = 0;
+        D_80148653       = 0;
+        D_80148655       = 0;
     }
 }

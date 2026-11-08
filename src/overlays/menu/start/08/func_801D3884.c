@@ -47,7 +47,7 @@ MATCH void func_801D3884(void) {
         g_MenuPanelTasks[14].pos.y   = 0x3C;
         g_MenuPanelTasks[14].unk_0B  = 0;
         g_MenuPanelTasks[14].unk_0C  = 0xFF;
-        state                        = &D_80148652;
+        state                        = &g_MenuStep.state;
         /* FAKE: scheduler hoists the state load past the stores. */
         FAKE_BARRIER();
         g_MenuPanelTasks[14].unk_0A = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
@@ -56,7 +56,7 @@ MATCH void func_801D3884(void) {
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        counter = &D_80148651;
+        counter = &g_MenuStep.sub_step;
         *counter -= 3;
     }
 }

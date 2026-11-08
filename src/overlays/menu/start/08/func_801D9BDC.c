@@ -114,11 +114,11 @@ NON_MATCHING void func_801D9BDC(void) {
                 val3 = val7 << 0x18;
             } while (val10 < 6);
             D_80148654 = 5;
-            D_80148652 += 1;
+            g_MenuStep.state += 1;
         } else {
-            D_80148651 = 6;
-            D_80148652 = 0;
-            D_80148660 = 0;
+            g_MenuStep.sub_step = 6;
+            g_MenuStep.state    = 0;
+            D_80148660          = 0;
             g_GameEntrySubstate += 1;
         }
     }

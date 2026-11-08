@@ -8,12 +8,12 @@ MATCH void func_801D1254(void) {
 
     *p = val;
     if (val == 0) {
-        D_801E606C = 0;
-        D_801E603C = 0;
-        D_801E6040 = 0;
-        *p         = 0;
-        D_80148655 = 0;
-        D_80148652 = 0;
-        D_80148651 += 1;
+        D_801E606C       = 0;
+        D_801E603C       = 0;
+        D_801E6040       = 0;
+        *p               = 0;
+        D_80148655       = 0;
+        g_MenuStep.state = 0;
+        g_MenuStep.sub_step += 1;
     }
 }

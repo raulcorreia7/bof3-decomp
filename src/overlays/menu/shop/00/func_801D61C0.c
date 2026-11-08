@@ -9,7 +9,7 @@ MATCH void func_801D61C0(void) {
     s16 next;
 
     if (SYS_TestFlag(g_SceneEventFlags, 0x77) != 0) {
-        D_80148651 = 6;
+        g_MenuStep.sub_step = 6;
         Message_StartAreaMessage(0xEF);
         return;
     }
@@ -33,7 +33,7 @@ MATCH void func_801D61C0(void) {
     {
         u8* state;
 
-        state = &D_80148651;
+        state = &g_MenuStep.sub_step;
         *state += 1;
     }
 }

@@ -71,11 +71,11 @@ NON_MATCHING void func_801D8390(void) {
         g_MenuPanelTasks[18].pos.y   = 0x3C;
         g_BattleItemRow              = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
         g_MenuPanelTasks[18].unk_0B  = 0;
-        D_80148652 += 1;
+        g_MenuStep.state += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_801485DC = 0;
-        D_80148651 -= 5;
+        g_MenuStep.sub_step -= 5;
     }
 }
 #else

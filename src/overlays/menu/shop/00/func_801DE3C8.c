@@ -10,7 +10,7 @@ MATCH void func_801DE3C8(void) {
 
     if (WINDOW_EFFECT_IDLE()) {
         UI_SetMode(UI_MODE_FAST_FADE_IN);
-        counter  = &D_80148652;
+        counter  = &g_MenuStep.state;
         count    = *counter;
         *counter = count + 1;
     }

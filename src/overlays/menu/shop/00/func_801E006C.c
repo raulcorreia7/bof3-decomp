@@ -51,13 +51,13 @@ MATCH void func_801E006C(void) {
         D_801483C4           = BATTLE_PARTY_STRIDE;
         D_801483C6           = 0x3E;
         D_801483CD           = 0;
-        (*((s8*)(&D_80148652)))++;
+        (*((s8*)(&g_MenuStep.state)))++;
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_8014837B = 1;
         D_8014839F = 1;
-        (*((s8*)(&D_80148651)))--;
+        (*((s8*)(&g_MenuStep.sub_step)))--;
     }
 }
