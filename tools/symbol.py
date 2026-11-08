@@ -19,6 +19,10 @@ image, so give `--image` once per image that holds the twin; `--local` limits th
 images' `src/` and `config/` folders (`--scope` to the given paths). The resident images
 (`exe/slus_004_22`, `emi/etc/game/00`) are visible everywhere and rename with no scope.
 
+`rename` checks the planned edits and moves before changing sources. A failure restores the
+files, paths and index; success also requires no old named reference in src/include/config,
+including untracked files. Address-name comments and unrelated images retain their provenance.
+
 `params` renames parameters of one function in its unit file `FUNC.c` and on its prototype
 lines in headers.
 
@@ -32,8 +36,11 @@ from __future__ import annotations
 
 import argparse
 import collections
+import os
 import re
+import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 from bof3.resolve.ids import source_folder
@@ -46,16 +53,17 @@ RESIDENT = ("exe/slus_004_22", "emi/etc/game/00")
 DEFAULT_SCOPE = ("src", "include", "config", "docs", "asm")
 
 
-def git(*args: str, check: bool = True) -> str:
+def git(*args: str, check: bool = True, env: dict[str, str] | None = None) -> str:
     """Run Git in the repository and return stdout."""
     return subprocess.run(
-        ["git", *args], cwd=ROOT, capture_output=True, text=True, check=check
+        ["git", *args], cwd=ROOT, capture_output=True, text=True, check=check, env=env
     ).stdout
 
 
 def grep_files(word: str, scope: list[str]) -> list[str]:
     """Return the tracked files under ``scope`` that hold ``word`` as a whole word."""
-    return git("grep", "-l", "-w", "-e", word, "--", *scope, check=False).split()
+    names = git("grep", "-l", "-z", "-w", "-e", word, "--", *scope, check=False)
+    return [name for name in names.split("\0") if name]
 
 
 def add(args: argparse.Namespace) -> int:
@@ -97,10 +105,10 @@ def local_scope(images: list[str]) -> list[str]:
     return folders
 
 
-def with_address_comment(path: Path, old: str, new: str) -> bool:
-    """Write ``/* old */`` above the definition or declaration of ``new``; return True if it did."""
-    lines = path.read_text(encoding="utf-8").split("\n")
-    out, changed = [], False
+def with_address_comment(path: Path, old: str, new: str, text: str) -> str:
+    """Keep the original address above a renamed definition or declaration."""
+    lines = text.split("\n")
+    out = []
     function = re.compile(r"(MATCH|NON_MATCHING)\b[^=;]*\b" + re.escape(new) + r"\(")
     prototype = re.compile(r"[A-Za-z_][^=;{}]*\b" + re.escape(new) + r"\(.*\);")
     variable = re.compile(
@@ -123,11 +131,86 @@ def with_address_comment(path: Path, old: str, new: str) -> bool:
                 out.insert(len(out) - 1, f"/* {old} */")
             else:
                 out.append(f"/* {old} */")
-            changed = True
         out.append(line)
-    if changed:
-        path.write_text("\n".join(out), encoding="utf-8")
-    return changed
+    return "\n".join(out)
+
+
+def check_rename(
+    old: str, edits: dict[Path, str], scope: list[str], address: bool
+) -> None:
+    """Reject old references in the planned or current source tree."""
+    pattern = re.compile(rb"\b" + re.escape(old.encode()) + rb"\b")
+    names = git("ls-files", "-z", "--cached", "--others", "--", *scope)
+    for name in names.rstrip("\0").split("\0"):
+        path = ROOT / name
+        if not name.startswith(("src/", "include/", "config/")) or not path.is_file():
+            continue
+        data = edits[path].encode("utf-8") if path in edits else path.read_bytes()
+        if address:
+            data = re.sub(
+                rb"(?m)^\s*/\* " + re.escape(old.encode()) + rb" \*/\s*$", b"", data
+            )
+        if pattern.search(data):
+            raise SystemExit(
+                f"symbol: {old} remains in {name}; include every reference in the rename"
+            )
+
+
+def apply_rename(
+    edits: dict[Path, str],
+    moves: list[tuple[str, str]],
+    old: str,
+    scope: list[str],
+    address: bool,
+) -> None:
+    """Publish the index only after every file edit, move and reference check succeeds."""
+    index = Path(
+        git("rev-parse", "--path-format=absolute", "--git-path", "index").strip()
+    )
+    lock = index.with_name(index.name + ".lock")
+    # Hold Git's real index lock while git mv operates on a private copy.
+    lock.open("xb").close()
+    try:
+        with tempfile.TemporaryDirectory(prefix=".symbol-rename-", dir=ROOT) as folder:
+            scratch = Path(folder)
+            private_index = scratch / "index"
+            shutil.copy2(index, private_index)
+            env = dict(os.environ, GIT_INDEX_FILE=str(private_index))
+            backups = {}
+            for number, path in enumerate(edits):
+                if (
+                    path.is_symlink()
+                    or not path.is_file()
+                    or not os.access(path, os.W_OK)
+                    or not os.access(path.parent, os.W_OK)
+                ):
+                    raise SystemExit(f"symbol: cannot rewrite {path.relative_to(ROOT)}")
+                backup = scratch / str(number)
+                shutil.copy2(path, backup)
+                backups[path] = backup
+            for source, target in moves:
+                if not os.access((ROOT / source).parent, os.W_OK):
+                    raise SystemExit(f"symbol: cannot move {source}")
+                if os.path.lexists(ROOT / target):
+                    raise SystemExit(f"symbol: destination already exists: {target}")
+                git("mv", "-n", "--", source, target, env=env)
+            try:
+                for path, contents in edits.items():
+                    path.write_text(contents, encoding="utf-8")
+                for source, target in moves:
+                    git("mv", "--", source, target, env=env)
+                check_rename(old, {}, scope, address)
+                shutil.copyfile(private_index, lock)
+                os.chmod(lock, index.stat().st_mode)
+                os.replace(lock, index)
+            except BaseException:
+                for _, target in moves:
+                    (ROOT / target).unlink(missing_ok=True)
+                for path, backup in backups.items():
+                    os.replace(backup, path)
+                raise
+    finally:
+        lock.unlink(missing_ok=True)
 
 
 def rename(args: argparse.Namespace) -> int:
@@ -182,22 +265,25 @@ def rename(args: argparse.Namespace) -> int:
     else:
         for image in images:
             text = symtab.rename_row(text, image, old, new) or text
-    SYMBOLS.write_text(text, encoding="utf-8")
     pattern = re.compile(r"\b" + re.escape(old) + r"\b")
+    edits = {SYMBOLS: text}
+    moves = []
     for name in files:
         path = ROOT / name
-        path.write_text(
-            pattern.sub(new, path.read_text(encoding="utf-8")), encoding="utf-8"
-        )
-    for name in files:
-        if Path(name).name == f"{old}.c":
-            target = Path(name).with_name(f"{new}.c").as_posix()
-            git("mv", name, target)
-            files[files.index(name)] = target
-    if address:
-        for name in files:
-            if name.startswith(("src/", "include/")):
-                with_address_comment(ROOT / name, old, new)
+        contents = edits.get(path)
+        if contents is None:
+            contents = path.read_text(encoding="utf-8")
+        contents = pattern.sub(new, contents)
+        if address and name.startswith(("src/", "include/")):
+            contents = with_address_comment(path, old, new, contents)
+        edits[path] = contents
+        if path.name == f"{old}.c":
+            moves.append(
+                (name, path.with_name(f"{new}.c").relative_to(ROOT).as_posix())
+            )
+    check_scope = scope if address else ["src", "include", "config"]
+    check_rename(old, edits, check_scope, bool(address))
+    apply_rename(edits, moves, old, check_scope, bool(address))
     print(f"renamed {old} -> {new} in {len(files)} files")
     return 0
 
@@ -289,8 +375,12 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("add needs --source (a description) or --alias")
     try:
         return args.run(args)
-    except symtab.SymtabError as error:
+    except (symtab.SymtabError, OSError) as error:
         raise SystemExit(f"symbol: {error}") from None
+    except subprocess.CalledProcessError as error:
+        raise SystemExit(
+            f"symbol: {error.stderr.strip() if error.stderr else error}"
+        ) from None
 
 
 if __name__ == "__main__":
