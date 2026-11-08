@@ -20,7 +20,7 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
     UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 154, 160, 0, g_WindowStyle);
     text = Party_GetAbilities(task->unk_0A, task->unk_0B, 0);
     y    = task->pos.y;
-    for (n = 0; n < 10; n++, y += 0xD, text++) {
+    for (n = 0; n < 10; n++, y += 13, text++) {
         if (*text != 0) {
             disabled = (u8)func_801AF5B0(task->unk_08, D_80148656, *text) == 0;
             color    = -disabled & 7;

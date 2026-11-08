@@ -10,9 +10,9 @@ MATCH s32 func_801BC4D0(void) {
     saved = g_Task->direction_08;
     kind  = func_801B9598();
     if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
-        g_Task->timer = 0x20;
+        g_Task->timer = 32;
     } else {
-        g_Task->timer = 0x10;
+        g_Task->timer = 16;
     }
     rate          = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
     g_Task->timer = (g_Task->timer / (rate & BYTE_MASK));
