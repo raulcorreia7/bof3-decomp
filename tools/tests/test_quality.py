@@ -185,3 +185,9 @@ def test_subsystem_table_groups_files_by_path_prefix() -> None:
         "Total",
     ]
     assert lines[-1].split("|")[2].strip() == "2"
+
+
+def test_a_quality_allowed_line_accepts_one_metric_in_one_file() -> None:
+    text = "Subject\n\nQuality-Allowed: src/a/x.c harmful\nQuality-Allowed: src/b/y.c casts\n"
+    found = quality.ALLOWED.findall(text)
+    assert found == [("src/a/x.c", "harmful"), ("src/b/y.c", "casts")]

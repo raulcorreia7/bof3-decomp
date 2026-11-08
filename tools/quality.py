@@ -33,6 +33,9 @@ A new ``MATCH`` body is exempt from both, since its first name and globals are t
 ``notes`` and ``twins`` are trended, not gated (``--gate`` changes the set). A file the change did
 not touch never counts, so old debt never blocks. ``BASE`` is compared at its merge-base with
 ``--to``, so work that landed on ``BASE`` since the branch point never counts as a regression.
+
+A commit message line ``Quality-Allowed: <path> <metric>`` accepts one metric rise in one file,
+for a matching aid that is the best try after the plain forms failed (keep its ``FAKE:`` note).
 """
 
 from __future__ import annotations
@@ -219,6 +222,18 @@ def touched(base: str, to: str) -> set[str]:
     )
     out = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, check=True)
     return set(out.stdout.split())
+
+
+ALLOWED = re.compile(r"^Quality-Allowed:\s*(\S+)\s+(\w+)", re.M)
+
+
+def allowed(base: str, to: str) -> set[tuple[str, str]]:
+    """Return the ``(path, metric)`` pairs that commits between ``base`` and ``to`` accept."""
+    out = subprocess.run(
+        ["git", "log", "--format=%B", f"{base}..{'HEAD' if to == 'WORK' else to}"],
+        cwd=ROOT, capture_output=True, text=True, check=False,
+    )  # fmt: skip
+    return set(ALLOWED.findall(out.stdout))
 
 
 def worse(
@@ -447,11 +462,14 @@ def main(argv: list[str] | None = None) -> int:
         base = merge_base(args.diff, args.to)
         old_files, new_files = rev_files(base), rev_files(args.to)
         changed = touched(base, args.to)
-        found = worse(
-            scan(old_files), scan(new_files), changed,
-            [m for m in gate if m not in PER_FUNCTION],
-        )  # fmt: skip
-        found += ratchet(old_files, new_files, changed, gate)
+        accepted = allowed(base, args.to)
+        found = []
+        for metric in gate:
+            left = {p for p in changed if (p, metric) not in accepted}
+            if metric in PER_FUNCTION:
+                found += ratchet(old_files, new_files, left, [metric])
+            else:
+                found += worse(scan(old_files), scan(new_files), left, [metric])
         for line in found:
             print(line)
         if found:
