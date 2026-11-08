@@ -45,9 +45,6 @@ extern u8 D_80144F5F;
 
 s32 func_8019601C();
 
-extern u8       D_80146874;
-extern u8       D_80146875;
-extern u16      D_80146876;
 extern u8       D_801FD030;
 extern Callback D_801FD038[];
 

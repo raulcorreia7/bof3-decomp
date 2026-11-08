@@ -1,10 +1,7 @@
 #include "area102_13.h"
 
+#include "overlays/area/Area_TimedDrawStep.h"
+
 MATCH void func_801F3408(void) {
-    func_801F36B4(g_Task->timer);
-    g_Task->timer += 1;
-    if (g_Task->timer >= 8U) {
-        g_Task->timer = 0;
-        g_Task->header.step += 1;
-    }
+    AREA_TIMED_DRAW_STEP(func_801F36B4);
 }

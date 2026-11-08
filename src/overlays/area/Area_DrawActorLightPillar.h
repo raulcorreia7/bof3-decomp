@@ -1,7 +1,8 @@
 /* Draw a light pillar at the current task's position. One definition shared by the area overlays
  * that place one.
  */
-/* func_801F3D28 (area100), func_801F3EA4 (area112), func_801F2F30 (area116) */
+/* Area_DrawActorLightPillar (area100 0x801F3D28, area112 0x801F3EA4, area116 0x801F2F30, area143 0x801F3F94,
+ * area146 0x801F2E20) */
 MATCH void Area_DrawActorLightPillar(void) {
     s32    pos[3];
     Actor* work = g_Task;
