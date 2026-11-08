@@ -4,7 +4,7 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     u8*   rect;
     SPRT* sprt;
 
-    rect = func_801AF270(sprite_id, flags & 1);
+    rect = UI_GetSpriteRect(sprite_id, flags & 1);
     sprt = (SPRT*)g_GfxPrimCursor;
 
     SetSprt(sprt);

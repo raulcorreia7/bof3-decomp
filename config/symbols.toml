@@ -1769,6 +1769,9 @@ func_801D0C10 = { addr = 0x801D0C10, type = "func", source = "Entry of the commu
 g_Commu05States = { addr = 0x801D1950, source = "the 3 step handlers of the commu05 scene, called by func_801D0C10 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 
 ["emi/etc/game/00"]
+Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
+UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
+Area_PickEncounter = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
 D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, folded into that table in #400" }
 D_801CD459 = { addr = 0x801CD459, alias = true, source = "s_CameraScrollDeltas +0x1, the y half of the first GameDelta pair (#379)" }
 D_801CD5BD = { addr = 0x801CD5BD, alias = true, source = "s_EntitySpawnOffsets +0x1, the y half of the first GameDelta pair (#379)" }
