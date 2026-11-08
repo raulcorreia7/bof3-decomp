@@ -43,7 +43,7 @@ MATCH void Battle_LoadEndOverlay(void) {
         }
         g_Battle.action_lock = 0u;
     }
-    if (g_Battle.encounter == 0u) {
+    if (BATTLE_IS_RANDOM()) {
         u8 flags = g_Battle.outcome.result;
 
         if ((flags & 1u) != 0u) {

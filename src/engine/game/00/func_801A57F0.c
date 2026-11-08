@@ -52,14 +52,14 @@ MATCH void func_801A57F0(u8* script) {
     g_Task->direction_08     = script[0] & 0xF;
     g_Task->unk_06           = script[0] >> 4;
 
-    *(u16*)((u8*)&D_80146914 + *counter * ACTOR_SIZE) = script[4];
-    *(s16*)((u8*)&D_80146916 + *counter * ACTOR_SIZE) = script[5];
-    g_Actors[*counter].unk_7C                         = (script[0xF] | (script[0xE] << 8));
+    FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[4];
+    FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[5];
+    g_Actors[*counter].unk_7C                      = (script[0xF] | (script[0xE] << 8));
     /* FAKE: forces the counter re-read before the next shadow store. */
     FAKE_BARRIER();
-    D_80146900[*counter][0]                          = script[0xB];
-    *(u8*)((u8*)&D_801468FF + *counter * ACTOR_SIZE) = script[0x10];
-    D_8014691C[*counter][0]                          = 0x7F;
+    D_80146900[*counter][0]                       = script[0xB];
+    FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE) = script[0x10];
+    D_8014691C[*counter][0]                       = 0x7F;
 
     func_801A4990(script + 0xD);
 

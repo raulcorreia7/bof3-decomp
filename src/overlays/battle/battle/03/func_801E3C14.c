@@ -42,7 +42,7 @@ MATCH void func_801E3C14(void) {
             func_8009D198();
             break;
     }
-    if (g_Battle.encounter != 0) {
+    if (BATTLE_IS_SCRIPTED()) {
         g_BattleCurrentEnemy->unk_E4(1);
     }
     lock_work = g_BattleCurrentEnemy;
@@ -83,7 +83,7 @@ MATCH void func_801E3C14(void) {
                 GFX_AllocPaletteFade(g_Task, 0x10, 0x10, 0x10, 0);
             }
             g_BattleCurrentEnemy->status = STATUS_KO;
-        } else if (g_Battle.encounter != 0) {
+        } else if (BATTLE_IS_SCRIPTED()) {
             func_801E52F0(tail_work->unk_E8[2]);
         }
     }

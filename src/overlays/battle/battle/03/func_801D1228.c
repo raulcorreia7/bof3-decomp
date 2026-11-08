@@ -135,7 +135,7 @@ NON_MATCHING void func_801D1228(void) {
         slot += 1;
     } while ((u32)(slot & BYTE_MASK) < 0xBU);
     slot = 0;
-    if (g_Battle.encounter == 0) {
+    if (BATTLE_IS_RANDOM()) {
         EMI_LoadArchive(g_GameAreaId + EMI_SLOT_ENEMY);
         slot = 0;
     }
@@ -145,7 +145,7 @@ NON_MATCHING void func_801D1228(void) {
         slot += 1;
         index = slot & BYTE_MASK;
     } while ((u32)(slot & BYTE_MASK) < 0x10U);
-    if (g_Battle.encounter != 0) {
+    if (BATTLE_IS_SCRIPTED()) {
         g_Battle.boss_event_hook(BOSS_EVENT_BATTLE_RESET);
     }
     g_Battle.phase.step += 1;

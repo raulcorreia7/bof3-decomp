@@ -23,7 +23,7 @@ NON_MATCHING void func_801D43EC(void) {
         *battle_flags &= 0xD7FB;
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
-        if (g_Battle.encounter != 0) {
+        if (BATTLE_IS_SCRIPTED()) {
             g_Battle.boss_event_hook(BOSS_EVENT_RESTART_BEGIN);
         }
         if (g_Battle.outcome.result != 0) {
@@ -69,7 +69,7 @@ NON_MATCHING void func_801D43EC(void) {
             g_Battle.phase.step     = 0;
             g_Battle.phase.sub_step = 1;
         }
-        if (g_Battle.encounter != 0) {
+        if (BATTLE_IS_SCRIPTED()) {
             g_Battle.boss_event_hook(BOSS_EVENT_RESTART_END);
         }
     }

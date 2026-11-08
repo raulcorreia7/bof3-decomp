@@ -2,7 +2,8 @@
 
 /* Configures the shared 8x8 sprite primitive as the dim AREA030 icon
  * marker and appends it with the caller's semi-transparency mode. */
-MATCH void func_801D18CC(s16 sprite_x, s16 sprite_y, u8 icon_index) {
+/* func_801D18CC */
+MATCH void Fishing_DrawIcon(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     SPRT_8* primitive;
 
     primitive = (SPRT_8*)g_GfxPrimCursor;

@@ -9,7 +9,7 @@ MATCH void func_801F33F0(void) {
     s    = g_Task;
     flag = &g_ScriptVars[3];
     step = *flag;
-    e    = &g_Actors[((u8*)s)[0x0B]];
+    e    = &g_Actors[s->param.unk_0B];
     TASK_SET(e);
     if ((step & 0x80u) != 0u) {
         s->header.mode = 0x0E;

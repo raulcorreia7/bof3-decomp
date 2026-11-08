@@ -26,7 +26,7 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
         if ((u8)other != 0u) {
             func_801DD858((u8)other);
         }
-    } else if (g_Battle.encounter != 0u) {
+    } else if (BATTLE_IS_SCRIPTED()) {
         func_801E52F0(*ENEMY_COMBATANT(kind).unk_E8);
     } else {
         SND_QueueSelectionFx((ENEMY_COMBATANT(kind).kind * 2u) | 0x600u);

@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 MATCH void func_800ABBA4(void) {
-    if (g_Battle.encounter != 0) {
+    if (BATTLE_IS_SCRIPTED()) {
         func_800ABBE0();
         return;
     }

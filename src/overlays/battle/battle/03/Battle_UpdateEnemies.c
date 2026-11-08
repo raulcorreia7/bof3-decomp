@@ -10,7 +10,7 @@ MATCH void Battle_UpdateEnemies(void) {
             enemy = &g_BattleEnemyBattlers[(u8)i];
             TASK_SET((PartyMember*)enemy);
             g_BattleCurrentEnemy = (EnemyBattler*)enemy;
-            if (g_Battle.encounter != 0u) {
+            if (BATTLE_IS_SCRIPTED()) {
                 if (enemy->header.mode != 0u) {
                     enemy->unk_E4(2);
                 }

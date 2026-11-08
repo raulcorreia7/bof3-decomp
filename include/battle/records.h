@@ -803,6 +803,10 @@ ASSERT_SIZE(BattleRange, 0x40);
 /* A battler slot on the player side: slots 0-2 are the party rows. */
 #define BATTLER_IS_PLAYER(slot)           ((slot) < BATTLE_PARTY_CHARACTERS_COUNT)
 
+/* A random battle has encounter 0; a scripted battle holds its s_BattleModeRecords index. */
+#define BATTLE_IS_RANDOM()                (g_Battle.encounter == 0)
+#define BATTLE_IS_SCRIPTED()              (g_Battle.encounter != 0)
+
 /* The battle ended with the party's victory: the result bit the ending step
  * sets when no enemy is left. */
 #define BATTLE_IS_VICTORY()               (g_Battle.outcome.result & BATTLE_RESULT_VICTORY)

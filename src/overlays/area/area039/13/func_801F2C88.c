@@ -10,6 +10,6 @@ MATCH void func_801F2C88(void) {
         work->unk_0A -= 1;
         g_CurrentActor->unk_7E -= 2;
     } else {
-        ((u8*)work)[0x04] = 0;
+        work->unk_04 = 0;
     }
 }

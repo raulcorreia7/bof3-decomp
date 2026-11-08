@@ -19,14 +19,14 @@ MATCH void func_801A3D1C(void* unused) {
         if (old_a != 0) {
             D_80147CB9[index] = old_a - 1;
             work              = g_Task;
-            work->unk_64 += *(s32*)((u8*)D_80147CBC + index);
-            work->unk_68 += *(s32*)((u8*)D_80147CC0 + index);
+            work->unk_64 += FIELD(s32, D_80147CBC, index);
+            work->unk_68 += FIELD(s32, D_80147CC0, index);
         }
         old_b = D_80147CBA[index];
         if (old_b != 0) {
             D_80147CBA[index] = old_b - 1;
             work              = g_Task;
-            work->unk_6C += *(s32*)((u8*)D_80147CC4 + index);
+            work->unk_6C += FIELD(s32, D_80147CC4, index);
         }
     }
 }

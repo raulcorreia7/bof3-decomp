@@ -22,7 +22,7 @@ MATCH void Battle_LoadBattleArchive(void) {
     }
     D_80146856 = 0;
     D_80146855 = 0;
-    if (g_Battle.encounter != 0) {
+    if (BATTLE_IS_SCRIPTED()) {
         arg = g_BossArchiveSlots[D_801CD78F[g_Battle.encounter * 4]];
     } else if (g_SceneState.scenario_id < 8) {
         arg = 6;

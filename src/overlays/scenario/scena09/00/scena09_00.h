@@ -22,7 +22,8 @@ extern Callback D_801FE3E0[];
 extern Callback D_801FE3EC[];
 extern u8       D_801FE430[4];
 
-void func_801F7574(void);
+/* func_801F7574 */
+void Scene_ClearWorkRows(void);
 s32  func_801F75BC(void);
 void func_801F76D0(void);
 
