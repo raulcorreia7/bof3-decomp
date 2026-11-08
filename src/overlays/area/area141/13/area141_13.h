@@ -30,6 +30,8 @@ void func_801A65A0(u8* script);
 void Actor_BeginScript(s32 raw_selector, s32 raw_code);
 void func_801F4300(u8* table, s32 arg);
 
+extern u8 D_801F4DFC[];
+
 /* The game-overlay state bytes the cancel path resets. */
 extern u8 D_801F4E50[];
 
