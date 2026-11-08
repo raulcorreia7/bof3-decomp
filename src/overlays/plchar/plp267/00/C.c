@@ -8,11 +8,11 @@ MATCH void func_801CE404(void) {
     D_801D0988[TASK_BYTES[2]]();
 }
 
-MATCH void Char_StartTurn_801CE448(void) {
+MATCH void Char_StartTurn2(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-MATCH void Char_RunStepScript_801CE514(void) {
+MATCH void Char_RunStepScript2(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
 }
 
@@ -94,7 +94,7 @@ MATCH void func_801CFCA4(void) {
 
 #include "../../Char_StartNearestFacingTurn.h"
 
-MATCH void Char_RunStepScript_801CFDDC(void) {
+MATCH void Char_RunStepScript15(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 

@@ -12,7 +12,7 @@ MATCH void Char_StartTurn(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-MATCH void Char_RunStepScript_801CE514(void) {
+MATCH void Char_RunStepScript2(void) {
     CHAR_RUN_STEP_CASES(CHARACTER_FACING_AWAY, 0x41, CHARACTER_FACING_BACK, 0x40);
 }
 
@@ -30,7 +30,7 @@ MATCH void func_801CEA00(void) {
     SYS_DISPATCH_TASK(D_801D07A4, 2, g_Task);
 }
 
-MATCH void Char_StartTurn_801CEA44(void) {
+MATCH void Char_StartTurn4(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
@@ -90,7 +90,7 @@ MATCH void func_801CFAA8(void) {
 
 #include "../../Char_StartNearestFacingTurn.h"
 
-MATCH void Char_RunStepScript_801CFBE0(void) {
+MATCH void Char_RunStepScript14(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 

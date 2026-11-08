@@ -56,7 +56,7 @@ MATCH void func_801CF924(void) {
     SYS_DISPATCH_TASK(D_801CFFD4, 2, g_Task);
 }
 
-MATCH void Char_StartTurn_801CF968(void) {
+MATCH void Char_StartTurn8(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 

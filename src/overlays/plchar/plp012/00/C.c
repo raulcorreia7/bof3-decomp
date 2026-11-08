@@ -51,12 +51,12 @@ MATCH void func_801CF500(void) {
 }
 
 /* This copy turns between facings 3 and 5; the image's own are the header's. */
-MATCH void Char_StartTurn_801CF544(void) {
+MATCH void Char_StartTurn6(void) {
     CHAR_START_TURN(3, 5);
 }
 
 /* This copy selects scripts 0x40 and 0x41 at facings 5 and 3; the image's own are the header's. */
-MATCH void Char_RunStepScript_801CF610(void) {
+MATCH void Char_RunStepScript10(void) {
     CHAR_RUN_STEP_SCRIPT(5, 3);
 }
 

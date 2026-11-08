@@ -34,7 +34,7 @@ MATCH void func_801CF12C(void) {
 
 #include "overlays/plchar/Char_StartTurn.h"
 
-MATCH void Char_RunStepScript_801CF23C(void) {
+MATCH void Char_RunStepScript7(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_AWAY, CHARACTER_FACING_BACK);
 }
 
@@ -80,7 +80,7 @@ MATCH void func_801D0050(void) {
     SYS_DISPATCH_TASK(D_801D0340, 2, g_Task);
 }
 
-MATCH void Char_StartTurn_801D0094(void) {
+MATCH void Char_StartTurn9(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
