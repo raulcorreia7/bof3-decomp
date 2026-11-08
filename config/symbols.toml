@@ -3340,7 +3340,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SetCameraZOffset = { addr = 0x801F2D18, type = "func", source = "Sets g_AreaCameraOffsetZ to -0x100, the Z shift of the camera, and g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetZ = { addr = 0x801F2D38, type = "func", source = "Zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
-Area_PauseBgm = { addr = 0x801F2E9C, type = "func", source = "pauses the current background music (area039 script handler)" }
+Area_PauseBGM = { addr = 0x801F2E9C, type = "func", source = "pauses the current background music (area039 script handler)" }
 Area_FadeOutSequence = { addr = 0x801F2F68, type = "func", source = "fades out the sound sequence (area039 script handler)" }
 
 ["emi/world01/area040/13"]
@@ -3438,8 +3438,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world01/area057/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_SetAnswerMessage = { addr = 0x801F2C04, type = "func", source = "Stores the message id the answer table D_801F4AFC holds for the menu choice g_MessageChoice in g_MessageRequest." }
-Area_PauseBgm = { addr = 0x801F2D30, type = "func", source = "pauses the current background music (area057 script handler)" }
-Area_ResumeBgm = { addr = 0x801F2D58, type = "func", source = "resumes the current background music (area057 script handler)" }
+Area_PauseBGM = { addr = 0x801F2D30, type = "func", source = "pauses the current background music (area057 script handler)" }
+Area_ResumeBGM = { addr = 0x801F2D58, type = "func", source = "resumes the current background music (area057 script handler)" }
 
 ["emi/world01/area058/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
