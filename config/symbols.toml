@@ -4850,6 +4850,8 @@ g_CurrentActor = { addr = 0x80146884, type = "Actor", source = "The current acto
 g_Actors = { addr = 0x80146888, size = 0x1170, source = "The field actors." }
 g_ActorWalkDestX = { addr = 0x80146908, size = 0x4, alias = true, source = "x of the destination func_801AC33C walks the actor to; the Actor.walk_dest_x word (byte 0x80) seen as a column of g_Actors" }
 g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of the destination func_801AC33C walks the actor to; the Actor.walk_dest_y word (byte 0x84) seen as a column of g_Actors" }
+D_80146904 = { addr = 0x80146904, size = 0x2, alias = true, source = "The Actor.unk_7C halfword (byte 0x7C) seen as a column of g_Actors" }
+D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.unk_88 word (byte 0x88) seen as a column of g_Actors" }
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
 g_ScriptState = { addr = 0x80148210, type = "GameScriptState", source = "The script state." }

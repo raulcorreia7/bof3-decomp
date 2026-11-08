@@ -343,10 +343,11 @@ extern u8                 D_801468C2[]; /* 0x801468C2 */
 extern s32                D_801468C4;
 extern u8                 D_801468FF;
 extern u8                 D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
-extern u16                D_80146904[30][0x4C];               /* 0x80146904 */
-extern s32                g_ActorWalkDestX[30][0x26];         /* 0x80146908 */
-extern s32                g_ActorWalkDestY[30][0x26];         /* 0x8014690C */
-extern s32                D_80146910[30][0x26];               /* 0x80146910 */
+/* FAKE: column views of g_Actors for func_801A65A0 and func_801A68C0, the only forms that match them. */
+extern u16                D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
+extern s32                g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
+extern s32                g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
+extern s32                D_80146910[ENTITY_MAX][ACTOR_SIZE / 4];       /* Actor.unk_88 */
 extern u16                D_80146914;
 extern u16                D_80146918[][ACTOR_SIZE / 2];
 extern u8                 D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
