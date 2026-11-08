@@ -4210,6 +4210,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3DDC, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F3E28, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3EB4, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3FBC, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area176/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4276,6 +4277,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area178/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4309,6 +4311,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area179/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4342,6 +4345,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area180/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4375,6 +4379,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area181/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4408,6 +4413,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area182/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4441,6 +4447,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area183/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4474,6 +4481,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area184/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4507,6 +4515,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area185/13"]
 Fairy_InitVillage = { addr = 0x801EECA4, alias = true }
@@ -4540,6 +4549,7 @@ FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", so
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
 Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
+Area_QueueSelectFx = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area186/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
