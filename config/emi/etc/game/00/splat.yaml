@@ -80,7 +80,7 @@ segments:
     subsegments:
       - [0x150, .data, D_80195950]
       - [0x154, .rodata, func_801A4BF8]
-      - [0x190, .rodata, Master_RunSceneEvent]
+      - [0x190, .rodata, Menu_OpenMaster]
       - [0x1A8, .rodata, func_801A7E54]
       - [0x1D8, .rodata, Scene_RunShopSaveEvent]
       - [0x238, .rodata, func_801A8728]
@@ -485,7 +485,7 @@ segments:
       - [0x1242C, c, Scene_ResetEventState]
       - [0x124AC, c, Scene_RunEventHandler]
       - [0x124E8, c, func_801A7CE8]
-      - [0x124F0, c, Master_RunSceneEvent]
+      - [0x124F0, c, Menu_OpenMaster]
       - [0x12654, c, func_801A7E54]
       - [0x1282C, c, Scene_RunShopSaveEvent]
       - [0x12AF8, c, Message_RunAreaMessage]

@@ -4,16 +4,16 @@
 
 /* Work-entry stock list, its selector, and the per-entry stock table. */
 
-MATCH void Master_ApplyMaster(void) {
+MATCH void Menu_ApplyMasterMode(void) {
     u8 value;
 
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    value = g_MasterActorModes[g_SceneEventSelection];
+    value = g_MenuMasterActorModes[g_SceneEventSelection];
     if (value != GAME_NONE) {
         g_Actors[g_ScriptVars[3]].header.mode = value;
     }
-    g_MasterStep = 0;
+    g_MenuMasterStep = 0;
     g_SceneEventStep++;
 }

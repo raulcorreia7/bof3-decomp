@@ -18,7 +18,7 @@ MATCH void func_801E77F0(void) {
             do {
                 offset = i * 24;
                 if ((&D_8018E9A1)[offset] - '0' == j) {
-                    CardAccessFile(1, &g_SaveCardDirectory[offset], 1, 0x1C, 0xEA0);
+                    SAVE_AccessFile(1, &g_SaveCardDirectory[offset], 1, 0x1C, 0xEA0);
                     *(MenuListRowWords*)row = *(MenuListRowWords*)0x800C26A0;
                     row->source_index       = i;
                 }

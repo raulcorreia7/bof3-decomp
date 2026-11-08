@@ -37,7 +37,7 @@
     do {                                  \
         if (MENU_SELECTION_ARMED()) {     \
             g_MessageRequest = (request); \
-            g_MasterStep     = 6;         \
+            g_MenuMasterStep = 6;         \
         } else {                          \
             MESSAGE_REQUEST_CLEAR();      \
         }                                 \
@@ -51,7 +51,7 @@
             g_MessageRequest = (idle);                \
         } else {                                      \
             g_MessageRequest = (selected);            \
-            g_MasterStep     = 6;                     \
+            g_MenuMasterStep = 6;                     \
         }                                             \
     } while (0)
 
@@ -60,7 +60,7 @@
 #define WORLD_FINISH_ANSWER_MESSAGE(substep) \
     do {                                     \
         if (MENU_SELECTION_ARMED()) {        \
-            g_MasterSubStep = (substep);     \
+            g_MenuMasterSubStep = (substep); \
         }                                    \
         MESSAGE_REQUEST_CLEAR();             \
     } while (0)
@@ -68,4 +68,4 @@
 /* The master panel step and sub-step the answer messages arm; the sisyou
  * image owns the bytes. */
 /* D_801D4286 */
-extern u8 g_MasterSubStep;
+extern u8 g_MenuMasterSubStep;

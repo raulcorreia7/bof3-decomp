@@ -8,7 +8,7 @@
 
 MATCH void func_801D26C4(void) {
     SYS_SetFlag(D_8014554C, g_SceneEventSelection);
-    Message_StartAreaMessage(g_MasterMessageIds[g_SceneEventSelection]);
+    Message_StartAreaMessage(g_MenuMasterMessageIds[g_SceneEventSelection]);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    g_MasterSubStep++;
+    g_MenuMasterSubStep++;
 }

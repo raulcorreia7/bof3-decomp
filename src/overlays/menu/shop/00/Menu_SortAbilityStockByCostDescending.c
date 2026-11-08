@@ -20,7 +20,7 @@ MATCH void Menu_SortAbilityStockByCostDescending(void) {
             if (cur != 0) {
                 nxt = *(row + 1);
                 if ((nxt != 0) && (D_801CA71A[cur].unk_00 < D_801CA71A[nxt].unk_00)) {
-                    Menu_SwapBytes_801E1BB8(row, row + 1);
+                    Menu_SwapBytes6(row, row + 1);
                 }
             }
             row++;

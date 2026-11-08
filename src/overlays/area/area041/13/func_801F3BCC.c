@@ -20,5 +20,5 @@ MATCH void func_801F3BCC(void) {
         value = 0x64;
     }
     g_MessageRequest = value;
-    g_MasterStep     = 6;
+    g_MenuMasterStep = 6;
 }

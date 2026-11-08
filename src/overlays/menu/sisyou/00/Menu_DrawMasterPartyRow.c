@@ -1,6 +1,6 @@
 #include "sisyou_00.h"
 
-MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
+MATCH void Menu_DrawMasterPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     Character* record;
     u8*        base;
     s16        text_x;

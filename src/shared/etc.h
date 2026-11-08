@@ -72,15 +72,15 @@ extern u8          D_8014869C;
 extern u8          D_8014869D;
 extern AbilityCost D_801CA71A[];
 /* D_801EC628 */
-extern u8          MENU_STAT_GLYPH_0[44];
+extern u8          g_MenuStatFrameLeft[44];
 /* D_801EC654 */
-extern u8          MENU_STAT_GLYPH_1[12];
+extern u8          g_MenuStatFrameMiddle[12];
 /* D_801EC660 */
-extern u8          MENU_STAT_GLYPH_2[24];
+extern u8          g_MenuStatFrameRight[24];
 /* D_801EC678 */
-extern u8          MENU_CAPTION_GLYPH_0[12];
+extern u8          g_MenuCaptionLeft[12];
 /* D_801EC684 */
-extern u8          MENU_CAPTION_GLYPH_1[12];
+extern u8          g_MenuCaptionMiddle[12];
 /* D_801EC940 */
 extern u8          g_MenuLabelPower[4];
 /* D_801EC944 */
@@ -89,11 +89,11 @@ extern u8          g_MenuLabelDefense[4];
 extern u8          g_MenuLabelIntellect[4];
 
 /* D_801E5A24 (shop), D_801ECB40 (start) */
-extern UvRect      MENU_CLUT_STRIP_CELLS[];
+extern UvRect      g_MenuClutStripCells[];
 /* D_801E5AD0 (shop), D_801ECBEC (start) */
-extern u8          MENU_CLUT_STRIP_ENTRIES[];
+extern u8          g_MenuClutStripEntries[];
 /* D_801E5B1C (shop), D_801ECC38 (start) */
-extern u8          MENU_CLUT_STRIP_PALETTES[];
+extern u8          g_MenuClutStripPalettes[];
 /* D_801E6074 (shop), D_801ED804 (start) */
 extern u8          g_SaveSlotFirst;
 /* D_801E6078 (shop), D_801ED808 (start) */
@@ -139,7 +139,7 @@ void        Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height);
 void        Menu_DrawClutStrip(u8 clut_index);
 void        func_801D3310(void);
 void        func_801E1680(void);
-s32         CardScanDirectory(char* prefix, u8 length);
+s32         SAVE_ScanDirectory(char* prefix, u8 length);
 void        func_801F03D0(void);
 void        func_801F16BC(void);
 void        func_801F18BC(void);

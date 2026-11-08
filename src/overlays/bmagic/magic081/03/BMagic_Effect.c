@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(CardAccessFile);
+INCLUDE_ASM(SAVE_AccessFile);
 
 INCLUDE_ASM(func_801EED44);
 

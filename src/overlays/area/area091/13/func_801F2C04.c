@@ -11,5 +11,5 @@ MATCH s32 func_801F2C04(void) {
     } else {
         g_MessageRequest = 7;
     }
-    g_MasterStep = 6;
+    g_MenuMasterStep = 6;
 }

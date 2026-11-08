@@ -55,9 +55,9 @@ MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
         TEXT_SetVariable(0, 8, Resource_GetText(x30));
         WinDrawCueText(xb, panel_y + 34, 0x34);
     }
-    UI_DrawSpriteRun(panel_x, panel_y, MENU_STAT_GLYPH_0, 0);
+    UI_DrawSpriteRun(panel_x, panel_y, g_MenuStatFrameLeft, 0);
     for (i = 0; i < 16; i++) {
-        UI_DrawSpriteRun(panel_x + (i * 8), panel_y, MENU_STAT_GLYPH_1, 0);
+        UI_DrawSpriteRun(panel_x + (i * 8), panel_y, g_MenuStatFrameMiddle, 0);
     }
-    UI_DrawSpriteRun(panel_x, panel_y, MENU_STAT_GLYPH_2, 0);
+    UI_DrawSpriteRun(panel_x, panel_y, g_MenuStatFrameRight, 0);
 }

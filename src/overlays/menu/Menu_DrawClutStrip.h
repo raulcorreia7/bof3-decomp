@@ -27,7 +27,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
     clut     = (u16*)((index << 1) + (u32)cluts);
     x        = 0;
     for (row = 0; row < 5; row++) {
-        entry = &MENU_CLUT_STRIP_ENTRIES[MENU_CLUT_STRIP_PALETTES[index]];
+        entry = &g_MenuClutStripEntries[g_MenuClutStripPalettes[index]];
         for (pair = 0; pair < 2; pair++, x += 0x20) {
             y     = 0;
             shade = 0x80;
@@ -37,7 +37,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
                 SetSemiTrans(prim, 0);
                 setXY0(prim, x, y);
                 prim->clut = *clut;
-                desc       = &MENU_CLUT_STRIP_CELLS[*entry];
+                desc       = &g_MenuClutStripCells[*entry];
                 setUV0(prim, desc->u, desc->v);
                 prim->w = desc->w;
                 h       = desc->h;

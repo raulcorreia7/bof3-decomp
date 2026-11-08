@@ -273,10 +273,10 @@ extern const char* D_801E5434[];
 /* D_801E545C */
 extern Callback    g_ShopStep5Funcs[SHOP_STEP5_COUNT];
 extern u8          D_801E547C[];
-extern u8          MENU_CAPTION_GLYPH_2[];
-extern u8          MENU_CLOCK_CAPTION[];
-extern u8          MENU_COMMAND_FRAME[];
-extern u8          MENU_COMMAND_FRAME_SELECTED[];
+extern u8          g_MenuCaptionRight[];
+extern u8          g_MenuClockCaption[];
+extern u8          g_MenuCommandFrame[];
+extern u8          g_MenuCommandFrameSelected[];
 /* D_801E5638 */
 extern u8          g_MenuListTab2OffSprites[0xC];
 /* D_801E5650 */
@@ -306,8 +306,8 @@ extern u8          D_801E5844[];
 extern u8          D_801E5848[];
 extern u8          g_MenuPortraitAtlas[];
 extern u8          D_801E5880[];
-extern u8          MENU_CAPTION_ICON[];
-extern u8          MENU_CLOCK_COLON[];
+extern u8          g_MenuCaptionIcon[];
+extern u8          g_MenuClockColon[];
 extern u8*         g_MenuCommandLabels[];
 extern u8          g_MenuCommandRows[][5];
 extern u8          g_MenuEquipStatLabels[];
@@ -612,7 +612,7 @@ void func_801DE944(void);
 void func_801DEE20(void);
 void func_801DEE64(void);
 void func_801DF00C(s32 panel_x, s32 panel_y);
-void Menu_SwapBytes_801DF464(u8* first, u8* second);
+void Menu_SwapBytes5(u8* first, u8* second);
 s32  func_801DF478(void);
 void func_801DF6A8(void);
 void func_801DF90C(void);
@@ -635,7 +635,7 @@ void func_801E112C(MenuPanelTask* task);
 void func_801E1710(MenuPanelTask* task);
 /* func_801E1B80 */
 void Menu_RunAbilityStockSort(s32 cursor_row);
-void Menu_SwapBytes_801E1BB8(u8* first, u8* second);
+void Menu_SwapBytes6(u8* first, u8* second);
 /* func_801E1BCC */
 void Menu_PackAbilityStock(void);
 /* func_801E1C88 */
@@ -733,7 +733,7 @@ void func_801E4DF4(MenuPanelTask* panel_task);
 void func_801E4E9C(MenuPanelTask* panel_task);
 void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_mode);
 /* Returns the save probe's signed byte result; its caller tests it against -1. */
-s8   CardAccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
+s8   SAVE_AccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
 u32  func_801EF200(void);
 s32  func_801EF27C(s32, s32, u8*);
 

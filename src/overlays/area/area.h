@@ -71,7 +71,7 @@ void            func_801F2C8C(void);
 void            func_801F2D18(void);
 void            func_801F2D3C(void);
 /* D_801D4285 */
-extern u8       g_MasterStep;
+extern u8       g_MenuMasterStep;
 void            func_801F2E1C(void);
 void            func_801F2ED8(void);
 void            func_801F2EEC(void);

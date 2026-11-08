@@ -33,9 +33,9 @@ u32 D_801E5898 = 0;
 
 s32 D_801E589C[5] = {-12, -4, 12, 4, 12};
 
-u8 MENU_CAPTION_ICON[4] = "`" T_END;
+u8 g_MenuCaptionIcon[4] = "`" T_END;
 
-u8 MENU_CLOCK_COLON[4] = ">" T_END;
+u8 g_MenuClockColon[4] = ">" T_END;
 
 u8 D_801E58B8[4] = "Use" T_END;
 

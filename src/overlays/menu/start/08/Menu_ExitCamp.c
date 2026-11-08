@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-MATCH void Camp_EnterMainLoop(void) {
+MATCH void Menu_ExitCamp(void) {
     u16* count;
     u8   i;
 

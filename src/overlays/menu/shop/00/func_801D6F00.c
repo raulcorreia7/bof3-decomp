@@ -21,7 +21,7 @@ MATCH void func_801D6F00(void) {
     s32         offset;
     u32*        count_word;
 
-    g_SaveSlotFirst = CardScanDirectory((char*)D_801D0C94, 0x10);
+    g_SaveSlotFirst = SAVE_ScanDirectory((char*)D_801D0C94, 0x10);
     D_801E610C      = 0;
     count           = 0;
     i               = 0;

@@ -17,6 +17,6 @@
 #define AREA_RESET_VARIANT       0xFF
 
 /* The shop panel step the request sets. */
-#define g_MasterSubStep          (*(s8*)&g_MasterSubStep)
+#define g_MenuMasterSubStep      (*(s8*)&g_MenuMasterSubStep)
 
 #endif

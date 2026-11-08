@@ -4,7 +4,7 @@
  * of rows 3 to 7 hold a command id 1 to 5, drawn as a label; column 11 of those rows is part of that label. The
  * cursor sits at (D_801ED7E0, D_801ED7E4). */
 #ifdef NON_MATCHING
-NON_MATCHING void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
+NON_MATCHING void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
     /* 87.1%; regalloc: retail moves grid_y to v0 before the label copy, ours keeps it in a2. */
     NameEntryLabels labels;
     u16             base_y;
@@ -62,5 +62,5 @@ NON_MATCHING void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
     Menu_DrawCursorSprite(cursor_x, y & HALF_MASK, 0);
 }
 #else
-INCLUDE_ASM(Start_DrawNameEntryGrid);
+INCLUDE_ASM(Menu_DrawNameEntryGrid);
 #endif

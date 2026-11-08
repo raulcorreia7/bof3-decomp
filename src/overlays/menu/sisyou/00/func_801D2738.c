@@ -7,6 +7,6 @@ MATCH void func_801D2738(void) {
         return;
     }
     SYS_SetFlag(D_8014554F, g_SceneEventSelection);
-    g_MasterStep    = 3;
-    g_MasterSubStep = 0;
+    g_MenuMasterStep    = 3;
+    g_MenuMasterSubStep = 0;
 }

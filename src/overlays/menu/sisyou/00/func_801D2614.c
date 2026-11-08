@@ -14,5 +14,5 @@ MATCH void func_801D2614(void) {
     } else {
         step = 1;
     }
-    g_MasterStep = step;
+    g_MenuMasterStep = step;
 }

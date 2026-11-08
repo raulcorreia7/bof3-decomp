@@ -21,21 +21,21 @@ MATCH void func_801D10AC(u32 message_id) {
     pad  = *padp;
 
     if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (g_MasterBannerLock != 0) {
-            handler = g_MasterSubStep - 1;
+        if (g_MenuMasterBannerLock != 0) {
+            handler = g_MenuMasterSubStep - 1;
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 2));
-            handler = g_MasterSubStep + 1;
+            handler = g_MenuMasterSubStep + 1;
         }
-        g_MasterSubStep = handler;
+        g_MenuMasterSubStep = handler;
         SND_PlayCue(EMI_CUE_ID(1, 4));
     } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        g_MasterBannerLock = 1;
-        g_MasterSubStep    = g_MasterSubStep - 1;
+        g_MenuMasterBannerLock = 1;
+        g_MenuMasterSubStep    = g_MenuMasterSubStep - 1;
         SND_PlayCue(EMI_CUE_ID(1, 6));
     } else if (trig & HALF_MASK) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
-        g_MasterBannerLock ^= 1;
+        g_MenuMasterBannerLock ^= 1;
     }
 
     count = g_PartySize;
@@ -44,7 +44,7 @@ MATCH void func_801D10AC(u32 message_id) {
         entryp = &g_Game.members[0].character_index;
         y      = MASTER_MENU_ROW_TOP;
         do {
-            Master_DrawPartyRow(MASTER_MENU_ROW_X, y, *entryp, i);
+            Menu_DrawMasterPartyRow(MASTER_MENU_ROW_X, y, *entryp, i);
             Menu_DrawStatPanel(MASTER_MENU_STAT_PANEL_X, y, *entryp);
             entryp += BATTLE_PARTY_STRIDE;
             y += MASTER_MENU_ROW_PITCH;
@@ -52,12 +52,12 @@ MATCH void func_801D10AC(u32 message_id) {
         } while (i < g_Game.party_size);
     }
 
-    MenuDrawSelectionBox(MASTER_MENU_ROW_X, (g_MasterMenuCursor * MASTER_MENU_ROW_PITCH + MASTER_MENU_ROW_TOP) & 0xFFFE,
+    MenuDrawSelectionBox(MASTER_MENU_ROW_X, (g_MenuMasterCursor * MASTER_MENU_ROW_PITCH + MASTER_MENU_ROW_TOP) & 0xFFFE,
                          MASTER_MENU_SELECT_WIDTH, MASTER_MENU_SELECT_HEIGHT, 0, 6);
     Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, MASTER_MENU_FRAME_Y, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT,
                        g_WindowStyle);
     /* MESSAGE_TABLE_TEXT here changes the stock-row loop's register allocation. */
     i = (s32)&AREA_MESSAGE_TABLE->offsets[message_id & HALF_MASK];
     UI_DrawText(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, 255, (u8*)(MEM(u16, i) + (u32)AREA_MESSAGE_TABLE));
-    Menu_DrawCursorSprite((g_MasterBannerLock << 5) + 243, 21, 0);
+    Menu_DrawCursorSprite((g_MenuMasterBannerLock << 5) + 243, 21, 0);
 }

@@ -6,11 +6,11 @@ MATCH void func_801D3E70(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    g_MasterMenuCursor++;
-    if ((g_MasterMenuCursor & BYTE_MASK) < g_Game.party_size) {
-        g_MasterSubStep = 1;
+    g_MenuMasterCursor++;
+    if ((g_MenuMasterCursor & BYTE_MASK) < g_Game.party_size) {
+        g_MenuMasterSubStep = 1;
     } else {
-        g_MasterStep    = 2;
-        g_MasterSubStep = 1;
+        g_MenuMasterStep    = 2;
+        g_MenuMasterSubStep = 1;
     }
 }

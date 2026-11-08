@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Master_RunSceneEvent(void) {
+MATCH void Menu_OpenMaster(void) {
     switch (g_SceneEventStep) {
         case 0:
             g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;

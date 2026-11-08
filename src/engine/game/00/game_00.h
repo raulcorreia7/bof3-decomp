@@ -812,7 +812,7 @@ void    func_801A7330(const volatile u8* data);
 s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);
-void    Master_RunSceneEvent(void);
+void    Menu_OpenMaster(void);
 void    Message_RunAreaMessage(void);
 void    func_801A7E54(void);
 void    Scene_RunShopSaveEvent(void);
