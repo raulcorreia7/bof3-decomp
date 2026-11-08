@@ -49,6 +49,10 @@ extern void func_801F5940(void);
 extern u8 D_8014554C[];
 
 extern u8 D_80146865;
+extern u8 D_80146875;
+
+void func_801F40D0(s32 arg0);
+void func_801F42E8(void);
 
 void func_801F40A4(void);
 void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
