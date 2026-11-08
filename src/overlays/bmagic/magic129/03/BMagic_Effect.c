@@ -45,7 +45,7 @@ MATCH void func_801EEFC4(void) {
 
 INCLUDE_ASM(func_801EF058);
 
-#include "../../Effect_CountUpTimerByTwoAndStep.h"
+#include "overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h"
 
 INCLUDE_ASM(func_801EF3DC);
 

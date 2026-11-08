@@ -59,7 +59,7 @@ MATCH void func_801D0DA4(void) {
     SYS_DISPATCH_TASK(D_801D1B2C, 1, g_Task);
 }
 
-#include "../../Scene_EndScan.h"
+#include "overlays/scenario/Scene_EndScan.h"
 
 INCLUDE_ASM(func_801D0E30);
 
@@ -154,4 +154,4 @@ INCLUDE_ASM(Scene_UpdateScanBars);
 
 INCLUDE_ASM(func_801D17A0);
 
-#include "../../Scene_DrawRedGradient.h"
+#include "overlays/scenario/Scene_DrawRedGradient.h"

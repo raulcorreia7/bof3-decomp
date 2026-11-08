@@ -61,7 +61,7 @@ INCLUDE_ASM(func_801EF090);
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
-#include "../../Effect_DispatchStep.h"
+#include "overlays/bmagic/Effect_DispatchStep.h"
 
 MATCH void func_801EF250(void) {
     g_Task                           = g_BattleEffectBattler;

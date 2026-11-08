@@ -13,7 +13,7 @@ import os
 import re
 from dataclasses import dataclass, field
 
-from .ctext import split_args
+from bof3.source.ctext import split_args
 
 _KEYWORDS = frozenset(
     "if while for switch return sizeof else do case goto defined typeof __attribute__".split()

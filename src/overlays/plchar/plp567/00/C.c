@@ -82,7 +82,7 @@ MATCH void func_801CFAA8(void) {
     SYS_DISPATCH_TASK(D_801D07D8, 2, g_Task);
 }
 
-#include "../../Char_StartNearestFacingTurn.h"
+#include "overlays/plchar/Char_StartNearestFacingTurn.h"
 
 #include "overlays/plchar/Char_RunStepScriptRyuAdult.h"
 

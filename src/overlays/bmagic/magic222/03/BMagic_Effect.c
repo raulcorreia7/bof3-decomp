@@ -39,7 +39,7 @@ MATCH void Effect_SwingCameraAngle(void) {
 
 INCLUDE_ASM(func_801EF324);
 
-#include "../../Effect_StartTint.h"
+#include "overlays/bmagic/Effect_StartTint.h"
 
 MATCH void func_801EF4F0(void) {
     g_Task->unk_5D -= 0x10;

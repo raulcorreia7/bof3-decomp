@@ -52,7 +52,7 @@ MATCH void func_801CF500(void) {
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
-#include "../../Char_AdvanceFacingTurn.h"
+#include "overlays/plchar/Char_AdvanceFacingTurn.h"
 
 MATCH void func_801CF70C(void) {
     SYS_DISPATCH_TASK(D_801CFBBC, 2, g_Task);
