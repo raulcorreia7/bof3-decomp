@@ -7,4 +7,9 @@
 
 extern BMagicEffectFuncs D_801EEC04;
 
+extern Callback D_801F08B8[];
+extern s32      D_1F800004;
+
+extern Callback D_801F08C4[];
+
 #endif

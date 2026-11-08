@@ -35,7 +35,23 @@ MATCH void func_801EF064(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EF0A8);
+MATCH void func_801EF0A8(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F0554, g_Task->header.step);
+    if (g_Task->header.flags & 1) {
+        if (g_Task->header.step != 0) {
+            if (g_Task->header.step < 4) {
+                func_800AF764();
+                func_8014D290();
+                Effect_SetActiveActorMatrix();
+                func_801EF7E0();
+                func_801EFA30();
+                PopMatrix();
+            }
+        }
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EF174);
 

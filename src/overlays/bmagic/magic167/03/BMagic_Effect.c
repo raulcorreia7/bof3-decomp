@@ -25,7 +25,16 @@ MATCH void func_801EF2D8(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EF31C);
+MATCH void func_801EF31C(void) {
+    SYS_DISPATCH_BYTE(D_801F08B8, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        Effect_SetActorMatrix();
+        D_1F800004 = g_Task->unk_09 * 5;
+        func_801EF4B0();
+        func_801EF708();
+        PopMatrix();
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
@@ -37,7 +46,18 @@ INCLUDE_ASM(func_801EF4B0);
 
 INCLUDE_ASM(func_801EF708);
 
-INCLUDE_ASM(func_801EF9B8);
+MATCH void func_801EF9B8(void) {
+    SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        Effect_SetActorMatrix();
+        if (g_Task->header.step < 3) {
+            func_801EFC44();
+        }
+        func_801F05C8(2);
+        func_801F05C8(3);
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EFA70(void) {
     u8 timer;
