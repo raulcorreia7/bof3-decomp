@@ -512,7 +512,7 @@ extern FishingTarget*        g_FishingLureRow;
 /* D_801E3214 */
 extern u8                    g_FishingNewRecord;
 
-s32  func_800F7094(s32 arg0, s16 arg1, u8 arg2, s32 arg3, s32 arg4);
+s32  func_800F7094(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
 /* func_8014D6DC */
 void Actor_BeginScript(s32 raw_selector, s32 raw_code);
 /* func_801650B4 */
@@ -628,12 +628,12 @@ void func_801D72E4(s16 panel_x, s16 panel_y);
 void func_801D7784(u16 list_x, u16 list_y);
 void func_801D799C(s16 x, s16 y, u8 height, u8 style);
 void func_801D7B64(void);
-void func_801D7C10(s32 arg0, s32 arg1, s32 arg2);
+void func_801D7C10(s32 x, s32 y, s32 flags);
 void func_801D7D68(s16 x, s16 y, u8 column_mode);
 void func_801D7EB0(s32 x, s32 y);
 void func_801D8248(s16 x, s16 y, u8 height);
 void func_801D8364(s16 panel_x, s16 panel_y);
-void func_801D88E0(s16 arg0, s16 arg1);
+void func_801D88E0(s16 x, s16 y);
 void func_801D8D70(u16 x, u16 y);
 void func_801D90FC(s32 x, s16 y);
 void func_801D934C(s32 x, s32 y, s32 width, s32 height);

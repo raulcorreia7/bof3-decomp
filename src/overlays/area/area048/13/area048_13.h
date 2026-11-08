@@ -18,9 +18,9 @@ extern u8 D_801F4D80[];
 
 extern u8 D_801F4E54[];
 
-s32  func_801F4C28(s32 arg0, s32 arg1);
+s32  func_801F4C28(s32 x, s32 y);
 void func_801F2EC0(void);
-void func_801F41F0(s32 arg0, s32 arg1);
+void func_801F41F0(s32 page, s32 column);
 
 void func_801F302C(void* arg0, void* arg1, void* arg2);
 void func_801F4258(s32 arg0);

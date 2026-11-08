@@ -26,7 +26,7 @@ extern Callback D_801F3ABC[];
 void      func_801F2C74(void);
 void      func_801F2D5C(void);
 void      func_801F2E3C(AreaTrail* trail);
-void      func_801F2F0C(const void* arg0);
+void      func_801F2F0C(const void* trail);
 void      func_801F304C(AreaTrail* trail);
 void      func_801F3164(void);
 void      func_801F31CC(void);
