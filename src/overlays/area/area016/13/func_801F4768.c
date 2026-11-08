@@ -1,7 +1,7 @@
 #include "area016_13.h"
 
+/* FAKE: the vertex stores cast to s16 inline to keep retail's add order. CLEANUP: name the vertex fields. */
 MATCH void func_801F4768(void) {
-    /* FAKE: the vertex stores cast to s16 inline to keep retail's add order. CLEANUP: name the vertex fields. */
     POLY_FT4* prim;
     POLY_FT4* cell;
     SVECTOR*  quad;
