@@ -8,7 +8,7 @@ MATCH void func_800A4B2C(void) {
         func_80097FE8();
         D_80148594 = 0;
         *lock      = 0;
-        BattleStageMessageResource(g_BattleMessageSlot);
+        Battle_ShowMessage(g_BattleMessageSlot);
         /* FAKE: statement boundary keeps the retail register order and schedule. */
         ORDER_LOCK(g_BattleMessageState = 1);
         EMI_LoadArchive(EMI_SLOT_BATL_RE2);

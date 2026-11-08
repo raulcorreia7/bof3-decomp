@@ -139,7 +139,7 @@ Callback D_801EACD4[5] = {
 Callback D_801EACE8[3] = {
     (Callback)func_801D67EC,
     (Callback)func_801D6818,
-    (Callback)Battle_StreamEndOverlay,
+    (Callback)Battle_LoadEndOverlay,
 };
 
 /* 0x801EACF4 */

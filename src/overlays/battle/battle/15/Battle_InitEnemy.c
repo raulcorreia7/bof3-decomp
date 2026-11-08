@@ -15,7 +15,7 @@
  * in s0, or a register pin that this compiler honours on a parameter. */
 /* func_800ABCE0 */
 #ifdef NON_MATCHING
-NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
+NON_MATCHING void Battle_InitEnemy(s32 slot, u16 unit, s32 x, s32 y) {
     EnemyBattler* enemy;
     u16           unit_id;
     s32           unit_offset;
@@ -69,5 +69,5 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     g_Battle.enemy_count += 1;
 }
 #else
-INCLUDE_ASM(Battle_ArmEnemySlot);
+INCLUDE_ASM(Battle_InitEnemy);
 #endif

@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801E2170 */
-MATCH void Battle_RunEnemies(void) {
+MATCH void Battle_UpdateEnemies(void) {
     volatile EnemyBattler* enemy;
     s32                    i;
 

@@ -33,7 +33,7 @@
 #define CHARACTER_PALETTE_COLORS     32
 
 /* The ailments the engine cures when a battle ends (the game's own strings
- * call status removal "cure"): func_801D6F28 and Battle_StreamEndOverlay pass a
+ * call status removal "cure"): func_801D6F28 and Battle_LoadEndOverlay pass a
  * battler's status & this mask to func_800A36F0; STATUS_KO, STATUS_POISONED
  * and STATUS_CONFUSED persist. The (u16) keeps the complement a 16-bit
  * immediate (andi) in func_801D6F28's schedule. */

@@ -4,10 +4,10 @@ MATCH void func_800980E4(void) {
     u8  result;
     u8* game_ram;
 
-    result                            = Battle_FindSelectableSlotForward(3);
+    result                            = Battle_TargetNext(3);
     g_BattleActorTurn->command.target = result;
 
-    BattleStageAttackNameMessage(2, 0);
+    Battle_SetTextActionName(2, 0);
 
     g_Battle.selection_latch = 1;
     g_InputRepeatButtons     = 0;
