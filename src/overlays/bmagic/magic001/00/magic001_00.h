@@ -5,6 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+#define MAGIC001_STEP_COUNT 11
+
+typedef struct Magic001Steps {
+    Callback handlers[MAGIC001_STEP_COUNT];
+} Magic001Steps;
+
+extern Magic001Steps    D_801EEC10;
 extern u8               g_BattleActiveBattler;
 extern EffectStepFuncs3 D_801EEC3C;
 
