@@ -29,12 +29,12 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
-    work                    = g_Task;
-    D_80146908[*counter][0] = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
+    work                          = g_Task;
+    g_ActorWalkDestX[*counter][0] = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read before the shadow store. */
     MATCH_BARRIER();
 
-    D_8014690C[*counter][0] = (work->pos.y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
+    g_ActorWalkDestY[*counter][0] = (work->pos.y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read against merging. */
     MATCH_BARRIER();
 
