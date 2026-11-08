@@ -708,10 +708,10 @@ void         func_801D8690(s32 x, s32 y, s32 slot);
 void         Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot);
 void         func_801D8DF8(s32 panel_x, s32 panel_y, u32 index);
 /* func_801D9304 */
-void         Battle_OpenPartyPanel(u8 arg0);
-void         func_801D9388(u8 arg0);
-void         func_801D93E4(u8 arg0);
-void         func_801D9428(u8 arg0);
+void         Battle_OpenPartyPanel(u8 index);
+void         func_801D9388(u8 index);
+void         func_801D93E4(u8 mode);
+void         func_801D9428(u8 index);
 void         func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value);
 /* func_801D9684 */
 void         Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value);

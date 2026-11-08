@@ -2,7 +2,7 @@
 
 /* Plain scratchpad cell read; emits a fresh absolute load per use. */
 
-MATCH bool func_801AC33C(s32 ease_in, s32 arg1) {
+MATCH bool func_801AC33C(s32 ease_in, s32 distance) {
     Actor* work;
     s32    step_x;
     s32    step_y;
@@ -26,17 +26,17 @@ MATCH bool func_801AC33C(s32 ease_in, s32 arg1) {
     reached_x                = 0;
     if ((g_Task->unk_18 + g_Task->unk_1C) == 0) {
         g_CurrentActor->walk_dest_x =
-            g_Task->pos.x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (arg1 & BYTE_MASK);
+            g_Task->pos.x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (distance & BYTE_MASK);
         g_CurrentActor->walk_dest_y =
-            g_Task->pos.y.fixed + (g_FacingSteps[g_Task->direction_08 & 7].y << 1) * (arg1 & BYTE_MASK);
+            g_Task->pos.y.fixed + (g_FacingSteps[g_Task->direction_08 & 7].y << 1) * (distance & BYTE_MASK);
         if ((ease_in & BYTE_MASK) != 0) {
-            g_Task->unk_18 = step_x >> (arg1 & BYTE_MASK);
-            g_Task->unk_1C = step_y >> (arg1 & BYTE_MASK);
+            g_Task->unk_18 = step_x >> (distance & BYTE_MASK);
+            g_Task->unk_1C = step_y >> (distance & BYTE_MASK);
             g_Task->vx     = 0;
             g_Task->vy     = 0;
         } else {
-            g_Task->unk_18 = -(step_x >> (arg1 & BYTE_MASK));
-            g_Task->unk_1C = -(step_y >> (arg1 & BYTE_MASK));
+            g_Task->unk_18 = -(step_x >> (distance & BYTE_MASK));
+            g_Task->unk_1C = -(step_y >> (distance & BYTE_MASK));
             g_Task->vx     = step_x;
             g_Task->vy     = step_y;
         }
