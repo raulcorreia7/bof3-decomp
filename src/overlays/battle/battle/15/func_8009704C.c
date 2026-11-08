@@ -41,8 +41,9 @@ NON_MATCHING void func_8009704C(void) {
     sel        = (BattleSelectionScratch*)((u8*)&g_BattleChoicePhase - 3);
     D_801485DC = 1u;
     D_801485E0 = g_MenuPanelTasks[16].pos.x + 7u;
-    D_801485E2 = g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].unk_10) * 13 + 0x1A);
-    trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
+    D_801485E2 =
+        g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].u.addr.unk_10) * 13 + 0x1A);
+    trigger = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value &
          (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
@@ -115,7 +116,7 @@ NON_MATCHING void func_8009704C(void) {
     handle                     = Resource_GetText(*(u16*)(D_801CA71E + kind * 0x14));
     ring_index                 = (D_801EC328 - 1) & 0xF;
     D_801EB5B4[ring_index * 2] = handle;
-    if (g_MenuPanelTasks[16].unk_12 != 0) {
+    if (g_MenuPanelTasks[16].u.addr.unk_12 != 0) {
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
@@ -123,7 +124,7 @@ NON_MATCHING void func_8009704C(void) {
         D_801485DC                                         = 0u;
         D_801EB5B1[ring_index * 8]                         = 1u;
         ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
-        D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].unk_10;
+        D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
         SND_PlayCue(EMI_CUE_ID(1, 6));
         *(volatile u8*)&g_BattleUIStep += 1;
@@ -138,7 +139,7 @@ NON_MATCHING void func_8009704C(void) {
         }
         SND_PlayCue(EMI_CUE_ID(1, 3));
         ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
-        D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].unk_10;
+        D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
         entry                                              = Party_GetAbilities(message[0], group->index, 1);
         kind                                               = entry[group->cursor];
