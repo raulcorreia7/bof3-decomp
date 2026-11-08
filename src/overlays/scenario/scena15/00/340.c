@@ -124,7 +124,26 @@ MATCH void func_801F7920(void) {
 MATCH void func_801F79BC(void) {
 }
 
-INCLUDE_ASM(func_801F79C4);
+MATCH void func_801F79C4(void) {
+    u16   tpage;
+    TILE* tile;
+
+    tpage = GetTPage(0, 2, 0x3C0, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, 0xC);
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    tile->r0 = g_Task->tint.bytes.unk_5D;
+    tile->g0 = g_Task->tint.bytes.unk_5E;
+    tile->b0 = g_Task->tint.bytes.unk_5F;
+    tile->w  = 0x140;
+    tile->x0 = 0;
+    tile->y0 = 0;
+    tile->h  = 0xF0;
+    SetSemiTrans(tile, 1);
+    SetShadeTex(tile, 0);
+    GFX_AddPrim(3, 0x10);
+}
 
 MATCH void func_801F7AA8(void) {
     SYS_DISPATCH_TASK(D_801FE5A0, 1, g_Task);
