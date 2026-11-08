@@ -1,4 +1,5 @@
 #include "plp678_00.h"
+#include "engine/game/00/game_00.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -24,7 +25,8 @@ MATCH void func_801CE674(void) {
     SYS_DISPATCH_TASK(D_801D0578, 3, g_Task);
 }
 
-INCLUDE_ASM(func_801CE6B8);
+/* func_801CE6B8 */
+#include "overlays/plchar/Char_FaceFreeDirection.h"
 
 INCLUDE_ASM(func_801CE7B8);
 
@@ -34,8 +36,9 @@ INCLUDE_ASM(func_801CE7B8);
 
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
-/* hint: the work-pointer store of the 2 and 1 results shares one tail with the result held in v0 (g_Task loaded before the li in the jump delay slot); every C form folds the constant into each branch. The body is 4 bytes over. */
-INCLUDE_ASM(func_801CEC28);
+MATCH s32 func_801CEC28(s16 x, s16 y) {
+    CHAR_PROBE_CELL_CODE(func_801CEE34);
+}
 
 INCLUDE_ASM(func_801CEE34);
 

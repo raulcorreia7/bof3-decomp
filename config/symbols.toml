@@ -2863,6 +2863,7 @@ Char_ClearModeIfSlotFree = { addr = 0x801CF9C4, type = "func", source = "Clears 
 ["emi/plchar/plp678/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
+Char_FaceFreeDirection = { addr = 0x801CE6B8, type = "func", source = "Chooses a free facing and its turn script; sets param.unk_0B to 0, unk_0A to 11 and unk_03 to 1." }
 Char_AdvancePaletteScript = { addr = 0x801CEA04, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 1 stages the palette of byte 0x05, phase 2 selects the script of direction_08 once func_8014DAEC reports ready; ends and clears the panel mode when g_GameStateIndex is GAME_REQUEST_IDLE." }
 Char_StartFacingScript = { addr = 0x801CEB34, type = "func", source = "Selects the script of direction_08 once func_8014DAEC reports ready and adds 1 to byte 0x03." }
 Char_ClearSlotRefIfUnused = { addr = 0x801CEB94, type = "func", source = "When the actor slot in byte 0x06 is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears byte 0x06 and lowers byte 0x03 by 2." }
