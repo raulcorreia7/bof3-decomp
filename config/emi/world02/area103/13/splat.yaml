@@ -32,7 +32,7 @@ segments:
       - [0x1508, c, func_801F4108]
       - [0x15EC, c, func_801F41EC]
       - [0x16E0, c, func_801F42E0]
-      - [0x1774, c, Area_ResumeBGM]
+      - [0x1774, c, func_801F4374]
       - [0x17EC, c, func_801F43EC]
       - [0x18B0, c, func_801F44B0]
       - [0x197C, c, func_801F457C]
@@ -53,7 +53,7 @@ segments:
       - [0x2B38, c, func_801F5738]
       - [0x2B78, c, func_801F5778]
       - [0x2BB4, c, func_801F57B4]
-      - [0x2BFC, c, Area_SetTaskGroundHeight]
+      - [0x2BFC, c, Actor_SetGroundHeight]
       - [0x2C34, c, func_801F5834]
       - [0x2CF4, c, func_801F58F4]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

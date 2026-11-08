@@ -3338,7 +3338,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SetCameraZOffset = { addr = 0x801F2D18, type = "func", source = "Sets g_AreaCameraOffsetZ to -0x100, the Z shift of the camera, and g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetZ = { addr = 0x801F2D38, type = "func", source = "Zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
-Area_PauseBGM = { addr = 0x801F2E9C, type = "func", source = "pauses area BGM via SND_PauseBGM(g_SndBGMId); same body pattern as area108/145" }
+Area_PauseBGM = { addr = 0x801F2E9C, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_PauseBGM; the same body is Area_PauseBGM in area057, area108 and area145." }
 
 ["emi/world01/area040/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3434,8 +3434,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world01/area057/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_SetAnswerMessage = { addr = 0x801F2C04, type = "func", source = "Stores the message id the answer table D_801F4AFC holds for the menu choice g_MessageChoice in g_MessageRequest." }
-Area_PauseBGM = { addr = 0x801F2D30, type = "func", source = "pauses area BGM via SND_PauseBGM(g_SndBGMId); same body pattern as area108/145" }
-Area_ResumeBGM = { addr = 0x801F2D58, type = "func", source = "resumes area BGM via SND_ResumeBGM(g_SndBGMId); same body pattern as area108/145" }
+Area_PauseBGM = { addr = 0x801F2D30, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_PauseBGM; the same body is Area_PauseBGM in area039, area108 and area145." }
+Area_ResumeBGM = { addr = 0x801F2D58, type = "func", source = "Resumes the BGM of g_SndBGMId through SND_ResumeBGM; the same body is Area_ResumeBGM in area108 and area145." }
 
 ["emi/world01/area058/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3710,9 +3710,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world02/area103/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "resumes area BGM via SND_ResumeBGM(g_SndBGMId); same body as area145/14 step callback" }
 Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "Returns the first index 0 to 2 of D_801F5D64 whose tag equals byte 0 of a battle party row, 0xFF when none match; func_801F560C calls it." }
-Area_SetTaskGroundHeight = { addr = 0x801F57FC, type = "func", source = "samples terrain height at task position and sets task Z (Area_SampleHeight in area103)" }
+Actor_SetGroundHeight = { addr = 0x801F57FC, type = "func", source = "Stores the ground height Area_SampleHeight returns at the task position in its Z; unlike Actor_SnapToGround it does not advance the mode. No C caller, it is reached through the area103 tables." }
 
 ["emi/world02/area104/14"]
 Message_RunAreaMessage = { addr = 0x801F2F0C, type = "func", source = "Starts message 4 with Message_StartAreaMessage, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the D_801448EB state." }
@@ -3749,7 +3748,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world02/area107/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_EndMessage = { addr = 0x801F2DFC, type = "func", source = "clears script active, plays area cue 6, and resets TASK_BYTES[1] when message request ends (area107 interaction close)" }
+Area_EndMessage = { addr = 0x801F2DFC, type = "func", source = "Last step of the area107 task step table D_801F2E44: func_801F2D4C starts message 1 and sets mode 4, and this step waits until g_GameStateIndex leaves GAME_REQUEST_MESSAGE, then clears the script-active flag, plays area cue 6 and returns the task to mode 0." }
 
 ["emi/world02/area108/14"]
 Area_DrawScreenTint = { addr = 0x801F3BA0, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
@@ -3967,9 +3966,9 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world03/area145/14"]
 Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Message_ShowParty = { addr = 0x801F403C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
-Area_SkipIfHasKey = { addr = 0x801F4304, type = "func", source = "advances script cursor by 3 when the player has VITAL_ITEM_KEY (area145 script branch)" }
-Area_PauseBGM = { addr = 0x801F434C, type = "func", source = "pauses area BGM via SND_PauseBGM(g_SndBGMId); step callback matching area108 Area_PauseBGM" }
-Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "resumes area BGM via SND_ResumeBGM(g_SndBGMId); step callback matching area108 Area_ResumeBGM" }
+Area_SkipIfHasKey = { addr = 0x801F4304, type = "func", source = "Script branch: skips the next 3 script bytes when Item_VitalHas(VITAL_ITEM_KEY) reports the key; no C caller, it is reached through the area145 script tables." }
+Area_PauseBGM = { addr = 0x801F434C, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_PauseBGM; the same body as Area_PauseBGM in area039, area057 and area108." }
+Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "Resumes the BGM of g_SndBGMId through SND_ResumeBGM; the same body as Area_ResumeBGM in area057 and area108." }
 g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area146/13"]
@@ -3994,7 +3993,7 @@ Area_EndCutscene = { addr = 0x801F39A4, type = "func", source = "Clears scene ev
 Actor_PlaceAtFocus = { addr = 0x801F39D4, type = "func", source = "Copies D_80147A8C, g_AreaFocusY and D_80147A94 into the actor position at bytes 0x34, 0x38 and 0x3C." }
 Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "Sets g_MessageRequest to 6 when g_MessageChoice is nonzero, otherwise to 4." }
-Area_SampleForwardHeight = { addr = 0x801F4544, type = "func", source = "samples terrain height 5 units ahead in facing direction, stores target pos in unk_18/unk_1C and height in gravity (called by func_801F42C0 jump setup in area148)" }
+Area_SampleForwardHeight = { addr = 0x801F4544, type = "func", source = "Samples the terrain height 5 steps ahead of the task along its facing, stores that point in unk_18 and unk_1C and the height in gravity; called by func_801F42C0 when it starts its motion." }
 g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area149/13"]
@@ -4210,11 +4209,11 @@ Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 
 Actor_SlideScreenDown16 = { addr = 0x801F38E8, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
 Area_Update = { addr = 0x801F3958, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F4100, type = "func", source = "Reads the script row of the loaded area at the script state row and cursor, begins the actor script of that step at the saved script_pc - 2, stores the row argument in byte 0x2A and advances the cursor by 2." }
-Area_FreePaletteOnAreaChange = { addr = 0x801F4D1C, type = "func", source = "frees task palette slot owner when game requests area change (area174 palette cleanup callback)" }
+Area_FreePaletteOnAreaChange = { addr = 0x801F4D1C, type = "func", source = "Frees the palette slots of the task through GFX_FreePaletteSlotOwner when g_GameStateIndex is GAME_REQUEST_AREA_CHANGE; no C caller, it is reached through the area174 tables." }
 
 ["emi/world04/area175/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_FadeOutScreenTint = { addr = 0x801F3374, type = "func", source = "decrements screen tint RGB by 6 per tick until timer expires, then sets mode 4, and draws screen tint (area175)" }
+Area_FadeOutScreenTint = { addr = 0x801F3374, type = "func", source = "Counts the task timer down, lowering the three tint bytes by 6 each tick, sets mode 4 when the timer reaches 0 and draws the screen tint through Area_DrawScreenTint." }
 Area_DrawScreenTint = { addr = 0x801F3438, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Area_DrawSpinTriangle = { addr = 0x801F2E2C, type = "func", source = "Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin." }
 Area_InitSpin = { addr = 0x801F30CC, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
