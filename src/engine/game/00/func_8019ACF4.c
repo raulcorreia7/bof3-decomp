@@ -6,7 +6,7 @@ MATCH void func_8019ACF4(void) {
     s32    step;
 
     func_8019AA44();
-    work                = (Actor*)SCRATCH_WORK;
+    work                = g_Task;
     pos                 = (g_AreaCameraOffsetZ << 16) + work->vy;
     /* FAKE: volatile re-read keeps the direction load before the store.
      */

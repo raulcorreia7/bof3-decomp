@@ -40,7 +40,7 @@ MATCH void func_8019A3FC(void) {
         work->tint.signed_bytes.unk_5E = -8;
         work->tint.signed_bytes.unk_5D = -8;
         work                           = g_Task;
-        work->timer                    = 0x14;
+        work->timer                    = 20;
     } else {
         g_Task->tint.bytes.flags = 0;
         ptr                      = g_Task;
@@ -48,7 +48,7 @@ MATCH void func_8019A3FC(void) {
         ptr->tint.bytes.unk_5E   = 0;
         ptr->tint.bytes.unk_5D   = 0;
         work                     = g_Task;
-        work->timer              = 0x10;
+        work->timer              = 16;
     }
 
     ((void (*)(u8, Actor*))Actor_SelectScript)(s_SceneHandlerIds[g_Task->unk_06], other);

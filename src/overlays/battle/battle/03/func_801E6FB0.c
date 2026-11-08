@@ -21,7 +21,7 @@ MATCH void func_801E6FB0(void) {
             return;
         }
         g_Task->unk_27 = 0xFF;
-        g_Task->timer  = 0x3C;
+        g_Task->timer  = 60;
         if (g_Task->param.unk_0B != id) {
             Actor_SelectScript(s_BattleBattlerStepIds[id]);
             g_Task->param.unk_0B = id;

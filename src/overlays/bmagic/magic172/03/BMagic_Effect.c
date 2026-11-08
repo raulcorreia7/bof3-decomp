@@ -31,7 +31,7 @@ MATCH void func_801EF3A4(void) {
 
     g_Task->param.unk_0B += 2;
     timer = g_Task->timer;
-    if (timer < 0x10U) {
+    if (timer < 16U) {
         g_Task->timer = timer + 2;
     }
     counter        = g_Task->unk_09 - 1;
