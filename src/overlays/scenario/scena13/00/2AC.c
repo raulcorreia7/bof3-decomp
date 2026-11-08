@@ -48,7 +48,7 @@ MATCH void func_801F6FD0(void) {
 #include "shared/Screen_DrawTint.h"
 
 MATCH void Screen_DrawTint(void) {
-    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & 0xFFFF));
+    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & HALF_MASK));
 }
 
 MATCH void func_801F70DC(void) {
@@ -59,14 +59,14 @@ MATCH void func_801F70DC(void) {
     actor = g_Task;
     i     = 0;
     do {
-        actor2 = &g_Actors[i & 0xFF];
+        actor2 = &g_Actors[i & BYTE_MASK];
         g_Task = actor2;
         if ((actor2->header.flags & 1) && (actor2->unk_06 == 6)) {
             actor2->unk_29 = 5;
             func_8014D290();
         }
         i += 1;
-    } while ((i & 0xFF) < 0x1EU);
+    } while ((i & BYTE_MASK) < 0x1EU);
     g_Task = actor;
 }
 
@@ -122,7 +122,7 @@ MATCH void func_801F7444(void) {
 }
 
 MATCH void func_801F7484(void) {
-    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & 0xFFFF));
+    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & HALF_MASK));
 }
 
 MATCH void func_801F7568(void) {

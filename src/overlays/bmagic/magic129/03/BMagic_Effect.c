@@ -78,7 +78,7 @@ MATCH void func_801F00D4(void) {
 
     value3         = g_Task->unk_09 - 1;
     g_Task->unk_09 = value3;
-    if (!(value3 & 0xFF)) {
+    if (!(value3 & BYTE_MASK)) {
         g_Task->unk_14      = 0x40000;
         g_Task->unk_20      = 0x20000;
         value2              = RANDOM_MASK(0xF) + 0x1C;

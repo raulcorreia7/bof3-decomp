@@ -52,7 +52,7 @@ MATCH void func_801EEFF8(void) {
 
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x04000000;
@@ -138,7 +138,7 @@ MATCH void func_801EFAB0(void) {
     if (g_FrameCount & 1) {
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
-        if (!(counter & 0xFF)) {
+        if (!(counter & BYTE_MASK)) {
             BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
             func_801E5988();
         }

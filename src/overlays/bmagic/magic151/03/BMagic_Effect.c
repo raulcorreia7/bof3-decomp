@@ -28,7 +28,7 @@ MATCH void func_801EEEA8(void) {
     saved_work = g_Task;
     battler    = &g_Game.members[g_Battle.active_battler];
     g_Task     = battler;
-    Actor_RequestScript((battler->facing + 0x3C) & 0xFF);
+    Actor_RequestScript((battler->facing + 0x3C) & BYTE_MASK);
     g_Task = saved_work;
     saved_work->unk_03 += 1;
 }

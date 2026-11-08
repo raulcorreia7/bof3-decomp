@@ -31,7 +31,7 @@ MATCH void func_801EF140(void) {
 
     count                    = g_Task->unk_09;
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) - 0x60;
-    if ((count & 0xFF) != 0x10) {
+    if ((count & BYTE_MASK) != 0x10) {
         g_Task->unk_09 = count + 1;
     }
     timer = g_Task->timer;

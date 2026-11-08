@@ -36,7 +36,7 @@ MATCH void func_801EF3A4(void) {
     }
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
-    if (!(counter & 0xFF)) {
+    if (!(counter & BYTE_MASK)) {
         g_Task->header.step += 1;
     }
 }

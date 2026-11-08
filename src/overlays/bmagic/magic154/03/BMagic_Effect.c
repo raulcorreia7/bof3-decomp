@@ -110,12 +110,12 @@ MATCH void func_801EF58C(void) {
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         func_8014DAEC();
         func_800AFC98(2, 4);
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
-    } else if (func_8014DAEC() & 0xFF) {
+    } else if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0;
         g_BattleEffectBattler->param.unk_0B -= 1;
