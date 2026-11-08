@@ -11,7 +11,7 @@ MATCH void func_801F3FF0(void) {
     if (choice >= 5) {
         goto end;
     }
-    g_ScriptVars[0] = 0xA;
+    g_ScriptVars[0] = 10;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
 end:;
 }
