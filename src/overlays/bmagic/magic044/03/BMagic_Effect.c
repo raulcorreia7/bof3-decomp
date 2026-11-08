@@ -38,7 +38,7 @@ INCLUDE_ASM(func_801EF320);
 MATCH void func_801EF478(void) {
     u8 timer;
 
-    func_801F0390();
+    Effect_ClearTrail();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
@@ -54,18 +54,13 @@ INCLUDE_ASM(func_801EFA4C);
 MATCH void func_801F02A0(void) {
     s32 i;
 
-    BMAGIC_SHIFT_TRAIL(D_801F0A38)
-    D_801F0A38[g_Task->unk_04][g_Task->param.unk_0B].x = g_Task->unk_2E.half;
-    D_801F0A38[g_Task->unk_04][g_Task->param.unk_0B].y = g_Task->unk_30.half;
+    BMAGIC_SHIFT_TRAIL(BMagic_Trail)
+    BMagic_Trail[g_Task->unk_04][g_Task->param.unk_0B].x = g_Task->unk_2E.half;
+    BMagic_Trail[g_Task->unk_04][g_Task->param.unk_0B].y = g_Task->unk_30.half;
 }
 
-MATCH void func_801F0390(void) {
-    s32 i;
-
-    BMAGIC_SHIFT_TRAIL(D_801F0A38)
-    D_801F0A38[g_Task->unk_04][g_Task->param.unk_0B].x = -1;
-    D_801F0A38[g_Task->unk_04][g_Task->param.unk_0B].y = -1;
-}
+/* func_801F0390 */
+#include "overlays/bmagic/Effect_ClearTrail.h"
 
 MATCH void func_801F0478(void) {
     SYS_DISPATCH_BYTE(D_801F0A2C, g_Task->header.step);

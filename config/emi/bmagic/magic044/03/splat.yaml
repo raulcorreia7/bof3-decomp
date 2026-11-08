@@ -17,5 +17,5 @@ segments:
     align: 4
     subsegments:
       - [0x1E10, bin, D_801F0A10]
-      - [0x1E38, bin, D_801F0A38]
+      - [0x1E38, bin, BMagic_Trail]
   - [0x1F38]
