@@ -61,25 +61,25 @@ MATCH void Area_UpdateCamera(void) {
         }
     }
     if ((s16)D_80149336 >= 0x200) {
-        func_80152D9C();
+        Area_LoadCellColumnNext();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         D_80149336 -= 0x200;
     }
     if ((s16)D_80149336 < -0x1FF) {
-        func_80152C9C();
+        Area_LoadCellColumnPrev();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         D_80149336 += 0x200;
     }
     if ((s16)g_AreaTileRemainderY >= 0x200) {
-        func_80152FB0();
+        Area_LoadCellRowsNext();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         g_AreaTileRemainderY -= 0x200;
     }
     if ((s16)g_AreaTileRemainderY < -0x1FF) {
-        func_80152E94();
+        Area_LoadCellRowsPrev();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         g_AreaTileRemainderY += 0x200;

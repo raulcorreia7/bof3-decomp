@@ -269,8 +269,8 @@ typedef struct SoundSequence {
 } SoundSequence;
 
 /* Stack snapshots of the fixed dispatch tables the step handlers copy to the
- * frame and index: func_801507BC/func_801510DC copy the eight-entry tables at
- * g_MessageStates/D_80149A7C, func_80151538/func_801518F4 the six-entry tables at
+ * frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at
+ * g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at
  * D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry
  * tables on the stack, and g_MessageStepBank is the sixteen-entry handler bank
  * Message_DispatchBankStep copies. One type per table size, shared by every copier. */
@@ -1089,7 +1089,8 @@ void        func_8014F2F0(void);
 void        GFX_FadeToBlackSlowest(void);
 void        func_8014F460(void);
 extern void func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
-extern void func_801507BC(void);
+/* func_801507BC */
+extern void Message_DispatchState(void);
 void        func_8015083C(void);
 void        func_80150E48(void);
 void        func_80150E98(void);
@@ -1112,7 +1113,8 @@ void        func_801517AC(void);
 void        func_80151820(void);
 void        func_80151844(void);
 void        func_80151894(void);
-void        func_801518F4(void);
+/* func_801518F4 */
+void        Message_DispatchChoiceMode(void);
 void        func_80151964(void);
 void        func_801519F8(void);
 void        func_80151A48(void);
@@ -1140,10 +1142,14 @@ void        Message_SetAnswerMessage12(void);
 void        Message_SetAnswerMessage13(void);
 void        Message_SetAnswerMessage14(void);
 void        Message_SetAnswerMessage15(void);
-void        func_80152C9C(void);
-void        func_80152D9C(void);
-void        func_80152E94(void);
-void        func_80152FB0(void);
+/* func_80152C9C */
+void        Area_LoadCellColumnPrev(void);
+/* func_80152D9C */
+void        Area_LoadCellColumnNext(void);
+/* func_80152E94 */
+void        Area_LoadCellRowsPrev(void);
+/* func_80152FB0 */
+void        Area_LoadCellRowsNext(void);
 extern s32  func_801530D0(void);
 extern void func_80153CC4(u32 unused);
 extern void func_80153D34(void);

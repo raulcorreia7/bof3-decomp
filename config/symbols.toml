@@ -5074,12 +5074,14 @@ Message_GetText = { addr = 0x801502D0, type = "func", source = "Returns the text
 UI_ResetMessage = { addr = 0x80150304, type = "func", source = "Resets the front-end selection state and requests menu 0 mode 0." }
 UI_UpdateLayout = { addr = 0x801503E0, type = "func", source = "Rebuilds the layout of the message window." }
 UI_DrawMessageScript = { addr = 0x80150470, type = "func", source = "Draws a message script." }
+Message_DispatchState = { addr = 0x801507BC, type = "func", source = "Runs the handler of the message window state." }
 UI_TickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
 UI_HandleChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
 Message_DispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
 Message_StartRequest = { addr = 0x801514D0, type = "func", source = "Starts the requested message." }
 UI_ClosePanel = { addr = 0x801515A8, type = "func", source = "Clears the panel index - arms panel 1 mode 0 and advances the front-end step." }
 UI_ScrollChoice = { addr = 0x80151628, type = "func", source = "Moves the choice cursor." }
+Message_DispatchChoiceMode = { addr = 0x801518F4, type = "func", source = "Runs the handler of the message choice mode." }
 UI_UpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
 UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
 Message_DispatchBankStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer bank." }
@@ -5096,6 +5098,10 @@ Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "Sets 
 Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "Sets the message that answers the menu choice." }
 UI_DrawWaitMarker = { addr = 0x801526F4, type = "func", source = "Draws the message wait marker." }
 Area_UpdateCamera = { addr = 0x801527E4, type = "func", source = "Steps the area camera." }
+Area_LoadCellColumnPrev = { addr = 0x80152C9C, type = "func", source = "Streams the cell column before the first one when the camera passes -0x200." }
+Area_LoadCellColumnNext = { addr = 0x80152D9C, type = "func", source = "Streams the cell column past the last one into the ring when the camera passes +0x200." }
+Area_LoadCellRowsPrev = { addr = 0x80152E94, type = "func", source = "Streams the two cell rows before the first one when the vertical remainder passes -0x200." }
+Area_LoadCellRowsNext = { addr = 0x80152FB0, type = "func", source = "Streams the two cell rows past the last one when the vertical remainder passes +0x200." }
 Area_GetCell = { addr = 0x801541C0, type = "func", source = "Returns the area cell at panel coordinates." }
 Area_UploadCell = { addr = 0x80154294, type = "func", source = "Uploads an area cell." }
 Area_AllocCellPrimRow = { addr = 0x8015456C, type = "func", source = "Allocates a primitive row for an area cell." }
