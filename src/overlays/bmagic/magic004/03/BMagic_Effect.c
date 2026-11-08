@@ -59,12 +59,8 @@ MATCH void func_801EFAD4(void) {
     func_801E5988();
 }
 
-MATCH void func_801EFAF4(void) {
-    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
-    g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_BYTE(D_801EFE60, g_Task->header.step);
-    g_ScriptBank = 0x800D3800;
-}
+/* func_801EFAF4 */
+#include "overlays/bmagic/BMagic_RunStep.h"
 
 #include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
 

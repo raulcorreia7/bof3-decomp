@@ -6,5 +6,5 @@ MATCH void func_800C2780(void) {
     ((Actor*)g_Task)->active_flags = 0;
     ((Actor*)g_Task)->pos.z.fixed  = 0;
     func_800C27E8();
-    TASK_BYTES[2]++;
+    g_Task->header.step++;
 }

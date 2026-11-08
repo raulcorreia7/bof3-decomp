@@ -13,14 +13,12 @@ MATCH void func_801F457C(void) {
     Game_FindAreaHandler();
     Area_FindSceneRecord(0x205);
 
-    TASK_BYTES[0x48]     = 0;
+    g_Task->unk_48       = 0;
     g_Task->active_flags = 0;
-    TASK_BYTES[0x2A]     = 0;
-    TASK_BYTES[0x5D]     = 0;
-    TASK_BYTES[0x5E]     = 0;
-    TASK_BYTES[0x5F]     = 0;
+    g_Task->unk_2A       = 0;
+    ACTOR_CLEAR_TINT();
 
-    row_offset                                               = TASK_BYTES[0x0B] * 4;
+    row_offset                                               = g_Task->param.unk_0B * 4;
     map_offset                                               = D_801F4D05[row_offset] * g_AreaMapBundle.width;
     *(g_AreaCellCodes + map_offset + D_801F4D04[row_offset]) = 0xA0;
     Actor_SelectScript(0);

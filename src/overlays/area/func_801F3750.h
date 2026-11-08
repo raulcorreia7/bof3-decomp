@@ -3,6 +3,8 @@
  * is 2, then draws panel 0x5C. One definition shared by the area overlays;
  * every change here must verify every member. */
 /* func_801F3750 (area016), func_801F3750 (area045) */
+#include "area/spad.h"
+
 MATCH void func_801F3750(void) {
     Actor* scratch;
 
@@ -12,7 +14,7 @@ MATCH void func_801F3750(void) {
         scratch->unk_03++;
     }
 
-    if (D_801454F2 != 0 && TASK_BYTES[0x0B] != 0) {
+    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
         goto force; /* skips the 0x100 test: force state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -22,7 +24,7 @@ MATCH void func_801F3750(void) {
         goto done; /* skips the forced write: panel `0x5C` draws next */
     }
 force:
-    TASK_BYTES[0x03] = 3;
+    g_Task->unk_03 = 3;
 done:
     func_801F40C4(0x5C, g_Task->screen_y);
 }

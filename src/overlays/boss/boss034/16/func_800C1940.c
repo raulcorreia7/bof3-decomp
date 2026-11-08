@@ -2,8 +2,8 @@
 
 MATCH void func_800C1940(void) {
     if (func_8014D978() != 0) {
-        TASK_BYTES[9]  = 0x40;
-        TASK_BYTES[10] = 0x20;
-        TASK_BYTES[3]  = 1;
+        g_Task->unk_09 = 64;
+        g_Task->timer  = 32;
+        g_Task->unk_03 = 1;
     }
 }
