@@ -3,7 +3,7 @@
 MATCH void func_801F2C60(void) {
     u8* work;
 
-    TASK_BYTES[0x09] = 0;
-    work             = (u8*)g_Task;
+    g_Task->timer = 0;
+    work          = (u8*)g_Task;
     work[2] += 1;
 }

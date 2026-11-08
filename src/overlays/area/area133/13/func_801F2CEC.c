@@ -15,7 +15,7 @@ MATCH void func_801F2CEC(void) {
     selection = D_801F2DD4[index];
     result    = func_8015CB18(3, 0, selection, x, y);
     if ((u8)result != 0xFF) {
-        work      = TASK_BYTES;
+        work      = (u8*)g_Task;
         work[0xB] = result;
     }
 }
