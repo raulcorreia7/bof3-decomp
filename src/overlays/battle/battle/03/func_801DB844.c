@@ -28,7 +28,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
             return false;
         }
         group = 2u;
-        if (g_BattleSurprise != group && g_BattleSurprise != 3u) {
+        if (g_BattleOutcome.surprise != group && g_BattleOutcome.surprise != 3u) {
             return true;
         }
     } else {
@@ -49,7 +49,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
             return false;
         }
         group = 1u;
-        if (g_BattleSurprise != group && g_BattleSurprise != 3u) {
+        if (g_BattleOutcome.surprise != group && g_BattleOutcome.surprise != 3u) {
             return true;
         }
     }

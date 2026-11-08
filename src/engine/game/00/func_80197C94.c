@@ -10,7 +10,7 @@ MATCH void func_80197C94(void) {
     func_801BF448();
     func_801A06D8();
     func_801992B8();
-    if ((g_BattleOptions & BATTLE_OPT_KEEP_BGM) == 0) {
+    if ((g_BattleOutcome.options & BATTLE_OPT_KEEP_BGM) == 0) {
         if (g_SndBGMId != GAME_NONE) {
             SsSepPause(g_SelectionFxVoices[g_SelectionCues[g_SndBGMId * 4]], D_80181EBB[g_SndBGMId * 4]);
             for (i = 0; i < 1376; i++) {
@@ -31,14 +31,14 @@ MATCH void func_80197C94(void) {
     }
     EMI_LoaderStreamInitSlot(arg);
     Menu_ResetPanelTasks();
-    state              = &g_GameEntrySubstate;
-    counter            = *state;
-    g_BattleEventFlags = 0;
-    g_BattleState      = 0;
-    g_BattleMode       = 0;
-    g_BattleStep       = 0;
-    g_BattleSubStep    = 0;
-    g_BattleUIStep     = 0;
-    g_BattleUIState    = 0;
-    *state             = counter + 1;
+    state                       = &g_GameEntrySubstate;
+    counter                     = *state;
+    g_BattleOutcome.event_flags = 0;
+    g_BattleState               = 0;
+    g_BattleMode                = 0;
+    g_BattleStep                = 0;
+    g_BattleSubStep             = 0;
+    g_BattleUIStep              = 0;
+    g_BattleUIState             = 0;
+    *state                      = counter + 1;
 }

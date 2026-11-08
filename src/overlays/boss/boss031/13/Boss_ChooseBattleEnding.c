@@ -5,7 +5,7 @@ MATCH void Boss_ChooseBattleEnding(void) {
         g_SceneState.step_05 = 0x14;
         func_801DDED8();
     } else {
-        g_BattleOptions &= 0xBF;
+        g_BattleOutcome.options &= 0xBF;
         func_801DDF00();
     }
 }

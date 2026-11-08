@@ -50,7 +50,7 @@ MATCH void func_801E0788(void) {
         g_GameState->unk_139       = 0;
         func_800A9BD8(g_Task->slot);
         if ((func_801E0E0C() & BYTE_MASK) || (g_BattleLivingPartyCount == 0)) {
-            VOL(u8, g_BattleResult) |= BATTLE_RESULT_DEFEAT;
+            VOL(u8, g_BattleOutcome.result) |= BATTLE_RESULT_DEFEAT;
         }
         half2 = &g_BattleState;
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {

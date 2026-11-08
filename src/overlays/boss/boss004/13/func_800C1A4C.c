@@ -19,7 +19,7 @@ MATCH void func_800C1A4C(void) {
             Area_SampleHeight(((PartyBattler*)g_Task)->pos.x.fixed, ((PartyBattler*)g_Task)->pos.y.fixed);
         g_BattleCurrentEnemy->script = &D_800C272C;
         Actor_SelectScript(1U);
-        result = &g_BattleResult;
+        result = &g_BattleOutcome.result;
         *result |= 4;
         g_BattleBossFlags |= 1 << ((PartyBattler*)g_Task)->slot;
         ((PartyBattler*)g_Task)->header.step += 1;

@@ -22,7 +22,7 @@ MATCH void Battle_StreamEndOverlay(void) {
         g_BattleSubStep -= 1u;
         return;
     }
-    if ((g_BattleResult & BATTLE_RESULT_DEFEAT) == 0u) {
+    if ((g_BattleOutcome.result & BATTLE_RESULT_DEFEAT) == 0u) {
         i = 0u;
         if (i < g_BattleRowCursor) {
             do {
@@ -44,7 +44,7 @@ MATCH void Battle_StreamEndOverlay(void) {
         g_BattleActionLock = 0u;
     }
     if (g_BattleEncounter == 0u) {
-        u8 flags = g_BattleResult;
+        u8 flags = g_BattleOutcome.result;
 
         if ((flags & 1u) != 0u) {
             g_BattleStep = 2u;

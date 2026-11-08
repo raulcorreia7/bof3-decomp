@@ -226,7 +226,6 @@ extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */
 /* D_8014630C */
 extern u8              g_BattleTurnOrder[];
-extern u8              D_80146327;
 extern u8              D_80146364[];
 /* D_80146374 */
 extern u8              g_BattleActiveBattler;

@@ -7,10 +7,10 @@ MATCH void Battle_DefeatEnemy(void) {
     volatile u32* acc;
 
     g_Task->header.flags = g_Task->header.flags | ACTOR_FLAG_HIDDEN;
-    acc                  = &g_BattleRewardExp;
+    acc                  = &g_BattleOutcome.reward_exp;
     *acc += g_BattleCurrentEnemy->exp;
     ORDER_LOCK_BEGIN
-        g_BattleRewardZenny += g_BattleCurrentEnemy->zenny;
+        g_BattleOutcome.reward_zenny += g_BattleCurrentEnemy->zenny;
         g_BattleCurrentEnemy->status |= STATUS_KO;
         g_BattleCurrentEnemy->zenny = 0;
         Battle_CancelTurn(g_Task->slot);
@@ -19,7 +19,7 @@ MATCH void Battle_DefeatEnemy(void) {
         g_BattleLivingEnemyCount = count;
         new_var                  = count == 0;
         if (new_var) {
-            g_BattleResult |= BATTLE_RESULT_VICTORY;
+            g_BattleOutcome.result |= BATTLE_RESULT_VICTORY;
         }
         if (((g_BattleState & BATTLE_STATE_OVER) != 0) && (D_801463CA == g_Task->slot)) {
             g_BattleState &= ~BATTLE_STATE_OVER;

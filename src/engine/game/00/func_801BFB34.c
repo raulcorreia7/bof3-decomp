@@ -112,7 +112,7 @@ NON_MATCHING void func_801BFB34(void) {
             val5 += BATTLE_PARTY_STRIDE;
         } while (val4 < (s32)g_PartySize);
     }
-    if (!(g_BattleOptions & 0x80)) {
+    if (!(g_BattleOutcome.options & 0x80)) {
         val4 = 0;
         if ((s32)g_PartySize > 0) {
             val5 = 0;

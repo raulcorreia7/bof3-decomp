@@ -1,7 +1,7 @@
 #include "boss013_16.h"
 
 MATCH void func_800C243C(void) {
-    if (!(g_BattleResult & BATTLE_RESULT_VICTORY)) {
+    if (!(g_BattleOutcome.result & BATTLE_RESULT_VICTORY)) {
         if (!(g_BattleBossFlags & 1)) {
             func_800AC844(2);
             TASK_SET(func_800AC754(2));

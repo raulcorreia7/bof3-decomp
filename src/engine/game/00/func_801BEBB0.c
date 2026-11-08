@@ -52,10 +52,10 @@ MATCH void func_801BEBB0(void) {
         offset += BATTLE_PARTY_STRIDE;
     } while (slot < 5);
     if (count == 5) {
-        g_BattleSurprise = 1;
+        g_BattleOutcome.surprise = 1;
     } else if (count == 0) {
-        g_BattleSurprise = 2;
+        g_BattleOutcome.surprise = 2;
     } else {
-        g_BattleSurprise = 0;
+        g_BattleOutcome.surprise = 0;
     }
 }

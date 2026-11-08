@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 MATCH void func_8009BA7C(void) {
-    if (g_BattleEventFlags == 0) {
+    if (g_BattleOutcome.event_flags == 0) {
         g_BattleMode     = 5;
         g_AreaCameraStep = 0;
         g_BattleStep     = 3;

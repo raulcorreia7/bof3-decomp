@@ -3,7 +3,7 @@
 MATCH void Boss_ChooseBattleEnding(void) {
     s8 var_v0_2;
 
-    if (!(g_BattleResult & BATTLE_RESULT_VICTORY)) {
+    if (!(g_BattleOutcome.result & BATTLE_RESULT_VICTORY)) {
         goto block_4;
     }
     if (g_BattleBossFlags & 2) {

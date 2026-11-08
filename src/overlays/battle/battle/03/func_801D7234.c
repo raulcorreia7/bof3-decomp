@@ -11,7 +11,7 @@ MATCH void func_801D7234(void) {
 
     if (EMI_LoaderIsReady() != 0) {
         g_BattleEndHook();
-        if ((g_BattleOptions & BATTLE_OPT_KEEP_BGM) == 0u) {
+        if ((g_BattleOutcome.options & BATTLE_OPT_KEEP_BGM) == 0u) {
             SND_StopAllSequences();
             action = g_SndBGMId;
             if (action != 0xFFu) {
@@ -19,7 +19,7 @@ MATCH void func_801D7234(void) {
                 state  = g_EmiStreamFlags;
                 /* FAKE: retail loads the state cell before the flags byte. */
                 MATCH_FAKE_BARRIER();
-                flag             = g_BattleResult;
+                flag             = g_BattleOutcome.result;
                 D_80146855       = unk_02;
                 unk_03           = D_80181EB8[action].sequence;
                 g_EmiStreamFlags = state | 0x20u;
@@ -31,7 +31,7 @@ MATCH void func_801D7234(void) {
                 D_801463B0  = template_id;
                 EMI_LoaderStreamInitSlot(template_id);
             } else {
-                g_BattleResult |= BATTLE_RESULT_NO_BGM;
+                g_BattleOutcome.result |= BATTLE_RESULT_NO_BGM;
             }
         }
         counter = &g_BattleSubStep;
