@@ -36,7 +36,7 @@ segments:
       - [0xEFC, c, func_801F3AFC]
       - [0xF7C, c, func_801F3B7C]
       - [0xFFC, c, func_801F3BFC]
-      - [0x107C, c, func_801F3C7C]
+      - [0x107C, c, Item_AddSeaCharts]
       - [0x109C, c, func_801F3C9C]
       - [0x10D0, c, func_801F3CD0]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

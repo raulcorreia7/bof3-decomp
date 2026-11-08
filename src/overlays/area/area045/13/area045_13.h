@@ -39,6 +39,9 @@ extern WorldMapMarker D_801F53CC[6];
 extern u8  D_801F4DA4[548];
 extern u16 D_801F51BC[9][16];
 extern u8  D_801F531C[28];
+extern u8  D_801F5418[2];
+extern u8  D_801F5410[4];
+extern u8  D_801F5414[4];
 extern u8  D_801F531D[]; /* the record-selector byte at +1 */
 extern u8  D_801F532C[]; /* the "Manillo" text at +0x10 */
 

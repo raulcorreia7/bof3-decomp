@@ -13,6 +13,7 @@ extern BattleEffect D_801EF724[];
 void func_801EF284(void);
 void func_801EF380(void);
 void func_801EED04(void);
-void func_801EEEF0(void);
+/* func_801EEEF0 */
+void BMagic_DispatchMode(void);
 
 #endif

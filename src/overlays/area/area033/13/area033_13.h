@@ -35,6 +35,9 @@ extern UPoint2D D_801F501C[];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
 extern u8       D_801F502C[];
 extern u8       D_801F502D[];
+extern u8       D_801F5044[2];
+extern u8       D_801F503C[4];
+extern u8       D_801F5040[4];
 extern void (*D_801F5034[])(void);
 #define AREA_HUD_MASK_TABLE D_801F4FF8
 
