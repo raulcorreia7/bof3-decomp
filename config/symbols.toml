@@ -865,6 +865,8 @@ Effect_CountDownAndPlay = { addr = 0x801EF3D4, type = "func", source = "Counts t
 Effect_SetActorMatrix = { addr = 0x801EF440, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic113 (Noting)." }
 Effect_CountDownTimerStep = { addr = 0x801F0868, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic113 (Noting)." }
 g_BMagicEffectModes = { addr = 0x801F0B94, source = "Handlers of magic113 (Noting), run by header.mode (byte 0x01)." }
+D_801F0BA4 = { addr = 0x801F0BA4, type = "s32", source = "Per-level orbit radius values of magic113, indexed by the effect's level byte (param 0x0B); func_801EF7A0 copies one into the scratchpad radius word." }
+D_801F0BAC = { addr = 0x801F0BAC, source = "Step handlers of magic113, run by header.step (byte 0x02) from func_801EF7A0." }
 D_801F0BC0 = { addr = 0x801F0BC0, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801EFC28." }
 D_801F0BCC = { addr = 0x801F0BCC, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801F0140." }
 
