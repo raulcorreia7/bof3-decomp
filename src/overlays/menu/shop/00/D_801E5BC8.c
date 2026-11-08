@@ -10,7 +10,7 @@ u8 D_801E5BC8[0x24] = {
 
 Callback g_ShopStep6Funcs[SHOP_STEP6_COUNT] = {func_801DE1C4, func_801DE45C, func_801DE4C8, func_801DE850};
 
-Callback g_ShopStep6Sub0Funcs[SHOP_STEP6_SUB0_COUNT] = {func_801DE200, func_801DE3C8, func_801DE40C};
+Callback g_ShopStep6Sub0Funcs[SHOP_STEP6_SUB0_COUNT] = {func_801DE200, Shop_BeginFadeIn, func_801DE40C};
 
 Callback g_ShopStep6Sub3Funcs[SHOP_STEP6_SUB3_COUNT] = {func_801DE88C, func_801DE8E8, func_801DE944, func_801DEE20};
 

@@ -4,7 +4,8 @@
  * the game UI contract (include/sys/gameui.h) and is not declared by
  * shop_00.h. */
 
-MATCH void func_801DE3C8(void) {
+/* func_801DE3C8 */
+MATCH void Shop_BeginFadeIn(void) {
     volatile u8* counter;
     u8           count;
 
