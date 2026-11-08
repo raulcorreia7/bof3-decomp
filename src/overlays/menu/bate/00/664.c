@@ -158,7 +158,7 @@ MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
 /* First difference: the stack frame, 0x70 bytes against 0x78. */
 INCLUDE_ASM(Menu_DrawHeaderBar);
 
-INCLUDE_ASM(func_801D5634);
+#include "overlays/menu/Menu_DrawEquipCompareWindow.h"
 
 #include "overlays/menu/Menu_DrawRowIcons.h"
 

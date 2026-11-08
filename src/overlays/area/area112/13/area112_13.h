@@ -19,6 +19,6 @@ extern u8                  D_801F493C[];
 
 void func_801F2EA8(void);
 void func_801F3274(void);
-void func_801F3EEC(void*);
+void Area_DrawLightPillar(s32* pos);
 
 #endif

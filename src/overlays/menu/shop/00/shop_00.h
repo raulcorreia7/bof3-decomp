@@ -311,6 +311,9 @@ extern u8          MENU_CLOCK_COLON[];
 extern u8*         g_MenuCommandLabels[];
 extern u8          g_MenuCommandRows[][5];
 extern u8          g_MenuEquipStatLabels[];
+extern u8          g_MenuEquipCompareLabels[];
+extern u8          g_MenuEquipCompareSprites[];
+extern u8          g_MenuEquipSlotIcons[];
 /* D_801E5B7C */
 extern u8*         g_MenuAbilityListNames[4];
 extern u8          D_801E5BC8[];
