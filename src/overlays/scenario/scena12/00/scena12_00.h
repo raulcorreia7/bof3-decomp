@@ -13,7 +13,8 @@ extern u8  D_80146874;
 extern u8  D_80146875;
 extern u32 D_801F6C00;
 
-extern Callback  D_801FD178[];
+/* D_801FD178 */
+extern Callback  g_SceneEntityDispatch[];
 extern Callback  D_801FD184[];
 extern Callback  D_801FD190[];
 extern Callback  D_801FD198[];

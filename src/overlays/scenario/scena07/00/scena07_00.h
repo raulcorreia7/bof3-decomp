@@ -62,7 +62,8 @@ u8 func_801F9EFC(void);
 
 extern s8       D_80146874;
 extern u8       D_80146875;
-extern Callback D_801FDD14[];
+/* D_801FDD14 */
+extern Callback g_SceneEntityDispatch[];
 
 extern u8       D_80144EB8[];
 extern u8       D_80146865;

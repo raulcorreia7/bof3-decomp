@@ -4,11 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801F6F70(void) {
-    u8* entity;
-
-    D_801FE80C[entity[1]]();
-}
+#include "overlays/scenario/Scene_DispatchEntity.h"
 
 INCLUDE_ASM(func_801F6FAC);
 
