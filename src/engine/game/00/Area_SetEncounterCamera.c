@@ -3,7 +3,8 @@
 /* Sums the heights of the live candidate cells and the queued entries, then centres and installs
  * the battle camera matrix.
  */
-MATCH void func_801C7244(s32 mode) {
+/* func_801C7244 */
+MATCH void Area_SetEncounterCamera(s32 mode) {
     EncounterEnemy* entry;
     SVECTOR*        rot;
     SVECTOR         angle;

@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_8009CFEC(void) {
+/* func_8009CFEC */
+MATCH void Battle_MergeEnemyPanels(void) {
     PanelOwner entries[8];
     u8         count;
     u8         i;

@@ -3,7 +3,8 @@
 /* decrements g_MessageChoiceStep when the D_801490BA countdown is 2, and steps the
  * countdown up by two otherwise.
  */
-MATCH void func_80151A48(void) {
+/* func_80151A48 */
+MATCH void UI_PrevChoice(void) {
     s8 value;
 
     value = D_801490BA[0];

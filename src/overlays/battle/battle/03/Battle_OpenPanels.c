@@ -49,7 +49,7 @@ MATCH void Battle_OpenPanels(void) {
             D_80148332[battler + 0xD].y_04       = panel_y;
         }
     }
-    func_801D9304(0);
+    Battle_OpenPartyPanel(0);
     func_800AC964();
     counter = &g_Battle.phase.sub_step;
     *counter += 1;

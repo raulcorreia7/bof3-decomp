@@ -707,7 +707,8 @@ void         func_801D8450(u32 panel_index);
 void         func_801D8690(s32 x, s32 y, s32 slot);
 void         Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot);
 void         func_801D8DF8(s32 panel_x, s32 panel_y, u32 index);
-void         func_801D9304(u8 arg0);
+/* func_801D9304 */
+void         Battle_OpenPartyPanel(u8 arg0);
 void         func_801D9388(u8 arg0);
 void         func_801D93E4(u8 arg0);
 void         func_801D9428(u8 arg0);
@@ -738,12 +739,15 @@ u8           func_801DB9E4(u32 battler_index);
 PartyMember* func_801DBB20(u8 selector);
 /* func_801DBB78 */
 u32          Battle_ApplyDamage(u8 attacker, u8 target);
-u32          func_801DC73C(s16 damage, u32 battler_index, u32 target_index);
-u32          func_801DC894(s16 damage, u8 attacker, u8 target);
+/* func_801DC73C */
+u32          Battle_RollHitOnParty(s16 damage, u32 battler_index, u32 target_index);
+/* func_801DC894 */
+u32          Battle_RollHitOnEnemy(s16 damage, u8 attacker, u8 target);
 u32          Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction);
 /* func_801DCCB0 */
 u32          Battle_CalcPartyDefense(void);
-u32          func_801DCD50(u32 unused, u8 battler_index, s32 damage_value);
+/* func_801DCD50 */
+u32          Battle_ScaleDamage(u32 unused, u8 battler_index, s32 damage_value);
 void         func_801DCEF8(u32 battler_index);
 void         func_801DD08C(void);
 void         func_801DD29C(void);

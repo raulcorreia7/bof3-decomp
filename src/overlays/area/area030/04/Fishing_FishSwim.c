@@ -75,6 +75,6 @@ MATCH void Fishing_FishSwim(void) {
             FISHING_STATE->step_timer_09 = 0x10;
         }
     }
-    func_801E0394();
+    Fishing_MoveFish();
     func_8014D978();
 }

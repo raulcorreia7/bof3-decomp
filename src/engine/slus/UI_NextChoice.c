@@ -3,7 +3,8 @@
 /* advances g_MessageChoiceStep when the D_801490BA countdown is -2, and steps the
  * countdown down by two otherwise.
  */
-MATCH void func_801519F8(void) {
+/* func_801519F8 */
+MATCH void UI_NextChoice(void) {
     s8 value;
 
     value = D_801490BA[0];

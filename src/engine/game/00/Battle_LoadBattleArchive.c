@@ -7,7 +7,7 @@ MATCH void Battle_LoadBattleArchive(void) {
     u32  i;
 
     Party_BuildBattlers(PARTY_ORDER_BATTLE);
-    func_801BF448();
+    Battle_PlaceMembers();
     func_801A06D8();
     func_801992B8();
     if ((g_Battle.outcome.options & BATTLE_OPT_KEEP_BGM) == 0) {

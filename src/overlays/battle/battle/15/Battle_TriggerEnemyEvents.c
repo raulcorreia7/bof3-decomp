@@ -88,5 +88,5 @@ MATCH void Battle_TriggerEnemyEvents(void) {
                 break;
         }
     }
-    func_8009CFEC();
+    Battle_MergeEnemyPanels();
 }

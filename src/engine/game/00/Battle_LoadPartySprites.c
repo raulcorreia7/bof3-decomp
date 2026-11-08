@@ -12,7 +12,7 @@ MATCH void Battle_LoadPartySprites(void) {
     s8            dy;
     s32           span;
 
-    ready = func_801BEE5C();
+    ready = Battle_LoadPartyScripts();
     func_801A06D8();
     func_801992B8();
     if (ready != 0) {

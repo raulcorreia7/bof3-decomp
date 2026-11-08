@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D9304(u8 arg0) {
+/* func_801D9304 */
+MATCH void Battle_OpenPartyPanel(u8 arg0) {
     u8 count;
 
     Menu_OpenPanelTask(1, 3);

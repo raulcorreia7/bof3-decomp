@@ -1,7 +1,8 @@
 #include "battle_15.h"
 
 /* Sets the bit at bit_index in the D_80144F60 bitmask. */
-MATCH void func_800AD074(u32 bit_index) {
+/* func_800AD074 */
+MATCH void Battle_SetEnemyDefeated(u32 bit_index) {
     u32  word_index;
     u32* bit_words;
 

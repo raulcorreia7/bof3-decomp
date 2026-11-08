@@ -3,7 +3,8 @@
 /* Returns code's low six bits plus 0x1E when bit 0x80 is clear; with the bit set it scans the 30 records of
  * D_8014688E (152-byte stride) for the key-th record whose first byte is 10 and returns the key.
  */
-MATCH s8 func_8015B4F4(s32 code) {
+/* func_8015B4F4 */
+MATCH s8 Actor_FindScriptSlot(s32 code) {
     s8  result;
     s32 index;
     s32 count;

@@ -6,7 +6,7 @@
  * count reaches zero.
  */
 MATCH void UI_UpdateChoice(void) {
-    Table2 table = {{func_801519F8, func_80151A48}};
+    Table2 table = {{UI_NextChoice, UI_PrevChoice}};
 
     table.handlers[g_MessageChoiceStep]();
     if (g_MessageChoiceTimer != 0xFFFFu) {

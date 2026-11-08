@@ -65,7 +65,7 @@ NON_MATCHING void Battle_InitEnemy(s32 slot, u16 unit, s32 x, s32 y) {
     g_BattleEnemyBattlers[slot & BYTE_MASK].unk_8A = FIELD(u16, &D_800E405E, unit_offset);
     Battle_LoadEnemyBattler(slot & BYTE_MASK, unit & BYTE_MASK);
     func_800AD0A8(slot & BYTE_MASK, unit & HALF_MASK);
-    g_BattleEnemyBattlers[slot & BYTE_MASK].unk_7F = func_800AD044(FIELD(u8, &D_800E4050, unit_offset));
+    g_BattleEnemyBattlers[slot & BYTE_MASK].unk_7F = Battle_IsEnemyDefeated(FIELD(u8, &D_800E4050, unit_offset));
     g_Battle.enemy_count += 1;
 }
 #else

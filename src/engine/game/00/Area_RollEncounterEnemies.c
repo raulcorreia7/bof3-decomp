@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s32 func_801C6AEC(s32 candidate_id) {
+/* func_801C6AEC */
+MATCH s32 Area_RollEncounterEnemies(s32 candidate_id) {
     s32             slot;
     s32             index;
     s32             kept;

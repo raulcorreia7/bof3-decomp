@@ -221,7 +221,8 @@ void         Menu_ResetPanelTasks(void);
 void         Area_UpdateParty(void);
 void         func_8015B410(void* matrix);
 void         func_8015B4B0(void* matrix);
-s8           func_8015B4F4(s32 code);
+/* func_8015B4F4 */
+s8           Actor_FindScriptSlot(s32 code);
 /* func_8015A944 */
 void         func_8015A944(void);
 /* func_8015B580 */
