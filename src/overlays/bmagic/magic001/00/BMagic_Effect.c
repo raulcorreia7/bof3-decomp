@@ -18,8 +18,15 @@ MATCH void func_801EEFD8(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-/* blocker: copies 0x2C bytes from D_801EEC10 as an unrolled 16-byte loop plus a 12-byte tail, and no struct of that size is typed for it yet. */
-INCLUDE_ASM(func_801EF01C);
+MATCH void func_801EF01C(void) {
+    Magic001Steps handlers;
+
+    handlers = D_801EEC10;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+    }
+}
 
 MATCH void func_801EF0E8(void) {
     func_801E257C(g_BattleActiveBattler, 0xAU);
@@ -135,7 +142,7 @@ MATCH void func_801EF688(void) {
 }
 
 MATCH void func_801EF72C(void) {
-    Magic001Steps handlers;
+    Magic001SecondSteps handlers;
 
     handlers = D_801EEC3C;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);

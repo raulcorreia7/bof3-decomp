@@ -8,5 +8,5 @@ MATCH void func_801F2DBC(void) {
         *state              = *state + 1;
         g_Task->header.mode = 3;
     }
-    func_801F2E34();
+    Screen_DrawTint();
 }

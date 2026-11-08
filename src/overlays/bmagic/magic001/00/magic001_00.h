@@ -5,15 +5,21 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8 g_BattleActiveBattler;
-
-#define MAGIC001_STEP_COUNT 3
+#define MAGIC001_STEP_COUNT 11
 
 typedef struct Magic001Steps {
-    Callback steps[MAGIC001_STEP_COUNT];
+    Callback handlers[MAGIC001_STEP_COUNT];
 } Magic001Steps;
 
-extern Magic001Steps D_801EEC3C;
+#define MAGIC001_SECOND_STEP_COUNT 3
+
+typedef struct Magic001SecondSteps {
+    Callback steps[MAGIC001_SECOND_STEP_COUNT];
+} Magic001SecondSteps;
+
+extern Magic001Steps       D_801EEC10;
+extern u8                  g_BattleActiveBattler;
+extern Magic001SecondSteps D_801EEC3C;
 
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->param.unk_0B == 0) {

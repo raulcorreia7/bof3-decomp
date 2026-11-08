@@ -7,4 +7,6 @@
 
 extern u16 D_801EFA6C[];
 
+extern Callback D_801EFA5C[];
+
 #endif
