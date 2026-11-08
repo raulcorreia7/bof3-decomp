@@ -575,7 +575,7 @@ void func_801D7D48(void);
 void Menu_SwapBytes(u8* first, u8* second);
 void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor);
 void func_801D8050(s32 panel_x);
-s32  func_801D81B4(u8* cursor_byte, s32 palette_index);
+u8   func_801D81B4(u8* cursor_byte, s32 palette_index);
 void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused);
 void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index);
 void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);

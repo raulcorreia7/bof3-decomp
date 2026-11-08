@@ -27,7 +27,7 @@ extern Callback D_801FE8D8[];
 void func_801F7DE8(void);
 s32  func_801F7E14(void);
 void func_801F8AE8(void);
-s32  func_801F8BF8(void);
+u8   func_801F8BF8(void);
 
 extern void (*D_801FE8FC[])(void* slot);
 

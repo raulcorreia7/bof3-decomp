@@ -142,7 +142,7 @@ void  func_801AFFD8(const void* world_position, void* screen_xy, void* projectio
 /* func_801B0DFC */
 void  func_801B0DFC(void);
 /* func_801B0E44 */
-s32   func_801B0E44(void);
+u8    func_801B0E44(void);
 /* func_801B2D00 */
 s32   Actor_GetTurnStep(s32 selector);
 /* func_801B59B4 */
@@ -158,7 +158,7 @@ void  func_801BDAB8(void);
 /* func_801BDB7C */
 u8    Party_CountOrder(u8 mode);
 /* func_801BDD58 */
-s32   func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
+u8    func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 /* func_801BDE14 */
 s8    func_801BDE14(s32 pos_x, s32 pos_y, s32 range_mode);
 /* func_801BE0C0 */

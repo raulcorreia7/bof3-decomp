@@ -1,6 +1,6 @@
 #include "area171_13.h"
 
-MATCH s32 func_801F3CF0(s32 x, s32 y) {
+MATCH u8 func_801F3CF0(s32 x, s32 y) {
     s32 cx;
     s32 cy;
 

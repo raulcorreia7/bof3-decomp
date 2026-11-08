@@ -1,6 +1,6 @@
 #include "area191_13.h"
 
-MATCH s32 func_801F3924(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+MATCH u16 func_801F3924(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32 index;
 
     if ((u8)arg3 < 5) {

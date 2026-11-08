@@ -44,7 +44,7 @@ void func_801F5B90(void);
 
 s32 func_801A79A4(s32, s32);
 
-s32 func_801F5028(s32, s32, s32);
+u8 func_801F5028(s32, s32, s32);
 
 void func_801F5C7C(void);
 

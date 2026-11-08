@@ -673,7 +673,7 @@ void        func_8009B700(void);
 void        func_8009B794(void);
 void        func_8009B828(void);
 void        func_8009B964(void);
-s32         func_8009BACC(s32 diff);
+u8          func_8009BACC(s32 diff);
 /* func_8009C8AC */
 u8          Battle_ActionHasElement(u16 required_mask);
 void        func_8009CCBC(void* battler, s32 rate_type, s32 rate_percent);
@@ -692,7 +692,7 @@ s16         func_800A2EF0(u8 battler_index, u16 element_mask);
 s32         func_800A30E8(u8 unused, u8 battler_index);
 void        func_800A31E0(u8 selection_kind, u16 input_mask);
 bool        func_800A3638(s32 battler_index, s32 compare_value);
-s32         func_800A36BC(s32 battler_index, s32 compare_value);
+u8          func_800A36BC(s32 battler_index, s32 compare_value);
 u16         func_800A36F0(u8 battler_index, u16 flags);
 extern void func_800A39B4(s16 delta, u8 battler_index);
 u8          func_800A3A10(u8 battler_index, u8 selection_kind);
@@ -1066,7 +1066,7 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 
 u8 func_800A40D0(u8 battler_index);
 
-s32 func_800AED5C(s32 arg0, u32 battler_index);
+u8 func_800AED5C(s32 arg0, u32 battler_index);
 
 u8 Battle_SlotIsBlocked(u8 slot);
 
