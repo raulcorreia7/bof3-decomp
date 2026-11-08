@@ -64,8 +64,6 @@ INCLUDE_ASM(func_801CF3DC);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-/* blocker: loop initialization order; first diff: +0x13C. */
-/* func_801CF664 */
 MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
     CHAR_PROBE_CELL_SPAWN(20);
 }
