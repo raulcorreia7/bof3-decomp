@@ -7,6 +7,7 @@
  */
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
  * draft; best score 82.69%. resume: a lever or header fix that closes the first mismatch. */
+/* Pinned coordinates and bundle pointer reach +0x18; the width load still uses a different register. */
 #ifdef NON_MATCHING
 NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     s8   v[4];

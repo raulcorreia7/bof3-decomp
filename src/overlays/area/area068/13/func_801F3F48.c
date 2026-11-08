@@ -1,8 +1,12 @@
 #include "area068_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801F3F48(void) {
-    s32 step;
+MATCH s32 func_801F3F48(void) {
+    /* CLEANUP: the shift-and-subtract run is GCC's exact division of the pointer difference, so
+     * the readable form is the actor index g_ScriptWorkRecord - g_Actors (the same as in
+     * area059 func_801F2F34). */
+    /* FAKE: the product needs the retail temporary registers. */
+    MATCH_FAKE_PIN(s32, step, "v1");
+    MATCH_FAKE_PIN(s32, part, "a0");
     /* FAKE: pin carries the request code in a2 from the first store to the
      * g_SceneEventMode store. */
     MATCH_FAKE_PIN(s32, request, "a2");
@@ -26,8 +30,13 @@ NON_MATCHING s32 func_801F3F48(void) {
     ORDER_LOCK_BEGIN
         record->unk_7E = 0;
         record         = (Actor*)((s32)record - base);
-        step           = ((s32)(-(((s32)record) * 0xD79435E5))) >> 3;
-        D_80146867     = (s8)step;
+        part           = ((s32)record << 3) - (s32)record;
+        part           = (part << 2) - (s32)record;
+        step           = (part << 9) - part;
+        part           = step << 18;
+        step           = -(step + part);
+        step >>= 3;
+        D_80146867 = (s8)step;
         /* FAKE: barrier keeps the g_SceneEventMode/g_SceneEventSelection stores in statement
          * order after the row store. */
         MATCH_FAKE_BARRIER();
@@ -39,9 +48,3 @@ NON_MATCHING s32 func_801F3F48(void) {
     g_SceneEventSelection = step;
     return 0;
 }
-#else
-/* nonmatching: 8 rows, one register choice. The exact record-index division (x * 0xD79435E5, then >> 3) builds its
- * temporaries in a0/v1 in retail and v0/v1 here (first row 0x801F3F90). MATCH_FAKE_USE(base) before the third reload
- * was dropped: it cost 4 bytes and moved the first row to 0x801F3F78. */
-INCLUDE_ASM(func_801F3F48);
-#endif
