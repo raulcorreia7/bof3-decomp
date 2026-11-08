@@ -6,8 +6,8 @@ MATCH void func_801F40AC(void) {
     g_Task->param.actor_slot = Actor_FindFreeSlot();
     slot                     = g_Task->param.actor_slot;
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags                 = 1;
-        g_ActorSlots[g_Task->param.actor_slot].type     = 0x1F;
+        g_ActorSlots[slot].header.flags                    = 1;
+        g_ActorSlots[g_Task->param.actor_slot].type        = 0x1F;
         g_ActorSlots[g_Task->param.actor_slot].pos.x.fixed = TO_COORD(46);
         g_ActorSlots[g_Task->param.actor_slot].pos.y.fixed = TO_COORD(92);
         g_ActorSlots[g_Task->param.actor_slot].pos.z.fixed = TO_COORD(416);
