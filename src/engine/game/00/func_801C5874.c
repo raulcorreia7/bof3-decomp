@@ -17,12 +17,12 @@ MATCH void func_801C5874(void) {
         *base -= 1;
         return;
     }
-    list         = FIELD(s32*, g_AreaLoads[g_GameAreaId], 0x1Cu);
-    target       = list[D_80143FBF];
+    list       = FIELD(s32*, g_AreaLoads[g_GameAreaId], 0x1Cu);
+    target     = list[D_80143FBF];
     /* GameWork cell aliases the flag cluster at D_80143FBD - 0x75. */
-    SCRATCH_WORK = (Actor*)(base - 0x75);
-    sel          = func_801A8D38(base - 1, target);
-    D_80143F50   = sel;
+    g_Task     = (Actor*)(base - 0x75);
+    sel        = func_801A8D38(base - 1, target);
+    D_80143F50 = sel;
     if (base[-1] & 8) {
         base[-1] &= 0xF7;
         D_80143F49 = 0;
