@@ -11,7 +11,7 @@ MATCH s8 func_801BDE14(s32 pos_x, s32 pos_y, s32 range_mode) {
     off   = 0;
     do {
         slot = (u8*)g_Actors + off;
-        if ((slot != (u8*)SCRATCH_WORK) && (((u8*)g_Actors)[off] != 0) && ((((u8*)g_Actors + 7)[off] & 0x80) == 0)) {
+        if ((slot != (u8*)g_Task) && (((u8*)g_Actors)[off] != 0) && ((((u8*)g_Actors + 7)[off] & 0x80) == 0)) {
             if (((func_801BDD58(pos_x, pos_y, kind, range_mode, (Actor*)slot)) & BYTE_MASK) != 0) {
                 return index;
             }

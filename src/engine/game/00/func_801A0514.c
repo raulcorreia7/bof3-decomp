@@ -13,7 +13,7 @@ MATCH void func_801A0514(void) {
 
         entity = (Actor*)((u8*)g_Actors + (slot_u8 * ACTOR_SIZE));
 
-        SCRATCH_WORK = entity;
+        g_Task = entity;
 
         if (ACTOR_IN_USE(*entity)) {
             if (entity->unk_06 != 9) {
@@ -31,7 +31,7 @@ MATCH void func_801A0514(void) {
                 {
                     Actor* scratch;
                     s32    kind;
-                    scratch = (Actor*)SCRATCH_WORK;
+                    scratch = g_Task;
                     kind    = scratch->unk_06;
                     if (kind == 10) {
                         index += 1;
