@@ -250,24 +250,34 @@
 #endif
 
 /*
- * Marker macros for intentionally-unmatched or non-equivalent code, and
- * function bodies that live entirely in assembly. They expand to nothing and
- * tag the construct for readers and the build.
+ * Status markers. They expand to nothing and tag the construct for readers and
+ * the build; they are not MATCH_FAKE_* helpers and never need a `FAKE:` note.
  *
- * Status rule: every lifted function carries exactly one status marker
- * inline at the start of its own definition line (`MATCH void func_...`,
- * `NON_MATCHING void func_...`), so tree state is greppable. MATCH marks a
- * compiled definition; NON_MATCHING marks a draft under `#ifdef NON_MATCHING`
- * whose `#else` links the split assembly. No definition is exempt: a PsyQ stub such as
- * `__main` carries MATCH, and only a `static inline` helper in a header goes without.
+ *   MATCH         this C is the original: it compiles to the retail bytes.
+ *   NON_MATCHING  a C draft under `#ifdef NON_MATCHING`; the split assembly in
+ *                 the `#else` builds until the draft matches.
+ *   HAND_ASM      the original was hand-written assembly; this C, under
+ *                 `#ifdef NON_MATCHING`, is its equivalent (same inputs, outputs
+ *                 and effects) and the `#else` assembly stays the build path.
+ *                 Every function in `asm/<target>/hand/` has one. It counts
+ *                 separately from C matches and is not debt.
+ *
+ * Every lifted function carries exactly one status marker inline at the start
+ * of its own definition line (`MATCH void func_...`), so tree state is
+ * greppable. No definition is exempt: a PsyQ stub such as `__main` carries
+ * MATCH, and only a `static inline` helper in a header goes without.
  * `INCLUDE_ASM` lines take no marker. `tools/check_markers.py` enforces the rule.
  *
- * The draft build passes `-DNON_MATCHING`; the marker then expands to nothing so
- * the draft definition compiles. Without the flag the branch is skipped, which
- * keeps the INCLUDE_ASM fallback as the build path.
+ * The draft build passes `-DNON_MATCHING`; the markers then expand to nothing
+ * so the draft definition compiles. Without the flag the branch is skipped,
+ * which keeps the INCLUDE_ASM as the build path.
  */
 #ifndef MATCH
 #define MATCH
+#endif
+
+#ifndef HAND_ASM
+#define HAND_ASM
 #endif
 
 #ifdef NON_MATCHING

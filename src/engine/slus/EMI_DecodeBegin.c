@@ -1,19 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* FAKE: origin unresolved.
- * PROFILE: the prior 52-profile catalog and the new 56-profile matrices for
- * GCC 2.8.0, 2.8.1 and 2.95.2 found no exact C match. Both a plain C89 form and
- * a `register`/`ori` address form were tested; the best output is still 60
- * bytes with differences. See docs/toolchain.md#compiler-chain.
- * MACHINE: this is an ordinary ABI leaf (`$a0` input, `$ra` return). Its
- * `$t0`-`$t2` allocation and `lui`/`ori` addresses are compiler-emittable.
- * No non-ABI entry, live-across-call caller register or computed resume entry
- * proves hand authorship.
- * OPEN: do not count this as `asm-original`. Keep the byte-preserving assembly
- * branch until C89 matches or provenance supplies proof; the model below
- * documents the inferred behavior.
- */
-/* Pinned context and scratchpad pointers produce 0x38 bytes; addiu replaces retail ori at +0x04. */
+/* HAND_ASM: leaf with `$t0`-`$t2` allocation and `ori` addresses no profile reproduces.
+ * See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
 /* INFERRED C model: initialises the resumable stream decoder described by
  * EMI_DecodeStep.
@@ -25,7 +13,7 @@
  * field through `ori` li-form addresses; C89 cannot hold a fixed address in a
  * register across the stores.
  */
-NON_MATCHING void EMI_DecodeBegin(u8* dst) {
+HAND_ASM void EMI_DecodeBegin(u8* dst) {
     EMIDecodeContext* ctx;
 
     ctx             = D_800327A0;

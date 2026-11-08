@@ -1,16 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* FAKE: proven asm-original.
- * PROFILE: no exact C match in 56 candidate profiles each for GCC 2.8.0,
- * 2.8.1 and 2.95.2; 2.8.0/2.8.1 each had 3 profile build errors, while 2.95.2
- * compiled all 56. See docs/toolchain.md#compiler-chain
- * (decoder-clean and decoder-pinned-context-cursors).
- * MACHINE: `$t0`/`$t3` stay live across calls; `$ra` is parked in `$s6`;
- * `$s0`-`$s7` are saved in the context; `jr $t4` dispatches through an absolute
- * resume table. These non-ABI registers and computed entries are not expressible
- * in pure C89.
- * MODEL: retain the C89 model below and count this separately from C matches.
- */
+/* HAND_ASM: `$t0`/`$t3` stay live across calls, `$ra` is parked in `$s6`, `$s0`-`$s7` are saved in
+ * the context and `jr $t4` dispatches through an absolute resume table; C89 cannot express them.
+ * See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
 /* INFERRED C model: resumable stream decoder.
  * decodes the scratchpad window [src, limit) into ctx->dst until the
@@ -47,7 +39,7 @@ typedef enum DecoderState {
 /* Copy kernel: copies count bytes forward and returns the advanced
  * destination. The original takes count/src/dst in $s4/$s5/$t3. */
 
-NON_MATCHING s32 EMI_DecodeStep(void) {
+HAND_ASM s32 EMI_DecodeStep(void) {
     EMIDecodeContext* ctx;
     u8*               dst;
     u8*               src;

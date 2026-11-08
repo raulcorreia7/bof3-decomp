@@ -394,7 +394,7 @@ void        EMI_DecodeBegin(u8* dst);
 s32         EMI_DecodeStep(void);
 /* Main-exe functions called by this overlay. */
 /* func_801644D8 */
-s32         func_801644D8(s32 arg0, s32 x, s32 y, s32 width, s32 height, s32 shade);
+void        func_801644D8(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade);
 /* func_801647C4 */
 void        Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
 /* func_80164A44 */

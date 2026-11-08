@@ -1,15 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* FAKE: proven asm-original.
- * PROFILE: no exact C match in 56 candidate profiles each for GCC 2.8.0,
- * 2.8.1 and 2.95.2; 2.8.0/2.8.1 each had 3 profile build errors, while 2.95.2
- * compiled all 56. See docs/toolchain.md#compiler-chain
- * (restore-tail-c).
- * MACHINE: entry 0x801642CC reloads `$s1`; the shared entry 0x801642D0 skips
- * it. Both rely on caller-held `$t0` context and `$s6` saved-return state.
- * This non-ABI multi-entry restore tail has no C89 function equivalent.
- * MODEL: keep the no-op C89 model below and count this separately from C.
- */
+/* HAND_ASM: multi-entry register-restore tail (0x801642CC reloads `$s1`, 0x801642D0 skips it) over
+ * caller-held `$t0` and `$s6`; C89 has no equivalent. See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
 /* INFERRED C model: shared restore tail of the resumable decoder.
  * reloads the outer caller's $s1-$s7 from the context spill area at
@@ -21,7 +13,7 @@
  * plus the return, and a C epilogue is compiler-owned, so the model has no
  * statements of its own.
  */
-NON_MATCHING void func_801642CC(void) {
+HAND_ASM void func_801642CC(void) {
     /* Register restore and return; see the comment above. */
 }
 #else

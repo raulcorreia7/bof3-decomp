@@ -3,8 +3,8 @@
 
     tools/worklist.py [-n 30] [--image SUBSTR] [--route ROUTE] [--tsv]
 
-One row per `INCLUDE_ASM` function. The route is the cheapest known way in, in the order
-docs/matching.md tries them:
+One row per `INCLUDE_ASM` function; a `HAND_ASM` unit is done and has no row. The route
+is the cheapest known way in, in the order docs/matching.md tries them:
 
     template0   a matched template with no differing instruction: tools/template_try.py
     generator   a mechanical shape: tools/gen_body.py <shape>
@@ -60,6 +60,11 @@ def hint(src: str | None) -> str:
     return " ".join(" ".join(n.replace("*", " ").split()) for n in notes)
 
 
+def is_hand_asm(src: str) -> bool:
+    """True when the unit marks its function `HAND_ASM`: written in assembly, so done."""
+    return "\nHAND_ASM " in (ROOT / src).read_text(encoding="utf-8")
+
+
 def templates() -> dict[str, tuple[str, int]]:
     """Return the cheapest template of each assembly function: ref -> (template, diff_count)."""
     out, err = io.StringIO(), io.StringIO()
@@ -83,7 +88,7 @@ def rank(image: str = "", route: str = "") -> list[Row]:
     }
     rows = []
     for f in gen_body.asm_functions():
-        if f.src is None or image not in f.image:
+        if f.src is None or image not in f.image or is_hand_asm(f.src):
             continue
         tmpl = near.get(f.ref)
         if tmpl and tmpl[1] == 0:
