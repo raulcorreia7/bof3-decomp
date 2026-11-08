@@ -15,7 +15,8 @@ MATCH void func_801D0DD8(void) {
     g_MenuStep.step     = D_8018E244 + 2;
 }
 
-MATCH void func_801D0E04(void) {
+/* func_801D0E04 */
+MATCH void MenuBate_ResetPanels(void) {
     u16* count;
 
     Menu_ResetPanelTasks();
@@ -31,7 +32,8 @@ MATCH void func_801D0E74(void) {
     SYS_DISPATCH_BYTE(g_MenuBateStep2Sub0Funcs, g_MenuStep.state);
 }
 
-MATCH void func_801D0EB0(void) {
+/* func_801D0EB0 */
+MATCH void MenuBate_StartFadeIn(void) {
     u8* count;
 
     UI_SetMode(UI_MODE_FAST_FADE_IN);

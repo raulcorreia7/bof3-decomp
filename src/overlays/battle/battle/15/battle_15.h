@@ -685,7 +685,8 @@ void        func_8009DCC8(void);
 extern void func_8009DE18(void);
 void        func_8009DE8C(void);
 extern void func_8009E500(void);
-void        func_8009F320(void);
+/* func_8009F320 */
+void        Battle_HalveDamage(void);
 void        func_8009F6EC(void);
 extern void func_800A0378(void);
 s16         func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
@@ -705,7 +706,8 @@ u8          func_800A41D8(s32 input_mask);
 u8          func_800A4238(s32 input_mask);
 s16         func_800A4294(s32 input_kind);
 void        func_800A46C4(void);
-void        func_800A4700(void);
+/* func_800A4700 */
+void        Battle_LoadDragonArchive(void);
 void        func_800A4744(void);
 void        func_800A47AC(void);
 void        func_800A4900(void);
@@ -760,7 +762,8 @@ bool        func_800AB470(u8 battler_index);
 bool        func_800AB4BC(s32 kind_index);
 void        func_800AB570(s32 battler_index);
 u8          func_800AB68C(u8 excluded_slot);
-extern void func_800ABBE0(void);
+/* func_800ABBE0 */
+extern void Battle_LoadEncounter(void);
 extern void func_800ABC30(void);
 extern void Battle_LoadEncounterEnemies(void);
 void        func_800AD0A8(s32 enemy_index, s32 unit_index);
@@ -813,7 +816,8 @@ extern void func_800B1728(void);
 /* func_800B1A74 */
 extern void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_b, u8 title_index);
 void        func_800B20CC(void);
-void        func_800B2104(void);
+/* func_800B2104 */
+void        Battle_DrawInventoryPanel(void);
 void        func_800B2158(void);
 void        func_800B2198(void);
 void        func_800B21D8(void);
@@ -866,7 +870,8 @@ void Actor_SelectScript_keep_a1(u32 selector, u32 payload);
 #else
 #define Actor_SelectScript_keep_a1(selector, payload) Actor_SelectScript(selector)
 #endif
-bool        func_80097574(void);
+/* func_80097574 */
+bool        Battle_IsAbilityLocked(void);
 void        func_80097EC0(void);
 extern void func_8009AAE8(void);
 void        func_8009B03C(void);
