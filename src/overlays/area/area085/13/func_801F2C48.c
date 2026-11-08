@@ -10,6 +10,6 @@ MATCH void func_801F2C48(void) {
     work->tint.bytes.unk_5F = 0;
     work->tint.bytes.unk_5E = 0;
     work->tint.bytes.unk_5D = 0;
-    func_801F2ED8();
+    Screen_DrawTint();
     func_801F2FCC();
 }
