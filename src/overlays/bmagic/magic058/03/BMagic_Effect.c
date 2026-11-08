@@ -116,7 +116,7 @@ INCLUDE_ASM(func_801EF74C);
 
 INCLUDE_ASM(func_801EFA78);
 
-/* blocker: candidate loads g_Task.y into v0 where retail uses v1; first diff: lw v1,56(a1) at 0x801EFDF4. */
+/* blocker: the draft is a squared distance of two battler positions (>> 9) against the scratchpad halfword squared, `dx * dx + dy * dy <= r * r`, with the task y read into a local before the subtraction; it is down to 4 rows: retail keeps the y square in a1 and the radius square in v1 (0x801EFE10), the draft has them swapped. Tried limit, dist and square locals, a radius local, limit first, a reversed compare. The scratchpad halfword needs a name without an address. */
 INCLUDE_ASM(func_801EFDD4);
 
 /* func_801EFE38 */

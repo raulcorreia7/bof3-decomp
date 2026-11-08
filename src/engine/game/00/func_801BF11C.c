@@ -1,8 +1,9 @@
 #include "game_00.h"
 
 /* nonmatching: one instruction differs. The palette copy loop (0x801BF31C) adds src and j*2 as `addu v0,v0,v1` in retail
- * and `addu v0,v1,v0` here. Tried: index and pointer operand orders, src/dst declaration and assignment order, inline
- * src expression, 10 min permuter. The party scan needs `offset = i * BATTLE_PARTY_STRIDE` as a local. */
+ * and `addu v0,v1,v0` here. Tried: index and pointer operand orders, 0x60 + j, (src + 0x60)[j], j[src], src/dst
+ * declaration and assignment order, src folded to `+ 0x60`, bank and j as u32, bank as `* 0x40`, an inline src
+ * expression, 10 min permuter. The party scan needs `offset = i * BATTLE_PARTY_STRIDE` as a local. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801BF11C(void) {
     u8*  work;
