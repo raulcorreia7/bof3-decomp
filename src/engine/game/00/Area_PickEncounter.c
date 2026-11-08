@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s32 func_801C6A7C(void) {
+/* func_801C6A7C */
+MATCH s32 Area_PickEncounter(void) {
     s32 sum;
     u8* base;
     s32 index;

@@ -3,7 +3,8 @@
 /* walks the grid twice: each pass advances the column cursor from g_AreaGridColCursor (wrapping at the last column),
  * passes every cell of the row g_AreaGridRowCursor selects to func_801545B4 and func_801541C0, then steps
  * g_AreaGridRowCursor back (wrapping at the last row); the panel origin moves by (-1, -1). */
-MATCH void func_80152E94(void) {
+/* func_80152E94 */
+MATCH void Area_LoadCellRowsPrev(void) {
     s32       i;
     s32       rotCol;
     s32       col;

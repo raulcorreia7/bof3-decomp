@@ -120,8 +120,9 @@ void  func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height,
 void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 /* func_801AF20C */
 s32   func_801AF20C(u8* command_stream);
+/* UI_GetSpriteRect */
 /* func_801AF270 */
-u8*   func_801AF270(u8 sprite_id, u8 flags);
+u8*   UI_GetSpriteRect(u8 sprite_id, u8 flags);
 /* func_801AF2A0 */
 void  UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 /* func_801AF390 */
