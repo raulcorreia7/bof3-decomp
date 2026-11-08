@@ -163,6 +163,7 @@ MATCH void func_801F79EC(void) {
     SYS_DISPATCH_TASK(D_801FDDB4, 2, g_Task);
 }
 
+/* blocker: position setup load order; first diff: +0x00 (prologue). */
 INCLUDE_ASM(func_801F7A30);
 
 INCLUDE_ASM(func_801F7AB0);
@@ -185,6 +186,7 @@ MATCH void func_801F7D28(void) {
     SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Task);
 }
 
+/* blocker: same position setup as func_801F7A30; first diff: +0x00 (load order). */
 INCLUDE_ASM(func_801F7D6C);
 
 MATCH void func_801F7DDC(void) {

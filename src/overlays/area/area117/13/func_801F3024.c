@@ -1,19 +1,7 @@
 #include "area117_13.h"
 
-MATCH void func_801F3024(void) {
-    u16 position;
+#include "overlays/area/Area_ScreenSlideDownStep.h"
 
-    position         = g_Task->screen_y + 0x20;
-    g_Task->screen_y = position;
-    if ((s16)position >= 0) {
-        func_801F2E08();
-        if (g_Task->header.step == 2) {
-            return;
-        }
-        g_Task->header.step = 1;
-        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
-        }
-    }
-    func_801F314C();
+MATCH void func_801F3024(void) {
+    AREA_SCREEN_SLIDE_DOWN_STEP(func_801F2E08, func_801F314C);
 }
