@@ -59,16 +59,16 @@ extern u8* g_GfxPrimCursor;
 extern u8  g_UiFormatBuffer[];
 
 /* Queue a draw-mode primitive for the texture page at order-table slot 1: the
- * default texture window, primitive size 0xC. */
+ * default texture window. */
 static inline void GFX_AddDrawMode(s32 tpage) {
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(1, sizeof(DR_MODE));
 }
 
-/* The same draw mode with dithering on. */
-static inline void GFX_AddDitheredDrawMode(s32 tpage) {
+/* The same draw mode with dithering on, at order-table slot `layer`. */
+static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (tpage), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(layer, sizeof(DR_MODE));
 }
 
 /* The shared cursor viewed as the primitive it is about to receive. */

@@ -51,5 +51,5 @@ static inline void Area_DrawSpinTriangleOn(const void* spin, u32 order) {
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0, 0, 0);
 
-    GFX_AddPrim(order, 0x1Cu);
+    GFX_AddPrim(order, sizeof(POLY_G3));
 }
