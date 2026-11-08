@@ -5,6 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern SVECTOR D_1F800014[];
+void           BMagic_DrawGlowRing(void);
+
 #define MAGIC096_STEP_COUNT 5
 
 typedef struct Magic096Steps {

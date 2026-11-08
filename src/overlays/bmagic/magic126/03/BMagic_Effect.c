@@ -36,8 +36,8 @@ MATCH void func_801EEF14(void) {
     SYS_DISPATCH_BYTE(D_801F1268, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
-        func_801EF438();
-        func_801EF7A4();
+        BMagic_DrawGlowRingOuter();
+        BMagic_DrawGlowRingInner();
         func_801EF1C8();
         PopMatrix();
     }
@@ -61,9 +61,101 @@ MATCH void func_801EF00C(void) {
 
 INCLUDE_ASM(func_801EF1C8);
 
-INCLUDE_ASM(func_801EF438);
+/* The glow ring scratch: the inner and outer radius and the inner-edge colour, then the quad corners (D_1F800014). */
+#define GLOW_RING_INNER D_1F800000.view.effect.params[0]
+#define GLOW_RING_OUTER D_1F800000.view.effect.params[1]
+#define GLOW_RING_RED   D_1F800000.view.effect.params[3]
+#define GLOW_RING_GREEN D_1F800000.view.effect.params[4]
+#define GLOW_RING_BLUE  D_1F800000.view.effect.params[5]
 
-INCLUDE_ASM(func_801EF7A4);
+/* The outer half of the glow ring: 16 additive quads from twice the effect timer (byte 0x0A) out to three
+ * times it, plus a random 0 to 3 for flicker, fading out at the outer edge. */
+MATCH void BMagic_DrawGlowRingOuter(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    GFX_AddPrim(5, 0xC);
+    GLOW_RING_INNER  = g_Task->timer * 2;
+    GLOW_RING_OUTER  = g_Task->timer * 3 + (rand() & 3);
+    GLOW_RING_RED    = g_Task->unk_09 * 15;
+    GLOW_RING_GREEN  = g_Task->unk_09 * 4;
+    GLOW_RING_BLUE   = g_Task->unk_09 * 15;
+    D_1F800014[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
+    D_1F800014[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
+    D_1F800014[3].vx = FIXED_MUL(rsin(0), GLOW_RING_INNER);
+    D_1F800014[3].vy = FIXED_MUL(rcos(0), GLOW_RING_INNER);
+    D_1F800014[3].vz = 0;
+    D_1F800014[2].vz = 0;
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
+    for (i = 1; i <= 16; i++) {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[2].vx = D_1F800014[3].vx;
+        D_1F800014[2].vy = D_1F800014[3].vy;
+        D_1F800014[1].vx = FIXED_MUL(rsin(i << 8), GLOW_RING_OUTER);
+        D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_OUTER);
+        D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), GLOW_RING_INNER);
+        D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_INNER);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
+                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
+        setRGB3(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
+        GFX_AddPrim(5, 0x24);
+    }
+}
+
+/* The inner half: from the timer out to twice it, coloured at the outer edge where the outer half starts. */
+MATCH void BMagic_DrawGlowRingInner(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    GFX_AddPrim(5, 0xC);
+    GLOW_RING_INNER  = g_Task->timer;
+    GLOW_RING_OUTER  = g_Task->timer * 2;
+    GLOW_RING_RED    = g_Task->unk_09 * 15;
+    GLOW_RING_GREEN  = g_Task->unk_09 * 4;
+    GLOW_RING_BLUE   = g_Task->unk_09 * 15;
+    D_1F800014[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
+    D_1F800014[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
+    D_1F800014[3].vx = FIXED_MUL(rsin(0), GLOW_RING_INNER);
+    D_1F800014[3].vy = FIXED_MUL(rcos(0), GLOW_RING_INNER);
+    D_1F800014[3].vz = 0;
+    D_1F800014[2].vz = 0;
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
+    for (i = 1; i <= 16; i++) {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[2].vx = D_1F800014[3].vx;
+        D_1F800014[2].vy = D_1F800014[3].vy;
+        D_1F800014[1].vx = FIXED_MUL(rsin(i << 8), GLOW_RING_OUTER);
+        D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_OUTER);
+        D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), GLOW_RING_INNER);
+        D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_INNER);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
+                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB0(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
+        setRGB1(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        GFX_AddPrim(5, 0x24);
+    }
+}
 
 MATCH void func_801EFAF4(void) {
     SYS_DISPATCH_BYTE(D_801F1278, g_Task->header.step);

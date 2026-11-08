@@ -5,7 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8 g_BattleActiveBattler;
+extern u8      g_BattleActiveBattler;
+extern SVECTOR D_1F800014[];
 
 #define MAGIC151_STEP_COUNT 5
 
@@ -23,7 +24,7 @@ void                     func_801F0648(void);
 extern Callback D_801F24B8[];
 extern Callback D_801F250C[];
 void            func_801F1DC0(void);
-void            func_801F1E70(void);
-void            func_801F2188(void);
+void            BMagic_DrawGlowRingInner(void);
+void            BMagic_DrawGlowRingOuter(void);
 
 #endif

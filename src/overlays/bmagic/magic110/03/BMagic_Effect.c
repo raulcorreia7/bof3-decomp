@@ -120,7 +120,7 @@ MATCH void func_801EF7B4(void) {
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFA48();
-        func_801EFC98();
+        BMagic_DrawDarkRing();
         PopMatrix();
     }
 }
@@ -145,7 +145,17 @@ MATCH void func_801EF8C0(void) {
 
 INCLUDE_ASM(func_801EFA48);
 
-INCLUDE_ASM(func_801EFC98);
+#include "overlays/bmagic/BMagic_DarkRingQuads.h"
+
+/* func_801EFC98 */
+MATCH void BMagic_DrawDarkRing(void) {
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
+    GFX_AddPrim(2, 0xC);
+    D_1F800000.view.effect.params[0] = g_Task->unk_14;
+    D_1F800000.view.effect.params[1] = g_Task->unk_14 + 0x80;
+    D_1F800000.view.effect.params[2] = g_Task->unk_09 * 4;
+    BMAGIC_DRAW_DARK_RING_QUADS(2, 2);
+}
 
 MATCH void func_801EFFB8(void) {
     SYS_DISPATCH_BYTE(D_801F049C, g_Task->header.step);
