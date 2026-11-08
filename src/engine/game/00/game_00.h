@@ -615,9 +615,9 @@ void    func_80199308(void);
 void    Game_UpdateMenuFrame(void);
 void    func_80199398(void);
 /* func_801993F0 */
-void    Game_RunAbilityMenuFrame(void);
+void    Game_UpdateAbilityMenuFrame(void);
 /* func_80199418 */
-void    Game_RunStatusMenuFrame(void);
+void    Game_UpdateStatusMenuFrame(void);
 void    func_8019959C(void);
 void    func_801995A4(void);
 void    func_801995F8(void);

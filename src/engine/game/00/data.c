@@ -45,9 +45,9 @@ Callback g_GameShopSubstates[3] = {(Callback)Game_LoadShopOverlay, (Callback)fun
 Callback g_GameFishingSubstates[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
                                       (Callback)func_801E0C20};
 
-Callback g_MenuAbilityOpen[3] = {(Callback)Game_LoadAbilityMenu, (Callback)Game_RunAbilityMenuFrame, (Callback)Game_ReturnFromAbilityMenu};
+Callback g_MenuAbilityOpen[3] = {(Callback)Game_LoadAbilityMenu, (Callback)Game_UpdateAbilityMenuFrame, (Callback)Game_ReturnFromAbilityMenu};
 
-Callback g_MenuStatusOpen[3] = {(Callback)Game_LoadStatusMenu, (Callback)Game_RunStatusMenuFrame, (Callback)Game_ReturnFromStatusMenu};
+Callback g_MenuStatusOpen[3] = {(Callback)Game_LoadStatusMenu, (Callback)Game_UpdateStatusMenuFrame, (Callback)Game_ReturnFromStatusMenu};
 
 Callback g_GameSceneCameraSubstates[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
 

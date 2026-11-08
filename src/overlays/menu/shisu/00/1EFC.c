@@ -111,7 +111,7 @@ MATCH void func_801D3124(void) {
 }
 
 /* func_801D3164 */
-MATCH void Menu_UpdateStatusCommand(void) {
+MATCH void Menu_StatusCommandsPanel(void) {
     g_MenuStatusTask2StateFuncs[g_MenuCurrentPanel->state]();
     Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A,
                         g_MenuCurrentPanel->unk_0B, 0);

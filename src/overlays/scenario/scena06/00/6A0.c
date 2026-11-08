@@ -328,8 +328,7 @@ MATCH void Party_JoinPeco(void) {
 
 #include "overlays/scenario/Scene_JoinNina.h"
 
-/* func_801FE198 */
-MATCH void Scene_JoinGarrField(void) {
+MATCH void func_801FE198(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);

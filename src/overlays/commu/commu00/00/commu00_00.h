@@ -298,8 +298,7 @@ void func_801F1064(u8 task_index, u8 record_kind_index);
 void func_801F1110(u8 task_index, u8 record_kind_index);
 void func_801F1204(u8 task_index, u8 record_kind_index);
 void func_801F1254(u8 task_index);
-/* func_801F1294 */
-s32  Commu_StartFairyEvent(u8* active_ui);
+s32  func_801F1294(u8* active_ui);
 s32  func_801F12C8(volatile Actor* slot);
 s32  Fairy_ShowPlayRecordMessage(void);
 s32  func_801F13B8(void);

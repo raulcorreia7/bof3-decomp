@@ -570,7 +570,7 @@ void        func_801E4318(void);
 void        func_801E441C(void);
 void        func_801E45CC(void);
 /* func_801E462C */
-void        Menu_UpdateCampFrame(void);
+void        Menu_UpdateCamp(void);
 void        func_801E4670(void);
 void        func_801E46F8(void);
 void        func_801E4744(void);

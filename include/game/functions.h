@@ -149,7 +149,7 @@ s32   Actor_GetTurnStep(s32 selector);
 bool  func_801B59B4(void);
 /* Game_RewardZenny */
 /* func_801B5E58 */
-void  Game_RewardZenny(s32 cue_value);
+void  Game_RewardZenny(s32 zenny);
 /* func_801B6610 */
 bool  func_801B6610(s16 map_x, s16 map_y);
 /* func_801BC400 */

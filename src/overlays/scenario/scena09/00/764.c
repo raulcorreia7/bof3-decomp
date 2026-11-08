@@ -526,7 +526,7 @@ MATCH s32 func_801FDC1C(void) {
 INCLUDE_ASM(func_801FDC70);
 
 /* func_801FDCF4 */
-MATCH void Scene_AddNinaAdult(void) {
+MATCH void Scene_JoinAdultNinaWithGarr(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
@@ -534,7 +534,7 @@ MATCH void Scene_AddNinaAdult(void) {
 }
 
 /* func_801FDD38 */
-MATCH void Scene_AddGarr(void) {
+MATCH void Scene_JoinGarrWithNina(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
@@ -547,8 +547,7 @@ MATCH void Scene_AddGarr(void) {
 
 #include "overlays/scenario/Scene_JoinAdultNina.h"
 
-/* func_801FDE50 */
-MATCH void Scene_AddPeco(void) {
+MATCH void func_801FDE50(void) {
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_PECO);
     Party_LoadPalettes();
@@ -559,7 +558,7 @@ MATCH void Scene_AddPeco(void) {
 #include "overlays/scenario/Scene_JoinPeco.h"
 
 /* func_801FDF10 */
-MATCH void Scene_JoinMomoParty(void) {
+MATCH void Scene_JoinMomoWithPeco(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_PECO, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -569,7 +568,7 @@ MATCH void Scene_JoinMomoParty(void) {
 #include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
 
 /* func_801FE014 */
-MATCH void Scene_AddNinaAdultRei(void) {
+MATCH void Scene_JoinAdultNinaWithRei(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
@@ -577,7 +576,7 @@ MATCH void Scene_AddNinaAdultRei(void) {
 }
 
 /* func_801FE058 */
-MATCH void Scene_JoinReiNinaAdult(void) {
+MATCH void Scene_JoinReiAdultNina(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_REI);
@@ -586,7 +585,7 @@ MATCH void Scene_JoinReiNinaAdult(void) {
 }
 
 /* func_801FE0A4 */
-MATCH void Scene_AddRei(void) {
+MATCH void Scene_JoinReiWithNina(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_REI);
@@ -594,7 +593,7 @@ MATCH void Scene_AddRei(void) {
 }
 
 /* func_801FE0E8 */
-MATCH void Scene_AddRyuAdult(void) {
+MATCH void Scene_JoinRyuAdult(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_RYU_ADULT);
@@ -613,14 +612,14 @@ MATCH void Scene_RemoveReiGarr(void) {
 #include "overlays/scenario/Scene_RemoveGarr.h"
 
 /* func_801FE1AC */
-MATCH void Scene_RemoveGarrNina(void) {
+MATCH void Scene_RemoveGarrAdultNina(void) {
     Party_RemoveMember(CHAR_ID_GARR);
     Party_RemoveMember(CHAR_ID_NINA_ADULT);
     Party_LoadPalettes();
 }
 
 /* func_801FE1DC */
-MATCH void Scene_RemoveReiNina(void) {
+MATCH void Scene_RemoveReiAdultNina(void) {
     Party_RemoveMember(CHAR_ID_REI);
     Party_RemoveMember(CHAR_ID_NINA_ADULT);
     Party_LoadPalettes();

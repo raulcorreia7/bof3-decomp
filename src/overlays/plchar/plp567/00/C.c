@@ -64,7 +64,7 @@ MATCH void func_801CF51C(void) {
 }
 
 /* func_801CF560 */
-MATCH void PlChar_RequestFacingScript(void) {
+MATCH void Char_RequestFacingScript(void) {
     func_801CF944();
     Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
     g_Task->unk_0A = 0xB;

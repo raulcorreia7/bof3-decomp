@@ -428,8 +428,7 @@ MATCH void Party_JoinRyuYoung(void) {
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 
-/* func_801FD38C */
-MATCH void Scene_JoinMomo(void) {
+MATCH void func_801FD38C(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -442,8 +441,7 @@ MATCH void Scene_JoinNinaYoung(void) {
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
-/* func_801FD404 */
-MATCH void Scene_JoinPeco(void) {
+MATCH void func_801FD404(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_PECO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_PECO);
