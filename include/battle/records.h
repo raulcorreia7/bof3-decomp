@@ -384,9 +384,9 @@ typedef struct EnemyBattler {
     Stats       stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
     Stats       base;  /* +0xC0 the stats before buffs */
     u8          kind;
-    u8          fired_events;   /* +0xE1 one bit per event packet already applied */
-    s8          panel_offset_x; /* +0xE2 added to the panel's screen x, as the party's g_BattlePanelOffsets entry */
-    s8          panel_offset_y; /* +0xE3 added to the panel's screen y */
+    u8          triggered_events; /* +0xE1 one bit per event packet already applied */
+    s8          panel_offset_x;   /* +0xE2 added to the panel's screen x, as the party's g_BattlePanelOffsets entry */
+    s8          panel_offset_y;   /* +0xE3 added to the panel's screen y */
     ModeFunc    unk_E4;
     u16*        unk_E8;
     u8*         script;

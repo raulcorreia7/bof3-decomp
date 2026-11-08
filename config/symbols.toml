@@ -15,7 +15,7 @@ Battle_BuildTurnOrder = { addr = 0x801DAAE4, type = "func", source = "Builds the
 Battle_CancelTurn = { addr = 0x801DD14C, type = "func", source = "Cancels a battler's queued command and removes it from the turn order by overwriting its g_BattleTurnOrder entry with 0xFF." }
 Battle_InsertTurnFirst = { addr = 0x801DD26C, type = "func", source = "Puts battler arg0 at the head of the turn order: steps g_BattleTurnCursor back one and stores the battler there." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-Battle_FireEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and fires each one whose trigger holds, once per battle unless it is a repeating trigger." }
+Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, alias = true }
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", alias = true }
 g_BattleSelections = { addr = 0x800B65F8, alias = true }
@@ -104,7 +104,7 @@ Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 ["emi/battle/battle/15"]
 Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells whether the running ability or the attacker's weapon carries any element of the mask and the current enemy took a nonzero hp change." }
 Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
-g_BattleEnemyEvents = { addr = 0x800E407C, source = "The event packets of each enemy kind record of the encounter block, one 0x88-byte record per kind; Battle_FireEnemyEvents walks them." }
+g_BattleEnemyEvents = { addr = 0x800E407C, source = "The event packets of each enemy kind record of the encounter block, one 0x88-byte record per kind; Battle_TriggerEnemyEvents walks them." }
 D_801EB72C_rows = { addr = 0x801EB72C, alias = true, source = "enemy battler rows read through EnemyBattler fields since #495" }
 g_MenuInventoryCountFormat = { addr = 0x80096A4C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
@@ -114,9 +114,9 @@ g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder
 g_BattleTurnCount = { addr = 0x80146323, source = "Number of battlers ranked in g_BattleTurnOrder, set by Battle_BuildTurnOrder." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleWorkCell = { addr = 0x1F800044, alias = true }
-Battle_FireEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and fires each one whose trigger holds, once per battle unless it is a repeating trigger." }
-Battle_EnemyEventFired = { addr = 0x8009C868, type = "func", source = "Tells whether the event packet at an index has already fired for the enemy." }
-Battle_SetEnemyEventFired = { addr = 0x8009C87C, type = "func", source = "Sets or clears the fired bit of an event packet index for the enemy." }
+Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
+Battle_EnemyEventTriggered = { addr = 0x8009C868, type = "func", source = "Tells whether the event packet at an index has already been triggered for the enemy." }
+Battle_SetEnemyEventTriggered = { addr = 0x8009C87C, type = "func", source = "Sets or clears the triggered bit of an event packet index for the enemy." }
 Effect_ShakeScreen = { addr = 0x800A8EB8, type = "func", source = "Sets the three screen shake offsets (bytes 0x5D to 0x5F) to -16 times the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) down, clearing the effect at the wrap past zero in the shared battle effects." }
 Battle_PickRandomTarget = { addr = 0x800AB760, type = "func", source = "Picks a random selectable target for a command." }
 Battle_ArmEnemySlot = { addr = 0x800ABCE0, type = "func", source = "Sets up an enemy battler in a slot and queues its script." }
