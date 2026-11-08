@@ -29,7 +29,7 @@ segments:
       - [0xE14, c, func_801F3A14]
       - [0xE6C, c, func_801F3A6C]
       - [0xF18, c, func_801F3B18]
-      - [0xFA0, c, func_801F3BA0]
+      - [0xFA0, c, Screen_DrawTint]
       - [0x1084, c, func_801F3C84]
       - [0x1190, c, GFX_DrawShadedDisc]
       - [0x1334, c, func_801F3F34]

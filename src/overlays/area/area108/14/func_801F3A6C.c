@@ -9,6 +9,6 @@ MATCH s32 func_801F3A6C(void) {
     } else {
         g_Task->header.mode = 6;
     }
-    func_801F3BA0();
+    Screen_DrawTint();
     func_801F3C84();
 }

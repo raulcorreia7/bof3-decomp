@@ -20,7 +20,9 @@ extern u8       D_801FBF20[];
 extern Callback D_801FBF48[];
 extern Callback D_801FBF54[];
 
-void func_801F6FF8(void);
+void Screen_DrawTint(void);
+#define SCREEN_TINT_LAYER 5U
+#define SCREEN_TINT_TPAGE (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF)
 void func_801F70DC(void);
 void func_801F7568(void);
 
