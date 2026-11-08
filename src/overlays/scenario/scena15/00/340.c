@@ -1,4 +1,5 @@
 #include "scena15_00.h"
+
 #include "shared/Area_DrawScreenTint.h"
 
 #if BOF3_USE_ASM
