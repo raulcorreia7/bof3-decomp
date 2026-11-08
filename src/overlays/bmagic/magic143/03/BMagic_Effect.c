@@ -34,7 +34,7 @@ MATCH void func_801EF054(void) {
     u8* selector;
 
     g_Task->param.unk_0B++;
-    timer = g_Task->unk_09 - 1;
+    timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
         selector = &g_BattleTargetSelector;

@@ -496,13 +496,14 @@ MATCH s32 func_801FC6C4(void) {
     /* FAKE: v1 holds both constants (30 and 7) across the two stores. */
     FAKE_REG(s32, v, "v1");
     Game_SetScriptActive();
-    v = 30;
+    v          = 30;
     D_80146876 = v;
-    v = 7;
+    v          = 7;
     D_80146874 = v;
     D_80146875 = 0;
     return 0;
 }
+
 INCLUDE_ASM(func_801FC704);
 
 MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {

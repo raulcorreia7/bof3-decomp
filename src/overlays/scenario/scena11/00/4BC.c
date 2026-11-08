@@ -15,15 +15,15 @@ MATCH void func_801F70BC(void) {
 MATCH s32 func_801F7104(void) {
     s32 mode;
 
-    D_801481F8.x = 0;
-    D_801481F8.y = 0;
-    D_801481F8.z = 0;
-    D_801481E8.x = g_AreaCameraAngle.vx << 16;
-    D_801481E8.y = g_AreaCameraAngle.vy << 16;
-    D_801481E8.z = g_AreaCameraAngle.vz << 16;
+    D_801481F8.x             = 0;
+    D_801481F8.y             = 0;
+    D_801481F8.z             = 0;
+    D_801481E8.x             = g_AreaCameraAngle.vx << 16;
+    D_801481E8.y             = g_AreaCameraAngle.vy << 16;
+    D_801481E8.z             = g_AreaCameraAngle.vz << 16;
     g_AreaCameraRefreshCount = g_Task->timer;
-    mode = 1;
-    g_Task->header.mode = mode;
+    mode                     = 1;
+    g_Task->header.mode      = mode;
     return mode;
 }
 
@@ -31,8 +31,8 @@ MATCH void func_801F7178(void) {
     u16 angle;
     s16 arg;
 
-    angle = (u16)g_AreaCameraAngle.vy;
-    arg = angle + 244;
+    angle                = (u16)g_AreaCameraAngle.vy;
+    arg                  = angle + 244;
     g_AreaCameraAngle.vy = angle + 4;
     Area_AdvanceScroll(arg);
     if (g_AreaCameraAngle.vy >= 241) {
@@ -47,8 +47,8 @@ MATCH void func_801F7200(void) {
     u16 angle;
     s16 arg;
 
-    angle = (u16)g_AreaCameraAngle.vy;
-    arg = angle + 236;
+    angle                = (u16)g_AreaCameraAngle.vy;
+    arg                  = angle + 236;
     g_AreaCameraAngle.vy = angle - 4;
     Area_AdvanceScroll(arg);
     if (g_AreaCameraAngle.vy < -240) {
@@ -85,27 +85,27 @@ MATCH void func_801F7BFC(void) {
 
     state = (u8*)&D_80146875;
     switch (*state) {
-    case 0:
-        if (g_GameStateIndex == 2) {
+        case 0:
+            if (g_GameStateIndex == 2) {
+                break;
+            }
+            v               = 1;
+            g_ScriptVars[0] = v;
+            func_801BE1B0(0);
+            *state = v;
             break;
-        }
-        v = 1;
-        g_ScriptVars[0] = v;
-        func_801BE1B0(0);
-        *state = v;
-        break;
-    case 1:
-        if (g_ScriptVars[0] != 3) {
+        case 1:
+            if (g_ScriptVars[0] != 3) {
+                break;
+            }
+            SYS_SetFlag(g_SceneFlags, 5);
+            Game_ClearScriptActive();
+            D_80146865 = 0;
+            D_80146866 = 0;
+            D_80146867 = 0;
+            *state     = 0;
+            D_80146874 = 0;
             break;
-        }
-        SYS_SetFlag(g_SceneFlags, 5);
-        Game_ClearScriptActive();
-        D_80146865 = 0;
-        D_80146866 = 0;
-        D_80146867 = 0;
-        *state = 0;
-        D_80146874 = 0;
-        break;
     }
 }
 
