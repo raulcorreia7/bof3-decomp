@@ -398,7 +398,6 @@ BMagic_RunStep = { addr = 0x801EEC1C, type = "func", source = "Runs the handler 
 
 ["emi/bmagic/magic053/03"]
 BMagic_DrawDarkRing = { addr = 0x801EFA30, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 D_801EEC04 = { addr = 0x801EEC04, type = "Magic053Steps", source = "Step handlers of magic053, run by header.mode (byte 0x01) from func_801EEC10." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF9C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x10) and advances header.mode (byte 0x01) in magic053 (Lavaburst)." }
@@ -737,7 +736,6 @@ Effect_SetActorMatrix = { addr = 0x801EF14C, type = "func", source = "Sets the a
 
 ["emi/bmagic/magic096/03"]
 BMagic_DrawGlowRing = { addr = 0x801EFDF4, type = "func", source = "draws 8 additive POLY_G4 quads in a ring that grows with the effect timer (byte 0x0A), coloured at the inner edge, at the effect cell, in magic096 (Blizzard)" }
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC10 = { addr = 0x801EEC10, type = "Magic096Steps", source = "Step handlers of magic096, run by header.step (byte 0x02) from func_801EEEE4; the five Callback slots are copied to a local table first." }
 BMagic_RunStep = { addr = 0x801EEC24, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic096 (Blizzard)." }
@@ -839,7 +837,6 @@ Effect_PlayOnIdleTick = { addr = 0x801EED1C, type = "func", source = "When the e
 Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "Raises the effect timer (byte 0x09) by 8 and advances header.mode (byte 0x01) when it reaches 0x80 in magic108 (Hypnotize, Confuse)." }
 
 ["emi/bmagic/magic110/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 BMagic_DrawDarkRing = { addr = 0x801EFC98, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic110 (Ragnarok)." }
@@ -895,7 +892,6 @@ Effect_StartPaletteFade = { addr = 0x801EF06C, type = "func", source = "Frees th
 Effect_PlayOnce_801EF344 = { addr = 0x801EF344, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic117 (Rest, Douse, Snooze)." }
 
 ["emi/bmagic/magic118/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_UpdateBurn = { addr = 0x801EEC18, type = "func", source = "per-frame update of the Burn effect: runs the step handler D_801EEC04 selects, then draws the flame quads and triangles while the effect is active" }
 BMagic_SpawnBurnFlames = { addr = 0x801EECD4, type = "func", source = "starts the Burn effect: claims eight flame effect slots with Battle_AllocEffect, each pointing at the effect work record, copies a palette row with the semi-transparent bit set and queues cue 0x100" }
@@ -967,7 +963,6 @@ g_BMagicEffectModes = { addr = 0x801F05D8, source = "Handlers of magic125 (Divin
 ["emi/bmagic/magic126/03"]
 BMagic_DrawGlowRingInner = { addr = 0x801EF7A4, type = "func", source = "draws 16 additive POLY_G4 quads from the effect timer (byte 0x0A) to twice it, coloured from byte 0x09 at the outer edge, in magic126 (ShadowBreath)" }
 BMagic_DrawGlowRingOuter = { addr = 0x801EF438, type = "func", source = "draws 16 additive POLY_G4 quads from twice the effect timer (byte 0x0A) to three times it plus rand() & 3, coloured from byte 0x09 at the inner edge, in magic126 (ShadowBreath)" }
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEE70, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic126 (ShadowBreath)." }
 Effect_CopyBattlerCoords = { addr = 0x801EEFAC, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic126 (ShadowBreath)." }
@@ -1094,7 +1089,6 @@ Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "Raises BATTL
 ["emi/bmagic/magic151/03"]
 BMagic_DrawGlowRingInner = { addr = 0x801F1E70, type = "func", source = "draws 64 additive POLY_G4 quads from the effect radius (word 0x14) to 64 past it, shaded fifteen times byte 0x09 at the outer edge, in magic151 (Accession)" }
 BMagic_DrawGlowRingOuter = { addr = 0x801F2188, type = "func", source = "draws 64 additive POLY_G4 quads from 64 to 128 past the effect radius (word 0x14), shaded fifteen times byte 0x09 at the inner edge, in magic151 (Accession)" }
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC50, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic151 (Accession)." }
 Effect_StepOnZeroTick = { addr = 0x801F00B4, type = "func", source = "Advances header.step (byte 0x02) when the effect ticker (byte 0x0B) is zero in magic151 (Accession)." }
@@ -1227,7 +1221,6 @@ g_BMagicEffectModes = { addr = 0x801EFA00, source = "Handlers of magic219 (Magma
 D_801EFA04 = { addr = 0x801EFA04, source = "Step handlers of magic219, run by header.step (byte 0x02) from func_801EF068." }
 
 ["emi/bmagic/magic220/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 BMagic_DrawDarkRing = { addr = 0x801EFC40, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEEB0, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x10) and advances header.mode (byte 0x01) in magic220 (Geo Breath)." }
@@ -1241,7 +1234,6 @@ g_BMagicEffectModes = { addr = 0x801F06DC, source = "Handlers of magic220 (Geo B
 D_801F06E0 = { addr = 0x801F06E0, source = "Step handlers of magic220 (Disembowel family), run by header.step (byte 0x02) from func_801EEFBC." }
 
 ["emi/bmagic/magic222/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 BMagic_DrawDarkRing = { addr = 0x801EFACC, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic222 (Combustion)." }
@@ -1279,7 +1271,6 @@ D_801F03AC = { addr = 0x801F03AC, source = "Mode handlers of the magic225 effect
 D_801F03BC = { addr = 0x801F03BC, source = "Effect slot table of the magic225 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic226/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 BMagic_DrawDarkRing = { addr = 0x801EFA64, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF3C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x10) and advances header.mode (byte 0x01) in magic226 (MeteorStrike)." }

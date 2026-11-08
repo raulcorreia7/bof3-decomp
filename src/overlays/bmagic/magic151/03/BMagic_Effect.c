@@ -328,9 +328,9 @@ MATCH void Effect_SetActorMatrix_801F1DC0(void) {
 }
 
 /* The glow ring scratch: the inner radius, the outer radius and the shade, then the quad corners (D_1F800014). */
-#define GLOW_RING_INNER D_1F800000_HALF[1]
-#define GLOW_RING_OUTER D_1F800000_HALF[2]
-#define GLOW_RING_SHADE D_1F800000_HALF[5]
+#define GLOW_RING_INNER D_1F800000.view.effect.params[1]
+#define GLOW_RING_OUTER D_1F800000.view.effect.params[2]
+#define GLOW_RING_SHADE D_1F800000.view.effect.params[5]
 
 /* The inner half of the glow ring: a ring of 64 additive quads from the effect radius (word 0x14) out
  * to 64 past it, brightest at its outer edge. */

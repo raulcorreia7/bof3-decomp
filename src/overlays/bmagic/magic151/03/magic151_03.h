@@ -6,7 +6,6 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern u8      g_BattleActiveBattler;
-extern s16     D_1F800000_HALF[];
 extern SVECTOR D_1F800014[];
 
 #define MAGIC151_STEP_COUNT 5

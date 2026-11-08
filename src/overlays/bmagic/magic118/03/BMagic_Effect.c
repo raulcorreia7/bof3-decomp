@@ -77,9 +77,9 @@ INCLUDE_ASM(BMagic_DrawBurnSprites);
 
 /* The dark ring scratch: the inner and outer radius and the inner-edge shade, then the quad corners
  * (D_1F800014). */
-#define DARK_RING_INNER D_1F800000_HALF[1]
-#define DARK_RING_OUTER D_1F800000_HALF[2]
-#define DARK_RING_SHADE D_1F800000_HALF[5]
+#define DARK_RING_INNER D_1F800000.view.effect.params[1]
+#define DARK_RING_OUTER D_1F800000.view.effect.params[2]
+#define DARK_RING_SHADE D_1F800000.view.effect.params[5]
 
 /* A ring of 32 subtractive quads from radius 128 to 192 that darkens toward its inner edge by six times the
  * effect counter (byte 0x09), then the draw mode back to plain blending. */

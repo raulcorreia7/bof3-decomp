@@ -77,10 +77,10 @@ INCLUDE_ASM(func_801EFB3C);
 
 /* The glow ring scratch: the inner and outer radius and the inner-edge red and green, then the quad corners
  * (D_1F800014). */
-#define GLOW_RING_INNER D_1F800000_HALF[0]
-#define GLOW_RING_OUTER D_1F800000_HALF[1]
-#define GLOW_RING_RED   D_1F800000_HALF[6]
-#define GLOW_RING_GREEN D_1F800000_HALF[7]
+#define GLOW_RING_INNER D_1F800000.view.effect.params[0]
+#define GLOW_RING_OUTER D_1F800000.view.effect.params[1]
+#define GLOW_RING_RED   D_1F800000.view.effect.params[6]
+#define GLOW_RING_GREEN D_1F800000.view.effect.params[7]
 
 /* A ring of 8 additive quads around the effect position, from 16 times the effect timer (byte 0x0A) plus 16
  * out to plus 128, coloured at the inner edge and fading out. */
