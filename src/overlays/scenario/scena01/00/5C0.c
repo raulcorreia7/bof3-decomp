@@ -40,10 +40,10 @@ MATCH void func_801F7480(void) {
         func_801F7AE4();
     }
     func_801F7C54();
-    g_Task->timer = ((Actor*)g_Task)->timer + 4;
+    g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 0x20;
-        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
+        g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }
 
@@ -52,9 +52,9 @@ INCLUDE_ASM(func_801F752C);
 MATCH void func_801F75C8(void) {
     func_801F7678(g_Task->timer);
     func_801F7C54();
-    g_Task->timer = ((Actor*)g_Task)->timer - 4;
+    g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
-        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
+        g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }
 

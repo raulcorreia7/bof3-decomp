@@ -13,12 +13,12 @@ MATCH void func_801F6F40(void) {
 MATCH void func_801F6F7C(void) {
     Actor* work;
 
-    work           = (Actor*)g_Task;
+    work           = g_Task;
     work->screen_x = 640;
     work->screen_y = 1536;
     work->timer    = 0;
     Area_ClearWorkColumn();
-    ((Actor*)g_Task)->header.mode = ((Actor*)g_Task)->header.mode + 1;
+    (g_Task)->header.mode = (g_Task)->header.mode + 1;
 }
 
 MATCH void func_801F6FCC(void) {
@@ -27,10 +27,10 @@ MATCH void func_801F6FCC(void) {
         func_801F75D8();
     }
     func_801F7748();
-    g_Task->timer = ((Actor*)g_Task)->timer + 4;
+    g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 0x20;
-        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
+        g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }
 
@@ -42,16 +42,16 @@ MATCH void func_801F7078(void) {
     func_801F7748();
     if (g_ScriptVars[0] == 0x1F) {
         g_Task->timer       = 0xFC;
-        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
+        g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }
 
 MATCH void func_801F7100(void) {
     func_801F71B0(g_Task->timer);
     func_801F7748();
-    g_Task->timer = ((Actor*)g_Task)->timer - 4;
+    g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
-        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
+        g_Task->header.mode = (g_Task)->header.mode + 1;
     }
 }
 

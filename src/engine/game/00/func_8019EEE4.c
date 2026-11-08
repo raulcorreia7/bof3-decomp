@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-#define WORK ((Actor*)g_Task)
-
 MATCH u8 func_8019EEE4(void) {
     s16 distance;
     s8  slot;
@@ -22,29 +20,30 @@ MATCH u8 func_8019EEE4(void) {
     if (distance - D_80145ECE >= 0x101) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0x11) {
+    if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0x11) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0xFD) {
+    if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0xFD) {
         found = 1;
-        Area_ClearCell(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y));
+        Area_ClearCell(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
     }
-    if ((COORD_FRAC(WORK->pos.x) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0xFD) {
+    if ((COORD_FRAC(g_Task->pos.x) != 0) && !found) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y)) & BYTE_MASK) ==
+            0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y));
+            Area_ClearCell((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y));
         }
     }
-    if ((COORD_FRAC(WORK->pos.y) != 0) && !found &&
-        ((Area_GetCellCode(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
+    if ((COORD_FRAC(g_Task->pos.y) != 0) && !found &&
+        ((Area_GetCellCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
         found = 1;
-        Area_ClearCell(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1));
+        Area_ClearCell(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
     }
-    if ((COORD_FRAC(WORK->pos.x) != 0) && (COORD_FRAC(WORK->pos.y) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) &
+    if ((COORD_FRAC(g_Task->pos.x) != 0) && (COORD_FRAC(g_Task->pos.y) != 0) && !found) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) &
              BYTE_MASK) == 0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1));
+            Area_ClearCell((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         }
     }
     if (found) {

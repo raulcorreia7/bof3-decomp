@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-#define WORK ((Actor*)g_Task)
-
 MATCH void func_801A68C0(u8* script) {
     s16*   counter = (s16*)&D_1F800000;
     s16    slot;
@@ -66,15 +64,15 @@ MATCH void func_801A68C0(u8* script) {
     g_Task->tint.bytes.flags         = 2;
 
     if (D_80146900[*counter][0] == 0) {
-        Area_SetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y), 0x10);
-        if (COORD_FRAC(WORK->pos.x) != 0) {
-            Area_SetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y), 0x10);
+        Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
+        if (COORD_FRAC(g_Task->pos.x) != 0) {
+            Area_SetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y), 0x10);
         }
-        if (COORD_FRAC(WORK->pos.y) != 0) {
-            Area_SetCellCode(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1), 0x10);
+        if (COORD_FRAC(g_Task->pos.y) != 0) {
+            Area_SetCellCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
         }
-        if ((COORD_FRAC(WORK->pos.x) != 0) && (COORD_FRAC(WORK->pos.y) != 0)) {
-            Area_SetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1), 0x10);
+        if ((COORD_FRAC(g_Task->pos.x) != 0) && (COORD_FRAC(g_Task->pos.y) != 0)) {
+            Area_SetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
         }
     }
 

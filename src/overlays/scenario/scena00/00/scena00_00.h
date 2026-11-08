@@ -14,7 +14,7 @@
 #define SCN_TRI_SHADE_V1   0x6E
 #define SCN_TRI_SHADE_V2   0x64
 #define SCN_EFFECT         ((SceneEffect*)g_Task)
-#define SPAD_ROW           ((Actor*)g_Task)
+#define SPAD_ROW           g_Task
 
 #define g_PartyX           (*(u32*)&g_PartyX)
 #define g_PartyY           ((u32*)&g_PartyY)
