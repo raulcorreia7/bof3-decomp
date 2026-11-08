@@ -5,8 +5,8 @@ u32 D_801F2C00 = 0x54;
 
 /* Work-state handlers; func_801F30A8 enters the same table at its sixth entry (D_801F3F80). */
 static const Callback s_WorkStates[8] = {
-    Actor_TrackFocus, func_801F2D18, func_801F2DAC, func_801F2E64,
-    func_801F2EE4,    func_801F30EC, Actor_Reveal,  Actor_FreePaletteFades,
+    Actor_TrackFocus, func_801F2D18, func_801F2DAC, Area_ShrinkMarkerDisc,
+    Area_ClearMarker, func_801F30EC, Actor_Reveal,  Actor_FreePaletteFades,
 };
 
 /* Variable-length script records; no reader names a field, so the block stays a byte array. */
@@ -181,7 +181,8 @@ MATCH void func_801F2DAC(void) {
     }
 }
 
-MATCH void func_801F2E64(void) {
+/* func_801F2E64 */
+MATCH void Area_ShrinkMarkerDisc(void) {
     GFX_DrawShadedDisc(g_Task->screen_x, g_Task->screen_y, g_Task->timer, 0x80, 0);
     g_Task->timer -= 1;
     if ((s8)g_Task->timer < 0) {
@@ -189,7 +190,8 @@ MATCH void func_801F2E64(void) {
     }
 }
 
-MATCH void func_801F2EE4(void) {
+/* func_801F2EE4 */
+MATCH void Area_ClearMarker(void) {
     Actor_Clear();
 }
 

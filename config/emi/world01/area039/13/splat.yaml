@@ -19,11 +19,11 @@ segments:
       - [0x254, c, func_801F2E54]
       - [0x28C, c, func_801F2E8C]
       - [0x294, c, func_801F2E94]
-      - [0x29C, c, func_801F2E9C]
+      - [0x29C, c, Area_PauseBgm]
       - [0x2C4, c, func_801F2EC4]
       - [0x2EC, c, func_801F2EEC]
       - [0x30C, c, func_801F2F0C]
-      - [0x368, c, func_801F2F68]
+      - [0x368, c, Area_FadeOutSequence]
       - [0x394, c, func_801F2F94]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

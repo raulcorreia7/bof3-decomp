@@ -74,7 +74,8 @@ MATCH void func_80117BF4(void) {
     SYS_DISPATCH_BYTE(D_801181B4, TASK_BYTES[0x2]);
 }
 
-MATCH void func_80117C38(void) {
+/* func_80117C38 */
+MATCH void Scene_AdvanceState(void) {
     Scene_AdvanceActorState();
 }
 
