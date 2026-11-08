@@ -109,7 +109,7 @@ MATCH void func_801D240C(void) {
 
     D_1F800000 = RANDOM_MASK(7) + g_Task->band * 3;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
     i         = 0;
     angle_ptr = &D_1F800000;
     GFX_AddPrim(2, sizeof(DR_MODE));

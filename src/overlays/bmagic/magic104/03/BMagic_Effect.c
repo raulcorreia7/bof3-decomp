@@ -120,9 +120,9 @@ INCLUDE_ASM(func_801EFB2C);
 INCLUDE_ASM(func_801EFE34);
 
 MATCH void func_801F020C(void) {
-    GFX_AddDitheredDrawMode(4, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5);
+    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
     SYS_DISPATCH_BYTE(D_801F0900, g_Task->header.step);
-    GFX_AddDitheredDrawMode(4, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5);
+    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
 }
 
 MATCH void func_801F02F4(void) {
