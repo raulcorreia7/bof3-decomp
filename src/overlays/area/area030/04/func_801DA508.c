@@ -9,7 +9,7 @@ MATCH void func_801DA508(void) {
     record                = FISHING_STATE;
     record->step_timer_09 = (record->step_timer_09 + 1);
 
-    func_801E19CC((s16)(0x44 - FISHING_STATE->step_timer_09 * 80), 0x4E);
+    func_801E19CC((s16)(68 - FISHING_STATE->step_timer_09 * 80), 78);
 
     if (FISHING_STATE->step_timer_09 == 4) {
         SND_PlayCue(EMI_CUE_ID(1, 2));

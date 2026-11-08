@@ -8,9 +8,9 @@ MATCH void func_801D6B28(s8 panel_kind) {
 
     Area_AddActor();
     func_801E0C80(0, 1);
-    func_801E0DCC(0x15, 1, 0x32, 0x96);
-    func_801E0DCC(0x16, 1, 0xBC, 0x96);
-    func_801E0DCC(0x11, 1, 0x36, 0x9C);
+    func_801E0DCC(0x15, 1, 50, 150);
+    func_801E0DCC(0x16, 1, 188, 150);
+    func_801E0DCC(0x11, 1, 54, 156);
 
     {
         FishingState* work;
@@ -20,13 +20,13 @@ MATCH void func_801D6B28(s8 panel_kind) {
 
         work   = (FishingState*)TASK_BYTES;
         value  = work->pos_x_0C;
-        left_x = (value < 0x39) ? 0x39 : ((value >= 0x7A) ? 0x79 : value);
+        left_x = (value < 57) ? 57 : ((value >= 122) ? 121 : value);
 
         shown          = (FishingState*)TASK_BYTES;
         work->pos_x_0C = left_x;
 
         value   = shown->cursor_10;
-        right_x = (value < 0x41) ? 0x41 : ((value >= 0x95) ? 0x94 : value);
+        right_x = (value < 65) ? 65 : ((value >= 149) ? 148 : value);
 
         pair             = (FishingState*)TASK_BYTES;
         shown->cursor_10 = right_x;

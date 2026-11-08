@@ -97,7 +97,7 @@ NON_MATCHING void func_801DC93C(void) {
                 } else {
                     color = D_800100DE;
                 block_39:
-                    UI_DrawText(0x1D, 0x14, 0, 0xFFU, color + FISHING_TEXT_BANK);
+                    UI_DrawText(29, 20, 0, 0xFFU, color + FISHING_TEXT_BANK);
                 }
                 break;
             case 0:
@@ -107,7 +107,7 @@ NON_MATCHING void func_801DC93C(void) {
                 color = D_800100C0;
                 goto block_39; /* shared selection join */
         }
-        Menu_DrawCursorSprite((D_80144286 * 0x30) + 0x58, 0x2EU, 0);
+        Menu_DrawCursorSprite((D_80144286 * 48) + 88, 46U, 0);
     }
 }
 #else

@@ -13,7 +13,7 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
     s16      y;
     s16      base;
 
-    func_801D1744((panel_x + 0x58), (panel_y + 8), 4);
+    func_801D1744((panel_x + 88), (panel_y + 8), 4);
 
     if (g_ActorSlots[0].header.mode == 0) {
         y = panel_y;
@@ -22,7 +22,7 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
     }
     base = panel_y;
     CLAMP_MIN(y, base);
-    x = (panel_x + 0x59);
+    x = (panel_x + 89);
     func_801D1818(x, y, 4);
 
     primitive = (POLY_F4*)g_GfxPrimCursor;
@@ -38,10 +38,10 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
     GFX_AddPrim(4, 0x18);
 
     if (g_ActorSlots[0].header.mode == 4) {
-        y = 0xB4;
+        y = 180;
         if (COORD_INT(g_ActorSlots[0].pos.z) <= 0) {
-            y = 0xB4 - COORD_INT(g_ActorSlots[0].pos.z) / 32;
+            y = 180 - COORD_INT(g_ActorSlots[0].pos.z) / 32;
         }
-        func_801D18CC((panel_x + 0x69), y, 2);
+        func_801D18CC((panel_x + 105), y, 2);
     }
 }

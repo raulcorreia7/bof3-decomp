@@ -15,11 +15,11 @@ MATCH void func_801D5398(void) {
     if (D_80145E93[0] >= 3) {
         mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
     }
-    func_801D7C10(0x58, 0x28, mask);
+    func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 
     work                = FISHING_STATE;
     work->step_timer_09 = (u8)(work->step_timer_09 - 1);
-    func_801D72E4(0x27, (s16)(FISHING_STATE->step_timer_09 * 0x3C + 0x40));
+    func_801D72E4(39, (s16)(FISHING_STATE->step_timer_09 * 60 + 64));
 
     if (FISHING_STATE->step_timer_09 == 0) {
         index                            = Actor_FindFreeSlot() & BYTE_MASK;

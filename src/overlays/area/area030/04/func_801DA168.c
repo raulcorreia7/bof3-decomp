@@ -10,7 +10,7 @@ MATCH void func_801DA168(void) {
     FishingState* work;
 
     pad = &g_InputPressed;
-    func_801E1758(0x6C, 0x56);
+    func_801E1758(108, 86);
 
     if ((*pad & (PADLup | PADLdown)) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
@@ -29,8 +29,8 @@ MATCH void func_801DA168(void) {
         work->sub_index_03 = (work->sub_index_03 + 1);
     }
 
-    Menu_DrawCursorSprite(0x70, (0x82 - FISHING_STATE->cue_index_06 * 0x10) & 0xFFFE, 0);
+    Menu_DrawCursorSprite(112, (130 - FISHING_STATE->cue_index_06 * 16) & 0xFFFE, 0);
     func_801E16DC();
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(0x1D, 0x15, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_80010080));
+    UI_DrawText(29, 21, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_80010080));
 }
