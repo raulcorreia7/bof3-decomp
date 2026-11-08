@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801DE8C0 */
-MATCH void BattleStageSelectionRingRecord(s8 index, s8 record_kind, u8* text) {
+MATCH void Battle_AddMessage(s8 index, s8 record_kind, u8* text) {
     u8  i;
     int off;
 

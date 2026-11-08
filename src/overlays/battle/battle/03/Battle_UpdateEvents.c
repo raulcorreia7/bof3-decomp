@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801DE43C */
-MATCH void Battle_RunEvents(void) {
+MATCH void Battle_UpdateEvents(void) {
     BattleEventSteps handlers;
     u8               group;
     s8               event_slot;

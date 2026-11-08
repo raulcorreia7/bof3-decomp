@@ -36,7 +36,7 @@
  * Both battle overlays declare g_BattleEnemyBattlers as EnemyBattler and read the same
  * table, so this is one record: the union of both overlays' halves.
  *
- * The cells from +0x06 to +0x5F are the ones the slot setup (Battle_ArmEnemySlot
+ * The cells from +0x06 to +0x5F are the ones the slot setup (Battle_InitEnemy
  * and Battle_AddEnemy) clears when it arms an enemy slot; their widths follow
  * those accesses. No reader names them yet, so they keep the address names. */
 
@@ -97,9 +97,9 @@ ASSERT_OFFSET(BattleAction, unk_08, 0x08);
  *   emi/etc/game/00 func_801C6BB4   writes the encounter position at +0x04
  *                                    and +0x08
  *   emi/battle/battle/15 func_800ABC30 reads all three and hands the id, the
- *                                    x and the y to Battle_ArmEnemySlot
+ *                                    x and the y to Battle_InitEnemy
  *
- * The id is the index of one 0x88-byte enemy record (Battle_ArmEnemySlot reads
+ * The id is the index of one 0x88-byte enemy record (Battle_InitEnemy reads
  * &D_800E405E + id * 0x88), so +0x01 is that index and 0xFF means none. */
 typedef struct EncounterEnemy {
     u8       active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
@@ -343,7 +343,7 @@ typedef struct EnemyBattler {
     TaskHeader  header; /* 0x00 */
     u8          unk_03;
     u8          unk_04;
-    u8          slot;   /* +0x05 battler slot; Battle_ArmEnemySlot stores slot + 3 here */
+    u8          slot;   /* +0x05 battler slot; Battle_InitEnemy stores slot + 3 here */
     u8          unk_06; /* +0x06 cleared when the slot is armed */
     u8          unk_07; /* +0x07 cleared when the slot is armed */
     u8          unk_08; /* +0x08 the battle index with its low bit flipped */

@@ -20,7 +20,7 @@ MATCH s32 func_800AA7A0(u8 slot) {
     sub = func_800AA8A4(slot);
     if (sub == 0) {
         random_range = 2;
-        return rand() % random_range == 0;
+        return RANDOM_MOD(random_range) == 0;
     }
     return 0;
 }

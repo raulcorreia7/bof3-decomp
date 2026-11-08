@@ -15,7 +15,7 @@ segments:
       - [0x7C, c, func_801EEC7C]
       - [0x2B8, c, func_801EEEB8]
       - [0x310, c, func_801EEF10]
-      - [0x4A8, c, Battle_RunGameOver]
+      - [0x4A8, c, Battle_UpdateGameOver]
       - [0x580, c, func_801EF180]
       - [0x718, c, func_801EF318]
       - [0x7B4, c, func_801EF3B4]

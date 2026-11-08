@@ -29,7 +29,7 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction) {
         if (damage < -0x33)
             band = 8;
         damage <<= 8;
-        damage += (ENEMY_COMBATANT(attacker).level << 8) * (((rand() % 2) + 2) << 8) /
+        damage += (ENEMY_COMBATANT(attacker).level << 8) * (((RANDOM_MOD(2)) + 2) << 8) /
                   (s_BattleDamageBandDivisors[band & BYTE_MASK] << 8);
         damage >>= 8;
         damage += RANDOM_MASK(1);

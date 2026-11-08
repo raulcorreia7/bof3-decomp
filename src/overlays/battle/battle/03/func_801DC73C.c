@@ -47,7 +47,7 @@ enemy:
 
 after_enemy:
     threshold = D_801EC303;
-    if (threshold >= rand() % 100) {
+    if (threshold >= RANDOM_PERCENT()) {
         /* threshold passed: clear the status instead */
         goto clear;
     }

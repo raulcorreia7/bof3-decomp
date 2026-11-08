@@ -129,7 +129,7 @@ typedef struct DropChances {
 /* The battle panel's own 0x24-stride entry table at 0x80148332: the base
  * symbol is the table's first byte, so its fields start at +0. */
 typedef struct BattlePanel {
-    u8  mode_00;    /* +0x00 panel mode; Battle_ReserveStagePanels writes 5 and 7 */
+    u8  mode_00;    /* +0x00 panel mode; Battle_OpenPanels writes 5 and 7 */
     u8  unk_01;     /* +0x01 */
     s16 x_02;       /* +0x02 panel x */
     s16 y_04;       /* +0x04 panel y */
@@ -606,9 +606,9 @@ void         Battle_DispatchStep(void);
 extern void  func_801D1228(void);
 /* func_801D17C4 */
 void         Battle_DispatchEntrance(void);
-extern void  Battle_ReserveStagePanels(void);
+extern void  Battle_OpenPanels(void);
 /* func_801D1AB4 */
-void         Battle_WaitUIMode(void);
+void         Battle_WaitForUI(void);
 /* func_801D1AE8 */
 void         Battle_InitPanels(void);
 /* func_801D1B94 */
@@ -625,12 +625,12 @@ extern void  func_801D24D4(void);
 extern void  func_801D251C(void);
 extern void  func_801D25A0(void);
 /* func_801D2740 */
-extern void  Battle_RunTurnSetup(void);
+extern void  Battle_UpdateTurnSetup(void);
 extern void  func_801D277C(void);
 extern void  func_801D28E8(void);
 extern void  func_801D2A24(void);
 /* func_801D2AA8 */
-extern void  Battle_RunTurns(void);
+extern void  Battle_UpdateTurns(void);
 extern void  func_801D2B1C(void);
 extern void  func_801D2B58(void);
 extern void  func_801D2FC0(void);
@@ -661,7 +661,7 @@ extern void  func_801D42B4(void);
 extern void  func_801D43EC(void);
 void         func_801D4850(void);
 /* func_801D4AC0 */
-extern void  Battle_RunRoundEnd(void);
+extern void  Battle_UpdateRoundEnd(void);
 extern void  func_801D4AFC(void);
 extern void  func_801D4B38(void);
 void         func_801D4D44(void);
@@ -677,12 +677,12 @@ u8           func_801D5DCC(void);
 u8           func_801D64C4(u8 battler_index);
 extern void  func_801D656C(void);
 /* func_801D6774 */
-extern void  Battle_RunResult(void);
+extern void  Battle_UpdateResult(void);
 extern void  func_801D67B0(void);
 extern void  func_801D67EC(void);
 extern void  func_801D6818(void);
 /* func_801D6A14 */
-extern void  Battle_StreamEndOverlay(void);
+extern void  Battle_LoadEndOverlay(void);
 extern void  func_801D6C84(void);
 extern void  func_801D6CC0(void);
 extern void  func_801D6D90(void);
@@ -758,7 +758,7 @@ u8           func_801DDE7C(u32 counter_index, u32 packed_value);
 u8           func_801DDF50(u16 entry_id, u32 table_kind);
 void         func_801DE1D4(void);
 /* func_801DE43C */
-void         Battle_RunEvents(void);
+void         Battle_UpdateEvents(void);
 void         func_801DE60C(u32 slot, u8 action_kind, u8 arg2, u8 arg3, u8 arg4, u8* payload);
 void         func_801DE690(void);
 extern void  func_801DE698(void);
@@ -767,16 +767,16 @@ void         func_801DE7FC(void);
 void         func_801DE804(void);
 u8           func_801DE858(s8 event_kind);
 /* func_801DE8C0 */
-void         BattleStageSelectionRingRecord(s8 index, s8 record_kind, u8* text);
+void         Battle_AddMessage(s8 index, s8 record_kind, u8* text);
 u8           func_801DE92C(void);
 void         Battle_SetTextPartyName(u32 party_slot);
 void         Battle_SetTextEnemyName(u32 enemy_index);
 /* func_801DEA64 */
-void         BattleStageMessageResource(s32 message_slot);
+void         Battle_ShowMessage(s32 message_slot);
 void         func_801DEAE0(void);
 void         func_801DEBC4(u32 script_index, u32 event_index);
 /* func_801DECE0 */
-void         Battle_RunParty(void);
+void         Battle_UpdateParty(void);
 /* func_801DED54 */
 void         Battle_UpdatePartyActors(void);
 u8           func_801DEDE4(void);
@@ -844,7 +844,7 @@ extern void  func_801E1EC0(void);
 extern void  func_801E2024(void);
 extern void  func_801E2120(void);
 /* func_801E2170 */
-void         Battle_RunEnemies(void);
+void         Battle_UpdateEnemies(void);
 /* func_801E2284 */
 void         Battle_UpdateEnemyActors(void);
 void         func_801E25E0(u8 arg0);
@@ -914,7 +914,7 @@ void         Battle_RollEnemyDrops(void);
 void         func_801E5768(void);
 void         func_801E57C8(void);
 /* func_801E5824 */
-void         Battle_RunEffects(void);
+void         Battle_UpdateEffects(void);
 extern void  func_801E5AEC(void);
 void         func_801E5AF4(void);
 extern void  func_801E5B8C(void);
