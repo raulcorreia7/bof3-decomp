@@ -491,18 +491,8 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
-MATCH s32 func_801FC6C4(void) {
-    /* FAKE: retail holds both constants in v1; plain stores pick v0. */
-    FAKE_REG(s32, value, "v1");
-
-    Game_SetScriptActive();
-    value                 = 30;
-    g_SceneState.timer_06 = value;
-    value                 = 7;
-    g_SceneState.state_04 = value;
-    g_SceneState.step_05  = 0;
-    return 0;
-}
+/* blocker: both constants need v1; first diff: li v1,30 at 0x801FC6D4. */
+INCLUDE_ASM(func_801FC6C4);
 
 INCLUDE_ASM(func_801FC704);
 
