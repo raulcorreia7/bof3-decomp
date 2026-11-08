@@ -16,6 +16,10 @@ INCLUDE_ASM(func_801EED48);
 /* func_801EF11C */
 #include "overlays/bmagic/Effect_NextStep.h"
 
+MATCH void Effect_NextStep(void) {
+    BMagic_AdvanceEffectStep(1);
+}
+
 INCLUDE_ASM(func_801EF160);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
