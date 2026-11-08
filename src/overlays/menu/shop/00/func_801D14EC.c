@@ -1,27 +1,26 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried untested-head loop (call in the test), store orders, base+index operand order, u32
- * index copies, an s16 view of x (+1.2, li -0x96). resume: MenuPanelTask.x as s16 (shared type change) and a register
- * choice that keeps the 8i temp in a0, so the loop-exit delay slot stays nop. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D14EC(void) {
-    MenuPanelTask* panel;
-    u8             i;
-    u8*            step;
+MATCH void func_801D14EC(void) {
+    u8  i;
+    u8* step;
 
     if (D_801E6058 != 0) {
+        MenuPanelTask* panel;
+
+        /* FAKE: an unset panel live at the loop head fixes retail's temp registers; pure C best 73 differing rows. */
+        MATCH_FAKE_USE(panel);
         i = 0;
         while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
-            panel          = &g_MenuPanelTasks[i + 3];
-            panel->pos.y   = i * 54 + 62;
-            panel->unk_0A  = i;
-            panel->pos.x   = -150;
-            panel->active  = 1;
-            panel->handler = 7;
-            panel->mode    = 5;
-            panel->state   = 2;
-            panel->unk_0B  = 0;
-            panel->unk_0C  = 0;
+            panel             = &g_MenuPanelTasks[i + 3];
+            panel->unk_0A     = i;
+            LOH(panel->pos.x) = -150;
+            panel->pos.y      = i * 54 + 62;
+            panel->active     = 1;
+            panel->handler    = 7;
+            panel->mode       = 5;
+            panel->state      = 2;
+            panel->unk_0B     = 0;
+            panel->unk_0C     = 0;
             i++;
         }
     }
@@ -38,6 +37,3 @@ NON_MATCHING void func_801D14EC(void) {
     step             = &D_80148652;
     (*step)++;
 }
-#else
-INCLUDE_ASM(func_801D14EC);
-#endif
