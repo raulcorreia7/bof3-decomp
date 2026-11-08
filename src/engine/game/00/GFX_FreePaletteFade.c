@@ -4,15 +4,15 @@ MATCH void GFX_FreePaletteFade(u8 index) {
     PaletteOwner* target;
     u8            saved;
 
-    if ((D_80145BD4[index].flags & PALETTE_FADE_ACTIVE) == 0u) {
+    if ((g_PaletteFades[index].flags & PALETTE_FADE_ACTIVE) == 0u) {
         return;
     }
-    if ((D_80145BD4[index].flags & 0x80u) != 0u) {
-        D_80145BD4[index].target->flags &= 0xFBu;
+    if ((g_PaletteFades[index].flags & 0x80u) != 0u) {
+        g_PaletteFades[index].target->flags &= 0xFBu;
     }
-    target                  = D_80145BD4[index].target;
-    saved                   = D_80145BD4[index].saved_byte;
-    D_80145BD4[index].flags = 0u;
-    target->saved_byte      = saved;
-    GFX_MarkPaletteCells(D_80145BD4[index].table_index, index, 0u);
+    target                      = g_PaletteFades[index].target;
+    saved                       = g_PaletteFades[index].saved_byte;
+    g_PaletteFades[index].flags = 0u;
+    target->saved_byte          = saved;
+    GFX_MarkPaletteCells(g_PaletteFades[index].table_index, index, 0u);
 }

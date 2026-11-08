@@ -9,9 +9,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC88);
 
 MATCH void func_801EEE70(void) {
-    D_80145BD6[g_Task->timer].red_offset--;
-    D_80145BD6[g_Task->timer].green_offset--;
-    D_80145BD6[g_Task->timer].blue_offset--;
+    g_PaletteFades[g_Task->timer].offset.red--;
+    g_PaletteFades[g_Task->timer].offset.green--;
+    g_PaletteFades[g_Task->timer].offset.blue--;
     if (--g_Task->unk_09 == 0) {
         func_800A9610(g_BattleTargetSelector, 16);
         g_Task->header.mode++;

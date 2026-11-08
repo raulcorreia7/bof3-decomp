@@ -11,9 +11,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EED0C);
 
 MATCH void func_801EEE20(void) {
-    D_80145BD6[MAGIC010_TASK->timer].red_offset--;
-    D_80145BD6[MAGIC010_TASK->timer].green_offset--;
-    D_80145BD6[MAGIC010_TASK->timer].blue_offset--;
+    g_PaletteFades[MAGIC010_TASK->timer].offset.red--;
+    g_PaletteFades[MAGIC010_TASK->timer].offset.green--;
+    g_PaletteFades[MAGIC010_TASK->timer].offset.blue--;
     if (--MAGIC010_TASK->unk_09 == 0) {
         GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);

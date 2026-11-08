@@ -10,8 +10,8 @@ MATCH void GFX_ResetPaletteFades(void) {
     u8  column;
     u8* map;
 
-    for (entry = 0; entry < GRAPHICS_PALETTE_FADE_COUNT; entry++) {
-        D_80145BD4[entry].flags = 0;
+    for (entry = 0; entry < PALETTE_FADE_COUNT; entry++) {
+        g_PaletteFades[entry].flags = 0;
     }
 
     for (row = 0; row < 4; row++) {

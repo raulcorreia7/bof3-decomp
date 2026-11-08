@@ -21,7 +21,7 @@ void  Actor_Create(u8* request);
 /* func_8019625C */
 void  func_8019625C(void);
 /* func_8019651C */
-s32   GFX_AllocPaletteFade(void* target, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
+s32   GFX_AllocPaletteFade(void* target, s32 red, s32 green, s32 blue, s32 flag_value);
 /* func_80196670 */
 void  GFX_FreePaletteFade(u8 index);
 /* func_80196718 */
