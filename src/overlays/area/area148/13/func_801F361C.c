@@ -7,7 +7,7 @@ MATCH void func_801F361C(void) {
     if (SYS_TestFlag(g_SceneEventFlags, 0x5A) != 0) {
         arg0                  = 0;
         arg1                  = -2;
-        (g_Task)->screen_y    = 0x80;
+        (g_Task)->screen_y    = 128;
         (g_Task)->header.step = 3;
     } else {
         (g_Task)->screen_y = 0;

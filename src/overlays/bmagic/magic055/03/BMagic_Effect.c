@@ -32,7 +32,7 @@ MATCH void func_801EECCC(void) {
     i   = 1;
     dst = MEM_PTR(u16, 0x8003AC02u);
     src = MEM_PTR(u16, 0x80036C02u);
-    for (; i < 0x10; i++) {
+    for (; i < 16; i++) {
         *dst++ = *src++ | 0x8000;
     }
     *MEM_PTR(u16, 0x8003AC00u) = 0;

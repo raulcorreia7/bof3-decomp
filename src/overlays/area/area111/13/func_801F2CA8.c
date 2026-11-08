@@ -5,7 +5,7 @@ MATCH void func_801F2CA8(void) {
 
     work->timer    = 0x28;
     work->screen_x = 0;
-    work->screen_y = 0x100;
+    work->screen_y = 256;
     g_Task->header.mode++;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x06));
 }

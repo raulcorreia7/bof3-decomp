@@ -1,4 +1,4 @@
-/* Scrolls the actor screen origin to y 0xF0 and advances its state. One
+/* Scrolls the actor screen origin to y 240 and advances its state. One
  * definition shared by the world area overlays; every change here must verify
  * every member. */
 /* func_801F3594 (area152), func_801F3604 (area033), func_801F3640 (area151), func_801F36D0 (area016), func_801F36D0
@@ -10,7 +10,7 @@ MATCH void Actor_SetScreenBottom(void) {
     if (D_801454F2 == 0 || g_Task->param.unk_0B == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE && GAME_SCRIPT_ACTIVE() == 0) {
             work           = g_Task;
-            work->screen_y = 0xF0;
+            work->screen_y = 240;
             work->unk_03++;
         }
     }

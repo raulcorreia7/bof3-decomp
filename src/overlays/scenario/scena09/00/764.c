@@ -30,7 +30,7 @@ MATCH void func_801F7574(void) {
     u8  i;
 
     row = MEM_PTR(u8, 0x800E5000u) + g_Task->unk_06 * 0x500;
-    for (i = 0; i < 0x20; i++, row += 0x28) {
+    for (i = 0; i < 32; i++, row += 40) {
         *row = 0;
     }
 }

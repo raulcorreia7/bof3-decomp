@@ -21,7 +21,7 @@ MATCH void func_801EEC18(void) {
             g_BattleEffectBattler = saved;
         }
         count += 1;
-    } while ((u8)count < 0x60);
+    } while ((u8)count < 96);
 }
 
 INCLUDE_ASM(func_801EECF8);
@@ -131,7 +131,7 @@ INCLUDE_ASM(func_801F0220);
 MATCH u32 func_801F0354(void) {
     u8 index;
 
-    for (index = 0u; index < 0x60; index++) {
+    for (index = 0u; index < 96; index++) {
         if ((D_801F0454[index << 5] & 1) == 0) {
             D_801F0454[index << 5] |= 1;
             return index;
