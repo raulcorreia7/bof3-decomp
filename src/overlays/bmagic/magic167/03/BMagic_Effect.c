@@ -76,7 +76,7 @@ MATCH void func_801EFACC(void) {
     g_Task->param.unk_0B += 2;
     g_Task->unk_09 += 1;
     timer = g_Task->timer;
-    if (timer < 0x10U) {
+    if (timer < 16U) {
         g_Task->timer = timer + 1;
     }
     if (g_Task->unk_09 == 0x18) {
