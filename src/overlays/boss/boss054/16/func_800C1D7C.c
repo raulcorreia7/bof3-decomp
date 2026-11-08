@@ -1,7 +1,7 @@
 #include "boss054_16.h"
 
 MATCH void func_800C1D7C(void) {
-    Boss054EffectSteps handlers;
+    BossEffect054Steps handlers;
 
     handlers = D_800C182C;
     handlers.steps[((PartyBattler*)g_Task)->header.step]();

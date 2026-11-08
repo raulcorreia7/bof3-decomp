@@ -19,11 +19,11 @@ extern Boss054Funcs D_800C1804;
 
 #define BOSS054_EFFECT_STEP_COUNT 3
 
-typedef struct Boss054EffectSteps {
+typedef struct BossEffect054Steps {
     Callback steps[BOSS054_EFFECT_STEP_COUNT];
-} Boss054EffectSteps;
+} BossEffect054Steps;
 
-extern Boss054EffectSteps D_800C182C;
+extern BossEffect054Steps D_800C182C;
 extern u8                 D_800C2078[];
 extern u16                D_800C2084[];
 extern Callback           D_800C2090[];
