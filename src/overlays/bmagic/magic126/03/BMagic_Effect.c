@@ -271,7 +271,7 @@ INCLUDE_ASM(func_801F0ED0);
 MATCH u32 func_801F1110(void) {
     u8 index;
 
-    for (index = 0u; index < 0x80; index++) {
+    for (index = 0u; index < 128; index++) {
         if ((D_801F12BC[index << 5] & 1) == 0) {
             D_801F12BC[index << 5] |= 1;
             return index;

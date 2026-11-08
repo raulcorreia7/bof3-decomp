@@ -36,7 +36,7 @@ MATCH void func_801EF140(void) {
         g_Task->unk_09 = count + 1;
     }
     timer = g_Task->timer;
-    if (timer != 0x10) {
+    if (timer != 16) {
         g_Task->timer = timer + 2;
     }
     if (COORD_INT(g_Task->pos.z) == COORD_INT(BATTLE_ACTIVE_WORK->pos.z)) {
