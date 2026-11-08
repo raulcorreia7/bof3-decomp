@@ -9,7 +9,6 @@
 #include "work/area_spad.h"
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
-#define AREA_WALK_LIMIT_TABLE D_801F4400
 /* The field step bytes the palette path tests. */
 /* The request value blob the selection handlers index. */
 /* The request value tables indexed by the selection byte. */

@@ -36,6 +36,5 @@ void func_801F34CC(void);
 void Area_Update(void);
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP Area_DrawHud
 
 #endif

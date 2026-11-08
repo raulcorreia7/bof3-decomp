@@ -41,7 +41,6 @@ void func_801F5380(void);
 void func_801F5B90(void);
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP Area_DrawHud
 
 s32 func_801A79A4(s32, s32);
 

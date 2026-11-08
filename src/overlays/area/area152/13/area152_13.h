@@ -30,7 +30,6 @@ extern u8       D_801F4E20[];
 extern u8       D_801F4E21[];
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F4DEC[6];
 #define AREA_HUD_MASK_TABLE D_801F4DEC
