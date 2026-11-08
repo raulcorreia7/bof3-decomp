@@ -41,6 +41,6 @@ void func_801F2FE0(void);
 /* The focus-point projection and the frame step the handlers enter. */
 void func_801F30A0(void);
 /* The draw step that reads the three-word work position. */
-void func_801F3FDC(u32* pos);
+void Area_DrawLightPillar(s32* pos);
 
 #endif

@@ -7,5 +7,5 @@ MATCH void func_801F3D28(void) {
     pos[0] = work->pos.x.fixed;
     pos[1] = work->pos.y.fixed;
     pos[2] = work->pos.z.fixed;
-    func_801F3D70(pos);
+    Area_DrawLightPillar(pos);
 }

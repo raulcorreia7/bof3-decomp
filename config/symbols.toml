@@ -3189,6 +3189,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 Actor_RunAreaStep = { addr = 0x801F2C30, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F2DF0, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world00/area037/13"]
 g_MasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
@@ -3304,6 +3305,7 @@ Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "Sets g_Me
 Actor_RunAreaStep = { addr = 0x801F2D5C, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2E80, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F3014, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F30A8, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world01/area060/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3539,6 +3541,7 @@ Area_AddCameraOffsetY4 = { addr = 0x801F3630, type = "func", source = "Adds 4 to
 Area_SubCameraOffsetY4 = { addr = 0x801F3658, type = "func", source = "Subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F3680, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Actor_SnapToGround = { addr = 0x801F3CDC, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F3D70, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world02/area102/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3602,6 +3605,7 @@ Actor_RunAreaStep = { addr = 0x801F3638, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F366C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Message_SelectAnswer = { addr = 0x801F3870, type = "func", source = "Sets g_MessageRequest to 0x14 when g_MessageChoice is nonzero, otherwise to 0x13." }
 Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F3EEC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world02/area113/13"]
@@ -3640,6 +3644,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F2F78, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world03/area117/13"]
 Message_ClearRequest = { addr = 0x801F3FB0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
@@ -3763,6 +3768,7 @@ Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the wor
 Message_ShowParty = { addr = 0x801F3C74, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Script_SkipInstructionForSlot7 = { addr = 0x801F3D38, type = "func", source = "Adds 3 to the script cursor when g_GameState leader_id is CHAR_ID_RYU_ADULT." }
 Actor_SnapToGround = { addr = 0x801F3F48, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F3FDC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F52FC, size = 0xC, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
 ["emi/world03/area144/13"]
@@ -3777,6 +3783,7 @@ g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and mess
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_RunAreaStep = { addr = 0x801F2C34, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Actor_SnapToGround = { addr = 0x801F2DD4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+Area_DrawLightPillar = { addr = 0x801F2E68, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 
 ["emi/world03/area147/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }

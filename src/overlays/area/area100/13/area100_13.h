@@ -13,6 +13,6 @@ extern u8 D_801F4F68[];
 
 void func_801F2D60(void*);
 void func_801F31E8(Point3DL* pos, s32 vz);
-void func_801F3D70(void*);
+void Area_DrawLightPillar(s32* pos);
 
 #endif
