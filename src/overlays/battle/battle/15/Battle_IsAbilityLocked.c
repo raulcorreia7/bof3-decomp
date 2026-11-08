@@ -3,7 +3,8 @@
 /* reports whether the current character may select the kind stored in
  * the active selection-scratch entry.
  */
-MATCH bool func_80097574(void) {
+/* func_80097574 */
+MATCH bool Battle_IsAbilityLocked(void) {
     u8* slot = (u8*)&D_80148656;
     u8* entry;
 

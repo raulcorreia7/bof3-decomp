@@ -25,6 +25,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, alias = true }
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", alias = true }
+Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", alias = true }
 g_BattleSelections = { addr = 0x800B65F8, alias = true }
 g_BattleActionType_nv = { addr = 0x80146375, alias = true }
 g_BattlePhases = { addr = 0x801D0C04, source = "Battle mode handlers, one per battle mode." }
@@ -109,6 +110,16 @@ g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (str
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 
 ["emi/battle/battle/15"]
+Battle_IsAbilityLocked = { addr = 0x80097574, type = "func", source = "returns true when the selected ability cannot be used in battle" }
+Battle_HalveDamage = { addr = 0x8009F320, type = "func", source = "sets the damage-halved action flag on the current target" }
+Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the reprisal damage flag on the active battler" }
+Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
+Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
+Battle_LoadDraArchive = { addr = 0x800A4700, type = "func", source = "Loads the BATL_DRA archive when no choice phase is pending and advances ui_state; step 0 of the D_800B4CAC battle UI step table. The archive's job is not proven, so the name keeps the disc label." }
+Battle_StartAbilityPose = { addr = 0x800A581C, type = "func", source = "Step 2 of the ability panel step table D_800B4D00: plays common cue 4, sets D_80148627 to 2 and COMBATANT_FLAG_ABILITY_ALT_POSE on the active row, and advances ui_state." }
+Battle_LoadScriptedEncounter = { addr = 0x800ABBE0, type = "func", source = "Loads the encounter enemies with Battle_LoadEncounterEnemies and runs the setup handler D_800B5108[g_Battle.encounter]; func_800ABBA4 calls it when BATTLE_IS_SCRIPTED and func_800ABC30 otherwise." }
+Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
+Battle_DrawInventoryPanel = { addr = 0x800B2104, type = "func", source = "runs the panel state handler and draws the inventory window" }
 Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells whether the running ability or the attacker's weapon carries any element of the mask and the current enemy took a nonzero hp change." }
 Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
 Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
@@ -1635,6 +1646,8 @@ g_MenuFormationOrder = { addr = 0x801D0D18, source = "Starting member order of t
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D5C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (g_MenuStep.step) through g_MenuBateStates." }
+Menu_ResetPanels = { addr = 0x801D0E04, type = "func", source = "resets menu panel tasks and advances the game entry substate" }
+Menu_StartFadeIn = { addr = 0x801D0EB0, type = "func", source = "sets fast fade-in mode and advances the menu step state" }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D2F64, type = "func", source = "Draws the equipment panel of character record_index in the Bate menu: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
@@ -1801,8 +1814,11 @@ Game_FinishCameraLook = { addr = 0x801981D4, type = "func", source = "Ends the c
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
 Game_CallAreaHandler = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table D_801C86F8 and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenarioHandler." }
 UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
+Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task mode FIELD_TASK_MODE_LEADER_SWITCH (slot 3 of D_801CD0AC): runs the leader-switch step table D_801CD0FC, which Game_RequestLeaderSwitch starts" }
+Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
 Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
+Actor_Move = { addr = 0x801C57B4, source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
 Area_PickEncounter = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
 Area_RollEncounterEnemies = { addr = 0x801C6AEC, type = "func", source = "Copies the 8 enemy ids of the chosen encounter into the encounter list and keeps each by a random roll against its spawn chance in s_EntitySpawnChances; returns how many stayed. Called by Area_BuildEncounter." }
@@ -2195,6 +2211,8 @@ D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu d
 g_SaveSlotLevelFormat = { addr = 0x801D0E44, source = "Format of the level on a save slot row." }
 g_SaveSlotTimeFormat = { addr = 0x801D0E48, source = "Format of the play time on a save slot row: hours and minutes." }
 g_SaveSlotTimeColon = { addr = 0x801D0E54, source = "The colon drawn between the hours and minutes of a save slot row." }
+Shop_StartFadeIn = { addr = 0x801DE3C8, type = "func", source = "Starts the fast UI fade in once the window effect is idle and advances the shop step state; Menu_StartFadeIn does the same in the Bate menu." }
+Shop_DrawCuePanel = { addr = 0x801E4DF4, type = "func", source = "draws the shop cue text panel window and frame" }
 g_SaveSlotFrameSprites = { addr = 0x801E5738, source = "Sprite run of a save slot row frame." }
 g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory; the start overlay uses the same address as SAVE_IMAGE_ADDR." }
 g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
@@ -2381,6 +2399,8 @@ Menu_DrawHeaderBar = { addr = 0x801D1E54, type = "func", source = "Draws the win
 Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
 Menu_UpdateMaster = { addr = 0x801D25D8, type = "func", source = "Runs the g_MasterMenuStates handler selected by the panel step byte g_MenuMasterStep; the game overlay runs it each frame." }
+Master_StartOffer = { addr = 0x801D27C8, type = "func", source = "starts the master skill offer message in the sisyou menu" }
+Master_StartFarewell = { addr = 0x801D2B64, source = "Starts the master's farewell message (g_MenuMasterMessageIds + MASTER_MESSAGE_FAREWELL) once and moves the master menu to step 6; the last entry of g_MenuMasterStep2Funcs, which starts with Master_StartOffer." }
 Menu_ApplyMasterMode = { addr = 0x801D3ED0, type = "func", source = "Writes the actor mode g_MenuMasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel." }
 g_MenuLabelPower = { addr = 0x801D4038, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D403C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
@@ -2409,6 +2429,9 @@ g_SaveSlotLevelFormat = { addr = 0x801D0DAC, source = "Format of the level on a 
 g_SaveSlotTimeFormat = { addr = 0x801D0DB0, source = "Format of the play time on a save slot row: hours and minutes." }
 g_SaveSlotTimeColon = { addr = 0x801D0DBC, source = "The colon drawn between the hours and minutes of a save slot row." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
+Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "runs the current camp substate handler and draws the area scene in the start menu" }
+Item_Revive = { addr = 0x801E8270, source = "Item effect that revives a character: sets the field or party record's HP to 1 and clears status 0x4000 through Char_ClearStatus; returns 3 when Char_ClearStatus returns 0, else 0." }
+Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears poison status from all field party members in the start menu item effects" }
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
 g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
@@ -3570,6 +3593,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world02/area077/14"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 GFX_AddBlendDrawMode = { addr = 0x801F3198, type = "func", source = "Adds a draw mode for the given blend mode on the texture page at VRAM 960,0 (GetTPage, GFX_AddDrawMode); called by func_801F36E8 before it draws a 64x64 area effect." }
+Actor_InitSlot = { addr = 0x801F61F0, type = "func", source = "finds a free actor slot and sets its flags and type (called by func_801F6084 and func_801F60A4)" }
 Area_DrawSpinTriangle = { addr = 0x801F47C8, type = "func", source = "Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin." }
 Area_InitSpin = { addr = 0x801F4A68, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
 Message_SetAnswerMessage = { addr = 0x801F59DC, type = "func", source = "Stores the message id the answer table D_801F6B1C holds for the menu choice g_MessageChoice in g_MessageRequest." }
@@ -3601,6 +3625,7 @@ Area_ClearWorkColumn = { addr = 0x801F3910, type = "func", source = "Zeroes byte
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area085/13"]
+Actor_FreePalette = { addr = 0x801F3BA4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area198." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_DrawScreenTint = { addr = 0x801F2ED8, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Actor_FreePaletteFades = { addr = 0x801F36B4, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
@@ -4653,6 +4678,7 @@ g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Tag and mess
 ["emi/world04/area198/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F2E5C, type = "func", source = "Starts an actor script from the area table." }
+Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area085." }
 Area_FreePaletteOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
 
@@ -5361,6 +5387,8 @@ Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area ma
 Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }
 Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
 Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
+Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
+UI_DrawTextRows = { addr = 0x8015A170, source = "Draws each row of the message window up to g_MessageWindow.last_row through UI_DrawTextAt, carrying the text cursor from row to row." }
 UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
@@ -5375,6 +5403,7 @@ Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "Tests a scene
 Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene event flag." }
 Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
 Game_IsScenarioAtLeast = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
+func_8015B83C = { addr = 0x8015B83C, type = "func", source = "Entry of the script condition table data_8018214C: tests bit **cursor of the D_80145548 mask, whose owner is not proven." }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
@@ -6201,7 +6230,10 @@ Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "Adds 2 to
 Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the scene event state." }
 
 ["emi/battle/batl_end/00"]
+Battle_WaitVictoryLoad = { addr = 0x801EEFCC, type = "func", source = "Last substate of ui_step 0 of the battle victory overlay (D_801F0CA4): waits for EMI_IsReady after func_801EECD0 requested the member archive, then resets the row cursor and ui_state and advances ui_step." }
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
+Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny reward of the battle victory screen: formats g_Zenny with TEXT_Format and draws the amount and its caption; the second entry of the table in func_801F097C." }
 
 ["emi/battle/batl_ovr/00"]
+Battle_StartGameOver = { addr = 0x801EEC40, type = "func", source = "Step 0 of the BATL_OVR (battle defeat) step table that ends in Battle_UpdateGameOver: sets UI mode 0x13, copies palette 0x1A and advances ui_step." }
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }

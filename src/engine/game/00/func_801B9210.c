@@ -34,7 +34,7 @@ MATCH void func_801B9210(void) {
         } else {
             func_801C24D0();
             g_Task->timer--;
-            func_801C57B4();
+            Actor_Move();
         }
     } else {
         Actor_ClearVelocity();

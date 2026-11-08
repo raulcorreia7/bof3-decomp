@@ -4,7 +4,8 @@
  * selected entry's flags_04: the local battler record while the
  * local count g_Battle.active_battler is under 3, otherwise the enemy battler row.
  */
-MATCH void func_8009F320(void) {
+/* func_8009F320 */
+MATCH void Battle_HalveDamage(void) {
     func_800A3F28();
 
     if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {

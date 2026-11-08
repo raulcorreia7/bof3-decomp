@@ -128,7 +128,7 @@ Callback g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT] = {
 };
 
 Callback g_MenuMasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT] = {
-    func_801D27C8, func_801D282C, func_801D28B0, func_801D29C8, func_801D2A4C, func_801D2B64,
+    Master_StartOffer, func_801D282C, func_801D28B0, func_801D29C8, func_801D2A4C, Master_StartFarewell,
 };
 
 Callback g_MenuMasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT] = {

@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH s32 func_801E8270(s32 character_index, s32 record_index) {
+/* func_801E8270 */
+MATCH s32 Item_Revive(s32 character_index, s32 record_index) {
     Character* rec;
 
     if ((record_index & BYTE_MASK) == 0) {
