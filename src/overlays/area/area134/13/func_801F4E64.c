@@ -1,7 +1,7 @@
 #include "area134_13.h"
 
 MATCH void func_801F4E64(s32* center, s32 radius) {
-    u8  scratch[0x20];
+    u8  scratch[32];
     s32 i;
     s32 index;
 

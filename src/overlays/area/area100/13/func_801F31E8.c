@@ -6,7 +6,7 @@ MATCH void func_801F31E8(Point3DL* pos, s32 height) {
     DVECTOR  inner;
     DVECTOR  outer;
     s32      point[3];
-    u8       camera[0x50];
+    u8       camera[80];
     POLY_G4* prim;
     s32      angle;
     s32      shade;
