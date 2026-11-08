@@ -2,27 +2,27 @@
 
 /* Previews equipping item_id in a slot: copies the party record, sets the slot,
  * rebuilds the stats on the copy and returns the four stat values with a flag
- * each (3 lower, 2 higher, 0 equal).
+ * each (EquipPreviewChange).
  */
 /* func_80164D2C */
 MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values) {
     Character  preview;
-    u16*       before[4];
-    u16*       after[4];
+    u16*       before[EQUIP_PREVIEW_STAT_COUNT];
+    u16*       after[EQUIP_PREVIEW_STAT_COUNT];
     Character* character;
     u8         i;
     s32        j;
 
-    character = &g_Characters[character_id];
-    before[0] = &character->stats.power;
-    before[1] = &character->stats.defense;
-    before[2] = &character->stats.intellect;
-    before[3] = &character->stats.agility;
-    after[0]  = &preview.stats.power;
-    after[1]  = &preview.stats.defense;
-    after[2]  = &preview.stats.intellect;
-    after[3]  = &preview.stats.agility;
-    preview   = *character;
+    character                       = &g_Characters[character_id];
+    before[EQUIP_PREVIEW_POWER]     = &character->stats.power;
+    before[EQUIP_PREVIEW_DEFENSE]   = &character->stats.defense;
+    before[EQUIP_PREVIEW_INTELLECT] = &character->stats.intellect;
+    before[EQUIP_PREVIEW_AGILITY]   = &character->stats.agility;
+    after[EQUIP_PREVIEW_POWER]      = &preview.stats.power;
+    after[EQUIP_PREVIEW_DEFENSE]    = &preview.stats.defense;
+    after[EQUIP_PREVIEW_INTELLECT]  = &preview.stats.intellect;
+    after[EQUIP_PREVIEW_AGILITY]    = &preview.stats.agility;
+    preview                         = *character;
     switch (slot) {
         case EQUIP_SLOT_WEAPON:
             preview.equip.weapon = item_id;
@@ -44,13 +44,13 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
             break;
     }
     Char_RebuildStats(&preview);
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < EQUIP_PREVIEW_STAT_COUNT; i++) {
         j         = i & BYTE_MASK;
         flags[j]  = 0;
         values[j] = *after[j];
         if (*before[j] < *after[j])
-            flags[j] = 3;
+            flags[j] = EQUIP_PREVIEW_HIGHER;
         if (*before[j] > *after[j])
-            flags[j] = 2;
+            flags[j] = EQUIP_PREVIEW_LOWER;
     }
 }

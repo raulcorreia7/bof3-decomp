@@ -585,7 +585,7 @@ u16  Item_GetPrice(s32 category, s32 item_id);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
 void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
-void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 equip_slot, u8 item_id);
+void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id);
 void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */
 void Menu_DrawInventoryWindow(MenuPanelTask* arg0);
