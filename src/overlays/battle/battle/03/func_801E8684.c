@@ -46,13 +46,13 @@ NON_MATCHING void func_801E8684(void) {
     temp_v1_126                                  = temp_a0_112->slot * BATTLE_PARTY_STRIDE;
     *(&D_80145FB4 + temp_v1_126)                 = *(&D_80145FB4 + temp_v1_126) | 0x2000;
     temp_v0_135                                  = temp_a0_112->slot;
-    *(D_801EC364 + (temp_v0_135 * 0x78))         = *(u8*)&g_EncounterParty[temp_v0_135].x;
+    g_BattleEffects[temp_v0_135].pos.x           = g_EncounterParty[temp_v0_135].x;
     temp_v0_147                                  = temp_a0_112->slot;
-    *(D_801EC368 + (temp_v0_147 * 0x78))         = *(u8*)&g_EncounterParty[temp_v0_147].y;
-    temp_v0_163                                  = temp_a0_112->slot * 0x78;
+    g_BattleEffects[temp_v0_147].pos.y           = g_EncounterParty[temp_v0_147].y;
+    temp_v0_163                                  = temp_a0_112->slot;
     temp_a1_173                                  = g_Task;
-    *(D_801EC36C + (temp_a1_173->slot * 0x78)) =
-        Area_SampleHeight(*(D_801EC364 + temp_v0_163), *(D_801EC368 + temp_v0_163)) << 0x10;
+    g_BattleEffects[temp_a1_173->slot].pos.z.fixed =
+        Area_SampleHeight(g_BattleEffects[temp_v0_163].pos.x.fixed, g_BattleEffects[temp_v0_163].pos.y.fixed) << 0x10;
     temp_a0_187 = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
     temp_v1_190 = g_BattlePartyBattlers[temp_a1_173->slot].chr.level;
     if ((temp_v1_190 == 7) || (temp_v1_190 == 0)) {

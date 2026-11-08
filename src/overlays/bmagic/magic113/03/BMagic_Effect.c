@@ -20,7 +20,7 @@ MATCH void func_801EF000(void) {
         g_BattleEffects[slot].header.mode      = 1;
         g_BattleEffects[slot].target.party     = work;
         facing                                 = g_BattleEffectBattler->facing;
-        g_BattleEffects[slot].unk_09           = 0;
+        g_BattleEffects[slot].arg.unk_09       = 0;
         g_BattleEffects[slot].unk_0A           = 0;
         g_BattleEffects[slot].unk_08           = (facing + 2) & 3;
         g_BattleEffects[slot].pos.x            = g_Task->pos.x;

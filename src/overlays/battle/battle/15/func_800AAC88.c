@@ -10,7 +10,7 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
 
     action_slot = Battle_AllocEffect(0, 1);
 
-    D_801EC33B[action_slot * BATTLE_EFFECT_STRIDE] = 0;
+    g_BattleEffects[action_slot].unk_0B = 0;
 
     if (battler_index < 3u) {
         g_BattleEffects[action_slot].target.party = &g_BattlePartyBattlers[battler_index];
@@ -21,31 +21,31 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
     }
 
     if (amount < 0) {
-        *(u32*)(D_801EC390 + action_slot * BATTLE_EFFECT_STRIDE) = ABS(amount);
-        D_801EC357[action_slot * BATTLE_EFFECT_STRIDE]           = 6u;
+        g_BattleEffects[action_slot].word_60.target_index = ABS(amount);
+        g_BattleEffects[action_slot].unk_27               = 6u;
     } else {
-        *(u32*)(D_801EC390 + action_slot * BATTLE_EFFECT_STRIDE) = amount;
-        D_801EC357[action_slot * BATTLE_EFFECT_STRIDE]           = 0u;
+        g_BattleEffects[action_slot].word_60.target_index = amount;
+        g_BattleEffects[action_slot].unk_27               = 0u;
     }
 
     if (!(target_flags & BATTLE_HIT_HP)) {
-        D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 4u;
+        g_BattleEffects[action_slot].unk_07 = 4u;
         return;
     }
     if (!(target_flags & BATTLE_HIT_HP_LANDED)) {
         if (target_flags & BATTLE_HIT_HP_MAX) {
-            D_801EC357[action_slot * BATTLE_EFFECT_STRIDE] = 6u;
-            D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 2u;
+            g_BattleEffects[action_slot].unk_27 = 6u;
+            g_BattleEffects[action_slot].unk_07 = 2u;
             return;
         }
     }
     if (amount != 0) {
-        D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 0u;
+        g_BattleEffects[action_slot].unk_07 = 0u;
         return;
     }
     if (!(target_flags & BATTLE_HIT_HP_LANDED)) {
-        D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 3u;
+        g_BattleEffects[action_slot].unk_07 = 3u;
         return;
     }
-    D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 0u;
+    g_BattleEffects[action_slot].unk_07 = 0u;
 }

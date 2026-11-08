@@ -8,12 +8,13 @@
 #define EFFECT_TICK_INCREMENT 1
 #define EFFECT_TICK_LIMIT     0xC0
 
-extern u8 D_801EC338[];
-
+/* Column views of g_BattleEffects: func_801EEC5C stores through them because
+ * member stores let the D_8014637C load move above the target store. */
+extern u8       D_801EC338[];
 extern u8       D_801EC364[];
 extern u8       D_801EC368[];
 extern u8       D_801EC36C[];
-/* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
+extern u8       D_801EC3A4[];
 extern Callback D_801F048C[];
 
 void func_801EED40(void);

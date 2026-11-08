@@ -20,7 +20,7 @@ MATCH void func_801EEEA0(void) {
         slot                               = Battle_AllocEffect(1, 0x48) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].unk_04       = 4;
-        g_BattleEffects[slot].unk_09       = 0x18;
+        g_BattleEffects[slot].arg.unk_09   = 0x18;
         g_BattleEffects[slot].unk_0A       = 4;
         g_BattleEffects[slot].target.party = work;
         g_Task->param.unk_0B += 1;

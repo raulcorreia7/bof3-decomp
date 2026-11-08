@@ -7,7 +7,7 @@ MATCH void func_801DDAF0(void) {
 
     index                               = Battle_AllocEffect(0u, 6u) & BYTE_MASK;
     work_a                              = g_Task;
-    g_BattleEffects[index].unk_09       = 0u;
+    g_BattleEffects[index].arg.unk_09   = 0u;
     work_b                              = g_Task;
     g_BattleEffects[index].target.party = work_a;
     g_BattleEffects[index].pos.x        = work_b->pos.x;

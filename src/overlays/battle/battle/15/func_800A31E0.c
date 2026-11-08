@@ -42,7 +42,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
         acc = &g_BattlePendingStatus;
         *acc |= STATUS_CONFUSED;
         func_801DDFEC(selection_kind);
-        D_801EC339[selection_kind * 0x78] = 0;
+        g_BattleEffects[selection_kind].arg.sway = 0;
         if (selection_kind < 3) {
             g_BattlePartyBattlers[selection_kind].turn.command.type = 0;
             g_BattlePartyBattlers[selection_kind].turn.damage_flags.volatile_value &= ~2;
