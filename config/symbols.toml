@@ -3,6 +3,7 @@
 # reads. Every other symbol file is generated from this file.
 
 ["emi/battle/battle/03"]
+s_BattleBattlerTemplateTails = { addr = 0x801EC048, alias = true, source = "row 0 turn.action_flags of s_BattleBattlerTemplates (+0x128); the tail global folded into the PartyBattler rows in #503" }
 g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it." }
 g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back." }
 g_BattleTurnCount = { addr = 0x80146323, source = "Number of battlers ranked in g_BattleTurnOrder, set by Battle_BuildTurnOrder." }
@@ -101,6 +102,7 @@ g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (str
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 
 ["emi/battle/battle/15"]
+D_801EB72C_rows = { addr = 0x801EB72C, alias = true, source = "enemy battler rows read through EnemyBattler fields since #495" }
 g_MenuInventoryCountFormat = { addr = 0x80096A4C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 g_MenuInventoryTitles = { addr = 0x800B6E88, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
@@ -1718,6 +1720,9 @@ func_801D0C10 = { addr = 0x801D0C10, type = "func", source = "Entry of the commu
 g_Commu05States = { addr = 0x801D1950, source = "the 3 step handlers of the commu05 scene, called by func_801D0C10 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 
 ["emi/etc/game/00"]
+D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, folded into that table in #400" }
+D_801CD459 = { addr = 0x801CD459, alias = true, source = "s_CameraScrollDeltas +0x1, the y half of the first GameDelta pair (#379)" }
+D_801CD5BD = { addr = 0x801CD5BD, alias = true, source = "s_EntitySpawnOffsets +0x1, the y half of the first GameDelta pair (#379)" }
 # Readable names live in the owning headers
 # (src/engine/game/00/game_00.h); a row exists only for a type:func
 # boundary or a sized data-table label.
