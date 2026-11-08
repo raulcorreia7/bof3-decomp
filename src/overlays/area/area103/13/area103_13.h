@@ -9,7 +9,7 @@
 
 void      func_801F482C(void);
 void      func_801F49A0(s32 arg);
-void      func_801F4E70(s32 arg);
+void      func_801F4E70(s32 frame);
 extern u8 D_801F5934[];
 extern u8 D_801F5948[];
 extern u8 D_801F5954[];

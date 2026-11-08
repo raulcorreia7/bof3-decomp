@@ -1,14 +1,14 @@
 #include "area103_13.h"
 
-MATCH void func_801F4E70(s32 arg) {
-    RECT r;
+MATCH void func_801F4E70(s32 frame) {
+    RECT rect;
     s32  idx;
 
-    idx = arg * 2;
-    r.x = D_801F5A14[idx] + 0x240;
-    r.y = D_801F5A15[idx] + 0x100;
-    r.w = 0x20;
-    r.h = 0x40;
-    SetDrawMove(g_GfxPrimCursor, &r, (TASK_BYTES[0xB] * 3) * 16 + 0x240, 0x100);
-    GFX_AddPrim(6, 0x18);
+    idx    = frame * 2;
+    rect.x = D_801F5A14[idx] + 576;
+    rect.y = D_801F5A15[idx] + 256;
+    rect.w = 32;
+    rect.h = 64;
+    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, g_Task->param.unk_0B * 48 + 576, 256);
+    GFX_AddPrim(6, 24);
 }

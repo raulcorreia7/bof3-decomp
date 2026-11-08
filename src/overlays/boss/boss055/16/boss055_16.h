@@ -9,7 +9,6 @@
 /* The scratchpad work area is a PartyMember record in this image. */
 #define g_Task ((PartyMember*)g_Task)
 
-extern s8 D_80146875;
 #include "overlays/battle/battle.h"
 
 /* The ten script ids a phase starts, picked by the word at D_801463BE. */
@@ -30,16 +29,11 @@ extern Callback       D_800C35A4[];
 extern Callback       D_800C35AC[];
 extern Callback       D_800C35B4[];
 extern Callback       D_800C35CC[];
-extern Callback       D_800C35D8[];
 extern Callback       D_800C35EC[];
 extern Callback       D_800C35F8[];
-extern u8             D_80146375;
 extern u16            D_801463BE;
-extern u16            D_801463C0;
-extern u8             D_801CA718[];
 /* D_801EB630 */
 
-void func_800C227C(void);
 void func_800C238C(u8 arg0, u8 arg1);
 void func_800C2780(void);
 void func_800C27E8(void);
@@ -55,6 +49,9 @@ void func_800C2ECC(void);
 void func_800C2FA4(void);
 void func_800C3284(void);
 
+void func_800C227C(void);
 void func_800C2340(u8 arg0, u8 index, u8 value);
+
+extern Callback D_800C35D8[];
 
 #endif

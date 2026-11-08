@@ -1,8 +1,8 @@
 #include "boss055_16.h"
 
 MATCH void func_800C20A4(void) {
-    ((Callback*)D_800C35D8)[TASK_BYTES[2]]();
-    if ((TASK_BYTES[1] == 8) && (TASK_BYTES[2] < 3)) {
+    D_800C35D8[g_Task->header.step]();
+    if (g_Task->header.mode == 8 && g_Task->header.step < 3) {
         func_800C227C();
     }
 }
