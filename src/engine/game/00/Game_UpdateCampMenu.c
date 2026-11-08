@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Game_RunCampMenuLoop(void) {
+MATCH void Game_UpdateCampMenu(void) {
     const Callback* callbacks;
 
     g_GameEntryState    = 0u;

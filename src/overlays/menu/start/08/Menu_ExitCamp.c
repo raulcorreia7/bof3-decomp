@@ -14,7 +14,7 @@ MATCH void Menu_ExitCamp(void) {
             g_GameEntrySubstate = 0;
             (*count)++;
         } else {
-            CallbackReplace(Game_RunMainLoop);
+            CallbackReplace(Game_UpdateMain);
         }
         D_80148652 = 0;
         D_80148653 = 0;

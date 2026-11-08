@@ -1,9 +1,9 @@
 #include "game_00.h"
 
-MATCH void Game_RunFieldState(void) {
+MATCH void Game_UpdateField(void) {
     u32* counter;
 
-    Game_RunScenarioEntry();
+    Game_UpdateScenario();
     Area_RunFrame();
 
     switch (g_GameStateIndex) {

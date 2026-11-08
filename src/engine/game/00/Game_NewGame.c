@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Game_ResetGameState(void) {
+MATCH void Game_NewGame(void) {
     u16 area_id;
     u16 world_flags;
     u32 entry_x;

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Game_RunAreaLoadState(void) {
+MATCH void Game_UpdateAreaLoad(void) {
     u16 context_seed;
     u32 context_a;
     u32 context_b;

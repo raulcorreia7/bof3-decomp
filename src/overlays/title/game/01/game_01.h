@@ -39,7 +39,7 @@ extern const u16    D_801D1C70;
 extern const u16    D_801D1C72;
 extern const u16    D_801D1C74;
 
-void Game_RunTitle(void);
+void Game_UpdateTitle(void);
 void Game_BeginTitle(void);
 void Game_WaitTitleFade(void);
 void Game_AdvanceTitleFade(void);
