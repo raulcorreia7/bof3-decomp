@@ -113,7 +113,8 @@ typedef struct ActorSlot {
     u8         unk_27;       /* 0x27 */
     u8         unk_28;       /* 0x28 */
     u8         unk_29;       /* 0x29 cleared when the slot is rebuilt */
-    u8         pad_2A[4];    /* 0x2A-0x2D */
+    u8         pad_2A[2];    /* 0x2A-0x2B */
+    u16        unk_2C;       /* 0x2C */
     s16        unk_2E;       /* 0x2E */
     u16        unk_30;       /* 0x30 */
     u8         pad_32[2];    /* 0x32-0x33 */
@@ -129,6 +130,7 @@ ASSERT_SIZE(ActorSlot, ACTOR_SLOT_SIZE);
 ASSERT_OFFSET(ActorSlot, header, 0x00);
 ASSERT_OFFSET(ActorSlot, type, 0x05);
 ASSERT_OFFSET(ActorSlot, layer, 0x09);
+ASSERT_OFFSET(ActorSlot, unk_2C, 0x2C);
 ASSERT_OFFSET(ActorSlot, scene_step, 0x0C);
 ASSERT_OFFSET(ActorSlot, selection, 0x10);
 ASSERT_OFFSET(ActorSlot, pos, 0x34);
