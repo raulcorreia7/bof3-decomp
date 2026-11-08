@@ -109,15 +109,15 @@ void Boss_EndBattle3(void);
 
 /* The ending hooks of both sets send each live party battler into its ending pose: KO'd battlers
  * take the down script, the rest the stand script for their facing. */
-#define BOSS_SEND_PARTY_TO_ENDING_POSE(n)                                                          \
-    if (g_Game.members[n].header.flags & 1) {                                                      \
-        Battle_CancelTurn(g_Game.members[n].slot);                                                 \
-        TASK_SET(&g_Game.members[n]);                                                              \
-        if (g_Game.members[n].chr.status & STATUS_KO) {                                            \
-            Actor_SwitchScript(g_Game.members[n].facing + 0x1C, MEM_PTR(u8, 0x800F0800u), 0x1800); \
-        } else {                                                                                   \
-            Actor_SwitchScript(g_Game.members[n].facing + 4, MEM_PTR(u8, 0x800F0800u), 0x1800);    \
-        }                                                                                          \
+#define BOSS_SEND_PARTY_TO_ENDING_POSE(n)                                                                 \
+    if (g_Game.members[n].header.flags & 1) {                                                             \
+        Battle_CancelTurn(g_Game.members[n].slot);                                                        \
+        TASK_SET(&g_Game.members[n]);                                                                     \
+        if (g_Game.members[n].chr.status & STATUS_KO) {                                                   \
+            Actor_SwitchScript(g_Game.members[n].facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800); \
+        } else {                                                                                          \
+            Actor_SwitchScript(g_Game.members[n].facing + 4, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);    \
+        }                                                                                                 \
     }
 
 /* Finishes the boss's defeat: adds the battle reward, shows the task again and parks it in mode 3.

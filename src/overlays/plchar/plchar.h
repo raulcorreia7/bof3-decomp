@@ -84,6 +84,8 @@
  * (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing
  * script. The body of every Char_FaceFreeDirection; each passes its two functions. Every change here must verify
  * every member image. */
+/* Char_FaceFreeDirection (plp016 0x801CF7B4, plp026 0x801CFBD8, plp056 0x801CF9DC, plp267 0x801CEEB0, plp467
+ * 0x801CE8D4, plp567 0x801CECB4, plp678 0x801CE6B8) */
 #define CHAR_FACE_FREE_DIRECTION(CHECK, PREPARE)                                \
     u8 direction;                                                               \
                                                                                 \

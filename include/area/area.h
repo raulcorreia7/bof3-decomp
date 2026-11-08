@@ -271,7 +271,7 @@ ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
  * the block through `g_ScriptBank`: `section = u32[bank + 4*lhu(work+0x2C)]`,
  * `record = bank + section + u16[bank + section + 2*lbu(work+0x4B)]`, stored to
- * `work+0x50`. The battle overlays swap `0x800F0800` in for the duration of a
+ * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_BANK` in for the duration of a
  * battle handler. */
 typedef struct AreaScriptBank {
     u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */

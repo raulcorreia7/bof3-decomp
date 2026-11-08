@@ -51,18 +51,18 @@ found:
         kind  = rec[0x13C];
         flags = g_Characters[kind].status;
         if ((flags & 0x4000) != 0) {
-            Actor_StageScriptRecord(rec[0x4B], 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
+            Actor_StageScriptRecord(rec[0x4B], 0, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0xA00);
             g_Task->param.unk_0B = 0;
         } else {
             sel = rec[0x08];
             if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_Battle.scroll_dir]) {
                 if (rec[0x0B] != 0) {
-                    Actor_StageScriptRecord(sel, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
+                    Actor_StageScriptRecord(sel, 0, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0xA00);
                     g_Task->param.unk_0B = 0;
                 }
             } else {
                 rec[0x08] = (sel + rec[0x0B]) & 7;
-                Actor_StageScriptRecord(g_Task->direction_08, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
+                Actor_StageScriptRecord(g_Task->direction_08, 0, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0xA00);
             }
             func_8014D978();
         }
