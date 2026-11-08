@@ -74,8 +74,8 @@ NON_MATCHING void func_801F4768(void) {
         q3->vx   = x_high;
         q3->vy   = y_high;
 
-        RotTransPers4(quad, q1, q2, q3, (long*)((u8*)primitive + 8), (long*)((u8*)primitive + 0x10),
-                      (long*)((u8*)primitive + 0x18), (long*)((u8*)primitive + 0x20), &depth, &flag);
+        RotTransPers4(quad, q1, q2, q3, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2,
+                      (long*)&primitive->x3, &depth, &flag);
 
         func_80155560((u32)width | 0xBB509100u, primitive, 1);
         GFX_AddPrim(4, 0x28);
