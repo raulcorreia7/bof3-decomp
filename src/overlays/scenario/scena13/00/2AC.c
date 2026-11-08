@@ -317,9 +317,7 @@ MATCH void func_801FB3DC(void) {
 
 MATCH void func_801FB414(void) {
     SYS_SetFlag(g_SceneFlags, 28);
-    Game_SetScriptActive();
-    g_SceneEventMode      = 44;
-    g_SceneEventStep      = 0;
+    Scene_StartEvent(44, 0);
     g_SceneEventSelection = 17;
 }
 

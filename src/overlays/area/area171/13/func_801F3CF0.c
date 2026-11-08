@@ -28,9 +28,7 @@ MATCH s32 func_801F3CF0(s32 x, s32 y) {
                 }
             }
             if (D_1F800000.view.raw[0] != 0) {
-                Game_SetScriptActive();
-                g_SceneEventMode = 0x30;
-                g_SceneEventStep = 0x14;
+                Scene_StartEvent(0x30, 0x14);
             }
         }
     }

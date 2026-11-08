@@ -7,9 +7,7 @@ MATCH void func_801F3D4C(void) {
         message = 4;
     } else {
         if (g_MessageChoice == 1) {
-            Game_SetScriptActive();
-            g_SceneEventMode = 0x29;
-            g_SceneEventStep = 0;
+            Scene_StartEvent(0x29, 0);
         }
         message = 0xFFFF;
     }

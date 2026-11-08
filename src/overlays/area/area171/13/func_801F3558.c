@@ -19,8 +19,6 @@ MATCH void func_801F3558(void) {
     }
 
     if (g_BattlePartyBattlers[0].chr.character_id == 7) {
-        Game_SetScriptActive();
-        g_SceneEventMode = 0x30;
-        g_SceneEventStep = 0xA;
+        Scene_StartEvent(0x30, 0xA);
     }
 }

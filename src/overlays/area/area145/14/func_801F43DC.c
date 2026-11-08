@@ -3,9 +3,7 @@
 MATCH s32 func_801F43DC(s32 entry_x, s32 entry_y) {
     if ((D_80143F03 == 0) && (entry_y == TO_COORD(9) + COORD_HALF) && (((entry_x >> 0x10) - 27) < 2U) &&
         (((u16)D_80145EC6 - 0x1B) < 2U)) {
-        Game_SetScriptActive();
-        g_SceneEventMode = 0x14;
-        g_SceneEventStep = 0x19;
+        Scene_StartEvent(0x14, 0x19);
         return 1;
     }
     if (D_80143F03 == 4) {

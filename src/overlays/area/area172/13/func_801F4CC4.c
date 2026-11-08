@@ -7,9 +7,7 @@ MATCH s32 func_801F4CC4(s32 x, s32 y) {
     if (D_80143F03 == 0) {
         if (x == TO_COORD(36) + COORD_HALF && ((y >> 16) - 53) < 3U &&
             ((g_BattlePartyBattlers[0].facing - 6) < 2U || g_BattlePartyBattlers[0].facing == FACING_UP_LEFT)) {
-            Game_SetScriptActive();
-            g_SceneEventMode = 0x23;
-            g_SceneEventStep = 0;
+            Scene_StartEvent(0x23, 0);
             return 1;
         }
     }
