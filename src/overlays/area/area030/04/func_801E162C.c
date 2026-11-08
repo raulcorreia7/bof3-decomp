@@ -7,7 +7,7 @@ MATCH void func_801E162C(s16 cell_x, s16 cell_y, u16 icon_index) {
     func_801E0DCC(0xC, 1, cell_x, cell_y);
 
     if (icon_index != 0xFFFF) {
-        UI_DrawText((cell_x + 0xA), (cell_y + 8), 0, 0xFF,
+        UI_DrawText((cell_x + 10), (cell_y + 8), 0, 0xFF,
                     (u8*)(*(u16*)((u8*)MEM_PTR(const volatile u16, 0x80010000u) + icon_index * 2) + 0x80010000u));
     }
 }

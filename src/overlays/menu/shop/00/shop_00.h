@@ -12,11 +12,16 @@
 #include <string.h>
 #include <stdio.h>
 
+/* Antique IDs: GAME.EMI item table, @source: wiki:data/records#gameemi-fixed-tables. */
+#define SHOP_ANTIQUE_FIRST            ITEM_CLAY_VASE
+#define SHOP_ANTIQUE_COUNT            (ITEM_DRAGON_TEAR - ITEM_CLAY_VASE + 1U)
+#define SHOP_ANTIQUE_PRICE_MULTIPLIER 50
+
 /* The game clock's seconds byte. Retail reads it a second time through the
  * literal address, so the second read keeps the MEM spelling. */
-#define SHOP_CLOCK_SECONDS_ADDR 0x8014496E
-#define g_SceneFlags            ((u8**)&g_SceneFlags)
-#define g_AreaLoads             ((s32**)g_AreaLoads)
+#define SHOP_CLOCK_SECONDS_ADDR       0x8014496E
+#define g_SceneFlags                  ((u8**)&g_SceneFlags)
+#define g_AreaLoads                   ((s32**)g_AreaLoads)
 
 /* Draw the cursor icon; on the countdown or an input advance it and report
  * arrival. A bare statement macro: the member declares `counter` and `count`
@@ -457,11 +462,10 @@ extern u8              g_MenuFormationFrameLeft[];
 extern u8              g_MenuFormationFrameMiddle[];
 extern u8              g_MenuFormationFrameRight[];
 void                   Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
-bool                   func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
+bool                   func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value,
                    u8 sprite_flag);
-void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
-                   s32 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 void func_801C1254(u8 ability_id, u8 party_slot);
 void Shop_DispatchStep(void);
@@ -494,7 +498,7 @@ void func_801D34F0(void);
 void func_801D352C(void);
 void func_801D3560(u16* result_code);
 s32  Shop_ApplyPercent(s32 value, s32 percent);
-u32  Shop_GetSellPrice(s32 item_kind, s32 quantity, s32 discount_flag);
+u32  Shop_GetSellPrice(ItemCategory category, s32 item_id, s32 antique_shop);
 void func_801D3710(void);
 /* func_801D3828 */
 void Shop_Equip(u8 character_id, u8 slot, u8 item_id);
@@ -581,7 +585,7 @@ void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 void Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
 void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
-u16  Item_GetPrice(s32 category, s32 item_id);
+u16  Item_GetPrice(ItemCategory category, s32 item_id);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
 void Menu_DrawRowIcons(u8* row_record, s32 palette_index);

@@ -13,6 +13,6 @@ MATCH void func_801D54F8(void) {
         record = FISHING_STATE;
         mask   = BIT(record->cue_index_06) & BYTE_MASK;
     }
-    func_801D7C10(0x58, 0x28, mask);
-    func_801D72E4(0x27, 0x40);
+    func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
+    func_801D72E4(39, 64);
 }

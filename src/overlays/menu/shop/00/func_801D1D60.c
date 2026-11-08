@@ -24,7 +24,7 @@ MATCH void func_801D1D60(void) {
             zenny = &g_Zenny;
             *zenny -= g_ShopItemPrice * g_ShopItemCount;
             Item_Add(g_ShopItemCategory, g_ShopItemId, g_ShopItemCount, 0);
-            stock = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
+            stock = Item_GetIcon(g_ShopItemCategory, g_ShopItemId);
             if (D_801E6058 != 0 && g_ShopItemCategory != 0 && ((u32)((stock - 0xA) & BYTE_MASK) >= 2)) {
                 *toggle    = 1;
                 D_80148652 = D_80148652 + 1;

@@ -36,9 +36,9 @@ MATCH void func_801DCDB8(void) {
     }
 
     if (!(D_80144287 & 1)) {
-        UI_DrawText(0x1D, 0x14, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_800100A2));
+        UI_DrawText(29, 20, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_800100A2));
     } else {
-        UI_DrawText(0x1D, 0x14, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_800100A4));
+        UI_DrawText(29, 20, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_800100A4));
     }
 
     if (!(D_80144287 & 0x80)) {
@@ -51,5 +51,5 @@ MATCH void func_801DCDB8(void) {
         }
         D_801442AC = value;
     }
-    Menu_DrawCursorSprite(0x1C, (D_80144287 & 1) * 0x10 + 0x58, 0);
+    Menu_DrawCursorSprite(28, (D_80144287 & 1) * 16 + 88, 0);
 }

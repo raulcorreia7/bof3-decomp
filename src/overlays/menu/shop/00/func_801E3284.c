@@ -48,7 +48,7 @@ MATCH void func_801E3284(MenuPanelTask* task) {
                   (task->pos.y + SHOP_COUNTS_SHADOW_OFFSET) & HALF_MASK, SHOP_COUNTS_WINDOW_WIDTH,
                   SHOP_COUNTS_WINDOW_HEIGHT, 0, g_WindowStyle);
     func_801AEA80((task->pos.x + SHOP_COUNTS_ICON_X) & HALF_MASK, (task->pos.y + SHOP_COUNTS_ICON_Y) & HALF_MASK,
-                  D_801E5E1C[Item_GetKind(group, key) & BYTE_MASK], 0);
+                  D_801E5E1C[Item_GetIcon(group, key) & BYTE_MASK], 0);
     UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_NAME_Y), 0,
                 func_801AF20C(icon) & BYTE_MASK, icon);
 

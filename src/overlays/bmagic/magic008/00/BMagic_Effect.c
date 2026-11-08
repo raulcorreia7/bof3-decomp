@@ -378,7 +378,7 @@ MATCH void func_801F1274(void) {
 }
 
 MATCH void func_801F1294(void) {
-    BMagicStepTable7 handlers;
+    Magic008EarlySteps handlers;
 
     handlers = D_801EECAC;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
@@ -418,7 +418,7 @@ MATCH void func_801F16E8(void) {
 }
 
 MATCH void func_801F1708(void) {
-    BMagicStepTable10 handlers;
+    Magic008Steps handlers;
 
     handlers = D_801EECC8;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);

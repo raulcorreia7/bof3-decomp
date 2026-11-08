@@ -7,6 +7,7 @@
 #include "sys/cd_format.h"
 #include "psx/psyq.h"
 #include "game/character.h"
+#include "game/item.h"
 #include "common/handler.h"
 
 volatile u8* func_800AC754(u8 entry_id);
@@ -419,7 +420,7 @@ u32         Char_ClearStatus(u8 index, u16 mask, u8 mode);
 /* func_80165D48 */
 u8*         Item_GetRecord(s32 category, s32 item);
 /* func_80165E04 */
-s32         Item_GetKind(s32 category, s32 item_id);
+s32         Item_GetIcon(ItemCategory category, s32 item_id);
 /* func_80165EC0 */
 u8          Item_GetEquipability(u8 category, u8 item);
 /* func_80165F68 */

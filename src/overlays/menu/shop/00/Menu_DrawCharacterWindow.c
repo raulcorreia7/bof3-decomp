@@ -1,9 +1,10 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried do-while(0) AID scope, a search over source rewrites: text_clut reused for the px copy
- * (95.74), y/px/py update orders. resume: py in s2 and the shaded byte in s3. */
+/* nonmatching: 2 instructions; retail schedules `andi a0,s1` before `addiu s2,s2,2` (sched1 boosts the a0 zero-extend
+ * over the in-place py add). */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
+    Character* records;
     Character* stats;
     u32        clut;
     u32        text_clut;
@@ -12,20 +13,19 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     s32        y;
 
     clut = (u8)shaded ? 7 : 0;
-    UI_DrawWindow((px + 3) & HALF_MASK, (py + 3) & HALF_MASK, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT,
-                  (u8)shaded, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(px + 3, py + 3, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)shaded,
+                  CHARACTER_BLOCK->window_style);
     x = px;
-    /* AID: a the order lock steers the register homes of x, y and stats. */
+    y = py;
+    /* AID: the order lock keeps the x and y copies below the window call. */
     ORDER_LOCK_BEGIN
-        y = py;
+        records = (Character*)CHARACTER_BLOCK->records;
         px += 0x56;
         py += 2;
-        stats     = &g_Characters[character_index];
-        text_clut = px;
-        Menu_DrawCharacterPortrait(text_clut & HALF_MASK, py & HALF_MASK, stats->character_id,
-                                   (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
+        stats = &records[character_index];
+        Menu_DrawCharacterPortrait(px, py, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
-        UI_DrawText((s16)(x + 20), (s16)(y + 3), text_clut, 5, stats);
+        UI_DrawText(x + 20, y + 3, text_clut, 5, stats);
     ORDER_LOCK_END;
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
@@ -83,8 +83,11 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
     UI_DrawSpriteRun(x, y, D_801E547C, 0);
     Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
+    /* FAKE: dead stores keep px and py the CSE heads of their x and y copies. */
+    px = 0;
+    py = 0;
 }
 #else
-/* blocker: register homes (py in s2, shaded byte in s3). */
+/* blocker: schedule of `addiu s2,s2,2` after `andi a0,s1,0xffff`. */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 #endif

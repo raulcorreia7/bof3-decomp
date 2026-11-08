@@ -218,8 +218,8 @@ g_BMagicEffectModes = { addr = 0x801F0A24, source = "Handlers of magic006 (Mind 
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC58 = { addr = 0x801EEC58, source = "Six step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0294." }
 D_801EEC70 = { addr = 0x801EEC70, type = "EffectStepFuncs5", source = "Five step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0568." }
-D_801EECAC = { addr = 0x801EECAC, type = "BMagicStepTable7", source = "Seven step handlers of the magic008 effect, run by header.step (byte 0x02) from func_801F1294." }
-D_801EECC8 = { addr = 0x801EECC8, type = "BMagicStepTable10", source = "Ten step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F1708." }
+D_801EECAC = { addr = 0x801EECAC, type = "Magic008EarlySteps", source = "Seven step handlers of the magic008 effect, run by header.step (byte 0x02) from func_801F1294." }
+D_801EECC8 = { addr = 0x801EECC8, type = "Magic008Steps", source = "Ten step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F1708." }
 Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_PlayOnce = { addr = 0x801EF010, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartPlaying_801EF728 = { addr = 0x801EF728, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
@@ -1923,7 +1923,7 @@ g_Abilities = { addr = 0x801CA70C, size = 0x11D0, source = "The 228 Ability reco
 g_LevelGrowth = { addr = 0x801CB8DC, size = 0x15A8, source = "The LevelGrowth records of GAME.EMI: 0x318 bytes per character, with the experience of each level at 8-byte stride." }
 D_801CCE84 = { addr = 0x801CCE84, size = 0xF8 }
 D_801CCF7C = { addr = 0x801CCF7C, size = 0xD4 }
-s_ItemSpriteIds = { addr = 0x801CD050, size = 0x10, source = "Sprite id by item kind table index; func_801AF800 passes the entry to func_801AEA80." }
+s_ItemSpriteIds = { addr = 0x801CD050, size = 0x10, source = "Sprite id indexed by the item icon; func_801AF800 passes the entry to func_801AEA80." }
 s_ItemIconIds = { addr = 0x801CD060, size = 0xC, source = "Icon id by icon index; func_801AF930 passes the entry to func_801AEA80." }
 s_RouteStepScratch = { addr = 0x801CD06C, size = 0x20, source = "func_801B5BDC splits each two-byte entry into a route step and the scratch byte at unk_2A" }
 s_EntityPlacementOffsets = { addr = 0x801CD08C, size = 0x20, source = "s8 x, y pairs that func_801B1E24 and func_801B21E8 search for an entity position." }
@@ -2131,7 +2131,7 @@ g_MenuClockFormat = { addr = 0x801D0DE0, source = "Format string of the play tim
 g_MenuInventoryCountFormat = { addr = 0x801D0E20, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Entry of the shop: dispatches on the menu step byte D_80148650 through the D_801E5144 handlers." }
 Shop_ApplyPercent = { addr = 0x801D3654, type = "func", source = "Returns value * percent / 100, at least 1; the item list prices its rows through it." }
-Shop_GetSellPrice = { addr = 0x801D3688, type = "func", source = "Returns the sell price of an item: half of Item_GetPrice, with the discount price for category 0 quantities 0x2B to 0x36." }
+Shop_GetSellPrice = { addr = 0x801D3688, type = "func", source = "Returns half the item price, or 50 times the price for antique shop items from Clay Vase through Dragon Tear." }
 Shop_Equip = { addr = 0x801D3828, type = "func", source = "Swaps one equipment slot of a party member for the chosen item; called by the shop equip step func_801D23E4." }
 SAVE_DispatchState = { addr = 0x801D46A4, type = "func", source = "Runs the save state handler selected by D_80148652 from the 21-entry table D_801E530C." }
 SAVE_DrawSlots = { addr = 0x801D67B0, type = "func", source = "Draws the visible rows of the shop stock list from g_SaveSlotFirst for g_SaveSlotCount rows, and the panel header." }
@@ -2268,7 +2268,7 @@ g_ShopPanel17StateFuncs = { addr = 0x801E5F30, source = "the state handlers of p
 g_ShopPanel18StateFuncs = { addr = 0x801E5F3C, source = "the state handlers of panel mode 18, indexed by the panel task state" }
 g_ShopPortraitAtlas = { addr = 0x801E600C, size = 0x30, source = "Portrait cells by portrait index, read by func_801E4FC8: u, v and the palette position of each portrait; the same cells as g_MenuPortraitAtlas." }
 g_ShopStockIndex = { addr = 0x801E6044, source = "Index of the selected row of the shop stock at D_8018E7CC (count byte, then category and item pairs); func_801D163C wraps it at the count." }
-g_ShopItemCategory = { addr = 0x801E6048, source = "Item category of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add and Item_GetKind by func_801D1D60." }
+g_ShopItemCategory = { addr = 0x801E6048, source = "Item category of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add and Item_GetIcon by func_801D1D60." }
 g_ShopItemId = { addr = 0x801E604C, source = "Item id of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add by func_801D1D60." }
 g_ShopItemCount = { addr = 0x801E6050, source = "Quantity of the selected shop item: func_801D2D64 steps it with the arrows, and func_801D1D60 passes it to Item_Add and multiplies the price by it." }
 g_ShopItemCountMax = { addr = 0x801E605C, source = "Largest quantity the player can buy: g_Zenny / price capped at 99 minus the held count, set by func_801D163C and used by func_801D2D64 as the clamp." }
@@ -5209,7 +5209,7 @@ Char_ApplyWeapon = { addr = 0x80165760, type = "func", source = "Adds the equipp
 Char_ApplyArmor = { addr = 0x801658DC, type = "func", source = "Adds the equipped armor bonuses to a character." }
 Char_ApplyAccessories = { addr = 0x80165B3C, type = "func", source = "Adds the equipped accessory bonuses to a character." }
 Item_GetRecord = { addr = 0x80165D48, type = "func", source = "Returns the record of an item." }
-Item_GetKind = { addr = 0x80165E04, type = "func", source = "Returns the kind of a weapon, armor or accessory." }
+Item_GetIcon = { addr = 0x80165E04, type = "func", source = "Returns the item icon index; armor uses its equip type as the index." }
 Item_GetEquipability = { addr = 0x80165EC0, type = "func", source = "Returns which characters can equip an item." }
 Item_GetFlags = { addr = 0x80165F68, type = "func", source = "Returns the flags of an item." }
 Item_GetPower = { addr = 0x80166034, type = "func", source = "Returns the power of a weapon or armor." }
