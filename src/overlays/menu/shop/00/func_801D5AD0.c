@@ -5,7 +5,7 @@ MATCH void func_801D5AD0(void) {
     s8* flag;
 
     MENU_DRAW_HEADER();
-    WinDrawCueText(28, 22, 0x91);
+    WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x91);
     func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
     if ((Menu_ToggleOption() & BYTE_MASK) != 0) {
         flag = &D_8014865B;

@@ -4,8 +4,8 @@
  * five saved registers differ. resume: a source shape that keeps the x/y roots out of s2/s3. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D750C(s32 x, s32 y) {
-    s32 sp28;
-    s32 sp30;
+    s32 u;
+    s32 v_tex;
     s16 var_a0_255;
     s16 var_s0;
     s16 var_s7;
@@ -46,8 +46,8 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
         var_s3 += 0xE;
         var_s7 = (s16)var_s3;
         var_fp = (temp_v0_85 >> 7) & 0xF8 & BYTE_MASK;
-        sp28   = ((temp_v0_81 & 0x1F) * 8) & BYTE_MASK;
-        sp30   = (temp_v0_85 >> 2) & 0xF8 & BYTE_MASK;
+        u      = ((temp_v0_81 & 0x1F) * 8) & BYTE_MASK;
+        v_tex  = (temp_v0_85 >> 2) & 0xF8 & BYTE_MASK;
         do {
             var_s3 = var_s4 + 0x14;
             var_s2 = (s32)(s16)var_s3;
@@ -108,13 +108,13 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
             var_s2 = var_s4 + 0x5D;
             var_s2 <<= 0x10;
             var_s2 = var_s2 >> 0x10;
-            func_801DA5A8((s16)var_s3, (s16)var_s1, (s16)var_s2, (s16)var_s1, (u8)sp28, (u8)sp30, (u8)var_fp);
+            func_801DA5A8((s16)var_s3, (s16)var_s1, (s16)var_s2, (s16)var_s1, (u8)u, (u8)v_tex, (u8)var_fp);
             var_s0 = var_s6 + 0x17;
             var_s0 <<= 0x10;
             var_s0 = (s16)(var_s0 >> 0x10);
-            func_801DA5A8((s16)var_s3, (s16)(var_s6 + 3), (s16)var_s3, var_s0, (u8)sp28, (u8)sp30, (u8)var_fp);
-            func_801DA4B4((s16)var_s2, (s16)var_s1, (s16)var_s2, var_s0, (u8)sp28, (u8)sp30, (u8)var_fp);
-            func_801DA4B4((s16)var_s3, var_s0, (s16)var_s2, var_s0, (u8)sp28, (u8)sp30, (u8)var_fp);
+            func_801DA5A8((s16)var_s3, (s16)(var_s6 + 3), (s16)var_s3, var_s0, (u8)u, (u8)v_tex, (u8)var_fp);
+            func_801DA4B4((s16)var_s2, (s16)var_s1, (s16)var_s2, var_s0, (u8)u, (u8)v_tex, (u8)var_fp);
+            func_801DA4B4((s16)var_s3, var_s0, (s16)var_s2, var_s0, (u8)u, (u8)v_tex, (u8)var_fp);
             var_s4 += 0x5E;
         } while ((u32)(var_s5 & BYTE_MASK) < (u8)g_Battle.party_count);
     }

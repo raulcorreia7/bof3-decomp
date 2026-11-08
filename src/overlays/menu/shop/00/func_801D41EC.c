@@ -12,7 +12,7 @@ MATCH void func_801D41EC(void) {
 
     MENU_DRAW_HEADER();
     if (D_8014865C != -1) {
-        WinDrawCueText(28, 22, 0xA4);
+        WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0xA4);
     }
     count      = D_80148654 - 1;
     D_80148654 = count;

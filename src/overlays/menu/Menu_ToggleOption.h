@@ -9,7 +9,7 @@ MATCH u8 Menu_ToggleOption(void) {
     u16 pad;
     u16 confirm;
 
-    WinDrawCueText(28, 22, 0xF);
+    WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0xF);
     flag = &D_8014865B;
     Menu_DrawCursorSprite((u16)(((0x1F - (*flag * 4)) * 8) + 0x1B), 0x18, 0);
     pad = g_InputPressed;

@@ -18,7 +18,7 @@ typedef struct GameSpawnRecord {
 } GameSpawnRecord;
 
 MATCH void func_8019DC6C(void) {
-    u8               scratch[0x20];
+    u8               scratch[32];
     GameSpawnRecord* rec;
     GameSpawnState*  state;
     s32              i;

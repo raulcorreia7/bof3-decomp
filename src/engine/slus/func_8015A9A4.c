@@ -9,11 +9,11 @@
 /* Reordered coordinate assignments leave the origin load difference at +0x0C; volatile reads and a barrier alter the prologue. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015A9A4(void) {
-    s16   sp10;
-    s16   sp12;
-    s16   sp14;
-    s16   sp16;
-    s16   sp18[2];
+    s16   vec_x;
+    s16   vec_y;
+    s16   vec_z;
+    s16   vec_pad;
+    s16   sxy[2];
     s16   temp_a2_146;
     s32   temp_a0_142;
     s32   var_v0_28;
@@ -58,20 +58,20 @@ NON_MATCHING void func_8015A9A4(void) {
         Actor_ReadValue();
     }
     temp_v1_96 = g_Task;
-    sp10       = ((s32)FIELD(u16, temp_v1_96, 0x34u) >> 9) - 0x4000;
-    sp12       = ((s32)FIELD(u16, temp_v1_96, 0x38u) >> 9) - 0x4000;
-    sp14       = (s16)((s16) - (s16)FIELD(u16, temp_v1_96, 0x3Eu) / 2);
-    gte_ldv0(&sp10);
+    vec_x      = ((s32)FIELD(u16, temp_v1_96, 0x34u) >> 9) - 0x4000;
+    vec_y      = ((s32)FIELD(u16, temp_v1_96, 0x38u) >> 9) - 0x4000;
+    vec_z      = (s16)((s16) - (s16)FIELD(u16, temp_v1_96, 0x3Eu) / 2);
+    gte_ldv0(&vec_x);
     gte_rtps();
-    gte_stsxy(sp18);
+    gte_stsxy(sxy);
     gte_stszotz(&g_Task->unk_60);
     temp_a1_132                    = g_Task;
-    FIELD(u16, temp_a1_132, 0x2Eu) = sp18[0];
-    FIELD(u16, temp_a1_132, 0x30u) = sp18[1];
+    FIELD(u16, temp_a1_132, 0x2Eu) = sxy[0];
+    FIELD(u16, temp_a1_132, 0x30u) = sxy[1];
     temp_a0_142                    = ((u8)FIELD(u8, (*(void**)((u8*)(temp_a1_132) + 0x54)), 0x3u) >> 1) & 4;
     temp_a2_146                    = (s16)FIELD(u16, temp_a1_132, 0x2Eu);
     if ((((&D_80182174)[temp_a0_142] + 0x140) < temp_a2_146) || (temp_a2_146 < -(s32)(&D_80182175)[temp_a0_142]) ||
-        (((&D_80182176)[temp_a0_142] + 0xF0) < sp18[1]) || (sp18[1] < -(s32)(&D_80182177)[temp_a0_142])) {
+        (((&D_80182176)[temp_a0_142] + 0xF0) < sxy[1]) || (sxy[1] < -(s32)(&D_80182177)[temp_a0_142])) {
         temp_v1_177         = g_Task;
         *(u8*)(temp_v1_177) = (u8)(*(u8*)(temp_v1_177) | 0x80);
         return;

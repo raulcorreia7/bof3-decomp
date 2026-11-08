@@ -10,7 +10,7 @@ MATCH void func_80197E54(void) {
     if (EMI_IsReady() && local_ready) {
         g_AreaCameraStep             = 0;
         g_Battle.outcome.event_flags = 0;
-        g_Battle.phase.mode          = 0;
+        g_Battle.phase.mode          = BATTLE_MODE_ENTRANCE;
         g_Battle.phase.step          = 0;
         g_Battle.phase.sub_step      = 0;
         g_Battle.ui_step             = 0;

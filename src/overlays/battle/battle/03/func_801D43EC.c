@@ -27,7 +27,7 @@ NON_MATCHING void func_801D43EC(void) {
             g_Battle.boss_event_hook(BOSS_EVENT_RESTART_BEGIN);
         }
         if (g_Battle.outcome.result != 0) {
-            g_Battle.phase.mode = 4;
+            g_Battle.phase.mode = BATTLE_MODE_ROUND_END;
             g_Battle.phase.step = 2;
             return;
         }

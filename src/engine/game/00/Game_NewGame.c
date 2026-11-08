@@ -34,5 +34,5 @@ MATCH void Game_NewGame(void) {
     }
 
     g_SndBGMId       = 0xFFu;
-    g_GameEntryState = 1u;
+    g_GameEntryState = GAME_STATE_AREA_LOAD;
 }

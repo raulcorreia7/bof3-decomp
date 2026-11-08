@@ -3,7 +3,7 @@
 /* 69.64%; opcode/regalloc: prologue saves s3/s4 instead of s1/s0; later register and branch differences remain. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
-    s16 sp20;
+    s16 tex_u;
     s16 temp_a1_190;
     s16 temp_v0_217;
     s16 var_a0_154;
@@ -35,7 +35,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     temp_v0_61 = temp_v0_57 & HALF_MASK;
     var_s6     = (temp_v0_61 >> 2) & 0xF8;
     var_s5     = (temp_v0_61 >> 7) & 0xF8;
-    sp20       = (temp_v0_57 & 0x1F) * 8;
+    tex_u      = (temp_v0_57 & 0x1F) * 8;
     func_801D9C80((s16)var_s0, (s16)(var_s1 + 8), 8U, 1U);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 6), 2, 1);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 0x19), 3, 1);
@@ -67,21 +67,21 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s0      = var_s0 >> 0x10;
     temp_a1_190 = var_s7 + 2;
     var_s3      = var_s6 & BYTE_MASK;
-    var_s4      = sp20;
+    var_s4      = tex_u;
     var_s2      = var_s5 & BYTE_MASK;
     func_801DA5A8((s16)var_s0, temp_a1_190, (s16)(var_fp + 0x49), temp_a1_190, (u8)(s32)var_s4, (u8)(s32)var_s3,
                   (u8)var_s2);
     func_801DA5A8((s16)var_s0, (s16)var_s1, (s16)var_s0, (s16)(var_s7 + 0x12), (u8)(s32)var_s4, (u8)(s32)var_s3,
                   (u8)var_s2);
     var_s6 -= 0x10;
-    temp_v0_217 = sp20 - 0x10;
+    temp_v0_217 = tex_u - 0x10;
     var_s5 -= 0x10;
     if (temp_v0_217 < 0) {
-        sp20 = 0;
+        tex_u = 0;
     } else if (temp_v0_217 >= 0x100) {
-        sp20 = 0xFF;
+        tex_u = 0xFF;
     } else {
-        sp20 = temp_v0_217;
+        tex_u = temp_v0_217;
     }
     var_v0_226  = var_s6 << 0x10;
     temp_v0_233 = var_v0_226 >> 0x10;
@@ -109,7 +109,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 <<= 0x10;
     var_s1 = var_s1 >> 0x10;
     var_s3 = var_s6 & BYTE_MASK;
-    var_s4 = sp20;
+    var_s4 = tex_u;
     var_s2 &= BYTE_MASK;
     func_801DA408((s16)var_s0, (s16)(var_s7 + 2), (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
                   (u8)var_s2);

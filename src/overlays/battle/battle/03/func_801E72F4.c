@@ -34,7 +34,7 @@ MATCH void func_801E72F4(void) {
     if (!ACTOR_IN_USE(*g_BattleEffectBattler)) {
         func_801E5988();
     }
-    if (g_Battle.phase.mode != 1) {
+    if (g_Battle.phase.mode != BATTLE_MODE_COMMANDS) {
         func_801E5988();
     }
 }

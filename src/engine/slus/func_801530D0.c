@@ -17,10 +17,10 @@
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801530D0(void) {
     s32 sp10_row;
-    s32 sp18;
-    u8* sp20;
-    s32 sp40;
-    s32 sp48;
+    s32 depth_threshold;
+    u8* map_width_ptr;
+    s32 row_depth_off;
+    s32 col_depth_off;
     s8* rec;
     s32 width;
     s32 v;
@@ -48,10 +48,10 @@ NON_MATCHING s32 func_801530D0(void) {
     v          = ABS(v);
     D_8014933D = 0;
     D_8014933A &= 0xFE;
-    tmp        = (0x160 - v) / 50;
-    D_1F80000C = tmp;
-    sp18       = (g_AreaTargetCellX - g_AreaTileOriginX) + (g_AreaTargetCellY - g_AreaTileOriginY) + 8;
-    width      = 0;
+    tmp             = (0x160 - v) / 50;
+    D_1F80000C      = tmp;
+    depth_threshold = (g_AreaTargetCellX - g_AreaTileOriginX) + (g_AreaTargetCellY - g_AreaTileOriginY) + 8;
+    width           = 0;
     if (tmp > 0) {
         width = tmp - 1;
     }
@@ -73,11 +73,11 @@ NON_MATCHING s32 func_801530D0(void) {
     if (g_AreaSceneMode == 0x23) {
         D_1F80000C = 0;
     }
-    sp20       = &g_AreaMapBundle.width;
-    sp40       = -0x30;
-    sp10_row   = g_AreaGridRowCursor;
-    sp48       = 0;
-    D_80149341 = D_1F80000C;
+    map_width_ptr = &g_AreaMapBundle.width;
+    row_depth_off = -0x30;
+    sp10_row      = g_AreaGridRowCursor;
+    col_depth_off = 0;
+    D_80149341    = D_1F80000C;
     do {
         v = 0;
         if (sp10_row != 0x37) {
@@ -91,7 +91,7 @@ NON_MATCHING s32 func_801530D0(void) {
         }
         fp = 0;
         if ((0x1C - (tmp * 2)) > 0) {
-            s5 = sp48;
+            s5 = col_depth_off;
             do {
                 v = 0;
                 if (col != 27) {
@@ -103,9 +103,9 @@ NON_MATCHING s32 func_801530D0(void) {
                     Area_RequestCellRows((AreaCell*)s0);
                     D_8014933A |= 1;
                 } else {
-                    D_1F800014[0].vx           = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    D_1F800014[0].vy           = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    rec                        = (s8*)((MAP_BUNDLE_BASE + 0x30) + s0[1] * *sp20 * 4 + s0[0] * 4);
+                    D_1F800014[0].vx = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    D_1F800014[0].vy = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    rec              = (s8*)((MAP_BUNDLE_BASE + 0x30) + s0[1] * *map_width_ptr * 4 + s0[0] * 4);
                     *(s8**)(D_1F800000 + 0x10) = rec;
                     D_1F800014[0].vz           = -(rec[0] * 0x10);
                     gte_ldv0(&D_1F800014[0]);
@@ -136,8 +136,8 @@ NON_MATCHING s32 func_801530D0(void) {
                             }
                             rec  = *(s8**)(D_1F800000 + 0x10);
                             word = *(u32*)rec;
-                            low  = rec[*sp20 * 4];
-                            if (((*(s8*)(rec + *sp20 * 4) < ((s32)(word << 8) >> 0x18)) |
+                            low  = rec[*map_width_ptr * 4];
+                            if (((*(s8*)(rec + *map_width_ptr * 4) < ((s32)(word << 8) >> 0x18)) |
                                  (((s32)((s32)low << 0x10) >> 0x18) < (s32)(word >> 0x18))) != 0) {
                                 *(u16*)(s1 + 0x4E) = Area_AllocCellPrimRow();
                             }
@@ -167,14 +167,14 @@ NON_MATCHING s32 func_801530D0(void) {
                                 if (tmp != 0) {
                                     cell = v;
                                     if (s6 != 0) {
-                                        cell = v + sp40;
+                                        cell = v + row_depth_off;
                                     }
                                     LINK_PACKET(cell, pkt);
                                 } else {
                                     LINK_PACKET((g_FrameBufferIndex + 2) * 8 + s5, pkt);
                                 }
                             } else if ((tmp != 0) &&
-                                       ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (sp18 < s6)))) {
+                                       ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
                                 word          = *(u32*)rec;
                                 D_1F800000[0] = word ^ 0x80;
                                 if ((((word >> 8) & BYTE_MASK) ^ 0x80) < D_1F800000[0]) {
@@ -238,8 +238,8 @@ NON_MATCHING s32 func_801530D0(void) {
             } while (fp < (0x1C - (D_1F80000C * 2)));
         }
         s6 += 1;
-        sp40 += 0x30;
-        sp48 += 0x30;
+        row_depth_off += 0x30;
+        col_depth_off += 0x30;
     } while (s6 < 0x37);
     func_80153D34();
 }

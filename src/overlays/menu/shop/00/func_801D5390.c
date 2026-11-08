@@ -6,7 +6,7 @@ MATCH void func_801D5390(void) {
 
     MENU_DRAW_HEADER();
     cursor = &D_80148654;
-    SAVE_DrawSlots((*cursor * 0x50 + 0x20), 0x30, 0);
+    SAVE_DrawSlots((*cursor * 0x50 + SAVE_SLOTS_X), SAVE_SLOTS_Y, 0);
     step    = *cursor + 1;
     *cursor = step;
     if (step == 4) {

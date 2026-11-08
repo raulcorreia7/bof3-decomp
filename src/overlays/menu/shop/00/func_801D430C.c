@@ -9,6 +9,6 @@ MATCH void func_801D430C(void) {
         *counter += 1;
     } else if (D_8014865C != -1) {
         MENU_DRAW_HEADER();
-        WinDrawCueText(28, 22, 0xA4);
+        WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0xA4);
     }
 }

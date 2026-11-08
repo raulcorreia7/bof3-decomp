@@ -9,7 +9,7 @@ MATCH void Area_DrawLightPillar(s32* pos) {
     DVECTOR  inner;
     DVECTOR  outer;
     s32      point[3];
-    u8       camera[0x30];
+    u8       camera[48];
     POLY_G4* prim;
     s32      angle;
     s32      shade;

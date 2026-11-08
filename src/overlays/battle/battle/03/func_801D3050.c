@@ -21,7 +21,7 @@ MATCH void func_801D3050(void) {
         func_801D9484();
         func_801DE560(2, 0, 0, 0x2D, Message_GetText(CALLBACK_SLOT_IDLE));
     }
-    g_Battle.phase.mode     = 3;
+    g_Battle.phase.mode     = BATTLE_MODE_TURNS;
     g_Battle.phase.step     = 0;
     g_Battle.phase.sub_step = 0;
 }

@@ -7,7 +7,7 @@ MATCH void Game_LoadShopOverlay(void) {
         work = &g_Actors[D_8014865C];
         TASK_SET(work);
         if (work->unk_18 == 9) {
-            g_GameEntryState    = 2u;
+            g_GameEntryState    = GAME_STATE_FIELD;
             g_GameEntrySubstate = 0u;
             g_GameStateIndex    = GAME_REQUEST_IDLE;
             if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {

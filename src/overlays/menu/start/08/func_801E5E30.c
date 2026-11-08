@@ -10,7 +10,7 @@ MATCH void func_801E5E30(void) {
             func_801E14A8(0x62, 0x4C, D_801ED870, g_SaveCardPort, 0);
             break;
         case 10:
-            SAVE_DrawSlots(0x20, 0x30, 0U);
+            SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             break;
     }
     UI_DrawText(28, 21, 0, 0xFFU, Message_GetText(D_801ED7FC + 0xA6));

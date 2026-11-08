@@ -12,7 +12,7 @@
  * first mismatch of the sort prologue and the merge loop registers. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8014BC70(void) {
-    s32  sp28;
+    s32  layer;
     s32  var_s7;
     s32  var_s4;
     s32  var_fp;
@@ -93,16 +93,16 @@ NON_MATCHING void func_8014BC70(void) {
                 *slot      = *(u32**)(D_80142CC4 + tmp);
             }
         }
-        sp28 = var_s7 & BYTE_MASK;
+        layer = var_s7 & BYTE_MASK;
     loop_22:
         var_v1_169 = var_s4 & BYTE_MASK;
     loop_23:
-        if ((OBJ_KEY(var_v1_169) >> 8) == sp28) {
+        if ((OBJ_KEY(var_v1_169) >> 8) == layer) {
             var_a0_187 = var_fp & BYTE_MASK;
             if (var_v1_169 < D_8014832D) {
             block_27:
                 word = D_80143740[var_a0_187];
-                if ((((word >> 0x18) == sp28) && (var_a0_187 < D_8014933D) &&
+                if ((((word >> 0x18) == layer) && (var_a0_187 < D_8014933D) &&
                      (OBJ_KEY(var_s4 & BYTE_MASK) >= (word >> 0x10))) ||
                     ((var_s4 & BYTE_MASK) == D_8014832D)) {
                     var_s0 = var_fp & BYTE_MASK;
@@ -131,7 +131,7 @@ NON_MATCHING void func_8014BC70(void) {
                 obj      = OBJ(tmp);
                 key      = *(u16*)(obj + 0x32);
                 unlinked = var_s1 << 0x18;
-                if ((((u32)(key << 0x10)) >> 0x18) == sp28) {
+                if ((((u32)(key << 0x10)) >> 0x18) == layer) {
                     if (tmp < D_8014832D) {
                         if (g_AreaDrawMode != 6) {
                             if (g_AreaDrawMode == 4) {
@@ -210,7 +210,7 @@ NON_MATCHING void func_8014BC70(void) {
             }
         }
         var_a0_187 = var_fp & BYTE_MASK;
-        if ((D_80143740[var_a0_187] >> 0x18) == sp28) {
+        if ((D_80143740[var_a0_187] >> 0x18) == layer) {
             if (var_a0_187 < D_8014933D) {
                 goto block_27;
             }

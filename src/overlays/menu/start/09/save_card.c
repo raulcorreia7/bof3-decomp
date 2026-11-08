@@ -285,7 +285,7 @@ MATCH void SAVE_BuildFileHeader(s8 magic_lo, s8 magic_hi, char* kind_name) { /* 
 /* Opens a card file with up to 120 retries; on failure, reports directory capacity. */
 /* func_801EF96C */
 MATCH s32 SAVE_OpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
-    char path[0x20];
+    char path[32];
     s32  total;
     s32  retries;
     s32  fd;
@@ -402,7 +402,7 @@ check:
 /* func_801EFCA8 */
 MATCH s32 SAVE_ScanDirectory(char* prefix, u8 length) { /* func_801EFCA8 */
     struct DIRENTRY dir;
-    char            pattern[0x80];
+    char            pattern[128];
     u8              i;
     u8              j;
 

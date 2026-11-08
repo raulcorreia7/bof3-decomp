@@ -11,7 +11,7 @@ MATCH void func_8019CCB8(void) {
     u8* copy_dst;
     u8  step;
 
-    if (g_GameEntryState != 1) {
+    if (g_GameEntryState != GAME_STATE_AREA_LOAD) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
             func_8019D4BC();
             goto block_9; /* shared tail */

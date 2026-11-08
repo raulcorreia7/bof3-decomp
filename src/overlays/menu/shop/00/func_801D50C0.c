@@ -4,8 +4,8 @@ MATCH void func_801D50C0(void) {
     u8 count;
 
     MENU_DRAW_HEADER();
-    WinDrawCueText(28, 22, 0x9F);
-    SAVE_DrawSlots(0x20, 0x30, 0);
+    WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x9F);
+    SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
     if ((Menu_ToggleOption() & BYTE_MASK) != 0) {
         if (D_8014865B != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));

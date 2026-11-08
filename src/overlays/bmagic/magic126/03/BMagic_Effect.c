@@ -213,7 +213,7 @@ INCLUDE_ASM(func_801F0240);
 MATCH void func_801F037C(void) {
     s32 diff;
     u8  count;
-    u8  scratch[0x10]; /* FAKE: unreferenced local pads the frame to 0x28. */
+    u8  scratch[16]; /* FAKE: unreferenced local pads the frame to 0x28. */
 
     count = g_Task->unk_09;
     if (count < 0x10) {
