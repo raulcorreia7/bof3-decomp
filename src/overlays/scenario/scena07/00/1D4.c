@@ -283,7 +283,25 @@ INCLUDE_ASM(func_801F83D0);
 
 INCLUDE_ASM(func_801F8478);
 
-INCLUDE_ASM(func_801F85D8);
+MATCH u8 func_801F85D8(void) {
+    u8  i;
+    s32 live;
+    u8* slot;
+    u8  buffer[0x20];
+
+    live = 0;
+    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 960, 0));
+    Area_SetCameraMatrix(buffer);
+    slot = MEM_PTR(u8, AREA_WORK);
+    for (i = 0; i < 8; i += 1, slot += 28) {
+        if (slot[0] != 0) {
+            D_801FDDF0[slot[1]](slot);
+            live = 1;
+            func_801F81D4(slot);
+        }
+    }
+    return live;
+}
 
 /* Hint: operates on a0 as a byte record (bytes 0x02, 0x03, 0x01, 0x04 and a flag at D_801FDFC4); the record type is not declared, so the draft needs it first. */
 INCLUDE_ASM(func_801F86BC);
