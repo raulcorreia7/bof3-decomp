@@ -62,11 +62,11 @@ After you add a `hand/` file, a header or a `NON_MATCHING` marker, run
 
 ## Gates
 
-| Check             | Command                                           | Pass                                                                                                 |
-| ----------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| One image's bytes | `check-<image>`                                   | `sha1sum -c` accepts the linked payload                                                              |
-| Every image       | `check`                                           | every image matches                                                                                  |
-| Hygiene           | `format-check`, `include-asm`, `markers`, `addrs` | format passes; `INCLUDE_ASM` not above merge base; every definition marked; no recorded address lost |
+| Check             | Command                                                   | Pass                                                                                                                                                                             |
+| ----------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| One image's bytes | `check-<image>`                                           | `sha1sum -c` accepts the linked payload                                                                                                                                          |
+| Every image       | `check`                                                   | every image matches                                                                                                                                                              |
+| Hygiene           | `format-check`, `include-asm`, `markers`, `addrs`, `kept` | format passes; `INCLUDE_ASM` not above merge base; every definition marked; no recorded address lost; no named helper, define, global, type, member or function lost or degraded |
 
 A failed build or an unsupported flag is a failure, never a match. A percentage only ranks work.
 
