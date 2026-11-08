@@ -134,7 +134,7 @@ format the rows. It reads the function index, so build first.
 ## Pre-push
 
 `pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs `check` (with a disc), `check-headers`,
-`check-plain` (with the compiler), `check-tree`, `externs`, `include-asm`, `addrs`, `format-check`, `meson test`, `typeloss`, `quality` and `subsystems` (writes the table to `build/subsystems.md`; never fails), prints one line each and
+`check-plain` (with the compiler), `check-tree`, `externs`, `include-asm`, `markers`, `addrs`, `format-check`, `meson test`, `typeloss`, `quality` and `subsystems` (writes the table to `build/subsystems.md`; never fails), prints one line each and
 keeps the logs in `build/pre-push/`. CI runs it too.
 
 ## Worktrees
@@ -153,7 +153,7 @@ Meson, setup or another tool calls these. A contributor does not run them.
 | `split.py`, `link_symbols.py`, `decomp_yaml.py` | Split an image, write its link script, and write the coddog settings    |
 | `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper and the DMPSX rewrite                              |
 | `objdiff_config.py`, `rzproject.py`          | Build the objdiff project and the Rizin projects                        |
-| `check_addrs.py`, `check_asm.sh`, `check_externs.sh`, `check_hand.sh`, `check_headers.sh`, `check_plain.sh`, `check_tree.sh` | The bodies of the `addrs`, `include-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
+| `check_addrs.py`, `check_markers.py`, `check_asm.sh`, `check_externs.sh`, `check_hand.sh`, `check_headers.sh`, `check_plain.sh`, `check_tree.sh` | The bodies of the `addrs`, `markers`, `include-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
 | `format.sh`                                  | The body of `format` and `format-check`                                 |
 
 `bin/coddog` finds twins and `bin/rz` reads retail bytes; no other tool does either. `bin/internal/` holds `find-tool` and the binutils wrappers (`as`, `ld`, `nm`, `objcopy`, `objdump`) that the build uses.

@@ -53,7 +53,7 @@ MATCH void func_801EEE0C(void) {
     g_Task->unk_20           = g_Task->pos.z.fixed;
     MATCH_FAKE_BARRIER(); /* FAKE: keeps the g_BattleActiveBattler read below the coord copy stores */
     slot = g_BattleActiveBattler;
-    if (slot < BATTLE_PARTY_SLOT_COUNT) {
+    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         battler = &g_BattlePartyBattlers[slot];
     } else {
         battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);

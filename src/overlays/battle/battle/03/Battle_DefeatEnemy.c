@@ -7,10 +7,10 @@ MATCH void Battle_DefeatEnemy(void) {
     volatile u32* acc;
 
     g_Task->header.flags = g_Task->header.flags | ACTOR_FLAG_HIDDEN;
-    acc                  = &g_BattleSpoilsExp;
+    acc                  = &g_BattleRewardExp;
     *acc += g_BattleCurrentEnemy->exp;
     ORDER_LOCK_BEGIN
-        g_BattleSpoilsZenny += g_BattleCurrentEnemy->zenny;
+        g_BattleRewardZenny += g_BattleCurrentEnemy->zenny;
         g_BattleCurrentEnemy->status |= STATUS_KO;
         g_BattleCurrentEnemy->zenny = 0;
         Battle_CancelTurn(g_Task->slot);

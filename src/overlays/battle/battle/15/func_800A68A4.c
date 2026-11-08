@@ -55,7 +55,7 @@ MATCH void func_800A68A4(void) {
     for (i = 0; i < g_BattleGeneCount[0]; i++) {
         FIELD(u8, &g_BattleTargetRows, i) = g_BattleGenes[i];
     }
-    for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         FIELD(u8, &g_BattleTargetRows, i) = 0xFF;
     }
     g_BattleTargetRows[0].gate_03 = (D_800B6F5C << 5) + (D_800B6F58 & 0x1F);

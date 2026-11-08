@@ -13,7 +13,7 @@ MATCH u8 func_801BF78C(void) {
         work        = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
         g_GameState = (GameState*)work;
         TASK_SET(work);
-        for (j = 0; j < BATTLE_PARTY_SLOT_COUNT; j++) {
+        for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
             if (g_PartyFieldOrder[j] == work[0x79]) {
                 break;
             }

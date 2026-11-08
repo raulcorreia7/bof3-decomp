@@ -19,7 +19,7 @@ MATCH s32 func_801B6470(void) {
                 return 0;
             }
             world_id = MEM(u16, GAME_AREA_ID_ADDR);
-            for (i = 0; i < 10; i++) {
+            for (i = 0; i < WORLD_MAP_DESTINATION_COUNT; i++) {
                 if (world_id == D_801CD24C[i].area_id) {
                     g_GameContextKind = 4;
                     g_GameContextSeed = D_801CD24C[i].map_id;

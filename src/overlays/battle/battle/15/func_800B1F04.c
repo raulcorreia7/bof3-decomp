@@ -25,7 +25,7 @@ MATCH void func_800B1F04(s16 x, s16 y, s32 width, s16 height, u8 color, u8 mask)
         base = 0xFF;
     }
 
-    for (bit = 1, i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++, bit <<= 1) {
+    for (bit = 1, i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++, bit <<= 1) {
         if (bit & mask_copy) {
             rgb[i] = base;
         } else {

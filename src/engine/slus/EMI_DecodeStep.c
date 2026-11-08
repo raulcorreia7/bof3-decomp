@@ -11,9 +11,7 @@
  * in pure C89.
  * MODEL: retain the C89 model below and count this separately from C matches.
  */
-#if BOF3_USE_ASM
-MATCH INCLUDE_ASM(EMI_DecodeStep);
-#else
+#ifdef NON_MATCHING
 /* INFERRED C model: resumable stream decoder.
  * decodes the scratchpad window [src, limit) into ctx->dst until the
  * window runs out or the 0xFF control byte appears, saving a resume state so
@@ -49,7 +47,7 @@ typedef enum DecoderState {
 /* Copy kernel: copies count bytes forward and returns the advanced
  * destination. The original takes count/src/dst in $s4/$s5/$t3. */
 
-s32 EMI_DecodeStep(void) {
+NON_MATCHING s32 EMI_DecodeStep(void) {
     EMIDecodeContext* ctx;
     u8*               dst;
     u8*               src;
@@ -156,4 +154,6 @@ window_check:
     ctx->src   = (u8*)SCRATCH_PAD;
     return 0;
 }
+#else
+INCLUDE_ASM(EMI_DecodeStep);
 #endif

@@ -17,7 +17,7 @@ MATCH void MenuDrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u
         shade = 0xFF;
     }
     bit = 1;
-    for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (mask & bit) {
             rgb[i] = shade;
         } else {

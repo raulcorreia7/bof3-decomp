@@ -10,7 +10,7 @@ MATCH void func_800B0250(void) {
     for (i = 0; i < 18; i++) {
         D_800B7088[i][0] = 0;
     }
-    for (j = 0; j < BATTLE_PARTY_SLOT_COUNT; j++) {
+    for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
         for (i = 0; i < 6; i++) {
             if (D_800B7070[j][i] != 0) {
                 slot                         = Battle_AllocEffect(0, 9) & BYTE_MASK;

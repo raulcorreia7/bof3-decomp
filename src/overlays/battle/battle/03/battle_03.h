@@ -436,7 +436,7 @@ extern u8               D_801EB4FA[][12];
 extern BattleRank       D_801EB550[];
 extern u8               D_801EB5B0[];
 /* D_801EBF20 */
-extern PartyBattler     s_BattleBattlerTemplates[BATTLE_PARTY_SLOT_COUNT]; /* Alternate local work entries. */
+extern PartyBattler     s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT]; /* Alternate local work entries. */
 extern u8               D_801EB6D0[];
 extern u8               D_801EBF04;
 extern s32              D_801EBFA0;
@@ -450,7 +450,7 @@ void          func_800980A8(void);
 void          func_8009834C(void);
 void          func_8009B274(void);
 /* func_8009BBE8 */
-void          Battle_FireEnemyEvents(void);
+void          Battle_TriggerEnemyEvents(void);
 void          func_8009BFC4(void);
 void          func_8009D198(void);
 u16           func_800A2AE0(u8 arg0);

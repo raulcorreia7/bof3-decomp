@@ -4,4 +4,4 @@
  * hand-written routine called from the battle and shop overlays; its
  * body is the original image's 0x2ec bytes.
  */
-MATCH INCLUDE_ASM(func_801644D8);
+INCLUDE_ASM(func_801644D8);

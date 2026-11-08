@@ -45,7 +45,7 @@ NON_MATCHING void func_801DAE14(u16 buttons) {
     for (i = 0; i < (count & BYTE_MASK); i++) {
         D_801ED694[i][0] = 1;
     }
-    for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {
+    for (; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         D_801ED694[i][0] = 0;
     }
 

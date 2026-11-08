@@ -8,7 +8,7 @@ MATCH u8 func_801E2D90(u8 slot_offset) {
 
     result = 0u;
     best   = 10000u;
-    for (slot = 0u; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
+    for (slot = 0u; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
         if (Battle_SlotIsBlocked(slot) == 0u) {
             value = g_BattlePartyBattlers[slot].chr.hp;
             if (value < best) {
