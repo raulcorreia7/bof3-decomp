@@ -17,7 +17,7 @@ MATCH void func_801F435C(void) {
         g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;
         func_801F45C8();
         g_Task->timer  = 0x50;
-        g_Task->unk_0A = rand() % 45;
+        g_Task->unk_0A = RANDOM_BELOW(45);
         if (g_Task->unk_0A != 0) {
             g_Task->timer -= 1;
             g_Task->header.mode = 2;

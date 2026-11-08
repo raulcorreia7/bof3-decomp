@@ -13,7 +13,7 @@ MATCH void Battle_RollEnemyDrops(void) {
     chances = g_BattleDropChances;
     for (i = 0; i < 2; i++) {
         if (g_BattleCurrentEnemy->drops[i].item != 0 && g_BattleCurrentEnemy->drops[i].rate != 0) {
-            if (chances.chance[g_BattleCurrentEnemy->drops[i].rate] >= (rand() & BYTE_MASK)) {
+            if (chances.chance[g_BattleCurrentEnemy->drops[i].rate] >= (RANDOM_MASK(BYTE_MASK))) {
                 for (j = 0; j < g_BattleOutcome.drop_count; j++) {
                     if (g_BattleOutcome.drops.items[j] == g_BattleCurrentEnemy->drops[i].item) {
                         g_BattleOutcome.drops.item_counts[j]++;

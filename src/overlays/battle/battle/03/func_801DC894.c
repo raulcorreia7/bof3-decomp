@@ -21,7 +21,7 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
     if (attacker < 3 && (g_Game.members[attacker].u.turn.action_flags.value & COMBATANT_FLAG_ALWAYS_HITS)) {
         return damage;
     }
-    if ((ENEMY_COMBATANT(target).event_flags & ENEMY_EVENT_EVADE) && (rand() & 2)) {
+    if ((ENEMY_COMBATANT(target).event_flags & ENEMY_EVENT_EVADE) && (RANDOM_MASK(2))) {
         ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
         return 0;
     }
@@ -29,7 +29,7 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
         return damage;
     }
     threshold = D_801EC324;
-    if (rand() % 100 < threshold) {
+    if (RANDOM_PERCENT() < threshold) {
         return damage;
     }
     ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;

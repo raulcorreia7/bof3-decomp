@@ -42,7 +42,7 @@ MATCH u8 func_801DD448(void) {
     work = g_Game.current;
     if ((work->u.turn.damage_flags.value & COMBATANT_FLAG_REPRISAL) == 0u) {
         threshold = work->chr.stats.reprisal_chance;
-        return (rand() % 100) < threshold;
+        return (RANDOM_PERCENT()) < threshold;
     }
     return 1u;
 }

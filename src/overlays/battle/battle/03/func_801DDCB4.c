@@ -26,7 +26,7 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
         return 0u;
     }
 
-    r100 = rand() % 100;
+    r100 = RANDOM_PERCENT();
     if (counter < 3u ? (s_BattleStatusRecoveryChances[counter] >= r100) : (r100 < 76)) {
         return 1u;
     }
@@ -41,5 +41,5 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     }
 
     limit = 10000 - rt[state] * 50;
-    return (rand() % 10000 <= limit) ? 1u : 0u;
+    return (RANDOM_BELOW(10000) <= limit) ? 1u : 0u;
 }

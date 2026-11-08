@@ -14,8 +14,9 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
     u8            actor;
     u8            slot;
 
-    slot               = arg0;
-    g_BattleActionType = ((s32)D_800B51F8[g_BattleEnemyBattlers[slot & BYTE_MASK].choice_ai] >> ((rand() & 3) * 2)) & 3;
+    slot = arg0;
+    g_BattleActionType =
+        ((s32)D_800B51F8[g_BattleEnemyBattlers[slot & BYTE_MASK].choice_ai] >> ((RANDOM_MASK(3)) * 2)) & 3;
     if ((g_BattleState & BATTLE_STATE_OVER) && (g_BattleEnemyBattlers[slot & BYTE_MASK].stats.intellect < 2U)) {
         g_BattleActionType = 0;
     }
@@ -33,7 +34,7 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
             } else {
                 if (g_BattleEnemyBattlers[index].event_flags & 0x20) {
                     g_BattleActionType                           = 4;
-                    g_BattleEnemyBattlers[index].turn.command.id = g_BattleEnemyBattlers[index].skills[rand() & 7];
+                    g_BattleEnemyBattlers[index].turn.command.id = g_BattleEnemyBattlers[index].skills[RANDOM_MASK(7)];
                     actor                                        = slot & BYTE_MASK;
                 } else {
                     goto block_16; /* shared state fallback */

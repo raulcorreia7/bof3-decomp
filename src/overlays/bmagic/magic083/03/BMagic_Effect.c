@@ -82,7 +82,7 @@ MATCH void func_801F0010(void) {
     PartyMember* reset;
 
     func_800AF764();
-    func_801F0BA8((rand() & 3) | 0x18);
+    func_801F0BA8((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -110,7 +110,7 @@ MATCH void func_801F0104(void) {
     PartyMember* task;
 
     func_800AF764();
-    func_801F0BA8((rand() & 3) | 0x18);
+    func_801F0BA8((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -138,9 +138,9 @@ MATCH void func_801F01F8(void) {
 
     func_800AF764();
     if ((g_Task->unk_0C == 4) && (g_Task->timer < 5U)) {
-        value2 = (rand() & 3) | 0x40;
+        value2 = (RANDOM_MASK(3)) | 0x40;
     } else {
-        value2 = (rand() & 3) | 0x18;
+        value2 = (RANDOM_MASK(3)) | 0x18;
     }
     func_801F0BA8(value2);
     Effect_SetActorMatrix();

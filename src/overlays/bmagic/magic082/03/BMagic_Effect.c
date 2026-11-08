@@ -65,7 +65,7 @@ MATCH void func_801EFEF4(void) {
     PartyMember* reset;
 
     func_800AF764();
-    func_801F0A84((rand() & 3) | 0x18);
+    func_801F0A84((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F03E0();
     PopMatrix();
@@ -93,7 +93,7 @@ MATCH void func_801EFFE8(void) {
     PartyMember* task;
 
     func_800AF764();
-    func_801F0A84((rand() & 3) | 0x18);
+    func_801F0A84((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F03E0();
     PopMatrix();

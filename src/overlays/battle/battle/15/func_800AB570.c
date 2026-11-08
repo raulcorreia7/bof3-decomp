@@ -10,7 +10,7 @@ MATCH void func_800AB570(s32 battler_index) {
     if ((s8)g_Game.members[index].counter_136 >= 6) {
         value = 5;
     }
-    if ((rand() % 20) < (s8)value && g_BattleLivingPartyCount != 1) {
+    if ((RANDOM_BELOW(20)) < (s8)value && g_BattleLivingPartyCount != 1) {
         result = func_800AB68C(index);
     } else {
         result = Battle_FindSelectableSlotForward(RANDOM_MASK(7) + 3);

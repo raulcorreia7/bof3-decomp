@@ -78,7 +78,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
 
     GFX_AddDitheredDrawMode(5, getTPage(0, 1, 320, 256));
     GLOW_RING_INNER  = g_Task->timer * 2;
-    GLOW_RING_OUTER  = g_Task->timer * 3 + (rand() & 3);
+    GLOW_RING_OUTER  = g_Task->timer * 3 + (RANDOM_MASK(3));
     GLOW_RING_RED    = g_Task->unk_09 * 15;
     GLOW_RING_GREEN  = g_Task->unk_09 * 4;
     GLOW_RING_BLUE   = g_Task->unk_09 * 15;

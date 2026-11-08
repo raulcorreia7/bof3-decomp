@@ -181,7 +181,7 @@ MATCH s32 func_801D2750(s32 limit) {
     s32 roll;
 
     do {
-        roll = rand() & 0xF;
+        roll = RANDOM_MASK(0xF);
     } while (roll == 0 || roll >= ((limit & 0xFF) + 1));
     return roll;
 }
@@ -419,11 +419,11 @@ MATCH void func_801D5A48(void) {
 MATCH s32 func_801D5AD0(s32 limit) {
     s32 var_s1;
 
-    var_s1 = rand() & 0x7F;
+    var_s1 = RANDOM_MASK(0x7F);
     ORDER_LOCK_BEGIN
     loop_1:
         if ((var_s1 & 0xFF) >= (u32)(limit & 0xFF)) {
-            var_s1 -= rand() & 0xF;
+            var_s1 -= RANDOM_MASK(0xF);
             goto loop_1;
         }
     ORDER_LOCK_END;

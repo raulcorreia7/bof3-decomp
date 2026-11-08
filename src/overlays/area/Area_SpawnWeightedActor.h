@@ -19,7 +19,7 @@ MATCH void Area_SpawnWeightedActor(void) {
     s32 pick;
     s32 y;
 
-    roll  = rand() & 0x3F;
+    roll  = RANDOM_MASK(0x3F);
     count = 0;
 pick_weight:
     weight = g_AreaSpawnWeights[count];

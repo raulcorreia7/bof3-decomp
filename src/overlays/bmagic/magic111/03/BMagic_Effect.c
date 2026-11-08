@@ -70,7 +70,7 @@ MATCH void func_801EF158(void) {
 MATCH void func_801EF1D4(void) {
     s32 start;
 
-    start          = rand() & 0x3F;
+    start          = RANDOM_MASK(0x3F);
     g_Task->unk_0C = start;
     g_Task->unk_10 = start + 0x1F;
     g_Task->unk_09 = 0;

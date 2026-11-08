@@ -1000,7 +1000,7 @@ static inline u8 BattleRollHitChance(u8 selection_kind, s16 (*hit_rate)(s32, s32
     if (temp == -1) {
         ret = 0;
     } else {
-        ret = (rand() % 100) >= ((threshold * rate * temp) / 10000);
+        ret = (RANDOM_PERCENT()) >= ((threshold * rate * temp) / 10000);
     }
     return ret;
 }

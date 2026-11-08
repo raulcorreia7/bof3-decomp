@@ -21,7 +21,7 @@ MATCH u8 func_800A3DF8(u8 battler_index, u8 selection_kind) {
     if (temp == -1) {
         ret = 0;
     } else {
-        ret = (rand() % 100) >= ((threshold * rate * temp) / 10000);
+        ret = (RANDOM_PERCENT()) >= ((threshold * rate * temp) / 10000);
     }
     return ret;
 }

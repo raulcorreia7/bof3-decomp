@@ -36,9 +36,9 @@ MATCH void func_801EEF04(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 2), 2, g_Task);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         if ((g_FrameCount & 1) == 0) {
-            g_Task->unk_5D = (rand() & 3) + 4;
-            g_Task->unk_5E = (rand() & 3) + 4;
-            g_Task->unk_5F = (rand() & 3) + 4;
+            g_Task->unk_5D = (RANDOM_MASK(3)) + 4;
+            g_Task->unk_5E = (RANDOM_MASK(3)) + 4;
+            g_Task->unk_5F = (RANDOM_MASK(3)) + 4;
         }
         Effect_SetActorMatrix();
         func_801EF258();
@@ -56,9 +56,9 @@ MATCH void func_801EEFF8(void) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x04000000;
-        g_Task->unk_5D      = (rand() & 3) + 4;
-        g_Task->unk_5E      = (rand() & 3) + 4;
-        g_Task->unk_5F      = (rand() & 3) + 4;
+        g_Task->unk_5D      = (RANDOM_MASK(3)) + 4;
+        g_Task->unk_5E      = (RANDOM_MASK(3)) + 4;
+        g_Task->unk_5F      = (RANDOM_MASK(3)) + 4;
         g_Task->unk_14      = 0x100;
         g_Task->unk_09      = 0x10;
         g_Task->timer       = 8;

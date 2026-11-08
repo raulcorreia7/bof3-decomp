@@ -42,7 +42,7 @@ MATCH void func_801EEEA4(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        g_Task->param.unk_0B = rand() & 3;
+        g_Task->param.unk_0B = RANDOM_MASK(3);
         if (g_Task->timer < 16) {
             g_Task->unk_09 = D_801F0A84[g_Task->timer];
         } else {

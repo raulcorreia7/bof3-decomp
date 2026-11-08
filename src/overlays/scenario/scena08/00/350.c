@@ -61,7 +61,7 @@ INCLUDE_ASM(func_801F74E0);
 
 MATCH void func_801F757C(void) {
     func_801F8534();
-    g_Task->script_pc += rand() & 0xFF;
+    g_Task->script_pc += RANDOM_MASK(0xFF);
     if (g_ScriptVars[0] == 0xB) {
         g_Task->unk_5A = 0x20;
         g_Task->header.mode += 1;
