@@ -45,8 +45,8 @@ MATCH void func_801EEEE0(void) {
 
 MATCH void func_801EEF84(void) {
     PartyMember* work;
-    s32          var_a0;
-    u8           temp_v0;
+    s32          cue;
+    u8           timer;
 
     g_Task->unk_29    = 0;
     g_Task->unk_25    = 0x1D;
@@ -58,16 +58,16 @@ MATCH void func_801EEF84(void) {
     work->unk_2B      = 0;
     work->unk_2C.half = 0;
     g_Task->unk_2A    = 0;
-    temp_v0           = g_Task->unk_09;
-    if (temp_v0 != 0) {
-        var_a0 = 0x100;
-        if (temp_v0 & 1) {
-            var_a0 = 0x101;
+    timer             = g_Task->unk_09;
+    if (timer != 0) {
+        cue = 0x100;
+        if (timer & 1) {
+            cue = 0x101;
         }
     } else {
-        var_a0 = 0x102;
+        cue = 0x102;
     }
-    SND_QueueSelectionFx(var_a0);
+    SND_QueueSelectionFx(cue);
     Actor_SelectScript(5U);
     g_Task->header.step += 1;
 }

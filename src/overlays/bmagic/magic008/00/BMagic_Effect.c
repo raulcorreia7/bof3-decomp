@@ -390,12 +390,12 @@ MATCH void func_801F1294(void) {
 #include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801F1384(void) {
-    u8 temp_v0;
+    u8 timer;
 
     func_8014DAEC();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         func_800AFC98(2, 0);
         func_800A9820(g_Battle.target_selector);
         g_Task->header.step += 1;
@@ -432,12 +432,12 @@ MATCH void Effect_ReloadTimerAndStep2(void) {
 }
 
 MATCH void func_801F1804(void) {
-    u8 temp_v0;
+    u8 timer;
 
     func_8014DAEC();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         func_800AFC98(2, 0);
         func_800A9820(g_Battle.target_selector);
         g_Task->header.step += 1;

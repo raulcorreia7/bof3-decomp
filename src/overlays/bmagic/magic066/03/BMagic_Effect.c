@@ -128,12 +128,12 @@ MATCH void func_801EF8C8(void) {
 }
 
 MATCH void func_801EF930(void) {
-    u8 temp_v1;
+    u8 timer;
 
     func_801EF984();
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 0x80) {
+    timer          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = timer;
+    if ((timer & BYTE_MASK) == 0x80) {
         func_801E5988();
     }
 }

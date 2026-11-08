@@ -55,11 +55,11 @@ MATCH void func_801EF070(void) {
 }
 
 MATCH void func_801EF0D4(void) {
-    u8 temp_v1;
+    u8 timer;
 
-    temp_v1        = g_Task->unk_09 + 2;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & BYTE_MASK) == 0x10) {
+    timer          = g_Task->unk_09 + 2;
+    g_Task->unk_09 = timer;
+    if ((timer & BYTE_MASK) == 0x10) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }

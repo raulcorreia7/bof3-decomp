@@ -59,32 +59,32 @@ INCLUDE_ASM(func_801EF420);
 
 MATCH void func_801EF5C0(void) {
     s16* state;
-    u16  var_v0;
-    u8   temp_v0;
+    u16  angle;
+    u8   timer;
 
     func_8014DAEC();
     if (g_Task->unk_09 & 1) {
-        state  = &g_AreaCameraAngle.vx;
-        var_v0 = *state + 0x14;
+        state = &g_AreaCameraAngle.vx;
+        angle = *state + 0x14;
     } else {
-        state  = &g_AreaCameraAngle.vx;
-        var_v0 = *state - 0x14;
+        state = &g_AreaCameraAngle.vx;
+        angle = *state - 0x14;
     }
-    *state         = var_v0;
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    *state         = angle;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         g_AreaCameraAngle.vx = -0x2AAU;
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF674(void) {
-    u8 temp_v0;
+    u8 timer;
 
-    temp_v0 = g_Task->timer;
-    if (temp_v0 != 0) {
-        g_Task->timer = temp_v0 - 2;
+    timer = g_Task->timer;
+    if (timer != 0) {
+        g_Task->timer = timer - 2;
     }
     if (func_8014DAEC() & BYTE_MASK) {
         g_Task->header.step += 1;
@@ -122,13 +122,13 @@ MATCH void func_801EFD94(void) {
 
 MATCH void func_801EFE1C(void) {
     s32  r;
-    s32  temp_v1;
+    s32  direction;
     s16* angle = &D_1F800004;
 
     r                   = rand();
-    temp_v1             = g_Task->param.unk_0B;
+    direction           = g_Task->param.unk_0B;
     g_Task->unk_0C      = (r & 7) + 8;
-    *angle              = temp_v1 << 9;
+    *angle              = direction << 9;
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(*angle) * g_Task->unk_0C);
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;

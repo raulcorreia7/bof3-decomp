@@ -10,33 +10,33 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC70);
 
 MATCH void func_801EEDF8(void) {
-    s32 var_a0;
-    s32 temp_v1;
-    u8  temp_v1_2;
+    s32 cue;
+    s32 timer;
+    u8  timer_next;
 
-    temp_v1 = g_Task->unk_09;
-    if (temp_v1 != 0x10) {
-        if (temp_v1 < 0x11) {
-            var_a0 = 0x101;
-            if (temp_v1 != 8) {
+    timer = g_Task->unk_09;
+    if (timer != 0x10) {
+        if (timer < 0x11) {
+            cue = 0x101;
+            if (timer != 8) {
             } else {
                 goto block_7;
             }
         } else {
-            var_a0 = 0x101;
-            if (temp_v1 != 0x18) {
+            cue = 0x101;
+            if (timer != 0x18) {
             } else {
                 goto block_7;
             }
         }
     } else {
-        var_a0 = 0x102;
+        cue = 0x102;
     block_7:
-        SND_QueueSelectionFx(var_a0);
+        SND_QueueSelectionFx(cue);
     }
-    temp_v1_2      = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1_2;
-    if ((temp_v1_2 & BYTE_MASK) == 0x19) {
+    timer_next     = g_Task->unk_09 + 1;
+    g_Task->unk_09 = timer_next;
+    if ((timer_next & BYTE_MASK) == 0x19) {
         g_Task->header.mode += 1;
     }
 }

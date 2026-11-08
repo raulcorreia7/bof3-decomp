@@ -48,12 +48,12 @@ MATCH void func_801EF3A4(void) {
 }
 
 MATCH void func_801EF43C(void) {
-    u8 temp_v0;
+    u8 timer;
 
     func_8014D978();
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         g_Task->unk_18 = 0x60;
         g_Task->unk_1C = -0x80;
         g_Task->header.step += 1;

@@ -179,20 +179,20 @@ MATCH void func_801EFBEC(void) {
 INCLUDE_ASM(func_801EFC54);
 
 MATCH void func_801EFD28(void) {
-    s32 temp_v1;
-    u8  temp_a1;
-    u8  temp_v0;
+    s32 value;
+    u8  timer;
+    u8  next;
 
-    temp_a1                  = g_Task->timer;
-    temp_v1                  = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14           = temp_v1;
-    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + temp_v1;
-    if (temp_a1 < 8U) {
-        g_Task->timer = temp_a1 + 1;
+    timer                    = g_Task->timer;
+    value                    = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14           = value;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + value;
+    if (timer < 8U) {
+        g_Task->timer = timer + 1;
     }
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    next           = g_Task->unk_09 - 1;
+    g_Task->unk_09 = next;
+    if (!(next & BYTE_MASK)) {
         func_800AFC98(2, 0);
         SND_QueueSelectionFx(0x203);
         g_Task->unk_14 = 0x40;
@@ -235,18 +235,18 @@ MATCH void func_801EFE38(void) {
 MATCH void func_801EFFCC(void) {
     PartyMember* work;
     PartyMember* source;
-    s8           temp_v0;
-    u8           temp_v0_2;
+    s8           count;
+    u8           timer;
 
-    temp_v0 = g_Task->unk_5D;
-    if (temp_v0 != -0x80) {
-        g_Task->unk_5D = temp_v0 - 0x10;
+    count = g_Task->unk_5D;
+    if (count != -0x80) {
+        g_Task->unk_5D = count - 0x10;
         g_Task->unk_5E -= 16;
         g_Task->unk_5F -= 16;
     }
-    temp_v0_2 = g_Task->timer;
-    if (temp_v0_2 != 0) {
-        g_Task->timer = temp_v0_2 - 2;
+    timer = g_Task->timer;
+    if (timer != 0) {
+        g_Task->timer = timer - 2;
     }
     if ((s8)g_Task->unk_5D == -128) {
         work   = g_Task;
