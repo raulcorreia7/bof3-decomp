@@ -7,7 +7,7 @@ MATCH void func_801D543C(void) {
     u8  panel_timer;
 
     resource    = 0;
-    panel_timer = 0x12;
+    panel_timer = 18;
     switch (g_SaveCardStatus) {
         case CARD_EVENT_TIMEOUT:
             resource = 3;
@@ -16,7 +16,7 @@ MATCH void func_801D543C(void) {
             resource    = 4;
             D_801E607C  = 0;
             D_8014865B  = 0;
-            panel_timer = 0xF;
+            panel_timer = 15;
             break;
         case CARD_EVENT_ERROR:
             resource = 5;
@@ -45,7 +45,7 @@ MATCH void func_801D543C(void) {
             break;
         case SAVE_STATUS_SAVED:
             MENU_DRAW_HEADER();
-            panel_timer = 0xB;
+            panel_timer = 11;
             UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(GAME_TEXT_SAVE_COMPLETE));
             SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             D_801E6080 = 1;
@@ -66,7 +66,7 @@ MATCH void func_801D543C(void) {
             break;
         case SAVE_STATUS_CREATED:
             MENU_DRAW_HEADER();
-            panel_timer = 0xB;
+            panel_timer = 11;
             UI_DrawText(28, 22, 0, 0xFFU, Message_GetText(0x96));
             SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             D_801E6080 = 1;
