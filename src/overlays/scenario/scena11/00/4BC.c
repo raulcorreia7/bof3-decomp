@@ -27,9 +27,37 @@ MATCH s32 func_801F7104(void) {
     return mode;
 }
 
-INCLUDE_ASM(func_801F7178);
+MATCH void func_801F7178(void) {
+    u16 angle;
+    s16 arg;
 
-INCLUDE_ASM(func_801F7200);
+    angle = (u16)g_AreaCameraAngle.vy;
+    arg = angle + 244;
+    g_AreaCameraAngle.vy = angle + 4;
+    Area_AdvanceScroll(arg);
+    if (g_AreaCameraAngle.vy >= 241) {
+        if (g_GameStateIndex == 0) {
+            SND_PlayCue(0x203);
+        }
+        g_Task->header.mode = 2;
+    }
+}
+
+MATCH void func_801F7200(void) {
+    u16 angle;
+    s16 arg;
+
+    angle = (u16)g_AreaCameraAngle.vy;
+    arg = angle + 236;
+    g_AreaCameraAngle.vy = angle - 4;
+    Area_AdvanceScroll(arg);
+    if (g_AreaCameraAngle.vy < -240) {
+        if (g_GameStateIndex == 0) {
+            SND_PlayCue(0x203);
+        }
+        g_Task->header.mode = 1;
+    }
+}
 
 MATCH void func_801F7288(void) {
     SYS_DISPATCH_BYTE(D_801FAEF0, D_80146872);
