@@ -2,4 +2,7 @@
 
 #include "overlays/area/Actor_WalkWhileWithinLimit.h"
 
-AREA_WALK_WHILE_WITHIN_LIMIT(D_801F6898);
+/* func_801F4840 */
+MATCH void Actor_WalkWhileWithinLimit(void) {
+    Area_WalkWhileWithinLimit(D_801F6898);
+}

@@ -2,4 +2,7 @@
 
 #include "overlays/area/Area_CheckStepTrigger.h"
 
-AREA_CHECK_STEP_TRIGGER(0x29);
+/* func_801F2E80 */
+MATCH s32 Area_CheckStepTrigger(s32 x, s32 y) {
+    return Area_StepIntoTrigger(x, y, 0x29);
+}

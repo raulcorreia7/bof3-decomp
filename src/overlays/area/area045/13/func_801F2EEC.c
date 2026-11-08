@@ -2,4 +2,6 @@
 
 #include "overlays/area/func_801F2EEC.h"
 
-AREA_STEP_BY_CELL_CODE(D_801F5338);
+MATCH void func_801F2EEC(void) {
+    AREA_STEP_BY_CELL_CODE(D_801F5338);
+}
