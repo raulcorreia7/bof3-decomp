@@ -8,9 +8,9 @@ MATCH void func_801F2C48(void) {
         g_AreaSceneMode = 1;
         func_80196070();
     } else {
-        width                                        = MEM_PTR(u8, 0x80104000u);
-        *(u8*)(g_AreaCellCodes + *width * 60 + 0x45) = 0x10;
-        *(u8*)(g_AreaCellCodes + *width * 60 + 0x46) = 0x10;
+        width                               = MEM_PTR(u8, 0x80104000u);
+        g_AreaCellCodes[*width * 60 + 0x45] = 0x10;
+        g_AreaCellCodes[*width * 60 + 0x46] = 0x10;
         func_801F2F3C(-0x100, 0x80);
         g_Task->header.step += 1;
     }
