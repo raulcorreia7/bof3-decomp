@@ -9,7 +9,6 @@
 /* The scratchpad work area is a PartyMember record in this image. */
 #define g_Task ((PartyMember*)g_Task)
 
-extern s8 D_80146875;
 #include "overlays/battle/battle.h"
 
 /* The ten script ids a phase starts, picked by the word at D_801463BE. */
