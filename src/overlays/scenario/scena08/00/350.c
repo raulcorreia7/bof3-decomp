@@ -421,6 +421,7 @@ MATCH void func_801FA294(void) {
     SYS_DISPATCH_BYTE(D_801FE964, D_80146872);
 }
 
+/* blocker: retail stores a word zero to g_ScriptVars (sw), the u8[4] declaration gives sb; first diff: sb at 0x801FA2F0. */
 INCLUDE_ASM(func_801FA2D0);
 
 INCLUDE_ASM(func_801FA32C);
