@@ -44,7 +44,31 @@ INCLUDE_ASM(func_801F7CC8);
 
 INCLUDE_ASM(func_801F7F08);
 
-INCLUDE_ASM(func_801F82D8);
+MATCH void func_801F82D8(s32 slot) {
+    Actor* work;
+    Actor* other;
+
+    TASK_SET(&g_ActorSlots[slot & 0xFF]);
+    Area_FindSceneRecord(0x18);
+
+    g_Task->active_flags = 0;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_2B       = (g_Task->unk_2B + 1);
+    g_Task->unk_48       = 0;
+
+    work                     = g_Task;
+    work->tint.bytes.unk_5D  = 0;
+    other                    = g_Task;
+    work->vz                 = 0;
+    work->gravity            = -8;
+    other->tint.bytes.unk_5E = 0;
+
+    g_Task->tint.bytes.unk_5F = 0;
+    Actor_SelectScript(0xE);
+
+    g_Task->header.mode = 3;
+    g_Task->header.step = 1;
+}
 
 INCLUDE_ASM(func_801F83C8);
 
