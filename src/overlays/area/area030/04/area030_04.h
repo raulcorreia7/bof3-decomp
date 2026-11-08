@@ -333,7 +333,6 @@ typedef struct FishingThresholdData {
     u16 thresholds[13];
 } FishingThresholdData;
 
-extern u16                   D_80010000[];
 extern s16                   D_800396C0;
 extern s16                   D_800396FE;
 extern u8                    D_800F724C;
