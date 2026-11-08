@@ -37,10 +37,10 @@ MATCH void func_801EEF78(void) {
 }
 
 MATCH void func_801EEFBC(void) {
-    EffectStepFuncs4 handlers;
+    Magic105Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 3) {
         func_801EF2F0();
         func_801EF3A0();

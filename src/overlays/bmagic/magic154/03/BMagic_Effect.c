@@ -95,9 +95,9 @@ MATCH void func_801EF454(void) {
 }
 
 MATCH void func_801EF4B4(void) {
-    EffectStepFuncs4 handlers = D_801EEC14;
+    Magic154Steps handlers = D_801EEC14;
 
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }

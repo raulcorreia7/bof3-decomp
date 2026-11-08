@@ -5,13 +5,73 @@
 #include "sys/emi.h"
 #include "types.h"
 
+/* The three state routines of a bmagic module head, run by the effect's mode. */
+#define MAGIC_MODULE_STEP_COUNT 3
+
+typedef struct MagicModuleSteps {
+    Callback steps[MAGIC_MODULE_STEP_COUNT];
+} MagicModuleSteps;
+
+/* The step routines Effect_DispatchStep runs for the work battler. */
+#define EFFECT_DISPATCH_STEP_COUNT 3
+
+typedef struct EffectDispatchSteps {
+    Callback steps[EFFECT_DISPATCH_STEP_COUNT];
+} EffectDispatchSteps;
+
+/* The mode routines Effect_DrawActor runs before it draws the effect's actor. */
+#define ACTOR_EFFECT_STEP_COUNT 3
+
+typedef struct ActorEffectSteps {
+    Callback steps[ACTOR_EFFECT_STEP_COUNT];
+} ActorEffectSteps;
+
+/* The step routines of the effect work record func_801EF37C advances. */
+#define BMAGIC_EFFECT_WORK_STEP_COUNT 3
+
+typedef struct BMagicEffectWorkSteps {
+    Callback steps[BMAGIC_EFFECT_WORK_STEP_COUNT];
+} BMagicEffectWorkSteps;
+
+/* The step routines of one sparkle of the sparkle pool. */
+#define SPARKLE_EFFECT_STEP_COUNT 3
+
+typedef struct SparkleEffectSteps {
+    Callback steps[SPARKLE_EFFECT_STEP_COUNT];
+} SparkleEffectSteps;
+
+/* The owners of these lists are not told apart yet; each type keeps the address of the shared function that runs it. */
+#define MAGIC010_SHARED_STEP_COUNT 4
+
+typedef struct Magic010SharedSteps {
+    Callback steps[MAGIC010_SHARED_STEP_COUNT];
+} Magic010SharedSteps;
+
+#define MAGIC068_SHARED_STEP_COUNT 5
+
+typedef struct Magic068SharedSteps {
+    Callback steps[MAGIC068_SHARED_STEP_COUNT];
+} Magic068SharedSteps;
+
+#define MAGIC065_SHARED_STEP_COUNT 4
+
+typedef struct Magic065SharedSteps {
+    Callback steps[MAGIC065_SHARED_STEP_COUNT];
+} Magic065SharedSteps;
+
+#define MAGIC004_SHARED_STEP_COUNT 5
+
+typedef struct Magic004SharedSteps {
+    Callback steps[MAGIC004_SHARED_STEP_COUNT];
+} Magic004SharedSteps;
+
 /* A battle-effect module's head. The id word is the value the type-0 EMI
  * loader compares with the archive TOC; the three state callbacks follow and
  * the module entry copies them and indexes them with the shared spad step
  * byte. The rest of the head is per-module data measured from its own bytes. */
 typedef struct MagicModule {
     EMIModuleId      id;    /* 0x00; 0x144-0x1BF */
-    EffectStepFuncs3 steps; /* 0x04 */
+    MagicModuleSteps steps; /* 0x04 */
 } MagicModule;
 
 ASSERT_SIZE(MagicModule, 0x10);

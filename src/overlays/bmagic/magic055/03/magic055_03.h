@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs3 D_801EEC04;
+extern ActorEffectSteps D_801EEC04;
 extern Callback         D_801EFC64[];
 
 #endif

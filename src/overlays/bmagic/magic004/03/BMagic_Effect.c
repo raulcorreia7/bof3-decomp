@@ -38,10 +38,10 @@ MATCH void func_801EF8CC(void) {
 }
 
 MATCH void func_801EF910(void) {
-    EffectStepFuncs4 handlers;
+    Magic004Steps handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }

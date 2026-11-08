@@ -3,65 +3,22 @@
 
 #include "common/handler.h"
 
-/* func_801D656C treats 0xFF as pending; battle/battle/03 passes modes 0-6. */
-typedef u8 (*BossBattleEventFunc)(u32 mode);
+/* The moments of a boss encounter at which battle/battle/03 calls the boss overlay's g_BossBattleEventHook. */
+typedef enum BossEvent {
+    BOSS_EVENT_RESTART_BEGIN,  /* the battle restarts */
+    BOSS_EVENT_ACTION_START,   /* a chosen action begins */
+    BOSS_EVENT_TURN_END,       /* the turn's hand-off wait is over; the hook may keep it pending */
+    BOSS_EVENT_TICK,           /* every frame of a running battle mode */
+    BOSS_EVENT_EFFECTS_LOADED, /* the battle effect overlay finished loading */
+    BOSS_EVENT_RESTART_END,    /* the restart message is up */
+    BOSS_EVENT_BATTLE_RESET,   /* the battle state is reset */
+    BOSS_EVENT_COUNT
+} BossEvent;
 
-/* The step routines of a battle effect, run by the effect's header.mode or
- * header.step. Retail copies the whole list to the stack before the indexed
- * call, so each length is its own type. */
-typedef struct EffectStepFuncs3 {
-    Callback handlers[3];
-} EffectStepFuncs3;
+/* The hook's reply to BOSS_EVENT_TURN_END while the boss still runs its own event. */
+#define BOSS_EVENT_PENDING 0xFF
 
-typedef struct EffectStepFuncs4 {
-    Callback handlers[4];
-} EffectStepFuncs4;
-
-typedef struct EffectStepFuncs5 {
-    Callback handlers[5];
-} EffectStepFuncs5;
-
-typedef struct EffectStepFuncs8 {
-    Callback handlers[8];
-} EffectStepFuncs8;
-
-/* The state routines of a battle menu panel, selected by the panel's state. */
-typedef struct BattlePanelStateFuncs3 {
-    Callback handlers[3];
-} BattlePanelStateFuncs3;
-
-typedef struct BattlePanelStateFuncs4 {
-    Callback handlers[4];
-} BattlePanelStateFuncs4;
-
-typedef struct BattlePanelStateFuncs5 {
-    Callback handlers[5];
-} BattlePanelStateFuncs5;
-
-/* The mode routines of a battle menu panel, selected by the panel's mode. */
-typedef struct BattlePanelModeFuncs5 {
-    Callback handlers[5];
-} BattlePanelModeFuncs5;
-
-typedef struct BattlePanelModeFuncs6 {
-    Callback handlers[6];
-} BattlePanelModeFuncs6;
-
-/* The routines of the battle event kinds Battle_RunEvents dispatches. */
-typedef struct BattleEventFuncs {
-    Callback handlers[5];
-} BattleEventFuncs;
-
-ASSERT_SIZE(EffectStepFuncs3, 3 * sizeof(Callback));
-ASSERT_SIZE(EffectStepFuncs4, 4 * sizeof(Callback));
-ASSERT_SIZE(EffectStepFuncs5, 5 * sizeof(Callback));
-ASSERT_SIZE(EffectStepFuncs8, 8 * sizeof(Callback));
-ASSERT_SIZE(BattlePanelStateFuncs3, 3 * sizeof(Callback));
-ASSERT_SIZE(BattlePanelStateFuncs4, 4 * sizeof(Callback));
-ASSERT_SIZE(BattlePanelStateFuncs5, 5 * sizeof(Callback));
-ASSERT_SIZE(BattlePanelModeFuncs5, 5 * sizeof(Callback));
-ASSERT_SIZE(BattlePanelModeFuncs6, 6 * sizeof(Callback));
-ASSERT_SIZE(BattleEventFuncs, 5 * sizeof(Callback));
+typedef u8 (*BossEventFunc)(u32 event);
 
 void        func_800AC844(u8 entry_id);
 void        func_800AC934(u8 entry_id);

@@ -16,17 +16,35 @@ typedef struct Magic008Steps {
     Callback handlers[MAGIC008_STEP_COUNT];
 } Magic008Steps;
 
-extern EffectStepFuncs4  D_801EEC04;
+#define MAGIC008_STEP_COUNT 4
+
+typedef struct Magic008Steps {
+    Callback steps[MAGIC008_STEP_COUNT];
+} Magic008Steps;
+
+#define MAGIC008_SECOND_STEP_COUNT 3
+
+typedef struct Magic008SecondSteps {
+    Callback steps[MAGIC008_SECOND_STEP_COUNT];
+} Magic008SecondSteps;
+
+#define MAGIC008_THIRD_STEP_COUNT 5
+
+typedef struct Magic008ThirdSteps {
+    Callback steps[MAGIC008_THIRD_STEP_COUNT];
+} Magic008ThirdSteps;
+
+extern Magic008Steps     D_801EEC04;
 extern BMagicEffectFuncs D_801EEC58;
 
-extern EffectStepFuncs3  D_801EEC14;
-extern EffectStepFuncs5  D_801EEC70;
-extern EffectStepFuncs4  D_801EEC20;
-extern EffectStepFuncs4  D_801EEC30;
-extern EffectStepFuncs3  D_801EEC40;
-extern EffectStepFuncs3  D_801EEC4C;
-extern EffectStepFuncs4  D_801EEC84;
-extern BMagicEffectFuncs D_801EEC94;
+extern Magic008SecondSteps D_801EEC14;
+extern Magic008ThirdSteps  D_801EEC70;
+extern Magic008Steps       D_801EEC20;
+extern Magic008Steps       D_801EEC30;
+extern Magic008SecondSteps D_801EEC40;
+extern Magic008SecondSteps D_801EEC4C;
+extern Magic008Steps       D_801EEC84;
+extern BMagicEffectFuncs   D_801EEC94;
 
 extern Magic008EarlySteps D_801EECAC;
 extern Magic008Steps      D_801EECC8;

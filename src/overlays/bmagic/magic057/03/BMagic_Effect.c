@@ -17,10 +17,10 @@ MATCH void func_801EECB0(void) {
 }
 
 MATCH void func_801EED2C(void) {
-    EffectStepFuncs4 table;
+    Magic057Steps table;
 
     table = D_801EEC10;
-    SYS_DISPATCH_TASK(table.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(table.steps, 2, g_Task);
 }
 
 MATCH void func_801EED98(void) {
@@ -71,18 +71,18 @@ MATCH void func_801EEFEC(void) {
 }
 
 MATCH void func_801EF02C(void) {
-    EffectStepFuncs3 handlers;
+    Magic057SecondSteps handlers;
 
     handlers = D_801EEC20;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 MATCH void func_801EF08C(void) {
-    EffectStepFuncs3 handlers;
+    Magic057SecondSteps handlers;
 
     handlers     = D_801EEC2C;
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1) {
         func_8014D290();
     }
@@ -104,10 +104,10 @@ MATCH void func_801EF528(void) {
 }
 
 MATCH void func_801EF55C(void) {
-    EffectStepFuncs3 handlers;
+    Magic057SecondSteps handlers;
 
     handlers = D_801EEC38;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
 MATCH void func_801EF5BC(void) {
@@ -148,11 +148,11 @@ MATCH void func_801EF81C(void) {
 }
 
 MATCH void func_801EF83C(void) {
-    EffectStepFuncs3 handlers;
+    Magic057SecondSteps handlers;
 
     handlers     = D_801EEC44;
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((g_Task->header.flags & 1) && (g_BattleEffectBattler->timer == 0)) {
         func_8014D290();
     }

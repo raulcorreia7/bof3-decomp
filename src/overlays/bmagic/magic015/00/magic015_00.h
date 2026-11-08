@@ -5,13 +5,31 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs4 D_801EEC04;
+#define MAGIC015_STEP_COUNT 4
 
-extern EffectStepFuncs4 D_801EEC14;
-extern EffectStepFuncs4 D_801EEC24;
-extern EffectStepFuncs5 D_801EEC54;
-extern EffectStepFuncs8 D_801EEC34;
-extern u8               g_BattleActiveBattler;
+typedef struct Magic015Steps {
+    Callback steps[MAGIC015_STEP_COUNT];
+} Magic015Steps;
+
+#define MAGIC015_THIRD_STEP_COUNT 5
+
+typedef struct Magic015ThirdSteps {
+    Callback steps[MAGIC015_THIRD_STEP_COUNT];
+} Magic015ThirdSteps;
+
+#define MAGIC015_SECOND_STEP_COUNT 8
+
+typedef struct Magic015SecondSteps {
+    Callback steps[MAGIC015_SECOND_STEP_COUNT];
+} Magic015SecondSteps;
+
+extern Magic015Steps D_801EEC04;
+
+extern Magic015Steps       D_801EEC14;
+extern Magic015Steps       D_801EEC24;
+extern Magic015ThirdSteps  D_801EEC54;
+extern Magic015SecondSteps D_801EEC34;
+extern u8                  g_BattleActiveBattler;
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the
  * fade is done, moves the effect onto that battler and advances. One body shared

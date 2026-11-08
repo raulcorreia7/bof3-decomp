@@ -5,8 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleEffect*    D_801EC2E0;
-extern EffectStepFuncs4 D_801EEC04;
+extern BattleEffect*       D_801EC2E0;
+extern Magic010SharedSteps D_801EEC04;
 
 /* The guard the record reset waits on, the battle flag it raises, and the
  * request hand-off that follows. */

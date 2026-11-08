@@ -8,9 +8,9 @@ void Effect_SetActorMatrix(void);
 void func_801EF9E4(void);
 
 MATCH void Effect_DrawActor(void) {
-    EffectStepFuncs3 handlers = D_801EEC04;
+    ActorEffectSteps handlers = D_801EEC04;
 
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     if (g_Task->header.flags != 0) {
         func_800AF764();
         g_Task->unk_30.half -= 0x10;

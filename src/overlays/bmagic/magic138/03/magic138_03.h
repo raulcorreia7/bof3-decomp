@@ -5,6 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs3 D_801EEC10;
+#define MAGIC138_STEP_COUNT 3
+
+typedef struct Magic138Steps {
+    Callback steps[MAGIC138_STEP_COUNT];
+} Magic138Steps;
+
+extern Magic138Steps D_801EEC10;
 
 #endif

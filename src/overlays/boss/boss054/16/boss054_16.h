@@ -17,11 +17,17 @@ ASSERT_OFFSET(Boss054Funcs, handlers, 0x00);
 
 extern Boss054Funcs D_800C1804;
 
-extern EffectStepFuncs3 D_800C182C;
-extern u8               D_800C2078[];
-extern u16              D_800C2084[];
-extern Callback         D_800C2090[];
-extern Callback         D_800C20C0[];
+#define BOSS054_EFFECT_STEP_COUNT 3
+
+typedef struct Boss054EffectSteps {
+    Callback steps[BOSS054_EFFECT_STEP_COUNT];
+} Boss054EffectSteps;
+
+extern Boss054EffectSteps D_800C182C;
+extern u8                 D_800C2078[];
+extern u16                D_800C2084[];
+extern Callback           D_800C2090[];
+extern Callback           D_800C20C0[];
 
 void func_800C18E0(s32 mode);
 void func_800C1D7C(void);
