@@ -30,7 +30,7 @@ MATCH void func_801EEF60(void) {
 }
 
 MATCH void func_801EEFA4(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers     = D_801EEC10;
     g_ScriptBank = 0x800C3800;

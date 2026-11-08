@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EECA0(void) {
-    BattleHandlerTable4 table = D_801EEC04;
+    EffectStepFuncs4 table = D_801EEC04;
 
     SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
 }
@@ -23,7 +23,7 @@ MATCH void func_801EF150(void) {
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF248(void) {
-    BattleHandlerTable4 table = D_801EEC14;
+    EffectStepFuncs4 table = D_801EEC14;
 
     SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
 }
@@ -41,7 +41,7 @@ MATCH void Effect_StartPlaying_801EF610(void) {
 }
 
 MATCH void func_801EF644(void) {
-    BattleHandlerTable4 table = D_801EEC24;
+    EffectStepFuncs4 table = D_801EEC24;
 
     SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
 }
@@ -68,7 +68,7 @@ MATCH void func_801EF9E4(void) {
 }
 
 MATCH void func_801EFA28(void) {
-    BattleHandlerTable8 handlers = D_801EEC34;
+    EffectStepFuncs8 handlers = D_801EEC34;
 
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
@@ -133,7 +133,7 @@ MATCH void func_801EFEFC(void) {
 }
 
 MATCH void func_801EFF1C(void) {
-    BattleHandlerTable5 handlers;
+    EffectStepFuncs5 handlers;
 
     handlers = D_801EEC54;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);

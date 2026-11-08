@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC24(void) {
-    BattleHandlerTable5 handlers;
+    EffectStepFuncs5 handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
@@ -109,7 +109,7 @@ MATCH void func_801F02A0(void) {
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
 MATCH void func_801F038C(void) {
-    BattleHandlerTable3 handlers;
+    EffectStepFuncs3 handlers;
 
     handlers = D_801EEC18;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);

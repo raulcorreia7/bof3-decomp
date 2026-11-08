@@ -10,8 +10,8 @@
  * the module entry copies them and indexes them with the shared spad step
  * byte. The rest of the head is per-module data measured from its own bytes. */
 typedef struct MagicModule {
-    EMIModuleId         id;    /* 0x00; 0x144-0x1BF */
-    BattleHandlerTable3 steps; /* 0x04 */
+    EMIModuleId      id;    /* 0x00; 0x144-0x1BF */
+    EffectStepFuncs3 steps; /* 0x04 */
 } MagicModule;
 
 ASSERT_SIZE(MagicModule, 0x10);

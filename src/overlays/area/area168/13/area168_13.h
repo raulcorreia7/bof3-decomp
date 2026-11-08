@@ -21,6 +21,8 @@ enum {
 /* The shadow-quad renderer the step pairs call; func_801F4158 in the retail
  * symbol map. */
 void               func_801F4158_area168(s32 index, s8 code);
+/* The cell-code write, taking the three values as full words (this image passes the table words unnarrowed). */
+void               func_801A4BC0(s32 column, s32 row, s32 code);
 /* The scratchpad quad the shadow pass fills and the GTE reads. */
 extern SVECTOR     D_1F800014[];
 /* The shadow spread multiplier this pass indexes by the step code. */
@@ -33,9 +35,12 @@ extern u8          D_801F4F95[];
 
 /* The party position in 16.16 fixed point. */
 extern s32 D_80145EC4;
+/* One cell of the entry tables inside the payload blob: `offset` is the table's byte offset, `index` the byte offset of
+ * the row. */
+#define AREA168_ENTRY_TABLE(type, offset, index) (*(type*)&D_801F4B2C[(offset) + (index)])
 /* The payload's data after the last function; the per-state handler tables
  * start at 0xC. */
-extern u8  D_801F4B2C[];
+extern u8 D_801F4B2C[];
 
 /* The game-overlay state bytes the cancel path resets. */
 #endif

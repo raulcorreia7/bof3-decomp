@@ -5,9 +5,9 @@ MATCH void GFX_FreePaletteFadeTarget(void* target) {
 
     index = 0;
     do {
-        if (D_80145BD4[index].target == target) {
+        if (g_PaletteFades[index].target == target) {
             GFX_FreePaletteFade(index);
         }
         index += 1;
-    } while (index < GRAPHICS_PALETTE_FADE_COUNT);
+    } while (index < PALETTE_FADE_COUNT);
 }

@@ -26,7 +26,7 @@ NON_MATCHING void func_8019625C(void) {
     u8 high_bit;
 
     for (entry_index = 0; entry_index < 32; entry_index++) {
-        entry = &D_80145BD4[entry_index];
+        entry = &g_PaletteFades[entry_index];
         if ((entry->flags & PALETTE_FADE_ACTIVE) != 0u) {
             value             = entry->saved_byte;
             table_index       = entry->table_index;
@@ -53,7 +53,7 @@ NON_MATCHING void func_8019625C(void) {
                 green = (s8)((color >> 5) & 0x1Fu);
                 blue  = (s8)((color >> 10) & 0x1Fu);
 
-                red   = (s8)(red + entry->red_offset);
+                red   = (s8)(red + entry->offset.red);
                 value = red < 0;
                 if (value) {
                     red = 0;
@@ -61,14 +61,14 @@ NON_MATCHING void func_8019625C(void) {
                     red = 0x1F;
                 }
 
-                green = (s8)(green + entry->green_offset);
+                green = (s8)(green + entry->offset.green);
                 if (green < 0) {
                     green = 0;
                 } else if (green >= 0x20) {
                     green = 0x1F;
                 }
 
-                blue = (s8)(blue + entry->blue_offset);
+                blue = (s8)(blue + entry->offset.blue);
                 if (blue < 0) {
                     blue = 0;
                 } else if (blue >= 0x20) {

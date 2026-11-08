@@ -26,7 +26,7 @@ MATCH void func_801EEEA0(void) {
 }
 
 MATCH void func_801EEEE4(void) {
-    BattleHandlerTable5 handlers = D_801EEC10;
+    EffectStepFuncs5 handlers = D_801EEC10;
 
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
