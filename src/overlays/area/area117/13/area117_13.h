@@ -12,6 +12,7 @@ extern u8  D_80144ED0[];
 /* The party position in 16.16 fixed point. */
 extern s32 D_80145EC4;
 extern u16 D_801F55D8[];
+extern u8  D_801F463C[];
 
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x1C
