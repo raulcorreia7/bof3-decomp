@@ -1,8 +1,6 @@
 #include "area016_13.h"
 
-/* nonmatching: 5 instructions; retail schedules `subu v1,t1,t0` (x_low) before the y shift. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F4768(void) {
+MATCH void func_801F4768(void) {
     POLY_FT4* prim;
     POLY_FT4* cell;
     SVECTOR*  quad;
@@ -15,8 +13,6 @@ NON_MATCHING void func_801F4768(void) {
     s32       size;
     s32       row;
     s32       col;
-    s32       x_low;
-    s32       y_low;
     s32       x_high;
     s32       y_high;
 
@@ -53,18 +49,14 @@ NON_MATCHING void func_801F4768(void) {
     q1->vz   = -0x300;
     q2->vz   = -0x300;
     q3->vz   = -0x300;
-    x_low    = x_high - size;
-    y_low    = y_high - size;
-    x_high += size;
-    y_high += size;
-    quad->vx = x_low;
-    quad->vy = y_low;
-    q1->vx   = x_high;
-    q1->vy   = y_low;
-    q2->vx   = x_low;
-    q2->vy   = y_high;
-    q3->vx   = x_high;
-    q3->vy   = y_high;
+    quad->vx = x_high - size;
+    quad->vy = y_high - size;
+    q1->vx   = x_high + size;
+    q1->vy   = y_high - size;
+    q2->vx   = x_high - size;
+    q2->vy   = y_high + size;
+    q3->vx   = x_high + size;
+    q3->vy   = y_high + size;
     RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
     func_80155560(width | 0xBB509100, prim, 1);
@@ -105,7 +97,3 @@ NON_MATCHING void func_801F4768(void) {
         }
     }
 }
-#else
-/* blocker: schedule of the vertex corners; first diff: subu v1,t1,t0 at 0x801F495C. */
-INCLUDE_ASM(func_801F4768);
-#endif
