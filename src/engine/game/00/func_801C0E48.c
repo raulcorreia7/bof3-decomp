@@ -14,7 +14,7 @@ MATCH s32 func_801C0E48(void) {
         result = 1;
     } else {
         slot = D_80146262 - 1;
-        if (D_80145E91[slot * BATTLE_PARTY_STRIDE] == 1) {
+        if (g_BattlePartyBattlers[slot].header.mode == 1) {
             if (D_80146262 == 1) {
                 flags           = g_AreaWalkFlags;
                 g_AreaWalkFlags = flags & ~AREA_WALK_ENTRY_ACTIVE;
