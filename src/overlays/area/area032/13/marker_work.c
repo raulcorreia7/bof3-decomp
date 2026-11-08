@@ -158,64 +158,34 @@ MATCH s32 func_801F2C04(void) {
 #include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F2D18(void) {
-    u8**   slots;
-    Actor* work;
-    u8*    chk;
-
-    slots = SP_PTR(u8*, 0u);
-    work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc(work->screen_x, work->screen_y, work->timer, 0x80, 0);
-    slots = SP_PTR(u8*, 0u);
-    slots[0x11][9] += 0x0F;
-    slots = SP_PTR(u8*, 0u);
-    chk   = slots[0x11];
-    if (chk[9] >= 0x3D) {
-        chk[9] = 0xFF;
-        slots  = SP_PTR(u8*, 0u);
-        slots[0x11][1] += 1;
+    GFX_DrawShadedDisc(g_Task->screen_x, g_Task->screen_y, g_Task->timer, 0x80, 0);
+    g_Task->timer += 0x0F;
+    if (g_Task->timer >= 0x3D) {
+        g_Task->timer = 0xFF;
+        g_Task->header.mode += 1;
     }
 }
 
 MATCH void func_801F2DAC(void) {
-    u8**   slots;
-    Actor* work;
-    u8*    chk;
-    u8     count;
+    u8 count;
 
-    slots = SP_PTR(u8*, 0u);
-    work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc(work->screen_x, work->screen_y, (work->timer & 1) | 0x3C, 0x80, 0);
-    slots = SP_PTR(u8*, 0u);
-    if (slots[0x11][9] == 0xD7) {
+    GFX_DrawShadedDisc(g_Task->screen_x, g_Task->screen_y, (g_Task->timer & 1) | 0x3C, 0x80, 0);
+    if (g_Task->timer == 0xD7) {
         SND_PlayCue(EMI_CUE_ID(2, 3));
     }
-    slots  = SP_PTR(u8*, 0u);
-    chk    = slots[0x11];
-    count  = (chk[9] - 1);
-    chk[9] = count;
+    count         = (g_Task->timer - 1);
+    g_Task->timer = count;
     if (count == 0) {
-        slots          = SP_PTR(u8*, 0u);
-        slots[0x11][9] = 0x3C;
-        slots          = SP_PTR(u8*, 0u);
-        slots[0x11][1] += 1;
+        g_Task->timer = 0x3C;
+        g_Task->header.mode += 1;
     }
 }
 
 MATCH void func_801F2E64(void) {
-    u8**   slots;
-    Actor* work;
-    s8*    chk;
-
-    slots = SP_PTR(u8*, 0u);
-    work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc(work->screen_x, work->screen_y, work->timer, 0x80, 0);
-    slots = SP_PTR(u8*, 0u);
-    slots[0x11][9] -= 1;
-    slots = SP_PTR(u8*, 0u);
-    chk   = (s8*)slots[0x11];
-    if (chk[9] < 0) {
-        slots = SP_PTR(u8*, 0u);
-        slots[0x11][1] += 1;
+    GFX_DrawShadedDisc(g_Task->screen_x, g_Task->screen_y, g_Task->timer, 0x80, 0);
+    g_Task->timer -= 1;
+    if ((s8)g_Task->timer < 0) {
+        g_Task->header.mode += 1;
     }
 }
 
@@ -230,7 +200,6 @@ MATCH void func_801F30A8(void) {
 }
 
 MATCH void func_801F30EC(void) {
-    u8** slots;
     u8*  work;
     u8*  data;
     u8*  cell;
@@ -238,55 +207,43 @@ MATCH void func_801F30EC(void) {
     u32  cell3;
     s16* scratch;
 
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][3] = Actor_FindFree();
-    slots          = SP_PTR(u8*, 0u);
-    if (slots[0x11][3] == GAME_NONE) {
+    g_Task->unk_03 = Actor_FindFree();
+    if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    slots[0x11][4]                        = Actor_FindFree();
-    slots                                 = SP_PTR(u8*, 0u);
-    if (slots[0x11][4] == GAME_NONE) {
-        slots                                 = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].header.flags = 0;
+    g_Actors[g_Task->unk_03].header.flags = 1;
+    g_Task->unk_04                        = Actor_FindFree();
+    if (g_Task->unk_04 == GAME_NONE) {
+        g_Actors[g_Task->unk_03].header.flags = 0;
         return;
     }
 
     scratch                               = (s16*)D_1F800000;
     data                                  = (u8*)D_801F3F8C;
-    slots                                 = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags = 1;
-    slots                                 = SP_PTR(u8*, 0u);
-    work                                  = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags = 1;
+    work                                  = (u8*)g_Task;
     *scratch                              = work[3];
     func_801A4D54(data);
     *scratch = work[4];
     func_801A4D54(data);
-    slots[0x11] = work;
+    SP_REF(u8*, 0x44) = work;
 
     g_Actors[work[3]].pos.x.fixed -= ONE;
     g_Actors[work[3]].pos.y.fixed += ONE;
     g_Actors[work[4]].pos.x.fixed += ONE;
     g_Actors[work[4]].pos.y.fixed -= ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    slots                                     = SP_PTR(u8*, 0u);
-    cell                                      = slots[0x11];
+    g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    cell                                      = (u8*)g_Task;
     cell4                                     = cell[4];
     cell3                                     = cell[3];
     FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 0;
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 0;
     GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
     GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][9] = 4;
-    slots          = SP_PTR(u8*, 0u);
-    slots[0x11][1] = 1;
+    g_Task->timer       = 4;
+    g_Task->header.mode = 1;
 }
 
 #include "shared/Actor_Reveal.h"
@@ -353,71 +310,55 @@ MATCH void func_801F3800(void) {
 
 MATCH void func_801F3844(void) {
     /* FAKE: v1 pin keeps slot pointer live; unpinned spills to a1. */
-    FAKE_REG(u8*, work, "v1");
-    u8**   slots;
-    s8*    swords;
+    FAKE_REG(Actor*, work, "v1");
+    Actor* slot;
     s32    value;
     Actor* base;
 
-    slots                  = SP_PTR(u8*, 0u);
-    g_CurrentActor->unk_93 = GFX_AllocPaletteFade(slots[0x11], 0, 0, 0, 1);
-    slots                  = SP_PTR(u8*, 0u);
-    work                   = slots[0x11];
-    work[0] |= 0x20;
-    slots = SP_PTR(u8*, 0u);
-    work  = slots[0x11];
-    work[0] &= 0xBF;
-    slots                       = SP_PTR(u8*, 0u);
-    slots[0x11][0x5C]           = 1;
-    slots                       = SP_PTR(u8*, 0u);
-    swords                      = (s8*)slots[0x11];
-    swords[0x5F]                = -0x80;
-    swords[0x5E]                = -0x80;
-    swords[0x5D]                = -0x80;
-    slots                       = SP_PTR(u8*, 0u);
-    work                        = slots[0x11];
-    value                       = 0x2000;
-    *(s32*)(work + 0xC)         = value;
-    value                       = ((Actor*)work)->pos.x.fixed;
-    work[4]                     = 1;
-    base                        = g_CurrentActor;
-    ((Actor*)work)->pos.x.fixed = value + 0x2000;
+    g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, 0, 0, 0, 1);
+    work                   = g_Task;
+    work->header.flags |= 0x20;
+    work = g_Task;
+    work->header.flags &= 0xBF;
+    g_Task->tint.bytes.flags = 1;
+    slot                     = g_Task;
+    slot->tint.signed_bytes.unk_5F = -0x80;
+    slot->tint.signed_bytes.unk_5E = -0x80;
+    slot->tint.signed_bytes.unk_5D = -0x80;
+    work  = g_Task;
+    value = 0x2000;
+    work->vx           = value;
+    value              = work->pos.x.fixed;
+    work->unk_04       = 1;
+    base               = g_CurrentActor;
+    work->pos.x.fixed  = value + 0x2000;
     base->unk_7E -= 2;
 }
 
 MATCH void func_801F3920(void) {
-    u8**   slots;
     Actor* work;
-    u8*    slot;
+    Actor* slot;
 
-    slots = SP_PTR(u8*, 0u);
-    if (((Actor*)slots[0x11])->tint.signed_bytes.unk_5D < -0x40) {
-        ((Actor*)slots[0x11])->tint.signed_bytes.unk_5D += 4;
+    if (g_Task->tint.signed_bytes.unk_5D < -0x40) {
+        g_Task->tint.signed_bytes.unk_5D += 4;
     }
-    slots = SP_PTR(u8*, 0u);
-    if (((Actor*)slots[0x11])->tint.signed_bytes.unk_5E < -0x40) {
-        ((Actor*)slots[0x11])->tint.signed_bytes.unk_5E += 4;
+    if (g_Task->tint.signed_bytes.unk_5E < -0x40) {
+        g_Task->tint.signed_bytes.unk_5E += 4;
     }
-    slots = SP_PTR(u8*, 0u);
-    if (((Actor*)slots[0x11])->tint.signed_bytes.unk_5F < -0x40) {
-        ((Actor*)slots[0x11])->tint.signed_bytes.unk_5F += 4;
+    if (g_Task->tint.signed_bytes.unk_5F < -0x40) {
+        g_Task->tint.signed_bytes.unk_5F += 4;
     }
-    slots = SP_PTR(u8*, 0u);
-    work  = (Actor*)slots[0x11];
-    if ((FIELD(s32, work, 0x5Cu) & ~0xFF) == 0xC0C0C000) {
+    work = g_Task;
+    if ((work->tint.word & ~0xFF) == 0xC0C0C000) {
         GFX_FreePaletteFade(g_CurrentActor->unk_93);
-        slots = SP_PTR(u8*, 0u);
-        FIELD(u8, slots[0x11], 0u) &= 0xDF;
-        slots                  = SP_PTR(u8*, 0u);
-        slots[0x11][0x5Cu]     = 0;
-        slots                  = SP_PTR(u8*, 0u);
-        slot                   = slots[0x11];
-        slot[0x5F]             = 0;
-        slot[0x5E]             = 0;
-        slot[0x5D]             = 0;
-        slots                  = SP_PTR(u8*, 0u);
-        slots[0x11][4]         = 0;
-        g_CurrentActor->unk_78 = 2;
+        g_Task->header.flags           = (g_Task->header.flags & 0xDF);
+        g_Task->tint.bytes.flags       = 0;
+        slot                           = g_Task;
+        slot->tint.signed_bytes.unk_5F = 0;
+        slot->tint.signed_bytes.unk_5E = 0;
+        slot->tint.signed_bytes.unk_5D = 0;
+        g_Task->unk_04                 = 0;
+        g_CurrentActor->unk_78         = 2;
     } else {
         work->pos.x.fixed += work->vx;
         g_CurrentActor->unk_7E -= 2;
@@ -427,93 +368,60 @@ MATCH void func_801F3920(void) {
 /* Original passes no mode argument; declared arg-less to match. */
 
 MATCH void func_801F3A78(void) {
-    u8** slots;
-    u8*  work;
-    u8*  item;
-    u8   index;
+    u8 index;
 
-    index             = Actor_FindFreeSlot();
-    slots             = SP_PTR(u8*, 0u);
-    slots[0x11][0x0B] = index;
-    slots             = SP_PTR(u8*, 0u);
-    if (slots[0x11][0x0B] == GAME_NONE) {
+    index                = Actor_FindFreeSlot();
+    g_Task->param.unk_0B = index;
+    if (g_Task->param.unk_0B == GAME_NONE) {
         return;
     }
-    slots                                        = SP_PTR(u8*, 0u);
-    g_ActorSlots[slots[0x11][0x0B]].header.flags = 1;
-    slots                                        = SP_PTR(u8*, 0u);
-    g_ActorSlots[slots[0x11][0x0B]].type         = 0x50;
-    slots                                        = SP_PTR(u8*, 0u);
-    work                                         = slots[0x11];
-    g_ActorSlots[work[0x0B]].unk_06              = work[0x08];
-    slots                                        = SP_PTR(u8*, 0u);
-    item                                         = slots[0x11];
-    g_ActorSlots[item[0x0B]].pos.x.fixed         = ((Actor*)item)->pos.x.fixed;
-    g_ActorSlots[item[0x0B]].pos.y.fixed         = ((Actor*)item)->pos.y.fixed + 0x4000;
-    g_ActorSlots[item[0x0B]].pos.z.fixed         = ((Actor*)item)->pos.z.fixed + 0x01000000;
-    g_ActorSlots[item[0x0B]].layer               = 0x78;
+    g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
+    g_ActorSlots[g_Task->param.unk_0B].type         = 0x50;
+    g_ActorSlots[g_Task->param.unk_0B].unk_06       = g_Task->direction_08;
+    g_ActorSlots[g_Task->param.unk_0B].pos.x.fixed  = g_Task->pos.x.fixed;
+    g_ActorSlots[g_Task->param.unk_0B].pos.y.fixed  = g_Task->pos.y.fixed + 0x4000;
+    g_ActorSlots[g_Task->param.unk_0B].pos.z.fixed  = g_Task->pos.z.fixed + 0x01000000;
+    g_ActorSlots[g_Task->param.unk_0B].layer        = 0x78;
 }
 
 MATCH void func_801F3C18(void) {
-    u8** slots;
-    u8   value;
+    u8 value;
 
-    value             = Actor_FindFreeSlot();
-    slots             = SP_PTR(u8*, 0u);
-    slots[0x11][0x0B] = value;
-    slots             = SP_PTR(u8*, 0u);
-    if (slots[0x11][0x0B] != GAME_NONE) {
-        slots                                        = SP_PTR(u8*, 0u);
-        g_ActorSlots[slots[0x11][0x0B]].header.flags = 1;
-        slots                                        = SP_PTR(u8*, 0u);
-        g_ActorSlots[slots[0x11][0x0B]].type         = 0x4F;
-        slots                                        = SP_PTR(u8*, 0u);
-        g_ActorSlots[slots[0x11][0x0B]].link = ((s32)(-(((s32)g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
+    value                = Actor_FindFreeSlot();
+    g_Task->param.unk_0B = value;
+    if (g_Task->param.unk_0B != GAME_NONE) {
+        g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
+        g_ActorSlots[g_Task->param.unk_0B].type         = 0x4F;
+        g_ActorSlots[g_Task->param.unk_0B].link = ((s32)(-(((s32)g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
     }
 }
 
 MATCH void func_801F3D28(void) {
-    u8** slots;
-    u8   value;
+    u8 value;
 
-    value             = Actor_FindFreeSlot();
-    slots             = SP_PTR(u8*, 0u);
-    slots[0x11][0x0B] = value;
-    slots             = SP_PTR(u8*, 0u);
-    if (slots[0x11][0x0B] != GAME_NONE) {
-        slots                                        = SP_PTR(u8*, 0u);
-        g_ActorSlots[slots[0x11][0x0B]].header.flags = 1;
-        slots                                        = SP_PTR(u8*, 0u);
-        g_ActorSlots[slots[0x11][0x0B]].type         = 0x4E;
+    value                = Actor_FindFreeSlot();
+    g_Task->param.unk_0B = value;
+    if (g_Task->param.unk_0B != GAME_NONE) {
+        g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
+        g_ActorSlots[g_Task->param.unk_0B].type         = 0x4E;
     }
 }
 
 /* Original passes no mode argument; declared arg-less to match. */
 
 MATCH void func_801F3DCC(void) {
-    u8** slots;
-    u8*  work;
-    u8*  item;
-    u8   index;
+    u8 index;
 
-    index             = Actor_FindFreeSlot();
-    slots             = SP_PTR(u8*, 0u);
-    slots[0x11][0x0B] = index;
-    slots             = SP_PTR(u8*, 0u);
-    if (slots[0x11][0x0B] == GAME_NONE) {
+    index                = Actor_FindFreeSlot();
+    g_Task->param.unk_0B = index;
+    if (g_Task->param.unk_0B == GAME_NONE) {
         return;
     }
-    slots                                        = SP_PTR(u8*, 0u);
-    g_ActorSlots[slots[0x11][0x0B]].header.flags = 1;
-    slots                                        = SP_PTR(u8*, 0u);
-    g_ActorSlots[slots[0x11][0x0B]].type         = 0x50;
-    slots                                        = SP_PTR(u8*, 0u);
-    work                                         = slots[0x11];
-    g_ActorSlots[work[0x0B]].unk_06              = work[8];
-    slots                                        = SP_PTR(u8*, 0u);
-    item                                         = slots[0x11];
-    g_ActorSlots[item[0x0B]].pos.x.fixed         = ((Actor*)item)->pos.x.fixed;
-    g_ActorSlots[item[0x0B]].pos.y.fixed         = ((Actor*)item)->pos.y.fixed + COORD_HALF;
-    g_ActorSlots[item[0x0B]].pos.z.fixed         = ((Actor*)item)->pos.z.fixed + 0x01000000;
-    g_ActorSlots[item[0x0B]].layer               = 0x3C;
+    g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
+    g_ActorSlots[g_Task->param.unk_0B].type         = 0x50;
+    g_ActorSlots[g_Task->param.unk_0B].unk_06       = g_Task->direction_08;
+    g_ActorSlots[g_Task->param.unk_0B].pos.x.fixed  = g_Task->pos.x.fixed;
+    g_ActorSlots[g_Task->param.unk_0B].pos.y.fixed  = g_Task->pos.y.fixed + COORD_HALF;
+    g_ActorSlots[g_Task->param.unk_0B].pos.z.fixed  = g_Task->pos.z.fixed + 0x01000000;
+    g_ActorSlots[g_Task->param.unk_0B].layer        = 0x3C;
 }
