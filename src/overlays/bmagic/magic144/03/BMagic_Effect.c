@@ -102,8 +102,28 @@ MATCH void func_801EF654(void) {
 
 INCLUDE_ASM(func_801EF818);
 
-/* hint: first differing instruction is the flags beqz at +0x48 (candidate four instructions longer): retail loads unk_30 inside each arm of the param.unk_0B == 1 test, the candidate loads it after the if. */
-INCLUDE_ASM(func_801EFF74);
+MATCH void func_801EFF74(void) {
+    PartyMember* work;
+    u16          x;
+    u16          y;
+
+    SYS_DISPATCH_BYTE(D_801F04FC, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_800AF764();
+        work = g_Task;
+        if (work->param.unk_0B == 1) {
+            x = work->unk_2E.half - MAGIC092_STEP_X;
+            y = work->unk_30.half;
+        } else {
+            x = work->unk_2E.half + MAGIC092_STEP_X;
+            y = work->unk_30.half;
+        }
+        y -= MAGIC092_RISE_Y;
+        work->unk_2E.half = x;
+        work->unk_30.half = y;
+        func_801F01D0();
+    }
+}
 
 #include "overlays/bmagic/Effect_AppearAtTarget.h"
 

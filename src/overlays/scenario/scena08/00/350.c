@@ -45,8 +45,14 @@ INCLUDE_ASM(func_801F70C0);
 
 INCLUDE_ASM(func_801F7164);
 
-/* Hint: reads D_801492DA as lhu for the scroll argument and as lh for the compare, so one signed type fails either way. */
-INCLUDE_ASM(func_801F7200);
+MATCH void func_801F7200(void) {
+    func_801F8534();
+    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
+    if (g_ScriptVars[0] == 0xB) {
+        g_Task->unk_5A = 0x20;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7268);
 

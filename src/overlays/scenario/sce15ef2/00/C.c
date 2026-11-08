@@ -130,7 +130,13 @@ MATCH void func_801D10E8(void) {
     work[1]++;
 }
 
-INCLUDE_ASM(func_801D1118);
+MATCH void func_801D1118(void) {
+    Scene_DrawRedGradient(-(g_Task->timer << 4) & BYTE_MASK);
+    if (--g_Task->timer == 0) {
+        g_Task->timer = 16;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D11A4);
 

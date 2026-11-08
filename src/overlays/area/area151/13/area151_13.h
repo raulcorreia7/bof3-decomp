@@ -41,6 +41,9 @@ void Area_Update(void);
 /* The value of area update step in the shared Area_Update body. */
 
 extern WorldMapMarker D_801F54C0[6];
+extern u8             D_801F550C[2];
+extern u8             D_801F5504[4];
+extern u8             D_801F5508[4];
 #define AREA_HUD_MASK_TABLE D_801F54C0
 
 #endif

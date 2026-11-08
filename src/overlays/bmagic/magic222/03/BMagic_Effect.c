@@ -115,7 +115,22 @@ MATCH void func_801EFDEC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFE74);
+MATCH void func_801EFE74(void) {
+    s32  r;
+    s32  temp_v1;
+    s16* angle = &D_1F800004;
+
+    r                   = rand();
+    temp_v1             = g_Task->param.unk_0B;
+    g_Task->unk_0C      = (r & 7) + 8;
+    *angle              = temp_v1 << 9;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(*angle) * g_Task->unk_0C);
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->unk_09      = 8;
+    g_Task->timer       = 0x10;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EFF7C(void) {
     PartyMember* task;
