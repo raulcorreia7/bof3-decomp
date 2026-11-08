@@ -1,0 +1,3 @@
+#include "area104_14.h"
+
+#include "../../Area_RequestRestartOnContextChange.h"

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-/* nonmatching 94.41%: branch@+0x0000; the case arms still differ in tail scheduling. */
+/* nonmatching 94.41%: branch@+0x002C; callers pass u16 cells (andi, no sll/sra) so func_801A20F8 needs a u16 prototype here (s16 in game_00.h conflicts); the x/y sums retail adds one call late (delay slot of the next jal), sequential, combined and reordered `+=` forms all add earlier. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
     /* FAKE: register pins reproduce retail's s2/s4/s0/s5/s1/s3 assignment; pinned 94.41%. */

@@ -5,7 +5,8 @@
  * and the entry's row and bits 14-19 select. */
 /* nonmatching: 6 rows differ, registers only. The entry cursor is t1 in retail and a3 here (0x801544AC), and the payload
  * word takes a3 where ours takes t1. `payload = *record != 0` before the list loop took it from 14 rows to 6; two
- * FAKE_REG attempts and a 7 min permuter run did not close it. */
+ * FAKE_REG attempts and a 7 min permuter run did not close it; declaration order, the payload load position and
+ * index, address and stepped-pointer entry forms leave the same 6 rows. */
 /* Pinning the entry and payload registers together adds an instruction; the first difference is the branch at +0x20. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80154438(void) {

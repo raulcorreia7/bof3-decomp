@@ -4,6 +4,8 @@
 /* The bmagic/magic144/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
+#define MAGIC092_STEP_X 16
+#define MAGIC092_RISE_Y 12
 
 extern Callback D_801F04D4[];
 extern Callback D_801F04FC[];
@@ -19,5 +21,7 @@ extern BattleEffect D_801F050C[];
 void func_801EF294(void);
 void func_801EED04(void);
 void func_801EF510(void);
+
+void func_801F01D0(void);
 
 #endif

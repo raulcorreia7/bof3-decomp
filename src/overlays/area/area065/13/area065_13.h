@@ -33,6 +33,9 @@ extern WorldMapPoint D_801F4DE0[];
 extern u16           D_801F50FC[5][16];
 extern u8            D_801F525C[12];
 extern u8            D_801F525D[];
+extern u8            D_801F5354[2];
+extern u8            D_801F534C[4];
+extern u8            D_801F5350[4];
 extern u8            D_801F5268[]; /* the "Manillo" text at +0x10 */
 
 void func_801F40FC(s16 x, s16 y);

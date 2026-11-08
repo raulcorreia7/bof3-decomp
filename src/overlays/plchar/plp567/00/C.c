@@ -104,7 +104,9 @@ INCLUDE_ASM(func_801D006C);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-INCLUDE_ASM(func_801D02F4);
+MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
+    CHAR_PROBE_CELL_SPAWN(20);
+}
 
 #include "overlays/plchar/Char_SpawnActor.h"
 
