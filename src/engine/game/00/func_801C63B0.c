@@ -41,7 +41,7 @@ MATCH s32 func_801C63B0(void) {
         }
     }
     if (swapped) {
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < ARRAY_COUNT(s_EncounterOriginNudges); i++) {
             x = g_EncounterOriginX + s_EncounterOriginNudges[i].x;
             y = g_EncounterOriginY + s_EncounterOriginNudges[i].y;
             if (((func_801C7518(x, y, 1) & BYTE_MASK) != 0) &&
