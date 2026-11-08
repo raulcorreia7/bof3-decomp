@@ -20,7 +20,7 @@ MATCH void func_8009B2B0(void) {
     enemy_sum     = 0;
     counter       = *counter_byte + 1;
     *counter_byte = counter;
-    if (g_Battle.encounter != 0) {
+    if (BATTLE_IS_SCRIPTED()) {
         g_Battle.ui_step = g_Battle.ui_step + 1;
     } else if (counter >= 3) {
         g_Battle.ui_step = 2;

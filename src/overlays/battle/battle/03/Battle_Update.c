@@ -16,7 +16,7 @@ MATCH void Battle_Update(void) {
     Battle_UpdateEffects();
     Battle_UpdatePartyActors();
     Battle_UpdateEnemyActors();
-    if (g_Battle.encounter != 0) {
+    if (BATTLE_IS_SCRIPTED()) {
         func_801A0514();
     } else {
         func_801A061C();

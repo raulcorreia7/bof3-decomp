@@ -71,7 +71,7 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
     } else if (func_800A9304((slot + 3) & BYTE_MASK) & BYTE_MASK) {
         g_Battle.target_selector = Battle_PickEnemyTarget(actor);
     }
-    if (g_Battle.encounter != 0) {
+    if (BATTLE_IS_SCRIPTED()) {
         enemy                = &g_BattleEnemyBattlers[slot & BYTE_MASK];
         g_BattleCurrentEnemy = enemy;
         g_Task               = enemy;

@@ -5,7 +5,7 @@ MATCH void func_801B2AB4(void) {
     s32 offset;
     u8  state;
 
-    if (g_Battle.encounter == 0) {
+    if (BATTLE_IS_RANDOM()) {
         func_801BEBB0();
     } else {
         index = 1;
