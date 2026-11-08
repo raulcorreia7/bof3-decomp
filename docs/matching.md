@@ -94,8 +94,20 @@ A draft stays only when it is structured C under these conventions and its score
 are known; otherwise the function is the `INCLUDE_ASM` line, with a one- or two-sentence hint above
 it when a lift attempt learned something ([comments](conventions.md#comments)).
 
-An asm-authored original keeps the split assembly as its build path and its C model behind
-`#if BOF3_USE_ASM ... #else <model> #endif`; `BOF3_ASM_MATCH=0` compiles the model.
+### Status markers
+
+Three markers expand to nothing and say what a definition is; they are not `FAKE:` helpers and
+take no `FAKE:` note ([helpers](conventions.md#helpers)).
+
+| Marker         | Meaning                                                      | Shape                                            | Counts as           |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------ | ------------------- |
+| `MATCH`        | this C is the original and compiles to the retail bytes      | plain definition                                 | a C match           |
+| `NON_MATCHING` | a C draft; the split assembly builds until it matches        | `#ifdef NON_MATCHING` draft, `#else INCLUDE_ASM` | debt                |
+| `HAND_ASM`     | the original was hand-written assembly; this C is equivalent | same shape; the `INCLUDE_ASM` is the original    | done, counted apart |
+
+`tools/check_markers.py` requires `HAND_ASM` on every function in `asm/<target>/hand/` and allows
+it nowhere else. A `HAND_ASM` body has the same inputs, outputs and effects as the assembly and
+keeps a short note with the reason C89 cannot express it.
 
 The build passes the image's asm folder as `-DASM_DIR="asm/<target>"` (its `hand` subfolder for
 authored assembly), so the macro takes only the unit name. A match removes one `INCLUDE_ASM` line;

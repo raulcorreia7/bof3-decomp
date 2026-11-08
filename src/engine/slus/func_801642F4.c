@@ -1,17 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* FAKE: proven asm-original.
- * PROFILE: no exact C match in 56 candidates each for GCC 2.8.0, 2.8.1 and
- * 2.95.2 against the 0x4D0-byte span that included func_801644D8; 2.8.x each
- * had 3 profile build errors, while 2.95.2 compiled all 56. See
- * docs/toolchain.md#compiler-chain.
- * MACHINE: entry operands are `$s4`/`$s5`/`$t3`; `$s2`/`$s3` hold block size
- * and table base. `jr $t7` enters a 12-byte-stride unrolled copy block. This
- * non-ABI entry and computed resume table are not expressible in pure C89.
- * Span 0x801642F4-0x801644D8 (0x1e4 bytes); 0x801644D8 is a separate
- * function (ten callers in the battle and shop overlays).
- * MODEL: keep the C89 semantic model below and count separately from C matches.
- */
+/* HAND_ASM: operands in `$s4`/`$s5`/`$t3`, and `jr $t7` enters a 12-byte-stride unrolled copy block;
+ * C89 cannot express the non-ABI entry or the computed resume. See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
 /* INFERRED C model: stream copy kernel.
  * copies count bytes forward, byte by byte, from src to dst, so an
@@ -25,7 +15,7 @@
  * costs no loop. That register convention and the computed entry are why the
  * function stays assembly.
  */
-NON_MATCHING u8* func_801642F4(u8* dst, const u8* src, u32 count) {
+HAND_ASM u8* func_801642F4(u8* dst, const u8* src, u32 count) {
     u32 n;
 
     while (count >= 32) {

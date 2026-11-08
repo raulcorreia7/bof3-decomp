@@ -18,7 +18,7 @@ MATCH void func_801F71B8(void) {
 MATCH void func_801F71FC(void) {
     Actor* actor;
 
-    D_801FD288.half    = (rand() & 1) << 15;
+    D_801FD288.half    = (RANDOM_MASK(1)) << 15;
     actor              = g_Task;
     actor->header.step = actor->header.step + 1;
 }

@@ -77,9 +77,9 @@ MATCH void func_801F0478(void) {
 MATCH void func_801F04F0(void) {
     func_800AF764();
     g_Task->unk_30.half += 8;
-    g_Task->unk_5D = (rand() & 3) + 1;
-    g_Task->unk_5E = (rand() & 3) + 1;
-    g_Task->unk_5F = (rand() & 3) + 1;
+    g_Task->unk_5D = (RANDOM_MASK(3)) + 1;
+    g_Task->unk_5E = (RANDOM_MASK(3)) + 1;
+    g_Task->unk_5F = (RANDOM_MASK(3)) + 1;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0x10;
     g_Task->header.step += 1;

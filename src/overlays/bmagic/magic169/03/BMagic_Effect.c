@@ -93,12 +93,12 @@ MATCH void func_801EFA18(void) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_Task->unk_0C;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
-        speed               = ((rand() & 3) << 20) + 0x200000;
+        speed               = ((RANDOM_MASK(3)) << 20) + 0x200000;
         g_Task->unk_14      = speed;
         g_Task->unk_20      = speed / 16;
-        g_Task->unk_5D      = (rand() & 7) + 6;
-        g_Task->unk_5E      = (rand() & 7) + 6;
-        g_Task->unk_5F      = (rand() & 7) + 6;
+        g_Task->unk_5D      = (RANDOM_MASK(7)) + 6;
+        g_Task->unk_5E      = (RANDOM_MASK(7)) + 6;
+        g_Task->unk_5F      = (RANDOM_MASK(7)) + 6;
         g_Task->unk_09      = 0;
         g_Task->timer       = 0x10;
         g_Task->header.step++;

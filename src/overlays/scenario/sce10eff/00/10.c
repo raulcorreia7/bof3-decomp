@@ -302,9 +302,9 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
         cell[0] = ((work->ticker + i) & 0xF) << 8;
         if RANDOM_MASK (1) {
             new_var  = (s16)jitter_mask;
-            cell[-1] = radius_base + (rand() & new_var);
+            cell[-1] = radius_base + (RANDOM_MASK(new_var));
         } else {
-            cell[-1] = radius_base - (rand() & new_var);
+            cell[-1] = radius_base - (RANDOM_MASK(new_var));
         }
         prev[0].vx = 0;
         prev[1].vx = 0;

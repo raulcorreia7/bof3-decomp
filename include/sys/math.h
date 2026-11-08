@@ -17,6 +17,9 @@
 
 /* Whole-degree angles in the 4096-unit turn; ONE is the full turn. */
 #define ANGLE_45        (ONE / 8)
+#define ANGLE_90        (ONE / 4)
+#define ANGLE_180       (ONE / 2)
+#define ANGLE_270       (ONE * 3 / 4)
 
 /* A degree count converted to the 4096-unit angle at run time. */
 #define DEG(degrees)    ((degrees) * ONE / 360)

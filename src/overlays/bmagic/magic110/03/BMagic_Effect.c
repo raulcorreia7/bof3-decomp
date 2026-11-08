@@ -82,7 +82,7 @@ INCLUDE_ASM(func_801EF528);
 MATCH void func_801EF648(void) {
     PartyMember* work;
 
-    g_Task->unk_2E.half = (rand() & 3) + 0x9F;
+    g_Task->unk_2E.half = (RANDOM_MASK(3)) + 0x9F;
     work                = g_Task;
     work->unk_30.half -= 2;
     work->scale.y += 0x2000;

@@ -8,7 +8,7 @@ MATCH void func_801F3B24(void) {
     g_Task->timer += 1;
     if (g_Task->timer >= 0x41U) {
         g_Task->timer = 0;
-        if ((rand() & 1) != 0) {
+        if ((RANDOM_MASK(1)) != 0) {
             g_Task->header.step = 5;
         }
     }
