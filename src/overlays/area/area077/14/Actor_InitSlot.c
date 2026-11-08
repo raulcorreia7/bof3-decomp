@@ -1,7 +1,6 @@
 #include "area077_14.h"
 
 /* func_801F61F0 */
-
 MATCH void Actor_InitSlot(s32 type) {
     ActorSlot* record;
     u8         slot;
