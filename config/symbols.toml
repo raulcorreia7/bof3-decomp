@@ -901,7 +901,9 @@ D_801F0CB0 = { addr = 0x801F0CB0, source = "Step handlers of the effect, run by 
 ["emi/bmagic/magic121/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnIdleTick = { addr = 0x801EEE08, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic121 (DragonBreath)." }
+BMagic_UpdateDragonBreath = { addr = 0x801EEEAC, type = "func", source = "Runs the step handler selected by header.step (byte 0x02); while the effect is active and header.step is nonzero, re-rolls work bytes 0x5D-0x5F every 8th frame, spawns the breath particles and draws the breath through BMagic_DrawDragonBreath in magic121 (DragonBreath)." }
 Effect_CountUpWorkByteAndStep = { addr = 0x801EF2D4, type = "func", source = "Counts work byte 0x04 up by two and advances header.step (byte 0x02) at 16 in magic121 (DragonBreath)." }
+BMagic_DrawDragonBreath = { addr = 0x801EF414, type = "func", source = "Draws the DragonBreath effect with semi-transparent gouraud quads placed by rsin and rcos in magic121 (DragonBreath)." }
 g_BMagicEffectModes = { addr = 0x801F0C38, source = "Handlers of magic121 (DragonBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic122/03"]
@@ -4816,6 +4818,8 @@ g_SceneFlags = { addr = 0x8014686C, type = "u32", source = "Flags of the current
 g_SceneState = { addr = 0x80146870, source = "The scene state." }
 g_CurrentActor = { addr = 0x80146884, type = "Actor", source = "The current actor." }
 g_Actors = { addr = 0x80146888, size = 0x1170, source = "The field actors." }
+g_ActorWalkDestX = { addr = 0x80146908, size = 0x4, alias = true, source = "x of the destination func_801AC33C walks the actor to; the Actor.walk_dest_x word (byte 0x80) seen as a column of g_Actors" }
+g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of the destination func_801AC33C walks the actor to; the Actor.walk_dest_y word (byte 0x84) seen as a column of g_Actors" }
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
 g_ScriptState = { addr = 0x80148210, type = "GameScriptState", source = "The script state." }

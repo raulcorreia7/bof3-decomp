@@ -229,8 +229,8 @@ typedef struct Actor {
     u8             unk_7B;            /* 0x7B */
     u16            unk_7C;            /* 0x7C - 16-bit signal; commu00 calls it the label id */
     u16            unk_7E;            /* 0x7E */
-    s32            unk_80;            /* 0x80 */
-    s32            unk_84;            /* 0x84 */
+    s32            walk_dest_x;       /* 0x80 - x the walk ends at */
+    s32            walk_dest_y;       /* 0x84 - y the walk ends at */
     u32            unk_88;            /* 0x88 */
     ActorExt       ext;               /* 0x8C - see ActorExt */
     u16            roll_90;           /* 0x90 */
@@ -261,6 +261,8 @@ ASSERT_OFFSET(Actor, interaction_flags, 0x74);
 ASSERT_OFFSET(Actor, unk_77, 0x77);
 ASSERT_OFFSET(Actor, callback_index, 0x7A);
 ASSERT_OFFSET(Actor, unk_7C, 0x7C);
+ASSERT_OFFSET(Actor, walk_dest_x, 0x80);
+ASSERT_OFFSET(Actor, walk_dest_y, 0x84);
 ASSERT_OFFSET(Actor, unk_88, 0x88);
 ASSERT_OFFSET(Actor, ext, 0x8C);
 ASSERT_OFFSET(Actor, facing_92, 0x92);
