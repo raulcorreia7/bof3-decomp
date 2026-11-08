@@ -4,7 +4,7 @@ MATCH void func_801F3594(s16 x0, s16 y0, u16 x1, u16 y1, u16 x2, u16 y2, u16 x3,
                          u8 semi_trans) {
     POLY_F4* prim;
 
-    prim    = (POLY_F4*)g_GfxPrimCursor;
+    prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
     SetSemiTrans(prim, semi_trans);
     prim->x0 = x0;
