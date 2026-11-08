@@ -12,7 +12,7 @@ void        func_800989B4(void);
 u8          func_8009AF7C(void);
 void        func_800A4458(void);
 /* func_800A581C */
-void        Battle_PlayAbilityPose(void);
+void        Battle_StartAbilityPose(void);
 u8          func_800A9304(u8 slot);
 /* Stages the selection cell for the next battle step. */
 void        func_800A9820(u8 selector);
@@ -65,7 +65,7 @@ s16         func_801DE0AC(s32 factor_a, s32 factor_b);
 void        Battle_SetSlotPending(u32 slot);
 void        func_801DE560(u8 event_kind, u8 arg1, u8 arg2, u8 arg3, u8* payload);
 /* func_801E52F0 */
-void        Battle_PlayEffectCue(u16 effect_id);
+void        Battle_PlayEnemyCue(u16 cue_id);
 /* func_801E590C */
 u32         Battle_AllocEffect(u32 mode, u32 handler_index);
 void        func_801E5988(void);

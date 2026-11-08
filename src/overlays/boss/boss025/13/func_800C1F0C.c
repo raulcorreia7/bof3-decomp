@@ -7,7 +7,7 @@ MATCH void func_800C1F0C(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        Battle_PlayEffectCue(*g_BattleCurrentEnemy->unk_E8);
+        Battle_PlayEnemyCue(*g_BattleCurrentEnemy->unk_E8);
         g_Task->header.step += 1;
     }
 }

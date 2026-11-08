@@ -4,16 +4,18 @@
 
 ["emi/battle/battle/03"]
 g_BGMTracks = { addr = 0x80181EB8, size = 0x294, source = "Music tracks: the BGM archive slot, SEP package and sequence of each track id." }
-Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "waits for EMI after reloading area audio, then advances to battle phase step 4" }
+Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "Step after Battle_ReloadAreaAudio in the D_801EABB8 step table: when EMI_IsReady, moves the battle phase to step 4 with sub_step 0." }
 Battle_OpenPartyPanel = { addr = 0x801D9304, type = "func", source = "Opens panel task 1 for the party list: sizes it from the party count through D_801EAF27 and places it at x 0xF0. Called by Battle_OpenPanels." }
+Battle_DrawDimOverlay = { addr = 0x801D9900, type = "func", source = "Draws a semi-transparent dark grey tile of 960x240 on the font texture page; called by func_801D238C." }
+Battle_DrawLine = { addr = 0x801DA408, type = "func", source = "Queues one flat-coloured LINE_F2 from (x0, y0) to (x1, y1) in the given r, g, b; draws the panel edges in func_801D8690 and func_801D8DF8 (UI_DrawLine is the grey-level resident variant)." }
 Battle_RollHitOnParty = { addr = 0x801DC73C, type = "func", source = "Rolls whether an attack on a party member hits: a blind attacker misses on a random roll, otherwise the hit chance in D_801EC303 decides; a miss returns 0 and clears BATTLE_HIT_HP_LANDED in the target's turn flags. Called by Battle_CalcDamage when the target is a party member." }
 Battle_RollHitOnEnemy = { addr = 0x801DC894, type = "func", source = "Rolls whether an attack on an enemy hits: a blind attacker misses on a random roll, an always-hit attacker passes, an enemy with the evade event misses on a random roll, otherwise the hit chance in D_801EC324 decides; a miss returns 0 and clears BATTLE_HIT_HP_LANDED. Called by Battle_CalcDamage when the target is an enemy." }
 Battle_CalcPartyDefense = { addr = 0x801DCCB0, type = "func", source = "Averages the party defense for the damage reduction." }
 Battle_ScaleDamage = { addr = 0x801DCD50, type = "func", source = "Scales the base damage Battle_RollBaseDamage computed: a falloff for large values, the random spread D_801EAFA0, the element resistance and the holy resistance of the target; returns the result rounded to 16 bits." }
 Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Returns the selectable battler with the lowest hp." }
-Battle_PlayEffectCue = { addr = 0x801E52F0, type = "func", source = "plays an effect sound cue when the cue id is not the 0xFFFF sentinel" }
-Battle_TriggerCritical = { addr = 0x801E5704, type = "func", source = "sets the critical hit state and allocates a critical effect when the enemy triggers a critical event" }
-Battle_HandleDesertDefeat = { addr = 0x801E5768, type = "func", source = "handles defeat in the Desert of Death by setting up the respawn scene" }
+Battle_PlayEnemyCue = { addr = 0x801E52F0, type = "func", source = "Plays the cue id through SND_PlayCue unless it is the 0xFFFF none value; the callers pass the enemy cue words EnemyBattler.unk_E8 in scripted battles, where other battles play cue 0x600 + kind * 2 instead." }
+Battle_TriggerCritical = { addr = 0x801E5704, type = "func", source = "When the current enemy has ENEMY_EVENT_CRITICAL and a random bit is set, raises BATTLE_STATE_CRITICAL and allocates battle effect 2; called by func_801E3B04 and the boss028, boss033, boss051 and boss055 handlers." }
+Battle_HandleDesertDefeat = { addr = 0x801E5768, type = "func", source = "Installed as g_Battle.choose_ending_hook by func_801E320C: on a defeat in AREA_ID_DESERT_OF_DEATH_MAP it sets scene state 1, step 0x19 and the script-active flag." }
 s_BattleBattlerTemplateTails = { addr = 0x801EC048, alias = true, source = "row 0 turn.action_flags of s_BattleBattlerTemplates (+0x128); the tail global folded into the PartyMember rows in #503" }
 g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it; the turn_order member of g_Battle.", alias = true }
 g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back; the turn_cursor member of g_Battle.", alias = true }
@@ -117,8 +119,8 @@ Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells wh
 Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
 Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
 Battle_MergeEnemyPanels = { addr = 0x8009CFEC, type = "func", source = "Removes the entries of the enemy panel list D_801ED9B0 that repeat an enemy kind and panel id, keeping the first; called after the enemy events trigger." }
-Battle_PlayAbilityPose = { addr = 0x800A581C, type = "func", source = "plays the ability pose cue and sets the active battler's alternate pose flag" }
-Battle_LoadScriptedEncounter = { addr = 0x800ABBE0, type = "func", source = "loads encounter enemies and runs the scripted encounter handler (called from the scripted encounter path)" }
+Battle_StartAbilityPose = { addr = 0x800A581C, type = "func", source = "Step 2 of the ability panel step table D_800B4D00: plays common cue 4, sets D_80148627 to 2 and COMBATANT_FLAG_ABILITY_ALT_POSE on the active row, and advances ui_state." }
+Battle_LoadScriptedEncounter = { addr = 0x800ABBE0, type = "func", source = "Loads the encounter enemies with Battle_LoadEncounterEnemies and runs the setup handler D_800B5108[g_Battle.encounter]; func_800ABBA4 calls it when BATTLE_IS_SCRIPTED and func_800ABC30 otherwise." }
 Battle_IsEnemyDefeated = { addr = 0x800AD044, type = "func", source = "Tests the bit of an enemy kind in the bit set D_80144F60 that Battle_DefeatEnemy fills; Battle_InitEnemy stores the result in the battler's unk_7F, which the enemy name panel reads." }
 Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the bit of an enemy kind in the bit set D_80144F60; Battle_DefeatEnemy calls it and Battle_IsEnemyDefeated reads it." }
 g_BattleEnemyEvents = { addr = 0x800E407C, source = "The event packets of each enemy kind record of the encounter block, one 0x88-byte record per kind; Battle_TriggerEnemyEvents walks them." }
@@ -1112,6 +1114,7 @@ g_BMagicEffectModes = { addr = 0x801EF9B4, source = "Handlers of magic146 (Notin
 
 ["emi/bmagic/magic150/03"]
 Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic150 (Eye Beam)." }
+BMagic_ProjectSpan = { addr = 0x801EF2C0, type = "func", source = "Projects the span position and the points half a unit left and right of it to the screen with Area_ProjectPoint, into screen[1], screen[0] and screen[2]." }
 
 ["emi/bmagic/magic151/03"]
 BMagic_DrawGlowRingInner = { addr = 0x801F1E70, type = "func", source = "draws 64 additive POLY_G4 quads from the effect radius (word 0x14) to 64 past it, shaded fifteen times byte 0x09 at the outer edge, in magic151 (Accession)" }
@@ -6183,8 +6186,9 @@ Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "Adds 2 to
 Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the scene event state." }
 
 ["emi/battle/batl_end/00"]
+Battle_WaitVictoryLoad = { addr = 0x801EEFCC, type = "func", source = "Last substate of ui_step 0 of the battle victory overlay (D_801F0CA4): waits for EMI_IsReady after func_801EECD0 requested the member archive, then resets the row cursor and ui_state and advances ui_step." }
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
-Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "formats and draws the zenny reward on the battle victory screen" }
+Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny reward of the battle victory screen: formats g_Zenny with TEXT_Format and draws the amount and its caption; the second entry of the table in func_801F097C." }
 
 ["emi/battle/batl_ovr/00"]
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }

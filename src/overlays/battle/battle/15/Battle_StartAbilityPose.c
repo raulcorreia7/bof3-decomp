@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 /* func_800A581C */
-MATCH void Battle_PlayAbilityPose(void) {
+MATCH void Battle_StartAbilityPose(void) {
     u8* counter;
 
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));

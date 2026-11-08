@@ -84,7 +84,7 @@ MATCH void func_801E3C14(void) {
             }
             g_BattleCurrentEnemy->status = STATUS_KO;
         } else if (BATTLE_IS_SCRIPTED()) {
-            Battle_PlayEffectCue(tail_work->unk_E8[2]);
+            Battle_PlayEnemyCue(tail_work->unk_E8[2]);
         }
     }
     if (g_BattleCurrentEnemy->turn.hp_change < 0 || g_BattleCurrentEnemy->turn.ap_change < 0) {

@@ -374,7 +374,7 @@ segments:
       - [0x145DC, c, func_801E51DC]
       - [0x14688, c, func_801E5288]
       - [0x146E8, c, func_801E52E8]
-      - [0x146F0, c, Battle_PlayEffectCue]
+      - [0x146F0, c, Battle_PlayEnemyCue]
       - [0x1471C, c, Battle_RollEnemyDrops]
       - [0x148EC, c, Battle_DefeatEnemy]
       - [0x14A7C, c, func_801E567C]

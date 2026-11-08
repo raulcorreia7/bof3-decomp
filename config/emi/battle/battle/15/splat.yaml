@@ -330,7 +330,7 @@ segments:
       - [0xEAC4, c, func_800A52C4]
       - [0xEB00, c, func_800A5300]
       - [0xEB30, c, func_800A5330]
-      - [0xF01C, c, Battle_PlayAbilityPose]
+      - [0xF01C, c, Battle_StartAbilityPose]
       - [0xF074, c, func_800A5874]
       - [0xF0F4, c, func_800A58F4]
       - [0xF1AC, c, func_800A59AC]

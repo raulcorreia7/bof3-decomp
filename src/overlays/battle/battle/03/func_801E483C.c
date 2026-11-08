@@ -7,7 +7,7 @@ MATCH void func_801E483C(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
     global = (u8*)(EFFECT_BANK_80140000);
     if (global[0x62EAu] != 0u) {
-        Battle_PlayEffectCue(*(u16*)((*(u32*)(((u32)g_BattleCurrentEnemy + 0xE8u)) + 6u)));
+        Battle_PlayEnemyCue(*(u16*)((*(u32*)(((u32)g_BattleCurrentEnemy + 0xE8u)) + 6u)));
     }
     GFX_FreePaletteFadeTarget((void*)g_Task);
     GFX_AllocPaletteFade((void*)g_Task, 0xFF, 0xFF, 0xFF, 0);

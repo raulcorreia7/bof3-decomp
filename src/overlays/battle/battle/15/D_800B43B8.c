@@ -99,7 +99,7 @@ Callback D_800B4CAC[7] = {func_800A46C4, func_800A47AC, func_800A4900, func_800A
 Callback D_800B4CC8[2] = {func_800A4700, func_800A4744};
 Callback D_800B4CD0[5] = {func_800A493C, func_800A4AD0, func_800A4B08, func_800A4B2C, func_800A4BB4};
 Callback D_800B4CE4[7] = {func_800A4C44, func_800A4C70, func_800A4D3C, func_800A50B8, func_800A5120, func_800A5164, func_800A5244};
-Callback D_800B4D00[5] = {func_800A5300, func_800A5330, Battle_PlayAbilityPose, func_800A5874, func_800A58F4};
+Callback D_800B4D00[5] = {func_800A5300, func_800A5330, Battle_StartAbilityPose, func_800A5874, func_800A58F4};
 Callback D_800B4D14[7] = {func_800A59E8, func_800A5A18, func_800A5AE4, func_800A5DE0, func_800A5E54, func_800A5E98, func_800A5F80};
 static u8 s_gap_800B4D30[356] = {
     0x2C, 0x60, 0x0A, 0x80, 0xA8, 0x60, 0x0A, 0x80, 0xDC, 0x60, 0x0A, 0x80, 0x2C, 0x63, 0x0A, 0x80,
