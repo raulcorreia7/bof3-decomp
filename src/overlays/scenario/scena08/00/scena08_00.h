@@ -19,7 +19,8 @@ extern u8       D_80146874;
 extern u8       D_80146875;
 extern u16      D_80146876;
 extern u32      D_801F6C00;
-extern Callback D_801FE894[];
+/* D_801FE894 */
+extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE8A0[];
 extern Callback D_801FE8D0[];
 extern Callback D_801FE8D8[];
@@ -39,7 +40,8 @@ extern Callback D_801FE938[];
 extern Callback D_801FE964[];
 
 extern Callback  D_801FE970[];
-extern SceneFunc D_801FE9C0[];
+/* D_801FE9C0 */
+extern SceneFunc g_SceneActorDispatch[];
 extern u16       D_801FE9EC[];
 
 void func_801FE800(void);

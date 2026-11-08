@@ -1,5 +1,6 @@
 #include "area145_14.h"
 
-MATCH void func_801F434C(void) {
+/* func_801F434C */
+MATCH void Area_PauseBGM(void) {
     SND_PauseBGM(g_SndBGMId);
 }

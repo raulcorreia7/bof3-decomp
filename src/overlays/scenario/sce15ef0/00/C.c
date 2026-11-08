@@ -4,11 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801D0C0C(void) {
-    u8* entity;
-
-    D_801D1F88[entity[1]]();
-}
+#include "overlays/scenario/Scene_DispatchEntity.h"
 
 MATCH void func_801D0C48(void) {
     g_Task->pos.x      = TO_COORD(48) + COORD_HALF;

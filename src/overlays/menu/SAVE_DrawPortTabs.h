@@ -1,6 +1,8 @@
-#include "shop_00.h"
-
-MATCH void func_801DDFB0(s16 x, s16 y, u32 flags, u8 row, u8 variant) {
+/* Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port. One definition
+ * shared by the Bate, Shisu and Shop overlays; each image defines its own g_SaveCardPortLabelFirst and
+ * g_SaveCardPortLabelSecond. Every change here must verify every member. */
+/* func_801D8508 (bate), func_801D94B0 (shisu), func_801DDFB0 (shop) */
+MATCH void SAVE_DrawPortTabs(s16 x, s16 y, u32 flags, u8 row, u8 variant) {
     s16 left;
     s16 right;
     s16 text_y;
@@ -23,12 +25,12 @@ MATCH void func_801DDFB0(s16 x, s16 y, u32 flags, u8 row, u8 variant) {
     UI_DrawText(left, (y + 25), color, TEXT_LENGTH_MAX, Message_GetText(0x85));
     right  = (x + 94);
     text_y = (y + 25);
-    UI_DrawAsciiString(right, text_y, color, &D_801D0E58);
+    UI_DrawAsciiString(right, text_y, color, &g_SaveCardPortLabelFirst);
 
     color = (flags & MENU_LIST_FLAG_TAB_2) ? MENU_SHADE_NORMAL : MENU_SHADE_DIM;
     UI_DrawText(left, (y + 41), color, TEXT_LENGTH_MAX, Message_GetText(0x85));
     text_y = (y + 41);
-    UI_DrawAsciiString(right, text_y, color, &D_801D0E5C);
+    UI_DrawAsciiString(right, text_y, color, &g_SaveCardPortLabelSecond);
 
     row_offset = (row << 4);
     Menu_DrawCursorSprite((x + 8), (row_offset + y + 28), 0);

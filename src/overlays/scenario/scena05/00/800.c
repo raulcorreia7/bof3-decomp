@@ -4,11 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801F7400(void) {
-    u8* entity;
-
-    D_801FD5A8[entity[1]]();
-}
+#include "overlays/scenario/Scene_DispatchEntity.h"
 
 MATCH void func_801F743C(void) {
     Actor* actor;
@@ -290,14 +286,7 @@ INCLUDE_ASM(func_801FC808);
 
 INCLUDE_ASM(func_801FC8A0);
 
-MATCH void func_801FCA58(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FD644[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FCA98(void) {
 }

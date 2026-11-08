@@ -1,8 +1,7 @@
 #include "boss025_13.h"
 
-MATCH void Boss_EndBattle2(void) {
-    u16* flags;
+#include "overlays/boss/Boss_SetEndWindowBody.h"
 
-    BATTLE_RAISE_STATE(BATTLE_STATE_WINDOW_BUSY);
-    UI_SetMode(4);
+MATCH void Boss_EndBattle2(void) {
+    BOSS_SET_END_WINDOW_BODY();
 }

@@ -17,5 +17,5 @@ segments:
     vram: 0x801FE894
     align: 4
     subsegments:
-      - [0x7C94, bin, D_801FE894]
+      - [0x7C94, bin, g_SceneEntityDispatch]
   - [0x7E80]

@@ -39,14 +39,7 @@ MATCH void func_801F6CA4(void) {
     }
 }
 
-MATCH void func_801F6D10(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801F6DE0[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801F6D50(void) {
 }

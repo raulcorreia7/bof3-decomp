@@ -17,5 +17,5 @@ segments:
     vram: 0x801FA180
     align: 4
     subsegments:
-      - [0x3580, bin, D_801FA180]
+      - [0x3580, bin, g_SceneEntityDispatch]
   - [0x3760]

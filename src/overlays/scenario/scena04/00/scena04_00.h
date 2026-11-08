@@ -22,7 +22,8 @@ extern s32 D_80146958;
 extern s32 D_8014695C;
 
 extern u32      D_801F6C00;
-extern Callback D_801FA180[];
+/* D_801FA180 */
+extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FA198[];
 void            func_80196070(void);
 s8              func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
@@ -34,9 +35,12 @@ extern Callback  D_801FA1E4[];
 extern Callback  D_801FA204[];
 extern Callback  D_801FA210[];
 extern s8        D_801FA220[];
-extern SceneFunc D_801FA224[];
-extern u8        D_801FA228;
-extern Callback  D_801FA230[];
+/* D_801FA224 */
+extern SceneFunc g_SceneActorDispatch[];
+/* D_801FA228 */
+extern u8        g_ScenePositionTable;
+/* D_801FA230 */
+extern Callback  g_ScenePositionDispatch[];
 
 void func_801F7EC0();
 

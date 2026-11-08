@@ -19,7 +19,7 @@ segments:
       - [0x254, c, func_801F2E54]
       - [0x28C, c, func_801F2E8C]
       - [0x294, c, func_801F2E94]
-      - [0x29C, c, func_801F2E9C]
+      - [0x29C, c, Area_PauseBGM]
       - [0x2C4, c, func_801F2EC4]
       - [0x2EC, c, func_801F2EEC]
       - [0x30C, c, func_801F2F0C]

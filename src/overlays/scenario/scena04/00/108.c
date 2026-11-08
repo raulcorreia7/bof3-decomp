@@ -5,11 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801F6D08(void) {
-    u8* entity;
-
-    D_801FA180[entity[1]]();
-}
+#include "overlays/scenario/Scene_DispatchEntity.h"
 
 MATCH void func_801F6D44(void) {
     Actor* work;
@@ -272,14 +268,7 @@ MATCH void func_801F9CFC(void) {
     g_AreaCameraHeight += offset * 4;
 }
 
-MATCH void func_801F9D48(void* entity) {
-    SceneFunc handler;
-    u8        index;
-
-    index   = ((Actor*)entity)->callback_index;
-    handler = D_801FA224[index];
-    handler(entity, g_SceneFlags);
-}
+#include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH s32 func_801F9D88(void* entity, void* flags) {
     SYS_SetFlag(flags, 0);
@@ -301,19 +290,7 @@ INCLUDE_ASM(func_801F9DF4);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-MATCH s32 func_801FA010(s32 x, s32 y) {
-    s8  index;
-    s32 result;
-
-    index = func_801A7AD8(&D_801FA228, 1, x, y);
-    if (index >= 0) {
-        SYS_DISPATCH_BYTE(D_801FA230, index);
-        result = 1;
-    } else {
-        result = -1;
-    }
-    return result;
-}
+#include "overlays/scenario/Scene_DispatchByPosition.h"
 
 MATCH void func_801FA074(void) {
     Game_SetScriptActive();
