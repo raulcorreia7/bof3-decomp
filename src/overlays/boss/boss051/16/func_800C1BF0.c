@@ -11,7 +11,7 @@ MATCH void func_800C1BF0(void) {
     func_8014DAEC();
     g_Task = battler;
     value2 = battler->unk_09;
-    value  = value2 & 0xFF;
+    value  = value2 & BYTE_MASK;
     if (value != 0xFF) {
         if (value == 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_ENEMY, 1));

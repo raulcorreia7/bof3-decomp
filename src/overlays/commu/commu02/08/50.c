@@ -40,7 +40,7 @@ MATCH void func_801D0DE0(void) {
     }
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
-    func_801D3184(0x6E - ((count & 0xFF) * 0x28), 0x48);
+    func_801D3184(0x6E - ((count & BYTE_MASK) * 0x28), 0x48);
     func_801D32A0(0x6E - ((u8)D_801DB0C4 * 0x28), 0x74, 1);
     check = D_801DB0C4;
     if (check == 0) {
