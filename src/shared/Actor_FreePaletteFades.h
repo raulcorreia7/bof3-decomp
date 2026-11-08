@@ -3,14 +3,10 @@
  * verify every member. Members: Actor_FreePaletteFades (scena03, area032,
  * area085) and Actor_FreePaletteFades2 (scena03). */
 #define ACTOR_FREE_PALETTE_FADES()                        \
-    slots = SP_PTR(u8*, 0u);                              \
-    GFX_FreePaletteFadeTarget(&g_Actors[slots[0x11][3]]); \
-    slots = SP_PTR(u8*, 0u);                              \
-    GFX_FreePaletteFadeTarget(&g_Actors[slots[0x11][4]]); \
+    GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_03]); \
+    GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_04]); \
     Actor_Clear()
 
 MATCH void Actor_FreePaletteFades(void) {
-    u8** slots;
-
     ACTOR_FREE_PALETTE_FADES();
 }
