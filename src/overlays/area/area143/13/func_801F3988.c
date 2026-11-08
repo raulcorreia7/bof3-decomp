@@ -12,5 +12,5 @@ MATCH void func_801F3988(void) {
         return;
     }
     g_MessageRequest = message;
-    g_MasterStep     = 6;
+    g_MenuMasterStep = 6;
 }

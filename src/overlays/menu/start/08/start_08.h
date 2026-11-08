@@ -266,8 +266,8 @@ typedef struct WillpowerCurve {
     u8 base;
 } WillpowerCurve;
 
-extern Character      g_StartCharacters[CHARACTER_COUNT];
-extern WillpowerCurve g_StartWillpowerCurves[CHARACTER_COUNT];
+extern Character      g_NewGameCharacters[CHARACTER_COUNT];
+extern WillpowerCurve g_NewGameWillpowerCurves[CHARACTER_COUNT];
 extern u8             s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
 #define MENU_START_STEP_COUNT          9
@@ -323,13 +323,13 @@ extern Callback D_801EC578[];
 extern Callback D_801EC58C[];
 /* Panel and caption resources. A glyph row is a run of 3-byte records
  * {s8 dx, s8 dy, u8 glyph} in 8-pixel units that UI_DrawSpriteRun draws until
- * glyph 0xFF; MENU_CAPTION_GLYPH_2 packs several such runs and the label
+ * glyph 0xFF; g_MenuCaptionRight packs several such runs and the label
  * strings in one row. The icon and portrait rows are UI_DrawText glyph
  * strings and an atlas of s16 cells followed by label strings. Both stay byte
  * arrays: a row's size includes alignment padding past its payload (44 bytes
  * for a 42-byte run, 688 for a 687-byte bank), and a typed record array would
  * need the split data to own that padding. */
-extern u8       MENU_CAPTION_GLYPH_2[688];
+extern u8       g_MenuCaptionRight[688];
 /* D_801EC754 */
 extern u8       g_MenuListTab2OffSprites[];
 /* D_801EC76C */
@@ -350,7 +350,7 @@ extern u8       g_MenuLabelAgility[4];
 extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
 extern u8       g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Shop_DrawEquipment */
 extern u8       g_MenuPortraitAtlas[96];
-extern u8       MENU_CAPTION_ICON[792];
+extern u8       g_MenuCaptionIcon[792];
 extern s32      D_801ECC98[];
 extern Callback D_801ECCF8[];
 extern Callback D_801ECD1C[];
@@ -394,7 +394,7 @@ typedef struct CursorFrameSize {
 
 ASSERT_SIZE(CursorFrameSize, 4);
 
-extern CursorFrameSize g_StartCursorFrames[4];
+extern CursorFrameSize g_MenuStartCursorFrames[4];
 /* D_801ED43C */
 extern Callback        g_MenuStartPanel11StateFuncs[MENU_START_PANEL11_STATE_COUNT];
 /* D_801ED448 */
@@ -518,7 +518,7 @@ void        func_801D8DC8(void);
 void        func_801D902C(void);
 void        func_801D90A8(void);
 void        func_801D9110(void);
-extern void Menu_SwapBytes_801D933C(u8* first, u8* second);
+extern void Menu_SwapBytes3(u8* first, u8* second);
 extern void func_801D9350(void);
 void        func_801D970C(void);
 void        func_801D9748(void);
@@ -530,7 +530,7 @@ void        func_801DA27C(void);
 void        func_801DA320(void);
 void        func_801DA984(void);
 void        func_801DAA68(void);
-void        Menu_SwapBytes_801DAC08(u8* first, u8* second);
+void        Menu_SwapBytes4(u8* first, u8* second);
 extern void func_801DB510(void);
 void        func_801DB550(void);
 void        func_801DB5AC(void);
@@ -590,11 +590,11 @@ void        func_801E5C68(void);
 void        func_801E5E30(void);
 void        func_801E5F34(void);
 void        SAVE_RunLoadRestore(void);
-void        Camp_EnterMainLoop(void);
+void        Menu_ExitCamp(void);
 extern void func_801E6388(s32 overlay_x, s32 overlay_y);
-extern void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
+extern void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
 /* func_801E6784 */
-extern s32  Start_DrawNameEntryControls(u8 page, s32 x, s32 y);
+extern s32  Menu_DrawNameEntryControls(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
 extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
@@ -689,7 +689,7 @@ void        func_801EA994(void);
 void        func_801EA9D4(void);
 void        func_801EAEC4(void);
 extern void func_801EAF98(MenuPanelTask* task);
-extern s8   CardAccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
+extern s8   SAVE_AccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
 extern s32  func_801EFCA8(char* prefix, u8 length);
 
 /* Slide the master panel in to x 320 and stop it there. */
@@ -783,12 +783,12 @@ extern s32       D_801EC548;
 extern s32       D_801EC54A;
 extern s32       D_801EC54C;
 extern s32       D_801EC598;
-extern u8        MENU_CLOCK_CAPTION[];
-extern u8        MENU_COMMAND_FRAME[];
-extern u8        MENU_COMMAND_FRAME_SELECTED[];
+extern u8        g_MenuClockCaption[];
+extern u8        g_MenuCommandFrame[];
+extern u8        g_MenuCommandFrameSelected[];
 extern u8        g_MenuEquipStatSprites[];
 extern u8        D_801EC938[];
-extern u8        MENU_CLOCK_COLON[];
+extern u8        g_MenuClockColon[];
 extern u8*       g_MenuCommandLabels[];  /* label id -> button text */
 extern u8        g_MenuCommandRows[][5]; /* button count, then four label ids */
 extern u8        g_MenuEquipStatLabels[];

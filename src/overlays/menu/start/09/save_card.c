@@ -4,7 +4,7 @@
  * the descriptor to func_801EFB44. Mode 0x200 reopens the file in mode 1.
  * Returns 0 on success (or when mode is 0) and -1 on failure.
  * K&R definition: the u8 port narrows at each use, as in retail. */
-MATCH s32 CardAccessFile(port, name, mode, size, offset)
+MATCH s32 SAVE_AccessFile(port, name, mode, size, offset)
 u8        port;
 char*     name;
 s32       mode;
@@ -23,8 +23,8 @@ s32       offset;
     g_SaveCardStatus = CARD_EVENT_PENDING;
     do {
         tries--;
-        CardPollInfo();
-        CardPollSoftwareEvents();
+        SAVE_PollCardInfo();
+        SAVE_PollSoftwareEvents();
         if (tries == 0) {
             return -1;
         }
@@ -33,27 +33,27 @@ s32       offset;
     while (retry != 0) {
         switch (g_SaveCardStatus) {
             case CARD_EVENT_OK:
-                CardPollLoad();
+                SAVE_PollCardLoad();
                 if (g_SaveCardStatus != CARD_EVENT_OK) {
                     return -1;
                 }
                 if (mode == 0) {
                     return 0;
                 }
-                fd = CardOpenFile(port, name, mode);
+                fd = SAVE_OpenFile(port, name, mode);
                 if (fd == -1) {
                     return -1;
                 }
                 if (mode == 0x200) {
                     close(fd);
-                    fd = CardOpenFile(port, name, 1);
+                    fd = SAVE_OpenFile(port, name, 1);
                     if (fd == -1) {
                         g_SaveCardStatus = CARD_EVENT_ERROR;
                         return -1;
                     }
-                    CardTransferFile(fd, 1, size, offset);
+                    SAVE_TransferFile(fd, 1, size, offset);
                 } else {
-                    CardTransferFile(fd, mode, size, offset);
+                    SAVE_TransferFile(fd, mode, size, offset);
                 }
                 return 0;
             case CARD_EVENT_TIMEOUT:
@@ -65,27 +65,27 @@ s32       offset;
                     func_801EF148();
                     switch (g_SaveCardStatus) {
                         case CARD_EVENT_OK:
-                            CardPollLoad();
+                            SAVE_PollCardLoad();
                             if (g_SaveCardStatus != CARD_EVENT_OK) {
                                 return -1;
                             }
                             if (mode == 0) {
                                 return 0;
                             }
-                            if (CardOpenFile(port, name, mode) == -1) {
+                            if (SAVE_OpenFile(port, name, mode) == -1) {
                                 return -1;
                             }
                             if (mode == 0x200) {
                                 close(fd);
-                                fd = CardOpenFile(port, name, 1);
+                                fd = SAVE_OpenFile(port, name, 1);
                                 if (fd != -1) {
-                                    CardTransferFile(fd, 1, size, offset);
+                                    SAVE_TransferFile(fd, 1, size, offset);
                                     return 0;
                                 }
                                 g_SaveCardStatus = CARD_EVENT_ERROR;
                                 return -1;
                             } else {
-                                CardTransferFile(fd, mode, size, offset);
+                                SAVE_TransferFile(fd, mode, size, offset);
                             }
                             return 0;
                         case CARD_EVENT_TIMEOUT:
@@ -126,7 +126,7 @@ MATCH s32 func_801EEEC8(void) {
 
 /* Tests hardware-card events in order and returns the first active event. */
 /* func_801EEF40 */
-MATCH s32 CardTestHardwareEvents(void) { /* func_801EEF40 */
+MATCH s32 SAVE_TestHardwareEvents(void) { /* func_801EEF40 */
     for (;;) {
         if (TestEvent(g_SysCardHardwareIoEvent) != 0) {
             return CARD_EVENT_OK;
@@ -142,7 +142,7 @@ MATCH s32 CardTestHardwareEvents(void) { /* func_801EEF40 */
 
 /* Polls the four software-card event descriptors. */
 /* func_801EEFA0 */
-MATCH void CardPollSoftwareEvents(void) { /* func_801EEFA0 */
+MATCH void SAVE_PollSoftwareEvents(void) { /* func_801EEFA0 */
     TestEvent(g_SysCardSoftwareIoEvent);
     TestEvent(g_SysCardSoftwareTimeoutEvent);
     TestEvent(g_SysCardSoftwareNewEvent);
@@ -151,7 +151,7 @@ MATCH void CardPollSoftwareEvents(void) { /* func_801EEFA0 */
 
 /* Polls the three hardware-card event descriptors. */
 /* func_801EEFF8 */
-MATCH void CardPollHardwareEvents(void) { /* func_801EEFF8 */
+MATCH void SAVE_PollHardwareEvents(void) { /* func_801EEFF8 */
     TestEvent(g_SysCardHardwareIoEvent);
     TestEvent(g_SysCardHardwareTimeoutEvent);
     TestEvent(g_SysCardHardwareErrorEvent);
@@ -159,7 +159,7 @@ MATCH void CardPollHardwareEvents(void) { /* func_801EEFF8 */
 
 /* Polls card info for up to 60 frames and stores its event result. */
 /* func_801EF040 */
-MATCH void CardPollInfo(void) { /* func_801EF040 */
+MATCH void SAVE_PollCardInfo(void) { /* func_801EF040 */
     s32 count;
     s32 status;
 
@@ -178,7 +178,7 @@ MATCH void CardPollInfo(void) { /* func_801EF040 */
 
 /* Retries card load for up to 60 frames and stores its event result. */
 /* func_801EF0B4 */
-MATCH void CardPollLoad(void) { /* func_801EF0B4 */
+MATCH void SAVE_PollCardLoad(void) { /* func_801EF0B4 */
     s32 count;
     s32 status;
 
@@ -187,7 +187,7 @@ MATCH void CardPollLoad(void) { /* func_801EF0B4 */
     do {
         if (_card_load(g_SaveCardPort * 0x10) != 0) {
             g_SaveCardStatus = func_801EEEC8();
-            CardPollSoftwareEvents();
+            SAVE_PollSoftwareEvents();
             count = (g_SaveCardStatus == CARD_EVENT_PENDING) ? (count - 1) : 0;
         } else {
             g_SaveCardStatus = CARD_EVENT_PENDING;
@@ -202,12 +202,12 @@ MATCH void func_801EF148(void) {
     s32 status;
 
     count = 0x3C;
-    CardPollHardwareEvents();
+    SAVE_PollHardwareEvents();
     status = -1;
     do {
         if (_card_clear(g_SaveCardPort * 0x10) != 0) {
             count            = 0;
-            g_SaveCardStatus = CardTestHardwareEvents();
+            g_SaveCardStatus = SAVE_TestHardwareEvents();
         } else {
             g_SaveCardStatus = status;
             count -= 1;
@@ -217,7 +217,7 @@ MATCH void func_801EF148(void) {
 
 /* Clears the selected card and records its event result. */
 /* func_801EF1C0 */
-MATCH void CardIssueClear(void) { /* func_801EF1C0 */
+MATCH void SAVE_ClearCard(void) { /* func_801EF1C0 */
     s32 result;
 
     if (_card_clear((*(s32*)&g_SaveCardPort) << 4) != 0) {
@@ -230,7 +230,7 @@ MATCH void CardIssueClear(void) { /* func_801EF1C0 */
 
 /* Formats the save-module name for the selected card port. */
 /* func_801EF200 */
-MATCH s32 CardFormatDevice(void) { /* func_801EF200 */
+MATCH s32 SAVE_FormatCard(void) { /* func_801EF200 */
     char name[16];
 
     if (g_SaveCardPort == 0) {
@@ -241,14 +241,14 @@ MATCH s32 CardFormatDevice(void) { /* func_801EF200 */
     if (format(name) == 1) {
         return 0;
     }
-    CardPollInfo();
+    SAVE_PollCardInfo();
     return -1;
 }
 
 /* Builds the save-frame header and copies blocks for the selected save kind. */
 
 /* func_801EF27C */
-MATCH void CardBuildFileHeader(s8 magic_lo, s8 magic_hi, char* kind_name) { /* func_801EF27C */
+MATCH void SAVE_BuildFileHeader(s8 magic_lo, s8 magic_hi, char* kind_name) { /* func_801EF27C */
     u8  i;
     u8* save;
 
@@ -284,7 +284,7 @@ MATCH void CardBuildFileHeader(s8 magic_lo, s8 magic_hi, char* kind_name) { /* f
 
 /* Opens a card file with up to 120 retries; on failure, reports directory capacity. */
 /* func_801EF96C */
-MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
+MATCH s32 SAVE_OpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
     char path[0x20];
     s32  total;
     s32  retries;
@@ -309,8 +309,8 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
         VSync(1);
         retries++;
     } while ((retries & BYTE_MASK) < 120U);
-    CardPollInfo();
-    CardPollSoftwareEvents();
+    SAVE_PollCardInfo();
+    SAVE_PollSoftwareEvents();
     if (g_SaveCardStatus != CARD_EVENT_OK) {
         g_SaveCardStatus = CARD_EVENT_TIMEOUT;
         return -1;
@@ -319,7 +319,7 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
         g_SaveCardStatus = CARD_EVENT_ERROR;
         return -1;
     }
-    CardScanDirectory(D_801EEC14, 6);
+    SAVE_ScanDirectory(D_801EEC14, 6);
     retries = 0;
     do {
         total += g_SaveCardDirectory[retries & BYTE_MASK].size;
@@ -335,7 +335,7 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
 
 /* Reads or writes a card file, retrying failed transfers for up to 60 frames. */
 /* func_801EFB44 */
-MATCH s32 CardTransferFile(s32 fd, s32 mode, s32 size, s32 offset) { /* func_801EFB44 */
+MATCH s32 SAVE_TransferFile(s32 fd, s32 mode, s32 size, s32 offset) { /* func_801EFB44 */
     /* FAKE: pin the countdown to $s1. */
     FAKE_REG(s32, count, "s1");
     /* FAKE: pin the constant one to $s6. */
@@ -380,7 +380,7 @@ write_path:
     goto retry; /* a failed write polls the card again */
 
 retry:
-    CardPollInfo();
+    SAVE_PollCardInfo();
     if (g_SaveCardStatus == one) {
         close(fd);
         return -1;
@@ -400,7 +400,7 @@ check:
 
 /* Copies matching card-directory entries into the 15-slot table. */
 /* func_801EFCA8 */
-MATCH s32 CardScanDirectory(char* prefix, u8 length) { /* func_801EFCA8 */
+MATCH s32 SAVE_ScanDirectory(char* prefix, u8 length) { /* func_801EFCA8 */
     struct DIRENTRY dir;
     char            pattern[0x80];
     u8              i;

@@ -190,7 +190,7 @@ extern s32             D_801EEC1C;
 extern s32             D_801EEC24;
 extern char            D_801EEC2C[];
 /* The asset span asset_save_icons holds three TimIcon records at 0x801EFE54, 0x801EFF14 and
- * 0x801EFFD4. CardBuildFileHeader copies icon 0's CLUT colors and each icon's pixels into the
+ * 0x801EFFD4. SAVE_BuildFileHeader copies icon 0's CLUT colors and each icon's pixels into the
  * memory-card save frame; nothing reads the TIM headers or uploads them to VRAM. */
 extern u8              D_801EFE68[]; /* icon 0 clut.data */
 extern u8              D_801EFE94[]; /* icon 0 image.data */
@@ -199,13 +199,13 @@ extern u8              D_801F0014[]; /* icon 2 image.data */
 
 /* SDK and cross-unit functions used by this image. */
 extern s32  func_801EEEC8(void);
-extern s32  CardTestHardwareEvents(void);
-extern void CardPollSoftwareEvents(void);
-extern void CardPollHardwareEvents(void);
-extern void CardPollInfo(void);
-extern void CardPollLoad(void);
+extern s32  SAVE_TestHardwareEvents(void);
+extern void SAVE_PollSoftwareEvents(void);
+extern void SAVE_PollHardwareEvents(void);
+extern void SAVE_PollCardInfo(void);
+extern void SAVE_PollCardLoad(void);
 extern void func_801EF148(void);
-extern s32  CardOpenFile(u8 port, char* name, s32 mode);
-extern s32  CardTransferFile(s32 fd, s32 mode, s32 size, s32 offset);
+extern s32  SAVE_OpenFile(u8 port, char* name, s32 mode);
+extern s32  SAVE_TransferFile(s32 fd, s32 mode, s32 size, s32 offset);
 
 #endif

@@ -312,21 +312,21 @@ s32  func_801F15F8(u8* active_ui);
 void func_801F1638(void);
 void func_801F1684(void);
 void func_801F16F8(void);
-void func_801F1770(void);
+void Fairy_LoadCommu01(void);
 void func_801F17A4(void);
-void func_801F1824(void);
+void Fairy_ReloadPartyBank(void);
 void func_801F1874(void);
 void Fairy_GrantGift(void);
 void func_801F1AFC(void);
 void func_801F1B30(void);
 void Fairy_RollExploreReward(void);
-void func_801F1EB0(void);
+void Fairy_LoadCommu02(void);
 void func_801F1F10(void);
 void func_801F1F4C(void);
-void func_801F1FD8(void);
+void Fairy_LoadCommu03(void);
 void func_801F205C(void);
-void func_801F222C(void);
-void func_801F22C8(void);
+void Fairy_LoadCommu04(void);
+void Fairy_LoadCommu05(void);
 void func_801F235C(void);
 
 #endif

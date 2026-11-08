@@ -14,7 +14,7 @@ MATCH void SAVE_RunLoadVerify(void) {
     Menu_DrawClutStrip(D_80144953);
     MENU_DRAW_HEADER();
     SAVE_DrawSlots(0x20, 0x30, 0);
-    CardAccessFile(0, 0, 0, 0, 0);
+    SAVE_AccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus != CARD_EVENT_OK) {
         SND_PlayCue(EMI_CUE_ID(1, 7));
     } else {
@@ -23,7 +23,7 @@ MATCH void SAVE_RunLoadVerify(void) {
             *clear++ = 0;
         }
         TEXT_Format(g_UiFormatBuffer, g_SaveFileNameFormat, g_SaveSlotFirst);
-        if (CardAccessFile(1, g_UiFormatBuffer, 1, SAVE_FILE_SIZE, 0) != -1) {
+        if (SAVE_AccessFile(1, g_UiFormatBuffer, 1, SAVE_FILE_SIZE, 0) != -1) {
             stored     = D_800C1A70;
             D_800C1A70 = 0;
             sum        = 0;

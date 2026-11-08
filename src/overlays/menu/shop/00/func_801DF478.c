@@ -8,9 +8,9 @@ MATCH s32 func_801DF478(void) {
 
     if (D_80148658 == D_8014865A) {
         if (D_80148658 == 0) {
-            Menu_SwapBytes_801DF464(&g_PartyFieldOrder[D_80148659], &g_PartyFieldOrder[(s8)D_8014865D]);
+            Menu_SwapBytes5(&g_PartyFieldOrder[D_80148659], &g_PartyFieldOrder[(s8)D_8014865D]);
         } else {
-            Menu_SwapBytes_801DF464(&D_801E6244[D_80148659], &D_801E6244[(s8)D_8014865D]);
+            Menu_SwapBytes5(&D_801E6244[D_80148659], &D_801E6244[(s8)D_8014865D]);
         }
         return 0xFF;
     }

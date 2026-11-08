@@ -56,7 +56,7 @@ MenuPortraitSprite g_MenuPortraitAtlas[MASTER_MENU_ATLAS_COUNT] = {
 // clang-format on
 
 /* Master skill grants: {level threshold, ability id}; {99, 0xFF} marks an empty slot. */
-MasterSkill g_MasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT] = {
+MasterSkill g_MenuMasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT] = {
     {{2, ABILITY_RISKY_BLOW},
      {5, ABILITY_FOCUS},
      {8, ABILITY_SUPER_COMBO},
@@ -88,7 +88,7 @@ MasterSkill g_MasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT] = {
 
 /* Master stat bonuses: hp, ap, power, defense, agility, intellect. */
 // clang-format off
-MasterStats g_MasterStats[MASTER_COUNT] = {
+MasterStats g_MenuMasterStats[MASTER_COUNT] = {
     {2, -2, 2, 1, 0, -3},
     {0, 1, -1, -1, 0, 2},
     {-1, 1, -2, 1, 0, 2},
@@ -113,13 +113,13 @@ u8 D_801D41BA = 0x00;
 u8 D_801D41BB = 0x00;
 
 /* Message ids the panels queue. */
-s16 g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT] = {
+s16 g_MenuMasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT] = {
     64, 0, 32, 128, 128, 0, 0, 144, 0, 43, 96, 92, 112, 132, 152, 80, 3, 0,
 };
 
 /* Step and sub-step handlers. */
 Callback g_MasterMenuStates[MASTER_MENU_STEP_COUNT] = {
-    func_801D2614, func_801D2688, func_801D278C, func_801D2BE8, func_801D32D4, func_801D3924, Master_ApplyMaster,
+    func_801D2614, func_801D2688, func_801D278C, func_801D2BE8, func_801D32D4, func_801D3924, Menu_ApplyMasterMode,
 };
 
 Callback g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT] = {
@@ -127,33 +127,33 @@ Callback g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT] = {
     func_801D2738,
 };
 
-Callback g_MasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT] = {
+Callback g_MenuMasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT] = {
     func_801D27C8, func_801D282C, func_801D28B0, func_801D29C8, func_801D2A4C, func_801D2B64,
 };
 
-Callback g_MasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT] = {
+Callback g_MenuMasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT] = {
     func_801D0C48, func_801D0C88, func_801D2C24, func_801D2C64, func_801D12FC,
     func_801D2CA4, func_801D30C4, func_801D3148, func_801D3258,
 };
 
-Callback g_MasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT] = {
+Callback g_MenuMasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT] = {
     func_801D0C48, func_801D0C88, func_801D3310, func_801D3350, func_801D12FC,
     func_801D3390, func_801D3714, func_801D3798, func_801D38A8,
 };
 
-Callback g_MasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT] = {
+Callback g_MenuMasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT] = {
     func_801D3960,
     func_801D3A24,
     func_801D3E70,
 };
 
-u8 g_MasterActorModes[MASTER_ACTOR_MODE_COUNT] = {
+u8 g_MenuMasterActorModes[MASTER_ACTOR_MODE_COUNT] = {
     GAME_NONE, GAME_NONE, GAME_NONE, 3, GAME_NONE, 3, GAME_NONE, GAME_NONE, GAME_NONE, 6,
     GAME_NONE, GAME_NONE, GAME_NONE, GAME_NONE, GAME_NONE, GAME_NONE, GAME_NONE, 0, 0, 0,
 };
 
 /* Shop panel state. */
-u8 g_MasterBannerLock = 0;
-u8 g_MasterStep       = 0;
-u8 g_MasterSubStep    = 0;
-u8 g_MasterPanelLock  = 0;
+u8 g_MenuMasterBannerLock = 0;
+u8 g_MenuMasterStep       = 0;
+u8 g_MenuMasterSubStep    = 0;
+u8 g_MenuMasterPanelLock  = 0;

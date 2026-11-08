@@ -6,7 +6,7 @@
  * without an ink. One definition shared by the
  * start, Bate, Shisu and shop overlays; each overlay includes this file where
  * the function sits and binds g_MenuCommandRows, g_MenuCommandLabels,
- * MENU_COMMAND_FRAME and MENU_COMMAND_FRAME_SELECTED in its table in
+ * g_MenuCommandFrame and g_MenuCommandFrameSelected in its table in
  * config/symbols.toml. Every change must verify every member.
  */
 /* func_801DDC74 (start), func_801D4CD4 (bate), func_801D5C7C (shisu), func_801DA77C (shop) */
@@ -42,7 +42,7 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
         col         = i * 0x30;
         offset      = (4 - (label_width & BYTE_MASK)) * 4 + 6;
         UI_DrawText((s16)(x + col + offset), (s16)(y + 3), color, 0x10, label);
-        UI_DrawSpriteRun((s16)(x + col), (s16)y, (i != selected) ? MENU_COMMAND_FRAME : MENU_COMMAND_FRAME_SELECTED, 0);
+        UI_DrawSpriteRun((s16)(x + col), (s16)y, (i != selected) ? g_MenuCommandFrame : g_MenuCommandFrameSelected, 0);
         i++;
     } while (i < g_MenuCommandRows[row][0]);
 }

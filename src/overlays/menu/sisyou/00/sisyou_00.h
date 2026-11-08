@@ -23,7 +23,7 @@
 #define MASTER_MENU_LABEL_LONG_SIZE  8
 #define MASTER_MENU_MESSAGE_ID_COUNT 18
 
-/* The messages of one master, as offsets from the master's entry of g_MasterMessageIds. */
+/* The messages of one master, as offsets from the master's entry of g_MenuMasterMessageIds. */
 enum MasterMessage {
     MASTER_MESSAGE_GREETING = 0,
     MASTER_MESSAGE_FAREWELL = 4,
@@ -108,46 +108,46 @@ extern char               g_MenuLabelConfusion[MASTER_MENU_LABEL_LONG_SIZE]; /* 
 /* D_801D4058 */
 extern MenuPortraitSprite g_MenuPortraitAtlas[MASTER_MENU_ATLAS_COUNT];
 /* D_801D4088 */
-extern MasterSkill        g_MasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT];
+extern MasterSkill        g_MenuMasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT];
 /* D_801D4154 */
-extern MasterStats        g_MasterStats[MASTER_COUNT];
+extern MasterStats        g_MenuMasterStats[MASTER_COUNT];
 extern u8                 D_801D41BA;
 extern u8                 D_801D41BB;
 /* D_801D41BC */
-extern s16                g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT];
+extern s16                g_MenuMasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT];
 /* D_801D4204 */
-extern Callback           g_MasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT];
 /* D_801D421C */
-extern Callback           g_MasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT];
 /* D_801D4240 */
-extern Callback           g_MasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT];
 /* D_801D4264 */
-extern Callback           g_MasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT];
 /* D_801D4270 */
-extern u8                 g_MasterActorModes[MASTER_ACTOR_MODE_COUNT];
-extern u8                 g_MasterBannerLock;
-extern u8                 g_MasterStep;
-extern u8                 g_MasterSubStep;
-extern u8                 g_MasterPanelLock;
+extern u8                 g_MenuMasterActorModes[MASTER_ACTOR_MODE_COUNT];
+extern u8                 g_MenuMasterBannerLock;
+extern u8                 g_MenuMasterStep;
+extern u8                 g_MenuMasterSubStep;
+extern u8                 g_MenuMasterPanelLock;
 extern u8                 D_801D4288;
-extern u8                 g_MasterScrollOffset;
-extern u8                 g_MasterMenuCursor;
+extern u8                 g_MenuMasterScrollOffset;
+extern u8                 g_MenuMasterCursor;
 extern Callback           g_MasterMenuStates[MASTER_MENU_STEP_COUNT];
 extern Callback           g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT];
 
 /* Functions, in address order. */
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 void UI_DrawSpriteRun(s16 arg0, s16 arg1, const u8* arg2, u8 arg3);
-void Master_ResetPanel(void);
+void Menu_ResetMasterPanel(void);
 void func_801D0C48(void);
 void func_801D0C88(void);
 void func_801D0DD4(s32 message_id, s32 confirm);
 void func_801D10AC(u32 message_id);
-void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon);
+void Menu_DrawMasterPartyRow(u16 x, u16 y, u8 entry, u8 icon);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
-void Master_DispatchMenu(void);
+void Menu_UpdateMaster(void);
 void func_801D2614(void);
 void func_801D2688(void);
 void func_801D26C4(void);
@@ -176,7 +176,7 @@ void func_801D3960(void);
 void func_801D39CC(u32 entry);
 void func_801D3A24(void);
 void func_801D3E70(void);
-void Master_ApplyMaster(void);
+void Menu_ApplyMasterMode(void);
 void MenuDrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u8 mask);
 
 /* Request the active master's message id plus the handler's panel offset. The
@@ -185,9 +185,9 @@ static inline void MasterMenuRequestMasterMessage(u8* state, s32 offset) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + offset));
+    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + offset));
     *state = GAME_REQUEST_MESSAGE;
-    g_MasterSubStep++;
+    g_MenuMasterSubStep++;
 }
 
 /* Request the active master's panel message once, then latch the UI state. */
@@ -195,9 +195,9 @@ static inline void MasterMenuRunActivePanelMessage(u8* state) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
-    *state       = 2;
-    g_MasterStep = 6;
+    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
+    *state           = 2;
+    g_MenuMasterStep = 6;
 }
 
 #endif

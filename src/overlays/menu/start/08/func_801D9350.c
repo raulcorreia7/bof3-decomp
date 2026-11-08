@@ -17,7 +17,7 @@ MATCH void func_801D9350(void) {
             next  = row + 1;
             do {
                 if (*row == 0 && *next != 0) {
-                    Menu_SwapBytes_801D933C(row, next);
+                    Menu_SwapBytes3(row, next);
                 }
                 next++;
                 j++;

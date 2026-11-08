@@ -12,11 +12,11 @@ MATCH void func_801E5078(void) {
     MENU_DRAW_HEADER();
     UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(0xA8));
     g_SaveCardPort = 0;
-    CardAccessFile(0, 0, 0, 0, 0);
+    SAVE_AccessFile(0, 0, 0, 0, 0);
     port           = 1;
     first_status   = g_SaveCardStatus;
     g_SaveCardPort = port;
-    CardAccessFile(0, 0, 0, 0, 0);
+    SAVE_AccessFile(0, 0, 0, 0, 0);
     second_status = g_SaveCardStatus;
     if ((first_status == CARD_EVENT_OK) || (first_status == CARD_EVENT_NEW)) {
         if ((second_status == CARD_EVENT_OK) || (second_status == CARD_EVENT_NEW)) {

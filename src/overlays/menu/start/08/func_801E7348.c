@@ -15,7 +15,7 @@ MATCH s32 func_801E7348(void) {
     buffer[1] = 0;
     buffer[0] = 0;
     for (g_SaveCardPort = 0; g_SaveCardPort < 2; g_SaveCardPort++) {
-        CardAccessFile(0, 0, 0, 0, 0);
+        SAVE_AccessFile(0, 0, 0, 0, 0);
         if (g_SaveCardStatus == CARD_EVENT_OK || g_SaveCardStatus == CARD_EVENT_NEW) {
             count   = func_801EFCA8(D_801D0F14, 0x10);
             matched = 0;

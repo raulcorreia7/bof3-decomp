@@ -16,12 +16,12 @@ MATCH void Party_InitDefaults(void) {
     u8 willpower;
 
     for (index = 0; index < CHAR_INDEX_WHELP; index++) {
-        RECORDS[index] = g_StartCharacters[index];
-        willpower      = (g_Characters[index].level << 4) / g_StartWillpowerCurves[index].level_divisor +
-                         g_StartWillpowerCurves[index].base;
+        RECORDS[index] = g_NewGameCharacters[index];
+        willpower      = (g_Characters[index].level << 4) / g_NewGameWillpowerCurves[index].level_divisor +
+                         g_NewGameWillpowerCurves[index].base;
         START_PARTY->records[index].base.willpower = willpower;
         START_PARTY->records[index].willpower      = willpower;
         g_Characters[index].stats.willpower        = willpower;
     }
-    RECORDS[D_80181B1A] = g_StartCharacters[CHAR_INDEX_WHELP];
+    RECORDS[D_80181B1A] = g_NewGameCharacters[CHAR_INDEX_WHELP];
 }

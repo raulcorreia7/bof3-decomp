@@ -2,7 +2,7 @@
  * blinks on the clock's thirtieths count, and the caption row. One definition
  * shared by the start, Bate, Shisu and shop overlays; each overlay includes
  * this file where the function sits and binds g_MenuClockFormat,
- * MENU_CLOCK_COLON, MENU_CLOCK_CAPTION and the caption glyph runs in its table
+ * g_MenuClockColon, g_MenuClockCaption and the caption glyph runs in its table
  * in config/symbols.toml. Every change must verify every member.
  */
 /* func_801DD974 (start), func_801D49D4 (bate), func_801D597C (shisu), func_801DA47C (shop) */
@@ -25,12 +25,12 @@ MATCH void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y) {
     TEXT_Format(g_UiFormatBuffer, g_MenuClockFormat, g_PlayClock.minutes);
     UI_DrawAsciiString(x + 60, text_y, 0, g_UiFormatBuffer);
     if (g_PlayClock.thirtieths < 0xF) {
-        UI_DrawTextString(x + 52, window_y, 0, 0xFF, MENU_CLOCK_COLON);
-        UI_DrawTextString(x + 52, y + 7, 0, 0xFF, MENU_CLOCK_COLON);
+        UI_DrawTextString(x + 52, window_y, 0, 0xFF, g_MenuClockColon);
+        UI_DrawTextString(x + 52, y + 7, 0, 0xFF, g_MenuClockColon);
     }
-    UI_DrawSpriteRun(x, y, MENU_CLOCK_CAPTION, 0);
+    UI_DrawSpriteRun(x, y, g_MenuClockCaption, 0);
     for (i = 0, row_x = x + 0x18; i < 6; i++) {
-        UI_DrawSpriteRun(row_x + i * 8, y, MENU_CAPTION_GLYPH_1, 0);
+        UI_DrawSpriteRun(row_x + i * 8, y, g_MenuCaptionMiddle, 0);
     }
-    UI_DrawSpriteRun(x - 0x10, y, MENU_CAPTION_GLYPH_2, 0);
+    UI_DrawSpriteRun(x - 0x10, y, g_MenuCaptionRight, 0);
 }

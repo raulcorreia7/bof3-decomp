@@ -52,10 +52,10 @@ extern Callback g_MenuStatusTaskFuncs[MENU_STATUS_TASK_COUNT];
 extern Callback g_MenuStatusTask2StateFuncs[MENU_STATUS_TASK2_STATE_COUNT];
 /* D_801D9774 */
 extern Callback g_MenuStatusTask3StateFuncs[MENU_STATUS_TASK3_STATE_COUNT];
-extern u8       MENU_CAPTION_GLYPH_2[];
-extern u8       MENU_CLOCK_CAPTION[];
-extern u8       MENU_COMMAND_FRAME[];
-extern u8       MENU_COMMAND_FRAME_SELECTED[];
+extern u8       g_MenuCaptionRight[];
+extern u8       g_MenuClockCaption[];
+extern u8       g_MenuCommandFrame[];
+extern u8       g_MenuCommandFrameSelected[];
 /* D_801D9960 */
 extern u8       g_MenuListTab2OffSprites[];
 /* D_801D9978 */
@@ -83,8 +83,8 @@ extern u8       g_MenuEquipRowIcons[];
 extern u8       g_MenuLabelEquip[];
 extern u8       g_MenuPortraitAtlas[];
 extern u8       D_801D9BA8[];
-extern u8       MENU_CAPTION_ICON[];
-extern u8       MENU_CLOCK_COLON[];
+extern u8       g_MenuCaptionIcon[];
+extern u8       g_MenuClockColon[];
 extern u8*      g_MenuCommandLabels[];
 extern u8       g_MenuCommandRows[][5];
 extern char*    D_801D9EA4[];
@@ -172,9 +172,9 @@ extern u8              D_801DA0C6;
 s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 
 /* The clut strip tables of this overlay, bound in config/symbols.toml. */
-extern UvRect MENU_CLUT_STRIP_CELLS[];
-extern u8     MENU_CLUT_STRIP_ENTRIES[];
-extern u8     MENU_CLUT_STRIP_PALETTES[];
+extern UvRect g_MenuClutStripCells[];
+extern u8     g_MenuClutStripEntries[];
+extern u8     g_MenuClutStripPalettes[];
 void          Menu_DrawClutStrip(u8 clut_index);
 
 #endif

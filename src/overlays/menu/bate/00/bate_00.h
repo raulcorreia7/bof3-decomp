@@ -38,10 +38,10 @@ extern u8            D_8018E244;
 extern OverlayHeader D_801D0C00;
 extern u8            D_801D0D80[];
 extern u8            D_801D0D84[];
-extern u8            MENU_CAPTION_GLYPH_2[];
-extern u8            MENU_CLOCK_CAPTION[];
-extern u8            MENU_COMMAND_FRAME[];
-extern u8            MENU_COMMAND_FRAME_SELECTED[];
+extern u8            g_MenuCaptionRight[];
+extern u8            g_MenuClockCaption[];
+extern u8            g_MenuCommandFrame[];
+extern u8            g_MenuCommandFrameSelected[];
 extern u8            D_801D0D90[];
 extern u8            D_801D0D94[];
 extern u8            D_801D0D98[];
@@ -67,8 +67,8 @@ extern u8       g_MenuLabelEquip[];
 extern u8       g_MenuPortraitAtlas[];
 /* D_801D8700 */
 extern Callback g_MenuBateStep2Funcs[MENU_BATE_STEP2_COUNT];
-extern u8       MENU_CAPTION_ICON[];
-extern u8       MENU_CLOCK_COLON[];
+extern u8       g_MenuCaptionIcon[];
+extern u8       g_MenuClockColon[];
 extern u8*      g_MenuCommandLabels[];
 extern u8       g_MenuCommandRows[][5];
 /* D_801D870C */

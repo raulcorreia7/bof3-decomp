@@ -539,7 +539,7 @@ The `source` field of a function or global's `config/symbols.toml` row describes
 holds in one short present-tense sentence, using game terms. It does not record callers, addresses,
 implementation details or naming evidence. Leave it out when the role is unknown.
 
-A name you invent never holds an 8-digit address (`Menu_SwapBytes_801D933C`, `EFFECT_BANK_80140000`); only the tool names `func_<ADDR>`, `D_<ADDR>`, `L<ADDR>`, `jtbl_*`, `jpt_*` and `s_gap_*` do. `tools/check_names.py` enforces this in `include/` and `src/` and lists the legacy offenders in `config/address_names.txt`: rename one and delete its line.
+A name you invent never holds an 8-digit address (`Menu_SwapBytes3`, `EFFECT_BANK_80140000`); only the tool names `func_<ADDR>`, `D_<ADDR>`, `L<ADDR>`, `jtbl_*`, `jpt_*` and `s_gap_*` do. `tools/check_names.py` enforces this in `include/` and `src/` and lists the legacy offenders in `config/address_names.txt`: rename one and delete its line.
 
 An address name (`func_801D73B4`) spells its address and takes no `@`. Offset and address comments (`/* 0x1C */`, `/* D_80148627 */`) keep their own form.
 

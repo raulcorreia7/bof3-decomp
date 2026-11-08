@@ -18,11 +18,11 @@ MATCH void func_801D2A4C(void) {
         }
     }
     if (i < g_Game.party_size) {
-        g_MasterStep    = 4;
-        g_MasterSubStep = 0;
+        g_MenuMasterStep    = 4;
+        g_MenuMasterSubStep = 0;
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_NO_PUPILS));
+    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_NO_PUPILS));
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    g_MasterSubStep++;
+    g_MenuMasterSubStep++;
 }

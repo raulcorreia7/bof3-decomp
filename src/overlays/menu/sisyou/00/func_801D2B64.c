@@ -6,8 +6,8 @@ MATCH void func_801D2B64(void) {
     if (*state == 2) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
-    *state          = 2;
-    g_MasterStep    = 6;
-    g_MasterSubStep = 0;
+    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
+    *state              = 2;
+    g_MenuMasterStep    = 6;
+    g_MenuMasterSubStep = 0;
 }

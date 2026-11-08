@@ -14,7 +14,7 @@ MATCH u8 func_801DB04C(void) {
             tmp                                        = g_MenuPanelTasks[D_80148658[1] + 4].unk_0C;
             g_MenuPanelTasks[D_80148658[1] + 4].unk_0C = g_MenuPanelTasks[D_80148658[5] + 4].unk_0C;
             g_MenuPanelTasks[D_80148658[5] + 4].unk_0C = tmp;
-            Menu_SwapBytes_801DAC08(&g_PartyFieldOrder[D_80148658[1]], &g_PartyFieldOrder[D_80148658[5]]);
+            Menu_SwapBytes4(&g_PartyFieldOrder[D_80148658[1]], &g_PartyFieldOrder[D_80148658[5]]);
             for (i = 0; i < 4; i++) {
                 tmp                                   = s_SkillOrderCursors[D_80148658[1]][i];
                 s_SkillOrderCursors[D_80148658[1]][i] = s_SkillOrderCursors[D_80148658[5]][i];
@@ -29,7 +29,7 @@ MATCH u8 func_801DB04C(void) {
                 s_SkillOrderGroups[D_80148658[5]][i] = tmp;
             }
         } else {
-            Menu_SwapBytes_801DAC08(&D_801ED690[D_80148658[1]], &D_801ED690[D_80148658[5]]);
+            Menu_SwapBytes4(&D_801ED690[D_80148658[1]], &D_801ED690[D_80148658[5]]);
         }
         return 0xFF;
     }

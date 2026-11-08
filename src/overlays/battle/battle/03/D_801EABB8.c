@@ -158,14 +158,14 @@ Callback D_801EAD00[3] = {
 
 /* 0x801EAD0C */
 Callback D_801EAD0C[5] = {
-    (Callback)func_801D67EC, (Callback)func_801D6818, (Callback)func_801D6F28,
-    (Callback)func_801D7108, (Callback)func_801D716C,
+    (Callback)func_801D67EC, (Callback)func_801D6818, (Callback)Battle_ReloadPartyBank,
+    (Callback)Battle_ReloadAreaAudio, (Callback)func_801D716C,
 };
 
 /* 0x801EAD20 */
 Callback D_801EAD20[4] = {
-    (Callback)func_801D71E0,
-    (Callback)func_801D7234,
+    (Callback)Battle_ReloadFieldText,
+    (Callback)Battle_ReloadMusicBank,
     (Callback)Battle_WriteBackParty,
     (Callback)func_801D74D4,
 };
