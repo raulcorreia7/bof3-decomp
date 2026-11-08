@@ -33,7 +33,7 @@ MATCH void func_801EEE4C(void) {
         func_801EF710();
         PopMatrix();
     }
-    GFX_AddDitheredDrawMode(3, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15);
+    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
 }
 
 MATCH void func_801EEF1C(void) {

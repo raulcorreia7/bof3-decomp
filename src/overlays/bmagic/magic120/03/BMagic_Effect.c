@@ -48,7 +48,7 @@ MATCH void func_801EF270(void) {
 INCLUDE_ASM(BMagic_DrawWhelpBreath);
 
 MATCH void func_801EFD20(void) {
-    GFX_AddDitheredDrawMode(3, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15);
+    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
     g_ScriptBank = 0x800C3800;
     SYS_DISPATCH_BYTE(D_801F0CC4, g_Task->header.step);
     g_ScriptBank = 0x800D3800;

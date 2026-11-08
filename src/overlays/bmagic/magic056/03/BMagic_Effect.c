@@ -111,10 +111,10 @@ MATCH void func_801F00C8(void) {
     PartyBattler* work;
     PartyBattler* source;
 
-    g_Task->unk_5D -= 0x10;
-    g_Task->unk_5E -= 0x10;
-    g_Task->unk_5F -= 0x10;
-    if ((s8)g_Task->unk_5D == -0x80) {
+    g_Task->unk_5D -= 16;
+    g_Task->unk_5E -= 16;
+    g_Task->unk_5F -= 16;
+    if ((s8)g_Task->unk_5D == -128) {
         work   = g_Task;
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);

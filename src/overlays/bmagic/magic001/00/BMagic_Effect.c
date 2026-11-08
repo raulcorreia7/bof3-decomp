@@ -241,14 +241,14 @@ MATCH void func_801EFFCC(void) {
     temp_v0 = g_Task->unk_5D;
     if (temp_v0 != -0x80) {
         g_Task->unk_5D = temp_v0 - 0x10;
-        g_Task->unk_5E -= 0x10;
-        g_Task->unk_5F -= 0x10;
+        g_Task->unk_5E -= 16;
+        g_Task->unk_5F -= 16;
     }
     temp_v0_2 = g_Task->timer;
     if (temp_v0_2 != 0) {
         g_Task->timer = temp_v0_2 - 2;
     }
-    if ((s8)g_Task->unk_5D == -0x80) {
+    if ((s8)g_Task->unk_5D == -128) {
         work   = g_Task;
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);

@@ -44,7 +44,7 @@ MATCH void func_801EF1E0(void) {
 
 MATCH void func_801EF284(void) {
     SYS_DISPATCH_BYTE(D_801EFA5C, g_Task->header.step);
-    GFX_AddDitheredDrawMode(2, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35);
+    GFX_AddDitheredDrawMode(2, getTPage(0, 1, 320, 256));
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF4D4();
         func_801EF730();

@@ -97,11 +97,11 @@ MATCH void func_801D19C8(void) {
         if (slot->active == 0) {
             slot->active  = 1;
             slot->unk_01  = 0;
-            slot->life_02 = 0x10;
+            slot->life_02 = 16;
             actor         = g_Task;
             WorldPos_Copy(&slot->pos, &actor->pos);
-            slot->radius_14     = 0x100;
-            slot->core_shade_16 = 0x60;
+            slot->radius_14     = 256;
+            slot->core_shade_16 = 96;
             slot->rim_shade_17  = 0;
             return;
         }

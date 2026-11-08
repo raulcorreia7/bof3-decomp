@@ -104,7 +104,7 @@ MATCH void func_801EF2AC(void) {
 
 MATCH void func_801EF30C(void) {
     SYS_DISPATCH_BYTE(D_801F0518, g_Task->header.step);
-    GFX_AddDitheredDrawMode(3, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5);
+    GFX_AddDitheredDrawMode(3, getTPage(0, 1, 320, 256));
     if (g_Task->header.flags & 1 && g_Task->header.step != 0) {
         func_801EFF14();
         func_801EFC00();
