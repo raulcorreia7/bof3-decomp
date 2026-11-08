@@ -1,12 +1,14 @@
 #include "game_00.h"
 
-/* nonmatching: the last party scan is 4 bytes short; retail copies g_PartySize into a0 (blez v0, move a0,v0) and hoists the
- * 2 into a1. First difference 0x801BF148, the epilogue jump target. */
+/* nonmatching: one instruction differs. The palette copy loop (0x801BF31C) adds src and j*2 as `addu v0,v0,v1` in retail
+ * and `addu v0,v1,v0` here. Tried: index and pointer operand orders, src/dst declaration and assignment order, inline
+ * src expression, 10 min permuter. The party scan needs `offset = i * BATTLE_PARTY_STRIDE` as a local. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801BF11C(void) {
     u8*  work;
     s32  i;
     s32  j;
+    s32  offset;
     u8   order;
     s32  bank;
     u16* dst;
@@ -55,7 +57,8 @@ NON_MATCHING u8 func_801BF11C(void) {
         func_8014D978();
     }
     for (i = 0; i < g_PartySize; i++) {
-        if ((&D_80145E9B)[i * BATTLE_PARTY_STRIDE] != 2) {
+        offset = i * BATTLE_PARTY_STRIDE;
+        if ((&D_80145E9B)[offset] != 2) {
             return 0;
         }
     }

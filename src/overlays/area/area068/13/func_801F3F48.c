@@ -23,9 +23,6 @@ NON_MATCHING s32 func_801F3F48(void) {
     record2->unk_77      = 5;
     record               = g_ScriptWorkRecord;
     base                 = (s32)g_Actors;
-    /* FAKE: use keeps the g_Actors row materialized; retail fills the
-     * third reload's delay slot with it here. */
-    MATCH_FAKE_USE(base);
     ORDER_LOCK_BEGIN
         record->unk_7E = 0;
         record         = (Actor*)((s32)record - base);
@@ -43,6 +40,8 @@ NON_MATCHING s32 func_801F3F48(void) {
     return 0;
 }
 #else
-/* blocker: g_Actors address load scheduled early; first diff: 0x801F3F78. */
+/* nonmatching: 8 rows, one register choice. The exact record-index division (x * 0xD79435E5, then >> 3) builds its
+ * temporaries in a0/v1 in retail and v0/v1 here (first row 0x801F3F90). MATCH_FAKE_USE(base) before the third reload
+ * was dropped: it cost 4 bytes and moved the first row to 0x801F3F78. */
 INCLUDE_ASM(func_801F3F48);
 #endif

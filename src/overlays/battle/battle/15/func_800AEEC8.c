@@ -1,9 +1,9 @@
 #include "battle_15.h"
 
-/* blocker: tail regalloc; first diff: +0x80 `li v0,1` where retail reads g_Task.
- * Reordering the stores or hoisting work/result locals keeps 3 differ and +4 bytes, moving
- * the first diff to +0x70 (`andi a0,v0,0xff` against retail `andi v0,v0,0xff`); the draft
- * already returns the stored 1. Permuter 115k iterations, best score 480. */
+/* nonmatching: 9 rows differ, one scheduling difference. Retail loads g_Task (lui/lw a0) before `li v0,1` and the
+ * stores; ours loads it after the unk_04 and unk_09 stores (first row 0x800AEF48). Tried: status local for the 1,
+ * g_Task in a local before or after the alloc, the target store first (both move the offset into a0 and break the
+ * prologue), 115k permuter iterations. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1) {
     u8  mode;
@@ -23,11 +23,12 @@ NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1) {
         mode = 8;
     }
     slot                               = Battle_AllocEffect(1, 0x48);
+    status                             = 1;
     g_BattleEffects[slot].unk_04       = mode;
-    g_BattleEffects[slot].unk_09       = 1;
-    g_BattleEffects[slot].unk_0A       = 0;
+    g_BattleEffects[slot].unk_09       = status;
     g_BattleEffects[slot].target.party = g_Task;
-    return 1;
+    g_BattleEffects[slot].unk_0A       = 0;
+    return status;
 }
 #else
 INCLUDE_ASM(func_800AEEC8);
