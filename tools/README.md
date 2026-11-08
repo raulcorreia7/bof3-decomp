@@ -92,6 +92,12 @@ the body only when `tools/match.sh` reports an exact result. Twins with one body
 share `<func>.h`; twins at several addresses print `TWIN` and stay for a naming pass. A
 body is a lead: run `check-<image>`, then name it from evidence.
 
+The tool names a work-cell member through the nested structs and unions of the record (`header.step`,
+`pos.x.fixed`) and a word inside a record such as `g_Game` as its member. It writes no branch, `jalr`
+or load through an argument pointer, so a function with one prints `SKIP` and its first unlifted
+instruction. `worklist.py` lists a function on the `generator` route only when the tool can write its
+body; a `SKIP` function moves on to the template or plain route.
+
 ## Duplicates and names
 
 `dups.py near` groups functions with alike opcodes across all images and names the matched template of

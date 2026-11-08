@@ -7,7 +7,7 @@ One row per `INCLUDE_ASM` function; a `HAND_ASM` unit is done and has no row. Th
 is the cheapest known way in, in the order docs/matching.md tries them:
 
     template0   a matched template with no differing instruction: tools/template_try.py
-    generator   a mechanical shape: tools/gen_body.py <shape>
+    generator   a mechanical shape that tools/gen_body.py can write a body for
     template    a template with a few differing instructions: tools/template_diff.py
     plain       no known route: m2c draft, diagnose loop, permuter
 
@@ -80,9 +80,19 @@ def templates() -> dict[str, tuple[str, int]]:
     return {r[0]: (r[1], int(r[3])) for r in rows}
 
 
+def writable(f: gen_body.Func, tree: gen_body.Tree, names: gen_body.Names) -> bool:
+    """True when gen_body can write a body for ``f`` (a SKIP row would only waste the try)."""
+    try:
+        gen_body.body_for(f, tree, names)
+    except gen_body.Unsupported:
+        return False
+    return True
+
+
 def rank(image: str = "", route: str = "") -> list[Row]:
     """Return the worklist: cheapest route first, untried before tried, then by size."""
     near = templates()
+    tree, names = gen_body.Tree(), gen_body.Names()
     shapes = {
         f.ref: shape for shape, f, _ in gen_body.measure(gen_body.asm_functions())
     }
@@ -93,7 +103,7 @@ def rank(image: str = "", route: str = "") -> list[Row]:
         tmpl = near.get(f.ref)
         if tmpl and tmpl[1] == 0:
             kind, how = "template0", f"template_try.py: {tmpl[0]}"
-        elif shapes[f.ref] in GENERATED:
+        elif shapes[f.ref] in GENERATED and writable(f, tree, names):
             kind, how = "generator", f"gen_body.py {shapes[f.ref]}"
         elif tmpl and tmpl[1] <= EDITS:
             kind, how = "template", f"template_diff.py: {tmpl[0]} ({tmpl[1]} diff)"
