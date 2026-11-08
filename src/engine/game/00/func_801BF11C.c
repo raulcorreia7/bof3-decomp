@@ -48,9 +48,9 @@ MATCH u8 func_801BF11C(void) {
                     dst            = (u16*)(GAME_PALETTE_MIRROR + bank);
                     src            = (u16*)(GAME_PALETTE_STAGE + bank);
                     palette_offset = j << 1;
-                    color          = *(u16*)((u8*)src + palette_offset + 0xC0);
+                    color          = MEM(u16, (u32)src + palette_offset + 0xC0);
                     palette_offset += (s32)dst;
-                    *(u16*)palette_offset = color;
+                    MEM(u16, palette_offset) = color;
                 }
                 g_GfxPalettePending = 1;
                 g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
