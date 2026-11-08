@@ -35,8 +35,6 @@ void func_801F2F1C(void* sprite);
 void func_801F2FC8(void);
 u8   func_801F321C(void);
 void Screen_DrawTint(void);
-#define SCREEN_TINT_LAYER 5U
-#define SCREEN_TINT_TPAGE (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF)
 void func_801F3C84(void);
 
 extern Point2D D_801F63DC[];

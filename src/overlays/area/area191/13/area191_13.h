@@ -29,8 +29,6 @@ extern u8 D_801F4290[];
 
 /* The draw pass this image's entry runs. */
 void Screen_DrawTint(void);
-#define SCREEN_TINT_LAYER 5U
-#define SCREEN_TINT_TPAGE (GetTPage(0, 2, 0x3C0, 0) & 0xFFFF)
 
 void func_801F39AC(void);
 
