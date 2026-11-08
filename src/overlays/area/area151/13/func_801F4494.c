@@ -4,7 +4,7 @@ MATCH void func_801F4494(void) {
     Actor* scratch;
     Actor* work;
 
-    scratch = (Actor*)g_Task;
+    scratch = g_Task;
     if (scratch->param.unk_0B != 0) {
         if ((scratch->header.flags & ACTOR_FLAG_OFFSCREEN) != 0) {
             Actor_Clear();
@@ -14,7 +14,7 @@ MATCH void func_801F4494(void) {
         scratch->param.unk_0B = 1;
     }
 
-    work = (Actor*)g_Task;
+    work = g_Task;
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
     func_8014D978();

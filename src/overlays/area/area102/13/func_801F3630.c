@@ -1,10 +1,10 @@
 #include "area102_13.h"
 
 MATCH void func_801F3630(void) {
-    func_801F36B4(((Actor*)g_Task)->timer >> 2);
-    ((Actor*)g_Task)->timer -= 1;
-    if (((Actor*)g_Task)->timer < 8U) {
-        ((Actor*)g_Task)->timer       = ((Actor*)g_Task)->unk_0A;
-        ((Actor*)g_Task)->header.step = 1;
+    func_801F36B4((g_Task)->timer >> 2);
+    (g_Task)->timer -= 1;
+    if ((g_Task)->timer < 8U) {
+        (g_Task)->timer       = (g_Task)->unk_0A;
+        (g_Task)->header.step = 1;
     }
 }

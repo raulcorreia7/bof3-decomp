@@ -3,10 +3,10 @@
 MATCH void func_801F3798(void) {
     Actor* scratch;
 
-    scratch = (Actor*)g_Task;
+    scratch = g_Task;
     if (((u8*)scratch)[0xB] == 0) {
         ((u8*)scratch)[9]++;
-        scratch = (Actor*)g_Task;
+        scratch = g_Task;
         if (((u8*)scratch)[9] >= 0x5A) {
             ((u8*)scratch)[0xB]++;
         }
@@ -24,5 +24,5 @@ MATCH void func_801F3798(void) {
 bump:
     TASK_BYTES[0x03]++;
 done:
-    Area_DrawHudBanner(0x5C, ((Actor*)g_Task)->screen_y);
+    Area_DrawHudBanner(0x5C, (g_Task)->screen_y);
 }

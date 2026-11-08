@@ -5,13 +5,13 @@ MATCH void func_801F361C(void) {
     s32 arg1;
 
     if (SYS_TestFlag(g_SceneEventFlags, 0x5A) != 0) {
-        arg0                          = 0;
-        arg1                          = -2;
-        ((Actor*)g_Task)->screen_y    = 0x80;
-        ((Actor*)g_Task)->header.step = 3;
+        arg0                  = 0;
+        arg1                  = -2;
+        (g_Task)->screen_y    = 0x80;
+        (g_Task)->header.step = 3;
     } else {
-        ((Actor*)g_Task)->screen_y = 0;
-        ((Actor*)g_Task)->header.step += 1;
+        (g_Task)->screen_y = 0;
+        (g_Task)->header.step += 1;
         func_801F37B8(0, 1);
         arg0 = 1;
         arg1 = 1;
