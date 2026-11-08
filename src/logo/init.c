@@ -1,4 +1,5 @@
 #include "logo/logo.h"
+#include "gfx/prim.h"
 
 /* func_801CE760 */
 MATCH void Logo_Init(s32 work_base, u_long disc_lba) { /* func_801CE760 */
@@ -26,11 +27,11 @@ MATCH void Logo_InitDisplay(void) { /* func_801CE7F4 */
     ResetGraph(0);
     SetDispMask(0);
     SetVideoMode(MODE_NTSC);
-    height = 0xF0;
+    height = SCREEN_HEIGHT;
     disp   = D_801EB480;
-    SetDefDispEnv(disp, 0, 0, 320, height);
+    SetDefDispEnv(disp, 0, 0, SCREEN_WIDTH, height);
     disp++;
-    SetDefDispEnv(disp, 0, 240, 320, height);
+    SetDefDispEnv(disp, 0, SCREEN_HEIGHT, SCREEN_WIDTH, height);
     D_801EB4A5 = 1;
     D_801EB491 = 1;
     clip.w     = 960;
