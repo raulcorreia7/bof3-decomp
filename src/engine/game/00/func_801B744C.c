@@ -5,7 +5,7 @@ MATCH void func_801B744C(void) {
 
     if (func_8014DAEC() & BYTE_MASK) {
         rate            = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
-        g_Task->timer   = 0x20 / rate;
+        g_Task->timer   = 32 / rate;
         g_Task->vx      = g_FacingOffsets[g_Task->direction_08].x * rate * (g_Task->state_70.byte + 1);
         g_Task->vy      = g_FacingOffsets[g_Task->direction_08].y * rate * (g_Task->state_70.byte + 1);
         g_Task->vz      = (g_Task->state_70.byte + 1) << 6;

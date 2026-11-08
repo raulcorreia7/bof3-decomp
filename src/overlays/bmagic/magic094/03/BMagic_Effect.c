@@ -70,7 +70,7 @@ MATCH void func_801EF078(void) {
     u8 count;
 
     timer = g_Task->timer;
-    if (timer < 0x10U) {
+    if (timer < 16U) {
         g_Task->timer = timer + 1;
     }
     count          = g_Task->unk_09 + 1;

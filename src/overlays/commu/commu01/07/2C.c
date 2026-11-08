@@ -49,7 +49,7 @@ MATCH void func_801D1630(void) {
         func_801D49C4();
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         result = func_801D482C(1);
-        if (result & 0xFF) {
+        if (result & BYTE_MASK) {
             D_801D4E0C = 0xB5;
         }
     } else {
@@ -60,10 +60,10 @@ MATCH void func_801D1630(void) {
     selection = &g_SceneEventSelection;
     func_801D36FC(*selection, 1);
     func_801D36FC(D_801D4E28, 0);
-    if (!(result & 0xFF)) {
+    if (!(result & BYTE_MASK)) {
         func_801D4694(&x, &y, *selection, D_801D4E24);
         func_801D3984((s16)(x + 4), y, 1);
-        func_801D28A4(0xA0, 0x3E, func_801D3AA0(*selection, (D_801D4E24 - 1) & 0xFF) & 0xFF, 1);
+        func_801D28A4(0xA0, 0x3E, func_801D3AA0(*selection, (D_801D4E24 - 1) & BYTE_MASK) & BYTE_MASK, 1);
     }
 }
 

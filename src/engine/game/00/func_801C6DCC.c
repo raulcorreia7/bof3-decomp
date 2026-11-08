@@ -21,7 +21,7 @@ MATCH bool func_801C6DCC(void) {
                 }
                 if ((func_801C7824(COORD_INT(g_EncounterParty[inner].x), COORD_INT(g_EncounterParty[inner].y),
                                    *(s16*)(field - 4), *(s16*)field) &
-                     0xFF) != 0) {
+                     BYTE_MASK) != 0) {
                     flag = 1;
                     D_801CD8C4 += 1;
                     break;
