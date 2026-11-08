@@ -45,6 +45,8 @@ extern u16 D_801F6210;
 extern u16 D_801F6212;
 extern u16 D_801F6214;
 extern u16 D_801F6216;
+extern char D_801F2C04[];
+extern u8   D_80147C97;
 
 /* The camera and view steps the handlers enter. */
 void func_801F32A0(s32 value);
