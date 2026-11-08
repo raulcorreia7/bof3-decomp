@@ -25,6 +25,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, alias = true }
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", alias = true }
+Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", alias = true }
 g_BattleSelections = { addr = 0x800B65F8, alias = true }
 g_BattleActionType_nv = { addr = 0x80146375, alias = true }
 g_BattlePhases = { addr = 0x801D0C04, source = "Battle mode handlers, one per battle mode." }
@@ -1804,7 +1805,8 @@ Game_FinishCameraLook = { addr = 0x801981D4, type = "func", source = "Ends the c
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
 Game_CallAreaHandler = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table D_801C86F8 and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenarioHandler." }
 UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
-Area_EndScroll = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
+Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task mode FIELD_TASK_MODE_LEADER_SWITCH (slot 3 of D_801CD0AC): runs the leader-switch step table D_801CD0FC, which Game_RequestLeaderSwitch starts" }
+Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
 Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }

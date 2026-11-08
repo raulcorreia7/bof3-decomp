@@ -2139,7 +2139,7 @@ s8 s_EntityPlacementOffsets[32] = {
 };
 
 Callback D_801CD0AC[15] = {(Callback)func_801B016C, (Callback)func_801B0320, (Callback)func_801B69C0,
-                           (Callback)func_801B1AE8, (Callback)func_801B29BC, (Callback)func_801B2A70,
+                           (Callback)Game_RunLeaderSwitch, (Callback)func_801B29BC, (Callback)func_801B2A70,
                            (Callback)func_801B2C38, (Callback)func_801B2D90, (Callback)Area_Climb,
                            (Callback)func_801D9B14, (Callback)func_801B3690, (Callback)func_801B371C,
                            (Callback)func_801B3BFC, (Callback)func_801F4D9C, (Callback)func_801C22D8};
@@ -2149,7 +2149,7 @@ Callback D_801CD0E8[3] = {(Callback)func_801B036C, (Callback)func_801B0568, (Cal
 u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
 Callback D_801CD0FC[5] = {(Callback)func_801B1E24, (Callback)func_801B207C, (Callback)func_801B21E8,
-                          (Callback)func_801B26E0, (Callback)Area_EndScroll};
+                          (Callback)func_801B26E0, (Callback)Game_EndLeaderSwitch};
 
 Callback D_801CD110[2] = {(Callback)func_801B2A00, (Callback)func_801B2A20};
 

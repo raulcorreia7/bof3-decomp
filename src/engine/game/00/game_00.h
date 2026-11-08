@@ -888,13 +888,14 @@ void  func_801B0C88(void);
 void  func_801B0DA0(void);
 void  func_801B13BC(void);
 void  func_801B146C(void);
-void  func_801B1AE8(void);
+/* func_801B1AE8 */
+void  Game_RunLeaderSwitch(void);
 void  func_801B1E24(void);
 void  func_801B207C(void);
 void  func_801B21E8(void);
 void  func_801B26E0(void);
 /* func_801B2950 */
-void  Area_EndScroll(void);
+void  Game_EndLeaderSwitch(void);
 void  func_801B29BC(void);
 void  func_801B2A00(void);
 void  func_801B2A20(void);
