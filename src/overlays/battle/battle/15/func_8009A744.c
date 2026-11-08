@@ -38,7 +38,7 @@ NON_MATCHING void func_8009A744(void) {
         }
     }
     Char_RebuildStats(base);
-    if (g_BattlePartyCount != 0) {
+    if (g_Battle.party_count != 0) {
         i = 0;
         do {
             cell      = &g_Characters[g_Game.members[i].character_index];
@@ -52,7 +52,7 @@ NON_MATCHING void func_8009A744(void) {
             memcpy(&row[0x3C], &cell[0x1C], 0x10);
             memcpy(&row[0x4C], &cell[0x2C], 0x10);
             i++;
-        } while ((u8)i < g_BattlePartyCount);
+        } while ((u8)i < g_Battle.party_count);
     }
     func_800AAA74();
     j = 0;
@@ -64,12 +64,12 @@ NON_MATCHING void func_8009A744(void) {
         j++;
     } while (j < 3);
     func_800A4458();
-    if (g_BattlePartyCount != 0) {
+    if (g_Battle.party_count != 0) {
         i = 0;
         do {
             func_800A9BD8(i);
             i++;
-        } while ((u8)i < g_BattlePartyCount);
+        } while ((u8)i < g_Battle.party_count);
     }
 }
 #else

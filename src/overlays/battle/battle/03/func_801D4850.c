@@ -9,8 +9,8 @@
 MATCH void func_801D4850(void) {
     u32 clr;
 
-    if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != ABILITY_FOCUS)) {
-        if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+    if (((LOBU(g_Battle.action_type)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_Battle.action_id)) != ABILITY_FOCUS)) {
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
             {
                 u32 flags = BATTLE_ACTIVE_PARTY.u.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST;
                 clr       = 0xFFFFFFBFu;
@@ -22,23 +22,24 @@ MATCH void func_801D4850(void) {
             }
         } else {
             {
-                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST;
-                clr       = 0xFFFFFFBFu;
+                u32 flags =
+                    ENEMY_COMBATANT(g_Battle.active_battler).turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST;
+                clr = 0xFFFFFFBFu;
 
                 if (flags != 0u) {
                     /* FAKE: retail keeps the enemy index in v1. */
                     MATCH_REG(u32, eindex, "v1");
 
-                    ENEMY_COMBATANT(g_BattleActiveBattler).unk_114 = 0u;
-                    eindex                                         = g_BattleActiveBattler;
+                    ENEMY_COMBATANT(g_Battle.active_battler).unk_114 = 0u;
+                    eindex                                           = g_Battle.active_battler;
                     ENEMY_COMBATANT(eindex).turn.action_flags.value &= clr;
                 }
             }
         }
     }
 
-    if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != ABILITY_MEDITATION)) {
-        if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+    if (((LOBU(g_Battle.action_type)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_Battle.action_id)) != ABILITY_MEDITATION)) {
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
             {
                 u32 flags = BATTLE_ACTIVE_PARTY.u.turn.action_flags.value & COMBATANT_FLAG_MEDITATION;
                 clr       = 0xFFFFFF7Fu;
@@ -50,15 +51,16 @@ MATCH void func_801D4850(void) {
             }
         } else {
             {
-                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).turn.action_flags.value & COMBATANT_FLAG_MEDITATION;
-                clr       = 0xFFFFFF7Fu;
+                u32 flags =
+                    ENEMY_COMBATANT(g_Battle.active_battler).turn.action_flags.value & COMBATANT_FLAG_MEDITATION;
+                clr = 0xFFFFFF7Fu;
 
                 if (flags != 0u) {
                     /* FAKE: retail keeps the enemy index in v1. */
                     MATCH_REG(u32, eindex, "v1");
 
-                    ENEMY_COMBATANT(g_BattleActiveBattler).unk_115 = 0u;
-                    eindex                                         = g_BattleActiveBattler;
+                    ENEMY_COMBATANT(g_Battle.active_battler).unk_115 = 0u;
+                    eindex                                           = g_Battle.active_battler;
                     ENEMY_COMBATANT(eindex).turn.action_flags.value &= clr;
                 }
             }

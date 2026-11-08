@@ -12,7 +12,7 @@ MATCH void func_801E1888(void) {
     if (count == 0) {
         func_801DD858(5);
         if ((g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) &&
-            ((g_DragonForm & BYTE_MASK) != 4) && ((u32)((short)g_DragonForm - 7) >= 2)) {
+            ((g_Battle.dragon_form & BYTE_MASK) != 4) && ((u32)((short)g_Battle.dragon_form - 7) >= 2)) {
             func_801DD858(3);
         }
         g_Task->header.step = g_Task->header.step + 1;

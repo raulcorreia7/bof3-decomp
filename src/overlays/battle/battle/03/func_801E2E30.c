@@ -11,7 +11,7 @@ MATCH u8 func_801E2E30(void) {
     u8 index;
     u8 pick;
 
-    switch (g_BattlePartyCount) {
+    switch (g_Battle.party_count) {
         default:
             return 0;
         case 1:

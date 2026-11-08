@@ -1,7 +1,7 @@
 #include "boss033_16.h"
 
 MATCH void Boss_ChooseBattleEnding(void) {
-    if (FIELD(u32, &g_BattleOutcome.result, 0) & 6) {
+    if (FIELD(u32, &g_Battle.outcome.result, 0) & 6) {
         func_800AC934(0U);
         D_80146875          = 8;
         g_AreaScrollTargetX = D_80145EC4;

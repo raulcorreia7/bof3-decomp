@@ -6,7 +6,7 @@ MATCH void func_800C1C18(void) {
     u32 step;
 
     if (((PartyMember*)g_Task)->timer == 0) {
-        selector = (u8*)&g_BattleTargetSelector;
+        selector = (u8*)&g_Battle.target_selector;
         if (Battle_SlotIsBlocked(*selector) & 0xFF) {
             ((PartyMember*)g_Task)->header.mode = 9;
             return;

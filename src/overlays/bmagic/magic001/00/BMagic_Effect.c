@@ -29,7 +29,7 @@ MATCH void func_801EF01C(void) {
 }
 
 MATCH void func_801EF0E8(void) {
-    func_801E257C(g_BattleActiveBattler, 0xAU);
+    func_801E257C(g_Battle.active_battler, 0xAU);
     g_Task->unk_27 = g_BattleEffectBattler->unk_27;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
@@ -39,14 +39,14 @@ MATCH void func_801EF0E8(void) {
 MATCH void func_801EF164(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 0);
-        func_801E257C(g_BattleActiveBattler, 0xBU);
+        func_801E257C(g_Battle.active_battler, 0xBU);
         g_Task->unk_14 = 0x100;
         g_Task->unk_20 = -8;
         g_Task->header.step += 1;
     }
 }
 
-/* needs: type for g_BattleSelectedActor as a member of the BattleAction block; first diff: bnez target at +0x2C. */
+/* needs: type for g_Battle.selected_actor as a member of the BattleAction block; first diff: bnez target at +0x2C. */
 INCLUDE_ASM(func_801EF1CC);
 
 MATCH void func_801EF280(void) {
@@ -60,8 +60,8 @@ MATCH void func_801EF280(void) {
     COORD_INT(work->pos.z) += work->unk_14;
     if (timer == 0) {
         SND_QueueSelectionFx(0x203);
-        func_801E257C(g_BattleActiveBattler, 0xC);
-        func_800A9610(g_BattleTargetSelector, 0x10);
+        func_801E257C(g_Battle.active_battler, 0xC);
+        func_800A9610(g_Battle.target_selector, 0x10);
         g_Task->unk_09 = 3;
         g_Task->header.step++;
     }
@@ -69,7 +69,7 @@ MATCH void func_801EF280(void) {
 
 MATCH void func_801EF324(void) {
     if (func_8014DAEC() != 0u) {
-        func_801E257C(g_BattleActiveBattler, 0xA);
+        func_801E257C(g_Battle.active_battler, 0xA);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -81,7 +81,7 @@ MATCH void func_801EF37C(void) {
     func_8014DAEC();
     if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 0);
-        func_801E257C(g_BattleActiveBattler, 0xB);
+        func_801E257C(g_Battle.active_battler, 0xB);
         work         = g_Task;
         work->unk_14 = 0x140;
         work->timer  = 9;
@@ -109,7 +109,7 @@ MATCH void func_801EF468(void) {
     func_8014DAEC();
     if (func_8014DAEC() & BYTE_MASK) {
         SND_QueueSelectionFx(0x203);
-        func_801E257C(g_BattleActiveBattler, 0xC);
+        func_801E257C(g_Battle.active_battler, 0xC);
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
         if (timer != 0) {
@@ -122,7 +122,7 @@ MATCH void func_801EF468(void) {
 
 MATCH void func_801EF518(void) {
     if (func_8014DAEC() & 0xFF) {
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;
@@ -175,7 +175,7 @@ MATCH void func_801EFBEC(void) {
     g_Task->header.step += 1;
 }
 
-/* needs: type for g_BattleSelectedActor as a member of the BattleAction block; first diff: bnez target at +0x4C. */
+/* needs: type for g_Battle.selected_actor as a member of the BattleAction block; first diff: bnez target at +0x4C. */
 INCLUDE_ASM(func_801EFC54);
 
 MATCH void func_801EFD28(void) {
@@ -201,7 +201,7 @@ MATCH void func_801EFD28(void) {
                                 g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
         /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
         MATCH_FAKE_BARRIER();
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }
@@ -260,7 +260,7 @@ MATCH void func_801F00A8(void) {
     EFFECT_RAMP_TINT_AND_FINISH();
 }
 
-/* Blocker: GTE path (PushMatrix, RotTrans, RotMatrix) with a stack-built vector set and a z-span halfword from g_BattleSelectedActor or g_BattleEffectBattler by header.step; needs the matrix helpers before a draft. */
+/* Blocker: GTE path (PushMatrix, RotTrans, RotMatrix) with a stack-built vector set and a z-span halfword from g_Battle.selected_actor or g_BattleEffectBattler by header.step; needs the matrix helpers before a draft. */
 INCLUDE_ASM(func_801F014C);
 
 INCLUDE_ASM(func_801F0238);

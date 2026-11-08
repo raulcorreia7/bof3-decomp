@@ -42,7 +42,7 @@ MATCH void func_801EEF28(void) {
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(128);
         func_800AF764();
-        battler        = g_BattleSelectedActor;
+        battler        = g_Battle.selected_actor;
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_10 = 0;
         g_Task->unk_14 = (ratan2((s16)battler->unk_2E.half - (s16)g_Task->unk_2E.half,
@@ -114,7 +114,7 @@ MATCH void func_801F0100(void) {
         phase                        = g_Task->param.unk_0B;
         angle_cell                   = &D_1F800008;
         *angle_cell                  = phase << 9;
-        actor                        = g_BattleSelectedActor;
+        actor                        = g_Battle.selected_actor;
         g_Task->pos.x.fixed          = actor->pos.x.fixed + ((rcos((s16)(phase << 9)) * 0xC000) >> 12);
         (work = g_Task)->pos.y.fixed = actor->pos.y.fixed + ((rsin(*angle_cell) * 0xC000) >> 12);
         work->pos.z.fixed            = actor->pos.z.fixed;
@@ -159,7 +159,7 @@ MATCH void func_801F04F4(void) {
 MATCH void func_801F05A4(void) {
     PartyMember* src;
 
-    src                 = g_BattleSelectedActor;
+    src                 = g_Battle.selected_actor;
     g_Task->pos.x.fixed = src->pos.x.fixed;
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;

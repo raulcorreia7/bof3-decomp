@@ -6,7 +6,7 @@ MATCH void func_800A1A30(void) {
     u32 battler;
 
     func_800A3F28();
-    battler = LOBU(g_BattleActiveBattler);
+    battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
         g_Game.members[battler].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_IMMUNE;
         return;

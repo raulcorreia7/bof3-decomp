@@ -67,7 +67,7 @@ MATCH void func_801EF498(void) {
 MATCH void func_801EF518(void) {
     PartyMember** selected;
 
-    selected = &g_BattleSelectedActor;
+    selected = &g_Battle.selected_actor;
     func_800AF2B4(*selected, 0x60);
     if (func_800AF66C(*selected, 0x20000)) {
         g_Task->unk_09                   = func_800AFF98();
@@ -176,7 +176,7 @@ MATCH void func_801EF928(void) {
 MATCH void func_801EFA70(void) {
     PartyMember** selected;
 
-    selected = &g_BattleSelectedActor;
+    selected = &g_Battle.selected_actor;
     func_800AF2B4(*selected, 0x60);
     if (func_800AF66C(*selected, 0x20000)) {
         g_Task->header.step++;
@@ -195,7 +195,7 @@ INCLUDE_ASM(func_801EFBA0);
 MATCH void func_801EFD10(void) {
     if (func_8014D978() & 0xFF) {
         if (g_Task->param.unk_0B == 7) {
-            func_800A9820(g_BattleTargetSelector);
+            func_800A9820(g_Battle.target_selector);
         }
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();

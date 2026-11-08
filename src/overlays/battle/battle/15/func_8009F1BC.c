@@ -11,7 +11,7 @@ MATCH void func_8009F1BC(void) {
     u8  selection_kind;
     s16 res;
 
-    battler = LOBU(g_BattleActiveBattler);
+    battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
         value = g_Game.members[battler].chr.stats.power * 2;
     } else {
@@ -19,9 +19,9 @@ MATCH void func_8009F1BC(void) {
     }
     D_801EC30C     = value;
     battler_index  = g_BattleActiveBattler;
-    selection_kind = g_BattleTarget;
+    selection_kind = g_Battle.target;
     /* FAKE: keeps the kind-0x20 materialization in the jal delay slot. */
     MATCH_FAKE_BARRIER();
-    res                             = Battle_CalcDamage(battler_index, selection_kind, ELEM_HOLY);
-    g_BattleTargetRecord->hp_change = res;
+    res                               = Battle_CalcDamage(battler_index, selection_kind, ELEM_HOLY);
+    g_Battle.target_record->hp_change = res;
 }

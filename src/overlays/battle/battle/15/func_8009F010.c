@@ -17,7 +17,7 @@ MATCH void func_8009F010(void) {
     u8  selection_kind;
     s16 selection;
 
-    index = LOBU(g_BattleActiveBattler);
+    index = LOBU(g_Battle.active_battler);
     if (index < 3) {
         value = g_Game.members[index].chr.stats.intellect;
     } else {
@@ -26,9 +26,9 @@ MATCH void func_8009F010(void) {
     }
     D_801EC30C     = value;
     battler_index  = g_BattleActiveBattler;
-    selection_kind = g_BattleTarget;
+    selection_kind = g_Battle.target;
     /* FAKE: keeps the 0xFFFF load in the jal delay slot. */
     MATCH_FAKE_BARRIER();
-    selection                       = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
-    g_BattleTargetRecord->hp_change = selection;
+    selection                         = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
+    g_Battle.target_record->hp_change = selection;
 }

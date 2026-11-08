@@ -20,10 +20,10 @@ MATCH s32 func_8009BACC(s32 diff) {
     if (result == 0) {
         result = g_BattleEscapeThresholds[diff];
     }
-    if (g_BattleOutcome.attempts == 2) {
+    if (g_Battle.outcome.attempts == 2) {
         result += 8;
     }
-    for (slot = 0; slot < g_BattlePartyCount; slot++) {
+    for (slot = 0; slot < g_Battle.party_count; slot++) {
         if (!Battle_SlotIsBlocked(slot) && HAS_STATUS(g_Game.members[slot], 0x2000)) {
             result += 8;
             break;

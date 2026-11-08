@@ -6,7 +6,7 @@ MATCH void func_800C199C(void) {
 
     timer = ((PartyMember*)g_Task)->unk_09;
     if (timer == ((PartyMember*)g_Task)->timer) {
-        flags = &g_BattleBossFlags;
+        flags = &g_Battle.boss_flags;
         if (!(*flags & 4)) {
             SND_PlayCue(0x601U);
             *flags |= 4;

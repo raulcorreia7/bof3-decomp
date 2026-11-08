@@ -12,6 +12,5 @@ typedef struct Magic017Steps {
 } Magic017Steps;
 
 extern Magic017Steps D_801EEC10;
-extern u8            g_BattleActiveBattler;
 
 #endif

@@ -79,7 +79,7 @@ MATCH void func_801EF534(void) {
     u8 value2;
 
     if (func_8014DAEC() & 0xFF) {
-        if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             value2                                     = g_Task->param.unk_0B;
             g_BattleEnemyBattlers[value2].header.flags = g_BattleEnemyBattlers[value2].header.flags & 0xBF;
         } else {

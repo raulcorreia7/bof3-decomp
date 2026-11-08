@@ -16,7 +16,7 @@ MATCH void func_801D28E8(void) {
         } else {
             u8* step;
 
-            step = &g_BattleStep;
+            step = &g_Battle.phase.step;
             *step += 1;
         }
     }

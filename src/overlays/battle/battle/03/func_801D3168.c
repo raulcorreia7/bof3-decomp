@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801D3168(void) {
-    Battle_SetSlotPending(g_BattleActiveBattler);
-    D_8014637C[1]   = 4;
-    g_BattleMode    = 3;
-    g_BattleStep    = 2;
-    g_BattleSubStep = 0;
+    Battle_SetSlotPending(g_Battle.active_battler);
+    D_8014637C[1]           = 4;
+    g_Battle.phase.mode     = 3;
+    g_Battle.phase.step     = 2;
+    g_Battle.phase.sub_step = 0;
 }

@@ -77,7 +77,7 @@ MATCH void func_801EFA28(void) {
 }
 
 MATCH void func_801EFAE4(void) {
-    if (g_BattleActiveBattler < BATTLE_PARTY_CHARACTERS_COUNT) {
+    if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
         g_Task->header.step += 1;
     } else {
         g_Task->header.step += 2;
@@ -155,7 +155,7 @@ MATCH void func_801EFFC0(void) {
         g_Task->unk_5F = (u8) - ((g_Task->param.unk_0B + 1) * 0x14);
         g_Task->unk_2B = 0;
         g_Task->unk_27 = g_BattleEffectBattler->unk_27;
-        if (g_BattleActiveBattler < 3) {
+        if (g_Battle.active_battler < 3) {
             g_Task->header.step += 1;
         } else {
             g_Task->header.step += 2;
@@ -293,13 +293,13 @@ MATCH void func_801F0F2C(void) {
     } else if (g_FrameCount & 1) {
         g_Task->unk_09 -= 1;
     }
-    if ((g_Task->unk_14 < 0) && (g_Task->pos.z.fixed < g_BattleSelectedActor->pos.z.fixed)) {
+    if ((g_Task->unk_14 < 0) && (g_Task->pos.z.fixed < g_Battle.selected_actor->pos.z.fixed)) {
         g_Task->header.flags |= 0x20;
         g_Task->unk_5C      = 1;
         g_Task->unk_5D      = 0;
         g_Task->unk_5E      = 0;
         g_Task->unk_5F      = 0;
-        g_Task->pos.z.fixed = g_BattleSelectedActor->pos.z.fixed;
+        g_Task->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed;
         g_Task->header.step++;
     }
 }
@@ -353,7 +353,7 @@ MATCH void func_801F131C(void) {
     rot.vz = 0;
     rot.vy = 0;
     rot.vx = 0;
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_BattleSelectedActor);
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Battle.selected_actor);
 }
 
 INCLUDE_ASM(func_801F13D4);

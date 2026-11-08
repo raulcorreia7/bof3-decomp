@@ -28,7 +28,7 @@ MATCH void func_801EEF0C(void) {
 MATCH void func_801EEF94(void) {
     PartyMember* src;
 
-    src                      = g_BattleSelectedActor;
+    src                      = g_Battle.selected_actor;
     g_Task->pos.x.fixed      = src->pos.x.fixed;
     g_Task->pos.y.fixed      = src->pos.y.fixed;
     COORD_INT(g_Task->pos.z) = COORD_INT(src->pos.z);
@@ -41,7 +41,7 @@ MATCH void func_801EEFF4(void) {
     u8 counter;
 
     if (g_Task->unk_09 == 4) {
-        func_800A9610(g_BattleTargetSelector, 0x10U);
+        func_800A9610(g_Battle.target_selector, 0x10U);
     }
     SP_REF(s16, 0) = g_Task->unk_09 * 0x1C;
     counter        = g_Task->unk_09 + 1;
@@ -152,7 +152,7 @@ MATCH void func_801F02BC(void) {
 MATCH void func_801F0344(void) {
     PartyMember* src;
 
-    src                 = g_BattleSelectedActor;
+    src                 = g_Battle.selected_actor;
     g_Task->pos.x.fixed = src->pos.x.fixed;
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;

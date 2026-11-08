@@ -5,11 +5,11 @@ MATCH void func_8009A664(void) {
 
     entry = g_Game.members[g_BattleMessageSlot[5]].u.turn.command.id;
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        g_BattleUIState = 3;
+        g_Battle.ui_state = 3;
         return;
     }
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
-        g_BattleUIState = 2;
+        g_Battle.ui_state = 2;
         return;
     }
     if ((INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) &&

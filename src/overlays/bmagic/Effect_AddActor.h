@@ -4,7 +4,7 @@
 MATCH void Effect_AddActor(void) {
     func_8014D978();
     Area_AddActor();
-    if (g_BattleState & BATTLE_STATE_EFFECT_PLAYING) {
+    if (g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) {
         g_Task->header.step++;
     }
 }

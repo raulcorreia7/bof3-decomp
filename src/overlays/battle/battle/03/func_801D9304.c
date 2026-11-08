@@ -4,7 +4,7 @@ MATCH void func_801D9304(u8 arg0) {
     u8 count;
 
     Menu_ArmPanelTask(1, 3);
-    count      = g_BattlePartyCount;
+    count      = g_Battle.party_count;
     D_80148356 = 0;
     D_80148357 = arg0;
     D_8014835E = count;

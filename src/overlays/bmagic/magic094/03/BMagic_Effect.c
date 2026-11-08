@@ -37,7 +37,7 @@ MATCH void func_801EEE4C(void) {
 }
 
 MATCH void func_801EEF1C(void) {
-    func_800A9610(g_BattleTargetSelector, 32);
+    func_800A9610(g_Battle.target_selector, 32);
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
     g_Task->header.mode++;
@@ -52,7 +52,7 @@ MATCH void func_801EEF7C(void) {
     step           = g_Task->unk_09 + 1;
     g_Task->unk_09 = step;
     if (step == 0x10) {
-        slot = LOBU(g_BattleTargetSelector);
+        slot = LOBU(g_Battle.target_selector);
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
             battler = &g_Game.members[slot];
         } else {

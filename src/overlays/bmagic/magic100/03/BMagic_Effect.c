@@ -22,7 +22,7 @@ NON_MATCHING void func_801EEC70(void) {
     g_Task->facing       = src->facing;
     g_Task->pos.x.fixed  = src->pos.x.fixed;
     g_Task->pos.y.fixed  = src->pos.y.fixed;
-    span                 = g_BattleSelectedActor->pos.z.fixed;
+    span                 = g_Battle.selected_actor->pos.z.fixed;
     g_Task->unk_09       = 0;
     g_Task->pos.z.fixed  = span;
     g_Task->param.unk_0B = 0;
@@ -48,7 +48,7 @@ INCLUDE_ASM(func_801EEC70);
 
 MATCH void func_801EED9C(void) {
     if (g_Task->unk_09 != 0) {
-        func_800A9610(g_BattleTargetSelector, 0x10U);
+        func_800A9610(g_Battle.target_selector, 0x10U);
         g_Task->header.mode += 1;
     }
 }
@@ -78,7 +78,7 @@ MATCH void func_801EF0D8(void) {
     PartyMember* battler;
     u8           timer;
 
-    slot = LOBU(g_BattleTargetSelector);
+    slot = LOBU(g_Battle.target_selector);
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         battler = &g_Game.members[slot];
     } else {

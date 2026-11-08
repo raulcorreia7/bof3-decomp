@@ -9,7 +9,7 @@ MATCH void func_800AE108(s32 battler_index, s32 work_ptr) {
 
     work_cell     = work_ptr;
     action_id     = battler_index;
-    active_index  = &g_BattleActionId;
+    active_index  = &g_Battle.action_id;
     *active_index = action_id & BYTE_MASK;
     queued_slot   = Battle_AllocEffect(2, g_BattleActionSelection[action_id & BYTE_MASK]) & BYTE_MASK;
     g_BattleEffects[queued_slot].target.address = work_cell;

@@ -1,12 +1,12 @@
 #include "boss013_16.h"
 
 MATCH void func_800C2348(void) {
-    if (g_BattleOutcome.result & BATTLE_RESULT_VICTORY) {
-        *g_ScriptVars              = 0x14;
-        g_BattleOutcome.reward_exp = ENEMY_COMBATANT(3).exp + ENEMY_COMBATANT(4).exp;
+    if (g_Battle.outcome.result & BATTLE_RESULT_VICTORY) {
+        *g_ScriptVars               = 0x14;
+        g_Battle.outcome.reward_exp = ENEMY_COMBATANT(3).exp + ENEMY_COMBATANT(4).exp;
         func_801DDED8();
     } else {
-        if (g_BattleBossFlags & 0x40) {
+        if (g_Battle.boss_flags & 0x40) {
             g_Task = &D_801EB860;
             Area_FindSceneRecord(0xF9);
             g_Task->unk_24 &= 0xFE;

@@ -3,7 +3,7 @@
 
 /* func_800C1FF8 */
 MATCH void Boss_ChooseBattleEnding(void) {
-    if (g_BattleOutcome.result & BATTLE_RESULT_DEFEAT) {
+    if (g_Battle.outcome.result & BATTLE_RESULT_DEFEAT) {
         g_SceneState.state_04 = 6;
         g_SceneState.step_05  = 0x32;
     } else {

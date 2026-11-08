@@ -41,7 +41,7 @@ MATCH void func_801EF1CC(void) {
     u16* battle_flags;
 
     if (D_801EC2E4 == 0) {
-        battle_flags = &g_BattleState;
+        battle_flags = &g_Battle.state;
         *battle_flags |= 4;
         func_801E5988();
     }
@@ -77,7 +77,7 @@ MATCH void func_801EF328(void) {
 
 MATCH void func_801EF394(void) {
     if (func_8014DAEC() & 0xFF) {
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }

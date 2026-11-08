@@ -17,7 +17,7 @@ NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
     u8  picked;
 
     index = enemy_index;
-    switch (g_BattleActionType) {
+    switch (g_Battle.action_type) {
         case 1:
             flags = g_BattleEnemyBattlers[index].event_flags;
             if (flags & 1) {

@@ -11,6 +11,6 @@ MATCH void func_800C1F24(void) {
     g_Task->unk_29               = 4;
     g_BattleCurrentEnemy->script = &D_800C25FC;
     Actor_SelectScript((g_Task->facing + 4) & 0xFF);
-    flags = &g_BattleBossFlags;
+    flags = &g_Battle.boss_flags;
     *flags |= 0x40;
 }

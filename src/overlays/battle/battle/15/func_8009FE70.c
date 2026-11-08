@@ -2,5 +2,5 @@
 
 /* Sets the panel task's x half to -1. */
 MATCH void func_8009FE70(void) {
-    g_BattleTargetRecord->hp_change = -1;
+    g_Battle.target_record->hp_change = -1;
 }

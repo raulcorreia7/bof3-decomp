@@ -94,15 +94,15 @@ MATCH void func_80098450(void) {
     }
     if ((trigger & PADLup) != 0 && old_cursor == 0u) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
-        D_80148625     = 8u;
-        D_80148626     = 5u;
-        D_80148624     = 1u;
-        D_8014862F     = 0xFFu;
-        g_BattleUIStep = 6u;
-        D_8014862E     = 0u;
-        D_801483C0     = 0u;
-        D_80148628     = (g_MenuPanelTasks[16].pos.x + 0x20);
-        D_8014862A     = (g_MenuPanelTasks[16].pos.y - 0x16);
+        D_80148625       = 8u;
+        D_80148626       = 5u;
+        D_80148624       = 1u;
+        D_8014862F       = 0xFFu;
+        g_Battle.ui_step = 6u;
+        D_8014862E       = 0u;
+        D_801483C0       = 0u;
+        D_80148628       = (g_MenuPanelTasks[16].pos.x + 0x20);
+        D_8014862A       = (g_MenuPanelTasks[16].pos.y - 0x16);
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
@@ -114,7 +114,7 @@ MATCH void func_80098450(void) {
         D_801454FF                               = g_MenuPanelTasks[16].unk_0C;
         g_BattleMessageSlot[0x119]               = 0u;
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        *(u8*)&g_BattleUIStep += 1u;
+        *(u8*)&g_Battle.ui_step += 1u;
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
@@ -132,6 +132,6 @@ MATCH void func_80098450(void) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         g_BattleChoicePhase = 1u;
         D_801485DC          = 0u;
-        g_BattleUIStep      = 3u;
+        g_Battle.ui_step    = 3u;
     }
 }

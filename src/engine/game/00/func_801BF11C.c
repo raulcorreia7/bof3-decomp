@@ -15,11 +15,11 @@ NON_MATCHING u8 func_801BF11C(void) {
     u16* dst;
     u16* src;
 
-    if (g_BattleOutcome.options & 4) {
+    if (g_Battle.outcome.options & 4) {
         return 1;
     }
-    g_EncounterOriginX = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_BattleScrollDir].dx << 16);
-    g_EncounterOriginY = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_BattleScrollDir].dy << 16);
+    g_EncounterOriginX = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_Battle.scroll_dir].dx << 16);
+    g_EncounterOriginY = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_Battle.scroll_dir].dy << 16);
     for (i = 0; i < g_Game.party_size; i++) {
         work           = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
         g_Game.current = work;

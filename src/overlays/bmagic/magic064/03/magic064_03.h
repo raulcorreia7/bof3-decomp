@@ -12,7 +12,6 @@ typedef struct BMagic064Steps {
     Callback handlers[BMAGIC064_STEP_COUNT];
 } BMagic064Steps;
 
-extern u8             g_BattleActiveBattler;
 extern BMagic064Steps D_801EEC10;
 
 #define MAGIC064_STEP_COUNT 4

@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEC94);
 MATCH s32 func_801EEF3C(void) {
     u16* id;
 
-    id = (u16*)&g_BattleActionId;
+    id = (u16*)&g_Battle.action_id;
     switch (*id) {
         case 0x27:
         default:
@@ -73,7 +73,7 @@ MATCH void func_801EF134(void) {
     timer_next    = g_Task->timer + 2;
     g_Task->timer = timer_next;
     if ((timer_next & BYTE_MASK) == 0x18) {
-        selected = &g_BattleSelectedActor;
+        selected = &g_Battle.selected_actor;
         GFX_FreePaletteFadeTarget(*selected);
         g_Task->param.unk_0B = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
         g_Task->header.step += 1;
@@ -91,8 +91,8 @@ MATCH void func_801EF44C(void) {
     timer_next    = g_Task->timer - 2;
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
-        GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
-        func_800AF814(g_BattleTargetSelector);
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        func_800AF814(g_Battle.target_selector);
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }

@@ -210,7 +210,7 @@ MATCH void func_801EFBEC(void) {
 MATCH void func_801EFC74(void) {
     PartyMember* src;
 
-    src                 = g_BattleSelectedActor;
+    src                 = g_Battle.selected_actor;
     g_Task->pos.x.fixed = src->pos.x.fixed;
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;

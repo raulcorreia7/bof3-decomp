@@ -61,8 +61,8 @@ MATCH void func_801EF460(void) {
             g_Task->unk_5D = 0;
             g_Task->unk_5E = 0;
             g_Task->unk_5F = 0;
-            if (g_BattleActiveBattler >= 3) {
-                func_801E257C(g_BattleActiveBattler, 2);
+            if (g_Battle.active_battler >= 3) {
+                func_801E257C(g_Battle.active_battler, 2);
             }
             g_Task->unk_09 = func_800AFF98();
             g_Task->header.step += 1;
@@ -81,7 +81,7 @@ MATCH void func_801EF5FC(void) {
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
         if (!(counter & 0xFF)) {
-            func_800A9820(g_BattleTargetSelector);
+            func_800A9820(g_Battle.target_selector);
             func_800AFC98(2, 4);
             g_Task->header.step += 1;
         }
@@ -102,8 +102,8 @@ MATCH void func_801EF6EC(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        if (g_BattleActiveBattler >= 3U) {
-            func_801E257C(g_BattleActiveBattler, 0);
+        if (g_Battle.active_battler >= 3U) {
+            func_801E257C(g_Battle.active_battler, 0);
         }
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;

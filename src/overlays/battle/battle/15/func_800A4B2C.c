@@ -12,6 +12,6 @@ MATCH void func_800A4B2C(void) {
         /* FAKE: statement boundary keeps the retail register order and schedule. */
         ORDER_LOCK(g_BattleMessageState = 1);
         EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_RE2);
-        *(u8*)&g_BattleUIState += 1;
+        *(u8*)&g_Battle.ui_state += 1;
     }
 }

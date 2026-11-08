@@ -5,12 +5,12 @@ MATCH void func_801D3050(void) {
     u8           i;
 
     func_801D4850();
-    if (g_BattleSubStep == 2 && !BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+    if (g_Battle.phase.sub_step == 2 && !BATTLER_IS_PLAYER(g_Battle.active_battler)) {
         for (i = 0; i < 32; i++) {
             g_TextVariables[0][i] = 0;
         }
         i       = 0;
-        battler = &g_BattleActiveBattler;
+        battler = &g_Battle.active_battler;
         do {
             s32 row;
 
@@ -21,7 +21,7 @@ MATCH void func_801D3050(void) {
         func_801D9484();
         func_801DE560(2, 0, 0, 0x2D, Resource_GetText(CALLBACK_SLOT_IDLE));
     }
-    g_BattleMode    = 3;
-    g_BattleStep    = 0;
-    g_BattleSubStep = 0;
+    g_Battle.phase.mode     = 3;
+    g_Battle.phase.step     = 0;
+    g_Battle.phase.sub_step = 0;
 }

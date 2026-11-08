@@ -38,7 +38,7 @@ NON_MATCHING void func_800A1D84(void) {
     u8*          dst;
     u8           timer;
 
-    active    = &g_BattleTarget;
+    active    = &g_Battle.target;
     row_index = *active;
     if (row_index < BATTLE_ACTIVE_ROW_COUNT) {
         row_offset   = row_index * BATTLE_PARTY_STRIDE;
@@ -51,7 +51,7 @@ NON_MATCHING void func_800A1D84(void) {
         }
         Char_RebuildStats(&g_Characters[g_Game.members[*active].character_index]);
         i = 0;
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             do {
                 cell       = &g_Characters[g_Game.members[i].character_index];
                 dest       = i * BATTLE_PARTY_STRIDE + D_80145F04;
@@ -64,28 +64,28 @@ NON_MATCHING void func_800A1D84(void) {
                 dest[0x13]                   = cell[0x13];
                 *(BattleBlock*)(dest + 0x3C) = *(BattleBlock*)(cell + 0x1C);
                 *(BattleBlock*)(dest + 0x4C) = *(BattleBlock*)(cell + 0x2C);
-            } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         i = 0;
         func_800AAA74();
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             do {
                 dst                         = i * BATTLE_PARTY_STRIDE + D_80145F20;
                 src                         = i * BATTLE_PARTY_STRIDE + (D_80145F20 + 0x20);
                 *(BattleBlock*)(dst + 0x00) = *(BattleBlock*)(src + 0x00);
                 *(BattleBlock*)(dst + 0x10) = *(BattleBlock*)(src + 0x10);
                 i += 1;
-            } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         i = 0;
         func_800A4458();
-        if (g_BattlePartyCount != 0) {
+        if (g_Battle.party_count != 0) {
             do {
                 func_800A9BD8(i & BYTE_MASK);
                 i += 1;
-            } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
-        g_BattleTargetRecord->hp_change = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
+        g_Battle.target_record->hp_change = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
     }
 }
 #else

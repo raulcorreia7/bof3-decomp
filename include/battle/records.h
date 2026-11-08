@@ -8,7 +8,7 @@
  * Both overlays declare these globals with these types, so the same objects
  * are read through the same members and not through two look-alikes.
  *
- *   g_BattleAction   BattleAction *        battle family header (src/overlays/battle/battle.h)
+ *   g_Battle.action   BattleAction *        battle family header (src/overlays/battle/battle.h)
  *   D_801463DC   EncounterEnemy[]   battle/battle/15 image header, etc/game/00 image header
  *   D_801ED9B0   PanelOwner[]  battle family header (src/overlays/battle/battle.h)
  *   D_801CA71C   BattleSelectionType[]    battle family header (src/overlays/battle/battle.h)
@@ -46,7 +46,7 @@
 
 /* The active battler's row. Each battle overlay declares the active-battler
  * byte itself, so the macro expands where it is used. */
-#define BATTLE_ACTIVE_PARTY          (g_Game.members[g_BattleActiveBattler])
+#define BATTLE_ACTIVE_PARTY          (g_Game.members[g_Battle.active_battler])
 
 /* The action a battler has queued: whom it targets, what kind it is (examine 0, attack 1, defend 2, ability 4, item 5)
  * and the ability or item id. */
@@ -75,7 +75,7 @@ typedef struct BattleStatBlockPart {
 
 ASSERT_SIZE(BattleStatBlockPart, 0x10);
 
-/* Record behind the g_BattleAction cell; +0x02 is the action id. */
+/* Record behind the g_Battle.action cell; +0x02 is the action id. */
 typedef struct BattleAction {
     u8  pad_00[2];
     u16 unk_02;
@@ -241,7 +241,7 @@ typedef union BattlerFlags {
 
 /* One battler's turn: the command it queued, the HP and AP the hit deals, the
  * target state bits and counter, and the damage and action flag words. Both
- * battler records embed it as `turn`; g_BattleActorTurn and g_BattleTargetRecord
+ * battler records embed it as `turn`; g_BattleActorTurn and g_Battle.target_record
  * point at it. */
 typedef struct BattleTurn {
     BattleCommandSlot command;

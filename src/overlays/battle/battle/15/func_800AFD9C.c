@@ -16,7 +16,7 @@ MATCH void func_800AFD9C(void) {
     sum_span = 0;
     sum_y    = 0;
     sum_x    = 0;
-    flags    = g_BattleTargetSelector;
+    flags    = g_Battle.target_selector;
     if ((flags & 0xC0) != 0xC0) {
         if (flags & 0x40) {
             for (i = 0; i < ENCOUNTER_ENEMY_COUNT; i++) {

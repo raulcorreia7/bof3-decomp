@@ -29,7 +29,7 @@ NON_MATCHING s32 func_8009AC18(void) {
     Item_Add(D_800B44B8[g_BattleItemRow], *slots[g_BattleItemRow], 1, 0);
     *slots[g_BattleItemRow] = 0;
     Char_RebuildStats(base);
-    if (g_BattlePartyCount != 0) {
+    if (g_Battle.party_count != 0) {
         i = 0;
         do {
             cell                   = &g_Characters[g_Game.members[i].character_index];
@@ -49,7 +49,7 @@ NON_MATCHING s32 func_8009AC18(void) {
             FIELD(s32, row, 0x54u) = FIELD(s32, cell, 0x34u);
             FIELD(s32, row, 0x58u) = FIELD(s32, cell, 0x38u);
             i++;
-        } while ((u8)i < g_BattlePartyCount);
+        } while ((u8)i < g_Battle.party_count);
     }
     func_800AAA74();
     j = 0;
@@ -69,12 +69,12 @@ NON_MATCHING s32 func_8009AC18(void) {
         j++;
     } while ((u32)j < 3);
     func_800A4458();
-    if (g_BattlePartyCount != 0) {
+    if (g_Battle.party_count != 0) {
         i = 0;
         do {
             func_800A9BD8(i);
             i++;
-        } while ((u8)i < g_BattlePartyCount);
+        } while ((u8)i < g_Battle.party_count);
     }
     return 1;
 }

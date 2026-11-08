@@ -40,7 +40,7 @@ MATCH void func_801EEEC4(void) {
     if (!(count & 0xFF)) {
         g_Task->unk_09 = 4;
         g_Task->header.mode += 1;
-        func_800A9820(g_BattleTargetSelector);
+        func_800A9820(g_Battle.target_selector);
         SND_PlayCue(0x102U);
     }
 }

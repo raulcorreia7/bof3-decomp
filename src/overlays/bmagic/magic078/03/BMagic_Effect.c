@@ -35,8 +35,8 @@ MATCH void func_801EF12C(void) {
     s32 var_v0;
     s32 var_v1;
 
-    temp_v0 = ratan2(g_BattleSelectedActor->pos.y.fixed - g_Task->pos.y.fixed,
-                     g_BattleSelectedActor->pos.x.fixed - g_Task->pos.x.fixed);
+    temp_v0 = ratan2(g_Battle.selected_actor->pos.y.fixed - g_Task->pos.y.fixed,
+                     g_Battle.selected_actor->pos.x.fixed - g_Task->pos.x.fixed);
     var_v1  = g_Task->unk_0C;
     if (var_v1 < 0) {
         var_v1 += 0x3F;

@@ -16,7 +16,7 @@ MATCH void func_801EECCC(void) {
     u16*         src;
     u16*         dst;
 
-    actor          = g_BattleSelectedActor;
+    actor          = g_Battle.selected_actor;
     g_Task->facing = actor->facing;
     task           = g_Task;
     WorldPos_Copy(&task->pos, &actor->pos);
@@ -38,7 +38,7 @@ MATCH void func_801EECCC(void) {
     *MEM_PTR(u16, 0x8003AC00u) = 0;
     g_GfxPalettePending        = 1;
     SND_QueueSelectionFx(0x100);
-    func_800A9610(g_BattleTargetSelector, 0x10);
+    func_800A9610(g_Battle.target_selector, 0x10);
     g_Task->unk_09 = 1;
     g_Task->timer  = 1;
     g_Task->header.mode += 1;

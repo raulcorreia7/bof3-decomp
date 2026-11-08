@@ -28,8 +28,8 @@ MATCH void func_801EF4A8(void) {
     }
 }
 
-/* blocker: g_BattleState kept as an address (lui/addiu, lhu 0, sh 0); first diff: lhu at 0x801EF508 folds into the global. */
-/* blocker: the early-return block (g_BattleState |= 4; func_801E5988) is one instruction longer than retail; first diff: bnez v0 at 0x801EF4F8 (target 0x801EF528 against 0x801EF524). */
+/* blocker: g_Battle.state kept as an address (lui/addiu, lhu 0, sh 0); first diff: lhu at 0x801EF508 folds into the global. */
+/* blocker: the early-return block (g_Battle.state |= 4; func_801E5988) is one instruction longer than retail; first diff: bnez v0 at 0x801EF4F8 (target 0x801EF528 against 0x801EF524). */
 INCLUDE_ASM(func_801EF4EC);
 
 INCLUDE_ASM(func_801EF55C);

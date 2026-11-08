@@ -25,8 +25,8 @@ extern Callback    D_800C32A0[];
 extern u8          D_800C32B4;
 extern u8          D_800C32B8;
 extern u16         D_80145F18;
-/* The word at g_BattleScrollDir: its bytes are the scroll direction, g_BattleBossFlags, D_801462EE and
- * g_BattleSelectionLatch. func_800C1E34 tests the boss flag bits 3 and 5 together through it. */
+/* The word at g_Battle.scroll_dir: its bytes are the scroll direction, g_Battle.boss_flags, D_801462EE and
+ * g_Battle.selection_latch. func_800C1E34 tests the boss flag bits 3 and 5 together through it. */
 extern u32         D_801462EC;
 extern volatile u8 D_80146322;
 extern s8          D_80146875;

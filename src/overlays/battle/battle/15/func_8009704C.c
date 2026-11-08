@@ -127,7 +127,7 @@ NON_MATCHING void func_8009704C(void) {
         D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        *(volatile u8*)&g_BattleUIStep += 1;
+        *(volatile u8*)&g_Battle.ui_step += 1;
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
@@ -150,11 +150,11 @@ NON_MATCHING void func_8009704C(void) {
         if (turn->command.id == 0x97u) {
             g_BattleMessageState              = 2u;
             g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
-            g_BattleSubStep                   = 7u;
-            g_BattleUIStep                    = 0u;
+            g_Battle.phase.sub_step           = 7u;
+            g_Battle.ui_step                  = 0u;
             return;
         }
-        g_BattleUIStep = 3u;
+        g_Battle.ui_step = 3u;
     }
 }
 #else

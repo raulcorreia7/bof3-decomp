@@ -8,11 +8,11 @@ MATCH void func_80099E80(void) {
     flags  = Item_GetFlags(packed >> 8, packed & BYTE_MASK);
     if ((flags & 0x40) != 0) {
         if ((flags & 0x10) != 0) {
-            g_BattleUIStep = 9;
+            g_Battle.ui_step = 9;
         } else {
-            g_BattleUIStep = 8;
+            g_Battle.ui_step = 8;
         }
-        g_BattleUIState = 0;
+        g_Battle.ui_state = 0;
         SND_PlayCue(EMI_CUE_ID(1, 3));
         return;
     }
@@ -27,6 +27,6 @@ MATCH void func_80099E80(void) {
     } else {
         g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
     }
-    g_BattleUIStep  = 8;
-    g_BattleUIState = 3;
+    g_Battle.ui_step  = 8;
+    g_Battle.ui_state = 3;
 }

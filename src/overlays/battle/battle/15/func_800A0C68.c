@@ -35,5 +35,5 @@ MATCH void func_800A0C68(void) {
     if (total < -9999) {
         total = -9999;
     }
-    g_BattleTargetRecord->hp_change = total;
+    g_Battle.target_record->hp_change = total;
 }

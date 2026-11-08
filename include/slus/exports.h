@@ -133,28 +133,8 @@ extern u8             D_8014626D;
 extern u8             D_80146277;
 extern s32            D_801462A0;
 extern s32            D_801462A4;
-/* D_801462EA */
-extern u8             g_BattleEncounter;
-/* D_801462EF */
-extern volatile u8    g_BattleSelectionLatch;
-/* D_801462F2 */
-extern volatile u8    g_BattleEnemyCount;
-/* D_801462F4 */
-extern u8             g_BattlePanelSlot;
-/* D_801462FC */
-extern u8             g_BattlePanelWidths[];
-/* D_80146380 */
-extern BattleAction*  g_BattleAction;
-/* D_801463A4 */
+/* FAKE: g_Battle.choose_ending_hook as a global of its own; the sites that use it match only with a separate symbol. */
 extern Callback       g_BattleChooseEndingHook;
-/* D_801463A8 */
-extern Callback       g_BattleEndHook;
-/* D_801463C7 */
-extern u8             g_BattleGeneCount[];
-/* D_801463C9 */
-extern u8             g_DragonForm;
-/* D_801463CE */
-extern volatile u8    g_BattleActionLock;
 extern EncounterEnemy D_801463DC[];
 /* D_8014682D */
 extern s8             g_EmiServiceState;

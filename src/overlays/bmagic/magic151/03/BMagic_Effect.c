@@ -26,7 +26,7 @@ MATCH void func_801EEEA8(void) {
     PartyMember* battler;
 
     saved_work = g_Task;
-    battler    = &g_Game.members[g_BattleActiveBattler];
+    battler    = &g_Game.members[g_Battle.active_battler];
     g_Task     = battler;
     Actor_RequestScript((battler->facing + 0x3C) & 0xFF);
     g_Task = saved_work;
@@ -44,7 +44,7 @@ MATCH void func_801EF2A0(void) {
     PartyMember* battler;
 
     saved_work = g_Task;
-    battler    = &g_Game.members[g_BattleActiveBattler];
+    battler    = &g_Game.members[g_Battle.active_battler];
     g_Task     = battler;
     battler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task = saved_work;

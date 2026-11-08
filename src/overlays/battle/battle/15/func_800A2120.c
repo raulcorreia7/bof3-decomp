@@ -7,11 +7,11 @@ MATCH void func_800A2120(void) {
     u32 battler;
 
     func_800A3F28();
-    battler = LOBU(g_BattleActiveBattler);
+    battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
         g_Game.members[battler].u.turn.action_flags.value |= COMBATANT_FLAG_SELECTION_BONUS;
     } else {
         ENEMY_COMBATANT(battler).turn.action_flags.value |= COMBATANT_FLAG_SELECTION_BONUS;
     }
-    func_800A9BD8(g_BattleTarget);
+    func_800A9BD8(g_Battle.target);
 }

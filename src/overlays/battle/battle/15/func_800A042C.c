@@ -8,7 +8,7 @@ MATCH void func_800A042C(void) {
     /* FAKE: the retail enemy row index is in v0 and the offset chain in v1. */
     MATCH_FAKE_PIN(u32, enemy_index, "v0");
 
-    battler = LOBU(g_BattleActiveBattler);
+    battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
         value = g_Game.members[battler].chr.stats.power;
     } else {
@@ -31,10 +31,10 @@ MATCH void func_800A042C(void) {
                 LOHU(D_801EC30C) *= 2;
                 break;
         }
-    battler_index  = g_BattleActiveBattler;
-    selection_kind = g_BattleTarget;
+    battler_index  = g_Battle.active_battler;
+    selection_kind = g_Battle.target;
     /* FAKE: the barrier keeps the kind materialization out of the case exits
      * so it lands last, in the jal delay slot as retail has it. */
     MATCH_FAKE_BARRIER();
-    g_BattleTargetRecord->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFFU);
+    g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFFU);
 }

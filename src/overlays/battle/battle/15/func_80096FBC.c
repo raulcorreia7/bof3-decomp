@@ -15,9 +15,9 @@ MATCH void func_80096FBC(void) {
             g_MenuPanelTasks[16].unk_0B = 2u;
         }
     }
-    stage           = g_BattleUIStep;
-    message_slot    = g_BattleMessageSlot[5];
-    g_BattleUIState = 0u;
-    g_BattleUIStep  = (stage + 1u);
-    D_80148656      = message_slot;
+    stage             = g_BattleUIStep;
+    message_slot      = g_BattleMessageSlot[5];
+    g_Battle.ui_state = 0u;
+    g_Battle.ui_step  = (stage + 1u);
+    D_80148656        = message_slot;
 }

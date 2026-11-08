@@ -30,8 +30,8 @@ MATCH void func_801EEF88(void) {
     func_8014DAEC();
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {
-        func_800A9820(g_BattleTargetSelector);
-        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
+        func_800A9820(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }
@@ -54,7 +54,7 @@ INCLUDE_ASM(func_801EF18C);
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
 MATCH void func_801EF2F0(void) {
-    if (g_BattleState & BATTLE_STATE_EFFECT_PLAYING) {
+    if (g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) {
         func_801E5988();
     } else {
         func_800AFD9C();

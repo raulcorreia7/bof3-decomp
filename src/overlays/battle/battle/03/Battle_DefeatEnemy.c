@@ -7,22 +7,22 @@ MATCH void Battle_DefeatEnemy(void) {
     volatile u32* acc;
 
     g_Task->header.flags = g_Task->header.flags | ACTOR_FLAG_HIDDEN;
-    acc                  = &g_BattleOutcome.reward_exp;
+    acc                  = &g_Battle.outcome.reward_exp;
     *acc += g_BattleCurrentEnemy->exp;
     ORDER_LOCK_BEGIN
-        g_BattleOutcome.reward_zenny += g_BattleCurrentEnemy->zenny;
+        g_Battle.outcome.reward_zenny += g_BattleCurrentEnemy->zenny;
         g_BattleCurrentEnemy->status |= STATUS_KO;
         g_BattleCurrentEnemy->zenny = 0;
         Battle_CancelTurn(g_Task->slot);
         Battle_RollEnemyDrops();
-        count                    = g_BattleLivingEnemyCount - 1;
-        g_BattleLivingEnemyCount = count;
-        new_var                  = count == 0;
+        count                       = g_Battle.living_enemy_count - 1;
+        g_Battle.living_enemy_count = count;
+        new_var                     = count == 0;
         if (new_var) {
-            g_BattleOutcome.result |= BATTLE_RESULT_VICTORY;
+            g_Battle.outcome.result |= BATTLE_RESULT_VICTORY;
         }
-        if (((g_BattleState & BATTLE_STATE_OVER) != 0) && (D_801463CA == g_Task->slot)) {
-            g_BattleState &= ~BATTLE_STATE_OVER;
+        if (((g_Battle.state & BATTLE_STATE_OVER) != 0) && (D_801463CA == g_Task->slot)) {
+            g_Battle.state &= ~BATTLE_STATE_OVER;
         }
         func_800AD074(g_BattleCurrentEnemy->enemy_id.byte.kind);
         GFX_FreePaletteFadeTarget(g_Task);

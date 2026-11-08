@@ -11,7 +11,6 @@
 void func_800AF3A0(s32, s32, s32, s32, s32);
 u32  func_800AF6B8(u32, u32, s32, u32);
 
-extern u8       g_BattleActiveBattler;
 extern Callback D_801EFC9C[];
 
 void func_801EF180(void);

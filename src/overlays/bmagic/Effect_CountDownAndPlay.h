@@ -8,8 +8,8 @@ MATCH void Effect_CountDownAndPlay(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9820(g_BattleTargetSelector);
-        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
+        func_800A9820(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }

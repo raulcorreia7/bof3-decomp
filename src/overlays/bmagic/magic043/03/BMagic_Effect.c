@@ -12,7 +12,7 @@ MATCH void func_801EEEF0(void) {
     PartyMember* battler;
     u8           value;
 
-    battler        = g_BattleSelectedActor;
+    battler        = g_Battle.selected_actor;
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
