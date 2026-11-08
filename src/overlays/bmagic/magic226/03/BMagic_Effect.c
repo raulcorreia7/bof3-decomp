@@ -35,8 +35,12 @@ INCLUDE_ASM(func_801EF10C);
 
 INCLUDE_ASM(func_801EF310);
 
-#define BMAGIC_CAMERA_SWING_TICKS 0x3C
 #include "overlays/bmagic/Effect_SwingCameraAngle.h"
+
+/* func_801EF540 */
+MATCH void Effect_SwingCameraAngle(void) {
+    BMAGIC_SWING_CAMERA(60);
+}
 
 #include "../../Effect_StartTint.h"
 
