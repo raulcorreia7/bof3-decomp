@@ -74,7 +74,7 @@ MATCH void func_801EF8CC(void) {
 
 INCLUDE_ASM(func_801EF9F0);
 
-#include "overlays/bmagic/BMagic_DrawDarkRing.h"
+#include "overlays/bmagic/BMagic_DarkRingQuads.h"
 
 /* func_801EFC40 */
 MATCH void BMagic_DrawDarkRing(void) {
