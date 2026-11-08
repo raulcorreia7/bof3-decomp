@@ -4,7 +4,7 @@ MATCH s32 func_801F4E7C(void) {
     u8  i;
     s32 live;
     u8* slot;
-    u8  buffer[0x20];
+    u8  buffer[32];
 
     live = 0;
     GFX_AddDitheredDrawMode(2, GetTPage(0, 1, 0x3C0, 0));

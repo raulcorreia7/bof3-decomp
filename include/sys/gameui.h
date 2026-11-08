@@ -51,6 +51,14 @@ extern AreaDrawState g_AreaDrawState;
 #define MENU_DRAW_HEADER()                                                                                 \
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle)
 
+/* Where the shop and save screens put their prompt line, the Zenny window and the save slot list. */
+#define MENU_PROMPT_X       28
+#define MENU_PROMPT_Y       22
+#define MENU_ZENNY_WINDOW_X 98
+#define MENU_ZENNY_WINDOW_Y 40
+#define SAVE_SLOTS_X        32
+#define SAVE_SLOTS_Y        48
+
 /* The rows of the equip stat window, top to bottom. */
 typedef enum EquipStatRow {
     EQUIP_STAT_ROW_POWER   = 0,
@@ -184,7 +192,23 @@ typedef enum GameRequest {
     GAME_REQUEST_SCENE_CAMERA = 9, /* state 11 */
 } GameRequest;
 
-/* The main state machine index. */
+/* The rows of g_GameStates, the full-screen modes Game_UpdateMain runs. */
+typedef enum GameEntryState {
+    GAME_STATE_NEW_GAME     = 0,
+    GAME_STATE_AREA_LOAD    = 1,
+    GAME_STATE_FIELD        = 2,
+    GAME_STATE_MENU         = 3,
+    GAME_STATE_MESSAGE      = 4,
+    GAME_STATE_BATTLE       = 5,
+    GAME_STATE_CAMERA_LOOK  = 6,
+    GAME_STATE_SHOP         = 7,
+    GAME_STATE_FISHING      = 8,
+    GAME_STATE_ABILITY_MENU = 9,
+    GAME_STATE_STATUS_MENU  = 10,
+    GAME_STATE_SCENE_CAMERA = 11,
+} GameEntryState;
+
+/* The main state machine index, a GameEntryState value. */
 /* D_80143B90 */
 extern u16 g_GameEntryState;
 /* The request code, a GameRequest value. */

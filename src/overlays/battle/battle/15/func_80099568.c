@@ -8,7 +8,7 @@ bool func_8009AC18(void);
 MATCH void func_80099568(void) {
     /* FAKE: stack_scratch reserves the retail 0x28 frame; no instruction
      * references it — keep the slot so the frame layout matches. */
-    u8            stack_scratch[0x28];
+    u8            stack_scratch[40];
     volatile u16* input;
     u8*           counter;
     u8            cursor_value;

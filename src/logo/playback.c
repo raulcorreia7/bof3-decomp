@@ -108,7 +108,7 @@ MATCH void Logo_FadeOutAudio(void) { /* func_801CEDA4 */
 
 /* func_801CEDFC */
 MATCH void Logo_Main(void) { /* func_801CEDFC */
-    volatile u8 scratch[0x18];
+    volatile u8 scratch[24];
     u_long      pad_state;
     int         stream_finished;
 

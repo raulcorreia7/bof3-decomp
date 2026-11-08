@@ -27,7 +27,7 @@ MATCH void func_801D656C(void) {
         D_8014842C          = 0;
         D_80148408          = 0;
         D_801483E4          = 0;
-        g_Battle.phase.mode = 5;
+        g_Battle.phase.mode = BATTLE_MODE_RESULT;
         g_Battle.phase.step = 0;
         g_Battle.state &= ~BATTLE_STATE_COMMAND_ARMED;
     } else {
@@ -46,7 +46,7 @@ MATCH void func_801D656C(void) {
             }
         }
         g_Battle.outcome.surprise = 0;
-        g_Battle.phase.mode       = 1;
+        g_Battle.phase.mode       = BATTLE_MODE_COMMANDS;
         g_Battle.phase.step       = 0;
         g_Battle.phase.sub_step   = 0;
         g_Battle.state &= 0xFFF7;

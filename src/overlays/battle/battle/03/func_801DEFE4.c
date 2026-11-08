@@ -10,7 +10,7 @@ MATCH void func_801DEFE4(void) {
     u8           state;
 
     if (g_Battle.outcome.options & 0x20) {
-        if ((g_Battle.phase.mode == 5) && BATTLE_IS_VICTORY()) {
+        if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
             if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
                 Actor_SwitchScript(g_Task->facing + 0x1C, (u8*)0x800F0800U, 0x1800);
             } else {
@@ -18,7 +18,7 @@ MATCH void func_801DEFE4(void) {
             }
             return;
         }
-    } else if ((g_Battle.phase.mode == 5) && BATTLE_IS_VICTORY()) {
+    } else if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
         if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
             Actor_SwitchScript(g_Task->facing + 0x1C, (u8*)0x800F0800U, 0x1800);
         } else {

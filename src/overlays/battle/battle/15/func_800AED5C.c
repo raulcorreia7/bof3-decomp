@@ -2,7 +2,7 @@
 
 /* 0x20-byte unaligned head record copied with lwl/lwr. */
 typedef struct BattleRecordHead {
-    u8 bytes[0x20];
+    u8 bytes[32];
 } BattleRecordHead;
 
 extern u8 D_80145F20[];

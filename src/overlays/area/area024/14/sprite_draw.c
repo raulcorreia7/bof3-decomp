@@ -462,7 +462,7 @@ MATCH void func_801F3080(void) {
 }
 
 MATCH s32 func_801F30EC(void) {
-    u8  scratch[0x20];
+    u8  scratch[32];
     u8  i;
     s32 result;
 
@@ -781,7 +781,7 @@ MATCH void func_801F3D0C(void) {
 }
 
 MATCH void func_801F3D5C(void) {
-    u8         scratch[0x20];
+    u8         scratch[32];
     WorldSpin* work;
     u8         i;
 

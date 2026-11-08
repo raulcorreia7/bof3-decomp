@@ -8,7 +8,7 @@ MATCH void func_801D4A3C(void) {
     u8   count;
 
     MENU_DRAW_HEADER();
-    WinDrawCueText(28, 22, 0x98);
+    WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x98);
     func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
     prev      = g_SaveCardPort;
     prev_byte = prev;

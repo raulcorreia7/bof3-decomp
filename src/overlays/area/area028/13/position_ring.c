@@ -268,7 +268,7 @@ MATCH AreaSlotWork* func_801F3004(void) {
 }
 
 MATCH void func_801F3060(void) {
-    u8  scratch[0x20];
+    u8  scratch[32];
     u8  i;
     s16 scale;
 
@@ -306,7 +306,7 @@ MATCH void func_801F318C(s16 radius) {
     DVECTOR  center;
     DVECTOR  point;
     s32      pos[4];
-    u8       scratch[0x20];
+    u8       scratch[32];
     POLY_G3* primitive;
     DVECTOR* ring;
     s32      angle = 65408;

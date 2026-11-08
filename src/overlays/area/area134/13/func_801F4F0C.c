@@ -6,7 +6,7 @@ MATCH void func_801F4F0C(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
     DVECTOR  screen1;
     POLY_F3* packet;
     s32      i;
-    u8       scratch[0x20]; /* FAKE: unreferenced local pads frame to 0x80. */
+    u8       scratch[32]; /* FAKE: unreferenced local pads frame to 0x80. */
 
     Area_ProjectPoint(center, &screen0);
     point[0] = center[0] + FIXED_MUL(radius, rcos(angle));

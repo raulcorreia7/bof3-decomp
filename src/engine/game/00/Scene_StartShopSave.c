@@ -44,13 +44,13 @@ MATCH void Scene_StartShopSave(void) {
         case 6:
             D_8014865C       = -2;
             D_80148698       = 1;
-            g_GameEntryState = 7;
+            g_GameEntryState = GAME_STATE_SHOP;
             g_MenuStep.step  = 0;
             D_80148699       = 0;
             g_SceneEventStep = 7;
             break;
         case 7:
-            if (g_GameEntryState != 2) {
+            if (g_GameEntryState != GAME_STATE_FIELD) {
                 break;
             }
             g_SceneEventStep = 10;
@@ -102,7 +102,7 @@ MATCH void Scene_StartShopSave(void) {
             }
             D_8014865C       = -2;
             D_80148698       = 1;
-            g_GameEntryState = 7;
+            g_GameEntryState = GAME_STATE_SHOP;
             g_MenuStep.step  = 0;
             D_80148699       = 0;
             g_SceneEventStep = 6;

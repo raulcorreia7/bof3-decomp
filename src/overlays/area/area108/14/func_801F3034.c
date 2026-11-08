@@ -1,7 +1,7 @@
 #include "area108_14.h"
 
 MATCH s32 func_801F3034(void) {
-    u8  scratch[0x20];
+    u8  scratch[32];
     u8  i;
     s32 result;
 

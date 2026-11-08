@@ -3,7 +3,7 @@
 /* func_801F30B0 (area080) */
 MATCH void Area_ProjectRing(AreaRing* ring) {
     s32 point[3];
-    u8  camera[0x20];
+    u8  camera[32];
     s32 angle;
     u8  i;
 
