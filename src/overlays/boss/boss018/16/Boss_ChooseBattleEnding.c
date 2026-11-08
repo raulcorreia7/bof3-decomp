@@ -7,9 +7,9 @@ MATCH void Boss_ChooseBattleEnding(void) {
         goto block_4;
     }
     if (g_Battle.boss_flags & 2) {
-        D_80146875 = 0x1A;
+        g_SceneState.step_05 = 0x1A;
     } else {
-        D_80146875 = 0x1B;
+        g_SceneState.step_05 = 0x1B;
     }
     func_801DDED8();
     goto block_11;
@@ -34,7 +34,7 @@ block_9:
     func_800C2A40();
     var_v0_2 = 0x1C;
 block_10:
-    D_80146875 = var_v0_2;
+    g_SceneState.step_05 = var_v0_2;
     func_801DDF28();
 block_11:
     D_801FD702 = D_801EB7DC;
