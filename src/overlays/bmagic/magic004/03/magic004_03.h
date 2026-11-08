@@ -16,6 +16,7 @@ typedef struct Magic004Steps {
 extern Magic004Steps D_801EEC18;
 extern u16           D_801EFE40[];
 
-extern Callback D_801EFE60[];
+/* D_801EFE60 */
+extern Callback BMagic_StepTable[];
 
 #endif
