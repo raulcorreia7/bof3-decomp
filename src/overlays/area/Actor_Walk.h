@@ -3,7 +3,7 @@
  * overlays; every change here must verify every member. */
 /* func_801F4528 (area016), func_801F4528 (area045), func_801F4528 (area115), func_801F453C (area121), func_801F4558
    (area087), func_801F4560 (area065), func_801F5088 (area088) */
-MATCH void Actor_WalkAcross(void) {
+MATCH void Actor_Walk(void) {
     Actor* work;
     Actor* scratch;
 

@@ -210,8 +210,8 @@ WorldMapMarker D_801F5194[6] = {
 
 Callback D_801F51AC[3] = {
     Actor_SpawnRandomGroup,
-    Actor_StartWalkAcross,
-    Actor_WalkAcross,
+    Actor_StartWalk,
+    Actor_Walk,
 };
 
 /* Spawn offsets selected by the work byte at +0x08. */
