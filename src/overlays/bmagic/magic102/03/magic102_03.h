@@ -14,7 +14,7 @@ extern u16     D_1F800034_U16[2];
 
 s32 func_801F0ADC(s32 x, s32 y);
 
-extern EffectStepFuncs4 D_801EEC04;
+extern Func801EEC14Steps D_801EEC04;
 
 /* This effect steps the shared tick counter (unk_09) by one per
  * step and advances the magic step at its limit. */

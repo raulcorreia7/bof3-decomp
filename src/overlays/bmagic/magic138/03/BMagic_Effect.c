@@ -30,11 +30,11 @@ MATCH void func_801EEF60(void) {
 }
 
 MATCH void func_801EEFA4(void) {
-    EffectStepFuncs3 handlers;
+    Magic138Steps handlers;
 
     handlers     = D_801EEC10;
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1) {
         Area_AddActor();
     }

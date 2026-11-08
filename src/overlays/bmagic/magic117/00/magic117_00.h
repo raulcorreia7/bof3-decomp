@@ -6,7 +6,12 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* Battle flag and the request hand-off these overlays toggle. */
-extern EffectStepFuncs4 D_801EEC04;
-extern EffectStepFuncs4 D_801EEC14;
+extern Func801EEC24Steps D_801EEC04;
+
+typedef struct Magic117Steps {
+    Callback steps[4];
+} Magic117Steps;
+
+extern Magic117Steps D_801EEC14;
 
 #endif

@@ -7,16 +7,24 @@
 
 extern u8 D_801463D6;
 
-extern EffectStepFuncs5 D_801EEC04;
+typedef struct Magic003Steps801EEC04 {
+    Callback steps[5];
+} Magic003Steps801EEC04;
+
+typedef struct Magic003Steps801EEC18 {
+    Callback steps[4];
+} Magic003Steps801EEC18;
+
+extern Magic003Steps801EEC04 D_801EEC04;
 
 void func_801EF324(void);
 
 void func_801EF708(void);
 
-extern EffectStepFuncs4 D_801EEC18;
+extern Magic003Steps801EEC18 D_801EEC18;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern u8               D_801F0A84[];
-extern BattleEffect     D_801F0B38[];
+extern u8                    D_801F0A84[];
+extern BattleEffect          D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
 #define BMAGIC_EFFECT_COUNT 32
 

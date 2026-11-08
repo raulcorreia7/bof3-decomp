@@ -5,13 +5,55 @@
 #include "sys/emi.h"
 #include "types.h"
 
+/* The three state routines of a bmagic module head, run by the effect's mode. */
+typedef struct MagicModuleSteps {
+    Callback steps[3];
+} MagicModuleSteps;
+
+/* The step routines Effect_DispatchStep runs for the work battler. */
+typedef struct EffectDispatchSteps {
+    Callback steps[3];
+} EffectDispatchSteps;
+
+/* The mode routines Effect_DrawActor runs before it draws the effect's actor. */
+typedef struct ActorEffectSteps {
+    Callback steps[3];
+} ActorEffectSteps;
+
+/* The step routines of the effect work record func_801EF37C advances. */
+typedef struct BMagicEffectWorkSteps {
+    Callback steps[3];
+} BMagicEffectWorkSteps;
+
+/* The step routines of one sparkle of the sparkle pool. */
+typedef struct SparkleEffectSteps {
+    Callback steps[3];
+} SparkleEffectSteps;
+
+/* The owners of these lists are not told apart yet; each type keeps the address of the shared function that runs it. */
+typedef struct Func801EEC14Steps {
+    Callback steps[4];
+} Func801EEC14Steps;
+
+typedef struct Func801EEC18Steps {
+    Callback steps[5];
+} Func801EEC18Steps;
+
+typedef struct Func801EEC24Steps {
+    Callback steps[4];
+} Func801EEC24Steps;
+
+typedef struct Func801EEC28Steps {
+    Callback steps[5];
+} Func801EEC28Steps;
+
 /* A battle-effect module's head. The id word is the value the type-0 EMI
  * loader compares with the archive TOC; the three state callbacks follow and
  * the module entry copies them and indexes them with the shared spad step
  * byte. The rest of the head is per-module data measured from its own bytes. */
 typedef struct MagicModule {
     EMIModuleId      id;    /* 0x00; 0x144-0x1BF */
-    EffectStepFuncs3 steps; /* 0x04 */
+    MagicModuleSteps steps; /* 0x04 */
 } MagicModule;
 
 ASSERT_SIZE(MagicModule, 0x10);

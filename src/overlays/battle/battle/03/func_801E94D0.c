@@ -1,8 +1,8 @@
 #include "battle_03.h"
 
 MATCH void func_801E94D0(void) {
-    BattlePanelStateFuncs3 handlers;
+    Panel801D0FC4States handlers;
 
     handlers = D_801D0FC4;
-    handlers.handlers[BATTLE_PANEL_TASK->state]();
+    handlers.states[BATTLE_PANEL_TASK->state]();
 }

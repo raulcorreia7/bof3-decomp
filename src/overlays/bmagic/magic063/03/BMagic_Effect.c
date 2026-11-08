@@ -33,10 +33,10 @@ MATCH void func_801EEF30(void) {
 }
 
 MATCH void func_801EEF74(void) {
-    EffectStepFuncs5 handlers;
+    Magic063Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801EEFE4);

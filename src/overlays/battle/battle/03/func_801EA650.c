@@ -1,11 +1,11 @@
 #include "battle_03.h"
 
 MATCH void func_801EA650(void) {
-    BattlePanelStateFuncs3 handlers;
-    u8                     index;
+    Panel801D0FF8States handlers;
+    u8                  index;
 
     handlers = D_801D0FF8;
-    handlers.handlers[g_MenuCurrentPanel->state]();
+    handlers.states[g_MenuCurrentPanel->state]();
     func_801D7EB0((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
     index = BATTLE_PANEL_TASK->cell_0A.slot;
     UI_DrawText((g_MenuCurrentPanel->pos.x + 4), (g_MenuCurrentPanel->pos.y + 3), D_801EB4FA[index][0], 0xFFu,

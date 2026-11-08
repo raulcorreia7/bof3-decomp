@@ -1,8 +1,8 @@
 #include "battle_15.h"
 
 MATCH void func_800B0180(void) {
-    BattlePanelModeFuncs5 handlers;
+    Panel800969E4Modes handlers;
 
     handlers = D_800969E4;
-    handlers.handlers[g_MenuCurrentPanel->mode]();
+    handlers.modes[g_MenuCurrentPanel->mode]();
 }

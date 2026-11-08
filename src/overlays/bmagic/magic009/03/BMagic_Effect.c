@@ -43,10 +43,10 @@ INCLUDE_ASM(func_801EF198);
 INCLUDE_ASM(func_801EF3B8);
 
 MATCH void func_801EF6B0(void) {
-    EffectStepFuncs4 handlers;
+    Magic009Steps handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }

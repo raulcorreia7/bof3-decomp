@@ -54,11 +54,11 @@ MATCH void func_801EF710(void) {
 }
 
 MATCH void func_801EF754(void) {
-    EffectStepFuncs3 handlers;
-    u8               radius;
+    Magic074Steps handlers;
+    u8            radius;
 
     handlers = D_801EEC1C;
-    handlers.handlers[D_801F20DC->header.step]();
+    handlers.steps[D_801F20DC->header.step]();
     if ((D_801F20DC->header.flags & BMAGIC_EFFECT_IN_USE) && D_801F20DC->header.step != 0) {
         func_801F00B0();
         if (D_801F20DC->phase_0C & 3) {

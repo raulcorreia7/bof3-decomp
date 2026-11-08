@@ -1,8 +1,8 @@
 #include "battle_15.h"
 
 MATCH void func_800B0CE4(void) {
-    BattlePanelStateFuncs5 handlers;
+    Panel80096A14States handlers;
 
     handlers = D_80096A14;
-    handlers.handlers[g_MenuCurrentPanel->state]();
+    handlers.states[g_MenuCurrentPanel->state]();
 }

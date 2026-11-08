@@ -1,10 +1,10 @@
 #include "game_00.h"
 
 MATCH void func_801ACEBC(void) {
-    Actor*           work;
-    ActorStateFuncs5 table;
+    Actor*              work;
+    Actor80195ED4States table;
 
     work  = g_Task;
     table = D_80195ED4;
-    table.handlers[work->unk_04]();
+    table.states[work->unk_04]();
 }

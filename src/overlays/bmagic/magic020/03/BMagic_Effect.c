@@ -41,9 +41,9 @@ MATCH void func_801EF398(void) {
 }
 
 MATCH void func_801EF3DC(void) {
-    EffectStepFuncs8 handlers = D_801EEC1C;
+    Magic020Steps801EEC1C handlers = D_801EEC1C;
 
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
@@ -144,10 +144,10 @@ MATCH void func_801EF874(void) {
 }
 
 MATCH void func_801EF894(void) {
-    EffectStepFuncs3 handlers;
+    Magic020Steps801EEC3C handlers;
 
     handlers = D_801EEC3C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }

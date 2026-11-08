@@ -8,7 +8,11 @@
 /* The amount Effect_CountDownTimer adds to the effect work byte 9. */
 #define EFFECT_TIMER_STEP 8
 
-extern EffectStepFuncs3  D_801EEC28;
+typedef struct Magic039Steps {
+    Callback steps[3];
+} Magic039Steps;
+
+extern Magic039Steps     D_801EEC28;
 extern BMagicEffectFuncs D_801EEC10;
 
 void func_801EF758(void);

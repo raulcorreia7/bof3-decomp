@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC34(void) {
-    EffectStepFuncs5 handlers;
+    Magic060Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EECA4);

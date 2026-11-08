@@ -12,7 +12,7 @@ MATCH void func_801D656C(void) {
             return;
         }
     }
-    if (g_BattleEncounter != 0 && g_BossBattleEventHook(2U) == GAME_NONE) {
+    if (g_BattleEncounter != 0 && g_BossBattleEventHook(BOSS_EVENT_TURN_END) == BOSS_EVENT_PENDING) {
         return;
     }
     if (g_BattleResult != 0) {

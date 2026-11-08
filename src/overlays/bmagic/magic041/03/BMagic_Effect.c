@@ -35,10 +35,10 @@ MATCH void func_801EF190(void) {
 }
 
 MATCH void func_801EF1D4(void) {
-    EffectStepFuncs3 handlers;
+    Magic041Steps801EEC1C handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF670();
@@ -90,10 +90,10 @@ MATCH void func_801EF358(void) {
 }
 
 MATCH void func_801EF3D0(void) {
-    EffectStepFuncs4 handlers;
+    Magic041Steps801EEC28 handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFAB8();

@@ -5,9 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EECA0(void) {
-    EffectStepFuncs4 table = D_801EEC04;
+    Magic015Steps801EEC04 table = D_801EEC04;
 
-    SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EED0C);
@@ -23,9 +23,9 @@ MATCH void func_801EF150(void) {
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF248(void) {
-    EffectStepFuncs4 table = D_801EEC14;
+    Magic015Steps801EEC04 table = D_801EEC14;
 
-    SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF2B4);
@@ -41,9 +41,9 @@ MATCH void Effect_StartPlaying_801EF610(void) {
 }
 
 MATCH void func_801EF644(void) {
-    EffectStepFuncs4 table = D_801EEC24;
+    Magic015Steps801EEC04 table = D_801EEC24;
 
-    SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF6B0);
@@ -68,9 +68,9 @@ MATCH void func_801EF9E4(void) {
 }
 
 MATCH void func_801EFA28(void) {
-    EffectStepFuncs8 handlers = D_801EEC34;
+    Magic015Steps801EEC34 handlers = D_801EEC34;
 
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
@@ -133,10 +133,10 @@ MATCH void func_801EFEFC(void) {
 }
 
 MATCH void func_801EFF1C(void) {
-    EffectStepFuncs5 handlers;
+    Magic015Steps801EEC54 handlers;
 
     handlers = D_801EEC54;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }

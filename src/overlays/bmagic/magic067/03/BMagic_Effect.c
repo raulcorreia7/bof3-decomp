@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC24(void) {
-    EffectStepFuncs5 handlers;
+    Magic067Steps801EEC04 handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EEC94);
@@ -109,10 +109,10 @@ MATCH void func_801F02A0(void) {
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
 MATCH void func_801F038C(void) {
-    EffectStepFuncs3 handlers;
+    Magic067Steps801EEC18 handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
 MATCH void func_801F03EC(void) {

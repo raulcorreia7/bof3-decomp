@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801EA7DC(void) {
-    BattlePanelStateFuncs4 table = D_801D1004;
+    Panel801D1004States table = D_801D1004;
 
-    table.handlers[g_MenuCurrentPanel->state]();
+    table.states[g_MenuCurrentPanel->state]();
 }

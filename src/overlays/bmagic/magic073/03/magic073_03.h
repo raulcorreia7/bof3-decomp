@@ -19,9 +19,14 @@ u8 func_801F04A4(void);
 extern BMagicEffectWork D_801F0670[];
 #define BMAGIC_EFFECT_SLOTS D_801F0670
 #define BMAGIC_EFFECT_COUNT 160
-extern EffectStepFuncs3 D_801EEC1C;
-void                    func_801F00C4(void);
-void                    func_801EFBF8(u16 angle, u16 radius);
-void                    func_801EFE2C(u16 angle, u16 radius);
+
+typedef struct Magic073Steps {
+    Callback steps[3];
+} Magic073Steps;
+
+extern Magic073Steps D_801EEC1C;
+void                 func_801F00C4(void);
+void                 func_801EFBF8(u16 angle, u16 radius);
+void                 func_801EFE2C(u16 angle, u16 radius);
 
 #endif

@@ -5,7 +5,11 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern EffectStepFuncs5 D_801EEC04;
+typedef struct Magic060Steps {
+    Callback steps[5];
+} Magic060Steps;
+
+extern Magic060Steps D_801EEC04;
 
 extern Callback D_801F0BBC[];
 void            func_801F012C(void);

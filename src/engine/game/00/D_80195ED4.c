@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-ActorStateFuncs5 D_80195ED4 = {
+Actor80195ED4States D_80195ED4 = {
     func_801ACF2C,
     func_801AD0EC,
     func_801AD184,

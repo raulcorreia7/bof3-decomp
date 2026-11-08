@@ -3,8 +3,8 @@
  * every change here must verify every member. */
 /* func_801EEC24 (magic065), func_801EEC24 (magic117), func_801EEC24 (magic154) */
 MATCH void func_801EEC24(void) {
-    EffectStepFuncs4 table;
+    Func801EEC24Steps table;
 
     table = D_801EEC04;
-    SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }

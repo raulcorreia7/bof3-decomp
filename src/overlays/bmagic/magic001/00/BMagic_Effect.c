@@ -135,10 +135,10 @@ MATCH void func_801EF688(void) {
 }
 
 MATCH void func_801EF72C(void) {
-    EffectStepFuncs3 handlers;
+    Magic001Steps handlers;
 
     handlers = D_801EEC3C;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF78C);

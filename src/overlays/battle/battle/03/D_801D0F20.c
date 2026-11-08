@@ -8,34 +8,34 @@ extern void func_801EA254(void), func_801EA530(void);
 extern void func_801EA59C(void);
 
 /* 0x801D0F20 */
-EffectStepFuncs3 D_801D0F20 = {
+Effect801D0F20Steps D_801D0F20 = {
     (Callback)func_801E6420,
     (Callback)func_801E64B4,
     (Callback)func_801E65F8,
 };
 
 /* 0x801D0F2C */
-EffectStepFuncs3 D_801D0F2C = {
+Effect801D0F2CSteps D_801D0F2C = {
     (Callback)func_801E6990,
     (Callback)func_801E69C0,
     (Callback)func_801E6A54,
 };
 
 /* 0x801D0F38 */
-EffectStepFuncs3 D_801D0F38 = {
+Effect801D0F38Steps D_801D0F38 = {
     (Callback)func_801E6B28,
     (Callback)func_801E6BC8,
     (Callback)func_801E6C20,
 };
 
 /* 0x801D0F44 */
-EffectStepFuncs5 D_801D0F44 = {
+Effect801D0F44Steps D_801D0F44 = {
     (Callback)func_801E6D28, (Callback)func_801E6E54, (Callback)func_801E6FA0,
     (Callback)func_801E6FB0, (Callback)func_801E71EC,
 };
 
 /* 0x801D0F58 */
-EffectStepFuncs5 D_801D0F58 = {
+Effect801D0F58Steps D_801D0F58 = {
     (Callback)func_801E7528, (Callback)func_801E7558, (Callback)func_801E75B0,
     (Callback)func_801E7634, (Callback)func_801E7778,
 };
@@ -54,28 +54,28 @@ BattlePanelFuncs g_BattlePanelFuncs = {
 };
 
 /* 0x801D0FA0 */
-BattlePanelStateFuncs3 D_801D0FA0 = {
+Panel801D0FA0States D_801D0FA0 = {
     (Callback)func_801E915C,
     (Callback)func_801E91CC,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FAC */
-BattlePanelStateFuncs3 D_801D0FAC = {
+Panel801D0FACStates D_801D0FAC = {
     (Callback)func_801E927C,
     (Callback)func_801E9390,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FB8 */
-BattlePanelStateFuncs3 D_801D0FB8 = {
+Panel801D0FB8States D_801D0FB8 = {
     (Callback)func_801EAB64,
     (Callback)func_801E949C,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FC4 */
-BattlePanelStateFuncs3 D_801D0FC4 = {
+Panel801D0FC4States D_801D0FC4 = {
     (Callback)func_801E9530,
     (Callback)func_801E9538,
     (Callback)func_801EAB64,
@@ -90,7 +90,7 @@ Callback D_801D0FD0[4] = {
 };
 
 /* 0x801D0FE0 */
-BattlePanelStateFuncs3 D_801D0FE0 = {
+Panel801D0FE0States D_801D0FE0 = {
     (Callback)func_801E9CA8,
     (Callback)func_801E9F18,
     (Callback)func_801E9FDC,
@@ -105,14 +105,14 @@ BattlePanelTaskForwarders g_BattlePanelTaskForwarders = {
 };
 
 /* 0x801D0FF8 */
-BattlePanelStateFuncs3 D_801D0FF8 = {
+Panel801D0FF8States D_801D0FF8 = {
     (Callback)func_801EA728,
     (Callback)func_801EA76C,
     (Callback)func_801EA774,
 };
 
 /* 0x801D1004 */
-BattlePanelStateFuncs4 D_801D1004 = {
+Panel801D1004States D_801D1004 = {
     (Callback)func_801EA848,
     (Callback)func_801EA894,
     (Callback)func_801EA8F4,
