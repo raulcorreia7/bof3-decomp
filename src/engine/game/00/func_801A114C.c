@@ -35,8 +35,7 @@ MATCH void func_801A114C(Actor* record) {
             record->unk_7B = timer;
         }
         result = func_801A2A04(record);
-        if (((result & BYTE_MASK) != GAME_NONE) && (g_Task->timer != 0) &&
-            (func_801A1A58((Actor*)record) & BYTE_MASK)) {
+        if (((result & BYTE_MASK) != GAME_NONE) && (g_Task->timer != 0) && (func_801A1A58(record) & BYTE_MASK)) {
             spad_c               = g_Task;
             spad_c->unk_03       = spad_c->header.mode;
             g_Task->header.mode  = 0xAU;
