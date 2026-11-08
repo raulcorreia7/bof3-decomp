@@ -15,7 +15,8 @@ MATCH void func_801F771C(void) {
     FAKE_ORDER_LOCK(D_801F973C[index]());
 }
 
-MATCH void func_801F7750(void) {
+/* func_801F7750 */
+MATCH void Scene_EnterSaveArea(void) {
     GFX_ResetPalette();
     g_GfxPalettePending = 1;
     g_AreaDrawFlags     = 0x1F;
@@ -263,7 +264,8 @@ MATCH void func_801F8088(void) {
     func_801F8EF0();
 }
 
-MATCH void func_801F80CC(void) {
+/* func_801F80CC */
+MATCH void Scene_StartEndingXa(void) {
     u8* step;
 
     SND_StartXAStream(8, 1);
@@ -273,7 +275,8 @@ MATCH void func_801F80CC(void) {
     *step += 1;
 }
 
-MATCH void func_801F8110(void) {
+/* func_801F8110 */
+MATCH void Scene_WaitEndingXa(void) {
     u8  ready;
     u8* step;
 
@@ -460,7 +463,7 @@ MATCH void func_801F87D0(void) {
 MATCH void func_801F8844(void) {
     D_80146873            = 0;
     g_SceneState.state_04 = 0;
-    CallbackReplace(func_801F9490);
+    CallbackReplace(Scene_RunSaveMenu);
 }
 
 MATCH void func_801F887C(void* entity) {
@@ -535,7 +538,8 @@ INCLUDE_ASM(func_801F91F0);
 
 INCLUDE_ASM(func_801F938C);
 
-MATCH void func_801F9490(void) {
+/* func_801F9490 */
+MATCH void Scene_RunSaveMenu(void) {
     g_GameEntrySubstate = 0;
     func_8014BA04();
     Menu_ResetPanelTasks();
@@ -547,12 +551,14 @@ MATCH void func_801F9490(void) {
 
 INCLUDE_ASM(func_801F9504);
 
-MATCH void func_801F9654(void) {
+/* func_801F9654 */
+MATCH void Scene_UpdateSaveMenu(void) {
     Menu_UpdatePanelTasks();
     Shop_DispatchStep();
 }
 
-MATCH void func_801F967C(void) {
+/* func_801F967C */
+MATCH void Scene_ExitToTitle(void) {
     g_ScriptVars[0] = 0;
     D_80146865      = 0;
     D_80146866      = 0;

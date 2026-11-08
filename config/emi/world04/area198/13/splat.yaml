@@ -21,7 +21,7 @@ segments:
       - [0x59C, c, func_801F319C]
       - [0x788, c, func_801F3388]
       - [0x928, c, func_801F3528]
-      - [0x9A4, c, func_801F35A4]
+      - [0x9A4, c, Area_FreePaletteOnChange]
       - [0xA00, c, func_801F3600]
       - [0xAB4, c, func_801F36B4]
       - [0xC54, c, func_801F3854]

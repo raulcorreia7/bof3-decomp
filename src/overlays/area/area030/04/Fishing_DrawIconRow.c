@@ -2,7 +2,7 @@
 
 /* Draws the AREA030 icon cell at the given position and queues the
  * sprite selected by the palette index, unless the index is the null value. */
-MATCH void func_801E162C(s16 cell_x, s16 cell_y, u16 icon_index) {
+MATCH void Fishing_DrawIconRow(s16 cell_x, s16 cell_y, u16 icon_index) {
     func_801E0C80(3, 1);
     func_801E0DCC(0xC, 1, cell_x, cell_y);
 

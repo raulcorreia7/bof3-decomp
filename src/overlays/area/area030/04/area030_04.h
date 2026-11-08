@@ -534,7 +534,8 @@ void func_801D1538(void);
 void Fishing_DrawHud(s16 panel_x, s16 panel_y);
 void func_801D1744(s16 panel_x, s16 panel_y, u8 column_shade);
 void func_801D1818(s16 sprite_x, s16 sprite_y, u8 icon_index);
-void func_801D18CC(s16 sprite_x, s16 sprite_y, u8 icon_index);
+/* func_801D18CC */
+void Fishing_DrawIcon(s16 sprite_x, s16 sprite_y, u8 icon_index);
 /* func_801D195C */
 void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y);
 /* func_801D1B54 */
@@ -768,7 +769,7 @@ void func_801E0F4C(s16 sprite_x, s16 sprite_y, u8 icon_index);
 void func_801E1004(s32 item, s32 count, s32 column);
 /* func_801E1320 */
 void Fishing_DrawRank(s16 x, s16 y);
-void func_801E162C(s16 cell_x, s16 cell_y, u16 icon_index);
+void Fishing_DrawIconRow(s16 cell_x, s16 cell_y, u16 icon_index);
 void func_801E16DC(void);
 void func_801E1758(s32 x, s32 y);
 void func_801E19CC(s32 x, s32 y);

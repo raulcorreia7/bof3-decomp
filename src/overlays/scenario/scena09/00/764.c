@@ -11,7 +11,7 @@ MATCH void func_801F7364(void) {
 }
 
 MATCH void func_801F73A0(void) {
-    func_801F7574();
+    Scene_ClearWorkRows();
     func_801F76D0();
     g_Task->timer = 0xFF;
     g_Task->header.mode++;
@@ -25,7 +25,8 @@ MATCH void func_801F73F0(void) {
 
 INCLUDE_ASM(func_801F7424);
 
-MATCH void func_801F7574(void) {
+/* func_801F7574 */
+MATCH void Scene_ClearWorkRows(void) {
     u8* row;
     u8  i;
 
@@ -622,7 +623,8 @@ MATCH void func_801FE1DC(void) {
 
 #include "overlays/scenario/Scene_RemovePeco.h"
 
-MATCH void func_801FE35C(void) {
+/* func_801FE35C */
+MATCH void Scene_RemoveRyuAdult(void) {
     Party_RemoveMember(CHAR_ID_RYU_ADULT);
     Party_LoadPalettes();
 }
