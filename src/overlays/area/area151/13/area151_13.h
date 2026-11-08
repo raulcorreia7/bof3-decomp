@@ -25,9 +25,10 @@ extern Callback D_801F5440[];
 extern Callback D_801F5448[];
 extern Callback D_801F5458[];
 extern Callback D_801F54D8[];
-extern UPoint2D D_801F54E4[];
-extern u8       D_801F54F4[];
-extern u8       D_801F54F5[];
+/* D_801F54E4 */
+extern UPoint2D g_FlockVelocity[4];
+/* D_801F54F4 */
+extern u8       g_FlockScript[4][2];
 extern Callback D_801F54FC[];
 
 /* The work-mode steps the request wrapper runs. */
