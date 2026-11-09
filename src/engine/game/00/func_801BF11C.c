@@ -44,7 +44,7 @@ MATCH u8 func_801BF11C(void) {
                 /* CLEANUP: typed palette indexing reverses the source addition operands. */
                 actor = g_Task;
                 for (j = 0; j < 32; j++) {
-                    clut_offset           = actor->unk_05 << 6;
+                    clut_offset    = actor->unk_05 << 6;
                     dst            = (u16*)(GAME_PALETTE_MIRROR + clut_offset);
                     src            = (u16*)(GAME_PALETTE_STAGE + clut_offset);
                     palette_offset = j << 1;

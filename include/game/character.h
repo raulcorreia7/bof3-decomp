@@ -29,15 +29,15 @@
  * record at +0x4C. A section starts with a count and the offset of its palette
  * table; the table is a list of offsets, each to CHARACTER_PALETTE_COLORS
  * 16-bit colors, which GFX_LoadPalette copies to two VRAM staging rows. */
-#define CHARACTER_BANK_SECTION_COUNT 3
-#define CHARACTER_PALETTE_COLORS     32
+#define CHARACTER_SPRITES_SECTION_COUNT 3
+#define CHARACTER_PALETTE_COLORS        32
 
 /* The ailments the engine cures when a battle ends (the game's own strings
  * call status removal "cure"): Battle_ReloadPartyBank and Battle_LoadEndOverlay pass a
  * battler's status & this mask to func_800A36F0; STATUS_KO, STATUS_POISONED
  * and STATUS_CONFUSED persist. The (u16) keeps the complement a 16-bit
  * immediate (andi) in Battle_ReloadPartyBank's schedule. */
-#define STATUS_CURE_MASK             ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
+#define STATUS_CURE_MASK                ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
 
 /* Equipment bits: the characters that may use a weapon or armor record
  * (Item.equipability). */
@@ -297,7 +297,7 @@ ASSERT_OFFSET(LevelGrowth, ability, 0x06);
 ASSERT_OFFSET(LevelGrowth, extra_ability, 0x07);
 
 typedef struct CharacterSprites {
-    u32 section_offset[CHARACTER_BANK_SECTION_COUNT]; /* 0x00 from the container base */
+    u32 section_offset[CHARACTER_SPRITES_SECTION_COUNT]; /* 0x00 from the container base */
 } CharacterSprites;
 
 typedef struct CharacterSpritesSection {
