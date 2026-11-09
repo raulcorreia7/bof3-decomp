@@ -89,7 +89,19 @@ INCLUDE_ASM(func_801D36FC);
 
 INCLUDE_ASM(func_801D3984);
 
-INCLUDE_ASM(func_801D3A48);
+MATCH u8 func_801D3A48(u8 arg) {
+    s32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 0x3C; i++) {
+        if (g_FairyJobs[i].active != 0) {
+            if (g_FairyJobs[i].type == arg) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
 
 INCLUDE_ASM(func_801D3AA0);
 
