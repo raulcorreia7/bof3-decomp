@@ -1,8 +1,7 @@
 #ifndef MENU_ITEM_H
 #define MENU_ITEM_H
 
-/* One row of the item table the shop and start-menu sort routines read.
- * `unk_00` is the byte they compare; its role is unverified. */
+/* One row of the item table the shop and start-menu sort routines read. */
 
 #include "types.h"
 

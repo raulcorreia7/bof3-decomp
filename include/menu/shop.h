@@ -1,12 +1,9 @@
 #ifndef MENU_SHOP_H
 #define MENU_SHOP_H
 
-/* The shop row list shared by the shop and start-menu overlays. */
-
 #include "types.h"
 
-/* One shop row: 0x1C bytes. Byte 0x15 holds the source-list index the row was
- * copied from, or 0xFF when the row is empty. */
+/* One shop row: 0x1C bytes. */
 typedef struct MenuListRow {
     u8 unk_00[0x15];
     u8 source_index; /* 0x15 - source-list index, 0xFF when empty */

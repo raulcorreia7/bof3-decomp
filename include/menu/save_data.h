@@ -13,8 +13,7 @@
 /* The persistent block: 4,272 bytes. */
 #define SAVE_BLOCK_SIZE 0x10B0u
 
-/* The scene event the overlays step through: mode selects the g_SceneEvents handler, step advances inside it and
- * selection is the entry it works on (a fairy job, a master, a menu cursor). */
+/* The scene event the overlays step through. */
 typedef struct SceneEventState {
     s8 mode;
     s8 step;
@@ -23,9 +22,7 @@ typedef struct SceneEventState {
 
 ASSERT_SIZE(SceneEventState, 3);
 
-/* The persistent game state: SYS_StartFrontend clears it, SAVE_BuildSlotImage copies it to the memory card file
- * payload (file offset 0x200, so the frame-relative offsets of menu/save.h are these plus 0x200) and
- * SAVE_RunLoadRestore copies it back. */
+/* The persistent game state. */
 typedef struct SaveData {
     /* 0x000 */ SceneState      scene_state; /* a snapshot of g_SceneState */
     /* 0x010 */ u8              unk_10[3];
