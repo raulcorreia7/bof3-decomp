@@ -1,4 +1,4 @@
-/* One 0x74-byte entry of D_80143FFC, indexed by the byte argument of func_801CEA10. */
+/* Plchar_FollowerInReach for plp012, plp025, plp247, plp278 and plp27a; one 0x74-byte entry of D_80143FFC per index. */
 typedef struct PlcharCheckRecord {
     s32 pos_x; /* 0x00 */
     s32 pos_y; /* 0x04 */
@@ -13,7 +13,7 @@ ASSERT_OFFSET(PlcharCheckRecord, z, 0x0A);
 
 extern PlcharCheckRecord D_80143FFC[];
 
-MATCH s32 func_801CEA10(s32 arg0) {
+MATCH s32 Plchar_FollowerInReach(s32 arg0) {
     s32 i;
 
     for (i = 1; i < g_PartySize; i++) {
