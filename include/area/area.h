@@ -279,9 +279,9 @@ typedef struct AreaScriptBank {
     u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
 } AreaScriptBank;
 
-/* One section: `slots_bytes == 2 * M`, and the `record_off` values increase
- * strictly and tile the section, one stream each. The last section runs to the
- * end of the block. */
+/* One section: `slots_bytes == 2 * M`, and the distinct `record_off` values
+ * increase strictly and tile the section, one stream each. The last section
+ * runs to the end of the block. */
 typedef struct AreaScriptSection {
     u16 slots_bytes;   /* 0x00 - == 2 * M */
     u16 record_off[1]; /* 0x02 - M entries, relative to the section base */
