@@ -55,7 +55,11 @@ MATCH void func_801D0DAC(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0E38);
+MATCH void func_801D0E38(void) {
+    u8 timer;
+
+    SCENE_RED_GRADIENT_FADE(timer, 0x8, 5);
+}
 
 MATCH void func_801D0EAC(void) {
     SYS_DISPATCH_TASK(D_801D27D8, 1, g_Task);
@@ -63,7 +67,16 @@ MATCH void func_801D0EAC(void) {
 
 INCLUDE_ASM(func_801D0EF0);
 
-INCLUDE_ASM(func_801D0F94);
+MATCH void func_801D0F94(void) {
+    Actor* work;
+
+    work = g_Task;
+    work->pos.z.fixed += 0x800000;
+    func_801D1D20(&work->pos, &work->vx, work->tint.bytes.unk_5D, work->tint.bytes.unk_5E);
+    if (g_ScriptVars[0] == 0xB) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801D1008(void) {
     Scene_AdvanceActorStep();

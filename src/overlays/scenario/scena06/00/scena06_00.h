@@ -40,4 +40,7 @@ extern SceneFunc      g_SceneActorDispatch[];
 extern u8             D_801FE464[8];
 extern Scena06Handler D_801FE46C[];
 
+extern u8 D_801FE478;
+extern s8 (*D_801FE48C[])(void);
+
 #endif

@@ -18,9 +18,8 @@ MATCH void func_801EEFD8(void) {
     func_801E5988();
 }
 
-MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF014 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 /* hint: the eight-entry copy into a local EffectStepFuncs8 is unrolled by the candidate; first differing instruction is the addiu t0,a2,32 at +0x14 (retail runs the copy as a 16-byte loop with bne). */
 MATCH void func_801EF058(void) {

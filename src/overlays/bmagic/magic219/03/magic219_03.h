@@ -11,7 +11,7 @@ extern BattleEffect D_801EFA14[];
 #define BMAGIC_EFFECT_SLOTS D_801EFA14
 #define BMAGIC_EFFECT_COUNT 32
 /* func_801EF024 */
-void BMagic_DispatchMode(void);
+void BMagic_DispatchEffectMode(void);
 
 #define MAGIC219_STEP_COUNT 4
 

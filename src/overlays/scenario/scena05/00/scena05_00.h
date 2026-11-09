@@ -42,4 +42,9 @@ extern Callback  D_801FD5E8[];
 /* D_801FD644 */
 extern SceneFunc g_SceneActorDispatch[];
 
+extern u8 D_801FD668;
+extern s8 (*D_801FD674[])(void);
+
+void func_801F7660(s32 x, s32 y, s32 z, u16 angle);
+
 #endif
