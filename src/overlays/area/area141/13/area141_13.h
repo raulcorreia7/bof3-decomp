@@ -35,4 +35,7 @@ extern u8 D_801F4DFC[];
 /* The game-overlay state bytes the cancel path resets. */
 extern u8 D_801F4E50[];
 
+/* The cells that start the scene events of func_801F4158. */
+extern SceneTrigger D_801F4DD4[];
+
 #endif

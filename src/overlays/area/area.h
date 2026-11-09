@@ -108,7 +108,6 @@ void            func_801F3A78(void);
 void            func_801F3D28(void);
 void            Area_DrawGradientDiamond(s16 x, s16 y);
 void            Area_DrawHudBanner(s16 x, s16 y);
-s16             func_801F4158(DVECTOR* a, DVECTOR* b, DVECTOR* c);
 void            func_801F4178(void);
 void            func_801F41D8(void);
 void            func_801F4534(void);
@@ -146,6 +145,33 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
         battler->param.unk_0B = (u8)result;
     }
 }
+
+/* A cell and facing that starts a scene event at the given step. */
+typedef struct SceneTrigger {
+    u8 x;
+    u8 y;
+    u8 facing;
+    u8 step;
+} SceneTrigger;
+
+/* The body of a scene trigger check `u8 f(u8 x, u8 y)`: the party at (x, y) facing the leader's way stands on one of
+ * the `count` triggers of `table`. It starts the scene event `mode` at the trigger's step and returns 1, else returns
+ * 0. A block statement macro: it declares a local, so it is the first statement of the function. */
+#define AREA_START_SCENE_TRIGGER(table, count, mode)                                                           \
+    s32 i;                                                                                                     \
+                                                                                                               \
+    for (i = 0; i < (count); i++) {                                                                            \
+        if (x == (table)[i].x && y == (table)[i].y && ((table)[i].facing & 0xF) == g_Game.members[0].facing) { \
+            break;                                                                                             \
+        }                                                                                                      \
+    }                                                                                                          \
+    if (i == (count)) {                                                                                        \
+        return 0;                                                                                              \
+    }                                                                                                          \
+    Game_SetScriptActive();                                                                                    \
+    g_SceneEventMode = (mode);                                                                                 \
+    g_SceneEventStep = (table)[i].step;                                                                        \
+    return 1
 
 /* Whether a step to (x, y) enters the trigger band that starts at `first_row`: with the scene ready it clears
  * the first script variable and runs script entry 0, which starts the area scene and blocks the step. */
