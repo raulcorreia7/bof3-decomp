@@ -1,5 +1,8 @@
 #include "area049_13.h"
 #include "area/spad.h"
+#include "overlays/area/AreaSprite.h"
+
+extern AreaSprite* D_801181DC;
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -34,7 +37,18 @@ INCLUDE_ASM(func_80117410);
 
 INCLUDE_ASM(func_80117514);
 
-INCLUDE_ASM(func_8011759C);
+MATCH void func_8011759C(void) {
+    AreaSprite* work = D_801181DC;
+    u8          count;
+
+    work->origin.x += work->normal.vx;
+    work->flags_03--;
+    work->origin.y += work->normal.vy;
+    count = --((AreaSprite*)D_801181DC)->flags_02;
+    if (!(count & BYTE_MASK)) {
+        ((AreaSprite*)D_801181DC)->flags = 0;
+    }
+}
 
 MATCH void func_80117610(void) {
     SYS_DISPATCH_TASK(D_8011819C, 1, g_Task);
