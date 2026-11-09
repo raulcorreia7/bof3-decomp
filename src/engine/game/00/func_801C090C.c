@@ -11,13 +11,13 @@ MATCH s32 func_801C090C(s32 anchor_x, s32 anchor_y, s32 anchor_index) {
 
     count = g_Game.party_size;
     if (count >= 2U) {
-        x_ptr      = &D_80145EC4;
-        x          = anchor_x + FIELD(s32, &D_801CD47C, (anchor_index * 4) & 0x3F8) * 2;
-        *x_ptr     = x;
-        y          = anchor_y + FIELD(s32, &D_801CD480, (anchor_index * 4) & 0x3F8) * 2;
+        x_ptr                         = &D_80145EC4;
+        x                             = anchor_x + FIELD(s32, &D_801CD47C, (anchor_index * 4) & 0x3F8) * 2;
+        *x_ptr                        = x;
+        y                             = anchor_y + FIELD(s32, &D_801CD480, (anchor_index * 4) & 0x3F8) * 2;
         g_Game.members[0].pos.y.fixed = y;
         if (g_Game.members[0].unk_70 != 0) {
-            *x_ptr     = x + FIELD(s32, &D_801CD47C, (anchor_index * 4) & 0x3F8);
+            *x_ptr                        = x + FIELD(s32, &D_801CD47C, (anchor_index * 4) & 0x3F8);
             g_Game.members[0].pos.y.fixed = y + FIELD(s32, &D_801CD480, (anchor_index * 4) & 0x3F8);
         }
         g_Game.members[0].facing = anchor_index;
@@ -34,6 +34,6 @@ MATCH s32 func_801C090C(s32 anchor_x, s32 anchor_y, s32 anchor_index) {
     } else {
         g_Game.members[0].pos.x.fixed = anchor_x;
         g_Game.members[0].pos.y.fixed = anchor_y;
-        g_Game.members[0].facing = anchor_index;
+        g_Game.members[0].facing      = anchor_index;
     }
 }

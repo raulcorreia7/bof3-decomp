@@ -11,8 +11,8 @@ MATCH void func_80197F48(void) {
         g_AreaDrawMode = 6;
         Party_BuildBattlers(PARTY_ORDER_FIELD);
         func_801BFB34();
-        flags      = &g_Battle.outcome.options;
-        D_80143F22 = 0;
+        flags            = &g_Battle.outcome.options;
+        g_EncounterSteps = 0;
         if ((*flags & 2) == 0) {
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         }

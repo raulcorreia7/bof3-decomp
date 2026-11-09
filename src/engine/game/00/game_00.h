@@ -1583,7 +1583,7 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
 
     bit0 = flag_bits & 1;
     if (bit0 != 0) {
-        if ((D_80146878 & 0x1) != (D_80143F22 & 0x1)) {
+        if ((D_80146878 & 0x1) != (g_EncounterSteps & 0x1)) {
             value = actor->unk_7B;
             if (value < 0xFAu) {
                 actor->unk_7B = (u8)(value + step);

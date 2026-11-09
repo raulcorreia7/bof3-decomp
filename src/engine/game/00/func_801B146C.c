@@ -102,11 +102,11 @@ MATCH void func_801B146C(void) {
             g_Task->header.step = 2;
             goto block_end; /* leave the frame flags alone */
         }
-        counter    = D_80143F22;
-        D_80143F22 = counter + 1;
-        route_id   = g_Task->direction_08;
+        counter          = g_EncounterSteps;
+        g_EncounterSteps = counter + 1;
+        route_id         = g_Task->direction_08;
         if ((route_id == 2) || (route_id == 6)) {
-            D_80143F22 = counter + 2;
+            g_EncounterSteps = counter + 2;
         }
         Actor_ClearVelocity();
         g_AreaCameraStep       = 0;

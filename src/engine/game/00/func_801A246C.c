@@ -13,7 +13,7 @@ MATCH s32 func_801A246C(s32 value_a, s32 value_b, s32 flag_bits) {
     saved = flag_bits;
     flag_bits &= 1;
     if (flag_bits != 0) {
-        if ((D_80146878 & 0x2) != (D_80143F22 & 0x2)) {
+        if ((D_80146878 & 0x2) != (g_EncounterSteps & 0x2)) {
             value = FIELD(u8, value_a, 0x7Bu);
             if (value < 0xFAu) {
                 FIELD(u8, value_a, 0x7Bu) = (value + 1u);

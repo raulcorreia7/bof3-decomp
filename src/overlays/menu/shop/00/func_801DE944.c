@@ -96,7 +96,7 @@ MATCH void func_801DE944(void) {
             scroll   = &D_80145EC4;
             row      = 0;
             do {
-                dst                          = row;
+                dst                                             = row;
                 FIELD(s32, &g_Game.members[0].pos.x.fixed, dst) = scroll_x;
                 FIELD(s32, &g_Game.members[0].pos.y.fixed, dst) = scroll_y;
                 FIELD(s32, &g_Game.members[0].pos.z.fixed, dst) = Area_SampleHeight(scroll[0], scroll[1]) << 16;
