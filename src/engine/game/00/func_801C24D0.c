@@ -4,8 +4,7 @@
 */
 MATCH void func_801C24D0(void) {
     func_801C2538();
-    if ((g_Task->unk_05 == 0) &&
-        !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+    if ((g_Task->unk_05 == 0) && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         func_801C2710();
     }
 }

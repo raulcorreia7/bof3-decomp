@@ -11,8 +11,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     s32        y;
 
     clut = (u8)shaded ? 7 : 0;
-    UI_DrawWindow(px + 3, py + 3, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)shaded,
-                  CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(px + 3, py + 3, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)shaded, CHARACTER_BLOCK->window_style);
     x = px;
     y = py;
     /* FAKE: the order lock keeps the x and y copies below the window call. */

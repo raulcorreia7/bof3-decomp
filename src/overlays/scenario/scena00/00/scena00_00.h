@@ -148,10 +148,10 @@ typedef struct Scene00Tables {
     s8             unk_68;          /* 0x068 D_801FC9E8 */
     s8             unk_69;          /* 0x069 D_801FC9E9 */
     u8             pad_6A[2];
-    s8             unk_6C[4];  /* 0x06C D_801FC9EC */
-    u8             unk_70[12]; /* 0x070; no static reader */
-    Callback       unk_7C[4];  /* 0x07C func_801F913C, Scene_DispatchActor, Scene_CheckStepTrigger, func_801FC8F4 */
-    /* 0x8C */ u32 zero;       /* 0x08C; null terminator */
+    s8             unk_6C[4];       /* 0x06C D_801FC9EC */
+    u8             unk_70[12];      /* 0x070; no static reader */
+    Callback       unk_7C[4];       /* 0x07C func_801F913C, Scene_DispatchActor, Scene_CheckStepTrigger, func_801FC8F4 */
+    /* 0x8C */ u32 zero;            /* 0x08C; null terminator */
     Callback       handlers_90[15]; /* 0x090 D_801FCA10; D_801FCA1C at +0x0C */
     u8             table_CC[16];    /* 0x0CC D_801FCA4C */
     u8             table_DC[8];     /* 0x0DC D_801FCA5C */

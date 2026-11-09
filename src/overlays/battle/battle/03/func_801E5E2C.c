@@ -13,10 +13,9 @@ NON_MATCHING void func_801E5E2C(void) {
     source = slot->target.party;
     kind   = source->slot;
     if (kind < 3) {
-        COORD_INT(slot->pos.x) =
-            source->unk_2E.half + (s8)g_BattlePanelOffsets[(source->facing * 2) + (source->unk_2C.half * 8)];
-        source = slot->target.party;
-        offset = (g_BattlePanelOffsets + 1)[(source->facing * 2) + (source->unk_2C.half * 8)];
+        COORD_INT(slot->pos.x) = source->unk_2E.half + (s8)g_BattlePanelOffsets[(source->facing * 2) + (source->unk_2C.half * 8)];
+        source                 = slot->target.party;
+        offset                 = (g_BattlePanelOffsets + 1)[(source->facing * 2) + (source->unk_2C.half * 8)];
     } else {
         COORD_INT(slot->pos.x) = source->unk_2E.half + ENEMY_COMBATANT(kind).panel_offset_x;
         source                 = slot->target.party;

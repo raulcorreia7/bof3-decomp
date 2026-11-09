@@ -20,6 +20,5 @@ loop_1:
     if (count == 28) {
         return 0;
     }
-    return (*(s8(**)(s32, s32, s32, s32))(&D_801C86F8.bytes[(count * 8) + 4]))(handler_x & HALF_MASK,
-                                                                               handler_y & HALF_MASK, offset, cur);
+    return (*(s8(**)(s32, s32, s32, s32))(&D_801C86F8.bytes[(count * 8) + 4]))(handler_x & HALF_MASK, handler_y & HALF_MASK, offset, cur);
 }

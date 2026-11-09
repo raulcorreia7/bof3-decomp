@@ -49,8 +49,7 @@ MATCH void func_801F8850(void) {
     flags = &D_80145FF4;
     *flags &= 0xFE;
     D_80146134 &= 0xFE;
-    Game_RequestAreaChange(AREA_ID_DESERT_MANMO, TO_COORD(41) + COORD_HALF, TO_COORD(22) + COORD_HALF,
-                           AREA_ENTRY_MAP_LOADING);
+    Game_RequestAreaChange(AREA_ID_DESERT_MANMO, TO_COORD(41) + COORD_HALF, TO_COORD(22) + COORD_HALF, AREA_ENTRY_MAP_LOADING);
     Game_SetScriptActive();
     D_80146874 = 2;
     D_80146875 = 0;

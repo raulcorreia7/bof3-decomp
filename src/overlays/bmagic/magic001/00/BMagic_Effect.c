@@ -193,8 +193,7 @@ MATCH void func_801EFD28(void) {
         SND_QueueSelectionFx(0x203);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;
-        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed,
-                                g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
         /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
         FAKE_BARRIER();
         func_800A9820(g_Battle.target_selector);

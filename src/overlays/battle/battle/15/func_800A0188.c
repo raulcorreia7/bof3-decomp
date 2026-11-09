@@ -5,8 +5,7 @@ MATCH void func_800A0188(void) {
     u8          mode;
     u16         base;
 
-    g_Battle.target_record->hp_change =
-        Battle_CalcDamage(g_Battle.active_battler, g_Battle.target, BATTLE_ELEMENT_FROM_WEAPON);
+    g_Battle.target_record->hp_change = Battle_CalcDamage(g_Battle.active_battler, g_Battle.target, BATTLE_ELEMENT_FROM_WEAPON);
     /* FAKE: barrier holds mode load below the store */
     FAKE_BARRIER();
     mode = LOBU(g_Battle.target);

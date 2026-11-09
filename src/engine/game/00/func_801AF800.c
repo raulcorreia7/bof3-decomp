@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity,
-                         s32 sprite_flag) {
+MATCH void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag) {
     s16   x;
     s32   row;
     u8    item_category;

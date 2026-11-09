@@ -40,8 +40,7 @@ NON_MATCHING void func_801D6684(void) {
         }
     }
     row = 0;
-    if ((g_Task->unk_0A == 0) && (*((g_Task->param.unk_0B * 8) + &D_801E2050 + (page & BYTE_MASK)) == 1) &&
-        ((u32)((g_Task->timer % 12) & BYTE_MASK) < 0xAU)) {
+    if ((g_Task->unk_0A == 0) && (*((g_Task->param.unk_0B * 8) + &D_801E2050 + (page & BYTE_MASK)) == 1) && ((u32)((g_Task->timer % 12) & BYTE_MASK) < 0xAU)) {
         Actor_StepAnimLoop();
     }
     word_ptr   = &D_801E2070;

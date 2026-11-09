@@ -40,24 +40,21 @@ MATCH void func_801ADDD4(s32 char_id) {
         if (value >= 1000) {
             g_Characters[(u8)char_id].base.max_ap = 999;
         }
-        work = (g_LevelGrowth[(u8)char_id][level].power_defense >> 4) +
-               ((s8)g_Characters[(u8)char_id].level_up_modifiers[2]);
+        work = (g_LevelGrowth[(u8)char_id][level].power_defense >> 4) + ((s8)g_Characters[(u8)char_id].level_up_modifiers[2]);
         CLAMP_MIN(work, 0);
         value                                = g_Characters[(u8)char_id].base.power + work;
         g_Characters[(u8)char_id].base.power = value;
         if (value >= 1000) {
             g_Characters[(u8)char_id].base.power = 999;
         }
-        work = (g_LevelGrowth[(u8)char_id][level].power_defense & 0xF) +
-               ((s8)g_Characters[(u8)char_id].level_up_modifiers[3]);
+        work = (g_LevelGrowth[(u8)char_id][level].power_defense & 0xF) + ((s8)g_Characters[(u8)char_id].level_up_modifiers[3]);
         CLAMP_MIN(work, 0);
         value                                  = g_Characters[(u8)char_id].base.defense + work;
         g_Characters[(u8)char_id].base.defense = value;
         if (value >= 1000) {
             g_Characters[(u8)char_id].base.defense = 999;
         }
-        work = (g_LevelGrowth[(u8)char_id][level].agility_intellect >> 4) +
-               ((s8)g_Characters[(u8)char_id].level_up_modifiers[4]);
+        work = (g_LevelGrowth[(u8)char_id][level].agility_intellect >> 4) + ((s8)g_Characters[(u8)char_id].level_up_modifiers[4]);
         CLAMP_MIN(work, 0);
         value                                  = g_Characters[(u8)char_id].base.agility + work;
         g_Characters[(u8)char_id].base.agility = value;

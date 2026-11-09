@@ -34,8 +34,7 @@ MATCH void func_801E3C14(void) {
     D_801EC2E8                               = *(BattleStatBlock*)&g_BattleCurrentEnemy->stats;
     switch (LOBU(g_Battle.action_type)) {
         case BATTLE_ACTION_ATTACK:
-            g_Battle.target_record->hp_change =
-                Battle_ApplyDamage(g_Battle.active_battler, LOBU(g_Battle.target_selector));
+            g_Battle.target_record->hp_change = Battle_ApplyDamage(g_Battle.active_battler, LOBU(g_Battle.target_selector));
             break;
         case BATTLE_ACTION_ABILITY:
         case BATTLE_ACTION_ITEM:
@@ -54,12 +53,10 @@ MATCH void func_801E3C14(void) {
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ATTACK) {
             func_801E2314(4);
         }
-        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ITEM &&
-            !(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 4)) {
+        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ITEM && !(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 4)) {
             func_801E2314(4);
         }
-        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY &&
-            !(D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_NO_HIT_REACT)) {
+        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY && !(D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_NO_HIT_REACT)) {
             func_801E2314(4);
         }
     }

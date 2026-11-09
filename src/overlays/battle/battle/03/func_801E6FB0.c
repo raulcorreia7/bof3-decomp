@@ -9,8 +9,7 @@ MATCH void func_801E6FB0(void) {
 
     if ((g_Battle.state & BATTLE_STATE_EFFECT_LOADING) &&
         ((g_BattleEffectBattler->slot == g_Battle.active_battler) ||
-         ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) &&
-          ((LOHU(g_Battle.action_id) == ABILITY_ACCESSION) || (LOHU(g_Battle.action_id) == ABILITY_TEMPTATION))))) {
+         ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) && ((LOHU(g_Battle.action_id) == ABILITY_ACCESSION) || (LOHU(g_Battle.action_id) == ABILITY_TEMPTATION))))) {
         g_Task->header.mode += 1;
         return;
     }

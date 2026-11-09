@@ -3,11 +3,9 @@
 
 static Scene00Tables D_801FC980_Tables = {
     {
-        func_801F6E04, func_801F6E48, func_801F7264,           func_801F72A0, func_801F7350, func_801F7350,
-        func_801F73A8, func_801F7484, (Callback)func_801F74EC, func_801F7670, func_801F78CC, func_801F7A5C,
-        func_801F7B0C, func_801F7B80, func_801F7C34,           func_801F7CF0, func_801F7DC8, func_801F7EE0,
-        func_801F8014, func_801F8140, func_801F82B4,           func_801F878C, func_801F882C, func_801F8930,
-        func_801F89F0, func_801F8AB8,
+        func_801F6E04, func_801F6E48, func_801F7264, func_801F72A0, func_801F7350, func_801F7350, func_801F73A8, func_801F7484, (Callback)func_801F74EC,
+        func_801F7670, func_801F78CC, func_801F7A5C, func_801F7B0C, func_801F7B80, func_801F7C34, func_801F7CF0, func_801F7DC8, func_801F7EE0,
+        func_801F8014, func_801F8140, func_801F82B4, func_801F878C, func_801F882C, func_801F8930, func_801F89F0, func_801F8AB8,
     },
     0x0C,
     (s8)0xC8,
@@ -133,8 +131,7 @@ MATCH void func_801F6E48(void) {
     setClut(poly, 176, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
-    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
-           ((g_FrameCount >> 2) & 0x15) + poly->y2, 16, ((g_FrameCount >> 2) & 0x15) + poly->y2);
+    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0, ((g_FrameCount >> 2) & 0x15) + poly->y2, 16, ((g_FrameCount >> 2) & 0x15) + poly->y2);
 
     setRGB0(poly, 128, 128, 128);
 
@@ -886,8 +883,7 @@ MATCH void func_801F8BCC(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     half = SCN_EFFECT->channel_06 >> 1;
     SetPolyFT4(prim);
-    setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06,
-            SCN_EFFECT->channel_06);
+    setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06, SCN_EFFECT->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
     setRGB0(prim, SCN_EFFECT->color_r, SCN_EFFECT->color_g, SCN_EFFECT->color_b);
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
@@ -964,8 +960,7 @@ MATCH void func_801F8D90(void) {
     setClut(poly, 176, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
-    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
-           ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0), 16,
+    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0, ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0), 16,
            ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0));
 
     setRGB0(poly, 128, 128, 128);
@@ -1650,11 +1645,9 @@ MATCH void func_801FA7D8(void) {
                 g_ActorSlots[D_1F800000[0]].type         = 0x1Eu;
                 g_ActorSlots[D_1F800000[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
                 g_ActorSlots[D_1F800000[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
-                distance =
-                    Area_SampleHeight(g_ActorSlots[D_1F800000[0]].pos.x.fixed, g_ActorSlots[D_1F800000[0]].pos.y.fixed)
-                    << 16;
-                g_ActorSlots[D_1F800000[0]].pos.z.fixed = distance;
-                g_ActorSlots[D_1F800000[0]].unk_29      = 0;
+                distance                                 = Area_SampleHeight(g_ActorSlots[D_1F800000[0]].pos.x.fixed, g_ActorSlots[D_1F800000[0]].pos.y.fixed) << 16;
+                g_ActorSlots[D_1F800000[0]].pos.z.fixed  = distance;
+                g_ActorSlots[D_1F800000[0]].unk_29       = 0;
             }
             *counter             = 0x84u;
             g_SceneState.step_05 = 7u;

@@ -41,13 +41,9 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     item_id  = task->unk_0B;
     price    = Shop_GetSellPrice(category, item_id, discount);
     record   = Item_GetRecord(category, item_id);
-    UI_DrawWindow((task->pos.x + SHOP_DESC_SHADOW_OFFSET) & HALF_MASK,
-                  (task->pos.y + SHOP_DESC_SHADOW_OFFSET) & HALF_MASK, SHOP_DESC_PANEL_WIDTH, SHOP_DESC_PANEL_HEIGHT, 0,
-                  g_WindowStyle);
-    func_801AEA80((task->pos.x + SHOP_DESC_ICON_X) & HALF_MASK, (task->pos.y + SHOP_DESC_ICON_Y) & HALF_MASK,
-                  D_801E5E38[Item_GetIcon(category, item_id) & BYTE_MASK], 0);
-    UI_DrawText(task->pos.x + SHOP_DESC_NAME_X, task->pos.y + SHOP_DESC_NAME_Y, 0, func_801AF20C(record) & BYTE_MASK,
-                record);
+    UI_DrawWindow((task->pos.x + SHOP_DESC_SHADOW_OFFSET) & HALF_MASK, (task->pos.y + SHOP_DESC_SHADOW_OFFSET) & HALF_MASK, SHOP_DESC_PANEL_WIDTH, SHOP_DESC_PANEL_HEIGHT, 0, g_WindowStyle);
+    func_801AEA80((task->pos.x + SHOP_DESC_ICON_X) & HALF_MASK, (task->pos.y + SHOP_DESC_ICON_Y) & HALF_MASK, D_801E5E38[Item_GetIcon(category, item_id) & BYTE_MASK], 0);
+    UI_DrawText(task->pos.x + SHOP_DESC_NAME_X, task->pos.y + SHOP_DESC_NAME_Y, 0, func_801AF20C(record) & BYTE_MASK, record);
     buffer = (char*)g_UiFormatBuffer;
     TEXT_Format(buffer, D_801D0E88, price);
     UI_DrawGlyphString(task->pos.x + SHOP_DESC_PRICE_X, task->pos.y + SHOP_DESC_PRICE_Y, 0, buffer);
@@ -69,6 +65,5 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     UI_DrawSprite(task->pos.x, task->pos.y, MENU_FRAME_SPRITE_TOP_LEFT, 0);
     UI_DrawSprite(task->pos.x + SHOP_DESC_RIGHT_X, task->pos.y, MENU_FRAME_SPRITE_TOP_RIGHT, 0);
     UI_DrawSprite(task->pos.x, task->pos.y + SHOP_DESC_BOTTOM_Y, MENU_FRAME_SPRITE_FLAT_BOTTOM_LEFT, 0);
-    UI_DrawSprite(task->pos.x + SHOP_DESC_RIGHT_X, task->pos.y + SHOP_DESC_BOTTOM_Y,
-                  MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT, 0);
+    UI_DrawSprite(task->pos.x + SHOP_DESC_RIGHT_X, task->pos.y + SHOP_DESC_BOTTOM_Y, MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT, 0);
 }

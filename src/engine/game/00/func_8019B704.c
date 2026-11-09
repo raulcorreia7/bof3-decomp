@@ -44,8 +44,7 @@ NON_MATCHING void func_8019B704(void) {
     acc        = g_Task->vz + g_Task->gravity;
     g_Task->vz = acc;
     COORD_INT(g_Task->pos.z) += acc;
-    if ((g_AreaCameraMoving == 0) && (delta > TO_COORD(4)) && (g_AreaScrollTargetX == D_80145EC4) &&
-        (g_AreaScrollTargetY == D_80145EC8)) {
+    if ((g_AreaCameraMoving == 0) && (delta > TO_COORD(4)) && (g_AreaScrollTargetX == D_80145EC4) && (g_AreaScrollTargetY == D_80145EC8)) {
         if (g_Task->vx > 0) {
             g_AreaTargetCellX = (s16)(g_AreaTargetCellX + 5);
         } else if (g_Task->vx < 0) {

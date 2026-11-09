@@ -38,14 +38,12 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     }
     damage = Battle_RollBaseDamage(attacker, target, 0);
     if (BATTLER_IS_PLAYER(attacker) && !BATTLER_IS_PLAYER(target)) {
-        if ((g_Game.members[attacker].chr.equip.weapon == WEAPON_DEMONSBANE ||
-             g_Game.members[attacker].chr.equip.weapon == WEAPON_HOLY_AVENGER ||
+        if ((g_Game.members[attacker].chr.equip.weapon == WEAPON_DEMONSBANE || g_Game.members[attacker].chr.equip.weapon == WEAPON_HOLY_AVENGER ||
              g_Game.members[attacker].chr.equip.weapon == WEAPON_ARIES_SPEAR) &&
             ENEMY_COMBATANT(target).enemy_id.byte.family == ENEMY_FAMILY_DEMON) {
             damage *= 2;
         }
-        if ((g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGON_BLADE ||
-             g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGON_SPEAR ||
+        if ((g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGON_BLADE || g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGON_SPEAR ||
              g_Game.members[attacker].chr.equip.weapon == WEAPON_DRAGONFANG) &&
             ENEMY_COMBATANT(target).enemy_id.byte.family == ENEMY_FAMILY_DRAGON) {
             damage *= 2;

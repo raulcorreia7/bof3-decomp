@@ -81,17 +81,16 @@
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                    \
-    if ((g_Game.flags & 0x400) == 0) {                                                                               \
-        if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != \
-            0) {                                                                                                     \
-            g_Task->header.mode = 2;                                                                                 \
-            g_Task->header.step = new_step;                                                                          \
-            g_Task->unk_03      = 0;                                                                                 \
-            g_Task->unk_04      = 0;                                                                                 \
-            return 1;                                                                                                \
-        }                                                                                                            \
-    }                                                                                                                \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                         \
+    if ((g_Game.flags & 0x400) == 0) {                                                                                    \
+        if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
+            g_Task->header.mode = 2;                                                                                      \
+            g_Task->header.step = new_step;                                                                               \
+            g_Task->unk_03      = 0;                                                                                      \
+            g_Task->unk_04      = 0;                                                                                      \
+            return 1;                                                                                                     \
+        }                                                                                                                 \
+    }                                                                                                                     \
     return 0;
 
 /* Test the map cells around a 16.16 point for the wanted code. Kept: the two
@@ -274,141 +273,141 @@ typedef struct GameCursorState {
 ASSERT_OFFSET(GameCursorState, unk_04, 0x04);
 ASSERT_SIZE(GameCursorState, 0x0C);
 
-extern u16                D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
-extern u8                 D_1F800003;
-extern u16                D_1F800004; /* 0x1F800004 */
-extern u16                D_1F800006; /* 0x1F800006 */
-extern s16                D_1F800008; /* 0x1F800008 */
-extern u16                D_1F80000A; /* 0x1F80000A */
-extern s16                D_1F80000C; /* 0x1F80000C */
-extern u16                D_1F80000E; /* 0x1F80000E */
-extern s8                 D_800E4D40; /* 0x800E4D40 */
-extern s16                D_800E4D42; /* 0x800E4D42 */
-extern u8                 D_80143BB1;
-extern volatile u16       g_GameAreaId;
-extern volatile u8        D_80143F06; /* 0x80143F06 */
-extern volatile u32       D_80143F08; /* 0x80143F08 */
-extern volatile u32       D_80143F0C; /* 0x80143F0C */
-extern s16                D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
-extern s16                D_80143F1A; /* 0x80143F1A */
-extern volatile u8        g_GameRequestKind;
-extern s16                D_80143F26; /* integer half of g_EncounterOriginX */
-extern s16                D_80143F2A; /* integer half of g_EncounterOriginY */
+extern u16                       D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
+extern u8                        D_1F800003;
+extern u16                       D_1F800004; /* 0x1F800004 */
+extern u16                       D_1F800006; /* 0x1F800006 */
+extern s16                       D_1F800008; /* 0x1F800008 */
+extern u16                       D_1F80000A; /* 0x1F80000A */
+extern s16                       D_1F80000C; /* 0x1F80000C */
+extern u16                       D_1F80000E; /* 0x1F80000E */
+extern s8                        D_800E4D40; /* 0x800E4D40 */
+extern s16                       D_800E4D42; /* 0x800E4D42 */
+extern u8                        D_80143BB1;
+extern volatile u16              g_GameAreaId;
+extern volatile u8               D_80143F06; /* 0x80143F06 */
+extern volatile u32              D_80143F08; /* 0x80143F08 */
+extern volatile u32              D_80143F0C; /* 0x80143F0C */
+extern s16                       D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
+extern s16                       D_80143F1A; /* 0x80143F1A */
+extern volatile u8               g_GameRequestKind;
+extern s16                       D_80143F26; /* integer half of g_EncounterOriginX */
+extern s16                       D_80143F2A; /* integer half of g_EncounterOriginY */
 /* Scene step byte, countdown halfword and the slot index cached in the
  * scratchpad byte at 0x1F800000. The read-modify-write sites go through a
  * pointer, which is the shape this target's exact siblings use; plain stores
  * keep the scalar spelling.
  */
-extern u8                 D_80143F49;
-extern volatile u8        D_80143F4A;
-extern volatile u8        D_80143F4B; /* 0x80143F4B */
-extern s8                 D_80143F4E; /* 0x80143F4E */
-extern u8                 D_80143F51;
-extern s32                D_80143F5C;
-extern s32                D_80143F84;
-extern s16                g_ScrollHeight;
-extern u8                 D_80143FBC;
-extern u8                 D_80143FBD;
-extern u8                 D_80143FBF;
-extern u8                 D_80143FC1;
-extern u8                 D_80143FC3;
-extern s8                 D_801448E8; /* 0x801448E8 */
-extern s16                D_801448EE; /* 0x801448EE */
-extern s16                D_801448F0; /* 0x801448F0 */
-extern u8                 D_80144EE2;
-extern u8                 D_80144F5E[]; /* 0x80144F5E */
-extern u8                 D_80144FC4[]; /* 0x80144FC4; per-slot spawn-gate flag bytes */
-extern u8                 D_80145004[]; /* 0x80145004 */
-extern s32                D_8014503C;   /* 0x8014503C */
-extern s8                 D_8014504B;   /* 0x8014504B */
-extern u8                 g_FairyRooms;
-extern u8                 D_801457AB;
-extern u8                 D_80145E9B;
-extern u16                D_80145EBC; /* 0x80145EBC */
-extern u32                D_80145EDC; /* 0x80145EDC */
-extern u8                 D_80145F00; /* 0x80145F00 */
-extern u8                 D_80145FB4[];
-extern u16                D_80145FB8; /* 0x80145FB8 */
-extern u8                 D_80145FD1;
-extern u8                 D_80145FD6;
-extern u8                 D_80145FDB;
-extern u8                 D_80146111;
-extern u8                 D_80146119;
-extern u8                 D_8014611B;
-extern s32                D_8014611C;
-extern s32                D_80146120;
-extern s32                D_80146144;
-extern s32                D_80146148;
-extern volatile u8        D_80146256;
-extern u8                 D_80146260;
-extern u8                 D_80146261;
-extern u8                 D_80146262;
-extern s32                D_80146264; /* 0x80146264 */
-extern s16                D_80146266; /* 0x80146266 */
-extern s32                D_80146268; /* 0x80146268 */
-extern s16                D_8014626A; /* 0x8014626A */
-extern u8                 D_8014626C;
-extern u8                 D_8014626E;
-extern u8                 D_8014626F;
-extern u8                 D_80146270;
-extern u8                 D_80146855;
-extern u8                 D_80146856;
-extern u16                D_80146878;
-extern u8                 D_8014688F;
-extern u8                 D_80146893[]; /* 0x80146893 */
-extern GameSlotByteColumn D_801468B1[];
-extern GameSlotWordColumn D_801468B6[];
-extern GameSlotWordColumn D_801468B8[];
-extern u8                 D_801468BE[]; /* 0x801468BE */
-extern u8                 D_801468C2[]; /* 0x801468C2 */
-extern s32                D_801468C4;
+extern u8                        D_80143F49;
+extern volatile u8               D_80143F4A;
+extern volatile u8               D_80143F4B; /* 0x80143F4B */
+extern s8                        D_80143F4E; /* 0x80143F4E */
+extern u8                        D_80143F51;
+extern s32                       D_80143F5C;
+extern s32                       D_80143F84;
+extern s16                       g_ScrollHeight;
+extern u8                        D_80143FBC;
+extern u8                        D_80143FBD;
+extern u8                        D_80143FBF;
+extern u8                        D_80143FC1;
+extern u8                        D_80143FC3;
+extern s8                        D_801448E8; /* 0x801448E8 */
+extern s16                       D_801448EE; /* 0x801448EE */
+extern s16                       D_801448F0; /* 0x801448F0 */
+extern u8                        D_80144EE2;
+extern u8                        D_80144F5E[]; /* 0x80144F5E */
+extern u8                        D_80144FC4[]; /* 0x80144FC4; per-slot spawn-gate flag bytes */
+extern u8                        D_80145004[]; /* 0x80145004 */
+extern s32                       D_8014503C;   /* 0x8014503C */
+extern s8                        D_8014504B;   /* 0x8014504B */
+extern u8                        g_FairyRooms;
+extern u8                        D_801457AB;
+extern u8                        D_80145E9B;
+extern u16                       D_80145EBC; /* 0x80145EBC */
+extern u32                       D_80145EDC; /* 0x80145EDC */
+extern u8                        D_80145F00; /* 0x80145F00 */
+extern u8                        D_80145FB4[];
+extern u16                       D_80145FB8; /* 0x80145FB8 */
+extern u8                        D_80145FD1;
+extern u8                        D_80145FD6;
+extern u8                        D_80145FDB;
+extern u8                        D_80146111;
+extern u8                        D_80146119;
+extern u8                        D_8014611B;
+extern s32                       D_8014611C;
+extern s32                       D_80146120;
+extern s32                       D_80146144;
+extern s32                       D_80146148;
+extern volatile u8               D_80146256;
+extern u8                        D_80146260;
+extern u8                        D_80146261;
+extern u8                        D_80146262;
+extern s32                       D_80146264; /* 0x80146264 */
+extern s16                       D_80146266; /* 0x80146266 */
+extern s32                       D_80146268; /* 0x80146268 */
+extern s16                       D_8014626A; /* 0x8014626A */
+extern u8                        D_8014626C;
+extern u8                        D_8014626E;
+extern u8                        D_8014626F;
+extern u8                        D_80146270;
+extern u8                        D_80146855;
+extern u8                        D_80146856;
+extern u16                       D_80146878;
+extern u8                        D_8014688F;
+extern u8                        D_80146893[]; /* 0x80146893 */
+extern GameSlotByteColumn        D_801468B1[];
+extern GameSlotWordColumn        D_801468B6[];
+extern GameSlotWordColumn        D_801468B8[];
+extern u8                        D_801468BE[]; /* 0x801468BE */
+extern u8                        D_801468C2[]; /* 0x801468C2 */
+extern s32                       D_801468C4;
 /* FAKE: column views of g_Actors for the spawn functions (+0x77 unk_77, +0x78 unk_78, +0x8C ext, +0x94 unk_94).
  * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
-extern u8                 D_801468FF;
-extern u8                 D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
+extern u8                        D_801468FF;
+extern u8                        D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
 /* FAKE: column views of g_Actors for func_801A65A0 and func_801A68C0, the only forms that match them. */
-extern u16                D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
-extern s32                g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
-extern s32                g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
-extern s32                D_80146910[ENTITY_MAX][ACTOR_SIZE / 4];       /* Actor.unk_88 */
-extern u16                D_80146914;
-extern u16                D_80146918[][ACTOR_SIZE / 2];
-extern u8                 D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
-extern Actor              D_80147A58[];
-extern u8                 D_80147CB8[]; /* 0x80147CB8 */
-extern s8                 D_80147CB9[]; /* 0x80147CB9 */
-extern s8                 D_80147CBA[]; /* 0x80147CBA */
-extern u8                 D_80147CBB[]; /* 0x80147CBB */
-extern s32                D_80147CBC[];
-extern s32                D_80147CC0[];
-extern s32                D_80147CC4[];
-extern u16                D_801481D8;
-extern Point3DL           D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Point3DL           D_801481F8;   /* per-frame step of D_801481E8 */
-extern s16                D_8014820C;   /* 0x8014820C */
-extern s8                 D_80148654;   /* 0x80148654 */
-extern s8                 D_80148656;   /* 0x80148656 */
-extern s8                 D_801490E0;   /* 0x801490E0 */
-extern u8                 D_801581E0[]; /* 0x801581E0 */
-extern u8*                g_EncounterZones[];
-extern Point2DL           g_FacingOffsets[]; /* 0x80181AC0 */
-extern s8                 D_80181B00[];
-extern s8                 D_80181B01[];
-extern u8                 D_80181B1C[]; /* 0x80181B1C */
-extern u8                 D_80181B28[]; /* 0x80181B28 */
-extern s16                D_80181B70[]; /* 0x80181B70 */
-extern u32      D_80181CA8[60]; /* 0x80181CA8 - the 60-word table the exe defines at src/engine/slus/data_80181CA8.c */
-extern s32      D_80181CAC;
-extern u8       D_80181E40[];          /* 0x80181E40 */
-extern u8       D_80181E44[];          /* 0x80181E44 */
-extern u8       D_8018214C[];          /* 0x8018214C */
-extern u8       s_ScriptCopyBlock[16]; /* 0x8018216C */
+extern u16                       D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
+extern s32                       g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
+extern s32                       g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
+extern s32                       D_80146910[ENTITY_MAX][ACTOR_SIZE / 4];       /* Actor.unk_88 */
+extern u16                       D_80146914;
+extern u16                       D_80146918[][ACTOR_SIZE / 2];
+extern u8                        D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
+extern Actor                     D_80147A58[];
+extern u8                        D_80147CB8[]; /* 0x80147CB8 */
+extern s8                        D_80147CB9[]; /* 0x80147CB9 */
+extern s8                        D_80147CBA[]; /* 0x80147CBA */
+extern u8                        D_80147CBB[]; /* 0x80147CBB */
+extern s32                       D_80147CBC[];
+extern s32                       D_80147CC0[];
+extern s32                       D_80147CC4[];
+extern u16                       D_801481D8;
+extern Point3DL                  D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Point3DL                  D_801481F8;   /* per-frame step of D_801481E8 */
+extern s16                       D_8014820C;   /* 0x8014820C */
+extern s8                        D_80148654;   /* 0x80148654 */
+extern s8                        D_80148656;   /* 0x80148656 */
+extern s8                        D_801490E0;   /* 0x801490E0 */
+extern u8                        D_801581E0[]; /* 0x801581E0 */
+extern u8*                       g_EncounterZones[];
+extern Point2DL                  g_FacingOffsets[]; /* 0x80181AC0 */
+extern s8                        D_80181B00[];
+extern s8                        D_80181B01[];
+extern u8                        D_80181B1C[];   /* 0x80181B1C */
+extern u8                        D_80181B28[];   /* 0x80181B28 */
+extern s16                       D_80181B70[];   /* 0x80181B70 */
+extern u32                       D_80181CA8[60]; /* 0x80181CA8 - the 60-word table the exe defines at src/engine/slus/data_80181CA8.c */
+extern s32                       D_80181CAC;
+extern u8                        D_80181E40[];          /* 0x80181E40 */
+extern u8                        D_80181E44[];          /* 0x80181E44 */
+extern u8                        D_8018214C[];          /* 0x8018214C */
+extern u8                        s_ScriptCopyBlock[16]; /* 0x8018216C */
 /* D_8018217C */
-extern u8       g_AreaScriptTests; /* 0x8018217C */
-extern TailFunc D_801821C0[];
-extern u8       D_8018E268[];
-extern char     D_80195858[];                  /* 0x80195858 */
-extern char     D_80195860[];                  /* 0x80195860 */
+extern u8                        g_AreaScriptTests; /* 0x8018217C */
+extern TailFunc                  D_801821C0[];
+extern u8                        D_8018E268[];
+extern char                      D_80195858[]; /* 0x80195858 */
+extern char                      D_80195860[]; /* 0x80195860 */
 extern FieldSearchSpotStates     D_80195ED4;   /* 0x80195ED4 */
 extern char                      D_80195F0C[]; /* 0x80195F0C */
 extern FieldSearchSpotAltStates  D_80195F10;   /* 0x80195F10 */
@@ -882,7 +881,7 @@ void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend
 u8*     UI_GetSpriteRect(u8 sprite_id, u8 flags);
 void    UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool    func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
-void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
+void    func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 
 void  func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 void  func_801B00F8(void);

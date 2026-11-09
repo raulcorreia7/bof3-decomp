@@ -5,6 +5,5 @@ void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index);
 /* func_801E96CC */
 MATCH void Menu_StatsPanel(void) {
     g_MenuStartStatsStates[g_MenuCurrentPanel->state]();
-    Menu_DrawStatPanel(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y,
-                       g_CharSlot[g_PartyFieldOrder[g_MenuCurrentPanel->unk_0A]]);
+    Menu_DrawStatPanel(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_CharSlot[g_PartyFieldOrder[g_MenuCurrentPanel->unk_0A]]);
 }

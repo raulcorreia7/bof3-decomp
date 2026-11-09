@@ -27,8 +27,7 @@ NON_MATCHING void EMI_UploadVabBody(void) {
     }
 
     off    = D_80146488 << 11;
-    result = (s16)SsVabTransBodyPartly((u8*)(g_EmiRingBase + off), D_80146518[D_80146488],
-                                       *(s16*)(vab + 4 + D_80146482 * 0x14));
+    result = (s16)SsVabTransBodyPartly((u8*)(g_EmiRingBase + off), D_80146518[D_80146488], *(s16*)(vab + 4 + D_80146482 * 0x14));
     D_80146474 -= D_80146518[D_80146488];
     if (D_80146474 == 0) {
         if (result == *(s16*)(vab + 4 + D_80146482 * 0x14)) {

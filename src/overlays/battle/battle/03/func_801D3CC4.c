@@ -8,8 +8,7 @@ MATCH void func_801D3CC4(void) {
     u8 i;
 
     for (i = 0; (i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; i += 1) {
-        if (((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
-            (g_Game.members[i].header.mode != 6)) {
+        if (((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) && (g_Game.members[i].header.mode != 6)) {
             g_Game.members[i].header.mode = 6;
             g_Game.members[i].header.step = 0;
             g_Game.members[i].unk_03      = 0;
@@ -18,8 +17,7 @@ MATCH void func_801D3CC4(void) {
         }
     }
     for (i = 3; (i & BYTE_MASK) < COMBATANT_COUNT; i += 1) {
-        if (((ENEMY_COMBATANT(i).turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
-            (ENEMY_COMBATANT(i).header.mode != 6)) {
+        if (((ENEMY_COMBATANT(i).turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) && (ENEMY_COMBATANT(i).header.mode != 6)) {
             ENEMY_COMBATANT(i).header.mode = 6;
             ENEMY_COMBATANT(i).header.step = 0;
             ENEMY_COMBATANT(i).unk_03      = 0;
@@ -27,8 +25,7 @@ MATCH void func_801D3CC4(void) {
             Battle_SetSlotPending(i);
         }
     }
-    if (((func_800A99AC() & BYTE_MASK) == 0) && (D_801463C2 == 0) &&
-        ((g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) != 0)) {
+    if (((func_800A99AC() & BYTE_MASK) == 0) && (D_801463C2 == 0) && ((g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) != 0)) {
         g_Battle.phase.sub_step += 1;
     }
 }

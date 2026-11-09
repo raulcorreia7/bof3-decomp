@@ -39,8 +39,7 @@ MATCH void func_801D3C74(void) {
         anim                = FISHING_STATE;
         anim_count          = anim->step_index_0A;
         color_offset        = *(D_801E1E80 + (anim->row_4B * FISHING_PALETTE_ROW_STRIDE)) * FISHING_COLOR_ENTRY_SIZE;
-        func_801D9740(*(D_801E1F16 + color_offset), color_offset + D_801E1F14,
-                      (FISHING_PALETTE_WIDTH - (anim_count * FISHING_EXPAND_STEP_STRIDE)) & BYTE_MASK,
+        func_801D9740(*(D_801E1F16 + color_offset), color_offset + D_801E1F14, (FISHING_PALETTE_WIDTH - (anim_count * FISHING_EXPAND_STEP_STRIDE)) & BYTE_MASK,
                       0x125 - ((FISHING_EXPAND_STEP_COUNT - anim_count) * FISHING_EXPAND_STEP_STRIDE));
     } else {
         work->step_timer_09 = (work->step_timer_09 - 1);
@@ -49,8 +48,7 @@ MATCH void func_801D3C74(void) {
             timer->column_4A = (timer->column_4A + 1);
             queue            = FISHING_STATE;
             queue_pos        = queue->column_4A;
-            if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) ||
-                (g_FishingPromptSets[queue->cue_index_06][queue_pos] == GAME_NONE)) {
+            if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) || (g_FishingPromptSets[queue->cue_index_06][queue_pos] == GAME_NONE)) {
                 queue->column_4A = 0U;
             }
             if (D_80144125 != 7) {
@@ -71,8 +69,7 @@ MATCH void func_801D3C74(void) {
         color   = *(D_801E1E80 + (palette->row_4B * FISHING_PALETTE_ROW_STRIDE));
         if (color != GAME_NONE) {
             color_index = color * FISHING_COLOR_ENTRY_SIZE;
-            UI_DrawText((palette->origin_x_2E + (palette->counter_49 * FISHING_PALETTE_WIDTH)), (D_80144154 + 2),
-                        *(D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
+            UI_DrawText((palette->origin_x_2E + (palette->counter_49 * FISHING_PALETTE_WIDTH)), (D_80144154 + 2), *(D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
         }
     }
     draw = FISHING_STATE;

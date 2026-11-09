@@ -120,8 +120,7 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
         D_1F800014[1].vy = FIXED_MUL(rcos(i << 7), DARK_RING_OUTER);
         D_1F800014[3].vx = FIXED_MUL(rsin(i << 7), DARK_RING_INNER);
         D_1F800014[3].vy = FIXED_MUL(rcos(i << 7), DARK_RING_INNER);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
-                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, DARK_RING_SHADE, DARK_RING_SHADE, DARK_RING_SHADE);

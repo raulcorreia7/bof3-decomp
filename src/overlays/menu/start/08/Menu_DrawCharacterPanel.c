@@ -12,6 +12,5 @@ MATCH void Menu_DrawCharacterPanel(MenuPanelTask* task) {
         GetGraphType();
     }
     GFX_AddDrawMode(0xF);
-    Menu_DrawPanelIcon((task->pos.x + 9) & HALF_MASK, (task->pos.y + 5) & HALF_MASK, (task->unk_0A + 3) & BYTE_MASK,
-                       0x1E, (GetClut(16, STAGE_PALETTE_Y) & HALF_MASK), 128);
+    Menu_DrawPanelIcon((task->pos.x + 9) & HALF_MASK, (task->pos.y + 5) & HALF_MASK, (task->unk_0A + 3) & BYTE_MASK, 0x1E, (GetClut(16, STAGE_PALETTE_Y) & HALF_MASK), 128);
 }

@@ -17,8 +17,7 @@ MATCH s32 func_801CEA10(s32 arg0) {
     s32 i;
 
     for (i = 1; i < g_PartySize; i++) {
-        if (func_801BDD58(D_80143FFC[arg0 & 0xFF].pos_x, D_80143FFC[arg0 & 0xFF].pos_y,
-                          D_80143FFC[arg0 & 0xFF].z + 0x200, 1, (Actor*)&g_Game.members[i])) {
+        if (func_801BDD58(D_80143FFC[arg0 & 0xFF].pos_x, D_80143FFC[arg0 & 0xFF].pos_y, D_80143FFC[arg0 & 0xFF].z + 0x200, 1, (Actor*)&g_Game.members[i])) {
             return 1;
         }
     }

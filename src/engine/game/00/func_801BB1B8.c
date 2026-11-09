@@ -6,8 +6,7 @@ MATCH bool func_801BB1B8(void) {
 
     mode = SP_REF(u8, 0x8);
     if (mode == 0x10 || mode == 0x20) {
-        if ((SP_REF(u8, 0x9) == 0x10 || SP_REF(u8, 0x9) == 0x20) &&
-            (SP_REF(u8, 0xA) == 0x10 || SP_REF(u8, 0xA) == 0x20)) {
+        if ((SP_REF(u8, 0x9) == 0x10 || SP_REF(u8, 0x9) == 0x20) && (SP_REF(u8, 0xA) == 0x10 || SP_REF(u8, 0xA) == 0x20)) {
             return 1;
         }
         if (SP_REF(u8, 0x9) == 0x10 || SP_REF(u8, 0x9) == 0x20) {

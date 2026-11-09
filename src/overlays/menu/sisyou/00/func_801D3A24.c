@@ -81,9 +81,7 @@ NON_MATCHING void func_801D3A24(void) {
                     }
                     func_801D39CC(g_Game.members[g_MenuMasterCursor].character_index);
                     for (k = 0; k < 12; k++) {
-                        D_801490F8[k] =
-                            ((const u8*)(g_Abilities))[g_MenuMasterSkills[g_SceneEventSelection][i / 2].ability * 0x14 +
-                                                       k];
+                        D_801490F8[k] = ((const u8*)(g_Abilities))[g_MenuMasterSkills[g_SceneEventSelection][i / 2].ability * 0x14 + k];
                     }
                     done       = 1;
                     D_80149104 = 0;

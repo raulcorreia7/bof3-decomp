@@ -52,11 +52,8 @@ MATCH void func_801D10AC(u32 message_id) {
         } while (i < g_Game.party_size);
     }
 
-    Menu_DrawSelectionBox(MASTER_MENU_ROW_X,
-                          (g_MenuMasterCursor * MASTER_MENU_ROW_PITCH + MASTER_MENU_ROW_TOP) & 0xFFFE,
-                          MASTER_MENU_SELECT_WIDTH, MASTER_MENU_SELECT_HEIGHT, 0, 6);
-    Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, MASTER_MENU_FRAME_Y, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT,
-                       g_WindowStyle);
+    Menu_DrawSelectionBox(MASTER_MENU_ROW_X, (g_MenuMasterCursor * MASTER_MENU_ROW_PITCH + MASTER_MENU_ROW_TOP) & 0xFFFE, MASTER_MENU_SELECT_WIDTH, MASTER_MENU_SELECT_HEIGHT, 0, 6);
+    Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, MASTER_MENU_FRAME_Y, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT, g_WindowStyle);
     /* MESSAGE_TABLE_TEXT here changes the stock-row loop's register allocation. */
     i = (s32)&AREA_MESSAGE_TABLE->offsets[message_id & HALF_MASK];
     UI_DrawText(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, 255, (u8*)(MEM(u16, i) + (u32)AREA_MESSAGE_TABLE));

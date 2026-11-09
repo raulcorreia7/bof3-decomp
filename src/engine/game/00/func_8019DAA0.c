@@ -17,10 +17,8 @@ MATCH s32 func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count) {
     size[1] = spawn_offset;
     func_801AFFD8(spawn_record, size, size);
 
-    setXY4(primitive, (u16)screen.vx - ((s16)size[0] >> 1), (u16)screen.vy - ((s16)size[1] >> 1),
-           ((u16)screen.vx - ((s16)size[0] >> 1)) + size[0], (u16)screen.vy - ((s16)size[1] >> 1),
-           (u16)screen.vx - ((s16)size[0] >> 1), ((u16)screen.vy - ((s16)size[1] >> 1)) + size[1],
-           ((u16)screen.vx - ((s16)size[0] >> 1)) + size[0], ((u16)screen.vy - ((s16)size[1] >> 1)) + size[1]);
+    setXY4(primitive, (u16)screen.vx - ((s16)size[0] >> 1), (u16)screen.vy - ((s16)size[1] >> 1), ((u16)screen.vx - ((s16)size[0] >> 1)) + size[0], (u16)screen.vy - ((s16)size[1] >> 1),
+           (u16)screen.vx - ((s16)size[0] >> 1), ((u16)screen.vy - ((s16)size[1] >> 1)) + size[1], ((u16)screen.vx - ((s16)size[0] >> 1)) + size[0], ((u16)screen.vy - ((s16)size[1] >> 1)) + size[1]);
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     setClut(primitive, 160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(0, 1, 704, 256);

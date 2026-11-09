@@ -134,8 +134,7 @@ MATCH u8 func_801F04A4(void) {
     count = 0;
     i     = 0;
     do {
-        if (!(func_801DB524((i + 3) & BYTE_MASK) & BYTE_MASK) &&
-            g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
+        if (!(func_801DB524((i + 3) & BYTE_MASK) & BYTE_MASK) && g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
             count++;
         }
         i++;
