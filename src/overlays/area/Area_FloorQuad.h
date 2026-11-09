@@ -1,8 +1,4 @@
-/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as
- * direction_08 picks, and its corners lifted to the terrain by Area_SampleHeight. Each member passes the
- * sprite word for func_80155560; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a
- * static inline: the word is read after RotTransPers4, and an inline argument would load it first. Every
- * change here must verify every member. */
+/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as direction_08 picks, and its corners lifted to the terrain by Area_SampleHeight. Each member passes the sprite word for func_80155560; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a static inline: the word is read after RotTransPers4, and an inline argument would load it first. */
 extern SVECTOR D_1F800014[];
 
 #define AREA_DRAW_FLOOR_QUAD(sprite)                                                                    \

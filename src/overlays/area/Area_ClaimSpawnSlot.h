@@ -1,4 +1,4 @@
-/* Starts the first free spawn slot as a glow disc at the actor position. Every change here must verify every member. */
+/* Starts the first free spawn slot as a glow disc at the actor position. */
 /* func_801F526C (area098), func_801F3DE0 (area188), func_801F38E8 (area172) */
 MATCH void Area_ClaimSpawnSlot(void) {
     AreaSpawnSlot* slot;

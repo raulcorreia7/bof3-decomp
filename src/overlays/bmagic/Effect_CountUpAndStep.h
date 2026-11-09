@@ -1,6 +1,4 @@
-/* Counts the effect timer (work byte 0x09) up; at 0x10 it advances the effect
- * step (work byte 0x02). One definition shared by the bmagic effect modules;
- * every change here must verify every member. */
+/* Counts the effect timer (work byte 0x09) up; at 0x10 it advances the effect step (work byte 0x02). */
 /* Effect_CountUpAndStep (magic062, magic067, magic079, magic082, magic086, magic088, magic111, magic137, magic167,
    magic223, magic225), Effect_CountUpAndStep2 (magic079) */
 /* The statements of Effect_CountUpAndStep. */

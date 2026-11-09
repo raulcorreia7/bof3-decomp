@@ -1,9 +1,6 @@
 #ifndef ETC_FAMILY_H
 #define ETC_FAMILY_H
 
-/* Declarations shared by two or more etc images; an image header that
- * reads one includes this file. */
-
 #include "game.h"
 #include "sys/cd.h"
 #include "sys/exe.h"

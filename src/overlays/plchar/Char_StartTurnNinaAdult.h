@@ -1,5 +1,4 @@
-/* Starts the walk route of NinaAdult with its fixed turn facings. One definition shared by the plchar
- * character programs; every change here must verify every member image. */
+/* Starts the walk route of NinaAdult with its fixed turn facings. */
 MATCH void Char_StartTurnNinaAdult(void) {
     CHAR_START_TURN(FACING_RIGHT, FACING_DOWN);
 }

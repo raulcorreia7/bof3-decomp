@@ -1,7 +1,10 @@
 # Reproduce wiki facts
 
 The commands run from the repository root. `bof3` is the CLI that `tools/setup.sh` builds at
-`build/rust/release/bof3`, or the binary named by `BOF3_CLI`. `$DISC` is the extracted disc folder
+`build/rust/release/bof3`, or the binary named by `BOF3_CLI`. The `bof3 assets` commands need the
+full build, which `tools/setup.sh` does not make:
+`(cd tools/bof3-tools && cargo build --release -p rebof3 --features assets)`; run the binary at
+`tools/bof3-tools/target/release/bof3`. `rizin` is 0.9.1 ([matching tools](toolchain.md#matching-tools)). `$DISC` is the extracted disc folder
 (`build/disc`) and `$OUT` is a scratch folder. Each block reproduces the facts of one wiki page.
 The tools are in [bof3-tools](https://github.com/raulcorreia7/bof3-tools/blob/main/docs/cli.md).
 

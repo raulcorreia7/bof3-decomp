@@ -1,8 +1,6 @@
 #ifndef MENU_SHOP_H
 #define MENU_SHOP_H
 
-/* The shop row list shared by the shop and start-menu overlays. */
-
 #include "types.h"
 
 /* One shop row: 0x1C bytes. Byte 0x15 holds the source-list index the row was

@@ -1,5 +1,4 @@
-/* Clears the current battle magic trail slot. One definition shared by the bmagic overlays;
- * every change here must verify every member. */
+/* Clears the current battle magic trail slot. */
 /* func_801F0390 (magic044), func_801F03A0 (magic173) */
 MATCH void Effect_ClearTrail(void) {
     s32 i;

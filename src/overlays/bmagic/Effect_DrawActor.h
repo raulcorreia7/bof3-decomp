@@ -1,7 +1,4 @@
-/* Draws the effect's actor while the effect is flagged; the step handler for
- * header.mode runs first. Shared by the bmagic overlays that hold the table at
- * D_801EEC04; every change here must verify every member.
- */
+/* Draws the effect's actor while the effect is flagged; the step handler for header.mode runs first. */
 /* Effect_DrawActor (magic055, magic091) */
 void func_801EF7B0(void);
 void Effect_SetActorMatrix(void);

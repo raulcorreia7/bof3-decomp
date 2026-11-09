@@ -713,7 +713,7 @@ extern volatile Weapon g_Weapons[];
 | A typed value, or one used outside C (asm, linker)       | `#define`                                                                                                                                                                                 |
 | A per-image value                                        | `#define` in the image header                                                                                                                                                             |
 
-A member keeps its width (`u8 mode; /* BattleMode */`, `u16 flags; /* BattlerFlags */`): an `enum`
+No struct member has an enum type: an enum-typed member is 4 bytes. A member keeps its width (`u8 mode; /* BattleMode */`, `u16 flags; /* BattlerFlags */`): an `enum`
 is an `int` to the retail compiler and would move the layout ([compiler](#compiler)). An enum constant is an `int` constant, so
 `flags & BATTLER_DAMAGED` compiles as `(1 << 6)` does. A `(1 << n)` value that is only compared,
 never combined, is a state and belongs in its closed-set `enum`.
@@ -772,6 +772,13 @@ addresses. The access decides: find the reader in the retail assembly before cho
 | character or text code                                    | the game's text encoding (`include/game/text.h`), never a bare byte                        | `STRING_END`                  |
 | function or data address                                  | the symbol, never a number                                                                 | `func_80196FFC`, `&g_Party`   |
 | unused fill or padding                                    | a `pad` or `unk` member, value as stored                                                   | `0xCC`                        |
+
+Fixed point: the 16.16 `Coord` union (`include/common/fixed.h`) is used where code reads or writes
+one half, or uses a half together with the whole value (`COORD_INT`, `COORD_FRAC`). Elsewhere the
+value is the whole `s32` word, read with `FIX_INT(x)` (integer part) and `FIX_FRAC(x)` (low 16 bits). A 4.12 value is a plain integer, written with `ONE` and
+`FIXED_MUL` (`include/sys/math.h`).
+
+A constant compared against an unsigned retail operand keeps its `U` suffix in the `#define`.
 
 Width masks, shifts and arithmetic stay literal. A value that reads both ways takes the form of its
 main reader and a comment for the other. A set a `switch` walks becomes an `enum`.
@@ -1284,6 +1291,9 @@ The path tells the build which image a source belongs to; the build needs no sou
 ### Files
 
 - One function per file until matching is done. The file is named for the function.
+- A `.c` file is a matching unit, not a claimed original source file. Files merge into one claimed
+  original unit only with evidence (rodata order, an SDK member object, a jump table), cited once
+  where the merge is made.
 - No data or header fold: data and headers are not merged into function files.
 - A translation-unit merge happens only where a match needs it. A merge that changes bytes means the
   boundary is wrong: split there.
@@ -1488,10 +1498,13 @@ differs. Find candidates with `bin/coddog cluster <target>` ([coddog](toolchain.
 | Several images, a value differs per image                                              | Each member keeps its own `MATCH` function that calls one shared `static inline` helper, or a statement macro where the inline does not match, with the value as an argument: `MATCH void Area_DrawScreenTint(void) { Screen_DrawTintLayer(5, getTPage(0, 2, 960, 0)); }`. The helper takes the fewest arguments needed and never the function name. A per-image `#define` before the include stays only where the difference is a type, with a one-line reason. |
 | Several images, one image holds two members                                            | The statement macro for every member of the group, so the body has one source.                                                                                                                                                                                                                                                                                                                                                                                   |
 | Several groups, one member each                                                        | One function in the subsystem directory that owns it (`src/shared/Menu_SlidePanelLeft.h`, `src/shared/Actor_FreePaletteFades.h`), not in one user's group. Each member includes it by that path where the function sits (`#include "shared/Menu_SlidePanelLeft.h"`), and the header's first comment lists every member.                                                                                                                                          |
+| Several bmagic overlays, same body                                                     | One header `src/overlays/bmagic/<Name>.h`; each overlay's `BMagic_Effect.c` includes it at the body's position.                                                                                                                                                                                                                                                                                                                                                  |
 | A helper inside otherwise different functions                                          | A `static inline` function in the group header.                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 A shared body follows these rules:
 
+- Bodies that differ in a value use a statement macro by default; a `static inline` helper only
+  where it gives the same bytes.
 - One body lives in `Name.h` at the lowest folder that holds every includer ([tree](#tree)), named
   for the function. Each image keeps a thin `Name.c` that includes the image header, then the body.
 - A group is a candidate when its members have equal bytes (exact, or equal after relocations).

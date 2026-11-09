@@ -1,6 +1,4 @@
-/* Moves the sprite along twice its normal, widens it by 0x80 and counts its life down; at zero it restarts the count
- * at 0x40 and advances the sprite's stage. A statement macro shared by the area overlays; every change here must
- * verify every member. */
+/* Moves the sprite along twice its normal, widens it by 0x80 and counts its life down; at zero it restarts the count at 0x40 and advances the sprite's stage. */
 /* AREA_SPRITE_EXPAND_STEP (area024 0x801F31B4, area108 0x801F30FC) */
 #define AREA_SPRITE_EXPAND_STEP(SPRITE)                                           \
     AreaSprite* work;                                                             \

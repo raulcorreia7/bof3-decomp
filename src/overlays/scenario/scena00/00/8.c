@@ -683,8 +683,6 @@ MATCH void func_801F8360(void) {
     } while (i < 24);
 }
 
-/* Projection helpers shared by the scenario and world00 overlays. */
-
 /* The current scenario work object. The cell is a volatile pointer so every
  * read of it stays its own load, as in the shipped image. */
 

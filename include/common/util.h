@@ -3,8 +3,7 @@
 
 #include "types.h"
 
-/* Small arithmetic, bit and in-place byte-view helpers shared by the game
- * sources. LO/HI read the little-endian halves of an object without copying. */
+/* LO/HI read the little-endian halves of an object without copying. */
 
 /* The byte value that means no slot, index or result in a byte field. It is
  * compared, never used as a mask. */

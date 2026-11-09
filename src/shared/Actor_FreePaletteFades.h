@@ -1,7 +1,4 @@
-/* Frees the two palette fade targets of the actor slot and resets the area
- * work. The statements of Actor_FreePaletteFades; every change here must
- * verify every member. Members: Actor_FreePaletteFades (scena03, area032,
- * area085) and Actor_FreePaletteFades2 (scena03). */
+/* Frees the two palette fade targets of the actor slot and resets the area work. Members: Actor_FreePaletteFades (scena03, area032, area085) and Actor_FreePaletteFades2 (scena03). */
 #define ACTOR_FREE_PALETTE_FADES()                        \
     GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_03]); \
     GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_04]); \
