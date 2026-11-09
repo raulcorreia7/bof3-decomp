@@ -22,34 +22,28 @@ u8 s_PaletteSlotDivisors[8] = {0x10, 0x01, 0x08, 0x04, 0x02, 0x00, 0x00, 0x00};
 
 u8 s_PaletteSlotStrides[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0xCC, 0xCC, 0xCC};
 
-Callback g_GameCampMenuLoad[3] = {(Callback)Game_LoadCampMenu, (Callback)func_801E3E88, (Callback)func_801E1680};
+Callback g_GameCampMenuLoad[3] = {Game_LoadCampMenu, func_801E3E88, func_801E1680};
 
-Callback g_GameStates[12] = {
-    (Callback)Game_NewGame,      (Callback)Game_UpdateAreaLoad,   (Callback)Game_UpdateField,
-    (Callback)Game_UpdateMenu,        (Callback)func_801979D4,           (Callback)Game_UpdateBattle,
-    (Callback)Game_UpdateCameraLook,  (Callback)Game_UpdateShop,       (Callback)Game_UpdateFishing,
-    (Callback)Game_UpdateAbilityMenu, (Callback)Game_UpdateStatusMenu, (Callback)Game_UpdateSceneCamera};
+Callback g_GameStates[12] = {Game_NewGame,          Game_UpdateAreaLoad, Game_UpdateField,   Game_UpdateMenu,        func_801979D4,         Game_UpdateBattle,
+                             Game_UpdateCameraLook, Game_UpdateShop,     Game_UpdateFishing, Game_UpdateAbilityMenu, Game_UpdateStatusMenu, Game_UpdateSceneCamera};
 
-Callback g_GameMenuSubstates[3] = {(Callback)Game_LoadMenuOverlay, (Callback)Game_UpdateMenuFrame, (Callback)Game_ReturnFromMenu};
+Callback g_GameMenuSubstates[3] = {Game_LoadMenuOverlay, Game_UpdateMenuFrame, Game_ReturnFromMenu};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameBattleSubstates[8] = {(Callback)func_80197A60, (Callback)Battle_LoadPartySprites, (Callback)func_80197C1C,
-                                  (Callback)Battle_LoadBattleArchive, (Callback)func_80197E54, (Callback)func_801D1014,
-                                  (Callback)func_80197EFC, (Callback)func_80197F48};
+Callback g_GameBattleSubstates[8] = {func_80197A60, Battle_LoadPartySprites, func_80197C1C, Battle_LoadBattleArchive, func_80197E54, func_801D1014, func_80197EFC, func_80197F48};
 
 Offset2DB s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
-Callback g_GameShopSubstates[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)Game_ReturnFromShop};
+Callback g_GameShopSubstates[3] = {Game_LoadShopOverlay, func_80199398, Game_ReturnFromShop};
 
-Callback g_GameFishingSubstates[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
-                                      (Callback)func_801E0C20};
+Callback g_GameFishingSubstates[4] = {func_801984E8, func_801E0BD0, func_801985C8, func_801E0C20};
 
-Callback g_MenuAbilityOpen[3] = {(Callback)Game_LoadAbilityMenu, (Callback)Game_UpdateAbilityMenuFrame, (Callback)Game_ReturnFromAbilityMenu};
+Callback g_MenuAbilityOpen[3] = {Game_LoadAbilityMenu, Game_UpdateAbilityMenuFrame, Game_ReturnFromAbilityMenu};
 
-Callback g_MenuStatusOpen[3] = {(Callback)Game_LoadStatusMenu, (Callback)Game_UpdateStatusMenuFrame, (Callback)Game_ReturnFromStatusMenu};
+Callback g_MenuStatusOpen[3] = {Game_LoadStatusMenu, Game_UpdateStatusMenuFrame, Game_ReturnFromStatusMenu};
 
-Callback g_GameSceneCameraSubstates[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
+Callback g_GameSceneCameraSubstates[3] = {func_80198B00, func_80198B44, func_80198B6C};
 
 u8 s_MenuLine1Run[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
@@ -59,17 +53,15 @@ u8 s_MenuLine1FlagRun[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x2D, 0x02, 0x00, 0x0
 
 u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2E, 0x00, 0x00, 0xFF};
 
-Callback g_MenuPanelModes[5] = {(Callback)func_801995A4, (Callback)Menu_DrawPanelCursor, (Callback)func_801996A8,
-                                   (Callback)func_8019977C, (Callback)func_8019986C};
+Callback g_MenuPanelModes[5] = {func_801995A4, Menu_DrawPanelCursor, func_801996A8, func_8019977C, func_8019986C};
 
-Callback g_MenuPanelStates[3] = {(Callback)func_8019959C, (Callback)func_801995F8, (Callback)func_80199638};
+Callback g_MenuPanelStates[3] = {func_8019959C, func_801995F8, func_80199638};
 
-Callback g_MenuOptionStates[3] = {(Callback)func_8019959C, (Callback)func_801996FC, (Callback)Menu_SlidePanelLeft};
+Callback g_MenuOptionStates[3] = {func_8019959C, func_801996FC, Menu_SlidePanelLeft};
 
-Callback g_MenuActionStates[3] = {(Callback)func_8019959C, (Callback)func_801997EC, (Callback)func_8019982C};
+Callback g_MenuActionStates[3] = {func_8019959C, func_801997EC, func_8019982C};
 
-Callback g_MenuTaskStates[4] = {(Callback)func_8019959C, (Callback)func_80199938, (Callback)func_80199978,
-                                  (Callback)func_801999B8};
+Callback g_MenuTaskStates[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
 
 char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
                          "OPTION" T_END T_END, "VITAL" T_END T_END T_END};
@@ -77,87 +69,223 @@ char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "
 u8* D_801C7C5C[5] = {(u8*)&D_801C7C34[0][0], (u8*)&D_801C7C34[1][0], (u8*)&D_801C7C34[2][0], (u8*)&D_801C7C34[3][0],
                      (u8*)&D_801C7C34[4][0]};
 
-Callback g_ActorTypes[187] = {
-    (Callback)func_8019A210, (Callback)func_801F6DC0, (Callback)func_801D0C98,        (Callback)func_801D1B10,
-    (Callback)func_8019AB5C, (Callback)func_801D20C8, (Callback)func_8019A3B8,        (Callback)func_801F70F0,
-    (Callback)func_801F7440, (Callback)func_801F7A18, (Callback)func_801D2978,        (Callback)func_801F8748,
-    (Callback)func_801D2BF0, (Callback)func_801D3358, (Callback)func_8019A258,        (Callback)func_801D35CC,
-    (Callback)func_801F8D70, (Callback)func_801F71C0, (Callback)func_801F729C,        (Callback)func_8019A8B4,
-    (Callback)func_801F6E70, (Callback)func_801F2C18, (Callback)func_8019A2A0,        (Callback)func_8019B364,
-    (Callback)func_8019F98C, (Callback)func_8019A804, (Callback)func_801D42A0,        (Callback)func_8019C620,
-    (Callback)func_801F73B8, (Callback)func_801F6F38, (Callback)func_801F2C14,        (Callback)func_801F2C18,
-    (Callback)func_801F2C04, (Callback)func_801F7A9C, (Callback)func_801F7DF0,        (Callback)func_801F82E4,
-    (Callback)func_801F844C, (Callback)func_801F85FC, (Callback)func_801F73F8,        (Callback)func_801F74EC,
-    (Callback)func_801F2C40, (Callback)func_801F6D00, (Callback)func_801F2C04,        (Callback)func_801F3304,
-    (Callback)func_801F77A8, (Callback)func_801F2C04, (Callback)func_801F7A84,        (Callback)func_801F2C30,
-    (Callback)func_8019CB94, (Callback)func_8019AC34, (Callback)func_8019ADA4,        (Callback)func_801F2C04,
-    (Callback)func_8019DDCC, (Callback)func_801F2C44, (Callback)func_801F73BC,        (Callback)func_8019B10C,
-    (Callback)func_801F31E4, (Callback)func_801F352C, (Callback)func_8019EAF4,        (Callback)func_801F2C04,
-    (Callback)func_801F7508, (Callback)func_801F2C04, (Callback)func_801F2C90,        (Callback)func_801F2E88,
-    (Callback)func_801F2C04, (Callback)func_8019F2CC, (Callback)func_801F389C,        (Callback)func_801F2C18,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F309C,
-    (Callback)func_801F2CC4, (Callback)func_801F6DCC, (Callback)func_801F3C74,        (Callback)func_801F3E04,
-    (Callback)func_801F4034, (Callback)func_801F36D4, (Callback)func_801F2C04,        (Callback)func_801F30A8,
-    (Callback)func_801F6F48, (Callback)func_801F707C, (Callback)func_801F7928,        (Callback)func_801F2C8C,
-    (Callback)func_801F3244, (Callback)func_801F3A64, (Callback)func_801F3064,        (Callback)func_801F95D4,
-    (Callback)func_8019A2E8, (Callback)func_801F2C30, (Callback)func_801F2C7C,        (Callback)func_801F2CA0,
-    (Callback)func_8019A330, (Callback)func_801F6F68, (Callback)func_801F7518,        (Callback)func_801F986C,
-    (Callback)func_801F9DBC, (Callback)func_801F2C04, (Callback)func_801F34FC,        (Callback)func_801F36A4,
-    (Callback)func_801F37D0, (Callback)func_801F2C04, (Callback)func_801F344C,        (Callback)func_801F2C04,
-    (Callback)func_801F3E20, (Callback)func_801D0C10, (Callback)func_801F60C0,        (Callback)func_801F2DE4,
-    (Callback)func_80117004, (Callback)func_801F735C, (Callback)func_80117610,        (Callback)func_801F2C04,
-    (Callback)func_8019F840, (Callback)func_801F46A0, (Callback)func_801F2C1C,        (Callback)func_801F2DB0,
-    (Callback)func_801F307C, (Callback)func_801F6EA4, (Callback)func_801F2C3C,        (Callback)func_801F7174,
-    (Callback)func_801F31E8, (Callback)func_801F2D18, (Callback)func_801F2E10,        (Callback)func_801F2EEC,
-    (Callback)func_801F30C8, (Callback)func_801F2CF8, (Callback)func_801F427C,        (Callback)func_801F2C64,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F3560,
-    (Callback)func_801F3E0C, (Callback)func_801F7198, (Callback)func_801F75F8,        (Callback)func_801F2C04,
-    (Callback)func_801F2C04, (Callback)func_801F77F8, (Callback)Fishing_ShowLocation, (Callback)func_801F2C04,
-    (Callback)func_801F2DA4, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F2C04,
-    (Callback)func_801F41D0, (Callback)func_801F2C80, (Callback)func_8019B284,        (Callback)func_801F4344,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2E20,        (Callback)func_801F2FF0,
-    (Callback)func_801F33AC, (Callback)func_801F455C, (Callback)func_801F2C04,        (Callback)func_801F3070,
-    (Callback)func_801D0C04, (Callback)func_801F7AA8, (Callback)func_801F8A5C,        (Callback)func_801F8488,
-    (Callback)func_801D0C04, (Callback)func_801D2170, (Callback)func_801D2B64,        (Callback)func_801D2DEC,
-    (Callback)func_801F87B4, (Callback)func_801F4D80, (Callback)func_801F3A24,        (Callback)func_801D0C04,
-    (Callback)func_801D0DA4, (Callback)func_801D0EF8, (Callback)func_801D10A4,        (Callback)func_801D0C04,
-    (Callback)func_801D0D38, (Callback)func_801D0EAC, (Callback)func_801D1068,        (Callback)func_801D13DC,
-    (Callback)func_801D1588, (Callback)func_801F70B4, (Callback)func_801F3E14,        (Callback)func_801F3F04,
-    (Callback)func_801F2D90, (Callback)func_801F2D18, (Callback)func_801F2FD0,        (Callback)func_801F3C98,
-    (Callback)func_801F2EA0, (Callback)func_801F32C0, (Callback)func_801F7BA8};
+Callback g_ActorTypes[187] = {func_8019A210,
+                              func_801F6DC0,
+                              func_801D0C98,
+                              func_801D1B10,
+                              func_8019AB5C,
+                              func_801D20C8,
+                              func_8019A3B8,
+                              func_801F70F0,
+                              func_801F7440,
+                              func_801F7A18,
+                              func_801D2978,
+                              func_801F8748,
+                              func_801D2BF0,
+                              func_801D3358,
+                              func_8019A258,
+                              func_801D35CC,
+                              func_801F8D70,
+                              func_801F71C0,
+                              func_801F729C,
+                              func_8019A8B4,
+                              func_801F6E70,
+                              func_801F2C18,
+                              func_8019A2A0,
+                              func_8019B364,
+                              func_8019F98C,
+                              func_8019A804,
+                              func_801D42A0,
+                              func_8019C620,
+                              func_801F73B8,
+                              func_801F6F38,
+                              func_801F2C14,
+                              func_801F2C18,
+                              (Callback)func_801F2C04,
+                              func_801F7A9C,
+                              func_801F7DF0,
+                              func_801F82E4,
+                              func_801F844C,
+                              func_801F85FC,
+                              func_801F73F8,
+                              func_801F74EC,
+                              func_801F2C40,
+                              func_801F6D00,
+                              (Callback)func_801F2C04,
+                              func_801F3304,
+                              func_801F77A8,
+                              (Callback)func_801F2C04,
+                              func_801F7A84,
+                              func_801F2C30,
+                              func_8019CB94,
+                              func_8019AC34,
+                              func_8019ADA4,
+                              (Callback)func_801F2C04,
+                              func_8019DDCC,
+                              func_801F2C44,
+                              func_801F73BC,
+                              func_8019B10C,
+                              func_801F31E4,
+                              func_801F352C,
+                              func_8019EAF4,
+                              (Callback)func_801F2C04,
+                              func_801F7508,
+                              (Callback)func_801F2C04,
+                              func_801F2C90,
+                              func_801F2E88,
+                              (Callback)func_801F2C04,
+                              func_8019F2CC,
+                              func_801F389C,
+                              func_801F2C18,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F309C,
+                              func_801F2CC4,
+                              func_801F6DCC,
+                              func_801F3C74,
+                              func_801F3E04,
+                              func_801F4034,
+                              func_801F36D4,
+                              (Callback)func_801F2C04,
+                              func_801F30A8,
+                              func_801F6F48,
+                              func_801F707C,
+                              func_801F7928,
+                              func_801F2C8C,
+                              func_801F3244,
+                              func_801F3A64,
+                              func_801F3064,
+                              func_801F95D4,
+                              func_8019A2E8,
+                              func_801F2C30,
+                              func_801F2C7C,
+                              func_801F2CA0,
+                              func_8019A330,
+                              func_801F6F68,
+                              func_801F7518,
+                              func_801F986C,
+                              func_801F9DBC,
+                              (Callback)func_801F2C04,
+                              func_801F34FC,
+                              func_801F36A4,
+                              func_801F37D0,
+                              (Callback)func_801F2C04,
+                              func_801F344C,
+                              (Callback)func_801F2C04,
+                              func_801F3E20,
+                              func_801D0C10,
+                              func_801F60C0,
+                              func_801F2DE4,
+                              func_80117004,
+                              func_801F735C,
+                              func_80117610,
+                              (Callback)func_801F2C04,
+                              func_8019F840,
+                              func_801F46A0,
+                              func_801F2C1C,
+                              func_801F2DB0,
+                              func_801F307C,
+                              func_801F6EA4,
+                              func_801F2C3C,
+                              func_801F7174,
+                              func_801F31E8,
+                              func_801F2D18,
+                              func_801F2E10,
+                              func_801F2EEC,
+                              func_801F30C8,
+                              func_801F2CF8,
+                              func_801F427C,
+                              (Callback)func_801F2C64,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F3560,
+                              func_801F3E0C,
+                              func_801F7198,
+                              func_801F75F8,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F77F8,
+                              Fishing_ShowLocation,
+                              (Callback)func_801F2C04,
+                              func_801F2DA4,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F41D0,
+                              func_801F2C80,
+                              func_8019B284,
+                              func_801F4344,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F2E20,
+                              func_801F2FF0,
+                              func_801F33AC,
+                              func_801F455C,
+                              (Callback)func_801F2C04,
+                              func_801F3070,
+                              func_801D0C04,
+                              func_801F7AA8,
+                              func_801F8A5C,
+                              func_801F8488,
+                              func_801D0C04,
+                              func_801D2170,
+                              func_801D2B64,
+                              func_801D2DEC,
+                              func_801F87B4,
+                              func_801F4D80,
+                              func_801F3A24,
+                              func_801D0C04,
+                              func_801D0DA4,
+                              func_801D0EF8,
+                              func_801D10A4,
+                              func_801D0C04,
+                              func_801D0D38,
+                              func_801D0EAC,
+                              func_801D1068,
+                              func_801D13DC,
+                              func_801D1588,
+                              func_801F70B4,
+                              func_801F3E14,
+                              func_801F3F04,
+                              func_801F2D90,
+                              func_801F2D18,
+                              func_801F2FD0,
+                              func_801F3C98,
+                              func_801F2EA0,
+                              func_801F32C0,
+                              func_801F7BA8};
 
 AreaHandler D_801C7F5C[11] = {
-    {(Callback)func_801F2EEC, (Callback)func_801F45CC, (Callback)func_801F4178, (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2E20, (Callback)func_801F4500, (Callback)func_801F40AC, (Callback)func_801F3350, (Callback)func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, {0, 0, 0}},
-    {(Callback)func_801F2EEC, (Callback)func_801F45CC, (Callback)func_801F4178, (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2F24, (Callback)func_801F4604, (Callback)func_801F41B0, (Callback)func_801F3454, (Callback)func_801F47A0, &D_801F4DE0, AREA_ID_MOMO_TOWER_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2F20, (Callback)func_801F45FC, (Callback)func_801F41A8, (Callback)func_801F3450, (Callback)func_801F4798, &D_801F4DD4, AREA_ID_RHAPALA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F3A50, (Callback)func_801F512C, (Callback)func_801F4CD8, (Callback)func_801F3F80, (Callback)func_801F52C8, &D_801F591C, AREA_ID_URKAN_TAPA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2FB0, (Callback)0, (Callback)0, (Callback)func_801F34E0, (Callback)func_801F4238, (s32)0x00000000u, 104, {0, 0, 0}},
-    {(Callback)func_801F2EF0, (Callback)func_801F45CC, (Callback)func_801F4178, (Callback)func_801F3420, (Callback)func_801F4768, &D_801F4D90, AREA_ID_DAUNA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2F04, (Callback)func_801F45E0, (Callback)func_801F418C, (Callback)func_801F3434, (Callback)func_801F477C, &D_801F64E8, AREA_ID_STEEL_BEACH_MAP, {0, 0, 0}},
-    {(Callback)func_801F2E5C, (Callback)func_801F4538, (Callback)func_801F40E4, (Callback)func_801F338C, (Callback)func_801F46D4, &D_801F4D04, AREA_ID_KOMBINAT_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2DB0, (Callback)func_801F448C, (Callback)func_801F4038, (Callback)func_801F32E0, (Callback)func_801F4628, &D_801F4C48, AREA_ID_DRAGNIER_WORLD_MAP, {0, 0, 0}},
+    {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP, {0, 0, 0}},
+    {func_801F2E20, func_801F4500, func_801F40AC, func_801F3350, func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, {0, 0, 0}},
+    {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP, {0, 0, 0}},
+    {func_801F2F24, func_801F4604, func_801F41B0, func_801F3454, func_801F47A0, &D_801F4DE0, AREA_ID_MOMO_TOWER_WORLD_MAP, {0, 0, 0}},
+    {func_801F2F20, func_801F45FC, func_801F41A8, func_801F3450, func_801F4798, &D_801F4DD4, AREA_ID_RHAPALA_WORLD_MAP, {0, 0, 0}},
+    {func_801F3A50, func_801F512C, func_801F4CD8, func_801F3F80, func_801F52C8, &D_801F591C, AREA_ID_URKAN_TAPA_WORLD_MAP, {0, 0, 0}},
+    {func_801F2FB0, (Callback)0, (Callback)0, func_801F34E0, func_801F4238, (s32)0x00000000u, 104, {0, 0, 0}},
+    {func_801F2EF0, func_801F45CC, func_801F4178, func_801F3420, func_801F4768, &D_801F4D90, AREA_ID_DAUNA_WORLD_MAP, {0, 0, 0}},
+    {func_801F2F04, func_801F45E0, func_801F418C, func_801F3434, func_801F477C, &D_801F64E8, AREA_ID_STEEL_BEACH_MAP, {0, 0, 0}},
+    {func_801F2E5C, func_801F4538, func_801F40E4, func_801F338C, func_801F46D4, &D_801F4D04, AREA_ID_KOMBINAT_WORLD_MAP, {0, 0, 0}},
+    {func_801F2DB0, func_801F448C, func_801F4038, func_801F32E0, func_801F4628, &D_801F4C48, AREA_ID_DRAGNIER_WORLD_MAP, {0, 0, 0}},
 };
 
-Callback D_801C8090[3] = {(Callback)func_8019A3FC, (Callback)func_8019A53C, (Callback)func_8019A7D4};
+Callback D_801C8090[3] = {func_8019A3FC, func_8019A53C, func_8019A7D4};
 
 u8 s_SceneHandlerIds[8] = {0x00, 0x00, 0x02, 0x01, 0x03, 0x04, 0x00, 0x00};
 
-Callback D_801C80A4[6] = {(Callback)func_8019A580, (Callback)func_8019A580, (Callback)func_8019A580,
-                          (Callback)func_8019A6AC, (Callback)func_8019A580, (Callback)func_8019A630};
+Callback D_801C80A4[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80BC[3] = {(Callback)func_8019A3FC, (Callback)func_8019A848, (Callback)func_8019A7D4};
+Callback D_801C80BC[3] = {func_8019A3FC, func_8019A848, func_8019A7D4};
 
-Callback D_801C80C8[6] = {(Callback)func_8019A580, (Callback)func_8019A580, (Callback)func_8019A580,
-                          (Callback)func_8019A6AC, (Callback)func_8019A580, (Callback)func_8019A630};
+Callback D_801C80C8[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80E0[3] = {(Callback)func_8019A904, (Callback)func_8019AA44, (Callback)func_8019AAFC};
+Callback D_801C80E0[3] = {func_8019A904, func_8019AA44, func_8019AAFC};
 
-Callback D_801C80EC[3] = {(Callback)func_8019AC84, (Callback)func_8019ACF4, (Callback)func_8019AD70};
+Callback D_801C80EC[3] = {func_8019AC84, func_8019ACF4, func_8019AD70};
 
-Callback D_801C80F8[4] = {(Callback)func_8019ADE8, (Callback)func_8019AF1C, (Callback)func_8019B024,
-                          (Callback)func_8019B0EC};
+Callback D_801C80F8[4] = {func_8019ADE8, func_8019AF1C, func_8019B024, func_8019B0EC};
 
 ActorToss s_ActorTossArcs[3] = {
     {0x300000, 0x80000},
@@ -165,67 +293,48 @@ ActorToss s_ActorTossArcs[3] = {
     {0x100000, 0x80000},
 };
 
-Callback D_801C8120[3] = {(Callback)func_8019B150, (Callback)func_8019B1E8, (Callback)func_8019B0EC};
+Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, func_8019B0EC};
 
-Callback D_801C812C[6] = {(Callback)func_8019B3A8, (Callback)func_8019B4A0, (Callback)func_8019B704,
-                          (Callback)func_8019BBA4, (Callback)func_8019BE28, (Callback)func_8019BEFC};
+Callback D_801C812C[6] = {func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28, func_8019BEFC};
 
-Callback D_801C8144[4] = {(Callback)func_8019C664, (Callback)func_8019C794, (Callback)func_8019C910,
-                          (Callback)func_8019C954};
+Callback D_801C8144[4] = {func_8019C664, func_8019C794, func_8019C910, func_8019C954};
 
-Callback D_801C8154[4] = {(Callback)func_8019CBD8, (Callback)func_8019CCB8, (Callback)func_8019CEDC,
-                          (Callback)func_8019CFCC};
+Callback D_801C8154[4] = {func_8019CBD8, func_8019CCB8, func_8019CEDC, func_8019CFCC};
 
-Callback D_801C8164[6] = {(Callback)func_8019DE10, (Callback)func_8019E264, (Callback)func_8019E424,
-                          (Callback)func_8019E780, (Callback)func_8019E918, (Callback)func_8019EAD4};
+Callback D_801C8164[6] = {func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918, func_8019EAD4};
 
-Callback D_801C817C[4] = {(Callback)func_8019DE54, (Callback)func_8019DF8C, (Callback)func_8019DFB4,
-                          (Callback)func_8019E1A0};
+Callback D_801C817C[4] = {func_8019DE54, func_8019DF8C, func_8019DFB4, func_8019E1A0};
 
 u8 s_AreaCueIds[12] = {AREA_ID_MCNEIL_BEFORE_NUE, AREA_ID_CEDAR_WOODS_BUNYAN_BEFORE_NUE, AREA_ID_CEDAR_WOODS_BEFORE_NUE, AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE, AREA_ID_FARM_BEFORE_NUE, AREA_ID_MCNEIL_MANOR_AREA_BEFORE_NUE, AREA_ID_YRAAL_ROAD_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE, AREA_ID_BEFORE_MOUNT_GLAUS_BEFORE_NUE, 0x00, 0x00, 0x00};
 
-Callback D_801C8198[2] = {(Callback)func_8019E2A8, (Callback)func_8019E36C};
+Callback D_801C8198[2] = {func_8019E2A8, func_8019E36C};
 
-Callback D_801C81A0[4] = {(Callback)func_8019E468, (Callback)func_8019E4A8, (Callback)func_8019E5D4,
-                          (Callback)func_8019E6F8};
+Callback D_801C81A0[4] = {func_8019E468, func_8019E4A8, func_8019E5D4, func_8019E6F8};
 
-Callback D_801C81B0[2] = {(Callback)func_8019E7C4, (Callback)func_8019E884};
+Callback D_801C81B0[2] = {func_8019E7C4, func_8019E884};
 
-Callback D_801C81B8[2] = {(Callback)func_8019E95C, (Callback)func_8019EA60};
+Callback D_801C81B8[2] = {func_8019E95C, func_8019EA60};
 
-Callback D_801C81C0[3] = {(Callback)func_8019EB38, (Callback)func_8019EC20, (Callback)func_8019ED40};
+Callback D_801C81C0[3] = {func_8019EB38, func_8019EC20, func_8019ED40};
 
-Callback D_801C81CC[4] = {(Callback)func_8019F310, (Callback)func_8019F384, (Callback)func_8019F430,
-                          (Callback)func_8019F4F8};
+Callback D_801C81CC[4] = {func_8019F310, func_8019F384, func_8019F430, func_8019F4F8};
 
 Callback D_801C81DC[105] = {
-    (Callback)func_8019F9D0, (Callback)func_801F7D04, (Callback)func_8019A370, (Callback)func_8019A370,
-    (Callback)func_801F3120, (Callback)func_801F4CDC, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F31AC, (Callback)func_801F2C04, (Callback)func_801F37B0, (Callback)func_801F35FC,
-    (Callback)func_801F3944, (Callback)func_801F3D60, (Callback)func_801F2C1C, (Callback)func_801F3014,
-    (Callback)func_801F2E98, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F33B4,
-    (Callback)func_80117A30, (Callback)func_801F2C04, (Callback)func_801F3448, (Callback)func_801F3BD0,
-    (Callback)func_801F4F00, (Callback)func_801F2C04, (Callback)func_801F52F8, (Callback)func_801F3F34,
-    (Callback)func_801F2C04, (Callback)func_801F3264, (Callback)func_80117BF4, (Callback)func_801F5608,
-    (Callback)func_801F3A78, (Callback)func_801F2C04, (Callback)func_801F2C18, (Callback)func_801F30EC,
-    (Callback)func_801F3B5C, (Callback)func_801F2C04, (Callback)func_801F2C5C, (Callback)func_801F3A8C,
-    (Callback)func_801F2C34, (Callback)func_801F2C88, (Callback)func_801F3BE8, (Callback)func_801F2C5C,
-    (Callback)func_801F33E0, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F33D8, (Callback)func_801F3418,
-    (Callback)func_801F3418, (Callback)func_801F35D8, (Callback)func_801F3D6C, (Callback)func_801F2C04,
-    (Callback)func_801F44F8, (Callback)func_801F2C14, (Callback)func_801F3440, (Callback)func_801F49D4,
-    (Callback)func_801F2C04, (Callback)func_801F2C48, (Callback)func_801F32DC, (Callback)func_801F3FF8,
-    (Callback)func_801F343C, (Callback)func_801F31EC, (Callback)func_801F6390, (Callback)func_801F35F4,
-    (Callback)func_801F35E0, (Callback)func_801F3764, (Callback)func_801F44B0, (Callback)func_801F39BC,
-    (Callback)func_801F39BC, (Callback)func_801F3BE0, (Callback)func_801F3678, (Callback)func_801F3C10,
-    (Callback)func_801F410C, (Callback)func_801F2CE8, (Callback)func_801F3118, (Callback)func_801F3234,
-    (Callback)func_801F3404, (Callback)func_801F3628, (Callback)func_801F358C, (Callback)func_801F3AFC,
-    (Callback)func_801F3D08, (Callback)func_801F2C04, (Callback)func_801F2C48, (Callback)func_801F3380,
-    (Callback)func_801F3B94, (Callback)func_801F344C, (Callback)func_801F4254, (Callback)func_801F3CB0,
-    (Callback)func_801F532C, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F3A38, (Callback)func_801F2C04, (Callback)func_801F38C0, (Callback)func_801F3474,
-    (Callback)func_801F31B0};
+    func_8019F9D0,           func_801F7D04,           func_8019A370,           func_8019A370,           func_801F3120,           func_801F4CDC,           (Callback)func_801F2C04,
+    (Callback)func_801F2C04, func_801F31AC,           (Callback)func_801F2C04, func_801F37B0,           func_801F35FC,           (Callback)func_801F3944, func_801F3D60,
+    func_801F2C1C,           func_801F3014,           func_801F2E98,           (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F33B4,           func_80117A30,
+    (Callback)func_801F2C04, func_801F3448,           func_801F3BD0,           func_801F4F00,           (Callback)func_801F2C04, func_801F52F8,           func_801F3F34,
+    (Callback)func_801F2C04, func_801F3264,           func_80117BF4,           func_801F5608,           func_801F3A78,           (Callback)func_801F2C04, func_801F2C18,
+    func_801F30EC,           func_801F3B5C,           (Callback)func_801F2C04, func_801F2C5C,           func_801F3A8C,           func_801F2C34,           func_801F2C88,
+    func_801F3BE8,           func_801F2C5C,           func_801F33E0,           (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
+    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F33D8,           func_801F3418,
+    func_801F3418,           func_801F35D8,           func_801F3D6C,           (Callback)func_801F2C04, func_801F44F8,           func_801F2C14,           func_801F3440,
+    func_801F49D4,           (Callback)func_801F2C04, func_801F2C48,           func_801F32DC,           func_801F3FF8,           func_801F343C,           func_801F31EC,
+    func_801F6390,           func_801F35F4,           func_801F35E0,           func_801F3764,           func_801F44B0,           func_801F39BC,           func_801F39BC,
+    func_801F3BE0,           func_801F3678,           func_801F3C10,           func_801F410C,           func_801F2CE8,           (Callback)func_801F3118, func_801F3234,
+    func_801F3404,           (Callback)func_801F3628, func_801F358C,           func_801F3AFC,           func_801F3D08,           (Callback)func_801F2C04, func_801F2C48,
+    func_801F3380,           func_801F3B94,           func_801F344C,           func_801F4254,           func_801F3CB0,           func_801F532C,           (Callback)func_801F2C04,
+    (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F3A38,           (Callback)func_801F2C04, func_801F38C0,           func_801F3474,           func_801F31B0};
 
 u8 s_EntityModes[4] = {0x00, 0x03, 0x02, 0x06};
 
@@ -251,9 +360,9 @@ u16 D_801C8424[8] = {
     0x0600, 0x0800, 0x0A00, 0x0C00, 0x0E00, 0x0000, 0x0200, 0x0400,
 };
 
-Callback D_801C8434[2] = {(Callback)Game_StartFadeWhite, (Callback)func_801A3648};
+Callback D_801C8434[2] = {Game_StartFadeWhite, func_801A3648};
 
-Callback D_801C843C[2] = {(Callback)Game_StartFadeBlack, (Callback)func_801A386C};
+Callback D_801C843C[2] = {Game_StartFadeBlack, func_801A386C};
 
 u8 s_ScriptOpcodeLengths[16] = {0x11, 0x10, 0x13, 0x12, 0x11, 0x12, 0x10, 0x11,
                                 0x0C, 0x0D, 0x0E, 0x0E, 0x02, 0x04, 0x07, 0x00};
@@ -265,36 +374,24 @@ SceneSlots* g_SceneScenes[20] = {
     (SceneSlots*)&D_801FD1A4, (SceneSlots*)&D_801FBF34, (SceneSlots*)&D_801FC404, (SceneSlots*)&D_801FE5F4,
     (SceneSlots*)&D_801F8538, (SceneSlots*)&D_801F9728, (SceneSlots*)&D_801F6D58, (SceneSlots*)&D_801F6DBC};
 
-Callback g_SceneStates[2] = {(Callback)Scene_ResetEventState, (Callback)Scene_UpdateEvent};
+Callback g_SceneStates[2] = {Scene_ResetEventState, Scene_UpdateEvent};
 
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-Callback g_SceneEvents[64] = {
-    (Callback)func_801A7CE8,        (Callback)func_801F37E4, (Callback)func_801F394C,          (Callback)func_801F4B60,
-    (Callback)Menu_OpenMaster, (Callback)func_801A7E54, (Callback)Message_RunAreaMessage, (Callback)func_801F4378,
-    (Callback)func_801F34A0,        (Callback)func_801F3740, (Callback)Scene_StartShopSave, (Callback)func_801F2C04,
-    (Callback)func_801F50F0,        (Callback)func_801F2C04, (Callback)func_801F16BC,          (Callback)func_801F3F34,
-    (Callback)func_801F3254,        (Callback)func_801F3EE8, (Callback)func_801F529C,          (Callback)func_801F3198,
-    (Callback)func_801F45EC,        (Callback)func_801F18BC, (Callback)func_801F1B8C,          (Callback)func_801F1E74,
-    (Callback)func_801F1F9C,        (Callback)func_801F2020, (Callback)func_801F228C,          (Callback)func_801A839C,
-    (Callback)func_801F38D8,        (Callback)func_801F2CDC, (Callback)func_801F37EC,          (Callback)func_801F3C24,
-    (Callback)func_801F4494,        (Callback)func_801F3460, (Callback)func_801F2F54,          (Callback)func_801F4BC0,
-    (Callback)func_801F3B4C,        (Callback)func_801F4B58, (Callback)func_801F4C84,          (Callback)func_801F2C04,
-    (Callback)func_801F5E4C,        (Callback)func_801F40C0, (Callback)func_801F2C7C,          (Callback)func_801F4B80,
-    (Callback)func_801A83DC,        (Callback)func_801F5E1C, (Callback)func_801F38DC,          (Callback)func_801F390C,
-    (Callback)func_801F3B4C,        (Callback)func_801F4F9C, (Callback)func_801F4D14,          (Callback)func_801F4164,
-    (Callback)func_801F3D28,        (Callback)func_801F33C8, (Callback)func_801F2E98,          (Callback)func_801A852C,
-    (Callback)func_801F30BC,        (Callback)func_801F2EA0, (Callback)func_801F2D0C,          (Callback)func_801F4A0C,
-    (Callback)func_801F23A4,        (Callback)func_801F3180, (Callback)func_801F2CF0,          (Callback)func_801F3CD0};
+Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,       func_801F4B60,           Menu_OpenMaster, func_801A7E54,           Message_RunAreaMessage, func_801F4378,
+                              func_801F34A0, func_801F3740, Scene_StartShopSave, (Callback)func_801F2C04, func_801F50F0,   (Callback)func_801F2C04, func_801F16BC,          func_801F3F34,
+                              func_801F3254, func_801F3EE8, func_801F529C,       func_801F3198,           func_801F45EC,   func_801F18BC,           func_801F1B8C,          func_801F1E74,
+                              func_801F1F9C, func_801F2020, func_801F228C,       func_801A839C,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,
+                              func_801F4494, func_801F3460, func_801F2F54,       func_801F4BC0,           func_801F3B4C,   func_801F4B58,           func_801F4C84,          (Callback)func_801F2C04,
+                              func_801F5E4C, func_801F40C0, func_801F2C7C,       func_801F4B80,           func_801A83DC,   func_801F5E1C,           func_801F38DC,          func_801F390C,
+                              func_801F3B4C, func_801F4F9C, func_801F4D14,       func_801F4164,           func_801F3D28,   func_801F33C8,           func_801F2E98,          func_801A852C,
+                              func_801F30BC, func_801F2EA0, func_801F2D0C,       func_801F4A0C,           func_801F23A4,   func_801F3180,           func_801F2CF0,          func_801F3CD0};
 
 u8 s_SceneStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 
-Callback D_801C85C4[11] = {
-    (Callback)Fishing_ShowLocation, (Callback)func_801F2D18,        (Callback)Fishing_ShowLocation,
-    (Callback)func_801F2C6C,        (Callback)func_801F2C6C,        (Callback)func_801F3798,
-    (Callback)func_801F2F0C,        (Callback)Fishing_ShowLocation, (Callback)func_801F2E1C,
-    (Callback)Fishing_ShowLocation, (Callback)func_801F2CA8};
+Callback D_801C85C4[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
+                           func_801F2F0C,        Fishing_ShowLocation, func_801F2E1C,        Fishing_ShowLocation, func_801F2CA8};
 
 SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F2D28, (SceneFunc)func_801A8714, (SceneFunc)&D_801F1294,   (SceneFunc)&D_801F1318,
@@ -315,20 +412,17 @@ SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F4288, (SceneFunc)&D_801F3184,   (SceneFunc)&D_801F15B8,   (SceneFunc)func_801F2CA8,
     (SceneFunc)&D_801F4594, (SceneFunc)&D_801F3C9C};
 
-AreaHooks D_801C86F8 = {{{AREA_ID_MOMO_TOWER_UPPER, {0, 0, 0}, (Callback)func_801F33A8},  {AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, {0, 0, 0}, (Callback)func_801F4F60},
-                         {AREA_ID_PLANT, {0, 0, 0}, (Callback)func_801F3194},  {AREA_ID_LIGHTHOUSE_INSIDE, {0, 0, 0}, (Callback)func_801F5880},
-                         {AREA_ID_STEEL_BEACH_FREIGHTER, {0, 0, 0}, (Callback)func_801F3350},  {AREA_ID_DUMP, {0, 0, 0}, (Callback)func_801F3E14},
-                         {AREA_ID_BLACK_SHIP_EARLY, {0, 0, 0}, (Callback)func_801F5130}, {AREA_ID_COLONY_OUTSIDE, {0, 0, 0}, (Callback)func_801F4504},
-                         {AREA_ID_FAIRY_VILLAGE_DOLPHIN, {0, 0, 0}, (Callback)func_801F4528}, {AREA_ID_FAIRY_VILLAGE_176, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_177, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_178, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_179, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_180, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_181, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_182, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_183, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_184, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_185, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_DAUNA_MINE_NO_TEXT, {0, 0, 0}, (Callback)func_801F2D78},
-                         {AREA_ID_RELAY_POINT_A_PORTAL, {0, 0, 0}, (Callback)func_801F3A14}, {AREA_ID_MYRIA_STATION_WORKERS, {0, 0, 0}, (Callback)func_801F4914},
-                         {AREA_ID_FACTORY_OUTSIDE_SECOND, {0, 0, 0}, (Callback)func_801F4364}, {AREA_ID_FACTORY_BLOCK_ROOM, {0, 0, 0}, (Callback)func_801F4380},
-                         {AREA_ID_CAER_XHAN_LIFT_AREA, {0, 0, 0}, (Callback)func_801F41A0}, {AREA_ID_RYU_DREAM_FIRST, {0, 0, 0}, (Callback)func_801F4158},
-                         {AREA_ID_HIDDEN_FACTORY_ENTRANCE, {0, 0, 0}, (Callback)func_801F4534}, {AREA_ID_HIDDEN_FACTORY_ROOMS, {0, 0, 0}, (Callback)func_801F502C}}};
+AreaHooks D_801C86F8 = {
+    {{AREA_ID_MOMO_TOWER_UPPER, {0, 0, 0}, func_801F33A8},      {AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, {0, 0, 0}, func_801F4F60}, {AREA_ID_PLANT, {0, 0, 0}, func_801F3194},
+     {AREA_ID_LIGHTHOUSE_INSIDE, {0, 0, 0}, func_801F5880},     {AREA_ID_STEEL_BEACH_FREIGHTER, {0, 0, 0}, func_801F3350},    {AREA_ID_DUMP, {0, 0, 0}, func_801F3E14},
+     {AREA_ID_BLACK_SHIP_EARLY, {0, 0, 0}, func_801F5130},      {AREA_ID_COLONY_OUTSIDE, {0, 0, 0}, func_801F4504},           {AREA_ID_FAIRY_VILLAGE_DOLPHIN, {0, 0, 0}, func_801F4528},
+     {AREA_ID_FAIRY_VILLAGE_176, {0, 0, 0}, func_801F3378},     {AREA_ID_FAIRY_VILLAGE_177, {0, 0, 0}, func_801F3378},        {AREA_ID_FAIRY_VILLAGE_178, {0, 0, 0}, func_801F3378},
+     {AREA_ID_FAIRY_VILLAGE_179, {0, 0, 0}, func_801F3378},     {AREA_ID_FAIRY_VILLAGE_180, {0, 0, 0}, func_801F3378},        {AREA_ID_FAIRY_VILLAGE_181, {0, 0, 0}, func_801F3378},
+     {AREA_ID_FAIRY_VILLAGE_182, {0, 0, 0}, func_801F3378},     {AREA_ID_FAIRY_VILLAGE_183, {0, 0, 0}, func_801F3378},        {AREA_ID_FAIRY_VILLAGE_184, {0, 0, 0}, func_801F3378},
+     {AREA_ID_FAIRY_VILLAGE_185, {0, 0, 0}, func_801F3378},     {AREA_ID_DAUNA_MINE_NO_TEXT, {0, 0, 0}, func_801F2D78},       {AREA_ID_RELAY_POINT_A_PORTAL, {0, 0, 0}, func_801F3A14},
+     {AREA_ID_MYRIA_STATION_WORKERS, {0, 0, 0}, func_801F4914}, {AREA_ID_FACTORY_OUTSIDE_SECOND, {0, 0, 0}, func_801F4364},   {AREA_ID_FACTORY_BLOCK_ROOM, {0, 0, 0}, func_801F4380},
+     {AREA_ID_CAER_XHAN_LIFT_AREA, {0, 0, 0}, func_801F41A0},   {AREA_ID_RYU_DREAM_FIRST, {0, 0, 0}, func_801F4158},          {AREA_ID_HIDDEN_FACTORY_ENTRANCE, {0, 0, 0}, func_801F4534},
+     {AREA_ID_HIDDEN_FACTORY_ROOMS, {0, 0, 0}, func_801F502C}}};
 
 u8 s_TalkMessageIds[36] = {0x53, 0x00, 0x00, 0x5B, 0x6C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x54,
                            0x00, 0x00, 0x5C, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x00,
@@ -350,9 +444,9 @@ u8 s_ScriptOpcodeOffsets[256] = {
     0x01, 0x01, 0x01, 0x02, 0x02, 0x09, 0x05, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x03, 0x05, 0x04, 0x01, 0x02,
     0x07, 0x02, 0x03, 0x05, 0x01, 0x01, 0x01, 0x03, 0x01};
 
-Callback D_801C88FC[2] = {(Callback)func_801ACA14, (Callback)func_801ACAC0};
+Callback D_801C88FC[2] = {func_801ACA14, func_801ACAC0};
 
-Callback D_801C8904[2] = {(Callback)func_801ACC08, (Callback)func_801ACCD8};
+Callback D_801C8904[2] = {func_801ACC08, func_801ACCD8};
 
 ActorWorkFunc D_801C890C[11] = {
     (ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)func_801AD35C, (ActorWorkFunc)func_801AD44C,
@@ -2078,43 +2172,31 @@ s8 s_EntityPlacementOffsets[32] = {
     0x00, 0xFD, 0xFD, 0x00, 0x02, 0xFE, 0xFF, 0xFC, 0x03, 0x00, 0x00, 0xFD, 0x02, 0x02, 0x04, 0xFF,
 };
 
-Callback D_801CD0AC[15] = {(Callback)func_801B016C, (Callback)func_801B0320, (Callback)func_801B69C0,
-                           (Callback)Game_RunLeaderSwitch, (Callback)func_801B29BC, (Callback)func_801B2A70,
-                           (Callback)func_801B2C38, (Callback)func_801B2D90, (Callback)Area_Climb,
-                           (Callback)func_801D9B14, (Callback)func_801B3690, (Callback)func_801B371C,
-                           (Callback)func_801B3BFC, (Callback)func_801F4D9C, (Callback)func_801C22D8};
+Callback D_801CD0AC[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_RunLeaderSwitch, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
+                           Area_Climb,    func_801D9B14, func_801B3690, func_801B371C,        func_801B3BFC, func_801F4D9C, func_801C22D8};
 
-Callback D_801CD0E8[3] = {(Callback)func_801B036C, (Callback)func_801B0568, (Callback)func_801B0DA0};
+Callback D_801CD0E8[3] = {func_801B036C, func_801B0568, func_801B0DA0};
 
 u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
-Callback D_801CD0FC[5] = {(Callback)func_801B1E24, (Callback)func_801B207C, (Callback)func_801B21E8,
-                          (Callback)func_801B26E0, (Callback)Game_EndLeaderSwitch};
+Callback D_801CD0FC[5] = {func_801B1E24, func_801B207C, func_801B21E8, func_801B26E0, Game_EndLeaderSwitch};
 
-Callback D_801CD110[2] = {(Callback)func_801B2A00, (Callback)func_801B2A20};
+Callback D_801CD110[2] = {func_801B2A00, func_801B2A20};
 
-Callback D_801CD118[2] = {(Callback)func_801B2AB4, (Callback)func_801B2B6C};
+Callback D_801CD118[2] = {func_801B2AB4, func_801B2B6C};
 
-Callback D_801CD120[4] = {(Callback)func_801B2DDC, (Callback)func_801B2FC8, (Callback)func_801B315C,
-                          (Callback)func_801B31F0};
+Callback D_801CD120[4] = {func_801B2DDC, func_801B2FC8, func_801B315C, func_801B31F0};
 
-Callback g_AreaClimbSteps[4] = {(Callback)func_801B32A4, (Callback)Area_ClimbMount, (Callback)func_801B3488,
-                          (Callback)Area_ClimbDismount};
+Callback g_AreaClimbSteps[4] = {func_801B32A4, Area_ClimbMount, func_801B3488, Area_ClimbDismount};
 
-Callback g_AreaClimbMountSteps[5] = {(Callback)func_801B3314, (Callback)func_801B3388, (Callback)func_801B33C4,
-                          (Callback)func_801B3400, (Callback)func_801B343C};
+Callback g_AreaClimbMountSteps[5] = {func_801B3314, func_801B3388, func_801B33C4, func_801B3400, func_801B343C};
 
-Callback g_AreaClimbDismountSteps[4] = {(Callback)func_801B3584, (Callback)func_801B35B0, (Callback)func_801B35EC,
-                          (Callback)func_801B3670};
+Callback g_AreaClimbDismountSteps[4] = {func_801B3584, func_801B35B0, func_801B35EC, func_801B3670};
 
-Callback g_PersonalActions[19] = {
-    (Callback)func_801CFD3C, (Callback)func_801CFB40, (Callback)func_801D05EC, (Callback)func_801CFF64,
-    (Callback)func_801D0A10, (Callback)func_801D02B0, (Callback)func_801D0814, (Callback)func_801CFAB8,
-    (Callback)func_801CFE98, (Callback)func_801D0944, (Callback)func_801CFC70, (Callback)func_801CF8BC,
-    (Callback)func_801CF5A8, (Callback)func_801CF8BC, (Callback)func_801D0368, (Callback)func_801CF694,
-    (Callback)func_801D0748, (Callback)func_801CFA74, (Callback)func_801D0520};
+Callback g_PersonalActions[19] = {func_801CFD3C, func_801CFB40, func_801D05EC, func_801CFF64, func_801D0A10, func_801D02B0, func_801D0814, func_801CFAB8, func_801CFE98, func_801D0944,
+                                  func_801CFC70, func_801CF8BC, func_801CF5A8, func_801CF8BC, func_801D0368, func_801CF694, func_801D0748, func_801CFA74, func_801D0520};
 
-Callback D_801CD1B0[2] = {(Callback)func_801B3768, (Callback)func_801B3A3C};
+Callback D_801CD1B0[2] = {func_801B3768, func_801B3A3C};
 
 u8 s_EncounterStepThresholds[16] = {
     0x00, 0x00, 0x78, 0x3C, 0x60, 0x30, 0x48, 0x24, 0x18, 0x0C, 0x10, 0x08, 0x08, 0x04, 0x00, 0x00,
@@ -2124,12 +2206,8 @@ u8 s_MenuBattlerKinds[4] = {0x03, 0x06, 0x08, 0x00};
 
 u8 s_RouteSlotAlternates[12] = {0x00, 0x00, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00};
 
-Callback D_801CD1D8[19] = {
-    (Callback)func_801CFCF8, (Callback)func_801CFAFC, (Callback)func_801D05A8, (Callback)func_801CFF20,
-    (Callback)func_801D09CC, (Callback)func_801D026C, (Callback)func_801D07D0, (Callback)func_801CFA74,
-    (Callback)func_801CFE54, (Callback)func_801D0900, (Callback)func_801CFC2C, (Callback)func_801CF878,
-    (Callback)func_801CF564, (Callback)func_801CF878, (Callback)func_801D0324, (Callback)func_801CF650,
-    (Callback)func_801D0704, (Callback)func_801CFA30, (Callback)func_801D04DC};
+Callback D_801CD1D8[19] = {func_801CFCF8, func_801CFAFC, func_801D05A8, func_801CFF20, func_801D09CC, func_801D026C, func_801D07D0, func_801CFA74, func_801CFE54, func_801D0900,
+                           func_801CFC2C, func_801CF878, func_801CF564, func_801CF878, func_801D0324, func_801CF650, func_801D0704, func_801CFA30, func_801D04DC};
 
 WorldMapBattlefields D_801CD224 = {{{AREA_ID_YRAAL_WORLD_MAP, AREA_ID_YRAAL_BATTLEFIELD}, {AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE}, {AREA_ID_WYNDIA_WORLD_MAP, AREA_ID_WYNDIA_CENTRAL_BATTLEFIELD}, {AREA_ID_MOMO_TOWER_WORLD_MAP, AREA_ID_WYNDIA_EASTERN_BATTLEFIELD},
                                     {AREA_ID_RHAPALA_WORLD_MAP, AREA_ID_RHAPALA_BATTLEFIELD}, {AREA_ID_URKAN_TAPA_WORLD_MAP, AREA_ID_URKAN_BATTLEFIELD}, {AREA_ID_DAUNA_WORLD_MAP, AREA_ID_DAUNA_HILLS_BATTLEFIELD}, {AREA_ID_STEEL_BEACH_MAP, AREA_ID_YRAAL_BATTLEFIELD},
@@ -2147,37 +2225,27 @@ u8 s_AreaScenePositions[8] = {
 
 u8 s_AreaCellKinds[12] = {0xC0, 0xA0, 0xA1, 0xAE, 0xAF, 0x91, 0x26, 0x27, 0x28, 0x29, 0x2C, 0xFF};
 
-Callback D_801CD2B0[9] = {(Callback)func_801B6A04, (Callback)func_801B70D4, (Callback)func_801B726C,
-                          (Callback)func_801B73B0, (Callback)func_801B78B4, (Callback)func_801B8234,
-                          (Callback)func_801B870C, (Callback)func_801B9048, (Callback)func_801B91CC};
+Callback D_801CD2B0[9] = {func_801B6A04, func_801B70D4, func_801B726C, func_801B73B0, func_801B78B4, func_801B8234, func_801B870C, func_801B9048, func_801B91CC};
 
-Callback D_801CD2D4[6] = {(Callback)func_801B6AB0, (Callback)func_801B6BC8, (Callback)func_801B6F1C,
-                          (Callback)func_801B6FDC, (Callback)func_801B7024, (Callback)func_801B707C};
+Callback D_801CD2D4[6] = {func_801B6AB0, func_801B6BC8, func_801B6F1C, func_801B6FDC, func_801B7024, func_801B707C};
 
-Callback D_801CD2EC[2] = {(Callback)func_801B72B0, (Callback)func_801B7344};
+Callback D_801CD2EC[2] = {func_801B72B0, func_801B7344};
 
-Callback D_801CD2F4[5] = {(Callback)func_801B73F4, (Callback)func_801B744C, (Callback)func_801B7658,
-                          (Callback)func_801B76F4, (Callback)func_801B781C};
+Callback D_801CD2F4[5] = {func_801B73F4, func_801B744C, func_801B7658, func_801B76F4, func_801B781C};
 
-Callback D_801CD308[2] = {(Callback)func_801B790C, (Callback)func_801B7D00};
+Callback D_801CD308[2] = {func_801B790C, func_801B7D00};
 
-Callback D_801CD310[8] = {(Callback)func_801B7950, (Callback)func_801B7988, (Callback)func_801B79F8,
-                          (Callback)func_801B81EC, (Callback)func_801B7B54, (Callback)func_801B7C10,
-                          (Callback)func_801B7C58, (Callback)func_801B7CA0};
+Callback D_801CD310[8] = {func_801B7950, func_801B7988, func_801B79F8, func_801B81EC, func_801B7B54, func_801B7C10, func_801B7C58, func_801B7CA0};
 
-Callback D_801CD330[10] = {(Callback)func_801B7D44, (Callback)func_801B7D84, (Callback)func_801B7DC0,
-                           (Callback)func_801B7DFC, (Callback)func_801B7E38, (Callback)func_801B7E74,
-                           (Callback)func_801B7EF0, (Callback)func_801B81EC, (Callback)func_801B7FE0,
-                           (Callback)func_801B80B4};
+Callback D_801CD330[10] = {func_801B7D44, func_801B7D84, func_801B7DC0, func_801B7DFC, func_801B7E38, func_801B7E74, func_801B7EF0, func_801B81EC, func_801B7FE0, func_801B80B4};
 
-Callback D_801CD358[5] = {(Callback)func_801B828C, (Callback)func_801B830C, (Callback)func_801B8394,
-                          (Callback)func_801B8578, (Callback)func_801B85C0};
+Callback D_801CD358[5] = {func_801B828C, func_801B830C, func_801B8394, func_801B8578, func_801B85C0};
 
-Callback D_801CD36C[2] = {(Callback)func_801B876C, (Callback)func_801B87B8};
+Callback D_801CD36C[2] = {func_801B876C, func_801B87B8};
 
-Callback D_801CD374[2] = {(Callback)func_801B90A0, (Callback)func_801B9100};
+Callback D_801CD374[2] = {func_801B90A0, func_801B9100};
 
-Callback D_801CD37C[2] = {(Callback)func_801B9210, (Callback)func_801B9478};
+Callback D_801CD37C[2] = {func_801B9210, func_801B9478};
 
 u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x02, 0x00,
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0xFF, 0xFF,
@@ -2188,26 +2256,12 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFE, 0xFF,
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF};
 
-Callback D_801CD404[15] = {(Callback)func_801BBE98,
-                           (Callback)func_801BBFB4,
-                           (Callback)func_801B69C0,
-                           (Callback)func_801BD32C,
-                           (Callback)func_801BD35C,
-                           (Callback)func_801BD38C,
-                           (Callback)func_801BD394,
-                           (Callback)func_801BD5A4,
-                           (Callback)func_801BD7F8,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)func_801C22D8};
+Callback D_801CD404[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
+                           func_801BD7F8, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
-Callback D_801CD440[2] = {(Callback)func_801BC000, (Callback)Area_StepSceneTimer};
+Callback D_801CD440[2] = {func_801BC000, Area_StepSceneTimer};
 
-Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)Area_ClimbMount, (Callback)func_801BD83C,
-                          (Callback)Area_ClimbDismount};
+Callback D_801CD448[4] = {func_801B32A4, Area_ClimbMount, func_801BD83C, Area_ClimbDismount};
 
 Offset2DB s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
     {-CAMERA_SCROLL_STEP, 0},
@@ -2225,8 +2279,7 @@ u8 s_RouteIndexByMode[4] = {0x03, 0x05, 0x07, 0x01};
 
 s32 D_801CD47C[8] = {0, -32768, (s32)0x00008000u, 0, 0, (s32)0x00008000u, -32768, 0};
 
-Callback D_801CD49C[4] = {(Callback)func_801C0AB4, (Callback)func_801C0CDC, (Callback)func_801C0D34,
-                          (Callback)func_801C0D54};
+Callback D_801CD49C[4] = {func_801C0AB4, func_801C0CDC, func_801C0D34, func_801C0D54};
 
 SlotSource D_801CD4AC[5] = {{0x00, 0x00, 0x00, 0x00},
                             {0x02, 0x02, 0x00, 0x00},
@@ -2250,10 +2303,9 @@ Callback* D_801CD510[20] = {
 
 u8 s_AreaProbeCellCodes[8] = {0x30, 0x40, 0x50, 0x80, 0x90, 0xE0, 0xF0, 0xFF};
 
-Callback D_801CD568[2] = {(Callback)func_801C5830, (Callback)func_801C5838};
+Callback D_801CD568[2] = {func_801C5830, func_801C5838};
 
-Callback D_801CD570[5] = {(Callback)func_801C5874, (Callback)func_801C5BB8, (Callback)func_801C5C7C,
-                          (Callback)func_801C5CB4, (Callback)func_801C5D68};
+Callback D_801CD570[5] = {func_801C5874, func_801C5BB8, func_801C5C7C, func_801C5CB4, func_801C5D68};
 
 u8 D_801CD584[56] = {0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00, 0x00, 0x01, 0x02,
                      0x00, 0x00, 0x02, 0x01, 0x01, 0x02, 0x02, 0x02, 0x00, 0x00, 0x03, 0x02, 0x00, 0x00,
