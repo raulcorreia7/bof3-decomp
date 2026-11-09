@@ -8,13 +8,13 @@ MATCH void func_801F2FE0(void) {
 
     spark = AREA_SPARKS;
     for (i = 0; i < 0x10; i++) {
-        spark->live = 1;
+        spark->live   = 1;
         spark->unk_01 = 0;
         spark->unk_02 = rand() | 0xF0;
         spark->unk_03 = rand() & 0x1F;
-        spark->x = D_801F42E8[i][0] << 16;
-        spark->y = D_801F42E8[i][1] << 16;
-        spark->z = Area_SampleHeight(spark->x, spark->y) << 16;
+        spark->x      = D_801F42E8[i][0] << 16;
+        spark->y      = D_801F42E8[i][1] << 16;
+        spark->z      = Area_SampleHeight(spark->x, spark->y) << 16;
         spark++;
     }
 }

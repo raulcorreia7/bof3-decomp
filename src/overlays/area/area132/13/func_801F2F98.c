@@ -13,7 +13,7 @@ MATCH void func_801F2F98(void) {
         if (effect != NULL) {
             func_801F37A4(effect);
             FIELD(u16, effect, 0x14u) = 0x80;
-            FIELD(u8, effect, 0x17u) = i;
+            FIELD(u8, effect, 0x17u)  = i;
         }
         i++;
     } while (i < 0x10);

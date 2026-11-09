@@ -29,9 +29,9 @@ extern u16 D_801F4FD4;
 extern u32 g_GameEntryStateWord;
 extern u8  D_80146874;
 extern u8  D_80146875;
-extern u8 D_801F4404[];
-extern u8 D_801F4405[];
-extern u8 D_801EB748[];
+extern u8  D_801F4404[];
+extern u8  D_801F4405[];
+extern u8  D_801EB748[];
 
 void func_801F3630(void);
 
