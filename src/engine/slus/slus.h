@@ -272,7 +272,7 @@ typedef struct SoundSequence {
  * frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at
  * g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at
  * D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry
- * tables on the stack, and g_MessageStepBank is the sixteen-entry handler bank
+ * tables on the stack, and g_MessageStepTable is the sixteen-entry handler bank
  * Message_DispatchBankStep copies. One type per table size, shared by every copier. */
 typedef struct {
     Callback handlers[8];
@@ -681,7 +681,7 @@ extern const Table6                g_MessageChoiceModes;
  * handlers that follow Message_DispatchBankStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
 /* D_80149ACC */
-extern const HandlerBank           g_MessageStepBank;
+extern const HandlerBank           g_MessageStepTable;
 extern const struct CallbackTable3 D_80149B30;
 extern const struct CallbackTable5 D_80149B3C;
 extern const struct CallbackTable5 D_80149B50;

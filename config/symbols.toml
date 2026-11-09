@@ -5484,7 +5484,7 @@ D_80149998 = { addr = 0x80149998, size = 0x178, alias = true }
 g_UiLocalModes = { addr = 0x801499AC, size = 0x54, alias = true, source = "Local UI mode handlers." }
 g_MessageStates = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
 g_MessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = "Message choice handlers." }
-g_MessageStepBank = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
+g_MessageStepTable = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
 g_EmiCDSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
 g_EmiRingSlotHandlers = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 __main = { addr = 0x8014AA04, type = "func", source = "Entry point of the executable." }
