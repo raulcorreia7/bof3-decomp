@@ -208,8 +208,7 @@ typedef enum AreaId {
     AREA_ID_END_GAME_SAVE                        = 199,
 } AreaId;
 
-/* Or-ed into the facing of an area request: only the scroll target is placed
- * (func_801BFF9C) and the map-loading walk flag is set (func_8019FAA0). */
+/* Or-ed into the facing of an area request. */
 #define AREA_ENTRY_MAP_LOADING 0x80
 
 #define GAME_TABLE_ENTRY_SIZE  0x44

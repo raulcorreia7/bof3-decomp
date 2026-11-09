@@ -1,18 +1,7 @@
 #ifndef AREA_FISHING_H
 #define AREA_FISHING_H
 
-/* The fishing tables:
- *
- * | Table | Address | Record | Rows | Reader |
- * | --- | --- | ---: | ---: | --- |
- * | rod table | `0x801E2748` | 10 bytes | — | `emi/world00/area030/04@0x801DDE2C` |
- * | lure table | `0x801E2720` | 20 bytes | — | `emi/world00/area030/04@0x801DDE2C` |
- * | pond rows | `0x80146888` | 0x98 bytes | 30 | `emi/world00/area030/04@0x801DBBAC`, `@0x801E026C`, `@0x801DE5EC` |
- * | caught-fish bytes | `0x80144FE4` | 1 byte | — | `emi/world00/area030/04@0x801D5048`, `@0x801D4884`, `@0x801DB554` |
- *
- * A pond is an entity-table record (`include/sys/actor.h`, 30 records at `0x80146888`); the fishing code reads the
- * stamina, facing and fish bytes of each. "Pond" is a community name, not a retail string.
- */
+/* The fishing tables: | Table | Address | Record | Rows | Reader | | --- | --- |. */
 
 #include "types.h"
 
@@ -41,9 +30,7 @@ extern u8 g_FishingRod;
 #define FISHING_POND_STRIDE                0x98 /* size of one entity-table record */
 #define FISHING_POND_ROWS                  30   /* entity-table record count */
 
-/* Lure rows are 20 bytes. The notes span the three float-rate groups as
- * `+1..3`, `+4..7`, and `+8..11` while calling each a 16-bit value, so the
- * groups keep their byte spans and their widths stay unresolved. */
+/* Lure rows are 20 bytes. */
 #define FISHING_LURE_IDLE_FLOAT_OFFSET     0x01u
 #define FISHING_LURE_REELING_FLOAT_OFFSET  0x04u
 #define FISHING_LURE_SIDEWAYS_FLOAT_OFFSET 0x08u
@@ -51,8 +38,7 @@ extern u8 g_FishingRod;
 /* Rod table row; every field is one byte (@source: wiki:data/field#fairy-village-and-fishing). */
 typedef struct FishingRod {
     u8 cast_power_speed_00;
-    u8 cast_sweep_direction_01; /* 0 linear bidirectional, 1 linear
-                                   unidirectional, 2 quadratic bidirectional */
+    u8 cast_sweep_direction_01; /* 0 linear bidirectional, 1 linear unidirectional, 2 quadratic bidirectional */
     u8 max_distance_02;         /* half the value in metres */
     u8 reel_cursor_size_03;
     s8 cursor_return_speed_04;
