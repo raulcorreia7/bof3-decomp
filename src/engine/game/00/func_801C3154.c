@@ -1,8 +1,8 @@
 #include "game_00.h"
 
-/* Source and destination palette banks. Literal addresses keep the
- * lui+ori codegen the original binary uses for these banks. */
-#define PALETTE_BANK_SRC 0x80033800u
+/* Source and destination CLUT blocks. Literal addresses keep the
+ * lui+ori codegen the original binary uses for these blocks. */
+#define CLUT_BLOCK_SRC 0x80033800u
 
 MATCH void func_801C3154(void) {
     volatile Actor* work;
@@ -19,7 +19,7 @@ MATCH void func_801C3154(void) {
         index    = 1;
         work     = g_Task;
         base_dst = AREA_PALETTE_WORK;
-        base_src = PALETTE_BANK_SRC;
+        base_src = CLUT_BLOCK_SRC;
         do {
             off = index << 1;
             sel = work->unk_27;
