@@ -654,7 +654,8 @@ extern void  func_801D3C1C(void);
 extern void  func_801D3C88(void);
 extern void  func_801D3CC4(void);
 extern void  func_801D3E80(void);
-extern void  func_801D3F6C(void);
+/* func_801D3F6C */
+extern void  Battle_FinishEffectLoad(void);
 extern void  func_801D3FEC(void);
 extern void  func_801D4028(void);
 extern void  func_801D409C(void);

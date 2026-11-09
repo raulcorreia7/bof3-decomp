@@ -703,14 +703,17 @@ s16         func_800A4294(s32 input_kind);
 void        func_800A46C4(void);
 /* func_800A4700 */
 void        Battle_LoadDraArchive(void);
-void        func_800A4744(void);
+/* func_800A4744 */
+void        Battle_FinishDraLoad(void);
 void        func_800A47AC(void);
 void        func_800A4900(void);
 void        func_800A493C(void);
 void        func_800A4AD0(void);
 void        func_800A4B08(void);
-void        func_800A4B2C(void);
-void        func_800A4BB4(void);
+/* func_800A4B2C */
+void        Battle_LoadRe2Archive(void);
+/* func_800A4BB4 */
+void        Battle_FinishRe2Load(void);
 void        func_800A4C08(void);
 void        func_800A4C44(void);
 void        func_800A4C70(void);

@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800A4B2C(void) {
+/* func_800A4B2C */
+MATCH void Battle_LoadRe2Archive(void) {
     u8* lock;
 
     lock = &D_80148624;

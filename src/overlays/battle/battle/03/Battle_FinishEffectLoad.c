@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D3F6C(void) {
+/* func_801D3F6C */
+MATCH void Battle_FinishEffectLoad(void) {
     if (EMI_IsReady() != 0) {
         if (BATTLE_IS_SCRIPTED()) {
             g_Battle.boss_event_hook(BOSS_EVENT_EFFECTS_LOADED);

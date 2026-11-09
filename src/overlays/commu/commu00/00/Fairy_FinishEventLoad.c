@@ -3,7 +3,8 @@
 /* Cleared here: D_801F2944/D_801F2945 also serve func_801F23A4's selection
  * latch, while the four bytes D_801F294C..D_801F294F have no reader. */
 
-MATCH void func_801F17A4(void) {
+/* func_801F17A4 */
+MATCH void Fairy_FinishEventLoad(void) {
     if (EMI_IsReady()) {
         GFX_ResetPalette();
         g_GfxPalettePending = 1;

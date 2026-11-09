@@ -105,7 +105,7 @@ Callback D_801EAC98[3] = {
 Callback D_801EACA4[3] = {
     (Callback)func_801D3CC4,
     (Callback)func_801D3E80,
-    (Callback)func_801D3F6C,
+    (Callback)Battle_FinishEffectLoad,
 };
 
 /* 0x801EACB0 */

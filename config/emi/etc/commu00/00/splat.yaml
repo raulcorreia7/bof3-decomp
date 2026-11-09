@@ -72,7 +72,7 @@ segments:
       - [0x2ABC, c, func_801F16BC]
       - [0x2AF8, c, func_801F16F8]
       - [0x2B70, c, Fairy_LoadCommu01]
-      - [0x2BA4, c, func_801F17A4]
+      - [0x2BA4, c, Fairy_FinishEventLoad]
       - [0x2C24, c, Fairy_ReloadPartyBank]
       - [0x2C74, c, func_801F1874]
       - [0x2CBC, c, func_801F18BC]
