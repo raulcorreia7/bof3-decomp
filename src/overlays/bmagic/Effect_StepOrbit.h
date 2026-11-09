@@ -1,5 +1,4 @@
-/* Turns the orbiting effect one step around its battler and ages its timers. One definition shared by the bmagic
- * effect modules; every change here must verify every member. */
+/* Circles the effect around its battler, one turn every 64 frames, until its frames run out. */
 /* func_801EF29C (magic106), func_801EF704 (magic063) */
 MATCH void Effect_StepOrbit(void) {
     u8 timer;
@@ -22,8 +21,8 @@ MATCH void Effect_StepOrbit(void) {
     if (g_BMagicOrbitWork->unk_03 < 7) {
         g_BMagicOrbitWork->unk_03++;
     }
-    timer                       = g_BMagicOrbitWork->timer_08 - 1;
-    g_BMagicOrbitWork->timer_08 = timer;
+    timer                          = g_BMagicOrbitWork->frames_left - 1;
+    g_BMagicOrbitWork->frames_left = timer;
     if (timer == 0) {
         g_BMagicOrbitWork->header.step++;
     }

@@ -1,4 +1,11 @@
 #include "area168_13.h"
 
-/* blocker: compare constant register; first diff: li v0,1 against li a0,1 at 0x801F49E4. */
-INCLUDE_ASM(func_801F49D4);
+MATCH void func_801F49D4(void) {
+    if (g_MessageChoice == 0) {
+        g_MessageRequest = 0x12;
+    } else if (g_MessageChoice == 1) {
+        g_MessageRequest = 0x13;
+    } else {
+        g_MessageRequest = 0x14;
+    }
+}

@@ -19,5 +19,7 @@
 /* The payload's first words: the per-state handler pointers. */
 extern u8 D_801F3A90[];
 
+extern TriggerBox D_801F3B9C[2];
+
 /* The target's final handler. */
 #endif
