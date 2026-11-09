@@ -8,7 +8,7 @@
  * mesh, place objects and run the area script from these bytes; the game
  * overlay queries the same grid. Format: @source: wiki:formats/area.
  *
- * Readers: `exe/slus_004_22@0x80155560` indexes the interleaved bank offsets;
+ * Readers: `exe/slus_004_22@0x80155560` indexes the interleaved tile table offsets;
  * `exe/slus_004_22@0x8014DD3C` stores scene record byte +0x07 at work+0x2C and
  * `exe/slus_004_22@0x8014D6DC` uses it as a script-table index.
  *
@@ -134,36 +134,36 @@
  * `@0x80158B24`, `@0x8015507C`, `@0x80155B40`; the grid readers live in
  * emi/etc/game/00 (`@0x8019C4F0`, `@0x8019C794`, `@0x8019EC20`). */
 typedef struct AreaMapBundle {
-    u8  width;                 /* 0x00 - grid width in cells */
-    u8  height;                /* 0x01 */
-    u16 grid_off4_02;          /* 0x02 - cell grid, 4-byte units:
+    u8  width;                       /* 0x00 - grid width in cells */
+    u8  height;                      /* 0x01 */
+    u16 grid_off4_02;                /* 0x02 - cell grid, 4-byte units:
                                 *        (0x30 + width*height*4 + align4(width*height)) / 4 */
-    u16 bank_offsets_04[4][2]; /* 0x04-0x13 - [selector][bank], A then B */
-    u16 byte_code_off4_14;     /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
+    u16 tile_table_offsets_04[4][2]; /* 0x04-0x13 - [selector][table], A then B */
+    u16 byte_code_off4_14;           /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
                                 *        (0x30 + width*height*4) / 4; equals
                                 *        width*height + 12 in 200/200 payloads */
-    u16 zero_16;               /* 0x16 - zero in 200/200, no reader */
-    u16 zero_18;               /* 0x18 - zero in 200/200, no reader */
-    u16 color_1A[2];           /* 0x1A-0x1D - runtime color words, written by the engine
+    u16 zero_16;                     /* 0x16 - zero in 200/200, no reader */
+    u16 zero_18;                     /* 0x18 - zero in 200/200, no reader */
+    u16 color_1A[2];                 /* 0x1A-0x1D - runtime color words, written by the engine
                                 *            (`@0x801583BC` is the only header store) and
                                 *            read at `0x8010401A + (mask >> 3) * 2` */
-    u16 scroll_1E;             /* 0x1E - shipped 0xF300-0xFA90 in 76/200, meaning open */
-    u16 list_base_20;          /* 0x20 - record list, opcode byte & 0x3f */
-    u16 list_base_22;          /* 0x22 - record list, opcode byte & 0x7f */
-    u16 record_region_24;      /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
-    u16 zero_26;               /* 0x26 - zero in 200/200, no reader */
-    u16 object_list_28;        /* 0x28 - tag + body size, walked by the map interpreter */
-    u16 height_off4_2A;        /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
+    u16 scroll_1E;                   /* 0x1E - shipped 0xF300-0xFA90 in 76/200, meaning open */
+    u16 list_base_20;                /* 0x20 - record list, opcode byte & 0x3f */
+    u16 list_base_22;                /* 0x22 - record list, opcode byte & 0x7f */
+    u16 record_region_24;            /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
+    u16 zero_26;                     /* 0x26 - zero in 200/200, no reader */
+    u16 object_list_28;              /* 0x28 - tag + body size, walked by the map interpreter */
+    u16 height_off4_2A;              /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
                                 *        payloads, == size - width*height in the rest */
-    u16 zero_2C;               /* 0x2C - zero in 200/200, no reader */
-    u16 zero_2E;               /* 0x2E - zero in 200/200, no reader */
+    u16 zero_2C;                     /* 0x2C - zero in 200/200, no reader */
+    u16 zero_2E;                     /* 0x2E - zero in 200/200, no reader */
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
 ASSERT_OFFSET(AreaMapBundle, width, 0x00);
 ASSERT_OFFSET(AreaMapBundle, height, 0x01);
 ASSERT_OFFSET(AreaMapBundle, grid_off4_02, 0x02);
-ASSERT_OFFSET(AreaMapBundle, bank_offsets_04, 0x04);
+ASSERT_OFFSET(AreaMapBundle, tile_table_offsets_04, 0x04);
 ASSERT_OFFSET(AreaMapBundle, byte_code_off4_14, 0x14);
 ASSERT_OFFSET(AreaMapBundle, list_base_20, 0x20);
 ASSERT_OFFSET(AreaMapBundle, height_off4_2A, 0x2A);
@@ -217,7 +217,7 @@ typedef struct AreaCellCorners {
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
 
-/* Four-byte bank-A tile rectangle. */
+/* Four-byte tile table A rectangle. */
 typedef struct AreaTileRect {
     u8 dv_00;
     u8 du_01;
@@ -227,7 +227,7 @@ typedef struct AreaTileRect {
 
 ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
 
-/* Eight-byte bank-B tile descriptor: four UV pairs. */
+/* Eight-byte tile table B descriptor: four UV pairs. */
 typedef struct AreaTileQuad {
     u8 uv_pairs_00[4][2];
 } AreaTileQuad;
