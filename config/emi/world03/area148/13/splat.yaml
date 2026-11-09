@@ -11,7 +11,7 @@ segments:
       - [0x5C, c, func_801F2C5C]
       - [0xA0, c, func_801F2CA0]
       - [0x264, c, func_801F2E64]
-      - [0x3A4, c, Actor_SlideScreenUp]
+      - [0x3A4, c, Actor_SlideScreenToEdge]
       - [0x420, c, Actor_AdvanceOutsidePartyCell]
       - [0x51C, c, Area_AdvanceCountdown]
       - [0x5AC, c, Area_Update]
