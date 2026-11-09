@@ -146,7 +146,7 @@ NON_MATCHING void func_801B21E8(void) {
     val7                = MAX(val7, val10);
     tmp0                = ((u32)val7 >> 0xD) & BYTE_MASK;
     if (tmp0 != 0) {
-        g_AreaCameraHeightStep = (s16)((s16)((u16)D_80145ECE - g_AreaCameraHeight) / tmp0);
+        g_AreaCameraHeightStep = (s16)((s16)((u16)COORD_INT(g_Game.members[0].pos.z) - g_AreaCameraHeight) / tmp0);
     } else {
         g_AreaCameraHeightStep = 0;
     }
