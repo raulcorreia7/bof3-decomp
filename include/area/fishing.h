@@ -10,19 +10,17 @@
  * | pond rows | `0x80146888` | 0x98 bytes | 30 | `emi/world00/area030/04@0x801DBBAC`, `@0x801E026C`, `@0x801DE5EC` |
  * | caught-fish bytes | `0x80144FE4` | 1 byte | — | `emi/world00/area030/04@0x801D5048`, `@0x801D4884`, `@0x801DB554` |
  *
- * "Pond" is the community word for the array (bof3-notes), not a retail string. The pond rows are the actor rows: the
- * table at `0x80146888` is the 30-row entity table (`include/sys/actor.h`), and the fishing code reads the stamina,
- * facing and fish bytes of its rows.
+ * A pond is an entity-table record (`include/sys/actor.h`, 30 records at `0x80146888`); the fishing code reads the
+ * stamina, facing and fish bytes of each. "Pond" is a community name, not a retail string.
  */
 
 #include "types.h"
 
 /*
- * Fishing state. The selector bytes and both table bases are proven in the
- * matched world00/area030/04 code: `lure_table + lure * 20` and `rod_table + rod * 10`
- * (func_801DDE2C). The reference notes give the same record strides at
- * different RAM addresses (0x801E2914 / 0x801E2950); those stay unverified
- * here. Record fields come from @source: wiki:data/field#fairy-village-and-fishing.
+ * Fishing state. The code addresses `lure_table + lure * 20` and `rod_table + rod * 10`
+ * (func_801DDE2C). Other references give the same record strides at RAM addresses
+ * 0x801E2914 and 0x801E2950; these are unverified. Record fields:
+ * @source: wiki:data/field#fairy-village-and-fishing.
  */
 
 extern u8 g_FishingLure;
@@ -40,8 +38,8 @@ extern u8 g_FishingRod;
 #define FISHING_ROD_COUNT                  6
 #define FISHING_ROD_STRIDE                 0x0a
 #define FISHING_LURE_STRIDE                0x14
-#define FISHING_POND_STRIDE                0x98 /* the field work row size */
-#define FISHING_POND_ROWS                  30   /* the field work table's row count */
+#define FISHING_POND_STRIDE                0x98 /* size of one entity-table record */
+#define FISHING_POND_ROWS                  30   /* entity-table record count */
 
 /* Lure rows are 20 bytes. The notes span the three float-rate groups as
  * `+1..3`, `+4..7`, and `+8..11` while calling each a 16-bit value, so the

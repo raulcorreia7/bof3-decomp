@@ -942,8 +942,8 @@ u32 D_801E3000[] = { 0x801D4410, 0x801D4580 };   /* literal addresses do not rel
 ## SDK names
 
 Game code says what it means through PsyQ's names for SDK calls and values, symbols for RAM and
-named registers for hardware. This is how the game was written: against the SDK's own names, with
-the game's own macros for what it does with them. System tags build on PsyQ names and never copy,
+named registers for hardware. The game was written against the SDK's names, with its own macros for
+what it does with them. System tags build on PsyQ names and never copy,
 rename or forward them one-to-one.
 
 - Call the SDK and use its names directly: `CdControl(CdlSetloc, ...)`, `SpuSetKey(SPU_ON, ...)`,

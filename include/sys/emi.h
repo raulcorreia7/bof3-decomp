@@ -8,8 +8,7 @@
  * is (a RAM copy, a packed payload, a graphics upload, a VAB header or body, a cue
  * table, a sequence package) and its load argument is a destination or a
  * selector for that type. The main executable's loader copies or maps each
- * payload. Evidence: all 880 US Breath of Fire III (USA) archives and the loader readers;
- * @source: wiki:formats/emi. */
+ * payload. Measured over all 880 US archives: @source: wiki:formats/emi. */
 
 /* Container layout, measured over all 880 US Breath of Fire III (USA) archives (@source: wiki:formats/emi#padding). */
 #define EMI_SECTOR_SIZE             0x800 /* payload alignment; also the first payload offset */

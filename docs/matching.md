@@ -5,7 +5,7 @@ verdict; a score, a marker or a disassembler opinion is a lead.
 
 ## Route
 
-Take the cheapest route first and move on after one honest try. `tools/worklist.py` ranks the open
+Take the cheapest route first and move on after one real attempt. `tools/worklist.py` ranks the open
 functions by route ([find work](../CONTRIBUTING.md#find-work)).
 
 | # | Route           | Command                                                                   | Move on when                                            |
