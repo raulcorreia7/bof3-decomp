@@ -65,8 +65,10 @@ Each change is done when `check` prints `check: 428 images match`, `check-plain`
 
 ## Language and formatting
 
-C89 plus the extensions the retail compiler supports: designated initializers for data tables and
-`static inline` ([compiler](#compiler)). No mixed declarations and code, no declarations in `for`, no `_Bool`, no anonymous
+Plain C89. The one GNU extension is `static inline` where it gives the retail bytes
+([compiler](#compiler)); the build's `INCLUDE_ASM` and `__attribute__` layout fixes are tooling, not source style.
+A table indexed by an enum lists its rows in enum order with a one-line `/* NAME */` before each,
+never a designated initializer. No mixed declarations and code, no declarations in `for`, no `_Bool`, no anonymous
 unions, no `//` comments.
 
 The layout: 4-space indent, 120 columns, braces on the same line, `T* x` pointers, declarations and
@@ -1581,8 +1583,7 @@ them; setup and commands are in [toolchain](toolchain.md).
 
 ### Compiler
 
-The retail compiler is GCC 2.7.2 for the PlayStation at `-O2`: C89 with designated initializers and
-`static inline`. An `enum` type is an `int`. An inline function is integrated as compiled code, not
+The retail compiler is GCC 2.7.2 for the PlayStation at `-O2`: C89, plus `static inline`. An `enum` type is an `int`. An inline function is integrated as compiled code, not
 as text, and a `do { ... } while (0)` scope is a block that can steer register allocation; which
 bodies keep their bytes is measured in
 [inline functions and byte identity](toolchain.md#inline-functions-and-byte-identity).
