@@ -58,6 +58,9 @@ extern u8       D_801F626C[];
 /* The x/y entry-coordinate pairs the request step indexes. */
 extern u8       D_801F6AAC[];
 extern u8       D_801F6AB4[];
+/* The x/y byte pairs the step compares the position against. */
+extern u8       D_801F6B2C[];
+extern u8       D_801F6B2D[];
 extern Callback D_801F6B34[];
 extern Callback D_801F6B40[];
 void            func_801F37C4(void);
