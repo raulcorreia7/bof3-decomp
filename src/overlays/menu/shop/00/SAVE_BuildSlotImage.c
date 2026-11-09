@@ -65,8 +65,8 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     g_SavedScriptVars[1]           = g_ScriptVars[1];
     g_SavedScriptVars[2]           = g_ScriptVars[2];
     g_SavedScriptVars[3]           = g_ScriptVars[3];
-    g_SaveEntryX                   = (u32)D_80145EC4;
-    g_SaveEntryY                   = (u32)D_80145EC8;
+    g_SaveEntryX                   = (u32)g_Game.members[0].pos.x.fixed;
+    g_SaveEntryY                   = (u32)g_Game.members[0].pos.y.fixed;
     g_SaveAreaId                   = g_GameAreaId;
     g_SaveEntryFacing              = g_Game.members[0].facing;
     n                              = 0;

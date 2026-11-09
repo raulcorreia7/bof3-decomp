@@ -27,8 +27,8 @@ MATCH s32 func_801E8BA0(void) {
         bit_index -= 1;
         *counter_byte -= 1;
     } while (bit_index >= 246);
-    D_80145040 = D_80145EC4;
-    D_80145044 = D_80145EC8;
+    D_80145040 = g_Game.members[0].pos.x.fixed;
+    D_80145044 = g_Game.members[0].pos.y.fixed;
     D_80145048 = g_GameAreaId;
     return 0;
 }

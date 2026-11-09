@@ -59,8 +59,8 @@ MATCH void func_801D62DC(void) {
                 i++;
             } while (i < g_PartySize);
         }
-        g_AreaScrollTargetX = D_80145EC4;
-        g_AreaScrollTargetY = D_80145EC8;
+        g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+        g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
         func_80153DE8();
         Area_RunSetupStream(*g_AreaLoads[g_GameAreaId]);
     }

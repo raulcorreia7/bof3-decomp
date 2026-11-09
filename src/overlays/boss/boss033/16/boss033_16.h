@@ -16,7 +16,6 @@ extern Callback D_800C27A0[];
 extern Callback D_800C27AC[];
 extern Callback D_800C27B4[];
 extern Callback D_800C27D0[];
-extern s32      D_80145EC4;
 extern s8       D_80146875;
 
 /* The battle target calls the battle image defines. */

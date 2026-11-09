@@ -4,8 +4,8 @@ MATCH void Boss_ChooseBattleEnding(void) {
     if (FIELD(u32, &g_Battle.outcome.result, 0) & 6) {
         func_800AC934(0U);
         D_80146875          = 8;
-        g_AreaScrollTargetX = D_80145EC4;
-        g_AreaScrollTargetY = D_80145EC8;
+        g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+        g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
         func_801DDED8();
         return;
     }
