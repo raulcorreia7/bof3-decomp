@@ -319,7 +319,7 @@ typedef struct AreaActorDefs {
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {
-    u32 script_bank_00;   /* 0x00 -> 0x800D3800 (swapped per battle handler) */
+    u32 script_table_00;  /* 0x00 -> 0x800D3800 (swapped per battle handler) */
     u32 scene_records_04; /* 0x04 -> 0x800E3804 */
     u32 work_08;          /* 0x08 -> 0x800E4800 */
     u32 code_base_0C;     /* 0x0C -> 0x800F5000 */
