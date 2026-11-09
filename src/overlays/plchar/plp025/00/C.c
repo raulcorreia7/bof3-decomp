@@ -1,4 +1,5 @@
 #include "plp025_00.h"
+#include "overlays/plchar/plchar_check.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -48,7 +49,7 @@ INCLUDE_ASM(func_801CF37C);
 
 INCLUDE_ASM(func_801CF5D4);
 
-INCLUDE_ASM(func_801CF738);
+MATCH s32 func_801CF738(s32 arg0) PLCHAR_CHECK_PARTY_BODY(arg0)
 
 INCLUDE_ASM(func_801CF808);
 
