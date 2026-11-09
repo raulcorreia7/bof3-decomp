@@ -4512,6 +4512,7 @@ Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 
 Actor_SlideScreenDown16 = { addr = 0x801F38E8, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
 Area_Update = { addr = 0x801F3958, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F4100, type = "func", source = "Reads the script row of the loaded area at the script state row and cursor, begins the actor script of that step at the saved script_pc - 2, stores the row argument in byte 0x2A and advances the cursor by 2." }
+Actor_BeginScriptFromAreaTableAtStart = { addr = 0x801F41A8, type = "func", source = "Starts the area script step at the cursor once the task script_pc is 2, otherwise moves the cursor back 2 to repeat the command." }
 Area_FreePaletteOnAreaChange = { addr = 0x801F4D1C, type = "func", source = "Frees the palette slots of the task through GFX_FreePaletteSlotOwner when g_GameStateIndex is GAME_REQUEST_AREA_CHANGE; no C caller, it is reached through the area174 tables." }
 
 ["emi/world04/area175/13"]
@@ -4943,6 +4944,7 @@ g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Tag and mess
 ["emi/world04/area198/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F2E5C, type = "func", source = "Starts an actor script from the area table." }
+Actor_BeginScriptFromAreaTableAtStart = { addr = 0x801F2F04, type = "func", source = "Starts the area script step at the cursor once the task script_pc is 2, otherwise moves the cursor back 2 to repeat the command." }
 Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area085." }
 Area_FreePaletteOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
