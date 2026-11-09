@@ -30,6 +30,15 @@ s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
         return (handlers)[index]();                           \
     } while (0)
 
+/* Hand a scene over to the actor routine of `scene`: enter mode 4 with the given state and clear the
+ * actor's word at +0x7E. Every change here must verify every member. */
+#define SCENE_START_ACTOR(actor, scene, step) \
+    func_801BE1B0(scene);                     \
+    (actor)->header.mode = 4;                 \
+    (actor)->unk_78      = 2;                 \
+    (actor)->unk_77      = (step);            \
+    (actor)->unk_7E      = 0
+
 #define SCRATCH_COLUMN_COUNT  0x80
 #define SCRATCH_COLUMN_OFFSET 0
 #define SCRATCH_COLUMN_STRIDE 0x14

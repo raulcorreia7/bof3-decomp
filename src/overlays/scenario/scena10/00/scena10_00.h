@@ -29,16 +29,11 @@ extern u16       D_801FE974[3];
 /* D_801FE97C */
 extern SceneFunc g_SceneActorDispatch[];
 
-/* The actor-start members of 368.c: reset the scene state, set the actor to mode 4 with a fixed
- * state and step, and raise a scene flag. They differ only in the three constants. Every change
- * here must verify every member. */
+/* The actor-start members of 368.c: start the actor, then raise a scene flag. They differ only in the
+ * three constants. Every change here must verify every member. */
 #define SCENA10_ACTOR_START(scene, step, flag) \
     do {                                       \
-        func_801BE1B0(scene);                  \
-        actor->header.mode = 4;                \
-        actor->unk_78      = 2;                \
-        actor->unk_77      = (step);           \
-        actor->unk_7E      = 0;                \
+        SCENE_START_ACTOR(actor, scene, step); \
         SYS_SetFlag(g_SceneFlags, (flag));     \
     } while (0)
 
