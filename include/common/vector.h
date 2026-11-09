@@ -32,8 +32,7 @@ typedef struct Point3D {
     s16 z;
 } Point3D;
 
-/* Three signed words: a position or an angle accumulator that the game stores
- * packed, without the SDK's pad word. */
+/* Three signed words: a position or an angle accumulator that the game stores packed, without the SDK's pad word. */
 typedef struct Point3DL {
     s32 x;
     s32 y;
