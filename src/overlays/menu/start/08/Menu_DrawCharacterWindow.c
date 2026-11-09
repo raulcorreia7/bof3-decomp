@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 70.90%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused) {
     s16        val0;
@@ -139,6 +137,5 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
                             character->exp);
 }
 #else
-/* blocker: register homes (py in s2, shaded byte in s3). */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 #endif

@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: saved regs s6/s7 swapped (arg3 in s6,
- * arg5 in s7); pin next. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6) {
     u8*  stack_10;

@@ -90,7 +90,6 @@ MATCH void func_801EF2CC(void) {
 
 INCLUDE_ASM(func_801EF318);
 
-/* Blocker: GTE path (SetLineF4, SetSemiTrans, RotAverage4) with a stack-built quad; no C draft yet. */
 INCLUDE_ASM(func_801EFE14);
 
 MATCH void func_801EFEB8(void) {

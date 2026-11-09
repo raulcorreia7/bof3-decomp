@@ -11,8 +11,8 @@ is the cheapest known way in, in the order docs/matching.md tries them:
     template    a template with a few differing instructions: tools/template_diff.py
     plain       no known route: m2c draft, diagnose loop, permuter
 
-A function with a hint above its `INCLUDE_ASM` (an earlier try) sorts after the untried ones of
-its route and shows the hint. Build first (`meson compile -C build/meson`): the function index
+A function recorded in `config/attempts.tsv` sorts after the untried ones of
+its route and shows its attempts. Build first (`meson compile -C build/meson`): the function index
 comes from the built images. Templates need `rapidfuzz` (`tools/setup.sh --matching`).
 """
 
@@ -20,8 +20,8 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import csv
 import io
-import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -33,8 +33,6 @@ ROOT = Path(__file__).resolve().parent.parent
 ROUTES = ("template0", "generator", "template", "plain")
 GENERATED = ("call-seq", "store-seq", "spad", "dispatch", "straight")
 EDITS = 3  # template_diff.py takes up to this many edits
-BLOCK = re.compile(r"^/\*(.*?)\*/", re.M | re.S)
-MARKER = re.compile(r"\s*\w+\s*")  # the `/* func_ADDR */` name marker
 HINT_WIDTH = 150
 
 
@@ -49,15 +47,16 @@ class Row:
     hint: str
 
 
-def hint(src: str | None) -> str:
-    """Return the notes above the function's `INCLUDE_ASM`, on one line."""
-    if not src:
-        return ""
-    text = (ROOT / src).read_text(encoding="utf-8")
-    notes = [
-        m.group(1) for m in BLOCK.finditer(text) if not MARKER.fullmatch(m.group(1))
-    ]
-    return " ".join(" ".join(n.replace("*", " ").split()) for n in notes)
+def attempts(path: Path = ROOT / "config/attempts.tsv") -> dict[str, str]:
+    """Return the recorded attempts for each function."""
+    result: dict[str, list[str]] = {}
+    with path.open(encoding="utf-8", newline="") as source:
+        for row in csv.DictReader(source, delimiter="\t"):
+            note = "; ".join(
+                row[key] for key in ("tried", "first_diff", "score") if row[key]
+            )
+            result.setdefault(row["function"], []).append(note or "attempt recorded")
+    return {ref: " | ".join(notes) for ref, notes in result.items()}
 
 
 def is_hand_asm(src: str) -> bool:
@@ -92,6 +91,7 @@ def writable(f: gen_body.Func, tree: gen_body.Tree, names: gen_body.Names) -> bo
 def rank(image: str = "", route: str = "") -> list[Row]:
     """Return the worklist: cheapest route first, untried before tried, then by size."""
     near = templates()
+    notes = attempts()
     tree, names = gen_body.Tree(), gen_body.Names()
     shapes = {
         f.ref: shape for shape, f, _ in gen_body.measure(gen_body.asm_functions())
@@ -110,7 +110,7 @@ def rank(image: str = "", route: str = "") -> list[Row]:
         else:
             kind, how = "plain", "m2c draft"
         if not route or route == kind:
-            rows.append(Row(f.ref, len(f.words), kind, how, hint(f.src)))
+            rows.append(Row(f.ref, len(f.words), kind, how, notes.get(f.ref, "")))
     return sorted(
         rows, key=lambda r: (ROUTES.index(r.route), bool(r.hint), r.words, r.ref)
     )
@@ -129,7 +129,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--route", choices=ROUTES, default="", help="keep one route")
     parser.add_argument(
-        "--tsv", action="store_true", help="tab-separated, with the full hint"
+        "--tsv", action="store_true", help="tab-separated, with the full attempts"
     )
     args = parser.parse_args(argv)
     rows = rank(args.image, args.route)

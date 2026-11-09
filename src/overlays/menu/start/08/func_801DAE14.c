@@ -1,10 +1,6 @@
 /* best score 90.14 */
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to
- * g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv
- * (85.21), 15 min of rewrite search (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in
- * the branch delay slot and i++ after the volatile load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAE14(u16 buttons) {
     s32 count;

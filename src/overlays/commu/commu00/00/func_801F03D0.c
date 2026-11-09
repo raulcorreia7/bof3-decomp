@@ -1,10 +1,5 @@
 #include "commu00_00.h"
 
-/* Rolls three distinct labels per row into D_801F2930: each roll is RANDOM_MASK(0x1F), lowered by RANDOM_MASK(0xF)
- * until it fits the row's signed cap, then offset by 0x9B; 0x9F and 0xA0 and repeats are skipped. nonmatching 72.22%:
- * the caps are copied as one 3-byte record (retail lb/sb block copy). The retail keeps &caps in s5 across the row loop
- * and leaves the clamp loop unrotated (test at the top, j back); a goto clamp gives the unrotated shape (73.03%).
- * resume: a loop form GCC does not rotate, then the s5 hoist. */
 /* Cap byte of each table row lives in the module header, read signed. */
 
 /* The three label caps, copied as one record. */

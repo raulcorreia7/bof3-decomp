@@ -1,9 +1,5 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: tried the 0x140-byte panel copy as one struct assignment through a PartyMember view of
- * D_801EBF20, which gives retail's aligned four-word loop instead of the first-draft word-by-word body (65.62%).
- * residual: the body is 80 bytes short and keeps s1-s3 saved where retail saves only s0. resume: a body whose per-field
- * writes re-read g_Task like the retail sequence and need no crossing temporaries. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E8684(void) {
     PartyMember* temp_a0_112;

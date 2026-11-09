@@ -25,7 +25,6 @@ MATCH void func_801EEEE8(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-// hint: retail stores scale.x/scale.y through the same base as unk_48 before the unk_27 store; z store goes before unk_25 (matches up to +0x10).
 INCLUDE_ASM(func_801EEF80);
 
 INCLUDE_ASM(func_801EF118);

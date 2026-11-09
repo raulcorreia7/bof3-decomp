@@ -14,7 +14,6 @@ MATCH void func_801F743C(void) {
     actor->header.mode = actor->header.mode + 1;
 }
 
-/* Hint: a3 is lhu of the low half of vx (0x0C), while 0x0C is also read as a word; the same field needs two widths. */
 INCLUDE_ASM(func_801F745C);
 
 MATCH void func_801F74CC(void) {
@@ -281,7 +280,6 @@ MATCH void func_801FC778(void) {
     }
 }
 
-/* blocker: store in the bne delay slot; first diff: li a2,5 against li a1,5. */
 INCLUDE_ASM(func_801FC808);
 
 INCLUDE_ASM(func_801FC8A0);

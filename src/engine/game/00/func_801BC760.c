@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned; abs as if(v<0)v=-v, separate block temps; scheduler order of
- * the four D_80146144/48 product terms vs near-sum differs (51.9%). */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BC760(void) {
     PartyMember* row;

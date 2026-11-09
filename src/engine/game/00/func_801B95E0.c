@@ -7,8 +7,6 @@
 #define PAD_C          SP_REF(u8, 0xA)
 #define WDIR           g_Task->direction_08
 
-/* nonmatching unmeasured: tried if-chain compare order, ret var for return 3; pad pointer folds to absolute (retail
- * keeps s0), delay-slot li v0,3 sharing. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801B95E0(void) {
     s16 x;

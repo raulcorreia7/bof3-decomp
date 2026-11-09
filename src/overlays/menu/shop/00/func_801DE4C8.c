@@ -1,7 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried branch at +0x001c; resource-selection if/else call layout; candidate 49.56%. resume:
- * retail if/else call layout for resource selection rebuilt from asm. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DE4C8(void) {
     u8* resource;

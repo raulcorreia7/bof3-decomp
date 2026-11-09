@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: the first draft rebuilt on the GetTPage/SetDrawMode panel pass; first mismatch regalloc +0x4,
- * five saved registers differ. resume: a source shape that keeps the x/y roots out of s2/s3. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D750C(s32 x, s32 y) {
     s32 u;

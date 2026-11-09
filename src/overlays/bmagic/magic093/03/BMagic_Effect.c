@@ -26,7 +26,6 @@ MATCH void func_801EF0C4(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
 }
 
-// hint: retail indexes enemy via v1 (lui/addiu base, addu s0,v0,v1) and masks (unk_03+3) with andi; enemy-table forms tried (g_BattleEnemyBattlers[], base+stride) did not match
 INCLUDE_ASM(func_801EF108);
 
 MATCH void func_801EF264(void) {

@@ -6,9 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-/* Structurally complete; the candidate keeps the loop counter in t-regs and CSEs the work
- * reload, retail keeps them in $s0/$s1 and reloads g_Task each iteration (75 vs 67
- * instructions). Permuter tried: best 2030, 23 errors (2400 iterations). */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC70(void) {
     PartyMember* src;
@@ -99,7 +96,6 @@ MATCH void func_801EF0D8(void) {
 
 INCLUDE_ASM(func_801EF1DC);
 
-/* blocker: angle register; first diff: addiu v0,v0,512 (retail) against addiu a0,v0,512 (candidate). */
 INCLUDE_ASM(func_801EF358);
 
 MATCH void func_801EF434(void) {

@@ -359,6 +359,5 @@ NON_MATCHING s32 func_801BA678(void) {
     }
 }
 #else
-/* blocker: body 0xAE4 against retail 0xB40; first diff: +0x58 tail-jump target. */
 INCLUDE_ASM(func_801BA678);
 #endif

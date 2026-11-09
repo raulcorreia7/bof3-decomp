@@ -44,7 +44,6 @@ MATCH void func_801D150C(void) {
     }
 }
 
-// hint: retail keeps D_801DB0C4 unsigned (lbu throughout), counter in s0 and the x position (0x100000, += 0x200000, sra 16) in s1 with a 48-byte frame; plain forms hoist 0x200000 into s2 and drop the extra frame slots
 INCLUDE_ASM(func_801D15A4);
 
 INCLUDE_ASM(func_801D1774);
@@ -74,8 +73,6 @@ MATCH void func_801D1938(void) {
 
 INCLUDE_ASM(func_801D1A50);
 
-/* blocker: loop register allocation; first diff: +0x44 index load before the counter. */
-/* hint: the slot-counter loop (x kept as a 16.16 running value, D_801DB0C4 as u8) is 8 bytes over (0x138 against 0x130); first differing instruction: sw ra,28(sp) at +0xC, because the 0x200000 step is hoisted into s2 where retail reloads it inside the loop. */
 INCLUDE_ASM(func_801D1D68);
 
 INCLUDE_ASM(func_801D1E98);
@@ -222,7 +219,6 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1Step0Funcs, D_801F294D);
 }
 
-/* needs: u8 view of const g_SelectionCues and g_SelectionSequences; first diff: 0x801D35E0 lui v1 against v0. */
 INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {
@@ -319,7 +315,6 @@ INCLUDE_ASM(func_801D3E44);
 
 INCLUDE_ASM(func_801D4158);
 
-/* blocker: call target shifts with a 12-byte short body; first diff: +0x48. */
 INCLUDE_ASM(func_801D42B4);
 
 INCLUDE_ASM(func_801D437C);
@@ -344,7 +339,6 @@ MATCH void func_801D4840(void) {
     }
 }
 
-// hint: window frame drawer; natural form with s16 x/y and func_801D2EDC(s16, s16, s32) matches except the draw-mode style: retail sets a3 in branch delay slots with s0 = dx = 8 after the cursor load, the candidate puts dx in s2 and hoists move s1,zero
 INCLUDE_ASM(func_801D4910);
 
 INCLUDE_ASM(func_801D4AE0);
@@ -802,7 +796,6 @@ INCLUDE_ASM(func_801D7EA0);
 
 INCLUDE_ASM(func_801D7EF0);
 
-/* blocker: frame is 0x30, not 0x38; first diff: x argument copies. */
 INCLUDE_ASM(func_801D8058);
 
 INCLUDE_ASM(func_801D812C);

@@ -34,7 +34,6 @@ MATCH void func_801EF098(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-/* blocker: work pointer lifetime; first diff: lui a0 at +0x50. */
 INCLUDE_ASM(func_801EF130);
 
 INCLUDE_ASM(func_801EF27C);

@@ -1,8 +1,5 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: tried the first-draft body with the volatile g_InputMasks[BATTLE_INPUT_CONFIRM] view and one-member struct views for
- * the pad rows (62.12%). residual: retail keeps s5/s6 live across the draw calls (frame 0x30 against our 0x28) and the
- * body is 20 bytes short. resume: a source shape whose pad cursor and state base stay live across the calls. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1E8C(void) {
     PartyMember* temp_v0_66;

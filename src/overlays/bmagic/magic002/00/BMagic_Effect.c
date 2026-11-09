@@ -38,7 +38,6 @@ MATCH void func_801EEEBC(void) {
     }
 }
 
-/* blocker: retail loads unk_09 before unk_60 and keeps g_Task in v1; first diff: lui v1 against a0 at 0x801EEF84. */
 INCLUDE_ASM(func_801EEF84);
 
 INCLUDE_ASM(func_801EF030);

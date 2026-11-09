@@ -2,10 +2,6 @@
 
 /* Runs the area-030 actor's aim: picks the facing from the target
  * record, moves the actor's aim box and keeps the follow distance in range. */
-/* nonmatching 79.64%: writing the sub_index_03 clear and return at both call sites instead of jumping to one shared
- * block removed one shared label (79.29 -> 79.64); the four arms' D_801E31F8 and g_ActorSlots[0].unk_14 tails still
- * cross-jump, so the candidate is 64 bytes short. Remaining branch@+0xb4: the arm tails need to differ enough that
- * GCC 2.7.2's jump2 cannot share them. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DA9DC(void) {
     u8   limit;

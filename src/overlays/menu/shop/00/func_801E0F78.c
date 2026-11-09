@@ -1,14 +1,5 @@
 #include "shop_00.h"
 
-/* Lists the party members whose record flag bit 0 is set into D_801E6264, then builds the shop's first two panel
- * tasks (and slot 6 when Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) is clear).
- * nonmatching 86.53%: retail keeps &D_80148331 in v0 and stores the slot-0 bytes through it before the other
- * fields, in source order; ours folds the pointer to absolute stores and schedules them later. A MenuPanelTask
- * view gives the same score. resume: a pointer GCC cannot fold. */
-/* nonmatching unmeasured: tried local u8 pointer (folds to absolute), panel-task struct views of the slot-0 bytes with
- * the -fno-rerun-cse-after-loop row, all 24 orders of the slot-0 stores (92.66 only with the stores out of order),
- * chained -0x14/2 stores. resume: a shape that gives 7 the s0 home and keeps -0x14 in a0 while the slot-0 stores stay
- * in retail order. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E0F78(void) {
     u8 i;

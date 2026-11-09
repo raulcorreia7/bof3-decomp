@@ -4,7 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* blocker: entry reads v0 and v1 before setting them. */
 INCLUDE_ASM(func_801D2AFC);
 
 MATCH void func_801D2C0C(void) {
@@ -67,7 +66,6 @@ MATCH void func_801D2E20(void) {
     func_801D2ADC();
 }
 
-/* blocker: intermediate subtraction; first diff: +0x54 loads 0x02000000, not 0xFE000000. */
 INCLUDE_ASM(func_801D2E80);
 
 MATCH void func_801D2F48(void) {
@@ -161,7 +159,6 @@ MATCH void func_801D32E0(void) {
 
 INCLUDE_ASM(func_801D3320);
 
-/* blocker: register homes (py in s2, shaded byte in s3). */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Menu_DrawStatPanel.h"

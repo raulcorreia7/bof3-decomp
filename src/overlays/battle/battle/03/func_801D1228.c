@@ -4,10 +4,6 @@
  * count and the per-slot rows, then hands the first live battler the work
  * pointer.
  */
-/* nonmatching unmeasured: tried the first draft does not compile (the raw 0x8003xxxx state blocks and the row pointers
- * need views); the first draft cleaned into role-named locals and a local state-block type (47.22%). residual: the
- * register allocation and the row/state address forms still differ from the retail. resume: a source shape that
- * reproduces the retail's row and state-block address forms and its register allocation. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1228(void) {
     u8* work_row;

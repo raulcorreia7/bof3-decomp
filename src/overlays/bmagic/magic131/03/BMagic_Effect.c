@@ -8,7 +8,6 @@ INCLUDE_ASM(func_801EEC24);
 
 INCLUDE_ASM(func_801EEDEC);
 
-/* blocker: dragon-form switch layout; first diff: bnez v0 at 0x801EEF88 (signed compare slti in retail). */
 INCLUDE_ASM(func_801EEF64);
 
 INCLUDE_ASM(func_801EF000);
@@ -182,7 +181,6 @@ MATCH void func_801F0438(void) {
     }
 }
 
-/* blocker: actor load schedule; first diff: lui a0 at +0x10. */
 INCLUDE_ASM(func_801F04C0);
 
 MATCH void func_801F053C(void) {
@@ -219,7 +217,6 @@ MATCH void func_801F0B44(void) {
     }
 }
 
-/* blocker: coordinate and actor load schedule; first diff: lui a0 at +0x08. */
 INCLUDE_ASM(func_801F0BCC);
 
 MATCH void func_801F0C4C(void) {

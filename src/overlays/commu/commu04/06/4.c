@@ -60,5 +60,4 @@ INCLUDE_ASM(func_801D1628);
 
 #include "overlays/commu/Fairy_EndCommuScene.h"
 
-/* blocker: tail store order and a typed BattleOwnerKind view; first diff: sb zero,%lo(D_80148332) at 0x801D16D4. */
 INCLUDE_ASM(func_801D16A4);

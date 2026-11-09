@@ -109,7 +109,6 @@ MATCH void func_801EF4E4(void) {
     }
 }
 
-/* the angle cell address (lui s0,0x1f80) is built after the param load; every form hoists it into the bnez delay slot; first diff +0x2C */
 INCLUDE_ASM(func_801EF584);
 
 MATCH void func_801EF690(void) {

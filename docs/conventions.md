@@ -1532,7 +1532,7 @@ These stay:
 - a `FAKE:` note on a fake helper;
 - `@bug`;
 - legal text and tool directives (`clang-format off`, the `M2CTX` and `PERMUTER` guards);
-- one line above an unfinished `INCLUDE_ASM`: the blocker and the first differing instruction.
+- failed attempts in `config/attempts.tsv`, never in source.
 
 | Where                              | Says                                                                                      |
 | ---------------------------------- | ----------------------------------------------------------------------------------------- |
@@ -1541,7 +1541,6 @@ These stay:
 | beside a member                    | its offset, then its role when the name does not say it                                   |
 | at a fake-match helper             | `/* FAKE: <reason>. */`, the only marker form ([fake-match helpers](#fake-match-helpers)) |
 | at a retail bug kept for the match | `/* @bug <what goes wrong and when>. */`                                                  |
-| above an `INCLUDE_ASM` line        | the blocker and the first differing instruction, one line                                 |
 
 **Do**
 
@@ -1550,9 +1549,6 @@ These stay:
 void Item_Add(u16 item_id, u8 item_count);
 
 /* @bug reads one row past g_ShopStock when shop_index is SHOP_COUNT. */
-
-/* blocker: effect pointer reload; first diff: lw v0, 0x10(s0). */
-INCLUDE_ASM(func_801F1408);
 ```
 
 **Don't**

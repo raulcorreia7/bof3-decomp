@@ -59,7 +59,6 @@ INCLUDE_ASM(func_801FBC88);
 
 INCLUDE_ASM(func_801FBD88);
 
-/* needs: compiling draft for the jump table at +0x20. */
 INCLUDE_ASM(func_801FC498);
 
 INCLUDE_ASM(func_801FC718);
