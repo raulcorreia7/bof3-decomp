@@ -55,7 +55,11 @@ MATCH void func_801D0DAC(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0E38);
+MATCH void func_801D0E38(void) {
+    u8 timer;
+
+    SCENE_RED_GRADIENT_FADE(timer, 0x8, 5);
+}
 
 MATCH void func_801D0EAC(void) {
     SYS_DISPATCH_TASK(D_801D27D8, 1, g_Task);

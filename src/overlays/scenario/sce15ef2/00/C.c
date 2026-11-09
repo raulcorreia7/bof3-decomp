@@ -146,15 +146,7 @@ MATCH void func_801D1118(void) {
 MATCH void func_801D11A4(void) {
     u8 timer;
 
-    timer = g_Task->timer;
-    if (timer == 0x10) {
-        Scene_DrawRedGradient(0xFF);
-    } else {
-        Scene_DrawRedGradient((timer << 4) & BYTE_MASK);
-    }
-    if (--g_Task->timer == 0) {
-        func_80196070();
-    }
+    SCENE_RED_GRADIENT_FADE(timer, 0x10, 4);
 }
 
 INCLUDE_ASM(func_801D1218);
