@@ -1,16 +1,5 @@
 #include "game_00.h"
 
-/* Packed 16.16 coordinate word: the high half is the tile coordinate and the
- * low half the sub-tile bits, the layout func_801A8F94 stores. */
-typedef union {
-    s32 word;
-
-    struct {
-        u16 frac;
-        s16 tile;
-    } parts;
-} GamePackedCoord;
-
 /* K&R definition: the callers pass two arguments through the unprototyped
  * declaration, and the s16 parameters narrow here. stale_a3 arrives as the packed
  * probe word whose high half takes the tile y. */
@@ -21,7 +10,7 @@ s16       y;
 s32       stale_a2;
 s32       stale_a3;
 {
-    GamePackedCoord org;
+    Coord           org;
     u8*             map;
     s16             ix;
     s16             iy;
@@ -37,9 +26,9 @@ s32       stale_a3;
     }
     stale_a3 &= HALF_MASK;
     stale_a3 |= (u16)y << 16;
-    org.parts.frac = 0;
-    org.parts.tile = x;
-    dist           = Area_SampleHeight(org.word, stale_a3 & 0xFFFF0000);
+    org.part.fraction = 0;
+    org.part.integer = x;
+    dist           = Area_SampleHeight(org.fixed, stale_a3 & 0xFFFF0000);
     tile           = Area_GetCellCode(ix, iy);
     counter        = COORD_INT((g_Task)->pos.z);
     if (counter - dist < 257 && (tile & 0xF0) == 0xF0) {
