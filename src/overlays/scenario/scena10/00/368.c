@@ -168,7 +168,14 @@ MATCH void func_801FD528(void) {
     g_ScriptVars[0]       = 0xA;
 }
 
-INCLUDE_ASM(func_801FD568);
+MATCH void func_801FD568(Actor* actor) {
+    func_801BE1B0(0);
+    actor->header.mode = 4;
+    actor->unk_78      = 2;
+    actor->unk_77      = 5;
+    actor->unk_7E      = 0;
+    SYS_SetFlag(g_SceneFlags, 0xF);
+}
 
 INCLUDE_ASM(func_801FD5C0);
 
