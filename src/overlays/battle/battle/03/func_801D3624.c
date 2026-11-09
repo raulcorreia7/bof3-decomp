@@ -1,14 +1,8 @@
 #include "battle_03.h"
 
-/* Non-volatile view of the battle mode word (0x801463C0): ram.h declares it
- * volatile, and a volatile 16-bit load cannot be narrowed to the byte the
- * slot-selection call takes. */
+/* Non-volatile view of the battle mode word (0x801463C0). */
 
-/* starts a battle: clears the 0x20 setup flag, records the battle
- * mode, resolves the battler row of the random kind (local rows for kinds
- * 0-2, enemy rows for 3+) and copies its position words into the 0x80146386
- * pair.
- */
+/* starts a battle: clears the 0x20 setup flag, records the battle mode, resolves the battler row of the random kind (local rows for kinds 0-2, enemy rows for 3+) and copies its position words into the 0x80146386 pair. */
 MATCH void func_801D3624(void) {
     u16* setup_flags;
     /* FAKE: allocator tie, row pointer in a1. */

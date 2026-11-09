@@ -1,8 +1,6 @@
 #include "battle_15.h"
 
-/* reports whether the current character may select the kind stored in
- * the active selection-scratch entry.
- */
+/* reports whether the current character may select the kind stored in the active selection-scratch entry. */
 /* func_80097574 */
 MATCH bool Battle_IsAbilityLocked(void) {
     u8* slot = (u8*)&D_80148656;

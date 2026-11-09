@@ -1,8 +1,6 @@
 #include "battle_15.h"
 
-/* Draws the ability panel: the ability icons of every row, their
- * names and the frame behind them.
- */
+/* Draws the ability panel: the ability icons of every row, their names and the frame behind them. */
 /* nonmatching unmeasured: the retail frame is 0x58 and the candidate 0x50, so the eight unused frame bytes are
  * declared; candidate 73.79%. resume: a source shape that reproduces the retail's register homes. */
 #ifdef NON_MATCHING

@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* Sprite and palette blocks for the two panel slots. Not declared by headers;
- * the addresses are the binary's own. */
+/* Sprite and palette blocks for the two panel slots. */
 
 MATCH void func_800B4220(s16 x, s16 y, u8 selected) {
     s16 slot_x;

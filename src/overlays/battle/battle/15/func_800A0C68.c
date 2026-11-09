@@ -1,8 +1,6 @@
 #include "battle_15.h"
 
-/* sums the weighted affinity of each battle slot and stores the
- *           clamped result in the active record's halfword field.
- */
+/* sums the weighted affinity of each battle slot and stores the clamped result in the active record's halfword field. */
 MATCH void func_800A0C68(void) {
     /* FAKE: retail reserves 8 stack bytes that no statement uses. */
     FAKE_STACK_PADS(u8, 8);

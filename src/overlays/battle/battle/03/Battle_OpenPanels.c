@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* Reserves the battle stage's selection panel entries and fills one ring record per active battler
- * from its stage tables.
- */
+/* Reserves the battle stage's selection panel entries and fills one ring record per active battler from its stage tables. */
 /* func_801D1828 */
 MATCH void Battle_OpenPanels(void) {
     u8* group;

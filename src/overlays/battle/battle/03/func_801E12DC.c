@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* when no active local damage row carries the 0x2000 flag, marks the local work word, records the work
- * pointer in the slot the route state selects and advances the work byte at 0x04.
- */
+/* when no active local damage row carries the 0x2000 flag, marks the local work word, records the work pointer in the slot the route state selects and advances the work byte at 0x04. */
 MATCH void func_801E12DC(void) {
     PartyMember* work;
     PartyMember* slot_work;

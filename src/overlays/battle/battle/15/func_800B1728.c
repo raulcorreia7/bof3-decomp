@@ -1,8 +1,6 @@
 #include "battle_15.h"
 
-/* Draws the battle command list: copies the command page, draws up to three rows with the affordability color
- * and the price text, and the cursor box.
- */
+/* Draws the battle command list. */
 MATCH void func_800B1728(void) {
     s32 entry;
     u16 line_y;

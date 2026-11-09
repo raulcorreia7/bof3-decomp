@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* sets bit 0x100 in the damage status row for the active battler.
- */
+/* sets bit 0x100 in the damage status row for the active battler. */
 /* func_800A1704 */
 MATCH void Battle_GrantAlwaysHits(void) {
     u8 battler;

@@ -1,10 +1,8 @@
 #include "battle_03.h"
 
-/* Byte-displacement views over the active-count byte, the local-work array
- * (stride 0x140) and the ability template records (stride 0xA4). */
+/* Byte-displacement views over the active-count byte, the local-work array (stride 0x140) and the ability template records (stride 0xA4). */
 
-/* One 16-byte block of a template record; the copy below walks the record in
- * these blocks (the trailing word is copied separately). */
+/* One 16-byte block of a template record. */
 typedef struct BattleTemplateBlock {
     u32 words[4];
 } BattleTemplateBlock;

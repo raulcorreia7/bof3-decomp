@@ -1,12 +1,9 @@
 #include "battle_15.h"
 
-/* gcc 2.7.2 treats a union member as an aggregate access, so the slot byte
- * is reloaded after each row store, as in retail. */
+/* gcc 2.7.2 treats a union member as an aggregate access. */
 #define ACTIVE_BATTLER (((BattleSelectionContext*)&g_Battle.target)->sel)
 
-/* clears the active battler's eight status bytes and its status flag bits, then
- * passes that battler to func_800A9BD8.
- */
+/* clears the active battler's eight status bytes and its status flag bits. */
 MATCH void func_800A17A4(void) {
     u8 i;
 

@@ -2,9 +2,7 @@
 
 /* Per-row (x, y) offsets of the five panel rows. */
 
-/* draws the five panel rows at the panel position plus the per-row offsets, then ages the row counters or
- * advances the panel state when the first row has run out.
- */
+/* draws the five panel rows at the panel position plus the per-row offsets. */
 MATCH void func_801E927C(void) {
     u8 i;
     u8 size;

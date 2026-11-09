@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* Selection record at 0x800B65F8: a u16 id followed by the handler word that
- * D_800B65FC exposes as BattleSelectionAction. */
+/* Selection record at 0x800B65F8. */
 
 /* func_800AE1F8 */
 MATCH void Battle_LoadSelectionEffect(s32 selection_index) {

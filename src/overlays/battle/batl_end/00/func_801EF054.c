@@ -1,9 +1,6 @@
 #include "batl_end_00.h"
 
-/* Steps g_Battle.row_cursor over the party rows, asking func_801EF928 about each member's id. On
- * the first hit it sets bit 5 of g_Battle.outcome.result and steps g_Battle.ui_state; when no row hits it
- * resets g_Battle.ui_state and steps g_Battle.ui_step. Retail reaches g_Battle.ui_state, the row's id byte
- * and g_Battle.outcome.result as offsets from the g_Battle.row_cursor address, so this keeps the address view. */
+/* Steps g_Battle.row_cursor over the party rows, asking func_801EF928 about each member's id. */
 MATCH void func_801EF054(void) {
     u8* first = &g_Battle.row_cursor;
     u8* row;

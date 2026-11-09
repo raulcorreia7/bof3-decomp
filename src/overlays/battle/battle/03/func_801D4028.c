@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* with the setup flag set and no pending slot, asks the selection helper for a state and advances the
- * selection stage to it, clearing the state byte when the helper accepts.
- */
+/* with the setup flag set and no pending slot, asks the selection helper for a state and advances the selection stage to it, clearing the state byte when the helper accepts. */
 MATCH void func_801D4028(void) {
     u8 next;
 

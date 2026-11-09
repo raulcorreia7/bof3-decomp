@@ -6,8 +6,7 @@ typedef struct BattleMenuCursor {
     u16 page;
 } BattleMenuCursor;
 
-/* Battle menu cursor bounds: the index runs over the three rows of a page and the page over ten pages of three rows;
- * the target's own header declares none of them under these names. */
+/* Battle menu cursor bounds. */
 #define CURSOR_INDEX_MAX 2
 #define CURSOR_PAGE_MAX  9
 #define CURSOR_PAGE_STEP 3

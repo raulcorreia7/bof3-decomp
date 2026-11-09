@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* clears the current enemy's deferred halfword, resets the local work point pair, runs the mirror helper,
- * selects local work mode 4, runs the battle update, posts event 0x205 and advances the local substate.
- */
+/* clears the current enemy's deferred halfword, resets the local work point pair, runs the mirror helper, selects local work mode 4, runs the battle update, posts event 0x205 and advances the local substate. */
 MATCH void func_801E44D4(void) {
     PartyMember* work;
 

@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* Per-battler selector byte table and ability-template records (stride 0xA4).
- */
+/* Per-battler selector byte table and ability-template records (stride 0xA4). */
 
 MATCH void Battle_SetTextPartyName(u32 party_slot) {
     SYS_CopyString(g_TextVariables[0],

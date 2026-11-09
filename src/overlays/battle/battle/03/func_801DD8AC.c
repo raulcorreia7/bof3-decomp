@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* Byte-displacement views over the per-battler local records (stride 0x140,
- * the PartyMember array) and the ability template records (stride 0xA4).
- * g_Game.members comes from battle_03.h; the rest are field bases. */
+/* Byte-displacement views over the per-battler local records (stride 0x140, the PartyMember array) and the ability template records (stride 0xA4). g_Game.members comes from battle_03.h. */
 
 MATCH void func_801DD8AC(u32 battler_index) {
     u32 off;

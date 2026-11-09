@@ -1,10 +1,8 @@
 #include "battle_03.h"
 
-/* The entrance row table. Each row holds the sprite pair's byte offsets. */
+/* The entrance row table. */
 
-/* primes the battle entrance row state, then steps each of the seven
- * entrance rows through its handler and its entrance sprite pair.
- */
+/* primes the battle entrance row state. */
 MATCH void func_801D238C(void) {
     u8 panel_index;
 

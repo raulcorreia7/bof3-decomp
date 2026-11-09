@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* clears the small local/enemy action scratch flags for one battler
- * and removes it from the ranked owner list if present.
- */
+/* clears the small local/enemy action scratch flags for one battler and removes it from the ranked owner list if present. */
 /* func_801DD14C */
 MATCH void Battle_CancelTurn(u8 battler_index) {
     u8 index;

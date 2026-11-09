@@ -1,8 +1,4 @@
-/* scales an attack's base damage by the battle damage rate and
- * variance percents, applies the active element rule modifier, a random
- * damage roll percent, and halving/voiding status flags of the target
- * battler before returning the final s16 damage.
- */
+/* scales an attack's base damage by the battle damage rate and variance percents, applies the active element rule modifier, a random damage roll percent. */
 #include "battle_15.h"
 
 MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_flag) {

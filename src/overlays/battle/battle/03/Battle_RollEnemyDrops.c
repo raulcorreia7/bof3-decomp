@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* rolls the current enemy's two drop rows: a row with an item and rate passes when its g_BattleDropChances chance is
- * at least RANDOM_MASK(0xFF); a passing item bumps its drop count or is appended with count 1 (at most 15 entries),
- * and the row's item is cleared.
- */
+/* rolls the current enemy's two drop rows. */
 /* func_801E531C */
 MATCH void Battle_RollEnemyDrops(void) {
     DropChances chances;

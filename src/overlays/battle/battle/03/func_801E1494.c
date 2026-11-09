@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* consumes the signed counter at +0x11C against the bar at +0x88: a counter not above the bar re-arms the
- * bar, otherwise it is subtracted within the +0x90 cap (a negative counter queues one cue); then dispatches the
- * +0x120 flag bits and advances the scratch work step.
- */
+/* consumes the signed counter at +0x11C against the bar at +0x88. */
 MATCH void func_801E1494(void) {
     s16          value;
     u16          amount;

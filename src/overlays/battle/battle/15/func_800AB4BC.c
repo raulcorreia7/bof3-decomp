@@ -1,8 +1,6 @@
 #include "battle_15.h"
 
-/* @returns 1 if the value at the kind_index row in D_80145FAA equals 0xE or
- * 0x128.
- */
+/* @returns 1 if the value at the kind_index row in D_80145FAA equals 0xE or 0x128. */
 MATCH bool func_800AB4BC(s32 kind_index) {
     u16 value;
 

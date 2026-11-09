@@ -1,12 +1,6 @@
 #include "battle_15.h"
 
-/* picks the dragon form row whose three gene slots are all free:
- * func_800A6CF8 reports a slot as free while its gene is the 0xFF wildcard or
- * already one of the party's, and the first row that passes every slot copies
- * D_800B4D4C's companion gene into BATTLE_DRAGON_COMPANION and returns the row.
- * Row 6 asks func_800A6D84 for the battle formation first and returns its
- * pick when it has one; 0xFF means no row qualified.
- */
+/* picks the dragon form row whose three gene slots are all free. */
 MATCH u8 func_800A6C2C(void) {
     u8 row;
     u8 slot;

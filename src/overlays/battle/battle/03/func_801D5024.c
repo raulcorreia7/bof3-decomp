@@ -14,7 +14,7 @@ MATCH void func_801D5024(void) {
             }
             *counter += 1;
         }
-        /* fall through */
+        /* fall through. */
         case 2: {
             u8* counter = &g_Battle.phase.sub_step;
 
@@ -23,7 +23,7 @@ MATCH void func_801D5024(void) {
                 return;
             }
         }
-        /* fall through */
+        /* fall through. */
         case 3: {
             u8* counter = &g_Battle.phase.sub_step;
 
@@ -32,7 +32,7 @@ MATCH void func_801D5024(void) {
                 return;
             }
         }
-        /* fall through */
+        /* fall through. */
         case 4: {
             u8* counter = &g_Battle.phase.sub_step;
 
@@ -41,7 +41,7 @@ MATCH void func_801D5024(void) {
                 return;
             }
         }
-        /* fall through */
+        /* fall through. */
         case 5: {
             u8* counter = &g_Battle.phase.sub_step;
 
@@ -50,7 +50,7 @@ MATCH void func_801D5024(void) {
                 return;
             }
         }
-        /* fall through */
+        /* fall through. */
         case 6: {
             u8* counter = &g_Battle.phase.sub_step;
 
@@ -59,7 +59,7 @@ MATCH void func_801D5024(void) {
                 return;
             }
         }
-        /* fall through */
+        /* fall through. */
         case 7: {
             u8* counter = &g_Battle.phase.sub_step;
 
@@ -69,7 +69,7 @@ MATCH void func_801D5024(void) {
             }
             *counter += 1;
         }
-        /* fall through */
+        /* fall through. */
         case 9: {
             u8* counter = &g_Battle.phase.sub_step;
 
@@ -79,7 +79,7 @@ MATCH void func_801D5024(void) {
             }
             *counter += 1;
         }
-        /* fall through */
+        /* fall through. */
         case 11: {
             u8* counter = &g_Battle.phase.sub_step;
 

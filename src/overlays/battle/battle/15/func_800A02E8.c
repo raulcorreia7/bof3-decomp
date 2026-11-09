@@ -1,10 +1,6 @@
 #include "battle_15.h"
 
-/* when the active battler has no pending action flag, clears its
- * rule counter (for the first three battlers) and refreshes the shared battle
- * display unless the input-mask query succeeds; otherwise marks the g_Battle.target_record
- * record as selected.
- */
+/* when the active battler has no pending action flag, clears its rule counter (for the first three battlers) and refreshes the shared battle display unless the input-mask query succeeds. */
 MATCH void func_800A02E8(void) {
     u32 battler;
 

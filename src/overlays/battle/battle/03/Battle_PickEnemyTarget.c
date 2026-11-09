@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* picks the auto-target result byte for one enemy slot: dispatches on the global battle mode byte (1 =
- * enemy-state helper, 4 = decide from enemy targeting flags, otherwise read the preset table entry directly).
- */
+/* picks the auto-target result byte for one enemy slot. */
 /* nonmatching unmeasured: tried 55.15% at the control flow: mode switch with case 1, 4 and default, positive-polarity
  * flag chains, func_801E2D90 takes the slot index (branch-delay-slot a0 setup), non-volatile mode byte; falsified:
  * flags-first and kind-index-first load order through locals (44.44), flat kind*20 offset (44.44), a0/v1 pins on flags

@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* Overlay head .data, 0x801D0F20..0x801D1014: the panel, preview and
- * result handler tables the overlay dispatches through. */
+/* Overlay head .data, 0x801D0F20..0x801D1014. */
 
 /* In-overlay dispatch targets (split assembly units). */
 extern void func_801EA254(void), func_801EA530(void);

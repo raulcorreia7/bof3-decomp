@@ -15,7 +15,7 @@ MATCH s32 func_800A7B40(u8 combination, u8 count) {
         }
         for (j = 0; j < limit; j++) {
             if (*(rec + j + 0x70) == D_800B4EB0[combination][i]) {
-                /* id already listed */
+                /* id already listed. */
                 goto next;
             }
         }

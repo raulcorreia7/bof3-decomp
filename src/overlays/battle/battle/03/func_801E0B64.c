@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* Refreshes the per-battler substate copies and panel positions.
- */
+/* Refreshes the per-battler substate copies and panel positions. */
 /* nonmatching unmeasured: tried the first draft rewritten with typed word/byte copy loops. resume: close the +0x8
  * immediate/address materialization. */
 #ifdef NON_MATCHING

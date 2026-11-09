@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* @initializes several global state variables.
- */
+/* @initializes several global state variables. */
 MATCH void func_800A4AD0(void) {
     u8 value = g_BattleRowCursor;
 

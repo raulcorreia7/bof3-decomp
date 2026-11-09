@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* stages the battle script record selected by the active battler's status flags and action state
- * into the battle script table, or arms the record already staged.
- */
+/* stages the battle script record selected by the active battler's status flags and action state into the battle script table, or arms the record already staged. */
 MATCH void func_801DEFE4(void) {
     PartyMember* work;
     PartyMember* battler;

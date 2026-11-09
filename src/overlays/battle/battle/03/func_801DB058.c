@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* computes average/max thresholds for eligible enemy and local
- * battlers, then marks the battlers that pass each threshold pair with the
- * shared `0x8000` state bit.
- */
+/* computes average/max thresholds for eligible enemy and local battlers. */
 MATCH u8 func_801DB058(void) {
     u16 local_hits;
     u16 total;

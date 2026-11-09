@@ -2,9 +2,7 @@
 
 /* Enemy work halfword pair at +0x84 (stride 0x118, indexed by slot - 3). */
 
-/* doubles the two selected enemy-row halfwords and clamps them to
- * 0xFFFF; it re-reads the selector before storing the second result.
- */
+/* doubles the two selected enemy-row halfwords and clamps them to 0xFFFF. */
 MATCH void func_800A07D0(void) {
     BattleSelectionContext* ctx;
     s32                     first_doubled;

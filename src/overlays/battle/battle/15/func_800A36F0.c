@@ -1,10 +1,8 @@
 #include "battle_15.h"
 
-/* Non-volatile scratchpad work cell (0x1F800044), read/saved/restored around
- * the update exactly as the loader expects. */
+/* Non-volatile scratchpad work cell (0x1F800044), read/saved/restored around the update exactly as the loader expects. */
 
-/* Applies the battler's status masks, updates shared defence values when the
- * magic-defence bit changes, and restores the active work pointer. */
+/* Applies the battler's status masks, updates shared defence values when the magic-defence bit changes. */
 MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
     u16 status;
     u32 saved_work;
@@ -81,5 +79,4 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
     return status;
 }
 
-/* Local weak bindings (same mechanism as symbols.c) so the diff link step
- * resolves the semantic names; they do not affect compilation. */
+/* Local weak bindings (same mechanism as symbols.c) so the diff link step resolves the semantic names. */

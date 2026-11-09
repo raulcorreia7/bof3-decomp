@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* waits until the sixteen hand-off markers g_SndVoiceStatus[16..23] are clear, then either performs the
- * configured reset or reinitialises the panel rows, stream slot and first three battler slots and clears the battle
- * bits.
- */
+/* waits until the sixteen hand-off markers g_SndVoiceStatus[16..23] are clear. */
 MATCH void func_801D656C(void) {
     u8 i;
 

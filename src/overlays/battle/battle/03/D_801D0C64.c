@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* Overlay head .data, 0x801D0C64..0x801D0CA0: the icon CLUT row, the
- * format strings and the five-entry panel table. */
+/* Overlay head .data, 0x801D0C64..0x801D0CA0. */
 
 /* In-overlay dispatch targets (split assembly units). */
 

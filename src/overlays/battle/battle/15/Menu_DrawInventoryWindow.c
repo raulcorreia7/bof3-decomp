@@ -1,7 +1,7 @@
 #include "battle_15.h"
 #include "menu/inventory.h"
 
-/* The battle copy of the menu inventory panel: seven visible rows and a shorter frame, without the vital-tab marks. */
+/* The battle copy of the menu inventory panel. */
 /* func_800B25C0 */
 MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     u8   scroll_y;

@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* sets flag bit 0x80 and increments the battler counter while below two.
- */
+/* sets flag bit 0x80 and increments the battler counter while below two. */
 MATCH void func_800A15DC(void) {
     u32          playerIndex;
     s32          enemy_index;

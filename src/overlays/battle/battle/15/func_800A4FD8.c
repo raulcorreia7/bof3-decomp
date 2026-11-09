@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* Four-byte battle slot rows: the gate byte at +0x03 skips the row, the three
- * slot bytes at +0x00..+0x02 index the D_800B4C7C value table. */
+/* Four-byte battle slot rows. */
 
 MATCH bool func_800A4FD8(void) {
     s32 row_index;

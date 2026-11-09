@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* Advances the active enemy battler's AI state: rolls the next state from its behavior row, gates it on
- * health and flags, then dispatches the state update and records it.
- */
+/* Advances the active enemy battler's AI state. */
 /* nonmatching unmeasured: the byte width of D_800B51F8 is corrected and
  * the enemy-work reads use the EnemyBattler members; candidate 46.94%. resume: the retail homes the slot in s1 (the
  * candidate keeps it in s2) and stores g_Battle.action_type through a pointer materialised before the rand() call. */

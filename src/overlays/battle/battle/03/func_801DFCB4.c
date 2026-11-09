@@ -4,11 +4,7 @@
 /* FAKE: non-volatile alias of g_Battle.action_type for the closing action-type test;
  * LOBU keeps the byte's address live in s0 across the calls (82.97%). */
 
-/* resolves the active party record's step: clears its 0x118 result cells,
- * stages its stat block at D_801EC2E8, runs the step for the current action type,
- * applies the 0x11C and 0x11E cells, marks a knockout at zero hp, then
- * advances the step.
- */
+/* resolves the active party record's step. */
 MATCH void func_801DFCB4(void) {
     PartyMember* self;
     PartyMember* stats_work;
@@ -28,8 +24,7 @@ MATCH void func_801DFCB4(void) {
     D_8014639C                               = g_Task;
     g_Battle.target_record                   = &self->u.turn;
     g_Battle.target                          = slot;
-    /* Plain pointer stores, not field stores: retail keeps each one ahead
-     * of the next g_Battle.target_record reload. */
+    /* Plain pointer stores, not field stores: retail keeps each one ahead of the next g_Battle.target_record reload. */
     *(s16*)((u8*)self + 0x11C)               = 0;
     *(s16*)((u32)g_Battle.target_record + 6) = 0;
     *((u8*)g_Battle.target_record + 8)       = 0;

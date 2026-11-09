@@ -1,9 +1,6 @@
 #include "battle_15.h"
 
-/* applies one battle event packet to the current enemy work row,
- * dispatches the per-kind record updates, then copies the packet's eight tail
- * bytes.
- */
+/* applies one battle event packet to the current enemy work row, dispatches the per-kind record updates. */
 /* func_8009C994 */
 MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* event) {
     EnemyBattler* work;

@@ -4,8 +4,7 @@
 /* Player cue index tables. */
 /* Enemy cue rows: one 0x118-byte row per enemy slot, cue index at +0. */
 
-/* Queues the current battler's battle cue id from the event flag row.
- */
+/* Queues the current battler's battle cue id from the event flag row. */
 MATCH void func_800AB834(void) {
     u8 row;
     u8 battler;

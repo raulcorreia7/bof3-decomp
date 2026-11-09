@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* Player flag rows (stride 0x140) and enemy flag rows (stride 0x118) hold the
- * byte read here at record offset 0. */
+/* Player flag rows (stride 0x140) and enemy flag rows (stride 0x118) hold the byte read here at record offset 0. */
 
 MATCH s16 func_800A3060(u8 battler_index, u16 rule_mask) {
     u8  index;

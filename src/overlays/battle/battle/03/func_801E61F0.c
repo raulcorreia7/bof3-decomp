@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* counts the queued slot's step byte down and, on expiry, clears the
- * 0x80 bit of the flag record selected by the slot owner's index before running
- * the queued step.
- */
+/* counts the queued slot's step byte down and, on expiry, clears the 0x80 bit of the flag record selected by the slot owner's index before running the queued step. */
 MATCH void func_801E61F0(void) {
     BattleEffect* work;
     u8            count;

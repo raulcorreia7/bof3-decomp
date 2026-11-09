@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* re-arms the scratchpad work record for the battle view: sets the mode byte, clears the motion
- * accumulators, copies the pending table byte, seeds the anchor from the record's coordinates and resets the entry
- * bytes.
- */
+/* re-arms the scratchpad work record for the battle view. */
 MATCH void func_801DEF0C(void) {
     volatile PartyMember* work;
     volatile PartyMember* out;

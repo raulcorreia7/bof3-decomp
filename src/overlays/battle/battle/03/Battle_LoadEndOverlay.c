@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* completes the battle setup pass: waits while a record holds the pending bit, backs the state counter off
- * on an inconsistent selection, otherwise resets each local record's presentation, runs the followups and hands the
- * front end to the EMI loader.
- */
+/* completes the battle setup pass. */
 /* func_801D6A14 */
 MATCH void Battle_LoadEndOverlay(void) {
     u8  i;

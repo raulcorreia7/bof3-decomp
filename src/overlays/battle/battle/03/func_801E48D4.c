@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* advances the active local-work timers by adding +0x10 into +0x44
- * and +0x1C into +0x10, then re-arms the effect when +0x44 went negative.
- */
+/* advances the active local-work timers by adding +0x10 into +0x44 and +0x1C into +0x10. */
 MATCH void func_801E48D4(void) {
     PartyMember* work;
     s32          timer;

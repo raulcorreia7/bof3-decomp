@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* loads the active menu panel's gauge fraction and caps for both
- * bars from its entry, clamping each to one, and advances the panel.
- */
+/* loads the active menu panel's gauge fraction and caps for both bars from its entry, clamping each to one. */
 MATCH void func_801E9CA8(void) {
     MenuPanelTask* p1;
     MenuPanelTask* p2;

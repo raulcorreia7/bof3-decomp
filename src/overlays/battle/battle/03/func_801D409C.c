@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* scans the first three battle action slots and, per kind mask bit 0x200, clears the slot's 0x8 flag and
- * appends a selection-ring record (the 0x24 ability name for the flagged kind, else the 0x23 resource); when all are
- * past it advances the phase byte.
- */
+/* scans the first three battle action slots and, per kind mask bit 0x200, clears the slot's 0x8 flag and appends a selection-ring record (the 0x24 ability name for the flagged kind, else the 0x23 resource). */
 MATCH void func_801D409C(void) {
     u8*                     state;
     u8*                     battler;

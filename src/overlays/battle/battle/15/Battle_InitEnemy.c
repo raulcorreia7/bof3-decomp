@@ -3,8 +3,7 @@
 /* The enemy record the unit id is read from. */
 #define BATTLE_ENEMY_RECORD_SIZE 0x88
 
-/* Arms one enemy battler slot: installs the work pointer in the scratchpad, resets the slot record, copies
- * the unit id, then queues the unit's script and bit flag. */
+/* Arms one enemy battler slot. */
 /* nonmatching 61.0%: tried the first draft (59.75%); u16 unit parameter (61.01%); u8/u16/s32/u32 parameter-type sweep
  * (best 61.01%); caching the unit offset in a local (56.10%); moving the y store after the call (58.39%); a register
  * pin on slot and unit (61.01%, no change: gcc 2.7.2 ignores the constraint). the work record's byte cells are read

@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* Active-enemy flag bytes: element 0 of this stride-0x118 table corresponds to
- * master record slot 3 (the three preceding slots are the party members). */
+/* Active-enemy flag bytes: element 0 of this stride-0x118 table corresponds to master record slot 3 (the three preceding slots are the party members). */
 
 MATCH void func_801DDB7C(void) {
     PartyMember*  work;

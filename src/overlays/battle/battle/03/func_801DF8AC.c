@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* selects the next local-state handler from one of two tables and
- * calls it immediately.
- */
+/* selects the next local-state handler from one of two tables and calls it immediately. */
 
 MATCH void func_801DF8AC(void) {
     PartyMember* battle_work = g_Game.current;

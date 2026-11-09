@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* Builds the active battler's queued action list: copies up to three gene bytes, appends the combo ids
- * enabled by the gene flags, then terminates with 0xD9 and clears the rest. */
+/* Builds the active battler's queued action list. */
 MATCH void func_800A78B8(void) {
     u8* dst;
     u8  count;

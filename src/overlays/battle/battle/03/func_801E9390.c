@@ -9,8 +9,7 @@ MATCH void func_801E9390(void) {
     MenuPanelTask* task;
 
     i    = 0;
-    /* Retail materialises &g_Battle.panel_slot once before the loop and reloads the
-     * byte on every iteration; a plain scalar read repeats lui plus the load. */
+    /* Retail materialises &g_Battle.panel_slot once before the loop and reloads the byte on every iteration. */
     mode = &g_Battle.panel_slot;
     do {
         index = i & BYTE_MASK;

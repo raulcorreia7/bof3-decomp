@@ -5,9 +5,7 @@ typedef struct BattleEnemyFlag118 {
     u8  pad_04[0x114];
 } BattleEnemyFlag118;
 
-/* sets the selection-suppress bit for the active battler and
- *           advances its pending-count byte while below two.
- */
+/* sets the selection-suppress bit for the active battler and advances its pending-count byte while below two. */
 MATCH void func_800A14B4(void) {
     volatile u8* p;
     u32          slot;

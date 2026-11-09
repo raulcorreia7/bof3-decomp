@@ -1,12 +1,6 @@
 #include "battle_15.h"
 
-/* The retail leaves this unit's payload word in $a1 at the call. The callee
- * overwrites $a1 with its own zero operand, so the value is caller context
- * and not part of the shared one-argument prototype in include/sys/exe.h.
- * The alias names the same address with the second argument spelled out, so
- * the compiler keeps the $a1 write. The widths are the ones this caller
- * already used: a plain word for the selector and a plain word for the
- * payload. */
+/* The retail leaves this unit's payload word in $a1 at the call. */
 #if defined(MATCHING)
 asm(".globl Actor_SelectScript_keep_a1\n.set Actor_SelectScript_keep_a1, Actor_SelectScript\n");
 #endif

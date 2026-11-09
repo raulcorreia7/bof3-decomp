@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* updates the active battler's animation: runs its state handler, eases the hurt blend bytes and recomputes
- * the sprite vector from the pose tables.
- */
+/* updates the active battler's animation. */
 MATCH void func_801DF3F8(void) {
     PartyMember* actor;
     s32          y_pos;

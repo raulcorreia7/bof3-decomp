@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* returns ready immediately when the local work flags allow it;
- * otherwise delegates to the first EXE-side readiness helper.
- */
+/* returns ready immediately when the local work flags allow it. */
 MATCH u8 func_801DEDE4(void) {
     volatile PartyMember* battle_work   = g_Game.current;
     volatile u8*          battle_global = (u8*)(PARTY_STATE_PTR);

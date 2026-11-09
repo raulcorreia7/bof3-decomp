@@ -1,8 +1,7 @@
 #include "common/vector.h"
 #include "battle_15.h"
 
-/* The panel geometry the draw code reads: the origin x and y place the quad
- * on screen and the height is the quad's row count. */
+/* The panel geometry the draw code reads. */
 typedef struct BattlePanelGeometry {
     u8       pad_00[0x0A];
     u8       height;
@@ -55,8 +54,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
            panel->origin.y + (panel->height + 1));
     primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
     setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
-    /* The texture entry is read through the table symbol at every use: the retail
-     * code materializes the table address again for each access. */
+    /* The texture entry is read through the table symbol at every use. */
     tex_offset = texture_index * BATTLE_PANEL_TEX_STRIDE;
     setUV4(primitive, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
@@ -74,8 +72,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
            panel2->origin.y + panel2->height);
     primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
     setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
-    /* The second texture block reads the work record again for its last row, the
-     * way the retail code reloads the scratchpad work pointer there. */
+    /* The second texture block reads the work record again for its last row, the way the retail code reloads the scratchpad work pointer there. */
     setUV4(primitive, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x,

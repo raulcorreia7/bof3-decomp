@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* finds the next local battler record with neither the 1 nor the 2 flag, marks it 0x2000, clears the first
- * three slot flags when its state is not 4, records it in the group slot and advances the selection counters.
- */
+/* finds the next local battler record with neither the 1 nor the 2 flag, marks it 0x2000, clears the first three slot flags when its state is not 4, records it in the group slot and advances the selection counters. */
 MATCH void func_801D6818(void) {
     u8 index;
     u8 slot;

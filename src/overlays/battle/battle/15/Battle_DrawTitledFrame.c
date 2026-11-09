@@ -1,9 +1,7 @@
 #include "battle_15.h"
 
 /* func_800B1A74 */
-/* Draws the battle list box: the frame, the title text (DATA or BEST by title_index), the row and column guide
- * lines and their corner markers. The two unused parameters are the panel task's bytes 8 and 9 that the caller passes
- * through. */
+/* Draws the battle list box. */
 /* nonmatching unmeasured: tried opcode@+0x4: saved-register set and prologue order differ (retail
  * s3,s1,s7,s8,s2,s0,s5,s6,s4; ours differs), and the title text base materialization is off. resume: match the
  * caller-facing five-argument prototype (fifth byte on the stack) and rebuild the prologue copies from the asm. */

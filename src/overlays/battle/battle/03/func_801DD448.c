@@ -1,12 +1,8 @@
 #include "battle_03.h"
 
-/* The battle-local work pointer cell lives in normal RAM, not scratchpad;
- * reads of the cell itself are ordinary loads in the original code.
- */
+/* The battle-local work pointer cell lives in normal RAM, not scratchpad. */
 
-/* reports whether the current local work is eligible for the queued
- * branch, optionally applying the reprisal-pending gate and one random threshold.
- */
+/* reports whether the current local work is eligible for the queued branch, optionally applying the reprisal-pending gate and one random threshold. */
 MATCH u8 func_801DD448(void) {
     PartyMember*  work;
     volatile u16* gate;

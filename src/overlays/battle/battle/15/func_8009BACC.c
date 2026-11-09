@@ -1,9 +1,6 @@
 #include "battle_15.h"
 
-/* maps an agility difference to an escape threshold: table value for
- * the 16-wide bucket of diff + 0x20, +8 when the flag byte is 2, +8 when a live
- * slot has bit 0x2000 set, capped at 0x40.
- */
+/* maps an agility difference to an escape threshold. */
 MATCH u8 func_8009BACC(s32 diff) {
     u8 result;
     u8 slot;

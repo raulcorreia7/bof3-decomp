@@ -1,12 +1,6 @@
 #include "battle_03.h"
 
-/* Battle/03's retail .data, 0x801EABB8..0x801ED9D0, in address order.
- * The dispatch tables name their in-overlay targets; a target outside this
- * overlay (the exe and the boss overlay at 0x800C0000) stays an address
- * literal.  The runtime work areas are all zero in the retail image and stay
- * explicitly initialised so they keep their place in .data.  A span that no
- * declared type describes is one s_gap container; its interior D_ names stay
- * address-named views that the linker pins. */
+/* Battle/03's retail .data, 0x801EABB8..0x801ED9D0, in address order. */
 
 /* In-overlay dispatch targets (split assembly units). */
 
@@ -74,20 +68,14 @@ Callback D_801EAC4C[3] = {
     (Callback)func_801D39BC,
 };
 
-/* 0x801EAC58: the abilities `Recall` (ability 36 in GAME.EMI) casts at random.
- * Battle_PickTarget (0x801D3844) picks a slot with RANDOM_MASK(0x1F) and makes that
- * ability the action's ability. 32 slots, one ability ID each; the repeated
- * Burn entry weights the pick. */
+/* 0x801EAC58: the abilities `Recall` (ability 36 in GAME.EMI) casts at random. */
 /* D_801EAC58 */
 volatile u8 g_BattleRecallAbilities[32] = {
     0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76,
     0x5B, 0x5B, 0x5E, 0x5E, 0x64, 0x61, 0x67, 0x5C, 0x5F, 0x65, 0x62, 0x46, 0x4B, 0x52, 0x54, 0x55,
 };
 
-/* 0x801EAC78: the abilities `MagicShuffle` (37) and `Trump` (140) cast at
- * random. Battle_PickTarget (0x801D3844) picks a slot with RANDOM_MASK(0x1F) and
- * makes that ability the action's ability. 32 slots, one ability ID each; the
- * repeated Burn entry weights the pick. */
+/* 0x801EAC78: the abilities `MagicShuffle` (37) and `Trump` (140) cast at random. */
 /* D_801EAC78 */
 volatile u8 g_BattleMagicShuffleAbilities[32] = {
     0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x5B, 0x5B, 0x5E, 0x5E, 0x64, 0x61, 0x67, 0x5C,
@@ -623,8 +611,7 @@ static u8 s_gap_801EBF0C[0x14] = {0};
 
 /* 0x801EBF20 */
 /* D_801EBF20 */
-/* The party battler rows func_801E8684 copies into g_Game.members; func_801E7B34 and func_801D6818 read
- * their header.flags and turn.action_flags. */
+/* The party battler rows func_801E8684 copies into g_Game.members. */
 PartyMember s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT] = {0};
 
 /* 0x801EC2E0 */

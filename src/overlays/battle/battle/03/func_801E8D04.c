@@ -1,13 +1,6 @@
 #include "battle_03.h"
 
-/* clears the work flag and, when the fade counter reaches its
- * threshold, clears the slot's paired flag words before running the shared
- * battle step; otherwise advances the counter.
- *
- * The non-volatile view of g_BattleEffectBattler is load-bearing: retail's counter store
- * sits in the return-jump delay slot, which the assembler's delay-slot
- * filling only moves for a non-volatile store.
- */
+/* clears the work flag and, when the fade counter reaches its threshold, clears the slot's paired flag words before running the shared battle step. */
 MATCH void func_801E8D04(void) {
     u32 value;
 

@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* clears one local/enemy ranking scratch set across all battlers.
- */
+/* clears one local/enemy ranking scratch set across all battlers. */
 MATCH void func_801DB494(void) {
     u8 index;
 

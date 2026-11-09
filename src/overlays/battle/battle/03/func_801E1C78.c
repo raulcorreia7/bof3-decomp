@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* refreshes the active local work, then runs the 0x10-priority or
- * the 0x20-priority battle handler according to the +0x124 flags.
- */
+/* refreshes the active local work. */
 MATCH void func_801E1C78(void) {
     volatile PartyMember* work;
     u32                   flags;

@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* arms the queued selection from the pending slot: when already resolved it seeds the active battler's work
- * record and advances the panel state, otherwise it resolves the selection resource and queues the 30-frame event.
- */
+/* arms the queued selection from the pending slot. */
 MATCH void func_801D3A64(void) {
     u16 packed;
 

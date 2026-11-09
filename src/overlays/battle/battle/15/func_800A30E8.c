@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
-/* Player flag rows (stride 0x140) and enemy flag rows (stride 0x118) hold the
- * battler's heal-resistance byte at record offset 0. */
+/* Player flag rows (stride 0x140) and enemy flag rows (stride 0x118) hold the battler's heal-resistance byte at record offset 0. */
 
 /* Selection-kind flag table: the power byte at +0 of each 0x14-byte record. */
 extern u8 D_801CA71B[];

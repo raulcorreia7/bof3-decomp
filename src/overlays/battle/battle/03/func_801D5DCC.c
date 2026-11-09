@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* sums the per-turn hit point change of each living party member (modes, equipment, accessories, status bit 1)
- * and arms the follow-up state for every battler whose change is non-zero; living enemies with status bit 1 take half
- * of their max HP. Returns whether D_801463C2 is set.
- */
+/* sums the per-turn hit point change of each living party member (modes, equipment, accessories, status bit 1) and arms the follow-up state for every battler whose change is non-zero. */
 MATCH u8 func_801D5DCC(void) {
     u8  slot;
     s16 delta;

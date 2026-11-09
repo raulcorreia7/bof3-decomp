@@ -2,10 +2,7 @@
 
 /* INFERRED: the +0x00 flag word and 0x140-byte row match func_800AFF98. */
 
-/* calls func_800A3F28. When the selection index is below 3, sets
- * flag 0x400 in each active player row and then clears it from the row
- * selected by the current selection index.
- */
+/* calls func_800A3F28. */
 MATCH void func_800A1CB4(void) {
     u8 slot;
 

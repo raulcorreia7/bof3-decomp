@@ -1,8 +1,6 @@
 #include "battle_15.h"
 
-/* arms every idle battler slot and starts the battle phase when the
- * battle scene has not been entered yet.
- */
+/* arms every idle battler slot and starts the battle phase when the battle scene has not been entered yet. */
 /* FAKE: retail reads g_Battle.state as volatile. */
 MATCH void func_8009B828(void) {
     u8 i;

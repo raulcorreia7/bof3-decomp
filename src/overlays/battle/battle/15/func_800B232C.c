@@ -1,9 +1,6 @@
 #include "battle_15.h"
 
-/* dispatches the panel handler selected by the panel-task byte at
- * +3, then forwards the task's character/coordinates/state fields to the
- * panel renderer.
- */
+/* dispatches the panel handler selected by the panel-task byte at +3. */
 MATCH void func_800B232C(void) {
     D_800B6E40[BATTLE_PANEL_TASK->state]();
     /* FAKE: retail reads g_CharSlot as u8[]. */

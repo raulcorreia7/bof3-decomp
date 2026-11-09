@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* sets the selected local record flag, advances its state, and moves
- * the shared battle work counter forward.
- */
+/* sets the selected local record flag, advances its state, and moves the shared battle work counter forward. */
 MATCH void func_801E7888(void) {
     PartyMember* work;
     u8           selection;

@@ -1,9 +1,6 @@
 #include "battle_03.h"
 
-/* positions the panel task from the selected enemy row's base and
- * value offsets, draws it, then drops the panel when the active selection slot
- * disagrees with the panel's row.
- */
+/* positions the panel task from the selected enemy row's base and value offsets, draws it. */
 MATCH void func_801E99AC(void) {
     BattlePanelTask* panel;
     u8               row;

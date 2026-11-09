@@ -1,8 +1,6 @@
 #include "battle_03.h"
 
-/* refreshes one local record's activation and reports whether its
- * `0x400` flag is clear.
- */
+/* refreshes one local record's activation and reports whether its `0x400` flag is clear. */
 MATCH u8 func_801DD704(u8 battler_index) {
     u32 flags;
 

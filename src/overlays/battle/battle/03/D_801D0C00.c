@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* Overlay head .data, 0x801D0C00..0x801D0C2C: the mode-handler table and
- * the entrance table the battle state machine copies to its stack. */
+/* Overlay head .data, 0x801D0C00..0x801D0C2C. */
 
 /* In-overlay dispatch targets (split assembly units). */
 
