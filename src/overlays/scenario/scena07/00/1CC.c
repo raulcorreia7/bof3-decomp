@@ -520,7 +520,7 @@ MATCH void func_801FD3FC(Actor* actor) {
 
 MATCH void func_801FD45C(Actor* actor) {
     SYS_SetFlag(g_SceneFlags, 0xB);
-    Item_VitalAdd(5);
+    Item_VitalAdd(VITAL_ITEM_GUILD_LETTER);
     Game_SetScriptActive();
     SCENE_START_ACTOR(actor, 4, 6);
 }
