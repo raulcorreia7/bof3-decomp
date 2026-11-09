@@ -24,6 +24,11 @@ typedef struct CellOffset {
 
 /* The payload's first words: the per-state handler pointers. */
 extern u8                  D_801F4ED4[];
+extern u8                  D_80143FCD[];
+extern u8                  D_80143FCE[];
+extern u8                  D_80143FD3[];
+extern u8                  D_80143FF6[];
+extern u8                  D_80143FF8[];
 extern CellOffset          D_801F5304[];
 extern u8                  D_801F5308[];
 /* D_801F5914 */
