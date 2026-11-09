@@ -2,7 +2,6 @@
 #include "area/spad.h"
 #include "overlays/area/AreaSprite.h"
 
-
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
@@ -133,7 +132,15 @@ MATCH void func_80117A74(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_80117ACC);
+MATCH void func_80117ACC(void) {
+    if (SYS_TestFlag(D_80144ED0, 0x3E) != 0) {
+        g_Task->timer++;
+        func_80117B60(0x80 - (g_Task->timer >> 1));
+        if (g_Task->timer >= 0x80) {
+            func_80196070();
+        }
+    }
+}
 
 INCLUDE_ASM(func_80117B60);
 
