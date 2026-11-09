@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* shifts the 12 palette planes that the mask pair selects (row mask the 0x200-byte plane, column mask the
- * 16-cell rows): each nonzero 15-bit channel is offset by red, green and blue and clamped to 1..0x1F, into the
- * working copy of the 0x600 offset slice, marking the palette dirty.
- */
+/* shifts the 12 palette planes that the mask pair selects (row mask the 0x200-byte plane, column mask the 16-cell rows). */
 MATCH void Area_ApplyPaletteTint(s32 column_mask, s32 row_mask, s32 red, s32 green, s32 blue) {
     s32  plane;
     s32  row;

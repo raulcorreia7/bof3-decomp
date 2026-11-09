@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances the 12-bit rotation position g_AreaCameraAngle.vx by the signed step step toward target and reports 1 once
- * it has passed the target; otherwise it snaps to target and rebuilds D_801481D8 from D_801481E0 + 0x2AA. The two arms
- * spell the comparison with the masked accumulator on the left; reordering an arm changes the operand and register
- * order.
- */
+/* advances the 12-bit rotation position g_AreaCameraAngle.vx by the signed step step toward target and reports 1 once it has passed the target. */
 MATCH u8 Area_StepCameraX(s16 target, s8 step) {
     s32  value;
     u16* angle;

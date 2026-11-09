@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* TODO
- */
+/* TODO. */
 MATCH void func_80153CC4(u32 unused) {
     u32 base_t0;
     u32 level_t1;

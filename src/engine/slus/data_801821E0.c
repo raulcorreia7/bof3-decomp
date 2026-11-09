@@ -1,9 +1,6 @@
 #include "slus.h"
 
-/*
- * resident-executable variables and tables 0x801821E0..0x80183B78; widths follow the
- * loads and stores of the consumers, no field meaning is proven.
- */
+/* resident-executable variables and tables 0x801821E0..0x80183B78. */
 
 u16 g_VabProgramOffsets[4] = {
     0x0000,

@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* services the active EMI CD-ready callback, validates the sector
- * source, dispatches the current loader phase, and advances the streaming ring.
- */
+/* services the active EMI CD-ready callback, validates the sector source, dispatches the current loader phase. */
 MATCH void EMI_CdOnReady(u8 status, u8* result) {
     u8*           read_progress;
     CdlLOC*       current_pos;

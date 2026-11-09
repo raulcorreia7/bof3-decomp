@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* decrements g_MessageChoiceStep when the D_801490BA countdown is 2, and steps the
- * countdown up by two otherwise.
- */
+/* decrements g_MessageChoiceStep when the D_801490BA countdown is 2. */
 /* func_80151A48 */
 MATCH void UI_PrevChoice(void) {
     s8 value;

@@ -5,10 +5,7 @@ typedef struct {
     u32 values[4];
 } GameUICallbackGroup;
 
-/* snapshots the 21-entry local-mode callback table at g_UiLocalModes to
- * the stack and dispatches the entry selected by the current game-UI local
- * mode. UI_SetMode arms this loop through CbRegister.
- */
+/* snapshots the 21-entry local-mode callback table at g_UiLocalModes to the stack and dispatches the entry selected by the current game-UI local mode. */
 MATCH void UI_DispatchLocalMode(void) {
     GameUICallbackGroup*       dst;
     const GameUICallbackGroup* src;

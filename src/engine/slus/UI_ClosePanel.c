@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* closes the front-end panel: clears the panel index, arms panel 1
- * with mode 0, marks the panel state, and advances the front-end step.
- */
+/* closes the front-end panel. */
 MATCH void UI_ClosePanel(void) {
     u8 count;
 

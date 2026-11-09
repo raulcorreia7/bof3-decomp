@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* resets EMI transfer counters, converts the current LBA to CdlLOC,
- * and arms the next loader phase.
- */
+/* resets EMI transfer counters, converts the current LBA to CdlLOC, and arms the next loader phase. */
 MATCH void EMI_StartArchive(void) {
     volatile u8* read_progress;
     s8           state;

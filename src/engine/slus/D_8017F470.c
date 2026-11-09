@@ -1,9 +1,6 @@
 #include "slus.h"
 
-/*
- * pointer table of the 51 name cells in the D_80149814 string block
- * (exception names, then register names); SYSTEM_ShowException indexes it.
- */
+/* pointer table of the 51 name cells in the D_80149814 string block (exception names. */
 #define S(off) ((const void *)(D_80149814 + ((off) - 0x14)))
 
 const void *const D_8017F470[51] = {

@@ -1,16 +1,12 @@
 #include "engine/slus/slus.h"
 
-/* The front-end state block shares its base with the cursor word at 0x00;
- * retail addresses the row selector and count from there at +0x15/+0x16. */
+/* The front-end state block shares its base with the cursor word at 0x00. */
 typedef struct {
     u8 row;
     s8 count;
 } PanelRowIndex;
 
-/* emits the D_801490C6+1 glyphs of the D_801490C5 row at the panel
- * position, stepping each by the row's scale and threading the cursor through
- * UI_DrawTextAt.
- */
+/* emits the D_801490C6+1 glyphs of the D_801490C5 row at the panel position, stepping each by the row's scale and threading the cursor through UI_DrawTextAt. */
 MATCH void func_8015A098(void) {
     MenuPanelTask* panel;
     u8*            state;

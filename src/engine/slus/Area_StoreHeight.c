@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* stores value in the height-byte table of the map bundle at the scaled (s16) index.
- */
+/* stores value in the height-byte table of the map bundle at the scaled (s16) index. */
 MATCH void Area_StoreHeight(s32 x, s32 y, u8 value) {
     u8* base;
 

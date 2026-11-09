@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* steps the field camera toward its scroll goal, wraps the tile origin when it passes 0x200 either way (each wrap
- * calls one of the four edge refills), then rebuilds the rotation, view translation and projection matrix.
- */
+/* steps the field camera toward its scroll goal, wraps the tile origin when it passes 0x200 either way (each wrap calls one of the four edge refills). */
 /* func_801527E4 */
 MATCH void Area_UpdateCamera(void) {
     SVECTOR view;

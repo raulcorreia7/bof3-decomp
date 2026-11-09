@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* initializes the sound system: builds the SE table, starts the
- * ticker and reverb, opens the reserved voice and the seven SEP/VAB slots,
- * then seeds the reverb and voice parameter words.
- */
+/* initializes the sound system. */
 MATCH void SND_Init(void) {
     SsInit();
     SsSetTableSize((s8*)D_80148A50, 2, 4);

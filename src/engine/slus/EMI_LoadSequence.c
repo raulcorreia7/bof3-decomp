@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* selects the current EMI entry's alternate destination, marks the
- * entry with flag 2, advances the loader state machine, and advances the step.
- */
+/* selects the current EMI entry's alternate destination, marks the entry with flag 2, advances the loader state machine. */
 MATCH void EMI_LoadSequence(void) {
     u32 entry_offset;
 

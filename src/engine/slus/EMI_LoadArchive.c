@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* initializes EMI streaming state, refreshes the active LBA, and
- * installs CD callbacks.
- */
+/* initializes EMI streaming state, refreshes the active LBA, and installs CD callbacks. */
 MATCH void EMI_LoadArchive(u32 emi_id) {
     u32 cd_base;
     u32 active_lba;

@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* counts how many of one item the party holds: mode 0 returns its
- * inventory quantity, any other mode counts it among the equipment of the
- * live character records, plus the fishing rod and lures for accessories.
- */
+/* counts how many of one item the party holds. */
 MATCH s32 Item_Count(u8 category, u8 item, u8 mode) {
     u8*        ids;
     u8*        qtys;

@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances the current loader slot through its transfer, retunes
- * the remaining byte count, and re-arms the slot state machine.
- */
+/* advances the current loader slot through its transfer, retunes the remaining byte count. */
 /* Typed bank fields and a cached bank pointer leave a 0x30 frame versus retail 0x20. */
 #ifdef NON_MATCHING
 NON_MATCHING void EMI_UploadVabBody(void) {

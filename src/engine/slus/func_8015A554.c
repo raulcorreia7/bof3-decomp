@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* counts the row bytes of the D_801490B0 stream into the
- * D_801490CF table and lays out the panel box from that count and
- * D_801490C6.
- */
+/* counts the row bytes of the D_801490B0 stream into the D_801490CF table and lays out the panel box from that count and D_801490C6. */
 /* 50.39%; regalloc: retail keeps count/cursor in t0/a0; this draft uses a3/t0. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015A554(void) {

@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* returns the group's u16 resource id for one choice entry from the row table that the low byte of
- * category selects (strides 0x12 for 0 and others, 0x18, 0x16, 0x14, 0x10 for 1-4), indexed by the low byte of
- * item_id.
- */
+/* returns the group's u16 resource id for one choice entry from the row table that the low byte of category selects (strides 0x12 for 0 and others, 0x18, 0x16, 0x14, 0x10 for 1-4), indexed by the low byte of item_id. */
 MATCH s32 Item_GetDescription(s32 category, s32 item_id) {
     switch (category & BYTE_MASK) {
         case ITEM_CAT_ITEM:

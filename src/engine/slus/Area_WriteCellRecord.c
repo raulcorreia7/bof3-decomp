@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* writes one 4-byte cell record into the bundle's cell area: the u16 grid slot under (row, column) holds
- * the record id, and the record is copied from cell+4 (cell+8 while D_8014933C is zero) to the scaled slot after the
- * 4bpp cell image.
- */
+/* writes one 4-byte cell record into the bundle's cell area. */
 MATCH void Area_WriteCellRecord(u8* cell) {
     u32  map;
     u32  scratch[2];

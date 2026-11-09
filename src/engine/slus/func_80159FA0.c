@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* draws a flat-coloured F4 quad into the current primitive: sets the
- * rgb byte, writes the four corners derived from the two anchor points and the
- * two spans, appends the 0x1C-byte primitive, then draws the line across it.
- */
+/* draws a flat-coloured F4 quad into the current primitive. */
 MATCH void func_80159FA0(s32 x, s32 y, u8 width, u8 height) {
     LINE_F4* line;
     s32      x0;

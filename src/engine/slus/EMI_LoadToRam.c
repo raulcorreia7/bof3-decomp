@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* copies the current type-0 EMI payload to RAM, then advances the
- * loader's completed-entry count.
- */
+/* copies the current type-0 EMI payload to RAM, then advances the loader's completed-entry count. */
 MATCH void EMI_LoadToRam(void) {
     s32* completed_entries;
 

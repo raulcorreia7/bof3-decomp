@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* probes the bundle cell grid: the (x, y) delta becomes a row/column pair (both outside 0x38 reject with 0), rotated by
- * the cursor offsets g_AreaGridRowCursor/g_AreaGridColCursor, reads the cell halfword at g_AreaCellGrid and rewrites
- * every 0x23 command of its primitive list to 0x24, clearing the low flag bit of its palette record. */
+/* probes the bundle cell grid. */
 MATCH u8 Area_ClearCellPalette(s32 x, s32 y) {
     u8*  map;
     u8*  entry;
@@ -50,8 +48,7 @@ MATCH u8 Area_ClearCellPalette(s32 x, s32 y) {
             if ((word & 0xFF000000) == 0x23000000) {
                 command      = (word & 0xFFFFFF) | 0x24000000;
                 *(s32*)entry = command;
-                /* kept: the folded constant address keeps retail's own base load; the member form shares the register
-                   of map. */
+                /* kept: the folded constant address keeps retail's own base load; the member form shares the register of map. */
                 object =
                     (s32*)((*MEM_PTR(u16, (MAP_BUNDLE_BASE + 0x28)) * 4) + MAP_BUNDLE_BASE + (command & HALF_MASK) * 4);
                 value = *object;

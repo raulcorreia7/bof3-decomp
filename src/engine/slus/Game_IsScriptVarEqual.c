@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* returns 1 when record[1] equals the table entry selected by record[0],
- * and -1 otherwise.
- */
+/* returns 1 when record[1] equals the table entry selected by record[0], and -1 otherwise. */
 MATCH s32 Game_IsScriptVarEqual(u8* record) {
     u8 first;
     u8 second;

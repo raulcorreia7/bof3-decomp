@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* walks the bundle record list from g_AreaMapBundle.list_base_22: a 0x80 record picks the sub-record that the
- * g_FrameCount serial modulo the low byte selects and copies its eight palette words to g_GraphicsPaletteDst, raising
- * the palette stage serial; each record advances by its +2 size byte. */
+/* walks the bundle record list from g_AreaMapBundle.list_base_22. */
 MATCH void Area_CyclePalette(void) {
     u32* record;
     u32* dst;

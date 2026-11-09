@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* runs the front-end cue/step handler for the two pad masks: the MENU_INPUT_CANCEL cue sets owner mode 3, arms the
- * area request and steps once; the MENU_INPUT_CONFIRM cue steps twice; otherwise repeat-decoded input moves the choice
- * cursor, wrapping at zero through D_801490C6.
- */
+/* runs the front-end cue/step handler for the two pad masks. */
 MATCH void UI_HandleChoiceInput(void) {
     s32 action;
 

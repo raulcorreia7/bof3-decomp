@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* starts a volume sweep on the voice from the current level in
- * g_SndVoiceVolume to the target level in g_SndVoiceTargetVolume, then records the target as the
- * current level.
- */
+/* starts a volume sweep on the voice from the current level in g_SndVoiceVolume to the target level in g_SndVoiceTargetVolume. */
 MATCH void SND_StartVolumeSweep(s32 voice) {
     u16 index;
 

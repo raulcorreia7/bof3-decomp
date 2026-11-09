@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances g_MessageChoiceStep when the D_801490BA countdown is -2, and steps the
- * countdown down by two otherwise.
- */
+/* advances g_MessageChoiceStep when the D_801490BA countdown is -2. */
 /* func_801519F8 */
 MATCH void UI_NextChoice(void) {
     s8 value;

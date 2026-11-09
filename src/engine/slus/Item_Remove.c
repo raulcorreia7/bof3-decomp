@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* subtracts amount from the slot of item in the category rows; clears the slot when it reaches zero.
- * Returns 0 when the item is absent or the stack is short. */
+/* subtracts amount from the slot of item in the category rows; clears the slot when it reaches zero. */
 MATCH u8 Item_Remove(s32 category, u8 item, s32 amount, s32 unused) {
     u8* ids;
     u8* qtys;

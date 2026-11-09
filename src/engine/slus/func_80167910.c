@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* draws the outlined, rotating fairy portrait: projects the work
- * coordinates, builds the portrait quad and the rotating triangle fan, and
- * restores the matrix stack.
- */
+/* draws the outlined, rotating fairy portrait. */
 MATCH void func_80167910(void) {
     SVECTOR   rot;
     SVECTOR   axis;

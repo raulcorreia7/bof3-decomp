@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* publishes each of the four field work records as the scratchpad
- * work pointer and steps the ones that are active and not yet flagged 0x40.
- */
+/* publishes each of the four field work records as the scratchpad work pointer and steps the ones that are active and not yet flagged 0x40. */
 MATCH void Area_UpdateParty(void) {
     u8 index;
 

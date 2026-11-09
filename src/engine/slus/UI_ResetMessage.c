@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* resets the front-end selection state: clears the area request handshake, keeps only the pending bit of
- * the flags word, consumes one byte from a type-12 resource stream, then requests menu 0 mode 0 and arms the
- * front-end entry.
- */
+/* resets the front-end selection state. */
 MATCH void UI_ResetMessage(void) {
     u8* base;
     u8* cursor;

@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* samples the bundle's four-corner cell records and height bytes at the 16.16 point (x, y): the half-cell
- * bits pick the corner formula, g_AreaHeightOffsetEnabled scales the height byte (cleared by the caller), and the result is the
- * larger diagonal sum * 16 or, with both half-cell bits, the largest corner * 32, as s16; outside the grid it returns
- * 0.
- */
+/* samples the bundle's four-corner cell records and height bytes at the 16.16 point (x, y). */
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
  * draft; best score 82.69%. resume: a lever or header fix that closes the first mismatch. */
 /* Pinned coordinates and bundle pointer reach +0x18; the width load still uses a different register. */

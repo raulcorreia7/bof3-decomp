@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances D_801490CA by D_801490C8 and steps D_801490BB by the
- * signed high byte of the old sum, clearing both counters when the byte stays
- * non-negative.
- */
+/* advances D_801490CA by D_801490C8 and steps D_801490BB by the signed high byte of the old sum, clearing both counters when the byte stays non-negative. */
 MATCH void func_80151DCC(void) {
     u8* bb;
     s16 delta;

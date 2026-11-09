@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* clears the 22 front-end slots field by field and the trailing flag byte g_MenuPanelMode.
- */
+/* clears the 22 front-end slots field by field and the trailing flag byte g_MenuPanelMode. */
 MATCH void Menu_ResetPanelTasks(void) {
     s32 i;
 

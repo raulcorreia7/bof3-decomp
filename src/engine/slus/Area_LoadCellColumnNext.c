@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* rebuilds one rotated column of the 56 x 28 cell grid (column cursor from g_AreaGridColCursor wrapping at the last
- * column, row cursors from g_AreaGridRowCursor wrapping at the last row), passing every cell to func_801545B4 and
- * func_801541C0; the panel origin moves by (+1, -1). */
+/* rebuilds one rotated column of the 56 x 28 cell grid (column cursor from g_AreaGridColCursor wrapping at the last column, row cursors from g_AreaGridRowCursor wrapping at the last row), passing every cell to func_801545B4 and func_801541C0. */
 /* func_80152D9C */
 MATCH void Area_LoadCellColumnNext(void) {
     s32       row;

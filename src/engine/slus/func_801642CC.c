@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* HAND_ASM: multi-entry register-restore tail (0x801642CC reloads `$s1`, 0x801642D0 skips it) over
- * caller-held `$t0` and `$s6`; C89 has no equivalent. See docs/toolchain.md#compiler-chain. */
+/* HAND_ASM: multi-entry register-restore tail (0x801642CC reloads `$s1`, 0x801642D0 skips it) over caller-held `$t0` and `$s6`. */
 #ifdef NON_MATCHING
 /* C model, checked on the host by tools/tests/test_lz77_model.py: shared restore tail of the resumable decoder.
  * reloads the outer caller's $s1-$s7 from the context spill area at

@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* decrements g_MessageStateTimer and clears g_MessageState when it reaches zero.
- */
+/* decrements g_MessageStateTimer and clears g_MessageState when it reaches zero. */
 MATCH void UI_TickChoiceTimer(void) {
     u8 value;
 

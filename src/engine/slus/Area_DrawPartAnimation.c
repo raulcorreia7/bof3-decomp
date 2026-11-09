@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* draws the part list of one scene record: per run it builds an FT4 primitive from four packed cells (byte offsets
- * around the origin), projects the quad, picks one of the run's animation frames from g_FrameCount modulo the run
- * length and queues it.
- */
+/* draws the part list of one scene record. */
 MATCH void Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y) {
     SVECTOR    verts[4];
     ScenePart* run;

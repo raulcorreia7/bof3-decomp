@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* copies count bytes from src to dst, front to back.
- */
+/* copies count bytes from src to dst, front to back. */
 /* func_80177CD4 */
 MATCH void Mem_CopyBytes(u8* dst_base, u8* src_base, s32 count) {
     u8* dst;

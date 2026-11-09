@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* classifies the active scratchpad work area.
- */
+/* classifies the active scratchpad work area. */
 MATCH s32 Actor_GetType(void) {
     u8* work;
 

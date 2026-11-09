@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* draws the textured quads in part_list: builds the local position
- * and rotation vectors, then per 0x18-byte part pushes the GTE
- * matrix, rotates the part, emits a POLY_FT4 with four packed texture
- * coordinates and appends it with the part's draw mode.
- */
+/* draws the textured quads in part_list. */
 MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
     SVECTOR   pos;
     SVECTOR   rot;

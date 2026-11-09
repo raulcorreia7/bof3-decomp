@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* moves the 8-bit record value toward its 100/0 bounds by delta,
- * clamping at the crossed bound; a value already at 100 stays put.
- */
+/* moves the 8-bit record value toward its 100/0 bounds by delta, clamping at the crossed bound. */
 MATCH u32 Char_AddPercent(u8* value, u8 delta) {
     u8 cur;
 

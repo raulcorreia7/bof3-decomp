@@ -1,13 +1,11 @@
 #include "engine/slus/slus.h"
 
-/* walks the bundle record list g_AreaMapBundle.object_list_28: a header of 0x8001 marks a palette entry whose low flag
- * bit is cleared, and its twelve-byte entries each write their payload word into the map row that the halfword table
- * and the entry's row and bits 14-19 select. */
+/* walks the bundle record list g_AreaMapBundle.object_list_28. */
 /* nonmatching: 6 rows differ, registers only. The entry cursor is t1 in retail and a3 here (0x801544AC), and the payload
  * word takes a3 where ours takes t1. `payload = *record != 0` before the list loop took it from 14 rows to 6; two
  * FAKE_REG attempts and a 7 min permuter run did not close it; declaration order, the payload load position and
  * index, address and stepped-pointer entry forms leave the same 6 rows. */
-/* Entry/payload pins separately or together change the prologue; a separate initial flag and a 5,000-iteration permuter leave +0x74 as the best first difference. */
+/* Entry/payload pins separately or together change the prologue. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80154438(void) {
     /* FAKE: unused frame, 16 bytes. */

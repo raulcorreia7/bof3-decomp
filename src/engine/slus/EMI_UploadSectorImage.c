@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* programs the sprite rectangle for the current stream slot from
- * its record entry and uploads the slot's image when it fits the screen.
- */
+/* programs the sprite rectangle for the current stream slot from its record entry and uploads the slot's image when it fits the screen. */
 MATCH void EMI_UploadSectorImage(void) {
     s8*   idxp;
     s8    index;

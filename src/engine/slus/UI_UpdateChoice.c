@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* dispatches the handler the pending step byte g_MessageChoiceStep selects
- * through the two-entry table stored on the stack, then counts the pending
- * halfword g_MessageChoiceTimer down unless it is 0xFFFF, and clears g_MessageChoiceMode when the
- * count reaches zero.
- */
+/* dispatches the handler the pending step byte g_MessageChoiceStep selects through the two-entry table stored on the stack. */
 MATCH void UI_UpdateChoice(void) {
     Table2 table = {{UI_NextChoice, UI_PrevChoice}};
 

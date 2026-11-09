@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* latches two record fields into the bundle header color_1A pair, picking
- * the word or halfword fields by the D_8014933C mode byte.
- */
+/* latches two record fields into the bundle header color_1A pair, picking the word or halfword fields by the D_8014933C mode byte. */
 MATCH void func_801583BC(void* obj) {
     s32 first;
     /* FAKE: pin the second field result in the retail destination register. Natural u16/s32 locals without the pin

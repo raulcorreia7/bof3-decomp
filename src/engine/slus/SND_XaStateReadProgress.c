@@ -1,8 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* Polls the pending dispatch timer, else advances the retry counter. */
-/* polls the status flag and issues the pending CD command.
- */
+/* polls the status flag and issues the pending CD command. */
 MATCH void SND_XaStateReadProgress(void) {
     s32 wrap;
     s8* flag;

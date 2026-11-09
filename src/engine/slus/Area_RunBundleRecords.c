@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* while bit 2 of g_AreaDrawFlags is set, walks the bundle record list at g_AreaMapBundle.list_base_22 (four-byte
- * units): the opcode (low seven bits of +3) selects the handler in g_BundleRecordOpcodes and the word count at +2 advances; stops
- * at a zero terminator. */
+/* while bit 2 of g_AreaDrawFlags is set, walks the bundle record list at g_AreaMapBundle.list_base_22 (four-byte units). */
 MATCH void Area_RunBundleRecords(void) {
     u8* record;
 

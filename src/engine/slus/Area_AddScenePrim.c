@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* chooses the draw mode for the current scene, appends a 12-byte
- * primitive, then re-links the scene's cached packet into the ordering-table
- * slot selected by g_AreaDrawMode when the scene entry is live.
- */
+/* chooses the draw mode for the current scene, appends a 12-byte primitive. */
 MATCH void Area_AddScenePrim(s32 scene) {
     u32* slot;
     u32* packet;

@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* HAND_ASM: a sprite-quad emitter whose prologue, saved registers and frame the compiler profiles
- * do not reproduce. See docs/toolchain.md#compiler-chain. */
+/* HAND_ASM: a sprite-quad emitter whose prologue, saved registers and frame the compiler profiles do not reproduce. */
 #ifdef NON_MATCHING
 /* The 16x16 icon cell at index in the sprite sheet, drawn as a textured quad at (x, y) with the
  * given width, height and shade; the clut row comes from a per-index table. */

@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* maps panel coordinates px/py into the map bundle (x = g_AreaTileOriginX + px/2 + py, y =
- * g_AreaTileOriginY + px/2 - py) and, strictly inside the bundle's size, reads the 16-bit cell and reports a non-zero
- * one through out, else zeroes out.
- */
+/* maps panel coordinates px/py into the map bundle (x = g_AreaTileOriginX + px/2 + py, y = g_AreaTileOriginY + px/2. */
 MATCH void Area_GetCell(s32 px, s32 py, AreaCell* out) {
     AreaMapBundle* bundle;
     s32            width;

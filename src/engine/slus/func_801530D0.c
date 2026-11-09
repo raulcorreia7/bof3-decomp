@@ -10,10 +10,7 @@
         *(u32*)(D_80142CC4 + (off)) = (u32)(pkt);                                      \
     } while (0)
 
-/* Draws the visible window of the 0x37 by 0x1C tile ring: each cell is projected through the GTE, culled against the
- * screen box, given a packet pair (plus linked rows at +0x46/+0x4E) and linked into the ordering table by depth.
- * The scratch words behind D_1F80000C hold the window half-width.
- */
+/* Draws the visible window of the 0x37 by 0x1C tile ring. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801530D0(void) {
     s32 sp10_row;

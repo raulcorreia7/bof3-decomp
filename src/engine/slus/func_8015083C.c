@@ -1,15 +1,11 @@
 #include "engine/slus/slus.h"
 
-/* The channel record at g_UiWindowChannel is addressed by byte offsets from its flag halfword: +0 flags, +2 a result
- * byte, +3 a repeat count, +0xC the script cursor, +0x10 the return cursor. */
+/* The channel record at g_UiWindowChannel is addressed by byte offsets from its flag halfword. */
 #define CHAN_CURSOR(base) (*(u8**)((base) + 0xC))
 #define CHAN_RETURN(base) (*(u8**)((base) + 0x10))
 #define STEP_TABLE        ((u8*)D_8017F5B4)
 
-/* runs the channel script at the cursor until an opcode ends the step: 0 returns or ends the step in state 2, 2 ends
- * it in state 3, 3/4/7/8 call a sub-script (with its return cursor kept), 0xA queues a cue, 0xB ends the step in
- * state 1, 0xF/0x14/0x16 load per-channel fields, 0x10/0x11 toggle bit 0x10; other opcodes read the pad state.
- */
+/* runs the channel script at the cursor until an opcode ends the step. */
 /* nonmatching 24.33%: restated from the first draft with byte-offset field access and the dense switch. resume:
  * register assignment of the base pointers and the case order. */
 #ifdef NON_MATCHING

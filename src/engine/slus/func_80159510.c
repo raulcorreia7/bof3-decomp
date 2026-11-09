@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* The shared MenuPanelTask view stops at 0x08; the draw fields at 0x0D, 0x10
- * and 0x12 are recovered from the accesses. */
+/* The shared MenuPanelTask view stops at 0x08. */
 typedef struct MenuPanelDrawTask {
     u8  unk_00[3];
     u8  state;

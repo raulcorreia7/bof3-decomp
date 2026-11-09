@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* adds value to the matching key slot, capping at 99;
- * inserts a new slot and flags scratch on success.
- */
+/* adds value to the matching key slot, capping at 99; inserts a new slot and flags scratch on success. */
 MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
     u8  key;
     u8  add;

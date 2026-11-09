@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* claims the free record slot reported by Actor_FindFreeSlot and fills its
- * header, the two signed words, the id byte and the two halfword fields.
- */
+/* claims the free record slot reported by Actor_FindFreeSlot and fills its header, the two signed words, the id byte and the two halfword fields. */
 /* The head stays unprototyped: retail callers pass whole words and the callee narrows them itself. */
 MATCH s32 func_8015CB18(id, step, selection, x, y)
 u16       id;

@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances the front-end step counter while the pad holds the cue mask, then moves the choice cursor on
- * repeat input: 0x1000 steps back (wrapping to the maximum), 0x4000 forward (wrapping to zero).
- */
+/* advances the front-end step counter while the pad holds the cue mask. */
 MATCH void UI_ScrollChoice(void) {
     volatile u16* pad;
     s32           action;

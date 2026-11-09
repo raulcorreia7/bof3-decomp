@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* with no request pending (g_MessageChoiceTimer == 0) steps the shared cue
- * counter D_801490C8 by -2 in mode 2 and +2 otherwise, clamps it to 0 when it
- * crosses (clearing the mode g_MessageChoiceMode and bit 3 of g_UiWindowChannel), then arms
- * g_MessageChoiceTimer.
- */
+/* with no request pending (g_MessageChoiceTimer == 0) steps the shared cue counter D_801490C8 by -2 in mode 2 and +2 otherwise, clamps it to 0 when it crosses (clearing the mode g_MessageChoiceMode and bit 3 of g_UiWindowChannel). */
 MATCH void func_80151B50(void) {
     u16 value;
 

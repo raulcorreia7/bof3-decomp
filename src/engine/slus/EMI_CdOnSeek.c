@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* latches the loader status, selecting the error status when the
- * recorded state is negative.
- */
+/* latches the loader status, selecting the error status when the recorded state is negative. */
 MATCH void EMI_CdOnSeek(void) {
     s32 state;
 

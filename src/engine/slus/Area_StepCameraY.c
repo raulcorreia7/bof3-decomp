@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* steps the scene angle g_AreaCameraAngle.vy by step and reports 1 once the masked accumulator has passed target;
- * otherwise it snaps to target and rebuilds D_801481DA from D_801481E2. The two arms spell the comparison with the
- * masked accumulator on the left, which fixes the operand and register order.
- */
+/* steps the scene angle g_AreaCameraAngle.vy by step and reports 1 once the masked accumulator has passed target. */
 MATCH u8 Area_StepCameraY(s16 target, s8 step) {
     s32  value;
     u16* angle;

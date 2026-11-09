@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* stores one frontend-local mode and installs the matching callback.
- */
+/* stores one frontend-local mode and installs the matching callback. */
 MATCH void UI_SetMode(u16 local_mode) {
     if (WINDOW_EFFECT_BUSY()) {
         return;

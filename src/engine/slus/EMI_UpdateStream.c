@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* Once per frame while an archive streams: runs the handler of each sector parked in the ring, marks the
- * archive ready when the ring is empty after the pause, and restarts a read that made no progress for
- * EMI_STREAM_TIMEOUT_FRAMES frames.
- */
+/* Once per frame while an archive streams. */
 MATCH void EMI_UpdateStream(void) {
     SystemDispatchFuncs callbacks;
     u8*                 head;

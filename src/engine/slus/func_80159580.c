@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances the panel's two 12.4 axes by half their per-frame steps
- * and, when an axis reaches zero, snaps that axis to the mode-keyed table
- * value; completing both axes steps the panel state, otherwise the box is
- * redrawn through func_80159FA0.
- */
+/* advances the panel's two 12.4 axes by half their per-frame steps and. */
 MATCH void func_80159580(void) {
     MenuPanelTask* task;
     s32            count;

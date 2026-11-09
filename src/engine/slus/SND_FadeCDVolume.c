@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* steps the latched level toward the requested level one step at a time, then latches the final value. The
- * address flows through two pointer locals before the loop pointer; the allocator only keeps retail's second live
- * copy (a2) in that shape.
- */
+/* steps the latched level toward the requested level one step at a time, then latches the final value. */
 MATCH void SND_FadeCDVolume(s32 level) {
     u8  target;
     u8* base;

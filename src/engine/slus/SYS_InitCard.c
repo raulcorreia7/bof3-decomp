@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* opens and enables the boot-side event set used after the logo path
- * hands back to the disc/runtime layer.
- */
+/* opens and enables the boot-side event set used after the logo path hands back to the disc/runtime layer. */
 MATCH void SYS_InitCard(void) {
     EnterCriticalSection();
     g_SysCardSoftwareIoEvent      = OpenEvent(SwCARD, EvSpIOE, EvMdNOINTR, NULL);

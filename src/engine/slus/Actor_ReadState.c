@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* reads the scratchpad work record: with mode byte +0x4A == 1 it returns 2 when half the entry index
- * (+0x58) matches the filter byte (+0x49), else the length of the indexed stream entry at +0x50; otherwise the raw
- * index halfword.
- */
+/* reads the scratchpad work record. */
 MATCH u16 Actor_ReadState(void) {
     Actor* record;
     u8*    entry;

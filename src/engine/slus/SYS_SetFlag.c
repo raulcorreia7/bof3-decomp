@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* sets bit bit_index in the byte array at bits.
- */
+/* sets bit bit_index in the byte array at bits. */
 MATCH void SYS_SetFlag(void* bits, u8 bit_index) {
     u8* p;
 

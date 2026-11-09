@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* when the pad word is nonzero or g_UiWindowChannel has 0xC0 set, increments the message panel state and the handler
- * index g_UiWindowStep[0] and sets bit 2 of that counter; the guard reads the counter as a word, the body as its
- * halfword. */
+/* when the pad word is nonzero or g_UiWindowChannel has 0xC0 set, increments the message panel state and the handler index g_UiWindowStep[0] and sets bit 2 of that counter. */
 MATCH void func_80150E98(void) {
     u8  mode;
     u8  index;

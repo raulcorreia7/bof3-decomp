@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* probes the bundle cell grid: the (x, y) delta becomes a row/column pair (both outside 0x38 reject with 0), rotated by
- * the cursor offsets g_AreaGridRowCursor/g_AreaGridColCursor; returns the low 12 bits of the cell prim_id of the
- * rotated g_AreaCells entry. */
+/* probes the bundle cell grid. */
 
 MATCH s32 Area_GetCellId(s32 x, s32 y) {
     s32 dx;

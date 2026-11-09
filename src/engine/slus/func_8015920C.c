@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances the panel's two scroll axes toward the pending values,
- * taking the axis target from the mode-keyed D_8017F9xx tables on expiry and
- * committing the panel position to the window driver.
- */
+/* advances the panel's two scroll axes toward the pending values, taking the axis target from the mode-keyed D_8017F9xx tables on expiry and committing the panel position to the window driver. */
 MATCH void func_8015920C(void) {
     MenuPanelTask* panel;
     u16            next_x;

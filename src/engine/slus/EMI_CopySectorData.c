@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* copies the next EMI transfer chunk from the CD sector buffer,
- * wrapping into the active slot's sector when a partial sector remains.
- */
+/* copies the next EMI transfer chunk from the CD sector buffer, wrapping into the active slot's sector when a partial sector remains. */
 MATCH void EMI_CopySectorData(void) {
     u32  transfer_words;
     u32  transfer_size;

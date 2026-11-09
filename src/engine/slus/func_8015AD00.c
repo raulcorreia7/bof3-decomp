@@ -1,8 +1,7 @@
 #include "engine/slus/slus.h"
 #include <inline_c.h>
 
-/* One 0x28-byte textured-quad record of the table at work->unk_50: clut index,
- * four vertices, the face normal and four packed uv pairs. */
+/* One 0x28-byte textured-quad record of the table at work->unk_50. */
 typedef struct PanelPiece {
     s16 clut;    /* 0x00 */
     u16 v[4][3]; /* 0x02 */
@@ -10,8 +9,7 @@ typedef struct PanelPiece {
     u16 uv[4];   /* 0x20 */
 } PanelPiece;
 
-/* One 0x28-byte primitive this function builds at the primitive cursor: a
- * POLY_FT4, with a halves view over the uv pairs retail stores whole. */
+/* One 0x28-byte primitive this function builds at the primitive cursor. */
 typedef union PanelQuadPrim {
     POLY_FT4 ft4;
 
@@ -28,10 +26,7 @@ typedef union PanelQuadPrim {
     } halves;
 } PanelQuadPrim;
 
-/* projects the panel's textured-quad table through the GTE into
- * the primitive list, fills one sort-list row per quad and returns the quad
- * count.
- */
+/* projects the panel's textured-quad table through the GTE into the primitive list, fills one sort-list row per quad and returns the quad count. */
 MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     CVECTOR color;
     FAKE_STACK_PADS(VECTOR, 1); /* FAKE: retail keeps a dead 16-byte VECTOR slot at sp+0x18. */

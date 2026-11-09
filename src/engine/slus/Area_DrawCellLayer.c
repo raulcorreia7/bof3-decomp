@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* rotates the row/column cursors, walks a segment of the g_AreaCellGrid cell table and dispatches every
- * populated cell's record list through the D_8017F668 callbacks; this entry's packet first gets its low 24 bits
- * replaced by the D_80142CC0 colour.
- */
+/* rotates the row/column cursors, walks a segment of the g_AreaCellGrid cell table and dispatches every populated cell's record list through the D_8017F668 callbacks. */
 MATCH void Area_DrawCellLayer(s32 layer) {
     /* FAKE: unused frame, 8 bytes. */
     FAKE_STACK_PADS(u8, 8);

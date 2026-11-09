@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* initializes the post-logo disc/event path and hands control to the
- * first boot-side callback chain.
- */
+/* initializes the post-logo disc/event path and hands control to the first boot-side callback chain. */
 MATCH void SYS_InitHardware(void) {
     ResetCallback();
     EMI_Init();

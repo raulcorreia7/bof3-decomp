@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* shifts D_801490C8 left by four, copies g_MessageChoiceTimer into D_801490CA
- * and bumps g_MessageChoiceStep.
- */
+/* shifts D_801490C8 left by four, copies g_MessageChoiceTimer into D_801490CA and bumps g_MessageChoiceStep. */
 MATCH void func_80151D8C(void) {
     u16* counter;
     u16  value;

@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* adds amount to the g_Zenny accumulator (and to D_80145030 when skip_earned is
- * zero), clamping the accumulator at 0x98967F.
- */
+/* adds amount to the g_Zenny accumulator (and to D_80145030 when skip_earned is zero), clamping the accumulator at 0x98967F. */
 MATCH s32 Party_AddZenny(s32 amount, s32 skip_earned) {
     u32  sum;
     u32* zenny;

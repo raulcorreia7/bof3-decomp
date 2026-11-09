@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* copies 8 bytes into the buffer at 0x80146824 when mode is 0x2,
- * else flags 0x8014682E as -0x1.
- */
+/* copies 8 bytes into the buffer at 0x80146824 when mode is 0x2, else flags 0x8014682E as -0x1. */
 MATCH void SND_StoreXASyncResult(s32 intr, u8* result) {
     s32 i;
 

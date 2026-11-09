@@ -1,5 +1,4 @@
-/* dispatches to the mode handler selected by the flag.
- */
+/* dispatches to the mode handler selected by the flag. */
 #include "engine/slus/slus.h"
 
 MATCH void EMI_Update(void) {

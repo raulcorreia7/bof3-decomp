@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* latches the pending flags into the panel flag byte, arms the two half-centres and 12.4 slide targets from
- * the flag-keyed centre tables, clears both remaining distances, steps the panel state and derives each per-frame
- * step as a fifth of its centre.
- */
+/* latches the pending flags into the panel flag byte, arms the two half-centres and 12.4 slide targets from the flag-keyed centre tables, clears both remaining distances, steps the panel state and derives each per-frame step as a fifth of its centre. */
 MATCH void func_80159050(void) {
     volatile u8* flags;
     /* FAKE: the merged panel pointer must survive the if/else in v1; the allocator

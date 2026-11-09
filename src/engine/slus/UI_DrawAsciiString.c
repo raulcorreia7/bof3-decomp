@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* draws the ASCII string at (x, y + 1) as 8x12 sprite cells:
- * advances x by 8 per character, starts a new row 12 pixels down on a
- * newline, and skips spaces and the terminator.
- */
+/* draws the ASCII string at (x, y + 1) as 8x12 sprite cells. */
 MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
     /* FAKE: the two pins reproduce retail's callee-saved assignment; the logic
      * alone lets the allocator pick different saved registers. */

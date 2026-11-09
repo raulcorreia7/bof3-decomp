@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* resets the palette work area: clears the flag byte of each of the
- * 32 0x0C-byte palette work records, then fills the four 16-byte palette maps
- * with 0xFF.
- */
+/* resets the palette work area. */
 MATCH void GFX_ResetPaletteFades(void) {
     u8  entry;
     u8  row;

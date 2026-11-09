@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* scans the 0x10-stride slot table at D_80145DA0 and hands the index
- * of every entry whose key word equals owner to func_8014E484.
- */
+/* scans the 0x10-stride slot table at D_80145DA0 and hands the index of every entry whose key word equals owner to func_8014E484. */
 MATCH void GFX_FreePaletteSlotOwner(void* owner) {
     s32   index;
     s32   offset;

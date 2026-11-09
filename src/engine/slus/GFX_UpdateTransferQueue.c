@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* walks the transfer queue: each entry names two packed RECT
- * halves and a record whose kind routes the upload through func_8014E7F8,
- * func_8014E8FC or LoadImage; the queue count is cleared afterwards.
- */
+/* walks the transfer queue: each entry names two packed RECT halves and a record whose kind routes the upload through func_8014E7F8, func_8014E8FC or LoadImage. */
 MATCH void GFX_UpdateTransferQueue(void) {
     RECT rect;
     u16* table1;

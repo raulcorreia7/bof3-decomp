@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* Plays the sprite animation backwards: counts the step delay (+0x4A) down and, at zero, stages the step before the
- * position (+0x58); at position 0 it wraps to the end and returns 1. Jump steps are ignored.
- */
+/* Plays the sprite animation backwards. */
 /* func_8014DA24 */
 MATCH u8 Actor_StepAnimReverse(void) {
     u8  result;

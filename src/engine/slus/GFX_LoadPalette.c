@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* copies 0x20 halfwords of the selected record field into dst and dst +
- * 0x4000, then marks the copy complete. An actor palette goes to
- * GAME_PALETTE_STAGE + slot * 0x40 (arena row 15), so slot n's CLUT is VRAM
- * (32 n mod 256, 495 + 32 n / 256); the second copy is the working copy.
- */
+/* copies 0x20 halfwords of the selected record field into dst and dst + 0x4000, then marks the copy complete. */
 MATCH void GFX_LoadPalette(u8* dst, s32 field) {
     u8* record;
     u8* table;

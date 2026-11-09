@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* stops the effect voice that the group's entry in g_SelectionFxVoices names, then either pins both stream volume
- * cells to 0x1FFF and forwards the sequencer id and volume pair to SsSepSetVol, or silences the voice while the duck
- * gate D_80144954 is set, and finally starts it through SsSepPlay (mode 1, level 1).
- */
+/* stops the effect voice that the group's entry in g_SelectionFxVoices names. */
 MATCH void SND_PlaySequence(u16 group, s32 sequence, s32 left_volume, s32 right_volume) {
     s16 seq;
 

@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* counts g_MessageStateTimer down and, when it reaches zero, advances the mode byte,
- * the entry index and bit 2 of g_UiWindowChannel.
- */
+/* counts g_MessageStateTimer down and. */
 MATCH void func_80151894(void) {
     u8  value;
     u8  mode;

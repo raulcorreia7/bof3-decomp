@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state
- * (+0x48) bytes, seeds the +0x40/+0x44 scroll pair with 0x1000, links the panel record at +0x54, clears the
- * +0x64/+0x68 angles and seeds +0x6C from D_801C8424 by the +8 route byte.
- */
+/* initializes the scratch work record for a new panel. */
 MATCH void func_8015AC8C(u8* panel) {
     Actor* work;
     s32    value;

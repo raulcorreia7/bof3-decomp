@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* adjusts the record's 16-bit fields at +0x20 and +0x24 by the kind-selected bytes of the 0x18-stride table
- * Weapon.power and .weight, then by kind - 0xD nudges the counters in the +0x1C record body.
- */
+/* adjusts the record's 16-bit fields at +0x20 and +0x24 by the kind-selected bytes of the 0x18-stride table Weapon.power and .weight. */
 MATCH void Char_ApplyWeapon(void* character) {
     /* FAKE: record base pinned to s1; the retail allocation keeps kind in s2. */
     FAKE_REG(u8*, record, "s1");

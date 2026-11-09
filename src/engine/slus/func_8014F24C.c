@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* spins GFX_UpdateScreenFade until it reports a nonzero masked status,
- * stepping the two g_AreaCameraAngle.vx coordinates up by 0xB and the g_AreaCameraOffsetZ count
- * down by 0x32 each pass and re-arming the callback count.
- */
+/* spins GFX_UpdateScreenFade until it reports a nonzero masked status, stepping the two g_AreaCameraAngle.vx coordinates up by 0xB and the g_AreaCameraOffsetZ count down by 0x32 each pass and re-arming the callback count. */
 MATCH void func_8014F24C(void) {
     s32  flag;
     u16* level;

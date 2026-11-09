@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* resolves the bundle cell at (column, row) and uploads its word list plus the pad2 and pad1 linked rows
- * to the g_AreaCellPrims row context for display buffer slot; presence bits of the uploaded words fold into the
- * returned mask and an empty pad1 link is released.
- */
+/* resolves the bundle cell at (column, row) and uploads its word list plus the pad2 and pad1 linked rows to the g_AreaCellPrims row context for display buffer slot. */
 MATCH s32 Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot) {
     AreaMapBundle* map;
     u8*            entry;

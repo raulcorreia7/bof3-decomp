@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* sets the menu panel's position from the D_8017F944/D_8017F946
- * lookup keyed by the D_801490CE byte, packs the panel's window fields and
- * advances its state byte.
- */
+/* sets the menu panel's position from the D_8017F944/D_8017F946 lookup keyed by the D_801490CE byte, packs the panel's window fields and advances its state byte. */
 MATCH void func_80159A90(void) {
     /* FAKE: pins panel to v1. */
     FAKE_REG(MenuPanelTask*, panel, "v1");

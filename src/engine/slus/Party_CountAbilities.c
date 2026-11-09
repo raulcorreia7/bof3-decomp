@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* selects one ability panel by kind (or the shared default table),
- * then counts its nonzero entries.
- */
+/* selects one ability panel by kind (or the shared default table), then counts its nonzero entries. */
 MATCH u8 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode) {
     Character* record;
     u8*        table;

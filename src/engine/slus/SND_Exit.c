@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* releases the sound system: stops all keys, closes the seven VAB
- * banks and the seven SEP owners, then shuts down the reverb and the SPU.
- */
+/* releases the sound system. */
 MATCH void SND_Exit(void) {
     SsUtAllKeyOff(0);
     SsVabClose(g_SndVabIds[0]);

@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances the record halfword toward its limit by delta, clamping
- * at the limit.
- */
+/* advances the record halfword toward its limit by delta, clamping at the limit. */
 MATCH s32 Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy) {
     Character* rec;
     s32        cur;

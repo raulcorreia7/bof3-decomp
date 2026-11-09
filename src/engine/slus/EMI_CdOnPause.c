@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* selects the CD-read dispatch mode from the latched sync status.
- */
+/* selects the CD-read dispatch mode from the latched sync status. */
 MATCH void EMI_CdOnPause(void) {
     if (D_8014648C < 0) {
         D_8014648A = 6;

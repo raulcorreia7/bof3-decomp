@@ -1,11 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* builds the window layout table for one bank: it reads a six-entry
- * record at layout * 0x1C, accumulates the running x and y extents, and
- * stores the six layout entries (each a base pointer, an index, and a
- * accumulated size) into the D_80148A1C..D_80148A4C globals, with the first
- * four bytes of each entry mirrored into D_8014677C..D_801467F8.
- */
+/* builds the window layout table for one bank. */
 MATCH void SND_SetBankLayout(u32 layout) {
     s32 off;
     /* FAKE: pin keeps the accumulator in v1. */

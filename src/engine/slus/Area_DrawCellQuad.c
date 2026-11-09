@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* copies the four vertex pairs of the g_AreaCellPrims rows that the mask bits select (1, 2, 4: the row, its pad2 and
- * pad1 links) into one flat quad, shades it from the palette halfword that mask >> 3 selects and appends it to the
- * ordering table.
- */
+/* copies the four vertex pairs of the g_AreaCellPrims rows that the mask bits select (1, 2, 4. */
 MATCH void Area_DrawCellQuad(s32 mask, s32 index) {
     POLY_F4*  primitive;
     u16*      color;

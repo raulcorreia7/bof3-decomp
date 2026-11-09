@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* subtracts amount from the D_80149070 accumulator of the voice at
- * voice and derives the clamped D_80149040 level from it.
- */
+/* subtracts amount from the D_80149070 accumulator of the voice at voice and derives the clamped D_80149040 level from it. */
 MATCH void SND_LowerVoiceLevel(s32 voice, s32 amount) {
     u32  index;
     u16* level_ptr;

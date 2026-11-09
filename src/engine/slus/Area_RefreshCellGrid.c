@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* walks the 0x38 x 0x1C cell grid, advancing the row and column
- * cursors from g_AreaGridRowCursor/g_AreaGridColCursor with wraparound at 0x37/0x1B and passing
- * each rotated cell of g_AreaCells to func_801541C0, then calls func_80158B24.
- */
+/* walks the 0x38 x 0x1C cell grid, advancing the row and column cursors from g_AreaGridRowCursor/g_AreaGridColCursor with wraparound at 0x37/0x1B and passing each rotated cell of g_AreaCells to func_801541C0. */
 MATCH void Area_RefreshCellGrid(void) {
     s32 row;
     s32 col;

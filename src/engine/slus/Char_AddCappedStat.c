@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* Adds delta to *value unless already 999, clamps at 999.
- */
+/* Adds delta to *value unless already 999, clamps at 999. */
 MATCH s32 Char_AddCappedStat(u16* value, s32 delta) {
     u16 cur;
     u16 next;

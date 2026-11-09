@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* Initializes the game runtime, then runs the permanent frame loop,
- * including the guarded EMI service/reset path.
- */
+/* Initializes the game runtime. */
 MATCH void SYS_Main(void) {
     u8* work;
 

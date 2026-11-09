@@ -1,11 +1,6 @@
 #include "engine/slus/slus.h"
 
-/*
- * initializes the callback cursor to the slot table, then walks all
- * four slots once: opens threads for slots marked open, counts down yield
- * timers, and switches into any slot whose timer expired or that requested a
- * forced switch.
- */
+/* initializes the callback cursor to the slot table. */
 MATCH void CallbackRun(void) {
     g_CallbackSlot = D_80143B40;
     {
@@ -24,7 +19,7 @@ MATCH void CallbackRun(void) {
                     if (--g_CallbackSlot->countdown != 0) {
                         break;
                     }
-                    /* fall through */
+                    /* fall through. */
 
                 case CALLBACK_SLOT_SWITCH:
                 dispatch:

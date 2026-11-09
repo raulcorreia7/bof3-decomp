@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* sets the active selection cue: resolves the selection's two cue
- * bytes, starts and stops the cue, stores the level, and publishes the id.
- */
+/* sets the active selection cue. */
 MATCH void SND_PlayBGM(s32 selection_id, s32 cue_level, s32 cue_shape) {
     u32 index;
 

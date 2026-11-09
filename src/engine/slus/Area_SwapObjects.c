@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* swaps the two indexed words of the D_8014828C table.
- */
+/* swaps the two indexed words of the D_8014828C table. */
 MATCH void Area_SwapObjects(s32 first, s32 second) {
     s32* a;
     s32* b;

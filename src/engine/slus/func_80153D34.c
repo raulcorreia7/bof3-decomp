@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* exchange-sorts the 4-byte records at 0x80143740 by their high
- * halfword, swapping each out-of-order pair through the scratch word at
- * 0x1F80000C.
- */
+/* exchange-sorts the 4-byte records at 0x80143740 by their high halfword, swapping each out-of-order pair through the scratch word at 0x1F80000C. */
 MATCH void func_80153D34(void) {
     s32 i;
     s32 j;

@@ -6,9 +6,7 @@ typedef struct {
     u16 unk_02;
 } MapCell;
 
-/* builds the projected quad for one map cell's texture entry, stages
- * the primitive, and appends it to the ordering table.
- */
+/* builds the projected quad for one map cell's texture entry, stages the primitive. */
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
  * draft; best score 77.33%. resume: a lever or header fix that closes the first mismatch. */
 /* Retail loads the cell halfword at +2; pinned cell coordinates first differ in scheduling at +0x44. */

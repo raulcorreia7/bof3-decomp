@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* TODO
- */
+/* TODO. */
 MATCH void func_8015D820(u16 cue_id, u16 index) {
     if (D_80145EC6 <= COORD_INT(g_Actors[index].pos.x) + 22 && D_80145EC6 >= COORD_INT(g_Actors[index].pos.x) - 22 &&
         D_80145ECA <= COORD_INT(g_Actors[index].pos.y) + 22 && D_80145ECA >= COORD_INT(g_Actors[index].pos.y) - 22) {

@@ -1,10 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* steps the scratchpad work record: it adds vx to x and vy to y, adds the old vz shifted right by eight
- * to the z integer, counts unk_0A down and adds the incoming step to vz; it keeps the larger ground
- * height in the z integer, and when unk_0A runs out it writes 0x10 divided by the byte from
- * g_RouteSpeedScale into unk_0A, or calls Actor_ApplyVelocity and sets unk_04 to 3.
- */
+/* steps the scratchpad work record. */
 MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
     Actor* work;
     s32    speed;

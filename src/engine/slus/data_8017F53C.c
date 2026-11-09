@@ -1,10 +1,6 @@
 #include "slus.h"
 
-/*
- * small lookup tables read by the sprite, menu and step-table code
- * (func_8014CF9C, func_8014D290, func_8014EA80, func_8014FC90, UI_DrawGlyph,
- * func_801523D0..Message_SetAnswerMessage15).
- */
+/* small lookup tables read by the sprite, menu and step-table code (func_8014CF9C, func_8014D290, func_8014EA80, func_8014FC90, UI_DrawGlyph, func_801523D0..Message_SetAnswerMessage15). */
 
 /* Sprite cell sizes (width, height) in pixels: width 8 * ((i & 3) + 1), height 8 * ((i >> 2) + 1). */
 const u8 g_SpriteSizes[16][2] = {

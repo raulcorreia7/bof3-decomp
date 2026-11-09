@@ -1,16 +1,11 @@
 #include "slus.h"
-/*
- * route, step and lookup tables of the resident executable, read by
- * the emi/etc/game/00 consumers (g_FacingOffsets routes, g_FacingSteps steps, g_CharSlot
- * character slots).
- */
+/* route, step and lookup tables of the resident executable, read by the emi/etc/game/00 consumers (g_FacingOffsets routes, g_FacingSteps steps, g_CharSlot character slots). */
 
 const Point2DL g_FacingOffsets[8] = {
     {-2048, -2048}, {0, -2048}, {1024, -1024}, {2048, 0}, {2048, 2048}, {0, 2048}, {-1024, 1024}, {-2048, 0},
 };
 
-/* Stride 2: an x and y step per mode, read as [mode * 2] by func_801B44DC, func_801B4BE4, func_801B4D7C,
- * func_801B5C54, func_801B95E0 and func_801BA678. needs: type. */
+/* Stride 2: an x and y step per mode, read as [mode * 2] by func_801B44DC, func_801B4BE4, func_801B4D7C, func_801B5C54, func_801B95E0 and func_801BA678. needs. */
 const s8 D_80181B00[16] = {
     -1, -1, 0, -1, 1, -1, 1, 0, 1, 1, 0, 1, -1, 1, -1, 0,
 };

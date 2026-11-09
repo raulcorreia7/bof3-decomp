@@ -1,9 +1,6 @@
 #include "slus.h"
 
-/*
- * table of 200 pointers into overlay memory (0x801F....), indexed by
- * g_GameAreaId in the emi/etc/game/00 and emi/scenario/scena00/00 consumers.
- */
+/* table of 200 pointers into overlay memory (0x801F....), indexed by g_GameAreaId in the emi/etc/game/00 and emi/scenario/scena00/00 consumers. */
 void *const g_AreaLoads[200] = {
     (void *)&D_801F3FF8, (void *)&D_801F41D0, (void *)&D_801F3A84,
     (void *)&D_801F3340, (void *)&D_801F3988, (void *)&D_801F3A90,

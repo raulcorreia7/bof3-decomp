@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* sets bit 3 of g_UiWindowChannel and, when no request is pending, arms
- * g_MessageChoiceTimer and bumps g_MessageChoiceStep.
- */
+/* sets bit 3 of g_UiWindowChannel and. */
 MATCH void func_80151B08(void) {
     u16* counter = (u16*)&g_UiWindowChannel;
 

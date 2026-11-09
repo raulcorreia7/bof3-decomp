@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* latches the last CdSync callback result bytes and marks the async
- * sync status.
- */
+/* latches the last CdSync callback result bytes and marks the async sync status. */
 MATCH void EMI_CdOnSync(s32 status, u8* result) {
     s32 i;
 

@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* copies the matching eight-byte selection record into the active
- * scratch work record, including its paired palette bytes; returns true
- * when the table has no matching id.
- */
+/* copies the matching eight-byte selection record into the active scratch work record, including its paired palette bytes. */
 /* FAKE: retail accesses the word at +0x70 whole; the member is the byte the entity rows use. */
 MATCH bool Area_FindSceneRecord(s32 wanted_id) {
     s32 i;

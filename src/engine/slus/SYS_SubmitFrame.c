@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* links the active frame's eight ordering-table heads to their
- * packet chains with the PsyQ AddPrims helper.
- */
+/* links the active frame's eight ordering-table heads to their packet chains with the PsyQ AddPrims helper. */
 MATCH void SYS_SubmitFrame(void) {
     s32   index;
     u32** ordering_table;

@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* clears the four flag bytes of the 0x140-stride record selected by character_index.
- */
+/* clears the four flag bytes of the 0x140-stride record selected by character_index. */
 MATCH void Party_ClearBattlerState(s32 character_index) {
     u32 index;
 

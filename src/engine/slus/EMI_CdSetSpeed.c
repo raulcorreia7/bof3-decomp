@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* syncs the CD reader, sets double-speed mode, and latches ready
- * state 2 when both commands succeed.
- */
+/* syncs the CD reader, sets double-speed mode, and latches ready state 2 when both commands succeed. */
 MATCH void EMI_CdSetSpeed(void) {
     u8  param[8];
     u8* result;

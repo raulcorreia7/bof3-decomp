@@ -1,15 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* Matching constraints of the shape: the || branch keeps GetGraphType()'s two
- * accepted modes on one shared draw-mode expression; the unsigned casts are
- * what make retail emit srl (not sra); the `tpage` local is what keeps the 0x2F
- * OR on the first operand (a single expression lets GCC reassociate it onto the
- * shifted term). */
+/* Matching constraints of the shape. */
 
-/* builds the texture-page draw-mode word for the current graphics
- * mode: modes 1 and 2 take the shifted 0x300-bit form, every other mode the
- * 0x100/0x200-bit form, then the 12-byte primitive is appended at slot 1.
- */
+/* builds the texture-page draw-mode word for the current graphics mode. */
 MATCH void func_8014FC00(s32 mode) {
     s32 draw_mode;
     u32 tpage;

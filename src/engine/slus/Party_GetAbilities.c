@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* resolves the party record a slot kind points at: character records
- *           are selected for mode == 0, formation records otherwise.
- */
+/* resolves the party record a slot kind points at. */
 MATCH u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode) {
     Character* record;
     u32        slot;

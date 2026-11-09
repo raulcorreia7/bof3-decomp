@@ -1,11 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* Modifies a bounded byte counter by a signed delta:
- *   positive delta: increment counter, cap at 6
- *   negative delta: decrement counter, floor at 0
- *   zero delta:     set counter to 7 (special max)
- * Returns 1 if the counter value changed, 0 otherwise.
- */
+/* Modifies a bounded byte counter by a signed delta. */
 MATCH s32 Char_AddResistance(u8* counter, s32 delta) {
     s32 signed_delta;
 

@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* moves two shared coordinates toward a limit while waiting for the scheduler.
- */
+/* moves two shared coordinates toward a limit while waiting for the scheduler. */
 MATCH void func_8014F2F0(void) {
     u16  level;
     s32  iteration;
