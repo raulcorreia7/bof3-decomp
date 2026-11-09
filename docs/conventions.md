@@ -71,7 +71,7 @@ A table indexed by an enum lists its rows in enum order with a one-line `/* NAME
 never a designated initializer. No mixed declarations and code, no declarations in `for`, no `_Bool`, no anonymous
 unions, no `//` comments.
 
-The layout: 4-space indent, 120 columns, braces on the same line, `T* x` pointers, declarations and
+The layout: 4-space indent, 200 columns, braces on the same line, `T* x` pointers, declarations and
 assignments aligned within each block. The formatter owns it, so never hand-align
 ([formatter](#formatter)).
 
