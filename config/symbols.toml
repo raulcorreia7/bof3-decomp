@@ -236,7 +236,7 @@ Effect_DrawScreenFade = { addr = 0x801EF6E0, type = "func", source = "Draws the 
 BMagic_DispatchEffectMode = { addr = 0x801EF8CC, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic004." }
 Effect_SetDuration = { addr = 0x801EF9A0, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic004 (ThundrStrike)." }
 Effect_LowerTickerStepOnReady = { addr = 0x801EFA70, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (Actor_StepAnimOnce) in magic004 (ThundrStrike)." }
-BMagic_RunStep = { addr = 0x801EFAF4, type = "func", source = "Runs the battle magic effect step with the script bank set for the overlay." }
+BMagic_RunStep = { addr = 0x801EFAF4, type = "func", source = "Runs the battle magic effect step with the script table set for the overlay." }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 2 in magic004 (ThundrStrike)." }
 D_801EFE40 = { addr = 0x801EFE40, source = "Sound cue id per effect index of the magic004 effect, read by func_801EF158 with the effect's unk_04 index." }
 g_BMagicEffectModes = { addr = 0x801EFE58, source = "Handlers of magic004 (ThundrStrike), run by header.mode (byte 0x01)." }
@@ -1030,7 +1030,7 @@ Effect_CountUpTimerCallSelector = { addr = 0x801EF2EC, type = "func", source = "
 Effect_CountUpAndStepAt120 = { addr = 0x801EF374, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 120 in magic120 (Whelp Breath)." }
 Effect_CountUpAndFinishAt136 = { addr = 0x801EF3C4, type = "func", source = "Raises the effect ticker (byte 0x0B), lowers byte 0x04 and counts the effect timer (byte 0x09) up; at 136 sets the active battler's ticker to 0xFF and clears the effect in magic120 (Whelp Breath)." }
 BMagic_DrawWhelpBreath = { addr = 0x801EF44C, type = "func", source = "Draws the Whelp Breath effect while its active mode runs." }
-BMagic_RunStep = { addr = 0x801EFD20, type = "func", source = "Runs the battle magic effect step with the script bank set for the overlay." }
+BMagic_RunStep = { addr = 0x801EFD20, type = "func", source = "Runs the battle magic effect step with the script table set for the overlay." }
 Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic120 (Whelp Breath)." }
 g_BMagicEffectModes = { addr = 0x801F0CA8, source = "Handlers of magic120 (Whelp Breath), run by header.mode (byte 0x01)." }
 D_801F0CB0 = { addr = 0x801F0CB0, source = "Step handlers of the effect, run by header.step (byte 0x02) through SYS_DISPATCH_BYTE." }

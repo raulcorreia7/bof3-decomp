@@ -4,13 +4,13 @@
 /* A world area: the map bundle the area program loads at 0x80104000 (grid
  * dimensions, per-cell corner heights, tile rectangles, the per-cell byte-code
  * table, and the object and record lists), the scene/step table at 0x800E3800
- * and the area script bank at 0x800D3800. The area overlays build the field
+ * and the area script table at 0x800D3800. The area overlays build the field
  * mesh, place objects and run the area script from these bytes; the game
  * overlay queries the same grid. Format: @source: wiki:formats/area.
  *
  * Readers: `exe/slus_004_22@0x80155560` indexes the interleaved bank offsets;
  * `exe/slus_004_22@0x8014DD3C` stores scene record byte +0x07 at work+0x2C and
- * `exe/slus_004_22@0x8014D6DC` uses it as a script-bank index.
+ * `exe/slus_004_22@0x8014D6DC` uses it as a script-table index.
  *
  * Per-cell byte-code values, record-list opcodes and `scroll_1E` have no known
  * meaning and keep offset names.
@@ -22,7 +22,7 @@
  *
  * - `AreaMapBundle` and its cell rows: map bundle.
  * - `AreaActorDef`, `AreaActorDefs`: scene/step table.
- * - `AreaScriptBank`, `AreaScriptSection`: area script bank.
+ * - `AreaScriptTable`, `AreaScriptSection`: area script table.
  * - `AreaTrail`, `AreaSlotWork`, `UPoint2D`: neighboring buffers; the
  *   area program owns them.
  *
@@ -260,20 +260,20 @@ typedef struct AreaMapObjectHeader {
 
 ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
 
-/* `0x800D3800` - the area script bank, a bank of actor animation streams: a
+/* `0x800D3800` - the area script table, a table of actor animation streams: a
  * `u32` directory, then per section a `u16` slot table followed by its
  * records. Each record is one stream (see `Actor_StageAnimStep`). `dir_bytes == 4 * L` is the
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
- * the block through `g_ScriptTable`: `section = u32[bank + 4*lhu(work+0x2C)]`,
- * `record = bank + section + u16[bank + section + 2*lbu(work+0x4B)]`, stored to
+ * the block through `g_ScriptTable`: `section = u32[table + 4*lhu(work+0x2C)]`,
+ * `record = table + section + u16[table + section + 2*lbu(work+0x4B)]`, stored to
  * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_TABLE` in for the duration of a
  * battle handler. */
-typedef struct AreaScriptBank {
+typedef struct AreaScriptTable {
     u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */
     u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
-} AreaScriptBank;
+} AreaScriptTable;
 
 /* One section: `slots_bytes == 2 * M`, and the distinct `record_off` values
  * increase strictly and tile the section, one stream each. The last section
@@ -285,7 +285,7 @@ typedef struct AreaScriptSection {
 
 /* `0x800E3800` - the scene table: a `u32` count then 8-byte records.
  * `exe/slus_004_22@0x8014DD3C` copies `script_section` to work+0x2C;
- * `@0x8014D6DC` uses it as a script-bank directory index and
+ * `@0x8014D6DC` uses it as a script-table directory index and
  * `@0x80167E00` compares it before resolving the record id in a terminated
  * list. `D_801459F4` publishes the record array at `0x800E3800 + 4`. */
 typedef enum SpriteTextureMode {
@@ -304,7 +304,7 @@ typedef struct AreaActorDef {
     u8  texture_page;   /* 0x04 - to work+0x25 (4 distinct values) */
     u8  texture_v;      /* 0x05 - to work+0x26 (31 distinct values) */
     u8  texture_mode;   /* 0x06 - to work+0x28; the 9 and 10 cases belong to actor +0x06 */
-    u8  script_section; /* 0x07 - copied to work+0x2C; script-bank index */
+    u8  script_section; /* 0x07 - copied to work+0x2C; script-table index */
 } AreaActorDef;
 
 ASSERT_SIZE(AreaActorDef, AREA_ACTOR_DEF_SIZE);
@@ -315,7 +315,7 @@ typedef struct AreaActorDefs {
 } AreaActorDefs;
 
 /* `0x801459F0` - the four pointers the loader publishes together. Each word has
- * its own name in the tree (`g_ScriptTable` the script bank, `D_801459F4` the scene
+ * its own name in the tree (`g_ScriptTable` the script table, `D_801459F4` the scene
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {
