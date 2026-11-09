@@ -1,3 +1,3 @@
 #include "area115_13.h"
 
-#include "overlays/area/Area_SlideActorDown.h"
+#include "overlays/area/Area_WidenActor.h"
