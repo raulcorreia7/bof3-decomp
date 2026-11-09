@@ -1,9 +1,9 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried regalloc: the work record lands in t0 while retail copies pos_x to t0 and puts the
+/* nonmatching unmeasured: tried regalloc: the record lands in t0 while retail copies pos_x to t0 and puts the
  * record in a0; the top-level test stays bnez-to-exit in every if/else spelling (hit=0 then, return 0 then, negated
  * then, >= then, <= then, goto) and GCC threads the small then-block into the branch; hoisting the 0x10 product does
- * not change the sink. resume: a source form that frees a0 for the work record (retail copies pos_x to t0 first) and
+ * not change the sink. resume: a source form that frees a0 for the record (retail copies pos_x to t0 first) and
  * keeps the top-level test as beqz-to-body. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record) {

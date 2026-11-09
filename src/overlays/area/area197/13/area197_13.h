@@ -8,7 +8,7 @@
 
 /* The scratchpad work row and the published record the step paths read. */
 
-/* The character work record, viewed as bytes here. */
+/* The character record, viewed as bytes here. */
 
 /* The area-flag bit store. */
 extern u8                  D_80144EF8[];

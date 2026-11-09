@@ -8,7 +8,7 @@
 
 /* The scratchpad work row the entry paths read. */
 
-/* The character work record, viewed as bytes here. */
+/* The character record, viewed as bytes here. */
 
 /* The area-flag bit store and the global flag byte. */
 

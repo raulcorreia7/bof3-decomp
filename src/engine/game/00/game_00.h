@@ -69,7 +69,7 @@
     saved  = g_Task;                                                                   \
     result = g_SceneScenes[(s32)g_SceneState.scenario_id]->entry(handler_x, handler_y)
 
-/* Run the gated cell test and arm the work record on a hit. */
+/* Run the gated cell test and arm the record on a hit. */
 #define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                    \
     if ((g_Game.flags & 0x400) == 0) {                                                                               \
         if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != \
@@ -96,7 +96,7 @@
         return value;                                                                                  \
     } while (0)
 
-/* The work record the shared scene-timer body reads. */
+/* The record the shared scene-timer body reads. */
 
 typedef enum TileRunFlags {
     TILE_RUN_VERTICAL = 1 << 7,
@@ -208,7 +208,7 @@ ASSERT_OFFSET(SpinQuad, rotation, 0x10);
 ASSERT_OFFSET(SpinQuad, corners, 0x18);
 ASSERT_SIZE(SpinQuad, 0x38);
 
-/* Per-slot column views over the 0x98-byte work records. */
+/* Per-slot column views over the 0x98-byte records. */
 typedef struct GameSlotWordColumn {
     u16 value;
     u8  pad[0x96];

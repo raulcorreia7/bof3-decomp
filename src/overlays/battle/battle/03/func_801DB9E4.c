@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* reports whether battler_index's work record (local below 3, enemy otherwise) is available and not
+/* reports whether battler_index's record (local below 3, enemy otherwise) is available and not
  * suppressed and the mode byte equals neither the record's own mode (2 local, 1 enemy) nor 3. FAKE: the mode byte is
  * copied per arm into a word temporary: each arm re-reads the global and hands the value plus the arm's mode constant
  * to one shared comparison, which keeps the re-read in the arm and the constant in a register at the merged tail.

@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* Clamps the work record's height to the retail range. */
+/* Clamps the record's height to the retail range. */
 /* func_801D23F4 */
 MATCH void Fishing_LureFly(void) {
     s32           row;

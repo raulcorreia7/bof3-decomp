@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* reads the scratchpad work record. */
+/* reads the scratchpad record. */
 MATCH u16 Actor_ReadState(void) {
     Actor* record;
     u8*    entry;

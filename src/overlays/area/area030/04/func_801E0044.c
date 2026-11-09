@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* Integrates the AREA030 work record's two velocity pairs into its position words and counts down the timer byte. */
+/* Integrates the AREA030 record's two velocity pairs into its position words and counts down the timer byte. */
 MATCH void func_801E0044(void) {
     FishingState* work;
     FishingState* checked;

@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* Panel cursor fields of the scratchpad work record. */
+/* Panel cursor fields of the scratchpad record. */
 #define FISHING_CURSOR_TIMER    (FISHING_STATE->step_timer_09)
 #define FISHING_CURSOR_ROW_Y    (FISHING_STATE->origin_x_2E)
 #define FISHING_CURSOR_ITEM_PTR (FISHING_STATE->item_50.pointer)

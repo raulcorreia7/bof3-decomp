@@ -1,4 +1,4 @@
-/* Runs the step of the current effect work record D_801F17B0. */
+/* Runs the step of the current effect record D_801F17B0. */
 /* func_801EF37C (magic162), func_801EF37C (magic168) */
 MATCH void func_801EF37C(void) {
     BMagicEffectWorkSteps handlers;

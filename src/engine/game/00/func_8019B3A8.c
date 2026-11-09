@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-/* Per-frame movement accumulators of the work record. */
+/* Per-frame movement accumulators of the record. */
 typedef struct {
     u8  pad_00[0x0C];
     s32 unk_0C;

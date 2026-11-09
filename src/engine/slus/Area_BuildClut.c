@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* packs the work record's texture-page and CLUT selector into the 16-bit word the caller stores. */
+/* packs the record's texture-page and CLUT selector into the 16-bit word the caller stores. */
 MATCH void Area_BuildClut(u16* dst) {
     s32 base;
     u32 sel;

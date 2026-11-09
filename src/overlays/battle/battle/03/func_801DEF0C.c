@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* re-arms the scratchpad work record for the battle view. */
+/* re-arms the scratchpad record for the battle view. */
 MATCH void func_801DEF0C(void) {
     volatile PartyMember* work;
     volatile PartyMember* out;

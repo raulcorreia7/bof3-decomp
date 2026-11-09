@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* Initialises the AREA030 scratch work record. */
+/* Initialises the AREA030 scratch record. */
 MATCH void func_801D29BC(void) {
     volatile u8* world;
     volatile u8* work;

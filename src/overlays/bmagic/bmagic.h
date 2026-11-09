@@ -45,7 +45,7 @@
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
     func_801E5988()
 
-/* The sway step of the effect work record WORK points to. */
+/* The sway step of the effect record WORK points to. */
 #define BMAGIC_SWAY_EFFECT_WORK(WORK, CLEAR)                                              \
     phase            = (WORK)->phase_0C + 1;                                              \
     (WORK)->phase_0C = phase;                                                             \
@@ -63,7 +63,7 @@
         CLEAR();                                                                          \
     }
 
-/* The sway-advance step of the effect work record WORK points to. */
+/* The sway-advance step of the effect record WORK points to. */
 #define BMAGIC_SWAY_ADVANCE_WORK(WORK)                                                             \
     phase            = (WORK)->phase_0C + 1;                                                       \
     (WORK)->phase_0C = phase;                                                                      \
@@ -175,7 +175,7 @@ typedef struct BMagicEffectFuncs {
 ASSERT_SIZE(BMagicEffectFuncs, 0x18);
 ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
 
-/* The effect work record D_801F17B4 points to. */
+/* The effect record D_801F17B4 points to. */
 typedef struct BMagicEffectWork {
     /* 0x00 */ TaskHeader   header;
     /* 0x03 */ u8           unk_03;

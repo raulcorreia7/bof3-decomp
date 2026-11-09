@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* Advances the work record's motion and bounce timers and selects the walk animation direction. */
+/* Advances the record's motion and bounce timers and selects the walk animation direction. */
 /* func_801D2648 */
 MATCH void Fishing_LureFloat(void) {
     s32 total;

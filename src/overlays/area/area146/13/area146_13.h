@@ -6,7 +6,7 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-/* The character work record the flag copy reads. */
+/* The character record the flag copy reads. */
 
 /* The game-overlay state bytes the win-close path resets. */
 

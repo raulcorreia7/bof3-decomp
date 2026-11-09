@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* Draws the entity of the scratchpad work record g_Task. */
+/* Draws the entity of the scratchpad record g_Task. */
 MATCH void Area_DrawObjectSprite(void) {
     POLY_FT4*   prim;
     SpriteCell* cell;

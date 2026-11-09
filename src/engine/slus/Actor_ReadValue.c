@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* publishes a field record's value halfword into the work record's +0x32. */
+/* publishes a field record's value halfword into the record's +0x32. */
 /* FAKE: retail reads the key as the low byte (lbu) of the word member. */
 MATCH void Actor_ReadValue(void) {
     s8 index;

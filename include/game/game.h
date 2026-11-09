@@ -340,7 +340,7 @@ extern s32       D_801CD954;
 
 /* Finds the first unused slot in the entry table at 0x80143FC8. */
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`. */
-/* Selects a route direction away from the work record's current direction. */
+/* Selects a route direction away from the record's current direction. */
 /* Awards the proximity reward: sound cue, area request, owned money. */
 /* Returns a field record slot holding a body near (pos_x, pos_y), or -1. */
 

@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* advances the scratchpad work record's sort key from its grid position, retires the record when the key leaves the ordering table. */
+/* advances the scratchpad record's sort key from its grid position, retires the record when the key leaves the ordering table. */
 /* nonmatching 68.24%: first mismatch +0x0020; assigning work after the early return gives retail's
  * single load and copy, but the copy lands in a2 (retail a3) and the col/row loads are emitted in the
  * other order; swapping the two statements is flat. resume: a shape that gives the work copy a3. */

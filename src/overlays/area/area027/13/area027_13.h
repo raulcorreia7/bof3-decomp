@@ -9,7 +9,7 @@
 /* Reset sentinel stored to g_MessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF
 
-/* The wall-marker view of the work record: the angle at +0x0C and the byte bumped once the angle passes 0x400. */
+/* The wall-marker view of the record: the angle at +0x0C and the byte bumped once the angle passes 0x400. */
 typedef union AreaWallAngle {
     s32 word;
     s16 half;

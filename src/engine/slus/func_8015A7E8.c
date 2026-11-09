@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* publishes each of the four 0x98-byte work records, honouring the record flag and dispatching the mode table for active records. */
+/* publishes each of the four 0x98-byte records, honouring the record flag and dispatching the mode table for active records. */
 MATCH void func_8015A7E8(void) {
     u8* rec;
     u8* base;

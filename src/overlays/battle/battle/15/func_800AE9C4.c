@@ -33,7 +33,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
     u32                  tex_offset;
     s32                  mode;
     BattlePanelGeometry* panel;
-    /* The second quad reads the work record again, the way the retail code does. */
+    /* The second quad reads the record again, the way the retail code does. */
     BattlePanelGeometry* panel2;
 
     if (GetGraphType() == 1) {
@@ -72,7 +72,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
            panel2->origin.y + panel2->height);
     primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
     setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
-    /* The second texture block reads the work record again for its last row, the way the retail code reloads the scratchpad work pointer there. */
+    /* The second texture block reads the record again for its last row, the way the retail code reloads the scratchpad work pointer there. */
     setUV4(primitive, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x,

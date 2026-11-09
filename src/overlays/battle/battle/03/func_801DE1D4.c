@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* Arms a queued action for every live battler. */
-/* nonmatching unmeasured: tried the queue walk rebuilt on the typed slot and work records, with the 0x74-byte record
+/* nonmatching unmeasured: tried the queue walk rebuilt on the typed slot and records, with the 0x74-byte record
  * copy as memcpy (64.37%). residual: the work-record base is hoisted into s3 where retail materializes it at the use,
  * which also adds the 0x28 frame, and the two tails land four instructions apart. resume: a copy source whose base is
  * only used inside its branch. */

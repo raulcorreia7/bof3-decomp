@@ -2,7 +2,7 @@
 
 /* Action values, one u16 per 0x140-byte battler row. */
 
-/* installs the active battler's local work record as the scratchpad work record, refreshes the battle tables and cursors for its slot, clears the record's low flag. */
+/* installs the active battler's local record as the scratchpad record, refreshes the battle tables and cursors for its slot, clears the record's low flag. */
 MATCH void func_801E7634(void) {
     PartyMember* saved;
 

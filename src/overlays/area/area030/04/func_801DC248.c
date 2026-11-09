@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* Panel page fields of the scratchpad work record. */
+/* Panel page fields of the scratchpad record. */
 #define FISHING_PAGE_STEP     (FISHING_STATE->step_timer_09)
 #define FISHING_PAGE_CATEGORY (FISHING_STATE->saved_index_0B)
 #define FISHING_PAGE_FLAG     (FISHING_STATE->cue_index_06)

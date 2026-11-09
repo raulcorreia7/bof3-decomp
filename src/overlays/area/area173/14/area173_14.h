@@ -11,7 +11,7 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0xC0
 
-/* The current work record and its second halfword table. */
+/* The current record and its second halfword table. */
 
 /* The scratchpad cell holding this mode's work pointer. */
 

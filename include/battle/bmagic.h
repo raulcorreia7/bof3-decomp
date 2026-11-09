@@ -26,7 +26,7 @@ typedef struct ActorEffectSteps {
     Callback steps[ACTOR_EFFECT_STEP_COUNT];
 } ActorEffectSteps;
 
-/* The step routines of the effect work record func_801EF37C advances. */
+/* The step routines of the effect record func_801EF37C advances. */
 #define BMAGIC_EFFECT_WORK_STEP_COUNT 3
 
 typedef struct BMagicEffectWorkSteps {

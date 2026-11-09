@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* initializes the scratch work record for a new panel. */
+/* initializes the scratch record for a new panel. */
 MATCH void func_8015AC8C(u8* panel) {
     Actor* work;
     s32    value;

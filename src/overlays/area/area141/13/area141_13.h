@@ -8,7 +8,7 @@
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
-/* The fixed work record the dispatch compares the work pointer against. */
+/* The fixed record the dispatch compares the work pointer against. */
 extern Actor D_80143F48;
 
 /* The state handler tables the dispatchers index. */

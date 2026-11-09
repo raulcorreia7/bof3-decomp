@@ -20,7 +20,7 @@
 /* The signed stat modifier bytes an enemy battler carries from +0x108. */
 #define ENEMY_STAT_MULTIPLIER_COUNT  8
 
-/* The enemy battler work record (stride 0x118 at 0x801EB630). */
+/* The enemy battler record (stride 0x118 at 0x801EB630). */
 
 /* Ask whether the battler's status word carries the flag, a STATUS_* value or a mask. */
 #define HAS_STATUS(battler, flag)    (((battler).chr.status & (flag)) != 0)
@@ -186,7 +186,7 @@ ASSERT_OFFSET(BattleEffect, unk_5C, 0x5C);
 ASSERT_OFFSET(BattleEffect, word_60, 0x60);
 ASSERT_OFFSET(BattleEffect, target, 0x74);
 
-/* A flag word of a battle work record. */
+/* A flag word of a battle record. */
 typedef union BattlerFlags {
     u32          value;
     volatile u32 volatile_value;
@@ -217,7 +217,7 @@ typedef union BattleScreenCoord {
     s16 signed_half;
 } BattleScreenCoord;
 
-/* The cell at +0x90 of a local work record. */
+/* The cell at +0x90 of a local record. */
 typedef union BattleWorkHalfOrByte90 {
     u16 half;
     u8  value;
@@ -442,7 +442,7 @@ typedef struct FieldEntryWork {
 
 ASSERT_SIZE(FieldEntryWork, 0x08);
 
-/* One party member's live work record. */
+/* One party member's live record. */
 typedef struct PartyMember {
     TaskHeader          header; /* 0x00 */
     u8                  unk_03;
@@ -962,7 +962,7 @@ extern PartyMember*  g_BattleEffectBattler;
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
-/* Enemy battler work record (stride 0x118, indexed by slot - 3). */
+/* Enemy battler record (stride 0x118, indexed by slot - 3). */
 extern EnemyBattler  g_BattleEnemyBattlers[];
 
 #endif

@@ -2,7 +2,7 @@
 
 /* Item table: 0x14-byte records, byte 0 is the sort key. */
 
-/* Bubble-sorts the ten-entry party id list of the selection work record into descending order of the item table's sort key, skipping zero entries. */
+/* Bubble-sorts the ten-entry party id list of the selection record into descending order of the item table's sort key, skipping zero entries. */
 MATCH void func_801D942C(void) {
     u8* list;
     u8* next;

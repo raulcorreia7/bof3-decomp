@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* clears the work record's 0x40 flag and advances the step word by 0x2000 until it reaches 0x10000. */
+/* clears the record's 0x40 flag and advances the step word by 0x2000 until it reaches 0x10000. */
 MATCH void func_801E8558(void) {
     PartyMember* work;
     PartyMember* stage;

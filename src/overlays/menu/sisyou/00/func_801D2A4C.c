@@ -2,7 +2,7 @@
 
 /* Panel-lock flag owned by the main executable. */
 
-/* Work-entry count and the two strided per-entry tables (0x140-byte work records, 0xA4-byte stock records). */
+/* Work-entry count and the two strided per-entry tables (0x140-byte records, 0xA4-byte stock records). */
 
 MATCH void func_801D2A4C(void) {
     s32 i;

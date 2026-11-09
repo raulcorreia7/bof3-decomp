@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* integrates the positive velocity components at +0xC/+0x10 into the work record's +0x34/+0x38 coordinates. */
+/* integrates the positive velocity components at +0xC/+0x10 into the record's +0x34/+0x38 coordinates. */
 MATCH void Actor_ApplyVelocity(void) {
     s32 value;
 

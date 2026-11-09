@@ -5,7 +5,7 @@
 asm(".globl Actor_SelectScript_keep_a1\n.set Actor_SelectScript_keep_a1, Actor_SelectScript\n");
 #endif
 
-/* swaps the scratchpad work pointer (0x1F800044) for the active battle work record, then advances its +0x08 byte
+/* swaps the scratchpad work pointer (0x1F800044) for the active battle record, then advances its +0x08 byte
  * through Actor_SelectScript or, for kind 3 and above, forwards the kind and payload through func_801E24F8; restores
  * the pointer. NOTE: the kind byte is read through a plain (non-volatile) MEM view; a volatile u8 load into the widened
  * local emits a redundant `andi 0xFF` that the original bytes do not have. */

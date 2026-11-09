@@ -1,7 +1,7 @@
 #include "game_00.h"
 
-/* Per-slot column views over the 0x98-byte work records. */
-/* Column bases: +0x2E, +0x30 and +0x29 of every work record. */
+/* Per-slot column views over the 0x98-byte records. */
+/* Column bases: +0x2E, +0x30 and +0x29 of every record. */
 
 MATCH void func_8019B284(void) {
     Actor* work;

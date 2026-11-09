@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* publishes the active battler's work record for the pending-action update. */
+/* publishes the active battler's record for the pending-action update. */
 MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     u32 kind;
 

@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* func_801C1254 */
-/* Loads the party member's field sprite into the work record. */
+/* Loads the party member's field sprite into the record. */
 MATCH void Party_LoadMemberSprite(s32 character_id, s32 party_slot) {
     Actor*    work;
     const u8* base;

@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* resets the mode work record. */
+/* resets the mode record. */
 MATCH void Area_ResetScene(void) {
     Actor*       work;
     PartyMember* mode_work;

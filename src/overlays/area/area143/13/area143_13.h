@@ -16,7 +16,7 @@
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0xFF
 
-/* The character work record the span step reads. */
+/* The character record the span step reads. */
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* stages the work record's state byte at +0x29. */
+/* stages the record's state byte at +0x29. */
 MATCH void func_8015A944(void) {
     Actor* work;
     u8     state;
