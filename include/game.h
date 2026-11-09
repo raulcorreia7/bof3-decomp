@@ -13,9 +13,5 @@
 #include "slus/exports.h"
 #include "game/functions.h"
 
-/* The small base every game source reaches: the shared headers and the
- * resident systems all groups use. A group header includes this file and the
- * subsystem headers its images use; an image header includes its group header;
- * a unit includes its image header
- * ([include layers](../docs/conventions.md#include-layers)). */
+/* The small base every game source reaches: the shared headers and the resident systems all groups use. */
 #endif
