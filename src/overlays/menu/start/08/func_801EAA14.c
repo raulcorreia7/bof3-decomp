@@ -52,8 +52,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
                 val7  = 0;
             }
             val6 = val4 & HALF_MASK;
-            UI_DrawWindow(val5 & HALF_MASK, val6, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT,
-                          (val10 + 0x80) & BYTE_MASK, (s32)g_WindowStyle);
+            UI_DrawWindow(val5 & HALF_MASK, val6, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (val10 + 0x80) & BYTE_MASK, (s32)g_WindowStyle);
             if (!(val10 & BYTE_MASK)) {
                 val9 = (FIELD(u16, val11, 0xCu) >> 6) & 2;
             } else {
@@ -68,8 +67,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
             val6 <<= 0x10;
             val6 = (u16)((s32)val6 >> 0x10);
             UI_DrawGlyphString((s16)(stack_38 >> 16), (s16)val6, (u32)val3, g_UiFormatBuffer);
-            if ((FIELD(u16, val11, 0xCu) & (STATUS_CONFUSED | STATUS_POISONED)) ==
-                (STATUS_CONFUSED | STATUS_POISONED)) {
+            if ((FIELD(u16, val11, 0xCu) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
                 if (g_FrameCount & 0x20) {
                     val2 = 1;
                     if (val3 != 0) {

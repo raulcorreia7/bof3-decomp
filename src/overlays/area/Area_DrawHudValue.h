@@ -3,8 +3,7 @@
  */
 /* func_801F40FC (area065), func_801F40C4 (area045) */
 MATCH void Area_DrawHudValue(s16 x, s16 y) {
-    if ((g_AreaDrawFlags & (AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_APPEND_ACTOR_PRIMITIVES |
-                            AREA_DRAW_APPEND_AREA_PRIMITIVES)) == 0) {
+    if ((g_AreaDrawFlags & (AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES)) == 0) {
         return;
     }
     ((void (*)(s16, s16, u32))Area_DrawHudSprite)(x, y, 4);

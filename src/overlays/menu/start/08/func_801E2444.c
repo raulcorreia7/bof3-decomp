@@ -15,8 +15,7 @@ MATCH void func_801E2444(void) {
         return;
     }
     level = &D_80148654;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - *level * 0x10) & 0xFFF0, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - *level * 0x10) & 0xFFF0, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801E26A8((*level << 6) | 0x1C, 0x40);
     func_801E2668(0, 0x70, 0x26 - *level * 0x10);
     value  = *level + 1;

@@ -81,8 +81,7 @@ MATCH void func_801BC000(void) {
                     if (g_Game.current->chr.character_id == CHAR_ID_GARR) {
                         tmp10 = g_Task;
                         tmp3  = tmp10->timer;
-                        Area_ReadHeight(tmp10->pos.x.fixed + (tmp10->vx * tmp3),
-                                        tmp10->pos.y.fixed + (tmp10->vy * tmp3));
+                        Area_ReadHeight(tmp10->pos.x.fixed + (tmp10->vx * tmp3), tmp10->pos.y.fixed + (tmp10->vy * tmp3));
                     }
                     tmp11        = g_Task;
                     tmp11->timer = (tmp11->timer - 1);

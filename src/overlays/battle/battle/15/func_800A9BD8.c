@@ -11,41 +11,23 @@ MATCH void func_800A9BD8(u8 slot) {
     } else {
         slot -= BATTLE_PARTY_CHARACTERS_COUNT;
 
-        g_BattleEnemyBattlers[slot].stats.power = func_801DE0AC(
-            g_BattleEnemyBattlers[slot].base.power, (g_BattleEnemyBattlers[slot].stat_multipliers[0] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.defense = func_801DE0AC(
-            g_BattleEnemyBattlers[slot].base.defense, (g_BattleEnemyBattlers[slot].stat_multipliers[1] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.agility = func_801DE0AC(
-            g_BattleEnemyBattlers[slot].base.agility, (g_BattleEnemyBattlers[slot].stat_multipliers[2] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.intellect = func_801DE0AC(
-            g_BattleEnemyBattlers[slot].base.intellect, (g_BattleEnemyBattlers[slot].stat_multipliers[3] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.reprisal_chance =
-            func_801DE144(g_BattleEnemyBattlers[slot].base.reprisal_chance,
-                          (g_BattleEnemyBattlers[slot].stat_multipliers[4] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.critical_chance =
-            func_801DE144(g_BattleEnemyBattlers[slot].base.critical_chance,
-                          (g_BattleEnemyBattlers[slot].stat_multipliers[5] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.evasion = func_801DE144(
-            g_BattleEnemyBattlers[slot].base.evasion, (g_BattleEnemyBattlers[slot].stat_multipliers[6] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.accuracy = func_801DE144(
-            g_BattleEnemyBattlers[slot].base.accuracy, (g_BattleEnemyBattlers[slot].stat_multipliers[7] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.power           = func_801DE0AC(g_BattleEnemyBattlers[slot].base.power, (g_BattleEnemyBattlers[slot].stat_multipliers[0] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.defense         = func_801DE0AC(g_BattleEnemyBattlers[slot].base.defense, (g_BattleEnemyBattlers[slot].stat_multipliers[1] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.agility         = func_801DE0AC(g_BattleEnemyBattlers[slot].base.agility, (g_BattleEnemyBattlers[slot].stat_multipliers[2] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.intellect       = func_801DE0AC(g_BattleEnemyBattlers[slot].base.intellect, (g_BattleEnemyBattlers[slot].stat_multipliers[3] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.reprisal_chance = func_801DE144(g_BattleEnemyBattlers[slot].base.reprisal_chance, (g_BattleEnemyBattlers[slot].stat_multipliers[4] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.critical_chance = func_801DE144(g_BattleEnemyBattlers[slot].base.critical_chance, (g_BattleEnemyBattlers[slot].stat_multipliers[5] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.evasion         = func_801DE144(g_BattleEnemyBattlers[slot].base.evasion, (g_BattleEnemyBattlers[slot].stat_multipliers[6] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.accuracy        = func_801DE144(g_BattleEnemyBattlers[slot].base.accuracy, (g_BattleEnemyBattlers[slot].stat_multipliers[7] * 2) + 100);
 
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FIRE] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FIRE];
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FROST] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FROST];
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_ELECTRIC] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_ELECTRIC];
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_EARTH] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_EARTH];
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_WIND] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_WIND];
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_HOLY] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_HOLY];
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_PSIONIC] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_PSIONIC];
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_DEATH] =
-            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_DEATH];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FIRE]     = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FIRE];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FROST]    = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FROST];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_ELECTRIC] = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_ELECTRIC];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_EARTH]    = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_EARTH];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_WIND]     = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_WIND];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_HOLY]     = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_HOLY];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_PSIONIC]  = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_PSIONIC];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_DEATH]    = g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_DEATH];
 
         if (g_BattleEnemyBattlers[slot].turn.action_flags.value & 0x4000) {
             g_BattleEnemyBattlers[slot].stats.power = g_BattleEnemyBattlers[slot].stats.power * 3;

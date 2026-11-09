@@ -18,9 +18,7 @@ MATCH void func_80098DC4(void) {
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & (PADLup | PADLdown)) != 0) {
-        if ((Item_GetFlags(g_MenuPanelTasks[16].unk_0A,
-                           D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
-             0x80u) != 0u) {
+        if ((Item_GetFlags(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) & 0x80u) != 0u) {
             g_BattleActorTurn->command.target = Battle_TargetNext(3);
             *(u8*)&g_Battle.ui_state -= 1u;
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
@@ -31,8 +29,7 @@ MATCH void func_80098DC4(void) {
         if ((func_8009AF7C() & BYTE_MASK) != 0u) {
             g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1));
         } else {
-            g_BattleActorTurn->command.target =
-                Battle_TargetNext(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
+            g_BattleActorTurn->command.target = Battle_TargetNext(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
@@ -40,8 +37,7 @@ MATCH void func_80098DC4(void) {
         if ((func_8009AF7C() & BYTE_MASK) != 0u) {
             g_BattleActorTurn->command.target = func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1));
         } else {
-            g_BattleActorTurn->command.target =
-                Battle_TargetPrev(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
+            g_BattleActorTurn->command.target = Battle_TargetPrev(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }

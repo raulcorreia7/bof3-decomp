@@ -113,18 +113,18 @@ extern u8              g_MenuFormationFrameMiddle[];
 extern u8              g_MenuFormationFrameRight[];
 void                   Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 void                   Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
-void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
-void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
-void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
-extern void func_801D1D1C(void);
-extern void func_801D1E34(void);
-extern s32  func_801D2978(void);
-extern s32  func_801D2ADC(void);
-extern void func_801D2C0C(void);
-extern void func_801D2DA8(void);
-extern void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
-extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
+void                   func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+bool                   func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
+void                   func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
+void                   func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
+extern void            func_801D1D1C(void);
+extern void            func_801D1E34(void);
+extern s32             func_801D2978(void);
+extern s32             func_801D2ADC(void);
+extern void            func_801D2C0C(void);
+extern void            func_801D2DA8(void);
+extern void            Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
+extern void            Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 
 /* Slide the master panel up to y -20 and stop it there. */
 static inline void Menu_SlidePanelUp(void) {

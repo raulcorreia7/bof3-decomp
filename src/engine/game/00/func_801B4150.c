@@ -9,15 +9,13 @@ MATCH s32 func_801B4150(void) {
 
     dir = g_Task->direction_08;
     if (!(dir & 1)) {
-        first = func_801B43D0(g_Task->pos.x.fixed + g_FacingSteps[(u8)(dir - 1) & 7].x,
-                              g_Task->pos.y.fixed + g_FacingSteps[(u8)(dir - 1) & 7].y, (dir - 1) & 7);
+        first = func_801B43D0(g_Task->pos.x.fixed + g_FacingSteps[(u8)(dir - 1) & 7].x, g_Task->pos.y.fixed + g_FacingSteps[(u8)(dir - 1) & 7].y, (dir - 1) & 7);
         first = (s8)first;
         if (first != -1) {
             g_Task->direction_08 = (g_Task->direction_08 - 1) & 7;
             return first;
         }
-        slot = func_801B43D0(g_Task->pos.x.fixed + g_FacingSteps[(u8)(g_Task->direction_08 + 1) & 7].x,
-                             g_Task->pos.y.fixed + g_FacingSteps[(u8)(g_Task->direction_08 + 1) & 7].y,
+        slot = func_801B43D0(g_Task->pos.x.fixed + g_FacingSteps[(u8)(g_Task->direction_08 + 1) & 7].x, g_Task->pos.y.fixed + g_FacingSteps[(u8)(g_Task->direction_08 + 1) & 7].y,
                              (g_Task->direction_08 + 1) & 7);
         slot = (s8)slot;
         if (slot != first) {
@@ -25,8 +23,7 @@ MATCH s32 func_801B4150(void) {
             return slot;
         }
         dir = g_Task->direction_08;
-        return (s8)func_801B43D0(g_Task->pos.x.fixed + g_FacingSteps[dir].x, g_Task->pos.y.fixed + g_FacingSteps[dir].y,
-                                 dir);
+        return (s8)func_801B43D0(g_Task->pos.x.fixed + g_FacingSteps[dir].x, g_Task->pos.y.fixed + g_FacingSteps[dir].y, dir);
     } else {
         s32 step = g_Task->state_70.byte + 2;
         x        = g_Task->pos.x.fixed + g_FacingSteps[dir].x * step;

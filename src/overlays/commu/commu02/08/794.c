@@ -460,8 +460,7 @@ MATCH void func_801D5E94(void) {
 
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((count & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH,
-                       MENU_HEADER_HEIGHT, g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((count & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     check = D_801DB0C4;
@@ -543,8 +542,7 @@ MATCH void func_801D62C8(void) {
 
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801D8058(0x4A, ((u8)D_801DB0C4 * 0x28) + 0x64);
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
@@ -638,8 +636,7 @@ MATCH void func_801D6BE4(void) {
 
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {
@@ -688,8 +685,7 @@ MATCH void func_801D708C(void) {
         }
     }
     func_801D9210();
-    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & HALF_MASK,
-                  0, 6);
+    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & HALF_MASK, 0, 6);
 }
 
 INCLUDE_ASM(func_801D7234);

@@ -1,8 +1,7 @@
 #include "area042_13.h"
 
 MATCH s32 func_801F4A18(s32 entry_x, s32 entry_y) {
-    if (((entry_y == TO_COORD(48) + COORD_HALF) && (((entry_x >> 0x10) - 123) < 2U)) ||
-        ((entry_y == TO_COORD(54) + COORD_HALF) && (((entry_x >> 0x10) - 29) < 3U))) {
+    if (((entry_y == TO_COORD(48) + COORD_HALF) && (((entry_x >> 0x10) - 123) < 2U)) || ((entry_y == TO_COORD(54) + COORD_HALF) && (((entry_x >> 0x10) - 29) < 3U))) {
         SYS_ClearFlag(g_SceneEventFlags, 0x11U);
         SYS_ClearFlag(g_SceneEventFlags, 0xBU);
         SYS_ClearFlag(g_SceneEventFlags, 0x12U);

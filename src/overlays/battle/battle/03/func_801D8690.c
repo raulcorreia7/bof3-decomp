@@ -51,8 +51,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     temp_v1_139 = g_BattleEnemyBattlers[var_s4].unk_7F;
     var_s7      = var_s1;
     if (temp_v1_139 == 1) {
-        func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_MenuCurrentPanel->unk_0B, (u16)g_MenuCurrentPanel->flags,
-                      (s8)(s32)temp_v1_139);
+        func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_MenuCurrentPanel->unk_0B, (u16)g_MenuCurrentPanel->flags, (s8)(s32)temp_v1_139);
         var_a0_154 = var_fp + 4;
     } else {
         func_801D94D4((s32)(s16)(var_s2 + 0x24), (u32)(s16)(var_s1 + 0xC), 0, 0xFFFF);
@@ -69,10 +68,8 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s3      = var_s6 & BYTE_MASK;
     var_s4      = tex_u;
     var_s2      = var_s5 & BYTE_MASK;
-    func_801DA5A8((s16)var_s0, temp_a1_190, (s16)(var_fp + 0x49), temp_a1_190, (u8)(s32)var_s4, (u8)(s32)var_s3,
-                  (u8)var_s2);
-    func_801DA5A8((s16)var_s0, (s16)var_s1, (s16)var_s0, (s16)(var_s7 + 0x12), (u8)(s32)var_s4, (u8)(s32)var_s3,
-                  (u8)var_s2);
+    func_801DA5A8((s16)var_s0, temp_a1_190, (s16)(var_fp + 0x49), temp_a1_190, (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
+    func_801DA5A8((s16)var_s0, (s16)var_s1, (s16)var_s0, (s16)(var_s7 + 0x12), (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
     var_s6 -= 0x10;
     temp_v0_217 = tex_u - 0x10;
     var_s5 -= 0x10;
@@ -111,10 +108,8 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s3 = var_s6 & BYTE_MASK;
     var_s4 = tex_u;
     var_s2 &= BYTE_MASK;
-    Battle_DrawLine((s16)var_s0, (s16)(var_s7 + 2), (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
-                    (u8)var_s2);
-    Battle_DrawLine((s16)(var_fp + 2), (s16)var_s1, (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
-                    (u8)var_s2);
+    Battle_DrawLine((s16)var_s0, (s16)(var_s7 + 2), (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
+    Battle_DrawLine((s16)(var_fp + 2), (s16)var_s1, (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
 }
 #else
 INCLUDE_ASM(func_801D8690);

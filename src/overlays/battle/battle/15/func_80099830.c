@@ -66,9 +66,8 @@ NON_MATCHING void func_80099830(void) {
     if (g_BattleListCursor != FIELD(u8, row_base, 0xBu)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    choice = (u8*)D_801485A1;
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] =
-        Message_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
+    choice                                   = (u8*)D_801485A1;
+    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
     if (g_InputMasks[BATTLE_INPUT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */

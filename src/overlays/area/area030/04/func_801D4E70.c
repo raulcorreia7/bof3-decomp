@@ -25,20 +25,16 @@ MATCH void func_801D4E70(void) {
     if (work->counter_08 == 0) {
         key_a = work->bounce_3C.half.key_3E;
         if (g_FishingBestCatch[key_a] != 0) {
-            func_801E0F4C((work->step_timer_09 * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y,
-                          key_a & BYTE_MASK);
+            func_801E0F4C((work->step_timer_09 * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, key_a & BYTE_MASK);
         } else {
-            func_801E0F4C((work->step_timer_09 * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y,
-                          0xFF);
+            func_801E0F4C((work->step_timer_09 * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, 0xFF);
         }
     } else {
         key_b = work->bounce_3C.half.key_3E;
         if (g_FishingBestCatch[key_b] != 0) {
-            func_801E0F4C(FISHING_CATCH_ICON_X - (work->step_timer_09 * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y,
-                          key_b & BYTE_MASK);
+            func_801E0F4C(FISHING_CATCH_ICON_X - (work->step_timer_09 * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y, key_b & BYTE_MASK);
         } else {
-            func_801E0F4C(FISHING_CATCH_ICON_X - (work->step_timer_09 * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y,
-                          0xFF);
+            func_801E0F4C(FISHING_CATCH_ICON_X - (work->step_timer_09 * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y, 0xFF);
         }
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);

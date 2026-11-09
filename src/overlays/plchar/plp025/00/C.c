@@ -68,8 +68,7 @@ MATCH s32 func_801CF738(s32 arg0) {
         s2 = v0 << 2;
         s1 = 0x140;
     L801CEA54:
-        v0 = func_801BDD58(*(s32*)(D_80143FFC + s2), *(s32*)(D_80144000 + s2), (*(s16*)(D_80144006 + s2)) + 0x200, 1,
-                           (Actor*)((u8*)&g_Game + s1));
+        v0 = func_801BDD58(*(s32*)(D_80143FFC + s2), *(s32*)(D_80144000 + s2), (*(s16*)(D_80144006 + s2)) + 0x200, 1, (Actor*)((u8*)&g_Game + s1));
         if (!(v0 & 0xFF)) {
             v0 = g_PartySize;
             s0 = s0 + 1;

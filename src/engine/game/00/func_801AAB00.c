@@ -17,11 +17,9 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
     switch (code[CUR(sub)]) {
         case 0xC0:
             if (Actor_GetType() != 1) {
-                g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2],
-                                                              (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             } else {
-                g_Game.current->unk_13D = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2],
-                                                               (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_Game.current->unk_13D = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             }
             CUR(sub) += 4;
             break;

@@ -127,12 +127,10 @@ MATCH void UI_DrawMessageScript(void) {
                         if (state->flags & FRONTEND_FLAG_REQUEST_PENDING) {
                             UI_DrawGlyph(color, p);
                         } else {
-                            UI_DrawText(state->x + state->dx, state->y + state->dy,
-                                        (color + state->palette * 0x10) & BYTE_MASK, 1, p);
+                            UI_DrawText(state->x + state->dx, state->y + state->dy, (color + state->palette * 0x10) & BYTE_MASK, 1, p);
                         }
                     } else {
-                        UI_DrawText(((s16*)cursor)[0], ((s16*)cursor)[1],
-                                    (color + ((u8*)cursor)[-4] * 0x10) & BYTE_MASK, 1, p);
+                        UI_DrawText(((s16*)cursor)[0], ((s16*)cursor)[1], (color + ((u8*)cursor)[-4] * 0x10) & BYTE_MASK, 1, p);
                     }
                     if (*p == STRING_SKIP || *p == STRING_SKIP_ALT || *p == STRING_NUM) {
                         p++;

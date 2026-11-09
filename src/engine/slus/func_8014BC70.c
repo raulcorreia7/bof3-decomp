@@ -52,10 +52,8 @@ NON_MATCHING void func_8014BC70(void) {
                     a2 = OBJ(var_t0_34);
                     a3 = OBJ(var_t0_34 - 1);
                     if ((*(u16*)(a2 + 0x32) < *(u16*)(a3 + 0x32)) ||
-                        ((*(u16*)(a2 + 0x32) == *(u16*)(a3 + 0x32)) &&
-                         ((sum_a = *(s32*)(a2 + 0x34) + *(s32*)(a2 + 0x38),
-                           sum_b = *(s32*)(a3 + 0x34) + *(s32*)(a3 + 0x38), (sum_a < sum_b)) ||
-                          ((sum_a == sum_b) && (*(s32*)(a2 + 0x3C) < *(s32*)(a3 + 0x3C)))))) {
+                        ((*(u16*)(a2 + 0x32) == *(u16*)(a3 + 0x32)) && ((sum_a = *(s32*)(a2 + 0x34) + *(s32*)(a2 + 0x38), sum_b = *(s32*)(a3 + 0x34) + *(s32*)(a3 + 0x38), (sum_a < sum_b)) ||
+                                                                        ((sum_a == sum_b) && (*(s32*)(a2 + 0x3C) < *(s32*)(a3 + 0x3C)))))) {
                         Area_SwapObjects(var_t0_34, (var_s4 - 1) & BYTE_MASK);
                     }
                     var_s4 -= 1;
@@ -100,9 +98,7 @@ NON_MATCHING void func_8014BC70(void) {
             if (var_v1_169 < D_8014832D) {
             block_27:
                 word = D_80143740[var_a0_187];
-                if ((((word >> 0x18) == layer) && (var_a0_187 < D_8014933D) &&
-                     (OBJ_KEY(var_s4 & BYTE_MASK) >= (word >> 0x10))) ||
-                    ((var_s4 & BYTE_MASK) == D_8014832D)) {
+                if ((((word >> 0x18) == layer) && (var_a0_187 < D_8014933D) && (OBJ_KEY(var_s4 & BYTE_MASK) >= (word >> 0x10))) || ((var_s4 & BYTE_MASK) == D_8014832D)) {
                     var_s0 = var_fp & BYTE_MASK;
                     if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
                         u32* pk  = &D_80143740[var_s0];

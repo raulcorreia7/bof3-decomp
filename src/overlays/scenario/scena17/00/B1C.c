@@ -160,12 +160,11 @@ MATCH void func_801F7D08(void) {
 
     if (g_AreaCameraMoving == 0) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
-        g_AreaScrollTargetX = TO_COORD(38);
-        g_AreaCameraHeightStep =
-            ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
-        step            = &D_80146874;
-        g_AreaSceneMode = 1;
-        *step           = *step + 1;
+        g_AreaScrollTargetX    = TO_COORD(38);
+        g_AreaCameraHeightStep = ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
+        step                   = &D_80146874;
+        g_AreaSceneMode        = 1;
+        *step                  = *step + 1;
         return;
     }
     height             = g_AreaCameraHeight;

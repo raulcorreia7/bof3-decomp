@@ -16,9 +16,7 @@ MATCH void SND_UpdateXA(void) {
         *mode      = SND_XA_STATE_WAIT_SYNC;
     }
 
-    if (D_8014681C >= 0xB5 &&
-        ((g_EmiServiceState = SND_XA_STATE_SEEK, temp = (s16)D_80146820++ < 6, temp == 0) || SND_HasXACDError() != 0) &&
-        g_EmiServiceState < SND_XA_STATE_PAUSE) {
+    if (D_8014681C >= 0xB5 && ((g_EmiServiceState = SND_XA_STATE_SEEK, temp = (s16)D_80146820++ < 6, temp == 0) || SND_HasXACDError() != 0) && g_EmiServiceState < SND_XA_STATE_PAUSE) {
         g_EmiServiceState = SND_XA_STATE_WAIT_SYNC;
     }
 }

@@ -113,10 +113,9 @@ ASSERT_OFFSET(FairyVariant, count, 0x04);
  * bytes: D_801EEC04[0..2] by func_801EF784 and D_801EEC08[0..2] by
  * func_801F03D0. */
 typedef struct FairyVillageHead {
-    u32 id; /* 0x00; TOC cached first word, 0x18 */
-    s8  explore_threshold[FAIRY_EXPLORE_TRIP_COUNT +
-                          1];                /* 0x04 D_801EEC04; 65, 55, 15: the success roll per trip type */
-    s8  label_cap[FAIRY_EXPLORE_TRIP_COUNT]; /* 0x08 D_801EEC08; values 15/20/25 */
+    u32 id;                                              /* 0x00; TOC cached first word, 0x18 */
+    s8  explore_threshold[FAIRY_EXPLORE_TRIP_COUNT + 1]; /* 0x04 D_801EEC04; 65, 55, 15: the success roll per trip type */
+    s8  label_cap[FAIRY_EXPLORE_TRIP_COUNT];             /* 0x08 D_801EEC08; values 15/20/25 */
     u8  pad_0B;
 } FairyVillageHead;
 
@@ -150,31 +149,29 @@ ASSERT_OFFSET(FairyVillageHeaderData, rolls, 0x54);
 /* The overlay's shared data block, read through the symbol views listed
  * beside each member. The step arrays are the scene step tables the village dispatches through. */
 typedef struct FairyVillageData {
-    u16 resource_ids[FAIRY_VILLAGE_RESOURCE_ID_COUNT]; /* 0x000 D_801F24FC; source_index % 6 */
-    u8  unk_00C[12];                                   /* 0x00C; no static reader */
-    u16 culture_threshold[FAIRY_CULTURE_LEVEL_COUNT];  /* 0x018 D_801F2514; 15,18,21,24,27,30,40 */
-    u8  pad_026;
-    u8  job_progress_cap[FAIRY_VILLAGE_JOB_PROGRESS_CAP_COUNT]; /* 0x027 D_801F2523; the cap per job-progress step */
-    u16 copy_class[FAIRY_VILLAGE_COPY_CLASS_COUNT]
-                  [FAIRY_VILLAGE_COPY_CLASS_FIELD_COUNT];     /* 0x034 D_801F2530/D_801F2532/D_801F2534;
+    u16                 resource_ids[FAIRY_VILLAGE_RESOURCE_ID_COUNT]; /* 0x000 D_801F24FC; source_index % 6 */
+    u8                  unk_00C[12];                                   /* 0x00C; no static reader */
+    u16                 culture_threshold[FAIRY_CULTURE_LEVEL_COUNT];  /* 0x018 D_801F2514; 15,18,21,24,27,30,40 */
+    u8                  pad_026;
+    u8                  job_progress_cap[FAIRY_VILLAGE_JOB_PROGRESS_CAP_COUNT];                                                                    /* 0x027 D_801F2523; the cap per job-progress step */
+    u16                 copy_class[FAIRY_VILLAGE_COPY_CLASS_COUNT][FAIRY_VILLAGE_COPY_CLASS_FIELD_COUNT];                                          /* 0x034 D_801F2530/D_801F2532/D_801F2534;
                                                      max price, battles, multiplier */
-    u8  music_level_cap[FAIRY_VILLAGE_MUSIC_LEVEL_CAP_COUNT]; /* 0x064 D_801F2560; the level cap per culture */
-    u8  task_rows[FAIRY_VILLAGE_TASK_ROW_COUNT][FAIRY_VILLAGE_TASK_ROW_FIELD_COUNT]; /* 0x06C D_801F2568 */
-    u8  variant_rows[FAIRY_VILLAGE_VARIANT_ROW_COUNT][FAIRY_VILLAGE_VARIANT_ROW_FIELD_COUNT]
-                    [FAIRY_VILLAGE_VARIANT_VARIANT_COUNT];                     /* 0x0A8 D_801F25A4 */
-    /* 0xF0 */ Callback commu01_steps[FAIRY_COMMU01_STEP_COUNT];               /* 0x0F0 g_FairyCommu01States */
-    Callback            gift_steps[FAIRY_GIFT_STEP_COUNT];                     /* 0x108 g_FairyGiftStates */
-    Callback            explore_reward_steps[FAIRY_EXPLORE_REWARD_STEP_COUNT]; /* 0x114 g_FairyExploreRewardStates */
+    u8                  music_level_cap[FAIRY_VILLAGE_MUSIC_LEVEL_CAP_COUNT];                                                                      /* 0x064 D_801F2560; the level cap per culture */
+    u8                  task_rows[FAIRY_VILLAGE_TASK_ROW_COUNT][FAIRY_VILLAGE_TASK_ROW_FIELD_COUNT];                                               /* 0x06C D_801F2568 */
+    u8                  variant_rows[FAIRY_VILLAGE_VARIANT_ROW_COUNT][FAIRY_VILLAGE_VARIANT_ROW_FIELD_COUNT][FAIRY_VILLAGE_VARIANT_VARIANT_COUNT]; /* 0x0A8 D_801F25A4 */
+    /* 0xF0 */ Callback commu01_steps[FAIRY_COMMU01_STEP_COUNT];                                                                                   /* 0x0F0 g_FairyCommu01States */
+    Callback            gift_steps[FAIRY_GIFT_STEP_COUNT];                                                                                         /* 0x108 g_FairyGiftStates */
+    Callback            explore_reward_steps[FAIRY_EXPLORE_REWARD_STEP_COUNT];                                                                     /* 0x114 g_FairyExploreRewardStates */
     u8                  unk_118[4];
-    FairyExploreReward  explore_rewards[FAIRY_EXPLORE_COUNT];       /* 0x11C D_801F2618/D_801F2619 */
-    Callback            commu02_steps[FAIRY_COMMU02_STEP_COUNT];    /* 0x17C g_FairyCommu02States */
-    const Callback      commu02_entries[FAIRY_COMMU02_ENTRY_COUNT]; /* 0x190 g_FairyCommu02Events */
-    Callback            commu03_steps[FAIRY_COMMU03_STEP_COUNT];    /* 0x1A0 g_FairyCommu03States */
-    Callback            commu04_steps[FAIRY_COMMU04_STEP_COUNT];    /* 0x1B4 g_FairyCommu04States */
-    u16                 copy_item[FAIRY_VILLAGE_COPY_ITEM_COUNT];   /* 0x1D0 D_801F26CC/D_801F26CE/D_801F26D0 */
-    Callback            commu05_steps[FAIRY_COMMU05_STEP_COUNT];    /* 0x1F0 g_FairyCommu05States */
-    Fairy               fairies[FAIRY_VILLAGE_COUNT]; /* 0x204 g_Fairies/D_801F2705/D_801F2706/D_801F2708 */
-    u8                  unk_420[12];                  /* 0x420; no static reader */
+    FairyExploreReward  explore_rewards[FAIRY_EXPLORE_COUNT];                                   /* 0x11C D_801F2618/D_801F2619 */
+    Callback            commu02_steps[FAIRY_COMMU02_STEP_COUNT];                                /* 0x17C g_FairyCommu02States */
+    const Callback      commu02_entries[FAIRY_COMMU02_ENTRY_COUNT];                             /* 0x190 g_FairyCommu02Events */
+    Callback            commu03_steps[FAIRY_COMMU03_STEP_COUNT];                                /* 0x1A0 g_FairyCommu03States */
+    Callback            commu04_steps[FAIRY_COMMU04_STEP_COUNT];                                /* 0x1B4 g_FairyCommu04States */
+    u16                 copy_item[FAIRY_VILLAGE_COPY_ITEM_COUNT];                               /* 0x1D0 D_801F26CC/D_801F26CE/D_801F26D0 */
+    Callback            commu05_steps[FAIRY_COMMU05_STEP_COUNT];                                /* 0x1F0 g_FairyCommu05States */
+    Fairy               fairies[FAIRY_VILLAGE_COUNT];                                           /* 0x204 g_Fairies/D_801F2705/D_801F2706/D_801F2708 */
+    u8                  unk_420[12];                                                            /* 0x420; no static reader */
     volatile u8         variant_counter[FAIRY_VILLAGE_VARIANT_COUNTER_COUNT];                   /* 0x42C D_801F2928 */
     u16                 labels[FAIRY_VILLAGE_LABEL_ROW_COUNT][FAIRY_VILLAGE_LABEL_FIELD_COUNT]; /* 0x434 D_801F2930 */
     u8                  pad_446[2];
@@ -197,72 +194,72 @@ ASSERT_OFFSET(FairyVillageData, variant_counter, 0x42C);
 ASSERT_OFFSET(FairyVillageData, labels, 0x434);
 
 /* Retail-address data symbols, in address order. */
-extern u8       D_801448F2;
-extern s32      D_80145030;
-extern s32      D_8014503C;
-extern s32      D_801455A8;
-extern u32      D_801455AC;
-extern u32      D_801455B0;
-extern u32      D_801455B4;
-extern s32      D_801455B8;
-extern s32      D_801455BC;
-extern u16      D_801455C0;
-extern s8       D_801455C2;
-extern u8       D_801455C6;
-extern const u8 g_FairyRooms[];
-extern u8       D_801457A9[];
-extern u8       D_801457AA[];
-extern u8       D_801457AB[];
-extern s32 D_801457EC; /* end of the group table at 0x801457AC; func_801EF52C and func_801EFEA8 compare a row pointer
+extern u8               D_801448F2;
+extern s32              D_80145030;
+extern s32              D_8014503C;
+extern s32              D_801455A8;
+extern u32              D_801455AC;
+extern u32              D_801455B0;
+extern u32              D_801455B4;
+extern s32              D_801455B8;
+extern s32              D_801455BC;
+extern u16              D_801455C0;
+extern s8               D_801455C2;
+extern u8               D_801455C6;
+extern const u8         g_FairyRooms[];
+extern u8               D_801457A9[];
+extern u8               D_801457AA[];
+extern u8               D_801457AB[];
+extern s32              D_801457EC; /* end of the group table at 0x801457AC; func_801EF52C and func_801EFEA8 compare a row pointer
                            against it */
-extern u8  D_80145E30[];
-extern u8  D_80145E48[];
-extern u8  D_80145E60[];
-extern ShopStock      g_GameShopStock[SHOP_COUNT];
-extern s8             D_801EEC08[];
-extern char           D_801EEC44[];
-extern u8             g_FairyGifts[];
-extern u8             D_801EEC98[];
-extern u8             D_801F2458[];
-extern const u16      D_801F24FC[];
-extern u16            D_801F2514[];
-extern u8             D_801F2523[];
+extern u8               D_80145E30[];
+extern u8               D_80145E48[];
+extern u8               D_80145E60[];
+extern ShopStock        g_GameShopStock[SHOP_COUNT];
+extern s8               D_801EEC08[];
+extern char             D_801EEC44[];
+extern u8               g_FairyGifts[];
+extern u8               D_801EEC98[];
+extern u8               D_801F2458[];
+extern const u16        D_801F24FC[];
+extern u16              D_801F2514[];
+extern u8               D_801F2523[];
 /* The copy-class cells of the overlay's data block: each class's max price,
  * battle count and multiplier. The retail materializes every cell through its
  * own symbol and steps six bytes per class (func_801EFA50). */
-extern u8             D_801F2560; /* the bar limit byte; func_801EFEA8 reads it with lbu at 0x801EFF14 and 0x801EFFE8 */
-extern u8             D_801F2568[][3];
-extern u8             D_801F25A4[][3][3];
+extern u8               D_801F2560; /* the bar limit byte; func_801EFEA8 reads it with lbu at 0x801EFF14 and 0x801EFFE8 */
+extern u8               D_801F2568[][3];
+extern u8               D_801F25A4[][3][3];
 /* D_801F25EC */
-extern Callback       g_FairyCommu01States[FAIRY_COMMU01_STEP_COUNT];
+extern Callback         g_FairyCommu01States[FAIRY_COMMU01_STEP_COUNT];
 /* D_801F2604 */
-extern Callback       g_FairyGiftStates[FAIRY_GIFT_STEP_COUNT];
+extern Callback         g_FairyGiftStates[FAIRY_GIFT_STEP_COUNT];
 /* D_801F2610 */
-extern Callback       g_FairyExploreRewardStates[FAIRY_EXPLORE_REWARD_STEP_COUNT];
-extern u8             g_FairyExploreRewards[];
-extern u8             D_801F2619[];
+extern Callback         g_FairyExploreRewardStates[FAIRY_EXPLORE_REWARD_STEP_COUNT];
+extern u8               g_FairyExploreRewards[];
+extern u8               D_801F2619[];
 /* D_801F2678 */
-extern Callback       g_FairyCommu02States[FAIRY_COMMU02_STEP_COUNT];
+extern Callback         g_FairyCommu02States[FAIRY_COMMU02_STEP_COUNT];
 /* D_801F268C */
-extern const Callback g_FairyCommu02Events[FAIRY_COMMU02_ENTRY_COUNT];
+extern const Callback   g_FairyCommu02Events[FAIRY_COMMU02_ENTRY_COUNT];
 /* D_801F269C */
-extern Callback       g_FairyCommu03States[FAIRY_COMMU03_STEP_COUNT];
+extern Callback         g_FairyCommu03States[FAIRY_COMMU03_STEP_COUNT];
 /* D_801F26B0 */
-extern Callback       g_FairyCommu04States[FAIRY_COMMU04_STEP_COUNT];
-extern FairyVariant   D_801F26CC[1];
+extern Callback         g_FairyCommu04States[FAIRY_COMMU04_STEP_COUNT];
+extern FairyVariant     D_801F26CC[1];
 /* D_801F26EC */
-extern Callback       g_FairyCommu05States[FAIRY_COMMU05_STEP_COUNT];
-extern u8             g_Fairies[][9];
-extern u8             D_801F2706[][9];
-extern u8             D_801F2708[];
-extern volatile u8    D_801F2928[1];
+extern Callback         g_FairyCommu05States[FAIRY_COMMU05_STEP_COUNT];
+extern u8               g_Fairies[][9];
+extern u8               D_801F2706[][9];
+extern u8               D_801F2708[];
+extern volatile u8      D_801F2928[1];
 /* Label table rows are the three age buckets; each row holds one entry per
  * record variant. */
-extern u16            D_801F2930[][3];
-extern u8             D_801F2944;
-extern u8             D_801F2945;
-extern u8*            D_801F2948;
-extern u8             D_801F294F;
+extern u16              D_801F2930[][3];
+extern u8               D_801F2944;
+extern u8               D_801F2945;
+extern u8*              D_801F2948;
+extern u8               D_801F294F;
 extern FairyVillageData D_801F24FC_Data;
 
 /* The scratchpad work pointer; each overlay types the pointee for its mode. */

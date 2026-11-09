@@ -19,8 +19,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             state->cursor = (u16)(base[state->cursor + 2] | (base[state->cursor + 1] << 8));
                             state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
                         } else {
-                            state->cursor =
-                                (u16)(state->cursor + base[state->cursor + 2] + (base[state->cursor + 1] << 8));
+                            state->cursor = (u16)(state->cursor + base[state->cursor + 2] + (base[state->cursor + 1] << 8));
                         }
                         break;
                     case 2:
@@ -105,15 +104,13 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case 13:
                         if (Actor_GetType() == 2) {
-                            g_PartyX = (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
-                            g_PartyY = (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
+                            g_PartyX       = (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
+                            g_PartyY       = (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
                             g_ScrollHeight = Area_SampleHeight(g_PartyX, g_PartyY);
                             sel            = 0xFF;
                         } else {
-                            g_Task->pos.x.fixed =
-                                (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
-                            g_Task->pos.y.fixed =
-                                (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
+                            g_Task->pos.x.fixed      = (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
+                            g_Task->pos.y.fixed      = (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
                             COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
                         }
                         state->cursor += 5;

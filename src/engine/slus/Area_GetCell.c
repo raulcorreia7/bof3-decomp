@@ -21,8 +21,7 @@ MATCH void Area_GetCell(s32 px, s32 py, AreaCell* out) {
         if (x < width - 1) {
             if (y > 0) {
                 if (y < g_AreaMapBundle.height - 1) {
-                    value =
-                        *(u16*)((u8*)bundle + ((g_AreaMapBundle.grid_off4_02 * 4) + (x2 = x * 2) + (y * width * 2)));
+                    value = *(u16*)((u8*)bundle + ((g_AreaMapBundle.grid_off4_02 * 4) + (x2 = x * 2) + (y * width * 2)));
                     if (value != 0) {
                         out->tile_x = x;
                         out->tile_y = y;

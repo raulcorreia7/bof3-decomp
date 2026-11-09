@@ -27,8 +27,7 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
         do {
             row_y  = base_y & HALF_MASK;
             record = &g_Characters[g_CharSlot[D_801E6244[row & BYTE_MASK]]];
-            UI_DrawWindow(base_x & HALF_MASK, row_y, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, 0x80,
-                          (s32)g_WindowStyle);
+            UI_DrawWindow(base_x & HALF_MASK, row_y, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, 0x80, (s32)g_WindowStyle);
             if (text_x != 0) {
                 shade = 1;
             } else {

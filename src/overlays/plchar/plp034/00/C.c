@@ -70,7 +70,6 @@ INCLUDE_ASM(func_801CFC7C);
 
 #include "overlays/plchar/Char_ClearPanelModeIfUnused.h"
 
-
 INCLUDE_ASM(func_801CFEAC);
 
 MATCH void func_801D0050(void) {

@@ -50,7 +50,6 @@ MATCH void func_801CEF54(void) {
     g_Task->unk_03 = 1;
 }
 
-
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
 #include "overlays/plchar/Char_ClearPanelModeIfUnused.h"

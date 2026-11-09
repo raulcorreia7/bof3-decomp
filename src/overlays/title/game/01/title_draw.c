@@ -107,10 +107,10 @@ MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
         primitive     = GFX_BuildGlyphPrimitive(48, 184, 7, 2, 0);
         pulse_counter = D_80143C2A + 1u;
         D_80143C2A    = pulse_counter;
-        pulse = (pulse_counter & 0x20u) == 0u ? ((pulse_counter & 0x1Fu) << 2) : -128 - ((pulse_counter & 0x1Fu) << 2);
-        primitive[4] = pulse;
-        primitive[5] = pulse;
-        primitive[6] = pulse;
+        pulse         = (pulse_counter & 0x20u) == 0u ? ((pulse_counter & 0x1Fu) << 2) : -128 - ((pulse_counter & 0x1Fu) << 2);
+        primitive[4]  = pulse;
+        primitive[5]  = pulse;
+        primitive[6]  = pulse;
     } else {
         D_80143C2A = 0u;
     }
@@ -271,9 +271,7 @@ MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
             continue;
         }
 
-        flags = GetGraphType() == one ? ((marker & 0x3FF) >> 6) | 0x200
-                : GetGraphType() == 2 ? ((marker & 0x3FF) >> 6) | 0x200
-                                      : ((marker & 0x3FF) >> 6) | 0x80;
+        flags = GetGraphType() == one ? ((marker & 0x3FF) >> 6) | 0x200 : GetGraphType() == 2 ? ((marker & 0x3FF) >> 6) | 0x200 : ((marker & 0x3FF) >> 6) | 0x80;
         GFX_SET_DRAW_MODE(flags);
 
         GFX_AddPrim(2, sizeof(DR_MODE));

@@ -29,8 +29,7 @@ MATCH void Battle_DrawRollingDigits(u8 palette) {
         do {
             loop_view     = (BattleDigitRoll*)D_801EC2E0;
             current_digit = loop_view->count;
-            Battle_DrawNumber((loop_view->x - digit_index * 8 - 12), loop_view->y, palette,
-                              ((current_digit + digit_index) % 10));
+            Battle_DrawNumber((loop_view->x - digit_index * 8 - 12), loop_view->y, palette, ((current_digit + digit_index) % 10));
         } while (--digit_index >= 0);
     }
 }

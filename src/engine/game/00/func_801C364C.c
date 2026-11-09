@@ -6,8 +6,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
     s32 result;
     s32 enabled;
 
-    if (func_801C472C(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, wanted_code & BYTE_MASK, 0) &
-        BYTE_MASK) {
+    if (func_801C472C(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, wanted_code & BYTE_MASK, 0) & BYTE_MASK) {
         return 0;
     }
     enabled = find_facing & BYTE_MASK;
@@ -17,9 +16,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
     if (enabled) {
         for (;;) {
             route  = ((g_Task->direction_08 ^ 4) + i) & 7;
-            result = func_801C3E40(g_Task->pos.x.fixed + g_FacingSteps[route].x * 2,
-                                   g_Task->pos.y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(g_Task->pos.z)) &
-                     0xFF;
+            result = func_801C3E40(g_Task->pos.x.fixed + g_FacingSteps[route].x * 2, g_Task->pos.y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(g_Task->pos.z)) & 0xFF;
             /* FAKE: holds the increment after the probe call. */
             FAKE_BARRIER();
             i++;

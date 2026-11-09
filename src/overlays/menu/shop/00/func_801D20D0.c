@@ -32,8 +32,7 @@ NON_MATCHING void func_801D20D0(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if ((Item_GetEquipability(g_ShopItemCategory, g_ShopItemId) >> g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]) &
-            1) {
+        if ((Item_GetEquipability(g_ShopItemCategory, g_ShopItemId) >> g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]) & 1) {
             for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
                 if (i == (s8)D_80148656) {
                     g_MenuPanelTasks[i + 3].state = 3;

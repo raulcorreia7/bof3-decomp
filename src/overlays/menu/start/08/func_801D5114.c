@@ -19,8 +19,7 @@ MATCH void func_801D5114(void) {
         left  = D_801C893C[kind];
         right = D_801C8950[kind];
         for (j = 0; j < INV_SLOTS_PER_CATEGORY - 1 - i; j++) {
-            if (left[0] != 0 && left[1] != 0 && (mask & Item_GetEquipability(kind, left[0])) == 0 &&
-                (mask & Item_GetEquipability(kind, left[1])) != 0) {
+            if (left[0] != 0 && left[1] != 0 && (mask & Item_GetEquipability(kind, left[0])) == 0 && (mask & Item_GetEquipability(kind, left[1])) != 0) {
                 Menu_SwapBytes(left, left + 1);
                 Menu_SwapBytes(right, right + 1);
             }

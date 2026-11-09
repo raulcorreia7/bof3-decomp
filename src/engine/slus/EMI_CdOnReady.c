@@ -54,8 +54,7 @@ MATCH void EMI_CdOnReady(u8 status, u8* result) {
         }
 
         CdGetSector((void*)(g_EmiRingBase + (g_EmiRingSlot << 11)), 0x200);
-        if ((g_EmiStep == 0) && ((g_EmiFirstWord != *(u32*)((g_EmiRingSlot << 11) + g_EmiRingBase)) ||
-                                 (g_EmiPayloadSector != g_EmiSectorCursor))) {
+        if ((g_EmiStep == 0) && ((g_EmiFirstWord != *(u32*)((g_EmiRingSlot << 11) + g_EmiRingBase)) || (g_EmiPayloadSector != g_EmiSectorCursor))) {
             g_EmiReadStatus  = 1;
             g_EmiStreamState = 0;
             return;

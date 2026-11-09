@@ -24,10 +24,8 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
 
     Menu_DrawFilledPanel(x, y, MENU_EQUIPMENT_PANEL_WIDTH, MENU_EQUIPMENT_PANEL_HEIGHT);
     record = &g_Characters[record_index];
-    UI_DrawText((s16)(x + MENU_EQUIPMENT_CAPTION_X), (s16)(y + MENU_EQUIPMENT_CAPTION_Y), 0, TEXT_LENGTH_MAX,
-                g_MenuLabelEquip);
-    func_801644D8(0, (s32)(u16)(x + MENU_EQUIPMENT_EMBLEM_X), (s32)(u16)(y + MENU_EQUIPMENT_EMBLEM_Y),
-                  MENU_EQUIPMENT_EMBLEM_SIZE, MENU_EQUIPMENT_EMBLEM_SIZE, 0x80);
+    UI_DrawText((s16)(x + MENU_EQUIPMENT_CAPTION_X), (s16)(y + MENU_EQUIPMENT_CAPTION_Y), 0, TEXT_LENGTH_MAX, g_MenuLabelEquip);
+    func_801644D8(0, (s32)(u16)(x + MENU_EQUIPMENT_EMBLEM_X), (s32)(u16)(y + MENU_EQUIPMENT_EMBLEM_Y), MENU_EQUIPMENT_EMBLEM_SIZE, MENU_EQUIPMENT_EMBLEM_SIZE, 0x80);
 
     objects[0] = &g_Weapons[record->equip.weapon];
     objects[1] = &g_Armors[record->equip.shield];
@@ -38,9 +36,7 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
 
     for (row = 0; row < MENU_EQUIPMENT_ROW_COUNT; row++) {
         row_y = (u16)(y + (row * MENU_EQUIPMENT_ROW_HEIGHT + MENU_EQUIPMENT_FIRST_ROW_Y));
-        func_801AEA80((s32)(u16)(x + MENU_EQUIPMENT_ROW_ICON_X), (s32)(u16)(row_y + MENU_EQUIPMENT_ROW_ICON_DY),
-                      g_MenuEquipRowIcons[row], 0);
-        UI_DrawText((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, func_801AF20C((u8*)objects[row]) & BYTE_MASK,
-                    (u8*)objects[row]);
+        func_801AEA80((s32)(u16)(x + MENU_EQUIPMENT_ROW_ICON_X), (s32)(u16)(row_y + MENU_EQUIPMENT_ROW_ICON_DY), g_MenuEquipRowIcons[row], 0);
+        UI_DrawText((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, func_801AF20C((u8*)objects[row]) & BYTE_MASK, (u8*)objects[row]);
     }
 }

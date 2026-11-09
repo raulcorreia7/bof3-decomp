@@ -27,8 +27,7 @@ MATCH void func_800AAA74(void) {
                 slot = 0u;
                 do {
                     if (Battle_SlotIsBlocked(slot) == 0u) {
-                        Char_AddStat(&g_Game.members[slot].chr.base.agility,
-                                     -((g_Game.members[slot].chr.base.agility >> 2u)));
+                        Char_AddStat(&g_Game.members[slot].chr.base.agility, -((g_Game.members[slot].chr.base.agility >> 2u)));
                     }
                     slot += 1u;
                 } while (slot < g_Battle.party_count);
