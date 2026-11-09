@@ -69,7 +69,12 @@ MATCH void func_801D0EC4(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0EF8);
+MATCH void func_801D0EF8(void) {
+    SYS_DISPATCH_TASK(D_801D1B38, 1, g_Task);
+    if (g_Task->header.mode != 0) {
+        func_801D17A0((s16)g_Task->screen_x, (s16)g_Task->screen_y, 0x80);
+    }
+}
 
 MATCH void func_801D0F68(void) {
     Actor* work;
