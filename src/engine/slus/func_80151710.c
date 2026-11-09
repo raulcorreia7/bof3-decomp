@@ -14,7 +14,7 @@ MATCH void func_80151710(void) {
         handlers = ((AreaLoad*)g_AreaLoads[g_GameAreaId])->steps;
         handlers[step]();
     } else {
-        Message_DispatchBankStep();
+        Message_DispatchTableStep();
     }
     count          = g_UiWindowStep;
     D_801490B8[0]  = 0;

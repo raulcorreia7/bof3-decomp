@@ -248,7 +248,7 @@ segments:
       - [0xBBD8C, c, func_80151D8C]
       - [0xBBDCC, c, func_80151DCC]
       - [0xBBE24, c, UI_DrawGlyph]
-      - [0xBC2F8, c, Message_DispatchBankStep]
+      - [0xBC2F8, c, Message_DispatchTableStep]
       - [0xBC370, c, func_80152370]
       - [0xBC3D0, c, func_801523D0]
       - [0xBC420, c, func_80152420]

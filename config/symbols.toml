@@ -5596,7 +5596,7 @@ UI_UpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current
 UI_NextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_MessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_UpdateChoice." }
 UI_PrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_MessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_UpdateChoice." }
 UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
-Message_DispatchBankStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer bank." }
+Message_DispatchTableStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer table." }
 Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "Sets the message that answers the menu choice." }
 Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "Sets the message that answers the menu choice." }
 Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "Sets the message that answers the menu choice." }

@@ -4,7 +4,7 @@
  * selected by the shared step byte g_MessageWindow.step_id, whose 0x80 base is rebased onto
  * the bank's 16 entries.
  */
-MATCH void Message_DispatchBankStep(void) {
+MATCH void Message_DispatchTableStep(void) {
     HandlerBank bank;
 
     bank = g_MessageStepBank;
