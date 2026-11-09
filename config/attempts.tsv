@@ -473,6 +473,7 @@
 "emi/world04/area198/13@0x801F3600"	"blocker: load register tie"	"+0x44 lbu v1 against v0."	""
 "exe/slus_004_22@0x8014BC70"	"nonmatching 46.80%: restated from the first draft with object macros and the original goto structure. resume: first mismatch of the sort prologue and the merge loop registers."	""	"46.80%"
 "exe/slus_004_22@0x8014D290"	"nonmatching 68.24%: first mismatch +0x0020; assigning work after the early return gives retail's single load and copy, but the copy lands in a2 (retail a3) and the col/row loads are emitted in the other order; swapping the two statements is flat. resume: a shape that gives the work copy a3."	""	"68.24%"
+"exe/slus_004_22@0x8014D290"	"work pointer coordinates; combined key; defer pointer copy"	"0x8014D2B0 move a3,v1 versus move a2,v1"	"68.24% (prior draft)"
 "exe/slus_004_22@0x8014DE78"	"An s32 index and pinned range or distance change register allocation; none restores the"	"at +0x24."	""
 "exe/slus_004_22@0x8014DE78"	"nonmatching 22 differing rows: retail subtracts self - actor (set); the rest is register assignment. Tried split dist locals; range reuse; ternary abs; row pointer. resume: a form that writes each distance into the self-field register."	""	""
 "exe/slus_004_22@0x8014DE78"	"while loop; swap setup; merge activity checks; prior distance and pin forms"	"0x8014DE9C sll a1,v0,3 versus sll a2,v0,3"	"22 differing rows (prior draft)"
