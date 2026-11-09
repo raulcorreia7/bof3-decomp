@@ -300,13 +300,13 @@ typedef struct CharacterBank {
     u32 section_offset[CHARACTER_BANK_SECTION_COUNT]; /* 0x00 from the container base */
 } CharacterBank;
 
-typedef struct CharacterBankSection {
+typedef struct CharacterSpritesSection {
     u32 unk_00;         /* 0x00 16 in the sampled sections; no reader */
     u32 palette_offset; /* 0x04 section-relative offset of the palette table */
-} CharacterBankSection;
+} CharacterSpritesSection;
 
 ASSERT_SIZE(CharacterBank, 0x0C);
-ASSERT_OFFSET(CharacterBankSection, palette_offset, 0x04);
+ASSERT_OFFSET(CharacterSpritesSection, palette_offset, 0x04);
 
 /* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
  * indexes it through the g_CharSlot slot of a stored character id. */
