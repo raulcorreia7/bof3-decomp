@@ -1,43 +1,26 @@
-#ifndef PLCHAR_CHECK_SHARED_H
-#define PLCHAR_CHECK_SHARED_H
+/* One 0x74-byte entry of D_80143FFC, indexed by the byte argument of func_801CEA10. */
+typedef struct PlcharCheckRecord {
+    s32 pos_x; /* 0x00 */
+    s32 pos_y; /* 0x04 */
+    u8  pad_08[2];
+    s16 z; /* 0x0A */
+    u8  pad_0C[0x74 - 0x0C];
+} PlcharCheckRecord;
 
-#define PLCHAR_CHECK_PARTY_BODY(arg0)                                                                                 \
-    {                                                                                                                 \
-        register s32 s0 asm("$16") = 1;                                                                               \
-        register s32 s2 asm("$18");                                                                                   \
-        register s32 s1 asm("$17");                                                                                   \
-        register s32 v0 asm("$2");                                                                                    \
-        register s32 v1 asm("$3");                                                                                    \
-                                                                                                                      \
-        v0 = g_PartySize;                                                                                             \
-        if (s0 >= v0) {                                                                                               \
-            goto L801CEAC0;                                                                                           \
-        }                                                                                                             \
-        v1 = (arg0) & 0xFF;                                                                                           \
-        v0 = v1 << 3;                                                                                                 \
-        v0 = v0 - v1;                                                                                                 \
-        v0 = v0 << 2;                                                                                                 \
-        v0 = v0 + v1;                                                                                                 \
-        s2 = v0 << 2;                                                                                                 \
-        s1 = 0x140;                                                                                                   \
-    L801CEA54:                                                                                                        \
-        v0 = func_801BDD58(*(s32*)(D_80143FFC + s2), *(s32*)(D_80144000 + s2), (*(s16*)(D_80144006 + s2)) + 0x200, 1, \
-                           (Actor*)((u8*)&g_Game + s1));                                                              \
-        if (!(v0 & 0xFF)) {                                                                                           \
-            v0 = g_PartySize;                                                                                         \
-            s0 = s0 + 1;                                                                                              \
-            if (s0 < v0) {                                                                                            \
-                s1 = s1 + 0x140;                                                                                      \
-                goto L801CEA54;                                                                                       \
-            }                                                                                                         \
-            goto L801CEAC0;                                                                                           \
-        }                                                                                                             \
-        v0 = 1;                                                                                                       \
-    L801CEAC4:                                                                                                        \
-        return v0;                                                                                                    \
-    L801CEAC0:                                                                                                        \
-        v0 = 0;                                                                                                       \
-        goto L801CEAC4;                                                                                               \
+ASSERT_SIZE(PlcharCheckRecord, 0x74);
+ASSERT_OFFSET(PlcharCheckRecord, pos_y, 0x04);
+ASSERT_OFFSET(PlcharCheckRecord, z, 0x0A);
+
+extern PlcharCheckRecord D_80143FFC[];
+
+MATCH s32 func_801CEA10(s32 arg0) {
+    s32 i;
+
+    for (i = 1; i < g_PartySize; i++) {
+        if (func_801BDD58(D_80143FFC[arg0 & 0xFF].pos_x, D_80143FFC[arg0 & 0xFF].pos_y,
+                          D_80143FFC[arg0 & 0xFF].z + 0x200, 1, (Actor*)&g_Game.members[i])) {
+            return 1;
+        }
     }
-
-#endif
+    return 0;
+}

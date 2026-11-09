@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801CE654);
 
 INCLUDE_ASM(func_801CE8AC);
 
-INCLUDE_ASM(func_801CEA10);
+#include "overlays/plchar/plchar_check.h"
 
 INCLUDE_ASM(func_801CEAE0);
 
