@@ -60,21 +60,34 @@ MATCH void func_80117818(void) {
 }
 
 MATCH void func_80117864(void* arg0) {
-    u8* p = (u8*)arg0;
-    u8* a = (u8*)g_Task;
+    struct {
+        u8  unk_00;
+        u8  unk_01;
+        u8  unk_02;
+        u8  unk_03;
+        s32 unk_04;
+        s32 unk_08;
+        s32 unk_0C;
+        u8  pad_10[0xC];
+        s32 unk_1C;
+        u8  pad_20[4];
+        u16 unk_24;
+        u8  unk_26;
+    } *p = arg0;
+    Actor* a = (Actor*)g_Task;
     s32 v;
 
-    *(s32*)(p + 4) = *(s32*)(a + 0x34);
-    *(s32*)(p + 8) = *(s32*)(a + 0x38);
-    v = *(s32*)(a + 0x3C);
-    p[0] = 1;
-    *(u16*)(p + 0x24) = 0x80;
-    p[3] = 0xC0;
-    p[0x26] = 2;
-    *(s32*)(p + 0x1C) = 0;
-    p[1] = 0;
-    p[2] = 0x20;
-    *(s32*)(p + 0xC) = v;
+    p->unk_04 = *(s32*)((u8*)a + 0x34);
+    p->unk_08 = *(s32*)((u8*)a + 0x38);
+    v         = *(s32*)((u8*)a + 0x3C);
+    p->unk_00 = 1;
+    p->unk_24 = 0x80;
+    p->unk_03 = 0xC0;
+    p->unk_26 = 2;
+    p->unk_1C = 0;
+    p->unk_01 = 0;
+    p->unk_02 = 0x20;
+    p->unk_0C = v;
 }
 
 #include "overlays/area/Area_FindFreeWorkRow.h"
