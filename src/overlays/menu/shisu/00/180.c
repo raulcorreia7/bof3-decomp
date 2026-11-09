@@ -161,7 +161,6 @@ MATCH void func_801D1910(void) {
     }
 }
 
-/* blocker: late loads of g_MenuStep.state and D_801DA0A7 sources. */
 INCLUDE_ASM(func_801D1964);
 
 INCLUDE_ASM(func_801D1A20);
@@ -175,7 +174,6 @@ MATCH void func_801D1CA4(void) {
     g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
 }
 
-/* blocker: store constant order; first diff: +0x00 li v0,20. */
 INCLUDE_ASM(func_801D1D1C);
 
 MATCH void func_801D1E34(void) {

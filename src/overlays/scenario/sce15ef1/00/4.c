@@ -68,7 +68,6 @@ MATCH void func_801D13F4(void) {
     }
 }
 
-/* needs: camera transform declarations and record types. */
 INCLUDE_ASM(func_801D147C);
 
 INCLUDE_ASM(func_801D1678);
@@ -202,10 +201,8 @@ MATCH void func_801D2170(void) {
 
 INCLUDE_ASM(func_801D21B4);
 
-/* needs: image rectangle and buffer declarations. */
 INCLUDE_ASM(func_801D23A0);
 
-/* needs: camera transform declarations and record types. */
 INCLUDE_ASM(func_801D2474);
 
 INCLUDE_ASM(func_801D26BC);
@@ -220,14 +217,12 @@ MATCH void func_801D2B64(void) {
     SYS_DISPATCH_TASK(D_801D396C, 1, g_Task);
 }
 
-/* blocker: work pointer reload; first diff: +0x08 lui v0,0x1f80. */
 INCLUDE_ASM(func_801D2BA8);
 
 INCLUDE_ASM(func_801D2C00);
 
 INCLUDE_ASM(func_801D2C94);
 
-/* blocker: statement order; first diff: +0x2C lw v0,12(v1) (candidate) against lbu a1,9(v1) (retail). */
 INCLUDE_ASM(func_801D2D5C);
 
 MATCH void func_801D2DEC(void) {

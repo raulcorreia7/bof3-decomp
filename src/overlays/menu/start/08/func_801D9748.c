@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* nonmatching: first diff 0x801D974C, `i = 0` lands after the record address; retail also loads the 6 for both panel handlers into v1 right after the loop. Delayed init, signed counter, do-while, for, row pointer and chained handler stores tried; LOH(pos.y) fixes the -20 constant. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D9748(void) {
     volatile u8*   record;

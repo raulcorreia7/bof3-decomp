@@ -290,7 +290,6 @@ MATCH void func_801FC778(void) {
     }
 }
 
-/* blocker: store in the bne delay slot; first diff: li a2,5 against li a1,5. */
 INCLUDE_ASM(func_801FC808);
 
 INCLUDE_ASM(func_801FC8A0);

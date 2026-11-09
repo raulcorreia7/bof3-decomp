@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 41.36%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801B9F08(u8 arg0, u8 arg1, s8 arg2) {
     u8 buffer[3];

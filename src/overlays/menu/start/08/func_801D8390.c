@@ -8,7 +8,6 @@ typedef struct Start08PanelHead {
     u8  unk_110;
 } Start08PanelHead;
 
-/* 88.89%; typed and volatile panel pointers and opaque base tried; first diff 0x801D83C4, panel store. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8390(void) {
     s16* panel;

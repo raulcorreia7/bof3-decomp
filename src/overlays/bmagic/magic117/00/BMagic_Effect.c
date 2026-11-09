@@ -6,7 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC24.h"
 
-/* blocker: no matched C template (magic010/00 func_801EEC80). */
 INCLUDE_ASM(func_801EEC90);
 
 INCLUDE_ASM(func_801EED2C);

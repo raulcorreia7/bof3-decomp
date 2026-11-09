@@ -25,9 +25,6 @@ typedef struct BattlePanelState {
  * table, writes its panel rows and copies the actor state into the battle
  * state block.
  */
-/* nonmatching unmeasured: tried the cursor and the state bases sit in s2 and the extra s8 where retail keeps them in a0
- * and s4 to s7. resume: a source shape whose live set matches the retail so the extra s8 disappears and the cursor
- * lands in a0. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2B58(void) {
     BattleActorRecord* actor;

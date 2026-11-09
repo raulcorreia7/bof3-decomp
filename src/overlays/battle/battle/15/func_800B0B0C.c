@@ -1,6 +1,5 @@
 #include "battle_15.h"
 
-/* NON_MATCHING: pinned x, nonvolatile y and signed loop counter tried; first diff 0x800B0B10, saved registers. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800B0B0C(s16 base_x, s16 base_y) {
     volatile u16 y_value;

@@ -5,9 +5,6 @@ extern u8 D_80145F20[];
 /* Advances the battle party: bumps the active battler's timer, copies
  * the character cells into the battle rows and drains the enemy rows.
  */
-/* nonmatching unmeasured: the active-battler byte is reached through a pointer the retail homes in s2; candidate
- * 40.59%. resume: a source shape that reproduces the retail's cell, row and enemy-row address forms and its register
- * allocation. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A0EC4(void) {
     Character* cell;

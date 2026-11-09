@@ -13,7 +13,6 @@ MATCH void func_801D0C8C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event0Step0Funcs, D_801F294D);
 }
 
-/* blocker: constant and store order; first diff: 801D0CD0. */
 INCLUDE_ASM(func_801D0CC8);
 
 MATCH void func_801D0D54(void) {

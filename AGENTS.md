@@ -50,8 +50,8 @@ the disc only the disc-free checks run ([toolchain](docs/toolchain.md#without-a-
 - `meson compile -C build/meson format` rewrites C, Python, TOML and Markdown and needs clang-format,
   ruff and dprint; `pre-push` only checks.
 - In zsh quote word lists (`git grep -lz ... | xargs -0`) and overwrite with `>|`.
-- A function you give up on keeps a hint above its `INCLUDE_ASM`: the template tried and the first
-  differing instruction. `tools/worklist.py` shows it.
+- Record failed attempts in `config/attempts.tsv`: the forms tried and first differing instruction.
+  `tools/worklist.py` shows them.
 
 ## Task routing
 

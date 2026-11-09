@@ -35,7 +35,6 @@ MATCH void func_801EEEDC(void) {
     }
 }
 
-/* blocker: counter clear schedule; first diff: lui a0,0x8014 (retail) against move s0,zero (candidate). */
 INCLUDE_ASM(func_801EEF80);
 
 MATCH void func_801EF068(void) {
@@ -75,7 +74,6 @@ MATCH void func_801EF43C(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-/* blocker: work pointer lifetime; first diff: lui v1 at +0x20. */
 INCLUDE_ASM(func_801EF528);
 
 MATCH void func_801EF648(void) {
@@ -124,7 +122,6 @@ MATCH void func_801EF7B4(void) {
     }
 }
 
-/* blocker: work pointer lifetime; first diff: lui v1 at entry. */
 INCLUDE_ASM(func_801EF844);
 
 MATCH void func_801EF8C0(void) {
@@ -164,7 +161,6 @@ MATCH void func_801EFFB8(void) {
     }
 }
 
-/* blocker: two offset tables D_801F04A4 and D_801F04A8 (stride 8, indexed by param.unk_0B) have no symbol row or type in this image; needs: type. */
 INCLUDE_ASM(func_801F0040);
 
 MATCH void func_801F00D8(void) {

@@ -58,14 +58,12 @@ MATCH s32 func_801CF940(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(func_801CFB4C);
 }
 
-/* blocker: save order; first diff: +0x4 s2 saved first (retail saves s3 first). */
 INCLUDE_ASM(func_801CFB4C);
 
 MATCH void func_801CFC38(void) {
     SYS_DISPATCH_TASK(D_801D0334, 3, g_Task);
 }
 
-/* blocker: first diff: +0x0 g_Task load before the 0x8015DF18 call. */
 INCLUDE_ASM(func_801CFC7C);
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"

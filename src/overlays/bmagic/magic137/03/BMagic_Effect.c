@@ -31,7 +31,6 @@ MATCH void func_801EF018(void) {
     }
 }
 
-/* Blocker: same shape as func_801EF38C (scroll-target position copy, then SND and timer stores); retail's load order for the y terms differs from the candidate. */
 INCLUDE_ASM(func_801EF090);
 
 MATCH void func_801EF174(void) {

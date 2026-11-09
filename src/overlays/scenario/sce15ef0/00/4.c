@@ -45,7 +45,6 @@ MATCH void func_801D0DB0(void) {
     }
 }
 
-/* blocker: fade value register; first diff: +0x34 lb a0,94(v0) (candidate) against lb v0,94(v0) (retail). */
 INCLUDE_ASM(func_801D0E5C);
 
 MATCH void func_801D0F44(void) {
