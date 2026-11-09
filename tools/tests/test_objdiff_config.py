@@ -194,3 +194,29 @@ def test_a_function_or_unlisted_name_is_left_to_the_link() -> None:
     assert rows["g_BattleActionLock"] == 0x801463CE
     assert "Actor_Clear" not in rows
     assert not any(name.startswith(("func_", "D_")) for name in rows)
+
+
+def test_a_unit_with_a_draft_is_not_marked_complete(tmp_path: Path) -> None:
+    """A MATCH marker claims the unit, but a NON_MATCHING draft in it, or in a header it includes, does not."""
+    cfg = {"nonmatching_suffix": SUFFIX, "report_objects": str(tmp_path / "report")}
+    any_name = re.compile("")
+    shared = objdiff_config.Project(
+        tmp_path,
+        cfg,
+        re.compile(r"^[ \t]*MATCH\b", re.M),
+        re.compile(r"^NON_MATCHING\s", re.M),
+        any_name,
+        any_name,
+    )
+    (tmp_path / "Draft.h").write_text("NON_MATCHING void func_B(void) {}\n")
+    whole = tmp_path / "whole.c"
+    whole.write_text("MATCH void func_A(void) {}\n")
+    drafted = tmp_path / "drafted.c"
+    drafted.write_text(
+        "MATCH void func_A(void) {}\n#ifdef NON_MATCHING\nNON_MATCHING void func_B(void) {}\n#endif\n"
+    )
+    shared_draft = tmp_path / "shared.c"
+    shared_draft.write_text('MATCH void func_A(void) {}\n#include "Draft.h"\n')
+    assert not shared.drafted(whole)
+    assert shared.drafted(drafted)
+    assert shared.drafted(shared_draft)

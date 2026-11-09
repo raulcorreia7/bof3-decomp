@@ -217,6 +217,10 @@ class Project:
         """Return True when the source, or a header it includes, carries a ``MATCH`` marker."""
         return bool(self.match.search(source_text(source)))
 
+    def drafted(self, source: Path) -> bool:
+        """Return True when the source, or a header it includes, holds a ``NON_MATCHING`` draft."""
+        return bool(self.draft.search(source_text(source)))
+
     def hand_complete(self, source: Path) -> bool:
         """Return True for a hand-written unit marked `HAND_ASM`."""
         text = source.read_text(encoding="utf-8", errors="replace")
@@ -382,7 +386,7 @@ def _game_units(
         complete = (
             project.hand_complete(source)
             if category == str(project.cfg["hand_category"])
-            else project.marked(source)
+            else project.marked(source) and not project.drafted(source)
         )
         metadata = {
             "complete": complete and not broken and not unlifted,
