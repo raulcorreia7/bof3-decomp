@@ -16,7 +16,8 @@ MATCH void func_801C5CB4(void) {
     }
     if (D_80143F5C != 0) {
         D_80143F84 += D_80143F5C;
-        /* Overlap view: upper half of s32 D_80143F84; sibling TU uses both views. */
+        /* Overlap view: upper half of s32 D_80143F84; sibling TU uses both views.
+         */
         Area_AdvanceScroll(HIH(D_80143F84));
     }
 }

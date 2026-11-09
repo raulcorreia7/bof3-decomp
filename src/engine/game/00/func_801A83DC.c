@@ -10,7 +10,9 @@ MATCH void func_801A83DC(void) {
             game_state = &g_GameStateIndex;
 
             if (*game_state != GAME_REQUEST_MESSAGE) {
-                /* Dest is the bit buffer at 0x80145548 (ahead of the celerity and bonebreak timers). */
+                /* Dest is the bit buffer at 0x80145548 (ahead of the celerity and
+                 * bonebreak timers); base+offset keeps the s0-reuse addiu, absolute form regresses
+                 * bytes. */
                 SYS_SetFlag(state + 0xC5C, g_SceneEventSelection);
                 strncpy((char*)g_TextVariables[0], (char*)Message_GetText((g_SceneEventSelection + 0x4172)), 8);
                 D_801490E0 = 0;

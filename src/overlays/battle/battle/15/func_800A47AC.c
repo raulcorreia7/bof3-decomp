@@ -2,7 +2,10 @@
 
 /* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
 
-/* opens the battle menu pair, primes the shared timers and request word. */
+/* opens the battle menu pair, primes the shared timers and request
+ * word, then unpacks the 18-bit panel flag mask into the 3x6 flag table and
+ * advances the battle frame step.
+ */
 MATCH void func_800A47AC(void) {
     u8 row;
     u8 col;

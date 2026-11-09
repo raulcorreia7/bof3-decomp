@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Clears the scratch work object's bytes 0x09-0x0B and halfword 0x30, then advances its state byte 0x01. */
+/* Clears the scratch work object's bytes 0x09-0x0B and halfword
+ * 0x30, then advances its state byte 0x01. */
 /* func_801D2D74 */
 MATCH void Fishing_ReelGaugeInit(void) {
     FishingState* record;

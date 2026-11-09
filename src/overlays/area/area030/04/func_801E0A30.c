@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Resets the seven AREA030 object records, re-arms the object slots 7..19. */
+/* Resets the seven AREA030 object records, re-arms the object slots
+ * 7..19, and sets the work-object mode byte to 2. */
 MATCH void func_801E0A30(void) {
     s32 i;
 

@@ -1,6 +1,9 @@
 #include "battle_15.h"
 
-/* clears the 0x40000 selection flag on every free slot's damage-status row (player rows 0-2, enemy rows indexed by slot-3 up to 10). */
+/* clears the 0x40000 selection flag on every free slot's damage-status
+ * row (player rows 0-2, enemy rows indexed by slot-3 up to 10), then sets the
+ * same flag on the active battler's row.
+ */
 MATCH void func_800A26F0(void) {
     u8 slot;
 

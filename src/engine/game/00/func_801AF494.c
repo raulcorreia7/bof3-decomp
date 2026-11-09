@@ -21,25 +21,25 @@ MATCH bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id) {
                 return true;
             }
             if ((Area_GetCellCode(D_80145EC6, D_80145ECA) & BYTE_MASK) == 0xAE) {
-                /* probe matched: the predicate holds. */
+                /* probe matched: the predicate holds */
                 goto ret1;
             }
             return false;
         case 2:
             if (Item_GetFlags(category, item_id) & 2) {
-                /* record bit 1 set. */
+                /* record bit 1 set */
                 goto ret1;
             }
             return false;
         case 3:
             if ((Item_GetFlags(category, item_id) & 8) == 0) {
-                /* record bit 3 clear. */
+                /* record bit 3 clear */
                 goto ret1;
             }
             return false;
         case 4:
             if (((Item_GetEquipability(category, item_id) & BYTE_MASK) >> character_id) & 1) {
-                /* selected record bit set. */
+                /* selected record bit set */
                 goto ret1;
             }
             return false;

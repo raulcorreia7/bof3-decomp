@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* Initializes the runtime work buffers and subsystem state used by the executable's boot loop. */
+/* Initializes the runtime work buffers and subsystem state used by
+ * the executable's boot loop.
+ */
 MATCH void SYS_InitRuntime(void) {
     u8* work;
 

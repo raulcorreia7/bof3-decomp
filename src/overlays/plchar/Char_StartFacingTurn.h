@@ -1,4 +1,9 @@
-/* Starts the turn to the nearer of facings 3 and 5. */
+/* Starts the turn to the nearer of facings 3 and 5: stores that facing and its
+ * Actor_GetTurnStep sign, sets the timer byte to 2 and advances the task
+ * state; on scenario 15 it only clears the panel mode byte. One definition
+ * shared by the plchar character programs; each program includes it where the
+ * function sits, and a change must keep every member matching.
+ */
 MATCH void Char_StartFacingTurn(void) {
     s32 to_back;
     s32 to_away;

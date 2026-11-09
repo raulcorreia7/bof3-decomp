@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* loads the active work area's two sprite bytes from either the queued battler table or the current battler table, queues the palette step and advances the area's phase. */
+/* loads the active work area's two sprite bytes from either the queued
+ * battler table or the current battler table, queues the palette step and
+ * advances the area's phase.
+ */
 MATCH void func_801DF914(void) {
     PartyMember* current;
     PartyMember* work;

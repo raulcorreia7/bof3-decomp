@@ -4,7 +4,10 @@
 #define OBJ(i)     ((u8*)D_8014828C[i])
 #define OBJ_KEY(i) (*(u16*)(OBJ(i) + 0x32))
 
-/* draws every queued object per scene layer. */
+/* draws every queued object per scene layer: sorts the object list by layer key and depth, then for each of the
+ * 0x37 scenes merges the object list with the packet list D_80143740 by key and links each object (sorted by depth
+ * through the panel sort rows) or packet into the ordering table.
+ */
 /* nonmatching 46.80%: restated from the first draft with object macros and the original goto structure. resume:
  * first mismatch of the sort prologue and the merge loop registers. */
 #ifdef NON_MATCHING

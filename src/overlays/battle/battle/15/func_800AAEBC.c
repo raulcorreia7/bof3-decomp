@@ -1,6 +1,9 @@
 #include "battle_15.h"
 
-/* allocates a queued battle-action slot, binds it to a battler, records the signed target index. */
+/* allocates a queued battle-action slot, binds it to a battler,
+ * records the signed target index, and selects the action mode from the
+ * battler's status flags.
+ */
 
 MATCH void func_800AAEBC(s16 target_index, u8 battler_index) {
     u8 action_slot;

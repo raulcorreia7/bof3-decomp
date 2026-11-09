@@ -16,5 +16,7 @@
 #include "sys/math.h"
 #include "sys/dispatch.h"
 
-/* The include set every game translation unit starts from. */
+/* The include set every game translation unit starts from: base types,
+ * helpers, callbacks, vectors, PsyQ types, fixed-address seams and the
+ * matching helpers. */
 #endif

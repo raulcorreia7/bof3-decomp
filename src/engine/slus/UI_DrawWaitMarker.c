@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* when the graphics-flag word has bit 0x20, draws an 8x8 flat sprite at the position. */
+/* when the graphics-flag word has bit 0x20, draws an 8x8 flat sprite at the position: draw mode from a new
+ * TPage, then the sprite primitive with CLUT, RGB, position, size and semi-transparency, appended to the output
+ * table.
+ */
 MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
     SPRT* prim;
 

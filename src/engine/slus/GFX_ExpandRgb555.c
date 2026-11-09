@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* expands packed RGB555 pixel pairs into RGB24 bytes. */
+/* expands packed RGB555 pixel pairs into RGB24 bytes, then uploads
+ * the result and advances the shared image cursor past the aligned block.
+ */
 MATCH void GFX_ExpandRgb555(u32* pixels, RECT rect) {
     u8* dst;
     u32 color;

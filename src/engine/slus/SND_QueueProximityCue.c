@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* One band: the cue fires when the record's x and y both lie within `radius` of the target point (g_AreaTargetCellX, g_AreaTargetCellY). */
+/* One band: the cue fires when the work record's x and y both lie within `radius` of the target point
+ * (g_AreaTargetCellX, g_AreaTargetCellY); `table` is the cue table the band stores. */
 #define SND_PROXIMITY_BAND(radius, table)         \
     work   = g_Task;                              \
     x      = COORD_INT(work->pos.x);              \
@@ -23,7 +24,10 @@
         }                                         \
     }
 
-/* raises the proximity cue selected by the active work area's distance from the target point, testing the six nested radii from widest to tightest and only the first matching band fires. */
+/* raises the proximity cue selected by the active work area's
+ * distance from the target point, testing the six nested radii from widest to
+ * tightest and only the first matching band fires.
+ */
 MATCH void SND_QueueProximityCue(s32 cue_id) {
     Actor* work;
     /* FAKE: the axis value stays in a0 across both range tests. */

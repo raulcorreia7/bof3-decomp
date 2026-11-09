@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-/* The block at D_801448D8 holds the 0xA4-byte Character party records at +0x90 (g_Characters). */
+/* The block at D_801448D8 holds the 0xA4-byte Character party records
+ * at +0x90 (g_Characters). */
 typedef struct StartPartyBlock {
     u8        unk_00[0x90];
     Character records[8];

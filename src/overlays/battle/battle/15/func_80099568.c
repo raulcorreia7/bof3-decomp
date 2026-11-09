@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* First byte of g_BattleChoicePanel (0x80148570). */
+/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
+ * direct %lo store form instead of materializing the array address. */
 
 bool func_8009AC18(void);
 

@@ -1,4 +1,7 @@
-/* Runs the step of the current effect record D_801F17B0. */
+/* Runs the step of the current effect work record D_801F17B0; one still in use
+ * after its first step draws its disc, and its rays on three frames in four.
+ * One definition shared by the bmagic overlays; every change here must verify
+ * every member. */
 /* func_801EF37C (magic162), func_801EF37C (magic168) */
 MATCH void func_801EF37C(void) {
     BMagicEffectWorkSteps handlers;

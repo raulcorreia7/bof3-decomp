@@ -1,6 +1,7 @@
 #include "sisyou_00.h"
 
-/* Stock list (stride 0x140 per entry) and the character records' master id byte at +0x1B (stride 0xA4). */
+/* Stock list (stride 0x140 per entry) and the character records' master id
+ * byte at +0x1B (stride 0xA4). */
 
 /* Front-end phase byte owned by the main executable. */
 

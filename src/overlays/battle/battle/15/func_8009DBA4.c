@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* Non-volatile view of the battler selection index (0x80146394). */
+/* Non-volatile view of the battler selection index (0x80146394): battle_15.h
+ * declares it volatile, whose byte load cannot feed the index arithmetic
+ * without an extra mask. */
 
 MATCH void func_8009DBA4(void) {
     u32 index;

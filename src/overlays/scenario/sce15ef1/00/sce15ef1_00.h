@@ -1,7 +1,8 @@
 #ifndef OVERLAY_SCENARIO_SCE15EF1_00_H
 #define OVERLAY_SCENARIO_SCE15EF1_00_H
 
-/* The scenario/sce15ef1/00 overlay's local declarations. */
+/* The scenario/sce15ef1/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "overlays/scenario/scenario.h"
 #include "shared/WorldSpin.h"

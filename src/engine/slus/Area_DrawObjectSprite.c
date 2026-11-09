@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* Draws the entity of the scratchpad record g_Task. */
+/* Draws the entity of the scratchpad work record g_Task: culls it against the 0x1C0 by 0x170 screen window
+ * (setting or clearing the hidden bit 0x80 of the first byte), then queues its sprite cells. Plain cells go to
+ * func_8014CF9C; flipped or scaled cells become FT4 primitives here, with the size row from g_SpriteSizes.
+ */
 MATCH void Area_DrawObjectSprite(void) {
     POLY_FT4*   prim;
     SpriteCell* cell;

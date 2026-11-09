@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* arms the panel task selected by the menu id and reports 0xFF when it is already armed, otherwise the menu id. */
+/* arms the panel task selected by the menu id and reports
+ * 0xFF when it is already armed, otherwise the menu id.
+ */
 MATCH u8 Menu_OpenPanelTask(u8 menu_id, u8 handler) {
     u32 index;
     /* FAKE: retail holds the success status in $v0 from the branch target. */

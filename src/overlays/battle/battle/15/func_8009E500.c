@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* Prepares the selected battler's damage preview. */
+/* Prepares the selected battler's damage preview: reads the damage cap from the player or enemy row into the
+ * 0x801463A0 slot 3, marks the action state, then passes the row limit and the cap to the damage routine after growing
+ * the preview when it exceeds the limit. */
 /* nonmatching unmeasured: tried frame 0x28 vs 0x18: the cached delta/limit locals spill while the retail keeps them in
  * registers; branch layout now bne to the tail store. resume: drive both halves from one u32 row index and pass the row
  * addresses as non-volatile u16 pointers. */

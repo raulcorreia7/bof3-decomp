@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* adds char_id to the party order arrays g_PartyFieldOrder and g_PartyBattleOrder. */
+/* adds char_id to the party order arrays g_PartyFieldOrder and g_PartyBattleOrder: below PARTY_SLOT_COUNT it appends and
+ * returns 1, otherwise it replaces the first field-order member with record flag bit 1 clear that is also in the
+ * battle order (1), or returns 0. Each call sets flag bits 0 and 1 on char_id's record.
+ */
 MATCH s32 Party_AddMember(u8 char_id) {
     s32 char_rec;
     s32 field_rec;

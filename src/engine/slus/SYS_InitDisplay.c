@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* initializes both display/draw environment pairs used by the boot-side double buffer. */
+/* initializes both display/draw environment pairs used by the
+ * boot-side double buffer.
+ */
 MATCH void SYS_InitDisplay(void) {
     u8* work;
 

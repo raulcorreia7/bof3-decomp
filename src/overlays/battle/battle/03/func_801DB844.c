@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* reports whether one battler slot is selectable. */
+/* reports whether one battler slot is selectable: checks its group (local below three, enemy otherwise)
+ * against that group's flag byte, gate halfword and stage word, and accepts only when the selection byte is neither
+ * the slot's own group nor 3.
+ */
 MATCH u8 func_801DB844(u32 battler_index) {
     u8  index;
     u32 offset;

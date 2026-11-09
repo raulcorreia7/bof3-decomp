@@ -1,7 +1,9 @@
 #ifndef OVERLAY_WORLD00_FISHING_04_H
 #define OVERLAY_WORLD00_FISHING_04_H
 
-/* The world00/area030/04 world overlay's local declarations. */
+/* The world00/area030/04 world overlay's local declarations: the area work table, the
+ * route-velocity tables, script state and handlers. Only this image includes
+ * the file. */
 
 #include "overlays/area/world00.h"
 #include "area/spad.h"
@@ -12,7 +14,8 @@
 #define FISHING_ROW          ((Actor*)g_CurrentActor)
 #define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishingSpecies)[(index)])
 
-/* The fishing messages: indexes into the message table the pond loads at AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
+/* The fishing messages: indexes into the message table the pond loads at
+ * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
 typedef enum FishingMessageId {
     FISHING_MSG_CAUTION          = 60,
     FISHING_MSG_FISH             = 61,
@@ -34,7 +37,8 @@ typedef enum FishingMessageId {
 /* The fish species the pond holds: the fish items from ITEM_JELLYFISH to ITEM_MACKEREL. */
 #define FISHING_FISH_SPECIES      (ITEM_MACKEREL - ITEM_JELLYFISH + 1)
 
-/* The pond camera follows the lure between these heights (16.16 cells). */
+/* The pond camera follows the lure between these heights (16.16 cells); a
+ * hooked fish out of the water is at FISHING_CATCH_HEIGHT. */
 #define FISHING_CAMERA_Y_MIN      TO_COORD(21)
 #define FISHING_CAMERA_Y_MAX      TO_COORD(60)
 #define FISHING_CATCH_HEIGHT      TO_COORD_HALF(62)
@@ -66,7 +70,8 @@ typedef union FishingMotion {
     } half;
 } FishingMotion;
 
-/* The bounce accumulator at 0x3C is a word; the key at 0x3E is its upper half, read and written on its own. */
+/* The bounce accumulator at 0x3C is a word; the key at 0x3E is its upper
+ * half, read and written on its own. */
 typedef union FishingBounce {
     s32 unk_3C;
 
@@ -76,7 +81,9 @@ typedef union FishingBounce {
     } half;
 } FishingBounce;
 
-/* The low cell of 0x38 is read as a byte and, by func_801E0044, as a halfword over 0x38-0x39. */
+/* The low cell of 0x38 is read as a byte and, by func_801E0044, as a
+ * halfword over 0x38-0x39: the low half of the fixed-point y, whose sign bit
+ * it keeps. */
 typedef union FishingStateSlotLow {
     u8  unk_38; /* the byte at 0x38 */
     s16 pos_low_38;
@@ -89,7 +96,12 @@ typedef struct FishingStateSlot {
 
 ASSERT_SIZE(FishingStateSlot, 4);
 
-/* The cell at 0x38 is read as a word, as a byte and, at 0x3A, as a halfword of its own. */
+/* The cell at 0x38 is read as a word, as a byte and, at 0x3A, as a halfword
+ * of its own.  The word holds the work record's y position in 16.16 fixed
+ * point: Fishing_FishAppear writes 0x3E0000 - facing * 0xC0000, Fishing_CastInput
+ * writes 0x410000, Fishing_LureFly subtracts 0x4000 and func_801E03F8 calls
+ * it pos_y while calling 0x34 pos_x.  The accessory drawer func_801D8364
+ * stores the accessory slot of the selected row in the 0x3A halfword. */
 typedef union FishingStateY {
     s32              pos_y;
     FishingStateSlot half;
@@ -97,7 +109,8 @@ typedef union FishingStateY {
 
 ASSERT_SIZE(FishingStateY, 4);
 
-/* One cue row of D_801E1D58. */
+/* One cue row of D_801E1D58: the 16.16 fixed-point height offset and the
+ * per-step delta; four rows, indexed by cue_index_06 (Fishing_LureFly). */
 typedef struct FishingCueStep {
     s32 offset_00;
     s32 step_04;
@@ -105,7 +118,9 @@ typedef struct FishingCueStep {
 
 ASSERT_SIZE(FishingCueStep, 0x08);
 
-/* One 10-byte character record row inside the PanelIcon table. */
+/* One 10-byte character record row inside the PanelIcon table; g_FishingRodRow is
+ * stepped to the selected row by Fishing_SelectGear. Bytes 0x04 through 0x07 are
+ * read as signed (Fishing_HookedReel). */
 typedef struct FishingCharRow {
     u8 byte_00;   /* 0x00 */
     u8 byte_01;   /* 0x01 */
@@ -124,13 +139,16 @@ ASSERT_OFFSET(FishingCharRow, sbyte_05, 0x05);
 ASSERT_OFFSET(FishingCharRow, sbyte_06, 0x06);
 ASSERT_OFFSET(FishingCharRow, sbyte_07, 0x07);
 
-/* The item pointer at 0x50 and the message text pointer at 0x54 are stored as words and dereferenced as bytes. */
+/* The item pointer at 0x50 and the message text pointer at 0x54 are stored as
+ * words and dereferenced as bytes. */
 typedef union FishingItemPointer {
     u8* pointer;
     s32 word;
 } FishingItemPointer;
 
-/* One fishing animation step. */
+/* One fishing animation step: the animation func_8014D8D4 plays (bit 7 ends
+ * the sequence), the next step index and the x/y deltas applied to the rod
+ * position. D_801E207D..F are byte views of the following rows of D_801E207C. */
 typedef struct FishingAnimationStep {
     s8 anim_id;
     u8 next_step;
@@ -199,7 +217,10 @@ typedef struct FishingState {
 ASSERT_OFFSET(FishingState, y_38, 0x38);
 STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.half.slot_3A) == 0x3A);
 
-/* The 0x24-byte fishing scene cue rows at g_FishingSpecies, indexed by the work's cue_index_06 and selected by the g_FishingPromptSets queue table. value_00 is the scene id func_8014DD3C resolves. */
+/* The 0x24-byte fishing scene cue rows at g_FishingSpecies, indexed by the work's
+ * cue_index_06 and selected by the g_FishingPromptSets queue table. value_00 is the
+ * scene id func_8014DD3C resolves; count_0A limits the spawn facing. The rest
+ * is not modelled. */
 typedef struct FishingSceneCue {
     u16 value_00;
     u8  pad_02[8];
@@ -211,13 +232,16 @@ ASSERT_SIZE(FishingSceneCue, 0x24);
 ASSERT_OFFSET(FishingSceneCue, value_00, 0x00);
 ASSERT_OFFSET(FishingSceneCue, count_0A, 0x0A);
 
-/* The world panel's selection state word at the head of each 0x98-byte field work row. */
+/* The world panel's selection state word at the head of each 0x98-byte field
+ * work row; Fishing_HookedReel latches the pad state here and the byte at +1 is the
+ * world mode. The rest of the row is the field work record. */
 typedef struct FishingSelectionState {
     s32 state; /* 0x00 */
     u8  pad[0x94];
 } FishingSelectionState;
 
-/* One 0x10-byte panel icon row from D_801E2424. */
+/* One 0x10-byte panel icon row from D_801E2424: the CLUT x and y (unk_00 and
+ * unk_04), the quad size and the U/V origin func_801E0DCC copies into a sprite. */
 typedef struct PanelIcon {
     s32 unk_00;
     s32 unk_04;
@@ -258,7 +282,9 @@ ASSERT_OFFSET(FishingTarget, unk_10, 0x10);
 ASSERT_OFFSET(FishingTarget, unk_11, 0x11);
 ASSERT_OFFSET(FishingTarget, pad_12, 0x12);
 
-/* One 0xA-byte panel texture cell: the U/V origin, the quad width, the extra V span and the texture page word. */
+/* One 0xA-byte panel texture cell: the U/V origin, the quad width, the extra V
+ * span and the texture page word. The D_801E218C..D_801E2194 tables are
+ * indexed by the panel style and read by func_801D799C. */
 typedef struct PanelTexture {
     u16 u;
     u16 v;
@@ -283,7 +309,8 @@ typedef struct FishingAnchors {
 
 ASSERT_SIZE(FishingAnchors, 6);
 
-/* 17 rows of ten companion-overlay index bytes and the two zero bytes that align D_801E31E0. */
+/* 17 rows of ten companion-overlay index bytes and the two zero bytes that
+ * align D_801E31E0. */
 typedef struct FishingCompanionCells {
     u8 cells[17][10];
     u8 align[2];
@@ -750,7 +777,8 @@ void func_801E19CC(s32 x, s32 y);
 bool Fishing_FishStacksFull(void);
 void func_801E1C7C(void);
 
-/* When the AREA030 state byte is 3, arm the selection cue and advance the sub-state. */
+/* When the AREA030 state byte is 3, arm the selection cue and advance the
+ * sub-state, then run the shared world update. */
 static inline void WorldAdvanceFishingSubState(u8 subState) {
     if (D_80144199 == 3) {
         SND_StopSequence(0, 1);
@@ -762,7 +790,8 @@ static inline void WorldAdvanceFishingSubState(u8 subState) {
     Actor_StepAnimLoop();
 }
 
-/* Draw the area030 cue row and its cell. */
+/* Draw the area030 cue row and its cell; the cell drawer is the overlay's
+ * accessory drawer or the default drawer. */
 static inline void FishingDrawCue(u8 accessoryCue) {
     FishingState* record;
     s32           mask;

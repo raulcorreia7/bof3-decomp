@@ -2,7 +2,8 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Seeds the AREA030 panel scratch record for the cursor phase, arms the mode helper with the cursor row and queues the cue that row selects. */
+/* Seeds the AREA030 panel scratch record for the cursor phase, arms
+ * the mode helper with the cursor row and queues the cue that row selects. */
 MATCH void func_801D339C(void) {
     FishingState* panel;
     FishingState* other;

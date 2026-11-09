@@ -21,7 +21,8 @@ typedef union SceneSlots {
 
 ASSERT_SIZE(SceneSlots, 0x40);
 
-/* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from entries 5 and 8. */
+/* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from
+ * entries 5 and 8; func_801F8358 calls entries 13-15 as (record, state). */
 static SceneSlots D_801F8538 = {{
     func_801F6C90,
     (Callback)func_801F8358,
@@ -70,7 +71,9 @@ MATCH void func_801F6CCC(void) {
     D_80146872           = 1;
 }
 
-/* Current area id (u16) and the frontend popup word cell, both fixed by the shipped image layout. */
+/* Current area id (u16) and the frontend popup word cell, both fixed by the
+ * shipped image layout.
+ */
 
 MATCH void func_801F6D90(void) {
     u16 area_id;
@@ -114,7 +117,8 @@ MATCH void func_801F6E30(void) {
     }
 }
 
-/* Flag byte at 0x80143F03, read through the plain u8 view. */
+/* Flag byte at 0x80143F03, read through the plain u8 view: the volatile
+ * SCENA16_D_80143F03 declaration would add a masking instruction here. */
 
 MATCH void func_801F6EB0(void) {
     if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
@@ -138,7 +142,8 @@ MATCH void func_801F6F30(void) {
         g_ScriptVarsReq.word = 0u;
         Area_AdvanceScroll(0x300u);
         func_801C601C(0u);
-        /* The cell is advanced through an unsigned view and read back signed for x. */
+        /* The cell is advanced through an unsigned view and read back signed
+         * for x: the two views of g_AreaCameraAngle.vx are not interchangeable. */
         base          = (u16*)&g_AreaCameraAngle.vx;
         base[0]       = (base[0] + 0xAAu);
         object_index  = Actor_FindFreeSlot();
@@ -202,7 +207,10 @@ MATCH void func_801F7188(void) {
     }
 }
 
-/* Boundary: the reviewed range stops at 0x801F743C. */
+/* Boundary: the reviewed range stops at 0x801F743C, but this routine runs to
+ * the shared epilogue at 0x801F777C (0x801F7230..0x801F7790). Its 12-entry
+ * switch table at 0x801F6C04 dispatches cases 5-11 into the auto-named
+ * func_801F743C block of the `main` segment. */
 MATCH void func_801F7230(void) {
     switch (g_SceneState.step_05) {
         case 0: {
@@ -519,7 +527,8 @@ MATCH void func_801F7CC4(void) {
             }
             Message_StartAreaMessage(1u);
             {
-                /* Case-local pointer: keeps this increment in its own register pair. */
+                /* Case-local pointer: keeps this increment in its own register pair,
+                 * so cases 0 and 2 cross-jump into one shared tail. */
                 u8* next_state;
 
                 next_state  = &g_SceneState.step_05;

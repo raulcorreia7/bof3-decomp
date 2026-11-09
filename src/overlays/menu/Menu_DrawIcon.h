@@ -1,4 +1,7 @@
-/* Draw one 16x8 icon cell from the fixed D8 atlas row. each overlay includes this file where the function sits. */
+/* Draw one 16x8 icon cell from the fixed D8 atlas row. One definition shared
+ * by the shop, start, Bate and Shisu overlays; each overlay includes this file
+ * where the function sits.
+ */
 /* func_801D2520 (sisyou), func_801D4564 (bate), func_801D550C (shisu), func_801DA00C (shop), func_801DD504 (start) */
 MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode) {
     SPRT* sprt;

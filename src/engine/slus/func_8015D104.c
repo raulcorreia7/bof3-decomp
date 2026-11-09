@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* subtracts amount from the indexed g_SndVoiceTargetVolume byte, clamping it at zero. */
+/* subtracts amount from the indexed g_SndVoiceTargetVolume byte, clamping it at zero.
+ */
 MATCH void func_8015D104(s32 slot, s32 amount) {
     u32 index;
     s8  value;

@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-/* Overlay head .data, 0x801D0CB8..0x801D0F0C. */
+/* Overlay head .data, 0x801D0CB8..0x801D0F0C: the drop chances and the
+ * queued-slot dispatch tables (mode, kind and sub-kind handlers). */
 
 /* In-overlay dispatch targets (split assembly units). */
 
@@ -8,7 +9,9 @@ DropChances g_BattleDropChances = {
     0x00, 0x00, 0x01, 0x03, 0x07, 0x1F, 0x7F, 0xFF,
 };
 
-/* 0x801D0CC0: the queued slot's mode (+0x06, stored by Battle_AllocEffect) selects one of these four stage handlers. */
+/* 0x801D0CC0: the queued slot's mode (+0x06, stored by Battle_AllocEffect)
+ * selects one of these four stage handlers; Battle_UpdateEffects copies the
+ * table and dispatches for every active slot. */
 /* D_801D0CC0 */
 BattleEffectStages g_BattleEffectStages = {
     (Callback)func_801E5AF4,
@@ -17,7 +20,8 @@ BattleEffectStages g_BattleEffectStages = {
     (Callback)func_801E5C1C,
 };
 
-/* 0x801D0CD0: mode 0's stage handler (func_801E5AF4) dispatches the queued slot's handler index (+0x05) here. */
+/* 0x801D0CD0: mode 0's stage handler (func_801E5AF4) dispatches the queued
+ * slot's handler index (+0x05) here; 19 handlers, indices 0..0x12. */
 /* D_801D0CD0 */
 BattleEffectStage0Funcs g_BattleEffectStage0Funcs = {
     (Callback)func_801E5AEC, (Callback)func_801E5CA4, (Callback)func_801E63C0, (Callback)func_801E6724,
@@ -27,7 +31,8 @@ BattleEffectStage0Funcs g_BattleEffectStage0Funcs = {
     (Callback)func_800A8C60, (Callback)func_801E862C, (Callback)func_800A8D80,
 };
 
-/* 0x801D0D1C: mode 1's stage handler (func_801E5B8C) dispatches the queued slot's handler index (+0x05) here. */
+/* 0x801D0D1C: mode 1's stage handler (func_801E5B8C) dispatches the queued
+ * slot's handler index (+0x05) here; 110 handlers. */
 /* D_801D0D1C */
 BattleEffectStage1Funcs g_BattleEffectStage1Funcs = {
     (Callback)func_801E5AEC, (Callback)func_801EF2CC, (Callback)func_800AE788, (Callback)func_801EF75C,
@@ -60,7 +65,8 @@ BattleEffectStage1Funcs g_BattleEffectStage1Funcs = {
     (Callback)func_801EEE2C, (Callback)func_801EF04C,
 };
 
-/* 0x801D0ED4: mode 3's stage handler (func_801E5C1C) dispatches the queued slot's handler index (+0x05) here. */
+/* 0x801D0ED4: mode 3's stage handler (func_801E5C1C) dispatches the queued
+ * slot's handler index (+0x05) here; eight handlers. */
 /* D_801D0ED4 */
 BattleEffectStage3Funcs g_BattleEffectStage3Funcs = {
     (Callback)func_801E5AEC, (Callback)func_801EEE64, (Callback)func_800C1BEC, (Callback)func_800C1EA0,

@@ -12,7 +12,8 @@
 #define GENE_HELP_PICK_TEXT    0x58
 #define BLANK_TEXT             0x4000
 
-/* The Accession gene picker. */
+/* The Accession gene picker: moves the cursor over the gene grid, adds or removes up to GENE_PICK_MAX genes and
+ * confirms when the party member has the AP. */
 /* blocker: retail spills the function-wide g_Battle.gene_count address (unused 8-byte slot, absolute loads in the
  * confirm branch); the draft keeps it in s0. First diff: addiu sp,sp,-48. Tried: a local count pointer. */
 #ifdef NON_MATCHING

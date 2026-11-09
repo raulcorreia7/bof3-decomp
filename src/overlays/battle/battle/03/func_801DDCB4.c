@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* Countdown/retry state bytes. */
+/* Countdown/retry state bytes: per-battler fields viewed as arrays whose
+ * element stride equals one battler record (0x140 local, 0x118 enemy).
+ * D_801EAFFC holds short-counter thresholds; D_801EAFF4 maps a retry-state
+ * byte to the retry percentage used for the long-shot reroll below. */
 
 MATCH u8 func_801DDCB4(u32 battler_index) {
     u32 id;

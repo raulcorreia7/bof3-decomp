@@ -13,7 +13,7 @@ MATCH u8* func_801A4518(u8* script) {
     for (;;) {
         op = *script;
         if (op == 0xF5) {
-            /* stream terminator: return the cursor after it. */
+            /* stream terminator: return the cursor after it */
             goto done;
         }
         if (op == 0xF6) {

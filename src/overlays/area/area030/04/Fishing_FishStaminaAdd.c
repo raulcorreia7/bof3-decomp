@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Adds the signed delta to the halfword at work+0x8E, then clamps the result into [0, work+0x8C]. */
+/* Adds the signed delta to the halfword at work+0x8E, then clamps
+ * the result into [0, work+0x8C]. */
 /* func_801E026C */
 MATCH void Fishing_FishStaminaAdd(s8 delta) {
     Actor* work;

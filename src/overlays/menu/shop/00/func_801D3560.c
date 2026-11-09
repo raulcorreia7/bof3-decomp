@@ -9,7 +9,8 @@ MATCH void func_801D3560(u16* result_code) {
 
     *result_code = 100;
     for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
-        /* Shift form: it keeps the table symbol in the load's immediate field, which `i * 0x140` does not. */
+        /* Shift form: it keeps the table symbol in the load's immediate field,
+         * which `i * 0x140` does not. */
         item  = g_Game.members[i].character_index;
         entry = &g_Characters[item];
         if (entry->equip.accessories[0] == ACCESSORY_COUPONS) {

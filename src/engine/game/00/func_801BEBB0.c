@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-/* The retail passes the roll in $a0 and the callee discards it. */
+/* The retail passes the roll in $a0 and the callee discards it, so the value
+ * is caller context and not part of the shared no-argument prototype. The
+ * alias names the same address with the argument spelled out. */
 
 /* Typed view of the party stats table (the 0xA4-byte Character rows). */
 

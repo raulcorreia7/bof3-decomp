@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* scans the three local battle records. */
+/* scans the three local battle records: live slots with the pending
+ * flag either arm the selection action bit or clear the flag, and the routine
+ * reports whether it armed one. */
 MATCH s32 func_800AA8FC(void) {
     s32 i;
     s32 off;

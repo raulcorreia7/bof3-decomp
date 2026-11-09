@@ -1,4 +1,6 @@
-/* Sets the GTE rotation and translation to the effect actor's position and half its height span, multiplied by the camera matrix. */
+/* Sets the GTE rotation and translation to the effect actor's position and
+ * half its height span, multiplied by the camera matrix. One definition shared
+ * by the bmagic effect modules; every change here must verify every member. */
 /* func_801F06E0 (magic006), func_801EF9F4 (magic039), func_801EF5C0 (magic041), func_801F0110 (magic053), func_801EF700
    (magic055), func_801EF410 (magic056), func_801EF69C (magic058), func_801EF414 (magic062), func_801EF784 (magic066),
    func_801EFBE8 (magic068), func_801F07C8 (magic078), func_801EF3A8 (magic079), func_801EF4BC (magic082), func_801EF794

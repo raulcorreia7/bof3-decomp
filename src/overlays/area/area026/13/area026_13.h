@@ -1,7 +1,9 @@
 #ifndef OVERLAY_WORLD00_AREA026_13_H
 #define OVERLAY_WORLD00_AREA026_13_H
 
-/* The area026 world overlay's local declarations. */
+/* The area026 world overlay's local declarations: the 0x40-byte world work
+ * record, its handler table and prototypes. Only this image includes the
+ * file. */
 
 #include "overlays/area/world00.h"
 

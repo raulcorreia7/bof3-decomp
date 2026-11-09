@@ -2,7 +2,8 @@
 
 MATCH void func_800A4C70(void) {
     u8*          flag;
-    /* The state byte is accessed through a volatile view. */
+    /* The state byte is accessed through a volatile view: retail orders the
+     * counter load before this RMW and this store before the counter store. */
     volatile u8* state;
     u8           count;
 

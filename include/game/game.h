@@ -75,12 +75,15 @@ typedef struct GraphicsPaletteAnimation {
 
 ASSERT_SIZE(GraphicsPaletteAnimation, 0x10);
 
-/* g_PaletteFades. */
+/* g_PaletteFades */
 extern PaletteFade              g_PaletteFades[PALETTE_FADE_COUNT];
 /* D_80145D94 */
 extern GraphicsPaletteAnimation D_80145D94[8];
 
-/* The game's area state at 0x80143F00. */
+/* The game's area state at 0x80143F00: the area being run, the area to return to and the pending area request.
+ * func_8019FAA0 stores the current area, its cell class and the scroll target into last_*, and func_801B146C hands
+ * them back to Game_RequestAreaChange; Game_RequestAreaChange stores the request fields in the order of its
+ * arguments. The members keep their own globals (several images read them with a different width or volatile). */
 typedef struct GameAreaState {
     /* 0x00 */ u16 area_id;
     /* 0x02 */ u8  request_flags;
@@ -334,13 +337,19 @@ extern u8        D_801CD8D0[116];
 extern u8        s_PartySlotOrder[4];
 extern s32       D_801CD954;
 
-/* The game system: the records, text and script formats the frontend and every overlay read. */
+/* The game system: the records, text and script formats the frontend and every
+ * overlay read. A game source reaches it through game.h. */
 
-/* GAME.EMI entry points that other overlays call at their fixed address. */
+/* GAME.EMI entry points that other overlays call at their fixed address:
+ * emi/etc/game/00 (GAME.EMI#0) is resident beside the field overlays. */
 
-/* Finds the first unused slot in the entry table at 0x80143FC8. */
-/* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`. */
-/* Selects a route direction away from the record's current direction. */
+/* Finds the first unused slot in the entry table at 0x80143FC8; the retail
+ * callee reads no argument and zeroes $a0 before the scan. */
+/* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`; `move a0,s4` in Actor_StepMovement) and
+ * the callee never reads it; with (void) that instruction is dropped. */
+/* Selects a route direction away from the work record's current direction:
+ * returns -1 when the current index lies in the selector's four-step span,
+ * otherwise 1. */
 /* Awards the proximity reward: sound cue, area request, owned money. */
 /* Returns a field record slot holding a body near (pos_x, pos_y), or -1. */
 

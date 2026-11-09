@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* Active selector record func_801B5C54 returns. */
+/* Active selector record func_801B5C54 returns; the item key at 0x4 is read
+ * as a halfword so its high byte arrives in one load. */
 typedef struct GameSelRecord {
     u8 pad_00[4];
     u8 index_04; /* bit index into the D_80145004 marks */
@@ -29,7 +30,7 @@ MATCH void func_801B2FC8(void) {
                 }
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
                 Game_RewardZenny((FIELD(u16, sel, 0x4u) >> 8) * 0x28);
-                /* the text row reports through its own resource; skip the dispatch. */
+                /* the text row reports through its own resource; skip the dispatch */
                 goto state;
             }
             item = Item_GetRecord(sel->kind_06, FIELD(u16, sel, 0x4u) >> 8);

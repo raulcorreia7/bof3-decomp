@@ -1,6 +1,10 @@
 #include "area030_04.h"
 
-/* Steps the area panel back one cursor row (unk_09). */
+/* Steps the area panel back one cursor row (unk_09); when it reaches
+ * row 0 it sets the 0x0B mode and moves unk_01 to the next state, or to 4
+ * when bit 0 of unk_07 is set. It then draws the panel frame and rows at the
+ * row offset, the selection mask (1 << unk_06) appearing only in mode 0x0B
+ * once D_80145E93 is at least 3. */
 MATCH void func_801D4378(void) {
     s32 mask;
 

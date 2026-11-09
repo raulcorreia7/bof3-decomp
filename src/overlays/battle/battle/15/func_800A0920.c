@@ -1,6 +1,10 @@
 #include "battle_15.h"
 
-/* sets flag bit 0x10 on the player row named by g_Battle.target, marks the battle sub-state byte 4. */
+/* sets flag bit 0x10 on the player row named by g_Battle.target, marks
+ * the battle sub-state byte 4, then walks selection slots from
+ * g_Battle.turn_cursor-1 up to g_Battle.turn_count: each slot byte that is not
+ * 0xFF is sent to func_801DDFEC and marked 0xFF.
+ */
 MATCH void func_800A0920(void) {
     s32 base;
     u32 slot;

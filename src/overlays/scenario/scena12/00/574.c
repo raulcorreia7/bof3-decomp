@@ -55,7 +55,9 @@ MATCH void func_801F7240(void) {
     SCENA12_STEP_COUNTER();
 }
 
-/* The statements of func_801F7348 and func_801F7518, byte-identical twins. */
+/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state
+ * is 4 or scene flag 0x2E is set, queue script step 5 with D_80146875 = 0x19, raise the script-active flag and clear
+ * the work. Every change here must verify both members. */
 #define SCENA12_START_SCRIPT()                                                                                        \
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_GameEntryState != 4 && SYS_TestFlag(g_SceneFlags, 0x2E) == 0) { \
         D_80146875 = 0x19;                                                                                            \
@@ -254,7 +256,7 @@ MATCH s32 func_801FC80C(s32 y) {
             D_80146874 = 2;
             return 1;
         }
-        /* Duplicate return node #5. */
+        /* Duplicate return node #5. Try simplifying control flow for better match */
         return 0;
     }
     return 0;

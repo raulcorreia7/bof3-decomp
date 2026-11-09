@@ -18,7 +18,7 @@ MATCH s32 func_801A17A0(u8* entry_record) {
         list  = FIELD(s32*, entry, 4u);
         func_801A3F3C((u8*)list[flags & 0xFFF]);
         if (FIELD(u16, entry_record, 8u) & 0x8000) {
-            /* the entry keeps its 0x8000 state: skip the selection step. */
+            /* the entry keeps its 0x8000 state: skip the selection step */
             goto stored;
         }
     }

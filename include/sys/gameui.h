@@ -38,7 +38,7 @@ ASSERT_OFFSET(AreaDrawState, flags, 0x02);
 
 extern AreaDrawState g_AreaDrawState;
 
-/* retail addresses. */
+/* retail addresses */
 
 /* The menu header bar every screen draws at the top: geometry in pixels, y at its resting row. */
 #define MENU_HEADER_X           20
@@ -66,7 +66,9 @@ typedef enum EquipStatRow {
     EQUIP_STAT_ROW_AGILITY = 2,
 } EquipStatRow;
 
-/* A message table (the wiki calls this a message bank): u16 byte offsets from the table start, then the records. */
+/* A message table (the wiki calls this a message bank): u16 byte offsets from
+ * the table start, then the records. An area loads its table at
+ * AREA_MESSAGE_TABLE; a message id is the offset index. */
 typedef struct MessageTable {
     u16 offsets[1];
 } MessageTable;
@@ -107,18 +109,23 @@ typedef struct MessageTable {
 #define MENU_FORMATION_WINDOW_WIDTH   69
 #define MENU_FORMATION_WINDOW_HEIGHT  48
 
-/* The requested message id: 0xFFFF means no message. */
+/* The requested message id: 0xFFFF means no message. ResourceRequestMessage
+ * stores a message index in the slot and Message_StartRequest reads the slot as that
+ * index; the player's menu choice at g_MessageChoice decides the index. */
 #define MESSAGE_NONE                  0xFFFF
 #define MESSAGE_REQUEST_CLEAR()       (g_MessageRequest = MESSAGE_NONE)
 
-/* The player's menu choice at 0x801490C7 (MenuState.selection_index). */
-/* An alias byte of g_MessageWindow.selection_index. */
+/* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
+ * while no answer is selected, nonzero once the player picks one. */
+/* An alias byte of g_MessageWindow.selection_index: the area overlays read it as a plain byte, and the
+ * member access changes their code. */
 /* D_801490C7 */
 extern s8 g_MessageChoice;
 #define MENU_SELECTION_IDLE()  (g_MessageChoice == 0)
 #define MENU_SELECTION_ARMED() (g_MessageChoice != 0)
 
-/* The repeatable buttons of a pad mask. */
+/* The repeatable buttons of a pad mask: PAD_GetRepeatedButtons sees the held keys
+ * filtered to the buttons that repeat. */
 #define INPUT_DIRECTIONAL      (PADLup | PADLright | PADLdown | PADLleft)
 #define INPUT_ACTION_BUTTONS                                                                          \
     (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADL2 | PADR1 | PADR2 | PADstart | PADselect)
@@ -130,7 +137,8 @@ extern s8 g_MessageChoice;
 
 /* A countdown timer expires when the decrement reaches zero. */
 #define TIMER_EXPIRED(timer)             (--(timer) == 0)
-/* EMI_GetArchiveId packs the loaded archive's index (low 7 bits) with the family-0 (PL) marker bit. */
+/* EMI_GetArchiveId packs the loaded archive's index (low 7 bits) with
+ * the family-0 (PL) marker bit; readers mask the index off. */
 #define EMI_LOADED_INDEX_MASK            0x7F
 #define EMI_LOADED_PL                    0x80
 
@@ -140,7 +148,8 @@ extern s8 g_MessageChoice;
  * words; the shared calls resolve resources, decode pad input and queue cues.
  * Format: @source: wiki:data/text. */
 
-/* The work-list draw flags in D_8014832E. */
+/* The work-list draw flags in D_8014832E: the draw pass sorts the work table
+ * by its key, then walks the records the set bits ask for. */
 typedef enum AreaDrawFlags {
     AREA_DRAW_SORTED_RECORDS          = 1 << 0,
     AREA_DRAW_NEGATIVE_DEPTH          = 1 << 1,
@@ -151,7 +160,8 @@ typedef enum AreaDrawFlags {
         AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES,
 } AreaDrawFlags;
 
-/* The frontend channel word D_801490A4. */
+/* The frontend channel word D_801490A4: the window script machine, the
+ * selection passes and the shop/start overlays share it. */
 typedef enum FrontendFlags {
     FRONTEND_FLAG_TIMER_ACTIVE    = 1 << 0,
     FRONTEND_FLAG_CONFIRM         = 1 << 1,
@@ -166,7 +176,8 @@ typedef enum FrontendFlags {
 extern s32 D_80143B4C;
 extern s32 D_80143B50;
 
-/* The request code that field code writes to g_GameStateIndex. */
+/* The request code that field code writes to g_GameStateIndex. Game_UpdateField reads it after the per-frame
+ * update and enters the state named in the comment. Codes 0 to 9 are all it handles. */
 typedef enum GameRequest {
     GAME_REQUEST_IDLE         = 0,
     GAME_REQUEST_MENU         = 1, /* state 3 */
@@ -215,7 +226,10 @@ extern u8 g_GameRequestFlags;
 /* D_80143C40 */
 extern u16 g_UiWindowEffectBusy;
 
-/* The screen effects UI_SetMode starts, by index into g_UiLocalModes. */
+/* The screen effects UI_SetMode starts, by index into g_UiLocalModes. Each
+ * effect comes as an out/in pair: out takes the screen to black or white, in
+ * brings it back. The indexes not named here run camera spins and distance
+ * resets. */
 typedef enum UiMode {
     UI_MODE_FADE_OUT       = 0,
     UI_MODE_FADE_IN        = 1,
@@ -247,7 +261,9 @@ extern u16 D_80145A7C;
 /* D_80145AA4 */
 extern u16 g_InputHeld;
 
-/* Pad masks, one slot per game action. */
+/* Pad masks, one slot per game action. The config screen remaps the six
+ * labelled Speak, Move, Action, Menu, View and Change; Confirm and Cancel are
+ * read by the menu-like states. Each game state names the slots it reads. */
 typedef enum InputSlot {
     INPUT_SLOT_SPEAK,
     INPUT_SLOT_MOVE,
@@ -261,7 +277,9 @@ typedef enum InputSlot {
     INPUT_SLOT_COUNT
 } InputSlot;
 
-/* Field: X talks to people, examines objects and opens chests. */
+/* Field: X talks to people, examines objects and opens chests; the run button
+ * walks or runs by the Auto Run option; the triangle starts the lead
+ * character's personal action. */
 #define FIELD_INPUT_INTERACT        INPUT_SLOT_SPEAK
 #define FIELD_INPUT_RUN             INPUT_SLOT_MOVE
 #define FIELD_INPUT_MENU            INPUT_SLOT_MENU
@@ -269,7 +287,9 @@ typedef enum InputSlot {
 #define FIELD_INPUT_SWITCH_LEADER   INPUT_SLOT_CHANGE
 #define FIELD_INPUT_PERSONAL_ACTION INPUT_SLOT_ACTION
 
-/* World map: X enters the location under the party. */
+/* World map: X enters the location under the party; the triangle shows a short
+ * text guide to the current location; the areas that run the world map variant
+ * read the run and view buttons too. */
 #define WORLD_INPUT_ENTER           INPUT_SLOT_SPEAK
 #define WORLD_INPUT_RUN             INPUT_SLOT_MOVE
 #define WORLD_INPUT_VIEW            INPUT_SLOT_VIEW
@@ -344,6 +364,7 @@ extern u8           g_MessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
 /* D_801490A4 */
 extern volatile u16 g_UiWindowChannel;
+/* Area request slot shared by the area024 and area027 overlays. */
 /* D_801490A8 */
 extern u16          g_MessageRequest;
 /* D_801490AA */
@@ -359,7 +380,12 @@ extern const u8     g_SelectionCues[];
 /* D_80181EBB */
 extern const u8     g_SelectionSequences[];
 
-/* Resource and pad-input helpers the overlays call. */
+/* Resource and pad-input helpers the overlays call: resolve a resource id to
+ * its data pointer, look up a group choice's resource id, and decode the
+ * repeatable buttons of an input mask.  The resource id is taken whole: the
+ * retail callee shifts the incoming $a0 logically (srl $v0,$a0,12 at
+ * 0x801502D8) and masks it itself (andi $a0,$a0,0x3FFF at 0x801502E4), and
+ * the eight callers pass a 32-bit word. */
 /* Game-front dispatchers: mode, layout bank, and cue entry points. */
 
 #endif

@@ -1,7 +1,9 @@
 #ifndef OVERLAY_ETC_SISYOU_00_H
 #define OVERLAY_ETC_SISYOU_00_H
 
-/* The master and skill menu overlay's local declarations. */
+/* The master and skill menu overlay's local declarations: the stock rows, the
+ * sprite atlas, the message ids and the step handlers. Only this image includes
+ * the file. */
 
 #include "game/character.h"
 #include "battle/records.h"
@@ -48,7 +50,9 @@ enum MasterMessage {
 #define MASTER_ACTOR_MODE_COUNT         20
 #define MASTER_MENU_STATE_COUNT         4
 
-/* The party screen layout, in pixels. */
+/* The party screen layout, in pixels: the party rows, the stat panel, the
+ * selection box, the header frame and the header text. The four drawers
+ * (func_801D10AC, func_801D0DD4, func_801D12FC, func_801D0C88) place them. */
 #define MASTER_MENU_ROW_X               17
 #define MASTER_MENU_ROW_TOP             62
 #define MASTER_MENU_ROW_PITCH           54
@@ -62,12 +66,14 @@ enum MasterMessage {
 #define MASTER_MENU_TEXT_X              27
 #define MASTER_MENU_TEXT_Y              19
 
-/* The payload prologue at 0x801D0C00. */
+/* The payload prologue at 0x801D0C00: the type-0 EMI loader compares the
+ * first word with the archive TOC's cached first word; the rest are the three
+ * sprintf formats the shop panels pass as D_801D0C04/g_MenuCurrentValueFormat/g_MenuMaxValueFormat. */
 typedef struct MasterMenuHead {
     u32  id;                             /* 0x00; TOC cached first word, 0x1F */
     char fmt_a[MASTER_MENU_FMT_A_SIZE];  /* 0x04 "%3d" */
-    char fmt_b[MASTER_MENU_FMT_BC_SIZE]; /* 0x08 "%3d/ " */
-    char fmt_c[MASTER_MENU_FMT_BC_SIZE]; /* 0x10 " /%3d" */
+    char fmt_b[MASTER_MENU_FMT_BC_SIZE]; /* 0x08 "%3d/   " */
+    char fmt_c[MASTER_MENU_FMT_BC_SIZE]; /* 0x10 "   /%3d" */
 } MasterMenuHead;
 
 ASSERT_SIZE(MasterMenuHead, MASTER_MENU_HEAD_SIZE);
@@ -174,7 +180,8 @@ void func_801D3E70(void);
 void Menu_ApplyMasterMode(void);
 void Menu_DrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u8 mask);
 
-/* Request the active master's message id plus the handler's panel offset. */
+/* Request the active master's message id plus the handler's panel offset. The
+ * caller passes the state pointer so its saved register matches the original. */
 static inline void MasterMenuRequestMasterMessage(u8* state, s32 offset) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;

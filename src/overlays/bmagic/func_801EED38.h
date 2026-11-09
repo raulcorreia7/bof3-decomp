@@ -1,4 +1,7 @@
-/* Clears the sparkle pool, copies the facing and position of the selected battler into the effect. */
+/* Clears the sparkle pool, copies the facing and position of the selected
+ * battler into the effect, and spawns the sparkles of EFFECT_SPARKLE_KIND, each
+ * group of four with a longer launch delay. One definition shared by the bmagic
+ * overlays; every change here must verify every member. */
 /* func_801EED38 (magic070), func_801EED38 (magic071), func_801EED38 (magic072) */
 MATCH void func_801EED38(void) {
     PartyMember* battler;

@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* initializes two coordinates and fades them toward an endpoint while waiting for the scheduler. */
+/* initializes two coordinates and fades them toward an endpoint
+ * while waiting for the scheduler.
+ */
 MATCH void func_8014F024(void) {
     u16  level;
     s32  iterations;

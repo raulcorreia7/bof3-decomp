@@ -1,6 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* transforms a point by the camera and object matrices. */
+/* transforms a point by the camera and object matrices: builds the rotation
+ * matrix from the D_801481D8 triple, rotates the D_80149BF0 translation
+ * through the object angle, applies the transposed input rotation, and writes
+ * the 16.16 result to the caller.
+ */
 MATCH void func_8015B2AC(s16* out, s32* in) {
     MATRIX  matrix;
     VECTOR  vec;

@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* sets bit 0x10000 in the damage status row for the active battler. */
+/* sets bit 0x10000 in the damage status row for the active battler.
+ */
 /* func_800A1A30 */
 MATCH void Battle_GrantDamageImmunity(void) {
     u32 battler;

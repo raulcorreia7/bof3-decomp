@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* closes every non-empty callback slot. */
+/* closes every non-empty callback slot: each occupied slot is emptied and its
+ * thread closed before a boot hand-over.
+ */
 MATCH void CallbackStopAll(void) {
     CallbackSlot*          slot_end;
     volatile CallbackSlot* next_slot;

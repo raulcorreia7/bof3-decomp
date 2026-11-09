@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* selects the next EMI entry, transfers its dispatch metadata into loader state, releases any prior owner. */
+/* selects the next EMI entry, transfers its dispatch metadata into
+ * loader state, releases any prior owner, and advances the loader step.
+ */
 MATCH void EMI_LoadVabHeader(void) {
     /* FAKE: unused frame, 64 bytes. */
     FAKE_STACK_PADS(u8, 64);

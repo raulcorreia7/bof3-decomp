@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* steps *value toward limit by delta, clamping upward at limit and downward at zero. */
+/* steps *value toward limit by delta, clamping upward at limit and
+ * downward at zero.
+ */
 MATCH s16 Char_AddPoints(u16* value, u16 limit, s16 delta) {
     u16 cur;
     u16 next;

@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* draws the missing-file notice and the three scratchpad ID bytes, yields one scheduler tick. */
+/* draws the missing-file notice and the three scratchpad ID bytes,
+ * yields one scheduler tick, and repeats forever.
+ */
 MATCH void SYS_ShowFileNotFound(void) {
     while (1) {
         UI_DrawGlyphString(160, 100, 0, (const u8*)D_80149F9C);

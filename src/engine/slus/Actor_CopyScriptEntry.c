@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* selects the stream entry `entry` through func_8014DC08, copies `length` bytes from the work-area cursor to the staging buffer advanced by length * the work-area byte at +0x05. */
+/* selects the stream entry `entry` through func_8014DC08, copies
+ * `length` bytes from the work-area cursor to the staging buffer advanced by
+ * length * the work-area byte at +0x05, then leaves the cursor at the copy end.
+ */
 MATCH void Actor_CopyScriptEntry(u32 entry, u8* staging, u32 length) {
     /* FAKE: unused frame, 8 bytes. */
     FAKE_STACK_PADS(u8, 8);

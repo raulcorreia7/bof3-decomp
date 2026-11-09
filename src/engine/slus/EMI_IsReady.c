@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* returns true only when the EXE-side EMI loader reached ready state 3. */
+/* returns true only when the EXE-side EMI loader reached ready
+ * state 3.
+ */
 MATCH bool EMI_IsReady(void) {
     volatile const u8* emi_state_base;
 

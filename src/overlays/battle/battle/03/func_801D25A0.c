@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* counts every queued attacker's item action, marks each battler the overlay still holds, gates the selection flag and starts the overlay's stream slot. */
+/* counts every queued attacker's item action, marks each battler
+ * the overlay still holds, gates the selection flag and starts the overlay's
+ * stream slot.
+ */
 MATCH void func_801D25A0(void) {
     s32  i;
     u8   rank;

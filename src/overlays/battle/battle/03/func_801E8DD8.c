@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* derives queued-slot position offsets from either the local or enemy source tables and writes them into the current queued object. */
+/* derives queued-slot position offsets from either the local or enemy
+ * source tables and writes them into the current queued object.
+ */
 MATCH void func_801E8DD8(void) {
     u8* slot = (u8*)g_BattleEffectBattler;
     s8  offset_x;

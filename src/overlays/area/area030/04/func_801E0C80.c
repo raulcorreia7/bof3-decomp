@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Builds the texture-page word for the selected AREA030 graphic and appends its draw-mode primitive to the current ordering-table stream. */
+/* Builds the texture-page word for the selected AREA030 graphic and
+ * appends its draw-mode primitive to the current ordering-table stream. */
 MATCH void func_801E0C80(s32 graphic, s32 layer) {
     s32 tpage;
 

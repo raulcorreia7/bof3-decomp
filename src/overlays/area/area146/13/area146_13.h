@@ -1,12 +1,13 @@
 #ifndef OVERLAY_WORLD03_AREA146_13_H
 #define OVERLAY_WORLD03_AREA146_13_H
 
-/* The world03/area146/13 overlay: one file per split function and its data. */
+/* The world03/area146/13 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-/* The character record the flag copy reads. */
+/* The character work record the flag copy reads. */
 
 /* The game-overlay state bytes the win-close path resets. */
 

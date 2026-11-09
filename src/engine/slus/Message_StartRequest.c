@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* initializes the record header bytes and resolves the halfword at SLUS_LOAD_ADDRESS indexed by g_MessageRequest into the two record pointers. */
+/* initializes the record header bytes and resolves the halfword at
+ * SLUS_LOAD_ADDRESS indexed by g_MessageRequest into the two record pointers.
+ */
 MATCH void Message_StartRequest(void) {
     s32 entry;
 

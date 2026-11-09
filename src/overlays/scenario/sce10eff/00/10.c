@@ -145,7 +145,8 @@ MATCH void func_801D10C8(void) {
 MATCH void func_801D1138(void) {
     SceneBandEffect* work;
 
-    /* A store through the pointer may alias the cell, so each step reloads it. */
+    /* A store through the pointer may alias the cell, so each step reloads
+     * it. */
     work = g_Task;
     work->ticker++;
     work = g_Task;
@@ -160,7 +161,8 @@ MATCH void func_801D11A0(void) {
     SceneBandEffect* work;
     u8               count;
 
-    /* A store through the pointer may alias the cell, so each step reloads it. */
+    /* A store through the pointer may alias the cell, so each step reloads
+     * it. */
     work = g_Task;
     work->ticker++;
     work       = g_Task;

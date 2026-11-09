@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* rebuilds the active boot-frame ordering-table and packet-pointer tables. */
+/* rebuilds the active boot-frame ordering-table and packet-pointer
+ * tables, then restores the two fixed packet arena bounds.
+ */
 MATCH void SYS_PrepareFrame(void) {
     u8*  packet;
     u32* ordering;
@@ -14,7 +16,8 @@ MATCH void SYS_PrepareFrame(void) {
     buffer_index    = g_FrameBufferIndex;
     packet          = D_80145990;
     g_GfxPrimCursor = (u8*)(0x80020000u + ((buffer_index * 9) << 12));
-    /* The paired no-op increments keep the counter live across the store. */
+    /* The paired no-op increments keep the counter live across the store; a
+     * plain while strength-reduces to a countdown and loses the retail shape. */
     while (index < 8) {
         index++;
         index--;

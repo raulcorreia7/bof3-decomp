@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* clears the eight halfwords ending at offset 0x6E and the 16-byte run at offset 0x70 of the g_CallbackSlot work area. */
+/* clears the eight halfwords ending at offset 0x6E and the 16-byte run at
+ * offset 0x70 of the g_CallbackSlot work area.
+ */
 MATCH void func_8014BA04(void) {
     u8* base;
     u8* p;

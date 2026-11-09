@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Runs the area-030 command menu. */
+/* Runs the area-030 command menu: cursor movement, cancel/confirm buttons, command cycling and the selected
+ * page title. */
 /* nonmatching unmeasured: tried opcode@+0x0: entry pad/title selection block and the command-cycle switch do not
  * reproduce the retail prologue and case layout; menu logic is in place. resume: rebuild the switch as the retail case
  * 0/1/default order and re-check the pad mask split. */

@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Draws the area-030 accessory rows. */
+/* Draws the area-030 accessory rows: the accessory icons of every
+ * slot with their count text and the frame behind them. */
 /* RESIDUAL: 47.01%; retail frame 0x78, current frame 0x70, and the
  * call sequence differ. FISHING_STATE->y_38.half.slot_3A is the typed s16 at
  * offset 0x3A. resume: reproduce the retail control-flow and frame shape. */

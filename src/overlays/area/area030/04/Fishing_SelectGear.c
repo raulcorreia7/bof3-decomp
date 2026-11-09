@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Points the two character record cursors at the selected table rows (20-byte and 10-byte strides) when their selector bytes are set. */
+/* Points the two character record cursors at the selected table rows
+ * (20-byte and 10-byte strides) when their selector bytes are set. */
 /* func_801DDE2C */
 MATCH void Fishing_SelectGear(void) {
     if (g_FishingLure != 0) {

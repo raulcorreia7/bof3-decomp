@@ -4,7 +4,10 @@
 #define SPAD_CURSOR     ((Actor*)SPAD_CURSOR_REF)
 #define SPAD_CURSOR_REF (scratch_base = (u8*)SP(0u), *((void* volatile*)(scratch_base + 0x44u)))
 
-/* draws one status sprite from the scratch cursor. */
+/* draws one status sprite from the scratch cursor: selects the draw
+ * mode by graph type, sets the texture from the cell record, offsets x by mirror,
+ * selects the clut by clut and appends the primitive.
+ */
 MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     /* FAKE: keep the masked bit in a2. */
     FAKE_REG(s32, mode_bit, "a2");

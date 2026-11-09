@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* Advances battle state, clears the suppression flag on the battler and enemy rows. */
+/* Advances battle state, clears the suppression flag on the battler and enemy rows, and updates the scene counter. */
 
 MATCH void func_801D4B38(void) {
     u8  action;

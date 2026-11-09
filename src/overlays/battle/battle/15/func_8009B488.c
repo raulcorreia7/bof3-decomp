@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* Seeds the battle work rows for the next phase. */
+/* Seeds the battle work rows for the next phase: resets the scratch markers, folds the speed table into the
+ * phase words, records the damage-delta shift, streams the three enemy slots and clears every active row's action
+ * bytes. */
 /* FAKE: retail takes the s32 view of the return value. */
 MATCH void func_8009B488(void) {
     s32          speed_offset;

@@ -5,7 +5,8 @@
 #define BANNER_INDEX (FISHING_STATE->step_index_0A)
 #define BANNER_FRAME (FISHING_STATE->cue_index_06)
 
-/* Advances the area-030 title banner. */
+/* Advances the area-030 title banner: walks the 3-byte frame table, queues the shop record when the frame
+ * asks for it, clamps the scroll frame, and draws the banner panels. */
 MATCH void func_801D6128(void) {
     s8            delta;
     s32           prev;

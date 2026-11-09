@@ -1,7 +1,9 @@
 #ifndef OVERLAY_WORLD00_AREA016_13_H
 #define OVERLAY_WORLD00_AREA016_13_H
 
-/* The area016 world overlay's local declarations. */
+/* The area016 world overlay's local declarations: its work record, spawn and
+ * marker tables, and the handlers its units share. Only this image includes
+ * the file. */
 
 #include "overlays/area/world00.h"
 #include "area/spad.h"
@@ -13,14 +15,17 @@
 #define SPAWN_OFFSET_FORWARD 0x2000u
 #define SPAWN_OFFSET_BACK    0xE000u
 
-/* The overlay's data block at 0x801F4DA0..0x801F51E0 is one variable per table, in retail address order, in D_801F4DA0_Data.c. */
+/* The overlay's data block at 0x801F4DA0..0x801F51E0 is one variable per
+ * table, in retail address order, in D_801F4DA0_Data.c. */
 
 /* Data, in address order. */
 extern SVECTOR       D_1F800014[];
-/* The steppers that must reload the cell after every store select the volatile declaration. */
+/* The steppers that must reload the cell after every store select the
+ * volatile declaration. */
 extern WorldMapKey   D_801F4D7C[9];
 extern WorldMapPoint D_801F4DA0[137];
-/* Key rows: column 0 is matched against g_GameContextSeed. */
+/* Key rows: column 0 is matched against g_GameContextSeed; column g_SceneState is
+ * the value Fishing_ShowLocation passes on. */
 extern u16           D_801F4FC4[9][16];
 extern u8            D_801F50E4[28];
 extern u8            D_801F50E5[]; /* the record-selector byte at +1 */

@@ -2,7 +2,8 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Draws the AREA030 prompt rows for the current slot and, at the end of the fade, retires or advances the sub-state selected by the work byte. */
+/* Draws the AREA030 prompt rows for the current slot and, at the end
+ * of the fade, retires or advances the sub-state selected by the work byte. */
 MATCH void func_801DBD6C(void) {
     FishingState* work;
     s32           offset;

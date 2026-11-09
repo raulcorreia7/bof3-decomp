@@ -1,5 +1,7 @@
-/* On the Steel Beach map, when PROBE accepts the actor's cell. */
-/* AREA_STEEL_BEACH_PROBE_STEP (area104 0x801F4D24, area121 0x801F5268). */
+/* On the Steel Beach map, when PROBE accepts the actor's cell: runs the field reset calls, lowers the timer, flags
+ * field mode 1, sets step 1 and returns 1; otherwise returns 0. A statement macro shared by the area overlays; every
+ * change here must verify every member. */
+/* AREA_STEEL_BEACH_PROBE_STEP (area104 0x801F4D24, area121 0x801F5268) */
 #define AREA_STEEL_BEACH_PROBE_STEP(PROBE)                                           \
     if ((g_GameAreaId != AREA_ID_STEEL_BEACH_MAP) ||                                 \
         !(PROBE(g_Task->pos.x.fixed, g_Task->pos.y.fixed,                            \

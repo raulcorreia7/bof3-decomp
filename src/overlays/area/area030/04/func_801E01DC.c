@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Advances the scratchpad step byte when the work object's 0x58 halfword equals the table entry selected by its byte 6. */
+/* Advances the scratchpad step byte when the work object's 0x58
+ * halfword equals the table entry selected by its byte 6; otherwise runs the
+ * shared world update. */
 MATCH void func_801E01DC(void) {
     FishingState* record;
 

@@ -1,4 +1,8 @@
-/* Counts the hold timer at byte 0x09 up to 90 frames and flags it at byte 0x0B. */
+/* Counts the hold timer at byte 0x09 up to 90 frames and flags it at byte
+ * 0x0B; with the screen-mode flag, a message or a script present it steps
+ * the work state, and draws the banner record 0x5C at the work y
+ * coordinate.
+ */
 /* func_801F382C (area115), func_801F3840 (area121), func_801F438C
  * (area088), func_801F385C (area087) */
 MATCH void Area_CountHudBannerHold(void) {

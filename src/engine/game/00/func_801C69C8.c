@@ -5,7 +5,8 @@ MATCH s32 func_801C69C8(s32 record_index) {
     FormationPos* slot;
     s32           mode;
     s32           result;
-    /* Retail reserves 0x20 variable bytes and never reads them; the unused array reproduces that frame. */
+    /* Retail reserves 0x20 variable bytes and never reads them; the unused
+     * array reproduces that frame. */
     u8            unk_10[0x20];
 
     index               = record_index & BYTE_MASK;

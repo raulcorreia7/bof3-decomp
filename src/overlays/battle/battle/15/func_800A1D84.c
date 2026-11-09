@@ -9,12 +9,15 @@ extern u8 D_80145F20[];
 /* The timer counts up to this value before it stops. */
 #define BATTLE_TIMER_MAX        9
 
-/* A sixteen-byte block the retail copies with four unaligned word pairs. */
+/* A sixteen-byte block the retail copies with four unaligned word pairs, so the
+ * block is moved as a byte group and never as machine words. */
 typedef struct BattleBlock {
     u8 bytes[16];
 } BattleBlock;
 
-/* Advances the player battler. */
+/* Advances the player battler: bumps its timer and mirrored work row, copies the battler work rows and effect
+ * vectors, and mirrors the active row value into the selection slot.
+ */
 /* nonmatching unmeasured: tried the first draft with pointer locals and FIELD views (35.93%); the 16-byte packed block
  * copies (39.51%); the active index read once into a local (40.25%); the u8 loop counter (45.38%); the packed block
  * copies with the u8 counter (48.50%); the second loop's source base computed from the table base (62.55%). residual:

@@ -1,14 +1,15 @@
 #ifndef OVERLAY_BMAGIC_MAGIC107_03_H
 #define OVERLAY_BMAGIC_MAGIC107_03_H
 
-/* The bmagic/magic107/03 overlay. */
+/* The bmagic/magic107/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
 
 #define EFFECT_TICK_INCREMENT 1
 #define EFFECT_TICK_LIMIT     0xC0
 
-/* Column views of g_BattleEffects. */
+/* Column views of g_BattleEffects: func_801EEC5C stores through them because
+ * member stores let the D_8014637C load move above the target store. */
 extern u8       D_801EC338[];
 extern u8       D_801EC364[];
 extern u8       D_801EC368[];

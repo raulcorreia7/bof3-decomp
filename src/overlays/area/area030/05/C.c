@@ -15,7 +15,9 @@ static u8 D_800F722C[16] = {
     0x06, 0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x06, 0x06, 0x06, 0x06, 0x14, 0x15, 0x16, 0x00, 0x00, 0x00,
 };
 
-/* The work block: the four cells the handlers write and the two dispatch indexes. */
+/* The work block: the four cells the handlers write and the two dispatch
+ * indexes. Each cell is its own symbol at a 4-byte stride; every other byte is
+ * unread padding. */
 static u8 s_ListCursor = 0;
 static u8 pad_800F723D = 0, pad_800F723E = 0, pad_800F723F = 0;
 static u8 D_800F7240   = 0;
@@ -309,7 +311,8 @@ MATCH void func_800F5D98(void) {
     func_800F5E44();
 }
 
-/* Queues a draw-mode packet, two 160x240 textured quads side by side, then a second draw-mode packet. */
+/* Queues a draw-mode packet, two 160x240 textured quads side by side, then a
+ * second draw-mode packet. */
 MATCH void func_800F5E44(void) {
     u8* cursor;
     s32 i;

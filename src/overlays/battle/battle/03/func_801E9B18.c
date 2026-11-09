@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* dispatches one of three panel-task handlers by battle state byte +0x03, draws the selected battler row's two bars and sets or clears its 0x2000 bit from the gauge fraction. */
+/* dispatches one of three panel-task handlers by battle state byte +0x03, draws the selected battler row's
+ * two bars and sets or clears its 0x2000 bit from the gauge fraction.
+ */
 MATCH void func_801E9B18(void) {
     BattlePanel5States handlers;
     u16                flags;

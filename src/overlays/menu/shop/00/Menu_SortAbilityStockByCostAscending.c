@@ -1,6 +1,8 @@
 #include "shop_00.h"
 
-/* Item table: 0x14-byte records; byte 0 is the sort key. */
+/* Item table: 0x14-byte records; byte 0 is the sort key. Indexed at each use
+ * so the symbol address rematerializes per access (no held base pointer).
+ */
 
 /* func_801E1D84 */
 MATCH void Menu_SortAbilityStockByCostAscending(void) {

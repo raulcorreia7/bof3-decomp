@@ -1,7 +1,9 @@
 #ifndef OVERLAY_ETC_GAME_01_H
 #define OVERLAY_ETC_GAME_01_H
 
-/* The etc/game/01 frontend overlay's local declarations. */
+/* The etc/game/01 frontend overlay's local declarations: the banner and glyph
+ * records, the window masks and the handler entry points. Only this image
+ * includes the file. */
 
 #include "shared/etc.h"
 

@@ -1,4 +1,7 @@
-/* Counts the step timer up and moves the stage byte on after 0x5A frames, steps the actor state when the game script is active or the state index is 2. */
+/* Counts the step timer up and moves the stage byte on after 0x5A frames,
+ * steps the actor state when the game script is active or the state index is 2,
+ * then draws panel 0x5C. One definition shared by the area overlays; every
+ * change here must verify every member. */
 /* func_801F3828 (area016), func_801F3828 (area045) */
 MATCH void func_801F3828(void) {
     Actor* scratch;

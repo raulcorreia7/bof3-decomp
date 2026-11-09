@@ -1,6 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* draws one Gouraud-shaded quadrangle per eight-record part in the list at parts. */
+/* draws one Gouraud-shaded quadrangle per eight-record part in the
+ * list at parts: four vertices built from signed byte offsets around the
+ * projected origin, four packed RGBA colours, and a draw mode selected from
+ * the first colour's tpage bits.
+ */
 MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
     SVECTOR    verts[4];
     SVECTOR*   v;

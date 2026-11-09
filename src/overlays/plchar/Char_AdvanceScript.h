@@ -1,4 +1,9 @@
-/* Advances the character's script phase. */
+/* Advances the character's script phase: the work byte at +0x0B selects
+ * idle (0), the select-and-advance step (1) or the finished-scene check
+ * (anything else). A done flag clears the work marker at +0x2B and the
+ * panel mode byte in the game state record. One definition shared by the
+ * plchar character programs; each program includes it where the function sits.
+ */
 MATCH void Char_AdvanceScript(void) {
     u8 done;
 

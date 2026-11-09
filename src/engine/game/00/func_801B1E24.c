@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-/* One 0x140-byte battle work row. */
+/* One 0x140-byte battle work row. Only the fields this unit reads are named. */
 typedef struct BattleWorkSlot {
     u8  flags;
     u8  mode;

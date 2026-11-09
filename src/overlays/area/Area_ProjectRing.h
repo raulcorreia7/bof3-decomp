@@ -1,4 +1,5 @@
-/* Projects the ring points around ring->center onto the screen. */
+/* Projects the ring points around ring->center onto the screen. One definition shared by the area overlays;
+   every change here must verify every member. */
 /* func_801F30B0 (area080) */
 MATCH void Area_ProjectRing(AreaRing* ring) {
     s32 point[3];

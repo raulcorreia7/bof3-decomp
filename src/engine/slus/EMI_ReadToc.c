@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* validates the active EMI header tag and builds cumulative sector offsets for its entries. */
+/* validates the active EMI header tag and builds cumulative sector
+ * offsets for its entries; invalid tags disable the active load.
+ */
 MATCH void EMI_ReadToc(void) {
     u8*           header;
     u8*           tag;

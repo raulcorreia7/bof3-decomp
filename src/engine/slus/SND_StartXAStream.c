@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* resets the loader request block for the given position, latches the request, runs the entry lookup, converts the target LBA. */
+/* resets the loader request block for the given position, latches
+ * the request, runs the entry lookup, converts the target LBA, and installs
+ * the CD sync callback.
+ */
 MATCH void SND_StartXAStream(s32 key, s32 unused) {
     s16* req;
 

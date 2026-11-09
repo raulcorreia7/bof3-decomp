@@ -1,6 +1,9 @@
 #include "battle_15.h"
 
-/* marks battlers as damaged. */
+/* marks battlers as damaged: bit 0x80 of the selector loops over
+ * the three player rows, bit 0x40 over the eleven enemy rows, and a selector
+ * without bits 0xC0 marks only the one indexed battler.
+ */
 MATCH void func_800A9820(u8 selector) {
     s32 i;
     u8  index;

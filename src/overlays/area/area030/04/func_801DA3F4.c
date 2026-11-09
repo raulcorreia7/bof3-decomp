@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Decrements the panel animation counter, draws the current sub-state cell through the later helper. */
+/* Decrements the panel animation counter, draws the current
+ * sub-state cell through the later helper, and advances the panel state once
+ * the counter reaches zero. */
 MATCH void func_801DA3F4(void) {
     FishingState* record;
 

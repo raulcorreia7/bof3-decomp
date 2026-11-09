@@ -26,7 +26,9 @@ static const WinGlyphGeometry D_801D1C6C[WIN_GLYPH_GEOMETRY_COUNT] = {
 };
 // clang-format on
 
-/* The handler opens the selection-specific EXE effect for the current selection. */
+/* The handler opens the selection-specific EXE effect for the current
+ * selection.
+ */
 /* func_801D1134 */
 MATCH void SND_StartSelectionEffect(void) { /* func_801D1134 */
     u8 selection;
@@ -40,7 +42,9 @@ MATCH void SND_StartSelectionEffect(void) { /* func_801D1134 */
     }
 }
 
-/* The handler closes the current selection-specific EXE effect and clears the active selection byte. */
+/* The handler closes the current selection-specific EXE effect and clears
+ * the active selection byte.
+ */
 /* func_801D1184 */
 MATCH void SND_StopSelectionEffect(void) { /* func_801D1184 */
     u8* selection_ptr = &g_SndBGMId;
@@ -54,7 +58,9 @@ MATCH void SND_StopSelectionEffect(void) { /* func_801D1184 */
     }
 }
 
-/* The handler clears the prompt gate after the EXE reaches idle selection state. */
+/* The handler clears the prompt gate after the EXE reaches idle selection
+ * state, then draws the active frontend prompt and selection marker.
+ */
 /* func_801D11E4 */
 MATCH void UI_DrawChoicePrompt(void) { /* func_801D11E4 */
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE && g_GameEntryState == 2u && g_UiWindowEffectBusy == 0u) {
@@ -68,7 +74,9 @@ MATCH void UI_DrawChoicePrompt(void) { /* func_801D11E4 */
     }
 }
 
-/* The handler draws both New Game/Load prompt panels, their labels, and the selection marker. */
+/* The handler draws both New Game/Load prompt panels, their labels, and the
+ * selection marker. When the popup is open, it pulses the active marker.
+ */
 /* func_801D12CC */
 MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
     u8* primitive;
@@ -108,7 +116,10 @@ MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
     }
 }
 
-/* The handler draws two paired frontend label groups at the requested position. */
+/* The handler draws two paired frontend label groups at the requested
+ * position. The first expanded pair is optional; both groups use the same
+ * selection and alpha controls.
+ */
 /* func_801D150C */
 MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D150C */
     u8* primitive;
@@ -133,7 +144,9 @@ MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D1
     GFX_SetPrimitiveAlpha(primitive, alpha);
 }
 
-/* The handler draws a paired frontend label group at the requested position and applies the supplied selection and alpha controls to both primitives. */
+/* The handler draws a paired frontend label group at the requested position
+ * and applies the supplied selection and alpha controls to both primitives.
+ */
 /* func_801D16DC */
 MATCH void UI_DrawIconPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D16DC */
     u8* primitive;
@@ -148,7 +161,8 @@ MATCH void UI_DrawIconPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D16
     GFX_SetPrimitiveAlpha(primitive, alpha);
 }
 
-/* The table has five u16 fields per 10-byte row. */
+/* The table has five u16 fields per 10-byte row. Keep each symbol-relative
+ * base separate so the loads retain the retail code shape. */
 
 /* func_801D17D8 */
 MATCH u8* GFX_BuildGlyphPrimitive(s32 x, s32 y, s32 glyph, s32 palette, u8 flags) { /* func_801D17D8 */
@@ -171,7 +185,9 @@ MATCH u8* GFX_BuildGlyphPrimitive(s32 x, s32 y, s32 glyph, s32 palette, u8 flags
     return primitive;
 }
 
-/* The handler writes one alpha value to the three color channels of a frontend primitive. */
+/* The handler writes one alpha value to the three color channels of a
+ * frontend primitive.
+ */
 /* func_801D18E8 */
 MATCH void GFX_SetPrimitiveAlpha(u8* primitive, u8 alpha) { /* func_801D18E8 */
     primitive[4] = alpha;
@@ -194,7 +210,8 @@ MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
     u8                          phase;
     u8*                         primitive;
 
-    /* Anchor the banner state on the fade-phase byte. */
+    /* Anchor the banner state on the fade-phase byte: the original derives the
+     * scroll base (-15) and alpha cell (-13) from &g_UiTitleFadePhase. */
     phase_addr = &g_UiTitleFadePhase;
     if (*phase_addr == 0) {
         return;
@@ -226,7 +243,8 @@ MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
             continue;
         }
 
-        /* Read the dispatch phase through a non-volatile view so cc1 does not emit an andi 0xFF zero-extension before the == 1 / == 3 compares. */
+        /* Read the dispatch phase through a non-volatile view so cc1 does not emit
+         * an andi 0xFF zero-extension before the == 1 / == 3 compares. */
         phase = LOBU(state->phase);
         if (phase == one) {
             a            = state->alpha + 1;
@@ -266,7 +284,9 @@ MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
     }
 }
 
-/* The handler advances the two frontend window fades. */
+/* The handler advances the two frontend window fades. It promotes the fade
+ * phase when both channels saturate and draws the visible menu/window layers.
+ */
 /* func_801D1B00 */
 MATCH void UI_UpdateWindowFade(void) { /* func_801D1B00 */
     /* FAKE: volatile u8 alias emits ephemeral lbu reads. */

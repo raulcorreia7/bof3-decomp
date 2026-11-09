@@ -22,7 +22,8 @@ MATCH void Battle_InitPanels(void) {
             i += 1;
         } while ((i & BYTE_MASK) < 7u);
     }
-    /* Retail keeps the sub-step byte's address in a register for the increment; a direct `+= 1` repeats lui. */
+    /* Retail keeps the sub-step byte's address in a register for the increment;
+     * a direct `+= 1` repeats lui. */
     counter = &g_Battle.phase.sub_step;
     *counter += 1;
 }

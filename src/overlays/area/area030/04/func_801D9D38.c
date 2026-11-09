@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Resets the AREA030 panel scratch record and sub-state, starts the panel cue selected by the loaded-scene flags. */
+/* Resets the AREA030 panel scratch record and sub-state, starts the
+ * panel cue selected by the loaded-scene flags, and advances the state byte. */
 MATCH void func_801D9D38(void) {
     u8* record;
     s32 mode;

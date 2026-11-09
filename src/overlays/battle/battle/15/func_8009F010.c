@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* Non-volatile view of the selected battler index (0x80146374). */
+/* Non-volatile view of the selected battler index (0x80146374): battle_15.h
+ * declares it volatile, whose byte load cannot feed the index arithmetic
+ * without an extra mask. */
 
 /* FAKE: the call arguments are read into locals first and the barrier keeps the
  * 0xFFFF materialization out of the load-delay path, so it lands in the jal

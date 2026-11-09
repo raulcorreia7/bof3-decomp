@@ -1,6 +1,9 @@
 #include "area030_04.h"
 
-/* Advances the active AREA030 panel animation (the 0xC scroll position, the 0x10 spring) according to the panel mode. */
+/* Advances the active AREA030 panel animation (the 0xC scroll
+ * position, the 0x10 spring) according to the panel mode, then draws the
+ * panel window and the bar whose length follows the scroll position; mode 3
+ * also seeds the next panel's position. */
 /* func_801D1CF0 */
 MATCH void Fishing_CastGaugeSweep(void) {
     FishingState* work;

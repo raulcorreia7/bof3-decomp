@@ -1,6 +1,10 @@
 #include "battle_15.h"
 
-/* Rescales one battler's stats. */
+/* Rescales one battler's stats: player slots defer to the player
+ * stat routine; enemy slots scale their power, defense, agility and intellect and their
+ * reprisal, critical, evasion and accuracy from the base stats by the stat modifier bytes,
+ * copy the resistances and apply the row's doubling and zeroing flags.
+ */
 MATCH void func_800A9BD8(u8 slot) {
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         func_800A9FC4((BattlePanelRecord*)&D_80145F04[slot * BATTLE_PARTY_STRIDE], slot);

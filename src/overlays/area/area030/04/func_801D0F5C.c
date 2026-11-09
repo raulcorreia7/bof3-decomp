@@ -1,6 +1,11 @@
 #include "area030_04.h"
 
-/* Fills the area's 32-entry CLUT working copy from the palette block selected by g_Game.members[0].unk_27. */
+/* Fills the area's 32-entry CLUT working copy from the palette
+ * block selected by g_Game.members[0].unk_27: entries 1-30 come from the selected 0x200-byte
+ * block plus the selected 0x40-byte unit, marked opaque, and entries 0 and 31
+ * are cleared. It then publishes the palette serial and either selects the
+ * late stage (g_AreaTargetCellY >= 0x39) or seeds the panel bytes before stepping the
+ * scratchpad state byte 0x03. */
 MATCH void func_801D0F5C(void) {
     u8* selected;
     u8* dst;

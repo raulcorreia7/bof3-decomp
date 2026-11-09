@@ -1,9 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* Returns the index of the first active live pond record with fish id 0x0A inside the player's reach, or -1. */
+/* Returns the index of the first active live pond record with fish id 0x0A inside the player's reach, or -1.
+ */
 /* nonmatching 22 differing rows: retail subtracts self - actor (set); the rest is register assignment. Tried split dist locals; range reuse; ternary abs; row pointer.
  * resume: a form that writes each distance into the self-field register. */
-/* An s32 index and pinned range or distance change register allocation. */
+/* An s32 index and pinned range or distance change register allocation; none restores the first difference at +0x24. */
 #ifdef NON_MATCHING
 NON_MATCHING s8 func_8014DE78(void) {
     Actor* self;

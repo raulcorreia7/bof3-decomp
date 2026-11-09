@@ -14,7 +14,8 @@
 
 #define SHOP_ITEM_REF_SIZE 0x02
 
-/* Item flags: what the menu offers and how the battle selector targets the item. */
+/* Item flags: what the menu offers and how the battle selector targets the
+ * item. */
 typedef enum ItemFlags {
     ITEM_TARGET_BOTH          = 1 << 0,
     ITEM_TARGET_SELECTABLE    = 1 << 1,
@@ -34,7 +35,9 @@ typedef enum ArmorType {
     ARMOR_TYPE_BODY    = 4,
 } ArmorType;
 
-/* The kind of a weapon, armor or accessory record (Item_GetKind): it selects the icon the item list draws. */
+/* The kind of a weapon, armor or accessory record (Item_GetKind): it selects the icon the item list draws. Armor
+ * records hold their ArmorType; accessory kinds 10 and 11 are the fishing lures and rods, which no equipment slot
+ * holds. No record has kind ITEM_KIND_UNUSED. */
 typedef enum ItemKind {
     ITEM_KIND_ITEM         = 0,
     ITEM_KIND_WEAPON       = 1,
@@ -193,7 +196,7 @@ typedef struct ManilloStock {
 
 ASSERT_SIZE(ManilloStock, MANILLO_STOCK_STRIDE);
 
-/* The item table ids (category ITEM_CAT_ITEM). */
+/* The item table ids (category ITEM_CAT_ITEM). Names from the GAME.EMI record tables. */
 typedef enum ItemId {
     ITEM_NOTHING       = 0,
     ITEM_GREEN_APPLE   = 1,
@@ -289,7 +292,7 @@ typedef enum ItemId {
     ITEM_WATER_JUG     = 91,
 } ItemId;
 
-/* The weapon table ids (category ITEM_CAT_WEAPON). */
+/* The weapon table ids (category ITEM_CAT_WEAPON). Names from the GAME.EMI record tables. */
 typedef enum WeaponId {
     WEAPON_NOTHING        = 0,
     WEAPON_DAGGER         = 1,
@@ -376,7 +379,7 @@ typedef enum WeaponId {
     WEAPON_BEAST_SPEAR    = 82,
 } WeaponId;
 
-/* The armor table ids (category ITEM_CAT_ARMOR). */
+/* The armor table ids (category ITEM_CAT_ARMOR). Names from the GAME.EMI record tables. */
 typedef enum ArmorId {
     ARMOR_NOTHING           = 0,
     ARMOR_CLOTHING          = 1,
@@ -448,7 +451,7 @@ typedef enum ArmorId {
     ARMOR_MANLY_CLOTHES     = 67,
 } ArmorId;
 
-/* The accessory table ids (category ITEM_CAT_ACCESSORY). */
+/* The accessory table ids (category ITEM_CAT_ACCESSORY). Names from the GAME.EMI record tables. */
 typedef enum AccessoryId {
     ACCESSORY_NOTHING      = 0,
     ACCESSORY_TITAN_BELT   = 1,
@@ -504,7 +507,7 @@ typedef enum AccessoryId {
     ACCESSORY_MASTERS_ROD  = 51,
 } AccessoryId;
 
-/* The vital item table ids (category ITEM_CAT_VITAL). */
+/* The vital item table ids (category ITEM_CAT_VITAL). Names from the GAME.EMI record tables. */
 typedef enum VitalItemId {
     VITAL_ITEM_FLIER        = 1,
     VITAL_ITEM_EGG          = 3,
@@ -517,10 +520,17 @@ typedef enum VitalItemId {
     VITAL_ITEM_FOUNTAIN_PEN = 15,
 } VitalItemId;
 
-/* The five equipment tables; counts are owned by game/records.h. */
+/* The five equipment tables; counts are owned by game/records.h. Read through
+ * the record types above so the offsets stay declared in one place. */
 /* D_801C8964 */
 extern volatile Item      g_Items[];
-/* The two cells the retail materializes by symbol in each equipment table. */
+/* The two cells the retail materializes by symbol in each equipment table: the
+ * row's flags byte and its price halfword. The record types above hold them at
+ * their offsets, but a reader that walks a table by the cell's own symbol
+ * needs the cell named; the row's stride is the record's stride.
+ *
+ * The offsets are Item.flags and .price, Weapon.flags and .price,
+ * Armor.flags and .price, and Accessory.flags and .price. */
 extern u8                 D_801C8970[]; /* the item row's flags byte */
 extern u8                 D_801C8974;   /* the item row's price halfword */
 /* D_801C8FDC */
@@ -538,6 +548,8 @@ extern volatile Accessory g_Accessories[];
 extern u8                 D_801C9E89[]; /* the accessory row's flags byte */
 extern u8                 D_801C9E8E;   /* the accessory row's price halfword */
 
-/* Resolves one GAME.EMI equipment record from its category and key. */
+/* Resolves one GAME.EMI equipment record from its category and key: the
+ * category selects the item, weapon, armor, accessory or vital-item table above,
+ * the key the record inside it. Retail unit exe/slus_004_22@0x80165D48. */
 
 #endif

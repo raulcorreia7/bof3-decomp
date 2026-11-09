@@ -1,4 +1,6 @@
-/* Plays the effect the target selector chose once the effect ticker (work byte 0x0B) is zero. */
+/* Plays the effect the target selector chose once the effect ticker (work byte
+ * 0x0B) is zero. One definition shared by the bmagic effect modules; every change
+ * here must verify every member. */
 /* func_801EEDA4 (magic006), func_801EEEDC (magic039), func_801EF130 (magic041), func_801EED44 (magic042), func_801EF300
    (magic043), func_801EEDA0 (magic044), func_801EEF10 (magic046), func_801EEE10 (magic048), func_801EEEA8 (magic050),
    func_801EF004 (magic053), func_801EEE30 (magic069), func_801EF2DC (magic070), func_801EF2DC (magic071), func_801EF2DC

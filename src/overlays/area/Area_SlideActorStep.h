@@ -1,5 +1,7 @@
-/* While the actor's slide counter (0x0A) runs, moves it along the diagonal by the current entry of the offset table and lowers the field scroll by 2. */
-/* AREA_SLIDE_ACTOR_STEP (area068 0x801F3B9C, area068 0x801F3CB0, area069 0x801F2C88). */
+/* While the actor's slide counter (0x0A) runs, moves it along the diagonal by the current entry of the offset table
+ * and lowers the field scroll by 2; at zero it clears the slide flag (0x04). A statement macro shared by the area
+ * overlays; every change here must verify every member. */
+/* AREA_SLIDE_ACTOR_STEP (area068 0x801F3B9C, area068 0x801F3CB0, area069 0x801F2C88) */
 #define AREA_SLIDE_ACTOR_STEP(OFFSETS)                                       \
     Actor* work;                                                             \
     work = g_Task;                                                           \

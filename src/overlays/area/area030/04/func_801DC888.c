@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* On the AREA030 entry frame (state byte 0) arms the opening cue, advances the world selector and clears the work object's step byte. */
+/* On the AREA030 entry frame (state byte 0) arms the opening cue,
+ * advances the world selector and clears the work object's step byte. */
 MATCH void func_801DC888(void) {
     if (D_80144125 == 0) {
         SND_StartDecrescendo(0, 0, 0x14, 0x10);

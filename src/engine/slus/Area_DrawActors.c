@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* sorts the active work-record table by its 0x3E key with a descending bubble pass. */
+/* sorts the active work-record table by its 0x3E key with a
+ * descending bubble pass, then points the scratchpad work slot at each record
+ * in order and runs the per-record update.
+ */
 MATCH void Area_DrawActors(void) {
     FAKE_REG(s32, count, "a0"); /* FAKE: retail keeps the record count in a0. */
     s32 i;

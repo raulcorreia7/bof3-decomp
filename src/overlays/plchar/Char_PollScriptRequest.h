@@ -1,4 +1,4 @@
-/* Answers the character's script request once ready. */
+/* Answers the character's script request once ready. Every change here must verify every member. */
 MATCH void Char_PollScriptRequest(void) {
     if (g_Task->option_flags != 0) {
         if (Actor_StepAnimOnce() & BYTE_MASK) {

@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* HAND_ASM: leaf with `$t0`-`$t2` allocation and `ori` addresses no profile reproduces. */
+/* HAND_ASM: leaf with `$t0`-`$t2` allocation and `ori` addresses no profile reproduces.
+ * See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
 /* C model, checked on the host by tools/tests/test_lz77_model.py: initialises the resumable stream decoder described by
  * LZ77_DecodeStep.

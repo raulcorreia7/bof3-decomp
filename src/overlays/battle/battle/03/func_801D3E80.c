@@ -12,7 +12,7 @@ MATCH void func_801D3E80(void) {
 
     if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) {
         entry_index = g_BattleActionSelection[LOHU(g_Battle.action_id)];
-        /* mode 4 shares the stream-entry test below. */
+        /* mode 4 shares the stream-entry test below */
         goto check_entry;
     }
     if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ITEM) {

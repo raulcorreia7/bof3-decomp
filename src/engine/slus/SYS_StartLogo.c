@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* loads and transfers control to LOGO.EXE. */
+/* loads and transfers control to LOGO.EXE, then restores the boot
+ * rendering path after the loaded executable returns.
+ */
 MATCH void SYS_StartLogo(void) {
     u_long* ordering_table;
     u32*    exec_state;

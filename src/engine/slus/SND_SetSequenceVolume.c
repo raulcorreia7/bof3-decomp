@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* refreshes the SsSepVol pair from the paused stream state and forwards the caller's byte-selected volume entry to SsSepSetVol. */
+/* refreshes the SsSepVol pair from the paused stream state and forwards
+ * the caller's byte-selected volume entry to SsSepSetVol.
+ */
 MATCH void SND_SetSequenceVolume(s32 group, s16 sequence, s16 left_volume, s16 right_volume) {
     u16 vA;
     u16 vB;

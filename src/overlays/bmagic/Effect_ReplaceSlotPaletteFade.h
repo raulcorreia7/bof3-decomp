@@ -1,4 +1,7 @@
-/* When the effect timer reaches zero, frees the palette fade of the battler that slot byte 0x04 names (party slots first. */
+/* When the effect timer reaches zero, frees the palette fade of the battler that slot byte 0x04 names (party slots
+ * first, then enemy slots), allocates a new one, stores its index in the timer, restarts the effect timer at 8 and
+ * advances the effect step. One definition shared by the bmagic effect modules; every change here must verify every
+ * member. */
 /* func_801EF2DC (magic073), func_801EF2C8 (magic074) */
 MATCH void Effect_ReplaceSlotPaletteFade(void) {
     void* battler;

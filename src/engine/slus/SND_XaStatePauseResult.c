@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* steps the status counter and issues the pending CD command. */
+/* steps the status counter and issues the pending CD command.
+ */
 MATCH void SND_XaStatePauseResult(void) {
     s8* flag;
 

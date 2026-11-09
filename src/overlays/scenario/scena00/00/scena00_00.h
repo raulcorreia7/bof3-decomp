@@ -7,7 +7,8 @@
 #include "area/spad.h"
 #include "common/util.h"
 
-/* Scene_DrawTriangle: the third vertex is `size` rotated by this angle (4096 per turn). */
+/* Scene_DrawTriangle: the third vertex is `size` rotated by this angle
+ * (4096 per turn); the vertices are grey (r = g = b) at these levels. */
 #define SCN_TRI_APEX_ANGLE 0x4F
 #define SCN_TRI_SHADE_V0   0x28
 #define SCN_TRI_SHADE_V1   0x6E
@@ -18,7 +19,9 @@
 #define g_PartyX           (*(u32*)&g_PartyX)
 #define g_PartyY           ((u32*)&g_PartyY)
 
-/* g_ScriptVars[2] in func_801FA7D8. */
+/* g_ScriptVars[2] in func_801FA7D8: retail loads every access through its own `lui $r, %hi(D_80146866)`; the array
+ * member shares one %hi across the accesses and the function grows by 12 bytes (an absolute address and a local
+ * pointer also move bytes). */
 extern u8 D_80146866;
 
 #define g_AreaScrollTargetY   ((u32*)&g_AreaScrollTargetY)
@@ -28,9 +31,15 @@ extern u8 D_80146866;
 #define SCENE_FX_CELL_COUNT   12
 #define SCENE_FX_WEIGHT_COUNT 3
 
-/* One row of the sample table at D_80147BD8: twelve sample offsets and three weights per 0x28-byte record. */
+/* One row of the sample table at D_80147BD8: twelve sample offsets and three
+ * weights per 0x28-byte record. */
 
-/* One 0x28-byte entry of the source table at D_80147BD8, which carried identical file-local copies. */
+/* One 0x28-byte entry of the source table at D_80147BD8, shared by
+ * func_801FC01C and func_801FC3A0, which carried identical file-local copies.
+ * The stride is a retail read: func_801FC01C walks the table as
+ * `(SceneSampleRecord *)(i * 0x28 + base)`. Twelve s16 samples sit at
+ * +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the
+ * halfwords read here are named, the rest stays unresolved padding. */
 typedef struct SceneSampleRecord {
     u8  unk_00[2];
     s16 sample[SCENE_FX_CELL_COUNT];
@@ -52,7 +61,8 @@ ASSERT_OFFSET(SceneLinePoint, x, 0x00);
 ASSERT_OFFSET(SceneLinePoint, y, 0x04);
 ASSERT_OFFSET(SceneLinePoint, z, 0x08);
 
-/* Scene effects: func_801F7134 draws the actor-relative sprite. */
+/* Scene effects: func_801F7134 draws the actor-relative sprite;
+ * func_801F78EC draws its field-space lines and Scene_DrawTriangle its rotated triangles. */
 typedef struct SceneEffect {
     u8             pad_00[0x1];
     /* 0x01 */ u8  step; /* the scenario step byte */
@@ -118,7 +128,8 @@ ASSERT_SIZE(Scene00Head, 8);
 ASSERT_OFFSET(Scene00Head, overlay, 0x00);
 ASSERT_OFFSET(Scene00Head, unk_04, 0x04);
 
-/* The three scenario line-color bytes copied from D_801F6C04 and passed to func_801F78EC as one three-byte argument. */
+/* The three scenario line-color bytes copied from D_801F6C04 and passed to
+ * func_801F78EC as one three-byte argument. */
 typedef struct SceneLineColor {
     s8 r;
     s8 g;
@@ -130,7 +141,13 @@ ASSERT_OFFSET(SceneLineColor, r, 0);
 ASSERT_OFFSET(SceneLineColor, g, 1);
 ASSERT_OFFSET(SceneLineColor, b, 2);
 
-/* The shared table block at 0x801FC980..0x801FCA84, read through several overlapping views. */
+/* The shared table block at 0x801FC980..0x801FCA84, read through several
+ * overlapping views: D_801FC980 and its sub-tables at +0x08, +0x1C, +0x2C
+ * and +0x54 are state-handler pointer arrays; D_801FC9E8/D_801FC9E9 are s8
+ * deltas; D_801FC9EC is an s8 array indexed by (work->counter_09 >> 2);
+ * D_801FCA10 and D_801FCA1C are handler arrays; D_801FCA4C is a byte table
+ * indexed by a value & 0xF; D_801FCA5C is a byte table indexed by a state;
+ * and D_801FCA64/D_801FCA65 are byte pairs indexed by entry * 2. */
 typedef struct Scene00Tables {
     Callback       handlers_00[26]; /* 0x000; D_801FC980, sub-views at +0x08/+0x1C/+0x2C/+0x54 */
     s8             unk_68;          /* 0x068 D_801FC9E8 */
@@ -155,10 +172,14 @@ typedef struct SceneFxSlot {
 
 ASSERT_SIZE(SceneFxSlot, 0x30);
 
-/* Cell `k` of the slot at byte offset `slot` in a SceneFx table. */
+/* Cell `k` of the slot at byte offset `slot` in a SceneFx table. Retail addresses each
+ * cell from the slot offset; indexing the table by slot number reorders the frame setup. */
 #define SCENE_FX_CELL(table, slot, k) (((SceneFxSlot*)((u8*)(table) + (slot)))->cell[k])
 
-/* The per-slot sample effect. */
+/* The per-slot sample effect: func_801FC01C seeds it from the sample table at
+ * D_80147BD8 and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
+ * `delta` its per-frame step and `life_step` the amount taken off the cell's
+ * lifetime. */
 typedef struct SceneFx {
     SceneFxSlot delta[SCENE_FX_SLOT_COUNT];
     SceneFxSlot accum[SCENE_FX_SLOT_COUNT];

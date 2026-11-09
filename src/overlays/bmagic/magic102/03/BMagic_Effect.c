@@ -8,7 +8,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC80);
 
-/* Counts this effect's steps. */
+/* Counts this effect's steps; at the tick limit it re-arms the counter, steps
+ * the magic, and flips the area camera's vertical offset with the frame parity. */
 MATCH void func_801EF218(void) {
     PartyMember* work;
     u8           tick;
@@ -30,7 +31,8 @@ INCLUDE_ASM(func_801EFD7C);
 
 INCLUDE_ASM(func_801EFEFC);
 
-/* Draws one Gouraud-shaded quadrangle per eight-word part in the list at parts, like the resident Area_DrawGouraudQuads. */
+/* Draws one Gouraud-shaded quadrangle per eight-word part in the list at parts, like the resident
+ * Area_DrawGouraudQuads, but each vertex's depth adds func_801F0ADC of its x and y. */
 MATCH void func_801F016C(ScenePart* parts, s32 shift_x, s32 shift_y) {
     SVECTOR    verts[4];
     long       flag;
@@ -82,7 +84,8 @@ MATCH void func_801F016C(ScenePart* parts, s32 shift_x, s32 shift_y) {
     GFX_AddPrim(g_AreaDrawMode, sizeof(DR_MODE));
 }
 
-/* Draws the textured quads in part_list like the resident Area_DrawParts. */
+/* Draws the textured quads in part_list like the resident Area_DrawParts, but the origin depth adds func_801F0ADC of
+ * the origin x and y, and every part draws in the area draw mode. */
 MATCH void func_801F0488(u8* part_list, s32 x, s32 y) {
     SVECTOR   pos;
     SVECTOR   rot;
@@ -156,7 +159,8 @@ MATCH void func_801F0488(u8* part_list, s32 x, s32 y) {
     }
 }
 
-/* Draws one sprite of a scene record as an FT4 primitive, like the resident Area_DrawSceneSprite. */
+/* Draws one sprite of a scene record as an FT4 primitive, like the resident Area_DrawSceneSprite, but the sprite stands
+ * on the ground: its depth is half the ground height under its origin. */
 MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     POLY_FT4* prim;
     u8*       frame;

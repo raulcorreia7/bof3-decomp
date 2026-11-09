@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Resets the AREA030 scratchpad record for the next state. */
+/* Resets the AREA030 scratchpad record for the next state: clears the
+ * state, clip, and draw fields, primes the colour step and depth slots, marks
+ * the record busy and advances the state byte. */
 MATCH void func_801D42E4(void) {
     FishingState* work;
     FishingState* advanced;

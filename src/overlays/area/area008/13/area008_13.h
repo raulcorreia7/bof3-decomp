@@ -69,7 +69,8 @@ void func_801F45E4(void);
 void func_801F4600(void);
 void func_801F461C(void);
 
-/* Select the work mode from the area flag bytes. */
+/* Select the work mode from the area flag bytes: mode 9 when bit 7 is set,
+ * else mode 5 when the second byte is 3. */
 static inline void FieldSelectDrawMode(void) {
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
         g_Task->header.mode = 9;
@@ -80,7 +81,8 @@ static inline void FieldSelectDrawMode(void) {
     }
 }
 
-/* Clear the mode guard, mark the slot live, point the work pointer at the indexed row and hand control to the area script. */
+/* Clear the mode guard, mark the slot live, point the work pointer at the
+ * indexed row and hand control to the area script. */
 static inline void FieldActivateActor(void) {
     Actor* s;
     Actor* e;

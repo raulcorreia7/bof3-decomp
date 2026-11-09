@@ -1,10 +1,14 @@
 #include "game_00.h"
 
-/* Route movement step table in main-exe data. */
+/* Route movement step table in main-exe data: one 8-byte record per route
+ * {x step, y step}; the y column also appears as its own symbol. */
 
-/* Per-route walk-completion threshold table in main-exe data, indexed by the current map's route byte in the shared scenario state block at g_Game.current+0x79. */
+/* Per-route walk-completion threshold table in main-exe data, indexed by the
+ * current map's route byte in the shared scenario state block at
+ * g_Game.current+0x79. */
 
-/* Per-route walk-completion threshold table, indexed by the current map's route byte in the shared scenario state block at g_Game.current+0x79. */
+/* Per-route walk-completion threshold table, indexed by the current map's
+ * route byte in the shared scenario state block at g_Game.current+0x79. */
 
 MATCH void func_801C5558(void) {
     Actor* work;

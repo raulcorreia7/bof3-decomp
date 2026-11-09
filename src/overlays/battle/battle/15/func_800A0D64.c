@@ -1,6 +1,9 @@
 #include "battle_15.h"
 
-/* resolves the battler's base value, applies the shared damage helper, subtracts the selected record's first halfword and clamps the result at zero. */
+/* resolves the battler's base value, applies the shared damage
+ * helper, subtracts the selected record's first halfword and clamps the result
+ * at zero.
+ */
 /* FAKE: _nv weak views avoid the andi and hoist the loads out of the prologue. */
 /* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
 extern u8 D_801CA71B[];

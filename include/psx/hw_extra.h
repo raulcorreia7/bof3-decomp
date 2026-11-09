@@ -3,7 +3,8 @@
 
 #include "psx/mem.h"
 
-/* The hardware seam: HW_REF and HW_PTR reach the PS1 MMIO window. */
+/* The hardware seam: HW_REF and HW_PTR reach the PS1 MMIO window. The BIOS vector and
+ * kernel addresses name the low-memory region the kernel owns. */
 
 #define HW_PTR(type, addr) MEM_PTR(volatile type, addr)
 #define HW_REF(type, addr) MEM(volatile type, addr)

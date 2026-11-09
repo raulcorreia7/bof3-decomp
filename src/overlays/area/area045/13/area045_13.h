@@ -1,7 +1,8 @@
 #ifndef OVERLAY_WORLD01_AREA045_13_H
 #define OVERLAY_WORLD01_AREA045_13_H
 
-/* The world01/area045/13 overlay: one file per split function and its data. */
+/* The world01/area045/13 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "overlays/area/world01.h"
 #include "area/spad.h"
@@ -25,7 +26,8 @@ extern UPoint2D g_FlockVelocity[4];
 extern u8       g_FlockScript[4][2];
 extern u8       D_801F5408[];
 
-/* The steppers that reload the cell after every store select the volatile declaration. */
+/* The steppers that reload the cell after every store select the volatile
+ * declaration. */
 
 /* The value of func 801f2eec table in the shared func_801F2EEC body. */
 

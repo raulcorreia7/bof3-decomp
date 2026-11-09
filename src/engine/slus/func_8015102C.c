@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* ticks the step timer at g_MessageState. */
+/* ticks the step timer at g_MessageState: at count zero it sets the count to one and increments the phase at +0x18; at
+ * phase 7 it calls Message_StartRequest for state 4 or 5, otherwise resets the cursor, state and count fields and masks
+ * the +0x04 flags with 0xFFF3. */
 MATCH void func_8015102C(void) {
     u8  one;
     u8  count;

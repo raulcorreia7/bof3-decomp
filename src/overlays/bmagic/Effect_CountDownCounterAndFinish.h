@@ -1,4 +1,7 @@
-/* Counts the work counter at byte 0x09 down. */
+/* Counts the work counter at byte 0x09 down; at zero the active battler's
+ * effect ticker byte drops by one and the effect work record is cleared. One
+ * definition shared by the bmagic effect modules; every change here must verify
+ * every member. */
 /* func_801F0134 (magic144), func_801F0420 (magic092) */
 MATCH void Effect_CountDownCounterAndFinish(void) {
     u8 counter;

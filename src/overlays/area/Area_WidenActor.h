@@ -1,4 +1,7 @@
-/* Grows the actor's horizontal scale by 8192 fixed-point units per frame while counting the timer down. */
+/* Grows the actor's horizontal scale by 8192 fixed-point units per frame while
+ * counting the timer down; at zero it clears the reset flag and moves the
+ * handler to mode 3.
+ */
 /* func_801F3228 (area115), func_801F323C (area121) */
 MATCH void Area_WidenActor(void) {
     Actor* work;

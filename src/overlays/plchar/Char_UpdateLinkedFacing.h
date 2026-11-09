@@ -1,4 +1,4 @@
-/* Updates the linked actor facing after the timer expires. */
+/* Updates the linked actor facing after the timer expires. Check every including image after changes. */
 MATCH void Char_UpdateLinkedFacing(void) {
     u8 timer;
 

@@ -6,9 +6,19 @@
 #include "common/fixed.h"
 #include "common/vector.h"
 
-/* Counts, row sizes and array lengths of the fixed game tables, in the units the loaders use. */
+/* Counts, row sizes and array lengths of the fixed game tables, in the units
+ * the loaders use. The loaders and the menu/party code index these; the record
+ * types live beside their subsystem: character, item, ability, enemy, gene and
+ * fairy. */
 
-/* The field slot table at 0x80143FC8: 20 rows of 0x74 bytes. */
+/* The field slot table at 0x80143FC8: 20 rows of 0x74 bytes. A slot is claimed
+ * by Actor_FindFreeSlot, filled by Actor_Create and Char_SpawnActor, and
+ * cleared by Actor_Free(s). The frontend cues, the staged scene objects and
+ * the area030 fishing actors all use the same rows. The position words are the
+ * same 16.16 coordinates as the field actor's (sys/actor.h): the
+ * ground height from Area_SampleHeight sits in the halfword at +0x3E.
+ *
+ * The allocator's result is the actor slot. Callers test it against 0xFF for none. No retail string names the table. */
 #define ACTOR_SLOT_SIZE                0x74
 #define ACTOR_SLOT_COUNT               20
 

@@ -2,7 +2,8 @@
 
 /* NOTE: plain views; the volatile declarations elsewhere make the status loads
  * schedule before the raw store that retail keeps ahead of them. */
-/* ABI view: the callee truncates its count to u8. */
+/* ABI view: the callee truncates its count to u8, but this caller keeps the
+ * word result (`move` before the explicit & 0xFF) as retail does. */
 extern s32 Fairy_CountFairies(void);
 
 MATCH void Fairy_InitVillage(void) {

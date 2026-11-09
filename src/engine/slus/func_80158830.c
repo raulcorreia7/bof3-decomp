@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* One 8-byte move entry. */
+/* One 8-byte move entry. The u16 flags field overlaps the high half of the
+ * control word, so the views share a union. */
 typedef union Start08Move {
     u32 control;
 
@@ -19,7 +20,8 @@ typedef union Start08Move {
     } bytes;
 } Start08Move;
 
-/* Draws the record's selected move entry as a display rectangle and queues the primitive. */
+/* Draws the record's selected move entry as a display rectangle and queues the primitive.
+ */
 MATCH void func_80158830(void* obj) {
     RECT         rect;
     Start08Move* row;

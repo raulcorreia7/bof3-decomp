@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* integrates the local work velocity into its position fields, or resets the local step when the position passes 0xFFFF. */
+/* integrates the local work velocity into its position fields, or
+ * resets the local step when the position passes 0xFFFF, then refreshes the
+ * battle update.
+ */
 MATCH void func_801E3398(void) {
     PartyMember* work;
 

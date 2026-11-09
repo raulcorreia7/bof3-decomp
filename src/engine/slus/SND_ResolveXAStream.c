@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* resolves one loader entry from its packed key, skips flagged slots. */
+/* resolves one loader entry from its packed key, skips flagged
+ * slots, and latches the base and scaled entry bounds.
+ */
 MATCH void SND_ResolveXAStream(s32 stream_id) {
     s32  scale;
     u8*  counter;

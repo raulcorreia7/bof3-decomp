@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Configures the requested AREA030 sprite and its CLUT entry after selecting graphics mode 1. */
+/* Configures the requested AREA030 sprite and its CLUT entry after
+ * selecting graphics mode 1. */
 MATCH void func_801E0F4C(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     u16   clut;
     u32   sprite_index;

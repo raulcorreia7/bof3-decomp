@@ -1,4 +1,7 @@
-/* Interpolate the exp between two adjacent row sums. each overlay includes this file where the function sits. */
+/* Interpolate the exp between two adjacent row sums. One definition shared by
+ * the shop, start, Bate and Shisu overlays; each overlay includes this file
+ * where the function sits.
+ */
 /* func_801D504C (bate), func_801D5FF4 (shisu), func_801DAAF4 (shop), func_801DDFEC (start) */
 MATCH u32 Char_GetExpProgress(u32 character, u32 level, u32 exp) {
     u32 first;

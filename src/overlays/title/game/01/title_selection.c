@@ -1,6 +1,8 @@
 #include "game_01.h"
 
-/* The handler counts down the frontend timer. */
+/* The handler counts down the frontend timer. At zero, it selects fade phase
+ * `3`, opens the window phase, rearms 900 ticks, and advances the state.
+ */
 /* func_801D0D94 */
 MATCH void Game_AdvanceTitleFade(void) { /* func_801D0D94 */
     u16* timer_ptr;
@@ -18,7 +20,9 @@ MATCH void Game_AdvanceTitleFade(void) { /* func_801D0D94 */
     }
 }
 
-/* The handler decrements the local timer. */
+/* The handler decrements the local timer. On expiry, it enters local mode
+ * `0`, opens selection FX, and advances the title state.
+ */
 /* func_801D0DF0 */
 MATCH void SND_StartTitleBGM(void) { /* func_801D0DF0 */
     volatile u16* timer_ptr;
@@ -35,7 +39,9 @@ MATCH void SND_StartTitleBGM(void) { /* func_801D0DF0 */
     }
 }
 
-/* The handler waits for the selection effect to close, resets frontend-local phases and EXE flags, installs the next callback. */
+/* The handler waits for the selection effect to close, resets frontend-local
+ * phases and EXE flags, installs the next callback, and advances the state.
+ */
 /* func_801D0E54 */
 MATCH void Game_StartSelectedGame(void) { /* func_801D0E54 */
     if (WINDOW_EFFECT_IDLE()) {
@@ -56,7 +62,10 @@ MATCH void Game_StartSelectedGame(void) { /* func_801D0E54 */
     }
 }
 
-/* The prompt state returns to state zero when the EXE gate closes. */
+/* The prompt state returns to state zero when the EXE gate closes. Otherwise,
+ * after loading is idle, it reads pad input, starts the selected cue, and
+ * advances.
+ */
 /* func_801D0F00 */
 MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
     if (D_80143B40 == 0u) {
@@ -79,7 +88,10 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
     UI_DrawChoicePrompt();
 }
 
-/* While the EXE gate is active, the handler updates the frontend prompt. */
+/* While the EXE gate is active, the handler updates the frontend prompt.
+ * Otherwise, it clears the prompt selection and returns the overlay to state
+ * zero.
+ */
 /* func_801D0FB8 */
 MATCH void UI_UpdateChoicePrompt(void) { /* func_801D0FB8 */
     if (D_80143B40 == 0u) {
@@ -90,7 +102,8 @@ MATCH void UI_UpdateChoicePrompt(void) { /* func_801D0FB8 */
     }
 }
 
-/* Closes the current selection FX, restores layout bank 0, installs the alternate frontend callback loop. */
+/* Closes the current selection FX, restores layout bank 0, installs the
+ * alternate frontend callback loop, then exits the active EXE callback thread. */
 /* func_801D1000 */
 MATCH void Game_LeaveTitle(void) { /* func_801D1000 */
     if (WINDOW_EFFECT_BUSY()) {

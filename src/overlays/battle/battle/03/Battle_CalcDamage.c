@@ -1,7 +1,10 @@
 #define GAME_SCRATCH_BASE_SCALAR
 #include "battle_03.h"
 
-/* computes one hit's damage. */
+/* computes one hit's damage: the element defaults to the attacker's weapon,
+ * then the weapon-vs-enemy-kind doubling, status reactions, the random spread and the
+ * +/-9999 clamp.
+ */
 /* func_801DC044 */
 MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     DamageSpread spread;

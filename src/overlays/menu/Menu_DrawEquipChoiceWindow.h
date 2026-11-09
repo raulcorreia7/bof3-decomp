@@ -1,4 +1,7 @@
-/* The equip list of the camp and shop menus. */
+/* The equip list of the camp and shop menus: the inventory rows of the chosen slot's category that the party member
+ * can equip, gathered into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts and drawn in the inventory panel's frame.
+ * start/08, shop/00, bate/00 and shisu/00 include it where the function sits, and each image header declares the
+ * g_MenuEquip* tables. */
 /* func_801E0A70 (start), func_801DD578 (shop), func_801D7AD0 (bate), func_801D8A78 (shisu) */
 MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     u8   scroll_y;

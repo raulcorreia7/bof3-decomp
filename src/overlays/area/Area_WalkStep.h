@@ -1,5 +1,7 @@
-/* Runs the walk update: on cell 0xAF requests an area change. */
-/* AREA_WALK_STEP (area104 0x801F4E3C, area121 0x801F5380). */
+/* Runs the walk update: on cell 0xAF requests an area change; counts walk frames (two per frame facing 2 or 6); when
+ * the party is free and a run, enter or direction input is held, calls RUN with it; then resets the step to 0. A
+ * statement macro shared by the area overlays; every change here must verify every member. */
+/* AREA_WALK_STEP (area104 0x801F4E3C, area121 0x801F5380) */
 #define AREA_WALK_STEP(RUN)                                                                                    \
     s32 value;                                                                                                 \
     u16 value2;                                                                                                \

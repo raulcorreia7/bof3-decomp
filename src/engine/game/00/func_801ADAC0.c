@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* The slot scanner is entered with a0 still holding the caller's argument. */
+/* The slot scanner is entered with a0 still holding the caller's argument, so
+ * it is reached through a K&R declaration rather than its typed prototype. */
 
 MATCH void func_801ADAC0(s8 actor_slot) {
     s8 value;

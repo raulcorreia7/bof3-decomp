@@ -13,7 +13,8 @@
 /* Each entry-animation step narrows the palette entry by this many pixels. */
 #define FISHING_EXPAND_STEP_STRIDE 2
 
-/* Slides the area-030 shop text. */
+/* Slides the area-030 shop text: advances the entry animation, queues the next palette entry into the world
+ * record table, and redraws the row highlight and the fill bar. */
 MATCH void func_801D3C74(void) {
     s32           color_offset;
     s32           color_index;

@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* steps the menu cursor bob. */
+/* steps the menu cursor bob: the cursor offset D_801490BA walks between -3 and 3 (the direction is g_MessageChoiceStep), and at
+ * each end the D_801490BB blink counter runs, reloading the D_801490CA timer and, at zero, counting g_MessageChoiceTimer down.
+ */
 /* nonmatching 48.78%: branch@+0x0030; the retail merges both direction arms into one pos store through v0 and
  * keeps D_801490BA and D_801490BB as lui/at accesses, while this source pointerizes them. resume: a source shape
  * that keeps the symbols unpointerized. */

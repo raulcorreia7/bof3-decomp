@@ -1,7 +1,9 @@
 #ifndef OVERLAY_ETC_GAME_00_H
 #define OVERLAY_ETC_GAME_00_H
 
-/* The etc/game/00 overlay's local declarations. */
+/* The etc/game/00 overlay's local declarations: the frontend state, the resource,
+ * area and handler tables, and the prototypes its units share. Only this image
+ * includes the file; the data tables are in data.h. */
 
 #define GRAPHICS_PALETTE_PENDING_VOLATILE
 #define GAME_REQUEST_FLAGS_VOLATILE
@@ -41,7 +43,10 @@
 #define g_AreaLoads            ((void**)g_AreaLoads)
 #define g_RouteSpeedScale      ((u8*)g_RouteSpeedScale)
 
-/* Start an EMI stream slot and stage the palette advance. */
+/* Start an EMI stream slot and stage the palette advance. A bare statement
+ * macro: the member declares `ent` and `ev`. Kept: tested as an inline, the
+ * slot argument and the member's locals change the frame and register use; the
+ * do/while form moves bytes. */
 #define GAME_START_STREAM_AND_STAGE_PALETTE(slot) \
     UI_SetMode(2u);                               \
     if (WINDOW_EFFECT_BUSY()) {                   \
@@ -64,12 +69,18 @@
     g_GfxPalettePending = 1u;                     \
     *ent                = ev
 
-/* Run the scenario dispatch entry. */
+/* Run the scenario dispatch entry. A bare statement macro: the member declares
+ * `saved` and `result`, runs its fallback when `result` is 0 and restores
+ * g_Task. Kept: `entry` is a member name of the scene table record, so it
+ * cannot be an argument without an indirect call; the do/while form moves
+ * bytes. */
 #define GAME_RUN_SCENARIO_ENTRY(entry)                                                 \
     saved  = g_Task;                                                                   \
     result = g_SceneScenes[(s32)g_SceneState.scenario_id]->entry(handler_x, handler_y)
 
-/* Run the gated cell test and arm the record on a hit. */
+/* Run the gated cell test and arm the work record on a hit. Kept: it returns
+ * from the member and takes the flag value after a branch; tested as an inline,
+ * the bytes move. */
 #define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                    \
     if ((g_Game.flags & 0x400) == 0) {                                                                               \
         if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != \
@@ -83,7 +94,9 @@
     }                                                                                                                \
     return 0;
 
-/* Test the map cells around a 16.16 point for the wanted code. */
+/* Test the map cells around a 16.16 point for the wanted code. Kept: the two
+ * callee names differ per member and the body returns from the member; a callee
+ * argument would be an indirect call. */
 #define GAME_TEST_MAP_CELLS(flagged_test, unflagged_test, pos_x, pos_y, flag, wanted_code, mask_cells) \
     do {                                                                                               \
         u8 value;                                                                                      \
@@ -96,7 +109,7 @@
         return value;                                                                                  \
     } while (0)
 
-/* The record the shared scene-timer body reads. */
+/* The work record the shared scene-timer body reads. */
 
 typedef enum TileRunFlags {
     TILE_RUN_VERTICAL = 1 << 7,
@@ -163,7 +176,8 @@ typedef struct TileRunSet {
 ASSERT_OFFSET(TileRunSet, runs, 0x2C);
 ASSERT_OFFSET(TileRunSet, last_run, 0x31);
 
-/* A field search spot: a one-time random zenny find, flagged in the actor so it pays once. */
+/* A field search spot: a one-time random zenny find, flagged in the actor so it pays once. The
+ * Alt table differs only in the reaction effect its roll starts. */
 typedef enum FieldSearchSpotState {
     FIELD_SEARCH_SPOT_STATE_ROLL,
     FIELD_SEARCH_SPOT_STATE_SMALL_FIND,
@@ -196,7 +210,8 @@ typedef struct FieldSearchSpotFadeStates {
     Callback states[FIELD_SEARCH_SPOT_FADE_STATE_COUNT];
 } FieldSearchSpotFadeStates;
 
-/* A spinning quad at 0x800E4800 + n * 0x38. */
+/* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
+ * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
     Point3D pos;
     u8      unk_06[0x0A];
@@ -208,7 +223,8 @@ ASSERT_OFFSET(SpinQuad, rotation, 0x10);
 ASSERT_OFFSET(SpinQuad, corners, 0x18);
 ASSERT_SIZE(SpinQuad, 0x38);
 
-/* Per-slot column views over the 0x98-byte records. */
+/* Per-slot column views over the 0x98-byte work records: the trailing padding
+ * carries the record stride so each column keeps its own field base. */
 typedef struct GameSlotWordColumn {
     u16 value;
     u8  pad[0x96];
@@ -278,7 +294,11 @@ extern s16                D_80143F1A; /* 0x80143F1A */
 extern volatile u8        g_GameRequestKind;
 extern s16                D_80143F26; /* integer half of g_EncounterOriginX */
 extern s16                D_80143F2A; /* integer half of g_EncounterOriginY */
-/* Scene step byte, countdown halfword and the slot index cached in the scratchpad byte at 0x1F800000. */
+/* Scene step byte, countdown halfword and the slot index cached in the
+ * scratchpad byte at 0x1F800000. The read-modify-write sites go through a
+ * pointer, which is the shape this target's exact siblings use; plain stores
+ * keep the scalar spelling.
+ */
 extern u8                 D_80143F49;
 extern volatile u8        D_80143F4A;
 extern volatile u8        D_80143F4B; /* 0x80143F4B */
@@ -744,7 +764,8 @@ s32     func_801A239C(Actor* value_a, s32 value_b, u8 flag_bits);
 s32     func_801A246C(s32 value_a, s32 value_b, s32 flag_bits);
 void    func_801A253C(Actor* entity);
 void    func_801A271C(void* record);
-/* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it. */
+/* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
+ * that instruction is dropped (func_801A253C) or the frame shrinks by 8 bytes (func_801A1384). */
 void    func_801A275C(void* unused);
 void    func_801A2788(s32 handler_index);
 void    func_801A27C4(Actor* entity);
@@ -1531,7 +1552,8 @@ void  func_801F95D4(void);
 void  func_801F986C(void);
 void  func_801F9DBC(void);
 
-/* Run the overlay map-load handshake. */
+/* Run the overlay map-load handshake: wait for the loader, switch the window
+ * to mode 3, drain the effect loop and run the world/front update slice. */
 static inline void GameRunMapLoadHandshake(void) {
     CallbackWait(1U);
     CallbackWait(1U);

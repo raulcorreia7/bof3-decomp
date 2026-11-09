@@ -1,4 +1,6 @@
-/* Every 1024 frames, spawns a flock of up to three actors at the focus point, flying 0x400 above the ground, with one random facing of four. */
+/* Every 1024 frames, spawns a flock of up to three actors at the focus point,
+ * flying 0x400 above the ground, with one random facing of four. One definition shared by
+ * the world area overlays; every change here must verify every member. */
 /* func_801F41BC (area016), func_801F407C (area152), func_801F40F0 (area033), func_801F4128 (area151), func_801F41BC
    (area045), func_801F41BC (area115), func_801F41D0 (area121), func_801F41EC (area087), func_801F41F4 (area065) ,
    func_801F4D1C (area088) */

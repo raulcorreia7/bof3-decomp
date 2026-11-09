@@ -2,7 +2,11 @@
 
 #include <inline_c.h>
 
-/* projects the anchor vertex of each five-record part in the list at parts and. */
+/* projects the anchor vertex of each five-record part in the list at
+ * parts and, when it lands on screen, builds a textured quadrangle from the
+ * part's four vertex offsets and packed colour word, appending it to the
+ * ordering-table bucket its flag bits select.
+ */
 MATCH void Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
     SVECTOR    verts[4];
     ScenePart* p;

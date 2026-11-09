@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* Semantic view of the shared battle-selection scratch band (g_BattleChoicePanel, 0x80148570). */
+/* Semantic view of the shared battle-selection scratch band
+ * (g_BattleChoicePanel, 0x80148570): word-sized cursor coordinates and
+ * ring state sit beside byte-sized panel fields. */
 typedef struct BattleSelectionInitWork {
     volatile u8  selection_kind;  /* +0x00 */
     volatile u8  panel_rows;      /* +0x01 */

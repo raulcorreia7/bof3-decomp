@@ -14,7 +14,8 @@ MATCH void func_801F2DB0(void) {
     *(s32*)(scratch + 0x0C) = x;
     *(s32*)(scratch + 0x10) = y;
 
-    /* The step stores re-read the work cell: the compiler must assume a call may have changed it. */
+    /* The step stores re-read the work cell: the compiler must assume a call
+     * may have changed it. */
     if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA1) {
         g_Task->param.unk_0B = 1;
     } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA0) {

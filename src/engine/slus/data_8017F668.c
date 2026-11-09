@@ -1,6 +1,9 @@
 #include "slus.h"
 
-/* callback table read by func_80155B40, handler table g_BundleOpcodes and the small value tables read by func_80157CE4 and func_80159580. */
+/*
+ * callback table read by func_80155B40, handler table g_BundleOpcodes and
+ * the small value tables read by func_80157CE4 and func_80159580.
+ */
 
 const CellFunc D_8017F668[77] = {
     (CellFunc)Area_DrawPartQuads,

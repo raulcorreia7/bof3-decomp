@@ -1,6 +1,6 @@
 #include "bate_00.h"
 
-/* The format strings, the ten formation layouts of the party formation menu. */
+/* The format strings, the ten formation layouts of the party formation menu, and the address runs ahead of the code. */
 static char s_gap_801D0C04[8] = "  %3d";
 static char s_gap_801D0C0C[8] = " ---";
 static char s_gap_801D0C14[4] = "---";

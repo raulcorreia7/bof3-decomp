@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* sets bit 0x1000 in the damage status row's +0x04 flag word for the active battler. */
+/* sets bit 0x1000 in the damage status row's +0x04 flag word for the
+ * active battler, then forwards the selection state to func_800A9BD8.
+ */
 MATCH void func_800A2120(void) {
     u32 battler;
 

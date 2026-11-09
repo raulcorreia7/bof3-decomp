@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* copies the nine menu-panel handlers to the stack. */
+/* copies the nine menu-panel handlers to the stack, then dispatches
+ * active panel tasks whose mode is at or above the current menu mode.
+ */
 MATCH void Menu_UpdatePanelTasks(void) {
     MenuPanelFuncs handlers;
     Callback*      funcs;

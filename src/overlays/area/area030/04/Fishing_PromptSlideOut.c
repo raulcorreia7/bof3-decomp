@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Advances the local scratch vertical offset and routes the next AREA030 panel draw through the later helper at `0x801D9534`. */
+/* Advances the local scratch vertical offset and routes the next
+ * AREA030 panel draw through the later helper at `0x801D9534`. */
 /* func_801D3938 */
 MATCH void Fishing_PromptSlideOut(void) {
     s32 val;

@@ -3,7 +3,8 @@
 
 /* ACTOR_SIZE-byte work-area slots; the full record type belongs to emi/etc/game/00. */
 
-/* Staged work-area pointer cell. */
+/* Staged work-area pointer cell; a symbol-backed access keeps the store and
+ * the reload on their own address load. */
 
 /* FAKE: retail reads g_Actors as bytes. */
 MATCH void func_801D1000(void) {
@@ -24,7 +25,8 @@ MATCH void func_801D1000(void) {
         g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
     }
     Menu_ResetPanelTasks();
-    /* Pointer form: retail keeps one base register across the counter load and the store. */
+    /* Pointer form: retail keeps one base register across the counter load and
+     * the store, which a symbol access would re-materialize. */
     counter = &g_GameEntrySubstate;
     *counter += 1;
 }

@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* Battler element rows: the resistance byte at +0x00 (func_800A30E8) is followed by the element-slot bytes the 0x1C0 element mask selects. */
+/* Battler element rows: the resistance byte at +0x00 (func_800A30E8) is
+ * followed by the element-slot bytes the 0x1C0 element mask selects. */
 
 MATCH s16 func_800A2D70(u8 battler_index, u16 element_mask) {
     s32 value = 0;

@@ -21,7 +21,10 @@ typedef struct SceneSlot {
     u8  scene;
 } SceneSlot;
 
-/* steps the 30 field actor slots. */
+/* steps the 30 field actor slots: when the selected slot is live it refreshes its state byte and runs the
+ * kind-10 step, or looks its scene up in the loaded scene table and D_80183A70 and runs the kind step only on a
+ * listed scene.
+ */
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 72.50%. resume: a lever or header
  * fix that closes the first mismatch. */
 #ifdef NON_MATCHING

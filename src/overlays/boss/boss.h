@@ -1,7 +1,8 @@
 #ifndef BOSS_FAMILY_H
 #define BOSS_FAMILY_H
 
-/* an image header that reads one includes this file. */
+/* Declarations shared by two or more boss images; an image header that
+ * reads one includes this file. */
 
 #include "game.h"
 #include "sys/actor.h"
@@ -9,7 +10,8 @@
 #include "battle/functions.h"
 #include <memory.h>
 
-/* A boss module's head. */
+/* A boss module's head. The rest of the head is the per-boss callback block
+ * measured from each image's own bytes. */
 typedef struct BossModule {
     EMIModuleId id; /* 0x00; 0x11E-0x140 */
 } BossModule;
@@ -105,7 +107,8 @@ void Boss_ChooseBattleEnding3(void);
 /* func_800C1F94 (boss002), func_800C2210 (boss008), func_800C25A4 (boss004), func_800C292C (boss018) */
 void Boss_EndBattle3(void);
 
-/* The ending hooks of both sets send each live party battler into its ending pose. */
+/* The ending hooks of both sets send each live party battler into its ending pose: KO'd battlers
+ * take the down script, the rest the stand script for their facing. */
 #define BOSS_SEND_PARTY_TO_ENDING_POSE(n)                                                                  \
     if (g_Game.members[n].header.flags & 1) {                                                              \
         Battle_CancelTurn(g_Game.members[n].slot);                                                         \
@@ -117,7 +120,8 @@ void Boss_EndBattle3(void);
         }                                                                                                  \
     }
 
-/* Finishes the boss's defeat: adds the battle reward, shows the task again and parks it in mode 3. */
+/* Finishes the boss's defeat: adds the battle reward, shows the task again and parks it in mode 3.
+ * Boss_FinishDefeat (boss001, boss002, boss004, boss017, boss022) and Boss_FinishDefeat2 (boss001). */
 #define BOSS_FINISH_DEFEAT()                                              \
     do {                                                                  \
         EnemyBattler* work;                                               \

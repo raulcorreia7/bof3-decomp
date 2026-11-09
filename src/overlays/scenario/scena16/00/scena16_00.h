@@ -1,7 +1,9 @@
 #ifndef OVERLAY_SCENARIO_SCENA16_00_H
 #define OVERLAY_SCENARIO_SCENA16_00_H
 
-/* The scena16 scenario overlay's local declarations. */
+/* The scena16 scenario overlay's local declarations: its palette and VRAM
+ * records, the window words it shares and its prototypes. Only this image
+ * includes the file. */
 
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"

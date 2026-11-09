@@ -1,6 +1,9 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 countdown panel. */
+/* Draws the AREA030 countdown panel: it lays out three icon cells,
+ * formats the remaining count from the world byte pair into the shared UI
+ * character buffer, and draws the two-line caption with an extra emphasis row
+ * when the count has reached 50 in graphics mode 4. */
 /* func_801D159C */
 MATCH void Fishing_DrawHud(s16 panel_x, s16 panel_y) {
     s8 value;

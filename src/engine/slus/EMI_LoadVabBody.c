@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* starts the current EMI entry transfer and records either its active-slot state or a terminal loader error before advancing the step. */
+/* starts the current EMI entry transfer and records either its
+ * active-slot state or a terminal loader error before advancing the step.
+ */
 MATCH void EMI_LoadVabBody(void) {
     u32 read_cursor;
     u8  entry_index;

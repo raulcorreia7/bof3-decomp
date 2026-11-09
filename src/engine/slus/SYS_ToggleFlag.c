@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* toggles bit bit_index in the byte array at bits. */
+/* toggles bit bit_index in the byte array at bits.
+ */
 MATCH void SYS_ToggleFlag(void* bits, u8 bit_index) {
     u8* p;
 

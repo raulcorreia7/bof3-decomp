@@ -9,7 +9,7 @@ MATCH void func_801DDFEC(u32 battler_index) {
         return;
     }
     index = g_Battle.turn_cursor - 1u;
-    /* enter the scan at its bound test. */
+    /* enter the scan at its bound test */
     goto check;
     for (;;) {
     body:
@@ -28,7 +28,7 @@ MATCH void func_801DDFEC(u32 battler_index) {
         index += 1u;
     check:
         if ((index & BYTE_MASK) < g_Battle.turn_count) {
-            /* next ranked owner. */
+            /* next ranked owner */
             goto body;
         }
         return;

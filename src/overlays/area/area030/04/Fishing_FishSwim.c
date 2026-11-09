@@ -3,7 +3,8 @@
 /* The cue the actor plays when it enters its idle roll. */
 #define FISHING_IDLE_CUE 0x16
 
-/* Runs the area-030 actor AI. */
+/* Runs the area-030 actor AI: rolls the idle action, steps the animation, steers the actor toward its target
+ * and fires the attack when aligned. */
 /* func_801DE82C */
 MATCH void Fishing_FishSwim(void) {
     FishingState* work;

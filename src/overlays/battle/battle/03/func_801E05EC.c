@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* on expiry, runs a flagged response or queues a work slot and increments the active step. */
+/* on expiry, runs a flagged response or queues a work slot and
+ * increments the active step; otherwise subtracts its deltas, decrements the
+ * countdown and runs the next step.
+ */
 MATCH void func_801E05EC(void) {
     u32          slot;
     PartyMember* work;

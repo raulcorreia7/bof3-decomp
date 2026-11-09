@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* spins the shared tint step on the g_AreaCameraAngle.vz rotation cell until the step reports completion. */
+/* spins the shared tint step on the g_AreaCameraAngle.vz rotation cell until
+ * the step reports completion, then clears the six tint bytes and releases the
+ * callback thread.
+ */
 MATCH void func_8014F460(void) {
     s32  flag;
     u16* level;

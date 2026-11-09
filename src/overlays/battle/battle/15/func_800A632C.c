@@ -33,6 +33,7 @@ MATCH void func_800A632C(void) {
         effect_flag = &D_801463B4;
         *effect_flag ^= 1;
     }
-    /* Retail passes the unmasked 32-bit cursor expression. */
+    /* Retail passes the unmasked 32-bit cursor expression; the shared u16
+     * prototype would add a truncation the original does not have. */
     ((void (*)(s32, s32, s32))Menu_DrawCursorSprite)((D_801463B4 * 0x22) + 0xD5, 0x18, 0);
 }

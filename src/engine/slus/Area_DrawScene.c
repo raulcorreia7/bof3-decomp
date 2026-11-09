@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* switches the stack to the top of the scratchpad, runs the three front-end frame steps, clears the gameui bytes D_8014832C and D_8014832D. */
+/* switches the stack to the top of the scratchpad, runs the three
+ * front-end frame steps, clears the gameui bytes D_8014832C and D_8014832D, then
+ * restores the interrupted stack pointer.
+ */
 MATCH void Area_DrawScene(void) {
     unsigned long stack;
 

@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* walks the D_801490CF table's D_801490C6+1 entries through UI_DrawTextAt, passing 0x3A as the first argument and threading each returned cursor into the next call. */
+/* walks the D_801490CF table's D_801490C6+1 entries through
+ * UI_DrawTextAt, passing 0x3A as the first argument and threading each returned
+ * cursor into the next call.
+ */
 /* func_8015A170 */
 MATCH void UI_DrawTextRows(void) {
     u8* cursor;

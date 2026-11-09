@@ -1,6 +1,8 @@
 #include "area068_13.h"
 
-/* Point the mode record and the work cell at the first party record. */
+/* Point the mode record and the work cell at the first party record, then once
+ * the two scene flags line up run script 0x6E and hand the previous work row
+ * back with its step set to 3. */
 MATCH void func_801F2CF8(void) {
     Actor* actor;
 

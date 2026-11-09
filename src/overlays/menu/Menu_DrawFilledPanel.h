@@ -1,4 +1,5 @@
-/* Fills a menu panel and draws its tiled border. */
+/* Fills a menu panel and draws its tiled border. One definition shared by the
+ * shop and Bate overlays; every change here must verify every member. */
 /* func_801D6470 (bate), func_801DBF18 (shop), func_801D7418 (shisu), func_801DF410 (start) */
 MATCH void Menu_DrawFilledPanel(s16 x, s16 y, s16 width, s32 height) {
     u8 i;

@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Advances the local scratch vertical offset, wraps it at the panel limit while stepping the state byte. */
+/* Advances the local scratch vertical offset, wraps it at the panel
+ * limit while stepping the state byte, then routes the panel draw through the
+ * helper at `0x801D9534`. */
 /* func_801D3684 */
 MATCH void Fishing_PromptSlideIn(void) {
     s32 val;

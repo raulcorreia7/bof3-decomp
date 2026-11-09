@@ -3,7 +3,7 @@
 
 #include "common/vector.h"
 
-/* The spin-effect record the overlay's sprite pass draws. */
+/* The spin-effect work record the overlay's sprite pass draws. */
 typedef struct WorldSpin {
     Point3DL           origin;
     u8                 unk_0C[4];

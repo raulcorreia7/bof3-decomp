@@ -1,7 +1,11 @@
 #include "game_00.h"
 
-/* Opcodes 0xF0 to 0xFF of the actor script table. */
-/* Opcodes 0xF0 to 0xFF of the actor script table. */
+/* Opcodes 0xF0 to 0xFF of the actor script table: the record group that moves
+ * the task (or the camera, Actor_GetType() == 2) in z, walks it to a cell,
+ * waits, and touches the cell palette. Named from the case bodies. */
+/* Opcodes 0xF0 to 0xFF of the actor script table: the record group that moves
+ * the task (or the camera, Actor_GetType() == 2) in z, walks it to a cell,
+ * waits, and touches the cell palette. Named from the case bodies. */
 typedef enum ActorScriptMotionOp {
     ACTOR_SCRIPT_MOTION_CLEAR_SCRIPT_ACTIVE = 0xF0, /* clear GAME_FLAG_SCRIPT_ACTIVE */
     ACTOR_SCRIPT_MOTION_SET_SCRIPT_ACTIVE   = 0xF1, /* set GAME_FLAG_SCRIPT_ACTIVE */

@@ -1,6 +1,8 @@
 #include "start_08.h"
 
-/* Character grid of the name entry window: page `page` of D_801ECDBC holds 8 rows of 12 cells. */
+/* Character grid of the name entry window: page `page` of D_801ECDBC holds 8 rows of 12 cells. The cells in column 10
+ * of rows 3 to 7 hold a command id 1 to 5, drawn as a label; column 11 of those rows is part of that label. The
+ * cursor sits at (D_801ED7E0, D_801ED7E4). */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
     /* 87.1%; regalloc: retail moves grid_y to v0 before the label copy, ours keeps it in a2. */

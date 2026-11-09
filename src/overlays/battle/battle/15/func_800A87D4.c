@@ -1,11 +1,11 @@
 #include "battle_15.h"
 
-/* The 0x74 bytes of the record that a queued slot copies. */
+/* The 0x74 bytes of the work record that a queued slot copies. */
 typedef struct BattleWorkImage {
     u32 words[29];
 } BattleWorkImage;
 
-/* Copies the battle record into a queued slot and arms the active actor. */
+/* Copies the battle work record into a queued slot and arms the active actor. */
 MATCH void func_800A87D4(void) {
     u8*              kind;
     u8*              work;
@@ -15,7 +15,7 @@ MATCH void func_800A87D4(void) {
     index = Battle_AllocEffect(0, 0x12);
     if ((index & BYTE_MASK) != GAME_NONE) {
         slot                                             = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
-        /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell. */
+        /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell */
         *slot                                            = *(BattleWorkImage*)g_BattleWorkCell;
         g_BattleEffects[index & BYTE_MASK].unk_06        = 0;
         g_BattleEffects[index & BYTE_MASK].handler_index = 0x12;

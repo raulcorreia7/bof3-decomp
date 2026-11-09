@@ -54,7 +54,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     }
     rec   = g_Task;
     value = rec->pos.y.fixed;
-    /* x holds the step count, then the x sum. */
+    /* x holds the step count, then the x sum */
     x     = rec->timer;
     dy    = rec->vy * x;
     x     = rec->pos.x.fixed + rec->vx * x;

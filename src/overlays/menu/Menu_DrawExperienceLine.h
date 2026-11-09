@@ -1,4 +1,7 @@
-/* Draws the experience progress line of a character from x, y. */
+/* Draws the experience progress line of a character from x, y: its x extent is the exp between the current
+ * and next level scaled over the level-growth span, red, one semi-transparent line primitive. One definition
+ * shared by the Bate, Shisu and shop overlays; each includes this file where the function sits. Every change
+ * here must verify every member. */
 /* func_801D4730 (bate), func_801D56D8 (shisu), func_801DA1D8 (shop) */
 MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 kind, u8 level, u32 exp) {
     LINE_F2* line;

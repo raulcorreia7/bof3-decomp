@@ -1,4 +1,6 @@
-/* Copy the field focus point into the work position. */
+/* Copy the field focus point into the work position. One definition shared by
+ * the world area overlays; every change here must verify every member
+ * address. */
 /* func_801F2EC4 (area149), func_801F39D4 (area148), func_801F4434 (area167) */
 MATCH void Actor_PlaceAtFocus(void) {
     u8* work;

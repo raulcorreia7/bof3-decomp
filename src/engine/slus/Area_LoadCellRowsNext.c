@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* walks two rotated rows of the cell grid. */
+/* walks two rotated rows of the cell grid: each pass advances the row cursor from g_AreaGridRowCursor (wrapping at the
+ * last row) and the column cursor from g_AreaGridColCursor (wrapping at the last column) and passes each cell to
+ * func_801545B4 and func_801541C0; the panel origin moves by (+1, +1). */
 /* func_80152FB0 */
 MATCH void Area_LoadCellRowsNext(void) {
     s32 row;

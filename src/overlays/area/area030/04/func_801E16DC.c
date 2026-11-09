@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Configures the dim semi-transparent AREA030 tile and appends it after selecting graphics mode 4. */
+/* Configures the dim semi-transparent AREA030 tile and appends it
+ * after selecting graphics mode 4. */
 MATCH void func_801E16DC(void) {
     TILE* primitive;
 

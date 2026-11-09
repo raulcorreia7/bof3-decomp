@@ -1,6 +1,10 @@
 #include "slus.h"
 
-/* colour matrix, 16-byte copy block and the script handler table of the resident executable. */
+/*
+ * colour matrix, 16-byte copy block and the script handler table of
+ * the resident executable; the emi/etc/game/00 script interpreter indexes the
+ * handlers and its tail (D_801821C0).
+ */
 
 const MATRIX D_8018214C = {
     {{3096, 0, 0}, {3096, 0, 0}, {3096, 0, 0}},

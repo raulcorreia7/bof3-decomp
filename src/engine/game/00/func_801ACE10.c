@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* The selected entry receives the caller's index (the same word the fallback table at D_801C890C is indexed by) and the record's handler index. */
+/* The selected entry receives the caller's index (the same word the fallback
+ * table at D_801C890C is indexed by) and the work record's handler index. */
 MATCH void func_801ACE10(s32 handler_index) {
     volatile Actor* work;
     s32             index;

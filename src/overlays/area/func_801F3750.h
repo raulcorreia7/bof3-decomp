@@ -1,4 +1,7 @@
-/* Lowers the panel height by 0xA, advances the actor state when it drops below 0xC9, forces the state to 3 when the game script is active or the state index is 2. */
+/* Lowers the panel height by 0xA, advances the actor state when it drops below
+ * 0xC9, forces the state to 3 when the game script is active or the state index
+ * is 2, then draws panel 0x5C. One definition shared by the area overlays;
+ * every change here must verify every member. */
 /* func_801F3750 (area016), func_801F3750 (area045) */
 #include "area/spad.h"
 

@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* Loops the sprite animation. */
+/* Loops the sprite animation: counts the step delay (+0x4A) down and, at zero, wraps to step 0 at the end of the
+ * stream (step count at +0x49) or follows a jump step (delay >= 0x80), returning 1 on a wrap or jump, then stages the step.
+ */
 /* func_8014D978 */
 MATCH u8 Actor_StepAnimLoop(void) {
     Actor* first_work;

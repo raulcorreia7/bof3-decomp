@@ -1,7 +1,8 @@
 #ifndef WORLD01_FAMILY_H
 #define WORLD01_FAMILY_H
 
-/* an image header that reads one includes this file. */
+/* Declarations shared by two or more world01 images; an image header that
+ * reads one includes this file. */
 
 #include "sys/gameui.h"
 #include "overlays/area/area.h"

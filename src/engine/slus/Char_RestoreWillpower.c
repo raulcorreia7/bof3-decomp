@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* advances the record byte toward its limit by delta, clamping upward at the limit. */
+/* advances the record byte toward its limit by delta, clamping
+ * upward at the limit, and restoring the limit when delta is empty.
+ */
 MATCH s32 Char_RestoreWillpower(s32 character_index, s32 amount, s32 mode) {
     Character* rec;
     s32        cur;

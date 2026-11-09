@@ -1,7 +1,9 @@
 #ifndef OVERLAY_WORLD00_AREA027_13_H
 #define OVERLAY_WORLD00_AREA027_13_H
 
-/* The area027 world overlay's local declarations. */
+/* The area027 world overlay's local declarations: the state selectors, the
+ * reset sentinel and the work state handler table. Only this image includes
+ * the file. */
 
 #include "overlays/area/world00.h"
 #include "area/spad.h"
@@ -9,7 +11,8 @@
 /* Reset sentinel stored to g_MessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF
 
-/* The wall-marker view of the record: the angle at +0x0C and the byte bumped once the angle passes 0x400. */
+/* The wall-marker view of the work record: the angle at +0x0C and the byte
+ * bumped once the angle passes 0x400. */
 typedef union AreaWallAngle {
     s32 word;
     s16 half;

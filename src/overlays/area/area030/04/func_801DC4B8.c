@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Submits mask `g_FishingLure` to `Item_Remove` as mode 3. */
+/* Submits mask `g_FishingLure` to `Item_Remove` as mode 3; when it
+ * reports failure, clears `g_FishingLure` and `g_FishingLureQty`. Always refreshes the
+ * state through `func_801DDDBC`. */
 MATCH void func_801DC4B8(void) {
     u8* flags;
 

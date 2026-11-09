@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* Row field outside this target's include chain. */
+/* Row field outside this target's include chain: the enemy action id halfword
+ * at +0x74 of the 0x118-byte rows indexed by (slot - 3). */
 
 /* Non-volatile alias for the selection-kind byte at 0x80146375. Reading it
  * through the target's volatile g_Battle.action_type makes the compiler materialize
@@ -17,7 +18,12 @@
 
 /* Enemy row view anchored at the status halfword (+0x82) of the 0x118-byte rows. */
 
-/* answers whether the battler slot may act. */
+/* answers whether the battler slot may act: with the battle 0x4000
+ *           flag set, the slot unblocked and not the current selection, an
+ *           enemy slot is checked through its action row and action id. The
+ *           result byte g_Battle.target_selector receives the slot, the current selection, or
+ *           a 0x40/0x80/0xC0 action code.
+ */
 MATCH u8 func_800A9304(u8 slot) {
     s32 index;
     u8  action;
@@ -32,7 +38,7 @@ MATCH u8 func_800A9304(u8 slot) {
         return true;
     }
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-        /* shared exit: the panel copies the current selection. */
+        /* shared exit: the panel copies the current selection */
         goto copy_selection;
     }
     index = slot - BATTLE_PARTY_CHARACTERS_COUNT;
@@ -57,7 +63,7 @@ MATCH u8 func_800A9304(u8 slot) {
                 return true;
             }
         }
-        /* shared exit: the panel copies the current selection. */
+        /* shared exit: the panel copies the current selection */
         goto copy_selection;
     }
     return true;

@@ -1,4 +1,5 @@
-/* Area_Update of area160 and area162 to area165 (func_801F30D4). */
+/* Area_Update of area160 and area162 to area165 (func_801F30D4): the floor quad with sprite word
+ * 0x150010F, turned by direction_08 << 21. */
 #include "overlays/area/Area_FloorQuad.h"
 
 MATCH void Area_Update(void) {

@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* scans the 0x20-byte table g_VitalItemIds for (item_id & 0xFF), returning 1 on a hit and 0 otherwise. */
+/* scans the 0x20-byte table g_VitalItemIds for (item_id & 0xFF), returning
+ * 1 on a hit and 0 otherwise.
+ */
 MATCH bool Item_VitalHas(s32 item_id) {
     u8* entry;
     s32 index;

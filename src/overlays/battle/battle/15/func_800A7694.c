@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* Gene-step bonus tables (five-byte rows). */
+/* Gene-step bonus tables (five-byte rows): the sibling of the affinity-level
+ * table in battle/genes.h, indexed by `clamp(step + 2, 0, 4)`. */
 
 MATCH void func_800A7694(s8 affinity_0, s8 affinity_1, s8 affinity_2, s8 affinity_3, s8 affinity_4) {
     u8* rec;

@@ -1,4 +1,7 @@
-/* Slides the banner x coordinate sixteen pixels left per frame and clears the handler index off the left edge. */
+/* Slides the banner x coordinate sixteen pixels left per frame and clears
+ * the handler index off the left edge; with screen mode 2 it holds state 1,
+ * and draws HUD record 0x10 at the banner x coordinate.
+ */
 /* func_801F360C (area115), func_801F3620 (area121), func_801F416C
  * (area088), func_801F363C (area087) */
 MATCH void Area_SlideHudBannerLeft(void) {

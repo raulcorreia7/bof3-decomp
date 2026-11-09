@@ -1,4 +1,5 @@
-/* Counts the timer down; at zero queues the selection sound and advances the step. */
+/* Counts the timer down; at zero queues the selection sound and advances the step. Every change here must verify every
+   member. */
 /* func_801EEDB0 (magic048), func_801EEE20 (magic222) */
 MATCH void Effect_CountDownTimerQueueFx(void) {
     PartyMember* work;

@@ -32,7 +32,8 @@ MATCH void func_801CEBFC(void) {
 
 #include "overlays/plchar/Char_StartTurn.h"
 
-/* Runs one route step script. */
+/* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
+ * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
 #include "overlays/plchar/Char_AdvanceFacingTurn.h"
 
 MATCH void func_801CEE08(void) {

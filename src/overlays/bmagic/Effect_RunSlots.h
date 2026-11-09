@@ -1,4 +1,6 @@
-/* Runs the effect step the task mode selects. */
+/* Runs the effect step the task mode selects, then runs every effect slot in use with
+ * g_BattleEffectBattler set to the battler of that slot. One definition shared by the bmagic
+ * overlays; every change here must verify every member. */
 /* func_801EEC10 (magic220), func_801EEC10 (magic223), func_801EEC10 (magic226) */
 MATCH void func_801EEC10(void) {
     Magic220SharedSteps handlers = D_801EEC04;

@@ -4,7 +4,9 @@ typedef struct {
     s32 w[4];
 } Quad;
 
-/* copies one record, patches 6 bytes, recalculates it, then flags 4 field comparisons. */
+/* copies one record, patches 6 bytes, recalculates it, then flags 4
+ * field comparisons.
+ */
 MATCH void func_80164EF8(s32 index, u8* patch, u8* flags, u16* values) {
     Character copy;
     u16*      org[4];

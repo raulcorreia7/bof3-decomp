@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* applies battle-selection cursor input. */
+/* applies battle-selection cursor input: a held confirm/cancel pair jumps to a selection phase, a flagged
+ * secondary-panel entry consumes the 0x5000 triggers, and the D-pad scrolls the active slot with the move cue.
+ */
 MATCH void func_80098DC4(void) {
     u16 held;
     s32 trigger;

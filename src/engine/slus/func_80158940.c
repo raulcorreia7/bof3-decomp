@@ -1,7 +1,9 @@
 #include "engine/slus/slus.h"
 #include "battle/records.h"
 
-/* marks the layer and marker bytes of every entry whose rectangle contains one of the three layer points or the base point. */
+/* marks the layer and marker bytes of every entry whose rectangle
+ * contains one of the three layer points or the base point.
+ */
 /* nonmatching 90.85%: tried the first draft cleaned to compiling C; best score 90.85%. resume: a lever or header fix
  * that closes the first mismatch. */
 #ifdef NON_MATCHING

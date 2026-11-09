@@ -1,10 +1,14 @@
 #include "engine/slus/slus.h"
 
-/* advances the scratchpad record's sort key from its grid position, retires the record when the key leaves the ordering table. */
+/* advances the scratchpad work record's sort key from its grid
+ * position, retires the record when the key leaves the ordering table, and
+ * otherwise writes the packed key, projects its 16.16 position through the GTE
+ * and publishes the resulting screen pair.
+ */
 /* nonmatching 68.24%: first mismatch +0x0020; assigning work after the early return gives retail's
  * single load and copy, but the copy lands in a2 (retail a3) and the col/row loads are emitted in the
  * other order; swapping the two statements is flat. resume: a shape that gives the work copy a3. */
-/* Pinned or opaque work pointers change the prologue. */
+/* Pinned or opaque work pointers change the prologue; a barrier and coordinate loads through work differ at +0x20. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8014D290(void) {
     SVECTOR   vec;

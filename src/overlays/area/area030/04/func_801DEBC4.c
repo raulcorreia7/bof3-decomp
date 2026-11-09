@@ -2,7 +2,9 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* When the pending flag is set, clears the anchor flag, starts the scene selected by the work row, latches the cursor height and direction and arms the panel step. */
+/* When the pending flag is set, clears the anchor flag, starts the
+ * scene selected by the work row, latches the cursor height and direction and
+ * arms the panel step. */
 MATCH void func_801DEBC4(void) {
     FishingState* work;
     FishingState* panel;

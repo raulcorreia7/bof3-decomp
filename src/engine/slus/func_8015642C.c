@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* draws the shadowed sprite pairs of the field object at obj, positioned from the (x, y) map cell. */
+/* draws the shadowed sprite pairs of the field object at obj, positioned from the (x, y) map cell: projects a
+ * three-vertex rim to cull off-screen objects, then emits two textured quadrangles per part from the
+ * D_8017F* tables, the second projection filling the first corners of both. */
 /* nonmatching 64.16%: restated from the first draft with table indexing and a two-prim loop. resume: register order of
  * the object pointer and the order temp, then the prim write order. */
 #ifdef NON_MATCHING

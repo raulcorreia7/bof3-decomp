@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* latches the active mode's sub-state flag into g_AreaHeightOffsetEnabled. */
+/* latches the active mode's sub-state flag into g_AreaHeightOffsetEnabled.
+ */
 MATCH void Area_EnableHeightOffset(void) {
     s32 flag;
 

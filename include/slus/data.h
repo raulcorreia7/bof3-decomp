@@ -12,7 +12,7 @@
 /* SLUS_004.22 data the overlays share, in address order. */
 extern s32         D_80033A08;
 /* Main-executable RAM state that has no name yet. */
-/* retail addresses. */
+/* retail addresses */
 extern u16         D_800C1A70;
 extern volatile u8 D_80140000[];
 extern u8          D_80143BB0;
@@ -53,7 +53,8 @@ extern u32         D_80145044;
 extern u8  D_8014546C[ABILITY_STOCK_SLOT_COUNT];
 extern u8  D_801454F4[][3];
 extern u32 D_80145548;
-/* A unit that must re-read the cell after every store (etc/game/00) defines GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
+/* A unit that must re-read the cell after every store (etc/game/00) defines
+ * GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
 #ifdef GRAPHICS_PALETTE_PENDING_VOLATILE
 /* D_80145988 */
 extern volatile u8 g_GfxPalettePending; /* 0x80145988 */
@@ -86,7 +87,8 @@ extern u8  g_BattleStep;
 extern u8  g_BattleSubStep;
 /* FAKE: g_Battle.state as a global of its own; the sites that use it match only with a separate symbol. */
 extern u16 g_BattleState;
-/* The bytes the battle code index. */
+/* The bytes the battle code index; the bmagic images that copy its record
+ * define BATTLE_PARTY_CELL_RECORD before their first include. */
 #ifdef BATTLE_PARTY_CELL_RECORD
 extern struct PartyMember* D_8014637C;
 #else
@@ -104,7 +106,10 @@ extern u8            D_801468C0[];
 extern s16           D_80146916;
 extern s32           D_80147A8C;
 extern s32           D_80147A94;
-/* Per-slot effect work arrays at a 0x30-byte stride. */
+/* Per-slot effect work arrays at a 0x30-byte stride: the accumulators at
+ * D_801FD030, the seeded deltas at D_801FCA90 and the per-cell lifetimes at
+ * D_801FD5D0.
+ */
 extern u8*           D_80147AA8;
 extern s32           D_80147AC4;
 /* D_80148208 */
@@ -124,7 +129,8 @@ extern volatile u8   D_80148627;
 /* D_801492E8 */
 extern MATRIX        g_CameraMatrix;
 
-/* Load the GTE with `matrix`, rotated by `rot` and viewed through the camera. */
+/* Load the GTE with `matrix`, rotated by `rot` and viewed through the camera:
+ * the model matrix a 3D effect or scene part draws with. */
 static inline void Camera_SetModelMatrix(SVECTOR* rot, MATRIX* matrix) {
     RotMatrix(rot, matrix);
     MulMatrix2(&g_CameraMatrix, matrix);
@@ -133,7 +139,8 @@ static inline void Camera_SetModelMatrix(SVECTOR* rot, MATRIX* matrix) {
 }
 
 /* D_80149308 */
-/* A unit that must re-read the target after storing it defines AREA_SCROLL_TARGET_VOLATILE before its first include. */
+/* A unit that must re-read the target after storing it defines
+ * AREA_SCROLL_TARGET_VOLATILE before its first include. */
 #ifdef AREA_SCROLL_TARGET_VOLATILE
 extern volatile s32 g_AreaScrollTargetX;
 #else
@@ -180,7 +187,19 @@ extern const u8 D_80181B34[20][3];
 /* D_80143F22 */
 extern s16      g_EncounterSteps;
 extern u8       D_80145E44;
-/* The main executable keeps the interrupt dispatcher table and SPU handles. */
+/* The main executable keeps the interrupt dispatcher table and SPU handles.
+ * D_80185690 stores the table address 0x80185670; libetc wrappers load it and
+ * fetch one slot: DMACallback 0x04, InterruptCallback 0x08, ResetCallback
+ * 0x0C, StopCallback 0x10 (`lw v0, 0x10(v0); jalr v0`,
+ * exe/slus_004_22@0x801749E8) and VSyncCallback 0x14, called with (4,
+ * callback). Slots stay offset-named.
+ *
+ * _spu_RXX and D_80183AC4 point at SPU registers 0x1F801C00 and
+ * 0x1F801014 (u16 array read at exe/slus_004_22@0x801690F8, u32
+ * read-modify-write at @0x80168E68). D_80184448 and D_8018444C are the sound
+ * callbacks the engine installs (0x8016C548 sits in the image, the second is
+ * null-checked before the call). D_801856A4 is an s32 slot array whose address
+ * is taken (`addiu v0, v0, %lo(D_801856A4)`, exe/slus_004_22@0x801750C4). */
 /* D_801862D8 */
 extern s16      SQRT[192];
 #endif

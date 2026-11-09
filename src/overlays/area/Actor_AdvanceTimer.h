@@ -1,4 +1,6 @@
-/* Advance the work-area timer; once it reaches 8, step the origin counter and keep counting. */
+/* Advance the work-area timer; once it reaches 8, step the origin counter and
+ * keep counting. One definition shared by the world area overlays; every
+ * change here must verify every member address. */
 /* func_801F3568 */
 MATCH void Actor_AdvanceTimer(void) {
     Actor* work;

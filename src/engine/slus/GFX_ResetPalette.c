@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* clears the four 0x200-byte rows 0x1C..0x1F of the 0x80033800 palette work area. */
+/* clears the four 0x200-byte rows 0x1C..0x1F of the 0x80033800 palette
+ * work area, then copies all 0x20 rows of that area into the palette
+ * destination at g_GraphicsPaletteDst.
+ */
 MATCH void GFX_ResetPalette(void) {
     u16  row;
     u16  column;

@@ -2,7 +2,9 @@
 
 /* Panel-lock flag owned by the main executable. */
 
-/* Stock count and the two strided per-entry tables (0x140-byte stock records, 0xA4-byte item records). */
+/* Stock count and the two strided per-entry tables (0x140-byte stock records,
+ * 0xA4-byte item records); the 2-D form keeps the original's symbol+index
+ * addressing. */
 
 MATCH void func_801D3798(void) {
     s32 i;

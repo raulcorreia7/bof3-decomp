@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Steps the battle cursor row. */
+/* Steps the battle cursor row: it nudges the cursor up or down while the actor stands inside the row
+ * band, then draws the cursor line and the row marker. */
 /* nonmatching unmeasured: tried the retail loads the work pointer into a0 and the candidate into a1, and the
  * saved-register plan follows from it. resume: a source shape that keeps the work pointer in a0 after the panel call.
  */

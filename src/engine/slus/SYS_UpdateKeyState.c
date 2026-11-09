@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* publishes the PadRead(0) result into the two pad state records, keeping the previous value and the newly pressed bits. */
+/* publishes the PadRead(0) result into the two pad state records, keeping
+ * the previous value and the newly pressed bits.
+ */
 MATCH void SYS_UpdateKeyState(void) {
     /* FAKE: pins three live values to the retail v0/v1/a1 homes. */
     FAKE_REG(u32, pad, "v0");

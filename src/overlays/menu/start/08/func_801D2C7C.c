@@ -1,7 +1,8 @@
 #include "shared/etc.h"
 
 /* Shop panel table: 0x24-byte records owned by this overlay. */
-/* start_08.h cannot be included here. */
+/* start_08.h cannot be included here: it declares g_BattleChoicePhase as u8 and
+ * Party_CountOrder as u8(u8); this unit needs s8 and s32(s32). */
 extern s8 D_8014854F;
 extern s8 D_80148656;
 

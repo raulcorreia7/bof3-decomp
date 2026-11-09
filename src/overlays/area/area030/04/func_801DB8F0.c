@@ -2,7 +2,9 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Drives the AREA030 prompt row cursor from the pad pair and. */
+/* Drives the AREA030 prompt row cursor from the pad pair and, when it
+ * reaches the slot's row limit, queues the confirm cue and advances the panel
+ * step. */
 MATCH void func_801DB8F0(void) {
     s32 offset;
 

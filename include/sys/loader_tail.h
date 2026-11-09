@@ -13,7 +13,10 @@ typedef struct SceneFlagPair {
 
 ASSERT_SIZE(SceneFlagPair, 2);
 
-/* The records behind the main executable's loader pointer lists. */
+/* The records behind the main executable's loader pointer lists: a halfword
+ * key with two bytes, and a record list with its count. func_8014D6DC passes
+ * the halfword to func_8014DD3C and stores the byte at +2 in the work
+ * record. */
 typedef struct ScriptRef {
     u16 unk_00;
     u8  unk_02;

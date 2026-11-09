@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Fills area palette entries 1-30 from the selected CLUT block, marks them opaque, resets palette state, initializes scratchpad values. */
+/* Fills area palette entries 1-30 from the selected CLUT block,
+ * marks them opaque, resets palette state, initializes scratchpad values,
+ * and advances the work state before calling func_8014D4E0. */
 MATCH void func_801D130C(void) {
     s32           i;
     u8*           selected;

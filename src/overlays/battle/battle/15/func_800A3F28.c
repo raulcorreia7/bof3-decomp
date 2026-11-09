@@ -3,7 +3,10 @@
 /* FAKE: LOBU reads the volatile g_Battle.target as a plain byte; the volatile load
  * would need an extra mask for the index arithmetic. */
 
-/* sets the battler-dirty flag. */
+/* sets the battler-dirty flag, then marks the active battler's
+ * damage-status row present and clears its pending-select bit: player rows
+ * below index 3, enemy rows above.
+ */
 MATCH void func_800A3F28(void) {
     u32           battler_index;
     volatile u16* pFlag;

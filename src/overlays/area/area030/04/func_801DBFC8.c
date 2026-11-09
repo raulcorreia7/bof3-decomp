@@ -2,7 +2,9 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Draws the AREA030 prompt rows for the current slot, arms the cursor and caption rows and, on any pad input, retires the caret and advances the panel step. */
+/* Draws the AREA030 prompt rows for the current slot, arms the cursor
+ * and caption rows and, on any pad input, retires the caret and advances the
+ * panel step. */
 MATCH void func_801DBFC8(void) {
     FishingState* work;
     s32           offset;

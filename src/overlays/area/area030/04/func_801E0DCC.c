@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 panel sprite selected by icon_index at the position it is given, sourcing its CLUT, size and texture coordinates from the panel table. */
+/* Draws the AREA030 panel sprite selected by icon_index at the position it
+ * is given, sourcing its CLUT, size and texture coordinates from the panel
+ * table, and appends it to the ordering-table layer layer names. */
 MATCH u8* func_801E0DCC(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y) {
     SPRT* sprite;
 

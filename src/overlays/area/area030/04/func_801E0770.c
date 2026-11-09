@@ -1,6 +1,9 @@
 #include "area030_04.h"
 
-/* Reports whether the area030 anchor may settle. */
+/* Reports whether the area030 anchor may settle: graphics mode 4 with
+ * an exhausted sprite bank, no pending flag and area state 3, then the
+ * scratchpad probe record within 0x7FFF of the anchor on x and y and within
+ * 0x400 on z. */
 MATCH s32 func_801E0770(void) {
     FishingState* work;
     s32           d;

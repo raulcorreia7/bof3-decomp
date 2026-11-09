@@ -1,7 +1,8 @@
 #ifndef WORLD03_FAMILY_H
 #define WORLD03_FAMILY_H
 
-/* an image header that reads one includes this file. */
+/* Declarations shared by two or more world03 images; an image header that
+ * reads one includes this file. */
 
 #include "overlays/area/area.h"
 #include "overlays/area/Message_ShowParty.h"

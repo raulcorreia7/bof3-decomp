@@ -11,7 +11,7 @@ MATCH u8* func_801A44A4(u8* script) {
             break;
         case 0xF9:
             script++;
-            /* fallthrough. */
+            /* fallthrough */
         case 0xFA:
             script++;
             break;

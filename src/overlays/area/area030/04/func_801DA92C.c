@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Advances the AREA030 progress counters and clears the four settle flags before arming the area load step and stepping the work state. */
+/* Advances the AREA030 progress counters and clears the four settle
+ * flags before arming the area load step and stepping the work state. */
 MATCH void func_801DA92C(void) {
     u8*           counter;
     u8*           flags;

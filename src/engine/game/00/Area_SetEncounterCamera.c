@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-/* Sums the heights of the live candidate cells and the queued entries. */
+/* Sums the heights of the live candidate cells and the queued entries, then centres and installs
+ * the battle camera matrix.
+ */
 /* func_801C7244 */
 MATCH void Area_SetEncounterCamera(s32 mode) {
     EncounterEnemy* entry;

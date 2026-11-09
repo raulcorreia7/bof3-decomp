@@ -45,7 +45,7 @@ MATCH void func_801EF164(void) {
     }
 }
 
-/* needs: type for g_Battle.selected_actor as a member of the BattleAction block. */
+/* needs: type for g_Battle.selected_actor as a member of the BattleAction block; first diff: bnez target at +0x2C. */
 INCLUDE_ASM(func_801EF1CC);
 
 MATCH void func_801EF280(void) {
@@ -174,7 +174,7 @@ MATCH void func_801EFBEC(void) {
     g_Task->header.step += 1;
 }
 
-/* needs: type for g_Battle.selected_actor as a member of the BattleAction block. */
+/* needs: type for g_Battle.selected_actor as a member of the BattleAction block; first diff: bnez target at +0x4C. */
 INCLUDE_ASM(func_801EFC54);
 
 MATCH void func_801EFD28(void) {

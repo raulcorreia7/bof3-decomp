@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Builds the AREA030 Gouraud quad panel. */
+/* Builds the AREA030 Gouraud quad panel: two 16-pixel-wide columns
+ * whose right column repeats the left column's edge, then appends the 0x24-byte
+ * primitive with the caller's semi-transparency mode. */
 MATCH void func_801D1744(s16 panel_x, s16 panel_y, u8 column_shade) {
     POLY_G4* primitive;
 

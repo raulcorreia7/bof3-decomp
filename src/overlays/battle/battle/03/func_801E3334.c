@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* clears local work flag 0x40, selects enemy mode 0. */
+/* clears local work flag 0x40, selects enemy mode 0, then resets the
+ * local work timers and counters and enters substate 1.
+ */
 MATCH void func_801E3334(void) {
     PartyMember* work;
 

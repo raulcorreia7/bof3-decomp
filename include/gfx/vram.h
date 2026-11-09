@@ -22,7 +22,8 @@
 /* CLUT (0, 494) the area sprite draws share (@source: wiki:formats/assets). */
 #define WORLD_SPRITE_CLUT         0x7B80
 
-/* How many palette cells a sprite owns (work byte 0x28). */
+/* How many palette cells a sprite owns (work byte 0x28): one 16-color cell, a whole 256-color row, or runs of 2, 4
+ * and 8 cells. Area_BuildClut builds its CLUT word from it and GFX_AllocPaletteCell finds a free run of that size. */
 typedef enum PaletteKind {
     PALETTE_KIND_CELL    = 0,
     PALETTE_KIND_ROW     = 1,

@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-/* Panel handler table selected by the shared panel task's state byte, the two byte lookup tables and the draw helper owned by this overlay. */
+/* Panel handler table selected by the shared panel task's state byte, the two
+ * byte lookup tables and the draw helper owned by this overlay. */
 
 MATCH void func_801E9AF0(void) {
     g_MenuStartPanel8StateFuncs[g_MenuCurrentPanel->state]();

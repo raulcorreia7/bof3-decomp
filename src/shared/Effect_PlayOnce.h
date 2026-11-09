@@ -1,5 +1,9 @@
-/* Plays the effect the target selector chose and clears it. */
-/* Effect_PlayOnce (boss050, magic008, magic010, magic015, magic020, magic117, magic145, magic146), Effect_PlayOnce2 (magic117). */
+/* Plays the effect the target selector chose and clears it. One definition
+ * shared by images of several overlay groups; every change here must verify
+ * every member.
+ */
+/* Effect_PlayOnce (boss050, magic008, magic010, magic015, magic020, magic117, magic145, magic146),
+   Effect_PlayOnce2 (magic117) */
 /* The statements of Effect_PlayOnce; each member has no locals. */
 #define BATTLE_PLAY_ONCE()                                  \
     func_800A9820(g_Battle.target_selector);                \

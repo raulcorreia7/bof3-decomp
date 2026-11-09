@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* positions the active menu panel from its entry's script offsets and the cursor state. */
+/* positions the active menu panel from its entry's script offsets and
+ * the cursor state, then either reports the hit to the script handler or walks
+ * the panel one state down.
+ */
 MATCH void func_801E9FDC(void) {
     MenuPanelTask* panel;
     u8             index;

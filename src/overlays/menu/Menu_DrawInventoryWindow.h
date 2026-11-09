@@ -1,4 +1,5 @@
-/* The inventory panel of the camp, battle-camp, master and shop menus. */
+/* The inventory panel of the camp, battle-camp, master and shop menus: start/08, bate/00, shisu/00 and shop/00
+ * include it where the function sits, and each image header declares its g_MenuInventory* tables. */
 /* needs: type: D_80148656 is read signed here and unsigned by its other readers. */
 extern u8 D_80148656;
 

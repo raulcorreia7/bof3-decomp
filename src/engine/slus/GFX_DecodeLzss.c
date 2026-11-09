@@ -6,7 +6,11 @@
 #define LZSS_RING_START (LZSS_RING_SIZE - LZSS_MAX_MATCH)
 #define LZSS_RING_MASK  (LZSS_RING_SIZE - 1)
 
-/* decodes the LZSS stream after the packed record's first word (512-byte scratchpad ring starting at 494, 12-bit positions, 3-18 byte copies) into the shared image cursor. */
+/* decodes the LZSS stream after the packed record's first word
+ * (512-byte scratchpad ring starting at 494, 12-bit positions, 3-18 byte
+ * copies) into the shared image cursor, then uploads the result and advances
+ * the cursor past the aligned block.
+ */
 MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
     u8* src;
     u8* dst;

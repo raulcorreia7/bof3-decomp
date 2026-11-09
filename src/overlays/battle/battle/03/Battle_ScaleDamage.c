@@ -1,7 +1,9 @@
 #define GAME_SCRATCH_BASE_SCALAR
 #include "battle_03.h"
 
-/* Record views: the scale-index byte sits at record offset 0xA4 of the local work array (stride 0x140) and at record offset 0xB4 of the enemy work array (stride 0x118). */
+/* Record views: the scale-index byte sits at record offset 0xA4 of the local
+ * work array (stride 0x140) and at record offset 0xB4 of the enemy work array
+ * (stride 0x118). */
 
 /* func_801DCD50 */
 MATCH u32 Battle_ScaleDamage(u32 unused, u8 battler_index, s32 damage_value) {

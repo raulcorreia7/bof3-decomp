@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* lets the damage through, or blocks it and clears bit 0x10 of the target's flags, by the attacker's status 0x8 roll, the target's 0x4 roll and the D_801EC324 percent roll. */
+/* lets the damage through, or blocks it and clears bit 0x10 of the target's flags,
+ * by the attacker's status 0x8 roll, the target's 0x4 roll and the D_801EC324 percent roll.
+ */
 /* func_801DC894 */
 MATCH u32 Battle_RollHitOnEnemy(s16 damage, u8 attacker, u8 target) {
     u8 threshold;

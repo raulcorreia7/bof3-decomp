@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* fills the libsnd function table the sequence player dispatches through. */
+/* fills the libsnd function table the sequence player dispatches through */
 MATCH void SND_InstallSequenceFuncs(void) {
     SsFCALL.noteon                 = _SsNoteOn;
     SsFCALL.programchange          = _SsSetProgramChange;

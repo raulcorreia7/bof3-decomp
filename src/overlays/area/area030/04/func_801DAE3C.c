@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* When flag `g_AreaCameraMoving` is clear, arms the spin state. */
+/* When flag `g_AreaCameraMoving` is clear, arms the spin state: writes 0x40
+ * to halfword `g_AreaCameraStep` and 0x3C0000 to word `g_AreaScrollTargetY`, then increments
+ * byte 0x03 of the scratchpad work object. */
 MATCH void func_801DAE3C(void) {
     if (g_AreaCameraMoving == 0) {
         g_AreaCameraStep    = 0x40;

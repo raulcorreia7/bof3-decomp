@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-/* The 0x7E-byte six-row panel table and the seven-byte attribute tail copied out of the fixed tables at the top of this unit. */
+/* The 0x7E-byte six-row panel table and the seven-byte attribute tail copied
+ * out of the fixed tables at the top of this unit. */
 typedef struct MenuPanelRows {
     u8 rows[6][0x15];
 } MenuPanelRows;

@@ -1,11 +1,19 @@
 #ifndef BASE_TYPES_H
 #define BASE_TYPES_H
 
-/* The fixed-width types and compile-time layout checks. */
+/* The fixed-width types and compile-time layout checks shared by every game
+ * header. A record asserts its size and each known member offset where it is
+ * declared, so a wrong layout fails the build. */
 
 #include <stddef.h>
 
-/* C89-compatible compile-time assertions. */
+/*
+ * C89-compatible compile-time assertions. The assertion's identifier comes
+ * from what it asserts - the type, plus the member for ASSERT_OFFSET - never
+ * from __LINE__, so two headers can be included together whatever line their
+ * assertions sit on. A name is asserted once per translation unit, and `type`
+ * must be one identifier (a typedef name), because it is pasted into it.
+ */
 #define DECOMP_JOIN_IMPL(a, b)           a##b
 #define DECOMP_JOIN(a, b)                DECOMP_JOIN_IMPL(a, b)
 
@@ -19,7 +27,8 @@
 #define ASSERT_OFFSET(type, member, expected_offset) \
     STATIC_ASSERT(DECOMP_JOIN(type, DECOMP_JOIN(_offset_, member)), DECOMP_OFFSETOF(type, member) == (expected_offset))
 
-/* PsyQ has no boolean type; the game returns flags as an int. */
+/* PsyQ has no boolean type; the game returns flags as an int. C23 and C++ define bool,
+ * true and false themselves, so this is only for older C. */
 #if !defined(__cplusplus) && (!defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L)
 enum {
     false,

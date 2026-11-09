@@ -1,7 +1,8 @@
 #ifndef OVERLAY_ETC_SHISU_00_H
 #define OVERLAY_ETC_SHISU_00_H
 
-/* The etc/shisu/00 overlay's local declarations. */
+/* The etc/shisu/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "menu/party.h"
 #include "shared/etc.h"
@@ -37,7 +38,8 @@ extern char          g_SaveCardPortLabelSecond[];
 #define MENU_STATUS_TASK2_STATE_COUNT 3
 #define MENU_STATUS_TASK3_STATE_COUNT 3
 
-/* The overlay's step and sub-step handler pools. */
+/* The overlay's step and sub-step handler pools; the tables are views into one
+ * callback run, selected by the shared menu step byte. */
 /* D_801D96DC */
 extern Callback g_MenuStatusStates[MENU_STATUS_STEP_COUNT];
 /* D_801D96F0 */

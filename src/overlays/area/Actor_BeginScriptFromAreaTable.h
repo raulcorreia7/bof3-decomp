@@ -1,4 +1,7 @@
-/* Reads the script table row for the loaded area at the script row and cursor, starts that step's actor script at the saved program counter and stores the row argument. */
+/* Reads the script table row for the loaded area at the script row and
+ * cursor, starts that step's actor script at the saved program counter
+ * and stores the row argument.
+ */
 /* func_801F4100, func_801F2E5C */
 MATCH void Actor_BeginScriptFromAreaTable(void) {
     u8* bank;

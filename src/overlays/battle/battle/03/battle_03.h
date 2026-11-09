@@ -1,7 +1,9 @@
 #ifndef OVERLAY_BATTLE_BATTLE_03_H
 #define OVERLAY_BATTLE_BATTLE_03_H
 
-/* The battle/battle/03 overlay's local declarations. */
+/* The battle/battle/03 overlay's local declarations: the command, step and damage
+ * dispatch tables, its actor views and the prototypes its units share. The
+ * common records are in battle/records.h; only this image includes this file. */
 
 #include "overlays/battle/battle.h"
 #include <stdio.h>
@@ -9,12 +11,16 @@
 #include "menu/draw.h"
 #include <strings.h>
 
-/* retail addresses. */
+/* retail addresses */
 
-/* Battle state machine: the battle mode byte 0x801462E0 selects one of the six handler words at 0x801D0C04, the step byte 0x801462E1 selects one of the mode's step words. */
+/* Battle state machine: the battle mode byte 0x801462E0 selects one of the six
+ * handler words at 0x801D0C04, the step byte 0x801462E1 selects one
+ * of the mode's step words, and the sub-step byte 0x801462E2 one of the four
+ * entrance words at 0x801D0C1C. */
 /* The per-frame passes func_801D1014 runs, in its order. */
 /* The damage chain. */
-/* The queued battle panel slots. */
+/* The queued battle panel slots, and the size a drawn panel gets: its row
+ * width g_Battle.panel_widths plus this margin, or this margin alone for an empty row. */
 #define BATTLE_PANEL_SLOT_COUNT     5
 #define BATTLE_PANEL_SIZE           0x10
 /* Current enemy-work pointer cell (fixed RAM, not scratchpad). */
@@ -26,7 +32,8 @@
 #define BATTLE_ENEMY_WORD_100(work) MEM(volatile u32, (u32)(work) + 0x100u)
 /* Panel-task root pointer cell at 0x801485C8 (u8* volatile). */
 #define BATTLE_PANEL_ROOT_BASE      D_80150000
-/* Base-pointer accessors for fixed RAM regions (preserve lui+offset codegen). */
+/* Base-pointer accessors for fixed RAM regions (preserve lui+offset codegen).
+ */
 /* FAKE: retail reads D_80140000 as volatile u16[]. */
 #define BATTLE_GLOBAL_RAM_U16       ((volatile u16*)D_80140000)
 /* Additional fixed-base tables and dispatch helpers. */
@@ -38,21 +45,29 @@
 #define BATTLE_ENTRANCE_STEP        (((u8*)&D_80140000)[0x62E2])
 #define g_Task                      ((PartyMember*)g_Task)
 
-/* The fixed panel-task argument table preserves the caller's whole argument block for the selected entry. */
+/* The fixed panel-task argument table preserves the caller's whole argument
+ * block for the selected entry; no lifted caller names those seven words yet,
+ * so they keep the panel-task spelling and the selector pointer it also
+ * receives. No generic entry carries this contract. */
 typedef void (*BattlePanelForwardFunc)(s32 panel_arg0, s32 panel_arg1, s32 panel_arg2, s32 panel_arg3, s32 panel_arg4,
                                        s32 panel_arg5, s32 panel_arg6, u8* selector);
 
-/* The panel task's kind byte (+0x02) selects one of these eight update routines. */
+/* The panel task's kind byte (+0x02) selects one of these eight update
+ * routines; func_801E9074 copies the table and dispatches. */
 typedef struct {
     Callback handlers[8];
 } BattlePanelFuncs;
 
-/* The queued slot's kind (+0x05) selects one of these eight handlers in slot mode 3 (`g_BattleEffectStages` row 3). */
+/* The queued slot's kind (+0x05) selects one of these eight handlers in slot
+ * mode 3 (`g_BattleEffectStages` row 3); func_801E5C1C copies the
+ * table and dispatches. */
 typedef struct {
     Callback handlers[8];
 } BattleEffectStage3Funcs;
 
-/* The queued slot's kind (+0x05) selects one of these 110 handlers in slot mode 1 (`g_BattleEffectStages` row 1). */
+/* The queued slot's kind (+0x05) selects one of these 110 handlers in slot
+ * mode 1 (`g_BattleEffectStages` row 1); func_801E5B8C copies the
+ * table and dispatches. */
 typedef struct {
     Callback handlers[110];
 } BattleEffectStage1Funcs;
@@ -88,17 +103,20 @@ typedef struct BattleSpritePrimitive {
     s16 unk_0E;
 } BattleSpritePrimitive;
 
-/* The battle sub-step byte 0x801462E2 selects one of these four entrance handlers, copied to the stack from 0x801D0C1C. */
+/* The battle sub-step byte 0x801462E2 selects one of these four entrance
+ * handlers, copied to the stack from 0x801D0C1C. */
 typedef struct {
     Callback handlers[4];
 } BattleEntrances;
 
-/* The queued slot's mode (+0x06, stored by Battle_AllocEffect) selects one of these four stage handlers, copied to the stack from 0x801D0CC0. */
+/* The queued slot's mode (+0x06, stored by Battle_AllocEffect) selects one
+ * of these four stage handlers, copied to the stack from 0x801D0CC0. */
 typedef struct {
     Callback handlers[4];
 } BattleEffectStages;
 
-/* The 0x20-byte stat block from max_hp on (Character +0x1C, local-work row +0x90), copied with unaligned word pairs. */
+/* The 0x20-byte stat block from max_hp on (Character +0x1C, local-work
+ * row +0x90), copied with unaligned word pairs. */
 typedef struct BattleStatBlock {
     u8 bytes[0x20];
 } BattleStatBlock;
@@ -108,7 +126,8 @@ typedef struct DropChances {
     u8 chance[8];
 } DropChances;
 
-/* The battle panel's own 0x24-stride entry table at 0x80148332. */
+/* The battle panel's own 0x24-stride entry table at 0x80148332: the base
+ * symbol is the table's first byte, so its fields start at +0. */
 typedef struct BattlePanel {
     u8  mode_00;    /* +0x00 panel mode; Battle_OpenPanels writes 5 and 7 */
     u8  unk_01;     /* +0x01 */
@@ -125,7 +144,8 @@ ASSERT_OFFSET(BattlePanel, x_02, 0x02);
 ASSERT_OFFSET(BattlePanel, y_04, 0x04);
 ASSERT_OFFSET(BattlePanel, battler_08, 0x08);
 
-/* The battle mode byte 0x801462E0 selects one of these six handlers, copied to the stack from 0x801D0C04. */
+/* The battle mode byte 0x801462E0 selects one of these six handlers, copied to
+ * the stack from 0x801D0C04. */
 typedef struct {
     Callback handlers[6];
 } BattlePhases;
@@ -154,7 +174,9 @@ typedef struct BattleRank {
     u16 index;
 } BattleRank;
 
-/* The queued slot's kind (+0x05) selects one of these 19 handlers in slot mode 0 (`g_BattleEffectStages` row 0). */
+/* The queued slot's kind (+0x05) selects one of these 19 handlers in slot mode
+ * 0 (`g_BattleEffectStages` row 0); func_801E5AF4 copies the table
+ * and dispatches. */
 typedef struct {
     Callback handlers[19];
 } BattleEffectStage0Funcs;
@@ -164,7 +186,8 @@ typedef struct {
     Callback handlers[5];
 } BattleSavedPreviewFuncs;
 
-/* The panel task forwarder func_801EA1E0 calls the routine its selector names with the caller's seven words. */
+/* The panel task forwarder func_801EA1E0 calls the routine its selector names
+ * with the caller's seven words. */
 typedef struct {
     BattlePanelForwardFunc handlers[3];
 } BattlePanelTaskForwarders;
@@ -182,7 +205,9 @@ extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
-/* One-field views of the same rows. */
+/* One-field views of the same rows: the local rows (stride 0x140) and the
+ * enemy rows (stride 0x118), each anchored at the field the retail symbol
+ * names. */
 extern u8              D_80145FB1;
 extern u8              D_80145FB2[];
 /* FAKE: func_801D4B38 and func_801D64C4 only match with the flags cell as its own volatile word row. */
@@ -208,7 +233,8 @@ extern s16             D_801463DA;
 extern volatile u8     D_80146855;
 extern volatile u8     D_80146856;
 extern BattlePanel     D_80148332[];
-/* UI state byte of the 0x8014837A bundle the entrance sequence writes. */
+/* UI state byte of the 0x8014837A bundle the entrance sequence writes; the
+ * battle/battle/15 and etc/shop/00 targets declare their own. */
 extern s32             D_80149298;
 extern void            D_801492B8;
 extern u8* volatile D_80150000[];
@@ -339,7 +365,8 @@ extern BattlePanel0States        D_801D0FA0;
 extern BattlePanel1States        D_801D0FAC;
 extern BattlePanel2States        D_801D0FB8;
 extern BattlePanel3States        D_801D0FC4;
-/* The panel's four state handlers; func_801E960C copies them to the stack before the indexed call. */
+/* The panel's four state handlers; func_801E960C copies them to the stack
+ * before the indexed call. */
 extern Callback                  D_801D0FD0[4];
 extern BattlePanel5States        D_801D0FE0;
 /* D_801D0FEC */
@@ -406,7 +433,7 @@ extern volatile u16 D_801EB09C[][10]; /* Event-script rows (10 halfwords each) i
 /* D_801EB108 */
 extern u8           s_BattlePanelYOffsets[];
 extern s32          D_801EB08F;
-/* g_BattlePanelOffsets + 1: func_801D3624 only, the sum changes its bytes. */
+/* g_BattlePanelOffsets + 1: func_801D3624 only, the sum changes its bytes */
 extern s8           D_801EB0B1[];
 extern u8           D_801EB109[];
 extern Callback     D_801EB120[];
@@ -435,7 +462,8 @@ extern Callback         D_801EB27C[];
 extern Callback         D_801EB294[];
 extern Callback         D_801EB298[];
 extern u8               D_801EB35C[];
-/* Party formation weights: one byte per slot in the formation, two slots per formation in the first table and three in the second (func_801E2E30). */
+/* Party formation weights: one byte per slot in the formation, two slots per
+ * formation in the first table and three in the second (func_801E2E30). */
 /* D_801EB394 */
 extern u8               s_BattlePartialPartyTargetWeights[3][2];
 /* D_801EB39C */
@@ -457,7 +485,8 @@ extern Callback         D_801EB46C[];
 extern Callback         D_801EB478[];
 /* D_801EB494 */
 extern u8               s_BattleBattlerStepIds[];
-/* Effect-type tables: the offset the effect starts at, and the cue byte per type and step (func_801E679C). */
+/* Effect-type tables: the offset the effect starts at, and the cue byte per
+ * type and step (func_801E679C). */
 extern u8               D_801EB4A4[];
 extern u8               D_801EB4B0[];
 extern s32              D_801EB4BF;
@@ -833,11 +862,11 @@ void         func_801E2948(s8 enemy_index);
 u8           Battle_PickEnemyTarget(u8 enemy_index);
 /* func_801E2CA4 */
 u8           Battle_PickLowestHpTarget(void);
-/* bytes, caller passes a byte index, no sign extension. */
+/* bytes, caller passes a byte index, no sign extension */
 u8           func_801E2D4C(u8 slot_offset);
 u8           func_801E2D90(u8 slot_offset);
 u8           func_801E2E30(void);
-/* bytes, caller passes a byte index, no sign extension. */
+/* bytes, caller passes a byte index, no sign extension */
 u8           func_801E30B8(u8 slot_offset);
 void         func_801E31C8(void);
 extern void  func_801E320C(void);
@@ -995,7 +1024,8 @@ extern volatile u8 D_801F0000[];
 /* The effect entry points this overlay calls by their fixed address. */
 void               func_801EEEC8(void);
 
-/* Drain 0x2000 from the battle work counter; at zero set flags bit 6 and advance the spad step. */
+/* Drain 0x2000 from the battle work counter; at zero set flags bit 6 and
+ * advance the spad step. */
 static inline void BattleDrainWorkCounter(void) {
     PartyMember* work;
 

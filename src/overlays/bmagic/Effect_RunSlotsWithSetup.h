@@ -1,4 +1,6 @@
-/* Runs the effect step the task mode selects (the setup step. */
+/* Runs the effect step the task mode selects (the setup step, then the image's start handler), then
+ * runs every effect slot in use with g_BattleEffectBattler set to the battler of that slot. One
+ * definition shared by the bmagic overlays; every change here must verify every member. */
 /* func_801EEC04 (magic083), func_801EEC04 (magic087), func_801EEC04 (magic093), func_801EEC04 (magic158),
    func_801EEC04 (magic213) */
 MATCH void func_801EEC04(void) {

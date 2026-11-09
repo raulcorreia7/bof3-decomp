@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* @tests a specific bit in the bitmask array at D_80144F60. */
+/* @tests a specific bit in the bitmask array at D_80144F60.
+ * Uses bit_index & 0xFFFF for index calculation.
+ */
 /* func_800AD044 */
 MATCH u32 Battle_IsEnemyDefeated(u32 bit_index) {
     u32 byte_offset;

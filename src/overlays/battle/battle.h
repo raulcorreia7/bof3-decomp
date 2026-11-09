@@ -1,7 +1,8 @@
 #ifndef BATTLE_FAMILY_H
 #define BATTLE_FAMILY_H
 
-/* an image header that reads one includes this file. */
+/* Declarations shared by two or more battle images; an image header that
+ * reads one includes this file. */
 
 #include "game.h"
 #include "sys/cd.h"
@@ -36,14 +37,17 @@
  * the candidate table at 0x801463DC before a wild encounter. Evidence:
  * @source: wiki:data/battle#where-the-records-are. */
 
-/* A battle-effect module's head: the two battle modules BATL_END and BATL_OVR carry the id alone. */
+/* A battle-effect module's head: the two battle modules BATL_END and BATL_OVR
+ * carry the id alone. */
 typedef struct BattleModule {
     EMIModuleId id; /* 0x00; 0x142 BATL_END, 0x143 BATL_OVR */
 } BattleModule;
 
 ASSERT_SIZE(BattleModule, 4);
 
-/* Camera scroll step per direction. */
+/* Camera scroll step per direction: func_8009B488, func_8009B700, func_8009B794
+ * and func_800A8678 add one entry to the x/y phase scroll words, indexed by
+ * g_Battle.scroll_dir. */
 typedef struct BattleScrollDelta {
     s8 x;
     s8 y;
@@ -55,7 +59,9 @@ extern BattleScrollDelta            D_800B44C0[4];
 /* D_800B6510 */
 extern u8                           g_BattleActionSelection[232];
 extern u8*                          D_800B6AB0[];
-/* One-field views of the same rows. */
+/* One-field views of the same rows: the local rows (stride 0x140) and the
+ * enemy rows (stride 0x118), each anchored at the field the retail symbol
+ * names. */
 extern u8                           D_801454F5[];
 extern u8                           D_801454F6[];
 extern u8                           D_80145FA8[];

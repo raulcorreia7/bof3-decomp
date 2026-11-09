@@ -1,6 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* prepares the frontend: clears the game state, reloads the palette stage, publishes the area bank pointers, streams FIRST.EMI and registers the GAME.EMI starter. */
+/* prepares the frontend: clears the game state, reloads the palette stage,
+ * publishes the area bank pointers, streams FIRST.EMI and registers the
+ * GAME.EMI starter. It resets the graphics and sound pipeline for the overlay
+ * start, clearing the work buffer.
+ */
 MATCH void SYS_StartFrontend(void) {
     u16*       dst;
     const u16* src;

@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* Route movement step table in main-exe data: one 8-byte record per route {x step, y step}. */
+/* Route movement step table in main-exe data: one 8-byte record per route
+ * {x step, y step}. */
 
 MATCH s32 func_801A1BC0(Actor* record) {
     Actor* work;

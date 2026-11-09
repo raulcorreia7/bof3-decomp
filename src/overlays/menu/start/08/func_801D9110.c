@@ -26,7 +26,7 @@ MATCH void func_801D9110(void) {
     g_BattleChoicePhase = 2;
     panel->active       = 1;
     panel += 3;
-    /* the slide x and the skill-order cells keep their own symbols: retail schedules each store separately. */
+    /* the slide x and the skill-order cells keep their own symbols: retail schedules each store separately */
     D_80148574     = 0x140;
     D_80148576     = 0x3E;
     panel->mode    = MENU_START_MODE_CURSOR_FRAME;

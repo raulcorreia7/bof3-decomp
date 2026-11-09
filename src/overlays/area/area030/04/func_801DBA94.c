@@ -2,7 +2,8 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Scrolls the AREA030 prompt rows down with the timer and advances the panel step once the timer expires. */
+/* Scrolls the AREA030 prompt rows down with the timer and advances
+ * the panel step once the timer expires. */
 MATCH void func_801DBA94(void) {
     FishingState* work;
     FishingState* state;

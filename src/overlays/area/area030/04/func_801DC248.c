@@ -1,13 +1,16 @@
 #include "area030_04.h"
 
-/* Panel page fields of the scratchpad record. */
+/* Panel page fields of the scratchpad work record. */
 #define FISHING_PAGE_STEP     (FISHING_STATE->step_timer_09)
 #define FISHING_PAGE_CATEGORY (FISHING_STATE->saved_index_0B)
 #define FISHING_PAGE_FLAG     (FISHING_STATE->cue_index_06)
 #define FISHING_SLOT_HANDLER  (FISHING_STATE->mode_index_02)
 #define FISHING_PAGE_HANDLER  (FISHING_STATE->sub_index_03)
 
-/* Advances the AREA030 selection page. */
+/* Advances the AREA030 selection page: slides the page counter,
+ * draws the page/selection rows for the current category entry, and on the
+ * fourth step resets the counter, registers the chosen entry with the page
+ * flags, and queues the 0x203 cue before the world step passes. */
 MATCH void func_801DC248(void) {
     s32 offset;
     u8* counter;

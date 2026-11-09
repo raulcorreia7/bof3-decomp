@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: the first draft rebuilt on the typed records; the loader gate, the blocked-slot walk and
+/* nonmatching unmeasured: the first draft rebuilt on the typed work records; the loader gate, the blocked-slot walk and
  * the panel row writes follow retail. resume: the branch and register diffs in the state block. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E7BA0(void) {

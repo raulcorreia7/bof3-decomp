@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* renders the formatted capture count as a row of digit sprites, advancing eight pixels per glyph and skipping blanks. */
+/* renders the formatted capture count as a row of digit sprites,
+ * advancing eight pixels per glyph and skipping blanks.
+ */
 /* func_801D9684 */
 MATCH void Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value) {
     u8    i;

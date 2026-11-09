@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* steps the pending dispatch timer, else arms the next mode. */
+/* steps the pending dispatch timer, else arms the next mode.
+ */
 
 MATCH void SND_XaStateSeekResult(void) {
     if (D_8014682E < 0) {

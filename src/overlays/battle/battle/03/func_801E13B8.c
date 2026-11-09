@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* when local-work flag 0x2000 is clear, drops the 0x70 and 0x200 status bits, clears the active battler's pending bit. */
+/* when local-work flag 0x2000 is clear, drops the 0x70 and 0x200
+ * status bits, clears the active battler's pending bit, and restarts the local
+ * presentation at substate 2.
+ */
 MATCH void func_801E13B8(void) {
     PartyMember*          work;
     volatile PartyMember* cell;

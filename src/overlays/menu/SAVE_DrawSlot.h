@@ -1,4 +1,7 @@
-/* Draws one save slot row: the window, the row icon and up to three party icons, the name, the level, the play time and the experience line. */
+/* Draws one save slot row: the window, the row icon and up to three party icons, the name, the level, the
+ * play time and the experience line; a NULL row draws only the window. One definition shared by the shop and
+ * start overlays: each image defines its own g_SaveSlotLevelFormat, g_SaveSlotTimeFormat, g_SaveSlotTimeColon
+ * and g_SaveSlotFrameSprites. Every change here must verify every member. */
 MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row) {
     s16 x;
     s16 y;

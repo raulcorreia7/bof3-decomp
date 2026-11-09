@@ -1,4 +1,7 @@
-/* Runs the step of the current sparkle D_801F17B4. */
+/* Runs the step of the current sparkle D_801F17B4; a sparkle still in use
+ * after its first step draws its disc, and its rays on three frames in four.
+ * One definition shared by the bmagic overlays; every change here must verify
+ * every member. */
 /* func_801EF380 (magic070), func_801EF380 (magic071), func_801EF380 (magic072) */
 MATCH void func_801EF380(void) {
     SparkleEffectSteps handlers;

@@ -1,6 +1,9 @@
 #include "area030_04.h"
 
-/* Draws the three shop panel columns selected by the low three bits of mask at screen columns x + 0x00/0x30/0x60 and row y + 4. */
+/* Draws the three shop panel columns selected by the low three bits
+ * of mask at screen columns x + 0x00/0x30/0x60 and row y + 4: each
+ * column is drawn by func_801D7D68 and its icon strip painted through
+ * func_8014F800. */
 /* nonmatching 73.03%: retail keeps y in s4 and narrows it directly in a1; this source uses
  * a separate saved temporary and stores the slot byte before the call instead of in its delay slot.
  * resume: align the live ranges and defer the slot store. */

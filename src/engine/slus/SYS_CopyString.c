@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* copies at most (limit & 0xFF) bytes from src to dst, stopping at a NUL byte. */
+/* copies at most (limit & 0xFF) bytes from src to dst, stopping at a
+ * NUL byte, and NUL-terminates the destination.
+ */
 MATCH void SYS_CopyString(u8* dst, u8* src, s32 limit) {
     u32 count;
     u32 index;

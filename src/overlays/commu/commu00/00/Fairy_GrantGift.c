@@ -1,6 +1,7 @@
 #include "commu00_00.h"
 
-/* 4-byte gift-shop row: the battle count, the item index and the item type; the handlers take the type first. */
+/* 4-byte gift-shop row: the battle count, the item index and the item type;
+ * the handlers take the type first. */
 
 MATCH void Fairy_GrantGift(void) {
     FairyGift buf[20];

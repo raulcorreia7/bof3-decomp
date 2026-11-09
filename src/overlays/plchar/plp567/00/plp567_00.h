@@ -1,7 +1,8 @@
 #ifndef OVERLAY_PLCHAR_PLP567_00_H
 #define OVERLAY_PLCHAR_PLP567_00_H
 
-/* The plchar/plp567/00 overlay's local declarations. */
+/* The plchar/plp567/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "overlays/plchar/plchar.h"
 #include "area/spad.h"

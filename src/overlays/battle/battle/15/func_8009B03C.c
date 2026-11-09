@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* First byte of g_BattleChoicePanel (0x80148570). */
+/* First byte of g_BattleChoicePanel (0x80148570); the scalar symbol form
+ * emits the direct %lo store the original uses. */
 
 /* FAKE: The original keeps &D_801485B8 in $v1 and reaches 0x80148594 as
  * `sb $a0,-36($v1)`; every clean-C spelling (base pointer, derived `latch`

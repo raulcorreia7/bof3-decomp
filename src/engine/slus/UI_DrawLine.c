@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* draws one flat-coloured line into the current primitive. */
+/* draws one flat-coloured line into the current primitive: sets the
+ * rgb byte, writes both corner points, then appends the 0x10-byte primitive to
+ * ordering table 1.
+ */
 /* func_8015A2B0 */
 MATCH void UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray) {
     LINE_F2* primitive;

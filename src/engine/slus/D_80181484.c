@@ -1,6 +1,9 @@
 #include "slus.h"
 
-/* two flag bytes per scene id (SCENE_FLAG_COUNT ids). */
+/*
+ * two flag bytes per scene id (SCENE_FLAG_COUNT ids); func_8014DD3C copies the pair selected by
+ * the matched scene id into the scratchpad work record.
+ */
 
 const SceneFlagPair D_80181484[SCENE_FLAG_COUNT] = {
     {1, 1}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 3}, {0, 0}, {0, 0}, {1, 1}, {0, 1}, {0, 0}, {0, 0},

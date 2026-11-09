@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* Per-frame movement accumulators of the record. */
+/* Per-frame movement accumulators of the work record; the shared layout still
+ * carries 0x0C-0x20 as padding, so the span gets a local typed view. */
 typedef struct {
     u8  pad_00[0x0C];
     s32 unk_0C;

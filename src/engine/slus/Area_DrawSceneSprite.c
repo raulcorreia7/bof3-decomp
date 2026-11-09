@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* Draws one sprite of a scene record as an FT4 primitive. */
+/* Draws one sprite of a scene record as an FT4 primitive: projects the record origin, skips it when it falls outside
+ * the screen margin, picks an animation frame from g_FrameCount modulo the frame count and sizes the quad from the
+ * frame's byte offsets, scaled by the projected depth.
+ */
 MATCH void Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     POLY_FT4* prim;
     u8*       frame;

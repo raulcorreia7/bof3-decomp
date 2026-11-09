@@ -1,4 +1,8 @@
-/* Copies the character id of every party member into D_80144908 and a local list. */
+/* Copies the character id of every party member into D_80144908 and a local
+ * list, then removes each listed member except adult Ryu from the party and
+ * runs Party_LoadPalettes. Scene_RebuildRyuGarrParty reads D_80144908 afterwards.
+ * One definition shared by the images that include it;
+ * every change here must verify every member. */
 /* func_801FE234 (scena09), func_801FE6F4 (scena10) */
 MATCH void Scene_StashPartyExceptRyuAdult(void) {
     u8 ids[3];

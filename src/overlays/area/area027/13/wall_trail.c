@@ -582,7 +582,8 @@ MATCH void func_801F36D0(void) {
     g_ScriptVars[0] = value;
 }
 
-/* Original sets no mode argument (etc/game/00 revision ignores it); declared arg-less to match. */
+/* Original sets no mode argument (etc/game/00 revision ignores it); declared
+ * arg-less to match. Table is the etc/game/00 ActorSlot table. */
 
 MATCH void func_801F3710(void) {
     s32        actor_slot;

@@ -7,12 +7,18 @@
 #include "slus/exports.h"
 #include "types.h"
 
-/* The menu system: a screen is a set of panel task records animated into place, with a choice list (group, page and cursor) driving the menu screens. */
+/* The menu system: a screen is a set of panel task records animated into place,
+ * with a choice list (group, page and cursor) driving the menu screens. The
+ * shop and start-menu overlays share the choice-panel view and the animation
+ * macros below; the party, inventory and save headers own the data those
+ * screens read. */
 
-/* retail addresses. */
+/* retail addresses */
 #define MENU_PANEL_COUNT       22
 
-/* Shared panel-animation quantities. */
+/* Shared panel-animation quantities. Steps and clamps are human quantities, so
+ * they are decimal (handbook: addresses/masks/encodings hex, pixel steps/clamps
+ * decimal). */
 #define MENU_PANEL_STEP_X      32
 #define MENU_PANEL_STEP_Y      16
 #define MENU_PANEL_FLOOR_X     (-170)
@@ -22,7 +28,16 @@
 #define MENU_CHOICE_PANEL_SIZE 0x14
 #define MENU_PANEL_TASK_SIZE   0x24
 
-/* One panel animation body: the panel moves along the member in fixed pixel steps toward a bound and stops there, clearing its state. */
+/* One panel animation body: the panel moves along the member in fixed pixel
+ * steps toward a bound and stops there, clearing its state. An advance tests
+ * above the limit after the overshooting step; a retreat tests below the bound,
+ * so the two directions are two bodies. Kept as macros: as inlines 38 of 67
+ * members diverge (the limit moves to $a0 and a label is added).
+ *
+ * Usage:
+ *   MATCH void func_800B2218(void) { MENU_ADVANCE_PANEL(pos.x, MENU_PANEL_STEP_X, 320); }
+ *   MATCH void func_801E3CB8(void) { MENU_RETREAT_PANEL(pos.x, MENU_PANEL_STEP_X, MENU_PANEL_FLOOR_X); }
+ */
 #define MENU_ADVANCE_PANEL(member, step, limit) \
     do {                                        \
         MenuPanelTask* panel;                   \
@@ -52,7 +67,18 @@
         }                                       \
     } while (0)
 
-/* The choice-list view of a panel slot. */
+/* The choice-list view of a panel slot. The shop panel (slot 7 of
+ * g_MenuPanelTasks, 0x8014842C) and the start-menu panel (slot 13,
+ * 0x80148504) walk the same group tables with this record, so the field names
+ * and the layout are one record and the overlays include this view instead of
+ * redeclaring it.
+ *
+ * Writers and readers: `emi/etc/shop/00@0x801D2828` and `@0x801D334C` build the shop
+ * panel (group 0, the group's first entry, the cursor, the drawn cursor 0xFF);
+ * `emi/etc/start/08@0x801D3D00` reads the same four fields of the start panel
+ * through D_801C893C and D_801C8950 and clears the drawn cursor with 0xFF.
+ * The x and y are the panel's screen position: the draw calls take x + 7 and
+ * y + 7, and the panel animation slides x (MENU_ADVANCE_PANEL). */
 typedef struct MenuChoicePanel {
     u8       active; /* 0x00: set while the panel is armed */
     u8       pad_01[0x03];
@@ -76,7 +102,9 @@ ASSERT_OFFSET(MenuChoicePanel, group_cursor, 0x0C);
 ASSERT_OFFSET(MenuChoicePanel, drawn_cursor, 0x0D);
 ASSERT_OFFSET(MenuChoicePanel, confirm_gate, 0x12);
 
-/* What a list panel lists: the shop's item list reads a price discount (and dims the whole list when it is set), the ability lists read whose abilities and which kind (Party_GetAbilities' arguments). */
+/* What a list panel lists: the shop's item list reads a price discount (and
+ * dims the whole list when it is set), the ability lists read whose abilities
+ * and which kind (Party_GetAbilities' arguments). */
 typedef union MenuListSource {
     struct {
         u8 dimmed;        /* non-zero draws every row greyed out */
@@ -96,7 +124,8 @@ ASSERT_SIZE(MenuListSource, 2);
 #define MENU_SHADE_SELECTED                 2
 #define MENU_SHADE_DIM                      7
 
-/* The frame sprites of a panel border. */
+/* The frame sprites of a panel border: the top edge and its corners, the side edges, and the flat bottom edge
+ * that closes the short panels. */
 #define MENU_FRAME_SPRITE_TOP_LEFT          0x28
 #define MENU_FRAME_SPRITE_TOP               0x29
 #define MENU_FRAME_SPRITE_TOP_RIGHT         0x2A
@@ -106,13 +135,17 @@ ASSERT_SIZE(MenuListSource, 2);
 #define MENU_FRAME_SPRITE_FLAT_BOTTOM       0x3B
 #define MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT 0x3C
 
-/* MenuListPanel.flags: two cursor-tab bits. */
+/* MenuListPanel.flags: two cursor-tab bits, and a frame countdown in the high
+ * nibble that the drawer steps down once per draw. */
 #define MENU_LIST_FLAG_TAB_1                0x01
 #define MENU_LIST_FLAG_TAB_2                0x02
 #define MENU_LIST_FRAME_MASK                0xF0
 #define MENU_LIST_FRAME_STEP                0x10
 
-/* The list panel record, handed to the panel drawers as a pointer. */
+/* The list panel record, handed to the panel drawers as a pointer: the
+ * shop's ability and item lists (Shop_DrawAbilities, Shop_DrawItems) and the
+ * ability list of the bate overlay read the same cells. The record's extent
+ * is unknown; 0x24, the names pointer, is the last known cell. */
 typedef struct MenuListPanel {
     u8             pad_00[4];
     UPoint2D       pos;         /* 0x04 */
@@ -175,13 +208,17 @@ typedef struct MenuPanelAddr {
     u16 unk_1E;
 } MenuPanelAddr;
 
-/* One of the 22 panel task records: the panel's position, state, layer and item-table base. */
+/* One of the 22 panel task records: the panel's position, state, layer and
+ * item-table base. The battle overlays read the first 0x0C bytes through
+ * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
     u8       active;  /* set to open the panel, cleared to close it */
     u8       handler; /* Menu_UpdatePanelTasks calls g_MenuPanels.handlers[handler] */
     u8       mode; /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
     u8       state;
-    /* x and y are screen positions. */
+    /* x and y are screen positions. Most readers load them with lhu; the slide
+     * code compares them as s16 and stores signed constants through LOH, so the
+     * field stays u16 and each slide keeps its s16 view. */
     UPoint2D pos;
     u8       unk_08;
     u8       unk_09;
@@ -192,7 +229,8 @@ typedef struct MenuPanelTask {
     u8       unk_0E;
     u8       layer; /* panel layer, tested against the dispatch mode */
 
-    /* The cells 0x10..0x1F mean different things to each panel mode. */
+    /* The cells 0x10..0x1F mean different things to each panel mode; each user
+     * reads the view that names what the mode keeps there. */
     union {
         MenuPanelGrow    grow;    /* the window-grow animation (slus) */
         MenuPanelMessage message; /* the header bar that shows a message */
@@ -211,7 +249,11 @@ ASSERT_OFFSET(MenuPanelTask, u, 0x10);
 ASSERT_OFFSET(MenuPanelTask, item_table, 0x20);
 ASSERT_SIZE(MenuPanelTask, MENU_PANEL_TASK_SIZE);
 
-/* The shop's choice panel is slot 7 of g_MenuPanelTasks (0x8014842C), built by `emi/etc/shop/00@0x801D2828` and `@0x801D334C`. */
+/* The shop's choice panel is slot 7 of g_MenuPanelTasks (0x8014842C), built by
+ * `emi/etc/shop/00@0x801D2828` and `@0x801D334C`. Its retail symbol is
+ * declared in sys/gameui.h, because the same address holds a different byte
+ * in the battle overlays (equal addresses in different targets are
+ * unrelated); the shop overlay casts it to this record. */
 
 /* D_80148330 */
 extern MenuPanelTask  g_MenuPanelTasks[MENU_PANEL_COUNT];
@@ -222,7 +264,8 @@ extern MenuPanelTask* g_MenuCurrentPanel;
 extern s8             D_8014865C;
 extern u8             D_80148699;
 
-/* Draw the panel's icon through the PsyQ 8x8 sprite primitive. */
+/* Draw the panel's icon through the PsyQ 8x8 sprite primitive. The panel writes
+ * the sprite fields itself at the primitive cursor; SetSprt8 only tags it. */
 static inline void MenuDrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
     SPRT_8* icon;
 

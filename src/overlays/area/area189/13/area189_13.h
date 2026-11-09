@@ -1,14 +1,15 @@
 #ifndef OVERLAY_WORLD04_AREA189_13_H
 #define OVERLAY_WORLD04_AREA189_13_H
 
-/* The world04/area189/13 overlay: one file per split function and its data. */
+/* The world04/area189/13 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 
 /* The scratchpad work row the entry paths read. */
 
-/* The character record, viewed as bytes here. */
+/* The character work record, viewed as bytes here. */
 
 /* The area-flag bit store and the global flag byte. */
 

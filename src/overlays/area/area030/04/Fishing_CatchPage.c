@@ -1,6 +1,10 @@
 #include "area030_04.h"
 
-/* Draws the catch page for pond slot g_FishingHookedFish (fish id and length) and, on a 0x50 pad press, resolves the catch. */
+/* Draws the catch page for pond slot g_FishingHookedFish (fish id and
+ * length) and, on a 0x50 pad press, resolves the catch: fish 0x16 sets
+ * message 1, a failed inventory add of item fish + 0x38 sets message 2,
+ * and a successful add jumps the state (unk_03) to 0xD; then queues cue
+ * 0x102 and advances the state. */
 /* func_801DBBAC */
 MATCH void Fishing_CatchPage(void) {
     u16 fish;
@@ -16,7 +20,8 @@ MATCH void Fishing_CatchPage(void) {
     if (g_InputPressed & (PADRup | PADRdown)) {
         g_FishingNewRecord            = 0;
         FISHING_STATE->saved_index_0B = 0;
-        /* pond record +6 (fish id), read through the table base. */
+        /* pond record +6 (fish id), read through the table base: the
+         * D_8014688E spelling lets gcc hold its address across the calls */
         /* FAKE: retail reads g_Actors as u8[]. */
         fish                          = ((u8*)g_Actors)[g_FishingHookedFish * 0x98 + 6];
         if ((u8)fish == 0x16) {

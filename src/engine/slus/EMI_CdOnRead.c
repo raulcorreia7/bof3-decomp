@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* selects the CD-read completion mode from the latched sync status and clears the retry flag on failure. */
+/* selects the CD-read completion mode from the latched sync status
+ * and clears the retry flag on failure.
+ */
 MATCH void EMI_CdOnRead(void) {
     u8 mode;
 

@@ -1,6 +1,7 @@
 #include "shop_00.h"
 
-/* Globals the shop target's include chain does not reach. */
+/* Globals the shop target's include chain does not reach; the etc/game/00 overlay
+ * owns them (src/engine/game/00/game_00.h). */
 
 MATCH void func_801D0EDC(void) {
     s32        index;
@@ -23,7 +24,7 @@ MATCH void func_801D0EDC(void) {
     }
     count = 0;
 
-    /* retail walks the records from the status halfword: +0x8 is current_hp, +0x10 is max_hp. */
+    /* retail walks the records from the status halfword: +0x8 is current_hp, +0x10 is max_hp */
     row = &g_Characters[0];
     do {
         need = row->stats.max_hp >> 2;

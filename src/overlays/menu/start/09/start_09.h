@@ -1,7 +1,9 @@
 #ifndef OVERLAY_ETC_START_09_H
 #define OVERLAY_ETC_START_09_H
 
-/* The etc/start/09 save overlay's local declarations. */
+/* The etc/start/09 save overlay's local declarations: the save directory, the card
+ * name and prefix tables, the TIM image records and the save frame. Only this
+ * image includes the file. */
 
 #include "shared/etc.h"
 #include <string.h>
@@ -187,7 +189,9 @@ extern char            D_801EEC14[];
 extern s32             D_801EEC1C;
 extern s32             D_801EEC24;
 extern char            D_801EEC2C[];
-/* The asset span asset_save_icons holds three TimIcon records at 0x801EFE54, 0x801EFF14 and 0x801EFFD4. */
+/* The asset span asset_save_icons holds three TimIcon records at 0x801EFE54, 0x801EFF14 and
+ * 0x801EFFD4. SAVE_BuildFileHeader copies icon 0's CLUT colors and each icon's pixels into the
+ * memory-card save frame; nothing reads the TIM headers or uploads them to VRAM. */
 extern u8              D_801EFE68[]; /* icon 0 clut.data */
 extern u8              D_801EFE94[]; /* icon 0 image.data */
 extern u8              D_801EFF54[]; /* icon 1 image.data */

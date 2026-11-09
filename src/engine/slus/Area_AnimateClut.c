@@ -1,8 +1,11 @@
 #include "engine/slus/slus.h"
 
-/* Destination palette bank (AREA_PALETTE_WORK, the g_GraphicsPaletteDst of include/gfx/prim.h). */
+/* Destination palette bank (AREA_PALETTE_WORK, the g_GraphicsPaletteDst of include/gfx/prim.h). The constant keeps the
+ * lui+ori codegen the original binary uses for the bank. */
 
-/* searches the palette records for the id g_FrameCount modulo the header word gives, copies the record's 0x20 bytes into the palette bank and raises the palette stage serial. */
+/* searches the palette records for the id g_FrameCount modulo the header word gives, copies the record's 0x20
+ * bytes into the palette bank and raises the palette stage serial; a record id above the wanted id ends the search.
+ */
 MATCH void Area_AnimateClut(u8* palette_list) {
     s32* dst;
     s32* src;

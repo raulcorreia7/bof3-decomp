@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_MAGIC113_03_H
 #define OVERLAY_BMAGIC_MAGIC113_03_H
 
-/* The bmagic/magic113/03 overlay. */
+/* The bmagic/magic113/03 overlay. Only this image includes the file. */
 
 /* 0x1F800000 scratchpad */
 #define GAME_SCRATCH_BASE_WORD

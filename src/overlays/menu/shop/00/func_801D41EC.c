@@ -1,6 +1,8 @@
 #include "shop_00.h"
 
-/* File-local declarations: shared fill-style byte, shop selection byte, the 4-entry result table and helpers owned by this target or the executable overlay. */
+/* File-local declarations: shared fill-style byte, shop selection byte, the
+ * 4-entry result table and helpers owned by this target or the executable
+ * overlay. */
 
 MATCH void func_801D41EC(void) {
     s16 i;

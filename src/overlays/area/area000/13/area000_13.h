@@ -1,7 +1,9 @@
 #ifndef OVERLAY_WORLD00_AREA000_13_H
 #define OVERLAY_WORLD00_AREA000_13_H
 
-/* The area000 world overlay's local declarations. */
+/* The area000 world overlay's local declarations: the loader-verified payload
+ * id and the four functions in address order. Only this image includes the
+ * file. */
 
 #include "overlays/area/world00.h"
 

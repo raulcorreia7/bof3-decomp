@@ -1,4 +1,6 @@
-/* Reset the message request, then set the scene event step the menu selection picks. */
+/* Reset the message request, then set the scene event step the menu selection
+ * picks. One source for the world area overlays. Every change here must verify
+ * every member address. */
 static inline void World_SelectEventStep(void) {
     MESSAGE_REQUEST_CLEAR();
     if (g_MessageChoice == 0) {

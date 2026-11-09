@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* The retail caller loads the fifth argument with lh. */
+/* The retail caller loads the fifth argument with lh, so the declaration keeps
+ * s16 although the definition names it u16; the low halfword is identical. */
 
 MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
     switch (table[state->index_0A]) {

@@ -1,7 +1,8 @@
 #ifndef OVERLAY_ETC_BATE_00_H
 #define OVERLAY_ETC_BATE_00_H
 
-/* The etc/bate/00 overlay's local declarations. */
+/* The etc/bate/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "menu/party.h"
 #include "shared/etc.h"
@@ -58,7 +59,8 @@ extern u8            g_SaveCardPortLabelSecond[];
 #define MENU_BATE_STEP3_COUNT      3
 #define MENU_BATE_STEP3_SUB0_COUNT 2
 
-/* The overlay's step and sub-step handler pools. */
+/* The overlay's step and sub-step handler pools; the tables are views into one
+ * callback run, selected by the shared menu step bytes. */
 /* D_801D86E0 */
 extern Callback g_MenuBateStates[MENU_BATE_STEP_COUNT];
 extern s8       D_801D86F0;

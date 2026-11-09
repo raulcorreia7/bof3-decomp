@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* dispatches a cue's bank and record, updates interpolated channel values, and keys the requested SPU voices. */
+/* dispatches a cue's bank and record, updates interpolated channel
+ * values, and keys the requested SPU voices.
+ */
 MATCH void SND_PlayCue(u16 cue_id) {
     s32 scaled;
     s32 next;
@@ -22,7 +24,7 @@ MATCH void SND_PlayCue(u16 cue_id) {
                     next += 0x7F;
                 }
                 D_8018B3A0 = next >> 7;
-                /* fall through. */
+                /* fall through */
             case 2:
                 scaled = D_8018B374 * (0x80 - D_8018B37C);
                 if (scaled < 0) {
@@ -34,7 +36,7 @@ MATCH void SND_PlayCue(u16 cue_id) {
                     next += 0x7F;
                 }
                 D_8018B378 = next >> 7;
-                /* fall through. */
+                /* fall through */
             case 1:
                 scaled = D_8018B34C * (0x80 - D_8018B354);
                 if (scaled < 0) {
@@ -46,7 +48,7 @@ MATCH void SND_PlayCue(u16 cue_id) {
                     next += 0x7F;
                 }
                 D_8018B350 = next >> 7;
-                /* fall through. */
+                /* fall through */
             case 0:
                 scaled = D_8018B324 * (0x80 - D_8018B32C);
                 if (scaled < 0) {

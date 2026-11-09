@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* starts the transfer of slot. */
+/* starts the transfer of slot: loads its start sector and, from its TOC entry, size, load argument,
+ * first word and type into the active loader state; returns 0 when the slot is past the entry count or a
+ * stream flag skips a type below 6.
+ */
 MATCH s32 EMI_NextEntry(u8 slot) {
     volatile EMITocEntry* toc_entry;
     s32                   result;

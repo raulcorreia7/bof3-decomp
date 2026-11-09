@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 counter panel. */
+/* Draws the AREA030 counter panel: formats the current sub-state
+ * count into the shared UI character buffer and queues both text rows. */
 MATCH void func_801D7B64(void) {
     FishingState* record;
     u8*           buffer;

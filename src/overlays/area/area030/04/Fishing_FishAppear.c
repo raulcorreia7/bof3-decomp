@@ -1,8 +1,10 @@
 #include "area030_04.h"
 
-/* Each access reloads the record and the row, as retail does. */
+/* Each access reloads the work record and the row, as retail does. */
 
-/* Picks the area's spawn row, randomises the facing and position of the scratchpad record from its table byte and the play clock. */
+/* Picks the area's spawn row, randomises the facing and position of
+ *           the scratchpad work record from its table byte and the play clock,
+ *           then bumps the work step counter. */
 /* nonmatching unmeasured: tried the bounce count in a local (68.75); the negated scale in a local (66.21); the unsigned
  * facing comparison with a count local (74.31); the area-table entry taken as a pointer instead of a 0x24-byte rvalue
  * (74.31, byte-identical, so the rvalue was never the frame's cause). The candidate's frame is 0x28 where the retail's

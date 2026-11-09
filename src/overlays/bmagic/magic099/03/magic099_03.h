@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_MAGIC099_03_H
 #define OVERLAY_BMAGIC_MAGIC099_03_H
 
-/* The bmagic/magic099/03 overlay. */
+/* The bmagic/magic099/03 overlay. Only this image includes the file. */
 
 /* The scratchpad base here is the 32-bit depth word. */
 #define GAME_SCRATCH_BASE_WORD
@@ -17,7 +17,8 @@ extern s32 D_1F800004;
 #define BOLT_FLICKER_MASK 0x3F
 #define BOLT_FLICKER_BASE 0x80
 
-/* The bolt point D_1F800014, also read as halfwords. */
+/* The bolt point D_1F800014, also read as halfwords, and the scratch words of the bolt: the segment length, the
+ * swing angle, the flicker and the segment count. */
 extern SVECTOR             D_1F800014[];
 extern s16                 D_1F800014_HALF[];
 extern s16                 D_1F800016;
@@ -29,11 +30,13 @@ extern Callback            D_801F09A0[4];
 extern Callback            D_801F09B0[4];
 extern Callback            D_801F09C0[4];
 
-/* Advance the effect timer: one step of the counter, reloading the work cell on every store. */
+/* Advance the effect timer: one step of the counter, reloading the work cell on
+ * every store. */
 static inline void BattleEffectTimerStep(void) {
     PartyMember* work;
 
-    /* A store through the pointer may alias the cell, so each step reloads it. */
+    /* A store through the pointer may alias the cell, so each step reloads
+     * it. */
     g_Task->param.unk_0B++;
     work = g_Task;
     if (work->timer < 16) {
@@ -45,7 +48,9 @@ static inline void BattleEffectTimerStep(void) {
     }
 }
 
-/* Orbit projection step: advance the orbit counter, store the angle and its depth in the scratchpad pair. */
+/* Orbit projection step: advance the orbit counter, store the angle and its
+ * depth in the scratchpad pair, then add the cos/sin velocities to the
+ * projected position. */
 static inline void MagicOrbitProjectionStep(s32 depth) {
     PartyMember* work;
     s32          counter;

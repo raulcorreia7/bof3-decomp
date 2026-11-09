@@ -1,7 +1,8 @@
 #ifndef OVERLAY_SCENARIO_SCE15EF0_00_H
 #define OVERLAY_SCENARIO_SCE15EF0_00_H
 
-/* The scenario/sce15ef0/00 overlay's local declarations. */
+/* The scenario/sce15ef0/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "common/vector.h"
 #include "sys/gameui.h"
@@ -9,7 +10,8 @@
 
 #define g_Task ((Sce15ef0Work*)g_Task)
 
-/* The overlay's scratchpad work area. */
+/* The overlay's scratchpad work area: the scenario effect layout (fields at
+ * +0x01, +0x09, +0x0C, +0x2E, +0x34 and +0x5D match scena00's SceneEffect). */
 typedef struct Sce15ef0Work {
     TaskHeader header;
     u8         pad_03[0x06];

@@ -1,4 +1,9 @@
-/* One route step for a field character. */
+/* One route step for a field character: turn the facing when the route index
+ * is even, probe the step ahead, then play the walk or the blocked animation
+ * and bump the task state. Char_ProbeFacingCell is the image-local probe; the
+ * route table and the animation player are the resident executable's. One
+ * definition shared by the plchar character overlays; every change here must
+ * verify every member image. */
 /* func_801CE898 (plp478), func_801CEC78 (plp578), func_801CEE74 (plp278), func_801CEE74 (plp27a), func_801CEE94
    (plp457), func_801CF090 (plp247), func_801CF470 (plp257), func_801CF724 (plp678), func_801CF940 (plp467),
    func_801CFD20 (plp567), func_801CFF1C (plp267) */

@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* refreshes the stage palette to VRAM when the stage serial is set, then clears the serial. */
+/* refreshes the stage palette to VRAM when the stage serial is set,
+ * then clears the serial.
+ */
 MATCH void GFX_UploadPalette(void) {
     RECT rect;
 

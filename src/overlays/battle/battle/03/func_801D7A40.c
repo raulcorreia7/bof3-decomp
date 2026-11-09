@@ -1,8 +1,12 @@
 #include "battle_03.h"
 
-/* The battle panel rows. */
+/* The battle panel rows. Each row has an (x, y) offset pair in D_801EAE94 and a
+ * row width in g_Battle.panel_widths; rows 0-4 are the queued battle panels and rows 5-6
+ * the two entrance origins. g_Battle.panel_slot names the selected panel slot. */
 
-/* draws the queued battle panel rows and the two entrance origins around (x, y), each quad sized by the width of its own row. */
+/* draws the queued battle panel rows and the two entrance origins around (x, y), each quad sized by the
+ * width of its own row.
+ */
 MATCH void func_801D7A40(s16 x, s16 y) {
     u8  panel_index;
     u8  row_width;
@@ -13,7 +17,8 @@ MATCH void func_801D7A40(s16 x, s16 y) {
     for (panel_index = 0; panel_index < BATTLE_PANEL_SLOT_COUNT; panel_index++) {
         if (panel_index != g_Battle.panel_slot) {
             shade = 0x80;
-            /* Rows 2 and 3 use shade 0x40 instead of 0x80 while the battle message slot's word at +0x128 has 0x2 set. */
+            /* Rows 2 and 3 use shade 0x40 instead of 0x80 while the battle
+             * message slot's word at +0x128 has 0x2 set. */
             if ((panel_index == 2 || panel_index == 3) && (FIELD(s32, g_BattleMessageSlot, 0x128u) & 2)) {
                 shade = 0x40;
             }
@@ -38,7 +43,9 @@ MATCH void func_801D7A40(s16 x, s16 y) {
                       (y + s_BattlePanelOffsets[g_Battle.panel_slot][1] - (row_width >> 1)),
                       (u8)(row_width + BATTLE_PANEL_SIZE), (row_width + BATTLE_PANEL_SIZE), shade);
     }
-    /* The entrance origins are the rows after the queued panels, with their offsets and widths in the same two tables. */
+    /* The entrance origins are the rows after the queued panels, with their
+     * offsets and widths in the same two tables; a battle quad's palette row
+     * follows the row index. */
     entrance_widths = g_Battle.panel_widths + BATTLE_PANEL_SLOT_COUNT;
     row_width       = entrance_widths[0];
     if (row_width != 0) {

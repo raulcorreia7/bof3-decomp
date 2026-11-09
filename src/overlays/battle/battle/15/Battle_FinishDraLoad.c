@@ -7,7 +7,8 @@ MATCH void Battle_FinishDraLoad(void) {
         GFX_CopyPalette(0x1B);
         g_BattleUIState = 0;
         g_GfxPalettePending++;
-        /* Plain view: a volatile access pins the increment and blocks the epilogue hoist the original image performs. */
+        /* Plain view: a volatile access pins the increment and blocks the
+         * epilogue hoist the original image performs. */
         *(u8*)&g_Battle.ui_step += 1;
     }
 }

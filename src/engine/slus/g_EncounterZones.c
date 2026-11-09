@@ -1,6 +1,9 @@
 #include "slus.h"
 
-/* per-index start of a record list in g_AreaEncounterZones (MAP_ZONE_LIST_COUNT entries), indexed in the emi/etc/game/00 consumers. */
+/*
+ * per-index start of a record list in g_AreaEncounterZones (MAP_ZONE_LIST_COUNT entries),
+ * indexed in the emi/etc/game/00 consumers.
+ */
 const EncounterZone* const g_EncounterZones[MAP_ZONE_LIST_COUNT] = {
     &g_AreaEncounterZones[0],   &g_AreaEncounterZones[8],   &g_AreaEncounterZones[12],  &g_AreaEncounterZones[13],
     &g_AreaEncounterZones[16],  &g_AreaEncounterZones[19],  &g_AreaEncounterZones[24],  &g_AreaEncounterZones[25],

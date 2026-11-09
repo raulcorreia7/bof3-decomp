@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* Stages the next two-byte step of the sprite animation stream. */
+/* Stages the next two-byte step of the sprite animation stream: the delay byte to +0x4A, the frame byte through the
+ * frame table at +0x54 to +0x5A, then the position (+0x58) moves on by 2.
+ */
 /* func_8014DB98 */
 MATCH void Actor_StageAnimStep(void) {
     u16    index;

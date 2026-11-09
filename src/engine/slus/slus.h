@@ -1,7 +1,10 @@
 #ifndef SLUS_004_22_H
 #define SLUS_004_22_H
 
-/* The main executable's local declarations. */
+/* The main executable's local declarations: the EMI loader, its CD and SPU
+ * state, the window state and the data symbols its units share. The shared
+ * subsystem headers own the cross-image names; only this executable includes
+ * this file. */
 
 #define GAME_SCRATCH_BASE_SCALAR
 #include "common/vector.h"
@@ -42,12 +45,16 @@
 #define MAP_ZONE_COUNT        666                  /* records in g_AreaEncounterZones */
 #define MAP_ZONE_LIST_COUNT   200                  /* lists in g_EncounterZones, one per map index */
 #define MAP_ZONE_SIZE         0x08
-/* The tone a cue reader looked up last. */
+/* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
+ * the VAB header at `vab_header` (a word of g_SndBankHeaders). */
 #define CUE_TONE(vab_header)  ((VagAtr*)(D_8018B40C + (vab_header)))
 #define g_SceneRecord         (*(RecordKey*)&g_SceneState)
 #define g_CurrentActor        ((u8*)g_CurrentActor)
 
-/* Store the row entry the menu selection picks and latch the delay it selects. */
+/* Store the row entry the menu selection picks and latch the delay it selects.
+ * Kept: as an inline the row literal folds into `addiu` where retail shifts
+ * first (instruction 4 differs in 4 of 4 members); the member also returns from
+ * inside. */
 #define SLUS_SELECT_ANSWER_MESSAGE(row, delay0, delay1)                               \
     do {                                                                              \
         u16 value;                                                                    \
@@ -66,7 +73,10 @@
         g_ScriptVars[0] = (u8)value;                                                  \
     } while (0)
 
-/* Force the word's top byte to the bundle tag and run its bundle-list entry. */
+/* Force the word's top byte to the bundle tag and run its bundle-list entry. A
+ * bare statement macro: the member declares `word`. The do/while form moves
+ * bytes. Kept: as an inline the bundle tag is an argument and the mask
+ * loads into $a1 instead of $v1 (2 of 2 members differ). */
 #define SLUS_RETAG_BUNDLE_AND_RUN(bundle_tag)                                                         \
     word    = (*record & 0x00FFFFFF) | (bundle_tag);                                                  \
     *record = word;                                                                                   \
@@ -83,7 +93,9 @@
         D_8018B318 = (cues)[D_8018B404 * 4 + 3]; \
         break;
 
-/* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). */
+/* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0 and fills one more slot per
+ * layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows
+ * lets another bank supply the tone and voice. Every change here must verify every member. */
 #define SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)                                                            \
     s32 cue;                                                                                                  \
     s16 program;                                                                                              \
@@ -190,7 +202,10 @@ ASSERT_OFFSET(MenuState, selection_index, 0x0B);
 ASSERT_OFFSET(MenuState, cue_counter, 0x0C);
 ASSERT_OFFSET(MenuState, cue_timer, 0x0E);
 
-/* Resumable stream-decoder context, which carried identical file-local copies. */
+/* Resumable stream-decoder context, shared by LZ77_DecodeBegin (the initialiser)
+ * and LZ77_DecodeStep (the decoder), which carried identical file-local copies.
+ * The spill offsets and the 0x40 extent are retail reads: the decoder stores
+ * s0-s7 with `sw s0..s7, 0x20..0x3C($t0)` on the context base. */
 typedef struct EMIDecodeContext {
     u8* dst;        /* 0x00 decompressed output cursor */
     u32 unk04;      /* 0x04 not referenced by the decoder */
@@ -215,7 +230,10 @@ typedef struct SpriteCell {
     u8 v;    /* 0x04 */
 } SpriteCell;
 
-/* The 0xC-byte panel sort rows at 0x80147CFC. */
+/* The 0xC-byte panel sort rows at 0x80147CFC: func_8015AD00 fills one row per
+ * quad, func_8014BC70 walks the list, and func_8014C47C swaps two rows. The
+ * list's second row starts at 0x80147D08 and the depth word at 0x80147D0C, so
+ * those addresses are interior views of the same rows. */
 typedef struct PanelSortItem {
     u8* primitive; /* 0x00 */
     u16 z;         /* 0x04 - largest projected z of the quad; `lh` reads */
@@ -232,7 +250,11 @@ typedef struct PanelSortDepth {
 
 ASSERT_SIZE(PanelSortDepth, 0xC);
 
-/* The SPU voice record the sound units index. */
+/* The SPU voice record the sound units index: _SsReadDeltaValue walks the byte
+ * stream through cursor at +0x04 and accumulates at +0x80, _SsVmSetSeqVol sets
+ * the rate byte at +0x12 and the volume/pan pair at +0x74/+0x76. Both models
+ * end at 0xAC; the fields they cover do not overlap, so one record keeps both
+ * spellings and the bytes between them stay unnamed. */
 typedef struct SoundSequence {
     u8  pad_00[4];    /* +0x00 */
     u8* cursor;       /* +0x04 byte stream cursor */
@@ -246,7 +268,12 @@ typedef struct SoundSequence {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundSequence;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the
+ * frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at
+ * g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at
+ * D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry
+ * tables on the stack, and g_MessageStepTable is the sixteen-entry handler table
+ * Message_DispatchTableStep copies. One type per table size, shared by every copier. */
 typedef struct {
     Callback handlers[8];
 } Table8;
@@ -305,7 +332,9 @@ typedef struct {
 
 ASSERT_SIZE(Rec_8017F5B4, 0x04);
 
-/* Row of the D_8017F960 panel table. */
+/* Row of the D_8017F960 panel table: tile column offset, tile row offset and
+ * the row step multiplied by the panel index; read through the interior symbols
+ * D_8017F962 and D_8017F964 by func_8015A098 and func_8015A1D8. */
 typedef struct {
     s16 col_offset;
     s16 row_offset;
@@ -314,7 +343,10 @@ typedef struct {
 
 ASSERT_SIZE(WindowTextRow, 0x06);
 
-/* A tile rectangle of a map and what the field code reads once the party stands in it. func_801A0490 and func_801B3C3C compare the four corners as unsigned bytes against (x, y). */
+/* A tile rectangle of a map and what the field code reads once the party stands in it.
+ * func_801A0490 and func_801B3C3C compare the four corners as unsigned bytes against (x, y);
+ * `rate` indexes the D_801CD1B8 pair table (Area_RollEncounterThreshold), `kind` is returned by func_801A0348, and
+ * func_801A0380 uses `seed` directly when `pick` is 0, else `seed` indexes the D_80181E40 picker. */
 typedef struct {
     u8 x0;
     u8 y0;
@@ -328,7 +360,9 @@ typedef struct {
 
 ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
-/* The bank records at g_EmiBanks seen from its second symbol, 0x80146780 (EMIBank + 4). */
+/* The bank records at g_EmiBanks seen from its second symbol, 0x80146780 (EMIBank + 4):
+ * EMI_LoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed
+ * EMIBank access moves their register allocation. */
 typedef struct EMIAudioLink {
     u32 word;
     u8  unk_04[8];
@@ -337,13 +371,15 @@ typedef struct EMIAudioLink {
     u8  unk_10[4];
 } EMIAudioLink;
 
-/* The selected record byte at 0x80146870/0x80146874. */
+/* The selected record byte at 0x80146870/0x80146874: the equality and order
+ * tests read it unsigned, the getter returns it sign-extended. */
 typedef union RecordKey {
     s8 sbyte; /* 0x00 */
     u8 ubyte; /* 0x00 */
 } RecordKey;
 
-/* The front-end step record behind g_MessageState. */
+/* The front-end step record behind g_MessageState: func_8015102C walks the timer,
+ * phase, cursor and flag fields; the other units read only its first byte. */
 typedef struct FrontendStep {
     u8  state_00;     /* 0x00 */
     u8  selection_01; /* 0x01 */
@@ -362,14 +398,16 @@ typedef struct FrontendStep {
 
 ASSERT_SIZE(FrontendStep, 0x2C);
 
-/* The six-byte panel row view that starts at row +2. */
+/* The six-byte panel row view that starts at row +2: its last halfword is the
+ * next row's +0. func_8015A1D8 indexes it by the selection byte. */
 typedef struct PanelRowWindow {
     s16 row_offset;
     s16 scale;
     u16 next_row_first;
 } PanelRowWindow;
 
-/* The loader cursor cell 0x80146844. */
+/* The loader cursor cell 0x80146844: the header scan walks it by byte, the
+ * transfer path indexes it by the 0x10-byte slot. */
 typedef union OverlaySlotCursor {
     u8*          bytes; /* 0x00 */
     EMITocEntry* slots; /* 0x00 */
@@ -400,7 +438,8 @@ extern u8               D_800E3800;
 /* The g_AreaCellPrims row bits of AreaCell.prim_id. */
 #define AREA_CELL_PRIM_MASK 0xFFF
 
-/* One cell of the 56 x 28 screen grid. */
+/* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
+ * Area_GetCell stores) and its row in g_AreaCellPrims (0 = none). */
 typedef struct AreaCell {
     u8  tile_x;
     u8  tile_y;
@@ -408,14 +447,17 @@ typedef struct AreaCell {
 } AreaCell;
 
 extern AreaCell                    g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
-/* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer (g_FrameBufferIndex). */
+/* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
+ * (g_FrameBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
+ * cells (0 = none); in its first, pad1 holds the pending upload request. */
 extern POLY_FT4                    g_AreaCellPrims[][2];
 extern u16                         g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 extern u16                         g_AreaCellPrimFreeIds[0x400];
 extern u8                          D_80142CC0[];
 extern u8                          D_80142CE0[];
 extern u32                         D_80143740[];
-/* SLUS-only state: overlays declare these addresses with their own views, so the registry does not emit them. */
+/* SLUS-only state: overlays declare these addresses with their own views, so
+ * the registry does not emit them. */
 extern CallbackSlot                D_80143B40[]; /* four slots, 0x80 bytes each */
 extern u8                          D_80143D75;
 extern u8                          D_80143D76;
@@ -442,7 +484,8 @@ extern u16                         D_80145A54[];
 extern u16                         D_80145AA6;
 extern u16                         D_80145AAE;
 /* Pad repeat decoder state words; shop also reads them (func_801D5D98). */
-/* Text cursor cells: the draw-text entry seeds them and the line printer computes with them. */
+/* Text cursor cells: the draw-text entry seeds them and the line printer
+ * computes with them. */
 extern u16                         D_80145ACA;
 extern u16                         D_80145ACC;
 extern s32                         D_80145DA0;
@@ -634,7 +677,9 @@ extern const Table8                D_80149A7C;
 extern const Table6                D_80149A9C;
 /* D_80149AB4 */
 extern const Table6                g_MessageChoiceModes;
-/* The 16-entry handler table (code addresses 0x80152370..0x801526C8, the step handlers that follow Message_DispatchTableStep). */
+/* The 16-entry handler table (code addresses 0x80152370..0x801526C8, the step
+ * handlers that follow Message_DispatchTableStep): the shared step byte's indices at and
+ * above 0x80 dispatch through it. */
 /* D_80149ACC */
 extern const HandlerTable          g_MessageStepTable;
 extern const struct CallbackTable3 D_80149B30;
@@ -685,7 +730,18 @@ extern u8                          D_80182175;
 extern u8                          D_80182176;
 extern u8                          D_80182177;
 extern s32                         D_801821D0;
-/* The readers resolve a tone through `g_SndBankHeaders[bank]`. */
+/* The readers resolve a tone through `g_SndBankHeaders[bank]`: one header pointer
+ * per bank, installed by `SND_SetBankLayout` (`0x80161808`). The reader indexes
+ * the header at `0x820 + 512*program + 32*tone` and copies the tone's volume,
+ * pan, pitch tune and min note into voice state.
+ *
+ * The shipped tables make the address more than that formula. The program
+ * offset table `0x801821E0` holds four halfwords `{0, 512, 1024, 0}`, and the
+ * readers index it with the record's program 0-7. Program 3 therefore reads 0,
+ * and programs 4-7 read the first tone-table halfwords (0, 32, 64, 96), so the
+ * slot is not `512 * program`. The quirk affects 1,248 entries, all bank 6
+ * programs 3-7 in the 200 `BIN/BENEMY` banks. It is shipped-engine behavior, not
+ * the record's meaning. */
 extern u16                         g_VabProgramOffsets[4];
 extern u16                         g_VabToneOffsets[80];
 extern u16                         D_80182288[4];
@@ -717,7 +773,11 @@ extern s16                         D_8018B30C;
 extern s16                         D_8018B310;
 extern s16                         D_8018B314;
 extern s16                         D_8018B318;
-/* The four front-end selection voice slots sit in one 0x28-byte-strided block (D_8018B308 + 0x28 * k, k = 0-3). */
+/* The four front-end selection voice slots sit in one 0x28-byte-strided block
+ * (D_8018B308 + 0x28 * k, k = 0-3); +0x14 of a slot holds the voice number its
+ * cue keys on, which is what the four symbols below name. The state word
+ * func_8015D71C fills packs only that number's low byte, so the packing reads
+ * take the halfword's low byte. */
 extern s16                         D_8018B31C;
 extern s16                         D_8018B320;
 extern s16                         D_8018B324;
@@ -783,7 +843,8 @@ extern u8 D_801C839D[];
 extern void (*D_801C83D8[])(u8*);
 extern u8*                   D_801C893C[];
 extern u8*                   D_801C8950[];
-/* The five row tables of choice resources. */
+/* The five row tables of choice resources. Each symbol is a byte scalar, so its
+ * rows are addressed with the group's byte stride. */
 extern u8                    D_801C8972;
 extern u8                    D_801C8FE8;
 extern u8                    D_801C90E8[];
@@ -796,7 +857,10 @@ extern BattleAbilityCategory D_801CA719[];
 extern u8                    D_801CA71A[];
 /* Ability elements and flags share a 16-bit mask in this image. */
 extern u16                   D_801CA71C;
-/* The scratchpad work cell. */
+/* The scratchpad work cell. Not volatile: 37 matched SLUS readers keep the
+ * pointer in a register across a block (func_8015AD00 at +0xBC), and a volatile
+ * cell adds a reload there. A unit that must reload it after a call assigns it
+ * to a local at the call boundary. */
 extern u8                    D_801EFEFC;
 extern u8                    D_801F016C;
 extern u8                    D_801F0488;

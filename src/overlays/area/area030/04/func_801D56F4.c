@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* When the gate pair is clear, dispatches the scratch record byte at +2 through the overlay's jump table. */
+/* When the gate pair is clear, dispatches the scratch record byte
+ * at +2 through the overlay's jump table; otherwise resets the work area. */
 MATCH void func_801D56F4(void) {
     FishingState* record;
 

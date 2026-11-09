@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* writes the 0x140-stride record flags selected by slot. */
+/* writes the 0x140-stride record flags selected by slot.
+ */
 MATCH void func_8015C214(s32 slot, u8 value) {
     u32 index;
 

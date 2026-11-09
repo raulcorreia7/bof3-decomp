@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* walks a message control stream (the switch is on the control byte) and draws the text it describes. */
+/* walks a message control stream (the switch is on the control byte) and draws the text it describes: control
+ * bytes 1, 3-9 select the glyph source (item, character or party tables) and advance the cursor; returns the stream
+ * position after the last byte it consumed.
+ */
 /* nonmatching 59.09%: opcode@+0x000c; lifted draft from the first draft, compiling C only (its jump table rodata is not
  * yet placed). resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING

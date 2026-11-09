@@ -2,7 +2,11 @@
 #include "area/spad.h"
 #include "area/map.h"
 
-/* Refreshes the status-panel rows and the field-camera scroll. */
+/* Refreshes the status-panel rows and the field-camera scroll: fills the row
+ * buffer from the party records, then on scene 0x85 copies the per-row scroll
+ * table and on scene 0x5C seeds a fixed scroll and its angle, priming
+ * g_AreaScrollTargetX/0C unless the camera flag g_SceneState.flags_01 bit 6 is set.
+ */
 MATCH void func_801DE944(void) {
     u8*  party;
     u8*  actor;

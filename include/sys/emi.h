@@ -36,7 +36,8 @@
 #define EMI_BGM_SLOT_VAB_BODY       2 /* 3 when the archive also carries a cue table at 2 */
 #define EMI_BGM_BANK                0
 
-/* A whole bank holds three VAB triples around a zero filler and the LZ77 container. */
+/* A whole bank holds three VAB triples around a zero filler and the LZ77 container;
+ * a one-section bank holds the first triple and one section. */
 #define EMI_BPLCHAR_SLOT_VAB_HEADER 0
 #define EMI_BPLCHAR_SLOT_CUES       1
 #define EMI_BPLCHAR_SLOT_VAB_BODY   2
@@ -77,7 +78,9 @@ typedef enum EMIEntryType {
  * its source's id. */
 typedef u32 EMIModuleId;
 
-/* States the loader keeps in the type cell besides the entry types. */
+/* States the loader keeps in the type cell besides the entry types. EMI_NextEntry sets
+ * EMI_LOADER_STATE_ARCHIVE_HEADER while it reads the archive's first sector; EMI_ReadToc
+ * handles it. */
 typedef enum EMILoaderState {
     EMI_LOADER_STATE_ARCHIVE_HEADER = 5,
 } EMILoaderState;

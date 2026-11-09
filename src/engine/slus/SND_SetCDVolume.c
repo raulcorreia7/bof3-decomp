@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* Latch the CD level and write the CD attenuator. */
+/* Latch the CD level and write the CD attenuator: stereo (g_SndMono == 0) routes the level to val0 and val2,
+ * mono sends half the level to all four.
+ */
 MATCH void SND_SetCDVolume(u8 volume) {
     /* FAKE: volatile pointee keeps one materialized level address. */
     volatile u8* level = &g_SndCDVolume;

@@ -1,6 +1,11 @@
 #include "logo.h"
 
-/* Retail .data 0x801D7DE0..0x801DAC24. */
+/* Retail .data 0x801D7DE0..0x801DAC24: the LOGO.EXE scheduler and the
+ * CD-I / MDEC state the logo video decoder walks. Objects are in address
+ * order; interior D_ views are pinned to their address by the linker. The
+ * ascending LBA table at the top is held as bytes because a word-sized
+ * initializer would put entries on the GTE placeholder pattern and the
+ * GTE-macro pass of the build would rewrite them. */
 
 /* 0x801D7DE0 */
 u8 D_801D7DE0[3536] = {

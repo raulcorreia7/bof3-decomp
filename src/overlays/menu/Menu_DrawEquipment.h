@@ -1,4 +1,9 @@
-/* Draws a party member's weapon, shield, helmet, armor and two accessories in the equipment slots. each member includes it where the function sits. */
+/* Draws a party member's weapon, shield, helmet, armor and two accessories in
+ * the equipment slots. One definition shared by the equipment panel copies in
+ * emi/etc/shop/00, emi/etc/start/08, emi/etc/bate/00 and emi/etc/shisu/00; each
+ * member includes it where the function sits. Every change here must verify
+ * every member.
+ */
 /* func_801D3B4C (bate), func_801D4AF4 (shisu), func_801D95F4 (shop), func_801DCAEC (start) */
 MATCH void Menu_DrawEquipment(s32 origin_x, s32 origin_y, s32 index, s32 selection) {
     Character* record;

@@ -1,6 +1,10 @@
 #include "area030_04.h"
 
-/* Reacts to the confirm/cancel pad bits for the AREA030 prompt. */
+/* Reacts to the confirm/cancel pad bits for the AREA030 prompt: the
+ * confirm path clears the pending flag, queues cue 0x200, raises both sprite
+ * bytes, retires the panel and steps the work state to 2 with the probe height
+ * reset; the cancel path clears the sub-state. Both paths then run the shared
+ * per-frame tail. */
 /* func_801DA638 */
 MATCH void Fishing_CastInput(void) {
     FishingState* work;

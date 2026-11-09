@@ -1,4 +1,6 @@
-/* Scrolls the actor screen origin up by 0x20 and cues 0x201 when it reaches zero. */
+/* Scrolls the actor screen origin up by 0x20 and cues 0x201 when it reaches
+ * zero. One definition shared by the world04 area overlays; every change here
+ * must verify every member. */
 /* func_801F3064 */
 MATCH void Actor_SlideScreenUp(void) {
     Actor* work;

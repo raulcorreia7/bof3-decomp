@@ -2,7 +2,8 @@
 
 extern u8 D_80148656; /* local: u8 read; a sibling copy is s8 */
 
-/* Draws the ten-row ability list panel. */
+/* Draws the ten-row ability list panel: each row's ability with its level, the title label, the two tab strips and the
+ * window frame. */
 /* func_801E0354 */
 MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
     u8* text;

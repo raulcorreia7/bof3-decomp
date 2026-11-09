@@ -3,7 +3,8 @@
 
 #include "types.h"
 
-/* The play clock and the two countdown timers. */
+/* The play clock and the two countdown timers: hours, minutes, seconds and thirtieths of a second, one byte each.
+ * The play clock stops at 99:59:59; the timers count down through the same fields. */
 
 #define GAME_CLOCK_THIRTIETHS_PER_SECOND         30
 #define GAME_CLOCK_SECONDS_PER_MINUTE            60
@@ -31,7 +32,8 @@ ASSERT_OFFSET(GameClock, thirtieths, 0x03);
 
 /* D_80144FC0 */
 extern GameClock g_PlayClock;
-/* The countdown timers of the celerity and bonebreak abilities. */
+/* The countdown timers of the celerity and bonebreak abilities. Both lie in the saved block, at save offsets
+ * SAVE_CELERITY_TIMER and SAVE_BONEBREAK_TIMER. */
 /* D_80145554 */
 extern GameClock g_GameCelerityTimer;
 /* D_80145558 */

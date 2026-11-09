@@ -356,7 +356,8 @@ MATCH void func_801F3414(void) {
 MATCH void func_801F341C(void) {
 }
 
-/* Original sets no mode argument (etc/game/00 revision ignores it); declared arg-less to match. */
+/* Original sets no mode argument (etc/game/00 revision ignores it); declared
+ * arg-less to match. Table is the etc/game/00 ActorSlot table. */
 
 MATCH void func_801F3424(void) {
     s32        actor_slot;

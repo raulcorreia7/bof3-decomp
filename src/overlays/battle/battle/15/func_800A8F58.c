@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* Rolls the battler's hurt reaction. */
+/* Rolls the battler's hurt reaction: when the command state is a hit state, gives each live battler a 1-in-12
+ * chance per frame to raise its 0x100 reaction flag. */
 /* nonmatching unmeasured: tried opcode@+0x8: the hit-state gate and the 1-in-12 roll chain differ; the slot loops and
  * flag stores are in place (first-draft pointer-counter code was uncompilable). resume: rebuild the
  * g_Battle.target_selector mask gate and the rand()/12 roll from the asm. */

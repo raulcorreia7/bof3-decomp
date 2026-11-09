@@ -1,6 +1,9 @@
 #include "area030_04.h"
 
-/* Translates the frame's pad state into the panel mode. */
+/* Translates the frame's pad state into the panel mode: the 0x10
+ *           case advances the step counter, 0x80/0x4 select the next panel
+ *           step, and 0x40 either arms or clears the fishing prompt depending
+ *           on the lure/rod and the area query. */
 /* func_801D9E40 */
 MATCH void Fishing_ChooseAction(void) {
     switch (g_InputPressed & (PADRup | PADRdown | PADRleft | PADL1)) {

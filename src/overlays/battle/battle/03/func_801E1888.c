@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* counts the work area's step byte down. */
+/* counts the work area's step byte down; at expiry it requests the queued battle message, adds the
+ * follow-up when the message flag allows it and advances the step byte.
+ */
 MATCH void func_801E1888(void) {
     PartyMember* work;
     u8           count;

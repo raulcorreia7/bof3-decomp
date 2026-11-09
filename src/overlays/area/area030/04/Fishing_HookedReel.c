@@ -1,11 +1,15 @@
 #include "area030_04.h"
 
-/* The world state word and the pad word share the PsyQ button bits. */
+/* The world state word and the pad word share the PsyQ button bits:
+ * PADLleft|PADLdown is 0xC000, PADLup|PADLright is 0x3000 and PADRdown is
+ * 0x40. */
 
 /* D_80146889 and D_801468A4 are two views of the 0x98-byte world-state row
  * table at 0x80146888, so both are stepped with the row size. */
 
-/* Updates the world panel's selection state from the pad and the world state word. */
+/* Updates the world panel's selection state from the pad and the
+ * world state word: it latches the new mode, steps the row timer, refreshes
+ * the slot timer word and counts the state changes. */
 /* func_801DB140 */
 MATCH void Fishing_HookedReel(void) {
     FishingState* work;

@@ -1,7 +1,8 @@
 #ifndef OVERLAY_WORLD04_AREA173_14_H
 #define OVERLAY_WORLD04_AREA173_14_H
 
-/* The world04/area173/14 overlay: one file per split function and its data. */
+/* The world04/area173/14 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
 #include "area/spad.h"
@@ -11,7 +12,7 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0xC0
 
-/* The current record and its second halfword table. */
+/* The current work record and its second halfword table. */
 
 /* The scratchpad cell holding this mode's work pointer. */
 

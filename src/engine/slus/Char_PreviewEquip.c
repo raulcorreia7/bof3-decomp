@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* Previews equipping item_id in a slot. */
+/* Previews equipping item_id in a slot: copies the party record, sets the slot,
+ * rebuilds the stats on the copy and returns the four stat values with a flag
+ * each (EquipPreviewChange).
+ */
 /* func_80164D2C */
 MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values) {
     Character  preview;

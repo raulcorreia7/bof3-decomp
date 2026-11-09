@@ -1,5 +1,8 @@
-/* Raises the effect timer (work byte 0x09) by one up to 0x2E, counts the effect counter (0x0A) down. */
-/* Effect_CountDownTimerCapped (magic056, magic103). */
+/* Raises the effect timer (work byte 0x09) by one up to 0x2E, counts the effect
+ * counter (0x0A) down, and finishes the effect at zero like Effect_CountDownTimer.
+ * One definition shared by the bmagic effect modules; every change here must
+ * verify every member. */
+/* Effect_CountDownTimerCapped (magic056, magic103) */
 MATCH void Effect_CountDownTimerCapped(void) {
     PartyMember* first;
     PartyMember* work;

@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* The retail code never reads $a0-$a2. */
+/* The retail code never reads $a0-$a2; the slus caller's arguments are leftover register values kept in its prototype.
+*/
 MATCH void func_801C24D0(void) {
     func_801C2538();
     if ((g_Task->unk_05 == 0) &&

@@ -1,6 +1,11 @@
 #include "engine/slus/slus.h"
 
-/* draws a text string's glyph bytes through the shared sprite cursor at (x, y). */
+/* draws a text string's glyph bytes through the shared sprite cursor
+ * at (x, y): 0x01 starts a new line 9 lower at the first x, 0xFF skips one
+ * glyph, 0x15 maps the next byte into the 32-column sheet and other bytes the
+ * 31-column sheet; glyphs are 8 wide. The fourth argument budgets the bytes
+ * drawn; returns the byte after the terminator.
+ */
 MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* text) {
     u8* str;
     s16 left;

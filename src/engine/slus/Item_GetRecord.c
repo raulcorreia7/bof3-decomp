@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* resolves one item record from its category and item. */
+/* resolves one item record from its category and item: the category
+ * selects the item, weapon, armor, accessory or vital-item table, the item the
+ * record inside it. Item and out-of-range categories read the item table.
+ */
 MATCH u8* Item_GetRecord(s32 category, s32 item) {
     switch (category & BYTE_MASK) {
         case ITEM_CAT_ITEM:

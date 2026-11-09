@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* claims a packet slot for the map cell at the packed (x, y) position. */
+/* claims a packet slot for the map cell at the packed (x, y) position: an in-range slot under the
+ * buffer's packet limit takes a 0x30-byte record whose tag address becomes the cursor.
+ */
 MATCH void Area_AddCellPrim(s32 x, s32 y, s32 depth, s32 size) {
     u8* cursor;
     u8* next;

@@ -2,7 +2,7 @@ enum {
     BMAGIC_PALETTE_BRIGHTEN_FRAMES = 8
 };
 
-/* Prepares the selected battler palette. */
+/* Prepares the selected battler palette. Every change must verify every member. */
 MATCH void Effect_PreparePalette(void) {
     PartyMember** selected;
 

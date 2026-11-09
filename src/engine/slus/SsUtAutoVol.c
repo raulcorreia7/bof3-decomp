@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* installs SetAutoVol as the per-voice auto-volume callback _SsVmFlush runs and starts a volume sweep on `voice` from vol_from to vol_to in delta-sized steps (a voice outside 0..0x17 is rejected). */
+/* installs SetAutoVol as the per-voice auto-volume callback _SsVmFlush runs and starts a volume sweep on
+ * `voice` from vol_from to vol_to in delta-sized steps (a voice outside 0..0x17 is rejected).
+ */
 MATCH short SsUtAutoVol(short voice, short vol_from, short vol_to, short delta) {
     D_8018E988 = SetAutoVol;
     if ((u16)voice < 0x18) {

@@ -1,6 +1,7 @@
 #include "area045_13.h"
 
-/* Each access reloads the work cell. */
+/* Each access reloads the work cell: the stores go through its pointer, which
+ * the compiler must assume may alias the cell. */
 MATCH void func_801F4610(void) {
     s32 row_offset;
     s32 map_offset;

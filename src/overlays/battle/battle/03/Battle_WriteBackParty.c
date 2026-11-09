@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* arms every active local battler's queued action, clears the battle state bundle. */
+/* arms every active local battler's queued action, clears the battle
+ * state bundle, and advances the shared scene counter.
+ */
 /* func_801D7350 */
 MATCH void Battle_WriteBackParty(void) {
     s32           i;

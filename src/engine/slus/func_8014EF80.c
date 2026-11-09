@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* advances both coordinate words of the shared target and counts its distance cell down while the step reports incomplete. */
+/* advances both coordinate words of the shared target and counts its
+ * distance cell down while the step reports incomplete; then releases the
+ * callback thread.
+ */
 MATCH void func_8014EF80(void) {
     s32  flag;
     u16* coordinates;

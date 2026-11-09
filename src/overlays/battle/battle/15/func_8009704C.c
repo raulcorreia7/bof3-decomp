@@ -6,7 +6,8 @@ typedef struct BattleSelectionGroup {
     u8 cursor;
 } BattleSelectionGroup;
 
-/* Primary battle-selection scratch block; cursor geometry lives at 0x8014857C. */
+/* Primary battle-selection scratch block; cursor geometry lives at 0x8014857C.
+ * The block is addressed from its phase byte at 0x80148573. */
 typedef struct BattleSelectionScratch {
     u8  pad_00[0xC];
     u8  cursor_index;

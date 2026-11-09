@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* polls the key-on status of every SPU voice 0..0x17 through SpuGetKeyStatus and stores each result in the g_SndVoiceStatus table. */
+/* polls the key-on status of every SPU voice 0..0x17 through
+ * SpuGetKeyStatus and stores each result in the g_SndVoiceStatus table.
+ */
 MATCH void SND_UpdateVoiceStatus(void) {
     u8 i;
 

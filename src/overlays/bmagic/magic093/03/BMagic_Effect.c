@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EED04);
 
-/* Starts the effect once bytes 0x09 and 0x0B of the record are both zero. */
+/* Starts the effect once bytes 0x09 and 0x0B of the work record are both zero. */
 MATCH void func_801EF02C(void) {
     u16* flags;
 

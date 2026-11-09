@@ -120,7 +120,7 @@ void  func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height,
 void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 /* func_801AF20C */
 s32   func_801AF20C(u8* command_stream);
-/* UI_GetSpriteRect. */
+/* UI_GetSpriteRect */
 /* func_801AF270 */
 u8*   UI_GetSpriteRect(u8 sprite_id, u8 flags);
 /* func_801AF2A0 */
@@ -169,12 +169,12 @@ s32   func_801BE1B0(u32 index);
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 mode);
-/* Party_LoadPalettes. */
+/* Party_LoadPalettes */
 /* func_801C1630 */
 void  Party_LoadPalettes(void);
 /* func_801C187C */
 s32   Party_JoinMember(s32 char_id);
-/* Party_RemoveMember. */
+/* Party_RemoveMember */
 /* func_801C1ABC */
 void  Party_RemoveMember(s32 character_id);
 /* func_801C1DF0 */

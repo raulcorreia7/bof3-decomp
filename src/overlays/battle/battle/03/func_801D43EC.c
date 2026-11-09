@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* Restarts the battle: clears the pending step, swaps the battle state with the saved one and refreshes the actors' status rows. */
+/* Restarts the battle: clears the pending step, swaps the battle
+ * state with the saved one and refreshes the actors' status rows.
+ */
 /* nonmatching unmeasured: tried the four swapped state words are not kept in stack slots, so the frame is 0x28 against
  * the retail 0x30 and the candidate is 124 bytes short. resume: a source shape that keeps the four swapped words in
  * stack slots and drops the extra saved register. */

@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-/* Four-byte battle slot rows. */
+/* Four-byte battle slot rows: the gate byte at +0x03 skips the row, the three
+ * slot bytes at +0x00..+0x02 index the D_800B4C7C value table. */
 
 MATCH void func_800A6488(void) {
     u8* counter = (u8*)&g_Battle.ui_state;

@@ -4,7 +4,9 @@ typedef struct {
     u32 word[4];
 } ExceptionQuad;
 
-/* displays the boot exception register dump and loops forever updating the double-buffered debug screen. */
+/* displays the boot exception register dump and loops forever
+ * updating the double-buffered debug screen.
+ */
 MATCH void SYS_ShowException(void) {
     const u32*     exception_frame;
     ExceptionQuad* src;

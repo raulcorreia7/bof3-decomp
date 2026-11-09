@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-/* event-queue slot array: stride 12 (0xC); byte 0 = active flag, byte 1 = event type. */
+/* event-queue slot array: stride 12 (0xC); byte 0 = active flag, byte 1 = event
+ * type. */
 
 MATCH u8 func_801DE858(s8 event_kind) {
     u8  index;

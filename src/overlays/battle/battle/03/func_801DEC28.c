@@ -20,7 +20,7 @@ MATCH void func_801DEC28(u8* out, u8* text, s32 width, s32 max_chars) {
         if (*src++ != 0) {
             used += 1;
             if ((used & BYTE_MASK) < max_len) {
-                /* next source byte. */
+                /* next source byte */
                 goto count_next;
             }
         }
@@ -45,7 +45,7 @@ MATCH void func_801DEC28(u8* out, u8* text, s32 width, s32 max_chars) {
             used += 1;
             dst += 1;
             if ((used & BYTE_MASK) < copy_len) {
-                /* next copied byte. */
+                /* next copied byte */
                 goto copy_next;
             }
         }

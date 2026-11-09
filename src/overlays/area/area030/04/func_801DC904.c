@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Increments the AREA030 scratchpad panel field at offset 3 when the global flag D_80144281 equals 3. */
+/* Increments the AREA030 scratchpad panel field at offset 3 when the
+ * global flag D_80144281 equals 3; otherwise returns without modifying it. */
 MATCH void func_801DC904(void) {
     volatile u8* scratch;
     u8           flag;

@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Counts down the AREA030 scratch timer at +0x2E. */
+/* Counts down the AREA030 scratch timer at +0x2E; when it falls
+ * below the threshold it reloads the counter pair and advances the state
+ * byte, then runs the shared state dispatcher. */
 MATCH void func_801D34A0(void) {
     FishingState* work;
     s32           val;

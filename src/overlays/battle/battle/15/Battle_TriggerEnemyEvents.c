@@ -14,7 +14,10 @@
         }                                                               \
     }
 
-/* walks the four battle event packets of the current enemy kind and triggers the ones whose condition holds. */
+/* walks the four battle event packets of the current enemy kind and
+ * triggers the ones whose condition holds, then hands the frame to the
+ * event dispatcher.
+ */
 /* func_8009BBE8 */
 MATCH void Battle_TriggerEnemyEvents(void) {
     BattleEventPacket* packet;

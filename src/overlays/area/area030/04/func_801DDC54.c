@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* When the state halfword is clear, clears the four companion overlay flags and the mode byte, arms the state halfword with 3. */
+/* When the state halfword is clear, clears the four companion
+ * overlay flags and the mode byte, arms the state halfword with 3, then
+ * advances byte 0x03 of the scratchpad work object. */
 MATCH void func_801DDC54(void) {
     FishingState* spad;
 

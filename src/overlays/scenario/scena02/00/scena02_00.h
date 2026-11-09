@@ -1,7 +1,8 @@
 #ifndef OVERLAY_SCENARIO_SCENA02_00_H
 #define OVERLAY_SCENARIO_SCENA02_00_H
 
-/* The scenario/scena02/00 overlay's local declarations. */
+/* The scenario/scena02/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "overlays/scenario/scenario.h"
 #include "sys/exe.h"
@@ -23,7 +24,9 @@ extern Callback  D_801FE288[];
 extern Callback  D_801FE294[];
 extern SceneFunc D_801FE304[66];
 
-/* The party-in-range triggers of 5A4.c. */
+/* The party-in-range triggers of 5A4.c: while D_80143F03 is 0, start func_801FCB54 when the party
+ * position (g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) lies inside a window around g_Actors[actor_id]. Each macro is one
+ * window shape; the members differ only in the distances. Every change must verify every member. */
 
 /* Within `y_pad` of the actor's y, and from its x to `x_len` past it. */
 #define SCENA02_TRIGGER_NEAR_Y(actor_id, y_pad, x_len)                                       \

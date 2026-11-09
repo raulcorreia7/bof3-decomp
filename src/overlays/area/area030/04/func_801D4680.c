@@ -1,6 +1,9 @@
 #include "area030_04.h"
 
-/* Advances the area panel's cursor step and draws its rows. */
+/* Advances the area panel's cursor step and draws its rows: the
+ *           0x0B mode picks the full-width or indented row band, the 0x07 flag
+ *           picks the normal or alternate row renderer, and at step 4 the mode
+ *           sets the next cursor byte (advance or 0xC). */
 MATCH void func_801D4680(void) {
     s32 x;
     s32 y;

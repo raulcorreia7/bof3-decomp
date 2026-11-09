@@ -1,4 +1,5 @@
-/* Adds the effect's actor and advances the step once the effect is playing. */
+/* Adds the effect's actor and advances the step once the effect is playing. Every change here must verify every member.
+*/
 /* func_801EF2A8 (magic046), func_801F043C (magic067), func_801F007C (magic137) */
 MATCH void Effect_AddActor(void) {
     Actor_StepAnimLoop();

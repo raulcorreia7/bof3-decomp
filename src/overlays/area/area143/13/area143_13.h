@@ -1,7 +1,8 @@
 #ifndef OVERLAY_WORLD03_AREA143_13_H
 #define OVERLAY_WORLD03_AREA143_13_H
 
-/* The world03/area143/13 overlay: one file per split function and its data. */
+/* The world03/area143/13 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
 #include "area/spad.h"
@@ -16,7 +17,7 @@
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0xFF
 
-/* The character record the span step reads. */
+/* The character work record the span step reads. */
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

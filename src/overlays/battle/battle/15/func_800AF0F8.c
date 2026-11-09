@@ -1,6 +1,9 @@
 #include "battle_15.h"
 
-/* claims `count` packets of `size` bytes for the map cell at the packed (pos_x, pos_y) position. */
+/* claims `count` packets of `size` bytes for the map cell at the packed (pos_x, pos_y) position: an in-range
+ * cell under the buffer limit repeatedly picks and clears an entry of values[] and links the packet word to base +
+ * entry * size.
+ */
 /* nonmatching unmeasured: tried lift order tile_x-first; s32 pos_y; an 8-byte stack pad for retail's 0x10 frame; FIELD
  * for the byte-strided row halfword; do-while outer, for inner. resume: prologue store order (v0 first) and the
  * second-loop hoisted 0xFF00/0xFFFF constants. */

@@ -32,10 +32,15 @@
 #define CHARACTER_SPRITES_SECTION_COUNT 3
 #define CHARACTER_PALETTE_COLORS        32
 
-/* The ailments the engine cures when a battle ends (the game's own strings call status removal "cure"). */
+/* The ailments the engine cures when a battle ends (the game's own strings
+ * call status removal "cure"): Battle_ReloadPartySprites and Battle_LoadEndOverlay pass a
+ * battler's status & this mask to func_800A36F0; STATUS_KO, STATUS_POISONED
+ * and STATUS_CONFUSED persist. The (u16) keeps the complement a 16-bit
+ * immediate (andi) in Battle_ReloadPartySprites's schedule. */
 #define STATUS_CURE_MASK                ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
 
-/* Equipment bits: the characters that may use a weapon or armor record (Item.equipability). */
+/* Equipment bits: the characters that may use a weapon or armor record
+ * (Item.equipability). */
 typedef enum EquipFlags {
     EQUIP_RYU   = 1 << 0,
     EQUIP_NINA  = 1 << 1,
@@ -47,7 +52,8 @@ typedef enum EquipFlags {
     EQUIP_WHELP = 1 << 7,
 } EquipFlags;
 
-/* Equipment slot: the order of the Character members weapon, shield, helmet, armor and accessories[]. */
+/* Equipment slot: the order of the Character members weapon, shield, helmet,
+ * armor and accessories[]. */
 typedef enum EquipSlot {
     EQUIP_SLOT_WEAPON      = 0,
     EQUIP_SLOT_SHIELD      = 1,
@@ -76,7 +82,9 @@ typedef enum EquipPreviewChange {
     EQUIP_PREVIEW_HIGHER = 3,
 } EquipPreviewChange;
 
-/* Which party-order array a call reads. */
+/* Which party-order array a call reads: the walking order g_PartyFieldOrder or the
+ * battle order g_PartyBattleOrder, three character ids each, 0xFF for an empty
+ * position. Party_CountOrder and Party_BuildBattlers take it as their mode. */
 typedef enum PartyOrder {
     PARTY_ORDER_FIELD  = 0,
     PARTY_ORDER_BATTLE = 1,
@@ -97,7 +105,9 @@ typedef enum CharacterIndex {
     CHARACTER_COUNT  = 8,
 } CharacterIndex;
 
-/* Stored character id. */
+/* Stored character id. The party-order arrays hold these values, not record
+ * slots; menu/party.h owns the map that resolves one to a record slot.
+ * ID 10 appears in the save portrait table and in Whelp's record. */
 typedef enum CharacterId {
     CHAR_ID_RYU_YOUNG   = 0,
     CHAR_ID_NINA_YOUNG  = 1,
@@ -113,7 +123,11 @@ typedef enum CharacterId {
     CHAR_ID_BLANK       = 0xFF,
 } CharacterId;
 
-/* Status word bits. */
+/* Status word bits. The code tests and clears these values. Labels: the
+ * ailment strings in the game data name the effects (paralysis, blindness,
+ * the Silence skill, confusion, sleep, poison); the 0x20 label is
+ * unverified: the code only clears and restores that bit, and a battle/battle/15
+ * comment calls it magic-defense. */
 typedef enum StatusFlags {
     STATUS_UNK_0     = 1 << 0,
     STATUS_UNK_1     = 1 << 1,
@@ -151,7 +165,8 @@ typedef enum MasterId {
     MASTER_MERYLEEP  = 16,
 } MasterId;
 
-/* The operations of a master's stat modifier script, one (operation, amount) pair each, applied by Char_ApplyMaster. */
+/* The operations of a master's stat modifier script, one (operation, amount) pair each, applied by
+ * Char_ApplyMaster. Operations 0 to 8 add to the resistance of that RES_INDEX_*. */
 typedef enum MasterModifier {
     MASTER_MOD_SURPRISE_CHANCE = 9,
     MASTER_MOD_REPRISAL_CHANCE = 10,
@@ -161,7 +176,8 @@ typedef enum MasterModifier {
     MASTER_MOD_END             = 14,
 } MasterModifier;
 
-/* The 0x20-byte stat block: the live copy at +0x1C holds the equipment and buffs a battle reads. */
+/* The 0x20-byte stat block: the live copy at +0x1C holds the equipment and
+ * buffs a battle reads; the permanent copy at +0x3C is what level-ups raise. */
 typedef struct Stats {
     u16 max_hp;
     u16 max_ap;
@@ -227,7 +243,14 @@ typedef struct Character {
 
 ASSERT_SIZE(Character, PARTY_RECORD_STRIDE);
 
-/* The block from the window-style byte 0x80144952 through the eight character records at 0x80144968. */
+/* The block from the window-style byte 0x80144952 through the eight character
+ * records at 0x80144968. The menu drawers read the style byte and then index a
+ * record from the same base address, so the records are byte rows here: the
+ * block starts 0x16 bytes before the first record, and a Character
+ * member would align to 0x18. Cast a row to Character to read fields.
+ *
+ * Reader: `emi/etc/shop/00@0x801E1710` loads the style byte through the
+ * base register, then adds 0x90 (0x16 plus the skill-ability offset) to it. */
 typedef struct Char_Block {
     u8 window_style; /* 0x00: the last argument of UI_DrawWindow */
     u8 pad_01[0x15];
@@ -285,7 +308,8 @@ typedef struct CharacterSpritesSection {
 ASSERT_SIZE(CharacterSprites, 0x0C);
 ASSERT_OFFSET(CharacterSpritesSection, palette_offset, 0x04);
 
-/* The party's character records, one per CHAR_INDEX_*. */
+/* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
+ * indexes it through the g_CharSlot slot of a stored character id. */
 /* D_80144968 */
 extern Character   g_Characters[CHARACTER_COUNT];
 /* D_801CB8DC */

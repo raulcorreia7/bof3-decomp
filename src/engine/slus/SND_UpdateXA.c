@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* runs the active state handler, then advances the timer and steps the state machine forward on expiry. */
+/* runs the active state handler, then advances the timer and
+ * steps the state machine forward on expiry.
+ */
 MATCH void SND_UpdateXA(void) {
     s32 temp;
     s8* mode;

@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* seeds the scratch work area for the incoming scene. */
+/* seeds the scratch work area for the incoming scene: clears work byte 0x5, copies D_80145FBC to byte 0xB,
+ * sets byte 0x11C of the local-work block, stores g_Game.members[0].pos.x.fixed/8/C at +0x34/+0x38/+0x3C and advances the work byte at
+ * 0x1.
+ */
 MATCH void Area_InitScene(void) {
     Actor* work;
 

@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* reports whether all active local battlers satisfy the strict ready predicate used by the later queued branch. */
+/* reports whether all active local battlers satisfy the strict ready
+ * predicate used by the later queued branch.
+ */
 MATCH u8 func_801E0E0C(void) {
     u8 index;
 

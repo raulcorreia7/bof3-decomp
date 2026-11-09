@@ -23,7 +23,8 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
         dir_y = -((y >> 16) < D_80145ECA);
     }
     for (i = 0; i <= span_x; i++) {
-        /* The tracked height cell is the s16 at +0xA of the pair base. */
+        /* The tracked height cell is the s16 at +0xA of the pair base; both
+         * probes read it through the pair they walk, hence the two offsets. */
         px    = g_Game.members[0].pos.x.fixed + dir_x * (i << 15);
         value = Area_ReadHeight(px, y);
         if (abs(COORD_INT(g_Game.members[0].pos.z) - value) >= 0x41) {

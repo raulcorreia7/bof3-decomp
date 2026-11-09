@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* When halfword `g_UiWindowEffectBusy` is clear, clears byte `D_8014419E`, increments byte `D_80144199`. */
+/* When halfword `g_UiWindowEffectBusy` is clear, clears byte `D_8014419E`,
+ * increments byte `D_80144199`, then increments byte 0x03 of the scratchpad
+ * work object. */
 MATCH void func_801D9C4C(void) {
     u8* p;
 

@@ -96,7 +96,8 @@ MATCH s32 func_801C3B78(s32 pos_x, s32 pos_y, s32 wanted_code, s32 mask_cells) {
     if (cells[0] == (wanted & BYTE_MASK)) {
         return 1;
     }
-    /* Distinct local keeps the compare above a branch; `return 0` is if-converted to xor/sltiu. */
+    /* Distinct local keeps the compare above a branch; `return 0` is
+     * if-converted to xor/sltiu. */
     x_raw = 0;
     return x_raw;
 }

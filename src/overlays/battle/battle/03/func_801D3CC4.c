@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* resets the action step of every queued battler and every overlay slot that is still claimed. */
+/* resets the action step of every queued battler and every overlay
+ * slot that is still claimed, then arms the escape timer while nothing else
+ * holds the phase.
+ */
 MATCH void func_801D3CC4(void) {
     u8 i;
 

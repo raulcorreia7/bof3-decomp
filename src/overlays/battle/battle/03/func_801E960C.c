@@ -1,11 +1,18 @@
 #include "battle_03.h"
 
-/* Four state handlers; the binary keeps the table at this address and no header declares it. */
+/* Four state handlers; the binary keeps the table at this address and no
+ * header declares it. */
 typedef void (*BattlePanelFunc)(void);
 
-/* 0x118-byte enemy work rows; the rows are anchors that the code addresses by byte offset. */
+/* 0x118-byte enemy work rows; the rows are anchors that the code addresses by
+ * byte offset. The row's action points and cap are read through the
+ * EnemyBattler record. */
 
-/* advances the battle menu panel. */
+/* advances the battle menu panel: dispatches the state handler,
+ * copies the selected enemy's figures and the panel fields into the panel
+ * record, closes the panel when the slot becomes blocked, and toggles the
+ * enemy row's 0x2000 flag from the row's shutter counters.
+ */
 MATCH void func_801E960C(void) {
     BattlePanelTask* task;
     BattlePanelTask* panel;

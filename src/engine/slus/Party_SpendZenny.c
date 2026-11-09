@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* subtracts amount from the g_Zenny counter when it is large enough, reporting success. unused is unused. */
+/* subtracts amount from the g_Zenny counter when it is large enough,
+ * reporting success. unused is unused; every caller passes 0.
+ */
 MATCH bool Party_SpendZenny(u32 amount, s32 unused) {
     u32  value;
     s32  result;

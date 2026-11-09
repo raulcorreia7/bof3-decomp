@@ -1,4 +1,11 @@
-/* Clears the panel mode byte in the game state record during scenario 15. */
+/* Clears the panel mode byte in the game state record during scenario 15;
+ * otherwise picks the nearer of directions 3 and 5 by distance from the work
+ * direction byte, starts that direction's script through func_801B2D00 as the
+ * turn target at byte 0x03, loads the timer at byte 0x09 with 2 and advances
+ * the handler index. One definition shared by the plchar character programs;
+ * each program includes it where the function sits, and a change must keep
+ * every member matching.
+ */
 /* func_801CFCE8 (plp267), func_801CF23C (plp257), func_801CEC60 (plp457), func_801CFAEC (plp567) */
 MATCH void Char_StartNearestFacingTurn(void) {
     s32 to_back;

@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* resolves a palette-tint request word (bits 8-15 the class, bit 0 the polarity). */
+/* resolves a palette-tint request word (bits 8-15 the class, bit 0 the polarity): classes FA/FF compare the
+ * low byte with a reference byte, FC00 folds in the entry-0 UI state, FB00 tests g_AreaCameraAngle.vz against a
+ * 0x801-frame window at 0x200, and the low classes read a bit from the 8-byte-stride table g_SceneFlagWords.
+ */
 MATCH s8 Area_TestCondition(s32 request) {
     s16 tag     = request;
     s32 shifted = request << 16;

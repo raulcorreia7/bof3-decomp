@@ -1,7 +1,10 @@
 #ifndef OVERLAY_BATTLE_BATTLE_15_H
 #define OVERLAY_BATTLE_BATTLE_15_H
 
-/* The battle/battle/15 overlay's local declarations. */
+/* The battle/battle/15 overlay's local declarations: the command, step and damage
+ * dispatch tables, the actor views it shares with battle/battle/03 and the prototypes
+ * its units use. The common records are in battle/records.h; only this image
+ * includes this file. */
 
 #include "overlays/battle/battle.h"
 #include <stdlib.h>
@@ -11,11 +14,13 @@
 #include "menu/draw.h"
 #include "menu/clock.h"
 
-/* retail addresses. */
+/* retail addresses */
 
 #define BATTLE_SELECTION_SLOT_MASK     0x7F
 
-/* Engine helpers this target calls. */
+/* Engine helpers this target calls. The implementing bodies live in the
+ * battle/battle/03 overlay; the call sites in this target fix the parameter roles
+ * named in the prototypes below. */
 /* Typed view of the scratchpad work area; each use reloads the cell. */
 #define BATTLE_WORK                    ((PartyMember*)g_Task)
 
@@ -23,23 +28,30 @@
 #define ACTOR_TARGET_STEP(delta)       ((s8)g_BattleActorTurn->command.target + (delta))
 #define BATTLE_ACTIVE_MESSAGE_SLOT_PTR (*(volatile void**)&g_BattleMessageSlot)
 #define BATTLE_ACTIVE_ROW              ((PartyMember*)g_BattleMessageSlot)
-/* Fixed-address bases, tables, and rodata pointers. */
+/* Fixed-address bases, tables, and rodata pointers. The raw literals live only
+ * here; function bodies reference these named accessors. */
 #define BATTLE_LOCK_RAM_BASE           D_80150000
 
-/* Entry table at D_8014688E with its parallel id byte table at D_8014691A. */
+/* Entry table at D_8014688E with its parallel id byte table at D_8014691A:
+ * thirty records of stride 0x98, kind 7 marks a live entry
+ * (func_800AC754, func_800AC7D0). */
 #define BATTLE_ENTRY_STRIDE            0x98
 #define BATTLE_ENTRY_COUNT             30
 /* The kind byte of a live entry; the other kinds are unproven. */
 #define BATTLE_ENTRY_KIND              7
 
-/* The hit-chance formula's quantities, in percentage points. */
+/* The hit-chance formula's quantities, in percentage points: the threshold is
+ * the seeded roll's fifth over the base, capped at the max; the rate is the
+ * base over the seeded roll's fifth, floored at the min. */
 #define BATTLE_HIT_THRESHOLD_BASE      50
 #define BATTLE_HIT_THRESHOLD_MAX       100
 #define BATTLE_HIT_RATE_BASE           125
 #define BATTLE_HIT_RATE_MIN            50
 #define g_AreaScrollTargetY            (*(u32*)&g_AreaScrollTargetY)
 
-/* Pick the battler's step rule row from the flagged, player and enemy tables. */
+/* Pick the battler's step rule row from the flagged, player and enemy tables.
+ * Kept: as an inline the enemy table pointer loads into $a0 before the branch
+ * (first instruction differs in both members). */
 #define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                                                  \
     do {                                                                                                  \
         u32 row;                                                                                          \
@@ -69,7 +81,8 @@ typedef enum PartyFormation {
     PARTY_FORMATION_REFUGE  = 0x05, /* battle/battle/03 func_801D5DCC tests g_PartyFormation == 5 */
 } PartyFormation;
 
-/* The selection byte g_Battle.row_cursor: bit 7 marks an active selection, the low seven bits are its slot. */
+/* The selection byte g_Battle.row_cursor: bit 7 marks an active selection, the low
+ * seven bits are its slot. */
 typedef enum BattleSelectionFlags {
     BATTLE_SELECTION_ACTIVE = 1 << 7,
 } BattleSelectionFlags;
@@ -80,13 +93,17 @@ typedef struct BattleSelectionAction {
     u32      unk_04;
 } BattleSelectionAction;
 
-/* Player flag row of the selection table. */
+/* Player flag row of the selection table: stride 0x140, flag word at the
+ * row's +0x128 (the table's base symbol D_80145FB8). */
 typedef volatile struct BattleSelectionPlayer {
     volatile u32 flags; /* +0x128 */
     u8           pad_04[0x13C];
 } BattleSelectionPlayer;
 
-/* Battle sprite cell record consumed by func_800AF8F0, func_800AF9D4 and func_800AFB48. */
+/* Battle sprite cell record consumed by func_800AF8F0, func_800AF9D4 and
+ * func_800AFB48: +0x24 bit 2 selects the second 0x80037800 cell bank, +0x27 is
+ * the quotient/remainder source and +0x28 indexes D_800B6C28/D_800B6C30/
+ * D_800B6C38. */
 typedef struct BattleSpriteCellRecord {
     u8 pad_00[0x24]; /* +0x00 .. +0x23 */
     u8 flags_24;     /* +0x24 bit 2 selects the +0x10 bank */
@@ -128,7 +145,11 @@ typedef struct BattleStatDisplayTemplate {
 
 ASSERT_SIZE(BattleStatDisplayTemplate, 0x18);
 
-/* Battle-local work row (stride 0x140 at g_Game.members). */
+/* Battle-local work row (stride 0x140 at g_Game.members). Offsets 0x24..0x4B
+ * are the g_Task stores in func_800ADD44 (retail asm byte/half/word
+ * widths, matching its exact twin func_800ADA4C). +0x120/+0x124/+0x128 alias
+ * D_80145FB0 (u8), D_80145FB4[i].flags (u32) and D_80145FB8[i].flags
+ * (u32); 0x9F..0xA3 is the element-slot byte run func_800A2AE0 reads. */
 typedef struct BattlePlayerDamageStatus {
     volatile u32 flags;
     volatile u32 flags_04;
@@ -141,7 +162,9 @@ typedef struct BattleLocalOffsetPair {
     s16 values[4][2];
 } BattleLocalOffsetPair;
 
-/* Declarations and record types this target owns. */
+/* Declarations and record types this target owns; the units below carried
+ * the same text in their own file-local copies.
+ * Evidence: tasks/types-all/decl-census.tsv, tasks/types-all/inventory.tsv. */
 typedef struct BattleSlot {
     u8 slot_00;
     u8 slot_01;
@@ -159,7 +182,13 @@ typedef struct BattleHandlerQuad {
     Callback handlers[4];
 } BattleHandlerQuad;
 
-/* One battle event packet (0x10 bytes) of the event table at 0x800E407C. */
+/* One battle event packet (0x10 bytes) of the event table at 0x800E407C: the
+ * table holds four packets per enemy kind record, at the kind record's +0x34.
+ *
+ * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
+ * (Battle_TriggerEnemyEvents), its +0x01 with `lbu` and switches on it (Battle_ApplyEnemyEvent),
+ * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
+ * and its +0x08..+0x0F with `lbu` (Battle_ApplyEnemyEvent). */
 typedef struct BattleEventPacket {
     u8  kind;        /* +0x00 the kind Battle_TriggerEnemyEvents switches on to pick the trigger test */
     u8  effect_kind; /* +0x01 the kind Battle_ApplyEnemyEvent switches on to pick the record update */
@@ -180,7 +209,8 @@ ASSERT_OFFSET(BattleEventPacket, unk_04, 0x04);
 ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
 
-/* What makes an event packet trigger (BattleEventPacket.kind). */
+/* What makes an event packet trigger (BattleEventPacket.kind). The once-only kinds trigger at most once per
+ * battle; the REPEAT kinds trigger at every hit. */
 typedef enum BattleEventTrigger {
     BATTLE_EVENT_HIT_FIRE             = 0,
     BATTLE_EVENT_HIT_FROST            = 1,
@@ -203,7 +233,8 @@ typedef enum BattleEventTrigger {
     BATTLE_EVENT_LETHAL_HIT           = 37,
 } BattleEventTrigger;
 
-/* The enemy record of the encounter block from its event packets (+0x34) on. */
+/* The enemy record of the encounter block from its event packets (+0x34) on: ENEMY_AI_COUNT packets, then the rest of
+ * the Enemy record. The address view of the cell that Enemy.ai covers; retail addresses it as a constant. */
 typedef struct BattleEnemyEvents {
     BattleEventPacket packets[ENEMY_AI_COUNT];
     u8                unk_40[ENEMY_STRIDE - ENEMY_AI_COUNT * sizeof(BattleEventPacket)];
@@ -213,7 +244,12 @@ ASSERT_SIZE(BattleEnemyEvents, ENEMY_STRIDE);
 
 #define BATTLE_ENEMY_EVENTS MEM_PTR(BattleEnemyEvents, 0x800E407Cu)
 
-/* The player battler's panel record (D_80145F04, stride 0x140). */
+/* The player battler's panel record (D_80145F04, stride 0x140): the panel
+ * block of the local battler row, whose +0x74 the record's address is.
+ *
+ * func_800A9FC4 scales the four halfwords at +0x40 into the four halfwords at
+ * +0x20, scales the four bytes at +0x55 into the four bytes at +0x35, and
+ * mirrors the bytes at +0x4B..+0x53 into +0x2B..+0x33. */
 typedef struct BattlePanelRecord {
     u8  pad_00[0x20];
     s16 unk_20; /* the scaled stat quotes */
@@ -269,7 +305,8 @@ typedef struct BattleSelectionState {
     volatile u8 selection_index; /* +0xA4 */
 } BattleSelectionState;
 
-/* Shared battle-template stats, one row (stride 0x78) per battler slot. */
+/* Shared battle-template stats, one row (stride 0x78) per battler slot. The
+ * magic-defence path copies three defence values out of this table. */
 typedef struct BattleTemplateStats {
     u32 defence[3]; /* 0x00 */
     u8  pad_0C[0x6C];
@@ -280,7 +317,9 @@ typedef struct BattleEnemyRecord {
     u8 unk_00[0x118];
 } BattleEnemyRecord;
 
-/* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's save/restore keeps the plain word. */
+/* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
+ * save/restore keeps the plain word. A second name is the only form that keeps
+ * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
 extern u32 g_BattleWorkCell;
 
 #define BATTLE_EFFECT_STEP_COUNT 3
@@ -417,7 +456,8 @@ extern u8                     s_BattleAbilityLine2Run[12];
 extern u8                     s_BattleAbilityLine1FlagRun[12];
 /* D_800B6DA8 */
 extern u8                     s_BattleAbilityLine2FlagRun[12];
-/* The panel slots' palette and sprite blocks. */
+/* The panel slots' palette and sprite blocks; func_800B4220 hands their
+ * addresses to func_8014F800 and UI_DrawSpriteRun. */
 /* D_800B6DCC */
 extern u8                     s_BattlePanelSelectedMarker[6];
 /* D_800B6DD4 */
@@ -485,7 +525,9 @@ extern volatile u8                       D_801462E7;
 extern BattleSelectionState D_801462F0_state;
 /* FAKE: g_Battle.active_battler as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8          g_BattleActiveBattler;
-/* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols.toml (this image's table or battle/battle/03's). */
+/* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols.toml (this image's
+ * table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for one cell use them; a cast of the
+ * canonical symbol merges the pair and changes the bytes. */
 extern u8                   g_BattleActiveBattler_nv;
 /* FAKE: g_Battle.target as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8          g_BattleTarget;
@@ -495,8 +537,11 @@ extern u8                   D_801463D6;
 /* D_801463D8 */
 /* D_80148570 */
 extern volatile u8          g_BattleChoicePanel[];
-/* First byte of g_BattleChoicePanel (0x80148570). */
-/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the direct %lo store form. */
+/* First byte of g_BattleChoicePanel (0x80148570). The original stores it
+ * through a scalar symbol, which emits the direct %lo store form; indexing the
+ * array symbol would materialize its address in a register instead. */
+/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
+ * direct %lo store form. */
 extern volatile u8          g_BattleSelectionHead;
 extern u8                   D_80148571;
 extern u8                   D_80148572;
@@ -527,15 +572,18 @@ extern volatile u16         D_8014862A;
 extern volatile u8          D_8014862F;
 extern volatile u8          D_80148654;
 extern u8                   D_80148656;
-/* Proven game-RAM base for battle state (0x80140000). func_800A4458 already references it through a local extern of this exact type. */
-/* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes D_801EB5B4 + ((D_801EC328. */
+/* Proven game-RAM base for battle state (0x80140000). func_800A4458 already
+ * references it through a local extern of this exact type. */
+/* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes
+ * D_801EB5B4 + ((D_801EC328 - 1) & 0xF) * 8). */
 extern volatile u8          D_80150000[];
 extern u8*                  D_801C893C[];
 extern u8*                  D_801C8950[];
 extern u8*                  g_MenuInventoryTitles[5];
 extern char                 g_MenuInventoryCountFormat[];
 extern u8                   D_801C90ED[];
-/* Selection-kind table base; byte 0 of each stride-0x14 entry holds the flags. */
+/* Selection-kind table base; byte 0 of each stride-0x14 entry holds the flags.
+ */
 /* Selection-kind flag table base: byte 0 of the kind entry holds the flags. */
 extern u8                   D_801CA718[];
 extern u8                   D_801CA719[];
@@ -797,12 +845,17 @@ u8   Battle_TargetNext(s32 start_slot);
 /* func_801DB6F4 */
 u8   Battle_TargetPrev(u8 slot);
 s32  func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
-/* The panel scale helper lives in battle/battle/03 (src/overlays/battle/battle/03/ func_801DE0AC.c). */
+/* The panel scale helper lives in battle/battle/03 (src/overlays/battle/battle/03/
+ * func_801DE0AC.c). Its retail body multiplies $a0 by $a1 and reads no other
+ * argument, and every call site in this target passes two words, so the
+ * helper takes two parameters. */
 /* Multiplies its inputs and divides by 100. */
 s16  func_801DE144(s32 amount, s32 percent);
 /* func_801DE8C0 */
 void Battle_AddMessage(u32 index, u32 record_kind, u8* text);
-/* PsyQ SDK primitive setup helpers called by this target. */
+/* PsyQ SDK primitive setup helpers called by this target.
+ * SetSprt8 / SetSemiTrans are declared by <libgpu.h> (via common.h);
+ * GFX_AddPrim is a game primitive-append helper declared by gfx/prim.h. */
 /* func_801DE94C */
 void Battle_SetTextActionName(u32 index, s8 queue_kind);
 /* func_801DEA64 */
@@ -850,7 +903,9 @@ static inline void BattleApplyHalfDamage(s32 anim) {
     }
 }
 
-/* Fill the 3x3 slot grid from the queued-slot allocator, then raise the panel. */
+/* Fill the 3x3 slot grid from the queued-slot allocator, then raise the panel.
+ * The trailing values differ per member, so each member writes them; the loop
+ * is the shared helper. */
 static inline void BattleFillEffectGrid(s32 kind) {
     s32 offset;
     s32 slot;
@@ -865,7 +920,8 @@ static inline void BattleFillEffectGrid(s32 kind) {
     }
 }
 
-/* Report whether the status byte at offset differs from the masked compare value, for the first three battlers. */
+/* Report whether the status byte at offset differs from the masked compare
+ * value, for the first three battlers. */
 static inline s32 BattleCompareStatusByte(s32 battler_index, s32 compare_value, s32 offset) {
     volatile u8* entry;
     s32          result;
@@ -890,7 +946,8 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-/* Reset the three selection bytes once the lock at -0x7A8D is clear, then run the selection update. */
+/* Reset the three selection bytes once the lock at -0x7A8D is clear, then run
+ * the selection update. */
 static inline void BattleResetSelectionState(void) {
     volatile u8* battle_selection_state;
     volatile u8* battle_selection_lock;
@@ -937,7 +994,8 @@ static inline u8 BattleRollHitChance(u8 selection_kind, s16 (*hit_rate)(s32, s32
     return ret;
 }
 
-/* Write the selected battler's action result from the selection value that the mode selects, clamped at zero. */
+/* Write the selected battler's action result from the selection value that the
+ * mode selects, clamped at zero. */
 static inline void BattleSelectionDelta(s32 mode) {
     /* FAKE: retail keeps the cell address in $s0 across both selection calls;
      * without the pin GCC rematerialises it after each call and the function
@@ -963,7 +1021,8 @@ static inline void BattleSelectionDelta(s32 mode) {
     }
 }
 
-/* Set the selection flag on the chosen battler or mark the pending record, then run the panel update. */
+/* Set the selection flag on the chosen battler or mark the pending record,
+ * then run the panel update. */
 static inline void BattleSetSelectionFlag(u32 flag) {
     u32         mode;
     BattleTurn* record;

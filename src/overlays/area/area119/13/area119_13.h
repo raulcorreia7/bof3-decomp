@@ -1,7 +1,8 @@
 #ifndef OVERLAY_WORLD03_AREA119_13_H
 #define OVERLAY_WORLD03_AREA119_13_H
 
-/* The world03/area119/13 overlay: one file per split function and its data. */
+/* The world03/area119/13 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "sys/actor.h"
 #include "area/area.h"

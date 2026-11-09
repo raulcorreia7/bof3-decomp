@@ -1,4 +1,6 @@
-/* Counts the effect timer (work byte 0x09) down. */
+/* Counts the effect timer (work byte 0x09) down; at zero it plays the effect the
+ * target selector chose and raises the effect-playing flag. One definition
+ * shared by the bmagic effect modules; every change here must verify every member. */
 /* func_801EF0EC (magic054), func_801EF3D4 (magic113), func_801EF0BC (magic114) */
 MATCH void Effect_CountDownAndPlay(void) {
     u8 timer;

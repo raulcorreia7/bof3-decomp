@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* stages the record's state byte at +0x29. */
+/* stages the work record's state byte at +0x29: 4 when byte +0x24 has bit 0x10, 6 when byte 3 of the record
+ * pointer at +0x54 has bit 0x20, otherwise g_AreaDrawMode; then runs func_8015A9A4.
+ */
 MATCH void func_8015A944(void) {
     Actor* work;
     u8     state;

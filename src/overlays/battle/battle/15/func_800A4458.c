@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* resets the stats of the first three battlers from the template at 0x801EBEF0. */
+/* resets the stats of the first three battlers from the template at 0x801EBEF0: hit points
+ * scaled down by fatigue, the other stats raised by the template, resistances copied.
+ */
 MATCH void func_800A4458(void) {
     BattleStatDisplayTemplate* tpl;
     PartyMember*               work;

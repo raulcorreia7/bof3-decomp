@@ -1,6 +1,11 @@
 #include "battle_15.h"
 
-/* Drives the primary battle-selection panel. */
+/* Drives the primary battle-selection panel: seeds the scroll band, reads the 0xF00C triggers (group cycle,
+ * cursor walk, page up and down over seven-entry pages), restages the ring handle, then commits the selection,
+ * opens the confirm prompt or pages the group entry. The selection work is a MenuChoicePanel; the confirm gate and
+ * the commit group are read through the global, not the panel pointer, because the original reloads them by
+ * absolute address after the pointer is dead.
+ */
 /* D_8014857A stays an address symbol at the cursor steps: a g_MenuPanelTasks[16] view changes the code. */
 MATCH void func_80098450(void) {
     volatile u8*     phase;

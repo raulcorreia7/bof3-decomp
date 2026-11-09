@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* runs the work area's step handler (D_801EB3FC[unk_02]). */
+/* runs the work area's step handler (D_801EB3FC[unk_02]); while bit 0x20 of the enemy's reach is set it
+ * steps the active queued slot's signed level (flipping at 12 and -12) and sets the area's unk_34 or unk_38 from the
+ * slot word plus level << 9; calls func_801E30F8 unless bit 0x1000 of unk_100 is set.
+ */
 MATCH void func_801E3638(void) {
     PartyMember* work;
 

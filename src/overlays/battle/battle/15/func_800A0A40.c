@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* Non-volatile view of the active battler index (0x80146374). */
+/* Non-volatile view of the active battler index (0x80146374): battle_15.h
+ * declares it volatile, whose byte load cannot feed the index arithmetic
+ * without an extra mask. */
 
 MATCH void func_800A0A40(void) {
     volatile u16* pFlag;

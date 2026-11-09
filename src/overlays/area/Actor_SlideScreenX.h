@@ -1,4 +1,8 @@
-/* Advance the area origin one step and advance the work state once it passes image threshold. each overlay's image header names its origin offset, step and threshold. */
+/* Advance the area origin one step and advance the work state once it passes
+ * image threshold. One definition shared by the world area overlays; each
+ * overlay's image header names its origin offset, step and threshold. Every
+ * change here must verify every member address.
+ */
 /* func_801F2EF8 (area160), func_801F2EF8 (area163), func_801F2EF8 (area164), func_801F2EF8 (area165), func_801F2F0C
    (area169), func_801F2F2C (area157), func_801F2FE0 (area167), func_801F3420 (area152), func_801F3490 (area033),
    func_801F34CC (area151), func_801F355C (area016), func_801F355C (area045), func_801F3560 (area115), func_801F3574

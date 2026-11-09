@@ -1,7 +1,8 @@
 #ifndef OVERLAY_SCENARIO_SCENA13_00_H
 #define OVERLAY_SCENARIO_SCENA13_00_H
 
-/* The scenario/scena13/00 overlay's local declarations. */
+/* The scenario/scena13/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #define GRAPHICS_PALETTE_PENDING_VOLATILE
 #define GAME_SCRATCH_BASE_SCALAR
@@ -30,7 +31,9 @@ extern u8        D_801FBF98[];
 /* D_801FBFB8 */
 extern SceneFunc g_SceneActorDispatch[];
 
-/* Reserve two actor slots and start the same pair of scripts on them. */
+/* Reserve two actor slots and start the same pair of scripts on them; the
+ * second script sits 0x10 bytes after the first. Every change must verify
+ * every member. */
 #define SCENE_START_SCRIPT_PAIR(script)                              \
     do {                                                             \
         s32 first;                                                   \

@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* seeds the work area from the selected handler entry. */
+/* seeds the work area from the selected handler entry: the size byte
+ * sets the hold counter and the two velocity dividers, and mode 2 instead
+ * publishes the direction vector into the movement globals.
+ */
 MATCH s8 Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags) {
     u8  size;
     s32 absX;

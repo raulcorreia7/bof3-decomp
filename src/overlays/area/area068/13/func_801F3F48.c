@@ -1,7 +1,9 @@
 #include "area068_13.h"
 
 MATCH s32 func_801F3F48(void) {
-    /* CLEANUP: the shift-and-subtract run is GCC's exact division of the pointer difference. */
+    /* CLEANUP: the shift-and-subtract run is GCC's exact division of the pointer difference, so
+     * the readable form is the actor index g_ScriptWorkRecord - g_Actors (the same as in
+     * area059 func_801F2F34). */
     /* FAKE: the product needs the retail temporary registers. */
     FAKE_REG(s32, step, "v1");
     FAKE_REG(s32, part, "a0");

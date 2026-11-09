@@ -28,7 +28,8 @@
 #define EMI_CUE_VOICE_MASK   0x1F
 #define EMI_CUE_LAYER_MASK   0x60
 
-/* The sound banks, by what each holds. */
+/* The sound banks, by what each holds. Banks 3 to 5 hold the party character
+ * forms and have no cue site. */
 typedef enum SNDBank {
     SND_BANK_MUSIC  = 0,
     SND_BANK_COMMON = 1,
@@ -44,15 +45,29 @@ typedef enum SNDBank {
 #define EMI_CUE_ID_BANK(id)   (((id) & EMI_CUE_ID_BANK_MASK) >> EMI_CUE_ID_BANK_SHIFT)
 #define EMI_CUE_ID_INDEX(id)  ((id) & EMI_CUE_ID_INDEX_MASK)
 
-/* Cue id: `(bank << 8) | record_index`. */
+/* Cue id: `(bank << 8) | record_index`. The images call the dispatcher with
+ * the constructed id, e.g. `emi/etc/game/00@0x8019B024` passes bank 1,
+ * record 6. */
 #define EMI_CUE_ID(bank, index)                                                                                \
     ((((u32)(bank) << EMI_CUE_ID_BANK_SHIFT) & EMI_CUE_ID_BANK_MASK) | ((u32)(index) & EMI_CUE_ID_INDEX_MASK))
 
 typedef struct EMICue {
-    u8 alias_bank; /* bits 2-0: bank that supplies the voice index and its VAB volume, pan and tune; 0 = own bank. */
-    u8 program;    /* EMICueProgramFlags; bit 7 use_cue_volume */
-    u8 tone;       /* bits 7-4: tone slot 0-14, the fourth SsUtKeyOnV argument. */
-    u8 voice;      /* bits 4-0: first SPU voice 0-23. */
+    u8 alias_bank; /* bits 2-0: bank that supplies the voice index and its VAB
+                    * volume, pan and tune; 0 = own bank. 0 in all 8,608 entries;
+                    * bits 7-3 are zero in all of them, role unknown. */
+    u8 program;    /* EMICueProgramFlags; bit 7 use_cue_volume: set follows the key-on with
+                    * SsUtSetDetVVol(voice, cue volL, cue volR); clear keeps the
+                    * tone's own volume. Bits 6-0: tone block 0-7, the third
+                    * SsUtKeyOnV argument. */
+    u8 tone;       /* bits 7-4: tone slot 0-14, the fourth SsUtKeyOnV argument.
+                    * Bits 3-0 are copied to voice state and compared with the
+                    * previous cue's value (the retrigger decision): 0x10 in
+                    * 8,342 entries, 0x11 in 239, other values in 27. Role
+                    * unknown. */
+    u8 voice;      /* bits 4-0: first SPU voice 0-23. Bits 6-5: layers, extra
+                    * voices keyed on the cue (0 in 525 entries, 1 in 7,662, 2 in
+                    * 248, 3 in 173). Bit 7 is zero in all 8,608 entries, role
+                    * unknown. */
 } EMICue;
 
 ASSERT_SIZE(EMICue, EMI_CUE_RECORD_SIZE);

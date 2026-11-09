@@ -1,4 +1,14 @@
-/* Draw a row of up to four command buttons from g_MenuCommandRows[row]. */
+/* Draw a row of up to four command buttons from g_MenuCommandRows[row]: a
+ * window, the label text and the frame sprite per button. The selected button
+ * has its own frame. A button is dimmed (color 7) when it is not the selected
+ * one while the selection is in range, when label id 0x12 is used without
+ * game-request bit 0, or when label id 8 is used without the fountain pen and
+ * without an ink. One definition shared by the
+ * start, Bate, Shisu and shop overlays; each overlay includes this file where
+ * the function sits and binds g_MenuCommandRows, g_MenuCommandLabels,
+ * g_MenuCommandFrame and g_MenuCommandFrameSelected in its table in
+ * config/symbols.toml. Every change must verify every member.
+ */
 /* func_801DDC74 (start), func_801D4CD4 (bate), func_801D5C7C (shisu), func_801DA77C (shop) */
 MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
     u8  i;

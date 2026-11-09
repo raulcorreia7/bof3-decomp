@@ -1,14 +1,15 @@
 #ifndef OVERLAY_WORLD03_AREA141_13_H
 #define OVERLAY_WORLD03_AREA141_13_H
 
-/* The world03/area141/13 overlay: one file per split function and its data. */
+/* The world03/area141/13 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
-/* The fixed record the dispatch compares the work pointer against. */
+/* The fixed work record the dispatch compares the work pointer against. */
 extern Actor D_80143F48;
 
 /* The state handler tables the dispatchers index. */

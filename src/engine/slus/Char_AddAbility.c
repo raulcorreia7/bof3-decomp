@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* stores the value in the first empty slot of a byte table. */
+/* stores the value in the first empty slot of a byte table.
+ */
 MATCH s32 Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode) {
     u8* table;
     s32 limit;

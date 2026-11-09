@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-/* Scratch byte 0: nonzero while the current route probe is active. */
+/* Scratch byte 0: nonzero while the current route probe is active. The retail
+ * code materializes this symbol address in each branch, so keep the pointer
+ * expression rather than a cached direct access. */
 #define SPAD_ACTIVE (*(volatile u8*)&D_1F800000)
 
 MATCH bool func_801B8D18(void) {

@@ -1,6 +1,7 @@
 #include "batl_end_00.h"
 
-/* Party item grant queue at D_80146327. */
+/* Party item grant queue at D_80146327: the count byte, an unaligned run of
+ * item words at +0xD and each item's level byte at +0x2D. */
 typedef struct PartyGrantQueue {
     u8 count; /* +0x00 */
     u8 pad_01[0xC];

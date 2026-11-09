@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* Applies the status bits named by input_mask to one battler (players below 3, enemies from 3). */
+/* Applies the status bits named by input_mask to one battler (players below 3,
+ * enemies from 3): each bit is set in g_Battle.pending_status unless the battler already has
+ * it or a blocking status, then the merged word is stored back and published. */
 MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
     u16  status;
     u8   slot;

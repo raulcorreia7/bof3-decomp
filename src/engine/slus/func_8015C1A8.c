@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* writes the two record fields selected by slot and sets the mode flag. */
+/* writes the two record fields selected by slot and sets the mode flag.
+ */
 MATCH void func_8015C1A8(s32 slot, u8 field_1c, u8 field_18) {
     u32 index;
     u16 flags;

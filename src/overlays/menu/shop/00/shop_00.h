@@ -1,7 +1,9 @@
 #ifndef OVERLAY_ETC_SHOP_00_H
 #define OVERLAY_ETC_SHOP_00_H
 
-/* The shop overlay's local declarations. */
+/* The shop overlay's local declarations: its panel and sprite views, the
+ * weapon/armor/item stock state, and the prototypes its units share. Only this
+ * image includes the file. */
 
 #include "game/character.h"
 #include "menu/party.h"
@@ -15,12 +17,16 @@
 #define SHOP_ANTIQUE_COUNT            (ITEM_DRAGON_TEAR - ITEM_CLAY_VASE + 1U)
 #define SHOP_ANTIQUE_PRICE_MULTIPLIER 50
 
-/* The game clock's seconds byte. */
+/* The game clock's seconds byte. Retail reads it a second time through the
+ * literal address, so the second read keeps the MEM spelling. */
 #define SHOP_CLOCK_SECONDS_ADDR       0x8014496E
 #define g_SceneFlags                  ((u8**)&g_SceneFlags)
 #define g_AreaLoads                   ((s32**)g_AreaLoads)
 
-/* Draw the cursor icon; on the countdown or an input advance it and report arrival. */
+/* Draw the cursor icon; on the countdown or an input advance it and report
+ * arrival. A bare statement macro: the member declares `counter` and `count`
+ * and returns its result. Kept: as an inline the frame grows 4 bytes (0xBC, retail
+ * 0xB8) and the do/while form moves bytes. */
 #define ETC_DRAW_CURSOR(row_y, icon, frame)                        \
     WinDrawCueText(MENU_PROMPT_X, (row_y), *cursor_byte + (icon)); \
     counter = &D_80148654;                                         \
@@ -36,7 +42,9 @@
     }                                                              \
     return 0
 
-/* Tick the request counter and switch the window to mode 1 when the stream loader is idle. */
+/* Tick the request counter and switch the window to mode 1 when the stream
+ * loader is idle. Kept: the cue counter is a global lvalue; as an inline taking
+ * its address, the first lui moves from $v1 to $v0 in both members. */
 #define ETC_ADVANCE_CUE_AFTER_COUNTDOWN(cue_counter) \
     do {                                             \
         u8* counter;                                 \
@@ -68,7 +76,8 @@ ASSERT_OFFSET(MenuListPanel, selected, 0x0D);
 ASSERT_OFFSET(MenuListPanel, unk_10, 0x10);
 ASSERT_OFFSET(MenuListPanel, names, 0x20);
 
-/* The scratchpad work row behind g_Task while func_801D62DC fills it from the selection table at 0x801E537C (three words per row). */
+/* The scratchpad work row behind g_Task while func_801D62DC fills it from
+ * the selection table at 0x801E537C (three words per row). */
 typedef struct ShopSelection {
     u8  pad_00[0x34];
     s32 unk_34;

@@ -2,7 +2,9 @@
 
 /* Declared file-locally: this module's shared header omits the callees. */
 
-/* Draws the AREA030 prompt rows for the current slot, queues the cue the pad pair selects, toggles the caret and advances the panel step. */
+/* Draws the AREA030 prompt rows for the current slot, queues the cue
+ * the pad pair selects, toggles the caret and advances the panel step, then
+ * places the caret row and runs the shared per-frame tails. */
 MATCH void func_801DC0CC(void) {
     FishingState* work;
     s32           offset;

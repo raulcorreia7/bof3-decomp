@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* scans the sep table for a claimable voice. */
+/* scans the sep table for a claimable voice: the first entry with a
+ * bound sep id whose four seq slots report end-of-sequence is written back as
+ * (entry index, seq); returns 0 on a claim and 1 when none is free.
+ */
 MATCH bool SND_FindFreeFxVoice(u8* out_index, u8* out_seq) {
     s32 i;
     s32 j;

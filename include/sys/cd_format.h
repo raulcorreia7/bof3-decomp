@@ -9,9 +9,11 @@
  * disc names (@source: wiki:formats/emi#disc-slot-ids). */
 typedef u32 DiscLba;
 
-/* A loader slot id indexes the disc file table at 0x80182444. */
+/* A loader slot id indexes the disc file table at 0x80182444. A family base
+ * is the slot of its first file; the file at base + n is the n-th of its
+ * numbered series (ENEMY000, BGM000, PL012, AREA000, ...). */
 typedef enum EMISlotId {
-    /* BATTLE. */
+    /* BATTLE */
     EMI_SLOT_BATL_DRA     = 0,
     EMI_SLOT_BATL_END     = 1,
     EMI_SLOT_BATL_OVR     = 2,
@@ -21,7 +23,7 @@ typedef enum EMISlotId {
     EMI_SLOT_BATTLE       = 6,
     EMI_SLOT_BATTLE2      = 7,
     EMI_SLOT_COMN_SE      = 8,
-    /* numbered series. */
+    /* numbered series */
     EMI_SLOT_ENEMY        = 0x9,
     EMI_SLOT_BGM          = 0xD1,
     EMI_SLOT_MAGIC        = 0x122,
@@ -29,7 +31,7 @@ typedef enum EMISlotId {
     EMI_SLOT_BOSS         = 0x1B3,
     EMI_SLOT_BPLD         = 0x1DB,
     EMI_SLOT_BPLU         = 0x1EE,
-    /* ETC. */
+    /* ETC */
     EMI_SLOT_A085SE2      = 0x254,
     EMI_SLOT_A108SE2      = 0x255,
     EMI_SLOT_AFLDKWA      = 0x256,
@@ -52,14 +54,15 @@ typedef enum EMISlotId {
     EMI_SLOT_SISYOU       = 0x267,
     EMI_SLOT_START        = 0x268,
     EMI_SLOT_STATUS       = 0x269,
-    /* numbered series. */
+    /* numbered series */
     EMI_SLOT_PL           = 0x26A,
     EMI_SLOT_PLP          = 0x27D,
     EMI_SLOT_SCENA        = 0x295,
     EMI_SLOT_AREA         = 0x2AB,
 } EMISlotId;
 
-/* The family argument of EMI_GetArchiveId selects the numbered series that the index counts into. */
+/* The family argument of EMI_GetArchiveId selects the numbered series that the
+ * index counts into. */
 typedef enum EMIFamily {
     EMI_FAMILY_PL   = 0,
     EMI_FAMILY_BPLD = 1,

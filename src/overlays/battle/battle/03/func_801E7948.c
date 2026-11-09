@@ -1,9 +1,10 @@
 #include "battle_03.h"
 
-/* Slot tables selected by the battle record's 0x08 byte; values are stream-slot ids (u16). */
+/* Slot tables selected by the battle work record's 0x08 byte; values are
+ * stream-slot ids (u16). */
 
 /* picks the next stream slot for the battle overlay: with the 0x8000 flag the hint selects a 0xF/0xE/0xD/7
- * variant by the record's unk_08 (offset by 0x1DB/0x1EE when the query fails), without it the hint indexes the
+ * variant by the work record's unk_08 (offset by 0x1DB/0x1EE when the query fails), without it the hint indexes the
  * D_800B4A64/D_800B4A68 slot table; starts the slot and advances the step byte.
  */
 MATCH void func_801E7948(void) {

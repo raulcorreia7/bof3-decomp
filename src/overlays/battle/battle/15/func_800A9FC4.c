@@ -1,6 +1,9 @@
 #include "battle_15.h"
 
-/* Rescales the active battler's panel values. */
+/* Rescales the active battler's panel values: blends the four stat
+ * quotes and the four element gauges toward their row tables, mirrors the
+ * panel bytes and applies the element and status modifiers.
+ */
 MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     s32 party_slot;
     s32 row_offset;

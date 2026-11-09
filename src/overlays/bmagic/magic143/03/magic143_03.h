@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_MAGIC143_03_H
 #define OVERLAY_BMAGIC_MAGIC143_03_H
 
-/* The bmagic/magic143/03 overlay. */
+/* The bmagic/magic143/03 overlay. Only this image includes the file. */
 
 /* The scratchpad base here is the 32-bit depth word. */
 #define GAME_SCRATCH_BASE_WORD
@@ -14,7 +14,8 @@
 #define BOLT_FLICKER_MASK 0x1F
 #define BOLT_FLICKER_BASE 0xA0
 
-/* The bolt point D_1F800014, also read as halfwords. */
+/* The bolt point D_1F800014, also read as halfwords, and the scratch words of the bolt: the segment length, the
+ * swing angle, the flicker and the segment count. */
 extern SVECTOR D_1F800014[];
 extern s16     D_1F800014_HALF[];
 extern s16     D_1F800016;

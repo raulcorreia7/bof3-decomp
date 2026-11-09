@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Advances the scratchpad step counter and moves the work position by the current entry's deltas. */
+/* Advances the scratchpad step counter and moves the work position
+ *           by the current entry's deltas, then redraws the panel row and
+ *           two counters. */
 MATCH void func_801D6CB0(void) {
     u8 steps;
     s8 direction;

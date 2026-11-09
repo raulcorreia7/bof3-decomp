@@ -1,8 +1,18 @@
 #include "area030_04.h"
 
-/* Area 030/04's retail .data, 0x801E1CD4..0x801E3044, in address order. */
+/* Area 030/04's retail .data, 0x801E1CD4..0x801E3044, in address order.
+ * Each pointer table and byte table is its own object; row tables use their
+ * record types with direct brace initializers. A few retail rows start at an
+ * offset the 4-byte object alignment cannot express (D_801E1F16, the
+ * D_801E1FE8 group, D_801E2025, D_801E21D9 and D_801E2331), so each run
+ * is one packed row container whose fields keep the retail names.
+ * Address-named views of a row (D_801E207D, D_801E2ACA, D_801E2720, ...)
+ * stay names of their own: the linker pins every D_<ADDR> name to its
+ * address, so a reader keeps the name the retail code used. */
 
-/* One 12-byte fishing message row. */
+/* One 12-byte fishing message row: the text length, the text pointer, the
+ * palette index (0xFF for none) and the display duration reloaded when the
+ * message finishes. The 13 rows are the fishing prompts and status lines. */
 typedef struct {
     u8  length;
     u8  pad_01[3];
@@ -13,14 +23,16 @@ typedef struct {
 } FishingMessage;
 ASSERT_SIZE(FishingMessage, 0xC);
 
-/* One 8-byte lure label slot. */
+/* One 8-byte lure label slot: the frame string func_801DE018 steps and the
+ * signed growth byte it folds into the bar. */
 typedef struct {
     u8 *frames;
     s32 growth;
 } FishingLureLabel;
 ASSERT_SIZE(FishingLureLabel, 0x8);
 
-/* Packed runs: the compiler aligns every object to 4 bytes, while these retail rows sit at odd offsets. */
+/* Packed runs: the compiler aligns every object to 4 bytes, while these
+ * retail rows sit at odd offsets.  The fields keep the retail address names. */
 struct FishingCueColors {
     u8 D_801E1F14[2];
     u8 D_801E1F16[10];
@@ -111,7 +123,8 @@ static u8 sLineOnRocksLabel[28] = "Line" T_SP "got" T_SP "caught" T_SP "on" T_SP
 static u8 sLineBrokeLabel[24] = "Line" T_SP "broke" "\x91" T_SP "lure" T_SP "lost]";
 static u8 sLureFellLabel[32] = "Lure" T_SP "fell" T_SP "off" "\x91" T_SP "catch" T_SP "got" T_SP "away]";
 static u8 sLessThanLabel[4] = "<";
-/* Fishing prompt and status messages. */
+/* Fishing prompt and status messages; D_801E1E7C names the text word at +4
+ * and D_801E1E80 the palette byte at +8 of a row. */
 static FishingMessage sFishingMessages[13] = {
     {0x0A, {0, 0, 0}, sCastingLabel, 0x00, 0x0C, {0, 0}},
     {0x11, {0, 0, 0}, sSetRodLabel, 0x02, 0x0C, {0, 0}},
@@ -166,7 +179,8 @@ Callback D_801E1FD4[5] = {
     (Callback)func_801D57B0, (Callback)func_801D5958, (Callback)func_801D5A48,
     (Callback)func_801D5B48, (Callback)func_801D5B70,
 };
-/* Step rows: a sound byte, a state byte, the handler table and two more byte columns, all read with the same row index. */
+/* Step rows: a sound byte, a state byte, the handler table and two more
+ * byte columns, all read with the same row index. */
 static struct FishingStepRows sStepRows = {
     {0x01},
     {0x10, 0x02, 0x14, 0x03, 0x1E, 0x04, 0x10, 0x03, 0x10, 0x04, 0x10, 0x03,
@@ -349,7 +363,8 @@ u16 D_801E2354[24] = {
     0x0010, 0x000C, 0x0010, 0x000E, 0x000E, 0x000E, 0x000E, 0x0010,
     0x0012, 0x000E, 0x0018, 0x0012, 0x0028, 0x0010, 0x001A, 0x0000,
 };
-/* The four word columns of the 16-byte AREA030 graphic draw records, indexed by graphic id with func_801E0C80's `(graphic & 0xff) * 4`. */
+/* The four word columns of the 16-byte AREA030 graphic draw records,
+ * indexed by graphic id with func_801E0C80's `(graphic & 0xff) * 4`. */
 s32 D_801E2384[1] = {
     0x00000001,
 };

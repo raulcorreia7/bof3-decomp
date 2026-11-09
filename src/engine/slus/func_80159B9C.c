@@ -1,9 +1,11 @@
 #include "engine/slus/slus.h"
 
-/* draws a translucent textured quad and its outline at the given screen position. */
+/* draws a translucent textured quad and its outline at the given
+ * screen position, then four corner bars around it.
+ */
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header
  * fix that closes the first mismatch. */
-/* Deferred coordinate initialization leaves the saved-register difference at +0x04. */
+/* Deferred coordinate initialization leaves the saved-register difference at +0x04; pinned arguments change the frame size. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80159B9C(s32 x, s32 y, u16 w, u16 h) {
     s16       x1 = x;

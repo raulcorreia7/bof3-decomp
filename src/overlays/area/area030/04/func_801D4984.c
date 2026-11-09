@@ -1,6 +1,10 @@
 #include "area030_04.h"
 
-/* Slides the AREA030 fishing panel in. */
+/* Slides the AREA030 fishing panel in: steps the slide counter at
+ * work+0x09 down, draws the panel bars, the recorded or blank catch row keyed
+ * by work+0x3E, the counter panel and the frame offset by that counter, then
+ * the option mask, and advances the work state at work+0x01 once the counter
+ * reaches zero. */
 MATCH void func_801D4984(void) {
     s16 key;
     s32 mask;

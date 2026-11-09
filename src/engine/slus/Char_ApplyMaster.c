@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* runs the update script selected by arg[0x1B]. */
+/* runs the update script selected by arg[0x1B]: each entry is an
+ * (opcode, operand) pair applied to one counter slot, MASTER_MOD_END ends it.
+ */
 MATCH void Char_ApplyMaster(u8* arg) {
     u8* pc;
     u8* val;

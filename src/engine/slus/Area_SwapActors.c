@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* swaps the two indexed words of the D_80148214 table. */
+/* swaps the two indexed words of the D_80148214 table.
+ */
 MATCH void Area_SwapActors(s32 first, s32 second) {
     Actor** table;
     Actor** a;

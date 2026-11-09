@@ -2,7 +2,10 @@
 
 u8 func_800A82A0(u8 selection_id); /* extern */
 
-/* picks the battle formation. */
+/* picks the battle formation: collects the flag byte of each live,
+ * non-active party slot, then accepts one of the six directional pairs,
+ * retrying once with the pair swapped.
+ */
 MATCH u8 func_800A805C(void) {
     u8 slots[PARTY_SLOT_COUNT];
     u8 count; /* collected flag count; the swap below reuses its storage */
@@ -67,7 +70,8 @@ MATCH u8 func_800A805C(void) {
                 }
                 break;
         }
-        /* Rotate the two collected flag bytes. */
+        /* Rotate the two collected flag bytes; the counter's storage carries
+         * the saved first byte, as the original keeps it in that register. */
         count    = slots[0];
         slots[0] = slots[1];
         slots[1] = count;

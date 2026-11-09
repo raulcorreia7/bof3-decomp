@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* Retries the pending read, then converts the stored position. */
+/* Retries the pending read, then converts the stored position.
+ */
 MATCH void SND_XaStateReadResult(void) {
     s32  value;
     u16  count;

@@ -1,7 +1,8 @@
 #ifndef BMAGIC_FAMILY_H
 #define BMAGIC_FAMILY_H
 
-/* an image header that reads one includes this file. */
+/* Declarations shared by two or more bmagic images; an image header that
+ * reads one includes this file. */
 
 #include "common/vector.h"
 #include "game.h"
@@ -12,7 +13,9 @@
 #define BMAGIC_PHASE_ANGLE(phase) ((phase) << 6)
 #define BMAGIC_PHASE_MASK         0x3F
 
-/* The statements of Effect_SetActorMatrix after its rotation is set. */
+/* The statements of Effect_SetActorMatrix after its rotation is set; each
+ * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
+ * whose vertical span halves into the depth. */
 #define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)    \
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000; \
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000; \
@@ -30,7 +33,11 @@
 
 #define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(g_Task)
 
-/* Free the palette fade of the battler the target selector names (a party row below BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row), tell the battle UI and the effect player about the selector. */
+/* Free the palette fade of the battler the target selector names (a party row
+ * below BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row), tell the battle UI and
+ * the effect player about the selector, then raise the effect-playing state.
+ * A statement macro: the member declares u32 slot, u8* selector and
+ * PartyMember* battler. */
 #define BMAGIC_RELEASE_TARGET_AND_PLAY()                                        \
     slot = LOBU(g_Battle.target_selector);                                      \
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                 \
@@ -45,7 +52,12 @@
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
     func_801E5988()
 
-/* The sway step of the effect record WORK points to. */
+/* The sway step of the effect work record WORK points to: phase_0C advances and
+ * its low six bits set the wave (also stored in the scratchpad halfword at
+ * 0x1F800006), which moves unk_20 around unk_08 by 0x18 * sin; unk_22 grows by
+ * unk_0A; unk_06 drops every fourth frame; at timer_05 zero the effect steps
+ * and CLEAR (the image's work-clearing function) runs. A statement macro: the
+ * member declares u16 phase and u8 timer. */
 #define BMAGIC_SWAY_EFFECT_WORK(WORK, CLEAR)                                              \
     phase            = (WORK)->phase_0C + 1;                                              \
     (WORK)->phase_0C = phase;                                                             \
@@ -63,7 +75,13 @@
         CLEAR();                                                                          \
     }
 
-/* The sway-advance step of the effect record WORK points to. */
+/* The sway-advance step of the effect work record WORK points to: phase_0C
+ * advances and its low six bits set the wave (also stored in the scratchpad
+ * halfword at 0x1F800006), which moves unk_20 around unk_08 by 0x18 * sin;
+ * unk_22 grows by unk_0A; unk_06 counts up and the step advances whenever the
+ * count reaches unk_07. A statement macro: the member declares s32 wave, u16
+ * phase and u8 tick. The rsin argument keeps its (s16) truncation: the wave is
+ * passed twice and the second, recomputed shift lands in the call's delay slot. */
 #define BMAGIC_SWAY_ADVANCE_WORK(WORK)                                                             \
     phase            = (WORK)->phase_0C + 1;                                                       \
     (WORK)->phase_0C = phase;                                                                      \
@@ -82,7 +100,9 @@ typedef Point2D TrailPoint;
 
 #define BMAGIC_TRAIL_LENGTH 32
 
-/* Shift the points of the trail TRAIL[unk_04] from unk_0B up to unk_0A. */
+/* Shift the points of the trail TRAIL[unk_04] from unk_0B up to unk_0A - 1 one
+ * place toward the end, freeing the point at unk_0B. A statement macro: the
+ * member declares s32 i. */
 #define BMAGIC_SHIFT_TRAIL(TRAIL)                                        \
     i = g_Task->timer - 1;                                               \
     while (i >= g_Task->param.unk_0B) {                                  \
@@ -94,7 +114,9 @@ typedef Point2D TrailPoint;
 /* Decrement the active effect ticker. */
 #define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->param.unk_0B--)
 
-/* Run the module step handler the task step selects. */
+/* Run the module step handler the task step selects. A bare statement macro:
+ * the member declares `handlers`. Kept: as an inline taking the table by value
+ * the frame is 56 bytes where retail has 48 (func_801EEC1C in magic086). */
 #define BMAGIC_DISPATCH_STEP_HANDLERS(table, field) \
     handlers = (table);                             \
     handlers.handlers[g_Task->field]()
@@ -123,7 +145,8 @@ static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
     handlers[g_Task->header.mode]();
 }
 
-/* Add `step` to the work counter, count the effect timer down and finish the effect at zero. */
+/* Add `step` to the work counter, count the effect timer down and finish the
+ * effect at zero. */
 static inline void BMagic_CountDownEffectTimer(u8 step) {
     PartyMember* work;
     PartyMember* active;
@@ -141,7 +164,8 @@ static inline void BMagic_CountDownEffectTimer(u8 step) {
     }
 }
 
-/* Go to the next effect mode and reload the work timer while the ticker is under `limit`. */
+/* Go to the next effect mode and reload the work timer while the ticker is
+ * under `limit`. */
 static inline void BMagic_AdvanceEffectStep(u8 limit) {
     PartyMember* work;
 
@@ -153,7 +177,10 @@ static inline void BMagic_AdvanceEffectStep(u8 limit) {
     }
 }
 
-/* Swing the area camera pitch by 20 each tick, up on odd timer values and down on even ones. */
+/* Swing the area camera pitch by 20 each tick, up on odd timer values and down
+ * on even ones; at zero, rest it at -60 degrees, reload the timer with
+ * `settle_ticks` and go to the next step. A statement macro: as an inline the
+ * function is two instructions longer. */
 #define BMAGIC_SWING_CAMERA(settle_ticks)          \
     do {                                           \
         if ((g_Task->unk_09 & 1) != 0) {           \
@@ -175,7 +202,9 @@ typedef struct BMagicEffectFuncs {
 ASSERT_SIZE(BMagicEffectFuncs, 0x18);
 ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
 
-/* The effect record D_801F17B4 points to. */
+/* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
+ * func_801EF33C dispatches on mode. magic070-072 keep a pool of them, one
+ * record per sparkle. */
 typedef struct BMagicEffectWork {
     /* 0x00 */ TaskHeader   header;
     /* 0x03 */ u8           unk_03;
@@ -212,7 +241,7 @@ ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
 ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
 ASSERT_OFFSET(BMagicEffectWork, battler, 0x28);
 
-/* The record of an effect that orbits its battler. */
+/* The record of an effect that orbits its battler: the angle advances every frame and the radius scales sin and cos. */
 typedef struct BMagicOrbitWork {
     /* 0x00 */ TaskHeader header;
     /* 0x03 */ u8         unk_03;
@@ -264,7 +293,8 @@ extern BMagicEffectWork* D_801F17B0;
 extern BMagicEffectWork* D_801F17B4;
 
 void func_800A9610(u8 selector, u16 flags);
-/* Per-image effect entry points whose name is a different symbol in another overlay. */
+/* Per-image effect entry points whose name is a different symbol in another
+ * overlay; battle/battle/03 keeps its own view. */
 void func_800AFC54(void);
 void func_801EEC5C(void);
 void func_801EECE4(void);

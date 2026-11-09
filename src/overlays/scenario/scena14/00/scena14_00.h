@@ -1,7 +1,8 @@
 #ifndef OVERLAY_SCENARIO_SCENA14_00_H
 #define OVERLAY_SCENARIO_SCENA14_00_H
 
-/* The scenario/scena14/00 overlay's local declarations. */
+/* The scenario/scena14/00 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "overlays/scenario/scenario.h"
 

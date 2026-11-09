@@ -4,7 +4,8 @@
 #include "types.h"
 #include "psx/hw_extra.h"
 
-/* The PS1 hardware registers behind HW_REF: memory controller, SIO, DMA, timers, GPU, SPU and CD. */
+/* The PS1 hardware registers behind HW_REF: memory controller, SIO, DMA,
+ * timers, GPU, SPU and CD. Each name is the register it addresses. */
 
 #define MEM_CTRL1_EXP1_BASE  HW_REF(u32, 0x1F801000)
 #define MEM_CTRL1_EXP2_BASE  HW_REF(u32, 0x1F801004)

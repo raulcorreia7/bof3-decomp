@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* draws a Gouraud-shaded quadrangle sized and coloured from the record at record when its corners fall inside the current draw area. */
+/* draws a Gouraud-shaded quadrangle sized and coloured from the
+ * record at record when its corners fall inside the current draw area.
+ */
 MATCH void Area_DrawGouraudQuad(u32* record) {
     u8*      src;
     u32      x_limit;

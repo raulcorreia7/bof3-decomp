@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Adds 8 to the work position and, once it reaches 0xF1, resets the position to 0xF0, clears the sub-state bytes and steps the work state. */
+/* Adds 8 to the work position and, once it reaches 0xF1, resets the
+ * position to 0xF0, clears the sub-state bytes and steps the work state, then
+ * submits the position. */
 MATCH void func_801D0E9C(void) {
     FishingState* work;
     s32           position;

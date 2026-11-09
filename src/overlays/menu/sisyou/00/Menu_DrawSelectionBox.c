@@ -37,7 +37,8 @@ MATCH void Menu_DrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, 
 
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
-    /* DIAG(1): the original stores the quad corners x0,y0,x3,y3,y1,y2,x2,x1. */
+    /* DIAG(1): the original stores the quad corners x0,y0,x3,y3,y1,y2,x2,x1;
+     * the scheduler preserves statement order here, so spell that order. */
     setXY0(line4, x_corner, y);
     line4->x3 = x;
     line4->y3 = y_bottom;

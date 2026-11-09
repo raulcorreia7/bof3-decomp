@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* HAND_ASM: `$t0`/`$t3` stay live across calls, `$ra` is parked in `$s6`, `$s0`-`$s7` are saved in the context and `jr $t4` dispatches through an absolute resume table. */
+/* HAND_ASM: `$t0`/`$t3` stay live across calls, `$ra` is parked in `$s6`, `$s0`-`$s7` are saved in
+ * the context and `jr $t4` dispatches through an absolute resume table; C89 cannot express them.
+ * See docs/toolchain.md#compiler-chain. */
 #ifdef NON_MATCHING
 /* C model, checked on the host by tools/tests/test_lz77_model.py: resumable stream decoder.
  * decodes the scratchpad window [src, limit) into ctx->dst until the

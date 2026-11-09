@@ -1,6 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* draws a text record through the shared sprite cursor. */
+/* draws a text record through the shared sprite cursor: STRING_COLOR selects the next byte as a
+ * palette source, STRING_NOCOLOR restores the saved one, STRING_NEWLINE advances a line, STRING_VAR recurses into a
+ * 0x20-byte row, STRING_NUM selects a glyph from the 21-column sheet, and ordinary bytes use the 31-column sheet;
+ * glyphs are 8 wide with height from D_8017F580. The second argument budgets the bytes consumed.
+ */
 MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
     u8* str;
     u8  palette;

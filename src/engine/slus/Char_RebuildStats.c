@@ -6,7 +6,9 @@ typedef struct {
     u8 data[32];
 } CharacterAttributes;
 
-/* copies the base block over the live block, refreshes derived state. */
+/* copies the base block over the live block, refreshes derived
+ * state, then retunes per-slot values against the matching table entry.
+ */
 MATCH void Char_RebuildStats(Character* record) {
     s32 prod;
     s32 quot;

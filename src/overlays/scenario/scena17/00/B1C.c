@@ -152,7 +152,8 @@ MATCH void func_801F7C6C(void) {
     }
 }
 
-/* The script counter is read and written through one materialized address (a0). */
+/* The script counter is read and written through one materialized address (a0), so the increment
+ * store lands in the jump's delay slot; a direct D_80146874 += 1 reloads the address per access. */
 MATCH void func_801F7D08(void) {
     s32 height;
     u8* step;

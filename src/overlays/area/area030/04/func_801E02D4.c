@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Picks a randomised reaction tier from the distance between the scratch byte at 0x0A and current_byte, scaled by the per-state threshold. */
+/* Picks a randomised reaction tier from the distance between the
+ * scratch byte at 0x0A and current_byte, scaled by the per-state threshold, and returns
+ * whether the drawn nibble falls below it. */
 MATCH bool func_801E02D4(u8 current_byte, u8 target_byte) {
     u32 raw;
     u32 threshold;

@@ -26,7 +26,7 @@ typedef struct ActorEffectSteps {
     Callback steps[ACTOR_EFFECT_STEP_COUNT];
 } ActorEffectSteps;
 
-/* The step routines of the effect record func_801EF37C advances. */
+/* The step routines of the effect work record func_801EF37C advances. */
 #define BMAGIC_EFFECT_WORK_STEP_COUNT 3
 
 typedef struct BMagicEffectWorkSteps {
@@ -71,7 +71,10 @@ typedef struct Magic004SharedSteps {
     Callback steps[MAGIC004_SHARED_STEP_COUNT];
 } Magic004SharedSteps;
 
-/* A battle-effect module's head. */
+/* A battle-effect module's head. The id word is the value the type-0 EMI
+ * loader compares with the archive TOC; the three state callbacks follow and
+ * the module entry copies them and indexes them with the shared spad step
+ * byte. The rest of the head is per-module data measured from its own bytes. */
 typedef struct MagicModule {
     EMIModuleId      id;    /* 0x00; 0x144-0x1BF */
     MagicModuleSteps steps; /* 0x04 */
@@ -79,7 +82,8 @@ typedef struct MagicModule {
 
 ASSERT_SIZE(MagicModule, 0x10);
 
-/* The effect-module entry points, in address order: battle/battle/03 runs a module through these steps. */
+/* The effect-module entry points, in address order: battle/battle/03 runs a
+ * module through these steps. */
 void func_801EEC04(void);
 void func_801EEC58(void);
 void func_801EED70(void);

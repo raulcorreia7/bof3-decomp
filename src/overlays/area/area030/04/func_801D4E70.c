@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Draws one panel row: counts the work timer down, draws the entry for the current key at the offset set by the direction flag. */
+/* Draws one panel row: counts the work timer down, draws the entry for the current key at the
+ * offset set by the direction flag, then the frame, and resets the state to 8 once the timer reaches zero. */
 MATCH void func_801D4E70(void) {
     FishingState* work;
     s16           key;

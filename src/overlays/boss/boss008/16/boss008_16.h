@@ -1,7 +1,8 @@
 #ifndef OVERLAY_BOSS_BOSS008_16_H
 #define OVERLAY_BOSS_BOSS008_16_H
 
-/* The boss/boss008/16 overlay: one file per split function and its data. */
+/* The boss/boss008/16 overlay: one file per split function
+ * and its data. Only this image includes the file. */
 
 #include "overlays/boss/boss.h"
 
@@ -26,14 +27,17 @@ void                func_800C1D74(s32 mode);
 void                func_800C1E60(s32 mode);
 void                func_800C1F4C(s32 mode);
 u8                  Boss_HandleBattleEvent4(u32 mode);
-/* The mode handler sets the image installs into the battle hooks. */
+/* The mode handler sets the image installs into the battle hooks; the
+ * addresses are in [emi/boss/boss008/16] of config/symbols.toml. */
 void                Boss_ChooseBattleEnding4(void);
 void                Boss_EndBattle4(void);
 void                func_800C236C(u8 phase);
 /* D_801EB630 */
 extern EnemyBattler g_BattleEnemyBattlers[];
 
-/* The end-of-battle setup of one enemy slot. */
+/* The end-of-battle setup of one enemy slot. It takes the slot's record into the scratchpad and finds scene
+ * record 0x83; the finish plays script 0 and copies the halfwords at +0x58 and +0x5A of the first enemy record. A
+ * member that marks the record writes that statement between the two. */
 #define BOSS008_END_BATTLE_BEGIN(slot)          \
     func_800AC844(slot);                        \
     g_Task = (PartyMember*)func_800AC754(slot); \

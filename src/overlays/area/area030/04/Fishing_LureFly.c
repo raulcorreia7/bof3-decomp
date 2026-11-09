@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Clamps the record's height to the retail range. */
+/* Clamps the work record's height to the retail range, then either
+ * settles the record on arrival (clears motion and advances the state) or steps
+ * its Y coordinate toward the target and updates X/Z from the current motion. */
 /* func_801D23F4 */
 MATCH void Fishing_LureFly(void) {
     s32           row;

@@ -1,4 +1,6 @@
-/* Raises the ticker and timer, lowers the counter by two and advances the step when it reaches 0x10. */
+/* Raises the ticker and timer, lowers the counter by two and advances the step when it reaches 0x10.
+ * One definition shared by the images that include it;
+ * every change here must verify every member. */
 /* func_801EF09C (magic055), func_801EF09C (magic091) */
 MATCH void func_801EF09C(void) {
     u8 counter;

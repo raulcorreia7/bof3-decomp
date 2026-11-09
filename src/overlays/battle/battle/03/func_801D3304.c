@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* resolves the selected ability action, draws its panel and either starts the confirm step or queues the failure cues. */
+/* resolves the selected ability action, draws its panel and either
+ * starts the confirm step or queues the failure cues.
+ */
 MATCH void func_801D3304(void) {
     u16 row;
     u16 flag;
@@ -21,7 +23,7 @@ MATCH void func_801D3304(void) {
             return;
         }
         if (*battle_half != 0x97) {
-            /* a plain store: the volatile one blocks the func_801501E4 delay-slot fill. */
+            /* a plain store: the volatile one blocks the func_801501E4 delay-slot fill */
             *(u8*)&g_BattleMessageState = 1;
             SYS_CopyString((u8*)&D_80149298, (u8*)&g_Abilities[*battle_half], 0xC);
             func_801DE560(1, 1, 0, 0x3C, (u8*)&D_80149298);

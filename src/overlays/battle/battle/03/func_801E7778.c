@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* clears one local work flag bit. */
+/* clears one local work flag bit, then either integrates the local
+ * velocity or resets the step and clears the selected record's pending flag.
+ */
 MATCH void func_801E7778(void) {
     PartyMember* work;
     u8           flag;

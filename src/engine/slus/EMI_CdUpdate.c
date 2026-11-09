@@ -4,7 +4,9 @@ typedef struct OverlayCallbackGroup {
     u32 values[4];
 } OverlayCallbackGroup;
 
-/* snapshots the target-local EMI callback table and invokes the callback selected by the current loader mode. */
+/* snapshots the target-local EMI callback table and invokes the
+ * callback selected by the current loader mode.
+ */
 MATCH void EMI_CdUpdate(void) {
     OverlayCallbackGroup*       dst;
     const OverlayCallbackGroup* src;

@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* @returns whether the bytes at offsets 0x86/0x87 of g_Game.current select compare_value (masked). */
+/* @returns whether the bytes at offsets 0x86/0x87 of g_Game.current select
+ * compare_value (masked); only checks when (battler_index & 0xFF) < 3.
+ */
 MATCH bool func_800A3638(s32 battler_index, s32 compare_value) {
     volatile u8* entry;
     s32          compare_byte;

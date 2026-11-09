@@ -1,4 +1,8 @@
-/* The equipment compare window. */
+/* The equipment compare window: a party member's name, power, defense, intellect and agility, the value each stat
+ * would reach with the equipment in patch (func_80164EF8) beside an icon chosen by its compare flag, and the six
+ * equipment slots, with the task's two selected slots raised. start/08, shop/00, bate/00 and shisu/00 include it where
+ * the function sits, and each image header declares g_MenuEquipCompareSprites, g_MenuEquipCompareLabels and
+ * g_MenuEquipSlotIcons. */
 #define MENU_EQUIP_COMPARE_WINDOW_WIDTH  120
 #define MENU_EQUIP_COMPARE_WINDOW_HEIGHT 163
 #define MENU_EQUIP_COMPARE_STATS         4 /* power, defense, intellect and agility */

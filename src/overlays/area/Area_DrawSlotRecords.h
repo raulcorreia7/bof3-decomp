@@ -1,5 +1,6 @@
-/* Draws the sixteen 0x2C-byte records at 0x800E48C0 with DRAW_SLOT, turning each record's angle by 0x10. */
-/* AREA_DRAW_SLOT_RECORDS (area098 0x801F5940, area188 0x801F44B4). */
+/* Draws the sixteen 0x2C-byte records at 0x800E48C0 with DRAW_SLOT, turning each record's angle by 0x10. A statement
+ * macro shared by the area overlays; every change here must verify every member. */
+/* AREA_DRAW_SLOT_RECORDS (area098 0x801F5940, area188 0x801F44B4) */
 #define AREA_DRAW_SLOT_RECORDS(DRAW_SLOT)                     \
     MATRIX matrix;                                            \
     s32    spin;                                              \

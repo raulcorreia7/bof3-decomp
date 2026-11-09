@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* initializes the EMI/CD bootstrap state before the first active entry is installed. */
+/* initializes the EMI/CD bootstrap state before the first active
+ * entry is installed.
+ */
 MATCH void EMI_Init(void) {
     s32           i;
     u8*           slot_state;

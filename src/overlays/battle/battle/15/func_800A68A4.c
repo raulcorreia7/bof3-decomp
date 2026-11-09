@@ -9,7 +9,8 @@ MATCH void func_800A68A4(void) {
 
     i = 0;
     {
-        /* The loop's pointer must die before the first call, or the address is held in s1 from entry. */
+        /* The loop's pointer must die before the first call, or the address is
+         * held in s1 from entry. */
         volatile u8* loop_battler = &g_Battle.active_battler;
         for (; i < 8; i++) {
             g_Game.members[*loop_battler].status.unk_12C[i] = 0;

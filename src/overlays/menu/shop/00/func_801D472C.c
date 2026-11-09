@@ -8,7 +8,8 @@ MATCH void func_801D472C(void) {
     D_801E60EC = SAVE_WAIT_PROBE;
     MENU_DRAW_HEADER();
     D_801E6080 = 0;
-    /* Pointer form: retail keeps one base register across the counter read and the store. */
+    /* Pointer form: retail keeps one base register across the counter read and
+     * the store, which symbol accesses would re-materialize. */
     state      = &g_MenuStep.state;
     count      = *state;
     *state     = 0x13;

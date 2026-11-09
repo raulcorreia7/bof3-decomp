@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Arms the panel window and cursor row, counts the panel timer down and, at zero, claims a free entry row for the selected scene and advances the work state. */
+/* Arms the panel window and cursor row, counts the panel timer down
+ * and, at zero, claims a free entry row for the selected scene and advances the
+ * work state. */
 /* FAKE: retail reads the distance halfword unsigned (lhu). */
 MATCH void func_801D5398(void) {
     FishingState* work;

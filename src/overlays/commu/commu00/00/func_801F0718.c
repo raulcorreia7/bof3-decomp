@@ -1,8 +1,18 @@
 #include "commu00_00.h"
 
-/* Shapes the bytes prove: the pair handed to Area_SampleHeight is read through the D_801468BC/D_801468C0 byte views of the slot's packed fields (a g_Task-relative read emits a materialized base plus zero-displacement loads instead). */
-/* Packed coordinate pair of each task slot, reached through its own byte view (slot stride 0x98, pair at +0x34/+0x38). */
-/* Per-task rows of three bytes; byte 2 is the mode selector and bytes 0-1 seed the packed coordinate pair. */
+/* Shapes the bytes prove: the pair handed to Area_SampleHeight is read through the
+ * D_801468BC/D_801468C0 byte views of the slot's packed fields (a
+ * g_Task-relative read emits a materialized base plus zero-displacement
+ * loads instead); variant_state and the distance pair go through the
+ * g_Actors array expression while mode, state, unk_34/36/38/3a/3e,
+ * source_index and resource_id go through the g_Task scratch pointer; the
+ * unk_3A store precedes unk_38 and the unk_3E store precedes source_index. No
+ * .rodata table is involved, so the jump-table alignment residual of
+ * Fairy_SpawnWorker cannot apply here. */
+/* Packed coordinate pair of each task slot, reached through its own byte view
+ * (slot stride 0x98, pair at +0x34/+0x38). */
+/* Per-task rows of three bytes; byte 2 is the mode selector and bytes 0-1 seed
+ * the packed coordinate pair. */
 
 MATCH void func_801F0718(u8 source_index, u8 task_index) {
     s16 distance;

@@ -1,4 +1,5 @@
-/* Dispatches a scene handler by position index. */
+/* Dispatches a scene handler by position index. One definition shared by scenario overlays;
+ * every change here must verify every member. */
 /* func_801FA010 (scena04), func_801FDA98 (scena07) */
 MATCH s32 Scene_DispatchByPosition(s32 x, s32 y) {
     s8  index;

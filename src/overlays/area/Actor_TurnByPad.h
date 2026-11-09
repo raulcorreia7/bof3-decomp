@@ -1,4 +1,7 @@
-/* Turns the task facing by the held pad direction. */
+/* Turns the task facing by the held pad direction: down reverses it, right steps it
+ * forward and left steps it back, then it is kept to the eight facings. Returns 0 when
+ * no direction is held. One definition shared by the area overlays. Every change here
+ * must verify every member address. */
 /* func_801F5140 (area104/14), func_801F5684 (area121/14) */
 MATCH bool Actor_TurnByPad(void) {
     if (g_InputHeld & 0x4000) {

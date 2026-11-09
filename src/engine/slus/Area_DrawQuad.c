@@ -2,7 +2,10 @@
 
 #include <inline_c.h>
 
-/* draws one textured quadrangle per five-word part in the list at parts. */
+/* draws one textured quadrangle per five-word part in the list at
+ * parts: four vertices built from signed byte offsets around the projected
+ * origin, and a primitive code chosen from the part texture word.
+ */
 MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
     SVECTOR    verts[4];
     ScenePart* rec;

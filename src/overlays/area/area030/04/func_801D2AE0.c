@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Either advances the local AREA030 scratch record from the shared world state or falls back to the game-side helper when the countdown gate is not active. */
+/* Either advances the local AREA030 scratch record from the shared
+ * world state or falls back to the game-side helper when the countdown gate is
+ * not active. */
 MATCH void func_801D2AE0(void) {
     volatile u8* scratch;
     volatile u8* world;

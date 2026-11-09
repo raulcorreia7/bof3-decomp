@@ -25,7 +25,8 @@
  * meanings stay separate.
  */
 
-/* Swap the bytes two pointers address, as the menu overlays swap two entries of a party order array or of the standby list. */
+/* Swap the bytes two pointers address, as the menu overlays swap two entries of a party order array or of the
+ * standby list. */
 static inline void Menu_SwapEntries(u8* first, u8* second) {
     u8 temp;
 
@@ -34,7 +35,8 @@ static inline void Menu_SwapEntries(u8* first, u8* second) {
     *second = temp;
 }
 
-/* One party formation: its name as the formation menu prints it (the length is what centres it) and the screen offset of each party member from the formation origin. */
+/* One party formation: its name as the formation menu prints it (the length is what centres it) and the screen
+ * offset of each party member from the formation origin. */
 typedef struct FormationLayout {
     char    name[7];
     u8      name_length;
@@ -52,6 +54,7 @@ typedef struct FormationOrder {
 
 /* D_80144F50 */
 extern u32 g_Zenny;
-/* Stored character id -> character-record slot (Observed: `sel = map[party_order[slot]]`). */
+/* Stored character id -> character-record slot (Observed:
+ * `sel = map[party_order[slot]]`). */
 
 #endif

@@ -1,6 +1,9 @@
 #include "area030_04.h"
 
-/* Advances the menu row counter, passes the row's 0x50-scaled window position to the row redraw. */
+/* Advances the menu row counter, passes the row's 0x50-scaled window
+ * position to the row redraw, and on the last row resets the counter and bumps
+ * the state counter selected by the record flag; the frame then redraws the
+ * panel and the address-based cursor. */
 MATCH void func_801DA2A0(void) {
     u8*  work;
     u8*  byte_counter;

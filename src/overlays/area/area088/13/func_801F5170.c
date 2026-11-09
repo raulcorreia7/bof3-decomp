@@ -1,6 +1,7 @@
 #include "area088_13.h"
 
-/* Each access reloads the work cell. */
+/* Each access reloads the work cell: the stores go through its pointer, which
+ * the compiler must assume may alias the cell. */
 #include "overlays/area/Area_StartCellActor.h"
 
 MATCH void func_801F5170(void) {

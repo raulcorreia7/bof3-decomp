@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* records the current EMI dispatch handler for the active ring slot, marks that slot active. */
+/* records the current EMI dispatch handler for the active ring slot,
+ * marks that slot active, and advances the loader step.
+ */
 MATCH void EMI_LoadCompressed(void) {
     s8*           flag;
     volatile u32* handlers;

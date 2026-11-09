@@ -1,6 +1,9 @@
 #include "battle_03.h"
 
-/* steps the three local battler rows. */
+/* steps the three local battler rows: each active row's countdown
+ * is compared with half the party size, then either its action is queued or
+ * the countdown is reduced and its state advanced.
+ */
 MATCH s32 func_801D62D8(void) {
     s32 count;
     u8  index;
@@ -15,7 +18,7 @@ MATCH s32 func_801D62D8(void) {
             flags = g_Game.members[index].u.turn.action_flags.volatile_value;
             if (flags & 2) {
                 if (flags & 0x20) {
-                    /* retail shares this clear block. */
+                    /* retail shares this clear block */
                     goto clear;
                 }
                 countdown = g_Game.members[index].chr.ap;

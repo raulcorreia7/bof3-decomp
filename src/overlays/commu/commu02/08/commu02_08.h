@@ -1,7 +1,8 @@
 #ifndef OVERLAY_ETC_COMMU02_08_H
 #define OVERLAY_ETC_COMMU02_08_H
 
-/* The etc/commu02/08 overlay's local declarations. */
+/* The etc/commu02/08 overlay's local declarations. Only this image
+ * includes the file. */
 
 #include "shared/etc.h"
 

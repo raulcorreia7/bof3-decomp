@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* clears the cell byte in the map's byte-code table, maps the cell through the grid table g_AreaCellGrid. */
+/* clears the cell byte in the map's byte-code table, maps the cell
+ * through the grid table g_AreaCellGrid, then walks the cell's primitive list and
+ * rewrites the render code of every quad command to 0x30.
+ */
 MATCH void Area_ClearCell(s32 x, s32 y) {
     AreaMapBundle* map;
     u8*            prim;

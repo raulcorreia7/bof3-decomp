@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* seeks the CD reader and flags completion. */
+/* seeks the CD reader and flags completion.
+ */
 MATCH void EMI_CdSeek(void) {
     u16* counter;
 
@@ -9,7 +10,8 @@ MATCH void EMI_CdSeek(void) {
         *counter -= 1;
         return;
     }
-    /* Param is D_80146778 (CdlLOC; see EMI_StartArchive.c); object form regresses bytes. */
+    /* Param is D_80146778 (CdlLOC; see EMI_StartArchive.c); object form regresses
+     * bytes. */
     if (CdSeekP((u_char*)counter + 0x2E6) != 0) {
         D_8014648A = 3;
     }

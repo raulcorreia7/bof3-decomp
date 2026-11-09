@@ -1,6 +1,7 @@
 #include "area030_04.h"
 
-/* Whether every fish species is held at the stack limit. */
+/* Whether every fish species is held at the stack limit: counts the item slots
+ * of ITEM_JELLYFISH through ITEM_MACKEREL that are full. */
 /* func_801E1C10 */
 MATCH bool Fishing_FishStacksFull(void) {
     s32 fish;

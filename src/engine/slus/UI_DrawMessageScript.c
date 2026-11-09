@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* The window state block whose flags word sits at g_UiWindowChannel. */
+/* The window state block whose flags word sits at g_UiWindowChannel; the palette and
+ * glyph deltas follow, then the x/y cursor the script advances. */
 typedef struct GameUITextState {
     volatile u16 flags; /* 0x00 */
     u8           unk_02[0x12];
@@ -12,7 +13,9 @@ typedef struct GameUITextState {
     u16          y;       /* 0x1A */
 } GameUITextState;
 
-/* walks the message script at g_MessageScript, drawing each glyph through func_8014F800 until D_801490B9 characters were drawn. */
+/* walks the message script at g_MessageScript, drawing each glyph
+ * through func_8014F800 until D_801490B9 characters were drawn.
+ */
 MATCH void UI_DrawMessageScript(void) {
     u8*              p;
     u8*              saved;
@@ -117,7 +120,9 @@ MATCH void UI_DrawMessageScript(void) {
                     if (*p == STRING_BACKSPACE && cursor[0] == cursor[2]) {
                         cursor[0] -= 8;
                     }
-                    /* The flagged path offsets the state cursor by its deltas. */
+                    /* The flagged path offsets the state cursor by its deltas; the
+                     * other reads the cursor signed and its palette from the byte
+                     * before it. */
                     if (flags & 0x20) {
                         if (state->flags & FRONTEND_FLAG_REQUEST_PENDING) {
                             UI_DrawGlyph(color, p);

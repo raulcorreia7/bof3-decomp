@@ -1,4 +1,4 @@
-/* Ends a turning step: begins the next one or stores the direction. */
+/* Ends a turning step: begins the next one or stores the direction. Every change here must verify every member. */
 /* func_801F58E8 (area104), func_801F5E2C (area121) */
 MATCH void Area_EndTurn(void) {
     u8* heading;

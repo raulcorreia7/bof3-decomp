@@ -1,4 +1,7 @@
-/* Once the script stream reports ready (Actor_StepAnimOnce), sets the work flag 0x20, starts the tint at zero and steps the handler. */
+/* Once the script stream reports ready (Actor_StepAnimOnce), sets the work flag
+ * 0x20, starts the tint at zero and steps the handler. Every change here must
+ * verify every member.
+ */
 /* func_801EFF28 (magic001), func_801F0024 (magic056) */
 MATCH void Effect_PrimeTintOnScriptReady(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {

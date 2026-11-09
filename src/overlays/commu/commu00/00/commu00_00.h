@@ -12,13 +12,16 @@
 #include <stdio.h>
 #include <string.h>
 
-/* The fairy-village roster this overlay owns. */
+/* The fairy-village roster this overlay owns: the 60 stat rows at 0x801F2700
+ * and the 60 job rows that pair with them at 0x801455C8. */
 #define FAIRY_VILLAGE_COUNT                   60
 
 /* The village culture levels, 0 to 6 (D_801455C4, gated by `sltiu 7`). */
 #define FAIRY_CULTURE_MAX                     6
 
-/* The exploration trip types. */
+/* The exploration trip types: the success roll each one needs
+ * (D_801EEC04, read signed by func_801EF784) and the label cap that bounds
+ * its random label roll (D_801EEC08, read by func_801F03D0). */
 #define FAIRY_EXPLORE_TRIP_NEAR               0
 #define FAIRY_EXPLORE_TRIP_MIDDLE             1
 #define FAIRY_EXPLORE_TRIP_FAR                2
@@ -34,7 +37,8 @@
 /* The job-progress step the copy shop needs before it opens (D_801455C3). */
 #define FAIRY_JOB_PROGRESS_COPY               0xA
 
-/* The fairy job row: 8 bytes, the stride the village code walks (func_801EF110, func_801EFA50). */
+/* The fairy job row: 8 bytes, the stride the village code walks
+ * (func_801EF110, func_801EFA50). */
 #define FAIRY_JOB_SIZE                        0x8
 #define FAIRY_VARIANT_SIZE                    0x6
 #define FAIRY_VILLAGE_HEAD_SIZE               0xC
@@ -43,7 +47,8 @@
 #define FAIRY_VILLAGE_HEADER_DATA_SIZE        0x60
 #define FAIRY_VILLAGE_FMT_SIZE                4
 
-/* The overlay's shared data block at 0x801F24FC..0x801F2950, read through the symbol views in the data block. */
+/* The overlay's shared data block at 0x801F24FC..0x801F2950, read through the
+ * symbol views in the data block. Each define is one member's row count. */
 #define FAIRY_VILLAGE_DATA_SIZE               0x454
 #define FAIRY_VILLAGE_RESOURCE_ID_COUNT       6
 #define FAIRY_CULTURE_LEVEL_COUNT             7
@@ -81,10 +86,12 @@
 /* The loaded work-area pointer; the pointee is the unit's Actor. */
 #define FAIRY_VILLAGE_ACTIVE_UI               D_801F2948
 
-/* The kind table read without volatile semantics. */
+/* The kind table read without volatile semantics: the cell is declared
+ * volatile for its other users, so the units that walk it take a plain view. */
 /* Byte at the start of each 8-byte record-kind entry. */
 #define VILLAGE_ROOM_SUBTYPE(index)           (D_801457A9[(index) * 8])
-/* Unsigned view: the cell is declared s8, but the original reads and writes it unsigned (lbu/sb). */
+/* Unsigned view: the cell is declared s8, but the original reads and writes it
+ * unsigned (lbu/sb). */
 /* FAKE: retail reads the state byte unsigned. */
 #define FAIRY_EVENT_STEP                      (*(u8*)&g_SceneEventStep)
 
@@ -117,7 +124,8 @@ ASSERT_SIZE(FairyVillageHead, FAIRY_VILLAGE_HEAD_SIZE);
 ASSERT_OFFSET(FairyVillageHead, explore_threshold, 0x04);
 ASSERT_OFFSET(FairyVillageHead, label_cap, 0x08);
 
-/* One exploration reward row (Fairy_RollExploreReward). */
+/* One exploration reward row (Fairy_RollExploreReward): the roll the group starts at,
+ * then the three group weights. */
 typedef struct FairyRewardRoll {
     u8 value;
     u8 weights[FAIRY_EXPLORE_TRIP_COUNT];
@@ -126,7 +134,9 @@ typedef struct FairyRewardRoll {
 ASSERT_SIZE(FairyRewardRoll, FAIRY_REWARD_ROLL_SIZE);
 ASSERT_OFFSET(FairyRewardRoll, weights, 0x01);
 
-/* The 96-byte header-data block. */
+/* The 96-byte header-data block: the "%d" format, the 20 gift rows
+ * Fairy_GrantGift copies, and the 3 exploration reward rows Fairy_RollExploreReward
+ * copies. */
 typedef struct FairyVillageHeaderData {
     char            fmt[FAIRY_VILLAGE_FMT_SIZE];     /* 0x00 D_801EEC44 "%d" */
     FairyGift       gifts[FAIRY_GIFT_COUNT];         /* 0x04 D_801EEC48 */
@@ -137,20 +147,21 @@ ASSERT_SIZE(FairyVillageHeaderData, FAIRY_VILLAGE_HEADER_DATA_SIZE);
 ASSERT_OFFSET(FairyVillageHeaderData, gifts, 0x04);
 ASSERT_OFFSET(FairyVillageHeaderData, rolls, 0x54);
 
-/* The overlay's shared data block, read through the symbol views listed beside each member. */
+/* The overlay's shared data block, read through the symbol views listed
+ * beside each member. The step arrays are the scene step tables the village dispatches through. */
 typedef struct FairyVillageData {
     u16 resource_ids[FAIRY_VILLAGE_RESOURCE_ID_COUNT]; /* 0x000 D_801F24FC; source_index % 6 */
     u8  unk_00C[12];                                   /* 0x00C; no static reader */
     u16 culture_threshold[FAIRY_CULTURE_LEVEL_COUNT];  /* 0x018 D_801F2514; 15,18,21,24,27,30,40 */
     u8  pad_026;
     u8  job_progress_cap[FAIRY_VILLAGE_JOB_PROGRESS_CAP_COUNT]; /* 0x027 D_801F2523; the cap per job-progress step */
-    u16 copy_class
-        [FAIRY_VILLAGE_COPY_CLASS_COUNT]
-        [FAIRY_VILLAGE_COPY_CLASS_FIELD_COUNT]; /* 0x034 D_801F2530/D_801F2532/D_801F2534; max price, battles, multiplier */
-    u8 music_level_cap[FAIRY_VILLAGE_MUSIC_LEVEL_CAP_COUNT]; /* 0x064 D_801F2560; the level cap per culture */
-    u8 task_rows[FAIRY_VILLAGE_TASK_ROW_COUNT][FAIRY_VILLAGE_TASK_ROW_FIELD_COUNT]; /* 0x06C D_801F2568 */
-    u8 variant_rows[FAIRY_VILLAGE_VARIANT_ROW_COUNT][FAIRY_VILLAGE_VARIANT_ROW_FIELD_COUNT]
-                   [FAIRY_VILLAGE_VARIANT_VARIANT_COUNT];                      /* 0x0A8 D_801F25A4 */
+    u16 copy_class[FAIRY_VILLAGE_COPY_CLASS_COUNT]
+                  [FAIRY_VILLAGE_COPY_CLASS_FIELD_COUNT];     /* 0x034 D_801F2530/D_801F2532/D_801F2534;
+                                                     max price, battles, multiplier */
+    u8  music_level_cap[FAIRY_VILLAGE_MUSIC_LEVEL_CAP_COUNT]; /* 0x064 D_801F2560; the level cap per culture */
+    u8  task_rows[FAIRY_VILLAGE_TASK_ROW_COUNT][FAIRY_VILLAGE_TASK_ROW_FIELD_COUNT]; /* 0x06C D_801F2568 */
+    u8  variant_rows[FAIRY_VILLAGE_VARIANT_ROW_COUNT][FAIRY_VILLAGE_VARIANT_ROW_FIELD_COUNT]
+                    [FAIRY_VILLAGE_VARIANT_VARIANT_COUNT];                     /* 0x0A8 D_801F25A4 */
     /* 0xF0 */ Callback commu01_steps[FAIRY_COMMU01_STEP_COUNT];               /* 0x0F0 g_FairyCommu01States */
     Callback            gift_steps[FAIRY_GIFT_STEP_COUNT];                     /* 0x108 g_FairyGiftStates */
     Callback            explore_reward_steps[FAIRY_EXPLORE_REWARD_STEP_COUNT]; /* 0x114 g_FairyExploreRewardStates */
@@ -202,11 +213,11 @@ extern const u8 g_FairyRooms[];
 extern u8       D_801457A9[];
 extern u8       D_801457AA[];
 extern u8       D_801457AB[];
-extern s32
-    D_801457EC; /* end of the group table at 0x801457AC; func_801EF52C and func_801EFEA8 compare a row pointer against it */
-extern u8             D_80145E30[];
-extern u8             D_80145E48[];
-extern u8             D_80145E60[];
+extern s32 D_801457EC; /* end of the group table at 0x801457AC; func_801EF52C and func_801EFEA8 compare a row pointer
+                           against it */
+extern u8  D_80145E30[];
+extern u8  D_80145E48[];
+extern u8  D_80145E60[];
 extern ShopStock      g_GameShopStock[SHOP_COUNT];
 extern s8             D_801EEC08[];
 extern char           D_801EEC44[];
@@ -216,7 +227,9 @@ extern u8             D_801F2458[];
 extern const u16      D_801F24FC[];
 extern u16            D_801F2514[];
 extern u8             D_801F2523[];
-/* The copy-class cells of the overlay's data block: each class's max price, battle count and multiplier. */
+/* The copy-class cells of the overlay's data block: each class's max price,
+ * battle count and multiplier. The retail materializes every cell through its
+ * own symbol and steps six bytes per class (func_801EFA50). */
 extern u8             D_801F2560; /* the bar limit byte; func_801EFEA8 reads it with lbu at 0x801EFF14 and 0x801EFFE8 */
 extern u8             D_801F2568[][3];
 extern u8             D_801F25A4[][3][3];
@@ -243,7 +256,8 @@ extern u8             g_Fairies[][9];
 extern u8             D_801F2706[][9];
 extern u8             D_801F2708[];
 extern volatile u8    D_801F2928[1];
-/* Label table rows are the three age buckets; each row holds one entry per record variant. */
+/* Label table rows are the three age buckets; each row holds one entry per
+ * record variant. */
 extern u16            D_801F2930[][3];
 extern u8             D_801F2944;
 extern u8             D_801F2945;

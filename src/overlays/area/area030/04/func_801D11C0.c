@@ -1,6 +1,8 @@
 #include "area030_04.h"
 
-/* Copies current AREA030 settings into the active scratch record. */
+/* Copies current AREA030 settings into the active scratch record.
+ * Mode 1 clears its flag and returns; otherwise a signed world value at least
+ * 0x39 sets the flag to 3 before the remaining fields are copied. */
 /* FAKE: retail stores the +0x54..+0x5A fields through byte-pointer views; typed stores let gcc hoist the later loads.
  */
 MATCH void func_801D11C0(void) {

@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* counts the non-zero bytes of the selected inventory record slot. */
+/* counts the non-zero bytes of the selected inventory record slot.
+ */
 MATCH u8 Item_CountHeld(u32 category) {
     u8* p;
     u8  count;

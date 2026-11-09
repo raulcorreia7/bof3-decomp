@@ -1,4 +1,6 @@
-/* Each access reloads the work cell. */
+/* One definition shared by the area overlays; every change here must verify every member. */
+/* Each access reloads the work cell: the stores go through its pointer, which
+ * the compiler must assume may alias the cell. */
 #include "area/spad.h"
 
 MATCH void func_801F3060(void) {

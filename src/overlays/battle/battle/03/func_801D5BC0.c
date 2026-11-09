@@ -1,6 +1,8 @@
 #include "battle_03.h"
 
-/* resets one local/enemy `0x80` path, zeroes saved values, rebuilds the followup state bytes. */
+/* resets one local/enemy `0x80` path, zeroes saved values, rebuilds
+ * the followup state bytes, and queues the common event when needed.
+ */
 MATCH u8 func_801D5BC0(void) {
     u8 index;
     u8 count;

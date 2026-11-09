@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-/* Standalone TU: game_00.h still declares this function as void(s16, s16). */
+/* Standalone TU: game_00.h still declares this function as void(s16, s16),
+ * which contradicts the observed s32 0/1 return, so shared decls stay local
+ * until the header is corrected by its owner. */
 
 #ifdef NON_MATCHING
 NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {

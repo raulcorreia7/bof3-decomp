@@ -1,6 +1,8 @@
 #include "battle_15.h"
 
-/* scans the three local battler slots (0x140 stride) and enemy slots 3-10 (0x118 stride) for an entry with its +0x00 flag and damage-status nibble 0xF0 both set. */
+/* scans the three local battler slots (0x140 stride) and enemy slots 3-10 (0x118 stride) for an entry with
+ * its +0x00 flag and damage-status nibble 0xF0 both set; returns 1 if one exists, else 0.
+ */
 MATCH s32 func_800A99AC(void) {
     u8 i;
 

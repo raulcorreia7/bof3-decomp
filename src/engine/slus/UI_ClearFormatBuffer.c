@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* clears the first eight words of the g_UiFormatBuffer table. */
+/* clears the first eight words of the g_UiFormatBuffer table.
+ */
 MATCH void UI_ClearFormatBuffer(void) {
     u32* p;
     u8   index;

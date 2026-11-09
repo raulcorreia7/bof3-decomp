@@ -27,7 +27,9 @@ MATCH void func_801DE200(void) {
     u8  standby_value;
     s32 total;
 
-    /* The retail copies the whole $v0 (move t1,v0). */
+    /* The retail copies the whole $v0 (move t1,v0); shop_00.h declares
+     * Party_CountOrder as u8(u8), so the call is made through a word-typed
+     * pointer. */
     count         = ((s32 (*)(u8))Party_CountOrder)(0);
     search_limit  = count & BYTE_MASK;
     record        = &g_Characters[0].character_id;

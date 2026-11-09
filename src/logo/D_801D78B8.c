@@ -1,4 +1,6 @@
-/* exe/logo data at 0x801D78B8 (44 bytes), embedded in .text between the functions and read by DecDCTvlc and func_801D7884. */
+/* exe/logo data at 0x801D78B8 (44 bytes), embedded in .text between the
+ * functions and read by DecDCTvlc and func_801D7884.  The
+ * tail holds two constants. */
 
 #include "logo.h"
 

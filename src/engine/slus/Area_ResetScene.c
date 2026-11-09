@@ -1,6 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* resets the mode record. */
+/* resets the mode work record: clears the counters g_AreaCameraStep/g_AreaCameraHeightStep and the words at
+ * +0x0C..+0x14 of the work area, sets byte +0x11C of the mode work area to 3, then runs func_80167428 (when the 0xF000
+ * field of g_Game.input is set) or arms the work flag byte at +0x01.
+ */
 MATCH void Area_ResetScene(void) {
     Actor*       work;
     PartyMember* mode_work;
