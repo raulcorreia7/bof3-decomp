@@ -320,7 +320,9 @@ MATCH s32 func_801FDA64(void) {
 
 INCLUDE_ASM(func_801FDA6C);
 
-INCLUDE_ASM(func_801FE03C);
+MATCH s8 func_801FE03C(s32 x, s32 y) {
+    SCENE_PROBE_POSITION(D_801FE350, 2, D_801FE35C);
+}
 
 MATCH s32 func_801FE0A4(void) {
     if (SYS_TestFlag(g_SceneFlags, 3) == 0 || SYS_TestFlag(g_SceneFlags, 4)) {

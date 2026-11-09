@@ -273,7 +273,9 @@ MATCH s32 func_801FD278(void) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FD280);
+MATCH s8 func_801FD280(s32 x, s32 y) {
+    SCENE_PROBE_POSITION(D_801FE474, 14, D_801FE4BC);
+}
 
 MATCH s32 func_801FD2E8(void) {
     if (D_80145F09 == 5) {
