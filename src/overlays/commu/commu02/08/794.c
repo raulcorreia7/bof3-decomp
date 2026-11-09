@@ -820,7 +820,17 @@ INCLUDE_ASM(func_801D90D8);
 
 INCLUDE_ASM(func_801D9210);
 
-INCLUDE_ASM(func_801D92B0);
+MATCH u8 func_801D92B0(void) {
+    s32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 7; i++) {
+        if (g_Characters[i].unk_07 & 1) {
+            count++;
+        }
+    }
+    return count;
+}
 
 INCLUDE_ASM(func_801D92F4);
 
