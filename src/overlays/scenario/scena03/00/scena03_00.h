@@ -54,15 +54,15 @@ extern Callback D_801FD038[];
 
 /* The camera nudges of 270.c: step the scroll words by the table entry picked with the low bits of the
  * facing counter. They differ only in table and mask. Every change here must verify every member. */
-#define SCENA03_NUDGE_SCROLL(table, mask)                  \
-    do {                                                   \
-        u16* scroll;                                       \
-        u16  dir;                                          \
-                                                           \
-        dir     = D_80146876 & (mask);                     \
-        scroll  = (u16*)&D_80145ECE;                       \
-        *scroll += (table)[dir] * 16;                      \
-        D_8014600E += (table)[dir] * 16;                   \
+#define SCENA03_NUDGE_SCROLL(table, mask) \
+    do {                                  \
+        u16* scroll;                      \
+        u16  dir;                         \
+                                          \
+        dir    = D_80146876 & (mask);     \
+        scroll = (u16*)&D_80145ECE;       \
+        *scroll += (table)[dir] * 16;     \
+        D_8014600E += (table)[dir] * 16;  \
     } while (0)
 
 s8 func_801FCD1C(void);
