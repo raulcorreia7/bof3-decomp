@@ -15,7 +15,7 @@ MATCH void func_801EEC04(void) {
         if (D_801EF9F8[(u8)count << 5] & 1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801EFA14, (u8)count << 5);
-            D_801F05F8            = D_801EF9F8 + ((u8)count << 5);
+            g_BMagicOrbitWork     = D_801EF9F8 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EEEE0();
             g_BattleEffectBattler = saved;
@@ -29,15 +29,15 @@ INCLUDE_ASM(func_801EECE4);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEE0(void) {
-    u8* work;
+    BMagicOrbitWork* work;
 
-    work = D_801F05F8;
-    D_801EF9C0[work[1]]();
+    work = g_BMagicOrbitWork;
+    D_801EF9C0[work->header.mode]();
 }
 
 MATCH void func_801EEF24(void) {
-    SYS_DISPATCH_BYTE(D_801EF9C4, D_801F05F8[2]);
-    if (D_801F05F8[0] != 0 && D_801F05F8[2] != 0) {
+    SYS_DISPATCH_BYTE(D_801EF9C4, g_BMagicOrbitWork->header.step);
+    if (g_BMagicOrbitWork->header.flags != 0 && g_BMagicOrbitWork->header.step != 0) {
         func_801EF52C();
         func_801EF5F4();
         PopMatrix();
@@ -48,7 +48,8 @@ INCLUDE_ASM(func_801EEFAC);
 
 INCLUDE_ASM(func_801EF16C);
 
-INCLUDE_ASM(func_801EF29C);
+/* func_801EF29C */
+#include "overlays/bmagic/Effect_StepOrbit.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF418(void) {
@@ -58,18 +59,19 @@ NON_MATCHING void func_801EF418(void) {
     s32 cosTerm;
     s32 angle;
 
-    angle                        = (FIELD(u16, D_801F05F8, 0xE) + 0x40) & 0xFFF;
-    FIELD(u16, D_801F05F8, 0xE)  = angle;
-    FIELD(s32, D_801F05F8, 0x10) = g_BattleEffectBattler->pos.x.fixed + rsin(angle) * FIELD(s16, D_801F05F8, 0xC);
-    cosTerm                      = rcos((s16)FIELD(u16, D_801F05F8, 0xE)) * FIELD(s16, D_801F05F8, 0xC);
-    counter                      = FIELD(u8, D_801F05F8, 0xB) + 1;
-    spin                         = FIELD(u8, D_801F05F8, 0xA);
-    FIELD(u16, D_801F05F8, 0x1A) = (u16)(FIELD(u16, D_801F05F8, 0x1A) + spin);
-    FIELD(u8, D_801F05F8, 0xB)   = counter;
-    FIELD(s32, D_801F05F8, 0x14) = g_BattleEffectBattler->pos.y.fixed + cosTerm;
+    angle                              = (FIELD(u16, g_BMagicOrbitWork, 0xE) + 0x40) & 0xFFF;
+    FIELD(u16, g_BMagicOrbitWork, 0xE) = angle;
+    FIELD(s32, g_BMagicOrbitWork, 0x10) =
+        g_BattleEffectBattler->pos.x.fixed + rsin(angle) * FIELD(s16, g_BMagicOrbitWork, 0xC);
+    cosTerm = rcos((s16)FIELD(u16, g_BMagicOrbitWork, 0xE)) * FIELD(s16, g_BMagicOrbitWork, 0xC);
+    counter = FIELD(u8, g_BMagicOrbitWork, 0xB) + 1;
+    spin    = FIELD(u8, g_BMagicOrbitWork, 0xA);
+    FIELD(u16, g_BMagicOrbitWork, 0x1A) = (u16)(FIELD(u16, g_BMagicOrbitWork, 0x1A) + spin);
+    FIELD(u8, g_BMagicOrbitWork, 0xB)   = counter;
+    FIELD(s32, g_BMagicOrbitWork, 0x14) = g_BattleEffectBattler->pos.y.fixed + cosTerm;
     if (g_FrameCount & 1) {
-        timer                    = FIELD(u8, D_801F05F8, 9) - 1;
-        FIELD(u8, D_801F05F8, 9) = timer;
+        timer                           = FIELD(u8, g_BMagicOrbitWork, 9) - 1;
+        FIELD(u8, g_BMagicOrbitWork, 9) = timer;
         if (!(timer & 0xFF)) {
             g_BattleEffectBattler->param.unk_0B -= 1;
             func_801EF970();
@@ -90,11 +92,11 @@ MATCH void func_801EF52C(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    off    = FIELD(u16, D_801F05F8, 0xE) + 0x800;
-    rot.vz = ((D_801F05F8[3] << 7) - off) & 0xFFF;
-    pos.vx = (FIELD(s32, D_801F05F8, 0x10) >> 9) - 0x4000;
-    pos.vy = (FIELD(s32, D_801F05F8, 0x14) >> 9) - 0x4000;
-    pos.vz = -FIELD(s16, D_801F05F8, 0x1A) / 2;
+    off    = FIELD(u16, g_BMagicOrbitWork, 0xE) + 0x800;
+    rot.vz = ((g_BMagicOrbitWork->unk_03 << 7) - off) & 0xFFF;
+    pos.vx = (FIELD(s32, g_BMagicOrbitWork, 0x10) >> 9) - 0x4000;
+    pos.vy = (FIELD(s32, g_BMagicOrbitWork, 0x14) >> 9) - 0x4000;
+    pos.vz = -FIELD(s16, g_BMagicOrbitWork, 0x1A) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -114,9 +116,9 @@ MATCH u32 func_801EF914(void) {
 }
 
 MATCH void func_801EF970(void) {
-    D_801F05F8[0] = 0;
-    D_801F05F8[1] = 0;
-    D_801F05F8[2] = 0;
-    D_801F05F8[3] = 0;
-    D_801F05F8[4] = 0;
+    g_BMagicOrbitWork->header.flags = 0;
+    g_BMagicOrbitWork->header.mode  = 0;
+    g_BMagicOrbitWork->header.step  = 0;
+    g_BMagicOrbitWork->unk_03       = 0;
+    g_BMagicOrbitWork->unk_04       = 0;
 }

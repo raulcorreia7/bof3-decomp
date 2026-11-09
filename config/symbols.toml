@@ -563,8 +563,9 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Effect_StartOnZeroTick = { addr = 0x801EEEE4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic063 (SuddenDeath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEF30, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic063." }
 Effect_FinishOnZeroTick = { addr = 0x801EF2E4, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the targets of the side mask in byte 0x04, lowers the active battler's ticker and clears the effect in magic063 (SuddenDeath)." }
+Effect_StepOrbit = { addr = 0x801EF704, type = "func", source = "Turns the orbiting effect of magic063 one step around its battler and ages its timers." }
 g_BMagicEffectModes = { addr = 0x801F0400, source = "Handlers of magic063 (SuddenDeath), run by header.mode (byte 0x01)." }
-D_801F1054 = { addr = 0x801F1054, source = "Work record of the magic063 sub-effect whose handlers run by header.step (byte 0x02)." }
+g_BMagicOrbitWork = { addr = 0x801F1054, type = "BMagicOrbitWork*", source = "Work record of the orbiting sub-effect of magic063 whose handlers run by header.step (byte 0x02)." }
 
 ["emi/bmagic/magic064/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -926,6 +927,8 @@ g_BMagicEffectModes = { addr = 0x801F0048, source = "Handlers of magic105 (Kyrie
 ["emi/bmagic/magic106/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEE80, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic106 (Death)." }
+Effect_StepOrbit = { addr = 0x801EF29C, type = "func", source = "Turns the orbiting effect of magic106 one step around its battler and ages its timers." }
+g_BMagicOrbitWork = { addr = 0x801F05F8, type = "BMagicOrbitWork*", source = "Work record of the orbiting sub-effect of magic106 whose handlers run by header.step (byte 0x02)." }
 
 ["emi/bmagic/magic107/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

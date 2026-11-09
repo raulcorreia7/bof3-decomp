@@ -15,7 +15,7 @@ MATCH void func_801EEC18(void) {
         if (D_801F0454[(u8)count << 5] & 1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801F0470, (u8)count << 5);
-            D_801F1054            = D_801F0454 + ((u8)count << 5);
+            g_BMagicOrbitWork     = D_801F0454 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EF340();
             g_BattleEffectBattler = saved;
@@ -95,12 +95,12 @@ MATCH void func_801EF1C8(void) {
 #include "overlays/bmagic/Effect_FinishOnZeroTick.h"
 
 MATCH void func_801EF340(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 1, D_801F1054);
+    SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 1, g_BMagicOrbitWork);
 }
 
 MATCH void func_801EF384(void) {
-    SYS_DISPATCH_BYTE(D_801F040C, D_801F1054->header.step);
-    if (D_801F1054->header.flags != 0 && D_801F1054->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801F040C, g_BMagicOrbitWork->header.step);
+    if (g_BMagicOrbitWork->header.flags != 0 && g_BMagicOrbitWork->header.step != 0) {
         func_801EF994();
         func_801EFA5C();
         PopMatrix();
@@ -111,7 +111,8 @@ INCLUDE_ASM(func_801EF40C);
 
 INCLUDE_ASM(func_801EF5CC);
 
-INCLUDE_ASM(func_801EF704);
+/* func_801EF704 */
+#include "overlays/bmagic/Effect_StepOrbit.h"
 
 INCLUDE_ASM(func_801EF880);
 
@@ -125,11 +126,11 @@ MATCH void func_801EF994(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    off    = FIELD(u16, D_801F1054, 0xE) + 0x800;
-    rot.vz = (((D_801F1054)->unk_03 << 7) - off) & 0xFFF;
-    pos.vx = ((D_801F1054)->unk_10 >> 9) - 0x4000;
-    pos.vy = ((D_801F1054)->unk_14 >> 9) - 0x4000;
-    pos.vz = -FIELD(s16, D_801F1054, 0x1A) / 2;
+    off    = FIELD(u16, g_BMagicOrbitWork, 0xE) + 0x800;
+    rot.vz = (((g_BMagicOrbitWork)->unk_03 << 7) - off) & 0xFFF;
+    pos.vx = ((g_BMagicOrbitWork)->unk_10 >> 9) - 0x4000;
+    pos.vy = ((g_BMagicOrbitWork)->unk_14 >> 9) - 0x4000;
+    pos.vz = -FIELD(s16, g_BMagicOrbitWork, 0x1A) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -137,15 +138,15 @@ MATCH void func_801EF994(void) {
 INCLUDE_ASM(func_801EFA5C);
 
 MATCH void func_801EFD7C(void) {
-    SYS_DISPATCH_BYTE(D_801F0440, D_801F1054->header.step);
-    if (D_801F1054->header.flags != 0 && D_801F1054->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801F0440, g_BMagicOrbitWork->header.step);
+    if (g_BMagicOrbitWork->header.flags != 0 && g_BMagicOrbitWork->header.step != 0) {
         func_801EF994();
         func_801EFA5C();
         PopMatrix();
     }
 }
 
-// hint: matches except retail loads D_801F1054 for the unk_09 store before the 0xE halfword store (ours stores the halfword first, then reloads and waits a nop).
+// hint: matches except retail loads g_BMagicOrbitWork for the unk_09 store before the 0xE halfword store (ours stores the halfword first, then reloads and waits a nop).
 INCLUDE_ASM(func_801EFE04);
 
 INCLUDE_ASM(func_801EFF18);
@@ -169,9 +170,9 @@ MATCH u32 func_801F0354(void) {
 }
 
 MATCH void func_801F03B0(void) {
-    D_801F1054->header.flags = 0;
-    D_801F1054->header.mode  = 0;
-    D_801F1054->header.step  = 0;
-    D_801F1054->unk_03       = 0;
-    D_801F1054->unk_04       = 0;
+    g_BMagicOrbitWork->header.flags = 0;
+    g_BMagicOrbitWork->header.mode  = 0;
+    g_BMagicOrbitWork->header.step  = 0;
+    g_BMagicOrbitWork->unk_03       = 0;
+    g_BMagicOrbitWork->unk_04       = 0;
 }
