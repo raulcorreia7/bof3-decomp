@@ -2,7 +2,6 @@
 #include "area/spad.h"
 #include "overlays/area/AreaSprite.h"
 
-extern AreaSprite* D_801181DC;
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");

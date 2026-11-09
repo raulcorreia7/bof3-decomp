@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/area/world01.h"
+#include "overlays/area/AreaSprite.h"
 #include "overlays/scenario/scenario.h"
 
 /* The work-window byte offset and row stride this overlay scans. */
@@ -19,6 +20,7 @@ extern Callback D_8011818C[];
 extern Callback D_8011819C[];
 extern Callback D_801181AC[];
 extern Callback D_801181B4[];
+extern AreaSprite* D_801181DC;
 
 u8 func_80117410();
 u8 func_80117900(void);
