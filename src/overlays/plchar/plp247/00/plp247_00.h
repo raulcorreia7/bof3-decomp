@@ -27,4 +27,3 @@ extern Callback D_801CFB40[];
 extern u8 D_80143FFC[];
 extern u8 D_80144000[];
 extern u8 D_80144006[];
-
