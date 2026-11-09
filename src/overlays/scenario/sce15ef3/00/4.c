@@ -67,7 +67,16 @@ MATCH void func_801D0EAC(void) {
 
 INCLUDE_ASM(func_801D0EF0);
 
-INCLUDE_ASM(func_801D0F94);
+MATCH void func_801D0F94(void) {
+    Actor* work;
+
+    work = g_Task;
+    work->pos.z.fixed += 0x800000;
+    func_801D1D20(&work->pos, &work->vx, work->tint.bytes.unk_5D, work->tint.bytes.unk_5E);
+    if (g_ScriptVars[0] == 0xB) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801D1008(void) {
     Scene_AdvanceActorStep();
