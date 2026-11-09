@@ -3,12 +3,7 @@
 
 /* The PsyQ SDK headers (@source: wiki:data/programs#psyq-sdk) */
 
-/*
- * Include PsyQ headers for type definitions only (SVECTOR, RECT, etc.).
- * PsyQ function declarations in these headers are tolerated; the
- * config/symbols.toml rows provide the original-binary addresses at link time.
- * This header includes no game header except types.h.
- */
+/* Include PsyQ headers for type definitions only (SVECTOR, RECT, etc.). */
 #include "types.h"
 
 /* clang-format off */
@@ -24,15 +19,12 @@
 
 struct EXEC;
 
-/* Declarations the retail release provided that its 3.7 headers omit. Every
- * name here has a retail address and a reader; nothing else belongs here. */
+/* Declarations the retail release provided that its 3.7 headers omit. */
 
-/* retail 0x8017B2B4 reads no argument and returns a zero-extended byte; 3.7
- * libgpu.h getTPage and setDrawTPage call it with none. */
+/* retail 0x8017B2B4 reads no argument and returns a zero-extended byte. */
 /* func_8017B2B4 (slus), func_801D40F8 (logo) */
 extern s32  GetGraphType(void);
-/* retail 0x8017B438 reads a0 as a log string and a1 as RECT; 3.7 SYS.OBJ
- * exports it and libgpu.h does not declare it. */
+/* retail 0x8017B438 reads a0 as a log string and a1 as RECT. */
 /* func_8017B438 (slus), func_801D427C (logo) */
 extern void checkRECT(char* log, RECT* rect);
 
