@@ -1,5 +1,5 @@
-#ifndef FUNC_801CEA10_H
-#define FUNC_801CEA10_H
+#ifndef PLCHAR_FUNC_801CEA10_H
+#define PLCHAR_FUNC_801CEA10_H
 
 extern u32 D_80143FFC;
 extern u32 D_80144000;

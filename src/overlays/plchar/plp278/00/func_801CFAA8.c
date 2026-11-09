@@ -2,5 +2,5 @@
 #include "overlays/plchar/func_801CFAA8.h"
 
 MATCH void func_801CFAA8(void) {
-    func_801CFAA8_common();
+    Char_FaceFreeDirectionShared();
 }

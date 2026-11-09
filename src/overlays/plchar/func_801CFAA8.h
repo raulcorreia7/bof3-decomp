@@ -1,7 +1,7 @@
-#ifndef FUNC_801CFAA8_H
-#define FUNC_801CFAA8_H
+#ifndef PLCHAR_FUNC_FACE_FREE_H
+#define PLCHAR_FUNC_FACE_FREE_H
 
-MATCH void func_801CFAA8_common(void) {
+MATCH void Char_FaceFreeDirectionShared(void) {
     u8 direction;
     
     direction = g_Task->direction_08;
