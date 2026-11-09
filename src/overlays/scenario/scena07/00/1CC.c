@@ -140,11 +140,21 @@ INCLUDE_ASM(func_801F7638);
 
 INCLUDE_ASM(func_801F76D0);
 
-/* Hint: pointer global D_801FDFBC plus a halfword at +0x10 and a word counter at +0x0C of g_Task; the pointer struct is not typed yet. */
-INCLUDE_ASM(func_801F77AC);
+MATCH void func_801F77AC(void) {
+    D_801FDFBC->unk_10 += 4;
+    func_801F97E0(D_801FDFBC);
+    if (--g_Task->vx == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
-/* Hint: the pointer global D_801FDFBC is read as a word at +0x08; its struct is not typed yet, so the draft needs that type first. */
-INCLUDE_ASM(func_801F7810);
+MATCH void func_801F7810(void) {
+    D_801FDFBC->z += 0x1000000;
+    func_801F97E0(D_801FDFBC);
+    if (D_801FDFBC->z > 0xFFFFFFF) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F786C(void) {
     SYS_DISPATCH_TASK(D_801FDDAC, 2, g_Task);
@@ -304,8 +314,20 @@ MATCH u8 func_801F85D8(void) {
     return active;
 }
 
-/* Hint: operates on a0 as a byte record (bytes 0x02, 0x03, 0x01, 0x04 and a flag at D_801FDFC4); the record type is not declared, so the draft needs it first. */
-INCLUDE_ASM(func_801F86BC);
+MATCH void func_801F86BC(u8* row) {
+    u8 next;
+
+    row[3] += 6;
+    if (--row[2] == 0) {
+        next   = row[1] + 1;
+        row[2] = row[4];
+        row[1] = next;
+        if (D_801FDFC4 == 0) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
+            D_801FDFC4 = 1;
+        }
+    }
+}
 
 #include "overlays/scenario/Actor_Wait.h"
 

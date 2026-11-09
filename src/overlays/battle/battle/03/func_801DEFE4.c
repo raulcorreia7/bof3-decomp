@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* stages the battle script record selected by the active battler's status flags and action state
- * into the battle script bank, or arms the record already staged.
+ * into the battle script table, or arms the record already staged.
  */
 MATCH void func_801DEFE4(void) {
     PartyMember* work;
@@ -12,17 +12,17 @@ MATCH void func_801DEFE4(void) {
     if (g_Battle.outcome.options & 0x20) {
         if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
             if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
-                Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+                Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
             } else {
-                Actor_SwitchScript(g_Task->unk_4B, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+                Actor_SwitchScript(g_Task->unk_4B, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
             }
             return;
         }
     } else if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
         if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
-            Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+            Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         } else {
-            Actor_SwitchScript(g_Task->facing + 0x20, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+            Actor_SwitchScript(g_Task->facing + 0x20, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         }
         return;
     }

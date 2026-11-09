@@ -1,10 +1,10 @@
 #include "game_00.h"
 
-/* Opcodes 0x80 to 0x8C of the actor script bank: the record group that drives
+/* Opcodes 0x80 to 0x8C of the actor script table: the record group that drives
  * the scene around the actor - script-active and fade flags, actor placement,
  * the area camera scroll, palette tints, the XA music stream, and spawning a
  * helper record. Named from the case bodies. */
-/* Opcodes 0x80 to 0x8C of the actor script bank: the record group that drives
+/* Opcodes 0x80 to 0x8C of the actor script table: the record group that drives
  * the scene around the actor - script-active and fade flags, actor placement,
  * the area camera scroll, palette tints, the XA music stream, and spawning a
  * helper record. Named from the case bodies. */

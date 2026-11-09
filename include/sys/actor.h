@@ -216,7 +216,7 @@ typedef struct Actor {
     u8             unk_49;            /* 0x49 */
     u8             unk_4A;            /* 0x4A - sprite animation: ticks left in the step; fishing prompt rows hold
                                 *        the prompt column here */
-    u8             unk_4B;            /* 0x4B - the script-bank record index */
+    u8             unk_4B;            /* 0x4B - the script-table record index */
     s32            unk_4C;            /* 0x4C */
     u8*            script;            /* 0x50 - sprite animation: the step list, (delay, frame) byte pairs
                                 *        (Actor_SeekScript, Actor_StageAnimStep); the fishing record keeps its item

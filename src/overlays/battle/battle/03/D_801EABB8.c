@@ -158,7 +158,7 @@ Callback D_801EAD00[3] = {
 
 /* 0x801EAD0C */
 Callback D_801EAD0C[5] = {
-    (Callback)func_801D67EC, (Callback)func_801D6818, (Callback)Battle_ReloadPartyBank,
+    (Callback)func_801D67EC, (Callback)func_801D6818, (Callback)Battle_ReloadPartySprites,
     (Callback)Battle_ReloadAreaAudio, (Callback)Battle_WaitAreaReload,
 };
 

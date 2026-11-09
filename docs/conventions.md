@@ -1352,7 +1352,7 @@ reads the format includes it. The names match the wiki's format page and the Rus
 
 | Format                                                                                                                                                | Header                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| EMI archives, the disc file list, the LZ77 stream, SEP and BGM banks, the BGM selection table, cue tables, overlay headers, script banks              | ours, one per format     |
+| EMI archives, the disc file list, the LZ77 stream, SEP and BGM banks, the BGM selection table, cue tables, overlay headers, script tables             | ours, one per format     |
 | STR and XA sector geometry and the XA subheader (`str.h`)                                                                                             | ours: PsyQ leaves it out |
 | VAB (`VabHdr`, `ProgAtr`, `VagAtr`), TIM (`TIM_IMAGE`), CD positions and files (`CdlLOC`, `CdlFILTER`, `CdlFILE`), the STR sector header (`StHEADER`) | PsyQ's own type          |
 

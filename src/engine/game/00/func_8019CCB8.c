@@ -28,7 +28,7 @@ MATCH void func_8019CCB8(void) {
             move_y += g_Task->vy * step;
             func_8019D4BC();
             if (func_8019D054(move_x, move_y) & BYTE_MASK) {
-                copy_dst   = (u8*)BATTLE_SCRIPT_BANK;
+                copy_dst   = (u8*)BATTLE_SCRIPT_TABLE;
                 copy_count = *g_Task->range_54.table * 0x28;
                 copy_index = 0;
                 if (copy_count > 0) {
@@ -39,7 +39,7 @@ MATCH void func_8019CCB8(void) {
                         copy_dst += 1;
                     } while (copy_index < copy_count);
                 }
-                g_Task->script = (u8*)BATTLE_SCRIPT_BANK; /* the same buffer */
+                g_Task->script = (u8*)BATTLE_SCRIPT_TABLE; /* the same buffer */
                 func_8019D648();
                 func_8019D9C0();
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 14));
