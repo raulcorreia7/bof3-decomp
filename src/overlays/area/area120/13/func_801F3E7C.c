@@ -4,7 +4,7 @@ MATCH void func_801F3E7C(void) {
     s32 x;
     s32 y;
 
-    if ((*(s32*)g_Task->vx & 0xFFFF00) == 0x30600) {
+    if ((MEM(s32, g_Task->vx) & 0xFFFF00) == 0x30600) {
         g_Task->timer       = 0;
         g_Task->header.step = 5;
         func_801F3DF0();
