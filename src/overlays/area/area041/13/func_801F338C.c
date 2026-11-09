@@ -5,7 +5,7 @@ MATCH void func_801F338C(void) {
         Actor* a = g_Task;
         s32    x = a->pos.x.fixed;
 
-        a->timer = 0;
+        a->timer       = 0;
         a->pos.x.fixed = x + 0x40;
         g_Task->header.step++;
     }
