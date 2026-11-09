@@ -1,4 +1,4 @@
-/* Advances the script after staging the palette. Check every including image after changes. */
+/* Advances the script after staging the palette. */
 MATCH void Char_AdvancePaletteScript(void) {
     u8 done;
     u8 state;

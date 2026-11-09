@@ -1,8 +1,7 @@
 #ifndef OVERLAY_PLCHAR_PLP015_00_H
 #define OVERLAY_PLCHAR_PLP015_00_H
 
-/* The plchar/plp015/00 overlay's local declarations. Only this image
- * includes the file. */
+/* The plchar/plp015/00 overlay's local declarations. */
 
 /* The two route directions this character program turns between. */
 #define CHARACTER_FACING_AWAY FACING_LEFT

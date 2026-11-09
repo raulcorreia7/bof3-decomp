@@ -58,8 +58,7 @@ MATCH void func_801CF924(void) {
 
 #include "overlays/plchar/Char_StartTurnMomo.h"
 
-/* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
- * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
+/* Runs one route step script. */
 #include "overlays/plchar/Char_AdvanceFacingTurn.h"
 
 MATCH void func_801CFB30(void) {

@@ -1,8 +1,4 @@
-/* One route step for a field character that takes the step height at face
- * value: turn the facing when the route index is even, probe the step ahead,
- * then play the walk or the blocked animation and bump the task state. One
- * definition shared by the plchar character overlays; every change here must
- * verify every member image. */
+/* One route step for a field character that takes the step height at face value. */
 MATCH void func_801CE770(void) {
     s16 dist;
     s32 x;
