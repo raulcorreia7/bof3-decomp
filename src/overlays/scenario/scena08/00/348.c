@@ -104,7 +104,11 @@ MATCH void func_801F7A9C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7AD0);
+MATCH void func_801F7AD0(void) {
+    SYS_DISPATCH_TASK(D_801FE8E4, 2, g_Task);
+    func_801F8D98(MEM_PTR(void, 0x800E48E0u));
+    func_801F90C8(MEM_PTR(void, 0x800E48E0u));
+}
 
 INCLUDE_ASM(func_801F7B2C);
 
@@ -419,7 +423,14 @@ MATCH void func_801FA294(void) {
 }
 
 /* blocker: retail stores a word zero to g_ScriptVars (sw), the u8[4] declaration gives sb; first diff: sb at 0x801FA2F0. */
-INCLUDE_ASM(func_801FA2D0);
+MATCH void func_801FA2D0(void) {
+    D_80144EC8[0] = 0;
+    *(u32*)g_ScriptVars = 0;
+    D_80146872 = 1;
+    func_801FA32C();
+    func_801FE12C();
+    SYS_SetFlag(&D_80144EC8[0x60], 0x43);
+}
 
 INCLUDE_ASM(func_801FA32C);
 
