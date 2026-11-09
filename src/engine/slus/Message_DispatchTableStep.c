@@ -1,12 +1,12 @@
 #include "engine/slus/slus.h"
 
-/* copies the handler bank into the local frame, then runs the entry
+/* copies the handler table into the local frame, then runs the entry
  * selected by the shared step byte g_MessageWindow.step_id, whose 0x80 base is rebased onto
- * the bank's 16 entries.
+ * the table's 16 entries.
  */
 MATCH void Message_DispatchTableStep(void) {
-    HandlerBank bank;
+    HandlerTable table;
 
-    bank = g_MessageStepTable;
-    bank.handlers[g_MessageWindow.step_id - 0x80]();
+    table = g_MessageStepTable;
+    table.handlers[g_MessageWindow.step_id - 0x80]();
 }
