@@ -1,3 +1,5 @@
 #include "area108_14.h"
 
-INCLUDE_ASM(func_801F4918);
+MATCH void func_801F4918(void) {
+    AREA_PLACE_ACTOR(D_801F637C);
+}

@@ -7,6 +7,7 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+u8        Area_FindTaggedPartySlot(void);
 void      func_801F482C(void);
 void      func_801F49A0(s32 arg);
 void      func_801F4E70(s32 frame);

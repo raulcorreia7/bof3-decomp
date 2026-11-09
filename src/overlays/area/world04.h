@@ -83,4 +83,29 @@ static inline void World04_StoreAnswerChoice(u8* target) {
     *target = g_MessageChoice;
 }
 
+/* A trigger rectangle in tile units. */
+typedef struct TriggerBox {
+    u8 x0;
+    u8 y0;
+    u8 x1;
+    u8 y1;
+    u8 unk_04;
+} TriggerBox;
+
+/* The index of the first of the two boxes the party member stands in, or 0xFF. */
+#define WORLD04_FIND_TRIGGER_BOX(member, boxes)                                                        \
+    do {                                                                                               \
+        s32 i;                                                                                         \
+        s32 x = g_Game.members[(member)].pos.x.fixed;                                                  \
+        s32 y = g_Game.members[(member)].pos.y.fixed;                                                  \
+        for (i = 0; i < 2; i++) {                                                                      \
+            if (x < ((boxes)[i].x0 << 16) || x > ((boxes)[i].x1 << 16) || y < ((boxes)[i].y0 << 16) || \
+                y > ((boxes)[i].y1 << 16)) {                                                           \
+                continue;                                                                              \
+            }                                                                                          \
+            return i;                                                                                  \
+        }                                                                                              \
+        return 0xFF;                                                                                   \
+    } while (0)
+
 #endif
