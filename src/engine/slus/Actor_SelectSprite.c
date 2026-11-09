@@ -5,7 +5,7 @@
  * of the record's sheet to texture page +0x25 and row +0x26, then stores the mirror byte (+0x2A) and the animation
  * step list (+0x50).
  */
-MATCH void Actor_SelectScriptBank(u32 record_index) {
+MATCH void Actor_SelectSprite(u32 record_index) {
     /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
     FAKE_STACK_PADS(u8, 16);
     Actor* work;

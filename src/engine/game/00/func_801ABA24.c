@@ -1,12 +1,12 @@
 #include "game_00.h"
 
-/* Opcodes 0x60 to 0x66 of the actor script bank: pick the facing animation
+/* Opcodes 0x60 to 0x66 of the actor script table: pick the facing animation
  * script for the task from its facing, lock the route, and select the script.
- * The bases index the script bank records; their animation roles are not
+ * The bases index the script table records; their animation roles are not
  * proven. Named from the case bodies. */
-/* Opcodes 0x60 to 0x66 of the actor script bank: pick the facing animation
+/* Opcodes 0x60 to 0x66 of the actor script table: pick the facing animation
  * script for the task from its facing, lock the route, and select the script.
- * The bases index the script bank records; their animation roles are not
+ * The bases index the script table records; their animation roles are not
  * proven. Named from the case bodies. */
 typedef enum ActorScriptFaceOp {
     ACTOR_SCRIPT_FACE_SELECT_FACING  = 0x60, /* the script for the current facing */

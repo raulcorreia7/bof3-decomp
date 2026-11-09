@@ -6,7 +6,7 @@ MATCH u8 func_801BF11C(void) {
     s32          j;
     s32          offset;
     u8           order;
-    s32          bank;
+    s32          clut_offset;
     u16*         dst;
     u16*         src;
     Actor*       actor;
@@ -44,9 +44,9 @@ MATCH u8 func_801BF11C(void) {
                 /* CLEANUP: typed palette indexing reverses the source addition operands. */
                 actor = g_Task;
                 for (j = 0; j < 32; j++) {
-                    bank           = actor->unk_05 << 6;
-                    dst            = (u16*)(GAME_PALETTE_MIRROR + bank);
-                    src            = (u16*)(GAME_PALETTE_STAGE + bank);
+                    clut_offset    = actor->unk_05 << 6;
+                    dst            = (u16*)(GAME_PALETTE_MIRROR + clut_offset);
+                    src            = (u16*)(GAME_PALETTE_STAGE + clut_offset);
                     palette_offset = j << 1;
                     color          = MEM(u16, (u32)src + palette_offset + 0xC0);
                     palette_offset += (s32)dst;

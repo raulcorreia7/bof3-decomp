@@ -316,7 +316,7 @@ void func_801F16F8(void);
 void Fairy_LoadCommu01(void);
 /* func_801F17A4 */
 void Fairy_FinishEventLoad(void);
-void Fairy_ReloadPartyBank(void);
+void Fairy_ReloadPartySprites(void);
 void func_801F1874(void);
 void Fairy_GrantGift(void);
 void func_801F1AFC(void);

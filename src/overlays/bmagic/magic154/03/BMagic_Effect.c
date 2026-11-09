@@ -26,12 +26,12 @@ MATCH void func_801EEFE0(void) {
 
 MATCH void func_801EF104(void) {
     GFX_AddDitheredDrawMode(3, getTPage(0, 1, 320, 256));
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF1EC(void) {
