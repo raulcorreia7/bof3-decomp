@@ -73,13 +73,14 @@ MATCH void func_80117864(void* arg0) {
         u8  pad_20[4];
         u16 unk_24;
         u8  unk_26;
-    } *p = arg0;
-    Actor* a = (Actor*)g_Task;
-    s32 v;
+    }* p = arg0;
 
-    p->unk_04 = *(s32*)((u8*)a + 0x34);
-    p->unk_08 = *(s32*)((u8*)a + 0x38);
-    v         = *(s32*)((u8*)a + 0x3C);
+    Actor* a = g_Task;
+    s32    v;
+
+    p->unk_04 = a->pos.x.fixed;
+    p->unk_08 = a->pos.y.fixed;
+    v         = a->pos.z.fixed;
     p->unk_00 = 1;
     p->unk_24 = 0x80;
     p->unk_03 = 0xC0;
