@@ -11,6 +11,7 @@
 
 /* The fixed work record the dispatch compares the work pointer against. */
 extern Actor D_80143F48;
+extern u8    D_80144EF8[];
 
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];
