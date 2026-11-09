@@ -23,9 +23,8 @@ MATCH void func_801EF0A4(void) {
     }
 }
 
-MATCH void func_801EF114(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF114 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 extern Callback D_801EFD5C[];
 

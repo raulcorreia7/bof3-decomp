@@ -12,9 +12,8 @@ INCLUDE_ASM(func_801EEF3C);
 
 #include "shared/Effect_StartPlaying.h"
 
-MATCH void func_801EF1B0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF1B0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF1F4(void) {
     SYS_DISPATCH_BYTE(D_801F0754, g_Task->header.step);

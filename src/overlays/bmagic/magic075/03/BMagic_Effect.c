@@ -13,9 +13,8 @@ INCLUDE_ASM(func_801EEDE0);
 
 INCLUDE_ASM(func_801EEEB0);
 
-MATCH void func_801EEFF4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEFF4 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF038(void) {
     g_ScriptBank = BMAGIC_SCRIPT_BANK;

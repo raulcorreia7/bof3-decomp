@@ -23,9 +23,8 @@ MATCH void func_801EF09C(void) {
     func_801E5988();
 }
 
-MATCH void func_801EF0DC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF0DC */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF120(void) {
     SYS_DISPATCH_BYTE(D_801EF8A4, g_Task->header.step);

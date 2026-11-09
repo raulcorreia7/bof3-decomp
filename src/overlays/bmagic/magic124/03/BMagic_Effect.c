@@ -29,9 +29,8 @@ INCLUDE_ASM(func_801EF0B0);
 MATCH void func_801EF268(void) {
 }
 
-MATCH void func_801EF270(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF270 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EF2B4);
 

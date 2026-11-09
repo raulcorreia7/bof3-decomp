@@ -28,9 +28,8 @@ INCLUDE_ASM(func_801EECF8);
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-MATCH void func_801EEF30(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF30 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF74(void) {
     Magic063Steps handlers;
