@@ -913,7 +913,7 @@ typedef enum BattleResultFlags {
 } BattleResultFlags;
 
 extern s32          D_801459E8;
-/* Battle frame/sequence word read by both battle overlays. */
+/* Pointer to the active animation-stream bank (area, battle or battle magic). */
 /* D_801459F0 */
 extern volatile u32 g_ScriptBank;
 extern u8           D_80145A00;

@@ -81,9 +81,9 @@
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
 #define AREA_PALETTE_WORK          0x80037800u
-/* The script banks g_ScriptBank alternates between: the area bank the field
- * uses, the battle bank the battle handler swaps in, and the battle magic bank
- * a battle magic effect sets while its step table runs (every setter is a
+/* The animation-stream banks g_ScriptBank alternates between: the area bank the
+ * field uses, the battle bank the battle handler swaps in, and the battle magic
+ * bank a battle magic effect sets while its step table runs (every setter is a
  * bmagic overlay; it restores the area bank afterwards). */
 #define AREA_SCRIPT_BANK           0x800D3800u
 #define BATTLE_SCRIPT_BANK         0x800F0800u
@@ -264,8 +264,9 @@ typedef struct AreaMapObjectHeader {
 
 ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
 
-/* `0x800D3800` - the area script bank: a `u32` directory, then one `u16` slot
- * table per section, then byte-addressed records. `dir_bytes == 4 * L` is the
+/* `0x800D3800` - the area script bank, a bank of actor animation streams: a
+ * `u32` directory, then per section a `u16` slot table followed by its
+ * records. Each record is one stream (see `Actor_StageAnimStep`). `dir_bytes == 4 * L` is the
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
@@ -278,9 +279,9 @@ typedef struct AreaScriptBank {
     u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
 } AreaScriptBank;
 
-/* One section: `slots_bytes == 2 * M` in 2072 of 2380 sections; the 308 that
- * are not monotone are 51 byte-identical blobs reused across payloads, likely a
- * second section kind. The last section runs to the end of the block. */
+/* One section: `slots_bytes == 2 * M`, and the `record_off` values increase
+ * strictly and tile the section, one stream each. The last section runs to the
+ * end of the block. */
 typedef struct AreaScriptSection {
     u16 slots_bytes;   /* 0x00 - == 2 * M */
     u16 record_off[1]; /* 0x02 - M entries, relative to the section base */
