@@ -257,6 +257,7 @@ typedef struct BMagicOrbitWork {
     /* 0x0E */ u16        angle;
     /* 0x10 */ s32        unk_10;
     /* 0x14 */ s32        unk_14;
+    /* 0x18 */ s32        unk_18;
 } BMagicOrbitWork;
 
 ASSERT_OFFSET(BMagicOrbitWork, radius, 0x0C);
