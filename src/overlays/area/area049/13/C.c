@@ -35,7 +35,20 @@ INCLUDE_ASM(func_801172D0);
 
 INCLUDE_ASM(func_80117410);
 
-INCLUDE_ASM(func_80117514);
+MATCH void func_80117514(void) {
+    AreaSprite* work = D_801181DC;
+    u8          count;
+
+    count = work->flags_02 - 1;
+    work->origin.x += work->normal.vx * 2;
+    work->origin.y += work->normal.vy * 2;
+    work->flags_02 = count;
+    work->half_size += 0x80;
+    if (!(count & BYTE_MASK)) {
+        ((AreaSprite*)D_801181DC)->flags_02 = 0x40;
+        ((AreaSprite*)D_801181DC)->flags_01++;
+    }
+}
 
 MATCH void func_8011759C(void) {
     AreaSprite* work = D_801181DC;
