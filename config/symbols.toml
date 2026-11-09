@@ -5048,7 +5048,7 @@ DecDCTReset = { addr = 0x801D6DE4, type = "func" }
 DecDCTGetEnv = { addr = 0x801D6E1C, type = "func", size = 0x8C, source = "PsyQ LIBPRESS library routine." }
 DecDCTPutEnv = { addr = 0x801D6EA8, type = "func", size = 0x9C, source = "PsyQ LIBPRESS library routine." }
 DecDCTBufSize = { addr = 0x801D6F44, type = "func", size = 0xC, source = "PsyQ LIBPRESS library routine." }
-DecDCTin = { addr = 0x801D6F50, type = "func" }
+DecDCTin = { addr = 0x801D6F50, type = "func", size = 0x7C, source = "PsyQ LIBPRESS library routine." }
 DecDCTout = { addr = 0x801D6FCC, type = "func", size = 0x20, source = "PsyQ LIBPRESS library routine." }
 DecDCTinSync = { addr = 0x801D6FEC, type = "func", size = 0x3C, source = "PsyQ LIBPRESS library routine." }
 DecDCToutSync = { addr = 0x801D7028, type = "func", size = 0x3C, source = "PsyQ LIBPRESS library routine." }
@@ -5918,7 +5918,7 @@ PadInit = { addr = 0x80174668, type = "func" }
 PadRead = { addr = 0x801746B8, type = "func" }
 PadStop = { addr = 0x801746E0, type = "func" }
 VSync = { addr = 0x80174700, type = "func" }
-v_wait = { addr = 0x80174848, type = "func", source = "LIBETC.LIB 484 bytes" }
+v_wait = { addr = 0x80174848, type = "func", size = 0x9C, source = "PsyQ LIBETC library routine." }
 ResetCallback = { addr = 0x801748E4, type = "func" }
 InterruptCallback = { addr = 0x80174914, type = "func", source = "LIBETC.LIB 1808 bytes" }
 DMACallback = { addr = 0x80174944, type = "func", source = "LIBETC.LIB 1808 bytes" }
@@ -6319,6 +6319,7 @@ _spu_rev_workareasize = { addr = 0x80183FB4, source = "LIBSPU s_rmp.o _spu_rev_w
 _spu_rev_param = { addr = 0x80183FDC, source = "LIBSPU s_rmp.o _spu_rev_param, 680 bytes equal retail" }
 _snd_seq_tick_env = { addr = 0x80184440, alias = true }
 _svm_sreg = { addr = 0x80184458, alias = true }
+Vcount = { addr = 0x801856C4, size = 0x4, source = "PsyQ LIBETC vblank counter, one per vblank; v_wait spins until it reaches its target." }
 CD_cbsync = { addr = 0x80185780, alias = true }
 CD_cbready = { addr = 0x80185784, alias = true }
 CD_debug = { addr = 0x8018578C, alias = true }
