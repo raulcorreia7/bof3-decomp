@@ -17,6 +17,7 @@ extern s8*       D_801F44A4;
 /* func_801F30B0 */
 void Area_ProjectRing(AreaRing* ring);
 void func_801F31A0(s32 arg0);
+void func_801F33DC(AreaRing* ring);
 void func_801F3834(void);
 void func_801F3870(void);
 

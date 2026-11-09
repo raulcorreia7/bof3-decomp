@@ -21,6 +21,7 @@ void func_801F5428(s32 arg0);
 extern Callback D_801F57D0[];
 
 void func_801F393C(void);
+void func_801F2F50(Point3DL* pos, s16 a, s16 b, u16 c, s32 d, s32 e);
 void func_801F46C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 #endif
