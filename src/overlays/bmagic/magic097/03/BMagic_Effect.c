@@ -33,9 +33,7 @@ INCLUDE_ASM(func_801EF5C4);
 
 INCLUDE_ASM(func_801EFE04);
 
-/* Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length
- * and brightness flicker at random, and it goes into the depth cell of the effect's position. The halfword copy of
- * Effect_DrawBolt.h. */
+/* Draws the lightning bolt of the effect as LINE_G2 segments. */
 MATCH void Effect_DrawBolt(void) {
     LINE_G2* primitive;
     s16*     d;

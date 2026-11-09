@@ -1,7 +1,4 @@
-/* Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length
- * and brightness flicker at random, and it goes into the depth cell of the effect's position. One definition shared
- * by magic099 and magic143; each image header defines BOLT_RADIUS, BOLT_FLICKER_MASK and BOLT_FLICKER_BASE and reads
- * the scratch words as s32 (GAME_SCRATCH_BASE_WORD). Every change here must verify every member. */
+/* Draws the lightning bolt of the effect as LINE_G2 segments. */
 /* func_801F043C (magic099), func_801EF9A4 (magic143) */
 MATCH void Effect_DrawBolt(void) {
     LINE_G2* primitive;

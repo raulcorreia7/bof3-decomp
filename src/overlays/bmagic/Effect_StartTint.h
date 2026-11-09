@@ -1,6 +1,4 @@
-/* Counts byte 0x09 down; at zero it sets work flag 0x20, loads the tint
- * selector with 1, clears the three tint colours and steps the handler.
- */
+/* Counts byte 0x09 down; at zero it sets work flag 0x20, loads the tint selector with 1, clears the three tint colours and steps the handler. */
 /* func_801EF448, func_801EF5F0 */
 MATCH void Effect_StartTint(void) {
     u8 count;

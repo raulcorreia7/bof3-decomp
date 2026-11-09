@@ -11,8 +11,7 @@ MATCH void func_801EEC04(void) {
 /* blocker: target-Y load schedule; first diff: lui v1,0x1f80 at 0x801EEC5C. */
 INCLUDE_ASM(func_801EEC5C);
 
-/* The two handlers read the variant byte already loaded in a0, so the calls pass no argument: a
- * call with an argument adds a zero-extension the retail code folds away. */
+/* The two handlers read the variant byte already loaded in a0. */
 MATCH void func_801EECE4(void) {
     u8 ticks;
     u8 count;

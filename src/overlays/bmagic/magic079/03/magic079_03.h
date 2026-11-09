@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_MAGIC079_03_H
 #define OVERLAY_BMAGIC_MAGIC079_03_H
 
-/* The bmagic/magic079/03 overlay. Only this image includes the file. */
+/* The bmagic/magic079/03 overlay. */
 
 #define BATTLE_PARTY_CELL_RECORD
 

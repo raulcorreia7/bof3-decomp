@@ -1,7 +1,4 @@
-/* Copy the module head's three state callbacks and run the one the shared spad
- * step byte selects. The callback triple is the proven MagicModule.steps
- * member, so the body takes no table parameter. One definition shared by the
- * bmagic effect modules; each includes this file where the function sits. */
+/* Copy the module head's three state callbacks and run the one the shared spad step byte selects. */
 /* func_801EEC10 (magic038), func_801EEC10 (magic048), func_801EEC10 (magic066), func_801EEC10 (magic075), func_801EEC10
    (magic100), func_801EEC10 (magic103), func_801EEC10 (magic120), func_801EEC10 (magic130), func_801EEC10 (magic145),
    func_801EEC10 (magic216), func_801EEC10 (magic222), func_801EEC18 (magic002), func_801EEC1C (magic052), func_801EEC1C

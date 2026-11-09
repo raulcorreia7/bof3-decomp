@@ -48,7 +48,7 @@ MATCH void BMagic_UpdateBurnSprites(void) {
     }
 }
 
-/* Retail keeps the battler in v1 and the task in a0; the draft (--dec form, timer 2, unk_14 zero) is one instruction short at the 0x14 bnez, the reg order differs. */
+/* Retail keeps the battler in v1 and the task in a0. */
 INCLUDE_ASM(func_801EEFF4);
 
 MATCH void func_801EF0A4(void) {
@@ -85,14 +85,12 @@ INCLUDE_ASM(BMagic_DrawBurnSprites);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-/* The dark ring scratch: the inner and outer radius and the inner-edge shade, then the quad corners
- * (D_1F800014). */
+/* The dark ring scratch: the inner and outer radius and the inner-edge shade. */
 #define DARK_RING_INNER D_1F800000.view.effect.params[1]
 #define DARK_RING_OUTER D_1F800000.view.effect.params[2]
 #define DARK_RING_SHADE D_1F800000.view.effect.params[5]
 
-/* A ring of 32 subtractive quads from radius 128 to 192 that darkens toward its inner edge by six times the
- * effect counter (byte 0x09), then the draw mode back to plain blending. */
+/* A ring of 32 subtractive quads from radius 128 to 192 that darkens toward its inner edge by six times the effect counter (byte 0x09). */
 MATCH void BMagic_DrawBurnFlameQuads(void) {
     POLY_G4* prim;
     long     depth;

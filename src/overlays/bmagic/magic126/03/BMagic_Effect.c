@@ -60,15 +60,14 @@ MATCH void func_801EF00C(void) {
 
 INCLUDE_ASM(func_801EF1C8);
 
-/* The glow ring scratch: the inner and outer radius and the inner-edge colour, then the quad corners (D_1F800014). */
+/* The glow ring scratch: the inner and outer radius and the inner-edge colour. */
 #define GLOW_RING_INNER D_1F800000.view.effect.params[0]
 #define GLOW_RING_OUTER D_1F800000.view.effect.params[1]
 #define GLOW_RING_RED   D_1F800000.view.effect.params[3]
 #define GLOW_RING_GREEN D_1F800000.view.effect.params[4]
 #define GLOW_RING_BLUE  D_1F800000.view.effect.params[5]
 
-/* The outer half of the glow ring: 16 additive quads from twice the effect timer (byte 0x0A) out to three
- * times it, plus a random 0 to 3 for flicker, fading out at the outer edge. */
+/* The outer half of the glow ring. */
 MATCH void BMagic_DrawGlowRingOuter(void) {
     POLY_G4* prim;
     long     depth;

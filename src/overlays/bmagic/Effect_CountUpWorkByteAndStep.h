@@ -1,6 +1,4 @@
-/* Counts the work byte 0x04 up by two and steps the handler when it
- * reaches 16.
- */
+/* Counts the work byte 0x04 up by two and steps the handler when it reaches 16. */
 /* func_801EF2D4, func_801EF1A0 */
 MATCH void Effect_CountUpWorkByteAndStep(void) {
     u8 timer;

@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_MAGIC066_03_H
 #define OVERLAY_BMAGIC_MAGIC066_03_H
 
-/* The bmagic/magic066/03 overlay. Only this image includes the file. */
+/* The bmagic/magic066/03 overlay. */
 
 #include "overlays/bmagic/bmagic.h"
 extern Callback D_801F006C[];

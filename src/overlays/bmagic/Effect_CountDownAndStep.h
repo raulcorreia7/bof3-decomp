@@ -1,8 +1,5 @@
-/* Counts the effect counter (work byte 0x0A) down; at zero it advances the
- * effect step (work byte 0x02). One definition shared by the bmagic effect
- * modules; every change here must verify every member. */
-/* Effect_CountDownAndStep (magic062, magic067, magic076, magic078, magic082, magic111, magic131, magic137, magic222),
-   Effect_CountDownAndStep2 (magic131) */
+/* Counts the effect counter (work byte 0x0A) down; at zero it advances the effect step (work byte 0x02). */
+/* Effect_CountDownAndStep (magic062, magic067, magic076, magic078, magic082, magic111, magic131, magic137, magic222), Effect_CountDownAndStep2 (magic131). */
 /* The statements of Effect_CountDownAndStep. */
 #define BMAGIC_COUNT_DOWN_AND_STEP()                       \
     do {                                                   \

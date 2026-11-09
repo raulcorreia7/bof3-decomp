@@ -97,10 +97,10 @@ MATCH void func_801EFFA4(void) {
     }
 }
 
-/* The y position loads g_BattleEffectBattler before the rcos multiply; retail multiplies first (first diff at 0x801F0094). The x position matches. */
+/* The y position loads g_BattleEffectBattler before the rcos multiply. */
 INCLUDE_ASM(func_801F002C);
 
-/* Retail reloads g_Task after the rsin call and before the 24x multiply; the draft multiplies first (first diff at 0x801F0140). Needs the extern D_1F800004 (u16) in magic220_03.h. */
+/* Retail reloads g_Task after the rsin call and before the 24x multiply. */
 INCLUDE_ASM(func_801F010C);
 
 INCLUDE_ASM(func_801F01C8);

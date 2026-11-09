@@ -1,7 +1,4 @@
-/* Raises the effect ticker, drops the effect counter by three and counts the
- * wait down by two; at zero it releases the battler's ticker and clears the
- * effect. Every change here must verify every member.
- */
+/* Raises the effect ticker, drops the effect counter by three and counts the wait down by two. */
 /* func_801EF124 (magic055), func_801EF124 (magic091) */
 MATCH void func_801EF124(void) {
     u8 count;

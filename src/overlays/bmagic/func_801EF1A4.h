@@ -1,7 +1,4 @@
-/* Darkens the palette fade of the effect by one step; on the last step frees
- * the fade of the selected battler, tells the battle UI and goes to the next
- * mode. One definition shared by the bmagic overlays; every change here must
- * verify every member. */
+/* Darkens the palette fade of the effect by one step. */
 /* func_801EF1A4 (magic070), func_801EF1A4 (magic071), func_801EF1A4 (magic072) */
 MATCH void func_801EF1A4(void) {
     g_PaletteFades[g_Task->timer].offset.red--;

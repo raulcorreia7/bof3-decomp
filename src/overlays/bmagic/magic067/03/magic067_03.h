@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_MAGIC067_03_H
 #define OVERLAY_BMAGIC_MAGIC067_03_H
 
-/* The bmagic/magic067/03 overlay. Only this image includes the file. */
+/* The bmagic/magic067/03 overlay. */
 
 #include "overlays/bmagic/bmagic.h"
 

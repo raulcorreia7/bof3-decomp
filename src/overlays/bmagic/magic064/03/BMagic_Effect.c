@@ -305,8 +305,7 @@ INCLUDE_ASM(func_801F0EEC);
 
 INCLUDE_ASM(func_801F103C);
 
-/* Report the map cell the projected point lands on: out[0] and out[1] receive
- * the cell, or zero when the probe leaves the map or hits an empty cell. */
+/* Report the map cell the projected point lands on. */
 MATCH void func_801F12B8(s32 px, s32 py, u8* out) {
     u8* buffer;
     s32 width;

@@ -8,8 +8,7 @@ MATCH void func_801EEC04(void) {
     ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EED40);
 }
 
-/* The g_Task base for the span read must be fetched before the D_801EC364 store and the
- * z member read kept in place; both inline reads or an early span local shift the reload. */
+/* The g_Task base for the span read must be fetched before the D_801EC364 store and the z member read kept in place. */
 MATCH void func_801EEC5C(void) {
     PartyMember* work;
     s32          scroll_x;

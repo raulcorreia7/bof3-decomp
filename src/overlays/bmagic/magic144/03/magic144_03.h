@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_MAGIC144_03_H
 #define OVERLAY_BMAGIC_MAGIC144_03_H
 
-/* The bmagic/magic144/03 overlay. Only this image includes the file. */
+/* The bmagic/magic144/03 overlay. */
 
 #include "overlays/bmagic/bmagic.h"
 #define MAGIC092_STEP_X 16
