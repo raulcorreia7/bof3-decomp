@@ -99,10 +99,10 @@ MATCH void func_801EF880(void) {
 }
 
 MATCH void func_801EF8C4(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0078, g_Task->header.step);
     func_800AF764();
-    g_ScriptTable = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF930(void) {

@@ -35,12 +35,12 @@ MATCH void func_801EEE94(void) {
 MATCH void func_801EEEE0(void) {
     Magic052Steps handlers = D_801EEC10;
 
-    g_ScriptTable = BATTLE_SCRIPT_BANK;
+    g_ScriptTable = BATTLE_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EEF84(void) {

@@ -939,11 +939,11 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     BattleEffectSteps handlers;
     PartyMember*      work;
 
-    handlers     = *table;
-    work         = (PartyMember*)g_Task;
-    g_ScriptTable = BATTLE_SCRIPT_BANK;
+    handlers      = *table;
+    work          = (PartyMember*)g_Task;
+    g_ScriptTable = BATTLE_SCRIPT_TABLE;
     ((Callback*)&handlers)[work->header.mode]();
-    g_ScriptTable = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 /* Reset the three selection bytes once the lock at -0x7A8D is clear, then run

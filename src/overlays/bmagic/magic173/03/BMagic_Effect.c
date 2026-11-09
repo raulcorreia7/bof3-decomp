@@ -64,7 +64,7 @@ INCLUDE_ASM(func_801EFA34);
 #include "overlays/bmagic/Effect_ClearTrail.h"
 
 MATCH void func_801F0488(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F09A0, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_800AF764();
@@ -73,7 +73,7 @@ MATCH void func_801F0488(void) {
             func_8014D290();
         }
     }
-    g_ScriptTable = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801F0540(void) {

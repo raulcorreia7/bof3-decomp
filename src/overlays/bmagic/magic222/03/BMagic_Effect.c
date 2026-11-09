@@ -17,13 +17,13 @@ INCLUDE_ASM(func_801EEC70);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF24(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0D64, g_Task->header.step);
     if ((g_Task->header.flags & 1) && g_Task->header.step != 0) {
         func_800AF764();
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 /* hint: g_Task loads before the effect battler for the position copy and the battler z loads before the unk_25 store; the candidate loads the two in the other order. First differing instruction: lui v1,0x1f80 at +0x2C. */

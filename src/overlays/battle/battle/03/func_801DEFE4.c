@@ -12,17 +12,17 @@ MATCH void func_801DEFE4(void) {
     if (g_Battle.outcome.options & 0x20) {
         if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
             if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
-                Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+                Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
             } else {
-                Actor_SwitchScript(g_Task->unk_4B, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+                Actor_SwitchScript(g_Task->unk_4B, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
             }
             return;
         }
     } else if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
         if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
-            Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+            Actor_SwitchScript(g_Task->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         } else {
-            Actor_SwitchScript(g_Task->facing + 0x20, MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+            Actor_SwitchScript(g_Task->facing + 0x20, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         }
         return;
     }
