@@ -27,15 +27,13 @@ NON_MATCHING void func_8009E500(void) {
             if (limit < g_Game.members[g_Battle.active_battler].chr.ap + delta) {
                 g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, limit, delta),
-                          g_Battle.active_battler);
+            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, limit, delta), g_Battle.active_battler);
         } else {
             limit = ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap;
             if (limit < ENEMY_COMBATANT(g_Battle.active_battler).ap + delta) {
                 g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, limit, delta),
-                          g_Battle.active_battler);
+            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, limit, delta), g_Battle.active_battler);
         }
         g_Battle.action->unk_08 = 0;
     } else {

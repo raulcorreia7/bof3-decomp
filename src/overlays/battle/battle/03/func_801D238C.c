@@ -22,7 +22,6 @@ MATCH void func_801D238C(void) {
     Battle_DrawDimOverlay();
     for (panel_index = 0; panel_index < 7; panel_index++) {
         func_801D8450(panel_index);
-        func_801644D8(panel_index, s_BattlePanelOffsets[panel_index][0] + 0x88,
-                      s_BattlePanelOffsets[panel_index][1] + 0x58, BATTLE_PANEL_SIZE, BATTLE_PANEL_SIZE, 0x80);
+        func_801644D8(panel_index, s_BattlePanelOffsets[panel_index][0] + 0x88, s_BattlePanelOffsets[panel_index][1] + 0x58, BATTLE_PANEL_SIZE, BATTLE_PANEL_SIZE, 0x80);
     }
 }

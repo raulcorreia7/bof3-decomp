@@ -37,8 +37,7 @@ MATCH void Area_ClearCell(s32 x, s32 y) {
         prim = (u8*)(g_AreaMapBundle.record_region_24 * 4 + (s32)((u8*)map + cell * 4));
         end  = prim + (*(u16*)(prim - 2) * 4 - 4);
         while (prim != end) {
-            if ((*(u32*)prim & 0xFF000000) == 0x03000000 || (*(u32*)prim & 0xFF000000) == 0x09000000 ||
-                (*(u32*)prim & 0xFF000000) == 0x27000000) {
+            if ((*(u32*)prim & 0xFF000000) == 0x03000000 || (*(u32*)prim & 0xFF000000) == 0x09000000 || (*(u32*)prim & 0xFF000000) == 0x27000000) {
                 *(u32*)prim = (*(u32*)prim & 0xFFFFFF) | 0x30000000;
             }
             prim += *(u8*)(prim + 2) * 4;

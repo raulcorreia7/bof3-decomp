@@ -67,15 +67,13 @@ MATCH void func_801DF3F8(void) {
             actor = g_Task;
             mode  = actor->facing;
             if ((mode == 1) || (mode == 3)) {
-                actor->pos.x.fixed =
-                    g_BattleEffects[actor->slot].pos.x.fixed + (g_BattleEffects[actor->slot].arg.sway << 9);
+                actor->pos.x.fixed = g_BattleEffects[actor->slot].pos.x.fixed + (g_BattleEffects[actor->slot].arg.sway << 9);
             } else {
                 y_pos = g_BattleEffects[actor->slot].pos.y.fixed + (g_BattleEffects[actor->slot].arg.sway << 9);
                 goto store_coord_y;
             }
         }
-    } else if ((g_Battle.state & BATTLE_STATE_RELOAD_PARTY) &&
-               (g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+    } else if ((g_Battle.state & BATTLE_STATE_RELOAD_PARTY) && (g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
         PartyMember* work = g_Task;
 
         s32 x = g_EncounterOriginX;

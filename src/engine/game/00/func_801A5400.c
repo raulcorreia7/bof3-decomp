@@ -24,12 +24,10 @@ MATCH void func_801A5400(u8* script) {
         Area_FindSceneRecord(FIELD(u16, counter, 0x2u));
         g_Task->header.flags           = ACTOR_FLAG_IN_USE;
         coord_record                   = g_Task;
-        g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed =
-            (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
+        g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         FAKE_BARRIER();
-        g_Actors[*counter].walk_dest_y = coord_record->pos.y.fixed =
-            (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
+        g_Actors[*counter].walk_dest_y = coord_record->pos.y.fixed = (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         FAKE_BARRIER();
         g_Actors[*counter].unk_88     = 0;
@@ -68,8 +66,7 @@ MATCH void func_801A5400(u8* script) {
         }
         cell_record_c = g_Task;
         if ((COORD_FRAC(cell_record_c->pos.x) != 0) && (COORD_FRAC(cell_record_c->pos.y) != 0)) {
-            Area_SetCellCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1),
-                             (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
+            Area_SetCellCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1), (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
         }
         VOL(u16, D_1F800000) += 1;
     }

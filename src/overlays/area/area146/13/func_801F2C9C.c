@@ -5,8 +5,7 @@
  * match clears the first script variable and calls func_801BE1B0(0). */
 MATCH s32 func_801F2C9C(s32 x, s32 y) {
     if (D_80143F03 == 1 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && ((x >> 16) - 68) < 3U) {
-        if (((y >> 16) - 42) < 3U &&
-            (g_Game.members[0].facing == FACING_UP_LEFT || (g_Game.members[0].facing - 6) < 2U)) {
+        if (((y >> 16) - 42) < 3U && (g_Game.members[0].facing == FACING_UP_LEFT || (g_Game.members[0].facing - 6) < 2U)) {
             *g_ScriptVars = 0;
             func_801BE1B0(0);
             return 1;

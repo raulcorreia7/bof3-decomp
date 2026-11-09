@@ -59,8 +59,7 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp28;
     void*  tmp29;
 
-    if ((0x400 & g_Game.flags) ||
-        ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
+    if ((0x400 & g_Game.flags) || ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
         return 1;
     }
     tmp12 = *(D_80181B00 + (g_Task->direction_08 * 2));
@@ -106,10 +105,8 @@ NON_MATCHING s32 func_801BA678(void) {
                         goto block_21; /* retail branch */
                     }
                     if (!(func_801BB1B8(2) & BYTE_MASK)) {
-                        if ((((spad[1] & 0xF0) != 0xA0) ||
-                             ((tmp19 = g_Task->direction_08, val9 = 9, (tmp19 != 1)) && (tmp19 != 5))) &&
-                            (((spad[2] & 0xF0) != 0xA0) ||
-                             ((tmp20 = g_Task->direction_08, val9 = 0xA, (tmp20 != 3)) && (tmp20 != 7)))) {
+                        if ((((spad[1] & 0xF0) != 0xA0) || ((tmp19 = g_Task->direction_08, val9 = 9, (tmp19 != 1)) && (tmp19 != 5))) &&
+                            (((spad[2] & 0xF0) != 0xA0) || ((tmp20 = g_Task->direction_08, val9 = 0xA, (tmp20 != 3)) && (tmp20 != 7)))) {
                             if ((spad[1] & 0xF0) == 0xA0) {
                                 g_Task->direction_08 = val20;
                                 func_801BB8E8(4U, 6U, 5U);

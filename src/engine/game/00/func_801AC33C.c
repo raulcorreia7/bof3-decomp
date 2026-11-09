@@ -25,10 +25,8 @@ MATCH bool func_801AC33C(s32 ease_in, s32 distance) {
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     reached_x                = 0;
     if ((g_Task->unk_18 + g_Task->unk_1C) == 0) {
-        g_CurrentActor->walk_dest_x =
-            g_Task->pos.x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (distance & BYTE_MASK);
-        g_CurrentActor->walk_dest_y =
-            g_Task->pos.y.fixed + (g_FacingSteps[g_Task->direction_08 & 7].y << 1) * (distance & BYTE_MASK);
+        g_CurrentActor->walk_dest_x = g_Task->pos.x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (distance & BYTE_MASK);
+        g_CurrentActor->walk_dest_y = g_Task->pos.y.fixed + (g_FacingSteps[g_Task->direction_08 & 7].y << 1) * (distance & BYTE_MASK);
         if ((ease_in & BYTE_MASK) != 0) {
             g_Task->unk_18 = step_x >> (distance & BYTE_MASK);
             g_Task->unk_1C = step_y >> (distance & BYTE_MASK);
@@ -50,8 +48,7 @@ MATCH bool func_801AC33C(s32 ease_in, s32 distance) {
     if (g_Task->unk_06 == 0x0A) {
         pos_x = g_Task->pos.x.fixed;
         slot  = (-(((s32)g_CurrentActor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
-        if ((((pos_x ^ (pos_x + g_Task->vx)) & 0x8000) != 0) ||
-            ((pos_y = g_Task->pos.y.fixed, (((pos_y ^ (pos_y + delta)) & 0x8000)) != 0))) {
+        if ((((pos_x ^ (pos_x + g_Task->vx)) & 0x8000) != 0) || ((pos_y = g_Task->pos.y.fixed, (((pos_y ^ (pos_y + delta)) & 0x8000)) != 0))) {
             func_801A3080(g_CurrentActor, g_Task->direction_08 & 7);
         }
         index = (s32)(slot << 24) >> 20;

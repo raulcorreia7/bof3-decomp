@@ -8,8 +8,7 @@ MATCH u8 func_801E4368(void) {
         if ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) && (LOHU(g_Battle.action_id) == ABILITY_TIMED_BLOW)) {
             return 0u;
         }
-        if ((g_Battle.action_lock != 0u) &&
-            ((BATTLE_CURRENT_ENEMY_PTR->turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+        if ((g_Battle.action_lock != 0u) && ((BATTLE_CURRENT_ENEMY_PTR->turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
             return 0u;
         }
         if ((BATTLE_CURRENT_ENEMY_PTR->event_flags & ENEMY_EVENT_REPRISAL) == 0u) {

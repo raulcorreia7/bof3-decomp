@@ -1,8 +1,7 @@
 #include "start_08.h"
 
-extern void        Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height,
-                                      u8 window_style); /* local: void read; a sibling copy is s32 */
-extern volatile u8 g_SndMono;                           /* local: volatile access; a sibling copy is plain */
+extern void        Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style); /* local: void read; a sibling copy is s32 */
+extern volatile u8 g_SndMono;                                                                /* local: volatile access; a sibling copy is plain */
 
 MATCH void func_801E18D0(void) {
     s32 pressed;

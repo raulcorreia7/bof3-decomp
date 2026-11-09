@@ -3,9 +3,8 @@
 /* The state table Scene_UpdateEffectState dispatches through; the word after its last
  * entry holds the work pointer Scene_EffectBegin publishes. */
 Callback D_801D2708[15] = {
-    func_801D0FAC, func_801D1218, func_801D1D58, func_801D1034, func_801D10C8,
-    func_801D1138, func_801D11A0, func_801D12A8, func_801D13C0, func_801D1430,
-    func_801D1544, func_801D1DE0, func_801D1EFC, func_801D1F50, func_801D2064,
+    func_801D0FAC, func_801D1218, func_801D1D58, func_801D1034, func_801D10C8, func_801D1138, func_801D11A0, func_801D12A8,
+    func_801D13C0, func_801D1430, func_801D1544, func_801D1DE0, func_801D1EFC, func_801D1F50, func_801D2064,
 };
 
 SceneBandEffect* D_801D2744 = 0;

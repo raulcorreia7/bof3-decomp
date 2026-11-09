@@ -9,8 +9,7 @@
 /* The step count is rounded up to this many scale steps. */
 #define BATTLE_BAR_STEP_ROUND 0xF
 
-MATCH void func_801EA254(u8* scale, s16* max_value, s16* last_max, s16* value, s16* target, u8* delta, s16* steps,
-                         s8* direction) {
+MATCH void func_801EA254(u8* scale, s16* max_value, s16* last_max, s16* value, s16* target, u8* delta, s16* steps, s8* direction) {
     if (*last_max != *max_value) {
         if (*target >= *max_value) {
             *target = *max_value;

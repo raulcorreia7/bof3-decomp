@@ -37,8 +37,7 @@ NON_MATCHING void func_801D1E8C(void) {
         if (FIELD(u8, g_BattleMessageSlot, 0x119u) == 5) {
             temp_v1_80 = FIELD(s32, g_BattleMessageSlot, 0x124u);
             if (!(temp_v1_80 & 0x4000)) {
-                func_801DDE7C((u32)FIELD(u8, g_BattleMessageSlot, 0x122u),
-                              (u32)FIELD(u16, g_BattleMessageSlot, 0x11Au));
+                func_801DDE7C((u32)FIELD(u8, g_BattleMessageSlot, 0x122u), (u32)FIELD(u16, g_BattleMessageSlot, 0x11Au));
             } else {
                 FIELD(s32, g_BattleMessageSlot, 0x124u) = (s32)(temp_v1_80 & ~0x4000);
             }
@@ -48,8 +47,7 @@ NON_MATCHING void func_801D1E8C(void) {
         return;
     }
     if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad) {
-        if (((u32)(g_Battle.panel_slot - 2) < 2U) &&
-            (g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+        if (((u32)(g_Battle.panel_slot - 2) < 2U) && (g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
@@ -91,8 +89,7 @@ NON_MATCHING void func_801D1E8C(void) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
                 if (*(u8*)(&g_Battle.cursor.panel_entry) == (var_s1 + 1)) {
                     if (*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) != 0) {
-                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) ||
-                            !(g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
                             temp_a0_239                                             = var_s0 + 1;
                             FIELD(s8, (&D_8014837B), 0x24u)                         = 2;
                             *(u8*)(&D_8014837B)                                     = 2;
@@ -100,8 +97,7 @@ NON_MATCHING void func_801D1E8C(void) {
                             FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x1u)  = temp_a0_239;
                             FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x4u)  = 0;
                             FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x5u)  = 0;
-                            *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5) =
-                                (u8)(*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5) + 2);
+                            *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5)        = (u8)(*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5) + 2);
                             return;
                         }
                         *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) = 0U;

@@ -60,13 +60,12 @@ NON_MATCHING void func_801EF418(void) {
     s32 cosTerm;
     s32 angle;
 
-    angle                              = (FIELD(u16, g_BMagicOrbitWork, 0xE) + 0x40) & 0xFFF;
-    FIELD(u16, g_BMagicOrbitWork, 0xE) = angle;
-    FIELD(s32, g_BMagicOrbitWork, 0x10) =
-        g_BattleEffectBattler->pos.x.fixed + rsin(angle) * FIELD(s16, g_BMagicOrbitWork, 0xC);
-    cosTerm = rcos((s16)FIELD(u16, g_BMagicOrbitWork, 0xE)) * FIELD(s16, g_BMagicOrbitWork, 0xC);
-    counter = FIELD(u8, g_BMagicOrbitWork, 0xB) + 1;
-    spin    = FIELD(u8, g_BMagicOrbitWork, 0xA);
+    angle                               = (FIELD(u16, g_BMagicOrbitWork, 0xE) + 0x40) & 0xFFF;
+    FIELD(u16, g_BMagicOrbitWork, 0xE)  = angle;
+    FIELD(s32, g_BMagicOrbitWork, 0x10) = g_BattleEffectBattler->pos.x.fixed + rsin(angle) * FIELD(s16, g_BMagicOrbitWork, 0xC);
+    cosTerm                             = rcos((s16)FIELD(u16, g_BMagicOrbitWork, 0xE)) * FIELD(s16, g_BMagicOrbitWork, 0xC);
+    counter                             = FIELD(u8, g_BMagicOrbitWork, 0xB) + 1;
+    spin                                = FIELD(u8, g_BMagicOrbitWork, 0xA);
     FIELD(u16, g_BMagicOrbitWork, 0x1A) = (u16)(FIELD(u16, g_BMagicOrbitWork, 0x1A) + spin);
     FIELD(u8, g_BMagicOrbitWork, 0xB)   = counter;
     FIELD(s32, g_BMagicOrbitWork, 0x14) = g_BattleEffectBattler->pos.y.fixed + cosTerm;

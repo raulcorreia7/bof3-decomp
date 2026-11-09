@@ -47,13 +47,10 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     }
     if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM) {
         if (g_Battle.dragon_form == 0x16) {
-            g_Game.members[party_slot].chr.stats.evasion = g_Game.members[party_slot].chr.stats.evasion + 0x1E;
-            g_Game.members[party_slot].chr.stats.critical_chance =
-                g_Game.members[party_slot].chr.stats.critical_chance + 0x1E;
-            g_Game.members[party_slot].chr.stats.evasion =
-                func_801DE144(g_Game.members[party_slot].chr.stats.evasion, 0x64);
-            g_Game.members[party_slot].chr.stats.critical_chance =
-                func_801DE144(g_Game.members[party_slot].chr.stats.critical_chance, 0x64);
+            g_Game.members[party_slot].chr.stats.evasion         = g_Game.members[party_slot].chr.stats.evasion + 0x1E;
+            g_Game.members[party_slot].chr.stats.critical_chance = g_Game.members[party_slot].chr.stats.critical_chance + 0x1E;
+            g_Game.members[party_slot].chr.stats.evasion         = func_801DE144(g_Game.members[party_slot].chr.stats.evasion, 0x64);
+            g_Game.members[party_slot].chr.stats.critical_chance = func_801DE144(g_Game.members[party_slot].chr.stats.critical_chance, 0x64);
         }
     }
 

@@ -51,16 +51,13 @@ NON_MATCHING void func_801576FC(u8* record) {
                 case 0:     /* switch 1 */
                     tmp7 = *val10;
                     val1 += 1;
-                    tmp0                                   = g_AreaMapBundle.grid_off4_02 * 4;
-                    FIELD(u32, val10,
-                          tmp0 + ((((s32)((tmp7 * g_AreaMapBundle.height) + 1) >> 1) * 4) +
-                                  (FIELD(u16, val10, (tmp1 * tmp7 * 2) + tmp0 + (tmp6 * 2)) * 4) +
-                                  ((tmp4 >> 0xE) & 0x3C))) = FIELD(s32, (val2 + val9), 0x4u);
+                    tmp0 = g_AreaMapBundle.grid_off4_02 * 4;
+                    FIELD(u32, val10, tmp0 + ((((s32)((tmp7 * g_AreaMapBundle.height) + 1) >> 1) * 4) + (FIELD(u16, val10, (tmp1 * tmp7 * 2) + tmp0 + (tmp6 * 2)) * 4) + ((tmp4 >> 0xE) & 0x3C))) =
+                        FIELD(s32, (val2 + val9), 0x4u);
                     goto block_13; /* retail branch */
                 default:           /* switch 1 */
                     val1 += 2;
-                    FIELD(u8, (u8*)g_AreaCellCodes, tmp6 + (tmp1 * g_AreaMapBundle.width)) =
-                        (s8)(FIELD(u32, val9, 0x4u) >> (val5 * 0x10));
+                    FIELD(u8, (u8*)g_AreaCellCodes, tmp6 + (tmp1 * g_AreaMapBundle.width)) = (s8)(FIELD(u32, val9, 0x4u) >> (val5 * 0x10));
                     break;
                 case 1: /* switch 1 */
                 block_13:
@@ -87,9 +84,8 @@ NON_MATCHING void func_801576FC(u8* record) {
                     val1 += 2;
                     break;
                 case 2: /* switch 1 */
-                    FIELD(u32, val10, 0x30 + (tmp6 * 4) + (tmp1 * g_AreaMapBundle.width * 4)) =
-                        FIELD(s32, (val2 + val9), 0x4u);
-                    g_AreaCameraRefreshCount = 2;
+                    FIELD(u32, val10, 0x30 + (tmp6 * 4) + (tmp1 * g_AreaMapBundle.width * 4)) = FIELD(s32, (val2 + val9), 0x4u);
+                    g_AreaCameraRefreshCount                                                  = 2;
                     val1 += 3;
                     break;
             }

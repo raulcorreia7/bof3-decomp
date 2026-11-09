@@ -11,16 +11,15 @@ MATCH void func_801D3D00(void) {
     u32              span;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
-        Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-    g_MenuPanelTasks[14].unk_0C                      = 0;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
-    span = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
-    panel                                           = &D_80148504;
-    pressed = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
-    cursor  = D_80148510;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_MenuPanelTasks[14].unk_0C                                 = 0;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    span                                                        = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
+    panel                                                       = &D_80148504;
+    pressed                                                     = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    cursor                                                      = D_80148510;
     if (pressed & PADLup) {
         if (cursor != 0) {
             D_80148510 = cursor - 1;
@@ -76,10 +75,8 @@ MATCH void func_801D3D00(void) {
                 return;
             }
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-            Menu_SwapBytes(&D_801C893C[panel->group][panel->drawn_cursor],
-                           &D_801C893C[panel->group][panel->group_cursor]);
-            Menu_SwapBytes(&D_801C8950[panel->group][panel->drawn_cursor],
-                           &D_801C8950[panel->group][panel->group_cursor]);
+            Menu_SwapBytes(&D_801C893C[panel->group][panel->drawn_cursor], &D_801C893C[panel->group][panel->group_cursor]);
+            Menu_SwapBytes(&D_801C8950[panel->group][panel->drawn_cursor], &D_801C8950[panel->group][panel->group_cursor]);
             panel->drawn_cursor = 0xFF;
         } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));

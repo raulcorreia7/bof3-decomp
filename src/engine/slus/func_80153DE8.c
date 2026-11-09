@@ -24,8 +24,7 @@ NON_MATCHING void func_80153DE8(void) {
     SetBackColor(120, 120, 120);
     prim_base = (u8*)g_AreaCellPrims;
     for (row_offset = 0, row = 0; row_offset < 1024; row_offset++, row += 0x50) {
-        for (i = 0, primitive_row_offset = row, primitive_offset = row, prim = prim_base; i < 2;
-             primitive_offset += 0x28, i++, prim += 0x28) {
+        for (i = 0, primitive_row_offset = row, primitive_offset = row, prim = prim_base; i < 2; primitive_offset += 0x28, i++, prim += 0x28) {
             poly = (POLY_FT4*)(prim + primitive_row_offset);
             SetPolyFT4(poly);
             SetShadeTex(poly, 0);

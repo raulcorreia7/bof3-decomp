@@ -1,8 +1,7 @@
 #include "area030_05.h"
 
 static Callback D_800F71F0[11] = {
-    func_800F5048, func_800F5138, func_800F5BA4, func_800F50B4, func_800F510C, func_800F51BC,
-    func_800F550C, func_800F5828, func_800F5AD8, func_800F5BE0, func_800F5D98,
+    func_800F5048, func_800F5138, func_800F5BA4, func_800F50B4, func_800F510C, func_800F51BC, func_800F550C, func_800F5828, func_800F5AD8, func_800F5BE0, func_800F5D98,
 };
 
 /* The 16-byte table after the dispatch pointers; no reader in this image. */
@@ -86,10 +85,8 @@ MATCH void func_800F51BC(void) {
     }
     if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         if (func_800F65A8(s_ListCursor, 1) == 0) {
-            total = Item_Count(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
-                               D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, 0) +
-                    Item_Count(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
-                               D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, 1);
+            total = Item_Count(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, 0) +
+                    Item_Count(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, 1);
             if (total >= 99) {
                 s_ListCursor |= 0x80;
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
@@ -114,10 +111,7 @@ MATCH void func_800F51BC(void) {
 tail:
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     if (((s8)s_ListCursor & 0xC0) == 0) {
-        WinDrawCueText(0x18, 0x14,
-                       Item_GetDescription(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
-                                           D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00) &
-                           0xFFFF);
+        WinDrawCueText(0x18, 0x14, Item_GetDescription(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00) & 0xFFFF);
     }
     func_800F606C(0);
 }
@@ -158,10 +152,8 @@ MATCH void func_800F550C(void) {
     while (func_800F65A8(s1, s_ListItemId) != 0) {
         s_ListItemId = s_ListItemId - 1;
     }
-    s0 = Item_Count(D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_01,
-                    D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 0) +
-         Item_Count(D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_01,
-                    D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 1);
+    s0 = Item_Count(D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_01, D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 0) +
+         Item_Count(D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_01, D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 1);
     s0 &= BYTE_MASK;
     while (1) {
         if (s0 + (s8)s_ListItemId < 100) {
@@ -208,8 +200,7 @@ MATCH void func_800F5828(void) {
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 5));
             s_ListCursor &= 0xBF;
-            Item_Add(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] * 8],
-                     D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, s_ListItemId, 0);
+            Item_Add(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] * 8], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, s_ListItemId, 0);
             func_800F7100();
             s_ListItemId = 1;
             s_Step       = 0;
@@ -219,8 +210,7 @@ MATCH void func_800F5828(void) {
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 
     if (s_Step == 2) {
-        src = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][s_ListCursor & 0xF] * 8],
-                             D_801E2F7C[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]].cost_00);
+        src = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][s_ListCursor & 0xF] * 8], D_801E2F7C[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]].cost_00);
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = src[i];
         }
@@ -366,30 +356,23 @@ MATCH void func_800F606C(s32 draw_all) {
     u8  n;
     n = draw_all & BYTE_MASK;
     func_800F63CC(0x14, 0x38, n);
-    UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF,
-                MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_TRADE_ITEM_LABEL));
+    UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_TRADE_ITEM_LABEL));
     for (i = 0; i < D_800F7240; i++) {
-        h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)],
-                           ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
+        h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)], ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
         w = func_800F65A8(i & BYTE_MASK, 1);
         if ((draw_all & BYTE_MASK) != 0) {
             UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
-            func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
-                          D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
+            func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
         } else if (i == ((s8)s_ListCursor)) {
             if ((w & BYTE_MASK) == 0) {
                 UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
-                func_800F7094(0x1C, (s16)(0x54 + (i * 13)),
-                              ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
-                              D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
+                func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
             }
             UI_DrawText(0x25, (0x4F + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
-            func_800F7094(0x1C, (s16)(0x52 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
-                          D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
+            func_800F7094(0x1C, (s16)(0x52 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
         } else {
             UI_DrawText(0x25, (0x51 + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
-            func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
-                          D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
+            func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
         }
     }
 }
@@ -440,8 +423,7 @@ MATCH u8 func_800F65A8(s32 slot, s32 amount) {
             return false;
         }
         limit = (u8(*)[8]) & D_801E2F7E[0][3];
-        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & HALF_MASK) <
-            limit[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
+        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & HALF_MASK) < limit[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
             return true;
         }
     }
@@ -477,11 +459,9 @@ MATCH void func_800F6730(void) {
         if (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] == GAME_NONE) {
             break;
         }
-        value = Item_GetRecord(ITEM_CAT_ITEM,
-                               (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
+        value = Item_GetRecord(ITEM_CAT_ITEM, (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
         UI_DrawText(0xAD, (0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
-        TEXT_Format(g_UiFormatBuffer, D_800F5000.format,
-                    D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
+        TEXT_Format(g_UiFormatBuffer, D_800F5000.format, D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
         UI_DrawGlyphString(0x110, (0x5C + i * 13), 0, g_UiFormatBuffer);
         cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
         if (cost < D_801E2F81[D_801E3134[g_GameContextKind][slot]][i]) {
@@ -556,15 +536,13 @@ MATCH void func_800F6C5C(void) {
     UI_DrawText(0x21, 0x7C, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_NONE_OWNED));
 
     entry = D_801E3134[g_GameContextKind][slot];
-    TEXT_Format(g_UiFormatBuffer, D_800F5000.format,
-                Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & HALF_MASK);
+    TEXT_Format(g_UiFormatBuffer, D_800F5000.format, Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & HALF_MASK);
     UI_DrawGlyphString(0x84, 0x80, 0, g_UiFormatBuffer);
 
     UI_DrawText(0x21, 0x88, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_NONE_EQUIPPED));
 
     entry = D_801E3134[g_GameContextKind][slot];
-    TEXT_Format(g_UiFormatBuffer, D_800F5000.format,
-                Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & HALF_MASK);
+    TEXT_Format(g_UiFormatBuffer, D_800F5000.format, Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & HALF_MASK);
     UI_DrawGlyphString(0x84, 0x8C, 0, g_UiFormatBuffer);
 }
 
@@ -617,8 +595,6 @@ MATCH void func_800F7100(void) {
         }
         p       = D_801E2F7E[list_index] + 3;
         new_var = p[i] * ((s8)s_ListItemId);
-        Item_Remove(ITEM_CAT_ITEM,
-                    (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK,
-                    new_var & BYTE_MASK, 0);
+        Item_Remove(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK, new_var & BYTE_MASK, 0);
     }
 }

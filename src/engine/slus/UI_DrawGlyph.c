@@ -28,11 +28,9 @@ NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
         FIELD(s8, g_GfxPrimCursor, 0x14u)  = (s8)(val1 + (((*val0 - '0') % 31) * 8));
         FIELD(s8, g_GfxPrimCursor, 0x15u)  = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48);
         FIELD(s8, g_GfxPrimCursor, 0x1Cu)  = (s8)(((*val0 - '0') % 31) * 8);
-        FIELD(s8, g_GfxPrimCursor, 0x1Du) =
-            (s8)((((*val0 - '0') / 31) * 0xC) + 0x48 + (val2 - g_TextRowOffsets[D_801490B8[0]]));
-        FIELD(s8, g_GfxPrimCursor, 0x24u) = (s8)(val1 + (((*val0 - '0') % 31) * 8));
-        FIELD(s8, g_GfxPrimCursor, 0x25u) =
-            (s8)((((*val0 - '0') / 31) * 0xC) + 0x48 + (val2 - g_TextRowOffsets[D_801490B8[0]]));
+        FIELD(s8, g_GfxPrimCursor, 0x1Du)  = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48 + (val2 - g_TextRowOffsets[D_801490B8[0]]));
+        FIELD(s8, g_GfxPrimCursor, 0x24u)  = (s8)(val1 + (((*val0 - '0') % 31) * 8));
+        FIELD(s8, g_GfxPrimCursor, 0x25u)  = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48 + (val2 - g_TextRowOffsets[D_801490B8[0]]));
         FIELD(s8, g_GfxPrimCursor, 0x4u)   = 0x80;
         FIELD(s8, g_GfxPrimCursor, 0x5u)   = 0x80;
         FIELD(s8, g_GfxPrimCursor, 0x6u)   = 0x80;
@@ -41,19 +39,11 @@ NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
         FIELD(s16, g_GfxPrimCursor, 0x10u) = (s16)((u16)g_MessageWindow.cue_counter + (g_MessageWindow.text.x + 8));
         FIELD(u16, g_GfxPrimCursor, 0x12u) = (u16)g_MessageWindow.text.y;
         FIELD(u16, g_GfxPrimCursor, 0x18u) = (u16)g_MessageWindow.text.x;
-        FIELD(s16, g_GfxPrimCursor, 0x1Au) =
-            (s16)(g_MessageWindow.text.y +
-                  (((u16)g_MessageWindow.cue_counter + 0xC) -
-                   ((s32)(((((s32)((u16)g_MessageWindow.cue_counter << 0x10) >> 0xC) + 0xC0) / 12) *
-                          g_TextRowOffsets[D_801490B8[0]]) >>
-                    4)));
+        FIELD(s16, g_GfxPrimCursor, 0x1Au) = (s16)(g_MessageWindow.text.y + (((u16)g_MessageWindow.cue_counter + 0xC) -
+                                                                             ((s32)(((((s32)((u16)g_MessageWindow.cue_counter << 0x10) >> 0xC) + 0xC0) / 12) * g_TextRowOffsets[D_801490B8[0]]) >> 4)));
         FIELD(s16, g_GfxPrimCursor, 0x20u) = (s16)((u16)g_MessageWindow.cue_counter + (g_MessageWindow.text.x + 8));
-        FIELD(s16, g_GfxPrimCursor, 0x22u) =
-            (s16)(g_MessageWindow.text.y +
-                  (((u16)g_MessageWindow.cue_counter + 0xC) -
-                   ((s32)(((((s32)((u16)g_MessageWindow.cue_counter << 0x10) >> 0xC) + 0xC0) / 12) *
-                          g_TextRowOffsets[D_801490B8[0]]) >>
-                    4)));
+        FIELD(s16, g_GfxPrimCursor, 0x22u) = (s16)(g_MessageWindow.text.y + (((u16)g_MessageWindow.cue_counter + 0xC) -
+                                                                             ((s32)(((((s32)((u16)g_MessageWindow.cue_counter << 0x10) >> 0xC) + 0xC0) / 12) * g_TextRowOffsets[D_801490B8[0]]) >> 4)));
         SetPolyFT4((POLY_FT4*)g_GfxPrimCursor);
         SetSemiTrans(g_GfxPrimCursor, 1);
         GFX_AddPrim(1U, sizeof(POLY_FT4));

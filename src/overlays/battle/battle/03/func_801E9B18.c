@@ -13,12 +13,10 @@ MATCH void func_801E9B18(void) {
     handlers = D_801D0FE0;
     handlers.states[BATTLE_PANEL_TASK->state]();
     row = D_80145F04 + BATTLE_PANEL_TASK->cell_0A.slot * BATTLE_PARTY_STRIDE;
-    func_801EA1E0((((u8*)g_MenuCurrentPanel) + 0xB), (row + 0x1C), (((u8*)g_MenuCurrentPanel) + 0x1C),
-                  (((u8*)g_MenuCurrentPanel) + 0x14), (row + 0x14), (((u8*)g_MenuCurrentPanel) + 0xD),
+    func_801EA1E0((((u8*)g_MenuCurrentPanel) + 0xB), (row + 0x1C), (((u8*)g_MenuCurrentPanel) + 0x1C), (((u8*)g_MenuCurrentPanel) + 0x14), (row + 0x14), (((u8*)g_MenuCurrentPanel) + 0xD),
                   (((u8*)g_MenuCurrentPanel) + 0x18), ((u8*)g_MenuCurrentPanel) + 0x8);
     row = D_80145F04 + BATTLE_PANEL_TASK->cell_0A.slot * BATTLE_PARTY_STRIDE;
-    func_801EA1E0((((u8*)g_MenuCurrentPanel) + 0xC), (row + 0x1E), (((u8*)g_MenuCurrentPanel) + 0x1E),
-                  (((u8*)g_MenuCurrentPanel) + 0x16), (row + 0x16), (((u8*)g_MenuCurrentPanel) + 0xE),
+    func_801EA1E0((((u8*)g_MenuCurrentPanel) + 0xC), (row + 0x1E), (((u8*)g_MenuCurrentPanel) + 0x1E), (((u8*)g_MenuCurrentPanel) + 0x16), (row + 0x16), (((u8*)g_MenuCurrentPanel) + 0xE),
                   (((u8*)g_MenuCurrentPanel) + 0x1A), ((u8*)g_MenuCurrentPanel) + 0x9);
     /* The chr.status view changes the schedule and size, so the flags keep the D_80145F10 address view. */
     slot   = BATTLE_PANEL_TASK->cell_0A.slot;

@@ -12,10 +12,9 @@
 #include "game/records.h"
 
 /* Difficulty is the high nibble; the low two bits are the AbilityType. */
-#define ABILITY_SKILL(difficulty, ability_type) (((difficulty) << 4) | (ability_type))
+#define ABILITY_SKILL(difficulty, ability_type)                                                       (((difficulty) << 4) | (ability_type))
 
-#define ABILITY_OBJECT(name, targeting_flags, type, cost, power, element, ability_flags, description) \
-    {name, (targeting_flags), (type), (cost), (power), (element), (ability_flags), (description)}
+#define ABILITY_OBJECT(name, targeting_flags, type, cost, power, element, ability_flags, description) {name, (targeting_flags), (type), (cost), (power), (element), (ability_flags), (description)}
 
 /* Ability flags (record offset 0x11). Together with the element byte they form
  * the 16-bit mask the battle code tests: bit 0 is a ninth element. */

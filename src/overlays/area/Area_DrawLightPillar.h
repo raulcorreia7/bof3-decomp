@@ -37,8 +37,7 @@ MATCH void Area_DrawLightPillar(s32* pos) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
-        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx,
-               outer.vy);
+        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
         setRGB0(prim, shade, shade, shade);
         setRGB1(prim, shade, shade, shade);
         if ((u8)(i - 4) >= 8) {

@@ -37,8 +37,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
             }
         }
     }
-    if ((input_mask & STATUS_CONFUSED) && (func_800A3638(selection_kind, 8) & BYTE_MASK) &&
-        !(status & (STATUS_UNK_11 | STATUS_SLEEPING | STATUS_CONFUSED | STATUS_PARALYZED))) {
+    if ((input_mask & STATUS_CONFUSED) && (func_800A3638(selection_kind, 8) & BYTE_MASK) && !(status & (STATUS_UNK_11 | STATUS_SLEEPING | STATUS_CONFUSED | STATUS_PARALYZED))) {
         acc = &g_Battle.pending_status;
         *acc |= STATUS_CONFUSED;
         func_801DDFEC(selection_kind);
@@ -52,8 +51,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
             ENEMY_COMBATANT(selection_kind).turn.damage_flags.value &= ~2;
         }
     }
-    if ((input_mask & STATUS_BLIND) && (func_800A3638(selection_kind, 9) & BYTE_MASK) &&
-        (func_800A36BC(selection_kind, 0x2B) & BYTE_MASK) &&
+    if ((input_mask & STATUS_BLIND) && (func_800A3638(selection_kind, 9) & BYTE_MASK) && (func_800A36BC(selection_kind, 0x2B) & BYTE_MASK) &&
         !(status & (STATUS_UNK_11 | STATUS_BLIND | STATUS_PARALYZED))) {
         acc = &g_Battle.pending_status;
         *acc |= STATUS_BLIND;

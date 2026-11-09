@@ -63,8 +63,7 @@ NON_MATCHING void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
         SP_REF(s16, 0x26) = tmp0;
         D_1F800014[3].vx  = tmp3;
         SP_REF(s16, 0x2E) = tmp0;
-        RotTransPers4(&D_1F800014[1], &D_1F800014[2], &D_1F800014[3], &D_1F800014[0], (s32*)(val9 + 0x10),
-                      (s32*)(val9 + 0x18), (s32*)(val9 + 0x20), (s32*)(val9 + 8), &stack_28, &stack_2C);
+        RotTransPers4(&D_1F800014[1], &D_1F800014[2], &D_1F800014[3], &D_1F800014[0], (s32*)(val9 + 0x10), (s32*)(val9 + 0x18), (s32*)(val9 + 0x20), (s32*)(val9 + 8), &stack_28, &stack_2C);
         val2 = (((7 - val3) * 8) + 7) - val7;
         if (val2 < 0) {
             val2 += 3;

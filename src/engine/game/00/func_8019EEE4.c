@@ -28,20 +28,17 @@ MATCH u8 func_8019EEE4(void) {
         Area_ClearCell(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
     }
     if ((COORD_FRAC(g_Task->pos.x) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y)) & BYTE_MASK) ==
-            0xFD) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0xFD) {
             found = 1;
             Area_ClearCell((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y));
         }
     }
-    if ((COORD_FRAC(g_Task->pos.y) != 0) && !found &&
-        ((Area_GetCellCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
+    if ((COORD_FRAC(g_Task->pos.y) != 0) && !found && ((Area_GetCellCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
         found = 1;
         Area_ClearCell(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
     }
     if ((COORD_FRAC(g_Task->pos.x) != 0) && (COORD_FRAC(g_Task->pos.y) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) &
-             BYTE_MASK) == 0xFD) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD) {
             found = 1;
             Area_ClearCell((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         }
@@ -57,14 +54,13 @@ MATCH u8 func_8019EEE4(void) {
             }
             index = (s8)Actor_FindFreeSlot();
             if (index != -1) {
-                g_ActorSlots[index].header.flags = 1;
-                g_ActorSlots[index].type         = 0x34;
-                g_ActorSlots[index].header.mode  = 1;
-                g_ActorSlots[index].pos.x.fixed  = g_Task->pos.x.fixed;
-                g_ActorSlots[index].pos.y.fixed  = g_Task->pos.y.fixed;
-                COORD_INT(g_ActorSlots[index].pos.z) =
-                    Area_SampleHeight(g_ActorSlots[index].pos.x.fixed, g_ActorSlots[index].pos.y.fixed) + 0x100;
-                g_ActorSlots[index].link = 0;
+                g_ActorSlots[index].header.flags     = 1;
+                g_ActorSlots[index].type             = 0x34;
+                g_ActorSlots[index].header.mode      = 1;
+                g_ActorSlots[index].pos.x.fixed      = g_Task->pos.x.fixed;
+                g_ActorSlots[index].pos.y.fixed      = g_Task->pos.y.fixed;
+                COORD_INT(g_ActorSlots[index].pos.z) = Area_SampleHeight(g_ActorSlots[index].pos.x.fixed, g_ActorSlots[index].pos.y.fixed) + 0x100;
+                g_ActorSlots[index].link             = 0;
             }
             g_Game.members[0].unk_07 = 1;
         } else {

@@ -14,8 +14,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
     maximum = 0u;
     index   = 0u;
     while ((u8)index < 3u) {
-        if ((D_801463BA == 0u) ||
-            ((g_Game.members[(u8)index].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+        if ((D_801463BA == 0u) || ((g_Game.members[(u8)index].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 u16 value;
 
@@ -30,8 +29,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
     count = 0u;
     index = 0u;
     while ((u8)index < 3u) {
-        if ((D_801463BA == 0u) ||
-            ((g_Game.members[(u8)index].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+        if ((D_801463BA == 0u) || ((g_Game.members[(u8)index].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 s16 score;
                 s32 mode;
@@ -49,11 +47,8 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
                 if (g_Game.members[(u8)index].turn.command.type == BATTLE_COMMAND_ITEM) {
                     D_801EB550[(u8)count].value = 1;
                 }
-                score = D_801EB550[(u8)count].value;
-                score =
-                    (s16)(score *
-                          g_BattleTurnPriorityMultipliers[(u8)func_801DB434(g_Game.members[(u8)index].chr.level, 1u)]) /
-                    100;
+                score                       = D_801EB550[(u8)count].value;
+                score                       = (s16)(score * g_BattleTurnPriorityMultipliers[(u8)func_801DB434(g_Game.members[(u8)index].chr.level, 1u)]) / 100;
                 D_801EB550[(u8)count].value = score;
                 count += 1u;
                 D_801EB550[(u8)count - 1u].value = score + g_Game.members[(u8)index].chr.stats.agility;
@@ -64,8 +59,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
 
     index = 3u;
     while ((u8)index < 11u) {
-        if ((D_801463BA == 0u) ||
-            ((g_BattleEnemyBattlers[(u8)index - 3u].turn.action_flags.value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+        if ((D_801463BA == 0u) || ((g_BattleEnemyBattlers[(u8)index - 3u].turn.action_flags.value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 u32 slot;
                 u32 rank;
@@ -74,8 +68,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
                 rank                        = func_801DB434(g_BattleEnemyBattlers[slot].level, 0u);
                 D_801EB550[(u8)count].index = (u8)index;
                 count += 1u;
-                D_801EB550[(u8)count - 1u].value =
-                    g_BattleEnemyBattlers[slot].stats.agility + D_801EAF48[((u8)rank * 0x10u) + RANDOM_MASK(0xFu)];
+                D_801EB550[(u8)count - 1u].value = g_BattleEnemyBattlers[slot].stats.agility + D_801EAF48[((u8)rank * 0x10u) + RANDOM_MASK(0xFu)];
             }
         }
         index += 1u;

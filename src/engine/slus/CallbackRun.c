@@ -15,8 +15,7 @@ MATCH void CallbackRun(void) {
             switch (g_CallbackSlot->state) {
                 case CALLBACK_SLOT_OPEN:
                     EnterCriticalSection();
-                    g_CallbackSlot->thread_id = OpenTh((long (*)())g_CallbackSlot->callback, g_CallbackSlot->open_arg,
-                                                       g_CallbackSlot->open_arg_2);
+                    g_CallbackSlot->thread_id = OpenTh((long (*)())g_CallbackSlot->callback, g_CallbackSlot->open_arg, g_CallbackSlot->open_arg_2);
                     ExitCriticalSection();
                     goto dispatch; /* a freshly opened slot switches in at once, like a forced switch */
 

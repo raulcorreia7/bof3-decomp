@@ -72,9 +72,7 @@ loop_18:
     slot = fields[-7];
     off  = slot * ENEMY_STRIDE;
     if (entry->active != 0) {
-        if (!(func_801C7064(*(s32*)(fields - 4), *(s32*)(fields), ENCOUNTER_ENEMY_AT(off)->reach,
-                            ENCOUNTER_ENEMY_AT(off)->height) &
-              0xFF)) {
+        if (!(func_801C7064(*(s32*)(fields - 4), *(s32*)(fields), ENCOUNTER_ENEMY_AT(off)->reach, ENCOUNTER_ENEMY_AT(off)->height) & 0xFF)) {
             entry->active = 0;
             D_801CD8C4 -= 1;
         }

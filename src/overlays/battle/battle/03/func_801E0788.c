@@ -40,10 +40,8 @@ MATCH void func_801E0788(void) {
         }
         w2                 = g_Game.current;
         w2->u.turn.counter = 0;
-        w2->u.turn.action_flags.value &=
-            ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO |
-              COMBATANT_FLAG_SELECTION_BONUS | COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING |
-              COMBATANT_FLAG_SELECTED);
+        w2->u.turn.action_flags.value &= ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO | COMBATANT_FLAG_SELECTION_BONUS |
+                                           COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_SELECTED);
         g_GameState->counter_136      = 0;
         g_Game.current->counter_137   = 0;
         g_Game.current->focus_counter = 0;
@@ -60,9 +58,8 @@ MATCH void func_801E0788(void) {
             g_Task->unk_03 = 4;
         } else {
             Battle_ClearSlotPending(g_Task->slot);
-            w = g_Game.current;
-            flags =
-                w->u.turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
+            w                            = g_Game.current;
+            flags                        = w->u.turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
             w->u.turn.damage_flags.value = flags & ~0x200;
             g_Task->header.mode          = 3;
             g_Task->header.step          = 0;

@@ -12,8 +12,7 @@ MATCH void func_8009A664(void) {
         g_Battle.ui_state = 2;
         return;
     }
-    if ((INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) &&
-        (Item_GetFlags(entry >> 8, entry & BYTE_MASK) & 0x80)) {
+    if ((INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) && (Item_GetFlags(entry >> 8, entry & BYTE_MASK) & 0x80)) {
         g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }

@@ -12,11 +12,10 @@ MATCH void func_801D2EAC(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801ED618 + 0x13;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x =
-        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + D_801ED618 * 0x30;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
-    pad                                             = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
-    cursor                                          = D_801ED618;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + D_801ED618 * 0x30;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    pad                                                         = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    cursor                                                      = D_801ED618;
     if (pad & PADLleft) {
         D_801ED618--;
         if (D_801ED618 < 0) {

@@ -30,8 +30,7 @@ MATCH void func_801D23E4(void) {
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         cursor = &D_80148656;
-        Shop_Equip(g_CharSlot[g_PartyFieldOrder[(s8)*cursor]], (selection + (D_801E6054 + 0xFF)) & BYTE_MASK,
-                   g_ShopItemId);
+        Shop_Equip(g_CharSlot[g_PartyFieldOrder[(s8)*cursor]], (selection + (D_801E6054 + 0xFF)) & BYTE_MASK, g_ShopItemId);
         Char_RebuildStats(&g_Characters[g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]]);
         D_80148652 += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
