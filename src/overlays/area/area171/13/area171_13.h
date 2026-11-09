@@ -10,7 +10,7 @@
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The payload's per-state handler table. */
-extern u8 D_801F3F5C[];
+extern u8         D_801F3F5C[];
 extern TriggerBox D_801F4188[2];
 
 extern u8 D_80144CAA;

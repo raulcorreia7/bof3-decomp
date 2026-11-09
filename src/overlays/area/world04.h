@@ -93,19 +93,19 @@ typedef struct TriggerBox {
 } TriggerBox;
 
 /* The index of the first of the two boxes the party member stands in, or 0xFF. */
-#define WORLD04_FIND_TRIGGER_BOX(member, boxes)                                                                   \
-    do {                                                                                                          \
-        s32 i;                                                                                                    \
-        s32 x = g_Game.members[(member)].pos.x.fixed;                                                             \
-        s32 y = g_Game.members[(member)].pos.y.fixed;                                                             \
-        for (i = 0; i < 2; i++) {                                                                                 \
-            if (x < ((boxes)[i].x0 << 16) || x > ((boxes)[i].x1 << 16) || y < ((boxes)[i].y0 << 16) ||           \
-                y > ((boxes)[i].y1 << 16)) {                                                                      \
-                continue;                                                                                         \
-            }                                                                                                     \
-            return i;                                                                                             \
-        }                                                                                                         \
-        return 0xFF;                                                                                              \
+#define WORLD04_FIND_TRIGGER_BOX(member, boxes)                                                        \
+    do {                                                                                               \
+        s32 i;                                                                                         \
+        s32 x = g_Game.members[(member)].pos.x.fixed;                                                  \
+        s32 y = g_Game.members[(member)].pos.y.fixed;                                                  \
+        for (i = 0; i < 2; i++) {                                                                      \
+            if (x < ((boxes)[i].x0 << 16) || x > ((boxes)[i].x1 << 16) || y < ((boxes)[i].y0 << 16) || \
+                y > ((boxes)[i].y1 << 16)) {                                                           \
+                continue;                                                                              \
+            }                                                                                          \
+            return i;                                                                                  \
+        }                                                                                              \
+        return 0xFF;                                                                                   \
     } while (0)
 
 #endif
