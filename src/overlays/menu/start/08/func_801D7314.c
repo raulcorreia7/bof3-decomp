@@ -5,8 +5,6 @@
  * order and its measured bytes (58.33% against 57.74% without it). */
 extern volatile s16 D_80148628;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 65.79%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D7314(void) {
     s16 tmp0;

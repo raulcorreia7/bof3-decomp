@@ -2,7 +2,6 @@
 
 /* Shows the selected battler's damage step and adjusts the HP bar.
  */
-/* NON_MATCHING: delayed battler load, repeated load and uncached enemy tried; first diff 0x8009E248, prologue. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009E248(void) {
     s32 id;

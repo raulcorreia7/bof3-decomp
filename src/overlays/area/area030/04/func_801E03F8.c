@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
 /* Reflects the work velocity off the play-field bounds. */
-/* nonmatching unmeasured: best 56.79%; row_delta and face_delta scored 47.53% (first mismatch +0x009C branch); next,
- * preserve the retail row-pointer, 0x19FFFF, and cue-table load order. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E03F8(void) {
     s32 upper_limit;

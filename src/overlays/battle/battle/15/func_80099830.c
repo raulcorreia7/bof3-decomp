@@ -2,9 +2,6 @@
 
 void func_8009A744(void); /* extern */
 
-/* nonmatching unmeasured: tried opcode@+0x8: prologue and the 0xF00C/0x500C pad split do not reproduce the retail
- * order; scroll/confirm logic is in place. resume: rebuild the two PAD_GetRepeatedButtons calls and the scroll
- * compare grouping from the asm. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80099830(void) {
     s32  pad;

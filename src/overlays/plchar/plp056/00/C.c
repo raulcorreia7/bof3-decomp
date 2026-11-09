@@ -84,7 +84,6 @@ MATCH s32 func_801CFF4C(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(func_801D0158);
 }
 
-/* blocker: save order; first diff: +0x4 s2 saved first (retail saves s3 first). */
 INCLUDE_ASM(func_801D0158);
 
 MATCH void func_801D0244(void) {

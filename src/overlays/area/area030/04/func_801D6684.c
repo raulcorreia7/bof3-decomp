@@ -2,11 +2,6 @@
 
 /* Draws the area-030 HUD cell grid: steps the page timer, draws each of the 32 cells with its selected color,
  * and advances the page row when the timer expires. */
-/* nonmatching 68.66%: the 5th func_8014FC90 argument was a literal 0; retail
- * loads it as the cell palette word ((cell << 1) + &D_801E2070) on both paths,
- * which this body now passes. First diff +0x003C is a layout shift: the body is
- * 20 bytes short because jump2 shares arm tails retail keeps apart. resume: a
- * per-path tail shape that keeps the three arm exits separate. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D6684(void) {
     s32*  word_ptr;

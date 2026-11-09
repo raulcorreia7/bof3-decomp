@@ -51,7 +51,6 @@ MATCH void func_801EEE50(void) {
     g_Task->timer = 0;
 }
 
-/* blocker: spad cell read hoisted; first diff: lui a1,0x1f80 at 0x801EEF28. */
 INCLUDE_ASM(func_801EEEB0);
 
 MATCH void func_801EEFA4(void) {
@@ -89,10 +88,8 @@ MATCH void func_801EF08C(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-/* blocker: cross-jumped (rand() % 6) << 0x10 prefixes; first diff: beqz v0 target at 0x801EF150. */
 INCLUDE_ASM(func_801EF134);
 
-/* blocker: y-store deref hoisted; first diff: sra a0,v0,0x1f at 0x801EF440. */
 INCLUDE_ASM(func_801EF3C4);
 
 MATCH void func_801EF528(void) {
@@ -118,7 +115,6 @@ MATCH void func_801EF5BC(void) {
     g_Task->header.step++;
 }
 
-/* blocker: body 2-3 instructions fat; first diff: linked table constants +8 and +C. */
 INCLUDE_ASM(func_801EF620);
 
 MATCH void func_801EF7A0(void) {

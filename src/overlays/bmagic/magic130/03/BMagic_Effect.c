@@ -24,7 +24,6 @@ MATCH void func_801EEF18(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-/* blocker: work pointer lifetime; first diff: lui v1 at +0x20. */
 INCLUDE_ASM(func_801EEFB4);
 
 MATCH void func_801EF10C(void) {

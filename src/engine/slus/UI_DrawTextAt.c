@@ -4,8 +4,6 @@
  * bytes 1, 3-9 select the glyph source (item, character or party tables) and advance the cursor; returns the stream
  * position after the last byte it consumed.
  */
-/* nonmatching 59.09%: opcode@+0x000c; lifted draft from the first draft, compiling C only (its jump table rodata is not
- * yet placed). resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
     s32 temp_v0_136;

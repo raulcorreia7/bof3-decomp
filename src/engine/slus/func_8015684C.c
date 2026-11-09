@@ -9,9 +9,6 @@ typedef struct {
 /* builds the projected quad for one map cell's texture entry, stages
  * the primitive, and appends it to the ordering table.
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
- * draft; best score 77.33%. resume: a lever or header fix that closes the first mismatch. */
-/* Retail loads the cell halfword at +2; pinned cell coordinates first differ in scheduling at +0x44. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     MapCell* cell;

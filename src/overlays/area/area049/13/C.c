@@ -26,7 +26,6 @@ MATCH void func_801170A4(void) {
     }
 }
 
-/* blocker: instruction scheduling; first diff: hoisted move for the zeroed channels before the tpage store. */
 INCLUDE_ASM(func_801170D8);
 
 INCLUDE_ASM(func_801172D0);

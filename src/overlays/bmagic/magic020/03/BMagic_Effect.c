@@ -186,7 +186,6 @@ MATCH void func_801EFAD4(void) {
     func_801E5988();
 }
 
-/* hint: a local Callback[2] of func_801EFBA0 and func_801EFD10 fails to compile at the first function-pointer store (handlers[0] = func_801EFBA0); not byte-compared. */
 INCLUDE_ASM(func_801EFAF4);
 
 INCLUDE_ASM(func_801EFBA0);

@@ -110,7 +110,6 @@ MATCH void func_801F0140(void) {
     }
 }
 
-/* blocker: work pointer register; first diff: 0x801F0278 a0 against a1. */
 INCLUDE_ASM(func_801F021C);
 
 /* func_801F02D4 */

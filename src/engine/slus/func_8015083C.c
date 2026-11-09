@@ -10,8 +10,6 @@
  * it in state 3, 3/4/7/8 call a sub-script (with its return cursor kept), 0xA queues a cue, 0xB ends the step in
  * state 1, 0xF/0x14/0x16 load per-channel fields, 0x10/0x11 toggle bit 0x10; other opcodes read the pad state.
  */
-/* nonmatching 24.33%: restated from the first draft with byte-offset field access and the dense switch. resume:
- * register assignment of the base pointers and the case order. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015083C(void) {
     u8  loop;

@@ -3,8 +3,6 @@
 #define CUR(s)       FIELD(u16, (s), 0xAu)
 #define PACK24(c, o) (((s32)(s8)(c)[o] << 0x10) | ((c)[(o) + 1] << 8))
 
-/* nonmatching unmeasured: tried goto-shared tails, value-var join, per-branch pointer temp; first mismatch C1/C2
- * pointer-vs-slot register order. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
     u8* code;

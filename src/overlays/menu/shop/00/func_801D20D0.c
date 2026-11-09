@@ -1,8 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried panel-task struct members for the flag stores, cursor pointer local, flag row
- * -fno-rerun-cse-after-loop, a search over source rewrites. resume: a source shape that keeps the cursor la out of the
- * prologue and loads the cursor before the store. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D20D0(void) {
     s32 buttons;

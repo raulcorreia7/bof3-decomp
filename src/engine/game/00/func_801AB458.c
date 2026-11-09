@@ -24,8 +24,6 @@ typedef enum ActorScriptStageOp {
     ACTOR_SCRIPT_STAGE_SPAWN_HELPER        = 0x8C, /* args: [flag]; func_8015CC00 claims a slot at the actor */
 } ActorScriptStageOp;
 
-/* nonmatching unmeasured: tried 70.14%: single return value exit via break; retail keeps base pointer s2 for base[1]
- * (4(s2)); gcc folds it to the D_80145EC8 symbol. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value) {
     u8    byte;

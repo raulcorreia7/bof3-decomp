@@ -89,7 +89,6 @@ MATCH u8 func_801FA5EC(void) {
     return 0;
 }
 
-/* blocker: first lui in v1; first diff: lui v0 (candidate) against lui v1 (retail). */
 INCLUDE_ASM(func_801FA644);
 
 INCLUDE_ASM(func_801FA6BC);

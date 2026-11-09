@@ -4,8 +4,6 @@
 /* marks the layer and marker bytes of every entry whose rectangle
  * contains one of the three layer points or the base point.
  */
-/* nonmatching 90.85%: tried the first draft cleaned to compiling C; best score 90.85%. resume: a lever or header fix
- * that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80158940(void* obj) {
     u32* cursor = (u32*)obj;
@@ -76,6 +74,5 @@ NON_MATCHING void func_80158940(void* obj) {
     }
 }
 #else
-/* First difference: the bias load is scheduled early. */
 INCLUDE_ASM(func_80158940);
 #endif

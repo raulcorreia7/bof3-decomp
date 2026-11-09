@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried frame pad 24 added (65.85%); search-loop limit as signed local gives blez but
- * regresses; prev/cur address order in compaction loop (retail a0=cur, v1=prev via v0-1). */
 /* func_801C1ABC */
 #ifdef NON_MATCHING
 NON_MATCHING void Party_RemoveMember(s32 character_id) {

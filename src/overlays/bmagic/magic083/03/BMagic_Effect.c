@@ -71,7 +71,6 @@ MATCH void func_801EFE98(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
-/* blocker: y offset order; first diff: +0x94 sll v1,v0,1 (retail finishes the rcos*0xB0>>3 product before loading g_BattleEffectBattler for y and z, cached in a1) against the battler load first (candidate); body is the angle-ring start of magic213 with radius 0xB0 >> 3. */
 INCLUDE_ASM(func_801EFEDC);
 
 MATCH void func_801F0010(void) {
@@ -173,7 +172,6 @@ MATCH void func_801F01F8(void) {
     }
 }
 
-/* hint: 3-image twin (magic062 00EC, 082 0260, 083 038C): spiral position update; everything matches except the s16 radius cell at 0x1F800000: retail uses a separate lui per access, a cast view of D_1F800000 hoists the base into s1 (needs an s16 alias symbol for 0x1F800000, scratch draft b26-magic062.c) */
 INCLUDE_ASM(func_801F038C);
 
 INCLUDE_ASM(func_801F050C);

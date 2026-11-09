@@ -162,14 +162,12 @@ MATCH void func_801F786C(void) {
 
 INCLUDE_ASM(func_801F78B0);
 
-/* Hint: pointer global D_801FDFC0 is read and written as a halfword at +0x510 and passed to func_801F9330; the record type is not declared, so the draft needs it first. */
 INCLUDE_ASM(func_801F7960);
 
 MATCH void func_801F79EC(void) {
     SYS_DISPATCH_TASK(D_801FDDB4, 2, g_Task);
 }
 
-/* blocker: position setup load order; first diff: +0x00 (prologue). */
 INCLUDE_ASM(func_801F7A30);
 
 INCLUDE_ASM(func_801F7AB0);
@@ -192,7 +190,6 @@ MATCH void func_801F7D28(void) {
     SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Task);
 }
 
-/* blocker: same position setup as func_801F7A30; first diff: +0x00 (load order). */
 INCLUDE_ASM(func_801F7D6C);
 
 MATCH void func_801F7DDC(void) {
@@ -254,7 +251,6 @@ MATCH void func_801F81B4(void) {
     Actor_Clear();
 }
 
-/* needs: camera transform declarations and drawing record type. */
 INCLUDE_ASM(func_801F81D4);
 
 MATCH void func_801F8358(void) {
@@ -286,7 +282,6 @@ MATCH u8* func_801F8394(void) {
     return NULL;
 }
 
-/* needs: particle record type. */
 INCLUDE_ASM(func_801F83D0);
 
 INCLUDE_ASM(func_801F8478);
@@ -331,7 +326,6 @@ MATCH void func_801F86BC(u8* row) {
 
 #include "overlays/scenario/Actor_Wait.h"
 
-/* blocker: 0x40000 constant register; first diff: lui v0,4 (retail) against a0 or a1 (candidate). */
 INCLUDE_ASM(func_801F8764);
 
 MATCH void func_801F8804(u8 shade) {
@@ -347,15 +341,12 @@ MATCH void func_801F8804(u8 shade) {
     GFX_AddPrim(1, sizeof(TILE));
 }
 
-/* needs: table record type. */
 INCLUDE_ASM(func_801F88B8);
 
-/* needs: table record type. */
 INCLUDE_ASM(func_801F8BE8);
 
 #include "shared/AngleAverage12.h"
 
-/* blocker: argument save order; first diff: +0x0C. */
 INCLUDE_ASM(func_801F8F90);
 
 INCLUDE_ASM(func_801F90F4);
@@ -631,5 +622,4 @@ MATCH void func_801FDBCC(void) {
     Party_RemoveMember(D_80146189);
 }
 
-/* blocker: nops after each load; first diff: 0x801FDC30 nop against lui a0. */
 INCLUDE_ASM(func_801FDBF4);

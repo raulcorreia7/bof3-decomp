@@ -1,9 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried opcode@+0x0: frame 0x18 without s0; retail keeps the D_801483CB address in s0 across
- * the input branches, while the pointer local folds away in our source (43.60 to 58.77 after the old-cursor compare
- * fix). resume: force the cursor address to stay live: compare through a pointer whose value is read after the branches
- * without other uses folding it. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E05E0(void) {
     s32 pad;

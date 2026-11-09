@@ -2,8 +2,6 @@
 
 /* lifted draft, best score 23.25%; semantics unverified
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
- * draft; best score 23.25%. resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
     s16   stack_18; /* compiler-managed */

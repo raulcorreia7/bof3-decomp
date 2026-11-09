@@ -40,7 +40,6 @@ MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801CFDA4, 2, g_Task);
 }
 
-/* blocker: SND_PlayCue argument narrows to u16; first diff: +0xE8. */
 INCLUDE_ASM(func_801CF37C);
 
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"

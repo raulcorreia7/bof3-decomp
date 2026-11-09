@@ -26,7 +26,6 @@ MATCH void func_801F6D44(void) {
     g_Task->header.mode += 1;
 }
 
-/* blocker: schedule; first diff: +4 li a0,0x10 before the s0 save. */
 INCLUDE_ASM(func_801F6DD4);
 
 MATCH void func_801F6EA4(void) {
@@ -46,7 +45,6 @@ MATCH void func_801F6EA4(void) {
     }
 }
 
-/* blocker: unk_09 value register; first diff: +0x40 lbu a1,9(v0) (candidate) against lbu a0,9(v0) (retail). */
 INCLUDE_ASM(func_801F6F2C);
 
 MATCH void func_801F6FF8(void) {
