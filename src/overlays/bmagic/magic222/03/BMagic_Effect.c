@@ -13,9 +13,8 @@ INCLUDE_ASM(func_801EEC70);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEEE0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEEE0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF24(void) {
     g_ScriptBank = BMAGIC_SCRIPT_BANK;

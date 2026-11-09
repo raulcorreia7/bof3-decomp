@@ -41,9 +41,8 @@ INCLUDE_ASM(func_801EEFF8);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EF190(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF190 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF1D4(void) {
     Magic041Steps handlers;

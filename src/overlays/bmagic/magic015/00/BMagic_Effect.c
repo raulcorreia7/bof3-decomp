@@ -63,9 +63,8 @@ MATCH void Effect_StartPlaying4(void) {
     BATTLE_RAISE_EFFECT_PLAYING();
 }
 
-MATCH void func_801EF9E4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF9E4 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EFA28(void) {
     Magic015SecondSteps handlers = D_801EEC34;

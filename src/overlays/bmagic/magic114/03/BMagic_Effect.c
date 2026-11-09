@@ -80,9 +80,8 @@ MATCH void func_801EF6A8(void) {
     Camera_SetModelMatrix(&rot, &matrix);
 }
 
-MATCH void func_801EF774(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF774 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF7B8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 3), 2, g_Task);

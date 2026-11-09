@@ -25,9 +25,8 @@ INCLUDE_ASM(func_801EF3A0);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF56C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF56C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF5B0(void) {
     SYS_DISPATCH_BYTE(D_801F0D1C, g_Task->header.step);

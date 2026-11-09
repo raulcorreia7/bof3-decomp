@@ -30,9 +30,7 @@ INCLUDE_ASM(func_801EF0B4);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 /* func_801EF360 */
-MATCH void BMagic_DispatchMode(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF3A4(void) {
     SYS_DISPATCH_BYTE(D_801EFC8C, g_Task->header.step);
@@ -45,7 +43,15 @@ MATCH void func_801EF3A4(void) {
 
 INCLUDE_ASM(func_801EF42C);
 
-INCLUDE_ASM(func_801EF55C);
+MATCH void func_801EF55C(void) {
+    g_Task->pos.x.fixed += g_Task->unk_0C;
+    g_Task->pos.y.fixed += g_Task->unk_10;
+    g_Task->unk_09 += 1;
+    g_Task->timer += 2;
+    if (g_Task->timer == 0x10) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF5E0(void) {
     PartyMember* work;

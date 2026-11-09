@@ -80,9 +80,8 @@ MATCH s32 func_801EF34C(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF4E0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF4E0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF524(void) {
     SYS_DISPATCH_BYTE(D_801F0030, g_Task->header.step);

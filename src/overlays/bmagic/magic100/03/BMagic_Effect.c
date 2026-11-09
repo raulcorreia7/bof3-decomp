@@ -52,9 +52,8 @@ MATCH void func_801EED9C(void) {
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEE58(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEE58 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE9C(void) {
     SYS_DISPATCH_BYTE(D_801EFDD0, g_Task->header.step);

@@ -41,9 +41,8 @@ MATCH void func_801EF0EC(void) {
     }
 }
 
-MATCH void func_801EF16C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF16C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 #include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
 

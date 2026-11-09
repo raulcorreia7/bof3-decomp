@@ -12,9 +12,8 @@ INCLUDE_ASM(func_801EEC70);
 
 #include "shared/Effect_PlayOnce.h"
 
-MATCH void func_801EEE2C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEE2C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE70(void) {
     SYS_DISPATCH_BYTE(D_801EF418, g_Task->header.step);

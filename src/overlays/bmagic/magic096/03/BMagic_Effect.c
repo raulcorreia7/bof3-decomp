@@ -21,9 +21,8 @@ MATCH void func_801EEDD8(void) {
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEEA0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEEA0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEE4(void) {
     Magic096Steps handlers = D_801EEC10;

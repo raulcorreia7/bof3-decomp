@@ -14,6 +14,6 @@ void func_801EF284(void);
 void func_801EF380(void);
 void func_801EED04(void);
 /* func_801EEEF0 */
-void BMagic_DispatchMode(void);
+void BMagic_DispatchEffectMode(void);
 
 #endif
