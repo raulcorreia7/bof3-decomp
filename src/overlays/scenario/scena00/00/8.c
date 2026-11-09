@@ -1136,8 +1136,8 @@ MATCH void func_801F9644(void) {
                 g_ActorSlots[D_1F800000[0]].layer          = 0x40;
             }
             Party_HideBattlers();
-            D_80145EC4 = TO_COORD(51);
-            D_80145EC8 = TO_COORD(64);
+            g_Game.members[0].pos.x.fixed = TO_COORD(51);
+            g_Game.members[0].pos.y.fixed = TO_COORD(64);
             SYS_SetFlag(g_SceneFlags, 2U);
             return;
         }
@@ -1650,8 +1650,8 @@ MATCH void func_801FA7D8(void) {
             if (id != 0xFFu) {
                 g_ActorSlots[D_1F800000[0]].header.flags = 1;
                 g_ActorSlots[D_1F800000[0]].type         = 0x1Eu;
-                g_ActorSlots[D_1F800000[0]].pos.x.fixed  = D_80145EC4;
-                g_ActorSlots[D_1F800000[0]].pos.y.fixed  = D_80145EC8;
+                g_ActorSlots[D_1F800000[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
+                g_ActorSlots[D_1F800000[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
                 distance =
                     Area_SampleHeight(g_ActorSlots[D_1F800000[0]].pos.x.fixed, g_ActorSlots[D_1F800000[0]].pos.y.fixed)
                     << 16;
@@ -1767,7 +1767,7 @@ MATCH void func_801FA7D8(void) {
 
         case 15:
             if (g_ScriptVarsReq.byte == 7u) {
-                func_801BFE34(D_80145EC4, D_80145EC8, 1u);
+                func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 1u);
                 Battle_StartScripted(1u);
                 SYS_SetFlag(g_SceneFlags, 5u);
                 g_SceneState.step_05 = 0x10u;
@@ -1807,7 +1807,7 @@ MATCH void func_801FAF6C(void) {
 
         case 11:
             if (g_ScriptVarsReq.byte == 0xB) {
-                func_801BFE34(D_80145EC4, D_80145EC8, 4);
+                func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 4);
                 Battle_StartScripted(4);
                 g_SceneState.step_05 = 0xC;
             }
@@ -1831,7 +1831,7 @@ MATCH void func_801FAF6C(void) {
 
         case 21:
             if (g_ScriptVarsReq.byte == 5) {
-                func_801BFE34(D_80145EC4, D_80145EC8, 5);
+                func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 5);
                 Battle_StartScripted(5);
                 g_SceneState.step_05 = 0x16;
             }
@@ -1848,7 +1848,7 @@ MATCH void func_801FAF6C(void) {
 
         case 31:
             if (g_ScriptVarsReq.byte == 4) {
-                func_801BFE34(D_80145EC4, D_80145EC8, 6);
+                func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 6);
                 Battle_StartScripted(6);
                 g_SceneState.step_05 = 0x20;
             }
@@ -1884,7 +1884,7 @@ MATCH void func_801FB204(void) {
 
         case 1:
             if (g_ScriptVarsReq.byte == 0xD) {
-                func_801BFE34(D_80145EC4, D_80145EC8, 7);
+                func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 7);
                 Battle_StartScripted(7);
                 g_SceneState.step_05 = 2;
             }

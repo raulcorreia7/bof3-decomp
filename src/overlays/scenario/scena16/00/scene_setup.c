@@ -159,8 +159,8 @@ MATCH void func_801F6F30(void) {
         }
 
         Party_HideBattlers();
-        SCENA16_D_80145EC4 = 0x330000u;
-        SCENA16_D_80145EC8 = 0x400000u;
+        g_Game.members[0].pos.x.fixed = 0x330000u;
+        g_Game.members[0].pos.y.fixed = 0x400000u;
         SYS_SetFlag(g_SceneFlags, 2);
     } else if (SYS_TestFlag(g_SceneFlags, 10) == 0) {
         SYS_SetFlag(g_SceneFlags, 10);

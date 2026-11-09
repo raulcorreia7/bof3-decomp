@@ -10,8 +10,8 @@ MATCH void func_801D0C48(void) {
     u8* work;
 
     work                   = (u8*)g_Task;
-    FIELD(s32, work, 0x34) = D_80145EC4;
-    FIELD(s32, work, 0x38) = D_80145EC8;
+    FIELD(s32, work, 0x34) = g_Game.members[0].pos.x.fixed;
+    FIELD(s32, work, 0x38) = g_Game.members[0].pos.y.fixed;
     FIELD(s32, work, 0x3C) = D_80145ECC;
     func_801D16DC();
     func_801D19A0();

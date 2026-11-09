@@ -10,8 +10,6 @@
 /* The four script variable bytes read as one word. */
 #define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
 
-extern s32 D_80145EC4;
-
 extern u8 D_80146865;
 extern u8 D_80145E98;
 extern u8 D_80146866;
@@ -27,59 +25,59 @@ extern Callback  D_801FE294[];
 extern SceneFunc D_801FE304[66];
 
 /* The party-in-range triggers of 5A4.c: while D_80143F03 is 0, start func_801FCB54 when the party
- * position (D_80145EC4, D_80145EC8) lies inside a window around g_Actors[actor_id]. Each macro is one
+ * position (g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) lies inside a window around g_Actors[actor_id]. Each macro is one
  * window shape; the members differ only in the distances. Every change must verify every member. */
 
 /* Within `y_pad` of the actor's y, and from its x to `x_len` past it. */
-#define SCENA02_TRIGGER_NEAR_Y(actor_id, y_pad, x_len)                    \
-    {                                                                     \
-        if (D_80143F03 == 0) {                                            \
-            if (g_Actors[actor_id].pos.y.fixed + (y_pad) >= D_80145EC8 && \
-                D_80145EC8 >= g_Actors[actor_id].pos.y.fixed - (y_pad) && \
-                D_80145EC4 >= g_Actors[actor_id].pos.x.fixed &&           \
-                g_Actors[actor_id].pos.x.fixed + (x_len) >= D_80145EC4) { \
-                func_801FCB54();                                          \
-            }                                                             \
-        }                                                                 \
+#define SCENA02_TRIGGER_NEAR_Y(actor_id, y_pad, x_len)                                       \
+    {                                                                                        \
+        if (D_80143F03 == 0) {                                                               \
+            if (g_Actors[actor_id].pos.y.fixed + (y_pad) >= g_Game.members[0].pos.y.fixed && \
+                g_Game.members[0].pos.y.fixed >= g_Actors[actor_id].pos.y.fixed - (y_pad) && \
+                g_Game.members[0].pos.x.fixed >= g_Actors[actor_id].pos.x.fixed &&           \
+                g_Actors[actor_id].pos.x.fixed + (x_len) >= g_Game.members[0].pos.x.fixed) { \
+                func_801FCB54();                                                             \
+            }                                                                                \
+        }                                                                                    \
     }
 
 /* Within `x_pad` of the actor's x, and from its y to `y_len` past it. */
-#define SCENA02_TRIGGER_NEAR_X(actor_id, x_pad, y_len)                    \
-    {                                                                     \
-        if (D_80143F03 == 0) {                                            \
-            if (g_Actors[actor_id].pos.x.fixed + (x_pad) >= D_80145EC4 && \
-                D_80145EC4 >= g_Actors[actor_id].pos.x.fixed - (x_pad) && \
-                D_80145EC8 >= g_Actors[actor_id].pos.y.fixed &&           \
-                g_Actors[actor_id].pos.y.fixed + (y_len) >= D_80145EC8) { \
-                func_801FCB54();                                          \
-            }                                                             \
-        }                                                                 \
+#define SCENA02_TRIGGER_NEAR_X(actor_id, x_pad, y_len)                                       \
+    {                                                                                        \
+        if (D_80143F03 == 0) {                                                               \
+            if (g_Actors[actor_id].pos.x.fixed + (x_pad) >= g_Game.members[0].pos.x.fixed && \
+                g_Game.members[0].pos.x.fixed >= g_Actors[actor_id].pos.x.fixed - (x_pad) && \
+                g_Game.members[0].pos.y.fixed >= g_Actors[actor_id].pos.y.fixed &&           \
+                g_Actors[actor_id].pos.y.fixed + (y_len) >= g_Game.members[0].pos.y.fixed) { \
+                func_801FCB54();                                                             \
+            }                                                                                \
+        }                                                                                    \
     }
 
 /* From `y_below` under to `y_above` over the actor's y, and from its x to `x_len` past it. */
-#define SCENA02_TRIGGER_BAND_Y(actor_id, y_above, y_below, x_len)           \
-    {                                                                       \
-        if (D_80143F03 == 0) {                                              \
-            if (g_Actors[actor_id].pos.y.fixed + (y_above) >= D_80145EC8 && \
-                D_80145EC8 >= g_Actors[actor_id].pos.y.fixed - (y_below) && \
-                D_80145EC4 >= g_Actors[actor_id].pos.x.fixed &&             \
-                g_Actors[actor_id].pos.x.fixed + (x_len) >= D_80145EC4) {   \
-                func_801FCB54();                                            \
-            }                                                               \
-        }                                                                   \
+#define SCENA02_TRIGGER_BAND_Y(actor_id, y_above, y_below, x_len)                              \
+    {                                                                                          \
+        if (D_80143F03 == 0) {                                                                 \
+            if (g_Actors[actor_id].pos.y.fixed + (y_above) >= g_Game.members[0].pos.y.fixed && \
+                g_Game.members[0].pos.y.fixed >= g_Actors[actor_id].pos.y.fixed - (y_below) && \
+                g_Game.members[0].pos.x.fixed >= g_Actors[actor_id].pos.x.fixed &&             \
+                g_Actors[actor_id].pos.x.fixed + (x_len) >= g_Game.members[0].pos.x.fixed) {   \
+                func_801FCB54();                                                               \
+            }                                                                                  \
+        }                                                                                      \
     }
 
 /* From `x_len` before the actor's x up to it, and within `y_pad` of its y. */
-#define SCENA02_TRIGGER_BEHIND_X(actor_id, x_len, y_pad)                  \
-    {                                                                     \
-        if (D_80143F03 == 0) {                                            \
-            if (D_80145EC4 >= g_Actors[actor_id].pos.x.fixed - (x_len) && \
-                g_Actors[actor_id].pos.x.fixed >= D_80145EC4 &&           \
-                D_80145EC8 >= g_Actors[actor_id].pos.y.fixed - (y_pad) && \
-                g_Actors[actor_id].pos.y.fixed + (y_pad) >= D_80145EC8) { \
-                func_801FCB54();                                          \
-            }                                                             \
-        }                                                                 \
+#define SCENA02_TRIGGER_BEHIND_X(actor_id, x_len, y_pad)                                     \
+    {                                                                                        \
+        if (D_80143F03 == 0) {                                                               \
+            if (g_Game.members[0].pos.x.fixed >= g_Actors[actor_id].pos.x.fixed - (x_len) && \
+                g_Actors[actor_id].pos.x.fixed >= g_Game.members[0].pos.x.fixed &&           \
+                g_Game.members[0].pos.y.fixed >= g_Actors[actor_id].pos.y.fixed - (y_pad) && \
+                g_Actors[actor_id].pos.y.fixed + (y_pad) >= g_Game.members[0].pos.y.fixed) { \
+                func_801FCB54();                                                             \
+            }                                                                                \
+        }                                                                                    \
     }
 
 void func_801FBF94(u8 actor_id);
