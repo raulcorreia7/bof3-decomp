@@ -186,7 +186,16 @@ MATCH void func_801FD9B4(Actor* actor) {
     SCENA10_ACTOR_START(0xB, 0x1F, 0x13);
 }
 
-INCLUDE_ASM(func_801FDA0C);
+MATCH void func_801FDA0C(Actor* actor) {
+    u8* state;
+
+    Game_SetScriptActive();
+    func_801BE1B0(1);
+    SYS_SetFlag(g_SceneFlags, 0x15);
+    state = &D_80146875;
+    *state += 1;
+    actor->unk_7E += 1;
+}
 
 MATCH void func_801FDA74(void) {
     SYS_SetFlag(g_SceneFlags, 0x19U);
