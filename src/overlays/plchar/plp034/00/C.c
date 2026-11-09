@@ -68,14 +68,7 @@ INCLUDE_ASM(func_801CFC7C);
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
-MATCH void func_801CFE14(void) {
-    if ((g_ActorSlots[g_Task->param.actor_slot].header.flags == 0 ||
-         g_ActorSlots[g_Task->param.actor_slot].header.mode == 1) &&
-        g_AreaCameraMoving == 0) {
-        g_Game.current->u.field.mode_12B.s8_value = 0;
-    }
-    Actor_StepAnimLoop();
-}
+#include "overlays/plchar/Char_ClearPanelModeIfUnused.h"
 
 
 INCLUDE_ASM(func_801CFEAC);

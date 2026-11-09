@@ -53,7 +53,7 @@ MATCH void func_801CEF54(void) {
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
-INCLUDE_ASM(func_801CF0EC);
+#include "overlays/plchar/Char_ClearPanelModeIfUnused.h"
 
 INCLUDE_ASM(func_801CF184);
 
