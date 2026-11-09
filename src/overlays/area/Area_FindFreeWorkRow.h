@@ -1,4 +1,4 @@
-/* Find the first row whose byte is zero in the area work window, or NULL. each overlay's image header names its offset and stride. */
+/* Find the first row whose byte is zero in the area work window, or NULL. Each overlay's image header names its offset and stride. */
 /* func_801178C4 (area049), func_801F3158 (area052), func_801F3348 (area125), func_801F4D80 (area098) */
 MATCH u8* Area_FindFreeWorkRow(void) {
     u8* p;

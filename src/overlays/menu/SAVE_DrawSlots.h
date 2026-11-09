@@ -1,4 +1,4 @@
-/* Draw the visible stock rows and the panel header. each image header declares the stock count, rows, first row and the two draw helpers. */
+/* Draw the visible stock rows and the panel header. Each image header declares the stock count, rows, first row and the two draw helpers. */
 /* func_801D67B0 (shop), func_801E6C68 (start) */
 #define SAVE_SLOT_INSET_X      16
 #define SAVE_SLOT_INSET_Y      6

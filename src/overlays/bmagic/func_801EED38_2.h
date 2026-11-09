@@ -1,4 +1,4 @@
-/* Clears the effect slots, copies the facing and position of the selected battler into the effect, queues the selection sound, and spawns the sparkles of EFFECT_SPARKLE_KIND, each group of four with a longer launch delay. each image header defines EFFECT_SPARKLE_KIND and declares the kind tables D_801F0194 and D_801F019C. */
+/* Clears the effect slots, copies the facing and position of the selected battler into the effect, queues the selection sound, and spawns the sparkles of EFFECT_SPARKLE_KIND, each group of four with a longer launch delay. Each image header defines EFFECT_SPARKLE_KIND and declares the kind tables D_801F0194 and D_801F019C. */
 /* func_801EED38 (magic162), func_801EED38 (magic168) */
 MATCH void func_801EED38(void) {
     PartyMember* battler;
