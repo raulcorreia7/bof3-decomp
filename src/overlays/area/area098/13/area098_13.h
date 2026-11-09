@@ -29,6 +29,13 @@ extern Callback D_801F5F7C[];
 extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
 extern void (*D_801F5FBC[])(void* slot);
+/* The screen-capture size for one table row. */
+typedef struct CaptureSize {
+    s16 w;
+    s16 h;
+    s16 unk_04[2]
+} CaptureSize;
+
 extern u8 D_801F6510;
 extern u8 D_801F6514;
 
