@@ -22,18 +22,18 @@ extern SVECTOR D_1F800014[];
         SetShadeTex(prim, 0);                                                                           \
         if (g_Task->direction_08 != 0) {                                                                \
             D_1F800014[0].vy = D_1F800014[1].vy = D_1F800014[2].vy = D_1F800014[3].vy =                 \
-                (((g_Task->pos.y.fixed >> 16) - 0x80) << 7) | 0x40;                                     \
+                ((FIX_INT(g_Task->pos.y.fixed) - 0x80) << 7) | 0x40;                                    \
             D_1F800014[0].vx = D_1F800014[2].vx =                                                       \
-                (((g_Task->pos.x.fixed >> 16) - 0x7F) << 7) - (g_Task->screen_y - 0x40);                \
+                ((FIX_INT(g_Task->pos.x.fixed) - 0x7F) << 7) - (g_Task->screen_y - 0x40);               \
             D_1F800014[1].vx = D_1F800014[3].vx =                                                       \
-                (((g_Task->pos.x.fixed >> 16) - 0x80) << 7) - (g_Task->screen_y + 0x40);                \
+                ((FIX_INT(g_Task->pos.x.fixed) - 0x80) << 7) - (g_Task->screen_y + 0x40);               \
         } else {                                                                                        \
             D_1F800014[0].vx = D_1F800014[1].vx = D_1F800014[2].vx = D_1F800014[3].vx =                 \
-                (((g_Task->pos.x.fixed >> 16) - 0x80) << 7) | 0x40;                                     \
+                ((FIX_INT(g_Task->pos.x.fixed) - 0x80) << 7) | 0x40;                                    \
             D_1F800014[0].vy = D_1F800014[2].vy =                                                       \
-                (((g_Task->pos.y.fixed >> 16) - 0x7F) << 7) + (g_Task->screen_y + 0x40);                \
+                ((FIX_INT(g_Task->pos.y.fixed) - 0x7F) << 7) + (g_Task->screen_y + 0x40);               \
             D_1F800014[1].vy = D_1F800014[3].vy =                                                       \
-                (((g_Task->pos.y.fixed >> 16) - 0x80) << 7) + (s16)(g_Task->screen_y - 0x40);           \
+                ((FIX_INT(g_Task->pos.y.fixed) - 0x80) << 7) + (s16)(g_Task->screen_y - 0x40);          \
         }                                                                                               \
         x                = (D_1F800014[0].vx + 0x4000) << 9;                                            \
         y                = (D_1F800014[0].vy + 0x4000) << 9;                                            \

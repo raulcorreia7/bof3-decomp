@@ -9,6 +9,7 @@
 
 extern u8       D_80144908[];
 extern u32      D_801F6C00;
+extern u8       D_80146875;
 /* D_801FE80C */
 extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE820[];
@@ -27,6 +28,14 @@ extern u8        D_801FE970[3];
 extern u16       D_801FE974[3];
 /* D_801FE97C */
 extern SceneFunc g_SceneActorDispatch[];
+
+/* The actor-start members of 368.c: start the actor, then raise a scene flag. They differ only in the
+ * three constants. Every change here must verify every member. */
+#define SCENA10_ACTOR_START(scene, step, flag) \
+    do {                                       \
+        SCENE_START_ACTOR(actor, scene, step); \
+        SYS_SetFlag(g_SceneFlags, (flag));     \
+    } while (0)
 
 /* The party lookups of 368.c: return the value paired with the first id in `ids` that a party member
  * holds, else `none`. The members differ only in table and count. Every change must verify every member. */

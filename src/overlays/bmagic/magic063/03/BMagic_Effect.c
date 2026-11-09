@@ -61,7 +61,36 @@ MATCH void func_801EF190(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1C8);
+MATCH void func_801EF1C8(void) {
+    u8           i;
+    u8           slot;
+    u8           val;
+    s32          off;
+    PartyMember* task;
+
+    if (g_Task->param.unk_0B != 0) {
+        return;
+    }
+    i = 0;
+    do {
+        slot = func_801F0354();
+        if (slot != 0xFF) {
+            off                                  = slot << 5;
+            task                                 = g_Task;
+            D_801F0454[off + 1]                  = 0;
+            D_801F0454[off + 4]                  = i;
+            FIELD(PartyMember*, D_801F0470, off) = task;
+            val                                  = ((i >> 1) & 0x70) + (rand() & 0xF) + 1;
+            D_801F0454[off + 10]                 = val;
+            D_801F0454[off + 8]                  = 0x40 - val;
+            g_Task->param.unk_0B++;
+        }
+        i++;
+    } while (i < 0x5C);
+    SND_QueueSelectionFx(0x101);
+    SND_QueueSelectionFx(0x102);
+    g_Task->header.step++;
+}
 
 #include "overlays/bmagic/Effect_FinishOnZeroTick.h"
 

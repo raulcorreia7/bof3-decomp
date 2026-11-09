@@ -111,7 +111,31 @@ MATCH void func_801EF44C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4A4);
+MATCH void func_801EF4A4(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    rot.vx = 0;
+    rot.vy = 0;
+    switch (g_Task->facing) {
+        case 0:
+            rot.vz = 0x400;
+            break;
+        case 1:
+            rot.vz = 0x800;
+            break;
+        case 2:
+            rot.vz = 0xC00;
+            break;
+        default:
+            rot.vz = 0;
+            break;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+}
 
 INCLUDE_ASM(func_801EF5B0);
 

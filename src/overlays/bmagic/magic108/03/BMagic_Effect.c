@@ -160,6 +160,26 @@ INCLUDE_ASM(func_801EF180);
 
 INCLUDE_ASM(func_801EF2D4);
 
-INCLUDE_ASM(func_801EF5C0);
+MATCH void func_801EF5C0(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+    u8      angle;
+
+    PushMatrix();
+    if (g_Task->facing & 1) {
+        rot.vx = 0;
+        angle  = g_Task->timer & 0x1F;
+        rot.vy = (s16)(angle << 7);
+        rot.vz = 0x400;
+    } else {
+        angle  = g_Task->timer & 0x1F;
+        rot.vx = (s16)(angle << 7);
+        rot.vy = 0;
+        rot.vz = 0;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+}
 
 INCLUDE_ASM(func_801EF6C0);

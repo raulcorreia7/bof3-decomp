@@ -8,7 +8,25 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-INCLUDE_ASM(func_801EEEC8);
+MATCH void func_801EEEC8(void) {
+    u32          slot;
+    PartyMember* task;
+    PartyMember* task2;
+
+    if (g_Task->param.unk_0B == 1) {
+        slot                               = Battle_AllocEffect(1, 0xF) & 0xFF;
+        task                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].unk_0B       = 2;
+        g_BattleEffects[slot].target.party = task;
+        slot                               = Battle_AllocEffect(1, 0xF) & 0xFF;
+        task2                              = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].unk_0B       = 3;
+        g_BattleEffects[slot].target.party = task2;
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 

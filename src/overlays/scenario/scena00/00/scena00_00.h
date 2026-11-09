@@ -49,27 +49,11 @@ typedef struct SceneSampleRecord {
 
 ASSERT_SIZE(SceneSampleRecord, 0x28);
 
-/* Field elevation at +0x3C: func_801F74EC copies the actor's 16.16 height;
- * func_801F78EC projects its signed integer part. */
-typedef union SceneElevation {
-    s32 fixed_point; /* 0x00 */
-
-    struct {
-        u16 fraction; /* 0x00 */
-        s16 height;   /* 0x02 */
-    } parts;
-} SceneElevation;
-
-ASSERT_SIZE(SceneElevation, 4);
-ASSERT_OFFSET(SceneElevation, fixed_point, 0x00);
-ASSERT_OFFSET(SceneElevation, parts, 0x00);
-STATIC_ASSERT(SceneElevation_parts_height, DECOMP_OFFSETOF(SceneElevation, parts.height) == 2);
-
 /* Field-space endpoints passed by value to func_801F78EC. */
 typedef struct SceneLinePoint {
-    s32            x;
-    s32            y;
-    SceneElevation z;
+    s32   x;
+    s32   y;
+    Coord z;
 } SceneLinePoint;
 
 ASSERT_SIZE(SceneLinePoint, 0x0C);

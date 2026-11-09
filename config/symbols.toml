@@ -558,6 +558,7 @@ Effect_CountDownAndStep = { addr = 0x801EFC00, type = "func", source = "Counts t
 g_BMagicEffectModes = { addr = 0x801F0C10, source = "Handlers of magic062 (Celerity), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic063/03"]
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_StartOnZeroTick = { addr = 0x801EEEE4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic063 (SuddenDeath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEF30, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic063." }
@@ -644,6 +645,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF47C, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 
 ["emi/bmagic/magic073/03"]
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 D_801EEC1C = { addr = 0x801EEC1C, type = "Magic073Steps", source = "Step handlers of magic073, run by header.step (byte 0x02) from func_801EF768." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
@@ -658,6 +660,7 @@ g_BMagicEffectModes = { addr = 0x801F0668, source = "Handlers of magic073 (Vital
 D_801F21F0 = { addr = 0x801F21F0, source = "Work record of the magic073 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
 ["emi/bmagic/magic074/03"]
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 D_801EEC1C = { addr = 0x801EEC1C, type = "Magic074Steps", source = "Step handlers of magic074, run by header.step (byte 0x02) from func_801EF754." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
@@ -1020,6 +1023,8 @@ D_801EFCD4 = { addr = 0x801EFCD4, source = "Mode handlers of the bmagic/magic118
 
 ["emi/bmagic/magic120/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 BMagic_DispatchMode = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic120 (Whelp Breath)." }
 Effect_PlayOnIdleTick = { addr = 0x801EEFB0, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic120 (Whelp Breath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF010, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic120." }
@@ -1164,6 +1169,10 @@ g_BMagicEffectModes = { addr = 0x801EF72C, source = "Handlers of magic138 (Main 
 ["emi/bmagic/magic143/03"]
 D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+SND_QueueSelectionFx = { addr = 0x8015D71C, alias = true }
+func_800A9610 = { addr = 0x800A9610, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EED24, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic143 (Thunder Clap)." }
 BMagic_DispatchEffectMode = { addr = 0x801EED70, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic143." }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF100, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect counter (byte 0x0A) down by two; at zero lowers the active battler's ticker and clears the effect in magic143 (Thunder Clap)." }
@@ -4272,12 +4281,14 @@ Area_DrawLightPillar = { addr = 0x801F2E68, type = "func", source = "Draws a pil
 ["emi/world03/area147/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 World_AdvanceAreaWhenPartyNear = { addr = 0x801F2DF4, type = "func", source = "Runs World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) once the party is next to the work cell, then Area_Update(0)." }
+Actor_SlideScreenToEdge = { addr = 0x801F2F34, type = "func", source = "Adds 0x10 to the actor screen_y; at 0x80 or above adds 1 to header.step (byte 0x02); then runs Area_Update with -1 when the word at 0x32 is zero, else 0." }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F2FB0, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08)." }
 Area_AdvanceCountdown = { addr = 0x801F30AC, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue 0x201 when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update(0), or Area_Update(-1) when byte 0x32 is zero." }
 Area_Update = { addr = 0x801F313C, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 
 ["emi/world03/area148/13"]
 World_AdvanceAreaWhenPartyNear = { addr = 0x801F2E64, type = "func", source = "Runs World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) once the party is next to the work cell, then Area_Update(0)." }
+Actor_SlideScreenToEdge = { addr = 0x801F2FA4, type = "func", source = "Adds 0x10 to the actor screen_y; at 0x80 or above adds 1 to header.step (byte 0x02); then runs Area_Update with -1 when the word at 0x32 is zero, else 0." }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F3020, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08)." }
 Area_AdvanceCountdown = { addr = 0x801F311C, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue 0x201 when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update(0), or Area_Update(-1) when byte 0x32 is zero." }
 Area_Update = { addr = 0x801F31AC, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }

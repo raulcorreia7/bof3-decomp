@@ -385,7 +385,8 @@ typedef struct AreaRing {
     s32     center[3];                /* 0x10 - the ring centre */
     s32     unk_1C;                   /* 0x1C */
     s16     radius;                   /* 0x20 */
-    s16     unk_22;                   /* 0x22 */
+    u8      unk_22;                   /* 0x22 */
+    u8      unk_23;                   /* 0x23 */
     DVECTOR screen_base;              /* 0x24 */
     DVECTOR screen_center;            /* 0x28 */
     DVECTOR screen[AREA_RING_POINTS]; /* 0x2C - one screen position per ring point */
