@@ -80,7 +80,7 @@
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
 #define AREA_PALETTE_WORK          0x80037800u
-/* The animation-stream banks g_ScriptBank alternates between: the area bank the
+/* The animation-stream banks g_ScriptTable alternates between: the area bank the
  * field uses, the battle bank the battle handler swaps in, and the battle magic
  * bank a battle magic effect sets while its step table runs (every setter is a
  * bmagic overlay; it restores the area bank afterwards). */
@@ -269,7 +269,7 @@ ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
- * the block through `g_ScriptBank`: `section = u32[bank + 4*lhu(work+0x2C)]`,
+ * the block through `g_ScriptTable`: `section = u32[bank + 4*lhu(work+0x2C)]`,
  * `record = bank + section + u16[bank + section + 2*lbu(work+0x4B)]`, stored to
  * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_BANK` in for the duration of a
  * battle handler. */
@@ -318,7 +318,7 @@ typedef struct AreaActorDefs {
 } AreaActorDefs;
 
 /* `0x801459F0` - the four pointers the loader publishes together. Each word has
- * its own name in the tree (`g_ScriptBank` the script bank, `D_801459F4` the scene
+ * its own name in the tree (`g_ScriptTable` the script bank, `D_801459F4` the scene
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {

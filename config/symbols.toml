@@ -5311,7 +5311,7 @@ g_FairyRooms = { addr = 0x801457A8, source = "Fairy village rooms." }
 D_801457A9 = { addr = 0x801457A9, alias = true, source = "Subtype of each fairy village room." }
 g_GfxPalettePending = { addr = 0x80145988, source = "Palette upload pending flag." }
 g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive context." }
-g_ScriptBank = { addr = 0x801459F0, type = "u32", source = "Pointer to the active animation-stream bank: Actor_BeginScript hands a record of it to Actor_SeekScript." }
+g_ScriptTable = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Actor_BeginScript hands a record of it to Actor_SeekScript." }
 g_InputHeld = { addr = 0x80145AA4, source = "Buttons held this frame." }
 g_InputPressed = { addr = 0x80145AA8, source = "Buttons pressed this frame." }
 g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the controller." }

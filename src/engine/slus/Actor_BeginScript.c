@@ -40,7 +40,7 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
     if (g_Task->active_flags & 1) {
         Actor_SelectScriptBank(g_Task->unk_4B);
     } else {
-        table = (u8*)g_ScriptBank;
+        table = (u8*)g_ScriptTable;
         table += ((s32*)table)[g_Task->unk_2C];
         g_Task->script = table + ((u16*)table)[g_Task->unk_4B];
     }

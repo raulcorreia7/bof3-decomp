@@ -17,7 +17,7 @@ INCLUDE_ASM(func_801EED18);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF048(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801F0C44, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
         func_800AF764();
@@ -27,7 +27,7 @@ MATCH void func_801EF048(void) {
         BMagic_DrawDarkRing();
         PopMatrix();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_BANK;
 }
 
 INCLUDE_ASM(func_801EF10C);
