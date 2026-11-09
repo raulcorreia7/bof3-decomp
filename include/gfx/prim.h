@@ -5,11 +5,9 @@
 #include "psx/psyq.h"
 #include "types.h"
 
-/* The shared primitive cursor and color packing used by the menu, field and
- * effect drawers. */
+/* The shared primitive cursor and color packing used by the menu, field and effect drawers. */
 
-/* A sprite rectangle in texture bytes: origin u, v and size w, h. The sprite
- * drawers copy it into a SPRT. */
+/* A sprite rectangle in texture bytes: origin u, v and size w, h. */
 typedef struct UvRect {
     u8 u;
     u8 v;
@@ -23,12 +21,11 @@ ASSERT_SIZE(UvRect, 0x4);
 #define SCREEN_WIDTH                 320
 #define SCREEN_HEIGHT                240
 
-/* retail addresses */
+/* retail addresses. */
 /* First primitive arena: bank n starts at this address + n * 0x9000. */
 #define PRIM_ARENA_BASE              0x80028FCCu
 
-/* Begin a draw-mode primitive at the shared cursor with the default
- * texture window and no extra argument. */
+/* Begin a draw-mode primitive at the shared cursor with the default texture window and no extra argument. */
 #define GFX_SET_DRAW_MODE(tpage)     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (tpage), 0)
 
 /* Draw one cue record's text at (x, y): the resource is the text bank. */
@@ -53,16 +50,13 @@ ASSERT_SIZE(UvRect, 0x4);
 #define PSX_COLOR_STP(c)             (((u16)(c) >> 15) & 1u)
 #define PSX_PACK_COLOR(r, g, b, stp) ((u16)((r) | ((g) << 5) | ((b) << 10) | ((u16)(stp) << 15)))
 
-/* Shared primitive cursor (PsyQ SDK global, owned by the main exe). A named
- * symbol (not a fixed-address macro) so codegen emits the symbol-relative
- * `lui + lw reg, %lo(reg)` load the original binary uses. */
+/* Shared primitive cursor (PsyQ SDK global, owned by the main exe). */
 /* D_8014598C */
 extern u8* g_GfxPrimCursor;
 /* D_80145AD4 */
 extern u8  g_UiFormatBuffer[];
 
-/* Queue a draw-mode primitive for the texture page at order-table slot 1: the
- * default texture window. */
+/* Queue a draw-mode primitive for the texture page at order-table slot 1: the default texture window. */
 static inline void GFX_AddDrawMode(s32 tpage) {
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(1, sizeof(DR_MODE));
@@ -75,8 +69,7 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
 }
 
 /* The shared cursor viewed as the primitive it is about to receive. */
-/* The texture-page word getTPage builds, one macro per layout: GetGraphType() 1 and 2
- * keep the colour mode and blend in bits 9-10 and 7-8, the others in bits 7-8 and 5-6. */
+/* The texture-page word getTPage builds, one macro per layout. */
 #define GFX_TPAGE_STANDARD(tp, abr, x, y)                                                                             \
     ((((tp) & 0x3) << 7) | (((abr) & 0x3) << 5) | (((y) & 0x100) >> 4) | (((x) & 0x3FF) >> 6) | (((y) & 0x200) << 2))
 #define GFX_TPAGE_GRAPH_TYPE_1_2(tp, abr, x, y)                                             \
@@ -84,8 +77,7 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
 
 #define GFX_CURSOR(type) ((type*)g_GfxPrimCursor)
 
-/* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared
- * cursor and return it. */
+/* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared cursor and return it. */
 static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     SPRT* sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
@@ -96,8 +88,7 @@ static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     return sprt;
 }
 
-/* Begin a poly on the shared cursor, with semi-transparency `semi_trans`, and return it. The caller sets its
- * points, colours and texture, then queues it with GFX_AddPrim. */
+/* Begin a poly on the shared cursor, with semi-transparency `semi_trans`, and return it. */
 static inline POLY_G3* GFX_BeginPolyG3(s32 semi_trans) {
     POLY_G3* prim = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(prim);
