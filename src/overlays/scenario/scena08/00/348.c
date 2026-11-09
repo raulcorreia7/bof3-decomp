@@ -55,7 +55,11 @@ INCLUDE_ASM(func_801F7268);
 INCLUDE_ASM(func_801F7320);
 
 /* Hint: reads screen_x and screen_y as signed halves (lh); the Actor members are u16, so the draft loads lhu. */
-INCLUDE_ASM(func_801F73D4);
+MATCH void func_801F73D4(void) {
+    Actor* work;
+
+    SCENA08_SCREEN_EFFECT_STEP(work, 0x10);
+}
 
 INCLUDE_ASM(func_801F743C);
 
@@ -75,7 +79,11 @@ INCLUDE_ASM(func_801F75E4);
 INCLUDE_ASM(func_801F7688);
 
 /* Hint: same shape as func_801F73D4 (lh of screen_x and screen_y, u16 members); here the 0x32 update is -0x10. */
-INCLUDE_ASM(func_801F774C);
+MATCH void func_801F774C(void) {
+    Actor* work;
+
+    SCENA08_SCREEN_EFFECT_STEP(work, -0x10);
+}
 
 INCLUDE_ASM(func_801F77B4);
 
@@ -387,7 +395,6 @@ MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_Task);
 }
 
-/* blocker: ori in the work load delay slot; first diff: +4 ori v1,v1,0x8000 against lui v0,0x1f80. */
 INCLUDE_ASM(func_801F9E00);
 
 INCLUDE_ASM(func_801F9E50);
