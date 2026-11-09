@@ -25,7 +25,7 @@
 
 /* The character bank container loaded at 0x8003B800 (PLxxx archives;
  * @source: wiki:formats/character): a table of section offsets relative to the container.
- * func_801C1254 stores the selected section's address in the scratchpad work
+ * Party_LoadMemberSprite stores the selected section's address in the scratchpad work
  * record at +0x4C. A section starts with a count and the offset of its palette
  * table; the table is a list of offsets, each to CHARACTER_PALETTE_COLORS
  * 16-bit colors, which GFX_LoadPalette copies to two VRAM staging rows. */

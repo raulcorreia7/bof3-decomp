@@ -13,7 +13,7 @@ MATCH void func_801EEE74(void) {
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         saved->header.mode++;
     }
     g_Task = saved;
@@ -27,7 +27,7 @@ MATCH void func_801EEF88(void) {
 
     saved_work = g_Task;
     g_Task     = D_801EC2E0->target.party;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {
         func_800A9820(g_Battle.target_selector);

@@ -8,7 +8,7 @@ MATCH void func_800C1BF0(void) {
 
     battler = g_Task;
     g_Task  = g_BattleEffectBattler;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     g_Task = battler;
     value2 = battler->unk_09;
     value  = value2 & BYTE_MASK;

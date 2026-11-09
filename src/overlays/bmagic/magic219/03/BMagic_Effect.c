@@ -84,7 +84,7 @@ MATCH void func_801EF5DC(void) {
     u8 timer_next;
     u8 count;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     timer_next = g_Task->timer;
     if (timer_next != 0) {
         g_Task->timer = timer_next - 1;

@@ -16,7 +16,7 @@ MATCH void Party_BuildBattlers(u32 mode) {
         battler->header.flags = PARTY_MEMBER_FLAG_OCCUPIED;
         entry_table           = g_PartyFieldOrder;
         g_Task->unk_05        = i;
-        ((void (*)(u8, u8))func_801C1254)(*((entry_table + ((mode & BYTE_MASK) * 3)) + i), i);
+        ((void (*)(u8, u8))Party_LoadMemberSprite)(*((entry_table + ((mode & BYTE_MASK) * 3)) + i), i);
         g_Task->unk_48                    = 0;
         g_Task->scale.x                   = 0x10000;
         g_Task->scale.y                   = 0x10000;

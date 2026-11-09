@@ -18,6 +18,6 @@ MATCH void func_801DB808(void) {
     if (FISHING_STATE->step_timer_09 == 0) {
         FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 + 1);
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_801E16DC();
 }

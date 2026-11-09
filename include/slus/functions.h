@@ -73,8 +73,10 @@ void         Actor_SelectScript(u8 selector);
 u32          Actor_RequestScript(u8 selector);
 /* func_8014D910 */
 void         Actor_SeekScript(u16 position);
-u8           func_8014D978(void);
-u8           func_8014DAEC(void);
+/* func_8014D978 */
+u8           Actor_StepAnimLoop(void);
+/* func_8014DAEC */
+u8           Actor_StepAnimOnce(void);
 /* func_8014DC08 */
 extern void  Actor_SelectScriptBank(u32 record_index);
 /* func_8014DD3C */

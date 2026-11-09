@@ -13,6 +13,6 @@ MATCH void func_800AD434(void) {
         BATTLE_WORK->header.step = 0;
         return;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     Area_AddActor();
 }

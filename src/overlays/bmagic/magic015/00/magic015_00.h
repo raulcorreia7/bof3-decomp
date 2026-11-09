@@ -42,7 +42,7 @@ extern Magic015SecondSteps D_801EEC34;
         g_Task->unk_5F -= 0x10;                                                        \
     }                                                                                  \
     if ((g_BattleEffectBattler->param.unk_0B == 1) && ((s8)g_Task->unk_5D == -0x80) && \
-        (func_8014DAEC() & BYTE_MASK)) {                                               \
+        (Actor_StepAnimOnce() & BYTE_MASK)) {                                          \
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;                      \
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;                      \
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;                      \

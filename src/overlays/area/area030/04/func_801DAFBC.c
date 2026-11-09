@@ -11,5 +11,5 @@ MATCH void func_801DAFBC(void) {
         FISHING_STATE->step_timer_09 = 0;
         FISHING_STATE->sub_index_03 += 1;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

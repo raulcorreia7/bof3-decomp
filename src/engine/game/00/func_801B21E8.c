@@ -64,7 +64,7 @@ NON_MATCHING void func_801B21E8(void) {
                 tmp5           = (u8*)g_Game.members + val5;
                 g_Task         = tmp5;
                 g_Game.current = tmp5;
-                func_801C1254(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
+                Party_LoadMemberSprite(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
                 g_Game.current->status.field.flags_12C.u8_value = val14;
                 if (g_Game.current->status.field.flags_12C.u8_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;

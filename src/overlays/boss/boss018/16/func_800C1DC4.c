@@ -17,5 +17,5 @@ MATCH void func_800C1DC4(void) {
     g_BattleCurrentEnemy->unk_E4        = func_800C2074;
     g_BattleCurrentEnemy->unk_E8        = &D_800C2CA4;
     ((PartyMember*)g_Task)->header.mode = 2;
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

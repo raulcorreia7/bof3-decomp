@@ -10,5 +10,5 @@ MATCH void Boss_InitEnemy3(void) {
     work->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
     work->unk_E8 = D_800C1B28;
     ACTOR_SET_MODE(2);
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

@@ -6,7 +6,7 @@ MATCH bool func_801C539C(void) {
     Actor* reload;
     s32    doubled;
 
-    if (!(func_8014DAEC() & BYTE_MASK)) {
+    if (!(Actor_StepAnimOnce() & BYTE_MASK)) {
         return false;
     }
     g_Game.current->u.field.counter_11C.s8_value = (FIELD(s32, g_Task, 0x70u) + 2);

@@ -1,7 +1,7 @@
 /* Launches the facing probe from a free actor slot once the script reaches CHAR_LAUNCH_SCRIPT_PC. Every change here
    must verify every member. */
 MATCH void Char_ClaimLinkSlot(void) {
-    func_8014D978();
+    Actor_StepAnimLoop();
     if (g_Task->script_pc == CHAR_LAUNCH_SCRIPT_PC) {
         g_Task->param.actor_slot = Actor_FindFreeSlot();
         if (g_Task->param.actor_slot != GAME_NONE) {

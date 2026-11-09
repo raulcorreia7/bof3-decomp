@@ -73,7 +73,7 @@ MATCH void func_8019BBA4(void) {
                 }
             }
         }
-        func_8014D978();
+        Actor_StepAnimLoop();
         Area_SetDrawMode();
     }
 }

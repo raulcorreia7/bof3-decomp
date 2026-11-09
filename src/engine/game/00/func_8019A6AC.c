@@ -11,7 +11,7 @@ MATCH void func_8019A6AC(void) {
     g_Task->tint.bytes.unk_5D -= 6;
     g_Task->tint.bytes.unk_5E -= 6;
     g_Task->tint.bytes.unk_5F -= 6;
-    func_8014D978();
+    Actor_StepAnimLoop();
     work = g_Task;
     if (work->unk_05 == 6) {
         if ((work->timer & 1) != 0) {

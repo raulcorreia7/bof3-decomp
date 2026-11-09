@@ -5,7 +5,7 @@ MATCH void func_801E6C20(void) {
     u8            count;
     u16           half;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0u) {

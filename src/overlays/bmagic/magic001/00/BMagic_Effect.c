@@ -37,7 +37,7 @@ MATCH void func_801EF0E8(void) {
 }
 
 MATCH void func_801EF164(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800AFC98(2, 0);
         func_801E257C(g_Battle.active_battler, 0xBU);
         g_Task->unk_14 = 0x100;
@@ -68,7 +68,7 @@ MATCH void func_801EF280(void) {
 }
 
 MATCH void func_801EF324(void) {
-    if (func_8014DAEC() != 0u) {
+    if (Actor_StepAnimOnce() != 0u) {
         func_801E257C(g_Battle.active_battler, 0xA);
         g_Task->header.step = g_Task->header.step + 1;
     }
@@ -77,9 +77,9 @@ MATCH void func_801EF324(void) {
 MATCH void func_801EF37C(void) {
     PartyMember* work;
 
-    func_8014DAEC();
-    func_8014DAEC();
-    if (func_8014DAEC() & BYTE_MASK) {
+    Actor_StepAnimOnce();
+    Actor_StepAnimOnce();
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800AFC98(2, 0);
         func_801E257C(g_Battle.active_battler, 0xB);
         work         = g_Task;
@@ -105,9 +105,9 @@ MATCH void func_801EF408(void) {
 MATCH void func_801EF468(void) {
     u8 timer;
 
-    func_8014DAEC();
-    func_8014DAEC();
-    if (func_8014DAEC() & BYTE_MASK) {
+    Actor_StepAnimOnce();
+    Actor_StepAnimOnce();
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_Battle.active_battler, 0xC);
         timer          = g_Task->unk_09 - 1;
@@ -121,7 +121,7 @@ MATCH void func_801EF468(void) {
 }
 
 MATCH void func_801EF518(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800A9820(g_Battle.target_selector);
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;

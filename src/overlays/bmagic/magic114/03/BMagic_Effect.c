@@ -166,7 +166,7 @@ MATCH void func_801F0D6C(void) {
 }
 
 MATCH void func_801F0E4C(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_801E5988();
         return;
     }

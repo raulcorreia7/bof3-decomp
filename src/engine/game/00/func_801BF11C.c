@@ -60,7 +60,7 @@ MATCH u8 func_801BF11C(void) {
                 g_Task->param.unk_0B     = 2;
             }
         }
-        func_8014D978();
+        Actor_StepAnimLoop();
     }
 
     for (i = 0; i < g_Game.party_size; i++) {

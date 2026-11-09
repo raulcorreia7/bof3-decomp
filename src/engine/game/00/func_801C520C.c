@@ -35,7 +35,7 @@ MATCH s32 func_801C520C(void) {
         Area_AdvanceScroll(COORD_INT(g_Task->pos.z));
     }
     if (!(g_FrameCount & 3)) {
-        func_8014DAEC();
+        Actor_StepAnimOnce();
     }
     return done;
 }

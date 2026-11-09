@@ -10,18 +10,18 @@ MATCH void Char_AdvanceScript(void) {
     done = 0;
     if (g_Task->param.unk_0B != 0) {
         if (g_Task->param.unk_0B == 1) {
-            if (func_8014DAEC() & BYTE_MASK) {
+            if (Actor_StepAnimOnce() & BYTE_MASK) {
                 Actor_SelectScript(g_Task->direction_08);
                 g_Task->param.unk_0B = 2;
             }
         } else {
-            func_8014D978();
+            Actor_StepAnimLoop();
             if (D_80143BB0 == 0) {
                 done = 1;
             }
         }
     } else {
-        if (func_8014DAEC() & BYTE_MASK) {
+        if (Actor_StepAnimOnce() & BYTE_MASK) {
             done = 1;
         }
     }

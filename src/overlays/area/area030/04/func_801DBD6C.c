@@ -41,6 +41,6 @@ MATCH void func_801DBD6C(void) {
             work->sub_index_03 = (work->sub_index_03 + 1);
         }
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_801E16DC();
 }

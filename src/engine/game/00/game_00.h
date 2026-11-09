@@ -1081,7 +1081,8 @@ void  func_801C0D34(void);
 void  func_801C0D54(void);
 s32   func_801C0E48(void);
 s32   func_801C0F9C(u8 source_row);
-void  func_801C1254(s32 ability_id, s32 party_slot);
+/* func_801C1254 */
+void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 void  func_801C16B8(void);
 void  func_801C1840(void);
 void  func_801C1E88(s32 key, s32* counter);

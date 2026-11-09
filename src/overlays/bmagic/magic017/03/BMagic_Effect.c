@@ -77,7 +77,7 @@ MATCH void func_801EF5FC(void) {
     u8 counter;
 
     if (BATTLE_ACTIVE_WORK->param.unk_0B == 1) {
-        func_8014DAEC();
+        Actor_StepAnimOnce();
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
         if (!(counter & BYTE_MASK)) {
@@ -89,7 +89,7 @@ MATCH void func_801EF5FC(void) {
 }
 
 MATCH void func_801EF694(void) {
-    if (func_8014DAEC() != 0u) {
+    if (Actor_StepAnimOnce() != 0u) {
         g_Task->unk_09      = 8;
         g_Task->header.step = g_Task->header.step + 1;
     }

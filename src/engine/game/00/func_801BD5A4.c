@@ -36,5 +36,5 @@ MATCH void func_801BD5A4(void) {
             }
             break;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

@@ -1,10 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* counts the staged entry byte at +0x4A down (0 while it survives); at expiry it re-arms it with 1 and
- * reports 1 when the stream index at +0x58 already selects the byte at +0x49, otherwise an opcode (>= 0x80) moves the
- * index to the operand's doubled value and reports 1; finally it stages the next entry through func_8014DB98.
+/* Plays the sprite animation once: as Actor_StepAnimLoop, but at the end of the stream it sets the delay (+0x4A)
+ * to 1 and returns 1 without staging, so the last frame holds.
  */
-MATCH u8 func_8014DAEC(void) {
+/* func_8014DAEC */
+MATCH u8 Actor_StepAnimOnce(void) {
     u8  result;
     u8  count;
     u16 index;
@@ -22,7 +22,7 @@ MATCH u8 func_8014DAEC(void) {
             g_Task->script_pc = *(u8*)(g_Task->script + index + 1) << 1;
             result            = 1;
         }
-        func_8014DB98();
+        Actor_StageAnimStep();
     }
     return result;
 }

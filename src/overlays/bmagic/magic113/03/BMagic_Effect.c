@@ -222,7 +222,7 @@ MATCH void func_801F08B4(void) {
 MATCH void func_801F0A80(void) {
     u8 value;
 
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         value          = g_Task->unk_09 + 1;
         g_Task->unk_09 = value;
         if ((value & BYTE_MASK) >= 3U) {

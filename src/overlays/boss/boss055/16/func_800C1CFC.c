@@ -3,7 +3,7 @@
 MATCH void func_800C1CFC(void) {
     EnemyBattler* work;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     Battle_DefeatEnemy();
     GFX_FreePaletteSlotOwner(g_Task);
     work = g_BattleCurrentEnemy;

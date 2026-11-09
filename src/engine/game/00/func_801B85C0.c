@@ -28,5 +28,5 @@ MATCH void func_801B85C0(void) {
     }
     g_Task->timer = (g_Task->timer - 1);
     func_801B0DFC();
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

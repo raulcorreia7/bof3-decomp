@@ -12,5 +12,5 @@ MATCH u8 func_801E3160(void) {
         return 1u;
     }
 
-    return func_8014DAEC();
+    return Actor_StepAnimOnce();
 }

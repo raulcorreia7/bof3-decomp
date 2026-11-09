@@ -49,5 +49,5 @@ MATCH void func_800C20CC(void) {
             work[2]++;
         }
     }
-    func_8014DAEC();
+    Actor_StepAnimOnce();
 }

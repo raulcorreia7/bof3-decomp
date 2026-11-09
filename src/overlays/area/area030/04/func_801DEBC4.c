@@ -10,7 +10,7 @@ MATCH void func_801DEBC4(void) {
     FishingState* panel;
     FishingState* state;
 
-    if ((func_8014D978() & BYTE_MASK) != 0) {
+    if ((Actor_StepAnimLoop() & BYTE_MASK) != 0) {
         D_801E3200 = 0;
         Area_FindSceneRecord(*(u16*)(g_FishingSpecies + FISHING_STATE->cue_index_06 * 0x24));
 

@@ -35,7 +35,7 @@ INCLUDE_ASM(func_801EF078);
 MATCH void func_801EF1F4(void) {
     u8 count;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     g_Task->param.unk_0B += 0xC;
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -64,7 +64,7 @@ MATCH void func_801EF8CC(void) {
     if (count != 0) {
         g_Task->unk_5D = count - 2;
     }
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }

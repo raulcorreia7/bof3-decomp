@@ -1,10 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* counts the delay byte at +0x4A down (0 while it survives); at expiry with a zero stream index it reseeds
- * the index from twice the byte at +0x49 and reports 1, then steps the index back twice, staging the stream bytes and
- * the command's halfword from the table at +0x54 into +0x5A.
+/* Plays the sprite animation backwards: counts the step delay (+0x4A) down and, at zero, stages the step before the
+ * position (+0x58); at position 0 it wraps to the end and returns 1. Jump steps are ignored.
  */
-MATCH u8 func_8014DA24(void) {
+/* func_8014DA24 */
+MATCH u8 Actor_StepAnimReverse(void) {
     u8  result;
     u8  count;
     u8  selected;

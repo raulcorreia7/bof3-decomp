@@ -72,7 +72,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             g_Task->unk_2A       = 0;
             g_Task->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
-            func_801C1254(g_Game.members[0].chr.character_id, 0);
+            Party_LoadMemberSprite(g_Game.members[0].chr.character_id, 0);
         } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {
             g_Game.members[0].unk_2B = 0;
             *(s32*)&D_80145F00       = 0;
@@ -105,11 +105,11 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     (&g_Game.members[0].character_index)[off] = kind;
                     *(Character*)dst                          = *rec;
                     if (!(g_Task->active_flags & 1)) {
-                        func_801C1254(*order, i & BYTE_MASK);
+                        Party_LoadMemberSprite(*order, i & BYTE_MASK);
                         FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
                     } else {
-                        func_801C1254(*order, i & BYTE_MASK);
+                        Party_LoadMemberSprite(*order, i & BYTE_MASK);
                         order++;
                         GFX_FreePaletteFadeTarget(g_Task);
                         g_Task->unk_27 = (g_Task->unk_05 + 0x78);

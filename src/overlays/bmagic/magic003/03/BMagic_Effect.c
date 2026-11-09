@@ -158,7 +158,7 @@ MATCH void func_801EF478(void) {
     g_Task->pos.y.fixed += g_Task->unk_10;
     g_Task->pos.z.fixed += g_Task->unk_14;
     g_Task->unk_14 += g_Task->unk_20;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     if (g_Task->pos.z.fixed == g_Task->scale.y) {
         g_Task->header.step += 1;
     }
@@ -181,7 +181,7 @@ MATCH void func_801EF578(void) {
         func_800A9610(g_Battle.target_selector, 0x10U);
         g_Task->unk_09 = 0xFF;
     }
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     if (g_Task->unk_09 == 0xFF) {
         g_Task->unk_0C = -0x2000;
         g_Task->unk_10 = 0;
@@ -193,7 +193,7 @@ MATCH void func_801EF578(void) {
 MATCH void func_801EF644(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;
     g_Task->pos.y.fixed += g_Task->unk_10;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     if (g_Task->pos.x.fixed == g_Task->unk_18 && g_Task->pos.y.fixed == g_Task->unk_1C) {
         g_Task->header.step++;
     }
@@ -228,7 +228,7 @@ MATCH void func_801EF918(void) {
     g_Task->pos.y.fixed += g_Task->unk_10;
     g_Task->pos.z.fixed += g_Task->unk_14;
     g_Task->unk_14 += g_Task->unk_20;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     if (g_Task->pos.z.fixed == g_Task->scale.y) {
         g_Task->header.step++;
     }
@@ -238,14 +238,14 @@ MATCH void func_801EF9AC(void) {
     g_Task->unk_0C = -0x2000;
     g_Task->unk_10 = 0;
     func_801DD350(g_Task);
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     g_Task->header.step += 1;
 }
 
 MATCH void func_801EF9FC(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;
     g_Task->pos.y.fixed += g_Task->unk_10;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     if ((g_Task->pos.x.fixed == g_Task->unk_18) && (g_Task->pos.y.fixed == g_Task->unk_1C)) {
         GFX_FreePaletteFadeTarget(g_Task);
         g_BattleEffectBattler->param.unk_0B -= 1;
@@ -264,8 +264,8 @@ INCLUDE_ASM(func_801EFB8C);
 MATCH void func_801EFCF8(void) {
     PartyMember* work;
 
-    func_8014DAEC();
-    if (func_8014DAEC() != 0u) {
+    Actor_StepAnimOnce();
+    if (Actor_StepAnimOnce() != 0u) {
         work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();

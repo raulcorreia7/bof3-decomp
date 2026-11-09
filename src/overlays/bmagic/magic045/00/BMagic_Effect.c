@@ -37,7 +37,7 @@ MATCH void func_801EF2B0(void) {
     PartyMember* task;
 
     if (g_FrameCount & 1) {
-        func_8014D978();
+        Actor_StepAnimLoop();
     }
     g_Task->unk_5D -= 6;
     g_Task->unk_5E -= 6;

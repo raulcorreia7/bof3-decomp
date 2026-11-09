@@ -472,7 +472,8 @@ void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Abili
                    u8 sprite_flag);
 void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
-void func_801C1254(u8 ability_id, u8 party_slot);
+/* func_801C1254 */
+void Party_LoadMemberSprite(u8 character_id, u8 party_slot);
 void Shop_DispatchStep(void);
 void func_801D0EDC(void);
 void func_801D1000(void);

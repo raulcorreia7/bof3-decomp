@@ -11,17 +11,17 @@ MATCH void Char_AdvancePaletteScript(void) {
     state = g_Task->param.unk_0B;
     if (state != 0) {
         if (state == 2) {
-            if (func_8014DAEC() & 0xFF) {
+            if (Actor_StepAnimOnce() & 0xFF) {
                 Actor_SelectScript(g_Task->direction_08);
                 g_Task->param.unk_0B = 3;
             }
         } else {
-            func_8014D978();
+            Actor_StepAnimLoop();
         }
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             done = 1;
         }
-    } else if (func_8014DAEC() & 0xFF) {
+    } else if (Actor_StepAnimOnce() & 0xFF) {
         done = 1;
     }
     if (done & 0xFF) {

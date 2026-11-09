@@ -15,6 +15,6 @@ MATCH void func_8019BEFC(void) {
             func_8019BFD4();
         }
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     Area_SetDrawMode();
 }

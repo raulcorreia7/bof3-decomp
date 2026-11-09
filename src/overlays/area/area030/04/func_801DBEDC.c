@@ -18,6 +18,6 @@ MATCH void func_801DBEDC(void) {
     if ((g_InputPressed & (PADRup | PADRdown)) != 0) {
         FISHING_STATE->sub_index_03 = 0xE;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_801E16DC();
 }

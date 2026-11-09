@@ -10,7 +10,7 @@ MATCH void func_8019E1A0(void) {
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
     work->pos.z.fixed += work->vz;
-    func_8014D978();
+    Actor_StepAnimLoop();
     record     = g_Task;
     sceneTimer = record->timer;
     if (sceneTimer != 0) {

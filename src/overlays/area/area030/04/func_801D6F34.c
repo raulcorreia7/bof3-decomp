@@ -34,7 +34,7 @@ MATCH void func_801D6F34(void) {
     } else {
         FISHING_STATE->step_timer_09 = steps - 1;
         if (!(D_801E20CC[FISHING_STATE->step_index_0A - 1].anim_id & 0x80)) {
-            func_8014D978();
+            Actor_StepAnimLoop();
         }
     }
     FISHING_STATE->pos_x_0C += D_801E20CC[FISHING_STATE->step_index_0A - 1].delta_x;

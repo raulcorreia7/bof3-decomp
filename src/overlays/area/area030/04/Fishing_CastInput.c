@@ -33,5 +33,5 @@ MATCH void Fishing_CastInput(void) {
         next               = FISHING_STATE;
         next->sub_index_03 = 0;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

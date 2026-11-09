@@ -22,5 +22,5 @@ MATCH void func_801E7000(void) {
         Actor_SelectScript((g_Task->unk_06 + 8) & BYTE_MASK);
     }
     Area_AddActor();
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

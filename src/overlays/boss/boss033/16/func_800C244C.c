@@ -12,5 +12,5 @@ MATCH void func_800C244C(void) {
     if (work->unk_14 == -0x40) {
         work->header.step++;
     }
-    func_8014DAEC();
+    Actor_StepAnimOnce();
 }

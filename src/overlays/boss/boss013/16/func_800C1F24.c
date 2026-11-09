@@ -7,7 +7,7 @@ MATCH void func_800C1F24(void) {
     SYS_CopyString(*g_TextVariables, g_Characters[D_80181B11].name, 8);
     func_801DE560(2, 0, 0, 0x2D, Message_GetText(0x25U));
     D_800C26E0 = 0;
-    func_801C1254(1, 1);
+    Party_LoadMemberSprite(1, 1);
     g_Task->unk_29               = 4;
     g_BattleCurrentEnemy->script = &D_800C25FC;
     Actor_SelectScript((g_Task->facing + 4) & BYTE_MASK);

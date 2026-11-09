@@ -36,6 +36,6 @@ MATCH void Fishing_CatchPage(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         FISHING_STATE->sub_index_03++;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_801E16DC();
 }

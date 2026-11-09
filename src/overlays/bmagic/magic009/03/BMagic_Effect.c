@@ -69,7 +69,7 @@ MATCH void func_801EF788(void) {
             func_800AFC98(2, 5);
         }
     }
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         g_Task->unk_09 = 8;
         g_Task->header.step += 1;
     }

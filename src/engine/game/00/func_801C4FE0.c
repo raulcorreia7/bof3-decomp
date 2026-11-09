@@ -40,7 +40,7 @@ MATCH s32 func_801C4FE0(void) {
         Area_AdvanceScroll((s16)COORD_INT(g_Task->pos.z));
     }
     if (!(g_FrameCount & 3)) {
-        func_8014DAEC();
+        Actor_StepAnimOnce();
     }
     return moved;
 }

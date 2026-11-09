@@ -53,7 +53,7 @@ MATCH void func_801EF1EC(void) {
         g_Task->unk_2C.half = 0;
         g_Task->unk_2B      = 0;
         Actor_SelectScript(0U);
-        func_8014D978();
+        Actor_StepAnimLoop();
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
@@ -111,11 +111,11 @@ MATCH void func_801EF58C(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        func_8014DAEC();
+        Actor_StepAnimOnce();
         func_800AFC98(2, 4);
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
-    } else if (func_8014DAEC() & BYTE_MASK) {
+    } else if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0;
         g_BattleEffectBattler->param.unk_0B -= 1;
@@ -124,7 +124,7 @@ MATCH void func_801EF58C(void) {
 }
 
 MATCH void func_801EF648(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->unk_09--;
         g_Task->header.step++;
     }

@@ -53,7 +53,7 @@ MATCH void func_801CF500(void) {
 #include "overlays/plchar/Char_RunStepScriptPeco.h"
 
 MATCH void func_801CF70C(void) {
-    func_8014D978();
+    Actor_StepAnimLoop();
 }
 
 MATCH void func_801CF72C(void) {

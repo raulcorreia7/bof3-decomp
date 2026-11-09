@@ -9,7 +9,7 @@ MATCH void func_801BFAC4(void) {
         work        = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
         g_GameState = work;
         TASK_SET(work);
-        func_8014D978();
+        Actor_StepAnimLoop();
         i++;
     }
 }

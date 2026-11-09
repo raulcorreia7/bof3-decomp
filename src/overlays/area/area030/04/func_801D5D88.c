@@ -24,7 +24,7 @@ MATCH void func_801D5D88(void) {
         FISHING_STATE->step_index_0A += 1;
     } else {
         FISHING_STATE->step_timer_09 = mode - 1;
-        func_8014D978();
+        Actor_StepAnimLoop();
     }
     Area_AddActor();
     func_801E0C80(0, 1);

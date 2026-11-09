@@ -25,6 +25,6 @@ MATCH void func_801DBA94(void) {
     if (state->step_timer_09 == 0) {
         state->sub_index_03 = (state->sub_index_03 + 1);
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_801E16DC();
 }

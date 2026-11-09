@@ -10,5 +10,5 @@ MATCH void func_801DDDBC(void) {
     D_8014419E = 3;
     D_80144199 += 1;
     FISHING_STATE->sub_index_03 += 1;
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

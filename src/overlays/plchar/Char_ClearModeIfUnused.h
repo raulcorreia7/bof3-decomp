@@ -1,7 +1,7 @@
 /* Clears the probe-slot reference at the work byte +0x2B and the panel mode
  * byte in the game state record once the actor slot at the work byte +0x0B is
  * unused (its use flag is clear or its byte +0x01 is set) and the area camera
- * is not moving, then runs func_8014D978. Unlike Char_ClearModeIfSlotFree this
+ * is not moving, then runs Actor_StepAnimLoop. Unlike Char_ClearModeIfSlotFree this
  * member also clears the reference and accepts a slot whose byte +0x01 is set.
  * One definition shared by the plchar character programs; each program includes
  * it where the function sits, and a change must keep every member matching.
@@ -17,5 +17,5 @@ MATCH void Char_ClearModeIfUnused(void) {
         work->unk_2B                              = 0;
         g_Game.current->u.field.mode_12B.s8_value = 0;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

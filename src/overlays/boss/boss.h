@@ -41,7 +41,7 @@ static inline void Boss_StartEnemyScript(u8* script, ModeFunc handler, u16* step
     work = g_BattleCurrentEnemy;
     EnemyBattler_SetScript(work, script, handler, steps);
     ACTOR_SET_MODE(2);
-    func_8014D978();
+    Actor_StepAnimLoop();
 }
 
 /* Boss_StartEnemyScript for a boss whose handler also runs the combatant's action. */
@@ -54,7 +54,7 @@ static inline void Boss_StartEnemyScriptAction(u8* script, ModeFunc handler, u16
     work->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
     work->unk_E8 = steps;
     ACTOR_SET_MODE(2);
-    func_8014D978();
+    Actor_StepAnimLoop();
 }
 
 void func_800AC870(s32 entry_id, PartyMember* source_record, s32 mode);
@@ -126,7 +126,7 @@ void Boss_EndBattle3(void);
     do {                                                                  \
         EnemyBattler* work;                                               \
                                                                           \
-        func_8014DAEC();                                                  \
+        Actor_StepAnimOnce();                                             \
         Battle_DefeatEnemy();                                             \
         work = g_BattleCurrentEnemy;                                      \
         work->turn.damage_flags.value |= COMBATANT_FLAG_SKIP_ACTION_STEP; \

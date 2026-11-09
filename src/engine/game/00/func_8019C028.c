@@ -17,7 +17,7 @@ MATCH bool func_8019C028(void) {
         }
     }
     g_Task->header.mode = 4;
-    func_8014D978();
+    Actor_StepAnimLoop();
     Area_SetDrawMode();
     return 1;
 fail:

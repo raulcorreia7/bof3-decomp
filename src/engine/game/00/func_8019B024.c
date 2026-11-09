@@ -16,6 +16,6 @@ MATCH void func_8019B024(void) {
     g_Task->pos.z.fixed += g_Task->vz;
     diff       = g_Task->vz - g_Task->gravity;
     g_Task->vz = diff;
-    func_8014D978();
+    Actor_StepAnimLoop();
     Area_SetDrawMode();
 }

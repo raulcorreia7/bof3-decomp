@@ -36,7 +36,7 @@ MATCH void func_801EF19C(void) {
 INCLUDE_ASM(func_801EF238);
 
 MATCH void func_801EF3A4(void) {
-    func_8014D978();
+    Actor_StepAnimLoop();
     g_Task->unk_0C += g_Task->unk_18;
     g_Task->unk_10 += g_Task->unk_1C;
     g_Task->scale.x += g_Task->unk_0C;
@@ -50,7 +50,7 @@ MATCH void func_801EF3A4(void) {
 MATCH void func_801EF43C(void) {
     u8 timer;
 
-    func_8014D978();
+    Actor_StepAnimLoop();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
@@ -63,7 +63,7 @@ MATCH void func_801EF43C(void) {
 MATCH void func_801EF4A8(void) {
     PartyMember* work;
 
-    func_8014D978();
+    Actor_StepAnimLoop();
     work = g_Task;
     work->unk_0C += work->unk_18;
     work->unk_10 += work->unk_1C;
@@ -78,7 +78,7 @@ MATCH void func_801EF534(void) {
     u8 value;
     u8 value2;
 
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             value2                                     = g_Task->param.unk_0B;
             g_BattleEnemyBattlers[value2].header.flags = g_BattleEnemyBattlers[value2].header.flags & 0xBF;

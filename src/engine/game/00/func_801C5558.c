@@ -39,5 +39,5 @@ MATCH void func_801C5558(void) {
         work->header.step = 3;
     }
 
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

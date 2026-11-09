@@ -45,5 +45,5 @@ MATCH void func_801DC248(void) {
         SND_PlayBGM(0x28, 0x64, 8);
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

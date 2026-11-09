@@ -12,6 +12,6 @@ MATCH void func_800C1AB4(void) {
     }
     saved_work             = ((PartyMember*)g_Task);
     ((PartyMember*)g_Task) = D_801EC2E0->target.party;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     ((PartyMember*)g_Task) = saved_work;
 }

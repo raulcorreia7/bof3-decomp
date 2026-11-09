@@ -9,5 +9,5 @@ MATCH void func_800C1DCC(void) {
     work->unk_E8        = D_800C3194;
     g_Task->facing      = FACING_RIGHT;
     g_Task->header.mode = 2;
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

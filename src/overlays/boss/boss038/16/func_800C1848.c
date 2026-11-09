@@ -7,7 +7,7 @@ MATCH void func_800C1848(void) {
     g_BattleCurrentEnemy->unk_E8 = g_BossEnemyActionTable;
     g_BattleCurrentEnemy->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
     g_Task->header.mode = 2;
-    func_8014D978();
+    Actor_StepAnimLoop();
     if (SYS_TestFlag(g_SceneFlags, 2) != 0) {
         Battle_LoadEnemyBattler((g_BattleCurrentEnemy->slot - 3) & BYTE_MASK,
                                 func_800AC704(ENEMY_ID_AMMONITE_ALT) & BYTE_MASK);

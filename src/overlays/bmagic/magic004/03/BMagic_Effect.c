@@ -77,7 +77,7 @@ MATCH void func_801EFD84(void) {
             SND_QueueSelectionFx(0x101);
         }
     }
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
         return;

@@ -124,7 +124,7 @@ box_16:
         g_ActorSlots[0].scene_step = 0;
     }
     if (g_ActorSlots[0].selection > 0) {
-        func_8014D978();
+        Actor_StepAnimLoop();
     }
 }
 #else

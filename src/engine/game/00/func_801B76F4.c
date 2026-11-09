@@ -23,5 +23,5 @@ MATCH void func_801B76F4(void) {
         (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
         Area_AdvanceScroll((s16)COORD_INT(g_Task->pos.z));
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

@@ -79,7 +79,7 @@ MATCH void func_801EF518(void) {
 MATCH void func_801EF5A4(void) {
     u8 timer;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
@@ -88,7 +88,7 @@ MATCH void func_801EF5A4(void) {
 }
 
 MATCH void func_801EF608(void) {
-    if ((BATTLE_ACTIVE_WORK->param.unk_0B == 0) && (func_8014DAEC() & BYTE_MASK)) {
+    if ((BATTLE_ACTIVE_WORK->param.unk_0B == 0) && (Actor_StepAnimOnce() & BYTE_MASK)) {
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }
@@ -193,7 +193,7 @@ INCLUDE_ASM(func_801EFAF4);
 INCLUDE_ASM(func_801EFBA0);
 
 MATCH void func_801EFD10(void) {
-    if (func_8014D978() & BYTE_MASK) {
+    if (Actor_StepAnimLoop() & BYTE_MASK) {
         if (g_Task->param.unk_0B == 7) {
             func_800A9820(g_Battle.target_selector);
         }

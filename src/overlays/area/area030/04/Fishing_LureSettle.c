@@ -6,7 +6,7 @@
 MATCH void Fishing_LureSettle(void) {
     FishingState* record;
 
-    if (func_8014DAEC() != 0u) {
+    if (Actor_StepAnimOnce() != 0u) {
         Actor_SelectScript(3);
         record                   = FISHING_STATE;
         record->handler_index_01 = (record->handler_index_01 + 1);

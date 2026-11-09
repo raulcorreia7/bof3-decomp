@@ -143,7 +143,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             break;
         }
         case ACTOR_SCRIPT_MOTION_WAIT_SCRIPT_READY:
-            if (func_8014DAEC() != 0)
+            if (Actor_StepAnimOnce() != 0)
                 return value;
             g_Task->option_flags |= ACTOR_OPT_WAIT_STREAM;
             state->index_0A--;

@@ -15,7 +15,7 @@ MATCH void func_801A65A0(u8* script) {
         TASK_SET(&g_Actors[slot]);
         g_CurrentActor = &g_Actors[slot];
         func_801A4AA8();
-        func_801C1254(script[1], script[0xF]);
+        Party_LoadMemberSprite(script[1], script[0xF]);
         g_Task->header.flags = ACTOR_FLAG_IN_USE;
         coord_x              = script[5] << 16;
         slot_off             = *counter * ACTOR_SIZE;

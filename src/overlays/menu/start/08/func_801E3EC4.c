@@ -11,7 +11,7 @@ MATCH void func_801E3EC4(void) {
     *hint             = 0;
     g_Game.current    = g_BattlePartyBattlers;
     TASK_SET(g_BattlePartyBattlers);
-    func_801C1254(0, 0);
+    Party_LoadMemberSprite(0, 0);
     TASK_BYTES[0]                    = 1;
     g_Game.current->chr.character_id = 0;
     work                             = TASK_BYTES;

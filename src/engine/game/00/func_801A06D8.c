@@ -57,14 +57,14 @@ MATCH u32 func_801A06D8(void) {
                     j = 0;
                     do {
                         j++;
-                        func_8014D978();
+                        Actor_StepAnimLoop();
                     } while (j <= n);
                 }
             } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                 if (g_Task->header.flags & ACTOR_FLAG_STEP_MOVE) {
-                    func_8014D978();
+                    Actor_StepAnimLoop();
                 } else {
-                    func_8014DAEC();
+                    Actor_StepAnimOnce();
                 }
             }
         }

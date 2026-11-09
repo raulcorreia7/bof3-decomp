@@ -17,5 +17,5 @@ MATCH void func_800A8DE8(void) {
     work->unk_09 = 8u;
     work         = (PartyMember*)g_Task;
     work->header.mode++;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
 }

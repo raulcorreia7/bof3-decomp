@@ -35,7 +35,7 @@ MATCH void func_801DE944(void) {
             row = 0;
             do {
                 TASK_SET(((u8*)g_Game.members + row));
-                func_801C1254(FIELD(u8, &g_Game.members[0].chr.character_id, row), i);
+                Party_LoadMemberSprite(FIELD(u8, &g_Game.members[0].chr.character_id, row), i);
                 Actor_SelectScript(g_Task->direction_08);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
@@ -62,7 +62,7 @@ MATCH void func_801DE944(void) {
         g_Game.members[0].slot   = 0;
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
         g_Task->unk_48           = 0;
-        func_801C1254(g_Game.members[0].chr.character_id, 0);
+        Party_LoadMemberSprite(g_Game.members[0].chr.character_id, 0);
         Actor_SelectScript(g_Task->direction_08);
         ACTOR_SET_MODE(0);
         g_Task->header.step = 0;

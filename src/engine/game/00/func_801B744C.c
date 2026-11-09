@@ -3,7 +3,7 @@
 MATCH void func_801B744C(void) {
     u8 rate; /* the g_RouteSpeedScale entry func_801BC4D0 calls the rate */
 
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         rate            = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
         g_Task->timer   = 32 / rate;
         g_Task->vx      = g_FacingOffsets[g_Task->direction_08].x * rate * (g_Task->state_70.byte + 1);

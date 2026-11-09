@@ -42,7 +42,7 @@ MATCH void Fishing_HookedReel(void) {
         work = FISHING_STATE;
         if (work->step_timer_09 != 0) {
             work->step_timer_09 -= 1;
-            func_8014D978();
+            Actor_StepAnimLoop();
         counted:
             D_80144216 += 1;
         } else {
@@ -60,7 +60,7 @@ MATCH void Fishing_HookedReel(void) {
         if (g_InputHeld & PADRdown) {
             func_801DB0AC();
             func_801DB04C();
-            func_8014D978();
+            Actor_StepAnimLoop();
         counted_again:
             counter = &D_80144216;
             *counter += 1;
@@ -83,7 +83,7 @@ MATCH void Fishing_HookedReel(void) {
         D_801E31F8 = 1;
         D_8014421C = g_FishingRodRow->sbyte_04;
         Actor_RequestScript(7);
-        func_8014D978();
+        Actor_StepAnimLoop();
         D_80144216 += 1;
     } else {
         D_801E31F8                            = 0;

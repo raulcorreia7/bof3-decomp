@@ -96,7 +96,7 @@ INCLUDE_ASM(func_801EFEE8);
 MATCH void func_801F0140(void) {
     s32 value;
 
-    func_8014D978();
+    Actor_StepAnimLoop();
     g_Task->scale.x += 0x800;
     g_Task->scale.y += 0x800;
     g_Task->pos.x.fixed += rsin(g_Task->unk_14) * g_Task->unk_0C;

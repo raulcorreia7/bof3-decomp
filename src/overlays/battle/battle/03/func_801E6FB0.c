@@ -40,7 +40,7 @@ MATCH void func_801E6FB0(void) {
         g_Task->header.mode = 0;
     }
     func_801E8DD8();
-    func_8014D978();
+    Actor_StepAnimLoop();
     Area_AddActor();
     if ((Battle_SlotIsBlocked(g_BattleEffectBattler->slot) & BYTE_MASK) && !ACTOR_IN_USE(*g_BattleEffectBattler)) {
         g_Task->header.mode = 0;

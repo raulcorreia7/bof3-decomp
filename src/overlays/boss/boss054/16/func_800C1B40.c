@@ -5,7 +5,7 @@ MATCH void func_800C1B40(void) {
 
     saved = (PartyMember*)g_Task;
     TASK_SET((D_801EC2E0->target.bytes));
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         saved->timer = 0;
         saved->header.mode++;
     }

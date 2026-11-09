@@ -1,6 +1,9 @@
 #include "game_00.h"
 
-MATCH void func_801C1254(s32 ability_id, s32 party_slot) {
+/* func_801C1254 */
+/* Loads the party member's field sprite into the work record: the character bank section, sprite page, sheet row,
+ * CLUT selector (party_slot + 0x78), palette kind and the slot's palette. */
+MATCH void Party_LoadMemberSprite(s32 character_id, s32 party_slot) {
     Actor*    work;
     const u8* base;
     const u8* entry;
@@ -16,7 +19,7 @@ MATCH void func_801C1254(s32 ability_id, s32 party_slot) {
     Actor* next_5d;
 
     index = 0;
-    key   = ability_id & BYTE_MASK;
+    key   = character_id & BYTE_MASK;
     hint  = g_EmiLoadedCharacterIndex;
     base  = D_80181B34[0];
     entry = base + (hint & 0x7F) * 3;

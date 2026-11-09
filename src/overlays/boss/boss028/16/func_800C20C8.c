@@ -5,5 +5,5 @@ MATCH void func_800C20C8(void) {
     if (!ACTOR_IN_USE(*g_BattleEffectBattler)) {
         g_Task->header.step++;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

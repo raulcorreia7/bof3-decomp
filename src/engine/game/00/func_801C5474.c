@@ -22,6 +22,6 @@ MATCH s32 func_801C5474(void) {
     if (state->timer == state->unk_0A) {
         GFX_LoadPalette(((state->unk_05 << 6) + GAME_PALETTE_STAGE), 0);
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     return 0;
 }

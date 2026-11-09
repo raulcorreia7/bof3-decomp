@@ -16,5 +16,5 @@ MATCH void func_801B7658(void) {
     if (g_Task->unk_05 == 0) {
         Area_AdvanceScroll(COORD_INT(g_Task->pos.z));
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

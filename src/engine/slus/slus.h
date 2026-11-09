@@ -1052,7 +1052,8 @@ extern const MenuPanelFuncs  g_MenuPanels;
 void        func_8014C47C(struct Vec3W* a, struct Vec3W* b);
 extern void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
 extern void Actor_BeginScript(s32 raw_selector, s32 raw_code);
-extern void func_8014DB98(void);
+/* func_8014DB98 */
+extern void Actor_StageAnimStep(void);
 /* Retail function prototypes (one declaration each). */
 s8          func_8014DE78(void);
 extern void GFX_ExpandRgb555(u32* pixels, RECT rect);
@@ -1260,7 +1261,8 @@ extern const ObjectFunc
     g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8  D_8017F90D;
 void       func_801A17A0(u8* entry_record);
-void       func_801C1254(s32 ability_id, s32 party_slot, s32 ignored);
+/* func_801C1254 */
+void       Party_LoadMemberSprite(s32 character_id, s32 party_slot, s32 ignored);
 void       func_801D0C04(void);
 extern s32 func_801F2C04(void);
 

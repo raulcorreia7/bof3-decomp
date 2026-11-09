@@ -16,5 +16,5 @@ MATCH void func_800C1848(void) {
     }
     g_BattleCurrentEnemy->unk_E4 = func_800C1934;
     g_Task->header.mode          = 2;
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

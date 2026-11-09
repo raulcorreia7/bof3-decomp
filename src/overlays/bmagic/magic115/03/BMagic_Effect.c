@@ -74,8 +74,8 @@ MATCH void func_801EF690(void) {
 }
 
 MATCH void func_801EF7A4(void) {
-    func_8014DAEC();
-    if (func_8014DAEC() != 0u) {
+    Actor_StepAnimOnce();
+    if (Actor_StepAnimOnce() != 0u) {
         g_Task->header.step = g_Task->header.step + 2;
     }
 }
@@ -85,7 +85,7 @@ MATCH void func_801EF7F4(void) {
     g_Task->unk_5D -= 4;
     g_Task->unk_5E -= 4;
     g_Task->unk_5F -= 4;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     g_Task->unk_5D = value;
     g_Task->header.step += 1;
 }

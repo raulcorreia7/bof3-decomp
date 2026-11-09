@@ -7,5 +7,5 @@ MATCH void func_801DC514(void) {
         func_801DDE94(3);
         FISHING_STATE->sub_index_03 += 1;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

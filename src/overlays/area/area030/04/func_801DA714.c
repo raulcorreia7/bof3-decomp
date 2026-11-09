@@ -5,7 +5,7 @@
 MATCH void func_801DA714(void) {
     FishingState* record;
 
-    func_8014D978();
+    Actor_StepAnimLoop();
     record = FISHING_STATE;
     if (record->flags_58 == 6) {
         g_ActorSlots[0].header.mode = (g_ActorSlots[0].header.mode + 1);

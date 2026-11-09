@@ -45,7 +45,7 @@ MATCH void func_801EEE50(void) {
 
     work   = g_Task;
     g_Task = D_801EC2E0->target.party;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     g_Task        = work;
     work->unk_09  = 0;
     g_Task->timer = 0;

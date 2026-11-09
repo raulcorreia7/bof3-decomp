@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-/* Blocker: copies 16 halfwords from 0x80036C00 to 0x8003AC00 (unnamed data, no table yet) and swaps the scratchpad work pointer to g_BattleEffectBattler around func_8014D978. */
+/* Blocker: copies 16 halfwords from 0x80036C00 to 0x8003AC00 (unnamed data, no table yet) and swaps the scratchpad work pointer to g_BattleEffectBattler around Actor_StepAnimLoop. */
 INCLUDE_ASM(func_801EEC88);
 
 INCLUDE_ASM(func_801EED60);
@@ -16,7 +16,7 @@ MATCH void func_801EEED8(void) {
 
     saved_work = g_Task;
     g_Task     = g_BattleEffectBattler;
-    func_8014D978();
+    Actor_StepAnimLoop();
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {
         func_800A9820(g_Battle.target_selector);
@@ -80,7 +80,7 @@ MATCH void func_801EF5D0(void) {
 }
 
 MATCH void func_801EF6A4(void) {
-    if (func_8014D978() != 0u) {
+    if (Actor_StepAnimLoop() != 0u) {
         g_Task->header.step = g_Task->header.step + 1;
     } else {
         Area_AddActor();

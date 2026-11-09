@@ -6,7 +6,7 @@ MATCH void func_800C18FC(void) {
 
     Actor_RequestScript(4);
     ((Actor*)g_Task)->unk_2A = 0;
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     Battle_DefeatEnemy();
     work = g_BattleCurrentEnemy;
     work->turn.damage_flags.value |= COMBATANT_FLAG_SKIP_ACTION_STEP;

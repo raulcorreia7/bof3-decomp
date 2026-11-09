@@ -148,7 +148,7 @@ MATCH void func_801EFB68(void) {
     g_Task->pos.x.fixed += (rsin((g_Task->timer & 0x3F) << 8) * 8) >> 3;
     g_Task->pos.y.fixed += (rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) - 8;
-    if ((func_8014DAEC() & BYTE_MASK) || (COORD_INT(g_Task->pos.z) < g_Task->unk_14)) {
+    if ((Actor_StepAnimOnce() & BYTE_MASK) || (COORD_INT(g_Task->pos.z) < g_Task->unk_14)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.flags = 0;
         g_Task->header.mode  = 0;

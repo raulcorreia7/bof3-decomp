@@ -81,7 +81,7 @@ MATCH void func_801EFB64(void) {
 MATCH void func_801EFBF8(void) {
     u8 count;
 
-    func_8014D978();
+    Actor_StepAnimLoop();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
@@ -94,7 +94,7 @@ MATCH void func_801EFBF8(void) {
 INCLUDE_ASM(func_801EFC74);
 
 MATCH void func_801EFEF0(void) {
-    if (func_8014DAEC() != 0u) {
+    if (Actor_StepAnimOnce() != 0u) {
         g_Task->unk_09      = 0xF;
         g_Task->header.step = g_Task->header.step + 1;
     }

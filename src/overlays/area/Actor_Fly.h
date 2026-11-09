@@ -20,6 +20,6 @@ MATCH void Actor_Fly(void) {
     work = g_Task;
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_8014D290();
 }

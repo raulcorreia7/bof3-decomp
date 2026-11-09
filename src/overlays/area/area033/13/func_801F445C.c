@@ -17,6 +17,6 @@ MATCH void func_801F445C(void) {
     work = (u8*)g_Task;
     *(s32*)(work + 0x34) += *(s32*)(work + 0x0C);
     *(s32*)(work + 0x38) += *(s32*)(work + 0x10);
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_8014D290();
 }

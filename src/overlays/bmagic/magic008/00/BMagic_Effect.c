@@ -169,7 +169,7 @@ MATCH void func_801F037C(void) {
 MATCH void func_801F03FC(void) {
     u8 counter;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
@@ -180,7 +180,7 @@ MATCH void func_801F03FC(void) {
 }
 
 MATCH void func_801F047C(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         SND_QueueSelectionFx(0x101);
         g_Task->unk_09 = 0xF;
         g_Task->header.step += 1;
@@ -236,7 +236,7 @@ MATCH void func_801F0710(void) {
 MATCH void func_801F07D4(void) {
     u8 counter;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
@@ -248,7 +248,7 @@ MATCH void func_801F07D4(void) {
 }
 
 MATCH void func_801F0864(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         SND_QueueSelectionFx(0x101);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
@@ -288,10 +288,10 @@ MATCH void func_801F0A20(void) {
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & BYTE_MASK)) {
-        func_8014DAEC();
+        Actor_StepAnimOnce();
         func_800AFC98(2, 4);
         g_Task->header.step += 1;
-    } else if (func_8014DAEC() & BYTE_MASK) {
+    } else if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
@@ -300,7 +300,7 @@ MATCH void func_801F0A20(void) {
 }
 
 MATCH void func_801F0AC8(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800A9820(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
@@ -342,7 +342,7 @@ MATCH void func_801F0FA4(void) {
     if (g_FrameCount & 1) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-        func_8014DAEC();
+        Actor_StepAnimOnce();
         value          = g_Task->unk_09 - 1;
         g_Task->unk_09 = value;
         if (!(value & BYTE_MASK)) {
@@ -358,7 +358,7 @@ MATCH void func_801F0FA4(void) {
 INCLUDE_ASM(func_801F1090);
 
 MATCH void func_801F117C(void) {
-    if ((func_8014DAEC() & BYTE_MASK) != 0u) {
+    if ((Actor_StepAnimOnce() & BYTE_MASK) != 0u) {
         g_Task->header.step += 1u;
     }
 }
@@ -392,7 +392,7 @@ MATCH void func_801F1294(void) {
 MATCH void func_801F1384(void) {
     u8 timer;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
@@ -403,7 +403,7 @@ MATCH void func_801F1384(void) {
 }
 
 MATCH void func_801F1400(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         if (g_Task->header.step == 5) {
             g_BattleEffectBattler->param.unk_0B = 0xFF;
         }
@@ -434,7 +434,7 @@ MATCH void Effect_ReloadTimerAndStep2(void) {
 MATCH void func_801F1804(void) {
     u8 timer;
 
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
@@ -445,7 +445,7 @@ MATCH void func_801F1804(void) {
 }
 
 MATCH void func_801F1880(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
         if (g_Task->header.step == 8) {
             g_BattleEffectBattler->param.unk_0B = 0xFF;
         }

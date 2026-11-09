@@ -38,6 +38,6 @@ MATCH void func_801DC0CC(void) {
         work->sub_index_03 = (work->sub_index_03 + 1);
     }
     Menu_DrawCursorSprite(32, FISHING_STATE->cue_index_06 * 12 + 182, 0);
-    func_8014D978();
+    Actor_StepAnimLoop();
     func_801E16DC();
 }

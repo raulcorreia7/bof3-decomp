@@ -473,7 +473,8 @@ extern s16  Char_AddStat(u16* value, s16 delta);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
 bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 s32         func_801B6470(u8 arg0);
-void        func_801C1254(s32 ability_id, s32 save_slot);
+/* func_801C1254 */
+void        Party_LoadMemberSprite(s32 character_id, s32 save_slot);
 /* The start overlay's handler tables call these functions. */
 void        func_801D177C(void);
 void        func_801D1B24(void);

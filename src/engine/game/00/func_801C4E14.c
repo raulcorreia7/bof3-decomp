@@ -24,6 +24,6 @@ MATCH s32 func_801C4E14(void) {
         Actor_RequestScript(work->direction_08);
         g_Task->unk_0A = 4U;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     return inactive;
 }

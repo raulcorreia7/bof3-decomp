@@ -29,7 +29,7 @@ MATCH void func_801D5958(void) {
         cur->step_index_0A = (cur->step_index_0A + 1);
     } else {
         work->step_timer_09 = (work->step_timer_09 - 1);
-        func_8014D978();
+        Actor_StepAnimLoop();
     }
     Area_AddActor();
 }

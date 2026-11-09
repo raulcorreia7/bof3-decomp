@@ -5,13 +5,13 @@ MATCH void func_8019ED40(void) {
         if (g_Task->param.unk_0B == 0u) {
             return;
         }
-        if (func_8014DAEC() != 0u) {
+        if (Actor_StepAnimOnce() != 0u) {
             g_Task->param.unk_0B = 1;
         }
         if (g_Task->param.unk_0B != 2u) {
             return;
         }
-    } else if ((func_8014DAEC() != 0u) || (g_Task->param.unk_0B != 0u)) {
+    } else if ((Actor_StepAnimOnce() != 0u) || (g_Task->param.unk_0B != 0u)) {
         Actor_Clear();
         return;
     }

@@ -31,6 +31,6 @@ MATCH void func_8019C794(void) {
             g_ActorSlots[index].header.mode  = 3;
         }
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
     Area_SetDrawMode();
 }

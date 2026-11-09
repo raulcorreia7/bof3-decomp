@@ -139,7 +139,7 @@ INCLUDE_ASM(func_801F023C);
 MATCH void func_801F042C(void) {
     u8 count;
 
-    func_8014D978();
+    Actor_StepAnimLoop();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {

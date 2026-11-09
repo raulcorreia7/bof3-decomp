@@ -1,10 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* runs down the delay byte at work offset 0x4A; at zero it compares half the staged index (0x58) with the
- * filter byte (0x49): a match zeroes the index and reports 1, otherwise a 0x80 command byte reloads the index from
- * the next byte and reports 1. An expired delay always advances the stream through func_8014DB98.
+/* Loops the sprite animation: counts the step delay (+0x4A) down and, at zero, wraps to step 0 at the end of the
+ * stream (step count at +0x49) or follows a jump step (delay >= 0x80), returning 1 on a wrap or jump, then stages the step.
  */
-MATCH u8 func_8014D978(void) {
+/* func_8014D978 */
+MATCH u8 Actor_StepAnimLoop(void) {
     Actor* first_work;
     Actor* work;
     u8*    entry;
@@ -26,7 +26,7 @@ MATCH u8 func_8014D978(void) {
                 result          = 1;
             }
         }
-        func_8014DB98();
+        Actor_StageAnimStep();
     }
     return result;
 }

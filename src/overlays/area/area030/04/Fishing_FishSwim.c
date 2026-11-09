@@ -76,5 +76,5 @@ MATCH void Fishing_FishSwim(void) {
         }
     }
     Fishing_MoveFish();
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

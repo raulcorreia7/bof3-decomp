@@ -24,5 +24,5 @@ MATCH void func_800C1A4C(void) {
         g_Battle.boss_flags |= 1 << ((PartyMember*)g_Task)->slot;
         ((PartyMember*)g_Task)->header.step += 1;
     }
-    func_8014D978();
+    Actor_StepAnimLoop();
 }

@@ -13,7 +13,7 @@ MATCH void Effect_ShakeScreen(void) {
         work         = (PartyMember*)g_Task;
         work->unk_5E = -(work->param.unk_0B * 16);
     }
-    func_8014DAEC();
+    Actor_StepAnimOnce();
     {
         PartyMember* work;
         u8           old;

@@ -8,5 +8,5 @@ MATCH void func_800C1934(void) {
     work->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
     work->unk_E8 = BOSS_ENEMY_STEP_DATA;
     ACTOR_SET_MODE(2);
-    func_8014D978();
+    Actor_StepAnimLoop();
 }
