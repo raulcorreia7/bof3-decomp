@@ -9,14 +9,7 @@
 
 #define PARTY_STATE_PTR  MEM_PTR(volatile PartyState, PARTY_STATE_BASE)
 
-/* Game RAM at 0x80140000 that scenario overlays and battle also write; the
- * party state is the only part modelled here.
- *
- * Only the fields below are modelled. The spans left as pad are
- * not free memory: overlays that map over this base reuse them, e.g.
- * battle/battle/03 func_801D9428 writes the bytes at +0x83C2..+0x83C7 and battle/battle/15
- * func_800A4458 the halfwords at +0x5F1E..+0x5F4E. Read a pad as "not modelled
- * here", never as "unused". */
+/* Game RAM at 0x80140000 that scenario overlays and battle also write. */
 typedef struct PartyState {
     u8                       pad_0000[0x4f59];
     /* 0x4F59 */ volatile u8 menu_flags; /* sisyou reads it as the master-menu flags byte */
