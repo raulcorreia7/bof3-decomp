@@ -146,8 +146,7 @@ extern s8 g_MessageChoice;
  * substate, timer and the fade/phase words below) drives text boxes, choices
  * and transitions. The game, shop, start-menu and scenario overlays read these
  * words; the shared calls resolve resources, decode pad input and queue cues.
- * Evidence: the writer/reader addresses beside the names and
- * @source: wiki:data/text. */
+ * Format: @source: wiki:data/text. */
 
 /* The work-list draw flags in D_8014832E: the draw pass sorts the work table
  * by its key, then walks the records the set bits ask for. */

@@ -11,9 +11,9 @@
  *
  * The base order and the pointer-table contents come from the shipped image:
  * each table holds the five ID arrays and four quantity arrays in the order
- * below. The first four category labels are proven in code; the fifth ID
+ * below. The code confirms the first four category labels; the fifth ID
  * array's vital-item label is inferred from its position and the category-4
- * vital-item code, so it stays a candidate name.
+ * vital-item code.
  *
  * Category codes match ITEM_CAT_* in game/item.h.
  */

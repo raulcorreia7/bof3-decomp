@@ -73,7 +73,7 @@
  * and the layout are one record and the overlays include this view instead of
  * redeclaring it.
  *
- * Evidence: `emi/etc/shop/00@0x801D2828` and `@0x801D334C` build the shop
+ * Writers and readers: `emi/etc/shop/00@0x801D2828` and `@0x801D334C` build the shop
  * panel (group 0, the group's first entry, the cursor, the drawn cursor 0xFF);
  * `emi/etc/start/08@0x801D3D00` reads the same four fields of the start panel
  * through D_801C893C and D_801C8950 and clears the drawn cursor with 0xFF.
@@ -145,7 +145,7 @@ ASSERT_SIZE(MenuListSource, 2);
 /* The list panel record, handed to the panel drawers as a pointer: the
  * shop's ability and item lists (Shop_DrawAbilities, Shop_DrawItems) and the
  * ability list of the bate overlay read the same cells. The record's extent
- * is not proven; 0x24 is the last proven cell, the names pointer. */
+ * is unknown; 0x24, the names pointer, is the last known cell. */
 typedef struct MenuListPanel {
     u8             pad_00[4];
     UPoint2D       pos;         /* 0x04 */
