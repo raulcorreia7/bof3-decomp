@@ -500,6 +500,7 @@
 "exe/slus_004_22@0x8015A344"	"nonmatching 59.09%: opcode@+0x000c; lifted draft from the first draft, compiling C only (its jump table rodata is not yet placed). resume: a lever or header fix that closes the first mismatch."	""	"59.09%"
 "exe/slus_004_22@0x8015A9A4"	"nonmatching 51.63%: lifted from the first draft with gte_ macros; branch order of the first loads differs. resume: load order of g_AreaTileOriginX/g_AreaTileOriginY and the 0x38 reload."	""	"51.63%"
 "exe/slus_004_22@0x8015BEA0"	"nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best score 53.64%. resume: a lever or header fix that closes the first mismatch."	""	"53.64%"
+"exe/slus_004_22@0x8015BEA0"	"remove initialization; direct table access; explicit return branch"	"0x8015BEA4 li a2,4 versus argument move"	"53.64% (prior pinned draft)"
 "exe/slus_004_22@0x80161454"	"nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best score 48.50%. resume: a lever or header fix that closes the first mismatch."	""	"48.50%"
 "exe/slus_004_22@0x80166FF8"	"A barrier after the party bytes moves the"	"to +0x18; indexed and pinned loops also differ."	""
 "exe/slus_004_22@0x80167428"	"nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 39.27%. resume: a lever or header fix that closes the first mismatch."	""	"39.27%"

@@ -127,4 +127,7 @@ def test_attempt_notes_are_rejected() -> None:
     assert problems("/* First difference: register. */\nMATCH void f(void) {}\n") == [
         "attempt note belongs in config/attempts.tsv"
     ]
+    assert problems("/* nonmatching unmeasured: draft. */\n") == [
+        "attempt note belongs in config/attempts.tsv"
+    ]
     assert problems('MATCH void f(void) { char *s = "First difference:"; }\n') == []

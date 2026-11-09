@@ -129,7 +129,7 @@ def check_text(text: str, path: str = "<text>") -> list[Violation]:
                     )
                 )
             elif re.search(
-                r"\b(?:NON_MATCHING(?:\s|:)|first diff(?:erence|ering)?|\btried\b)",
+                r"\b(?:NON_?MATCHING(?:\s|:)|first diff(?:erence|ering)?|\btried\b)",
                 tok,
                 re.I,
             ):
