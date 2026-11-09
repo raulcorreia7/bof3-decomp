@@ -1,3 +1,3 @@
 #include "area121_14.h"
 
-#include "overlays/area/Area_SlideActorUpOrClear.h"
+#include "overlays/area/Area_NarrowActorOrClear.h"

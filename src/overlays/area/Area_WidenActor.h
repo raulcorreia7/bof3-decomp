@@ -3,7 +3,7 @@
  * handler to mode 3.
  */
 /* func_801F3228 (area115), func_801F323C (area121) */
-MATCH void Area_SlideActorDown(void) {
+MATCH void Area_WidenActor(void) {
     Actor* work;
     Actor* reload;
     u8     timer;

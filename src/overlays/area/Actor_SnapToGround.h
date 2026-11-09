@@ -8,9 +8,9 @@ MATCH void Actor_SnapToGround(void) {
     Actor* depth_target;
     s32    result;
 
-    work                         = g_Task;
-    result                       = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
-    depth_target                 = g_Task;
+    work                      = g_Task;
+    result                    = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    depth_target              = g_Task;
     depth_target->pos.z.fixed = result << 16;
     depth_target->header.mode++;
 }
