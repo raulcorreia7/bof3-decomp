@@ -17,9 +17,7 @@
 #define LZ77_CONTROL_MATCH_LENGTH_MASK   0x0F
 #define LZ77_CONTROL_END                 0xFF
 
-/* Decoder control stream (`exe/slus_004_22@0x801640E4`): bit 4 marks a literal
- * run of 0x20 - low five bits bytes; otherwise the byte is a back-reference of
- * (0xE0 high bits, 0x0F low bits) length. 0xFF ends the stream. */
+/* Decoder control stream (`exe/slus_004_22@0x801640E4`). */
 typedef enum Lz77ControlFlags {
     LZ77_CONTROL_LITERAL_FLAG = 1 << 4,
 } Lz77ControlFlags;

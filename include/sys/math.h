@@ -3,8 +3,7 @@
 
 #include "types.h"
 
-/* 4096 is 1.0 and one turn; angles use the same unit. PsyQ <libgte.h> also
- * defines ONE with the same value. */
+/* 4096 is 1.0 and one turn; angles use the same unit. */
 #ifndef ONE
 #define ONE 4096
 #endif
@@ -24,17 +23,7 @@
 /* A degree count converted to the 4096-unit angle at run time. */
 #define DEG(degrees)    ((degrees) * ONE / 360)
 
-/* In-place integer lower bound. Standard statement macro: trailing semicolon
- * required. It bounds a stable lvalue in place and keeps the retail
- * comparison, spelling, signedness and read order, so an argument that reads
- * memory or a volatile keeps its original repeated-read behavior. The bound
- * must be side-effect free.
- *
- *   CLAMP_MIN(value, min);   raises value to at least min
- *
- * No upper-bound companion: its two sites keep their explicit branch
- * (world00/area027/13 func_801F2F0C).
- */
+/* In-place integer lower bound. */
 #define CLAMP_MIN(value, min)  \
     do {                       \
         if ((value) < (min)) { \
