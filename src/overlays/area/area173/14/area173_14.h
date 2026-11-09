@@ -30,11 +30,11 @@ void func_801F3060(s32 arg0, s32 arg1);
 void func_801F3324(s32 source_y, s32 dest_y);
 
 /* Steps the cycling frame timer and copies the frame row at table offset to dest_y every sixth tick. */
-#define AREA_CYCLE_FRAME(offset, dest_y)                                  \
-    g_Task->timer++;                                                      \
-    if (g_Task->timer % 6 == 0) {                                         \
-        g_Task->timer = (g_Task->timer < 24) ? g_Task->timer : 0;         \
-        func_801F3324(D_801F4ED4[(offset) + g_Task->timer / 6], dest_y);  \
+#define AREA_CYCLE_FRAME(offset, dest_y)                                 \
+    g_Task->timer++;                                                     \
+    if (g_Task->timer % 6 == 0) {                                        \
+        g_Task->timer = (g_Task->timer < 24) ? g_Task->timer : 0;        \
+        func_801F3324(D_801F4ED4[(offset) + g_Task->timer / 6], dest_y); \
     }
 
 #endif
