@@ -37,7 +37,11 @@ MATCH void func_801F707C(void) {
     SYS_DISPATCH_TASK(D_801FE8A0, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F70C0);
+MATCH void func_801F70C0(void) {
+    u8 i;
+
+    SCENA08_SPARKLE_START(i, EMI_CUE_ID(SND_BANK_AREA, 0x08));
+}
 
 MATCH void func_801F7164(void) {
     u16 count;
@@ -68,16 +72,7 @@ MATCH void func_801F73D4(void) {
 MATCH void func_801F743C(void) {
     u8 i;
 
-    g_Task->unk_5A = 0x20;
-    g_Task->unk_32 = 0;
-    g_Task->script_pc = 0;
-    for (i = 0; i < 0x40; i++) {
-        g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
-        func_801F81F4(g_Task->script_pc);
-    }
-    g_Task->unk_2C = 0;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
-    g_Task->header.mode += 1;
+    SCENA08_SPARKLE_START(i, EMI_CUE_ID(SND_BANK_AREA, 0x02));
 }
 
 MATCH void func_801F74E0(void) {
@@ -420,7 +415,16 @@ MATCH void func_801F9AC0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F9B68);
+MATCH void func_801F9B68(void) {
+    g_Task->pos.x.fixed += g_Task->vx;
+    g_Task->pos.y.fixed += g_Task->vy;
+    g_Task->pos.z.fixed += g_Task->vz;
+    g_Task->vz -= 0x100000;
+    func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
+    if (g_Task->pos.y.fixed == 0x360000) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F9C00(void) {
     Actor* work;
