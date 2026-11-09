@@ -10,7 +10,7 @@ MATCH void func_801F23A4(void) {
     switch (*variant) {
         case 0:
             D_801F2945 = g_SndBGMId;
-            SND_StopSequence(((u8*)g_SelectionCues)[D_801F2945 * 4], D_80181EBB[D_801F2945 * 4]);
+            SND_StopSequence(((u8*)g_SelectionCues)[D_801F2945 * 4], g_SelectionSequences[D_801F2945 * 4]);
             SND_StartXAStream(D_801F2944 == 0 ? 8 : 10, 1);
             /* FAKE: the original spells this increment off the neighboring mode
              * byte, so the switch's cached g_SceneEventStep address is not reused; both
