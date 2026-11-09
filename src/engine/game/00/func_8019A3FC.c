@@ -1,8 +1,6 @@
 #include "game_00.h"
 
-/* The retail leaves the work pointer in $a1 at this call. The callee overwrites
- * $a1 with its own zero operand, so the value is caller context and not part
- * of the shared prototype; the cast keeps the $a1 write. */
+/* The retail leaves the work pointer in $a1 at this call. */
 
 /* FAKE: retail reads the screen origin as unsigned halfwords (lhu). */
 MATCH void func_8019A3FC(void) {

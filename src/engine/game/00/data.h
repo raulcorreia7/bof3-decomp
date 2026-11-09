@@ -1,12 +1,11 @@
 #ifndef GAME_00_DATA_H
 #define GAME_00_DATA_H
 
-/* The game overlay's data tables: sprite rectangles, map hooks, world routes and
- * the handler rows its frontend walks. Only this image includes the file. */
+/* The game overlay's data tables. */
 
 #define GAME_AREA_HANDLER_COUNT   11
 
-/* Cells in the square-spiral search order around a formation: the centre, then rings one to three, and a closing centre. */
+/* Cells in the square-spiral search order around a formation. */
 /* Camera directions and the scroll step of one cell quarter. */
 #define CAMERA_DIR_COUNT          4
 #define CAMERA_SCROLL_STEP        4
@@ -14,8 +13,7 @@
 #define ENTITY_SPAWN_OFFSET_COUNT 50
 #define ENTITY_SPAWN_SEARCH_COUNT (ENTITY_SPAWN_OFFSET_COUNT - 1)
 
-/* Eight-byte area entry: the area id it applies to, then the map id and the
- * x and y that func_801B6470 stages for the transition. */
+/* Eight-byte area entry: the area id it applies to. */
 typedef struct WorldMapDestination {
     u16 area_id;
     u16 map_id;
@@ -31,9 +29,7 @@ typedef struct SlotSource {
     u8 unk_03;
 } SlotSource;
 
-/* Eight-byte map hook: the map id byte and the handler at +4. Game_CallAreaHandler
- * scans the rows by byte offset, because the retail loop keeps a running
- * offset instead of an index. */
+/* Eight-byte map hook: the map id byte and the handler at +4. */
 typedef struct AreaHook {
     u8       map;
     u8       pad_01[3];
@@ -49,8 +45,7 @@ typedef struct WorldMapBattlefield {
 /* The ten rows fill the 40 bytes of D_801CD224. */
 ASSERT_SIZE(WorldMapBattlefield, 0x4);
 
-/* Byte views of two typed tables. The retail readers walk the bytes by offset,
- * so the union keeps both the record rows and the byte view. */
+/* Byte views of two typed tables. */
 typedef union AreaHooks {
     AreaHook rows[28];
     u8       bytes[224];
@@ -70,8 +65,7 @@ typedef struct SceneSlots {
     s8 (*entry_10)(s32, s32);
 } SceneSlots;
 
-/* Four-byte battle party slot. Area_PlaceEncounterParty marks it active, stores its sort
- * key and orders the slots by that key. */
+/* Four-byte battle party slot. */
 typedef struct PartySlot {
     u8 active;
     u8 key;
@@ -83,11 +77,7 @@ ASSERT_SIZE(PartySlot, 0x4);
 ASSERT_OFFSET(PartySlot, active, 0x0);
 ASSERT_OFFSET(PartySlot, key, 0x1);
 
-/* 0x1C-byte front-end handler row. Game_FindAreaHandler returns the row whose key
- * byte at +0x18 matches the current world state; the handlers sit at +0, +4,
- * +8, +0x0C and +0x10, and +0x14 points to the area's map points, four-byte rows (x, y,
- * context seed, context kind) that func_801B690C searches for the actor cell; Fishing_ShowLocation walks the same
- * rows. The only reader of the member is Game_GetAreaMapPoints; the rows are written by the data initialiser only. */
+/* 0x1C-byte front-end handler row. */
 typedef struct AreaHandler {
     Callback handler_00;
     Callback handler_04;

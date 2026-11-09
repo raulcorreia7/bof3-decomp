@@ -4,10 +4,7 @@
 
 /* Packed spawn record staging halfword in scratchpad. */
 
-/* Parallel per-slot shadow tables overlaying the 0x98-byte work-area
- * records; each column stores one field of every slot at a fixed address.
- * The scalars D_801468FF, D_80146914 and D_80146916 are columns too,
- * addressed through byte offsets because the headers declare them as scalars. */
+/* Parallel per-slot shadow tables overlaying the 0x98-byte work-area records. */
 
 MATCH void func_801A57F0(u8* script) {
     s16*   counter = (s16*)&D_1F800000;
@@ -31,8 +28,7 @@ MATCH void func_801A57F0(u8* script) {
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
-    /* The outer shadow assignment forms the slot offset before the position
-     * flag test, as retail schedules it. */
+    /* The outer shadow assignment forms the slot offset before the position flag test, as retail schedules it. */
     work                           = g_Task;
     g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */

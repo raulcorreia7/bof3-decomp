@@ -42,7 +42,7 @@ MATCH void func_8019D648(void) {
         args[1]  = (s16)aux[-9];
         dst += 28;
         args[2] = (s16)aux[-8];
-        /* retail passes the count as a third word, which libgte.h's two-argument prototype lacks */
+        /* retail passes the count as a third word, which libgte.h's two-argument prototype lacks. */
         ((void (*)(s32*, void*, s32))VectorNormalS)(args, dst_next, count);
         row += 1;
         aux[-2] = 0;

@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* The scalars D_80146914 and D_80146916 are per-slot columns too,
- * addressed through byte offsets because the headers declare them as scalars. */
+/* The scalars D_80146914 and D_80146916 are per-slot columns too, addressed through byte offsets because the headers declare them as scalars. */
 
 MATCH void func_801A50C0(u8* script) {
     s16*   counter = (s16*)&D_1F800000;

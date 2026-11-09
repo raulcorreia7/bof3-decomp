@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* Slot-selection cursor D_80146262, its capacity g_Game.party_size, the per-slot
- * active bits g_Game.flags and the selection flag D_80146260. */
+/* Slot-selection cursor D_80146262, its capacity g_Game.party_size, the per-slot active bits g_Game.flags and the selection flag D_80146260. */
 
 MATCH s32 func_801C0F9C(u8 source_row) {
     s32 i;
@@ -18,9 +17,7 @@ MATCH s32 func_801C0F9C(u8 source_row) {
             }
         }
     }
-    /* The two labelled exits below are the retail block layout: the tests at the
-     * head and at check_prev share select_slot, and select_slot falls back into
-     * the reloaded cursor. */
+    /* The two labelled exits below are the retail block layout. */
 check_prev:
     if (((g_Game.flags >> (D_80146262 - 1)) & 1) == 0) {
         goto reload_slot; /* the previous slot is free, reload the cursor */

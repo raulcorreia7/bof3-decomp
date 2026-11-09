@@ -13,7 +13,7 @@ MATCH void func_8019C124(s32 step_byte) {
                 goto set_state; /* the x tile advanced by one */
             }
         } else if (vel < 0) {
-            /* keep the current tile */
+            /* keep the current tile. */
         } else {
             goto set_state; /* the velocity is zero, keep the tile */
         }
@@ -26,7 +26,7 @@ MATCH void func_8019C124(s32 step_byte) {
                 goto set_state; /* the y tile advanced by one */
             }
         } else if (vel < 0) {
-            /* keep the current tile */
+            /* keep the current tile. */
         } else {
             goto set_state; /* the velocity is zero, keep the tile */
         }

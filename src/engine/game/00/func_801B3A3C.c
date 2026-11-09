@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* Per-slot field columns over the work-area array; one shared byte offset,
- * each column keeping its own absolute base for slot addressing. */
+/* Per-slot field columns over the work-area array. */
 
 MATCH void func_801B3A3C(void) {
     Actor* saved;

@@ -18,9 +18,7 @@ MATCH void func_801A4AA8(void) {
     motion->unk_6C                 = 0;
     motion->unk_68                 = 0;
     motion->unk_64                 = 0;
-    /* 0x74 is a flag byte and 0x75 a byte timer (Actor.interaction_flags /
-     * timer_75); every access in the module is byte-wide, so both stores are
-     * byte-wide. */
+    /* 0x74 is a flag byte and 0x75 a byte timer (Actor.interaction_flags / timer_75). */
     animation->interaction_flags   = 0;
     g_CurrentActor->timer_75       = 0;
     g_CurrentActor->pad_76         = 0;

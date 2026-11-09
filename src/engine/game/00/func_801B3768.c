@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* Spawn counter with no registry row: every branch below that completes a
- * spawn bumps it. */
+/* Spawn counter with no registry row: every branch below that completes a spawn bumps it. */
 
 MATCH void func_801B3768(void) {
     Actor* work;

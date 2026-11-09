@@ -1,8 +1,6 @@
 #include "game_00.h"
 
-/* Scene view entry at view offset +0x10: the optional handler this unit
- * belongs to (offsets +0x08/+0x0C carry its siblings, declared in
- * Area_IsStepBlocked.c and func_801A79A4.c). */
+/* Scene view entry at view offset +0x10. */
 
 MATCH s8 Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1) {
     Actor* saved;

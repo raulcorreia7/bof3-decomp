@@ -2,8 +2,7 @@
 
 /* Entity spawn counter in scratchpad (signed 16-bit slot index). */
 
-/* Parallel per-slot shadow tables overlaying the 0x98-byte work-area slots;
- * each column stores one field of every record at a fixed address. */
+/* Parallel per-slot shadow tables overlaying the 0x98-byte work-area slots. */
 
 MATCH void func_801A7330(const volatile u8* data) {
     s16*   counter = (s16*)&D_1F800000;

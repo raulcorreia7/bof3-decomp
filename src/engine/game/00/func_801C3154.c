@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* Source and destination CLUT blocks. Literal addresses keep the
- * lui+ori codegen the original binary uses for these blocks. */
+/* Source and destination CLUT blocks. */
 #define CLUT_BLOCK_SRC 0x80033800u
 
 MATCH void func_801C3154(void) {

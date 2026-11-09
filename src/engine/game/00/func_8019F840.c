@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* The battle slot byte views are volatile so the selection loop keeps the
- * per-byte symbol addressing instead of a strength-reduced pointer. */
+/* The battle slot byte views are volatile so the selection loop keeps the per-byte symbol addressing instead of a strength-reduced pointer. */
 
 MATCH void func_8019F840(void) {
     s32 i;

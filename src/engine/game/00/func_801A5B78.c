@@ -22,8 +22,7 @@ MATCH void func_801A5B78(u8* script) {
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
-    /* The outer shadow assignment forms the slot offset before the position
-     * flag test, as retail schedules it. */
+    /* The outer shadow assignment forms the slot offset before the position flag test, as retail schedules it. */
     work                           = g_Task;
     g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */

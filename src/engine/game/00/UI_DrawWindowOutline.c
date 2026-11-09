@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* draws the outline of the rectangle at (x, y) of width by height in the window style color; bit 0 of flags picks the
- * blend of the edge pieces and bits 4-7 cut the four corners. */
+/* draws the outline of the rectangle at (x, y) of width by height in the window style color. */
 /* nonmatching unmeasured: tried 65.09%: byte-based color table index fixed; retail colors computed first in s4/s3/s1,
  * args copied to s8/s7/s5 (pins reach correct set but lose 8 points); no sh a0,0x28(sp) arg spill in retail. */
 #ifdef NON_MATCHING

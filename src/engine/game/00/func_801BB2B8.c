@@ -1,11 +1,6 @@
 #include "game_00.h"
 
-/* Packed coordinate pair; the high half carries the shifted coordinate.
- * RESIDUAL: the original reads the (uninitialized) word's low half before
- * writing `hi` — retail's prologue `andi t0,t0,0xFFFF; or t0,t0,(x1<<16);
- * and t0,t0,0xFFFF0000` is exactly this field insert + word mask on an
- * uninitialized local, so the union word must stay uninitialized here.
- */
+/* Packed coordinate pair; the high half carries the shifted coordinate. */
 typedef union {
     s32 w;
 

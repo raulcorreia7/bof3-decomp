@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* The cross product of (first - origin) and (second - first): its sign tells which side of the
- * line origin-first the point second lies on. */
+/* The cross product of (first. */
 MATCH s16 func_801AFF90(Point2D* origin, Point2D* first_point, Point2D* second_point) {
     s16 first_x;
     s16 first_y;

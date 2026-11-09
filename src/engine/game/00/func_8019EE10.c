@@ -10,8 +10,7 @@ MATCH void func_8019EE10(void) {
     FIELD(u32, g_Task, 0x4Cu) = D_80145EDC;
     g_Task->unk_2B            = 1;
     g_Task->draw_layer        = g_Game.members[0].unk_29;
-    /* The work pointer cell is re-read once per store; the second read is kept in
-     * its own local so both reads stay in the original load-then-store order. */
+    /* The work pointer cell is re-read once per store. */
     work                      = g_Task;
     work->unk_25              = 0x1D;
     next                      = g_Task;

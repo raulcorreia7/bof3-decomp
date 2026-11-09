@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* Sets no draw mode: the sprite uses the page its caller set with UI_DrawSpriteRun
- * (832, 256 when flags bit 0 is set, else 896, 256). The CLUT is (176, 481) when flags bit 1 is clear. */
+/* Sets no draw mode: the sprite uses the page its caller set with UI_DrawSpriteRun (832, 256 when flags bit 0 is set, else 896, 256). */
 MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     u8*   rect;
     SPRT* sprt;

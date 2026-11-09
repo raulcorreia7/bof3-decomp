@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-/* Scratchpad map-coordinate staging: the staged halfwords at 0x04/0x06, their
- * per-axis bias flags at 0x08/0x0C and the source halfwords at 0x0A/0x0E. */
+/* Scratchpad map-coordinate staging. */
 
 MATCH void func_801B13BC(void) {
     u16  value;

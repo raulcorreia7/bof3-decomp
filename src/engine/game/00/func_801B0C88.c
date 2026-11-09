@@ -14,7 +14,7 @@ MATCH void func_801B0C88(void) {
         do {
             sel = g_CharSlot[g_PartyFieldOrder[index]];
             if (g_Characters[sel].status & STATUS_POISONED) {
-                /* party member is active: use mode 3 */
+                /* party member is active: use mode 3. */
                 goto store3;
             }
             index++;
@@ -24,12 +24,12 @@ MATCH void func_801B0C88(void) {
         flag = g_AutoRun;
         if (g_Game.input & g_InputMasks[FIELD_INPUT_RUN]) {
             if ((flag ^ 1) == 0) {
-                /* confirm pressed with the flag set: use mode 3 */
+                /* confirm pressed with the flag set: use mode 3. */
                 goto store3;
             }
         } else {
             if (flag == 0) {
-                /* nothing pressed with the flag clear: use mode 3 */
+                /* nothing pressed with the flag clear: use mode 3. */
                 goto store3;
             }
         }

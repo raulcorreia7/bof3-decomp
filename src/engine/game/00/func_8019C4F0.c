@@ -1,8 +1,6 @@
 #include "game_00.h"
 
-/* K&R definition: the callers pass two arguments through the unprototyped
- * declaration, and the s16 parameters narrow here. stale_a3 arrives as the packed
- * probe word whose high half takes the tile y. */
+/* K&R definition: the callers pass two arguments through the unprototyped declaration. */
 /* FAKE: retail reads the row through a non-volatile pointer. */
 MATCH s32 func_8019C4F0(x, y, stale_a2, stale_a3)
 s16       x;

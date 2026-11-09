@@ -11,8 +11,7 @@ MATCH void func_801C5DFC(u8 route_index) {
     } else {
         g_AreaCameraStep = 8;
     }
-    /* The retail build reloads the step table at each use: a non-const view
-     * keeps the three reads separate. */
+    /* The retail build reloads the step table at each use: a non-const view keeps the three reads separate. */
     step             = g_AreaCameraStep * ((u8*)g_RouteSpeedScale)[D_80143FC0];
     scale            = 0x80 / step;
     g_AreaCameraStep = step;

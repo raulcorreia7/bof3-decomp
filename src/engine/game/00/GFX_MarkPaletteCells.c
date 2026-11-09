@@ -24,20 +24,20 @@ MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
             D_80145D54[row][column + 0xA] = value;
             D_80145D54[row][column + 0x9] = value;
             D_80145D54[row][column + 0x8] = value;
-            /* fallthrough */
+            /* fallthrough. */
         case PALETTE_KIND_CELLS_8:
             D_80145D54[row][column + 0x7] = value;
             D_80145D54[row][column + 0x6] = value;
             D_80145D54[row][column + 0x5] = value;
             D_80145D54[row][column + 0x4] = value;
-            /* fallthrough */
+            /* fallthrough. */
         case PALETTE_KIND_CELLS_4:
             D_80145D54[row][column + 0x3] = value;
             D_80145D54[row][column + 0x2] = value;
-            /* fallthrough */
+            /* fallthrough. */
         case PALETTE_KIND_CELLS_2:
             D_80145D54[row][column + 0x1] = value;
-            /* fallthrough */
+            /* fallthrough. */
         case PALETTE_KIND_CELL:
             D_80145D54[row][column] = value;
             break;
