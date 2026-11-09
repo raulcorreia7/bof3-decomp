@@ -6,4 +6,6 @@
 
 #include "overlays/area/world04.h"
 
+extern u8 D_80144EF0[];
+
 #endif
