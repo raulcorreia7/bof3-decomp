@@ -54,6 +54,22 @@ typedef struct AreaBurstSlot {
 
 ASSERT_SIZE(AreaBurstSlot, 0x1C);
 
+/* One of the slots at AREA_WORK, 0x38 bytes each: a streak drawn between two points. */
+typedef struct AreaStreakSlot {
+    u8  active;     /* 0x00 - 0 marks a free slot */
+    u8  kind;       /* 0x01 */
+    u8  life;       /* 0x02 */
+    u8  head_shade; /* 0x03 - shade at the first point */
+    u8  tail_shade; /* 0x04 - shade at the second point */
+    u8  unk_05[3];
+    s32 head[3]; /* 0x08 */
+    s32 unk_14;
+    s32 tail[3]; /* 0x18 */
+    u8  unk_24[0x14];
+} AreaStreakSlot;
+
+ASSERT_SIZE(AreaStreakSlot, 0x38);
+
 extern u8 D_801F6510;
 extern u8 D_801F6514;
 
@@ -75,6 +91,7 @@ extern u8 D_80146875;
 
 void func_801F40D0(s32 arg0);
 void func_801F42E8(void);
+void func_801F4220(AreaStreakSlot* slot);
 
 void func_801F40A4(void);
 void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
