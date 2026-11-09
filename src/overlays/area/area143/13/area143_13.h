@@ -21,7 +21,6 @@
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* The scene position words the work step copies. */
-extern s32 D_80145EC4;
 
 /* The state handler tables the dispatchers index. */
 extern Callback            D_801F4308[];

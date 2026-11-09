@@ -12,7 +12,6 @@
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
 extern SVECTOR  D_1F800014[];
-extern s32      D_80145EC4[];
 extern u8       D_801F4D7C[];
 /* The spawn step handler table indexed by the record's step byte. */
 extern Callback D_801F5338[];

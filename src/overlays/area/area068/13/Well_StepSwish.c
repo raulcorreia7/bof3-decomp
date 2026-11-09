@@ -8,8 +8,8 @@ MATCH void Well_StepSwish(void) {
         work        = g_Task;
         g_GameState = g_Game.members;
         TASK_SET(g_Game.members);
-        D_80145EC8 &= 0xFFFFF000;
-        D_80145EC4 &= 0xFFFFF000;
+        g_Game.members[0].pos.y.fixed &= 0xFFFFF000;
+        g_Game.members[0].pos.x.fixed &= 0xFFFFF000;
         g_Task            = work;
         work->header.mode = WELL_MODE_RAISE_BEGIN;
         g_WellPressCount  = 0;
@@ -21,7 +21,7 @@ MATCH void Well_StepSwish(void) {
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
-                D_80145EC8 += 0x800;
+                g_Game.members[0].pos.y.fixed += 0x800;
                 g_Task = work;
                 break;
             case 0x2000:
@@ -29,7 +29,7 @@ MATCH void Well_StepSwish(void) {
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
-                D_80145EC4 -= 0x800;
+                g_Game.members[0].pos.x.fixed -= 0x800;
                 g_Task = work;
                 break;
             case 0x4000:
@@ -37,7 +37,7 @@ MATCH void Well_StepSwish(void) {
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
-                D_80145EC8 -= 0x800;
+                g_Game.members[0].pos.y.fixed -= 0x800;
                 g_Task = work;
                 break;
             case 0x8000:
@@ -45,7 +45,7 @@ MATCH void Well_StepSwish(void) {
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
-                D_80145EC4 += 0x800;
+                g_Game.members[0].pos.x.fixed += 0x800;
                 g_Task = work;
                 break;
         }

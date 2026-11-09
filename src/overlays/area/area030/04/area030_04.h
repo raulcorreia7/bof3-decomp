@@ -363,7 +363,6 @@ extern u16                   D_801442AC;
 extern u16                   D_801442BC;
 extern u16                   D_801442BE;
 extern u8                    D_801454EC[];
-extern s32                   D_80145EC4;
 extern u8                    D_80145ED9;
 extern u8                    D_80145EDA;
 extern s32                   D_80145EE0;

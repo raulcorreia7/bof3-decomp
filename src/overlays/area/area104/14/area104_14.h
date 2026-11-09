@@ -8,7 +8,6 @@
 #include "area/spad.h"
 
 extern SVECTOR  D_1F800014[];
-extern s32      D_80145EC4;
 extern u8       D_801F6980[];
 extern Callback D_801F6A64[];
 extern u8       D_801F6A78[];

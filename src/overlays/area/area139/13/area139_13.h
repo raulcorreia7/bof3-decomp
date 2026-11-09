@@ -11,7 +11,6 @@
 #define g_CurrentActor ((u8*)g_CurrentActor)
 
 /* The party position in 16.16 fixed point. */
-extern s32      D_80145EC4;
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F4430[];
 extern Callback D_801F4448[];

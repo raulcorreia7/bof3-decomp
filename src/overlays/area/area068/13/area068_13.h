@@ -43,7 +43,6 @@ enum WellMode {
 #define WELL_CUE_SWISH            EMI_CUE_ID(SND_BANK_AREA, 2)
 
 extern u8  D_80145E97;
-extern s32 D_80145EC4;
 extern u8  D_80145EDA;
 extern u16 D_80145EE8;
 extern u8  D_80146865;

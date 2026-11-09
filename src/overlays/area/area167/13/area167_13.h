@@ -15,7 +15,6 @@
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 extern u8  D_80146866;
 /* The mode byte the request handler writes. */
 /* The overlay state bytes the request sets. */

@@ -10,10 +10,10 @@ NON_MATCHING void Fishing_LureCast(void) {
     s32 value;
     u32 index;
 
-    FISHING_STATE->motion_34.unk_34 = D_80145EC4;
-    FISHING_STATE->y_38.pos_y       = D_80145EC8 - COORD_HALF;
+    FISHING_STATE->motion_34.unk_34 = g_Game.members[0].pos.x.fixed;
+    FISHING_STATE->y_38.pos_y       = g_Game.members[0].pos.y.fixed - COORD_HALF;
     FISHING_STATE->bounce_3C.half.key_3E =
-        (s16)(Area_SampleHeight(FISHING_STATE->motion_34.unk_34, D_80145EC8 - COORD_HALF) + 0x100);
+        (s16)(Area_SampleHeight(FISHING_STATE->motion_34.unk_34, g_Game.members[0].pos.y.fixed - COORD_HALF) + 0x100);
 
     value                       = g_FishingRodRow->byte_02 * D_801440BC / 255 + 8;
     FISHING_STATE->cue_index_06 = (u8)(value / 15);

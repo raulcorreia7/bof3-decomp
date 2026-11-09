@@ -16,7 +16,6 @@
 
 /* The current map row in the field-loader table. */
 /* The party position in 16.16 fixed point. */
-extern s32      D_80145EC4;
 /* The payload's first words: the per-state handler pointers. */
 extern u8       D_801F4FAC[];
 /* The palette callbacks this overlay animates. */

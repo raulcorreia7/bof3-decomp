@@ -10,9 +10,8 @@
 /* The global state byte the area update gates on. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 /* The payload's per-state handler table. */
-extern u8  D_801F3420[];
+extern u8 D_801F3420[];
 
 /* The scratchpad cell holding this mode's work pointer. */
 /* The overlay's frame handler. */

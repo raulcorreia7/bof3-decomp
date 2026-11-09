@@ -7,8 +7,8 @@ MATCH void func_801F2FB0(void) {
     Actor* scratch;
 
     scaled = g_Game.members[0].unk_0C * g_Game.members[0].unk_09;
-    x      = (D_80145EC4 + scaled) >> 16;
-    y      = (D_80145EC8 + g_Game.members[0].unk_10 * g_Game.members[0].unk_09) >> 16;
+    x      = (g_Game.members[0].pos.x.fixed + scaled) >> 16;
+    y      = (g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09) >> 16;
 
     scratch     = g_Task;
     scratch->vx = x;

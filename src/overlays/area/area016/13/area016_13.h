@@ -20,7 +20,6 @@
 
 /* Data, in address order. */
 extern SVECTOR       D_1F800014[];
-extern s32           D_80145EC4[];
 /* The steppers that must reload the cell after every store select the
  * volatile declaration. */
 extern WorldMapKey   D_801F4D7C[9];

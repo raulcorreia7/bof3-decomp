@@ -20,7 +20,6 @@ extern SVECTOR D_1F800014[];
 /* The area state byte and the frame flags it is tested against. */
 /* The staged cue rows' fields: the allocation flags, kind, layer, step and
  * distance halfword, indexed by the row stride the spawn pass allocates. */
-extern s32     D_80145EC4[];
 /* The payload's data after the last function; the per-state handler tables
  * start at 0x130. */
 extern u8      D_801F4C3C[];

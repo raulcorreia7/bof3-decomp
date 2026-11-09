@@ -21,9 +21,8 @@
 /* The shared game work word the flag mask sets. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 /* The payload includes the per-state handler tables. */
-extern u8  D_801F57BC[];
+extern u8 D_801F57BC[];
 
 extern void func_801F3994(void);
 

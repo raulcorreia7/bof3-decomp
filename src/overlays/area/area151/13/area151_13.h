@@ -16,7 +16,6 @@
 
 extern SVECTOR  D_1F800014[];
 /* The world-area state byte tested by the work handlers. */
-extern s32      D_80145EC4[];
 extern u8       D_801F4CE8[];
 /* The request selector and the area request slot. */
 extern Callback D_801F542C[];

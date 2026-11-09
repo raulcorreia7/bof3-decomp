@@ -8,7 +8,6 @@
 #include "area/spad.h"
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 /* The scratchpad cell holding this mode's work pointer. */
 /* The payload's first four words: the per-state handler pointers. */
 

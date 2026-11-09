@@ -14,8 +14,7 @@ void Area_Update(s32 arg);
 /* The global state byte the area update gates on. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 /* The state handler tables the dispatchers index. */
-extern u8  D_801F358C[];
+extern u8 D_801F358C[];
 
 #endif

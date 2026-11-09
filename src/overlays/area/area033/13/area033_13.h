@@ -14,7 +14,6 @@ extern SVECTOR D_1F800014[];
 /* The map step: 9 runs the area entry instead of the reset. */
 extern u8      D_8014496D;
 /* The party focus point: the camera-scroll targets, x then y, in 16.16. */
-extern s32     D_80145EC4[];
 /* The tile map scan: four byte records per work row, the map offset and code. */
 extern u8      D_801F4CB0[];
 /* The work-step handler table indexed by the record's step byte. */

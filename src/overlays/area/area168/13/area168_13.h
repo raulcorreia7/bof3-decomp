@@ -34,7 +34,6 @@ extern u8          D_801F4F95[];
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 /* One cell of the entry tables inside the payload blob: `offset` is the table's byte offset, `index` the byte offset of
  * the row. */
 #define AREA168_ENTRY_TABLE(type, offset, index) (*(type*)&D_801F4B2C[(offset) + (index)])

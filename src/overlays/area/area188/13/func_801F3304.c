@@ -1,15 +1,15 @@
 #include "area188_13.h"
 
 MATCH void func_801F3304(void) {
-    Actor* work;
-    s32*   pos;
-    s32    z;
+    Actor*    work;
+    WorldPos* pos;
+    s32       z;
 
     work           = g_Task;
-    pos            = D_80145EC4;
-    work->unk_64   = pos[0];
-    work->unk_68   = pos[1];
-    z              = pos[2] + 0x800000;
+    pos            = &g_Game.members[0].pos;
+    work->unk_64   = pos->x.fixed;
+    work->unk_68   = pos->y.fixed;
+    z              = pos->z.fixed + 0x800000;
     work->timer    = 8;
     work->screen_x = 0;
     work->unk_6C   = z;

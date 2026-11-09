@@ -8,7 +8,6 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-extern s32 D_80145EC4;
 extern u8  D_801F511C[];
 extern u16 D_801F59E4;
 extern u8  D_801F59E8;

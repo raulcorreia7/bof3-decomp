@@ -18,8 +18,8 @@ MATCH void Actor_TrackFocus(void) {
 
     vertex                 = D_1F800014;
     screen                 = D_1F800034;
-    vertex->vx             = (s16)((D_80145EC4 >> 9) - 0x4000);
-    SP_REF(s16, 0x16)      = (s16)((D_80145EC8 >> 9) - 0x4000);
+    vertex->vx             = (s16)((g_Game.members[0].pos.x.fixed >> 9) - 0x4000);
+    SP_REF(s16, 0x16)      = (s16)((g_Game.members[0].pos.y.fixed >> 9) - 0x4000);
     SP_REF(s16, 0x18)      = (s16)((-D_80145ECE) / 2);
     result                 = RotTransPers(vertex, (long*)screen, &depth, &flag);
     work                   = g_Task;

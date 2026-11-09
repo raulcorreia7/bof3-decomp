@@ -24,7 +24,6 @@
 #define AREA_SPIN_SCALE_BASE 3
 #define AREA_SPIN_FADE       0x20
 
-extern s32      D_80145EC4[];
 extern Callback D_801F5F68[];
 extern Callback D_801F5F7C[];
 extern Callback D_801F5F88[];

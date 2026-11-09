@@ -16,9 +16,8 @@
 
 /* The mode byte the handler tests and the overlay's flag word. */
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 /* The payload's first words: the per-state handler pointers. */
-extern u8  D_801F3A90[];
+extern u8 D_801F3A90[];
 
 /* The target's final handler. */
 #endif

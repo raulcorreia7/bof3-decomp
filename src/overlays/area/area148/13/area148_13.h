@@ -15,7 +15,6 @@
 /* The scenario state bytes the hit path sets. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 
 void                       Area_Update(s32 arg);
 /* The field focus point the work position copies. */

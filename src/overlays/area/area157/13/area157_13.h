@@ -15,10 +15,9 @@
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
 /* The payload's first words: the per-state handler pointers. */
-extern u8  D_801F38CC[];
-extern u8  D_801F3924[];
+extern u8 D_801F38CC[];
+extern u8 D_801F3924[];
 
 /* The target's final handler. */
 #endif

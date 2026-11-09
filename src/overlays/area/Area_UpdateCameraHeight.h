@@ -1,5 +1,5 @@
 /* Updates the area camera height to the ground under the party position
- * D_80145EC4/D_80145EC8: the sampled height is stored, or 0x20 below it when the
+ * g_Game.members[0].pos.x.fixed/g_Game.members[0].pos.y.fixed: the sampled height is stored, or 0x20 below it when the
  * camera already sits at that exact height, and the camera refresh counter
  * advances by 2. One definition shared by the world area overlays. Every change
  * here must verify every member address.
@@ -8,7 +8,7 @@
 MATCH void Area_UpdateCameraHeight(void) {
     s32 height;
 
-    height = Area_SampleHeight(D_80145EC4, D_80145EC8);
+    height = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
     if (g_AreaCameraHeight == height) {
         height -= 0x20;
     }

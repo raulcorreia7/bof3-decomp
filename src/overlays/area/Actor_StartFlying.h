@@ -17,8 +17,8 @@ MATCH void Actor_StartFlying(void) {
     scratch              = g_Task;
     scratch->vx          = (s16)g_FlockVelocity[scratch->direction_08].x;
     scratch->vy          = (s16)g_FlockVelocity[scratch->direction_08].y;
-    scratch->pos.x.fixed = D_80145EC4[0];
-    scratch->pos.y.fixed = D_80145EC4[1];
+    scratch->pos.x.fixed = g_Game.members[0].pos.x.fixed;
+    scratch->pos.y.fixed = g_Game.members[0].pos.y.fixed;
 
     if (scratch->unk_06 != 0) {
         COORD_INT(scratch->pos.x) -= (s32)(g_FlockVelocity[scratch->direction_08].x << 16) >> 29;

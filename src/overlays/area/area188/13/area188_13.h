@@ -19,7 +19,6 @@ extern u8 D_801F6898[];
 #define AREA_SPIN_FADE       0x20
 
 /* The party position in 16.16 fixed point: x, y and the ground height. */
-extern s32 D_80145EC4[];
 
 /* The shared record table as its byte view. */
 
