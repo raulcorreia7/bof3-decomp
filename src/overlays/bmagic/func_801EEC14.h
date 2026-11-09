@@ -1,6 +1,4 @@
-/* Runs the handler that the active battler's mode selects from the module head's table.
- * One definition shared by the images that include it;
- * every change here must verify every member. */
+/* Runs the handler that the active battler's mode selects from the module head's table. */
 /* func_801EEC14 (magic010), func_801EEC14 (magic102), func_801EEC14 (magic104), func_801EEC14 (magic109), func_801EEC14
    (magic115), func_801EEC14 (magic116) */
 MATCH void func_801EEC14(void) {

@@ -1,6 +1,4 @@
-/* Sets the three screen shake offsets from the effect ticker and counts the
- * effect down. One definition shared by the battle and boss overlays; every
- * change here must verify every member. */
+/* Sets the three screen shake offsets from the effect ticker and counts the effect down. */
 /* func_800A8EB8 (battle), func_800C26A4 (boss033) */
 MATCH void Effect_ShakeScreen(void) {
     {

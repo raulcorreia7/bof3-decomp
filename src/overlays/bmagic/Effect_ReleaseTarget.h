@@ -1,5 +1,4 @@
-/* Releases the battle effect target when the timer expires. One definition shared by the bmagic
- * overlays; every change here must verify every member. */
+/* Releases the battle effect target when the timer expires. */
 /* func_801EF324 (magic097), func_801EF334 (magic098) */
 MATCH void Effect_ReleaseTarget(void) {
     u8 count;

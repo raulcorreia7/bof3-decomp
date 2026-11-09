@@ -1,4 +1,4 @@
-/* Counts the wait down and finishes the effect at zero. Every change here must verify every member. */
+/* Counts the wait down and finishes the effect at zero. */
 /* func_801EF3E0 (magic096), func_801EF478 (magic130) */
 MATCH void Effect_CountDownAndFinish(void) {
     PartyMember* work;

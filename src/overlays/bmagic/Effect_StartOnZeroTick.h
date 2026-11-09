@@ -1,6 +1,4 @@
-/* Raises the effect-playing flag and runs the effect step once the effect ticker
- * (work byte 0x0B) is zero. One definition shared by the bmagic effect modules;
- * every change here must verify every member. */
+/* Raises the effect-playing flag and runs the effect step once the effect ticker (work byte 0x0B) is zero. */
 /* func_801F01E4 (magic008), func_801EEF84 (magic013), func_801EF084 (magic038), func_801EEEFC (magic040), func_801EEE58
    (magic045), func_801EEEE4 (magic063), func_801EF284 (magic067), func_801EEF50 (magic074), func_801EF354 (magic082),
    func_801EF080 (magic083), func_801EF300 (magic088), func_801EEFB4 (magic092), func_801EEF38 (magic097), func_801EEF38

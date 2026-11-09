@@ -1,5 +1,4 @@
-/* Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell that sprite_id selects in AREA_HUD_SPRITE_CELLS.
- * One definition shared by the area overlays; every change here must verify every member. */
+/* Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell that sprite_id selects in AREA_HUD_SPRITE_CELLS. */
 MATCH void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id) {
     SPRT* sprt;
     s32   tpage;

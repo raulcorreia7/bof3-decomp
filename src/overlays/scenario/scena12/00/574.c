@@ -55,9 +55,7 @@ MATCH void func_801F7240(void) {
     SCENA12_STEP_COUNTER();
 }
 
-/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state
- * is 4 or scene flag 0x2E is set, queue script step 5 with D_80146875 = 0x19, raise the script-active flag and clear
- * the work. Every change here must verify both members. */
+/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state is 4 or scene flag 0x2E is set, queue script step 5 with D_80146875 = 0x19, raise the script-active flag and clear the work. */
 #define SCENA12_START_SCRIPT()                                                                                        \
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_GameEntryState != 4 && SYS_TestFlag(g_SceneFlags, 0x2E) == 0) { \
         D_80146875 = 0x19;                                                                                            \

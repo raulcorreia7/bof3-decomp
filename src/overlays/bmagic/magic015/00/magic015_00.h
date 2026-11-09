@@ -30,10 +30,7 @@ extern Magic015Steps       D_801EEC24;
 extern Magic015ThirdSteps  D_801EEC54;
 extern Magic015SecondSteps D_801EEC34;
 
-/* Fades the tint down to -0x80, then once the effect battler's param is 1 and the
- * fade is done, moves the effect onto that battler and advances. One body shared
- * by func_801F0A94 and func_801F1088; every change must verify both. Needs a local
- * `s8 tint`. */
+/* Fades the tint down to -0x80, then once the effect battler's param is 1 and the fade is done, moves the effect onto that battler and advances. Needs a local `s8 tint`. */
 #define EFFECT_APPEAR_AT_BATTLER()                                                     \
     tint = (s8)g_Task->unk_5D;                                                         \
     if (tint != -0x80) {                                                               \

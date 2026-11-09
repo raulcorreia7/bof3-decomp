@@ -64,9 +64,7 @@ void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3);
 void func_801F85F0(s32 x, s32 y, s32 angle);
 void func_801F8108(s32 x, s32 y);
 
-/* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and
- * leave the scene when the countdown ends. They differ only in the sign of the turn. Every change
- * here must verify every member. */
+/* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and leave the scene when the countdown ends. They differ only in the sign of the turn. */
 #define SCENA08_SCREEN_EFFECT_STEP(work, step)                                        \
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32); \
     (work) = g_Task;                                                                  \
@@ -75,8 +73,7 @@ void func_801F8108(s32 x, s32 y);
         func_80196070();                                                              \
     }
 
-/* The two sparkle steps of 348.c: stir the seed, advance the frame counters and move to the next mode
- * after `reset` frames. They differ only in `reset`. Every change here must verify every member. */
+/* The two sparkle steps of 348.c: stir the seed, advance the frame counters and move to the next mode after `reset` frames. They differ only in `reset`. */
 #define SCENA08_SPARKLE_STEP(count, timer, reset) \
     func_801F8534();                              \
     g_Task->script_pc += RANDOM_MASK(BYTE_MASK);  \
@@ -92,8 +89,7 @@ void func_801F8108(s32 x, s32 y);
         g_Task->header.mode += 1;                 \
     }
 
-/* The two sparkle starts of 348.c: seed the frame counters, stir the seed 0x40 times and play `cue`.
- * They differ only in `cue`. Every change here must verify every member. */
+/* The two sparkle starts of 348.c: seed the frame counters, stir the seed 0x40 times and play `cue`. They differ only in `cue`. */
 #define SCENA08_SPARKLE_START(i, cue)                \
     g_Task->unk_5A    = 0x20;                        \
     g_Task->unk_32    = 0;                           \

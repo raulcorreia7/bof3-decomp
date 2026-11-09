@@ -1,5 +1,4 @@
-/* Starts message AREA_MESSAGE_REQUEST and waits for the message screen to close. One definition shared by the game
- * engine and an area overlay; every change here must verify every member. */
+/* Starts message AREA_MESSAGE_REQUEST and waits for the message screen to close. */
 MATCH void Message_RunAreaMessage(void) {
     s8* state;
 

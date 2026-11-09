@@ -1,7 +1,4 @@
-/* Count the active battler's effect ticker down and clear the effect work
- * record. One definition shared by the bmagic overlays; every change here must
- * verify every member.
- */
+/* Count the active battler's effect ticker down and clear the effect work record. */
 /* Effect_TickDownAndClear (magic012, magic015, magic038, magic045, magic054, magic115, magic138),
    Effect_TickDownAndClear3 (magic045), Effect_TickDownAndClear2 (magic115) */
 /* The statements of Effect_TickDownAndClear. */

@@ -1,5 +1,4 @@
-/* Initialises the area work bytes and loads scene 0x1D1. One definition shared
- * by the two world area overlays; every change here must verify every member. */
+/* Initialises the area work bytes and loads scene 0x1D1. */
 /* func_801F2F24 (area152), func_801F2FD0 (area151) */
 #include "area/spad.h"
 

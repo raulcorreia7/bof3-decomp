@@ -1,7 +1,4 @@
-/* Raises the effect ticker, lowers the work byte at +0x04 and counts the
- * counter at +0x09; at 136 it sets the active battler's ticker to 0xFF and
- * clears the effect. Every change here must verify every member.
- */
+/* Raises the effect ticker, lowers the work byte at +0x04 and counts the counter at +0x09; at 136 it sets the active battler's ticker to 0xFF and clears the effect. */
 /* func_801EF3C4 (magic120), func_801EF29C (magic122) */
 MATCH void Effect_CountUpAndFinishAt136(void) {
     u8 counter;
