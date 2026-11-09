@@ -1,9 +1,9 @@
 #ifndef PLCHAR_CHECK_PARTY_H
 #define PLCHAR_CHECK_PARTY_H
 
-extern u32 D_80143FFC;
-extern u32 D_80144000;
-extern u16 D_80144006;
+extern u8 D_80143FFC[];
+extern u8 D_80144000[];
+extern u8 D_80144006[];
 
 MATCH s32 func_801CEA10(s32 arg0) {
     register s32 s0 asm("$16") = 1;
@@ -26,9 +26,9 @@ MATCH s32 func_801CEA10(s32 arg0) {
     s1 = 0x140;
 L801CEA54:
     temp = (PartyMember*)((u8*)&g_Game + s1);
-    v0 = func_801BDD58(*(u32*)((u8*)&D_80143FFC + s2), 
-                       *(u32*)((u8*)&D_80144000 + s2), 
-                       (*(u16*)((u8*)&D_80144006 + s2)) + 0x200, 
+    v0 = func_801BDD58(*(s32*)(D_80143FFC + s2), 
+                       *(s32*)(D_80144000 + s2), 
+                       (*(s16*)(D_80144006 + s2)) + 0x200, 
                        1, (Actor*)temp);
     if (!(v0 & 0xFF)) {
         v0 = g_PartySize;
