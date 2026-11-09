@@ -5,12 +5,12 @@
    (area100), func_801F3E58 (area112), func_801F3F48 (area143) */
 MATCH void Actor_SnapToGround(void) {
     Actor* work;
-    u8*    depth_target;
+    Actor* depth_target;
     s32    result;
 
-    work                           = g_Task;
-    result                         = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
-    depth_target                   = (u8*)g_Task;
-    FIELD(s32, depth_target, 0x3C) = result << 16;
-    depth_target[1]++;
+    work                      = g_Task;
+    result                    = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    depth_target              = g_Task;
+    depth_target->pos.z.fixed = result << 16;
+    depth_target->header.mode++;
 }

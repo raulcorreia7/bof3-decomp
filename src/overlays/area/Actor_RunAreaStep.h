@@ -7,5 +7,5 @@
    (area100), func_801F3638 (area112), func_801F3C40 (area143), func_801F4008 (area145) */
 MATCH void Actor_RunAreaStep(void) {
     g_Task->unk_48 = 0;
-    GFX_FreePaletteFadeTarget((u8*)g_Task);
+    GFX_FreePaletteFadeTarget(g_Task);
 }
