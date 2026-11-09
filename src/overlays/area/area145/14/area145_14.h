@@ -50,4 +50,7 @@ extern s32   D_80147CC4[];
 extern SceneTrigger D_801F5CC0[];
 extern u8           D_80144EF0[];
 
+/* g_Game.current */
+extern PartyMember* D_80146250;
+
 #endif
