@@ -532,7 +532,19 @@ MATCH void func_801FD524(void) {
     g_SceneState.state_04 = 7;
 }
 
-INCLUDE_ASM(func_801FD5A0);
+MATCH void func_801FD5A0(void) {
+    Game_SetScriptActive();
+    g_ScriptVars[0] = 0;
+    D_80146865      = 0;
+    D_80146866      = 0;
+    D_80146867      = 0;
+    if (SYS_TestFlag(D_80144EB8, 0x23)) {
+        D_80146875 = 0x14;
+    } else {
+        D_80146875 = 0xA;
+    }
+    D_80146874 = 7;
+}
 
 MATCH ActorSlot* func_801FD610(u8 mode) {
     ActorSlot* slot;

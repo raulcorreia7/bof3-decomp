@@ -281,8 +281,6 @@ MATCH void func_801F8CDC(Actor* actor) {
 
 #include "overlays/scenario/Actor_Wait.h"
 
-/* blocker: row load order; first diff: +0x10 lw v1,20(a2) (candidate) against lbu v1,3(a2) (retail). */
-/* Hint: steps a 3-byte-header record: byte 0x02 counts down, 0x03 adds 6, word 0x08 adds 0x40000, word 0x14 accumulates 0x08; the record type with word 0x08 and 0x14 is not named yet. */
 INCLUDE_ASM(func_801F8D4C);
 
 INCLUDE_ASM(func_801F8D98);
