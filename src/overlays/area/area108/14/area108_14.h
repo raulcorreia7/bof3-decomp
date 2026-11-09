@@ -21,8 +21,30 @@ typedef struct Area108Scratch {
 ASSERT_SIZE(Area108Scratch, 0x40);
 ASSERT_OFFSET(Area108Scratch, pos, 0x34);
 
+/* One placement row: a whole coordinate per axis and whether it sits half a cell on. */
+typedef struct AreaPosEntry {
+    u8 x;
+    u8 x_half;
+    u8 y;
+    u8 y_half;
+} AreaPosEntry;
+
+ASSERT_SIZE(AreaPosEntry, 0x04);
+
+/* Place the actor on the row of `table` that the current stage number selects. */
+#define AREA_PLACE_ACTOR(table)                                     \
+    do {                                                            \
+        u32 i = (u8)(D_80147B67 - 1);                               \
+                                                                    \
+        COORD_INT(g_Task->pos.x)  = (table)[i].x;                   \
+        COORD_FRAC(g_Task->pos.x) = ((table)[i].x_half != 0) << 15; \
+        COORD_INT(g_Task->pos.y)  = (table)[i].y;                   \
+        COORD_FRAC(g_Task->pos.y) = ((table)[i].y_half != 0) << 15; \
+    } while (0)
+
 /* The game-overlay state bytes the cancel path resets. */
 extern u8       D_80147AF0;
+extern u8       D_80147B67;
 extern u8       D_801F56E8[];
 extern Callback D_801F56F4[];
 extern u8       D_801F56FC[];
