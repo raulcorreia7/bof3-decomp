@@ -11,6 +11,7 @@
 
 /* The payload's per-state handler table. */
 extern u8 D_801F3F5C[];
+extern TriggerBox D_801F4188[2];
 
 extern u8 D_80144CAA;
 void      func_801A4BC0(s32 arg0, s32 arg1, s32 arg2);
