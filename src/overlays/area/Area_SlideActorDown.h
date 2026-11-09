@@ -1,23 +1,23 @@
-/* Slides the actor down its screen coordinate by 0x2000 fixed-point units
- * per frame while counting byte 0x09 down; at zero it clears byte 0x48 and
- * moves the handler to state 3.
+/* Grows the actor's horizontal scale by 8192 fixed-point units per frame while
+ * counting the timer down; at zero it clears the reset flag and moves the
+ * handler to mode 3.
  */
 /* func_801F3228 (area115), func_801F323C (area121) */
 MATCH void Area_SlideActorDown(void) {
-    u8* work;
-    u8* reload;
-    u8  timer;
+    Actor* work;
+    Actor* reload;
+    u8     timer;
 
     Actor_CenterOnScreen();
 
-    work    = (u8*)g_Task;
-    timer   = work[9];
-    work[9] = timer - 1;
-    reload  = (u8*)g_Task;
-    FIELD(s32, work, 0x40) += 0x2000;
+    work        = g_Task;
+    timer       = work->timer;
+    work->timer = timer - 1;
+    reload      = g_Task;
+    work->scale.x += 8192;
 
-    if (reload[9] == 0) {
-        reload[0x48]        = 0;
+    if (reload->timer == 0) {
+        reload->unk_48      = 0;
         g_Task->header.mode = 3;
     }
 

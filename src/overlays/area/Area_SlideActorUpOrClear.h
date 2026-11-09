@@ -1,26 +1,25 @@
-/* Slides the actor up its screen coordinate by 0x2000 fixed-point units
- * per frame while counting byte 0x09 down; at zero it releases the actor
- * during an area change, else clears byte 0x48 and moves the handler to
- * state 1.
+/* Shrinks the actor's horizontal scale by 8192 fixed-point units per frame
+ * while counting the timer down; at zero it releases the actor during an area
+ * change, else clears the reset flag and moves the handler to mode 1.
  */
 /* func_801F3364 (area115), func_801F3378 (area121) */
 MATCH void Area_SlideActorUpOrClear(void) {
-    u8* work;
-    u8* check;
+    Actor* work;
+    Actor* check;
 
     Actor_CenterOnScreen();
 
-    work = (u8*)g_Task;
-    work[9] -= 1;
-    check = (u8*)g_Task;
-    FIELD(s32, work, 0x40) -= 0x2000;
+    work = g_Task;
+    work->timer -= 1;
+    check = g_Task;
+    work->scale.x -= 8192;
 
-    if (check[9] == 0) {
+    if (check->timer == 0) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
             Actor_Clear();
             return;
         }
-        check[0x48]         = 0;
+        check->unk_48       = 0;
         g_Task->header.mode = 1;
         return;
     }
