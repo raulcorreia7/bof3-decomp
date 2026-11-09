@@ -20,5 +20,6 @@ typedef struct Magic219Steps {
 } Magic219Steps;
 
 extern Magic219Steps D_801EEC04;
+extern u8            D_801EF9E8[];
 
 #endif
