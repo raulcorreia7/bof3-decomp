@@ -10,7 +10,23 @@ MATCH void func_801EEC04(void) {
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    PartyMember* src;
+    u32          slot;
+    PartyMember* task;
+
+    src                                = g_Battle.selected_actor;
+    slot                               = Battle_AllocEffect(1, 0x35) & 0xFF;
+    task                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = task;
+    g_BattleEffects[slot].pos.x.fixed  = src->pos.x.fixed;
+    g_BattleEffects[slot].pos.y.fixed  = src->pos.y.fixed;
+    g_BattleEffects[slot].pos.z.fixed  = src->pos.z.fixed;
+    g_Task->param.unk_0B               = 1;
+    SND_QueueSelectionFx(0x100);
+    g_Task->header.mode += 1;
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
@@ -27,7 +43,20 @@ MATCH void func_801EEF10(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801EEF78);
+MATCH void func_801EEF78(void) {
+    u8 timer;
+
+    g_Task->timer += 4;
+    g_Task->param.unk_0B += 1;
+    timer = g_Task->timer;
+    if (timer == 16) {
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        GFX_AllocPaletteFade(g_Battle.selected_actor, -8, -8, -8, 1);
+        func_800A9610(g_Battle.target_selector, 16);
+        g_Task->unk_09 = 32;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF054(void) {
     u8  timer;
