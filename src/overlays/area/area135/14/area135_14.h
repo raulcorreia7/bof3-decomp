@@ -64,6 +64,7 @@ void            func_801F37C4(void);
 void            func_801F3830(s32 arg0, s32 arg1);
 void            func_801F3CA8(void);
 s32             func_801F5BCC(s16 arg0);
+u8              func_801F5C60(s32 x, s32 y);
 u8              func_801F5D1C(void);
 /* The overlay's companion steps the wrappers enter. */
 void            func_801F5D98(void);
