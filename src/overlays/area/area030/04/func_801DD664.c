@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 prompt row, then steps the panel cursor from the
- * pad pair: right/left wrap the entry index and move the caret, confirm queues
- * the accept cue and steps the panel state back. */
+/* Draws the AREA030 prompt row. */
 MATCH void func_801DD664(void) {
     u8* panel;
     u16 index;

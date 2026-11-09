@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Runs the area-030 actor's aim: picks the facing from the target
- * record, moves the actor's aim box and keeps the follow distance in range. */
+/* Runs the area-030 actor's aim. */
 /* nonmatching 79.64%: writing the sub_index_03 clear and return at both call sites instead of jumping to one shared
  * block removed one shared label (79.29 -> 79.64); the four arms' D_801E31F8 and g_ActorSlots[0].unk_14 tails still
  * cross-jump, so the candidate is 64 bytes short. Remaining branch@+0xb4: the arm tails need to differ enough that

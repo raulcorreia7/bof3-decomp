@@ -1,8 +1,4 @@
-/* Steps the HUD banner ten units down per frame and clears the work state
- * byte at the bottom row; without the screen-mode flag and with no message
- * or script active it loads state 1 instead, and draws the banner record
- * 0x5C at the work y coordinate.
- */
+/* Steps the HUD banner ten units down per frame and clears the work state byte at the bottom row. */
 /* func_801F392C (area115), func_801F3940 (area121), func_801F448C
  * (area088), func_801F37EC (area152), func_801F395C (area087) */
 MATCH void Area_StepHudBannerDown(void) {

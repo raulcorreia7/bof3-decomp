@@ -9,9 +9,7 @@
 #define FISHING_CURSOR_FLAG     (FISHING_STATE->step_index_0A)
 #define FISHING_CURSOR_STEP     (FISHING_STATE->handler_index_01)
 
-/* Ticks the AREA030 panel item cursor: counts the entry timer down and draws the shrinking row, or on expiry
- * skips a two-byte item code, advances the item pointer and entry count, clamps the count to the category table and
- * hands the new category row to the cursor. */
+/* Ticks the AREA030 panel item cursor. */
 MATCH void func_801D3A54(void) {
     FishingState* work;
     u8*           item;

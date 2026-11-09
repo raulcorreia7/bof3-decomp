@@ -1,5 +1,4 @@
-/* Queues the area screen overlay at (x, y): one sprite per pad mask hit through AREA_HUD_MASK_TABLE, then the
- * gradient diamond. One definition shared by the area overlays; every change here must verify every member. */
+/* Queues the area screen overlay at (x, y). */
 MATCH void Area_DrawHud(s16 x, s16 y) {
     s32 i;
     s32 type;

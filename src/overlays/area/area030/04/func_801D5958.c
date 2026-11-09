@@ -2,10 +2,7 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Walks the AREA030 prompt cue table: while a cue is pending it
- * decrements the countdown and runs the per-frame tail; otherwise it advances
- * the cue index, arms the cue through the mode helper, latches the new
- * countdown and bumps the index. */
+/* Walks the AREA030 prompt cue table. */
 MATCH void func_801D5958(void) {
     FishingState* work;
     FishingState* next;

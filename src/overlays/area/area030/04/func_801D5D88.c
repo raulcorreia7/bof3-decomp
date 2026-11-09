@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Advances the area-030 scrolling banner: steps the 3-byte frame table, bounces the strip between its ends,
- * and draws the three letter rows plus the page counter. */
+/* Advances the area-030 scrolling banner. */
 MATCH void func_801D5D88(void) {
     s32           offset;
     s32           scroll;

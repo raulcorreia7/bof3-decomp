@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Resets the AREA030 panel scratch state and queues the cue selected
- * by the current sub-state table entry. */
+/* Resets the AREA030 panel scratch state and queues the cue selected by the current sub-state table entry. */
 MATCH void func_801E0124(void) {
     FishingState* record;
 

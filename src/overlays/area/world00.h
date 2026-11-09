@@ -1,8 +1,7 @@
 #ifndef WORLD00_FAMILY_H
 #define WORLD00_FAMILY_H
 
-/* Declarations shared by two or more world00 images; an image header that
- * reads one includes this file. */
+/* an image header that reads one includes this file. */
 
 #include "overlays/area/area.h"
 #include "overlays/area/WorldAreaRequest.h"

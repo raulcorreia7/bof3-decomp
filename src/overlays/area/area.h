@@ -1,9 +1,7 @@
 #ifndef OVERLAY_AREA_AREA_H
 #define OVERLAY_AREA_AREA_H
 
-/* The area group's declarations: the symbols two or more area images read or
- * call. A world header includes this file; an image header includes its world
- * header. */
+/* The area group's declarations: the symbols two or more area images read or call. */
 
 #include "game.h"
 #include "sys/exe.h"
@@ -22,8 +20,7 @@
  * loader checks against the archive TOC (@source: wiki:formats/emi#code-overlays). */
 #define AREA_MODULE_ID(area) (52 + (area))
 
-/* One panel marker row selected by a controller mask: the mask, the panel
- * step it selects and an unused byte. */
+/* One panel marker row selected by a controller mask: the mask, the panel step it selects and an unused byte. */
 typedef struct WorldMapMarker {
     u16           mask;
     /* 0x02 */ u8 step;
@@ -42,9 +39,7 @@ typedef struct WorldMapPoint {
 
 ASSERT_SIZE(WorldMapPoint, 4);
 
-/* One world key row: the key matched against g_GameContextSeed and the mode it
- * selects. The area key tables are scanned at a 4-byte stride by func_801F30EC
- * and its per-area twins. */
+/* One world key row: the key matched against g_GameContextSeed and the mode it selects. */
 typedef struct WorldMapKey {
     u16 key;    /* 0x00 */
     u8  mode;   /* 0x02 */
@@ -123,9 +118,7 @@ extern u8       D_801F5364[];
 
 extern Callback D_801F5804[];
 
-/* Ask func_8015CB18 what the party battler in `slot` finds at its position: aim the task at the battler,
- * look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the
- * battler's unk_0B. Every change here must verify every member. */
+/* Ask func_8015CB18 what the party battler in `slot` finds at its position. */
 static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     PartyMember* battler;
     u8           index;
@@ -154,9 +147,7 @@ typedef struct SceneTrigger {
     u8 step;
 } SceneTrigger;
 
-/* The body of a scene trigger check `u8 f(u8 x, u8 y)`: the party at (x, y) facing the leader's way stands on one of
- * the `count` triggers of `table`. It starts the scene event `mode` at the trigger's step and returns 1, else returns
- * 0. A block statement macro: it declares a local, so it is the first statement of the function. */
+/* The body of a scene trigger check `u8 f(u8 x, u8 y)`. */
 #define AREA_START_SCENE_TRIGGER(table, count, mode)                                                           \
     s32 i;                                                                                                     \
                                                                                                                \
@@ -173,8 +164,7 @@ typedef struct SceneTrigger {
     g_SceneEventStep = (table)[i].step;                                                                        \
     return 1
 
-/* Whether a step to (x, y) enters the trigger band that starts at `first_row`: with the scene ready it clears
- * the first script variable and runs script entry 0, which starts the area scene and blocks the step. */
+/* Whether a step to (x, y) enters the trigger band that starts at `first_row`. */
 static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
     if (D_80143F03 == 2 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && (u32)((x >> 16) - 70) < 3U) {
         if ((u32)((y >> 16) - first_row) < 3U &&
@@ -187,9 +177,7 @@ static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
     return 0;
 }
 
-/* Store the step the cell code under the party leader's next position selects, then run it from `steps`.
- * A plain-block statement macro: as an inline the function is longer, and `do { } while (0)` adds an
- * instruction. */
+/* Store the step the cell code under the party leader's next position selects, then run it from `steps`. */
 #define AREA_STEP_BY_CELL_CODE(steps)                                                                          \
     {                                                                                                          \
         s32    x;                                                                                              \

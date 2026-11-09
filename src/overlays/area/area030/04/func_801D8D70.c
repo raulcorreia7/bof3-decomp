@@ -9,8 +9,7 @@
 #define FISHING_PANEL_WIDTH     138
 #define FISHING_LABEL_COLUMN_X  136
 
-/* Draws the two-line AREA030 panel: a 0x8A-wide frame per section,
- * the item icon rows, and the two labelled columns. */
+/* Draws the two-line AREA030 panel. */
 MATCH void func_801D8D70(u16 x, u16 y) {
     u16 panel_x;
     u16 panel_y;

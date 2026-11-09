@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* On the two gate states, clamps the shared selection byte and
- * repositions the cursor, then queues the panel icon selected by the low bit. */
+/* On the two gate states, clamps the shared selection byte and repositions the cursor. */
 MATCH void func_801DCCF4(void) {
     FishingState* record;
     s32           value;

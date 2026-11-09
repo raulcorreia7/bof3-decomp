@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Runs the panel helper, then issues the 0x1D text-row draw for
- * the fixed row selected by the scratch record byte at +0x4B. */
+/* Runs the panel helper, then issues the 0x1D text-row draw for the fixed row selected by the scratch record byte at +0x4B. */
 MATCH void func_801D3824(void) {
     u8* record;
     s32 index;

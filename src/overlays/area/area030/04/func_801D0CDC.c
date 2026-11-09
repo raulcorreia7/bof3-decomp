@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Copies the four AREA030 entry bytes into the scratch record and
- * seeds its panel fields, position limit and state counter. */
+/* Copies the four AREA030 entry bytes into the scratch record and seeds its panel fields, position limit and state counter. */
 MATCH void func_801D0CDC(void) {
     FishingState* panel;
     FishingState* blank;

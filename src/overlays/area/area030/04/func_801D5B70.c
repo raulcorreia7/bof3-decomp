@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Seeds the AREA030 scratch record for the later menu phase, then
- * arms the 0x0A subsystem step and retires scratch state byte `0x03`. */
+/* Seeds the AREA030 scratch record for the later menu phase. */
 
 /* Declared file-locally: this module's shared header omits the callee. */
 

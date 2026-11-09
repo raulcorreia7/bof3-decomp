@@ -1,18 +1,6 @@
 #include "area030_04.h"
 
-/* Advances the four AREA030 label slots for one frame.  Each slot
- * reloads its row byte and the masked byte its row selects in the slot table;
- * a live row first decrements its dwell counter, then a per-slot mode is chosen
- * from the refresh flag and that counter.  A retiring slot folds its signed
- * growth byte plus the character's height into the shared bar value once the
- * sum reaches the bar limit (also refreshing the bar's clear value), a growing
- * slot advances its row byte and reloads a 12-frame dwell, and any other slot
- * clears both of its bytes.
- *
- * Row bytes and dwell counters live in the byte planes at 0x801E31E0 and
- * 0x801E31E4 (four slots each, one byte per slot); the slot table at 0x801E28F4
- * has 8-byte entries whose leading word points at the row's byte string, and
- * the signed growth byte shared with that stride lives at 0x801E28F8. */
+/* Advances the four AREA030 label slots for one frame. */
 MATCH void func_801DE018(void) {
     s32 i;
     s32 mode;

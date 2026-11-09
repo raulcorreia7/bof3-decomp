@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Advances the AREA030 sub-state counter, seeds the battle
- * parameters from the current slot, and enters the next mode. */
+/* Advances the AREA030 sub-state counter, seeds the battle parameters from the current slot. */
 MATCH void func_801DAF18(void) {
     u8 counter;
 

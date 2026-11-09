@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Counts the AREA030 box timer down and, while it runs, draws the
- * shrinking clip row for the selected entry; at zero it hands off to the box
- * teardown. */
+/* Counts the AREA030 box timer down and, while it runs, draws the shrinking clip row for the selected entry. */
 MATCH void func_801D41E4(void) {
     FishingState* work;
     FishingState* state;

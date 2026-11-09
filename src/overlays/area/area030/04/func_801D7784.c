@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the 0x17-cell work list at (list_x, list_y) with its 0x78-wide
- * frames, the 0x17-cell gauge row at list_y + 0x90, and the three-cell tail,
- * then closes the frame. */
+/* Draws the 0x17-cell work list at (list_x, list_y) with its 0x78-wide frames, the 0x17-cell gauge row at list_y + 0x90. */
 MATCH void func_801D7784(u16 list_x, u16 list_y) {
     s32 i;
     s32 offset;

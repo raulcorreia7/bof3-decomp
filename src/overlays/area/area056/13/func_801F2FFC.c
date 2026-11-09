@@ -1,7 +1,6 @@
 #include "area056_13.h"
 
-/* Twin of func_801F2C04 in this image (scene flag 14 instead of 8);
- * consolidate the bodies in the polish pass. */
+/* Twin of func_801F2C04 in this image (scene flag 14 instead of 8); consolidate the bodies in the polish pass. */
 MATCH void func_801F2FFC(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {

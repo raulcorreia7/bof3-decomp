@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Reacts to the pad repeat decode: closes or reopens the panel,
- * advances the panel cursor through the scratchpad work record, and redraws the
- * two panel lines with the selected record word and fishing-rod/lure id. */
+/* Reacts to the pad repeat decode. */
 MATCH void func_801DCDB8(void) {
     u16* pad_state;
     u16  pad;

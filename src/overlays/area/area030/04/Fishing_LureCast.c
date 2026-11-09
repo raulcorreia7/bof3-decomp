@@ -1,9 +1,6 @@
 #include "area030_04.h"
 
-/* Seeds the AREA030 battle-intro scratch record: it captures the
- * world anchor pair, samples the ground height at it, with Area_SampleHeight, scales the
- * entry's height byte into the record's clip value, clamps the height plus 0x100,
- * and primes the table pointers and draw state for the next frame. */
+/* Seeds the AREA030 battle-intro scratch record. */
 /* func_801D210C */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_LureCast(void) {

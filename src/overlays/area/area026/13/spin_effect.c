@@ -358,8 +358,7 @@ MATCH s32 func_801F2C04(void) {
     SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
 }
 
-/* `work2` re-reads the slot so each site emits its own address load;
- * both pointers denote the same object. */
+/* `work2` re-reads the slot so each site emits its own address load; both pointers denote the same object. */
 MATCH void func_801F2C48(void) {
     Actor* work;
     Actor* work2;
@@ -380,8 +379,7 @@ MATCH void func_801F2C48(void) {
     work2->header.mode++;
 }
 
-/* `work2`/`work3` re-read the slot so each site emits its own address
- * load; all pointers denote the same object. */
+/* `work2`/`work3` re-read the slot so each site emits its own address load; all pointers denote the same object. */
 MATCH void func_801F2C94(void) {
     Actor* work;
     Actor* work2;
@@ -409,9 +407,7 @@ MATCH void func_801F2D3C(void) {
     Actor_Clear();
 }
 
-/* The table pointers must stay non-const: the original build reads them
- * through writable pointers, which keeps the outgoing 5th argument store
- * ordered before the table loads. */
+/* The table pointers must stay non-const. */
 MATCH void func_801F2D5C(s32* center, s32 radius) {
     u8   scratch[0x20];
     s32* tbl33fc;
@@ -561,8 +557,7 @@ MATCH void func_801F3338(void) {
     SYS_SetFlag(g_SceneFlags, 0x2Eu);
 }
 
-/* Original sets no mode argument (etc/game/00 revision ignores it); declared
- * arg-less to match. Table is the etc/game/00 ActorSlot table. */
+/* Original sets no mode argument (etc/game/00 revision ignores it); declared arg-less to match. */
 
 MATCH void func_801F3360(void) {
     s32        actor_slot;

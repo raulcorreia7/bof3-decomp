@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Initialises the AREA030 panel scratch record from the current
- * sub-state table entry and advances the panel animation counter. */
+/* Initialises the AREA030 panel scratch record from the current sub-state table entry and advances the panel animation counter. */
 MATCH void func_801D39B8(void) {
     FishingState* record;
     FishingState* panel;

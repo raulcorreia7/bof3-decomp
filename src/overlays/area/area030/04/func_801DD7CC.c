@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 panel row, then moves the panel state when the
- * prompt page and frame state allow it: the accept cue steps the caret back,
- * right/left step the selected index with wraparound. */
+/* Draws the AREA030 panel row. */
 MATCH void func_801DD7CC(void) {
     UI_DrawText(29, 20, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_HOW_TO_PAGE_HINT));
     if ((D_80144281 == 0xE) && (D_80144288 == 0)) {

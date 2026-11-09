@@ -1,7 +1,6 @@
 #include "area056_13.h"
 
-/* The func_801F2C04 request entry with the palette and flag guards
- * swapped (scene flag 11). */
+/* The func_801F2C04 request entry with the palette and flag guards swapped (scene flag 11). */
 MATCH void func_801F2DFC(void) {
     MESSAGE_REQUEST_CLEAR();
     if (g_MessageChoice == 1) {

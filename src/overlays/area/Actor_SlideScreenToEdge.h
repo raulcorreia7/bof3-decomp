@@ -1,6 +1,4 @@
-/* Slides the actor screen origin by 0x10 and advances the step at 0x80. One
- * definition shared by the world03 area overlays; every change here must
- * verify every member. */
+/* Slides the actor screen origin by 0x10 and advances the step at 0x80. */
 /* func_801F2F34 (area147) */
 /* func_801F2FA4 (area148) */
 MATCH void Actor_SlideScreenToEdge(void) {

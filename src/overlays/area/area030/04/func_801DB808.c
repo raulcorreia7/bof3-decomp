@@ -2,8 +2,7 @@
 
 /* Declared file-locally: this module's shared header omits the callees. */
 
-/* Counts the AREA030 prompt timer down while the slot row scrolls,
- * then steps the work state once the timer expires and runs the shared tails. */
+/* Counts the AREA030 prompt timer down while the slot row scrolls. */
 MATCH void func_801DB808(void) {
     s32 offset;
 

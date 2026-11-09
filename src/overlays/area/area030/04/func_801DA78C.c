@@ -1,10 +1,6 @@
 #include "area030_04.h"
 
-/* Advances the area's entry state: while the record's state byte is
- * not 3, the held d-pad direction nudges the record's selection word, and the work area either
- * latches the pressed 0xA000 direction into its 0x0C word and the record's
- * speed word, or releases the record once the direction is no longer held and
- * its 0x34 word leaves the accepted range; it then runs the shared refresh. */
+/* Advances the area's entry state. */
 MATCH void func_801DA78C(void) {
     ActorSlot*    record;
     FishingState* work;

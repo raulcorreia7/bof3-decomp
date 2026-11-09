@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 menu icon: sets the FT4 header, picks the tpage
- * from the GPU graph type, maps the 0x58/0x9A texture cell over both halves of
- * the quad, and queues the 0x28-byte primitive. */
+/* Draws the AREA030 menu icon. */
 MATCH void func_801D8248(s16 x, s16 y, u8 height) {
     POLY_FT4* prim;
     s32       tpage;

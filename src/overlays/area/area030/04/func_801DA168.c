@@ -2,9 +2,7 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Draws the AREA030 prompt frame for the caret row, queues the cue the
- * pad pair selects and advances the panel step, then re-arms the panel window
- * and the prompt row. */
+/* Draws the AREA030 prompt frame for the caret row, queues the cue the pad pair selects and advances the panel step. */
 MATCH void func_801DA168(void) {
     u16*          pad;
     FishingState* work;

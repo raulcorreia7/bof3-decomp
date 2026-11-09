@@ -7,8 +7,7 @@
 /* Each accessory row is one icon cell tall. */
 #define FISHING_ACCESSORY_ROW_HEIGHT  13
 
-/* Draws the accessory slot list: two icon rows per accessory with
- * its quantity, then the footer and the selection cursor clamp. */
+/* Draws the accessory slot list. */
 /* nonmatching unmeasured: the x/y parameters are 32-bit (the retail prologue copies $a0 and $a1 whole into $s0 and $v1
  * and never re-sign-extends them, and it masks the y argument with 0xFFFF after adding 1); area030_04.h and this
  * definition now declare them s32, and the callers narrow their argument to 16 bits themselves. resume: a source shape

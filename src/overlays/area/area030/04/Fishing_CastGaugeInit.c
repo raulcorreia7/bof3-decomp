@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Seeds the AREA030 scratchpad record for the next state and advances
- * the state byte. */
+/* Seeds the AREA030 scratchpad record for the next state and advances the state byte. */
 /* func_801D1B54 */
 MATCH void Fishing_CastGaugeInit(void) {
     FishingState* record;

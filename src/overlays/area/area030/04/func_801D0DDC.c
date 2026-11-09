@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Subtracts 8 from the work position, clamps it to 0xAE when lower, increments the work state byte, and
- * submits the position. */
+/* Subtracts 8 from the work position, clamps it to 0xAE when lower, increments the work state byte. */
 MATCH void func_801D0DDC(void) {
     FishingState* work;
     u8            state;

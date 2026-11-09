@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 status banner: queues the current mode's label
- * strip, then the icon quad with the elapsed-battle count clamped to 0..4. */
+/* Draws the AREA030 status banner. */
 
 MATCH void func_801D1F38(void) {
     u8 label;

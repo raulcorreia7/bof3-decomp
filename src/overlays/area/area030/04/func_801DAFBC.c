@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* When the AREA030 state byte is 3, arms the alternate selection cue
- * and advances the sub-state to 2, then runs the shared world update. */
+/* When the AREA030 state byte is 3, arms the alternate selection cue and advances the sub-state to 2. */
 MATCH void func_801DAFBC(void) {
     if (D_80144199 == 3) {
         SND_StopSequence(0, 0);

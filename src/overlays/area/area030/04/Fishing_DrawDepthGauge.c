@@ -2,10 +2,7 @@
 
 /* PsyQ SetPolyF4; the SDK map omits this entry, so the address name is kept. */
 
-/* Draws the AREA030 panel's bottom caption bar: a Gouraud panel plus
- * a 16x16 mode sprite, then a flat quad built from the two caption columns. The
- * bar top tracks the world height helper unless the countdown gate is off, and
- * the second icon slides up while the count is still running. */
+/* Draws the AREA030 panel's bottom caption bar. */
 /* func_801D195C */
 MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
     POLY_F4* primitive;

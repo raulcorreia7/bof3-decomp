@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD00_AREA032_13_H
 #define OVERLAY_WORLD00_AREA032_13_H
 
-/* The area032 world overlay's local declarations: the sprite and scratch views,
- * its handler table and prototypes. Only this image includes the file. */
+/* The area032 world overlay's local declarations. */
 
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/area/world00.h"

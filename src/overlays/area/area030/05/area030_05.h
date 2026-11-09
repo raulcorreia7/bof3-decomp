@@ -1,16 +1,13 @@
 #ifndef OVERLAY_WORLD00_FISHING_05_H
 #define OVERLAY_WORLD00_FISHING_05_H
 
-/* The world00/area030/05 world overlay's local declarations: the work-cost rows, the
- * payload prologue and the area data symbols. Only this image includes the
- * file. */
+/* The world00/area030/05 world overlay's local declarations. */
 
 #include "overlays/area/world00.h"
 #include <stdio.h>
 #include "menu/draw.h"
 
-/* The fishing shop messages: indexes into the message table the pond loads at
- * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
+/* The fishing shop messages. */
 typedef enum FishingShopMessageId {
     FISHING_SHOP_MSG_CONFIRM_ALL      = 69,
     FISHING_SHOP_MSG_CONFIRM_ITEM     = 70,
@@ -32,8 +29,7 @@ typedef struct AreaCost {
     u8 run_05[3];
 } AreaCost;
 
-/* Payload prologue: the loader-verified module id and the "*%2d" format the
- * cost printers pass to sprintf. */
+/* Payload prologue: the loader-verified module id and the "*%2d" format the cost printers pass to sprintf. */
 typedef struct EMIOverlayHead {
     u32  id;        /* 0x00 */
     char format[5]; /* 0x04 "*%2d" */

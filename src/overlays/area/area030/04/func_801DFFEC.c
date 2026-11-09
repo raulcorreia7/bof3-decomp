@@ -1,9 +1,6 @@
 #include "area030_04.h"
 
-/* Writes the scratchpad work-object fields at 0x0C and 0x10 from the
- * words at 0x34 and 0x38: each becomes (word & 0xFFFF8000) - word, i.e. the
- * negated low 15 bits, shifted right 3. Also marks byte 0x09 as 8 and bumps
- * the work-object step byte 0x02. */
+/* Writes the scratchpad work-object fields at 0x0C and 0x10 from the words at 0x34 and 0x38. */
 MATCH void func_801DFFEC(void) {
     u32* record;
     u32  x;

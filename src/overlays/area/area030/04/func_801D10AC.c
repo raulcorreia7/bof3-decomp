@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Grows the three AREA030 scratch bytes by 0x10 and, once the first
- * one reaches -0x40, clears them and the scratch flags before stepping the
- * scratch state, then defers to the AREA030 handler. */
+/* Grows the three AREA030 scratch bytes by 0x10 and, once the first one reaches -0x40, clears them and the scratch flags before stepping the scratch state. */
 MATCH void func_801D10AC(void) {
     FISHING_STATE->tint_5D += 0x10;
     FISHING_STATE->tint_5E += 0x10;

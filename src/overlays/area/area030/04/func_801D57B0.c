@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Claims up to two free AREA030 entry rows for the running scene, then
- * seeds the scratch record for the later menu phase and steps the work state. */
+/* Claims up to two free AREA030 entry rows for the running scene. */
 MATCH void func_801D57B0(void) {
     FishingState* work;
     FishingState* panel;

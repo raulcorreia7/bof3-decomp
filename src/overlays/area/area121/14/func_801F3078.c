@@ -1,6 +1,5 @@
 #include "area121_14.h"
 
-/* Each access reloads the work cell: the stores go through its pointer, which
- * the compiler must assume may alias the cell. */
+/* Each access reloads the work cell. */
 
 #include "overlays/area/Area_InitSceneActor.h"

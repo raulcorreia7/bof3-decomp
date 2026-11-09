@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Walks the 30 AREA030 state records (stride 0x98) and runs the
- * per-record update for each live one, publishing the active record through the
- * scratchpad pointer cell. */
+/* Walks the 30 AREA030 state records (stride 0x98) and runs the per-record update for each live one, publishing the active record through the scratchpad pointer cell. */
 MATCH void func_801E09B4(void) {
     u8* p;
     s32 i;

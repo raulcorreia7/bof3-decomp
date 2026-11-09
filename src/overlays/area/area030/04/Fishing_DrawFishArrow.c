@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Builds the AREA030 fish arrow textured quad from page (576, 256) with CLUT
- * (0, 489), mirrored when flip is nonzero, and queues the primitive.
- */
+/* Builds the AREA030 fish arrow textured quad from page (576, 256) with CLUT (0, 489), mirrored when flip is nonzero. */
 
 /* func_801D2C34 */
 MATCH void Fishing_DrawFishArrow(s16 x, s16 y, s8 flip, u8 ot_index) {

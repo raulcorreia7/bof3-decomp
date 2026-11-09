@@ -1,9 +1,7 @@
 #ifndef OVERLAY_WORLD00_AREA024_14_H
 #define OVERLAY_WORLD00_AREA024_14_H
 
-/* The area024 world overlay's local declarations: its sprite, spin and scratch
- * work records, handler table and prototypes. Only this image includes the
- * file. */
+/* The area024 world overlay's local declarations. */
 
 #include "common/vector.h"
 #include "overlays/area/AreaSprite.h"
@@ -33,8 +31,7 @@ typedef struct Area024Scratch {
 ASSERT_SIZE(Area024Scratch, 0x40);
 ASSERT_OFFSET(Area024Scratch, pos, 0x34);
 
-/* Per-sprite transform state at 0x800E4940 (0x18-byte stride): the halfword
- * translation base at +0x00 and the rotation angles at +0x10. */
+/* Per-sprite transform state at 0x800E4940 (0x18-byte stride). */
 typedef struct AreaTransform {
     /* 0x00 */ u16     base_x;
     /* 0x02 */ u16     base_y;

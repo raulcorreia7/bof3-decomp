@@ -1,11 +1,6 @@
 #include "area030_04.h"
 
-/* Walks the 30 state records (stride 0x98) at g_Actors; for every
- * live record it publishes the record pointer to the scratch work slot
- * g_Task and to g_CurrentActor, dispatches through the handler table
- * g_FishingFishStates with the record's type byte, then rebuilds the record's blend byte
- * 0x5D from flag 0x20 and the signed halfword 0x3E and copies it to 0x5E and
- * 0x5F. */
+/* Walks the 30 state records (stride 0x98) at g_Actors. */
 /* func_801DE4AC */
 MATCH void Fishing_UpdateFish(void) {
     void (**table)(void);

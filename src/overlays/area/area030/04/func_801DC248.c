@@ -7,10 +7,7 @@
 #define FISHING_SLOT_HANDLER  (FISHING_STATE->mode_index_02)
 #define FISHING_PAGE_HANDLER  (FISHING_STATE->sub_index_03)
 
-/* Advances the AREA030 selection page: slides the page counter,
- * draws the page/selection rows for the current category entry, and on the
- * fourth step resets the counter, registers the chosen entry with the page
- * flags, and queues the 0x203 cue before the world step passes. */
+/* Advances the AREA030 selection page. */
 MATCH void func_801DC248(void) {
     s32 offset;
     u8* counter;

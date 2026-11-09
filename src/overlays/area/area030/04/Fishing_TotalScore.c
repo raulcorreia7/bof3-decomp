@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Sums the per-slot results of the slot helper for every set byte of
- * the 32-entry table and returns the 16-bit total. */
+/* Sums the per-slot results of the slot helper for every set byte of the 32-entry table and returns the 16-bit total. */
 /* func_801E0B6C */
 MATCH s32 Fishing_TotalScore(void) {
     s32 i;

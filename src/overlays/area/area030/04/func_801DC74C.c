@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Initializes the AREA030 field when the gate halfword is clear:
- * sets the two world scale words, resets the object records, arms the field
- * effect, and starts the matching field cue. */
+/* Initializes the AREA030 field when the gate halfword is clear. */
 MATCH void func_801DC74C(void) {
     if (WINDOW_EFFECT_IDLE()) {
         CallbackWait(1);

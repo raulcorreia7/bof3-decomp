@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Configures the shared 8x8 sprite primitive as the dim AREA030 icon
- * marker and appends it with the caller's semi-transparency mode. */
+/* Configures the shared 8x8 sprite primitive as the dim AREA030 icon marker and appends it with the caller's semi-transparency mode. */
 /* func_801D18CC */
 MATCH void Fishing_DrawIcon(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     SPRT_8* primitive;

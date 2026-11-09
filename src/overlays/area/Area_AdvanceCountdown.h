@@ -1,10 +1,4 @@
-/* Advances the countdown at g_Task +0x30 by 0x10: when it reaches zero or
- * below the state byte moves to 1 and, if g_GameStateIndex is 0, cue 0x201 plays;
- * the frame update then runs with the mode taken from the sign of g_Task
- * +0x32. One definition shared by the world03 area overlays; members keep the
- * explicit Actor view because not every member unit defines the view macro.
- * Every change here must verify every member address.
- */
+/* Advances the countdown at g_Task +0x30 by 0x10. */
 /* func_801F311C (area148/13), func_801F30AC (area147/13) */
 MATCH void Area_AdvanceCountdown(void) {
     u16 count;

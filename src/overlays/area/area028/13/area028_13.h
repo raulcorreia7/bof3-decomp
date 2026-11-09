@@ -1,9 +1,7 @@
 #ifndef OVERLAY_WORLD00_AREA028_13_H
 #define OVERLAY_WORLD00_AREA028_13_H
 
-/* The area028 world overlay's local declarations: the 32-entry position ring,
- * the scratch position view and the work state handler table. Only this image
- * includes the file. */
+/* The area028 world overlay's local declarations. */
 
 #include "overlays/area/world00.h"
 #include "area/spad.h"

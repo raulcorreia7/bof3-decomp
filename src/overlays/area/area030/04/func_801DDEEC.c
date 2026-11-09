@@ -2,9 +2,7 @@
 
 #define WORLD00_FISHING_DRAW_ENABLE SP_REF(u8, 0u)
 
-/* Holds the AREA030 fade flag: a pad-1 input bit forces the flag on
- * and refills the fade counter, otherwise a pad-2 bit drains the counter and
- * keeps the flag on until it reaches zero. */
+/* Holds the AREA030 fade flag. */
 MATCH void func_801DDEEC(void) {
     FishingState* record;
 

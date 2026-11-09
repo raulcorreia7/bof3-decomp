@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Selects the AREA030 scratch mode bytes from the world state:
- * mode 1 clears the flag, otherwise a low world halfword sets it; either
- * way the follow byte is cleared. */
+/* Selects the AREA030 scratch mode bytes from the world state. */
 MATCH void func_801D1538(void) {
     FishingState* spike;
 

@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD02_AREA090_13_H
 #define OVERLAY_WORLD02_AREA090_13_H
 
-/* The world02/area090/13 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The world02/area090/13 overlay: one file per split function and its data. */
 
 #include "overlays/area/world02.h"
 

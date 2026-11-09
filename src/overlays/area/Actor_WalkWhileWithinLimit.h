@@ -1,5 +1,4 @@
-/* Walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the
- * facing-5 y step is at most the limit the scene selects from `limits`. Shared by the world area overlays. */
+/* Walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the limit the scene selects from `limits`. */
 static inline void Area_WalkWhileWithinLimit(const u8* limits) {
     if ((u32)(g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08 & 7].y) <=
         (u32)(limits[g_SceneEventSelection] << 16)) {

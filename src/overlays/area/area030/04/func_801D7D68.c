@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Draws one status-panel column at (x, y): the panel frame, two
- * label rows, four row icons and the footer; column_mode (the caller passes one bit of
- * its mask) selects the second set of sprite ids, 4 apart. */
+/* Draws one status-panel column at (x, y). */
 MATCH void func_801D7D68(s16 x, s16 y, u8 column_mode) {
     s32 i;
 

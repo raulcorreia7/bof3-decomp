@@ -1,6 +1,4 @@
-/* When any area draw mode is set, draws HUD sprites 4 and 5 side by side
- * and the value text at their corner.
- */
+/* When any area draw mode is set, draws HUD sprites 4 and 5 side by side and the value text at their corner. */
 /* func_801F40FC (area065), func_801F40C4 (area045) */
 MATCH void Area_DrawHudValue(s16 x, s16 y) {
     if ((g_AreaDrawFlags & (AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_APPEND_ACTOR_PRIMITIVES |

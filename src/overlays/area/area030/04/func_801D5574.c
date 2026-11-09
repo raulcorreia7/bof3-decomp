@@ -1,10 +1,6 @@
 #include "area030_04.h"
 
-/* Advances the scratchpad step byte, draws the AREA030 frame (its
- * width shrinks by 0x10 per step when the direction byte is clear, otherwise
- * fixed) and the strip at the step-derived offset, then on step 4 sets the next
- * work step from the direction byte: 0 with no direction, else 2 for 0 and 6
- * for 1. */
+/* Advances the scratchpad step byte, draws the AREA030 frame (its width shrinks by 0x10 per step when the direction byte is clear, otherwise fixed) and the strip at the step-derived offset. */
 MATCH void func_801D5574(void) {
     s32 offset;
     s32 y;

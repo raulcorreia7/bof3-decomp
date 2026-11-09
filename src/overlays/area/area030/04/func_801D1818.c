@@ -2,10 +2,7 @@
 
 /* PsyQ SetSprt16; the SDK map omits this entry, so the address name is kept. */
 
-/* Configures the shared 16x16 sprite primitive as the AREA030 mode
- * icon and appends it with the caller's semi-transparency mode. The sprite's U
- * coordinate comes from the texture table entry selected by the world graphics
- * mode bits. */
+/* Configures the shared 16x16 sprite primitive as the AREA030 mode icon and appends it with the caller's semi-transparency mode. */
 MATCH void func_801D1818(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     SPRT_16* primitive;
 

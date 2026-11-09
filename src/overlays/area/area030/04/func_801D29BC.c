@@ -1,10 +1,6 @@
 #include "area030_04.h"
 
-/* Initialises the AREA030 scratch work record: copies the five world
- * state bytes at (u32)&D_80143FEC..(u32)&D_80143FF0 into scratch offsets 0x24..0x28, marks
- * 0x29 with 5, clears the byte at 0x48 and the words at 0x3C and 0x60..0x6C,
- * seeds the delta bytes 0x5D..0x5F with -100, then refreshes the record through
- * func_801D2AE0 and advances the scratch work index at 0x01. */
+/* Initialises the AREA030 scratch work record. */
 MATCH void func_801D29BC(void) {
     volatile u8* world;
     volatile u8* work;

@@ -1,7 +1,5 @@
-/* Moves the actor's screen y down by 0x20; once it reaches 0 calls ARRIVE, sets step 1 and plays the area cue when no
- * request is pending; then calls DRAW. A statement macro shared by the area overlays; every change here must verify
- * every member. */
-/* AREA_SCREEN_SLIDE_DOWN_STEP (area117 0x801F3024, area119 0x801F3210) */
+/* Moves the actor's screen y down by 0x20. */
+/* AREA_SCREEN_SLIDE_DOWN_STEP (area117 0x801F3024, area119 0x801F3210). */
 #define AREA_SCREEN_SLIDE_DOWN_STEP(ARRIVE, DRAW)         \
     u16 position;                                         \
     position         = g_Task->screen_y + 0x20;           \

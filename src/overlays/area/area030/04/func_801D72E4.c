@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the area-030 party bars: the actor's own bar row, the
- * member bars and the name text. */
+/* Draws the area-030 party bars: the actor's own bar row, the member bars and the name text. */
 /* nonmatching unmeasured: the bar count is 10 with a live step index and 9 without it (the retail sets s3 to 10 and
  * 9 on the two paths) and the slot stores run flags, type, unk_01, unk_02; candidate 68.92%. resume: a source
  * shape that homes the work pointer in a0 like the retail. */

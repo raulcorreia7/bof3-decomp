@@ -1,7 +1,6 @@
 #include "area016_13.h"
 
-/* Each access reloads the work cell: the stores go through its pointer, which
- * the compiler must assume may alias the cell. */
+/* Each access reloads the work cell. */
 
 MATCH void func_801F4610(void) {
     s32 row;

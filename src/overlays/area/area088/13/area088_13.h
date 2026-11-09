@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD02_AREA088_13_H
 #define OVERLAY_WORLD02_AREA088_13_H
 
-/* The world02/area088/13 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The world02/area088/13 overlay: one file per split function and its data. */
 
 #include "overlays/area/world02.h"
 #include "area/spad.h"
@@ -45,8 +44,7 @@ extern WorldMapMarker D_801F6234[6];
 extern u16 D_800E4B3E;
 /* g_SceneEventStep read unsigned: Fishing_ShowLocation steps it with a byte load. */
 extern u8  g_SceneEventStep_u8[];
-/* Key rows: column 0 is matched against g_GameContextSeed; column g_SceneState is the message Fishing_ShowLocation
- * starts. */
+/* Key rows: column 0 is matched against g_GameContextSeed. */
 extern u16 D_801F6090[7][16];
 /* Three fishing spots of 12 bytes: the spot id, then the 11 fish ids its board lists (0xFF ends the list). */
 extern u8  D_801F6170[36];

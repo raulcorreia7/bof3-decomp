@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Advances the accessory panel's step cursor through the
- * D_801E20CC entry table, reserves a scenario row for the selected ability,
- * moves the panel by the step deltas and redraws its counter. */
+/* Advances the accessory panel's step cursor through the D_801E20CC entry table, reserves a scenario row for the selected ability, moves the panel by the step deltas and redraws its counter. */
 MATCH void func_801D6F34(void) {
     u8 steps;
     u8 slot;

@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* TODO */
+/* TODO. */
 MATCH void func_801D36F8(void) {
     FishingState* record;
     s8            slot;

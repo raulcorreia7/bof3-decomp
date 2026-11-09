@@ -1,9 +1,6 @@
 #include "area030_04.h"
 
-/* Sets the graphic-0 draw mode on the work layer, places the panel
- * sprite at (x, y), gives it the requested width and shifts its u coordinate,
- * then, unless the shared state word masks the layer off (bit 8), sets graphic
- * 6 and appends the matching semi-transparent tile primitive to the layer. */
+/* Sets the graphic-0 draw mode on the work layer, places the panel sprite at (x, y), gives it the requested width and shifts its u coordinate, then, unless the shared state word masks the layer off (bit 8), sets graphic 6 and appends the matching semi-transparent tile primitive to the layer. */
 /* func_801D3244 */
 MATCH void Fishing_DrawReelCursor(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, u8 ot_layer, s8 is_enabled) {
     TILE* prim;

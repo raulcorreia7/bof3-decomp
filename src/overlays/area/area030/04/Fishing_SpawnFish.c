@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* The kind tables read through a non-const view so the base is rebuilt at
- * every access, the way retail materializes it. */
+/* The kind tables read through a non-const view so the base is rebuilt at every access, the way retail materializes it. */
 #define KIND_TABLE            MEM_PTR(s8, 0x801E2AD6u)
 #define LIMIT_TABLE           MEM_PTR(s8, 0x801E2AD7u)
 #define COUNT_TABLE           MEM_PTR(u8, 0x801E2DF4u)
@@ -16,8 +15,7 @@
 #define ROW_VALUE             FISHING_ROW->ext.fishing.stamina_max
 #define ROW_VALUE2            FISHING_ROW->ext.fishing.stamina
 
-/* Spawns the area-030 state rows for the active spawn columns, rolling and clamping each row's hit value into
- * the kind table words. */
+/* Spawns the area-030 state rows for the active spawn columns, rolling and clamping each row's hit value into the kind table words. */
 /* nonmatching unmeasured: tried the first draft (54.01%); volatile kind tables (48.66%); fresh-pointer table views
  * (53.48%); non-const table view (57.22%); s32 row index (55.08%); s8 count (43.32%); the count table through a pointer
  * local (53.48%) and the count table named by symbol (53.48%). residual is the register roles: retail homes the row

@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* While the scratchpad work-object gate byte is set, decrements it
- * and integrates the object's three velocity components into its three
- * position accumulators. */
+/* While the scratchpad work-object gate byte is set, decrements it and integrates the object's three velocity components into its three position accumulators. */
 /* func_801E0394 */
 MATCH void Fishing_MoveFish(void) {
     FishingState* work;

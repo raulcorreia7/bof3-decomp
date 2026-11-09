@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Scans the 0x20-entry table at 0x80144FE4 from the work record's key
- * word, advancing the key until it hits an occupied entry or wraps back to the
- * start, then seeds the menu panel, the cue mask and the step timer. */
+/* Scans the 0x20-entry table at 0x80144FE4 from the work record's key word, advancing the key until it hits an occupied entry or wraps back to the start. */
 /* func_801D4884 */
 MATCH void Fishing_DataNextFish(void) {
     FishingState* record;

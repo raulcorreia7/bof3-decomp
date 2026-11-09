@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Dispatches the AREA030 scratchpad state byte through the overlay's
- * jump table. */
+/* Dispatches the AREA030 scratchpad state byte through the overlay's jump table. */
 /* func_801D42A0 */
 MATCH void Fishing_DataRun(void) {
     g_FishingDataStates[FISHING_STATE->handler_index_01]();

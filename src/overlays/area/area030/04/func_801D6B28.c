@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Refreshes the AREA030 HUD panel state, clamps the two tracked x
- * positions into their visible ranges, then routes the two marker helpers. */
+/* Refreshes the AREA030 HUD panel state, clamps the two tracked x positions into their visible ranges. */
 MATCH void func_801D6B28(s8 panel_kind) {
     s32 left_x;
     s32 right_x;

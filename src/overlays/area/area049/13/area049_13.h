@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD01_AREA049_13_H
 #define OVERLAY_WORLD01_AREA049_13_H
 
-/* The world01/area049/13 overlay's local declarations. Only this image
- * includes the file. */
+/* The world01/area049/13 overlay's local declarations. */
 
 #include "overlays/area/world01.h"
 #include "overlays/scenario/scenario.h"

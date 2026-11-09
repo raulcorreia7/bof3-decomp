@@ -1,7 +1,4 @@
-/* Shrinks the actor's horizontal scale by 8192 fixed-point units per frame
- * while counting the timer down; at zero it releases the actor during an area
- * change, else clears the reset flag and moves the handler to mode 1.
- */
+/* Shrinks the actor's horizontal scale by 8192 fixed-point units per frame while counting the timer down. */
 /* func_801F3364 (area115), func_801F3378 (area121) */
 MATCH void Area_NarrowActorOrClear(void) {
     Actor* work;

@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Ticks the panel animation counter down, redraws the two panel
- * rows, and advances the panel state once the counter reaches zero. */
+/* Ticks the panel animation counter down, redraws the two panel rows. */
 MATCH void func_801DB738(void) {
     FishingState* record;
 

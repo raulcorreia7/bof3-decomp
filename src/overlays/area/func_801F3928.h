@@ -1,7 +1,4 @@
-/* Raises the panel height at +0x30 by 0xA and clears state byte 0x03 once it
- * reaches 0xF0; sets that byte to 1 when D_801454F2 is 0, the state index is
- * not 2 and the game script is inactive, then draws panel 0x5C. One definition
- * shared by the area overlays; every change here must verify every member. */
+/* Raises the panel height at +0x30 by 0xA and clears state byte 0x03 once it reaches 0xF0. */
 /* func_801F3928 (area016), func_801F3928 (area045) */
 MATCH void func_801F3928(void) {
     Actor* scratch;

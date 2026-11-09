@@ -1,7 +1,4 @@
-/* Centres the actor on screen, counts work byte 0x09 down while adding 0x2000
- * to the field at +0x40, and when the byte reaches 0 clears the field at +0x48
- * and sets work byte 0x01 to 3, then adds the actor. One definition shared by
- * the area overlays; every change here must verify every member. */
+/* Centres the actor on screen, counts work byte 0x09 down while adding 0x2000 to the field at +0x40. */
 /* func_801F3224 (area016), func_801F3224 (area045) */
 MATCH void func_801F3224(void) {
     Actor* scratch;

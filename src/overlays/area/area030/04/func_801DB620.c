@@ -1,9 +1,6 @@
 #include "area030_04.h"
 
-/* Decrements the scratchpad panel counter, shifts the panel by the
- * counter's remaining pixels, and once the counter reaches zero queues cue
- * 0x20B or 0x20C according to the current slot's stored type, reloads the
- * counter to 4 and advances the panel state before the world step passes. */
+/* Decrements the scratchpad panel counter, shifts the panel by the counter's remaining pixels. */
 MATCH void func_801DB620(void) {
     FishingState* record;
     u8            slot;

@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Selects the load mode from the scheduled-area flag, then copies the
- * selected AREA030 table row into the scratch record's probe fields and runs
- * the per-frame tail. */
+/* Selects the load mode from the scheduled-area flag. */
 /* func_801D28DC */
 MATCH void Fishing_LureHooked(void) {
     FishingState* work;

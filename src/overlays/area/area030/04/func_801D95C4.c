@@ -2,8 +2,7 @@
 
 /* Palette row table: 0x40-byte rows selected by the panel palette byte. */
 
-/* Draws two semi-transparent rectangle outlines in the palette row colour, crossing the draw modes around the
- * shade flag. */
+/* Draws two semi-transparent rectangle outlines in the palette row colour, crossing the draw modes around the shade flag. */
 /* nonmatching unmeasured: tried u16 prototype; corrected LINE_F3 stores; palette index math; ternary mode select.
  * resume: prologue placement and register allocation; frame is 0x40 vs 0x38. */
 /* Inline RGB expressions restore the 0x38 frame; register allocation first differs at +0x0C. */

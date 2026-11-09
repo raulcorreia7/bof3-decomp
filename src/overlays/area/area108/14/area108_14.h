@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD02_AREA108_14_H
 #define OVERLAY_WORLD02_AREA108_14_H
 
-/* The world02/area108/14 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The world02/area108/14 overlay: one file per split function and its data. */
 
 #include "common/vector.h"
 #include "overlays/area/AreaSprite.h"

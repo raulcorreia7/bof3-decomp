@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the area-030 HUD cell grid: steps the page timer, draws each of the 32 cells with its selected color,
- * and advances the page row when the timer expires. */
+/* Draws the area-030 HUD cell grid. */
 /* nonmatching 68.66%: the 5th func_8014FC90 argument was a literal 0; retail
  * loads it as the cell palette word ((cell << 1) + &D_801E2070) on both paths,
  * which this body now passes. First diff +0x003C is a layout shift: the body is

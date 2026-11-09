@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD01_AREA068_13_H
 #define OVERLAY_WORLD01_AREA068_13_H
 
-/* The world01/area068/13 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The world01/area068/13 overlay: one file per split function and its data. */
 
 #include "overlays/area/world01.h"
 #include "area/spad.h"
@@ -16,9 +15,7 @@
 #define WELL_TIME_LIMIT_COUNT   16
 #define WELL_TIME_LIMIT_MASK    (WELL_TIME_LIMIT_COUNT - 1)
 
-/* Task modes of the well minigame, the index of its handler table. Lowering and raising run the same
- * ready, count and repeat cycle: a press in "ready" goes to "count", which goes to "repeat"; a press in
- * "repeat" goes back to "ready". */
+/* Task modes of the well minigame, the index of its handler table. */
 enum WellMode {
     WELL_MODE_BEGIN        = 0,
     WELL_MODE_LOWER_READY  = 1,
@@ -71,8 +68,7 @@ extern u8  g_WellSwishStep;
 /* D_801F4E14 */
 extern u16 g_WellSwishButtons;
 
-/* One tick of the lowering timer: running out stores the press count and ends the phase; a press counts
- * and takes press_mode, otherwise idle_mode. */
+/* One tick of the lowering timer. */
 #define WELL_TICK_LOWER(end_cue, press_mode, idle_mode) \
     if (--g_WellLowerTimer == 0) {                      \
         SND_PlayCue(end_cue);                           \

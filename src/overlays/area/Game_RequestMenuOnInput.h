@@ -1,7 +1,4 @@
-/* Requests the menu and clears the actor state when the menu pad mask is
- * pressed and the run lock is off, playing the menu cue; reports whether it
- * fired.
- */
+/* Requests the menu and clears the actor state when the menu pad mask is pressed and the run lock is off, playing the menu cue. */
 /* func_801F5034 (area104), func_801F5578 (area121) */
 MATCH bool Game_RequestMenuOnInput(void) {
     if ((g_InputPressed & g_InputMasks[FIELD_INPUT_MENU]) == 0) {

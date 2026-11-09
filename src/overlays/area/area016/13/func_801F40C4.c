@@ -2,8 +2,7 @@
 
 /* Holds the text stream's offset in the 0x80010000 block. */
 
-/* Local view: this caller passes s16 arguments; the s32 definition only
- * changes the callee prologue save order. */
+/* Local view: this caller passes s16 arguments; the s32 definition only changes the callee prologue save order. */
 
 MATCH void func_801F40C4(s16 x, s16 y) {
     if ((g_AreaDrawFlags & (AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_APPEND_ACTOR_PRIMITIVES |

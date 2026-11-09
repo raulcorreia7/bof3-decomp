@@ -2,8 +2,7 @@
 
 /* Declared file-locally: this module's shared header omits the callee. */
 
-/* Seeds the AREA030 scratch record for the later menu phase, clears
- * its panel state, bumps scratch state byte `0x03` and arms mode 3. */
+/* Seeds the AREA030 scratch record for the later menu phase, clears its panel state, bumps scratch state byte `0x03` and arms mode 3. */
 MATCH void func_801D6598(void) {
     FishingState* record;
     FishingState* retired;

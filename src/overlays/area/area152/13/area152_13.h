@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD04_AREA152_13_H
 #define OVERLAY_WORLD04_AREA152_13_H
 
-/* The world04/area152/13 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The world04/area152/13 overlay: one file per split function and its data. */
 
 #include "overlays/area/world04.h"
 #include "area/spad.h"
@@ -18,10 +17,8 @@
 extern SVECTOR D_1F800014[];
 /* The selection byte that arms the area request. */
 /* The area state byte and the frame flags it is tested against. */
-/* The staged cue rows' fields: the allocation flags, kind, layer, step and
- * distance halfword, indexed by the row stride the spawn pass allocates. */
-/* The payload's data after the last function; the per-state handler tables
- * start at 0x130. */
+/* The staged cue rows' fields. */
+/* The payload's data after the last function; the per-state handler tables start at 0x130. */
 extern u8      D_801F4C3C[];
 #define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
 /* D_801F4E10 */

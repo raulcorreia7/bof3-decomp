@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Draws a 0x28-byte textured quad at (x, y): the graph type selects
- * the tpage bits and the style-selected texture entry fills the UV and size
- * fields of the primitive. */
+/* Draws a 0x28-byte textured quad at (x, y). */
 MATCH void func_801D799C(s16 x, s16 y, u8 height, u8 style) {
     POLY_FT4* prim;
     u16       tpage;

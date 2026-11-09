@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the accessory panel for one actor row: the accessory icons, their names and the slot markers
- * around the actor's icon. */
+/* Draws the accessory panel for one actor row. */
 /* nonmatching unmeasured: the retail frame is 0x48 and the candidate 0x40, so the eight unused frame bytes are
  * declared; candidate 60.27%. resume: a source shape that reproduces the retail's cell, row and enemy-row address
  * forms. */

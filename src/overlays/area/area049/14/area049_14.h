@@ -1,8 +1,7 @@
 #ifndef OVERLAY_WORLD01_AREA049_14_H
 #define OVERLAY_WORLD01_AREA049_14_H
 
-/* The world01/area049/14 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The world01/area049/14 overlay: one file per split function and its data. */
 
 #include "overlays/area/world01.h"
 
@@ -17,8 +16,7 @@ extern u16 D_801F5CD4[];
 
 extern u16 D_801F5CD8[];
 
-/* A bare statement macro, used as a member's whole body. Clear the interaction bit; when the party confirmed
- * (the leader is character 6), run the script and store the two step bytes. */
+/* A bare statement macro, used as a member's whole body. */
 #define AREA_INTERACT_CONFIRM(step_next)                                      \
     if (g_Game.members[0].chr.character_id == 6) {                            \
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING; \

@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* On the final counter state raises the per-slot gauge to its limit
- * and arms the panel cue, then refreshes the shared panel helper. */
+/* On the final counter state raises the per-slot gauge to its limit and arms the panel cue. */
 /* func_801DB554 */
 MATCH void Fishing_CatchRecord(void) {
     FishingState* record;

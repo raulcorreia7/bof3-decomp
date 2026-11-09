@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* Resets the AREA030 scratchpad panel: it clears the state flag byte,
- * rewinds the panel vertical offset to -0x19, and advances the state byte. */
+/* Resets the AREA030 scratchpad panel. */
 MATCH void func_801D3650(void) {
     u8* ptr;
     u8* ptr2;

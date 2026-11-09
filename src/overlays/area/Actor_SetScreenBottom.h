@@ -1,6 +1,4 @@
-/* Scrolls the actor screen origin to y 240 and advances its state. One
- * definition shared by the world area overlays; every change here must verify
- * every member. */
+/* Scrolls the actor screen origin to y 240 and advances its state. */
 /* func_801F3594 (area152), func_801F3604 (area033), func_801F3640 (area151), func_801F36D0 (area016), func_801F36D0
    (area045), func_801F36D4 (area115), func_801F36E8 (area121), func_801F3704 (area087), func_801F3708 (area065),
    func_801F3794 (area104), func_801F4234 (area088) */

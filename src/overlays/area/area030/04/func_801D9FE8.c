@@ -1,7 +1,6 @@
 #include "area030_04.h"
 
-/* When the state byte is clear and the flag byte is 1, seeds the
- * work counter, queues cue 0x102, and bumps the work phase. */
+/* When the state byte is clear and the flag byte is 1, seeds the work counter, queues cue 0x102. */
 MATCH void func_801D9FE8(void) {
     if (D_80144125 == 0 && D_8014403D == 1) {
         FISHING_STATE->step_timer_09 = 4;

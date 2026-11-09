@@ -2,8 +2,7 @@
 
 /* Declared file-locally: this module's shared header omits the callees. */
 
-/* Draws the AREA030 prompt rows for the current slot, arms the cursor
- * and caption rows, and retires the panel when the confirm bits arrive. */
+/* Draws the AREA030 prompt rows for the current slot, arms the cursor and caption rows. */
 MATCH void func_801DBEDC(void) {
     s32 offset;
 

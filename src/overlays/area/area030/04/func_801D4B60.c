@@ -1,10 +1,6 @@
 #include "area030_04.h"
 
-/* Draws the AREA030 fishing panel: stages the panel bars at y 0x4E,
- * selects the fishing record row by the scratch pose, shows the recorded or
- * blank catch row and the pose-keyed icon, then draws the counter panel, the
- * frame at (0x14, 0x12, 0x118, 0x13) and the option mask derived from the work
- * slot when the area state is at least 3. */
+/* Draws the AREA030 fishing panel. */
 MATCH void func_801D4B60(void) {
     s16 key;
     u8  fish;

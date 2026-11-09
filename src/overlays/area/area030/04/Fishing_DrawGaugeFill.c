@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Queues the two AREA030 menu icon gouraud quads: the top half with
- * the light corners at the bottom, then the bottom half with the light corners
- * at the top. */
+/* Queues the two AREA030 menu icon gouraud quads. */
 
 /* func_801D1B88 */
 MATCH void Fishing_DrawGaugeFill(s16 quad_x, s16 quad_y, s16 quad_width, u8 corner_shade) {

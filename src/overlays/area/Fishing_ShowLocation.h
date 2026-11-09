@@ -1,4 +1,3 @@
-/* One definition shared by the area overlays; every change here must verify every member. */
 /* func_801F2C38 */
 MATCH void Fishing_ShowLocation(void) {
     if (D_80143F04 == AREA_ID_CHECKPOINT_BRIDGE) {

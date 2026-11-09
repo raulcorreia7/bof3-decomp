@@ -1,7 +1,4 @@
-/* Steps the banner ten units up per frame, loading the work state with 3
- * at the top row; the screen-mode flag, a message or a script force the
- * same state, and the banner record 0x5C draws at the work y coordinate.
- */
+/* Steps the banner ten units up per frame, loading the work state with 3 at the top row. */
 /* func_801F3754 (area115), func_801F3768 (area121), func_801F3814
  * (area104), func_801F42B4 (area088) */
 MATCH void Area_RaiseHudBanner(void) {
