@@ -1,6 +1,6 @@
-#include "plp278_00.h"
+#include "plp478_00.h"
 
-MATCH void func_801CFAA8(void) {
+MATCH void func_801CF4CC(void) {
     u8 direction;
     
     direction = g_Task->direction_08;
