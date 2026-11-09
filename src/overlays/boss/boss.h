@@ -1,9 +1,6 @@
 #ifndef BOSS_FAMILY_H
 #define BOSS_FAMILY_H
 
-/* Declarations shared by two or more boss images; an image header that
- * reads one includes this file. */
-
 #include "game.h"
 #include "sys/actor.h"
 #include "sys/exe.h"

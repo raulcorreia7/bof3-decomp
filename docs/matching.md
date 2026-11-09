@@ -6,7 +6,7 @@ verdict; a score, a marker or a disassembler opinion is a lead.
 ## Route
 
 Take the cheapest route first and move on after one real attempt. `tools/worklist.py` ranks the open
-functions by route ([find work](../CONTRIBUTING.md#find-work)).
+functions by route ([find work](../CONTRIBUTING.md#your-first-function)).
 
 | # | Route           | Command                                                                   | Move on when                                            |
 | - | --------------- | ------------------------------------------------------------------------- | ------------------------------------------------------- |
@@ -43,9 +43,8 @@ Fix causes before functions.
 ## The loop
 
 1. Read `asm/<target>/func_<ADDR>.s`, its callers and its prototypes.
-2. Draft the C in the ignored scratch folder `work/<image>/<ADDR>/`. A new lift in source uses
-   `NON_MATCHING` until `tools/match.sh` reports `match` and `check-<image>` passes; only then
-   replace its draft with a `MATCH` definition.
+2. Draft the C in the ignored scratch folder `work/<image>/<ADDR>/`, then move it into the unit's
+   `.c` as a `NON_MATCHING` draft ([markers](#markers-and-unmatched-bodies)).
 3. Compile it with the `cc` wrapper and diff it against the target object assembled from the split
    asm ([toolchain](toolchain.md#compiler-wrapper), [objdiff](toolchain.md#objdiff)), or edit the
    unit's `.c` and run `tools/match.sh <target> <func>`. It answers in a fraction of a second:
@@ -53,7 +52,8 @@ Fix causes before functions.
    ([match.sh](toolchain.md#matchsh)). `tools/match.sh --diff <target>@<address>` prints the whole
    function side by side, `!` marking differing rows.
 4. Polish an exact candidate in place ([polish](#polish)).
-5. Run `check-<image>`.
+5. Replace the draft with a `MATCH` definition and run `check-<image>`. A new lift stays a
+   `NON_MATCHING` draft until `tools/match.sh` reports `match` and `check-<image>` passes.
 
 Only the image link proves bytes; `match.sh` compares `.text` only and refuses a function with a
 jump table, string or data of its own. A score and an old comparison prove nothing.

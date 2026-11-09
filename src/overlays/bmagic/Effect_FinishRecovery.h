@@ -1,4 +1,4 @@
-/* Finishes the effect on its targets. Every change must verify every member. */
+/* Finishes the effect on its targets. */
 MATCH void Effect_FinishRecovery(void) {
     if (g_Task->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;

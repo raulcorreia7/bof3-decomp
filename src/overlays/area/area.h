@@ -1,9 +1,7 @@
 #ifndef OVERLAY_AREA_AREA_H
 #define OVERLAY_AREA_AREA_H
 
-/* The area group's declarations: the symbols two or more area images read or
- * call. A world header includes this file; an image header includes its world
- * header. */
+/* The area group's declarations: the symbols two or more area images read or call. */
 
 #include "game.h"
 #include "sys/exe.h"
@@ -123,9 +121,7 @@ extern u8       D_801F5364[];
 
 extern Callback D_801F5804[];
 
-/* Ask func_8015CB18 what the party battler in `slot` finds at its position: aim the task at the battler,
- * look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the
- * battler's unk_0B. Every change here must verify every member. */
+/* Ask func_8015CB18 what the party battler in `slot` finds at its position: aim the task at the battler, look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the battler's unk_0B. */
 static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     PartyMember* battler;
     u8           index;

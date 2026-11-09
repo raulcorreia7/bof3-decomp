@@ -1,4 +1,4 @@
-/* Advances the step when the ticker is zero. Every change here must verify every member. */
+/* Advances the step when the ticker is zero. */
 /* func_801EF528 (magic083), func_801F00B4 (magic151) */
 MATCH void Effect_StepOnZeroTick(void) {
     PartyMember* work;

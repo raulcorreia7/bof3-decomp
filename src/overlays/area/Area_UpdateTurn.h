@@ -1,4 +1,3 @@
-/* One definition shared by the area overlays; every change here must verify every member. */
 MATCH void Area_UpdateTurn(void) {
     Actor* actor;
     s32    heading;

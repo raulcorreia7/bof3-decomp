@@ -1,8 +1,4 @@
-/* Claims the first free row of the effect slot table and returns its index,
- * or 0xFF when all BMAGIC_EFFECT_COUNT rows are in use. One definition shared by
- * the bmagic effect modules; each image header names its table and row count
- * BMAGIC_EFFECT_SLOTS and BMAGIC_EFFECT_COUNT. Every change here must verify
- * every member. */
+/* Claims the first free row of the effect slot table and returns its index, or 0xFF when all BMAGIC_EFFECT_COUNT rows are in use. Each image header names its table and row count BMAGIC_EFFECT_SLOTS and BMAGIC_EFFECT_COUNT. */
 MATCH u32 BMagic_AllocEffect(void) {
     u8 index;
 

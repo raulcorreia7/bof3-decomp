@@ -1,5 +1,4 @@
-/* Dispatches a scenario actor to its callback handler. One definition shared by scenario overlays;
- * every change here must verify every member. */
+/* Dispatches a scenario actor to its callback handler. */
 /* func_801FC46C (scena03), func_801F9D48 (scena04), func_801FCA58 (scena05),
  * func_801FCDD0 (scena06), func_801FD3BC (scena07), func_801FE018 (scena08), func_801FC5E4 (scena09),
  * func_801FD464 (scena10), func_801FA5B8 (scena11), func_801FC574 (scena12), func_801FB350 (scena13),

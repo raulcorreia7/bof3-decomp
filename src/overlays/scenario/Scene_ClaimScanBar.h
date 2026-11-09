@@ -1,4 +1,4 @@
-/* Starts the first free scan bar. Every change here must verify every member. */
+/* Starts the first free scan bar. */
 /* func_801D15DC (sce15ef2), func_801D25EC (sce15ef3) */
 MATCH void Scene_ClaimScanBar(void) {
     s32      index;

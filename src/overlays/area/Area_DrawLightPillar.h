@@ -1,6 +1,4 @@
-/* Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads between a ring of radius 32 at pos and the
- * same ring 0x800 units higher, with a shade that alternates each frame and steps by 4 per segment. One definition
- * shared by the area overlays; every change here must verify every member. */
+/* Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads between a ring of radius 32 at pos and the same ring 0x800 units higher, with a shade that alternates each frame and steps by 4 per segment. */
 /* func_801F2DF0 (area036), func_801F30A8 (area059), func_801F3D70 (area100), func_801F3EEC (area112), func_801F2F78
  * (area116), func_801F3FDC (area143), func_801F2E68 (area146) */
 MATCH void Area_DrawLightPillar(s32* pos) {

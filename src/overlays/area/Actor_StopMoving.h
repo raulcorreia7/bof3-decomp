@@ -1,6 +1,4 @@
-/* Clears the actor velocity words and sets the game overlay byte to 3. One
- * definition shared by the two world area overlays; every change here must
- * verify every member. */
+/* Clears the actor velocity words and sets the game overlay byte to 3. */
 /* func_801F5108 (area104), func_801F564C (area121) */
 MATCH void Actor_StopMoving(void) {
     Actor* work;
