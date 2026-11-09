@@ -775,7 +775,7 @@ addresses. The access decides: find the reader in the retail assembly before cho
 
 Fixed point: the 16.16 `Coord` union (`include/common/fixed.h`) is used where code reads or writes
 one half, or uses a half together with the whole value (`COORD_INT`, `COORD_FRAC`). Elsewhere the
-value is the whole `s32` word. A 4.12 value is a plain integer, written with `ONE` and
+value is the whole `s32` word, read with `FIX_INT(x)` (integer part) and `FIX_FRAC(x)` (low 16 bits). A 4.12 value is a plain integer, written with `ONE` and
 `FIXED_MUL` (`include/sys/math.h`).
 
 A constant compared against an unsigned retail operand keeps its `U` suffix in the `#define`.
