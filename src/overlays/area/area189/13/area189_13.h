@@ -18,6 +18,8 @@
 /* The game-overlay state bytes the cancel paths reset. */
 
 extern u16      D_801492DC;
+/* The per-buffer ordering-table heads, one 8-byte entry per slot. */
+extern u32*     D_80143534[][2];
 /* The key-state word and its mask partner (gameui.h names it g_InputPressed). */
 /* The state handler banks the step dispatchers index. */
 extern Callback D_801F6238[];
