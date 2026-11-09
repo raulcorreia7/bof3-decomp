@@ -17,10 +17,7 @@
 
 #define ENEMY_AI_BLOCK_SIZE 0x10
 
-/* The family byte of an enemy id: the slayer weapons double damage to their
- * family (Dragon Blade, Dragon Spear and Dragonfang to dragons; Demonsbane,
- * Holy Avenger and Aries Spear to demons). The disc records hold only these three
- * values: 146 enemies with none, 11 dragons, 12 demons. */
+/* The family byte of an enemy id. */
 typedef enum EnemyFamily {
     ENEMY_FAMILY_NONE   = 0,
     ENEMY_FAMILY_DRAGON = 1,
@@ -230,9 +227,7 @@ typedef struct EnemyAIBlock {
 
 ASSERT_SIZE(EnemyAIBlock, ENEMY_AI_BLOCK_SIZE);
 
-/* The enemy id as the records store it, read as two bytes: the low byte tells
- * enemies apart (func_801DA69C, func_8009CFEC, Battle_DefeatEnemy) and the high byte is the
- * family the slayer weapons test (Battle_CalcDamage, func_800A2598). */
+/* The enemy id as the records store it, read as two bytes. */
 typedef union EnemyIdCode {
     u16 value;
 
@@ -242,8 +237,7 @@ typedef union EnemyIdCode {
     } byte;
 } EnemyIdCode;
 
-/* One drop of an enemy: the item id (index, then type, as Battle_RollEnemyDrops
- * compares it) and the index into the 8-byte drop chance table at 0x801D0CB8. */
+/* One drop of an enemy: the item id (index. */
 typedef struct EnemyDrop {
     u16 item;
     u8  rate;
@@ -252,8 +246,7 @@ typedef struct EnemyDrop {
 
 ASSERT_SIZE(EnemyDrop, 0x4);
 
-/* Enemy.event_flags and EnemyBattler.event_flags: what the enemy AI may do. The top three bits allow the defend, escape
- * and ability actions the AI picks from. */
+/* Enemy.event_flags and EnemyBattler.event_flags: what the enemy AI may do. */
 typedef enum EnemyEventFlags {
     ENEMY_EVENT_UNK_0    = 1 << 0,
     ENEMY_EVENT_REPRISAL = 1 << 1,

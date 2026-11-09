@@ -33,10 +33,7 @@
 #define STRING_COLOR_BLUE      0x03
 #define T_BLUE                 "\x03"
 
-/* Glyph bytes outside the ASCII letters and digits, and the string form that
- * concatenates them. STRING_SPACE is the message font's space glyph; the plain
- * ASCII space belongs to the interface font. The two fullwidth slots draw the
- * same shapes as their plain counterparts, one glyph apart. */
+/* Glyph bytes outside the ASCII letters and digits, and the string form that concatenates them. */
 #define STRING_COLON           0x3A
 #define T_COLON                "\x3A"
 #define STRING_SEMICOLON       0x3B
@@ -76,8 +73,7 @@
  * (@source: wiki:data/text).
  */
 
-/* Control codes. Each name follows the effect of its case body; a code with no
- * known effect has a plain descriptive name. */
+/* Control codes. */
 typedef enum TextCommand {
     STRING_END       = 0x00,
     STRING_NEWLINE   = 0x01,

@@ -10,8 +10,7 @@
 /* Affinity columns per gene row. */
 #define AFFINITY_COUNT          14
 
-/* Runtime dragon state: the selected id, the companion byte copied from
- * D_800B4D4C, and the signed affinity accumulator over AFFINITY_* columns. */
+/* Runtime dragon state: the selected id, the companion byte copied from D_800B4D4C. */
 #define BATTLE_DRAGON_ID        0x800B6F58u
 #define BATTLE_DRAGON_COMPANION 0x800B6F5Cu
 #define BATTLE_GENE_AFFINITY    0x800B6F60u
@@ -33,8 +32,7 @@
  * values and the two rows the accumulation loop never reads.
  */
 
-/* Gene ids as the battle tables index them; the patch-gated Flame area record
- * (0x21) has no slot here. */
+/* Gene ids as the battle tables index them; the patch-gated Flame area record (0x21) has no slot here. */
 typedef enum GeneId {
     GENE_FLAME    = 0,
     GENE_FROST    = 1,
@@ -57,9 +55,7 @@ typedef enum GeneId {
     GENE_EMPTY    = 0xFF,
 } GeneId;
 
-/* Dragon form ids the predetermined gene rows select: D_800B4D58 row + 4. The
- * genes are the row's combination; Infinity alone, or with any other gene, is
- * the berserk Kaiser. */
+/* Dragon form ids the predetermined gene rows select: D_800B4D58 row + 4. */
 typedef enum DragonForm {
     DRAGON_FORM_TRUE_KAISER    = 4,  /* Infinity, Trance, Radiance */
     DRAGON_FORM_TRYGON         = 5,  /* Flame, Frost, Thunder */
@@ -74,8 +70,7 @@ typedef enum DragonForm {
     DRAGON_FORM_PYGMY          = 14, /* Mutant, unnamed gene */
 } DragonForm;
 
-/* Affinity columns, in the order the dragon-id selection reads them: five
- * elements, then five stats, then the four form affinities. */
+/* Affinity columns, in the order the dragon-id selection reads them. */
 typedef enum GeneAffinity {
     AFFINITY_FLAME        = 0,
     AFFINITY_FROST        = 1,
@@ -105,7 +100,7 @@ typedef struct Chrysm {
 
 ASSERT_SIZE(Chrysm, CHRYSM_OBJECT_SIZE);
 
-/* The ten per-gene pointers. Their owner and consumer are unverified. */
+/* The ten per-gene pointers. */
 typedef struct DragonPointers {
     u32 pointer[10];
 } DragonPointers;
@@ -123,12 +118,10 @@ ASSERT_OFFSET(DragonFormStats, resist, 0x05);
 
 /* 0x800B4C7C: per-gene AP cost, 8-bit entries. */
 extern const u8 D_800B4C7C[GENE_ID_COUNT];
-/* 0x800B4D4C / 0x800B4D58: 11 predetermined forms; 0xFF is a wildcard gene and
- * the dragon id is `row + 4`. D_800B4D58 is read as [selection id][slot]. */
+/* 0x800B4D4C / 0x800B4D58: 11 predetermined forms; 0xFF is a wildcard gene and the dragon id is `row + 4`. */
 extern const u8 D_800B4D4C[11];
 extern const u8 D_800B4D58[11][3];
-/* 0x800B4E8C: affinity-level bonus in ten-point steps, indexed by
- * `clamp(affinity_level + 2, 0, 4)`. */
+/* 0x800B4E8C: affinity-level bonus in ten-point steps, indexed by `clamp(affinity_level + 2, 0, 4)`. */
 extern const s8 D_800B4E8C[5];
 /* 0x800B4EA4: base ability ids for the four non-predetermined forms. */
 extern const u8 D_800B4EA4[4][3];

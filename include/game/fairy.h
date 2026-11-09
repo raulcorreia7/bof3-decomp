@@ -23,8 +23,7 @@ typedef struct Fairy {
 
 ASSERT_SIZE(Fairy, FAIRY_STRIDE);
 
-/* Gift-shop unlocks are battle counts; exploration rewards use the same item
- * IDs. */
+/* Gift-shop unlocks are battle counts; exploration rewards use the same item IDs. */
 typedef struct FairyGift {
     u16 num_battles; /* battles before the gift unlocks */
     u8  item_index;

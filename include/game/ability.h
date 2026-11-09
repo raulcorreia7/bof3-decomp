@@ -17,8 +17,7 @@
 #define ABILITY_OBJECT(name, targeting_flags, type, cost, power, element, ability_flags, description) \
     {name, (targeting_flags), (type), (cost), (power), (element), (ability_flags), (description)}
 
-/* Ability flags (record offset 0x11). Together with the element byte they form
- * the 16-bit mask the battle code tests: bit 0 is a ninth element. */
+/* Ability flags (record offset 0x11). */
 typedef enum AbilityFlags {
     ABILITY_ELEMENT_DEATH = 1 << 0, /* the Death resistance applies to its damage */
     ABILITY_EXAMINABLE    = 1 << 1,
@@ -27,9 +26,7 @@ typedef enum AbilityFlags {
     ABILITY_AFFECTS_STATS = 1 << 4,
 } AbilityFlags;
 
-/* Ability targeting byte (record offset 0x0C): bit switches the battle selectors
- * (Battle_PickTarget, Battle_PickEnemyTarget) test. Without SELECT or ALL the
- * ability targets its user; OPPONENT is the other side from the user. */
+/* Ability targeting byte (record offset 0x0C). */
 typedef enum AbilityTargetFlags {
     ABILITY_TARGET_FIELD        = 1 << 0, /* usable from the field menu */
     ABILITY_TARGET_BATTLE       = 1 << 1, /* usable in battle */
@@ -42,8 +39,7 @@ typedef enum AbilityTargetFlags {
 } AbilityTargetFlags;
 
 /* clang-format off */
-/* Who an ability can be aimed at: the ALL, OPPONENT, SELECT and BOTH_SIDES bits.
- * ENEMY means the cursor starts on the other side. */
+/* Who an ability can be aimed at: the ALL, OPPONENT, SELECT and BOTH_SIDES bits. */
 typedef enum AbilityAim {
     ABILITY_AIM_USER             = 0,
     ABILITY_AIM_ALL_ALLIES       = ABILITY_TARGET_ALL,
@@ -127,11 +123,7 @@ typedef struct Ability {
 ASSERT_OFFSET(Ability, description, 0x12);
 ASSERT_SIZE(Ability, ABILITY_STRIDE);
 
-/* Ability ids, the record index in the GAME.EMI ability table; the names are the
- * record names. Ids 174-215 repeat the spells of 70-115 as AbilityType SKILL
- * records (the _SKILL suffix); the "Noting" placeholders carry their id.
- * func_801ADDD4 passes these ids to the character ability list.
- */
+/* Ability ids, the record index in the GAME.EMI ability table; the names are the record names. */
 typedef enum AbilityId {
     ABILITY_NONE              = 0,
     ABILITY_NUE_STOMP         = 1,
