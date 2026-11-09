@@ -10,6 +10,7 @@
 #define SCRATCH_ROW_OFFSET 0x00
 
 extern u16      D_800E4C1E;
+extern u8       D_80144EC8[];
 extern u8       g_VitalItemIds;
 extern s16      D_801448EE;
 extern u8       D_80146867;
@@ -24,6 +25,7 @@ extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE8A0[];
 extern Callback D_801FE8D0[];
 extern Callback D_801FE8D8[];
+extern Callback D_801FE8E4[];
 
 void func_801F7DE8(void);
 s32  func_801F7E14(void);
@@ -47,9 +49,26 @@ extern u16       D_801FE9EC[];
 void func_801FE800(void);
 
 void func_801F8964(s32 arg0);
+void func_801F8D98(void* table);
+void func_801F90C8(void* table);
+void func_801FA32C(void);
+void func_801FE12C(void);
 
 void func_801FA19C(WorldPos* pos, s32* vx);
 
 void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3);
+
+void func_801F85F0(s32 x, s32 y, s32 angle);
+
+/* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and
+ * leave the scene when the countdown ends. They differ only in the sign of the turn. Every change
+ * here must verify every member. */
+#define SCENA08_SCREEN_EFFECT_STEP(work, step)                                        \
+    func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32); \
+    (work) = g_Task;                                                                  \
+    (work)->unk_32 += (step);                                                         \
+    if (--(work)->unk_5A == 0) {                                                      \
+        func_80196070();                                                              \
+    }
 
 #endif

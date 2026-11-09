@@ -29,9 +29,8 @@ MATCH void func_801EEDB8(void) {
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
-MATCH void func_801EEEBC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEEBC */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF00(void) {
     SYS_DISPATCH_BYTE(D_801F006C, g_Task->header.step);

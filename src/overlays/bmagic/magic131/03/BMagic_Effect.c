@@ -54,9 +54,8 @@ MATCH void func_801EF488(void) {
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-MATCH void func_801EF668(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF668 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EF6AC);
 

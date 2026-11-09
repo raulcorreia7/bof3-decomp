@@ -14,9 +14,8 @@ MATCH void func_801EEF34(void) {
 
 #include "shared/Effect_StartPlaying.h"
 
-MATCH void func_801EEFD8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEFD8 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF01C(void) {
     Magic001Steps handlers;

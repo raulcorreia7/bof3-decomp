@@ -19,9 +19,8 @@ INCLUDE_ASM(func_801EEC98);
 
 #include "overlays/bmagic/Effect_CountDownAndPlay.h"
 
-MATCH void func_801EF158(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF158 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF19C(void) {
     BMagicEffectFuncs handlers;

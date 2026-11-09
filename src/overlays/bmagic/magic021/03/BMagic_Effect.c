@@ -31,9 +31,8 @@ INCLUDE_ASM(func_801EED30);
 
 #include "shared/Effect_StartPlaying.h"
 
-MATCH void func_801EEFDC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEFDC */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF020(void) {
     BMagicEffectFuncs handlers;
@@ -115,6 +114,4 @@ INCLUDE_ASM(func_801EFA48);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801EFDB0 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

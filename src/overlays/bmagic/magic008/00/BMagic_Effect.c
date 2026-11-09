@@ -130,9 +130,8 @@ MATCH u32 func_801F0230(void) {
     return LOHU(g_Battle.action_id) == 7 ? 7 : 0xFF;
 }
 
-MATCH void func_801F0250(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801F0250 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801F0294(void) {
     BMagicEffectFuncs handlers;

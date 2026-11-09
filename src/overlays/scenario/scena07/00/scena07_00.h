@@ -68,6 +68,11 @@ u8 func_801F9EFC(void);
 extern Callback g_SceneEntityDispatch[];
 
 extern u8       D_80144EB8[];
+extern u8       D_80146865;
+extern u8       D_80146866;
+extern u8       D_80146867;
+extern u8       D_80146874;
+extern u8       D_80146875;
 /* D_801FDFA0 */
 extern u8       g_ScenePositionTable;
 /* D_801FDFA8 */

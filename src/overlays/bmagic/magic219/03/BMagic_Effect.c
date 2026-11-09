@@ -18,7 +18,7 @@ MATCH void func_801EEC14(void) {
             saved_battler         = g_BattleEffectBattler;
             g_Task                = (PartyMember*)&D_801EFA14[i];
             g_BattleEffectBattler = D_801EFA14[i].target.party;
-            BMagic_DispatchMode();
+            BMagic_DispatchEffectMode();
             g_BattleEffectBattler = saved_battler;
             g_Task                = saved_task;
         }
@@ -44,9 +44,7 @@ MATCH void func_801EEF54(void) {
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 /* func_801EF024 */
-MATCH void BMagic_DispatchMode(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF068(void) {
     g_ScriptBank = BMAGIC_SCRIPT_BANK;
@@ -105,6 +103,4 @@ INCLUDE_ASM(func_801EF71C);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801EF998 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

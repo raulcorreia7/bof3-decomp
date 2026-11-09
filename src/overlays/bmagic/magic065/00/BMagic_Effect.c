@@ -47,9 +47,8 @@ MATCH void func_801EF1CC(void) {
     }
 }
 
-MATCH void func_801EF20C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF20C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF250(void) {
     Magic065Steps handlers;

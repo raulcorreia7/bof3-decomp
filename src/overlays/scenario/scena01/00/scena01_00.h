@@ -22,6 +22,9 @@ extern Callback  D_801FE29C[];
 extern Callback  D_801FE2A8[];
 extern SceneFunc D_801FE308[66];
 
+extern u8 D_801FE350;
+extern s8 (*D_801FE35C[])(void);
+
 u8 func_801F7C54(void);
 
 void func_801F7678(s32 arg0);
