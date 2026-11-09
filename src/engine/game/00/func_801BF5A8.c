@@ -1,8 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried cleaned first-draft temps (frame now 0x18 like retail), signed /4; 40.50%: retail
- * rereads g_Battle.scroll_dir after the 0x34 store and folds the table symbol into the displacement (lui at; addu
- * at,at,index; lb); mine hoists &D_801CD458[index*2] and CSEs it; x is copied to t2 in retail. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801BF5A8(s32 x, s32 y, s32 party_slot) {
     u8     base;

@@ -1,13 +1,5 @@
 #include "area008_13.h"
 
-/* NOTE: not byte-matching (293/339 insn, 1352 bytes — 1 insn short; first diff
- * +0x00D0, insn 52). The re-lift reproduces the original's 120-byte frame, the
- * a0-a3 spills to 24/32/40/48(sp), and the block-3 x1/x3 association
- * `base + (half_width + odd_width + 2)`. Residual: a register domino —
- * bottom_v/bottom_y/half_width land in s1/s2/s3 instead of s2/s3/s1, one
- * `move v0,s1` replaces the hoisted `sll v0,s2,5` clut_x setup, and the
- * reload of width_plus_1 loses the redundant original `andi v0,s1,0xffff`.
- */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 window_style) {
     RECT*     texture_window;

@@ -2,8 +2,6 @@
 
 /* Refreshes the per-battler substate copies and panel positions.
  */
-/* nonmatching unmeasured: tried the first draft rewritten with typed word/byte copy loops. resume: close the +0x8
- * immediate/address materialization. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E0B64(void) {
     u8*  src;

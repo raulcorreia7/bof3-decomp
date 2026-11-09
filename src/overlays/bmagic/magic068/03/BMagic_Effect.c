@@ -28,8 +28,6 @@ MATCH void func_801EF4A8(void) {
     }
 }
 
-/* blocker: g_Battle.state kept as an address (lui/addiu, lhu 0, sh 0); first diff: lhu at 0x801EF508 folds into the global. */
-/* blocker: the early-return block (g_Battle.state |= 4; func_801E5988) is one instruction longer than retail; first diff: bnez v0 at 0x801EF4F8 (target 0x801EF528 against 0x801EF524). */
 INCLUDE_ASM(func_801EF4EC);
 
 INCLUDE_ASM(func_801EF55C);
@@ -69,7 +67,6 @@ MATCH void func_801EF884(void) {
     }
 }
 
-/* Blocker: retail stores header.step once after the join (both arms compute it in v0 and share one sb at 0x801EF9BC); a per-arm header.step++/-- writes twice. Candidate also reloads g_Task before each SND call. */
 INCLUDE_ASM(func_801EF908);
 
 MATCH void func_801EF9D0(void) {

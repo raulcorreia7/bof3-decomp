@@ -20,10 +20,8 @@ MATCH void func_801F7014(void) {
 
 INCLUDE_ASM(func_801F7028);
 
-/* blocker: color register; first diff: +0x30 lhu a1,0(a2). */
 INCLUDE_ASM(func_801F7960);
 
-/* needs: D_801FC4C0 declaration. */
 INCLUDE_ASM(func_801F7A18);
 
 MATCH void func_801F7B5C(void) {
@@ -197,7 +195,6 @@ MATCH void func_801FC0C8(void) {
     Party_LoadPalettes();
 }
 
-/* blocker: frame 0x20 against 0x18; first diff: +0x0 addiu sp,sp,-32. */
 INCLUDE_ASM(func_801FC130);
 
 MATCH void func_801FC1E8(void) {

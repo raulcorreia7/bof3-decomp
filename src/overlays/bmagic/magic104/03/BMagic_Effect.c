@@ -69,7 +69,6 @@ MATCH void func_801EF21C(void) {
     }
 }
 
-/* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
 MATCH void func_801EF27C(void) {
     u8 count;
 

@@ -6,8 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC28);
 
-/* blocker: running-offset indexing; first diff: retail move v1,zero at +4 against a lui base. */
-/* blocker: the clear loop over the 0x78-stride table at D_801F0B38 needs its record type; first diff: lui at the table address at 0x801EED14. */
 INCLUDE_ASM(func_801EED14);
 
 MATCH void func_801EEDAC(void) {

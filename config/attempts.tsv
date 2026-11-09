@@ -1,0 +1,503 @@
+function	tried	first_diff	score
+emi/battle/batl_end/00@0x801EEF14	blocker: step and difference registers	0x801EEF58.	
+emi/battle/batl_end/00@0x801EF7B4	blocker: step register	0x801EF7F8 step in v1 (retail) against v0 (candidate).	
+emi/battle/batl_end/00@0x801F0BB0	blocker: id and level register split	0x801F0BE8 id in a2 (retail) against a0 (candidate).	
+emi/battle/battle/03@0x801D1228	nonmatching unmeasured: tried the first draft does not compile (the raw 0x8003xxxx state blocks and the row pointers need views); the first draft cleaned into role-named locals and a local state-block type (47.22%). residual: the register allocation and the row/state address forms still differ from the retail. resume: a source shape that reproduces the retail's row and state-block address forms and its register allocation.		47.22%
+emi/battle/battle/03@0x801D1D10	nonmatching unmeasured: tried the cursor walk with a byte-cursor alias for the body writes and a halfword view for the g_InputHeld clear, which reproduces retail's reload and pre-branch test (80.81%). residual: our body is 16 bytes too long, the flag stores at -0x24/-0x48 rematerialize absolute, and the tail writes the state bytes absolutely where retail holds &g_Battle.row_cursor in a0 and reaches -4/-5. resume: a source shape that keeps one flag base live across the delay slot.		80.81%
+emi/battle/battle/03@0x801D1E8C	nonmatching unmeasured: tried the first-draft body with the volatile g_InputMasks[BATTLE_INPUT_CONFIRM] view and one-member struct views for the pad rows (62.12%). residual: retail keeps s5/s6 live across the draw calls (frame 0x30 against our 0x28) and the body is 20 bytes short. resume: a source shape whose pad cursor and state base stay live across the calls.		62.12%
+emi/battle/battle/03@0x801D2B58	nonmatching unmeasured: tried the cursor and the state bases sit in s2 and the extra s8 where retail keeps them in a0 and s4 to s7. resume: a source shape whose live set matches the retail so the extra s8 disappears and the cursor lands in a0.		
+emi/battle/battle/03@0x801D43EC	nonmatching unmeasured: tried the four swapped state words are not kept in stack slots, so the frame is 0x28 against the retail 0x30 and the candidate is 124 bytes short. resume: a source shape that keeps the four swapped words in stack slots and drops the extra saved register.		
+emi/battle/battle/03@0x801D750C	nonmatching unmeasured: the first draft rebuilt on the GetTPage/SetDrawMode panel pass; first mismatch regalloc +0x4, five saved registers differ. resume: a source shape that keeps the x/y roots out of s2/s3.		
+emi/battle/battle/03@0x801D9E9C	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 28.57%. resume: a lever or header fix that closes the first mismatch.		28.57%
+emi/battle/battle/03@0x801DA7D4	nonmatching unmeasured: tried the command-list build with the entry table indexed directly (a `table` alias hoisted the stack array into s4 where retail recomputes sp+0x10 per use), the wide max and the byte accumulator (75.00%). residual: retail seeds the s2 accumulator at entry and saves s2 first; ours saves s3 first and emits the s2 store later, and ten branch hunks follow from that. resume: a source shape whose sum accumulator is live from entry.		75.00%
+emi/battle/battle/03@0x801DE1D4	nonmatching unmeasured: tried the queue walk rebuilt on the typed slot and work records, with the 0x74-byte record copy as memcpy (64.37%). residual: the work-record base is hoisted into s3 where retail materializes it at the use, which also adds the 0x28 frame, and the two tails land four instructions apart. resume: a copy source whose base is only used inside its branch.		64.37%
+emi/battle/battle/03@0x801E0B64	nonmatching unmeasured: tried the first draft rewritten with typed word/byte copy loops. resume: close the +0x8 immediate/address materialization.		
+emi/battle/battle/03@0x801E25E0	nonmatching unmeasured: the byte width of D_800B51F8 is corrected and the enemy-work reads use the EnemyBattler members; candidate 46.94%. resume: the retail homes the slot in s1 (the candidate keeps it in s2) and stores g_Battle.action_type through a pointer materialised before the rand() call.		46.94%
+emi/battle/battle/03@0x801E2A88	nonmatching unmeasured: tried 55.15% at the control flow: mode switch with case 1, 4 and default, positive-polarity flag chains, func_801E2D90 takes the slot index (branch-delay-slot a0 setup), non-volatile mode byte; falsified: flags-first and kind-index-first load order through locals (44.44), flat kind 20 offset (44.44), a0/v1 pins on flags and targeting_flags (54.81), declaration order and enemy_index + 3 (55.15 unchanged), 20 min random search run (type hacks only). resume: case 4 header: kind index load, flags load into a0, targeting flags into v1, row in v0, index copy in a1 and parameter copy in a2.		55.15%
+emi/battle/battle/03@0x801E5E2C	nonmatching unmeasured: tried cached slot pointer; kind-3 hoisted to a local; unsigned index casts; else-scoped row local. resume: a source shape that materializes kind-3 before the branch (retail fills the beqz delay slot with addiu).		
+emi/battle/battle/03@0x801E7BA0	nonmatching unmeasured: the first draft rebuilt on the typed work records; the loader gate, the blocked-slot walk and the panel row writes follow retail. resume: the branch and register diffs in the state block.		
+emi/battle/battle/03@0x801E8684	nonmatching unmeasured: tried the 0x140-byte panel copy as one struct assignment through a PartyMember view of D_801EBF20, which gives retail's aligned four-word loop instead of the first-draft word-by-word body (65.62%). residual: the body is 80 bytes short and keeps s1-s3 saved where retail saves only s0. resume: a body whose per-field writes re-read g_Task like the retail sequence and need no crossing temporaries.		65.62%
+emi/battle/battle/15@0x8009704C	nonmatching unmeasured: tried the store-order lever (82.73% -> 84.24%), the (s32) cast on the pad mask (81.82%, no change) and the fixed-address base spelling (81.57%, regressed); a 7929-iteration statement search with 190 errors gave no improvement on the base. candidate 77.88%. resume: a register-pair form that puts the 0xf00c pad mask in the call's delay slot and the scroll arithmetic in the +0x0054 slot.		82.73%, 84.24%, 81.82%, 81.57%, 77.88%
+emi/battle/battle/15@0x80099364	nonmatching 61.07%: tried ternary polarity; panel s1 local sunk to first use (59.23% -> 61.07%); frame/saved-reg set matched; a 3x10min search over source rewrites (best 70.54% with a private unsigned char D_801485E0 extern that narrows battle_15.h's volatile u16; dropped: retail stores halfwords at 0x801485E0/E2 (sh at +0x80099400/+0x8009940c), so that form breaks behavior); a register pin on flag (a0/v0) had no effect at the residual site. a second search (15min, 263k rewrites) from this draft: best 75.00% (99/132, +12), residual moves to +0x00c8 opcode (lhu v0,0(s0) vs li v0,255 shape); non-exact and not adopted pending a clean-C89 restatement. resume: restate the rank-1 form as clean C89 and attack the +0x00c8 hunk, or the register-pair form that loads D_80148627 after the D_801EB5B4 store (retail order +0x003c..0x0064), or an approved register pin targeting the s1-setup hoist.		61.07%, 59.23%, 70.54%, 75.00%
+emi/battle/battle/15@0x80099830	nonmatching unmeasured: tried opcode@+0x8: prologue and the 0xF00C/0x500C pad split do not reproduce the retail order; scroll/confirm logic is in place. resume: rebuild the two PAD_GetRepeatedButtons calls and the scroll compare grouping from the asm.		
+emi/battle/battle/15@0x80099B74	nonmatching unmeasured: tried the pad-state address: retail keeps it in s0 and re-reads the pad state through that register, the candidate reloads the address for each use; tried: the resource select split from the ring store, a pad-state pointer local, one scratchpad read, per-use masks; resume: a source shape that keeps the pad-state address in s0 and reads the pad state through it.		
+emi/battle/battle/15@0x8009A744	nonmatching unmeasured: tried the register allocation of the table bases: retail holds the row base in s0 and the slot counter in s1, and the D_800B6F50/D_800B44B0 tables are indexed through at; the pinned form reaches 54.80% (pure-C best 46.40%) and the residual is a same-size regalloc difference at +0x24. resume: a spelling that keeps the row base and the slot counter in retail's s0 and s1 without a pin.		54.80%, 46.40%
+emi/battle/battle/15@0x8009AC18	nonmatching unmeasured: tried branch@+0xb4: the row-copy loop materializes the D_80145FCC base in a register while retail indexes the symbol per iteration; object is 120 bytes short on the byte-copy blocks. resume: index D_80145FCC/D_80145F04 per use and keep the full FIELD copy sequence per row.		
+emi/battle/battle/15@0x8009E248	NON_MATCHING: delayed battler load, repeated load and uncached enemy tried	0x8009E248, prologue.	
+emi/battle/battle/15@0x8009E500	nonmatching unmeasured: tried frame 0x28 vs 0x18: the cached delta/limit locals spill while the retail keeps them in registers; branch layout now bne to the tail store. resume: drive both halves from one u32 row index and pass the row addresses as non-volatile u16 pointers.		
+emi/battle/battle/15@0x8009FB38	nonmatching 86.89%: branch@+0x0000; the second refresh loop still schedules differently.		86.89%
+emi/battle/battle/15@0x800A0EC4	nonmatching unmeasured: the active-battler byte is reached through a pointer the retail homes in s2; candidate 40.59%. resume: a source shape that reproduces the retail's cell, row and enemy-row address forms and its register allocation.		40.59%
+emi/battle/battle/15@0x800A1D84	nonmatching unmeasured: tried the first draft with pointer locals and FIELD views (35.93%); the 16-byte packed block copies (39.51%); the active index read once into a local (40.25%); the u8 loop counter (45.38%); the packed block copies with the u8 counter (48.50%); the second loop's source base computed from the table base (62.55%). residual: the frame - the candidate saves one register too many (s3) and keeps the loop count address in a callee-saved register where retail rematerialises it in t0/t1, and the retail re-materialises the D_80145FCC base inside the loop while the candidate holds it in t2. resume: a source shape with one long-lived value less, so the loop count address is rematerialised per loop and the frame drops from 0x30 to the retail 0x20.		35.93%, 39.51%, 40.25%, 45.38%, 48.50%, 62.55%
+emi/battle/battle/15@0x800A5330	blocker: retail spills the function-wide g_Battle.gene_count address (unused 8-byte slot, absolute loads in the confirm branch); the draft keeps it in s0	addiu sp,sp,-48. Tried: a local count pointer.	
+emi/battle/battle/15@0x800A8F58	nonmatching unmeasured: tried opcode@+0x8: the hit-state gate and the 1-in-12 roll chain differ; the slot loops and flag stores are in place (first-draft pointer-counter code was uncompilable). resume: rebuild the g_Battle.target_selector mask gate and the rand()/12 roll from the asm.		
+emi/battle/battle/15@0x800AA368	nonmatching 52.1%: tried the first draft (49.08%); g_Battle.target_selector hoisted into a local (50.92%); callee result in a temporary local (52.15%); active local removed (47.24%); tagged do-while(0) wall around the mask assignment (51.53%); a register pin on mask (49.08%); a search over 7800 source rewrites, best 4650, no better shape. residual is one register: retail keeps the action mask in s2 while the candidate keeps it in s3, and the branch test differs (retail beqz s3, candidate beqz v0). resume: a source shape that raises the mask local's weighted reference count so it wins s2 over the active-count local, or a longer search over source rewrites.		52.1%, 49.08%, 50.92%, 52.15%, 47.24%, 51.53%
+emi/battle/battle/15@0x800ABCE0	nonmatching 61.0%: tried the first draft (59.75%); u16 unit parameter (61.01%); u8/u16/s32/u32 parameter-type sweep (best 61.01%); caching the unit offset in a local (56.10%); moving the y store after the call (58.39%); a register pin on slot and unit (61.01%, no change: gcc 2.7.2 ignores the constraint). the work record's byte cells are read through the shared record's members now; the word cells at +0x0C..+0x20 and the halfwords at +0x2E..+0x32 keep the byte-pointer form, because the member form lets gcc 2.7.2 fold the zero stores and drops an instruction (60.38 percent, 628 bytes against the retail's 636). residual is the callee-saved set: retail saves s2,s0,ra,s3,s1 with slot in s2 and unit in s0; the candidate saves s1,s0,s3,ra,s2. resume: a source shape that homes slot in s2 and unit in s0, or a register pin that this compiler honours on a parameter.		61.0%, 59.75%, 61.01%, 56.10%, 58.39%
+emi/battle/battle/15@0x800AC01C	NON_MATCHING: local enemy, volatile task and direct array forms tried	0x800AC020, saved register.	
+emi/battle/battle/15@0x800AED5C	NON_MATCHING: reloaded context, volatile context and typed saved pointer tried	0x800AED60, base load.	
+emi/battle/battle/15@0x800AEEC8	NON_MATCHING: task locals, volatile task and barriers tried	0x800AEF48, task address load.	
+emi/battle/battle/15@0x800AF0F8	nonmatching unmeasured: tried lift order tile_x-first; s32 pos_y; an 8-byte stack pad for retail's 0x10 frame; FIELD for the byte-strided row halfword; do-while outer, for inner. resume: prologue store order (v0 first) and the second-loop hoisted 0xFF00/0xFFFF constants.		
+emi/battle/battle/15@0x800B0B0C	NON_MATCHING: pinned x, nonvolatile y and signed loop counter tried	0x800B0B10, saved registers.	
+emi/battle/battle/15@0x800B1A74	nonmatching unmeasured: tried opcode@+0x4: saved-register set and prologue order differ (retail s3,s1,s7,s8,s2,s0,s5,s6,s4; ours differs), and the title text base materialization is off. resume: match the caller-facing five-argument prototype (fifth byte on the stack) and rebuild the prologue copies from the asm.		
+emi/battle/battle/15@0x800B2C90	nonmatching unmeasured: the retail frame is 0x58 and the candidate 0x50, so the eight unused frame bytes are declared; candidate 73.79%. resume: a source shape that reproduces the retail's register homes.		73.79%
+emi/bmagic/magic001/00@0x801EF1CC	needs: type for g_Battle.selected_actor as a member of the BattleAction block	bnez target at +0x2C.	
+emi/bmagic/magic001/00@0x801EF5CC	Blocker: retail keeps an 8-byte frame (addiu sp,-8) and loads the -0x80 sentinel after the lb; a signed s8 phase local gives no frame and the constant is hoisted to the top.		
+emi/bmagic/magic001/00@0x801EFC54	needs: type for g_Battle.selected_actor as a member of the BattleAction block	bnez target at +0x4C.	
+emi/bmagic/magic001/00@0x801F014C	Blocker: GTE path (PushMatrix, RotTrans, RotMatrix) with a stack-built vector set and a z-span halfword from g_Battle.selected_actor or g_BattleEffectBattler by header.step; needs the matrix helpers before a draft.		
+emi/bmagic/magic002/00@0x801EEF84	blocker: retail loads unk_09 before unk_60 and keeps g_Task in v1	lui v1 against a0 at 0x801EEF84.	
+emi/bmagic/magic003/03@0x801EED14	blocker: running-offset indexing	retail move v1,zero at +4 against a lui base.	
+emi/bmagic/magic003/03@0x801EED14	blocker: the clear loop over the 0x78-stride table at D_801F0B38 needs its record type	lui at the table address at 0x801EED14.	
+emi/bmagic/magic004/03@0x801EF9E8	blocker: branch over the g_Battle.action_id < 0x85 test	0x801EFA18.	
+emi/bmagic/magic004/03@0x801EF9E8	blocker: the zero branch compares the timer with a branch retail places after the table lookup	bnez v0 at 0x801EFA18.	
+emi/bmagic/magic008/00@0x801F05FC	hint: retail keeps the 1 constant in v1 across unk_5C/unk_2B and loads each -128 and scale constant at its own store; ours hoists them into temps.		
+emi/bmagic/magic013/03@0x801EF36C	hint: the step-limit select (0xC when the timer is 1, else 0x10) and the position adds leave the body 12 bytes over (0x124 against 0x118)	lw v0,56(a2) at +0x10 where retail holds y in another register.	
+emi/bmagic/magic013/03@0x801EFF88	hint: the sin/cos position offsets with the angle held in the scratchpad cell leave the body 4 bytes over (0x124 against 0x120)	sw ra,16(sp) at +0xC (retail saves a callee register first).	
+emi/bmagic/magic015/00@0x801EFBD8	hint: a FAKE_BARRIER before the unk_20 store reloads g_Task as retail does	is li v0,-8 at +0xC0 (candidate nop in the load delay slot).	
+emi/bmagic/magic015/00@0x801EFCC4	Blocker: the z halfword at +0x3E is loaded unsigned (lhu) and summed with the 0x14 cell; COORD_INT is s16, so it gives lh. Same blocker as func_801F0DB4.		
+emi/bmagic/magic015/00@0x801EFDE8	blocker: the halfword at +0x3E (the z-span halfword, upper half of pos.z) has no PartyMember member; needs: type.		
+emi/bmagic/magic015/00@0x801F0194	hint: a FAKE_BARRIER before the unk_20 store reloads g_Task as retail does	is li v0,-8 at +0x88 (candidate nop in the load delay slot).	
+emi/bmagic/magic015/00@0x801F0248	hint: blocker is the z halfword at +0x3E, read and stored unsigned (lhu/sh) by this function; COORD_INT is s16 (lh). Needs an unsigned view of pos.z.		
+emi/bmagic/magic015/00@0x801F0570	hint: blocker is the z halfword at +0x3E, read unsigned (lhu at +0x3C and +0x9C) and stored with sh; COORD_INT is s16. Needs the unsigned z view.		
+emi/bmagic/magic015/00@0x801F0770	hint: m2c draft with the task cached in a0 and unk_48..scale in a second local is 12 over	lbu v0,9(a0) at +0x28 where retail holds the timer in v1 and the z in v0.	
+emi/bmagic/magic015/00@0x801F0DB4	Blocker: retail reads the z halfword at +0x3E unsigned (lhu) and loads the 0x14 cell before the 0x09 decrement; COORD_INT is s16 (lh). Needs an unsigned halfword view of pos.z.		
+emi/bmagic/magic015/00@0x801F0E54	hint:	is the beqz at +0x50 (candidate one instruction short): retail reloads g_Task (lui/lw) before the unk_14 store; a FAKE_BARRIER there moves the li 0x48 out of the branch delay slot.	
+emi/bmagic/magic017/03@0x801EF11C	blocker: work pointer reload	+0xB0 lui v1,0x1f80 (retail reloads g_Task for the unk_27 store and again before the call) against a0 held across both (candidate).	
+emi/bmagic/magic017/03@0x801EF300	blocker: y store	+0x34 sw v0,0x10(v1) shared after the branches (retail) against the constant hoisted to a2 across the call (candidate).	
+emi/bmagic/magic020/03@0x801EFAF4	hint: a local Callback[2] of func_801EFBA0 and func_801EFD10 fails to compile at the first function-pointer store (handlers[0] = func_801EFBA0); not byte-compared.		
+emi/bmagic/magic039/03@0x801EF584	the angle cell address (lui s0,0x1f80) is built after the param load; every form hoists it into the bnez delay slot	+0x2C	
+emi/bmagic/magic043/03@0x801EF55C	blocker: candidate loads g_Task into v1 where retail uses v0, and the body is 8 bytes shorter	lui v1 against v0 at 0x801EF55C.	
+emi/bmagic/magic044/03@0x801F05AC	blocker: retail reloads g_Task after rand() for the 0x09 update	lhu v0 against lbu v0 at 0x801F05C8.	
+emi/bmagic/magic044/03@0x801F0638	blocker: retail reloads g_Task after rand() for both the 0x2E and timer updates	lui v1 against a0 at 0x801F0664.	
+emi/bmagic/magic045/00@0x801EEF80	hint: retail stores scale.x/scale.y through the same base as unk_48 before the unk_27 store; z store goes before unk_25 (matches up to +0x10).		
+emi/bmagic/magic057/03@0x801EEEB0	blocker: spad cell read hoisted	lui a1,0x1f80 at 0x801EEF28.	
+emi/bmagic/magic057/03@0x801EF134	blocker: cross-jumped (rand() % 6) << 0x10 prefixes	beqz v0 target at 0x801EF150.	
+emi/bmagic/magic057/03@0x801EF3C4	blocker: y-store deref hoisted	sra a0,v0,0x1f at 0x801EF440.	
+emi/bmagic/magic057/03@0x801EF620	blocker: body 2-3 instructions fat	linked table constants +8 and +C.	
+emi/bmagic/magic058/03@0x801EF61C	blocker: the timer and battler branch layout differs	beqz v1 against the frame-parity branch at 0x801EF644.	
+emi/bmagic/magic058/03@0x801EFDD4	blocker: the draft is a squared distance of two battler positions (>> 9) against the scratchpad halfword squared, `dx dx + dy dy <= r r`, with the task y read into a local before the subtraction; it is down to 4 rows: retail keeps the y square in a1 and the radius square in v1 (0x801EFE10), the draft has them swapped. Tried limit, dist and square locals, a radius local, limit first, a reversed compare. The scratchpad halfword needs a name without an address.		
+emi/bmagic/magic062/03@0x801EFC4C	blocker: y offset order	+0x94 sll v1,v0,1 (retail finishes the rcos 0xB0>>3 product before loading g_BattleEffectBattler for y and z, cached in a1) against the battler load first (candidate); body is the angle-ring start of magic213 with radius 0xB0 >> 3.	
+emi/bmagic/magic062/03@0x801F00EC	hint: 3-image twin (magic062 00EC, 082 0260, 083 038C): spiral position update; everything matches except the s16 radius cell at 0x1F800000: retail uses a separate lui per access, a cast view of D_1F800000 hoists the base into s1 (needs an s16 alias symbol for 0x1F800000, scratch draft b26-magic062.c)		
+emi/bmagic/magic063/03@0x801EFE04	hint: matches except retail loads D_801F1054 for the unk_09 store before the 0xE halfword store (ours stores the halfword first, then reloads and waits a nop).		
+emi/bmagic/magic064/03@0x801EF3C8	hint: with u8 active = &g_Battle.active_battler and party = g_Game.members every instruction matches except retail's li a1,2 after the s2 address setup (2 slots late) at +0x8.		
+emi/bmagic/magic064/03@0x801F0364	blocker: a 0x1C-stride record table (D_801F13B4, flags byte at 0, 0xC0 rows) has no record type in this image; needs: type.		
+emi/bmagic/magic064/03@0x801F03D8	blocker: the loop keeps the constants 1 and 6 in registers	addiu a3 against the table address at 0x801F03E0.	
+emi/bmagic/magic067/03@0x801EF38C	Blocker: retail computes pos.x and stores it before loading the y terms (g_AreaScrollTargetY and unk_10); the candidate hoists all four loads above the first store. Scheduling, not a value difference.		
+emi/bmagic/magic068/03@0x801EF4EC	blocker: g_Battle.state kept as an address (lui/addiu, lhu 0, sh 0)	lhu at 0x801EF508 folds into the global.	
+emi/bmagic/magic068/03@0x801EF4EC	blocker: the early-return block (g_Battle.state |= 4; func_801E5988) is one instruction longer than retail	bnez v0 at 0x801EF4F8 (target 0x801EF528 against 0x801EF524).	
+emi/bmagic/magic068/03@0x801EF908	Blocker: retail stores header.step once after the join (both arms compute it in v0 and share one sb at 0x801EF9BC); a per-arm header.step++/-- writes twice. Candidate also reloads g_Task before each SND call.		
+emi/bmagic/magic070/03@0x801EF810	The scratch block is addressed by constant, not from a1 = 0x1F800008: sw ra 0x30 for 0x34.		
+emi/bmagic/magic070/03@0x801EFA44	The scratch block is addressed by constant as in func_801EF810: addiu sp -0x38 for -0x40.		
+emi/bmagic/magic070/03@0x801EFCDC	The loop is based on x, not on a2 = &radius: move s3,zero for s2.		
+emi/bmagic/magic075/03@0x801EEDE0	blocker: four byte stores to the offset of g_PaletteFades at a stride of 12 indexed by byte 0x0A.		
+emi/bmagic/magic078/03@0x801EFE14	Blocker: GTE path (SetLineF4, SetSemiTrans, RotAverage4) with a stack-built quad; no C draft yet.		
+emi/bmagic/magic080/00@0x801EEC5C	blocker: target-Y load schedule	lui v1,0x1f80 at 0x801EEC5C.	
+emi/bmagic/magic081/03@0x801EEEDC	blocker: retail loads g_Task twice around the g_BattleEffects[slot].header.mode store (a0 for target.party, then s0); member stores let the two loads merge	lui a0 at 0x801EEF00.	
+emi/bmagic/magic081/03@0x801EF57C	blocker: the 0x78-stride queue at 0x801EC330 has no g_BattleEffects row in this image; needs a symbols.toml row first.		
+emi/bmagic/magic082/03@0x801EFDC0	blocker: y offset order	+0x94 sll v1,v0,1 (retail finishes the rcos 0xB0>>3 product before loading g_BattleEffectBattler for y and z, cached in a1) against the battler load first (candidate); body is the angle-ring start of magic213 with radius 0xB0 >> 3.	
+emi/bmagic/magic082/03@0x801F0260	hint: 3-image twin (magic062 00EC, 082 0260, 083 038C): spiral position update; everything matches except the s16 radius cell at 0x1F800000: retail uses a separate lui per access, a cast view of D_1F800000 hoists the base into s1 (needs an s16 alias symbol for 0x1F800000, scratch draft b26-magic062.c)		
+emi/bmagic/magic083/03@0x801EFEDC	blocker: y offset order	+0x94 sll v1,v0,1 (retail finishes the rcos 0xB0>>3 product before loading g_BattleEffectBattler for y and z, cached in a1) against the battler load first (candidate); body is the angle-ring start of magic213 with radius 0xB0 >> 3.	
+emi/bmagic/magic083/03@0x801F038C	hint: 3-image twin (magic062 00EC, 082 0260, 083 038C): spiral position update; everything matches except the s16 radius cell at 0x1F800000: retail uses a separate lui per access, a cast view of D_1F800000 hoists the base into s1 (needs an s16 alias symbol for 0x1F800000, scratch draft b26-magic062.c)		
+emi/bmagic/magic087/03@0x801EFE90	Blocker: retail loads the -0x80000 constant (lui a0,0xFFF8) before the pos.z load at 0x801EFEA0; both the -= and += 0xFFF80000 forms put a nop there.		
+emi/bmagic/magic088/03@0x801EEC20	blocker: frame 0x30 against retail 0x38	0x801EEC28.	
+emi/bmagic/magic088/03@0x801EF0A8	hint: the two palette-offset adds, the zero test and the actor local leave the frame 8 bytes small (24 against 32)	addiu sp,sp,-24 at +0x8; the retail body also loads the selected actor into a0 before the first store.	
+emi/bmagic/magic091/03@0x801EECCC	blocker: call setup order	+0xF0 lui a0,0x8014 (retail loads the selector before li s0,1 and fills the delay slot with li a1,16) against li a1,16 first (candidate); body is magic055 func_801EECCC with handler 0x16 and func_800A9610 before the sound.	
+emi/bmagic/magic092/03@0x801EF1F0	hint: same shape as magic093 801EF108 and magic097 801EF1A4 (retail 4 bytes longer: v1 index, base added last); enemy-table forms tried do not match		
+emi/bmagic/magic093/03@0x801EF108	hint: retail indexes enemy via v1 (lui/addiu base, addu s0,v0,v1) and masks (unk_03+3) with andi; enemy-table forms tried (g_BattleEnemyBattlers[], base+stride) did not match		
+emi/bmagic/magic095/03@0x801EEC18	blocker: a 0x14-byte constant block D_801EEC04 copied to the stack has no record type in this image; needs: type.		
+emi/bmagic/magic097/03@0x801EF1A4	hint: same shape as magic093 801EF108: retail holds g_Task in a0 and indexes the enemy table via v1 (base added last); enemy[idx], idx local and (u8 )base + idx stride forms did not match		
+emi/bmagic/magic098/03@0x801EF1B4	enemy/party palette-fade arms share the func_800A9610(slot, 0x10) tail but retail keeps unk_03 in v1 and builds the row address in s0 from it; the m2c shape leaves it 4 bytes short	+0x54	
+emi/bmagic/magic100/03@0x801EEC70	Structurally complete; the candidate keeps the loop counter in t-regs and CSEs the work reload, retail keeps them in $s0/$s1 and reloads g_Task each iteration (75 vs 67 instructions). Permuter tried: best 2030, 23 errors (2400 iterations).		
+emi/bmagic/magic100/03@0x801EF358	blocker: angle register	addiu v0,v0,512 (retail) against addiu a0,v0,512 (candidate).	
+emi/bmagic/magic101/03@0x801EECCC	Three shapes tried (if/else per branch, read-then-condition-xor, shared-goto): gcc's cross-jump merges the g_Battle.active_battler tests or the facing reads (0x180 vs 0x19C); retail keeps three separate D_8014637C loads and a shared xor block at 0x801EED50	0x801EECE0, the side-mask test's target. Layout problem, not scheduling.	
+emi/bmagic/magic101/03@0x801EF4DC	Blocker: retail reloads g_Task after the rsin shift (sll v0,v0,5 at 0x801EF514); the candidate hoists the g_Task load above it. Three drafts (local work, direct reads, split offset) all fail there.		
+emi/bmagic/magic101/03@0x801EF580	hint: front half matches (wave local, count local); retail stores unk_10/unk_14 = 0x80 before unk_09 = 0x10 and does sw unk_1C through the old task pointer, but the candidate hoists li 16/sb unk_09 first		
+emi/bmagic/magic110/03@0x801EEF80	blocker: counter clear schedule	lui a0,0x8014 (retail) against move s0,zero (candidate).	
+emi/bmagic/magic110/03@0x801EF528	blocker: work pointer lifetime	lui v1 at +0x20.	
+emi/bmagic/magic110/03@0x801EF844	blocker: work pointer lifetime	lui v1 at entry.	
+emi/bmagic/magic110/03@0x801F0040	blocker: two offset tables D_801F04A4 and D_801F04A8 (stride 8, indexed by param.unk_0B) have no symbol row or type in this image; needs: type.		
+emi/bmagic/magic114/03@0x801EEDA0	Blocker: copies 256 halfword palette entries between unnamed data at 0x80033C00, 0x80036C00, 0x80037C00, 0x8003AC00; the tables need declaring first.		
+emi/bmagic/magic114/03@0x801EFE70	Best 20 differences: bnez at 0x801EFE94; adjust work pointer reloads.		
+emi/bmagic/magic114/03@0x801EFE70	blocker: work pointer lifetime	+0x34 lui v1 against lui a0.	
+emi/bmagic/magic115/03@0x801EF130	blocker: work pointer lifetime	lui a0 at +0x50.	
+emi/bmagic/magic116/03@0x801EEDB0	blocker: register allocation	lui v1 at 0x801EEDF0.	
+emi/bmagic/magic116/03@0x801EEDB0	blocker: the mode update reloads g_Task into the other register	lui v1 against v0 at 0x801EEDF0.	
+emi/bmagic/magic117/00@0x801EEC90	blocker: no matched C template (magic010/00 func_801EEC80).		
+emi/bmagic/magic118/03@0x801EEFF4	Retail keeps the battler in v1 and the task in a0; the draft (--dec form, timer 2, unk_14 zero) is one instruction short at the 0x14 bnez, the reg order differs.		
+emi/bmagic/magic121/03@0x801EF414	blocker: sp20 and sp18 stores scheduling	+0x80.	
+emi/bmagic/magic125/03@0x801EFE8C	hint: matches the plain draft except the angle sum (unk_09 + (unk_0B & 7) 8) << 6 adds with the operands swapped and the z add loads the work pointer into a1.		
+emi/bmagic/magic130/03@0x801EEFB4	blocker: work pointer lifetime	lui v1 at +0x20.	
+emi/bmagic/magic131/03@0x801EEF64	blocker: dragon-form switch layout	bnez v0 at 0x801EEF88 (signed compare slti in retail).	
+emi/bmagic/magic131/03@0x801F04C0	blocker: actor load schedule	lui a0 at +0x10.	
+emi/bmagic/magic131/03@0x801F0BCC	blocker: coordinate and actor load schedule	lui a0 at +0x08.	
+emi/bmagic/magic137/03@0x801EF090	Blocker: same shape as func_801EF38C (scroll-target position copy, then SND and timer stores); retail's load order for the y terms differs from the candidate.		
+emi/bmagic/magic138/03@0x801EEC88	Blocker: copies 16 halfwords from 0x80036C00 to 0x8003AC00 (unnamed data, no table yet) and swaps the scratchpad work pointer to g_BattleEffectBattler around Actor_StepAnimLoop.		
+emi/bmagic/magic150/03@0x801EEF80	blocker: D_801EFAAC and D_801EFAAE are one base-register pair in retail (a0 +0, +2)	lui v0 against addiu a0 at 0x801EEF84.	
+emi/bmagic/magic150/03@0x801EF6F8	blocker: the cursor walk needs a table entry type (eight 8-byte rows with halfword fields)	the cursor load at 0x801EF71C.	
+emi/bmagic/magic158/03@0x801EF1C8	magic045 shape with the angle cell as s16 &D_1F800004 reaches 4 bytes short; retail keeps the masked phase in v0 and shifts it twice (sll a0 then sll v0), ours puts it in a0	+0x14	
+emi/bmagic/magic172/03@0x801EF158	blocker: copied x load schedule	lw a0 at +0x28.	
+emi/bmagic/magic172/03@0x801EF590	blocker: early constant load	0x801EF5B8.	
+emi/bmagic/magic213/03@0x801EF23C	nonmatching: same body as Effect_FadePaletteIn, but retail has no stack frame; the shared body links one (+4 bytes	at +0xE4).	
+emi/bmagic/magic218/03@0x801EF70C	blocker: the radius is a halfword at D_1F800000 (lh) but spawn.h types it s32; needs: type (a per-file width view is not allowed).		
+emi/bmagic/magic220/03@0x801EF078	blocker: work pointer lifetime	lui v0 at +0x84.	
+emi/bmagic/magic220/03@0x801EF40C	blocker: y register merge	lw v0,56(a1) (retail) against lw v1,56(a1) (candidate).	
+emi/bmagic/magic220/03@0x801F002C	The y position loads g_BattleEffectBattler before the rcos multiply; retail multiplies first (	at 0x801F0094). The x position matches.	
+emi/bmagic/magic220/03@0x801F010C	Retail reloads g_Task after the rsin call and before the 24x multiply; the draft multiplies first (	at 0x801F0140). Needs the extern D_1F800004 (u16) in magic220_03.h.	
+emi/bmagic/magic222/03@0x801EEFC8	hint: g_Task loads before the effect battler for the position copy and the battler z loads before the unk_25 store; the candidate loads the two in the other order	lui v1,0x1f80 at +0x2C.	
+emi/bmagic/magic222/03@0x801F0584	blocker: candidate loads g_Task into a1 where retail keeps it in a0 (lui a0 at 0x801F058C) across the 2E/30 copy	there. Three draft orders tried.	
+emi/bmagic/magic223/03@0x801EEFB4	blocker: BATTLE_RAISE_STATE puts the flags pointer in v0 where retail uses v1	lui v1 against v0 at 0x801EEFD4.	
+emi/bmagic/magic225/03@0x801F021C	blocker: work pointer register	0x801F0278 a0 against a1.	
+emi/bmagic/magic226/03@0x801F055C	blocker: candidate is 4 bytes short (0xBC against 0xC0); retail reloads g_Task before the timer and step stores	the bnez target at 0x801F057C.	
+emi/bmagic/magic226/03@0x801F061C	blocker: source pointer register	lui a2 (retail) against lui a3 (candidate).	
+emi/boss/boss012/16@0x800C1CD8	hint: shadow quad (GFX_SET_DRAW_MODE, POLY_FT4, PartyMember view, depth = unk_20 - 0x3C) matches to the y2 store; retail stores x3 before the u/v bytes and loads the y3 cells ahead of them, the candidate stores x3 after the u/v bytes (reloads g_Task).		
+emi/boss/boss013/16@0x800C1B4C	retail reloads g_Battle.boss_flags after the |= 4 store (no CSE) and fills the jal slot with li a0	0x800C1B7C	
+emi/boss/boss018/16@0x800C1F28	blocker: slot 4 kept in a register	800C1F4C bne v1,v0.	
+emi/boss/boss018/16@0x800C1F28	m2c draft: 6 differing	at 800C1F4C: retail keeps 4 in a register (bne v1,v0) for slot == 4; if/else and inverted tests give sltiu/xori. Next lever: a different slot test or a loop shape.	
+emi/boss/boss018/16@0x800C2820	hint: 0x10C bytes, not the goto layout of Ending/Ending2 (0x120); the 0x1C/0x3A flag chain is shaped differently.		
+emi/boss/boss018/16@0x800C29AC	blocker: nested 2x2 table copy into the 0x80104030 word area	prologue, then indexing and register order.	
+emi/boss/boss018/16@0x800C2AA4	hint: two enemy rows (0x801EB748, 0x801EB860) reached through one field word; the draft's &D_801EB7CA - 0x82 work-pointer stores need a row type this image lacks	lui v1,0x801f at 0x800C2AA4.	
+emi/boss/boss025/13@0x800C1BB0	blocker: retail reloads g_BattleCurrentEnemy and D_80144E00 in its own registers after the call	lui v1 at 0x800C1C18.	
+emi/boss/boss025/13@0x800C2184	blocker: retail hoists the four halfword loads above the hook stores; D_80145F1A is an array in func_800C2634 and a scalar here	lui v0 at 0x800C2184.	
+emi/boss/boss028/16@0x800C1C9C	hint: the plain draft (slot header.mode = 1 and target = g_Task through g_BattleEffects[index]) is close; retail keeps the battler in v1 and the task in a1 and loads the AllocEffect argument 3 after the z read; needs g_BattleEffects alias row.		
+emi/boss/boss028/16@0x800C1D90	needs: Area_SampleHeight result read as a word	lw t0,20(v0) (retail) against lw a3,20(v0).	
+emi/boss/boss028/16@0x800C1F2C	needs: Area_SampleHeight result read as a word	sll/sra extension after the call.	
+emi/boss/boss034/16@0x800C22D0	blocker: g_Task reload for the two halfword stores	800C2310.	
+emi/boss/boss035/16@0x800C1B84	blocker:	0x800C1B8C sltiu.	
+emi/boss/boss038/16@0x800C1A34	blocker: load order	+0x5C record load into a1 (retail).	
+emi/boss/boss054/16@0x800C1FA8	needs: Area_SampleHeight result read as a word	retail addiu v0,v0,384 (candidate sll v0,v0,16).	
+emi/etc/bate/00@0x801D27C4	blocker: register homes (py in s2, shaded byte in s3).		
+emi/etc/bate/00@0x801D31B0	hint: x needs two homes (raw s5, sign-extended s1 after the window call) and base pointer s0 = &g_WindowStyle; frame 0x50 vs 0x38.		
+emi/etc/bate/00@0x801D50E8		the stack frame, 0x70 bytes against 0x78.	
+emi/etc/commu00/00@0x801EEEF0	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 73.00%. resume: a lever or header fix that closes the first mismatch.		73.00%
+emi/etc/commu00/00@0x801F03D0	Rolls three distinct labels per row into D_801F2930: each roll is RANDOM_MASK(0x1F), lowered by RANDOM_MASK(0xF) until it fits the row's signed cap, then offset by 0x9B; 0x9F and 0xA0 and repeats are skipped. nonmatching 72.22%: the caps are copied as one 3-byte record (retail lb/sb block copy). The retail keeps &caps in s5 across the row loop and leaves the clamp loop unrotated (test at the top, j back); a goto clamp gives the unrotated shape (73.03%). resume: a loop form GCC does not rotate, then the s5 hoist.		72.22%, 73.03%
+emi/etc/commu01/07@0x801D273C		s5 is saved as s6.	
+emi/etc/commu01/07@0x801D3984		s2 is saved as s1.	
+emi/etc/commu01/07@0x801D4474	needs: Area_SampleHeight result type	+0x60 early return.	
+emi/etc/commu01/07@0x801D49C4	needs: typed 18-byte lookup data and fairy room access.		
+emi/etc/commu02/08@0x801D0CC8	blocker: constant and store order	801D0CD0.	
+emi/etc/commu02/08@0x801D15A4	hint: retail keeps D_801DB0C4 unsigned (lbu throughout), counter in s0 and the x position (0x100000, += 0x200000, sra 16) in s1 with a 48-byte frame; plain forms hoist 0x200000 into s2 and drop the extra frame slots		
+emi/etc/commu02/08@0x801D1D68	blocker: loop register allocation	+0x44 index load before the counter.	
+emi/etc/commu02/08@0x801D1D68	hint: the slot-counter loop (x kept as a 16.16 running value, D_801DB0C4 as u8) is 8 bytes over (0x138 against 0x130)	sw ra,28(sp) at +0xC, because the 0x200000 step is hoisted into s2 where retail reloads it inside the loop.	
+emi/etc/commu02/08@0x801D35E0	needs: u8 view of const g_SelectionCues and g_SelectionSequences	0x801D35E0 lui v1 against v0.	
+emi/etc/commu02/08@0x801D42B4	blocker: call target shifts with a 12-byte short body	+0x48.	
+emi/etc/commu02/08@0x801D4910	hint: window frame drawer; natural form with s16 x/y and func_801D2EDC(s16, s16, s32) matches except the draw-mode style: retail sets a3 in branch delay slots with s0 = dx = 8 after the cursor load, the candidate puts dx in s2 and hoists move s1,zero		
+emi/etc/commu02/08@0x801D8058	blocker: frame is 0x30, not 0x38	x argument copies.	
+emi/etc/commu04/06@0x801D16A4	blocker: tail store order and a typed BattleOwnerKind view	sb zero,%lo(D_80148332) at 0x801D16D4.	
+emi/etc/game/00@0x801A1C5C		the case-3 branch target.	
+emi/etc/game/00@0x801A1C5C	nonmatching 94.41%: branch@+0x002C; callers pass u16 cells (andi, no sll/sra) so func_801A20F8 needs a u16 prototype here (s16 in game_00.h conflicts); the x/y sums retail adds one call late (delay slot of the next jal), sequential, combined and reordered `+=` forms all add earlier.		94.41%
+emi/etc/game/00@0x801A1ED8	nonmatching 84.06%: branch@+0x0044; the default arm and the call-result accumulation still differ.		84.06%
+emi/etc/game/00@0x801A3080	nonmatching unmeasured: tried if (dir != N) value = -value shared sll/sra (79.39%); saved regs rotated: retail keeps facing in s3 and a separate type copy in s1 (gcc copy-propagates type over facing), angle_x/angle_y in s4/s5; declaration-order shuffles (150) no gain.		79.39%
+emi/etc/game/00@0x801AA470	nonmatching unmeasured: tried first-draft switch cleaned; signed divide by array element adds 8 stack bytes (frame 0x28 vs 0x20); index pointer, cursor tails.		
+emi/etc/game/00@0x801AAB00	nonmatching unmeasured: tried goto-shared tails, value-var join, per-branch pointer temp; first mismatch C1/C2 pointer-vs-slot register order.		
+emi/etc/game/00@0x801AB458	nonmatching unmeasured: tried 70.14%: single return value exit via break; retail keeps base pointer s2 for base[1] (4(s2)); gcc folds it to the D_80145EC8 symbol.		70.14%
+emi/etc/game/00@0x801AED54	nonmatching unmeasured: tried 65.09%: byte-based color table index fixed; retail colors computed first in s4/s3/s1, args copied to s8/s7/s5 (pins reach correct set but lose 8 points); no sh a0,0x28(sp) arg spill in retail.		65.09%
+emi/etc/game/00@0x801AF5B0	nonmatching unmeasured: tried regalloc: first-compare tail layout; andi placement vs retail.		
+emi/etc/game/00@0x801AFA1C	nonmatching unmeasured: saved regs s6/s7 swapped (arg3 in s6, arg5 in s7); pin next.		
+emi/etc/game/00@0x801B0E44	nonmatching unmeasured: s1-held D_1F800008 pointer folds to absolute.		
+emi/etc/game/00@0x801B1E24	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 58.67%. resume: a lever or header fix that closes the first mismatch.		58.67%
+emi/etc/game/00@0x801B21E8	nonmatching unmeasured: tried 72.01%: u8 record copy base, pointer locals val13/val0 for D_80145FBC/D_1F800008; remaining: record-copy loop biv form (retail lw 0..0xc from a2), D_80146111 compare against g_Game.party_size reg not const 3, hoisted lui a0 base.		72.01%
+emi/etc/game/00@0x801B44DC	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 18.24%. resume: a lever or header fix that closes the first mismatch.		18.24%
+emi/etc/game/00@0x801B4D7C	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 27.52%. resume: a lever or header fix that closes the first mismatch.		27.52%
+emi/etc/game/00@0x801B6674	nonmatching unmeasured: tried scheduler order of loads in the 0x800 path and the shared 8019FA28 call tail (g_GameContextKind lbu a3 lands above the g_Game.walk_flags lhu); 80.24%.		80.24%
+emi/etc/game/00@0x801B95E0	nonmatching unmeasured: tried if-chain compare order, ret var for return 3; pad pointer folds to absolute (retail keeps s0), delay-slot li v0,3 sharing.		
+emi/etc/game/00@0x801B9F08	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 41.36%. resume: a lever or header fix that closes the first mismatch.		41.36%
+emi/etc/game/00@0x801BA678	blocker: body 0xAE4 against retail 0xB40	+0x58 tail-jump target.	
+emi/etc/game/00@0x801BC760	nonmatching unmeasured: tried the first draft cleaned; abs as if(v<0)v=-v, separate block temps; scheduler order of the four D_80146144/48 product terms vs near-sum differs (51.9%).		51.9%
+emi/etc/game/00@0x801BCD60	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 50.00%. resume: a lever or header fix that closes the first mismatch.		50.00%
+emi/etc/game/00@0x801BDD58	nonmatching unmeasured: tried regalloc: the work record lands in t0 while retail copies pos_x to t0 and puts the record in a0; the top-level test stays bnez-to-exit in every if/else spelling (hit=0 then, return 0 then, negated then, >= then, <= then, goto) and GCC threads the small then-block into the branch; hoisting the 0x10 product does not change the sink. resume: a source form that frees a0 for the work record (retail copies pos_x to t0 first) and keeps the top-level test as beqz-to-body.		
+emi/etc/game/00@0x801BE1B0	nonmatching unmeasured: tried 43.98%: signed s32 counters + 16-byte frame pad; retail addresses scratch arrays as lui at,0x1f80; sb 8(at) (direct SP_REF forms lost the frame), slt vs sltu loops.		43.98%
+emi/etc/game/00@0x801BE920	nonmatching unmeasured: tried volatile FIELD(T,&sym,off) byte-offset swaps (63.25%); retail order is load A, load B / load B, load A, store A, store B per pair with off_a=a0 and off_b=v1 kept in the arg regs; mine copies the offsets (move t0,a0) and orders loads differently.		63.25%
+emi/etc/game/00@0x801BF5A8	nonmatching unmeasured: tried cleaned first-draft temps (frame now 0x18 like retail), signed /4; 40.50%: retail rereads g_Battle.scroll_dir after the 0x34 store and folds the table symbol into the displacement (lui at; addu at,at,index; lb); mine hoists &D_801CD458[index 2] and CSEs it; x is copied to t2 in retail.		40.50%
+emi/etc/game/00@0x801BFB34	nonmatching unmeasured: tried 63.54%: stride-1 spad, loaded counts; retail keeps count in a0 across loop and spad base in a3 (pointer local), first-loop count copy move a1,v0.		63.54%
+emi/etc/game/00@0x801C1ABC	nonmatching unmeasured: tried frame pad 24 added (65.85%); search-loop limit as signed local gives blez but regresses; prev/cur address order in compaction loop (retail a0=cur, v1=prev via v0-1).		65.85%
+emi/etc/game/00@0x801C41D0	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 47.52%. resume: a lever or header fix that closes the first mismatch.		47.52%
+emi/etc/shisu/00@0x801D1964	blocker: late loads of g_MenuStep.state and D_801DA0A7 sources.		
+emi/etc/shisu/00@0x801D1D1C	blocker: store constant order	+0x00 li v0,20.	
+emi/etc/shisu/00@0x801D2AFC	blocker: entry reads v0 and v1 before setting them.		
+emi/etc/shisu/00@0x801D2E80	blocker: intermediate subtraction	+0x54 loads 0x02000000, not 0xFE000000.	
+emi/etc/shisu/00@0x801D376C	blocker: register homes (py in s2, shaded byte in s3).		
+emi/etc/shop/00@0x801D1A90		+0x4: retail keeps &g_MenuPanelTasks[9] in v1 and reads slot 8's pos at -0x20/-0x1E twice; the draft folds both reads to one absolute load. Tried: pointer local, constant indexes, FAKE_ORDER_FENCE after each setup store, a pinned v1.	
+emi/etc/shop/00@0x801D20D0	nonmatching unmeasured: tried panel-task struct members for the flag stores, cursor pointer local, flag row -fno-rerun-cse-after-loop, a search over source rewrites. resume: a source shape that keeps the cursor la out of the prologue and loads the cursor before the store.		
+emi/etc/shop/00@0x801D69E0	nonmatching unmeasured: tried the first draft (39.90%); 16-byte struct copy (49.74%); byte-array copy for the unaligned lwl/lwr (56.85%); u16 loop counter and u16 destination store (63.45%); the FIELD offset views replaced by typed fields and the work-text pointer, the first-draft pointer juggling removed (61.62%). residual is the register allocation of the second row loop: retail homes the work base in s2, the row base in s3 and the constants in t0/t1/a0-a3, the candidate homes them in s0 and v1. resume: a source shape that gives the work base the s2 home and the loop constants their own registers, without keeping the work-text pointer alive past the row loop.		39.90%, 49.74%, 56.85%, 63.45%, 61.62%
+emi/etc/shop/00@0x801D826C	blocker: schedule of `addiu s2,s2,2` after `andi a0,s1,0xffff`.		
+emi/etc/shop/00@0x801D826C	nonmatching: 2 instructions; retail schedules `andi a0,s1` before `addiu s2,s2,2` (sched1 boosts the a0 zero-extend over the in-place py add).		
+emi/etc/shop/00@0x801D8C58		s0 is saved early.	
+emi/etc/shop/00@0x801D8C58	nonmatching 79.49%: s16 x/y and u8 index/flag params, a 24-byte stack frame. Retail copies x to s5 after the first call and sign-extends x in place in s1, loads the slot base after the s2 save, and adds 0x16 after the index product. resume: a source form that gives x two homes (raw s5, extended s1) and delays the slot base load.		79.49%
+emi/etc/shop/00@0x801DAB90		the stack frame, 0x70 bytes against 0x78.	
+emi/etc/shop/00@0x801DE4C8	nonmatching unmeasured: tried branch at +0x001c; resource-selection if/else call layout; candidate 49.56%. resume: retail if/else call layout for resource selection rebuilt from asm.		49.56%
+emi/etc/shop/00@0x801DF00C	nonmatching unmeasured: tried the candidate frames at 0x70 against the retail 0x50 - twelve locals stay live and s2 is saved. resume: a source shape with the retail live set (the panel x and y in s1 and s0, the base x and y in s5 and s4, the row counter in s7, the text buffer in s6) so the frame drops to 0x50.		
+emi/etc/shop/00@0x801DF6A8	nonmatching unmeasured: tried the first draft cleaned with a typed row loop and FIELD cursor cells. resume: close the +0xC insert (extra store) in the row loop.		
+emi/etc/shop/00@0x801E032C	nonmatching unmeasured: tried the first draft cleaned with a byte cursor and typed cell table. resume: close the +0x14 prologue store order (s2 frame).		
+emi/etc/shop/00@0x801E05E0	nonmatching unmeasured: tried opcode@+0x0: frame 0x18 without s0; retail keeps the D_801483CB address in s0 across the input branches, while the pointer local folds away in our source (43.60 to 58.77 after the old-cursor compare fix). resume: force the cursor address to stay live: compare through a pointer whose value is read after the branches without other uses folding it.		
+emi/etc/shop/00@0x801E0BAC	nonmatching unmeasured: tried opcode/prologue at +0x0000; cursor address not live across input branches; D_801483CB width; candidate 58.33%. resume: cursor address kept live to final compare as retail s0.		58.33%
+emi/etc/shop/00@0x801E0F78	Lists the party members whose record flag bit 0 is set into D_801E6264, then builds the shop's first two panel tasks (and slot 6 when Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) is clear). nonmatching 86.53%: retail keeps &D_80148331 in v0 and stores the slot-0 bytes through it before the other fields, in source order; ours folds the pointer to absolute stores and schedules them later. A MenuPanelTask view gives the same score. resume: a pointer GCC cannot fold.		86.53%
+emi/etc/shop/00@0x801E0F78	nonmatching unmeasured: tried local u8 pointer (folds to absolute), panel-task struct views of the slot-0 bytes with the -fno-rerun-cse-after-loop row, all 24 orders of the slot-0 stores (92.66 only with the stores out of order), chained -0x14/2 stores. resume: a shape that gives 7 the s0 home and keeps -0x14 in a0 while the slot-0 stores stay in retail order.		
+emi/etc/shop/00@0x801E112C	nonmatching unmeasured: tried the first draft with register-named locals and FIELD views; the first draft cleaned into role-named locals, the panel task read through its header members, the icon offset chain recovered from the retail and the two icon calls given their seven-argument shape (60.74%). residual: the register allocation and the ability-icon address forms still differ from the retail. resume: a source shape that reproduces the retail's ability-icon address forms and its register allocation.		60.74%
+emi/etc/sisyou/00@0x801D1E54	nonmatching 60.2%: tried raw byte-offset spelling of both texture_window increments (60.18%, no change); frame-slot delta 0x78 vs 0x70 with identical save set. resume: when a source shape forces all four args to home (retail sw a0..a3 at 0x18/0x20/0x28/0x30, 8-byte-spaced, with lhu reloads of x/y from the homes) instead of keeping x/y in callee-saved registers; then re-measure the five opcode and three branch hunks.		60.2%, 60.18%
+emi/etc/start/08@0x801D40D8	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.37%. resume: a lever or header fix that closes the first mismatch.		75.37%
+emi/etc/start/08@0x801D4564	82.15%; item pointer, limited pointer use and argument locals tried	0x801D457C, address register.	82.15%
+emi/etc/start/08@0x801D53AC	nonmatching 76.74%: retail reads D_801ED620 signed at 0x47D4 (lb) and unsigned later, but the union view keeps the cell's address in s0 and falls to 55.81%. resume: a form that reads it once as signed without materialising the address.		76.74%, 55.81%
+emi/etc/start/08@0x801D6AC4	87.4%	at +0x3C: retail loads a global address (lui) where ours zeroes s6.	87.4%
+emi/etc/start/08@0x801D7314	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 65.79%. resume: a lever or header fix that closes the first mismatch.		65.79%
+emi/etc/start/08@0x801D8390	88.89%; typed and volatile panel pointers and opaque base tried	0x801D83C4, panel store.	88.89%
+emi/etc/start/08@0x801D8680	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 68.31%. resume: a lever or header fix that closes the first mismatch.		68.31%
+emi/etc/start/08@0x801D9748	nonmatching:	0x801D974C, `i = 0` lands after the record address; retail also loads the 6 for both panel handlers into v1 right after the loop. Delayed init, signed counter, do-while, for, row pointer and chained handler stores tried; LOH(pos.y) fixes the -20 constant.	
+emi/etc/start/08@0x801D9BDC	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 82.70%. resume: a lever or header fix that closes the first mismatch.		82.70%
+emi/etc/start/08@0x801DA474	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.25%. resume: a lever or header fix that closes the first mismatch.		75.25%
+emi/etc/start/08@0x801DAC1C	NON_MATCHING: row pointer, invariant base and pinned base tried	0x801DAC80, table base load.	
+emi/etc/start/08@0x801DAE14	nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv (85.21), 15 min of rewrite search (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in the branch delay slot and i++ after the volatile load.		88.03%
+emi/etc/start/08@0x801DB764	blocker: register homes (py in s2, shaded byte in s3).		
+emi/etc/start/08@0x801DB764	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 70.90%. resume: a lever or header fix that closes the first mismatch.		70.90%
+emi/etc/start/08@0x801DC150	nonmatching: frame 0x38 against retail 0x50	at +0x0; retail keeps x raw in s5 and sign-extended in s1 and holds &g_WindowStyle in s0.	
+emi/etc/start/08@0x801DE088	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 65.42%. resume: a lever or header fix that closes the first mismatch.		65.42%
+emi/etc/start/08@0x801E206C	59.91%; signed, volatile and unsigned cursor pointers tried	0x801E20B8, cursor address load.	59.91%
+emi/etc/start/08@0x801E26A8	65.62%; selected pointer, early y adjustment and do-while tried	0x801E26AC, saved registers.	65.62%
+emi/etc/start/08@0x801E2898	blocker: packed record types for the stack work area.		
+emi/etc/start/08@0x801E2898	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 49.08%. resume: a lever or header fix that closes the first mismatch.		49.08%
+emi/etc/start/08@0x801E2E90	76.7%; delayed index, volatile selector and delayed mask tried	0x801E2E90, frame 0xB8 vs 0xC0.	76.7%
+emi/etc/start/08@0x801E33E8	blocker: spill count	+0x0 addiu sp,sp,-0x50 (retail) against -0x40 (candidate).	
+emi/etc/start/08@0x801E33E8	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 55.84%. resume: a lever or header fix that closes the first mismatch.		55.84%
+emi/etc/start/08@0x801E4744	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 81.20%. resume: a lever or header fix that closes the first mismatch.		81.20%
+emi/etc/start/08@0x801EAA14	nonmatching 60.11%: the panel's item table is the typed member now; the unit still needs a lever that closes the first mismatch. resume: the record's layout is proven, so the remaining diff is code shape.		60.11%
+emi/etc/start/08@0x801EAF98	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header fix that closes the first mismatch.		69.08%
+emi/plchar/plp012/00@0x801CF37C	blocker: SND_PlayCue argument narrows to u16	+0xE8.	
+emi/plchar/plp016/00@0x801CFF30	Exact draft: pin y to s4 and kind to s2, leave x unpinned; shared twins need an evidenced name.		
+emi/plchar/plp016/00@0x801CFF30	blocker: shared flag lifetime	+0x04.	
+emi/plchar/plp026/00@0x801D0354	blocker: save order	+0x4 s2 saved first (retail saves s3 first).	
+emi/plchar/plp034/00@0x801CFB4C	blocker: save order	+0x4 s2 saved first (retail saves s3 first).	
+emi/plchar/plp034/00@0x801CFC7C	blocker:	+0x0 g_Task load before the 0x8015DF18 call.	
+emi/plchar/plp056/00@0x801D0158	blocker: save order	+0x4 s2 saved first (retail saves s3 first).	
+emi/plchar/plp267/00@0x801CF62C	blocker: save order	+0x4 s2 saved first (retail saves s3 first).	
+emi/plchar/plp349/00@0x801CEE24	blocker: save order	+0x4 s2 saved first (retail saves s3 first).	
+emi/plchar/plp467/00@0x801CF050	blocker: save order	+0x4 s2 saved first (retail saves s3 first).	
+emi/plchar/plp567/00@0x801CF430	blocker: save order	+0x4 s2 saved first (retail saves s3 first).	
+emi/plchar/plp678/00@0x801CF1A4	blocker: probe flag register	+0x3C addu s2,a0,v0 (retail cx in s1, cy in s0, the flag computed in v0 and moved to s2 in the delay slot) against cx in s2 and the flag in s0 (candidate); body is Char_ProbeFacingCell with the cell test 0xF0/0xF1/0xF4/0xF6/0xF7 plus func_801B5AE4 != -1.	
+emi/scenario/sce15ef0/00@0x801D0E5C	blocker: fade value register	+0x34 lb a0,94(v0) (candidate) against lb v0,94(v0) (retail).	
+emi/scenario/sce15ef1/00@0x801D147C	needs: camera transform declarations and record types.		
+emi/scenario/sce15ef1/00@0x801D23A0	needs: image rectangle and buffer declarations.		
+emi/scenario/sce15ef1/00@0x801D2474	needs: camera transform declarations and record types.		
+emi/scenario/sce15ef1/00@0x801D2BA8	blocker: work pointer reload	+0x08 lui v0,0x1f80.	
+emi/scenario/sce15ef1/00@0x801D2D5C	blocker: statement order	+0x2C lw v0,12(v1) (candidate) against lbu a1,9(v1) (retail).	
+emi/scenario/sce15ef2/00@0x801D1414	blocker: stack frame	+0x0 stack 0x28 against 0x38.	
+emi/scenario/sce15ef2/00@0x801D1624	blocker: case constant 1 kept in v0	+0x8C.	
+emi/scenario/sce15ef3/00@0x801D18CC	blocker: 0x20000 hoisted into s4	+0x10 sw ra,64(sp) against 68.	
+emi/scenario/sce15ef3/00@0x801D19A0	blocker: retail reserves 16 bytes of locals	+0x0 addiu sp,sp,-48.	
+emi/scenario/sce15ef3/00@0x801D2634	blocker: case constant 1 kept in v0	+0x8C.	
+emi/scenario/scena01/00@0x801F729C	blocker: constant order	+0x68 li v0,100 (candidate) against li v1,320 (retail).	
+emi/scenario/scena01/00@0x801F7AE4	needs: particle record type at 0x800E4800.		
+emi/scenario/scena01/00@0x801F7C54	needs: particle record type at 0x800E4800.		
+emi/scenario/scena01/00@0x801FD28C	needs: D_801FE280 declaration.		
+emi/scenario/scena02/00@0x801FE1C0	blocker: nops after each lbu [v0]	0x801FE1F0 nop against lui a0.	
+emi/scenario/scena04/00@0x801F6DD4	blocker: schedule	+4 li a0,0x10 before the s0 save.	
+emi/scenario/scena04/00@0x801F6F2C	blocker: unk_09 value register	+0x40 lbu a1,9(v0) (candidate) against lbu a0,9(v0) (retail).	
+emi/scenario/scena05/00@0x801F745C	Hint: a3 is lhu of the low half of vx (0x0C), while 0x0C is also read as a word; the same field needs two widths.		
+emi/scenario/scena05/00@0x801FC808	blocker: store in the bne delay slot	li a2,5 against li a1,5.	
+emi/scenario/scena06/00@0x801FC498	needs: compiling draft for the jump table at +0x20.		
+emi/scenario/scena07/00@0x801F77AC	Hint: pointer global D_801FDFBC plus a halfword at +0x10 and a word counter at +0x0C of g_Task; the pointer struct is not typed yet.		
+emi/scenario/scena07/00@0x801F7810	Hint: the pointer global D_801FDFBC is read as a word at +0x08; its struct is not typed yet, so the draft needs that type first.		
+emi/scenario/scena07/00@0x801F7960	Hint: pointer global D_801FDFC0 is read and written as a halfword at +0x510 and passed to func_801F9330; the record type is not declared, so the draft needs it first.		
+emi/scenario/scena07/00@0x801F7A30	blocker: position setup load order	+0x00 (prologue).	
+emi/scenario/scena07/00@0x801F7D6C	blocker: same position setup as func_801F7A30	+0x00 (load order).	
+emi/scenario/scena07/00@0x801F81D4	needs: camera transform declarations and drawing record type.		
+emi/scenario/scena07/00@0x801F83D0	needs: particle record type.		
+emi/scenario/scena07/00@0x801F86BC	Hint: operates on a0 as a byte record (bytes 0x02, 0x03, 0x01, 0x04 and a flag at D_801FDFC4); the record type is not declared, so the draft needs it first.		
+emi/scenario/scena07/00@0x801F8764	blocker: 0x40000 constant register	lui v0,4 (retail) against a0 or a1 (candidate).	
+emi/scenario/scena07/00@0x801F88B8	needs: table record type.		
+emi/scenario/scena07/00@0x801F8BE8	needs: table record type.		
+emi/scenario/scena07/00@0x801F8F90	blocker: argument save order	+0x0C.	
+emi/scenario/scena07/00@0x801FDBF4	blocker: nops after each load	0x801FDC30 nop against lui a0.	
+emi/scenario/scena08/00@0x801F73D4	Hint: reads screen_x and screen_y as signed halves (lh); the Actor members are u16, so the draft loads lhu.		
+emi/scenario/scena08/00@0x801F774C	Hint: same shape as func_801F73D4 (lh of screen_x and screen_y, u16 members); here the 0x32 update is -0x10.		
+emi/scenario/scena08/00@0x801F8D4C	Hint: steps a 3-byte-header record: byte 0x02 counts down, 0x03 adds 6, word 0x08 adds 0x40000, word 0x14 accumulates 0x08; the record type with word 0x08 and 0x14 is not named yet.		
+emi/scenario/scena08/00@0x801F8D4C	blocker: row load order	+0x10 lw v1,20(a2) (candidate) against lbu v1,3(a2) (retail).	
+emi/scenario/scena08/00@0x801F9E00	blocker: ori in the work load delay slot	+4 ori v1,v1,0x8000 against lui v0,0x1f80.	
+emi/scenario/scena08/00@0x801FA2D0	blocker: retail stores a word zero to g_ScriptVars (sw), the u8[4] declaration gives sb	sb at 0x801FA2F0.	
+emi/scenario/scena09/00@0x801FDC70	Hint: retail loads li v0,-1 in the flag test branch delay slot before the test; both the == 0 form and the early return put it after.		
+emi/scenario/scena10/00@0x801FA644	blocker: first lui in v1	lui v0 (candidate) against lui v1 (retail).	
+emi/scenario/scena12/00@0x801FCD58	Hint: a draft drops the stores of D_80146865 and D_80146867 to zero before the step store; the retail order is ScriptVars, 865, 867, 875, 874.		
+emi/scenario/scena13/00@0x801F735C	blocker: andi v1,a1,0xFF compare against 0x37	andi omitted.	
+emi/scenario/scena13/00@0x801FBA34	hint: the area-id and scene-flag chain with both u16 area compares is 8 bytes over (0x14C against 0x144)	lui v0,0x8014 at +0x14, because the compiler adds andi 0xFFFF after each lhu of g_GameAreaId where retail compares the loaded value directly.	
+emi/scenario/scena14/00@0x801F7960	blocker: color register	+0x30 lhu a1,0(a2).	
+emi/scenario/scena14/00@0x801F7A18	needs: D_801FC4C0 declaration.		
+emi/scenario/scena14/00@0x801FC130	blocker: frame 0x20 against 0x18	+0x0 addiu sp,sp,-32.	
+emi/scenario/scena17/00@0x801F8480	blocker: sum register	+0x18 addiu v0,v0,2 (candidate) against addiu a1,v0,2 (retail).	
+emi/scenario/scena17/00@0x801F8594	blocker: argument duplication across paths	+0x2C beqz v0 target against jal.	
+emi/scenario/scena17/00@0x801F90BC	blocker: argument locals' register order	+0x14 move s2,a2 (candidate) against move s2,a3 (retail).	
+emi/world00/area008/13@0x801F3D88	NOTE: not byte-matching (293/339 insn, 1352 bytes — 1 insn short	+0x00D0, insn 52). The re-lift reproduces the original's 120-byte frame, the a0-a3 spills to 24/32/40/48(sp), and the block-3 x1/x3 association `base + (half_width + odd_width + 2)`. Residual: a register domino — bottom_v/bottom_y/half_width land in s1/s2/s3 instead of s2/s3/s1, one `move v0,s1` replaces the hoisted `sll v0,s2,5` clut_x setup, and the reload of width_plus_1 loses the redundant original `andi v0,s1,0xffff`.	
+emi/world00/area030/04@0x801D2DC4	nonmatching unmeasured: tried the retail loads the work pointer into a0 and the candidate into a1, and the saved-register plan follows from it. resume: a source shape that keeps the work pointer in a0 after the panel call.		
+emi/world00/area030/04@0x801D6684	nonmatching 68.66%: the 5th func_8014FC90 argument was a literal 0; retail loads it as the cell palette word ((cell << 1) + &D_801E2070) on both paths, which this body now passes	+0x003C is a layout shift: the body is 20 bytes short because jump2 shares arm tails retail keeps apart. resume: a per-path tail shape that keeps the three arm exits separate.	68.66%
+emi/world00/area030/04@0x801D72E4	nonmatching unmeasured: the bar count is 10 with a live step index and 9 without it (the retail sets s3 to 10 and 9 on the two paths) and the slot stores run flags, type, unk_01, unk_02; candidate 68.92%. resume: a source shape that homes the work pointer in a0 like the retail.		68.92%
+emi/world00/area030/04@0x801D7C10	Indexed slots with an unconditional increment match the tail; pointer hoisting	ers at +0x14.	
+emi/world00/area030/04@0x801D7C10	nonmatching 73.03%: retail keeps y in s4 and narrows it directly in a1; this source uses a separate saved temporary and stores the slot byte before the call instead of in its delay slot. resume: align the live ranges and defer the slot store.		73.03%
+emi/world00/area030/04@0x801D7EB0	nonmatching unmeasured: the x/y parameters are 32-bit (the retail prologue copies $a0 and $a1 whole into $s0 and $v1 and never re-sign-extends them, and it masks the y argument with 0xFFFF after adding 1); area030_04.h and this definition now declare them s32, and the callers narrow their argument to 16 bits themselves. resume: a source shape that reproduces the retail's argument narrowing and its 0x58 frame.		
+emi/world00/area030/04@0x801D88E0	nonmatching unmeasured: the retail frame is 0x48 and the candidate 0x40, so the eight unused frame bytes are declared; candidate 60.27%. resume: a source shape that reproduces the retail's cell, row and enemy-row address forms.		60.27%
+emi/world00/area030/04@0x801D934C	nonmatching unmeasured: typed PsyQ fields with s32 arguments score 61.25%; the mixed narrow-argument variant scored 52.46%, leaving saved-register allocation at +0x04.		61.25%, 52.46%
+emi/world00/area030/04@0x801D95C4	Inline RGB expressions restore the 0x38 frame; register allocation	ers at +0x0C.	
+emi/world00/area030/04@0x801D95C4	nonmatching unmeasured: tried u16 prototype; corrected LINE_F3 stores; palette index math; ternary mode select. resume: prologue placement and register allocation; frame is 0x40 vs 0x38.		
+emi/world00/area030/04@0x801DA9DC	nonmatching 79.64%: writing the sub_index_03 clear and return at both call sites instead of jumping to one shared block removed one shared label (79.29 -> 79.64); the four arms' D_801E31F8 and g_ActorSlots[0].unk_14 tails still cross-jump, so the candidate is 64 bytes short. Remaining branch@+0xb4: the arm tails need to differ enough that GCC 2.7.2's jump2 cannot share them.		79.64%
+emi/world00/area030/04@0x801DC93C	nonmatching unmeasured: tried opcode@+0x0: entry pad/title selection block and the command-cycle switch do not reproduce the retail prologue and case layout; menu logic is in place. resume: rebuild the switch as the retail case 0/1/default order and re-check the pad mask split.		
+emi/world00/area030/04@0x801DE1C0	nonmatching unmeasured: tried the first draft (54.01%); volatile kind tables (48.66%); fresh-pointer table views (53.48%); non-const table view (57.22%); s32 row index (55.08%); s8 count (43.32%); the count table through a pointer local (53.48%) and the count table named by symbol (53.48%). residual is the register roles: retail homes the row index in s2 and the count in s3, the candidate homes them in s4 and s2, and retail materialises the count table base full (lui+addiu) before adding the index parts while the candidate folds the base into the displacement. resume: a source shape that materialises the count table base full and adds the row offset and the column separately, and that gives the row index the s2 home and the count the s3 home.		54.01%, 48.66%, 53.48%, 57.22%, 55.08%, 43.32%
+emi/world00/area030/04@0x801DE5EC	A volatile cue pointer	ers at +0x28 and produces a 0x208-byte body instead of 0x240.	
+emi/world00/area030/04@0x801DE5EC	nonmatching unmeasured: tried the bounce count in a local (68.75); the negated scale in a local (66.21); the unsigned facing comparison with a count local (74.31); the area-table entry taken as a pointer instead of a 0x24-byte rvalue (74.31, byte-identical, so the rvalue was never the frame's cause). The candidate's frame is 0x28 where the retail's is 0x18, and it keeps the table base in s0 where the retail rematerialises it per access (lhu %lo(g_FishingSpecies)($at) and lbu %lo(D_801E2AD2)($at) at 0x801DE61C and 0x801DE6B4). resume: a source shape that keeps the table base out of a callee-saved register and drops the frame to the retail's 0x18.		
+emi/world00/area030/04@0x801E03F8	nonmatching unmeasured: best 56.79%; row_delta and face_delta scored 47.53% (first mismatch +0x009C branch); next, preserve the retail row-pointer, 0x19FFFF, and cue-table load order.		56.79%, 47.53%
+emi/world00/area037/13@0x801F38DC	state switch like area169 func_801F390C (state = &g_SceneEventStep, flags at state + 0x63C); retail keeps &g_GameStateIndex in s1 for case 1 and shares one step store; my forms leave the frame 24 or the tail 0xC bytes long	+0x0	
+emi/world01/area040/13@0x801F3400	hint: control flow and the 4x4 palette-clear loop match; the cell coordinates (arg >> 16) are computed into a0/a1 after the func_801F369C call and copied to s0/s1, where every C form hoists them into s0/s1 first	sra a0,s2,0x10 at +0x80.	
+emi/world01/area041/13@0x801F3B48	needs: D_801F5678 table declaration.		
+emi/world01/area042/13@0x801F2C84	blocker: frame adjust placement	addiu sp,sp,-40 (retail) against lui v0,0x1f80 (candidate).	
+emi/world01/area042/13@0x801F2E78	needs: color table declaration.		
+emi/world01/area042/13@0x801F3280	needs: color table declaration.		
+emi/world01/area042/13@0x801F3D18	needs: D_801F5358 declaration.		
+emi/world01/area042/13@0x801F4B0C	blocker: stack frame	stack size 0x48 against 0x58.	
+emi/world01/area044/13@0x801F33A8	hint: same lookup as area118 func_801F502C; the heading address lui t0 comes after the u8 masks in retail and the shared void(void) prototype in overlays/area/area.h blocks the u8 signature.		
+emi/world01/area047/13@0x801F2D44	needs: func_801F330C return type.		
+emi/world01/area048/13@0x801F4AB4	blocker: branch layout	beq v1,v0,0x801F4AFC (retail) against 0x801F4B04 (candidate).	
+emi/world01/area049/13@0x801170D8	blocker: instruction scheduling	hoisted move for the zeroed channels before the tpage store.	
+emi/world01/area049/14@0x801F3194	hint: same lookup as area118 func_801F502C; retail hoists the heading byte address (lui a3) after the u8 masks of x and y, every pointer form hoists it first.		
+emi/world01/area052/13@0x801F3280	two-cell column loop (Area_StoreHeight, Area_GetCellCode, Area_SetCellCode(x, y, 0x11) per row); retail keeps x, y, y+1, (y+1)<<16 and two counters in s-regs (frame 56); my loop is frame 64, 4 bytes long	+0x0	
+emi/world01/area052/13@0x801F35A0	two-row copy loops of the cell column at x 0x11 (Area_StoreHeight, func_801A4BC0, Area_GetCellCode); retail keeps eleven loop invariants in s0-s8 (frame 56); my loops are frame 32, 4 bytes short at +0x0 addiu sp.		
+emi/world01/area052/13@0x801F4290	blocker: s16 return truncation	sll v0,16 / sra v0,8 at 0x801F42F8.	
+emi/world01/area052/13@0x801F431C	blocker: s16 return truncation	+0x70 sll v0,v0,0x10 pair against sll 0x8.	
+emi/world01/area056/13@0x801F3200	blocker: prologue and branch-slot scheduling	+0x00 li v0,0xffff against addiu sp.	
+emi/world01/area060/13@0x801F3288	blocker: cursor sum register	addu v0,a3,a0 (retail) against addu t0,a3,a0 (candidate).	
+emi/world01/area067/14@0x801F2E48	needs: Actor halfword members at +0x10 and +0x12	the sh zero stores.	
+emi/world01/area071/13@0x801F2C04	needs: byte tables D_80143FCD and D_80143FD3; the template fails on g_CurrentActor arithmetic.		
+emi/world02/area077/14@0x801F3CB8	blocker: retail loads the three D_ globals before the prologue (addiu sp)	addiu sp at 0x801F3CC8.	
+emi/world02/area077/14@0x801F41B4	tried: raw pointer loops over 0x800E4800/0x800E4830 with fixed strides; didn't match		
+emi/world02/area079/13@0x801F2CB4	blocker: jump table is in existing .data, not generated .rodata.		
+emi/world02/area082/13@0x801F3398	blocker: register allocation	lui 0x1f80 work register v0 (retail) against a0.	
+emi/world02/area082/13@0x801F4334	blocker: register allocation	+0xA0 lui v0 against v1.	
+emi/world02/area082/13@0x801F4C90	blocker: expression grouping	0x801F4CB0 mfhi a1 against a2.	
+emi/world02/area082/13@0x801F5388	blocker: channel order	andi v1,a0,0xFFFF (candidate) where retail multiplies the red channel first.	
+emi/world02/area091/13@0x801F3228	hint: palette clear loop base const lands in a2 (retail a3, task in a2); first run of stores matches via Actor task local; unk_0A=2 not timer		
+emi/world02/area092/13@0x801F304C	needs: actor table declaration.		
+emi/world02/area092/13@0x801F355C	needs: actor table declaration.		
+emi/world02/area098/13@0x801F3994	blocker: instruction scheduling	+0x4 lui v1 against a2.	
+emi/world02/area098/13@0x801F3F50	blocker: register rotation	0x801F3F78.	
+emi/world02/area098/13@0x801F46EC	blocker: register allocation	saved s1 stack slot.	
+emi/world02/area098/13@0x801F48E8	blocker: register allocation	saved s2/s0.	
+emi/world02/area098/13@0x801F4FEC	needs: union over Actor direction_08, unk_09, unk_0A and unk_0B.		
+emi/world02/area099/13@0x801F2FD4	blocker: instruction scheduling	0x801F2FE4.	
+emi/world02/area100/13@0x801F2D60	Matches as Area_DrawLightPillar's body with u8 camera[0x50] passed to Area_SetCameraMatrix (twin: area145/14 func_801F3980); a shared body needs a name of its own beside Area_DrawLightPillar in this image.		
+emi/world02/area103/13@0x801F3718	blocker: Actor gravity and active_flags widths	lw a1,0x34(v0) (retail) against lw a0 (candidate).	
+emi/world02/area103/13@0x801F482C	hint: retail keeps 0x170, 0x1A0, 0x270 and 0x120 in s-regs (frame 56, s0-s6); the plain draft uses frame 48 and fewer saves.		
+emi/world02/area104/14@0x801F4238	blocker: load and store order	lbu step against lui frame count.	
+emi/world02/area104/14@0x801F4608	needs: callee declarations and task members.		
+emi/world02/area104/14@0x801F4AE4	blocker: register allocation	0x801F4AE8.	
+emi/world02/area104/14@0x801F5BB0	blocker: stack frame	stack slot 0x5C against 0x60.	
+emi/world02/area104/14@0x801F66D0	blocker: code register tie	+0x1C andi v1 against a0.	
+emi/world02/area108/14@0x801F3588	hint: random SVECTOR rotated by RotMatrix then four RotTrans corners; draft m2c only, not tried		
+emi/world02/area108/14@0x801F4160	hint: POLY_FT4 quad through RotTransPers4 with scratchpad SVECTORs; not tried beyond the m2c draft		
+emi/world02/area108/14@0x801F4F60	hint: four-entry lookup on x, y and heading (the party-heading family) then spawns an actor; heading hoist blocker		
+emi/world02/area111/13@0x801F3790	blocker: exact division	srl v1,v1,3 (retail) against sra (candidate).	
+emi/world02/area111/13@0x801F4510	hint: column must live in a1 (srl) and row in a2 (sra copy) with the param left in a0; every local order swaps the two and moves the param to a1.		
+emi/world03/area114/13@0x801F2C68	blocker: GCC picks v0 for the constants	li v1,44 at 0x801F2C78.	
+emi/world03/area114/13@0x801F2CA8	blocker: v0 = 0 before the stores	+0x14 move v0,zero.	
+emi/world03/area117/13@0x801F30AC	blocker: delay slot fill	beqz delay slot at 0x801F30C4.	
+emi/world03/area117/13@0x801F41D8	needs: g_Game.flags and g_Game.walk_flags in place of the merged flags.		
+emi/world03/area117/13@0x801F4534	hint: takes (u8 x, u8 y) returns s32, loop of 1 entry over u8 table [4] (draft in scratch b26-area117-4534.c); blocked by shared void(void) prototype in overlays/area/area.h and game_00.h (needs: type)		
+emi/world03/area118/13@0x801F2C6C	hint: the packed clock word (low byte count, bits 8-14 frames, bit 15 phase) loads once and the phase shifts out before the move to a0; every C form copies the word first	srl a1,v0,0xf at +0x78.	
+emi/world03/area118/13@0x801F502C	hint: the u8 compares of x and y (andi) must come before the heading address lui a3 and after s0 = 0 in retail; every statement order puts them elsewhere.		
+emi/world03/area119/13@0x801F3170	blocker: delay slot fill	dx-abs bgez slot at 0x801F31A0.	
+emi/world03/area120/13@0x801F3DF0	blocker: scratch pointer register	lui a1 (retail) against lui v1 (candidate).	
+emi/world03/area128/13@0x801F3030	blocker: constant register	lui v0,0x4e.	
+emi/world03/area130/13@0x801F322C	blocker: candidate hoists header.mode++ before the vx/vy/screen_x stores	+0x24, size 0x58 against 0x54.	
+emi/world03/area131/13@0x801F2C40	blocker: delay slot fill	nop after the g_ScriptWorkRecord reload at 0x801F2CB4.	
+emi/world03/area132/13@0x801F3AEC	retail holds the constant 1 for flags, mode and link in v1 (li v1,1 before the x store)	0x801F3B34	
+emi/world03/area134/13@0x801F2C78	twin of its image sibling (same body, the g_Task / g_Game.current save-restore writes then a state switch); retail is 0x11C bytes, the switch form 0x10C	+0xC	
+emi/world03/area134/13@0x801F33C0	blocker: reload register	+0x2C lui v0 against v1.	
+emi/world03/area134/13@0x801F3440	blocker: body 0xA4 against retail 0x9C	compare constant register at +0x4.	
+emi/world03/area134/13@0x801F34DC	blocker: the draft swaps g_Task around its reads; retail reads D_801468BC before the first g_Task store	lui v0 at 0x801F34E8.	
+emi/world03/area134/13@0x801F35D4	twin of its image sibling (same body, the g_Task / g_Game.current save-restore writes then a state switch); retail is 0x11C bytes, the switch form 0x10C	+0xC	
+emi/world03/area134/13@0x801F3C98	blocker: set-block register rotation	0x801F3CFC.	
+emi/world03/area134/13@0x801F3D88	blocker: the draft swaps g_Task around its reads; retail reads D_801468BC before the first g_Task store	lui v0 at 0x801F34E8.	
+emi/world03/area134/13@0x801F48B0	blocker: register allocation	lui v0 (retail) against lui v1 (candidate) at the g_Actors[0].x load.	
+emi/world03/area135/14@0x801F32A0	blocker: depth register tie	+0x2C lui a2 against a1.	
+emi/world03/area135/14@0x801F34BC	blocker: argument cast order	sll a3,a3,1 (retail) against sll a0,a0,16 at 0x801F3534.	
+emi/world03/area135/14@0x801F41C8	blocker: register permutation	addiu a1,v0,-6 (retail) against a0 (candidate) at 0x801F41E4.	
+emi/world03/area135/14@0x801F4464	blocker: branch load sharing	lui v1,SP (retail) against lui a1,SP (candidate).	
+emi/world03/area135/14@0x801F49EC	blocker: constant materialization order	addu v1,v0,zero in the bgez delay slot at 0x801F4A58.	
+emi/world03/area135/14@0x801F5208	blocker: mode register	lui a0 (retail) against lui v1 (candidate).	
+emi/world03/area135/14@0x801F5BCC	blocker: scratch pointer register	lui v1 (retail) against lui a1 (candidate).	
+emi/world03/area135/14@0x801F603C	blocker: register allocation	first global address in a2 against v1 at 0x801F603C.	
+emi/world03/area139/13@0x801F2CE0	blocker: loop-body scheduling	unk_1C store at 0x801F2D78.	
+emi/world03/area139/13@0x801F2E68	blocker: constant materialization order	0x801F2E70.	
+emi/world03/area139/13@0x801F3F84	func_801F3F84		
+emi/world03/area140/13@0x801F2D80	blocker: delay slot fill	bgez slot nop at 0x801F2DB0.	
+emi/world03/area140/13@0x801F3DAC	blocker: actor row pointer register	+0x0 lui v0 against v1.	
+emi/world03/area141/13@0x801F35E4	blocker: register swap at the x.fixed load	v0 against v1.	
+emi/world03/area143/13@0x801F2EF0	hint: the 0x18-row walk keeps row and row + 1 in s1/s0; every pointer form adds a third base register (s3) and shifts the frame.		
+emi/world03/area143/13@0x801F3278	blocker: copy folds to a constant	+0x44 move a1,s0 (retail) against move a1,zero (candidate).	
+emi/world03/area143/13@0x801F3AF4	blocker: lhu 0x7E scheduled early	lui v1,%hi(g_ScriptWorkRecord) at +0x28.	
+emi/world03/area143/13@0x801F3E60	blocker: entry and temp register permutation	lhu v1,0(a2) against lhu a1 at 0x801F3E84.	
+emi/world03/area144/13@0x801F30CC	blocker: unexplained 0x10-byte frame	addiu sp,sp,-16.	
+emi/world03/area144/13@0x801F3C78	tried: copy g_Task pos to globals, read g_ScriptState+4, call func_801C5DFC; register allocation differs		
+emi/world03/area145/14@0x801F3980	Matches as Area_DrawLightPillar's body with u8 camera[0x50] passed to Area_SetCameraMatrix (twin: area100/13 func_801F2D60); a shared body needs a name of its own.		
+emi/world03/area147/13@0x801F313C	func_801F313C		
+emi/world03/area148/13@0x801F31AC	func_801F31AC		
+emi/world03/area149/13@0x801F3140	hint: two-slot spawn loop; the 0x194 draft with ActorSlot unk_2C is 12 bytes over, retail copies the raw slot into a1 where ours masks (	+0x48)	
+emi/world03/area149/13@0x801F32D4	hint: shifts the scroll, party and focus x by -0x14 cells at camera x 0x63FF and every type-0x37 actor; not tried beyond the m2c draft		
+emi/world03/area149/13@0x801F36CC	hint: adds 0x16 to the high half of the s32 focus x word (D_80147A8C, lhu at +2); a second view symbol of that address needs its own symbols row, left unmatched		
+emi/world04/area157/13@0x801F3108	func_801F3108		
+emi/world04/area158/13@0x801F2C48	needs: coordinate table declaration.		
+emi/world04/area160/13@0x801F2C48	needs: coordinate table declaration.		
+emi/world04/area161/13@0x801F2C48	hint: 8-image twin group (area158,160-166; table address differs per image, D_801F3438 in 161). Draft in scratch b26-area161-2C48.c: prologue/stores match via Actor task after the facing store; tail (|party-cell<<16| <= 0x10000, retail hoists li a2,0x10000 and keeps cell s16 in v1, party in a0) differs from the two-arm gap form		
+emi/world04/area162/13@0x801F2C48	hint: 8-image twin group (area158,160-166; table address differs per image, D_801F3438 in 161). Draft in scratch b26-area161-2C48.c: prologue/stores match via Actor task after the facing store; tail (|party-cell<<16| <= 0x10000, retail hoists li a2,0x10000 and keeps cell s16 in v1, party in a0) differs from the two-arm gap form		
+emi/world04/area163/13@0x801F2C48	hint: 8-image twin group (area158,160-166; table address differs per image, D_801F3438 in 161). Draft in scratch b26-area161-2C48.c: prologue/stores match via Actor task after the facing store; tail (|party-cell<<16| <= 0x10000, retail hoists li a2,0x10000 and keeps cell s16 in v1, party in a0) differs from the two-arm gap form		
+emi/world04/area164/13@0x801F2C48	hint: 8-image twin group (area158,160-166; table address differs per image, D_801F3438 in 161). Draft in scratch b26-area161-2C48.c: prologue/stores match via Actor task after the facing store; tail (|party-cell<<16| <= 0x10000, retail hoists li a2,0x10000 and keeps cell s16 in v1, party in a0) differs from the two-arm gap form		
+emi/world04/area165/13@0x801F2C48	hint: 8-image twin group (area158,160-166; table address differs per image, D_801F3438 in 161). Draft in scratch b26-area161-2C48.c: prologue/stores match via Actor task after the facing store; tail (|party-cell<<16| <= 0x10000, retail hoists li a2,0x10000 and keeps cell s16 in v1, party in a0) differs from the two-arm gap form		
+emi/world04/area166/13@0x801F2C48	hint: 8-image twin group (area158,160-166; table address differs per image, D_801F3438 in 161). Draft in scratch b26-area161-2C48.c: prologue/stores match via Actor task after the facing store; tail (|party-cell<<16| <= 0x10000, retail hoists li a2,0x10000 and keeps cell s16 in v1, party in a0) differs from the two-arm gap form		
+emi/world04/area167/13@0x801F31BC	func_801F31BC		
+emi/world04/area168/13@0x801F2DB4	needs: D_801F4B30 table declaration.		
+emi/world04/area168/13@0x801F3914	func_801F3914		
+emi/world04/area168/13@0x801F4158	blocker: code save-move placement	0x801F419C move s3,a1.	
+emi/world04/area168/13@0x801F49D4	blocker: compare constant register	li v0,1 against li a0,1 at 0x801F49E4.	
+emi/world04/area169/13@0x801F30E8	func_801F30E8		
+emi/world04/area169/13@0x801F3628	needs: g_Game.flags and g_Game.walk_flags in place of the merged flags.		
+emi/world04/area170/13@0x801F2D3C	needs: pointer assignment to unk_4C does not compile.		
+emi/world04/area170/13@0x801F40F0	func_801F40F0		
+emi/world04/area173/14@0x801F45E0	func_801F45E0		
+emi/world04/area173/14@0x801F4A4C	blocker: x value materialization split around the loads	+0x4 ori v0 against lui a0.	
+emi/world04/area174/13@0x801F3320	needs: type for the projected point locals.		
+emi/world04/area174/13@0x801F3958	func_801F3958		
+emi/world04/area174/13@0x801F4A5C	needs: shared type for the two-byte direction table.		
+emi/world04/area175/13@0x801F2CD8	hint: m2c produced no draft; read from the asm, not tried		
+emi/world04/area175/13@0x801F36DC	hint: GFX_DrawShadedDisc shape with centre shade 0x80 and rim shade 0 inlined, s32 params; retail frame is 64 (s0-s4 plus two product temps), the shared-body form links 56	+0x0	
+emi/world04/area189/13@0x801F497C	blocker: cursor sum register	addu v0,a3,a0 (retail) against addu t0,a3,a0 (candidate).	
+emi/world04/area189/13@0x801F559C	blocker: axis sum register	0x801F55A8 lw v1,52(a0) against lw v0,52(a0).	
+emi/world04/area189/13@0x801F6088	blocker: pointer-bounded loop leaves an extra counter	retail opens with addiu sp,-8.	
+emi/world04/area191/13@0x801F3014	blocker: choice-to-step body is right, registers differ: choice loads into v1 and step into v0	lui v1 against a0 at 0x801F3014.	
+emi/world04/area191/13@0x801F3658	four-cell 0xA6 count (x/y fraction tests); retail frame is 48 with s0-s5 live (found copied to count), every inline form leaves it 40	+0x0, twin area191/area192 differ in the event mode only	
+emi/world04/area191/13@0x801F37AC	hint: table lookup over D_801F4248 (5 entries) then scene-flag indexed tables; not tried beyond the m2c draft		
+emi/world04/area191/13@0x801F39AC	hint: spawns six actors from a table chosen by flags and D_80144F56; not tried		
+emi/world04/area191/13@0x801F3AB0	hint: restores flagged characters (status 0, hp/ap = max) then copies g_Characters rows into g_Game.members[].chr; retail copies each record with a 0x10-stride loop (0x130 bytes), the struct assignment compiles to 0x104		
+emi/world04/area192/13@0x801F2D7C	blocker: constant pseudo register	0x801F2D7C state load against the 0xFFFF materialization.	
+emi/world04/area192/13@0x801F3118	four-cell 0xA6 count (x/y fraction tests); retail frame is 48 with s0-s5 live (found copied to count), every inline form leaves it 40	+0x0, twin area191/area192 differ in the event mode only	
+emi/world04/area198/13@0x801F3600	blocker: load register tie	+0x44 lbu v1 against v0.	
+exe/slus_004_22@0x8014BC70	nonmatching 46.80%: restated from the first draft with object macros and the original goto structure. resume: first mismatch of the sort prologue and the merge loop registers.		46.80%
+exe/slus_004_22@0x8014D290	nonmatching 68.24%: first mismatch +0x0020; assigning work after the early return gives retail's single load and copy, but the copy lands in a2 (retail a3) and the col/row loads are emitted in the other order; swapping the two statements is flat. resume: a shape that gives the work copy a3.		68.24%
+exe/slus_004_22@0x8014DE78	An s32 index and pinned range or distance change register allocation; none restores the	at +0x24.	
+exe/slus_004_22@0x8014DE78	nonmatching 22 differing rows: retail subtracts self - actor (set); the rest is register assignment. Tried split dist locals; range reuse; ternary abs; row pointer. resume: a form that writes each distance into the self-field register.		
+exe/slus_004_22@0x8015083C	nonmatching 24.33%: restated from the first draft with byte-offset field access and the dense switch. resume: register assignment of the base pointers and the case order.		24.33%
+exe/slus_004_22@0x80151C00	nonmatching 48.78%: branch@+0x0030; the retail merges both direction arms into one pos store through v0 and keeps D_801490BA and D_801490BB as lui/at accesses, while this source pointerizes them. resume: a source shape that keeps the symbols unpointerized.		48.78%
+exe/slus_004_22@0x801530D0	blocker: stack frame	+0x0 addiu sp,sp,-0x78 (retail) against -0x70 (candidate).	
+exe/slus_004_22@0x80153DE8	nonmatching 70.04%: opcode@+0x004c; the byte-offset reset loop reaches it, but retail keeps the row and prim counters in different saved registers. Pinning them (work/.../best.c, 75.61%) still leaves the +0x00e4 vector destination in a2 instead of a3. resume: a source shape that changes the vector/state copy lifetimes.		70.04%, 75.61%
+exe/slus_004_22@0x80154438	Entry/payload pins separately or together change the prologue; a separate initial flag and a 5,000-iteration permuter leave +0x74 as the best	.	
+exe/slus_004_22@0x80154438	nonmatching: 6 rows differ, registers only. The entry cursor is t1 in retail and a3 here (0x801544AC), and the payload word takes a3 where ours takes t1. `payload = record != 0` before the list loop took it from 14 rows to 6; two FAKE_REG attempts and a 7 min permuter run did not close it; declaration order, the payload load position and index, address and stepped-pointer entry forms leave the same 6 rows.		
+exe/slus_004_22@0x8015477C	nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best score 82.69%. resume: a lever or header fix that closes the first mismatch.		82.69%
+exe/slus_004_22@0x80154ABC	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 46.74%. resume: a lever or header fix that closes the first mismatch.		46.74%
+exe/slus_004_22@0x80155560	nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best score 23.25%. resume: a lever or header fix that closes the first mismatch.		23.25%
+exe/slus_004_22@0x8015642C	nonmatching 64.16%: restated from the first draft with table indexing and a two-prim loop. resume: register order of the object pointer and the order temp, then the prim write order.		64.16%
+exe/slus_004_22@0x8015684C	Retail loads the cell halfword at +2; pinned cell coordinates	er in scheduling at +0x44.	
+exe/slus_004_22@0x8015684C	nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best score 77.33%. resume: a lever or header fix that closes the first mismatch.		77.33%
+exe/slus_004_22@0x801569B8	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 63.72%. resume: a lever or header fix that closes the first mismatch.		63.72%
+exe/slus_004_22@0x801576FC	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 48.52%. resume: a lever or header fix that closes the first mismatch.		48.52%
+exe/slus_004_22@0x80157CE4	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 45.34%. resume: a lever or header fix that closes the first mismatch.		45.34%
+exe/slus_004_22@0x80158940		the bias load is scheduled early.	
+exe/slus_004_22@0x80158940	nonmatching 90.85%: tried the first draft cleaned to compiling C; best score 90.85%. resume: a lever or header fix that closes the first mismatch.		90.85%
+exe/slus_004_22@0x80159B9C	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header fix that closes the first mismatch.		69.08%
+exe/slus_004_22@0x8015A344	nonmatching 59.09%: opcode@+0x000c; lifted draft from the first draft, compiling C only (its jump table rodata is not yet placed). resume: a lever or header fix that closes the first mismatch.		59.09%
+exe/slus_004_22@0x8015A9A4	nonmatching 51.63%: lifted from the first draft with gte_ macros; branch order of the first loads differs. resume: load order of g_AreaTileOriginX/g_AreaTileOriginY and the 0x38 reload.		51.63%
+exe/slus_004_22@0x8015BEA0	nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best score 53.64%. resume: a lever or header fix that closes the first mismatch.		53.64%
+exe/slus_004_22@0x80161454	nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best score 48.50%. resume: a lever or header fix that closes the first mismatch.		48.50%
+exe/slus_004_22@0x80166FF8	A barrier after the party bytes moves the	to +0x18; indexed and pinned loops also differ.	
+exe/slus_004_22@0x80167428	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 39.27%. resume: a lever or header fix that closes the first mismatch.		39.27%
+exe/slus_004_22@0x80167E00	nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 72.50%. resume: a lever or header fix that closes the first mismatch.		72.50%
+exe/slus_004_22@0x80178764	blocker: this compiler folds constant returns to `move v0,zero`; retail loads the immediate	li v0,0 at 0x80178768.	

@@ -7,7 +7,6 @@ typedef struct BattleRecordHead {
 
 extern u8 D_80145F20[];
 
-/* NON_MATCHING: reloaded context, volatile context and typed saved pointer tried; first diff 0x800AED60, base load. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_800AED5C(s32 arg0, u32 battler_index) {
     BattleSelectionContext* ctx;

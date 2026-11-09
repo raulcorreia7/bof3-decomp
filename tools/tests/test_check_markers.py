@@ -118,3 +118,13 @@ def test_every_hand_file_needs_hand_asm_and_nothing_else_may_have_it() -> None:
     assert [v.problem for v in check_hand_units(hand, {"a.c": DRAFT + other})] == [
         "HAND_ASM on a function with no asm/*/hand/ file"
     ]
+
+
+def test_attempt_notes_are_rejected() -> None:
+    assert problems("/* blocker */\nINCLUDE_ASM(f);\n") == [
+        "comment above INCLUDE_ASM; record attempts in config/attempts.tsv"
+    ]
+    assert problems("/* First difference: register. */\nMATCH void f(void) {}\n") == [
+        "attempt note belongs in config/attempts.tsv"
+    ]
+    assert problems('MATCH void f(void) { char *s = "First difference:"; }\n') == []

@@ -45,7 +45,6 @@ MATCH void func_801EF3A4(void) {
 
 INCLUDE_ASM(func_801EF42C);
 
-/* blocker: candidate loads g_Task into v1 where retail uses v0, and the body is 8 bytes shorter; first diff: lui v1 against v0 at 0x801EF55C. */
 INCLUDE_ASM(func_801EF55C);
 
 MATCH void func_801EF5E0(void) {

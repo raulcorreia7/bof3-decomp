@@ -40,7 +40,6 @@ MATCH void func_801EF314(void) {
     }
 }
 
-/* Blocker: retail computes pos.x and stores it before loading the y terms (g_AreaScrollTargetY and unk_10); the candidate hoists all four loads above the first store. Scheduling, not a value difference. */
 INCLUDE_ASM(func_801EF38C);
 
 MATCH void func_801EF44C(void) {

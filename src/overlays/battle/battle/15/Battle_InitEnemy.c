@@ -5,14 +5,6 @@
 
 /* Arms one enemy battler slot: installs the work pointer in the scratchpad, resets the slot record, copies
  * the unit id, then queues the unit's script and bit flag. */
-/* nonmatching 61.0%: tried the first draft (59.75%); u16 unit parameter (61.01%); u8/u16/s32/u32 parameter-type sweep
- * (best 61.01%); caching the unit offset in a local (56.10%); moving the y store after the call (58.39%); a register
- * pin on slot and unit (61.01%, no change: gcc 2.7.2 ignores the constraint). the work record's byte cells are read
- * through the shared record's members now; the word cells at +0x0C..+0x20 and the halfwords at +0x2E..+0x32 keep the
- * byte-pointer form, because the member form lets gcc 2.7.2 fold the zero stores and drops an instruction (60.38
- * percent, 628 bytes against the retail's 636). residual is the callee-saved set: retail saves s2,s0,ra,s3,s1 with
- * slot in s2 and unit in s0; the candidate saves s1,s0,s3,ra,s2. resume: a source shape that homes slot in s2 and unit
- * in s0, or a register pin that this compiler honours on a parameter. */
 /* func_800ABCE0 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_InitEnemy(s32 slot, u16 unit, s32 x, s32 y) {

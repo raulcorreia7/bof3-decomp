@@ -179,10 +179,8 @@ MATCH void func_801D16DC(void) {
 
 INCLUDE_ASM(func_801D1758);
 
-/* blocker: 0x20000 hoisted into s4; first diff: +0x10 sw ra,64(sp) against 68. */
 INCLUDE_ASM(func_801D18CC);
 
-/* blocker: retail reserves 16 bytes of locals; first diff: +0x0 addiu sp,sp,-48. */
 INCLUDE_ASM(func_801D19A0);
 
 INCLUDE_ASM(func_801D1A60);
@@ -203,5 +201,4 @@ INCLUDE_ASM(Scene_DrawScanBar);
 
 #include "overlays/scenario/Scene_ClaimScanBar.h"
 
-/* blocker: case constant 1 kept in v0; first diff: +0x8C. */
 INCLUDE_ASM(Scene_UpdateScanBars);

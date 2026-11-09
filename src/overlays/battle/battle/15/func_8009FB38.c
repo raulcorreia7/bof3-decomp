@@ -1,6 +1,5 @@
 #include "battle_15.h"
 
-/* nonmatching 86.89%: branch@+0x0000; the second refresh loop still schedules differently. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009FB38(void) {
     Character* stat_base;

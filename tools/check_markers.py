@@ -118,7 +118,31 @@ def check_text(text: str, path: str = "<text>") -> list[Violation]:
         kind, tok = m.lastgroup, m.group()
         tok_line = line
         line += tok.count("\n")
-        if kind in ("comment", "string", "char", "number", "space"):
+        if kind == "comment":
+            if re.match(r"[ \t]*\n[ \t]*INCLUDE_ASM\s*\(", text[m.end() :]):
+                found.append(
+                    Violation(
+                        path,
+                        tok_line,
+                        "comment",
+                        "comment above INCLUDE_ASM; record attempts in config/attempts.tsv",
+                    )
+                )
+            elif re.search(
+                r"\b(?:NON_MATCHING(?:\s|:)|first diff(?:erence|ering)?|\btried\b)",
+                tok,
+                re.I,
+            ):
+                found.append(
+                    Violation(
+                        path,
+                        tok_line,
+                        "comment",
+                        "attempt note belongs in config/attempts.tsv",
+                    )
+                )
+            continue
+        if kind in ("string", "char", "number", "space"):
             continue
         if kind == "directive":
             parsed = re.match(

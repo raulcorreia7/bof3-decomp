@@ -54,7 +54,6 @@ INCLUDE_ASM(func_801F7268);
 
 INCLUDE_ASM(func_801F7320);
 
-/* Hint: reads screen_x and screen_y as signed halves (lh); the Actor members are u16, so the draft loads lhu. */
 INCLUDE_ASM(func_801F73D4);
 
 INCLUDE_ASM(func_801F743C);
@@ -74,7 +73,6 @@ INCLUDE_ASM(func_801F75E4);
 
 INCLUDE_ASM(func_801F7688);
 
-/* Hint: same shape as func_801F73D4 (lh of screen_x and screen_y, u16 members); here the 0x32 update is -0x10. */
 INCLUDE_ASM(func_801F774C);
 
 INCLUDE_ASM(func_801F77B4);
@@ -277,8 +275,6 @@ MATCH void func_801F8CDC(Actor* actor) {
 
 #include "overlays/scenario/Actor_Wait.h"
 
-/* blocker: row load order; first diff: +0x10 lw v1,20(a2) (candidate) against lbu v1,3(a2) (retail). */
-/* Hint: steps a 3-byte-header record: byte 0x02 counts down, 0x03 adds 6, word 0x08 adds 0x40000, word 0x14 accumulates 0x08; the record type with word 0x08 and 0x14 is not named yet. */
 INCLUDE_ASM(func_801F8D4C);
 
 INCLUDE_ASM(func_801F8D98);
@@ -385,7 +381,6 @@ MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_Task);
 }
 
-/* blocker: ori in the work load delay slot; first diff: +4 ori v1,v1,0x8000 against lui v0,0x1f80. */
 INCLUDE_ASM(func_801F9E00);
 
 INCLUDE_ASM(func_801F9E50);
@@ -418,7 +413,6 @@ MATCH void func_801FA294(void) {
     SYS_DISPATCH_BYTE(D_801FE964, D_80146872);
 }
 
-/* blocker: retail stores a word zero to g_ScriptVars (sw), the u8[4] declaration gives sb; first diff: sb at 0x801FA2F0. */
 INCLUDE_ASM(func_801FA2D0);
 
 INCLUDE_ASM(func_801FA32C);

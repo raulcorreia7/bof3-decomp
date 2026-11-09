@@ -52,7 +52,6 @@ INCLUDE_ASM(func_801EF0A4);
 
 INCLUDE_ASM(func_801EF1F0);
 
-/* hint: the step-limit select (0xC when the timer is 1, else 0x10) and the position adds leave the body 12 bytes over (0x124 against 0x118); first differing instruction: lw v0,56(a2) at +0x10 where retail holds y in another register. */
 INCLUDE_ASM(func_801EF36C);
 
 MATCH void func_801EF484(void) {
@@ -93,7 +92,6 @@ MATCH void func_801EFDF8(void) {
 
 INCLUDE_ASM(func_801EFE80);
 
-/* hint: the sin/cos position offsets with the angle held in the scratchpad cell leave the body 4 bytes over (0x124 against 0x120); first differing instruction: sw ra,16(sp) at +0xC (retail saves a callee register first). */
 INCLUDE_ASM(func_801EFF88);
 
 MATCH void func_801F00A8(void) {

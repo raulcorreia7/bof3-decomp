@@ -93,11 +93,8 @@ MATCH void func_801F04D4(void) {
     }
 }
 
-/* blocker: candidate is 4 bytes short (0xBC against 0xC0); retail reloads g_Task before the timer and step stores; first diff: the bnez target at 0x801F057C. */
 INCLUDE_ASM(func_801F055C);
 
-/* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
-/* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
 INCLUDE_ASM(func_801F061C);
 
 MATCH void func_801F068C(void) {

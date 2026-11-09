@@ -1,7 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried opcode/prologue at +0x0000; cursor address not live across input branches; D_801483CB
- * width; candidate 58.33%. resume: cursor address kept live to final compare as retail s0. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E0BAC(void) {
     s32 pad;

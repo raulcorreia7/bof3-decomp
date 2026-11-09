@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried 63.54%: stride-1 spad, loaded counts; retail keeps count in a0 across loop and spad
- * base in a3 (pointer local), first-loop count copy move a1,v0. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801BFB34(void) {
     s32* val0;

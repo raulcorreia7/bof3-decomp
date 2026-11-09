@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: s1-held D_1F800008 pointer folds to absolute. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801B0E44(void) {
     u8   saved_dir;

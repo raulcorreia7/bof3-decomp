@@ -4,9 +4,6 @@
  * cell under the buffer limit repeatedly picks and clears an entry of values[] and links the packet word to base +
  * entry * size.
  */
-/* nonmatching unmeasured: tried lift order tile_x-first; s32 pos_y; an 8-byte stack pad for retail's 0x10 frame; FIELD
- * for the byte-strided row halfword; do-while outer, for inner. resume: prologue store order (v0 first) and the
- * second-loop hoisted 0xFF00/0xFFFF constants. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, s32 base, u8 count, u8 size, u8 seed) {
     u8*  packet;

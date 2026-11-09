@@ -8,7 +8,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-/* blocker: four byte stores to the offset of g_PaletteFades at a stride of 12 indexed by byte 0x0A. */
 INCLUDE_ASM(func_801EEDE0);
 
 INCLUDE_ASM(func_801EEEB0);

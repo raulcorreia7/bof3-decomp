@@ -2,8 +2,6 @@
 
 /* lifted draft, best score 53.64%; semantics unverified
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
- * draft; best score 53.64%. resume: a lever or header fix that closes the first mismatch. */
 /* Byte-sized scale locals leave the first register difference at +0x04; a remaining-time pointer changes the prologue. */
 #ifdef NON_MATCHING
 NON_MATCHING bool Area_StepCameraAngle(s32 degrees, s8 duration) {
