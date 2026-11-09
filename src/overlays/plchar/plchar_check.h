@@ -1,7 +1,7 @@
-#ifndef PLCHAR_CHECK_H
-#define PLCHAR_CHECK_H
+#ifndef PLCHAR_CHECK_SHARED_H
+#define PLCHAR_CHECK_SHARED_H
 
-#define FUNC_801CEA10_IMPL(arg0)                                              \
+#define PLCHAR_CHECK_PARTY_BODY(arg0)                                         \
     {                                                                         \
         register s32 s0 asm("$16") = 1;                                       \
         register s32 s2 asm("$18");                                           \
