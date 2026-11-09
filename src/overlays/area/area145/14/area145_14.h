@@ -29,4 +29,16 @@ void func_801F332C(u8* first, u8* second);
 /* The draw step that reads the three-word work position. */
 void func_801F3980(u32* pos);
 
+/* The two corner cells of each of the four areas the step covers. */
+typedef struct CellBox {
+    u8 x1;
+    u8 y1;
+    u8 x2;
+    u8 y2;
+} CellBox;
+
+extern CellBox  D_801F543C[4];
+extern Callback D_801F544C[];
+void            func_801F2F30(s32* first, s32* second);
+
 #endif
