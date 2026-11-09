@@ -7,16 +7,16 @@ MATCH void func_800C1B14(void) {
     u8           kind;
 
     g_Task->header.mode += 1;
-    kind = g_BattleEnemyBattlers[0].kind;
+    kind           = g_BattleEnemyBattlers[0].kind;
     g_Task->unk_09 = ENCOUNTER_ENEMIES[kind].unk_84[2];
-    g_Task->timer = 0x2D;
+    g_Task->timer  = 0x2D;
 
     battler = g_BattleEffectBattler;
     saved   = g_Task;
     TASK_SET(battler);
     battler->unk_24 |= 0x80;
 
-    work = g_Task;
+    work         = g_Task;
     work->unk_29 = 2;
     work->unk_2E.half += 0x30;
     work->unk_30.half -= 0x10;

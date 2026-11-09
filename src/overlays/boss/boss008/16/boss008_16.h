@@ -51,6 +51,6 @@ extern EnemyBattler g_BattleEnemyBattlers[];
 extern u8 D_800C2640[];
 extern u8 D_800C2641[];
 extern u8 D_800C2642[];
-void func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
+void      func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
 
 #endif
