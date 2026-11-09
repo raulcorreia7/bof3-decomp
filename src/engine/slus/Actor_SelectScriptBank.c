@@ -1,8 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* selects the 3-byte record `record_index & 0xFF` from the work-area resource header; unless work flag bit 1 is set
- * it queues the palette pair and tile pointer in the next slot, then stores the record's draw offset and sub-table
- * pointer.
+/* Selects the sprite bank record `record_index & 0xFF`: a 3-byte (sheet, animation, mirror) triple after header[3]
+ * (a bank holds no record count; zero padding ends the list). Unless work flag bit 1 is set it queues the upload
+ * of the record's sheet to texture page +0x25 and row +0x26, then stores the mirror byte (+0x2A) and the animation
+ * step list (+0x50).
  */
 MATCH void Actor_SelectScriptBank(u32 record_index) {
     /* FAKE: retail reserves 16 bytes of frame that no statement uses. */

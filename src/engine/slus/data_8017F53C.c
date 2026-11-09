@@ -6,6 +6,7 @@
  * func_801523D0..Message_SetAnswerMessage15).
  */
 
+/* Sprite cell sizes (width, height) in pixels: width 8 * ((i & 3) + 1), height 8 * ((i >> 2) + 1). */
 const u8 g_SpriteSizes[16][2] = {
     {8, 8}, {16, 8}, {24, 8}, {32, 8},
     {8, 16}, {16, 16}, {24, 16}, {32, 16},

@@ -198,12 +198,13 @@ typedef struct Actor {
     s32            unk_1C;            /* 0x1C - commu00 calls it variant_arg_1 */
     s32            gravity;           /* 0x20 added to vz each step */
     u8             active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks the record active */
-    u8             unk_25;            /* 0x25 */
-    u8             unk_26;            /* 0x26 */
-    u8             unk_27;            /* 0x27 */
-    u8             unk_28;            /* 0x28 */
+    u8             unk_25;            /* 0x25 - sprite: texture page of the sheet (Party_LoadMemberSprite) */
+    u8             unk_26;            /* 0x26 - sprite: sheet row in the page; Party_RemoveMember stores other values */
+    u8             unk_27;            /* 0x27 - sprite: CLUT selector (Area_BuildClut); battle number actors keep the
+                                *        value they draw here */
+    u8             unk_28;            /* 0x28 - sprite: palette kind, nonzero draws 8-bit (Area_BuildClut) */
     u8             draw_layer;        /* 0x29 - the ordering-table layer GFX_AddPrim files its primitives in */
-    u8             unk_2A;            /* 0x2A */
+    u8             unk_2A;            /* 0x2A - sprite: mirror flag, 0 or 1 (Area_DrawObjectSprite) */
     u8             unk_2B;            /* 0x2B */
     u16            unk_2C;            /* 0x2C */
     u16            screen_x;          /* 0x2E - HUD banner and marker screen x */
@@ -213,14 +214,17 @@ typedef struct Actor {
     SpriteScale    scale;             /* 0x40 16.16; 0x10000 is full size */
     u8             unk_48;            /* 0x48 - commu00 calls it the reset flag */
     u8             unk_49;            /* 0x49 */
-    u8             unk_4A;            /* 0x4A - the world slot mode seed */
+    u8             unk_4A;            /* 0x4A - sprite animation: ticks left in the step; fishing prompt rows hold
+                                *        the prompt column here */
     u8             unk_4B;            /* 0x4B - the script-bank record index */
     s32            unk_4C;            /* 0x4C */
-    u8*            script;            /* 0x50 - cursor into the area script stream (Actor_CopyScriptEntry,
-                                *        Actor_SeekScript) */
+    u8*            script;            /* 0x50 - sprite animation: the step list, (delay, frame) byte pairs
+                                *        (Actor_SeekScript, Actor_StageAnimStep); the fishing record keeps its item
+                                *        pointer here */
     ActorRange     range_54;          /* 0x54 - range record; +2 range, +3 bit 0x10 */
-    u16            script_pc;         /* 0x58 - byte position in the script stream at script */
-    u16            unk_5A;            /* 0x5A */
+    u16            script_pc;         /* 0x58 - sprite animation: byte position in the step list at script */
+    u16            unk_5A;            /* 0x5A - sprite animation: offset of the current frame's cells in the table at
+                                *        range_54 (Area_DrawObjectSprite) */
     ActorTint      tint;              /* 0x5C */
     s32            unk_60;            /* 0x60 */
     s32            unk_64;            /* 0x64 */
