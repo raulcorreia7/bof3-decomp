@@ -18,7 +18,15 @@ MATCH void Effect_NextStep(void) {
     BMagic_AdvanceEffectStep(1);
 }
 
-INCLUDE_ASM(func_801EF160);
+MATCH void Effect_DarkenPalette(void) {
+    g_PaletteFades[g_Task->timer].offset.red--;
+    g_PaletteFades[g_Task->timer].offset.green--;
+    g_PaletteFades[g_Task->timer].offset.blue--;
+    if (--g_Task->unk_09 == 0) {
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        g_Task->header.mode++;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 

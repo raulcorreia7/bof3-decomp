@@ -81,7 +81,7 @@
 
 /* A local holds a constant so the loop pass hoists it in retail order. A
  * declaration, the same in every mode: `s32 FAKE_HOLD(x, 4);`. Needs an
- * adjacent FAKE: note with the evidence (best pure-C match %, the rewrites tried). */
+ * adjacent FAKE: note with the best pure-C match % and the rewrites tried. */
 #define FAKE_HOLD(name, value)   name = (value)
 
 /* Volatile access to an existing object. */

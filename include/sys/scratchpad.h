@@ -114,7 +114,7 @@ ASSERT_OFFSET(ScratchPad, view, 0x000);
 
 /* The scratchpad as a typed object at a byte offset: SPAD(0u)->view.battle.state_00. The existing
  * SCRATCH_PAD/SP/SP_PTR/SP_REF helpers in psx/mem.h keep working; prefer a view member once the mode
- * and offset are both proven. */
+ * and offset are both known. */
 #define SPAD(byte_offset) SP_PTR(ScratchPad, byte_offset)
 
 /* Scratchpad base + 1; battle/battle/03 and etc/game/00 write it directly. */
