@@ -4,9 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-extern s16 D_801D1940;
-extern u8 D_801D1918[];
-
 /* The commu03 overlay entry: the shared commu step byte selects the handler. */
 MATCH void func_801D0C44(void) {
     SYS_DISPATCH_BYTE(g_Commu03States, D_801F294C);
@@ -39,7 +36,7 @@ INCLUDE_ASM(func_801D0E28);
 MATCH void func_801D1000(void) {
     if (EMI_IsReady()) {
         s16 idx = D_801D1940;
-        u8 cue = D_801D1918[idx];
+        u8  cue = D_801D1918[idx];
         SND_PlayBGM(cue, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         D_801F294D = 0;
     }

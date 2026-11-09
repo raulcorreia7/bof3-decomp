@@ -4,8 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-extern u8 D_801D86F8[];
-
 /* The bate overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D9C(void) {
     SYS_DISPATCH_BYTE(g_MenuBateStates, g_MenuStep.step);
@@ -44,7 +42,7 @@ MATCH void Menu_StartFadeIn(void) {
 }
 
 MATCH void func_801D0EE4(void) {
-    u8 *base = &D_80144953;
+    u8* base = &D_80144953;
     Menu_DrawClutStrip(*base);
     if (g_UiWindowEffectBusy != 0) {
         return;
@@ -53,7 +51,7 @@ MATCH void func_801D0EE4(void) {
     func_801D1C90();
     D_80148654 = 4;
     D_80148652++;
-    strncpy((char *)(base + 0x491), (char *)D_801D86F8, 5);
+    strncpy((char*)(base + 0x491), (char*)D_801D86F8, 5);
 }
 
 MATCH void func_801D0F70(void) {
