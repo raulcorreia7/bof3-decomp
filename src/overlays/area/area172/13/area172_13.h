@@ -18,6 +18,7 @@
 
 /* The payload's first words: the per-state handler pointers. */
 extern u8 D_801F507C[];
+extern s8 D_801F6780[];
 
 /* The overlay's flag word. */
 
