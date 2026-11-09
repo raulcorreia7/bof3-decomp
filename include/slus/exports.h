@@ -1,8 +1,8 @@
 #ifndef SLUS_EXPORTS_H
 #define SLUS_EXPORTS_H
 
-/* The main executable's exports to the overlays, in address order. The
- * subsystem headers keep the names they already own; this file lists the
+/* The main executable's exports to the overlays, in address order. Symbols
+ * owned by a subsystem header are declared there; this file declares the
  * remaining SLUS_004.22 symbols the overlays read or call. */
 
 #include "types.h"

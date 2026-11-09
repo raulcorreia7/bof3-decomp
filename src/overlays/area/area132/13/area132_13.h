@@ -19,4 +19,6 @@ void func_801F37A4(u8* effect);
 u8*  func_801F3800(void);
 u8   func_801F38B0(void);
 
+void func_801F3268(void);
+
 #endif
