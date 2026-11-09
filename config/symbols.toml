@@ -4175,12 +4175,14 @@ Area_DrawLightPillar = { addr = 0x801F2E68, type = "func", source = "Draws a pil
 ["emi/world03/area147/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 World_AdvanceAreaWhenPartyNear = { addr = 0x801F2DF4, type = "func", source = "Runs World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) once the party is next to the work cell, then Area_Update(0)." }
+Actor_SlideScreenUp = { addr = 0x801F2F34, type = "func", source = "Adds 0x10 to the actor screen_y; at 0x80 or above adds 1 to header.step (byte 0x02); then runs Area_Update with -1 when the word at 0x32 is zero, else 0." }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F2FB0, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08)." }
 Area_AdvanceCountdown = { addr = 0x801F30AC, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue 0x201 when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update(0), or Area_Update(-1) when byte 0x32 is zero." }
 Area_Update = { addr = 0x801F313C, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 
 ["emi/world03/area148/13"]
 World_AdvanceAreaWhenPartyNear = { addr = 0x801F2E64, type = "func", source = "Runs World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) once the party is next to the work cell, then Area_Update(0)." }
+Actor_SlideScreenUp = { addr = 0x801F2FA4, type = "func", source = "Adds 0x10 to the actor screen_y; at 0x80 or above adds 1 to header.step (byte 0x02); then runs Area_Update with -1 when the word at 0x32 is zero, else 0." }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F3020, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08)." }
 Area_AdvanceCountdown = { addr = 0x801F311C, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue 0x201 when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update(0), or Area_Update(-1) when byte 0x32 is zero." }
 Area_Update = { addr = 0x801F31AC, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
