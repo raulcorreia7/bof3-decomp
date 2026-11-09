@@ -40,14 +40,6 @@ void func_801F4798(void* arg0, void* arg1);
 
 void func_801F4614(void);
 
-/* A cell and facing that starts a scene event at the given step. */
-typedef struct SceneTrigger {
-    u8 x;
-    u8 y;
-    u8 facing;
-    u8 step;
-} SceneTrigger;
-
 extern SceneTrigger D_801F615C[];
 
 #endif

@@ -36,4 +36,12 @@ extern u16 D_80146876;
 void Area_Update();
 
 /* The world-overlay position resolver used by the origin handlers. */
+/* A cell and facing that starts a scene event at the given step. */
+typedef struct SceneTrigger {
+    u8 x;
+    u8 y;
+    u8 facing;
+    u8 step;
+} SceneTrigger;
+
 #endif

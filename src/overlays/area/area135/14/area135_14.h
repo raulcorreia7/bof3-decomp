@@ -80,4 +80,6 @@ extern u8       D_801F6B3C[];
 void func_80159B9C(s32 x, s32 y, s32 w, s32 h);
 void func_80159FA0(s32 x, s32 y, s32 width, s32 height);
 
+extern SceneTrigger D_801F6BA8[];
+
 #endif
