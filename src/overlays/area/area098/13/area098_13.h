@@ -34,8 +34,24 @@ extern void (*D_801F5FBC[])(void* slot);
 typedef struct CaptureSize {
     s16 w;
     s16 h;
-    s16 unk_04[2]
+    s16 unk_04[2];
 } CaptureSize;
+
+/* One of the 16 slots at AREA_WORK, 0x1C bytes each. */
+typedef struct AreaBurstSlot {
+    u8  active;   /* 0x00 - 0 marks a free slot */
+    u8  kind;     /* 0x01 - selects the per-frame handler */
+    u8  life;     /* 0x02 - frames left */
+    u8  fade;     /* 0x03 */
+    s32 unk_04;   /* 0x04 */
+    s32 speed;    /* 0x08 */
+    s32 unk_0C;   /* 0x0C */
+    s32 distance; /* 0x10 */
+    s32 unk_14;   /* 0x14 */
+    s32 unk_18;   /* 0x18 */
+} AreaBurstSlot;
+
+ASSERT_SIZE(AreaBurstSlot, 0x1C);
 
 extern u8 D_801F6510;
 extern u8 D_801F6514;
@@ -65,6 +81,7 @@ s32  func_801F4E7C(void);
 
 void func_801F48E8(void* arg0, void* arg1, s32 arg2);
 void func_801F4BC0(void* slot);
+void func_801F4FEC(AreaBurstSlot* slot);
 void func_801F4DBC(s32 arg0);
 void func_801F5580(s32 arg0);
 
