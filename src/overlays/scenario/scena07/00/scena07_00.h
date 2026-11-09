@@ -42,10 +42,7 @@ typedef struct Scena07Burst {
 } Scena07Burst;
 
 extern Scena07Burst* D_801FDFBC;
-extern s32           D_80145EC4;
-extern s32           D_80145EC8;
 void                 func_801F97E0(Scena07Burst* burst);
-void                 func_801FA01C(void);
 
 void func_801F81D4(u8* row);
 

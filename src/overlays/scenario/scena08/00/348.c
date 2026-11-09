@@ -104,10 +104,10 @@ MATCH void func_801F7688(void) {
     pos[1] = g_Task->pos.y.fixed;
     pos[2] = g_Task->pos.z.fixed;
     Area_ProjectPoint(pos, &screen);
-    work             = g_Task;
-    work->screen_x   = screen.vx;
-    work->screen_y   = screen.vy;
-    work->unk_32     = 0x140;
+    work           = g_Task;
+    work->screen_x = screen.vx;
+    work->screen_y = screen.vy;
+    work->unk_32   = 0x140;
     work->header.mode += 1;
     work->unk_5A = 0x14;
     func_801F8108((s16)g_Task->screen_x, (s16)g_Task->screen_y);
@@ -170,7 +170,7 @@ MATCH void func_801F7AD0(void) {
 }
 
 MATCH void func_801F7B2C(void) {
-    D_800E4C1E = 0xC0;
+    D_800E4C1E    = 0xC0;
     g_Task->pos.x = 0x6B0000;
     g_Task->pos.y = 0x460000;
     g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 0x460000) << 16;
@@ -534,9 +534,9 @@ MATCH void func_801FA294(void) {
 }
 
 MATCH void func_801FA2D0(void) {
-    D_80144EC8[0] = 0;
+    D_80144EC8[0]    = 0;
     g_ScriptVarsWord = 0;
-    D_80146872 = 1;
+    D_80146872       = 1;
     func_801FA32C();
     func_801FE12C();
     SYS_SetFlag(&D_80144EC8[0x60], 0x43);
