@@ -43,19 +43,7 @@ MATCH void func_801F7164(void) {
     u16 count;
     u16 timer;
 
-    func_801F8534();
-    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
-    if ((g_Task->unk_5A & 3) == 0) {
-        g_Task->unk_2C += 1;
-    }
-    count = g_Task->unk_32 + 1;
-    timer = g_Task->unk_5A - 1;
-    g_Task->unk_5A = timer;
-    g_Task->unk_32 = count;
-    if (timer == 0) {
-        g_Task->unk_5A = 0x96;
-        g_Task->header.mode += 1;
-    }
+    SCENA08_SPARKLE_STEP(count, timer, 0x96);
 }
 
 MATCH void func_801F7200(void) {
@@ -92,7 +80,12 @@ MATCH void func_801F743C(void) {
     g_Task->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801F74E0);
+MATCH void func_801F74E0(void) {
+    u16 count;
+    u16 timer;
+
+    SCENA08_SPARKLE_STEP(count, timer, 0x2D);
+}
 
 MATCH void func_801F757C(void) {
     func_801F8534();
@@ -401,9 +394,31 @@ MATCH void func_801F98E0(void) {
 
 INCLUDE_ASM(func_801F995C);
 
-INCLUDE_ASM(func_801F9A10);
+MATCH void func_801F9A10(void) {
+    g_Task->pos.x.fixed += g_Task->vx;
+    g_Task->pos.y.fixed += g_Task->vy;
+    g_Task->pos.z.fixed += g_Task->vz;
+    g_Task->vz -= 0x200000;
+    func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
+    if (g_Task->pos.y.fixed == 0x4B0000) {
+        g_Task->timer = 0x3C;
+        g_Task->header.mode += 1;
+    }
+}
 
-INCLUDE_ASM(func_801F9AC0);
+MATCH void func_801F9AC0(void) {
+    if (--g_Task->timer == 0) {
+        g_Task->pos.x = 0x4B0000;
+        g_Task->pos.y = 0x4B0000;
+        g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 0x4B0000) << 16;
+        g_Task->vx    = 0xFFFF4925;
+        g_Task->vy    = 0xFFFF0000;
+        g_Task->vz    = 0x4C30C4;
+        g_Task->header.mode += 1;
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+    }
+}
 
 INCLUDE_ASM(func_801F9B68);
 

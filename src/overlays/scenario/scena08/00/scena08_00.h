@@ -74,4 +74,21 @@ void func_801F85F0(s32 x, s32 y, s32 angle);
         func_80196070();                                                              \
     }
 
+/* The two sparkle steps of 348.c: stir the seed, advance the frame counters and move to the next mode
+ * after `reset` frames. They differ only in `reset`. Every change here must verify every member. */
+#define SCENA08_SPARKLE_STEP(count, timer, reset)       \
+    func_801F8534();                                    \
+    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);        \
+    if ((g_Task->unk_5A & 3) == 0) {                    \
+        g_Task->unk_2C += 1;                            \
+    }                                                   \
+    (count) = g_Task->unk_32 + 1;                       \
+    (timer) = g_Task->unk_5A - 1;                       \
+    g_Task->unk_5A = (timer);                           \
+    g_Task->unk_32 = (count);                           \
+    if ((timer) == 0) {                                 \
+        g_Task->unk_5A = (reset);                       \
+        g_Task->header.mode += 1;                       \
+    }
+
 #endif
