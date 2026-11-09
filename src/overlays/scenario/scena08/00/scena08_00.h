@@ -31,6 +31,9 @@ void func_801F7DE8(void);
 s32  func_801F7E14(void);
 void func_801F8AE8(void);
 u8   func_801F8BF8(void);
+u8*  func_801F8B14(void);
+void func_801F8B50(u8* record);
+void func_801F81F4(u16 value);
 
 extern void (*D_801FE8FC[])(void* slot);
 

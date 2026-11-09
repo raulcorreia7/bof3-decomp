@@ -77,7 +77,20 @@ MATCH void func_801F73D4(void) {
     SCENA08_SCREEN_EFFECT_STEP(work, 0x10);
 }
 
-INCLUDE_ASM(func_801F743C);
+MATCH void func_801F743C(void) {
+    u8 i;
+
+    g_Task->unk_5A = 0x20;
+    g_Task->unk_32 = 0;
+    g_Task->script_pc = 0;
+    for (i = 0; i < 0x40; i++) {
+        g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
+        func_801F81F4(g_Task->script_pc);
+    }
+    g_Task->unk_2C = 0;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
+    g_Task->header.mode += 1;
+}
 
 INCLUDE_ASM(func_801F74E0);
 
@@ -119,7 +132,23 @@ MATCH void func_801F79B0(void) {
     work->header.step = work->header.step + 1;
 }
 
-INCLUDE_ASM(func_801F79EC);
+MATCH void func_801F79EC(void) {
+    u8* record;
+
+    if (g_Task->unk_5A == 4) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
+    }
+    if ((g_Task->unk_5A & 7) == 0) {
+        record = func_801F8B14();
+        if (record != NULL) {
+            func_801F8B50(record);
+        }
+    }
+    func_801F8BF8();
+    if (--g_Task->unk_5A == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F7A9C(void) {
     if (!(func_801F8BF8() & BYTE_MASK)) {
