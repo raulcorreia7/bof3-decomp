@@ -15,7 +15,16 @@ MATCH void func_801F743C(void) {
 }
 
 /* Hint: a3 is lhu of the low half of vx (0x0C), while 0x0C is also read as a word; the same field needs two widths. */
-INCLUDE_ASM(func_801F745C);
+MATCH void func_801F745C(void) {
+    Actor* work;
+
+    work = g_Task;
+    func_801F7660(work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed, work->vx);
+    g_Task->vx += 0x10;
+    if (g_Task->vx > 0x500) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F74CC(void) {
     Actor_Clear();
