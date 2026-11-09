@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801D0C0C);
+INCLUDE_ASM(func_801D0C04);
 
 MATCH void func_801D0C70(void) {
     u8* work;

@@ -3081,6 +3081,7 @@ Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "Starts one spin-ef
 g_SceneEntityDispatch = { addr = 0x801D3918, source = "scenario entity dispatch table" }
 
 ["emi/scenario/sce15ef2/00"]
+func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "func_801D0C04+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_EndScan = { addr = 0x801D0DE8, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Scene_DrawScanBar = { addr = 0x801D1414, type = "func", source = "Draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity." }
 Scene_ClearScanBars = { addr = 0x801D15B0, type = "func", source = "Clears the in-use byte of each of the 16 scan bars." }
