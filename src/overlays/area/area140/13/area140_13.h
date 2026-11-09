@@ -24,4 +24,14 @@ s32 func_801F3C44(s32 x, s32 y);
 
 void func_801F3950(s32 arg0, s32 arg1);
 
+/* A start cell and the way the actor faces from it. */
+typedef struct AreaStart {
+    u8 x;
+    u8 y;
+    u8 direction;
+    u8 param;
+} AreaStart;
+
+extern AreaStart D_801F47F4[];
+
 #endif

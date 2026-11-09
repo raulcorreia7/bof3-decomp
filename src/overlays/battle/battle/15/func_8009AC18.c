@@ -4,9 +4,6 @@ extern u8 D_80145F20[];
 
 /* Ends the battle selection: hands the chosen slot to the sound request, clears it, then copies the battler
  * work rows and resets the effect slots. */
-/* nonmatching unmeasured: tried branch@+0xb4: the row-copy loop materializes the D_80145FCC base in a register while
- * retail indexes the symbol per iteration; object is 120 bytes short on the byte-copy blocks. resume: index
- * D_80145FCC/D_80145F04 per use and keep the full FIELD copy sequence per row. */
 #ifdef NON_MATCHING
 NON_MATCHING bool func_8009AC18(void) {
     u8* slots[6];

@@ -15,8 +15,13 @@ extern u16 D_801F55E4[];
 extern u8  D_801F463C[];
 extern u8  D_801F4640[];
 extern u8  D_801F558C[];
+/* The x/y byte pairs of the cell table indexed by the actor param. */
+extern u8  D_801F4658[];
+extern u8  D_801F4659[];
 
 void func_801F3884(s32, s32);
+void func_801F34C8(void);
+void func_801F364C(void);
 
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x1C

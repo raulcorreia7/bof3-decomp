@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* 82.15%; item pointer, limited pointer use and argument locals tried; first diff 0x801D457C, address register. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4564(void) {
     s32 tmp0;

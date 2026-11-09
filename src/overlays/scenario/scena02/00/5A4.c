@@ -548,5 +548,4 @@ MATCH void Party_JoinRei(void) {
 
 #include "overlays/scenario/Scene_RemoveRei.h"
 
-/* blocker: nops after each lbu [v0]; first diff: 0x801FE1F0 nop against lui a0. */
 INCLUDE_ASM(func_801FE1C0);

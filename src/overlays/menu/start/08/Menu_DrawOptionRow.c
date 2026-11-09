@@ -20,8 +20,6 @@ typedef union {
     s32        words[32];
 } WorkArea;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 49.08%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step) {
     WorkArea work;
@@ -85,6 +83,5 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     GFX_AddPrim(1U, sizeof(LINE_F2));
 }
 #else
-/* blocker: packed record types for the stack work area. */
 INCLUDE_ASM(Menu_DrawOptionRow);
 #endif

@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried 43.98%: signed s32 counters + 16-byte frame pad; retail addresses scratch arrays as lui
- * at,0x1f80; sb 8(at) (direct SP_REF forms lost the frame), slt vs sltu loops. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BE1B0(u32 index) {
     Actor* row;

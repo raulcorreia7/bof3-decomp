@@ -19,7 +19,6 @@ INCLUDE_ASM(func_801EEFC8);
 
 #include "overlays/bmagic/Effect_CountDownAndPickRandom.h"
 
-/* enemy/party palette-fade arms share the func_800A9610(slot, 0x10) tail but retail keeps unk_03 in v1 and builds the row address in s0 from it; the m2c shape leaves it 4 bytes short; first diff +0x54 */
 INCLUDE_ASM(func_801EF1B4);
 
 /* func_801EF334 */

@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* NON_MATCHING: row pointer, invariant base and pinned base tried; first diff 0x801DAC80, table base load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAC1C(void) {
     u8* table;

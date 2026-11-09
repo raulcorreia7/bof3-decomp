@@ -31,6 +31,9 @@ void func_801F7DE8(void);
 s32  func_801F7E14(void);
 void func_801F8AE8(void);
 u8   func_801F8BF8(void);
+u8*  func_801F8B14(void);
+void func_801F8B50(u8* record);
+void func_801F81F4(u16 value);
 
 extern void (*D_801FE8FC[])(void* slot);
 
@@ -59,6 +62,7 @@ void func_801FA19C(WorldPos* pos, s32* vx);
 void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3);
 
 void func_801F85F0(s32 x, s32 y, s32 angle);
+void func_801F8108(s32 x, s32 y);
 
 /* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and
  * leave the scene when the countdown ends. They differ only in the sign of the turn. Every change
@@ -70,5 +74,36 @@ void func_801F85F0(s32 x, s32 y, s32 angle);
     if (--(work)->unk_5A == 0) {                                                      \
         func_80196070();                                                              \
     }
+
+/* The two sparkle steps of 348.c: stir the seed, advance the frame counters and move to the next mode
+ * after `reset` frames. They differ only in `reset`. Every change here must verify every member. */
+#define SCENA08_SPARKLE_STEP(count, timer, reset) \
+    func_801F8534();                              \
+    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);  \
+    if ((g_Task->unk_5A & 3) == 0) {              \
+        g_Task->unk_2C += 1;                      \
+    }                                             \
+    (count)        = g_Task->unk_32 + 1;          \
+    (timer)        = g_Task->unk_5A - 1;          \
+    g_Task->unk_5A = (timer);                     \
+    g_Task->unk_32 = (count);                     \
+    if ((timer) == 0) {                           \
+        g_Task->unk_5A = (reset);                 \
+        g_Task->header.mode += 1;                 \
+    }
+
+/* The two sparkle starts of 348.c: seed the frame counters, stir the seed 0x40 times and play `cue`.
+ * They differ only in `cue`. Every change here must verify every member. */
+#define SCENA08_SPARKLE_START(i, cue)                \
+    g_Task->unk_5A    = 0x20;                        \
+    g_Task->unk_32    = 0;                           \
+    g_Task->script_pc = 0;                           \
+    for ((i) = 0; (i) < 0x40; (i)++) {               \
+        g_Task->script_pc += RANDOM_MASK(BYTE_MASK); \
+        func_801F81F4(g_Task->script_pc);            \
+    }                                                \
+    g_Task->unk_2C = 0;                              \
+    SND_PlayCue(cue);                                \
+    g_Task->header.mode += 1;
 
 #endif

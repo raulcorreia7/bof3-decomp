@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* 87.4%; first difference at +0x3C: retail loads a global address (lui) where ours zeroes s6. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D6AC4(s32 party_slot) {
     struct {

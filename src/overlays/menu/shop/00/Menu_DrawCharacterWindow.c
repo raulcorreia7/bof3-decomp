@@ -1,7 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching: 2 instructions; retail schedules `andi a0,s1` before `addiu s2,s2,2` (sched1 boosts the a0 zero-extend
- * over the in-place py add). */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
     Character* records;
@@ -88,6 +86,5 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     py = 0;
 }
 #else
-/* blocker: schedule of `addiu s2,s2,2` after `andi a0,s1,0xffff`. */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 #endif

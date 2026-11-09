@@ -6,7 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-/* Blocker: copies 16 halfwords from 0x80036C00 to 0x8003AC00 (unnamed data, no table yet) and swaps the scratchpad work pointer to g_BattleEffectBattler around Actor_StepAnimLoop. */
 INCLUDE_ASM(func_801EEC88);
 
 INCLUDE_ASM(func_801EED60);
@@ -48,7 +47,6 @@ MATCH void func_801EF50C(void) {
     func_801E5988();
 }
 
-/* blocker: constant register; first diff: 0x801EF554 (retail holds 0x800F0800 in v0 and g_Task in v1). */
 MATCH void func_801EF52C(void) {
     Magic138Steps handlers;
 

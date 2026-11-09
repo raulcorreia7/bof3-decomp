@@ -17,12 +17,11 @@ functions by route ([find work](../CONTRIBUTING.md#find-work)).
 | 5 | Hand loop       | m2c draft, `tools/match.sh`, [diagnose](#diagnose), [permuter](#permuter) | three structurally different tries fail                 |
 
 Budget: three structurally different tries per function (a different shape, not a tweak of the same
-one). Then leave the hint and report `BLOCKED <reason>`.
+one). Then record the attempt in `config/attempts.tsv` and report `BLOCKED <reason>`.
 
 A route that gives `EXACT` still needs `check-<image>`, a name from evidence and the shared-body
-treatment ([shared bodies](conventions.md#shared-bodies)). When you give up, leave a hint above the
-`INCLUDE_ASM` line: the template tried and the first differing instruction, in one or two
-sentences. The worklist shows the hint, so the next person starts there.
+treatment ([shared bodies](conventions.md#shared-bodies)). Record failed attempts in
+`config/attempts.tsv` with the function, forms tried, first difference and score when known.
 
 ## Order of work
 
@@ -44,7 +43,9 @@ Fix causes before functions.
 ## The loop
 
 1. Read `asm/<target>/func_<ADDR>.s`, its callers and its prototypes.
-2. Draft the C in the ignored scratch folder `work/<image>/<ADDR>/`.
+2. Draft the C in the ignored scratch folder `work/<image>/<ADDR>/`. A new lift in source uses
+   `NON_MATCHING` until `tools/match.sh` reports `match` and `check-<image>` passes; only then
+   replace its draft with a `MATCH` definition.
 3. Compile it with the `cc` wrapper and diff it against the target object assembled from the split
    asm ([toolchain](toolchain.md#compiler-wrapper), [objdiff](toolchain.md#objdiff)), or edit the
    unit's `.c` and run `tools/match.sh <target> <func>`. It answers in a fraction of a second:
@@ -82,7 +83,6 @@ A draft builds only with `-DNON_MATCHING`; the matching build links the split as
 ```c
 #ifdef NON_MATCHING
 NON_MATCHING void func_<ADDR>(void) {
-    /* 87.4%; regalloc: v0/v1 tie */
     <body>
 }
 #else
@@ -90,9 +90,7 @@ INCLUDE_ASM(func_<ADDR>);
 #endif
 ```
 
-A draft stays only when it is structured C under these conventions and its score and first mismatch
-are known; otherwise the function is the `INCLUDE_ASM` line, with a one- or two-sentence hint above
-it when a lift attempt learned something ([comments](conventions.md#comments)).
+Keep a draft under `NON_MATCHING`. Record its attempts in `config/attempts.tsv`, never in source.
 
 ### Status markers
 

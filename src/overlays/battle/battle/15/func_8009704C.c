@@ -16,10 +16,6 @@ typedef struct BattleSelectionScratch {
     s16 scroll_delta;
 } BattleSelectionScratch;
 
-/* nonmatching unmeasured: tried the store-order lever (82.73% -> 84.24%), the (s32) cast on the pad mask (81.82%,
- * no change) and the fixed-address base spelling (81.57%, regressed); a 7929-iteration statement search with 190
- * errors gave no improvement on the base. candidate 77.88%. resume: a register-pair form that puts the 0xf00c pad mask
- * in the call's delay slot and the scroll arithmetic in the +0x0054 slot. */
 #ifdef NON_MATCHING
 /* FAKE: retail reads D_801454F4 as flat bytes; the owner declares rows. */
 NON_MATCHING void func_8009704C(void) {

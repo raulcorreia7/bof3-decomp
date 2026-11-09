@@ -72,4 +72,6 @@ void func_801F3D5C(void);
 s32  func_801F3E48(u8 shade);
 void func_801F41EC(void);
 
+s16 func_801F4158(DVECTOR* a, DVECTOR* b, DVECTOR* c);
+
 #endif

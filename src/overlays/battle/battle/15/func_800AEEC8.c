@@ -1,6 +1,5 @@
 #include "battle_15.h"
 
-/* NON_MATCHING: task locals, volatile task and barriers tried; first diff 0x800AEF48, task address load. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1) {
     u8  mode;

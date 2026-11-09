@@ -215,7 +215,6 @@ MATCH void func_801F0568(void) {
     }
 }
 
-// hint: retail keeps the 1 constant in v1 across unk_5C/unk_2B and loads each -128 and scale constant at its own store; ours hoists them into temps.
 INCLUDE_ASM(func_801F05FC);
 
 MATCH void func_801F0710(void) {

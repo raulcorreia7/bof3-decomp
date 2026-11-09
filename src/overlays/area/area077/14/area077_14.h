@@ -33,6 +33,8 @@ ASSERT_SIZE(AreaSlot, 0x34);
 #define AREA_SLOT_COUNT 64
 
 extern u8  D_801F6250[];
+extern u8  D_801F6278[];
+extern u8  D_801F627D[];
 extern u8  D_801F62EC[];
 extern u16 D_801F6B1C[];
 extern u8  D_801F6B28[];

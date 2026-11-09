@@ -11,6 +11,7 @@
 
 /* The fixed work record the dispatch compares the work pointer against. */
 extern Actor D_80143F48;
+extern u8    D_80144EF8[];
 
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];
@@ -34,5 +35,8 @@ extern u8 D_801F4DFC[];
 
 /* The game-overlay state bytes the cancel path resets. */
 extern u8 D_801F4E50[];
+
+/* The cells that start the scene events of func_801F4158. */
+extern SceneTrigger D_801F4DD4[];
 
 #endif

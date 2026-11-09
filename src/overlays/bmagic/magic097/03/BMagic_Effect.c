@@ -19,7 +19,6 @@ INCLUDE_ASM(func_801EEFC8);
 
 #include "overlays/bmagic/Effect_CountDownAndPickRandom.h"
 
-// hint: same shape as magic093 801EF108: retail holds g_Task in a0 and indexes the enemy table via v1 (base added last); enemy[idx], idx local and (u8*)base + idx*stride forms did not match
 INCLUDE_ASM(func_801EF1A4);
 
 /* func_801EF324 */

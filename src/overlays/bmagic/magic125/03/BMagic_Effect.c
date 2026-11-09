@@ -153,7 +153,6 @@ INCLUDE_ASM(func_801EFB8C);
 
 INCLUDE_ASM(func_801EFCE4);
 
-/* hint: matches the plain draft except the angle sum (unk_09 + (unk_0B & 7) * 8) << 6 adds with the operands swapped and the z add loads the work pointer into a1. */
 INCLUDE_ASM(func_801EFE8C);
 
 INCLUDE_ASM(func_801EFFC8);

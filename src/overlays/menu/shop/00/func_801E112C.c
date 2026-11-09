@@ -1,10 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried the first draft with register-named locals and FIELD views; the first draft cleaned
- * into role-named locals, the panel task read through its header members, the icon offset chain recovered from the
- * retail and the two icon calls given their seven-argument shape (60.74%). residual: the register allocation
- * and the ability-icon address forms still differ from the retail. resume: a source shape that reproduces the retail's
- * ability-icon address forms and its register allocation. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E112C(MenuPanelTask* task) {
     Ability* ability_obj;

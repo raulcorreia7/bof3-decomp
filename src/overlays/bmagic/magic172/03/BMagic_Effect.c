@@ -19,7 +19,6 @@ INCLUDE_ASM(func_801EEC5C);
 
 INCLUDE_ASM(func_801EEE7C);
 
-/* blocker: copied x load schedule; first diff: lw a0 at +0x28. */
 INCLUDE_ASM(func_801EF158);
 
 INCLUDE_ASM(func_801EF210);
@@ -63,7 +62,6 @@ MATCH void func_801EF518(void) {
     }
 }
 
-/* blocker: early constant load; first diff: 0x801EF5B8. */
 INCLUDE_ASM(func_801EF590);
 
 INCLUDE_ASM(func_801EF650);
