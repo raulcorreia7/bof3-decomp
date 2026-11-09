@@ -1,4 +1,3 @@
-/* One definition shared by the boss overlays; every change here must verify every member. */
 MATCH void func_800C1934(void) {
     EnemyBattler* work;
 

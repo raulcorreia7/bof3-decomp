@@ -1,15 +1,13 @@
 #ifndef OVERLAY_BOSS_BOSS018_16_H
 #define OVERLAY_BOSS_BOSS018_16_H
 
-/* The boss/boss018/16 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The boss/boss018/16 overlay: one file per split function and its data. */
 
 #include "overlays/boss/boss.h"
 
 #define g_SceneFlags ((void*)g_SceneFlags)
 
-/* The mode handler sets the image installs into the battle hooks; the
- * addresses are in [emi/boss/boss018/16] of config/symbols.toml. */
+/* The mode handler sets the image installs into the battle hooks. */
 
 extern u8       D_800C2C38[];
 extern u8       D_800C2C44[];

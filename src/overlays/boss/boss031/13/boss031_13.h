@@ -1,8 +1,7 @@
 #ifndef OVERLAY_BOSS_BOSS031_13_H
 #define OVERLAY_BOSS_BOSS031_13_H
 
-/* The boss/boss031/13 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The boss/boss031/13 overlay: one file per split function and its data. */
 
 #include "overlays/boss/boss.h"
 

@@ -1,8 +1,7 @@
 #ifndef OVERLAY_BOSS_BOSS001_13_H
 #define OVERLAY_BOSS_BOSS001_13_H
 
-/* The boss/boss001/13 overlay: one file per split function
- * and its data. Only this image includes the file. */
+/* The boss/boss001/13 overlay: one file per split function and its data. */
 
 #include "overlays/boss/boss.h"
 
@@ -22,14 +21,12 @@ extern Callback     D_800C221C[];
 extern Callback     D_800C224C[];
 extern Callback     D_800C2264[];
 extern Callback     D_800C2270[];
-/* Battle RAM cell cleared by the mode start; the block around it belongs to
- * include/battle/records.h, which does not name this halfword yet. */
+/* Battle RAM cell cleared by the mode start. */
 extern volatile u16 D_801463BE;
 /* D_801EB630 */
 extern EnemyBattler g_BattleEnemyBattlers[];
 
-/* The three battle hooks the image installs; the addresses are in
- * [emi/boss/boss001/13] of config/symbols.toml. */
+/* The three battle hooks the image installs; the addresses are in [emi/boss/boss001/13] of config/symbols.toml. */
 
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C1E00(s32 mode);
