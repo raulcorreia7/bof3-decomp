@@ -17,8 +17,7 @@ NON_MATCHING void func_801E112C(MenuPanelTask* task) {
     s32      icon_kind;
     s32      ability;
 
-    UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
-                  MENU_INVENTORY_WINDOW_HEIGHT, 0, (s32)g_WindowStyle);
+    UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, 0, (s32)g_WindowStyle);
     kinds = &g_WindowStyle + 0xB1A;
     kinds = &kinds[func_801AFD10(&task->u.addr.unk_10, &row_offset, &count, &task->u.addr.unk_12) & BYTE_MASK];
     row_y = task->pos.y + (s8)row_offset;
@@ -37,8 +36,7 @@ NON_MATCHING void func_801E112C(MenuPanelTask* task) {
                 ability_obj  = &g_Abilities[ability_id];
                 ability_kind = Char_GetAbilityElement((s32)ability_id);
                 if ((icon_x == task->unk_0B + offset) || has_icon) {
-                    func_801AF930((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), 7, ability_kind, ability_obj,
-                                  (s32)ability_obj->cost, 1);
+                    func_801AF930((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), 7, ability_kind, ability_obj, (s32)ability_obj->cost, 1);
                     icon_y    = (s16)(row_y + 0x18);
                     icon_kind = has_icon * 2;
                     ability   = ability_kind & BYTE_MASK;
@@ -47,20 +45,16 @@ NON_MATCHING void func_801E112C(MenuPanelTask* task) {
                     icon_kind = 0;
                     ability   = ability_kind & BYTE_MASK;
                 }
-                func_801AF930((s16)(task->pos.x + 7), icon_y, icon_kind, ability, ability_obj, (s32)ability_obj->cost,
-                              0);
+                func_801AF930((s16)(task->pos.x + 7), icon_y, icon_kind, ability, ability_obj, (s32)ability_obj->cost, 0);
             }
             kinds += 1;
             index += 1;
             row_y += 0xD;
         } while ((index & BYTE_MASK) < (count + 9));
     }
-    UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
-                  MENU_INVENTORY_TOP_HEIGHT, (s32)task->unk_09, (s32)g_WindowStyle);
-    UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH,
-                  MENU_INVENTORY_BOTTOM_HEIGHT, (s32)task->unk_09, (s32)g_WindowStyle);
-    UI_DrawText((s16)(task->pos.x - (((func_801AF20C(&D_801E5D1C) & BYTE_MASK) * 4) - 78)), (s16)(task->pos.y + 7), 0,
-                0x10U, (&D_801E5D1C));
+    UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, (s32)task->unk_09, (s32)g_WindowStyle);
+    UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, (s32)task->unk_09, (s32)g_WindowStyle);
+    UI_DrawText((s16)(task->pos.x - (((func_801AF20C(&D_801E5D1C) & BYTE_MASK) * 4) - 78)), (s16)(task->pos.y + 7), 0, 0x10U, (&D_801E5D1C));
     TEXT_Format(g_UiFormatBuffer, D_801D0E7C, Party_CountAbilities(0U, 0xFFU, 0U) & BYTE_MASK, 0x80);
     UI_DrawGlyphString((s16)(task->pos.x + 85), (s16)(task->pos.y + 146), 0U, g_UiFormatBuffer);
     UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, &D_801E5C78, 1);

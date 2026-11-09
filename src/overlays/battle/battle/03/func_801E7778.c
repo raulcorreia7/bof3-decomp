@@ -16,9 +16,9 @@ MATCH void func_801E7778(void) {
     if (step != 0x10000) {
         work->scale.x = step + 0x2000;
     } else {
-        work->unk_48 = 0;
-        index        = g_BattleEffectBattler->slot;
-        value        = g_Game.members[index].u.turn.damage_flags.value & ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+        work->unk_48                                    = 0;
+        index                                           = g_BattleEffectBattler->slot;
+        value                                           = g_Game.members[index].u.turn.damage_flags.value & ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
         g_Game.members[index].u.turn.damage_flags.value = value;
         func_801E5988();
     }

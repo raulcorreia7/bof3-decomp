@@ -15,16 +15,14 @@ MATCH void func_800A17A4(void) {
         for (i = 0; i < 8; i++) {
             D_80145FB4[ACTIVE_BATTLER].pad_08[i] = 0;
         }
-        g_Game.members[ACTIVE_BATTLER].u.turn.damage_flags.volatile_value &=
-            ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
+        g_Game.members[ACTIVE_BATTLER].u.turn.damage_flags.volatile_value &= ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
         g_Game.members[ACTIVE_BATTLER].u.turn.action_flags.volatile_value &= 0xFFFBC43F;
         func_800A9BD8(ACTIVE_BATTLER);
     } else {
         for (i = 0; i < 8; i++) {
             ENEMY_COMBATANT(ACTIVE_BATTLER).stat_multipliers[i] = 0;
         }
-        ENEMY_COMBATANT(ACTIVE_BATTLER).turn.damage_flags.value &=
-            ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
+        ENEMY_COMBATANT(ACTIVE_BATTLER).turn.damage_flags.value &= ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
         ENEMY_COMBATANT(ACTIVE_BATTLER).turn.action_flags.value &= 0xFFFBC43F;
         func_800A9BD8(ACTIVE_BATTLER);
     }

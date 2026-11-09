@@ -54,8 +54,7 @@ MATCH void Area_UpdateCamera(void) {
             g_AreaTileRemainderY -= g_AreaCameraHeightStep * 2;
         }
         g_AreaCameraRefreshCount = 2;
-        dir                      = ((0x800000 - ((g_AreaCameraX + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) |
-                                    (0x800000 - (g_AreaCameraY << 8) - (g_AreaScrollTargetY & ~0x7FFF)));
+        dir                      = ((0x800000 - ((g_AreaCameraX + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) | (0x800000 - (g_AreaCameraY << 8) - (g_AreaScrollTargetY & ~0x7FFF)));
         if (dir == 0) {
             g_AreaCameraMoving = 0;
         }
@@ -87,8 +86,7 @@ MATCH void Area_UpdateCamera(void) {
     if (refilled != 0) {
         Area_IndexCells();
     }
-    if (g_AreaCameraAngle.vx != *(s16*)&D_801492E0 || g_AreaCameraAngle.vy != D_801492E2 ||
-        g_AreaCameraAngle.vz != D_801492E4) {
+    if (g_AreaCameraAngle.vx != *(s16*)&D_801492E0 || g_AreaCameraAngle.vy != D_801492E2 || g_AreaCameraAngle.vz != D_801492E4) {
         g_AreaCameraRefreshCount = 3;
         *(SVECTOR*)&D_801492E0   = *&g_AreaCameraAngle;
     }

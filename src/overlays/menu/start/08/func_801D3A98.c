@@ -40,9 +40,8 @@ MATCH void func_801D3A98(void) {
             func_801D49F8(entry);
             return;
         }
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags = 0xFF;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C =
-            s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags  = 0xFF;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
         /* g_MenuStep.state through g_MenuStep.sub_step: retail keeps the symbol-relative
          * address in a register for the read-modify-write. */
         (&g_MenuStep.sub_step)[1]++;

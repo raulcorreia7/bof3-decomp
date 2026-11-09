@@ -16,11 +16,10 @@
 /* The type-0 loader copies the character program to 0x801CE400 and compares
  * its first word with the archive TOC cache. All 19 programs carry 33 + the
  * name-order ordinal (0x21-0x33); code follows at +0x04. */
-#define PLCHAR_PROGRAM_FIRST 33
+#define PLCHAR_PROGRAM_FIRST                                     33
 
 /* Runs one route step's script: when the facing index has reached the direction byte, it selects the script id for the turn (0x40 at the back facing, 0x41 at the away facing) and advances the task state; otherwise it counts the step timer down, and on zero re-arms it and requests the next script. The body of every Char_RunStepScript member; each passes the two facing values at which it selects script 0x40 and 0x41. */
-#define CHAR_RUN_STEP_SCRIPT(FACING_SCRIPT_40, FACING_SCRIPT_41)        \
-    CHAR_RUN_STEP_CASES(FACING_SCRIPT_40, 0x40, FACING_SCRIPT_41, 0x41)
+#define CHAR_RUN_STEP_SCRIPT(FACING_SCRIPT_40, FACING_SCRIPT_41) CHAR_RUN_STEP_CASES(FACING_SCRIPT_40, 0x40, FACING_SCRIPT_41, 0x41)
 
 /* The same step with the two switch cases written in the given order: a member whose
  * retail switch tests the 0x41 facing first passes the 0x41 case first. */

@@ -31,8 +31,7 @@ NON_MATCHING void func_801DA9DC(void) {
         FISHING_STATE->sub_index_03  = 0U;
         return;
     }
-    if (Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed) >=
-        COORD_INT(g_ActorSlots[0].pos.z)) {
+    if (Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed) >= COORD_INT(g_ActorSlots[0].pos.z)) {
         chance = g_FishingLureRow->unk_11;
         if ((RANDOM_MASK(0xF) < chance) && !(g_FrameCount & 0xF)) {
             g_ActorSlots[0].scene_step = 0;
@@ -115,8 +114,7 @@ box_16:
         capped = FISHING_CAMERA_Y_MIN;
     }
     g_AreaScrollTargetY = capped;
-    if (((g_ActorSlots[0].pos.x.fixed <= TO_COORD(8)) && (g_ActorSlots[0].scene_step < 0)) ||
-        ((g_ActorSlots[0].pos.x.fixed > 0x11FFFF) && (g_ActorSlots[0].scene_step > 0))) {
+    if (((g_ActorSlots[0].pos.x.fixed <= TO_COORD(8)) && (g_ActorSlots[0].scene_step < 0)) || ((g_ActorSlots[0].pos.x.fixed > 0x11FFFF) && (g_ActorSlots[0].scene_step > 0))) {
         g_ActorSlots[0].scene_step = 0;
     }
     if (g_ActorSlots[0].selection > 0) {

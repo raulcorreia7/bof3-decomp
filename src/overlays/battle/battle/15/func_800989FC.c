@@ -3,8 +3,7 @@
 MATCH void func_800989FC(void) {
     u32 flags;
 
-    flags = Item_GetFlags(g_MenuPanelTasks[16].unk_0A,
-                          D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]);
+    flags = Item_GetFlags(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]);
     if ((flags & 0x40u) != 0u) {
         if ((flags & 0x10u) != 0u) {
             g_Battle.ui_step = 5u;

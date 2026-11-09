@@ -13,8 +13,7 @@ MATCH void func_801E2C00(u16 x, s32 y, s32 group, s32 selected, s32 mode) {
         if ((selected & BYTE_MASK) == i && mode == 3) {
             UI_DrawText(x + (s8)label->offset_x - label->length * 4 + 116, y - 2, flag, label->length, label->text);
         } else {
-            UI_DrawTextString(x + (s8)label->offset_x - label->length * 4 + 116, y + 2, flag, label->length,
-                              label->text);
+            UI_DrawTextString(x + (s8)label->offset_x - label->length * 4 + 116, y + 2, flag, label->length, label->text);
         }
     }
 }

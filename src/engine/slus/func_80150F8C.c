@@ -8,6 +8,5 @@ MATCH void func_80150F8C(void) {
         g_UiWindowStep++;
     }
     /* FAKE: retail reads D_8014833A as u8. */
-    UI_DrawWaitMarker((g_MessageWindow.origin.x + ((*(u8*)D_8014833A) >> 1) - 0xE),
-                      (D_801490C8 + (g_MessageWindow.text.y + 0xC)));
+    UI_DrawWaitMarker((g_MessageWindow.origin.x + ((*(u8*)D_8014833A) >> 1) - 0xE), (D_801490C8 + (g_MessageWindow.text.y + 0xC)));
 }

@@ -34,8 +34,7 @@ MATCH u8 func_801DD448(void) {
         return 0u;
     }
 
-    if ((g_Battle.action_lock != 0u) &&
-        ((g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+    if ((g_Battle.action_lock != 0u) && ((g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
         return 0u;
     }
 

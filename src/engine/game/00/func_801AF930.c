@@ -1,7 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value,
-                         u8 sprite_flag) {
+MATCH void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag) {
     s32 y2;
     u8* buffer;
     s32 count;

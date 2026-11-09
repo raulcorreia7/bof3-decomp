@@ -381,13 +381,13 @@ typedef struct EnemyBattler {
     u8          name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
     EnemyIdCode enemy_id;
     u8          choice_ai;
-    u8          unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16         event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16         status;      /* +0x82 StatusFlags; Battle_DefeatEnemy sets STATUS_KO when the enemy leaves the field */
-    u16         zenny;       /* +0x84 added to the battle reward by Battle_DefeatEnemy */
-    u16         exp;         /* +0x86 added to the battle reward by Battle_DefeatEnemy */
-    u16         level;       /* +0x88 the turn-order ranking and the base damage read it */
-    u16         unk_8A;      /* +0x8A set from the area scene record when the slot is armed */
+    u8          unk_7F;                    /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16         event_flags;               /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16         status;                    /* +0x82 StatusFlags; Battle_DefeatEnemy sets STATUS_KO when the enemy leaves the field */
+    u16         zenny;                     /* +0x84 added to the battle reward by Battle_DefeatEnemy */
+    u16         exp;                       /* +0x86 added to the battle reward by Battle_DefeatEnemy */
+    u16         level;                     /* +0x88 the turn-order ranking and the base damage read it */
+    u16         unk_8A;                    /* +0x8A set from the area scene record when the slot is armed */
     u8          skills[ENEMY_SKILL_COUNT]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
     u16         hp;
     u16         ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
@@ -404,15 +404,14 @@ typedef struct EnemyBattler {
     u8          unk_F0;
     u8          unk_F1;
     u8          pad_F2[2];
-    BattleTurn  turn; /* +0xF4 the action the enemy has queued and its outcome */
-    s8          stat_multipliers
-        [ENEMY_STAT_MULTIPLIER_COUNT]; /* +0x108 the first four modify power, defense, agility and intellect */
-    u8 pad_110[2];
-    u8 unk_112;
-    u8 unk_113;
-    u8 unk_114;
-    u8 unk_115;
-    u8 pad_116[0x2];
+    BattleTurn  turn;                                          /* +0xF4 the action the enemy has queued and its outcome */
+    s8          stat_multipliers[ENEMY_STAT_MULTIPLIER_COUNT]; /* +0x108 the first four modify power, defense, agility and intellect */
+    u8          pad_110[2];
+    u8          unk_112;
+    u8          unk_113;
+    u8          unk_114;
+    u8          unk_115;
+    u8          pad_116[0x2];
 } EnemyBattler;
 
 ASSERT_SIZE(EnemyBattler, 0x118);
@@ -562,14 +561,14 @@ typedef struct PartyMember {
     u8                  unk_5D;
     u8                  unk_5E;
     u8                  unk_5F;
-    s32       unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
-    s32       unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
-    u8        pad_68[8];
-    u8        unk_70;
-    u8        pad_71[3];
+    s32                 unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
+    s32                 unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
+    u8                  pad_68[8];
+    u8                  unk_70;
+    u8                  pad_71[3];
     /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
      * 0xA4-byte character record to this offset. */
-    Character chr;
+    Character           chr;
 
     /* +0x118 battle keeps the action the player has queued and its outcome; the field reuses the bytes as counters */
     union {

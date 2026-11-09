@@ -78,8 +78,7 @@ NON_MATCHING void func_8019625C(void) {
                 if (color_index == 0u) {
                     destination[destination_index] = 0u;
                 } else {
-                    destination[destination_index + color_index] =
-                        (u16)((red << 10) | (((high_bit << 15) | (blue << 10)) | (green << 5)));
+                    destination[destination_index + color_index] = (u16)((red << 10) | (((high_bit << 15) | (blue << 10)) | (green << 5)));
                 }
                 source_index++;
             }

@@ -19,8 +19,7 @@ MATCH void func_801B76F4(void) {
         g_Task->gravity = 0;
         g_Task->unk_03  = 4;
     }
-    if ((g_Task->unk_05 == 0) &&
-        (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
+    if ((g_Task->unk_05 == 0) && (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
         Area_AdvanceScroll((s16)COORD_INT(g_Task->pos.z));
     }
     Actor_StepAnimLoop();

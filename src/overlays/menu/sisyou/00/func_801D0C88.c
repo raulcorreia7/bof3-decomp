@@ -26,8 +26,7 @@ MATCH void func_801D0C88(void) {
             row++;
         } while (row < g_Game.party_size);
     }
-    Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, (MASTER_MENU_FRAME_Y - (g_MenuMasterScrollOffset * 10)) & 0xFFFE,
-                       MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT, g_WindowStyle);
+    Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, (MASTER_MENU_FRAME_Y - (g_MenuMasterScrollOffset * 10)) & 0xFFFE, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT, g_WindowStyle);
     if (g_MenuMasterScrollOffset == 0) {
         g_MenuMasterCursor = 0;
         g_MenuMasterSubStep += 1;

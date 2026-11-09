@@ -31,8 +31,7 @@ MATCH void Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y) 
                 verts[i].vz = parts[n].raw;
                 n++;
             }
-            RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2,
-                          (long*)&prim->x3, (long*)&prim->x0, &depth, &flag);
+            RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, (long*)&prim->x0, &depth, &flag);
             i    = 0;
             skip = g_FrameCount % parts[n].pick.table;
             run  = &parts[n];

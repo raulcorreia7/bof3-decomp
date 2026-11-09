@@ -20,9 +20,8 @@ MATCH void func_8009F884(void) {
     selection_kind = g_Battle.target;
     /* FAKE: keeps the 2 load in the jal delay slot. */
     FAKE_BARRIER();
-    ((volatile BattleTurn*)g_Battle.target_record)->hp_change =
-        Battle_CalcDamage(battler_index, selection_kind, ELEM_FROST);
-    record = g_Battle.target_record->hp_change;
+    ((volatile BattleTurn*)g_Battle.target_record)->hp_change = Battle_CalcDamage(battler_index, selection_kind, ELEM_FROST);
+    record                                                    = g_Battle.target_record->hp_change;
     if (record < base && !(flags & STATUS_SLEEPING) && record != 0) {
         func_800A4238(0x40);
     }

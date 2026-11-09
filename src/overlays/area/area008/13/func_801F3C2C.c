@@ -8,8 +8,7 @@ MATCH void func_801F3C2C(void) {
 
     scratch = (Actor*)WORLD00_AREA008_SCRATCH_PTR;
     buf     = (char*)g_UiFormatBuffer;
-    TEXT_Format(buf, WORLD00_AREA008_D_801F2C04, scratch->tint.signed_bytes.unk_5E,
-                (scratch->tint.signed_bytes.unk_5D * 100) / 30);
+    TEXT_Format(buf, WORLD00_AREA008_D_801F2C04, scratch->tint.signed_bytes.unk_5E, (scratch->tint.signed_bytes.unk_5D * 100) / 30);
 
     UI_DrawAsciiString(0x86, 0x3B, 0, buf);
 

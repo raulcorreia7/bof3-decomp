@@ -60,8 +60,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
         GFX_AddPrim(1, sizeof(POLY_FT4));
         primitive++;
         *primitive = primitive[-1];
-        setXY4(primitive, x + (width >> 1), y, (x + (width >> 1)) + ((width >> 1) - 4), y, x + (width >> 1), y + height,
-               (x + (width >> 1)) + ((width >> 1) - 4), y + height);
+        setXY4(primitive, x + (width >> 1), y, (x + (width >> 1)) + ((width >> 1) - 4), y, x + (width >> 1), y + height, (x + (width >> 1)) + ((width >> 1) - 4), y + height);
         GFX_AddPrim(1, sizeof(POLY_FT4));
     }
     primitive++;

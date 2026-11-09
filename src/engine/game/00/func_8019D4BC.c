@@ -13,7 +13,6 @@ MATCH void func_8019D4BC(void) {
     }
     if ((COORD_FRAC(g_Task->pos.x) != 0) && (COORD_FRAC(g_Task->pos.y) != 0)) {
         Area_StoreHeight((s16)(COORD_INT(g_Task->pos.x) + 1), (s16)(COORD_INT(g_Task->pos.y) + 1), 0);
-        Area_SetCellCode((s16)(COORD_INT(g_Task->pos.x) + 1), (s16)(COORD_INT(g_Task->pos.y) + 1),
-                         FIELD(u8, g_Task, 0x17u));
+        Area_SetCellCode((s16)(COORD_INT(g_Task->pos.x) + 1), (s16)(COORD_INT(g_Task->pos.y) + 1), FIELD(u8, g_Task, 0x17u));
     }
 }

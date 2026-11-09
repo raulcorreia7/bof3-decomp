@@ -40,7 +40,7 @@ NON_MATCHING void func_8015A9A4(void) {
     }
     temp_a1_42                    = g_Task;
     FIELD(u16, temp_a2_15, 0x32u) = var_v0_38;
-    temp_a0_51 = (FIELD(u16, temp_a1_42, 0x32u) + (s8)FIELD(u8, (*(void**)((u8*)(temp_a1_42) + 0x54)), 0x1u)) << 8;
+    temp_a0_51                    = (FIELD(u16, temp_a1_42, 0x32u) + (s8)FIELD(u8, (*(void**)((u8*)(temp_a1_42) + 0x54)), 0x1u)) << 8;
     FIELD(u16, temp_a1_42, 0x32u) = temp_a0_51;
     if (g_AreaDrawMode == 4) {
         if (D_8014933F != 0) {
@@ -68,8 +68,8 @@ NON_MATCHING void func_8015A9A4(void) {
     FIELD(u16, temp_a1_132, 0x30u) = sxy[1];
     temp_a0_142                    = ((u8)FIELD(u8, (*(void**)((u8*)(temp_a1_132) + 0x54)), 0x3u) >> 1) & 4;
     temp_a2_146                    = (s16)FIELD(u16, temp_a1_132, 0x2Eu);
-    if ((((&D_80182174)[temp_a0_142] + 0x140) < temp_a2_146) || (temp_a2_146 < -(s32)(&D_80182175)[temp_a0_142]) ||
-        (((&D_80182176)[temp_a0_142] + 0xF0) < sxy[1]) || (sxy[1] < -(s32)(&D_80182177)[temp_a0_142])) {
+    if ((((&D_80182174)[temp_a0_142] + 0x140) < temp_a2_146) || (temp_a2_146 < -(s32)(&D_80182175)[temp_a0_142]) || (((&D_80182176)[temp_a0_142] + 0xF0) < sxy[1]) ||
+        (sxy[1] < -(s32)(&D_80182177)[temp_a0_142])) {
         temp_v1_177         = g_Task;
         *(u8*)(temp_v1_177) = (u8)(*(u8*)(temp_v1_177) | 0x80);
         return;

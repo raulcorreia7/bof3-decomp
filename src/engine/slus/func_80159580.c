@@ -59,8 +59,7 @@ MATCH void func_80159580(void) {
         return;
     }
     if (!(g_MenuCurrentPanel->flags & 1)) {
-        func_80159FA0((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4,
-                      (g_MenuCurrentPanel->u.grow.width >> 4), (g_MenuCurrentPanel->u.grow.height >> 4));
+        func_80159FA0((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, (g_MenuCurrentPanel->u.grow.width >> 4), (g_MenuCurrentPanel->u.grow.height >> 4));
     }
     if (g_MenuCurrentPanel->mode == 0) {
         UI_UpdateLayout();

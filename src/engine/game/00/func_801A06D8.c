@@ -20,8 +20,7 @@ MATCH u32 func_801A06D8(void) {
             SP_REF(s8, 0x3) = 0;
             if (row->timer == 0 && (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_PENDING)) {
                 if (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_REQUEST) {
-                    if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) &&
-                        !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
+                    if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) && !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_Actors[i].unk_79 = g_Task->direction_08 & 7;
                         if (!(g_Task->option_flags & ACTOR_OPT_KEEP_FACING)) {
                             g_Task->direction_08 = (g_Game.members[0].facing ^ 4) & 7;

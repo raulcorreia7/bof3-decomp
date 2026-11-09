@@ -99,8 +99,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
         D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_OUTER);
         D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), GLOW_RING_INNER);
         D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_INNER);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
-                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
@@ -140,8 +139,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
         D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_OUTER);
         D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), GLOW_RING_INNER);
         D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_INNER);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
-                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         setRGB0(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB1(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB2(prim, 1, 1, 1);
@@ -221,8 +219,7 @@ MATCH void func_801F037C(void) {
 
     func_800AF2B4((BattleRange*)g_BattleEffectBattler, 0x60);
     g_Task->unk_10 = g_Task->unk_0C;
-    g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed,
-                            g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+    g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
 
     if (func_800AF66C((BattleRange*)g_BattleEffectBattler, 0xC000) != 0) {
         g_Task->header.step += 1;

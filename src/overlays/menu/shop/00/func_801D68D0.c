@@ -26,8 +26,7 @@ MATCH void func_801D68D0(s32 reset_slots) {
         Char_ClearStatus(id, STATUS_LOW_HP, 0);
         index += 1;
     } while ((index & BYTE_MASK) < 8U);
-    if ((SYS_TestFlag((u8*)g_Characters + 0xBE4, 4) != 0) && (SYS_TestFlag((u8*)g_Characters + 0xBE7, 4) == 0) &&
-        (((u8*)g_Characters)[0xB8B] < 0x1EU)) {
+    if ((SYS_TestFlag((u8*)g_Characters + 0xBE4, 4) != 0) && (SYS_TestFlag((u8*)g_Characters + 0xBE7, 4) == 0) && (((u8*)g_Characters)[0xB8B] < 0x1EU)) {
         ((u8*)g_Characters)[0xB8B] = 0;
     }
 }

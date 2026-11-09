@@ -77,12 +77,10 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
 /* The shared cursor viewed as the primitive it is about to receive. */
 /* The texture-page word getTPage builds, one macro per layout: GetGraphType() 1 and 2
  * keep the colour mode and blend in bits 9-10 and 7-8, the others in bits 7-8 and 5-6. */
-#define GFX_TPAGE_STANDARD(tp, abr, x, y)                                                                             \
-    ((((tp) & 0x3) << 7) | (((abr) & 0x3) << 5) | (((y) & 0x100) >> 4) | (((x) & 0x3FF) >> 6) | (((y) & 0x200) << 2))
-#define GFX_TPAGE_GRAPH_TYPE_1_2(tp, abr, x, y)                                             \
-    ((((tp) & 0x3) << 9) | (((abr) & 0x3) << 7) | (((y) >> 3) & 0x60) | (((x) >> 6) & 0xF))
+#define GFX_TPAGE_STANDARD(tp, abr, x, y)       ((((tp) & 0x3) << 7) | (((abr) & 0x3) << 5) | (((y) & 0x100) >> 4) | (((x) & 0x3FF) >> 6) | (((y) & 0x200) << 2))
+#define GFX_TPAGE_GRAPH_TYPE_1_2(tp, abr, x, y) ((((tp) & 0x3) << 9) | (((abr) & 0x3) << 7) | (((y) >> 3) & 0x60) | (((x) >> 6) & 0xF))
 
-#define GFX_CURSOR(type) ((type*)g_GfxPrimCursor)
+#define GFX_CURSOR(type)                        ((type*)g_GfxPrimCursor)
 
 /* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared
  * cursor and return it. */

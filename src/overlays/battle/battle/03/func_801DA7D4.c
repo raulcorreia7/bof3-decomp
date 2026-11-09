@@ -47,8 +47,7 @@ NON_MATCHING void func_801DA7D4(void) {
     sum = 0;
     i   = 0;
     do {
-        if ((D_801463BA == 0) ||
-            (g_Game.members[i].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
+        if ((D_801463BA == 0) || (g_Game.members[i].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
             if (func_801DB844(i) & BYTE_MASK) {
                 total        = sum;
                 entry        = &entries[total];

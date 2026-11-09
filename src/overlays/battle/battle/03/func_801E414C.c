@@ -26,17 +26,14 @@ MATCH void func_801E414C(void) {
                 }
             }
             action_type = *(u8*)&g_Battle.action_type;
-            if ((action_type == BATTLE_ACTION_ABILITY) &&
-                ((FIELD(u16, &D_801CA71C, g_Battle.action_id * 0x14) & 0x800) != 0) &&
-                ((func_801E4368() & BYTE_MASK) != 0) &&
+            if ((action_type == BATTLE_ACTION_ABILITY) && ((FIELD(u16, &D_801CA71C, g_Battle.action_id * 0x14) & 0x800) != 0) && ((func_801E4368() & BYTE_MASK) != 0) &&
                 ((FIELD(u8, &D_801CA718, g_Battle.action_id * 0x14) & ABILITY_TARGET_ALL) == 0)) {
                 g_Battle.state |= BATTLE_STATE_REPRISAL_PENDING;
             }
         }
         Battle_ClearSlotPending(FIELD(u8, g_Task, 0x05));
-        enemy = g_BattleCurrentEnemy;
-        flags =
-            enemy->turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
+        enemy                          = g_BattleCurrentEnemy;
+        flags                          = enemy->turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
         enemy->turn.damage_flags.value = flags & ~0x200;
         FIELD(s8, g_Task, 0x01)        = 2;
         FIELD(s8, g_Task, 0x02)        = 0;

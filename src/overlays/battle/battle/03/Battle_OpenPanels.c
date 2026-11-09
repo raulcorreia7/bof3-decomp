@@ -35,14 +35,14 @@ MATCH void Battle_OpenPanels(void) {
             D_80148332[0xD + battler].unk_01  = 0;
             /* FAKE: barrier keeps the row-byte load after the two panel byte stores. */
             FAKE_BARRIER();
-            first                          = g_Game.members[battler].facing;
-            index                          = first * 2 + g_Game.members[battler].chr.character_id * 8;
-            panel_x                        = g_Game.members[battler].unk_2E.half + g_BattlePanelOffsets[index];
-            panel_x                        = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 2] + panel_x;
-            D_80148332[battler + 0xD].x_02 = panel_x;
+            first                                = g_Game.members[battler].facing;
+            index                                = first * 2 + g_Game.members[battler].chr.character_id * 8;
+            panel_x                              = g_Game.members[battler].unk_2E.half + g_BattlePanelOffsets[index];
+            panel_x                              = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 2] + panel_x;
+            D_80148332[battler + 0xD].x_02       = panel_x;
             /* The y lookup reloads the row bytes; the x store may have changed them. */
-            index   = g_Game.members[battler].facing * 2 + g_Game.members[battler].chr.character_id * 8;
-            panel_y = g_Game.members[battler].unk_30.half + (g_BattlePanelOffsets + 1)[index] + 0xC;
+            index                                = g_Game.members[battler].facing * 2 + g_Game.members[battler].chr.character_id * 8;
+            panel_y                              = g_Game.members[battler].unk_30.half + (g_BattlePanelOffsets + 1)[index] + 0xC;
             D_80148332[battler + 0xD].battler_08 = battler;
             D_80148332[battler + 0xD].unk_06     = 0;
             D_80148332[battler + 0xD].unk_07     = 0;

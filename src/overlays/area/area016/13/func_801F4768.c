@@ -32,8 +32,7 @@ MATCH void func_801F4768(void) {
         COORD_INT(g_Task->pos.y) = -8;
     }
 
-    if (abs(g_AreaTargetCellX - COORD_INT(g_Task->pos.x)) >= 0x1A &&
-        abs(g_AreaTargetCellY - COORD_INT(g_Task->pos.y)) >= 0x1A) {
+    if (abs(g_AreaTargetCellX - COORD_INT(g_Task->pos.x)) >= 0x1A && abs(g_AreaTargetCellY - COORD_INT(g_Task->pos.y)) >= 0x1A) {
         return;
     }
 
@@ -59,15 +58,13 @@ MATCH void func_801F4768(void) {
     q2->vy   = y_high + size;
     q3->vx   = x_high + size;
     q3->vy   = y_high + size;
-    RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
-                  &flag);
+    RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     func_80155560(width | 0xBB509100, prim, 1);
     GFX_AddPrim(4, sizeof(POLY_FT4));
 
     for (row = 0; row < (2 - width) * 4 + 1; row++) {
         for (col = 0; col < (2 - width) * 4; col++) {
-            cell = Area_FindCellQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col,
-                                     COORD_INT(g_Task->pos.y) - (2 - width) + row);
+            cell = Area_FindCellQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col, COORD_INT(g_Task->pos.y) - (2 - width) + row);
             if (cell == NULL) {
                 continue;
             }
@@ -83,19 +80,14 @@ MATCH void func_801F4768(void) {
             prim->tpage      = getTPage(0, 2, 704, 256);
             setRGB0(prim, 40, 40, 40);
             prim->u0 = D_801F51D8[width] + col * D_801F51E0[width];
-            prim->v0 =
-                D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
+            prim->v0 = D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
             prim->u1 = D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col);
-            prim->v1 =
-                D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
+            prim->v1 = D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
             prim->u2 = D_801F51D8[width] + col * D_801F51E0[width];
-            prim->v2 = D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] -
-                                                D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
+            prim->v2 = D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
             prim->u3 = D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col);
-            prim->v3 = D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] -
-                                                D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
-            Area_AddCellPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16,
-                             (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
+            prim->v3 = D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
+            Area_AddCellPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16, (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
         }
     }
 }

@@ -30,8 +30,7 @@ MATCH void func_801E020C(void) {
                         *half |= BATTLE_STATE_REPRISAL_PENDING;
                     }
                 }
-                if ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) &&
-                    ((D_801CA71C[g_Battle.action_id].mask & 0x800) != 0) && ((func_801DD448() & BYTE_MASK) != 0) &&
+                if ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) && ((D_801CA71C[g_Battle.action_id].mask & 0x800) != 0) && ((func_801DD448() & BYTE_MASK) != 0) &&
                     ((D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_ALL) == 0)) {
                     g_Battle.state |= BATTLE_STATE_REPRISAL_PENDING;
                 }
@@ -40,8 +39,7 @@ MATCH void func_801E020C(void) {
             *half = (*half & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         }
         Battle_ClearSlotPending(g_Task->slot);
-        g_Game.current->u.turn.damage_flags.value &=
-            ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
+        g_Game.current->u.turn.damage_flags.value &= ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
             volatile u8* flag;

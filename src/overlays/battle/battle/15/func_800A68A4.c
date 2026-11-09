@@ -17,12 +17,9 @@ MATCH void func_800A68A4(void) {
         }
     }
     battler = &g_Battle.active_battler;
-    g_Game.members[*battler].u.turn.damage_flags.volatile_value &=
-        ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
-    g_Game.members[*battler].u.turn.action_flags.volatile_value &=
-        ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO |
-          COMBATANT_FLAG_SELECTION_BONUS | COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING |
-          COMBATANT_FLAG_SELECTED);
+    g_Game.members[*battler].u.turn.damage_flags.volatile_value &= ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
+    g_Game.members[*battler].u.turn.action_flags.volatile_value &= ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO | COMBATANT_FLAG_SELECTION_BONUS |
+                                                                     COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_SELECTED);
     func_800A9BD8(*battler);
     index                                                    = *battler;
     flags                                                    = g_Game.members[index].u.turn.action_flags.volatile_value;

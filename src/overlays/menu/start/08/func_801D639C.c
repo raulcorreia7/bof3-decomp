@@ -44,11 +44,9 @@ MATCH void func_801D639C(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
     one                                                         = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
-        (u16)(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y +
-              (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A * 0xD + 0x57));
-    input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A * 0xD + 0x57));
+    input                                                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         next_slot                                       = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;

@@ -12,8 +12,7 @@ MATCH void Battle_MergeEnemyPanels(void) {
     found = 0;
     for (i = 0; i < D_801EB5A8; i++) {
         for (j = 0; j < count; j++) {
-            if (g_BattleEnemyBattlers[D_801ED9B0[i].owner_index].enemy_id.byte.kind !=
-                g_BattleEnemyBattlers[entries[j].owner_index].enemy_id.byte.kind) {
+            if (g_BattleEnemyBattlers[D_801ED9B0[i].owner_index].enemy_id.byte.kind != g_BattleEnemyBattlers[entries[j].owner_index].enemy_id.byte.kind) {
                 continue;
             }
             if (D_801ED9B0[i].panel_id != entries[j].panel_id) {
