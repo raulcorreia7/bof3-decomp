@@ -1,8 +1,6 @@
 #include "game_01.h"
 
-/* At fade phase `2`, the handler arms a 360-tick delay and advances the
- * frontend state.
- */
+/* At fade phase `2`, the handler arms a 360-tick delay and advances the frontend state. */
 MATCH void Game_WaitTitleFade(void) {
     if (LOBU(g_UiTitleFadePhase) == 2u) {
         u16 state;

@@ -1,14 +1,12 @@
 #include "game_01.h"
 
-/* The eight frontend state handlers are indexed by the state byte in
- * Game_RunFrontend. The table ends where the glyph geometry records begin. */
+/* The eight frontend state handlers are indexed by the state byte in Game_RunFrontend. */
 static Callback s_TitleStates[8] = {
     Game_BeginTitle,        Game_WaitTitleFade, Game_AdvanceTitleFade, SND_StartTitleBGM,
     Game_StartSelectedGame, UI_WaitTitleInput,  UI_UpdateChoicePrompt, Game_LeaveTitle,
 };
 
-/* Initializes the frontend overlay state, then runs its perpetual input,
- * state-dispatch, and render/update loop. */
+/* Initializes the frontend overlay state, then runs its perpetual input, state-dispatch, and render/update loop. */
 /* func_801D0C04 */
 MATCH void Game_UpdateTitle(void) { /* func_801D0C04 */
     g_UiTitleState    = 0u;
@@ -24,8 +22,7 @@ MATCH void Game_UpdateTitle(void) { /* func_801D0C04 */
     }
 }
 
-/* Selects layout bank 2, requests DEMO.EMI, waits for the loader, seeds cue
- * 0x8D, then arms the local fade/window state. */
+/* Selects layout bank 2, requests DEMO.EMI, waits for the loader, seeds cue 0x8D. */
 /* func_801D0C90 */
 MATCH void Game_BeginTitle(void) { /* func_801D0C90 */
     u16 state;
