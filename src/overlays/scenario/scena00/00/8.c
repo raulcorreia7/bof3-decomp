@@ -96,10 +96,10 @@ MATCH void func_801F6E48(void) {
     work_cell = (SceneEffect*)work;
     adopted   = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
 
-    work_cell->pos.x             = adopted->pos.x.fixed;
-    work_cell->pos.y             = adopted->pos.y.fixed;
+    work_cell->pos.x       = adopted->pos.x.fixed;
+    work_cell->pos.y       = adopted->pos.y.fixed;
     work_cell->pos.z.fixed = adopted->pos.z.fixed;
-    g_GfxPrimCursor              = prim + 8;
+    g_GfxPrimCursor        = prim + 8;
     TASK_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
@@ -275,19 +275,19 @@ MATCH void func_801F74EC(void) {
     SceneLineColor color;
     s16            stop;
 
-    work                    = SCN_EFFECT;
-    color                   = D_801F6C04;
-    row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos.x;
-    next.x                  = point.x;
-    point.y                 = work->pos.y;
-    next.y                  = point.y;
-    point.z                 = work->pos.z;
-    next.z                  = point.z;
-    row_point.x             = row->pos.x.fixed;
-    row_point.y             = row->pos.y.fixed;
+    work              = SCN_EFFECT;
+    color             = D_801F6C04;
+    row               = (Actor*)&g_Actors[work->channel_06];
+    point.x           = work->pos.x;
+    next.x            = point.x;
+    point.y           = work->pos.y;
+    next.y            = point.y;
+    point.z           = work->pos.z;
+    next.z            = point.z;
+    row_point.x       = row->pos.x.fixed;
+    row_point.y       = row->pos.y.fixed;
     row_point.z.fixed = row->pos.z.fixed;
-    stop                    = 1;
+    stop              = 1;
     do {
         next.x = point.x;
         next.y = point.y + 0x8000;
@@ -320,16 +320,16 @@ MATCH void func_801F7670(void) {
     SceneLineColor color;
     s16            stop;
 
-    work                    = SCN_EFFECT;
-    color                   = D_801F6C04;
-    row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos.x;
-    point.y                 = work->pos.y;
-    point.z                 = work->pos.z;
-    row_point.x             = row->pos.x.fixed;
-    row_point.y             = row->pos.y.fixed;
+    work              = SCN_EFFECT;
+    color             = D_801F6C04;
+    row               = (Actor*)&g_Actors[work->channel_06];
+    point.x           = work->pos.x;
+    point.y           = work->pos.y;
+    point.z           = work->pos.z;
+    row_point.x       = row->pos.x.fixed;
+    row_point.y       = row->pos.y.fixed;
     row_point.z.fixed = row->pos.z.fixed;
-    stop                    = 1;
+    stop              = 1;
     do {
         next.x = point.x;
         next.y = point.y + 0x8000;
@@ -378,11 +378,11 @@ MATCH void func_801F78CC(void) {
  * LINE_F2 primitive.
  */
 MATCH void func_801F78EC(volatile SceneLinePoint to, volatile SceneLinePoint from, SceneLineColor color) {
-    LINE_F2*        prim;
-    SVECTOR         vec;
-    long            p;
-    long            flag;
-    Coord* point_z;
+    LINE_F2* prim;
+    SVECTOR  vec;
+    long     p;
+    long     flag;
+    Coord*   point_z;
 
     prim = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(prim);
@@ -922,10 +922,10 @@ MATCH void func_801F8D90(void) {
     work_cell = (SceneEffect*)work;
     first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
 
-    work_cell->pos.x             = first->pos.x.fixed;
-    work_cell->pos.y             = first->pos.y.fixed;
+    work_cell->pos.x       = first->pos.x.fixed;
+    work_cell->pos.y       = first->pos.y.fixed;
     work_cell->pos.z.fixed = first->pos.z.fixed;
-    g_GfxPrimCursor              = prim + 8;
+    g_GfxPrimCursor        = prim + 8;
     TASK_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;

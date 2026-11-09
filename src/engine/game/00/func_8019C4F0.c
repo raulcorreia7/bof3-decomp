@@ -10,13 +10,13 @@ s16       y;
 s32       stale_a2;
 s32       stale_a3;
 {
-    Coord           org;
-    u8*             map;
-    s16             ix;
-    s16             iy;
-    s16             dist;
-    s32             tile;
-    s16             counter;
+    Coord org;
+    u8*   map;
+    s16   ix;
+    s16   iy;
+    s16   dist;
+    s32   tile;
+    s16   counter;
 
     map = (u8*)MAP_BUNDLE_BASE;
     iy  = y;
@@ -27,10 +27,10 @@ s32       stale_a3;
     stale_a3 &= HALF_MASK;
     stale_a3 |= (u16)y << 16;
     org.part.fraction = 0;
-    org.part.integer = x;
-    dist           = Area_SampleHeight(org.fixed, stale_a3 & 0xFFFF0000);
-    tile           = Area_GetCellCode(ix, iy);
-    counter        = COORD_INT((g_Task)->pos.z);
+    org.part.integer  = x;
+    dist              = Area_SampleHeight(org.fixed, stale_a3 & 0xFFFF0000);
+    tile              = Area_GetCellCode(ix, iy);
+    counter           = COORD_INT((g_Task)->pos.z);
     if (counter - dist < 257 && (tile & 0xF0) == 0xF0) {
         return 1;
     }

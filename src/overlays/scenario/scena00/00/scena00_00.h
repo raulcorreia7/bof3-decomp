@@ -51,8 +51,8 @@ ASSERT_SIZE(SceneSampleRecord, 0x28);
 
 /* Field-space endpoints passed by value to func_801F78EC. */
 typedef struct SceneLinePoint {
-    s32            x;
-    s32            y;
+    s32   x;
+    s32   y;
     Coord z;
 } SceneLinePoint;
 

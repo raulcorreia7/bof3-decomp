@@ -20,6 +20,10 @@ ASSERT_SIZE(Coord, 0x04);
 #define COORD_INT(c)     ((c).part.integer)
 #define COORD_FRAC(c)    ((c).part.fraction)
 
+/* The integer part and the low 16 bits of a whole 16.16 word, as values: `FIX_INT(pos.z.fixed)`. */
+#define FIX_INT(x)       ((x) >> 16)
+#define FIX_FRAC(x)      ((x) & 0xFFFF)
+
 /* A whole number of cells as a 16.16 coordinate: `TO_COORD(12) + COORD_HALF` is 12.5. */
 #define TO_COORD(n)      ((n) << 16)
 #define COORD_HALF       0x8000
