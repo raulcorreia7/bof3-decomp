@@ -13,15 +13,14 @@ MATCH void func_801C2018(void) {
     u8* counter_word;
     u8  record_kind;
     u8  selector_thresholds[10];
-    u8* effect_bank_bytes;
+    u8* party_state;
     u8* gate_byte_ptr;
 
     memcpy(selector_thresholds, s_FairyConstructionThresholds, sizeof(selector_thresholds));
-    input_bits        = D_8014554C;
-    effect_bank_bytes = (u8*)EFFECT_BANK_80140000;
-    if ((SYS_TestFlag(input_bits, 4U) != 0) && (SYS_TestFlag(input_bits + 3, 4U) == 0) &&
-        (effect_bank_bytes[0x54F3] < 30U)) {
-        effect_bank_bytes[0x54F3] = (effect_bank_bytes[0x54F3] + 1);
+    input_bits  = D_8014554C;
+    party_state = (u8*)PARTY_STATE_PTR;
+    if ((SYS_TestFlag(input_bits, 4U) != 0) && (SYS_TestFlag(input_bits + 3, 4U) == 0) && (party_state[0x54F3] < 30U)) {
+        party_state[0x54F3] = (party_state[0x54F3] + 1);
     }
     if (g_SceneState.scenario_id >= 8) {
         bit_index     = 0xF6;

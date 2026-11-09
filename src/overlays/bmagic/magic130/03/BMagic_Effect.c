@@ -16,12 +16,12 @@ INCLUDE_ASM(func_801EEC70);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF18(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     D_801EFA4C[g_Task->header.step]();
     if ((g_Task->header.flags & ACTOR_FLAG_IN_USE) && (g_Task->header.step != 0)) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 /* blocker: work pointer lifetime; first diff: lui v1 at +0x20. */

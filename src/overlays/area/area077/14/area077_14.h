@@ -33,6 +33,8 @@ ASSERT_SIZE(AreaSlot, 0x34);
 #define AREA_SLOT_COUNT 64
 
 extern u8  D_801F6250[];
+extern u8  D_801F6278[];
+extern u8  D_801F627D[];
 extern u8  D_801F62EC[];
 extern u16 D_801F6B1C[];
 extern u8  D_801F6B28[];
@@ -58,6 +60,7 @@ void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y);
 extern void func_801F54B8(void);
 
 void Actor_InitSlot(s32 type);
+void func_801F462C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 /* func_801F3198 */
 void GFX_AddBlendDrawMode(u8 blend_mode);

@@ -10,6 +10,10 @@
 #include "area/spad.h"
 #include <rand.h>
 
+extern u8* D_80147B40;
+
+void func_801F3588(u8* dst, u8* src, u16* state);
+
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x04
 

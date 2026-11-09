@@ -51,7 +51,7 @@
 #define EMI_PLCHAR_SLOT_VAB_HEADER  0
 #define EMI_PLCHAR_SLOT_CUES        1
 #define EMI_PLCHAR_SLOT_VAB_BODY    2
-#define EMI_PLCHAR_SLOT_CONTAINER   3 /* PLxxx: the character bank, LZ77 */
+#define EMI_PLCHAR_SLOT_CONTAINER   3 /* PLxxx: the character sprites, LZ77 */
 #define EMI_PLCHAR_SLOT_PROGRAM     0 /* PLPxxx: the character program */
 #define EMI_PLCHAR_BANK             1
 

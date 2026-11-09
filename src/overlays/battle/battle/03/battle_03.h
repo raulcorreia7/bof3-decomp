@@ -692,7 +692,7 @@ extern void  func_801D6DE4(void);
 extern void  func_801D6E20(void);
 extern void  func_801D6EAC(void);
 extern void  func_801D6EEC(void);
-extern void  Battle_ReloadPartyBank(void);
+extern void  Battle_ReloadPartySprites(void);
 extern void  Battle_ReloadAreaAudio(void);
 /* func_801D716C */
 extern void  Battle_WaitAreaReload(void);

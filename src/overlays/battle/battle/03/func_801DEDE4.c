@@ -5,7 +5,7 @@
  */
 MATCH u8 func_801DEDE4(void) {
     volatile PartyMember* battle_work   = g_Game.current;
-    volatile u8*          battle_global = (u8*)(EFFECT_BANK_80140000);
+    volatile u8*          battle_global = (u8*)(PARTY_STATE_PTR);
 
     if (HAS_STATUS(*battle_work, STATUS_PARALYZED)) {
         return 1u;

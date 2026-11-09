@@ -39,11 +39,12 @@ typedef struct CaptureSize {
 
 /* One of the 16 slots at AREA_WORK, 0x1C bytes each. */
 typedef struct AreaBurstSlot {
-    u8  active;   /* 0x00 - 0 marks a free slot */
-    u8  kind;     /* 0x01 - selects the per-frame handler */
-    u8  life;     /* 0x02 - frames left */
-    u8  fade;     /* 0x03 */
-    s32 unk_04;   /* 0x04 */
+    u8  active; /* 0x00 - 0 marks a free slot */
+    u8  kind;   /* 0x01 - selects the per-frame handler */
+    u8  life;   /* 0x02 - frames left */
+    u8  fade;   /* 0x03 */
+    u8  unk_04; /* 0x04 */
+    u8  unk_05[3];
     s32 speed;    /* 0x08 */
     s32 unk_0C;   /* 0x0C */
     s32 distance; /* 0x10 */
@@ -52,6 +53,22 @@ typedef struct AreaBurstSlot {
 } AreaBurstSlot;
 
 ASSERT_SIZE(AreaBurstSlot, 0x1C);
+
+/* One of the slots at AREA_WORK, 0x38 bytes each: a streak drawn between two points. */
+typedef struct AreaStreakSlot {
+    u8  active;     /* 0x00 - 0 marks a free slot */
+    u8  kind;       /* 0x01 */
+    u8  life;       /* 0x02 */
+    u8  head_shade; /* 0x03 - shade at the first point */
+    u8  tail_shade; /* 0x04 - shade at the second point */
+    u8  unk_05[3];
+    s32 head[3]; /* 0x08 */
+    s32 unk_14;
+    s32 tail[3]; /* 0x18 */
+    u8  unk_24[0x14];
+} AreaStreakSlot;
+
+ASSERT_SIZE(AreaStreakSlot, 0x38);
 
 extern u8 D_801F6510;
 extern u8 D_801F6514;
@@ -74,6 +91,7 @@ extern u8 D_80146875;
 
 void func_801F40D0(s32 arg0);
 void func_801F42E8(void);
+void func_801F4220(AreaStreakSlot* slot);
 
 void func_801F40A4(void);
 void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
@@ -82,7 +100,7 @@ s32  func_801F4E7C(void);
 void func_801F48E8(void* arg0, void* arg1, s32 arg2);
 void func_801F4BC0(void* slot);
 void func_801F4FEC(AreaBurstSlot* slot);
-void func_801F4DBC(s32 arg0);
+void func_801F4DBC(AreaBurstSlot* slot);
 void func_801F5580(s32 arg0);
 
 extern u8          D_801F6520;

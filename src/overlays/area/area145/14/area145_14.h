@@ -29,4 +29,28 @@ void func_801F332C(u8* first, u8* second);
 /* The draw step that reads the three-word work position. */
 void func_801F3980(u32* pos);
 
+/* The two corner cells of each of the four areas the step covers. */
+typedef struct CellBox {
+    u8 x1;
+    u8 y1;
+    u8 x2;
+    u8 y2;
+} CellBox;
+
+extern CellBox  D_801F543C[4];
+extern Callback D_801F544C[];
+void            func_801F2F30(s32* first, s32* second);
+
+/* The actor row table and the per-actor 16-byte turn records. */
+extern Actor D_80147A58[];
+extern s8    D_80147CB9[];
+extern s8    D_80147CBA[];
+extern s32   D_80147CC4[];
+
+extern SceneTrigger D_801F5CC0[];
+extern u8           D_80144EF0[];
+
+/* g_Game.current */
+extern PartyMember* D_80146250;
+
 #endif

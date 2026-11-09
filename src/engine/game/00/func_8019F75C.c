@@ -7,7 +7,7 @@ MATCH void func_8019F75C(void) {
     s32 index;
     s32 limit;
 
-    dst   = MEM_PTR(u8, BATTLE_SCRIPT_BANK);
+    dst   = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
     limit = *g_Task->range_54.table * 0x28;
     index = 0;
     if (limit > 0) {
@@ -18,7 +18,7 @@ MATCH void func_8019F75C(void) {
             dst += 1;
         } while (index < limit);
     }
-    g_Task->script = MEM_PTR(u8, BATTLE_SCRIPT_BANK);
+    g_Task->script = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
     func_8019D648();
     func_8019D9C0();
     g_Task->timer = 16;
