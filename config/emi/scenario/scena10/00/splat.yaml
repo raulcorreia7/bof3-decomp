@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, D_801F6C00]
       - [0x4, bin, D_801F6C04]
-      - [0x370, c, 370]
+      - [0x368, c, 368]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

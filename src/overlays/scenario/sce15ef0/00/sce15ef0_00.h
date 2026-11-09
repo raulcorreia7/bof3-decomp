@@ -13,9 +13,7 @@
 /* The overlay's scratchpad work area: the scenario effect layout (fields at
  * +0x01, +0x09, +0x0C, +0x2E, +0x34 and +0x5D match scena00's SceneEffect). */
 typedef struct Sce15ef0Work {
-    u8       pad_00[0x01];
-    u8       step;  /* +0x01 */
-    u8       state; /* +0x02 */
+    TaskHeader header;
     u8       pad_03[0x06];
     u8       timer; /* +0x09 */
     u8       pad_0A[0x02];

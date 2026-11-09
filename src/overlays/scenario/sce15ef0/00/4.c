@@ -16,7 +16,7 @@ MATCH void func_801D0C48(void) {
     g_Task->origin_x   = 0;
     g_Task->color_r    = 0;
     g_Task->timer      = 8;
-    g_Task->step += 1;
+    g_Task->header.mode += 1;
 }
 
 MATCH void func_801D0CEC(void) {
@@ -29,7 +29,7 @@ MATCH void func_801D0CEC(void) {
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
-        g_Task->step += 1;
+        g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
     }
 }
@@ -41,7 +41,7 @@ MATCH void func_801D0DB0(void) {
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->color_g = 0;
         g_Task->timer   = 4;
-        g_Task->step += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -57,7 +57,7 @@ MATCH void func_801D0F44(void) {
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
-        g_Task->step += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -68,7 +68,7 @@ MATCH void func_801D101C(void) {
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
-        g_Task->step += 1;
+        g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 14));
     }
 }
@@ -87,7 +87,7 @@ MATCH void func_801D10C4(void) {
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer    = 16;
         g_Task->origin_x = 0x40;
-        g_Task->step += 1;
+        g_Task->header.mode += 1;
     }
 }
 

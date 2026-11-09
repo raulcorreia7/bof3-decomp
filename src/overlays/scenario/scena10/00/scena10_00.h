@@ -28,7 +28,7 @@ extern u16       D_801FE974[3];
 /* D_801FE97C */
 extern SceneFunc g_SceneActorDispatch[];
 
-/* The party lookups of 370.c: return the value paired with the first id in `ids` that a party member
+/* The party lookups of 368.c: return the value paired with the first id in `ids` that a party member
  * holds, else `none`. The members differ only in table and count. Every change must verify every member. */
 #define SCENA10_PARTY_LOOKUP(count, ids, values, none)                        \
     do {                                                                      \
