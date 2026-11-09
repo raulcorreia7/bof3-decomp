@@ -1,7 +1,4 @@
-/* Draws a filled disc as a fan of 32 semi-transparent Gouraud triangles around
- * (x, y) with the given radius; the centre takes center_shade and the
- * rim takes rim_shade. One definition shared by the several overlays; every change
- * here must verify every member. */
+/* Draws a filled disc as a fan of 32 semi-transparent Gouraud triangles around (x, y) with the given radius. */
 /* func_801F8C04 (scena03), func_801F2F04 (area032), func_801F3D90 (area108) */
 MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_shade) {
     POLY_G3* packet;

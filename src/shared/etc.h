@@ -1,8 +1,7 @@
 #ifndef ETC_FAMILY_H
 #define ETC_FAMILY_H
 
-/* Declarations shared by two or more etc images; an image header that
- * reads one includes this file. */
+/* an image header that reads one includes this file. */
 
 #include "game.h"
 #include "sys/cd.h"
@@ -152,7 +151,7 @@ int         abs(int); /* SDK libc, no staged abs.h */
 
 extern s32 D_801457AC;
 
-/* function-local data for func_801729D0 */
+/* function-local data for func_801729D0. */
 extern u8 D_8018E9A1;
 
 extern s32 D_8018E9A4;

@@ -1,10 +1,4 @@
-/* Starts one spin-effect record: copies the actor position into the origin,
- * turns the two vertex offsets (a point at AREA_SPIN_RADIUS on the unit circle
- * and its mirror) by a random rotation, picks the scale and sets the angles
- * and fade. One definition shared by the area overlays; each image sets
- * AREA_SPIN_RADIUS, AREA_SPIN_PITCH (the random pitch expression),
- * AREA_SPIN_SCALE_MASK, AREA_SPIN_SCALE_BASE and AREA_SPIN_FADE in its header.
- * Every change here must verify every member image. */
+/* Starts one spin-effect record. */
 MATCH void Area_InitSpin(void* spin) {
     WorldSpin* work;
     Actor*     scratch;

@@ -1,7 +1,4 @@
-/* Average two 12-bit angles along the shorter arc: order the pair, then use the
- * plain midpoint below half a turn and the wrapped midpoint at or above it.
- * One definition shared by the scenario and world overlays; every change here
- * must verify every member address. */
+/* Average two 12-bit angles along the shorter arc. */
 /* func_801F35B0 (area088), func_801F8F40 (scena07), func_801F9420 (scena08) */
 MATCH u32 AngleAverage12(u16 a, u16 b) {
     u16 t;
