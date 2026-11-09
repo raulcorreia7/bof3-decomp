@@ -25,7 +25,7 @@ typedef enum ActorScriptStageOp {
 } ActorScriptStageOp;
 
 /* nonmatching unmeasured: tried 70.14%: single return value exit via break; retail keeps base pointer s2 for base[1]
- * (4(s2)); gcc folds it to the lead member's y position. */
+ * (4(s2)); gcc folds it to the D_80145EC8 symbol. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value) {
     u8    byte;
@@ -69,7 +69,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
         case ACTOR_SCRIPT_STAGE_CAMERA_SCROLL: {
             s32* base;
 
-            base = &g_Game.members[0].pos.x.fixed;
+            base = &D_80145EC4;
             if ((g_AreaScrollTargetX != base[0]) || (g_AreaScrollTargetY != base[1])) {
                 delta_x = g_AreaScrollTargetX - base[0];
                 delta_x = ABS(delta_x);

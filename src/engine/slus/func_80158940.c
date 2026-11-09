@@ -45,8 +45,8 @@ NON_MATCHING void func_80158940(void* obj) {
         height       = (*cursor >> 2) & 0x7F;
         layer_offset = 0;
         for (; layer < 3; layer++) {
-            point_x = (FIELD(s32, &g_Game.members[0].pos.x.fixed, layer_offset) + bias) >> 16;
-            point_y = (FIELD(s32, &g_Game.members[0].pos.y.fixed, layer_offset) + bias) >> 16;
+            point_x = (FIELD(s32, &D_80145EC4, layer_offset) + bias) >> 16;
+            point_y = (FIELD(s32, &D_80145EC8, layer_offset) + bias) >> 16;
             if ((point_x >= x) && (point_x < (x + width)) && (point_y >= y) && (point_y < (y + height))) {
                 if ((*cursor & 1) != 0) {
                     *marker |= 1;

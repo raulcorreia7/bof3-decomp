@@ -27,17 +27,15 @@ NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) 
         FIELD(volatile u8, &g_Game.members[0].status.field.flags_12C.u8_value, off_a) =
             FIELD(volatile u8, &g_Game.members[0].status.field.flags_12C.u8_value, off_b);
         FIELD(volatile u8, &g_Game.members[0].status.field.flags_12C.u8_value, off_b) = val_b;
-        val_w = FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_a);
-        FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_a) =
-            FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_b);
-        FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_b) = val_w;
-        val_w = FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_a);
-        FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_a) =
-            FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_b);
-        FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_b) = val_w;
-        val_w                                                      = FIELD(volatile s32, &D_80145ECC, off_a);
-        FIELD(volatile s32, &D_80145ECC, off_a)                    = FIELD(volatile s32, &D_80145ECC, off_b);
-        FIELD(volatile s32, &D_80145ECC, off_b)                    = val_w;
+        val_w                                   = FIELD(volatile s32, &D_80145EC4, off_a);
+        FIELD(volatile s32, &D_80145EC4, off_a) = FIELD(volatile s32, &D_80145EC4, off_b);
+        FIELD(volatile s32, &D_80145EC4, off_b) = val_w;
+        val_w                                   = FIELD(volatile s32, &D_80145EC8, off_a);
+        FIELD(volatile s32, &D_80145EC8, off_a) = FIELD(volatile s32, &D_80145EC8, off_b);
+        FIELD(volatile s32, &D_80145EC8, off_b) = val_w;
+        val_w                                   = FIELD(volatile s32, &D_80145ECC, off_a);
+        FIELD(volatile s32, &D_80145ECC, off_a) = FIELD(volatile s32, &D_80145ECC, off_b);
+        FIELD(volatile s32, &D_80145ECC, off_b) = val_w;
     }
     val_w                                                 = FIELD(volatile s32, &g_Game.members[0].unk_0C, off_a);
     FIELD(volatile s32, &g_Game.members[0].unk_0C, off_a) = FIELD(volatile s32, &g_Game.members[0].unk_0C, off_b);

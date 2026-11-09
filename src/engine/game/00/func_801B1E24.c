@@ -53,8 +53,7 @@ NON_MATCHING void func_801B1E24(void) {
                      0)) {
                     goto found; /* first position test matched: run the row mark */
                 }
-                if (!(func_801B1B2C(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, value & BYTE_MASK,
-                                    ((BattleWorkSlot*)g_Task)->speed_70) &
+                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, ((BattleWorkSlot*)g_Task)->speed_70) &
                       0xFF)) {
                     goto next; /* fallback position rejected: next row */
                 }

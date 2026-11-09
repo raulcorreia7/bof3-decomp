@@ -26,8 +26,8 @@ NON_MATCHING s32 func_801BC760(void) {
     PartyMember* saved;
 
     dir    = g_Task->direction_08;
-    goal_x = g_Game.members[0].pos.x.fixed + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09);
-    goal_y = g_Game.members[0].pos.y.fixed + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
+    goal_x = D_80145EC4 + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09);
+    goal_y = D_80145EC8 + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
     if (g_Game.members[g_Task->unk_05 ^ 3].u.field.mode_12B.u8_value != 9) {
         if (g_Task->unk_05 == 2) {
             if (D_80145FD6 == 0) {
@@ -117,8 +117,8 @@ NON_MATCHING s32 func_801BC760(void) {
         if (*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN) {
             saved          = g_Game.current;
             g_Game.current = g_Game.members;
-            near_a = (g_Game.members[0].pos.x.fixed + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09)) & ~0x7FFF;
-            near_b = (g_Game.members[0].pos.y.fixed + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09)) & ~0x7FFF;
+            near_a         = (D_80145EC4 + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09)) & ~0x7FFF;
+            near_b         = (D_80145EC8 + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09)) & ~0x7FFF;
             if (!(func_801C3E40(near_a, near_b, g_Task->state_70.byte, Area_ReadHeight(near_a, near_b)) & BYTE_MASK)) {
                 g_Game.current = saved;
                 *(u8*)g_Task |= ACTOR_FLAG_HIDDEN;
