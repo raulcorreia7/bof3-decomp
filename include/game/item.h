@@ -172,6 +172,50 @@ ASSERT_OFFSET(Accessory, price, 0x12);
 
 #define ACCESSORY_OBJECT(name, equipability, header_flags, icon, weight, description, price) {{name, (equipability), (header_flags)}, (icon), (weight), (description), (price)}
 
+/* The g_GameShopStock index a shop counter opens, from the area scripts that spawn it. */
+typedef enum ShopId {
+    SHOP_MCNEIL_EQUIPMENT               = 0,
+    SHOP_MCNEIL_GENERAL                 = 1,
+    SHOP_WYNDIA_LOWER_WEAPONS           = 2,
+    SHOP_WYNDIA_LOWER_ARMOR             = 3,
+    SHOP_WYNDIA_LOWER_ACCESSORIES       = 4,
+    SHOP_WYNDIA_LOWER_ITEMS             = 5,
+    SHOP_GENMEL_EQUIPMENT               = 6,
+    SHOP_GENMEL_ITEMS                   = 7,
+    SHOP_MOMO_TOWER_OUTSIDE_GENERAL     = 8,
+    SHOP_9                              = 9,
+    SHOP_CONTEST_WEAPONS                = 10,
+    SHOP_CONTEST_ITEMS                  = 11,
+    SHOP_CONTEST_ARMOR                  = 12,
+    SHOP_RHAPALA_ENTRANCE_EQUIPMENT     = 13,
+    SHOP_RHAPALA_ENTRANCE_GENERAL       = 14,
+    SHOP_URKAN_TAPA_EQUIPMENT           = 15,
+    SHOP_URKAN_TAPA_GENERAL             = 16,
+    SHOP_17                             = 17,
+    SHOP_18                             = 18,
+    SHOP_19                             = 19,
+    SHOP_20                             = 20,
+    SHOP_21                             = 21,
+    SHOP_22                             = 22,
+    SHOP_SYN_CITY_EQUIPMENT             = 23,
+    SHOP_SYN_CITY_GENERAL               = 24,
+    SHOP_JUNK_TOWN_WEAPONS              = 25,
+    SHOP_JUNK_TOWN_GENERAL              = 26,
+    SHOP_DAUNA_MINE_ADULT_ITEMS         = 27,
+    SHOP_CLIFF_GAIST_GENERAL            = 28,
+    SHOP_KOMBINAT_EQUIPMENT             = 29,
+    SHOP_KOMBINAT_GENERAL               = 30,
+    SHOP_DRAGNIER_SURFACE_ITEMS         = 31,
+    SHOP_OASIS_GENERAL                  = 32,
+    SHOP_CAER_XHAN_HONEY_ROOM_EQUIPMENT = 33,
+    SHOP_34                             = 34,
+    SHOP_PARCH_EQUIPMENT                = 35,
+    SHOP_PARCH_GENERAL                  = 36,
+    SHOP_RHAPALA_CHECKPOINT_ITEMS       = 37,
+    SHOP_WYNDIA_UPPER_ITEMS             = 38,
+    SHOP_SYN_CITY_EQUIPMENT_2           = 39,
+} ShopId;
+
 typedef struct ShopItemRef {
     u8 item_type; /* ItemCategory */
     u8 item_index;
