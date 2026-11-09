@@ -11,7 +11,6 @@ MATCH s32 func_801CEA10(s32 arg0) {
     register s32 s1 asm("$17");
     register s32 v0 asm("$2");
     register s32 v1 asm("$3");
-    PartyMember* temp;
     
     v0 = g_PartySize;
     if (s0 >= v0) {
@@ -25,11 +24,10 @@ MATCH s32 func_801CEA10(s32 arg0) {
     s2 = v0 << 2;
     s1 = 0x140;
 L801CEA54:
-    temp = (PartyMember*)((u8*)&g_Game + s1);
     v0 = func_801BDD58(*(s32*)(D_80143FFC + s2), 
                        *(s32*)(D_80144000 + s2), 
                        (*(s16*)(D_80144006 + s2)) + 0x200, 
-                       1, (Actor*)temp);
+                       1, (Actor*)((u8*)&g_Game + s1));
     if (!(v0 & 0xFF)) {
         v0 = g_PartySize;
         s0 = s0 + 1;
