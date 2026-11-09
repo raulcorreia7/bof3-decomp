@@ -48,12 +48,12 @@ MATCH void func_801DE944(void) {
             } while (i < g_PartySize);
         }
         if (mode != 2 && g_Game.members[0].chr.character_id == 2) {
-            D_80145EC4 += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4) << 15;
-            D_80145EC8 += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4 + 2) << 15;
+            g_Game.members[0].pos.x.fixed += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4) << 15;
+            g_Game.members[0].pos.y.fixed += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4 + 2) << 15;
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
-            g_AreaScrollTargetX = D_80145EC4;
-            g_AreaScrollTargetY = D_80145EC8;
+            g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+            g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
             func_80153DE8();
         }
     } else {
@@ -76,16 +76,16 @@ MATCH void func_801DE944(void) {
             src   = 0;
             dst   = 0;
             for (; i < count; i++) {
-                FIELD(s32, &D_80145EC4, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].x, src);
-                FIELD(s32, &D_80145EC8, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].y, src);
-                FIELD(s32, &D_80145ECC, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].z, src);
+                FIELD(s32, &g_Game.members[0].pos.x.fixed, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].x, src);
+                FIELD(s32, &g_Game.members[0].pos.y.fixed, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].y, src);
+                FIELD(s32, &g_Game.members[0].pos.z.fixed, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].z, src);
                 src += 0x10;
                 dst += BATTLE_PARTY_STRIDE;
             }
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
-            g_AreaScrollTargetX = D_80145EC4;
-            g_AreaScrollTargetY = D_80145EC8;
+            g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+            g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
             func_80153DE8();
         }
     }
@@ -97,15 +97,15 @@ MATCH void func_801DE944(void) {
             row      = 0;
             do {
                 dst                          = row;
-                FIELD(s32, &D_80145EC4, dst) = scroll_x;
-                FIELD(s32, &D_80145EC8, dst) = scroll_y;
-                FIELD(s32, &D_80145ECC, dst) = Area_SampleHeight(scroll[0], scroll[1]) << 16;
+                FIELD(s32, &g_Game.members[0].pos.x.fixed, dst) = scroll_x;
+                FIELD(s32, &g_Game.members[0].pos.y.fixed, dst) = scroll_y;
+                FIELD(s32, &g_Game.members[0].pos.z.fixed, dst) = Area_SampleHeight(scroll[0], scroll[1]) << 16;
                 i++;
                 row += BATTLE_PARTY_STRIDE;
             } while (i < g_Game.party_size);
         }
-        g_AreaScrollTargetX = D_80145EC4;
-        g_AreaScrollTargetY = D_80145EC8;
+        g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+        g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
         func_80153DE8();
     }
     UI_SetMode(UI_MODE_FAST_FADE_IN);
