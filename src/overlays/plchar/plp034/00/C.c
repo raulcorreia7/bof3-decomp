@@ -68,7 +68,7 @@ INCLUDE_ASM(func_801CFC7C);
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
-INCLUDE_ASM(func_801CFE14);
+#include "overlays/plchar/Char_ClearPanelModeIfUnused.h"
 
 INCLUDE_ASM(func_801CFEAC);
 

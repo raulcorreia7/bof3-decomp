@@ -30,3 +30,7 @@ extern Callback D_801CFDCC[];
 void Actor_BeginScript(s32 raw_selector, s32 raw_code);
 
 #endif
+
+extern u8 D_80143FFC[];
+extern u8 D_80144000[];
+extern u8 D_80144006[];

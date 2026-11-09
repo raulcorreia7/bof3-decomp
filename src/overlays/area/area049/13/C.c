@@ -1,5 +1,6 @@
 #include "area049_13.h"
 #include "area/spad.h"
+#include "overlays/area/AreaSprite.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -32,9 +33,33 @@ INCLUDE_ASM(func_801172D0);
 
 INCLUDE_ASM(func_80117410);
 
-INCLUDE_ASM(func_80117514);
+MATCH void func_80117514(void) {
+    AreaSprite* work = D_801181DC;
+    u8          count;
 
-INCLUDE_ASM(func_8011759C);
+    count = work->flags_02 - 1;
+    work->origin.x += work->normal.vx * 2;
+    work->origin.y += work->normal.vy * 2;
+    work->flags_02 = count;
+    work->half_size += 0x80;
+    if (!(count & BYTE_MASK)) {
+        ((AreaSprite*)D_801181DC)->flags_02 = 0x40;
+        ((AreaSprite*)D_801181DC)->flags_01++;
+    }
+}
+
+MATCH void func_8011759C(void) {
+    AreaSprite* work = D_801181DC;
+    u8          count;
+
+    work->origin.x += work->normal.vx;
+    work->flags_03--;
+    work->origin.y += work->normal.vy;
+    count = --((AreaSprite*)D_801181DC)->flags_02;
+    if (!(count & BYTE_MASK)) {
+        ((AreaSprite*)D_801181DC)->flags = 0;
+    }
+}
 
 MATCH void func_80117610(void) {
     SYS_DISPATCH_TASK(D_8011819C, 1, g_Task);
@@ -107,7 +132,15 @@ MATCH void func_80117A74(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_80117ACC);
+MATCH void func_80117ACC(void) {
+    if (SYS_TestFlag(D_80144ED0, 0x3E) != 0) {
+        g_Task->timer++;
+        func_80117B60(0x80 - (g_Task->timer >> 1));
+        if (g_Task->timer >= 0x80) {
+            func_80196070();
+        }
+    }
+}
 
 INCLUDE_ASM(func_80117B60);
 

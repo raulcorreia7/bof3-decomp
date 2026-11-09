@@ -126,6 +126,7 @@ typedef struct BateState {
 
 extern s8        D_80148659;
 extern BateState D_801D8ED4;
+extern u8        D_801D86F8[];
 
 s32  Item_Count(u8 category, u8 item, u8 mode);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);

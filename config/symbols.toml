@@ -2861,6 +2861,7 @@ Char_AdvancePaletteScript = { addr = 0x801CF71C, type = "func", source = "Advanc
 Char_StartFacingScript = { addr = 0x801CF84C, type = "func", source = "Selects the script of direction_08 once Actor_StepAnimOnce reports ready and adds 1 to byte 0x03." }
 Char_ClearSlotRefIfUnused = { addr = 0x801CF8AC, type = "func", source = "When the actor slot in byte 0x06 is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears byte 0x06 and lowers byte 0x03 by 2." }
 Char_UpdateLinkedFacing = { addr = 0x801CFCF4, type = "func", source = "Requests the script of direction_08 and sets byte 0x03 to 2 once Actor_StepAnimOnce reports ready; otherwise counts byte 0x0A down and at 0 copies direction_08 and option_flags into the linked actor slot and plays cue 0x10B." }
+Char_ClearPanelModeIfUnused = { addr = 0x801CFE14, type = "func", source = "Clears the panel mode byte when the actor slot is unused and the camera is not moving, then runs Actor_StepAnimLoop." }
 Char_StartTurnRei = { addr = 0x801D0094, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Rei, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScript = { addr = 0x801D0160, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
 
@@ -2964,6 +2965,7 @@ Char_AdvancePaletteScript = { addr = 0x801CE9F4, type = "func", source = "Advanc
 Char_StartFacingScript = { addr = 0x801CEB24, type = "func", source = "Selects the script of direction_08 once Actor_StepAnimOnce reports ready and adds 1 to byte 0x03." }
 Char_ClearSlotRefIfUnused = { addr = 0x801CEB84, type = "func", source = "When the actor slot in byte 0x06 is free or has header.mode (byte 0x01) 1 and g_AreaCameraMoving is 0, clears byte 0x06 and lowers byte 0x03 by 2." }
 Char_UpdateLinkedFacing = { addr = 0x801CEFCC, type = "func", source = "Requests the script of direction_08 and sets byte 0x03 to 2 once Actor_StepAnimOnce reports ready; otherwise counts byte 0x0A down and at 0 copies direction_08 and option_flags into the linked actor slot and plays cue 0x10B." }
+Char_ClearPanelModeIfUnused = { addr = 0x801CF0EC, type = "func", source = "Clears the panel mode byte when the actor slot is unused and the camera is not moving, then runs Actor_StepAnimLoop." }
 Char_StartTurn = { addr = 0x801CF36C, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CF438, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
 
