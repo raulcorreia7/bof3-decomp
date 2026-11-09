@@ -85,6 +85,4 @@ MATCH void func_801EF7A0(void) {
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801EF850 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

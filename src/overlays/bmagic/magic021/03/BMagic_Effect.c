@@ -114,6 +114,4 @@ INCLUDE_ASM(func_801EFA48);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801EFDB0 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"
