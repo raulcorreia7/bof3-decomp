@@ -5,7 +5,7 @@ MATCH void func_801F2F98(void) {
     u8* effect;
 
     i = 0;
-    if (g_Task->param.turn_step != 0) {
+    if (g_Task->param.unk_0B != 0) {
         func_801F385C();
     }
     do {
