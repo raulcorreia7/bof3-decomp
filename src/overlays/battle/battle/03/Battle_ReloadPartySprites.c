@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void Battle_ReloadPartyBank(void) {
+MATCH void Battle_ReloadPartySprites(void) {
     u8 i;
 
     i = 0u;
