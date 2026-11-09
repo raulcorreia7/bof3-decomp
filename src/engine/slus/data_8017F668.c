@@ -135,7 +135,7 @@ const u32 D_8017F8E0[4] = {
 };
 
 const ObjectFunc g_BundleOpcodes[7] = {
-    (ObjectFunc)Area_ReadTintRecord,  func_801583BC, (ObjectFunc)Area_WriteCellRecord, (ObjectFunc)Area_LoadPaletteBank,
+    (ObjectFunc)Area_ReadTintRecord,  func_801583BC, (ObjectFunc)Area_WriteCellRecord, (ObjectFunc)Area_AnimateClut,
     (ObjectFunc)Area_DrawGouraudQuad, func_80158830, func_80158940,
 };
 

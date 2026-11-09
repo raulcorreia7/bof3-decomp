@@ -207,7 +207,7 @@ void         Area_WriteCellRecord(u8* cell);
 /* func_801584A4 */
 extern void  Area_RunBundleRecords(void);
 /* func_80158550 */
-void         Area_LoadPaletteBank(u8* palette_list);
+void         Area_AnimateClut(u8* palette_list);
 /* func_8015864C */
 void         Area_DrawGouraudQuad(u32* record);
 /* func_80158B24 */

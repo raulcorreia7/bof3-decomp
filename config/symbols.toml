@@ -5649,7 +5649,7 @@ Area_ReadTintRecord = { addr = 0x801581B4, type = "func", source = "Reads a pale
 Area_ApplyPaletteTint = { addr = 0x8015822C, type = "func", source = "Offsets the selected palette planes by the signed RGB deltas." }
 Area_WriteCellRecord = { addr = 0x80158400, type = "func", source = "Writes a cell record of the area bundle." }
 Area_RunBundleRecords = { addr = 0x801584A4, type = "func", source = "Runs the records of the area bundle." }
-Area_LoadPaletteBank = { addr = 0x80158550, type = "func", source = "Loads a palette bank of the area." }
+Area_AnimateClut = { addr = 0x80158550, type = "func", source = "Copies the current frame of an area CLUT animation into the palette." }
 Area_DrawGouraudQuad = { addr = 0x8015864C, type = "func", source = "Draws a Gouraud-shaded quadrangle from the record when inside the draw area." }
 Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area map records to cells." }
 Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }

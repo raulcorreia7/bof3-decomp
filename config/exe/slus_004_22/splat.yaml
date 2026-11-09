@@ -323,7 +323,7 @@ segments:
       - [0xC23BC, c, func_801583BC]
       - [0xC2400, c, Area_WriteCellRecord]
       - [0xC24A4, c, Area_RunBundleRecords]
-      - [0xC2550, c, Area_LoadPaletteBank]
+      - [0xC2550, c, Area_AnimateClut]
       - [0xC264C, c, Area_DrawGouraudQuad]
       - [0xC2830, c, func_80158830]
       - [0xC2940, c, func_80158940]
