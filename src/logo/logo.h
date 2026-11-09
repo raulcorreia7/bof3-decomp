@@ -1,15 +1,13 @@
 #ifndef LOGO_H
 #define LOGO_H
 
-/* The logo player's local declarations: its retail entry points, the stream and
- * MDEC state, and the data symbols its units share. Only this executable
- * includes the file. */
+/* The logo player's local declarations. */
 
 #include "game.h"
 #include "sys/intr.h"
 #include <libpress.h>
 
-/* retail addresses */
+/* retail addresses. */
 #define LOGO_WORK_BASE 0x8003B800 /* the work area Logo_Init carves at +0x2D00/+0xA500/+0x10480 */
 
 /* Data, in address order. */
