@@ -59,7 +59,23 @@ MATCH void func_80117818(void) {
     }
 }
 
-INCLUDE_ASM(func_80117864);
+MATCH void func_80117864(void* arg0) {
+    u8* p = (u8*)arg0;
+    u8* a = (u8*)g_Task;
+    s32 v;
+
+    *(s32*)(p + 4) = *(s32*)(a + 0x34);
+    *(s32*)(p + 8) = *(s32*)(a + 0x38);
+    v = *(s32*)(a + 0x3C);
+    p[0] = 1;
+    *(u16*)(p + 0x24) = 0x80;
+    p[3] = 0xC0;
+    p[0x26] = 2;
+    *(s32*)(p + 0x1C) = 0;
+    p[1] = 0;
+    p[2] = 0x20;
+    *(s32*)(p + 0xC) = v;
+}
 
 #include "overlays/area/Area_FindFreeWorkRow.h"
 
