@@ -29,6 +29,7 @@ extern Callback D_801F5F7C[];
 extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
 extern void (*D_801F5FBC[])(void* slot);
+
 /* The screen-capture size for one table row. */
 typedef struct CaptureSize {
     s16 w;
@@ -66,5 +67,8 @@ void func_801F48E8(void* arg0, void* arg1, s32 arg2);
 void func_801F4BC0(void* slot);
 void func_801F4DBC(s32 arg0);
 void func_801F5580(s32 arg0);
+
+extern u8          D_801F6520;
+extern CaptureSize D_801F5F5C[];
 
 #endif

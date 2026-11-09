@@ -68,4 +68,8 @@ void func_801F34B8(void);
 
 void func_801F4160(s32 arg0, s32 arg1);
 
+extern AreaPosEntry D_801F637C[];
+
+extern AreaPosEntry D_801F63A0[];
+
 #endif

@@ -1,8 +1,5 @@
 #include "area098_13.h"
 
-extern u8          D_801F6520;
-extern CaptureSize D_801F5F5C[];
-
 MATCH void func_801F2E98(void) {
     Actor* actor = g_Task;
     RECT   rect;

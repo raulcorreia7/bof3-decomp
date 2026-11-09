@@ -7,12 +7,12 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-extern u8  D_801F3DAC[];
-extern u16 D_801F4494[];
-extern u16 D_801F4498[];
-extern u16 D_801F449C[];
-extern s32 D_801F44A0;
-extern s8* D_801F44A4;
+extern u8        D_801F3DAC[];
+extern u16       D_801F4494[];
+extern u16       D_801F4498[];
+extern u16       D_801F449C[];
+extern AreaRing* D_801F44A0;
+extern s8*       D_801F44A4;
 
 /* func_801F30B0 */
 void Area_ProjectRing(AreaRing* ring);
