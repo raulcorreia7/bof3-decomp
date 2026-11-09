@@ -23,6 +23,7 @@
 /* The party position in 16.16 fixed point. */
 /* The payload includes the per-state handler tables. */
 extern u8 D_801F57BC[];
+extern u8 D_801F5990[];
 
 extern void func_801F3994(void);
 
