@@ -6,6 +6,7 @@
 
 #include "overlays/area/world03.h"
 #include "area/spad.h"
+#define AREA_SPARKS ((AreaSpark*)0x800E6000)
 
 /* The shop panel step the request sets. */
 
@@ -28,6 +29,7 @@ extern Callback            D_801F4314[];
 /* D_801F52FC */
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern Callback            D_801F5308[];
+extern s8 D_801F42E8[][2];
 
 /* The battle-step selector the handler tests. */
 /* The frame word the request compares. */
@@ -41,5 +43,7 @@ void func_801F2FE0(void);
 void func_801F30A0(void);
 /* The draw step that reads the three-word work position. */
 void Area_DrawLightPillar(s32* pos);
+
+typedef struct AreaSpark { u8 live; u8 unk_01; u8 unk_02; u8 unk_03; s32 x; s32 y; s32 z; s32 pad; } AreaSpark;
 
 #endif
