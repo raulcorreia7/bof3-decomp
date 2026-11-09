@@ -3,7 +3,7 @@
 
 MATCH void Char_FaceFreeDirectionShared(void) {
     u8 direction;
-    
+
     direction = g_Task->direction_08;
     if (!(direction & 1)) {
         g_Task->direction_08 = (direction - 1) & 7;
@@ -16,8 +16,8 @@ MATCH void Char_FaceFreeDirectionShared(void) {
     }
     func_8019601C();
     g_Task->param.unk_0B = 0;
-    g_Task->unk_0A = 0xB;
-    g_Task->unk_03 = 1;
+    g_Task->unk_0A       = 0xB;
+    g_Task->unk_03       = 1;
 }
 
 #endif
