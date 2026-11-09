@@ -69,7 +69,13 @@ MATCH void func_80117A30(void) {
     SYS_DISPATCH_BYTE(D_801181AC, g_Task->header.step);
 }
 
-INCLUDE_ASM(func_80117A74);
+MATCH void func_80117A74(void) {
+    if (SYS_TestFlag(D_80144ED0, 0x3E) != 0) {
+        func_80117B60(0x40);
+        func_80196070();
+    }
+    g_Task->header.step++;
+}
 
 INCLUDE_ASM(func_80117ACC);
 
