@@ -28,6 +28,7 @@ extern u8 D_801F45EC[];
 extern s8 D_801F5360[];
 /* The per-count movement step table. */
 extern s8 D_801F5378[];
+extern s16 D_801F5388[];
 
 /* Fairy_InitVillage in the commu overlay at the same address. */
 void func_801EECA4(void);
