@@ -112,7 +112,17 @@ MATCH void func_801F0140(void) {
 }
 
 /* blocker: work pointer register; first diff: 0x801F0278 a0 against a1. */
-INCLUDE_ASM(func_801F021C);
+MATCH void func_801F021C(void) {
+    Actor_StepAnimLoop();
+    g_Task->scale.x += 0x800;
+    g_Task->scale.y += 0x800;
+    g_Task->pos.x.fixed += rsin(g_Task->unk_14) << 2;
+    g_Task->pos.y.fixed += rcos(g_Task->unk_14) << 2;
+    if (--g_Task->unk_09 == 0) {
+        g_BattleEffectBattler->param.unk_0B--;
+        Actor_Clear();
+    }
+}
 
 /* func_801F02D4 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"
