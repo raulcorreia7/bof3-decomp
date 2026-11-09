@@ -10,10 +10,14 @@
 #define g_ScanBars ((ScanBar*)AREA_WORK)
 
 extern u32      D_801D0C00;
+extern Callback D_801D1B1C[];
 extern Callback D_801D1B2C[];
+extern Callback D_801D1B38[];
 extern Callback D_801D1B48[];
 
 /* func_801D1624 */
 u8 Scene_UpdateScanBars(s32 y);
+
+void func_801D17A0(s32 x, s32 y, s32 mode);
 
 #endif

@@ -16,8 +16,16 @@
 
 /* The scratchpad cell holding this mode's work pointer. */
 
+/* The cell a state lands on, in tile units. */
+typedef struct CellOffset {
+    u8 x;
+    u8 y;
+} CellOffset;
+
 /* The payload's first words: the per-state handler pointers. */
 extern u8                  D_801F4ED4[];
+extern CellOffset          D_801F5304[];
+extern u8                  D_801F5308[];
 /* D_801F5914 */
 extern PartyMemberMessages g_PartyMemberMessages[2];
 

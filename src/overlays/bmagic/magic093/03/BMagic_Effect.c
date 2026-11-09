@@ -18,9 +18,8 @@ MATCH void func_801EF02C(void) {
     }
 }
 
-MATCH void func_801EF080(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF080 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0C4(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
@@ -140,8 +139,6 @@ INCLUDE_ASM(func_801F01F0);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F0620 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"
 
 INCLUDE_ASM(func_801F0670);

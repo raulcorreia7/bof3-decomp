@@ -499,11 +499,24 @@ MATCH void func_801FD35C(void) {
 
 #include "overlays/scenario/Scene_DispatchActor.h"
 
-INCLUDE_ASM(func_801FD3FC);
+MATCH void func_801FD3FC(Actor* actor) {
+    SYS_SetFlag(g_SceneFlags, 0xA);
+    Game_SetScriptActive();
+    SCENE_START_ACTOR(actor, 3, 0x5);
+}
 
-INCLUDE_ASM(func_801FD45C);
+MATCH void func_801FD45C(Actor* actor) {
+    SYS_SetFlag(g_SceneFlags, 0xB);
+    Item_VitalAdd(5);
+    Game_SetScriptActive();
+    SCENE_START_ACTOR(actor, 4, 6);
+}
 
-INCLUDE_ASM(func_801FD4C4);
+MATCH void func_801FD4C4(Actor* actor) {
+    SYS_SetFlag(g_SceneFlags, 0xC);
+    Game_SetScriptActive();
+    SCENE_START_ACTOR(actor, 9, 0x1D);
+}
 
 MATCH void func_801FD524(void) {
     Game_SetScriptActive();
@@ -519,7 +532,19 @@ MATCH void func_801FD524(void) {
     g_SceneState.state_04 = 7;
 }
 
-INCLUDE_ASM(func_801FD5A0);
+MATCH void func_801FD5A0(void) {
+    Game_SetScriptActive();
+    g_ScriptVars[0] = 0;
+    D_80146865      = 0;
+    D_80146866      = 0;
+    D_80146867      = 0;
+    if (SYS_TestFlag(D_80144EB8, 0x23)) {
+        D_80146875 = 0x14;
+    } else {
+        D_80146875 = 0xA;
+    }
+    D_80146874 = 7;
+}
 
 MATCH ActorSlot* func_801FD610(u8 mode) {
     ActorSlot* slot;

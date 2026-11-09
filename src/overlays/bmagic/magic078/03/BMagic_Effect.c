@@ -10,9 +10,8 @@ INCLUDE_ASM(func_801EECFC);
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
-MATCH void func_801EEEE4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEEE4 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EEF28);
 

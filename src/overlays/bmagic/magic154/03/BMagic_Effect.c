@@ -21,9 +21,8 @@ MATCH void func_801EEFE0(void) {
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EF0C0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF0C0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF104(void) {
     GFX_AddDitheredDrawMode(3, getTPage(0, 1, 320, 256));

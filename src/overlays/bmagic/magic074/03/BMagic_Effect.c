@@ -25,9 +25,8 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-MATCH void func_801EEF9C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF9C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFE0(void) {
     BMagicEffectFuncs handlers;
@@ -44,7 +43,25 @@ INCLUDE_ASM(func_801EF058);
 /* func_801EF4D0 */
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
 
-INCLUDE_ASM(func_801EF518);
+MATCH void func_801EF518(void) {
+    u8           unk04;
+    PartyMember* battler;
+
+    unk04 = g_Task->unk_04;
+    if (unk04 < 3) {
+        battler = &g_Game.members[unk04];
+    } else {
+        battler = (PartyMember*)((EnemyBattler*)g_BattleEnemies + unk04);
+    }
+    g_PaletteFades[g_Task->timer].offset.red--;
+    g_PaletteFades[g_Task->timer].offset.green--;
+    g_PaletteFades[g_Task->timer].offset.blue--;
+    if (--g_Task->unk_09 == 0) {
+        func_80196718(battler);
+        func_800AF814(g_Task->unk_04);
+        g_Task->header.step++;
+    }
+}
 
 /* func_801EF6A4 */
 #include "overlays/bmagic/Effect_FinishRecovery.h"

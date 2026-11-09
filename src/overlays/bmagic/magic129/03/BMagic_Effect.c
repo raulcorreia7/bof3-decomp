@@ -31,9 +31,8 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEF80(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF80 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFC4(void) {
     SYS_DISPATCH_BYTE(D_801F05B8, g_Task->header.step);
@@ -126,6 +125,4 @@ INCLUDE_ASM(func_801F030C);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F0564 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

@@ -373,9 +373,13 @@ INCLUDE_ASM(func_801FB8A4);
 
 INCLUDE_ASM(func_801FC1D0);
 
-INCLUDE_ASM(func_801FC3B4);
+MATCH void func_801FC3B4(void) {
+    SCENA03_NUDGE_SCROLL(D_801FD004, 3);
+}
 
-INCLUDE_ASM(func_801FC410);
+MATCH void func_801FC410(void) {
+    SCENA03_NUDGE_SCROLL(D_801FD008, 1);
+}
 
 #include "overlays/scenario/Scene_DispatchActor.h"
 

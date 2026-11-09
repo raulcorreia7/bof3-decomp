@@ -1,5 +1,5 @@
 #!/bin/sh
-# Reject tracked retail media, files over 1 MiB, and relative includes or imports. Needs no build inputs.
+# Reject tracked retail media, files over 1 MiB, relative includes or imports, and struct members of enum type. Needs no build inputs.
 set -eu
 cd "$(dirname "$0")/.."
 
@@ -23,4 +23,5 @@ if [ -n "$relative" ]; then
 	echo "check-tree: include from the source root (\"overlays/area/X.h\") and import as bof3.<module>"
 	exit 1
 fi
+python3 tools/check_enum_members.py
 echo "check-tree: ok"
