@@ -1,5 +1,4 @@
-/* Turns the orbiting effect one step around its battler and ages its timers. One definition shared by the bmagic
- * effect modules; every change here must verify every member. */
+/* Orbits the effect around its battler while its timers run. */
 /* func_801EF29C (magic106), func_801EF704 (magic063) */
 MATCH void Effect_StepOrbit(void) {
     u8 timer;

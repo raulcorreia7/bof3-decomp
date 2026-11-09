@@ -1,6 +1,4 @@
-/* Starts the orbiting effect's next cycle once its delay runs out: the angle and radius come from the work record's
- * pattern byte, the timers get random lengths and the record advances a step. One definition shared by the bmagic
- * effect modules; every change here must verify every member. */
+/* Starts the effect's next orbit once its delay runs out. */
 /* func_801EEFAC (magic106), func_801EF40C (magic063) */
 MATCH void Effect_StartOrbit(void) {
     u8 phase;
