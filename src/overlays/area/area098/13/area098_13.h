@@ -39,11 +39,11 @@ typedef struct CaptureSize {
 
 /* One of the 16 slots at AREA_WORK, 0x1C bytes each. */
 typedef struct AreaBurstSlot {
-    u8  active;   /* 0x00 - 0 marks a free slot */
-    u8  kind;     /* 0x01 - selects the per-frame handler */
-    u8  life;     /* 0x02 - frames left */
-    u8  fade;     /* 0x03 */
-    u8  unk_04;   /* 0x04 */
+    u8  active; /* 0x00 - 0 marks a free slot */
+    u8  kind;   /* 0x01 - selects the per-frame handler */
+    u8  life;   /* 0x02 - frames left */
+    u8  fade;   /* 0x03 */
+    u8  unk_04; /* 0x04 */
     u8  unk_05[3];
     s32 speed;    /* 0x08 */
     s32 unk_0C;   /* 0x0C */
