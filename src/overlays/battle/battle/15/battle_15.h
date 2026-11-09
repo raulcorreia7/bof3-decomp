@@ -952,7 +952,7 @@ static inline void BattleResetSelectionState(void) {
     volatile u8* battle_selection_state;
     volatile u8* battle_selection_lock;
 
-    battle_selection_state = (u8*)(EFFECT_BANK_80140000);
+    battle_selection_state = (u8*)(PARTY_STATE_PTR);
     battle_selection_lock  = BATTLE_LOCK_RAM_BASE;
     if (battle_selection_lock[-0x7A8D] != 0u) {
         return;

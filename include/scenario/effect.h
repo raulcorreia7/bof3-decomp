@@ -1,13 +1,13 @@
-#ifndef SCENARIO_EFFECT_BANK_H
-#define SCENARIO_EFFECT_BANK_H
+#ifndef SCENARIO_EFFECT_H
+#define SCENARIO_EFFECT_H
 
 #include "psx/mem.h"
 #include "types.h"
 #include "menu/party.h"
 
-#define PARTY_STATE_BASE     0x80140000u
+#define PARTY_STATE_BASE 0x80140000u
 
-#define EFFECT_BANK_80140000 MEM_PTR(volatile PartyState, PARTY_STATE_BASE)
+#define PARTY_STATE_PTR  MEM_PTR(volatile PartyState, PARTY_STATE_BASE)
 
 /* Game RAM at 0x80140000 that scenario overlays and battle also write; the
  * party state is the only part modelled here.
