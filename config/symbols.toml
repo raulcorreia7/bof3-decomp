@@ -3440,6 +3440,7 @@ Fishing_LureInRange = { addr = 0x801E0680, type = "func", source = "true when th
 Fishing_CatchScore = { addr = 0x801E0ABC, type = "func", source = "score of one fish catch: the species row's maximum score (+0x12) scaled by length over the species maximum length (+0x0F), full score from the maximum length up" }
 Fishing_TotalScore = { addr = 0x801E0B6C, type = "func", source = "the player's fishing points: sums Fishing_CatchScore over the 32 g_FishingBestCatch lengths" }
 Fishing_DrawRank = { addr = 0x801E1320, type = "func", source = "draws the rank panel: picks the rank row of g_FishingRankIcons by the total fishing points against the rank score bounds at 0x801D0C70 and prints the points in five digits" }
+Fishing_DrawIconRow = { addr = 0x801E162C, type = "func", source = "Draws one catch-list row: the panel icon cell 0xC (func_801E0DCC) at the given cell and, unless the icon index is 0xFFFF, its text line." }
 Fishing_FishStacksFull = { addr = 0x801E1C10, type = "func", source = "reports whether every fish species (ITEM_JELLYFISH through ITEM_MACKEREL) is held at the 99-item stack limit; Fishing_ChooseAction diverts to sub step 7 once before the cast while it is true" }
 g_FishingCastGaugeStates = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
 g_FishingLureStates = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
