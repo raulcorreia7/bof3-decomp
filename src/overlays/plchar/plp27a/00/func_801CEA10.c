@@ -1,4 +1,4 @@
-#include "plp247_00.h"
+#include "plp27a_00.h"
 
 extern u32 D_80143FFC;
 extern u32 D_80144000;
