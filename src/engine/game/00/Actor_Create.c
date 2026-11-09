@@ -13,8 +13,7 @@ MATCH void Actor_Create(u8* request) {
         COORD_FRAC(g_ActorSlots[slot].pos.x) = (request[2] != 0) << 0xF;
         COORD_INT(g_ActorSlots[slot].pos.y)  = request[5];
         COORD_FRAC(g_ActorSlots[slot].pos.y) = (request[4] != 0) << 0xF;
-        COORD_INT(g_ActorSlots[slot].pos.z) =
-            Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, g_ActorSlots[slot].pos.y.fixed);
-        g_ActorSlots[slot].link = request[6];
+        COORD_INT(g_ActorSlots[slot].pos.z)  = Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, g_ActorSlots[slot].pos.y.fixed);
+        g_ActorSlots[slot].link              = request[6];
     }
 }

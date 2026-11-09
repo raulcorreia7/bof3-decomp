@@ -10,7 +10,7 @@ trim_trailing_whitespace = true
 [*.{c,h}]
 indent_style = space
 indent_size = 4
-max_line_length = 120
+max_line_length = 200
 
 # Split and authored assembly use spaces.
 [*.{s,inc}]

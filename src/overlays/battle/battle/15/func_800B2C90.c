@@ -44,15 +44,13 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
                     icon &= BYTE_MASK;
                     if (icon != 7) {
-                        func_801AF930((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), 7U, ability_id & BYTE_MASK,
-                                      ability_obj, ability_kind & BYTE_MASK, 1);
+                        func_801AF930((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), 7U, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
                     }
                     icon_y = (s16)(row_y + 0x18);
                 } else {
                     icon_y = (s16)(row_y + 0x1A);
                 }
-                func_801AF930((s16)(task->pos.x + 7), icon_y, icon, ability_id & BYTE_MASK, ability_obj,
-                              ability_kind & BYTE_MASK, 1);
+                func_801AF930((s16)(task->pos.x + 7), icon_y, icon, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
             }
             index += 1;
             kinds += 1;
@@ -117,8 +115,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
         UI_DrawSprite((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, 1);
         UI_DrawSprite((s16)(task->pos.x + 144), (s16)task->pos.y, 0x33, 1);
     }
-    func_801AFA1C(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor,
-                  (s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 7, 0xA, 0x5C);
+    func_801AFA1C(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor, (s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 7, 0xA, 0x5C);
 }
 #else
 INCLUDE_ASM(func_800B2C90);

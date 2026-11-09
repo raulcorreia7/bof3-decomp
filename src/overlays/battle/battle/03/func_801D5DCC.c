@@ -20,8 +20,7 @@ MATCH u8 func_801D5DCC(void) {
             if (g_Game.members[slot].chr.character_id == CHAR_ID_PECO) {
                 g_Game.members[slot].u.turn.hp_change -= (g_Game.members[slot].chr.stats.max_hp + 10) / 20;
             }
-            if (g_Game.members[slot].chr.character_id == CHAR_ID_RYU_ADULT ||
-                g_Game.members[slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
+            if (g_Game.members[slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
                 if (g_Game.members[slot].u.turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM) {
                     if (g_Battle.dragon_form == 0x12) {
                         g_Game.members[slot].u.turn.hp_change -= (g_Game.members[slot].chr.stats.max_hp + 10) / 20;
@@ -29,7 +28,7 @@ MATCH u8 func_801D5DCC(void) {
                 }
             }
             if (g_Game.members[slot].chr.equip.weapon == WEAPON_BEAST_SPEAR) {
-                delta = g_Game.members[slot].u.turn.hp_change + (g_Game.members[slot].chr.stats.max_hp + 10) / 20;
+                delta                                 = g_Game.members[slot].u.turn.hp_change + (g_Game.members[slot].chr.stats.max_hp + 10) / 20;
                 g_Game.members[slot].u.turn.hp_change = delta;
                 if (delta >= g_Game.members[slot].chr.hp) {
                     g_Game.members[slot].u.turn.hp_change = g_Game.members[slot].chr.hp - 1;

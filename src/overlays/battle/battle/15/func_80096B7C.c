@@ -21,13 +21,11 @@ MATCH void func_80096B7C(void) {
         return;
     }
     if ((trigger & PADLright) != 0) {
-        g_BattleActorTurn->command.target =
-            Battle_TargetNext(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_TargetNext(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if ((trigger & PADLleft) != 0) {
-        g_BattleActorTurn->command.target =
-            Battle_TargetPrev(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_TargetPrev(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
 }

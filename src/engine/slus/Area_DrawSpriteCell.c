@@ -69,8 +69,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     GFX_AddPrim(SPAD_CURSOR->draw_layer, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
-    setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0],
-          g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);
+    setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0], g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);
     sprite->y0 = SPAD_CURSOR->screen_y + (s8)sprite_cell->y;
     setUV0(sprite, sprite_cell->u, SPAD_CURSOR->unk_26 + sprite_cell->v);
     delta        = SPAD_CURSOR->tint.bytes.unk_5D - 0x80;

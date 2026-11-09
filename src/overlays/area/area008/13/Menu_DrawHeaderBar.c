@@ -68,8 +68,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     odd_h     = (s16)odd_width;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
-    setXY4(primitive, (s16)r_s8, (s16)(u16)y, (s16)(r_s1 + r_s8), (s16)(u16)y, (s16)r_s8, bottom_y, (s16)(r_s1 + r_s8),
-           bottom_y);
+    setXY4(primitive, (s16)r_s8, (s16)(u16)y, (s16)(r_s1 + r_s8), (s16)(u16)y, (s16)r_s8, bottom_y, (s16)(r_s1 + r_s8), bottom_y);
     setUV4(primitive, 0u, 0u, (u8)r_s4, 0u, 0u, bottom_v, (u8)r_s4, bottom_v);
     setRGB0(primitive, 172, 172, 172);
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);

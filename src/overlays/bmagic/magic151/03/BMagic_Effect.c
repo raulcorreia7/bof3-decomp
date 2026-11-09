@@ -361,8 +361,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
         D_1F800014[2].vy = D_1F800014[3].vy;
         D_1F800014[3].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_INNER);
         D_1F800014[3].vy = FIXED_MUL(rcos(i << 6), GLOW_RING_INNER);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
-                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         setRGB0(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
         setRGB1(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
         setRGB2(prim, 1, 1, 1);
@@ -400,8 +399,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
         D_1F800014[2].vy = D_1F800014[3].vy;
         D_1F800014[3].vx = FIXED_MUL(rsin(i << 6), GLOW_RING_INNER);
         D_1F800014[3].vy = FIXED_MUL(rcos(i << 6), GLOW_RING_INNER);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0,
-                      (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);

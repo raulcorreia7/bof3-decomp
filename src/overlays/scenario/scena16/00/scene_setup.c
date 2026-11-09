@@ -197,8 +197,7 @@ MATCH void func_801F7188(void) {
         if (selection != 0xFFu) {
             selection_offset = selection << 2;
             /* The const byte view: dropping the cast moves this call's loads. */
-            SND_StopSequence(((const u8*)(g_SelectionCues))[selection_offset],
-                             ((const u8*)(g_SelectionCues))[selection_offset + 1u]);
+            SND_StopSequence(((const u8*)(g_SelectionCues))[selection_offset], ((const u8*)(g_SelectionCues))[selection_offset + 1u]);
             *sel_ptr = 0xFFu;
         }
 

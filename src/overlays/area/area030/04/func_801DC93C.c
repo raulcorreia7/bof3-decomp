@@ -35,8 +35,7 @@ NON_MATCHING void func_801DC93C(void) {
             SND_FadeInSequence(0, 0, 0x14, 0x10);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             new_cmd = 5;
-            if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) ||
-                (new_cmd = 0xF, (cmd == 0xE))) {
+            if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) || (new_cmd = 0xF, (cmd == 0xE))) {
                 D_80144281 = new_cmd;
             }
             D_8014428B = 0;

@@ -1,8 +1,7 @@
 #include "shop_00.h"
 
 Callback g_ShopStates[SHOP_STEP_COUNT] = {
-    func_801D0EDC, func_801D1000, func_801D10E4, func_801D39BC, func_801D1000, func_801D7344,
-    func_801DE188, func_801DF978, func_801D3310, func_801E200C, func_801D6184,
+    func_801D0EDC, func_801D1000, func_801D10E4, func_801D39BC, func_801D1000, func_801D7344, func_801DE188, func_801DF978, func_801D3310, func_801E200C, func_801D6184,
 };
 
 Callback g_ShopStep2Funcs[SHOP_STEP2_COUNT] = {
@@ -19,8 +18,7 @@ Callback g_ShopStep2Sub1Funcs[SHOP_STEP2_SUB1_COUNT] = {
 };
 
 Callback g_ShopStep2Sub2Funcs[SHOP_STEP2_SUB2_COUNT] = {
-    func_801D14EC, func_801D163C, func_801D1A90, func_801D1D60,
-    func_801D1F74, func_801D20D0, func_801D23E4, func_801D26A8,
+    func_801D14EC, func_801D163C, func_801D1A90, func_801D1D60, func_801D1F74, func_801D20D0, func_801D23E4, func_801D26A8,
 };
 
 Callback g_ShopStep2Sub3Funcs[SHOP_STEP2_SUB3_COUNT] = {

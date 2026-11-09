@@ -29,8 +29,7 @@ MATCH void World_UpdateClouds(void) {
         COORD_INT(g_Task->pos.y) = -8;
     }
 
-    if (abs(g_AreaTargetCellX - COORD_INT(g_Task->pos.x)) >= WORLD_CLOUD_DRAW_RANGE &&
-        abs(g_AreaTargetCellY - COORD_INT(g_Task->pos.y)) >= WORLD_CLOUD_DRAW_RANGE) {
+    if (abs(g_AreaTargetCellX - COORD_INT(g_Task->pos.x)) >= WORLD_CLOUD_DRAW_RANGE && abs(g_AreaTargetCellY - COORD_INT(g_Task->pos.y)) >= WORLD_CLOUD_DRAW_RANGE) {
         return;
     }
 
@@ -56,15 +55,13 @@ MATCH void World_UpdateClouds(void) {
     q2->vy   = y_high + size;
     q3->vx   = x_high + size;
     q3->vy   = y_high + size;
-    RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
-                  &flag);
+    RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     func_80155560(width | 0xBB509100, prim, 1);
     GFX_AddPrim(4, sizeof(POLY_FT4));
 
     for (row = 0; row < (2 - width) * 4 + 1; row++) {
         for (col = 0; col < (2 - width) * 4; col++) {
-            cell = Area_FindCellQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col,
-                                     COORD_INT(g_Task->pos.y) - (2 - width) + row);
+            cell = Area_FindCellQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col, COORD_INT(g_Task->pos.y) - (2 - width) + row);
             if (cell == NULL) {
                 continue;
             }
@@ -80,23 +77,16 @@ MATCH void World_UpdateClouds(void) {
             prim->tpage      = getTPage(0, 2, 704, 256);
             setRGB0(prim, 40, 40, 40);
             prim->u0 = g_WorldCloudTexture.u_origin[width] + col * g_WorldCloudTexture.cell_size[width];
-            prim->v0 = g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] -
-                       g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
-            prim->u1 = g_WorldCloudTexture.cell_size[width] +
-                       (g_WorldCloudTexture.u_origin[width] + g_WorldCloudTexture.cell_size[width] * col);
-            prim->v1 = g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] -
-                       g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
+            prim->v0 = g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] - g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
+            prim->u1 = g_WorldCloudTexture.cell_size[width] + (g_WorldCloudTexture.u_origin[width] + g_WorldCloudTexture.cell_size[width] * col);
+            prim->v1 = g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] - g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000;
             prim->u2 = g_WorldCloudTexture.u_origin[width] + col * g_WorldCloudTexture.cell_size[width];
             prim->v2 = g_WorldCloudTexture.cell_size[width] +
-                       (u8)(g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] -
-                            g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
-            prim->u3 = g_WorldCloudTexture.cell_size[width] +
-                       (g_WorldCloudTexture.u_origin[width] + g_WorldCloudTexture.cell_size[width] * col);
+                       (u8)(g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] - g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
+            prim->u3 = g_WorldCloudTexture.cell_size[width] + (g_WorldCloudTexture.u_origin[width] + g_WorldCloudTexture.cell_size[width] * col);
             prim->v3 = g_WorldCloudTexture.cell_size[width] +
-                       (u8)(g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] -
-                            g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
-            Area_AddCellPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16,
-                             (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
+                       (u8)(g_WorldCloudTexture.v_origin[width] + row * g_WorldCloudTexture.cell_size[width] - g_WorldCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000);
+            Area_AddCellPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16, (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
         }
     }
 }

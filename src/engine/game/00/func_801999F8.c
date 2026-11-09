@@ -28,9 +28,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         byte = *src;
         if (byte != 0) {
             flag = 0;
-            if (task->unk_09 != 0 ||
-                (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[D_80148656]], task->unk_0A, byte) &
-                 BYTE_MASK) == 0) {
+            if (task->unk_09 != 0 || (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[D_80148656]], task->unk_0A, byte) & BYTE_MASK) == 0) {
                 flag = 1;
             }
             visible = flag;
@@ -64,8 +62,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     value  = func_801AF20C(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;
     UI_DrawText((task->pos.x - offset), (task->pos.y + 7), -(task->unk_09 != 0) & 7, 0x10, *slotp);
-    TEXT_Format(g_UiFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK,
-                (task->unk_0A != 4) ? 0x80 : 0x20);
+    TEXT_Format(g_UiFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK, (task->unk_0A != 4) ? 0x80 : 0x20);
     UI_DrawGlyphString((task->pos.x + 85), (task->pos.y + 146), -(task->unk_09 != 0) & 7, g_UiFormatBuffer);
     UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);
     UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, 1);
@@ -95,6 +92,5 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         UI_DrawSprite((task->pos.x + (i + 11) * 8), (task->pos.y + 144), 0x1C, 1);
     }
     UI_DrawSprite((task->pos.x + 136), (task->pos.y + 144), 0x1D, 1);
-    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9,
-                  (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
+    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9, (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
 }

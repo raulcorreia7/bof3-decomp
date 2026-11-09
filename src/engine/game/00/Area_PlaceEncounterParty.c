@@ -45,8 +45,7 @@ MATCH bool Area_PlaceEncounterParty(void) {
         for (i = 0; i < ARRAY_COUNT(s_EncounterOriginNudges); i++) {
             x = g_EncounterOriginX + s_EncounterOriginNudges[i].x;
             y = g_EncounterOriginY + s_EncounterOriginNudges[i].y;
-            if (((func_801C7518(x, y, 1) & BYTE_MASK) != 0) &&
-                ((func_801C7824(D_80143F2A, D_80143F2A, x >> 16, y >> 16) & BYTE_MASK) != 0)) {
+            if (((func_801C7518(x, y, 1) & BYTE_MASK) != 0) && ((func_801C7824(D_80143F2A, D_80143F2A, x >> 16, y >> 16) & BYTE_MASK) != 0)) {
                 break;
             }
         }

@@ -63,9 +63,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
             val2 |= 0x8000;
             val1 = ((u32)val4 >> 0x10) << 0x10;
             if (((Area_ReadStepHeight(val2, val1, 7U) < 0x41) || (val7 = 1, (SP_REF(void*, 0x0) == 0))) &&
-                ((val1 &= HALF_MASK, val1 |= ((val4 >> 0x10) + 1) << 0x10,
-                  ((Area_ReadStepHeight(val2, val1, 7U) < 0x41) != 0)) ||
-                 (val7 = 1, (SP_REF(void*, 0x0) == 0)))) {
+                ((val1 &= HALF_MASK, val1 |= ((val4 >> 0x10) + 1) << 0x10, ((Area_ReadStepHeight(val2, val1, 7U) < 0x41) != 0)) || (val7 = 1, (SP_REF(void*, 0x0) == 0)))) {
                 val2 &= HALF_MASK;
                 val2 |= ((u32)val3 >> 0x10) << 0x10;
                 val1 &= HALF_MASK;
@@ -108,9 +106,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
             val1 |= 0x8000;
             val2 = ((u32)val3 >> 0x10) << 0x10;
             if (((Area_ReadStepHeight(val2, val1, 1U) < 0x41) || (val7 = 1, (SP_REF(void*, 0x0) == 0))) &&
-                ((val2 &= HALF_MASK, val2 |= ((val3 >> 0x10) + 1) << 0x10,
-                  ((Area_ReadStepHeight(val2, val1, 1U) < 0x41) != 0)) ||
-                 (val7 = 1, (SP_REF(void*, 0x0) == 0)))) {
+                ((val2 &= HALF_MASK, val2 |= ((val3 >> 0x10) + 1) << 0x10, ((Area_ReadStepHeight(val2, val1, 1U) < 0x41) != 0)) || (val7 = 1, (SP_REF(void*, 0x0) == 0)))) {
                 val1 &= HALF_MASK;
                 val1 |= ((u32)val4 >> 0x10) << 0x10;
                 val2 &= HALF_MASK;

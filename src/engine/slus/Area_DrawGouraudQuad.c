@@ -17,8 +17,8 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
         x_limit = (u32)(0x7FFF - g_AreaCameraX) >> 8;
         y_limit = (0x8000 - g_AreaCameraY) >> 8;
         packed  = *(u32*)src;
-        if (((s32)x_limit >= (s32)(packed & BYTE_MASK)) && ((s32)y_limit >= (s32)((packed >> 8) & BYTE_MASK)) &&
-            ((s32)((packed >> 16) & BYTE_MASK) >= (s32)x_limit) && ((s32)(packed >> 24) >= (s32)y_limit)) {
+        if (((s32)x_limit >= (s32)(packed & BYTE_MASK)) && ((s32)y_limit >= (s32)((packed >> 8) & BYTE_MASK)) && ((s32)((packed >> 16) & BYTE_MASK) >= (s32)x_limit) &&
+            ((s32)(packed >> 24) >= (s32)y_limit)) {
             if (GetGraphType() == 1) {
                 tpage = 0x225;
             } else if (GetGraphType() == 2) {
@@ -34,10 +34,8 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
             } else {
                 src += 4;
             }
-            setRGB0(primitive, primitive->r1 = (*(u32*)src & 0x1F) * 8, primitive->g1 = (*(u32*)src >> 2) & 0xF8,
-                    primitive->b1 = (*(u32*)src >> 7) & 0xF8);
-            setRGB2(primitive, primitive->r3 = (*(u16*)(src + 2) & 0x1F) * 8, primitive->g3 = (*(u32*)src >> 18) & 0xF8,
-                    primitive->b3 = (*(u32*)src >> 23) & 0xF8);
+            setRGB0(primitive, primitive->r1 = (*(u32*)src & 0x1F) * 8, primitive->g1 = (*(u32*)src >> 2) & 0xF8, primitive->b1 = (*(u32*)src >> 7) & 0xF8);
+            setRGB2(primitive, primitive->r3 = (*(u16*)(src + 2) & 0x1F) * 8, primitive->g3 = (*(u32*)src >> 18) & 0xF8, primitive->b3 = (*(u32*)src >> 23) & 0xF8);
             GFX_AddPrim(7, sizeof(POLY_G4));
         }
     }

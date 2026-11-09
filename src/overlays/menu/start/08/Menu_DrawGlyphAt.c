@@ -136,8 +136,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
     tmp5 = val2 + ((val13 & BYTE_MASK) - (val6 & BYTE_MASK));
     tmp2 = val3 + 0xC;
     setXY4(val11, val1, val0, tmp5, val0, val1, tmp2, tmp5, tmp2);
-    setUV3(val11, (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC)), (s8)(((*val12 + 0x64) / 21) * 0xC),
-           (s8)(stack_20 + (((*val12 + 0x64) % 21) * 0xC)), (s8)(((*val12 + 0x64) / 21) * 0xC),
+    setUV3(val11, (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC)), (s8)(((*val12 + 0x64) / 21) * 0xC), (s8)(stack_20 + (((*val12 + 0x64) % 21) * 0xC)), (s8)(((*val12 + 0x64) / 21) * 0xC),
            (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC)), (s8)((((*val12 + 0x64) / 21) * 0xC) + 0xC));
     val11->u3 = (s8)((((*val12 + 0x64) % 21) * 0xC) + stack_20);
     val4      = (stack_18 & 0xF) * 0x10;

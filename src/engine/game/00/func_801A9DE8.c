@@ -68,9 +68,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     func_801ABBA8(state, value);
                     work     = g_Task;
                     den      = work->timer * state->unk_07;
-                    work->vz = ((s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4)) -
-                                (s16)COORD_INT(work->pos.z)) /
-                               den;
+                    work->vz = ((s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4)) - (s16)COORD_INT(work->pos.z)) / den;
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
                 } else {
                     s16* counter;
@@ -96,9 +94,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             if (g_Task->timer == 0)
                 g_Task->timer = 1;
             work     = g_Task;
-            work->vz = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) -
-                        (s16)COORD_INT(work->pos.z)) /
-                       work->timer;
+            work->vz = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) - (s16)COORD_INT(work->pos.z)) / work->timer;
             work->vx = 0;
             work->vy = 0;
             state->index_0A += 3;
@@ -182,8 +178,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             break;
         }
         case ACTOR_SCRIPT_MOTION_SET_ACTOR_MODE:
-            func_801AC768(state, *(table + state->index_0A + 1), *(table + state->index_0A + 2),
-                          *(table + state->index_0A + 3), *(table + state->index_0A + 4));
+            func_801AC768(state, *(table + state->index_0A + 1), *(table + state->index_0A + 2), *(table + state->index_0A + 3), *(table + state->index_0A + 4));
         advance_one:
             state->index_0A += 1;
             break;

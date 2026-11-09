@@ -12,8 +12,7 @@ MATCH void func_801D4680(void) {
 
     FISHING_STATE->step_timer_09++;
     if (FISHING_STATE->saved_index_0B == 0) {
-        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 16)) & 0xFFFE, MENU_HEADER_WIDTH,
-                      MENU_HEADER_HEIGHT, 0U);
+        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 16)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
         y     = FISHING_SHOP_COLUMNS_Y;
         flags = 0;
         t     = FISHING_STATE->step_timer_09 * 3;
@@ -31,14 +30,11 @@ MATCH void func_801D4680(void) {
         y = FISHING_SHOP_COLUMNS_Y;
     }
     func_801D7C10(x, y, flags);
-    func_801D88E0((FISHING_EQUIP_PANEL_X - (FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP)),
-                  FISHING_PANEL_CONTENT_Y);
+    func_801D88E0((FISHING_EQUIP_PANEL_X - (FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP)), FISHING_PANEL_CONTENT_Y);
     if (!(FISHING_STATE->counter_07 & 1)) {
-        func_801D7EB0((s16)((FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X),
-                      FISHING_PANEL_CONTENT_Y);
+        func_801D7EB0((s16)((FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
     } else {
-        func_801D8364(((FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X),
-                      FISHING_PANEL_CONTENT_Y);
+        func_801D8364(((FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
     }
     if (FISHING_STATE->step_timer_09 == 4) {
         if (FISHING_STATE->saved_index_0B == 0) {

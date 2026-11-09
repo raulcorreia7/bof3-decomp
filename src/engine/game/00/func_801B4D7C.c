@@ -69,8 +69,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                 GAME_ENTITY_ENTRY_DATA = val4;
                 *(u16*)(&D_1F800000)   = FIELD(s16, tmp29, 0x36u);
             loop_9:
-                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
-                    (val6 & BYTE_MASK)) {
+                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) == (val6 & BYTE_MASK)) {
                     tmp25 = g_Task;
                     tmp17 = FIELD(u8, tmp25, 0x8u);
                     tmp5  = tmp17 & BYTE_MASK;
@@ -103,8 +102,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                     val8                 = &D_1F800000 + 2;
                     SP_REF(void*, 0x2)   = COORD_INT(g_Task->pos.y);
                 loop_20:
-                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
-                        (val6 & BYTE_MASK)) {
+                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) == (val6 & BYTE_MASK)) {
                         tmp18 = g_Task;
                         tmp12 = FIELD(u8, tmp18, 0x8u);
                         tmp2  = tmp12 & BYTE_MASK;
@@ -150,8 +148,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
             val8                 = &D_1F800000 + 2;
             SP_REF(void*, 0x2)   = (u16)(FIELD(s16, tmp29, 0x3Au) - 1);
         loop_58:
-            if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
-                (val6 & BYTE_MASK)) {
+            if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) == (val6 & BYTE_MASK)) {
                 tmp22 = g_Task;
                 tmp15 = FIELD(u8, tmp22, 0x8u);
                 tmp4  = tmp15 & BYTE_MASK;
@@ -186,8 +183,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                     SP_REF(void*, 0x2)   = (u16)(FIELD(s16, tmp23, 0x3Au) - 1);
                 loop_71:
                     val1 += 1;
-                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) !=
-                        val8) {
+                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) != val8) {
                         FIELD(s16, (&D_1F800000), 0x2u) = (s16)(FIELD(s16, (&D_1F800000), 0x2u) + 1);
                         if (val1 >= 3) {
                             val1                 = 0;
@@ -198,8 +194,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                             SP_REF(void*, 0x2)   = (u16)(FIELD(s16, tmp24, 0x3Au) - 1);
                         loop_74:
                             val1 += 1;
-                            if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) &
-                                 BYTE_MASK) != val8) {
+                            if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) != val8) {
                                 FIELD(s16, (&D_1F800000), 0x2u) = (s16)(FIELD(s16, (&D_1F800000), 0x2u) + 1);
                                 val7                            = 0;
                                 if (val1 >= 3) {
@@ -225,8 +220,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
         SP_REF(void*, 0x2)   = val4;
         *(u16*)(&D_1F800000) = (u16)(FIELD(s16, tmp29, 0x36u) - 1);
     loop_34:
-        if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
-            (val6 & BYTE_MASK)) {
+        if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) == (val6 & BYTE_MASK)) {
             tmp19 = g_Task;
             tmp13 = FIELD(u8, tmp19, 0x8u);
             tmp3  = tmp13 & BYTE_MASK;
@@ -262,8 +256,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                 SP_REF(void*, 0x2)   = (u16)(FIELD(s16, tmp20, 0x3Au) - 1);
             loop_47:
                 val1 += 1;
-                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) !=
-                    val8) {
+                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) != val8) {
                     *(u16*)(&D_1F800000) = (u16)(*(u16*)(&D_1F800000) + 1);
                     if (val1 >= 3) {
                         val1                 = 0;
@@ -274,8 +267,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                         SP_REF(void*, 0x2)   = (u16)(FIELD(s16, tmp21, 0x3Au) + 2);
                     loop_50:
                         val1 += 1;
-                        if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) &
-                             BYTE_MASK) != val8) {
+                        if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) != val8) {
                             *(u16*)(&D_1F800000) = (u16)(*(u16*)(&D_1F800000) + 1);
                             if (val1 >= 3) {
                                 return 0U;

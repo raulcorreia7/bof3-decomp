@@ -66,12 +66,9 @@ MATCH void func_801B146C(void) {
             }
             goto block_24; /* continue with the front request */
         }
-        if ((state_flags & 2) &&
-            ((work_f = g_Task, speed = work_f->state_70.byte, route_index2 = work_f->direction_08 * 2,
-              pos_x = work_f->pos.x.fixed + ((*(s32*)((u8*)g_FacingSteps + route_index2 * 4)) * speed),
-              pos_y = work_f->pos.y.fixed + (g_FacingStepY[route_index2] * speed),
-              (pos_x == TO_COORD(2)) || (pos_y == TO_COORD(2)) || (pos_x == ((g_AreaMapBundle.width - 3) << 0x10)) ||
-                  (pos_y == ((g_AreaMapBundle.height - 3) << 0x10))))) {
+        if ((state_flags & 2) && ((work_f = g_Task, speed = work_f->state_70.byte, route_index2 = work_f->direction_08 * 2,
+                                   pos_x = work_f->pos.x.fixed + ((*(s32*)((u8*)g_FacingSteps + route_index2 * 4)) * speed), pos_y = work_f->pos.y.fixed + (g_FacingStepY[route_index2] * speed),
+                                   (pos_x == TO_COORD(2)) || (pos_y == TO_COORD(2)) || (pos_x == ((g_AreaMapBundle.width - 3) << 0x10)) || (pos_y == ((g_AreaMapBundle.height - 3) << 0x10))))) {
             Actor_RequestScript(g_Task->direction_08);
             Game_RequestAreaChange(D_80143F04, D_80143F08, D_80143F0C, FACING_DOWN_RIGHT);
             goto block_46; /* re-arm the frame flags */
@@ -131,8 +128,7 @@ MATCH void func_801B146C(void) {
                 goto block_46; /* re-arm the frame flags */
             }
             func_801C329C();
-            if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) &&
-                (g_Game.input & (g_InputMasks[FIELD_INPUT_INTERACT] | INPUT_DIRECTIONAL))) {
+            if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) && (g_Game.input & (g_InputMasks[FIELD_INPUT_INTERACT] | INPUT_DIRECTIONAL))) {
                 func_801B0568();
                 return;
             }

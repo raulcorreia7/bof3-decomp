@@ -27,18 +27,15 @@ MATCH void func_801D3F40(void) {
     if (style != 0) {
         style -= 1;
         FISHING_STATE->step_timer_09 = style;
-        func_801D9740(0, FISHING_STATE->text_54.pointer, ((8 - ((4 - FISHING_STATE->step_timer_09) * 2)) & 0xFE) | 0x80,
-                      0x1D);
+        func_801D9740(0, FISHING_STATE->text_54.pointer, ((8 - ((4 - FISHING_STATE->step_timer_09) * 2)) & 0xFE) | 0x80, 0x1D);
     }
     if (FISHING_STATE->counter_49 != 0) {
         u16* ox = &D_80144154;
-        UI_DrawText(FISHING_STATE->origin_x_2E, (*ox + 2), 0, FISHING_STATE->counter_49,
-                    FISHING_STATE->item_50.pointer);
+        UI_DrawText(FISHING_STATE->origin_x_2E, (*ox + 2), 0, FISHING_STATE->counter_49, FISHING_STATE->item_50.pointer);
         id = D_801E1E80[FISHING_STATE->row_4B * 0xC];
         if (id != GAME_NONE) {
             index = id * 3;
-            UI_DrawText((FISHING_STATE->origin_x_2E + (FISHING_STATE->counter_49 * 8)), (*ox + 2), D_801E1F16[index], 1,
-                        (u8*)(index + D_801E1F14));
+            UI_DrawText((FISHING_STATE->origin_x_2E + (FISHING_STATE->counter_49 * 8)), (*ox + 2), D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
         }
     } else {
         id = D_801E1E80[FISHING_STATE->row_4B * 0xC];

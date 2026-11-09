@@ -104,8 +104,7 @@ MATCH void func_80167910(void) {
         prim[3]          = 6;
         prim[7]          = 0x30;
         SetSemiTrans(prim, 1);
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)(prim + 8), (long*)(prim + 0x10),
-                      (long*)(prim + 0x18), &p, &sxy2);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)(prim + 8), (long*)(prim + 0x10), (long*)(prim + 0x18), &p, &sxy2);
         prim[4]    = 0x80;
         prim[5]    = 0x80;
         prim[6]    = 0x80;

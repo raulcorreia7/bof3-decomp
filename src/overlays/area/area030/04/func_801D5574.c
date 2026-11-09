@@ -13,8 +13,7 @@ MATCH void func_801D5574(void) {
 
     FISHING_STATE->step_timer_09 += 1;
     if (FISHING_STATE->saved_index_0B == 0) {
-        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - FISHING_STATE->step_timer_09 * 16) & 0xFFFE, MENU_HEADER_WIDTH,
-                      MENU_HEADER_HEIGHT, 0);
+        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - FISHING_STATE->step_timer_09 * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         y      = FISHING_SHOP_COLUMNS_Y;
         mask   = 0;
         t      = FISHING_STATE->step_timer_09 * 3;

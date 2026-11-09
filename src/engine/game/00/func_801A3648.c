@@ -16,8 +16,7 @@ MATCH void func_801A3648(void) {
         g_PaletteFades[index].offset.blue -= 1;
     }
     index = g_CurrentActor->unk_93;
-    if ((g_PaletteFades[index].offset.blue + g_PaletteFades[index].offset.green + g_PaletteFades[index].offset.red) ==
-        0) {
+    if ((g_PaletteFades[index].offset.blue + g_PaletteFades[index].offset.green + g_PaletteFades[index].offset.red) == 0) {
         GFX_FreePaletteFade(index);
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_FADE_WHITE;
         g_Task->header.mode = g_Task->unk_03;

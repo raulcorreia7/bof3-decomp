@@ -9,8 +9,7 @@ MATCH bool func_801D527C(void) {
     count = 0;
     for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
         if (func_801D64C4(slot) == 0) {
-            if ((g_Game.members[slot].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) &&
-                (g_Game.members[slot].counter_136 == 3)) {
+            if ((g_Game.members[slot].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) && (g_Game.members[slot].counter_136 == 3)) {
                 count++;
                 g_Game.members[slot].header.mode         = 6;
                 g_Game.members[slot].header.step         = 5;
@@ -26,8 +25,7 @@ MATCH bool func_801D527C(void) {
     }
     for (slot = 3; slot < 11; slot++) {
         if (func_801D64C4(slot) == 0) {
-            if ((ENEMY_COMBATANT(slot).turn.action_flags.value & COMBATANT_FLAG_CHARGING) &&
-                (g_Game.members[slot].counter_136 == 3)) {
+            if ((ENEMY_COMBATANT(slot).turn.action_flags.value & COMBATANT_FLAG_CHARGING) && (g_Game.members[slot].counter_136 == 3)) {
                 count++;
                 ENEMY_COMBATANT(slot).header.mode       = 6;
                 ENEMY_COMBATANT(slot).header.step       = 5;

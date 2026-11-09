@@ -442,8 +442,7 @@ MATCH s32 func_801FE18C(s32 x, s32 y) {
             return 0;
         }
         if (x == 0x310000 && (u32)((y >> 16) - 0x27) < 2) {
-            if (SYS_TestFlag(g_SceneFlags, 0xC) && SYS_TestFlag(g_SceneFlags, 0xE) && SYS_TestFlag(g_SceneFlags, 0xD) &&
-                SYS_TestFlag(g_SceneFlags, 0xF) && SYS_TestFlag(g_SceneFlags, 0x10)) {
+            if (SYS_TestFlag(g_SceneFlags, 0xC) && SYS_TestFlag(g_SceneFlags, 0xE) && SYS_TestFlag(g_SceneFlags, 0xD) && SYS_TestFlag(g_SceneFlags, 0xF) && SYS_TestFlag(g_SceneFlags, 0x10)) {
                 Game_SetScriptActive();
                 g_SceneState.state_04 = 5;
                 g_SceneState.step_05  = 5;

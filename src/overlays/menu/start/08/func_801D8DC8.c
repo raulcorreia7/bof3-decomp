@@ -29,10 +29,9 @@ MATCH void func_801D8DC8(void) {
     }
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = panel->pos.x + START_LIST_CURSOR_X;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
-        panel->pos.y + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y);
-    buttons = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
-    old     = panel->unk_0B;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y);
+    buttons                                          = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
+    old                                              = panel->unk_0B;
     if (buttons & PADLup) {
         if (old != 0) {
             panel->unk_0B = old - 1;

@@ -25,10 +25,8 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     y = work_index;
     z = work_mode;
     g_GameFlags &= 0xEFFF;
-    if (!(g_Game.walk_flags & AREA_WALK_MAP_LOADING) &&
-        (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) ||
-         (LOHU(g_GameAreaId) == AREA_ID_ADULT_CAMP) ||
-         (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 0x77U) == 0)))) {
+    if (!(g_Game.walk_flags & AREA_WALK_MAP_LOADING) && (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) || (LOHU(g_GameAreaId) == AREA_ID_ADULT_CAMP) ||
+                                                         (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 0x77U) == 0)))) {
         count = Party_CountOrder(PARTY_ORDER_FIELD);
         for (i = 0; i < count; i++) {
             g_Characters[g_CharSlot[g_PartyFieldOrder[i]]].status &= ~STATUS_CONFUSED;
