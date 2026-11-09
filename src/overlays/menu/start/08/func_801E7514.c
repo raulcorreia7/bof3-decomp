@@ -1,9 +1,6 @@
 #include "start_08.h"
 
-/* Icon geometry: five u16 fields per icon, a 10-byte stride. The original
- * reads each field through its own symbol-relative lui/addu/lhu, so the five
- * symbol bindings stay separate; a single struct base would materialize one
- * register and change the addressing. */
+/* Icon geometry: five u16 fields per icon, a 10-byte stride. */
 #define START08_ICON_STRIDE 10u
 
 MATCH void func_801E7514(s32 x, s32 y, s32 icon, s32 palette) {

@@ -18,8 +18,7 @@
 #define MENU_START_PANEL_CURSOR_FRAME 19 /* frame drawn around the cursor */
 #define MENU_START_PANEL_CURSOR       21 /* pointing-hand cursor */
 
-/* Panel modes of the start menu: the index into g_MenuStartPanelModes. Modes
- * whose draw helper is not yet read keep their number. */
+/* Panel modes of the start menu: the index into g_MenuStartPanelModes. */
 #define MENU_START_MODE_CHARACTER     0
 #define MENU_START_MODE_ZENNY         1
 #define MENU_START_MODE_PLAY_TIME     2
@@ -36,10 +35,7 @@
 #define MENU_START_MODE_ABILITIES     17
 #define g_SceneFlags                  ((void*)g_SceneFlags)
 
-/* Draw the scene timer sprite and count down; on zero advance the cue counter.
- * A bare statement macro: the member declares `timer` and `count`. Kept: tested
- * as an inline, the member's local frame disappears and the bytes move; the
- * do/while form moves bytes too. */
+/* Draw the scene timer sprite and count down; on zero advance the cue counter. */
 #define ETC_TICK_SCENE_TIMER()      \
     Menu_DrawClutStrip(D_80144953); \
     timer  = &D_80148654;           \
@@ -49,9 +45,7 @@
         D_80148651 += 1;            \
     }
 
-/* Step the master panel right and clamp it at the given x. Kept: as an inline
- * the limit is an argument used after the branch and the store moves (tested;
- * bytes differ in the member). */
+/* Step the master panel right and clamp it at the given x. */
 #define MENU_CLAMP_PANEL(limit)                          \
     do {                                                 \
         MenuPanelTask* panel;                            \
@@ -66,10 +60,7 @@
         }                                                \
     } while (0)
 
-/* The start menu's skill order screen, which runs in the battle selection
- * work area at 0x80148570: func_801D8908 moves the cursor and swaps two
- * skills, func_801D9350 packs the empty slots to the end. func_80166AE4
- * resolves the character's ability list by party slot and ability group. */
+/* The start menu's skill order screen. */
 typedef struct SkillOrder {
     u8 pad_00[0x0A];
     u8 party_slot;    /* 0x0A; character whose ability list is shown */
@@ -87,10 +78,7 @@ ASSERT_OFFSET(SkillOrder, cursor, 0x0C);
 ASSERT_OFFSET(SkillOrder, swap_cursor, 0x0D);
 ASSERT_OFFSET(SkillOrder, unk_54, 0x54);
 
-/* The start overlay's step counter at 0x80143B92. func_801E3EC4 takes its
- * address before the increment (lui/addiu of the base, then lhu/shu through
- * it), so that unit needs the one-element table view; every other reader
- * takes the scalar cell. */
+/* The start overlay's step counter at 0x80143B92. func_801E3EC4 takes its address before the increment (lui/addiu of the base. */
 typedef union CampMenuStepCounter {
     u16 value;
     u16 rows[1];
@@ -148,8 +136,7 @@ typedef struct Start08Rotation {
 
 extern Start08Rotation D_801EC4D0[];
 
-/* One 8-byte label row: glyph count, signed x nudge (read through (s8)), then
- * the text. */
+/* One 8-byte label row: glyph count, signed x nudge (read through (s8)), then the text. */
 typedef struct StartLabel {
     u8 length;
     u8 offset_x;
@@ -193,9 +180,7 @@ extern s8              D_801484E3;
 extern s16             D_801484E4;
 extern s16             D_801484E6;
 extern u8              D_801484EB;
-/* The start-menu panel: slot 13 of g_MenuPanelTasks (0x80148504), the shared
- * choice-list view. The retail addresses the cells one by one, so they keep
- * their own symbols below; each is the cell the shared record names. */
+/* The start-menu panel: slot 13 of g_MenuPanelTasks (0x80148504), the shared choice-list view. */
 extern u8*             D_80148500;
 extern MenuChoicePanel D_80148504;
 extern s16             D_80148508; /* signed scalar view of the panel's x */
@@ -241,8 +226,7 @@ extern s8              D_80148668;
 extern s8              D_80148669;
 extern s8              D_8014866A;
 extern u8              D_80148694;
-/* The save/card probe's result word; the start rows read its low byte with
- * LOBU, and etc/start/09 and etc/shop/00 test and store the whole word. */
+/* The save/card probe's result word. */
 /* D_8018E990 */
 extern u8              g_SaveCardDirectory[];
 extern u8*             D_801C893C[];
@@ -321,14 +305,7 @@ extern Callback g_MenuStartStep5Sub2Funcs[MENU_START_STEP5_SUB2_COUNT];
 extern Callback D_801EC53C[];
 extern Callback D_801EC578[];
 extern Callback D_801EC58C[];
-/* Panel and caption resources. A glyph row is a run of 3-byte records
- * {s8 dx, s8 dy, u8 glyph} in 8-pixel units that UI_DrawSpriteRun draws until
- * glyph 0xFF; g_MenuCaptionRight packs several such runs and the label
- * strings in one row. The icon and portrait rows are UI_DrawText glyph
- * strings and an atlas of s16 cells followed by label strings. Both stay byte
- * arrays: a row's size includes alignment padding past its payload (44 bytes
- * for a 42-byte run, 688 for a 687-byte bank), and a typed record array would
- * need the split data to own that padding. */
+/* Panel and caption resources. */
 extern u8       g_MenuCaptionRight[688];
 /* D_801EC754 */
 extern u8       g_MenuListTab2OffSprites[];
@@ -423,8 +400,7 @@ extern u8              D_801ED620;
 /* D_801ED63C */
 extern u8              g_EquipPreview[EQUIP_SLOT_COUNT];
 extern s8              D_801ED648;
-/* The start overlay's slot rows (three bytes per slot) and its byte table;
- * every reader indexes or walks them as bytes. */
+/* The start overlay's slot rows (three bytes per slot) and its byte table. */
 extern u8              D_801ED680[];
 extern u8              D_801ED68C;
 extern u8              D_801ED690[];
@@ -466,8 +442,7 @@ extern u8* g_NameEntryGridDot;
 /* D_801ED05C */
 extern u8  g_NameEntryControlsFrame[];
 
-/* Shared calls the start-screen units make: the main executable's window,
- * input, resource and sound helpers, and the game overlay's draw helpers. */
+/* Shared calls the start-screen units make. */
 extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern s16  Char_AddStat(u16* value, s16 delta);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
@@ -831,8 +806,7 @@ extern u8        D_801ED105;
 extern u8        D_801485B8;
 void             func_801EA1F0(MenuPanelTask* task);
 
-/* Pick the party record the record index selects: record 0 is the saved
- * Character, any other is the Character copy inside the battle row. */
+/* Pick the party record the record index selects. */
 static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_index) {
     if ((record_index & BYTE_MASK) == 0) {
         return &g_Characters[character_index & BYTE_MASK];

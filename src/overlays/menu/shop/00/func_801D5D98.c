@@ -1,8 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declarations: shared fill-style byte, shop panel/state bytes, the
- * panel mode/flag bytes and helpers owned by this target or the executable
- * overlay. */
+/* File-local declarations: shared fill-style byte, shop panel/state bytes, the panel mode/flag bytes and helpers owned by this target or the executable overlay. */
 
 MATCH void func_801D5D98(void) {
     u8  count;

@@ -43,8 +43,7 @@ MATCH void func_801D3A98(void) {
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags = 0xFF;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C =
             s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
-        /* g_MenuStep.state through g_MenuStep.sub_step: retail keeps the symbol-relative
-         * address in a register for the read-modify-write. */
+        /* g_MenuStep.state through g_MenuStep.sub_step. */
         (&g_MenuStep.sub_step)[1]++;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));

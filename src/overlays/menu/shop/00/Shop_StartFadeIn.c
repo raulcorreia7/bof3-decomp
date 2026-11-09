@@ -1,8 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declaration: UI_SetMode is the game UI mode setter owned by
- * the game UI contract (include/sys/gameui.h) and is not declared by
- * shop_00.h. */
+/* File-local declaration: UI_SetMode is the game UI mode setter owned by the game UI contract (include/sys/gameui.h) and is not declared by shop_00.h. */
 
 /* func_801DE3C8 */
 MATCH void Shop_StartFadeIn(void) {

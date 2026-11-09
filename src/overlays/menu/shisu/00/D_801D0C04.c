@@ -1,6 +1,6 @@
 #include "shisu_00.h"
 
-/* The format strings, the ten formation layouts of the party formation menu, and the address runs ahead of the code. */
+/* The format strings, the ten formation layouts of the party formation menu. */
 char g_MenuStatFormat[4] = "%3d";
 static char s_gap_801D0C08[8] = "%3d/   ";
 static char s_gap_801D0C10[8] = "   /%3d";

@@ -1,8 +1,4 @@
-/* Draw the four stat labels, their values and the glyph rows. One definition
- * shared by the shop, start, Bate and Shisu overlays; each overlay includes
- * this file where the function sits and binds the icon, format and glyph-row
- * names in its table in config/symbols.toml.
- */
+/* Draw the four stat labels, their values and the glyph rows. each overlay includes this file where the function sits and binds the icon, format and glyph-row names in its table in config/symbols.toml. */
 /* func_801D1444 (sisyou), func_801D2C2C (bate), func_801D3BD4 (shisu), func_801D86D4 (shop), func_801DBBCC (start) */
 MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
     u8* base;

@@ -2,8 +2,7 @@
 
 void func_801D9110(void);
 
-/* start_08.h cannot be included here: it declares D_80148654 and D_80148665
- * as plain bytes; this unit polls both as volatile. */
+/* start_08.h cannot be included here. */
 extern volatile u8 D_80148654;
 extern u8          D_80148656;
 extern volatile u8 D_80148665;
@@ -16,8 +15,7 @@ MATCH void func_801D7240(void) {
     Menu_DrawClutStrip(D_80144953);
     func_801D9110();
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
-    /* Volatile on the timer and the latched byte keeps the retail store order:
-     * plain loads are hoisted above the timer store. */
+    /* Volatile on the timer and the latched byte keeps the retail store order. */
     D_80148654 = 5;
     state      = D_80148651;
     pending    = D_80148665;

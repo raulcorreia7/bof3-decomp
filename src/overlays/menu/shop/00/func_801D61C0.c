@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declarations: frontend flag word, party-size byte, party pointer
- * table, and helpers owned by this target or the executable overlay. */
+/* File-local declarations: frontend flag word, party-size byte, party pointer table. */
 
 MATCH void func_801D61C0(void) {
     s16 value;

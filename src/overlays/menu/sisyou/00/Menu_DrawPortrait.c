@@ -1,7 +1,6 @@
 #include "sisyou_00.h"
 
-/* g_EmiLoadedCharacterIndex, the front-end mode byte owned by the main executable:
- * the low 7 bits select the current mode. */
+/* g_EmiLoadedCharacterIndex, the front-end mode byte owned by the main executable. */
 
 /* Panel atlas records: u, v, clut x, clut y (4-byte stride). */
 

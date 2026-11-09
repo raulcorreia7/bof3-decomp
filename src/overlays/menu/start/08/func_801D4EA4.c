@@ -1,7 +1,6 @@
 #include "start_08.h"
 
-/* Armor id list; the quantity list INV_ARMOR_QTY (0x8014534C) sits 0x200 bytes
- * on, and retail reaches it from this single base, so it stays an offset. */
+/* Armor id list; the quantity list INV_ARMOR_QTY (0x8014534C) sits 0x200 bytes on. */
 
 MATCH void func_801D4EA4(void) {
     u8* ids;

@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-/* Handler table for the shop's active mode, indexed by the shared
- * shop-state byte g_MenuStep.state. */
+/* Handler table for the shop's active mode, indexed by the shared shop-state byte g_MenuStep.state. */
 
 MATCH void SAVE_DispatchState(void) {
     SYS_DISPATCH_BYTE(g_SaveStates, g_MenuStep.state);

@@ -1,7 +1,4 @@
-/* Draw one party row: the stat values, the icons and the experience to the next level. One definition
- * shared by the shop, start, Bate and Shisu overlays; each overlay includes this file where the function
- * sits.
- */
+/* Draw one party row: the stat values, the icons and the experience to the next level. each overlay includes this file where the function sits. */
 /* func_801D37AC (bate), func_801D4754 (shisu), func_801D9254 (shop), func_801DC74C (start) */
 MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     u8* cell;

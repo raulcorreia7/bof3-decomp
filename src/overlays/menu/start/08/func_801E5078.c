@@ -1,7 +1,6 @@
 #include "start_08.h"
 
-/* start_08.h declares the card-port cell u8; retail stores it with `sw`, and
- * the etc/start/09 view owns the same cell as an s32. */
+/* start_08.h declares the card-port cell u8. */
 
 MATCH void func_801E5078(void) {
     s32 port;

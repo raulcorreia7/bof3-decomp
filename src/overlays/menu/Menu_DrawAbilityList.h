@@ -1,5 +1,4 @@
-/* Menu_DrawAbilityList: the ability list panel of the shop (0x801DCE5C) and bate (0x801D73B4) overlays. The including image
- * supplies g_MenuAbilityListNames and the four g_MenuListTab*Sprites runs. */
+/* Menu_DrawAbilityList: the ability list panel of the shop (0x801DCE5C) and bate (0x801D73B4) overlays. */
 
 /* Layout in pixels: the window and the frame cells around it. */
 #define MENU_ABILITY_LIST_WINDOW_WIDTH  154
@@ -67,7 +66,7 @@ MATCH void Menu_DrawAbilityList(MenuListPanel* panel) {
             }
             element = Char_GetAbilityElement(*list);
             ability = &g_Abilities[*list];
-            /* needs: type: D_80148656 is read signed here and unsigned above */
+            /* needs: type: D_80148656 is read signed here and unsigned above. */
             cost    = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
                 if (shade != MENU_SHADE_DIM) {

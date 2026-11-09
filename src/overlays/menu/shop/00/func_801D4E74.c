@@ -1,8 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declarations: shared fill-style byte, shop panel/selection bytes,
- * the panel flag byte, the pad state halfwords and helpers owned by this
- * target or the executable overlay. */
+/* File-local declarations: shared fill-style byte, shop panel/selection bytes, the panel flag byte, the pad state halfwords and helpers owned by this target or the executable overlay. */
 
 MATCH void func_801D4E74(void) {
     s32 buttons;

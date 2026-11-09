@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declarations: the shop message panel fields and the pad halfwords
- * are not declared by this target's shop_00.h. */
+/* File-local declarations: the shop message panel fields and the pad halfwords are not declared by this target's shop_00.h. */
 
 MATCH void func_801E2474(void) {
     u8* counter;

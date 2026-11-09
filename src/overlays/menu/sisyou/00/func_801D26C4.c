@@ -1,8 +1,6 @@
 #include "sisyou_00.h"
 
-/* Bit-array base owned by the main executable; only its address is taken. No
- * other consumer names the D_8014554C block (etc/game/00@0x801C2018 tests only its
- * bit 4). */
+/* Bit-array base owned by the main executable; only its address is taken. */
 
 /* Panel-lock flag owned by the main executable. */
 

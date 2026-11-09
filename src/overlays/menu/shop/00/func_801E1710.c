@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-/* Draws the skill-ability list panel of one character: ten rows with each
- * ability and its level, the name, the two tab strips and the window frame. */
+/* Draws the skill-ability list panel of one character. */
 MATCH void func_801E1710(MenuPanelTask* task) {
     Ability* ability;
     u8*      list;

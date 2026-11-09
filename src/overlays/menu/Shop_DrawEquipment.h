@@ -1,8 +1,4 @@
-/* Draw the equipment panel: the six equipped objects, each with its sprite, and the EQUIP caption. One
- * definition shared by the shop, start, Bate and Shisu overlays; each overlay includes this file where
- * the function sits and binds g_MenuEquipRowIcons and g_MenuLabelEquip in its table in
- * config/symbols.toml. Every change here must verify every member.
- */
+/* Draw the equipment panel: the six equipped objects, each with its sprite. */
 
 /* Layout in pixels: the panel in frame cells, the caption and its icon, and the equipment rows. */
 #define MENU_EQUIPMENT_PANEL_WIDTH  9

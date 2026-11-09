@@ -2,8 +2,7 @@
 
 extern s8 D_80148656; /* local: s8 read (lb); sibling copies are u8 */
 
-/* Bubble-sorts the panel group's entries so items usable by the acting party member come first; the parallel row of
- * the second table moves with each swap. */
+/* Bubble-sorts the panel group's entries so items usable by the acting party member come first. */
 MATCH void func_801D5114(void) {
     u8  kind;
     u8  mask;

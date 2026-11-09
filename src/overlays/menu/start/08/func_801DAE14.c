@@ -1,4 +1,4 @@
-/* best score 90.14 */
+/* best score 90.14. */
 #include "start_08.h"
 
 /* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to

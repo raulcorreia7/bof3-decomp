@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declarations: shop panel slot flags, kind/count/source bytes and
- * frame halfwords are not declared by this target's shop_00.h. */
+/* File-local declarations: shop panel slot flags, kind/count/source bytes and frame halfwords are not declared by this target's shop_00.h. */
 
 MATCH void func_801E2724(void) {
     u8* flags = D_80148378;

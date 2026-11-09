@@ -1,8 +1,6 @@
 #include "start_08.h"
 
-/* The staged shop row is a 0x1C-byte record and the byte at +0x15 marks the
- * row hidden (0xFF); g_SaveSlots[0].source_index is that byte of the first row, so the cursor's
- * row sits one stride per index above it. */
+/* The staged shop row is a 0x1C-byte record and the byte at +0x15 marks the row hidden (0xFF). */
 #define SHOP_ROW_STRIDE 0x1C
 
 MATCH void func_801E5738(void) {

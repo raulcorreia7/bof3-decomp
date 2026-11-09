@@ -1,7 +1,6 @@
 #include "start_08.h"
 
-/* Runs the four-row choice menu: moves the D_801ED618 cursor on up/down, then on confirm advances the menu step by
- * the chosen row, or on cancel backs out to the previous panel. */
+/* Runs the four-row choice menu. */
 MATCH void func_801D2EAC(void) {
     s32 pad;
     u8  cursor;

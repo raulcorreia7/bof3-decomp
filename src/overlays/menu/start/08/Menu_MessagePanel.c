@@ -1,10 +1,8 @@
 #include "start_08.h"
 
-/* File-local declarations: the panel state handler table and the draw helpers
- * owned by this target or the executable. */
+/* File-local declarations: the panel state handler table and the draw helpers owned by this target or the executable. */
 
-/* The shared MenuPanelTask view types the icon cursor at 0x10 as unk_10; the
- * accesses here are signed halfword loads. */
+/* The shared MenuPanelTask view types the icon cursor at 0x10 as unk_10. */
 #define ICON_TASK   ((MenuPanelTask*)g_MenuCurrentPanel)
 #define ICON_CURSOR (*(s16*)&ICON_TASK->u.message.id)
 

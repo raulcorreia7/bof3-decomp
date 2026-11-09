@@ -1,7 +1,6 @@
 #include "start_08.h"
 
-/* Panel handler table selected by the shared panel task's state byte; draw
- * helper owned by this overlay. */
+/* Panel handler table selected by the shared panel task's state byte; draw helper owned by this overlay. */
 
 /* func_801E9140 */
 MATCH void Menu_ZennyPanel(void) {

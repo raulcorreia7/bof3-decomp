@@ -1,9 +1,6 @@
 #include "start_08.h"
 
-/* The 0xA4-byte rows of g_Characters are Character records
- * (include/game/character.h); the 0x140-byte rows of D_80145F04 carry the same
- * AP halfword at +0x16. Both are read through one byte pointer, as in the
- * matched sibling func_801E8580. */
+/* The 0xA4-byte rows of g_Characters are Character records (include/game/character.h). */
 
 MATCH s32 func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record) {
     Character* record;

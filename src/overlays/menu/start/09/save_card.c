@@ -1,9 +1,6 @@
 #include "start_09.h"
 
-/* Waits for the memory card to settle, then opens `name` on `port` and hands
- * the descriptor to func_801EFB44. Mode 0x200 reopens the file in mode 1.
- * Returns 0 on success (or when mode is 0) and -1 on failure.
- * K&R definition: the u8 port narrows at each use, as in retail. */
+/* Waits for the memory card to settle, then opens `name` on `port` and hands the descriptor to func_801EFB44. */
 MATCH s32 SAVE_AccessFile(port, name, mode, size, offset)
 u8        port;
 char*     name;

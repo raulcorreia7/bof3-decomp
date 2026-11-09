@@ -1,8 +1,6 @@
 #include "shop_00.h"
 
-/* The per-slot shop byte arrays (stride 0x140), the item records addressed by
- * byte offset (stride 0xA4), the shop caption buffer and the panel helpers are
- * declared by shop_00.h; func_8014F800 is declared by gfx/prim.h. */
+/* The per-slot shop byte arrays (stride 0x140), the item records addressed by byte offset (stride 0xA4), the shop caption buffer and the panel helpers are declared by shop_00.h. */
 MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     u8  item;
     s32 rec;
@@ -29,8 +27,7 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
         sel = -(enabled != 0) & 7;
     }
     i   = 0;
-    /* The x - x term keeps x live across the xpos copy, so the allocator keeps
-     * the copy instruction instead of merging xpos with x. */
+    /* The x - x term keeps x live across the xpos copy. */
     rec = item * 0xA4 + x - x;
     gx  = xpos + 8;
     do {

@@ -1,7 +1,4 @@
-/* Draw the row's equipment and item icons. One definition shared by the shop,
- * start, Bate and Shisu overlays; each overlay includes this file where the
- * function sits.
- */
+/* Draw the row's equipment and item icons. each overlay includes this file where the function sits. */
 /* func_801D5E90 (bate), func_801D6E38 (shisu), func_801DB938 (shop), func_801DEE30 (start) */
 MATCH void Menu_DrawRowIcons(u8* row_record, s32 palette_index) {
     u8 palette;

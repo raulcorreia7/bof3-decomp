@@ -16,7 +16,7 @@ MATCH void func_801D12FC(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         D_80148654 = 5;
-        /* signed byte load is required here: retail uses lb, not lbu */
+        /* signed byte load is required here: retail uses lb, not lbu. */
         if (*mode == 0) {
             D_80148651 += 1;
         } else {

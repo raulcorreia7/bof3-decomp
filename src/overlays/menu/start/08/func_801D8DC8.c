@@ -1,7 +1,6 @@
 #include "start_08.h"
 
-/* The scrolling list: eighteen entries, nine rows on screen, each row one cell tall. unk_0A is the first row on
- * screen, unk_0B the cursor entry and unk_08 the scroll step the panel animation applies. */
+/* The scrolling list: eighteen entries, nine rows on screen, each row one cell tall. unk_0A is the first row on screen, unk_0B the cursor entry and unk_08 the scroll step the panel animation applies. */
 #define START_LIST_LAST_ENTRY     17
 #define START_LIST_VISIBLE_ROWS   9
 #define START_LIST_ROW_HEIGHT     13

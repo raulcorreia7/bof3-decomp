@@ -2,10 +2,7 @@
 
 /* Panel-lock flag owned by the main executable. */
 
-/* Stock count and the two strided per-entry tables (0x140-byte stock records,
- * 0xA4-byte item records); the 2-D form keeps the original's symbol+index
- * addressing. The stock row stride comes from func_801D0DD4 and its sibling
- * list walkers. */
+/* Stock count and the two strided per-entry tables (0x140-byte stock records, 0xA4-byte item records). */
 
 MATCH void func_801D3148(void) {
     s32 i;

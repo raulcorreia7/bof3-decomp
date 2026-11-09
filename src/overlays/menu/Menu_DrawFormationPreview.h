@@ -1,5 +1,4 @@
-/* The formation preview of the party formation menu. start/08, shop/00, bate/00 and shisu/00 include it where the
- * function sits, and each image header declares the g_MenuFormation* tables. */
+/* The formation preview of the party formation menu. start/08, shop/00, bate/00 and shisu/00 include it where the function sits. */
 
 /* The formation table as one block, so the preview copies all of it to the stack. */
 typedef struct FormationTable {

@@ -5,10 +5,7 @@ s32 Char_GetExpForLevel(s32 char_id, u8 level);
 
 /* Line primitive setup helper (SetLineF2 in the PsyQ libgpu object). */
 
-/* Returns character `char_id`'s cumulative experience at `level`: the sum of
- * the `exp` halfwords of the first `level` 8-byte LevelGrowth rows for that
- * character in the level-growth table (0x318-byte character stride); -1 when
- * `level` is 100 or more. */
+/* Returns character `char_id`'s cumulative experience at `level`. */
 
 MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 char_id, u8 level, u32 exp) {
     LINE_F2* line;

@@ -5,8 +5,7 @@ MATCH void func_801D39F8(void) {
     u8 count;
     u8 selection;
 
-    /* The state byte is read before the delay counter is stored: the original
-     * schedule interleaves the two accesses in that order. */
+    /* The state byte is read before the delay counter is stored. */
     count      = D_80148651;
     D_80148654 = 4;
     D_80148651 = count + 1;

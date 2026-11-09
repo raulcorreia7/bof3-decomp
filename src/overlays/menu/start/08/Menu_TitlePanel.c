@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-/* Menu_TitlePanel */
+/* Menu_TitlePanel. */
 MATCH void Menu_TitlePanel(void) {
     u8* resource;
     s32 panel_x;

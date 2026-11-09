@@ -24,8 +24,7 @@ MATCH void func_801D5E88(void) {
             SAVE_DrawPortTabs(98, 76, D_801E60F8, g_SaveCardPort, 1);
             break;
     }
-    /* Pointer form: retail keeps one base register across the count load and
-     * the store, which a symbol access would re-materialize. */
+    /* Pointer form: retail keeps one base register across the count load and the store. */
     p   = &D_80148654;
     val = *p - 1;
     *p  = val;

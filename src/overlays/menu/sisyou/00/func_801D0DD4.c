@@ -2,8 +2,7 @@
 
 void Menu_DrawStatPanel(s32 id, s32 y, u8 entry);
 
-/* Stock list (stride 0x140 per entry) and the character records' master id
- * byte at +0x1B (stride 0xA4). */
+/* Stock list (stride 0x140 per entry) and the character records' master id byte at +0x1B (stride 0xA4). */
 
 MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
     u16* padp;

@@ -53,8 +53,7 @@
 #define CONTROLS_SPRITE_SHADE     0x80
 
 /* func_801E6784 */
-/* Draws the name entry control window: the OK, Del, Next and Back labels beside the character grid and the button
- * icons that select them. */
+/* Draws the name entry control window. */
 MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     SPRT* sprite;
     u8*   rect;

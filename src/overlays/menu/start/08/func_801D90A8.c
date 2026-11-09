@@ -1,8 +1,7 @@
 #include "start_08.h"
 
 MATCH void func_801D90A8(void) {
-    /* Pointer form: retail keeps one base register across the count load and
-     * the store, which a symbol access would re-materialize. */
+    /* Pointer form: retail keeps one base register across the count load and the store. */
     u8* timer = &D_80148654;
     u8  count;
 

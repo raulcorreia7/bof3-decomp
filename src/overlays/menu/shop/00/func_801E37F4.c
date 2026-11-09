@@ -22,9 +22,7 @@
 #define SHOP_DESC_BOTTOM_Y       24
 #define SHOP_DESC_RIGHT_X        168
 
-/* The shared panel task names the shop fields only by offset: unk_06 is the
- * panel's y origin, unk_0A the item category, unk_0B the item id, unk_0C the
- * quantity (the "*%2d" line) and unk_0D the discount flag. */
+/* The shared panel task names the shop fields only by offset. */
 
 MATCH void func_801E37F4(MenuPanelTask* task) {
     char* buffer;

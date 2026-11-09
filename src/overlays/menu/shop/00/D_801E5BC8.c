@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-/* Cells of 6 bytes, two cells per 0xC row: func_801DF6A8 reads [a * 6 + b * 0xC]. needs: type, the cell
- * members. */
+/* Cells of 6 bytes, two cells per 0xC row: func_801DF6A8 reads [a * 6 + b * 0xC]. needs: type, the cell members. */
 u8 D_801E5BC8[0x24] = {
     0x11, 0x00, 0x3E, 0x00, 0x00, 0x00, 0x9D, 0x00, 0x41, 0x00, 0x01, 0x00, 0x11, 0x00, 0x74, 0x00,
     0x00, 0x00, 0x9D, 0x00, 0x75, 0x00, 0x01, 0x00, 0x11, 0x00, 0xAA, 0x00, 0x00, 0x00, 0x9D, 0x00,
@@ -14,7 +13,7 @@ Callback g_ShopStep6Sub0Funcs[SHOP_STEP6_SUB0_COUNT] = {func_801DE200, Shop_Star
 
 Callback g_ShopStep6Sub3Funcs[SHOP_STEP6_SUB3_COUNT] = {func_801DE88C, func_801DE8E8, func_801DE944, func_801DEE20};
 
-/* Where the party stands on the boat after the Black Ship, one position per party slot; read by func_801DE944 (0x801DE944). */
+/* Where the party stands on the boat after the Black Ship, one position per party slot. */
 BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT] = {
     {0x00328000, 0x002C0000, 0x01800000, 0},
     {0x00348000, 0x002B0000, 0x01800000, 0},

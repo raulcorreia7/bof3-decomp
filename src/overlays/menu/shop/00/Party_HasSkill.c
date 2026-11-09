@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declarations: the two shop item-id tables are owned by the
- * executable overlay; this function searches them read-only. */
+/* File-local declarations: the two shop item-id tables are owned by the executable overlay. */
 
 MATCH bool Party_HasSkill(s32 item_id) {
     u8* row;
