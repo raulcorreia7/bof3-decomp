@@ -31,4 +31,7 @@ void func_801F76D0(void);
 /* D_801FE434 */
 extern SceneFunc g_SceneActorDispatch[];
 
+extern u8 D_801FE474;
+extern s8 (*D_801FE4BC[])(void);
+
 #endif

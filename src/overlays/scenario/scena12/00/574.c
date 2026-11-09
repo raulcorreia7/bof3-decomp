@@ -264,7 +264,9 @@ MATCH s32 func_801FC80C(s32 y) {
 
 INCLUDE_ASM(func_801FC890);
 
-INCLUDE_ASM(func_801FCC54);
+MATCH s8 func_801FCC54(s32 x, s32 y) {
+    SCENE_PROBE_POSITION(D_801FD228, 4, D_801FD23C);
+}
 
 MATCH s32 func_801FCCBC(void) {
     Game_SetScriptActive();

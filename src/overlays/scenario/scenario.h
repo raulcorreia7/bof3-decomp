@@ -14,6 +14,22 @@
 #include "scenario/runtime.h"
 #include "sys/cd.h"
 
+s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
+
+/* The body of a scene's position probe: look the position up in a table of `count` entries and run
+ * the handler at the index found, returning its result, else -1. The probes differ only in table,
+ * count and handlers. Every change here must verify every member. */
+#define SCENE_PROBE_POSITION(table, count, handlers)          \
+    do {                                                      \
+        s8 index;                                             \
+                                                              \
+        index = func_801A7AD8(&(table), (count), x, y);       \
+        if (index < 0) {                                      \
+            return -1;                                        \
+        }                                                     \
+        return (handlers)[index]();                           \
+    } while (0)
+
 #define SCRATCH_COLUMN_COUNT  0x80
 #define SCRATCH_COLUMN_OFFSET 0
 #define SCRATCH_COLUMN_STRIDE 0x14
