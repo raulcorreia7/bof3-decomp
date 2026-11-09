@@ -43,7 +43,20 @@ MATCH void func_801EEF10(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801EEF78);
+MATCH void func_801EEF78(void) {
+    u8 timer;
+
+    g_Task->timer += 4;
+    g_Task->param.unk_0B += 1;
+    timer = g_Task->timer;
+    if (timer == 16) {
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        GFX_AllocPaletteFade(g_Battle.selected_actor, -8, -8, -8, 1);
+        func_800A9610(g_Battle.target_selector, 16);
+        g_Task->unk_09 = 32;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF054(void) {
     u8  timer;
