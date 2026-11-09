@@ -41,4 +41,10 @@ extern CellBox  D_801F543C[4];
 extern Callback D_801F544C[];
 void            func_801F2F30(s32* first, s32* second);
 
+/* The actor row table and the per-actor 16-byte turn records. */
+extern Actor D_80147A58[];
+extern s8    D_80147CB9[];
+extern s8    D_80147CBA[];
+extern s32   D_80147CC4[];
+
 #endif
