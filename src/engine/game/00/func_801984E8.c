@@ -16,7 +16,7 @@ MATCH void func_801984E8(void) {
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
     GFX_AddPrim(5u, sizeof(DR_MOVE));
     func_801E0BD0();
-    D_80143F22       = 0;
+    g_EncounterSteps = 0;
     g_GameStateIndex = GAME_REQUEST_IDLE;
     {
         u16 tmp_3B92 = g_GameEntrySubstate;

@@ -14,10 +14,10 @@ MATCH u8 func_8019EEE4(void) {
         g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
         return true;
     }
-    if (D_80145ECE - distance >= 0x81) {
+    if (COORD_INT(g_Game.members[0].pos.z) - distance >= 0x81) {
         return false;
     }
-    if (distance - D_80145ECE >= 0x101) {
+    if (distance - COORD_INT(g_Game.members[0].pos.z) >= 0x101) {
         return true;
     }
     if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0x11) {

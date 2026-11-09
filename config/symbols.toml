@@ -3645,13 +3645,13 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world01/area063/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets g_EncounterSteps to D_80145FB8 - 5." }
 g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area064/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets g_EncounterSteps to D_80145FB8 - 5." }
 g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
@@ -3716,13 +3716,13 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world01/area072/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets g_EncounterSteps to D_80145FB8 - 5." }
 g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area073/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets g_EncounterSteps to D_80145FB8 - 5." }
 g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
@@ -3950,7 +3950,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world02/area110/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets g_EncounterSteps to D_80145FB8 - 5." }
 g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
@@ -4069,7 +4069,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world03/area124/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets g_EncounterSteps to D_80145FB8 - 5." }
 g_AreaSpawnPositions = { addr = 0x801F2DC8, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F2DD8, source = "Weights for actor spawns." }
 
@@ -4077,7 +4077,7 @@ g_AreaSpawnWeights = { addr = 0x801F2DD8, source = "Weights for actor spawns." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_FindFreeWorkRow = { addr = 0x801F3348, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
 Area_ClearWorkColumn = { addr = 0x801F3384, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
-Area_SpawnWeightedActor = { addr = 0x801F3504, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+Area_SpawnWeightedActor = { addr = 0x801F3504, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets g_EncounterSteps to D_80145FB8 - 5." }
 g_AreaSpawnPositions = { addr = 0x801F37D8, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F37E8, source = "Weights for actor spawns." }
 
@@ -5148,6 +5148,7 @@ g_GameContextKind = { addr = 0x80143F1C, source = "Kind of the game entry contex
 g_GameRequestKind = { addr = 0x80143F1D, source = "Kind of the game request." }
 g_GameEntryMode = { addr = 0x80143F1E, source = "Entry mode of the field: Game_UpdateAreaLoad sets it to 10, 20 or 0 and Game_UpdateField tests it against GAME_NONE." }
 g_GamePrevSelection = { addr = 0x80143F1F, source = "The previous game selection." }
+g_EncounterSteps = { addr = 0x80143F22, source = "Steps walked since the last encounter: Area_WalkStep and func_801B146C add 1 per step (2 when direction_08 is 2 or 6), func_80197F48 and func_801984E8 reset it, and Area_CanStartEncounter starts a fight once it reaches the threshold Area_RollEncounterThreshold stores in D_80145FB8." }
 g_EncounterOriginX = { addr = 0x80143F24, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin x; Area_PlaceEncounterEnemies and func_801C6658 offset party start positions from it" }
 g_EncounterOriginY = { addr = 0x80143F28, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin y; Area_PlaceEncounterEnemies and func_801C6658 offset party start positions from it" }
 g_EncounterParty = { addr = 0x80143F2C, type = "FormationPos", size = 0x18, source = "func_801BFE34 and func_801C6658 store one field-battle start position per party order slot; func_801C6888 and func_801C69C8 test them for overlap and height" }

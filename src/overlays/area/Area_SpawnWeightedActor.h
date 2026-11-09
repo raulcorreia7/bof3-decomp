@@ -42,5 +42,5 @@ pick_weight:
         g_Actors[count].pos.y.fixed      = y;
         COORD_INT(g_Actors[count].pos.z) = Area_SampleHeight(g_Actors[count].pos.x.fixed, y);
     }
-    D_80143F22 = D_80145FB8 - 5;
+    g_EncounterSteps = D_80145FB8 - 5;
 }

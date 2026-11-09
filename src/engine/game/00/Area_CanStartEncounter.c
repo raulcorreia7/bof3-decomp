@@ -19,9 +19,9 @@ MATCH s32 Area_CanStartEncounter(void) {
         return 0;
     }
     if (g_Game.members[0].u.field.counter_11C.u8_value < 4) {
-        value = ((u16)D_80143F22 * 7) / 10;
+        value = ((u16)g_EncounterSteps * 7) / 10;
     } else {
-        value = (u16)D_80143F22;
+        value = (u16)g_EncounterSteps;
     }
     if (value < D_80145FB8) {
         return 0;

@@ -11,7 +11,6 @@
 #include <rand.h>
 
 extern SVECTOR  D_1F800014[];
-extern s32      D_80145EC4[];
 extern u8       D_801F64D8[];
 extern u8       D_801F64E8[];
 extern u8       D_801F64E9[]; /* the y byte of each D_801F64E8 row */

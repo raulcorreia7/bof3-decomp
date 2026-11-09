@@ -3,7 +3,7 @@
 MATCH bool func_801B59B4(void) {
     s32 kind;
 
-    kind = D_8014625C & INPUT_DIRECTIONAL;
+    kind = g_Game.input & INPUT_DIRECTIONAL;
     switch (kind) {
         case PADLup:
             g_Task->direction_08 = FACING_UP_LEFT;

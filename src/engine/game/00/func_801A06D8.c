@@ -68,7 +68,7 @@ MATCH u32 func_801A06D8(void) {
                 }
             }
         }
-        result     = (u16)D_80143F22;
+        result     = (u16)g_EncounterSteps;
         D_80146878 = result;
     }
     return result;

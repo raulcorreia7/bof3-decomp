@@ -16,7 +16,7 @@ MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
         index = 0;
     loop:
         {
-            if ((&D_80145F00)[index] == 0) {
+            if ((&g_Game.members[0].unk_70)[index] == 0) {
                 *x_ptr = x;
                 *y_ptr = y;
             } else if ((g_Game.walk_flags & 0x4000) == 0) {
@@ -28,8 +28,8 @@ MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
                 out_y  = y - FIELD(s32, &D_801CD480, tab);
                 *y_ptr = out_y;
             }
-            (&g_Game.members[0].facing)[index] = kind;
-            FIELD(s16, &D_80145ECE, index)     = Area_ReadHeight(*x_ptr, *y_ptr);
+            (&g_Game.members[0].facing)[index]                     = kind;
+            FIELD(s16, &COORD_INT(g_Game.members[0].pos.z), index) = Area_ReadHeight(*x_ptr, *y_ptr);
             if (count != 0) {
                 VOL(u8, ((u8*)&g_Game.members[0])[index]) |= 0x40;
             } else {

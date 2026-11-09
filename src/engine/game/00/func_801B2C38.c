@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801B2C38(void) {
-    if (D_8014625C != 0) {
+    if (g_Game.input != 0) {
         g_Game.current->u.field.mode_12B.u8_value = 0U;
     } else {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();

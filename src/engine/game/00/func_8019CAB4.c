@@ -11,7 +11,7 @@ MATCH u8 func_8019CAB4(void) {
         g_Actors[id].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
         return 1;
     }
-    if (D_80145ECE + 64 < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
+    if (COORD_INT(g_Game.members[0].pos.z) + 64 < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
         walkable = 1;
     } else {
         work     = g_Task;
