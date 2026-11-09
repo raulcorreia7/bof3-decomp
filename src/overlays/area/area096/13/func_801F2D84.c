@@ -1,3 +1,14 @@
 #include "area096_13.h"
 
-INCLUDE_ASM(func_801F2D84);
+MATCH void func_801F2D84(void) {
+    u8* width;
+
+    func_801F2ECC(g_Task->pos.z.fixed, 0x80);
+    g_Task->timer -= 1;
+    if (g_Task->timer == 0) {
+        width                               = MEM_PTR(u8, 0x80104000u);
+        g_AreaCellCodes[*width * 60 + 0x45] = 0;
+        g_AreaCellCodes[*width * 60 + 0x46] = 0;
+        g_Task->header.step += 1;
+    }
+}
