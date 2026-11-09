@@ -11,41 +11,71 @@ maspsx). The build reproduces all 428 code images of the game byte for byte.
 A function is named `TARGET@0xADDRESS`, for example `exe/slus_004_22@0x8014AA04`. The same address
 in two targets is two unrelated functions. Progress: [live status](https://raulcorreia7.github.io/bof3-status/).
 
-## Quick start
+## Requirements
 
-Linux is the primary host; use WSL2 on Windows. Install `git`, `curl`, `tar`, `unzip`, `7z` (not needed with `--no-sdk`),
-[`uv`](https://docs.astral.sh/uv/), Meson, Ninja, `clang-format` and
-[`dprint`](https://dprint.dev/install/) first ([full list](docs/toolchain.md#host-tools)).
+Linux x86_64. On Windows use WSL2.
 
-Without a disc you can edit code and docs and run every check that needs no game data:
+| Tool                                | Version             | Install                                                                               |
+| ----------------------------------- | ------------------- | ------------------------------------------------------------------------------------- |
+| `git`, `curl`, `tar`, `unzip`, `7z` | any                 | system package (`7z` is `p7zip`; `tools/setup.sh --no-sdk` does not need it)          |
+| Python                              | 3.12 or later       | system package; `uv` does not download one                                            |
+| [`uv`](https://docs.astral.sh/uv/)  | any                 | `curl -LsSf https://astral.sh/uv/install.sh \| sh`                                    |
+| Rust and a C compiler               | Rust 1.99 or later  | [rustup](https://rustup.rs/); `cc` from the system package `build-essential` or `gcc` |
+| Meson and Ninja                     | Meson 1.3 or later  | system package, or `uv tool install meson ninja`                                      |
+| `clang-format`                      | 23.1.3 (the CI pin) | `uv tool install clang-format==23.1.3`                                                |
+| [`dprint`](https://dprint.dev/)     | 0.64.3 (the CI pin) | [install page](https://dprint.dev/install/); the binary goes on `PATH`                |
+
+`tools/setup.sh` downloads the rest and checks each download by SHA-256: the GCC 2.7.2 PSX compiler,
+maspsx, MIPS binutils and PsyQ 3.7 (Sony's SDK). The permuter, `coddog`, `objdiff-cli` and `rizin`
+for matching are listed under [matching tools](docs/toolchain.md#matching-tools).
+
+The disc is a dump of the US release, serial `SLUS-00422`: a CUE sheet and two BIN tracks. Put all
+three files in `inputs/external/`; [inputs/README.md](inputs/README.md) lists their sizes and hashes.
+Without a disc you can still edit code and docs and run the checks that need no game data
+([without a disc](docs/toolchain.md#without-a-disc)).
+
+## Set up
 
 ```sh
 git clone https://github.com/raulcorreia7/bof3-decomp.git
 cd bof3-decomp
-tools/setup.sh --dev --no-payloads --no-sdk
-meson setup build/meson
-meson compile -C build/meson pre-push     # every check that needs no disc, one line each
+cp /path/to/disc/*.cue /path/to/disc/*.bin inputs/external/
+tools/setup.sh --dev
 ```
 
-With your own US disc in `inputs/external/` ([how](inputs/README.md)) you can also build and match:
+Setup creates `.venv`, downloads and verifies the toolchain, builds the disc extractor, extracts the
+disc to `build/disc` and checks every extracted file. It is safe to run again. Without a disc, run
+`tools/setup.sh --dev --no-payloads --no-sdk` instead.
+
+## Build
 
 ```sh
-tools/setup.sh --dev
 meson setup build/meson
 meson compile -C build/meson
-meson compile -C build/meson check        # every image against its retail SHA-1
-tools/worklist.py -n 10                   # what to match first
 ```
 
-Then [find work](CONTRIBUTING.md#find-work) and follow [your first match](CONTRIBUTING.md#your-first-match).
+The build writes one file per code image to `build/meson/<image>.bin`.
+
+## Check
+
+```sh
+meson compile -C build/meson check
+```
+
+Passes when all 428 images equal their retail SHA-1. Without a disc,
+`meson compile -C build/meson pre-push` runs every check that needs no game data.
+
+## Next
+
+- [Your first function](CONTRIBUTING.md#your-first-function): find one, match it, open a pull request.
+- [Documentation index](docs/README.md): toolchain, matching, conventions.
+- [Tools](tools/README.md): every routine task as one command.
 
 ## The data
 
-The repository holds no disc image, executable, audio or other game media, and no SDK object.
-Setup reads the disc you dumped and keeps everything it extracts under `build/` and `inputs/`, which
-Git ignores. Never commit or share those files. Setup downloads the pinned compiler and PsyQ 3.7
-(Sony's SDK) from their public sources and checks each download by hash
-([third-party tools](third_party/README.md)).
+The repository holds no disc image, executable, audio or other game media, and no SDK object. Setup
+keeps everything it extracts or downloads under `build/`, `inputs/` and `toolchains/`, which Git
+ignores. Never commit or share those files ([third-party tools](third_party/README.md)).
 
 ## Layout
 
@@ -60,7 +90,6 @@ Git ignores. Never commit or share those files. Setup downloads the pinned compi
 
 ## Links
 
-- [Documentation index](docs/README.md) and [CONTRIBUTING.md](CONTRIBUTING.md)
 - [BOF3 wiki](https://raulcorreia7.github.io/bof3-wiki/): game and file-format facts. A source
   comment `@source: wiki:data/records` names a page of it.
 - [bof3-tools](https://github.com/raulcorreia7/bof3-tools): the `bof3` disc and archive CLI that

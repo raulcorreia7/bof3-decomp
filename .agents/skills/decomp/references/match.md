@@ -10,7 +10,7 @@ Input: `TARGET@0xADDRESS` from the task.
    Budget: three structurally different tries, then record the attempt and `BLOCKED`. Dedupe with
    `bin/coddog match <target> <func>` ([coddog](../../../../docs/toolchain.md#coddog)): a matched twin
    is reused and shared ([shared bodies](../../../../docs/conventions.md#shared-bodies)), not lifted
-   again; a twin in the same image is `<Name>_<ADDR>` with the group's statement macro as its body.
+   again (a bmagic body is one `src/overlays/bmagic/<Name>.h`); a twin in the same image is `<Name>_<ADDR>` with the group's statement macro as its body.
 2. Seed: `tools/seed.py <target>@<func>` writes `work/<image>/<ADDR>/` (assembly, context, the best
    m2c draft, twins, callees, callers; [tools](../../../../tools/README.md#m2c-sweep)). Read it with
    the function's prototypes ([loop](../../../../docs/matching.md#the-loop)) and draft there.
@@ -26,8 +26,9 @@ Input: `TARGET@0xADDRESS` from the task.
    [permuter](../../../../docs/matching.md#permuter).
 5. On a match, polish the exact candidate before it lands ([polish](../../../../docs/matching.md#polish);
    [the rule](../../../../docs/conventions.md#write-it-as-the-original-programmer-did)) and re-run
-   `match.sh`. After a type or signature change also run `tools/sigs.py scan <path>`. After `match.sh` reports `match`, run `check-<image>` before replacing the draft with
-   `MATCH`. Without a match, record the forms tried and first differing instruction in
+   `match.sh`. After a type or signature change also run `tools/sigs.py scan <path>`. The lift stays
+   `NON_MATCHING` until `match.sh` reports `match` and `check-<image>` passes with the `MATCH`
+   definition in place. Without a match, record the forms tried and first differing instruction in
    `config/attempts.tsv`.
 6. The split: a match changes the unit's `.c` and, for a name, `config/symbols.toml`. The
    `config/<target>/splat.yaml` row stays. Change `splat.yaml` only when the split itself is wrong:

@@ -25,9 +25,9 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 
 ## Setup
 
-Linux is the primary host; use WSL2 on Windows. Install the host tools above, then run the
-commands of the [README quick start](../README.md#quick-start). Add `--matching` to
-`tools/setup.sh` for the permuter, the differ and m2c.
+Install the host tools above, then run the [README set up](../README.md#set-up) and
+[build](../README.md#build) commands. Add `--matching` to `tools/setup.sh` for the permuter, the
+differ and m2c.
 
 Put your disc in `inputs/external/` before `tools/setup.sh` ([inputs](../inputs/README.md)). The
 script is safe to run again; each step checks its result first. It runs:
