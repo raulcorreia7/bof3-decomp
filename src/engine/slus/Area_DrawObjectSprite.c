@@ -12,7 +12,7 @@ MATCH void Area_DrawObjectSprite(void) {
     u8          mode;
     u8          clip_x;
     u8          clip_y;
-    s8          bank;
+    s8          page_offset;
     u8          width;
     u8          height;
     s16         x;
@@ -73,11 +73,11 @@ MATCH void Area_DrawObjectSprite(void) {
                 clip_x = 0;
                 clip_y = 0;
             }
-            bank = 0;
+            page_offset = 0;
             if (g_Task->unk_28 != PALETTE_KIND_CELL) {
-                bank = -1;
+                page_offset = -1;
                 if (cell->u >= 0x28) {
-                    bank = cell->u >= 0xA1;
+                    page_offset = cell->u >= 0xA1;
                 }
             }
             prim   = (POLY_FT4*)g_GfxPrimCursor;
@@ -88,37 +88,37 @@ MATCH void Area_DrawObjectSprite(void) {
                 x        = g_Task->screen_x + (s8)cell->x;
                 prim->x0 = x;
                 prim->x1 = width + x;
-                prim->u1 = cell->u - bank * 128 - 1;
+                prim->u1 = cell->u - page_offset * 128 - 1;
                 prim->u0 = prim->u1 + width;
             } else if (mode == 2) {
                 x        = g_Task->screen_x - (s8)cell->x;
                 prim->x0 = x;
                 prim->x1 = x - width;
-                prim->u0 = cell->u - bank * 128 - 1;
+                prim->u0 = cell->u - page_offset * 128 - 1;
                 prim->u1 = prim->u0 + width;
             } else if (mode == 4) {
                 prim->x0 =
                     g_Task->screen_x + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
                 prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
-                prim->u0 = cell->u - bank * 128;
+                prim->u0 = cell->u - page_offset * 128;
                 prim->u1 = prim->u0 + width - clip_x;
             } else if (mode == 6) {
                 prim->x1 =
                     g_Task->screen_x - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
                 prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
-                prim->u1 = clip_x + (cell->u - bank * 128 - 1);
+                prim->u1 = clip_x + (cell->u - page_offset * 128 - 1);
                 prim->u0 = prim->u1 + width - clip_x;
             } else if (mode == 5) {
                 prim->x0 =
                     g_Task->screen_x + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
                 prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
-                prim->u1 = clip_x + (cell->u - bank * 128 - 1);
+                prim->u1 = clip_x + (cell->u - page_offset * 128 - 1);
                 prim->u0 = prim->u1 + width - clip_x;
             } else if (mode == 7) {
                 prim->x1 =
                     g_Task->screen_x - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
                 prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
-                prim->u0 = cell->u - bank * 128;
+                prim->u0 = cell->u - page_offset * 128;
                 prim->u1 = prim->u0 + width - clip_x;
             }
             prim->x2 = prim->x0;
@@ -147,11 +147,11 @@ MATCH void Area_DrawObjectSprite(void) {
             tint     = g_Task->tint.bytes.unk_5F - 0x80;
             prim->b0 = tint;
             if (GetGraphType() == 1 || GetGraphType() == 2) {
-                page  = g_Task->unk_25 + bank;
+                page  = g_Task->unk_25 + page_offset;
                 tpage = GFX_TPAGE_GRAPH_TYPE_1_2(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6,
                                                  (page / 16) << 8);
             } else {
-                page  = g_Task->unk_25 + bank;
+                page  = g_Task->unk_25 + page_offset;
                 tpage = GFX_TPAGE_STANDARD(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6,
                                            (page / 16) << 8);
             }
