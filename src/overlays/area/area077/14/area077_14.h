@@ -27,7 +27,7 @@ extern u8  D_801F6B50[];
 extern u8  D_801F6B58[];
 
 void func_801F3778(s32 arg0, void* dst, RECT* rect);
-void func_801F3B48(void* dst, s32 size);
+void func_801F3B48(Point2D* pos, u8 shade);
 
 void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y);
 
