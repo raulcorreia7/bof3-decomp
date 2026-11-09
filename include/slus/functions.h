@@ -78,7 +78,7 @@ u8           Actor_StepAnimLoop(void);
 /* func_8014DAEC */
 u8           Actor_StepAnimOnce(void);
 /* func_8014DC08 */
-extern void  Actor_SelectScriptBank(u32 record_index);
+extern void  Actor_SelectSprite(u32 record_index);
 /* func_8014DD3C */
 bool         Area_FindSceneRecord(s32 wanted_id);
 /* func_8014E0A8 */

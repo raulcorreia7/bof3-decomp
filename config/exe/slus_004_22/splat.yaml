@@ -146,7 +146,7 @@ segments:
       - [0xB7A24, c, Actor_StepAnimReverse]
       - [0xB7AEC, c, Actor_StepAnimOnce]
       - [0xB7B98, c, Actor_StageAnimStep]
-      - [0xB7C08, c, Actor_SelectScriptBank]
+      - [0xB7C08, c, Actor_SelectSprite]
       - [0xB7D3C, c, Area_FindSceneRecord]
       - [0xB7E78, c, func_8014DE78]
       - [0xB7FE8, c, Actor_ReadValue]

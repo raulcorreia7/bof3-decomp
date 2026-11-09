@@ -5532,7 +5532,7 @@ Actor_StepAnimLoop = { addr = 0x8014D978, type = "func", source = "Counts the st
 Actor_StepAnimReverse = { addr = 0x8014DA24, type = "func", source = "Plays the animation stream backwards: counts the delay at +0x4A down, at step 0 wraps to the end and returns 1, ignores jump steps, stages the step before the current position." }
 Actor_StepAnimOnce = { addr = 0x8014DAEC, type = "func", source = "As the looping step function, but at the end of the stream it sets +0x4A to 1 and returns 1 without staging, so the last frame holds; callers wait on it for a one-shot animation to end." }
 Actor_StageAnimStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Actor_SeekScript." }
-Actor_SelectScriptBank = { addr = 0x8014DC08, type = "func", source = "Selects the script bank of the actor." }
+Actor_SelectSprite = { addr = 0x8014DC08, type = "func", source = "Selects a sprite record of the actor: its sheet, animation and mirror." }
 Area_FindSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
 SYS_ReadCD = { addr = 0x8014E0A8, type = "func", source = "Reads sectors from the CD." }
