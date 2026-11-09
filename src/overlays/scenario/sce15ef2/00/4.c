@@ -4,7 +4,12 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801D0C0C);
+MATCH void func_801D0C04(void) {
+    D_801D1B1C[g_Task->header.mode]();
+    if (g_Task->header.mode != 0) {
+        func_801D1218(&g_Task->pos, (s16)g_Task->vx, 7);
+    }
+}
 
 MATCH void func_801D0C70(void) {
     u8* work;

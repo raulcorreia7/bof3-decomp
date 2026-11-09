@@ -140,9 +140,21 @@ INCLUDE_ASM(func_801F7638);
 
 INCLUDE_ASM(func_801F76D0);
 
-INCLUDE_ASM(func_801F77AC);
+MATCH void func_801F77AC(void) {
+    D_801FDFBC->unk_10 += 4;
+    func_801F97E0(D_801FDFBC);
+    if (--g_Task->vx == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
-INCLUDE_ASM(func_801F7810);
+MATCH void func_801F7810(void) {
+    D_801FDFBC->z += 0x1000000;
+    func_801F97E0(D_801FDFBC);
+    if (D_801FDFBC->z > 0xFFFFFFF) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F786C(void) {
     SYS_DISPATCH_TASK(D_801FDDAC, 2, g_Task);
@@ -297,7 +309,20 @@ MATCH u8 func_801F85D8(void) {
     return active;
 }
 
-INCLUDE_ASM(func_801F86BC);
+MATCH void func_801F86BC(u8* row) {
+    u8 next;
+
+    row[3] += 6;
+    if (--row[2] == 0) {
+        next   = row[1] + 1;
+        row[2] = row[4];
+        row[1] = next;
+        if (D_801FDFC4 == 0) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
+            D_801FDFC4 = 1;
+        }
+    }
+}
 
 #include "overlays/scenario/Actor_Wait.h"
 
