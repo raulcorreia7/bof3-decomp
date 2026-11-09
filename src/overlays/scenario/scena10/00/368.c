@@ -169,12 +169,7 @@ MATCH void func_801FD528(void) {
 }
 
 MATCH void func_801FD568(Actor* actor) {
-    func_801BE1B0(0);
-    actor->header.mode = 4;
-    actor->unk_78      = 2;
-    actor->unk_77      = 5;
-    actor->unk_7E      = 0;
-    SYS_SetFlag(g_SceneFlags, 0xF);
+    SCENA10_ACTOR_START(0, 5, 0xF);
 }
 
 INCLUDE_ASM(func_801FD5C0);
@@ -183,9 +178,13 @@ INCLUDE_ASM(func_801FD734);
 
 INCLUDE_ASM(func_801FD814);
 
-INCLUDE_ASM(func_801FD95C);
+MATCH void func_801FD95C(Actor* actor) {
+    SCENA10_ACTOR_START(0xA, 0x1E, 0x13);
+}
 
-INCLUDE_ASM(func_801FD9B4);
+MATCH void func_801FD9B4(Actor* actor) {
+    SCENA10_ACTOR_START(0xB, 0x1F, 0x13);
+}
 
 INCLUDE_ASM(func_801FDA0C);
 
