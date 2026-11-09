@@ -54,7 +54,6 @@ INCLUDE_ASM(func_801F7268);
 
 INCLUDE_ASM(func_801F7320);
 
-/* Hint: reads screen_x and screen_y as signed halves (lh); the Actor members are u16, so the draft loads lhu. */
 MATCH void func_801F73D4(void) {
     Actor* work;
 
@@ -78,7 +77,6 @@ INCLUDE_ASM(func_801F75E4);
 
 INCLUDE_ASM(func_801F7688);
 
-/* Hint: same shape as func_801F73D4 (lh of screen_x and screen_y, u16 members); here the 0x32 update is -0x10. */
 MATCH void func_801F774C(void) {
     Actor* work;
 
