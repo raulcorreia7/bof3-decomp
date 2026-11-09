@@ -27,6 +27,8 @@ extern u16 D_801F4FD4;
 
 /* g_GameEntryState and the byte after it, read as one word. */
 extern u32 g_GameEntryStateWord;
+extern u8 D_80146874;
+extern u8 D_80146875;
 
 void func_801F3630(void);
 
