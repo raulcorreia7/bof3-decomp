@@ -1,8 +1,7 @@
 #ifndef OVERLAY_SCENARIO_SCENA08_00_H
 #define OVERLAY_SCENARIO_SCENA08_00_H
 
-/* The scenario/scena08/00 overlay's local declarations. Only this image
- * includes the file. */
+/* The scenario/scena08/00 overlay's local declarations. */
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
@@ -60,9 +59,7 @@ void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3);
 
 void func_801F85F0(s32 x, s32 y, s32 angle);
 
-/* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and
- * leave the scene when the countdown ends. They differ only in the sign of the turn. Every change
- * here must verify every member. */
+/* The two screen-effect steps of 348.c. */
 #define SCENA08_SCREEN_EFFECT_STEP(work, step)                                        \
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32); \
     (work) = g_Task;                                                                  \

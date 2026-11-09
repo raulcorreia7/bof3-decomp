@@ -525,10 +525,10 @@ MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
                 g_SceneState.step_05  = 0;
                 return Scene_ShowMessage(0x12);
             }
-            /* Duplicate return node #11. Try simplifying control flow for better match */
+            /* Duplicate return node #11. */
             return 0;
         }
-        /* Duplicate return node #11. Try simplifying control flow for better match */
+        /* Duplicate return node #11. */
         return 0;
     }
     return 0;

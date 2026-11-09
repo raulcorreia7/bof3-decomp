@@ -1,8 +1,7 @@
 #ifndef OVERLAY_SCENARIO_SCENA05_00_H
 #define OVERLAY_SCENARIO_SCENA05_00_H
 
-/* The scenario/scena05/00 overlay's local declarations. Only this image
- * includes the file. */
+/* The scenario/scena05/00 overlay's local declarations. */
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
@@ -12,9 +11,7 @@ extern u8 D_80146874;
 extern u8  D_80146875;
 extern u16 D_80146876;
 
-/* The scene starter func_801FD178 and func_801FD208 share: both scene flags 6 set and 9 clear raise
- * an event flag, start the script and arm the timer, else return -1. Every change must keep both
- * members matching. */
+/* The scene starter func_801FD178 and func_801FD208 share. */
 #define SCENA05_START_SCENE(event_flag, timer)                                      \
     if (SYS_TestFlag(g_SceneFlags, 6) == 0 || SYS_TestFlag(g_SceneFlags, 9) != 0) { \
         return -1;                                                                  \

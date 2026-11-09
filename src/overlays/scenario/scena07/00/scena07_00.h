@@ -1,8 +1,7 @@
 #ifndef OVERLAY_SCENARIO_SCENA07_00_H
 #define OVERLAY_SCENARIO_SCENA07_00_H
 
-/* The scenario/scena07/00 overlay's local declarations. Only this image
- * includes the file. */
+/* The scenario/scena07/00 overlay's local declarations. */
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
@@ -41,8 +40,7 @@ void      func_801F8BE8(void* table);
 void      func_801FA38C(void);
 extern u8 D_801FDFC8;
 
-/* The panel fade step func_801F72E0 and func_801F80F0 share: draw the panel table, dim it by 12 and
- * advance the actor when its countdown ends. Every change must keep both members matching. */
+/* The panel fade step func_801F72E0 and func_801F80F0 share. */
 #define SCENA07_PANEL_FADE_STEP()              \
     func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
@@ -51,8 +49,7 @@ extern u8 D_801FDFC8;
         g_Task->header.step++;                 \
     }
 
-/* The panel brighten step func_801F724C and func_801F805C share: draw the panel table, brighten it by 6
- * and re-arm the countdown to 0x20 when it ends. Every change must keep both members matching. */
+/* The panel brighten step func_801F724C and func_801F805C share. */
 #define SCENA07_PANEL_BRIGHTEN_STEP()          \
     func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \

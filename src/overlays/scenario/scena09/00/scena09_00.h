@@ -1,8 +1,7 @@
 #ifndef OVERLAY_SCENARIO_SCENA09_00_H
 #define OVERLAY_SCENARIO_SCENA09_00_H
 
-/* The scenario/scena09/00 overlay's local declarations. Only this image
- * includes the file. */
+/* The scenario/scena09/00 overlay's local declarations. */
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"

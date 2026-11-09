@@ -163,9 +163,7 @@ MATCH void func_801F8488(void) {
     SYS_DISPATCH_TASK(D_801FE5B0, 1, g_Task);
 }
 
-/* The statements of func_801F84CC and func_801F87F8, byte-identical twins: set +0x29 of every party battler row to 3,
- * clear the three tint bytes of the current work and move it to step 1. Each member declares work and i. Every change
- * here must verify both members. */
+/* The statements of func_801F84CC and func_801F87F8, byte-identical twins. */
 #define SCENA15_PARTY_SETUP()           \
     work = g_Task;                      \
     for (i = 0; i < g_PartySize; i++) { \

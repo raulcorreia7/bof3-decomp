@@ -1,8 +1,7 @@
 #ifndef OVERLAY_SCENARIO_SCENA10_00_H
 #define OVERLAY_SCENARIO_SCENA10_00_H
 
-/* The scenario/scena10/00 overlay's local declarations. Only this image
- * includes the file. */
+/* The scenario/scena10/00 overlay's local declarations. */
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
@@ -29,16 +28,14 @@ extern u16       D_801FE974[3];
 /* D_801FE97C */
 extern SceneFunc g_SceneActorDispatch[];
 
-/* The actor-start members of 368.c: start the actor, then raise a scene flag. They differ only in the
- * three constants. Every change here must verify every member. */
+/* The actor-start members of 368.c: start the actor, then raise a scene flag. */
 #define SCENA10_ACTOR_START(scene, step, flag) \
     do {                                       \
         SCENE_START_ACTOR(actor, scene, step); \
         SYS_SetFlag(g_SceneFlags, (flag));     \
     } while (0)
 
-/* The party lookups of 368.c: return the value paired with the first id in `ids` that a party member
- * holds, else `none`. The members differ only in table and count. Every change must verify every member. */
+/* The party lookups of 368.c. */
 #define SCENA10_PARTY_LOOKUP(count, ids, values, none)                        \
     do {                                                                      \
         u8 slot;                                                              \

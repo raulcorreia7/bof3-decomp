@@ -1,8 +1,7 @@
 #ifndef OVERLAY_SCENARIO_SCENA03_00_H
 #define OVERLAY_SCENARIO_SCENA03_00_H
 
-/* The scenario/scena03/00 overlay's local declarations. Only this image
- * includes the file. */
+/* The scenario/scena03/00 overlay's local declarations. */
 
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
@@ -52,8 +51,7 @@ extern s8       D_801FD008[2];
 extern u8       D_801FD030;
 extern Callback D_801FD038[];
 
-/* The camera nudges of 270.c: step the scroll words by the table entry picked with the low bits of the
- * facing counter. They differ only in table and mask. Every change here must verify every member. */
+/* The camera nudges of 270.c. */
 #define SCENA03_NUDGE_SCROLL(table, mask) \
     do {                                  \
         u16* scroll;                      \

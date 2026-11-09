@@ -307,9 +307,7 @@ MATCH void func_801F74EC(void) {
     }
 }
 
-/* Draws the scenario line forward from the active point to the row point in 0x8000 steps, then back
- * from the far corner to the row point.
- */
+/* Draws the scenario line forward from the active point to the row point in 0x8000 steps. */
 MATCH void func_801F7670(void) {
     FAKE_STACK_PADS(u8, 8);
     SceneEffect*   work;
@@ -374,9 +372,7 @@ MATCH void func_801F78CC(void) {
     Actor_Clear();
 }
 
-/* Draws the scenario line between two transformed points with the given color and appends one
- * LINE_F2 primitive.
- */
+/* Draws the scenario line between two transformed points with the given color and appends one LINE_F2 primitive. */
 MATCH void func_801F78EC(volatile SceneLinePoint to, volatile SceneLinePoint from, SceneLineColor color) {
     LINE_F2* prim;
     SVECTOR  vec;
@@ -683,13 +679,9 @@ MATCH void func_801F8360(void) {
     } while (i < 24);
 }
 
-/* Projection helpers shared by the scenario and world00 overlays. */
+/* The current scenario work object. */
 
-/* The current scenario work object. The cell is a volatile pointer so every
- * read of it stays its own load, as in the shipped image. */
-
-/* Scene_DrawTriangle saves the active effect's rotation across a triangle draw;
- * func_8015B410 passes the three angles to RotMatrix. */
+/* Scene_DrawTriangle saves the active effect's rotation across a triangle draw. */
 typedef struct SceneRotation {
     Point3DL angle;
     s32      unk_0C; /* 0x0C */
@@ -2014,9 +2006,7 @@ MATCH void func_801FB67C(void) {
     }
 }
 
-/* Scene angle interpolation: turns the scene angle g_AreaCameraAngle.vz to `degrees`,
- * spreading the turn over `duration` times the route's base frame count;
- * returns nonzero until it completes. */
+/* Scene angle interpolation. */
 
 MATCH void func_801FB744(void) {
     u8* state;
@@ -2233,8 +2223,7 @@ MATCH void func_801FB924(void) {
     }
 }
 
-/* Current selection id: the index into the world-entry pointer table
- * g_AreaLoads. */
+/* Current selection id: the index into the world-entry pointer table g_AreaLoads. */
 
 /* Scratchpad camera pointer cell, re-read on every use. */
 
@@ -2401,8 +2390,7 @@ MATCH void Scene_DispatchActor(void* entity) {
 MATCH void func_801FC810(void) {
 }
 
-/* Step trigger: entry_08 of the scenario, called by Area_IsStepBlocked with its handler_x (x >> 16 is compared with the
- * column). A hit starts a scripted scene and returns 1; a nonzero result blocks the step. */
+/* Step trigger: entry_08 of the scenario, called by Area_IsStepBlocked with its handler_x (x >> 16 is compared with the column). */
 MATCH s32 Scene_CheckStepTrigger(s32 x) { /* func_801FC818 */
     if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 0x10) == 43) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
         g_SceneState.state_04 = 7;
