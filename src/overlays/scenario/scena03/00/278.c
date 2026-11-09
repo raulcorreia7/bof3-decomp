@@ -429,18 +429,19 @@ MATCH void func_801FC688(void) {
 }
 
 MATCH s32 func_801FC690(void) {
-    /* FAKE: retail materializes the action code in v1. */
-    FAKE_REG(s32, action, "v1");
-
     Game_SetScriptActive();
-    action                = 6;
-    g_SceneState.state_04 = action;
+    g_SceneState.state_04 = 6;
     g_SceneState.step_05  = 0;
     return 0;
 }
 
-/* blocker: both constants need v1; first diff: li v1,30 at 0x801FC6D4. */
-INCLUDE_ASM(func_801FC6C4);
+MATCH s32 func_801FC6C4(void) {
+    Game_SetScriptActive();
+    g_SceneState.timer_06 = 30;
+    g_SceneState.state_04 = 7;
+    g_SceneState.step_05  = 0;
+    return 0;
+}
 
 INCLUDE_ASM(func_801FC704);
 

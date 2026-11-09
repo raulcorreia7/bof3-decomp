@@ -244,8 +244,8 @@ u8           Area_StepCameraZ(s16 target, s8 step);
 bool         Area_StepCameraAngle(s32 degrees, s8 duration);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
-/* func_8015C088 */
-extern void  Game_SetScriptActive(void);
+/* func_8015C088; int with no value returned (see its definition) */
+extern s32   Game_SetScriptActive(void);
 /* func_8015C100 */
 extern void  Party_HideBattlers(void);
 /* func_8015C148 */
