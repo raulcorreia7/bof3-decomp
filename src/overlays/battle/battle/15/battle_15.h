@@ -504,7 +504,6 @@ extern BattleSlot             D_80145518[];
 extern u8                     D_8014551B;
 /* State byte (+0x01) of each player row (stride 0x140) and enemy row
  * (stride 0x118), indexed by byte offset. */
-extern s32                    D_80145EC4;
 /* Byte-addressed player rows: the first byte of each 0x140-byte work row holds
  * the battler's stored character id. */
 /* Battler base halfwords, one u16 per 0x140-byte player row. */
