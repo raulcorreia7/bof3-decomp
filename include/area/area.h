@@ -81,10 +81,13 @@
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
 #define AREA_PALETTE_WORK          0x80037800u
-/* The two script banks g_ScriptBank alternates between: the area bank the field
- * uses and the battle bank the battle handler swaps in. */
+/* The script banks g_ScriptBank alternates between: the area bank the field
+ * uses, the battle bank the battle handler swaps in, and the battle magic bank
+ * a battle magic effect sets while its step table runs (every setter is a
+ * bmagic overlay; it restores the area bank afterwards). */
 #define AREA_SCRIPT_BANK           0x800D3800u
 #define BATTLE_SCRIPT_BANK         0x800F0800u
+#define BMAGIC_SCRIPT_BANK         0x800C3800u
 #define AREA_PALETTE_UNIT          0x40u  /* one CLUT entry */
 #define AREA_PALETTE_ROW           0x200u /* one upload row (32 rows) */
 
@@ -268,7 +271,7 @@ ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
  * the block through `g_ScriptBank`: `section = u32[bank + 4*lhu(work+0x2C)]`,
  * `record = bank + section + u16[bank + section + 2*lbu(work+0x4B)]`, stored to
- * `work+0x50`. The battle overlays swap `0x800F0800` in for the duration of a
+ * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_BANK` in for the duration of a
  * battle handler. */
 typedef struct AreaScriptBank {
     u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */

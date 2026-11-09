@@ -39,7 +39,7 @@ MATCH void Game_UpdateField(void) {
             g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
             selection = g_SndBGMId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {
-                SND_StartDecrescendo(g_SelectionCues[selection * 4], D_80181EBB[selection * 4], 100, 16);
+                SND_StartDecrescendo(g_SelectionCues[selection * 4], g_SelectionSequences[selection * 4], 100, 16);
             }
             if (g_GameEntryMode != GAME_NONE) {
                 UI_SetMode(g_GameEntryMode);
@@ -47,7 +47,7 @@ MATCH void Game_UpdateField(void) {
             }
             selection = g_SndBGMId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {
-                SND_StopSequence(g_SelectionCues[selection * 4], D_80181EBB[selection * 4]);
+                SND_StopSequence(g_SelectionCues[selection * 4], g_SelectionSequences[selection * 4]);
             }
             g_GameEntryState = GAME_STATE_AREA_LOAD;
             break;

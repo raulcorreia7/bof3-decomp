@@ -81,12 +81,12 @@ MATCH void func_801EF08C(void) {
     Magic057SecondSteps handlers;
 
     handlers     = D_801EEC2C;
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1) {
         func_8014D290();
     }
-    g_ScriptBank = 0x800D3800;
+    g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
 /* blocker: cross-jumped (rand() % 6) << 0x10 prefixes; first diff: beqz v0 target at 0x801EF150. */
@@ -151,12 +151,12 @@ MATCH void func_801EF83C(void) {
     Magic057SecondSteps handlers;
 
     handlers     = D_801EEC44;
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((g_Task->header.flags & 1) && (g_BattleEffectBattler->timer == 0)) {
         func_8014D290();
     }
-    g_ScriptBank = 0x800D3800;
+    g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
 MATCH void func_801EF900(void) {

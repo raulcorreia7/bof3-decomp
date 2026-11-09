@@ -45,7 +45,7 @@ MATCH void func_801D1094(void) {
     if (g_SndBGMId != BGM_NONE) {
         if (g_SndBGMId != D_801D1944) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(D_80181EBB + bgm_offset));
+            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(g_SelectionSequences + bgm_offset));
         }
     }
     SND_RequestBGM(D_801D1944);

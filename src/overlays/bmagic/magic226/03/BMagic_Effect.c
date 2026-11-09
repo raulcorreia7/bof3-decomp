@@ -18,7 +18,7 @@ MATCH void func_801EF004(void) {
 }
 
 MATCH void func_801EF048(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801F0C44, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
         func_800AF764();

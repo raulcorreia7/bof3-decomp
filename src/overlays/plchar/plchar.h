@@ -80,6 +80,31 @@
     g_Task->unk_0A = 0xB;                                       \
     g_Task->unk_03 = 1
 
+/* Chooses a direction and requests its script: steps direction_08 to a free neighbouring facing when it is even
+ * (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing
+ * script. The body of every Char_FaceFreeDirection; each passes its two functions. Every change here must verify
+ * every member image. */
+/* Char_FaceFreeDirection (plp016 0x801CF7B4, plp026 0x801CFBD8, plp056 0x801CF9DC, plp267 0x801CEEB0, plp467
+ * 0x801CE8D4, plp567 0x801CECB4, plp678 0x801CE6B8) */
+#define CHAR_FACE_FREE_DIRECTION(CHECK, PREPARE)                                \
+    u8 direction;                                                               \
+                                                                                \
+    direction = g_Task->direction_08;                                           \
+    if (!(direction & 1)) {                                                     \
+        g_Task->direction_08 = (direction - 1) & 7;                             \
+        if (!(CHECK() & 0xFF)) {                                                \
+            g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;              \
+            if (!(CHECK() & 0xFF)) {                                            \
+                g_Task->direction_08 = (g_Task->direction_08 - 2) & 7;          \
+            }                                                                   \
+        }                                                                       \
+    }                                                                           \
+    PREPARE();                                                                  \
+    Actor_RequestScript((((s32)(g_Task->direction_08 - 1) / 2) + 0x42) & 0xFF); \
+    g_Task->param.unk_0B = 0;                                                   \
+    g_Task->unk_0A       = 0xB;                                                 \
+    g_Task->unk_03       = 1
+
 void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
 void Area_ClearCell(s32 x, s32 y);
 

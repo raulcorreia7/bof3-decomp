@@ -1,6 +1,21 @@
 #include "area117_13.h"
 
-/* tried: none (skipped - switch/jump table jtbl_801F2C04 mapping unknown, D_801F55E4 in blob);
- * needs D_801F55E4 (u16[6]) and switch on g_MessageChoice < 6: cases set
- * g_ScriptVars[0]=0xA + SND_PlayCue(0x205), or g_ScriptVars[0]=0x14, per jtbl */
-INCLUDE_ASM(func_801F4048);
+MATCH void func_801F4048(void) {
+    s8 choice = g_MessageChoice;
+
+    g_MessageRequest = D_801F55E4[choice];
+    switch (choice) {
+        case 0:
+        case 1:
+        case 3:
+        case 4:
+            g_ScriptVars[0] = 10;
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
+            break;
+        case 2:
+            g_ScriptVars[0] = 20;
+            break;
+        case 5:
+            break;
+    }
+}

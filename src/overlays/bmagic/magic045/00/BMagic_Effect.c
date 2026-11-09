@@ -17,7 +17,7 @@ MATCH void func_801EEEA4(void) {
 }
 
 MATCH void func_801EEEE8(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801EF8DC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
@@ -59,7 +59,7 @@ MATCH void func_801EF2B0(void) {
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF40C(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801EF8EC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();

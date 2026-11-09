@@ -66,12 +66,12 @@ MATCH void func_801EF3F8(void) {
 }
 
 MATCH void func_801EF43C(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801F0478, g_Task->header.step);
     if ((g_Task->header.flags & 1) && g_Task->header.step >= 2) {
         func_8014D290();
     }
-    g_ScriptBank = 0x800D3800;
+    g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"

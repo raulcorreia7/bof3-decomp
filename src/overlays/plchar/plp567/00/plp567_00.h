@@ -27,8 +27,6 @@ extern Callback D_801D07FC[];
 
 extern s32  func_801CF7A0(void);
 extern void func_801CF944(void);
-#define PLCHAR_CHECK_FACING func_801CF7A0
-#define PLCHAR_PREPARE_TURN func_801CF944
 
 #endif
 void func_801CF430(s32 kind, s32 x, s32 y, s32 code);

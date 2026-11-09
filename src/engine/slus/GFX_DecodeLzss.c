@@ -1,7 +1,13 @@
 #include "engine/slus/slus.h"
 
+/* The decoder's scratchpad ring: 512 bytes, entered LZSS_MAX_MATCH bytes before its end. */
+#define LZSS_RING_SIZE  512
+#define LZSS_MAX_MATCH  18
+#define LZSS_RING_START (LZSS_RING_SIZE - LZSS_MAX_MATCH)
+#define LZSS_RING_MASK  (LZSS_RING_SIZE - 1)
+
 /* decodes the LZSS stream after the packed record's first word
- * (512-byte scratchpad ring starting at 0x1EE, 12-bit positions, 3-18 byte
+ * (512-byte scratchpad ring starting at 494, 12-bit positions, 3-18 byte
  * copies) into the shared image cursor, then uploads the result and advances
  * the cursor past the aligned block.
  */
@@ -23,10 +29,10 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
     dst     = (u8*)D_801459FC;
     ring    = SP_PTR(u8, 0);
     count   = rect.w * rect.h * 2;
-    for (i = 493; i >= 0; i--) {
+    for (i = LZSS_RING_START - 1; i >= 0; i--) {
         ring[i] = 0;
     }
-    r     = 0x1EE;
+    r     = LZSS_RING_START;
     flags = 0;
     while (written < count) {
         flags = (u16)flags >> 1;
@@ -42,7 +48,7 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
                 written++;
                 *dst++    = c;
                 ring[r++] = c;
-                r &= 0x1FF;
+                r &= LZSS_RING_MASK;
             FAKE_ORDER_LOCK_END;
         } else {
             i   = *src++;
@@ -51,10 +57,10 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
             len = (len & 0xF) + 2;
             for (k = 0; k <= len; k++) {
                 written++;
-                c         = ring[(i + k) & 0x1FF];
+                c         = ring[(i + k) & LZSS_RING_MASK];
                 *dst++    = c;
                 ring[r++] = c;
-                r &= 0x1FF;
+                r &= LZSS_RING_MASK;
             }
         }
     }

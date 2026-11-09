@@ -378,7 +378,8 @@ extern u8           D_80181D99;
  * row stride. */
 /* D_80181EBA */
 extern const u8     g_SelectionCues[];
-extern const u8     D_80181EBB[];
+/* D_80181EBB */
+extern const u8     g_SelectionSequences[];
 
 /* Resource and pad-input helpers the overlays call: resolve a resource id to
  * its data pointer, look up a group choice's resource id, and decode the

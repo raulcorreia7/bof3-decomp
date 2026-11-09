@@ -38,7 +38,7 @@ MATCH void func_801EF2D8(void) {
 }
 
 MATCH void func_801EF31C(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801F0398, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EFCA0();
@@ -83,7 +83,7 @@ MATCH void func_801EFE0C(void) {
 }
 
 MATCH void func_801EFE50(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     SYS_DISPATCH_BYTE(D_801F03AC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();

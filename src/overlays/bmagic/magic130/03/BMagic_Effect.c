@@ -17,7 +17,7 @@ MATCH void func_801EEED4(void) {
 }
 
 MATCH void func_801EEF18(void) {
-    g_ScriptBank = 0x800C3800;
+    g_ScriptBank = BMAGIC_SCRIPT_BANK;
     D_801EFA4C[g_Task->header.step]();
     if ((g_Task->header.flags & ACTOR_FLAG_IN_USE) && (g_Task->header.step != 0)) {
         func_8014D290();

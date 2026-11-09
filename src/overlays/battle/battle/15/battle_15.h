@@ -943,9 +943,9 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
 
     handlers     = *table;
     work         = (PartyMember*)g_Task;
-    g_ScriptBank = 0x800F0800;
+    g_ScriptBank = BATTLE_SCRIPT_BANK;
     ((Callback*)&handlers)[work->header.mode]();
-    g_ScriptBank = 0x800D3800;
+    g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
 /* Reset the three selection bytes once the lock at -0x7A8D is clear, then run
