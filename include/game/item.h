@@ -82,6 +82,8 @@ ASSERT_OFFSET(VitalItem, description, 0x0C);
 ASSERT_SIZE(VitalItem, VITAL_ITEM_STRIDE);
 ASSERT_OFFSET(VitalItem, name, 0x00);
 
+#define VITAL_ITEM_OBJECT(name, description) {name, (description), 0}
+
 typedef struct Item {
     u8  name[ITEM_NAME_LENGTH];
     u8  flags;       /* ItemFlags */
@@ -96,6 +98,8 @@ ASSERT_OFFSET(Item, name, 0x00);
 ASSERT_OFFSET(Item, flags, 0x0c);
 ASSERT_OFFSET(Item, icon, 0x0d);
 ASSERT_OFFSET(Item, price, 0x10);
+
+#define ITEM_OBJECT(name, flags, icon, description, price) {name, (flags), (icon), (description), (price)}
 
 /* The run Weapon, Armor and Accessory open with. */
 typedef struct ItemHeader {
@@ -127,6 +131,9 @@ ASSERT_OFFSET(Weapon, weight, 0x10);
 ASSERT_OFFSET(Weapon, power, 0x12);
 ASSERT_OFFSET(Weapon, price, 0x16);
 
+#define WEAPON_OBJECT(name, equipability, header_flags, icon, element, weight, sound, power, description, price)       \
+    {{name, (equipability), (header_flags)}, (icon), (element), (weight), (sound), (power), 0, (description), (price)}
+
 typedef struct Armor {
     ItemHeader header;
     u8         equip_type; /* ArmorType */
@@ -145,6 +152,9 @@ ASSERT_OFFSET(Armor, weight, 0x0f);
 ASSERT_OFFSET(Armor, power, 0x10);
 ASSERT_OFFSET(Armor, price, 0x14);
 
+#define ARMOR_OBJECT(name, equipability, header_flags, equip_type, weight, power, description, price)    \
+    {{name, (equipability), (header_flags)}, (equip_type), (weight), (power), 0, (description), (price)}
+
 typedef struct Accessory {
     ItemHeader header;
     u8         icon; /* low nibble selects the icon */
@@ -160,6 +170,52 @@ ASSERT_OFFSET(Accessory, icon, 0x0e);
 ASSERT_OFFSET(Accessory, weight, 0x0f);
 ASSERT_OFFSET(Accessory, price, 0x12);
 
+#define ACCESSORY_OBJECT(name, equipability, header_flags, icon, weight, description, price) {{name, (equipability), (header_flags)}, (icon), (weight), (description), (price)}
+
+/* The g_GameShopStock index a shop counter opens, from the area scripts that spawn it. */
+typedef enum ShopId {
+    SHOP_MCNEIL_EQUIPMENT               = 0,
+    SHOP_MCNEIL_GENERAL                 = 1,
+    SHOP_WYNDIA_LOWER_WEAPONS           = 2,
+    SHOP_WYNDIA_LOWER_ARMOR             = 3,
+    SHOP_WYNDIA_LOWER_ACCESSORIES       = 4,
+    SHOP_WYNDIA_LOWER_ITEMS             = 5,
+    SHOP_GENMEL_EQUIPMENT               = 6,
+    SHOP_GENMEL_ITEMS                   = 7,
+    SHOP_MOMO_TOWER_OUTSIDE_GENERAL     = 8,
+    SHOP_9                              = 9,
+    SHOP_CONTEST_WEAPONS                = 10,
+    SHOP_CONTEST_ITEMS                  = 11,
+    SHOP_CONTEST_ARMOR                  = 12,
+    SHOP_RHAPALA_ENTRANCE_EQUIPMENT     = 13,
+    SHOP_RHAPALA_ENTRANCE_GENERAL       = 14,
+    SHOP_URKAN_TAPA_EQUIPMENT           = 15,
+    SHOP_URKAN_TAPA_GENERAL             = 16,
+    SHOP_17                             = 17,
+    SHOP_18                             = 18,
+    SHOP_19                             = 19,
+    SHOP_20                             = 20,
+    SHOP_21                             = 21,
+    SHOP_22                             = 22,
+    SHOP_SYN_CITY_EQUIPMENT             = 23,
+    SHOP_SYN_CITY_GENERAL               = 24,
+    SHOP_JUNK_TOWN_WEAPONS              = 25,
+    SHOP_JUNK_TOWN_GENERAL              = 26,
+    SHOP_DAUNA_MINE_ADULT_ITEMS         = 27,
+    SHOP_CLIFF_GAIST_GENERAL            = 28,
+    SHOP_KOMBINAT_EQUIPMENT             = 29,
+    SHOP_KOMBINAT_GENERAL               = 30,
+    SHOP_DRAGNIER_SURFACE_ITEMS         = 31,
+    SHOP_OASIS_GENERAL                  = 32,
+    SHOP_CAER_XHAN_HONEY_ROOM_EQUIPMENT = 33,
+    SHOP_34                             = 34,
+    SHOP_PARCH_EQUIPMENT                = 35,
+    SHOP_PARCH_GENERAL                  = 36,
+    SHOP_RHAPALA_CHECKPOINT_ITEMS       = 37,
+    SHOP_WYNDIA_UPPER_ITEMS             = 38,
+    SHOP_SYN_CITY_EQUIPMENT_2           = 39,
+} ShopId;
+
 typedef struct ShopItemRef {
     u8 item_type; /* ItemCategory */
     u8 item_index;
@@ -172,6 +228,15 @@ typedef struct ShopStock {
 
 ASSERT_SIZE(ShopItemRef, SHOP_ITEM_REF_SIZE);
 ASSERT_SIZE(ShopStock, SHOP_STRIDE);
+
+#define SHOP_ITEM(item_type, item_index) {(item_type), (item_index)}
+
+#define SHOP_OBJECT(item_count, slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10) \
+    {                                                                                                         \
+        (item_count), {                                                                                       \
+            slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10                      \
+        }                                                                                                     \
+    }
 
 typedef struct Chest {
     u8 memory;

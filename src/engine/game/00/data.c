@@ -22,34 +22,28 @@ u8 s_PaletteSlotDivisors[8] = {0x10, 0x01, 0x08, 0x04, 0x02, 0x00, 0x00, 0x00};
 
 u8 s_PaletteSlotStrides[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0xCC, 0xCC, 0xCC};
 
-Callback g_GameCampMenuLoad[3] = {(Callback)Game_LoadCampMenu, (Callback)func_801E3E88, (Callback)func_801E1680};
+Callback g_GameCampMenuLoad[3] = {Game_LoadCampMenu, func_801E3E88, func_801E1680};
 
-Callback g_GameStates[12] = {
-    (Callback)Game_NewGame,      (Callback)Game_UpdateAreaLoad,   (Callback)Game_UpdateField,
-    (Callback)Game_UpdateMenu,        (Callback)func_801979D4,           (Callback)Game_UpdateBattle,
-    (Callback)Game_UpdateCameraLook,  (Callback)Game_UpdateShop,       (Callback)Game_UpdateFishing,
-    (Callback)Game_UpdateAbilityMenu, (Callback)Game_UpdateStatusMenu, (Callback)Game_UpdateSceneCamera};
+Callback g_GameStates[12] = {Game_NewGame,          Game_UpdateAreaLoad, Game_UpdateField,   Game_UpdateMenu,        func_801979D4,         Game_UpdateBattle,
+                             Game_UpdateCameraLook, Game_UpdateShop,     Game_UpdateFishing, Game_UpdateAbilityMenu, Game_UpdateStatusMenu, Game_UpdateSceneCamera};
 
-Callback g_GameMenuSubstates[3] = {(Callback)Game_LoadMenuOverlay, (Callback)Game_UpdateMenuFrame, (Callback)Game_ReturnFromMenu};
+Callback g_GameMenuSubstates[3] = {Game_LoadMenuOverlay, Game_UpdateMenuFrame, Game_ReturnFromMenu};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameBattleSubstates[8] = {(Callback)func_80197A60, (Callback)Battle_LoadPartySprites, (Callback)func_80197C1C,
-                                  (Callback)Battle_LoadBattleArchive, (Callback)func_80197E54, (Callback)func_801D1014,
-                                  (Callback)func_80197EFC, (Callback)func_80197F48};
+Callback g_GameBattleSubstates[8] = {func_80197A60, Battle_LoadPartySprites, func_80197C1C, Battle_LoadBattleArchive, func_80197E54, func_801D1014, func_80197EFC, func_80197F48};
 
 Offset2DB s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
-Callback g_GameShopSubstates[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)Game_ReturnFromShop};
+Callback g_GameShopSubstates[3] = {Game_LoadShopOverlay, func_80199398, Game_ReturnFromShop};
 
-Callback g_GameFishingSubstates[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
-                                      (Callback)func_801E0C20};
+Callback g_GameFishingSubstates[4] = {func_801984E8, func_801E0BD0, func_801985C8, func_801E0C20};
 
-Callback g_MenuAbilityOpen[3] = {(Callback)Game_LoadAbilityMenu, (Callback)Game_UpdateAbilityMenuFrame, (Callback)Game_ReturnFromAbilityMenu};
+Callback g_MenuAbilityOpen[3] = {Game_LoadAbilityMenu, Game_UpdateAbilityMenuFrame, Game_ReturnFromAbilityMenu};
 
-Callback g_MenuStatusOpen[3] = {(Callback)Game_LoadStatusMenu, (Callback)Game_UpdateStatusMenuFrame, (Callback)Game_ReturnFromStatusMenu};
+Callback g_MenuStatusOpen[3] = {Game_LoadStatusMenu, Game_UpdateStatusMenuFrame, Game_ReturnFromStatusMenu};
 
-Callback g_GameSceneCameraSubstates[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
+Callback g_GameSceneCameraSubstates[3] = {func_80198B00, func_80198B44, func_80198B6C};
 
 u8 s_MenuLine1Run[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
@@ -59,17 +53,15 @@ u8 s_MenuLine1FlagRun[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x2D, 0x02, 0x00, 0x0
 
 u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2E, 0x00, 0x00, 0xFF};
 
-Callback g_MenuPanelModes[5] = {(Callback)func_801995A4, (Callback)Menu_DrawPanelCursor, (Callback)func_801996A8,
-                                   (Callback)func_8019977C, (Callback)func_8019986C};
+Callback g_MenuPanelModes[5] = {func_801995A4, Menu_DrawPanelCursor, func_801996A8, func_8019977C, func_8019986C};
 
-Callback g_MenuPanelStates[3] = {(Callback)func_8019959C, (Callback)func_801995F8, (Callback)func_80199638};
+Callback g_MenuPanelStates[3] = {func_8019959C, func_801995F8, func_80199638};
 
-Callback g_MenuOptionStates[3] = {(Callback)func_8019959C, (Callback)func_801996FC, (Callback)Menu_SlidePanelLeft};
+Callback g_MenuOptionStates[3] = {func_8019959C, func_801996FC, Menu_SlidePanelLeft};
 
-Callback g_MenuActionStates[3] = {(Callback)func_8019959C, (Callback)func_801997EC, (Callback)func_8019982C};
+Callback g_MenuActionStates[3] = {func_8019959C, func_801997EC, func_8019982C};
 
-Callback g_MenuTaskStates[4] = {(Callback)func_8019959C, (Callback)func_80199938, (Callback)func_80199978,
-                                  (Callback)func_801999B8};
+Callback g_MenuTaskStates[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
 
 char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
                          "OPTION" T_END T_END, "VITAL" T_END T_END T_END};
@@ -77,87 +69,223 @@ char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "
 u8* D_801C7C5C[5] = {(u8*)&D_801C7C34[0][0], (u8*)&D_801C7C34[1][0], (u8*)&D_801C7C34[2][0], (u8*)&D_801C7C34[3][0],
                      (u8*)&D_801C7C34[4][0]};
 
-Callback g_ActorTypes[187] = {
-    (Callback)func_8019A210, (Callback)func_801F6DC0, (Callback)func_801D0C98,        (Callback)func_801D1B10,
-    (Callback)func_8019AB5C, (Callback)func_801D20C8, (Callback)func_8019A3B8,        (Callback)func_801F70F0,
-    (Callback)func_801F7440, (Callback)func_801F7A18, (Callback)func_801D2978,        (Callback)func_801F8748,
-    (Callback)func_801D2BF0, (Callback)func_801D3358, (Callback)func_8019A258,        (Callback)func_801D35CC,
-    (Callback)func_801F8D70, (Callback)func_801F71C0, (Callback)func_801F729C,        (Callback)func_8019A8B4,
-    (Callback)func_801F6E70, (Callback)func_801F2C18, (Callback)func_8019A2A0,        (Callback)func_8019B364,
-    (Callback)func_8019F98C, (Callback)func_8019A804, (Callback)func_801D42A0,        (Callback)func_8019C620,
-    (Callback)func_801F73B8, (Callback)func_801F6F38, (Callback)func_801F2C14,        (Callback)func_801F2C18,
-    (Callback)func_801F2C04, (Callback)func_801F7A9C, (Callback)func_801F7DF0,        (Callback)func_801F82E4,
-    (Callback)func_801F844C, (Callback)func_801F85FC, (Callback)func_801F73F8,        (Callback)func_801F74EC,
-    (Callback)func_801F2C40, (Callback)func_801F6D00, (Callback)func_801F2C04,        (Callback)func_801F3304,
-    (Callback)func_801F77A8, (Callback)func_801F2C04, (Callback)func_801F7A84,        (Callback)func_801F2C30,
-    (Callback)func_8019CB94, (Callback)func_8019AC34, (Callback)func_8019ADA4,        (Callback)func_801F2C04,
-    (Callback)func_8019DDCC, (Callback)func_801F2C44, (Callback)func_801F73BC,        (Callback)func_8019B10C,
-    (Callback)func_801F31E4, (Callback)func_801F352C, (Callback)func_8019EAF4,        (Callback)func_801F2C04,
-    (Callback)func_801F7508, (Callback)func_801F2C04, (Callback)func_801F2C90,        (Callback)func_801F2E88,
-    (Callback)func_801F2C04, (Callback)func_8019F2CC, (Callback)func_801F389C,        (Callback)func_801F2C18,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F309C,
-    (Callback)func_801F2CC4, (Callback)func_801F6DCC, (Callback)func_801F3C74,        (Callback)func_801F3E04,
-    (Callback)func_801F4034, (Callback)func_801F36D4, (Callback)func_801F2C04,        (Callback)func_801F30A8,
-    (Callback)func_801F6F48, (Callback)func_801F707C, (Callback)func_801F7928,        (Callback)func_801F2C8C,
-    (Callback)func_801F3244, (Callback)func_801F3A64, (Callback)func_801F3064,        (Callback)func_801F95D4,
-    (Callback)func_8019A2E8, (Callback)func_801F2C30, (Callback)func_801F2C7C,        (Callback)func_801F2CA0,
-    (Callback)func_8019A330, (Callback)func_801F6F68, (Callback)func_801F7518,        (Callback)func_801F986C,
-    (Callback)func_801F9DBC, (Callback)func_801F2C04, (Callback)func_801F34FC,        (Callback)func_801F36A4,
-    (Callback)func_801F37D0, (Callback)func_801F2C04, (Callback)func_801F344C,        (Callback)func_801F2C04,
-    (Callback)func_801F3E20, (Callback)func_801D0C10, (Callback)func_801F60C0,        (Callback)func_801F2DE4,
-    (Callback)func_80117004, (Callback)func_801F735C, (Callback)func_80117610,        (Callback)func_801F2C04,
-    (Callback)func_8019F840, (Callback)func_801F46A0, (Callback)func_801F2C1C,        (Callback)func_801F2DB0,
-    (Callback)func_801F307C, (Callback)func_801F6EA4, (Callback)func_801F2C3C,        (Callback)func_801F7174,
-    (Callback)func_801F31E8, (Callback)func_801F2D18, (Callback)func_801F2E10,        (Callback)func_801F2EEC,
-    (Callback)func_801F30C8, (Callback)func_801F2CF8, (Callback)func_801F427C,        (Callback)func_801F2C64,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F3560,
-    (Callback)func_801F3E0C, (Callback)func_801F7198, (Callback)func_801F75F8,        (Callback)func_801F2C04,
-    (Callback)func_801F2C04, (Callback)func_801F77F8, (Callback)Fishing_ShowLocation, (Callback)func_801F2C04,
-    (Callback)func_801F2DA4, (Callback)func_801F2C04, (Callback)func_801F2C04,        (Callback)func_801F2C04,
-    (Callback)func_801F41D0, (Callback)func_801F2C80, (Callback)func_8019B284,        (Callback)func_801F4344,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2E20,        (Callback)func_801F2FF0,
-    (Callback)func_801F33AC, (Callback)func_801F455C, (Callback)func_801F2C04,        (Callback)func_801F3070,
-    (Callback)func_801D0C04, (Callback)func_801F7AA8, (Callback)func_801F8A5C,        (Callback)func_801F8488,
-    (Callback)func_801D0C04, (Callback)func_801D2170, (Callback)func_801D2B64,        (Callback)func_801D2DEC,
-    (Callback)func_801F87B4, (Callback)func_801F4D80, (Callback)func_801F3A24,        (Callback)func_801D0C04,
-    (Callback)func_801D0DA4, (Callback)func_801D0EF8, (Callback)func_801D10A4,        (Callback)func_801D0C04,
-    (Callback)func_801D0D38, (Callback)func_801D0EAC, (Callback)func_801D1068,        (Callback)func_801D13DC,
-    (Callback)func_801D1588, (Callback)func_801F70B4, (Callback)func_801F3E14,        (Callback)func_801F3F04,
-    (Callback)func_801F2D90, (Callback)func_801F2D18, (Callback)func_801F2FD0,        (Callback)func_801F3C98,
-    (Callback)func_801F2EA0, (Callback)func_801F32C0, (Callback)func_801F7BA8};
+Callback g_ActorTypes[187] = {func_8019A210,
+                              func_801F6DC0,
+                              func_801D0C98,
+                              func_801D1B10,
+                              func_8019AB5C,
+                              func_801D20C8,
+                              func_8019A3B8,
+                              func_801F70F0,
+                              func_801F7440,
+                              func_801F7A18,
+                              func_801D2978,
+                              func_801F8748,
+                              func_801D2BF0,
+                              func_801D3358,
+                              func_8019A258,
+                              func_801D35CC,
+                              func_801F8D70,
+                              func_801F71C0,
+                              func_801F729C,
+                              func_8019A8B4,
+                              func_801F6E70,
+                              func_801F2C18,
+                              func_8019A2A0,
+                              func_8019B364,
+                              func_8019F98C,
+                              func_8019A804,
+                              func_801D42A0,
+                              func_8019C620,
+                              func_801F73B8,
+                              func_801F6F38,
+                              func_801F2C14,
+                              func_801F2C18,
+                              (Callback)func_801F2C04,
+                              func_801F7A9C,
+                              func_801F7DF0,
+                              func_801F82E4,
+                              func_801F844C,
+                              func_801F85FC,
+                              func_801F73F8,
+                              func_801F74EC,
+                              func_801F2C40,
+                              func_801F6D00,
+                              (Callback)func_801F2C04,
+                              func_801F3304,
+                              func_801F77A8,
+                              (Callback)func_801F2C04,
+                              func_801F7A84,
+                              func_801F2C30,
+                              func_8019CB94,
+                              func_8019AC34,
+                              func_8019ADA4,
+                              (Callback)func_801F2C04,
+                              func_8019DDCC,
+                              func_801F2C44,
+                              func_801F73BC,
+                              func_8019B10C,
+                              func_801F31E4,
+                              func_801F352C,
+                              func_8019EAF4,
+                              (Callback)func_801F2C04,
+                              func_801F7508,
+                              (Callback)func_801F2C04,
+                              func_801F2C90,
+                              func_801F2E88,
+                              (Callback)func_801F2C04,
+                              func_8019F2CC,
+                              func_801F389C,
+                              func_801F2C18,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F309C,
+                              func_801F2CC4,
+                              func_801F6DCC,
+                              func_801F3C74,
+                              func_801F3E04,
+                              func_801F4034,
+                              func_801F36D4,
+                              (Callback)func_801F2C04,
+                              func_801F30A8,
+                              func_801F6F48,
+                              func_801F707C,
+                              func_801F7928,
+                              func_801F2C8C,
+                              func_801F3244,
+                              func_801F3A64,
+                              func_801F3064,
+                              func_801F95D4,
+                              func_8019A2E8,
+                              func_801F2C30,
+                              func_801F2C7C,
+                              func_801F2CA0,
+                              func_8019A330,
+                              func_801F6F68,
+                              func_801F7518,
+                              func_801F986C,
+                              func_801F9DBC,
+                              (Callback)func_801F2C04,
+                              func_801F34FC,
+                              func_801F36A4,
+                              func_801F37D0,
+                              (Callback)func_801F2C04,
+                              func_801F344C,
+                              (Callback)func_801F2C04,
+                              func_801F3E20,
+                              func_801D0C10,
+                              func_801F60C0,
+                              func_801F2DE4,
+                              func_80117004,
+                              func_801F735C,
+                              func_80117610,
+                              (Callback)func_801F2C04,
+                              func_8019F840,
+                              func_801F46A0,
+                              func_801F2C1C,
+                              func_801F2DB0,
+                              func_801F307C,
+                              func_801F6EA4,
+                              func_801F2C3C,
+                              func_801F7174,
+                              func_801F31E8,
+                              func_801F2D18,
+                              func_801F2E10,
+                              func_801F2EEC,
+                              func_801F30C8,
+                              func_801F2CF8,
+                              func_801F427C,
+                              (Callback)func_801F2C64,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F3560,
+                              func_801F3E0C,
+                              func_801F7198,
+                              func_801F75F8,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F77F8,
+                              Fishing_ShowLocation,
+                              (Callback)func_801F2C04,
+                              func_801F2DA4,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F41D0,
+                              func_801F2C80,
+                              func_8019B284,
+                              func_801F4344,
+                              (Callback)func_801F2C04,
+                              (Callback)func_801F2C04,
+                              func_801F2E20,
+                              func_801F2FF0,
+                              func_801F33AC,
+                              func_801F455C,
+                              (Callback)func_801F2C04,
+                              func_801F3070,
+                              func_801D0C04,
+                              func_801F7AA8,
+                              func_801F8A5C,
+                              func_801F8488,
+                              func_801D0C04,
+                              func_801D2170,
+                              func_801D2B64,
+                              func_801D2DEC,
+                              func_801F87B4,
+                              func_801F4D80,
+                              func_801F3A24,
+                              func_801D0C04,
+                              func_801D0DA4,
+                              func_801D0EF8,
+                              func_801D10A4,
+                              func_801D0C04,
+                              func_801D0D38,
+                              func_801D0EAC,
+                              func_801D1068,
+                              func_801D13DC,
+                              func_801D1588,
+                              func_801F70B4,
+                              func_801F3E14,
+                              func_801F3F04,
+                              func_801F2D90,
+                              func_801F2D18,
+                              func_801F2FD0,
+                              func_801F3C98,
+                              func_801F2EA0,
+                              func_801F32C0,
+                              func_801F7BA8};
 
 AreaHandler D_801C7F5C[11] = {
-    {(Callback)func_801F2EEC, (Callback)func_801F45CC, (Callback)func_801F4178, (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2E20, (Callback)func_801F4500, (Callback)func_801F40AC, (Callback)func_801F3350, (Callback)func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, {0, 0, 0}},
-    {(Callback)func_801F2EEC, (Callback)func_801F45CC, (Callback)func_801F4178, (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2F24, (Callback)func_801F4604, (Callback)func_801F41B0, (Callback)func_801F3454, (Callback)func_801F47A0, &D_801F4DE0, AREA_ID_MOMO_TOWER_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2F20, (Callback)func_801F45FC, (Callback)func_801F41A8, (Callback)func_801F3450, (Callback)func_801F4798, &D_801F4DD4, AREA_ID_RHAPALA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F3A50, (Callback)func_801F512C, (Callback)func_801F4CD8, (Callback)func_801F3F80, (Callback)func_801F52C8, &D_801F591C, AREA_ID_URKAN_TAPA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2FB0, (Callback)0, (Callback)0, (Callback)func_801F34E0, (Callback)func_801F4238, (s32)0x00000000u, 104, {0, 0, 0}},
-    {(Callback)func_801F2EF0, (Callback)func_801F45CC, (Callback)func_801F4178, (Callback)func_801F3420, (Callback)func_801F4768, &D_801F4D90, AREA_ID_DAUNA_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2F04, (Callback)func_801F45E0, (Callback)func_801F418C, (Callback)func_801F3434, (Callback)func_801F477C, &D_801F64E8, AREA_ID_STEEL_BEACH_MAP, {0, 0, 0}},
-    {(Callback)func_801F2E5C, (Callback)func_801F4538, (Callback)func_801F40E4, (Callback)func_801F338C, (Callback)func_801F46D4, &D_801F4D04, AREA_ID_KOMBINAT_WORLD_MAP, {0, 0, 0}},
-    {(Callback)func_801F2DB0, (Callback)func_801F448C, (Callback)func_801F4038, (Callback)func_801F32E0, (Callback)func_801F4628, &D_801F4C48, AREA_ID_DRAGNIER_WORLD_MAP, {0, 0, 0}},
+    {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP, {0, 0, 0}},
+    {func_801F2E20, func_801F4500, func_801F40AC, func_801F3350, func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, {0, 0, 0}},
+    {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP, {0, 0, 0}},
+    {func_801F2F24, func_801F4604, func_801F41B0, func_801F3454, func_801F47A0, &D_801F4DE0, AREA_ID_MOMO_TOWER_WORLD_MAP, {0, 0, 0}},
+    {func_801F2F20, func_801F45FC, func_801F41A8, func_801F3450, func_801F4798, &D_801F4DD4, AREA_ID_RHAPALA_WORLD_MAP, {0, 0, 0}},
+    {func_801F3A50, func_801F512C, func_801F4CD8, func_801F3F80, func_801F52C8, &D_801F591C, AREA_ID_URKAN_TAPA_WORLD_MAP, {0, 0, 0}},
+    {func_801F2FB0, (Callback)0, (Callback)0, func_801F34E0, func_801F4238, (s32)0x00000000u, 104, {0, 0, 0}},
+    {func_801F2EF0, func_801F45CC, func_801F4178, func_801F3420, func_801F4768, &D_801F4D90, AREA_ID_DAUNA_WORLD_MAP, {0, 0, 0}},
+    {func_801F2F04, func_801F45E0, func_801F418C, func_801F3434, func_801F477C, &D_801F64E8, AREA_ID_STEEL_BEACH_MAP, {0, 0, 0}},
+    {func_801F2E5C, func_801F4538, func_801F40E4, func_801F338C, func_801F46D4, &D_801F4D04, AREA_ID_KOMBINAT_WORLD_MAP, {0, 0, 0}},
+    {func_801F2DB0, func_801F448C, func_801F4038, func_801F32E0, func_801F4628, &D_801F4C48, AREA_ID_DRAGNIER_WORLD_MAP, {0, 0, 0}},
 };
 
-Callback D_801C8090[3] = {(Callback)func_8019A3FC, (Callback)func_8019A53C, (Callback)func_8019A7D4};
+Callback D_801C8090[3] = {func_8019A3FC, func_8019A53C, func_8019A7D4};
 
 u8 s_SceneHandlerIds[8] = {0x00, 0x00, 0x02, 0x01, 0x03, 0x04, 0x00, 0x00};
 
-Callback D_801C80A4[6] = {(Callback)func_8019A580, (Callback)func_8019A580, (Callback)func_8019A580,
-                          (Callback)func_8019A6AC, (Callback)func_8019A580, (Callback)func_8019A630};
+Callback D_801C80A4[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80BC[3] = {(Callback)func_8019A3FC, (Callback)func_8019A848, (Callback)func_8019A7D4};
+Callback D_801C80BC[3] = {func_8019A3FC, func_8019A848, func_8019A7D4};
 
-Callback D_801C80C8[6] = {(Callback)func_8019A580, (Callback)func_8019A580, (Callback)func_8019A580,
-                          (Callback)func_8019A6AC, (Callback)func_8019A580, (Callback)func_8019A630};
+Callback D_801C80C8[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80E0[3] = {(Callback)func_8019A904, (Callback)func_8019AA44, (Callback)func_8019AAFC};
+Callback D_801C80E0[3] = {func_8019A904, func_8019AA44, func_8019AAFC};
 
-Callback D_801C80EC[3] = {(Callback)func_8019AC84, (Callback)func_8019ACF4, (Callback)func_8019AD70};
+Callback D_801C80EC[3] = {func_8019AC84, func_8019ACF4, func_8019AD70};
 
-Callback D_801C80F8[4] = {(Callback)func_8019ADE8, (Callback)func_8019AF1C, (Callback)func_8019B024,
-                          (Callback)func_8019B0EC};
+Callback D_801C80F8[4] = {func_8019ADE8, func_8019AF1C, func_8019B024, func_8019B0EC};
 
 ActorToss s_ActorTossArcs[3] = {
     {0x300000, 0x80000},
@@ -165,67 +293,48 @@ ActorToss s_ActorTossArcs[3] = {
     {0x100000, 0x80000},
 };
 
-Callback D_801C8120[3] = {(Callback)func_8019B150, (Callback)func_8019B1E8, (Callback)func_8019B0EC};
+Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, func_8019B0EC};
 
-Callback D_801C812C[6] = {(Callback)func_8019B3A8, (Callback)func_8019B4A0, (Callback)func_8019B704,
-                          (Callback)func_8019BBA4, (Callback)func_8019BE28, (Callback)func_8019BEFC};
+Callback D_801C812C[6] = {func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28, func_8019BEFC};
 
-Callback D_801C8144[4] = {(Callback)func_8019C664, (Callback)func_8019C794, (Callback)func_8019C910,
-                          (Callback)func_8019C954};
+Callback D_801C8144[4] = {func_8019C664, func_8019C794, func_8019C910, func_8019C954};
 
-Callback D_801C8154[4] = {(Callback)func_8019CBD8, (Callback)func_8019CCB8, (Callback)func_8019CEDC,
-                          (Callback)func_8019CFCC};
+Callback D_801C8154[4] = {func_8019CBD8, func_8019CCB8, func_8019CEDC, func_8019CFCC};
 
-Callback D_801C8164[6] = {(Callback)func_8019DE10, (Callback)func_8019E264, (Callback)func_8019E424,
-                          (Callback)func_8019E780, (Callback)func_8019E918, (Callback)func_8019EAD4};
+Callback D_801C8164[6] = {func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918, func_8019EAD4};
 
-Callback D_801C817C[4] = {(Callback)func_8019DE54, (Callback)func_8019DF8C, (Callback)func_8019DFB4,
-                          (Callback)func_8019E1A0};
+Callback D_801C817C[4] = {func_8019DE54, func_8019DF8C, func_8019DFB4, func_8019E1A0};
 
 u8 s_AreaCueIds[12] = {AREA_ID_MCNEIL_BEFORE_NUE, AREA_ID_CEDAR_WOODS_BUNYAN_BEFORE_NUE, AREA_ID_CEDAR_WOODS_BEFORE_NUE, AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE, AREA_ID_FARM_BEFORE_NUE, AREA_ID_MCNEIL_MANOR_AREA_BEFORE_NUE, AREA_ID_YRAAL_ROAD_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE, AREA_ID_BEFORE_MOUNT_GLAUS_BEFORE_NUE, 0x00, 0x00, 0x00};
 
-Callback D_801C8198[2] = {(Callback)func_8019E2A8, (Callback)func_8019E36C};
+Callback D_801C8198[2] = {func_8019E2A8, func_8019E36C};
 
-Callback D_801C81A0[4] = {(Callback)func_8019E468, (Callback)func_8019E4A8, (Callback)func_8019E5D4,
-                          (Callback)func_8019E6F8};
+Callback D_801C81A0[4] = {func_8019E468, func_8019E4A8, func_8019E5D4, func_8019E6F8};
 
-Callback D_801C81B0[2] = {(Callback)func_8019E7C4, (Callback)func_8019E884};
+Callback D_801C81B0[2] = {func_8019E7C4, func_8019E884};
 
-Callback D_801C81B8[2] = {(Callback)func_8019E95C, (Callback)func_8019EA60};
+Callback D_801C81B8[2] = {func_8019E95C, func_8019EA60};
 
-Callback D_801C81C0[3] = {(Callback)func_8019EB38, (Callback)func_8019EC20, (Callback)func_8019ED40};
+Callback D_801C81C0[3] = {func_8019EB38, func_8019EC20, func_8019ED40};
 
-Callback D_801C81CC[4] = {(Callback)func_8019F310, (Callback)func_8019F384, (Callback)func_8019F430,
-                          (Callback)func_8019F4F8};
+Callback D_801C81CC[4] = {func_8019F310, func_8019F384, func_8019F430, func_8019F4F8};
 
 Callback D_801C81DC[105] = {
-    (Callback)func_8019F9D0, (Callback)func_801F7D04, (Callback)func_8019A370, (Callback)func_8019A370,
-    (Callback)func_801F3120, (Callback)func_801F4CDC, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F31AC, (Callback)func_801F2C04, (Callback)func_801F37B0, (Callback)func_801F35FC,
-    (Callback)func_801F3944, (Callback)func_801F3D60, (Callback)func_801F2C1C, (Callback)func_801F3014,
-    (Callback)func_801F2E98, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F33B4,
-    (Callback)func_80117A30, (Callback)func_801F2C04, (Callback)func_801F3448, (Callback)func_801F3BD0,
-    (Callback)func_801F4F00, (Callback)func_801F2C04, (Callback)func_801F52F8, (Callback)func_801F3F34,
-    (Callback)func_801F2C04, (Callback)func_801F3264, (Callback)func_80117BF4, (Callback)func_801F5608,
-    (Callback)func_801F3A78, (Callback)func_801F2C04, (Callback)func_801F2C18, (Callback)func_801F30EC,
-    (Callback)func_801F3B5C, (Callback)func_801F2C04, (Callback)func_801F2C5C, (Callback)func_801F3A8C,
-    (Callback)func_801F2C34, (Callback)func_801F2C88, (Callback)func_801F3BE8, (Callback)func_801F2C5C,
-    (Callback)func_801F33E0, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F33D8, (Callback)func_801F3418,
-    (Callback)func_801F3418, (Callback)func_801F35D8, (Callback)func_801F3D6C, (Callback)func_801F2C04,
-    (Callback)func_801F44F8, (Callback)func_801F2C14, (Callback)func_801F3440, (Callback)func_801F49D4,
-    (Callback)func_801F2C04, (Callback)func_801F2C48, (Callback)func_801F32DC, (Callback)func_801F3FF8,
-    (Callback)func_801F343C, (Callback)func_801F31EC, (Callback)func_801F6390, (Callback)func_801F35F4,
-    (Callback)func_801F35E0, (Callback)func_801F3764, (Callback)func_801F44B0, (Callback)func_801F39BC,
-    (Callback)func_801F39BC, (Callback)func_801F3BE0, (Callback)func_801F3678, (Callback)func_801F3C10,
-    (Callback)func_801F410C, (Callback)func_801F2CE8, (Callback)func_801F3118, (Callback)func_801F3234,
-    (Callback)func_801F3404, (Callback)func_801F3628, (Callback)func_801F358C, (Callback)func_801F3AFC,
-    (Callback)func_801F3D08, (Callback)func_801F2C04, (Callback)func_801F2C48, (Callback)func_801F3380,
-    (Callback)func_801F3B94, (Callback)func_801F344C, (Callback)func_801F4254, (Callback)func_801F3CB0,
-    (Callback)func_801F532C, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
-    (Callback)func_801F3A38, (Callback)func_801F2C04, (Callback)func_801F38C0, (Callback)func_801F3474,
-    (Callback)func_801F31B0};
+    func_8019F9D0,           func_801F7D04,           func_8019A370,           func_8019A370,           func_801F3120,           func_801F4CDC,           (Callback)func_801F2C04,
+    (Callback)func_801F2C04, func_801F31AC,           (Callback)func_801F2C04, func_801F37B0,           func_801F35FC,           (Callback)func_801F3944, func_801F3D60,
+    func_801F2C1C,           func_801F3014,           func_801F2E98,           (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F33B4,           func_80117A30,
+    (Callback)func_801F2C04, func_801F3448,           func_801F3BD0,           func_801F4F00,           (Callback)func_801F2C04, func_801F52F8,           func_801F3F34,
+    (Callback)func_801F2C04, func_801F3264,           func_80117BF4,           func_801F5608,           func_801F3A78,           (Callback)func_801F2C04, func_801F2C18,
+    func_801F30EC,           func_801F3B5C,           (Callback)func_801F2C04, func_801F2C5C,           func_801F3A8C,           func_801F2C34,           func_801F2C88,
+    func_801F3BE8,           func_801F2C5C,           func_801F33E0,           (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04,
+    (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F33D8,           func_801F3418,
+    func_801F3418,           func_801F35D8,           func_801F3D6C,           (Callback)func_801F2C04, func_801F44F8,           func_801F2C14,           func_801F3440,
+    func_801F49D4,           (Callback)func_801F2C04, func_801F2C48,           func_801F32DC,           func_801F3FF8,           func_801F343C,           func_801F31EC,
+    func_801F6390,           func_801F35F4,           func_801F35E0,           func_801F3764,           func_801F44B0,           func_801F39BC,           func_801F39BC,
+    func_801F3BE0,           func_801F3678,           func_801F3C10,           func_801F410C,           func_801F2CE8,           (Callback)func_801F3118, func_801F3234,
+    func_801F3404,           (Callback)func_801F3628, func_801F358C,           func_801F3AFC,           func_801F3D08,           (Callback)func_801F2C04, func_801F2C48,
+    func_801F3380,           func_801F3B94,           func_801F344C,           func_801F4254,           func_801F3CB0,           func_801F532C,           (Callback)func_801F2C04,
+    (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F3A38,           (Callback)func_801F2C04, func_801F38C0,           func_801F3474,           func_801F31B0};
 
 u8 s_EntityModes[4] = {0x00, 0x03, 0x02, 0x06};
 
@@ -251,9 +360,9 @@ u16 D_801C8424[8] = {
     0x0600, 0x0800, 0x0A00, 0x0C00, 0x0E00, 0x0000, 0x0200, 0x0400,
 };
 
-Callback D_801C8434[2] = {(Callback)Game_StartFadeWhite, (Callback)func_801A3648};
+Callback D_801C8434[2] = {Game_StartFadeWhite, func_801A3648};
 
-Callback D_801C843C[2] = {(Callback)Game_StartFadeBlack, (Callback)func_801A386C};
+Callback D_801C843C[2] = {Game_StartFadeBlack, func_801A386C};
 
 u8 s_ScriptOpcodeLengths[16] = {0x11, 0x10, 0x13, 0x12, 0x11, 0x12, 0x10, 0x11,
                                 0x0C, 0x0D, 0x0E, 0x0E, 0x02, 0x04, 0x07, 0x00};
@@ -265,36 +374,24 @@ SceneSlots* g_SceneScenes[20] = {
     (SceneSlots*)&D_801FD1A4, (SceneSlots*)&D_801FBF34, (SceneSlots*)&D_801FC404, (SceneSlots*)&D_801FE5F4,
     (SceneSlots*)&D_801F8538, (SceneSlots*)&D_801F9728, (SceneSlots*)&D_801F6D58, (SceneSlots*)&D_801F6DBC};
 
-Callback g_SceneStates[2] = {(Callback)Scene_ResetEventState, (Callback)Scene_UpdateEvent};
+Callback g_SceneStates[2] = {Scene_ResetEventState, Scene_UpdateEvent};
 
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-Callback g_SceneEvents[64] = {
-    (Callback)func_801A7CE8,        (Callback)func_801F37E4, (Callback)func_801F394C,          (Callback)func_801F4B60,
-    (Callback)Menu_OpenMaster, (Callback)func_801A7E54, (Callback)Message_RunAreaMessage, (Callback)func_801F4378,
-    (Callback)func_801F34A0,        (Callback)func_801F3740, (Callback)Scene_StartShopSave, (Callback)func_801F2C04,
-    (Callback)func_801F50F0,        (Callback)func_801F2C04, (Callback)func_801F16BC,          (Callback)func_801F3F34,
-    (Callback)func_801F3254,        (Callback)func_801F3EE8, (Callback)func_801F529C,          (Callback)func_801F3198,
-    (Callback)func_801F45EC,        (Callback)func_801F18BC, (Callback)func_801F1B8C,          (Callback)func_801F1E74,
-    (Callback)func_801F1F9C,        (Callback)func_801F2020, (Callback)func_801F228C,          (Callback)func_801A839C,
-    (Callback)func_801F38D8,        (Callback)func_801F2CDC, (Callback)func_801F37EC,          (Callback)func_801F3C24,
-    (Callback)func_801F4494,        (Callback)func_801F3460, (Callback)func_801F2F54,          (Callback)func_801F4BC0,
-    (Callback)func_801F3B4C,        (Callback)func_801F4B58, (Callback)func_801F4C84,          (Callback)func_801F2C04,
-    (Callback)func_801F5E4C,        (Callback)func_801F40C0, (Callback)func_801F2C7C,          (Callback)func_801F4B80,
-    (Callback)func_801A83DC,        (Callback)func_801F5E1C, (Callback)func_801F38DC,          (Callback)func_801F390C,
-    (Callback)func_801F3B4C,        (Callback)func_801F4F9C, (Callback)func_801F4D14,          (Callback)func_801F4164,
-    (Callback)func_801F3D28,        (Callback)func_801F33C8, (Callback)func_801F2E98,          (Callback)func_801A852C,
-    (Callback)func_801F30BC,        (Callback)func_801F2EA0, (Callback)func_801F2D0C,          (Callback)func_801F4A0C,
-    (Callback)func_801F23A4,        (Callback)func_801F3180, (Callback)func_801F2CF0,          (Callback)func_801F3CD0};
+Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,       func_801F4B60,           Menu_OpenMaster, func_801A7E54,           Message_RunAreaMessage, func_801F4378,
+                              func_801F34A0, func_801F3740, Scene_StartShopSave, (Callback)func_801F2C04, func_801F50F0,   (Callback)func_801F2C04, func_801F16BC,          func_801F3F34,
+                              func_801F3254, func_801F3EE8, func_801F529C,       func_801F3198,           func_801F45EC,   func_801F18BC,           func_801F1B8C,          func_801F1E74,
+                              func_801F1F9C, func_801F2020, func_801F228C,       func_801A839C,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,
+                              func_801F4494, func_801F3460, func_801F2F54,       func_801F4BC0,           func_801F3B4C,   func_801F4B58,           func_801F4C84,          (Callback)func_801F2C04,
+                              func_801F5E4C, func_801F40C0, func_801F2C7C,       func_801F4B80,           func_801A83DC,   func_801F5E1C,           func_801F38DC,          func_801F390C,
+                              func_801F3B4C, func_801F4F9C, func_801F4D14,       func_801F4164,           func_801F3D28,   func_801F33C8,           func_801F2E98,          func_801A852C,
+                              func_801F30BC, func_801F2EA0, func_801F2D0C,       func_801F4A0C,           func_801F23A4,   func_801F3180,           func_801F2CF0,          func_801F3CD0};
 
 u8 s_SceneStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 
-Callback D_801C85C4[11] = {
-    (Callback)Fishing_ShowLocation, (Callback)func_801F2D18,        (Callback)Fishing_ShowLocation,
-    (Callback)func_801F2C6C,        (Callback)func_801F2C6C,        (Callback)func_801F3798,
-    (Callback)func_801F2F0C,        (Callback)Fishing_ShowLocation, (Callback)func_801F2E1C,
-    (Callback)Fishing_ShowLocation, (Callback)func_801F2CA8};
+Callback D_801C85C4[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
+                           func_801F2F0C,        Fishing_ShowLocation, func_801F2E1C,        Fishing_ShowLocation, func_801F2CA8};
 
 SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F2D28, (SceneFunc)func_801A8714, (SceneFunc)&D_801F1294,   (SceneFunc)&D_801F1318,
@@ -315,20 +412,17 @@ SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F4288, (SceneFunc)&D_801F3184,   (SceneFunc)&D_801F15B8,   (SceneFunc)func_801F2CA8,
     (SceneFunc)&D_801F4594, (SceneFunc)&D_801F3C9C};
 
-AreaHooks D_801C86F8 = {{{AREA_ID_MOMO_TOWER_UPPER, {0, 0, 0}, (Callback)func_801F33A8},  {AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, {0, 0, 0}, (Callback)func_801F4F60},
-                         {AREA_ID_PLANT, {0, 0, 0}, (Callback)func_801F3194},  {AREA_ID_LIGHTHOUSE_INSIDE, {0, 0, 0}, (Callback)func_801F5880},
-                         {AREA_ID_STEEL_BEACH_FREIGHTER, {0, 0, 0}, (Callback)func_801F3350},  {AREA_ID_DUMP, {0, 0, 0}, (Callback)func_801F3E14},
-                         {AREA_ID_BLACK_SHIP_EARLY, {0, 0, 0}, (Callback)func_801F5130}, {AREA_ID_COLONY_OUTSIDE, {0, 0, 0}, (Callback)func_801F4504},
-                         {AREA_ID_FAIRY_VILLAGE_DOLPHIN, {0, 0, 0}, (Callback)func_801F4528}, {AREA_ID_FAIRY_VILLAGE_176, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_177, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_178, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_179, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_180, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_181, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_182, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_183, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_184, {0, 0, 0}, (Callback)func_801F3378},
-                         {AREA_ID_FAIRY_VILLAGE_185, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_DAUNA_MINE_NO_TEXT, {0, 0, 0}, (Callback)func_801F2D78},
-                         {AREA_ID_RELAY_POINT_A_PORTAL, {0, 0, 0}, (Callback)func_801F3A14}, {AREA_ID_MYRIA_STATION_WORKERS, {0, 0, 0}, (Callback)func_801F4914},
-                         {AREA_ID_FACTORY_OUTSIDE_SECOND, {0, 0, 0}, (Callback)func_801F4364}, {AREA_ID_FACTORY_BLOCK_ROOM, {0, 0, 0}, (Callback)func_801F4380},
-                         {AREA_ID_CAER_XHAN_LIFT_AREA, {0, 0, 0}, (Callback)func_801F41A0}, {AREA_ID_RYU_DREAM_FIRST, {0, 0, 0}, (Callback)func_801F4158},
-                         {AREA_ID_HIDDEN_FACTORY_ENTRANCE, {0, 0, 0}, (Callback)func_801F4534}, {AREA_ID_HIDDEN_FACTORY_ROOMS, {0, 0, 0}, (Callback)func_801F502C}}};
+AreaHooks D_801C86F8 = {
+    {{AREA_ID_MOMO_TOWER_UPPER, {0, 0, 0}, func_801F33A8},      {AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, {0, 0, 0}, func_801F4F60}, {AREA_ID_PLANT, {0, 0, 0}, func_801F3194},
+     {AREA_ID_LIGHTHOUSE_INSIDE, {0, 0, 0}, func_801F5880},     {AREA_ID_STEEL_BEACH_FREIGHTER, {0, 0, 0}, func_801F3350},    {AREA_ID_DUMP, {0, 0, 0}, func_801F3E14},
+     {AREA_ID_BLACK_SHIP_EARLY, {0, 0, 0}, func_801F5130},      {AREA_ID_COLONY_OUTSIDE, {0, 0, 0}, func_801F4504},           {AREA_ID_FAIRY_VILLAGE_DOLPHIN, {0, 0, 0}, func_801F4528},
+     {AREA_ID_FAIRY_VILLAGE_176, {0, 0, 0}, func_801F3378},     {AREA_ID_FAIRY_VILLAGE_177, {0, 0, 0}, func_801F3378},        {AREA_ID_FAIRY_VILLAGE_178, {0, 0, 0}, func_801F3378},
+     {AREA_ID_FAIRY_VILLAGE_179, {0, 0, 0}, func_801F3378},     {AREA_ID_FAIRY_VILLAGE_180, {0, 0, 0}, func_801F3378},        {AREA_ID_FAIRY_VILLAGE_181, {0, 0, 0}, func_801F3378},
+     {AREA_ID_FAIRY_VILLAGE_182, {0, 0, 0}, func_801F3378},     {AREA_ID_FAIRY_VILLAGE_183, {0, 0, 0}, func_801F3378},        {AREA_ID_FAIRY_VILLAGE_184, {0, 0, 0}, func_801F3378},
+     {AREA_ID_FAIRY_VILLAGE_185, {0, 0, 0}, func_801F3378},     {AREA_ID_DAUNA_MINE_NO_TEXT, {0, 0, 0}, func_801F2D78},       {AREA_ID_RELAY_POINT_A_PORTAL, {0, 0, 0}, func_801F3A14},
+     {AREA_ID_MYRIA_STATION_WORKERS, {0, 0, 0}, func_801F4914}, {AREA_ID_FACTORY_OUTSIDE_SECOND, {0, 0, 0}, func_801F4364},   {AREA_ID_FACTORY_BLOCK_ROOM, {0, 0, 0}, func_801F4380},
+     {AREA_ID_CAER_XHAN_LIFT_AREA, {0, 0, 0}, func_801F41A0},   {AREA_ID_RYU_DREAM_FIRST, {0, 0, 0}, func_801F4158},          {AREA_ID_HIDDEN_FACTORY_ENTRANCE, {0, 0, 0}, func_801F4534},
+     {AREA_ID_HIDDEN_FACTORY_ROOMS, {0, 0, 0}, func_801F502C}}};
 
 u8 s_TalkMessageIds[36] = {0x53, 0x00, 0x00, 0x5B, 0x6C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x54,
                            0x00, 0x00, 0x5C, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x00,
@@ -350,9 +444,9 @@ u8 s_ScriptOpcodeOffsets[256] = {
     0x01, 0x01, 0x01, 0x02, 0x02, 0x09, 0x05, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x03, 0x05, 0x04, 0x01, 0x02,
     0x07, 0x02, 0x03, 0x05, 0x01, 0x01, 0x01, 0x03, 0x01};
 
-Callback D_801C88FC[2] = {(Callback)func_801ACA14, (Callback)func_801ACAC0};
+Callback D_801C88FC[2] = {func_801ACA14, func_801ACAC0};
 
-Callback D_801C8904[2] = {(Callback)func_801ACC08, (Callback)func_801ACCD8};
+Callback D_801C8904[2] = {func_801ACC08, func_801ACCD8};
 
 ActorWorkFunc D_801C890C[11] = {
     (ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)func_801AD35C, (ActorWorkFunc)func_801AD44C,
@@ -367,575 +461,515 @@ u8* D_801C893C[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_
 u8* D_801C8950[5] = {g_InventoryCounts[0], g_InventoryCounts[1], g_InventoryCounts[2], g_InventoryCounts[3], (u8*)0};
 
 volatile Item g_Items[ITEM_COUNT] = {
-    {"Nothing", 0, 0, 0x4000, 0},
-    {"Green" T_SP "Apple", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4001, 5},
-    {"Bread", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4001, 20},
-    {"Healing" T_SP "Herb", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4002, 10},
-    {"Vitamin", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4003, 50},
-    {"MultiVitamin", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4004, 300},
-    {"Vitamins", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4005, 500},
-    {"Wisdom" T_SP "Seed", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4006, 500},
-    {"Wisdom" T_SP "Fruit", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4007, 1000},
-    {"Croc" T_SP "Tear", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4008, 5},
-    {"Antidote", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4009, 12},
-    {"Eye" T_SP "Drops", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x400A, 20},
-    {"THE" T_SP "MOCHI", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x400B, 40},
-    {"Panacea", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x400C, 100},
-    {"Ammonia", ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x400D, 200},
-    {"Moon" T_SP "Tears", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x400E, 1000},
-    {"Dynamite", ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40F1, 200},
-    {"Weather" T_SP "Vane", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40F0, 200},
-    {"Taser", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40EC, 200},
-    {"Belladonna", ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_SELECTABLE, 0, 0x40F5, 200},
-    {"Ginseng", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_SELECTABLE, 0, 0x40E0, 200},
-    {"Firecracker", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40E8, 500},
-    {"Icicle", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40EB, 500},
-    {"Napalm", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40F3, 800},
-    {"Molotov", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_SELECTABLE, 0, 0x40E6, 10},
-    {"Life" T_SP "Shard", ITEM_TARGET_BOTH, 0, 0x4010, 200},
-    {"Magic" T_SP "Shard", ITEM_TARGET_BOTH, 0, 0x4011, 200},
-    {"Power" T_SP "Food", ITEM_TARGET_BOTH, 0, 0x4012, 200},
-    {"Protein", ITEM_TARGET_BOTH, 0, 0x4013, 200},
-    {"Swallow" T_SP "Eye", ITEM_TARGET_BOTH, 0, 0x4014, 200},
-    {"Fish" T_DASH "head", ITEM_TARGET_BOTH, 0, 0x4015, 200},
-    {"Moxa", ITEM_TARGET_BOTH, 0, 0x4016, 200},
-    {"Hourglass", ITEM_TARGET_SELECTABLE, 0, 0x4017, 500},
-    {"Ivory" T_SP "Dice", ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x4018, 500},
-    {"Plate", 0, 0, 0x4031, 10},
-    {"Shaly" T_SP "Seed", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4171, 0},
-    {"Vinegar", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4008, 0},
-    {"Rusted" T_SP "Medal", 0, 0, 0x4031, 12},
-    {"Gems", 0, 0, 0x4031, 400},
-    {"Beef" T_SP "Jerky", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4003, 50},
-    {"Cheese", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4001, 10},
-    {"Berries", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4171, 5},
-    {"Mandrake", ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x40C7, 100},
-    {"Clay" T_SP "Vase", 0, 0, 0x4031, 2},
-    {"Marbles", 0, 0, 0x4031, 10},
-    {"Moldy" T_SP "Vase", 0, 0, 0x4031, 20},
-    {"Dirty" T_SP "Rags", 0, 0, 0x4031, 30},
-    {"Tea" T_SP "Cup", 0, 0, 0x4031, 40},
-    {"Beads", 0, 0, 0x4031, 60},
-    {"Rare" T_SP "Book", 0, 0, 0x4031, 80},
-    {"Old" T_SP "Painting", 0, 0, 0x4031, 120},
-    {"Myria" T_SP "Icon", 0, 0, 0x4031, 160},
-    {"Ladon" T_SP "Icon", 0, 0, 0x4031, 160},
-    {"Lithograph", 0, 0, 0x4031, 300},
-    {"Dragon" T_SP "Tear", 0, 0, 0x4031, 600},
-    {"Rice" T_SP "Ball", 0, 0, 0x40C6, 2},
-    {"Jellyfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41A0, 10},
-    {"Pirana", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41A1, 50},
-    {"Puffer", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_SELECTABLE, 0, 0x40E6, 50},
-    {"Trout", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41A3, 80},
-    {"RainbowTrout", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41A4, 160},
-    {"Red" T_SP "Catfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE, 0, 0x41A5, 300},
-    {"Bass", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41A6, 100},
-    {"MartianSquid", ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x41A7, 200},
-    {"Black" T_SP "Bass", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A8, 400},
-    {"Barandy", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A9, 2000},
-    {"Man" T_DASH "o" T_APOS T_DASH "War", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41AA, 10},
-    {"Flying" T_SP "Fish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41AB, 50},
-    {"Blowfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41AC, 80},
-    {"Sea" T_SP "Bream", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41AD, 160},
-    {"Sea" T_SP "Bass", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41AE, 100},
-    {"Black" T_SP "Porgy", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x41AF, 400},
-    {"Octopus", ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x41B0, 300},
-    {"Angler", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE, 0, 0x41B1, 400},
-    {"Devilfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE, 0, 0x41B2, 1000},
-    {"Spearfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41B3, 2000},
-    {"Whale", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT |
-                    ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41B4, 4000},
-    {"Mackerel", ITEM_TARGET_ENEMY_DEFAULT, 0, 0x40C8, 200},
-    {"Part" T_SP "A", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Part" T_SP "B", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Part" T_SP "C", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Part" T_SP "D", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Part" T_SP "E", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Part" T_SP "F", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Part" T_SP "G", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Part" T_SP "H", ITEM_TARGET_ALL, 0, 0x40C9, 4000},
-    {"Horseradish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4171, 0},
-    {"Faerie" T_SP "Tiara", ITEM_STORY_ITEM | ITEM_TARGET_ALL | ITEM_TARGET_BOTH, 0, 0x40CC, 0},
-    {"Skill" T_SP "Ink", 0, 0, 0x40CB, 100},
-    {"Flower" T_SP "Jewel", 0, 0, 0x4031, 10000},
-    {"Rakda" T_SP "Meat", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE |
-                    ITEM_TARGET_BOTH, 0, 0x4003, 50},
-    {"Water" T_SP "Jug", ITEM_STORY_ITEM | ITEM_TARGET_ALL | ITEM_TARGET_BOTH, 0, 0x40CD, 5}};
+    ITEM_OBJECT("Nothing", 0, 0, 0x4000, 0),
+    ITEM_OBJECT("Green" T_SP "Apple", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4001, 5),
+    ITEM_OBJECT("Bread", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4001, 20),
+    ITEM_OBJECT("Healing" T_SP "Herb", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4002, 10),
+    ITEM_OBJECT("Vitamin", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4003, 50),
+    ITEM_OBJECT("MultiVitamin", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4004, 300),
+    ITEM_OBJECT("Vitamins", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4005, 500),
+    ITEM_OBJECT("Wisdom" T_SP "Seed", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4006, 500),
+    ITEM_OBJECT("Wisdom" T_SP "Fruit", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4007, 1000),
+    ITEM_OBJECT("Croc" T_SP "Tear", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4008, 5),
+    ITEM_OBJECT("Antidote", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4009, 12),
+    ITEM_OBJECT("Eye" T_SP "Drops", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x400A, 20),
+    ITEM_OBJECT("THE" T_SP "MOCHI", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x400B, 40),
+    ITEM_OBJECT("Panacea", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x400C, 100),
+    ITEM_OBJECT("Ammonia", ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x400D, 200),
+    ITEM_OBJECT("Moon" T_SP "Tears", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x400E, 1000),
+    ITEM_OBJECT("Dynamite", ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40F1, 200),
+    ITEM_OBJECT("Weather" T_SP "Vane", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40F0, 200),
+    ITEM_OBJECT("Taser", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40EC, 200),
+    ITEM_OBJECT("Belladonna", ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_SELECTABLE, 0, 0x40F5, 200),
+    ITEM_OBJECT("Ginseng", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_SELECTABLE, 0, 0x40E0, 200),
+    ITEM_OBJECT("Firecracker", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40E8, 500),
+    ITEM_OBJECT("Icicle", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40EB, 500),
+    ITEM_OBJECT("Napalm", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_SELECTABLE, 0, 0x40F3, 800),
+    ITEM_OBJECT("Molotov", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_SELECTABLE, 0, 0x40E6, 10),
+    ITEM_OBJECT("Life" T_SP "Shard", ITEM_TARGET_BOTH, 0, 0x4010, 200),
+    ITEM_OBJECT("Magic" T_SP "Shard", ITEM_TARGET_BOTH, 0, 0x4011, 200),
+    ITEM_OBJECT("Power" T_SP "Food", ITEM_TARGET_BOTH, 0, 0x4012, 200),
+    ITEM_OBJECT("Protein", ITEM_TARGET_BOTH, 0, 0x4013, 200),
+    ITEM_OBJECT("Swallow" T_SP "Eye", ITEM_TARGET_BOTH, 0, 0x4014, 200),
+    ITEM_OBJECT("Fish" T_DASH "head", ITEM_TARGET_BOTH, 0, 0x4015, 200),
+    ITEM_OBJECT("Moxa", ITEM_TARGET_BOTH, 0, 0x4016, 200),
+    ITEM_OBJECT("Hourglass", ITEM_TARGET_SELECTABLE, 0, 0x4017, 500),
+    ITEM_OBJECT("Ivory" T_SP "Dice", ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x4018, 500),
+    ITEM_OBJECT("Plate", 0, 0, 0x4031, 10),
+    ITEM_OBJECT("Shaly" T_SP "Seed", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4171, 0),
+    ITEM_OBJECT("Vinegar", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4008, 0),
+    ITEM_OBJECT("Rusted" T_SP "Medal", 0, 0, 0x4031, 12),
+    ITEM_OBJECT("Gems", 0, 0, 0x4031, 400),
+    ITEM_OBJECT("Beef" T_SP "Jerky", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4003, 50),
+    ITEM_OBJECT("Cheese", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4001, 10),
+    ITEM_OBJECT("Berries", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4171, 5),
+    ITEM_OBJECT("Mandrake", ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x40C7, 100),
+    ITEM_OBJECT("Clay" T_SP "Vase", 0, 0, 0x4031, 2),
+    ITEM_OBJECT("Marbles", 0, 0, 0x4031, 10),
+    ITEM_OBJECT("Moldy" T_SP "Vase", 0, 0, 0x4031, 20),
+    ITEM_OBJECT("Dirty" T_SP "Rags", 0, 0, 0x4031, 30),
+    ITEM_OBJECT("Tea" T_SP "Cup", 0, 0, 0x4031, 40),
+    ITEM_OBJECT("Beads", 0, 0, 0x4031, 60),
+    ITEM_OBJECT("Rare" T_SP "Book", 0, 0, 0x4031, 80),
+    ITEM_OBJECT("Old" T_SP "Painting", 0, 0, 0x4031, 120),
+    ITEM_OBJECT("Myria" T_SP "Icon", 0, 0, 0x4031, 160),
+    ITEM_OBJECT("Ladon" T_SP "Icon", 0, 0, 0x4031, 160),
+    ITEM_OBJECT("Lithograph", 0, 0, 0x4031, 300),
+    ITEM_OBJECT("Dragon" T_SP "Tear", 0, 0, 0x4031, 600),
+    ITEM_OBJECT("Rice" T_SP "Ball", 0, 0, 0x40C6, 2),
+    ITEM_OBJECT("Jellyfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A0, 10),
+    ITEM_OBJECT("Pirana", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A1, 50),
+    ITEM_OBJECT("Puffer", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_SELECTABLE, 0, 0x40E6, 50),
+    ITEM_OBJECT("Trout", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A3, 80),
+    ITEM_OBJECT("RainbowTrout", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A4, 160),
+    ITEM_OBJECT("Red" T_SP "Catfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x41A5, 300),
+    ITEM_OBJECT("Bass", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A6, 100),
+    ITEM_OBJECT("MartianSquid", ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x41A7, 200),
+    ITEM_OBJECT("Black" T_SP "Bass", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A8, 400),
+    ITEM_OBJECT("Barandy", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41A9, 2000),
+    ITEM_OBJECT("Man" T_DASH "o" T_APOS T_DASH "War", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41AA, 10),
+    ITEM_OBJECT("Flying" T_SP "Fish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41AB, 50),
+    ITEM_OBJECT("Blowfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41AC, 80),
+    ITEM_OBJECT("Sea" T_SP "Bream", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41AD, 160),
+    ITEM_OBJECT("Sea" T_SP "Bass", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41AE, 100),
+    ITEM_OBJECT("Black" T_SP "Porgy", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41AF, 400),
+    ITEM_OBJECT("Octopus", ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x41B0, 300),
+    ITEM_OBJECT("Angler", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x41B1, 400),
+    ITEM_OBJECT("Devilfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_SHOW_NAME | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE, 0, 0x41B2, 1000),
+    ITEM_OBJECT("Spearfish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41B3, 2000),
+    ITEM_OBJECT("Whale", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_STORY_ITEM | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x41B4, 4000),
+    ITEM_OBJECT("Mackerel", ITEM_TARGET_ENEMY_DEFAULT, 0, 0x40C8, 200),
+    ITEM_OBJECT("Part" T_SP "A", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Part" T_SP "B", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Part" T_SP "C", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Part" T_SP "D", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Part" T_SP "E", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Part" T_SP "F", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Part" T_SP "G", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Part" T_SP "H", ITEM_TARGET_ALL, 0, 0x40C9, 4000),
+    ITEM_OBJECT("Horseradish", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4171, 0),
+    ITEM_OBJECT("Faerie" T_SP "Tiara", ITEM_STORY_ITEM | ITEM_TARGET_ALL | ITEM_TARGET_BOTH, 0, 0x40CC, 0),
+    ITEM_OBJECT("Skill" T_SP "Ink", 0, 0, 0x40CB, 100),
+    ITEM_OBJECT("Flower" T_SP "Jewel", 0, 0, 0x4031, 10000),
+    ITEM_OBJECT("Rakda" T_SP "Meat", ITEM_USABLE_MENU | ITEM_SHOW_ANIMATION | ITEM_TARGET_ENEMY_DEFAULT | ITEM_TARGET_SELECTABLE | ITEM_TARGET_BOTH, 0, 0x4003, 50),
+    ITEM_OBJECT("Water" T_SP "Jug", ITEM_STORY_ITEM | ITEM_TARGET_ALL | ITEM_TARGET_BOTH, 0, 0x40CD, 5),
+};
 
-volatile VitalItem g_VitalItems[VITAL_ITEM_COUNT] = {{"Nothing", 0x4000, 0},
-                                                     {"Flier", 0x41B5, 0},
-                                                     {"Wallet", 0x41B6, 0},
-                                                     {"Egg", 0x41B7, 0},
-                                                     {"Passport", 0x41B8, 0},
-                                                     {"Guild" T_SP "Letter", 0x41B9, 0},
-                                                     {"ID" T_SP "Card", 0x41BA, 0},
-                                                     {"Guild" T_SP "Badge", 0x41BB, 0},
-                                                     {"System" T_SP "Disk", 0x41BC, 0},
-                                                     {"Memo", 0x41BD, 0},
-                                                     {"Sea" T_SP "Charts", 0x41BE, 0},
-                                                     {"Key", 0x41BF, 0},
-                                                     {"Card" T_SP "Key" T_SP "A", 0x41C0, 0},
-                                                     {"Card" T_SP "Key" T_SP "B", 0x41C1, 0},
-                                                     {"Old" T_SP "Passport", 0x41C2, 0},
-                                                     {"Fountain" T_SP "Pen", 0x41C5, 0}};
+volatile VitalItem g_VitalItems[VITAL_ITEM_COUNT] = {
+    VITAL_ITEM_OBJECT("Nothing", 0x4000),
+    VITAL_ITEM_OBJECT("Flier", 0x41B5),
+    VITAL_ITEM_OBJECT("Wallet", 0x41B6),
+    VITAL_ITEM_OBJECT("Egg", 0x41B7),
+    VITAL_ITEM_OBJECT("Passport", 0x41B8),
+    VITAL_ITEM_OBJECT("Guild" T_SP "Letter", 0x41B9),
+    VITAL_ITEM_OBJECT("ID" T_SP "Card", 0x41BA),
+    VITAL_ITEM_OBJECT("Guild" T_SP "Badge", 0x41BB),
+    VITAL_ITEM_OBJECT("System" T_SP "Disk", 0x41BC),
+    VITAL_ITEM_OBJECT("Memo", 0x41BD),
+    VITAL_ITEM_OBJECT("Sea" T_SP "Charts", 0x41BE),
+    VITAL_ITEM_OBJECT("Key", 0x41BF),
+    VITAL_ITEM_OBJECT("Card" T_SP "Key" T_SP "A", 0x41C0),
+    VITAL_ITEM_OBJECT("Card" T_SP "Key" T_SP "B", 0x41C1),
+    VITAL_ITEM_OBJECT("Old" T_SP "Passport", 0x41C2),
+    VITAL_ITEM_OBJECT("Fountain" T_SP "Pen", 0x41C5),
+};
 
 Weapon g_Weapons[WEAPON_COUNT] = {
-    {{"Nothing", 0, 0x00}, 0, 0, 0, 0, 0, 0, 0x4000, 0},
-    {{"Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 4, 0, 0x4033, 50},
-    {{"BallockKnife", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 6, 0, 0x4034, 100},
-    {{"Bronze" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 2, 2, 8, 0, 0x4035, 240},
-    {{"Broad" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 3, 2, 15, 0, 0x4036, 600},
-    {{"Silver" T_SP "Knife", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, ELEM_HOLY, 1, 1, 12, 0, 0x4037, 1400},
-    {{"Scramasax", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 2, 2, 23, 0, 0x4038, 1200},
-    {{"Moon" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 4, 2, 32, 0, 0x4039, 2000},
-    {{"Claymore", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 10, 2, 43, 0, 0x403A, 2500},
-    {{"Flare" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, ELEM_FIRE, 4, 2, 38, 0, 0x403B, 3200},
-    {{"FeatherSword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, ELEM_WIND, 1, 2, 48, 0, 0x403C, 5200},
-    {{"Royal" T_SP "Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0xC6}, ITEM_KIND_WEAPON, 0, 2, 1, 54, 0, 0x403D, 6200},
-    {{"Baselard", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 3, 2, 59, 0, 0x403E, 6500},
-    {{"Deadly" T_SP "Blade", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 4, 2, 55, 0, 0x403F, 7900},
-    {{"Heavy" T_SP "Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, ELEM_FROST, 2, 1, 67, 0, 0x4040, 7500},
-    {{"Ascension", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, ELEM_HOLY, 4, 2, 70, 0, 0x4041, 14000},
-    {{"Heat" T_SP "Shotel", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, ELEM_FIRE, 3, 2, 76, 0, 0x4042, 9500},
-    {{"Barbarossa", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, ELEM_ELECTRIC, 10, 2, 82, 0, 0x4043, 12000},
-    {{"PiercingEdge", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0xE6}, ITEM_KIND_WEAPON, 0, 4, 2, 91, 0, 0x4044, 14500},
-    {{"Demonsbane", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 7, 2, 99, 0, 0x4045, 15000},
-    {{"DamascusSwd", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 4, 2, 105, 0, 0x4046, 16000},
-    {{"SeekingSword", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 7, 2, 110, 0, 0x4047, 20000},
-    {{"Dragon" T_SP "Blade", EQUIP_TEEPO | EQUIP_RYU, 0xFA}, ITEM_KIND_WEAPON, ELEM_FIRE, 4, 2, 130, 0, 0x4048, 65000},
-    {{"Holy" T_SP "Avenger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0xC6}, ITEM_KIND_WEAPON, ELEM_HOLY, 4, 2, 125, 0, 0x4049, 40000},
-    {{"Royal" T_SP "Sword", EQUIP_TEEPO | EQUIP_RYU, 0xF2}, ITEM_KIND_WEAPON, ELEM_ELECTRIC, 8, 2, 158, 0, 0x404A, 55000},
-    {{"GooKingSword", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 4, 2, 180, 0, 0x404B, 65000},
-    {{"AshurasSword", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 4, 2, 50, 0, 0x404C, 3600},
-    {{"HiddenDagger", EQUIP_TEEPO | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 51, 0, 0x404D, 7000},
-    {{"Bent" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 5, 2, 2, 0, 0x404E, 20},
-    {{"PointedStick", EQUIP_NINA, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 1, 0, 0x404F, 10},
-    {{"Oaken" T_SP "Staff", EQUIP_NINA, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 6, 0, 0x4050, 50},
-    {{"Mace", EQUIP_NINA, 0x00}, ITEM_KIND_WEAPON, 0, 3, 0, 12, 0, 0x4051, 400},
-    {{"Magician" T_SP "Rod", EQUIP_NINA, 0x00}, ITEM_KIND_WEAPON, 0, 2, 0, 20, 0, 0x4052, 780},
-    {{"QuarterStaff", EQUIP_NINA, 0x00}, ITEM_KIND_WEAPON, 0, 4, 0, 28, 0, 0x4053, 1100},
-    {{"WindCutter", EQUIP_NINA, 0xE6}, ITEM_KIND_WEAPON, ELEM_WIND, 3, 0, 34, 0, 0x4054, 2200},
-    {{"Ruby" T_SP "Scepter", EQUIP_NINA, 0xE6}, ITEM_KIND_WEAPON, ELEM_FIRE, 3, 0, 43, 0, 0x4055, 3200},
-    {{"LacquerStaff", EQUIP_NINA, 0x36}, ITEM_KIND_WEAPON, 0, 3, 0, 50, 0, 0x4056, 5600},
-    {{"Beryl" T_SP "Rod", EQUIP_NINA, 0x00}, ITEM_KIND_WEAPON, 0, 4, 0, 61, 0, 0x4057, 7200},
-    {{"Thunder" T_SP "Rod", EQUIP_NINA, 0xF2}, ITEM_KIND_WEAPON, ELEM_ELECTRIC, 10, 0, 69, 0, 0x4058, 9500},
-    {{"BlessedStaff", EQUIP_NINA, 0xC6}, ITEM_KIND_WEAPON, 0, 3, 0, 73, 0, 0x4059, 11000},
-    {{"Ouroboros", EQUIP_NINA, 0x46}, ITEM_KIND_WEAPON, 0, 5, 0, 80, 0, 0x405A, 22000},
-    {{"Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 2, 6, 16, 0, 0x405B, 750},
-    {{"Long" T_SP "Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 3, 6, 24, 0, 0x405C, 1000},
-    {{"Halberd", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 4, 6, 33, 0, 0x405D, 2100},
-    {{"Rood" T_SP "Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 4, 6, 41, 0, 0x405E, 2900},
-    {{"Flame" T_SP "Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, ELEM_FIRE, 4, 6, 42, 0, 0x405F, 3800},
-    {{"Flying" T_SP "Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 2, 6, 50, 0, 0x4060, 5000},
-    {{"PiercingPike", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 4, 6, 62, 0, 0x4061, 7400},
-    {{"Gigantess", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 12, 6, 78, 0, 0x4062, 8800},
-    {{"Gale" T_SP "Javelin", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, ELEM_WIND, 4, 6, 68, 0, 0x4063, 9100},
-    {{"Ice" T_SP "Halberd", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, ELEM_FROST, 6, 6, 80, 0, 0x4064, 12500},
-    {{"Aries" T_SP "Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 4, 6, 88, 0, 0x4065, 15500},
-    {{"Gunginir", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 10, 6, 99, 0, 0x4066, 22000},
-    {{"Dragon" T_SP "Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 6, 6, 110, 0, 0x4067, 19000},
-    {{"Rufad" T_APOS "sSpear", EQUIP_GARR, 0xD6}, ITEM_KIND_WEAPON, ELEM_HOLY, 2, 6, 108, 0, 0x4068, 65000},
-    {{"Claws", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 6, 0, 0x4069, 200},
-    {{"Rippers", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 10, 0, 0x406A, 600},
-    {{"Spiked" T_SP "Claws", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 18, 0, 0x406B, 1300},
-    {{"Flame" T_SP "Talons", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, ELEM_FIRE, 1, 0, 25, 0, 0x406C, 3300},
-    {{"Tiger" T_SP "Claws", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 34, 0, 0x406D, 3800},
-    {{"Raptor" T_SP "Claws", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 46, 0, 0x406E, 5800},
-    {{"Rockbreaker", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, ELEM_EARTH, 1, 0, 55, 0, 0x406F, 8200},
-    {{"Brass" T_SP "Claws", EQUIP_PECO, 0xE2}, ITEM_KIND_WEAPON, 0, 1, 0, 64, 0, 0x4070, 11000},
-    {{"Death" T_SP "Claws", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 73, 0, 0x4071, 14200},
-    {{"Dragonfang", EQUIP_PECO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 0, 85, 0, 0x4072, 22000},
-    {{"ThievesKnife", EQUIP_REI, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 36, 0, 0x4073, 3200},
-    {{"Katzbalger", EQUIP_REI, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 61, 0, 0x4074, 9200},
-    {{"Slicer", EQUIP_REI, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 85, 0, 0x4075, 16000},
-    {{"Lifestealer", EQUIP_REI, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 108, 0, 0x4076, 22000},
-    {{"Melted" T_SP "Blade", EQUIP_WHELP | EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ITEM_KIND_WEAPON, 0, 1, 1, 6, 0, 0x4069, 30},
-    {{"Ammo", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 58, 0, 0x40B9, 500},
-    {{"Flame" T_SP "Chrysm", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, ELEM_FIRE, 1, 5, 50, 0, 0x40BA, 500},
-    {{"Ice" T_SP "Chrysm", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, ELEM_FROST, 1, 5, 50, 0, 0x40BB, 500},
-    {{"ShotgunShell", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 78, 0, 0x40BC, 2200},
-    {{"Sleep" T_SP "Shells", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 80, 0, 0x40BD, 2500},
-    {{"HE" T_SP "Shells", EQUIP_MOMO, 0x08}, ITEM_KIND_WEAPON, 0, 1, 5, 166, 0, 0x40BE, 4200},
-    {{"Flash" T_SP "Shells", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 96, 0, 0x40BF, 5300},
-    {{"Homing" T_SP "Bomb", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 78, 0, 0x40C0, 7700},
-    {{"AP" T_SP "Shells", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 158, 0, 0x40C1, 10000},
-    {{"Gas" T_SP "Shells", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 118, 0, 0x40C2, 13500},
-    {{"Atomic" T_SP "Bomb", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, 0, 1, 5, 198, 0, 0x40C3, 16000},
-    {{"Ghostbuster", EQUIP_MOMO, 0x00}, ITEM_KIND_WEAPON, ELEM_HOLY, 1, 5, 155, 0, 0x40C4, 22000},
-    {{"Beast" T_SP "Spear", EQUIP_GARR, 0x00}, ITEM_KIND_WEAPON, 0, 15, 6, 150, 0, 0x40C5, 20000}};
+    WEAPON_OBJECT("Nothing", 0, 0x00, 0, 0, 0, 0, 0, 0x4000, 0),
+    WEAPON_OBJECT("Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 4, 0x4033, 50),
+    WEAPON_OBJECT("BallockKnife", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 6, 0x4034, 100),
+    WEAPON_OBJECT("Bronze" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 2, 2, 8, 0x4035, 240),
+    WEAPON_OBJECT("Broad" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 3, 2, 15, 0x4036, 600),
+    WEAPON_OBJECT("Silver" T_SP "Knife", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, ELEM_HOLY, 1, 1, 12, 0x4037, 1400),
+    WEAPON_OBJECT("Scramasax", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 2, 2, 23, 0x4038, 1200),
+    WEAPON_OBJECT("Moon" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 4, 2, 32, 0x4039, 2000),
+    WEAPON_OBJECT("Claymore", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 10, 2, 43, 0x403A, 2500),
+    WEAPON_OBJECT("Flare" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, ELEM_FIRE, 4, 2, 38, 0x403B, 3200),
+    WEAPON_OBJECT("FeatherSword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, ELEM_WIND, 1, 2, 48, 0x403C, 5200),
+    WEAPON_OBJECT("Royal" T_SP "Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0xC6, ITEM_KIND_WEAPON, 0, 2, 1, 54, 0x403D, 6200),
+    WEAPON_OBJECT("Baselard", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 3, 2, 59, 0x403E, 6500),
+    WEAPON_OBJECT("Deadly" T_SP "Blade", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 4, 2, 55, 0x403F, 7900),
+    WEAPON_OBJECT("Heavy" T_SP "Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, ELEM_FROST, 2, 1, 67, 0x4040, 7500),
+    WEAPON_OBJECT("Ascension", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, ELEM_HOLY, 4, 2, 70, 0x4041, 14000),
+    WEAPON_OBJECT("Heat" T_SP "Shotel", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, ELEM_FIRE, 3, 2, 76, 0x4042, 9500),
+    WEAPON_OBJECT("Barbarossa", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, ELEM_ELECTRIC, 10, 2, 82, 0x4043, 12000),
+    WEAPON_OBJECT("PiercingEdge", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0xE6, ITEM_KIND_WEAPON, 0, 4, 2, 91, 0x4044, 14500),
+    WEAPON_OBJECT("Demonsbane", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 7, 2, 99, 0x4045, 15000),
+    WEAPON_OBJECT("DamascusSwd", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 4, 2, 105, 0x4046, 16000),
+    WEAPON_OBJECT("SeekingSword", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 7, 2, 110, 0x4047, 20000),
+    WEAPON_OBJECT("Dragon" T_SP "Blade", EQUIP_TEEPO | EQUIP_RYU, 0xFA, ITEM_KIND_WEAPON, ELEM_FIRE, 4, 2, 130, 0x4048, 65000),
+    WEAPON_OBJECT("Holy" T_SP "Avenger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0xC6, ITEM_KIND_WEAPON, ELEM_HOLY, 4, 2, 125, 0x4049, 40000),
+    WEAPON_OBJECT("Royal" T_SP "Sword", EQUIP_TEEPO | EQUIP_RYU, 0xF2, ITEM_KIND_WEAPON, ELEM_ELECTRIC, 8, 2, 158, 0x404A, 55000),
+    WEAPON_OBJECT("GooKingSword", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 4, 2, 180, 0x404B, 65000),
+    WEAPON_OBJECT("AshurasSword", EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 4, 2, 50, 0x404C, 3600),
+    WEAPON_OBJECT("HiddenDagger", EQUIP_TEEPO | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 51, 0x404D, 7000),
+    WEAPON_OBJECT("Bent" T_SP "Sword", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 5, 2, 2, 0x404E, 20),
+    WEAPON_OBJECT("PointedStick", EQUIP_NINA, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 1, 0x404F, 10),
+    WEAPON_OBJECT("Oaken" T_SP "Staff", EQUIP_NINA, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 6, 0x4050, 50),
+    WEAPON_OBJECT("Mace", EQUIP_NINA, 0x00, ITEM_KIND_WEAPON, 0, 3, 0, 12, 0x4051, 400),
+    WEAPON_OBJECT("Magician" T_SP "Rod", EQUIP_NINA, 0x00, ITEM_KIND_WEAPON, 0, 2, 0, 20, 0x4052, 780),
+    WEAPON_OBJECT("QuarterStaff", EQUIP_NINA, 0x00, ITEM_KIND_WEAPON, 0, 4, 0, 28, 0x4053, 1100),
+    WEAPON_OBJECT("WindCutter", EQUIP_NINA, 0xE6, ITEM_KIND_WEAPON, ELEM_WIND, 3, 0, 34, 0x4054, 2200),
+    WEAPON_OBJECT("Ruby" T_SP "Scepter", EQUIP_NINA, 0xE6, ITEM_KIND_WEAPON, ELEM_FIRE, 3, 0, 43, 0x4055, 3200),
+    WEAPON_OBJECT("LacquerStaff", EQUIP_NINA, 0x36, ITEM_KIND_WEAPON, 0, 3, 0, 50, 0x4056, 5600),
+    WEAPON_OBJECT("Beryl" T_SP "Rod", EQUIP_NINA, 0x00, ITEM_KIND_WEAPON, 0, 4, 0, 61, 0x4057, 7200),
+    WEAPON_OBJECT("Thunder" T_SP "Rod", EQUIP_NINA, 0xF2, ITEM_KIND_WEAPON, ELEM_ELECTRIC, 10, 0, 69, 0x4058, 9500),
+    WEAPON_OBJECT("BlessedStaff", EQUIP_NINA, 0xC6, ITEM_KIND_WEAPON, 0, 3, 0, 73, 0x4059, 11000),
+    WEAPON_OBJECT("Ouroboros", EQUIP_NINA, 0x46, ITEM_KIND_WEAPON, 0, 5, 0, 80, 0x405A, 22000),
+    WEAPON_OBJECT("Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 2, 6, 16, 0x405B, 750),
+    WEAPON_OBJECT("Long" T_SP "Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 3, 6, 24, 0x405C, 1000),
+    WEAPON_OBJECT("Halberd", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 4, 6, 33, 0x405D, 2100),
+    WEAPON_OBJECT("Rood" T_SP "Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 4, 6, 41, 0x405E, 2900),
+    WEAPON_OBJECT("Flame" T_SP "Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, ELEM_FIRE, 4, 6, 42, 0x405F, 3800),
+    WEAPON_OBJECT("Flying" T_SP "Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 2, 6, 50, 0x4060, 5000),
+    WEAPON_OBJECT("PiercingPike", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 4, 6, 62, 0x4061, 7400),
+    WEAPON_OBJECT("Gigantess", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 12, 6, 78, 0x4062, 8800),
+    WEAPON_OBJECT("Gale" T_SP "Javelin", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, ELEM_WIND, 4, 6, 68, 0x4063, 9100),
+    WEAPON_OBJECT("Ice" T_SP "Halberd", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, ELEM_FROST, 6, 6, 80, 0x4064, 12500),
+    WEAPON_OBJECT("Aries" T_SP "Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 4, 6, 88, 0x4065, 15500),
+    WEAPON_OBJECT("Gunginir", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 10, 6, 99, 0x4066, 22000),
+    WEAPON_OBJECT("Dragon" T_SP "Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 6, 6, 110, 0x4067, 19000),
+    WEAPON_OBJECT("Rufad" T_APOS "sSpear", EQUIP_GARR, 0xD6, ITEM_KIND_WEAPON, ELEM_HOLY, 2, 6, 108, 0x4068, 65000),
+    WEAPON_OBJECT("Claws", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 6, 0x4069, 200),
+    WEAPON_OBJECT("Rippers", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 10, 0x406A, 600),
+    WEAPON_OBJECT("Spiked" T_SP "Claws", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 18, 0x406B, 1300),
+    WEAPON_OBJECT("Flame" T_SP "Talons", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, ELEM_FIRE, 1, 0, 25, 0x406C, 3300),
+    WEAPON_OBJECT("Tiger" T_SP "Claws", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 34, 0x406D, 3800),
+    WEAPON_OBJECT("Raptor" T_SP "Claws", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 46, 0x406E, 5800),
+    WEAPON_OBJECT("Rockbreaker", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, ELEM_EARTH, 1, 0, 55, 0x406F, 8200),
+    WEAPON_OBJECT("Brass" T_SP "Claws", EQUIP_PECO, 0xE2, ITEM_KIND_WEAPON, 0, 1, 0, 64, 0x4070, 11000),
+    WEAPON_OBJECT("Death" T_SP "Claws", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 73, 0x4071, 14200),
+    WEAPON_OBJECT("Dragonfang", EQUIP_PECO, 0x00, ITEM_KIND_WEAPON, 0, 1, 0, 85, 0x4072, 22000),
+    WEAPON_OBJECT("ThievesKnife", EQUIP_REI, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 36, 0x4073, 3200),
+    WEAPON_OBJECT("Katzbalger", EQUIP_REI, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 61, 0x4074, 9200),
+    WEAPON_OBJECT("Slicer", EQUIP_REI, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 85, 0x4075, 16000),
+    WEAPON_OBJECT("Lifestealer", EQUIP_REI, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 108, 0x4076, 22000),
+    WEAPON_OBJECT("Melted" T_SP "Blade", EQUIP_WHELP | EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ITEM_KIND_WEAPON, 0, 1, 1, 6, 0x4069, 30),
+    WEAPON_OBJECT("Ammo", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 58, 0x40B9, 500),
+    WEAPON_OBJECT("Flame" T_SP "Chrysm", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, ELEM_FIRE, 1, 5, 50, 0x40BA, 500),
+    WEAPON_OBJECT("Ice" T_SP "Chrysm", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, ELEM_FROST, 1, 5, 50, 0x40BB, 500),
+    WEAPON_OBJECT("ShotgunShell", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 78, 0x40BC, 2200),
+    WEAPON_OBJECT("Sleep" T_SP "Shells", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 80, 0x40BD, 2500),
+    WEAPON_OBJECT("HE" T_SP "Shells", EQUIP_MOMO, 0x08, ITEM_KIND_WEAPON, 0, 1, 5, 166, 0x40BE, 4200),
+    WEAPON_OBJECT("Flash" T_SP "Shells", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 96, 0x40BF, 5300),
+    WEAPON_OBJECT("Homing" T_SP "Bomb", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 78, 0x40C0, 7700),
+    WEAPON_OBJECT("AP" T_SP "Shells", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 158, 0x40C1, 10000),
+    WEAPON_OBJECT("Gas" T_SP "Shells", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 118, 0x40C2, 13500),
+    WEAPON_OBJECT("Atomic" T_SP "Bomb", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, 0, 1, 5, 198, 0x40C3, 16000),
+    WEAPON_OBJECT("Ghostbuster", EQUIP_MOMO, 0x00, ITEM_KIND_WEAPON, ELEM_HOLY, 1, 5, 155, 0x40C4, 22000),
+    WEAPON_OBJECT("Beast" T_SP "Spear", EQUIP_GARR, 0x00, ITEM_KIND_WEAPON, 0, 15, 6, 150, 0x40C5, 20000),
+};
 
 Armor g_Armors[ARMOR_COUNT] = {
-    {{"Nothing", 0, 0x00}, ARMOR_TYPE_NOTHING, 0, 0, 0, 0x4000, 0},
-    {{"Clothing", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 3, 2, 0, 0x4077, 50},
-    {{"LeatherArmor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 4, 4, 0, 0x4078, 180},
-    {{"Waistcloth", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 3, 5, 0, 0x4079, 210},
-    {{"Ranger" T_SP "Garb", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 4, 7, 0, 0x407A, 520},
-    {{"LeatherApron", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_BODY, 4, 6, 0, 0x407B, 330},
-    {{"Mage" T_APOS "s" T_SP "Robes", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_BODY, 3, 9, 0, 0x407C, 610},
-    {{"Cuirass", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 6, 12, 0, 0x407D, 620},
-    {{"Breastplate", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 4, 16, 0, 0x407E, 1000},
-    {{"Chain" T_SP "Cap", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 5, 19, 0, 0x407F, 1100},
-    {{"Scale" T_SP "Mail", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 6, 21, 0, 0x4080, 1450},
-    {{"Crepe" T_SP "Cape", EQUIP_PECO | EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_BODY, 2, 19, 0, 0x4081, 1300},
-    {{"AsbestosArmr", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 6, 18, 0, 0x4082, 1600},
-    {{"MithrilArmor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 6, 26, 0, 0x4083, 2100},
-    {{"Lgt" T_DOT "Clothing", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 1, 16, 0, 0x4084, 2700},
-    {{"Magma" T_SP "Armor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 8, 38, 0, 0x4085, 4500},
-    {{"Silver" T_SP "Mail", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 6, 32, 0, 0x4086, 3900},
-    {{"Robe" T_SP "of" T_SP "Wind", EQUIP_NINA, 0xC2}, ARMOR_TYPE_BODY, 0, 41, 0, 0x4087, 4500},
-    {{"Amber" T_SP "BPlate", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 4, 45, 0, 0x4088, 6100},
-    {{"PhantomDress", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_BODY, 3, 45, 0, 0x4089, 6300},
-    {{"BlizzardMail", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 8, 51, 0, 0x408A, 6800},
-    {{"LacquerArmor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 8, 57, 0, 0x408B, 8000},
-    {{"Sage" T_APOS "s" T_SP "Frock", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_BODY, 3, 53, 0, 0x408C, 9300},
-    {{"DamascusMail", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 6, 58, 0, 0x408D, 11000},
-    {{"Holy" T_SP "Robe", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_BODY, 3, 62, 0, 0x408E, 16000},
-    {{"Burglar" T_SP "Garb", EQUIP_REI, 0x00}, ARMOR_TYPE_BODY, 0, 64, 0, 0x408F, 19500},
-    {{"Royal" T_SP "Armor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 8, 72, 0, 0x4090, 18000},
-    {{"Force" T_SP "Armor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x46}, ARMOR_TYPE_BODY, 6, 65, 0, 0x4091, 22000},
-    {{"Gideon" T_APOS "sGarb", EQUIP_GARR, 0x00}, ARMOR_TYPE_BODY, 12, 82, 0, 0x4092, 25000},
-    {{"Diana" T_APOS "sDress", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_BODY, 4, 72, 0, 0x4093, 28000},
-    {{"Dragon" T_SP "Armor", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 6, 73, 0, 0x4094, 42000},
-    {{"Life" T_SP "Armor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 8, 80, 0, 0x4095, 48000},
-    {{"Mist" T_SP "Armor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 4, 75, 0, 0x4096, 65000},
-    {{"Bandana", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 0, 1, 0, 0x4097, 30},
-    {{"Hairband", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_HELMET, 0, 2, 0, 0x4098, 80},
-    {{"Brass" T_SP "Helm", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 1, 3, 0, 0x4099, 120},
-    {{"Iron" T_SP "Helm", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 2, 6, 0, 0x409A, 380},
-    {{"Knight" T_APOS "sHelm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 2, 8, 0, 0x409B, 720},
-    {{"Glass" T_SP "Domino", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 1, 6, 0, 0x409C, 450},
-    {{"Mithril" T_SP "Helm", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 1, 12, 0, 0x409D, 1100},
-    {{"Laurel", EQUIP_PECO | EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_HELMET, 0, 15, 0, 0x409E, 1800},
-    {{"Gold" T_SP "Hairpin", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_HELMET, 0, 14, 0, 0x409F, 2200},
-    {{"PlatinumHelm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 1, 18, 0, 0x40A0, 2800},
-    {{"UV" T_SP "Glasses", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 1, 18, 0, 0x40A1, 3600},
-    {{"Tiger" T_APOS "s" T_SP "Cap", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 1, 17, 0, 0x40A2, 5300},
-    {{"Sun" T_SP "Mask", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 1, 22, 0, 0x40A3, 7200},
-    {{"Lacquer" T_SP "Helm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 2, 21, 0, 0x40A4, 5500},
-    {{"Silver" T_SP "Tiara", EQUIP_MOMO | EQUIP_NINA, 0x00}, ARMOR_TYPE_HELMET, 1, 23, 0, 0x40A5, 12500},
-    {{"Divine" T_SP "Helm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 2, 26, 0, 0x40A6, 16000},
-    {{"Dragon" T_SP "Helm", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ARMOR_TYPE_HELMET, 2, 30, 0, 0x40A7, 18000},
-    {{"Bracers", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 0, 1, 0, 0x40A8, 30},
-    {{"Cloth" T_SP "Shield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 1, 3, 0, 0x40A9, 150},
-    {{"Gauntlet", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 1, 5, 0, 0x40AA, 400},
-    {{"BronzeShield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 2, 8, 0, 0x40AB, 610},
-    {{"Buckler", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 2, 12, 0, 0x40AC, 1100},
-    {{"MithrlShield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 3, 17, 0, 0x40AD, 1600},
-    {{"SteelGntlets", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 1, 21, 0, 0x40AE, 3000},
-    {{"Flame" T_SP "Shield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 3, 25, 0, 0x40AF, 4300},
-    {{"Kite" T_SP "Shield", EQUIP_PECO | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 3, 28, 0, 0x40B0, 4700},
-    {{"Ice" T_SP "Shield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 3, 28, 0, 0x40B1, 5800},
-    {{"SpikedGntlts", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 1, 28, 0, 0x40B2, 6800},
-    {{"LaquerShield", EQUIP_PECO | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 3, 33, 0, 0x40B3, 6500},
-    {{"Protectors", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 1, 16, 0, 0x40B4, 11000},
-    {{"GiantShield", EQUIP_GARR, 0x00}, ARMOR_TYPE_SHIELD, 5, 45, 0, 0x40B5, 15000},
-    {{"Mind" T_SP "Shield", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x62}, ARMOR_TYPE_SHIELD, 3, 34, 0, 0x40B6, 18000},
-    {{"DragonShield", EQUIP_TEEPO | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 3, 42, 0, 0x40B7, 32000},
-    {{"Aries" T_SP "Gloves", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_SHIELD, 2, 44, 0, 0x40B8, 25000},
-    {{"ManlyClothes", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 3, 10, 0, 0x41C4, 1000}};
+    ARMOR_OBJECT("Nothing", 0, 0x00, ARMOR_TYPE_NOTHING, 0, 0, 0x4000, 0),
+    ARMOR_OBJECT("Clothing", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 3, 2, 0x4077, 50),
+    ARMOR_OBJECT("LeatherArmor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 4, 4, 0x4078, 180),
+    ARMOR_OBJECT("Waistcloth", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 3, 5, 0x4079, 210),
+    ARMOR_OBJECT("Ranger" T_SP "Garb", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 4, 7, 0x407A, 520),
+    ARMOR_OBJECT("LeatherApron", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_BODY, 4, 6, 0x407B, 330),
+    ARMOR_OBJECT("Mage" T_APOS "s" T_SP "Robes", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_BODY, 3, 9, 0x407C, 610),
+    ARMOR_OBJECT("Cuirass", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 6, 12, 0x407D, 620),
+    ARMOR_OBJECT("Breastplate", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 4, 16, 0x407E, 1000),
+    ARMOR_OBJECT("Chain" T_SP "Cap", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 5, 19, 0x407F, 1100),
+    ARMOR_OBJECT("Scale" T_SP "Mail", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 6, 21, 0x4080, 1450),
+    ARMOR_OBJECT("Crepe" T_SP "Cape", EQUIP_PECO | EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_BODY, 2, 19, 0x4081, 1300),
+    ARMOR_OBJECT("AsbestosArmr", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 6, 18, 0x4082, 1600),
+    ARMOR_OBJECT("MithrilArmor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 6, 26, 0x4083, 2100),
+    ARMOR_OBJECT("Lgt" T_DOT "Clothing", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 1, 16, 0x4084, 2700),
+    ARMOR_OBJECT("Magma" T_SP "Armor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 8, 38, 0x4085, 4500),
+    ARMOR_OBJECT("Silver" T_SP "Mail", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 6, 32, 0x4086, 3900),
+    ARMOR_OBJECT("Robe" T_SP "of" T_SP "Wind", EQUIP_NINA, 0xC2, ARMOR_TYPE_BODY, 0, 41, 0x4087, 4500),
+    ARMOR_OBJECT("Amber" T_SP "BPlate", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 4, 45, 0x4088, 6100),
+    ARMOR_OBJECT("PhantomDress", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_BODY, 3, 45, 0x4089, 6300),
+    ARMOR_OBJECT("BlizzardMail", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 8, 51, 0x408A, 6800),
+    ARMOR_OBJECT("LacquerArmor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 8, 57, 0x408B, 8000),
+    ARMOR_OBJECT("Sage" T_APOS "s" T_SP "Frock", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_BODY, 3, 53, 0x408C, 9300),
+    ARMOR_OBJECT("DamascusMail", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 6, 58, 0x408D, 11000),
+    ARMOR_OBJECT("Holy" T_SP "Robe", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_BODY, 3, 62, 0x408E, 16000),
+    ARMOR_OBJECT("Burglar" T_SP "Garb", EQUIP_REI, 0x00, ARMOR_TYPE_BODY, 0, 64, 0x408F, 19500),
+    ARMOR_OBJECT("Royal" T_SP "Armor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 8, 72, 0x4090, 18000),
+    ARMOR_OBJECT("Force" T_SP "Armor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x46, ARMOR_TYPE_BODY, 6, 65, 0x4091, 22000),
+    ARMOR_OBJECT("Gideon" T_APOS "sGarb", EQUIP_GARR, 0x00, ARMOR_TYPE_BODY, 12, 82, 0x4092, 25000),
+    ARMOR_OBJECT("Diana" T_APOS "sDress", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_BODY, 4, 72, 0x4093, 28000),
+    ARMOR_OBJECT("Dragon" T_SP "Armor", EQUIP_TEEPO | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 6, 73, 0x4094, 42000),
+    ARMOR_OBJECT("Life" T_SP "Armor", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 8, 80, 0x4095, 48000),
+    ARMOR_OBJECT("Mist" T_SP "Armor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 4, 75, 0x4096, 65000),
+    ARMOR_OBJECT("Bandana", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 0, 1, 0x4097, 30),
+    ARMOR_OBJECT("Hairband", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_HELMET, 0, 2, 0x4098, 80),
+    ARMOR_OBJECT("Brass" T_SP "Helm", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 1, 3, 0x4099, 120),
+    ARMOR_OBJECT("Iron" T_SP "Helm", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 2, 6, 0x409A, 380),
+    ARMOR_OBJECT("Knight" T_APOS "sHelm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 2, 8, 0x409B, 720),
+    ARMOR_OBJECT("Glass" T_SP "Domino", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 1, 6, 0x409C, 450),
+    ARMOR_OBJECT("Mithril" T_SP "Helm", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 1, 12, 0x409D, 1100),
+    ARMOR_OBJECT("Laurel", EQUIP_PECO | EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_HELMET, 0, 15, 0x409E, 1800),
+    ARMOR_OBJECT("Gold" T_SP "Hairpin", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_HELMET, 0, 14, 0x409F, 2200),
+    ARMOR_OBJECT("PlatinumHelm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 1, 18, 0x40A0, 2800),
+    ARMOR_OBJECT("UV" T_SP "Glasses", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 1, 18, 0x40A1, 3600),
+    ARMOR_OBJECT("Tiger" T_APOS "s" T_SP "Cap", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 1, 17, 0x40A2, 5300),
+    ARMOR_OBJECT("Sun" T_SP "Mask", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 1, 22, 0x40A3, 7200),
+    ARMOR_OBJECT("Lacquer" T_SP "Helm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 2, 21, 0x40A4, 5500),
+    ARMOR_OBJECT("Silver" T_SP "Tiara", EQUIP_MOMO | EQUIP_NINA, 0x00, ARMOR_TYPE_HELMET, 1, 23, 0x40A5, 12500),
+    ARMOR_OBJECT("Divine" T_SP "Helm", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 2, 26, 0x40A6, 16000),
+    ARMOR_OBJECT("Dragon" T_SP "Helm", EQUIP_TEEPO | EQUIP_RYU, 0x00, ARMOR_TYPE_HELMET, 2, 30, 0x40A7, 18000),
+    ARMOR_OBJECT("Bracers", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 0, 1, 0x40A8, 30),
+    ARMOR_OBJECT("Cloth" T_SP "Shield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 1, 3, 0x40A9, 150),
+    ARMOR_OBJECT("Gauntlet", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 1, 5, 0x40AA, 400),
+    ARMOR_OBJECT("BronzeShield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 2, 8, 0x40AB, 610),
+    ARMOR_OBJECT("Buckler", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 2, 12, 0x40AC, 1100),
+    ARMOR_OBJECT("MithrlShield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 3, 17, 0x40AD, 1600),
+    ARMOR_OBJECT("SteelGntlets", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 1, 21, 0x40AE, 3000),
+    ARMOR_OBJECT("Flame" T_SP "Shield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 3, 25, 0x40AF, 4300),
+    ARMOR_OBJECT("Kite" T_SP "Shield", EQUIP_PECO | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 3, 28, 0x40B0, 4700),
+    ARMOR_OBJECT("Ice" T_SP "Shield", EQUIP_PECO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 3, 28, 0x40B1, 5800),
+    ARMOR_OBJECT("SpikedGntlts", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 1, 28, 0x40B2, 6800),
+    ARMOR_OBJECT("LaquerShield", EQUIP_PECO | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 3, 33, 0x40B3, 6500),
+    ARMOR_OBJECT("Protectors", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 1, 16, 0x40B4, 11000),
+    ARMOR_OBJECT("GiantShield", EQUIP_GARR, 0x00, ARMOR_TYPE_SHIELD, 5, 45, 0x40B5, 15000),
+    ARMOR_OBJECT("Mind" T_SP "Shield", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x62, ARMOR_TYPE_SHIELD, 3, 34, 0x40B6, 18000),
+    ARMOR_OBJECT("DragonShield", EQUIP_TEEPO | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 3, 42, 0x40B7, 32000),
+    ARMOR_OBJECT("Aries" T_SP "Gloves", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ARMOR_TYPE_SHIELD, 2, 44, 0x40B8, 25000),
+    ARMOR_OBJECT("ManlyClothes", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 3, 10, 0x41C4, 1000),
+};
 
 volatile Accessory g_Accessories[ACCESSORY_COUNT] = {
-    {{"Nothing", 0, 0x00}, 0, 0, 0x4000, 0},
-    {{"Titan" T_SP "Belt", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4019, 3000},
-    {{"High" T_SP "Boots", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x401A, 3000},
-    {{"Speed" T_SP "Boots", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x401B, 3000},
-    {{"Wisdom" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x401C, 3000},
-    {{"Lion" T_APOS "s" T_SP "Belt", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x401D, 3000},
-    {{"Dream" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x401E, 1000},
-    {{"Midas" T_SP "Stone", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 10, 0x41C3, 3000},
-    {{"Balance" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x401F, 1000},
-    {{"Bat" T_SP "Amulet", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4020, 1000},
-    {{"Ring" T_SP "of" T_SP "Ice", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4021, 5000},
-    {{"Ring" T_SP "of" T_SP "Fire", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4022, 5000},
-    {{"Thunder" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4023, 5000},
-    {{"Talisman", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4024, 500},
-    {{"Diamond" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4024, 3000},
-    {{"Life" T_SP "Sandals", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4025, 500},
-    {{"Light" T_SP "Bangle", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4025, 3000},
-    {{"Barrier" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4026, 3000},
-    {{"Hawk" T_APOS "s" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4027, 4000},
-    {{"Artemis" T_APOS T_SP "Cap", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4028, 4000},
-    {{"Bell" T_SP "Collar", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4029, 10000},
-    {{"Holy" T_SP "Mantle", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x402A, 10000},
-    {{"Cupid" T_APOS "s" T_SP "Lyre", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x402B, 15000},
-    {{"Ivory" T_SP "Charm", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x402C, 50000},
-    {{"Soul" T_SP "Gem", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x402D, 3000},
-    {{"Shaman" T_APOS "sRing", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x402E, 25000},
-    {{"Spirit" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x402F, 50000},
-    {{"Coupons", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ITEM_KIND_ACCESSORY, 0, 0x4030, 1000},
-    {{"Worm", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20},
-    {{"Spirit", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50},
-    {{"Caro", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200},
-    {{"Heavy" T_SP "Caro", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500},
-    {{"Toad", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20},
-    {{"Baby" T_SP "Frog", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50},
-    {{"Frog", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200},
-    {{"Fat" T_SP "Frog", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500},
-    {{"Old" T_SP "Popper", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20},
-    {{"Popper", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50},
-    {{"Top", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200},
-    {{"Dogwalker", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500},
-    {{"Sinker", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20},
-    {{"Float", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50},
-    {{"Hanger", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200},
-    {{"Deep" T_SP "Diver", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500},
-    {{"Coin", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500},
-    {{"Ding" T_SP "Frog", 0, 0x00}, ITEM_KIND_FISHING_LURE, 0, 0x4032, 10000},
-    {{"Wooden" T_SP "Rod", 0, 0x08}, ITEM_KIND_FISHING_ROD, 0, 0x4032, 40},
-    {{"Bamboo" T_SP "Rod", 0, 0x08}, ITEM_KIND_FISHING_ROD, 0, 0x4032, 300},
-    {{"Deluxe" T_SP "Rod", 0, 0x08}, ITEM_KIND_FISHING_ROD, 0, 0x4032, 800},
-    {{"Angling" T_SP "Rod", 0, 0x08}, ITEM_KIND_FISHING_ROD, 0, 0x4032, 2000},
-    {{"Spanner", 0, 0x08}, ITEM_KIND_FISHING_ROD, 0, 0x4032, 4000},
-    {{"Master" T_APOS "s" T_SP "Rod", 0, 0x08}, ITEM_KIND_FISHING_ROD, 0, 0x4032, 20000}};
+    ACCESSORY_OBJECT("Nothing", 0, 0x00, 0, 0, 0x4000, 0),
+    ACCESSORY_OBJECT("Titan" T_SP "Belt", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4019, 3000),
+    ACCESSORY_OBJECT("High" T_SP "Boots", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x401A, 3000),
+    ACCESSORY_OBJECT("Speed" T_SP "Boots", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x401B, 3000),
+    ACCESSORY_OBJECT("Wisdom" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x401C, 3000),
+    ACCESSORY_OBJECT("Lion" T_APOS "s" T_SP "Belt", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x401D, 3000),
+    ACCESSORY_OBJECT("Dream" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x401E, 1000),
+    ACCESSORY_OBJECT("Midas" T_SP "Stone", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 10, 0x41C3, 3000),
+    ACCESSORY_OBJECT("Balance" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x401F, 1000),
+    ACCESSORY_OBJECT("Bat" T_SP "Amulet", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4020, 1000),
+    ACCESSORY_OBJECT("Ring" T_SP "of" T_SP "Ice", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4021, 5000),
+    ACCESSORY_OBJECT("Ring" T_SP "of" T_SP "Fire", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4022, 5000),
+    ACCESSORY_OBJECT("Thunder" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4023, 5000),
+    ACCESSORY_OBJECT("Talisman", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4024, 500),
+    ACCESSORY_OBJECT("Diamond" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4024, 3000),
+    ACCESSORY_OBJECT("Life" T_SP "Sandals", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4025, 500),
+    ACCESSORY_OBJECT("Light" T_SP "Bangle", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4025, 3000),
+    ACCESSORY_OBJECT("Barrier" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4026, 3000),
+    ACCESSORY_OBJECT("Hawk" T_APOS "s" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4027, 4000),
+    ACCESSORY_OBJECT("Artemis" T_APOS T_SP "Cap", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4028, 4000),
+    ACCESSORY_OBJECT("Bell" T_SP "Collar", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4029, 10000),
+    ACCESSORY_OBJECT("Holy" T_SP "Mantle", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x402A, 10000),
+    ACCESSORY_OBJECT("Cupid" T_APOS "s" T_SP "Lyre", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x402B, 15000),
+    ACCESSORY_OBJECT("Ivory" T_SP "Charm", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x402C, 50000),
+    ACCESSORY_OBJECT("Soul" T_SP "Gem", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x402D, 3000),
+    ACCESSORY_OBJECT("Shaman" T_APOS "sRing", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x402E, 25000),
+    ACCESSORY_OBJECT("Spirit" T_SP "Ring", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x402F, 50000),
+    ACCESSORY_OBJECT("Coupons", EQUIP_PECO | EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00, ITEM_KIND_ACCESSORY, 0, 0x4030, 1000),
+    ACCESSORY_OBJECT("Worm", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20),
+    ACCESSORY_OBJECT("Spirit", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50),
+    ACCESSORY_OBJECT("Caro", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200),
+    ACCESSORY_OBJECT("Heavy" T_SP "Caro", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500),
+    ACCESSORY_OBJECT("Toad", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20),
+    ACCESSORY_OBJECT("Baby" T_SP "Frog", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50),
+    ACCESSORY_OBJECT("Frog", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200),
+    ACCESSORY_OBJECT("Fat" T_SP "Frog", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500),
+    ACCESSORY_OBJECT("Old" T_SP "Popper", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20),
+    ACCESSORY_OBJECT("Popper", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50),
+    ACCESSORY_OBJECT("Top", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200),
+    ACCESSORY_OBJECT("Dogwalker", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500),
+    ACCESSORY_OBJECT("Sinker", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 20),
+    ACCESSORY_OBJECT("Float", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 50),
+    ACCESSORY_OBJECT("Hanger", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 200),
+    ACCESSORY_OBJECT("Deep" T_SP "Diver", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500),
+    ACCESSORY_OBJECT("Coin", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 500),
+    ACCESSORY_OBJECT("Ding" T_SP "Frog", 0, 0x00, ITEM_KIND_FISHING_LURE, 0, 0x4032, 10000),
+    ACCESSORY_OBJECT("Wooden" T_SP "Rod", 0, 0x08, ITEM_KIND_FISHING_ROD, 0, 0x4032, 40),
+    ACCESSORY_OBJECT("Bamboo" T_SP "Rod", 0, 0x08, ITEM_KIND_FISHING_ROD, 0, 0x4032, 300),
+    ACCESSORY_OBJECT("Deluxe" T_SP "Rod", 0, 0x08, ITEM_KIND_FISHING_ROD, 0, 0x4032, 800),
+    ACCESSORY_OBJECT("Angling" T_SP "Rod", 0, 0x08, ITEM_KIND_FISHING_ROD, 0, 0x4032, 2000),
+    ACCESSORY_OBJECT("Spanner", 0, 0x08, ITEM_KIND_FISHING_ROD, 0, 0x4032, 4000),
+    ACCESSORY_OBJECT("Master" T_APOS "s" T_SP "Rod", 0, 0x08, ITEM_KIND_FISHING_ROD, 0, 0x4032, 20000),
+};
 
 ShopStock g_GameShopStock[SHOP_COUNT] = {
-    {7,
-     {{ITEM_CAT_WEAPON, WEAPON_BALLOCK_KNIFE}, {ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD}, {ITEM_CAT_ARMOR, ARMOR_LEATHER_ARMOR},
-      {ITEM_CAT_ARMOR, ARMOR_BRACERS}, {ITEM_CAT_ARMOR, ARMOR_CLOTH_SHIELD}, {ITEM_CAT_ARMOR, ARMOR_BANDANA},
-      {ITEM_CAT_ARMOR, ARMOR_BRASS_HELM}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_CROC_TEAR}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_MOLOTOV}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_WOODEN_ROD}, {ITEM_CAT_ACCESSORY, ACCESSORY_WORM},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_TOAD}, {ITEM_CAT_ACCESSORY, ACCESSORY_OLD_POPPER},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_SINKER}}},
-    {4,
-     {{ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD}, {ITEM_CAT_WEAPON, WEAPON_BROAD_SWORD}, {ITEM_CAT_WEAPON, WEAPON_CLAYMORE},
-      {ITEM_CAT_WEAPON, WEAPON_MACE}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {9,
-     {{ITEM_CAT_ARMOR, ARMOR_LEATHER_ARMOR}, {ITEM_CAT_ARMOR, ARMOR_LEATHER_APRON}, {ITEM_CAT_ARMOR, ARMOR_RANGER_GARB},
-      {ITEM_CAT_ARMOR, ARMOR_CUIRASS}, {ITEM_CAT_ARMOR, ARMOR_MAGES_ROBES}, {ITEM_CAT_ARMOR, ARMOR_GAUNTLET},
-      {ITEM_CAT_ARMOR, ARMOR_BRONZE_SHIELD}, {ITEM_CAT_ARMOR, ARMOR_IRON_HELM}, {ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {7,
-     {{ITEM_CAT_ACCESSORY, ACCESSORY_MIDAS_STONE}, {ITEM_CAT_ACCESSORY, ACCESSORY_TALISMAN},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_LIFE_SANDALS}, {ITEM_CAT_ITEM, ITEM_MOLOTOV}, {ITEM_CAT_ITEM, ITEM_DYNAMITE},
-      {ITEM_CAT_ITEM, ITEM_WEATHER_VANE}, {ITEM_CAT_ITEM, ITEM_TASER}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {10,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_WORM}, {ITEM_CAT_ACCESSORY, ACCESSORY_TOAD},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_OLD_POPPER}, {ITEM_CAT_ACCESSORY, ACCESSORY_SINKER},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_COIN}}},
-    {11,
-     {{ITEM_CAT_WEAPON, WEAPON_BROAD_SWORD}, {ITEM_CAT_WEAPON, WEAPON_SCRAMASAX}, {ITEM_CAT_WEAPON, WEAPON_MACE},
-      {ITEM_CAT_WEAPON, WEAPON_MAGICIAN_ROD}, {ITEM_CAT_WEAPON, WEAPON_RIPPERS}, {ITEM_CAT_ARMOR, ARMOR_RANGER_GARB},
-      {ITEM_CAT_ARMOR, ARMOR_CUIRASS}, {ITEM_CAT_ARMOR, ARMOR_BREASTPLATE}, {ITEM_CAT_ARMOR, ARMOR_GAUNTLET},
-      {ITEM_CAT_ARMOR, ARMOR_BRONZE_SHIELD}, {ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO}}},
-    {9,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ITEM, ITEM_DYNAMITE}, {ITEM_CAT_ITEM, ITEM_WEATHER_VANE}, {ITEM_CAT_ITEM, ITEM_TASER},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_AMMONIA}, {ITEM_CAT_ACCESSORY, ACCESSORY_TOAD},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_OLD_POPPER}, {ITEM_CAT_ARMOR, ARMOR_MAGES_ROBES}, {ITEM_CAT_ARMOR, ARMOR_CUIRASS},
-      {ITEM_CAT_ARMOR, ARMOR_GAUNTLET}, {ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO}}},
-    {4,
-     {{ITEM_CAT_ITEM, ITEM_MANDRAKE}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE}, {ITEM_CAT_ITEM, ITEM_EYE_DROPS},
-      {ITEM_CAT_ITEM, ITEM_MOLOTOV}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {3,
-     {{ITEM_CAT_WEAPON, WEAPON_SCRAMASAX}, {ITEM_CAT_WEAPON, WEAPON_MOON_SWORD}, {ITEM_CAT_WEAPON, WEAPON_CLAYMORE},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {9,
-     {{ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_MULTIVITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ITEM, ITEM_FIRECRACKER}, {ITEM_CAT_ITEM, ITEM_ICICLE}, {ITEM_CAT_ITEM, ITEM_NAPALM},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {4,
-     {{ITEM_CAT_ARMOR, ARMOR_BREASTPLATE}, {ITEM_CAT_ARMOR, ARMOR_SCALE_MAIL}, {ITEM_CAT_ARMOR, ARMOR_BUCKLER},
-      {ITEM_CAT_ARMOR, ARMOR_KNIGHTS_HELM}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_WEAPON, WEAPON_FLAME_CHRYSM}, {ITEM_CAT_WEAPON, WEAPON_MOON_SWORD}, {ITEM_CAT_WEAPON, WEAPON_LONG_SPEAR},
-      {ITEM_CAT_WEAPON, WEAPON_QUARTER_STAFF}, {ITEM_CAT_WEAPON, WEAPON_SPIKED_CLAWS}, {ITEM_CAT_ARMOR, ARMOR_BREASTPLATE},
-      {ITEM_CAT_ARMOR, ARMOR_SCALE_MAIL}, {ITEM_CAT_ARMOR, ARMOR_GAUNTLET}, {ITEM_CAT_ARMOR, ARMOR_BUCKLER},
-      {ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO}, {ITEM_CAT_ARMOR, ARMOR_KNIGHTS_HELM}}},
-    {10,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT}, {ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_POPPER}, {ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {7,
-     {{ITEM_CAT_WEAPON, WEAPON_CLAYMORE}, {ITEM_CAT_WEAPON, WEAPON_FLARE_SWORD}, {ITEM_CAT_WEAPON, WEAPON_LONG_SPEAR},
-      {ITEM_CAT_WEAPON, WEAPON_HALBERD}, {ITEM_CAT_ARMOR, ARMOR_MITHRIL_ARMOR}, {ITEM_CAT_ARMOR, ARMOR_MITHRIL_HELM},
-      {ITEM_CAT_ARMOR, ARMOR_MITHRIL_SHIELD}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {10,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT}, {ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_POPPER}, {ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_WEAPON, WEAPON_POINTED_STICK}, {ITEM_CAT_ARMOR, ARMOR_WAISTCLOTH}, {ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD},
-      {ITEM_CAT_ARMOR, ARMOR_BUCKLER}, {ITEM_CAT_WEAPON, WEAPON_WIND_CUTTER}, {ITEM_CAT_ARMOR, ARMOR_CREPE_CAPE},
-      {ITEM_CAT_WEAPON, WEAPON_FLAME_TALONS}, {ITEM_CAT_ARMOR, ARMOR_LAUREL}, {ITEM_CAT_WEAPON, WEAPON_ROYAL_DAGGER},
-      {ITEM_CAT_ARMOR, ARMOR_SPIKED_GAUNTLETS}, {ITEM_CAT_WEAPON, WEAPON_ICE_HALBERD}}},
-    {11,
-     {{ITEM_CAT_WEAPON, WEAPON_POINTED_STICK}, {ITEM_CAT_ARMOR, ARMOR_WAISTCLOTH}, {ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD},
-      {ITEM_CAT_ARMOR, ARMOR_CREPE_CAPE}, {ITEM_CAT_WEAPON, WEAPON_FLAME_TALONS}, {ITEM_CAT_ARMOR, ARMOR_AMBER_BREASTPLATE},
-      {ITEM_CAT_WEAPON, WEAPON_PIERCING_PIKE}, {ITEM_CAT_WEAPON, WEAPON_KATZBALGER}, {ITEM_CAT_ARMOR, ARMOR_PROTECTORS},
-      {ITEM_CAT_ARMOR, ARMOR_TIGERS_CAP}, {ITEM_CAT_WEAPON, WEAPON_OUROBOROS}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_GREEN_APPLE}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_PANACEA},
-      {ITEM_CAT_ITEM, ITEM_MULTIVITAMIN}, {ITEM_CAT_ITEM, ITEM_AMMONIA}, {ITEM_CAT_ACCESSORY, ACCESSORY_TALISMAN},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_LIFE_SANDALS}, {ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS}, {ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_DREAM_RING}, {ITEM_CAT_ACCESSORY, ACCESSORY_BALANCE_RING}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_GREEN_APPLE}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_PANACEA},
-      {ITEM_CAT_ITEM, ITEM_AMMONIA}, {ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS}, {ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT},
-      {ITEM_CAT_ITEM, ITEM_NAPALM}, {ITEM_CAT_ACCESSORY, ACCESSORY_DREAM_RING}, {ITEM_CAT_ACCESSORY, ACCESSORY_BALANCE_RING},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_BARRIER_RING}, {ITEM_CAT_ACCESSORY, ACCESSORY_DIAMOND_RING}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_BERRIES}, {ITEM_CAT_ITEM, ITEM_BEEF_JERKY}, {ITEM_CAT_ARMOR, ARMOR_CLOTHING},
-      {ITEM_CAT_WEAPON, WEAPON_FLAME_CHRYSM}, {ITEM_CAT_ITEM, ITEM_NAPALM}, {ITEM_CAT_ACCESSORY, ACCESSORY_BELL_COLLAR},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_ANGLING_ROD}, {ITEM_CAT_ITEM, ITEM_BELLADONNA}, {ITEM_CAT_WEAPON, WEAPON_ROYAL_DAGGER},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_HOLY_MANTLE}, {ITEM_CAT_ACCESSORY, ACCESSORY_SOUL_GEM}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_BERRIES}, {ITEM_CAT_ITEM, ITEM_BEEF_JERKY}, {ITEM_CAT_ITEM, ITEM_TASER},
-      {ITEM_CAT_WEAPON, WEAPON_TIGER_CLAWS}, {ITEM_CAT_ACCESSORY, ACCESSORY_ANGLING_ROD}, {ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_BELL_COLLAR}, {ITEM_CAT_ACCESSORY, ACCESSORY_SOUL_GEM},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_HOLY_MANTLE}, {ITEM_CAT_ITEM, ITEM_MOLOTOV}, {ITEM_CAT_WEAPON, WEAPON_HIDDEN_DAGGER}}},
-    {9,
-     {{ITEM_CAT_WEAPON, WEAPON_SILVER_KNIFE}, {ITEM_CAT_WEAPON, WEAPON_THIEVES_KNIFE}, {ITEM_CAT_WEAPON, WEAPON_WIND_CUTTER},
-      {ITEM_CAT_WEAPON, WEAPON_SHOTGUN_SHELL}, {ITEM_CAT_WEAPON, WEAPON_ROOD_SPEAR}, {ITEM_CAT_ARMOR, ARMOR_LIGHT_CLOTHING},
-      {ITEM_CAT_ARMOR, ARMOR_SILVER_MAIL}, {ITEM_CAT_ARMOR, ARMOR_STEEL_GAUNTLETS}, {ITEM_CAT_ARMOR, ARMOR_GOLD_HAIRPIN},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {9,
-     {{ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE}, {ITEM_CAT_ITEM, ITEM_EYE_DROPS},
-      {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA}, {ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG}, {ITEM_CAT_ACCESSORY, ACCESSORY_POPPER},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {6,
-     {{ITEM_CAT_WEAPON, WEAPON_FLAME_CHRYSM}, {ITEM_CAT_WEAPON, WEAPON_ICE_CHRYSM}, {ITEM_CAT_WEAPON, WEAPON_SHOTGUN_SHELL},
-      {ITEM_CAT_WEAPON, WEAPON_BARBAROSSA}, {ITEM_CAT_WEAPON, WEAPON_THUNDER_ROD}, {ITEM_CAT_WEAPON, WEAPON_GIGANTESS},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {10,
-     {{ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT}, {ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS}, {ITEM_CAT_ACCESSORY, ACCESSORY_WISDOM_RING},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT}, {ITEM_CAT_ITEM, ITEM_DYNAMITE}, {ITEM_CAT_ITEM, ITEM_WEATHER_VANE},
-      {ITEM_CAT_ITEM, ITEM_TASER}, {ITEM_CAT_ITEM, ITEM_BELLADONNA}, {ITEM_CAT_ITEM, ITEM_FIRECRACKER},
-      {ITEM_CAT_ITEM, ITEM_ICICLE}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ITEM, ITEM_DYNAMITE}, {ITEM_CAT_ITEM, ITEM_WEATHER_VANE}, {ITEM_CAT_ITEM, ITEM_TASER},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT}, {ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS}}},
-    {10,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT}, {ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_POPPER}, {ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_WEAPON, WEAPON_HEAT_SHOTEL}, {ITEM_CAT_WEAPON, WEAPON_PIERCING_EDGE}, {ITEM_CAT_WEAPON, WEAPON_BERYL_ROD},
-      {ITEM_CAT_WEAPON, WEAPON_GALE_JAVELIN}, {ITEM_CAT_WEAPON, WEAPON_RAPTOR_CLAWS}, {ITEM_CAT_WEAPON, WEAPON_AP_SHELLS},
-      {ITEM_CAT_ARMOR, ARMOR_SAGES_FROCK}, {ITEM_CAT_ARMOR, ARMOR_SPIKED_GAUNTLETS}, {ITEM_CAT_ARMOR, ARMOR_LACQUER_ARMOR},
-      {ITEM_CAT_ARMOR, ARMOR_LACQUER_SHIELD}, {ITEM_CAT_ARMOR, ARMOR_LACQUER_HELM}}},
-    {10,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_CARO}, {ITEM_CAT_ACCESSORY, ACCESSORY_FROG},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_TOP}, {ITEM_CAT_ACCESSORY, ACCESSORY_HANGER}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {9,
-     {{ITEM_CAT_WEAPON, WEAPON_DAMASCUS_SWORD}, {ITEM_CAT_ARMOR, ARMOR_DAMASCUS_MAIL}, {ITEM_CAT_ITEM, ITEM_HEALING_HERB},
-      {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_MULTIVITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {10,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT}, {ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS}, {ITEM_CAT_ACCESSORY, ACCESSORY_WISDOM_RING},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {10,
-     {{ITEM_CAT_WEAPON, WEAPON_SEEKING_SWORD}, {ITEM_CAT_WEAPON, WEAPON_BLESSED_STAFF}, {ITEM_CAT_WEAPON, WEAPON_GUNGINIR},
-      {ITEM_CAT_WEAPON, WEAPON_BRASS_CLAWS}, {ITEM_CAT_WEAPON, WEAPON_ATOMIC_BOMB}, {ITEM_CAT_ARMOR, ARMOR_ROYAL_ARMOR},
-      {ITEM_CAT_ARMOR, ARMOR_FORCE_ARMOR}, {ITEM_CAT_ARMOR, ARMOR_PROTECTORS}, {ITEM_CAT_ARMOR, ARMOR_MIND_SHIELD},
-      {ITEM_CAT_ARMOR, ARMOR_SUN_MASK}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {10,
-     {{ITEM_CAT_ITEM, ITEM_HEALING_HERB}, {ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE},
-      {ITEM_CAT_ITEM, ITEM_EYE_DROPS}, {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_CARO}, {ITEM_CAT_ACCESSORY, ACCESSORY_FROG},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_TOP}, {ITEM_CAT_ACCESSORY, ACCESSORY_HANGER},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_COIN}}},
-    {9,
-     {{ITEM_CAT_WEAPON, WEAPON_BENT_SWORD}, {ITEM_CAT_WEAPON, WEAPON_BASELARD}, {ITEM_CAT_WEAPON, WEAPON_FLYING_SPEAR},
-      {ITEM_CAT_WEAPON, WEAPON_RUBY_SCEPTER}, {ITEM_CAT_WEAPON, WEAPON_TIGER_CLAWS}, {ITEM_CAT_ARMOR, ARMOR_SILVER_MAIL},
-      {ITEM_CAT_ARMOR, ARMOR_AMBER_BREASTPLATE}, {ITEM_CAT_ARMOR, ARMOR_KITE_SHIELD}, {ITEM_CAT_ARMOR, ARMOR_PLATINUM_HELM},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE}, {ITEM_CAT_ITEM, ITEM_EYE_DROPS},
-      {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA}, {ITEM_CAT_ITEM, ITEM_FIRECRACKER},
-      {ITEM_CAT_ITEM, ITEM_ICICLE}, {ITEM_CAT_ACCESSORY, ACCESSORY_CARO}, {ITEM_CAT_ACCESSORY, ACCESSORY_FROG},
-      {ITEM_CAT_ACCESSORY, ACCESSORY_TOP}, {ITEM_CAT_ACCESSORY, ACCESSORY_HANGER}}},
-    {7,
-     {{ITEM_CAT_ITEM, ITEM_VITAMIN}, {ITEM_CAT_ITEM, ITEM_ANTIDOTE}, {ITEM_CAT_ITEM, ITEM_EYE_DROPS},
-      {ITEM_CAT_ITEM, ITEM_PANACEA}, {ITEM_CAT_ITEM, ITEM_AMMONIA}, {ITEM_CAT_ITEM, ITEM_FIRECRACKER},
-      {ITEM_CAT_ITEM, ITEM_ICICLE}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}}},
-    {11,
-     {{ITEM_CAT_ITEM, ITEM_BREAD}, {ITEM_CAT_ITEM, ITEM_BREAD}, {ITEM_CAT_ITEM, ITEM_BREAD},
-      {ITEM_CAT_ITEM, ITEM_BREAD}, {ITEM_CAT_ITEM, ITEM_BREAD}, {ITEM_CAT_ITEM, ITEM_BREAD},
-      {ITEM_CAT_ITEM, ITEM_BREAD}, {ITEM_CAT_ITEM, ITEM_BREAD}, {ITEM_CAT_ITEM, ITEM_BREAD},
-      {ITEM_CAT_ITEM, ITEM_BREAD}, {ITEM_CAT_ITEM, ITEM_BREAD}}},
-    {2,
-     {{ITEM_CAT_WEAPON, WEAPON_ASHURAS_SWORD}, {ITEM_CAT_ARMOR, ARMOR_MANLY_CLOTHES}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING},
-      {ITEM_CAT_ITEM, ITEM_NOTHING}, {ITEM_CAT_ITEM, ITEM_NOTHING}}}};
+    /* SHOP_MCNEIL_EQUIPMENT */
+    SHOP_OBJECT(7, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BALLOCK_KNIFE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LEATHER_ARMOR),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BRACERS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_CLOTH_SHIELD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BANDANA), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BRASS_HELM),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_MCNEIL_GENERAL */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_CROC_TEAR), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MOLOTOV), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_WOODEN_ROD), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_WORM),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TOAD), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_OLD_POPPER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SINKER)),
+    /* SHOP_WYNDIA_LOWER_WEAPONS */
+    SHOP_OBJECT(4, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BROAD_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_CLAYMORE),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_MACE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_WYNDIA_LOWER_ARMOR */
+    SHOP_OBJECT(9, SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LEATHER_ARMOR), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LEATHER_APRON), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_RANGER_GARB),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_CUIRASS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_MAGES_ROBES), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GAUNTLET), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BRONZE_SHIELD),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_IRON_HELM), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_WYNDIA_LOWER_ACCESSORIES */
+    SHOP_OBJECT(7, SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_MIDAS_STONE), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TALISMAN), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_LIFE_SANDALS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MOLOTOV), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_DYNAMITE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_WEATHER_VANE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_TASER),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_WYNDIA_LOWER_ITEMS */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_WORM), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TOAD),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_OLD_POPPER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SINKER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_COIN)),
+    /* SHOP_GENMEL_EQUIPMENT */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BROAD_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_SCRAMASAX), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_MACE),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_MAGICIAN_ROD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_RIPPERS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_RANGER_GARB), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_CUIRASS),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BREASTPLATE), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GAUNTLET), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BRONZE_SHIELD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO)),
+    /* SHOP_GENMEL_ITEMS */
+    SHOP_OBJECT(9, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_DYNAMITE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_WEATHER_VANE),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_TASER), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_MOMO_TOWER_OUTSIDE_GENERAL */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TOAD), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_OLD_POPPER),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_MAGES_ROBES), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_CUIRASS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GAUNTLET), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO)),
+    /* SHOP_9 */
+    SHOP_OBJECT(4, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MANDRAKE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MOLOTOV),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_CONTEST_WEAPONS */
+    SHOP_OBJECT(3, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_SCRAMASAX), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_MOON_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_CLAYMORE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_CONTEST_ITEMS */
+    SHOP_OBJECT(9, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MULTIVITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_FIRECRACKER), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ICICLE),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NAPALM), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_CONTEST_ARMOR */
+    SHOP_OBJECT(4, SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BREASTPLATE), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SCALE_MAIL), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BUCKLER), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_KNIGHTS_HELM),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_RHAPALA_ENTRANCE_EQUIPMENT */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_FLAME_CHRYSM), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_MOON_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_LONG_SPEAR),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_QUARTER_STAFF), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_SPIKED_CLAWS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BREASTPLATE),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SCALE_MAIL), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GAUNTLET), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BUCKLER), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GLASS_DOMINO),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_KNIGHTS_HELM)),
+    /* SHOP_RHAPALA_ENTRANCE_GENERAL */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_POPPER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_URKAN_TAPA_EQUIPMENT */
+    SHOP_OBJECT(7, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_CLAYMORE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_FLARE_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_LONG_SPEAR),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_HALBERD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_MITHRIL_ARMOR), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_MITHRIL_HELM),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_MITHRIL_SHIELD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_URKAN_TAPA_GENERAL */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_POPPER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_17 */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_POINTED_STICK), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_WAISTCLOTH), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_BUCKLER), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_WIND_CUTTER), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_CREPE_CAPE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_FLAME_TALONS),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LAUREL), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_ROYAL_DAGGER), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SPIKED_GAUNTLETS),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_ICE_HALBERD)),
+    /* SHOP_18 */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_POINTED_STICK), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_WAISTCLOTH), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BRONZE_SWORD),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_CREPE_CAPE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_FLAME_TALONS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_AMBER_BREASTPLATE),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_PIERCING_PIKE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_KATZBALGER), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_PROTECTORS),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_TIGERS_CAP), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_OUROBOROS)),
+    /* SHOP_19 */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_GREEN_APPLE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MULTIVITAMIN),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TALISMAN), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_LIFE_SANDALS),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_DREAM_RING),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BALANCE_RING)),
+    /* SHOP_20 */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_GREEN_APPLE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NAPALM),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_DREAM_RING), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BALANCE_RING), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BARRIER_RING),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_DIAMOND_RING)),
+    /* SHOP_21 */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BERRIES), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BEEF_JERKY), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_CLOTHING), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_FLAME_CHRYSM),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NAPALM), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BELL_COLLAR), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_ANGLING_ROD),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BELLADONNA), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_ROYAL_DAGGER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HOLY_MANTLE),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SOUL_GEM)),
+    /* SHOP_22 */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BERRIES), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BEEF_JERKY), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_TASER), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_TIGER_CLAWS),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_ANGLING_ROD), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BELL_COLLAR),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SOUL_GEM), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HOLY_MANTLE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MOLOTOV),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_HIDDEN_DAGGER)),
+    /* SHOP_SYN_CITY_EQUIPMENT */
+    SHOP_OBJECT(9, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_SILVER_KNIFE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_THIEVES_KNIFE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_WIND_CUTTER),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_SHOTGUN_SHELL), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_ROOD_SPEAR), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LIGHT_CLOTHING),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SILVER_MAIL), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_STEEL_GAUNTLETS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_GOLD_HAIRPIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_SYN_CITY_GENERAL */
+    SHOP_OBJECT(9, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_POPPER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_JUNK_TOWN_WEAPONS */
+    SHOP_OBJECT(6, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_FLAME_CHRYSM), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_ICE_CHRYSM), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_SHOTGUN_SHELL),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BARBAROSSA), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_THUNDER_ROD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_GIGANTESS), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_JUNK_TOWN_GENERAL */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_WISDOM_RING),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_DYNAMITE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_WEATHER_VANE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_TASER),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BELLADONNA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_FIRECRACKER), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ICICLE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_DAUNA_MINE_ADULT_ITEMS */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_DYNAMITE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_WEATHER_VANE),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_TASER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS)),
+    /* SHOP_CLIFF_GAIST_GENERAL */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_SPIRIT), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_BABY_FROG),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_POPPER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_FLOAT), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_KOMBINAT_EQUIPMENT */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_HEAT_SHOTEL), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_PIERCING_EDGE), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BERYL_ROD),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_GALE_JAVELIN), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_RAPTOR_CLAWS), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_AP_SHELLS),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SAGES_FROCK), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SPIKED_GAUNTLETS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LACQUER_ARMOR),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LACQUER_SHIELD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_LACQUER_HELM)),
+    /* SHOP_KOMBINAT_GENERAL */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_CARO), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_FROG),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TOP), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HANGER), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_DRAGNIER_SURFACE_ITEMS */
+    SHOP_OBJECT(9, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_DAMASCUS_SWORD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_DAMASCUS_MAIL), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_MULTIVITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_OASIS_GENERAL */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TITAN_BELT),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HIGH_BOOTS), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_WISDOM_RING), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_LIONS_BELT),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_CAER_XHAN_HONEY_ROOM_EQUIPMENT */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_SEEKING_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BLESSED_STAFF), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_GUNGINIR),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BRASS_CLAWS), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_ATOMIC_BOMB), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_ROYAL_ARMOR),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_FORCE_ARMOR), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_PROTECTORS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_MIND_SHIELD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SUN_MASK),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_34 */
+    SHOP_OBJECT(10, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_HEALING_HERB), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_CARO), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_FROG),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TOP), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HANGER), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_COIN)),
+    /* SHOP_PARCH_EQUIPMENT */
+    SHOP_OBJECT(9, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BENT_SWORD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_BASELARD), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_FLYING_SPEAR),
+                SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_RUBY_SCEPTER), SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_TIGER_CLAWS), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_SILVER_MAIL),
+                SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_AMBER_BREASTPLATE), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_KITE_SHIELD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_PLATINUM_HELM),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_PARCH_GENERAL */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_FIRECRACKER), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ICICLE), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_CARO),
+                SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_FROG), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_TOP), SHOP_ITEM(ITEM_CAT_ACCESSORY, ACCESSORY_HANGER)),
+    /* SHOP_RHAPALA_CHECKPOINT_ITEMS */
+    SHOP_OBJECT(7, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_VITAMIN), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ANTIDOTE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_EYE_DROPS), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_PANACEA),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_AMMONIA), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_FIRECRACKER), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_ICICLE), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+    /* SHOP_WYNDIA_UPPER_ITEMS */
+    SHOP_OBJECT(11, SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_BREAD)),
+    /* SHOP_SYN_CITY_EQUIPMENT_2 */
+    SHOP_OBJECT(2, SHOP_ITEM(ITEM_CAT_WEAPON, WEAPON_ASHURAS_SWORD), SHOP_ITEM(ITEM_CAT_ARMOR, ARMOR_MANLY_CLOTHES), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING),
+                SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING), SHOP_ITEM(ITEM_CAT_ITEM, ITEM_NOTHING)),
+};
 
-u8 D_801CA624[232] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+u8 D_801CA624[232] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 volatile Ability g_Abilities[ABILITY_COUNT] = {
     ABILITY_OBJECT("", ABILITY_TARGET_NONE, ABILITY_SKILL(0, ABILITY_TYPE_HEAL), 0, 0, 0, 0, 0x4000),
@@ -2138,43 +2172,31 @@ s8 s_EntityPlacementOffsets[32] = {
     0x00, 0xFD, 0xFD, 0x00, 0x02, 0xFE, 0xFF, 0xFC, 0x03, 0x00, 0x00, 0xFD, 0x02, 0x02, 0x04, 0xFF,
 };
 
-Callback D_801CD0AC[15] = {(Callback)func_801B016C, (Callback)func_801B0320, (Callback)func_801B69C0,
-                           (Callback)Game_RunLeaderSwitch, (Callback)func_801B29BC, (Callback)func_801B2A70,
-                           (Callback)func_801B2C38, (Callback)func_801B2D90, (Callback)Area_Climb,
-                           (Callback)func_801D9B14, (Callback)func_801B3690, (Callback)func_801B371C,
-                           (Callback)func_801B3BFC, (Callback)func_801F4D9C, (Callback)func_801C22D8};
+Callback D_801CD0AC[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_RunLeaderSwitch, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
+                           Area_Climb,    func_801D9B14, func_801B3690, func_801B371C,        func_801B3BFC, func_801F4D9C, func_801C22D8};
 
-Callback D_801CD0E8[3] = {(Callback)func_801B036C, (Callback)func_801B0568, (Callback)func_801B0DA0};
+Callback D_801CD0E8[3] = {func_801B036C, func_801B0568, func_801B0DA0};
 
 u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
-Callback D_801CD0FC[5] = {(Callback)func_801B1E24, (Callback)func_801B207C, (Callback)func_801B21E8,
-                          (Callback)func_801B26E0, (Callback)Game_EndLeaderSwitch};
+Callback D_801CD0FC[5] = {func_801B1E24, func_801B207C, func_801B21E8, func_801B26E0, Game_EndLeaderSwitch};
 
-Callback D_801CD110[2] = {(Callback)func_801B2A00, (Callback)func_801B2A20};
+Callback D_801CD110[2] = {func_801B2A00, func_801B2A20};
 
-Callback D_801CD118[2] = {(Callback)func_801B2AB4, (Callback)func_801B2B6C};
+Callback D_801CD118[2] = {func_801B2AB4, func_801B2B6C};
 
-Callback D_801CD120[4] = {(Callback)func_801B2DDC, (Callback)func_801B2FC8, (Callback)func_801B315C,
-                          (Callback)func_801B31F0};
+Callback D_801CD120[4] = {func_801B2DDC, func_801B2FC8, func_801B315C, func_801B31F0};
 
-Callback g_AreaClimbSteps[4] = {(Callback)func_801B32A4, (Callback)Area_ClimbMount, (Callback)func_801B3488,
-                          (Callback)Area_ClimbDismount};
+Callback g_AreaClimbSteps[4] = {func_801B32A4, Area_ClimbMount, func_801B3488, Area_ClimbDismount};
 
-Callback g_AreaClimbMountSteps[5] = {(Callback)func_801B3314, (Callback)func_801B3388, (Callback)func_801B33C4,
-                          (Callback)func_801B3400, (Callback)func_801B343C};
+Callback g_AreaClimbMountSteps[5] = {func_801B3314, func_801B3388, func_801B33C4, func_801B3400, func_801B343C};
 
-Callback g_AreaClimbDismountSteps[4] = {(Callback)func_801B3584, (Callback)func_801B35B0, (Callback)func_801B35EC,
-                          (Callback)func_801B3670};
+Callback g_AreaClimbDismountSteps[4] = {func_801B3584, func_801B35B0, func_801B35EC, func_801B3670};
 
-Callback g_PersonalActions[19] = {
-    (Callback)func_801CFD3C, (Callback)func_801CFB40, (Callback)func_801D05EC, (Callback)func_801CFF64,
-    (Callback)func_801D0A10, (Callback)func_801D02B0, (Callback)func_801D0814, (Callback)func_801CFAB8,
-    (Callback)func_801CFE98, (Callback)func_801D0944, (Callback)func_801CFC70, (Callback)func_801CF8BC,
-    (Callback)func_801CF5A8, (Callback)func_801CF8BC, (Callback)func_801D0368, (Callback)func_801CF694,
-    (Callback)func_801D0748, (Callback)func_801CFA74, (Callback)func_801D0520};
+Callback g_PersonalActions[19] = {func_801CFD3C, func_801CFB40, func_801D05EC, func_801CFF64, func_801D0A10, func_801D02B0, func_801D0814, func_801CFAB8, func_801CFE98, func_801D0944,
+                                  func_801CFC70, func_801CF8BC, func_801CF5A8, func_801CF8BC, func_801D0368, func_801CF694, func_801D0748, func_801CFA74, func_801D0520};
 
-Callback D_801CD1B0[2] = {(Callback)func_801B3768, (Callback)func_801B3A3C};
+Callback D_801CD1B0[2] = {func_801B3768, func_801B3A3C};
 
 u8 s_EncounterStepThresholds[16] = {
     0x00, 0x00, 0x78, 0x3C, 0x60, 0x30, 0x48, 0x24, 0x18, 0x0C, 0x10, 0x08, 0x08, 0x04, 0x00, 0x00,
@@ -2184,12 +2206,8 @@ u8 s_MenuBattlerKinds[4] = {0x03, 0x06, 0x08, 0x00};
 
 u8 s_RouteSlotAlternates[12] = {0x00, 0x00, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00};
 
-Callback D_801CD1D8[19] = {
-    (Callback)func_801CFCF8, (Callback)func_801CFAFC, (Callback)func_801D05A8, (Callback)func_801CFF20,
-    (Callback)func_801D09CC, (Callback)func_801D026C, (Callback)func_801D07D0, (Callback)func_801CFA74,
-    (Callback)func_801CFE54, (Callback)func_801D0900, (Callback)func_801CFC2C, (Callback)func_801CF878,
-    (Callback)func_801CF564, (Callback)func_801CF878, (Callback)func_801D0324, (Callback)func_801CF650,
-    (Callback)func_801D0704, (Callback)func_801CFA30, (Callback)func_801D04DC};
+Callback D_801CD1D8[19] = {func_801CFCF8, func_801CFAFC, func_801D05A8, func_801CFF20, func_801D09CC, func_801D026C, func_801D07D0, func_801CFA74, func_801CFE54, func_801D0900,
+                           func_801CFC2C, func_801CF878, func_801CF564, func_801CF878, func_801D0324, func_801CF650, func_801D0704, func_801CFA30, func_801D04DC};
 
 WorldMapBattlefields D_801CD224 = {{{AREA_ID_YRAAL_WORLD_MAP, AREA_ID_YRAAL_BATTLEFIELD}, {AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE}, {AREA_ID_WYNDIA_WORLD_MAP, AREA_ID_WYNDIA_CENTRAL_BATTLEFIELD}, {AREA_ID_MOMO_TOWER_WORLD_MAP, AREA_ID_WYNDIA_EASTERN_BATTLEFIELD},
                                     {AREA_ID_RHAPALA_WORLD_MAP, AREA_ID_RHAPALA_BATTLEFIELD}, {AREA_ID_URKAN_TAPA_WORLD_MAP, AREA_ID_URKAN_BATTLEFIELD}, {AREA_ID_DAUNA_WORLD_MAP, AREA_ID_DAUNA_HILLS_BATTLEFIELD}, {AREA_ID_STEEL_BEACH_MAP, AREA_ID_YRAAL_BATTLEFIELD},
@@ -2207,37 +2225,27 @@ u8 s_AreaScenePositions[8] = {
 
 u8 s_AreaCellKinds[12] = {0xC0, 0xA0, 0xA1, 0xAE, 0xAF, 0x91, 0x26, 0x27, 0x28, 0x29, 0x2C, 0xFF};
 
-Callback D_801CD2B0[9] = {(Callback)func_801B6A04, (Callback)func_801B70D4, (Callback)func_801B726C,
-                          (Callback)func_801B73B0, (Callback)func_801B78B4, (Callback)func_801B8234,
-                          (Callback)func_801B870C, (Callback)func_801B9048, (Callback)func_801B91CC};
+Callback D_801CD2B0[9] = {func_801B6A04, func_801B70D4, func_801B726C, func_801B73B0, func_801B78B4, func_801B8234, func_801B870C, func_801B9048, func_801B91CC};
 
-Callback D_801CD2D4[6] = {(Callback)func_801B6AB0, (Callback)func_801B6BC8, (Callback)func_801B6F1C,
-                          (Callback)func_801B6FDC, (Callback)func_801B7024, (Callback)func_801B707C};
+Callback D_801CD2D4[6] = {func_801B6AB0, func_801B6BC8, func_801B6F1C, func_801B6FDC, func_801B7024, func_801B707C};
 
-Callback D_801CD2EC[2] = {(Callback)func_801B72B0, (Callback)func_801B7344};
+Callback D_801CD2EC[2] = {func_801B72B0, func_801B7344};
 
-Callback D_801CD2F4[5] = {(Callback)func_801B73F4, (Callback)func_801B744C, (Callback)func_801B7658,
-                          (Callback)func_801B76F4, (Callback)func_801B781C};
+Callback D_801CD2F4[5] = {func_801B73F4, func_801B744C, func_801B7658, func_801B76F4, func_801B781C};
 
-Callback D_801CD308[2] = {(Callback)func_801B790C, (Callback)func_801B7D00};
+Callback D_801CD308[2] = {func_801B790C, func_801B7D00};
 
-Callback D_801CD310[8] = {(Callback)func_801B7950, (Callback)func_801B7988, (Callback)func_801B79F8,
-                          (Callback)func_801B81EC, (Callback)func_801B7B54, (Callback)func_801B7C10,
-                          (Callback)func_801B7C58, (Callback)func_801B7CA0};
+Callback D_801CD310[8] = {func_801B7950, func_801B7988, func_801B79F8, func_801B81EC, func_801B7B54, func_801B7C10, func_801B7C58, func_801B7CA0};
 
-Callback D_801CD330[10] = {(Callback)func_801B7D44, (Callback)func_801B7D84, (Callback)func_801B7DC0,
-                           (Callback)func_801B7DFC, (Callback)func_801B7E38, (Callback)func_801B7E74,
-                           (Callback)func_801B7EF0, (Callback)func_801B81EC, (Callback)func_801B7FE0,
-                           (Callback)func_801B80B4};
+Callback D_801CD330[10] = {func_801B7D44, func_801B7D84, func_801B7DC0, func_801B7DFC, func_801B7E38, func_801B7E74, func_801B7EF0, func_801B81EC, func_801B7FE0, func_801B80B4};
 
-Callback D_801CD358[5] = {(Callback)func_801B828C, (Callback)func_801B830C, (Callback)func_801B8394,
-                          (Callback)func_801B8578, (Callback)func_801B85C0};
+Callback D_801CD358[5] = {func_801B828C, func_801B830C, func_801B8394, func_801B8578, func_801B85C0};
 
-Callback D_801CD36C[2] = {(Callback)func_801B876C, (Callback)func_801B87B8};
+Callback D_801CD36C[2] = {func_801B876C, func_801B87B8};
 
-Callback D_801CD374[2] = {(Callback)func_801B90A0, (Callback)func_801B9100};
+Callback D_801CD374[2] = {func_801B90A0, func_801B9100};
 
-Callback D_801CD37C[2] = {(Callback)func_801B9210, (Callback)func_801B9478};
+Callback D_801CD37C[2] = {func_801B9210, func_801B9478};
 
 u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x02, 0x00,
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0xFF, 0xFF,
@@ -2248,26 +2256,12 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFE, 0xFF,
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF};
 
-Callback D_801CD404[15] = {(Callback)func_801BBE98,
-                           (Callback)func_801BBFB4,
-                           (Callback)func_801B69C0,
-                           (Callback)func_801BD32C,
-                           (Callback)func_801BD35C,
-                           (Callback)func_801BD38C,
-                           (Callback)func_801BD394,
-                           (Callback)func_801BD5A4,
-                           (Callback)func_801BD7F8,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)0,
-                           (Callback)func_801C22D8};
+Callback D_801CD404[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
+                           func_801BD7F8, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
-Callback D_801CD440[2] = {(Callback)func_801BC000, (Callback)Area_StepSceneTimer};
+Callback D_801CD440[2] = {func_801BC000, Area_StepSceneTimer};
 
-Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)Area_ClimbMount, (Callback)func_801BD83C,
-                          (Callback)Area_ClimbDismount};
+Callback D_801CD448[4] = {func_801B32A4, Area_ClimbMount, func_801BD83C, Area_ClimbDismount};
 
 Offset2DB s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
     {-CAMERA_SCROLL_STEP, 0},
@@ -2285,8 +2279,7 @@ u8 s_RouteIndexByMode[4] = {0x03, 0x05, 0x07, 0x01};
 
 s32 D_801CD47C[8] = {0, -32768, (s32)0x00008000u, 0, 0, (s32)0x00008000u, -32768, 0};
 
-Callback D_801CD49C[4] = {(Callback)func_801C0AB4, (Callback)func_801C0CDC, (Callback)func_801C0D34,
-                          (Callback)func_801C0D54};
+Callback D_801CD49C[4] = {func_801C0AB4, func_801C0CDC, func_801C0D34, func_801C0D54};
 
 SlotSource D_801CD4AC[5] = {{0x00, 0x00, 0x00, 0x00},
                             {0x02, 0x02, 0x00, 0x00},
@@ -2310,10 +2303,9 @@ Callback* D_801CD510[20] = {
 
 u8 s_AreaProbeCellCodes[8] = {0x30, 0x40, 0x50, 0x80, 0x90, 0xE0, 0xF0, 0xFF};
 
-Callback D_801CD568[2] = {(Callback)func_801C5830, (Callback)func_801C5838};
+Callback D_801CD568[2] = {func_801C5830, func_801C5838};
 
-Callback D_801CD570[5] = {(Callback)func_801C5874, (Callback)func_801C5BB8, (Callback)func_801C5C7C,
-                          (Callback)func_801C5CB4, (Callback)func_801C5D68};
+Callback D_801CD570[5] = {func_801C5874, func_801C5BB8, func_801C5C7C, func_801C5CB4, func_801C5D68};
 
 u8 D_801CD584[56] = {0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00, 0x00, 0x01, 0x02,
                      0x00, 0x00, 0x02, 0x01, 0x01, 0x02, 0x02, 0x02, 0x00, 0x00, 0x03, 0x02, 0x00, 0x00,
