@@ -1,4 +1,4 @@
-/* Advances the step when the work record's ticker is one. Every change here must verify every member. */
+/* Advances the step when the work record's ticker is one. */
 /* func_801EEFC4 (magic041), func_801EEE8C (magic118) */
 MATCH void Effect_NextStepOnWorkLastTick(void) {
     PartyMember* work;

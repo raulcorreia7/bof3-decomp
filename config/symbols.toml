@@ -236,7 +236,7 @@ Effect_DrawScreenFade = { addr = 0x801EF6E0, type = "func", source = "Draws the 
 BMagic_DispatchEffectMode = { addr = 0x801EF8CC, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic004." }
 Effect_SetDuration = { addr = 0x801EF9A0, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic004 (ThundrStrike)." }
 Effect_LowerTickerStepOnReady = { addr = 0x801EFA70, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (Actor_StepAnimOnce) in magic004 (ThundrStrike)." }
-BMagic_RunStep = { addr = 0x801EFAF4, type = "func", source = "Runs the battle magic effect step with the script bank set for the overlay." }
+BMagic_RunStep = { addr = 0x801EFAF4, type = "func", source = "Runs the battle magic effect step with the script table set for the overlay." }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 2 in magic004 (ThundrStrike)." }
 D_801EFE40 = { addr = 0x801EFE40, source = "Sound cue id per effect index of the magic004 effect, read by func_801EF158 with the effect's unk_04 index." }
 g_BMagicEffectModes = { addr = 0x801EFE58, source = "Handlers of magic004 (ThundrStrike), run by header.mode (byte 0x01)." }
@@ -1035,7 +1035,7 @@ Effect_CountUpTimerCallSelector = { addr = 0x801EF2EC, type = "func", source = "
 Effect_CountUpAndStepAt120 = { addr = 0x801EF374, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 120 in magic120 (Whelp Breath)." }
 Effect_CountUpAndFinishAt136 = { addr = 0x801EF3C4, type = "func", source = "Raises the effect ticker (byte 0x0B), lowers byte 0x04 and counts the effect timer (byte 0x09) up; at 136 sets the active battler's ticker to 0xFF and clears the effect in magic120 (Whelp Breath)." }
 BMagic_DrawWhelpBreath = { addr = 0x801EF44C, type = "func", source = "Draws the Whelp Breath effect while its active mode runs." }
-BMagic_RunStep = { addr = 0x801EFD20, type = "func", source = "Runs the battle magic effect step with the script bank set for the overlay." }
+BMagic_RunStep = { addr = 0x801EFD20, type = "func", source = "Runs the battle magic effect step with the script table set for the overlay." }
 Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic120 (Whelp Breath)." }
 g_BMagicEffectModes = { addr = 0x801F0CA8, source = "Handlers of magic120 (Whelp Breath), run by header.mode (byte 0x01)." }
 D_801F0CB0 = { addr = 0x801F0CB0, source = "Step handlers of the effect, run by header.step (byte 0x02) through SYS_DISPATCH_BYTE." }
@@ -1961,7 +1961,7 @@ Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task 
 Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
 Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
-Party_LoadMemberSprite = { addr = 0x801C1254, type = "func", source = "Loads a party member's field sprite: finds the section of the character bank at 0x8003B800 whose entry in the 3-byte row of the loaded character index equals the character id, points the work record's bank pointer (+0x4C) at it, sets its sprite page, sheet row, CLUT selector and palette kind (+0x25..+0x28) from the party slot, and loads the slot's palette at GAME_PALETTE_STAGE. Called by Party_JoinMember, Party_BuildBattlers, the shop and Actor_BeginScript." }
+Party_LoadMemberSprite = { addr = 0x801C1254, type = "func", source = "Loads a party member's field sprite: finds the section of the character sprites at 0x8003B800 whose entry in the 3-byte row of the loaded character index equals the character id, points the work record's bank pointer (+0x4C) at it, sets its sprite page, sheet row, CLUT selector and palette kind (+0x25..+0x28) from the party slot, and loads the slot's palette at GAME_PALETTE_STAGE. Called by Party_JoinMember, Party_BuildBattlers, the shop and Actor_BeginScript." }
 Actor_Move = { addr = 0x801C57B4, type = "func", source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
 Area_PickEncounter = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
@@ -3089,6 +3089,7 @@ Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "Starts one spin-ef
 g_SceneEntityDispatch = { addr = 0x801D3918, source = "scenario entity dispatch table" }
 
 ["emi/scenario/sce15ef2/00"]
+func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "func_801D0C04+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_EndScan = { addr = 0x801D0DE8, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Scene_DrawScanBar = { addr = 0x801D1414, type = "func", source = "Draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity." }
 Scene_ClearScanBars = { addr = 0x801D15B0, type = "func", source = "Clears the in-use byte of each of the 16 scan bars." }
@@ -4514,6 +4515,7 @@ Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 
 Actor_SlideScreenDown16 = { addr = 0x801F38E8, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
 Area_Update = { addr = 0x801F3958, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F4100, type = "func", source = "Reads the script row of the loaded area at the script state row and cursor, begins the actor script of that step at the saved script_pc - 2, stores the row argument in byte 0x2A and advances the cursor by 2." }
+Actor_BeginScriptFromAreaTableAtStart = { addr = 0x801F41A8, type = "func", source = "Starts the area script step at the cursor once the task script_pc is 2, otherwise moves the cursor back 2 to repeat the command." }
 Area_FreePaletteOnAreaChange = { addr = 0x801F4D1C, type = "func", source = "Frees the palette slots of the task through GFX_FreePaletteSlotOwner when g_GameStateIndex is GAME_REQUEST_AREA_CHANGE; no C caller, it is reached through the area174 tables." }
 
 ["emi/world04/area175/13"]
@@ -4945,6 +4947,7 @@ g_PartyMemberMessages = { addr = 0x801F4A2C, size = 0x54, source = "Tag and mess
 ["emi/world04/area198/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F2E5C, type = "func", source = "Starts an actor script from the area table." }
+Actor_BeginScriptFromAreaTableAtStart = { addr = 0x801F2F04, type = "func", source = "Starts the area script step at the cursor once the task script_pc is 2, otherwise moves the cursor back 2 to repeat the command." }
 Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area085." }
 Area_FreePaletteOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
@@ -5316,7 +5319,7 @@ g_FairyRooms = { addr = 0x801457A8, source = "Fairy village rooms." }
 D_801457A9 = { addr = 0x801457A9, alias = true, source = "Subtype of each fairy village room." }
 g_GfxPalettePending = { addr = 0x80145988, source = "Palette upload pending flag." }
 g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive context." }
-g_ScriptBank = { addr = 0x801459F0, type = "u32", source = "Pointer to the active animation-stream bank: Actor_BeginScript hands a record of it to Actor_SeekScript." }
+g_ScriptTable = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Actor_BeginScript hands a record of it to Actor_SeekScript." }
 g_InputHeld = { addr = 0x80145AA4, source = "Buttons held this frame." }
 g_InputPressed = { addr = 0x80145AA8, source = "Buttons pressed this frame." }
 g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the controller." }
@@ -5410,6 +5413,7 @@ g_SndCDMix = { addr = 0x8014683C, type = "CdlATV", size = 4, source = "Api:CdMix
 g_EmiServiceMode = { addr = 0x80146840, source = "EMI_Update runs EMI_UpdateStream for 1 and SND_UpdateXA for 2" }
 g_EmiStreamFlags = { addr = 0x80146854, source = "Flags of the EMI stream." }
 g_ScriptVars = { addr = 0x80146864, type = "u8", size = 0x4, source = "Script variables." }
+g_ScriptVarsWord = { addr = 0x80146864, type = "u32", alias = true, source = "The four script variable bytes of g_ScriptVars read and cleared as one word." }
 g_SceneFlags = { addr = 0x8014686C, type = "u32", source = "Flags of the current scenario." }
 g_SceneState = { addr = 0x80146870, source = "The scene state." }
 g_CurrentActor = { addr = 0x80146884, type = "Actor", source = "The current actor." }
@@ -5489,7 +5493,7 @@ D_80149998 = { addr = 0x80149998, size = 0x178, alias = true }
 g_UiLocalModes = { addr = 0x801499AC, size = 0x54, alias = true, source = "Local UI mode handlers." }
 g_MessageStates = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
 g_MessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = "Message choice handlers." }
-g_MessageStepBank = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
+g_MessageStepTable = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
 g_EmiCDSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
 g_EmiRingSlotHandlers = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 __main = { addr = 0x8014AA04, type = "func", source = "Entry point of the executable." }
@@ -5537,7 +5541,7 @@ Actor_StepAnimLoop = { addr = 0x8014D978, type = "func", source = "Counts the st
 Actor_StepAnimReverse = { addr = 0x8014DA24, type = "func", source = "Plays the animation stream backwards: counts the delay at +0x4A down, at step 0 wraps to the end and returns 1, ignores jump steps, stages the step before the current position." }
 Actor_StepAnimOnce = { addr = 0x8014DAEC, type = "func", source = "As the looping step function, but at the end of the stream it sets +0x4A to 1 and returns 1 without staging, so the last frame holds; callers wait on it for a one-shot animation to end." }
 Actor_StageAnimStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Actor_SeekScript." }
-Actor_SelectScriptBank = { addr = 0x8014DC08, type = "func", source = "Selects the script bank of the actor." }
+Actor_SelectSprite = { addr = 0x8014DC08, type = "func", source = "Selects a sprite record of the actor: its sheet, animation and mirror." }
 Area_FindSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
 SYS_ReadCD = { addr = 0x8014E0A8, type = "func", source = "Reads sectors from the CD." }
@@ -5601,7 +5605,7 @@ UI_UpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current
 UI_NextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_MessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_UpdateChoice." }
 UI_PrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_MessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_UpdateChoice." }
 UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
-Message_DispatchBankStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer bank." }
+Message_DispatchTableStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer table." }
 Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "Sets the message that answers the menu choice." }
 Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "Sets the message that answers the menu choice." }
 Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "Sets the message that answers the menu choice." }
@@ -5654,7 +5658,7 @@ Area_ReadTintRecord = { addr = 0x801581B4, type = "func", source = "Reads a pale
 Area_ApplyPaletteTint = { addr = 0x8015822C, type = "func", source = "Offsets the selected palette planes by the signed RGB deltas." }
 Area_WriteCellRecord = { addr = 0x80158400, type = "func", source = "Writes a cell record of the area bundle." }
 Area_RunBundleRecords = { addr = 0x801584A4, type = "func", source = "Runs the records of the area bundle." }
-Area_LoadPaletteBank = { addr = 0x80158550, type = "func", source = "Loads a palette bank of the area." }
+Area_AnimateClut = { addr = 0x80158550, type = "func", source = "Copies the current frame of an area CLUT animation into the palette." }
 Area_DrawGouraudQuad = { addr = 0x8015864C, type = "func", source = "Draws a Gouraud-shaded quadrangle from the record when inside the draw area." }
 Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area map records to cells." }
 Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }

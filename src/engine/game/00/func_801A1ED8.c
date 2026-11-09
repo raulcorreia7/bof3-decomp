@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching 84.06%: branch@+0x0044; the default arm and the call-result accumulation still differ. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     /* FAKE: register pins reproduce retail's s1/s2/s0/s3/s4 assignment; pinned 84.06%. */

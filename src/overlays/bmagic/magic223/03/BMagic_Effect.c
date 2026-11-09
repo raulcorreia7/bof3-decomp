@@ -10,7 +10,6 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-/* blocker: BATTLE_RAISE_STATE puts the flags pointer in v0 where retail uses v1; first diff: lui v1 against v0 at 0x801EEFD4. */
 INCLUDE_ASM(func_801EEFB4);
 
 /* func_801EF00C */

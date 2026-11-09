@@ -4,9 +4,6 @@
 
 /* Draws two semi-transparent rectangle outlines in the palette row colour, crossing the draw modes around the
  * shade flag. */
-/* nonmatching unmeasured: tried u16 prototype; corrected LINE_F3 stores; palette index math; ternary mode select.
- * resume: prologue placement and register allocation; frame is 0x40 vs 0x38. */
-/* Inline RGB expressions restore the 0x38 frame; register allocation first differs at +0x0C. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     LINE_F3* prim;

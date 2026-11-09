@@ -1,8 +1,4 @@
-/* Counts the work counter at byte 0x09 down by 2 and raises the timer at byte
- * 0x0A on odd frames; when the counter reaches 1 the active battler's effect
- * ticker byte drops by one and the effect work record is cleared. One
- * definition shared by the bmagic effect modules; every change here must verify
- * every member. */
+/* Counts the work counter at byte 0x09 down by 2 and raises the timer at byte 0x0A on odd frames; when the counter reaches 1 the active battler's effect ticker byte drops by one and the effect work record is cleared. */
 /* func_801EF738 (magic144), func_801EFA24 (magic092) */
 MATCH void Effect_CountDownByTwoFinishAtOne(void) {
     g_Task->unk_09 -= 2;

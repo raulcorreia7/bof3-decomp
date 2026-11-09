@@ -93,9 +93,7 @@
         D_8018B318 = (cues)[D_8018B404 * 4 + 3]; \
         break;
 
-/* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0 and fills one more slot per
- * layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows
- * lets another bank supply the tone and voice. Every change here must verify every member. */
+/* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
 #define SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)                                                            \
     s32 cue;                                                                                                  \
     s16 program;                                                                                              \
@@ -202,10 +200,7 @@ ASSERT_OFFSET(MenuState, selection_index, 0x0B);
 ASSERT_OFFSET(MenuState, cue_counter, 0x0C);
 ASSERT_OFFSET(MenuState, cue_timer, 0x0E);
 
-/* Resumable stream-decoder context, shared by LZ77_DecodeBegin (the initialiser)
- * and LZ77_DecodeStep (the decoder), which carried identical file-local copies.
- * The spill offsets and the 0x40 extent are retail reads: the decoder stores
- * s0-s7 with `sw s0..s7, 0x20..0x3C($t0)` on the context base. */
+/* The spill offsets and the 0x40 extent are retail reads: the decoder stores s0-s7 with `sw s0..s7, 0x20..0x3C($t0)` on the context base. */
 typedef struct EMIDecodeContext {
     u8* dst;        /* 0x00 decompressed output cursor */
     u32 unk04;      /* 0x04 not referenced by the decoder */
@@ -268,12 +263,7 @@ typedef struct SoundSequence {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundSequence;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the
- * frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at
- * g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at
- * D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry
- * tables on the stack, and g_MessageStepBank is the sixteen-entry handler bank
- * Message_DispatchBankStep copies. One type per table size, shared by every copier. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageStepTable is the sixteen-entry handler table Message_DispatchTableStep copies. */
 typedef struct {
     Callback handlers[8];
 } Table8;
@@ -288,7 +278,7 @@ typedef struct {
 
 typedef struct {
     Callback handlers[16];
-} HandlerBank;
+} HandlerTable;
 
 typedef struct MenuPanelFuncs {
     Callback handlers[9];
@@ -677,11 +667,11 @@ extern const Table8                D_80149A7C;
 extern const Table6                D_80149A9C;
 /* D_80149AB4 */
 extern const Table6                g_MessageChoiceModes;
-/* The 16-entry handler bank (code addresses 0x80152370..0x801526C8, the step
- * handlers that follow Message_DispatchBankStep): the shared step byte's indices at and
+/* The 16-entry handler table (code addresses 0x80152370..0x801526C8, the step
+ * handlers that follow Message_DispatchTableStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
 /* D_80149ACC */
-extern const HandlerBank           g_MessageStepBank;
+extern const HandlerTable          g_MessageStepTable;
 extern const struct CallbackTable3 D_80149B30;
 extern const struct CallbackTable5 D_80149B3C;
 extern const struct CallbackTable5 D_80149B50;
@@ -1132,7 +1122,7 @@ void        func_80151D3C(void);
 void        func_80151D8C(void);
 void        func_80151DCC(void);
 void        UI_DrawGlyph(s32 color, u8* text);
-void        Message_DispatchBankStep(void);
+void        Message_DispatchTableStep(void);
 void        func_80152370(void);
 void        func_801523D0(void);
 void        func_80152420(void);

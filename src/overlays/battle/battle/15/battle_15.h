@@ -1,10 +1,7 @@
 #ifndef OVERLAY_BATTLE_BATTLE_15_H
 #define OVERLAY_BATTLE_BATTLE_15_H
 
-/* The battle/battle/15 overlay's local declarations: the command, step and damage
- * dispatch tables, the actor views it shares with battle/battle/03 and the prototypes
- * its units use. The common records are in battle/records.h; only this image
- * includes this file. */
+/* The battle/battle/15 overlay's local declarations: the command, step and damage dispatch tables, the actor views it shares with battle/battle/03 and the prototypes its units use. The common records are in battle/records. */
 
 #include "overlays/battle/battle.h"
 #include <stdlib.h>
@@ -939,11 +936,11 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     BattleEffectSteps handlers;
     PartyMember*      work;
 
-    handlers     = *table;
-    work         = (PartyMember*)g_Task;
-    g_ScriptBank = BATTLE_SCRIPT_BANK;
+    handlers      = *table;
+    work          = (PartyMember*)g_Task;
+    g_ScriptTable = BATTLE_SCRIPT_TABLE;
     ((Callback*)&handlers)[work->header.mode]();
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 /* Reset the three selection bytes once the lock at -0x7A8D is clear, then run
@@ -952,7 +949,7 @@ static inline void BattleResetSelectionState(void) {
     volatile u8* battle_selection_state;
     volatile u8* battle_selection_lock;
 
-    battle_selection_state = (u8*)(EFFECT_BANK_80140000);
+    battle_selection_state = (u8*)(PARTY_STATE_PTR);
     battle_selection_lock  = BATTLE_LOCK_RAM_BASE;
     if (battle_selection_lock[-0x7A8D] != 0u) {
         return;

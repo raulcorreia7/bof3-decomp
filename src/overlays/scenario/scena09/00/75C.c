@@ -277,7 +277,6 @@ MATCH s8 func_801FD280(s32 x, s32 y) {
     SCENE_PROBE_POSITION(D_801FE474, 14, D_801FE4BC);
 }
 
-/* blocker: li v1,6 repeated in each branch delay slot; first diff: +0x10 bne targets +0x70 against +0x68. */
 MATCH s32 func_801FD2E8(void) {
     if (D_80145F09 == 5) {
         if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
@@ -513,7 +512,6 @@ MATCH s32 func_801FDC1C(void) {
     return -1;
 }
 
-/* Hint: retail loads li v0,-1 in the flag test branch delay slot before the test; both the == 0 form and the early return put it after. */
 INCLUDE_ASM(func_801FDC70);
 
 /* func_801FDCF4 */

@@ -78,7 +78,7 @@ u8           Actor_StepAnimLoop(void);
 /* func_8014DAEC */
 u8           Actor_StepAnimOnce(void);
 /* func_8014DC08 */
-extern void  Actor_SelectScriptBank(u32 record_index);
+extern void  Actor_SelectSprite(u32 record_index);
 /* func_8014DD3C */
 bool         Area_FindSceneRecord(s32 wanted_id);
 /* func_8014E0A8 */
@@ -207,7 +207,7 @@ void         Area_WriteCellRecord(u8* cell);
 /* func_801584A4 */
 extern void  Area_RunBundleRecords(void);
 /* func_80158550 */
-void         Area_LoadPaletteBank(u8* palette_list);
+void         Area_AnimateClut(u8* palette_list);
 /* func_8015864C */
 void         Area_DrawGouraudQuad(u32* record);
 /* func_80158B24 */
@@ -296,7 +296,7 @@ void        SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
 void        SND_PlayCue(u16 cue_id);
 /* func_80161808 */
-void        SND_SetBankLayout(u32 layout_bank);
+void        SND_SetBankLayout(u32 layout);
 /* func_80161B24 */
 void        SND_StartBGM(u8 bgm_id, u8 cue_level, u8 cue_shape);
 /* func_80161BBC */

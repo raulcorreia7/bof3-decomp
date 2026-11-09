@@ -6,7 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC44);
 
-/* Blocker: copies 256 halfword palette entries between unnamed data at 0x80033C00, 0x80036C00, 0x80037C00, 0x8003AC00; the tables need declaring first. */
 INCLUDE_ASM(func_801EEDA0);
 
 MATCH void func_801EEE84(void) {
@@ -103,8 +102,6 @@ MATCH void func_801EFDD8(void) {
     }
 }
 
-/* Best 20 differences: bnez at 0x801EFE94; adjust work pointer reloads. */
-/* blocker: work pointer lifetime; first diff: +0x34 lui v1 against lui a0. */
 INCLUDE_ASM(func_801EFE70);
 
 MATCH void func_801EFF1C(void) {
@@ -140,9 +137,9 @@ INCLUDE_ASM(func_801F04D4);
 INCLUDE_ASM(func_801F093C);
 
 MATCH void func_801F0D08(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F1230 + 3, g_Task->header.step);
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801F0D6C(void) {

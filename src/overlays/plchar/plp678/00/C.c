@@ -56,7 +56,6 @@ INCLUDE_ASM(func_801CEFD0);
 
 #include "overlays/plchar/Char_ClearModeIfUnused.h"
 
-/* blocker: probe flag register; first diff: +0x3C addu s2,a0,v0 (retail cx in s1, cy in s0, the flag computed in v0 and moved to s2 in the delay slot) against cx in s2 and the flag in s0 (candidate); body is Char_ProbeFacingCell with the cell test 0xF0/0xF1/0xF4/0xF6/0xF7 plus func_801B5AE4 != -1. */
 INCLUDE_ASM(func_801CF1A4);
 
 INCLUDE_ASM(func_801CF348);

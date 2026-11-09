@@ -16,12 +16,12 @@ INCLUDE_ASM(func_801EEE14);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF114(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF9A8 + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF1AC);

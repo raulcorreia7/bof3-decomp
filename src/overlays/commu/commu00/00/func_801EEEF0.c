@@ -1,7 +1,5 @@
 #include "commu00_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 73.00%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEEF0(u32 row_index) {
     s32 tmp0;

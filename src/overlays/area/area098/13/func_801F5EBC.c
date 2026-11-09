@@ -1,10 +1,7 @@
 #include "area098_13.h"
 
 MATCH s32 func_801F5EBC(void) {
-    /* CLEANUP: the shift-and-subtract run is GCC's exact division of the pointer difference, so
-     * the readable form is D_80146867 = g_ScriptWorkRecord - g_Actors. That form compiles the
-     * same multiply, but its stores and registers still differ (tried plain, a shared mode local
-     * and barriers). */
+    /* CLEANUP: use the pointer difference when its stores and registers match. */
     /* FAKE: the product needs the retail temporary registers. */
     FAKE_REG(s32, step, "v1");
     FAKE_REG(s32, part, "a0");

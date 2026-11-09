@@ -3,10 +3,6 @@
 /* The command ring holds sixteen handles. */
 #define BATTLE_RING_SLOT_MASK 0xF
 
-/* nonmatching unmeasured: tried the pad-state address: retail keeps it in s0 and re-reads the pad state through that
- * register, the candidate reloads the address for each use; tried: the resource select split from the ring store, a
- * pad-state pointer local, one scratchpad read, per-use masks; resume: a source shape that keeps the pad-state address
- * in s0 and reads the pad state through it. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80099B74(void) {
     s32  pad;

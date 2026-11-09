@@ -1,8 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried 72.01%: u8 record copy base, pointer locals val13/val0 for D_80145FBC/D_1F800008;
- * remaining: record-copy loop biv form (retail lw 0..0xc from a2), D_80146111 compare against g_Game.party_size reg not const
- * 3, hoisted lui a0 base. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B21E8(void) {
     s16*  val0;

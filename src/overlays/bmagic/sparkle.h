@@ -1,8 +1,7 @@
 #ifndef OVERLAY_BMAGIC_SPARKLE_H
 #define OVERLAY_BMAGIC_SPARKLE_H
 
-/* The sparkle pool of magic070, magic071 and magic072. Each image header
- * defines EFFECT_SPARKLE_KIND, then includes this file. */
+/* The sparkle pool of magic070, magic071 and magic072. */
 
 #include "overlays/bmagic/bmagic.h"
 

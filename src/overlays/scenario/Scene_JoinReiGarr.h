@@ -1,6 +1,4 @@
-/* Stream in the party resources, rebuild the battlers, add Rei and Garr to the
- * party and restage the party palettes. One definition shared by the scenario
- * programs; every change here must verify every member. */
+/* Stream in the party resources, rebuild the battlers, add Rei and Garr to the party and restage the party palettes. */
 /* func_801FADAC (scena11), func_801FD018 (scena12) */
 MATCH void Scene_JoinReiGarr(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);

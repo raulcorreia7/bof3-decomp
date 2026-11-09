@@ -2,13 +2,7 @@
 #include "scenario/runtime.h"
 #include "common/util.h"
 
-/* One source for the answer-message bodies every world area overlay carries. Every
- * change here must verify every member address.
- *
- * Kept as statement macros: as inlines these five diverge in 15 members across 6
- * images (area051, area056, area111, area112, area143, area148 of world01-03):
- * the message id is used after the branch, so it moves to $a0/$v1 and the body
- * grows from 0x28 to 0x38 bytes. */
+/* One source for the answer-message bodies every world area overlay carries. Kept as statement macros: as inlines these five diverge in 15 members across 6 images (area051, area056, area111, area112, area143, area148 of world01-03): the message id is used after the branch, so it moves to $a0/$v1 and the body grows from 0x28 to 0x38 bytes. */
 
 /* Store the message id the menu selection picks, else the idle id. */
 #define WORLD_SELECT_ANSWER_MESSAGE(selected, idle) \

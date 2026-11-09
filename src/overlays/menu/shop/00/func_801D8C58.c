@@ -1,8 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching 79.49%: s16 x/y and u8 index/flag params, a 24-byte stack frame. Retail copies x to s5 after the first
- * call and sign-extends x in place in s1, loads the slot base after the s2 save, and adds 0x16 after the index product.
- * resume: a source form that gives x two homes (raw s5, extended s1) and delays the slot base load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8C58(s16 x, s16 y, u8 index, u8 flag) {
     u8* slot;
@@ -38,6 +35,5 @@ NON_MATCHING void func_801D8C58(s16 x, s16 y, u8 index, u8 flag) {
     UI_DrawSpriteRun(x, y, D_801E5680, 1);
 }
 #else
-/* First difference: s0 is saved early. */
 INCLUDE_ASM(func_801D8C58);
 #endif

@@ -1,9 +1,5 @@
 #include "start_08.h"
 
-/* nonmatching 76.74%: retail reads D_801ED620 signed at 0x47D4 (lb) and
- * unsigned later, but the union view keeps the cell's address in s0 and falls
- * to 55.81%. resume: a form that reads it once as signed without materialising
- * the address. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D53AC(void) {
     s32 pressed;

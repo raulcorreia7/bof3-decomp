@@ -1,9 +1,6 @@
 #include <strings.h>
 
-/* Emit a semi-transparent `LineF2` in the requested colour and tpage. One
- * definition shared by the shop, start, Bate and Shisu overlays; each overlay
- * includes this file where the function sits.
- */
+/* Emit a semi-transparent `LineF2` in the requested colour and tpage. */
 /* func_801D36B8 (bate), func_801D4660 (shisu), func_801D9160 (shop), func_801DC658 (start) */
 MATCH void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y1, u8 color_r, u8 color_g, u8 color_b,
                                u8 tpage) {

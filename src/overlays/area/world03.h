@@ -1,9 +1,6 @@
 #ifndef WORLD03_FAMILY_H
 #define WORLD03_FAMILY_H
 
-/* Declarations shared by two or more world03 images; an image header that
- * reads one includes this file. */
-
 #include "overlays/area/area.h"
 #include "overlays/area/Message_ShowParty.h"
 #include "overlays/area/WorldAreaRequest.h"
@@ -36,4 +33,5 @@ extern u16 D_80146876;
 void Area_Update();
 
 /* The world-overlay position resolver used by the origin handlers. */
+
 #endif

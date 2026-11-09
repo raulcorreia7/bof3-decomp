@@ -1,7 +1,4 @@
-/* Draws the HUD banner at (x, y) when any draw flag is set: the left and right
- * banner sprites (4 and 5, 0x80 apart) and the title line whose offset sits at
- * the head of the main executable's text bank. One definition shared by the
- * area overlays; every change here must verify every member image. */
+/* Draws the HUD banner at (x, y) when any draw flag is set: the left and right banner sprites (4 and 5, 0x80 apart) and the title line whose offset sits at the head of the main executable's text bank. */
 /* FAKE: the call-through casts pass the s16 arguments of the retail call site. needs: type for Area_DrawHudSprite */
 MATCH void Area_DrawHudBanner(s16 x, s16 y) {
     if ((g_AreaDrawFlags & (AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_APPEND_ACTOR_PRIMITIVES |

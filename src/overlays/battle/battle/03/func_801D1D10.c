@@ -3,11 +3,6 @@
 /* Starts the next queued battler: walks the live battler cursors, arms the
  * first one whose row is idle and queues its action step.
  */
-/* nonmatching unmeasured: tried the cursor walk with a byte-cursor alias for the body writes and a halfword view for
- * the g_InputHeld clear, which reproduces retail's reload and pre-branch test (80.81%). residual: our body is 16 bytes
- * too long, the flag stores at -0x24/-0x48 rematerialize absolute, and the tail writes the state bytes absolutely where
- * retail holds &g_Battle.row_cursor in a0 and reaches -4/-5. resume: a source shape that keeps one flag base live across
- * the delay slot. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1D10(void) {
     s8*          cursor;

@@ -4,10 +4,6 @@ extern u8 D_80145F20[];
 
 /* Applies the battle selection: hands the six chosen slots to the sound queue, mirrors the battler work rows
  * and effect vectors, and resets the effect slots. */
-/* nonmatching unmeasured: tried the register allocation of the table bases: retail holds the row base in s0 and the
- * slot counter in s1, and the D_800B6F50/D_800B44B0 tables are indexed through at; the pinned form reaches 54.80%
- * (pure-C best 46.40%) and the residual is a same-size regalloc difference at +0x24. resume: a spelling that keeps the
- * row base and the slot counter in retail's s0 and s1 without a pin. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009A744(void) {
     u8* slots[6];

@@ -1,9 +1,4 @@
-/* The dark ring: a flat ring of 64 subtractive Gouraud quads around the effect matrix, between the radii in
- * scratchpad params 0 (inner) and 1 (outer). The outer edge subtracts nothing; the inner edge subtracts
- * params[shade_slot] from each channel, so the ring darkens toward its centre. Each member sets the draw mode
- * and the three params, then runs this with its ordering-table layer. A statement macro, not a static
- * inline: the static inline form builds 64 bytes longer with a different frame. One definition shared by the
- * bmagic effect modules; every change here must verify every member. */
+/* The dark ring: a flat ring of 64 subtractive Gouraud quads around the effect matrix, between the radii in scratchpad params 0 (inner) and 1 (outer). The outer edge subtracts nothing; the inner edge subtracts params[shade_slot] from each channel, so the ring darkens toward its centre. Each member sets the draw mode and the three params, then runs this with its ordering-table layer. A statement macro, not a static inline: the static inline form builds 64 bytes longer with a different frame. */
 /* BMagic_DrawDarkRing: magic053 func_801EFA30 and magic226 func_801EFA64 (BMagic_DrawDarkRing.h), magic110
  * func_801EFC98, magic220 func_801EFC40 and magic222 func_801EFACC. */
 #define BMAGIC_DARK_RING_SEGMENTS 64 /* 64 steps of 64 make the full 4096 circle */

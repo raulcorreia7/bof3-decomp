@@ -35,7 +35,6 @@ MATCH void func_801EEEDC(void) {
     }
 }
 
-/* blocker: counter clear schedule; first diff: lui a0,0x8014 (retail) against move s0,zero (candidate). */
 INCLUDE_ASM(func_801EEF80);
 
 MATCH void func_801EF068(void) {
@@ -65,17 +64,16 @@ INCLUDE_ASM(func_801EF148);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF43C(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0478, g_Task->header.step);
     if ((g_Task->header.flags & 1) && g_Task->header.step >= 2) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-/* blocker: work pointer lifetime; first diff: lui v1 at +0x20. */
 INCLUDE_ASM(func_801EF528);
 
 MATCH void func_801EF648(void) {
@@ -124,7 +122,6 @@ MATCH void func_801EF7B4(void) {
     }
 }
 
-/* blocker: work pointer lifetime; first diff: lui v1 at entry. */
 INCLUDE_ASM(func_801EF844);
 
 MATCH void func_801EF8C0(void) {
@@ -164,7 +161,6 @@ MATCH void func_801EFFB8(void) {
     }
 }
 
-/* blocker: two offset tables D_801F04A4 and D_801F04A8 (stride 8, indexed by param.unk_0B) have no symbol row or type in this image; needs: type. */
 INCLUDE_ASM(func_801F0040);
 
 MATCH void func_801F00D8(void) {

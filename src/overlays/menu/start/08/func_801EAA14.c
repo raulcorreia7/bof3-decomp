@@ -2,8 +2,6 @@
 
 /* Text label the item row draws. */
 
-/* nonmatching 60.11%: the panel's item table is the typed member now; the unit still needs a lever that closes the
- * first mismatch. resume: the record's layout is proven, so the remaining diff is code shape. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
     MenuPanelTask* stack_18;

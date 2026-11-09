@@ -34,12 +34,7 @@ extern u8 D_80146866;
 /* One row of the sample table at D_80147BD8: twelve sample offsets and three
  * weights per 0x28-byte record. */
 
-/* One 0x28-byte entry of the source table at D_80147BD8, shared by
- * func_801FC01C and func_801FC3A0, which carried identical file-local copies.
- * The stride is a retail read: func_801FC01C walks the table as
- * `(SceneSampleRecord *)(i * 0x28 + base)`. Twelve s16 samples sit at
- * +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the
- * halfwords read here are named, the rest stays unresolved padding. */
+/* The stride is a retail read: func_801FC01C walks the table as `(SceneSampleRecord *)(i * 0x28 + base)`. Twelve s16 samples sit at +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the halfwords read here are named, the rest stays unresolved padding. */
 typedef struct SceneSampleRecord {
     u8  unk_00[2];
     s16 sample[SCENE_FX_CELL_COUNT];

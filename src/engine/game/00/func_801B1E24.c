@@ -15,8 +15,6 @@ typedef struct BattleWorkSlot {
     u8  pad_12D[0x13];
 } BattleWorkSlot;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 58.67%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B1E24(void) {
     BattleWorkSlot* rows;

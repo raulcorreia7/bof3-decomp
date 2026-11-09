@@ -1,7 +1,4 @@
-/* The cell probe of the plchar programs that react to map cells 0xF2 and 0xF8 with the
- * shared Char_SpawnActor: 0xF2 spawns a field record (and sometimes a second) and
- * 0xF8 hands out the item 0x56. One definition shared by the plchar programs over each
- * image's CHAR_SPAWN_CUE_SCALE; every change here must verify every member image. */
+/* The cell probe of the plchar programs that react to map cells 0xF2 and 0xF8 with the shared Char_SpawnActor: 0xF2 spawns a field record (and sometimes a second) and 0xF8 hands out the item 0x56. */
 MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
     s32 cell;
     s32 i;

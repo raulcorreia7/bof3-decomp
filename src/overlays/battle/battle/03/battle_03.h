@@ -1,9 +1,7 @@
 #ifndef OVERLAY_BATTLE_BATTLE_03_H
 #define OVERLAY_BATTLE_BATTLE_03_H
 
-/* The battle/battle/03 overlay's local declarations: the command, step and damage
- * dispatch tables, its actor views and the prototypes its units share. The
- * common records are in battle/records.h; only this image includes this file. */
+/* The battle/battle/03 overlay's local declarations: the command, step and damage dispatch tables, its actor views and the prototypes its units share. The common records are in battle/records. */
 
 #include "overlays/battle/battle.h"
 #include <stdio.h>
@@ -692,7 +690,7 @@ extern void  func_801D6DE4(void);
 extern void  func_801D6E20(void);
 extern void  func_801D6EAC(void);
 extern void  func_801D6EEC(void);
-extern void  Battle_ReloadPartyBank(void);
+extern void  Battle_ReloadPartySprites(void);
 extern void  Battle_ReloadAreaAudio(void);
 /* func_801D716C */
 extern void  Battle_WaitAreaReload(void);

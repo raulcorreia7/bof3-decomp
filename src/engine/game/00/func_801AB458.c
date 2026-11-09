@@ -1,10 +1,10 @@
 #include "game_00.h"
 
-/* Opcodes 0x80 to 0x8C of the actor script bank: the record group that drives
+/* Opcodes 0x80 to 0x8C of the actor script table: the record group that drives
  * the scene around the actor - script-active and fade flags, actor placement,
  * the area camera scroll, palette tints, the XA music stream, and spawning a
  * helper record. Named from the case bodies. */
-/* Opcodes 0x80 to 0x8C of the actor script bank: the record group that drives
+/* Opcodes 0x80 to 0x8C of the actor script table: the record group that drives
  * the scene around the actor - script-active and fade flags, actor placement,
  * the area camera scroll, palette tints, the XA music stream, and spawning a
  * helper record. Named from the case bodies. */
@@ -24,8 +24,6 @@ typedef enum ActorScriptStageOp {
     ACTOR_SCRIPT_STAGE_SPAWN_HELPER        = 0x8C, /* args: [flag]; func_8015CC00 claims a slot at the actor */
 } ActorScriptStageOp;
 
-/* nonmatching unmeasured: tried 70.14%: single return value exit via break; retail keeps base pointer s2 for base[1]
- * (4(s2)); gcc folds it to the D_80145EC8 symbol. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value) {
     u8    byte;

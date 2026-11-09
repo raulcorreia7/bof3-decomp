@@ -1,7 +1,5 @@
 #include "area030_04.h"
 
-/* nonmatching unmeasured: typed PsyQ fields with s32 arguments score 61.25%; the mixed narrow-argument variant
- * scored 52.46%, leaving saved-register allocation at +0x04. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     s32  stack_10;

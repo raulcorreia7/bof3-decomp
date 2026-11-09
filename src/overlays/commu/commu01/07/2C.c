@@ -75,7 +75,6 @@ INCLUDE_ASM(func_801D1E48);
 
 INCLUDE_ASM(func_801D2110);
 
-/* First difference: s5 is saved as s6. */
 INCLUDE_ASM(func_801D273C);
 
 INCLUDE_ASM(func_801D28A4);
@@ -88,10 +87,21 @@ INCLUDE_ASM(func_801D3594);
 
 INCLUDE_ASM(func_801D36FC);
 
-/* First difference: s2 is saved as s1. */
 INCLUDE_ASM(func_801D3984);
 
-INCLUDE_ASM(func_801D3A48);
+MATCH u8 func_801D3A48(u8 arg) {
+    s32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 0x3C; i++) {
+        if (g_FairyJobs[i].active != 0) {
+            if (g_FairyJobs[i].type == arg) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
 
 INCLUDE_ASM(func_801D3AA0);
 
@@ -105,7 +115,6 @@ INCLUDE_ASM(func_801D4178);
 
 INCLUDE_ASM(func_801D42DC);
 
-/* needs: Area_SampleHeight result type; first diff: +0x60 early return. */
 INCLUDE_ASM(func_801D4474);
 
 INCLUDE_ASM(func_801D44E0);
@@ -122,7 +131,6 @@ MATCH void func_801D47C4(void) {
 
 INCLUDE_ASM(func_801D482C);
 
-/* needs: typed 18-byte lookup data and fairy room access. */
 INCLUDE_ASM(func_801D49C4);
 
 INCLUDE_ASM(func_801D4AAC);

@@ -78,7 +78,6 @@ MATCH void func_801EF3A8(void) {
     }
 }
 
-/* blocker: sp20 and sp18 stores scheduling; first diff: +0x80. */
 INCLUDE_ASM(BMagic_DrawDragonBreath);
 
 INCLUDE_ASM(func_801F0198);

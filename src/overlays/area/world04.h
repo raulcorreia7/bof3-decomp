@@ -1,15 +1,12 @@
 #ifndef WORLD04_FAMILY_H
 #define WORLD04_FAMILY_H
 
-/* Declarations shared by two or more world04 images; an image header that
- * reads one includes this file. */
-
 #include "sys/gameui.h"
 #include "overlays/area/area.h"
 #include "overlays/area/Message_ShowParty.h"
 #include "overlays/area/WorldAreaRequest.h"
 
-/* Message ids of the faerie village text bank shared by area175 through area185. */
+/* Message ids of the faerie village text, used by area175 through area185. */
 enum {
     FAIRY_MESSAGE_MUSICIAN_THANKS               = 0x5A,
     FAIRY_MESSAGE_COPY_SHOP_DECLINED            = 0x5F,

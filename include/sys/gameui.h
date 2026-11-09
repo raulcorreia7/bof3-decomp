@@ -364,21 +364,21 @@ extern u8           g_MessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
 /* D_801490A4 */
 extern volatile u16 g_UiWindowChannel;
-/* Area request slot shared by the area024 and area027 overlays. */
+
 /* D_801490A8 */
-extern u16          g_MessageRequest;
+extern u16      g_MessageRequest;
 /* D_801490AA */
-extern u16          g_MessageChoiceTimer;
-extern u8           D_801490CF[];
+extern u16      g_MessageChoiceTimer;
+extern u8       D_801490CF[];
 /* D_80181D98 */
-extern const u8     s_LoaderRecordBytes[168];
-extern u8           D_80181D99;
+extern const u8 s_LoaderRecordBytes[168];
+extern u8       D_80181D99;
 /* 0x80181EBA / 0x80181EBB: byte tables the selection paths read with a 4-byte
  * row stride. */
 /* D_80181EBA */
-extern const u8     g_SelectionCues[];
+extern const u8 g_SelectionCues[];
 /* D_80181EBB */
-extern const u8     g_SelectionSequences[];
+extern const u8 g_SelectionSequences[];
 
 /* Resource and pad-input helpers the overlays call: resolve a resource id to
  * its data pointer, look up a group choice's resource id, and decode the

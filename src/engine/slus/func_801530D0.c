@@ -244,6 +244,5 @@ NON_MATCHING s32 func_801530D0(void) {
     func_80153D34();
 }
 #else
-/* blocker: stack frame; first diff: +0x0 addiu sp,sp,-0x78 (retail) against -0x70 (candidate). */
 INCLUDE_ASM(func_801530D0);
 #endif

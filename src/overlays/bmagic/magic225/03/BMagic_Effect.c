@@ -37,7 +37,7 @@ INCLUDE_ASM(func_801EEF8C);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF31C(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0398, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EFCA0();
@@ -46,7 +46,7 @@ MATCH void func_801EF31C(void) {
         func_801EF7D4(0x40, 0xF0, 0x6C, 2);
         func_801EF7D4(0x140, 0xF0, 0x5C, 3);
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF404);
@@ -82,12 +82,12 @@ MATCH void func_801EFE0C(void) {
 }
 
 MATCH void func_801EFE50(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F03AC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EFEE8);
@@ -110,7 +110,6 @@ MATCH void func_801F0140(void) {
     }
 }
 
-/* blocker: work pointer register; first diff: 0x801F0278 a0 against a1. */
 INCLUDE_ASM(func_801F021C);
 
 /* func_801F02D4 */

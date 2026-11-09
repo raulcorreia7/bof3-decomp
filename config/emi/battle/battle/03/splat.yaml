@@ -128,7 +128,7 @@ segments:
       - [0x6220, c, func_801D6E20]
       - [0x62AC, c, func_801D6EAC]
       - [0x62EC, c, func_801D6EEC]
-      - [0x6328, c, Battle_ReloadPartyBank]
+      - [0x6328, c, Battle_ReloadPartySprites]
       - [0x6508, c, Battle_ReloadAreaAudio]
       - [0x656C, c, Battle_WaitAreaReload]
       - [0x65A4, c, func_801D71A4]

@@ -180,7 +180,6 @@ INCLUDE_ASM(func_801F0764);
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-/* blocker: self-copy semantics; first diff: coordinate loads reversed at 0x801F08C4. */
 MATCH void func_801F08B4(void) {
     PartyMember* task;
     s8           tint;

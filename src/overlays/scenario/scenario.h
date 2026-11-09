@@ -1,9 +1,6 @@
 #ifndef SCENARIO_FAMILY_H
 #define SCENARIO_FAMILY_H
 
-/* Declarations shared by two or more scenario images; an image header that
- * reads one includes this file. */
-
 #include "game.h"
 #include "sys/scene.h"
 #include "gfx/prim.h"
@@ -16,9 +13,7 @@
 
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
-/* The body of a scene's position probe: look the position up in a table of `count` entries and run
- * the handler at the index found, returning its result, else -1. The probes differ only in table,
- * count and handlers. Every change here must verify every member. */
+/* The body of a scene's position probe: look the position up in a table of `count` entries and run the handler at the index found, returning its result, else -1. The probes differ only in table, count and handlers. */
 #define SCENE_PROBE_POSITION(table, count, handlers)    \
     do {                                                \
         s8 index;                                       \
@@ -30,8 +25,7 @@ s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
         return (handlers)[index]();                     \
     } while (0)
 
-/* Hand a scene over to the actor routine of `scene`: enter mode 4 with the given state and clear the
- * actor's word at +0x7E. Every change here must verify every member. */
+/* Hand a scene over to the actor routine of `scene`: enter mode 4 with the given state and clear the actor's word at +0x7E. */
 #define SCENE_START_ACTOR(actor, scene, step) \
     func_801BE1B0(scene);                     \
     (actor)->header.mode = 4;                 \
@@ -39,9 +33,7 @@ s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
     (actor)->unk_77      = (step);            \
     (actor)->unk_7E      = 0
 
-/* The red-gradient fade step of the sce15ef images: draw the gradient at full strength on the peak
- * tick, else scaled from the countdown, and leave the scene when it ends. The members differ only in
- * peak and shift; the caller declares the u8 `timer`. Every change here must verify every member. */
+/* The red-gradient fade step of the sce15ef images: draw the gradient at full strength on the peak tick, else scaled from the countdown, and leave the scene when it ends. The members differ only in peak and shift; the caller declares the u8 `timer`. */
 #define SCENE_RED_GRADIENT_FADE(timer, peak, shift)              \
     (timer) = g_Task->timer;                                     \
     if ((timer) == (peak)) {                                     \

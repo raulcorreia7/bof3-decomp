@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void Battle_ReloadPartyBank(void) {
+MATCH void Battle_ReloadPartySprites(void) {
     u8 i;
 
     i = 0u;
@@ -31,7 +31,7 @@ MATCH void Battle_ReloadPartyBank(void) {
             u16          half = work->unk_58;
 
             g_Task = work;
-            Actor_StageScriptRecord(work->unk_4B, (u16)(half - 2u), MEM_PTR(u8, BATTLE_SCRIPT_BANK), 0x1800);
+            Actor_StageScriptRecord(work->unk_4B, (u16)(half - 2u), MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         }
     }
     EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
