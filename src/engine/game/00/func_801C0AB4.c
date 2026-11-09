@@ -23,7 +23,7 @@ MATCH void func_801C0AB4(void) {
         flag     = 1;
     } else {
         pos = (s32*)&((u8*)g_Game.members)[0x34];
-        if (abs(*pos - D_80146264) > 0xFFFF || abs(D_80145EC8 - D_80146268) > 0xFFFF) {
+        if (abs(*pos - D_80146264) > 0xFFFF || abs(g_Game.members[0].pos.y.fixed - D_80146268) > 0xFFFF) {
             index = 1;
             if (index < g_Game.party_size) {
                 off   = BATTLE_PARTY_STRIDE;

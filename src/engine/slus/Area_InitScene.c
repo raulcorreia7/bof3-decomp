@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* seeds the scratch work area for the incoming scene: clears work byte 0x5, copies D_80145FBC to byte 0xB,
- * sets byte 0x11C of the local-work block, stores D_80145EC4/8/C at +0x34/+0x38/+0x3C and advances the work byte at
+ * sets byte 0x11C of the local-work block, stores g_Game.members[0].pos.x.fixed/8/C at +0x34/+0x38/+0x3C and advances the work byte at
  * 0x1.
  */
 MATCH void Area_InitScene(void) {
@@ -11,8 +11,8 @@ MATCH void Area_InitScene(void) {
     g_Task->param.unk_0B                    = g_Game.members[0].status.field.flags_12C.u8_value;
     *(u8*)&g_Game.current->u.turn.hp_change = 3; /* FAKE: retail stores the byte. */
     work                                    = g_Task;
-    FIELD(u32, work, 0x34u)                 = D_80145EC4;
-    FIELD(u32, work, 0x38u)                 = D_80145EC8;
+    FIELD(u32, work, 0x34u)                 = g_Game.members[0].pos.x.fixed;
+    FIELD(u32, work, 0x38u)                 = g_Game.members[0].pos.y.fixed;
     FIELD(u32, work, 0x3Cu)                 = D_80145ECC;
     work->header.mode                       = work->header.mode + 1;
 }

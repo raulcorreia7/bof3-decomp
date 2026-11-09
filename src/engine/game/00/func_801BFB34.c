@@ -35,7 +35,7 @@ NON_MATCHING void func_801BFB34(void) {
         val0 = (s32*)&D_1F800000;
         val9 = 0;
         do {
-            tmp2 = FIELD(s32, &D_80145EC4, val9);
+            tmp2 = FIELD(s32, &g_Game.members[0].pos.x.fixed, val9);
             val9 += BATTLE_PARTY_STRIDE;
             val4 += 1;
             *val0 = tmp2;
@@ -64,7 +64,7 @@ NON_MATCHING void func_801BFB34(void) {
                 val7 = val10 * 4;
             }
             val4 += 1;
-            FIELD(s32, &D_80145EC4, val3) = FIELD(s32, &D_1F800000, val7);
+            FIELD(s32, &g_Game.members[0].pos.x.fixed, val3) = FIELD(s32, &D_1F800000, val7);
             val3 += BATTLE_PARTY_STRIDE;
             cnt_a = g_Game.party_size;
         } while (val4 < cnt_a);
@@ -75,7 +75,7 @@ NON_MATCHING void func_801BFB34(void) {
         val1  = (s32*)&D_1F800000;
         val11 = 0;
         do {
-            tmp4 = FIELD(s32, &D_80145EC8, val11);
+            tmp4 = FIELD(s32, &g_Game.members[0].pos.y.fixed, val11);
             val11 += BATTLE_PARTY_STRIDE;
             val4 += 1;
             *val1 = tmp4;
@@ -105,10 +105,10 @@ NON_MATCHING void func_801BFB34(void) {
             block_20:
                 val6 = val8 * 4;
             }
-            tmp0                          = FIELD(s32, &D_1F800000, val6);
-            FIELD(s32, &D_80145EC8, val5) = tmp0;
+            tmp0                                             = FIELD(s32, &D_1F800000, val6);
+            FIELD(s32, &g_Game.members[0].pos.y.fixed, val5) = tmp0;
             val4 += 1;
-            FIELD(s16, &D_80145ECE, val5) = Area_ReadHeight(FIELD(s32, &D_80145EC4, val5), tmp0);
+            FIELD(s16, &D_80145ECE, val5) = Area_ReadHeight(FIELD(s32, &g_Game.members[0].pos.x.fixed, val5), tmp0);
             val5 += BATTLE_PARTY_STRIDE;
         } while (val4 < (s32)g_Game.party_size);
     }

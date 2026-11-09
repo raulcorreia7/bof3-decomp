@@ -106,8 +106,8 @@ NON_MATCHING void func_801B21E8(void) {
                         val8 = val3 & BYTE_MASK;
                     }
                     if ((val8 == 0) || !(val9 & BYTE_MASK)) {
-                        val1 = D_80145EC4;
-                        val2 = D_80145EC8;
+                        val1 = g_Game.members[0].pos.x.fixed;
+                        val2 = g_Game.members[0].pos.y.fixed;
                         goto block_26; /* retail branch */
                     }
                 } else {
@@ -131,18 +131,18 @@ NON_MATCHING void func_801B21E8(void) {
     TASK_SET(g_Game.members);
     g_Game.current   = g_Game.members;
     g_AreaCameraStep = 0x20;
-    tmp3             = g_AreaScrollTargetX - D_80145EC4;
+    tmp3             = g_AreaScrollTargetX - g_Game.members[0].pos.x.fixed;
     val7             = tmp3;
     if (tmp3 < 0) {
         val7 = -val7;
     }
-    tmp2  = g_AreaScrollTargetY - D_80145EC8;
+    tmp2  = g_AreaScrollTargetY - g_Game.members[0].pos.y.fixed;
     val10 = tmp2;
     if (tmp2 < 0) {
         val10 = -val10;
     }
-    g_AreaScrollTargetX = D_80145EC4;
-    g_AreaScrollTargetY = D_80145EC8;
+    g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+    g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
     val7                = MAX(val7, val10);
     tmp0                = ((u32)val7 >> 0xD) & BYTE_MASK;
     if (tmp0 != 0) {

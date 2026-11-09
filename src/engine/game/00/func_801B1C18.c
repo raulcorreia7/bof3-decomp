@@ -10,8 +10,8 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
     s8  dir_x;
     s8  dir_y;
 
-    span_x = abs(x - D_80145EC4) >> 15;
-    span_y = abs(y - D_80145EC8) >> 15;
+    span_x = abs(x - g_Game.members[0].pos.x.fixed) >> 15;
+    span_y = abs(y - g_Game.members[0].pos.y.fixed) >> 15;
     if ((x >> 16) > D_80145EC6) {
         dir_x = 1;
     } else {
@@ -25,9 +25,9 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
     for (i = 0; i <= span_x; i++) {
         /* The tracked height cell is the s16 at +0xA of the pair base; both
          * probes read it through the pair they walk, hence the two offsets. */
-        px    = FIELD(s32, &D_80145EC4, 0) + dir_x * (i << 15);
+        px    = FIELD(s32, &g_Game.members[0].pos.x.fixed, 0) + dir_x * (i << 15);
         value = Area_ReadHeight(px, y);
-        if (abs(FIELD(s16, &D_80145EC4, 0xA) - value) >= 0x41) {
+        if (abs(FIELD(s16, &g_Game.members[0].pos.x.fixed, 0xA) - value) >= 0x41) {
             return 0;
         }
         if (func_801C3E40(px, y, mode & BYTE_MASK, value) & BYTE_MASK) {
@@ -35,9 +35,9 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
         }
     }
     for (i = 0; i <= span_y; i++) {
-        py    = FIELD(s32, &D_80145EC8, 0) + dir_y * (i << 15);
+        py    = FIELD(s32, &g_Game.members[0].pos.y.fixed, 0) + dir_y * (i << 15);
         value = Area_ReadHeight(x, py);
-        if (abs(FIELD(s16, &D_80145EC8, 0x6) - value) >= 0x41) {
+        if (abs(FIELD(s16, &g_Game.members[0].pos.y.fixed, 0x6) - value) >= 0x41) {
             return 0;
         }
         if (func_801C3E40(x, py, mode & BYTE_MASK, value) & BYTE_MASK) {

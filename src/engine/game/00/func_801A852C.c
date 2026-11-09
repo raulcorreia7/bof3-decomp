@@ -35,8 +35,8 @@ MATCH void func_801A852C(void) {
                         break;
                     }
                 }
-                D_80145040 = D_80145EC4;
-                D_80145044 = D_80145EC8;
+                D_80145040 = g_Game.members[0].pos.x.fixed;
+                D_80145044 = g_Game.members[0].pos.y.fixed;
                 D_80145048 = g_GameAreaId;
                 Game_RequestAreaChange(seed & HALF_MASK, TO_COORD(67), TO_COORD(22), FACING_DOWN_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;

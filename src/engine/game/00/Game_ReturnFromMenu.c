@@ -40,8 +40,8 @@ MATCH void Game_ReturnFromMenu(void) {
         *request = 0u;
         if ((*pending == 0u) && ((g_GameRequestFlags & 1u) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
             *pending   = 1u;
-            D_80145040 = D_80145EC4;
-            D_80145044 = D_80145EC8;
+            D_80145040 = g_Game.members[0].pos.x.fixed;
+            D_80145044 = g_Game.members[0].pos.y.fixed;
             D_80145048 = g_GameAreaId;
             D_8014504B = (g_Game.members[0].facing + s_DirectionJitters[RANDOM_MASK(3)]) & 0xF;
             Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);

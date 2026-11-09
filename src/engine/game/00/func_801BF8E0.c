@@ -29,10 +29,10 @@ MATCH void func_801BF8E0(void) {
         dst   = 0;
         do {
             index++;
-            tmp                               = *(s32*)((u8*)g_EncounterParty + src);
-            *((s32*)((u8*)&D_80145EC4 + dst)) = tmp;
-            tmp                               = *(s32*)((u8*)&g_EncounterParty[0].y + src);
-            *((s32*)((u8*)&D_80145EC8 + dst)) = tmp;
+            tmp                                                  = *(s32*)((u8*)g_EncounterParty + src);
+            *((s32*)((u8*)&g_Game.members[0].pos.x.fixed + dst)) = tmp;
+            tmp                                                  = *(s32*)((u8*)&g_EncounterParty[0].y + src);
+            *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + dst)) = tmp;
             src += 2 * sizeof(s32);
             dst += BATTLE_PARTY_STRIDE;
         } while (index < count);
@@ -58,15 +58,15 @@ MATCH void func_801BF8E0(void) {
         row              = index * BATTLE_PARTY_STRIDE;
         px               = &g_AreaScrollTargetX;
         dx               = *px;
-        x                = *((s32*)((u8*)&D_80145EC4 + row));
-        y                = *((s32*)((u8*)&D_80145EC8 + row));
+        x                = *((s32*)((u8*)&g_Game.members[0].pos.x.fixed + row));
+        y                = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + row));
         g_AreaCameraStep = 0x20;
         dx -= x;
         *px = x;
         py  = &g_AreaScrollTargetY;
         adx = abs(dx);
         dy  = abs(*py - y);
-        *py = *((s32*)((u8*)&D_80145EC8 + row));
+        *py = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + row));
         adx = MAX(adx, dy);
         ret = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
         adx = (u32)adx >> 13;

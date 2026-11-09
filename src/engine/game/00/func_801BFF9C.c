@@ -134,13 +134,13 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         } else {
             func_801C090C(x, y, z & BYTE_MASK);
         }
-        g_AreaScrollTargetX = D_80145EC4;
-        g_AreaScrollTargetY = D_80145EC8;
+        g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+        g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
         return;
     }
-    c41                 = TO_COORD(65);
-    D_80145EC4          = TO_COORD(15);
-    g_AreaScrollTargetX = TO_COORD(15);
-    D_80145EC8          = c41;
-    g_AreaScrollTargetY = TO_COORD(60);
+    c41                           = TO_COORD(65);
+    g_Game.members[0].pos.x.fixed = TO_COORD(15);
+    g_AreaScrollTargetX           = TO_COORD(15);
+    g_Game.members[0].pos.y.fixed = c41;
+    g_AreaScrollTargetY           = TO_COORD(60);
 }

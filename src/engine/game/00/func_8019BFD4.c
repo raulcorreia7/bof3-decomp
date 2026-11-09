@@ -5,8 +5,8 @@ MATCH void func_8019BFD4(void) {
 
     g_AreaCameraStep       = 0x40;
     g_AreaCameraMoving     = 1;
-    g_AreaScrollTargetX    = D_80145EC4;
-    g_AreaScrollTargetY    = D_80145EC8;
+    g_AreaScrollTargetX    = g_Game.members[0].pos.x.fixed;
+    g_AreaScrollTargetY    = g_Game.members[0].pos.y.fixed;
     neg                    = -g_AreaCameraHeightStep;
     g_AreaCameraHeightStep = neg;
 }

@@ -77,12 +77,12 @@ NON_MATCHING void func_80167428(void) {
         tmp8 = g_Task;
         tmp0 = FIELD(u8, tmp8, 0x8u) * 8;
         tmp2 = ((s32*)g_FacingSteps)[tmp0];
-        tmp4 = D_80145EC4 - (FIELD(s32, tmp8, 0x34u) + tmp2);
+        tmp4 = g_Game.members[0].pos.x.fixed - (FIELD(s32, tmp8, 0x34u) + tmp2);
         val2 = tmp4;
         if (tmp4 < 0) {
             val2 = -val2;
         }
-        tmp5 = D_80145EC8 - (FIELD(s32, tmp8, 0x38u) + *(g_FacingStepY + tmp0));
+        tmp5 = g_Game.members[0].pos.y.fixed - (FIELD(s32, tmp8, 0x38u) + *(g_FacingStepY + tmp0));
         val0 = tmp5;
         if (tmp5 < 0) {
             val0 = -val0;

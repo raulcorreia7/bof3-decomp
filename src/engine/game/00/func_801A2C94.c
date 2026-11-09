@@ -13,10 +13,10 @@ MATCH u8 func_801A2C94(Actor* actor) {
     work   = g_Task;
     route  = work->direction_08;
     delta  = work->pos.x.fixed;
-    dx     = D_80145EC4 - delta;
+    dx     = g_Game.members[0].pos.x.fixed - delta;
     dx     = ABS(dx);
     if ((dx >> 0x10) < entity->ext.bounds.half_width) {
-        dy    = D_80145EC8;
+        dy    = g_Game.members[0].pos.y.fixed;
         delta = work->pos.y.fixed;
         dy -= delta;
         dy = ABS(dy);

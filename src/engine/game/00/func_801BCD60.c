@@ -173,10 +173,10 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         }
         if (val6 != 0) {
             tmp9  = g_Task;
-            val10 = FIELD(s32, tmp9, 0x34u) - D_80145EC4;
+            val10 = FIELD(s32, tmp9, 0x34u) - g_Game.members[0].pos.x.fixed;
             val10 = ABS(val10);
             if (val10 <= TO_COORD(6)) {
-                val11 = FIELD(s32, tmp9, 0x38u) - D_80145EC8;
+                val11 = FIELD(s32, tmp9, 0x38u) - g_Game.members[0].pos.y.fixed;
                 val11 = ABS(val11);
                 if (val11 > TO_COORD(6)) {
                     goto block_39; /* retail branch */
