@@ -510,13 +510,19 @@ typedef enum AccessoryId {
 /* The vital item table ids (category ITEM_CAT_VITAL). Names from the GAME.EMI record tables. */
 typedef enum VitalItemId {
     VITAL_ITEM_FLIER        = 1,
+    VITAL_ITEM_WALLET       = 2,
     VITAL_ITEM_EGG          = 3,
+    VITAL_ITEM_PASSPORT     = 4,
     VITAL_ITEM_GUILD_LETTER = 5,
+    VITAL_ITEM_ID_CARD      = 6,
     VITAL_ITEM_GUILD_BADGE  = 7,
+    VITAL_ITEM_SYSTEM_DISK  = 8,
+    VITAL_ITEM_MEMO         = 9,
     VITAL_ITEM_SEA_CHARTS   = 10,
     VITAL_ITEM_KEY          = 11,
     VITAL_ITEM_CARD_KEY_A   = 12,
     VITAL_ITEM_CARD_KEY_B   = 13,
+    VITAL_ITEM_OLD_PASSPORT = 14,
     VITAL_ITEM_FOUNTAIN_PEN = 15,
 } VitalItemId;
 
