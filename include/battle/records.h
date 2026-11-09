@@ -738,7 +738,7 @@ ASSERT_SIZE(BattleRange, 0x40);
 /* retail addresses */
 
 /*
- * Evidenced in both battle/battle/03 and battle/battle/15. Per-image headers keep
+ * Common to battle/battle/03 and battle/battle/15. Per-image headers keep
  * their own target-specific accessors; these names describe addresses common
  * to both targets. Strides are struct sizes (hex). Addresses are fixed RAM
  * (hex).

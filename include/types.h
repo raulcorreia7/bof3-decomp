@@ -2,7 +2,7 @@
 #define BASE_TYPES_H
 
 /* The fixed-width types and compile-time layout checks shared by every game
- * header. A record asserts its size and each proven member offset where it is
+ * header. A record asserts its size and each known member offset where it is
  * declared, so a wrong layout fails the build. */
 
 #include <stddef.h>

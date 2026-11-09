@@ -249,8 +249,8 @@ ASSERT_SIZE(Character, PARTY_RECORD_STRIDE);
  * block starts 0x16 bytes before the first record, and a Character
  * member would align to 0x18. Cast a row to Character to read fields.
  *
- * Evidence: `emi/etc/shop/00@0x801E1710` loads the style byte through the
- * base register and then adds 0x90 (0x16 plus the skill-ability offset) to it. */
+ * Reader: `emi/etc/shop/00@0x801E1710` loads the style byte through the
+ * base register, then adds 0x90 (0x16 plus the skill-ability offset) to it. */
 typedef struct Char_Block {
     u8 window_style; /* 0x00: the last argument of UI_DrawWindow */
     u8 pad_01[0x15];

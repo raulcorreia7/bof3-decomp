@@ -6,15 +6,14 @@
  * table, and the object and record lists), the scene/step table at 0x800E3800
  * and the area script bank at 0x800D3800. The area overlays build the field
  * mesh, place objects and run the area script from these bytes; the game
- * overlay queries the same grid. Evidence: the readers below and
- * @source: wiki:formats/area.
+ * overlay queries the same grid. Format: @source: wiki:formats/area.
  *
- * Reader evidence: `exe/slus_004_22@0x80155560` indexes the interleaved bank
- * offsets; `exe/slus_004_22@0x8014DD3C` stores scene record byte +0x07 at
- * work+0x2C and `exe/slus_004_22@0x8014D6DC` uses it as a script-bank index.
+ * Readers: `exe/slus_004_22@0x80155560` indexes the interleaved bank offsets;
+ * `exe/slus_004_22@0x8014DD3C` stores scene record byte +0x07 at work+0x2C and
+ * `exe/slus_004_22@0x8014D6DC` uses it as a script-bank index.
  *
- * Meanings not recovered from readers remain offset-named: per-cell byte-code
- * values, record-list opcodes and `scroll_1E`.
+ * Per-cell byte-code values, record-list opcodes and `scroll_1E` have no known
+ * meaning and keep offset names.
  *
  * One definition per world object: the area overlays include this header
  * instead of redeclaring a record (@source: wiki:formats/area).
@@ -69,8 +68,8 @@
 /* The palette arena: one 16 KB CLUT arena (256 units of 0x40 bytes) that the
  * area, ETC, BATTLE and BMAGIC families fill in slices, with a working copy the
  * engine uploads wholesale when `g_GfxPalettePending` is set (`@0x8014E22C`, 32 rows of
- * 0x200 bytes; `@0x8014E284` does the copy). `include/gfx/prim.h:23` already
- * names the working copy. */
+ * 0x200 bytes; `@0x8014E284` does the copy). `include/gfx/prim.h:23` names
+ * the working copy. */
 #define AREA_PALETTE_ARENA               0x80033800u /* offset 0 in the arena */
 #define AREA_PALETTE_ARENA_33A00         0x80033A00u /* +0x200, 512 B; panel colors at +8 */
 #define AREA_PALETTE_ARENA_33C00         0x80033C00u /* +0x400, 512 B, BMAGIC/BATTLE */
@@ -279,8 +278,8 @@ typedef struct AreaScriptBank {
 } AreaScriptBank;
 
 /* One section: `slots_bytes == 2 * M` in 2072 of 2380 sections; the 308 that
- * are not monotone are 51 byte-identical blobs reused across payloads, likely a
- * second section kind. The last section runs to the end of the block. */
+ * are not monotone are 51 byte-identical blobs reused across payloads (probably a
+ * second section kind). The last section runs to the end of the block. */
 typedef struct AreaScriptSection {
     u16 slots_bytes;   /* 0x00 - == 2 * M */
     u16 record_off[1]; /* 0x02 - M entries, relative to the section base */
