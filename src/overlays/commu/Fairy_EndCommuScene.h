@@ -1,7 +1,5 @@
-/* Ends a commu scene: adds one to g_SceneEventStep unless a message is requested. One definition
- * shared by the commu overlays; every change here must verify every member. */
-/* func_801D5A9C (commu02/08), func_801D1670 (commu04/06), func_801D121C (commu03/06); the second copy in commu02/08,
-   Fairy_EndCommuSceneEvent3, uses the statements macro */
+/* Ends a commu scene: adds one to g_SceneEventStep unless a message is requested. */
+/* func_801D5A9C (commu02/08), func_801D1670 (commu04/06), func_801D121C (commu03/06). */
 #define COMMU_ADVANCE_STEP()                            \
     do {                                                \
         u8* state;                                      \

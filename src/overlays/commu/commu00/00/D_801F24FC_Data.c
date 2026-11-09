@@ -1,8 +1,6 @@
 #include "commu00_00.h"
 
-/* Copy-shop classes are {max price, battles that reach it, multiplier}. Task rows are {x seed, y seed, mode byte}:
- * the mode byte selects mode 0/state 1 (set) or mode 6/state 0 (clear). Variant rows hold three
- * {x seed, y seed, resource id} cells. */
+/* Copy-shop classes are {max price, battles that reach it, multiplier}. */
 // clang-format off
 FairyVillageData D_801F24FC_Data = {
     {391, 392, 732, 733, 734, 735},

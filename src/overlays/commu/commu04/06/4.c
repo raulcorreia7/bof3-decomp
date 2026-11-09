@@ -4,8 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* The commu04 overlay entry: the shared commu step byte selects the handler,
- * then the menu panels refresh while the game state is still zero. */
+/* The commu04 overlay entry. */
 MATCH void func_801D0C04(void) {
     g_Commu04States[D_801F294C]();
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
