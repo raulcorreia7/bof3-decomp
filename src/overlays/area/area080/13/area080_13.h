@@ -7,6 +7,7 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+extern WorldPos  D_80146954;
 extern u8        D_801F3DAC[];
 extern u16       D_801F4494[];
 extern u16       D_801F4498[];
