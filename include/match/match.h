@@ -3,14 +3,7 @@
 
 #include "types.h"
 
-/*
- * Assembly-match switch for asm-authored originals (hand-written or an
- * inline-asm macro): the bytes were authored in assembly, not emitted by the
- * compiler. Default 1: the included, byte-exact assembly is the build path.
- * Set -DBOF3_ASM_MATCH=0 to compile the file's INFERRED C semantic model
- * instead (documentation note; NOT byte-checked). A build without MATCHING
- * always uses the model.
- */
+/* Assembly-match switch for asm-authored originals (hand-written or an inline-asm macro). */
 #ifndef BOF3_ASM_MATCH
 #define BOF3_ASM_MATCH 1
 #endif
@@ -45,23 +38,13 @@
 /* Barrier that constrains scheduling and reloads. */
 #define FAKE_BARRIER()                __asm__ __volatile__("" : : : "memory")
 
-/*
- * Last-resort local allocator constraint. After the clean-C ladder and
- * a search over source rewrites, use once only for an allocator or entry-register
- * residual that the disassembly diff shows; retain only with an independent review and a live exact match.
- * Direct numeric pins still need explicit user approval. reg is a GCC MIPS
- * name. Legacy pins using numeric "$N" register spellings remain direct
- * declarations until their compiler syntax is separately verified.
- */
+/* Last-resort local allocator constraint. */
 #define FAKE_REG(type, name, reg)     register type name asm(reg)
 
-/* Force one access to go through a volatile pointer when codegen depends on
- * the reload, without declaring a volatile object or local. */
+/* Force one access to go through a volatile pointer when codegen depends on the reload, without declaring a volatile object or local. */
 #define FAKE_VOLATILE_PTR(type, expr) (volatile type*)(expr)
 
-/* Register-level operand constraints. FAKE_OPAQUE hides x's value from the
- * optimizer (it may have changed), so the compiler keeps x in a register;
- * FAKE_USE forces x live in a register at this point. */
+/* Register-level operand constraints. */
 #define FAKE_OPAQUE(x)                __asm__ __volatile__("" : "=r"(x) : "0"(x))
 #define FAKE_USE(x)                   __asm__ __volatile__("" : : "r"(x))
 
@@ -73,10 +56,7 @@
 #define FAKE_USE(x)
 #endif
 
-/* Retail frame bytes that no statement, struct, array, spilled argument or
- * local type explains: n unused objects of type, declared the same in every mode
- * (the size only matters when matching). A declaration:
- * place it with the other locals at block start. */
+/* Retail frame bytes that no statement, struct, array, spilled argument or local type explains. */
 #define FAKE_STACK_PADS(type, n) type stack_pad[n]
 
 /* A local holds a constant so the loop pass hoists it in retail order. A
@@ -87,14 +67,7 @@
 /* Volatile access to an existing object. */
 #define VOL(type, x)             (*(volatile type*)&(x))
 
-/*
- * Register-clobber barriers for MIPS delay-slot ordering.
- *
- * These constrain caller-register scheduling for a C-generated instruction,
- * including jal/branch delay-slot placement and fixed-address reload ordering.
- * They do not emit or select an opcode; use them only after the disassembly diff
- * shows the required register and placement. One macro per register in use.
- */
+/* Register-clobber barriers for MIPS delay-slot ordering. */
 #if defined(__GNUC__) && defined(MATCHING)
 #define FAKE_CLOBBER_A1() __asm__ __volatile__("" : : : "a1")
 #define FAKE_CLOBBER_A2() __asm__ __volatile__("" : : : "a2")
@@ -105,12 +78,7 @@
 #define FAKE_CLOBBER_A3()
 #endif
 
-/*
- * Basic-block boundary that holds one statement in place in the instruction
- * schedule. Use ONLY when the byte diff proves the scheduler reorders that
- * statement against a neighbor without it. Pure textual expansion, identical
- * to the literal do/while spelling; every use must still pass the byte check.
- */
+/* Basic-block boundary that holds one statement in place in the instruction schedule. */
 #if defined(MATCHING)
 #define FAKE_ORDER_LOCK(stmt) \
     do {                      \
@@ -120,12 +88,7 @@
 #define FAKE_ORDER_LOCK(stmt) stmt
 #endif
 
-/*
- * The same boundary around a run of statements. Write FAKE_ORDER_LOCK_BEGIN on its
- * own line and close it with `FAKE_ORDER_LOCK_END;`. The pair opens and closes one
- * block, so it must sit inside a single block of its own. Moving statements
- * into or out of the pair moves the boundary; byte-check every change.
- */
+/* The same boundary around a run of statements. */
 #if defined(MATCHING)
 #define FAKE_ORDER_LOCK_BEGIN do {
 #define FAKE_ORDER_LOCK_END \
@@ -136,10 +99,7 @@
 #define FAKE_ORDER_LOCK_END   }
 #endif
 
-/*
- * An empty boundary: splits the schedule at this point without holding any
- * statement. Same rules as FAKE_ORDER_LOCK.
- */
+/* An empty boundary: splits the schedule at this point without holding any statement. */
 #if defined(MATCHING)
 #define FAKE_ORDER_FENCE() \
     do {                   \
@@ -148,10 +108,7 @@
 #define FAKE_ORDER_FENCE() ((void)0)
 #endif
 
-/*
- * Unmatched code/data inclusion for C source. `ASM_DIR` is the image's one asm folder, passed as
- * `-DASM_DIR="asm/<target>"` (or its `hand` subfolder for authored assembly).
- */
+/* Unmatched code/data inclusion for C source. */
 #if defined(MATCHING) && !defined(M2CTX) && !defined(PERMUTER)
 #ifndef ASM_DIR
 #error "INCLUDE_ASM needs -DASM_DIR=\"asm/<target>\" from the build"
