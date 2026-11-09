@@ -792,7 +792,21 @@ MATCH void Fairy_EndCommuSceneEvent3(void) {
 
 #include "overlays/commu/Fairy_CountFairies.h"
 
-INCLUDE_ASM(func_801D7EA0);
+MATCH u8 func_801D7EA0(u8 arg) {
+    s32 active_count;
+    s32 i;
+
+    active_count = 0;
+    for (i = 0; i < 0x3C; i++) {
+        if (g_FairyJobs[i].active != 0) {
+            if ((active_count & 0xFF) == arg) {
+                return (u8)i;
+            }
+            active_count++;
+        }
+    }
+    return 0xFF;
+}
 
 INCLUDE_ASM(func_801D7EF0);
 
@@ -820,9 +834,33 @@ INCLUDE_ASM(func_801D90D8);
 
 INCLUDE_ASM(func_801D9210);
 
-INCLUDE_ASM(func_801D92B0);
+MATCH u8 func_801D92B0(void) {
+    s32 count = 0;
+    s32 i;
 
-INCLUDE_ASM(func_801D92F4);
+    for (i = 0; i < 7; i++) {
+        if (g_Characters[i].unk_07 & 1) {
+            count++;
+        }
+    }
+    return count;
+}
+
+MATCH u8 func_801D92F4(u8 arg) {
+    s32 active_count;
+    s32 i;
+
+    active_count = 0;
+    for (i = 0; i < 7; i++) {
+        if (g_Characters[i].unk_07 & 1) {
+            if ((active_count & 0xFF) == arg) {
+                return (u8)i;
+            }
+            active_count++;
+        }
+    }
+    return 0xFF;
+}
 
 INCLUDE_ASM(func_801D9348);
 
