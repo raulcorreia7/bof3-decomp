@@ -13,21 +13,19 @@ INCLUDE_ASM(func_801EEC70);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEEE0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEEE0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF24(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0D64, g_Task->header.step);
     if ((g_Task->header.flags & 1) && g_Task->header.step != 0) {
         func_800AF764();
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-/* hint: g_Task loads before the effect battler for the position copy and the battler z loads before the unk_25 store; the candidate loads the two in the other order. First differing instruction: lui v1,0x1f80 at +0x2C. */
 INCLUDE_ASM(func_801EEFC8);
 
 INCLUDE_ASM(func_801EF148);
@@ -190,7 +188,6 @@ MATCH void func_801F0504(void) {
     }
 }
 
-/* blocker: candidate loads g_Task into a1 where retail keeps it in a0 (lui a0 at 0x801F058C) across the 2E/30 copy; first diff there. Three draft orders tried. */
 INCLUDE_ASM(func_801F0584);
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"

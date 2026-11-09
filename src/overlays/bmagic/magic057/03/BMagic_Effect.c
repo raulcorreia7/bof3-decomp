@@ -51,7 +51,6 @@ MATCH void func_801EEE50(void) {
     g_Task->timer = 0;
 }
 
-/* blocker: spad cell read hoisted; first diff: lui a1,0x1f80 at 0x801EEF28. */
 INCLUDE_ASM(func_801EEEB0);
 
 MATCH void func_801EEFA4(void) {
@@ -80,19 +79,17 @@ MATCH void func_801EF02C(void) {
 MATCH void func_801EF08C(void) {
     Magic057SecondSteps handlers;
 
-    handlers     = D_801EEC2C;
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    handlers      = D_801EEC2C;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-/* blocker: cross-jumped (rand() % 6) << 0x10 prefixes; first diff: beqz v0 target at 0x801EF150. */
 INCLUDE_ASM(func_801EF134);
 
-/* blocker: y-store deref hoisted; first diff: sra a0,v0,0x1f at 0x801EF440. */
 INCLUDE_ASM(func_801EF3C4);
 
 MATCH void func_801EF528(void) {
@@ -118,7 +115,6 @@ MATCH void func_801EF5BC(void) {
     g_Task->header.step++;
 }
 
-/* blocker: body 2-3 instructions fat; first diff: linked table constants +8 and +C. */
 INCLUDE_ASM(func_801EF620);
 
 MATCH void func_801EF7A0(void) {
@@ -150,13 +146,13 @@ MATCH void func_801EF81C(void) {
 MATCH void func_801EF83C(void) {
     Magic057SecondSteps handlers;
 
-    handlers     = D_801EEC44;
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    handlers      = D_801EEC44;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((g_Task->header.flags & 1) && (g_BattleEffectBattler->timer == 0)) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF900(void) {

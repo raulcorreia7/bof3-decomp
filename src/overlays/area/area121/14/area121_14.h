@@ -14,6 +14,8 @@ extern SVECTOR  D_1F800014[];
 extern u8       D_801F64D8[];
 extern u8       D_801F64E8[];
 extern u8       D_801F64E9[]; /* the y byte of each D_801F64E8 row */
+/* The area ids the message step looks the current area up in. */
+extern u16      D_801F67BC[4];
 extern Callback D_801F67C4[];
 extern Callback D_801F67D8[];
 extern Callback D_801F67E0[];
@@ -42,7 +44,7 @@ void func_801F5B90(void);
 
 s32 func_801A79A4(s32, s32);
 
-u8 func_801F5028(s32, s32, s32);
+u8 func_801F5028(s32 x, s32 y, u8 dir);
 
 void func_801F5C7C(void);
 

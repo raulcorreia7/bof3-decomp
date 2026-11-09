@@ -2,9 +2,6 @@
 
 /* Draws the area-030 party bars: the actor's own bar row, the
  * member bars and the name text. */
-/* nonmatching unmeasured: the bar count is 10 with a live step index and 9 without it (the retail sets s3 to 10 and
- * 9 on the two paths) and the slot stores run flags, type, unk_01, unk_02; candidate 68.92%. resume: a source
- * shape that homes the work pointer in a0 like the retail. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     u16 value;
@@ -105,8 +102,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, (s32)g_WindowStyle);
     UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, 0x30, (s32)g_WindowStyle);
     health = FISHING_STATE->bounce_3C.half.unk_3C;
-    UI_DrawText((s16)(panel_x + 61), (s16)(panel_y + 6), 0, 0xFFU,
-                MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[health]));
+    UI_DrawText((s16)(panel_x + 61), (s16)(panel_y + 6), 0, 0xFFU, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[health]));
     func_801D7784((u16)panel_x, (u16)panel_y);
     text = (u8*)g_UiFormatBuffer;
     TEXT_Format(text, D_801D0C08, health + 1);

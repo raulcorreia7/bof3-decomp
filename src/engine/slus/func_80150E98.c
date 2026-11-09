@@ -8,8 +8,7 @@ MATCH void func_80150E98(void) {
     u8  index;
     u16 flags;
 
-    if ((g_InputPressed != 0) ||
-        ((*(s32*)&g_UiWindowChannel & (FRONTEND_FLAG_ADVANCE_REQUEST | FRONTEND_FLAG_MODE_LATCH)) != 0)) {
+    if ((g_InputPressed != 0) || ((*(s32*)&g_UiWindowChannel & (FRONTEND_FLAG_ADVANCE_REQUEST | FRONTEND_FLAG_MODE_LATCH)) != 0)) {
         mode  = g_MenuPanelTasks[0].state;
         /* FAKE: g_UiWindowStep is a one-byte scalar elsewhere; this unit reads it as an array element. */
         index = MEM(u8, (u32)&g_UiWindowStep);

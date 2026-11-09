@@ -1,8 +1,4 @@
-/* Draw the four stat labels, their values and the glyph rows. One definition
- * shared by the shop, start, Bate and Shisu overlays; each overlay includes
- * this file where the function sits and binds the icon, format and glyph-row
- * names in its table in config/symbols.toml.
- */
+/* Draw the four stat labels, their values and the glyph rows.toml. */
 /* func_801D1444 (sisyou), func_801D2C2C (bate), func_801D3BD4 (shisu), func_801D86D4 (shop), func_801DBBCC (start) */
 MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
     u8* base;
@@ -21,8 +17,7 @@ MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
 
     base = &g_WindowStyle;
     y15  = panel_x + 5;
-    UI_DrawWindow((s32)((u16)y15), (s32)((u16)(panel_y + 3)), MENU_STAT_WINDOW_WIDTH, MENU_STAT_WINDOW_HEIGHT, 0,
-                  (s32)base[0]);
+    UI_DrawWindow((s32)((u16)y15), (s32)((u16)(panel_y + 3)), MENU_STAT_WINDOW_WIDTH, MENU_STAT_WINDOW_HEIGHT, 0, (s32)base[0]);
     xb        = panel_x + 0xB;
     y8        = panel_y + 8;
     /* FAKE: pointer local. The index product is materialised first and the

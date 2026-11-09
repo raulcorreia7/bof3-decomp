@@ -1,13 +1,13 @@
-#ifndef SCENARIO_EFFECT_BANK_H
-#define SCENARIO_EFFECT_BANK_H
+#ifndef SCENARIO_EFFECT_H
+#define SCENARIO_EFFECT_H
 
 #include "psx/mem.h"
 #include "types.h"
 #include "menu/party.h"
 
-#define PARTY_STATE_BASE     0x80140000u
+#define PARTY_STATE_BASE 0x80140000u
 
-#define EFFECT_BANK_80140000 MEM_PTR(volatile PartyState, PARTY_STATE_BASE)
+#define PARTY_STATE_PTR  MEM_PTR(volatile PartyState, PARTY_STATE_BASE)
 
 /* Game RAM at 0x80140000 that scenario overlays and battle also write; the
  * party state is the only part modelled here.
@@ -19,13 +19,11 @@
  * here", never as "unused". */
 typedef struct PartyState {
     u8                       pad_0000[0x4f59];
-    /* 0x4F59 */ volatile u8 menu_flags; /* sisyou reads it as the master-menu flags byte */
-    /* 0x4F5A */ volatile u8
-        field_order[PARTY_SLOT_COUNT]; /* party order out of battle, 0xFF = empty (FORMATION_SLOT_EMPTY) */
+    /* 0x4F59 */ volatile u8 menu_flags;                     /* sisyou reads it as the master-menu flags byte */
+    /* 0x4F5A */ volatile u8 field_order[PARTY_SLOT_COUNT];  /* party order out of battle, 0xFF = empty (FORMATION_SLOT_EMPTY) */
     /* 0x4F5D */ volatile u8 battle_order[PARTY_SLOT_COUNT]; /* party order in battle, 0xFF = empty */
     u8                       pad_4F60[0x6254 - 0x4f60];
-    /* 0x6254 */ volatile u8
-        party_count; /* func_801667A4 appends to both order arrays at this index while it is below PARTY_SLOT_COUNT */
+    /* 0x6254 */ volatile u8 party_count; /* func_801667A4 appends to both order arrays at this index while it is below PARTY_SLOT_COUNT */
 } PartyState;
 
 ASSERT_SIZE(PartyState, 0x6255);

@@ -4,7 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* blocker: entry reads v0 and v1 before setting them. */
 INCLUDE_ASM(func_801D2AFC);
 
 MATCH void func_801D2C0C(void) {
@@ -67,7 +66,6 @@ MATCH void func_801D2E20(void) {
     func_801D2ADC();
 }
 
-/* blocker: intermediate subtraction; first diff: +0x54 loads 0x02000000, not 0xFE000000. */
 INCLUDE_ASM(func_801D2E80);
 
 MATCH void func_801D2F48(void) {
@@ -113,8 +111,7 @@ MATCH void func_801D3124(void) {
 /* func_801D3164 */
 MATCH void Menu_StatusCommandsPanel(void) {
     g_MenuStatusTask2StateFuncs[g_MenuCurrentPanel->state]();
-    Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A,
-                        g_MenuCurrentPanel->unk_0B, 0);
+    Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A, g_MenuCurrentPanel->unk_0B, 0);
 }
 
 MATCH void func_801D31CC(void) {
@@ -161,7 +158,6 @@ MATCH void func_801D32E0(void) {
 
 INCLUDE_ASM(func_801D3320);
 
-/* blocker: register homes (py in s2, shaded byte in s3). */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Menu_DrawStatPanel.h"
@@ -266,13 +262,9 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
         list++;
     } while (n < 10);
     x = panel->pos.x + 0x4E;
-    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 0x10,
-                D_801D9EA4[panel->group_first]);
-    UI_DrawSpriteRun(
-        panel->pos.x, panel->pos.y,
-        (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
-    UI_DrawSpriteRun(panel->pos.x, panel->pos.y,
-                     (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, 1);
+    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 0x10, D_801D9EA4[panel->group_first]);
+    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
+    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, 1);
     flags = FIELD(u8, panel, 0x9u);
     if (!(flags & MENU_LIST_FRAME_MASK)) {
         FIELD(u8, panel, 0x9u) = 0;

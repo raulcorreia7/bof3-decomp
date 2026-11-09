@@ -32,6 +32,20 @@ extern void func_801F4B0C(void);
 extern void func_801F4C68(void);
 
 void func_801F2E5C(void);
-void func_801F3378(s32 arg0);
+
+typedef struct AreaShot {
+    u8       pad_00[3];
+    u8       unk_03;
+    u8       unk_04;
+    u8       unk_05;
+    u16      angle;
+    s16      unk_08;
+    s16      unk_0A;
+    WorldPos pos;
+    u8       pad_18[4];
+    Point3DL velocity;
+} AreaShot;
+
+void func_801F3378(AreaShot* shot);
 
 #endif

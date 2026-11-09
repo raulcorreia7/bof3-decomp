@@ -8,7 +8,6 @@ typedef struct Start08PanelHead {
     u8  unk_110;
 } Start08PanelHead;
 
-/* 88.89%; typed and volatile panel pointers and opaque base tried; first diff 0x801D83C4, panel store. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8390(void) {
     s16* panel;
@@ -25,12 +24,12 @@ NON_MATCHING void func_801D8390(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active       = 1;
     slot                                                   = (u8*)panel + 0xA4;
     D_801485E0                                             = g_MenuPanelTasks[4].pos.x;
-    D_801485E2                                      = g_MenuPanelTasks[4].pos.y + g_MenuPanelTasks[16].unk_0A * 0x36;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x = g_MenuPanelTasks[16].pos.x + 0x2A;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = g_MenuPanelTasks[16].pos.y + 7;
-    pad                                             = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    g_MenuPanelTasks[16].flags                      = 0xFF;
-    count                                           = Party_CountOrder(PARTY_ORDER_FIELD);
+    D_801485E2                                             = g_MenuPanelTasks[4].pos.y + g_MenuPanelTasks[16].unk_0A * 0x36;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x        = g_MenuPanelTasks[16].pos.x + 0x2A;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y        = g_MenuPanelTasks[16].pos.y + 7;
+    pad                                                    = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    g_MenuPanelTasks[16].flags                             = 0xFF;
+    count                                                  = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         g_MenuPanelTasks[16].unk_0A -= 1;

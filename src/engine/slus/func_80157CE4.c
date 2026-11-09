@@ -2,8 +2,6 @@
 
 /* lifted draft, best score 45.34%; semantics unverified
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 45.34%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
     u16   stack_28;
@@ -100,8 +98,7 @@ NON_MATCHING void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
                 tmp6  = *(s32*)(tmp12);
                 tmp3  = (s32)(tmp6 << 8) >> 0x18;
                 val1  = tmp3 * 0x10;
-                if ((tmp9 < tmp3) ||
-                    (val1 = tmp3 * 0x10, ((((s32)((s32) * (s8*)(val8) << 0x10) >> 0x18) < (tmp6 >> 0x18)) != 0))) {
+                if ((tmp9 < tmp3) || (val1 = tmp3 * 0x10, ((((s32)((s32) * (s8*)(val8) << 0x10) >> 0x18) < (tmp6 >> 0x18)) != 0))) {
                     stack_3C = -val1;
                     val4     = (s32)(FIELD(u8, tmp12, 0x3u) << 0x18) >> 0x14;
                 } else {
@@ -113,9 +110,8 @@ NON_MATCHING void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
             val3 -= 1;
             stack_2C = (u16)stack_3C - 0x80;
             stack_34 = (u16)stack_44 - 0x80;
-            RotTransPers4((SVECTOR*)&stack_28, (SVECTOR*)&stack_30, (SVECTOR*)&stack_38, (SVECTOR*)&stack_40,
-                          (s32*)(val7 + 8), (s32*)(val7 + 0x10), (s32*)(val7 + 0x18), (s32*)(val7 + 0x20), &stack_48,
-                          &stack_4C);
+            RotTransPers4((SVECTOR*)&stack_28, (SVECTOR*)&stack_30, (SVECTOR*)&stack_38, (SVECTOR*)&stack_40, (s32*)(val7 + 8), (s32*)(val7 + 0x10), (s32*)(val7 + 0x18), (s32*)(val7 + 0x20),
+                          &stack_48, &stack_4C);
             tmp1 = D_8017F8E0[val6];
             val6 += 1;
             func_80155560((u32)tmp1, val7, 1);

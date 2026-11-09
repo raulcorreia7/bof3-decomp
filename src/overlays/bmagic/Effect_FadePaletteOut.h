@@ -1,7 +1,4 @@
-/* Darkens the palette fade row indexed by the effect timer (work byte 0x0A) by one on each
- * colour channel; when the effect ticker (work byte 0x09) reaches zero it frees the fade of
- * the selected battler, tells the battle UI and advances the mode. One definition shared by
- * the bmagic effect modules; every change here must verify every member. */
+/* Darkens the palette fade row indexed by the effect timer (work byte 0x0A) by one on each colour channel; when the effect ticker (work byte 0x09) reaches zero it frees the fade of the selected battler, tells the battle UI and advances the mode. */
 /* func_801EF1A0 (magic162), func_801EF1A0 (magic168) */
 MATCH void Effect_FadePaletteOut(void) {
     g_PaletteFades[g_Task->timer].offset.red--;

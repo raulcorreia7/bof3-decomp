@@ -19,7 +19,6 @@ MATCH void func_801EEE74(void) {
     g_Task = saved;
 }
 
-/* blocker: retail loads g_Task twice around the g_BattleEffects[slot].header.mode store (a0 for target.party, then s0); member stores let the two loads merge; first diff: lui a0 at 0x801EEF00. */
 INCLUDE_ASM(func_801EEEDC);
 
 MATCH void func_801EEF88(void) {
@@ -36,9 +35,8 @@ MATCH void func_801EEF88(void) {
     }
 }
 
-MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF014 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF058(void) {
     Magic081Steps handlers;
@@ -91,7 +89,6 @@ MATCH void func_801EF44C(void) {
     }
 }
 
-/* blocker: the 0x78-stride queue at 0x801EC330 has no g_BattleEffects row in this image; needs a symbols.toml row first. */
 INCLUDE_ASM(func_801EF57C);
 
 MATCH void func_801EF614(void) {

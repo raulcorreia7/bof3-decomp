@@ -6,7 +6,7 @@
 /* searches the palette records for the id g_FrameCount modulo the header word gives, copies the record's 0x20
  * bytes into the palette bank and raises the palette stage serial; a record id above the wanted id ends the search.
  */
-MATCH void Area_LoadPaletteBank(u8* palette_list) {
+MATCH void Area_AnimateClut(u8* palette_list) {
     s32* dst;
     s32* src;
     s32  count;

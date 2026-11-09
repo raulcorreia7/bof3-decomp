@@ -32,6 +32,18 @@ extern u8        D_801FDE88[4];
 extern SceneFunc g_SceneActorDispatch[];
 extern u8        D_801FDFC4;
 
+/* The record D_801FDFBC points at: a world position the burst draws around and its size. */
+typedef struct Scena07Burst {
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 unk_0C;
+    u16 unk_10;
+} Scena07Burst;
+
+extern Scena07Burst* D_801FDFBC;
+void                 func_801F97E0(Scena07Burst* burst);
+
 void func_801F81D4(u8* row);
 
 u8*       func_801F8394(void);
@@ -68,6 +80,11 @@ u8 func_801F9EFC(void);
 extern Callback g_SceneEntityDispatch[];
 
 extern u8       D_80144EB8[];
+extern u8       D_80146865;
+extern u8       D_80146866;
+extern u8       D_80146867;
+extern u8       D_80146874;
+extern u8       D_80146875;
 /* D_801FDFA0 */
 extern u8       g_ScenePositionTable;
 /* D_801FDFA8 */

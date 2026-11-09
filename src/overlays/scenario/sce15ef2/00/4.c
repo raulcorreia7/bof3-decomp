@@ -4,7 +4,12 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801D0C0C);
+MATCH void func_801D0C04(void) {
+    D_801D1B1C[g_Task->header.mode]();
+    if (g_Task->header.mode != 0) {
+        func_801D1218(&g_Task->pos, (s16)g_Task->vx, 7);
+    }
+}
 
 MATCH void func_801D0C70(void) {
     u8* work;
@@ -69,7 +74,12 @@ MATCH void func_801D0EC4(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0EF8);
+MATCH void func_801D0EF8(void) {
+    SYS_DISPATCH_TASK(D_801D1B38, 1, g_Task);
+    if (g_Task->header.mode != 0) {
+        func_801D17A0((s16)g_Task->screen_x, (s16)g_Task->screen_y, 0x80);
+    }
+}
 
 MATCH void func_801D0F68(void) {
     Actor* work;
@@ -138,18 +148,20 @@ MATCH void func_801D1118(void) {
     }
 }
 
-INCLUDE_ASM(func_801D11A4);
+MATCH void func_801D11A4(void) {
+    u8 timer;
+
+    SCENE_RED_GRADIENT_FADE(timer, 0x10, 4);
+}
 
 INCLUDE_ASM(func_801D1218);
 
-/* blocker: stack frame; first diff: +0x0 stack 0x28 against 0x38. */
 INCLUDE_ASM(Scene_DrawScanBar);
 
 #include "overlays/scenario/Scene_ClearScanBars.h"
 
 #include "overlays/scenario/Scene_ClaimScanBar.h"
 
-/* blocker: case constant 1 kept in v0; first diff: +0x8C. */
 INCLUDE_ASM(Scene_UpdateScanBars);
 
 INCLUDE_ASM(func_801D17A0);

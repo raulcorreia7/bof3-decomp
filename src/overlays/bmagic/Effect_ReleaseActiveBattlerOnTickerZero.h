@@ -1,7 +1,4 @@
-/* When the effect ticker runs down, advances the active battler's script step
- * (func_800AEF98), clears the battler's flag bit 0x40 and steps the handler.
- * Every change here must verify every member.
- */
+/* When the effect ticker runs down, advances the active battler's script step (func_800AEF98), clears the battler's flag bit 0x40 and steps the handler. */
 /* func_801EEF68 (magic017), func_801EEF38 (magic021) */
 MATCH void Effect_ReleaseActiveBattlerOnTickerZero(void) {
     if (g_Task->param.unk_0B == 0) {

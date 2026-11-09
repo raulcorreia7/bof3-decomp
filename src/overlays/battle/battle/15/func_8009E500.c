@@ -3,9 +3,6 @@
 /* Prepares the selected battler's damage preview: reads the damage cap from the player or enemy row into the
  * 0x801463A0 slot 3, marks the action state, then passes the row limit and the cap to the damage routine after growing
  * the preview when it exceeds the limit. */
-/* nonmatching unmeasured: tried frame 0x28 vs 0x18: the cached delta/limit locals spill while the retail keeps them in
- * registers; branch layout now bne to the tail store. resume: drive both halves from one u32 row index and pass the row
- * addresses as non-volatile u16 pointers. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009E500(void) {
     s16 delta;
@@ -30,15 +27,13 @@ NON_MATCHING void func_8009E500(void) {
             if (limit < g_Game.members[g_Battle.active_battler].chr.ap + delta) {
                 g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, limit, delta),
-                          g_Battle.active_battler);
+            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, limit, delta), g_Battle.active_battler);
         } else {
             limit = ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap;
             if (limit < ENEMY_COMBATANT(g_Battle.active_battler).ap + delta) {
                 g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, limit, delta),
-                          g_Battle.active_battler);
+            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, limit, delta), g_Battle.active_battler);
         }
         g_Battle.action->unk_08 = 0;
     } else {

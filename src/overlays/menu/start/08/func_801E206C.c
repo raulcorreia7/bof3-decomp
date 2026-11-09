@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* 59.91%; signed, volatile and unsigned cursor pointers tried; first diff 0x801E20B8, cursor address load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E206C(void) {
     u16 sel;

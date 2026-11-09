@@ -15,7 +15,16 @@ MATCH void func_801F743C(void) {
 }
 
 /* Hint: a3 is lhu of the low half of vx (0x0C), while 0x0C is also read as a word; the same field needs two widths. */
-INCLUDE_ASM(func_801F745C);
+MATCH void func_801F745C(void) {
+    Actor* work;
+
+    work = g_Task;
+    func_801F7660(work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed, work->vx);
+    g_Task->vx += 0x10;
+    if (g_Task->vx > 0x500) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F74CC(void) {
     Actor_Clear();
@@ -281,7 +290,6 @@ MATCH void func_801FC778(void) {
     }
 }
 
-/* blocker: store in the bne delay slot; first diff: li a2,5 against li a1,5. */
 INCLUDE_ASM(func_801FC808);
 
 INCLUDE_ASM(func_801FC8A0);
@@ -378,7 +386,9 @@ MATCH s32 func_801FCD60(void) {
 
 INCLUDE_ASM(func_801FCD68);
 
-INCLUDE_ASM(func_801FD110);
+MATCH s8 func_801FD110(s32 x, s32 y) {
+    SCENE_PROBE_POSITION(D_801FD668, 2, D_801FD674);
+}
 
 MATCH s32 func_801FD178(void) {
     SCENA05_START_SCENE(0x26, 1);

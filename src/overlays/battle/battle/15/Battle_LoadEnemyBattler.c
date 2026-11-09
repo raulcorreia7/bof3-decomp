@@ -31,25 +31,16 @@ MATCH void Battle_LoadEnemyBattler(u8 slot, u8 enemy_index) {
     g_BattleEnemyBattlers[slot].base.defense                                 = ENCOUNTER_ENEMIES[enemy_index].defense;
     g_BattleEnemyBattlers[slot].base.agility                                 = ENCOUNTER_ENEMIES[enemy_index].agility;
     g_BattleEnemyBattlers[slot].base.intellect                               = ENCOUNTER_ENEMIES[enemy_index].intellect;
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FIRE] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_FIRE];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FROST] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_FROST];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_ELECTRIC] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_ELECTRIC];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_EARTH] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_EARTH];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_WIND] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_WIND];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_HOLY] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_HOLY];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_PSIONIC] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_PSIONIC];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_STATUS] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_STATUS];
-    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_DEATH] =
-        ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_DEATH];
-    g_BattleEnemyBattlers[slot].stats = g_BattleEnemyBattlers[slot].base;
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FIRE]             = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_FIRE];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FROST]            = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_FROST];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_ELECTRIC]         = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_ELECTRIC];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_EARTH]            = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_EARTH];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_WIND]             = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_WIND];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_HOLY]             = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_HOLY];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_PSIONIC]          = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_PSIONIC];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_STATUS]           = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_STATUS];
+    g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_DEATH]            = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_DEATH];
+    g_BattleEnemyBattlers[slot].stats                                        = g_BattleEnemyBattlers[slot].base;
 
     g_BattleEnemyBattlers[slot].unk_F0                  = ENCOUNTER_ENEMIES[enemy_index].unk_84[0];
     g_BattleEnemyBattlers[slot].unk_F1                  = ENCOUNTER_ENEMIES[enemy_index].unk_84[1];

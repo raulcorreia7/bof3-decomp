@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried frame pad 24 added (65.85%); search-loop limit as signed local gives blez but
- * regresses; prev/cur address order in compaction loop (retail a0=cur, v1=prev via v0-1). */
 /* func_801C1ABC */
 #ifdef NON_MATCHING
 NON_MATCHING void Party_RemoveMember(s32 character_id) {
@@ -86,12 +84,11 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
                     wsrc += 4;
                     wdst += 4;
                 } while (wsrc != wend);
-                g_Task->unk_05 = (u8)slot;
-                g_Task->unk_26 = (u8)frac;
-                g_Task->unk_27 = (u8)code;
-                g_Task->unk_4B = 0xFF;
-                (&g_Game.members[0].character_index)[off] =
-                    g_CharSlot[FIELD(u8, &g_Game.members[0].chr.character_id, off)];
+                g_Task->unk_05                            = (u8)slot;
+                g_Task->unk_26                            = (u8)frac;
+                g_Task->unk_27                            = (u8)code;
+                g_Task->unk_4B                            = 0xFF;
+                (&g_Game.members[0].character_index)[off] = g_CharSlot[FIELD(u8, &g_Game.members[0].chr.character_id, off)];
             }
             off += BATTLE_PARTY_STRIDE;
             code++;

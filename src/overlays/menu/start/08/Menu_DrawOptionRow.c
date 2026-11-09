@@ -20,8 +20,6 @@ typedef union {
     s32        words[32];
 } WorkArea;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 49.08%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step) {
     WorkArea work;
@@ -64,15 +62,13 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     val3 = val1;
     if ((val4 & BYTE_MASK) == 3) {
         val6 &= BYTE_MASK;
-        UI_DrawText((s16)((val2 + 58) - (strlen(work.fields.strings[val6]) * 4)), (s16)(val1 - 1), 0, 0xFFU,
-                    work.fields.strings[val6]);
+        UI_DrawText((s16)((val2 + 58) - (strlen(work.fields.strings[val6]) * 4)), (s16)(val1 - 1), 0, 0xFFU, work.fields.strings[val6]);
         if (g_MenuStep.state != 1) {
             Menu_DrawCursorSprite((val2 + 4) & HALF_MASK, val3 & HALF_MASK, 0);
         }
     } else {
         val6 &= BYTE_MASK;
-        UI_DrawTextString((s16)((val2 + 58) - (strlen(work.fields.strings[val6]) * 4)), (s16)(val1 + 2), 0, 0xFF,
-                          work.fields.strings[val6]);
+        UI_DrawTextString((s16)((val2 + 58) - (strlen(work.fields.strings[val6]) * 4)), (s16)(val1 + 2), 0, 0xFF, work.fields.strings[val6]);
     }
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
@@ -85,6 +81,5 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     GFX_AddPrim(1U, sizeof(LINE_F2));
 }
 #else
-/* blocker: packed record types for the stack work area. */
 INCLUDE_ASM(Menu_DrawOptionRow);
 #endif

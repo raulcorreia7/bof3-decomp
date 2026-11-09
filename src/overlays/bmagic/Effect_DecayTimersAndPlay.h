@@ -1,7 +1,4 @@
-/* Counts the effect work record's timer bytes 0x09 and 0x0A down while the tick byte 0x0B is under their
- * limits; once the top halfword of the word at 0x08 is zero it plays the effect the target selector chose
- * and raises the effect-playing flag. One definition shared by the bmagic effect modules; every change here
- * must verify every member. */
+/* Counts the effect work record's timer bytes 0x09 and 0x0A down while the tick byte 0x0B is under their limits; once the top halfword of the word at 0x08 is zero it plays the effect the target selector chose and raises the effect-playing flag. */
 /* func_801EEEA8 (magic055), func_801EEEA8 (magic091) */
 MATCH void Effect_DecayTimersAndPlay(void) {
     if (g_Task->param.unk_0B < 4u) {

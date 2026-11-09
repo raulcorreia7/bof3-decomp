@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.25%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DA474(void) {
     s32          val0;
@@ -45,8 +43,8 @@ NON_MATCHING void func_801DA474(void) {
         val1 = 0x61;
     }
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = val1;
-    input_bits = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    tmp4       = Party_CountOrder(PARTY_ORDER_FIELD);
+    input_bits                                                  = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    tmp4                                                        = Party_CountOrder(PARTY_ORDER_FIELD);
     if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A != 0)) {
         D_80148658[0] = (u8)D_80148658[0] ^ 1;
     }

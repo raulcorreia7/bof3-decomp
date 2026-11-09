@@ -51,9 +51,8 @@ MATCH s32 Area_SetCellPalette(s32 x, s32 y) {
                 *((s32*)entry) = command;
                 /* kept: the folded constant address keeps retail's own base load; the member form shares the register
                    of map. */
-                object =
-                    (s32*)((*MEM_PTR(u16, (MAP_BUNDLE_BASE + 0x28)) * 4) + MAP_BUNDLE_BASE + (command & HALF_MASK) * 4);
-                value = *object;
+                object         = (s32*)((*MEM_PTR(u16, (MAP_BUNDLE_BASE + 0x28)) * 4) + MAP_BUNDLE_BASE + (command & HALF_MASK) * 4);
+                value          = *object;
                 if ((value & 0xF001) == 0x8000) {
                     *object = value | 1;
                     changed = 1;

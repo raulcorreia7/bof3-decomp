@@ -1,8 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried 72.01%: u8 record copy base, pointer locals val13/val0 for D_80145FBC/D_1F800008;
- * remaining: record-copy loop biv form (retail lw 0..0xc from a2), D_80146111 compare against g_Game.party_size reg not const
- * 3, hoisted lui a0 base. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B21E8(void) {
     s16*  val0;
@@ -95,12 +92,10 @@ NON_MATCHING void func_801B21E8(void) {
                     tmp4  = g_Task;
                     tmp10 = FIELD(u8, tmp4, 0x8u);
                     tmp1  = val6 + (tmp10 * 4);
-                    val3 =
-                        func_801B1B2C(FIELD(s32, val13, -0xF8) + (*(s32*)(s_EntityPlacementOffsets + tmp1 * 4) << 0xF),
-                                      FIELD(s32, val13, -0xF4) + (*(s32*)(D_801CD08D + tmp1 * 4) << 0xF), (s32)tmp10,
-                                      FIELD(u8, tmp4, 0x70u));
-                    val8 = val3 & BYTE_MASK;
-                    val9 = 0;
+                    val3  = func_801B1B2C(FIELD(s32, val13, -0xF8) + (*(s32*)(s_EntityPlacementOffsets + tmp1 * 4) << 0xF), FIELD(s32, val13, -0xF4) + (*(s32*)(D_801CD08D + tmp1 * 4) << 0xF),
+                                          (s32)tmp10, FIELD(u8, tmp4, 0x70u));
+                    val8  = val3 & BYTE_MASK;
+                    val9  = 0;
                     if (val8 != 0) {
                         val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), g_Task->state_70.byte);
                         val8 = val3 & BYTE_MASK;

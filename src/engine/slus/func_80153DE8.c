@@ -5,9 +5,6 @@
  * 0x38 by 0x1C cell table, fills the identity draw order and builds the first view through func_80154438, func_80157F98
  * and func_80158B24.
  */
-/* nonmatching 70.04%: opcode@+0x004c; the byte-offset reset loop reaches it, but retail keeps the row and prim
- * counters in different saved registers. Pinning them (work/.../best.c, 75.61%) still leaves the +0x00e4 vector
- * destination in a2 instead of a3. resume: a source shape that changes the vector/state copy lifetimes. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80153DE8(void) {
     POLY_FT4* poly;
@@ -27,8 +24,7 @@ NON_MATCHING void func_80153DE8(void) {
     SetBackColor(120, 120, 120);
     prim_base = (u8*)g_AreaCellPrims;
     for (row_offset = 0, row = 0; row_offset < 1024; row_offset++, row += 0x50) {
-        for (i = 0, primitive_row_offset = row, primitive_offset = row, prim = prim_base; i < 2;
-             primitive_offset += 0x28, i++, prim += 0x28) {
+        for (i = 0, primitive_row_offset = row, primitive_offset = row, prim = prim_base; i < 2; primitive_offset += 0x28, i++, prim += 0x28) {
             poly = (POLY_FT4*)(prim + primitive_row_offset);
             SetPolyFT4(poly);
             SetShadeTex(poly, 0);

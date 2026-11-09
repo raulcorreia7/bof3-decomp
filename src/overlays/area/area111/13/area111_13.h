@@ -7,8 +7,9 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-extern u8 D_801F4890[];
-extern u8 D_801F489C[];
+extern Actor D_80147A58[];
+extern u8    D_801F4890[];
+extern u8    D_801F489C[];
 
 void func_801F2DA0(void* arg0, s32 arg1, s32 arg2);
 

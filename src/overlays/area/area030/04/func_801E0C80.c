@@ -5,8 +5,7 @@
 MATCH void func_801E0C80(s32 graphic, s32 layer) {
     s32 tpage;
 
-    tpage = getTPage(D_801E2384[(graphic & BYTE_MASK) << 2], D_801E2388[(graphic & BYTE_MASK) << 2],
-                     D_801E238C[(graphic & BYTE_MASK) << 2], D_801E2390[(graphic & BYTE_MASK) << 2]);
+    tpage = getTPage(D_801E2384[(graphic & BYTE_MASK) << 2], D_801E2388[(graphic & BYTE_MASK) << 2], D_801E238C[(graphic & BYTE_MASK) << 2], D_801E2390[(graphic & BYTE_MASK) << 2]);
 
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim((u8)layer, sizeof(DR_MODE));

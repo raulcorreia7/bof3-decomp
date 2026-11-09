@@ -7,8 +7,6 @@
 #define PAD_C          SP_REF(u8, 0xA)
 #define WDIR           g_Task->direction_08
 
-/* nonmatching unmeasured: tried if-chain compare order, ret var for return 3; pad pointer folds to absolute (retail
- * keeps s0), delay-slot li v0,3 sharing. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801B95E0(void) {
     s16 x;
@@ -87,8 +85,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                     if (WDIR & 1) {
                         return ret;
                     }
-                    probe = Area_ReadStepHeight(x << 0x10, (((s16)FIELD(u16, g_Task, 0x3Au) + y) << 0x10) >> 1, 1)
-                            << 0x10;
+                    probe = Area_ReadStepHeight(x << 0x10, (((s16)FIELD(u16, g_Task, 0x3Au) + y) << 0x10) >> 1, 1) << 0x10;
                     if (PAD_FLAG == 0) {
                         return 3;
                     }
@@ -194,8 +191,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         if ((v & 0xF0) == 0xA0) {
             return func_801BB7B0(8) & BYTE_MASK;
         }
-        probe = Area_ReadStepHeight(((((s16)FIELD(u16, g_Task, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1)
-                << 0x10;
+        probe = Area_ReadStepHeight(((((s16)FIELD(u16, g_Task, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1) << 0x10;
         if (PAD_FLAG != 0) {
             ret = 3;
             if ((probe >> 0x10) >= 0x41) {

@@ -2,9 +2,6 @@
 
 /* Steps the battle cursor row: it nudges the cursor up or down while the actor stands inside the row
  * band, then draws the cursor line and the row marker. */
-/* nonmatching unmeasured: tried the retail loads the work pointer into a0 and the candidate into a1, and the
- * saved-register plan follows from it. resume: a source shape that keeps the work pointer in a0 after the panel call.
- */
 /* func_801D2DC4 */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
@@ -35,8 +32,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     func_801E0C80(0, 2);
     func_801E0DCC(0x11, 2, 135, 180);
     work = g_Task;
-    if ((work->vy == 0) && ((origin_y = work->screen_y, limit = *(&D_80146892 + (g_FishingHookedFish * 0x98)),
-                             step = g_FishingRodRow->byte_03 * 4, (((origin_y + step + 12) < limit) != 0)) ||
+    if ((work->vy == 0) && ((origin_y = work->screen_y, limit = *(&D_80146892 + (g_FishingHookedFish * 0x98)), step = g_FishingRodRow->byte_03 * 4, (((origin_y + step + 12) < limit) != 0)) ||
                             (limit < ((origin_y - step) - 12)))) {
         timer = work->timer;
         if (timer >= 0xFU) {
@@ -116,8 +112,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
         }
         prim = (u8**)marker_clamp;
         Fishing_DrawFishArrow((s16)prim, 203, (s8)((u32) ~*(&D_80146898 + (g_FishingHookedFish * 0x98)) >> 0x1F), 2U);
-        if ((D_80145E92 == 4) && (*(&D_8014688C + (g_FishingHookedFish * 0x98)) != 3) &&
-            ((marker_y < (s32)prim) || ((s32)prim < line_y)) && !(g_FrameCount & 0xF)) {
+        if ((D_80145E92 == 4) && (*(&D_8014688C + (g_FishingHookedFish * 0x98)) != 3) && ((marker_y < (s32)prim) || ((s32)prim < line_y)) && !(g_FrameCount & 0xF)) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 7));
         }
     }

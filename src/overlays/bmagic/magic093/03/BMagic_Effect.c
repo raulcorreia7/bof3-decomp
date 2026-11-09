@@ -18,15 +18,13 @@ MATCH void func_801EF02C(void) {
     }
 }
 
-MATCH void func_801EF080(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF080 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0C4(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
 }
 
-// hint: retail indexes enemy via v1 (lui/addiu base, addu s0,v0,v1) and masks (unk_03+3) with andi; enemy-table forms tried (g_BattleEnemyBattlers[], base+stride) did not match
 INCLUDE_ASM(func_801EF108);
 
 MATCH void func_801EF264(void) {
@@ -140,8 +138,6 @@ INCLUDE_ASM(func_801F01F0);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F0620 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"
 
 INCLUDE_ASM(func_801F0670);

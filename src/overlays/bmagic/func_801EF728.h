@@ -1,6 +1,4 @@
-/* Sways the effect work record D_801F17B0 (BMAGIC_SWAY_EFFECT_WORK). One
- * definition shared by the bmagic overlays; every change here must verify every
- * member. */
+/* Sways the effect work record D_801F17B0 (BMAGIC_SWAY_EFFECT_WORK). */
 /* func_801EF728 (magic162), func_801EF728 (magic168) */
 MATCH void func_801EF728(void) {
     u16 phase;

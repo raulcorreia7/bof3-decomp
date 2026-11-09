@@ -6,7 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-/* Blocker: copies 16 halfwords from 0x80036C00 to 0x8003AC00 (unnamed data, no table yet) and swaps the scratchpad work pointer to g_BattleEffectBattler around Actor_StepAnimLoop. */
 INCLUDE_ASM(func_801EEC88);
 
 INCLUDE_ASM(func_801EED60);
@@ -25,20 +24,19 @@ MATCH void func_801EEED8(void) {
     }
 }
 
-MATCH void func_801EEF60(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF60 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFA4(void) {
     Magic138Steps handlers;
 
-    handlers     = D_801EEC10;
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    handlers      = D_801EEC10;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1) {
         Area_AddActor();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF04C);
@@ -49,17 +47,16 @@ MATCH void func_801EF50C(void) {
     func_801E5988();
 }
 
-/* blocker: constant register; first diff: 0x801EF554 (retail holds 0x800F0800 in v0 and g_Task in v1). */
 MATCH void func_801EF52C(void) {
     Magic138Steps handlers;
 
-    handlers     = D_801EEC1C;
-    g_ScriptBank = BATTLE_SCRIPT_BANK;
+    handlers      = D_801EEC1C;
+    g_ScriptTable = BATTLE_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF5D0(void) {

@@ -1,6 +1,4 @@
-/* Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads between a ring of radius 32 at pos and the
- * same ring 0x800 units higher, with a shade that alternates each frame and steps by 4 per segment. One definition
- * shared by the area overlays; every change here must verify every member. */
+/* Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads between a ring of radius 32 at pos and the same ring 0x800 units higher, with a shade that alternates each frame and steps by 4 per segment. */
 /* func_801F2DF0 (area036), func_801F30A8 (area059), func_801F3D70 (area100), func_801F3EEC (area112), func_801F2F78
  * (area116), func_801F3FDC (area143), func_801F2E68 (area146) */
 MATCH void Area_DrawLightPillar(s32* pos) {
@@ -39,8 +37,7 @@ MATCH void Area_DrawLightPillar(s32* pos) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
-        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx,
-               outer.vy);
+        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
         setRGB0(prim, shade, shade, shade);
         setRGB1(prim, shade, shade, shade);
         if ((u8)(i - 4) >= 8) {

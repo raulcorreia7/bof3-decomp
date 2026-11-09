@@ -26,8 +26,7 @@ MATCH bool Char_TestAbilityRole(s32 bit, s32 role, ItemCategory category, s32 it
         if ((equip_slot & BYTE_MASK) < 4u && (equip_slot & BYTE_MASK) == (role & BYTE_MASK)) {
             return 1;
         }
-        if ((equip_slot & BYTE_MASK) == 4 &&
-            ((role & BYTE_MASK) == (equip_slot & BYTE_MASK) || (role & BYTE_MASK) == 5)) {
+        if ((equip_slot & BYTE_MASK) == 4 && ((role & BYTE_MASK) == (equip_slot & BYTE_MASK) || (role & BYTE_MASK) == 5)) {
             return 1;
         }
     }

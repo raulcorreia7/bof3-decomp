@@ -1,6 +1,5 @@
 #include "battle_15.h"
 
-/* nonmatching 86.89%: branch@+0x0000; the second refresh loop still schedules differently. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009FB38(void) {
     Character* stat_base;
@@ -29,8 +28,7 @@ NON_MATCHING void func_8009FB38(void) {
             active_count = (volatile u8*)(selected_battler_address - 0xA4);
             do {
                 row_offset    = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
-                src           = (Character*)(((&g_Game.members[0].character_index)[row_offset] * PARTY_RECORD_STRIDE) +
-                                             ((u8*)src_base));
+                src           = (Character*)(((&g_Game.members[0].character_index)[row_offset] * PARTY_RECORD_STRIDE) + ((u8*)src_base));
                 dst_row       = dst_base + row_offset;
                 dst_row[0x0E] = src->equip.weapon;
                 dst_row[0x0F] = src->equip.shield;

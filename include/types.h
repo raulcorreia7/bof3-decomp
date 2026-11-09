@@ -1,9 +1,7 @@
 #ifndef BASE_TYPES_H
 #define BASE_TYPES_H
 
-/* The fixed-width types and compile-time layout checks shared by every game
- * header. A record asserts its size and each known member offset where it is
- * declared, so a wrong layout fails the build. */
+/* A record asserts its size and each known member offset where it is declared, so a wrong layout fails the build. */
 
 #include <stddef.h>
 
@@ -14,18 +12,17 @@
  * assertions sit on. A name is asserted once per translation unit, and `type`
  * must be one identifier (a typedef name), because it is pasted into it.
  */
-#define DECOMP_JOIN_IMPL(a, b)           a##b
-#define DECOMP_JOIN(a, b)                DECOMP_JOIN_IMPL(a, b)
+#define DECOMP_JOIN_IMPL(a, b)                       a##b
+#define DECOMP_JOIN(a, b)                            DECOMP_JOIN_IMPL(a, b)
 
-#define STATIC_ASSERT(name, condition)   typedef char DECOMP_JOIN(static_assertion_, name)[(condition) ? 1 : -1]
+#define STATIC_ASSERT(name, condition)               typedef char DECOMP_JOIN(static_assertion_, name)[(condition) ? 1 : -1]
 
-#define ASSERT_SIZE(type, expected_size) STATIC_ASSERT(type, sizeof(type) == (expected_size))
+#define ASSERT_SIZE(type, expected_size)             STATIC_ASSERT(type, sizeof(type) == (expected_size))
 
 /* PsyQ 3.7's <stddef.h> shadows the compiler's and does not define offsetof. */
-#define DECOMP_OFFSETOF(type, member)    ((size_t)&((type*)0)->member)
+#define DECOMP_OFFSETOF(type, member)                ((size_t)&((type*)0)->member)
 
-#define ASSERT_OFFSET(type, member, expected_offset) \
-    STATIC_ASSERT(DECOMP_JOIN(type, DECOMP_JOIN(_offset_, member)), DECOMP_OFFSETOF(type, member) == (expected_offset))
+#define ASSERT_OFFSET(type, member, expected_offset) STATIC_ASSERT(DECOMP_JOIN(type, DECOMP_JOIN(_offset_, member)), DECOMP_OFFSETOF(type, member) == (expected_offset))
 
 /* PsyQ has no boolean type; the game returns flags as an int. C23 and C++ define bool,
  * true and false themselves, so this is only for older C. */

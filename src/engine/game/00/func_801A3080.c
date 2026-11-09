@@ -1,8 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried if (dir != N) value = -value shared sll/sra (79.39%); saved regs rotated: retail keeps
- * facing in s3 and a separate type copy in s1 (gcc copy-propagates type over facing), angle_x/angle_y in s4/s5;
- * declaration-order shuffles (150) no gain. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     Actor* work;
@@ -32,9 +29,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
 
     dir = type & BYTE_MASK;
     if ((work->vx + work->vy) != 0) {
-        value = (s16)(Area_SampleHeight(work->pos.x.fixed + g_FacingSteps[dir].x,
-                                        work->pos.y.fixed + g_FacingStepY[dir * 2]) -
-                      COORD_INT(g_Task->pos.z));
+        value = (s16)(Area_SampleHeight(work->pos.x.fixed + g_FacingSteps[dir].x, work->pos.y.fixed + g_FacingStepY[dir * 2]) - COORD_INT(g_Task->pos.z));
         if (facing & 2) {
             g_Task->unk_64 = 0;
             if (dir != 3) {

@@ -2,9 +2,6 @@
 
 /* Runs the area-030 command menu: cursor movement, cancel/confirm buttons, command cycling and the selected
  * page title. */
-/* nonmatching unmeasured: tried opcode@+0x0: entry pad/title selection block and the command-cycle switch do not
- * reproduce the retail prologue and case layout; menu logic is in place. resume: rebuild the switch as the retail case
- * 0/1/default order and re-check the pad mask split. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DC93C(void) {
     s32 pad;
@@ -38,8 +35,7 @@ NON_MATCHING void func_801DC93C(void) {
             SND_FadeInSequence(0, 0, 0x14, 0x10);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             new_cmd = 5;
-            if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) ||
-                (new_cmd = 0xF, (cmd == 0xE))) {
+            if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) || (new_cmd = 0xF, (cmd == 0xE))) {
                 D_80144281 = new_cmd;
             }
             D_8014428B = 0;

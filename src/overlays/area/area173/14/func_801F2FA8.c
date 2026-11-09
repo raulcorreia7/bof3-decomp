@@ -1,3 +1,5 @@
 #include "area173_14.h"
 
-INCLUDE_ASM(func_801F2FA8);
+MATCH void func_801F2FA8(void) {
+    AREA_CYCLE_FRAME(0x1C, 0)
+}

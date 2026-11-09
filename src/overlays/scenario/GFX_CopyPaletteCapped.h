@@ -1,8 +1,4 @@
-/* Copies the 16-colour palette at 0x80033800 to the palette upload buffer with
- * each 5-bit colour component limited to the low byte of its argument, sets
- * the semi-transparency bit on non-black colours and flags the upload. One
- * definition shared by the scenario overlays; every change here must verify
- * every member. */
+/* Copies the 16-colour palette at 0x80033800 to the palette upload buffer with each 5-bit colour component limited to the low byte of its argument, sets the semi-transparency bit on non-black colours and flags the upload. */
 /* func_801FB0B8 (scena13), func_801F83B0 (scena16) */
 MATCH void GFX_CopyPaletteCapped(u32 intensity) {
     s32 component_index;

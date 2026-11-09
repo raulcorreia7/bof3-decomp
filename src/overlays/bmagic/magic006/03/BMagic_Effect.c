@@ -12,9 +12,8 @@ INCLUDE_ASM(func_801EEC90);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEE04(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEE04 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE48(void) {
     BMagicEffectFuncs handlers;
@@ -45,10 +44,7 @@ MATCH void func_801EEF28(void) {
         battler        = g_Battle.selected_actor;
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_10 = 0;
-        g_Task->unk_14 = (ratan2((s16)battler->unk_2E.half - (s16)g_Task->unk_2E.half,
-                                 (s16)battler->unk_30.half - (s16)g_Task->unk_30.half) -
-                          0x200) &
-                         0xFFF;
+        g_Task->unk_14 = (ratan2((s16)battler->unk_2E.half - (s16)g_Task->unk_2E.half, (s16)battler->unk_30.half - (s16)g_Task->unk_30.half) - 0x200) & 0xFFF;
         SND_QueueSelectionFx(0x100);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;

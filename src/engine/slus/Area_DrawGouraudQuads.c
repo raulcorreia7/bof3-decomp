@@ -37,8 +37,7 @@ MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
                 v[i].vy = shift_y + parts[n].vertex.y * 2;
                 v[i].vz = parts[n].raw;
             }
-            RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2,
-                          (long*)&prim->x3, (long*)&prim->x0, &p, &flag);
+            RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, (long*)&prim->x0, &p, &flag);
             SetSemiTrans(prim, (rec[0].raw >> 31));
             setRGB0(prim, (rec[0].raw >> 16), (rec[0].raw >> 8), rec[0].raw);
             rec++;

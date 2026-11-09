@@ -17,9 +17,8 @@ MATCH s32 func_801EF0CC(void) {
     return 0;
 }
 
-MATCH void func_801EF108(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF108 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF14C(void) {
     SYS_DISPATCH_BYTE(D_801F0EF0, g_Task->header.step);
@@ -72,7 +71,6 @@ MATCH void func_801EFE98(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
-/* blocker: y offset order; first diff: +0x94 sll v1,v0,1 (retail finishes the rcos*0xB0>>3 product before loading g_BattleEffectBattler for y and z, cached in a1) against the battler load first (candidate); body is the angle-ring start of magic213 with radius 0xB0 >> 3. */
 INCLUDE_ASM(func_801EFEDC);
 
 MATCH void func_801F0010(void) {
@@ -174,7 +172,6 @@ MATCH void func_801F01F8(void) {
     }
 }
 
-/* hint: 3-image twin (magic062 00EC, 082 0260, 083 038C): spiral position update; everything matches except the s16 radius cell at 0x1F800000: retail uses a separate lui per access, a cast view of D_1F800000 hoists the base into s1 (needs an s16 alias symbol for 0x1F800000, scratch draft b26-magic062.c) */
 INCLUDE_ASM(func_801F038C);
 
 INCLUDE_ASM(func_801F050C);
@@ -185,6 +182,4 @@ INCLUDE_ASM(func_801F0BA8);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F0E24 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

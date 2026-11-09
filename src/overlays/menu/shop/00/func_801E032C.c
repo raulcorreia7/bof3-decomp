@@ -1,7 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned with a byte cursor and typed cell table. resume: close the
- * +0x14 prologue store order (s2 frame). */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E032C(void) {
     s32 input;

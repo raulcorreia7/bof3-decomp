@@ -1,6 +1,4 @@
-/* Reloads the effect timer (work byte 0x09) with the value EFFECT_TIMER_RELOAD returns
- * and advances the effect step (work byte 0x02). One definition shared by the
- * bmagic effect modules; every change here must verify every member. */
+/* Reloads the effect timer (work byte 0x09) with the value EFFECT_TIMER_RELOAD returns and advances the effect step (work byte 0x02). */
 /* Effect_SetDuration (magic009 through EFFECT_TIMER_RELOAD, magic004, magic008, magic021, magic065, magic154,
    magic161), Effect_ReloadTimerAndStep2 (magic008) */
 /* The function whose return value reloads the timer; an image header sets it,

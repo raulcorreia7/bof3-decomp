@@ -63,9 +63,8 @@ MATCH void Effect_StartPlaying4(void) {
     BATTLE_RAISE_EFFECT_PLAYING();
 }
 
-MATCH void func_801EF9E4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF9E4 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EFA28(void) {
     Magic015SecondSteps handlers = D_801EEC34;
@@ -95,10 +94,8 @@ MATCH void func_801EFB90(void) {
     }
 }
 
-/* hint: a FAKE_BARRIER before the unk_20 store reloads g_Task as retail does; first differing instruction is li v0,-8 at +0xC0 (candidate nop in the load delay slot). */
 INCLUDE_ASM(func_801EFBD8);
 
-/* Blocker: the z halfword at +0x3E is loaded unsigned (lhu) and summed with the 0x14 cell; COORD_INT is s16, so it gives lh. Same blocker as func_801F0DB4. */
 INCLUDE_ASM(func_801EFCC4);
 
 MATCH void func_801EFD7C(void) {
@@ -111,7 +108,6 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
-/* blocker: the halfword at +0x3E (the z-span halfword, upper half of pos.z) has no PartyMember member; needs: type. */
 INCLUDE_ASM(func_801EFDE8);
 
 MATCH void func_801EFE84(void) {
@@ -172,10 +168,8 @@ MATCH void func_801F014C(void) {
     }
 }
 
-/* hint: a FAKE_BARRIER before the unk_20 store reloads g_Task as retail does; first differing instruction is li v0,-8 at +0x88 (candidate nop in the load delay slot). */
 INCLUDE_ASM(func_801F0194);
 
-/* hint: blocker is the z halfword at +0x3E, read and stored unsigned (lhu/sh) by this function; COORD_INT is s16 (lh). Needs an unsigned view of pos.z. */
 INCLUDE_ASM(func_801F0248);
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
@@ -212,7 +206,6 @@ MATCH void func_801F045C(void) {
     }
 }
 
-/* hint: blocker is the z halfword at +0x3E, read unsigned (lhu at +0x3C and +0x9C) and stored with sh; COORD_INT is s16. Needs the unsigned z view. */
 INCLUDE_ASM(func_801F0570);
 
 MATCH void func_801F0654(void) {
@@ -242,7 +235,6 @@ MATCH void func_801F0654(void) {
     }
 }
 
-/* hint: m2c draft with the task cached in a0 and unk_48..scale in a second local is 12 over; first differing instruction: lbu v0,9(a0) at +0x28 where retail holds the timer in v1 and the z in v0. */
 INCLUDE_ASM(func_801F0770);
 
 INCLUDE_ASM(func_801F0864);
@@ -270,10 +262,8 @@ MATCH void func_801F0D48(void) {
     g_Task->header.step += 1;
 }
 
-/* Blocker: retail reads the z halfword at +0x3E unsigned (lhu) and loads the 0x14 cell before the 0x09 decrement; COORD_INT is s16 (lh). Needs an unsigned halfword view of pos.z. */
 INCLUDE_ASM(func_801F0DB4);
 
-/* hint: first differing instruction is the beqz at +0x50 (candidate one instruction short): retail reloads g_Task (lui/lw) before the unk_14 store; a FAKE_BARRIER there moves the li 0x48 out of the branch delay slot. */
 INCLUDE_ASM(func_801F0E54);
 
 MATCH void func_801F0F2C(void) {

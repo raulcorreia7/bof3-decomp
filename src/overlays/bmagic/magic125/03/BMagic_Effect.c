@@ -28,9 +28,8 @@ INCLUDE_ASM(func_801EED04);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEEC0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEEC0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF04(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 2), 2, g_Task);
@@ -154,7 +153,6 @@ INCLUDE_ASM(func_801EFB8C);
 
 INCLUDE_ASM(func_801EFCE4);
 
-/* hint: matches the plain draft except the angle sum (unk_09 + (unk_0B & 7) * 8) << 6 adds with the operands swapped and the z add loads the work pointer into a1. */
 INCLUDE_ASM(func_801EFE8C);
 
 INCLUDE_ASM(func_801EFFC8);
@@ -165,6 +163,4 @@ INCLUDE_ASM(func_801F020C);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F0588 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

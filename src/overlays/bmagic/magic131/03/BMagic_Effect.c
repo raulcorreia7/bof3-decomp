@@ -8,7 +8,6 @@ INCLUDE_ASM(func_801EEC24);
 
 INCLUDE_ASM(func_801EEDEC);
 
-/* blocker: dragon-form switch layout; first diff: bnez v0 at 0x801EEF88 (signed compare slti in retail). */
 INCLUDE_ASM(func_801EEF64);
 
 INCLUDE_ASM(func_801EF000);
@@ -54,9 +53,8 @@ MATCH void func_801EF488(void) {
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-MATCH void func_801EF668(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF668 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EF6AC);
 
@@ -182,7 +180,6 @@ MATCH void func_801F0438(void) {
     }
 }
 
-/* blocker: actor load schedule; first diff: lui a0 at +0x10. */
 INCLUDE_ASM(func_801F04C0);
 
 MATCH void func_801F053C(void) {
@@ -219,7 +216,6 @@ MATCH void func_801F0B44(void) {
     }
 }
 
-/* blocker: coordinate and actor load schedule; first diff: lui a0 at +0x08. */
 INCLUDE_ASM(func_801F0BCC);
 
 MATCH void func_801F0C4C(void) {

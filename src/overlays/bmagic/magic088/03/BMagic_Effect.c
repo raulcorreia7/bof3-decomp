@@ -4,7 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* blocker: frame 0x30 against retail 0x38; first diff: 0x801EEC28. */
 INCLUDE_ASM(func_801EEC20);
 
 INCLUDE_ASM(func_801EECA4);
@@ -41,7 +40,6 @@ MATCH void func_801EEFA0(void) {
 
 #include "overlays/bmagic/Effect_Pause.h"
 
-/* hint: the two palette-offset adds, the zero test and the actor local leave the frame 8 bytes small (24 against 32); first differing instruction: addiu sp,sp,-24 at +0x8; the retail body also loads the selected actor into a0 before the first store. */
 INCLUDE_ASM(func_801EF0A8);
 
 INCLUDE_ASM(func_801EF1AC);
@@ -82,9 +80,8 @@ MATCH s32 func_801EF34C(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF4E0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF4E0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF524(void) {
     SYS_DISPATCH_BYTE(D_801F0030, g_Task->header.step);

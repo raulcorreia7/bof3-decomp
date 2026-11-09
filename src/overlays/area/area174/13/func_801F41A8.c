@@ -1,3 +1,3 @@
 #include "area174_13.h"
 
-INCLUDE_ASM(func_801F41A8);
+#include "overlays/area/Actor_BeginScriptFromAreaTableAtStart.h"

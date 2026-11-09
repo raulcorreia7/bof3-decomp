@@ -12,12 +12,11 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEF78(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF78 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFBC(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F06E0, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
         func_8014D290();
@@ -26,10 +25,9 @@ MATCH void func_801EEFBC(void) {
         BMagic_DrawDarkRing();
         PopMatrix();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-/* blocker: work pointer lifetime; first diff: lui v0 at +0x84. */
 INCLUDE_ASM(func_801EF078);
 
 MATCH void func_801EF1F4(void) {
@@ -48,7 +46,6 @@ MATCH void func_801EF1F4(void) {
 
 INCLUDE_ASM(func_801EF294);
 
-/* blocker: y register merge; first diff: lw v0,56(a1) (retail) against lw v1,56(a1) (candidate). */
 MATCH void func_801EF40C(void) {
     if (g_FrameCount & 1) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
@@ -58,7 +55,7 @@ MATCH void func_801EF40C(void) {
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_0C;
     }
     if (--g_Task->unk_09 == 0) {
-        g_Task->unk_09 = 8;
+        g_Task->unk_09      = 8;
         g_Task->header.step--;
     }
 }
@@ -110,10 +107,8 @@ MATCH void func_801EFFA4(void) {
     }
 }
 
-/* The y position loads g_BattleEffectBattler before the rcos multiply; retail multiplies first (first diff at 0x801F0094). The x position matches. */
 INCLUDE_ASM(func_801F002C);
 
-/* Retail reloads g_Task after the rsin call and before the 24x multiply; the draft multiplies first (first diff at 0x801F0140). Needs the extern D_1F800004 (u16) in magic220_03.h. */
 INCLUDE_ASM(func_801F010C);
 
 INCLUDE_ASM(func_801F01C8);
@@ -126,6 +121,4 @@ INCLUDE_ASM(func_801F0334);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F068C */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

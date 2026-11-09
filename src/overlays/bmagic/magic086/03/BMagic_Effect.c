@@ -37,9 +37,8 @@ INCLUDE_ASM(func_801EF024);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF278(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF278 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF2BC(void) {
     SYS_DISPATCH_BYTE(D_801F0360, g_Task->header.step);
@@ -92,7 +91,6 @@ MATCH void func_801EF70C(void) {
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
-/* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
 MATCH void func_801EF7D4(void) {
     u8 count;
 

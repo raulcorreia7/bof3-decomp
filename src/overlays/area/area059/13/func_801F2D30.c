@@ -2,6 +2,5 @@
 #include "area/map.h"
 
 MATCH void func_801F2D30(void) {
-    Game_RequestAreaChange(AREA_ID_WYNDIA_BASEMENT_TELEPORTER, TO_COORD(70), TO_COORD(52),
-                           AREA_ENTRY_MAP_LOADING | FACING_UP);
+    Game_RequestAreaChange(AREA_ID_WYNDIA_BASEMENT_TELEPORTER, TO_COORD(70), TO_COORD(52), AREA_ENTRY_MAP_LOADING | FACING_UP);
 }

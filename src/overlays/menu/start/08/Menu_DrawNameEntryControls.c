@@ -68,8 +68,7 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
 
     /* The window. */
     GFX_AddDitheredDrawMode(1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
-    UI_DrawWindow(x + CONTROLS_WINDOW_INSET, y + CONTROLS_WINDOW_INSET, CONTROLS_WINDOW_WIDTH, CONTROLS_WINDOW_HEIGHT,
-                  0, g_WindowStyle);
+    UI_DrawWindow(x + CONTROLS_WINDOW_INSET, y + CONTROLS_WINDOW_INSET, CONTROLS_WINDOW_WIDTH, CONTROLS_WINDOW_HEIGHT, 0, g_WindowStyle);
 
     /* The panel sprite. */
     GFX_AddDrawMode(GetTPage(0, 0, CONTROLS_SPRITE_TPAGE_X, CONTROLS_SPRITE_TPAGE_Y));
@@ -87,45 +86,36 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
 
     /* The command labels. */
     for (row = 0; row < NAME_ENTRY_COMMAND_COUNT; row++) {
-        UI_DrawTextString(x + CONTROLS_LABEL_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0,
-                          CONTROLS_LABEL_LENGTH, g_NameEntryCommandLabels[row]);
+        UI_DrawTextString(x + CONTROLS_LABEL_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, CONTROLS_LABEL_LENGTH, g_NameEntryCommandLabels[row]);
     }
 
     /* The footer icons, on the row after the last label (row is NAME_ENTRY_COMMAND_COUNT here). */
-    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0,
-                       CONTROLS_ICON_FOOTER_V, GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X + CONTROLS_ICON_STEP, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y,
-                       1, CONTROLS_ICON_FOOTER_V, GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X + 2 * CONTROLS_ICON_STEP,
-                       top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 2, CONTROLS_ICON_FOOTER_V,
-                       GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X + 3 * CONTROLS_ICON_STEP,
-                       top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 3, CONTROLS_ICON_FOOTER_V,
-                       GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, CONTROLS_ICON_FOOTER_V, GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X + CONTROLS_ICON_STEP, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 1, CONTROLS_ICON_FOOTER_V, GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X + 2 * CONTROLS_ICON_STEP, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 2, CONTROLS_ICON_FOOTER_V, GetClut(0, MENU_ICON_CLUT_Y),
+                       CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_LABEL_X + 3 * CONTROLS_ICON_STEP, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 3, CONTROLS_ICON_FOOTER_V, GetClut(0, MENU_ICON_CLUT_Y),
+                       CONTROLS_ICON_SHADE);
 
     /* The dot grid. */
     for (row = 0; row < CONTROLS_DOT_ROWS; row++) {
         for (column = 0; column < CONTROLS_DOT_COLUMNS; column++) {
-            UI_DrawTextString(left + column * CONTROLS_DOT_STEP + CONTROLS_DOT_X,
-                              top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, 1, g_NameEntryGridDot);
+            UI_DrawTextString(left + column * CONTROLS_DOT_STEP + CONTROLS_DOT_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, 1, g_NameEntryGridDot);
         }
     }
 
     /* The button icons, blended. */
     GFX_AddDrawMode(getTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
 
-    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y, CONTROLS_ICON_OK, CONTROLS_ICON_BUTTONS_V,
-                       GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y + CONTROLS_ROW_HEIGHT, CONTROLS_ICON_DEL,
-                       CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y + 2 * CONTROLS_ROW_HEIGHT, CONTROLS_ICON_NEXT,
-                       CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y + 3 * CONTROLS_ROW_HEIGHT, CONTROLS_ICON_BACK,
-                       CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_PAIR_X, top + CONTROLS_FOOTER_Y, CONTROLS_ICON_PAIR_FIRST, CONTROLS_ICON_PAIR_V,
-                       GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
-    Menu_DrawPanelIcon(left + CONTROLS_PAIR_X + CONTROLS_ICON_STEP, top + CONTROLS_FOOTER_Y, CONTROLS_ICON_PAIR_SECOND,
-                       CONTROLS_ICON_PAIR_V, GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y, CONTROLS_ICON_OK, CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y + CONTROLS_ROW_HEIGHT, CONTROLS_ICON_DEL, CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y),
+                       CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y + 2 * CONTROLS_ROW_HEIGHT, CONTROLS_ICON_NEXT, CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y),
+                       CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y + 3 * CONTROLS_ROW_HEIGHT, CONTROLS_ICON_BACK, CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y),
+                       CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_PAIR_X, top + CONTROLS_FOOTER_Y, CONTROLS_ICON_PAIR_FIRST, CONTROLS_ICON_PAIR_V, GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
+    Menu_DrawPanelIcon(left + CONTROLS_PAIR_X + CONTROLS_ICON_STEP, top + CONTROLS_FOOTER_Y, CONTROLS_ICON_PAIR_SECOND, CONTROLS_ICON_PAIR_V, GetClut(0, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
 
     /* The window frame. */
     return func_801AF390(left, top, g_NameEntryControlsFrame, 0);

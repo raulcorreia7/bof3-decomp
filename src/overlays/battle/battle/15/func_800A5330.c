@@ -14,8 +14,6 @@
 
 /* The Accession gene picker: moves the cursor over the gene grid, adds or removes up to GENE_PICK_MAX genes and
  * confirms when the party member has the AP. */
-/* blocker: retail spills the function-wide g_Battle.gene_count address (unused 8-byte slot, absolute loads in the
- * confirm branch); the draft keeps it in s0. First diff: addiu sp,sp,-48. Tried: a local count pointer. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A5330(void) {
     s32 row;
@@ -31,8 +29,7 @@ NON_MATCHING void func_800A5330(void) {
     if (row != -1) {
         col = g_Battle.cursor.gene.column;
         if (D_800B7070[row][col] != 0) {
-            func_801DE60C(0, 1, 1, 0, GAME_NONE,
-                          Message_GetText((u16)(col + (row * GENE_GRID_COLUMNS + GENE_NAME_TEXT))));
+            func_801DE60C(0, 1, 1, 0, GAME_NONE, Message_GetText((u16)(col + (row * GENE_GRID_COLUMNS + GENE_NAME_TEXT))));
         } else {
             func_801DE60C(0, 1, 1, 0, GAME_NONE, Message_GetText(BLANK_TEXT));
         }
@@ -65,9 +62,8 @@ NON_MATCHING void func_800A5330(void) {
                 return;
             }
             if (g_Battle.gene_count < GENE_PICK_MAX) {
-                *cell = 0;
-                g_Battle.genes[g_Battle.gene_count] =
-                    g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
+                *cell                               = 0;
+                g_Battle.genes[g_Battle.gene_count] = g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
                 g_Battle.gene_count++;
                 func_800A82F8();
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));

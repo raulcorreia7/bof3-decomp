@@ -10,9 +10,8 @@ INCLUDE_ASM(func_801EECFC);
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
-MATCH void func_801EEEE4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEEE4 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EEF28);
 
@@ -35,8 +34,7 @@ MATCH void func_801EF12C(void) {
     s32 target;
     s32 dir;
 
-    angle = ratan2(g_Battle.selected_actor->pos.y.fixed - g_Task->pos.y.fixed,
-                   g_Battle.selected_actor->pos.x.fixed - g_Task->pos.x.fixed);
+    angle = ratan2(g_Battle.selected_actor->pos.y.fixed - g_Task->pos.y.fixed, g_Battle.selected_actor->pos.x.fixed - g_Task->pos.x.fixed);
     dir   = g_Task->unk_0C;
     if (dir < 0) {
         dir += 0x3F;
@@ -90,7 +88,6 @@ MATCH void func_801EF2CC(void) {
 
 INCLUDE_ASM(func_801EF318);
 
-/* Blocker: GTE path (SetLineF4, SetSemiTrans, RotAverage4) with a stack-built quad; no C draft yet. */
 INCLUDE_ASM(func_801EFE14);
 
 MATCH void func_801EFEB8(void) {

@@ -34,12 +34,7 @@ extern u8 D_80146866;
 /* One row of the sample table at D_80147BD8: twelve sample offsets and three
  * weights per 0x28-byte record. */
 
-/* One 0x28-byte entry of the source table at D_80147BD8, shared by
- * func_801FC01C and func_801FC3A0, which carried identical file-local copies.
- * The stride is a retail read: func_801FC01C walks the table as
- * `(SceneSampleRecord *)(i * 0x28 + base)`. Twelve s16 samples sit at
- * +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the
- * halfwords read here are named, the rest stays unresolved padding. */
+/* The stride is a retail read: func_801FC01C walks the table as `(SceneSampleRecord *)(i * 0x28 + base)`. Twelve s16 samples sit at +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the halfwords read here are named, the rest stays unresolved padding. */
 typedef struct SceneSampleRecord {
     u8  unk_00[2];
     s16 sample[SCENE_FX_CELL_COUNT];
@@ -49,27 +44,11 @@ typedef struct SceneSampleRecord {
 
 ASSERT_SIZE(SceneSampleRecord, 0x28);
 
-/* Field elevation at +0x3C: func_801F74EC copies the actor's 16.16 height;
- * func_801F78EC projects its signed integer part. */
-typedef union SceneElevation {
-    s32 fixed_point; /* 0x00 */
-
-    struct {
-        u16 fraction; /* 0x00 */
-        s16 height;   /* 0x02 */
-    } parts;
-} SceneElevation;
-
-ASSERT_SIZE(SceneElevation, 4);
-ASSERT_OFFSET(SceneElevation, fixed_point, 0x00);
-ASSERT_OFFSET(SceneElevation, parts, 0x00);
-STATIC_ASSERT(SceneElevation_parts_height, DECOMP_OFFSETOF(SceneElevation, parts.height) == 2);
-
 /* Field-space endpoints passed by value to func_801F78EC. */
 typedef struct SceneLinePoint {
-    s32            x;
-    s32            y;
-    SceneElevation z;
+    s32   x;
+    s32   y;
+    Coord z;
 } SceneLinePoint;
 
 ASSERT_SIZE(SceneLinePoint, 0x0C);
@@ -169,10 +148,10 @@ typedef struct Scene00Tables {
     s8             unk_68;          /* 0x068 D_801FC9E8 */
     s8             unk_69;          /* 0x069 D_801FC9E9 */
     u8             pad_6A[2];
-    s8             unk_6C[4];  /* 0x06C D_801FC9EC */
-    u8             unk_70[12]; /* 0x070; no static reader */
-    Callback       unk_7C[4];  /* 0x07C func_801F913C, Scene_DispatchActor, Scene_CheckStepTrigger, func_801FC8F4 */
-    /* 0x8C */ u32 zero;       /* 0x08C; null terminator */
+    s8             unk_6C[4];       /* 0x06C D_801FC9EC */
+    u8             unk_70[12];      /* 0x070; no static reader */
+    Callback       unk_7C[4];       /* 0x07C func_801F913C, Scene_DispatchActor, Scene_CheckStepTrigger, func_801FC8F4 */
+    /* 0x8C */ u32 zero;            /* 0x08C; null terminator */
     Callback       handlers_90[15]; /* 0x090 D_801FCA10; D_801FCA1C at +0x0C */
     u8             table_CC[16];    /* 0x0CC D_801FCA4C */
     u8             table_DC[8];     /* 0x0DC D_801FCA5C */

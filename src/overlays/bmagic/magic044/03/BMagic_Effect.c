@@ -12,9 +12,8 @@ INCLUDE_ASM(func_801EEC5C);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEE00(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEE00 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE44(void) {
     SYS_DISPATCH_BYTE(D_801F0A1C, g_Task->header.step);
@@ -66,10 +65,8 @@ MATCH void func_801F04F0(void) {
     g_Task->header.step += 1;
 }
 
-/* blocker: retail reloads g_Task after rand() for the 0x09 update; first diff: lhu v0 against lbu v0 at 0x801F05C8. */
 INCLUDE_ASM(func_801F05AC);
 
-/* blocker: retail reloads g_Task after rand() for both the 0x2E and timer updates; first diff: lui v1 against a0 at 0x801F0664. */
 INCLUDE_ASM(func_801F0638);
 
 INCLUDE_ASM(func_801F06D8);

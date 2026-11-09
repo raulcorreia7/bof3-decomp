@@ -1,5 +1,4 @@
-/* The inventory panel of the camp, battle-camp, master and shop menus: start/08, bate/00, shisu/00 and shop/00
- * include it where the function sits, and each image header declares its g_MenuInventory* tables. */
+/* The inventory panel of the camp, battle-camp, master and shop menus. */
 /* needs: type: D_80148656 is read signed here and unsigned by its other readers. */
 extern u8 D_80148656;
 
@@ -24,8 +23,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     s32  title_x;
     u8   scroll_shift;
 
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT,
-                  task->unk_09, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);
     first  = func_801AFD10(&task->unk_0B, &scroll_y, &scroll_rows, (u8*)&task->u.list.scroll);
     y      = task->pos.y + (s8)scroll_y;
     ids    = D_801C893C[task->unk_0A] + first;
@@ -34,9 +32,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
         item = *ids;
         if (item != 0) {
             unusable = false;
-            if (task->unk_09 != 0 ||
-                (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], task->unk_0A, item) &
-                 BYTE_MASK) == 0) {
+            if (task->unk_09 != 0 || (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], task->unk_0A, item) & BYTE_MASK) == 0) {
                 unusable = true;
             }
             dim   = unusable;
@@ -69,24 +65,17 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
         y += 13;
     }
 
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT,
-                  task->unk_09, CHARACTER_BLOCK->window_style);
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 146, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT,
-                  task->unk_09, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 146, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);
     title   = &g_MenuInventoryTitles[task->unk_0A];
     length  = func_801AF20C(*title);
     title_x = length * 4 - 78;
     UI_DrawText(task->pos.x - title_x, task->pos.y + 7, -(task->unk_09 != 0) & MENU_SHADE_DIM, 16, *title);
-    sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK,
-            task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
+    sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
     UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 146, -(task->unk_09 != 0) & MENU_SHADE_DIM, g_UiFormatBuffer);
 
-    UI_DrawSpriteRun(task->pos.x, task->pos.y,
-                     (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites,
-                     1);
-    UI_DrawSpriteRun(
-        task->pos.x, task->pos.y,
-        (task->u.list.tabs & MENU_LIST_FLAG_TAB_1) ? g_MenuInventoryTab1OnSprites : g_MenuInventoryTab1OffSprites, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_1) ? g_MenuInventoryTab1OnSprites : g_MenuInventoryTab1OffSprites, 1);
     tabs = task->u.list.tabs;
     if ((tabs & MENU_LIST_FRAME_MASK) == 0) {
         task->u.list.tabs = 0;
@@ -119,6 +108,5 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
         UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x33, 1);
     }
 
-    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 9,
-                  task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS, 116);
+    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 9, task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS, 116);
 }

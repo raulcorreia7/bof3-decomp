@@ -3,10 +3,6 @@
 /* The command ring holds sixteen handles. */
 #define BATTLE_RING_SLOT_MASK 0xF
 
-/* nonmatching unmeasured: tried the pad-state address: retail keeps it in s0 and re-reads the pad state through that
- * register, the candidate reloads the address for each use; tried: the resource select split from the ring store, a
- * pad-state pointer local, one scratchpad read, per-use masks; resume: a source shape that keeps the pad-state address
- * in s0 and reads the pad state through it. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80099B74(void) {
     s32  pad;
@@ -52,21 +48,19 @@ NON_MATCHING void func_80099B74(void) {
     if (keys & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (g_BattleTargetCursorCol != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-            slot = FIELD(u8, g_BattleMessageSlot, 0x5u);
-            g_Game.members[slot].turn.damage_flags.volatile_value =
-                g_Game.members[slot].turn.damage_flags.volatile_value | COMBATANT_FLAG_UNK_14;
-            *(u16*)((u8*)D_80145FAA + FIELD(u8, g_BattleMessageSlot, 0x5u) * BATTLE_PARTY_STRIDE) =
-                *(volatile u16*)&g_BattleTargetCursorCol;
-            choice                        = *(volatile u16*)&g_BattleTargetCursorCol;
-            g_BattleActorTurn->command.id = choice;
-            resource_id = Message_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
-            BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) = resource_id;
-            D_80148597                                                               = 2;
-            g_BattlePanelMode                                                        = 1;
-            D_801485DC                                                               = 0;
-            D_80148624                                                               = 0;
-            D_801483C0                                                               = 1;
-            g_Battle.ui_step                                                         = 7;
+            slot                                                                                  = FIELD(u8, g_BattleMessageSlot, 0x5u);
+            g_Game.members[slot].turn.damage_flags.volatile_value                                 = g_Game.members[slot].turn.damage_flags.volatile_value | COMBATANT_FLAG_UNK_14;
+            *(u16*)((u8*)D_80145FAA + FIELD(u8, g_BattleMessageSlot, 0x5u) * BATTLE_PARTY_STRIDE) = *(volatile u16*)&g_BattleTargetCursorCol;
+            choice                                                                                = *(volatile u16*)&g_BattleTargetCursorCol;
+            g_BattleActorTurn->command.id                                                         = choice;
+            resource_id                                                                           = Message_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
+            BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)              = resource_id;
+            D_80148597                                                                            = 2;
+            g_BattlePanelMode                                                                     = 1;
+            D_801485DC                                                                            = 0;
+            D_80148624                                                                            = 0;
+            D_801483C0                                                                            = 1;
+            g_Battle.ui_step                                                                      = 7;
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }

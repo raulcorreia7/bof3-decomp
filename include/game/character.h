@@ -23,21 +23,21 @@
 #define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intellect, ability, extra_ability)                   \
     {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intellect), (ability), (extra_ability)}
 
-/* The character bank container loaded at 0x8003B800 (PLxxx archives;
+/* The character sprites container loaded at 0x8003B800 (PLxxx archives;
  * @source: wiki:formats/character): a table of section offsets relative to the container.
  * Party_LoadMemberSprite stores the selected section's address in the scratchpad work
  * record at +0x4C. A section starts with a count and the offset of its palette
  * table; the table is a list of offsets, each to CHARACTER_PALETTE_COLORS
  * 16-bit colors, which GFX_LoadPalette copies to two VRAM staging rows. */
-#define CHARACTER_BANK_SECTION_COUNT 3
-#define CHARACTER_PALETTE_COLORS     32
+#define CHARACTER_SPRITES_SECTION_COUNT 3
+#define CHARACTER_PALETTE_COLORS        32
 
 /* The ailments the engine cures when a battle ends (the game's own strings
- * call status removal "cure"): Battle_ReloadPartyBank and Battle_LoadEndOverlay pass a
+ * call status removal "cure"): Battle_ReloadPartySprites and Battle_LoadEndOverlay pass a
  * battler's status & this mask to func_800A36F0; STATUS_KO, STATUS_POISONED
  * and STATUS_CONFUSED persist. The (u16) keeps the complement a 16-bit
- * immediate (andi) in Battle_ReloadPartyBank's schedule. */
-#define STATUS_CURE_MASK             ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
+ * immediate (andi) in Battle_ReloadPartySprites's schedule. */
+#define STATUS_CURE_MASK                ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
 
 /* Equipment bits: the characters that may use a weapon or armor record
  * (Item.equipability). */
@@ -296,17 +296,17 @@ ASSERT_OFFSET(LevelGrowth, agility_intellect, 0x05);
 ASSERT_OFFSET(LevelGrowth, ability, 0x06);
 ASSERT_OFFSET(LevelGrowth, extra_ability, 0x07);
 
-typedef struct CharacterBank {
-    u32 section_offset[CHARACTER_BANK_SECTION_COUNT]; /* 0x00 from the container base */
-} CharacterBank;
+typedef struct CharacterSprites {
+    u32 section_offset[CHARACTER_SPRITES_SECTION_COUNT]; /* 0x00 from the container base */
+} CharacterSprites;
 
-typedef struct CharacterBankSection {
+typedef struct CharacterSpritesSection {
     u32 unk_00;         /* 0x00 16 in the sampled sections; no reader */
     u32 palette_offset; /* 0x04 section-relative offset of the palette table */
-} CharacterBankSection;
+} CharacterSpritesSection;
 
-ASSERT_SIZE(CharacterBank, 0x0C);
-ASSERT_OFFSET(CharacterBankSection, palette_offset, 0x04);
+ASSERT_SIZE(CharacterSprites, 0x0C);
+ASSERT_OFFSET(CharacterSpritesSection, palette_offset, 0x04);
 
 /* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
  * indexes it through the g_CharSlot slot of a stored character id. */

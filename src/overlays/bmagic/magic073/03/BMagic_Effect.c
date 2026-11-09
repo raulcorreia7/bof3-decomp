@@ -32,9 +32,8 @@ MATCH void func_801EEF50(void) {
     }
 }
 
-MATCH void func_801EEFB0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEFB0 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFF4(void) {
     BMagicEffectFuncs handlers;
@@ -51,7 +50,25 @@ INCLUDE_ASM(func_801EF06C);
 /* func_801EF4E4 */
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
 
-INCLUDE_ASM(func_801EF52C);
+MATCH void func_801EF52C(void) {
+    u8           unk04;
+    PartyMember* battler;
+
+    unk04 = g_Task->unk_04;
+    if (unk04 < 3) {
+        battler = &g_Game.members[unk04];
+    } else {
+        battler = (PartyMember*)((EnemyBattler*)g_BattleEnemies + unk04);
+    }
+    g_PaletteFades[g_Task->timer].offset.red--;
+    g_PaletteFades[g_Task->timer].offset.green--;
+    g_PaletteFades[g_Task->timer].offset.blue--;
+    if (--g_Task->unk_09 == 0) {
+        func_80196718(battler);
+        func_800AF814(g_Task->unk_04);
+        g_Task->header.step++;
+    }
+}
 
 /* func_801EF6B8 */
 #include "overlays/bmagic/Effect_FinishRecovery.h"
@@ -117,8 +134,7 @@ MATCH u8 func_801F04A4(void) {
     count = 0;
     i     = 0;
     do {
-        if (!(func_801DB524((i + 3) & BYTE_MASK) & BYTE_MASK) &&
-            g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
+        if (!(func_801DB524((i + 3) & BYTE_MASK) & BYTE_MASK) && g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
             count++;
         }
         i++;

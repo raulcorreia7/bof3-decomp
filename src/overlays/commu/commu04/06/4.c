@@ -56,9 +56,15 @@ INCLUDE_ASM(func_801D12C8);
 
 INCLUDE_ASM(func_801D1568);
 
-INCLUDE_ASM(func_801D1628);
+MATCH void func_801D1628(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2) {
+        Message_StartAreaMessage(0x63);
+        *state = 2;
+    }
+}
 
 #include "overlays/commu/Fairy_EndCommuScene.h"
 
-/* blocker: tail store order and a typed BattleOwnerKind view; first diff: sb zero,%lo(D_80148332) at 0x801D16D4. */
 INCLUDE_ASM(func_801D16A4);

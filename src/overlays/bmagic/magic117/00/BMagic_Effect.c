@@ -6,7 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC24.h"
 
-/* blocker: no matched C template (magic010/00 func_801EEC80). */
 INCLUDE_ASM(func_801EEC90);
 
 INCLUDE_ASM(func_801EED2C);
@@ -26,7 +25,16 @@ MATCH void func_801EF000(void) {
 
 INCLUDE_ASM(func_801EF0F8);
 
-INCLUDE_ASM(func_801EF20C);
+MATCH void func_801EF20C(void) {
+    g_PaletteFades[g_Task->param.unk_0B].offset.red++;
+    g_PaletteFades[g_Task->param.unk_0B].offset.green++;
+    g_PaletteFades[g_Task->param.unk_0B].offset.blue++;
+    if (--g_Task->unk_09 == 0) {
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        func_800AF814(g_Battle.target_selector);
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void Effect_PlayOnce2(void) {
     BATTLE_PLAY_ONCE();

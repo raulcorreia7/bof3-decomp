@@ -48,16 +48,15 @@ extern AreaDrawState g_AreaDrawState;
 #define MENU_HEADER_SHORT_WIDTH 72
 
 /* Draw the menu header bar at its resting row in the player's window style. */
-#define MENU_DRAW_HEADER()                                                                                 \
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle)
+#define MENU_DRAW_HEADER()      Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle)
 
 /* Where the shop and save screens put their prompt line, the Zenny window and the save slot list. */
-#define MENU_PROMPT_X       28
-#define MENU_PROMPT_Y       22
-#define MENU_ZENNY_WINDOW_X 98
-#define MENU_ZENNY_WINDOW_Y 40
-#define SAVE_SLOTS_X        32
-#define SAVE_SLOTS_Y        48
+#define MENU_PROMPT_X           28
+#define MENU_PROMPT_Y           22
+#define MENU_ZENNY_WINDOW_X     98
+#define MENU_ZENNY_WINDOW_Y     40
+#define SAVE_SLOTS_X            32
+#define SAVE_SLOTS_Y            48
 
 /* The rows of the equip stat window, top to bottom. */
 typedef enum EquipStatRow {
@@ -121,14 +120,13 @@ typedef struct MessageTable {
  * member access changes their code. */
 /* D_801490C7 */
 extern s8 g_MessageChoice;
-#define MENU_SELECTION_IDLE()  (g_MessageChoice == 0)
-#define MENU_SELECTION_ARMED() (g_MessageChoice != 0)
+#define MENU_SELECTION_IDLE()            (g_MessageChoice == 0)
+#define MENU_SELECTION_ARMED()           (g_MessageChoice != 0)
 
 /* The repeatable buttons of a pad mask: PAD_GetRepeatedButtons sees the held keys
  * filtered to the buttons that repeat. */
-#define INPUT_DIRECTIONAL      (PADLup | PADLright | PADLdown | PADLleft)
-#define INPUT_ACTION_BUTTONS                                                                          \
-    (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADL2 | PADR1 | PADR2 | PADstart | PADselect)
+#define INPUT_DIRECTIONAL                (PADLup | PADLright | PADLdown | PADLleft)
+#define INPUT_ACTION_BUTTONS             (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADL2 | PADR1 | PADR2 | PADstart | PADselect)
 #define INPUT_REPEATED(pressed, buttons) (PAD_GetRepeatedButtons((pressed) & (buttons)))
 
 /* The window effect has finished (idle) or is still running (busy). */
@@ -156,8 +154,7 @@ typedef enum AreaDrawFlags {
     AREA_DRAW_CELL_LAYERS             = 1 << 2,
     AREA_DRAW_APPEND_ACTOR_PRIMITIVES = 1 << 3,
     AREA_DRAW_APPEND_AREA_PRIMITIVES  = 1 << 4,
-    AREA_DRAW_ALL_FLAGS               = AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_CELL_LAYERS |
-        AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES,
+    AREA_DRAW_ALL_FLAGS               = AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_CELL_LAYERS | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES,
 } AreaDrawFlags;
 
 /* The frontend channel word D_801490A4: the window script machine, the
@@ -364,21 +361,21 @@ extern u8           g_MessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
 /* D_801490A4 */
 extern volatile u16 g_UiWindowChannel;
-/* Area request slot shared by the area024 and area027 overlays. */
+
 /* D_801490A8 */
-extern u16          g_MessageRequest;
+extern u16      g_MessageRequest;
 /* D_801490AA */
-extern u16          g_MessageChoiceTimer;
-extern u8           D_801490CF[];
+extern u16      g_MessageChoiceTimer;
+extern u8       D_801490CF[];
 /* D_80181D98 */
-extern const u8     s_LoaderRecordBytes[168];
-extern u8           D_80181D99;
+extern const u8 s_LoaderRecordBytes[168];
+extern u8       D_80181D99;
 /* 0x80181EBA / 0x80181EBB: byte tables the selection paths read with a 4-byte
  * row stride. */
 /* D_80181EBA */
-extern const u8     g_SelectionCues[];
+extern const u8 g_SelectionCues[];
 /* D_80181EBB */
-extern const u8     g_SelectionSequences[];
+extern const u8 g_SelectionSequences[];
 
 /* Resource and pad-input helpers the overlays call: resolve a resource id to
  * its data pointer, look up a group choice's resource id, and decode the

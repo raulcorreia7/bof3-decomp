@@ -25,8 +25,7 @@ MATCH void func_80098450(void) {
     if (*phase == 0u) {
         D_801485DC = 1u;
         D_801485E0 = (g_MenuPanelTasks[16].pos.x + 7);
-        D_801485E2 =
-            (g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].unk_0B) * 0xD + 0x1A));
+        D_801485E2 = (g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].unk_0B) * 0xD + 0x1A));
     }
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
@@ -84,9 +83,7 @@ MATCH void func_80098450(void) {
     if (old_cursor != panel->group_cursor) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    handle = Message_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A,
-                                                 D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
-                             HALF_MASK);
+    handle                                   = Message_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) & HALF_MASK);
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = handle;
     if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_gate != 0) {
         return;
@@ -117,11 +114,9 @@ MATCH void func_80098450(void) {
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        value =
-            D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C] + (g_MenuPanelTasks[16].unk_0A << 8);
+        value                         = D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C] + (g_MenuPanelTasks[16].unk_0A << 8);
         g_BattleActorTurn->command.id = value;
-        if ((func_801AF494(g_MenuPanelTasks[16].unk_08, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) &
-             BYTE_MASK) == 0) {
+        if ((func_801AF494(g_MenuPanelTasks[16].unk_08, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }

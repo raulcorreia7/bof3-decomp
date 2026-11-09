@@ -3,10 +3,6 @@
 /* Arms a queued action for every live battler: copies the battler's work
  * record into the next free queued slot and seeds the slot's handler-index bytes.
  */
-/* nonmatching unmeasured: tried the queue walk rebuilt on the typed slot and work records, with the 0x74-byte record
- * copy as memcpy (64.37%). residual: the work-record base is hoisted into s3 where retail materializes it at the use,
- * which also adds the 0x28 frame, and the two tails land four instructions apart. resume: a copy source whose base is
- * only used inside its branch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DE1D4(void) {
     u8  index;

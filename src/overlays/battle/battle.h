@@ -1,9 +1,6 @@
 #ifndef BATTLE_FAMILY_H
 #define BATTLE_FAMILY_H
 
-/* Declarations shared by two or more battle images; an image header that
- * reads one includes this file. */
-
 #include "game.h"
 #include "sys/cd.h"
 #include "sys/actor.h"

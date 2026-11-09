@@ -23,6 +23,8 @@ extern Callback g_Commu03Step1Funcs[COMMU03_STEP1_COUNT];
 extern Callback g_Commu03Step2Funcs[COMMU03_STEP2_COUNT];
 extern u8       D_801D1944;
 extern u8       D_801D1948;
+extern s16      D_801D1940;
+extern u8       D_801D1918[];
 
 /* The overlay's state byte the guarded step advances. */
 

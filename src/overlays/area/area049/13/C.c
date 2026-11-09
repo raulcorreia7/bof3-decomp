@@ -1,5 +1,6 @@
 #include "area049_13.h"
 #include "area/spad.h"
+#include "overlays/area/AreaSprite.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -26,16 +27,39 @@ MATCH void func_801170A4(void) {
     }
 }
 
-/* blocker: instruction scheduling; first diff: hoisted move for the zeroed channels before the tpage store. */
 INCLUDE_ASM(func_801170D8);
 
 INCLUDE_ASM(func_801172D0);
 
 INCLUDE_ASM(func_80117410);
 
-INCLUDE_ASM(func_80117514);
+MATCH void func_80117514(void) {
+    AreaSprite* work = D_801181DC;
+    u8          count;
 
-INCLUDE_ASM(func_8011759C);
+    count = work->flags_02 - 1;
+    work->origin.x += work->normal.vx * 2;
+    work->origin.y += work->normal.vy * 2;
+    work->flags_02 = count;
+    work->half_size += 0x80;
+    if (!(count & BYTE_MASK)) {
+        ((AreaSprite*)D_801181DC)->flags_02 = 0x40;
+        ((AreaSprite*)D_801181DC)->flags_01++;
+    }
+}
+
+MATCH void func_8011759C(void) {
+    AreaSprite* work = D_801181DC;
+    u8          count;
+
+    work->origin.x += work->normal.vx;
+    work->flags_03--;
+    work->origin.y += work->normal.vy;
+    count = --((AreaSprite*)D_801181DC)->flags_02;
+    if (!(count & BYTE_MASK)) {
+        ((AreaSprite*)D_801181DC)->flags = 0;
+    }
+}
 
 MATCH void func_80117610(void) {
     SYS_DISPATCH_TASK(D_8011819C, 1, g_Task);
@@ -53,9 +77,44 @@ INCLUDE_ASM(func_801176B8);
 
 INCLUDE_ASM(func_80117768);
 
-INCLUDE_ASM(func_80117818);
+MATCH void func_80117818(void) {
+    if (func_80117900() == 0) {
+        func_80196070();
+        D_80146258 &= ~0x40;
+    }
+}
 
-INCLUDE_ASM(func_80117864);
+MATCH void func_80117864(void* arg0) {
+    struct {
+        u8  unk_00;
+        u8  unk_01;
+        u8  unk_02;
+        u8  unk_03;
+        s32 unk_04;
+        s32 unk_08;
+        s32 unk_0C;
+        u8  pad_10[0xC];
+        s32 unk_1C;
+        u8  pad_20[4];
+        u16 unk_24;
+        u8  unk_26;
+    }* p = arg0;
+
+    Actor* a = g_Task;
+    s32    v;
+
+    p->unk_04 = a->pos.x.fixed;
+    p->unk_08 = a->pos.y.fixed;
+    v         = a->pos.z.fixed;
+    p->unk_00 = 1;
+    p->unk_24 = 0x80;
+    p->unk_03 = 0xC0;
+    p->unk_26 = 2;
+    p->unk_1C = 0;
+    p->unk_01 = 0;
+    p->unk_02 = 0x20;
+    p->unk_0C = v;
+}
 
 #include "overlays/area/Area_FindFreeWorkRow.h"
 
@@ -65,9 +124,23 @@ MATCH void func_80117A30(void) {
     SYS_DISPATCH_BYTE(D_801181AC, g_Task->header.step);
 }
 
-INCLUDE_ASM(func_80117A74);
+MATCH void func_80117A74(void) {
+    if (SYS_TestFlag(D_80144ED0, 0x3E) != 0) {
+        func_80117B60(0x40);
+        func_80196070();
+    }
+    g_Task->header.step++;
+}
 
-INCLUDE_ASM(func_80117ACC);
+MATCH void func_80117ACC(void) {
+    if (SYS_TestFlag(D_80144ED0, 0x3E) != 0) {
+        g_Task->timer++;
+        func_80117B60(0x80 - (g_Task->timer >> 1));
+        if (g_Task->timer >= 0x80) {
+            func_80196070();
+        }
+    }
+}
 
 INCLUDE_ASM(func_80117B60);
 

@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: the first draft rebuilt on the GetTPage/SetDrawMode panel pass; first mismatch regalloc +0x4,
- * five saved registers differ. resume: a source shape that keeps the x/y roots out of s2/s3. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D750C(s32 x, s32 y) {
     s32 u;
@@ -56,13 +54,11 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
             var_s1 = (var_s0 + 0xD) * 0x24;
             func_801D9E9C((s16)var_s2, var_s7, (u16)((u8*)&D_8014833B)[var_s1], (u16)((u8*)&D_8014833D)[var_s1], 0);
             if (*(D_80145F22 + (var_s0 * BATTLE_PARTY_STRIDE)) != 0) {
-                func_801DA5A8((s16)var_s2, var_s7, (s16)(var_s4 + (g_MenuPanelTasks[var_s0 + 0xD].unk_0C + 0x14)),
-                              var_s7, 0x64U, 0U, 0xC8U);
+                func_801DA5A8((s16)var_s2, var_s7, (s16)(var_s4 + (g_MenuPanelTasks[var_s0 + 0xD].unk_0C + 0x14)), var_s7, 0x64U, 0U, 0xC8U);
                 temp_v0_153 = ((u8*)&D_8014833E)[var_s1];
                 if (temp_v0_153 != 0) {
                     temp_a2_160 = g_MenuPanelTasks[var_s0 + 0xD].unk_0C;
-                    func_801DA5A8((s16)(var_s4 + (temp_a2_160 + 0x14)), var_s7,
-                                  (s16)(temp_v0_153 + (temp_a2_160 + var_s3)), var_s7, 0xC8U, 0U, 0U);
+                    func_801DA5A8((s16)(var_s4 + (temp_a2_160 + 0x14)), var_s7, (s16)(temp_v0_153 + (temp_a2_160 + var_s3)), var_s7, 0xC8U, 0U, 0U);
                 }
             }
             temp_v1_181 = *(D_80145F10 + ((var_s5 & BYTE_MASK) * BATTLE_PARTY_STRIDE));
@@ -84,8 +80,7 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
                 var_a2_225 = (temp_v1_221 >> 0xB) & 4;
             }
             var_s0 = (var_s5 & BYTE_MASK) * BATTLE_PARTY_STRIDE;
-            func_801D94D4((s32)(s16)(var_s4 + 0x48), (u32)(s16)(var_s6 + 0xF), var_a2_225,
-                          (s32) * (D_80145F18 + var_s0));
+            func_801D94D4((s32)(s16)(var_s4 + 0x48), (u32)(s16)(var_s6 + 0xF), var_a2_225, (s32) * (D_80145F18 + var_s0));
             temp_v1_245 = *(D_80145F1A + var_s0);
             var_a2_248  = 2;
             if (temp_v1_245 != 0) {

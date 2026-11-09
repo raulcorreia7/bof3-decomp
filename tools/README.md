@@ -139,8 +139,7 @@ other metrics. A commit message line `Quality-Allowed: <path> <metric>` accepts 
 `worklist.py` prints one row per `INCLUDE_ASM` function with its cheapest route: `template0` (a
 template with no differing instruction, for `template_try.py`), `generator` (a `gen_body.py`
 shape), `template` (up to three differing instructions, for `template_diff.py`) or `plain`. It
-reuses `gen_body.py` and `dups.py near --full`, sorts untried functions before those with a hint
-above their `INCLUDE_ASM`, and shows that hint. `--route`, `--image`, `-n` and `--tsv` select and
+reuses `gen_body.py` and `dups.py near --full`, sorts untried functions before those in `config/attempts.tsv`, and shows their attempts. `--route`, `--image`, `-n` and `--tsv` select and
 format the rows. It reads the function index, so build first.
 
 ## Pre-push
@@ -165,7 +164,7 @@ Meson, setup or another tool calls these. A contributor does not run them.
 | `split.py`, `link_symbols.py`, `decomp_yaml.py` | Split an image, write its link script, and write the coddog settings    |
 | `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper (it caches objects in `~/.cache/bof3-cc`; `BOF3_CC_CACHE=0` turns that off) and the DMPSX rewrite |
 | `objdiff_config.py`, `rzproject.py`          | Build the objdiff project and the Rizin projects                        |
-| `check_addrs.py`, `check_kept.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_hand.sh`, `check_headers.sh`, `check_plain.sh`, `check_tree.sh` | The bodies of the `addrs`, `kept`, `markers`, `names`, `include-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
+| `check_addrs.py`, `check_kept.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_hand.sh`, `check_headers.sh`, `check_plain.sh`, `check_tree.sh`, `check_enum_members.py` | The bodies of the `addrs`, `kept`, `markers`, `names`, `include-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
 | `format.sh`                                  | The body of `format` and `format-check`                                 |
 
 `bin/coddog` finds twins and `bin/rz` reads retail bytes; no other tool does either. `bin/internal/` holds `find-tool` and the binutils wrappers (`as`, `ld`, `nm`, `objcopy`, `objdump`) that the build uses.

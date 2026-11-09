@@ -1,8 +1,4 @@
-/* Draw a 40x48 portrait from the 4-byte atlas records. One definition shared by
- * the shop, start, Bate, Shisu and commu overlays; each overlay includes this
- * file where the function sits and binds g_MenuPortraitAtlas in its
- * table in config/symbols.toml.
- */
+/* Draw a 40x48 portrait from the 4-byte atlas records.toml. */
 /* func_801D23A0 (sisyou), func_801D3518 (bate), func_801D44C0 (shisu), func_801D8F8C (commu02), func_801D8FC0 (shop),
    func_801DC4B8 (start) */
 MATCH void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode) {

@@ -30,8 +30,7 @@ MATCH s32 func_801C520C(void) {
         done = 1;
         Actor_RequestScript(transitionId);
     }
-    if ((g_Task->unk_05 == 0) &&
-        !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+    if ((g_Task->unk_05 == 0) && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_AdvanceScroll(COORD_INT(g_Task->pos.z));
     }
     if (!(g_FrameCount & 3)) {

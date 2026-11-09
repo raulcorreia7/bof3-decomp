@@ -10,6 +10,9 @@ extern u16 D_80146876;
 /* Handler tables the step bytes select. */
 extern void (*D_801F40F0[])(void);
 
+extern u8 D_801F40F8[];
+extern u8 D_801F40F9[];
+
 extern void (*D_801F40FC[])(void);
 
 #endif

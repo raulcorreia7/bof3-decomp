@@ -45,5 +45,6 @@ void func_801D28A4(s32 x, s32 y, s32 arg2, s32 arg3);
 extern u8  D_801D4E10;
 extern u16 D_801D4E14;
 extern u8  D_801D4E18;
+extern u8  D_801455C9[];
 
 #endif

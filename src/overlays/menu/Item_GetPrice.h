@@ -1,7 +1,4 @@
-/* Read the u16 value of one entry from the four item category tables. One
- * definition shared by the shop, start, Bate and Shisu overlays; each overlay
- * includes this file where the function sits.
- */
+/* Read the u16 value of one entry from the four item category tables. */
 /* func_801D4F1C (bate), func_801D5EC4 (shisu), func_801DA9C4 (shop), func_801DDEBC (start) */
 MATCH u16 Item_GetPrice(ItemCategory category, s32 item_id) {
     s32 category_byte;

@@ -15,8 +15,7 @@ MATCH void func_801E16B4(void) {
                     /* shared exit: the armed step clears the phase byte */
                     goto block_8;
                 }
-            } else if (((g_Battle.dragon_form == state) || ((g_Battle.dragon_form - 7) < 2U)) &&
-                       (func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
+            } else if (((g_Battle.dragon_form == state) || ((g_Battle.dragon_form - 7) < 2U)) && (func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
                 /* shared exit: the armed step clears the phase byte */
                 goto block_8;
             }

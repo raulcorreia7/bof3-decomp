@@ -7,8 +7,7 @@ MATCH void Area_RaiseHudBanner(void) {
         g_Task->unk_03++;
     }
 
-    if ((D_801454F2 != 0 && g_Task->param.unk_0B != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE ||
-        GAME_SCRIPT_ACTIVE() != 0) {
+    if ((D_801454F2 != 0 && g_Task->param.unk_0B != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE || GAME_SCRIPT_ACTIVE() != 0) {
         g_Task->unk_03 = 3;
     }
     Area_DrawHudBanner(0x5C, g_Task->screen_y);

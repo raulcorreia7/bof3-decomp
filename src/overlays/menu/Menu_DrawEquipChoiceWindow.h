@@ -1,7 +1,4 @@
-/* The equip list of the camp and shop menus: the inventory rows of the chosen slot's category that the party member
- * can equip, gathered into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts and drawn in the inventory panel's frame.
- * start/08, shop/00, bate/00 and shisu/00 include it where the function sits, and each image header declares the
- * g_MenuEquip* tables. */
+/* The equip list of the camp and shop menus: the inventory rows of the chosen slot's category that the party member can equip, gathered into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts and drawn in the inventory panel's frame. */
 /* func_801E0A70 (start), func_801DD578 (shop), func_801D7AD0 (bate), func_801D8A78 (shisu) */
 MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     u8   scroll_y;
@@ -38,11 +35,8 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     ids     = D_801C893C[task->unk_08];
     counts  = D_801C8950[task->unk_08];
     for (slot = 0; slot < INV_SLOTS_PER_CATEGORY; slot++) {
-        if ((func_801AF494(ITEM_TEST_EQUIPPABLE, g_CharSlot[g_PartyFieldOrder[task->unk_0C]], task->unk_08, *ids) &
-             BYTE_MASK) &&
-            (task->unk_08 != ITEM_CAT_ARMOR ||
-             task->unk_09 - EQUIP_SLOT_SHIELD ==
-                 (Item_GetIcon(ITEM_CAT_ARMOR, *ids) & BYTE_MASK) - ARMOR_TYPE_SHIELD)) {
+        if ((func_801AF494(ITEM_TEST_EQUIPPABLE, g_CharSlot[g_PartyFieldOrder[task->unk_0C]], task->unk_08, *ids) & BYTE_MASK) &&
+            (task->unk_08 != ITEM_CAT_ARMOR || task->unk_09 - EQUIP_SLOT_SHIELD == (Item_GetIcon(ITEM_CAT_ARMOR, *ids) & BYTE_MASK) - ARMOR_TYPE_SHIELD)) {
             choices++;
             g_MenuEquipChoiceIds[i]    = *ids;
             g_MenuEquipChoiceCounts[i] = *counts;
@@ -111,6 +105,5 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, 1);
     UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x33, 1);
 
-    func_801AFA1C(g_MenuEquipChoiceIds, task->unk_0A, task->pos.x + 144, task->pos.y + 24, 9, INV_SLOTS_PER_CATEGORY,
-                  116);
+    func_801AFA1C(g_MenuEquipChoiceIds, task->unk_0A, task->pos.x + 144, task->pos.y + 24, 9, INV_SLOTS_PER_CATEGORY, 116);
 }

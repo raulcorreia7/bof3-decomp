@@ -7,7 +7,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801F71C0);
 
-/* blocker: constant order; first diff: +0x68 li v0,100 (candidate) against li v1,320 (retail). */
 INCLUDE_ASM(func_801F729C);
 
 MATCH void func_801F73B8(void) {
@@ -70,10 +69,8 @@ INCLUDE_ASM(func_801F7A24);
 
 #include "shared/Area_ClearWorkColumn.h"
 
-/* needs: particle record type at 0x800E4800. */
 INCLUDE_ASM(func_801F7AE4);
 
-/* needs: particle record type at 0x800E4800. */
 INCLUDE_ASM(func_801F7C54);
 
 INCLUDE_ASM(func_801F7D04);
@@ -210,7 +207,6 @@ MATCH void func_801FCE30(void) {
 
 INCLUDE_ASM(func_801FCEC0);
 
-/* needs: D_801FE280 declaration. */
 INCLUDE_ASM(func_801FD28C);
 
 MATCH void func_801FD444(void* record) {
@@ -324,7 +320,9 @@ MATCH s32 func_801FDA64(void) {
 
 INCLUDE_ASM(func_801FDA6C);
 
-INCLUDE_ASM(func_801FE03C);
+MATCH s8 func_801FE03C(s32 x, s32 y) {
+    SCENE_PROBE_POSITION(D_801FE350, 2, D_801FE35C);
+}
 
 MATCH s32 func_801FE0A4(void) {
     if (SYS_TestFlag(g_SceneFlags, 3) == 0 || SYS_TestFlag(g_SceneFlags, 4)) {

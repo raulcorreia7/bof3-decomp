@@ -33,7 +33,15 @@ MATCH void func_801D0DEC(void) {
 
 INCLUDE_ASM(func_801D0E28);
 
-INCLUDE_ASM(func_801D1000);
+MATCH void func_801D1000(void) {
+    if (EMI_IsReady()) {
+        s16 idx = D_801D1940;
+        u8  cue = D_801D1918[idx];
+        SND_PlayBGM(cue, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+        D_801F294D = 0;
+    }
+    func_801D1250(0x32, 0x28);
+}
 
 MATCH void func_801D1058(void) {
     SYS_DISPATCH_BYTE(g_Commu03Step2Funcs, D_801F294D);

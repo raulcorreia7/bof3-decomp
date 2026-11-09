@@ -36,18 +36,23 @@ MATCH s32 func_801CEC18(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(func_801CEE24);
 }
 
-/* blocker: save order; first diff: +0x4 s2 saved first (retail saves s3 first). */
 INCLUDE_ASM(func_801CEE24);
 
 MATCH void func_801CEF10(void) {
     SYS_DISPATCH_TASK(D_801CF614, 3, g_Task);
 }
 
-INCLUDE_ASM(func_801CEF54);
+MATCH void func_801CEF54(void) {
+    /* FAKE: retail reads SND_PlayCue as void(s32). */
+    ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
+    Actor_RequestScript(((g_Task->direction_08 - 1) / 2) + 0x42);
+    g_Task->unk_0A = 8;
+    g_Task->unk_03 = 1;
+}
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
-INCLUDE_ASM(func_801CF0EC);
+#include "overlays/plchar/Char_ClearPanelModeIfUnused.h"
 
 INCLUDE_ASM(func_801CF184);
 

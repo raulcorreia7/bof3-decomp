@@ -13,12 +13,11 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EF004(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF004 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF048(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0C44, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
         func_800AF764();
@@ -28,7 +27,7 @@ MATCH void func_801EF048(void) {
         BMagic_DrawDarkRing();
         PopMatrix();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF10C);
@@ -93,11 +92,8 @@ MATCH void func_801F04D4(void) {
     }
 }
 
-/* blocker: candidate is 4 bytes short (0xBC against 0xC0); retail reloads g_Task before the timer and step stores; first diff: the bnez target at 0x801F057C. */
 INCLUDE_ASM(func_801F055C);
 
-/* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
-/* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
 INCLUDE_ASM(func_801F061C);
 
 MATCH void func_801F068C(void) {
@@ -125,6 +121,4 @@ INCLUDE_ASM(func_801F07D4);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F0BF0 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

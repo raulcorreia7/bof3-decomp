@@ -22,4 +22,14 @@ void func_801F30CC(void);
 /* The mode gate the step tests. */
 u8 func_801F34FC(void);
 
+/* A 16-byte point row of the table at D_801F3D80. */
+typedef struct AreaPoint {
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 pad;
+} AreaPoint;
+
+extern AreaPoint D_801F3D80[];
+
 #endif

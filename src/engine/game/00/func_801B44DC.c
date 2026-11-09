@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 18.24%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
     s32*  val0;
@@ -130,11 +128,8 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     tmp1                            = FIELD(u16, tmp32, 0x3Au) + (s8) * (D_80181B01 + tmp8);
                     FIELD(s16, (&D_1F800000), 0x2u) = tmp1;
                     if (((Area_GetCellCode((s16)tmp14, tmp1) & BYTE_MASK) == val7) ||
-                        (tmp34 = g_Task, val1 = (FIELD(u8, tmp34, 0x8u) - 2) & 7, tmp3 = val1 * 2,
-                         tmp15 = FIELD(u16, tmp34, 0x36u) + (s8) * (D_80181B00 + tmp3), *(u16*)(&D_1F800000) = tmp15,
-                         tmp2                            = FIELD(u16, tmp34, 0x3Au) + (s8) * (D_80181B01 + tmp3),
-                         FIELD(s16, (&D_1F800000), 0x2u) = tmp2,
-                         ((Area_GetCellCode((s16)tmp15, tmp2) & BYTE_MASK) == val7))) {
+                        (tmp34 = g_Task, val1 = (FIELD(u8, tmp34, 0x8u) - 2) & 7, tmp3 = val1 * 2, tmp15 = FIELD(u16, tmp34, 0x36u) + (s8) * (D_80181B00 + tmp3), *(u16*)(&D_1F800000) = tmp15,
+                         tmp2 = FIELD(u16, tmp34, 0x3Au) + (s8) * (D_80181B01 + tmp3), FIELD(s16, (&D_1F800000), 0x2u) = tmp2, ((Area_GetCellCode((s16)tmp15, tmp2) & BYTE_MASK) == val7))) {
                         g_Task->direction_08 = (u8)val1;
                         return 1U;
                     }
@@ -152,8 +147,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     val2                   = (s16)(&D_1F800000 + 2);
                     GAME_ENTITY_ENTRY_DATA = FIELD(u16, tmp27, 0x3Au);
                 loop_52:
-                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
-                        (val7 & BYTE_MASK)) {
+                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) == (val7 & BYTE_MASK)) {
                         tmp28 = g_Task;
                         tmp21 = FIELD(u8, tmp28, 0x8u);
                         tmp5  = tmp21 & BYTE_MASK;
@@ -202,8 +196,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     SP_REF(void*, 0x2)   = FIELD(u16, tmp30, 0x3Au);
                 loop_71:
                     val1 += 1;
-                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) !=
-                        val2) {
+                    if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) != val2) {
                         FIELD(s16, (&D_1F800000), 0x2u) = (s16)(FIELD(s16, (&D_1F800000), 0x2u) + 1);
                         if (val1 >= 2) {
                         block_73:
@@ -228,8 +221,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                 *(u16*)(&D_1F800000) = tmp16;
                 SP_REF(void*, 0x2)   = (u16)val2;
             loop_31:
-                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
-                    (val7 & BYTE_MASK)) {
+                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) == (val7 & BYTE_MASK)) {
                     tmp24 = g_Task;
                     tmp20 = FIELD(u8, tmp24, 0x8u);
                     tmp4  = tmp20 & BYTE_MASK;
@@ -279,8 +271,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                 SP_REF(void*, 0x2)   = (u16)(FIELD(u16, tmp26, 0x3Au) + 1);
             loop_46:
                 val1 += 1;
-                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) !=
-                    val2) {
+                if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) != val2) {
                     *(u16*)(&D_1F800000) = (u16)(*(u16*)(&D_1F800000) + 1);
                     if (val1 >= 2) {
                         return 0U;

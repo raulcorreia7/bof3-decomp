@@ -2,9 +2,6 @@
 
 /* Rolls the battler's hurt reaction: when the command state is a hit state, gives each live battler a 1-in-12
  * chance per frame to raise its 0x100 reaction flag. */
-/* nonmatching unmeasured: tried opcode@+0x8: the hit-state gate and the 1-in-12 roll chain differ; the slot loops and
- * flag stores are in place (first-draft pointer-counter code was uncompilable). resume: rebuild the
- * g_Battle.target_selector mask gate and the rand()/12 roll from the asm. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800A8F58(void) {
     u32 off;
@@ -57,8 +54,7 @@ NON_MATCHING s32 func_800A8F58(void) {
         return 0;
     }
     if (g_Battle.target_selector < 3) {
-        if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK) &&
-            (g_Game.members[g_Battle.target_selector].chr.stats.resistances[RES_INDEX_DEATH] < 6)) {
+        if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK) && (g_Game.members[g_Battle.target_selector].chr.stats.resistances[RES_INDEX_DEATH] < 6)) {
             roll = rand();
             if (roll == (roll / 12) * 12) {
                 FIELD(u32, D_80145FB4, g_Battle.target_selector * BATTLE_PARTY_STRIDE) |= 0x100;
@@ -68,8 +64,7 @@ NON_MATCHING s32 func_800A8F58(void) {
         }
         return 0;
     }
-    if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK) &&
-        (ENEMY_COMBATANT(g_Battle.target_selector).stats.resistances[RES_INDEX_DEATH] < 6)) {
+    if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK) && (ENEMY_COMBATANT(g_Battle.target_selector).stats.resistances[RES_INDEX_DEATH] < 6)) {
         roll = rand();
         if (roll == (roll / 12) * 12) {
             ENEMY_COMBATANT(g_Battle.target_selector).turn.damage_flags.value |= 0x100;

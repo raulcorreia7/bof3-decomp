@@ -37,8 +37,7 @@ MATCH void func_801A1384(void* entity) {
                 Actor* spad;
                 g_Task->unk_0A = (0x10 / rate);
                 rec[0x7B]--;
-                if (((g_Task->option_flags & ACTOR_OPT_NO_TARGET) == 0) &&
-                    ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
+                if (((g_Task->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
                     g_Task->direction_08 &= 7;
                     rec[0x76] = savedFlag;
                     rec[0x7B] = 0;

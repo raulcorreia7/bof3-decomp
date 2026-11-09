@@ -1,7 +1,4 @@
-/* Takes two free actors, passes each to func_801A4D54 with DATA, moves them one unit apart diagonally, makes both
- * semi-transparent and starts palette fades (15, 0, 0) on the first and (0, 0, 15) on the second; sets the timer to 4
- * and mode 1. Returns if no actor is free. A statement macro shared by the area and scenario overlays; every change
- * here must verify every member. */
+/* Takes two free actors, passes each to func_801A4D54 with DATA, moves them one unit apart diagonally, makes both semi-transparent and starts palette fades (15, 0, 0) on the first and (0, 0, 15) on the second; sets the timer to 4 and mode 1. Returns if no actor is free. */
 /* ACTOR_START_FADE_PAIR (area032 0x801F30EC, scena03 0x801F754C) */
 #define ACTOR_START_FADE_PAIR(DATA)                                       \
     Actor* work;                                                          \

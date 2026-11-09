@@ -14,9 +14,8 @@ MATCH void func_801EEF34(void) {
 
 #include "shared/Effect_StartPlaying.h"
 
-MATCH void func_801EEFD8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEFD8 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF01C(void) {
     Magic001Steps handlers;
@@ -46,7 +45,6 @@ MATCH void func_801EF164(void) {
     }
 }
 
-/* needs: type for g_Battle.selected_actor as a member of the BattleAction block; first diff: bnez target at +0x2C. */
 INCLUDE_ASM(func_801EF1CC);
 
 MATCH void func_801EF280(void) {
@@ -132,7 +130,6 @@ MATCH void func_801EF518(void) {
     }
 }
 
-/* Blocker: retail keeps an 8-byte frame (addiu sp,-8) and loads the -0x80 sentinel after the lb; a signed s8 phase local gives no frame and the constant is hoisted to the top. */
 INCLUDE_ASM(func_801EF5CC);
 
 #include "overlays/bmagic/Effect_RampTintAndFinish.h"
@@ -175,7 +172,6 @@ MATCH void func_801EFBEC(void) {
     g_Task->header.step += 1;
 }
 
-/* needs: type for g_Battle.selected_actor as a member of the BattleAction block; first diff: bnez target at +0x4C. */
 INCLUDE_ASM(func_801EFC54);
 
 MATCH void func_801EFD28(void) {
@@ -197,8 +193,7 @@ MATCH void func_801EFD28(void) {
         SND_QueueSelectionFx(0x203);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;
-        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed,
-                                g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
         /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
         FAKE_BARRIER();
         func_800A9820(g_Battle.target_selector);
@@ -260,7 +255,6 @@ MATCH void func_801F00A8(void) {
     EFFECT_RAMP_TINT_AND_FINISH();
 }
 
-/* Blocker: GTE path (PushMatrix, RotTrans, RotMatrix) with a stack-built vector set and a z-span halfword from g_Battle.selected_actor or g_BattleEffectBattler by header.step; needs the matrix helpers before a draft. */
 INCLUDE_ASM(func_801F014C);
 
 INCLUDE_ASM(func_801F0238);

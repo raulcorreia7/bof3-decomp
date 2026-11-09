@@ -1,9 +1,5 @@
 #include "sisyou_00.h"
 
-/* nonmatching 60.2%: tried raw byte-offset spelling of both texture_window increments (60.18%, no change); frame-slot
- * delta 0x78 vs 0x70 with identical save set. resume: when a source shape forces all four args to home (retail sw
- * a0..a3 at 0x18/0x20/0x28/0x30, 8-byte-spaced, with lhu reloads of x/y from the homes) instead of keeping x/y in
- * callee-saved registers; then re-measure the five opcode and three branch hunks. */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style) {
     RECT*     texture_window;
@@ -68,8 +64,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     odd_width  = (width - 3) & 1;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
-    setXY4(primitive, (s16)(x + 2), top, (s16)(((s16)(x + 2)) + half_width), top, (s16)(x + 2), bottom_y,
-           (s16)(((s16)(x + 2)) + half_width), bottom_y);
+    setXY4(primitive, (s16)(x + 2), top, (s16)(((s16)(x + 2)) + half_width), top, (s16)(x + 2), bottom_y, (s16)(((s16)(x + 2)) + half_width), bottom_y);
     setUV4(primitive, 0, 0, (u8)half_inner, 0, 0, bottom_v, (u8)half_inner, bottom_v);
     setRGB0(primitive, 172, 172, 172);
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
@@ -89,8 +84,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->y2 = bottom_y;
     primitive->x3 = (s16)(base_x + ((half_width + odd_width) + 2));
     primitive->y3 = bottom_y;
-    setUV4(primitive, 0, 0, (u8)(half_inner + odd_width_u16), 0, 0, bottom_v, (u8)(half_inner + odd_width_u16),
-           bottom_v);
+    setUV4(primitive, 0, 0, (u8)(half_inner + odd_width_u16), 0, 0, bottom_v, (u8)(half_inner + odd_width_u16), bottom_v);
     setRGB0(primitive, 172, 172, 172);
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 

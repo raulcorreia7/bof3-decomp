@@ -10,9 +10,8 @@ INCLUDE_ASM(func_801EED04);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EF0A8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF0A8 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0EC(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
@@ -144,7 +143,6 @@ MATCH void func_801EFE04(void) {
     g_Task->header.step += 1;
 }
 
-/* Blocker: retail loads the -0x80000 constant (lui a0,0xFFF8) before the pos.z load at 0x801EFEA0; both the -= and += 0xFFF80000 forms put a nop there. */
 INCLUDE_ASM(func_801EFE90);
 
 MATCH void func_801EFF50(void) {

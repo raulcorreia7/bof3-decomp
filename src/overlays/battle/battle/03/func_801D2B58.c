@@ -25,9 +25,6 @@ typedef struct BattlePanelState {
  * table, writes its panel rows and copies the actor state into the battle
  * state block.
  */
-/* nonmatching unmeasured: tried the cursor and the state bases sit in s2 and the extra s8 where retail keeps them in a0
- * and s4 to s7. resume: a source shape whose live set matches the retail so the extra s8 disappears and the cursor
- * lands in a0. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2B58(void) {
     BattleActorRecord* actor;
@@ -82,14 +79,10 @@ NON_MATCHING void func_801D2B58(void) {
                 offset        = kind * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
-                row->unk_02 =
-                    (s16)(actor->unk_2E +
-                          (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) + (g_Game.members[kind].chr.character_id * 8)]);
-                row->unk_04 =
-                    (s16)(actor->unk_30 + (s8)(g_BattlePanelOffsets +
-                                               1)[(actor->unk_08 * 2) + (g_Game.members[kind].chr.character_id * 8)]);
-                depth = actor->unk_32;
-                state = fa8_88 + offset;
+                row->unk_02   = (s16)(actor->unk_2E + (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) + (g_Game.members[kind].chr.character_id * 8)]);
+                row->unk_04   = (s16)(actor->unk_30 + (s8)(g_BattlePanelOffsets + 1)[(actor->unk_08 * 2) + (g_Game.members[kind].chr.character_id * 8)]);
+                depth         = actor->unk_32;
+                state         = fa8_88 + offset;
             } else {
                 actor         = (BattleActorRecord*)D_8014637C;
                 state_offset  = kind * 0x118;
@@ -115,11 +108,8 @@ NON_MATCHING void func_801D2B58(void) {
                 offset        = cursor[0] * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
-                row->unk_02 =
-                    (s16)(actor->unk_2E + (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) +
-                                                                   (g_Game.members[cursor[0]].chr.character_id * 8)]);
-                value =
-                    (g_BattlePanelOffsets + 1)[(actor->unk_08 * 2) + (g_Game.members[cursor[0]].chr.character_id * 8)];
+                row->unk_02   = (s16)(actor->unk_2E + (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) + (g_Game.members[cursor[0]].chr.character_id * 8)]);
+                value         = (g_BattlePanelOffsets + 1)[(actor->unk_08 * 2) + (g_Game.members[cursor[0]].chr.character_id * 8)];
             } else {
                 state_offset  = cursor[0] * 0x118;
                 row->state_08 = (void*)(g_BattleEnemies + state_offset);

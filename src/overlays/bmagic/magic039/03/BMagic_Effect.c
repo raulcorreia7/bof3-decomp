@@ -25,9 +25,8 @@ MATCH s32 func_801EEF3C(void) {
     }
 }
 
-MATCH void func_801EEF64(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF64 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFA8(void) {
     BMagicEffectFuncs handlers;
@@ -109,7 +108,6 @@ MATCH void func_801EF4E4(void) {
     }
 }
 
-/* the angle cell address (lui s0,0x1f80) is built after the param load; every form hoists it into the bnez delay slot; first diff +0x2C */
 INCLUDE_ASM(func_801EF584);
 
 MATCH void func_801EF690(void) {

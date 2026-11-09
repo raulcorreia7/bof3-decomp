@@ -33,9 +33,8 @@ INCLUDE_ASM(func_801EF490);
 /* func_801EF6E0 */
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
 
-MATCH void func_801EF8CC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF8CC */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF910(void) {
     Magic004Steps handlers;
@@ -49,8 +48,6 @@ MATCH void func_801EF910(void) {
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 
-/* blocker: branch over the g_Battle.action_id < 0x85 test; first diff: 0x801EFA18. */
-/* blocker: the zero branch compares the timer with a branch retail places after the table lookup; first diff: bnez v0 at 0x801EFA18. */
 INCLUDE_ASM(func_801EF9E8);
 
 #include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"

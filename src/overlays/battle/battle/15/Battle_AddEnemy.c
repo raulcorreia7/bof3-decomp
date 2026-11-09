@@ -4,7 +4,6 @@ typedef struct {
     u32 words[4];
 } WorkCopyBlock;
 
-/* NON_MATCHING: local enemy, volatile task and direct array forms tried; first diff 0x800AC020, saved register. */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_value) {
     volatile u8* source;

@@ -1,12 +1,10 @@
-/* Queues the area screen overlay at (x, y): one sprite per pad mask hit through AREA_HUD_MASK_TABLE, then the
- * gradient diamond. One definition shared by the area overlays; every change here must verify every member. */
+/* Queues the area screen overlay at (x, y): one sprite per pad mask hit through AREA_HUD_MASK_TABLE, then the gradient diamond. */
 MATCH void Area_DrawHud(s16 x, s16 y) {
     s32 i;
     s32 type;
     s32 tpage;
 
-    if ((g_AreaDrawFlags & (AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_APPEND_ACTOR_PRIMITIVES |
-                            AREA_DRAW_APPEND_AREA_PRIMITIVES)) == 0) {
+    if ((g_AreaDrawFlags & (AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES)) == 0) {
         return;
     }
 
@@ -49,8 +47,7 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
         }
     }
 
-    if ((func_801B6610(g_AreaTargetCellX, g_AreaTargetCellY) & BYTE_MASK) ||
-        (g_Game.walk_flags & AREA_WALK_TRANSITION) || (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) == 0xC ||
+    if ((func_801B6610(g_AreaTargetCellX, g_AreaTargetCellY) & BYTE_MASK) || (g_Game.walk_flags & AREA_WALK_TRANSITION) || (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) == 0xC ||
         (g_Game.flags & 0x4000)) {
         Area_DrawHudSprite((s16)(x + 0x30), (s16)(y + 0x18), 3);
     }

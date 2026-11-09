@@ -3,8 +3,6 @@
 /* Retail callers pass leftover register values the callee ignores. */
 extern bool func_801B6470(s32 arg0, s32 arg1);
 
-/* nonmatching unmeasured: tried scheduler order of loads in the 0x800 path and the shared 8019FA28 call tail
- * (g_GameContextKind lbu a3 lands above the g_Game.walk_flags lhu); 80.24%. */
 #ifdef NON_MATCHING
 NON_MATCHING bool func_801B6674(void) {
     s32 temp;

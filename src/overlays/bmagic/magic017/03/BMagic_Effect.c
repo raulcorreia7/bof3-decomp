@@ -18,11 +18,9 @@ MATCH void func_801EEFD8(void) {
     func_801E5988();
 }
 
-MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF014 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-/* hint: the eight-entry copy into a local EffectStepFuncs8 is unrolled by the candidate; first differing instruction is the addiu t0,a2,32 at +0x14 (retail runs the copy as a 16-byte loop with bne). */
 MATCH void func_801EF058(void) {
     Magic017Steps handlers;
 
@@ -33,12 +31,10 @@ MATCH void func_801EF058(void) {
     }
 }
 
-/* blocker: work pointer reload; first diff: +0xB0 lui v1,0x1f80 (retail reloads g_Task for the unk_27 store and again before the call) against a0 held across both (candidate). */
 INCLUDE_ASM(func_801EF11C);
 
 INCLUDE_ASM(func_801EF248);
 
-/* blocker: y store; first diff: +0x34 sw v0,0x10(v1) shared after the branches (retail) against the constant hoisted to a2 across the call (candidate). */
 INCLUDE_ASM(func_801EF300);
 
 MATCH void func_801EF460(void) {

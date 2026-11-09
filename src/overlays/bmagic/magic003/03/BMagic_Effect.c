@@ -6,8 +6,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC28);
 
-/* blocker: running-offset indexing; first diff: retail move v1,zero at +4 against a lui base. */
-/* blocker: the clear loop over the 0x78-stride table at D_801F0B38 needs its record type; first diff: lui at the table address at 0x801EED14. */
 INCLUDE_ASM(func_801EED14);
 
 MATCH void func_801EEDAC(void) {
@@ -253,9 +251,8 @@ MATCH void func_801EF9FC(void) {
     }
 }
 
-MATCH void func_801EFA9C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EFA9C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EFAE0);
 
@@ -290,6 +287,4 @@ INCLUDE_ASM(func_801F07B0);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F0A28 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

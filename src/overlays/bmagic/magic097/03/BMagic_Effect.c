@@ -12,15 +12,13 @@ INCLUDE_ASM(func_801EEC5C);
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-MATCH void func_801EEF84(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF84 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EEFC8);
 
 #include "overlays/bmagic/Effect_CountDownAndPickRandom.h"
 
-// hint: same shape as magic093 801EF108: retail holds g_Task in a0 and indexes the enemy table via v1 (base added last); enemy[idx], idx local and (u8*)base + idx*stride forms did not match
 INCLUDE_ASM(func_801EF1A4);
 
 /* func_801EF324 */

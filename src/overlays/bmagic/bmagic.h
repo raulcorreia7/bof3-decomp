@@ -1,9 +1,6 @@
 #ifndef BMAGIC_FAMILY_H
 #define BMAGIC_FAMILY_H
 
-/* Declarations shared by two or more bmagic images; an image header that
- * reads one includes this file. */
-
 #include "common/vector.h"
 #include "game.h"
 #include "gfx/prim.h"
@@ -240,6 +237,32 @@ ASSERT_OFFSET(BMagicEffectWork, pos, 0x14);
 ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
 ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
 ASSERT_OFFSET(BMagicEffectWork, battler, 0x28);
+
+/* The record of an effect that orbits its battler: the angle advances every frame and the radius scales sin and cos. */
+typedef struct BMagicOrbitWork {
+    /* 0x00 */ TaskHeader header;
+    /* 0x03 */ u8         unk_03;
+    /* 0x04 */ u8         unk_04;
+    /* 0x05 */ u8         timer_05;
+    /* 0x06 */ u8         timer_06;
+    /* 0x07 */ u8         timer_07;
+    /* 0x08 */ u8         frames_left;
+    /* 0x09 */ u8         unk_09;
+    /* 0x0A */ u8         unk_0A;
+    /* 0x0B */ u8         unk_0B;
+    /* 0x0C */ s16        radius;
+    /* 0x0E */ u16        angle;
+    /* 0x10 */ s32        unk_10;
+    /* 0x14 */ s32        unk_14;
+    /* 0x18 */ s32        unk_18;
+} BMagicOrbitWork;
+
+ASSERT_OFFSET(BMagicOrbitWork, radius, 0x0C);
+ASSERT_OFFSET(BMagicOrbitWork, angle, 0x0E);
+ASSERT_OFFSET(BMagicOrbitWork, unk_14, 0x14);
+
+/* D_801F05F8 (magic106), D_801F1054 (magic063) */
+extern BMagicOrbitWork* g_BMagicOrbitWork;
 
 extern MagicModule       D_801EEC00;
 /* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054),

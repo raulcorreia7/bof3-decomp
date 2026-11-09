@@ -98,7 +98,7 @@ MATCH void func_801D28D0(void) {
             selected_item      = (g_ShopItemId = D_801C893C[panel->group][panel->group_cursor]);
             g_ShopItemCategory = panel->group;
             D_80148628         = panel->pos.x + 7;
-            D_8014862A = panel->pos.y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
+            D_8014862A         = panel->pos.y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             if (func_801AF494(panel->kind, 0, g_ShopItemCategory, g_ShopItemId) & BYTE_MASK) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));

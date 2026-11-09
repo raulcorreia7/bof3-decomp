@@ -1,8 +1,5 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried the candidate frames at 0x70 against the retail 0x50 - twelve locals stay live and s2
- * is saved. resume: a source shape with the retail live set (the panel x and y in s1 and s0, the base x and y in s5 and
- * s4, the row counter in s7, the text buffer in s6) so the frame drops to 0x50. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
     Character* record;
@@ -30,8 +27,7 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
         do {
             row_y  = base_y & HALF_MASK;
             record = &g_Characters[g_CharSlot[D_801E6244[row & BYTE_MASK]]];
-            UI_DrawWindow(base_x & HALF_MASK, row_y, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, 0x80,
-                          (s32)g_WindowStyle);
+            UI_DrawWindow(base_x & HALF_MASK, row_y, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, 0x80, (s32)g_WindowStyle);
             if (text_x != 0) {
                 shade = 1;
             } else {

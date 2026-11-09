@@ -8,7 +8,7 @@ MATCH void func_8009DD50(void) {
         func_800A3F28();
         ((BattlePanelTask*)g_Battle.target_record)->x.signed_half = 0x270F;
     } else {
-        value = func_800A4294(3) - ENEMY_COMBATANT(g_Battle.target).stats.defense;
+        value                                                     = func_800A4294(3) - ENEMY_COMBATANT(g_Battle.target).stats.defense;
         ((BattlePanelTask*)g_Battle.target_record)->x.signed_half = value;
     }
     panel = (BattlePanelTask*)g_Battle.target_record;

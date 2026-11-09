@@ -25,9 +25,8 @@ MATCH void func_801EF03C(void) {
     }
 }
 
-MATCH void func_801EF09C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF09C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0E0(void) {
     SYS_DISPATCH_BYTE(D_801F08F0, g_Task->header.step);
@@ -69,7 +68,6 @@ MATCH void func_801EF21C(void) {
     }
 }
 
-/* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
 MATCH void func_801EF27C(void) {
     u8 count;
 

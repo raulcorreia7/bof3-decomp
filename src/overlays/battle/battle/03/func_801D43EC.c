@@ -3,9 +3,6 @@
 /* Restarts the battle: clears the pending step, swaps the battle
  * state with the saved one and refreshes the actors' status rows.
  */
-/* nonmatching unmeasured: tried the four swapped state words are not kept in stack slots, so the frame is 0x28 against
- * the retail 0x30 and the candidate is 124 bytes short. resume: a source shape that keeps the four swapped words in
- * stack slots and drops the extra saved register. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D43EC(void) {
     s32  saved0;
@@ -58,7 +55,7 @@ NON_MATCHING void func_801D43EC(void) {
             } else {
                 /* The party side reads the same block three bytes in; one address keeps both reads alike. */
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_801EB6D0 + 3);
-                flags = ENEMY_COMBATANT(index).turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
+                flags                         = ENEMY_COMBATANT(index).turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
             }
             if (flags != 0) {
                 func_801DE560(1, 0, 0, 0xF, (u8*)&D_801EB08F);

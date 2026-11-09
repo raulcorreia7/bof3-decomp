@@ -30,13 +30,10 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/func_801EF72C.h"
 
-/* The scratch block is addressed by constant, not from a1 = 0x1F800008: sw ra 0x30 for 0x34. */
 INCLUDE_ASM(func_801EF810);
 
-/* The scratch block is addressed by constant as in func_801EF810: addiu sp -0x38 for -0x40. */
 INCLUDE_ASM(func_801EFA44);
 
-/* The loop is based on x, not on a2 = &radius: move s3,zero for s2. */
 INCLUDE_ASM(func_801EFCDC);
 
 #include "overlays/bmagic/func_801F0000.h"

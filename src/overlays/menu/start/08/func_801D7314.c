@@ -5,8 +5,6 @@
  * order and its measured bytes (58.33% against 57.74% without it). */
 extern volatile s16 D_80148628;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 65.79%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D7314(void) {
     s16 tmp0;
@@ -19,18 +17,17 @@ NON_MATCHING void func_801D7314(void) {
     u8  tmp5;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[16].unk_08                      = 0;
-    tmp1                                             = *(&D_801EC488 + ((s8)D_801ED648 * 4));
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-    tmp0                                             = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x =
-        (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + ((s8)D_801ED648 * 0x30);
+    g_MenuPanelTasks[16].unk_08                                 = 0;
+    tmp1                                                        = *(&D_801EC488 + ((s8)D_801ED648 * 4));
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    tmp0                                                        = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + ((s8)D_801ED648 * 0x30);
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = tmp0;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = (s16)tmp1;
-    tmp2 = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
-    tmp3 = D_801ED648;
-    tmp4 = tmp3 - 1;
+    tmp2                                                        = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    tmp3                                                        = D_801ED648;
+    tmp4                                                        = tmp3 - 1;
     if (tmp2 & PADLleft) {
         D_801ED648 = tmp4;
         val0       = tmp2 & PADLright;

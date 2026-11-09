@@ -1,8 +1,5 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: tried cached slot pointer; kind-3 hoisted to a local; unsigned index casts; else-scoped row
- * local. resume: a source shape that materializes kind-3 before the branch (retail fills the beqz delay slot with
- * addiu). */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E5E2C(void) {
     BattleEffect* slot;
@@ -16,10 +13,9 @@ NON_MATCHING void func_801E5E2C(void) {
     source = slot->target.party;
     kind   = source->slot;
     if (kind < 3) {
-        COORD_INT(slot->pos.x) =
-            source->unk_2E.half + (s8)g_BattlePanelOffsets[(source->facing * 2) + (source->unk_2C.half * 8)];
-        source = slot->target.party;
-        offset = (g_BattlePanelOffsets + 1)[(source->facing * 2) + (source->unk_2C.half * 8)];
+        COORD_INT(slot->pos.x) = source->unk_2E.half + (s8)g_BattlePanelOffsets[(source->facing * 2) + (source->unk_2C.half * 8)];
+        source                 = slot->target.party;
+        offset                 = (g_BattlePanelOffsets + 1)[(source->facing * 2) + (source->unk_2C.half * 8)];
     } else {
         COORD_INT(slot->pos.x) = source->unk_2E.half + ENEMY_COMBATANT(kind).panel_offset_x;
         source                 = slot->target.party;

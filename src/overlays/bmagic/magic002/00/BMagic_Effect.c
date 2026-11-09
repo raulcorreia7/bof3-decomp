@@ -31,14 +31,12 @@ MATCH void func_801EEEBC(void) {
     work->unk_09++;
     work->unk_10 += work->unk_20;
     draw = g_Task;
-    func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60,
-                  draw->unk_58);
+    func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60, draw->unk_58);
     if (g_Task->unk_09 >= 0xB) {
         g_Task->header.mode++;
     }
 }
 
-/* blocker: retail loads unk_09 before unk_60 and keeps g_Task in v1; first diff: lui v1 against a0 at 0x801EEF84. */
 INCLUDE_ASM(func_801EEF84);
 
 INCLUDE_ASM(func_801EF030);

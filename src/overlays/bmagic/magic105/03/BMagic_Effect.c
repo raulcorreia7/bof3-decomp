@@ -32,9 +32,8 @@ INCLUDE_ASM(func_801EED1C);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEF78(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEF78 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFBC(void) {
     Magic105Steps handlers;
@@ -100,10 +99,10 @@ MATCH void func_801EF880(void) {
 }
 
 MATCH void func_801EF8C4(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0078, g_Task->header.step);
     func_800AF764();
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF930(void) {
@@ -115,18 +114,16 @@ MATCH void func_801EF930(void) {
     cell                                = &D_1F800000.view.area.entry_data;
     *cell                               = ((u32)(rsin(g_Task->unk_09 << 6) * 3) >> 4);
     D_1F800000.view.area.entity_counter = (g_Task->unk_09 << 6) + 0x40;
-    g_Task->pos.x.fixed =
-        BATTLE_ACTIVE_WORK->pos.x.fixed + ((rsin(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    g_Task->pos.y.fixed =
-        BATTLE_ACTIVE_WORK->pos.y.fixed + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    COORD_INT(g_Task->pos.z) = (COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
-    height                   = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
-    work                     = g_Task;
-    work->unk_25             = 0x1D;
-    work->unk_14             = height >> 16;
-    g_Task->unk_26           = 0;
-    g_Task->unk_27           = 0xA0;
-    g_Task->unk_28           = 0;
+    g_Task->pos.x.fixed                 = BATTLE_ACTIVE_WORK->pos.x.fixed + ((rsin(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
+    g_Task->pos.y.fixed                 = BATTLE_ACTIVE_WORK->pos.y.fixed + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
+    COORD_INT(g_Task->pos.z)            = (COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
+    height                              = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    work                                = g_Task;
+    work->unk_25                        = 0x1D;
+    work->unk_14                        = height >> 16;
+    g_Task->unk_26                      = 0;
+    g_Task->unk_27                      = 0xA0;
+    g_Task->unk_28                      = 0;
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     tint                = -0x40;
     g_Task->unk_5D      = tint;

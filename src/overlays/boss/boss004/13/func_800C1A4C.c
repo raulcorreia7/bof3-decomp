@@ -15,9 +15,8 @@ MATCH void func_800C1A4C(void) {
             ((PartyMember*)g_Task)->unk_2A = 1;
             ((PartyMember*)g_Task)->pos.x.fixed += TO_COORD(1) + COORD_HALF;
         }
-        COORD_INT(((PartyMember*)g_Task)->pos.z) =
-            Area_SampleHeight(((PartyMember*)g_Task)->pos.x.fixed, ((PartyMember*)g_Task)->pos.y.fixed);
-        g_BattleCurrentEnemy->script = &D_800C272C;
+        COORD_INT(((PartyMember*)g_Task)->pos.z) = Area_SampleHeight(((PartyMember*)g_Task)->pos.x.fixed, ((PartyMember*)g_Task)->pos.y.fixed);
+        g_BattleCurrentEnemy->script             = &D_800C272C;
         Actor_SelectScript(1U);
         result = &g_Battle.outcome.result;
         *result |= 4;

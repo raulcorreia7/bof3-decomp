@@ -1,7 +1,4 @@
-/* Draws a small four-point diamond at the screen position (x, y): rotates
- * the points by the area camera angle, projects them and
- * queues one Gouraud quad. One definition shared by the area overlays; every
- * change here must verify every member. */
+/* Draws a small four-point diamond at the screen position (x, y): rotates the points by the area camera angle, projects them and queues one Gouraud quad. */
 /* func_801F3ECC (area016), func_801F3E00 (area033), func_801F3ECC (area045), func_801F3F04 (area065), func_801F3F00
    (area087), func_801F4A30 (area088), func_801F3F90 (area104), func_801F3ED0 (area115), func_801F3EE4 (area121),
    func_801F3E3C (area151), func_801F3D90 (area152) */
@@ -48,8 +45,7 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     VOL(s16, q3->vz)        = 0;
 
     SetPolyG4((POLY_G4*)primitive);
-    RotTransPers4(scratch, scratch + 1, scratch + 2, scratch + 3, (long*)(primitive + 8), (long*)(primitive + 0x10),
-                  (long*)(primitive + 0x18), (long*)(primitive + 0x20), &depth, &flag);
+    RotTransPers4(scratch, scratch + 1, scratch + 2, scratch + 3, (long*)(primitive + 8), (long*)(primitive + 0x10), (long*)(primitive + 0x18), (long*)(primitive + 0x20), &depth, &flag);
 
     vx0 = *FAKE_VOLATILE_PTR(s16, (primitive + 8));
 
@@ -80,10 +76,9 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     /* FAKE: volatile-drop keeps the original load and store order. */
     *FAKE_VOLATILE_PTR(u8, (primitive + 0x1E)) = 0xFFu;
 
-    setXY4(((POLY_G4*)primitive), (s16)(vx0 - 0x9E) + x, (s16)(vy0 - 0x76) + y,
-           (s16)((s16)((POLY_G4*)primitive)->x1 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y1 - 0x76) + y,
-           (s16)((s16)((POLY_G4*)primitive)->x2 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y2 - 0x76) + y,
-           (s16)((s16)((POLY_G4*)primitive)->x3 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y3 - 0x76) + y);
+    setXY4(((POLY_G4*)primitive), (s16)(vx0 - 0x9E) + x, (s16)(vy0 - 0x76) + y, (s16)((s16)((POLY_G4*)primitive)->x1 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y1 - 0x76) + y,
+           (s16)((s16)((POLY_G4*)primitive)->x2 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y2 - 0x76) + y, (s16)((s16)((POLY_G4*)primitive)->x3 - 0x9E) + x,
+           (s16)((s16)((POLY_G4*)primitive)->y3 - 0x76) + y);
 
     GFX_AddPrim(1u, sizeof(POLY_G4));
     PopMatrix();

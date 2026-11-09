@@ -40,4 +40,6 @@ void func_801F4798(void* arg0, void* arg1);
 
 void func_801F4614(void);
 
+extern SceneTrigger D_801F615C[];
+
 #endif

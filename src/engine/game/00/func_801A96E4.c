@@ -27,8 +27,7 @@ MATCH void func_801A96E4(ScriptState* state, u8* base) {
             state->cursor += 1;
             break;
         case 0xB8:
-            SND_PlaySequence(*(base + state->cursor + 1), *(base + state->cursor + 2), *(base + state->cursor + 3),
-                             *(base + state->cursor + 3));
+            SND_PlaySequence(*(base + state->cursor + 1), *(base + state->cursor + 2), *(base + state->cursor + 3), *(base + state->cursor + 3));
             state->cursor += 3;
             break;
         case 0xB9:
@@ -36,23 +35,19 @@ MATCH void func_801A96E4(ScriptState* state, u8* base) {
             state->cursor += 2;
             break;
         case 0xBA:
-            SND_FadeInSequence(*(base + state->cursor + 1), *(base + state->cursor + 2), *(base + state->cursor + 3),
-                               *(base + state->cursor + 4));
+            SND_FadeInSequence(*(base + state->cursor + 1), *(base + state->cursor + 2), *(base + state->cursor + 3), *(base + state->cursor + 4));
             state->cursor += 4;
             break;
         case 0xBB:
-            SND_StartDecrescendo(*(base + state->cursor + 1), *(base + state->cursor + 2), *(base + state->cursor + 3),
-                                 *(base + state->cursor + 4));
+            SND_StartDecrescendo(*(base + state->cursor + 1), *(base + state->cursor + 2), *(base + state->cursor + 3), *(base + state->cursor + 4));
             state->cursor += 4;
             break;
         case 0xBC:
-            SND_QueueCueVolume(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8),
-                               *(base + state->cursor + 3), *(base + state->cursor + 4));
+            SND_QueueCueVolume(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3), *(base + state->cursor + 4));
             state->cursor += 4;
             break;
         case 0xBD:
-            func_8015D820(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8),
-                          *(base + state->cursor + 3));
+            func_8015D820(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3));
             state->cursor += 3;
             break;
         case 0xBE:

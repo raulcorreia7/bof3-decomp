@@ -18,8 +18,7 @@ MATCH void func_801D62DC(void) {
     }
     func_801D6E94();
     if (g_GameAreaId == AREA_ID_ADULT_CAMP || g_GameAreaId == AREA_ID_DESERT_ENTRANCE_CAMP ||
-        (g_GameAreaId == AREA_ID_DESERT_CAMP_FIRST && g_SceneState.scenario_id == 0xE &&
-         SYS_TestFlag(g_SceneFlags[0], 5) != 0)) {
+        (g_GameAreaId == AREA_ID_DESERT_CAMP_FIRST && g_SceneState.scenario_id == 0xE && SYS_TestFlag(g_SceneFlags[0], 5) != 0)) {
         for (track = 0; track < 4; track++) {
             if (D_801E6100[track] != 0) {
                 SsSepReplay(0, track);

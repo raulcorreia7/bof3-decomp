@@ -31,12 +31,11 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EF064(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF064 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0A8(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0554, g_Task->header.step);
     if (g_Task->header.flags & 1) {
         if (g_Task->header.step != 0) {
@@ -50,7 +49,7 @@ MATCH void func_801EF0A8(void) {
             }
         }
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF174);
@@ -184,6 +183,4 @@ INCLUDE_ASM(func_801F01C0);
 #include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801F04F8 */
-MATCH void Actor_Clear(void) {
-    BMagic_ResetLocalWork();
-}
+#include "overlays/bmagic/Actor_Clear.h"

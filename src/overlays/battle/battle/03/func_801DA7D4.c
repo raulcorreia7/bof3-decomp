@@ -13,10 +13,6 @@ ASSERT_SIZE(BattleCommand, BATTLE_COMMAND_ENTRY_SIZE);
 /* The number of command-list rows a battle can hold. */
 #define BATTLE_COMMAND_MAX 3
 
-/* nonmatching unmeasured: tried the command-list build with the entry table indexed directly (a `table` alias hoisted
- * the stack array into s4 where retail recomputes sp+0x10 per use), the wide max and the byte accumulator (75.00%).
- * residual: retail seeds the s2 accumulator at entry and saves s2 first; ours saves s3 first and emits the s2 store
- * later, and ten branch hunks follow from that. resume: a source shape whose sum accumulator is live from entry. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DA7D4(void) {
     BattleCommand  entries[BATTLE_COMMAND_MAX];
@@ -51,8 +47,7 @@ NON_MATCHING void func_801DA7D4(void) {
     sum = 0;
     i   = 0;
     do {
-        if ((D_801463BA == 0) ||
-            (g_Game.members[i].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
+        if ((D_801463BA == 0) || (g_Game.members[i].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
             if (func_801DB844(i) & BYTE_MASK) {
                 total        = sum;
                 entry        = &entries[total];

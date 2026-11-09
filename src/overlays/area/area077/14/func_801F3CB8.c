@@ -1,4 +1,8 @@
 #include "area077_14.h"
 
-/* blocker: retail loads the three D_ globals before the prologue (addiu sp); first diff: addiu sp at 0x801F3CC8. */
-INCLUDE_ASM(func_801F3CB8);
+MATCH void func_801F3CB8(void) {
+    WorldPos_Copy(&g_Task->pos, &D_80146954);
+    g_Task->vx = 180;
+    func_801F41B4();
+    g_Task->header.mode++;
+}

@@ -45,8 +45,24 @@ extern u8 D_80144F5F;
 
 s32 func_8019601C();
 
+extern u16      D_80146876;
+extern u16      D_8014600E;
+extern s8       D_801FD004[4];
+extern s8       D_801FD008[2];
 extern u8       D_801FD030;
 extern Callback D_801FD038[];
+
+/* The camera nudges of 270.c: step the scroll words by the table entry picked with the low bits of the facing counter. They differ only in table and mask. */
+#define SCENA03_NUDGE_SCROLL(table, mask) \
+    do {                                  \
+        u16* scroll;                      \
+        u16  dir;                         \
+                                          \
+        dir    = D_80146876 & (mask);     \
+        scroll = (u16*)&D_80145ECE;       \
+        *scroll += (table)[dir] * 16;     \
+        D_8014600E += (table)[dir] * 16;  \
+    } while (0)
 
 s8 func_801FCD1C(void);
 

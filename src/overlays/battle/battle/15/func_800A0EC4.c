@@ -5,9 +5,6 @@ extern u8 D_80145F20[];
 /* Advances the battle party: bumps the active battler's timer, copies
  * the character cells into the battle rows and drains the enemy rows.
  */
-/* nonmatching unmeasured: the active-battler byte is reached through a pointer the retail homes in s2; candidate
- * 40.59%. resume: a source shape that reproduces the retail's cell, row and enemy-row address forms and its register
- * allocation. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A0EC4(void) {
     Character* cell;
@@ -31,14 +28,13 @@ NON_MATCHING void func_800A0EC4(void) {
             row_offset                         = *state * BATTLE_PARTY_STRIDE;
             D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
         }
-        Char_RebuildStats(((&g_Game.members[0].character_index)[(*state * BATTLE_PARTY_STRIDE)] * 0xA4) +
-                          (u8*)&g_Characters);
+        Char_RebuildStats(((&g_Game.members[0].character_index)[(*state * BATTLE_PARTY_STRIDE)] * 0xA4) + (u8*)&g_Characters);
         index = 0;
         if (g_Battle.party_count != 0) {
             do {
-                row_offset = index * BATTLE_PARTY_STRIDE;
-                cell = (Character*)(((&g_Game.members[0].character_index)[row_offset] * 0xA4) + (u8*)&g_Characters);
-                dest = (Character*)(row_offset + D_80145F04);
+                row_offset                 = index * BATTLE_PARTY_STRIDE;
+                cell                       = (Character*)(((&g_Game.members[0].character_index)[row_offset] * 0xA4) + (u8*)&g_Characters);
+                dest                       = (Character*)(row_offset + D_80145F04);
                 dest->equip.weapon         = cell->equip.weapon;
                 dest->equip.shield         = cell->equip.shield;
                 dest->equip.helmet         = cell->equip.helmet;
@@ -82,8 +78,7 @@ NON_MATCHING void func_800A0EC4(void) {
             rate = ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].kind * 68] / 10;
             if ((u32)(rate & HALF_MASK) < value) {
                 g_BattleEnemyBattlers[member].stats.max_hp = value - rate;
-                g_BattleEnemyBattlers[member].base.max_hp -=
-                    ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].kind * 68] / 10;
+                g_BattleEnemyBattlers[member].base.max_hp -= ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].kind * 68] / 10;
                 value = g_BattleEnemyBattlers[member].stats.max_hp;
                 if (value < g_BattleEnemyBattlers[member].hp) {
                     g_BattleEnemyBattlers[member].hp = value;

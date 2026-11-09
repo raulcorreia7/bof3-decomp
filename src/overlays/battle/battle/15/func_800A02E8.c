@@ -9,8 +9,7 @@ MATCH void func_800A02E8(void) {
     u32 battler;
 
     battler = *(u8*)&g_Battle.target;
-    if ((g_Game.members[battler].u.turn.action_flags.value &
-         (COMBATANT_FLAG_DRAGON_FORM_QUEUED | COMBATANT_FLAG_DRAGON_FORM)) == 0u) {
+    if ((g_Game.members[battler].u.turn.action_flags.value & (COMBATANT_FLAG_DRAGON_FORM_QUEUED | COMBATANT_FLAG_DRAGON_FORM)) == 0u) {
         if (BATTLER_IS_PLAYER(battler)) {
             g_Game.members[battler].counter_137 = 0u;
         }

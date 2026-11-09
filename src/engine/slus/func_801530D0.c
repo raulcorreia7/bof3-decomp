@@ -103,9 +103,9 @@ NON_MATCHING s32 func_801530D0(void) {
                     Area_RequestCellRows((AreaCell*)s0);
                     D_8014933A |= 1;
                 } else {
-                    D_1F800014[0].vx = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    D_1F800014[0].vy = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    rec              = (s8*)((MAP_BUNDLE_BASE + 0x30) + s0[1] * *map_width_ptr * 4 + s0[0] * 4);
+                    D_1F800014[0].vx           = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    D_1F800014[0].vy           = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    rec                        = (s8*)((MAP_BUNDLE_BASE + 0x30) + s0[1] * *map_width_ptr * 4 + s0[0] * 4);
                     *(s8**)(D_1F800000 + 0x10) = rec;
                     D_1F800014[0].vz           = -(rec[0] * 0x10);
                     gte_ldv0(&D_1F800014[0]);
@@ -137,8 +137,7 @@ NON_MATCHING s32 func_801530D0(void) {
                             rec  = *(s8**)(D_1F800000 + 0x10);
                             word = *(u32*)rec;
                             low  = rec[*map_width_ptr * 4];
-                            if (((*(s8*)(rec + *map_width_ptr * 4) < ((s32)(word << 8) >> 0x18)) |
-                                 (((s32)((s32)low << 0x10) >> 0x18) < (s32)(word >> 0x18))) != 0) {
+                            if (((*(s8*)(rec + *map_width_ptr * 4) < ((s32)(word << 8) >> 0x18)) | (((s32)((s32)low << 0x10) >> 0x18) < (s32)(word >> 0x18))) != 0) {
                                 *(u16*)(s1 + 0x4E) = Area_AllocCellPrimRow();
                             }
                             *(u16*)(s0 + 2) |= Area_UploadCell(s0[0], s0[1], s1, g_FrameBufferIndex);
@@ -173,8 +172,7 @@ NON_MATCHING s32 func_801530D0(void) {
                                 } else {
                                     LINK_PACKET((g_FrameBufferIndex + 2) * 8 + s5, pkt);
                                 }
-                            } else if ((tmp != 0) &&
-                                       ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
+                            } else if ((tmp != 0) && ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
                                 word          = *(u32*)rec;
                                 D_1F800000[0] = word ^ 0x80;
                                 if ((((word >> 8) & BYTE_MASK) ^ 0x80) < D_1F800000[0]) {
@@ -196,12 +194,12 @@ NON_MATCHING s32 func_801530D0(void) {
                             tmp = s2 * 0x50;
                             v16 = *(u16*)(((u8*)g_AreaCellPrims + 0x46) + tmp);
                             if (v16 != 0) {
-                                link                 = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
-                                *(u32*)(link + 8)    = *(u32*)(pkt2 + 0x20);
-                                *(u32*)(link + 0x10) = *(u32*)(pkt2 + 0x10);
-                                D_1F800014[0].vx     = (s0[0] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-                                D_1F800014[0].vy     = ((s0[1] - 0x80) << 7) - AREA_CELL_HALF;
-                                rec = (s8*)((MAP_BUNDLE_BASE + 0x34) + s0[1] * g_AreaMapBundle.width * 4 + s0[0] * 4);
+                                link                       = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
+                                *(u32*)(link + 8)          = *(u32*)(pkt2 + 0x20);
+                                *(u32*)(link + 0x10)       = *(u32*)(pkt2 + 0x10);
+                                D_1F800014[0].vx           = (s0[0] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                D_1F800014[0].vy           = ((s0[1] - 0x80) << 7) - AREA_CELL_HALF;
+                                rec                        = (s8*)((MAP_BUNDLE_BASE + 0x34) + s0[1] * g_AreaMapBundle.width * 4 + s0[0] * 4);
                                 *(s8**)(D_1F800000 + 0x10) = rec;
                                 D_1F800014[1].vx           = D_1F800014[0].vx;
                                 D_1F800014[1].vy           = ((s0[1] - 0x80) << 7) + AREA_CELL_HALF;
@@ -214,13 +212,12 @@ NON_MATCHING s32 func_801530D0(void) {
                             }
                             v16 = *(u16*)(((u8*)g_AreaCellPrims + 0x4E) + tmp);
                             if (v16 != 0) {
-                                link                 = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
-                                *(u32*)(link + 8)    = *(u32*)(pkt2 + 0x18);
-                                *(u32*)(link + 0x10) = *(u32*)(pkt2 + 0x20);
-                                D_1F800014[0].vx     = ((s0[0] - 0x80) << 7) - AREA_CELL_HALF;
-                                D_1F800014[0].vy     = (s0[1] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-                                rec = (s8*)((MAP_BUNDLE_BASE + 0x30) + (s0[1] + 1) * g_AreaMapBundle.width * 4 +
-                                            s0[0] * 4);
+                                link                       = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
+                                *(u32*)(link + 8)          = *(u32*)(pkt2 + 0x18);
+                                *(u32*)(link + 0x10)       = *(u32*)(pkt2 + 0x20);
+                                D_1F800014[0].vx           = ((s0[0] - 0x80) << 7) - AREA_CELL_HALF;
+                                D_1F800014[0].vy           = (s0[1] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                rec                        = (s8*)((MAP_BUNDLE_BASE + 0x30) + (s0[1] + 1) * g_AreaMapBundle.width * 4 + s0[0] * 4);
                                 *(s8**)(D_1F800000 + 0x10) = rec;
                                 D_1F800014[1].vx           = ((s0[0] - 0x80) << 7) + AREA_CELL_HALF;
                                 D_1F800014[1].vy           = D_1F800014[0].vy;
@@ -244,6 +241,5 @@ NON_MATCHING s32 func_801530D0(void) {
     func_80153D34();
 }
 #else
-/* blocker: stack frame; first diff: +0x0 addiu sp,sp,-0x78 (retail) against -0x70 (candidate). */
 INCLUDE_ASM(func_801530D0);
 #endif

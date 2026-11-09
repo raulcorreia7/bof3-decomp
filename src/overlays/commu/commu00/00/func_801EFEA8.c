@@ -36,8 +36,7 @@ MATCH s32 func_801EFEA8(void) {
             } else if (current_progress < (&D_801F2560)[D_801455C4]) {
                 record_group_number = group_number;
                 for (active_record_offset = 0; active_record_offset < 480; active_record_offset += 8) {
-                    if (((u8*)g_FairyJobs)[active_record_offset] != 0 &&
-                        ((u8*)g_FairyJobs)[active_record_offset + 1] == record_group_number) {
+                    if (((u8*)g_FairyJobs)[active_record_offset] != 0 && ((u8*)g_FairyJobs)[active_record_offset + 1] == record_group_number) {
                         active_record_count += 1;
                     }
                 }
@@ -60,8 +59,7 @@ MATCH s32 func_801EFEA8(void) {
                         queue_offset                                  = progress_or_queue_count * 2;
                         D_80145E60[queue_offset]                      = 1;
                     scan_queue:
-                        if (((u8*)g_FairyJobs)[queue_scan_offset] == 0 ||
-                            ((u8*)g_FairyJobs)[queue_scan_offset + 1] != queue_group_number) {
+                        if (((u8*)g_FairyJobs)[queue_scan_offset] == 0 || ((u8*)g_FairyJobs)[queue_scan_offset + 1] != queue_group_number) {
                             queue_record_index += 1;
                             queue_scan_offset += 8;
                             if (queue_record_index < 60) {

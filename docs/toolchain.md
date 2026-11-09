@@ -25,9 +25,9 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 
 ## Setup
 
-Linux is the primary host; use WSL2 on Windows. Install the host tools above, then run the
-commands of the [README quick start](../README.md#quick-start). Add `--matching` to
-`tools/setup.sh` for the permuter, the differ and m2c.
+Install the host tools above, then run the [README set up](../README.md#set-up) and
+[build](../README.md#build) commands. Add `--matching` to `tools/setup.sh` for the permuter, the
+differ and m2c.
 
 Put your disc in `inputs/external/` before `tools/setup.sh` ([inputs](../inputs/README.md)). The
 script is safe to run again; each step checks its result first. It runs:
@@ -111,7 +111,7 @@ Run each as `meson compile -C build/meson <name>`. `<image>` is a target id with
 | `check-<image>`   | The same for one image, for example `check-exe+slus_004_22`.                                                                                                                                                                                                                                                                     |
 | `check-headers`   | Compile every public header on its own.                                                                                                                                                                                                                                                                                          |
 | `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                                                                                                                                                |
-| `check-tree`      | Reject tracked retail data and files over 1 MiB.                                                                                                                                                                                                                                                                                 |
+| `check-tree`      | Reject tracked retail data, files over 1 MiB and struct members of enum type.                                                                                                                                                                                                                                                    |
 | `include-asm`     | Reject more `INCLUDE_ASM` lines than at the merge base with `origin/main` (or `main`), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone), so a lost match hidden by a new one elsewhere still fails and the key survives a folder move. |
 | `format`          | Format C, Python, TOML and Markdown.                                                                                                                                                                                                                                                                                             |
 | `format-check`    | The same steps in check mode; no file changes.                                                                                                                                                                                                                                                                                   |

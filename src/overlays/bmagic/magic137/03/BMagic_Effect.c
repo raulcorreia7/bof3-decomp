@@ -19,9 +19,8 @@ MATCH void func_801EEF64(void) {
     }
 }
 
-MATCH void func_801EEFD4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEFD4 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF018(void) {
     SYS_DISPATCH_BYTE(D_801F0104, g_Task->header.step);
@@ -32,7 +31,6 @@ MATCH void func_801EF018(void) {
     }
 }
 
-/* Blocker: same shape as func_801EF38C (scroll-target position copy, then SND and timer stores); retail's load order for the y terms differs from the candidate. */
 INCLUDE_ASM(func_801EF090);
 
 MATCH void func_801EF174(void) {

@@ -59,7 +59,6 @@ INCLUDE_ASM(func_801FBC88);
 
 INCLUDE_ASM(func_801FBD88);
 
-/* needs: compiling draft for the jump table at +0x20. */
 INCLUDE_ASM(func_801FC498);
 
 INCLUDE_ASM(func_801FC718);
@@ -236,7 +235,9 @@ INCLUDE_ASM(func_801FD748);
 
 INCLUDE_ASM(func_801FD800);
 
-INCLUDE_ASM(func_801FDD14);
+MATCH s8 func_801FDD14(s32 x, s32 y) {
+    SCENE_PROBE_POSITION(D_801FE478, 4, D_801FE48C);
+}
 
 MATCH s32 func_801FDD7C(void) {
     if (Item_Count(1, 0x47, 0) == 0) {

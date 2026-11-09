@@ -2,7 +2,7 @@
 
 /* FAKE: the load uses the g_SceneEventStep symbol and the store its literal address
  * so each access materializes its own base (retail's two symbolic accesses). */
-MATCH void Fairy_ReloadPartyBank(void) {
+MATCH void Fairy_ReloadPartySprites(void) {
     u8 variant;
 
     g_EmiStreamFlags = 0x20;

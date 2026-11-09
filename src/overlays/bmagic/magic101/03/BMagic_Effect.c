@@ -16,10 +16,6 @@ MATCH void func_801EEC18(void) {
     }
 }
 
-/* Three shapes tried (if/else per branch, read-then-condition-xor, shared-goto): gcc's
- * cross-jump merges the g_Battle.active_battler tests or the facing reads (0x180 vs 0x19C);
- * retail keeps three separate D_8014637C loads and a shared xor block at 0x801EED50. First
- * diff 0x801EECE0, the side-mask test's target. Layout problem, not scheduling. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EECCC(void) {
     u32 slot;
@@ -91,9 +87,8 @@ MATCH void func_801EEF20(void) {
 
 INCLUDE_ASM(func_801EF07C);
 
-MATCH void func_801EF310(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF310 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF354(void) {
     SYS_DISPATCH_BYTE(D_801EFCE8, g_Task->header.step);
@@ -133,10 +128,8 @@ NON_MATCHING void func_801EF3DC(void) {
 INCLUDE_ASM(func_801EF3DC);
 #endif
 
-/* Blocker: retail reloads g_Task after the rsin shift (sll v0,v0,5 at 0x801EF514); the candidate hoists the g_Task load above it. Three drafts (local work, direct reads, split offset) all fail there. */
 INCLUDE_ASM(func_801EF4DC);
 
-// hint: front half matches (wave local, count local); retail stores unk_10/unk_14 = 0x80 before unk_09 = 0x10 and does sw unk_1C through the old task pointer, but the candidate hoists li 16/sb unk_09 first
 INCLUDE_ASM(func_801EF580);
 
 MATCH void func_801EF690(void) {

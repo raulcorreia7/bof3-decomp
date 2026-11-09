@@ -1,6 +1,4 @@
-/* Every 1024 frames, spawns a flock of up to three actors at the focus point,
- * flying 0x400 above the ground, with one random facing of four. One definition shared by
- * the world area overlays; every change here must verify every member. */
+/* Every 1024 frames, spawns a flock of up to three actors at the focus point, flying 0x400 above the ground, with one random facing of four. */
 /* func_801F41BC (area016), func_801F407C (area152), func_801F40F0 (area033), func_801F4128 (area151), func_801F41BC
    (area045), func_801F41BC (area115), func_801F41D0 (area121), func_801F41EC (area087), func_801F41F4 (area065) ,
    func_801F4D1C (area088) */
@@ -39,12 +37,12 @@ MATCH void Actor_SpawnFlock(void) {
         if (index == GAME_NONE) {
             break;
         }
-        g_ActorSlots[index].header.flags = 1;
-        g_ActorSlots[index].type         = 0x16;
-        g_ActorSlots[index].header.mode  = 1;
-        g_ActorSlots[index].unk_06       = (u8)i;
-        g_ActorSlots[index].unk_08       = (u8)(kind >> 4);
-        distance = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) + 0x400;
+        g_ActorSlots[index].header.flags     = 1;
+        g_ActorSlots[index].type             = 0x16;
+        g_ActorSlots[index].header.mode      = 1;
+        g_ActorSlots[index].unk_06           = (u8)i;
+        g_ActorSlots[index].unk_08           = (u8)(kind >> 4);
+        distance                             = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) + 0x400;
         COORD_INT(g_ActorSlots[index].pos.z) = distance;
         i++;
     } while (i < count);

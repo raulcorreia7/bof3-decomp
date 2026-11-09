@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: the first draft rebuilt on the typed work records; the loader gate, the blocked-slot walk and
- * the panel row writes follow retail. resume: the branch and register diffs in the state block. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E7BA0(void) {
     PartyMember* temp_a0_288;
@@ -63,8 +61,7 @@ NON_MATCHING void func_801E7BA0(void) {
                 do {
                     temp_a0_92 = var_s0 & BYTE_MASK;
                     var_s0 += 1;
-                    g_BattleEffects[Battle_AllocEffect(0U, 0x11U) & BYTE_MASK].target.party =
-                        &g_Game.members[temp_a0_92];
+                    g_BattleEffects[Battle_AllocEffect(0U, 0x11U) & BYTE_MASK].target.party = &g_Game.members[temp_a0_92];
                 } while ((u32)(var_s0 & BYTE_MASK) < (u8)g_Battle.party_count);
             }
         }
@@ -98,33 +95,30 @@ NON_MATCHING void func_801E7BA0(void) {
             var_a2_201 += 0x10;
             var_a3_198 += 0x10;
         } while (var_a2_201 != temp_t0_202);
-        *(D_80145E91 + ((g_Task)->slot * 0x140))     = 6;
-        *(D_80145E92 + ((g_Task)->slot * 0x140))     = 4;
-        *(D_80145E93 + ((g_Task)->slot * 0x140))     = 4;
-        *(D_80145E94 + ((g_Task)->slot * 0x140))     = 1;
-        g_Game.members[(g_Task)->slot].facing        = g_Game.members[temp_v1_191].facing;
-        *(&D_80145ED8 + ((g_Task)->slot * 0x140))    = 2;
-        temp_a0_288                                  = g_Task;
-        *(&D_80145ED0 + (temp_a0_288->slot * 0x140)) = 0;
-        temp_v1_302                                  = temp_a0_288->slot * BATTLE_PARTY_STRIDE;
-        *(&D_80145FB4 + temp_v1_302)                 = *(&D_80145FB4 + temp_v1_302) | 0x2000;
-        temp_v0_311                                  = temp_a0_288->slot;
-        g_BattleEffects[temp_v0_311].pos.x           = g_EncounterParty[temp_v0_311].x;
-        temp_v0_323                                  = temp_a0_288->slot;
-        g_BattleEffects[temp_v0_323].pos.y           = g_EncounterParty[temp_v0_323].y;
-        temp_v0_339                                  = temp_a0_288->slot;
-        temp_a1_349                                  = g_Task;
-        g_BattleEffects[temp_a1_349->slot].pos.z.fixed =
-            Area_SampleHeight(g_BattleEffects[temp_v0_339].pos.x.fixed, g_BattleEffects[temp_v0_339].pos.y.fixed)
-            << 0x10;
-        temp_a0_363 = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
-        temp_v1_366 = g_Game.members[temp_a1_349->slot].chr.level;
+        *(D_80145E91 + ((g_Task)->slot * 0x140))       = 6;
+        *(D_80145E92 + ((g_Task)->slot * 0x140))       = 4;
+        *(D_80145E93 + ((g_Task)->slot * 0x140))       = 4;
+        *(D_80145E94 + ((g_Task)->slot * 0x140))       = 1;
+        g_Game.members[(g_Task)->slot].facing          = g_Game.members[temp_v1_191].facing;
+        *(&D_80145ED8 + ((g_Task)->slot * 0x140))      = 2;
+        temp_a0_288                                    = g_Task;
+        *(&D_80145ED0 + (temp_a0_288->slot * 0x140))   = 0;
+        temp_v1_302                                    = temp_a0_288->slot * BATTLE_PARTY_STRIDE;
+        *(&D_80145FB4 + temp_v1_302)                   = *(&D_80145FB4 + temp_v1_302) | 0x2000;
+        temp_v0_311                                    = temp_a0_288->slot;
+        g_BattleEffects[temp_v0_311].pos.x             = g_EncounterParty[temp_v0_311].x;
+        temp_v0_323                                    = temp_a0_288->slot;
+        g_BattleEffects[temp_v0_323].pos.y             = g_EncounterParty[temp_v0_323].y;
+        temp_v0_339                                    = temp_a0_288->slot;
+        temp_a1_349                                    = g_Task;
+        g_BattleEffects[temp_a1_349->slot].pos.z.fixed = Area_SampleHeight(g_BattleEffects[temp_v0_339].pos.x.fixed, g_BattleEffects[temp_v0_339].pos.y.fixed) << 0x10;
+        temp_a0_363                                    = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
+        temp_v1_366                                    = g_Game.members[temp_a1_349->slot].chr.level;
         if ((temp_v1_366 == 7) || (temp_v1_366 == 0)) {
-            g_Game.members[temp_a1_349->slot].chr.ap     = D_801EB4C8;
-            g_Game.members[temp_a1_349->slot].chr.status = D_801EB4CC;
-            temp_a0_392                                  = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
-            g_Game.members[temp_a1_349->slot].chr.fatigue =
-                g_Characters[(&g_Game.members[0].character_index)[temp_a0_392]].fatigue;
+            g_Game.members[temp_a1_349->slot].chr.ap                           = D_801EB4C8;
+            g_Game.members[temp_a1_349->slot].chr.status                       = D_801EB4CC;
+            temp_a0_392                                                        = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
+            g_Game.members[temp_a1_349->slot].chr.fatigue                      = g_Characters[(&g_Game.members[0].character_index)[temp_a0_392]].fatigue;
             temp_a0_409                                                        = g_Task;
             var_s0                                                             = 0;
             *(&D_80145FB4 + (temp_a0_409->slot * 0x140))                       = D_801EB4D0;
@@ -144,12 +138,10 @@ NON_MATCHING void func_801E7BA0(void) {
         *(&D_80148346 + ((temp_a0_475 + 0xD) * 0x24)) = g_Game.members[temp_a0_475].chr.ap;
         temp_a1_490                                   = temp_a1_458->slot;
         temp_v0_494                                   = temp_a1_490 * BATTLE_PARTY_STRIDE;
-        *(&D_8014833B + ((temp_a1_490 + 0xD) * 0x24)) =
-            (s8)((s32)(g_Game.members[temp_a1_490].chr.hp * 0x37) / (s32)g_Game.members[temp_a1_490].chr.stats.max_hp);
-        temp_a1_528 = (g_Task)->slot;
-        temp_v0_532 = temp_a1_528 * BATTLE_PARTY_STRIDE;
-        g_MenuPanelTasks[temp_a1_528 + 0xD].unk_0C =
-            (u8)((s32)(g_Game.members[temp_a1_528].chr.ap * 0x37) / (s32)g_Game.members[temp_a1_528].chr.stats.max_ap);
+        *(&D_8014833B + ((temp_a1_490 + 0xD) * 0x24)) = (s8)((s32)(g_Game.members[temp_a1_490].chr.hp * 0x37) / (s32)g_Game.members[temp_a1_490].chr.stats.max_hp);
+        temp_a1_528                                   = (g_Task)->slot;
+        temp_v0_532                                   = temp_a1_528 * BATTLE_PARTY_STRIDE;
+        g_MenuPanelTasks[temp_a1_528 + 0xD].unk_0C    = (u8)((s32)(g_Game.members[temp_a1_528].chr.ap * 0x37) / (s32)g_Game.members[temp_a1_528].chr.stats.max_ap);
         Actor_SelectScript(((g_Task)->facing + 4) & BYTE_MASK);
         GFX_LoadPalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
         func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));

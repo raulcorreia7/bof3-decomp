@@ -36,9 +36,8 @@ MATCH void func_801EF2A8(void) {
 
 #include "shared/Effect_PlayOnce.h"
 
-MATCH void func_801EF398(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF398 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF3DC(void) {
     Magic020Steps handlers = D_801EEC1C;
@@ -187,7 +186,6 @@ MATCH void func_801EFAD4(void) {
     func_801E5988();
 }
 
-/* hint: a local Callback[2] of func_801EFBA0 and func_801EFD10 fails to compile at the first function-pointer store (handlers[0] = func_801EFBA0); not byte-compared. */
 INCLUDE_ASM(func_801EFAF4);
 
 INCLUDE_ASM(func_801EFBA0);

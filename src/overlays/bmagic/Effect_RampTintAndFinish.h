@@ -1,7 +1,4 @@
-/* Raises the three tint bytes by 0x10; when the first byte, read as signed,
- * reaches -0x40 it lowers the active battler's ticker and clears the effect.
- * One body shared by the members below; every change must verify every member.
- */
+/* Raises the three tint bytes by 0x10; when the first byte, read as signed, reaches -0x40 it lowers the active battler's ticker and clears the effect. */
 /* func_801EF688 (magic001), func_801F00A8 (magic001), func_801F0B8C (magic015) */
 #define EFFECT_RAMP_TINT_AND_FINISH()          \
     g_Task->unk_5D += 0x10;                    \

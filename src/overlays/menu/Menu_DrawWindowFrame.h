@@ -1,5 +1,4 @@
-/* The 8-pixel window frame of the camp, battle-camp, master and shop menus: start/08, bate/00, shisu/00 and
- * shop/00 include it where the function sits. */
+/* The 8-pixel window frame of the camp, battle-camp, master and shop menus. */
 /* func_801DF6EC (start), func_801D674C (bate), func_801D76F4 (shisu), func_801DC1F4 (shop) */
 MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     RECT window;

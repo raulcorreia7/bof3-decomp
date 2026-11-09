@@ -56,9 +56,8 @@ MATCH void func_801EF3A0(void) {
 
 INCLUDE_ASM(func_801EF4F0);
 
-MATCH void func_801EF75C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF75C */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF7A0(void) {
     SYS_DISPATCH_BYTE(D_801F0BAC, g_Task->header.step);
@@ -181,7 +180,6 @@ INCLUDE_ASM(func_801F0764);
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-/* blocker: self-copy semantics; first diff: coordinate loads reversed at 0x801F08C4. */
 MATCH void func_801F08B4(void) {
     PartyMember* task;
     s8           tint;

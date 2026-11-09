@@ -14,8 +14,7 @@ MATCH void func_801D41E4(void) {
     state = FISHING_STATE;
     if (state->step_timer_09 != 0) {
         index = D_801E1E80[state->row_4B * 0xC] * 3;
-        func_801D9740(D_801E1F16[index], D_801E1F14 + index, ((8 - (4 - state->step_timer_09) * 2) & 0xFE) | 0x80,
-                      0x1D);
+        func_801D9740(D_801E1F16[index], D_801E1F14 + index, ((8 - (4 - state->step_timer_09) * 2) & 0xFE) | 0x80, 0x1D);
         return;
     }
     Actor_Clear();

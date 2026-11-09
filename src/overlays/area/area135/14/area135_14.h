@@ -58,12 +58,16 @@ extern u8       D_801F626C[];
 /* The x/y entry-coordinate pairs the request step indexes. */
 extern u8       D_801F6AAC[];
 extern u8       D_801F6AB4[];
+/* The x/y byte pairs the step compares the position against. */
+extern u8       D_801F6B2C[];
+extern u8       D_801F6B2D[];
 extern Callback D_801F6B34[];
 extern Callback D_801F6B40[];
 void            func_801F37C4(void);
 void            func_801F3830(s32 arg0, s32 arg1);
 void            func_801F3CA8(void);
 s32             func_801F5BCC(s16 arg0);
+u8              func_801F5C60(s32 x, s32 y);
 u8              func_801F5D1C(void);
 /* The overlay's companion steps the wrappers enter. */
 void            func_801F5D98(void);
@@ -71,8 +75,11 @@ void            func_801F5F28(void);
 
 extern Callback D_801F6B48[];
 extern Callback D_801F6B6C[];
+extern u8       D_801F6B3C[];
 
 void func_80159B9C(s32 x, s32 y, s32 w, s32 h);
 void func_80159FA0(s32 x, s32 y, s32 width, s32 height);
+
+extern SceneTrigger D_801F6BA8[];
 
 #endif

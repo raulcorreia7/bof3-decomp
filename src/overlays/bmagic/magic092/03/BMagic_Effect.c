@@ -28,9 +28,8 @@ INCLUDE_ASM(func_801EED04);
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-MATCH void func_801EF000(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EF000 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF044(void) {
     SYS_DISPATCH_BYTE(D_801F07C0, g_Task->header.step);
@@ -43,7 +42,6 @@ MATCH void func_801EF044(void) {
 
 INCLUDE_ASM(func_801EF0CC);
 
-// hint: same shape as magic093 801EF108 and magic097 801EF1A4 (retail 4 bytes longer: v1 index, base added last); enemy-table forms tried do not match
 INCLUDE_ASM(func_801EF1F0);
 
 #include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"

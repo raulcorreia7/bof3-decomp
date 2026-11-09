@@ -1,5 +1,4 @@
-/* The formation preview of the party formation menu. start/08, shop/00, bate/00 and shisu/00 include it where the
- * function sits, and each image header declares the g_MenuFormation* tables. */
+/* The formation preview of the party formation menu. */
 
 /* The formation table as one block, so the preview copies all of it to the stack. */
 typedef struct FormationTable {
@@ -32,12 +31,10 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
 
     table = *(FormationTable*)g_MenuFormations;
     order = g_MenuFormationOrder;
-    UI_DrawWindow(x + 3, y + 3, MENU_FORMATION_WINDOW_WIDTH, MENU_FORMATION_WINDOW_HEIGHT, 0,
-                  CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(x + 3, y + 3, MENU_FORMATION_WINDOW_WIDTH, MENU_FORMATION_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
 
     layout = &table.layouts[index];
-    UI_DrawTextString(x + FORMATION_PREVIEW_CENTER_X - layout->name_length * 4, y + FORMATION_PREVIEW_NAME_Y, 0,
-                      layout->name_length, layout->name);
+    UI_DrawTextString(x + FORMATION_PREVIEW_CENTER_X - layout->name_length * 4, y + FORMATION_PREVIEW_NAME_Y, 0, layout->name_length, layout->name);
 
     switch (index) {
         case 0:
@@ -55,21 +52,16 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
 
     /* Turn the arrow and the members by angle, x at twice the scale of y. */
     for (i = 0; i < 3; i++) {
-        g_MenuFormationArrowTurned[i][0] =
-            (g_MenuFormationArrow[i][0] * rcos(angle) - g_MenuFormationArrow[i][1] * rsin(angle)) >> 11;
-        g_MenuFormationArrowTurned[i][1] =
-            (g_MenuFormationArrow[i][0] * rsin(angle) + g_MenuFormationArrow[i][1] * rcos(angle)) >> 12;
+        g_MenuFormationArrowTurned[i][0] = (g_MenuFormationArrow[i][0] * rcos(angle) - g_MenuFormationArrow[i][1] * rsin(angle)) >> 11;
+        g_MenuFormationArrowTurned[i][1] = (g_MenuFormationArrow[i][0] * rsin(angle) + g_MenuFormationArrow[i][1] * rcos(angle)) >> 12;
     }
 
     /* The arrow brightens toward the front. */
     poly = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(poly);
-    setXY3(poly, x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[0][0],
-           y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[0][1],
-           x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[1][0],
-           y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[1][1],
-           x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[2][0],
-           y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[2][1]);
+    setXY3(poly, x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[0][0], y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[0][1],
+           x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[1][0], y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[1][1],
+           x + FORMATION_PREVIEW_CENTER_X - 1 + g_MenuFormationArrowTurned[2][0], y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationArrowTurned[2][1]);
     poly->r0 = poly->g0 = g_MenuFormationArrowTurned[0][1] * 8 - 97;
     poly->b0            = 0;
     poly->r1 = poly->g1 = g_MenuFormationArrowTurned[1][1] * 8 - 97;
@@ -120,9 +112,8 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
 
     /* Each icon stands on its spot: the spot is the middle of the icon's bottom edge. */
     for (i = 0; i < members; i++) {
-        Menu_DrawPanelIcon(x + FORMATION_PREVIEW_CENTER_X + g_MenuFormationSpots[i][0] - 4,
-                           y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationSpots[i][1] - 8, (u8)(order.members[i] + 3),
-                           0x1E, GetClut(16, STAGE_PALETTE_Y), shade[i]);
+        Menu_DrawPanelIcon(x + FORMATION_PREVIEW_CENTER_X + g_MenuFormationSpots[i][0] - 4, y + FORMATION_PREVIEW_CENTER_Y + g_MenuFormationSpots[i][1] - 8, (u8)(order.members[i] + 3), 0x1E,
+                           GetClut(16, STAGE_PALETTE_Y), shade[i]);
     }
 
     UI_DrawSpriteRun(x, y, g_MenuFormationFrameLeft, 0);

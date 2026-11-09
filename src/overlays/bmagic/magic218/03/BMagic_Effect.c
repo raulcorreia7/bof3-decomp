@@ -14,9 +14,8 @@ INCLUDE_ASM(func_801EEC5C);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEE18(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+/* func_801EEE18 */
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE5C(void) {
     SYS_DISPATCH_BYTE(D_801EF774, g_Task->header.step);
@@ -69,5 +68,4 @@ MATCH void func_801EF0F0(void) {
 
 INCLUDE_ASM(func_801EF250);
 
-/* blocker: the radius is a halfword at D_1F800000 (lh) but spawn.h types it s32; needs: type (a per-file width view is not allowed). */
 INCLUDE_ASM(func_801EF70C);

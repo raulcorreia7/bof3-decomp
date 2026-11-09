@@ -1,8 +1,4 @@
-/* The equipment compare window: a party member's name, power, defense, intellect and agility, the value each stat
- * would reach with the equipment in patch (func_80164EF8) beside an icon chosen by its compare flag, and the six
- * equipment slots, with the task's two selected slots raised. start/08, shop/00, bate/00 and shisu/00 include it where
- * the function sits, and each image header declares g_MenuEquipCompareSprites, g_MenuEquipCompareLabels and
- * g_MenuEquipSlotIcons. */
+/* The equipment compare window: a party member's name, power, defense, intellect and agility, the value each stat would reach with the equipment in patch (func_80164EF8) beside an icon chosen by its compare flag, and the six equipment slots, with the task's two selected slots raised. */
 #define MENU_EQUIP_COMPARE_WINDOW_WIDTH  120
 #define MENU_EQUIP_COMPARE_WINDOW_HEIGHT 163
 #define MENU_EQUIP_COMPARE_STATS         4 /* power, defense, intellect and agility */
@@ -25,8 +21,7 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
 
     left = x;
     top  = y;
-    UI_DrawWindow(x + 4, y + 4, MENU_EQUIP_COMPARE_WINDOW_WIDTH, MENU_EQUIP_COMPARE_WINDOW_HEIGHT, 0,
-                  CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(x + 4, y + 4, MENU_EQUIP_COMPARE_WINDOW_WIDTH, MENU_EQUIP_COMPARE_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
     chr   = (Character*)CHARACTER_BLOCK->records[index];
     stats = &chr->stats;
     UI_DrawText(x + 32, y + 7, 0, 5, chr->name);
@@ -68,22 +63,17 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
         if (i == task->unk_0B) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, func_801AF20C(compare.names[i]) & BYTE_MASK,
-                        compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
             func_801AEA80((u16)(left + 6), (u16)(top + i * 13 + 85), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_SELECTED,
-                        func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_SELECTED, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
         } else if (i == task->unk_0A) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, func_801AF20C(compare.names[i]) & BYTE_MASK,
-                        compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
             func_801AEA80((u16)(left + 6), (u16)(top + i * 13 + 85), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_NORMAL,
-                        func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_NORMAL, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
         } else {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_NORMAL, func_801AF20C(compare.names[i]) & BYTE_MASK,
-                        compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_NORMAL, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
         }
     }
 

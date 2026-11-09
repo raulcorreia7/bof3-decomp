@@ -4,9 +4,6 @@
 /* Draws the battle list box: the frame, the title text (DATA or BEST by title_index), the row and column guide
  * lines and their corner markers. The two unused parameters are the panel task's bytes 8 and 9 that the caller passes
  * through. */
-/* nonmatching unmeasured: tried opcode@+0x4: saved-register set and prologue order differ (retail
- * s3,s1,s7,s8,s2,s0,s5,s6,s4; ours differs), and the title text base materialization is off. resume: match the
- * caller-facing five-argument prototype (fifth byte on the stack) and rebuild the prologue copies from the asm. */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_b, u8 title_index) {
     /* FAKE: preserve the retail 0x48-byte frame; pure C is 50.49%. */
@@ -52,8 +49,7 @@ NON_MATCHING void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_
     style_text = s_BattleFrameTitles[style];
     y16 += 7;
     y16 <<= 0x10;
-    UI_DrawText((s16)(x16 - (((func_801AF20C(style_text) & BYTE_MASK) * 4) - 70)), (s16)(y16 >> 16), 0, 0x10U,
-                style_text);
+    UI_DrawText((s16)(x16 - (((func_801AF20C(style_text) & BYTE_MASK) * 4) - 70)), (s16)(y16 >> 16), 0, 0x10U, style_text);
     x16 <<= 0x10;
     x16  = x16 >> 0x10;
     temp = y_word >> 0x10;

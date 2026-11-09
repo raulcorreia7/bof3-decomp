@@ -1,24 +1,19 @@
 #include "start_08.h"
 
-/* nonmatching 76.74%: retail reads D_801ED620 signed at 0x47D4 (lb) and
- * unsigned later, but the union view keeps the cell's address in s0 and falls
- * to 55.81%. resume: a form that reads it once as signed without materialising
- * the address. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D53AC(void) {
     s32 pressed;
     u8  old;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
-    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags   = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x =
-        (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags              = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801EC440[(s8)D_801ED620];
-    pressed = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
-    old     = D_801ED620;
+    pressed                                                     = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    old                                                         = D_801ED620;
     if (pressed & PADLleft) {
         D_801ED620 = old - 1;
         if ((s8)(old - 1) < 0) {

@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* 82.15%; item pointer, limited pointer use and argument locals tried; first diff 0x801D457C, address register. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4564(void) {
     s32 tmp0;
@@ -10,14 +9,11 @@ NON_MATCHING void func_801D4564(void) {
 
     Menu_DrawClutStrip(D_80144953);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
-        Item_GetDescription(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A,
-                            D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+        Item_GetDescription(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
-        (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y +
-        (((g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD) +
-         0x1A);
+        (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (((g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD) + 0x1A);
     tmp0 = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     if (tmp0 & PADLup) {
         if (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C != 0) {
@@ -30,8 +26,7 @@ NON_MATCHING void func_801D4564(void) {
         if ((u8)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C < 0x1FU) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C += 1;
         }
-        if ((s32)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C >=
-            (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9)) {
+        if ((s32)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C >= (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9)) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
     } else if (tmp0 & 4) {
@@ -52,9 +47,8 @@ NON_MATCHING void func_801D4564(void) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = 0x1F;
         } else {
             if (tmp2 >= 0xFU) {
-                g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C =
-                    (D_80148510 + 0x17) - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
-                val1 = 0x17;
+                g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = (D_80148510 + 0x17) - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+                val1                                            = 0x17;
             } else {
                 g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C += 9;
                 val1 = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9;

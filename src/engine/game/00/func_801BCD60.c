@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 50.00%. resume: a lever or header
- * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     s8    stack_10;
@@ -91,9 +89,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             FIELD(s32, tmp16, 0x38u) = tmp3;
             tmp17                    = g_Task;
             val0                     = 1;
-            if (func_801C3E40(FIELD(s32, tmp17, 0x34u), FIELD(s32, tmp17, 0x38u), FIELD(u8, tmp17, 0x70u),
-                              Area_ReadStepHeight(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10)) &
-                0xFF) {
+            if (func_801C3E40(FIELD(s32, tmp17, 0x34u), FIELD(s32, tmp17, 0x38u), FIELD(u8, tmp17, 0x70u), Area_ReadStepHeight(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10)) & 0xFF) {
                 tmp1 = val7 - 1;
                 val5 = g_Task->pos.x.fixed;
                 if (tmp1 > 1) {
@@ -104,15 +100,11 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                     tmp10                    = g_Task;
                     FIELD(s32, tmp10, 0x34u) = val3;
                     tmp18                    = g_Task;
-                    if (func_801C3E40(FIELD(s32, tmp18, 0x34u), FIELD(s32, tmp18, 0x38u), FIELD(u8, tmp18, 0x70u),
-                                      Area_ReadHeight(val3, FIELD(s32, tmp10, 0x38u))) &
-                        0xFF) {
+                    if (func_801C3E40(FIELD(s32, tmp18, 0x34u), FIELD(s32, tmp18, 0x38u), FIELD(u8, tmp18, 0x70u), Area_ReadHeight(val3, FIELD(s32, tmp10, 0x38u))) & 0xFF) {
                         tmp11                    = g_Task;
                         FIELD(s32, tmp11, 0x34u) = val4;
                         tmp19                    = g_Task;
-                        if (func_801C3E40(FIELD(s32, tmp19, 0x34u), FIELD(s32, tmp19, 0x38u), FIELD(u8, tmp19, 0x70u),
-                                          Area_ReadHeight(val4, FIELD(s32, tmp11, 0x38u))) &
-                            0xFF) {
+                        if (func_801C3E40(FIELD(s32, tmp19, 0x34u), FIELD(s32, tmp19, 0x38u), FIELD(u8, tmp19, 0x70u), Area_ReadHeight(val4, FIELD(s32, tmp11, 0x38u))) & 0xFF) {
                             val4 += TO_COORD(-1);
                             val3 += TO_COORD(1);
                             val0 += 1;
@@ -139,16 +131,11 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                         tmp12                    = g_Task;
                         FIELD(s32, tmp12, 0x38u) = val3;
                         tmp21                    = g_Task;
-                        if (func_801C3E40(FIELD(s32, tmp21, 0x34u), FIELD(s32, tmp21, 0x38u), FIELD(u8, tmp21, 0x70u),
-                                          Area_ReadHeight(FIELD(s32, tmp12, 0x34u), val3)) &
-                            0xFF) {
+                        if (func_801C3E40(FIELD(s32, tmp21, 0x34u), FIELD(s32, tmp21, 0x38u), FIELD(u8, tmp21, 0x70u), Area_ReadHeight(FIELD(s32, tmp12, 0x34u), val3)) & 0xFF) {
                             tmp13                    = g_Task;
                             FIELD(s32, tmp13, 0x38u) = val4;
                             tmp22                    = g_Task;
-                            if (func_801C3E40(FIELD(s32, tmp22, 0x34u), FIELD(s32, tmp22, 0x38u),
-                                              FIELD(u8, tmp22, 0x70u),
-                                              Area_ReadHeight(FIELD(s32, tmp13, 0x34u), val4)) &
-                                0xFF) {
+                            if (func_801C3E40(FIELD(s32, tmp22, 0x34u), FIELD(s32, tmp22, 0x38u), FIELD(u8, tmp22, 0x70u), Area_ReadHeight(FIELD(s32, tmp13, 0x34u), val4)) & 0xFF) {
                                 val4 += TO_COORD(-1);
                                 val3 += TO_COORD(1);
                                 val0 += 1;
@@ -186,10 +173,9 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             } else {
             block_39:
                 if (func_801C6FD4(FIELD(s16, tmp9, 0x36u), FIELD(s16, tmp9, 0x3Au)) & BYTE_MASK) {
-                    g_Game.current->status.field.flags_12C.u8_value =
-                        (u8)(g_Game.current->status.field.flags_12C.u8_value & 0xFE);
-                    g_Task->unk_29       = (u8)g_AreaDrawMode;
-                    g_Task->direction_08 = (u8)stack_10;
+                    g_Game.current->status.field.flags_12C.u8_value = (u8)(g_Game.current->status.field.flags_12C.u8_value & 0xFE);
+                    g_Task->unk_29                                  = (u8)g_AreaDrawMode;
+                    g_Task->direction_08                            = (u8)stack_10;
                 } else {
                     goto block_41; /* retail branch */
                 }

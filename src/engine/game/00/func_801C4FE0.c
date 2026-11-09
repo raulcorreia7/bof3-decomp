@@ -35,8 +35,7 @@ MATCH s32 func_801C4FE0(void) {
         moved = 1;
     }
 
-    if (g_Task->unk_05 == 0 &&
-        !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+    if (g_Task->unk_05 == 0 && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_AdvanceScroll((s16)COORD_INT(g_Task->pos.z));
     }
     if (!(g_FrameCount & 3)) {

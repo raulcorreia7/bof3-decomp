@@ -30,8 +30,7 @@ MATCH s32 func_801BC4D0(void) {
         case 5:
             return 1;
         case 3:
-            result = ((s32 (*)(s32, s32, u8))Area_ReadStepHeight)(*(s32*)&D_1F800008, FIELD(s32, (&D_1F800008), 0x4u),
-                                                                  g_Task->direction_08);
+            result = ((s32 (*)(s32, s32, u8))Area_ReadStepHeight)(*(s32*)&D_1F800008, FIELD(s32, (&D_1F800008), 0x4u), g_Task->direction_08);
             if (SP_REF(u8, 0) != 0) {
                 if ((s16)result >= 0x41) {
                     g_Task->direction_08 = saved;

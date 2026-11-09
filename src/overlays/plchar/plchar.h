@@ -1,9 +1,6 @@
 #ifndef PLCHAR_FAMILY_H
 #define PLCHAR_FAMILY_H
 
-/* Declarations shared by two or more plchar images; an image header that
- * reads one includes this file. */
-
 #include "game.h"
 #include "slus/facing.h"
 #include "sys/exe.h"
@@ -19,17 +16,10 @@
 /* The type-0 loader copies the character program to 0x801CE400 and compares
  * its first word with the archive TOC cache. All 19 programs carry 33 + the
  * name-order ordinal (0x21-0x33); code follows at +0x04. */
-#define PLCHAR_PROGRAM_FIRST 33
+#define PLCHAR_PROGRAM_FIRST                                     33
 
-/* Runs one route step's script: when the facing index has reached the
- * direction byte, it selects the script id for the turn (0x40 at the back
- * facing, 0x41 at the away facing) and advances the task state; otherwise it
- * counts the step timer down, and on zero re-arms it and requests the next
- * script. The body of every Char_RunStepScript member; each passes the two
- * facing values at which it selects script 0x40 and 0x41. Every change here must verify every member
- * image. */
-#define CHAR_RUN_STEP_SCRIPT(FACING_SCRIPT_40, FACING_SCRIPT_41)        \
-    CHAR_RUN_STEP_CASES(FACING_SCRIPT_40, 0x40, FACING_SCRIPT_41, 0x41)
+/* Runs one route step's script: when the facing index has reached the direction byte, it selects the script id for the turn (0x40 at the back facing, 0x41 at the away facing) and advances the task state; otherwise it counts the step timer down, and on zero re-arms it and requests the next script. The body of every Char_RunStepScript member; each passes the two facing values at which it selects script 0x40 and 0x41. */
+#define CHAR_RUN_STEP_SCRIPT(FACING_SCRIPT_40, FACING_SCRIPT_41) CHAR_RUN_STEP_CASES(FACING_SCRIPT_40, 0x40, FACING_SCRIPT_41, 0x41)
 
 /* The same step with the two switch cases written in the given order: a member whose
  * retail switch tests the 0x41 facing first passes the 0x41 case first. */
@@ -54,12 +44,7 @@
         }                                                                             \
     }
 
-/* Starts the character's walk route: picks the direction away from the work
- * record's current route index with the resident selector (Actor_GetTurnStep),
- * stores it in the direction byte at +0x03, arms the step timer at +0x09 and
- * advances the task state at +0x02. The body of every Char_StartTurn member;
- * each passes the two facing values it turns between. Every change here must
- * verify every member image. */
+/* Starts the character's walk route: picks the direction away from the work record's current route index with the resident selector (Actor_GetTurnStep), stores it in the direction byte at +0x03, arms the step timer at +0x09 and advances the task state at +0x02. The body of every Char_StartTurn member; each passes the two facing values it turns between. */
 #define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                            \
     if (abs(g_Task->direction_08 - FACING_BACK) > abs(g_Task->direction_08 - FACING_AWAY)) { \
         g_Task->param.turn_step = Actor_GetTurnStep(FACING_AWAY);                            \
@@ -71,19 +56,14 @@
     g_Task->timer = 2;                                                                       \
     g_Task->header.step++
 
-/* Runs this image's turn preparation, requests the script of the character's current facing and sets the task to
- * state 0xB, step 1. The body of every character's facing-turn start; each passes its preparation function. Every
- * change here must verify every member image. */
+/* Runs this image's turn preparation, requests the script of the character's current facing and sets the task to state 0xB, step 1. The body of every character's facing-turn start; each passes its preparation function. */
 #define CHAR_START_FACING_TURN(PREPARE)                         \
     PREPARE();                                                  \
     Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42); \
     g_Task->unk_0A = 0xB;                                       \
     g_Task->unk_03 = 1
 
-/* Chooses a direction and requests its script: steps direction_08 to a free neighbouring facing when it is even
- * (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing
- * script. The body of every Char_FaceFreeDirection; each passes its two functions. Every change here must verify
- * every member image. */
+/* Chooses a direction and requests its script: steps direction_08 to a free neighbouring facing when it is even (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing script. The body of every Char_FaceFreeDirection; each passes its two functions. */
 /* Char_FaceFreeDirection (plp016 0x801CF7B4, plp026 0x801CFBD8, plp056 0x801CF9DC, plp267 0x801CEEB0, plp467
  * 0x801CE8D4, plp567 0x801CECB4, plp678 0x801CE6B8) */
 #define CHAR_FACE_FREE_DIRECTION(CHECK, PREPARE)                                \
@@ -108,9 +88,6 @@
 void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
 void Area_ClearCell(s32 x, s32 y);
 
-/* The cell-code probe shared by the plchar character programs: the three cell codes
- * that react start the image's own effect spawner CALLEE. Every change here must
- * verify every member image. */
 #define CHAR_PROBE_CELL_CODE(CALLEE)                                       \
     s32 cell;                                                              \
     s32 i;                                                                 \

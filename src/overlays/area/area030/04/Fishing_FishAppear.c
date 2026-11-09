@@ -5,14 +5,7 @@
 /* Picks the area's spawn row, randomises the facing and position of
  *           the scratchpad work record from its table byte and the play clock,
  *           then bumps the work step counter. */
-/* nonmatching unmeasured: tried the bounce count in a local (68.75); the negated scale in a local (66.21); the unsigned
- * facing comparison with a count local (74.31); the area-table entry taken as a pointer instead of a 0x24-byte rvalue
- * (74.31, byte-identical, so the rvalue was never the frame's cause). The candidate's frame is 0x28 where the retail's
- * is 0x18, and it keeps the table base in s0 where the retail rematerialises it per access (lhu %lo(g_FishingSpecies)($at)
- * and lbu %lo(D_801E2AD2)($at) at 0x801DE61C and 0x801DE6B4). resume: a source shape that keeps the table base out of a
- * callee-saved register and drops the frame to the retail's 0x18. */
 /* func_801DE5EC */
-/* A volatile cue pointer first differs at +0x28 and produces a 0x208-byte body instead of 0x240. */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_FishAppear(void) {
     s16 limit;
@@ -30,11 +23,10 @@ NON_MATCHING void Fishing_FishAppear(void) {
         FISHING_ROW->facing_92 = count;
     }
     FISHING_ROW->facing_92 &= 3;
-    FISHING_STATE->motion_34.unk_34 = TO_COORD(20) - (RANDOM_MASK(0xF) << 0x10);
-    FISHING_STATE->y_38.pos_y = TO_COORD(62) - (FISHING_ROW->facing_92 * TO_COORD(12)) - (RANDOM_MASK(0xF) << 0x10);
-    FISHING_STATE->bounce_3C.half.key_3E =
-        (s16)((-(FISHING_ENTRY(FISHING_STATE->cue_index_06)->count_0A << 0x18) >> 0x10) - (RANDOM_MASK(7) << 5));
-    limit = Area_SampleHeight(FISHING_STATE->motion_34.unk_34, FISHING_STATE->y_38.pos_y);
+    FISHING_STATE->motion_34.unk_34      = TO_COORD(20) - (RANDOM_MASK(0xF) << 0x10);
+    FISHING_STATE->y_38.pos_y            = TO_COORD(62) - (FISHING_ROW->facing_92 * TO_COORD(12)) - (RANDOM_MASK(0xF) << 0x10);
+    FISHING_STATE->bounce_3C.half.key_3E = (s16)((-(FISHING_ENTRY(FISHING_STATE->cue_index_06)->count_0A << 0x18) >> 0x10) - (RANDOM_MASK(7) << 5));
+    limit                                = Area_SampleHeight(FISHING_STATE->motion_34.unk_34, FISHING_STATE->y_38.pos_y);
     if (FISHING_STATE->bounce_3C.half.key_3E == 0) {
         FISHING_STATE->bounce_3C.half.key_3E = -0x20;
     } else if (FISHING_STATE->bounce_3C.half.key_3E < limit) {

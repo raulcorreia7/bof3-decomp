@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: s1-held D_1F800008 pointer folds to absolute. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801B0E44(void) {
     u8   saved_dir;
@@ -45,8 +44,7 @@ NON_MATCHING s32 func_801B0E44(void) {
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if ((s16)result >= 0x41) {
-                    if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) &&
-                        (g_Task == (void*)g_Game.members)) {
+                    if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
                         if (Area_SetCellPalette(D_80145EC6, D_80145ECA) & BYTE_MASK) {
                             SND_PlayCue(D_801CD0F4[((u8*)pos2)[-7]]);
                             Actor_RequestScript((g_Task->direction_08 >> 1) + 0x10);

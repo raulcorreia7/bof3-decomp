@@ -3,11 +3,9 @@
 
 static Scene00Tables D_801FC980_Tables = {
     {
-        func_801F6E04, func_801F6E48, func_801F7264,           func_801F72A0, func_801F7350, func_801F7350,
-        func_801F73A8, func_801F7484, (Callback)func_801F74EC, func_801F7670, func_801F78CC, func_801F7A5C,
-        func_801F7B0C, func_801F7B80, func_801F7C34,           func_801F7CF0, func_801F7DC8, func_801F7EE0,
-        func_801F8014, func_801F8140, func_801F82B4,           func_801F878C, func_801F882C, func_801F8930,
-        func_801F89F0, func_801F8AB8,
+        func_801F6E04, func_801F6E48, func_801F7264, func_801F72A0, func_801F7350, func_801F7350, func_801F73A8, func_801F7484, (Callback)func_801F74EC,
+        func_801F7670, func_801F78CC, func_801F7A5C, func_801F7B0C, func_801F7B80, func_801F7C34, func_801F7CF0, func_801F7DC8, func_801F7EE0,
+        func_801F8014, func_801F8140, func_801F82B4, func_801F878C, func_801F882C, func_801F8930, func_801F89F0, func_801F8AB8,
     },
     0x0C,
     (s8)0xC8,
@@ -96,10 +94,10 @@ MATCH void func_801F6E48(void) {
     work_cell = (SceneEffect*)work;
     adopted   = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
 
-    work_cell->pos.x             = adopted->pos.x.fixed;
-    work_cell->pos.y             = adopted->pos.y.fixed;
-    work_cell->pos.z.fixed_point = adopted->pos.z.fixed;
-    g_GfxPrimCursor              = prim + 8;
+    work_cell->pos.x       = adopted->pos.x.fixed;
+    work_cell->pos.y       = adopted->pos.y.fixed;
+    work_cell->pos.z.fixed = adopted->pos.z.fixed;
+    g_GfxPrimCursor        = prim + 8;
     TASK_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
@@ -133,8 +131,7 @@ MATCH void func_801F6E48(void) {
     setClut(poly, 176, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
-    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
-           ((g_FrameCount >> 2) & 0x15) + poly->y2, 16, ((g_FrameCount >> 2) & 0x15) + poly->y2);
+    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0, ((g_FrameCount >> 2) & 0x15) + poly->y2, 16, ((g_FrameCount >> 2) & 0x15) + poly->y2);
 
     setRGB0(poly, 128, 128, 128);
 
@@ -260,7 +257,7 @@ MATCH void func_801F7484(void) {
     SCN_EFFECT->pos.x              = TO_COORD(11);
     SCN_EFFECT->pos.y              = TO_COORD(15) + COORD_HALF;
     distance                       = Area_SampleHeight(SCN_EFFECT->pos.x, TO_COORD(15) + COORD_HALF);
-    SCN_EFFECT->pos.z.parts.height = distance;
+    SCN_EFFECT->pos.z.part.integer = distance;
     SCN_EFFECT->ot_index           = 5;
     SCN_EFFECT->step               = 1;
 }
@@ -275,19 +272,19 @@ MATCH void func_801F74EC(void) {
     SceneLineColor color;
     s16            stop;
 
-    work                    = SCN_EFFECT;
-    color                   = D_801F6C04;
-    row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos.x;
-    next.x                  = point.x;
-    point.y                 = work->pos.y;
-    next.y                  = point.y;
-    point.z                 = work->pos.z;
-    next.z                  = point.z;
-    row_point.x             = row->pos.x.fixed;
-    row_point.y             = row->pos.y.fixed;
-    row_point.z.fixed_point = row->pos.z.fixed;
-    stop                    = 1;
+    work              = SCN_EFFECT;
+    color             = D_801F6C04;
+    row               = (Actor*)&g_Actors[work->channel_06];
+    point.x           = work->pos.x;
+    next.x            = point.x;
+    point.y           = work->pos.y;
+    next.y            = point.y;
+    point.z           = work->pos.z;
+    next.z            = point.z;
+    row_point.x       = row->pos.x.fixed;
+    row_point.y       = row->pos.y.fixed;
+    row_point.z.fixed = row->pos.z.fixed;
+    stop              = 1;
     do {
         next.x = point.x;
         next.y = point.y + 0x8000;
@@ -296,7 +293,7 @@ MATCH void func_801F74EC(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.parts.height = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Area_SampleHeight(point.x, next.y);
         }
         func_801F78EC(next, point, color);
         point = next;
@@ -320,16 +317,16 @@ MATCH void func_801F7670(void) {
     SceneLineColor color;
     s16            stop;
 
-    work                    = SCN_EFFECT;
-    color                   = D_801F6C04;
-    row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos.x;
-    point.y                 = work->pos.y;
-    point.z                 = work->pos.z;
-    row_point.x             = row->pos.x.fixed;
-    row_point.y             = row->pos.y.fixed;
-    row_point.z.fixed_point = row->pos.z.fixed;
-    stop                    = 1;
+    work              = SCN_EFFECT;
+    color             = D_801F6C04;
+    row               = (Actor*)&g_Actors[work->channel_06];
+    point.x           = work->pos.x;
+    point.y           = work->pos.y;
+    point.z           = work->pos.z;
+    row_point.x       = row->pos.x.fixed;
+    row_point.y       = row->pos.y.fixed;
+    row_point.z.fixed = row->pos.z.fixed;
+    stop              = 1;
     do {
         next.x = point.x;
         next.y = point.y + 0x8000;
@@ -338,7 +335,7 @@ MATCH void func_801F7670(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.parts.height = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Area_SampleHeight(point.x, next.y);
         }
         func_801F78EC(next, point, color);
         point = next;
@@ -346,7 +343,7 @@ MATCH void func_801F7670(void) {
 
     point.x              = TO_COORD(11);
     point.y              = TO_COORD(19) + COORD_HALF;
-    point.z.parts.height = Area_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
+    point.z.part.integer = Area_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
     color.r              = 0x30;
     color.g              = 0x30;
     color.b              = 0x30;
@@ -359,7 +356,7 @@ MATCH void func_801F7670(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.parts.height = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Area_SampleHeight(point.x, next.y);
         }
         func_801F78EC(point, next, color);
         point = next;
@@ -378,25 +375,25 @@ MATCH void func_801F78CC(void) {
  * LINE_F2 primitive.
  */
 MATCH void func_801F78EC(volatile SceneLinePoint to, volatile SceneLinePoint from, SceneLineColor color) {
-    LINE_F2*        prim;
-    SVECTOR         vec;
-    long            p;
-    long            flag;
-    SceneElevation* point_z;
+    LINE_F2* prim;
+    SVECTOR  vec;
+    long     p;
+    long     flag;
+    Coord*   point_z;
 
     prim = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(prim);
 
     vec.vx  = ((from.x >> 9) - 0x4000);
     vec.vy  = ((from.y >> 9) - 0x4000);
-    point_z = (SceneElevation*)&from.z;
-    vec.vz  = (-point_z->parts.height / 2);
+    point_z = (Coord*)&from.z;
+    vec.vz  = (-point_z->part.integer / 2);
     RotTransPers(&vec, (long*)&prim->x0, &p, &flag);
 
     vec.vx  = ((to.x >> 9) - 0x4000);
     vec.vy  = ((to.y >> 9) - 0x4000);
-    point_z = (SceneElevation*)&to.z;
-    vec.vz  = (-point_z->parts.height / 2);
+    point_z = (Coord*)&to.z;
+    vec.vz  = (-point_z->part.integer / 2);
     RotTransPers(&vec, (long*)&prim->x1, &p, &flag);
 
     setRGB0(prim, color.r, color.g, color.b);
@@ -419,7 +416,7 @@ MATCH void func_801F7A5C(void) {
     work_pos                     = SCN_EFFECT;
     work_pos->pos.x              = TO_COORD(99) + COORD_HALF;
     work_pos->pos.y              = TO_COORD(13);
-    work_pos->pos.z.parts.height = 0x300;
+    work_pos->pos.z.part.integer = 0x300;
     work_pos->counter_09         = 0x78;
     work_tail                    = SCN_EFFECT;
     work_pos->angle.x            = 0;
@@ -683,8 +680,6 @@ MATCH void func_801F8360(void) {
     } while (i < 24);
 }
 
-/* Projection helpers shared by the scenario and world00 overlays. */
-
 /* The current scenario work object. The cell is a volatile pointer so every
  * read of it stays its own load, as in the shipped image. */
 
@@ -840,7 +835,7 @@ MATCH void func_801F89F0(void) {
     update_work                     = SCN_EFFECT;
     update_work->pos.x              = (update_work->pos.x + deltas[0]);
     update_work->pos.y              = (update_work->pos.y + deltas[1]);
-    update_work->pos.z.parts.height = (update_work->pos.z.parts.height + deltas[2]);
+    update_work->pos.z.part.integer = (update_work->pos.z.part.integer + deltas[2]);
     update_work->step               = (update_work->step + 1);
 }
 
@@ -854,10 +849,10 @@ MATCH void func_801F8AB8(void) {
 
     screen = (DVECTOR*)D_1F800034;
     work   = SCN_EFFECT;
-    work->pos.z.parts.height += 0x20;
+    work->pos.z.part.integer += 0x20;
     point[0] = work->pos.x;
     point[1] = work->pos.y;
-    point[2] = work->pos.z.fixed_point;
+    point[2] = work->pos.z.fixed;
     Area_ProjectPoint(point, screen);
 
     current                     = SCN_EFFECT;
@@ -888,8 +883,7 @@ MATCH void func_801F8BCC(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     half = SCN_EFFECT->channel_06 >> 1;
     SetPolyFT4(prim);
-    setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06,
-            SCN_EFFECT->channel_06);
+    setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06, SCN_EFFECT->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
     setRGB0(prim, SCN_EFFECT->color_r, SCN_EFFECT->color_g, SCN_EFFECT->color_b);
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
@@ -922,10 +916,10 @@ MATCH void func_801F8D90(void) {
     work_cell = (SceneEffect*)work;
     first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
 
-    work_cell->pos.x             = first->pos.x.fixed;
-    work_cell->pos.y             = first->pos.y.fixed;
-    work_cell->pos.z.fixed_point = first->pos.z.fixed;
-    g_GfxPrimCursor              = prim + 8;
+    work_cell->pos.x       = first->pos.x.fixed;
+    work_cell->pos.y       = first->pos.y.fixed;
+    work_cell->pos.z.fixed = first->pos.z.fixed;
+    g_GfxPrimCursor        = prim + 8;
     TASK_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
@@ -966,8 +960,7 @@ MATCH void func_801F8D90(void) {
     setClut(poly, 176, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
-    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
-           ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0), 16,
+    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0, ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0), 16,
            ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0));
 
     setRGB0(poly, 128, 128, 128);
@@ -1652,11 +1645,9 @@ MATCH void func_801FA7D8(void) {
                 g_ActorSlots[D_1F800000[0]].type         = 0x1Eu;
                 g_ActorSlots[D_1F800000[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
                 g_ActorSlots[D_1F800000[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
-                distance =
-                    Area_SampleHeight(g_ActorSlots[D_1F800000[0]].pos.x.fixed, g_ActorSlots[D_1F800000[0]].pos.y.fixed)
-                    << 16;
-                g_ActorSlots[D_1F800000[0]].pos.z.fixed = distance;
-                g_ActorSlots[D_1F800000[0]].unk_29      = 0;
+                distance                                 = Area_SampleHeight(g_ActorSlots[D_1F800000[0]].pos.x.fixed, g_ActorSlots[D_1F800000[0]].pos.y.fixed) << 16;
+                g_ActorSlots[D_1F800000[0]].pos.z.fixed  = distance;
+                g_ActorSlots[D_1F800000[0]].unk_29       = 0;
             }
             *counter             = 0x84u;
             g_SceneState.step_05 = 7u;

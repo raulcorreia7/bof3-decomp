@@ -4,13 +4,13 @@
 /* A world area: the map bundle the area program loads at 0x80104000 (grid
  * dimensions, per-cell corner heights, tile rectangles, the per-cell byte-code
  * table, and the object and record lists), the scene/step table at 0x800E3800
- * and the area script bank at 0x800D3800. The area overlays build the field
+ * and the area script table at 0x800D3800. The area overlays build the field
  * mesh, place objects and run the area script from these bytes; the game
  * overlay queries the same grid. Format: @source: wiki:formats/area.
  *
- * Readers: `exe/slus_004_22@0x80155560` indexes the interleaved bank offsets;
+ * Readers: `exe/slus_004_22@0x80155560` indexes the interleaved tile table offsets;
  * `exe/slus_004_22@0x8014DD3C` stores scene record byte +0x07 at work+0x2C and
- * `exe/slus_004_22@0x8014D6DC` uses it as a script-bank index.
+ * `exe/slus_004_22@0x8014D6DC` uses it as a script-table index.
  *
  * Per-cell byte-code values, record-list opcodes and `scroll_1E` have no known
  * meaning and keep offset names.
@@ -22,7 +22,7 @@
  *
  * - `AreaMapBundle` and its cell rows: map bundle.
  * - `AreaActorDef`, `AreaActorDefs`: scene/step table.
- * - `AreaScriptBank`, `AreaScriptSection`: area script bank.
+ * - `AreaScriptTable`, `AreaScriptSection`: area script table.
  * - `AreaTrail`, `AreaSlotWork`, `UPoint2D`: neighboring buffers; the
  *   area program owns them.
  *
@@ -80,13 +80,10 @@
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
 #define AREA_PALETTE_WORK          0x80037800u
-/* The animation-stream banks g_ScriptBank alternates between: the area bank the
- * field uses, the battle bank the battle handler swaps in, and the battle magic
- * bank a battle magic effect sets while its step table runs (every setter is a
- * bmagic overlay; it restores the area bank afterwards). */
-#define AREA_SCRIPT_BANK           0x800D3800u
-#define BATTLE_SCRIPT_BANK         0x800F0800u
-#define BMAGIC_SCRIPT_BANK         0x800C3800u
+/* The script tables g_ScriptTable alternates between: the field's, the battle's and the battle magic's. */
+#define AREA_SCRIPT_TABLE          0x800D3800u
+#define BATTLE_SCRIPT_TABLE        0x800F0800u
+#define BMAGIC_SCRIPT_TABLE        0x800C3800u
 #define AREA_PALETTE_UNIT          0x40u  /* one CLUT entry */
 #define AREA_PALETTE_ROW           0x200u /* one upload row (32 rows) */
 
@@ -137,36 +134,36 @@
  * `@0x80158B24`, `@0x8015507C`, `@0x80155B40`; the grid readers live in
  * emi/etc/game/00 (`@0x8019C4F0`, `@0x8019C794`, `@0x8019EC20`). */
 typedef struct AreaMapBundle {
-    u8  width;                 /* 0x00 - grid width in cells */
-    u8  height;                /* 0x01 */
-    u16 grid_off4_02;          /* 0x02 - cell grid, 4-byte units:
+    u8  width;                       /* 0x00 - grid width in cells */
+    u8  height;                      /* 0x01 */
+    u16 grid_off4_02;                /* 0x02 - cell grid, 4-byte units:
                                 *        (0x30 + width*height*4 + align4(width*height)) / 4 */
-    u16 bank_offsets_04[4][2]; /* 0x04-0x13 - [selector][bank], A then B */
-    u16 byte_code_off4_14;     /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
+    u16 tile_table_offsets_04[4][2]; /* 0x04-0x13 - [selector][table], A then B */
+    u16 byte_code_off4_14;           /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
                                 *        (0x30 + width*height*4) / 4; equals
                                 *        width*height + 12 in 200/200 payloads */
-    u16 zero_16;               /* 0x16 - zero in 200/200, no reader */
-    u16 zero_18;               /* 0x18 - zero in 200/200, no reader */
-    u16 color_1A[2];           /* 0x1A-0x1D - runtime color words, written by the engine
+    u16 zero_16;                     /* 0x16 - zero in 200/200, no reader */
+    u16 zero_18;                     /* 0x18 - zero in 200/200, no reader */
+    u16 color_1A[2];                 /* 0x1A-0x1D - runtime color words, written by the engine
                                 *            (`@0x801583BC` is the only header store) and
                                 *            read at `0x8010401A + (mask >> 3) * 2` */
-    u16 scroll_1E;             /* 0x1E - shipped 0xF300-0xFA90 in 76/200, meaning open */
-    u16 list_base_20;          /* 0x20 - record list, opcode byte & 0x3f */
-    u16 list_base_22;          /* 0x22 - record list, opcode byte & 0x7f */
-    u16 record_region_24;      /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
-    u16 zero_26;               /* 0x26 - zero in 200/200, no reader */
-    u16 object_list_28;        /* 0x28 - tag + body size, walked by the map interpreter */
-    u16 height_off4_2A;        /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
+    u16 scroll_1E;                   /* 0x1E - shipped 0xF300-0xFA90 in 76/200, meaning open */
+    u16 list_base_20;                /* 0x20 - record list, opcode byte & 0x3f */
+    u16 list_base_22;                /* 0x22 - record list, opcode byte & 0x7f */
+    u16 record_region_24;            /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
+    u16 zero_26;                     /* 0x26 - zero in 200/200, no reader */
+    u16 object_list_28;              /* 0x28 - tag + body size, walked by the map interpreter */
+    u16 height_off4_2A;              /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
                                 *        payloads, == size - width*height in the rest */
-    u16 zero_2C;               /* 0x2C - zero in 200/200, no reader */
-    u16 zero_2E;               /* 0x2E - zero in 200/200, no reader */
+    u16 zero_2C;                     /* 0x2C - zero in 200/200, no reader */
+    u16 zero_2E;                     /* 0x2E - zero in 200/200, no reader */
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
 ASSERT_OFFSET(AreaMapBundle, width, 0x00);
 ASSERT_OFFSET(AreaMapBundle, height, 0x01);
 ASSERT_OFFSET(AreaMapBundle, grid_off4_02, 0x02);
-ASSERT_OFFSET(AreaMapBundle, bank_offsets_04, 0x04);
+ASSERT_OFFSET(AreaMapBundle, tile_table_offsets_04, 0x04);
 ASSERT_OFFSET(AreaMapBundle, byte_code_off4_14, 0x14);
 ASSERT_OFFSET(AreaMapBundle, list_base_20, 0x20);
 ASSERT_OFFSET(AreaMapBundle, height_off4_2A, 0x2A);
@@ -220,7 +217,7 @@ typedef struct AreaCellCorners {
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
 
-/* Four-byte bank-A tile rectangle. */
+/* Four-byte tile table A rectangle. */
 typedef struct AreaTileRect {
     u8 dv_00;
     u8 du_01;
@@ -230,7 +227,7 @@ typedef struct AreaTileRect {
 
 ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
 
-/* Eight-byte bank-B tile descriptor: four UV pairs. */
+/* Eight-byte tile table B descriptor: four UV pairs. */
 typedef struct AreaTileQuad {
     u8 uv_pairs_00[4][2];
 } AreaTileQuad;
@@ -263,20 +260,20 @@ typedef struct AreaMapObjectHeader {
 
 ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
 
-/* `0x800D3800` - the area script bank, a bank of actor animation streams: a
+/* `0x800D3800` - the area script table, a table of actor animation streams: a
  * `u32` directory, then per section a `u16` slot table followed by its
  * records. Each record is one stream (see `Actor_StageAnimStep`). `dir_bytes == 4 * L` is the
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
- * the block through `g_ScriptBank`: `section = u32[bank + 4*lhu(work+0x2C)]`,
- * `record = bank + section + u16[bank + section + 2*lbu(work+0x4B)]`, stored to
- * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_BANK` in for the duration of a
+ * the block through `g_ScriptTable`: `section = u32[table + 4*lhu(work+0x2C)]`,
+ * `record = table + section + u16[table + section + 2*lbu(work+0x4B)]`, stored to
+ * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_TABLE` in for the duration of a
  * battle handler. */
-typedef struct AreaScriptBank {
+typedef struct AreaScriptTable {
     u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */
     u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
-} AreaScriptBank;
+} AreaScriptTable;
 
 /* One section: `slots_bytes == 2 * M`, and the distinct `record_off` values
  * increase strictly and tile the section, one stream each. The last section
@@ -288,7 +285,7 @@ typedef struct AreaScriptSection {
 
 /* `0x800E3800` - the scene table: a `u32` count then 8-byte records.
  * `exe/slus_004_22@0x8014DD3C` copies `script_section` to work+0x2C;
- * `@0x8014D6DC` uses it as a script-bank directory index and
+ * `@0x8014D6DC` uses it as a script-table directory index and
  * `@0x80167E00` compares it before resolving the record id in a terminated
  * list. `D_801459F4` publishes the record array at `0x800E3800 + 4`. */
 typedef enum SpriteTextureMode {
@@ -307,7 +304,7 @@ typedef struct AreaActorDef {
     u8  texture_page;   /* 0x04 - to work+0x25 (4 distinct values) */
     u8  texture_v;      /* 0x05 - to work+0x26 (31 distinct values) */
     u8  texture_mode;   /* 0x06 - to work+0x28; the 9 and 10 cases belong to actor +0x06 */
-    u8  script_section; /* 0x07 - copied to work+0x2C; script-bank index */
+    u8  script_section; /* 0x07 - copied to work+0x2C; script-table index */
 } AreaActorDef;
 
 ASSERT_SIZE(AreaActorDef, AREA_ACTOR_DEF_SIZE);
@@ -318,11 +315,11 @@ typedef struct AreaActorDefs {
 } AreaActorDefs;
 
 /* `0x801459F0` - the four pointers the loader publishes together. Each word has
- * its own name in the tree (`g_ScriptBank` the script bank, `D_801459F4` the scene
+ * its own name in the tree (`g_ScriptTable` the script table, `D_801459F4` the scene
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {
-    u32 script_bank_00;   /* 0x00 -> 0x800D3800 (swapped per battle handler) */
+    u32 script_table_00;  /* 0x00 -> 0x800D3800 (swapped per battle handler) */
     u32 scene_records_04; /* 0x04 -> 0x800E3804 */
     u32 work_08;          /* 0x08 -> 0x800E4800 */
     u32 code_base_0C;     /* 0x0C -> 0x800F5000 */
@@ -385,7 +382,8 @@ typedef struct AreaRing {
     s32     center[3];                /* 0x10 - the ring centre */
     s32     unk_1C;                   /* 0x1C */
     s16     radius;                   /* 0x20 */
-    s16     unk_22;                   /* 0x22 */
+    u8      unk_22;                   /* 0x22 */
+    u8      unk_23;                   /* 0x23 */
     DVECTOR screen_base;              /* 0x24 */
     DVECTOR screen_center;            /* 0x28 */
     DVECTOR screen[AREA_RING_POINTS]; /* 0x2C - one screen position per ring point */

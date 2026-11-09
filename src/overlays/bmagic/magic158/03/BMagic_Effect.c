@@ -11,9 +11,7 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 /* func_801EEEF0 */
-MATCH void BMagic_DispatchMode(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
-}
+#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF34(void) {
     SYS_DISPATCH_BYTE(D_801EF788, g_Task->header.step);
@@ -44,7 +42,6 @@ MATCH void func_801EF140(void) {
     }
 }
 
-/* magic045 shape with the angle cell as s16* &D_1F800004 reaches 4 bytes short; retail keeps the masked phase in v0 and shifts it twice (sll a0 then sll v0), ours puts it in a0; first diff +0x14 */
 INCLUDE_ASM(func_801EF1C8);
 
 INCLUDE_ASM(func_801EF2F0);

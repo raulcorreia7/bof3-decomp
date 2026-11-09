@@ -64,8 +64,7 @@ MATCH void func_801F016C(ScenePart* parts, s32 shift_x, s32 shift_y) {
                 verts[i].vy = shift_y + parts[n].vertex.y * 2;
                 verts[i].vz = func_801F0ADC(verts[i].vx, verts[i].vy) + parts[n].raw;
             }
-            RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2,
-                          (long*)&prim->x3, (long*)&prim->x0, &p, &flag);
+            RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, (long*)&prim->x0, &p, &flag);
             SetSemiTrans(prim, (rec[0].raw >> 31));
             setRGB0(prim, (rec[0].raw >> 16), (rec[0].raw >> 8), rec[0].raw);
             rec++;
@@ -151,8 +150,7 @@ MATCH void func_801F0488(u8* part_list, s32 x, s32 y) {
             }
         }
 
-        RotTransPers4(&uv[1], &uv[2], &uv[3], &uv[0], (long*)(&prim->x1), (long*)(&prim->x2), (long*)(&prim->x3),
-                      (long*)(&prim->x0), &p, &flag);
+        RotTransPers4(&uv[1], &uv[2], &uv[3], &uv[0], (long*)(&prim->x1), (long*)(&prim->x2), (long*)(&prim->x3), (long*)(&prim->x0), &p, &flag);
         func_80155560(((ScenePart*)part_list)[part_word_offset + 5].raw, prim, 1);
         GFX_AddPrim(g_AreaDrawMode, sizeof(*prim));
         PopMatrix();

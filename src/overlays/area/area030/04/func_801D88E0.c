@@ -2,9 +2,6 @@
 
 /* Draws the accessory panel for one actor row: the accessory icons, their names and the slot markers
  * around the actor's icon. */
-/* nonmatching unmeasured: the retail frame is 0x48 and the candidate 0x40, so the eight unused frame bytes are
- * declared; candidate 60.27%. resume: a source shape that reproduces the retail's cell, row and enemy-row address
- * forms. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D88E0(s16 x, s16 y) {
     /* FAKE: unused frame, 8 bytes. */
@@ -66,8 +63,7 @@ NON_MATCHING void func_801D88E0(s16 x, s16 y) {
             panel_x = (s16)g_Accessories;
             UI_DrawText((s16)icon_x, (s16)icon_y, 7, 0xCU, (g_FishingRod * 0x14) + panel_x);
             func_800F7094((s32)slot_x, (s16)icon_y, g_FishingRod, 3, 0);
-            UI_DrawText((s16)icon_x, (s16)(panel_y + 24), (s32)(g_Task->option_flags), 0xCU,
-                        (g_FishingRod * 0x14) + panel_x);
+            UI_DrawText((s16)icon_x, (s16)(panel_y + 24), (s32)(g_Task->option_flags), 0xCU, (g_FishingRod * 0x14) + panel_x);
             func_800F7094((s32)slot_x, (s16)(panel_y + 44), g_FishingLure, 3, 0);
             last_x       = icon_x;
             last_y       = panel_y + 42;

@@ -2,8 +2,6 @@
 
 /* lifted draft, best score 23.25%; semantics unverified
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
- * draft; best score 23.25%. resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
     s16   stack_18; /* compiler-managed */
@@ -52,8 +50,7 @@ NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
     val9  = ((s32)val8 >> 0x1C) & 3;
     if (val8 & 0xF00) {
         if (val8 & 0x800) {
-            tmp14    = (*((val9 * 4) + &g_AreaMapBundle.bank_offsets_04[0][1]) * 4) +
-                       (((val8 & 0x7FF) * 8) + (MAP_BUNDLE_BASE + 0x00));
+            tmp14    = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][1]) * 4) + (((val8 & 0x7FF) * 8) + (MAP_BUNDLE_BASE + 0x00));
             stack_18 = FIELD(s8, tmp14, 0x3u);
             stack_1A = FIELD(s16, tmp14, 0x2u) & BYTE_MASK;
             stack_20 = FIELD(u8, tmp14, 0x1u);
@@ -64,8 +61,7 @@ NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
             stack_30 = FIELD(u8, tmp15, 0x1u);
             stack_32 = FIELD(u8, tmp14, 0x4u);
         } else {
-            tmp16    = (*((val9 * 4) + &g_AreaMapBundle.bank_offsets_04[0][0]) * 4) +
-                       (((val8 & BYTE_MASK) * 4) + (MAP_BUNDLE_BASE + 0x00));
+            tmp16    = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][0]) * 4) + (((val8 & BYTE_MASK) * 4) + (MAP_BUNDLE_BASE + 0x00));
             tmp9     = FIELD(s8, tmp16, 0x3u);
             stack_28 = (s16)tmp9;
             stack_18 = (s16)tmp9;

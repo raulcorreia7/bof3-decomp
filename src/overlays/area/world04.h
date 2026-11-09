@@ -1,15 +1,12 @@
 #ifndef WORLD04_FAMILY_H
 #define WORLD04_FAMILY_H
 
-/* Declarations shared by two or more world04 images; an image header that
- * reads one includes this file. */
-
 #include "sys/gameui.h"
 #include "overlays/area/area.h"
 #include "overlays/area/Message_ShowParty.h"
 #include "overlays/area/WorldAreaRequest.h"
 
-/* Message ids of the faerie village text bank shared by area175 through area185. */
+/* Message ids of the faerie village text, used by area175 through area185. */
 enum {
     FAIRY_MESSAGE_MUSICIAN_THANKS               = 0x5A,
     FAIRY_MESSAGE_COPY_SHOP_DECLINED            = 0x5F,
@@ -82,5 +79,29 @@ static inline void World04_StoreAnswerChoice(u8* target) {
     MESSAGE_REQUEST_CLEAR();
     *target = g_MessageChoice;
 }
+
+/* A trigger rectangle in tile units. */
+typedef struct TriggerBox {
+    u8 x0;
+    u8 y0;
+    u8 x1;
+    u8 y1;
+    u8 unk_04;
+} TriggerBox;
+
+/* The index of the first of the two boxes the party member stands in, or 0xFF. */
+#define WORLD04_FIND_TRIGGER_BOX(member, boxes)                                                                                     \
+    do {                                                                                                                            \
+        s32 i;                                                                                                                      \
+        s32 x = g_Game.members[(member)].pos.x.fixed;                                                                               \
+        s32 y = g_Game.members[(member)].pos.y.fixed;                                                                               \
+        for (i = 0; i < 2; i++) {                                                                                                   \
+            if (x < ((boxes)[i].x0 << 16) || x > ((boxes)[i].x1 << 16) || y < ((boxes)[i].y0 << 16) || y > ((boxes)[i].y1 << 16)) { \
+                continue;                                                                                                           \
+            }                                                                                                                       \
+            return i;                                                                                                               \
+        }                                                                                                                           \
+        return 0xFF;                                                                                                                \
+    } while (0)
 
 #endif
