@@ -1,8 +1,7 @@
 #include "area030_04.h"
 
-/* Builds the AREA030 menu icon textured quad: sets the FT4 header,
- * picks the tpage from the GPU graph type, lays the icon into both halves of
- * the quad and queues the primitive.
+/* Builds the AREA030 fish arrow textured quad from page (576, 256) with CLUT
+ * (0, 489), mirrored when flip is nonzero, and queues the primitive.
  */
 
 /* func_801D2C34 */

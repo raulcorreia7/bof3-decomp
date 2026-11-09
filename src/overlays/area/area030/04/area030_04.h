@@ -240,8 +240,8 @@ typedef struct FishingSelectionState {
     u8  pad[0x94];
 } FishingSelectionState;
 
-/* One 0x10-byte panel icon row from D_801E2424: the two texture-page words,
- * the quad size and the U/V origin func_801E0DCC copies into a sprite. */
+/* One 0x10-byte panel icon row from D_801E2424: the CLUT x and y (unk_00 and
+ * unk_04), the quad size and the U/V origin func_801E0DCC copies into a sprite. */
 typedef struct PanelIcon {
     s32 unk_00;
     s32 unk_04;
