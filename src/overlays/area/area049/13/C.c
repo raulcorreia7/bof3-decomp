@@ -52,7 +52,12 @@ INCLUDE_ASM(func_801176B8);
 
 INCLUDE_ASM(func_80117768);
 
-INCLUDE_ASM(func_80117818);
+MATCH void func_80117818(void) {
+    if (func_80117900() == 0) {
+        func_80196070();
+        D_80146258 &= ~0x40;
+    }
+}
 
 INCLUDE_ASM(func_80117864);
 
