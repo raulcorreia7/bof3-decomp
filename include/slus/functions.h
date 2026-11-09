@@ -296,7 +296,7 @@ void        SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
 void        SND_PlayCue(u16 cue_id);
 /* func_80161808 */
-void        SND_SetBankLayout(u32 layout_bank);
+void        SND_SetBankLayout(u32 layout);
 /* func_80161B24 */
 void        SND_StartBGM(u8 bgm_id, u8 cue_level, u8 cue_shape);
 /* func_80161BBC */
