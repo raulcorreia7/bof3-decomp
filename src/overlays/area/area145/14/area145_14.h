@@ -47,4 +47,7 @@ extern s8    D_80147CB9[];
 extern s8    D_80147CBA[];
 extern s32   D_80147CC4[];
 
+extern SceneTrigger D_801F5CC0[];
+extern u8           D_80144EF0[];
+
 #endif
