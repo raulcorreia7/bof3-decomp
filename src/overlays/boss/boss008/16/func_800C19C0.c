@@ -1,10 +1,5 @@
 #include "boss008_16.h"
 
-extern u8 D_800C2640[];
-extern u8 D_800C2641[];
-extern u8 D_800C2642[];
-extern void func_801D9DBC(s32, s32, s32, s32, s32);
-
 MATCH void func_800C19C0(void) {
     s32 idx;
     u32 b0;

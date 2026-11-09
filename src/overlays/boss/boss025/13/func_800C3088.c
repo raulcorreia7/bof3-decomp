@@ -1,11 +1,5 @@
 #include "boss025_13.h"
 
-extern u8  D_801490F8[];
-extern u8  D_800C184C[];
-extern s32 D_801463D0;
-extern u8  D_800C32A8[];
-extern u8  D_80146329;
-
 MATCH void func_800C3088(void) {
     u8* buf;
 
