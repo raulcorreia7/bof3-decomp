@@ -27,6 +27,8 @@ extern volatile u8  SCENA16_D_80143F03;
 extern u8           SCENA16_D_80143F1D;
 extern s32          SCENA16_D_80143F80;
 extern volatile u8  SCENA16_D_80145988;
+extern u32          SCENA16_D_80145EC4;
+extern u32          SCENA16_D_80145EC8;
 extern volatile u16 SCENA16_D_80146258;
 extern volatile u32 SCENA16_D_80149308;
 extern s32          SCENA16_D_8014930C;
