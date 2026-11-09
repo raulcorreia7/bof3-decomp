@@ -9,7 +9,7 @@ MATCH void func_800AF9D4(BattleSpriteCellRecord* record) {
     u32 dividend;
     u32 divisor;
     u32 i;
-    u32 bank;
+    u32 clut;
 
     index     = record->bank_index;
     dividend  = record->cell_value;
@@ -22,8 +22,8 @@ MATCH void func_800AF9D4(BattleSpriteCellRecord* record) {
         base = quotient + 0x10;
     }
     for (i = 1; i < (s_BattleCellRowCount[record->bank_index] << 4); i++) {
-        bank = (u32)g_GraphicsPaletteDst + ((base & BYTE_MASK) << 9);
-        *(u16*)(bank + ((product & BYTE_MASK) + i) * 2) &= 0x7FFF;
+        clut = (u32)g_GraphicsPaletteDst + ((base & BYTE_MASK) << 9);
+        *(u16*)(clut + ((product & BYTE_MASK) + i) * 2) &= 0x7FFF;
     }
     g_GfxPalettePending = 1;
 }

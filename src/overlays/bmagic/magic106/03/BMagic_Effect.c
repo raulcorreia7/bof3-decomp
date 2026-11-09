@@ -44,7 +44,8 @@ MATCH void func_801EEF24(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFAC);
+/* func_801EEFAC */
+#include "overlays/bmagic/Effect_StartOrbit.h"
 
 INCLUDE_ASM(func_801EF16C);
 

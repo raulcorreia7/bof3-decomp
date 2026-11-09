@@ -107,7 +107,8 @@ MATCH void func_801EF384(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF40C);
+/* func_801EF40C */
+#include "overlays/bmagic/Effect_StartOrbit.h"
 
 INCLUDE_ASM(func_801EF5CC);
 

@@ -1,10 +1,8 @@
 # Identifiers that still carry an address (file, name). check_names.py only lets this shrink.
-include/scenario/effect.h	EFFECT_BANK_80140000
 include/slus/exports.h	PTR_s_EXCEPTION_8017f504
 include/slus/exports.h	PTR_s_INTERRRUPT_8017f508
 include/slus/exports.h	s__LOGO_LOGO_EXE_1_80149800
 include/sys/loader_tail.h	Rec8_80181E40
-src/engine/game/00/func_801C2018.c	EFFECT_BANK_80140000
 src/engine/slus/SYS_ShowException.c	PTR_s_EXCEPTION_8017f504
 src/engine/slus/SYS_ShowException.c	PTR_s_INTERRRUPT_8017f508
 src/engine/slus/SYS_StartLogo.c	s__LOGO_LOGO_EXE_1_80149800
@@ -37,20 +35,10 @@ src/overlays/area/area168/13/func_801F3DB0.c	func_801F4158_area168
 src/overlays/area/area168/13/func_801F3F54.c	func_801F4158_area168
 src/overlays/area/area168/13/func_801F40D8.c	func_801F4158_area168
 src/overlays/area/area168/13/func_801F4158_area168.c	func_801F4158_area168
-src/overlays/battle/battle/03/func_801D9428.c	EFFECT_BANK_80140000
 src/overlays/battle/battle/03/func_801D99AC.c	func_801D99AC_decl_guard
 src/overlays/battle/battle/03/func_801D9DBC.c	func_801D9DBC_decl_guard
 src/overlays/battle/battle/03/func_801DA078.c	func_801DA078_decl_guard
-src/overlays/battle/battle/03/func_801DEDE4.c	EFFECT_BANK_80140000
-src/overlays/battle/battle/03/func_801E30F8.c	EFFECT_BANK_80140000
-src/overlays/battle/battle/03/func_801E3160.c	EFFECT_BANK_80140000
-src/overlays/battle/battle/03/func_801E483C.c	EFFECT_BANK_80140000
-src/overlays/battle/battle/03/func_801E6B28.c	EFFECT_BANK_80140000
 src/overlays/battle/battle/15/battle_15.h	D_801462F0_state
-src/overlays/battle/battle/15/battle_15.h	EFFECT_BANK_80140000
-src/overlays/battle/battle/15/func_8009773C.c	EFFECT_BANK_80140000
-src/overlays/battle/battle/15/func_800980E4.c	EFFECT_BANK_80140000
-src/overlays/battle/battle/15/func_80098408.c	EFFECT_BANK_80140000
 src/overlays/battle/battle/15/func_800A1CB4.c	D_801462F0_state
 src/overlays/bmagic/Effect_DrawBolt.h	D_1F800014_HALF
 src/overlays/bmagic/magic058/03/magic058_03.h	D_1F800000_HALF
@@ -68,7 +56,6 @@ src/overlays/commu/commu00/00/Fairy_StartJobs.c	D_801F24FC_Data
 src/overlays/commu/commu00/00/commu00_00.h	D_801F24FC_Data
 src/overlays/commu/commu00/00/func_801F1110.c	D_801F24FC_Data
 src/overlays/menu/shop/00/data_801E5DB4.c	unk_801E6004
-src/overlays/scenario/Scene_ClearParty.h	EFFECT_BANK_80140000
 src/overlays/scenario/scena00/00/8.c	D_801FC980_Tables
 src/overlays/scenario/scena16/00/scena16_00.h	SCENA16_D_80010004
 src/overlays/scenario/scena16/00/scena16_00.h	SCENA16_D_80010006

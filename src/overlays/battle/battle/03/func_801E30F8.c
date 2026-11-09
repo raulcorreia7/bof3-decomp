@@ -2,7 +2,7 @@
 
 MATCH u8 func_801E30F8(void) {
     volatile EnemyBattler* ew            = BATTLE_CURRENT_ENEMY_PTR;
-    volatile u8*           battle_global = (u8*)(EFFECT_BANK_80140000);
+    volatile u8*           battle_global = (u8*)(PARTY_STATE_PTR);
 
     if ((ew->status & (STATUS_PARALYZED | STATUS_SLEEPING)) != 0u) {
         return 1u;

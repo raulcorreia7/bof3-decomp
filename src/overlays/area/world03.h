@@ -36,4 +36,5 @@ extern u16 D_80146876;
 void Area_Update();
 
 /* The world-overlay position resolver used by the origin handlers. */
+
 #endif

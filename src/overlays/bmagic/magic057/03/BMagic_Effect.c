@@ -79,13 +79,13 @@ MATCH void func_801EF02C(void) {
 MATCH void func_801EF08C(void) {
     Magic057SecondSteps handlers;
 
-    handlers     = D_801EEC2C;
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    handlers      = D_801EEC2C;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 1) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF134);
@@ -146,13 +146,13 @@ MATCH void func_801EF81C(void) {
 MATCH void func_801EF83C(void) {
     Magic057SecondSteps handlers;
 
-    handlers     = D_801EEC44;
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    handlers      = D_801EEC44;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((g_Task->header.flags & 1) && (g_BattleEffectBattler->timer == 0)) {
         func_8014D290();
     }
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF900(void) {

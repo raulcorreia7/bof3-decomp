@@ -13,7 +13,7 @@ MATCH void func_800AFAB8(u8* record) {
     u32           remainder;
     u32           row;
     s32           product;
-    volatile u16* bank;
+    volatile u16* clut;
 
     slot      = record[0x28];
     index     = record[0x27];
@@ -27,7 +27,7 @@ MATCH void func_800AFAB8(u8* record) {
     if (flags & 4) {
         row = quotient + 0x10;
     }
-    bank                               = g_GraphicsPaletteDst + ((row & BYTE_MASK) << 8);
-    bank[(product & BYTE_MASK) + 0x1F] = 0;
+    clut                               = g_GraphicsPaletteDst + ((row & BYTE_MASK) << 8);
+    clut[(product & BYTE_MASK) + 0x1F] = 0;
     g_GfxPalettePending                = 1;
 }

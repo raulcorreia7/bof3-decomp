@@ -137,9 +137,9 @@ INCLUDE_ASM(func_801F04D4);
 INCLUDE_ASM(func_801F093C);
 
 MATCH void func_801F0D08(void) {
-    g_ScriptBank = BMAGIC_SCRIPT_BANK;
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F1230 + 3, g_Task->header.step);
-    g_ScriptBank = AREA_SCRIPT_BANK;
+    g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801F0D6C(void) {

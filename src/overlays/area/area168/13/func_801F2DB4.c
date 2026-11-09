@@ -1,3 +1,10 @@
 #include "area168_13.h"
 
-INCLUDE_ASM(func_801F2DB4);
+MATCH void func_801F2DB4(void) {
+    u8 i;
+
+    for (i = 0; i < 6; i++) {
+        Area_SetCellCode(0x10, D_801F4B30[i], 0);
+    }
+    Actor_Clear();
+}
