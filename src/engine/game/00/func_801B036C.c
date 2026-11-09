@@ -8,13 +8,13 @@ MATCH void func_801B036C(void) {
             g_Game.current->u.field.step_12A.s8_value = 0;
             return;
         }
-        if ((D_8014625C != 0) && !(g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED)) {
+        if ((g_Game.input != 0) && !(g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED)) {
             g_Game.current->u.field.step_12A.s8_value = 0;
         }
         if (!(func_801B6674() & BYTE_MASK) && !(func_801B6258() & BYTE_MASK) &&
             !(Game_RequestLeaderSwitch() & BYTE_MASK) && !(func_801B5758() & BYTE_MASK) &&
             !(Game_RequestPersonalAction() & BYTE_MASK) && !(func_801B5884() & BYTE_MASK) &&
-            !(func_801B5910() & BYTE_MASK) && (D_8014625C != 0)) {
+            !(func_801B5910() & BYTE_MASK) && (g_Game.input != 0)) {
             func_801B59B4();
             g_Task->option_flags = 0;
             g_Task->unk_0A       = 2;

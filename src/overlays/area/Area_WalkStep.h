@@ -30,7 +30,7 @@
         func_801C329C();                                                                                              \
         if (!(g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE) && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING)) {              \
             value =                                                                                                   \
-                D_8014625C & (g_InputMasks[WORLD_INPUT_RUN] | (g_InputMasks[WORLD_INPUT_ENTER] | INPUT_DIRECTIONAL)); \
+                g_Game.input & (g_InputMasks[WORLD_INPUT_RUN] | (g_InputMasks[WORLD_INPUT_ENTER] | INPUT_DIRECTIONAL)); \
             if (value != 0) {                                                                                         \
                 RUN(value);                                                                                           \
                 return;                                                                                               \

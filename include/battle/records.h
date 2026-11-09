@@ -693,7 +693,8 @@ typedef struct GameState {
     /* 0x3C6 */ u8           unk_3C6[2];
     /* 0x3C8 */ u16          flags;
     /* 0x3CA */ u16          walk_flags;
-    /* 0x3CC */ u8           unk_3CC[0x50];
+    /* 0x3CC */ u16          input; /* the pad state the field step reads: g_InputHeld, with left/right and up/down swapped while the lead is confused */
+    /* 0x3CE */ u8           unk_3CE[0x4E];
 } GameState;
 
 ASSERT_SIZE(GameState, 0x41C);
@@ -703,7 +704,8 @@ ASSERT_OFFSET(GameState, battle_order, 0x3C5);
 ASSERT_OFFSET(GameState, unk_3C6, 0x3C6);
 ASSERT_OFFSET(GameState, flags, 0x3C8);
 ASSERT_OFFSET(GameState, walk_flags, 0x3CA);
-ASSERT_OFFSET(GameState, unk_3CC, 0x3CC);
+ASSERT_OFFSET(GameState, input, 0x3CC);
+ASSERT_OFFSET(GameState, unk_3CE, 0x3CE);
 
 /* D_80145E90 */
 extern GameState g_Game;

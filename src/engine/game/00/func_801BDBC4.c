@@ -27,9 +27,9 @@ MATCH void func_801BDBC4(void) {
         found = 1;
     }
     if (found != 0) {
-        D_8014625C = (g_InputHeld & INPUT_ACTION_BUTTONS) |
+        g_Game.input = (g_InputHeld & INPUT_ACTION_BUTTONS) |
                      (((g_InputHeld & (PADLup | PADLright)) << 2) | ((g_InputHeld & (PADLdown | PADLleft)) >> 2));
     } else {
-        D_8014625C = g_InputHeld;
+        g_Game.input = g_InputHeld;
     }
 }
