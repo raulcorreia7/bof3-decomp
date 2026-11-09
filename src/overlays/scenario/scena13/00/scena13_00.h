@@ -31,9 +31,7 @@ extern u8        D_801FBF98[];
 /* D_801FBFB8 */
 extern SceneFunc g_SceneActorDispatch[];
 
-/* Reserve two actor slots and start the same pair of scripts on them; the
- * second script sits 0x10 bytes after the first. Every change must verify
- * every member. */
+/* Reserve two actor slots and start the same pair of scripts on them; the second script sits 0x10 bytes after the first. */
 #define SCENE_START_SCRIPT_PAIR(script)                              \
     do {                                                             \
         s32 first;                                                   \

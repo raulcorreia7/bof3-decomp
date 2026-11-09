@@ -1,7 +1,4 @@
-/* The world map cloud layer: drifts it down the map and draws it over the cells around its
- * position, with the image's g_WorldCloudTexture. One definition shared by the world area
- * overlays (area033, 045, 065, 087, 088, 115, 151 and 152).
- * Every change here must verify every member. */
+/* The world map cloud layer: drifts it down the map and draws it over the cells around its position, with the image's g_WorldCloudTexture. */
 MATCH void World_UpdateClouds(void) {
     POLY_FT4* prim;
     POLY_FT4* cell;

@@ -1,8 +1,4 @@
-/* Clear the party state's party order, battle order and party count, set the
- * menu flags' low three bits, then run the effect callback. One definition
- * shared by the scena00 and scena16 programs; each program includes this file
- * where the function sits.
- */
+/* Clear the party state's party order, battle order and party count, set the menu flags' low three bits, then run the effect callback. */
 MATCH void Scene_ClearParty(void) {
     u8 flags;
 

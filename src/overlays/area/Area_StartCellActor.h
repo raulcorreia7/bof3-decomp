@@ -1,6 +1,4 @@
-/* Clears the actor for pajama Ryu or when scene flag 1 is set; otherwise loads scene record 0x205, resets the actor's
- * work bytes and sets cell code 0xA0 at the x and y that the row (0x0B) names in the tables CELL_X and CELL_Y. A
- * statement macro shared by the area overlays; every change here must verify every member. */
+/* Clears the actor for pajama Ryu or when scene flag 1 is set; otherwise loads scene record 0x205, resets the actor's work bytes and sets cell code 0xA0 at the x and y that the row (0x0B) names in the tables CELL_X and CELL_Y. */
 /* AREA_START_CELL_ACTOR (area087 0x801F4640, area088 0x801F5170, area121 0x801F4624) */
 #define AREA_START_CELL_ACTOR(CELL_X, CELL_Y)                                                              \
     s32 row_offset;                                                                                        \

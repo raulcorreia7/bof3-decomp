@@ -1,10 +1,7 @@
 #ifndef OVERLAY_BATTLE_BATTLE_15_H
 #define OVERLAY_BATTLE_BATTLE_15_H
 
-/* The battle/battle/15 overlay's local declarations: the command, step and damage
- * dispatch tables, the actor views it shares with battle/battle/03 and the prototypes
- * its units use. The common records are in battle/records.h; only this image
- * includes this file. */
+/* The battle/battle/15 overlay's local declarations: the command, step and damage dispatch tables, the actor views it shares with battle/battle/03 and the prototypes its units use. The common records are in battle/records. */
 
 #include "overlays/battle/battle.h"
 #include <stdlib.h>

@@ -1,9 +1,6 @@
 #ifndef BMAGIC_FAMILY_H
 #define BMAGIC_FAMILY_H
 
-/* Declarations shared by two or more bmagic images; an image header that
- * reads one includes this file. */
-
 #include "common/vector.h"
 #include "game.h"
 #include "gfx/prim.h"

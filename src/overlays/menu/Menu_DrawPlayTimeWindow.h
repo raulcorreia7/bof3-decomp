@@ -1,10 +1,4 @@
-/* Draw the play time window: hours and minutes of g_PlayClock with a colon that
- * blinks on the clock's thirtieths count, and the caption row. One definition
- * shared by the start, Bate, Shisu and shop overlays; each overlay includes
- * this file where the function sits and binds g_MenuClockFormat,
- * g_MenuClockColon, g_MenuClockCaption and the caption glyph runs in its table
- * in config/symbols.toml. Every change must verify every member.
- */
+/* Draw the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, and the caption row.toml. */
 /* func_801DD974 (start), func_801D49D4 (bate), func_801D597C (shisu), func_801DA47C (shop) */
 MATCH void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y) {
     u16 x;

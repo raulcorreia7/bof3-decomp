@@ -1,5 +1,4 @@
-/* Sets the actor matrix like Effect_SetActorMatrix, rolled a quarter turn when the effect flag is set. Every change
-   here must verify every member. */
+/* Sets the actor matrix like Effect_SetActorMatrix, rolled a quarter turn when the effect flag is set. */
 /* func_801EFA18 (magic107), func_801F1408 (magic151) */
 MATCH void Effect_SetActorMatrixQuarterRoll(void) {
     SVECTOR pos;

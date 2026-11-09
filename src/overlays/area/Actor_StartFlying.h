@@ -1,8 +1,4 @@
-/* Gives each flock member a velocity from its facing, backs it off along it so the flock
- * enters from out of view (members 1 and 2 two cells to either side) and selects the
- * script for that facing; Actor_Fly follows. One definition shared by the world area
- * overlays: each member image defines its own g_FlockVelocity and g_FlockScript.
- * Every change here must verify every member. */
+/* Gives each flock member a velocity from its facing, backs it off along it so the flock enters from out of view (members 1 and 2 two cells to either side) and selects the script for that facing; Actor_Fly follows. */
 MATCH void Actor_StartFlying(void) {
     Actor* scratch;
     u16    value;

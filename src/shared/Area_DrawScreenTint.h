@@ -1,5 +1,5 @@
 /* Draws a semi-transparent tile over the whole screen in the colour of the task's tint, queued on the prim layer
- * `layer` under the draw-mode texture page `tpage`. Shared by the area overlays and scena13. */
+ * `layer` under the draw-mode texture page `tpage`. */
 static inline void Screen_DrawTintLayer(u32 layer, s32 tpage) {
     TILE* tile;
     u8    blue;

@@ -1,8 +1,4 @@
-/* When the effect ticker runs down: restores the arena palette from the bank
- * at 0x80033C00 (func_800AFC54), advances the active battler's script step
- * (func_800AEF98), clears the battler's flag bit 0x40 and steps the handler.
- * One body shared by the members below; every change must verify every member.
- */
+/* When the effect ticker runs down: restores the arena palette from the bank at 0x80033C00 (func_800AFC54), advances the active battler's script step (func_800AEF98), clears the battler's flag bit 0x40 and steps the handler. */
 /* func_801EF6AC (magic008), func_801EF150 (magic015), func_801EF594 (magic015) */
 #define EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE()                          \
     if (g_Task->param.unk_0B == 0) {                                         \
