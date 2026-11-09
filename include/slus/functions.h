@@ -246,7 +246,7 @@ u8           Area_StepCameraZ(s16 target, s8 step);
 bool         Area_StepCameraAngle(s32 degrees, s8 duration);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
-/* func_8015C088; int with no value returned (see its definition) */
+/* func_8015C088; int with no value returned (see its definition). */
 extern s32   Game_SetScriptActive(void);
 /* func_8015C100 */
 extern void  Party_HideBattlers(void);
@@ -436,7 +436,7 @@ bool        Item_VitalHas(s32 item_id);
 s32         Item_VitalAdd(u8 item_id);
 /* func_8016620C */
 void        Message_SetVariable(u8 slot, u8 length, const u8* text);
-/* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
+/* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8. */
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))
 /* func_80166438 */

@@ -3,17 +3,14 @@
 
 #include "types.h"
 
-/* The z/y/x vertex view of one part word: the part functions double the signed
- * byte offsets x and y around the projected origin and take the depth word
- * through `raw` (func_80156000, func_80156228, func_8015707C). */
+/* The z/y/x vertex view of one part word. */
 typedef struct {
     s16 z;
     s8  y;
     s8  x;
 } PartCell;
 
-/* One word of a scene part list: a packed cell, the record header (id and
- * run count), the four colour bytes of a part, or a run's frame pick. */
+/* One word of a scene part list. */
 typedef union ScenePart {
     u32      raw;
     PartCell vertex;
