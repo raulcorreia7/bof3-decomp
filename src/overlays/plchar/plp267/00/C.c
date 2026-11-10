@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801CE654);
 
 INCLUDE_ASM(func_801CE8AC);
 
-#include "overlays/plchar/Plchar_FollowerInReachCheck.h"
+#include "overlays/plchar/Plchar_FollowerInReach.h"
 
 INCLUDE_ASM(func_801CEAE0);
 
