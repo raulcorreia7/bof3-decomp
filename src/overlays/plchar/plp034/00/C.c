@@ -64,7 +64,12 @@ MATCH void func_801CFC38(void) {
     SYS_DISPATCH_TASK(D_801D0334, 3, g_Task);
 }
 
-INCLUDE_ASM(func_801CFC7C);
+MATCH void func_801CFC7C(void) {
+    ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
+    Actor_RequestScript((((s32)(g_Task->direction_08 - 1) / 2) + 0x42) & 0xFF);
+    g_Task->unk_0A = 8;
+    g_Task->unk_03 = 1;
+}
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
