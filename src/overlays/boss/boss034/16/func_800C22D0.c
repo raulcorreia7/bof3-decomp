@@ -9,5 +9,3 @@ MATCH void func_800C22D0(void) {
     g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;
     g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
 }
-
-
