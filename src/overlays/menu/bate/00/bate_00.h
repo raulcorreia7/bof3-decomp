@@ -112,6 +112,7 @@ extern u8       g_SaveSlotFrameSprites[];
 extern u8       D_801D8B84[];
 /* D_801D8E80 */
 extern u8*      g_MenuAbilityListNames[];
+extern u8       D_801D875C[6];
 extern u8       D_801D8EE0[5];
 
 extern const char g_MenuInventoryCountFormat[];
