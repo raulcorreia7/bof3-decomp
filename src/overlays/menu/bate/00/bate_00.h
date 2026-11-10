@@ -113,7 +113,7 @@ extern u8       D_801D8B84[];
 /* D_801D8E80 */
 extern u8*      g_MenuAbilityListNames[];
 extern u8       D_801D875C[6];
-extern u8       D_801D8EE0[5];
+extern u8       D_801D8EE0[6];
 
 extern const char g_MenuInventoryCountFormat[];
 
@@ -129,6 +129,7 @@ extern s8        D_80148659;
 extern BateState D_801D8ED4;
 extern u8        D_801D86F8[];
 
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);

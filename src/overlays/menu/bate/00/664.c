@@ -41,8 +41,6 @@ INCLUDE_ASM(func_801D1AB8);
 
 INCLUDE_ASM(func_801D1C90);
 
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-
 MATCH void func_801D1E8C(void) {
     u8* slots[6];
     u8* base;
