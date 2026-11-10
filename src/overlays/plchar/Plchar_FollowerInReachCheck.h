@@ -1,8 +1,9 @@
-#ifndef PLCHAR_FUNC_801CEA10_H
-#define PLCHAR_FUNC_801CEA10_H
+#ifndef PLCHAR_FOLLOWER_IN_REACH_CHECK_H
+#define PLCHAR_FOLLOWER_IN_REACH_CHECK_H
 
 #ifndef PLCHAR_CHECK_RECORD_DEFINED
 #define PLCHAR_CHECK_RECORD_DEFINED
+
 typedef struct PlcharCheckRecord {
     s32 pos_x;
     s32 pos_y;
@@ -15,7 +16,7 @@ typedef struct PlcharCheckRecord {
 extern PlcharCheckRecord D_80143FFC[];
 extern u8                g_PartySize;
 
-MATCH s32 func_801CEA10(u8 index) {
+MATCH s32 Plchar_FollowerInReach(u8 index) {
     s32 i;
 
     for (i = 1; i < g_PartySize; i++) {
