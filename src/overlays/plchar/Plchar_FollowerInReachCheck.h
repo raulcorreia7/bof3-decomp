@@ -1,6 +1,8 @@
 #ifndef PLCHAR_FOLLOWER_IN_REACH_CHECK_H
 #define PLCHAR_FOLLOWER_IN_REACH_CHECK_H
 
+#include "battle/records.h"
+
 /* Variant for plp026, plp257 and plp267. Plchar_FollowerInReach.h serves the other follower reach users. */
 #ifndef PLCHAR_CHECK_RECORD_DEFINED
 #define PLCHAR_CHECK_RECORD_DEFINED
@@ -19,7 +21,6 @@ ASSERT_OFFSET(PlcharCheckRecord, z, 0x0A);
 #endif
 
 extern PlcharCheckRecord D_80143FFC[];
-extern u8                g_PartySize;
 
 MATCH s32 Plchar_FollowerInReach(u8 index) {
     s32 i;
