@@ -115,7 +115,22 @@ INCLUDE_ASM(func_801D4178);
 
 INCLUDE_ASM(func_801D42DC);
 
-INCLUDE_ASM(func_801D4474);
+MATCH s32 func_801D4474(void) {
+    s32 val;
+    u32 v;
+
+    if (D_801D4DF8 == 0) {
+        v   = D_801455C3;
+        val = 0x6A;
+        if (v >= 5) {
+            v -= 4;
+            val = 0x6A - (v * 9);
+        }
+    } else {
+        val = 0xAC - D_801455C3 * 12;
+    }
+    return (s16)val;
+}
 
 INCLUDE_ASM(func_801D44E0);
 
