@@ -112,8 +112,6 @@ extern u8       g_SaveSlotFrameSprites[];
 extern u8       D_801D8B84[];
 /* D_801D8E80 */
 extern u8*      g_MenuAbilityListNames[];
-extern u8       D_801D875C[6];
-extern u8       D_801D8EE0[6];
 
 extern const char g_MenuInventoryCountFormat[];
 
@@ -123,6 +121,9 @@ typedef struct BateState {
     u8 unk_04;
     u8 pad_05[3];
     u8 unk_08;
+    u8 pad_09[3];
+    /* The equipped item in each slot before the change. */
+    u8 equipped_items[6];
 } BateState;
 
 extern s8        D_80148659;
