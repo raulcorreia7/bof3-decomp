@@ -6,7 +6,9 @@
 
 #include "overlays/area/world00.h"
 
+extern u8  D_80146871;
 extern u16 D_80146876;
+extern u8* g_EncounterZones[];
 /* Handler tables the step bytes select. */
 extern void (*D_801F40F0[])(void);
 
