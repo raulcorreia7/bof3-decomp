@@ -25,6 +25,4 @@ void func_801F3298(void);
 
 extern s16 D_801492DC;
 
-void func_80196070(void);
-
 #endif

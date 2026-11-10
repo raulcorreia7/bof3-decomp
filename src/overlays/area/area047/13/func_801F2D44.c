@@ -9,6 +9,6 @@ MATCH void func_801F2D44(void) {
     }
     func_801F31F4((g_Task->vx << 19) >> 16);
     if ((u8)func_801F330C() == 0) {
-        func_80196070();
+        Actor_Clear();
     }
 }
