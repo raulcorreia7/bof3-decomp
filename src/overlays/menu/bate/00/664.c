@@ -41,7 +41,36 @@ INCLUDE_ASM(func_801D1AB8);
 
 INCLUDE_ASM(func_801D1C90);
 
-INCLUDE_ASM(func_801D1E8C);
+extern u8 D_801D875C[];
+bool      Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+
+MATCH void func_801D1E8C(void) {
+    u8* slots[6];
+    u8* base;
+    s32 i;
+
+    base     = &D_80144DF2;
+    slots[1] = base + 1;
+    slots[2] = base + 2;
+    slots[3] = base + 3;
+    slots[4] = base + 4;
+    slots[0] = base;
+    slots[5] = base + 5;
+
+    i = 0;
+    do {
+        u8 idx  = i;
+        u8 item = D_801D8EE0[idx];
+        if (item != 0 && item != *slots[idx]) {
+            Item_Remove(D_801D875C[idx], item, 1, 0);
+            Item_Add(D_801D875C[idx], *slots[idx], 1, 0);
+            *slots[idx] = D_801D8EE0[idx];
+        }
+        i++;
+    } while ((u8)i < 6);
+
+    Char_RebuildStats((Character*)&D_80144DE4);
+}
 
 MATCH void func_801D1FA0(void) {
     u8 slot;
