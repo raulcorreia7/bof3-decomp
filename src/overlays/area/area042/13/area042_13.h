@@ -17,6 +17,7 @@ void func_801F3D18(s32);
 
 extern u8  D_801F5350[];
 extern u8  D_801F5354[];
+extern u8  D_801F5358[];
 extern u8  D_801F5334[];
 extern u8  D_801F534C[];
 extern u16 D_801F56C4[];
