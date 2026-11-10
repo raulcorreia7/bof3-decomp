@@ -19,7 +19,7 @@ void func_801F31F4(s16 scale);
 
 void func_801F32C4(void);
 
-u8   func_801F330C(void);
+u8 func_801F330C(void);
 
 void func_801F3298(void);
 

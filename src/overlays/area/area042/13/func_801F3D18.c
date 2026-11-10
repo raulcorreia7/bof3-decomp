@@ -7,6 +7,6 @@ MATCH void func_801F3D18(s32 arg0) {
     rect.y = 0x160;
     rect.w = 8;
     rect.h = 0x78;
-    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, D_801F5358[*(s16*)((u8*)g_Task + 0x36)] + 0x1C0, 0x160);
+    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, D_801F5358[COORD_INT(g_Task->pos.x)] + 0x1C0, 0x160);
     GFX_AddPrim(6, 0x18);
 }
