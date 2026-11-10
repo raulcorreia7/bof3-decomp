@@ -28,7 +28,7 @@ MATCH void func_801F390C(void) {
         g_Task->header.flags &= ~0x20;
         g_Task->tint.bytes.flags = 0;
         {
-            Actor* spad = g_Task;
+            Actor* spad             = g_Task;
             spad->tint.bytes.unk_5F = 0;
             spad->tint.bytes.unk_5E = 0;
             spad->tint.bytes.unk_5D = 0;
