@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world01.h"
+#include "area/spad.h"
 
 extern s32 D_80145ECC;
 extern u8  D_801F39C8[];
@@ -18,10 +19,12 @@ void func_801F31F4(s16 scale);
 
 void func_801F32C4(void);
 
-void func_801F330C(void);
+u8   func_801F330C(void);
 
 void func_801F3298(void);
 
 extern s16 D_801492DC;
+
+void func_80196070(void);
 
 #endif
