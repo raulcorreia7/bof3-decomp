@@ -1,9 +1,9 @@
 #include "area042_13.h"
 
-MATCH void func_801F3D18(s32 arg0) {
+MATCH void func_801F3D18(s32 column) {
     RECT rect;
 
-    rect.x = (arg0 * 8) + 0x1C8;
+    rect.x = (column * 8) + 0x1C8;
     rect.y = 0x160;
     rect.w = 8;
     rect.h = 0x78;
