@@ -41,33 +41,7 @@ INCLUDE_ASM(func_801D1AB8);
 
 INCLUDE_ASM(func_801D1C90);
 
-MATCH void func_801D1E8C(void) {
-    u8* slots[6];
-    u8* base;
-    s32 i;
-
-    base     = &D_80144DF2;
-    slots[1] = base + 1;
-    slots[2] = base + 2;
-    slots[3] = base + 3;
-    slots[4] = base + 4;
-    slots[0] = base;
-    slots[5] = base + 5;
-
-    i = 0;
-    do {
-        u8 idx  = i;
-        u8 item = D_801D8ED4.equipped_items[idx];
-        if (item != 0 && item != *slots[idx]) {
-            Item_Remove(((u8*)g_MenuBateStep2Sub2Funcs + 0x3C)[idx], item, 1, 0);
-            Item_Add(((u8*)g_MenuBateStep2Sub2Funcs + 0x3C)[idx], *slots[idx], 1, 0);
-            *slots[idx] = D_801D8ED4.equipped_items[idx];
-        }
-        i++;
-    } while ((u8)i < 6);
-
-    Char_RebuildStats((Character*)&D_80144DE4);
-}
+INCLUDE_ASM(func_801D1E8C);
 
 MATCH void func_801D1FA0(void) {
     u8 slot;
