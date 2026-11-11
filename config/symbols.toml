@@ -830,8 +830,10 @@ g_BMagicEffectModes = { addr = 0x801F089C, source = "Handlers of magic093 (Infer
 D_801F08C4 = { addr = 0x801F08C4, source = "Step handlers of the magic093 effect, run by header.step (byte 0x02) from func_801EFE5C." }
 
 ["emi/bmagic/magic094/03"]
-g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 
 D_801EF988 = { addr = 0x801EF988, source = "Mode handlers of magic094, run by header.mode (byte 0x01) from func_801EEE4C." }
 ["emi/bmagic/magic095/03"]
