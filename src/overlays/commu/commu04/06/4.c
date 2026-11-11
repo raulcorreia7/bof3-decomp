@@ -59,7 +59,7 @@ MATCH void func_801D1568(void) {
     u8  step;
     u8  idx;
 
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         selection = &g_SceneEventSelection;
         Item_Remove(g_FairyJobs[*selection].unk_03, g_FairyJobs[*selection].record_state, 1, 0);
         g_FairyJobs[*selection].unk_03 |= 0x10;
