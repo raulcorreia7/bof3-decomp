@@ -1,8 +1,0 @@
-#ifndef PLCHAR_FUNC_801CF808_H
-#define PLCHAR_FUNC_801CF808_H
-
-MATCH s32 func_801CF808(u8 index) {
-    PLCHAR_PROBE_FACING_FOLLOWER(index);
-}
-
-#endif

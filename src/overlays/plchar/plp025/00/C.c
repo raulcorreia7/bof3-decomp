@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801CF5D4);
 /* func_801CF738 */
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 
-#include "overlays/plchar/func_801CF808.h"
+#include "overlays/plchar/Plchar_ProbeFacingFollower.h"
 
 MATCH void func_801CF924(void) {
     SYS_DISPATCH_TASK(D_801CFFD4, 2, g_Task);
