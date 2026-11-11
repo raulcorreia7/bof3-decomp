@@ -57,16 +57,16 @@ INCLUDE_ASM(func_801D12C8);
 MATCH void func_801D1568(void) {
     u8* selection;
     u8  step;
-    u8  idx;
+    u8  job_index;
 
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         selection = &g_SceneEventSelection;
         Item_Remove(g_FairyJobs[*selection].unk_03, g_FairyJobs[*selection].record_state, 1, 0);
         g_FairyJobs[*selection].unk_03 |= 0x10;
         step = D_801F294C;
-        idx  = *selection;
+        job_index = *selection;
         step += 1;
-        g_FairyJobs[idx].progress_anchor = g_BattleCount;
+        g_FairyJobs[job_index].progress_anchor = g_BattleCount;
         D_801F294C                       = step;
     }
 }
