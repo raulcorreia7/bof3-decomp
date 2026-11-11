@@ -9,7 +9,9 @@
 /* The scratchpad work area is a PartyMember record in this image. */
 #define g_Task ((PartyMember*)g_Task)
 
+extern u8           D_800C3174[];
 extern u8           D_800C3180[];
+extern u16          D_800C318C[];
 extern u16          D_800C3194[];
 extern Callback     D_800C319C[];
 extern Callback     D_800C31CC[];
@@ -38,6 +40,7 @@ extern u8           D_801FE4EF;
 extern u32          D_801FE4F0;
 extern EnemyBattler D_801EB748[];
 
+void func_800C1D2C(s32 mode);
 void func_800C20F0(s32 mode);
 
 extern u8  D_800C184C[];
