@@ -587,7 +587,18 @@ MATCH void func_801D640C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub6Funcs, D_801F294E);
 }
 
-INCLUDE_ASM(func_801D6448);
+MATCH void func_801D6448(void) {
+    s32 i;
+
+    func_801D8968();
+    for (i = 0; i < 6; i++) {
+        g_TextVariables[0][i] = D_801DB080[i];
+    }
+    Message_StartAreaMessage(0xF3);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    D_801F294E++;
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+}
 
 MATCH void func_801D64E0(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
