@@ -70,6 +70,7 @@ extern u8       g_MenuPortraitAtlas[];
 /* D_801DAE74 */
 extern Callback g_Commu02Event3Step2Sub7Funcs[COMMU02_EVENT3_STEP2_SUB7_COUNT];
 extern s32      D_801DB07C;
+extern u8       D_801DB080[];
 /* The overlay's state byte the guarded step advances. */
 extern s8       D_801DB093;
 extern u8       D_801DB0B4;
