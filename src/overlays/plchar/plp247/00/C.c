@@ -17,16 +17,16 @@ MATCH void func_801CE610(void) {
 }
 
 /* func_801CE654 */
-#include "overlays/plchar/Plchar_RunGarrFieldTask.h"
+#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
 
-MATCH void Plchar_RunGarrFieldTask(void) {
+MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CEAE0);
 }
 
 #include "overlays/plchar/Char_TickPauseTimer.h"
 
 /* func_801CE8AC */
-#include "overlays/plchar/Plchar_FindGarrActorSlot.h"
+#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
 
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 

@@ -41,16 +41,16 @@ MATCH void func_801CF338(void) {
 }
 
 /* func_801CF37C */
-#include "overlays/plchar/Plchar_RunGarrFieldTask.h"
+#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
 
-MATCH void Plchar_RunGarrFieldTask(void) {
+MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CF808);
 }
 
 #include "overlays/plchar/func_801CF564.h"
 
 /* func_801CF5D4 */
-#include "overlays/plchar/Plchar_FindGarrActorSlot.h"
+#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
 
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 

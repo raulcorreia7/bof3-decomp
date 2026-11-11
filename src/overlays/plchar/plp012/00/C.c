@@ -57,9 +57,9 @@ MATCH void func_801CF70C(void) {
 }
 
 /* func_801CF750 */
-#include "overlays/plchar/Plchar_RunGarrFieldTask.h"
+#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
 
-MATCH void Plchar_RunGarrFieldTask(void) {
+MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CFBDC);
 }
 
@@ -75,7 +75,7 @@ MATCH void func_801CF938(void) {
 }
 
 /* func_801CF9A8 */
-#include "overlays/plchar/Plchar_FindGarrActorSlot.h"
+#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
 
 /* func_801CFB0C */
 #include "overlays/plchar/Plchar_FollowerInReach.h"

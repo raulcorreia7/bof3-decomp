@@ -1,5 +1,5 @@
 /* Finds the actor slot for Garr's follower reach check; verify every image after a change. */
-MATCH s8 Plchar_FindGarrActorSlot(void) {
+MATCH s8 PlChar_FindGarrActorSlot(void) {
     PartyMember* member;
     s32          direction;
     s32          i;
