@@ -6,7 +6,7 @@ MATCH void func_800C1BB0(void) {
 
     enemy         = g_BattleCurrentEnemy;
     enemy->script = D_800C3174;
-    enemy->unk_E4 = (ModeFunc)func_800C1D2C;
+    enemy->unk_E4 = func_800C1D2C;
     enemy->unk_E8 = D_800C318C;
 
     g_Task->header.mode = 2;
