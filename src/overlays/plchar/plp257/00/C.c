@@ -16,7 +16,10 @@ MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801CFEE8, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801CE654);
+/* func_801CE654 */
+#define PLCHAR_GARR_TASK_CHECK func_801CEAE0
+#include "overlays/plchar/Plchar_RunGarrFieldTask.h"
+#undef PLCHAR_GARR_TASK_CHECK
 
 #include "overlays/plchar/Char_TickPauseTimer.h"
 

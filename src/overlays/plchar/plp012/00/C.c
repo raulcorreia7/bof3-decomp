@@ -56,7 +56,10 @@ MATCH void func_801CF70C(void) {
     SYS_DISPATCH_TASK(D_801CFDB8, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801CF750);
+/* func_801CF750 */
+#define PLCHAR_GARR_TASK_CHECK func_801CFBDC
+#include "overlays/plchar/Plchar_RunGarrFieldTask.h"
+#undef PLCHAR_GARR_TASK_CHECK
 
 MATCH void func_801CF938(void) {
     if (g_Task->timer == 0) {

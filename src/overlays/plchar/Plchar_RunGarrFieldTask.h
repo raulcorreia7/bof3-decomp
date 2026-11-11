@@ -1,0 +1,42 @@
+#ifndef PLCHAR_RUN_GARR_FIELD_TASK_H
+#define PLCHAR_RUN_GARR_FIELD_TASK_H
+
+s8  Plchar_FindGarrActorSlot(void);
+s32 Plchar_FollowerInReach(u8 index);
+
+MATCH void Plchar_RunGarrFieldTask(void) {
+    u8  actor_slot;
+    u8  other_slot;
+    s32 pos_x;
+    s32 pos_y;
+
+    actor_slot = (u8)Plchar_FindGarrActorSlot();
+    if (actor_slot != 0xFF) {
+        if ((Plchar_FollowerInReach(actor_slot) & BYTE_MASK) == 0 && (PLCHAR_GARR_TASK_CHECK(actor_slot) & BYTE_MASK) == 0) {
+            g_ActorSlots[actor_slot].link = 1;
+            /* FAKE: retail reads SND_PlayCue as void(s32). */
+            ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
+            Actor_RequestScript(g_Task->direction_08 + 8);
+            g_GameState->u.field.counter_11C.u8_value = 2;
+            g_GameFlags |= 0x1000;
+            func_801C24D0();
+            g_Task->timer--;
+            func_801B0DFC();
+            g_GameState->u.field.mode_12B.u8_value = 1;
+            g_Task->header.step++;
+            return;
+        }
+    } else {
+        pos_x = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;
+        pos_y = g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;
+        if ((g_GameState->status.field.flags_12C.u8_value & 0x01) == 0) {
+            other_slot = (u8)func_801BDE14(pos_x, pos_y, 1);
+            if (other_slot != actor_slot) {
+                g_Actors[other_slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
+            }
+        }
+    }
+    g_GameState->u.field.mode_12B.u8_value = 0;
+}
+
+#endif
