@@ -1,5 +1,4 @@
-#ifndef PLCHAR_RUN_GARR_FIELD_TASK_H
-#define PLCHAR_RUN_GARR_FIELD_TASK_H
+/* Handles Garr's actor or queues an interaction; verify every image after a change. */
 
 s8  Plchar_FindGarrActorSlot(void);
 s32 Plchar_FollowerInReach(u8 index);
@@ -39,4 +38,3 @@ MATCH void Plchar_RunGarrFieldTask(void) {
     g_GameState->u.field.mode_12B.u8_value = 0;
 }
 
-#endif
