@@ -74,7 +74,9 @@ INCLUDE_ASM(func_801CF9A8);
 /* func_801CFB0C */
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 
-INCLUDE_ASM(func_801CFBDC);
+MATCH s32 func_801CFBDC(u8 index) {
+    PLCHAR_PROBE_FACING_FOLLOWER(index);
+}
 
 MATCH void func_801CFCF8(void) {
     D_801CFDC0[g_Task->unk_2C]();
