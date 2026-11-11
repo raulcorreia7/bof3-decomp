@@ -40,7 +40,7 @@ MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801CFDA4, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801CF37C);
+#include "overlays/plchar/Char_ClaimHelperSlotStep.h"
 
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
