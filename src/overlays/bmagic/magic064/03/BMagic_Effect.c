@@ -48,7 +48,30 @@ MATCH void func_801EEE1C(void) {
 
 INCLUDE_ASM(func_801EEEA8);
 
-INCLUDE_ASM(func_801EEFF8);
+MATCH void func_801EEFF8(void) {
+    u32          effect_slot;
+    u8           timer;
+    PartyMember* task;
+
+    if (g_Task->timer != 0) {
+        Area_IndexCells();
+        g_Task->timer = 0;
+    }
+
+    timer          = g_Task->unk_09;
+    g_Task->unk_09 = timer + 0xFF;
+    if (timer != 0) {
+        return;
+    }
+
+    effect_slot                               = Battle_AllocEffect(1, 58) & BYTE_MASK;
+    task                                      = g_Task;
+    g_BattleEffects[effect_slot].header.mode  = 1;
+    g_BattleEffects[effect_slot].target.party = task;
+    g_Task->param.unk_0B &= 0xFE;
+    SND_PlayCue(0x101);
+    g_Task->header.step++;
+}
 
 MATCH void func_801EF0D8(void) {
 }
