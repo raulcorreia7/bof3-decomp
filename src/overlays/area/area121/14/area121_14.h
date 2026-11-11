@@ -38,6 +38,7 @@ extern Callback D_801F689C[];
 /* func_801F35D0 */
 void Area_Update(void);
 void func_801F5380(void);
+void func_801F595C(s32 value, s32 flag);
 void func_801F5B90(void);
 
 /* The value of area update step in the shared Area_Update body. */
