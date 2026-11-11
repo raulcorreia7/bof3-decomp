@@ -40,23 +40,7 @@ MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801CFDA4, 2, g_Task);
 }
 
-MATCH void func_801CF37C(void) {
-    u8 slot;
-
-    if (!(g_Task->direction_08 & 1)) {
-        g_Task->direction_08 = (g_Task->direction_08 - 1) & 7;
-    }
-    slot                     = func_8019601C();
-    g_Task->param.actor_slot = slot;
-    if (g_Task->param.actor_slot != 0xFF) {
-        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
-        g_ActorSlots[g_Task->param.actor_slot].type         = 0x1B;
-    }
-    Actor_RequestScript((g_Task->direction_08 >> 1) + 0x42);
-    /* FAKE: retail reads SND_PlayCue as void(s32). */
-    ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
-    g_Task->header.step++;
-}
+#include "overlays/plchar/Char_ClaimHelperSlotStep.h"
 
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
