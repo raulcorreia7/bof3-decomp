@@ -6,7 +6,21 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC18.h"
 
-INCLUDE_ASM(func_801EEC88);
+MATCH void func_801EEC88(void) {
+    u32          slot;
+    PartyMember* work;
+
+    g_Task->facing                     = g_BattleEffectBattler->facing;
+    g_Task->pos.x.fixed                = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed                = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed                = g_BattleEffectBattler->pos.z.fixed;
+    slot                               = Battle_AllocEffect(1, 0x1C) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->param.unk_0B               = 1;
+    g_Task->header.mode += 1;
+}
 
 INCLUDE_ASM(func_801EED50);
 
