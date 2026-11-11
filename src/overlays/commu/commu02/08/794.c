@@ -185,7 +185,24 @@ MATCH s32 func_801D2750(s32 limit) {
 
 INCLUDE_ASM(func_801D2794);
 
-INCLUDE_ASM(func_801D2870);
+MATCH void func_801D2870(void) {
+    s32 i;
+    s32 j;
+    s32 value;
+
+    D_801DB080[0] = func_801D2750(9);
+    for (i = 1; i < 9; i++) {
+        do {
+            value = func_801D2750(9);
+            for (j = 0; j < i; j++) {
+                if ((u8)value == D_801DB080[j]) {
+                    break;
+                }
+            }
+        } while (j != i);
+        D_801DB080[i] = value;
+    }
+}
 
 INCLUDE_ASM(func_801D2908);
 
@@ -570,7 +587,18 @@ MATCH void func_801D640C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub6Funcs, D_801F294E);
 }
 
-INCLUDE_ASM(func_801D6448);
+MATCH void func_801D6448(void) {
+    s32 i;
+
+    func_801D8968();
+    for (i = 0; i < 6; i++) {
+        g_TextVariables[0][i] = D_801DB080[i];
+    }
+    Message_StartAreaMessage(0xF3);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    D_801F294E++;
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+}
 
 MATCH void func_801D64E0(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -709,7 +737,18 @@ MATCH void func_801D7474(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub6Funcs, D_801F294E);
 }
 
-INCLUDE_ASM(func_801D74B0);
+MATCH void func_801D74B0(void) {
+    s32 i;
+
+    func_801D8968();
+    for (i = 0; i < 6; i++) {
+        g_TextVariables[0][i] = D_801DB080[i];
+    }
+    Message_StartAreaMessage(0xF3);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    D_801F294E++;
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+}
 
 MATCH void func_801D7548(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
