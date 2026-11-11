@@ -1,12 +1,5 @@
 #include "boss025_13.h"
 
-extern u8  D_800C3174[];
-extern u16 D_800C318C[];
-void       func_800C1D2C(u8 index);
-extern u16 D_80144E00;
-extern u16 D_80144E04;
-extern u16 D_80144E06;
-
 MATCH void func_800C1BB0(void) {
     EnemyBattler* enemy;
     u16           v;
@@ -23,16 +16,16 @@ MATCH void func_800C1BB0(void) {
     g_BattleCurrentEnemy->unk_7F = 1;
 
     enemy               = g_BattleCurrentEnemy;
-    v                   = D_80144E00;
+    v                   = g_Characters[7].stats.max_hp;
     enemy->hp           = v;
     enemy->base.max_hp  = v;
     enemy->stats.max_hp = v;
 
-    v                  = D_80144E04;
+    v                  = g_Characters[7].stats.power;
     enemy->base.power  = v;
     enemy->stats.power = v;
 
-    v                    = D_80144E06;
+    v                    = g_Characters[7].stats.defense;
     enemy->base.defense  = v;
     enemy->stats.defense = v;
 }
