@@ -6,6 +6,9 @@
 
 #include "overlays/area/world01.h"
 
-extern u8 D_801F3330[];
+extern u32* D_80142F94[][2];
+extern u8   D_801F3330[];
+
+void func_801F3288(u8 size);
 
 #endif
