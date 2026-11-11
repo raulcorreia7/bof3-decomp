@@ -57,9 +57,11 @@ MATCH void func_801CF70C(void) {
 }
 
 /* func_801CF750 */
-#define PLCHAR_GARR_TASK_CHECK func_801CFBDC
 #include "overlays/plchar/Plchar_RunGarrFieldTask.h"
-#undef PLCHAR_GARR_TASK_CHECK
+
+MATCH void Plchar_RunGarrFieldTask(void) {
+    PLCHAR_RUN_GARR_FIELD_TASK(func_801CFBDC);
+}
 
 MATCH void func_801CF938(void) {
     if (g_Task->timer == 0) {

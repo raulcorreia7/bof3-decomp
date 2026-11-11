@@ -17,9 +17,11 @@ MATCH void func_801CE610(void) {
 }
 
 /* func_801CE654 */
-#define PLCHAR_GARR_TASK_CHECK func_801CEAE0
 #include "overlays/plchar/Plchar_RunGarrFieldTask.h"
-#undef PLCHAR_GARR_TASK_CHECK
+
+MATCH void Plchar_RunGarrFieldTask(void) {
+    PLCHAR_RUN_GARR_FIELD_TASK(func_801CEAE0);
+}
 
 #include "overlays/plchar/Char_TickPauseTimer.h"
 
