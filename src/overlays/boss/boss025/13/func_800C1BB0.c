@@ -16,16 +16,16 @@ MATCH void func_800C1BB0(void) {
     g_BattleCurrentEnemy->unk_7F = 1;
 
     enemy               = g_BattleCurrentEnemy;
-    v                   = g_Characters[7].stats.max_hp;
+    v                   = g_Characters[CHAR_ID_RYU_ADULT].stats.max_hp;
     enemy->hp           = v;
     enemy->base.max_hp  = v;
     enemy->stats.max_hp = v;
 
-    v                  = g_Characters[7].stats.power;
+    v                  = g_Characters[CHAR_ID_RYU_ADULT].stats.power;
     enemy->base.power  = v;
     enemy->stats.power = v;
 
-    v                    = g_Characters[7].stats.defense;
+    v                    = g_Characters[CHAR_ID_RYU_ADULT].stats.defense;
     enemy->base.defense  = v;
     enemy->stats.defense = v;
 }
