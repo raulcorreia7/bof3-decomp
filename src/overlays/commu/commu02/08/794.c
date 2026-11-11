@@ -185,7 +185,24 @@ MATCH s32 func_801D2750(s32 limit) {
 
 INCLUDE_ASM(func_801D2794);
 
-INCLUDE_ASM(func_801D2870);
+MATCH void func_801D2870(void) {
+    s32 i;
+    s32 j;
+    s32 value;
+
+    D_801DB080[0] = func_801D2750(9);
+    for (i = 1; i < 9; i++) {
+        do {
+            value = func_801D2750(9);
+            for (j = 0; j < i; j++) {
+                if ((u8)value == D_801DB080[j]) {
+                    break;
+                }
+            }
+        } while (j != i);
+        D_801DB080[i] = value;
+    }
+}
 
 INCLUDE_ASM(func_801D2908);
 
