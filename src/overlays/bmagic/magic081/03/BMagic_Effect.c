@@ -48,16 +48,16 @@ MATCH void func_801EF058(void) {
 MATCH void func_801EF0B8(void) {
     u32          slot;
     u8           effect_index;
-    PartyMember* work;
+    PartyMember* task;
 
-    g_Task->pos.x.fixed                        = g_BattleEffectBattler->pos.x.fixed + 0x20000;
+    g_Task->pos.x.fixed                        = g_BattleEffectBattler->pos.x.fixed + TO_COORD(2);
     g_Task->pos.y.fixed                        = g_BattleEffectBattler->pos.y.fixed;
     COORD_INT(g_Task->pos.z)                   = COORD_INT(g_BattleEffectBattler->pos.z);
     slot                                       = Battle_AllocEffect(1, 0x42);
     effect_index                               = slot & BYTE_MASK;
-    work                                       = g_Task;
+    task                                       = g_Task;
     g_BattleEffects[effect_index].header.mode  = 1;
-    g_BattleEffects[effect_index].target.party = work;
+    g_BattleEffects[effect_index].target.party = task;
     g_Task->timer                              = slot;
     SND_QueueSelectionFx(0x100);
     g_Task->param.unk_0B = 0;
