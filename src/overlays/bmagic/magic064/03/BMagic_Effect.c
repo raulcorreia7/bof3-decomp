@@ -154,7 +154,26 @@ MATCH void func_801EF5FC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF69C);
+MATCH void func_801EF69C(void) {
+    u8 timer;
+
+    if (g_Task->timer != 0) {
+        Area_IndexCells();
+        g_Task->timer = 0;
+    }
+
+    timer          = g_Task->unk_09;
+    g_Task->unk_09 = timer + 0xFF;
+    if (timer != 0) {
+        return;
+    }
+
+    g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_QUEUED;
+    g_Game.members[g_Battle.active_battler].counter_136 = 0;
+    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+    func_800A9820(g_Battle.target_selector);
+    func_801E5988();
+}
 
 MATCH void func_801EF78C(void) {
     Magic064Steps table;
