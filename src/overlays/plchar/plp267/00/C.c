@@ -24,9 +24,7 @@ INCLUDE_ASM(func_801CE8AC);
 
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 
-MATCH s32 func_801CEAE0(u8 index) {
-    PLCHAR_PROBE_FACING_FOLLOWER(index);
-}
+#include "overlays/plchar/Plchar_ProbeFacingFollower.h"
 
 MATCH void func_801CEBFC(void) {
     SYS_DISPATCH_TASK(D_801D099C, 2, g_Task);
