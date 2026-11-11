@@ -1,5 +1,6 @@
 #include "area104_14.h"
 
+/* The probe loop matches area121 func_801F5028 but keeps a separate body: the functions have different names, addresses and parameter forms. */
 MATCH u8 func_801F4AE4(s32 x, s32 y, s32 dir) {
     s32 tries;
 
