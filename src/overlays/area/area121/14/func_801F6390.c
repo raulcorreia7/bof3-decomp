@@ -10,7 +10,7 @@ MATCH void func_801F6390(void) {
     if (g_AreaSceneMode >= 3) {
         return;
     }
-    if ((g_AreaDrawFlags & 4) == 0) {
+    if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
     if (GetGraphType() == 1) {
