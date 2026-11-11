@@ -719,6 +719,7 @@ g_BMagicEffectModes = { addr = 0x801F02A4, source = "Handlers of magic079 (Drain
 ["emi/bmagic/magic081/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EC2E0 = { addr = 0x801EC2E0, source = "Pointer to the battle effect the magic081 effect runs on; func_801EEE74 and func_801EEF88 read its target party record." }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 SAVE_AccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card." }
 BMagic_DispatchEffectMode = { addr = 0x801EF014, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic081." }
 Effect_TickOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic081 (RottenBreath)." }

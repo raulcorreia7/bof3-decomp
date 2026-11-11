@@ -66,7 +66,17 @@ MATCH void func_801EF330(void) {
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801EF39C);
+MATCH void func_801EF39C(void) {
+    u8 effect_slot;
+
+    g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + 0x2000;
+    g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
+    effect_slot              = g_BattleEffectBattler->timer;
+    g_Task->unk_14           = ratan2(g_BattleEffects[effect_slot].pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffects[effect_slot].pos.y.fixed - g_Task->pos.y.fixed);
+    g_Task->unk_09           = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF44C(void) {
     s32 angle;
