@@ -72,7 +72,26 @@ MATCH void func_801CF75C(void) {
     CHAR_START_FACING_TURN(func_801CFB40);
 }
 
-INCLUDE_ASM(func_801CF7C8);
+MATCH void func_801CF7C8(void) {
+    if (Actor_StepAnimOnce() & BYTE_MASK) {
+        Actor_RequestScript(g_Task->direction_08);
+        g_Task->unk_03 = 2;
+        return;
+    }
+    if (g_Task->unk_0A != 0) {
+        g_Task->unk_0A--;
+        if (g_Task->unk_0A == 0) {
+            /* FAKE: retail reads SND_PlayCue as void(s32). */
+            ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
+            g_ActorSlots[g_Task->param.actor_slot].unk_08 = g_Task->direction_08;
+            if (g_Task->option_flags == 0) {
+                g_Task->option_flags = 1;
+            }
+            g_ActorSlots[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
+        }
+    }
+}
 
 #include "overlays/plchar/Char_ClearModeIfUnused.h"
 
