@@ -69,7 +69,8 @@ MATCH void func_801CF938(void) {
     Actor_StepAnimLoop();
 }
 
-INCLUDE_ASM(func_801CF9A8);
+/* func_801CF9A8 */
+#include "overlays/plchar/Plchar_FindGarrActorSlot.h"
 
 /* func_801CFB0C */
 #include "overlays/plchar/Plchar_FollowerInReach.h"

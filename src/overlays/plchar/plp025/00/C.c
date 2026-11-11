@@ -46,7 +46,8 @@ INCLUDE_ASM(func_801CF37C);
 
 #include "overlays/plchar/func_801CF564.h"
 
-INCLUDE_ASM(func_801CF5D4);
+/* func_801CF5D4 */
+#include "overlays/plchar/Plchar_FindGarrActorSlot.h"
 
 /* func_801CF738 */
 #include "overlays/plchar/Plchar_FollowerInReach.h"

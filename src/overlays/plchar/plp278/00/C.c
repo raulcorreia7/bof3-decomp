@@ -20,7 +20,8 @@ INCLUDE_ASM(func_801CE654);
 
 #include "overlays/plchar/Char_TickPauseTimer.h"
 
-INCLUDE_ASM(func_801CE8AC);
+/* func_801CE8AC */
+#include "overlays/plchar/Plchar_FindGarrActorSlot.h"
 
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 
