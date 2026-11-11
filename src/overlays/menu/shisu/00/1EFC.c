@@ -33,7 +33,21 @@ MATCH void func_801D2C84(void) {
     func_801D2978();
 }
 
-INCLUDE_ASM(func_801D2CE4);
+MATCH void func_801D2CE4(void) {
+    s32* p;
+    s32  h;
+
+    p = &D_801DA084;
+    *p += 0x200000;
+    h = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    if ((h << 16) < *p) {
+        *p         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16;
+        D_801DA04E = 1;
+    } else {
+        D_801DA04E = 0;
+    }
+    func_801D2978();
+}
 
 MATCH void func_801D2D88(void) {
     func_801D2978();

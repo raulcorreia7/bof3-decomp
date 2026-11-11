@@ -51,7 +51,16 @@ MATCH void func_801EF3D8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 4), 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF41C);
+MATCH void func_801EF41C(void) {
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 6), g_Task->header.step);
+    g_Task->param.unk_0B += 1;
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        Effect_SetActorMatrix();
+        func_801EF85C();
+        func_801EFAE8();
+        PopMatrix();
+    }
+}
 
 INCLUDE_ASM(func_801EF4C8);
 

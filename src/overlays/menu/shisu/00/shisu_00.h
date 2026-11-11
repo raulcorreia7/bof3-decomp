@@ -171,6 +171,7 @@ extern u8              D_8014839C;
 extern MenuStatusItems g_MenuStatusItems;
 extern s32             D_801DA044;
 extern u8              D_801DA04E;
+extern s32             D_801DA084;
 extern u8              D_801DA0C6;
 
 s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);

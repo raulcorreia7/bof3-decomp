@@ -229,7 +229,17 @@ INCLUDE_ASM(func_801F04A0);
 
 INCLUDE_ASM(func_801F05A4);
 
-INCLUDE_ASM(func_801F0B8C);
+MATCH void func_801F0B8C(s16 x0, s16 y0, s16 x1, s16 y1) {
+    LINE_G2* primitive;
+
+    primitive = (LINE_G2*)g_GfxPrimCursor;
+    SetLineG2(primitive);
+    setRGB0(primitive, 240, 20, 120);
+    setRGB1(primitive, 0, 0, 0);
+    setXY2(primitive, x0, y0, x1, y1);
+    SetSemiTrans(primitive, 1);
+    GFX_AddPrim(2, sizeof(LINE_G2));
+}
 
 MATCH void func_801F0C38(void) {
     Magic064SecondSteps handlers;
