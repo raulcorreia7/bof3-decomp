@@ -194,7 +194,8 @@ how each is made. `meson.build` turns that into one Ninja edge per object, link 
 
 A tracked data file with one record per row is JSON Lines (`.jsonl`): one JSON object per line,
 UTF-8, no trailing spaces, a fixed key order, and the row order the file keeps. Free text needs no
-quoting. `config/attempts.jsonl` holds the failed attempts. The build graph that `tools/split.py`
+quoting. `config/attempts.jsonl` holds the failed attempts and
+`config/sdk/library-units.jsonl` the SDK units. The build graph that `tools/split.py`
 prints for `meson.build` is the exception: it stays tab-separated, because Meson has no JSON parser
 and it is a pipe, not a file.
 
