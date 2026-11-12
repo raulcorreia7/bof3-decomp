@@ -66,6 +66,19 @@ ASSERT_OFFSET(Scena07BurstBuffer, unk_514, 0x514);
 extern Scena07BurstBuffer* D_801FDFC0;
 void                       func_801F9330(Scena07BurstBuffer* buffer);
 
+/* The burst rotation step func_801F7960 and func_801F7C9C share: draw the burst buffer, turn it by
+ * the step while the countdown is high, and clear the actor when it ends. Every change must keep
+ * both members matching. */
+static inline void Scene_TurnBurst(s32 step) {
+    func_801F9330(D_801FDFC0);
+    if (g_Task->vx >= 9) {
+        D_801FDFC0->angle += step;
+    }
+    if (--g_Task->vx == 0) {
+        func_80196070();
+    }
+}
+
 void func_801F81D4(u8* row);
 
 u8*       func_801F8394(void);
