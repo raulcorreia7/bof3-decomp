@@ -35,7 +35,29 @@ MATCH void Effect_SwingCameraAngle(void) {
     BMAGIC_SWING_CAMERA(22);
 }
 
-INCLUDE_ASM(func_801EF324);
+MATCH void func_801EF324(void) {
+    u8           count;
+    u32          slot;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        SND_QueueSelectionFx(0x102);
+        slot                               = Battle_AllocEffect(1, 0x60) & BYTE_MASK;
+        work                               = g_BattleEffectBattler;
+        g_BattleEffects[slot].header.mode  = 3;
+        g_BattleEffects[slot].target.party = work;
+        g_BattleEffectBattler->param.unk_0B += 1;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->unk_5C = 1;
+        g_Task->unk_5D = 0x40;
+        g_Task->unk_5E = 0x40;
+        g_Task->unk_5F = 0x40;
+        g_Task->unk_09 = 12;
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_StartTint.h"
 
