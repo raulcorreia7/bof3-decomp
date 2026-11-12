@@ -7,10 +7,10 @@ MATCH void func_801D6B28(s8 panel_kind) {
     s32 right_x;
 
     Area_AddActor();
-    func_801E0C80(0, 1);
-    func_801E0DCC(0x15, 1, 50, 150);
-    func_801E0DCC(0x16, 1, 188, 150);
-    func_801E0DCC(0x11, 1, 54, 156);
+    Fishing_SetDrawMode(0, 1);
+    Fishing_DrawSprite(0x15, 1, 50, 150);
+    Fishing_DrawSprite(0x16, 1, 188, 150);
+    Fishing_DrawSprite(0x11, 1, 54, 156);
 
     {
         FishingState* work;

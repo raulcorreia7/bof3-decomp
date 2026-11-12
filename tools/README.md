@@ -13,6 +13,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Build and check every image              | `meson compile -C build/meson check`                                     | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Check one image                          | `meson compile -C build/meson check-<image>`                             | same                                                      |
 | Rank the open functions, cheapest route first | `tools/worklist.py -n 10 [--image <name>]`                          | `--help`                                                  |
+| Write rows for another program           | `<tool> --jsonl` (worklist, dups, sigs, quality `--queue`, symbol refs, template_diff, m2c_sweep) | `--help`                                                  |
 | Run every check before a push            | `meson compile -C build/meson pre-push`                                  | [pre-push](#pre-push)                                     |
 | Compare one function with retail         | `tools/match.sh <target>@0x<ADDR>`                                       | [match.sh](../docs/toolchain.md#matchsh)                  |
 | Preprocess the context for m2c or a scratch | `tools/m2ctx.py include/common.h -o ctx.c`                            | [m2c](../docs/toolchain.md#m2c)                           |
@@ -20,7 +21,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Permute a near match                     | `tools/permuter_import.py src/<path>/<Name>.c`                           | [permuter](../docs/toolchain.md#permuter)                 |
 | Find a template for an assembly function | `tools/template_diff.py <target>@<func>`                                 | [template diff](#templates)                               |
 | Try the closest template for one function | `tools/template_try.py <target>@<func>`                                 | [template diff](#templates)                               |
-| Try templates in batch                   | `tools/template_try.py rows.tsv`                                         | same                                                      |
+| Try templates in batch                   | `tools/template_try.py rows.jsonl`                                       | same                                                      |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
 | Draft open functions with m2c, keep exact | `tools/m2c_sweep.py --sample 200`, `tools/m2c_sweep.py --image <image>` | [m2c sweep](#m2c-sweep)                                   |
 | Write the seed bundle of one function    | `tools/seed.py <target>@<func>`                                          | [m2c sweep](#m2c-sweep)                                   |
@@ -28,8 +29,8 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find twins in one image                  | `bin/coddog match <target> <func> -t 0.95`                               | [coddog](../docs/toolchain.md#coddog)                     |
 | Find alike functions across images       | `tools/dups.py near`                                                     | [duplicates](#duplicates-and-names)                       |
 | List same-name groups and split names    | `tools/dups.py shared-names`, `tools/dups.py split-names`                | same                                                      |
-| Find repeated instruction runs in functions | `tools/chunks.py -w 24 -o chunks.tsv`                                 | [duplicates](#duplicates-and-names)                       |
-| Mark each run asm, shared or pasted      | `tools/classify.py chunks.tsv out.tsv`                                   | same                                                      |
+| Find repeated instruction runs in functions | `tools/chunks.py -w 24 -o chunks.jsonl`                               | [duplicates](#duplicates-and-names)                       |
+| Mark each run asm, shared or pasted      | `tools/classify.py chunks.jsonl out.jsonl`                               | same                                                      |
 | Find repeated C bodies in the source     | `ripwire src --clones`                                                   | same                                                      |
 | Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/naming.md#rename-steps)       |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
@@ -56,8 +57,9 @@ tools/template_diff.py <target>@<func> <template target>@<template func>
 ```
 
 `template_try.py` takes one function ref, `tools/template_try.py <target>@<func>`, and tries its
-closest template; or rows of `TARGET@NAME<TAB>TEMPLATE@NAME` (`dups.py near --full` writes them,
-cheapest first). It lines up the template's instructions with the target's. Where only a
+closest template; or rows of `TARGET@NAME<TAB>TEMPLATE@NAME` (`dups.py near --full --jsonl` writes
+them as objects with the keys `target` and `template`, cheapest first). It lines up the template's
+instructions with the target's. Where only a
 relocation symbol differs, it names the target's symbol in the template's C; where only an
 immediate differs and that literal (or the numeric macro that holds it) occurs once, it writes the
 target's value. It declares what the body now uses in the image header, then calls `try_body.py`.
@@ -84,7 +86,7 @@ file already declares the name. Output: `EXACT`, `FAIL` with the first differenc
 
 ## m2c sweep
 
-`tools/m2c_sweep.py` drafts open functions with m2c, runs each draft through `tools/try_body.py` and keeps the exact ones; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_Task` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_Task`, or `((T *)g_Task)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
+`tools/m2c_sweep.py` drafts open functions with m2c, runs each draft through `tools/try_body.py` and keeps the exact ones, writing `build/m2c_sweep/results.jsonl` (target, status, differing, variant) and, with `--jsonl`, one object per printed line; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_Task` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_Task`, or `((T *)g_Task)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
 
 ## Body generators
 
@@ -109,8 +111,9 @@ body; a `SKIP` function moves on to the template or plain route.
 each assembly function; `near --full` writes one row per assembly function with its cheapest template
 and `diff_count`, the instructions that differ (jump targets ignored), cheapest first. `shared-names`
 lists one name that several bodies use, worst first. `split-names` lists byte-equal bodies that carry
-several names. All print tab-separated rows.
-`chunks.py` finds instruction runs (immediates masked) that recur in three or more functions; `classify.py`
+several names. All print tab-separated rows, or one JSON object per line with `--jsonl`.
+`chunks.py` finds instruction runs (immediates masked) that recur in three or more functions and
+writes JSON Lines with each group's `members`; `classify.py` reads and writes that form and
 marks each member asm, shared (a header body or a call) or pasted, so the rows left are the copies to
 fold. `ripwire src --clones` lists token-normalized duplicate C bodies.
 
@@ -123,7 +126,7 @@ files worst first. `--diff BASE` compares BASE with `--to` (default `HEAD`) and 
 `harmful` or `pasted` rose over the files the change touched (a moved body nets to zero), when a function
 present before and after holds more `D_`/`unk_` tokens (`names`), or when a body named before is now `func_<ADDR>`
 (`addr`); a new `MATCH` body is exempt from both. `BASE` is compared at its merge-base with `--to`. `--gate` picks
-other metrics. A commit message line `Quality-Allowed: <path> <metric>` accepts one rise in one file. Old debt in an untouched file never fails. `report` stores the totals under `quality` in `report.json`.
+other metrics. `--queue --jsonl` writes the same rows as objects. A commit message line `Quality-Allowed: <path> <metric>` accepts one rise in one file. Old debt in an untouched file never fails. `report` stores the totals under `quality` in `report.json`.
 
 ## Pre-push
 

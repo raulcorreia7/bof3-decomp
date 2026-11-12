@@ -6,7 +6,7 @@ whole match; [matching](../../../../docs/matching.md) is the full reference.
 1. **Pick a row.** Build first (`meson compile -C build/meson`): the worklist reads the built images.
    `tools/worklist.py -n 10` ranks the open functions, cheapest route first (`template0`,
    `generator`, `template`, `plain`). `--image <substr>` keeps one image, `--route` one route,
-   `--tsv` adds the attempts column. For a `template0` row,
+   `--tsv` adds the attempts column and `--jsonl` writes the rows as objects. For a `template0` row,
    `tools/template_try.py <TARGET>@<func>` puts the closest matched body in place and measures it.
    A `generator` row names its shape in the last column (`gen_body.py spad`), so run
    `tools/gen_body.py <shape>`; a `template` row also runs `tools/template_diff.py <TARGET>@<func>`

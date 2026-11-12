@@ -17,7 +17,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     g     = (color >> 2) & 0xF8;
     b     = (color >> 7) & 0xF8;
 
-    func_801E0C80(shade != 0 ? 7 : 6, 2);
+    Fishing_SetDrawMode(shade != 0 ? 7 : 6, 2);
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
     prim->x2 = (prim->x1 = x + w);
@@ -28,7 +28,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     SetSemiTrans(prim, 1);
     GFX_AddPrim(2, sizeof(LINE_F3));
 
-    func_801E0C80(shade != 0 ? 6 : 7, 2);
+    Fishing_SetDrawMode(shade != 0 ? 6 : 7, 2);
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
     prim->x2 = x + w;

@@ -12,7 +12,7 @@ MATCH void func_801D4680(void) {
 
     FISHING_STATE->step_timer_09++;
     if (FISHING_STATE->saved_index_0B == 0) {
-        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 16)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 16)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
         y     = FISHING_SHOP_COLUMNS_Y;
         flags = 0;
         t     = FISHING_STATE->step_timer_09 * 3;
@@ -21,7 +21,7 @@ MATCH void func_801D4680(void) {
         x += FISHING_SHOP_COLUMNS_X;
         x &= HALF_MASK;
     } else {
-        func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
+        Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
         flags = 0;
         if (D_80145E93[0] >= 3) {
             flags = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
