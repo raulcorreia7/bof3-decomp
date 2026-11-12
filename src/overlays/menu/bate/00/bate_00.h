@@ -130,7 +130,6 @@ extern s8        D_80148659;
 extern BateState D_801D8ED4;
 extern u8        D_801D86F8[];
 
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
@@ -156,8 +155,6 @@ void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s3
 
 /* func_801D73B4 */
 void Menu_DrawAbilityList(MenuListPanel* panel);
-
-s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 
 void func_801D2304(s32 arg0, s32 arg1);
 void func_801D259C(void);

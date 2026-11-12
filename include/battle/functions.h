@@ -46,8 +46,6 @@ void        func_800B2218(void);
 void        func_800B22AC(void);
 void        func_800B23B8(void);
 void        func_800B23F8(void);
-/* func_80166A10 */
-u8          Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 extern void func_801D8270(s32 x, s32 y);
 void        func_801D9484(void);
 void        func_801DAAE4(void);
