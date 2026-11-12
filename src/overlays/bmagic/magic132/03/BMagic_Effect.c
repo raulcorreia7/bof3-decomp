@@ -12,7 +12,7 @@ MATCH void func_801EEDD0(void) {
     g_PaletteFades[g_Task->timer].offset.red++;
     g_PaletteFades[g_Task->timer].offset.green++;
     g_PaletteFades[g_Task->timer].offset.blue++;
-    if (++g_Task->unk_09 == 0x10) {
+    if (++g_Task->unk_09 == 16) {
         D_8014637C->unk_29 = 2;
         g_Task->header.mode++;
     }
