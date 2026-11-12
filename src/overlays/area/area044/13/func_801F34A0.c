@@ -3,16 +3,16 @@
 
 MATCH void func_801F34A0(void) {
     u8 state;
-    u8 kind;
+    u8 state_type;
     u8 slot;
 
-    state = g_ScriptVars[3];
-    kind  = state & 3;
-    slot  = (state & 0x30) >> 4;
+    state      = g_ScriptVars[3];
+    state_type = state & 3;
+    slot       = (state & 0x30) >> 4;
 
     switch (g_SceneEventStep) {
         case 0:
-            if (kind == 0) {
+            if (state_type == 0) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x16) != 0) {
                     func_801F318C(FACING_RIGHT, 0);
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
@@ -20,7 +20,7 @@ MATCH void func_801F34A0(void) {
                     g_SceneEventStep = 1;
                     break;
                 }
-            } else if (kind == 1) {
+            } else if (state_type == 1) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x16) == 0) {
                     func_801F318C(FACING_LEFT, 0);
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));

@@ -3,12 +3,12 @@
 
 MATCH void func_801F3740(void) {
     u8 state;
-    u8 kind;
+    u8 state_type;
     u8 slot;
 
-    state = g_ScriptVars[3];
-    kind  = state & 3;
-    slot  = (state & 0x30) >> 4;
+    state      = g_ScriptVars[3];
+    state_type = state & 3;
+    slot       = (state & 0x30) >> 4;
 
     switch (g_SceneEventStep) {
         case 0:
@@ -41,13 +41,13 @@ MATCH void func_801F3740(void) {
         case 10: {
             s8* step;
 
-            if (kind == 0) {
+            if (state_type == 0) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x17) != 0) {
                     func_801F318C(FACING_DOWN, 0);
                     g_ScriptVars[3] = (g_ScriptVars[3] & 0xF0) | 2;
                     goto advance;
                 }
-            } else if (kind == 2) {
+            } else if (state_type == 2) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x17) == 0) {
                     func_801F318C(FACING_UP, 0);
                     g_ScriptVars[3] &= 0xF0;
