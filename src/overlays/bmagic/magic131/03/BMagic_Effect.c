@@ -12,7 +12,20 @@ INCLUDE_ASM(func_801EEF64);
 
 INCLUDE_ASM(func_801EF000);
 
-INCLUDE_ASM(func_801EF110);
+MATCH void func_801EF110(void) {
+    PartyMember* work;
+    u32          slot;
+
+    if (g_Task->param.unk_0B == 0) {
+        slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B++;
+        g_Task->unk_09 = 10;
+        g_Task->header.mode++;
+    }
+}
 
 INCLUDE_ASM(func_801EF1C0);
 
