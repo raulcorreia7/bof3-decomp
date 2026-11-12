@@ -66,6 +66,7 @@ static inline void Scene_SetFlagThenContinue(void* flags, u8 bit) {
     func_801FC5A4();
 }
 
+extern u8 D_80143F03;
 extern u8 D_80144EA2;
 extern u8 D_80144F5B;
 extern u8 D_80144F5C;

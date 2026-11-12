@@ -623,7 +623,36 @@ MATCH s8 func_801FCAB8(s32 entry_x, s32 entry_y) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FCB4C);
+MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
+    if (SYS_TestFlag(g_SceneFlags, 0x1B) == 0) {
+        if (D_80143F03 != 2) {
+            return 0;
+        }
+        if (entry_x != TO_COORD(0xA) + COORD_HALF) {
+            return 0;
+        }
+        if (((entry_y >> 16) - 0x24) >= 2U) {
+            return 0;
+        }
+        g_ScriptVars[1]       = 1;
+        g_SceneState.state_04 = 6;
+        g_SceneState.step_05  = 5;
+        return Scene_ShowMessage(0xC);
+    }
+    if (D_80143F03 == 3 && entry_y == TO_COORD(0xB) + COORD_HALF && ((entry_x >> 16) - 5) < 2U) {
+        if (SYS_TestFlag(g_SceneFlags, 0x1C) == 0) {
+            Game_SetScriptActive();
+            g_SceneState.step_05  = 0xF;
+            g_SceneState.state_04 = 6;
+            return 1;
+        } else {
+            g_SceneState.step_05  = 0xD;
+            g_SceneState.state_04 = 6;
+            return Scene_ShowMessage(0x11);
+        }
+    }
+    return 0;
+}
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
