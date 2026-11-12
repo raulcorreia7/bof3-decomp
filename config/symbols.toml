@@ -4147,7 +4147,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world01/area049/13"]
 Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
-func_80117C38 = { addr = 0x80117C38, type = "func", source = "Adds 1 to header.step of the running task (Scene_AdvanceActorState); the same body is unnamed in magic064, scena07 (four times), area108 (twice) and area197, so no shared name fits." }
+func_80117C38 = { addr = 0x80117C38, type = "func", source = "Adds 1 to header.step of the running task (Scene_AdvanceActorStep); the same body is unnamed in magic064, scena07 (four times), area108 (twice) and area197, so no shared name fits." }
 
 ["emi/world01/area049/14"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
