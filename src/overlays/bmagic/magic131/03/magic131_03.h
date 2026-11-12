@@ -10,6 +10,7 @@ extern Callback D_801F1BF4[];
 extern u8       D_801F1C38[];
 extern Callback D_801F1C08[];
 extern u8       D_801F1C54[];
+extern u8       D_801F1C74[];
 void            func_801F030C(void);
 
 extern Callback D_801F1C24[];

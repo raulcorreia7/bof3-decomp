@@ -295,7 +295,22 @@ MATCH void func_801F13A4(void) {
 
 INCLUDE_ASM(func_801F14A0);
 
-INCLUDE_ASM(func_801F153C);
+MATCH void func_801F153C(void) {
+    s16* angle_cell;
+    u8   phase;
+
+    phase                           = D_801F1C54[g_BMagicEffectWork->unk_07];
+    angle_cell                      = &D_1F800006;
+    *angle_cell                     = phase << 6;
+    g_BMagicEffectWork->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) << 6) >> 3);
+    g_BMagicEffectWork->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
+    g_BMagicEffectWork->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    COORD_INT(g_BMagicEffectWork->pos.z) += D_801F1C74[g_BMagicEffectWork->unk_07] << 6;
+    g_BMagicEffectWork->phase_0C = 0x40;
+    g_BMagicEffectWork->timer_05 = 0x10;
+    g_BMagicEffectWork->unk_06   = 8;
+    g_BMagicEffectWork->header.step += 1;
+}
 
 MATCH void func_801F1644(void) {
     s16* angle_cell;
