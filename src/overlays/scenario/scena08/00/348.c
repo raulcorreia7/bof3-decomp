@@ -346,7 +346,7 @@ MATCH u8 func_801F8BF8(void) {
 MATCH void func_801F8CDC(Scena08Spark* spark) {
     u8 life;
 
-    life        = spark->life - 1;
+    life = spark->life - 1;
     spark->fade += 6;
     spark->life = life;
     if (life == 0) {

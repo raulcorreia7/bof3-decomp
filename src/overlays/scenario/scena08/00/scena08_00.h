@@ -37,11 +37,11 @@ typedef struct Scena08Spark {
     u8  fade;        /* 0x03 - shade added per frame */
     u8  life_reload; /* 0x04 - frames loaded into life when it runs out */
     u8  pad_05[3];
-    s32 speed;       /* 0x08 - vertical speed */
-    s32 x;           /* 0x0C */
-    s32 y;           /* 0x10 */
-    s32 z;           /* 0x14 */
-    s32 unk_18;      /* 0x18 */
+    s32 speed;  /* 0x08 - vertical speed */
+    s32 x;      /* 0x0C */
+    s32 y;      /* 0x10 */
+    s32 z;      /* 0x14 */
+    s32 unk_18; /* 0x18 */
 } Scena08Spark;
 
 ASSERT_SIZE(Scena08Spark, 0x1C);
