@@ -103,9 +103,15 @@ MATCH void func_801EFB00(void) {
     BMAGIC_SWAY_EFFECT_WORK(D_801F20DC, func_801F0440)
 }
 
-INCLUDE_ASM(func_801EFBE4);
+#include "overlays/bmagic/BMagic_DrawSparkleRays.h"
 
-INCLUDE_ASM(func_801EFE18);
+MATCH void func_801EFBE4(u16 angle, u16 radius) {
+    BMAGIC_DRAW_SPARKLE_RAYS(EFFECT_SPARKLE_TASK, angle, radius);
+}
+
+MATCH void func_801EFE18(u16 angle, u16 radius) {
+    BMAGIC_DRAW_SPARKLE_LONG_RAYS(EFFECT_SPARKLE_TASK, angle, radius);
+}
 
 INCLUDE_ASM(func_801F00B0);
 

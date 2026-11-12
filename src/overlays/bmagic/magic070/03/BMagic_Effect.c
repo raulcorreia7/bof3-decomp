@@ -30,9 +30,15 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/func_801EF72C.h"
 
-INCLUDE_ASM(func_801EF810);
+#include "overlays/bmagic/BMagic_DrawSparkleRays.h"
 
-INCLUDE_ASM(func_801EFA44);
+MATCH void func_801EF810(u16 angle, u16 radius) {
+    BMAGIC_DRAW_SPARKLE_RAYS(EFFECT_SPARKLE_TASK, angle, radius);
+}
+
+MATCH void func_801EFA44(u16 angle, u16 radius) {
+    BMAGIC_DRAW_SPARKLE_LONG_RAYS(EFFECT_SPARKLE_TASK, angle, radius);
+}
 
 INCLUDE_ASM(func_801EFCDC);
 
