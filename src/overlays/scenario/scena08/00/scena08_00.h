@@ -28,15 +28,44 @@ extern Callback D_801FE8D0[];
 extern Callback D_801FE8D8[];
 extern Callback D_801FE8E4[];
 
-void func_801F7DE8(void);
-s32  func_801F7E14(void);
-void func_801F8AE8(void);
-u8   func_801F8BF8(void);
-u8*  func_801F8B14(void);
-void func_801F8B50(u8* record);
-void func_801F81F4(u16 value);
+/* One of the SCENA08_SPARK_COUNT falling sparks at AREA_WORK: kind selects the per-frame handler in D_801FE8FC. */
+#define SCENA08_SPARK_COUNT 8U
 
-extern void (*D_801FE8FC[])(void* slot);
+typedef struct Scena08Spark {
+    u8  active;      /* 0x00 - 0 marks a free slot */
+    u8  kind;        /* 0x01 - selects the per-frame handler */
+    u8  life;        /* 0x02 - frames left */
+    u8  fade;        /* 0x03 - shade added per frame */
+    u8  life_reload; /* 0x04 - frames loaded into life when it runs out */
+    u8  pad_05[3];
+    s32 speed;  /* 0x08 - vertical speed */
+    s32 x;      /* 0x0C */
+    s32 y;      /* 0x10 */
+    s32 z;      /* 0x14 */
+    s32 unk_18; /* 0x18 */
+} Scena08Spark;
+
+ASSERT_SIZE(Scena08Spark, 0x1C);
+ASSERT_OFFSET(Scena08Spark, active, 0x00);
+ASSERT_OFFSET(Scena08Spark, kind, 0x01);
+ASSERT_OFFSET(Scena08Spark, life, 0x02);
+ASSERT_OFFSET(Scena08Spark, fade, 0x03);
+ASSERT_OFFSET(Scena08Spark, life_reload, 0x04);
+ASSERT_OFFSET(Scena08Spark, speed, 0x08);
+ASSERT_OFFSET(Scena08Spark, x, 0x0C);
+ASSERT_OFFSET(Scena08Spark, y, 0x10);
+ASSERT_OFFSET(Scena08Spark, z, 0x14);
+ASSERT_OFFSET(Scena08Spark, unk_18, 0x18);
+
+extern void (*D_801FE8FC[])(Scena08Spark* spark);
+
+void          func_801F7DE8(void);
+s32           func_801F7E14(void);
+void          func_801F8AE8(void);
+u8            func_801F8BF8(void);
+Scena08Spark* func_801F8B14(void);
+void          func_801F8B50(Scena08Spark* spark);
+void          func_801F81F4(u16 value);
 
 void func_801F9688(void);
 
@@ -52,7 +81,7 @@ extern u16       D_801FE9EC[];
 
 void func_801FE800(void);
 
-void func_801F8964(s32 arg0);
+void func_801F8964(Scena08Spark* spark);
 void func_801F8D98(void* table);
 void func_801F90C8(void* table);
 void func_801FA32C(void);

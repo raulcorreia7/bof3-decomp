@@ -106,7 +106,38 @@ INCLUDE_ASM(func_801D1540);
 
 INCLUDE_ASM(func_801D1690);
 
-INCLUDE_ASM(func_801D1914);
+MATCH void func_801D1914(s16 amount) {
+    VECTOR start;
+    VECTOR end;
+
+    start.vx = TO_COORD(48) + COORD_HALF;
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-768);
+    end.vx   = TO_COORD(48) + COORD_HALF;
+    end.vy   = TO_COORD(113) + COORD_HALF;
+    end.vz   = TO_COORD(-512);
+    func_801D1370(&start, &end, amount);
+
+    start.vx = TO_COORD(48);
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-384);
+    func_801D1370(&start, &end, amount);
+
+    end.vx = TO_COORD(48);
+    end.vy = TO_COORD(113) + COORD_HALF;
+    end.vz = TO_COORD(-256);
+    func_801D1370(&start, &end, amount);
+
+    start.vx = TO_COORD(48) + COORD_HALF;
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-128);
+    func_801D1370(&start, &end, amount);
+
+    end.vx = TO_COORD(48) + COORD_HALF;
+    end.vy = TO_COORD(113) + COORD_HALF;
+    end.vz = 0;
+    func_801D1370(&start, &end, amount);
+}
 
 INCLUDE_ASM(func_801D1A20);
 

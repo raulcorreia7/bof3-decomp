@@ -284,7 +284,9 @@ BMagic_StepTable = { addr = 0x801EFE60, source = "Step handlers of magic004, run
 ["emi/bmagic/magic006/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnZeroTick = { addr = 0x801EEDA4, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic006 (Mind Sword)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE04, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic006." }
 Effect_TickOnTimerZero = { addr = 0x801EF41C, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic006 (Mind Sword)." }
@@ -317,7 +319,9 @@ D_801F1C04 = { addr = 0x801F1C04, type = "Point2DL", source = "Velocity pairs fu
 
 ["emi/bmagic/magic009/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC18 = { addr = 0x801EEC18, source = "Four step handlers of magic009 (Chlorine), one per header.step (byte 0x02); func_801EF6B0 copies them to the stack and calls the one the step picks." }
 Effect_CountDownTimerNextStep = { addr = 0x801EF01C, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.mode (byte 0x01) at zero in magic009 (Chlorine)." }
 Effect_NextStepOnZeroTick = { addr = 0x801EF068, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is zero in magic009 (Chlorine)." }
@@ -381,7 +385,9 @@ g_BMagicEffectModes = { addr = 0x801EF990, source = "Handlers of magic017 (Astra
 
 ["emi/bmagic/magic020/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC1C = { addr = 0x801EEC1C, type = "Magic020Steps", source = "Step handlers of magic020 (Disembowel), run by header.step (byte 0x02) from func_801EF3DC; the eight Callback slots are copied to a local table first." }
 Effect_DispatchMode = { addr = 0x801EEC48, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic020 (Disembowel)." }
 Effect_StartPlaying = { addr = 0x801EF31C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic020 (Disembowel)." }
@@ -492,6 +498,7 @@ BMagic_Trail = { addr = 0x801F0A38, source = "Trail points of the magic044 effec
 ["emi/bmagic/magic045/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EEE58, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic045 (Bone Dart)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEEA4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic045." }
 Effect_TickDownAndClear = { addr = 0x801EF3D8, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic045 (Bone Dart)." }
@@ -1116,6 +1123,7 @@ BMagic_AllocEffect = { addr = 0x801EFC8C, type = "func", source = "Claims the fi
 g_BMagicEffectModes = { addr = 0x801F0048, source = "Handlers of magic105 (Kyrie), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic106/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEE80, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic106 (Death)." }
@@ -1221,7 +1229,9 @@ Effect_PlayOnce2 = { addr = 0x801EF344, type = "func", source = "Plays the effec
 ["emi/bmagic/magic118/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 BMagic_UpdateBurn = { addr = 0x801EEC18, type = "func", source = "per-frame update of the Burn effect: runs the step handler D_801EEC04 selects, then draws the flame quads and triangles while the effect is active" }
 BMagic_SpawnBurnFlames = { addr = 0x801EECD4, type = "func", source = "starts the Burn effect: claims eight flame effect slots with Battle_AllocEffect, each pointing at the effect work record, copies a palette row with the semi-transparent bit set and queues cue 0x100" }
 BMagic_SelectBurnTarget = { addr = 0x801EEE20, type = "func", source = "counts the effect timer at +0x09 up and, at 16, calls Battle_ApplyDamageFlags with g_BattleTargetSelector and 0x10, then advances the step byte at +0x01" }
@@ -1422,7 +1432,9 @@ g_BMagicEffectModes = { addr = 0x801EFEE8, source = "Handlers of magic143 (Thund
 ["emi/bmagic/magic144/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EEE50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic144 (Wall of Fire)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE9C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic144." }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF11C, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the effect ticker (byte 0x0B) is set in magic144 (Wall of Fire)." }
@@ -3477,6 +3489,7 @@ s_SceneActorDispatch = { addr = 0x801FCA84, source = "scenario actor dispatch ta
 g_SceneFx = { addr = 0x801FCA90, source = "Func_801FC01C seeds and func_801FC3A0 steps the 30 slot by 12 cell sample effect." }
 
 ["emi/scenario/scena01/00"]
+Area_DrawSparkCell = { addr = 0x801F7A24, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
 Area_ClearWorkColumn = { addr = 0x801F7AB8, type = "func", source = "Clears one byte of each row in the actor window." }
 Scene_EnterCedarWoods = { addr = 0x801F8000, type = "func", source = "requests the area change to Cedar Woods before Nue and resets scene script state in scena01" }
 Scene_InitOpeningParty = { addr = 0x801FE10C, type = "func", source = "loads Ryu pajamas, Teepo, and Rei archives and joins Ryu pajamas as the opening party in scena01" }
@@ -4300,6 +4313,7 @@ Area_ResetCameraOffsetY = { addr = 0x801F2D64, type = "func", source = "Zeroes g
 
 ["emi/world02/area082/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_DrawSparkCell = { addr = 0x801F387C, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
 Area_ClearWorkColumn = { addr = 0x801F3910, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 
 ["emi/world02/area084/13"]
@@ -4492,6 +4506,7 @@ g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted act
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world02/area111/13"]
+g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
 Message_SelectAnswer = { addr = 0x801F33D0, type = "func", source = "Sets g_MessageRequest to 3 when g_MessageChoice is nonzero, otherwise to 2." }
 
 ["emi/world02/area112/13"]
