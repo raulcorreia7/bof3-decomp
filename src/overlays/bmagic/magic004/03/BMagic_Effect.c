@@ -8,7 +8,32 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC98);
 
-INCLUDE_ASM(func_801EEF8C);
+MATCH void func_801EEF8C(void) {
+    PartyMember* battler;
+    u8           selector;
+
+    if (g_Task->param.unk_0B < 2) {
+        selector = LOBU(g_Battle.target_selector);
+        if (selector < BATTLE_PARTY_CHARACTERS_COUNT) {
+            battler = &g_Game.members[selector];
+        } else {
+            battler = (PartyMember*)(g_BattleEnemies + selector * BATTLE_ENEMY_STRIDE);
+        }
+        g_Task->unk_5D = D_801EFE10[g_Task->unk_04 * 3];
+        g_Task->unk_5E = D_801EFE11[g_Task->unk_04 * 3];
+        g_Task->unk_5F = D_801EFE12[g_Task->unk_04 * 3];
+        func_80196718(battler);
+        g_Task->timer = func_8019651C(battler, (s8)g_Task->unk_5D, (s8)g_Task->unk_5E, (s8)g_Task->unk_5F, 0);
+        func_800AEF98(4, 0);
+        g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        func_800A9610(LOBU(g_Battle.target_selector), 0x20);
+        SND_QueueSelectionFx(0x100);
+        if ((u32)(g_Battle.action_id - 0x85) < 4) {
+            SND_QueueSelectionFx(0x101);
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801EF158(void) {
     u16 cue;
