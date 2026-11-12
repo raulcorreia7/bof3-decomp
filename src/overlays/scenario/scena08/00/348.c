@@ -269,7 +269,33 @@ MATCH void func_801F7DE8(void) {
 
 INCLUDE_ASM(func_801F7E14);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F802C(void) {
+    u8* work;
+    u16 base;
+    s32 angle;
+
+    work = func_801F7DAC();
+    if (work != NULL) {
+        work[0]               = 1;
+        work[2]               = 0;
+        FIELD(s32, work, 0x4) = g_Task->pos.x.fixed;
+        FIELD(s32, work, 0x8) = g_Task->pos.y.fixed;
+        FIELD(s32, work, 0xC) = g_Task->pos.z.fixed >> 8;
+        base                  = (u32)rsin(g_Task->vx) >> 4;
+        if (g_Task->unk_06 == 7) {
+            angle = base + 0x800;
+        } else {
+            angle = base + 0x400;
+        }
+        FIELD(s32, work, 0x14) = rcos(angle) * 3;
+        FIELD(s32, work, 0x18) = rsin(angle) * 3;
+        FIELD(s32, work, 0x1C) = 0;
+    }
+}
+#else
 INCLUDE_ASM(func_801F802C);
+#endif
 
 INCLUDE_ASM(func_801F8108);
 
