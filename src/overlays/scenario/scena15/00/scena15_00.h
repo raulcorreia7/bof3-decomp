@@ -7,20 +7,7 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 #include "battle/records.h"
-
-/* One of the 128 falling sparks the scene walks at AREA_WORK with a 0x14
- * stride: the active byte, a fall speed and the world position. */
-typedef struct SceneSpark {
-    u8       active; /* 0x00 */
-    u8       pad_01;
-    s16      fall_speed; /* 0x02 */
-    Point3DL pos;        /* 0x04 */
-    s32      unk_10;     /* 0x10 */
-} SceneSpark;
-
-ASSERT_SIZE(SceneSpark, 0x14);
-ASSERT_OFFSET(SceneSpark, fall_speed, 0x02);
-ASSERT_OFFSET(SceneSpark, pos, 0x04);
+#include "shared/AreaSpark.h"
 
 extern u32      D_801F6C00;
 /* D_801FE57C */

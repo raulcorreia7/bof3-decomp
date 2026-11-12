@@ -42,6 +42,9 @@ extern EnemyBattler D_801EB748[];
 
 void func_800C1D2C(s32 mode);
 void func_800C20F0(s32 mode);
+u8   func_800C2208(u32 mode);
+void func_800C2634(void);
+void func_800C2680(void);
 
 extern u8  D_800C184C[];
 extern u32 D_801463D0;

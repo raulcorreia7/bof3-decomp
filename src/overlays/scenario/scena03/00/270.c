@@ -86,7 +86,7 @@ MATCH void func_801F73BC(void) {
         g_Task->timer      = g_Task->header.mode;
         GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MOVE));
         if (g_Task->header.mode == 4) {
-            func_80196070();
+            Actor_Clear();
         }
     } else {
         g_Task->timer--;
@@ -222,7 +222,19 @@ MATCH void func_801F7E34(void) {
 
 INCLUDE_ASM(func_801F7E6C);
 
-INCLUDE_ASM(func_801F7F84);
+MATCH void func_801F7F84(void) {
+    ActorSlot** effects; /* the five effect slots spawned at +0x0C */
+    u8          i;
+
+    effects = (ActorSlot**)&g_Task->vx;
+    for (i = 0; i < 5; i++) {
+        if (effects[i]->unk_06 == 0) {
+            return;
+        }
+    }
+    g_ScriptVars[0] += 1;
+    Actor_Clear();
+}
 
 INCLUDE_ASM(func_801F7FFC);
 

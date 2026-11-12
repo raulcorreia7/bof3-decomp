@@ -26,6 +26,8 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from check_names import added_lines
+
 MARKERS = ("MATCH", "NON_MATCHING", "HAND_ASM")
 DRAFT_MARKERS = ("NON_MATCHING", "HAND_ASM")
 TOKEN = re.compile(
@@ -274,6 +276,23 @@ def tracked_hand_files() -> list[str]:
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
+        return 0
+    if argv and argv[0] == "--diff":
+        if len(argv) != 2:
+            print("usage: python3 tools/check_markers.py --diff REF", file=sys.stderr)
+            return 2
+        bad = 0
+        for path, line, text in added_lines(argv[1]):
+            if re.match(r"\s*#\s*if(?:def)?\s+NON_MATCHING\b", text):
+                print(
+                    f"{path}:{line}: a draft lands; resolve it or leave it out of the PR",
+                    file=sys.stderr,
+                )
+                bad = 1
+        if bad:
+            print(f"check-markers: drafts landed against {argv[1]}", file=sys.stderr)
+            return 1
+        print(f"check-markers: no drafts landed against {argv[1]}")
         return 0
     paths = argv or tracked_sources()
     problems: list[Violation] = []

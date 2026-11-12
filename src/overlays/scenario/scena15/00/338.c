@@ -62,7 +62,7 @@ MATCH void func_801F717C(void) {
 
 INCLUDE_ASM(func_801F71B0);
 
-MATCH void func_801F752C(SceneSpark* spark) {
+MATCH void func_801F752C(AreaSpark* spark) {
     DVECTOR screen;
     TILE_1* tile;
     u8      shade;
@@ -71,9 +71,8 @@ MATCH void func_801F752C(SceneSpark* spark) {
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 0);
-    tile->x0 = screen.vx;
-    tile->y0 = screen.vy;
-    shade    = -(rand() & 1);
+    setXY0(tile, screen.vx, screen.vy);
+    shade    = -RANDOM_MASK(1);
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;

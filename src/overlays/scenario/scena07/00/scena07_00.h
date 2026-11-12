@@ -108,8 +108,9 @@ extern u8 D_801FDFC8;
         g_Task->timer = 32;                    \
         g_Task->header.step++;                 \
     }
-u8 func_801F85D8(void);
-u8 func_801F9EFC(void);
+u8   func_801F85D8(void);
+void func_801F9DA8(void);
+u8   func_801F9EFC(void);
 
 /* D_801FDD14 */
 extern Callback g_SceneEntityDispatch[];
