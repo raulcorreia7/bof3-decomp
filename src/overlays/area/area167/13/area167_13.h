@@ -25,4 +25,7 @@ extern s32 g_AreaFocusY;
 /* The payload includes per-state handler tables. */
 extern u8  D_801F4A68[];
 
+/* One cell of the payload's data tables: `offset` is the table's byte offset and `index` the byte offset of the row. */
+#define AREA167_ENTRY_TABLE(type, offset, index) MEM(type, D_801F4A68 + (offset) + (index))
+
 #endif
