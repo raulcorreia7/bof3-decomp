@@ -3,7 +3,9 @@
 
 #include "common/vector.h"
 
-/* One of the 128 falling sparks at the area work base. */
+/* The falling sparks at the area work base and their count. */
+#define AREA_SPARK_COUNT 128
+
 typedef struct AreaSpark {
     u8       active;
     u8       unk_01;

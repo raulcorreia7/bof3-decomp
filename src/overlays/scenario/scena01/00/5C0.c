@@ -36,7 +36,7 @@ MATCH void func_801F73FC(void) {
 MATCH void func_801F7480(void) {
     func_801F7678(g_Task->timer);
     if ((g_FrameCount & 1) == 0) {
-        func_801F7AE4();
+        Area_AddSpark();
     }
     func_801F7C54();
     g_Task->timer = (g_Task)->timer + 4;
@@ -69,7 +69,7 @@ INCLUDE_ASM(func_801F7A24);
 
 #include "shared/Area_ClearWorkColumn.h"
 
-INCLUDE_ASM(func_801F7AE4);
+#include "shared/Area_AddSpark.h"
 
 INCLUDE_ASM(func_801F7C54);
 
