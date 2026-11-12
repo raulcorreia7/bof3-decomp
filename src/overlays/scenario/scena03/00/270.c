@@ -86,7 +86,7 @@ MATCH void func_801F73BC(void) {
         g_Task->timer      = g_Task->header.mode;
         GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MOVE));
         if (g_Task->header.mode == 4) {
-            func_80196070();
+            Actor_Clear();
         }
     } else {
         g_Task->timer--;
@@ -223,19 +223,16 @@ MATCH void func_801F7E34(void) {
 INCLUDE_ASM(func_801F7E6C);
 
 MATCH void func_801F7F84(void) {
-    ActorSlot** spawned;
+    ActorSlot** effects; /* the five effect slots spawned at +0x0C */
     u8          i;
 
-    /* the controller keeps the five slots it spawned in its velocity words */
-    spawned = (ActorSlot**)&g_Task->vx;
-    i       = 0;
-    do {
-        if (spawned[i]->unk_06 == 0) {
+    effects = (ActorSlot**)&g_Task->vx;
+    for (i = 0; i < 5; i++) {
+        if (effects[i]->unk_06 == 0) {
             return;
         }
-        i++;
-    } while (i < 5);
-    g_ScriptVars[0]++;
+    }
+    g_ScriptVars[0] += 1;
     Actor_Clear();
 }
 
