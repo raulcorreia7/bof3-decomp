@@ -490,13 +490,15 @@ def main(argv: list[str] | None = None) -> int:
         old_files, new_files = rev_files(base), rev_files(args.to)
         changed = touched(base, args.to)
         accepted = allowed(base, args.to)
+        # The metrics are counted once per revision; the gate reads them per metric.
+        old_rows, new_rows = scan(old_files), scan(new_files)
         found = []
         for metric in gate:
             left = {p for p in changed if (p, metric) not in accepted}
             if metric in PER_FUNCTION:
                 found += ratchet(old_files, new_files, left, [metric])
             else:
-                found += worse(scan(old_files), scan(new_files), left, [metric])
+                found += worse(old_rows, new_rows, left, [metric])
         for line in found:
             print(line)
         if found:

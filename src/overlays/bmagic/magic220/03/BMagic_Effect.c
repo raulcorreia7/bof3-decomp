@@ -111,7 +111,23 @@ INCLUDE_ASM(func_801F002C);
 
 INCLUDE_ASM(func_801F010C);
 
-INCLUDE_ASM(func_801F01C8);
+MATCH void func_801F01C8(void) {
+    s16* angle_cell;
+    s32  phase;
+    u8   count;
+
+    angle_cell  = &D_1F800004;
+    phase       = g_Task->param.unk_0B;
+    *angle_cell = phase << 8;
+    g_Task->pos.x.fixed += rsin((s16)(phase << 8)) * 2;
+    g_Task->pos.y.fixed += rcos(*angle_cell) * 2;
+    count         = g_Task->timer - 2;
+    g_Task->timer = count;
+    if (count == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        Actor_Clear();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 

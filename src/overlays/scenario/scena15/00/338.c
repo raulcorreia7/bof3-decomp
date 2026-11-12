@@ -62,7 +62,22 @@ MATCH void func_801F717C(void) {
 
 INCLUDE_ASM(func_801F71B0);
 
-INCLUDE_ASM(func_801F752C);
+MATCH void func_801F752C(AreaSpark* spark) {
+    DVECTOR screen;
+    TILE_1* tile;
+    u8      shade;
+
+    Area_ProjectPoint(&spark->pos.x, &screen);
+    tile = (TILE_1*)g_GfxPrimCursor;
+    SetTile1(tile);
+    SetSemiTrans(tile, 0);
+    setXY0(tile, screen.vx, screen.vy);
+    shade    = -RANDOM_MASK(1);
+    tile->b0 = shade;
+    tile->g0 = shade;
+    tile->r0 = shade;
+    GFX_AddPrim(1, sizeof(TILE_1));
+}
 
 #include "shared/Area_ClearWorkColumn.h"
 
@@ -256,7 +271,11 @@ MATCH void func_801F8A5C(void) {
 
 INCLUDE_ASM(func_801F8AA0);
 
-INCLUDE_ASM(func_801F8BC4);
+#include "overlays/scenario/Scene_AdvanceBandMotion.h"
+
+MATCH void func_801F8BC4(void) {
+    SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
+}
 
 INCLUDE_ASM(func_801F8C78);
 
@@ -281,7 +300,9 @@ MATCH void func_801F8EA8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8F4C);
+MATCH void func_801F8F4C(void) {
+    SCENE_ADVANCE_BAND_MOTION(-, func_801F9020);
+}
 
 /* func_801F9000 */
 MATCH void Scene_ClearActor(void) {

@@ -5,9 +5,10 @@ segments:
     start: 0x0
     vram: 0x801F2C00
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, .data, D_801F2C00]
+      - [0x4, .rodata, func_801F2D0C]
       - [0x38, c, Fishing_ShowLocation]
       - [0xB0, c, Message_SetAnswerMessage]
       - [0xDC, c, func_801F2CDC]

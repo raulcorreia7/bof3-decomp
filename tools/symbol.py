@@ -11,6 +11,9 @@
     tools/symbol.py member TYPE 0xOFF
     tools/symbol.py uses NAME|IMAGE@0xADDR
     tools/symbol.py value 0xNN [--image IMAGE] [--type ENUM_OR_PREFIX]
+    tools/symbol.py layers [--jsonl]
+    tools/symbol.py accesses NAME [--jsonl]
+    tools/symbol.py records [--jsonl]
 
 `add` writes one row of config/symbols.toml in address order.
 
@@ -60,6 +63,26 @@ sees, nearest scope first: its own headers, the group's, then `include/`. Each r
 header and line, and the enum or prefix family; `--type` keeps one enum or one name prefix. Without
 `--image` it reads every tracked header. The value is written in hexadecimal, like the other verbs.
 
+`layers` builds the game call graph over every image: split assembly `jal` targets, matched C calls,
+and the entries of every function table an indirect call or `jalr` uses. A function's layer is 0 when
+it calls nothing in the game (SDK and libc calls do not count), else 1 + the deepest callee; a cycle
+shares one layer. Each row carries the image, name, address, layer, caller count, callees, status
+(`MATCH`, `INCLUDE_ASM`, `NON_MATCHING`), whether the name is real, how many images hold a byte-equal
+body, and whether the body is already one shared header. `--jsonl` writes one object per line.
+
+`accesses` lists every load and store that reaches a record type or a global, decoded from the
+built function index: direct globals, globals that point at the type, and the image's `g_Task` view
+are followed. Each row gives the byte offset, the widths seen, reads and writes, the member the
+current definition has there, up to five examples, the constants it is compared with or assigned,
+the callee argument slots it is passed to, and a problem (`unknown member`, `width differs`,
+`signedness differs`, `straddles members`, `past the end`, `never accessed`). A coverage line on
+stderr says how many base-register memory operations the trace followed.
+
+`records` summarises every struct, union and typedef in `include/` and `src/**/*.h`: the compiler
+size, member count, `unk_`/`pad_` count, how many times the name is defined, how many other names
+share its layout, the globals and parameters of the type, and its direct access count. Rows are
+ordered by accesses times unknown members, so the records that need work first come first.
+
 Run `meson compile -C build/meson check-<image>` for every touched image afterwards.
 """
 
@@ -67,7 +90,9 @@ from __future__ import annotations
 
 import argparse
 import ast
+import bisect
 import collections
+import hashlib
 import json
 import os
 import re
@@ -1662,6 +1687,1623 @@ def value(args: argparse.Namespace) -> int:
     return 0
 
 
+# --- Call-graph layers ----------------------------------------------------------------------
+
+LAYER_RESIDENT = RESIDENT
+FUNC_ADDRESS_NAME = re.compile(r"func_[0-9A-F]{8}$")
+NON_MATCHING_DEF = re.compile(r"\bNON_MATCHING\b")
+HAND_ASM_DEF = re.compile(r"\bHAND_ASM\s*\(\s*(\w+)\s*\)")
+JAL = re.compile(r"\bjal\s+([A-Za-z_]\w*)")
+JALR = re.compile(r"\bjalr\b")
+DISPATCH_CALL = re.compile(r"SYS_DISPATCH_(?:BYTE|TASK)\(\s*\(*\s*([A-Za-z_]\w*)")
+ARRAY_CALL = re.compile(r"\b([A-Za-z_]\w*)\s*\[[^\]]*\]\s*\(")
+TABLE_INIT = re.compile(r"\b([A-Za-z_]\w*)\s*(?:\[[^\]]*\])?\s*=\s*\{")
+
+
+@dataclass
+class LayerNode:
+    """One function of one image, with its source and call-graph fields."""
+
+    image: str
+    name: str
+    addr: int
+    size: int
+    sha1: str
+    kind: str
+    src: str | None
+    status: str = "INCLUDE_ASM"
+    shared: bool = False
+    definition: object | None = None
+
+
+def _layer_manifests() -> dict:
+    from bof3.resolve import load_target_manifests
+
+    manifests = load_target_manifests(ROOT)
+    if not manifests:
+        raise SystemExit("layers: no targets under config/")
+    return manifests
+
+
+def _index_nodes(manifests: dict) -> list[LayerNode] | None:
+    """Return the built function index when every image is present, else None."""
+    from bof3.source.index import load_index
+
+    elfs = list((ROOT / "build/meson").glob("*.elf"))
+    if len(elfs) < len(manifests):
+        return None
+    try:
+        funcs = load_index(ROOT)
+    except SystemExit:
+        return None
+    return [
+        LayerNode(
+            func.image,
+            func.name,
+            func.addr,
+            func.size,
+            func.sha1,
+            "C" if func.status == "C" else "ASM",
+            func.src,
+        )
+        for func in funcs
+        if func.status != "LIB"
+    ]
+
+
+def _splat_nodes(manifests: dict) -> list[LayerNode]:
+    """Return every split function without a build, with its bytes hashed for copies."""
+    from bof3.resolve.layout import parse_splat_layout
+
+    nodes = []
+    seen = set()
+    for image, manifest in manifests.items():
+        layout = parse_splat_layout(ROOT / manifest.splat, manifest.load_address)
+        payload_path = ROOT / manifest.binary
+        try:
+            payload = payload_path.read_bytes()
+        except OSError:
+            payload = b""
+        for boundary in layout.boundaries:
+            if not boundary.is_function or not boundary.name:
+                continue
+            key = (image, boundary.name, boundary.virtual_start)
+            if key in seen:
+                continue
+            seen.add(key)
+            start = boundary.file_start
+            end = boundary.file_end if boundary.file_end is not None else len(payload)
+            body = payload[start:end] if payload and end > start else b""
+            size = (
+                boundary.virtual_end - boundary.virtual_start
+                if boundary.virtual_end is not None
+                else len(body)
+            )
+            nodes.append(
+                LayerNode(
+                    image,
+                    boundary.name,
+                    boundary.virtual_start,
+                    size,
+                    hashlib.sha1(body).hexdigest()[:16] if body else "",
+                    "C" if boundary.kind == "c" else "ASM",
+                    None,
+                )
+            )
+    return nodes
+
+
+def _layer_tree():
+    """Read every tracked C file once for definitions, calls and data initializers."""
+    from bof3.source import decls
+
+    texts = {name: ctext.read(ROOT, name) for name in ctext.tracked_c(ROOT)}
+    return decls.Tree(texts=texts)
+
+
+def _visible_files(tree, manifest) -> set[str]:
+    folder = manifest.source_dir
+    visible: set[str] = set()
+    for name in tree.texts:
+        if name.startswith(folder + "/") and name.endswith(".c"):
+            visible.update(tree.closure(name))
+    return visible
+
+
+def _defs_by_file(tree) -> dict[str, list]:
+    by_file: dict[str, list] = collections.defaultdict(list)
+    for decls in tree.decls.values():
+        for decl in decls:
+            if decl.kind == "def":
+                by_file[decl.file].append(decl)
+    for decls in by_file.values():
+        decls.sort(key=lambda decl: decl.line)
+    return by_file
+
+
+def _body_range(tree, by_file: dict[str, list], definition) -> tuple[int, int]:
+    lines = tree.stripped.get(definition.file, "").split("\n")
+    end = len(lines)
+    for later in by_file.get(definition.file, ()):
+        if later.line > definition.line:
+            end = later.line - 1
+            break
+    return definition.line, end
+
+
+def _asm_path(image: str, name: str) -> Path | None:
+    for folder in (ROOT / "asm" / image, ROOT / "asm" / image / "hand"):
+        path = folder / f"{name}.s"
+        if path.is_file():
+            return path
+    return None
+
+
+def _prepare_nodes(nodes: list[LayerNode], manifests: dict, tree) -> None:
+    """Fill each node's status, shared flag and defining declaration."""
+    visible_by_image: dict[str, set[str]] = {}
+    for node in nodes:
+        manifest = manifests.get(node.image)
+        if manifest is None:
+            continue
+        if node.image not in visible_by_image:
+            visible_by_image[node.image] = _visible_files(tree, manifest)
+        visible = visible_by_image[node.image]
+        definitions = [
+            decl
+            for decl in tree.decls.get(node.name, ())
+            if decl.kind == "def" and decl.file in visible
+        ]
+        chosen = next(
+            (decl for decl in definitions if decl.file.endswith(".h")),
+            definitions[0] if definitions else None,
+        )
+        node.definition = chosen
+        if chosen is not None:
+            raw = tree.texts[chosen.file].splitlines()
+            window = "\n".join(raw[max(0, chosen.line - 3) : chosen.line])
+            node.status = "NON_MATCHING" if NON_MATCHING_DEF.search(window) else "MATCH"
+            node.shared = chosen.file.endswith(".h")
+        else:
+            node.status = "INCLUDE_ASM"
+        if node.status != "MATCH" and node.src is None:
+            node.src = next(
+                (
+                    name
+                    for name in tree.texts
+                    if name.startswith(manifest.source_dir + "/")
+                    and name.endswith(".c")
+                    and re.search(
+                        r"INCLUDE_ASM\s*\(\s*" + re.escape(node.name) + r"\s*\)",
+                        tree.texts[name],
+                    )
+                ),
+                None,
+            )
+
+
+def _table_initializers(text: str, known: set[str]):
+    """Yield ``(table name, entries)`` for each top-level initializer of function names."""
+    depth_at = [0] * len(text)
+    depth = 0
+    for index, char in enumerate(text):
+        depth_at[index] = depth
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+    for match in TABLE_INIT.finditer(text):
+        if depth_at[match.start()] != 0:
+            continue
+        opening = match.end() - 1
+        closing = _match_brace(text, opening)
+        if closing < 0:
+            continue
+        entries: list[str] = []
+        for ident in IDENT.findall(text[opening + 1 : closing]):
+            if ident in known and ident not in entries:
+                entries.append(ident)
+        if entries:
+            yield match.group(1), entries
+
+
+def _layer_tables(tree, known: set[str], manifests: dict) -> tuple[dict, set[str]]:
+    """Return ``(image, table name) -> function names`` and every table name."""
+    folders = sorted(
+        ((manifest.source_dir, image) for image, manifest in manifests.items()),
+        key=lambda pair: -len(pair[0]),
+    )
+
+    def image_of(name: str) -> str | None:
+        for folder, image in folders:
+            if name.startswith(folder + "/"):
+                return image
+        return None
+
+    tables: dict[tuple[str, str], list[str]] = {}
+    names: set[str] = set()
+    for name, text in tree.stripped.items():
+        if not name.startswith("src/") or not name.endswith(".c"):
+            continue
+        image = image_of(name)
+        if image is None:
+            continue
+        for table, entries in _table_initializers(text, known):
+            tables[(image, table)] = entries
+            names.add(table)
+    return tables, names
+
+
+def _table_entries(tables: dict, image: str, name: str) -> list[str]:
+    for candidate in (image, *LAYER_RESIDENT):
+        if (candidate, name) in tables:
+            return tables[(candidate, name)]
+    found = [entries for (_, table), entries in tables.items() if table == name]
+    return found[0] if len(found) == 1 else []
+
+
+def _indirect_bases(text: str) -> set[str]:
+    bases = set(DISPATCH_CALL.findall(text))
+    bases.update(ARRAY_CALL.findall(text))
+    return bases
+
+
+def _local_tables(text: str, known: set[str]) -> dict[str, list[str]]:
+    """Return the function tables a body builds on its stack or in a local."""
+    tables: dict[str, list[str]] = {}
+    for match in TABLE_INIT.finditer(text):
+        opening = match.end() - 1
+        closing = _match_brace(text, opening)
+        if closing < 0:
+            continue
+        entries: list[str] = []
+        for ident in IDENT.findall(text[opening + 1 : closing]):
+            if ident in known and ident not in entries:
+                entries.append(ident)
+        if entries:
+            tables[match.group(1)] = entries
+    return tables
+
+
+def _table_targets(
+    text: str,
+    image: str,
+    table_names: set[str],
+    local: dict[str, list[str]],
+    resolve_table,
+) -> list[str]:
+    bases = _indirect_bases(text)
+    if not bases:
+        return []
+    referenced = set(IDENT.findall(text)) & table_names
+    targets: list[str] = []
+    for base in sorted(bases):
+        if base in local:
+            targets.extend(local[base])
+            continue
+        entries = resolve_table(image, base)
+        if entries:
+            targets.extend(entries)
+            continue
+        for table in sorted(referenced):
+            targets.extend(resolve_table(image, table))
+    return targets
+
+
+def _asm_table_targets(
+    text: str, image: str, table_names: set[str], resolve_table
+) -> list[str]:
+    if not JALR.search(text):
+        return []
+    targets: list[str] = []
+    for table in sorted(set(IDENT.findall(text)) & table_names):
+        targets.extend(resolve_table(image, table))
+    return targets
+
+
+def _call_names(
+    node: LayerNode,
+    tree,
+    by_file: dict[str, list],
+    calls_by_file: dict[str, list],
+    table_names: set[str],
+    known: set[str],
+    resolve_table,
+) -> list[str]:
+    """Return the game names a function calls, directly and through function tables."""
+    names: list[str] = []
+    if node.status == "MATCH" and node.definition is not None:
+        start, end = _body_range(tree, by_file, node.definition)
+        names.extend(
+            call.name
+            for call in calls_by_file.get(node.definition.file, ())
+            if start <= call.line <= end
+        )
+        body = "\n".join(
+            tree.stripped[node.definition.file].split("\n")[start - 1 : end]
+        )
+        names.extend(
+            _table_targets(
+                body,
+                node.image,
+                table_names,
+                _local_tables(body, known),
+                resolve_table,
+            )
+        )
+        return names
+    path = _asm_path(node.image, node.name)
+    if path is None:
+        if node.definition is not None:
+            start, end = _body_range(tree, by_file, node.definition)
+            names.extend(
+                call.name
+                for call in calls_by_file.get(node.definition.file, ())
+                if start <= call.line <= end
+            )
+        return names
+    text = path.read_text(encoding="utf-8", errors="replace")
+    names.extend(JAL.findall(text))
+    names.extend(_asm_table_targets(text, node.image, table_names, resolve_table))
+    return names
+
+
+def _layer_layouts(manifests: dict) -> tuple[dict, dict]:
+    """Return each target's reviewed layout and retail payload."""
+    from bof3.resolve.layout import parse_splat_layout
+
+    layouts = {}
+    payloads = {}
+    for image, manifest in manifests.items():
+        layouts[image] = parse_splat_layout(
+            ROOT / manifest.splat, manifest.load_address
+        )
+        try:
+            payloads[image] = (ROOT / manifest.binary).read_bytes()
+        except OSError:
+            payloads[image] = b""
+    return layouts, payloads
+
+
+def _looks_like_table(row: dict) -> bool:
+    if row.get("alias"):
+        return False
+    ctype = str(row.get("type", ""))
+    source = str(row.get("source", "")).lower()
+    return (
+        "Callback" in ctype
+        or "Func" in ctype
+        or "Steps" in ctype
+        or any(
+            word in source
+            for word in ("handler", "step", "table", "callback", "dispatch", "function")
+        )
+    )
+
+
+def _retail_table_entries(
+    image: str,
+    name: str,
+    symbols: dict,
+    layouts: dict,
+    payloads: dict,
+    by_address: dict[int, list[LayerNode]],
+) -> list[str]:
+    """Read a function table from the retail bytes of the image that defines it."""
+    table_image = image
+    row = symbols.get(image, {}).get(name)
+    if row is None:
+        for resident in LAYER_RESIDENT:
+            row = symbols.get(resident, {}).get(name)
+            if row is not None:
+                table_image = resident
+                break
+    if not isinstance(row, dict) or "addr" not in row:
+        return []
+    layout = layouts.get(table_image)
+    payload = payloads.get(table_image, b"")
+    if layout is None or not payload:
+        return []
+    address = int(row["addr"])
+    span = row.get("size")
+    if span is None:
+        for boundary in layout.boundaries:
+            if boundary.virtual_start <= address < (boundary.virtual_end or 0):
+                span = (boundary.virtual_end or address + 0x400) - address
+                break
+    if span is None:
+        span = 0x400
+    offset = address - layout.image_base
+    data = payload[offset : offset + span]
+    names: list[str] = []
+    for index in range(0, len(data) - 3, 4):
+        word = int.from_bytes(data[index : index + 4], "little")
+        if word == 0:
+            continue
+        candidates = by_address.get(word, ())
+        same = [node for node in candidates if node.image == table_image]
+        resident = [node for node in candidates if node.image in LAYER_RESIDENT]
+        for node in same or resident or candidates:
+            if node.name not in names:
+                names.append(node.name)
+    return names
+
+
+def assign_layers(count: int, edges: list[set[int]]) -> list[int]:
+    """Return each node's layer: 0 when it calls no game function, else 1 + its deepest callee.
+
+    A cycle is one strongly connected component and shares one layer.
+    """
+    adjacency = [list(targets) for targets in edges]
+    reverse: list[set[int]] = [set() for _ in range(count)]
+    for source, targets in enumerate(edges):
+        for target in targets:
+            reverse[target].add(source)
+    seen = [False] * count
+    finished: list[int] = []
+    for start in range(count):
+        if seen[start]:
+            continue
+        seen[start] = True
+        stack = [(start, 0)]
+        while stack:
+            node, index = stack[-1]
+            if index < len(adjacency[node]):
+                target = adjacency[node][index]
+                stack[-1] = (node, index + 1)
+                if not seen[target]:
+                    seen[target] = True
+                    stack.append((target, 0))
+            else:
+                finished.append(node)
+                stack.pop()
+    component = [-1] * count
+    components = 0
+    for start in reversed(finished):
+        if component[start] != -1:
+            continue
+        component[start] = components
+        stack = [start]
+        while stack:
+            node = stack.pop()
+            for target in reverse[node]:
+                if component[target] == -1:
+                    component[target] = components
+                    stack.append(target)
+        components += 1
+    component_edges: list[set[int]] = [set() for _ in range(components)]
+    for source, targets in enumerate(edges):
+        for target in targets:
+            if component[source] != component[target]:
+                component_edges[component[source]].add(component[target])
+    incoming = [0] * components
+    for targets in component_edges:
+        for target in targets:
+            incoming[target] += 1
+    order = [index for index in range(components) if incoming[index] == 0]
+    topological: list[int] = []
+    while order:
+        node = order.pop()
+        topological.append(node)
+        for target in component_edges[node]:
+            incoming[target] -= 1
+            if incoming[target] == 0:
+                order.append(target)
+    layers = [0] * components
+    for node in reversed(topological):
+        layers[node] = (
+            0
+            if not component_edges[node]
+            else 1 + max(layers[target] for target in component_edges[node])
+        )
+    return [layers[component[node]] for node in range(count)]
+
+
+def layers(args: argparse.Namespace) -> int:
+    """Print the call-graph layer of every function of every image."""
+    manifests = _layer_manifests()
+    index_nodes = _index_nodes(manifests)
+    if index_nodes is None:
+        print(
+            "symbol: no complete built image index; reading the split layouts by unit",
+            file=sys.stderr,
+        )
+        nodes = _splat_nodes(manifests)
+    else:
+        nodes = index_nodes
+    if not nodes:
+        raise SystemExit("layers: no functions found")
+    nodes.sort(key=lambda node: (node.image, node.addr, node.name))
+    tree = _layer_tree()
+    _prepare_nodes(nodes, manifests, tree)
+    by_file = _defs_by_file(tree)
+    calls_by_file: dict[str, list] = collections.defaultdict(list)
+    for call in tree.calls:
+        calls_by_file[call.file].append(call)
+    known = {node.name for node in nodes}
+    tables, table_names = _layer_tables(tree, known, manifests)
+    symbols = symbol_tables()
+    for rows in symbols.values():
+        for name, row in rows.items():
+            if isinstance(row, dict) and _looks_like_table(row):
+                table_names.add(name)
+    layouts, payloads = _layer_layouts(manifests)
+    by_image: dict[str, dict[str, int]] = collections.defaultdict(dict)
+    by_name: dict[str, list[int]] = collections.defaultdict(list)
+    by_address: dict[int, list[LayerNode]] = collections.defaultdict(list)
+    for index, node in enumerate(nodes):
+        by_image[node.image][node.name] = index
+        by_name[node.name].append(index)
+        by_address[node.addr].append(node)
+    table_cache: dict[tuple[str, str], list[str]] = {}
+
+    def resolve_table(image: str, name: str) -> list[str]:
+        key = (image, name)
+        if key in table_cache:
+            return table_cache[key]
+        found = _table_entries(tables, image, name)
+        if not found:
+            found = _retail_table_entries(
+                image, name, symbols, layouts, payloads, by_address
+            )
+        table_cache[key] = found
+        return found
+
+    edges = [set() for _ in nodes]
+    for index, node in enumerate(nodes):
+        for name in set(
+            _call_names(
+                node,
+                tree,
+                by_file,
+                calls_by_file,
+                table_names,
+                known,
+                resolve_table,
+            )
+        ):
+            for resident in (node.image, *LAYER_RESIDENT):
+                target = by_image.get(resident, {}).get(name)
+                if target is not None:
+                    edges[index].add(target)
+                    break
+            else:
+                for target in by_name.get(name, ()):
+                    edges[index].add(target)
+    callers = [0] * len(nodes)
+    for targets in edges:
+        for target in targets:
+            callers[target] += 1
+    levels = assign_layers(len(nodes), edges)
+    groups: dict[str, set[str]] = collections.defaultdict(set)
+    for node in nodes:
+        if node.sha1:
+            groups[node.sha1].add(node.image)
+    rows = []
+    for index, node in enumerate(nodes):
+        rows.append(
+            {
+                "image": node.image,
+                "name": node.name,
+                "address": f"0x{node.addr:08X}",
+                "layer": levels[index],
+                "callers": callers[index],
+                "callees": sorted({nodes[target].name for target in edges[index]}),
+                "status": node.status,
+                "named": not FUNC_ADDRESS_NAME.match(node.name),
+                "copies": len(groups[node.sha1]) if node.sha1 else 1,
+                "shared": node.shared,
+            }
+        )
+    rows.sort(key=lambda row: (row["layer"], row["image"], row["name"]))
+    keys = [
+        "image",
+        "name",
+        "address",
+        "layer",
+        "callers",
+        "callees",
+        "status",
+        "named",
+        "copies",
+        "shared",
+    ]
+    if args.jsonl:
+        for row in rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return 0
+    print("\t".join(keys))
+    for row in rows:
+        print(
+            "\t".join(
+                str(row[key]) if key != "callees" else ",".join(row[key])
+                for key in keys
+            )
+        )
+    return 0
+
+
+# --- Record accesses ------------------------------------------------------------------------
+
+MIPS_READ = {
+    "lb": (1, True),
+    "lbu": (1, False),
+    "lh": (2, True),
+    "lhu": (2, False),
+    "lw": (4, None),
+}
+MIPS_WRITE = {"sb": 1, "sh": 2, "sw": 4}
+MIPS_READ_OPS = {0x20, 0x21, 0x23, 0x24, 0x25}
+MIPS_WRITE_OPS = {0x28, 0x29, 0x2B}
+MIPS_OPCODES = {
+    0x08: "addi",
+    0x09: "addiu",
+    0x0A: "slti",
+    0x0B: "sltiu",
+    0x0C: "andi",
+    0x0D: "ori",
+    0x0F: "lui",
+    0x20: "lb",
+    0x21: "lh",
+    0x23: "lw",
+    0x24: "lbu",
+    0x25: "lhu",
+    0x28: "sb",
+    0x29: "sh",
+    0x2B: "sw",
+    0x04: "beq",
+    0x05: "bne",
+    0x03: "jal",
+}
+REG_NAMES = [
+    "zero", "at", "v0", "v1", "a0", "a1", "a2", "a3",
+    "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7",
+    "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7",
+    "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra",
+]  # fmt: skip
+CALLER_SAVED = set(range(1, 16)) | {24, 25}
+
+
+@dataclass(frozen=True)
+class AccessRange:
+    """A global object an instruction can address: its extent, name and record type."""
+
+    start: int
+    end: int
+    name: str
+    type_name: str | None
+
+
+@dataclass
+class MipsAccess:
+    """One load or store that lands in a target object or a traced pointer."""
+
+    image: str
+    function: str
+    offset: int
+    width: int
+    mnemonic: str
+    write: bool
+    signed: bool | None
+    instruction: str
+    global_name: str | None = None
+    type_name: str | None = None
+    constant: int | None = None
+    slot: str | None = None
+
+
+def _signed16(value: int) -> int:
+    return value - 0x10000 if value & 0x8000 else value
+
+
+def _signed32(value: int) -> int:
+    return value - 0x100000000 if value & 0x80000000 else value
+
+
+def _reg_name(number: int) -> str:
+    return REG_NAMES[number] if 0 <= number < len(REG_NAMES) else f"r{number}"
+
+
+def _offset_text(offset: int) -> str:
+    return f"-0x{-offset:x}" if offset < 0 else f"0x{offset:x}"
+
+
+def _instruction(word: int, call_name: str | None = None) -> str:
+    op = word >> 26
+    rs = (word >> 21) & 31
+    rt = (word >> 16) & 31
+    rd = (word >> 11) & 31
+    imm = word & 0xFFFF
+    funct = word & 63
+    name = MIPS_OPCODES.get(op)
+    if op == 0:
+        if funct in (0x20, 0x21):
+            return f"{'add' if funct == 0x20 else 'addu'} {_reg_name(rd)}, {_reg_name(rs)}, {_reg_name(rt)}"
+        if funct == 0x08:
+            return f"jr {_reg_name(rs)}"
+        if funct == 0x09:
+            return f"jalr {_reg_name(rs)}"
+        return f"0x{word:08x}"
+    if name == "lui":
+        return f"lui {_reg_name(rt)}, 0x{imm:x}"
+    if name in MIPS_READ or name in MIPS_WRITE:
+        return (
+            f"{name} {_reg_name(rt)}, {_offset_text(_signed16(imm))}({_reg_name(rs)})"
+        )
+    if name == "jal":
+        return f"jal {call_name or f'0x{word & 0x03FFFFFF:08x}'}"
+    if name in ("addi", "addiu", "slti", "sltiu"):
+        return (
+            f"{name} {_reg_name(rt)}, {_reg_name(rs)}, {_offset_text(_signed16(imm))}"
+        )
+    if name in ("andi", "ori"):
+        return f"{name} {_reg_name(rt)}, {_reg_name(rs)}, 0x{imm:x}"
+    if name in ("beq", "bne"):
+        return (
+            f"{name} {_reg_name(rs)}, {_reg_name(rt)}, {_offset_text(_signed16(imm))}"
+        )
+    return f"0x{word:08x}"
+
+
+def _range_at(
+    ranges: list[AccessRange], starts: list[int], address: int
+) -> AccessRange | None:
+    index = bisect.bisect_right(starts, address) - 1
+    if index >= 0:
+        found = ranges[index]
+        if address < found.end:
+            return found
+    return None
+
+
+def decode_accesses(
+    image: str,
+    function: str,
+    address: int,
+    words: tuple[int, ...],
+    ranges: list[AccessRange],
+    pointer_cells: dict[int, str],
+    function_names: dict[int, str],
+) -> tuple[list[MipsAccess], int, int]:
+    """Decode one function: the accesses it makes into ranges or traced pointer types.
+
+    Returns the accesses, the number of traced memory operations, and the number of
+    base-register operations whose base could not be followed.
+    """
+    starts = [item.start for item in ranges]
+    registers: dict[int, object] = {}
+    loaded: dict[int, int] = {}
+    moves: dict[int, tuple[int, int]] = {}
+    accesses: list[MipsAccess] = []
+    traced = 0
+    untraced = 0
+    for index, word in enumerate(words):
+        op = word >> 26
+        rs = (word >> 21) & 31
+        rt = (word >> 16) & 31
+        rd = (word >> 11) & 31
+        imm = word & 0xFFFF
+        simm = _signed16(imm)
+        funct = word & 63
+        pc = address + index * 4
+        if op == 0x0F:
+            registers[rt] = imm << 16
+            loaded.pop(rt, None)
+            moves.pop(rt, None)
+            continue
+        if op == 0x09:
+            base = registers.get(rs)
+            if isinstance(base, int):
+                registers[rt] = base + simm
+            elif isinstance(base, tuple):
+                registers[rt] = (base[0], base[1] + simm)
+            elif rs == 0:
+                registers[rt] = simm
+            else:
+                registers.pop(rt, None)
+            loaded.pop(rt, None)
+            moves.pop(rt, None)
+            continue
+        if op == 0x0D:
+            base = registers.get(rs)
+            if isinstance(base, int):
+                registers[rt] = base | imm
+            elif rs == 0:
+                registers[rt] = imm
+            else:
+                registers.pop(rt, None)
+            loaded.pop(rt, None)
+            moves.pop(rt, None)
+            continue
+        if op in (0x0A, 0x0B, 0x0C):
+            if rs in loaded:
+                access = accesses[loaded[rs]]
+                if access.constant is None:
+                    access.constant = simm if op in (0x0A, 0x0B) else imm
+            registers.pop(rt, None)
+            loaded.pop(rt, None)
+            continue
+        if op == 0:
+            if funct in (0x20, 0x21):
+                first = registers.get(rs)
+                second = registers.get(rt)
+                if rs == 0:
+                    value = second
+                elif rt == 0:
+                    value = first
+                else:
+                    value = None
+                if value is None:
+                    registers.pop(rd, None)
+                else:
+                    registers[rd] = value
+                loaded.pop(rd, None)
+                if rd in (4, 5, 6, 7) and (rs == 0 or rt == 0):
+                    moves[rd] = (rt if rs == 0 else rs, index)
+                continue
+            if funct == 0x08 and rs == 31:
+                break
+            if funct == 0x09:
+                _attach_slots(accesses, moves, loaded, index, "jalr")
+                _after_call(registers, loaded, moves)
+                continue
+            continue
+        if op in (0x20, 0x21, 0x23, 0x24, 0x25, 0x28, 0x29, 0x2B):
+            mnemonic = MIPS_OPCODES[op]
+            base = registers.get(rs)
+            found: AccessRange | None = None
+            access: MipsAccess | None = None
+            address_value = 0
+            if isinstance(base, int):
+                address_value = base + simm
+                found = _range_at(ranges, starts, address_value)
+                if found is not None:
+                    traced += 1
+                    access = MipsAccess(
+                        image,
+                        function,
+                        address_value - found.start,
+                        4,
+                        mnemonic,
+                        op in MIPS_WRITE_OPS,
+                        None,
+                        _instruction(word),
+                        found.name,
+                        found.type_name,
+                    )
+            elif isinstance(base, tuple):
+                type_name, base_offset = base
+                traced += 1
+                access = MipsAccess(
+                    image,
+                    function,
+                    base_offset + simm,
+                    4,
+                    mnemonic,
+                    op in MIPS_WRITE_OPS,
+                    None,
+                    _instruction(word),
+                    None,
+                    type_name,
+                )
+            elif rs not in (29, 30):
+                untraced += 1
+            if access is not None:
+                if mnemonic in MIPS_READ:
+                    access.width, access.signed = MIPS_READ[mnemonic]
+                else:
+                    access.width = MIPS_WRITE[mnemonic]
+                if access.write and isinstance(registers.get(rt), int):
+                    access.constant = registers[rt]
+                accesses.append(access)
+                if not access.write:
+                    loaded[rt] = len(accesses) - 1
+                elif rt in loaded:
+                    loaded.pop(rt, None)
+            else:
+                loaded.pop(rt, None)
+            if isinstance(base, int) and address_value in pointer_cells:
+                registers[rt] = (pointer_cells[address_value], 0)
+            else:
+                registers.pop(rt, None)
+            continue
+        if op == 0x03:
+            target = ((word & 0x03FFFFFF) << 2) | (pc & 0xF0000000)
+            name = function_names.get(target)
+            _attach_slots(accesses, moves, loaded, index, name or f"0x{target:08X}")
+            registers[31] = None
+            _after_call(registers, loaded, moves)
+            continue
+        if op in (0x04, 0x05):
+            if rs == 0 or rt == 0:
+                other = rt if rs == 0 else rs
+                if other in loaded:
+                    access = accesses[loaded[other]]
+                    if access.constant is None:
+                        access.constant = 0
+            else:
+                first, second = registers.get(rs), registers.get(rt)
+                if isinstance(first, int) and rt in loaded:
+                    accesses[loaded[rt]].constant = first
+                elif isinstance(second, int) and rs in loaded:
+                    accesses[loaded[rs]].constant = second
+            continue
+    return accesses, traced, untraced
+
+
+def _attach_slots(
+    accesses: list[MipsAccess],
+    moves: dict[int, tuple[int, int]],
+    loaded: dict[int, int],
+    index: int,
+    callee: str,
+) -> None:
+    for slot, (source, position) in moves.items():
+        if index - position > 4 or source not in loaded:
+            continue
+        access = accesses[loaded[source]]
+        label = f"{callee}[{_reg_name(slot)}]"
+        if access.slot is None:
+            access.slot = label
+        elif label not in access.slot.split(","):
+            access.slot += "," + label
+
+
+def _after_call(
+    registers: dict[int, object],
+    loaded: dict[int, int],
+    moves: dict[int, tuple[int, int]],
+) -> None:
+    for reg in list(registers):
+        if reg in CALLER_SAVED or isinstance(registers[reg], tuple):
+            registers.pop(reg, None)
+    for reg in list(loaded):
+        if reg in CALLER_SAVED:
+            loaded.pop(reg, None)
+    moves.clear()
+
+
+def _normalized_type(value: str) -> str:
+    return " ".join(value.replace("*", " * ").split())
+
+
+def _pointer_target(value: str) -> str | None:
+    text = _normalized_type(value)
+    return text[:-2].strip() if text.endswith(" *") else None
+
+
+def _task_types() -> dict[str, str]:
+    """Return image -> the record type its g_Task macro reads the scratchpad cell as.
+
+    A family header (``src/overlays/battle/battle.h``) casts the cell for every image under
+    its folder; an image header is more specific and wins.
+    """
+    pattern = re.compile(
+        r"#\s*define\s+g_Task\s+\(\(\s*(?:volatile\s+)?(\w+)\s*\*\s*\)\s*g_Task\s*\)"
+    )
+    headers = []
+    for path in (ROOT / "src").rglob("*.h"):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        match = pattern.search(text)
+        if match is not None:
+            headers.append((path.parent.relative_to(ROOT).as_posix(), match.group(1)))
+    found: dict[str, str] = {}
+    for image, manifest in _layer_manifests().items():
+        folder = manifest.source_dir
+        best: tuple[int, str] | None = None
+        for parent, type_name in headers:
+            if folder == parent or folder.startswith(parent + "/"):
+                if best is None or len(parent) > best[0]:
+                    best = (len(parent), type_name)
+        if best is not None:
+            found[image] = best[1]
+    return found
+
+
+def _c_member_uses(names: set[str]) -> dict[str, list[tuple[str, int, str]]]:
+    """Return one entry per ``.member``/``->member`` use of the names, comments masked."""
+    pattern = re.compile(r"(?:->|\.)\s*(\w+)")
+    found: dict[str, list[tuple[str, int, str]]] = collections.defaultdict(list)
+    if not names:
+        return found
+    for path in ctext.tracked_c(ROOT):
+        if path.startswith("include/psyq/"):
+            continue
+        text = ctext.read(ROOT, path)
+        masked = ctext.mask(text)
+        for number, line in enumerate(masked.split("\n"), 1):
+            for match in pattern.finditer(line):
+                if match.group(1) in names:
+                    raw = text.split("\n")[number - 1]
+                    found[match.group(1)].append((path, number, raw))
+    return found
+
+
+def _member_constants(line: str, member: str) -> list[int]:
+    """Return the numeric constants a C line compares with or assigns to a member."""
+    token = r"(0[xX][0-9A-Fa-f]+|\d+)[uUlL]*\b"
+    escaped = re.escape(member)
+    patterns = (
+        rf"\b{escaped}\b\s*(?:==|!=|<=|>=|<|>|&|\||\^|=)\s*{token}",
+        rf"{token}\s*(?:==|!=|<=|>=|<|>|&|\||\^|=)\s*\b{escaped}\b",
+    )
+    out = []
+    for pattern in patterns:
+        for match in re.finditer(pattern, line):
+            token = match.group(1)
+            try:
+                if token.lower().startswith("0x"):
+                    value = int(token, 16)
+                elif len(token) > 1 and token.startswith("0"):
+                    value = int(token, 8)
+                else:
+                    value = int(token, 10)
+            except ValueError:
+                continue
+            if value not in out:
+                out.append(value)
+    return out
+
+
+def _aggregate_accesses(
+    layout,
+    accesses: list[MipsAccess],
+    c_uses: dict[str, list[tuple[str, int, str]]],
+) -> list[dict]:
+    """Aggregate accesses by byte offset and attach the current member and problems."""
+    rows: dict[int, dict] = {}
+
+    def row(offset: int) -> dict:
+        return rows.setdefault(
+            offset,
+            {
+                "offset": offset,
+                "widths": collections.Counter(),
+                "reads": 0,
+                "writes": 0,
+                "examples": [],
+                "constants": [],
+                "slots": [],
+            },
+        )
+
+    for access in accesses:
+        item = row(access.offset)
+        item["widths"][access.mnemonic] += 1
+        item["reads"] += not access.write
+        item["writes"] += access.write
+        example = f"{access.image}@{access.function} {access.instruction}"
+        if example not in item["examples"] and len(item["examples"]) < 5:
+            item["examples"].append(example)
+        if access.constant is not None and access.constant not in item["constants"]:
+            item["constants"].append(access.constant)
+        if access.slot and access.slot not in item["slots"]:
+            item["slots"].append(access.slot)
+    member_offsets = set()
+    if layout is not None:
+        for member in layout.members:
+            member_offsets.add(member.offset)
+            leaf = member.path.rsplit(".", 1)[-1]
+            for path, number, line in c_uses.get(leaf, ()):
+                item = row(member.offset)
+                example = f"{path}:{number}"
+                if example not in item["examples"] and len(item["examples"]) < 5:
+                    item["examples"].append(example)
+                for value in _member_constants(line, leaf):
+                    if value not in item["constants"]:
+                        item["constants"].append(value)
+    for offset in member_offsets:
+        row(offset)
+    out = []
+    for offset in sorted(rows):
+        item = rows[offset]
+        problems = []
+        member = None
+        member_type = None
+        if layout is not None:
+            found = locate(layout, offset)
+            if found:
+                path, _, ctype = found[0]
+                member, member_type = path, ctype
+            else:
+                containing = [
+                    entry
+                    for entry in layout.members
+                    if entry.offset <= offset < entry.offset + entry.size
+                ]
+                containing.sort(key=lambda entry: -entry.path.count("."))
+                if containing:
+                    member, member_type = containing[0].path, containing[0].ctype
+            if member is None:
+                problems.append("unknown member")
+            elif member.rsplit(".", 1)[-1].startswith(("unk_", "pad_", "field_")):
+                problems.append("unknown member")
+        if not item["reads"] and not item["writes"]:
+            problems.append("never accessed")
+        for mnemonic in item["widths"]:
+            width = MIPS_READ.get(mnemonic, (MIPS_WRITE.get(mnemonic, 4), None))[0]
+            if offset + width > layout.size if layout is not None else False:
+                problems.append("past the end")
+            if layout is not None and member_type is not None:
+                leaf_width = _known_width(member_type)
+                if leaf_width is None:
+                    found = [entry for entry in layout.members if entry.path == member]
+                    leaf_width = found[0].size if found else None
+                if leaf_width is not None and leaf_width != width:
+                    problems.append("width differs")
+                signed = MIPS_READ.get(mnemonic, (0, None))[1]
+                if signed is not None and member_type:
+                    base = _normalized_type(member_type)
+                    if base in ("u8", "u16", "u32") and signed:
+                        problems.append("signedness differs")
+                    elif base in ("s8", "s16", "s32") and not signed:
+                        problems.append("signedness differs")
+            if layout is not None and offset + width <= layout.size:
+                last = locate(layout, offset + width - 1)
+                first = locate(layout, offset)
+                if first and last and first[0][0] != last[0][0]:
+                    problems.append("straddles members")
+        item["member"] = member
+        item["member_type"] = member_type
+        item["problem"] = ", ".join(dict.fromkeys(problems))
+        out.append(item)
+    return out
+
+
+def _index_by_image() -> dict[str, list]:
+    """Return every indexed function grouped by image; accesses need the built images."""
+    from bof3.source.index import load_index
+
+    try:
+        funcs = load_index(ROOT)
+    except SystemExit:
+        raise SystemExit(
+            "accesses: no built images. Run: meson compile -C build/meson -j 4"
+        ) from None
+    groups: dict[str, list] = collections.defaultdict(list)
+    for func in funcs:
+        groups[func.image].append(func)
+    return groups
+
+
+def _row_extent(row: dict, layout) -> int:
+    size = row.get("size")
+    if size is not None:
+        return int(size)
+    if layout is not None:
+        return layout.size
+    text = _normalized_type(str(row.get("type", "")))
+    if text.endswith(" *"):
+        return 4
+    width = SCALAR_WIDTH.get(text)
+    if width is not None:
+        return width
+    return 0x100
+
+
+def _visible_images(table: str, images: list[str]) -> list[str]:
+    return images if table in LAYER_RESIDENT else [table]
+
+
+def _scan_image(
+    image: str,
+    functions: dict[str, list],
+    ranges: list[AccessRange],
+    pointer_cells: dict[int, str],
+    names: dict[int, str],
+) -> tuple[list[MipsAccess], int, int]:
+    found: list[MipsAccess] = []
+    traced = 0
+    untraced = 0
+    for func in functions.get(image, ()):
+        accesses, part_traced, part_untraced = decode_accesses(
+            image,
+            func.name,
+            func.addr,
+            func.words,
+            ranges,
+            pointer_cells,
+            names,
+        )
+        found.extend(accesses)
+        traced += part_traced
+        untraced += part_untraced
+    return found, traced, untraced
+
+
+def _access_rows(
+    name: str,
+    layout,
+    accesses: list[MipsAccess],
+    c_uses: dict[str, list[tuple[str, int, str]]],
+    kind: str,
+) -> list[dict]:
+    rows = _aggregate_accesses(layout, accesses, c_uses)
+    for row in rows:
+        row["name"] = name
+        row["kind"] = kind
+    return rows
+
+
+def accesses(args: argparse.Namespace) -> int:
+    """List the reads and writes of a record type or a global, per offset."""
+    name = args.name
+    data = symbol_tables()
+    globals_found: list[tuple[str, dict]] = []
+    for table, rows in data.items():
+        row = rows.get(name)
+        if isinstance(row, dict) and "addr" in row and not row.get("alias"):
+            globals_found.append((table, row))
+    functions = _index_by_image()
+    images = sorted(functions)
+    task_types = _task_types()
+    all_accesses: list[MipsAccess] = []
+    traced = 0
+    untraced = 0
+    layout = None
+    c_uses: dict[str, list[tuple[str, int, str]]] = {}
+    if globals_found:
+        kind = "global"
+        seen = set()
+        for table, row in globals_found:
+            if (table, int(row["addr"])) in seen:
+                continue
+            seen.add((table, int(row["addr"])))
+            type_name = str(row.get("type", "")) or None
+            row_layout = type_layout(type_name) if type_name else None
+            if row_layout is not None and row_layout.record:
+                layout = row_layout
+            extent = _row_extent(row, row_layout)
+            start = int(row["addr"])
+            item_range = AccessRange(start, start + extent, name, type_name)
+            for image in _visible_images(table, images):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [item_range],
+                    {},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        member_names = (
+            {member.path.rsplit(".", 1)[-1] for member in layout.members}
+            if layout is not None
+            else set()
+        )
+        if member_names:
+            all_uses = _c_member_uses(member_names)
+            for member, uses in all_uses.items():
+                kept = [
+                    use
+                    for use in uses
+                    if re.search(
+                        r"\b"
+                        + re.escape(name)
+                        + r"\s*(?:->|\.)\s*"
+                        + re.escape(member)
+                        + r"\b",
+                        use[2],
+                    )
+                ]
+                if kept:
+                    c_uses[member] = kept
+    else:
+        kind = "type"
+        layout = type_layout(name)
+        if layout is None or not layout.record:
+            raise SystemExit(f"symbol: {name} is neither a global nor a record type")
+        direct_rows = [
+            (table, row_name, row)
+            for table, rows in data.items()
+            for row_name, row in rows.items()
+            if isinstance(row, dict)
+            and "addr" in row
+            and not row.get("alias")
+            and _normalized_type(str(row.get("type", ""))) == _normalized_type(name)
+        ]
+        pointer_rows = [
+            (table, row)
+            for table, rows in data.items()
+            for row_name, row in rows.items()
+            if isinstance(row, dict)
+            and "addr" in row
+            and not row.get("alias")
+            and _pointer_target(str(row.get("type", ""))) == _normalized_type(name)
+        ]
+        for table, row_name, row in direct_rows:
+            start = int(row["addr"])
+            item_range = AccessRange(
+                start, start + _row_extent(row, layout), row_name, name
+            )
+            for image in _visible_images(table, images):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [item_range],
+                    {},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        for table, row in pointer_rows:
+            cell = int(row["addr"])
+            for image in _visible_images(table, images):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [],
+                    {cell: name},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        for image, task_type in task_types.items():
+            if task_type == _normalized_type(name):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [],
+                    {0x1F800044: name},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        member_names = {member.path.rsplit(".", 1)[-1] for member in layout.members}
+        c_uses = _c_member_uses(member_names)
+        all_accesses = [access for access in all_accesses if access.type_name == name]
+    rows = _access_rows(name, layout, all_accesses, c_uses, kind)
+    if traced + untraced:
+        share = 100.0 * traced / (traced + untraced)
+        print(
+            f"accesses: traced {traced} of {traced + untraced} memory operations "
+            f"({share:.1f}%)",
+            file=sys.stderr,
+        )
+    keys = [
+        "name",
+        "kind",
+        "offset",
+        "widths",
+        "reads",
+        "writes",
+        "member",
+        "member_type",
+        "examples",
+        "constants",
+        "slots",
+        "problem",
+    ]
+    if args.jsonl:
+        for row in rows:
+            item = {key: row[key] for key in keys}
+            item["widths"] = dict(row["widths"])
+            print(json.dumps(item, ensure_ascii=False))
+        return 0
+    print("\t".join(keys))
+    for row in rows:
+        widths = ",".join(
+            f"{key}:{value}" for key, value in sorted(row["widths"].items())
+        )
+        print(
+            "\t".join(
+                [
+                    row["name"],
+                    row["kind"],
+                    f"0x{row['offset']:X}",
+                    widths,
+                    str(row["reads"]),
+                    str(row["writes"]),
+                    row["member"] or "",
+                    row["member_type"] or "",
+                    "; ".join(row["examples"]),
+                    ",".join(f"0x{value:X}" for value in row["constants"]),
+                    ",".join(row["slots"]),
+                    row["problem"],
+                ]
+            )
+        )
+    return 0
+
+
+RECORD_HEAD = re.compile(r"(?m)\b(?:typedef\s+)?(?:struct|union)\s*(?:(\w+)\s*)?\{")
+TYPEDEF_RECORD = re.compile(r"(?m)^\s*typedef\s+(?:struct|union)\s+(\w+)\s+(\w+)\s*;")
+
+
+def _record_definitions() -> tuple[dict[str, int], dict[str, str], set[str]]:
+    """Return each record name's definition count, its first header, and the record names."""
+    counts: dict[str, int] = collections.Counter()
+    header: dict[str, str] = {}
+    names: set[str] = set()
+    for path in ctext.tracked_c(ROOT):
+        if not path.endswith(".h"):
+            continue
+        text = ctext.read(ROOT, path)
+        masked = ctext.mask(text)
+        for match in RECORD_HEAD.finditer(masked):
+            opening = match.end() - 1
+            closing = _match_brace(masked, opening)
+            if closing < 0:
+                continue
+            tag = match.group(1) or ""
+            tail = re.match(r"\s*(\w+)\s*;", masked[closing + 1 :])
+            alias = tail.group(1) if tail else ""
+            for name in {part for part in (tag, alias) if part}:
+                counts[name] += 1
+                header.setdefault(name, path)
+                names.add(name)
+        for match in TYPEDEF_RECORD.finditer(masked):
+            name = match.group(2)
+            counts[name] += 1
+            header.setdefault(name, path)
+            names.add(name)
+    return dict(counts), header, names
+
+
+def _record_members(layout) -> list:
+    return list(layout.members)
+
+
+def _record_globals(symbols: dict, names: set[str]) -> dict[str, int]:
+    found: dict[str, int] = collections.Counter()
+    for rows in symbols.values():
+        for row in rows.values():
+            if not isinstance(row, dict):
+                continue
+            text = _normalized_type(str(row.get("type", "")))
+            if text in names:
+                found[text] += 1
+            else:
+                target = _pointer_target(text)
+                if target in names:
+                    found[target] += 1
+    return dict(found)
+
+
+def _record_params(tree, names: set[str]) -> dict[str, int]:
+    found: dict[str, int] = collections.Counter()
+    for decls_list in tree.decls.values():
+        for decl in decls_list:
+            for ctype, _ in decl.params:
+                for name in names:
+                    if re.search(r"\b" + re.escape(name) + r"\b", ctype):
+                        found[name] += 1
+    return dict(found)
+
+
+def _record_direct_accesses(
+    names: set[str],
+    layouts: dict,
+    symbols: dict,
+    functions: dict[str, list],
+    images: list[str],
+) -> dict[str, int]:
+    """Decode every image once and count the direct accesses to each record's globals."""
+    own: dict[str, list[AccessRange]] = collections.defaultdict(list)
+    resident: list[AccessRange] = []
+    for table, rows in symbols.items():
+        for row_name, row in rows.items():
+            if not isinstance(row, dict) or "addr" not in row or row.get("alias"):
+                continue
+            text = _normalized_type(str(row.get("type", "")))
+            if text not in names:
+                continue
+            layout = layouts.get(text)
+            start = int(row["addr"])
+            item = AccessRange(start, start + _row_extent(row, layout), row_name, text)
+            if table in LAYER_RESIDENT:
+                resident.append(item)
+            else:
+                own[table].append(item)
+    counts: dict[str, int] = collections.Counter()
+    for image in images:
+        ranges = own.get(image, []) + resident
+        if not ranges:
+            continue
+        for func in functions.get(image, ()):
+            found, _, _ = decode_accesses(
+                image,
+                func.name,
+                func.addr,
+                func.words,
+                ranges,
+                {},
+                {},
+            )
+            for access in found:
+                if access.type_name in names:
+                    counts[access.type_name] += 1
+    return dict(counts)
+
+
+def records(args: argparse.Namespace) -> int:
+    """Summarise every record: size, members, duplicates, globals, parameters and accesses."""
+    counts, header, names = _record_definitions()
+    layouts = {}
+    for name in sorted(names):
+        layout = type_layout(name)
+        if layout is not None and layout.record:
+            layouts[name] = layout
+    symbols = symbol_tables()
+    global_counts = _record_globals(symbols, set(layouts))
+    tree = _layer_tree()
+    param_counts = _record_params(tree, set(layouts))
+    member_names = {
+        member.path.rsplit(".", 1)[-1]
+        for layout in layouts.values()
+        for member in layout.members
+    }
+    c_uses = _c_member_uses(member_names)
+    functions = _index_by_image()
+    direct = _record_direct_accesses(
+        set(layouts), layouts, symbols, functions, sorted(functions)
+    )
+    signatures: dict[tuple, list[str]] = collections.defaultdict(list)
+    owners: dict[str, set[str]] = collections.defaultdict(set)
+    for name, layout in layouts.items():
+        signature = (layout.size, tuple((m.offset, m.ctype) for m in layout.members))
+        signatures[signature].append(name)
+        for member in layout.members:
+            owners[member.path.rsplit(".", 1)[-1]].add(name)
+    rows = []
+    for name, layout in layouts.items():
+        members = _record_members(layout)
+        unknown = sum(
+            1
+            for member in members
+            if member.path.rsplit(".", 1)[-1].startswith(("unk_", "pad_", "field_"))
+        )
+        c_count = sum(
+            len(c_uses.get(member.path.rsplit(".", 1)[-1], ())) for member in members
+        )
+        signature = (layout.size, tuple((m.offset, m.ctype) for m in members))
+        rows.append(
+            {
+                "record": name,
+                "size": layout.size,
+                "members": len(members),
+                "unknown": unknown,
+                "definitions": counts.get(name, 0),
+                "same_layout": len(signatures[signature]) - 1,
+                "globals": global_counts.get(name, 0),
+                "params": param_counts.get(name, 0),
+                "accesses": direct.get(name, 0) + c_count,
+                "header": header.get(name, ""),
+            }
+        )
+    rows.sort(
+        key=lambda row: (
+            -row["accesses"] * row["unknown"],
+            -row["accesses"],
+            row["record"],
+        )
+    )
+    keys = [
+        "record",
+        "size",
+        "members",
+        "unknown",
+        "definitions",
+        "same_layout",
+        "globals",
+        "params",
+        "accesses",
+        "header",
+    ]
+    if args.jsonl:
+        for row in rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return 0
+    print("\t".join(keys))
+    for row in rows:
+        print("\t".join(str(row[key]) for key in keys))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     """Run one verb."""
     parser = argparse.ArgumentParser(
@@ -1759,6 +3401,31 @@ def main(argv: list[str] | None = None) -> int:
     )
     eight.add_argument("--type", help="an enum name or a name prefix")
     eight.set_defaults(run=value)
+    nine = verbs.add_parser(
+        "layers",
+        help="print the call-graph layer of every function",
+        epilog="Example: tools/symbol.py layers --jsonl",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    nine.add_argument("--jsonl", action="store_true", help="one JSON object per line")
+    nine.set_defaults(run=layers)
+    ten = verbs.add_parser(
+        "accesses",
+        help="list the reads and writes of a record or global",
+        epilog="Example: tools/symbol.py accesses PartyMember --jsonl",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    ten.add_argument("name", help="a record type or a config/symbols.toml global")
+    ten.add_argument("--jsonl", action="store_true", help="one JSON object per line")
+    ten.set_defaults(run=accesses)
+    eleven = verbs.add_parser(
+        "records",
+        help="summarise every record and its accesses",
+        epilog="Example: tools/symbol.py records --jsonl",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    eleven.add_argument("--jsonl", action="store_true", help="one JSON object per line")
+    eleven.set_defaults(run=records)
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
         parser.error("add needs --source (a description) or --alias")

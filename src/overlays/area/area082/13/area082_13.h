@@ -6,7 +6,6 @@
 
 #include "overlays/area/world02.h"
 #include "area/spad.h"
-
 #include "shared/AreaSpark.h"
 
 extern SVECTOR  D_1F800014[];
