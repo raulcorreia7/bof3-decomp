@@ -149,7 +149,7 @@ MATCH void func_801EFE90(void) {
 
     work         = g_Task;
     work->unk_09 = work->unk_09 + 1;
-    work->pos.z.fixed += 0xFFF80000;
+    work->pos.z.fixed -= 0x80000;
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (!(timer & BYTE_MASK)) {

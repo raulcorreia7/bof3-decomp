@@ -1,6 +1,6 @@
 /* Draws the four rays of the sparkle around the effect point: each ray is a LINE_G2 from the centre in the
  * scratch halfwords D_1F800000/2 out to the rcos and rsin point at the frame angle plus its step, coloured from
- * the halfwords at 0x1F800008-0x1F80000C, and the effect point takes a DR_MODE cell and a 32-byte cell prim. */
+ * the scratch colour halfwords D_1F800000_HALF[4]-[6], and the effect point takes a DR_MODE cell and a 32-byte cell prim. */
 /* func_801EF810 (magic070), func_801EF810 (magic071), func_801EF810 (magic072) */
 MATCH void func_801EF810(u16 angle, u16 radius) {
     LINE_G2* prim;
