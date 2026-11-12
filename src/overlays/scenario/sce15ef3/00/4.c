@@ -204,7 +204,21 @@ INCLUDE_ASM(func_801D1D20);
 
 INCLUDE_ASM(func_801D1FF8);
 
-INCLUDE_ASM(func_801D230C);
+MATCH void func_801D230C(void) {
+    Point3DL pos;
+    s16      x;
+    s16      y;
+    u16      z;
+
+    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x380, 0x100));
+    pos.x = g_Task->pos.x.fixed;
+    pos.y = g_Task->pos.y.fixed;
+    pos.z = g_Task->pos.z.fixed;
+    x     = g_Task->screen_x;
+    y     = g_Task->screen_y;
+    z     = g_Task->unk_32;
+    func_801D1FF8(&pos, x, y, z, 0xC0, 0);
+}
 
 /* func_801D23AC */
 MATCH void Scene_DrawRedFade(u8 red) {

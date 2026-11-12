@@ -22,6 +22,7 @@ extern Callback D_801D280C[];
 void func_801D16DC(void);
 void func_801D18CC(void);
 void func_801D1A60(void);
+void func_801D1FF8(Point3DL* pos, s16 a, s16 b, u16 c, s32 d, s32 e);
 void func_801D230C(void);
 /* func_801D23AC */
 void Scene_DrawRedFade(u8 red);
