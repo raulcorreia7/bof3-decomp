@@ -184,7 +184,34 @@ MATCH void func_801F7D1C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7E2C);
+MATCH void func_801F7E2C(void) {
+    UPoint2D pos;
+    s8       tune;
+    s8       tune2;
+    Actor*   spad;
+    Actor*   spad2;
+
+    func_801F83AC(&pos);
+    spad = g_Task;
+    tune = spad->tint.signed_bytes.unk_5D;
+    if (tune < 0x70) {
+        spad->tint.signed_bytes.unk_5D = tune + 2;
+    }
+    spad2 = g_Task;
+    tune2 = spad2->tint.signed_bytes.unk_5E;
+    if (tune2 < 0x30) {
+        spad2->tint.signed_bytes.unk_5E = tune2 + 1;
+    }
+    func_801F81D8(pos.x, pos.y);
+    if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
+        g_Actors[g_Task->param.unk_0B].active_flags &= 0xF7;
+        g_Task->header.mode = 0;
+    }
+    if ((g_Task->tint.word & 0xFFFF00) == 0x307000) {
+        g_Task->unk_06      = 0;
+        g_Task->header.mode = 1;
+    }
+}
 
 MATCH void func_801F7F5C(void) {
     UPoint2D pos;
@@ -448,7 +475,7 @@ MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
         g_ActorSlots[slot].pos.x.fixed  = x;
         g_ActorSlots[slot].type         = 0x9E;
         g_ActorSlots[slot].pos.y.fixed  = y;
-        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + 0x2000000;
+        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + TO_COORD(0x200);
         g_ActorSlots[slot].unk_06       = unk_06;
         g_ActorSlots[slot].unk_07       = unk_07;
         g_ActorSlots[slot].link         = link;
