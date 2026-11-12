@@ -33,8 +33,6 @@ typedef struct Magic113Steps {
 
 extern Magic113Steps D_801EEC04;
 
-void func_801EF4F0(void);
-
 extern Callback D_801F0BAC[];
 extern s32      D_801F0BA4[];
 
