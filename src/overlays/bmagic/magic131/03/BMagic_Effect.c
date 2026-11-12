@@ -289,7 +289,7 @@ INCLUDE_ASM(func_801F13A4);
 MATCH void func_801F14A0(void) {
     s16 timer;
 
-    SYS_DISPATCH_TASK(D_801F1C94, 2, D_801F24E0);
+    SYS_DISPATCH_BYTE(D_801F1C94, D_801F24E0->header.step);
     timer = D_801F24E0->unk_26;
     if (timer != 0) {
         D_801F24E0->unk_26 = timer - 1;
