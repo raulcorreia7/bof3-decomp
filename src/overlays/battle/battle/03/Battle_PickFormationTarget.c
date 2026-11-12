@@ -5,7 +5,8 @@
 #define BATTLE_THREE_TARGET_COUNT 3
 
 /* Picks a random live target slot weighted by the formation table. */
-MATCH u8 func_801E2E30(void) {
+/* func_801E2E30 */
+MATCH u8 Battle_PickFormationTarget(void) {
     u8 total   = 0;
     u8 running = 0;
     u8 index;

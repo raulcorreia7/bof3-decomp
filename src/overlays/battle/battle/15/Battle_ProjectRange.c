@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AF764(void) {
+/* func_800AF764 */
+MATCH void Battle_ProjectRange(void) {
     s16         vec[3];
     long        flags[2];
     TILE_1*     primitive;

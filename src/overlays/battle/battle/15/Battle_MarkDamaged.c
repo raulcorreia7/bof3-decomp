@@ -4,7 +4,8 @@
  * the three player rows, bit 0x40 over the eleven enemy rows, and a selector
  * without bits 0xC0 marks only the one indexed battler.
  */
-MATCH void func_800A9820(u8 selector) {
+/* func_800A9820 */
+MATCH void Battle_MarkDamaged(u8 selector) {
     s32 i;
     u8  index;
 

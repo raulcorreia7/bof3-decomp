@@ -4,7 +4,8 @@
  *           the local or enemy work record, stores the signed magnitude and
  *           sets the action state from the target's flag byte.
  */
-MATCH void func_800AAC88(s16 amount, u8 battler_index) {
+/* func_800AAC88 */
+MATCH void Battle_QueueAction(s16 amount, u8 battler_index) {
     u8 action_slot;
     u8 target_flags;
 

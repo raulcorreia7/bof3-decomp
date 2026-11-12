@@ -4,7 +4,8 @@
  * shared 0x10 flag across all available battlers. FAKE: each countdown byte is read through a copy; the extra
  * temporary steers global-alloc so the scaled index keeps a0 and the count keeps v1.
  */
-MATCH void func_801D4D44(void) {
+/* func_801D4D44 */
+MATCH void Battle_TickCountdowns(void) {
     u8                     index;
     u32                    clr;
     u32                    enemy_index;

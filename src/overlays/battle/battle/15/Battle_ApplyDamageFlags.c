@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800A9610(u8 selector, u16 flags) {
+/* func_800A9610 */
+MATCH void Battle_ApplyDamageFlags(u8 selector, u16 flags) {
     s32 i;
     u8  slot;
     s32 battler;

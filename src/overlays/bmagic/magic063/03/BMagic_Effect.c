@@ -124,7 +124,7 @@ MATCH void func_801EF5CC(void) {
     if (g_BMagicOrbitWork->radius <= threshold) {
         g_BMagicOrbitWork->header.step++;
         if (g_BMagicOrbitWork->unk_04 == 0) {
-            func_800A9610(g_BattleEffectBattler->unk_04, 0x10);
+            Battle_ApplyDamageFlags(g_BattleEffectBattler->unk_04, 0x10);
         }
     }
 }

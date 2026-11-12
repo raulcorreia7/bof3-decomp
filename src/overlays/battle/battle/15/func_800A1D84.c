@@ -60,7 +60,7 @@ NON_MATCHING void func_800A1D84(void) {
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         i = 0;
-        func_800AAA74();
+        Battle_ApplyFormationStats();
         if (g_Battle.party_count != 0) {
             do {
                 dst                         = i * BATTLE_PARTY_STRIDE + D_80145F20;
@@ -74,7 +74,7 @@ NON_MATCHING void func_800A1D84(void) {
         func_800A4458();
         if (g_Battle.party_count != 0) {
             do {
-                func_800A9BD8(i & BYTE_MASK);
+                Battle_RescaleStats(i & BYTE_MASK);
                 i += 1;
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
