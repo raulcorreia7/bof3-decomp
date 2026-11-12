@@ -164,7 +164,7 @@ MATCH void func_801EFAB8(void) {
 MATCH void func_801EFAFC(void) {
     Callback handlers[7];
 
-    __builtin_memcpy(handlers, D_801EEC48, sizeof(handlers));
+    memcpy(handlers, D_801EEC48, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
