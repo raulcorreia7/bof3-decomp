@@ -157,7 +157,7 @@ MATCH void func_801D11F4(void) {
                 if (g_MenuStatusItems.used[0] != 0 && g_MenuStatusItems.used[1] != 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     g_MenuStep.sub_step += 2;
-                    g_MenuStep.state = g_MenuStep.state;
+                    g_MenuStep.state = g_MenuStep.state; /* FAKE: retail reloads and stores state. */
                 } else {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                     D_80148364 = 0x31;
