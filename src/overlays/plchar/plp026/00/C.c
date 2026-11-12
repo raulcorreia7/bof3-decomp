@@ -8,7 +8,7 @@ MATCH void func_801CE404(void) {
     D_801D0A54[g_Task->header.step]();
 }
 
-INCLUDE_ASM(func_801CE448);
+#include "overlays/plchar/func_801CE448.h"
 
 #include "overlays/plchar/func_801CE628.h"
 
