@@ -16,7 +16,17 @@ INCLUDE_ASM(func_801EF110);
 
 INCLUDE_ASM(func_801EF1C0);
 
-INCLUDE_ASM(func_801EF3D0);
+MATCH void func_801EF3D0(void) {
+    if (!EMI_IsReady()) {
+        return;
+    }
+    if (g_Battle.scroll_dir & 2) {
+        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex]);
+    } else {
+        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex]);
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EF488(void) {
     PartyMember* prev;
