@@ -4,9 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-void func_801EECFC(void);
-void Effect_PlayOnIdleTick(void);
-
 MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EECFC, Effect_PlayOnIdleTick};
     s32      tpage;
@@ -139,9 +136,6 @@ MATCH void func_801EFEB8(void) {
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
-
-void func_801F02FC(void);
-void Effect_SetActorMatrix(void);
 
 MATCH void func_801EFF84(void) {
     s32 tpage;
