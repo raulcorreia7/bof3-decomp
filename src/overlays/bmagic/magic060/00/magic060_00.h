@@ -11,11 +11,8 @@ typedef struct Magic060Steps {
     Callback steps[MAGIC060_STEP_COUNT];
 } Magic060Steps;
 
-extern u32 D_1F800004;
-
 extern Magic060Steps D_801EEC04;
 
-extern u16      D_801F0B9A[];
 extern Callback D_801F0BBC[];
 void            func_801F012C(void);
 
