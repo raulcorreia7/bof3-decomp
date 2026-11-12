@@ -83,7 +83,32 @@ INCLUDE_ASM(func_801EF6AC);
 
 INCLUDE_ASM(func_801EF7FC);
 
-INCLUDE_ASM(func_801EFA68);
+MATCH void func_801EFA68(void) {
+    u8 count;
+
+    g_Task->unk_2E.half += g_Task->unk_0C;
+    g_Task->unk_30.half += g_Task->unk_10;
+    g_Task->unk_0C += g_Task->unk_18;
+    g_Task->unk_10 += g_Task->unk_1C;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count & BYTE_MASK) {
+        return;
+    }
+    if (g_Battle.scroll_dir == 0 || g_Battle.scroll_dir == 3) {
+        g_Task->unk_0C = 4;
+        g_Task->unk_10 = 4;
+        g_Task->unk_18 = -1;
+        g_Task->unk_1C = -1;
+    } else {
+        g_Task->unk_0C = -4;
+        g_Task->unk_10 = 4;
+        g_Task->unk_18 = 1;
+        g_Task->unk_1C = -1;
+    }
+    g_Task->unk_09 = 6;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EFB64(void) {
     PartyMember* work  = g_Task;
