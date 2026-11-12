@@ -222,8 +222,8 @@ INCLUDE_ASM(func_801F026C);
 
 INCLUDE_ASM(func_801F0648);
 
-/* Runs the draw step that header.step selects, then sets the actor matrix, advances the effect timers and
- * feeds the slot's archive row to func_801F0D0C while the step is running. */
+/* Draws the glow ring step header.step selects: sets the actor matrix, advances the effect timers and
+ * passes the slot's draw row to func_801F0D0C while the step is running. */
 MATCH void func_801F0AC8(void) {
     PartyMember* work;
 
