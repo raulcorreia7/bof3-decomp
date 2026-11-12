@@ -48,13 +48,13 @@ MATCH void func_801D1364(void) {
 
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        D_801D4E0C = 0xB5;
+        D_801D4E0C = 181;
         D_801F294C--;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         row = D_801D4E24;
         if (row != 0) {
-            D_801D4E0C = 0x44;
+            D_801D4E0C = 68;
             D_801D4E28 = g_SceneEventSelection;
             D_801F294D++;
         } else {
@@ -116,7 +116,7 @@ MATCH void func_801D1630(void) {
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         result = func_801D482C(1);
         if (result & BYTE_MASK) {
-            D_801D4E0C = 0xB5;
+            D_801D4E0C = 181;
         }
     } else {
         func_801D3B0C(&D_801D4E28);
