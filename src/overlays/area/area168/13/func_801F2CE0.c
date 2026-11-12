@@ -1,13 +1,9 @@
-/* Every step re-reads the scratchpad cell. */
-#define TASK_VOLATILE
 #include "area168_13.h"
 
 MATCH void func_801F2CE0(void) {
     Actor* actor;
     u8     i;
     s32    z;
-    /* FAKE: retail materializes the mode in v0 before reading the task cell. */
-    FAKE_REG(u8, mode, "v0");
 
     g_Task->unk_06     = 0;
     actor              = g_Task;
@@ -24,8 +20,6 @@ MATCH void func_801F2CE0(void) {
         func_801F2E10(&work->vx, &work->unk_18);
     }
     if (SYS_TestFlag(g_SceneEventFlags, 0x91) != 0) {
-        mode = 2;
-        FAKE_BARRIER(); /* FAKE: keeps the task cell read after the mode constant. */
-        g_Task->header.mode = mode;
+        g_Task->header.mode = 2;
     }
 }
