@@ -32,6 +32,7 @@ void             func_801F8704(void);
 extern u8        D_801FE71C[];
 extern u8        D_801FE74C;
 void             func_801F8958(void);
+void             func_801F9020(WorldPos* pos, s32* velocity);
 void             func_801F92F0(Coord* position, s32* step);
 
 extern u8 D_801FE750;

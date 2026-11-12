@@ -252,7 +252,18 @@ MATCH void func_801F8A5C(void) {
 
 INCLUDE_ASM(func_801F8AA0);
 
-INCLUDE_ASM(func_801F8BC4);
+MATCH void func_801F8BC4(void) {
+    MATRIX matrix;
+
+    g_Task->vx += g_Task->unk_18;
+    g_Task->vy += g_Task->unk_1C;
+    g_Task->vz += g_Task->gravity;
+    Area_SetCameraMatrix(&matrix);
+    func_801F9020(&g_Task->pos, &g_Task->vx);
+    if (--g_Task->timer == 0) {
+        g_Task->header.mode++;
+    }
+}
 
 INCLUDE_ASM(func_801F8C78);
 
