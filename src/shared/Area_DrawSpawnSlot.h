@@ -1,7 +1,7 @@
 /* Draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot
  * position; the slot's radius shrinks every frame and its centre and rim shades colour the fan. Every change must
  * keep all three members matching. */
-/* 0x801D1B10 (sce15ef1), 0x801F53BC (area098), 0x801F3F30 (area188) */
+/* Area_DrawSpawnSlot (sce15ef1, area098, area188) */
 MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
     u16      size[2];
     u16      scale[2];
