@@ -7,8 +7,7 @@
 MATCH s32 func_801E0770(void) {
     FishingState* work;
     s32           d;
-    /* FAKE: retail keeps the z delta in $v0. */
-    FAKE_REG(s32, dz, "v0");
+    s32           dz;
     /* FAKE: retail keeps the y anchor in $a0. */
     FAKE_REG(s32, anchor, "a0");
     s32 limit;

@@ -1021,9 +1021,7 @@ static inline void BattleSelectionDelta(s32 mode) {
 static inline void BattleSetSelectionFlag(u32 flag) {
     u32         mode;
     BattleTurn* record;
-    /* FAKE: Pin the stored constant to $v0; clean C left the
-     * delay-slot constant in $v1 while $v0 stayed free. */
-    FAKE_REG(u8, one, "v0");
+    u8          one;
 
     if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *(u8*)&g_Battle.target;

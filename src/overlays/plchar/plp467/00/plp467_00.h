@@ -28,4 +28,3 @@ extern s32  func_801CF3C0(void);
 extern void func_801CF564(void);
 
 #endif
-void func_801CF050(s32 kind, s32 x, s32 y, s32 code);

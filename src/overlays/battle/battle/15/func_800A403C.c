@@ -4,9 +4,8 @@
 extern s8 D_801CA71B[];
 
 MATCH u8 func_800A403C(u8 battler_index) {
-    /* FAKE: pin the row index to v1 so the scaled offset keeps v0. */
-    FAKE_REG(u16, index, "v1");
-    u8 saved;
+    u16 index;
+    u8  saved;
 
     func_800A3F28();
     saved = battler_index;
