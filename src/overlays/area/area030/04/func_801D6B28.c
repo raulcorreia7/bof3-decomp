@@ -8,9 +8,9 @@ MATCH void func_801D6B28(s8 panel_kind) {
 
     Area_AddActor();
     Fishing_SetDrawMode(0, 1);
-    Fishing_DrawSprite(0x15, 1, 50, 150);
-    Fishing_DrawSprite(0x16, 1, 188, 150);
-    Fishing_DrawSprite(0x11, 1, 54, 156);
+    Fishing_DrawSprite(21, 1, 50, 150);
+    Fishing_DrawSprite(22, 1, 188, 150);
+    Fishing_DrawSprite(17, 1, 54, 156);
 
     {
         FishingState* work;
@@ -32,15 +32,15 @@ MATCH void func_801D6B28(s8 panel_kind) {
         shown->cursor_10 = right_x;
 
         if ((pair->cursor_10 < pair->pos_x_0C) || (pair->pos_x_0C + 0x20 < pair->cursor_10)) {
-            Fishing_DrawReelCursor(pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 7u) << 1), 1u, 1);
+            Fishing_DrawReelCursor(pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 0x7u) << 1), 1u, 1);
         } else {
-            Fishing_DrawReelCursor(pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 7u) << 1), 1u, 0);
+            Fishing_DrawReelCursor(pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 0x7u) << 1), 1u, 0);
         }
     }
 
     if ((panel_kind & BYTE_MASK) == 0) {
-        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 0, 1u);
+        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 179, 0, 1u);
     } else {
-        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 1, 1u);
+        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 179, 1, 1u);
     }
 }
