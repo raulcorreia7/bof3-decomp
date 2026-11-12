@@ -272,20 +272,19 @@ INCLUDE_ASM(func_801F8490);
 
 MATCH void func_801F853C(void) {
     Scena03Work* work;
-    u16          value;
+    s16          value;
 
     work = SCN_LINE;
     func_801F88FC(&work->line);
-    value             = work->line.unk_06;
-    value             = value - 0x10;
+    value             = work->line.unk_06 - 0x10;
     work->line.unk_06 = value;
-    if ((s16)value < 0) {
+    if (value < 0) {
         work->line.unk_06 = 0;
     }
-    if ((s16)work->line.unk_06 < 0x80) {
+    if (work->line.unk_06 < 0x80) {
         work->line.unk_08 -= 0x10;
     }
-    if ((s16)work->line.unk_08 < 0) {
+    if (work->line.unk_08 < 0) {
         work->line.unk_06 = 0;
         g_Task->header.mode += 1;
     }
