@@ -23,6 +23,7 @@ extern Callback D_801F66D4[17];
 /* The row table the step lookup reads through the load entry. */
 extern u8*      D_801F6748[];
 
+extern void Actor_BeginScript(u8 raw_selector, u16 raw_code);
 u8*         func_801F2E88(void);
 extern u8   func_801F2EC4(void);
 extern void func_801F4A5C(u8* pairs, u8 flag);

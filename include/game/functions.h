@@ -167,8 +167,6 @@ s8    func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode);
 s32   func_801BE1B0(u32 index);
 /* func_801BFE34 */
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
-/* func_801C1254 */
-void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 mode);
 /* Party_LoadPalettes */
