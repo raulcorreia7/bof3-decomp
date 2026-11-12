@@ -16,8 +16,6 @@ extern u8       D_801F1C54[];
 void            func_801F06B4(void);
 void            func_801F0D44(void);
 
-extern s16 D_1F800006;
-
 /* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the battle's
  * scroll direction picks the row's first or second pointer and g_EmiLoadedCharacterIndex picks the id. */
 extern u16* D_800B499C[][2];
