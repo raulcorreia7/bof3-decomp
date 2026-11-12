@@ -408,7 +408,21 @@ MATCH void func_801F8404(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8480);
+MATCH void func_801F8480(void) {
+    u8* timer;
+    u32 value;
+
+    timer  = &D_80146875;
+    value  = *timer + 2;
+    *timer = value;
+    if ((u8)value >= 127) {
+        *timer = 0;
+        D_80146874 += 1;
+        func_801F8B10(0x4B0, 0x80);
+    } else {
+        func_801F8B10(0x4B0, (u8)~value);
+    }
+}
 
 MATCH void func_801F84F4(void) {
     u8* timer;

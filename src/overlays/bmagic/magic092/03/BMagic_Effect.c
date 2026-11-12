@@ -40,7 +40,32 @@ MATCH void func_801EF044(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF0CC);
+MATCH void func_801EF0CC(void) {
+    PartyMember* work;
+    u8           count;
+    u8           i;
+    u8           slot;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        g_Task->param.unk_0B = 0;
+        for (i = 0; i < 3; i++) {
+            slot = BMagic_AllocEffect();
+            if (slot != GAME_NONE) {
+                work                                  = g_Task;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode = i != 0;
+                BMAGIC_EFFECT_SLOTS[slot].header.step = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
+                BMAGIC_EFFECT_SLOTS[slot].header.flags |= BMAGIC_EFFECT_IN_USE | ACTOR_FLAG_HIDDEN;
+                BMAGIC_EFFECT_SLOTS[slot].target.party = work;
+                g_Task->param.unk_0B += 1;
+            }
+        }
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF1F0);
 

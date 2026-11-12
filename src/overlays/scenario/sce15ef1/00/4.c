@@ -242,7 +242,18 @@ MATCH void func_801D2B64(void) {
     SYS_DISPATCH_TASK(D_801D396C, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801D2BA8);
+MATCH void func_801D2BA8(void) {
+    Actor* work;
+
+    work         = g_Task;
+    work->timer  = 20;
+    work->vx     = 0;
+    work->vy     = 0;
+    work->unk_18 = 0;
+    work->unk_1C = 0;
+    g_Task->header.mode++;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
+}
 
 INCLUDE_ASM(func_801D2C00);
 

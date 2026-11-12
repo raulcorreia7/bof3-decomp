@@ -1,4 +1,5 @@
 #include "magic131_03.h"
+#include "sys/scratchpad.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -36,9 +37,45 @@ MATCH void func_801EEDEC(void) {
 
 INCLUDE_ASM(func_801EEF64);
 
-INCLUDE_ASM(func_801EF000);
+MATCH void func_801EF000(void) {
+    u16          i;
+    u32          slot;
+    PartyMember* work;
 
-INCLUDE_ASM(func_801EF110);
+    if (!EMI_IsReady()) {
+        return;
+    }
+    g_Game.members[0].header.flags     = 0;
+    g_Game.members[1].header.flags     = 0;
+    g_Game.members[2].header.flags     = 0;
+    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].unk_04       = 0x21;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].arg.unk_09   = 0x18;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->param.unk_0B += 1;
+    for (i = 0; i < 256; i++) {
+        MEM(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW + i * 2) = MEM(u16, AREA_PALETTE_ARENA_33C00 + i * 2);
+    }
+    g_GfxPalettePending = 1;
+    g_Task->header.mode += 1;
+}
+
+MATCH void func_801EF110(void) {
+    PartyMember* work;
+    u32          slot;
+
+    if (g_Task->param.unk_0B == 0) {
+        slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B++;
+        g_Task->unk_09 = 10;
+        g_Task->header.mode++;
+    }
+}
 
 INCLUDE_ASM(func_801EF1C0);
 
@@ -96,7 +133,32 @@ INCLUDE_ASM(func_801EF6AC);
 
 INCLUDE_ASM(func_801EF7FC);
 
-INCLUDE_ASM(func_801EFA68);
+MATCH void func_801EFA68(void) {
+    u8 count;
+
+    g_Task->unk_2E.half += g_Task->unk_0C;
+    g_Task->unk_30.half += g_Task->unk_10;
+    g_Task->unk_0C += g_Task->unk_18;
+    g_Task->unk_10 += g_Task->unk_1C;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count & BYTE_MASK) {
+        return;
+    }
+    if (g_Battle.scroll_dir == 0 || g_Battle.scroll_dir == 3) {
+        g_Task->unk_0C = 4;
+        g_Task->unk_10 = 4;
+        g_Task->unk_18 = -1;
+        g_Task->unk_1C = -1;
+    } else {
+        g_Task->unk_0C = -4;
+        g_Task->unk_10 = 4;
+        g_Task->unk_18 = 1;
+        g_Task->unk_1C = -1;
+    }
+    g_Task->unk_09 = 6;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EFB64(void) {
     PartyMember* work  = g_Task;
@@ -336,27 +398,37 @@ MATCH void func_801F1138(void) {
     }
 }
 
-INCLUDE_ASM(func_801F11B8);
+MATCH void func_801F11B8(void) {
+    s16* angle_cell;
+    s32  z;
+    u8   phase;
 
-INCLUDE_ASM(func_801F12A0);
+    phase                   = D_801F1C38[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 7;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) << 6) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
+    z                       = g_BattleEffectBattler->pos.z.fixed;
+    D_801F24E0->pos.z.fixed = z;
+    D_801F24E0->phase_0C    = 0x40;
+    D_801F24E0->timer_05    = 16;
+    D_801F24E0->unk_06      = 20;
+    D_801F24E0->header.step++;
+}
+
+MATCH void func_801F12A0(void) {
+    s16* angle_cell;
+    u8   phase;
+
+    MAGIC131_ORBIT_GROW(D_801F1C38, 7);
+}
 
 MATCH void func_801F13A4(void) {
     s16* angle_cell;
     u8   phase;
     u8   timer;
 
-    D_801F24E0->phase_0C += 0x10;
-    phase                   = D_801F1C38[D_801F24E0->unk_07];
-    angle_cell              = &D_1F800006;
-    *angle_cell             = phase << 7;
-    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) * (s16)D_801F24E0->phase_0C) >> 3);
-    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
-    timer                   = D_801F24E0->timer_05 - 2;
-    D_801F24E0->timer_05    = timer;
-    if (timer == 0) {
-        g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801F1AC4();
-    }
+    MAGIC131_ORBIT_CLOSE(D_801F1C38, 7);
 }
 
 MATCH void func_801F14A0(void) {
@@ -395,19 +467,16 @@ MATCH void func_801F1644(void) {
     s16* angle_cell;
     u8   phase;
 
-    D_801F24E0->unk_06 += 2;
-    D_801F24E0->phase_0C += 0x20;
-    phase                   = D_801F1C54[D_801F24E0->unk_07];
-    angle_cell              = &D_1F800006;
-    *angle_cell             = phase << 6;
-    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) * (s16)D_801F24E0->phase_0C) >> 3);
-    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
-    if ((s16)D_801F24E0->phase_0C == 0x200) {
-        D_801F24E0->header.step += 1;
-    }
+    MAGIC131_ORBIT_GROW(D_801F1C54, 6);
 }
 
-INCLUDE_ASM(func_801F1748);
+MATCH void func_801F1748(void) {
+    s16* angle_cell;
+    u8   phase;
+    u8   timer;
+
+    MAGIC131_ORBIT_CLOSE(D_801F1C54, 6);
+}
 
 INCLUDE_ASM(func_801F1844);
 

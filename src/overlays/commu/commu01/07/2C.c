@@ -105,7 +105,7 @@ MATCH u8 func_801D3A48(u8 arg) {
     s32 count = 0;
     s32 i;
 
-    for (i = 0; i < 0x3C; i++) {
+    for (i = 0; i < FAIRY_JOB_COUNT; i++) {
         if (g_FairyJobs[i].active != 0) {
             if (g_FairyJobs[i].type == arg) {
                 count++;
@@ -115,7 +115,23 @@ MATCH u8 func_801D3A48(u8 arg) {
     return count;
 }
 
-INCLUDE_ASM(func_801D3AA0);
+MATCH u8 func_801D3AA0(u8 type, u8 index) {
+    u8  count;
+    s32 i;
+
+    count = 0;
+    for (i = 0; i < FAIRY_JOB_COUNT; i++) {
+        if (g_FairyJobs[i].active != 0) {
+            if (g_FairyJobs[i].type == type) {
+                if (count == index) {
+                    return (u8)i;
+                }
+                count++;
+            }
+        }
+    }
+    return GAME_NONE;
+}
 
 INCLUDE_ASM(func_801D3B0C);
 

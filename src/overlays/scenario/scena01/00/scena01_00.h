@@ -6,6 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
+#include "shared/AreaSpark.h"
 
 extern u8 D_80144E90[];
 

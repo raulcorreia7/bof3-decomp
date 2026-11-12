@@ -35,7 +35,7 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/Effect_DrawSparkleWedges.h"
 
-INCLUDE_ASM(func_801EFCDC);
+#include "overlays/bmagic/Effect_DrawSparkleDisc.h"
 
 #include "overlays/bmagic/func_801F0000.h"
 
