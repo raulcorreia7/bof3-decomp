@@ -1,5 +1,5 @@
 /* Draws a black, semi-transparent Gouraud quad over the whole 320x320 screen with dithering on. */
-/* AREA_DRAW_DIM_QUAD (area188 0x801F2C3C, area188 0x801F2D18) */
+/* func_801F2C3C, func_801F2D18 (area188) */
 #define AREA_DRAW_DIM_QUAD()                                               \
     POLY_G4* prim;                                                         \
     GFX_AddDitheredDrawMode(6U, GetTPage(2, 2, 0x140, 0x140) & HALF_MASK); \
