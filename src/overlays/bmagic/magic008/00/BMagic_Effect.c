@@ -28,7 +28,7 @@ MATCH void func_801EED5C(void) {
     g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
     g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 0x1F;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     SND_QueueSelectionFx(0x100);
@@ -112,7 +112,7 @@ MATCH void func_801EF7C8(void) {
     g_BattleEffects[index & BYTE_MASK].header.mode   = 4;
     g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
     g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 0x1F;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
@@ -152,7 +152,7 @@ MATCH void func_801EFAD4(void) {
     g_BattleEffects[index & BYTE_MASK].header.mode   = 5;
     g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
     g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 0x1F;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
