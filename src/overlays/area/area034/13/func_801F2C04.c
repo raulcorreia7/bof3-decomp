@@ -16,7 +16,7 @@ MATCH void func_801F2C04(void) {
     }
     step  = &g_SceneEventMode;
     *step = 5;
-    SYS_SetFlag(step + 0x63D, 0x1E);
+    SYS_SetFlag(step + 0x63D, 30);
 resume:
     if (g_MessageChoice != 2 && g_SceneState.scenario_id == 8 && SYS_TestFlag(g_SceneFlags, 3) == 0) {
         g_SceneEventMode = 0;
