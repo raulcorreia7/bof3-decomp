@@ -5,7 +5,7 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
     u8  level;
     u8  new_level;
     u8  i;
-    u8  modifier;
+    s8  modifier;
     s32 work;
     s32 exp;
     s32 delta;
@@ -32,42 +32,42 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             modifier = g_Characters[id].level_up_modifiers[0];
             for (i = level; i < new_level; i++) {
                 delta += g_LevelGrowth[id][i].hp;
-                delta += (s8)modifier;
+                delta += modifier;
             }
             break;
         case 2:
             modifier = g_Characters[id].level_up_modifiers[1];
             for (i = level; i < new_level; i++) {
                 delta += g_LevelGrowth[id][i].ap;
-                delta += (s8)modifier;
+                delta += modifier;
             }
             break;
         case 3:
             modifier = g_Characters[id].level_up_modifiers[2];
             for (i = level; i < new_level; i++) {
                 delta += g_LevelGrowth[id][i].power_defense >> 4;
-                delta += (s8)modifier;
+                delta += modifier;
             }
             break;
         case 4:
             modifier = g_Characters[id].level_up_modifiers[3];
             for (i = level; i < new_level; i++) {
                 delta += g_LevelGrowth[id][i].power_defense & 0xF;
-                delta += (s8)modifier;
+                delta += modifier;
             }
             break;
         case 5:
             modifier = g_Characters[id].level_up_modifiers[4];
             for (i = level; i < new_level; i++) {
                 delta += g_LevelGrowth[id][i].agility_intellect >> 4;
-                delta += (s8)modifier;
+                delta += modifier;
             }
             break;
         case 6:
             modifier = g_Characters[id].level_up_modifiers[5];
             for (i = level; i < new_level; i++) {
                 delta += g_LevelGrowth[id][i].agility_intellect & 0xF;
-                delta += (s8)modifier;
+                delta += modifier;
             }
             break;
     }
