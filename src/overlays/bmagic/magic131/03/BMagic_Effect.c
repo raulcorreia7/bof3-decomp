@@ -197,7 +197,7 @@ MATCH void func_801F030C(void) {
     SetPolyF4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);
-    shade = g_Task->unk_09 * 0xF;
+    shade = g_Task->unk_09 * 15;
     setRGB0(prim, shade, shade, shade);
     GFX_AddPrim(2, sizeof(POLY_F4));
     if (GetGraphType() == 1) {
