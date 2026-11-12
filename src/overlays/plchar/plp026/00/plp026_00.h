@@ -29,5 +29,7 @@ extern Callback D_801D0AC0[];
 extern s32  func_801D06C4(void);
 extern void func_801D0868(void);
 
+void Actor_BeginScript(s32 raw_selector, s32 raw_code);
+
 #endif
 void func_801D0354(s32 kind, s32 x, s32 y, s32 code);
