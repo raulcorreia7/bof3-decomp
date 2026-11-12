@@ -38,17 +38,17 @@ MATCH void func_801EEDB4(void) {
     func_800AF764();
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Effect_SetActorMatrixRolled();
-        func_801EF23C(0x30, 0x10, 3);
+        func_801EF23C(48, 16, 0x3);
         g_Task->param.unk_0B += 4;
-        func_801EF23C(0x20, 0x50, 0xF);
+        func_801EF23C(32, 80, 0xF);
         g_Task->param.unk_0B += 2;
         Effect_DrawBolt();
         g_Task->param.unk_0B += 4;
-        func_801EF23C(0x18, BOLT_RADIUS, BOLT_FLICKER_MASK);
-        g_Task->param.unk_0B -= 0xA;
-        g_Task->unk_2E.half += 0x10;
+        func_801EF23C(24, BOLT_RADIUS, BOLT_FLICKER_MASK);
+        g_Task->param.unk_0B -= 10;
+        g_Task->unk_2E.half += 16;
         func_801EFC74();
-        g_Task->unk_2E.half -= 0x20;
+        g_Task->unk_2E.half -= 32;
         func_801EFC74();
         PopMatrix();
     }
