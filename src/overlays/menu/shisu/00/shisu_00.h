@@ -30,11 +30,12 @@ extern char          g_SaveCardPortLabelFirst[];
 extern char          g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
 #define MENU_STATUS_STEP_COUNT        5
-#define MENU_STATUS_TASK_COUNT        7
+#define MENU_STATUS_TASK_COUNT        4
 #define MENU_STATUS_STEP1_COUNT       2
 #define MENU_STATUS_STEP2_COUNT       3
 #define MENU_STATUS_STEP2_SUB2_COUNT  5
 #define MENU_STATUS_STEP3_COUNT       2
+#define MENU_STATUS_TASK1_STATE_COUNT 3
 #define MENU_STATUS_TASK2_STATE_COUNT 3
 #define MENU_STATUS_TASK3_STATE_COUNT 3
 
@@ -53,6 +54,8 @@ extern Callback g_MenuStatusStep2Sub2Funcs[MENU_STATUS_STEP2_SUB2_COUNT];
 extern Callback D_801D9720[];
 extern Callback D_801D9734[];
 extern Callback g_MenuStatusTaskFuncs[MENU_STATUS_TASK_COUNT];
+/* D_801D975C */
+extern Callback g_MenuStatusTask1StateFuncs[MENU_STATUS_TASK1_STATE_COUNT];
 /* D_801D9768 */
 extern Callback g_MenuStatusTask2StateFuncs[MENU_STATUS_TASK2_STATE_COUNT];
 /* D_801D9774 */
@@ -126,6 +129,7 @@ extern void            func_801D2C0C(void);
 extern void            func_801D2DA8(void);
 extern void            Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 extern void            Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
+void                   Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 
 /* Slide the master panel up to y -20 and stop it there. */
 static inline void Menu_SlidePanelUp(void) {
