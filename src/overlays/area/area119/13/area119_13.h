@@ -12,8 +12,6 @@
 
 #define g_SceneFlags ((void*)g_SceneFlags)
 
-/* The party position in 16.16 fixed point. */
-
 extern u8 D_80146920[];
 extern u8 D_801F45C4[];
 
