@@ -104,7 +104,9 @@ curl -fL https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1
 
 Run each as `meson compile -C build/meson <name>`. `<image>` is a target id with `/` written as `+`.
 A check that compares with a base ref uses the newest of `public/main`, `origin/main` and `main`,
-the rule in `tools/lib/baseref.sh`.
+the rule in `tools/lib/baseref.sh`, and compares its merge base with HEAD, so a branch that is
+behind does not look as if it dropped what the newer commits added. CI has no disc and runs no byte
+check: the local `check` on every touched image is the proof.
 
 | Name              | Does                                                                                                                                                                                                                                                                                                         |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -319,10 +321,9 @@ and `INCLUDE_RODATA(D_<ADDR>)` resolve through the image's `-DASM_DIR`.
 ### Build model
 
 One source file builds one object. One image target links the objects through splat's `linker.ld`,
-in section order, and compares the flat payload with the retail bytes. A `target.toml` may declare
-a load reservation (`[[regions]]`) instead of extracting it: the link writes the window's fill and
-stamped words and includes the rest of the binary verbatim. `meson compile` and `check-<image>`
-use the same source and flags.
+in section order, and compares the flat payload with the retail bytes. A gap between code segments
+is a Splat `bin` row over the retail payload, so the link compares that window's bytes verbatim.
+`meson compile` and `check-<image>` use the same source and flags.
 
 ### objdiff
 

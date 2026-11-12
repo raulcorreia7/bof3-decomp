@@ -25,7 +25,6 @@ import re
 import struct
 import subprocess
 import sys
-import tomllib
 from collections import Counter
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -38,6 +37,36 @@ from bof3.link.graph import source_object
 from bof3.resolve import load_target_manifests
 from bof3.status.claims import DRAFT_RE, source_text
 
+ROOT = Path(__file__).resolve().parent.parent
+#: The source and split-assembly folders, and the report the status site reads.
+SRC = "src"
+ASM = "asm"
+REPORT = "build/report.json"
+LIBRARY_UNITS = "config/sdk/library-units.jsonl"
+#: The pinned binutils wrappers and the flags the images assemble with.
+ASSEMBLER = "bin/internal/binutils/as"
+NM = "bin/internal/binutils/nm"
+OBJCOPY = "bin/internal/binutils/objcopy"
+ASSEMBLER_FLAGS = ("-G0", "-EL", "-mips1")
+ASM_INCLUDE = ("include/match",)
+#: What a source claims about its unit, and how its split asm and marker are named.
+MATCH_MARKER = re.compile(r"^[ \t]*MATCH\b", re.MULTILINE)
+FUNC_ADDRESS = re.compile(r"^func_([0-9A-Fa-f]{8})$")
+DATA_ADDRESS = re.compile(r"^(?:D|T|jtbl)_([0-9A-Fa-f]+)$")
+NONMATCHING_SUFFIX = ".NON_MATCHING"
+DATA_LABEL = "dlabel"
+HAND_MARKER = "\nHAND_ASM "
+HAND_DIR = "hand"
+DATA_DIR = "data"
+#: objdiff's progress categories: the game totals read `game` only.
+GAME_CATEGORY = "game"
+SDK_CATEGORY = "sdk"
+HAND_CATEGORY = "hand-asm"
+CATEGORIES = (
+    {"id": GAME_CATEGORY, "name": "Game code rebuilt in C"},
+    {"id": SDK_CATEGORY, "name": "PsyQ SDK (shown apart)"},
+    {"id": HAND_CATEGORY, "name": "Hand-written assembly (shown apart)"},
+)
 #: objdiff's own project schema; the generated file is not a tracked config.
 SCHEMA_URL = (
     "https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json"
@@ -53,22 +82,14 @@ SHT_SYMTAB = 2
 
 @dataclass(frozen=True)
 class Project:
-    """One checkout and the objdiff settings read from ``config/project.toml``."""
+    """One checkout and the Meson build directory the project and units live in."""
 
     root: Path
-    cfg: dict[str, Any]
-    match: re.Pattern[str]
-    draft: re.Pattern[str]
-    func_address: re.Pattern[str]
-    data_address: re.Pattern[str]
-
-    def path(self, key: str) -> Path:
-        """Return one configured path under the checkout root."""
-        return (self.root / self.cfg[key]).resolve()
-
-    def tool(self, key: str) -> str:
-        """Return one configured tool path, keeping the symlink's verb name."""
-        return str(self.root / self.cfg[key])
+    build_dir: Path
+    match: re.Pattern[str] = MATCH_MARKER
+    draft: re.Pattern[str] = DRAFT_RE
+    func_address: re.Pattern[str] = FUNC_ADDRESS
+    data_address: re.Pattern[str] = DATA_ADDRESS
 
     def command(self, argv: list[str]) -> str:
         """Run one tool and return stdout; a failure exits with its stderr."""
@@ -106,11 +127,8 @@ class Project:
         self, source: Path, output: Path, definitions: tuple[str, ...] = ()
     ) -> None:
         """Run the assembler over one source, with optional ``--defsym`` pins."""
-        argv = [
-            self.tool("assembler"),
-            *[str(flag) for flag in self.cfg["assembler_flags"]],
-        ]
-        argv.extend(f"-I{self.root / include}" for include in self.cfg["asm_include"])
+        argv = [str(self.root / ASSEMBLER), *ASSEMBLER_FLAGS]
+        argv.extend(f"-I{self.root / include}" for include in ASM_INCLUDE)
         argv.extend(definitions)
         argv.extend(["-o", str(output), str(source)])
         self.command(argv)
@@ -120,7 +138,7 @@ class Project:
     ) -> None:
         """Resolve data relocations to their addresses so a base constant can match."""
         definitions = []
-        for line in self.command([self.tool("nm"), "-u", str(output)]).splitlines():
+        for line in self.command([str(self.root / NM), "-u", str(output)]).splitlines():
             if not line.split():
                 continue
             name = line.split()[-1]
@@ -137,14 +155,13 @@ class Project:
         names = [
             fields[-1]
             for line in self.command(
-                [self.tool("nm"), "-g", "--defined-only", str(output)]
+                [str(self.root / NM), "-g", "--defined-only", str(output)]
             ).splitlines()
-            if (fields := line.split())
-            and fields[-1].endswith(str(self.cfg["nonmatching_suffix"]))
+            if (fields := line.split()) and fields[-1].endswith(NONMATCHING_SUFFIX)
         ]
         if names:
             argv = [
-                self.tool("objcopy"),
+                str(self.root / OBJCOPY),
                 *[f"--strip-symbol={name}" for name in names],
                 str(output),
             ]
@@ -161,9 +178,7 @@ class Project:
         )
         if prelude:
             pieces.insert(0, '.include "macro.inc"\n')
-        label = re.compile(
-            rf"^\s*{re.escape(str(self.cfg['data_label']))}\s+(\S+)", re.M
-        )
+        label = re.compile(rf"^\s*{re.escape(DATA_LABEL)}\s+(\S+)", re.M)
         hidden = sorted(
             {match.group(1) for piece in pieces for match in label.finditer(piece)}
         )
@@ -179,16 +194,16 @@ class Project:
     def source_asm(self, target: str, source: Path) -> tuple[list[Path], str]:
         """Return a C source's split asm files and its progress category."""
         stem = source.stem
-        hand = self.root / self.cfg["asm"] / target / self.cfg["hand_dir"] / f"{stem}.s"
+        hand = self.root / ASM / target / HAND_DIR / f"{stem}.s"
         if hand.is_file():
-            return [hand], str(self.cfg["hand_category"])
-        directory = self.root / self.cfg["asm"] / target
+            return [hand], HAND_CATEGORY
+        directory = self.root / ASM / target
         found = [directory / f"{stem}.s"] if (directory / f"{stem}.s").is_file() else []
-        data = directory / self.cfg["data_dir"]
+        data = directory / DATA_DIR
         if data.is_dir():
             found.extend(sorted(data.glob(f"{stem}.*.s")))
         found.extend(sorted(directory.glob(f"{stem}.*.s")))
-        return _unique(found), str(self.cfg["game_category"])
+        return _unique(found), GAME_CATEGORY
 
     def report_base(self, base: Path) -> tuple[Path, bool]:
         """Return the object the report compares and whether it holds ``INCLUDE_ASM`` bodies.
@@ -197,10 +212,10 @@ class Project:
         ``INCLUDE_ASM`` function, so those bytes would score 100%. The report copy
         overwrites each such body; an object without one is used as built.
         """
-        output = self.path("report_objects") / base.name
+        output = self.build_dir / "objdiff/base" / base.name
         if output.is_file() and base.stat().st_mtime <= output.stat().st_mtime:
             return output, True
-        suffix = str(self.cfg["nonmatching_suffix"])
+        suffix = NONMATCHING_SUFFIX
         data = base.read_bytes()
         if suffix.encode("ascii") in data:
             patched = bytearray(data)
@@ -223,7 +238,7 @@ class Project:
     def hand_complete(self, source: Path) -> bool:
         """Return True for a hand-written unit marked `HAND_ASM`."""
         text = source.read_text(encoding="utf-8", errors="replace")
-        return str(self.cfg["hand_marker"]) in text
+        return HAND_MARKER in text
 
 
 def _unlifted_ranges(data: bytes, suffix: str, path: Path) -> list[tuple[int, int]]:
@@ -275,23 +290,6 @@ def _relative(path: Path, start: Path) -> str:
     return Path(os.path.relpath(path, start)).as_posix()
 
 
-def _load_config(path: Path, build_dir: Path) -> dict[str, Any]:
-    """Return the ``[objdiff]`` table of one project config.
-
-    The Meson build directory holds the compiled objects, named flat, and the project
-    beside them; the report stays where the config puts it.
-    """
-    with path.open("rb") as handle:
-        document = tomllib.load(handle)
-    cfg = document["objdiff"]
-    cfg["base_objects"] = cfg["project_dir"] = str(build_dir.resolve())
-    cfg["target_objects"] = str(build_dir.resolve() / "objdiff/target")
-    cfg["report_objects"] = str(build_dir.resolve() / "objdiff/base")
-    cfg["sdk_objects"] = str(build_dir.resolve() / "objdiff/sdk")
-    cfg["project"] = str(build_dir.resolve() / "objdiff.json")
-    return cfg
-
-
 def _target_rows(root: Path) -> list[dict[str, Any]]:
     """Return every target with the identity its layout gives it."""
     return [
@@ -306,9 +304,9 @@ def _target_rows(root: Path) -> list[dict[str, Any]]:
     ]
 
 
-def _library_rows(root: Path, cfg: dict[str, Any]) -> list[dict[str, Any]]:
+def _library_rows(root: Path) -> list[dict[str, Any]]:
     """Return the SDK library rows, or an empty list when the file is absent."""
-    path = root / cfg["library_units"]
+    path = root / LIBRARY_UNITS
     if not path.is_file():
         return []
     return [
@@ -326,7 +324,7 @@ def _unit(
     metadata: dict[str, Any],
 ) -> dict[str, Any]:
     """Return one objdiff unit with paths relative to the project directory."""
-    project_dir = project.path("project_dir")
+    project_dir = project.build_dir
     unit: dict[str, Any] = {
         "name": name,
         "target_path": _relative(target, project_dir),
@@ -340,7 +338,7 @@ def _unit(
 def _base_object(project: Project, source: Path, relative: Path) -> Path:
     """Return the object objdiff compares against: the draft build's for a draft source."""
     draft = project.draft.search(source.read_text(encoding="utf-8", errors="replace"))
-    return project.path("base_objects") / source_object(relative, draft=bool(draft))
+    return project.build_dir / source_object(relative, draft=bool(draft))
 
 
 def _game_units(
@@ -354,7 +352,7 @@ def _game_units(
     source_dir = project.root / str(target["source_dir"])
     sources = sorted(source_dir.glob("*.c"))
     readable = _readable_data(project.root, target_id)
-    asm_dir = project.root / project.cfg["asm"] / target_id
+    asm_dir = project.root / ASM / target_id
     if not asm_dir.is_dir() and any(
         project.func_address.match(source.stem) for source in sources
     ):
@@ -371,7 +369,7 @@ def _game_units(
         if not asm:
             skipped += 1
             continue
-        relative = source.relative_to(project.path("src"))
+        relative = source.relative_to(project.root / SRC)
         base = _base_object(project, source, relative)
         if not base.is_file():
             raise SystemExit(
@@ -381,13 +379,15 @@ def _game_units(
             )
         broken = base.stat().st_size == 0
         unlifted = False
-        if not broken and category != str(project.cfg["hand_category"]):
+        if not broken and category != HAND_CATEGORY:
             base, unlifted = project.report_base(base)
-        target_object = project.path("target_objects") / relative.with_suffix(".o")
+        target_object = (
+            project.build_dir / "objdiff/target" / relative.with_suffix(".o")
+        )
         project.assemble(asm, target_object, readable)
         complete = (
             project.hand_complete(source)
-            if category == str(project.cfg["hand_category"])
+            if category == HAND_CATEGORY
             else project.marked(source) and not project.drafted(source)
         )
         metadata = {
@@ -400,9 +400,7 @@ def _game_units(
                 project,
                 f"{target_id}/{source.stem}",
                 target_object,
-                None
-                if broken or category == str(project.cfg["hand_category"])
-                else base,
+                None if broken or category == HAND_CATEGORY else base,
                 metadata,
             )
         )
@@ -433,7 +431,7 @@ def _unlifted_units(
 ) -> list[dict[str, Any]]:
     """Return reviewed code with no C source: target-only and never complete."""
     target_id = str(target["id"])
-    directory = project.root / project.cfg["asm"] / target_id
+    directory = project.root / ASM / target_id
     units: list[dict[str, Any]] = []
     if not directory.is_dir():
         return units
@@ -443,7 +441,7 @@ def _unlifted_units(
             continue
         if f"{target_id}@0x{int(match.group(1), 16):08X}" in library_ids:
             continue
-        output = project.path("target_objects") / target_id / f"{source.stem}.o"
+        output = project.build_dir / "objdiff/target" / target_id / f"{source.stem}.o"
         project.assemble([source], output)
         units.append(
             _unit(
@@ -453,7 +451,7 @@ def _unlifted_units(
                 None,
                 {
                     "complete": False,
-                    "progress_categories": [str(project.cfg["game_category"])],
+                    "progress_categories": [GAME_CATEGORY],
                 },
             )
         )
@@ -575,7 +573,7 @@ def _sdk_unit(
         offset += 0x800
     if size <= 0 or offset < 0 or offset + size > len(binary.data):
         return None
-    output = project.path("sdk_objects") / binary.target_id / f"{address:08X}.o"
+    output = project.build_dir / "objdiff/sdk" / binary.target_id / f"{address:08X}.o"
     if not output.is_file() or output.stat().st_mtime < binary.stamp:
         source = _sdk_source(row, binary.data[offset : offset + size], output)
         project.assemble([source], output)
@@ -588,7 +586,7 @@ def _sdk_unit(
         {
             "complete": True,
             "source_path": str(row.get("object") or ""),
-            "progress_categories": [str(project.cfg["sdk_category"])],
+            "progress_categories": [SDK_CATEGORY],
         },
     )
 
@@ -601,7 +599,7 @@ def _sdk_units(
     """Return one target-only unit per SDK library row, and each unit's library info."""
     if not library:
         return [], {}
-    library_stamp = (project.root / project.cfg["library_units"]).stat().st_mtime
+    library_stamp = (project.root / LIBRARY_UNITS).stat().st_mtime
     cache: dict[str, SdkBinary] = {}
     units: list[dict[str, Any]] = []
     names: set[str] = set()
@@ -634,20 +632,12 @@ def _write_json(path: Path, document: dict[str, Any]) -> None:
     path.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
 
 
-def generate(config_path: Path, root: Path | None, build_dir: Path) -> int:
+def generate(root: Path | None, build_dir: Path) -> int:
     """Write the objdiff project and print its unit counts."""
-    cfg = _load_config(config_path, build_dir)
-    base = root.resolve() if root is not None else config_path.resolve().parent.parent
-    project = Project(
-        base,
-        cfg,
-        re.compile(str(cfg["match_marker"]), re.MULTILINE),
-        DRAFT_RE,
-        re.compile(str(cfg["func_address"])),
-        re.compile(str(cfg["data_address"])),
-    )
+    base = root.resolve() if root is not None else ROOT
+    project = Project(base, build_dir.resolve())
     targets = _target_rows(base)
-    library = _library_rows(base, cfg)
+    library = _library_rows(base)
     library_ids = {str(row["id"]) for row in library}
     library_symbols = {
         (str(row["id"]).rsplit("@", 1)[0], str(row["symbol"]))
@@ -675,17 +665,15 @@ def generate(config_path: Path, root: Path | None, build_dir: Path) -> int:
         "build_target": False,
         "build_base": False,
         "units": units,
-        "progress_categories": [
-            {"id": str(category["id"]), "name": str(category["name"])}
-            for category in cfg["category"]
-        ],
+        "progress_categories": [dict(category) for category in CATEGORIES],
     }
-    _write_json(project.path("project"), document)
-    _write_json(project.path("project_dir") / "sdk.json", sdk_info)
+    _write_json(project.build_dir / "objdiff.json", document)
+    _write_json(project.build_dir / "sdk.json", sdk_info)
     counts = Counter(str(unit["metadata"]["progress_categories"][0]) for unit in units)
     sys.stdout.write(
-        f"objdiff: {len(units)} units ({counts['game']} game, {counts['sdk']} sdk, "
-        f"{counts['hand-asm']} hand-asm); {skipped} data-only sources without a target\n"
+        f"objdiff: {len(units)} units ({counts[GAME_CATEGORY]} game, "
+        f"{counts[SDK_CATEGORY]} sdk, {counts[HAND_CATEGORY]} hand-asm); "
+        f"{skipped} data-only sources without a target\n"
     )
     return 0
 
@@ -756,7 +744,7 @@ def _demote(project_file: Path, names: dict[str, str]) -> None:
     project_file.write_text(json.dumps(project, indent=2) + "\n", encoding="utf-8")
 
 
-def report(config_path: Path, root: Path | None, build_dir: Path) -> int:
+def report(root: Path | None, build_dir: Path) -> int:
     """Run objdiff's report step and stamp the report with its provenance.
 
     ``objdiff-cli report generate`` writes ``build/report.json``: its version,
@@ -767,9 +755,8 @@ def report(config_path: Path, root: Path | None, build_dir: Path) -> int:
     names with its unit count, so the image with no units is counted instead
     of absent. ``quality`` holds the debt totals of ``tools/quality.py``.
     """
-    cfg = _load_config(config_path, build_dir)
-    base = root.resolve() if root is not None else config_path.resolve().parent.parent
-    report_path = base / cfg["report"]
+    base = root.resolve() if root is not None else ROOT
+    report_path = base / REPORT
     found = subprocess.run(
         [str(base / "bin/internal/find-tool"), "objdiff-cli"],
         capture_output=True,
@@ -780,7 +767,7 @@ def report(config_path: Path, root: Path | None, build_dir: Path) -> int:
         raise SystemExit(
             "no working objdiff-cli on PATH; install it as docs/toolchain.md#matching-tools says"
         )
-    project_dir = base / cfg["project_dir"]
+    project_dir = build_dir.resolve()
 
     def generate() -> dict[str, Any]:
         """Run objdiff over the project and return the report it wrote."""
@@ -821,7 +808,7 @@ def report(config_path: Path, root: Path | None, build_dir: Path) -> int:
     data["provenance"] = {"commit": sha, "date": date}
     # objdiff drops unknown unit metadata, so the SDK library, member and linkage are
     # stamped here from the sidecar `generate` wrote.
-    sdk_path = base / cfg["project_dir"] / "sdk.json"
+    sdk_path = build_dir.resolve() / "sdk.json"
     sdk_info = json.loads(sdk_path.read_text(encoding="utf-8"))
     for unit in data.get("units", []):
         if unit["name"] in sdk_info:
@@ -844,15 +831,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     generate_parser = sub.add_parser("generate", help="write the objdiff project")
-    generate_parser.add_argument(
-        "--config", type=Path, default=Path("config/project.toml")
-    )
     generate_parser.add_argument("--root", type=Path)
     generate_parser.add_argument("--build-dir", type=Path, required=True)
     report_parser = sub.add_parser("report", help="write and stamp the progress report")
-    report_parser.add_argument(
-        "--config", type=Path, default=Path("config/project.toml")
-    )
     report_parser.add_argument("--root", type=Path)
     report_parser.add_argument("--build-dir", type=Path, required=True)
     return parser
@@ -862,8 +843,8 @@ def main(argv: list[str] | None = None) -> int:
     """Run one subcommand and return its exit status."""
     args = build_parser().parse_args(argv)
     if args.command == "generate":
-        return generate(args.config, args.root, args.build_dir)
-    return report(args.config, args.root, args.build_dir)
+        return generate(args.root, args.build_dir)
+    return report(args.root, args.build_dir)
 
 
 if __name__ == "__main__":

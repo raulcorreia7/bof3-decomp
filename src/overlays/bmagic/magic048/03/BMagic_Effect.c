@@ -28,7 +28,22 @@ INCLUDE_ASM(func_801EEF3C);
 
 INCLUDE_ASM(func_801EF05C);
 
-INCLUDE_ASM(func_801EF158);
+MATCH void func_801EF158(void) {
+    VECTOR pos;
+    u8     count;
+
+    pos.vx = (g_Task->unk_0C >> 9) - 0x4000;
+    pos.vy = (g_Task->unk_10 >> 9) - 0x4000;
+    pos.vz = g_Task->unk_14 >> 1;
+    func_800AF3A0(pos, 0x10);
+    g_Task->unk_09 = g_Task->unk_09 + 1;
+    count          = g_Task->timer - 1;
+    g_Task->timer  = count;
+    if (!(count & BYTE_MASK)) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF234);
 
