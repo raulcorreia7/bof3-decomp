@@ -143,18 +143,18 @@ MATCH void func_801EF4F0(void) {
     switch (g_Task->facing) {
         case 0:
             rot.vx = 0;
-            rot.vy = 0x1000 - (g_Task->unk_09 << 6);
+            rot.vy = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             break;
         case 1:
-            rot.vx = g_Task->unk_09 << 6;
+            rot.vx = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             rot.vy = 0;
             break;
         case 2:
             rot.vx = 0;
-            rot.vy = g_Task->unk_09 << 6;
+            rot.vy = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             break;
         case 3:
-            rot.vx = 0x1000 - (g_Task->unk_09 << 6);
+            rot.vx = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             rot.vy = 0;
             break;
     }
@@ -176,18 +176,18 @@ MATCH void func_801EF648(void) {
     switch (g_Task->facing) {
         case 0:
             rot.vx = 0;
-            rot.vy = g_Task->unk_09 << 6;
+            rot.vy = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             break;
         case 1:
-            rot.vx = 0x1000 - (g_Task->unk_09 << 6);
+            rot.vx = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             rot.vy = 0;
             break;
         case 2:
             rot.vx = 0;
-            rot.vy = 0x1000 - (g_Task->unk_09 << 6);
+            rot.vy = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             break;
         case 3:
-            rot.vx = g_Task->unk_09 << 6;
+            rot.vx = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
             rot.vy = 0;
             break;
     }
@@ -246,7 +246,7 @@ MATCH void func_801F00A8(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = g_Task->unk_09 << 6;
+    rot.vz = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
