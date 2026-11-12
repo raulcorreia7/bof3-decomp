@@ -1,6 +1,4 @@
-/* Draws the four rays of the sparkle around the effect point: each ray is a LINE_G2 from the centre in the
- * scratch halfwords D_1F800000/2 out to the rcos and rsin point at the frame angle plus its step, coloured from
- * the scratch colour halfwords D_1F800000.view.effect.params[4]-[6], and the effect point takes a DR_MODE cell and a 32-byte cell prim. */
+/* Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end. Every change must verify all member images. */
 /* func_801EF810 (magic070), func_801EF810 (magic071), func_801EF810 (magic072), func_801EFBF8 (magic073), func_801EFBE4 (magic074), func_801EF80C (magic162), func_801EF80C (magic168) */
 MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
     LINE_G2* prim;

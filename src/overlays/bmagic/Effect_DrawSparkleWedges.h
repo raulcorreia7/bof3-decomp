@@ -1,7 +1,4 @@
-/* Draws the four rays of the sparkle as LINE_G3 wedges around the effect point: each wedge runs from the centre
- * in the scratch halfwords D_1F800000/2 through the half-radius point to the point at the frame angle and the
- * radius, its corners white at the centre and coloured from the scratch colour halfwords D_1F800000.view.effect.params[4]-[6]; the effect
- * point takes a DR_MODE cell and a 32-byte cell prim. */
+/* Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius. Every change must verify all member images. */
 /* func_801EFA44 (magic070), func_801EFA44 (magic071), func_801EFA44 (magic072), func_801EFE2C (magic073), func_801EFE18 (magic074), func_801EFA40 (magic162), func_801EFA40 (magic168) */
 MATCH void Effect_DrawSparkleWedges(u16 angle, u16 radius) {
     LINE_G3* prim;
