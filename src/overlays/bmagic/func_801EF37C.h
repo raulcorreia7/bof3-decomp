@@ -9,9 +9,9 @@ MATCH void func_801EF37C(void) {
     if ((D_801F17B0->header.flags & BMAGIC_EFFECT_IN_USE) && D_801F17B0->header.step != 0) {
         func_801EFCD8();
         if (D_801F17B0->phase_0C & 3) {
-            func_801EF80C(g_FrameCount >> 1, D_801F17B0->unk_06);
+            Effect_DrawSparkleRays(g_FrameCount >> 1, D_801F17B0->unk_06);
             radius = D_801F17B0->unk_06;
-            func_801EFA40((g_FrameCount >> 1) + 4, radius + (radius >> 1));
+            Effect_DrawSparkleWedges((g_FrameCount >> 1) + 4, radius + (radius >> 1));
         }
     }
 }

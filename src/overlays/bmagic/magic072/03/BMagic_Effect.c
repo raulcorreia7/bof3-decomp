@@ -31,9 +31,9 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/func_801EF72C.h"
 
-#include "overlays/bmagic/func_801EF810.h"
+#include "overlays/bmagic/Effect_DrawSparkleRays.h"
 
-#include "overlays/bmagic/func_801EFA44.h"
+#include "overlays/bmagic/Effect_DrawSparkleWedges.h"
 
 INCLUDE_ASM(func_801EFCDC);
 
