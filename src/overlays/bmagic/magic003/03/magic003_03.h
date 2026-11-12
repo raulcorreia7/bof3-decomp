@@ -23,6 +23,10 @@ extern Magic003Steps D_801EEC04;
 
 void func_801EF324(void);
 
+void func_801EFD4C(void);
+
+void func_801EFEC8(void);
+
 void func_801EF708(void);
 
 extern Magic003SecondSteps D_801EEC18;
