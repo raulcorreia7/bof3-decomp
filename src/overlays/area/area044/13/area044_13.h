@@ -6,4 +6,10 @@
 
 #include "overlays/area/world01.h"
 
+extern u8 D_80147A61;
+extern u8 D_80147AF9;
+
+void func_801F2DF4(void);
+void func_801F318C(u8 arg0, u8 arg1);
+
 #endif
