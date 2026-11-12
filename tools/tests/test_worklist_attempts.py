@@ -5,12 +5,12 @@ from worklist import attempts
 
 
 def test_attempts_keep_each_record(tmp_path):
-    path = tmp_path / "attempts.tsv"
+    path = tmp_path / "attempts.jsonl"
     path.write_text(
-        "function\ttried\tfirst_diff\tscore\n"
-        "image@0x80000000\tloop\tload\t90%\n"
-        "image@0x80000000\tpointer\t\t\n"
-        "other@0x80000000\tbranch\t\t\n"
+        '{"function": "image@0x80000000", "tried": "loop", "first_diff": "load", "score": 90}\n'
+        '{"function": "image@0x80000000", "tried": "pointer", "first_diff": "", "score": null}\n'
+        '{"function": "other@0x80000000", "tried": "branch", "first_diff": "", "score": null}\n',
+        encoding="utf-8",
     )
     assert attempts(path) == {
         "image@0x80000000": "loop; load; 90% | pointer",
