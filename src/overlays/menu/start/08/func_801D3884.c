@@ -42,8 +42,8 @@ MATCH void func_801D3884(void) {
         g_MenuPanelTasks[14].handler = 6;
         g_MenuPanelTasks[14].mode    = 0xF;
         g_MenuPanelTasks[14].active  = 1;
-        g_MenuPanelTasks[14].pos.x   = 0xB4;
-        g_MenuPanelTasks[14].pos.y   = 0x3C;
+        g_MenuPanelTasks[14].pos.x   = 180;
+        g_MenuPanelTasks[14].pos.y   = 60;
         g_MenuPanelTasks[14].unk_0B  = 0;
         g_MenuPanelTasks[14].unk_0C  = 0xFF;
         state                        = &g_MenuStep.state;

@@ -34,7 +34,7 @@ INCLUDE_ASM(func_801EED04);
 MATCH void func_801EEF04(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 2), 2, g_Task);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        if ((g_FrameCount & 1) == 0) {
+        if ((g_FrameCount & 0x1) == 0) {
             g_Task->unk_5D = (RANDOM_MASK(3)) + 4;
             g_Task->unk_5E = (RANDOM_MASK(3)) + 4;
             g_Task->unk_5F = (RANDOM_MASK(3)) + 4;
@@ -135,7 +135,7 @@ MATCH void func_801EFAB0(void) {
     if (level >= 9) {
         g_Task->unk_14 = level - 1;
     }
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
         if (!(counter & BYTE_MASK)) {

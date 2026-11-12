@@ -31,7 +31,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
     } else {
         index  = (battler_index - 3u) & BYTE_MASK;
         offset = index * 280u;
-        if ((g_BattleEnemyBattlers[index].header.flags & 1u) == 0u) {
+        if ((g_BattleEnemyBattlers[index].header.flags & 0x1u) == 0u) {
             return false;
         }
         if ((g_BattleEnemyBattlers[index].status & (STATUS_PARALYZED | STATUS_CONFUSED | STATUS_SLEEPING | STATUS_UNK_8 | STATUS_KO)) != 0u) {

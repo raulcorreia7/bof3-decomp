@@ -22,7 +22,7 @@ MATCH void func_801F3320(void) {
     check                = g_Task;
     scratch->scale.y     = spin - 0x2000;
 
-    if ((check->unk_0A & 3) == 0) {
+    if ((check->unk_0A & 0x3) == 0) {
         check->unk_04 = 1;
     }
 

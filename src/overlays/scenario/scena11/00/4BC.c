@@ -100,11 +100,7 @@ MATCH void func_801F7BFC(void) {
             }
             SYS_SetFlag(g_SceneFlags, 5);
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            *state                = 0;
-            g_SceneState.state_04 = 0;
+            Scene_ClearScriptState(state);
             break;
     }
 }

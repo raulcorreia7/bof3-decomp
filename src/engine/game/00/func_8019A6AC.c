@@ -14,12 +14,12 @@ MATCH void func_8019A6AC(void) {
     Actor_StepAnimLoop();
     work = g_Task;
     if (work->unk_05 == 6) {
-        if ((work->timer & 1) != 0) {
+        if ((work->timer & 0x1) != 0) {
             work->screen_y++;
         }
         Area_AddActor();
     } else {
-        if ((work->timer & 1) != 0) {
+        if ((work->timer & 0x1) != 0) {
             work->vy--;
         }
         func_8014D290();

@@ -6,7 +6,7 @@ MATCH void func_801F59F4(void) {
     if (MENU_SELECTION_IDLE()) {
         D_80146865 = 0;
     } else {
-        SYS_SetFlag(g_SceneFlags, 0x1A);
+        SYS_SetFlag(g_SceneFlags, 26);
         D_80146865 = 1;
     }
 }

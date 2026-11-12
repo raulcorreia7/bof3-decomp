@@ -35,7 +35,7 @@ MATCH void func_801F73FC(void) {
 
 MATCH void func_801F7480(void) {
     func_801F7678(g_Task->timer);
-    if ((g_FrameCount & 1) == 0) {
+    if ((g_FrameCount & 0x1) == 0) {
         func_801F7AE4();
     }
     func_801F7C54();
@@ -48,7 +48,7 @@ MATCH void func_801F7480(void) {
 
 MATCH void func_801F752C(void) {
     func_801F7678(0xFF);
-    if ((g_FrameCount & 1) == 0) {
+    if ((g_FrameCount & 0x1) == 0) {
         func_801F7AE4();
     }
     func_801F7C54();
@@ -172,7 +172,7 @@ MATCH void func_801FCCFC(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x18);
+            Message_StartAreaMessage(24);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -194,7 +194,7 @@ MATCH void func_801FCD9C(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x34);
+            Message_StartAreaMessage(52);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -214,7 +214,7 @@ MATCH void func_801FCE30(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x34);
+            Message_StartAreaMessage(52);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -240,12 +240,12 @@ MATCH void func_801FD484(void) {
 }
 
 MATCH void func_801FD48C(void) {
-    if (SYS_TestFlag(g_SceneFlags, 0x14) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 20) == 0) {
         *g_ScriptVars = 0;
         Game_SetScriptActive();
         D_80146875 = 0;
         D_80146874 = 0x12;
-        SYS_SetFlag(g_SceneFlags, 0x14U);
+        SYS_SetFlag(g_SceneFlags, 20U);
     }
 }
 
@@ -302,7 +302,7 @@ MATCH void func_801FD6CC(Actor* actor) {
     actor->header.mode   = 4;
     actor->unk_7B        = 0;
     actor->unk_77        = 0xA;
-    g_Task->direction_08 = g_Game.members[0].facing ^ 4;
+    g_Task->direction_08 = g_Game.members[0].facing ^ 0x4;
     func_8015BAC4(g_Task->direction_08);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_ScriptVars[0]       = 0;
@@ -321,7 +321,7 @@ MATCH void func_801FD84C(Actor* actor) {
     actor->unk_7E        = 0;
     actor->unk_7B        = 0;
     actor->unk_77        = 0xB;
-    g_Task->direction_08 = g_Game.members[0].facing ^ 4;
+    g_Task->direction_08 = g_Game.members[0].facing ^ 0x4;
     func_8015BAC4(g_Task->direction_08);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_SceneState.step_05  = 16;

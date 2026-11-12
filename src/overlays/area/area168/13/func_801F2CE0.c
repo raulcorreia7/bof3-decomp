@@ -19,7 +19,7 @@ MATCH void func_801F2CE0(void) {
         work->vz      = z;
         func_801F2E10(&work->vx, &work->unk_18);
     }
-    if (SYS_TestFlag(g_SceneEventFlags, 0x91) != 0) {
+    if (SYS_TestFlag(g_SceneEventFlags, 145) != 0) {
         g_Task->header.mode = 2;
     }
 }

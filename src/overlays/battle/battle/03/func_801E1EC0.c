@@ -14,7 +14,7 @@ MATCH void func_801E1EC0(void) {
     WorkChunk*            end;
     volatile PartyMember* work;
 
-    effect_slot = Battle_AllocEffect(0, 0xF);
+    effect_slot = Battle_AllocEffect(0, 15);
     dst         = (WorkChunk*)&g_BattleEffects[effect_slot & BYTE_MASK];
     src         = (WorkChunk*)&BATTLE_ACTIVE_PARTY;
     end         = src + 7;

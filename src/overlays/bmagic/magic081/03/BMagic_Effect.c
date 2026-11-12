@@ -53,7 +53,7 @@ MATCH void func_801EF0B8(void) {
     g_Task->pos.x.fixed                        = g_BattleEffectBattler->pos.x.fixed + TO_COORD(2);
     g_Task->pos.y.fixed                        = g_BattleEffectBattler->pos.y.fixed;
     COORD_INT(g_Task->pos.z)                   = COORD_INT(g_BattleEffectBattler->pos.z);
-    slot                                       = Battle_AllocEffect(1, 0x42);
+    slot                                       = Battle_AllocEffect(1, 66);
     effect_index                               = slot & BYTE_MASK;
     task                                       = g_Task;
     g_BattleEffects[effect_index].header.mode  = 1;

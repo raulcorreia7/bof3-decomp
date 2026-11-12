@@ -23,7 +23,7 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
     for (n = 0; n < 10; n++, y += 13, text++) {
         if (*text != 0) {
             disabled = (u8)func_801AF5B0(task->unk_08, D_80148656, *text) == 0;
-            color    = -disabled & 7;
+            color    = -disabled & 0x7;
             if (n == task->flags) {
                 color = 2;
             }
@@ -41,9 +41,9 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
         }
     }
     label_x = task->pos.x + 0x4E - strlen((const char*)D_801ECC98[task->unk_0B]) * 4;
-    UI_DrawText(label_x, (task->pos.y + 7), 0, 0x10, (u8*)(D_801ECC98[task->unk_0B]));
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 1) ? g_MenuListTab1OnSprites : g_MenuListTab1OffSprites, 1);
+    UI_DrawText(label_x, (task->pos.y + 7), 0, 16, (u8*)(D_801ECC98[task->unk_0B]));
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 0x2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 0x1) ? g_MenuListTab1OnSprites : g_MenuListTab1OffSprites, 1);
     flags = task->unk_09;
     if (!(flags & MENU_LIST_FRAME_MASK)) {
         task->unk_09 = 0;

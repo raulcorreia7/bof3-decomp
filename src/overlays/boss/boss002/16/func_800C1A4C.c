@@ -12,6 +12,6 @@ MATCH void func_800C1A4C(void) {
     if (!((s32)limit < remaining)) {
         flags = &g_Battle.boss_flags;
         *flags |= 1;
-        work->hp = 0xFFFF;
+        work->hp = 65535;
     }
 }

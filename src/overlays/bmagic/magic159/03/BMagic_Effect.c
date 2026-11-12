@@ -24,7 +24,7 @@ MATCH void func_801EEC5C(void) {
     work->pos.z.fixed  = g_BattleSelectedActor->pos.z.fixed;
     work->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 0x58) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 88) & BYTE_MASK;
     target                             = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 8;

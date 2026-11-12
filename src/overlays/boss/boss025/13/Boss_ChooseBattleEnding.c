@@ -7,13 +7,13 @@ MATCH void Boss_ChooseBattleEnding(void) {
     BOSS_SEND_PARTY_TO_ENDING_POSE(1)
     BOSS_SEND_PARTY_TO_ENDING_POSE(2)
     flags = &g_Battle.boss_flags;
-    if (*flags & 1) {
+    if (*flags & 0x1) {
         D_80146875 = 0xF;
     }
-    if (*flags & 2) {
+    if (*flags & 0x2) {
         D_80146875 = 7;
     }
-    if (*flags & 4) {
+    if (*flags & 0x4) {
         D_80146875 = 0x14;
     }
     func_801DDF28();

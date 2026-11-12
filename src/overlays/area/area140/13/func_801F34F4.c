@@ -5,7 +5,7 @@ MATCH void func_801F34F4(void) {
 
     height                   = (u16)COORD_INT(g_Task->pos.z) + 0x10;
     COORD_INT(g_Task->pos.z) = height;
-    if (height >= 0x80) {
+    if (height >= 128) {
         Area_SetCellPalette((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y));
         Area_ClearCellPalette((s32)(s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         g_Task->header.step += 1;

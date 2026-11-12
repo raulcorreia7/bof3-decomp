@@ -12,7 +12,7 @@ MATCH void Menu_DrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, 
     s32      y_bottom;
 
     if (color != 0) {
-        shade = (((g_FrameCount & 8) ? (g_FrameCount & 6) : (~g_FrameCount & 6)) << 5) | 0x3F;
+        shade = (((g_FrameCount & 0x8) ? (g_FrameCount & 0x6) : (~g_FrameCount & 0x6)) << 5) | 0x3F;
     } else {
         shade = 0xFF;
     }

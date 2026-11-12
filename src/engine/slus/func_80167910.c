@@ -38,10 +38,10 @@ MATCH void func_80167910(void) {
     poly->x1 = sy + 7;
     poly->x2 = poly->x0;
     poly->x3 = poly->x1;
-    if (g_FrameCount & 8) {
-        poly->y0 = g_Task->screen_y - 27 + (((u32)g_FrameCount >> 1) & 3);
+    if (g_FrameCount & 0x8) {
+        poly->y0 = g_Task->screen_y - 27 + (((u32)g_FrameCount >> 1) & 0x3);
     } else {
-        poly->y0 = g_Task->screen_y - 24 - (((u32)g_FrameCount >> 1) & 3);
+        poly->y0 = g_Task->screen_y - 24 - (((u32)g_FrameCount >> 1) & 0x3);
     }
     poly->u0 = 204;
     poly->u1 = 204;
@@ -57,7 +57,7 @@ MATCH void func_80167910(void) {
     poly->v3    = poly->v1;
     poly->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     poly->clut  = 0x7802;
-    if (!(g_Task->param.unk_0B & 1)) {
+    if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
     } else {
         GFX_AddPrim(3, sizeof(POLY_FT4));
@@ -79,15 +79,15 @@ MATCH void func_80167910(void) {
         mode = 0x5E;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
-    if (!(g_Task->param.unk_0B & 1)) {
+    if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     } else {
         GFX_AddPrim(3, sizeof(DR_MODE));
     }
-    if (g_FrameCount & 8) {
-        radius = (s16)(0x38 - ((~((u32)g_FrameCount >> 1) & 3) * 2));
+    if (g_FrameCount & 0x8) {
+        radius = (s16)(0x38 - ((~((u32)g_FrameCount >> 1) & 0x3) * 2));
     } else {
-        radius = (s16)(0x38 - (g_FrameCount & 6));
+        radius = (s16)(0x38 - (g_FrameCount & 0x6));
     }
     for (i = 0; i < 32; i++) {
         angle            = i << 7;
@@ -114,7 +114,7 @@ MATCH void func_80167910(void) {
         prim[0x14] = 0;
         prim[0x15] = 0;
         prim[0x16] = 0;
-        if (!(g_Task->param.unk_0B & 1)) {
+        if (!(g_Task->param.unk_0B & 0x1)) {
             Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_G3));
         } else {
             GFX_AddPrim(3, sizeof(POLY_G3));
