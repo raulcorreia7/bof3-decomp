@@ -19,7 +19,8 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Draft and upload                         | m2c draft, then a decomp.me scratch with the project flags               | [m2c](../docs/toolchain.md#m2c), [decomp.me](../docs/decomp-me.md) |
 | Permute a near match                     | `tools/permuter_import.py src/<path>/<Name>.c`                           | [permuter](../docs/toolchain.md#permuter)                 |
 | Find a template for an assembly function | `tools/template_diff.py <target>@<func>`                                 | [template diff](#templates)                               |
-| Try templates in batch                   | `tools/template_try.py rows.tsv`                                         | [template diff](#templates)                               |
+| Try the closest template for one function | `tools/template_try.py <target>@<func>`                                 | [template diff](#templates)                               |
+| Try templates in batch                   | `tools/template_try.py rows.tsv`                                         | same                                                      |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
 | Draft open functions with m2c, keep exact | `tools/m2c_sweep.py --sample 200`, `tools/m2c_sweep.py --image <image>` | [m2c sweep](#m2c-sweep)                                   |
 | Write the seed bundle of one function    | `tools/seed.py <target>@<func>`                                          | [m2c sweep](#m2c-sweep)                                   |
@@ -54,7 +55,8 @@ tools/template_diff.py emi/plchar/plp016/00@func_801CF610
 tools/template_diff.py <target>@<func> <template target>@<template func>
 ```
 
-`template_try.py` takes rows of `TARGET@NAME<TAB>TEMPLATE@NAME` (`dups.py near --full` writes them,
+`template_try.py` takes one function ref, `tools/template_try.py <target>@<func>`, and tries its
+closest template; or rows of `TARGET@NAME<TAB>TEMPLATE@NAME` (`dups.py near --full` writes them,
 cheapest first). It lines up the template's instructions with the target's. Where only a
 relocation symbol differs, it names the target's symbol in the template's C; where only an
 immediate differs and that literal (or the numeric macro that holds it) occurs once, it writes the

@@ -6,9 +6,10 @@
 One row per `INCLUDE_ASM` function; a `HAND_ASM` unit is done and has no row. The route
 is the cheapest known way in, in the order docs/matching.md tries them:
 
-    template0   a matched template with no differing instruction: tools/template_try.py
+    template0   a matched template with no differing instruction: tools/template_try.py REF
     generator   a mechanical shape that tools/gen_body.py can write a body for
-    template    a template with a few differing instructions: tools/template_diff.py
+    template    a template with a few differing instructions: tools/template_try.py REF,
+                or tools/template_diff.py REF to see them
     plain       no known route: m2c draft, diagnose loop, permuter
 
 A function recorded in `config/attempts.tsv` sorts after the untried ones of
