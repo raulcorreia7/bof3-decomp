@@ -33,6 +33,6 @@
         packet->r1 = packet->g1 = packet->b1 = 0;                    \
         packet->r0 = packet->g0 = packet->b0 = shade;                \
         GFX_AddPrim((LAYER), sizeof(POLY_G3));                       \
-    } while ((u16)angle < 0x1000);
+    } while ((u16)angle < ONE);
 
 #endif
