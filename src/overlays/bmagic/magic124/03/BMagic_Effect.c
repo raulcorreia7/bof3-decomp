@@ -32,7 +32,31 @@ MATCH void func_801EF268(void) {
 /* func_801EF270 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EF2B4);
+MATCH void func_801EF2B4(void) {
+    u8           slot;
+    PartyMember* battler;
+
+    SYS_DISPATCH_TASK(g_BMagicEffectModes + 2, 2, g_Task);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        g_Task->param.unk_0B++;
+        func_801EF6E8();
+        if ((g_Task->param.unk_0B & 3) == 0) {
+            if (g_Task->header.step == 1) {
+                if (g_Task->timer != 0) {
+                    slot = BMagic_AllocEffect();
+                    if (slot != 0xFF) {
+                        battler                                = g_BattleEffectBattler;
+                        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 1;
+                        BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
+                        BMAGIC_EFFECT_SLOTS[slot].unk_2E       = D_1F800000.view.effect.params[4];
+                        BMAGIC_EFFECT_SLOTS[slot].unk_30       = D_1F800000.view.effect.params[5];
+                        g_BattleEffectBattler->param.unk_0B++;
+                    }
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EF3FC);
 

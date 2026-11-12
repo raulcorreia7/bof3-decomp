@@ -62,7 +62,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
         }
     }
     Fishing_SetDrawMode(0, 2);
-    Fishing_DrawSprite(0x10, 2, 135, 180);
+    Fishing_DrawSprite(16, 2, 135, 180);
     Fishing_DrawGaugeFill(136, 203, ((FISHING_STATE->pos_x_0C * 96) / 255), 2);
     if (D_80145E92[0] == 3) {
         FISHING_STATE->origin_x_2E = 0xB8;

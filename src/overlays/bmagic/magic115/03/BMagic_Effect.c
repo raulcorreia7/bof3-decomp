@@ -37,7 +37,24 @@ INCLUDE_ASM(func_801EF130);
 
 INCLUDE_ASM(func_801EF27C);
 
-INCLUDE_ASM(func_801EF49C);
+MATCH void func_801EF49C(void) {
+    s32  value = -0x80;
+    s32* d;
+    u8   tick;
+
+    g_Task->unk_5D -= 4;
+    g_Task->unk_5E -= 4;
+    g_Task->unk_5F -= 4;
+    Actor_StepAnimLoop();
+    tick                = g_Task->unk_09 + 1;
+    g_Task->unk_09      = tick;
+    d                   = &D_1F800000;
+    d[0]                = BMAGIC_PHASE_ANGLE(tick & BMAGIC_PHASE_MASK);
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(d[0]), 0xC000);
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(d[0]), 0xC000);
+    g_Task->unk_5D      = value;
+    g_Task->header.step += 1;
+}
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 

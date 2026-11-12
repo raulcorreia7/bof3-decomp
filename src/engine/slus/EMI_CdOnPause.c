@@ -8,11 +8,11 @@ MATCH void EMI_CdOnPause(void) {
         return;
     }
     D_8014648A = 8;
-    if (D_8014648B & 1) {
+    if (D_8014648B & 0x1) {
         D_8014648A = 1;
         return;
     }
-    if (D_8014648B & 2) {
+    if (D_8014648B & 0x2) {
         CdReadyCallback(NULL);
         g_EmiStreamState = 2;
     }

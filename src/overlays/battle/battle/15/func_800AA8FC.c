@@ -17,7 +17,7 @@ MATCH s32 func_800AA8FC(void) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0) {
             off   = slot * BATTLE_PARTY_STRIDE;
             flags = g_Game.members[slot].u.turn.damage_flags.value;
-            if (flags & 8) {
+            if (flags & 0x8) {
                 if ((func_800AA874((u8)g_Battle.action->unk_02) & BYTE_MASK) == 0) {
                     kind = g_Battle.action->unk_02;
                     if (D_801CA71C[kind].mask & 0x200) {

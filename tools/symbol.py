@@ -16,12 +16,14 @@
     tools/symbol.py records [--jsonl]
     tools/symbol.py values --scan [--jsonl]
 
-`add` writes one row of config/symbols.toml in address order.
+`add` writes one row of config/symbols.toml in address order. The image is a folder under
+`config/` that holds a `splat.yaml`; any other id is refused.
 
 `rename` changes a function or global in every tracked file of the scope: the definition, each
 prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). It writes the
 row of config/symbols.toml: a new row for an address name (`--source` describes the symbol), or the
-renamed key of an existing row. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
+renamed key of an existing row. Naming an address replaces the row already keyed with its address
+name, so no key repeats. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
 above its definition and declaration. A named symbol is one name in every image: with no
 `--image` its row is renamed in every table that has it. An address name is unique only per
 image, so give `--image` once per image that holds the twin; `--local` limits the files to those
@@ -140,6 +142,13 @@ def grep_files(word: str, scope: list[str]) -> list[str]:
 
 def add(args: argparse.Namespace) -> int:
     """Insert one row."""
+    if not (ROOT / "config" / args.image / "splat.yaml").is_file():
+        print(
+            f"symbol: no image {args.image}; "
+            "use a folder id under config/ that holds a splat.yaml",
+            file=sys.stderr,
+        )
+        return 2
     addr = int(args.addr, 16)
     row = symtab.format_row(
         args.name, addr, type=args.type, size=int(args.size, 0) if args.size else None,
@@ -336,6 +345,9 @@ def rename(args: argparse.Namespace) -> int:
             source=args.source,
         )
         for image in images:
+            # A row already keyed with the address name would be rewritten by the source
+            # substitution below and repeat the new key.
+            text = symtab.remove_row(text, image, old) or text
             text = symtab.add_row(text, image, new, row, addr)
     else:
         for image in images:
@@ -1762,7 +1774,6 @@ VALUE_ANGLE_CONSTANTS = (
     (2048, "ANGLE_180"),
     (3072, "ANGLE_270"),
 )
-VALUE_FIXED_CONSTANTS = ((0x10000, "ONE"), (0x8000, "ONE / 2"), (0x4000, "ONE / 4"))
 VALUE_ALL_ONES = {1: "BYTE_MASK", 2: "HALF_MASK"}
 
 
@@ -2418,10 +2429,6 @@ def _value_role_constant(
     if signal.role == "angle":
         for angle, name in VALUE_ANGLE_CONSTANTS:
             if angle == value and name in index["names"]:
-                return name, ""
-    if signal.role == "fixed":
-        for fixed, name in VALUE_FIXED_CONSTANTS:
-            if fixed == value and name in index["names"]:
                 return name, ""
     if signal.role == "index" and value == 0xFF and "GAME_NONE" in index["names"]:
         return "GAME_NONE", ""

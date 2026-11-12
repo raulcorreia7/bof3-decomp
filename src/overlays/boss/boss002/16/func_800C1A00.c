@@ -5,7 +5,7 @@ MATCH void func_800C1A00(void) {
     EnemyBattler* work;
 
     work = g_BattleCurrentEnemy;
-    if (work->hp == 0xFFFF) {
+    if (work->hp == 65535) {
         g_Battle.action_type = 3;
         g_Task->unk_04       = 0;
         SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_ENEMY, 2));

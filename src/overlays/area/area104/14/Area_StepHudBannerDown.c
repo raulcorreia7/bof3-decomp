@@ -9,5 +9,5 @@ MATCH void Area_StepHudBannerDown(void) {
     if (D_801454F2 == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE && GAME_SCRIPT_ACTIVE() == 0) {
         g_Task->unk_03 = 1;
     }
-    Area_DrawHudBanner(0x5C, g_Task->screen_y);
+    Area_DrawHudBanner(92, g_Task->screen_y);
 }

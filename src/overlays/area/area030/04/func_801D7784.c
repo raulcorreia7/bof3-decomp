@@ -10,42 +10,42 @@ MATCH void func_801D7784(u16 list_x, u16 list_y) {
     s16 y;
 
     Fishing_SetDrawMode(9, 1);
-    Fishing_DrawSprite(0x25, 1, list_x, list_y);
+    Fishing_DrawSprite(37, 1, list_x, list_y);
 
     for (i = 0; i < 23; i++) {
         offset = i * 8 + 32;
-        Fishing_DrawSprite(0x26, 1, (list_x + offset), list_y);
+        Fishing_DrawSprite(38, 1, (list_x + offset), list_y);
     }
 
-    Fishing_DrawSprite(0x27, 1, (list_x + 216), list_y);
+    Fishing_DrawSprite(39, 1, (list_x + 216), list_y);
 
     x = list_x + 240;
-    Fishing_DrawSprite(0x28, 1, x, list_y);
+    Fishing_DrawSprite(40, 1, x, list_y);
 
     y = list_y + 24;
     Fishing_DrawWindowFill(list_x, y, 120, 0);
     Fishing_DrawWindowFill(x, y, 120, 1);
 
-    Fishing_DrawSprite(0x2A, 1, list_x, (list_y + 144));
+    Fishing_DrawSprite(42, 1, list_x, (list_y + 144));
 
     i      = 0;
     offset = 8;
     do {
-        Fishing_DrawSprite(0x2B, 1, (list_x + offset), (list_y + 144));
+        Fishing_DrawSprite(43, 1, (list_x + offset), (list_y + 144));
         i += 1;
         offset += 8;
     } while (i < 23);
 
-    Fishing_DrawSprite(0x2C, 1, (list_x + 192), (list_y + 144));
+    Fishing_DrawSprite(44, 1, (list_x + 192), (list_y + 144));
 
     i      = 0;
     offset = 200;
     do {
-        Fishing_DrawSprite(0x2D, 1, (list_x + offset), (list_y + 144));
+        Fishing_DrawSprite(45, 1, (list_x + offset), (list_y + 144));
         i += 1;
         offset += 8;
     } while (i < 3);
 
-    Fishing_DrawSprite(0x2E, 1, (list_x + 224), (list_y + 144));
-    Fishing_DrawSprite(0x2F, 1, (list_x + 231), (list_y + 144));
+    Fishing_DrawSprite(46, 1, (list_x + 224), (list_y + 144));
+    Fishing_DrawSprite(47, 1, (list_x + 231), (list_y + 144));
 }

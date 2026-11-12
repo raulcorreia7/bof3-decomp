@@ -28,7 +28,7 @@ MATCH void func_801DD9A0(void) {
         }
     }
     i = 1;
-    if (4 & g_FrameCount) {
+    if (0x4 & g_FrameCount) {
         sxy_out     = (long*)sxy;
         depth_out   = &depth;
         flag_out    = &flag;

@@ -74,7 +74,20 @@ MATCH void func_801EF31C(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF404);
+MATCH void func_801EF404(void) {
+    s32 i;
+
+    BMAGIC_MARK_SELECTED_SIDE(2);
+    if (g_Battle.encounter == 55) {
+        g_Task->unk_29 = 7;
+    } else {
+        g_Task->unk_29 = 3;
+    }
+    g_Task->param.unk_0B = 1;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF578(void) {
     u8 timer_next;
@@ -96,7 +109,18 @@ MATCH void func_801EF628(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF67C);
+MATCH void func_801EF67C(void) {
+    s32 i;
+
+    if (g_Task->unk_09 != 0) {
+        g_Task->unk_09 -= 2;
+    }
+    if (--g_Task->timer == 0) {
+        BMAGIC_MARK_SELECTED_SIDE(4);
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF7D4);
 
@@ -125,7 +149,7 @@ MATCH void func_801F0140(void) {
     g_Task->scale.y += 0x800;
     g_Task->pos.x.fixed += rsin(g_Task->unk_14) * g_Task->unk_0C;
     g_Task->pos.y.fixed += rcos(g_Task->unk_14) * g_Task->unk_0C;
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         value = g_Task->unk_0C;
         if (value == 4) {
             g_Task->header.step += 1;

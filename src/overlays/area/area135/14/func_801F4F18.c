@@ -8,7 +8,7 @@ MATCH void func_801F4F18(void) {
     g_ScriptState->cursor -= 2;
     slot             = Actor_FindFree();
     SP_REF(s16, 0x0) = slot;
-    if (slot == 0xFF) {
+    if (slot == GAME_NONE) {
         return;
     }
     func_801F5F28();
