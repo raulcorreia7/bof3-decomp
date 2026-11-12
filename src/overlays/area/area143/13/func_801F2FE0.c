@@ -11,7 +11,7 @@ MATCH void func_801F2FE0(void) {
         spark->live   = 1;
         spark->unk_01 = 0;
         spark->unk_02 = rand() | 0xF0;
-        spark->unk_03 = rand() & 0x1F;
+        spark->unk_03 = RANDOM_MASK(0x1F);
         spark->x      = D_801F42E8[i][0] << 16;
         spark->y      = D_801F42E8[i][1] << 16;
         spark->z      = Area_SampleHeight(spark->x, spark->y) << 16;

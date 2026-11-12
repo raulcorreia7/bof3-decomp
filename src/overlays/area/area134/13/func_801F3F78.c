@@ -25,7 +25,7 @@ MATCH void func_801F3F78(void) {
     }
     TASK_SET(actor);
     if (*state == 0) {
-        g_Task->timer       = D_801F5724[0x10 + (rand() & 0xF)];
+        g_Task->timer       = D_801F5724[0x10 + (RANDOM_MASK(0xF))];
         g_Task->header.mode = 3;
         return;
     }
