@@ -386,7 +386,7 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     SPRT* prim;
     u16   tpage;
 
-    tpage = GetTPage(2, blend & BYTE_MASK, 0x340, 0x100);
+    tpage = GetTPage(2, blend & BYTE_MASK, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (SPRT*)g_GfxPrimCursor;
