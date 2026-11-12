@@ -5,8 +5,8 @@
 #
 # Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, externs, include-asm, markers, names, addrs, kept, format-check,
 # meson test, typeloss, quality (no touched file gets worse), subsystems (writes the debt table to build/subsystems.md; never fails). BASE_REF is what the work is compared with; it defaults to the newest of
-# public/main, origin/main and main. Each log is build/pre-push/<check>.log. Format first with
-# `meson compile -C build/meson format`.
+# public/main, origin/main and main; comparisons use the merge base with HEAD. Each log is
+# build/pre-push/<check>.log. Format first with `meson compile -C build/meson format`.
 set -u
 case "${1:-}" in
 -h | --help) sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
@@ -22,6 +22,11 @@ if [ -z "$ref" ]; then
 	ref=$(newest_base_ref)
 fi
 [ -n "$ref" ] || { echo "pre-push: no public/main or origin/main to compare with" >&2; exit 1; }
+
+# A branch may be behind the base ref: compare the merge base, so commits that landed after the
+# branch started do not read as work the branch removed. Checks that take the merge base themselves
+# still get $ref; typeloss.py does not, so it gets $base.
+base=$(git merge-base "$ref" HEAD 2>/dev/null) || base=$ref
 
 status=0
 # Each check runs as a background job and writes its exit code beside its log. The Ninja
@@ -72,7 +77,7 @@ start externs tools/check_externs.sh "$ref"
 start include-asm tools/check_asm.sh "$ref"
 start format-check tools/format.sh --check
 start test meson test -C "$bld" --no-rebuild --print-errorlogs
-start typeloss python3 tools/typeloss.py "$ref" HEAD
+start typeloss python3 tools/typeloss.py "$base" HEAD
 start markers python3 tools/check_markers.py
 start names python3 tools/check_names.py
 start addrs python3 tools/check_addrs.py "$ref" HEAD
