@@ -212,8 +212,7 @@ MATCH void func_801EFD10(void) {
 MATCH void func_801EFD88(void) {
     TILE* tile;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(2, getTPage(0, 1, 320, 256));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
@@ -226,6 +225,5 @@ MATCH void func_801EFD88(void) {
     tile->g0     = SCREEN_SHADE;
     tile->b0     = SCREEN_SHADE;
     GFX_AddPrim(2, sizeof(TILE));
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, 320, 256), 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddDitheredDrawMode(2, getTPage(0, 0, 320, 256));
 }
