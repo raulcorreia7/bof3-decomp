@@ -342,3 +342,299 @@ def test_a_caller_that_branches_on_the_result_proves_a_bool() -> None:
     caller = one(function_text)
     call = asmtext.Call("Is_Ready", 0x801D1000, [])
     assert symbol._v0_after_call(caller, call) == "bool"
+
+
+def test_a_value_consumed_by_the_return_delay_slot_is_not_a_return() -> None:
+    function_text = function(
+        "Void",
+        0x14,
+        [
+            (0x801D1000, "lbu", "$v0, 0x3($v1)"),
+            (0x801D1004, "addiu", "$v0, $v0, 0x1"),
+            (0x801D1008, "jr", "$ra"),
+            (0x801D100C, "sb", "$v0, 0x3($v1)"),
+        ],
+    )
+    facts = asmtext.decode(one(function_text), {}, lambda address: None)
+    assert facts.return_writes == []
+
+
+def test_a_delay_slot_write_that_targets_the_epilogue_is_a_return() -> None:
+    function_text = function(
+        "Value",
+        0x24,
+        [
+            (0x801D1000, "bnez", "$a0, .L801D1014"),
+            (0x801D1004, "addu", "$v0, $a1, $zero"),
+            (0x801D1008, "nop", ""),
+            (0x801D100C, "j", ".L801D1014"),
+            (0x801D1010, "nop", ""),
+            (0x801D1014, "lw", "$ra, 0x10($sp)"),
+            (0x801D1018, "addiu", "$sp, $sp, 0x18"),
+            (0x801D101C, "jr", "$ra"),
+            (0x801D1020, "nop", ""),
+        ],
+    )
+    facts = asmtext.decode(one(function_text), {}, lambda address: None)
+    assert facts.return_writes == [("addu", "$v0, $a1, $zero")]
+    assert not facts.ambiguous_return
+
+
+def test_a_loop_delay_slot_that_writes_v0_makes_the_return_ambiguous() -> None:
+    function_text = function(
+        "Loop",
+        0x20,
+        [
+            (0x801D1000, "andi", "$v0, $a0, 0xFF"),
+            (0x801D1004, "sltiu", "$v0, $v0, 0x2"),
+            (0x801D1008, "bnez", "$v0, .L801D1000"),
+            (0x801D100C, "andi", "$v0, $a1, 0xFF"),
+            (0x801D1010, "lw", "$ra, 0x10($sp)"),
+            (0x801D1014, "addiu", "$sp, $sp, 0x18"),
+            (0x801D1018, "jr", "$ra"),
+            (0x801D101C, "nop", ""),
+        ],
+    )
+    facts = asmtext.decode(one(function_text), {}, lambda address: None)
+    assert facts.return_writes == []
+    assert facts.ambiguous_return
+
+
+def test_a_stack_argument_used_as_a_base_is_a_pointer() -> None:
+    function_text = function(
+        "StackPointer",
+        0x20,
+        [
+            (0x801D1000, "addiu", "$sp, $sp, -0x20"),
+            (0x801D1004, "lw", "$t0, 0x30($sp)"),
+            (0x801D1008, "lw", "$v0, 0x4($t0)"),
+            (0x801D100C, "jr", "$ra"),
+            (0x801D1010, "nop", ""),
+        ],
+    )
+    facts = asmtext.decode(one(function_text), {}, lambda address: None)
+    assert facts.stack_arguments == 1
+    assert facts.stack_pointers == {0}
+
+
+def tree_with(*texts: str):
+    from bof3.source import decls
+
+    return decls.Tree({f"h{index}.h": text for index, text in enumerate(texts)})
+
+
+def test_a_pointer_forwarded_to_a_declared_pointer_parameter_is_proven() -> None:
+    caller_text = function(
+        "Forward",
+        0x20,
+        [
+            (0x801D1000, "addu", "$a1, $a0, $zero"),
+            (0x801D1004, "jal", "Callee"),
+            (0x801D1008, "nop", ""),
+            (0x801D100C, "jr", "$ra"),
+            (0x801D1010, "nop", ""),
+        ],
+    )
+    caller = one(caller_text)
+    facts = asmtext.decode(caller, {}, lambda address: None)
+    tree = tree_with(
+        "typedef struct Record { u8 a; } Record;", "void Callee(s32 n, Record* r);"
+    )
+    assert symbol._forwarded_pointer(caller, facts, 0, tree, {"h1.h"}) == "Record"
+
+
+def test_a_pointer_result_reaching_an_argument_is_a_pointer() -> None:
+    caller_text = function(
+        "Pass",
+        0x28,
+        [
+            (0x801D1000, "jal", "Message_GetText"),
+            (0x801D1004, "nop", ""),
+            (0x801D1008, "addiu", "$a0, $zero, 0x2"),
+            (0x801D100C, "addiu", "$a1, $zero, 0x30"),
+            (0x801D1010, "jal", "AddMessage"),
+            (0x801D1014, "addu", "$a2, $v0, $zero"),
+            (0x801D1018, "jr", "$ra"),
+            (0x801D101C, "nop", ""),
+        ],
+    )
+    caller = one(caller_text)
+    facts = asmtext.decode(caller, {}, lambda address: None)
+    call = next(call for call in facts.calls if call.callee == "AddMessage")
+    tree = tree_with(
+        "u8* Message_GetText(s32 id);", "void AddMessage(s32 a, s32 b, u8* text);"
+    )
+    assert symbol._caller_argument_kind(caller, call, 2, tree, {"h1.h"}) == "pointer"
+
+
+def test_a_narrow_declared_argument_caps_a_proven_row_at_likely() -> None:
+    function_text = function(
+        "Take",
+        0x20,
+        [
+            (0x801D1000, "andi", "$a0, $a0, 0xFF"),
+            (0x801D1004, "jr", "$ra"),
+            (0x801D1008, "nop", ""),
+        ],
+    )
+    target = one(function_text)
+    facts = asmtext.decode(target, {}, lambda address: None)
+    caller_text = function(
+        "Caller",
+        0x18,
+        [
+            (0x801D1000, "addiu", "$a0, $zero, 0x4"),
+            (0x801D1004, "jal", "Take"),
+            (0x801D1008, "nop", ""),
+            (0x801D100C, "jr", "$ra"),
+            (0x801D1010, "nop", ""),
+        ],
+    )
+    caller = one(caller_text)
+    tree = tree_with("void Take(u8 value);")
+    row = symbol._function_signature(
+        target,
+        facts,
+        [(caller, asmtext.Call("Take", 0x801D1004, [4]))],
+        None,
+        tree,
+        {"h0.h"},
+    )
+    assert row["args"][0]["kind"] == "u8"
+    assert row["confidence"] == "likely"
+
+
+def fake_manifests():
+    from types import SimpleNamespace
+
+    return {
+        "emi/test/00": SimpleNamespace(source_dir="src/overlays/battle/test/00"),
+        "emi/menu/00": SimpleNamespace(source_dir="src/overlays/menu/00"),
+        "emi/etc/game/00": SimpleNamespace(source_dir="src/engine/game/00"),
+    }
+
+
+def test_three_callers_move_a_function_to_their_system() -> None:
+    function = asmtext.Function(
+        "emi/test/00", "func_801F0000", 0x801F0000, 4, "asm/x.s"
+    )
+    facts = asmtext.Facts()
+    callers = {
+        ("emi/test/00", "func_801F0000"): [
+            (asmtext.Function("emi/test/00", "Menu_First", 0x801F1000, 4, "x"), None),
+            (asmtext.Function("emi/test/00", "Menu_Second", 0x801F2000, 4, "x"), None),
+            (asmtext.Function("emi/menu/00", "Menu_Third", 0x801F3000, 4, "x"), None),
+        ]
+    }
+    rules = symbol._function_candidates(
+        function,
+        facts,
+        None,
+        fake_manifests(),
+        callers,
+        {},
+        {},
+        None,
+        None,
+        "Battle",
+        False,
+    )
+    assert any(line.startswith("rule a") for line in rules["Menu"])
+
+
+def test_a_single_writer_with_foreign_readers_moves_a_function() -> None:
+    function = asmtext.Function(
+        "emi/test/00", "func_801F0000", 0x801F0000, 4, "asm/x.s"
+    )
+    facts = asmtext.Facts(
+        accesses=[
+            asmtext.Access(
+                "g_MenuChoice", "emi/test/00", 0, 4, None, "sw", 0x801F0000, True
+            )
+        ]
+    )
+    key = ("g_MenuChoice", 0x801F4000)
+
+    class Index:
+        def resolve(self, image, name):
+            from types import SimpleNamespace
+
+            return SimpleNamespace(addr=0x801F4000)
+
+    writers = {key: {("emi/test/00", "func_801F0000")}}
+    readers = {key: {("emi/menu/00", "Menu_Read")}}
+    rules = symbol._function_candidates(
+        function,
+        facts,
+        Index(),
+        fake_manifests(),
+        {},
+        writers,
+        readers,
+        None,
+        None,
+        "Battle",
+        False,
+    )
+    assert any(line.startswith("rule b") for line in rules["Menu"])
+
+
+def test_a_function_between_two_system_functions_moves_with_no_local_caller() -> None:
+    function = asmtext.Function(
+        "emi/test/00", "func_801F0000", 0x801F0000, 4, "asm/x.s"
+    )
+    previous = asmtext.Function("emi/test/00", "Menu_Left", 0x801EF000, 4, "asm/x.s")
+    following = asmtext.Function("emi/test/00", "Menu_Right", 0x801F1000, 4, "asm/x.s")
+    rules = symbol._function_candidates(
+        function,
+        asmtext.Facts(),
+        None,
+        fake_manifests(),
+        {},
+        {},
+        {},
+        previous,
+        following,
+        "Battle",
+        True,
+    )
+    assert any(line.startswith("rule c") for line in rules["Menu"])
+
+
+def test_an_overlay_local_function_ignores_caller_and_writer_rules() -> None:
+    function = asmtext.Function("emi/test/00", "Battle_Step", 0x801F0000, 4, "asm/x.s")
+    facts = asmtext.Facts(
+        accesses=[
+            asmtext.Access("g_MenuChoice", "emi/test/00", 0, 4, None, "sw", 0, True)
+        ]
+    )
+
+    class Index:
+        def resolve(self, image, name):
+            from types import SimpleNamespace
+
+            return SimpleNamespace(addr=0x801F4000)
+
+    callers = {
+        ("emi/test/00", "Battle_Step"): [
+            (asmtext.Function("emi/test/00", "Menu_One", 0x801F1000, 4, "x"), None),
+            (asmtext.Function("emi/test/00", "Menu_Two", 0x801F2000, 4, "x"), None),
+            (asmtext.Function("emi/test/00", "Menu_Three", 0x801F3000, 4, "x"), None),
+        ]
+    }
+    writers = {("g_MenuChoice", 0x801F4000): {("emi/test/00", "Battle_Step")}}
+    readers = {("g_MenuChoice", 0x801F4000): {("emi/menu/00", "Menu_Read")}}
+    rules = symbol._function_candidates(
+        function,
+        facts,
+        Index(),
+        fake_manifests(),
+        callers,
+        writers,
+        readers,
+        None,
+        None,
+        "Battle",
+        True,
+    )
+    assert rules == {}

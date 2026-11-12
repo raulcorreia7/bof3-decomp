@@ -18,6 +18,7 @@ _HEADER = re.compile(
     r"(\S+)(?:\s+(.*?))?\s*$"
 )
 _GLABEL = re.compile(r"^\s*glabel\s+(\w+)\s*$")
+_LABEL = re.compile(r"^\s*(\.L\w+):\s*$")
 _SIZE = re.compile(r"^\s*(?:nonmatching|matching)\s+(\w+),\s*(0x[0-9A-Fa-f]+)", re.M)
 _COMMENT = re.compile(r"/\*.*?\*/")
 _MEMORY = re.compile(r"^(?P<expr>.*?)\((?P<base>\$[A-Za-z0-9]+)\)$")
@@ -101,6 +102,20 @@ READ_WIDTH = {
 }
 WRITE_WIDTH = {"sb": 1, "sh": 2, "sw": 4}
 MEMORY_OPS = LOADS | STORES
+BRANCHES = {
+    "beq",
+    "bne",
+    "beqz",
+    "bnez",
+    "bgez",
+    "bgtz",
+    "blez",
+    "bltz",
+    "bgezal",
+    "bltzal",
+    "bc1t",
+    "bc1f",
+}
 MAX_STRIDE = 0x400
 
 
@@ -123,13 +138,14 @@ class Function:
     size: int
     source: str
     insns: list[Insn] = field(default_factory=list)
+    labels: dict[str, int] = field(default_factory=dict)
 
 
 @dataclass(frozen=True, slots=True)
 class Value:
-    """A register's known value: a constant, a symbol's address, an argument or an index."""
+    """A register's known value: a constant, a symbol, an argument, a stack argument or an index."""
 
-    kind: str  # "imm", "sym", "arg" or "index"
+    kind: str  # "imm", "sym", "arg", "stack" or "index"
     name: str = ""
     offset: int = 0
     number: int = 0
@@ -179,8 +195,10 @@ class Facts:
     indirect: bool = False
     args: dict[int, ArgUse] = field(default_factory=dict)
     stack_arguments: int = 0
+    stack_pointers: set[int] = field(default_factory=set)
     return_writes: list[tuple[str, str]] = field(default_factory=list)
     return_width: tuple[int, bool | None] | None = None
+    ambiguous_return: bool = False
 
 
 def functions(text: str, image: str, source: str) -> list[Function]:
@@ -206,6 +224,10 @@ def functions(text: str, image: str, source: str) -> list[Function]:
             current.insns.append(
                 Insn(address, match.group(4), (match.group(5) or "").strip())
             )
+            continue
+        mark = _LABEL.match(line)
+        if mark:
+            current.labels[mark.group(1)] = len(current.insns)
         elif line.startswith("endlabel"):
             current = None
     for function in found:
@@ -324,6 +346,8 @@ def _plus(value: Value | None, delta: int) -> Value | None:
         return Value("sym", value.name, value.offset + delta)
     if value.kind == "arg":
         return Value("arg", offset=value.offset + delta, argument=value.argument)
+    if value.kind == "stack":
+        return Value("stack", offset=value.offset + delta, number=value.number)
     return None
 
 
@@ -405,7 +429,7 @@ def decode(
                             abs(constant)
                         )
                     values[dest] = _plus(base, constant)
-                elif base is not None and base.kind == "arg":
+                elif base is not None and base.kind in ("arg", "stack"):
                     values[dest] = _plus(base, constant)
                 elif base_register in ARG_REGISTERS and not base_known:
                     values[dest] = _plus(_arg_value(base_register), constant)
@@ -540,6 +564,7 @@ def decode(
                     frame,
                     prior,
                     add_access,
+                    dest,
                 )
             continue
 
@@ -558,6 +583,7 @@ def decode(
             known.update(ARG_REGISTERS)
     facts.return_writes = return_writes(function)
     facts.return_width = return_width(function)
+    facts.ambiguous_return = ambiguous_return(function)
     return facts
 
 
@@ -614,6 +640,7 @@ def _record_memory(
     frame: int,
     known: frozenset[int],
     add_access,
+    dest: int | None = None,
 ) -> None:
     """Record what one load or store proves: a symbol access, an argument use or a stack use."""
     expression, base = part
@@ -639,6 +666,9 @@ def _record_memory(
         if found is not None:
             add_access(found[1], found[0], found[2], insn, write)
         return
+    if value is not None and value.kind == "stack":
+        facts.stack_pointers.add(value.number)
+        return
     if value is not None and value.kind == "arg":
         argument = value.argument
         offset = value.offset + constant
@@ -663,9 +693,10 @@ def _record_memory(
         )
         return
     if base == 29 and constant >= frame + 0x10:
-        facts.stack_arguments = max(
-            facts.stack_arguments, (constant - frame - 0x10) // 4 + 1
-        )
+        stack_index = (constant - frame - 0x10) // 4
+        facts.stack_arguments = max(facts.stack_arguments, stack_index + 1)
+        if not write and dest is not None:
+            values[dest] = Value("stack", number=stack_index)
 
 
 def _width(insn: Insn) -> int:
@@ -711,9 +742,10 @@ def v0_writes(function: Function) -> list[tuple[str, str]]:
 def return_writes(function: Function) -> list[tuple[str, str]]:
     """Return the writes of v0 that reach a ``jr ra``: the function's returned values.
 
-    The compiler leaves the result in v0 just before the epilogue, so a write up to four
-    instructions before the return, or in its delay slot, is the returned value; earlier
-    writes to v0 are scratch.
+    A write whose value is read later (a store, a branch or an argument move) is scratch, and a
+    write in the delay slot of a branch that does not return is not a return value either; a
+    delay slot of a branch whose target block starts the epilogue writes the value that path
+    returns. The nearest write that survives each rule is the return value.
     """
     insns = function.insns
     found: list[tuple[str, str]] = []
@@ -723,19 +755,88 @@ def return_writes(function: Function) -> list[tuple[str, str]]:
         ops = operands(insn.operands)
         if not ops or register(ops[0]) != 31:
             continue
-        for position in range(index + 1, max(-1, index - 12), -1):
-            if position == index:
-                continue
-            if not 0 <= position < len(insns):
-                continue
+        read_since = False
+        for position in range(len(insns) - 1, -1, -1):
             earlier = insns[position]
-            if _epilogue(earlier):
-                continue
-            dest, _ = read_write(earlier.mnemonic, operands(earlier.operands))
-            if dest == 2:
-                found.append((earlier.mnemonic, earlier.operands))
-            break
+            dest, reads = read_write(earlier.mnemonic, operands(earlier.operands))
+            control = _control_at(insns, position)
+            if dest == 2 and not read_since:
+                if control is None or position == index + 1:
+                    found.append((earlier.mnemonic, earlier.operands))
+                    break
+                if _control_returns(insns, function.labels, control) or _value_move(
+                    earlier
+                ):
+                    found.append((earlier.mnemonic, earlier.operands))
+                    break
+            if 2 in reads:
+                read_since = True
     return found
+
+
+def ambiguous_return(function: Function) -> bool:
+    """Whether a v0 write in a branch delay slot could be read as a return value.
+
+    The value a branch's delay slot leaves in v0 on the fall-through path is either that path's
+    return value or a loop temporary; the bytes cannot say which, so the row is not proven.
+    """
+    for position, insn in enumerate(function.insns):
+        control = _control_at(function.insns, position)
+        if control is None:
+            continue
+        dest, _reads = read_write(insn.mnemonic, operands(insn.operands))
+        if dest != 2:
+            continue
+        if _control_returns(function.insns, function.labels, control):
+            continue
+        if _value_move(insn):
+            continue
+        return True
+    return False
+
+
+def _value_move(insn: Insn) -> bool:
+    """Whether an instruction only moves a value or loads it, the return idiom in a delay slot."""
+    if insn.mnemonic in LOADS or insn.mnemonic in ("mflo", "mfhi"):
+        return True
+    ops = operands(insn.operands)
+    if insn.mnemonic not in ("addu", "add") or len(ops) != 3:
+        return False
+    return register(ops[1]) == 0 or register(ops[2]) == 0
+
+
+def _control_at(insns: list[Insn], position: int) -> int | None:
+    """Return the index of the branch or jump whose delay slot ``position`` is, if any."""
+    if position - 1 >= 0 and _is_control(insns[position - 1].mnemonic):
+        return position - 1
+    return None
+
+
+def _control_returns(insns: list[Insn], labels: dict[str, int], control: int) -> bool:
+    """Whether the block a branch or jump targets starts with the epilogue."""
+    ops = operands(insns[control].operands)
+    target = ops[-1] if ops else ""
+    named = symbol(target)
+    if named is None or not named[0].startswith(".L"):
+        return False
+    start = labels.get(named[0])
+    if start is None or start <= control:
+        return False
+    for position in range(start, min(len(insns), start + 24)):
+        insn = insns[position]
+        if _epilogue(insn):
+            continue
+        return (
+            insn.mnemonic == "jr"
+            and bool(operands(insn.operands))
+            and (register(operands(insn.operands)[0]) == 31)
+        )
+    return False
+
+
+def _is_control(mnemonic: str) -> bool:
+    """Whether an instruction branches or jumps, so the next one is its delay slot."""
+    return mnemonic in BRANCHES or mnemonic in ("j", "jal", "jalr", "jr")
 
 
 def _epilogue(insn: Insn) -> bool:

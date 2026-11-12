@@ -151,12 +151,14 @@ form the conventions prescribe; `--jsonl` writes one object per site.
 signature GCC 2.7.2 would compile from it: the argument registers read before they are written, the
 stack arguments, each argument's kind and record, and the returned value or void, cross-checked
 against the argument registers and the returned `v0` of every caller. Each row carries the declared
-prototype, the found signature and a confidence. `symbol.py extents` gives each data and bss symbol
-its distance to the next symbol, the size its declaration states, the accesses past that size, its
-index stride and the neighbours only reached as `base + constant` from it. `symbol.py homes` reads
-the call and data graph: the systems of each function's callers, callees and data, the systems that
-read and write each global, and the address runs of each source file. `--jsonl` writes one object per
-line for each of the three.
+prototype, the found signature and a confidence; `proven` needs every caller to agree and every
+pointer and narrowing claim proved on both sides. `symbol.py extents` gives each data and bss
+symbol its distance to the next symbol, the size its declaration states, the accesses past that
+size, its index stride and the neighbours only reached as `base + constant` from it. `symbol.py
+homes` reads the call and data graph: a function moves to a system only by a caller majority, by
+being the single writer of a global its readers share, or by sitting between two of its functions
+in address order; a global belongs to the system all its writers are in; file rows cover
+`src/**/*.c` units. `--jsonl` writes one object per line for each of the three.
 
 ## Quality
 
