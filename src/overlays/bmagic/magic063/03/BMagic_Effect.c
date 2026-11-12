@@ -110,7 +110,24 @@ MATCH void func_801EF384(void) {
 /* func_801EF40C */
 #include "overlays/bmagic/Effect_StartOrbit.h"
 
-INCLUDE_ASM(func_801EF5CC);
+MATCH void func_801EF5CC(void) {
+    s32 threshold;
+
+    g_BMagicOrbitWork->radius -= 2;
+    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
+    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
+    g_BMagicOrbitWork->unk_0B++;
+    if (g_BMagicOrbitWork->unk_09 < 0x10) {
+        g_BMagicOrbitWork->unk_09 += 2;
+    }
+    threshold = ((g_BMagicOrbitWork->unk_04 >> 5) * 8) + 0x20;
+    if (g_BMagicOrbitWork->radius <= threshold) {
+        g_BMagicOrbitWork->header.step++;
+        if (g_BMagicOrbitWork->unk_04 == 0) {
+            func_800A9610(g_BattleEffectBattler->unk_04, 0x10);
+        }
+    }
+}
 
 /* func_801EF704 */
 #include "overlays/bmagic/Effect_StepOrbit.h"
