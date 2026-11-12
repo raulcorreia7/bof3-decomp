@@ -87,7 +87,7 @@ INCLUDE_ASM(func_<ADDR>);
 #endif
 ```
 
-Keep a draft under `NON_MATCHING`. Record its attempts in `config/attempts.tsv`, never in source.
+Keep a draft under `NON_MATCHING`. Record its attempts in `config/attempts.jsonl`, never in source.
 
 ### Status markers
 
