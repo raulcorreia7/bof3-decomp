@@ -18,7 +18,7 @@ MATCH void func_801EEC7C(void) {
         g_Game.members[0].unk_2E.half = D_801EF60C[*count - 1][0][0];
         g_Game.members[0].unk_30.half = D_801EF60C[*count - 1][0][1];
         g_Game.members[0].unk_29      = 1;
-        func_80196718(&g_Game.members[0]);
+        GFX_FreePaletteFadeTarget(&g_Game.members[0]);
         if (*count >= 2) {
             TASK_SET(&g_Game.members[1]);
             Actor_RequestScript(g_Game.members[1].facing + 0x1C);
@@ -26,7 +26,7 @@ MATCH void func_801EEC7C(void) {
             g_Game.members[1].unk_2E.half = D_801EF60C[*count - 1][1][0];
             g_Game.members[1].unk_30.half = D_801EF60C[*count - 1][1][1];
             g_Game.members[1].unk_29      = 1;
-            func_80196718(&g_Game.members[1]);
+            GFX_FreePaletteFadeTarget(&g_Game.members[1]);
             if (*count == 3) {
                 TASK_SET(&g_Game.members[2]);
                 Actor_RequestScript(g_Game.members[2].facing + 0x1C);
@@ -34,7 +34,7 @@ MATCH void func_801EEC7C(void) {
                 g_Game.members[2].unk_2E.half = D_801EF60C[*count - 1][2][0];
                 g_Game.members[2].unk_30.half = D_801EF60C[*count - 1][2][1];
                 g_Game.members[2].unk_29      = 1;
-                func_80196718(&g_Game.members[2]);
+                GFX_FreePaletteFadeTarget(&g_Game.members[2]);
             }
         }
     }
