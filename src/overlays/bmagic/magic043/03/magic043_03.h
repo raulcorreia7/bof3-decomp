@@ -5,7 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic068SharedSteps D_801EEC04;
+#define MAGIC043_STEP_COUNT 5
+
+typedef struct Magic043Steps {
+    Callback steps[MAGIC043_STEP_COUNT];
+} Magic043Steps;
+
+extern Magic043Steps D_801EEC04;
 
 extern Callback     D_801EFC8C[];
 extern u16          D_801EFC9C[];
