@@ -39,7 +39,7 @@ MATCH void func_801EED28(void) {
         BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
     }
-    func_800AFD9C();
+    Battle_CenterCamera();
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
     /* Copies arena palette rows 2 and 26 into the work copy with STP set, then restores color 0 of each row. */
