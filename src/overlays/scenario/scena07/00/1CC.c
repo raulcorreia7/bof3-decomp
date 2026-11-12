@@ -79,7 +79,7 @@ MATCH void func_801F7050(void) {
     for (i = 0; i < 16; i++) {
         actor->vz += 8388608;
         actor->pos.x.fixed += TO_COORD(1);
-        actor->pos.y.fixed += 0;
+        actor->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
         actor->pos.z.fixed += actor->vz;
     }
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
@@ -87,7 +87,20 @@ MATCH void func_801F7050(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801F70F8);
+MATCH void func_801F70F8(void) {
+    func_801F88B8(SCENA07_PANEL_ROWS);
+    func_801F8BE8(SCENA07_PANEL_ROWS);
+    g_Task->pos.x.fixed -= TO_COORD(1);
+    g_Task->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
+    g_Task->pos.z.fixed += g_Task->vz;
+    if (g_Task->vz != 0) {
+        g_Task->vz += TO_COORD(128);
+    }
+    if (g_Task->pos.x.fixed == g_Task->vx && g_Task->pos.y.fixed == g_Task->vy) {
+        g_Task->timer = 47;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F71C0(void) {
     func_801F88B8(SCENA07_PANEL_ROWS);
@@ -127,7 +140,7 @@ MATCH void func_801F7408(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     func_801F9DA8();
     g_Task->timer = 0;
     g_Task->vx    = 95;
@@ -147,7 +160,26 @@ MATCH void func_801F75F4(void) {
     SYS_DISPATCH_TASK(D_801FDD8C, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801F7638);
+MATCH void func_801F7638(void) {
+    Scena07Burst* burst;
+    s32           y;
+
+    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 0x10);
+
+    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    burst               = SCENA07_BURST_RECORD;
+    burst->x            = g_Task->pos.x.fixed;
+    y                   = g_Task->pos.y.fixed;
+    D_801FDFBC          = burst;
+    /* FAKE: the order lock keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
+    FAKE_ORDER_LOCK(burst->y = y);
+    burst->z      = g_Task->pos.z.fixed;
+    burst->unk_10 = 0;
+    g_Task->timer = 0;
+    g_Task->vx    = 95;
+    g_Task->header.step++;
+}
 
 INCLUDE_ASM(func_801F76D0);
 

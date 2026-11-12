@@ -85,8 +85,8 @@ NON_MATCHING void func_8014BC70(void) {
             if (word != 0) {
                 u32** slot = &D_801459D0[g_AreaDrawMode];
                 u32*  head = *slot;
-                *head      = (*head & 0xFF000000) | (word & 0xFFFFFF);
-                *slot      = *(u32**)(D_80142CC4 + tmp);
+                setaddr(head, word);
+                *slot = *(u32**)(D_80142CC4 + tmp);
             }
         }
         layer = var_s7 & BYTE_MASK;
