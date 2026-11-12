@@ -37,7 +37,6 @@ extern Callback D_801F0BAC[];
 extern s32      D_801F0BA4[];
 
 extern Callback D_801F0BC0[];
-void            func_801EF4F0(void);
 void            func_801EFDA0(void);
 
 extern Callback D_801F0BCC[];

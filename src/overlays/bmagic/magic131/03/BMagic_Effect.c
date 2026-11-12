@@ -384,7 +384,7 @@ MATCH void func_801F1B14(void) {
     vec[0]    = (work->pos.x.fixed >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
     vec[1]    = (work->pos.y.fixed >> 9) - 0x4000;
-    vec[2]    = -((s16)(*(u16*)((u8*)work + 0x1E)) / 2);
+    vec[2]    = -(COORD_INT(work->pos.z) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
     D_801F24E0->unk_20 = primitive->x0;
