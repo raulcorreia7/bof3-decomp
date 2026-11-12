@@ -16,7 +16,8 @@ MATCH void Actor_BeginScriptFromAreaTable(void) {
     row += g_ScriptState->cursor;
     step = row[2];
     arg  = row[3];
-    Actor_BeginScript(step, g_Task->script_pc - 2);
+    /* FAKE: retail reads Actor_BeginScript as void(u8, u16). */
+    ((void (*)(u8, u16))Actor_BeginScript)(step, g_Task->script_pc - 2);
     g_Task->unk_2A = arg;
     g_ScriptState->cursor += 2;
 }
