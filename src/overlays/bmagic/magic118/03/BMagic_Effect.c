@@ -39,11 +39,11 @@ MATCH void BMagic_SpawnBurnFlames(void) {
         g_Task->param.unk_0B++;
     }
     i   = 1;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 2);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW + 2);
-    for (; i < 16; i++, dst++, src++) {
-        *dst    = *src | 0x8000;
-        dst[16] = src[16] | 0x8000;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i]      = src[i] | 0x8000;
+        dst[i + 16] = src[i + 16] | 0x8000;
     }
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
