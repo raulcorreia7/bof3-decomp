@@ -25,14 +25,14 @@ typedef struct BMagicStreakSegment {
     /* 0x20 */ u8       pad_20[4];
     /* 0x24 */ Point3DL velocity;
     /* 0x30 */ u8       pad_30[4];
-    /* 0x34 */ u8  head_red;
-    /* 0x35 */ u8  head_green;
-    /* 0x36 */ u8  head_blue;
-    /* 0x37 */ u8  pad_37;
-    /* 0x38 */ u8  tail_red;
-    /* 0x39 */ u8  tail_green;
-    /* 0x3A */ u8  tail_blue;
-    /* 0x3B */ u8  pad_3B;
+    /* 0x34 */ u8       head_red;
+    /* 0x35 */ u8       head_green;
+    /* 0x36 */ u8       head_blue;
+    /* 0x37 */ u8       pad_37;
+    /* 0x38 */ u8       tail_red;
+    /* 0x39 */ u8       tail_green;
+    /* 0x3A */ u8       tail_blue;
+    /* 0x3B */ u8       pad_3B;
 } BMagicStreakSegment;
 
 ASSERT_SIZE(BMagicStreakSegment, 0x3C);
