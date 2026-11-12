@@ -220,7 +220,36 @@ MATCH void func_801F7E34(void) {
     FIELD(u8, work, 0x1u) = (FIELD(u8, work, 0x1u) + 1);
 }
 
-INCLUDE_ASM(func_801F7E6C);
+MATCH void func_801F7E6C(void) {
+    ActorSlot** effects;
+    ActorSlot*  spawned;
+    Actor*      record;
+    Actor*      actor;
+    u8          i;
+    u8          slot;
+
+    effects = (ActorSlot**)&g_Task->vx;
+    for (i = 0; i < 5; i++) {
+        slot = Actor_FindFreeSlot();
+        if (slot != GAME_NONE) {
+            spawned                    = &g_ActorSlots[slot];
+            effects[i]                 = spawned;
+            spawned->header.flags      = 1;
+            spawned->unk_06            = 0;
+            spawned->type              = 0x21;
+            actor                      = g_Task;
+            spawned->scene_step        = actor->pos.x.fixed;
+            spawned->selection         = actor->pos.y.fixed;
+            spawned->unk_14            = actor->pos.z.fixed;
+            record                     = (Actor*)spawned;
+            record->script_pc          = 6;
+            record->unk_5A             = 0;
+            record->tint.halves.unk_5C = i * 819;
+            record->tint.halves.unk_5E = 0;
+        }
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801F7F84(void) {
     ActorSlot** effects; /* the five effect slots spawned at +0x0C */
