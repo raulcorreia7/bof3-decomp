@@ -283,7 +283,24 @@ MATCH void func_801F0B8C(void) {
     EFFECT_RAMP_TINT_AND_FINISH();
 }
 
-INCLUDE_ASM(func_801F0C30);
+MATCH void func_801F0C30(void) {
+    Callback handlers[7];
+
+    __builtin_memcpy(handlers, D_801EEC84, sizeof(handlers));
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+        if (g_Task->unk_09 != 0 && g_Task->header.step < 4) {
+            if (g_Task->header.step < 3) {
+                func_801F1250();
+            } else {
+                func_801F131C();
+            }
+            func_801F13D4();
+            PopMatrix();
+        }
+    }
+}
 
 MATCH void func_801F0D48(void) {
     g_Task->unk_14 = 0x80;

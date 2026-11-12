@@ -25,7 +25,37 @@ MATCH void func_801EEC14(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED28);
+MATCH void func_801EED28(void) {
+    PartyMember* actor;
+    PartyMember* task;
+    u16*         dst;
+    u16*         src;
+    u32          slot;
+    u8           i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    actor          = g_BattleSelectedActor;
+    g_Task->facing = actor->facing;
+    task           = g_Task;
+    WorldPos_Copy(&task->pos, &actor->pos);
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    do {
+        dst[i]      = src[i];
+        dst[i + 16] = src[i + 16];
+        i++;
+    } while (i < 16);
+    g_GfxPalettePending                = 1;
+    slot                               = Battle_AllocEffect(1, 0x29) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_Task->param.unk_0B               = 2;
+    g_Task->header.mode += 1;
+}
 
 #include "overlays/bmagic/Effect_Pause.h"
 

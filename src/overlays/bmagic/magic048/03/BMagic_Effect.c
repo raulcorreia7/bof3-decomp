@@ -6,7 +6,29 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    PartyMember* work;
+    u32          slot;
+    u8           i;
+
+    g_Task->param.unk_0B = 0;
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->unk_09 = 10;
+    g_Task->header.mode += 1;
+    i = 0;
+    do {
+        slot                               = Battle_AllocEffect(1, 30) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].unk_0B       = i;
+        g_BattleEffects[slot].arg.unk_09   = ((i ^ 0xF) - 3) * 8;
+        g_BattleEffects[slot].target.party = work;
+        g_BattleEffects[slot].unk_08       = g_Task->facing;
+        g_Task->param.unk_0B += 1;
+        i++;
+    } while (i < 12);
+}
 
 #include "overlays/bmagic/Effect_CountDownTimerQueueFx.h"
 

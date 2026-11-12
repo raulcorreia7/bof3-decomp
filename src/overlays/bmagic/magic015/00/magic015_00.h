@@ -32,6 +32,8 @@ extern Magic015Steps       D_801EEC24;
 extern Magic015ThirdSteps  D_801EEC54;
 extern Magic015SecondSteps D_801EEC34;
 extern Callback            D_801EEC68[];
+/* The seven step handlers of the magic015 landing effect (func_801F0C30). */
+extern Callback            D_801EEC84[];
 
 void func_801F1250(void);
 void func_801F131C(void);
