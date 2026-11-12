@@ -43,7 +43,7 @@ MATCH void func_801EEFE0(void) {
     if (g_Task->unk_09 == 0) {
         func_800AEF98(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->header.mode += 1;
     }
 }

@@ -33,7 +33,7 @@ MATCH void func_801E1494(void) {
     }
     work = g_GameState;
     if (work->u.turn.target_flags & BATTLE_HIT_HP) {
-        func_800AAC88(work->u.turn.hp_change, g_Task->slot);
+        Battle_QueueAction(work->u.turn.hp_change, g_Task->slot);
         work = g_Game.current;
     }
     if (work->u.turn.target_flags & BATTLE_HIT_AP) {

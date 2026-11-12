@@ -44,6 +44,41 @@ typedef struct Scena07Burst {
 extern Scena07Burst* D_801FDFBC;
 void                 func_801F97E0(Scena07Burst* burst);
 
+/* The burst buffer D_801FDFC0 points at, at D_800E4C24: the burst position,
+ * its rotation angle and the scale triple its draw function reads. The span
+ * between the position and the angle is not modelled. */
+typedef struct Scena07BurstBuffer {
+    s32 x; /* 0x000 */
+    s32 y; /* 0x004 */
+    s32 z; /* 0x008 */
+    u8  pad_00C[0x504];
+    u16 angle; /* 0x510 */
+    u8  pad_512[2];
+    s32 unk_514; /* 0x514 */
+    s32 unk_518; /* 0x518 */
+    s32 unk_51C; /* 0x51C */
+} Scena07BurstBuffer;
+
+ASSERT_SIZE(Scena07BurstBuffer, 0x520);
+ASSERT_OFFSET(Scena07BurstBuffer, angle, 0x510);
+ASSERT_OFFSET(Scena07BurstBuffer, unk_514, 0x514);
+
+extern Scena07BurstBuffer* D_801FDFC0;
+void                       func_801F9330(Scena07BurstBuffer* buffer);
+
+/* The burst rotation step func_801F7960 and func_801F7C9C share: draw the burst buffer, turn it by
+ * the step while the countdown is high, and clear the actor when it ends. Every change must keep
+ * both members matching. */
+static inline void Scene_TurnBurst(s32 step) {
+    func_801F9330(D_801FDFC0);
+    if (g_Task->vx >= 9) {
+        D_801FDFC0->angle += step;
+    }
+    if (--g_Task->vx == 0) {
+        func_80196070();
+    }
+}
+
 void func_801F81D4(u8* row);
 
 u8*       func_801F8394(void);
@@ -53,25 +88,30 @@ void      func_801F8BE8(void* table);
 void      func_801FA38C(void);
 extern u8 D_801FDFC8;
 
+/* The panel's trail in the work memory, 32 rows of 0x18 bytes: the panel steps shift them down and
+ * draw the first 31. kept: a folded constant, so a symbol cannot replace it without growing every
+ * panel step. */
+#define SCENA07_PANEL_ROWS MEM_PTR(void, AREA_WORK + 0xE0)
+
 /* The panel fade step func_801F72E0 and func_801F80F0 share: draw the panel table, dim it by 12 and
  * advance the actor when its countdown ends. Every change must keep both members matching. */
-#define SCENA07_PANEL_FADE_STEP()              \
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
-    D_800E4C1E -= 0xC;                         \
-    if (--g_Task->timer == 0) {                \
-        g_Task->header.step++;                 \
+#define SCENA07_PANEL_FADE_STEP()      \
+    func_801F88B8(SCENA07_PANEL_ROWS); \
+    func_801F8BE8(SCENA07_PANEL_ROWS); \
+    D_800E4C1E -= 0xC;                 \
+    if (--g_Task->timer == 0) {        \
+        g_Task->header.step++;         \
     }
 
 /* The panel brighten step func_801F724C and func_801F805C share: draw the panel table, brighten it by 6
  * and re-arm the countdown to 0x20 when it ends. Every change must keep both members matching. */
-#define SCENA07_PANEL_BRIGHTEN_STEP()          \
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
-    D_800E4C1E += 6;                           \
-    if (--g_Task->timer == 0) {                \
-        g_Task->timer = 32;                    \
-        g_Task->header.step++;                 \
+#define SCENA07_PANEL_BRIGHTEN_STEP()  \
+    func_801F88B8(SCENA07_PANEL_ROWS); \
+    func_801F8BE8(SCENA07_PANEL_ROWS); \
+    D_800E4C1E += 6;                   \
+    if (--g_Task->timer == 0) {        \
+        g_Task->timer = 32;            \
+        g_Task->header.step++;         \
     }
 u8   func_801F85D8(void);
 void func_801F9DA8(void);

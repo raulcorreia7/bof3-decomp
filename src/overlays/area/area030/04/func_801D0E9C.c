@@ -11,7 +11,7 @@ MATCH void func_801D0E9C(void) {
     work            = FISHING_STATE;
     position        = work->cursor_10 + 8;
     work->cursor_10 = position;
-    if (position >= 0xF1) {
+    if (position >= 241) {
         work->handler_index_01      = 1;
         sub                         = FISHING_STATE;
         work->cursor_10             = 0xF0;

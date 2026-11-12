@@ -24,7 +24,7 @@ MATCH void func_800C1BF0(void) {
     if (value3 == 0) {
         g_BattleEffectBattler->header.mode = 5;
         g_BattleEffectBattler->header.step = 0;
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.mode += 1;
         return;
     }

@@ -130,7 +130,7 @@ NON_MATCHING void func_801E7BA0(void) {
             } while ((u32)(var_s0 & BYTE_MASK) < 8U);
             func_801E0B64();
         }
-        func_800A9BD8((g_Task)->slot);
+        Battle_RescaleStats((g_Task)->slot);
         temp_a1_458                                   = g_Task;
         temp_a0_460                                   = temp_a1_458->slot;
         *(&D_80148344 + ((temp_a0_460 + 0xD) * 0x24)) = g_Game.members[temp_a0_460].chr.hp;

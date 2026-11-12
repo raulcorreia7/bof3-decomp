@@ -30,9 +30,9 @@ MATCH void Fishing_DrawRank(s16 x, s16 y) {
     D_801454EC[0] = index;
     Fishing_DrawSprite(record->icon, 1, (x + 29), (y + 29));
     if (record->first != 0) {
-        Fishing_DrawSprite(0x48, 1, (record->offset + 29 + x), (y + 33));
+        Fishing_DrawSprite(72, 1, (record->offset + 29 + x), (y + 33));
         if (record->second != 0) {
-            Fishing_DrawSprite(0x48, 1, (record->offset + x + 36), (y + 33));
+            Fishing_DrawSprite(72, 1, (record->offset + x + 36), (y + 33));
         }
     }
 

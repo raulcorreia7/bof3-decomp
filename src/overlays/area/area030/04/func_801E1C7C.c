@@ -11,5 +11,5 @@ MATCH void func_801E1C7C(void) {
         return;
     }
     Fishing_SetDrawMode(3, 1);
-    Fishing_DrawSprite(0x47, 1, 26, 92);
+    Fishing_DrawSprite(71, 1, 26, 92);
 }

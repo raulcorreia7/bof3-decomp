@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void func_801DE560(u8 event_kind, u8 arg1, u8 arg2, u8 arg3, u8* payload) {
+MATCH void func_801DE560(u8 event_kind, u8 event_value, u8 group, u8 timer, u8* payload) {
     u8 index;
     u8 value;
 
@@ -12,9 +12,9 @@ MATCH void func_801DE560(u8 event_kind, u8 arg1, u8 arg2, u8 arg3, u8* payload) 
             D_801EB4F1[index][0]  = event_kind;
             /* slot+2 byte; battle_03.h declares D_801EB4F2 as a scalar, so reach it
              * as the last byte of the previous stride row */
-            D_801EB4F3[index][-1] = arg1;
-            D_801EB4F3[index][0]  = arg2;
-            D_801EB4F8[index][0]  = arg3;
+            D_801EB4F3[index][-1] = event_value;
+            D_801EB4F3[index][0]  = group;
+            D_801EB4F8[index][0]  = timer;
             D_801EB4F4[index][0]  = payload;
             D_801EB4FA[index][0]  = 0u;
             return;
