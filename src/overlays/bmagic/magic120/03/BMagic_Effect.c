@@ -148,7 +148,24 @@ INCLUDE_ASM(func_801F04B0);
 
 INCLUDE_ASM(func_801F078C);
 
-INCLUDE_ASM(func_801F08AC);
+MATCH void func_801F08AC(void) {
+    PartyMember* work;
+    u32          i;
+
+    for (i = 0; i < 8; i++) {
+        if (Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) != 0) {
+            continue;
+        }
+        work                     = g_Task;
+        work->facing             = g_BattleEnemyBattlers[i].unk_08;
+        g_Task->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
+        g_Task->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;
+        COORD_INT(g_Task->pos.z) = FIELD(u16, D_801EB66E, i * BATTLE_ENEMY_STRIDE);
+        Effect_SetActorMatrix();
+        func_801F0974();
+        PopMatrix();
+    }
+}
 
 INCLUDE_ASM(func_801F0974);
 

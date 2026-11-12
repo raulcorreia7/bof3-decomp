@@ -5,10 +5,31 @@ segments:
     start: 0x0
     vram: 0x801F6C00
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, .data, D_801F6C00]
       - [0x4, bin, D_801F6C04]
+      - [0x7C, .rodata, D_801F6C7C]
+      - [0xAC, .rodata, D_801F6CAC]
+      - [0x108, .rodata, D_801F6D08]
+      - [0x10C, .rodata, D_801F6D0C]
+      - [0x140, .rodata, D_801F6D40]
+      - [0x144, .rodata, D_801F6D44]
+      - [0x1B0, .rodata, D_801F6DB0]
+      - [0x1B4, .rodata, D_801F6DB4]
+      - [0x2A8, .rodata, D_801F6EA8]
+      - [0x2AC, .rodata, D_801F6EAC]
+      - [0x364, .rodata, D_801F6F64]
+      - [0x3E4, .rodata, D_801F6FE4]
+      - [0x434, .rodata, D_801F7034]
+      - [0x460, .rodata, D_801F7060]
+      - [0x464, .rodata, D_801F7064]
+      - [0x4B0, .rodata, D_801F70B0]
+      - [0x4B4, .rodata, D_801F70B4]
+      - [0x4DC, .rodata, D_801F70DC]
+      - [0x4F4, .rodata, D_801F70F4]
+      - [0x558, .rodata, D_801F7158]
+      - [0x55C, .rodata, D_801F715C]
       - [0x5C0, c, 5C0]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
