@@ -67,7 +67,8 @@ MATCH void Menu_DrawAbilityList(MenuListPanel* panel) {
             element = Char_GetAbilityElement(*list);
             ability = &g_Abilities[*list];
             /* needs: type: D_80148656 is read signed here and unsigned above */
-            cost    = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
+            /* FAKE: retail calls Char_GetAbilityCost with no prototype, so the cost keeps its full register. */
+            cost    = ((s32 (*)(u8, u8, u8))Char_GetAbilityCost)(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
                 if (shade != MENU_SHADE_DIM) {
                     func_801AF930(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, MENU_SHADE_DIM, element, ability, cost,

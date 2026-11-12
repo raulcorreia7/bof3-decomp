@@ -29,7 +29,8 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
             }
             level   = Char_GetAbilityElement(*text);
             entry   = (u8*)&g_Abilities[*text];
-            ability = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *text, 0);
+            /* FAKE: retail calls Char_GetAbilityCost with no prototype, so the cost keeps its full register. */
+            ability = ((s32 (*)(u8, u8, u8))Char_GetAbilityCost)(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *text, 0);
             if (n == task->flags || n == task->unk_0C) {
                 if ((u8)color != 7) {
                     func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);
