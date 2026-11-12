@@ -27,6 +27,7 @@ MATCH void func_801F3730(void) {
     }
     if (SYS_TestFlag(D_80144EF0, 0x10) == 0) {
         g_MessageRequest = 2;
+        /* FAKE: retail reaches g_SceneEventFlags as D_80144EF0 + 0x38, so the offset stays. */
         SYS_ClearFlag(D_80144EF0 + 0x38, 0x33);
     }
 }
