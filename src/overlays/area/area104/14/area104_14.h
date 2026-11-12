@@ -19,6 +19,10 @@ extern u8       D_801F6AA0[];
 extern u8 D_801F6B10[];
 extern u8 D_801F6B18[];
 
+extern u8 D_80146871;
+extern u8 D_80145E9A;
+extern u8 D_80145E9B;
+
 /* func_801F367C */
 void Area_Update(void);
 /* func_801F3BC4 */
