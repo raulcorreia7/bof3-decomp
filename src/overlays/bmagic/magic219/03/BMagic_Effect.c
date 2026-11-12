@@ -25,7 +25,35 @@ MATCH void func_801EEC14(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED28);
+/* Clears the effect slots, centers the camera and reloads palette rows 2 and 26 of the work copy with the STP bit
+ * set. */
+MATCH void func_801EED28(void) {
+    u16* dst;
+    u16* src;
+    u16* row_dst;
+    u16* row_src;
+    u16  i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    func_800AFD9C();
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    /* Copies arena palette rows 2 and 26 into the work copy with STP set, then restores color 0 of each row. */
+    for (i = 0, row_dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW), row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00), dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW),
+        src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+         i < 256; i++) {
+        row_dst[i] = row_src[i] | 0x8000;
+        dst[i]     = src[i] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    g_GfxPalettePending                                      = 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+}
 
 MATCH void func_801EEE50(void) {
     u8 i;
