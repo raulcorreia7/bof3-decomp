@@ -6,6 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern Magic068SharedSteps D_801EEC04;
+extern u8                  D_801EC2E4;
 
 void func_801EF55C(void);
 
