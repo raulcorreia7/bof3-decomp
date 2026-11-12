@@ -1,3 +1,10 @@
+#ifndef AREA_UPDATE_TORCH_GAUGE_H
+#define AREA_UPDATE_TORCH_GAUGE_H
+
+#include "game/game.h"
+#include "slus/exports.h"
+#include "sys/gameui.h"
+
 /* Updates the torch gauge while the area draw flag is set. */
 /* func_801F564C (area104), func_801F5B90 (area121) */
 #define AREA_UPDATE_TORCH_GAUGE(is_idle, timer_zero, draw_icon, set_value) \
@@ -30,3 +37,5 @@
         }                                                                  \
         set_value(value, flag);                                            \
     }
+
+#endif
