@@ -7,6 +7,7 @@
 
 extern Callback D_801F1BF4[];
 
+extern u8       D_801F1C38[];
 extern Callback D_801F1C08[];
 void            func_801F030C(void);
 
@@ -17,9 +18,15 @@ void            func_801F0D44(void);
 extern Callback         D_801F1C48[];
 extern PartyMember*     D_801F24E0;
 extern BMagicEffectWork D_801F1CA0[48];
-void                    func_801F0DF4(void);
+extern s16              D_1F800006;
+
+/* The effect work record D_801F24E0 points at. */
+#define g_BMagicEffectWork ((BMagicEffectWork*)D_801F24E0)
+
+void func_801F0DF4(void);
 
 void func_801F1844(void);
+void func_801F1AC4(void);
 void func_801F1B14(void);
 
 #endif
