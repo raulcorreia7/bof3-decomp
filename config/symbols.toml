@@ -3548,6 +3548,7 @@ g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted act
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world00/area030/04"]
+s_ShopMode = { addr = 0x800F724C, source = "Index of the shop state." }
 g_FishingLure = { addr = 0x80145026, source = "accessory id of the equipped lure; its row is the 0x14-byte entry of the lure table that g_FishingLureRow points at" }
 g_FishingLureQty = { addr = 0x80145027, source = "number of equipped lures held" }
 g_FishingRod = { addr = 0x80145028, source = "accessory id of the equipped rod; its row is the 0x0A-byte entry of the rod table that g_FishingRodRow points at" }
@@ -3641,6 +3642,11 @@ g_FishingLureRow = { addr = 0x801E3210, source = "the equipped lure's row of the
 g_FishingNewRecord = { addr = 0x801E3214, source = "set by Fishing_CatchRecord when a catch is longer than the species' g_FishingBestCatch length, cleared when the catch page is confirmed" }
 
 ["emi/world00/area030/05"]
+s_ShopStates = { addr = 0x800F71F0, source = "The shop's state handlers." }
+s_ShopItemIcons = { addr = 0x800F722C, source = "Sprite id per trade item icon." }
+s_ShopItemCount = { addr = 0x800F7240, source = "Number of stock rows the shop shows." }
+s_ShopDeclined = { addr = 0x800F7248, source = "The confirm prompt's answer: 0 yes, 1 no." }
+s_ShopMode = { addr = 0x800F724C, source = "Index of the shop state." }
 Fishing_DrawWindowFill = { addr = 0x801D799C, type = "func", source = "Fills a fishing window with its interior texture." }
 Fishing_DrawWindowFrame = { addr = 0x801D9534, type = "func", source = "Draws a fishing window frame and its inset shadow." }
 Fishing_SetDrawMode = { addr = 0x801E0C80, type = "func", source = "Sets the draw mode of one fishing graphic." }
@@ -3942,6 +3948,7 @@ Actor_Spawn = { addr = 0x801F2E1C, type = "func", source = "Claims a free g_Acto
 ["emi/world02/area080/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_ProjectRing = { addr = 0x801F30B0, type = "func", source = "Projects the 16 points of a glow ring onto the screen: each point lies at the ring radius around the centre, 0x100 angle units apart, and its screen position lands in the record's point row; one body shared with the other area overlays" }
+Area_DrawSpark = { addr = 0x801F352C, type = "func", source = "Draws one spark slot: shifts its four origin and four position trail points one place, projects both heads, then draws the head line and a three-quad fading ribbon in the slot colour, semi-transparent; the frame pass calls it for every active slot." }
 Area_SubCameraOffsetY20 = { addr = 0x801F3CE4, type = "func", source = "Subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_AddCameraOffsetY20 = { addr = 0x801F3D0C, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F3D34, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

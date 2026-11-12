@@ -1,6 +1,7 @@
 #include "area030_05.h"
 
-static Callback D_800F71F0[11] = {
+/* D_800F71F0 */
+static Callback s_ShopStates[11] = {
     func_800F5048, func_800F5138, func_800F5BA4, func_800F50B4, func_800F510C, func_800F51BC, func_800F550C, func_800F5828, func_800F5AD8, func_800F5BE0, func_800F5D98,
 };
 
@@ -10,7 +11,8 @@ static u8 D_800F721C[16] = {
 };
 
 /* Sprite id by item icon, read through Item_GetIcon in func_800F7094. */
-static u8 D_800F722C[16] = {
+/* D_800F722C */
+static u8 s_ShopItemIcons[16] = {
     0x06, 0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x06, 0x06, 0x06, 0x06, 0x14, 0x15, 0x16, 0x00, 0x00, 0x00,
 };
 
@@ -19,22 +21,25 @@ static u8 D_800F722C[16] = {
  * unread padding. */
 static u8 s_ListCursor = 0;
 static u8 pad_800F723D = 0, pad_800F723E = 0, pad_800F723F = 0;
-static u8 D_800F7240   = 0;
+/* D_800F7240 */
+static u8 s_ShopItemCount = 0;
 static u8 pad_800F7241 = 0, pad_800F7242 = 0, pad_800F7243 = 0;
 static u8 s_ListItemId = 0;
 static u8 pad_800F7245 = 0, pad_800F7246 = 0, pad_800F7247 = 0;
-static u8 D_800F7248   = 0;
+/* D_800F7248 */
+static u8 s_ShopDeclined = 0;
 static u8 pad_800F7249 = 0, pad_800F724A = 0, pad_800F724B = 0;
-static u8 D_800F724C   = 0;
+/* D_800F724C */
+static u8 s_ShopMode   = 0;
 static u8 s_Step       = 0;
 static u8 pad_800F724E = 0, pad_800F724F = 0;
 
 MATCH void func_800F500C(void) {
-    D_800F71F0[D_800F724C]();
+    s_ShopStates[s_ShopMode]();
 }
 
 MATCH void func_800F5048(void) {
-    D_800F71F0[3 + s_Step]();
+    s_ShopStates[3 + s_Step]();
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     func_800F606C(0);
     func_800F6730();
@@ -43,21 +48,21 @@ MATCH void func_800F5048(void) {
 
 MATCH void func_800F50B4(void) {
     UI_SetMode(1);
-    s_ListCursor = 0;
-    s_ListItemId = 1;
-    D_800F7240   = func_800F66D4();
+    s_ListCursor    = 0;
+    s_ListItemId    = 1;
+    s_ShopItemCount = func_800F66D4();
     s_Step += 1;
 }
 
 MATCH void func_800F510C(void) {
     if (WINDOW_EFFECT_IDLE()) {
-        D_800F724C = 1;
+        s_ShopMode = 1;
         s_Step     = 0;
     }
 }
 
 MATCH void func_800F5138(void) {
-    D_800F71F0[5 + s_Step]();
+    s_ShopStates[5 + s_Step]();
     func_800F5E44();
     func_800F6730();
     if (((s8)s_ListCursor & 0xC0) == 0) {
@@ -73,12 +78,12 @@ MATCH void func_800F51BC(void) {
     if ((r & PADLup) != 0) {
         s_ListCursor -= 1;
         if ((s8)s_ListCursor < 0) {
-            s_ListCursor = D_800F7240 - 1;
+            s_ListCursor = s_ShopItemCount - 1;
         }
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     } else if ((r & PADLdown) != 0) {
         s_ListCursor += 1;
-        if ((s8)s_ListCursor >= D_800F7240) {
+        if ((s8)s_ListCursor >= s_ShopItemCount) {
             s_ListCursor = 0;
         }
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
@@ -103,10 +108,10 @@ MATCH void func_800F51BC(void) {
         goto tail; /* skips the cancel branch: the confirm path shares the tail */
     }
     if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
-        D_800F7248 = 1;
+        s_ShopDeclined = 1;
         s_ListCursor |= 0x80;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        D_800F724C += 1;
+        s_ShopMode += 1;
     }
 tail:
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
@@ -165,7 +170,7 @@ MATCH void func_800F550C(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) {
-        D_800F7248 = 0;
+        s_ShopDeclined = 0;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         s_Step = s_Step + 1;
     } else if (g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
@@ -188,13 +193,13 @@ MATCH void func_800F5828(void) {
 
     pad = &g_InputPressed;
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
-        D_800F7248 ^= 1;
+        s_ShopDeclined ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     } else if (*pad & g_InputMasks[FISHING_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         s_Step -= 1;
     } else if (*pad & g_InputMasks[FISHING_INPUT_CAST]) {
-        if (D_800F7248 != 0) {
+        if (s_ShopDeclined != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             s_Step -= 1;
         } else {
@@ -217,7 +222,7 @@ MATCH void func_800F5828(void) {
         D_801490E4[0] = 0;
         UI_DrawText(0x28, 0x14, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ITEM));
         UI_DrawText(0xEE, 0x14, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_YES_NO));
-        Menu_DrawCursorSprite((D_800F7248 << 5) + 0xED, 0x16, 0);
+        Menu_DrawCursorSprite((s_ShopDeclined << 5) + 0xED, 0x16, 0);
     }
 
     func_800F606C(1);
@@ -242,7 +247,7 @@ MATCH void func_800F5AD8(void) {
 }
 
 MATCH void func_800F5BA4(void) {
-    D_800F71F0[9 + s_Step]();
+    s_ShopStates[9 + s_Step]();
 }
 
 MATCH void func_800F5BE0(void) {
@@ -250,39 +255,39 @@ MATCH void func_800F5BE0(void) {
 
     keys = &g_InputPressed;
     if ((INPUT_REPEATED(*keys, (PADLright | PADLleft)) & (PADLright | PADLleft)) != 0) {
-        D_800F7248 ^= 1;
+        s_ShopDeclined ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     } else {
         if ((*keys & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
-            D_800F7248 = 1;
+            s_ShopDeclined = 1;
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             {
-                u8 work = D_800F724C - 1;
+                u8 work = s_ShopMode - 1;
                 u8 sel  = s_ListCursor & 0x7F;
 
                 s_ListCursor = sel;
-                D_800F724C   = work;
+                s_ShopMode   = work;
             }
         }
         if ((*keys & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
-            if (D_800F7248 == 0) {
+            if (s_ShopDeclined == 0) {
                 UI_SetMode(0);
                 s_Step += 1;
             } else {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
                 {
-                    u8 work = D_800F724C - 1;
+                    u8 work = s_ShopMode - 1;
                     u8 sel  = s_ListCursor & 0x7F;
 
                     s_ListCursor = sel;
-                    D_800F724C   = work;
+                    s_ShopMode   = work;
                 }
             }
         }
     }
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ALL));
-    Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
+    Menu_DrawCursorSprite(s_ShopDeclined * 32 + 0xEE, 0x16, 0);
     func_800F606C(0);
     func_800F6730();
     func_800F5E44();
@@ -295,7 +300,7 @@ MATCH void func_800F5D98(void) {
     }
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ALL));
-    Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
+    Menu_DrawCursorSprite(s_ShopDeclined * 32 + 0xEE, 0x16, 0);
     func_800F606C(0);
     func_800F6730();
     func_800F5E44();
@@ -357,7 +362,7 @@ MATCH void func_800F606C(s32 draw_all) {
     n = draw_all & BYTE_MASK;
     func_800F63CC(0x14, 0x38, n);
     UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_TRADE_ITEM_LABEL));
-    for (i = 0; i < D_800F7240; i++) {
+    for (i = 0; i < s_ShopItemCount; i++) {
         h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)], ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
         w = func_800F65A8(i & BYTE_MASK, 1);
         if ((draw_all & BYTE_MASK) != 0) {
@@ -579,7 +584,7 @@ MATCH void func_800F6EE0(u16 x, u16 y) {
 MATCH void func_800F7094(s32 x, s32 y, s32 item_id, s32 category, u8 selected) {
     item_id &= BYTE_MASK;
     if (item_id != 0) {
-        func_801AEA80((u16)x, (u16)y, D_800F722C[Item_GetIcon(category & BYTE_MASK, item_id) & BYTE_MASK], selected);
+        func_801AEA80((u16)x, (u16)y, s_ShopItemIcons[Item_GetIcon(category & BYTE_MASK, item_id) & BYTE_MASK], selected);
     }
 }
 

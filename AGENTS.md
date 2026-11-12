@@ -38,7 +38,7 @@ pages.
 - One worktree per task ([worktrees](tools/README.md#worktrees)); rebase on `main` before each push.
 - `meson compile -C build/meson format`, then `pre-push` ([checks](tools/README.md#pre-push)).
 - A `config/symbols.toml` conflict keeps both sides, one row per symbol per image, in address order.
-- A failed try is one line in `config/attempts.tsv`, never a comment in `src/`.
+- A failed try is one line in `config/attempts.jsonl`, never a comment in `src/`.
 
 ## Writing
 
