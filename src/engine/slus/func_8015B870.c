@@ -27,7 +27,7 @@ MATCH s32 func_8015B870(u32 kind) {
         case 8:
             return D_80143F03;
         case 9:
-            return g_SceneState.flags_01 & 1;
+            return g_SceneState.flags_01 & 0x1;
         case 10:
             return g_Task->script_pc;
         case 11:

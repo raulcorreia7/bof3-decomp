@@ -33,7 +33,7 @@ MATCH void func_801EEFA8(void) {
 
     handlers = D_801EEC10;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
-    if ((g_Task->header.flags & 1) && g_Task->header.step != 0) {
+    if ((g_Task->header.flags & 0x1) && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFAA4();
         func_801F0054();
@@ -79,7 +79,15 @@ MATCH void func_801EF134(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1F4);
+MATCH void func_801EF1F4(void) {
+    g_Task->unk_09 += 1;
+    g_PaletteFades[g_Task->param.unk_0B].offset.red += 2;
+    g_PaletteFades[g_Task->param.unk_0B].offset.green += 2;
+    g_PaletteFades[g_Task->param.unk_0B].offset.blue += 2;
+    if (g_PaletteFades[g_Task->param.unk_0B].offset.red == 0x10) {
+        g_Task->header.step += 1;
+    }
+}
 
 /* Counts the effect counter up and fades the palette row the effect claimed down to zero, then steps. */
 MATCH void func_801EF320(void) {

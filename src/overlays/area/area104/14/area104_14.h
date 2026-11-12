@@ -15,8 +15,25 @@ extern Callback D_801F6A64[];
 extern u8       D_801F6A78[];
 extern u8       D_801F6A80[];
 extern u8       D_801F6A90[];
+
+/* One torch gauge arrow cell: the clut byte and the u byte of one gauge state. */
+typedef struct TorchGaugeCell {
+    u8 clut;
+    u8 u;
+} TorchGaugeCell;
+
+/* The arrow cell of each gauge state. */
+typedef struct TorchGaugeCells {
+    TorchGaugeCell rows[2];
+} TorchGaugeCells;
+
+ASSERT_SIZE(TorchGaugeCells, 0x04);
+
+extern TorchGaugeCells D_801F2C04;
+extern u8              D_801F2C08[];
+
 /* The map arrow sprite's width, height, u and v per sprite id. */
-extern u8       D_801F6AA0[];
+extern u8 D_801F6AA0[];
 #define AREA_HUD_SPRITE_CELLS D_801F6AA0
 extern u8 D_801F6B10[];
 extern u8 D_801F6B18[];

@@ -18,7 +18,7 @@ MATCH void func_800AF9D4(BattleSpriteCellRecord* record) {
     remainder = dividend % divisor;
     base      = quotient;
     product   = s_BattleCellRowScale[index] * remainder;
-    if (record->flags_24 & 4) {
+    if (record->flags_24 & 0x4) {
         base = quotient + 0x10;
     }
     for (i = 1; i < (s_BattleCellRowCount[record->bank_index] << 4); i++) {

@@ -25,7 +25,7 @@ MATCH void func_801B9210(void) {
         }
     }
     saved                = g_Task->direction_08;
-    g_Task->direction_08 = saved ^ 4;
+    g_Task->direction_08 = saved ^ 0x4;
     mode                 = func_801B9598();
     if (mode == 1 || mode == 3) {
         if ((func_801BDF08() << 24) != 0) {

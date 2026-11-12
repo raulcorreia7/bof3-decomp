@@ -10,6 +10,9 @@
 #define BMAGIC_PHASE_ANGLE(phase) ((phase) << 6)
 #define BMAGIC_PHASE_MASK         0x3F
 
+/* The bytes a sparkle ray reserves in its cell packet. */
+#define BMAGIC_RAY_CELL_SIZE      32
+
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */
@@ -302,11 +305,14 @@ extern Callback          g_BMagicEffectModes[];
 extern BMagicEffectWork* D_801F17B0;
 extern BMagicEffectWork* D_801F17B4;
 
+/* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
+ * bytes, the scratchpad view does not. */
+extern SVECTOR D_1F800014[];
+
 /* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
  * the row's column and g_EmiLoadedCharacterIndex picks the id. */
 extern u16* D_800B499C[][2];
 
-/* func_800A9610 */
 void Battle_ApplyDamageFlags(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
@@ -330,14 +336,16 @@ void func_801F006C(void);
 u32  BMagic_AllocEffect(void);
 /* Defined in Effect_DrawBolt.h, which a member includes after its first call. */
 void Effect_DrawBolt(void);
+/* Defined in Effect_DrawSparkleRays.h, which a member includes after its first call. */
+void Effect_DrawSparkleRays(u16 angle, u16 radius);
+/* Defined in Effect_DrawSparkleWedges.h, which a member includes after its first call. */
+void Effect_DrawSparkleWedges(u16 angle, u16 radius);
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
 /* Defined in Effect_SetActorMatrixQuarterRoll.h, which a member includes after its first call. */
 void Effect_SetActorMatrixQuarterRoll(void);
 /* Defined in Effect_DrawScreenFade.h, which a member includes after its first call. */
 void Effect_DrawScreenFade(void);
-/* Defined in Effect_DrawSparkleRays.h, which a member includes after its first call. */
-void Effect_DrawSparkleRays(u16 angle, u16 radius);
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
     do {                                          \

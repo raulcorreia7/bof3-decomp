@@ -13,7 +13,7 @@ MATCH bool func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag) {
     if ((func_801C472C(pos_x, pos_y, probe_flag, 0x10, 0) & BYTE_MASK) == 0) {
         return 1;
     }
-    if ((g_Game.current->status.field.flags_12C.u8_value & 1) == 0) {
+    if ((g_Game.current->status.field.flags_12C.u8_value & 0x1) == 0) {
         if ((func_801C472C(pos_x, pos_y, probe_flag, 0x11, 0) & BYTE_MASK) == 0) {
             return 1;
         }

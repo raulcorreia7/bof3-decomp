@@ -20,7 +20,7 @@ MATCH void func_801EEC84(void) {
     g_Task->timer        = 0;
     g_Task->header.mode += 1;
     for (i = 0; i < 16; i++) {
-        slot                               = Battle_AllocEffect(1, 0x4C) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 76) & BYTE_MASK;
         g_BattleEffects[slot].target.party = g_Task;
         g_BattleEffects[slot].arg.unk_09   = D_801F0498[i] + 1;
         g_BattleEffects[slot].unk_04       = i;

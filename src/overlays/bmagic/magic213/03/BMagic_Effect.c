@@ -55,7 +55,7 @@ MATCH void func_801EF5BC(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        angle                               = g_Task->param.unk_0B & 7;
+        angle                               = g_Task->param.unk_0B & 0x7;
         D_1F800000.view.area.entity_counter = angle << 9;
         g_Task->pos.x.fixed                 = g_BattleEffectBattler->pos.x.fixed + rsin(D_1F800000.view.area.entity_counter) * 0xC;
         g_Task->pos.y.fixed                 = g_BattleEffectBattler->pos.y.fixed + rcos(D_1F800000.view.area.entity_counter) * 0xC;

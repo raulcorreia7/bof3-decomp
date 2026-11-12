@@ -52,7 +52,7 @@ MATCH void func_801D0F44(void) {
     func_801D1220(g_Task->color_g);
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
     func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
-    func_801D1914(0x40);
+    func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
@@ -63,7 +63,7 @@ MATCH void func_801D0F44(void) {
 MATCH void func_801D101C(void) {
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
     func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
-    func_801D1914(0x40);
+    func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
@@ -81,7 +81,7 @@ MATCH void func_801D10C4(void) {
     }
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
     func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
-    func_801D1914(0x40);
+    func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer    = 16;
@@ -106,7 +106,38 @@ INCLUDE_ASM(func_801D1540);
 
 INCLUDE_ASM(func_801D1690);
 
-INCLUDE_ASM(func_801D1914);
+MATCH void func_801D1914(s16 amount) {
+    VECTOR start;
+    VECTOR end;
+
+    start.vx = TO_COORD(48) + COORD_HALF;
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-768);
+    end.vx   = TO_COORD(48) + COORD_HALF;
+    end.vy   = TO_COORD(113) + COORD_HALF;
+    end.vz   = TO_COORD(-512);
+    func_801D1370(&start, &end, amount);
+
+    start.vx = TO_COORD(48);
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-384);
+    func_801D1370(&start, &end, amount);
+
+    end.vx = TO_COORD(48);
+    end.vy = TO_COORD(113) + COORD_HALF;
+    end.vz = TO_COORD(-256);
+    func_801D1370(&start, &end, amount);
+
+    start.vx = TO_COORD(48) + COORD_HALF;
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-128);
+    func_801D1370(&start, &end, amount);
+
+    end.vx = TO_COORD(48) + COORD_HALF;
+    end.vy = TO_COORD(113) + COORD_HALF;
+    end.vz = 0;
+    func_801D1370(&start, &end, amount);
+}
 
 INCLUDE_ASM(func_801D1A20);
 
