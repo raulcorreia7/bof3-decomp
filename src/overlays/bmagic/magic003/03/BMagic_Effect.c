@@ -363,7 +363,39 @@ MATCH void func_801EFCF8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFD4C);
+/* The 0x74 bytes of a battler row that a queued effect slot copies. */
+typedef struct BattleWorkImage {
+    u32 words[29];
+} BattleWorkImage;
+
+MATCH void func_801EFD4C(void) {
+    BattleEffect*    image;
+    BattleWorkImage* dst;
+    BattleWorkImage* src;
+    u32              offset;
+    u32              slot;
+    u8               battler;
+
+    slot    = Battle_AllocEffect(1, 1);
+    battler = g_Battle.active_battler;
+    if (battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+        src  = (BattleWorkImage*)&g_Game.members[battler];
+        dst  = (BattleWorkImage*)&g_BattleEffects[slot & BYTE_MASK];
+        *dst = *src;
+    } else {
+        offset = (battler - BATTLE_PARTY_CHARACTERS_COUNT) * BATTLE_ENEMY_STRIDE;
+        dst    = (BattleWorkImage*)&g_BattleEffects[slot & BYTE_MASK];
+        *dst   = *(BattleWorkImage*)((u8*)g_BattleEnemyBattlers + offset);
+    }
+    FIELD(PartyMember*, D_801EC3A4, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE) = g_Task;
+    image                                                                      = &g_BattleEffects[slot & BYTE_MASK];
+    image->unk_06                                                              = 1;
+    image->handler_index                                                       = 1;
+    image->header.mode                                                         = 0;
+    image->header.step                                                         = 0;
+    image->arg.unk_09                                                          = 1;
+    g_Task->param.unk_0B += 1;
+}
 
 INCLUDE_ASM(func_801EFEC8);
 
