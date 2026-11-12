@@ -18,6 +18,9 @@
 /* The game-overlay state bytes the cancel paths reset. */
 
 extern u16      D_801492DC;
+/* The per-direction step table: the x and y words of each 8-byte entry. */
+extern u32      D_801F6308[];
+extern u32      D_801F630C[];
 /* The per-buffer ordering-table heads, one 8-byte entry per slot. */
 extern u32*     D_80143534[][2];
 /* The key-state word and its mask partner (gameui.h names it g_InputPressed). */
@@ -29,6 +32,7 @@ extern s8       D_801F6285[];
 /* The image's step passes. */
 void func_801F3514(void);
 void func_801F3800(void);
+s32  func_801F4A04(s32, s32);
 void func_801F559C(void);
 /* func_801F5F20 */
 void Actor_ClearVelocity(void);
