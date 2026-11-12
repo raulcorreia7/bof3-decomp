@@ -154,7 +154,7 @@ MATCH void func_801F7638(void) {
     FAKE_STACK_PADS(u8, 0x10);
 
     g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
-    burst               = MEM_PTR(Scena07Burst, 0x800E5148);
+    burst               = SCENA07_BURST_RECORD;
     burst->x            = g_Task->pos.x.fixed;
     y                   = g_Task->pos.y.fixed;
     D_801FDFBC          = burst;
