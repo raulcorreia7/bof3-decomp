@@ -393,14 +393,14 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     SetSprt(prim);
     setRGB0(prim, color, color, color);
     if ((sprite & BYTE_MASK) < 2) {
-        prim->x0 = g_Task->unk_2E.half - 0x20;
-        prim->y0 = g_Task->unk_30.half - 0x40;
+        prim->x0 = g_Task->unk_2E.half - 32;
+        prim->y0 = g_Task->unk_30.half - 64;
     } else {
-        prim->x0 = g_Task->unk_2E.half - 0x28;
-        prim->y0 = g_Task->unk_30.half - 0x40;
+        prim->x0 = g_Task->unk_2E.half - 40;
+        prim->y0 = g_Task->unk_30.half - 64;
     }
     setUV0(prim, D_801F13A4[sprite & BYTE_MASK].u, D_801F13A4[sprite & BYTE_MASK].v);
-    setWH(prim, 0x50, 0x48);
+    setWH(prim, 80, 72);
     SetSemiTrans(prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
 }
