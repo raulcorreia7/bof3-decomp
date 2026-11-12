@@ -310,10 +310,9 @@ and `INCLUDE_RODATA(D_<ADDR>)` resolve through the image's `-DASM_DIR`.
 ### Build model
 
 One source file builds one object. One image target links the objects through splat's `linker.ld`,
-in section order, and compares the flat payload with the retail bytes. A `target.toml` may declare
-a load reservation (`[[regions]]`) instead of extracting it: the link writes the window's fill and
-stamped words and includes the rest of the binary verbatim. `meson compile` and `check-<image>`
-use the same source and flags.
+in section order, and compares the flat payload with the retail bytes. A gap between code segments
+is a Splat `bin` row over the retail payload, so the link compares that window's bytes verbatim.
+`meson compile` and `check-<image>` use the same source and flags.
 
 ### objdiff
 

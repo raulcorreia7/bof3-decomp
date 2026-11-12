@@ -400,13 +400,13 @@ if have_game
   objdiff_json = custom_target('objdiff.json',
     output: ['objdiff.json', 'sdk.json'],
     depends: image_bins + draft_targets,
-    depend_files: ['config/project.toml', 'config/sdk/library-units.csv', 'tools/objdiff_config.py'],
+    depend_files: ['config/sdk/library-units.csv', 'tools/objdiff_config.py'],
     command: [venv_python, tools / 'objdiff_config.py', 'generate', '--root', root,
-              '--config', root / 'config/project.toml', '--build-dir', bld])
+              '--build-dir', bld])
   # The report names the commit that wrote it, so it is always rewritten.
   run_target('report',
     command: [venv_python, tools / 'objdiff_config.py', 'report', '--root', root,
-              '--config', root / 'config/project.toml', '--build-dir', bld],
+              '--build-dir', bld],
     depends: objdiff_json)
 
   rz_inputs = custom_target('rz-inputs',

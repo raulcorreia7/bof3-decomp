@@ -37,7 +37,7 @@ Fix causes before functions.
   ([residuals](#residuals)).
 - A reviewed span that is the head of a longer function is fixed by a `splat.yaml` merge, not by a
   per-function try.
-- An SDK, BIOS or hardware unit is classified (`sdk`, `hand-asm` in `config/project.toml`) and
+- An SDK, BIOS or hardware unit is classified (`sdk`, `hand-asm` in `tools/objdiff_config.py`) and
   counted, never recovered as game source.
 
 ## The loop
