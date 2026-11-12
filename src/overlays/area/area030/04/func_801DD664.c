@@ -7,7 +7,7 @@ MATCH void func_801DD664(void) {
     u8* panel;
     u16 index;
 
-    UI_DrawText(29, 20, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_DATA_PAGE_HINT));
+    UI_DrawText(29, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_DATA_PAGE_HINT));
 
     panel = &D_80144281;
     if (*panel != 8) {

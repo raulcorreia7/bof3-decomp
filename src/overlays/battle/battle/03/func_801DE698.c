@@ -6,14 +6,14 @@ MATCH void func_801DE698(void) {
     u16              count;
 
     work = D_801EB4DC;
-    if (work->unk_08 != GAME_NONE) {
+    if (work->timer != GAME_NONE) {
         mask = &g_Battle.outcome.event_flags;
-        *mask |= work->unk_01;
-        count        = work->unk_08 - 1;
-        work->unk_08 = count;
+        *mask |= work->event_type;
+        count       = work->timer - 1;
+        work->timer = count;
         if (count == 0) {
-            work->unk_00 = 0;
-            *mask &= ~D_801EB4DC->unk_01;
+            work->active = 0;
+            *mask &= ~D_801EB4DC->event_type;
             if ((func_801DE858(1) & BYTE_MASK) != 0) {
                 g_BattleMessageState = 0;
             }

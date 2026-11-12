@@ -54,7 +54,38 @@ MATCH void func_801EF254(void) {
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC14, header.step);
 }
 
-INCLUDE_ASM(func_801EF2CC);
+MATCH void func_801EF2CC(void) {
+    u8           count;
+    u8           i;
+    u8           slot;
+    PartyMember* actor;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        actor          = &g_Game.members[g_Task->unk_04];
+        g_Task->facing = actor->facing;
+        WorldPos_Copy(&g_Task->pos, &actor->pos);
+        g_Task->param.unk_0B = 0;
+        g_Task->unk_09       = 8;
+        g_Task->timer        = 0;
+        g_Task->header.step += 1;
+        i = 0;
+        do {
+            slot = BMagic_AllocEffect();
+            if (slot != GAME_NONE) {
+                work                                   = g_Task;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = ((i & BYTE_MASK) >> 2) + 0x10;
+                BMAGIC_EFFECT_SLOTS[slot].target.party = work;
+                g_Task->param.unk_0B += 1;
+            }
+            i++;
+        } while (i < 24);
+    }
+}
 
 MATCH void func_801EF444(void) {
     PartyMember* battler;
@@ -97,7 +128,7 @@ MATCH void func_801EF7D0(void) {
     if (g_Task->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         if (func_801DB524(g_Task->unk_04) & BYTE_MASK) {
-            func_800A9820(g_Task->unk_04);
+            Battle_MarkDamaged(g_Task->unk_04);
         }
         func_801E5988();
     }

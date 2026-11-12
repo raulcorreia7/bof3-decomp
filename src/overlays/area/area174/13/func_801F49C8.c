@@ -11,6 +11,6 @@ MATCH void func_801F49C8(void) {
     row   = FIELD(u8*, table, g_ScriptState->pad_03 * 4);
     row += g_ScriptState->cursor;
     step = row[2];
-    func_801F4A5C(D_801F6748[step], g_Game.members[0].facing ^ 4);
+    func_801F4A5C(D_801F6748[step], g_Game.members[0].facing ^ 0x4);
     g_ScriptState->cursor++;
 }

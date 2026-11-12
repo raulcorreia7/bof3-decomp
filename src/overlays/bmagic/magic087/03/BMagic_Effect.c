@@ -40,7 +40,7 @@ MATCH void func_801EF4A0(void) {
         return;
     }
     g_Task->unk_04 += 1;
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF580(0);
     func_801EF580(0xF);
 }

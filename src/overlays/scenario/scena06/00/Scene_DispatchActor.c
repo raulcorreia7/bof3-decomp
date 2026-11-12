@@ -1,4 +1,5 @@
 #include "scena06_00.h"
+#include "area/spad.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -168,7 +169,21 @@ INCLUDE_ASM(func_801FD3BC);
 
 INCLUDE_ASM(func_801FD568);
 
-INCLUDE_ASM(func_801FD748);
+MATCH s8 func_801FD748(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
+    s16 distance;
+    s16 z;
+
+    distance = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    z        = COORD_INT(g_Task->pos.z);
+    if (distance < z - 0x240) {
+        COORD_INT(g_Task->pos.z) = z + (g_Task->vz >> 8);
+        g_Task->vz += vz_delta;
+        return 1;
+    }
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x240;
+    g_Task->unk_04           = 0;
+    return 0;
+}
 
 INCLUDE_ASM(func_801FD800);
 

@@ -2,7 +2,7 @@
 
 MATCH void func_801F3130(void) {
     g_Task->screen_y = 0;
-    if (SYS_TestFlag(g_SceneEventFlags, 0x28) != 0) {
+    if (SYS_TestFlag(g_SceneEventFlags, 40) != 0) {
         Actor_Clear();
         return;
     }

@@ -14,7 +14,7 @@ MATCH void func_801F3C3C(s32 delta) {
         color = *src;
         r     = color & 0x1F;
         g     = (color >> 5) & 0x1F;
-        b     = (color >> 0xA) & 0x1F;
+        b     = (color >> 10) & 0x1F;
         if (r != 0) {
             r += delta;
             if (r <= 0) {

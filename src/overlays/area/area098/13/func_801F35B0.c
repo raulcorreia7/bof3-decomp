@@ -18,8 +18,8 @@ MATCH void func_801F35B0(void) {
     if (g_GameStateIndex != 2 && g_MessageRequest == 0x12 && D_80146875 == 0xC) {
         task         = g_Task;
         task->timer  = 0;
-        task->vx     = 0xA000;
-        task->vy     = 0xB000;
+        task->vx     = 40960;
+        task->vy     = 45056;
         task->unk_18 = 0;
         task->unk_1C = 0;
         g_Task->header.mode += 1;

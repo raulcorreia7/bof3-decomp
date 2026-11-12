@@ -5,9 +5,9 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "engine/game/00/game_00.h"
 
 extern u8 D_80144908[];
-extern u8 D_80144F5E;
 
 extern u8 D_80144F5F;
 
@@ -19,6 +19,8 @@ extern u8 D_80146871;
 extern u8 D_80146874;
 
 extern u8       D_80146875;
+extern s32      g_AreaFocusY;
+extern u16      D_80147A96;
 extern u32      D_801F6C00;
 extern Callback D_801FC418[];
 extern Callback D_801FC424[];

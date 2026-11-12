@@ -38,6 +38,11 @@ from bof3.toolchain.splat import splat_output_current, split_target
 #: Bounded so a split leaves cores free for the rest of the build.
 WORKERS = 8
 
+#: The files under ``config/`` that decide the graph: a target's layout and manifest, and the two
+#: tables its link script resolves names against. The rest of ``config/`` is bookkeeping (attempts,
+#: address names), the disc manifest or the SDK unit list, and none of it decides a row.
+GRAPH_CONFIG = frozenset({"splat.yaml", "target.toml", "link.toml", "symbols.toml"})
+
 
 def ensure_payload(root: Path, manifest: TargetManifest) -> Path:
     """Return the target's generated binary, deriving it from the disc when missing."""
@@ -117,7 +122,7 @@ def graph_inputs(root: Path, sources: set[str]) -> list[str]:
     files = {
         path.relative_to(root).as_posix()
         for path in (root / CONFIG).rglob("*")
-        if path.is_file()
+        if path.is_file() and path.name in GRAPH_CONFIG
     }
     for module in list(sys.modules.values()):
         path = getattr(module, "__file__", None)

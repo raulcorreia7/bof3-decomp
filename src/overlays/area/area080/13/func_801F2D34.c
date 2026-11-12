@@ -8,7 +8,7 @@ MATCH void func_801F2D34(void) {
     func_801F31A0(D_801F44A0);
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
-    if (!(remaining & 0xFF)) {
+    if (!(remaining & BYTE_MASK)) {
         func_801F3834();
         g_Task->timer = 120;
         g_Task->header.mode++;

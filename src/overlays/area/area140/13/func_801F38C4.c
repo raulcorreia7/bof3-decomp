@@ -5,7 +5,7 @@ MATCH void func_801F38C4(void) {
 
     z                        = (u16)COORD_INT(g_Task->pos.z) - 0x10;
     COORD_INT(g_Task->pos.z) = z;
-    if ((z << 0x10) <= 0) {
+    if ((z << 16) <= 0) {
         Area_ClearCellPalette((s32)(s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         g_Task->header.step = 1;
     }

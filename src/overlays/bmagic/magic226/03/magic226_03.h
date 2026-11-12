@@ -5,8 +5,14 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The scratch angle cell the meteor arc sets and reads. */
+extern s16 D_1F800004;
+
 extern Callback D_801F0C44[];
 extern Callback D_801F0C60[];
+
+/* The four rise speeds (z velocity) the meteor's arc picks by param.unk_0B & 3. */
+extern s32 D_801F0C68[];
 
 extern Callback D_801F0C78[];
 void            func_801F01B8(void);
