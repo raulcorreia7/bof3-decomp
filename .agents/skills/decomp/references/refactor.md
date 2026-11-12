@@ -19,8 +19,9 @@
    only when every member is exact; pull the share back when one diverges.
 5. Read the result as its original programmer would have written it
    ([the rule](../../../../docs/conventions.md#write-it-as-the-original-programmer-did)); rewrite any
-   line that still reads like decompiler output. Finish with `pre-push`: every image matches
-   (`check`), every source builds as plain C (`check-plain`) and no function falls back to `INCLUDE_ASM`.
+   line that still reads like decompiler output. Re-run `check-<image>` for every touched image.
+6. Gate: `pre-push` passes — every image matches (`check`), every source builds as plain C
+   (`check-plain`) and no function falls back to `INCLUDE_ASM`.
 
 A missing shared type outside the grant is a `needs: type <Type>+0xOFF <width> (<n> sites)` line.
 
