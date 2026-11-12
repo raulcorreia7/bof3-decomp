@@ -81,7 +81,8 @@ extern u8       D_801DB0CC;
 extern u8       D_801DB0D0;
 extern u8       D_801DB0D4;
 extern u8       D_801DB0D8;
-extern s8       D_801DB0DC;
+extern u8       D_801DB0DC;
+extern u8       g_Fairies[][9];
 extern u8       D_801F2944;
 extern u8       D_801F2945;
 

@@ -1957,6 +1957,7 @@ g_Commu02Event3Step2Funcs = { addr = 0x801DAE44, source = "9 sub-step handlers o
 g_Commu02Event3Step2Sub6Funcs = { addr = 0x801DAE68, source = "3 handlers of sub-step 6 of step 2 of the commu02 scene event 3, called by func_801D7474 (the sub-step 6 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_Commu02Event3Step2Sub7Funcs = { addr = 0x801DAE74, source = "5 handlers of sub-step 7 of step 2 of the commu02 scene event 3, called by func_801D7660 (the sub-step 7 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index." }
+g_Fairies = { addr = 0x801F2700, source = "Fairy_JoinVillage copies the 5-byte name of a 9-byte roster row" }
 
 ["emi/etc/commu03/06"]
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
