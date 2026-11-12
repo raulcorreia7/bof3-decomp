@@ -267,7 +267,27 @@ MATCH void func_801D2DEC(void) {
 
 INCLUDE_ASM(func_801D2E30);
 
-INCLUDE_ASM(func_801D2FD8);
+MATCH void func_801D2FD8(void) {
+    u8     mode;
+    RECT   rect;
+    Actor* actor;
+
+    actor        = g_Task;
+    mode         = actor->timer - 1;
+    actor->timer = mode;
+    if (!(mode & BYTE_MASK)) {
+        rect.x = 832;
+        rect.y = 256;
+        rect.w = D_801D3940[D_801D40AC].w;
+        rect.h = D_801D3940[D_801D40AC].h;
+        StoreImage(&rect, (u32*)AREA_WORK);
+        D_801D40B0    = AREA_WORK;
+        D_801D40B4    = 0x800EA200;
+        D_801D40A8    = 0;
+        g_Task->timer = 0;
+        g_Task->header.mode++;
+    }
+}
 
 INCLUDE_ASM(func_801D30AC);
 
