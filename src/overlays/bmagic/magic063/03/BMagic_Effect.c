@@ -161,7 +161,16 @@ MATCH void func_801EFD7C(void) {
 
 INCLUDE_ASM(func_801EFE04);
 
-INCLUDE_ASM(func_801EFF18);
+MATCH void func_801EFF18(void) {
+    g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
+    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->unk_09 += 2;
+    g_BMagicOrbitWork->unk_0B++;
+    if (g_BMagicOrbitWork->unk_09 == 0x10) {
+        g_BMagicOrbitWork->header.step++;
+    }
+}
 
 MATCH void func_801EFFE8(void) {
     g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
