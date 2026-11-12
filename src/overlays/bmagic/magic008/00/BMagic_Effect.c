@@ -335,7 +335,7 @@ MATCH void func_801F0DA8(void) {
 MATCH void func_801F0E54(void) {
     s8 tint;
 
-    g_Task->header.flags |= 0x20;
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     g_Task->unk_5C      = 1;
     g_Task->unk_2B      = 1;
     tint                = -0x50;
