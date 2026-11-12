@@ -8,6 +8,11 @@ and line.
 2. Run the quality pass below on it, one row at a time, until every row is read.
 3. List one finding per line: `file:line class fix`, then the count per class.
 
+The first review is complete: it reads the whole diff and lists every finding. A later review verifies
+the last review's findings and raises a new one only for a byte, marker, gate or wrong-file error.
+Mark every finding `[blocks]` (bytes, marker, gate, wrong file) or `[polish]`; only `[blocks]`
+stops a delivery.
+
 ## Quality pass
 
 | Check                  | Command                                                                                                                   | Fix                                                                                                                                                  |
