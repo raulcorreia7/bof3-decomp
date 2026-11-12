@@ -307,7 +307,7 @@ MATCH void func_801F153C(void) {
     D_801F24E0->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
     COORD_INT(D_801F24E0->pos.z) += D_801F1C74[D_801F24E0->unk_07] << 6;
     D_801F24E0->phase_0C = 0x40;
-    D_801F24E0->timer_05 = 0x10;
+    D_801F24E0->timer_05 = 16;
     D_801F24E0->unk_06   = 8;
     D_801F24E0->header.step += 1;
 }
