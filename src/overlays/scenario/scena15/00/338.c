@@ -173,7 +173,7 @@ MATCH void func_801F7D1C(void) {
     UPoint2D pos;
 
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
-        g_Actors[g_Task->param.unk_0B].active_flags &= 0xF7;
+        g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
         g_Task->header.mode = 0;
     } else {
         func_801F83AC(&pos);
@@ -186,25 +186,17 @@ MATCH void func_801F7D1C(void) {
 
 MATCH void func_801F7E2C(void) {
     UPoint2D pos;
-    s8       tune;
-    s8       tune2;
-    Actor*   spad;
-    Actor*   spad2;
 
     func_801F83AC(&pos);
-    spad = g_Task;
-    tune = spad->tint.signed_bytes.unk_5D;
-    if (tune < 0x70) {
-        spad->tint.signed_bytes.unk_5D = tune + 2;
+    if (g_Task->tint.signed_bytes.unk_5D < 0x70) {
+        g_Task->tint.signed_bytes.unk_5D += 2;
     }
-    spad2 = g_Task;
-    tune2 = spad2->tint.signed_bytes.unk_5E;
-    if (tune2 < 0x30) {
-        spad2->tint.signed_bytes.unk_5E = tune2 + 1;
+    if (g_Task->tint.signed_bytes.unk_5E < 0x30) {
+        g_Task->tint.signed_bytes.unk_5E += 1;
     }
     func_801F81D8(pos.x, pos.y);
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
-        g_Actors[g_Task->param.unk_0B].active_flags &= 0xF7;
+        g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
         g_Task->header.mode = 0;
     }
     if ((g_Task->tint.word & 0xFFFF00) == 0x307000) {
