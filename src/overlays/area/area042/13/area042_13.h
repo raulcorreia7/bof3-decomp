@@ -10,6 +10,11 @@
 void func_801F37A8(s32 arg0, s32 arg1);
 
 extern u8 D_801F2C04[];
+/* One-byte views of the colour triplets in the payload table: the retail code names the second and
+ * third channel by its own address. */
+extern u8 D_801F52C4[];
+extern u8 D_801F52C5[];
+extern u8 D_801F52C6[];
 extern u8 D_801F52D0[];
 extern u8 D_801F52E0[];
 extern u8 D_801F52E8[];
