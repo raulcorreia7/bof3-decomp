@@ -71,8 +71,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 0);
-    tile->x0 = screen.vx;
-    tile->y0 = screen.vy;
+    setXY0(tile, screen.vx, screen.vy);
     shade    = -(rand() & 1);
     tile->b0 = shade;
     tile->g0 = shade;
