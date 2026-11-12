@@ -237,7 +237,26 @@ MATCH void func_801F87F8(void) {
     SCENA15_PARTY_SETUP();
 }
 
-INCLUDE_ASM(func_801F8874);
+MATCH void func_801F8874(void) {
+    Actor* work;
+    u8*    counter;
+
+    work = g_Task;
+    if (work->tint.bytes.unk_5D < 0xF8) {
+        work->tint.bytes.unk_5D += 8;
+        g_Task->tint.bytes.unk_5E += 8;
+        g_Task->tint.bytes.unk_5F += 8;
+    } else {
+        work->tint.signed_bytes.unk_5F = -1;
+        work->tint.signed_bytes.unk_5E = -1;
+        work->tint.signed_bytes.unk_5D = -1;
+        counter                        = &g_SceneState.step_05;
+        *counter                       = *counter + 1;
+        g_Task->header.mode            = 2;
+    }
+    func_801F79C4();
+    func_801F8958();
+}
 
 MATCH void func_801F8930(void) {
     func_801F79C4();
