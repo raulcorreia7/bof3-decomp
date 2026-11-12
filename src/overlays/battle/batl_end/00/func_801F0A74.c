@@ -16,5 +16,5 @@ MATCH void func_801F0A74(s16 x, s16 y, u8 clut, u8 category, u8 item, u8 amount,
         return;
     }
     TEXT_Format(g_UiFormatBuffer, D_801EEC50, amount);
-    UI_DrawGlyphString(x + 0x6D, y + 2, clut, g_UiFormatBuffer);
+    UI_DrawGlyphString(x + 109, y + 2, clut, g_UiFormatBuffer);
 }
