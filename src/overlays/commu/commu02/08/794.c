@@ -466,7 +466,49 @@ MATCH s32 func_801D5AD0(s32 limit) {
     return roll & BYTE_MASK;
 }
 
-INCLUDE_ASM(func_801D5B2C);
+MATCH void func_801D5B2C(void) {
+    u8* src;
+    u8  i;
+    s32 j;
+
+    g_UiFormatBuffer[0] = 0x2A;
+    i                   = 1;
+    src                 = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
+    while (*src != STRING_END) {
+        g_UiFormatBuffer[i] = *src;
+        i++;
+        if ((u8)(*src - STRING_SKIP) < 2) {
+            src++;
+            g_UiFormatBuffer[i] = *src;
+            i++;
+        }
+        src++;
+    }
+    if (D_801DB0AE != 0xFF) {
+        src = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AE) * 2);
+        while (*src != STRING_END) {
+            g_UiFormatBuffer[i] = *src;
+            i++;
+            if ((u8)(*src - STRING_SKIP) < 2) {
+                src++;
+                g_UiFormatBuffer[i] = *src;
+                i++;
+            }
+            src++;
+        }
+    }
+    g_UiFormatBuffer[i] = 0x2B;
+    i++;
+    g_UiFormatBuffer[i] = STRING_SPACE;
+    i++;
+    for (j = 0; j < 5; j++) {
+        g_UiFormatBuffer[i] = D_801457E8[D_801F2948[5]][j];
+        i++;
+    }
+    g_UiFormatBuffer[i] = STRING_END;
+    UI_DrawText(0x32, 0x1E, 0, 0xFF, g_UiFormatBuffer);
+    UI_DrawText(0x32, 0x42, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 227 + (s8)D_801DB0B4));
+}
 
 MATCH void func_801D5D5C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3States, D_801F294C);
@@ -661,7 +703,36 @@ MATCH void func_801D67F0(void) {
     D_801DB0DC = func_801DA114();
 }
 
-INCLUDE_ASM(func_801D68AC);
+MATCH void func_801D68AC(void) {
+    s32 i;
+
+    D_801DB0C4 = D_801DB0C4 + 1;
+    if (D_801DB0DC != 0) {
+        func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    } else {
+        func_801D830C(0x44 - (D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    }
+    func_801D97C8(D_801DAAA8, (D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
+    func_801D9B80(0x12, (D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, (D_801DB0C4 * 0x1E) + 0x67, D_801DB0D4, D_801DB0D8);
+    if (D_801DB0C4 == 4) {
+        if (D_801DB0DC != 0) {
+            if (D_801DB080[0] == 0) {
+                for (i = 0; i < 5; i++) {
+                    D_801DB080[i] = g_Fairies[func_801D7EA0(D_801DB0B4) & BYTE_MASK][i];
+                }
+            }
+            Message_StartAreaMessage(244);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_801F294E += 1;
+        } else {
+            Message_StartAreaMessage(247);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_801F294C       = 4;
+            D_801F294D       = 0;
+        }
+    }
+}
 
 MATCH void func_801D6AC8(void) {
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);

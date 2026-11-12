@@ -10,7 +10,17 @@ INCLUDE_ASM(func_801EEC88);
 
 INCLUDE_ASM(func_801EEDD0);
 
-INCLUDE_ASM(func_801EEEF4);
+MATCH void func_801EEEF4(void) {
+    g_PaletteFades[g_Task->timer].offset.red--;
+    g_PaletteFades[g_Task->timer].offset.green--;
+    g_PaletteFades[g_Task->timer].offset.blue--;
+    if (--g_Task->unk_09 == 0) {
+        GFX_FreePaletteFadeTarget(D_8014637C);
+        func_800AF814(g_Battle.active_battler);
+        g_Task->unk_09 = 16;
+        g_Task->header.mode++;
+    }
+}
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 

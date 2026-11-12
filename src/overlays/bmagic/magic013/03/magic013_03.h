@@ -7,6 +7,8 @@
 
 extern Magic010SharedSteps D_801EEC04;
 
+extern s32 D_1F800004;
+
 extern Callback     D_801F03C0[];
 extern Callback     D_801F03DC[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
