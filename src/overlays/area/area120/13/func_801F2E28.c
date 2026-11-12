@@ -9,7 +9,7 @@ MATCH void func_801F2E28(void) {
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {
         slot = &g_ActorSlots[index];
-        GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
+        GFX_ClearRect(832, 256, 128, 256);
         *slot              = *(ActorSlot*)&g_Actors[2];
         slot->header.flags = 1;
         slot->pos.x.fixed  = g_Actors[2].pos.x.fixed;
