@@ -379,7 +379,7 @@ MATCH void func_801F8D4C(Scena08Spark* spark) {
     s32 speed;
 
     life         = spark->life - 1;
-    speed        = spark->speed + 0x40000;
+    speed        = spark->speed + TO_COORD(4);
     spark->life  = life;
     spark->speed = speed;
     spark->z += speed;
