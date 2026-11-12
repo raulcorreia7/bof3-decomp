@@ -1,3 +1,28 @@
 #include "area080_13.h"
 
-INCLUDE_ASM(func_801F2C48);
+MATCH void func_801F2C48(void) {
+    Actor*    work;
+    AreaRing* ring;
+
+    work              = g_Task;
+    work->pos.x.fixed = D_80146954.x.fixed;
+    work->pos.y.fixed = D_80146954.y.fixed;
+    work->pos.z.fixed = D_80146954.z.fixed;
+
+    ring            = (AreaRing*)AREA_WORK;
+    D_801F44A0      = ring;
+    ring->base[0]   = work->pos.x.fixed;
+    ring->base[1]   = work->pos.y.fixed;
+    ring->base[2]   = work->pos.z.fixed + TO_COORD(2048);
+    ring->center[0] = work->pos.x.fixed;
+    ring->center[1] = work->pos.y.fixed;
+    ring->center[2] = work->pos.z.fixed;
+    ring->unk_22    = 32;
+    ring->unk_23    = 0;
+    ring->radius    = 0;
+
+    func_801F3834();
+
+    g_Task->timer = 16;
+    g_Task->header.mode += 1;
+}
