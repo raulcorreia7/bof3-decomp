@@ -91,19 +91,6 @@ ASSERT_OFFSET(BattleEventSlot, group, 0x03);
 ASSERT_OFFSET(BattleEventSlot, payload, 0x04);
 ASSERT_OFFSET(BattleEventSlot, timer, 0x08);
 
-/* One of the two 4-byte drop rows at EnemyBattler+0x98 (Battle_RollEnemyDrops). */
-typedef struct BattleSpritePrimitive {
-    u8  pad_00[4];
-    u8  r0;
-    u8  g0;
-    u8  b0;
-    u8  pad_07;
-    s16 x0;
-    s16 y0;
-    s16 unk_0C;
-    s16 unk_0E;
-} BattleSpritePrimitive;
-
 /* The battle sub-step byte 0x801462E2 selects one of these four entrance
  * handlers, copied to the stack from 0x801D0C1C. */
 typedef struct {
