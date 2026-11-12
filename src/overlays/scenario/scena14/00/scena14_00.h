@@ -14,14 +14,13 @@ extern u8 D_80144F5F;
 extern u8 D_80145FF4;
 extern u8 D_80146134;
 
-extern s32 g_AreaFocusY;
-extern u16 D_80147A96;
-
 /* kept: written as g_SceneState.flags_01, func_801F8850 changes size and the image symbols move. */
 extern u8 D_80146871;
 extern u8 D_80146874;
 
 extern u8       D_80146875;
+extern s32      g_AreaFocusY;
+extern u16      D_80147A96;
 extern u32      D_801F6C00;
 extern Callback D_801FC418[];
 extern Callback D_801FC424[];
