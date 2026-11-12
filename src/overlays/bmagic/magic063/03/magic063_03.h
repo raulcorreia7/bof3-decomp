@@ -21,5 +21,6 @@ void            func_801EECF8(void);
 void            func_801EF340(void);
 void            func_801EF994(void);
 void            func_801EFA5C(void);
+void            func_801F03B0(void);
 
 #endif
