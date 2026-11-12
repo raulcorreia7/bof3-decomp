@@ -72,7 +72,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
     SetTile1(tile);
     SetSemiTrans(tile, 0);
     setXY0(tile, screen.vx, screen.vy);
-    shade    = -(rand() & 1);
+    shade    = -RANDOM_MASK(1);
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;
