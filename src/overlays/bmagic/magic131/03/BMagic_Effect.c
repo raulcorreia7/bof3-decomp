@@ -20,7 +20,7 @@ MATCH void func_801EF3D0(void) {
     if (!EMI_IsReady()) {
         return;
     }
-    if (g_Battle.scroll_dir & 2) {
+    if (g_Battle.scroll_dir & 0x2) {
         EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex]);
     } else {
         EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex]);
