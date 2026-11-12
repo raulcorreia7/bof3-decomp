@@ -520,7 +520,35 @@ MATCH void func_801F9160(s16 x, s16 y) {
 
 INCLUDE_ASM(func_801F91F0);
 
+#ifdef NON_MATCHING
+NON_MATCHING u8 func_801F938C(void) {
+    u8* text;
+    s32 i;
+    s32 y;
+
+    i = 0;
+    y = 0;
+    do {
+        text = D_801F981C[D_801F9DD0 + i];
+        if (text != (u8*)-1 && text != NULL) {
+            func_801F91F0(16, (s16)(y - D_801F9DD4), text);
+        }
+        i++;
+        y += 22;
+    } while (i < 16);
+    if (D_801F981C[D_801F9DD0] != (u8*)-1) {
+        D_801F9DD4++;
+        if (D_801F9DD4 == 22) {
+            D_801F9DD4 = 0;
+            D_801F9DD0++;
+        }
+        return 0;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM(func_801F938C);
+#endif
 
 /* func_801F9490 */
 MATCH void Scene_RunSaveMenu(void) {
