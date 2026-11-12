@@ -1078,6 +1078,8 @@ Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies 
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 BMagic_DispatchMode = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic100 (Cyclone)." }
 Effect_PlayOnZeroTick = { addr = 0x801EEDF8, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic100 (Cyclone)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE58, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic100." }
