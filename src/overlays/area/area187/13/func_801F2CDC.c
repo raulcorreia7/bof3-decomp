@@ -22,7 +22,7 @@ MATCH void func_801F2CDC(void) {
             if (g_GameStateIndex != *state) {
                 Scene_ClearEventState();
                 D_8014504A = 0;
-                SYS_ClearFlag(state + 0x63C, 0x77);
+                SYS_ClearFlag(state + 0x63C, 119);
                 func_8019FA28(D_80145048, D_80145040, D_80145044, 4);
             }
             break;

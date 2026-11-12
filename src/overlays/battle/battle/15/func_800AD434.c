@@ -8,7 +8,7 @@ MATCH void func_800AD434(void) {
     work = (PartyMember*)g_Task;
     funcs[work->header.step]();
     two = 2u;
-    if (!(D_80148624 & 1)) {
+    if (!(D_80148624 & 0x1)) {
         BATTLE_WORK->header.mode = two;
         BATTLE_WORK->header.step = 0;
         return;

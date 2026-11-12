@@ -206,7 +206,7 @@ MATCH void func_801F72A0(void) {
     if (work->color_r == 0x80) {
         g_ScriptVarsReq.byte = 0x14;
         work->step           = 2;
-        g_Task->timer        = 0xFF;
+        g_Task->timer        = 255;
     }
 }
 
@@ -663,7 +663,7 @@ MATCH void func_801F8360(void) {
         PushMatrix();
         func_8015B410(&matrix);
         func_8015B4B0(&matrix);
-        if (i & 1) {
+        if (i & 0x1) {
             RotTransPers3(&v0, &v1, &v2, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         } else {
             RotTransPers3(&v3, &v4, &v5, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -785,7 +785,7 @@ MATCH void func_801F882C(void) {
         tail = SCN_EFFECT;
         tail->counter_09 += 1;
         tail = SCN_EFFECT;
-        if ((tail->counter_09 & 3) == 0) {
+        if ((tail->counter_09 & 0x3) == 0) {
             tail->channel_06 += 1;
         }
         func_801F8BCC();
@@ -810,7 +810,7 @@ MATCH void func_801F8930(void) {
         tail = SCN_EFFECT;
         tail->color_g -= 4;
         tail = SCN_EFFECT;
-        if ((tail->counter_09 & 7) == 0) {
+        if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
         }
         func_801F8BCC();
@@ -867,7 +867,7 @@ MATCH void func_801F8AB8(void) {
         tail = SCN_EFFECT;
         tail->color_g -= 4;
         tail = SCN_EFFECT;
-        if ((tail->counter_09 & 7) == 0) {
+        if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
         }
         func_801F8BCC();
@@ -1113,7 +1113,7 @@ MATCH void func_801F9644(void) {
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
             g_ScriptVarsReq.word = 0;
-            Area_AdvanceScroll(0x300);
+            Area_AdvanceScroll(768);
             func_801C601C(0);
             timer       = &g_AreaCameraAngle.vx;
             *timer      = (*timer + 0xAA);
@@ -1134,8 +1134,8 @@ MATCH void func_801F9644(void) {
             SYS_SetFlag(g_SceneFlags, 2U);
             return;
         }
-        if (SYS_TestFlag(g_SceneFlags, 0xA) == 0) {
-            SYS_SetFlag(g_SceneFlags, 0xAU);
+        if (SYS_TestFlag(g_SceneFlags, 10) == 0) {
+            SYS_SetFlag(g_SceneFlags, 10U);
             func_801BE1B0(0U);
             g_AreaScrollTargetX    = TO_COORD(38);
             g_AreaScrollTargetY[0] = TO_COORD(27) + COORD_HALF;
@@ -1161,7 +1161,7 @@ MATCH void func_801F9868(void) {
                     g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
                     g_ScriptVarsReq.word = 0;
                     SYS_SetFlag(g_SceneFlags, 3U);
-                    Area_AdvanceScroll(0x480);
+                    Area_AdvanceScroll(1152);
                     g_AreaCameraOffsetZ  = 0x480;
                     g_AreaCameraAngle.vz = 848;
                     func_801BE1B0(0U);
@@ -1174,7 +1174,7 @@ MATCH void func_801F9868(void) {
                         g_ActorSlots[D_1F800000[0]].type           = 0x13;
                         g_ActorSlots[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx;
                         g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 0x200;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 512;
                         g_ActorSlots[D_1F800000[0]].layer          = 0x90;
                         return;
                     }
@@ -1246,7 +1246,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             SsSetMVol(0, 0);
-            Message_StartAreaMessage(0x10);
+            Message_StartAreaMessage(16);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             SND_PlayBGM(6, 0x5A, 8);
             g_SceneState.timer_06 = 0;
@@ -1286,7 +1286,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            Message_StartAreaMessage(0x11);
+            Message_StartAreaMessage(17);
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;
             g_SceneState.step_05 = 4;
             break;
@@ -1436,7 +1436,7 @@ MATCH void func_801FA27C(void) {
             if (count != 0) {
                 count--;
                 *counter            = count;
-                g_AreaCameraOffsetZ = (((0x130 - count) * 0x57943u) >> 16);
+                g_AreaCameraOffsetZ = (((304 - count) * 0x57943u) >> 16);
                 break;
             }
             g_SceneState.step_05 = 5;
@@ -1886,7 +1886,7 @@ MATCH void func_801FB204(void) {
 
         case 3:
             g_GameFlags |= 0x180;
-            Message_StartAreaMessage(0xE);
+            Message_StartAreaMessage(14);
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;
             g_SceneState.step_05 = 4;
             break;
@@ -1902,7 +1902,7 @@ MATCH void func_801FB204(void) {
                 g_AreaScrollTargetY[0] = TO_COORD(29);
                 func_80153DE8();
                 D_80143F84.raw = TO_COORD(1408);
-                Area_AdvanceScroll(0x580);
+                Area_AdvanceScroll(1408);
                 g_AreaCameraAngle.vx  = -778;
                 g_AreaCameraAngle.vz  = 384;
                 g_AreaCameraOffsetZ   = 0x480;
@@ -1927,7 +1927,7 @@ MATCH void func_801FB204(void) {
                         g_ActorSlots[D_1F800000[0]].type           = 0x13;
                         g_ActorSlots[D_1F800000[0]].camera_angle.x = -682;
                         g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 0x200;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 512;
                         g_ActorSlots[D_1F800000[0]].layer          = 0x20;
                     }
                     *countdown           = 0x20;
@@ -2025,7 +2025,7 @@ MATCH void func_801FB744(void) {
             u8* request;
 
             request = &g_ScriptVars[2];
-            if (*request & 1) {
+            if (*request & 0x1) {
                 D_80147C54 = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(26) + COORD_HALF);
                 D_80147C58 = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(21) + COORD_HALF);
             }
@@ -2395,13 +2395,13 @@ MATCH void func_801FC810(void) {
 /* Step trigger: entry_08 of the scenario, called by Area_IsStepBlocked with its handler_x (x >> 16 is compared with the
  * column). A hit starts a scripted scene and returns 1; a nonzero result blocks the step. */
 MATCH s32 Scene_CheckStepTrigger(s32 x) { /* func_801FC818 */
-    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 0x10) == 43) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 16) == 43) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
         g_SceneState.state_04 = 7;
         g_SceneState.step_05  = 0;
     }
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_WHELP) {
         if (D_80143F03 == 0) {
-            if ((x >> 0x10) == 20) {
+            if ((x >> 16) == 20) {
                 if (SYS_TestFlag(g_SceneFlags, 7) != 0) {
                     return 0;
                 }

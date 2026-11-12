@@ -71,7 +71,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
         abr = 2;
     }
     piece = (PanelPiece*)g_Task->script;
-    tpage = GetTPage(0, abr & 3, 704, 256);
+    tpage = GetTPage(0, abr & 0x3, 704, 256);
     prim  = g_GfxPrimCursor;
     p     = prim;
     if ((u8*)(g_FrameBufferIndex * 0x9000 + PRIM_ARENA_BASE) < (prim + count * 0x28)) {
@@ -187,7 +187,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             quad->ft4.tpage = tpage;
             quad->ft4.clut  = GetClut(piece->clut * 16, STAGE_PALETTE_Y + 3);
-            SetSemiTrans(p, (abr >> 6) & 1);
+            SetSemiTrans(p, (abr >> 6) & 0x1);
 
             i++;
             sort_list++;

@@ -69,7 +69,7 @@ MATCH void func_801D0DA4(void) {
 INCLUDE_ASM(func_801D0E30);
 
 MATCH void func_801D0EC4(void) {
-    if (!(Scene_UpdateScanBars(0xF0) & BYTE_MASK)) {
+    if (!(Scene_UpdateScanBars(240) & BYTE_MASK)) {
         Actor_Clear();
     }
 }

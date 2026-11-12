@@ -12,7 +12,7 @@ MATCH void func_801F2DD4(void) {
             event = 60;
             break;
         case 1:
-            if (SYS_TestFlag(g_SceneFlags, 0x1B) == 0) {
+            if (SYS_TestFlag(g_SceneFlags, 27) == 0) {
                 Game_SetScriptActive();
                 event = 18;
             } else {

@@ -17,7 +17,7 @@ MATCH void func_801F6F8C(void) {
 }
 
 MATCH void func_801F6FC4(void) {
-    if ((g_FrameCount & 3) == 0) {
+    if ((g_FrameCount & 0x3) == 0) {
         func_801F802C();
     }
     func_801F7E14();
@@ -64,7 +64,7 @@ MATCH void func_801F7268(void) {
 
     func_801F8534();
     g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
-    if ((g_Task->unk_5A & 3) == 0) {
+    if ((g_Task->unk_5A & 0x3) == 0) {
         g_Task->unk_2C -= 1;
     }
     if (g_Task->unk_5A == 2) {
@@ -157,15 +157,15 @@ MATCH void func_801F79B0(void) {
 }
 
 MATCH void func_801F79EC(void) {
-    u8* record;
+    Scena08Spark* spark;
 
     if (g_Task->unk_5A == 4) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
     }
-    if ((g_Task->unk_5A & 7) == 0) {
-        record = func_801F8B14();
-        if (record != NULL) {
-            func_801F8B50(record);
+    if ((g_Task->unk_5A & 0x7) == 0) {
+        spark = func_801F8B14();
+        if (spark != NULL) {
+            func_801F8B50(spark);
         }
     }
     func_801F8BF8();
@@ -188,10 +188,10 @@ MATCH void func_801F7AD0(void) {
 
 MATCH void func_801F7B2C(void) {
     D_800E4C1E    = 0xC0;
-    g_Task->pos.x = 0x6B0000;
-    g_Task->pos.y = 0x460000;
-    g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 0x460000) << 16;
-    g_Task->timer = 0x20;
+    g_Task->pos.x = 7012352;
+    g_Task->pos.y = 4587520;
+    g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 4587520) << 16;
+    g_Task->timer = 32;
     g_Task->header.step += 1;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
 }
@@ -212,10 +212,10 @@ MATCH void func_801F7BA8(void) {
 
 MATCH void func_801F7C08(void) {
     if (--g_Task->timer == 0) {
-        g_Task->pos.x = 0x640000;
-        g_Task->pos.y = 0x760000;
-        g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 0x760000) << 16;
-        g_Task->timer = 0x20;
+        g_Task->pos.x = 6553600;
+        g_Task->pos.y = 7733248;
+        g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 7733248) << 16;
+        g_Task->timer = 32;
         g_Task->header.step += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
     }
@@ -286,7 +286,30 @@ MATCH void func_801F7DE8(void) {
 
 INCLUDE_ASM(func_801F7E14);
 
-INCLUDE_ASM(func_801F802C);
+MATCH void func_801F802C(void) {
+    AreaSprite* work;
+    u32         angle;
+
+    work = (AreaSprite*)func_801F7DAC();
+    if (work != NULL) {
+        work->flags    = 1;
+        work->flags_02 = 0;
+        work->origin.x = g_Task->pos.x.fixed;
+        work->origin.y = g_Task->pos.y.fixed;
+        work->origin.z = g_Task->pos.z.fixed >> 8;
+        angle          = (u32)rsin(g_Task->vx) >> 4;
+        if (g_Task->unk_06 == 7) {
+            angle = (u16)angle;
+            angle += ANGLE_180;
+        } else {
+            angle = (u16)angle;
+            angle += ANGLE_90;
+        }
+        work->normal.vx = rcos(angle) * 3;
+        work->normal.vy = rsin(angle) * 3;
+        work->normal.vz = 0;
+    }
+}
 
 INCLUDE_ASM(func_801F8108);
 
@@ -294,7 +317,7 @@ MATCH void func_801F81F4(u16 value) {
     s32 count;
     s32 index;
 
-    count = 0x40;
+    count = 64;
     do {
         index = count & BYTE_MASK;
         count -= 1;
@@ -312,28 +335,28 @@ INCLUDE_ASM(func_801F85F0);
 INCLUDE_ASM(func_801F8964);
 
 MATCH void func_801F8AE8(void) {
-    s32 index;
-    s8* cell;
+    s32           index;
+    Scena08Spark* spark;
 
-    cell  = (s8*)AREA_WORK;
+    spark = (Scena08Spark*)AREA_WORK;
     index = 0;
     do {
-        *cell = 0;
+        spark->active = 0;
         index += 1;
-        cell += 0x1C;
-    } while ((index & BYTE_MASK) < 8U);
+        spark += 1;
+    } while ((index & BYTE_MASK) < SCENA08_SPARK_COUNT);
 }
 
-MATCH u8* func_801F8B14(void) {
-    u8* p;
-    u8  i;
+MATCH Scena08Spark* func_801F8B14(void) {
+    Scena08Spark* spark;
+    u8            i;
 
-    p = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < 8; i++) {
-        if (*p == 0) {
-            return p;
+    spark = (Scena08Spark*)AREA_WORK;
+    for (i = 0; i < SCENA08_SPARK_COUNT; i++) {
+        if (spark->active == 0) {
+            return spark;
         }
-        p += 0x1C;
+        spark += 1;
     }
     return NULL;
 }
@@ -341,40 +364,53 @@ MATCH u8* func_801F8B14(void) {
 INCLUDE_ASM(func_801F8B50);
 
 MATCH u8 func_801F8BF8(void) {
-    u8  i;
-    s32 live;
-    u8* slot;
-    u8  buffer[0x20];
+    u8            i;
+    s32           live;
+    Scena08Spark* spark;
+    u8            buffer[0x20];
 
     live = 0;
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
     Area_SetCameraMatrix(buffer);
-    slot = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < 8; i += 1, slot += 0x1C) {
-        if (slot[0] != 0) {
-            D_801FE8FC[slot[1]](slot);
+    spark = (Scena08Spark*)AREA_WORK;
+    for (i = 0; i < SCENA08_SPARK_COUNT; i += 1, spark += 1) {
+        if (spark->active != 0) {
+            D_801FE8FC[spark->kind](spark);
             live = 1;
-            func_801F8964(slot);
+            func_801F8964(spark);
         }
     }
     return live;
 }
 
-MATCH void func_801F8CDC(Actor* actor) {
-    u8 state;
+MATCH void func_801F8CDC(Scena08Spark* spark) {
+    u8 life;
 
-    state = actor->header.step - 1;
-    actor->unk_03 += 6;
-    actor->header.step = state;
-    if (state == 0) {
-        actor->header.step = actor->unk_04;
-        actor->header.mode += 1;
+    life = spark->life - 1;
+    spark->fade += 6;
+    spark->life = life;
+    if (life == 0) {
+        spark->life = spark->life_reload;
+        spark->kind += 1;
     }
 }
 
 #include "overlays/scenario/Actor_Wait.h"
 
-INCLUDE_ASM(func_801F8D4C);
+MATCH void func_801F8D4C(Scena08Spark* spark) {
+    u8  life;
+    s32 speed;
+
+    life         = spark->life - 1;
+    speed        = spark->speed + TO_COORD(4);
+    spark->life  = life;
+    spark->speed = speed;
+    spark->z += speed;
+    spark->fade += 6;
+    if (life == 0) {
+        spark->active = 0;
+    }
+}
 
 INCLUDE_ASM(func_801F8D98);
 
@@ -413,38 +449,51 @@ MATCH void func_801F98B0(void) {
 
 MATCH void func_801F98E0(void) {
     if (--g_Task->timer == 0) {
-        g_Task->pos.x = 0x510000;
-        g_Task->pos.y = 0x420000;
+        g_Task->pos.x = 5308416;
+        g_Task->pos.y = 4325376;
         g_Task->pos.z = 0x2C00000;
-        g_Task->vz    = 0x800000;
+        g_Task->vz    = 8388608;
         g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
     }
 }
 
-INCLUDE_ASM(func_801F995C);
+MATCH void func_801F995C(void) {
+    g_Task->pos.x.fixed -= 0x10000;
+    g_Task->pos.z.fixed += g_Task->vz;
+    g_Task->vz -= 2097152;
+    func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
+    if (g_Task->pos.x.fixed == 0x490000) {
+        g_Task->vx = 14563;
+        g_Task->vy = 65536;
+        g_Task->vz = 12116878;
+        g_Task->header.mode += 1;
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+    }
+}
 
 MATCH void func_801F9A10(void) {
     g_Task->pos.x.fixed += g_Task->vx;
     g_Task->pos.y.fixed += g_Task->vy;
     g_Task->pos.z.fixed += g_Task->vz;
-    g_Task->vz -= 0x200000;
+    g_Task->vz -= 2097152;
     func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
     if (g_Task->pos.y.fixed == 0x4B0000) {
-        g_Task->timer = 0x3C;
+        g_Task->timer = 60;
         g_Task->header.mode += 1;
     }
 }
 
 MATCH void func_801F9AC0(void) {
     if (--g_Task->timer == 0) {
-        g_Task->pos.x = 0x4B0000;
-        g_Task->pos.y = 0x4B0000;
-        g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 0x4B0000) << 16;
+        g_Task->pos.x = 4915200;
+        g_Task->pos.y = 4915200;
+        g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 4915200) << 16;
         g_Task->vx    = 0xFFFF4925;
         g_Task->vy    = 0xFFFF0000;
-        g_Task->vz    = 0x4C30C4;
+        g_Task->vz    = 4993220;
         g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
@@ -455,7 +504,7 @@ MATCH void func_801F9B68(void) {
     g_Task->pos.x.fixed += g_Task->vx;
     g_Task->pos.y.fixed += g_Task->vy;
     g_Task->pos.z.fixed += g_Task->vz;
-    g_Task->vz -= 0x100000;
+    g_Task->vz -= 1048576;
     func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
     if (g_Task->pos.y.fixed == 0x360000) {
         func_80196070();
@@ -478,7 +527,7 @@ MATCH void func_801F9C00(void) {
 MATCH void func_801F9C58(void) {
     g_Task->pos.y.fixed += 0x10000;
     g_Task->pos.z.fixed += g_Task->vz;
-    g_Task->vz -= 0x200000;
+    g_Task->vz -= 2097152;
     func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
     if (g_Task->pos.x.fixed == 0xF0000) {
         func_80196070();
@@ -500,7 +549,7 @@ MATCH void func_801F9CE0(void) {
 MATCH void func_801F9D30(void) {
     g_Task->pos.y.fixed += 0x10000;
     g_Task->pos.z.fixed += g_Task->vz;
-    g_Task->vz -= 0x200000;
+    g_Task->vz -= 2097152;
     func_801F9F8C(&g_Task->pos, 0x20, 8, 4);
     if (g_Task->pos.y.fixed > 0x18FFFF) {
         func_80196070();
@@ -511,11 +560,24 @@ MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F9E00);
+MATCH void func_801F9E00(void) {
+    Actor* work;
+    u8     mode;
+
+    work              = g_Task;
+    mode              = work->header.mode + 1;
+    work->pos.x.fixed = TO_COORD(25) + COORD_HALF;
+    work->pos.y.fixed = TO_COORD(25) + COORD_HALF;
+    work->pos.z.fixed = TO_COORD(1024);
+    work->vx          = work->pos.x.fixed + TO_COORD(4);
+    work->vy          = work->pos.y.fixed;
+    work->vz          = work->pos.z.fixed;
+    work->header.mode = mode;
+}
 
 MATCH void func_801F9E50(void) {
-    g_Task->pos.x.fixed -= 0x20000;
-    g_Task->vx -= 0x20000;
+    g_Task->pos.x.fixed -= TO_COORD(2);
+    g_Task->vx -= TO_COORD(2);
     func_801FA19C(&g_Task->pos, &g_Task->vx);
     if (g_Task->pos.x.fixed == 0x98000) {
         g_Task->header.mode += 1;
@@ -523,9 +585,9 @@ MATCH void func_801F9E50(void) {
 }
 
 MATCH void func_801F9EC4(void) {
-    g_Task->vx -= 0x20000;
+    g_Task->vx -= TO_COORD(2);
     func_801FA19C(&g_Task->pos, &g_Task->vx);
-    if (g_Task->vx == 0x98000) {
+    if (g_Task->vx == 622592) {
         g_Task->header.mode += 1;
     }
 }
@@ -544,7 +606,27 @@ MATCH void func_801F9F6C(void) {
 
 INCLUDE_ASM(func_801F9F8C);
 
-INCLUDE_ASM(func_801FA19C);
+MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
+    LINE_G2* prim;
+    DVECTOR  xy;
+    MATRIX   camera;
+
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 256));
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    prim = (LINE_G2*)g_GfxPrimCursor;
+    SetLineG2(prim);
+    SetSemiTrans(prim, 1);
+    Area_SetCameraMatrix(&camera);
+    Area_ProjectPoint(&pos->x.fixed, &xy);
+    prim->x0 = xy.vx;
+    prim->y0 = xy.vy;
+    Area_ProjectPoint(vx, &xy);
+    prim->x1 = xy.vx;
+    prim->y1 = xy.vy;
+    setRGB0(prim, 64, 64, 64);
+    setRGB1(prim, 0, 0, 0);
+    GFX_AddPrim(1, sizeof(LINE_G2));
+}
 
 MATCH void func_801FA294(void) {
     SYS_DISPATCH_BYTE(D_801FE964, D_80146872);
@@ -556,10 +638,20 @@ MATCH void func_801FA2D0(void) {
     D_80146872       = 1;
     func_801FA32C();
     func_801FE12C();
-    SYS_SetFlag(&D_80144EC8[0x60], 0x43);
+    SYS_SetFlag(&D_80144EC8[0x60], 67);
 }
 
-INCLUDE_ASM(func_801FA32C);
+MATCH void func_801FA32C(void) {
+    u8 i;
+
+    for (i = 0; i < CHARACTER_COUNT; i++) {
+        g_Characters[i].unk_07 |= 1;
+    }
+    func_801C16B8();
+    for (i = 1; i < CHARACTER_COUNT; i++) {
+        g_Characters[i].unk_07 &= 0xFE;
+    }
+}
 
 INCLUDE_ASM(func_801FA3E4);
 
@@ -674,7 +766,7 @@ MATCH void func_801FE12C(void) {
 }
 
 MATCH s32 func_801FE170(s32 x, s32 y) {
-    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (x == TO_COORD(51) + COORD_HALF) && (((y >> 0x10) - 39) < 2U)) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (x == TO_COORD(51) + COORD_HALF) && (((y >> 16) - 39) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             D_80146874 = 4;
@@ -691,8 +783,8 @@ MATCH s32 func_801FE170(s32 x, s32 y) {
         goto block_7;
     }
 block_7:
-    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (x == TO_COORD(56) + COORD_HALF) && (((y >> 0x10) - 46) < 4U)) {
-        SYS_SetFlag(g_SceneFlags, 0x16U);
+    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (x == TO_COORD(56) + COORD_HALF) && (((y >> 16) - 46) < 4U)) {
+        SYS_SetFlag(g_SceneFlags, 22U);
     }
     return 0;
 }

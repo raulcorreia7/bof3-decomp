@@ -332,12 +332,32 @@ MATCH void func_801F0DA8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0E54);
+MATCH void func_801F0E54(void) {
+    s8 tint;
+
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Task->unk_5C      = 1;
+    g_Task->unk_2B      = 1;
+    tint                = -0x50;
+    g_Task->unk_5D      = tint;
+    g_Task->unk_5E      = tint;
+    g_Task->unk_5F      = tint;
+    g_Task->unk_27      = g_BattleEffectBattler->unk_27;
+    g_Task->facing      = g_BattleEffectBattler->facing;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->unk_0C      = D_801F1C04[g_Task->param.unk_0B].x;
+    g_Task->unk_10      = D_801F1C04[g_Task->param.unk_0B].y;
+    func_801DD350(g_Task);
+    g_Task->unk_09 = func_800AFF98();
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801F0FA4(void) {
     u8 value;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         Actor_StepAnimOnce();
@@ -356,7 +376,7 @@ MATCH void func_801F0FA4(void) {
 MATCH void func_801F1090(void) {
     u8 value;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         value               = g_Task->unk_09 - 1;

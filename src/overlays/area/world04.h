@@ -58,6 +58,7 @@ extern u8  D_801F294C;
 extern u8  D_801F294D;
 extern u8  D_801F294E;
 extern u8  D_801F294F;
+/* The payload's handler pointers, then its entry coordinate pairs at 0x14. */
 extern u8  D_801F3418[];
 
 /* The scenario state byte the request writes. */

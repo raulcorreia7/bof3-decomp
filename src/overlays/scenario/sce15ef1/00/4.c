@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801D0DD8);
 INCLUDE_ASM(func_801D0F10);
 
 MATCH void func_801D0FEC(void) {
-    if ((g_Task->unk_06++ & 3) == 0) {
+    if ((g_Task->unk_06++ & 0x3) == 0) {
         func_801D19C8();
     }
     func_801D2088();
@@ -206,7 +206,7 @@ MATCH void func_801D2088(void) {
         *angle += 16;
         i += 1;
         angle += sizeof(WorldSpin) / sizeof(*angle);
-    } while ((i & 0xFF) < 0x20U);
+    } while ((i & BYTE_MASK) < 0x20U);
 }
 
 MATCH void func_801D2138(s32* first, s32* second) {
@@ -242,7 +242,18 @@ MATCH void func_801D2B64(void) {
     SYS_DISPATCH_TASK(D_801D396C, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801D2BA8);
+MATCH void func_801D2BA8(void) {
+    Actor* work;
+
+    work         = g_Task;
+    work->timer  = 20;
+    work->vx     = 0;
+    work->vy     = 0;
+    work->unk_18 = 0;
+    work->unk_1C = 0;
+    g_Task->header.mode++;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
+}
 
 INCLUDE_ASM(func_801D2C00);
 

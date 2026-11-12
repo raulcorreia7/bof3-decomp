@@ -4,7 +4,7 @@ MATCH void func_801F361C(void) {
     s32 arg0;
     s32 arg1;
 
-    if (SYS_TestFlag(g_SceneEventFlags, 0x5A) != 0) {
+    if (SYS_TestFlag(g_SceneEventFlags, 90) != 0) {
         arg0                  = 0;
         arg1                  = -2;
         (g_Task)->screen_y    = 128;

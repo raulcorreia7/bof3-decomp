@@ -4,7 +4,7 @@ MATCH void func_801F2C48(void) {
     Actor* work;
     u8     step;
 
-    if (!SYS_TestFlag(g_SceneEventFlags, 0xD)) {
+    if (!SYS_TestFlag(g_SceneEventFlags, 13)) {
         work = g_Task;
         step = 2;
     } else {
