@@ -34,7 +34,7 @@ MATCH void func_801EEC5C(void) {
     i   = 0;
     dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
     src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    for (; i < 0x100; i++) {
+    for (; i < 256; i++) {
         *dst++ = *src++;
     }
     g_GfxPalettePending = 1;
