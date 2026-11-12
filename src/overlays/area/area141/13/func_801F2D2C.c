@@ -1,5 +1,8 @@
 #include "area141_13.h"
 
+/* The part-word bits the upload step clears before the cell re-stages its rows. */
+#define CELL_UPLOAD_MASK (~(0x1F << 19))
+
 MATCH void func_801F2D2C(void) {
     AreaMapBundle* map;
     u32            entry_base;
