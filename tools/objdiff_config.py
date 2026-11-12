@@ -19,7 +19,6 @@ feeds the report only: the images link the compiled objects.
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import os
 import re
@@ -312,8 +311,11 @@ def _library_rows(root: Path, cfg: dict[str, Any]) -> list[dict[str, Any]]:
     path = root / cfg["library_units"]
     if not path.is_file():
         return []
-    with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
 
 
 def _unit(

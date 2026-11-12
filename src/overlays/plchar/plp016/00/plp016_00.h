@@ -35,4 +35,6 @@ extern void func_801D0444(void);
 
 void func_801CFF30(s32 kind, s32 x, s32 y, s32 code);
 
+void Actor_BeginScript(s32 raw_selector, s32 raw_code);
+
 #endif
