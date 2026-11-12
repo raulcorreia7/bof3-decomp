@@ -12,8 +12,36 @@ extern Magic010SharedSteps D_801EEC04;
  * request hand-off that follows. */
 u8 func_801EF118(void);
 
-extern u8 D_801EF2A8[];
+/* One quad of the effect: two world points, a color at each point and a shared
+ * speed, drawn translucent until the timer runs out. */
+typedef struct Magic116Quad {
+    /* 0x00 */ u8       state;
+    /* 0x01 */ u8       unk_01;
+    /* 0x02 */ u8       timer;
+    /* 0x03 */ u8       pad_03;
+    /* 0x04 */ WorldPos pos;
+    /* 0x10 */ u8       pad_10[4];
+    /* 0x14 */ WorldPos unk_14;
+    /* 0x20 */ u8       pad_20[4];
+    /* 0x24 */ Coord3D  speed;
+    /* 0x30 */ u8       pad_30[4];
+    /* 0x34 */ u8       color[3];
+    /* 0x37 */ u8       pad_37;
+    /* 0x38 */ u8       unk_38[3];
+    /* 0x3B */ u8       pad_3B;
+} Magic116Quad;
 
-void func_801EF020(u8* record);
+ASSERT_SIZE(Magic116Quad, 0x3C);
+ASSERT_OFFSET(Magic116Quad, timer, 0x02);
+ASSERT_OFFSET(Magic116Quad, pos, 0x04);
+ASSERT_OFFSET(Magic116Quad, unk_14, 0x14);
+ASSERT_OFFSET(Magic116Quad, speed, 0x24);
+ASSERT_OFFSET(Magic116Quad, color, 0x34);
+ASSERT_OFFSET(Magic116Quad, unk_38, 0x38);
+
+extern Magic116Quad D_801EF2A8[128];
+
+Magic116Quad* func_801EEFB8(void);
+void          func_801EF020(Magic116Quad* record);
 
 #endif

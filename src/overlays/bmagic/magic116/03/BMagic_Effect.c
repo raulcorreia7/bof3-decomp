@@ -47,13 +47,13 @@ MATCH void func_801EEE34(void) {
 
 INCLUDE_ASM(func_801EEE7C);
 
-MATCH u8* func_801EEFB8(void) {
-    u8* record;
-    u8  index;
+MATCH Magic116Quad* func_801EEFB8(void) {
+    Magic116Quad* record;
+    u8            index;
 
     record = D_801EF2A8;
-    for (index = 0; index < 128; index++, record += 0x3C) {
-        if (*record == 0) {
+    for (index = 0; index < 128; index++, record++) {
+        if (record->state == 0) {
             return record;
         }
     }
@@ -61,47 +61,47 @@ MATCH u8* func_801EEFB8(void) {
 }
 
 MATCH void func_801EEFF4(void) {
-    u8* record;
-    u8  index;
+    Magic116Quad* record;
+    u8            index;
 
     record = D_801EF2A8;
     index  = 0;
     do {
-        *record = 0;
+        record->state = 0;
         index++;
-        record += 0x3C;
+        record++;
     } while (index < 128);
 }
 
-MATCH void func_801EF020(u8* record) {
+MATCH void func_801EF020(Magic116Quad* record) {
     s32 offset;
 
-    record[0]                = 1;
-    record[1]                = 0;
-    record[2]                = 0x10;
-    offset                   = (RANDOM_MASK(0x1FF) - 0x100) << 8;
-    FIELD(s32, record, 0x04) = g_Task->pos.x.fixed + offset + offset;
-    FIELD(s32, record, 0x08) = g_Task->pos.y.fixed + 0x20000;
-    FIELD(s32, record, 0x0C) = g_Task->pos.z.fixed;
-    FIELD(s32, record, 0x14) = g_Task->pos.x.fixed + offset;
-    FIELD(s32, record, 0x18) = g_Task->pos.y.fixed;
-    FIELD(s32, record, 0x1C) = g_Task->pos.z.fixed;
-    record[0x34]             = RANDOM_MASK(1) << 7;
-    record[0x35]             = RANDOM_MASK(1) << 7;
-    record[0x36]             = RANDOM_MASK(1) << 7;
-    FIELD(s32, record, 0x24) = offset >> 1;
-    FIELD(s32, record, 0x28) = 0x10000;
-    FIELD(s32, record, 0x2C) = 0;
-    record[0x38]             = 0;
-    record[0x39]             = 0;
-    record[0x3A]             = 0;
+    record->state          = 1;
+    record->unk_01         = 0;
+    record->timer          = 16;
+    offset                 = (RANDOM_MASK(0x1FF) - 0x100) << 8;
+    record->pos.x.fixed    = g_Task->pos.x.fixed + offset + offset;
+    record->pos.y.fixed    = g_Task->pos.y.fixed + 0x20000;
+    record->pos.z.fixed    = g_Task->pos.z.fixed;
+    record->unk_14.x.fixed = g_Task->pos.x.fixed + offset;
+    record->unk_14.y.fixed = g_Task->pos.y.fixed;
+    record->unk_14.z.fixed = g_Task->pos.z.fixed;
+    record->color[0]       = RANDOM_MASK(1) << 7;
+    record->color[1]       = RANDOM_MASK(1) << 7;
+    record->color[2]       = RANDOM_MASK(1) << 7;
+    record->speed.x.fixed  = offset >> 1;
+    record->speed.y.fixed  = 0x10000;
+    record->speed.z.fixed  = 0;
+    record->unk_38[0]      = 0;
+    record->unk_38[1]      = 0;
+    record->unk_38[2]      = 0;
 }
 
 INCLUDE_ASM(func_801EF118);
 
 MATCH void func_801EF258(void) {
-    u8* record;
-    u8  i;
+    Magic116Quad* record;
+    u8            i;
 
     for (i = 0; i < 8; i++) {
         record = func_801EEFB8();
