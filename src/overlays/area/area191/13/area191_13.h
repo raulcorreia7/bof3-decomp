@@ -9,9 +9,6 @@
 
 /* The scenario state byte and its flag word. */
 
-/* The area flags, state word and adjacent counter this pass updates. */
-extern u8 D_80144F56;
-extern s8 D_8014504A;
 /* The game-overlay state bytes the request paths write. */
 extern u8 D_80146874;
 extern u8 D_80146875;

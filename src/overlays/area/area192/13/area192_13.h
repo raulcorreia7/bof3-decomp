@@ -17,9 +17,6 @@ extern u8 D_801F38C0[];
 
 /* The game-overlay state bytes the request paths write. */
 
-/* The game byte the request paths clear. */
-extern s8 D_8014504A;
-
 /* The published field work row and the state byte the reset writes. */
 
 /* The cell lookup the selection pass runs. */
