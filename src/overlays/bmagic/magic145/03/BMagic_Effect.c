@@ -18,7 +18,7 @@ INCLUDE_ASM(func_801EEC70);
 MATCH void func_801EEE70(void) {
     SYS_DISPATCH_BYTE(D_801EF418, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_801EF118();
+        Effect_DrawTexturedQuad();
     }
 }
 
@@ -31,4 +31,4 @@ MATCH void Effect_CountDownTimer(void) {
     BMagic_CountDownEffectTimer(1);
 }
 
-INCLUDE_ASM(func_801EF118);
+#include "overlays/bmagic/Effect_DrawTexturedQuad.h"

@@ -333,6 +333,8 @@ void Effect_DrawScreenFade(void);
 void Effect_DrawSparkleRays(u16 angle, u16 radius);
 /* Defined in Effect_DrawSparkleDisc.h, which a member includes after its first call. */
 void Effect_DrawSparkleDisc(void);
+/* Defined in Effect_DrawTexturedQuad.h, which a member includes after its first call. */
+void Effect_DrawTexturedQuad(void);
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
     do {                                          \

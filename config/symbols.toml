@@ -1243,6 +1243,7 @@ Effect_PlayOnce = { addr = 0x801EEDE4, type = "func", source = "Plays the effect
 BMagic_DispatchEffectMode = { addr = 0x801EEE2C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic145." }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF034, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up by two and advances header.step (byte 0x02) when the timer reaches 16 in magic145 (Noting)." }
 Effect_CountDownTimer = { addr = 0x801EF0A0, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic145 (Noting)." }
+Effect_DrawTexturedQuad = { addr = 0x801EF118, type = "func", source = "Draws the effect's textured quad as four diamond corners around its screen point: the radius is twice the effect phase byte (0x09), the colour eight times the timer (byte 0x0A); one body shared by magic145 and magic146" }
 g_BMagicEffectModes = { addr = 0x801EF414, source = "Handlers of magic145 (Noting), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic146/03"]
@@ -1253,6 +1254,7 @@ Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "Plays the effect
 BMagic_DispatchEffectMode = { addr = 0x801EF04C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic146." }
 Effect_FinishOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the targets of the side mask in byte 0x04, lowers the active battler's ticker and clears the effect in magic146 (Noting)." }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up by two and advances header.step (byte 0x02) when the timer reaches 16 in magic146 (Noting)." }
+Effect_DrawTexturedQuad = { addr = 0x801EF604, type = "func", source = "Draws the effect's textured quad as four diamond corners around its screen point: the radius is twice the effect phase byte (0x09), the colour eight times the timer (byte 0x0A); one body shared by magic145 and magic146" }
 BMagic_AllocEffect = { addr = 0x801EF900, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic146 (Noting)." }
 Actor_Clear = { addr = 0x801EF964, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801EF9B4, source = "Handlers of magic146 (Noting), run by header.mode (byte 0x01)." }
