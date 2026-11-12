@@ -1,5 +1,5 @@
 /* Runs the personal action's target step: after the turn wait it marks the rock the character faces, or probes the cell ahead for a field actor and a map-cell spawn, then advances the work state. Check every including image after changes. */
-/* Each image defines CHAR_CELL_PROBE as its map-cell probe and CHAR_PERSONAL_ACTION_CUE for its action's cue. */
+/* Each image defines CHAR_CELL_PROBE as its map-cell probe and CHAR_PERSONAL_ACTION_HAS_CUE for its action's cue. */
 
 MATCH void Char_RunPersonalAction(void) {
     s32 cell_x;
@@ -13,7 +13,7 @@ MATCH void Char_RunPersonalAction(void) {
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
         if (g_Task->unk_0A == 0) {
-            if (CHAR_PERSONAL_ACTION_CUE) {
+            if (CHAR_PERSONAL_ACTION_HAS_CUE) {
                 /* FAKE: retail reads SND_PlayCue as void(s32). */
                 ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
             }
@@ -21,13 +21,13 @@ MATCH void Char_RunPersonalAction(void) {
             if (slot != -1) {
                 u8 direction;
 
-                if (CHAR_PERSONAL_ACTION_CUE) {
+                if (CHAR_PERSONAL_ACTION_HAS_CUE) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
                 direction                 = g_Task->direction_08;
                 g_ActorSlots[slot].unk_0A = 1;
                 g_ActorSlots[slot].unk_08 = direction;
-                if (!CHAR_PERSONAL_ACTION_CUE) {
+                if (!CHAR_PERSONAL_ACTION_HAS_CUE) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
                 g_Task->unk_06 = slot;

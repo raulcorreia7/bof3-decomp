@@ -7,9 +7,9 @@
 #include "overlays/plchar/plchar.h"
 #include "area/spad.h"
 
-/* The image's map-cell probe and the cue of its personal action. */
-#define CHAR_CELL_PROBE          func_801CEC18
-#define CHAR_PERSONAL_ACTION_CUE 0
+/* The image's map-cell probe, and whether its personal action plays the character's cue. */
+#define CHAR_CELL_PROBE              func_801CEC18
+#define CHAR_PERSONAL_ACTION_HAS_CUE 0
 
 /* The tail callback table's entry count in this image. */
 #define PLCHAR_STEP_TABLE_COUNT  22
