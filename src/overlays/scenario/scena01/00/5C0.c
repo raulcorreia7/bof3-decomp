@@ -91,13 +91,7 @@ MATCH void func_801F7EDC(void) {
     POLY_F4* prim;
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x2A5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    tpage = getTPage(1, 1, 320, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(3, sizeof(DR_MODE));
     prim = (POLY_F4*)g_GfxPrimCursor;
