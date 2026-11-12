@@ -222,7 +222,19 @@ MATCH void func_801F7E34(void) {
 
 INCLUDE_ASM(func_801F7E6C);
 
-INCLUDE_ASM(func_801F7F84);
+MATCH void func_801F7F84(void) {
+    Actor** rows; /* the five effect actors spawned at +0x0C */
+    u8      i;
+
+    rows = (Actor**)&g_Task->vx;
+    for (i = 0; i < 5; i++) {
+        if (rows[i]->unk_06 == 0) {
+            return;
+        }
+    }
+    g_ScriptVars[0] += 1;
+    func_80196070();
+}
 
 INCLUDE_ASM(func_801F7FFC);
 
