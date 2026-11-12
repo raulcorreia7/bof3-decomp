@@ -332,7 +332,7 @@ MATCH void func_801EFB8C(void) {
         g_Task->pos.x.fixed = actor->pos.x.fixed;
         g_Task->pos.y.fixed = actor->pos.y.fixed;
         g_Task->pos.z.fixed = actor->pos.z.fixed;
-        func_800AF764();
+        Battle_ProjectRange();
         g_Task->unk_29    = 0;
         g_Task->unk_25    = 0x1D;
         g_Task->unk_26    = 0;
