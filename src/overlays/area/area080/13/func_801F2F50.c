@@ -13,7 +13,7 @@ MATCH void func_801F2F50(void) {
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
     if (!(remaining & 0xFF)) {
-        g_Task->timer = 16;
+        g_Task->timer = AREA_RING_STEP_FRAMES;
         g_Task->header.mode += 1;
     }
 }
