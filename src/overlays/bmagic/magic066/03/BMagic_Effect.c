@@ -38,7 +38,7 @@ MATCH void func_801EEC70(void) {
     g_GfxPalettePending                                     = 1;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0x18;
+    g_Task->unk_09       = 24;
     g_Task->header.mode += 1;
 }
 
