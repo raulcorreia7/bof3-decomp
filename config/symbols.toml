@@ -284,7 +284,9 @@ BMagic_StepTable = { addr = 0x801EFE60, source = "Step handlers of magic004, run
 ["emi/bmagic/magic006/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnZeroTick = { addr = 0x801EEDA4, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic006 (Mind Sword)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE04, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic006." }
 Effect_TickOnTimerZero = { addr = 0x801EF41C, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic006 (Mind Sword)." }
@@ -317,7 +319,9 @@ D_801F1C04 = { addr = 0x801F1C04, type = "Point2DL", source = "Velocity pairs fu
 
 ["emi/bmagic/magic009/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC18 = { addr = 0x801EEC18, source = "Four step handlers of magic009 (Chlorine), one per header.step (byte 0x02); func_801EF6B0 copies them to the stack and calls the one the step picks." }
 Effect_CountDownTimerNextStep = { addr = 0x801EF01C, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.mode (byte 0x01) at zero in magic009 (Chlorine)." }
 Effect_NextStepOnZeroTick = { addr = 0x801EF068, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is zero in magic009 (Chlorine)." }
@@ -381,7 +385,9 @@ g_BMagicEffectModes = { addr = 0x801EF990, source = "Handlers of magic017 (Astra
 
 ["emi/bmagic/magic020/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC1C = { addr = 0x801EEC1C, type = "Magic020Steps", source = "Step handlers of magic020 (Disembowel), run by header.step (byte 0x02) from func_801EF3DC; the eight Callback slots are copied to a local table first." }
 Effect_DispatchMode = { addr = 0x801EEC48, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic020 (Disembowel)." }
 Effect_StartPlaying = { addr = 0x801EF31C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic020 (Disembowel)." }
@@ -492,6 +498,7 @@ BMagic_Trail = { addr = 0x801F0A38, source = "Trail points of the magic044 effec
 ["emi/bmagic/magic045/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EEE58, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic045 (Bone Dart)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEEA4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic045." }
 Effect_TickDownAndClear = { addr = 0x801EF3D8, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic045 (Bone Dart)." }
@@ -2209,7 +2216,7 @@ g_FairyCommu02Events = { addr = 0x801F268C, source = "the 4 overlay entries of t
 g_FairyCommu03States = { addr = 0x801F269C, source = "the 5 step handlers of the commu03 scene that the village runs through func_801F1F9C, indexed by g_SceneEventStep; entry 2 is the commu03 overlay entry" }
 g_FairyCommu04States = { addr = 0x801F26B0, source = "the 7 step handlers of the commu04 scene that the village runs through func_801F2020, indexed by g_SceneEventStep; entry 4 is the commu04 overlay entry" }
 g_FairyCommu05States = { addr = 0x801F26EC, source = "the 5 step handlers of the commu05 scene that the village runs through func_801F228C, indexed by g_SceneEventStep; entry 2 is the commu05 overlay entry" }
-g_Fairies = { addr = 0x801F2700, source = "Fairy_JoinVillage copies the 5-byte name of a 9-byte roster row" }
+g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
 
 ["emi/etc/commu01/07"]
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01States." }
@@ -2246,6 +2253,7 @@ g_Commu02Event3Step2Funcs = { addr = 0x801DAE44, source = "9 sub-step handlers o
 g_Commu02Event3Step2Sub6Funcs = { addr = 0x801DAE68, source = "3 handlers of sub-step 6 of step 2 of the commu02 scene event 3, called by func_801D7474 (the sub-step 6 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_Commu02Event3Step2Sub7Funcs = { addr = 0x801DAE74, source = "5 handlers of sub-step 7 of step 2 of the commu02 scene event 3, called by func_801D7660 (the sub-step 7 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index." }
+g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
 
 ["emi/etc/commu03/06"]
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
