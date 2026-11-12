@@ -102,7 +102,6 @@ static inline void Scene_PlaceAtLead(void) {
     g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
 }
 
-u8*       func_801F8394(void);
 void      func_801F83D0(u8* row);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);

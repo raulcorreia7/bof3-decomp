@@ -246,7 +246,6 @@ void func_801F7350(void);
 void func_801F73A8(void);
 void func_801F7440(void);
 void func_801F7670(void);
-void func_801F78CC(void);
 void func_801F78EC(volatile SceneLinePoint to, volatile SceneLinePoint from, SceneLineColor color);
 void func_801F7A5C(void);
 void func_801F7B0C(void);
@@ -276,8 +275,6 @@ void func_801F92DC(void);
 void func_801F9644(void);
 void func_801F9868(void);
 void func_801F9B98(void);
-void func_801F9BD4(void);
-void func_801F9BDC(void);
 void func_801F9BE4(void);
 void func_801F9FB8(void);
 void func_801FA27C(void);
@@ -290,8 +287,6 @@ void func_801FB744(void);
 void func_801FB924(void);
 void func_801FBE88(void);
 void Scene_DispatchActor(void* entity);
-void func_801FC810(void);
 s32  Scene_CheckStepTrigger(s32 x);
-s32  func_801FC8F4(void);
 
 #endif
