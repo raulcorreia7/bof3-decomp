@@ -142,7 +142,7 @@ MATCH void func_801EFE80(void) {
         g_Task->pos.z.fixed = actor->pos.z.fixed;
         g_Task->unk_14      = RANDOM_MASK(7) + 0x80;
         g_Task->unk_20      = -0xC;
-        g_Task->unk_09      = 0x10;
+        g_Task->unk_09      = 16;
         g_Task->header.step++;
     }
 }
