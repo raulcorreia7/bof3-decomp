@@ -153,16 +153,16 @@ INCLUDE_ASM(func_801F7D1C);
 INCLUDE_ASM(func_801F7E2C);
 
 MATCH void func_801F7F5C(void) {
-    s16 pos[2];
+    UPoint2D pos;
 
-    func_801F83AC(pos);
+    func_801F83AC(&pos);
     if (g_Task->tint.signed_bytes.unk_5D != 0) {
         g_Task->tint.signed_bytes.unk_5D -= 2;
     }
     if (g_Task->tint.signed_bytes.unk_5E != 0) {
         g_Task->tint.signed_bytes.unk_5E -= 1;
     }
-    func_801F81D8(pos[0], pos[1]);
+    func_801F81D8(pos.x, pos.y);
     if ((g_Task->tint.word & 0xFFFF00) == 0) {
         Actor_Clear();
     }
@@ -172,7 +172,22 @@ INCLUDE_ASM(func_801F7FFC);
 
 INCLUDE_ASM(func_801F81D8);
 
-INCLUDE_ASM(func_801F83AC);
+MATCH void func_801F83AC(UPoint2D* out) {
+    SVECTOR vec;
+    long    depth;
+    long    flag;
+    u8      slot;
+
+    slot                    = g_Task->param.actor_slot;
+    g_Actors[slot].screen_x = g_Task->screen_x;
+    g_Actors[slot].screen_y = g_Task->screen_y;
+    vec.vx                  = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    vec.vy                  = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    vec.vz                  = -COORD_INT(g_Task->pos.z) / 2;
+    g_Task->unk_60          = RotTransPers(&vec, (long*)out, &depth, &flag);
+    out->x -= 12;
+    out->y -= 37;
+}
 
 MATCH void func_801F8488(void) {
     SYS_DISPATCH_TASK(D_801FE5B0, 1, g_Task);
