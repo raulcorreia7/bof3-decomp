@@ -439,7 +439,23 @@ MATCH void func_801FDC10(s32 shift) {
     }
 }
 
-INCLUDE_ASM(func_801FDC6C);
+MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
+    u8 slot;
+
+    slot = Actor_FindFreeSlot();
+    if (slot != GAME_NONE) {
+        g_ActorSlots[slot].header.flags = 1;
+        g_ActorSlots[slot].pos.x.fixed  = x;
+        g_ActorSlots[slot].type         = 0x9E;
+        g_ActorSlots[slot].pos.y.fixed  = y;
+        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + 0x2000000;
+        g_ActorSlots[slot].unk_06       = unk_06;
+        g_ActorSlots[slot].unk_07       = unk_07;
+        g_ActorSlots[slot].link         = link;
+        return 1;
+    }
+    return 0;
+}
 
 #include "overlays/scenario/Scene_DispatchActor.h"
 
