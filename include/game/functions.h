@@ -60,6 +60,8 @@ void  Actor_DispatchAll(void);
 u8    Game_FindAreaHandler(void);
 /* func_8019ABB0 */
 void  func_8019ABB0(s32 mode);
+/* func_8019F75C */
+void  func_8019F75C(void);
 /* func_8019F818 */
 void  func_8019F818(Actor* actor);
 /* func_8019FA28 */
@@ -84,6 +86,8 @@ void  Area_RunSetupStream(u8* cursor);
 void  Area_SetCellCode(s16 column, s16 row, u8 code);
 /* func_801A4D54 */
 void  func_801A4D54(u8* script);
+/* func_801A7330 */
+void  func_801A7330(const volatile u8* data);
 /* func_801A7704 */
 void  Scene_Start(u8 scenario_index);
 /* func_801A7804 */

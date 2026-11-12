@@ -51,9 +51,6 @@ extern u8   D_80147C97;
 /* The camera and view steps the handlers enter. */
 void func_801F32A0(s32 value);
 
-void func_8019F75C(void);
-void func_801A7330(const volatile u8* data);
-
 extern Callback D_801F6218[];
 
 extern Callback D_801F6258[];
