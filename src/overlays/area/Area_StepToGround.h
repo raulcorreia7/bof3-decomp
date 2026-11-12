@@ -3,12 +3,6 @@
  * frame count and a 64 per-frame delta. */
 /* func_801F336C (area095 0x801F336C), func_801F32FC (area096 0x801F32FC) */
 #define AREA_STEP_TO_GROUND()                                 \
-    Actor* work;                                              \
-    s32    steps;                                             \
-    s32    x;                                                 \
-    s32    y;                                                 \
-    s16    ground;                                            \
-    s32    floor_height;                                      \
     g_ScriptState->unk_07 = 1;                                \
     func_801ABBA8(g_ScriptState, 5);                          \
     steps         = g_Task->timer;                            \
