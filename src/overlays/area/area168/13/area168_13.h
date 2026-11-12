@@ -31,9 +31,18 @@ extern volatile u8 D_801F4BB4;
 extern u8          D_801F4F94[];
 extern u8          D_801F4F95[];
 
-/* The scratchpad cell holding this mode's work pointer. */
+/* The two endpoint y words of each line the mode draws, from the payload's pair table. */
+typedef struct LineEndpoints {
+    s32 from;
+    s32 to;
+} LineEndpoints;
 
-/* The party position in 16.16 fixed point. */
+/* The line endpoint table the mode walks. */
+extern LineEndpoints D_801F4B44[];
+
+/* Draws a line between two world points. */
+void func_801F2E10(s32* first, s32* second);
+
 /* One cell of the entry tables inside the payload blob: `offset` is the table's byte offset, `index` the byte offset of
  * the row. */
 #define AREA168_ENTRY_TABLE(type, offset, index) (*(type*)&D_801F4B2C[(offset) + (index)])
@@ -42,5 +51,4 @@ extern u8          D_801F4F95[];
 extern u8 D_801F4B2C[];
 extern u8 D_801F4B30[];
 
-/* The game-overlay state bytes the cancel path resets. */
 #endif
