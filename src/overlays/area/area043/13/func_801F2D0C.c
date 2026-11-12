@@ -22,8 +22,8 @@ MATCH void func_801F2D0C(void) {
     if (tuneC != -0x80) {
         spad2->tint.signed_bytes.unk_5F = (tuneC - 2);
     }
-    g_Task->scale.x += 0x800;
-    g_Task->scale.y += 0x800;
+    g_Task->scale.x += 2048;
+    g_Task->scale.y += 2048;
     if ((g_Task->tint.word & ~0xFF) == 0x80808000) {
         GFX_FreePaletteFade(g_CurrentActor->unk_93);
         g_Task->header.flags |= 0x40;
