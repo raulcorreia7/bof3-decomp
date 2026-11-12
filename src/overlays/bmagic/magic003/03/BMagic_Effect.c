@@ -4,7 +4,25 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC28);
+MATCH void func_801EEC28(void) {
+    PartyMember* saved_task;
+    PartyMember* saved_battler;
+    u8           i;
+
+    SYS_DISPATCH_BYTE(D_801F0AD8, g_Task->header.mode);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
+            BMagic_DispatchEffectMode();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED14);
 
@@ -286,7 +304,23 @@ INCLUDE_ASM(func_801EFD4C);
 
 INCLUDE_ASM(func_801EFEC8);
 
-INCLUDE_ASM(func_801F0078);
+MATCH void func_801F0078(void) {
+    PartyMember* battler;
+    u8           i;
+    u8           slot;
+
+    for (i = 0; i < g_BattleEffectBattler->timer; i++) {
+        slot                                   = BMagic_AllocEffect();
+        battler                                = g_BattleEffectBattler;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].header.step  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].unk_04       = i;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = (i / 2) & 7;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (i * 4) + 1;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
+        g_BattleEffectBattler->param.unk_0B += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0164);
 

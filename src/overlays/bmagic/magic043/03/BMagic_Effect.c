@@ -67,7 +67,16 @@ MATCH void func_801EF5E0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF64C);
+MATCH void func_801EF64C(void) {
+    g_Task->pos.x.fixed += g_Task->unk_0C;
+    g_Task->pos.y.fixed += g_Task->unk_10;
+    g_Task->unk_09 += 1;
+    g_Task->timer -= 2;
+    if (g_Task->timer == 0) {
+        BMAGIC_TICK_EFFECT_WORK();
+        BMagic_ResetLocalWork();
+    }
+}
 
 MATCH void func_801EF72C(void) {
     SVECTOR pos;
