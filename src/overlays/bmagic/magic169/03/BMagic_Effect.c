@@ -24,8 +24,8 @@ MATCH void func_801EED8C(void) {
     for (; i < 256; i++) {
         dst[i] = src[i] | 0x8000u;
     }
-    MEM(u16, 0x8003AC00u) = MEM(u16, 0x80036C00u);
-    g_GfxPalettePending   = 1;
+    MEM(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = MEM(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    g_GfxPalettePending = 1;
     SND_QueueSelectionFx(0x100);
     g_Task->unk_09       = 0;
     g_Task->param.unk_0B = 0;
