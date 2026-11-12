@@ -413,7 +413,8 @@ MATCH void func_801F95D4(void) {
 
 MATCH void func_801F9618(void) {
     func_801F9688();
-    if (g_GameAreaId != AREA_ID_DAUNA_MINE_WORKER) {
+    /* kept: the LOHU halfword compare matches retail; the plain u16 lvalue adds four bytes. */
+    if (LOHU(g_GameAreaId) != AREA_ID_DAUNA_MINE_WORKER) {
         g_Task->header.mode += 1;
     }
 }
@@ -697,8 +698,8 @@ MATCH void func_801FD07C(void) {
         return;
     }
     g_Actors[second].header.flags = 1;
-    counter                             = &D_1F800000.view.area.entity_counter;
-    *counter                            = D_801FEA74;
+    counter                       = &D_1F800000.view.area.entity_counter;
+    *counter                      = D_801FEA74;
     func_801A65A0(D_801FE9A0);
     Actor_BeginScript(0x4C, 0);
     *counter = D_801FEA78;
@@ -753,7 +754,7 @@ MATCH void func_801FE12C(void) {
     s32 index;
     u8* item;
 
-    item  = &g_VitalItemIds;
+    item  = g_VitalItemIds;
     index = 0;
     do {
         if (*item == 4) {
@@ -765,7 +766,7 @@ MATCH void func_801FE12C(void) {
 }
 
 MATCH s32 func_801FE170(s32 x, s32 y) {
-    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (x == TO_COORD(51) + COORD_HALF) && (((y >> 16) - 39) < 2U)) {
+    if ((LOHU(g_GameAreaId) == AREA_ID_DAUNA_MINE_ADULT) && (x == TO_COORD(51) + COORD_HALF) && (((y >> 16) - 39) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             D_80146874 = 4;
@@ -782,7 +783,7 @@ MATCH s32 func_801FE170(s32 x, s32 y) {
         goto block_7;
     }
 block_7:
-    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (x == TO_COORD(56) + COORD_HALF) && (((y >> 16) - 46) < 4U)) {
+    if ((LOHU(g_GameAreaId) == AREA_ID_MOUNT_LEVETT) && (x == TO_COORD(56) + COORD_HALF) && (((y >> 16) - 46) < 4U)) {
         SYS_SetFlag(g_SceneFlags, 22U);
     }
     return 0;
