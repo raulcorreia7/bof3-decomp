@@ -1,3 +1,14 @@
+#ifndef BMAGIC_SETUP_EFFECT_MATRIX_H
+#define BMAGIC_SETUP_EFFECT_MATRIX_H
+
+#include "common/fixed.h"
+#include "game/game.h"
+#include "match/match.h"
+#include "psx/mem.h"
+#include "psyq/libgte.h"
+#include "slus/data.h"
+#include "slus/exports.h"
+
 /* Sets up the effect matrix from the task position and frame. */
 /* func_801EF2F0 (magic158), func_801EF284 (magic166) */
 #define BMAGIC_SETUP_EFFECT_MATRIX()                                           \
@@ -27,3 +38,5 @@
     MulMatrix2(&g_CameraMatrix, &matrix);                                      \
     SetRotMatrix(&matrix);                                                     \
     SetTransMatrix(&matrix)
+
+#endif
