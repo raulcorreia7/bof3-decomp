@@ -12,7 +12,7 @@ MATCH void func_801F0650(void) {
         if (item != 0) {
             x_offset = (slot & 1) * 138 + 5;
             y_offset = (slot >> 1) * 13 + 4;
-            func_801F0A74(g_MenuCurrentPanel->pos.x + x_offset, g_MenuCurrentPanel->pos.y + y_offset, 0, item >> 8, item & BYTE_MASK, D_80146327.levels[slot], 0);
+            func_801F0A74(g_MenuCurrentPanel->pos.x + x_offset, g_MenuCurrentPanel->pos.y + y_offset, 0, item >> 8, item & BYTE_MASK, D_80146327.amounts[slot], 0);
         }
     }
 }

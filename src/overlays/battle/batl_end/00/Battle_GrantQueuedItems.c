@@ -8,7 +8,7 @@ MATCH void Battle_GrantQueuedItems(void) {
     if (EMI_IsReady() != 0) {
         for (slot = 0; slot < D_80146327.count; slot++) {
             item = PartyGrantQueue_Item(slot);
-            Item_Add(item >> 8, item & BYTE_MASK, D_80146327.levels[slot], 0);
+            Item_Add(item >> 8, item & BYTE_MASK, D_80146327.amounts[slot], 0);
         }
 
         g_Battle.phase.step     = 4;
