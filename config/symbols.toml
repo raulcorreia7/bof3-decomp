@@ -4107,6 +4107,7 @@ Message_SelectAnswer = { addr = 0x801F2CD8, type = "func", source = "Sets g_Mess
 
 ["emi/world01/area052/13"]
 Area_FindFreeWorkRow = { addr = 0x801F3158, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
+Area_UpdateEffectRows = { addr = 0x801F31C0, type = "func", source = "Ages the sixteen effect rows at the work window: draws each active row, raises its z by 0x3000, shrinks its 0x14 byte by 0x18, frees the row when its life byte reaches zero, and returns whether any row was active." }
 
 ["emi/world01/area053/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }

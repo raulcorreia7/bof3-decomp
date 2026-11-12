@@ -17,6 +17,7 @@ s32       func_801F3AE4(s32, s32, s32);
 extern u8 D_801F4D80[];
 
 extern u8 D_801F4E54[];
+extern u8 D_801F4E6C[];
 extern u8 D_801F4E70[];
 extern u8 D_801F4E74[];
 
