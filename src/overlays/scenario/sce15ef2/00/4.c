@@ -66,7 +66,21 @@ MATCH void func_801D0DA4(void) {
 
 #include "overlays/scenario/Scene_EndScan.h"
 
-INCLUDE_ASM(func_801D0E30);
+MATCH void func_801D0E30(void) {
+    u8 timer;
+
+    timer = g_Task->timer;
+    if (timer == 0) {
+        Scene_ClaimScanBar();
+        g_Task->timer = RANDOM_MASK(0xF) + 0x18;
+    } else {
+        g_Task->timer = timer - 1;
+    }
+    Scene_UpdateScanBars(0xF0);
+    if (g_ScriptVars[0] == 0xE) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801D0EC4(void) {
     if (!(Scene_UpdateScanBars(240) & BYTE_MASK)) {

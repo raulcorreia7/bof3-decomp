@@ -16,7 +16,8 @@ extern Callback D_801D1B38[];
 extern Callback D_801D1B48[];
 
 /* func_801D1624 */
-u8 Scene_UpdateScanBars(s32 y);
+u8   Scene_UpdateScanBars(s32 y);
+void Scene_ClaimScanBar(void);
 
 void func_801D1218(WorldPos* pos, s16 y, s32 mode);
 void func_801D17A0(s32 x, s32 y, s32 mode);
