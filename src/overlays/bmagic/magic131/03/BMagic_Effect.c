@@ -21,7 +21,7 @@ MATCH void func_801EEDEC(void) {
     g_Task->facing = g_BattleEffectBattler->facing;
     Battle_CenterCamera();
     g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0xA;
+    g_Task->unk_09       = 10;
     g_Task->timer        = 0;
     g_Task->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 105) & BYTE_MASK;
@@ -31,7 +31,7 @@ MATCH void func_801EEDEC(void) {
     g_Task->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(0x102);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
 }
 
 INCLUDE_ASM(func_801EEF64);
