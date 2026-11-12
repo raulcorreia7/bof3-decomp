@@ -21,7 +21,6 @@ extern u8 D_801F6B18[];
 
 extern u8 D_80146871;
 extern u8 D_80145E9A;
-extern u8 D_80145E9B;
 
 void func_801F5418(s32 value, s32 flag);
 void func_801F555C(s16 x, s16 y, u8 row);
