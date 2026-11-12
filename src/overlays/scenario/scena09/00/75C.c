@@ -41,7 +41,7 @@ MATCH s32 func_801F75BC(void) {
 
     Area_SetCameraMatrix(&camera);
     alive = 0;
-    row   = (SceneWorkRow*)(MEM_PTR(u8, 0x800E5000u) + g_Task->unk_06 * 0x500);
+    row   = (SceneWorkRow*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
     for (i = 0; i < 32; row++, i++) {
         if (row->active == 0) {
             continue;
