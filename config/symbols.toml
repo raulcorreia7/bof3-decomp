@@ -4696,6 +4696,8 @@ Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "Looks through 
 Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "Sets g_MessageRequest to 6 when g_MessageChoice is nonzero, otherwise to 4." }
 Area_SampleForwardHeight = { addr = 0x801F4544, type = "func", source = "Samples the terrain height 5 steps ahead of the task along its facing, stores that point in unk_18 and unk_1C and the height in gravity; called by func_801F42C0 when it starts its motion." }
 g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
+g_PartyTrailStep = { addr = 0x801F616C, size = 0x14, source = "The trail step of each follower per walk phase, ten rows of two step indexes into g_PartyTrailOffset; func_801F4614 probes the cell of each follower of the walking leader." }
+g_PartyTrailOffset = { addr = 0x801F6180, size = 0x40, source = "The cell offset from the walking leader of a trail step: four blocks of eight signed byte offsets, one block per facing pair, winding once around the leader; func_801F4614 adds one to the leader position to find each follower." }
 
 ["emi/world03/area149/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }

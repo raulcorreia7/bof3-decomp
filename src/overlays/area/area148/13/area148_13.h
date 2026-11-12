@@ -29,6 +29,10 @@ extern Callback            D_801F5024[];
 /* D_801F6144 */
 extern PartyMemberMessages g_PartyMemberMessages[2];
 extern Callback            D_801F6160[];
+/* The trail step of each follower per walk phase, and the cell offset of a
+ * trail step by facing block: one winding around the walking leader. */
+extern s8                  g_PartyTrailStep[10][2];
+extern s8                  g_PartyTrailOffset[32][2];
 
 /* The setup step the selector enters. */
 void func_801F37B8(s32 mode, s32 value);
