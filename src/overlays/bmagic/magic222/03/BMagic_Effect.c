@@ -28,7 +28,28 @@ MATCH void func_801EEF24(void) {
 
 INCLUDE_ASM(func_801EEFC8);
 
-INCLUDE_ASM(func_801EF148);
+/* Lets the effect fall onto the battler's height and, at its timer's end, starts eight effect slots, lifts the
+ * camera pitch and moves to the next step. */
+MATCH void func_801EF148(void) {
+    u32 slot;
+    u8  i;
+
+    g_Task->unk_14 -= g_Task->unk_20;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
+    if (--g_Task->unk_09 == 0) {
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        for (i = 0; i < 8; i++) {
+            slot                               = Battle_AllocEffect(1, 0x60) & BYTE_MASK;
+            g_BattleEffects[slot].target.party = g_BattleEffectBattler;
+            g_BattleEffects[slot].header.mode  = 2;
+            g_BattleEffects[slot].unk_0B       = i;
+            g_BattleEffectBattler->param.unk_0B += 1;
+        }
+        g_AreaCameraAngle.vx += 20;
+        g_Task->unk_09 = 8;
+        g_Task->header.step += 1;
+    }
+}
 
 /* func_801EF274 */
 MATCH void Effect_SwingCameraAngle(void) {
