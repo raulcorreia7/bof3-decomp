@@ -62,15 +62,15 @@ void         func_8014D290(void);
 /* func_8014D4E0 */
 extern void  Area_AddActor(void);
 /* func_8014D54C */
-void         Actor_CopyScriptEntry(u32 entry, u8* staging, u32 length);
+void         Actor_CopyScriptRecord(u32 record_index, u8* staging, u32 size);
 /* func_8014D5F0 */
 void         Actor_SwitchScript(u8 value, u8* dst, s32 size);
 /* func_8014D664 */
-void         Actor_StageScriptRecord(s32 value, s32 position, u8* dst, s32 size);
+void         Actor_StageScript(s32 script_index, s32 position, u8* staging, s32 size);
 /* func_8014D6B8 */
-void         Actor_SelectScript(u8 selector);
+void         Actor_SelectScript(u8 script_index);
 /* func_8014D8D4 */
-u32          Actor_RequestScript(u8 selector);
+u32          Actor_RequestScript(u8 script_index);
 /* func_8014D910 */
 void         Actor_SeekScript(u16 position);
 /* func_8014D978 */
@@ -80,7 +80,7 @@ u8           Actor_StepAnimOnce(void);
 /* func_8014DC08 */
 extern void  Actor_SelectSprite(u32 record_index);
 /* func_8014DD3C */
-bool         Area_FindSceneRecord(s32 wanted_id);
+bool         Area_SelectSceneRecord(s32 wanted_id);
 /* func_8014E0A8 */
 extern s32   SYS_ReadCD(s32 size, void* buffer, s32 sectors);
 /* func_8014E284 */
@@ -112,13 +112,13 @@ void         UI_SetMode(u16 local_mode);
 /* func_8014F704 */
 s32          GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
 /* func_8014F800 */
-void         UI_DrawText(s16 x, s16 y, s32 flag, u32 color, u8* text);
+void         UI_DrawText(s16 x, s16 y, s32 palette, u32 byte_count, u8* text);
 /* func_8014F84C */
-u8*          UI_DrawTextGlyphs(u8 flags, u8 len, u8* record);
+u8*          UI_DrawTextGlyphs(u8 palette, u8 byte_count, u8* text);
 /* func_8014FC00 */
 void         func_8014FC00(s32 mode);
 /* func_8014FC90 */
-const u8*    UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* text);
+const u8*    UI_DrawTextString(s16 x, s16 y, s32 palette, u8 byte_count, const u8* text);
 /* func_8014FF0C */
 void         UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 /* func_80150098 */
@@ -216,7 +216,7 @@ void         Area_IndexCells(void);
 void         Menu_UpdatePanelTasks(void);
 void         func_80158E20(void);
 /* func_80158DB8 */
-u8           Menu_OpenPanelTask(u8 menu_id, u8 handler);
+u8           Menu_OpenPanelTask(u8 panel_index, u8 handler_index);
 /* func_80158E50 */
 void         Menu_ResetPanelTasks(void);
 /* func_8015A758 */
@@ -251,7 +251,7 @@ extern s32   Game_SetScriptActive(void);
 /* func_8015C100 */
 extern void  Party_HideBattlers(void);
 /* func_8015C148 */
-s32          Actor_GetType(void);
+s32          Actor_GetOwner(void);
 void         func_8015C214(s32 slot, u8 value);
 /* func_8015C2D4 */
 s8           Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
@@ -274,7 +274,7 @@ extern void  SND_Start(void);
 /* func_8015CEBC */
 void         SND_Exit(void);
 /* func_8015D300 */
-void         SND_PlaySequence(u16 group, s32 sequence, s32 left_volume, s32 right_volume);
+void         SND_PlaySequence(u16 sep_slot, s32 sequence, s32 left_volume, s32 right_volume);
 /* func_8015D404 */
 void         SND_StopSequence(s32 group, s16 sequence);
 /* func_8015D438 */
@@ -300,7 +300,7 @@ void         SND_SetBankLayout(u32 layout);
 /* func_80161B24 */
 void         SND_StartBGM(u8 bgm_id, u8 cue_level, u8 cue_shape);
 /* func_80161BBC */
-bool         SND_RequestBGM(s32 requested);
+bool         SND_RequestBGM(s32 bgm_id);
 /* func_80161C20 */
 void         SND_PlayBGM(s32 selection_id, s32 cue_level, s32 cue_shape);
 /* func_80161CD0 */
@@ -444,7 +444,7 @@ u8   Item_CountHeld(u32 category);
 /* func_801664A0 */
 u8   Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
 /* func_801665A0 */
-u8   Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
+u8   Item_Remove(s32 category, u8 item_id, s32 count, s32 unused);
 /* func_8016663C */
 bool Party_SpendZenny(u32 amount, s32 unused);
 /* func_8016666C */

@@ -51,18 +51,18 @@ found:
         kind  = rec[0x13C];
         flags = g_Characters[kind].status;
         if ((flags & 0x4000) != 0) {
-            Actor_StageScriptRecord(rec[0x4B], 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
+            Actor_StageScript(rec[0x4B], 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             g_Task->param.unk_0B = 0;
         } else {
             sel = rec[0x08];
             if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_Battle.scroll_dir]) {
                 if (rec[0x0B] != 0) {
-                    Actor_StageScriptRecord(sel, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
+                    Actor_StageScript(sel, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
                     g_Task->param.unk_0B = 0;
                 }
             } else {
                 rec[0x08] = (sel + rec[0x0B]) & 0x7;
-                Actor_StageScriptRecord(g_Task->direction_08, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
+                Actor_StageScript(g_Task->direction_08, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             }
             Actor_StepAnimLoop();
         }

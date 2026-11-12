@@ -16,7 +16,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
     code = (u8*)target;
     switch (code[CUR(sub)]) {
         case 0xC0:
-            if (Actor_GetType() != 1) {
+            if (Actor_GetOwner() != 1) {
                 g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             } else {
                 g_Game.current->unk_13D = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
@@ -26,7 +26,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
         default:
             break;
         case 0xC1:
-            if (Actor_GetType() != 1) {
+            if (Actor_GetOwner() != 1) {
                 slot = g_CurrentActor->unk_93;
                 g_PaletteFades[slot].offset.red += (code + CUR(sub))[1];
                 g_PaletteFades[g_CurrentActor->unk_93].offset.green += (code + CUR(sub))[2];
@@ -41,7 +41,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             CUR(sub) += 3;
             break;
         case 0xC2:
-            if (Actor_GetType() != 1) {
+            if (Actor_GetOwner() != 1) {
                 slot = g_CurrentActor->unk_93;
                 g_PaletteFades[slot].offset.red -= (code + CUR(sub))[1];
                 g_PaletteFades[g_CurrentActor->unk_93].offset.green -= (code + CUR(sub))[2];
@@ -102,7 +102,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                     want = slot - 1;
                 }
                 g_Task->direction_08 = want & 7;
-                if (Actor_GetType() != 1) {
+                if (Actor_GetOwner() != 1) {
                     func_8015BAC4(g_Task->direction_08);
                 } else {
                     Actor_SelectScript(g_Task->direction_08);
@@ -123,7 +123,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             break;
         case 0xCB:
             cmd = code + CUR(sub);
-            Area_FindSceneRecord(cmd[2] | (cmd[1] << 8));
+            Area_SelectSceneRecord(cmd[2] | (cmd[1] << 8));
             Actor_SelectScript((code + CUR(sub))[3]);
             FIELD(s8, g_Task, 0x2Au) = (code + CUR(sub))[4] & 1;
             CUR(sub) += 4;
@@ -145,7 +145,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                     val = cur - 1;
                 }
                 g_Task->direction_08 = val & 7;
-                if (Actor_GetType() != 1) {
+                if (Actor_GetOwner() != 1) {
                     func_8015BAC4(g_Task->direction_08);
                 } else {
                     Actor_SelectScript(g_Task->direction_08);

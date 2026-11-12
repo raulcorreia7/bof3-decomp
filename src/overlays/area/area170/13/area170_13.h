@@ -28,7 +28,7 @@ extern u8 D_801F64B8[];
 
 extern void func_801F3994(void);
 
-s32  Item_Add(s32 category, s32 item, s32 amount, s32 unused);
+s32  Item_Add(s32 category, s32 item_id, s32 count, s32 unused);
 void func_801F3594(s16 x0, s16 y0, u16 x1, u16 y1, u16 x2, u16 y2, u16 x3, u16 y3, u8 r, u8 g, u8 b, u8 semi_trans);
 void func_801F3698(s16 x0, s16 y0, s16 x1, s16 y1, u16 x2, u16 y2, u8 r, u8 g, u8 b, u8 semi_trans);
 void func_801F3774(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, u8 semi_trans);

@@ -114,7 +114,7 @@ MATCH void func_801F82D8(s32 slot) {
     Actor* other;
 
     TASK_SET(&g_ActorSlots[slot & BYTE_MASK]);
-    Area_FindSceneRecord(0x18);
+    Area_SelectSceneRecord(0x18);
 
     g_Task->active_flags = 0;
     g_Task->unk_2A       = 0;

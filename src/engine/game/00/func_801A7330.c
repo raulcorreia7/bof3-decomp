@@ -25,7 +25,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     D_1F800002 = (u16)((data[1] << 8) | data[2]);
 
     func_801A4AA8();
-    Area_FindSceneRecord(D_1F800002);
+    Area_SelectSceneRecord(D_1F800002);
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 

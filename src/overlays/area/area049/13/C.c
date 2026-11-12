@@ -149,7 +149,7 @@ MATCH void func_80117BF4(void) {
 }
 
 MATCH void func_80117C38(void) {
-    Scene_AdvanceActorState();
+    Scene_AdvanceActorStep();
 }
 
 INCLUDE_ASM(func_80117C58);

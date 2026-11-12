@@ -4,7 +4,7 @@
 
 MATCH void func_801F3060(void) {
     g_Task->active_flags = 0x80;
-    Area_FindSceneRecord(AREA_SCENE_RECORD);
+    Area_SelectSceneRecord(AREA_SCENE_RECORD);
     g_Task->draw_layer = 5;
     g_Task->unk_2A     = 0;
     ACTOR_CLEAR_TINT();

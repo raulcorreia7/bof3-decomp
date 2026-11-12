@@ -4,7 +4,7 @@
 
 MATCH void WorldMap_StartScene(void) {
     g_Task->active_flags = 0x80;
-    Area_FindSceneRecord(0x1D1);
+    Area_SelectSceneRecord(0x1D1);
     g_Task->draw_layer = 5;
     g_Task->unk_2A     = 0;
     ACTOR_CLEAR_TINT();

@@ -5,7 +5,7 @@
  * when the table has no matching id.
  */
 /* FAKE: retail accesses the word at +0x70 whole; the member is the byte the entity rows use. */
-MATCH bool Area_FindSceneRecord(s32 wanted_id) {
+MATCH bool Area_SelectSceneRecord(s32 wanted_id) {
     s32 i;
     u16 id;
     u32 mask;

@@ -1,6 +1,6 @@
 /* Counts the work counter at byte 0x09 down; at zero the active battler's effect ticker byte drops by one and the effect work record is cleared. */
 /* func_801F0134 (magic144), func_801F0420 (magic092) */
-MATCH void Effect_CountDownCounterAndFinish(void) {
+MATCH void Effect_TickCounter(void) {
     u8 counter;
 
     counter        = g_Task->unk_09 - 1;

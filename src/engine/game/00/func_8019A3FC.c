@@ -12,7 +12,7 @@ MATCH void func_8019A3FC(void) {
     s32    delta;
     s32    total;
 
-    Area_FindSceneRecord(0x18);
+    Area_SelectSceneRecord(0x18);
 
     ptr         = g_Task;
     ptr->unk_48 = 0;

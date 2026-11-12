@@ -4,7 +4,7 @@
  * entry from the current hint's mode row, otherwise it is kept as the entry
  * index; then points unk_50 at that entry's script unless bit 0 of unk_24
  * hands it to func_8014DC08. */
-MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
+MATCH void Actor_BeginScript(s32 script_index, s32 position) {
     u8(*modes)[3];
     u8* table;
     s32 entry;
@@ -13,9 +13,9 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
     u16 code;
     u8  hint;
 
-    selector = raw_selector;
-    code     = raw_code;
-    if (raw_selector & 0x80) {
+    selector = script_index;
+    code     = position;
+    if (script_index & 0x80) {
         if (!(g_Task->active_flags & 0x2)) {
             modes          = (u8(*)[3])D_80181B34;
             hint           = g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK;
@@ -24,15 +24,15 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
             g_Task->active_flags ^= 3;
         }
         entry = ((s32*)&D_80181C7C)[g_Task->unk_64];
-        entry += (raw_selector & 0x7F) * 4;
-        Area_FindSceneRecord(*(u16*)entry);
+        entry += (script_index & 0x7F) * 4;
+        Area_SelectSceneRecord(*(u16*)entry);
         g_Task->unk_4B = *(u8*)(entry + 2);
         g_Task->unk_2A = *(u8*)(entry + 3);
     } else {
         flags = g_Task->active_flags;
         if (flags & 0x2) {
             flags &= 0xFC;
-            Party_LoadMemberSprite((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, raw_selector);
+            Party_LoadMemberSprite((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, script_index);
             g_Task->active_flags = g_Task->active_flags | flags;
         }
         g_Task->unk_4B = selector;

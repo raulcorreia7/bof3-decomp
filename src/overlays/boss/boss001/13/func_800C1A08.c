@@ -7,7 +7,7 @@ MATCH void func_800C1A08(void) {
         value                    = g_Task->pos.y.fixed + COORD_HALF;
         g_Task->pos.y.fixed      = value;
         COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, value);
-        Area_FindSceneRecord(0x5F);
+        Area_SelectSceneRecord(0x5F);
         g_BattleCurrentEnemy->script = &D_800C2188;
         g_Task->unk_2A               = 0;
         Actor_SelectScript(1U);

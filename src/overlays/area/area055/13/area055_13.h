@@ -6,6 +6,6 @@
 
 #include "overlays/area/world01.h"
 
-s32 Item_Count(s32 category, s32 item, s32 mode);
+s32 Item_Count(s32 category, s32 item_id, s32 mode);
 
 #endif

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u8 window_style) {
+MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette) {
     RECT*     texture_window;
     POLY_FT4* primitive;
     s32       color;
@@ -9,8 +9,8 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     s32       clut_x;
     u8        flags;
 
-    flags = style_flags;
-    style = style_flags & 0xF;
+    flags = frame_flags;
+    style = frame_flags & 0xF;
     color = (style == 1) ? 0x48 : 0xAC;
 
     texture_window    = (RECT*)g_GfxPrimCursor;
@@ -24,11 +24,11 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     if (style == 2) {
-        clut_x = (window_style << 5) | 0x10;
+        clut_x = (palette << 5) | 0x10;
         clut_y = 0x1E1;
         SetSemiTrans(primitive, 1);
     } else {
-        clut_x = window_style << 5;
+        clut_x = palette << 5;
         clut_y = 0x1E1;
     }
     primitive->b0 = color;

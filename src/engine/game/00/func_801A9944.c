@@ -93,7 +93,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
                  << 0x18) != 0) {
                 state->cursor = (state->cursor - 1);
                 result        = 0xFF;
-                if (Actor_GetType() == 2) {
+                if (Actor_GetOwner() == 2) {
                     return g_Task->direction_08;
                 }
                 return result;
@@ -120,7 +120,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             next_cursor_e8 = state->cursor + 1;
             state->cursor  = next_cursor_e8;
             state->unk_04  = *(target_bytes + (next_cursor_e8 & HALF_MASK));
-            if (Actor_GetType() == 2) {
+            if (Actor_GetOwner() == 2) {
                 selection = 0;
                 goto block_29; /* every command that keeps the selection shares the return */
             }

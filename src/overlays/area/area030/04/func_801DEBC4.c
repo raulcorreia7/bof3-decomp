@@ -12,7 +12,7 @@ MATCH void func_801DEBC4(void) {
 
     if ((Actor_StepAnimLoop() & BYTE_MASK) != 0) {
         D_801E3200 = 0;
-        Area_FindSceneRecord(*(u16*)(g_FishingSpecies + FISHING_STATE->cue_index_06 * 0x24));
+        Area_SelectSceneRecord(*(u16*)(g_FishingSpecies + FISHING_STATE->cue_index_06 * 0x24));
 
         work        = FISHING_STATE;
         work->flags = (work->flags | ACTOR_FLAG_SEMI_TRANSPARENT);

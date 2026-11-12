@@ -145,7 +145,7 @@ static inline void Menu_SlidePanelUp(void) {
     }
 }
 
-s32 Item_Count(u8 category, u8 item, u8 mode);
+s32 Item_Count(u8 category, u8 item_id, u8 mode);
 
 void func_801D3320(MenuPanelTask* task);
 s32  Char_GetExpForLevel(s32 character, s32 level);

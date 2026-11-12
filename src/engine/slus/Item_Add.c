@@ -3,7 +3,7 @@
 /* adds value to the matching key slot, capping at 99;
  * inserts a new slot and flags scratch on success.
  */
-MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
+MATCH bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused) {
     u8  key;
     u8  add;
     u8  limit;
@@ -12,8 +12,8 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
     s32 i;
     u8  cur;
 
-    key = (item & BYTE_MASK);
-    add = (amount & BYTE_MASK);
+    key = (item_id & BYTE_MASK);
+    add = (count & BYTE_MASK);
     if (key == 0) {
         return false;
     }
@@ -29,7 +29,7 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
         if (*keys == key) {
             cur = *vals;
             if ((cur + add) <= limit) {
-                *vals = (cur + amount);
+                *vals = (cur + count);
                 return true;
             }
             *vals = limit;
@@ -44,8 +44,8 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
     vals = D_801C8950[category & BYTE_MASK];
     do {
         if ((*keys == 0) || (*vals == 0)) {
-            *keys         = item;
-            *vals         = amount;
+            *keys         = item_id;
+            *vals         = count;
             D_1F800000[0] = 1;
             return true;
         }

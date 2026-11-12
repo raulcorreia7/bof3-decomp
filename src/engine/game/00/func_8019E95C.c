@@ -4,7 +4,7 @@ MATCH void func_8019E95C(void) {
     Actor* work;
     Actor* other;
 
-    if ((u8)Area_FindSceneRecord(0x46) != 0) {
+    if ((u8)Area_SelectSceneRecord(0x46) != 0) {
         Actor_Clear();
         return;
     }

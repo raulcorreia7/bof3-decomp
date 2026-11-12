@@ -7,7 +7,7 @@ MATCH void func_800C2024(void) {
     ((PartyMember*)g_Task)->unk_2A = 0;
     ((PartyMember*)g_Task)->unk_48 = 0;
     ((PartyMember*)g_Task)->unk_29 = 5;
-    Area_FindSceneRecord(0x15C);
+    Area_SelectSceneRecord(0x15C);
     Actor_SelectScript(6U);
     ((PartyMember*)g_Task)->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed;
     y                                        = g_BattleEffectBattler->pos.y.fixed;

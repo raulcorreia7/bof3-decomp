@@ -1009,7 +1009,7 @@ extern const MenuPanelFuncs  g_MenuPanels;
 
 void                    func_8014C47C(struct Vec3W* a, struct Vec3W* b);
 extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
-extern void             Actor_BeginScript(s32 raw_selector, s32 raw_code);
+extern void             Actor_BeginScript(s32 script_index, s32 position);
 /* func_8014DB98 */
 extern void             Actor_StageAnimStep(void);
 /* Retail function prototypes (one declaration each). */
@@ -1160,7 +1160,7 @@ extern void             func_8015A1D8(void);
 extern void             func_8015A264(void);
 /* func_8015A2B0 */
 void                    UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
-extern u8*              UI_DrawTextAt(s32 x, s32 y, u8* text);
+extern u8*              UI_DrawTextAt(s32 x, s32 y, u8* stream);
 void                    func_8015A554(void);
 extern void             func_8015A9A4(void);
 s8                      func_8015AD00(PanelSortItem* sort_list);

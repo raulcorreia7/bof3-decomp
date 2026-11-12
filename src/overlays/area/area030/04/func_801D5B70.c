@@ -6,7 +6,7 @@
 /* Declared file-locally: this module's shared header omits the callee. */
 
 MATCH void func_801D5B70(void) {
-    Area_FindSceneRecord(0x47);
+    Area_SelectSceneRecord(0x47);
     FISHING_STATE->active_flags = 0x80;
     FISHING_STATE->state_29     = 1;
     FISHING_STATE->state_2A     = 0;

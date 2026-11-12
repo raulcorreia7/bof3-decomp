@@ -4,7 +4,7 @@ MATCH void func_801E6B28(void) {
     volatile u8* global;
     u32          kind;
 
-    Area_FindSceneRecord(0x18);
+    Area_SelectSceneRecord(0x18);
     g_Task->unk_24 = 0x80;
     g_Task->unk_2A = 0;
     global         = (u8*)(PARTY_STATE_PTR);

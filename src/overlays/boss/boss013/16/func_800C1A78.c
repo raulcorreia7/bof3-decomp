@@ -10,7 +10,7 @@ MATCH void func_800C1A78(void) {
         g_BattleCurrentEnemy->stats.max_hp = 0xFFFF;
         g_BattleCurrentEnemy->hp           = 65535;
     }
-    Area_FindSceneRecord(0xEF);
+    Area_SelectSceneRecord(0xEF);
     Actor_SelectScript(0U);
     g_Task->unk_2A = 1;
 }

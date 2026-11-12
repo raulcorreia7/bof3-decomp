@@ -4,7 +4,7 @@ MATCH void Actor_StartFlying(void) {
     u16    value;
     u16    y;
 
-    Area_FindSceneRecord(0x46);
+    Area_SelectSceneRecord(0x46);
 
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;

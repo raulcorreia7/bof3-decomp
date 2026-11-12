@@ -19,7 +19,7 @@ MATCH void func_801A50C0(u8* script) {
     D_1F800002 = ((script[1] << 8) | script[2]);
 
     func_801A4AA8();
-    Area_FindSceneRecord(D_1F800002);
+    Area_SelectSceneRecord(D_1F800002);
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 

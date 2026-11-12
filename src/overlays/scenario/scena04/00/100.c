@@ -141,7 +141,7 @@ MATCH void func_801F7B00(void) {
     }
     func_801F7EC0(shade, row);
     if (g_ScriptVarsReq.byte == 3) {
-        Scene_AdvanceActorStep();
+        Scene_AdvanceActorMode();
     }
 }
 

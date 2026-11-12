@@ -7,7 +7,7 @@
 extern u16        D_801463B0;
 extern char       D_80149118[];
 extern u8*        D_801EB4F4;
-extern bool       Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+extern bool       Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 u8                func_801DB524(u32 slot);
 extern const char D_801EEC04[];
 extern const char D_801EEC4C[];

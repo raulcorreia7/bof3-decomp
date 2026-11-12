@@ -8,7 +8,7 @@ MATCH void func_801E0124(void) {
     FISHING_STATE->bounce_3C.unk_3C = 0;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
 
-    Area_FindSceneRecord(*(u16*)(D_801E2ACA + FISHING_STATE->cue_index_06 * 36));
+    Area_SelectSceneRecord(*(u16*)(D_801E2ACA + FISHING_STATE->cue_index_06 * 36));
 
     record        = FISHING_STATE;
     record->flags = (record->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);

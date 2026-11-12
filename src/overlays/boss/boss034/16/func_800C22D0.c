@@ -3,7 +3,7 @@
 MATCH void func_800C22D0(void) {
     func_800AC844(0);
     TASK_SET(func_800AC754(0));
-    Area_FindSceneRecord(0x1C1);
+    Area_SelectSceneRecord(0x1C1);
     Actor_SelectScript(8);
     g_Task->unk_2A = 1;
     g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;

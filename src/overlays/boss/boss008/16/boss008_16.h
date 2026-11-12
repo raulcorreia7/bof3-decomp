@@ -41,7 +41,7 @@ extern EnemyBattler g_BattleEnemyBattlers[];
 #define BOSS008_END_BATTLE_BEGIN(slot)          \
     func_800AC844(slot);                        \
     g_Task = (PartyMember*)func_800AC754(slot); \
-    Area_FindSceneRecord(0x83)
+    Area_SelectSceneRecord(0x83)
 
 #define BOSS008_END_BATTLE_FINISH()                   \
     Actor_SelectScript(0);                            \

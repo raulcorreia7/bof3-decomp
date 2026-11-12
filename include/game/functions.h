@@ -21,11 +21,11 @@ void  Actor_Create(u8* request);
 /* func_8019625C */
 void  func_8019625C(void);
 /* func_8019651C */
-s32   GFX_AllocPaletteFade(void* target, s32 red, s32 green, s32 blue, s32 flag_value);
+s32   GFX_AllocPaletteFade(void* owner, s32 red, s32 green, s32 blue, s32 fade_flags);
 /* func_80196670 */
 void  GFX_FreePaletteFade(u8 index);
 /* func_80196718 */
-void  GFX_FreePaletteFadeTarget(void* target);
+void  GFX_FreePaletteFadeTarget(void* owner);
 /* func_80196784 */
 u8    GFX_MarkPaletteCells(u8 mode, u8 value, u8 search);
 /* func_801968BC */
@@ -115,7 +115,7 @@ void  func_801AC1DC(s32* out, u8 selector);
 /* func_801AE214 */
 void  func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 /* func_801AE3F0 */
-void  UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u8 window_style);
+void  UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
 /* func_801AEA80 */
 void  func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shade_mode);
 /* func_801AEBA0 */
@@ -150,7 +150,7 @@ void  func_801B0DFC(void);
 /* func_801B0E44 */
 u8    func_801B0E44(void);
 /* func_801B2D00 */
-s32   Actor_GetTurnStep(s32 selector);
+s32   Actor_GetTurnStep(s32 target_facing);
 /* func_801B59B4 */
 bool  func_801B59B4(void);
 /* func_801B5E58 */
@@ -162,7 +162,7 @@ void  Area_ResetScene(void);
 /* func_801BDAB8 */
 void  func_801BDAB8(void);
 /* func_801BDB7C */
-u8    Party_CountOrder(u8 mode);
+u8    Party_CountOrder(u8 order);
 /* func_801BDD58 */
 u8    func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 /* func_801BDE14 */
@@ -174,7 +174,7 @@ s32   func_801BE1B0(u32 index);
 /* func_801BFE34 */
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
 /* func_801C1400 */
-void  Party_BuildBattlers(u32 mode);
+void  Party_BuildBattlers(u32 order);
 /* Party_LoadPalettes */
 /* func_801C1630 */
 void  Party_LoadPalettes(void);

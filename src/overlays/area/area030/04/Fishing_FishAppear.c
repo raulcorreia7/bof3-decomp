@@ -11,7 +11,7 @@ NON_MATCHING void Fishing_FishAppear(void) {
     s16 limit;
     u8  count;
 
-    Area_FindSceneRecord(FISHING_ENTRY(FISHING_STATE->cue_index_06)->value_00);
+    Area_SelectSceneRecord(FISHING_ENTRY(FISHING_STATE->cue_index_06)->value_00);
     FISHING_STATE->active_flags   = 0;
     FISHING_STATE->counter_48     = 2;
     FISHING_STATE->state_29       = 5;

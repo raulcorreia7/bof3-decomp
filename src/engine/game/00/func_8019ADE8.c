@@ -14,7 +14,7 @@ MATCH void func_8019ADE8(void) {
     GameRouteRequest request;
 
     g_Task->direction_08 = g_Game.members[0].facing & 0x7;
-    Area_FindSceneRecord(0x18);
+    Area_SelectSceneRecord(0x18);
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;
     g_Task->unk_2A       = 0;

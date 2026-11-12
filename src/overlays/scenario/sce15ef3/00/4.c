@@ -79,11 +79,11 @@ MATCH void func_801D0F94(void) {
 }
 
 MATCH void func_801D1008(void) {
-    Scene_AdvanceActorStep();
+    Scene_AdvanceActorMode();
 }
 
 MATCH void func_801D1028(void) {
-    Scene_AdvanceActorStep();
+    Scene_AdvanceActorMode();
 }
 
 MATCH void func_801D1048(void) {
