@@ -133,8 +133,7 @@ MATCH void func_801EF484(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF4F0(void) {
+MATCH void func_801EF4F0(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;
@@ -166,12 +165,8 @@ NON_MATCHING void func_801EF4F0(void) {
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
-#else
-INCLUDE_ASM(func_801EF4F0);
-#endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF648(void) {
+MATCH void func_801EF648(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;
@@ -203,9 +198,6 @@ NON_MATCHING void func_801EF648(void) {
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
-#else
-INCLUDE_ASM(func_801EF648);
-#endif
 
 INCLUDE_ASM(func_801EF79C);
 
