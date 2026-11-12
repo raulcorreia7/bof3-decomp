@@ -293,7 +293,23 @@ MATCH void func_801F1138(void) {
     }
 }
 
-INCLUDE_ASM(func_801F11B8);
+MATCH void func_801F11B8(void) {
+    s16* angle;
+    s32  z;
+    u8   phase;
+
+    phase                   = D_801F1C38[D_801F24E0->unk_07];
+    angle                   = &D_1F800006;
+    *angle                  = phase << 7;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) << 6) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle) << 6) >> 3);
+    z                       = g_BattleEffectBattler->pos.z.fixed;
+    D_801F24E0->pos.z.fixed = z;
+    D_801F24E0->phase_0C    = 0x40;
+    D_801F24E0->timer_05    = 16;
+    D_801F24E0->unk_06      = 20;
+    D_801F24E0->header.step++;
+}
 
 INCLUDE_ASM(func_801F12A0);
 
