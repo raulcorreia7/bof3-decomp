@@ -94,7 +94,7 @@ MATCH void func_801EF404(void) {
             i++;
         } while ((u32)(i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT);
     }
-    if (g_Battle.encounter == 0x37) {
+    if (g_Battle.encounter == 55) {
         g_Task->unk_29 = 7;
     } else {
         g_Task->unk_29 = 3;
