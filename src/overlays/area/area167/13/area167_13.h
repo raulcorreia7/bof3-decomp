@@ -12,20 +12,13 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0x80
 
-/* The scratchpad cell holding this mode's work pointer. */
-
-/* The party position in 16.16 fixed point. */
 extern u8  D_80146866;
-/* The mode byte the request handler writes. */
-/* The overlay state bytes the request sets. */
 /* The second field focus coordinate the work-position copy reads. */
 /* D_80147A90 */
 extern s32 g_AreaFocusY;
-/* The overlay's flag word. */
 /* The payload includes per-state handler tables. */
 extern u8  D_801F4A68[];
 
-/* One cell of the payload's data tables: `offset` is the table's byte offset and `index` the byte offset of the row. */
-#define AREA167_ENTRY_TABLE(type, offset, index) MEM(type, D_801F4A68 + (offset) + (index))
+#define AREA167_ENTRY_TABLE(type, offset, index) WORLD04_ENTRY_TABLE(D_801F4A68, type, offset, index)
 
 #endif
