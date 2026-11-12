@@ -25,7 +25,6 @@ extern Callback          D_801F1C48[];
 extern Callback          D_801F1C94[];
 extern BMagicEffectWork* D_801F24E0;
 extern BMagicEffectWork  D_801F1CA0[48];
-extern s16               D_1F800006;
 
 void func_801F0DF4(void);
 
