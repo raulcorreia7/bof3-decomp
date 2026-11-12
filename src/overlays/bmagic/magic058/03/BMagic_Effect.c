@@ -114,7 +114,22 @@ INCLUDE_ASM(func_801EF74C);
 
 INCLUDE_ASM(func_801EFA78);
 
+#ifdef NON_MATCHING
+NON_MATCHING bool func_801EFDD4(PartyMember* target) {
+    PartyMember* work;
+    s32          x;
+    s32          y;
+    s32          work_y;
+
+    work   = g_Task;
+    x      = (target->pos.x.fixed >> 9) - (work->pos.x.fixed >> 9);
+    work_y = work->pos.y.fixed >> 9;
+    y      = (target->pos.y.fixed >> 9) - work_y;
+    return x * x + y * y <= D_1F800000_HALF * D_1F800000_HALF;
+}
+#else
 INCLUDE_ASM(func_801EFDD4);
+#endif
 
 /* func_801EFE38 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"
