@@ -98,7 +98,6 @@ MATCH void func_801EF40C(void) {
 MATCH void func_801EF4EC(void) {
     PartyMember* battler;
     u8           i;
-    u8           none;
     u8           slot;
     u8           timer;
 
@@ -111,9 +110,9 @@ MATCH void func_801EF4EC(void) {
     }
     if ((g_FrameCount & 0x7) == 0) {
         SND_QueueSelectionFx(0x102);
-        for (i = 0, none = GAME_NONE; i < 16; i++) {
+        for (i = 0; i < 16; i++) {
             slot = BMagic_AllocEffect();
-            if (slot != none) {
+            if (slot != GAME_NONE) {
                 battler                                = g_BattleEffectBattler;
                 BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;

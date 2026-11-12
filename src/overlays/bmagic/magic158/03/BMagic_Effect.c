@@ -42,8 +42,8 @@ MATCH void func_801EEFBC(void) {
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(1152);
         entry               = RANDOM_MASK(7) * 3;
         g_Task->unk_5D      = D_801EF76C[entry];
-        g_Task->unk_5E      = D_801EF76D[entry];
-        g_Task->unk_5F      = D_801EF76E[entry];
+        g_Task->unk_5E      = D_801EF76C[entry + 1];
+        g_Task->unk_5F      = D_801EF76C[entry + 2];
         g_Task->unk_14      = 0x80;
         g_Task->unk_20      = -0x10;
         g_Task->unk_09      = 8;

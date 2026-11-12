@@ -63,7 +63,6 @@ ASSERT_OFFSET(Magic150SpanPair, current, 0x1C);
 
 void func_801EF254(void);
 u8   func_801EF8EC(void);
-/* func_801EF324 */
 void func_801EF324(Magic150SpanPair* pair);
 /* func_801EF2C0 */
 void BMagic_ProjectSpan(ProjectedSpan* span);

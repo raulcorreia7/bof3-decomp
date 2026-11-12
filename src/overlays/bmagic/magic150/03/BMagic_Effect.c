@@ -104,7 +104,7 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     setRGB3(quad, 0, 0, 0);
     GFX_AddPrim(1, sizeof(POLY_G4));
 
-    quad     = (POLY_G4*)g_GfxPrimCursor;
+    quad     = GFX_CURSOR(POLY_G4);
     *quad    = quad[-1];
     quad->x1 = pair->previous.screen[2].vx;
     quad->y1 = pair->previous.screen[2].vy;
@@ -112,7 +112,7 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     quad->y3 = pair->current.screen[2].vy;
     GFX_AddPrim(1, sizeof(POLY_G4));
 
-    line = (LINE_F2*)g_GfxPrimCursor;
+    line = GFX_CURSOR(LINE_F2);
     SetLineF2(line);
     SetSemiTrans(line, 1);
     line->x0 = pair->previous.screen[1].vx;
