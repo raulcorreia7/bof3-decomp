@@ -55,10 +55,10 @@ INCLUDE_ASM(func_801CEDB4);
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
 MATCH s32 func_801CF224(s16 x, s16 y) {
-    CHAR_PROBE_CELL_CODE(func_801CF430);
+    CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
-INCLUDE_ASM(func_801CF430);
+INCLUDE_ASM(Char_SpawnLinkedActor);
 
 MATCH void func_801CF51C(void) {
     SYS_DISPATCH_TASK(D_801D07CC, 3, g_Task);

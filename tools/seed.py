@@ -11,6 +11,8 @@ The bundle is `work/<image>/<ADDR>/`:
     draft.txt    that draft's result: variant, differing instructions, first difference
     twins.txt    the three nearest matched functions: C body and instruction diff
                  (tools/template_diff.py)
+    hints.md     the facts in the assembly, each with the tactic row it maps to
+                 (bof3/source/hints.py)
     callees.txt  the prototype of each function the assembly calls
     callers.txt  the lines of src/ and asm/ that call the function
 
@@ -32,6 +34,7 @@ import m2c_sweep
 import template_diff
 import template_try
 import try_body
+from bof3.source import hints
 from bof3.source.ctext import read
 from bof3.source.index import Func, find, load_index
 from bof3.source.remap import declaration
@@ -71,10 +74,10 @@ def callers(root: Path, func: Func) -> list[str]:
     ][:CALLERS]
 
 
-def twins(root: Path, funcs: list[Func], func: Func) -> str:
+def twins(root: Path, ranked: list[tuple[float, Func]], func: Func) -> str:
     """Return the nearest matched functions with their C and their instruction diff."""
     parts = []
-    for score, twin in template_diff.candidates(funcs, func, TWINS):
+    for score, twin in ranked:
         parts.append(f"# {score:.3f} {twin.ref} {twin.name} ({twin.size} bytes)")
         found = template_try.locate(twin.src or "", twin.name)
         if found:
@@ -87,10 +90,9 @@ def twins(root: Path, funcs: list[Func], func: Func) -> str:
     return "\n\n".join(parts) + "\n"
 
 
-def draft(root: Path, func: Func) -> tuple[str, str]:
+def draft(root: Path, func: Func, context: Path) -> tuple[str, str]:
     """Return the best draft and the line that says how it fared."""
-    ctx = m2c_sweep.context(root, func, {})
-    found = m2c_sweep.drafts(root, func, ctx)
+    found = m2c_sweep.drafts(root, func, context, jobs=len(m2c_sweep.VARIANTS))
     if not found:
         return "", "no m2c draft compiles to a definition of the function\n"
     best = None
@@ -121,13 +123,17 @@ def main(argv: list[str] | None = None) -> int:
     folder = ROOT / "work" / func.image / f"{func.addr:08X}"
     folder.mkdir(parents=True, exist_ok=True)
     (folder / "asm.s").write_text(asm.read_text(encoding="utf-8"), encoding="utf-8")
-    (folder / "ctx.c").write_text(
-        m2c_sweep.context(ROOT, func, {}).read_text(encoding="utf-8"), encoding="utf-8"
-    )
-    body, result = draft(ROOT, func)
+    context = m2c_sweep.context(ROOT, func, {})
+    (folder / "ctx.c").write_text(context.read_text(encoding="utf-8"), encoding="utf-8")
+    ranked = template_diff.candidates(funcs, func, TWINS)
+    body, result = draft(ROOT, func, context)
     (folder / "draft.c").write_text(body, encoding="utf-8")
     (folder / "draft.txt").write_text(result, encoding="utf-8")
-    (folder / "twins.txt").write_text(twins(ROOT, funcs, func), encoding="utf-8")
+    (folder / "twins.txt").write_text(twins(ROOT, ranked, func), encoding="utf-8")
+    (folder / "hints.md").write_text(
+        hints.build(ROOT, func, asm.read_text(encoding="utf-8"), tuple(ranked)),
+        encoding="utf-8",
+    )
     (folder / "callees.txt").write_text("\n".join(callees(ROOT, func)) + "\n", "utf-8")
     (folder / "callers.txt").write_text("\n".join(callers(ROOT, func)) + "\n", "utf-8")
     print(folder.relative_to(ROOT))

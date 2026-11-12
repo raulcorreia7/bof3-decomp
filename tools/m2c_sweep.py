@@ -162,17 +162,17 @@ def context(root: Path, func: Func, cache: dict[str, Path]) -> Path:
     return cache[header]
 
 
-def drafts(root: Path, func: Func, ctx: Path) -> dict[str, str]:
+def drafts(root: Path, func: Func, ctx: Path, jobs: int = 1) -> dict[str, str]:
     """Return the body that each m2c variant gives, one per distinct text."""
     asm = asm_path(root, func)
-    out: dict[str, str] = {}
-    seen: set[str] = set()
     work = spad_type(ctx.read_text(encoding="utf-8"), func.image)
     if work and asm:
         asm = root / WORK / "asm" / func.image.replace("/", "+") / asm.name
         asm.parent.mkdir(parents=True, exist_ok=True)
         asm.write_text(typed_asm(asm_path(root, func).read_text("utf-8")), "utf-8")
-    for variant, flags in VARIANTS.items():
+
+    def one(item: tuple[str, list[str]]) -> tuple[str, str | None]:
+        variant, flags = item
         run = subprocess.run(
             [
                 sys.executable,
@@ -194,6 +194,17 @@ def drafts(root: Path, func: Func, ctx: Path) -> dict[str, str]:
         body = to_body(run.stdout, func.name) if run.returncode == 0 else None
         if body and work and SPAD_VIEW_NAME in body:
             body = wrap_cell(body, work, root, func)
+        return variant, body
+
+    items = list(VARIANTS.items())
+    if jobs > 1:
+        with ThreadPoolExecutor(jobs) as pool:
+            results = list(pool.map(one, items))
+    else:
+        results = [one(item) for item in items]
+    out: dict[str, str] = {}
+    seen: set[str] = set()
+    for variant, body in results:
         if body and (key := try_body.body_key(body)) not in seen:
             seen.add(key)
             out[variant] = body
