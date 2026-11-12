@@ -3,7 +3,7 @@
 MATCH void func_801F2C48(void) {
     u8* width;
 
-    if ((SYS_TestFlag(g_SceneEventFlags, 0x22) != 0) || ((SYS_TestFlag(g_SceneEventFlags, 0x21) != 0) && (g_SceneState.scenario_id < 8))) {
+    if ((SYS_TestFlag(g_SceneEventFlags, 34) != 0) || ((SYS_TestFlag(g_SceneEventFlags, 33) != 0) && (g_SceneState.scenario_id < 8))) {
         g_AreaSceneMode = 1;
         func_80196070();
     } else {

@@ -12,7 +12,7 @@ MATCH void func_801F3320(void) {
         COORD_INT(g_Task->pos.z) = 0;
         g_Task->header.step++;
     } else {
-        COORD_INT(g_Task->pos.z) = 0x80;
+        COORD_INT(g_Task->pos.z) = 128;
         g_Task->header.step      = 4;
     }
     func_801F3950(g_Task->direction_08, COORD_INT(g_Task->pos.z));

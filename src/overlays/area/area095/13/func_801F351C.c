@@ -3,7 +3,7 @@
 MATCH void func_801F351C(void) {
     Actor* actor = g_Task;
 
-    if (COORD_INT(actor->pos.y) == 0x3A) {
+    if (COORD_INT(actor->pos.y) == 58) {
         switch ((u16)(COORD_INT(actor->pos.x) - 0x40)) {
             case 0:
                 actor->direction_08 = FACING_RIGHT;

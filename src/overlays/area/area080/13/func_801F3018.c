@@ -10,7 +10,7 @@ MATCH void func_801F3018(void) {
     func_801F3870();
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
-    if (!(remaining & 0xFF)) {
+    if (!(remaining & BYTE_MASK)) {
         func_80196070();
     }
 }

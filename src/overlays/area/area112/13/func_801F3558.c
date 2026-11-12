@@ -4,8 +4,8 @@ MATCH void func_801F3558(void) {
     s32 base;
     u8  state;
 
-    base  = (SYS_TestFlag(g_SceneEventFlags, 0x34) != 0) << 1;
-    state = SYS_TestFlag(g_SceneEventFlags, 0x35) ? (base | 1) : base;
+    base  = (SYS_TestFlag(g_SceneEventFlags, 52) != 0) << 1;
+    state = SYS_TestFlag(g_SceneEventFlags, 53) ? (base | 0x1) : base;
     switch (state) {
         case 0:
         default:

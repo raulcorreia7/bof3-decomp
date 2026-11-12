@@ -5,9 +5,9 @@ MATCH s32 func_801F2C04(void) {
 
     work = g_CurrentActor;
     work[0x74] &= 0xFE;
-    if (g_Game.members[0].chr.character_id == 5) {
-        SYS_SetFlag(g_SceneEventFlags, 0x32);
-        Area_SetCellPalette(0x4E, 0x33);
+    if (g_Game.members[0].chr.character_id == CHAR_ID_MOMO) {
+        SYS_SetFlag(g_SceneEventFlags, 50);
+        Area_SetCellPalette(78, 51);
         g_Task->header.flags = 0;
     }
 }

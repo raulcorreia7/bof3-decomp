@@ -11,7 +11,7 @@ MATCH void func_801F384C(void) {
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)y, (s16)g_Task->unk_18, 0xFF, 0xFF);
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
-    if ((timer & 0xFF) == 0) {
+    if ((timer & BYTE_MASK) == 0) {
         Actor* task;
 
         task                    = g_Task;

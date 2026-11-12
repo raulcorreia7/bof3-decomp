@@ -11,7 +11,7 @@ MATCH void func_801F2F90(void) {
     g_Task      = work;
     TASK_SET(g_Game.members);
     g_Task = work;
-    if (FIELD(s32, D_801468BC, 0) >= g_Game.members[0].pos.x.fixed) {
+    if (FIELD(s32, D_801468BC, 0x0) >= g_Game.members[0].pos.x.fixed) {
         work->header.mode = 0xD;
         g_Task->timer     = 0;
         return;

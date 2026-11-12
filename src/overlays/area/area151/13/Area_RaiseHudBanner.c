@@ -22,5 +22,5 @@ MATCH void Area_RaiseHudBanner(void) {
 force:
     g_Task->unk_03 = 3;
 done:
-    Area_DrawHudBanner(0x5C, (g_Task)->screen_y);
+    Area_DrawHudBanner(92, (g_Task)->screen_y);
 }

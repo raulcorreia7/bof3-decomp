@@ -6,7 +6,7 @@ MATCH void func_801F2CD4(void) {
 
     value2        = g_Task->timer - 1;
     g_Task->timer = value2;
-    if (value2 & 0xFF) {
+    if (value2 & BYTE_MASK) {
         g_AreaCameraOffsetZ = g_AreaCameraOffsetZ - 0x2A;
         value               = g_Task->tint.bytes.unk_5D;
         if (value != 0) {
