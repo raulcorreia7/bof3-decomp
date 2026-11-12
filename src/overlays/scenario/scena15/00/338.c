@@ -77,7 +77,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;
-    GFX_AddPrim(1, 12);
+    GFX_AddPrim(1, sizeof(TILE_1));
 }
 
 #include "shared/Area_ClearWorkColumn.h"
