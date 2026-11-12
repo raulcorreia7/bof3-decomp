@@ -357,7 +357,20 @@ MATCH void func_801F8CDC(Actor* actor) {
 
 #include "overlays/scenario/Actor_Wait.h"
 
-INCLUDE_ASM(func_801F8D4C);
+MATCH void func_801F8D4C(Scena08Spark* spark) {
+    u8  life;
+    s32 speed;
+
+    life         = spark->life - 1;
+    speed        = spark->speed + 0x40000;
+    spark->life  = life;
+    spark->speed = speed;
+    spark->z += speed;
+    spark->fade += 6;
+    if (life == 0) {
+        spark->active = 0;
+    }
+}
 
 INCLUDE_ASM(func_801F8D98);
 
