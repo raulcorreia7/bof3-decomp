@@ -90,11 +90,11 @@ MATCH void func_801EEF84(void) {
         i++;
     } while ((u32)(i & BYTE_MASK) < 8);
     if (g_FrameCount & 1) {
-        if (g_Task->timer < 0x20) {
+        if (g_Task->timer < 32) {
             g_Task->timer += 1;
         }
     }
-    if (g_Task->unk_09 == 0x60) {
+    if (g_Task->unk_09 == 96) {
         g_Task->header.step += 1;
     }
 }
