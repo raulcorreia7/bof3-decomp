@@ -23,7 +23,7 @@ MATCH void func_801DDB7C(void) {
 
     index = 3u;
     while (index < 11u) {
-        if ((ENEMY_COMBATANT(index).header.flags & 1u) != 0u) {
+        if ((ENEMY_COMBATANT(index).header.flags & 0x1u) != 0u) {
             enemy = (EnemyBattler*)g_BattleEnemies + index;
             TASK_SET((enemy));
             BATTLE_CURRENT_ENEMY_PTR = enemy;

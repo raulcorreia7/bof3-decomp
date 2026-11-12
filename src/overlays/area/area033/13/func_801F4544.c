@@ -5,7 +5,7 @@ MATCH void func_801F4544(void) {
     s32 row_offset;
     s32 map_offset;
 
-    if (D_8014496D == 9 || (g_SceneState.flags_01 & 1) != 0) {
+    if (D_8014496D == 9 || (g_SceneState.flags_01 & 0x1) != 0) {
         Actor_Clear();
         return;
     }

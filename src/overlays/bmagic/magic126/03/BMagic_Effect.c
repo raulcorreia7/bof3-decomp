@@ -12,7 +12,7 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
     count = 0;
     do {
-        if (D_801F12BC[(u8)count << 5] & 1) {
+        if (D_801F12BC[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801F12D8, (u8)count << 5);
             D_801F22BC            = D_801F12BC + ((u8)count << 5);
@@ -21,7 +21,7 @@ MATCH void func_801EEC04(void) {
             g_BattleEffectBattler = saved;
         }
         count += 1;
-    } while ((u8)count < 0x80);
+    } while ((u8)count < 128);
 }
 
 INCLUDE_ASM(func_801EECE4);
@@ -213,7 +213,7 @@ MATCH void func_801F037C(void) {
     u8  scratch[16]; /* FAKE: unreferenced local pads the frame to 0x28. */
 
     count = g_Task->unk_09;
-    if (count < 0x10) {
+    if (count < 16) {
         g_Task->unk_09 = count + 4;
     }
 
@@ -282,7 +282,7 @@ MATCH void func_801F0C7C(void) {
     s16* angle_cell;
     s32  angle;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         D_801F22BC->unk_07 += 1;
     }
     PARTY_MEMBER_WORD_08(D_801F22BC) += 0x80000;
@@ -302,7 +302,7 @@ MATCH void func_801F0DA4(void) {
     s32  angle;
     u8   count;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         D_801F22BC->unk_07 += 1;
     }
     angle              = D_801F22BC->unk_04 & 0xF;
@@ -325,7 +325,7 @@ MATCH u32 func_801F1110(void) {
     u8 index;
 
     for (index = 0u; index < 128; index++) {
-        if ((D_801F12BC[index << 5] & 1) == 0) {
+        if ((D_801F12BC[index << 5] & 0x1) == 0) {
             D_801F12BC[index << 5] |= 1;
             return index;
         }

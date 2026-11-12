@@ -12,7 +12,7 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
     count = 0;
     do {
-        if (D_801EF9F8[(u8)count << 5] & 1) {
+        if (D_801EF9F8[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801EFA14, (u8)count << 5);
             g_BMagicOrbitWork     = D_801EF9F8 + ((u8)count << 5);
@@ -21,7 +21,7 @@ MATCH void func_801EEC04(void) {
             g_BattleEffectBattler = saved;
         }
         count += 1;
-    } while ((u8)count < 0x60);
+    } while ((u8)count < 96);
 }
 
 INCLUDE_ASM(func_801EECE4);
@@ -123,8 +123,8 @@ INCLUDE_ASM(func_801EF5F4);
 MATCH u32 func_801EF914(void) {
     u8 index;
 
-    for (index = 0u; index < 0x60; index++) {
-        if ((D_801EF9F8[index << 5] & 1) == 0) {
+    for (index = 0u; index < 96; index++) {
+        if ((D_801EF9F8[index << 5] & 0x1) == 0) {
             D_801EF9F8[index << 5] |= 1;
             return index;
         }

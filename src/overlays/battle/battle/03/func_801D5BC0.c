@@ -40,7 +40,7 @@ MATCH u8 func_801D5BC0(void) {
 
     if (count != 0u) {
         func_801D9484();
-        func_801DE560(2u, 0u, 0u, 0x2Du, Message_GetText(0x18u));
+        func_801DE560(2u, 0u, 0u, 45u, Message_GetText(0x18u));
         return true;
     }
 

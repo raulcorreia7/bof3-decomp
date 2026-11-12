@@ -6,7 +6,7 @@ MATCH void func_801F457C(void) {
     s32 row_offset;
     s32 map_offset;
 
-    if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS || (g_SceneState.flags_01 & 1)) {
+    if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS || (g_SceneState.flags_01 & 0x1)) {
         Actor_Clear();
         return;
     }

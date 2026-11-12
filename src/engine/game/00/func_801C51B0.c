@@ -13,9 +13,9 @@ MATCH void func_801C51B0(void) {
     route                                            = work->direction_08;
     /* FAKE: barrier keeps saved ra from sinking below work load. */
     FAKE_BARRIER();
-    index = 0x34;
+    index = 52;
     if (route == 7) {
-        index = 0x37;
+        index = 55;
     }
     Actor_RequestScript(index);
 }

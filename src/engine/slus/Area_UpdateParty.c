@@ -12,7 +12,7 @@ MATCH void Area_UpdateParty(void) {
         work   = (u8*)&D_80147A58[index * ACTOR_SIZE];
         g_Task = work;
 
-        if (((work[0] & 1u) != 0u) && ((work[0] & 0x40u) == 0u)) {
+        if (((work[0] & 0x1u) != 0u) && ((work[0] & 0x40u) == 0u)) {
             func_8015A944();
         }
     }

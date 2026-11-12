@@ -54,11 +54,11 @@ MATCH void func_801E3284(MenuPanelTask* task) {
 
     TEXT_Format(text, D_801D0E98, task->unk_0C);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_QUANTITY_Y), 0U, text);
-    UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_HELD_LABEL_Y), 0, 0xFFU, Message_GetText(SHOP_TEXT_HELD_LABEL));
+    UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_HELD_LABEL_Y), 0, 255U, Message_GetText(SHOP_TEXT_HELD_LABEL));
 
     TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_HELD) & HALF_MASK);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_HELD_Y), 0U, text);
-    UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_LABEL_Y), 0, 0xFFU, Message_GetText(SHOP_TEXT_EQUIPPED_LABEL));
+    UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_LABEL_Y), 0, 255U, Message_GetText(SHOP_TEXT_EQUIPPED_LABEL));
 
     TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_EQUIPPED) & HALF_MASK);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_Y), 0U, text);

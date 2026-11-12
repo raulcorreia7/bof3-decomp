@@ -10,7 +10,7 @@ MATCH void func_801E483C(void) {
         Battle_PlayEnemyCue(*(u16*)((*(u32*)(((u32)g_BattleCurrentEnemy + 0xE8u)) + 6u)));
     }
     GFX_FreePaletteFadeTarget((void*)g_Task);
-    GFX_AllocPaletteFade((void*)g_Task, 0xFF, 0xFF, 0xFF, 0);
+    GFX_AllocPaletteFade((void*)g_Task, 255, 255, 255, 0);
     work                         = g_Task;
     work->unk_1C                 = -0x2000;
     work->unk_10                 = 0;

@@ -31,7 +31,19 @@ MATCH void func_801EEFF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF024);
+MATCH void func_801EF024(void) {
+    PartyMember* battler;
+
+    battler = g_Battle.selected_actor;
+    g_PaletteFades[g_Task->timer].offset.red--;
+    g_PaletteFades[g_Task->timer].offset.green--;
+    g_PaletteFades[g_Task->timer].offset.blue--;
+    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+        func_80196718(battler);
+        func_800AF814(g_Battle.target_selector);
+        g_Task->header.mode++;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 

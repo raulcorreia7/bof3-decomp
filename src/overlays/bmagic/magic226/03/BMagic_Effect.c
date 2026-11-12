@@ -77,7 +77,30 @@ MATCH void func_801EFDC8(void) {
 
 INCLUDE_ASM(func_801EFE48);
 
-INCLUDE_ASM(func_801EFF88);
+/* Moves the effect in a circle of radius 2 around its origin by the angle byte 0x0B, arcs it in z with its
+ * velocity, and relaunches the arc every 16 frames from the rise speed the ticker picks. */
+MATCH void func_801EFF88(void) {
+    s16* angle_cell;
+    s32  phase;
+    u8   count;
+
+    angle_cell  = &D_1F800004;
+    phase       = (g_Task->param.unk_0B - 2) & 0xF;
+    /* kept: (s16) types the rsin angle; without it GCC loads the ticker into a0 and the body is 4 bytes short. */
+    *angle_cell = phase << 8;
+    g_Task->pos.x.fixed += rsin((s16)(phase << 8)) * 2;
+    g_Task->pos.y.fixed += rcos(*angle_cell) * 2;
+    g_Task->pos.z.fixed += g_Task->unk_14;
+    g_Task->unk_14 += g_Task->unk_20;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        g_Task->unk_14 = D_801F0C68[g_Task->param.unk_0B & 0x3];
+        g_Task->unk_20 = -(g_Task->unk_14 / 8);
+        g_Task->unk_09 = 16;
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F00B0);
 

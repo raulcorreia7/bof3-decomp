@@ -17,7 +17,7 @@ segments:
       - [0x304, .rodata, D_801F6F04]
       - [0x3A8, .rodata, D_801F6FA8]
       - [0x3AC, .rodata, D_801F6FAC]
-      - [0x42C, .rodata, D_801F702C]
+      - [0x42C, .rodata, 75C]
       - [0x468, .rodata, D_801F7068]
       - [0x46C, .rodata, D_801F706C]
       - [0x6C8, .rodata, D_801F72C8]

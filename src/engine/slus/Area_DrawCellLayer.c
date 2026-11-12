@@ -38,11 +38,11 @@ MATCH void Area_DrawCellLayer(s32 layer) {
     row  = (row >= AREA_CELL_GRID_ROWS) ? (row - AREA_CELL_GRID_ROWS) : row;
 
     col_offset = D_80149341;
-    if (g_GameRequestFlags & 1) {
+    if (g_GameRequestFlags & 0x1) {
         col_offset = (col_offset < 2) ? 0 : col_offset - 2;
     }
 
-    col = row ^ 1;
+    col = row ^ 0x1;
     col &= 1;
     col += g_AreaGridColCursor + col_offset;
     col = (col >= AREA_CELL_GRID_COLS) ? (col - AREA_CELL_GRID_COLS) : col;

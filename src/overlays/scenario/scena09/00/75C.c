@@ -147,7 +147,44 @@ INCLUDE_ASM(func_801FA1F0);
 
 INCLUDE_ASM(func_801FA8B8);
 
-INCLUDE_ASM(func_801FAC88);
+MATCH void func_801FAC88(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            g_SceneState.step_05 = 1;
+            Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(61), TO_COORD(11), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
+            break;
+        case 1:
+            if (g_ScriptVars[0] == 0x0F) {
+                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                func_801C16B8();
+                SND_StartXAStream(0, 1);
+                g_SceneState.step_05 = 2;
+            }
+            break;
+        case 2:
+            if (WINDOW_EFFECT_IDLE()) {
+                g_AreaDrawFlags = 0;
+                if (SND_IsXAIdle() != 0) {
+                    g_SceneState.step_05 = 3;
+                }
+            }
+            break;
+        case 3:
+            g_SceneState.step_05 = 4;
+            Game_RequestAreaChange(AREA_ID_MOMO_TOWER_WORLD_MAP, TO_COORD(41), TO_COORD(50), FACING_DOWN_RIGHT);
+            break;
+        case 4:
+            SYS_SetFlag(g_SceneFlags, 0x2E);
+            g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+            g_GameFlags ^= 0x0E;
+            Game_ClearScriptActive();
+            g_ScriptVars[0] = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
+            break;
+        case 14:
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801FAE0C);
 

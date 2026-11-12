@@ -34,7 +34,7 @@ MATCH void GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot) {
     entry     = slot_copy->current_entry;
     dst       = entry[0] + product;
     src       = entry[1] + product;
-    if ((flags & 4u) != 0u) {
+    if ((flags & 0x4u) != 0u) {
         start = quotient + 0x10u;
     } else {
         start = quotient;

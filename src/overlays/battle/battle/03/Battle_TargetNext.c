@@ -22,7 +22,7 @@ MATCH u32 Battle_TargetNext(u32 start_slot) {
         }
     } else {
         i = start_slot;
-        if ((u8)start_slot < 0xB) {
+        if ((u8)start_slot < 11) {
             do {
                 slot = i;
                 if (Battle_SlotIsBlocked(slot) == 0) {

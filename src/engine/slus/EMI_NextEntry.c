@@ -12,7 +12,7 @@ MATCH s32 EMI_NextEntry(u8 slot) {
     if (*D_80146848 < slot) {
         return 0;
     }
-    if (((g_EmiStreamFlags & 0x20u) != 0) && (D_80146844.slots[slot].type < 6u)) {
+    if (((g_EmiStreamFlags & 0x20u) != 0) && (D_80146844.slots[slot].type < EMI_ENTRY_VAB_HEADER)) {
         return 0;
     }
 
