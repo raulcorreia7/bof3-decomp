@@ -28,7 +28,23 @@ INCLUDE_ASM(func_801EEF3C);
 
 INCLUDE_ASM(func_801EF05C);
 
-INCLUDE_ASM(func_801EF158);
+MATCH void func_801EF158(void) {
+    s32 vec[4];
+    u8  count;
+
+    vec[0] = (g_Task->unk_0C >> 9) - 0x4000;
+    vec[1] = (g_Task->unk_10 >> 9) - 0x4000;
+    vec[2] = g_Task->unk_14 >> 1;
+    /* The retail build passes the never-written slot after the vector. */
+    func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x10);
+    g_Task->unk_09 = g_Task->unk_09 + 1;
+    count          = g_Task->timer - 1;
+    g_Task->timer  = count;
+    if (!(count & BYTE_MASK)) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF234);
 
