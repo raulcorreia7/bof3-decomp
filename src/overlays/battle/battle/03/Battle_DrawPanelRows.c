@@ -7,7 +7,8 @@
 /* draws the queued battle panel rows and the two entrance origins around (x, y), each quad sized by the
  * width of its own row.
  */
-MATCH void func_801D7A40(s16 x, s16 y) {
+/* func_801D7A40 */
+MATCH void Battle_DrawPanelRows(s16 x, s16 y) {
     u8  panel_index;
     u8  row_width;
     u8  shade;

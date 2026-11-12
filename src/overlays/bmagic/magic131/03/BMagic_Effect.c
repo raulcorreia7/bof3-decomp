@@ -115,7 +115,7 @@ MATCH void func_801EFF48(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         direction = LOBU(g_Battle.scroll_dir);
         if (direction == 0 || direction == 3) {
             g_Task->unk_0C = 8;

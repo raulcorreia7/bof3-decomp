@@ -88,25 +88,30 @@ void      func_801F8BE8(void* table);
 void      func_801FA38C(void);
 extern u8 D_801FDFC8;
 
+/* The panel's trail in the work memory, 32 rows of 0x18 bytes: the panel steps shift them down and
+ * draw the first 31. kept: a folded constant, so a symbol cannot replace it without growing every
+ * panel step. */
+#define SCENA07_PANEL_ROWS MEM_PTR(void, AREA_WORK + 0xE0)
+
 /* The panel fade step func_801F72E0 and func_801F80F0 share: draw the panel table, dim it by 12 and
  * advance the actor when its countdown ends. Every change must keep both members matching. */
-#define SCENA07_PANEL_FADE_STEP()              \
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
-    D_800E4C1E -= 0xC;                         \
-    if (--g_Task->timer == 0) {                \
-        g_Task->header.step++;                 \
+#define SCENA07_PANEL_FADE_STEP()      \
+    func_801F88B8(SCENA07_PANEL_ROWS); \
+    func_801F8BE8(SCENA07_PANEL_ROWS); \
+    D_800E4C1E -= 0xC;                 \
+    if (--g_Task->timer == 0) {        \
+        g_Task->header.step++;         \
     }
 
 /* The panel brighten step func_801F724C and func_801F805C share: draw the panel table, brighten it by 6
  * and re-arm the countdown to 0x20 when it ends. Every change must keep both members matching. */
-#define SCENA07_PANEL_BRIGHTEN_STEP()          \
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
-    D_800E4C1E += 6;                           \
-    if (--g_Task->timer == 0) {                \
-        g_Task->timer = 32;                    \
-        g_Task->header.step++;                 \
+#define SCENA07_PANEL_BRIGHTEN_STEP()  \
+    func_801F88B8(SCENA07_PANEL_ROWS); \
+    func_801F8BE8(SCENA07_PANEL_ROWS); \
+    D_800E4C1E += 6;                   \
+    if (--g_Task->timer == 0) {        \
+        g_Task->timer = 32;            \
+        g_Task->header.step++;         \
     }
 u8   func_801F85D8(void);
 void func_801F9DA8(void);

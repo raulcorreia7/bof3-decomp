@@ -43,7 +43,7 @@ MATCH void func_801EEDD8(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9610(g_Battle.target_selector, 0x200);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x200);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

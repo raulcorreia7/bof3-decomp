@@ -13,7 +13,8 @@ typedef void (*BattlePanelFunc)(void);
  * record, closes the panel when the slot becomes blocked, and toggles the
  * enemy row's 0x2000 flag from the row's shutter counters.
  */
-MATCH void func_801E960C(void) {
+/* func_801E960C */
+MATCH void Battle_UpdateMenuPanel(void) {
     BattlePanelTask* task;
     BattlePanelTask* panel;
     u8*              row;

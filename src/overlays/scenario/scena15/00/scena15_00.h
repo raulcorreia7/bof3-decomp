@@ -18,8 +18,9 @@ extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
 
 void             func_801F71B0(u8 arg);
+void             func_801F752C(AreaSpark* spark);
 void             func_801F75D8(void);
-s32              func_801F7748(void);
+bool             func_801F7748(void);
 void             func_801F79C4(void);
 void             func_801F81D8(s16 x, s16 y);
 extern Callback  D_801FE5CC[];

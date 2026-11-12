@@ -35,7 +35,7 @@ NON_MATCHING void func_801EECCC(void) {
     facing = ((PartyMember*)D_8014637C)->facing ^ 0x2;
 have_facing:
     g_Task->facing = facing;
-    func_800AFD9C();
+    Battle_CenterCamera();
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0x30;
     g_Task->timer        = 0;
@@ -64,7 +64,7 @@ MATCH void func_801EEE68(void) {
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
     if (timer == 16) {
-        func_800A9610(g_Battle.target_selector, 0x10);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

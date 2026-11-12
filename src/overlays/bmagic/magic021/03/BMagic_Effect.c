@@ -73,7 +73,7 @@ MATCH void func_801EF104(void) {
 
 MATCH void func_801EF208(void) {
     if (Actor_StepAnimOnce() != 0u) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -107,7 +107,7 @@ MATCH void func_801EF534(void) {
 MATCH void func_801EF578(void) {
     SYS_DISPATCH_BYTE(D_801EFE08, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EF7FC();
         func_801EFA48();
     }

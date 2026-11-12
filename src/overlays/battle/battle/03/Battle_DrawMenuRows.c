@@ -5,7 +5,8 @@
 /* draws the five panel rows at the panel position plus the per-row offsets, then ages the row counters or
  * advances the panel state when the first row has run out.
  */
-MATCH void func_801E927C(void) {
+/* func_801E927C */
+MATCH void Battle_DrawMenuRows(void) {
     u8 i;
     u8 size;
     u8 xoff;

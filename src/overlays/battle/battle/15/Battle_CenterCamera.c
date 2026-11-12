@@ -3,7 +3,8 @@
 /* Averages the x, y and vertical span of the living battlers (the enemies in
  * the 0x40 mode, otherwise the three party slots) into the camera work
  * record. */
-MATCH void func_800AFD9C(void) {
+/* func_800AFD9C */
+MATCH void Battle_CenterCamera(void) {
     s32          i;
     s32          count;
     s32          sum_x;

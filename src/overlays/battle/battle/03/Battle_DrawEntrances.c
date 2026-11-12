@@ -5,7 +5,8 @@
 /* primes the battle entrance row state, then steps each of the seven
  * entrance rows through its handler and its entrance sprite pair.
  */
-MATCH void func_801D238C(void) {
+/* func_801D238C */
+MATCH void Battle_DrawEntrances(void) {
     u8 panel_index;
 
     if ((g_InputHeld & PADselect) == 0) {

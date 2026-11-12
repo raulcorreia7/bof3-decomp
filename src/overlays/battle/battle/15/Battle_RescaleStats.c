@@ -5,9 +5,10 @@
  * reprisal, critical, evasion and accuracy from the base stats by the stat modifier bytes,
  * copy the resistances and apply the row's doubling and zeroing flags.
  */
-MATCH void func_800A9BD8(u8 slot) {
+/* func_800A9BD8 */
+MATCH void Battle_RescaleStats(u8 slot) {
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-        func_800A9FC4((BattlePanelRecord*)&D_80145F04[slot * BATTLE_PARTY_STRIDE], slot);
+        Battle_RescalePanel((BattlePanelRecord*)&D_80145F04[slot * BATTLE_PARTY_STRIDE], slot);
     } else {
         slot -= BATTLE_PARTY_CHARACTERS_COUNT;
 

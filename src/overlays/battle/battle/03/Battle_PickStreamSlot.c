@@ -7,7 +7,8 @@
  * variant by the work record's unk_08 (offset by 0x1DB/0x1EE when the query fails), without it the hint indexes the
  * D_800B4A64/D_800B4A68 slot table; starts the slot and advances the step byte.
  */
-MATCH void func_801E7948(void) {
+/* func_801E7948 */
+MATCH void Battle_PickStreamSlot(void) {
     u32 slot;
 
     if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {

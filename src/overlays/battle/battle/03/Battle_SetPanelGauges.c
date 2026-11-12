@@ -3,7 +3,8 @@
 /* loads the active menu panel's gauge fraction and caps for both
  * bars from its entry, clamping each to one, and advances the panel.
  */
-MATCH void func_801E9CA8(void) {
+/* func_801E9CA8 */
+MATCH void Battle_SetPanelGauges(void) {
     MenuPanelTask* p1;
     MenuPanelTask* p2;
     MenuPanelTask* p3;

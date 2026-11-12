@@ -40,7 +40,7 @@ MATCH void func_801EEFF4(void) {
     u8 counter;
 
     if (g_Task->unk_09 == 4) {
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
     }
     SP_REF(s16, 0) = g_Task->unk_09 * 0x1C;
     counter        = g_Task->unk_09 + 1;
@@ -96,7 +96,7 @@ MATCH void func_801EFB88(void) {
 MATCH void func_801EFC70(void) {
     u8 count;
 
-    func_800AF764();
+    Battle_ProjectRange();
     g_Task->timer += 2;
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
@@ -110,7 +110,7 @@ MATCH void func_801EFCF4(void) {
     u8           counter;
     s32          drop;
 
-    func_800AF764();
+    Battle_ProjectRange();
     work         = g_Task;
     counter      = work->unk_09 + 1;
     drop         = (VOL(u8, work->unk_09) - 8) / 2;
@@ -124,7 +124,7 @@ MATCH void func_801EFCF4(void) {
 MATCH void func_801EFD74(void) {
     u8 counter;
 
-    func_800AF764();
+    Battle_ProjectRange();
     g_Task->unk_30.half -= (g_Task->unk_09 - 8) / 2;
     if ((g_Task->unk_09 & BYTE_MASK) != 0x2C) {
         g_Task->unk_09 = g_Task->unk_09 + 1;
