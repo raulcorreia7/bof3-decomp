@@ -138,7 +138,7 @@ MATCH void func_801EF860(void) {
     SYS_DISPATCH_TASK(D_801F0420, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF8A4);
+#include "overlays/bmagic/Effect_DrawRings.h"
 
 MATCH void func_801EFA18(void) {
     s32  phase;
@@ -219,9 +219,9 @@ MATCH void func_801EFCF4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFE3C);
+INCLUDE_ASM(BMagic_DrawRingTriangles);
 
-INCLUDE_ASM(func_801F0090);
+INCLUDE_ASM(BMagic_DrawRingQuads);
 
 /* func_801F0368 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

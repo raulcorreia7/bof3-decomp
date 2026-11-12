@@ -213,6 +213,15 @@ typedef struct BMagicEffectFuncs {
 ASSERT_SIZE(BMagicEffectFuncs, 0x18);
 ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
 
+/* The step handlers Effect_DrawRings runs, indexed by header.step (byte 0x02). */
+typedef struct BMagicStepHandlers {
+    Callback steps[3];
+} BMagicStepHandlers;
+
+ASSERT_SIZE(BMagicStepHandlers, 0xC);
+
+extern BMagicStepHandlers BMagic_EffectSteps;
+
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on mode. magic070-072 keep a pool of them, one
  * record per sparkle; magic131 keeps a pool of 48. */
@@ -329,6 +338,8 @@ void func_801EF4F0(void);
 void func_801EF970(void);
 void func_801EFA48(void);
 void func_801F0068(void);
+void BMagic_DrawRingTriangles(void);
+void BMagic_DrawRingQuads(void);
 
 void func_801F006C(void);
 
