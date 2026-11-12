@@ -15,6 +15,7 @@ extern u8  D_801F3504[];
 extern u16 D_801F533C[];
 extern u16 D_801F5348[];
 extern u16 D_801F5354[];
+extern u16 D_801F535C[];
 extern u8  D_801F536C[];
 
 #endif
