@@ -2,7 +2,7 @@
 
 MATCH void func_801F4494(void) {
     u8*  flag;
-    u8*  step;
+    u8*  mode;
     u16* countdown;
 
     switch (g_SceneEventStep) {
@@ -12,11 +12,11 @@ MATCH void func_801F4494(void) {
             break;
         case 1:
             if (D_80146867 == 0x18) {
-                step             = &g_SceneEventMode;
-                *step            = 0;
+                mode             = &g_SceneEventMode;
+                *mode            = 0;
                 g_SceneEventStep = 0;
                 /* FAKE: retail reaches g_SceneEventFlags as the mode byte plus 0x63D. */
-                SYS_SetFlag(step + 0x63D, 0x46);
+                SYS_SetFlag(mode + 0x63D, 0x46);
                 Game_RequestAreaChange(AREA_ID_CAER_XHAN_LIFT_RIDE, TO_COORD(8), TO_COORD(12), AREA_ENTRY_MAP_LOADING | FACING_UP);
             }
             break;
