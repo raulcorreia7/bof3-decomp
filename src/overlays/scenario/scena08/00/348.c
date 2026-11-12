@@ -555,7 +555,17 @@ MATCH void func_801FA2D0(void) {
     SYS_SetFlag(&D_80144EC8[0x60], 0x43);
 }
 
-INCLUDE_ASM(func_801FA32C);
+MATCH void func_801FA32C(void) {
+    u8 i;
+
+    for (i = 0; i < 8; i++) {
+        g_Characters[i].unk_07 |= 1;
+    }
+    func_801C16B8();
+    for (i = 1; i < 8; i++) {
+        g_Characters[i].unk_07 &= 0xFE;
+    }
+}
 
 INCLUDE_ASM(func_801FA3E4);
 
