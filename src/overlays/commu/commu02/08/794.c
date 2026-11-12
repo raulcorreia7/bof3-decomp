@@ -895,7 +895,7 @@ MATCH void Fairy_GenerateName(void) {
 
     count = 0;
     i     = 5;
-    dst   = &D_801DB080[5];
+    dst   = &D_801DB080[i];
     do {
         *dst = 0;
         i -= 1;
