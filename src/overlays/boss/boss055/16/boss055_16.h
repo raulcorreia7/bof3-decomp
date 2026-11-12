@@ -55,6 +55,7 @@ void func_800C3284(void);
 
 void func_800C227C(void);
 void func_800C2340(u8 arg0, u8 index, u8 value);
+u8   func_801DDF50(u16 entry_id, u32 table_kind);
 
 extern Callback D_800C35D8[];
 
