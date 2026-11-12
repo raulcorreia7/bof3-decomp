@@ -7,7 +7,7 @@ MATCH void func_801F2C60(void) {
     if (!SYS_TestFlag(D_80144ED0, 0xC)) {
         g_AreaCellCodes[((AreaMapBundle*)MAP_BUNDLE_BASE)->width * 21 + 1] = 0x50;
         g_AreaCellCodes[((AreaMapBundle*)MAP_BUNDLE_BASE)->width * 22 + 1] = 0x50;
-        g_Task->header.step                                                  = 5;
+        g_Task->header.step                                                = 5;
     } else {
         g_AreaCellCodes[((AreaMapBundle*)MAP_BUNDLE_BASE)->width * 21 + 1] = 0xA1;
         g_AreaCellCodes[((AreaMapBundle*)MAP_BUNDLE_BASE)->width * 22 + 1] = 0xA1;
