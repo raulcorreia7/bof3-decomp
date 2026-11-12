@@ -9,7 +9,7 @@ MATCH void func_801DA3F4(void) {
     record                = FISHING_STATE;
     record->step_timer_09 = (record->step_timer_09 - 1);
 
-    func_801E19CC((s16)(FISHING_STATE->step_timer_09 * 80 + 68), 78);
+    Fishing_DrawCautionBox((s16)(FISHING_STATE->step_timer_09 * 80 + 68), 78);
 
     record = FISHING_STATE;
     if (record->step_timer_09 == 0) {
@@ -18,5 +18,5 @@ MATCH void func_801DA3F4(void) {
         record->sub_index_03 = (record->sub_index_03 + 1);
     }
 
-    func_801E16DC();
+    Fishing_DrawDimScreen();
 }
