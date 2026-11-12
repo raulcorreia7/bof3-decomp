@@ -9,6 +9,9 @@ void func_801EECFC(void);
 void Effect_PlayOnIdleTick(void);
 void func_801F02FC(void);
 
+extern BattleEffect D_801EC330[];
+#define BMAGIC_EFFECT_SLOTS D_801EC330
+
 extern Callback D_801F08C4[];
 
 #endif
