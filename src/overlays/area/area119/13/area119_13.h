@@ -12,10 +12,11 @@
 
 #define g_SceneFlags ((void*)g_SceneFlags)
 
-/* The party position in 16.16 fixed point. */
-
 extern u8 D_80146920[];
 extern u8 D_801F45C4[];
+
+/* The eight spawn positions the overlay cycles through, in sixteenths of a cell. */
+extern UPoint2D D_801F4614[8];
 
 void func_801F3324(void);
 void func_801F369C(s32 level);

@@ -15,7 +15,8 @@
 
 #include "overlays/area/Message_SelectAnswerValue.h"
 
-void func_800F500C(void);
+/* func_800F500C */
+void Fishing_ShopRun(void);
 /* func_801E0C80 */
 void Fishing_SetDrawMode(s32 graphic, s32 layer);
 /* func_801E0DCC */
