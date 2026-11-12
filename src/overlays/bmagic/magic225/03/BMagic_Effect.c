@@ -77,23 +77,7 @@ MATCH void func_801EF31C(void) {
 MATCH void func_801EF404(void) {
     s32 i;
 
-    D_8014637C->unk_29 = 2;
-    i                  = 0;
-    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-        do {
-            if (!(Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) & BYTE_MASK)) {
-                g_BattleEnemyBattlers[i & BYTE_MASK].unk_29 = 2;
-            }
-            i++;
-        } while ((u32)(i & BYTE_MASK) < 8);
-    } else {
-        do {
-            if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK)) {
-                g_Game.members[i & BYTE_MASK].unk_29 = 2;
-            }
-            i++;
-        } while ((u32)(i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT);
-    }
+    BMAGIC_MARK_SELECTED_SIDE(2);
     if (g_Battle.encounter == 55) {
         g_Task->unk_29 = 7;
     } else {
@@ -132,23 +116,7 @@ MATCH void func_801EF67C(void) {
         g_Task->unk_09 -= 2;
     }
     if (--g_Task->timer == 0) {
-        D_8014637C->unk_29 = 4;
-        i                  = 0;
-        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            do {
-                if (!(Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) & BYTE_MASK)) {
-                    g_BattleEnemyBattlers[i & BYTE_MASK].unk_29 = 4;
-                }
-                i++;
-            } while ((u32)(i & BYTE_MASK) < 8);
-        } else {
-            do {
-                if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK)) {
-                    g_Game.members[i & BYTE_MASK].unk_29 = 4;
-                }
-                i++;
-            } while ((u32)(i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT);
-        }
+        BMAGIC_MARK_SELECTED_SIDE(4);
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
