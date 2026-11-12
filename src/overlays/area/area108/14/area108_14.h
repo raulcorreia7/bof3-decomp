@@ -11,6 +11,11 @@
 #include <rand.h>
 
 extern u8* D_80147B40;
+/* The cell the party leader's choice commits and the bit the event sets. */
+extern s16 D_80147B26[];
+extern u8  D_80147CC8;
+/* One row per staged party cell: x, y and facing, three bytes apart. */
+extern u8  D_801F636C[];
 
 void func_801F3588(u8* dst, u8* src, u16* state);
 
