@@ -84,6 +84,7 @@ MATCH bool Effect_TargetIsIdentified(void) {
 MATCH void func_801EF174(void) {
     u8 id;
 
+    /* kept: retail reloads the target row at each access; a PartyMember* local changes the bytes. */
     id                                                        = g_Game.members[g_Battle.target_selector].chr.character_id;
     g_Game.members[g_Battle.target_selector].chr.character_id = 0;
     func_801EF590(g_Game.members[g_Battle.target_selector].chr.name, 112, 48);
