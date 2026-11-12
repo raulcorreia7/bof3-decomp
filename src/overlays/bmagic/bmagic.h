@@ -280,6 +280,22 @@ ASSERT_OFFSET(BMagicOrbitWork, unk_14, 0x14);
 /* D_801F05F8 (magic106), D_801F1054 (magic063) */
 extern BMagicOrbitWork* g_BMagicOrbitWork;
 
+/* Steps the orbit work around its battler: the angle advances and the position follows it at the work's radius, the
+ * phase advances by unk_0A, and every other frame the frame count drops; at zero the battler's ticker drops and CLEAR
+ * runs. A statement macro. */
+#define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                           \
+    g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;                                                              \
+    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);      \
+    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius); \
+    FIELD(u16, g_BMagicOrbitWork, 0x1A) += g_BMagicOrbitWork->unk_0A;                                                                   \
+    g_BMagicOrbitWork->unk_0B++;                                                                                                        \
+    if (g_FrameCount & 0x1) {                                                                                                           \
+        if (--g_BMagicOrbitWork->unk_09 == 0) {                                                                                         \
+            g_BattleEffectBattler->param.unk_0B--;                                                                                      \
+            CLEAR();                                                                                                                    \
+        }                                                                                                                               \
+    }
+
 extern MagicModule       D_801EEC00;
 /* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054),
    D_801EF6CC (magic154), D_801EF718 (magic166), D_801EF72C (magic138), D_801EF770 (magic218), D_801EF784 (magic158),

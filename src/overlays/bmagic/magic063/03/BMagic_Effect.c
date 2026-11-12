@@ -133,17 +133,7 @@ MATCH void func_801EF5CC(void) {
 #include "overlays/bmagic/Effect_StepOrbit.h"
 
 MATCH void func_801EF880(void) {
-    g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
-    FIELD(u16, g_BMagicOrbitWork, 0x1A) += g_BMagicOrbitWork->unk_0A;
-    g_BMagicOrbitWork->unk_0B++;
-    if (g_FrameCount & 0x1) {
-        if (--g_BMagicOrbitWork->unk_09 == 0) {
-            g_BattleEffectBattler->param.unk_0B--;
-            func_801F03B0();
-        }
-    }
+    BMAGIC_ORBIT_BATTLER_AND_CLEAR(func_801F03B0);
 }
 
 MATCH void func_801EF994(void) {
