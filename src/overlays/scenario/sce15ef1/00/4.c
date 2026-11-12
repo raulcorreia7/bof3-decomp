@@ -293,7 +293,22 @@ MATCH void func_801D2BA8(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
 }
 
-INCLUDE_ASM(func_801D2C00);
+MATCH void func_801D2C00(void) {
+    Actor* work;
+    u8     timer;
+
+    work = g_Task;
+    work->unk_18 += 0x200;
+    work->unk_1C += 0x100;
+    work->vx += work->unk_18;
+    work->vy += work->unk_1C;
+    func_801D36BC(&work->pos.x.fixed, work->vx, work->vy);
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
+        Actor_Clear();
+    }
+}
 
 INCLUDE_ASM(func_801D2C94);
 
