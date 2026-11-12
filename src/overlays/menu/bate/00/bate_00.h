@@ -129,7 +129,7 @@ typedef struct BateState {
     u8 unk_08;
     u8 pad_09[3];
     /* The equipped item in each slot before the change. */
-    u8 equipped_items[6];
+    u8 equipped_items[EQUIP_SLOT_COUNT];
 } BateState;
 
 extern s8        D_80148659;
