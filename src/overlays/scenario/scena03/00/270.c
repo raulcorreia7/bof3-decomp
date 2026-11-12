@@ -86,7 +86,7 @@ MATCH void func_801F73BC(void) {
         g_Task->timer      = g_Task->header.mode;
         GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MOVE));
         if (g_Task->header.mode == 4) {
-            func_80196070();
+            Actor_Clear();
         }
     } else {
         g_Task->timer--;
@@ -233,7 +233,7 @@ MATCH void func_801F7F84(void) {
         }
     }
     g_ScriptVars[0] += 1;
-    func_80196070();
+    Actor_Clear();
 }
 
 INCLUDE_ASM(func_801F7FFC);
