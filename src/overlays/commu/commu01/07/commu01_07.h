@@ -47,4 +47,8 @@ extern u16 D_801D4E14;
 extern u8  D_801D4E18;
 extern u8  D_801455C9[];
 
+/* Nine cell frames of three screen points each. */
+extern u16 D_801D4C44[9][6];
+extern u8  D_801F286D[];
+
 #endif

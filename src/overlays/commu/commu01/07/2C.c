@@ -97,7 +97,53 @@ MATCH void func_801D3594(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D4030, 0xA8, 33, 20, 8);
 }
 
-INCLUDE_ASM(func_801D36FC);
+/* Outlines cell arg0 with a top line and a left line, white when arg1 is set and blinking otherwise. */
+MATCH void func_801D36FC(s32 arg0, s32 arg1) {
+    LINE_F3* prim;
+    s32      shade;
+    s32      state;
+
+    if ((arg1 & BYTE_MASK) == 0) {
+        state = g_FrameCount;
+        if (state & 8) {
+            shade = (state & 6) << 5 | 0x3F;
+        } else {
+            shade = (~state & 6) << 5 | 0x3F;
+        }
+    } else {
+        shade = 0xFF;
+    }
+
+    prim = (LINE_F3*)g_GfxPrimCursor;
+    SetLineF3(prim);
+    if ((u8)arg0 != 0 && (u8)arg0 < 9 && D_801F286D[g_GameAreaId] < (u8)arg0) {
+        prim->x0 = D_801D4C44[(u8)arg0][2];
+    } else {
+        prim->x0 = D_801D4C44[(u8)arg0][0];
+    }
+    prim->y0 = D_801D4C44[(u8)arg0][1];
+    prim->x1 = D_801D4C44[(u8)arg0][4];
+    prim->y1 = D_801D4C44[(u8)arg0][1];
+    prim->x2 = D_801D4C44[(u8)arg0][4];
+    prim->y2 = D_801D4C44[(u8)arg0][5];
+    setRGB0(prim, shade, shade, 0);
+    GFX_AddPrim(1, sizeof(LINE_F3));
+
+    prim = (LINE_F3*)g_GfxPrimCursor;
+    SetLineF3(prim);
+    if ((u8)arg0 != 0 && (u8)arg0 < 9 && D_801F286D[g_GameAreaId] < (u8)arg0) {
+        prim->y0 = D_801D4C44[(u8)arg0][1];
+    } else {
+        prim->y0 = D_801D4C44[(u8)arg0][3];
+    }
+    prim->x0 = D_801D4C44[(u8)arg0][2];
+    prim->x1 = D_801D4C44[(u8)arg0][2];
+    prim->y1 = D_801D4C44[(u8)arg0][5];
+    prim->x2 = D_801D4C44[(u8)arg0][4];
+    prim->y2 = D_801D4C44[(u8)arg0][5];
+    setRGB0(prim, shade, shade, 0);
+    GFX_AddPrim(1, sizeof(LINE_F3));
+}
 
 INCLUDE_ASM(func_801D3984);
 
