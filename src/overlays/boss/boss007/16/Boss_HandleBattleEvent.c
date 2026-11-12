@@ -2,6 +2,7 @@
 
 MATCH u8 Boss_HandleBattleEvent(u32 mode) {
     u8* text;
+    u8* message_state;
 
     switch ((u8)mode) {
         case 0:
@@ -24,8 +25,9 @@ MATCH u8 Boss_HandleBattleEvent(u32 mode) {
             g_Game.members[0].u.turn.action_flags.value &= ~COMBATANT_FLAG_DRAGON_FORM;
             SYS_CopyString(text, (u8*)&g_Abilities[ABILITY_WHELP_BREATH], 0xC);
             func_801DE560(1, 1, 0, 0x1E, text);
-            /* a plain store: the volatile one moves the Actor_SelectScript argument out of its delay slot */
-            *(u8*)&g_BattleMessageState = 1;
+            /* a plain view: the volatile store moves the Actor_SelectScript argument out of its delay slot */
+            message_state               = (u8*)&g_BattleMessageState;
+            *message_state              = 1;
             SP_REF(PartyMember*, 0x44u) = &g_Game.members[0];
             Actor_SelectScript(0x2C);
             g_BattleRowCursor   = 0x3C;
