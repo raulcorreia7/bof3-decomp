@@ -283,10 +283,10 @@ MATCH void func_801F802C(void) {
         angle          = (u32)rsin(g_Task->vx) >> 4;
         if (g_Task->unk_06 == 7) {
             angle = (u16)angle;
-            angle += 0x800;
+            angle += ANGLE_180;
         } else {
             angle = (u16)angle;
-            angle += 0x400;
+            angle += ANGLE_90;
         }
         work->normal.vx = rcos(angle) * 3;
         work->normal.vy = rsin(angle) * 3;
@@ -335,7 +335,7 @@ MATCH u8* func_801F8B14(void) {
     u8  i;
 
     p = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < CHARACTER_COUNT; i++) {
+    for (i = 0; i < 8; i++) {
         if (*p == 0) {
             return p;
         }
