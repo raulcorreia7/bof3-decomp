@@ -45,6 +45,7 @@ ASSERT_OFFSET(BMagicStreakSegment, tail_red, 0x38);
 
 extern BMagicStreakSegment D_801EF2A8[];
 
-void func_801EF020(BMagicStreakSegment* segment);
+BMagicStreakSegment* func_801EEFB8(void);
+void                 func_801EF020(BMagicStreakSegment* record);
 
 #endif

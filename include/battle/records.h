@@ -937,6 +937,8 @@ extern u8           g_BattleRowCursor;
 extern u8           D_801462EE;
 /* FAKE: g_Battle.boss_flags as a global of its own; the sites that set a bit in it match only with a separate symbol. */
 extern u8           g_BattleBossFlags;
+/* FAKE: g_Battle.party_count as a global of its own; the sites that use it match only with a separate symbol. */
+extern u8           g_BattlePartyCount;
 /* FAKE: g_Battle.living_party_count as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleLivingPartyCount;
 
@@ -1104,5 +1106,9 @@ extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
 /* Enemy battler work record (stride 0x118, indexed by slot - 3). */
 extern EnemyBattler  g_BattleEnemyBattlers[];
+/* The last battle's stat gains, which the bate stat screen adds to its character. */
+extern u32           D_801FE4E8;
+extern u8            D_801FE4EF;
+extern u32           D_801FE4F0;
 
 #endif

@@ -681,6 +681,7 @@ g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC50 = { addr = 0x801EEC50, type = "Magic064SecondSteps", size = 0x0c, source = "Handler table of the magic064 effect, run by header.step (byte 0x02)." }
 BMagic_DispatchMode = { addr = 0x801EEC7C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic064 (Weretiger)." }
 Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "Clears the effect timer (byte 0x09) and runs the next-step routine in magic064 (Weretiger)." }
+BMagic_ProjectCell = { addr = 0x801F12B8, type = "func", source = "Projects the map cell a projected point lands on." }
 g_BMagicEffectModes = { addr = 0x801F1394, source = "Handlers of magic064 (Weretiger), run by header.step (byte 0x02)." }
 
 ["emi/bmagic/magic065/00"]
@@ -750,6 +751,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF47C, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 Effect_DrawSparkleRays = { addr = 0x801EF810, type = "func", source = "Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end; one body shared with the other bmagic overlays." }
 Effect_DrawSparkleWedges = { addr = 0x801EFA44, type = "func", source = "Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius; one body shared with the other bmagic overlays." }
+Effect_DrawSparkleDisc = { addr = 0x801EFCDC, type = "func", source = "Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point: the record's bytes 0x20/0x22 are the point, byte 0x06 plus a random 0-3 is the radius, bytes 0x03 and 0x04 pick the colour row and kind, and byte 0x05 scales it; one body shared with the other bmagic overlays" }
 
 ["emi/bmagic/magic071/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
@@ -762,6 +764,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF47C, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 Effect_DrawSparkleRays = { addr = 0x801EF810, type = "func", source = "Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end; one body shared with the other bmagic overlays." }
 Effect_DrawSparkleWedges = { addr = 0x801EFA44, type = "func", source = "Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius; one body shared with the other bmagic overlays." }
+Effect_DrawSparkleDisc = { addr = 0x801EFCDC, type = "func", source = "Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point: the record's bytes 0x20/0x22 are the point, byte 0x06 plus a random 0-3 is the radius, bytes 0x03 and 0x04 pick the colour row and kind, and byte 0x05 scales it; one body shared with the other bmagic overlays" }
 
 ["emi/bmagic/magic072/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
@@ -774,6 +777,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF47C, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 Effect_DrawSparkleRays = { addr = 0x801EF810, type = "func", source = "Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end; one body shared with the other bmagic overlays." }
 Effect_DrawSparkleWedges = { addr = 0x801EFA44, type = "func", source = "Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius; one body shared with the other bmagic overlays." }
+Effect_DrawSparkleDisc = { addr = 0x801EFCDC, type = "func", source = "Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point: the record's bytes 0x20/0x22 are the point, byte 0x06 plus a random 0-3 is the radius, bytes 0x03 and 0x04 pick the colour row and kind, and byte 0x05 scales it; one body shared with the other bmagic overlays" }
 
 ["emi/bmagic/magic073/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
@@ -789,6 +793,7 @@ Effect_FinishRecovery = { addr = 0x801EF6B8, type = "func", source = "Finishes t
 Effect_LaunchSparkle = { addr = 0x801EF864, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 Effect_DrawSparkleRays = { addr = 0x801EFBF8, type = "func", source = "Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end; one body shared with the other bmagic overlays." }
 Effect_DrawSparkleWedges = { addr = 0x801EFE2C, type = "func", source = "Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius; one body shared with the other bmagic overlays." }
+Effect_DrawSparkleDisc = { addr = 0x801F00C4, type = "func", source = "Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point: the record's bytes 0x20/0x22 are the point, byte 0x06 plus a random 0-3 is the radius, bytes 0x03 and 0x04 pick the colour row and kind, and byte 0x05 scales it; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801F03E8, type = "func", source = "Claims the first free row of the 160 effect slots D_801F0670 (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic073 (Vitalize)." }
 g_BMagicEffectModes = { addr = 0x801F0668, source = "Handlers of magic073 (Vitalize), run by header.mode (byte 0x01)." }
 D_801F21F0 = { addr = 0x801F21F0, source = "Work record of the magic073 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
@@ -808,6 +813,7 @@ Effect_FinishRecovery = { addr = 0x801EF6A4, type = "func", source = "Finishes t
 Effect_LaunchSparkle = { addr = 0x801EF850, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 Effect_DrawSparkleRays = { addr = 0x801EFBE4, type = "func", source = "Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end; one body shared with the other bmagic overlays." }
 Effect_DrawSparkleWedges = { addr = 0x801EFE18, type = "func", source = "Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius; one body shared with the other bmagic overlays." }
+Effect_DrawSparkleDisc = { addr = 0x801F00B0, type = "func", source = "Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point: the record's bytes 0x20/0x22 are the point, byte 0x06 plus a random 0-3 is the radius, bytes 0x03 and 0x04 pick the colour row and kind, and byte 0x05 scales it; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801F03D4, type = "func", source = "Claims the first free row of the 160 effect slots D_801F055C (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic074 (Vigor)." }
 g_BMagicEffectModes = { addr = 0x801F0554, source = "Handlers of magic074 (Vigor), run by header.mode (byte 0x01)." }
 D_801F20DC = { addr = 0x801F20DC, source = "Work record of the magic074 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
@@ -1097,6 +1103,7 @@ g_BMagicEffectModes = { addr = 0x801EFCBC, source = "Handlers of magic101 (Typho
 ["emi/bmagic/magic102/03"]
 D_1F800034_U16 = { addr = 0x1F800034, type = "u16", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Effect_DrawShadedQuads = { addr = 0x801F016C, type = "func", source = "Draws the effect's Gouraud-shaded quads with a depth offset." }
 Area_DrawGroundSceneSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_DrawSceneSprite, with its depth from Area_SampleHeight under its origin, so the sprite stands on the ground." }
 
 ["emi/bmagic/magic103/03"]
@@ -1376,7 +1383,9 @@ D_801EFA6C = { addr = 0x801EFA6C, source = "Halfword table of magic130, indexed 
 
 ["emi/bmagic/magic131/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EF61C, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic131 (KaiserBreath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF668, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic131." }
 Effect_ClearTimerNextStep = { addr = 0x801F0178, type = "func", source = "Clears the effect timer (byte 0x09) and advances header.step (byte 0x02) in magic131 (KaiserBreath)." }
@@ -1469,6 +1478,7 @@ Effect_PlayOnce = { addr = 0x801EEDE4, type = "func", source = "Plays the effect
 BMagic_DispatchEffectMode = { addr = 0x801EEE2C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic145." }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF034, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up by two and advances header.step (byte 0x02) when the timer reaches 16 in magic145 (Noting)." }
 Effect_CountDownTimer = { addr = 0x801EF0A0, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic145 (Noting)." }
+Effect_DrawTexturedQuad = { addr = 0x801EF118, type = "func", source = "Draws the effect's textured quad as four diamond corners around its screen point: the radius is twice the effect phase byte (0x09), the colour eight times the timer (byte 0x0A); one body shared by magic145 and magic146" }
 g_BMagicEffectModes = { addr = 0x801EF414, source = "Handlers of magic145 (Noting), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic146/03"]
@@ -1480,6 +1490,7 @@ Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "Plays the effect
 BMagic_DispatchEffectMode = { addr = 0x801EF04C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic146." }
 Effect_FinishOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the targets of the side mask in byte 0x04, lowers the active battler's ticker and clears the effect in magic146 (Noting)." }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up by two and advances header.step (byte 0x02) when the timer reaches 16 in magic146 (Noting)." }
+Effect_DrawTexturedQuad = { addr = 0x801EF604, type = "func", source = "Draws the effect's textured quad as four diamond corners around its screen point: the radius is twice the effect phase byte (0x09), the colour eight times the timer (byte 0x0A); one body shared by magic145 and magic146" }
 BMagic_AllocEffect = { addr = 0x801EF900, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic146 (Noting)." }
 Actor_Clear = { addr = 0x801EF964, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801EF9B4, source = "Handlers of magic146 (Noting), run by header.mode (byte 0x01)." }
@@ -1560,6 +1571,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF478, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 Effect_DrawSparkleRays = { addr = 0x801EF80C, type = "func", source = "Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end; one body shared with the other bmagic overlays." }
 Effect_DrawSparkleWedges = { addr = 0x801EFA40, type = "func", source = "Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius; one body shared with the other bmagic overlays." }
+Effect_DrawSparkleDisc = { addr = 0x801EFCD8, type = "func", source = "Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point: the record's bytes 0x20/0x22 are the point, byte 0x06 plus a random 0-3 is the radius, bytes 0x03 and 0x04 pick the colour row and kind, and byte 0x05 scales it; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the first free row of the 128 effect slots D_801F01B0 (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic162." }
 
 ["emi/bmagic/magic166/03"]
@@ -1600,6 +1612,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF478, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 Effect_DrawSparkleRays = { addr = 0x801EF80C, type = "func", source = "Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end; one body shared with the other bmagic overlays." }
 Effect_DrawSparkleWedges = { addr = 0x801EFA40, type = "func", source = "Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius; one body shared with the other bmagic overlays." }
+Effect_DrawSparkleDisc = { addr = 0x801EFCD8, type = "func", source = "Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point: the record's bytes 0x20/0x22 are the point, byte 0x06 plus a random 0-3 is the radius, bytes 0x03 and 0x04 pick the colour row and kind, and byte 0x05 scales it; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the first free row of the 128 effect slots D_801F01B0 (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic168." }
 
 ["emi/bmagic/magic169/03"]
@@ -1620,7 +1633,9 @@ g_BMagicEffectModes = { addr = 0x801F041C, source = "Handlers of magic169 (Bened
 ["emi/bmagic/magic172/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnZeroTick = { addr = 0x801EEDD8, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic172 (Magic Ball)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE38, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic172." }
 Effect_TickOnTimerZero = { addr = 0x801EF4BC, type = "func", source = "Counts the effect timer (byte 0x09) down by 2 per frame; at zero lowers the ticker (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic172 (Magic Ball)." }
@@ -1724,6 +1739,7 @@ g_BMagicEffectModes = { addr = 0x801F0D54, source = "Handlers of magic222 (Combu
 ["emi/bmagic/magic223/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_ProjectRange = { addr = 0x800AF764, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF4C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (Battle_ApplyDamageFlags with 0x10) and advances header.mode (byte 0x01) in magic223 (Tempest, Hurricane)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF00C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic223." }
@@ -2643,6 +2659,7 @@ g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of s
 g_MenuStatusStep2Funcs = { addr = 0x801D9700, source = "3 sub-step handlers of step 2 of the status menu, called by func_801D11A4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStatusStep2Sub2Funcs = { addr = 0x801D970C, source = "5 handlers of sub-step 2 of step 2 of the status menu, called by func_801D1898 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_MenuStatusTaskFuncs = { addr = 0x801D974C, source = "Task state handlers of the status menu, dispatched by SYS_DISPATCH_TASK." }
+g_MenuStatusTask1StateFuncs = { addr = 0x801D975C, source = "the state handlers of panel task mode 1, indexed by the panel task state" }
 g_MenuStatusTask2StateFuncs = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
 g_MenuStatusTask3StateFuncs = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
 g_MenuStatFrameLeft = { addr = 0x801D9834, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -3586,6 +3603,7 @@ Scene_DispatchEntity = { addr = 0x801F6DCC, type = "func", source = "dispatches 
 func_801F6DD4 = { addr = 0x801F6DD4, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+GFX_DrawFan = { addr = 0x801F8F90, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FD3BC, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_DispatchByPosition = { addr = 0x801FDA98, type = "func", source = "dispatches a scene handler by position index" }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_JoinMember." }
@@ -3600,6 +3618,7 @@ Scene_DispatchEntity = { addr = 0x801F6F48, type = "func", source = "dispatches 
 func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 AngleAverage12 = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+GFX_DrawFan = { addr = 0x801F9470, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FE018, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_SetPartyWhelp = { addr = 0x801FE698, type = "func", source = "clears the party, streams archives and joins the Whelp with party palettes for the scene" }
 Scene_SetPartyRyuAdult = { addr = 0x801FE6DC, type = "func", source = "clears the party and joins adult Ryu for the scene" }
@@ -4374,6 +4393,7 @@ g_WorldCloudTexture = { addr = 0x801F580C, source = "Texture window of the cloud
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 AngleAverage12 = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+GFX_DrawFan = { addr = 0x801F3600, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Message_ClearOnCancel = { addr = 0x801F3764, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Fishing_ShowLocation = { addr = 0x801F3798, type = "func", source = "Prints the fish listed for the player position from g_FishingBestCatch with Message_StartAreaMessage, steps D_801448EC from 0 to 1, and clears it when the message closes." }
 Actor_ZoomIn = { addr = 0x801F3D88, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
@@ -4750,6 +4770,8 @@ Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "Looks through 
 Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "Sets g_MessageRequest to 6 when g_MessageChoice is nonzero, otherwise to 4." }
 Area_SampleForwardHeight = { addr = 0x801F4544, type = "func", source = "Samples the terrain height 5 steps ahead of the task along its facing, stores that point in unk_18 and unk_1C and the height in gravity; called by func_801F42C0 when it starts its motion." }
 g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
+g_PartyTrailStep = { addr = 0x801F616C, size = 0x14, source = "The trail step of each follower per walk phase, ten rows of two step indexes into g_PartyTrailOffset; func_801F4614 probes the cell of each follower of the walking leader." }
+g_PartyTrailOffset = { addr = 0x801F6180, size = 0x40, source = "The cell offset from the walking leader of a trail step: four blocks of eight signed byte offsets, one block per facing pair, winding once around the leader; func_801F4614 adds one to the leader position to find each follower." }
 
 ["emi/world03/area149/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -4958,6 +4980,7 @@ g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "Tag and mess
 
 ["emi/world04/area174/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_UpdateShots = { addr = 0x801F2EC4, type = "func", source = "Updates the active shots: moves them by their velocities, re-aims them, ages and frees them, and draws each; returns whether any was active." }
 Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "Runs Area_Update after World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F377C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }

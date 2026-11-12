@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC18(void) {
     Callback handlers[5];
 
-    __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
+    memcpy(handlers, D_801EEC04, sizeof(handlers));
     Effect_SetActorMatrix();
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
     PopMatrix();

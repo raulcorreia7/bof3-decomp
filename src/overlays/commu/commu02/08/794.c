@@ -237,7 +237,18 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1Step0Funcs, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D35E0);
+MATCH void func_801D35E0(void) {
+    /* Plain pointers: const lifts the two reads above the D_801DB0CC store. */
+    u8* cues;
+    u8* sequences;
+
+    D_801DB0CC = g_SndBGMId;
+    cues       = g_SelectionCues + g_SndBGMId * 4;
+    sequences  = g_SelectionSequences + g_SndBGMId * 4;
+    SND_StopSequence(*cues, *sequences);
+    SND_RequestBGM(BGM_COMMU02);
+    D_801F294D += 1;
+}
 
 MATCH void func_801D364C(void) {
     if (EMI_IsReady() != 0) {

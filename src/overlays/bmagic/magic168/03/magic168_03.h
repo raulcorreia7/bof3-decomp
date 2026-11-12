@@ -19,9 +19,11 @@ extern BMagicEffectWork D_801F01B0[];
 extern u8 D_801F0194[];
 /* The launch delay between each group of four sparkles, per kind. */
 extern u8 D_801F019C[];
+/* The colour rows of each kind. */
+#define EFFECT_SPARKLE_COLORS D_801F0158
+extern u8 D_801F0158[][4][3];
 
 extern BMagicEffectWorkSteps D_801EEC1C;
-void                         func_801EFCD8(void);
 extern BMagicEffectFuncs     D_801EEC04;
 void                         func_801EF338(void);
 
