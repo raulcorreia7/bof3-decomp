@@ -169,7 +169,20 @@ MATCH void func_801F7AA8(void) {
 
 INCLUDE_ASM(func_801F7AEC);
 
-INCLUDE_ASM(func_801F7D1C);
+MATCH void func_801F7D1C(void) {
+    UPoint2D pos;
+
+    if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
+        g_Actors[g_Task->param.unk_0B].active_flags &= 0xF7;
+        g_Task->header.mode = 0;
+    } else {
+        func_801F83AC(&pos);
+        g_Task->timer += 8;
+        g_Task->tint.signed_bytes.unk_5D = rsin(g_Task->timer << 4) >> 7;
+        g_Task->tint.signed_bytes.unk_5E = rcos(g_Task->timer << 4) >> 7;
+        func_801F7FFC(pos.x, pos.y);
+    }
+}
 
 INCLUDE_ASM(func_801F7E2C);
 
