@@ -1,5 +1,5 @@
-#ifndef SCENE_ADVANCE_BAND_H
-#define SCENE_ADVANCE_BAND_H
+#ifndef SCENARIO_SCENE_ADVANCE_BAND_H
+#define SCENARIO_SCENE_ADVANCE_BAND_H
 
 /* Runs one frame of the scene band: the work velocity steps by its acceleration, with the sign choosing
  * the direction, then the camera matrix is rebuilt, the caller's projector steps the band at the work
