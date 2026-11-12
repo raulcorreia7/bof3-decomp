@@ -235,10 +235,10 @@ MATCH void func_801F8A5C(void) {
 
 INCLUDE_ASM(func_801F8AA0);
 
-#include "overlays/scenario/Scene_AdvanceBand.h"
+#include "overlays/scenario/Scene_AdvanceBandMotion.h"
 
 MATCH void func_801F8BC4(void) {
-    SCENE_ADVANCE_BAND(+, func_801F9020);
+    SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
 }
 
 INCLUDE_ASM(func_801F8C78);
@@ -265,7 +265,7 @@ MATCH void func_801F8EA8(void) {
 }
 
 MATCH void func_801F8F4C(void) {
-    SCENE_ADVANCE_BAND(-, func_801F9020);
+    SCENE_ADVANCE_BAND_MOTION(-, func_801F9020);
 }
 
 /* func_801F9000 */
