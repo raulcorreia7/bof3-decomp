@@ -151,17 +151,16 @@ INCLUDE_ASM(func_801F078C);
 MATCH void func_801F08AC(void) {
     PartyMember* work;
     u32          i;
-    u32          offset;
 
-    for (i = 0, offset = 0; i < 8; i++, offset += BATTLE_ENEMY_STRIDE) {
-        if (func_801DB524((i + 3) & BYTE_MASK) != 0) {
+    for (i = 0; i < 8; i++) {
+        if (func_801DB524((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) != 0) {
             continue;
         }
-        work                       = g_Task;
-        work->facing               = D_801EB638[offset];
-        g_Task->pos.x.fixed        = FIELD(s32, D_801EB664, offset);
-        g_Task->pos.y.fixed        = FIELD(s32, D_801EB668, offset);
-        g_Task->pos.z.part.integer = FIELD(u16, D_801EB66E, offset);
+        work                     = g_Task;
+        work->facing             = g_BattleEnemyBattlers[i].unk_08;
+        g_Task->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
+        g_Task->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;
+        COORD_INT(g_Task->pos.z) = FIELD(u16, D_801EB66E, i * BATTLE_ENEMY_STRIDE);
         Effect_SetActorMatrix();
         func_801F0974();
         PopMatrix();
