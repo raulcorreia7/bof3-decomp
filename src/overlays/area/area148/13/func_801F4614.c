@@ -16,7 +16,7 @@ MATCH void func_801F4614(void) {
     i                   = 0;
     do {
         code = func_801BE0C0(g_Task->pos.x.fixed + (g_PartyTrailOffset[group + trail[i]][0] << 16), g_Task->pos.y.fixed + (g_PartyTrailOffset[group + trail[i]][1] << 16), 0);
-        if (code != 0xFF && !(g_Game.walk_flags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_TRANSITION)) && g_GameStateIndex == GAME_REQUEST_IDLE) {
+        if (code != GAME_NONE && !(g_Game.walk_flags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_TRANSITION)) && g_GameStateIndex == GAME_REQUEST_IDLE) {
             facing = g_Game.members[code].facing;
             next   = facing & 7;
             if ((facing & 1) == 0) {
