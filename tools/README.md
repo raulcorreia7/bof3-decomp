@@ -35,6 +35,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
+| Check the symbol table                   | `tools/symbol.py check`                                                  | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
 | Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown [--update]`                         | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | `--help`                                                  |

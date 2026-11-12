@@ -6,6 +6,7 @@
                            [--type T] [--size N] [--dry-run]
     tools/symbol.py params FUNC OLD=NEW...
     tools/symbol.py refs [DIR...]
+    tools/symbol.py check
 
 `add` writes one row of config/symbols.toml in address order.
 
@@ -29,6 +30,11 @@ lines in headers.
 `refs` ranks the address-named units (`func_<ADDR>.c`) under the folders (default `src`) by how
 often their name occurs in `src`, `include` and `asm`: the most used are the best to name first.
 
+`check` reports the table's problems: a table out of address order, a name at two addresses, an
+address with two non-alias names, a row repeated in several images, an alias no source mentions,
+and a row with no `source`. The first three exit 1; the rest are a list. Fix ordering by hand or
+with `tools/symbol.py add`; never renumber a row.
+
 Run `meson compile -C build/meson check-<image>` for every touched image afterwards.
 """
 
@@ -40,9 +46,11 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
+from bof3.link import symbols
 from bof3.resolve.ids import source_folder
 from bof3.source import symtab
 
@@ -329,6 +337,105 @@ def refs(args: argparse.Namespace) -> int:
     return 0
 
 
+def mentioned(names: set[str]) -> set[str]:
+    """Return the names that a tracked file under ``src``, ``include``, ``asm`` or ``config`` uses."""
+    if not names:
+        return set()
+    with tempfile.NamedTemporaryFile("w", suffix=".names", encoding="utf-8") as handle:
+        handle.write("\n".join(sorted(names)) + "\n")
+        handle.flush()
+        result = subprocess.run(
+            [
+                "git",
+                "grep",
+                "-h",
+                "-o",
+                "-w",
+                "-f",
+                handle.name,
+                "--",
+                "src",
+                "include",
+                "asm",
+                "config",
+                ":(exclude)config/symbols.toml",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    return set(result.stdout.split())
+
+
+def check(args: argparse.Namespace) -> int:
+    """Report the table's problems; a name at two addresses or an out-of-order table exits 1.
+
+    The other findings are the owner's list: a row repeated in several images (a candidate for a
+    group table), an alias no source mentions, and a row with no ``source``.
+    """
+    try:
+        tables = symbols.load(ROOT)
+    except symbols.LinkError as error:
+        print(f"symbols: {error}")
+        return 1
+    findings: list[str] = []
+    repeated: dict[tuple[str, int, str], list[str]] = collections.defaultdict(list)
+    aliases: list[tuple[str, symbols.Entry]] = []
+    status = 0
+    rows = 0
+    for target, entries in tables.items():
+        rows += len(entries)
+        for before, after in zip(entries, entries[1:]):
+            if before.addr > after.addr:
+                findings.append(
+                    f"order\t{target}\t{after.name} 0x{after.addr:08X} after "
+                    f"{before.name} 0x{before.addr:08X}"
+                )
+                status = 1
+                break
+        addresses: dict[str, set[int]] = collections.defaultdict(set)
+        names_at: dict[int, list[str]] = collections.defaultdict(list)
+        for entry in entries:
+            addresses[entry.name].add(entry.addr)
+            if entry.alias:
+                aliases.append((target, entry))
+            else:
+                names_at[entry.addr].append(entry.name)
+                repeated[(entry.name, entry.addr, entry.type)].append(target)
+            if not entry.source:
+                findings.append(f"no-source\t{target}\t{entry.name} 0x{entry.addr:08X}")
+        for name, found in addresses.items():
+            if len(found) > 1:
+                status = 1
+                findings.append(
+                    f"name-two-addresses\t{target}\t{name}\t"
+                    + " ".join(f"0x{a:08X}" for a in sorted(found))
+                )
+        for address, names in names_at.items():
+            if len(names) > 1:
+                status = 1
+                findings.append(
+                    f"address-two-names\t{target}\t0x{address:08X}\t" + " ".join(names)
+                )
+    for (name, address, type_), images in sorted(repeated.items()):
+        if len(images) > 1:
+            findings.append(
+                f"repeat\t{len(images)}\t{name}\t0x{address:08X}\t{type_ or '-'}\t"
+                + " ".join(images)
+            )
+    used = mentioned({entry.name for _, entry in aliases})
+    for target, entry in aliases:
+        if entry.name not in used:
+            findings.append(f"alias-unused\t{target}\t{entry.name} 0x{entry.addr:08X}")
+    print("\n".join(findings))
+    sys.stderr.write(
+        f"symbols: {len(tables)} tables, {rows} rows, {len(findings)} findings; "
+        f"{'FAIL' if status else 'ok'}\n"
+    )
+    return status
+
+
 def main(argv: list[str] | None = None) -> int:
     """Run one verb."""
     parser = argparse.ArgumentParser(
@@ -373,6 +480,8 @@ def main(argv: list[str] | None = None) -> int:
     four = verbs.add_parser("refs", help="rank address-named units by references")
     four.add_argument("dirs", nargs="*")
     four.set_defaults(run=refs)
+    five = verbs.add_parser("check", help="report symbol-table problems")
+    five.set_defaults(run=check)
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
         parser.error("add needs --source (a description) or --alias")
