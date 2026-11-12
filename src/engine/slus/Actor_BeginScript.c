@@ -32,8 +32,7 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
         flags = g_Task->active_flags;
         if (flags & 2) {
             flags &= 0xFC;
-            /* FAKE: retail passes a third argument the prototype does not declare. */
-            ((void (*)(s32, s32, s32))Party_LoadMemberSprite)((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, raw_selector);
+            Party_LoadMemberSprite((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, raw_selector);
             g_Task->active_flags = g_Task->active_flags | flags;
         }
         g_Task->unk_4B = selector;

@@ -16,7 +16,7 @@ and the tool says so.
 from __future__ import annotations
 
 import argparse
-import csv
+import json
 import os
 import re
 import struct
@@ -304,12 +304,12 @@ def write_types(root: Path, manifest: TargetManifest, output: Path) -> None:
 
 def _objects(units: Path) -> list[str]:
     """Return the PsyQ objects the staged library rows name."""
-    objects: set[str] = set()
-    with units.open(newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
-            if isinstance(row.get("object"), str) and row["object"]:
-                objects.add(str(row["object"]))
-    return sorted(objects)
+    rows = [
+        json.loads(line)
+        for line in units.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    return sorted({str(row["object"]) for row in rows if row.get("object")})
 
 
 def _signature(root: Path, cache: Path, name: str) -> Path | None:
@@ -339,7 +339,7 @@ def _signature(root: Path, cache: Path, name: str) -> Path | None:
 
 def signatures(root: Path, cache: Path) -> list[Path]:
     """Generate or reuse the FLIRT signatures for the staged PsyQ objects."""
-    units = root / "config/sdk/library-units.csv"
+    units = root / "config/sdk/library-units.jsonl"
     if not units.is_file():
         return []
     return [

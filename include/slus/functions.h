@@ -69,8 +69,6 @@ void         Actor_SwitchScript(u8 value, u8* dst, s32 size);
 void         Actor_StageScriptRecord(s32 value, s32 position, u8* dst, s32 size);
 /* func_8014D6B8 */
 void         Actor_SelectScript(u8 selector);
-/* func_8014D6DC */
-void         Actor_BeginScript(s32 raw_selector, s32 raw_code);
 /* func_8014D8D4 */
 u32          Actor_RequestScript(u8 selector);
 /* func_8014D910 */
@@ -406,8 +404,6 @@ void         Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
 void         Char_RebuildStats(Character* record);
 /* func_80164D2C */
 void         Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
-/* func_801650B4 */
-bool         Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 /* func_801651DC */
 s32          Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
 /* func_80165280 */
@@ -455,8 +451,6 @@ bool Party_SpendZenny(u32 amount, s32 unused);
 s32  Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_801666C8 */
 s32  Item_GetDescription(s32 category, s32 item_id);
-/* func_80166A10 */
-u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
 u8*  Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
