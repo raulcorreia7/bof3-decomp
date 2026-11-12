@@ -140,7 +140,41 @@ MATCH void func_801EFEB8(void) {
     Camera_SetModelMatrix(&rot, &matrix);
 }
 
-INCLUDE_ASM(func_801EFF84);
+void            func_801F02FC(void);
+void            Effect_SetActorMatrix(void);
+extern Callback D_801F08C4[];
+
+MATCH void func_801EFF84(void) {
+    s32 tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(4, 0xC);
+
+    if (g_Task->header.step != 0) {
+        Effect_SetActorMatrix();
+        func_801F02FC();
+        PopMatrix();
+    }
+
+    SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(4, 0xC);
+}
 
 MATCH void func_801F00A0(void) {
     if (g_Task->unk_4C->param.unk_0B == 1) {
