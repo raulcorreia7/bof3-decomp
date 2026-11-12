@@ -60,10 +60,10 @@ MATCH void func_801F841C(void) {
         case 0:
             *step = 1;
             SYS_SetFlag(g_SceneFlags, 0);
-            Game_RequestAreaChange(AREA_ID_EYGNOCK_ROAD, 0x1F8000, 0x4C0000, 0x86);
+            Game_RequestAreaChange(AREA_ID_EYGNOCK_ROAD, TO_COORD_HALF(31), TO_COORD(76), AREA_ENTRY_MAP_LOADING | FACING_DOWN_LEFT);
             break;
         case 1:
-            g_AreaDrawFlags = 0x1F;
+            g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             *step           = 2;
             break;
         case 2:
