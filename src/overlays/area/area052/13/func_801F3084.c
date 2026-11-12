@@ -5,7 +5,7 @@ MATCH void func_801F3084(void) {
     u16          angle;
     u8           i;
 
-    angle = 0x80;
+    angle = 128;
     for (i = 0; i < 4; i++) {
         row = (AreaWorkRow*)Area_FindFreeWorkRow();
         if (row != NULL) {
@@ -17,6 +17,6 @@ MATCH void func_801F3084(void) {
             row->unk_10      = 0x1800;
             row->unk_14      = 0xC0;
         }
-        angle += 0x100;
+        angle += 256;
     }
 }
