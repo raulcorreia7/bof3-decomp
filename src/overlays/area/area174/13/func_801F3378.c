@@ -1,7 +1,7 @@
 #include "area174_13.h"
 
 MATCH void func_801F3378(AreaShot* shot) {
-    shot->unk_03     = 1;
+    shot->active     = 1;
     shot->unk_04     = 0;
     shot->pos.x      = g_Task->pos.x;
     shot->pos.y      = g_Task->pos.y;
@@ -11,6 +11,6 @@ MATCH void func_801F3378(AreaShot* shot) {
     shot->velocity.z = (g_Task->vz - g_Task->pos.z.fixed) >> 5;
     shot->unk_08     = 0x40;
     shot->unk_0A     = 0x20;
-    shot->unk_05     = 0x20;
+    shot->timer      = 0x20;
     shot->angle      = func_801F3320(&g_Task->pos.x.fixed, &g_Task->vx);
 }

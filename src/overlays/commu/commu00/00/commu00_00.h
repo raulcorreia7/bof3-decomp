@@ -249,7 +249,6 @@ extern Callback         g_FairyCommu04States[FAIRY_COMMU04_STEP_COUNT];
 extern FairyVariant     D_801F26CC[1];
 /* D_801F26EC */
 extern Callback         g_FairyCommu05States[FAIRY_COMMU05_STEP_COUNT];
-extern u8               g_Fairies[][9];
 extern u8               D_801F2706[][9];
 extern u8               D_801F2708[];
 extern volatile u8      D_801F2928[1];
@@ -258,7 +257,6 @@ extern volatile u8      D_801F2928[1];
 extern u16              D_801F2930[][3];
 extern u8               D_801F2944;
 extern u8               D_801F2945;
-extern u8*              D_801F2948;
 extern u8               D_801F294F;
 extern FairyVillageData D_801F24FC_Data;
 

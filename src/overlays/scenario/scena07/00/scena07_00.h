@@ -54,6 +54,9 @@ typedef struct Scena07Burst {
     u16 unk_10;
 } Scena07Burst;
 
+/* The burst position record the start step fills. */
+#define SCENA07_BURST_RECORD MEM_PTR(Scena07Burst, AREA_WORK + 0x948)
+
 extern Scena07Burst* D_801FDFBC;
 void                 func_801F97E0(Scena07Burst* burst);
 
@@ -93,6 +96,14 @@ static inline void Scene_TurnBurst(s32 step) {
 }
 
 void func_801F81D4(u8* row);
+
+/* The position setup func_801F7A30 and func_801F7D6C share: place the actor at the lead member's position and
+ * sample the ground there. Every change must keep both members matching. */
+static inline void Scene_PlaceAtLead(void) {
+    g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
+    g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
+    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+}
 
 u8*       func_801F8394(void);
 void      func_801F83D0(u8* row);

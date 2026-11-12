@@ -30,11 +30,12 @@ extern char          g_SaveCardPortLabelFirst[];
 extern char          g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
 #define MENU_STATUS_STEP_COUNT        5
-#define MENU_STATUS_TASK_COUNT        7
+#define MENU_STATUS_TASK_COUNT        4
 #define MENU_STATUS_STEP1_COUNT       2
 #define MENU_STATUS_STEP2_COUNT       3
 #define MENU_STATUS_STEP2_SUB2_COUNT  5
 #define MENU_STATUS_STEP3_COUNT       2
+#define MENU_STATUS_TASK1_STATE_COUNT 3
 #define MENU_STATUS_TASK2_STATE_COUNT 3
 #define MENU_STATUS_TASK3_STATE_COUNT 3
 
@@ -53,6 +54,8 @@ extern Callback g_MenuStatusStep2Sub2Funcs[MENU_STATUS_STEP2_SUB2_COUNT];
 extern Callback D_801D9720[];
 extern Callback D_801D9734[];
 extern Callback g_MenuStatusTaskFuncs[MENU_STATUS_TASK_COUNT];
+/* D_801D975C */
+extern Callback g_MenuStatusTask1StateFuncs[MENU_STATUS_TASK1_STATE_COUNT];
 /* D_801D9768 */
 extern Callback g_MenuStatusTask2StateFuncs[MENU_STATUS_TASK2_STATE_COUNT];
 /* D_801D9774 */
@@ -88,6 +91,7 @@ extern u8       g_MenuEquipRowIcons[];
 /* D_801D9B64 */
 extern u8       g_MenuLabelEquip[];
 extern u8       g_MenuPortraitAtlas[];
+extern u32      D_801D9688[];
 extern u8       D_801D9BA8[];
 extern u8       g_MenuCaptionIcon[];
 extern u8       g_MenuClockColon[];
@@ -120,11 +124,12 @@ void                   func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 
 extern void            func_801D1D1C(void);
 extern void            func_801D1E34(void);
 extern s32             func_801D2978(void);
-extern s32             func_801D2ADC(void);
+extern void            func_801D2ADC(void);
 extern void            func_801D2C0C(void);
 extern void            func_801D2DA8(void);
 extern void            Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 extern void            Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
+void                   Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 
 /* Slide the master panel up to y -20 and stop it there. */
 static inline void Menu_SlidePanelUp(void) {
@@ -163,6 +168,7 @@ extern s8 D_80144E5E;
 extern void            func_801D1CA4(void);
 extern s32             func_801D1E60(void);
 extern void            func_801D1EE8(void);
+extern void            func_801D2308(void* record);
 extern void            func_801D27BC(void);
 extern u8              D_80144FF9;
 extern s16             D_80148364;
@@ -172,7 +178,14 @@ extern MenuStatusItems g_MenuStatusItems;
 extern s32             D_801DA044;
 extern u8              D_801DA04E;
 extern s32             D_801DA084;
+extern u8              D_801DA0C0;
 extern u8              D_801DA0C6;
+extern u32             D_801DA100;
+/* kept: the tint bytes stay separate globals; one array shares their base register and leaves
+   func_801D2ADC eight bytes short. */
+extern u8              D_801DA11D;
+extern u8              D_801DA11E;
+extern u8              D_801DA11F;
 
 s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 

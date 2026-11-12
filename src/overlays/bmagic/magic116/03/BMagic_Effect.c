@@ -101,18 +101,40 @@ MATCH void func_801EEFF4(void) {
     } while (index < 128);
 }
 
-INCLUDE_ASM(func_801EF020);
+MATCH void func_801EF020(BMagicStreakSegment* record) {
+    s32 offset;
+
+    record->active     = 1;
+    record->unk_01     = 0;
+    record->life       = 16;
+    offset             = (RANDOM_MASK(0x1FF) - 0x100) << 8;
+    record->head.x     = g_Task->pos.x.fixed + offset + offset;
+    record->head.y     = g_Task->pos.y.fixed + 0x20000;
+    record->head.z     = g_Task->pos.z.fixed;
+    record->tail.x     = g_Task->pos.x.fixed + offset;
+    record->tail.y     = g_Task->pos.y.fixed;
+    record->tail.z     = g_Task->pos.z.fixed;
+    record->head_red   = RANDOM_MASK(1) << 7;
+    record->head_green = RANDOM_MASK(1) << 7;
+    record->head_blue  = RANDOM_MASK(1) << 7;
+    record->velocity.x = offset >> 1;
+    record->velocity.y = 0x10000;
+    record->velocity.z = 0;
+    record->tail_red   = 0;
+    record->tail_green = 0;
+    record->tail_blue  = 0;
+}
 
 INCLUDE_ASM(func_801EF118);
 
 MATCH void func_801EF258(void) {
-    BMagicStreakSegment* result;
+    BMagicStreakSegment* record;
     u8                   i;
 
     for (i = 0; i < 8; i++) {
-        result = func_801EEFB8();
-        if (result != NULL) {
-            func_801EF020(result);
+        record = func_801EEFB8();
+        if (record != NULL) {
+            func_801EF020(record);
         }
     }
 }

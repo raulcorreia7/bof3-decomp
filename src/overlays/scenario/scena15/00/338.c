@@ -328,7 +328,20 @@ MATCH void func_801F8BC4(void) {
     SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
 }
 
-INCLUDE_ASM(func_801F8C78);
+MATCH void func_801F8C78(void) {
+    MATRIX matrix;
+    Actor* work;
+
+    Area_SetCameraMatrix(&matrix);
+    func_801F9020(&g_Task->pos.x, &g_Task->vx);
+    func_801F92F0(&g_Task->pos.x, &g_Task->vx);
+    work         = g_Task;
+    D_801FE738.x = -work->vx;
+    D_801FE738.y = -work->vy;
+    D_801FE738.z = -work->vz;
+    work->timer  = 128;
+    g_Task->header.mode++;
+}
 
 INCLUDE_ASM(func_801F8D30);
 
