@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 
 import pytest
 
 import check_names
-from check_names import offenders
+from check_names import offenders, unnamed_parameters
 
 
 def test_an_invented_name_with_an_address_is_an_offender() -> None:
@@ -48,6 +49,37 @@ def test_a_suffixed_default_name_is_still_an_offender() -> None:
 
 def test_words_without_a_digit_run_are_not_addresses() -> None:
     assert offenders("int FACEDBEE_flag;\nint step_12;\n") == set()
+
+
+def test_unnamed_parameters_are_offenders() -> None:
+    assert unnamed_parameters("void f(s32 arg0, s32 arg1) { return arg0; }\n") == {
+        "arg0",
+        "arg1",
+    }
+
+
+def test_argn_in_a_comment_or_string_is_ignored() -> None:
+    assert unnamed_parameters('/* arg0 */ char *s = "arg1"; void f(s32 x);\n') == set()
+
+
+def test_a_diff_with_an_unnamed_parameter_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/a.c").write_text("void f(void);\n")
+    git("add", ".")
+    git("commit", "-qm", "base")
+    (tmp_path / "src/a.c").write_text("void f(s32 arg0);\n")
+    git("commit", "-qam", "add arg0")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 1
+    assert "arg0: an unnamed parameter" in capsys.readouterr().err
 
 
 @pytest.fixture
