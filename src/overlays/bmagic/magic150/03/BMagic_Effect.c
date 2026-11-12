@@ -28,7 +28,7 @@ MATCH void func_801EEDCC(void) {
 }
 
 MATCH void func_801EEE24(void) {
-    u16* state;
+    s16* state;
     u8   timer;
 
     state = &D_801EFAAC;

@@ -7,7 +7,7 @@
 
 extern Callback D_801EEC04[];
 
-extern u16 D_801EFAAC;
+extern s16 D_801EFAAC;
 extern s16 D_801EFAAE;
 extern u16 D_801EFAB0;
 /* The eight-entry table the cursor walks and the cursor itself. */
