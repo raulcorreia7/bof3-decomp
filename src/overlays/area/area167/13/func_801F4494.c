@@ -106,11 +106,11 @@ MATCH void func_801F4494(void) {
             }
             break;
         case 32:
-            countdown = (u16*)&D_801448EE;
+            countdown = &LOHU(D_801448EE);
             if (--*countdown == 0) {
                 Game_ClearScriptActive();
-                /* FAKE: retail reaches g_SceneEventFlags as the countdown plus 0x63A. */
-                SYS_SetFlag((u8*)countdown + 0x63A, 0x90);
+                /* FAKE: retail reaches g_SceneEventFlags as the countdown halfword plus 0x31D. */
+                SYS_SetFlag(countdown + 0x31D, 0x90);
                 Game_RequestAreaChange(AREA_ID_MYRIA_STATION_MAIN_HALL, TO_COORD(21), TO_COORD(4), FACING_LEFT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 g_SceneEventMode = 0;
