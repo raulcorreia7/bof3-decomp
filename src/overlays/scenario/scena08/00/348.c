@@ -157,15 +157,15 @@ MATCH void func_801F79B0(void) {
 }
 
 MATCH void func_801F79EC(void) {
-    Scena08Spark* record;
+    Scena08Spark* spark;
 
     if (g_Task->unk_5A == 4) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
     }
     if ((g_Task->unk_5A & 7) == 0) {
-        record = func_801F8B14();
-        if (record != NULL) {
-            func_801F8B50(record);
+        spark = func_801F8B14();
+        if (spark != NULL) {
+            func_801F8B50(spark);
         }
     }
     func_801F8BF8();
