@@ -39,7 +39,7 @@ MATCH void func_801EED04(void) {
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
     }
     actor                              = g_Battle.selected_actor;
-    slot                               = Battle_AllocEffect(1, 0x36) & 0xFF;
+    slot                               = Battle_AllocEffect(1, 0x36) & BYTE_MASK;
     i                                  = 1;
     dst                                = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 2);
     src                                = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW + 2);
