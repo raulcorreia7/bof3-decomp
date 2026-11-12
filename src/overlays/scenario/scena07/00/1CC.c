@@ -483,7 +483,26 @@ INCLUDE_ASM(func_801FB6DC);
 
 INCLUDE_ASM(func_801FB914);
 
-INCLUDE_ASM(func_801FC094);
+MATCH void func_801FC094(void) {
+    u8 i;
+    u8 slot_index;
+
+    for (i = 0; i < 12; i++) {
+        if (D_801FDE40[i].timer != g_SceneState.timer_06) {
+            continue;
+        }
+        slot_index = Actor_FindFreeSlot();
+        if (slot_index == GAME_NONE) {
+            break;
+        }
+        g_ActorSlots[slot_index].header.flags     = 1;
+        g_ActorSlots[slot_index].type             = 0x18;
+        g_ActorSlots[slot_index].link             = 0x18;
+        COORD_INT(g_ActorSlots[slot_index].pos.x) = D_801FDE40[i].x;
+        COORD_INT(g_ActorSlots[slot_index].pos.y) = D_801FDE40[i].y;
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2) + i % 3);
+    }
+}
 
 MATCH void func_801FC1C4(void) {
     u8* step;

@@ -25,12 +25,25 @@ extern Callback D_801FDDC0[];
 extern Callback D_801FDDC8[];
 extern Callback D_801FDDD0[];
 extern void (*D_801FDDF0[])(u8* row);
-extern Callback  D_801FDE10[];
-extern Callback  D_801FDE1C[];
-extern u8        D_801FDE88[4];
+
+/* The spawn rows the scene timer unlocks: a cell position and the scene timer
+ * value that spawns it. */
+typedef struct SceneTimerSpawn {
+    u16 x;     /* +0x0 */
+    u16 y;     /* +0x2 */
+    s16 timer; /* +0x4 */
+} SceneTimerSpawn;
+
+ASSERT_SIZE(SceneTimerSpawn, 6);
+ASSERT_OFFSET(SceneTimerSpawn, y, 0x02);
+ASSERT_OFFSET(SceneTimerSpawn, timer, 0x04);
+extern Callback        D_801FDE10[];
+extern Callback        D_801FDE1C[];
+extern SceneTimerSpawn D_801FDE40[];
+extern u8              D_801FDE88[4];
 /* D_801FDF8C */
-extern SceneFunc g_SceneActorDispatch[];
-extern u8        D_801FDFC4;
+extern SceneFunc       g_SceneActorDispatch[];
+extern u8              D_801FDFC4;
 
 /* The record D_801FDFBC points at: a world position the burst draws around and its size. */
 typedef struct Scena07Burst {
