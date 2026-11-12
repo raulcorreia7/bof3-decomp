@@ -1414,7 +1414,9 @@ g_BMagicEffectModes = { addr = 0x801EFEE8, source = "Handlers of magic143 (Thund
 ["emi/bmagic/magic144/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EEE50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic144 (Wall of Fire)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE9C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic144." }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF11C, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the effect ticker (byte 0x0B) is set in magic144 (Wall of Fire)." }
