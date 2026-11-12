@@ -1,3 +1,8 @@
+#ifndef AREA_FIND_TRIGGER_BOX_H
+#define AREA_FIND_TRIGGER_BOX_H
+
+#include "game/game.h"
+
 /* Returns the index of the trigger box that contains the party member, or 0xFF. */
 /* func_801F2D00 (area049), func_801F4110 (area117), func_801F4C08 (area118), func_801F355C (area169), func_801F379C (area171) */
 
@@ -47,3 +52,5 @@
         return i;                                                                                                               \
     }                                                                                                                           \
     return 0xFF
+
+#endif
