@@ -1740,12 +1740,6 @@ VALUE_LEFTOVER = re.compile(
 VALUE_RIGHT_OPERATOR = re.compile(
     r"^\s*(==|!=|<=|>=|<|>|\+|-|\*|/|&|\||\^|<<|>>)\s*([A-Za-z_][\w.\[\]\->]*)"
 )
-VALUE_ARITHMETIC_LEFT = re.compile(
-    r"(\([^()]*\)|[A-Za-z_][\w.\[\]\->]*?)\s*[+\-*/%]\s*$"
-)
-VALUE_ARITHMETIC_RIGHT = re.compile(
-    r"^\s*[+\-*/%]\s*(\([^()]*\)|[A-Za-z_][\w.\[\]\->]*?)\s*(?:$|[<>!=&|^)])"
-)
 VALUE_SWITCH = re.compile(r"\bswitch\s*\(")
 VALUE_CASE = re.compile(r"\bcase\s+(0[xX][0-9A-Fa-f]+|\d+)[uUlL]*\s*:")
 VALUE_COUNT_NAME = re.compile(
@@ -2318,12 +2312,6 @@ def _value_target(masked: str, start: int, end: int) -> str:
     """Return the expression the literal is an operand of or is compared with."""
     before = masked[max(0, start - 90) : start]
     after = masked[end : end + 70]
-    arithmetic = VALUE_ARITHMETIC_LEFT.search(before)
-    if arithmetic is not None:
-        return arithmetic.group(1).strip()
-    arithmetic = VALUE_ARITHMETIC_RIGHT.match(after)
-    if arithmetic is not None:
-        return arithmetic.group(1).strip()
     left = VALUE_LEFTOVER.search(before)
     if left is not None:
         return left.group(1).strip()
