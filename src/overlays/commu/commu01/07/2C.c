@@ -42,7 +42,7 @@ MATCH void func_801D1364(void) {
     u8* selection;
     u8  old_row;
     s8  row;
-    s32 count;
+    u8  count;
     s32 room;
     u16 buttons;
 
@@ -168,7 +168,9 @@ MATCH void func_801D36FC(s32 cell, s32 selected) {
     LINE_F3* prim;
     s32      shade;
     s32      state;
+    u8       cell_index;
 
+    cell_index = cell;
     if ((selected & BYTE_MASK) == 0) {
         state = g_FrameCount;
         if (state & 8) {
@@ -182,31 +184,31 @@ MATCH void func_801D36FC(s32 cell, s32 selected) {
 
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
-    if ((u8)cell != 0 && (u8)cell < 9 && D_801F286D[g_GameAreaId] < (u8)cell) {
-        prim->x0 = D_801D4C44[(u8)cell][2];
+    if (cell_index != 0 && cell_index < COMMU_CELL_FRAME_COUNT && D_801F286D[g_GameAreaId] < cell_index) {
+        prim->x0 = D_801D4C44[cell_index].points[1][0];
     } else {
-        prim->x0 = D_801D4C44[(u8)cell][0];
+        prim->x0 = D_801D4C44[cell_index].points[0][0];
     }
-    prim->y0 = D_801D4C44[(u8)cell][1];
-    prim->x1 = D_801D4C44[(u8)cell][4];
-    prim->y1 = D_801D4C44[(u8)cell][1];
-    prim->x2 = D_801D4C44[(u8)cell][4];
-    prim->y2 = D_801D4C44[(u8)cell][5];
+    prim->y0 = D_801D4C44[cell_index].points[0][1];
+    prim->x1 = D_801D4C44[cell_index].points[2][0];
+    prim->y1 = D_801D4C44[cell_index].points[0][1];
+    prim->x2 = D_801D4C44[cell_index].points[2][0];
+    prim->y2 = D_801D4C44[cell_index].points[2][1];
     setRGB0(prim, shade, shade, 0);
     GFX_AddPrim(1, sizeof(LINE_F3));
 
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
-    if ((u8)cell != 0 && (u8)cell < 9 && D_801F286D[g_GameAreaId] < (u8)cell) {
-        prim->y0 = D_801D4C44[(u8)cell][1];
+    if (cell_index != 0 && cell_index < COMMU_CELL_FRAME_COUNT && D_801F286D[g_GameAreaId] < cell_index) {
+        prim->y0 = D_801D4C44[cell_index].points[0][1];
     } else {
-        prim->y0 = D_801D4C44[(u8)cell][3];
+        prim->y0 = D_801D4C44[cell_index].points[1][1];
     }
-    prim->x0 = D_801D4C44[(u8)cell][2];
-    prim->x1 = D_801D4C44[(u8)cell][2];
-    prim->y1 = D_801D4C44[(u8)cell][5];
-    prim->x2 = D_801D4C44[(u8)cell][4];
-    prim->y2 = D_801D4C44[(u8)cell][5];
+    prim->x0 = D_801D4C44[cell_index].points[1][0];
+    prim->x1 = D_801D4C44[cell_index].points[1][0];
+    prim->y1 = D_801D4C44[cell_index].points[2][1];
+    prim->x2 = D_801D4C44[cell_index].points[2][0];
+    prim->y2 = D_801D4C44[cell_index].points[2][1];
     setRGB0(prim, shade, shade, 0);
     GFX_AddPrim(1, sizeof(LINE_F3));
 }
