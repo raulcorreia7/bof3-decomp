@@ -129,7 +129,7 @@ MATCH void func_801F7408(void) {
     g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
     func_801F9DA8();
     g_Task->timer = 0;
-    g_Task->vx    = 0x5F;
+    g_Task->vx    = 95;
     g_Task->header.step += 1;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
 }
