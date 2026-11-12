@@ -22,7 +22,35 @@ MATCH void func_801EEF34(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFBC);
+/* At the ticker's zero, places the effect half a cell from the battler by the
+ * angle byte 0x0B and starts its rise from a random tint row. */
+MATCH void func_801EEFBC(void) {
+    u8   count;
+    s32  phase;
+    s32  entry;
+    s16* angle_cell;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        angle_cell          = &D_1F800004;
+        phase               = g_Task->param.unk_0B & 0xF;
+        *angle_cell         = phase << 8;
+        /* kept: (s16) types the rsin angle; without it GCC folds the two shifts and the body is 4 bytes short. */
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin((s16)(phase << 8)) * 0x8000) >> 12);
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle_cell) * 0x8000) >> 12);
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x4800000;
+        entry               = RANDOM_MASK(7) * 3;
+        g_Task->unk_5D      = D_801EF76C[entry];
+        g_Task->unk_5E      = D_801EF76D[entry];
+        g_Task->unk_5F      = D_801EF76E[entry];
+        g_Task->unk_14      = 0x80;
+        g_Task->unk_20      = -0x10;
+        g_Task->unk_09      = 8;
+        g_Task->timer       = 2;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF140(void) {
     u8 count;
