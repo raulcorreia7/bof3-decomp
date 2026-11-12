@@ -11,6 +11,7 @@
 
 /* The area flags, state word and adjacent counter this pass updates. */
 extern u8 D_80144F56;
+extern s8 D_8014504A;
 /* The game-overlay state bytes the request paths write. */
 extern u8 D_80146874;
 extern u8 D_80146875;
@@ -31,5 +32,6 @@ extern u8 D_801F4290[];
 void Area_DrawScreenTint(void);
 
 void func_801F39AC(void);
+void func_801F3AB0(void);
 
 #endif
