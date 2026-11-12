@@ -88,7 +88,7 @@ MATCH void func_801EF768(void) {
         if (D_801F21F0->phase_0C & 0x3) {
             Effect_DrawSparkleRays(g_FrameCount >> 1, D_801F21F0->unk_06);
             radius = D_801F21F0->unk_06;
-            func_801EFE2C((g_FrameCount >> 1) + 4, radius + (radius >> 1));
+            Effect_DrawSparkleWedges((g_FrameCount >> 1) + 4, radius + (radius >> 1));
         }
     }
 }
@@ -112,7 +112,7 @@ MATCH void func_801EFB14(void) {
 
 #include "overlays/bmagic/Effect_DrawSparkleRays.h"
 
-INCLUDE_ASM(func_801EFE2C);
+#include "overlays/bmagic/Effect_DrawSparkleWedges.h"
 
 #include "overlays/bmagic/Effect_DrawSparkleDisc.h"
 

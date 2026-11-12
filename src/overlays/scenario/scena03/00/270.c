@@ -477,21 +477,38 @@ MATCH s32 func_801FC6C4(void) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FC704);
+MATCH s8 func_801FC704(s32 entry_x, s32 entry_y) {
+    /* kept: the LOHU halfword compare matches retail; the plain u16 lvalue adds four bytes. */
+    switch (LOHU(g_GameAreaId)) {
+        case AREA_ID_WYNDIA_LOWER:
+            return func_801FC944(entry_x, entry_y);
+        case AREA_ID_WYNDIA_CASTLE_BASEMENT:
+            return func_801FC8AC(entry_x, entry_y);
+        case AREA_ID_GENMEL:
+            return func_801FCAB8(entry_x, entry_y);
+        case AREA_ID_MOUNT_MYRNEG:
+            return func_801FC7EC(entry_x, entry_y);
+        case AREA_ID_EYGNOCK_ROAD:
+            return func_801FC9DC(entry_x, entry_y);
+        case AREA_ID_MOUNT_BOUMORE_FIRST:
+            return func_801FCB4C(entry_x, entry_y);
+    }
+    return 0;
+}
 
-MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
+MATCH s32 func_801FC7EC(s32 entry_x, s32 entry_y) {
     u8 var_v0;
 
     if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
-            if (((arg0 >> 0x10) - 2) < 3U) {
-                if (arg1 == TO_COORD(6)) {
+            if (((entry_x >> 0x10) - 2) < 3U) {
+                if (entry_y == TO_COORD(6)) {
                     var_v0 = 2;
                     goto block_9;
                 }
             }
-        } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && (((arg0 >> 0x10) - 3) < 2U)) {
-            if (arg1 == TO_COORD(4)) {
+        } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && (((entry_x >> 0x10) - 3) < 2U)) {
+            if (entry_y == TO_COORD(4)) {
                 var_v0 = 1;
             block_9:
                 g_SceneState.state_04 = var_v0;
@@ -501,10 +518,10 @@ MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
     return 0;
 }
 
-MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
+MATCH s32 func_801FC8AC(s32 entry_x, s32 entry_y) {
     if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
-        if (((arg1 >> 0x10) - 7) < 2U) {
-            if (arg0 == TO_COORD(92)) {
+        if (((entry_y >> 0x10) - 7) < 2U) {
+            if (entry_x == TO_COORD(92)) {
                 SYS_SetFlag(g_SceneFlags, 7U);
                 g_SceneState.state_04 = 3;
                 g_SceneState.step_05  = 0xA;
@@ -517,10 +534,10 @@ MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
     return 0;
 }
 
-MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
+MATCH s8 func_801FC944(s32 entry_x, s32 entry_y) {
     if (SYS_TestFlag(g_SceneFlags, 21) == 0) {
-        if (arg1 == TO_COORD(65) + COORD_HALF) {
-            if (((arg0 >> 0x10) - 32) < 4U) {
+        if (entry_y == TO_COORD(65) + COORD_HALF) {
+            if (((entry_x >> 0x10) - 32) < 4U) {
                 g_SceneState.state_04 = 4;
                 g_SceneState.step_05  = 5;
                 return Scene_ShowMessage(0x33);
@@ -532,24 +549,24 @@ MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
     return 0;
 }
 
-MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
+MATCH s8 func_801FC9DC(s32 entry_x, s32 entry_y) {
     if (SYS_TestFlag(g_SceneFlags, 24) == 0) {
-        if (arg0 == TO_COORD(58) + COORD_HALF) {
-            if (((arg1 >> 0x10) - 60) >= 2U) {
+        if (entry_x == TO_COORD(58) + COORD_HALF) {
+            if (((entry_y >> 0x10) - 60) >= 2U) {
                 goto block_4;
             }
             goto block_9;
         }
     block_4:
-        if (arg1 == TO_COORD(2) + COORD_HALF) {
-            if (((arg0 >> 0x10) - 31) >= 2U) {
+        if (entry_y == TO_COORD(2) + COORD_HALF) {
+            if (((entry_x >> 0x10) - 31) >= 2U) {
                 goto block_7;
             }
             goto block_9;
         }
     block_7:
-        if (arg1 == TO_COORD(76) + COORD_HALF) {
-            if (((arg0 >> 0x10) - 31) < 2U) {
+        if (entry_y == TO_COORD(76) + COORD_HALF) {
+            if (((entry_x >> 0x10) - 31) < 2U) {
             block_9:
                 g_SceneState.state_04 = 5;
                 g_SceneState.step_05  = 0;
@@ -564,10 +581,10 @@ MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
     return 0;
 }
 
-MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
+MATCH s8 func_801FCAB8(s32 entry_x, s32 entry_y) {
     if (SYS_TestFlag(g_SceneFlags, 26) != 0) {
-        if ((arg0 >> 0x10) == 21) {
-            if (((arg1 >> 0x10) - 52) < 2U) {
+        if ((entry_x >> 0x10) == 21) {
+            if (((entry_y >> 0x10) - 52) < 2U) {
                 g_SceneState.state_04 = 5;
                 g_SceneState.step_05  = 0x10;
                 return Scene_ShowMessage(0x1F);

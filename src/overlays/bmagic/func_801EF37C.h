@@ -11,7 +11,7 @@ MATCH void func_801EF37C(void) {
         if (D_801F17B0->phase_0C & 3) {
             Effect_DrawSparkleRays(g_FrameCount >> 1, D_801F17B0->unk_06);
             radius = D_801F17B0->unk_06;
-            func_801EFA40((g_FrameCount >> 1) + 4, radius + (radius >> 1));
+            Effect_DrawSparkleWedges((g_FrameCount >> 1) + 4, radius + (radius >> 1));
         }
     }
 }

@@ -32,7 +32,7 @@ MATCH void func_801EEC5C(void) {
     g_Task->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
-    func_800A9610(g_Battle.target_selector, 0x10);
+    Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
