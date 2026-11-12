@@ -1,10 +1,9 @@
 #include "area132_13.h"
 
 MATCH u8 func_801F38B0(void) {
-    u8  scratch[32];
-    u8* effect;
-    u8  result;
-    u8  index;
+    u8 scratch[32];
+    u8 result;
+    u8 index;
 
     Area_SetCameraMatrix(scratch);
     result     = 0;
@@ -13,10 +12,9 @@ MATCH u8 func_801F38B0(void) {
     do {
         if (D_801F4A88[0] != 0u) {
             if (g_Task->header.mode == 0) {
-                effect = D_801F4A88;
-                FIELD(s32, effect, 0x4) += 8192;
-                FIELD(u16, effect, 0x14) += 8;
-                effect[3] -= 2;
+                FIELD(s32, D_801F4A88, 0x4) += 8192;
+                FIELD(u16, D_801F4A88, 0x14) += 8;
+                D_801F4A88[3] -= 2;
             } else {
                 FIELD(s32, D_801F4A88, 0x4) += 8192;
                 FIELD(s32, D_801F4A88, 0x4) += rcos(D_801F4A88[0x17] << 8);
