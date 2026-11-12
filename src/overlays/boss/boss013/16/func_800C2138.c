@@ -4,19 +4,19 @@ MATCH u8 func_800C2138(u32 mode) {
     u8* flags;
 
     switch ((u8)mode) {
-        case 0:
+        case BOSS_EVENT_RESTART_BEGIN:
             if ((ENEMY_COMBATANT(3).status & STATUS_LOW_HP) || (ENEMY_COMBATANT(4).status & STATUS_LOW_HP)) {
                 g_Battle.boss_flags |= 0x8;
             }
             break;
-        case 1:
+        case BOSS_EVENT_ACTION_START:
             if ((g_Battle.active_battler == 0) && (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) && !(g_Battle.boss_flags & 0x1)) {
                 g_Battle.action_type = BATTLE_ACTION_NONE;
                 g_MenuPanelMode      = 2;
                 Message_StartAreaMessage(0x27);
             }
             break;
-        case 2:
+        case BOSS_EVENT_TURN_END:
             flags = &g_Battle.boss_flags;
             if ((*flags & 0x40) || D_800C26E0) {
                 break;
@@ -33,9 +33,9 @@ MATCH u8 func_800C2138(u32 mode) {
             Actor_SelectScript((g_Task->facing + 4) & BYTE_MASK);
             *flags |= 0x40;
             break;
-        case 3:
-        case 4:
-        case 5:
+        case BOSS_EVENT_TICK:
+        case BOSS_EVENT_EFFECTS_LOADED:
+        case BOSS_EVENT_RESTART_END:
             break;
     }
     return 0;
