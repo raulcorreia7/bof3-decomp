@@ -25,15 +25,19 @@
 /* The camera seed halfword the request step stores. */
 /* The field focus point the camera step copies. */
 /* D_80147A90 */
-extern s32 g_AreaFocusY;
-extern u8  D_80147AAC[];
+extern s32   g_AreaFocusY;
+extern u8    D_80147AAC[];
 /* The scaled grid position and size the step checks compare against. */
-extern u8  D_80147C29;
-extern s32 D_80147C2C;
-extern s32 D_80147C30;
-extern s32 D_80147C54;
-extern s32 D_80147C58;
-extern u8  D_80147C90;
+extern u8    D_80147C29;
+extern s32   D_80147C2C;
+extern s32   D_80147C30;
+extern s32   D_80147C54;
+extern s32   D_80147C58;
+extern u8    D_80147C90;
+/* The four party work rows, and the shadow record each party row owns: 0x10
+ * bytes, its flag byte first. */
+extern Actor D_80147A58[];
+extern u8    D_80147CB8[];
 /* D_80149340 */
 
 /* The state handler tables the dispatchers index. */
@@ -80,7 +84,11 @@ extern u8       D_801F6B3C[];
 
 void func_80159B9C(s32 x, s32 y, s32 w, s32 h);
 void func_80159FA0(s32 x, s32 y, s32 width, s32 height);
+/* The engine places a work row from a spawn record. */
+void func_801A6C98(u8* record);
 
 extern SceneTrigger D_801F6BA8[];
+/* The party spawn record func_801A6C98 places when the area request returns. */
+extern u8           D_801F6BB0[];
 
 #endif
