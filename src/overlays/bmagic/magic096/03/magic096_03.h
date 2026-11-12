@@ -7,6 +7,7 @@
 
 extern SVECTOR D_1F800014[];
 void           BMagic_DrawGlowRing(void);
+void           func_801F0164(void);
 
 #define MAGIC096_STEP_COUNT 5
 
