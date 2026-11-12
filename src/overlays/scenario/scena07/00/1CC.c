@@ -146,7 +146,26 @@ MATCH void func_801F75F4(void) {
     SYS_DISPATCH_TASK(D_801FDD8C, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801F7638);
+MATCH void func_801F7638(void) {
+    Scena07Burst* burst;
+    s32           y;
+
+    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 0x10);
+
+    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    burst               = MEM_PTR(Scena07Burst, 0x800E5148);
+    burst->x            = g_Task->pos.x.fixed;
+    y                   = g_Task->pos.y.fixed;
+    D_801FDFBC          = burst;
+    /* FAKE: the order lock keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
+    FAKE_ORDER_LOCK(burst->y = y);
+    burst->z      = g_Task->pos.z.fixed;
+    burst->unk_10 = 0;
+    g_Task->timer = 0;
+    g_Task->vx    = 95;
+    g_Task->header.step++;
+}
 
 INCLUDE_ASM(func_801F76D0);
 
