@@ -364,6 +364,7 @@ Effect_TickOnZeroTick = { addr = 0x801EF954, type = "func", source = "When the e
 g_BMagicEffectModes = { addr = 0x801EF9A4, source = "Handlers of magic038 (War Shout), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic039/03"]
+g_PaletteFades = { addr = 0x80145BD4, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_DispatchMode = { addr = 0x801EEC34, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic039 (Focus, Meditation)." }
 Effect_NextStepOnZeroTick = { addr = 0x801EEEA8, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is zero in magic039 (Focus, Meditation)." }
