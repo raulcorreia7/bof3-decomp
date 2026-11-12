@@ -12,8 +12,9 @@ gives each distinct draft to `tools/try_body.py`. An exact draft stays in the tr
 so polish it (docs/matching.md#polish) and run `meson compile -C build/meson check-<image>`.
 A function that no draft matches is left as it was. Each function prints one line, `EXACT`
 or `BEST` with the fewest differing instructions of any draft that compiled (`NONE` when none
-did), and goes to `build/m2c_sweep/results.tsv` (ref, differing, variant). A run skips a
-function already in that file. The drafts are in `build/m2c_sweep/`.
+did), and goes to `build/m2c_sweep/results.jsonl` (target, status, differing, variant). A run skips
+a function already in that file. `--jsonl` turns each printed line into an object. The drafts are
+in `build/m2c_sweep/`.
 
 Functions that `tools/dups.py near --full` pairs with a matched template are skipped: use
 `tools/template_try.py` for them. Needs `rapidfuzz`
@@ -23,6 +24,7 @@ Functions that `tools/dups.py near --full` pairs with a matched template are ski
 from __future__ import annotations
 
 import argparse
+import json
 import random
 import re
 import subprocess
@@ -39,7 +41,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WORK = "build/m2c_sweep"
 SAMPLE_SEED = 1
 JOBS = 8
-RESULTS = f"{WORK}/results.tsv"
+RESULTS = f"{WORK}/results.jsonl"
 VARIANTS = {
     "default": [],
     "no-andor": ["--no-andor"],
@@ -220,26 +222,32 @@ def save_drafts(root: Path, func: Func, found: dict[str, str]) -> None:
         (folder / f"{func.addr:08X}.{variant}.c").write_text(body, encoding="utf-8")
 
 
-def read_results(root: Path) -> dict[str, tuple[str, str]]:
-    """Return ref -> (differing, variant) of the finished functions."""
+def read_results(root: Path) -> set[str]:
+    """Return the refs of the functions already swept."""
     path = root / RESULTS
     if not path.is_file():
-        return {}
-    rows = (ln.split("\t") for ln in path.read_text(encoding="utf-8").splitlines())
-    return {r[0]: (r[1], r[2]) for r in rows if len(r) >= 3}
+        return set()
+    return {
+        json.loads(line)["target"]
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    }
 
 
 def templated(root: Path) -> set[str]:
     """Return the refs that ``dups.py near --full`` pairs with a matched template."""
     result = subprocess.run(
-        [sys.executable, str(root / "tools/dups.py"), "near", "--full"],
+        [sys.executable, str(root / "tools/dups.py"), "near", "--full", "--jsonl"],
         cwd=root,
         capture_output=True,
         check=True,
         text=True,
     )
-    rows = result.stdout.splitlines()[1:]
-    return {r.split("\t")[0] for r in rows if r.strip()}
+    return {
+        json.loads(line)["target"]
+        for line in result.stdout.splitlines()
+        if line.strip()
+    }
 
 
 def select(args: argparse.Namespace, funcs: list[Func]) -> list[Func]:
@@ -283,6 +291,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("refs", nargs="*", help="TARGET@NAME or TARGET@0xADDRESS")
     parser.add_argument("--image", action="append", help="image id or prefix")
     parser.add_argument("--sample", type=int, help="sweep N functions at random")
+    parser.add_argument(
+        "--jsonl", action="store_true", help="one JSON object per printed line"
+    )
     args = parser.parse_args(argv)
     funcs = select(args, load_index(ROOT))
     print(f"sweeping {len(funcs)} functions", file=sys.stderr, flush=True)
@@ -294,9 +305,34 @@ def main(argv: list[str] | None = None) -> int:
             save_drafts(ROOT, func, found)
             status, diff, variant = sweep_one(ROOT, func, found)
             hits += status == "EXACT"
-            shown = "EXACT" if status == "EXACT" else "" if diff is None else str(diff)
-            log.write(f"{func.ref}\t{shown}\t{variant}\n")
+            log.write(
+                json.dumps(
+                    {
+                        "target": func.ref,
+                        "status": status,
+                        "differing": diff,
+                        "variant": variant or None,
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n"
+            )
             log.flush()
+            if args.jsonl:
+                print(
+                    json.dumps(
+                        {
+                            "status": status,
+                            "target": func.ref,
+                            "name": func.name,
+                            "differing": diff,
+                            "variant": variant or None,
+                        },
+                        ensure_ascii=False,
+                    ),
+                    flush=True,
+                )
+                continue
             print(
                 f"{status} {func.ref} {func.name}"
                 + (f" {diff} differ ({variant})" if status == "BEST" else ""),

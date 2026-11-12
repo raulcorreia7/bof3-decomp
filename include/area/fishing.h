@@ -58,7 +58,7 @@ typedef struct FishingRod {
     s8 cursor_return_speed_04;
     s8 cursor_left_speed_05;
     s8 cursor_right_speed_06;
-    u8 unk_07;
+    s8 unk_07;
     u8 snap_left_tension_08;
     u8 snap_right_tension_09;
 } FishingRod;

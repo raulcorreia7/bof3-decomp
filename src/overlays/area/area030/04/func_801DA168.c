@@ -10,7 +10,7 @@ MATCH void func_801DA168(void) {
     FishingState* work;
 
     pad = &g_InputPressed;
-    func_801E1758(108, 86);
+    Fishing_DrawPromptBox(108, 86);
 
     if ((*pad & (PADLup | PADLdown)) != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
@@ -30,7 +30,7 @@ MATCH void func_801DA168(void) {
     }
 
     Menu_DrawCursorSprite(112, (130 - FISHING_STATE->cue_index_06 * 16) & 0xFFFE, 0);
-    func_801E16DC();
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawDimScreen();
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(29, 21, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
 }

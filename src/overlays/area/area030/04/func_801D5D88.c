@@ -27,10 +27,10 @@ MATCH void func_801D5D88(void) {
         Actor_StepAnimLoop();
     }
     Area_AddActor();
-    func_801E0C80(0, 1);
-    func_801E0DCC(0x15, 1, 50, 122);
-    func_801E0DCC(0x16, 1, 188, 122);
-    func_801E0DCC(0x10, 1, 54, 128);
+    Fishing_SetDrawMode(0, 1);
+    Fishing_DrawSprite(0x15, 1, 50, 122);
+    Fishing_DrawSprite(0x16, 1, 188, 122);
+    Fishing_DrawSprite(0x10, 1, 54, 128);
     work     = FISHING_STATE;
     previous = work->step_index_0A - 1;
     mode     = D_801E200A[previous * 3];

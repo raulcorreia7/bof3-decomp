@@ -364,7 +364,7 @@ u16 D_801E2354[24] = {
     0x0012, 0x000E, 0x0018, 0x0012, 0x0028, 0x0010, 0x001A, 0x0000,
 };
 /* The four word columns of the 16-byte AREA030 graphic draw records,
- * indexed by graphic id with func_801E0C80's `(graphic & 0xff) * 4`. */
+ * indexed by graphic id with Fishing_SetDrawMode's `(graphic & 0xff) * 4`. */
 s32 D_801E2384[1] = {
     0x00000001,
 };

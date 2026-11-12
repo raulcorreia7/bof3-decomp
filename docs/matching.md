@@ -6,22 +6,22 @@ verdict; a score, a marker or a disassembler opinion is a lead.
 ## Route
 
 Take the cheapest route first and move on after one real attempt. `tools/worklist.py` ranks the open
-functions by route ([find work](../CONTRIBUTING.md#your-first-function)).
+functions by route, in the tool's order below ([find work](../CONTRIBUTING.md#your-first-match)).
 
-| # | Route           | Command                                                                   | Move on when                                            |
-| - | --------------- | ------------------------------------------------------------------------- | ------------------------------------------------------- |
-| 1 | Generator       | `tools/gen_body.py <shape> --dry-run`, then without `--dry-run`           | the shape is `branch`, or the body is not `EXACT`       |
-| 2 | Template        | `tools/template_try.py rows.tsv` (rows from `tools/dups.py near --full`)  | the row is `FAIL`, or the template has `diff_count` > 3 |
-| 3 | Template edit   | `tools/template_diff.py <target>@<func>`, then up to three edits          | three edits leave a difference                          |
-| 4 | m2c sweep, seed | `tools/m2c_sweep.py`, `tools/seed.py` ([tools](../tools/README.md))       | no exact body from the seed                             |
-| 5 | Hand loop       | m2c draft, `tools/match.sh`, [diagnose](#diagnose), [permuter](#permuter) | three structurally different tries fail                 |
+| # | Row         | Route                                                                                          | Move on when                                      |
+| - | ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| 1 | `template0` | `tools/template_try.py <target>@<func>`                                                        | the row is `FAIL`                                 |
+| 2 | `generator` | `tools/gen_body.py <shape>`, then without `--dry-run`                                          | the shape is `branch`, or the body is not `EXACT` |
+| 3 | `template`  | `tools/template_diff.py <target>@<func>`, then up to three edits                               | three edits leave a difference                    |
+| 4 | `plain`     | m2c draft from `tools/seed.py`, `tools/match.sh`, [diagnose](#diagnose), [permuter](#permuter) | three structurally different tries fail           |
 
-Budget: three structurally different tries per function (a different shape, not a tweak of the same
-one). Then record the attempt in `config/attempts.jsonl` and report `BLOCKED <reason>`.
+A `template0` row is a matched template with no differing instruction; `template` has up to three.
+A `generator` row names its shape in the last column. Three structurally different tries per function
+— a different instruction count, or a different call or branch sequence — then delete the draft and
+record the attempt ([match](../.agents/skills/decomp/references/match.md)).
 
 A route that gives `EXACT` still needs `check-<image>`, a name from evidence and the shared-body
-treatment ([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)). Record failed attempts in
-`config/attempts.jsonl` with the function, forms tried, first difference and score when known.
+treatment ([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)).
 
 ## Order of work
 
@@ -46,20 +46,16 @@ Fix causes before functions.
 2. Draft the C in the ignored scratch folder `work/<image>/<ADDR>/`, then move it into the unit's
    `.c` as a `NON_MATCHING` draft ([markers](#markers-and-unmatched-bodies)).
 3. Compile it with the `cc` wrapper and diff it against the target object assembled from the split
-   asm ([toolchain](toolchain.md#compiler-wrapper), [objdiff](toolchain.md#objdiff)), or edit the
-   unit's `.c` and run `tools/match.sh <target> <func>`. It answers in a fraction of a second:
-   `match`, or the first differing instruction, retail against candidate
-   ([match.sh](toolchain.md#matchsh)). `tools/match.sh --diff <target>@<address>` prints the whole
-   function side by side, `!` marking differing rows.
+   asm ([toolchain](toolchain.md#compiler-wrapper), [objdiff](toolchain.md#objdiff)), or run
+   `tools/match.sh` ([match.sh](toolchain.md#matchsh)).
 4. Polish an exact candidate in place ([polish](#polish)).
 5. Replace the draft with a `MATCH` definition and run `check-<image>`. A new lift stays a
    `NON_MATCHING` draft until `tools/match.sh` reports `match` and `check-<image>` passes.
 
-Only the image link proves bytes; `match.sh` compares `.text` only and refuses a function with a
-jump table, string or data of its own. A score and an old comparison prove nothing.
+Only the image link proves bytes; a score and an old comparison prove nothing.
 
-After you add a `hand/` file, a header or a `NON_MATCHING` marker, run
-`meson setup --reconfigure build/meson` ([reconfigure](toolchain.md#reconfigure)).
+A new header, `hand/` file or `NON_MATCHING` marker changes the build graph
+([reconfigure](toolchain.md#reconfigure)).
 
 ## Gates
 
@@ -70,6 +66,7 @@ After you add a `hand/` file, a header or a `NON_MATCHING` marker, run
 | Hygiene           | `format-check`, `include-asm`, `markers`, `addrs`, `kept` | format passes; `INCLUDE_ASM` not above merge base; every definition marked; no recorded address lost; no named helper, define, global, type, member or function lost or degraded |
 
 A failed build or an unsupported flag is a failure, never a match. A percentage only ranks work.
+The full push list, with what fails each check: [tools: pre-push](../tools/README.md#pre-push).
 
 ## Markers and unmatched bodies
 

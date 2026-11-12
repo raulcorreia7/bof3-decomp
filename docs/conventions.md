@@ -284,22 +284,23 @@ if (battler->state == 2 && !(battler->flags & 0x40)) {
 Write each number the way its users read it: decimal for quantities, hex for bit patterns and
 addresses. The access decides: find the reader in the retail assembly before choosing.
 
-| The users                                                 | Write                                                                                      | Example                       |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------- |
-| test, set or clear bits (`&`, `\|`, `^`, `~`, `<<`, `>>`) | a named flag when the bit has one meaning, else hex                                        | `ITEM_FLAG_VITAL`, `0x80`     |
-| byte or halfword mask                                     | `BYTE_MASK`, `HALF_MASK`                                                                   | `id & BYTE_MASK`              |
-| other mask or field extraction                            | named for its field, else hex at the width of the field                                    | `0x0F`                        |
-| count, index, loop bound, size in elements, timer         | decimal                                                                                    | `8`, `24`                     |
-| coordinate, pixels, speed, HP, damage, price, color value | decimal, signed when negative                                                              | `-4`, `320`, `128`            |
-| byte offset or stride inside a record                     | hex, matching the `/* 0x3C */` member comments; a stride becomes a typed array             | `0x140`                       |
-| angle (4096 = one turn)                                   | `ANGLE_<degrees>` when it is a whole number of degrees in the set, else decimal            | `ANGLE_90`, `ANGLE_45`, `341` |
-| "none" or "empty" marker                                  | the named marker (`GAME_NONE`, `FORMATION_SLOT_EMPTY`), else hex at the width of the field | `slot != 0xFF`                |
-| address, encoded multi-bit value                          | hex                                                                                        | `0x8080`                      |
-| fixed point (4096 = 1.0)                                  | `ONE`, `ONE / 2`, `ONE / 4`, else decimal; shifts by 12 stay literal                       | `ONE / 2`                     |
-| pad buttons and other SDK values                          | the PsyQ names; a game set where one exists                                                | `PADLup \| PADLdown`          |
-| character or text code                                    | the game's text encoding (`include/game/text.h`), never a bare byte                        | `STRING_END`                  |
-| function or data address                                  | the symbol, never a number                                                                 | `func_80196FFC`, `&g_Party`   |
-| unused fill or padding                                    | a `pad` or `unk` member, value as stored                                                   | `0xCC`                        |
+| The users                                                 | Write                                                                                      | Example                             |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------- |
+| test, set or clear bits (`&`, `\|`, `^`, `~`, `<<`, `>>`) | a named flag when the bit has one meaning, else hex                                        | `ITEM_FLAG_VITAL`, `0x80`           |
+| byte or halfword mask                                     | `BYTE_MASK`, `HALF_MASK`                                                                   | `id & BYTE_MASK`                    |
+| other mask or field extraction                            | named for its field, else hex at the width of the field                                    | `0x0F`                              |
+| count, index, loop bound, size in elements, timer         | decimal                                                                                    | `8`, `24`                           |
+| coordinate, pixels, speed, HP, damage, price, color value | decimal, signed when negative                                                              | `-4`, `320`, `128`                  |
+| byte offset or stride inside a record                     | hex, matching the `/* 0x3C */` member comments; a stride becomes a typed array             | `0x140`                             |
+| angle (4096 = one turn)                                   | `ANGLE_<degrees>` when it is a whole number of degrees in the set, else decimal            | `ANGLE_90`, `ANGLE_45`, `341`       |
+| "none" or "empty" marker                                  | the named marker (`GAME_NONE`, `FORMATION_SLOT_EMPTY`), else hex at the width of the field | `slot != 0xFF`                      |
+| address, encoded multi-bit value                          | hex                                                                                        | `0x8080`                            |
+| sound cue                                                 | `EMI_CUE_ID(bank, index)` (`include/audio/cue.h`), never the raw cue id                    | `EMI_CUE_ID(SND_BANK_COMMON, 0x00)` |
+| fixed point (4096 = 1.0)                                  | `ONE`, `ONE / 2`, `ONE / 4`, else decimal; shifts by 12 stay literal                       | `ONE / 2`                           |
+| pad buttons and other SDK values                          | the PsyQ names; a game set where one exists                                                | `PADLup \| PADLdown`                |
+| character or text code                                    | the game's text encoding (`include/game/text.h`), never a bare byte                        | `STRING_END`                        |
+| function or data address                                  | the symbol, never a number                                                                 | `func_80196FFC`, `&g_Party`         |
+| unused fill or padding                                    | a `pad` or `unk` member, value as stored                                                   | `0xCC`                              |
 
 Fixed point: the 16.16 `Coord` union (`include/common/fixed.h`) is used where code reads or writes
 one half, or uses a half together with the whole value (`COORD_INT`, `COORD_FRAC`). Elsewhere the

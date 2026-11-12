@@ -10,7 +10,7 @@ MATCH void func_801DA2A0(void) {
     u16* word_counter;
 
     FISHING_STATE->step_timer_09 = (FISHING_STATE->step_timer_09 + 1);
-    func_801E1758((s16)(0x6C - (FISHING_STATE->step_timer_09 * 0x50)), 0x56);
+    Fishing_DrawPromptBox((s16)(0x6C - (FISHING_STATE->step_timer_09 * 0x50)), 0x56);
     work = (u8*)g_Task;
     if (work[9] == 5) {
         work[9] = 0;
@@ -24,9 +24,9 @@ MATCH void func_801DA2A0(void) {
             work[3] = 0;
         }
     }
-    func_801E16DC();
+    Fishing_DrawDimScreen();
     if (FISHING_STATE->step_timer_09 != 0) {
-        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 0xFFU, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
     }
 }

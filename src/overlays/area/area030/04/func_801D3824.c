@@ -6,7 +6,7 @@ MATCH void func_801D3824(void) {
     u8* record;
     s32 index;
 
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     record = (u8*)g_Task;
     index  = (record[0x4B] * 3) << 2;
     UI_DrawText(29, 20, 0, D_801E1E78[index], (u8*)(*(u32*)((u8*)D_801E1E7C + index)));
