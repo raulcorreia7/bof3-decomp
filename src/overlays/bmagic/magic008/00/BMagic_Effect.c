@@ -12,10 +12,10 @@ MATCH void func_801EECF0(void) {
 }
 
 MATCH void func_801EED5C(void) {
-    BattleWorkImage* slot;
-    PartyMember*     work;
-    u32              index;
-    u8               active;
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
 
     g_Task->facing       = g_BattleEffectBattler->facing;
     g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
@@ -98,10 +98,10 @@ MATCH void func_801EF75C(void) {
 }
 
 MATCH void func_801EF7C8(void) {
-    BattleWorkImage* slot;
-    PartyMember*     work;
-    u32              index;
-    u8               active;
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
 
     g_Task->facing       = g_BattleEffectBattler->facing;
     g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
@@ -143,10 +143,10 @@ MATCH void func_801EFA74(void) {
 }
 
 MATCH void func_801EFAD4(void) {
-    BattleWorkImage* slot;
-    PartyMember*     work;
-    u32              index;
-    u8               active;
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
 
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;

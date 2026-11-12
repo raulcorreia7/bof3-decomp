@@ -131,25 +131,24 @@ typedef struct BattleWorkImage {
 ASSERT_SIZE(BattleWorkImage, 0x74);
 
 /* Copy the active battler's work image into a free effect slot. A statement
- * macro: the member declares u32 index, u8 active and BattleWorkImage* slot,
- * then sets the slot's handler fields. */
-#define BMAGIC_QUEUE_WORK_IMAGE()                                      \
-    index  = Battle_AllocEffect(1, 0x1F);                              \
-    active = g_Battle.active_battler;                                  \
-    if (BATTLER_IS_PLAYER(active)) {                                   \
-        BattleWorkImage* row;                                          \
-                                                                       \
-        row   = (BattleWorkImage*)&g_Game.members[active];             \
-        slot  = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK]; \
-        *slot = *row;                                                  \
-    } else {                                                           \
-        BattleWorkImage* row;                                          \
-        u32              enemy;                                        \
-                                                                       \
-        slot  = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK]; \
-        enemy = active - BATTLE_PARTY_CHARACTERS_COUNT;                \
-        row   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];       \
-        *slot = *row;                                                  \
+ * macro: the member declares u32 index, u8 active and BattleEffect* slot. */
+#define BMAGIC_QUEUE_WORK_IMAGE()                                                 \
+    index  = Battle_AllocEffect(1, 31);                                           \
+    active = g_Battle.active_battler;                                             \
+    if (BATTLER_IS_PLAYER(active)) {                                              \
+        BattleWorkImage* row;                                                     \
+                                                                                  \
+        row                     = (BattleWorkImage*)&g_Game.members[active];      \
+        slot                    = &g_BattleEffects[index & BYTE_MASK];            \
+        *(BattleWorkImage*)slot = *row;                                           \
+    } else {                                                                      \
+        BattleWorkImage* row;                                                     \
+        u32              enemy;                                                   \
+                                                                                  \
+        slot                    = &g_BattleEffects[index & BYTE_MASK];            \
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;         \
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy]; \
+        *(BattleWorkImage*)slot = *row;                                           \
     }
 
 /* Go to the effect's next step. */
