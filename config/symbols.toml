@@ -271,7 +271,10 @@ g_BMagicEffectModes = { addr = 0x801F0B00, source = "Handlers of magic003 (Super
 D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 effect, scanned by BMagic_AllocEffect and cleared by a loop over its 0x78-byte records." }
 
 ["emi/bmagic/magic004/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+GFX_AllocPaletteFade = { addr = 0x8019651C, alias = true }
+GFX_FreePaletteFadeTarget = { addr = 0x80196718, alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

@@ -30,6 +30,17 @@
 
 #define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(g_Task)
 
+/* The battler the target selector names: a party row below
+ * BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row. A statement macro: the
+ * member declares u8 selector and PartyMember* battler. */
+#define BMAGIC_SELECT_TARGET_BATTLER()                                              \
+    selector = LOBU(g_Battle.target_selector);                                      \
+    if (selector < BATTLE_PARTY_CHARACTERS_COUNT) {                                 \
+        battler = &g_Game.members[selector];                                        \
+    } else {                                                                        \
+        battler = (PartyMember*)(g_BattleEnemies + selector * BATTLE_ENEMY_STRIDE); \
+    }
+
 /* Free the palette fade of the battler the target selector names (a party row
  * below BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row), tell the battle UI and
  * the effect player about the selector, then raise the effect-playing state.
