@@ -44,10 +44,40 @@ extern AreaTriggerRect D_801F510C[2];
 void                   func_801F2EC8(AreaEffectRow* row);
 void                   func_801F3084(void);
 void                   func_801F3194(void);
-/* func_801F31C0 */
 s32                    Area_UpdateEffectRows(void);
+s32                    func_801F3980(s32* x, s32* y);
+void                   func_801F3A14(s32 x, s32 y);
+void                   func_801F3BA0(s32 x, s32 y);
 void                   func_801F3C4C(s32 x, s32 y);
 
 void func_801F431C(void);
+
+/* Step the party along the bridge route while the scene event runs: walk it at
+ * the lane the event byte names and advance the script cursor once it stops at
+ * `stop_x`. Every change must verify func_801F37A8 and func_801F3894. A
+ * statement macro, not a static inline: the stop x is read after the first
+ * branch, and an inline argument would keep it in a saved register. */
+#define AREA_STEP_PARTY_TO_BRIDGE(stop_x)                                    \
+    do {                                                                     \
+        s32 x;                                                               \
+        s32 y;                                                               \
+                                                                             \
+        if ((u8)func_801F3980(&x, &y) != 0) {                                \
+            if (g_ScriptVars[3] == 10) {                                     \
+                if (g_Task->pos.x.fixed != (stop_x)) {                       \
+                    func_801F3BA0(x, y);                                     \
+                    g_ScriptState->cursor += 6;                              \
+                }                                                            \
+            } else if (g_ScriptVars[3] == 20) {                              \
+                func_801F3A14(x, y);                                         \
+                if (g_Task->pos.x.fixed == TO_COORD_HALF(133)) {             \
+                    g_ScriptState->cursor += 3;                              \
+                    /* FAKE: keeps the step store after the cursor store. */ \
+                    FAKE_BARRIER();                                          \
+                    g_SceneEventStep = 45;                                   \
+                }                                                            \
+            }                                                                \
+        }                                                                    \
+    } while (0)
 
 #endif

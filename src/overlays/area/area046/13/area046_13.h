@@ -6,6 +6,4 @@
 
 #include "overlays/area/world01.h"
 
-extern u8 D_80146865;
-
 #endif

@@ -2,7 +2,7 @@
 
 MATCH void func_801F2C04(void) {
     s8* step = &g_SceneEventStep;
-    u8* flag;
+    u8* script_var;
 
     switch (*step) {
         case 0:
@@ -10,12 +10,12 @@ MATCH void func_801F2C04(void) {
             break;
 
         case 1:
-            flag = &D_80146865;
-            if (*flag != 2) {
+            script_var = &g_ScriptVars[1];
+            if (*script_var != 2) {
                 break;
             }
             Game_ClearScriptActive();
-            *flag            = 0;
+            *script_var      = 0;
             g_SceneEventMode = SCENE_EVENT_NONE;
             *step            = 0;
             break;
@@ -26,7 +26,7 @@ MATCH void func_801F2C04(void) {
             break;
 
         case 11:
-            if (D_80146865 == 0) {
+            if (g_ScriptVars[1] == 0) {
                 Game_ClearScriptActive();
                 g_SceneEventMode = SCENE_EVENT_NONE;
                 *step            = 0;
