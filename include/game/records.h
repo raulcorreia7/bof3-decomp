@@ -109,7 +109,7 @@ typedef struct ActorSlot {
     s32        unk_14;       /* 0x14 */
     s32        counter_18;   /* 0x18 */
     s32        counter_1C;   /* 0x1C */
-    s32        unk_20;       /* 0x20 - the area box length func_801F5190 seeds with 0x500000 */
+    s32        unk_20;       /* 0x20 - seeded with 0x500000 */
     u8         unk_24;       /* 0x24 */
     u8         pad_25[2];    /* 0x25-0x26 */
     u8         unk_27;       /* 0x27 */
