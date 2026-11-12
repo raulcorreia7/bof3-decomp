@@ -98,12 +98,12 @@ MATCH void func_801FB374(void) {
 
 /* Starts the area message `message`: the area overlay's own lookup (func_801F326C
  * for the second desert camp, func_801F37AC otherwise) maps it to a message index. */
-#define SCENA14_START_AREA_MESSAGE(message)               \
-    if (g_GameAreaId == AREA_ID_DESERT_CAMP_SECOND) {     \
-        Message_StartAreaMessage(func_801F326C(message)); \
-    } else {                                              \
-        Message_StartAreaMessage(func_801F37AC(message)); \
-    }                                                     \
+#define SCENA14_START_AREA_MESSAGE(message)                 \
+    if (LOHU(g_GameAreaId) == AREA_ID_DESERT_CAMP_SECOND) { \
+        Message_StartAreaMessage(func_801F326C(message));   \
+    } else {                                                \
+        Message_StartAreaMessage(func_801F37AC(message));   \
+    }                                                       \
     g_GameStateIndex = GAME_REQUEST_MESSAGE
 
 MATCH void func_801FB3BC(void) {
@@ -196,7 +196,7 @@ MATCH void func_801FBFA8(void) {
     Party_JoinMember(CHAR_ID_MOMO);
     Party_LoadPalettes();
     g_PartyBattleOrder[0] = 7;
-    D_80144F5E            = 8;
+    D_80144F5E[0]         = 8;
     D_80144F5F            = 5;
 }
 

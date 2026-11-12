@@ -5,11 +5,9 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-
-extern s16 g_ScrollHeight;
+#include "engine/game/00/game_00.h"
 
 extern u8 D_80144908[];
-extern u8 D_80144F5E;
 
 extern u8 D_80144F5F;
 
