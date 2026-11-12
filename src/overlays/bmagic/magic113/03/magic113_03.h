@@ -25,6 +25,16 @@ static inline void Effect_CountUpTimer(void) {
     }
 }
 
+#define MAGIC113_STEP_COUNT 8
+
+typedef struct Magic113Steps {
+    Callback handlers[MAGIC113_STEP_COUNT];
+} Magic113Steps;
+
+extern Magic113Steps D_801EEC04;
+
+void func_801EF4F0(void);
+
 extern Callback D_801F0BAC[];
 extern s32      D_801F0BA4[];
 
