@@ -33,7 +33,7 @@ MATCH void func_801EEE24(void) {
 
     radius = &D_801EFA9C.radius;
     *radius += 0x40;
-    D_801EFA9C.unk_12 += 0x60;
+    D_801EFA9C.offset += 0x60;
     func_801EF254();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
@@ -48,7 +48,7 @@ MATCH void func_801EEEC4(void) {
     u8 count;
 
     D_801EFA9C.radius = ((g_FrameCount & 1) * 0x10) + 0x100;
-    D_801EFA9C.unk_14 -= 0x200;
+    D_801EFA9C.angle -= 0x200;
     func_801EF254();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
