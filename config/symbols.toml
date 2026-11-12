@@ -273,6 +273,7 @@ Effect_DrawScreenFade = { addr = 0x801F0BBC, type = "func", source = "Draws the 
 Effect_SetDuration = { addr = 0x801F133C, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_ReloadTimerAndStep2 = { addr = 0x801F17BC, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic008 (Gambit, Mind Flay, Blind…)." }
 g_BMagicEffectModes = { addr = 0x801F1BEC, source = "Handlers of magic008 (Gambit, Mind Flay, Blind…), run by header.mode (byte 0x01)." }
+D_801F1C04 = { addr = 0x801F1C04, type = "Point2DL", source = "Velocity pairs func_801F0E54 reads by the effect ticker (byte 0x0B): unk_0C takes x and unk_10 y before func_801DD350 integrates them." }
 
 ["emi/bmagic/magic009/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

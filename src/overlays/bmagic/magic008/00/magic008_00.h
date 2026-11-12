@@ -48,5 +48,6 @@ extern BMagicEffectFuncs   D_801EEC94;
 
 extern Magic008EarlySteps D_801EECAC;
 extern Magic008Steps      D_801EECC8;
+extern Point2DL           D_801F1C04[];
 
 #endif
