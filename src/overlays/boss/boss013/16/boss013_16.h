@@ -37,6 +37,9 @@ u8   func_800C2138(u32 mode);
 void func_800C2348(void);
 void func_800C243C(void);
 
+/* func_801C1254 */
+void Party_LoadMemberSprite(s32 character_id, s32 party_slot);
+
 void func_800C18FC(s32 mode);
 
 void func_800C1B14(s32 mode);
