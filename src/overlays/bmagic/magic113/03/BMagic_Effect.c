@@ -5,9 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC24(void) {
-    Magic113ModeSteps handlers = D_801EEC04;
+    Magic113Steps handlers;
 
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);
     if (g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF4F0();

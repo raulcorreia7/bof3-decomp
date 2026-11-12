@@ -16,7 +16,17 @@ INCLUDE_ASM(func_801EF110);
 
 INCLUDE_ASM(func_801EF1C0);
 
-INCLUDE_ASM(func_801EF3D0);
+MATCH void func_801EF3D0(void) {
+    if (!EMI_IsReady()) {
+        return;
+    }
+    if (g_Battle.scroll_dir & 0x2) {
+        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex]);
+    } else {
+        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex]);
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EF488(void) {
     PartyMember* prev;
@@ -293,7 +303,20 @@ MATCH void func_801F13A4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F14A0);
+MATCH void func_801F14A0(void) {
+    s16 timer;
+
+    SYS_DISPATCH_BYTE(D_801F1C94, D_801F24E0->header.step);
+    timer = D_801F24E0->unk_26;
+    if (timer != 0) {
+        D_801F24E0->unk_26 = timer - 1;
+        return;
+    }
+    if (D_801F24E0->header.flags != 0 && D_801F24E0->header.step != 0) {
+        func_801F1B14();
+        func_801F1844();
+    }
+}
 
 MATCH void func_801F153C(void) {
     s16* angle_cell;

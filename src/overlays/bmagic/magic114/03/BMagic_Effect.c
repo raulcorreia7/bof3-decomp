@@ -31,8 +31,8 @@ MATCH void func_801EEEE4(void) {
 }
 
 MATCH void func_801EEF44(void) {
-    u32 slot;
     u8  count;
+    u32 slot;
 
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;

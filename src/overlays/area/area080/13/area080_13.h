@@ -9,6 +9,9 @@
 
 #define AREA_SPARK_TRAIL_POINTS 4u
 
+/* The frame count of one ring step: the timer the ring start and each step set. */
+#define AREA_RING_STEP_FRAMES   16
+
 /* One of the eight sparks the area keeps after the ring in its work area:
  * it drifts by its velocity and settles on the ground. */
 typedef struct AreaSparkSlot {

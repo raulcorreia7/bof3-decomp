@@ -149,21 +149,22 @@ INCLUDE_ASM(func_801F04B0);
 INCLUDE_ASM(func_801F078C);
 
 MATCH void func_801F08AC(void) {
-    u32 i;
+    PartyMember* work;
+    u32          i;
 
-    i = 0;
-    do {
-        if (!(Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) & BYTE_MASK)) {
-            g_Task->facing           = g_BattleEnemyBattlers[i].unk_08;
-            g_Task->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
-            g_Task->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;
-            COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEnemyBattlers[i].pos.z);
-            Effect_SetActorMatrix();
-            func_801F0974();
-            PopMatrix();
+    for (i = 0; i < 8; i++) {
+        if (Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) != 0) {
+            continue;
         }
-        i++;
-    } while (i < 8u);
+        work                     = g_Task;
+        work->facing             = g_BattleEnemyBattlers[i].unk_08;
+        g_Task->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
+        g_Task->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;
+        COORD_INT(g_Task->pos.z) = FIELD(u16, D_801EB66E, i * BATTLE_ENEMY_STRIDE);
+        Effect_SetActorMatrix();
+        func_801F0974();
+        PopMatrix();
+    }
 }
 
 INCLUDE_ASM(func_801F0974);

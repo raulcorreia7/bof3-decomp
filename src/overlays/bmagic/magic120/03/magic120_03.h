@@ -7,6 +7,10 @@
 
 extern Callback D_801F0CB0[];
 
+/* The z half of an enemy battler row: func_801F08AC loads it unsigned (lhu),
+ * where a part.integer load sign-extends. */
+extern u8 D_801EB66E[];
+
 void BMagic_DrawWhelpBreath(void);
 void func_801F0274(void);
 void func_801F08AC(void);

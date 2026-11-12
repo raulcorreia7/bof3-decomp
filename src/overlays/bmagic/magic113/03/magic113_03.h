@@ -9,13 +9,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* The orbit radius the effect keeps in the scratchpad word; func_801EF944 scales its sin and cos by it. */
-#define s_Magic113OrbitRadius    D_1F800000
-
-#define MAGIC113_MODE_STEP_COUNT 8
-
-typedef struct Magic113ModeSteps {
-    Callback steps[MAGIC113_MODE_STEP_COUNT];
-} Magic113ModeSteps;
+#define s_Magic113OrbitRadius D_1F800000
 
 /* Count the effect timer up and finish the effect at 12. */
 static inline void Effect_CountUpTimer(void) {
@@ -31,7 +25,13 @@ static inline void Effect_CountUpTimer(void) {
     }
 }
 
-extern Magic113ModeSteps D_801EEC04;
+#define MAGIC113_STEP_COUNT 8
+
+typedef struct Magic113Steps {
+    Callback handlers[MAGIC113_STEP_COUNT];
+} Magic113Steps;
+
+extern Magic113Steps D_801EEC04;
 
 extern Callback D_801F0BAC[];
 extern s32      D_801F0BA4[];

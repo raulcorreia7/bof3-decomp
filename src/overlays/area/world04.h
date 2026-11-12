@@ -80,6 +80,10 @@ static inline void World04_StoreAnswerChoice(u8* target) {
     *target = g_MessageChoice;
 }
 
+/* One cell of a payload's data tables: `offset` is the table's byte offset and
+ * `index` the byte offset of the row. */
+#define WORLD04_ENTRY_TABLE(payload, type, offset, index) (*(type*)&(payload)[(offset) + (index)])
+
 /* A trigger rectangle in tile units. */
 typedef struct TriggerBox {
     u8 x0;
