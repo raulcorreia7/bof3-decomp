@@ -40,6 +40,8 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | List every reference to a symbol         | `tools/symbol.py uses <Name>` or `tools/symbol.py uses <target>@0x<ADDR>` | same                                                      |
 | Find the name of a bare number           | `tools/symbol.py value 0x<NN> [--image <target>] [--type <EnumOrPrefix>]` | same                                                      |
 | Build the call-graph layers              | `tools/symbol.py layers [--jsonl]`                                       | [lookup](#lookup)                                         |
+| Find where a record or global is accessed | `tools/symbol.py accesses <TypeOrGlobal> [--jsonl]`                     | [lookup](#lookup)                                         |
+| Rank records by unknown accesses         | `tools/symbol.py records [--jsonl]`                                      | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Check the symbol table                   | `tools/symbol.py check`                                                  | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
@@ -135,7 +137,9 @@ one table; the first query in an image analyses its Rizin project and caches the
 among the headers the image sees, nearest scope first, so a bare `0x3A` becomes `ABILITY_SANCTUARY`.
 `symbol.py layers` builds the game call graph over every image, including table dispatch, and prints
 each function's layer, callers, callees, status, copies and shared flag. `--jsonl` writes one object
-per line.
+per line. `symbol.py accesses` decodes every image and reports a record's or global's byte offsets,
+widths, members, examples, constants and call slots with their width, signedness and straddle
+problems; `symbol.py records` ranks every record by accesses times unknown members.
 
 ## Quality
 
