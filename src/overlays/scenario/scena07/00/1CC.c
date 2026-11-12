@@ -139,7 +139,7 @@ MATCH void func_801F7408(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     func_801F9DA8();
     g_Task->timer = 0;
     g_Task->vx    = 95;
@@ -166,7 +166,7 @@ MATCH void func_801F7638(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     burst               = SCENA07_BURST_RECORD;
     burst->x            = g_Task->pos.x.fixed;
     y                   = g_Task->pos.y.fixed;
