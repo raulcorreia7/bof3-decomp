@@ -529,27 +529,7 @@ MATCH s32 func_801FDC1C(void) {
     return -1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801FDC70(void) {
-    if (SYS_TestFlag(g_SceneFlags, 0x33) != 0) {
-        return -1;
-    }
-    if (g_Game.members[0].chr.character_id == CHAR_ID_REI) {
-        g_ScriptVars[0] = 0;
-        Game_SetScriptActive();
-        g_SceneState.step_05  = 50;
-        g_SceneState.state_04 = 15;
-        return 1;
-    } else {
-        Game_SetScriptActive();
-        g_SceneState.step_05  = 52;
-        g_SceneState.state_04 = 15;
-        return 1;
-    }
-}
-#else
 INCLUDE_ASM(func_801FDC70);
-#endif
 
 /* func_801FDCF4 */
 MATCH void Scene_JoinAdultNinaWithGarr(void) {
