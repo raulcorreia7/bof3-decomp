@@ -25,8 +25,8 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 
 ## Setup
 
-Install the host tools above, then run the [README set up](../README.md#set-up) and
-[build](../README.md#build) commands. Add `--matching` to `tools/setup.sh` for the permuter, the
+Install the host tools above, then run the [README commands](../README.md#commands). Add
+`--matching` to `tools/setup.sh` for the permuter, the
 differ and m2c.
 
 Put your disc in `inputs/external/` before `tools/setup.sh` ([inputs](../inputs/README.md)). The
@@ -168,6 +168,15 @@ the check the image would not change and no error would appear.
 Meson regenerates the graph by itself when you edit a file under `config/`, a Python module that
 `tools/split.py` imports, or a source whose match marker decides a placed section. Regeneration
 takes seconds; a build with no change does not regenerate.
+
+### decomp.me
+
+For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and `gcc2.7.2-psx`. The project
+flags are in `build/meson/emit/cflags.txt`; the base set is
+`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`, and the
+scenario `sce10eff/00` adds `-fno-cse-follow-jumps -fno-cse-skip-blocks`. Define `MATCHING` and
+supply the required declarations in the scratch context. A scratch is a comparison tool;
+`check` verifies the project build.
 
 ### How the build works
 
