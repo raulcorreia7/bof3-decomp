@@ -79,7 +79,7 @@ MATCH u16 func_801FA904(u8* tags, u16* messages) {
             }
         }
     }
-    return 0xFFFF;
+    return MESSAGE_NONE;
 }
 
 INCLUDE_ASM(func_801FA9C8);
