@@ -362,7 +362,31 @@ INCLUDE_ASM(func_801D4AE0);
 
 INCLUDE_ASM(func_801D4EA4);
 
-INCLUDE_ASM(func_801D4F88);
+MATCH void func_801D4F88(s32 arg0, s32 arg1, s32 arg2) {
+    s32 i;
+    s32 x;
+    s32 y;
+
+    if ((u8)arg2) {
+        i = 0;
+        y = arg1 << 16;
+        x = arg0;
+        do {
+            func_801D2CF8((s16)x, y >> 16, D_801DB080[i]);
+            x += 0x20;
+            i++;
+        } while (i < 3);
+    } else {
+        i = 0;
+        y = arg1 << 16;
+        x = arg0;
+        do {
+            func_801D2CF8((s16)x, y >> 16, 0xFF);
+            x += 0x20;
+            i++;
+        } while (i < 3);
+    }
+}
 
 MATCH void func_801D5034(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event2States, D_801F294C);
