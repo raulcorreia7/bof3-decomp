@@ -569,7 +569,9 @@ g_BMagicEffectModes = { addr = 0x801F0400, source = "Handlers of magic063 (Sudde
 g_BMagicOrbitWork = { addr = 0x801F1054, type = "BMagicOrbitWork*", source = "Work record of the orbiting sub-effect of magic063 whose handlers run by header.step (byte 0x02)." }
 
 ["emi/bmagic/magic064/03"]
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC50 = { addr = 0x801EEC50, type = "Magic064SecondSteps", size = 0x0c, source = "Handler table of the magic064 effect, run by header.step (byte 0x02)." }
 BMagic_DispatchMode = { addr = 0x801EEC7C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic064 (Weretiger)." }
 Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "Clears the effect timer (byte 0x09) and runs the next-step routine in magic064 (Weretiger)." }
@@ -828,8 +830,10 @@ g_BMagicEffectModes = { addr = 0x801F089C, source = "Handlers of magic093 (Infer
 D_801F08C4 = { addr = 0x801F08C4, source = "Step handlers of the magic093 effect, run by header.step (byte 0x02) from func_801EFE5C." }
 
 ["emi/bmagic/magic094/03"]
-g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 
 D_801EF988 = { addr = 0x801EF988, source = "Mode handlers of magic094, run by header.mode (byte 0x01) from func_801EEE4C." }
 ["emi/bmagic/magic095/03"]
@@ -2798,6 +2802,8 @@ Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "Runs one step
 Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
 Char_StartTurnGarr = { addr = 0x801CF544, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CF610, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
+PlChar_RunGarrFieldTask = { addr = 0x801CF750, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
+PlChar_FindGarrActorSlot = { addr = 0x801CF9A8, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CFB0C, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CFBDC, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 
@@ -2837,6 +2843,8 @@ Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_
 Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
+PlChar_RunGarrFieldTask = { addr = 0x801CF37C, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
+PlChar_FindGarrActorSlot = { addr = 0x801CF5D4, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CF738, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CF808, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartTurnMomo = { addr = 0x801CF968, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Momo, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
@@ -2851,6 +2859,8 @@ Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_
 Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScriptGarr = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 1 of this image's party row (the task's byte 0x2C selects the route)." }
+PlChar_RunGarrFieldTask = { addr = 0x801CF37C, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
+PlChar_FindGarrActorSlot = { addr = 0x801CF5D4, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_ProbeFacingFollower = { addr = 0x801CF808, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartTurnPeco = { addr = 0x801CF968, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Peco, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScript = { addr = 0x801CFA34, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
@@ -2895,7 +2905,9 @@ Char_ClearModeIfUnused = { addr = 0x801D042C, type = "func", source = "When the 
 ["emi/plchar/plp247/00"]
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
+PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
 Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CEA10, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
@@ -2911,7 +2923,9 @@ Char_ProbeFacingCell = { addr = 0x801CF940, type = "func", source = "Returns 1 w
 ["emi/plchar/plp257/00"]
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
+PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
 Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_AdvanceFacingTurn = { addr = 0x801CED0C, type = "func", source = "Turns the character to the target facing in byte 0x03: on a match requests script 0x41 (facing down) or 0x40 (facing right) and advances header.step; otherwise counts timer down and at 0 reloads it with 2, steps direction_08 by turn_step and requests that direction script." }
@@ -2928,7 +2942,9 @@ Char_ProbeFacingCell = { addr = 0x801CFD20, type = "func", source = "Returns 1 w
 ["emi/plchar/plp267/00"]
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
+PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
 Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CED0C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
@@ -2948,7 +2964,9 @@ Char_ProbeFacingCell = { addr = 0x801D07CC, type = "func", source = "Returns 1 w
 ["emi/plchar/plp278/00"]
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
+PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
 Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CEA10, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartFacingTurn = { addr = 0x801CEC40, type = "func", source = "Starts the turn to the nearer of facings 3 and 5: stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step; in scenario 15 only clears the panel mode byte." }
@@ -2965,7 +2983,9 @@ Char_ClearModeIfSlotFree = { addr = 0x801CFBC0, type = "func", source = "Clears 
 ["emi/plchar/plp27a/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
+PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
 Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CEA10, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartFacingTurn = { addr = 0x801CEC40, type = "func", source = "Starts the turn to the nearer of facings 3 and 5: stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step; in scenario 15 only clears the panel mode byte." }

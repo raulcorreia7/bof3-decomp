@@ -60,7 +60,12 @@ MATCH void func_801CF70C(void) {
     SYS_DISPATCH_TASK(D_801CFDB8, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801CF750);
+/* func_801CF750 */
+#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
+
+MATCH void PlChar_RunGarrFieldTask(void) {
+    PLCHAR_RUN_GARR_FIELD_TASK(func_801CFBDC);
+}
 
 MATCH void func_801CF938(void) {
     if (g_Task->timer == 0) {
@@ -73,7 +78,8 @@ MATCH void func_801CF938(void) {
     Actor_StepAnimLoop();
 }
 
-INCLUDE_ASM(func_801CF9A8);
+/* func_801CF9A8 */
+#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
 
 /* func_801CFB0C */
 #include "overlays/plchar/Plchar_FollowerInReach.h"
