@@ -187,7 +187,7 @@ INCLUDE_ASM(func_801F7BE0);
 MATCH void func_801F7C9C(void) {
     func_801F9330(D_801FDFC0);
     if (g_Task->vx >= 9) {
-        D_801FDFC0->angle -= 0x40;
+        D_801FDFC0->angle -= 64;
     }
     if (--g_Task->vx == 0) {
         func_80196070();
