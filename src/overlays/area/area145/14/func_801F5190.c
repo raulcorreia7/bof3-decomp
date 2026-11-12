@@ -6,7 +6,7 @@ MATCH u8 func_801F5190(s32 scene_step, s32 selection, s32 counter_18, s32 counte
     slot          = Actor_FindFreeSlot();
     D_1F800000[0] = slot;
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags        = 1;
+        g_ActorSlots[slot].header.flags        = ACTOR_FLAG_IN_USE;
         g_ActorSlots[D_1F800000[0]].type       = 0x3F;
         g_ActorSlots[D_1F800000[0]].scene_step = scene_step;
         g_ActorSlots[D_1F800000[0]].selection  = selection;

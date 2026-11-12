@@ -17,7 +17,7 @@ MATCH void func_801F5CD0(void) {
     i = 0;
     do {
         slot                            = Actor_FindFreeSlot();
-        g_ActorSlots[slot].header.flags = 1;
+        g_ActorSlots[slot].header.flags = ACTOR_FLAG_IN_USE;
         g_ActorSlots[slot].type         = 0x5C;
         g_ActorSlots[slot].header.mode  = 3;
         g_ActorSlots[slot].unk_0A       = i << 3;
