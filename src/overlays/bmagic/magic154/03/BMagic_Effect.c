@@ -8,13 +8,42 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC90);
 
-INCLUDE_ASM(func_801EEE94);
+MATCH void func_801EEE94(void) {
+    u32          i;
+    s8           anchor;
+    u8           slot;
+    PartyMember* actor;
+    PartyMember* work;
+
+    if (g_Task->param.unk_0B == 0) {
+        actor          = g_Battle.selected_actor;
+        g_Task->facing = actor->facing;
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = -TO_COORD_HALF(1);
+        func_801DD350(g_Task);
+        g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.z.fixed = actor->pos.z.fixed;
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        for (i = 0, anchor = 1; i < 6; i++) {
+            slot                               = Battle_AllocEffect(1, 0x52) & BYTE_MASK;
+            work                               = g_Task;
+            g_BattleEffects[slot].header.mode  = 0;
+            g_BattleEffects[slot].unk_0B       = i;
+            g_BattleEffects[slot].arg.unk_09   = anchor;
+            g_BattleEffects[slot].target.party = work;
+            g_Task->param.unk_0B += 1;
+            anchor += 3;
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801EEFE0(void) {
     if (g_Task->unk_09 == 0) {
         func_800AEF98(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->header.mode += 1;
     }
 }

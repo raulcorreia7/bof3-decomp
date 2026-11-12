@@ -4,8 +4,8 @@ MATCH void func_801F3A64(void) {
     ActorSlot* actor;
     s32        slot;
 
-    slot = Actor_FindFreeSlot() & 0xFF;
-    if (slot != 0xFF) {
+    slot = Actor_FindFreeSlot() & BYTE_MASK;
+    if (slot != GAME_NONE) {
         actor               = &g_ActorSlots[slot];
         actor->header.flags = 1;
         actor->type         = 0x73;

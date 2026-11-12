@@ -8,7 +8,7 @@ MATCH void func_801F3B04(void) {
         func_801F4300(&D_801F4D94 + 5, 1);
     }
     if (D_80143F03 == 1) {
-        if (SYS_TestFlag(g_SceneEventFlags, 0x7A) == 0) {
+        if (SYS_TestFlag(g_SceneEventFlags, 122) == 0) {
             i = 2;
             do {
                 func_801F4300(i * 5 + &D_801F4D94, 1);
@@ -21,7 +21,7 @@ MATCH void func_801F3B04(void) {
                 i++;
             } while (i < 4);
         }
-        if (SYS_TestFlag(g_SceneEventFlags, 0x7B) == 0) {
+        if (SYS_TestFlag(g_SceneEventFlags, 123) == 0) {
             i = 4;
             do {
                 func_801F4300(i * 5 + &D_801F4D94, 1);
@@ -34,7 +34,7 @@ MATCH void func_801F3B04(void) {
                 i++;
             } while (i < 6);
         }
-        if (SYS_TestFlag(g_SceneEventFlags, 0x7C) == 0) {
+        if (SYS_TestFlag(g_SceneEventFlags, 124) == 0) {
             i = 6;
             do {
                 func_801F4300(i * 5 + &D_801F4D94, 1);

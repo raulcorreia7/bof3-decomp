@@ -75,7 +75,14 @@ INCLUDE_ASM(func_801D1E48);
 
 INCLUDE_ASM(func_801D2110);
 
-INCLUDE_ASM(func_801D273C);
+#include "overlays/commu/Commu_CellGrid.h"
+
+MATCH void func_801D273C(s16 x, s16 y) {
+    s32 i;
+    s32 offset;
+
+    COMMU_DRAW_CELL_GRID(func_801D4030, 0x22, 7, 4, 6);
+}
 
 INCLUDE_ASM(func_801D28A4);
 
@@ -83,7 +90,12 @@ INCLUDE_ASM(func_801D2D98);
 
 INCLUDE_ASM(func_801D3038);
 
-INCLUDE_ASM(func_801D3594);
+MATCH void func_801D3594(s16 x, s16 y) {
+    s32 i;
+    s32 offset;
+
+    COMMU_DRAW_CELL_GRID(func_801D4030, 0xA8, 33, 20, 8);
+}
 
 INCLUDE_ASM(func_801D36FC);
 
@@ -113,7 +125,33 @@ INCLUDE_ASM(func_801D4030);
 
 INCLUDE_ASM(func_801D4178);
 
-INCLUDE_ASM(func_801D42DC);
+MATCH void func_801D42DC(s16 x, s16 y, u8 rows) {
+    /* FAKE: retail frame reserves 8 bytes no statement uses. */
+    FAKE_STACK_PADS(u8, 8);
+    s32 i;
+    s32 offset;
+    u8  count;
+
+    func_801D4030(x, y, 6);
+    for (i = 0; i < 8; i++) {
+        offset = i * 8 + 8;
+        func_801D4030((s16)(x + offset), y, 7);
+        func_801D4030((s16)(x + offset), (s16)(y + rows), 0xC);
+    }
+    func_801D4030((s16)(x + 0x48), y, 8);
+    count = (rows >> 3) - 1;
+    i     = 0;
+    if (count != 0) {
+        do {
+            offset = i * 8 + 8;
+            func_801D4030(x, (s16)(y + offset), 9);
+            func_801D4030((s16)(x + 0x48), (s16)(y + offset), 0xA);
+            i++;
+        } while (i < count);
+    }
+    func_801D4030(x, (s16)(y + rows), 0xB);
+    func_801D4030((s16)(x + 0x48), (s16)(y + rows), 0xD);
+}
 
 MATCH s32 func_801D4474(void) {
     s32 val;

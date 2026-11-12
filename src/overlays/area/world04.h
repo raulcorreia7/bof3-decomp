@@ -58,6 +58,7 @@ extern u8  D_801F294C;
 extern u8  D_801F294D;
 extern u8  D_801F294E;
 extern u8  D_801F294F;
+/* The payload's handler pointers, then its entry coordinate pairs at 0x14. */
 extern u8  D_801F3418[];
 
 /* The scenario state byte the request writes. */
@@ -79,6 +80,10 @@ static inline void World04_StoreAnswerChoice(u8* target) {
     MESSAGE_REQUEST_CLEAR();
     *target = g_MessageChoice;
 }
+
+/* One cell of a payload's data tables: `offset` is the table's byte offset and
+ * `index` the byte offset of the row. */
+#define WORLD04_ENTRY_TABLE(payload, type, offset, index) (*(type*)&(payload)[(offset) + (index)])
 
 /* A trigger rectangle in tile units. */
 typedef struct TriggerBox {

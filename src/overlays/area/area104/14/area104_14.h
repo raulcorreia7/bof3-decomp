@@ -7,6 +7,8 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+void func_801F358C(void);
+
 extern SVECTOR  D_1F800014[];
 extern u8       D_801F6980[];
 extern Callback D_801F6A64[];

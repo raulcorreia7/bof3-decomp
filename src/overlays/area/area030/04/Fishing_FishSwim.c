@@ -19,7 +19,7 @@ MATCH void Fishing_FishSwim(void) {
             roll = rand();
             if (D_801E3200 == 0) {
                 work = FISHING_STATE;
-                if (work->bounce_3C.half.key_3E == 0 && !(roll & 3) && D_80145E92[0] != 4 && work->cue_index_06 != FISHING_IDLE_CUE) {
+                if (work->bounce_3C.half.key_3E == 0 && !(roll & 0x3) && D_80145E92[0] != 4 && work->cue_index_06 != FISHING_IDLE_CUE) {
                     D_801E3200 = 1;
                     Area_FindSceneRecord(*(u16*)(D_801E2ACA + work->cue_index_06 * sizeof(FishingSceneCue)));
                     if (!(*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN)) {
@@ -33,11 +33,11 @@ MATCH void Fishing_FishSwim(void) {
                     return;
                 }
             }
-            if (roll & 4) {
-                if (roll & 8) {
-                    FISHING_STATE->counter_08 = (FISHING_STATE->counter_08 + 1) & 7;
+            if (roll & 0x4) {
+                if (roll & 0x8) {
+                    FISHING_STATE->counter_08 = (FISHING_STATE->counter_08 + 1) & 0x7;
                 } else {
-                    FISHING_STATE->counter_08 = (FISHING_STATE->counter_08 - 1) & 7;
+                    FISHING_STATE->counter_08 = (FISHING_STATE->counter_08 - 1) & 0x7;
                 }
             }
             func_801E03F8();

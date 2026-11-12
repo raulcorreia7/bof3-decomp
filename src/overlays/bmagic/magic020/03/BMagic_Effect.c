@@ -186,18 +186,44 @@ MATCH void func_801EFAD4(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EFAF4);
+#include "overlays/bmagic/BMagic_RunEffectStep.h"
+
+MATCH void func_801EFAF4(void) {
+    BMAGIC_RUN_EFFECT_STEP(func_801EFBA0, func_801EFD10);
+}
 
 INCLUDE_ASM(func_801EFBA0);
 
 MATCH void func_801EFD10(void) {
     if (Actor_StepAnimLoop() & BYTE_MASK) {
         if (g_Task->param.unk_0B == 7) {
-            func_800A9820(g_Battle.target_selector);
+            Battle_MarkDamaged(g_Battle.target_selector);
         }
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();
     }
 }
 
-INCLUDE_ASM(func_801EFD88);
+/* The full-screen tile's colour scratch, read back for the three channels. */
+#define SCREEN_SHADE D_1F800000.view.effect.params[1]
+
+/* A semi-transparent full-screen tile shaded fifteen times the effect counter, then the draw mode back
+ * to plain blending. */
+MATCH void func_801EFD88(void) {
+    TILE* tile;
+
+    GFX_AddDitheredDrawMode(2, getTPage(0, 1, 320, 256));
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    SetSemiTrans(tile, 1);
+    tile->w      = SCREEN_WIDTH;
+    tile->y0     = 0;
+    tile->x0     = 0;
+    tile->h      = SCREEN_HEIGHT;
+    SCREEN_SHADE = g_Task->unk_09 * 15;
+    tile->r0     = SCREEN_SHADE;
+    tile->g0     = SCREEN_SHADE;
+    tile->b0     = SCREEN_SHADE;
+    GFX_AddPrim(2, sizeof(TILE));
+    GFX_AddDitheredDrawMode(2, getTPage(0, 0, 320, 256));
+}

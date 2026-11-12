@@ -24,12 +24,12 @@ MATCH void Fishing_DrawReelCursor(s16 panel_x, s16 panel_y, u8 panel_width, s8 u
     width   = panel_width;
 
     Fishing_SetDrawMode(0, layer);
-    sprite     = (SPRT*)Fishing_DrawSprite(0x1C, layer, x, y);
+    sprite     = (SPRT*)Fishing_DrawSprite(28, layer, x, y);
     w          = width & BYTE_MASK;
     sprite->w  = w;
     sprite->u0 = sprite->u0 + u_shift;
 
-    if (enabled != 0 && (g_FrameCount & 8) == 0) {
+    if (enabled != 0 && (g_FrameCount & 0x8) == 0) {
         Fishing_SetDrawMode(6, 2);
         prim = (TILE*)g_GfxPrimCursor;
         SetTile(prim);

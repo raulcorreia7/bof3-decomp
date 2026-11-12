@@ -22,7 +22,7 @@ MATCH void func_801F3474(void) {
             tile = (TILE_1*)g_GfxPrimCursor;
             SetTile1(tile);
             SetSemiTrans(tile, 1);
-            value = (0x17F - ((i << 3) + (g_FrameCount & 7))) >> 1;
+            value = (0x17F - ((i << 3) + (g_FrameCount & 0x7))) >> 1;
             setRGB0(tile, value / 4, value / 4, value);
 
             angle            = 256 + j * ANGLE_45;

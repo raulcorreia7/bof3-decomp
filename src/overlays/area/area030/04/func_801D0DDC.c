@@ -10,7 +10,7 @@ MATCH void func_801D0DDC(void) {
     work            = FISHING_STATE;
     position        = work->cursor_10 - 8;
     work->cursor_10 = position;
-    if (position < 0xAE) {
+    if (position < 174) {
         state                  = work->handler_index_01;
         work->cursor_10        = 0xAE;
         work->handler_index_01 = state + 1;

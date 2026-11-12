@@ -10,7 +10,7 @@ MATCH void func_801F2C60(void) {
         Area_InitSpin(work);
         i += 1;
         work += 0x2C;
-    } while ((i & 0xFF) < 0x20U);
+    } while ((i & BYTE_MASK) < 0x20U);
     g_Task->timer = 0;
     g_Task->header.mode += 1;
 }

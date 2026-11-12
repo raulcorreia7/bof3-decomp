@@ -28,7 +28,7 @@ MATCH void func_801F2F54(void) {
             g_GameFlags ^= 0x16;
             Scene_ClearEventState();
             D_8014504A = 0;
-            SYS_ClearFlag(state + 0x63C, 0x77);
+            SYS_ClearFlag(state + 0x63C, 119);
             func_8019FA28(0x79, 0x1A0000, 0x350000, 3);
             break;
     }

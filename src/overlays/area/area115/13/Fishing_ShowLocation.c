@@ -68,7 +68,7 @@ MATCH void Fishing_ShowLocation(void) {
                         }
                     }
                     D_801490E4[slot] = 0;
-                    slot += 0x20;
+                    slot += 32;
                     dst += 0x20;
                     count++;
                     from++;

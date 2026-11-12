@@ -7,8 +7,8 @@ MATCH void func_801F2FBC(void) {
     Area_FindSceneRecord(0x1BD);
     Actor_SelectScript(0);
     g_Task->unk_2A                 = 0;
-    g_Task->scale.x                = 0xE000;
-    g_Task->scale.y                = 0xE000;
+    g_Task->scale.x                = 57344;
+    g_Task->scale.y                = 57344;
     g_CurrentActor->unk_93         = func_8019651C((u8*)g_Task, 0, 0, 0, 1);
     g_Task->tint.bytes.flags       = 1;
     work                           = g_Task;

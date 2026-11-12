@@ -10,9 +10,9 @@ MATCH void func_801F3E7C(void) {
         func_801F3DF0();
     } else {
         g_Task->timer += 8;
-        x = abs(0x40 - g_Task->timer) + 0x40;
+        x = abs(64 - g_Task->timer) + 0x40;
         y = abs(0x20 - (g_Task->timer >> 1)) + 0x20;
-        if (g_Task->timer >= 0x80) {
+        if (g_Task->timer >= 128) {
             g_Task->timer       = 0;
             g_Task->header.step = 2;
         }

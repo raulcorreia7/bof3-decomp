@@ -102,7 +102,43 @@ INCLUDE_ASM(func_801F9134);
 
 INCLUDE_ASM(func_801F936C);
 
-INCLUDE_ASM(func_801F9678);
+MATCH void func_801F9678(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+            func_801BE1B0(26);
+            func_801C601C(1);
+            g_SceneState.step_05 = 1;
+            break;
+        case 1:
+            if (g_ScriptVars[0] == 0x15) {
+                func_801BE1B0(5);
+                g_SceneState.step_05 = 2;
+            }
+            break;
+        case 2:
+            if (g_ScriptVars[0] == 0x1F) {
+                func_801BFE34(TO_COORD(5), TO_COORD(55), 9);
+                Battle_StartScripted(9);
+                g_SceneState.step_05 = 3;
+            }
+            break;
+        case 3:
+            if (g_ScriptVars[0] == 0x20) {
+                func_801BE1B0(21);
+                g_SceneState.step_05 = 4;
+            }
+            break;
+        case 4:
+            if (g_ScriptVars[0] == 0x25) {
+                SYS_SetFlag(g_SceneFlags, 0x11);
+                g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
+                Game_ClearScriptActive();
+                Scene_ClearScriptState(&g_SceneState.step_05);
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F9800);
 

@@ -76,16 +76,20 @@ typedef struct DamageSpread {
 
 /* One 0xC-byte row of the event slot table at g_BattleEventSlots; D_801EB4DC points at the running row. */
 typedef struct BattleEventSlot {
-    u8  unk_00;
-    u8  unk_01;
+    u8  active;     /* 0x00 set while the event runs */
+    u8  event_type; /* 0x01 indexes g_BattleEvents.events and its flag bit */
     u8  pad_02;
-    u8  unk_03;
-    u8  pad_04[4];
-    u16 unk_08;
+    u8  group;   /* 0x03 event pass: group 0 before group 1 */
+    u8* payload; /* 0x04 the event's data pointer */
+    u16 timer;   /* 0x08 counts down; 0xFF means no countdown */
     u8  pad_0A[2];
 } BattleEventSlot;
 
 ASSERT_SIZE(BattleEventSlot, 0xC);
+ASSERT_OFFSET(BattleEventSlot, event_type, 0x01);
+ASSERT_OFFSET(BattleEventSlot, group, 0x03);
+ASSERT_OFFSET(BattleEventSlot, payload, 0x04);
+ASSERT_OFFSET(BattleEventSlot, timer, 0x08);
 
 /* One of the two 4-byte drop rows at EnemyBattler+0x98 (Battle_RollEnemyDrops). */
 typedef struct BattleSpritePrimitive {
@@ -356,7 +360,7 @@ extern BattlePanel0States        D_801D0FA0;
 extern BattlePanel1States        D_801D0FAC;
 extern BattlePanel2States        D_801D0FB8;
 extern BattlePanel3States        D_801D0FC4;
-/* The panel's four state handlers; func_801E960C copies them to the stack
+/* The panel's four state handlers; Battle_UpdateMenuPanel copies them to the stack
  * before the indexed call. */
 extern Callback                  D_801D0FD0[4];
 extern BattlePanel5States        D_801D0FE0;
@@ -454,7 +458,7 @@ extern Callback         D_801EB294[];
 extern Callback         D_801EB298[];
 extern u8               D_801EB35C[];
 /* Party formation weights: one byte per slot in the formation, two slots per
- * formation in the first table and three in the second (func_801E2E30). */
+ * formation in the first table and three in the second (Battle_PickFormationTarget). */
 /* D_801EB394 */
 extern u8               s_BattlePartialPartyTargetWeights[3][2];
 /* D_801EB39C */
@@ -611,11 +615,13 @@ extern void        func_801D1D10(void);
 extern void        func_801D1E8C(void);
 extern void        func_801D22AC(void);
 extern void        func_801D22E8(void);
-extern void        func_801D238C(void);
+/* func_801D238C */
+extern void        Battle_DrawEntrances(void);
 extern void        func_801D2480(void);
 extern void        func_801D24D4(void);
 extern void        func_801D251C(void);
-extern void        func_801D25A0(void);
+/* func_801D25A0 */
+extern void        Battle_ArmCommands(void);
 /* func_801D2740 */
 extern void        Battle_UpdateTurnSetup(void);
 extern void        func_801D277C(void);
@@ -633,7 +639,8 @@ extern void        func_801D31C0(void);
 extern void        func_801D31FC(void);
 extern void        func_801D3280(void);
 extern void        func_801D32C8(void);
-extern void        func_801D3304(void);
+/* func_801D3304 */
+extern void        Battle_SelectAbility(void);
 extern void        func_801D3624(void);
 /* func_801D3844 */
 u8                 Battle_PickTarget(void);
@@ -657,7 +664,8 @@ void               func_801D4850(void);
 extern void        Battle_UpdateRoundEnd(void);
 extern void        func_801D4AFC(void);
 extern void        func_801D4B38(void);
-void               func_801D4D44(void);
+/* func_801D4D44 */
+void               Battle_TickCountdowns(void);
 extern void        func_801D5008(void);
 extern void        func_801D5024(void);
 u8                 func_801D54F8(void);
@@ -666,9 +674,11 @@ u8                 func_801D57AC(void);
 u8                 func_801D590C(void);
 u8                 func_801D5A60(void);
 u8                 func_801D5BC0(void);
-u8                 func_801D5DCC(void);
+/* func_801D5DCC */
+u8                 Battle_ApplyTurnDamage(void);
 u8                 func_801D64C4(u8 battler_index);
-extern void        func_801D656C(void);
+/* func_801D656C */
+extern void        Battle_WaitVoiceSlots(void);
 /* func_801D6774 */
 extern void        Battle_UpdateResult(void);
 extern void        func_801D67B0(void);
@@ -694,7 +704,8 @@ extern void        Battle_ReloadMusicBank(void);
 extern void        Battle_WriteBackParty(void);
 extern void        func_801D74D4(void);
 void               func_801D750C(s32 x, s32 y);
-void               func_801D7A40(s16 x, s16 y);
+/* func_801D7A40 */
+void               Battle_DrawPanelRows(s16 x, s16 y);
 void               func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 shade);
 void               func_801D7EB0(s32 x, s32 y);
 void               func_801D8450(u32 panel_index);
@@ -759,7 +770,7 @@ u8                 func_801DDE7C(u32 counter_index, u32 packed_value);
 void               func_801DE1D4(void);
 /* func_801DE43C */
 void               Battle_UpdateEvents(void);
-void               func_801DE60C(u32 slot, u8 action_kind, u8 arg2, u8 arg3, u8 arg4, u8* payload);
+void               func_801DE60C(u32 slot, u8 event_type, u8 event_value, u8 group, u8 timer, u8* payload);
 void               func_801DE690(void);
 extern void        func_801DE698(void);
 extern void        func_801DE754(void);
@@ -855,7 +866,8 @@ u8                 Battle_PickLowestHpTarget(void);
 /* bytes, caller passes a byte index, no sign extension */
 u8                 func_801E2D4C(u8 slot_offset);
 u8                 func_801E2D90(u8 slot_offset);
-u8                 func_801E2E30(void);
+/* func_801E2E30 */
+u8                 Battle_PickFormationTarget(void);
 /* bytes, caller passes a byte index, no sign extension */
 u8                 func_801E30B8(u8 slot_offset);
 void               func_801E31C8(void);
@@ -960,7 +972,8 @@ extern void        func_801E7778(void);
 void               func_801E7818(void);
 extern void        func_801E7888(void);
 extern void        func_801E78F0(void);
-extern void        func_801E7948(void);
+/* func_801E7948 */
+extern void        Battle_PickStreamSlot(void);
 u8                 func_801E7B34(void);
 void               func_801E7BA0(void);
 extern void        func_801E8558(void);
@@ -974,21 +987,26 @@ extern void        func_801E90FC(void);
 void               func_801E915C(void);
 void               func_801E91CC(void);
 extern void        func_801E91FC(void);
-extern void        func_801E927C(void);
+/* func_801E927C */
+extern void        Battle_DrawMenuRows(void);
 extern void        func_801E9390(void);
 extern void        func_801E943C(void);
 void               func_801E949C(void);
 extern void        func_801E94D0(void);
 extern void        func_801E9530(void);
 extern void        func_801E9538(void);
-extern void        func_801E960C(void);
+/* func_801E960C */
+extern void        Battle_UpdateMenuPanel(void);
 extern void        func_801E97A8(void);
 extern void        func_801E9910(void);
 extern void        func_801E99AC(void);
-extern void        func_801E9B18(void);
-extern void        func_801E9CA8(void);
+/* func_801E9B18 */
+extern void        Battle_DispatchPanel(void);
+/* func_801E9CA8 */
+extern void        Battle_SetPanelGauges(void);
 extern void        func_801E9F18(void);
-extern void        func_801E9FDC(void);
+/* func_801E9FDC */
+extern void        Battle_MovePanel(void);
 void               func_801EA174(void);
 void               func_801EA1A4(void);
 void               func_801EA1E0(s32 panel_arg0, s32 panel_arg1, s32 panel_arg2, s32 panel_arg3, s32 panel_arg4, s32 panel_arg5, s32 panel_arg6, u8* selector);

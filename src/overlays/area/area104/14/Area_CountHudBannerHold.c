@@ -21,5 +21,5 @@ MATCH void Area_CountHudBannerHold(void) {
 bump:
     g_Task->unk_03++;
 done:
-    Area_DrawHudBanner(0x5C, g_Task->screen_y);
+    Area_DrawHudBanner(92, g_Task->screen_y);
 }
