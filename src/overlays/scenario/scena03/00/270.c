@@ -478,7 +478,7 @@ MATCH s32 func_801FC6C4(void) {
 }
 
 MATCH s8 func_801FC704(s32 entry_x, s32 entry_y) {
-    /* kept: the volatile id read masks the value; retail compares it plainly. */
+    /* kept: the LOHU halfword compare matches retail; the plain u16 lvalue adds four bytes. */
     switch (LOHU(g_GameAreaId)) {
         case AREA_ID_WYNDIA_LOWER:
             return func_801FC944(entry_x, entry_y);
