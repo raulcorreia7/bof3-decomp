@@ -33,7 +33,7 @@ MATCH void func_801F2EA0(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 SYS_ClearFlag(g_SceneEventFlags, 0x77);
                 Game_ClearScriptActive();
-                Game_RequestAreaChange(AREA_ID_KOMBINAT_WORLD_MAP, 0x160000, 0x150000, FACING_RIGHT);
+                Game_RequestAreaChange(AREA_ID_KOMBINAT_WORLD_MAP, TO_COORD(0x16), TO_COORD(0x15), FACING_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 g_SceneEventMode = SCENE_EVENT_NONE;
                 g_SceneEventStep = 0;
