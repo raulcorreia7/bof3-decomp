@@ -27,8 +27,8 @@ MATCH void func_801EEC84(void) {
         g_Task->param.unk_0B += 1;
     }
     i   = 0;
-    dst = MEM_PTR(u16, 0x8003AC00u);
-    src = MEM_PTR(u16, 0x80036C00u);
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
     do {
         *dst++ = *src++;
         i++;
