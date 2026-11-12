@@ -12,8 +12,7 @@ extern Magic010SharedSteps D_801EEC04;
  * request hand-off that follows. */
 u8 func_801EF118(void);
 
-/* One quad of the effect: two world points, a color at each point and a shared
- * speed, drawn translucent until the timer runs out. */
+/* One quad of the effect: two world points, a color and a shared speed. */
 typedef struct Magic116Quad {
     /* 0x00 */ u8       state;
     /* 0x01 */ u8       unk_01;
