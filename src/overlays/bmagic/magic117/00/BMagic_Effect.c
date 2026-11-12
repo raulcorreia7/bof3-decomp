@@ -30,7 +30,14 @@ MATCH void func_801EF000(void) {
 
 #include "overlays/bmagic/Effect_StartPaletteFade.h"
 
-INCLUDE_ASM(func_801EF0F8);
+MATCH void func_801EF0F8(void) {
+    g_PaletteFades[g_Task->param.unk_0B].offset.red--;
+    g_PaletteFades[g_Task->param.unk_0B].offset.green--;
+    g_PaletteFades[g_Task->param.unk_0B].offset.blue--;
+    if (++g_Task->unk_09 == 0x10) {
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EF20C(void) {
     g_PaletteFades[g_Task->param.unk_0B].offset.red++;
