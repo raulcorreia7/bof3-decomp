@@ -15,7 +15,21 @@ INCLUDE_ASM(func_801EEC94);
 
 #include "overlays/bmagic/Effect_Pause.h"
 
-INCLUDE_ASM(func_801EF080);
+/* Darkens the palette fade row the effect timer indexes and, when its red reaches zero, releases the selected
+ * battler's fades and advances the mode. */
+MATCH void func_801EF080(void) {
+    /* FAKE: retail frame reserves 0x10 bytes no statement uses. */
+    FAKE_STACK_PADS(u8, 0x10);
+
+    g_PaletteFades[g_Task->timer].offset.red -= 1;
+    g_PaletteFades[g_Task->timer].offset.green -= 1;
+    g_PaletteFades[g_Task->timer].offset.blue -= 1;
+    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        func_800AF814(g_Battle.target_selector);
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
