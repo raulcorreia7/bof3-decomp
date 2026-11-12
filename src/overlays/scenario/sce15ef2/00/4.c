@@ -72,12 +72,12 @@ MATCH void func_801D0E30(void) {
     timer = g_Task->timer;
     if (timer == 0) {
         Scene_ClaimScanBar();
-        g_Task->timer = RANDOM_MASK(0xF) + 0x18;
+        g_Task->timer = RANDOM_MASK(0xF) + 24;
     } else {
         g_Task->timer = timer - 1;
     }
-    Scene_UpdateScanBars(0xF0);
-    if (g_ScriptVars[0] == 0xE) {
+    Scene_UpdateScanBars(240);
+    if (g_ScriptVars[0] == 14) {
         g_Task->header.mode += 1;
     }
 }
