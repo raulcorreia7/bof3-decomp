@@ -185,7 +185,16 @@ MATCH void func_801F763C(void) {
     g_Task->header.mode = 1;
 }
 
-INCLUDE_ASM(func_801F7958);
+MATCH void func_801F7958(void) {
+    if (g_Task->timer != 0) {
+        g_Actors[g_Task->unk_03].pos.y.fixed += 0x800;
+        g_Actors[g_Task->unk_04].pos.y.fixed -= 0x800;
+        g_Task->timer -= 1;
+    } else {
+        g_Task->timer       = 15;
+        g_Task->header.mode = 2;
+    }
+}
 
 INCLUDE_ASM(func_801F7A1C);
 
