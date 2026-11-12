@@ -12,7 +12,7 @@ src = "src"
 asm = "asm"
 # The build directory, from --build-dir, holds the objects and the project.
 report = "build/report.json"
-library_units = "config/sdk/library-units.csv"
+library_units = "config/sdk/library-units.jsonl"
 assembler = "bin/internal/binutils/as"
 objcopy = "bin/internal/binutils/objcopy"
 nm = "bin/internal/binutils/nm"

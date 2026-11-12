@@ -3550,6 +3550,9 @@ g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted act
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world00/area030/04"]
+Fishing_ShopRun = { addr = 0x800F500C, type = "func", source = "Runs the shop's current state." }
+Fishing_ShopDrawItemIcon = { addr = 0x800F7094, type = "func", source = "Draws a trade item's icon." }
+s_ShopMode = { addr = 0x800F724C, source = "Index of the shop state." }
 g_FishingLure = { addr = 0x80145026, source = "accessory id of the equipped lure; its row is the 0x14-byte entry of the lure table that g_FishingLureRow points at" }
 g_FishingLureQty = { addr = 0x80145027, source = "number of equipped lures held" }
 g_FishingRod = { addr = 0x80145028, source = "accessory id of the equipped rod; its row is the 0x0A-byte entry of the rod table that g_FishingRodRow points at" }
@@ -3643,6 +3646,34 @@ g_FishingLureRow = { addr = 0x801E3210, source = "the equipped lure's row of the
 g_FishingNewRecord = { addr = 0x801E3214, source = "set by Fishing_CatchRecord when a catch is longer than the species' g_FishingBestCatch length, cleared when the catch page is confirmed" }
 
 ["emi/world00/area030/05"]
+Fishing_ShopRun = { addr = 0x800F500C, type = "func", source = "Runs the shop's current state." }
+Fishing_ShopOpen = { addr = 0x800F5048, type = "func", source = "Runs the shop's open steps and draws the window." }
+Fishing_ShopInit = { addr = 0x800F50B4, type = "func", source = "Resets the trade cursor and counts the stock." }
+Fishing_ShopWaitOpen = { addr = 0x800F510C, type = "func", source = "Waits for the window effect before the trade list opens." }
+Fishing_ShopChooseTrade = { addr = 0x800F5138, type = "func", source = "Runs the item and quantity selection and draws the trade list." }
+Fishing_ShopChooseItem = { addr = 0x800F51BC, type = "func", source = "Moves the trade cursor and starts the chosen trade." }
+Fishing_ShopChooseQuantity = { addr = 0x800F550C, type = "func", source = "Picks the trade quantity and confirms or cancels it." }
+Fishing_ShopConfirm = { addr = 0x800F5828, type = "func", source = "Confirms one trade and hands over the items." }
+Fishing_ShopTooGreedy = { addr = 0x800F5AD8, type = "func", source = "Shows the too-greedy message and returns to the list." }
+Fishing_ShopConfirmAll = { addr = 0x800F5BA4, type = "func", source = "Runs the confirm-all steps." }
+Fishing_ShopConfirmAllInput = { addr = 0x800F5BE0, type = "func", source = "Asks whether to confirm every trade." }
+Fishing_ShopExit = { addr = 0x800F5D98, type = "func", source = "Leaves the shop and returns to the fishing program." }
+Fishing_ShopDrawBackdrop = { addr = 0x800F5E44, type = "func", source = "Draws the shop backdrop." }
+Fishing_ShopDrawTradeList = { addr = 0x800F606C, type = "func", source = "Draws the shop's trade rows." }
+Fishing_ShopDrawListWindow = { addr = 0x800F63CC, type = "func", source = "Draws the shop's list window." }
+Fishing_ShopTradeBlocked = { addr = 0x800F65A8, type = "func", source = "Reports whether a party member lacks the trade's items." }
+Fishing_ShopItemCount = { addr = 0x800F66D4, type = "func", source = "Counts the shop's stock rows." }
+Fishing_ShopDrawNeeded = { addr = 0x800F6730, type = "func", source = "Draws the needed and owned columns of the selected trade." }
+Fishing_ShopDrawNeededWindow = { addr = 0x800F6A84, type = "func", source = "Draws one trade column window." }
+Fishing_ShopDrawQuantity = { addr = 0x800F6C5C, type = "func", source = "Draws the quantity prompt's item rows." }
+Fishing_ShopDrawQuantityWindow = { addr = 0x800F6EE0, type = "func", source = "Draws the quantity prompt window." }
+Fishing_ShopDrawItemIcon = { addr = 0x800F7094, type = "func", source = "Draws a trade item's icon." }
+Fishing_ShopTakeTradeItems = { addr = 0x800F7100, type = "func", source = "Takes the traded quantities from the party." }
+s_ShopStates = { addr = 0x800F71F0, source = "The shop's state handlers." }
+s_ShopItemIcons = { addr = 0x800F722C, source = "Sprite id per trade item icon." }
+s_ShopItemCount = { addr = 0x800F7240, source = "Number of stock rows the shop shows." }
+s_ShopDeclined = { addr = 0x800F7248, source = "The confirm prompt's answer: 0 yes, 1 no." }
+s_ShopMode = { addr = 0x800F724C, source = "Index of the shop state." }
 Fishing_DrawWindowFill = { addr = 0x801D799C, type = "func", source = "Fills a fishing window with its interior texture." }
 Fishing_DrawWindowFrame = { addr = 0x801D9534, type = "func", source = "Draws a fishing window frame and its inset shadow." }
 Fishing_SetDrawMode = { addr = 0x801E0C80, type = "func", source = "Sets the draw mode of one fishing graphic." }
