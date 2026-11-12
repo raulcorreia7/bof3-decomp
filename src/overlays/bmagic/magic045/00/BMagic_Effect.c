@@ -92,7 +92,21 @@ MATCH void func_801EF4A4(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EF608);
+MATCH void func_801EF608(void) {
+    s32 y;
+
+    Actor_StepAnimLoop();
+    g_Task->pos.x.fixed        = g_BattleEffects[g_Task->param.unk_0B].pos.x.fixed;
+    y                          = g_BattleEffects[g_Task->param.unk_0B].pos.y.fixed;
+    g_Task->pos.y.fixed        = y;
+    g_Task->pos.z.part.integer = Area_SampleHeight(g_Task->pos.x.fixed, y);
+    if (g_BattleEffects[g_Task->param.unk_0B].pos.z.part.integer < g_Task->pos.z.part.integer) {
+        g_Task->pos.z.fixed = g_BattleEffects[g_Task->param.unk_0B].pos.z.fixed;
+    }
+    if (g_BattleEffects[g_Task->param.unk_0B].header.step == 2) {
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF724);
 
