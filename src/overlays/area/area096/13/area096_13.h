@@ -7,9 +7,7 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-extern s8  D_80147CB9[];
-extern s32 D_80147CBC[];
-extern u8  D_801F3614[];
+extern u8 D_801F3614[];
 
 void func_801F2ECC(s32 arg0, s32 arg1);
 
