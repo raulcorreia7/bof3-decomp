@@ -213,7 +213,7 @@ MATCH void func_801D23AC(u8 shade) {
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, 0, 0);
-    setWH(tile, 320, 240);
+    setWH(tile, SCREEN_WIDTH, SCREEN_HEIGHT);
     setRGB0(tile, shade, 0, 0);
     GFX_AddPrim(1, sizeof(TILE));
 }
