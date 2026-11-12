@@ -40,7 +40,7 @@ extern Callback        D_801F0CC0[];
 extern char            D_801F0CD0[];
 extern u8              D_801F0CD4[]; /* item icon texture index, by Item_GetIcon result */
 extern void            func_801F09D4(void);
-void                   func_801F0A74(s16 x, s16 y, u8 clut, u8 category, u8 item, u8 amount, u8 unused);
+void                   func_801F0A74(s16 x, s16 y, u8 clut, u8 category, u8 item, u8 amount, u8 shade);
 /* func_801F09F4 */
 extern void         Battle_DrawVictoryZenny(void);
 
