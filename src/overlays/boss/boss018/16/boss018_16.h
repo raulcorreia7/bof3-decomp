@@ -97,6 +97,7 @@ void func_800C2AA4(void);
         case BOSS_EVENT_RESTART_END:                        \
             func_800C2AA4();                                \
             break;                                          \
-    }
+    }                                                       \
+    return 0
 
 #endif

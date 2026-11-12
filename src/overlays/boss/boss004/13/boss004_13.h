@@ -70,6 +70,7 @@ void func_800C1BBC(s32 mode);
                 g_Game.members[0].u.turn.action_flags.value &= ~COMBATANT_FLAG_DRAGON_FORM;            \
             }                                                                                          \
             break;                                                                                     \
-    }
+    }                                                                                                  \
+    return 0
 
 #endif
