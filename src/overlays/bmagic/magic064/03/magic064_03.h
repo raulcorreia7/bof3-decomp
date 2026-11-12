@@ -33,10 +33,7 @@ extern void*               D_801F28B4;
 extern u8                  D_801F13B4[];
 
 /* One sprite cell's texture coordinates: u and v of the cell in the effect's texture page. */
-typedef struct Magic064SpriteUv {
-    u16 u;
-    u16 v;
-} Magic064SpriteUv;
+typedef UPoint2D Magic064SpriteUv;
 
 extern Magic064SpriteUv D_801F13A4[];
 

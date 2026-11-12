@@ -399,7 +399,7 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
         prim->x0 = g_Task->unk_2E.half - 40;
         prim->y0 = g_Task->unk_30.half - 64;
     }
-    setUV0(prim, D_801F13A4[sprite & BYTE_MASK].u, D_801F13A4[sprite & BYTE_MASK].v);
+    setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);
     setWH(prim, 80, 72);
     SetSemiTrans(prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
