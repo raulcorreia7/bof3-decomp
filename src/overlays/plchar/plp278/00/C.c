@@ -68,7 +68,11 @@ MATCH void func_801CFA64(void) {
     SYS_DISPATCH_TASK(D_801CFCEC, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801CFAA8);
+#include "overlays/plchar/Char_ClaimHelperSlotStep.h"
+
+MATCH void func_801CFAA8(void) {
+    Char_ClaimHelperSlotStep();
+}
 
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 

@@ -5,4 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+void func_801EECFC(void);
+void Effect_PlayOnIdleTick(void);
+void func_801F02FC(void);
+
+extern Callback D_801F08C4[];
+
 #endif

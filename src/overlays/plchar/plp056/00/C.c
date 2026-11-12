@@ -119,7 +119,13 @@ MATCH void func_801D02F4(void) {
 
 INCLUDE_ASM(func_801D04C8);
 
-INCLUDE_ASM(func_801D066C);
+MATCH void func_801D066C(void) {
+    s16 dist;
+    s32 x;
+    s32 y;
+
+    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)
+}
 
 MATCH void func_801D07D0(void) {
     D_801D08BC[g_Task->unk_2C]();

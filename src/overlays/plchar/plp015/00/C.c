@@ -42,6 +42,10 @@ MATCH void func_801CF338(void) {
 
 #include "overlays/plchar/Char_ClaimHelperSlotStep.h"
 
+MATCH void func_801CF37C(void) {
+    Char_ClaimHelperSlotStep();
+}
+
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
 MATCH void func_801CF500(void) {

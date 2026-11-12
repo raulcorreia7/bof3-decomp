@@ -1,7 +1,7 @@
 #ifndef PLCHAR_CHAR_CLAIM_HELPER_SLOT_STEP_H
 #define PLCHAR_CHAR_CLAIM_HELPER_SLOT_STEP_H
 
-MATCH void func_801CF37C(void) {
+static inline void Char_ClaimHelperSlotStep(void) {
     u8 slot;
 
     if (!(g_Task->direction_08 & 1)) {
