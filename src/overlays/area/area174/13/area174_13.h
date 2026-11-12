@@ -38,9 +38,9 @@ void func_801F2E5C(void);
 
 typedef struct AreaShot {
     u8       pad_00[3];
-    u8       unk_03;
+    u8       active;
     u8       unk_04;
-    u8       unk_05;
+    u8       timer;
     u16      angle;
     s16      unk_08;
     s16      unk_0A;
@@ -55,7 +55,7 @@ ASSERT_OFFSET(AreaShot, angle, 0x06);
 ASSERT_OFFSET(AreaShot, pos, 0x0C);
 ASSERT_OFFSET(AreaShot, velocity, 0x1C);
 
-void func_801F2FEC(s32* pos, s16 width, s16 height, u16 angle, u8 color0, u8 color1);
+void func_801F2FEC(s32* pos, s16, s16, u16 angle, u8, u8);
 void func_801F3378(AreaShot* shot);
 
 #endif
