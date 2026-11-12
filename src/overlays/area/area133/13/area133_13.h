@@ -9,8 +9,14 @@
 /* The scenario state byte the copy writes. */
 
 /* The per-choice script entry bytes the confirm step copies into the work record. */
-extern u8 D_801F3DF0[];
-extern u8 D_801F3DF1[];
+typedef struct MessageChoiceEntry {
+    u8 unk_0; /* 0x0 */
+    u8 unk_1; /* 0x1 */
+} MessageChoiceEntry;
+
+ASSERT_SIZE(MessageChoiceEntry, 2);
+
+extern MessageChoiceEntry D_801F3DF0[];
 
 /* The return counter the confirm step restarts. */
 extern u8 D_8014865F;
