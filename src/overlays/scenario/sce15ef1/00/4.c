@@ -158,7 +158,7 @@ MATCH void func_801D1B10(AreaSpawnSlot* slot) {
         primitive->y0 = screen.vy;
         primitive->x1 = screen.vx + ((radius * rcos((u16)angle)) >> 0xC);
         primitive->y1 = screen.vy + ((radius * rsin((u16)angle)) >> 0xC);
-        angle += 0x80;
+        angle += 128;
         primitive->x2 = screen.vx + ((radius * rcos((u16)angle)) >> 0xC);
         primitive->y2 = screen.vy + ((radius * rsin((u16)angle)) >> 0xC);
         core          = slot->core_shade_16;
