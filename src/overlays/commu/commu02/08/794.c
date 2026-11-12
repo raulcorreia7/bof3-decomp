@@ -885,6 +885,7 @@ INCLUDE_ASM(func_801D875C);
 INCLUDE_ASM(func_801D88A4);
 
 /* Fills D_801DB080 with a name built from one random half of each of the two name tables in the loaded text bank. */
+/* func_801D8968 */
 MATCH void Fairy_GenerateName(void) {
     u8  count;
     s32 i;
