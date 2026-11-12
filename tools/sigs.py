@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare prototypes, definitions and calls across the C tree.
 
-    tools/sigs.py scan [--kind KIND] [PATH...]   one row per problem, counts on stderr
+    tools/sigs.py scan [--kind KIND] [--jsonl] [PATH...]   one row per problem, counts on stderr
 
 `scan` kinds: ret_mismatch, argc_mismatch, argtype_mismatch, proto_unspecified_args,
 param_name_differs, proto_placeholder_name, def_placeholder_name, implicit_decl, call_argc,
@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import json
 import sys
 from pathlib import Path
 
@@ -36,7 +37,21 @@ def scan(args: argparse.Namespace) -> int:
         if prefixes and not row.file.startswith(prefixes):
             continue
         counts[row.kind] += 1
-        print(row.kind, row.name, row.file, row.line, row.detail, sep="\t")
+        if args.jsonl:
+            print(
+                json.dumps(
+                    {
+                        "kind": row.kind,
+                        "name": row.name,
+                        "file": row.file,
+                        "line": row.line,
+                        "detail": row.detail,
+                    },
+                    ensure_ascii=False,
+                )
+            )
+        else:
+            print(row.kind, row.name, row.file, row.line, row.detail, sep="\t")
     for kind, count in sorted(counts.items()):
         print(f"{kind}\t{count}", file=sys.stderr)
     return 0
@@ -50,6 +65,7 @@ def main(argv: list[str] | None = None) -> int:
     verbs = parser.add_subparsers(dest="verb", required=True)
     one = verbs.add_parser("scan", help="list problems")
     one.add_argument("--kind", action="append", help="only this kind (repeatable)")
+    one.add_argument("--jsonl", action="store_true", help="one JSON object per line")
     one.add_argument("paths", nargs="*", help="only rows in files under these paths")
     one.set_defaults(run=scan)
     args = parser.parse_args(argv)

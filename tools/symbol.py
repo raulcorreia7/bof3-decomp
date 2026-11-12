@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import json
 import os
 import re
 import shutil
@@ -310,10 +311,10 @@ def params(args: argparse.Namespace) -> int:
     return 0
 
 
-def refs(args: argparse.Namespace) -> int:
-    """Print the address-named units with their reference counts, most used first."""
+def ref_rows(dirs: list[str]) -> list[dict]:
+    """Return the address-named units with their reference counts, most used first."""
     units = {}
-    for folder in args.dirs or ["src"]:
+    for folder in dirs:
         for path in sorted((ROOT / folder).rglob("func_????????.c")):
             units[path.stem] = path.relative_to(ROOT).as_posix()
     counts: collections.Counter[str] = collections.Counter()
@@ -324,8 +325,19 @@ def refs(args: argparse.Namespace) -> int:
                 counts.update(
                     word.findall(path.read_text(encoding="utf-8", errors="replace"))
                 )
-    for name in sorted(units, key=lambda n: (-counts[n], n)):
-        print(counts[name], name, units[name], sep="\t")
+    return [
+        {"count": counts[name], "name": name, "unit": units[name]}
+        for name in sorted(units, key=lambda n: (-counts[n], n))
+    ]
+
+
+def refs(args: argparse.Namespace) -> int:
+    """Print the address-named units with their reference counts, most used first."""
+    for row in ref_rows(args.dirs or ["src"]):
+        if args.jsonl:
+            print(json.dumps(row, ensure_ascii=False))
+        else:
+            print(row["count"], row["name"], row["unit"], sep="\t")
     return 0
 
 
@@ -372,6 +384,7 @@ def main(argv: list[str] | None = None) -> int:
     three.set_defaults(run=params)
     four = verbs.add_parser("refs", help="rank address-named units by references")
     four.add_argument("dirs", nargs="*")
+    four.add_argument("--jsonl", action="store_true", help="one JSON object per line")
     four.set_defaults(run=refs)
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
