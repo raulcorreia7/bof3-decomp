@@ -46,11 +46,16 @@ extern Callback D_801FE938[];
 extern Callback D_801FE964[];
 
 extern Callback  D_801FE970[];
+extern u8        D_801FE9A0[];
 /* D_801FE9C0 */
 extern SceneFunc g_SceneActorDispatch[];
 extern u16       D_801FE9EC[];
+extern s32       D_801FEA74;
+extern s32       D_801FEA78;
 
 void func_801FE800(void);
+void func_801A65A0(u8* script);
+void Actor_BeginScript(s32 raw_selector, s32 raw_code);
 
 void func_801F8964(s32 arg0);
 void func_801F8D98(void* table);
