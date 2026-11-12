@@ -255,14 +255,14 @@ MATCH void Party_JoinMomo(void) {
 }
 
 MATCH void func_801FE438(void) {
-    u8 ids[3];
+    u8 ids[PARTY_SLOT_COUNT];
     u8 slot;
 
-    for (slot = 0; slot < 3; slot++) {
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         ids[slot] = D_80144908[slot];
     }
     EMI_LoadPartyArchives(ids[0], ids[1], ids[2], 0);
-    for (slot = 0; slot < 3; slot++) {
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         if (ids[slot] != CHAR_ID_RYU_ADULT) {
             Party_JoinMember(ids[slot]);
         }
