@@ -223,10 +223,8 @@ MATCH void func_801F0104(void) {
     /* FAKE: retail keeps each staged coordinate access in order. */
     FAKE_ORDER_FENCE();
     line->y0 = D_1F80000E;
-    /* FAKE: retail keeps each staged coordinate access in order. */
     FAKE_ORDER_FENCE();
     line->x1 = D_1F80000C + 4;
-    /* FAKE: retail keeps each staged coordinate access in order. */
     FAKE_ORDER_FENCE();
     line->y1 = D_1F80000E;
     line->r0 = *shade;
@@ -237,13 +235,10 @@ MATCH void func_801F0104(void) {
     SetLineF2(line);
     SetSemiTrans(line, 1);
     line->x0 = D_1F80000C;
-    /* FAKE: retail keeps each staged coordinate access in order. */
     FAKE_ORDER_FENCE();
     line->y0 = D_1F80000E + 4;
-    /* FAKE: retail keeps each staged coordinate access in order. */
     FAKE_ORDER_FENCE();
     line->x1 = D_1F80000C;
-    /* FAKE: retail keeps each staged coordinate access in order. */
     FAKE_ORDER_FENCE();
     line->y1 = D_1F80000E - 4;
     line->r0 = *shade;
