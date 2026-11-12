@@ -23,6 +23,6 @@ MATCH void func_801F2C48(void) {
 
     func_801F3834();
 
-    g_Task->timer = 16;
+    g_Task->timer = AREA_RING_STEP_FRAMES;
     g_Task->header.mode += 1;
 }
