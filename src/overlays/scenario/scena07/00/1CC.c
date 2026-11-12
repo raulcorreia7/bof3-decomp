@@ -86,7 +86,20 @@ MATCH void func_801F7050(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801F70F8);
+MATCH void func_801F70F8(void) {
+    func_801F88B8(SCENA07_PANEL_ROWS);
+    func_801F8BE8(SCENA07_PANEL_ROWS);
+    g_Task->pos.x.fixed -= TO_COORD(1);
+    g_Task->pos.y.fixed += 0;
+    g_Task->pos.z.fixed += g_Task->vz;
+    if (g_Task->vz != 0) {
+        g_Task->vz += TO_COORD(128);
+    }
+    if (g_Task->pos.x.fixed == g_Task->vx && g_Task->pos.y.fixed == g_Task->vy) {
+        g_Task->timer = 47;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F71C0(void) {
     func_801F88B8(SCENA07_PANEL_ROWS);
