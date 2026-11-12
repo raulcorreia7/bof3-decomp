@@ -2,24 +2,24 @@
 #include "menu/save_data.h"
 
 MATCH void func_801F4378(void) {
-    u32 value;
-    u16 rest;
-    u16 minutes;
+    u32 timer;
+    u16 thirtieths;
     u16 seconds;
+    u16 hundredths;
 
     switch (g_SceneEventStep) {
         case 0: {
             u8* selection = &g_SceneEventSelection;
 
             if (*selection != 0) {
-                value   = g_SaveData.scene_event_timer;
-                minutes = value / 30;
-                rest    = value % 30;
-                seconds = rest * 10 / 3;
+                timer      = g_SaveData.scene_event_timer;
+                seconds    = timer / GAME_CLOCK_THIRTIETHS_PER_SECOND;
+                thirtieths = timer % GAME_CLOCK_THIRTIETHS_PER_SECOND;
+                hundredths = thirtieths * 10 / 3;
                 func_801F4B0C(124, 46, 72, 17, 0);
-                TEXT_Format(g_UiFormatBuffer, D_801F2C04, minutes, seconds);
+                TEXT_Format(g_UiFormatBuffer, D_801F2C04, seconds, hundredths);
                 g_UiFormatBuffer[2] = 0x8F;
-                UI_DrawText(140, 48, (minutes < 10) * 2, 5, g_UiFormatBuffer);
+                UI_DrawText(140, 48, (seconds < 10) * 2, 5, g_UiFormatBuffer);
                 (*selection)--;
                 break;
             }
@@ -90,14 +90,14 @@ MATCH void func_801F4378(void) {
             break;
 
         case 10:
-            value   = g_SaveData.scene_event_timer;
-            minutes = value / 30;
-            rest    = value % 30;
-            seconds = rest * 10 / 3;
+            timer      = g_SaveData.scene_event_timer;
+            seconds    = timer / GAME_CLOCK_THIRTIETHS_PER_SECOND;
+            thirtieths = timer % GAME_CLOCK_THIRTIETHS_PER_SECOND;
+            hundredths = thirtieths * 10 / 3;
             func_801F4B0C(124, 46, 72, 17, 0);
-            TEXT_Format(g_UiFormatBuffer, D_801F2C04, minutes, seconds + (rand() & 3));
+            TEXT_Format(g_UiFormatBuffer, D_801F2C04, seconds, hundredths + (rand() & 3));
             g_UiFormatBuffer[2] = 0x8F;
-            UI_DrawText(140, 48, (minutes < 10) ? ((g_SaveData.scene_event_timer >> 1) & 2) : 0, 5, g_UiFormatBuffer);
+            UI_DrawText(140, 48, (seconds < 10) ? ((g_SaveData.scene_event_timer >> 1) & 2) : 0, 5, g_UiFormatBuffer);
             if (g_SaveData.scene_event_timer != 0) {
                 g_SaveData.scene_event_timer--;
                 break;
