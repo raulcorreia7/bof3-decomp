@@ -39,8 +39,8 @@ MATCH void func_801D6B28(s8 panel_kind) {
     }
 
     if ((panel_kind & BYTE_MASK) == 0) {
-        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 179, 0, 1u);
+        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 0, 1u);
     } else {
-        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 179, 1, 1u);
+        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 1, 1u);
     }
 }
