@@ -66,7 +66,32 @@ MATCH void func_801EF488(void) {
 /* func_801EF668 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EF6AC);
+MATCH void func_801EF6AC(void) {
+    u16* dst;
+    u16* src;
+    u8   i;
+
+    g_ScriptTable = 0x8003B800;
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 4), g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+        if ((g_FrameCount & 3) == 0) {
+            i   = 0;
+            dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+            src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+            do {
+                dst[0x21 + i] = src[g_Task->unk_04 + i] | 0x8000;
+                i++;
+            } while (i < 9);
+            g_GfxPalettePending = 1;
+            g_Task->unk_04 += 9;
+            if (g_Task->unk_04 >= 0x7B) {
+                g_Task->unk_04 = 0x21;
+            }
+        }
+    }
+    g_ScriptTable = AREA_SCRIPT_TABLE;
+}
 
 INCLUDE_ASM(func_801EF7FC);
 
