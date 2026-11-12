@@ -12,7 +12,7 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
     count = 0;
     do {
-        if (D_801F12BC[(u8)count << 5] & 1) {
+        if (D_801F12BC[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801F12D8, (u8)count << 5);
             D_801F22BC            = D_801F12BC + ((u8)count << 5);
@@ -21,7 +21,7 @@ MATCH void func_801EEC04(void) {
             g_BattleEffectBattler = saved;
         }
         count += 1;
-    } while ((u8)count < 0x80);
+    } while ((u8)count < 128);
 }
 
 INCLUDE_ASM(func_801EECE4);
@@ -213,7 +213,7 @@ MATCH void func_801F037C(void) {
     u8  scratch[16]; /* FAKE: unreferenced local pads the frame to 0x28. */
 
     count = g_Task->unk_09;
-    if (count < 0x10) {
+    if (count < 16) {
         g_Task->unk_09 = count + 4;
     }
 
@@ -258,9 +258,46 @@ INCLUDE_ASM(func_801F09E0);
 
 INCLUDE_ASM(func_801F0B34);
 
-INCLUDE_ASM(func_801F0C7C);
+MATCH void func_801F0C7C(void) {
+    s16* angle_cell;
+    s32  angle;
 
-INCLUDE_ASM(func_801F0DA4);
+    if (g_FrameCount & 0x1) {
+        D_801F22BC->unk_07 += 1;
+    }
+    PARTY_MEMBER_WORD_08(D_801F22BC) += 0x80000;
+    angle              = D_801F22BC->unk_04 & 0xF;
+    angle_cell         = &D_1F800004;
+    *angle_cell        = angle << 8;
+    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
+    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
+    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
+    if ((s32)PARTY_MEMBER_WORD_08(D_801F22BC) > 0x7FFFFF) {
+        D_801F22BC->header.step += 1;
+    }
+}
+
+MATCH void func_801F0DA4(void) {
+    s16* angle_cell;
+    s32  angle;
+    u8   count;
+
+    if (g_FrameCount & 0x1) {
+        D_801F22BC->unk_07 += 1;
+    }
+    angle              = D_801F22BC->unk_04 & 0xF;
+    angle_cell         = &D_1F800004;
+    *angle_cell        = angle << 8;
+    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
+    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
+    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
+    count              = D_801F22BC->pad_06 - 1;
+    D_801F22BC->pad_06 = count;
+    if (count == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801F116C();
+    }
+}
 
 INCLUDE_ASM(func_801F0ED0);
 
@@ -268,7 +305,7 @@ MATCH u32 func_801F1110(void) {
     u8 index;
 
     for (index = 0u; index < 128; index++) {
-        if ((D_801F12BC[index << 5] & 1) == 0) {
+        if ((D_801F12BC[index << 5] & 0x1) == 0) {
             D_801F12BC[index << 5] |= 1;
             return index;
         }

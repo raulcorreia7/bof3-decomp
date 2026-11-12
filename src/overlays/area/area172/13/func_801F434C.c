@@ -8,7 +8,7 @@ MATCH void func_801F434C(void) {
     i    = 0;
     if (size != 0) {
         do {
-            if (g_Game.members[i].chr.character_id == 4) {
+            if (g_Game.members[i].chr.character_id == CHAR_ID_REI) {
                 g_ScriptState->cursor += 3;
                 return;
             }

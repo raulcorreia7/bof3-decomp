@@ -12,7 +12,7 @@ MATCH void func_801F2C48(void) {
     do {
         func_801F2F28((u8*)AREA_WORK);
         i += 1;
-    } while ((i & 0xFF) < 0x20U);
+    } while ((i & BYTE_MASK) < 0x20U);
     g_Task->timer = 0;
     g_Task->header.mode += 1;
 }

@@ -25,6 +25,30 @@ ASSERT_OFFSET(ScriptState, unk_07, 0x07);
 ASSERT_OFFSET(ScriptState, unk_08, 0x08);
 ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 
+/* The front-end step record behind g_MessageState: func_8015102C walks the timer,
+ * phase, cursor and flag fields; the other units read only its first byte. */
+typedef struct FrontendStep {
+    u8  state_00;     /* 0x00 */
+    u8  selection_01; /* 0x01 */
+    u8  pad_02[2];    /* 0x02 */
+    u16 flags_04;     /* 0x04 */
+    u8  count_06;     /* 0x06 */
+    u8  pad_07[5];    /* 0x07 */
+    s32 entry_0C;     /* 0x0C */
+    s32 cursor_10;    /* 0x10 */
+    u8  pad_14[4];    /* 0x14 */
+    u8  phase_18;     /* 0x18 */
+    u8  index_19;     /* 0x19 */
+    u8  pad_1A[0x0E]; /* 0x1A */
+    u16 scroll_28;    /* 0x28 */
+} FrontendStep;
+
+ASSERT_SIZE(FrontendStep, 0x2C);
+ASSERT_OFFSET(FrontendStep, state_00, 0x00);
+ASSERT_OFFSET(FrontendStep, count_06, 0x06);
+ASSERT_OFFSET(FrontendStep, cursor_10, 0x10);
+ASSERT_OFFSET(FrontendStep, scroll_28, 0x28);
+
 typedef struct AreaDrawState {
     u8 actor_count;
     u8 unk_01;
@@ -356,11 +380,15 @@ extern u8           D_8014842C;
 extern s8           g_SndVabIds[SND_SLOT_COUNT];
 extern s8           g_SndVoiceVolume[SND_VOICE_COUNT];
 extern u8           D_80148FE0[SND_VOICE_COUNT];
+/* D_801490A0 */
+extern FrontendStep g_MessageState;
 /* D_801490A2 */
 extern u8           g_MessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
 /* D_801490A4 */
 extern volatile u16 g_UiWindowChannel;
+/* D_801490A6 */
+extern u8           g_MessageStateTimer[];
 
 /* D_801490A8 */
 extern u16      g_MessageRequest;

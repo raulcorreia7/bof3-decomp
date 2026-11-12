@@ -123,7 +123,7 @@ MATCH void func_801F0100(void) {
 MATCH void func_801F020C(void) {
     u8 counter;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
     counter        = g_Task->unk_09 + 0x10;

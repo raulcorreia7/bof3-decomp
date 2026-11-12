@@ -35,7 +35,7 @@ MATCH void func_800AD2EC(void) {
     label                           = D_8014862A;
     record[1]                       = count + 1;
     ptr                             = TASK_BYTES;
-    *(u16*)(record + 0x30)          = (second / 3 * 16 & 0x1FE0) + (0x30 + label);
+    *(u16*)(record + 0x30)          = (second / 3 * 0x10 & 0x1FE0) + (0x30 + label);
     Actor_SelectScript(ptr[0x4B]);
     Area_AddActor();
 }

@@ -46,7 +46,26 @@ INCLUDE_ASM(func_801EF058);
 
 #include "overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h"
 
-INCLUDE_ASM(func_801EF3DC);
+MATCH void func_801EF3DC(void) {
+    PartyMember* battler;
+    u8           slot;
+    u8           timer;
+
+    if (g_Task->unk_09 >= 17 && (g_FrameCount & 0x3) == 0) {
+        slot                                   = BMagic_AllocEffect();
+        battler                                = g_BattleEffectBattler;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = RANDOM_MASK(0x1F);
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = 1;
+        g_BattleEffectBattler->param.unk_0B += 1;
+    }
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF4F0(void) {
     PartyMember* work;

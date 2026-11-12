@@ -11,5 +11,5 @@ MATCH void func_800C1D14(void) {
     }
     flag = &g_Battle.boss_flags;
     *flag |= 0x1;
-    enemy->hp = 0xFFFF;
+    enemy->hp = 65535;
 }
