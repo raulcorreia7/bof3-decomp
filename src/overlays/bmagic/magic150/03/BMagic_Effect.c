@@ -88,17 +88,14 @@ INCLUDE_ASM(func_801EF324);
 INCLUDE_ASM(func_801EF4E0);
 
 MATCH void func_801EF6B0(void) {
-    u8   i;
-    u16* work;
+    u8 i;
 
     D_801EFAF4 = D_801EFA9C.sparks;
     i          = 0;
     do {
-        work = (u16*)D_801EFAF4;
         i++;
-        *work = 0;
-        work += 4;
-        D_801EFAF4 = (Magic150Spark*)work;
+        D_801EFAF4->active = 0;
+        D_801EFAF4 += 1;
     } while (i < 8);
 }
 
