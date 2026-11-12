@@ -23,18 +23,18 @@ MATCH void func_801EEC70(void) {
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     /* Copies arena palette rows 26 and 2 into the work copy with STP set, then restores row 2's color 0. */
-    for (i = 0, dst = MEM_PTR(u16, 0x8003AC00u), src = MEM_PTR(u16, 0x80036C00u); i < 256; i++) {
+    for (i = 0, dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW), src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW); i < 256; i++) {
         *dst++ = *src++ | 0x8000;
     }
     {
         u16* row_dst;
         u16* row_src;
 
-        for (i = 0, row_dst = MEM_PTR(u16, 0x80037C00u), row_src = MEM_PTR(u16, 0x80033C00u); i < 16; i++) {
+        for (i = 0, row_dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW), row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00); i < 16; i++) {
             *row_dst++ = *row_src++ | 0x8000;
         }
     }
-    *MEM_PTR(u16, 0x80037C00u) = *MEM_PTR(u16, 0x80033C00u);
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     g_GfxPalettePending        = 1;
     SND_PlayCue(0x100);
     g_Task->param.unk_0B = 0;
