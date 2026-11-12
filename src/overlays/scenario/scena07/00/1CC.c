@@ -78,7 +78,7 @@ MATCH void func_801F7050(void) {
     for (i = 0; i < 16; i++) {
         actor->vz += 0x800000;
         actor->pos.x.fixed += TO_COORD(1);
-        actor->pos.y.fixed += 0;
+        actor->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
         actor->pos.z.fixed += actor->vz;
     }
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
@@ -90,7 +90,7 @@ MATCH void func_801F70F8(void) {
     func_801F88B8(SCENA07_PANEL_ROWS);
     func_801F8BE8(SCENA07_PANEL_ROWS);
     g_Task->pos.x.fixed -= TO_COORD(1);
-    g_Task->pos.y.fixed += 0;
+    g_Task->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
     g_Task->pos.z.fixed += g_Task->vz;
     if (g_Task->vz != 0) {
         g_Task->vz += TO_COORD(128);
