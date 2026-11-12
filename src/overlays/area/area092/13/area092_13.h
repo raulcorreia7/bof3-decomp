@@ -5,7 +5,9 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world02.h"
+#include "area/spad.h"
 
+extern u8  D_801F3A90[];
 extern u16 D_801F41B0[];
 extern u16 D_801F41BC[];
 extern u16 D_801F41C0[];
