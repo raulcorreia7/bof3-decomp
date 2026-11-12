@@ -24,12 +24,12 @@ MATCH void func_801F46AC(void) {
             }
             col++;
             hi = x >> 16;
-            x &= 0xFFFF;
+            x &= 65535;
             x |= (hi + 1) << 16;
         } while (col < 4);
         row++;
         hi = y >> 16;
-        y &= 0xFFFF;
+        y &= 65535;
         y |= (hi + 1) << 16;
     } while (row < 2);
     selection             = func_801F5C60(g_Task->pos.x.fixed, g_Task->pos.y.fixed);

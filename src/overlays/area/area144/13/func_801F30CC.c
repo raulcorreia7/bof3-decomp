@@ -25,6 +25,6 @@ MATCH void func_801F30CC(void) {
         row[-2] = 0;
         row[-1] = shade;
         row[0]  = 0;
-        row += 0x1C;
+        row += 28;
     }
 }

@@ -31,7 +31,7 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/func_801EF728.h"
 
-INCLUDE_ASM(func_801EF80C);
+#include "overlays/bmagic/Effect_DrawSparkleRays.h"
 
 INCLUDE_ASM(func_801EFA40);
 

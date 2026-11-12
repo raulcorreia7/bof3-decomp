@@ -142,7 +142,29 @@ MATCH void func_801F88A8(void) {
 
 INCLUDE_ASM(func_801F88B0);
 
-INCLUDE_ASM(func_801F894C);
+MATCH void func_801F894C(void) {
+    switch (g_SceneState.step_05) {
+        case 51:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                Game_ClearScriptActive();
+                g_SceneState.step_05  = 0;
+                g_SceneState.state_04 = 0;
+            }
+            break;
+
+        case 50:
+            Message_StartAreaMessage(6);
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_SceneState.step_05 = 51;
+            break;
+
+        case 60:
+            Message_StartAreaMessage(7);
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_SceneState.step_05 = 51;
+            break;
+    }
+}
 
 MATCH void func_801F89FC(void) {
 }

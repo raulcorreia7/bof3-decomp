@@ -54,7 +54,7 @@ MATCH void func_801EEE4C(void) {
 }
 
 MATCH void func_801EEF1C(void) {
-    func_800A9610(g_Battle.target_selector, 32);
+    Battle_ApplyDamageFlags(g_Battle.target_selector, 32);
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
     g_Task->header.mode++;

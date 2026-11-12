@@ -148,7 +148,7 @@ MATCH void func_801EF1FC(void) {
 MATCH void func_801EF268(void) {
     SND_QueueSelectionFx(258);
     D_801463D6 = g_Task->timer;
-    func_800A9820(g_BattleTargetSelector);
+    Battle_MarkDamaged(g_BattleTargetSelector);
     g_BattleState = g_Battle.state | BATTLE_STATE_EFFECT_PLAYING;
     func_801E5988();
 }
@@ -208,7 +208,7 @@ MATCH void func_801EF478(void) {
         SND_QueueSelectionFx(0x101);
         func_800AFC98(2, 0);
         func_801F0078();
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->unk_09 = 0xFF;
     }
     g_Task->pos.x.fixed += g_Task->unk_0C;
@@ -235,7 +235,7 @@ MATCH void func_801EF578(void) {
         SND_QueueSelectionFx(0x101);
         func_800AFC98(2, 0);
         func_801F0078();
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->unk_09 = 0xFF;
     }
     Actor_StepAnimOnce();

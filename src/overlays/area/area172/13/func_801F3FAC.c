@@ -14,8 +14,8 @@ MATCH void func_801F3FAC(void) {
     do {
         func_801F3BFC(spin);
         spin += 0x2C;
-        FIELD(u16, angle, 0) += 0x10;
+        FIELD(u16, angle, 0x0) += 0x10;
         i += 1;
         angle += 0x2C;
-    } while ((i & 0xFF) < 0x20U);
+    } while ((i & BYTE_MASK) < 0x20U);
 }

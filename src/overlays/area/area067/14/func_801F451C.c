@@ -1,7 +1,7 @@
 #include "area067_14.h"
 
 MATCH void func_801F451C(void) {
-    if (g_Game.members[0].chr.character_id == 6) {
+    if (g_Game.members[0].chr.character_id == CHAR_ID_PECO) {
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
         Game_SetScriptActive();
         g_ScriptVars[0] = 0;

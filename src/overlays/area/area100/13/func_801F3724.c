@@ -5,9 +5,9 @@ MATCH void func_801F3724(void) {
     s32        slot;
 
     g_AreaSceneMode = 1;
-    Area_SetCellPalette(0x4A, 0x2F);
-    slot = Actor_FindFreeSlot() & 0xFF;
-    if (slot != 0xFF) {
+    Area_SetCellPalette(74, 47);
+    slot = Actor_FindFreeSlot() & BYTE_MASK;
+    if (slot != GAME_NONE) {
         actor               = &g_ActorSlots[slot];
         actor->type         = 0xB7;
         actor->pos.x.fixed  = TO_COORD(70);

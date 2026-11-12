@@ -86,7 +86,7 @@ MATCH void func_801EF5FC(void) {
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
         if (!(counter & BYTE_MASK)) {
-            func_800A9820(g_Battle.target_selector);
+            Battle_MarkDamaged(g_Battle.target_selector);
             func_800AFC98(2, 4);
             g_Task->header.step += 1;
         }

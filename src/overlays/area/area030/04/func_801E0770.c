@@ -24,7 +24,7 @@ MATCH s32 func_801E0770(void) {
     if (0 != D_80144199) {
         return result;
     }
-    limit = 0x7FFF;
+    limit = 32767;
     if (3 != D_80145E92[0]) {
         return result;
     }

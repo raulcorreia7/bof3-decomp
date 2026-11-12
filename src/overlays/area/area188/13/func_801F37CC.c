@@ -6,7 +6,7 @@ MATCH void func_801F37CC(void) {
 
     count          = g_Task->unk_06;
     g_Task->unk_06 = count + 1;
-    if (!(count & 3)) {
+    if (!(count & 0x3)) {
         Area_ClaimSpawnSlot();
     }
     Area_UpdateSpawnSlots();
@@ -18,7 +18,7 @@ MATCH void func_801F37CC(void) {
         }
         mode          = g_Task->timer - 1;
         g_Task->timer = mode;
-        if (!(mode & 0xFF)) {
+        if (!(mode & BYTE_MASK)) {
             g_Task->unk_03 = 0x80;
             g_Task->header.mode += 1;
         }

@@ -254,7 +254,20 @@ MATCH void Party_JoinMomo(void) {
     Party_JoinMember(CHAR_ID_MOMO);
 }
 
-INCLUDE_ASM(func_801FE438);
+MATCH void func_801FE438(void) {
+    u8 ids[PARTY_SLOT_COUNT];
+    u8 slot;
+
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        ids[slot] = D_80144908[slot];
+    }
+    EMI_LoadPartyArchives(ids[0], ids[1], ids[2], 0);
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        if (ids[slot] != CHAR_ID_RYU_ADULT) {
+            Party_JoinMember(ids[slot]);
+        }
+    }
+}
 
 #include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
 
@@ -266,6 +279,19 @@ MATCH void func_801FE5B0(void) {
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 
-INCLUDE_ASM(func_801FE63C);
+MATCH void func_801FE63C(void) {
+    u8 ids[PARTY_SLOT_COUNT];
+    u8 slot;
+
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        ids[slot] = g_Game.members[slot].chr.character_id;
+    }
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        if (ids[slot] != CHAR_ID_RYU_ADULT) {
+            Party_RemoveMember(ids[slot]);
+        }
+    }
+    Party_LoadPalettes();
+}
 
 #include "overlays/scenario/Scene_StashPartyExceptRyuAdult.h"
