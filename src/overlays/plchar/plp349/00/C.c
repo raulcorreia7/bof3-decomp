@@ -1,4 +1,5 @@
 #include "plp349_00.h"
+#include "engine/game/00/game_00.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -44,7 +45,7 @@ MATCH void func_801CE698(void) {
     g_Task->unk_03       = 1;
 }
 
-INCLUDE_ASM(func_801CE7B8);
+#include "overlays/plchar/Char_RunPersonalAction.h"
 
 #include "overlays/plchar/Char_AdvancePaletteScript.h"
 

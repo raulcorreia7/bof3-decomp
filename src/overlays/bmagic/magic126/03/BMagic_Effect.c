@@ -151,7 +151,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
 MATCH void func_801EFAF4(void) {
     SYS_DISPATCH_BYTE(D_801F1278, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EFD5C();
     }
 }
@@ -200,7 +200,7 @@ INCLUDE_ASM(func_801EFD5C);
 MATCH void func_801F01C0(void) {
     SYS_DISPATCH_BYTE(D_801F1288, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F06AC();
     }
 }

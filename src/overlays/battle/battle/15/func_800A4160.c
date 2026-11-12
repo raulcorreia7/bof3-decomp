@@ -8,6 +8,6 @@ MATCH s32 func_800A4160(s32 selection_kind, s32 battler_index) {
         return 1;
     }
     func_800A39B4((s8)battler_index, kind);
-    func_800A9BD8(g_Battle.target);
+    Battle_RescaleStats(g_Battle.target);
     return 0;
 }
