@@ -6,6 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern SVECTOR D_1F800014[];
+extern s16     D_1F800004;
 
 extern Callback D_801F1268[];
 

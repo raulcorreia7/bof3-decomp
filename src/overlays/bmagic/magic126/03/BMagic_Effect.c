@@ -258,7 +258,24 @@ INCLUDE_ASM(func_801F09E0);
 
 INCLUDE_ASM(func_801F0B34);
 
-INCLUDE_ASM(func_801F0C7C);
+MATCH void func_801F0C7C(void) {
+    s16* angle_cell;
+    s32  angle;
+
+    if (g_FrameCount & 1) {
+        D_801F22BC->unk_07 += 1;
+    }
+    PARTY_MEMBER_WORD_08(D_801F22BC) += 0x80000;
+    angle              = D_801F22BC->unk_04 & 0xF;
+    angle_cell         = &D_1F800004;
+    *angle_cell        = angle << 8;
+    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
+    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
+    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
+    if ((s32)PARTY_MEMBER_WORD_08(D_801F22BC) > 0x7FFFFF) {
+        D_801F22BC->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0DA4);
 
