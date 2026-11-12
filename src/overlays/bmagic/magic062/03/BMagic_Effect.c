@@ -159,28 +159,7 @@ MATCH void func_801EFF68(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F00EC(void) {
-    func_800AF764();
-    func_801F0910((RANDOM_MASK(3)) | 0x20);
-    Effect_SetActorMatrix();
-    func_801F026C();
-    PopMatrix();
-    g_Task->unk_09 += g_Task->unk_0C;
-    g_Task->unk_10 += 4;
-    g_Task->param.unk_0B += 2;
-    D_1F800004[0]       = (g_Task->param.unk_0B & 0x1F) << 7;
-    D_1F800000_HALF     = g_Task->timer * g_Task->unk_10 + 0xB0;
-    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(D_1F800004[0]) * D_1F800000_HALF) >> 3);
-    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(D_1F800004[0]) * D_1F800000_HALF) >> 3);
-    if (++g_Task->timer == 0x10) {
-        g_BattleEffectBattler->param.unk_0B--;
-        func_801E5988();
-    }
-}
-#else
 INCLUDE_ASM(func_801F00EC);
-#endif
 
 INCLUDE_ASM(func_801F026C);
 
