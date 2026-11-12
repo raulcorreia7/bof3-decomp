@@ -23,14 +23,14 @@ MATCH void Fishing_DrawReelCursor(s16 panel_x, s16 panel_y, u8 panel_width, s8 u
     u_shift = u_offset;
     width   = panel_width;
 
-    func_801E0C80(0, layer);
-    sprite     = (SPRT*)func_801E0DCC(0x1C, layer, x, y);
+    Fishing_SetDrawMode(0, layer);
+    sprite     = (SPRT*)Fishing_DrawSprite(0x1C, layer, x, y);
     w          = width & BYTE_MASK;
     sprite->w  = w;
     sprite->u0 = sprite->u0 + u_shift;
 
     if (enabled != 0 && (g_FrameCount & 8) == 0) {
-        func_801E0C80(6, 2);
+        Fishing_SetDrawMode(6, 2);
         prim = (TILE*)g_GfxPrimCursor;
         SetTile(prim);
         SetSemiTrans(prim, 1);

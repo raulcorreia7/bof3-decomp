@@ -182,9 +182,6 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("old", help="the earlier revision")
     parser.add_argument("new", help="the later revision, or WORK for the working tree")
-    parser.add_argument(
-        "-n", "--limit", type=int, default=15, help="rows per list (15)"
-    )
     args = parser.parse_args(argv)
     (fa, ea), (fb, eb) = scan(args.old), scan(args.new)
     print(f"prototypes {len(fa)} -> {len(fb)}, externs {len(ea)} -> {len(eb)}")
@@ -214,7 +211,7 @@ def main(argv: list[str] | None = None) -> int:
         ("named extern gone", extern_gone),
     ):
         print(f"{title}: {len(rows)}")
-        for row in rows[: args.limit]:
+        for row in rows:
             print(f"  {row}")
     return int(bool(weaker or weaker_externs))
 

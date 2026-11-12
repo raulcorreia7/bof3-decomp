@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Fail when a symbol address that config/symbols.toml records at REF is gone at HEAD.
 
 Every function and data address found so far stays findable: a rename keeps its row's
@@ -11,7 +12,8 @@ Usage: python3 tools/check_addrs.py REF [HEAD]
 
 import subprocess
 import sys
-import tomllib
+
+from bof3.link.symbols import read_text
 
 SYMBOLS = "config/symbols.toml"
 
@@ -19,7 +21,7 @@ SYMBOLS = "config/symbols.toml"
 def addresses(rev):
     text = subprocess.check_output(["git", "show", f"{rev}:{SYMBOLS}"])
     found = {}
-    for target, rows in tomllib.loads(text.decode()).items():
+    for target, rows in read_text(text.decode()).items():
         for name, row in rows.items():
             if isinstance(row, dict) and "addr" in row:
                 found[(target, row["addr"])] = name
@@ -27,6 +29,9 @@ def addresses(rev):
 
 
 def main(argv):
+    if len(argv) == 2 and argv[1] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
     if len(argv) not in (2, 3):
         print(__doc__.strip(), file=sys.stderr)
         return 2

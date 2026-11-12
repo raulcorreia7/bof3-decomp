@@ -8,6 +8,6 @@ MATCH void Fishing_SelectGear(void) {
         g_FishingLureRow = (FishingTarget*)(D_801E2720 + g_FishingLure * sizeof(FishingTarget));
     }
     if (g_FishingRod != 0) {
-        g_FishingRodRow = (FishingCharRow*)(D_801E2748 + g_FishingRod * 10);
+        g_FishingRodRow = (FishingRod*)(D_801E2748 + g_FishingRod * sizeof(FishingRod));
     }
 }

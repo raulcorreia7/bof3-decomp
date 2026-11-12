@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 """Mark each member of a tools/chunks.py file as asm, shared or pasted.
 
-    tools/classify.py chunks.tsv classified.tsv
+    tools/classify.py chunks.jsonl classified.jsonl
 
 A member is shared when its body sits in an included header or is a call of a few lines at most,
 pasted when its own source holds the body. A group stays when two or more copies are asm or pasted,
-or one is pasted beside a shared one: the work left to fold into one body.
+or one is pasted beside a shared one: the work left to fold into one body. Both files are JSON
+Lines; the output adds the asm, pasted and shared counts to each kept group.
 """
 
 from __future__ import annotations
 
+import json
 import re
 import sys
+from collections.abc import Callable
 from functools import lru_cache
 from pathlib import Path
 
@@ -19,6 +22,7 @@ from bof3.source.index import load_index
 
 ROOT = Path(__file__).resolve().parent.parent
 SHARED_LINES = 3
+MEMBER = re.compile(r"(.+?):(\w+)\+0x[0-9A-F]+\[(\w+)\]")
 
 
 @lru_cache(None)
@@ -51,21 +55,55 @@ def kind(idx: dict, image: str, name: str, status: str) -> str:
     return "shared" if len(body) <= SHARED_LINES else "pasted"
 
 
+def classify_rows(
+    rows: list[dict], classify: Callable[[str, str, str], str]
+) -> list[dict]:
+    """Return the groups worth folding, with each member's kind counted."""
+    result = []
+    for row in rows:
+        kinds = []
+        for member in row["members"]:
+            m = MEMBER.match(member)
+            kinds.append(classify(*m.groups()) if m else "?")
+        asm, pasted, shared = (
+            kinds.count("asm"),
+            kinds.count("pasted"),
+            kinds.count("shared"),
+        )
+        if asm + pasted >= 2 or (pasted and shared):
+            result.append(
+                {
+                    "weight": row["weight"],
+                    "insns": row["insns"],
+                    "funcs": row["funcs"],
+                    "images": row["images"],
+                    "asm": asm,
+                    "pasted": pasted,
+                    "shared": shared,
+                    "members": row["members"],
+                }
+            )
+    return result
+
+
 def main() -> None:
+    if sys.argv[1:] in (["-h"], ["--help"]):
+        print(__doc__.strip())
+        return
     if len(sys.argv) != 3:
         sys.exit(__doc__)
     idx = {(f.image, f.name): f for f in load_index(ROOT, False)}
-    rows = [ln.split("\t") for ln in Path(sys.argv[1]).read_text().splitlines()][1:]
-    with open(sys.argv[2], "w") as out:
-        out.write("weight\tinsns\tfuncs\timages\tasm\tpasted\tshared\tmembers\n")
-        for r in rows:
-            ks = []
-            for m in r[5].split(" ; "):
-                mm = re.match(r"(.+?):(\w+)\+0x[0-9A-F]+\[(\w+)\]", m)
-                ks.append(kind(idx, *mm.groups()) if mm else "?")
-            a, p, s = ks.count("asm"), ks.count("pasted"), ks.count("shared")
-            if a + p >= 2 or (p and s):
-                out.write("\t".join([*r[:4], str(a), str(p), str(s), r[5]]) + "\n")
+    rows = [
+        json.loads(line)
+        for line in Path(sys.argv[1]).read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    kept = classify_rows(
+        rows, lambda image, name, status: kind(idx, image, name, status)
+    )
+    with open(sys.argv[2], "w", encoding="utf-8") as out:
+        for row in kept:
+            out.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
 if __name__ == "__main__":

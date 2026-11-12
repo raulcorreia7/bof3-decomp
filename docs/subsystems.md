@@ -1,6 +1,6 @@
 # Subsystems
 
-Which part of `src/` does which job, which records and headers it owns, and how much readability debt it holds. The path rules are in [conventions: files and headers](conventions.md#files-and-headers). The metrics are defined in [tools: quality](../tools/README.md#quality).
+Which part of `src/` does which job, which records and headers it owns, and how much readability debt it holds. The path rules are in [conventions: files and headers](layout.md#files-and-headers). The metrics are defined in [tools: quality](../tools/README.md#quality).
 
 ## Map
 

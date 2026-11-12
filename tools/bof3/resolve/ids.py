@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import glob
+import os
 import re
 import unicodedata
 from dataclasses import dataclass
+from pathlib import Path
 
 _EXE_NAMES = {
     "slus_004.22": "exe/slus_004_22",
@@ -130,6 +133,31 @@ def source_folder(target: str) -> str:
         if key in _SOURCE_ROOTS:
             return f"{_SOURCE_ROOTS[key]}/{archive}/{slot}"
     return f"overlays/{family}/{archive}/{slot}"
+
+
+def asm_dir(source: str | Path, root: str | Path) -> str | None:
+    """Return the `ASM_DIR` of a source under `src/`: its image folder, or its hand folder.
+
+    The image follows from the source folder: `src/engine/slus`, `src/logo`, and
+    `.../<archive>/<slot>/<file>` for the one `emi/<family>/<archive>/<slot>` under `config/`.
+    """
+    parts = os.path.relpath(os.path.abspath(source), root).split(os.sep)
+    if parts[0] != "src":
+        return None
+    if parts[1:3] == ["engine", "slus"]:
+        target = "exe/slus_004_22"
+    elif parts[1] == "logo":
+        target = "exe/logo"
+    elif len(parts) >= 5:
+        found = glob.glob(f"{root}/config/emi/*/{parts[-3]}/{parts[-2]}/splat.yaml")
+        if len(found) != 1:
+            return None
+        target = os.path.relpath(os.path.dirname(found[0]), f"{root}/config")
+    else:
+        return None
+    stem = os.path.splitext(parts[-1])[0]
+    hand = f"asm/{target}/hand"
+    return hand if os.path.isfile(f"{root}/{hand}/{stem}.s") else f"asm/{target}"
 
 
 def image_header(target: str) -> str:
