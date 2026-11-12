@@ -266,6 +266,19 @@ MATCH void func_801FE5B0(void) {
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 
-INCLUDE_ASM(func_801FE63C);
+MATCH void func_801FE63C(void) {
+    u8 ids[3];
+    u8 slot;
+
+    for (slot = 0; slot < 3; slot++) {
+        ids[slot] = g_Game.members[slot].chr.character_id;
+    }
+    for (slot = 0; slot < 3; slot++) {
+        if (ids[slot] != CHAR_ID_RYU_ADULT) {
+            Party_RemoveMember(ids[slot]);
+        }
+    }
+    Party_LoadPalettes();
+}
 
 #include "overlays/scenario/Scene_StashPartyExceptRyuAdult.h"
