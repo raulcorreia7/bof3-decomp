@@ -107,6 +107,7 @@ void func_801D4F88(s32 x, s32 y, s32 show_values);
 void func_801D5B2C(void);
 void func_801D8058(s32 arg0, s32 arg1);
 void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void Fairy_GenerateName(void);
 void func_801D90D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_801D94D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void func_801D97C8(s32 arg0, s32 arg1, s32 arg2);

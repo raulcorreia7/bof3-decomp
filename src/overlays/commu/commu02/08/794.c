@@ -1,4 +1,5 @@
 #include "commu02_08.h"
+#include "common/util.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -614,7 +615,7 @@ MATCH void func_801D640C(void) {
 MATCH void func_801D6448(void) {
     s32 i;
 
-    func_801D8968();
+    Fairy_GenerateName();
     for (i = 0; i < 6; i++) {
         g_TextVariables[0][i] = D_801DB080[i];
     }
@@ -764,7 +765,7 @@ MATCH void func_801D7474(void) {
 MATCH void func_801D74B0(void) {
     s32 i;
 
-    func_801D8968();
+    Fairy_GenerateName();
     for (i = 0; i < 6; i++) {
         g_TextVariables[0][i] = D_801DB080[i];
     }
@@ -883,7 +884,51 @@ INCLUDE_ASM(func_801D875C);
 
 INCLUDE_ASM(func_801D88A4);
 
-INCLUDE_ASM(func_801D8968);
+/* Fills D_801DB080 with a name built from one random half of each of the two name tables in the loaded text bank. */
+MATCH void Fairy_GenerateName(void) {
+    u8  count;
+    s32 i;
+    u8* src;
+    u8* dst;
+    u16 offset;
+
+    count = 0;
+    i     = 5;
+    dst   = &D_801DB080[5];
+    while (i >= 0) {
+        *dst = 0;
+        dst--;
+        i--;
+    }
+
+    offset = MEM_PTR(const u16, 0x800103E0u)[RANDOM_MASK(0x3F)];
+    src    = MEM_PTR(u8, 0x80010000u) + offset;
+    for (;;) {
+        u8 ch;
+
+        ch = *src;
+        if (ch == 0) {
+            break;
+        }
+        D_801DB080[count] = ch;
+        count++;
+        src++;
+    }
+
+    offset = MEM_PTR(const u16, 0x80010460u)[RANDOM_MASK(0x3F)];
+    src    = MEM_PTR(u8, 0x80010000u) + offset;
+    for (;;) {
+        u8 ch;
+
+        ch = *src;
+        if (ch == 0) {
+            break;
+        }
+        D_801DB080[count] = ch;
+        count++;
+        src++;
+    }
+}
 
 INCLUDE_ASM(Menu_DrawHeaderBar);
 
