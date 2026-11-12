@@ -111,7 +111,7 @@ MATCH void func_801EF388(void) {
     u8  i;
 
     if (g_Task->param.unk_0B == 1) {
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             g_Game.members[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
         if (g_BattleEffectBattler->facing < 2) {
