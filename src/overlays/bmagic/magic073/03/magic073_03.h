@@ -31,7 +31,6 @@ typedef struct Magic073Steps {
 
 extern Magic073Steps D_801EEC1C;
 void                 func_801F00C4(void);
-void                 Effect_DrawSparkleRays(u16 angle, u16 radius);
 void                 func_801EFE2C(u16 angle, u16 radius);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */

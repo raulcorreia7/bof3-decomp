@@ -26,7 +26,6 @@ extern u8 D_801F019C[];
 u32                          BMagic_AllocEffect(void);
 extern BMagicEffectWorkSteps D_801EEC1C;
 void                         func_801EFCD8(void);
-void                         Effect_DrawSparkleRays(u16 angle, u16 radius);
 void                         func_801EFA40(u16 angle, u16 radius);
 extern BMagicEffectFuncs     D_801EEC04;
 void                         func_801EF338(void);

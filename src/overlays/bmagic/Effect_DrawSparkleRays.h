@@ -1,6 +1,3 @@
-#ifndef BMAGIC_EFFECT_DRAW_SPARKLE_RAYS_H
-#define BMAGIC_EFFECT_DRAW_SPARKLE_RAYS_H
-
 /* Draws the rays of the current sparkle or effect as four LINE_G2 segments swept around its screen point. */
 /* Each image defines EFFECT_DRAW_WORK as the work record the rays come from. */
 
@@ -33,5 +30,3 @@ MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
         Area_AddCellPrim(EFFECT_DRAW_WORK->pos.x.fixed, EFFECT_DRAW_WORK->pos.y.fixed, 2, 32);
     }
 }
-
-#endif
