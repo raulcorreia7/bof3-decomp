@@ -11,7 +11,7 @@ extern u8  D_80144908[];
 extern u32 D_801F6C00;
 extern u8  D_80146875;
 
-/* The three scene rectangles the panel draws: position and size. */
+/* A scene rectangle the panel draws: position and size. */
 typedef struct Scena10Rect {
     s16 x;      /* 0x00 */
     s16 y;      /* 0x02 */
@@ -25,7 +25,8 @@ ASSERT_OFFSET(Scena10Rect, y, 0x02);
 ASSERT_OFFSET(Scena10Rect, width, 0x04);
 ASSERT_OFFSET(Scena10Rect, height, 0x06);
 
-extern Scena10Rect D_801FE7CC[3];
+/* The panel draws entry 2. */
+extern Scena10Rect D_801FE7CC[];
 
 /* D_801FE80C */
 extern Callback g_SceneEntityDispatch[];
