@@ -304,7 +304,23 @@ INCLUDE_ASM(func_801EFD4C);
 
 INCLUDE_ASM(func_801EFEC8);
 
-INCLUDE_ASM(func_801F0078);
+MATCH void func_801F0078(void) {
+    PartyMember* battler;
+    u8           i;
+    u8           slot;
+
+    for (i = 0; i < g_BattleEffectBattler->timer; i++) {
+        slot                                   = BMagic_AllocEffect();
+        battler                                = g_BattleEffectBattler;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].header.step  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].unk_04       = i;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = (i / 2) & 7;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (i * 4) + 1;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
+        g_BattleEffectBattler->param.unk_0B += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0164);
 
