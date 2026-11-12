@@ -8,7 +8,21 @@ MATCH void func_801EEC18(void) {
     BMagic_DispatchTaskPair(func_801EEC70, func_801EED44);
 }
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    u32 slot;
+
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 0x3E) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(0x100);
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
