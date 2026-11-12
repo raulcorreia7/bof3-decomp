@@ -628,10 +628,10 @@ MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
         if (D_80143F03 != 2) {
             return 0;
         }
-        if (entry_x != TO_COORD(0xA) + COORD_HALF) {
+        if (entry_x != TO_COORD(10) + COORD_HALF) {
             return 0;
         }
-        if (((entry_y >> 16) - 0x24) >= 2U) {
+        if (((entry_y >> 16) - 36) >= 2U) {
             return 0;
         }
         g_ScriptVars[1]       = 1;
@@ -639,7 +639,7 @@ MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
         g_SceneState.step_05  = 5;
         return Scene_ShowMessage(0xC);
     }
-    if (D_80143F03 == 3 && entry_y == TO_COORD(0xB) + COORD_HALF && ((entry_x >> 16) - 5) < 2U) {
+    if (D_80143F03 == 3 && entry_y == TO_COORD(11) + COORD_HALF && ((entry_x >> 16) - 5) < 2U) {
         if (SYS_TestFlag(g_SceneFlags, 0x1C) == 0) {
             Game_SetScriptActive();
             g_SceneState.step_05  = 0xF;
