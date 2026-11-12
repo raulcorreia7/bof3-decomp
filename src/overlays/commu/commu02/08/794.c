@@ -891,7 +891,6 @@ MATCH void Fairy_GenerateName(void) {
     s32 i;
     u8* src;
     u8* dst;
-    u16 offset;
 
     count = 0;
     i     = 5;
@@ -902,8 +901,7 @@ MATCH void Fairy_GenerateName(void) {
         dst -= 1;
     } while (i >= 0);
 
-    offset = AREA_MESSAGE_TABLE->offsets[FAIRY_NAME_FIRST_HALF_INDEX + RANDOM_MASK(0x3F)];
-    src    = (u8*)AREA_MESSAGE_TABLE + offset;
+    src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FAIRY_NAME_FIRST_HALF_INDEX + RANDOM_MASK(0x3F));
     for (;;) {
         u8 ch;
 
@@ -916,8 +914,7 @@ MATCH void Fairy_GenerateName(void) {
         src++;
     }
 
-    offset = AREA_MESSAGE_TABLE->offsets[FAIRY_NAME_SECOND_HALF_INDEX + RANDOM_MASK(0x3F)];
-    src    = (u8*)AREA_MESSAGE_TABLE + offset;
+    src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FAIRY_NAME_SECOND_HALF_INDEX + RANDOM_MASK(0x3F));
     for (;;) {
         u8 ch;
 
