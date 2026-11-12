@@ -386,7 +386,7 @@ def check(args: argparse.Namespace) -> int:
     rows = 0
     for target, entries in tables.items():
         rows += len(entries)
-        for before, after in zip(entries, entries[1:]):
+        for before, after in zip(entries, entries[1:], strict=False):
             if before.addr > after.addr:
                 findings.append(
                     f"order\t{target}\t{after.name} 0x{after.addr:08X} after "
