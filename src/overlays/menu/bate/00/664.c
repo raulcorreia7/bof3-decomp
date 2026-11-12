@@ -42,6 +42,7 @@ INCLUDE_ASM(func_801D1AB8);
 INCLUDE_ASM(func_801D1C90);
 
 /* Applies the equipment menu's trial set to the record it edits. */
+/* func_801D1E8C */
 MATCH void Menu_ApplyEquipment(void) {
     u8* slots[EQUIP_SLOT_COUNT];
     u8  item;
