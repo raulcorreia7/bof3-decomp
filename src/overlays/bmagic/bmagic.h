@@ -216,7 +216,7 @@ typedef struct BMagicEffectWork {
     /* 0x14 */ WorldPos     pos;
     /* 0x20 */ s16          unk_20;
     /* 0x22 */ u16          unk_22;
-    /* 0x24 */ s16          unk_24;
+    /* 0x24 */ u8           pad_24[2];
     /* 0x26 */ s16          unk_26;
     /* 0x28 */ PartyMember* battler;
 } BMagicEffectWork;
@@ -237,7 +237,6 @@ ASSERT_OFFSET(BMagicEffectWork, phase_0C, 0x0C);
 ASSERT_OFFSET(BMagicEffectWork, pos, 0x14);
 ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
 ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
-ASSERT_OFFSET(BMagicEffectWork, unk_24, 0x24);
 ASSERT_OFFSET(BMagicEffectWork, unk_26, 0x26);
 ASSERT_OFFSET(BMagicEffectWork, battler, 0x28);
 
