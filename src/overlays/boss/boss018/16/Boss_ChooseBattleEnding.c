@@ -6,7 +6,7 @@ MATCH void Boss_ChooseBattleEnding(void) {
     if (!(g_Battle.outcome.result & BATTLE_RESULT_VICTORY)) {
         goto block_4;
     }
-    if (g_Battle.boss_flags & 2) {
+    if (g_Battle.boss_flags & 0x2) {
         g_SceneState.step_05 = 0x1A;
     } else {
         g_SceneState.step_05 = 0x1B;
@@ -14,13 +14,13 @@ MATCH void Boss_ChooseBattleEnding(void) {
     func_801DDED8();
     goto block_11;
 block_4:
-    if (g_Battle.boss_flags & 1) {
+    if (g_Battle.boss_flags & 0x1) {
         goto block_7;
     }
-    if (SYS_TestFlag(g_SceneFlags, 0x23) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 35) == 0) {
         goto block_9;
     }
-    if (SYS_TestFlag(g_SceneFlags, 0x24) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 36) == 0) {
         goto block_8;
     }
 block_7:

@@ -153,7 +153,7 @@ MATCH void func_801EFEB8(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    if (work->slot == 0xD) {
+    if (work->slot == 13) {
         rot.vz = work->unk_0C;
     }
     pos.vx = (work->pos.x.fixed >> 9) - 0x4000;

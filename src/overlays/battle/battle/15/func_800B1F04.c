@@ -16,10 +16,10 @@ MATCH void func_800B1F04(s16 x, s16 y, s32 width, s16 height, u8 color, u8 mask)
 
     if (color != 0) {
         state = g_FrameCount;
-        if (state & 8) {
-            base = (((state & 6) << 5) | 0x3F);
+        if (state & 0x8) {
+            base = (((state & 0x6) << 5) | 0x3F);
         } else {
-            base = (((~state & 6) << 5) | 0x3F);
+            base = (((~state & 0x6) << 5) | 0x3F);
         }
     } else {
         base = 0xFF;

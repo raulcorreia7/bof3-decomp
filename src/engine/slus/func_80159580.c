@@ -13,10 +13,10 @@ MATCH void func_80159580(void) {
     task               = (MenuPanelTask*)g_MenuCurrentPanel;
     task->u.grow.width = (task->u.grow.width - task->u.grow.step_x);
     task->pos.x        = (task->pos.x + (s16)task->u.grow.step_x / 2);
-    if ((task->u.grow.width << 0x10) < 0) {
+    if ((task->u.grow.width << 16) < 0) {
         switch (task->mode) {
             case 0:
-                if (task->flags & 2) {
+                if (task->flags & 0x2) {
                     task->pos.x = ((g_MenuPanelOrigins[16 + D_801490CE * 2] + (task->unk_0A >> 1)) << 4);
                 } else {
                     task->pos.x = ((g_MenuPanelOrigins[D_801490CE * 2] + (task->unk_0A >> 1)) << 4);
@@ -35,10 +35,10 @@ MATCH void func_80159580(void) {
     task                = (MenuPanelTask*)g_MenuCurrentPanel;
     task->u.grow.height = (task->u.grow.height - task->u.grow.step_y);
     task->pos.y         = (task->pos.y + (s16)task->u.grow.step_y / 2);
-    if ((task->u.grow.height << 0x10) < 0) {
+    if ((task->u.grow.height << 16) < 0) {
         switch (task->mode) {
             case 0:
-                if (task->flags & 2) {
+                if (task->flags & 0x2) {
                     task->pos.y = ((g_MenuPanelOrigins[17 + D_801490CE * 2] + (task->unk_0B >> 1)) << 4);
                 } else {
                     task->pos.y = ((g_MenuPanelOrigins[1 + D_801490CE * 2] + (task->unk_0B >> 1)) << 4);
@@ -58,7 +58,7 @@ MATCH void func_80159580(void) {
         g_MenuCurrentPanel->state++;
         return;
     }
-    if (!(g_MenuCurrentPanel->flags & 1)) {
+    if (!(g_MenuCurrentPanel->flags & 0x1)) {
         func_80159FA0((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, (g_MenuCurrentPanel->u.grow.width >> 4), (g_MenuCurrentPanel->u.grow.height >> 4));
     }
     if (g_MenuCurrentPanel->mode == 0) {

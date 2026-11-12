@@ -8,7 +8,7 @@ MATCH void Area_BuildClut(u16* dst) {
     s32 base;
     u32 sel;
 
-    base = ((g_Task->active_flags & 4) != 0) ? STAGE_PALETTE_Y + 16 : STAGE_PALETTE_Y;
+    base = ((g_Task->active_flags & 0x4) != 0) ? STAGE_PALETTE_Y + 16 : STAGE_PALETTE_Y;
     switch (g_Task->unk_28) {
         case PALETTE_KIND_CELL:
             sel  = g_Task->unk_27;
@@ -23,16 +23,16 @@ MATCH void Area_BuildClut(u16* dst) {
         }
         case PALETTE_KIND_CELLS_2:
             sel  = g_Task->unk_27;
-            *dst = (((base + (sel >> 3)) << 6) | ((sel & 7) * 2));
+            *dst = (((base + (sel >> 3)) << 6) | ((sel & 0x7) * 2));
             break;
         case PALETTE_KIND_CELLS_4:
             sel  = g_Task->unk_27;
-            *dst = (((base + (sel >> 2)) << 6) | ((sel & 3) * 4));
+            *dst = (((base + (sel >> 2)) << 6) | ((sel & 0x3) * 4));
             break;
         case PALETTE_KIND_CELLS_8:
         default:
             sel  = g_Task->unk_27;
-            *dst = (((base + (sel >> 1)) << 6) | ((sel & 1) * 8));
+            *dst = (((base + (sel >> 0x1)) << 6) | ((sel & 1) * 8));
             break;
     }
 }

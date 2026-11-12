@@ -37,7 +37,7 @@ INCLUDE_ASM(func_801EED18);
 MATCH void func_801EF0A8(void) {
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0554, g_Task->header.step);
-    if (g_Task->header.flags & 1) {
+    if (g_Task->header.flags & 0x1) {
         if (g_Task->header.step != 0) {
             if (g_Task->header.step < 4) {
                 Battle_ProjectRange();
@@ -62,7 +62,7 @@ MATCH void func_801EF5C0(void) {
     u8   timer;
 
     Actor_StepAnimOnce();
-    if (g_Task->unk_09 & 1) {
+    if (g_Task->unk_09 & 0x1) {
         state = &g_AreaCameraAngle.vx;
         angle = *state + 0x14;
     } else {
@@ -102,7 +102,45 @@ MATCH void func_801EF6D8(void) {
 
 #include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
 
-INCLUDE_ASM(func_801EF7E0);
+MATCH void func_801EF7E0(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0x125;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x125;
+    } else {
+        tpage = 0x55;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = g_Task->param.unk_0B;
+    D_1F800000.view.effect.params[5] = g_Task->timer << 2;
+    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vz                 = 0;
+    D_1F800014[1].vz                 = 0;
+    D_1F800014[0].vz                 = 0;
+
+    for (i = 1; i <= 64; i++) {
+        prim             = GFX_BeginPolyG3(1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[0]);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]));
+        setRGB1(prim, LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]));
+        setRGB2(prim, LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]));
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+}
 
 #include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
@@ -126,7 +164,7 @@ MATCH void func_801EFE1C(void) {
 
     r                   = rand();
     direction           = g_Task->param.unk_0B;
-    g_Task->unk_0C      = (r & 7) + 8;
+    g_Task->unk_0C      = (r & 0x7) + 8;
     *angle              = direction << 9;
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(*angle) * g_Task->unk_0C);
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);

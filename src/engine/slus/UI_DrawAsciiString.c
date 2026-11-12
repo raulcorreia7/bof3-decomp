@@ -32,7 +32,7 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
     do {
         if (*str == '\n') {
             x = x0;
-            y += 0xC;
+            y += 12;
         } else if (*str != ' ' && *str != '\0') {
             sprite->clut = color;
             setRGB0(sprite, shade, shade, shade);

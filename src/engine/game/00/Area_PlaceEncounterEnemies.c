@@ -25,7 +25,7 @@ MATCH bool Area_PlaceEncounterEnemies(void) {
                 tmp = x;
                 x   = y;
                 y   = -tmp;
-                i   = (i + 1) & 3;
+                i   = (i + 1) & 0x3;
             }
             for (i = 0; i < ENTITY_SPAWN_SEARCH_COUNT; i++) {
                 entry->pos.x = g_EncounterOriginX + x + (s_EntitySpawnOffsets[i].dx << 15);

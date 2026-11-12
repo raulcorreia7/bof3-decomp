@@ -7,9 +7,8 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-/* The per-slot tag compared with the battle row byte. */
-
-/* The per-slot message index. */
+/* The scenario flag byte the answer path tests. */
+extern u8 D_80144EF0[];
 
 /* The battle record rows whose first byte is the slot tag. */
 extern u8                  D_801F41F8[];

@@ -176,7 +176,24 @@ MATCH void func_801EFE04(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EFE90);
+MATCH void func_801EFE90(void) {
+    PartyMember* work;
+    u8           timer;
+
+    work         = g_Task;
+    work->unk_09 = work->unk_09 + 1;
+    work->pos.z.fixed -= 0x80000;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (!(timer & BYTE_MASK)) {
+        g_Task->header.step += 1;
+        g_Task->header.flags = 0;
+        g_Task->header.mode  = 0;
+        g_Task->header.step  = 0;
+        g_Task->unk_03       = 0;
+        g_Task->unk_04       = 0;
+    }
+}
 
 MATCH void func_801EFF50(void) {
     SVECTOR pos;

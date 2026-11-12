@@ -11,7 +11,7 @@ MATCH void func_801A27C4(Actor* entity) {
         func_801A225C(entity, g_RouteSpeedScale[mode], 2);
         saved = g_Task->direction_08;
         for (i = 0; i < 4; i++) {
-            g_Task->direction_08 = s_EntityRouteIndices[g_Game.members[0].facing & 7][i];
+            g_Task->direction_08 = s_EntityRouteIndices[g_Game.members[0].facing & 0x7][i];
             if ((func_801A1AE4(entity) & BYTE_MASK) != 0) {
                 continue;
             }
@@ -35,7 +35,7 @@ MATCH void func_801A27C4(Actor* entity) {
                 entity->interaction_flags |= ACTOR_FLAG_MOVING;
             }
         } else {
-            g_Task->direction_08 = saved & 7;
+            g_Task->direction_08 = saved & 0x7;
             g_Task->timer        = 0;
         }
     }

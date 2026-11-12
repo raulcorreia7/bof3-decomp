@@ -38,14 +38,14 @@ MATCH void SYS_ShowException(void) {
     while (1) {
         VSync(2);
         x_label = 0x14;
-        y       = 0x3C;
+        y       = 60;
         x_value = 0x3C;
 
         PutDispEnv((DISPENV*)g_GfxCurrentDisplayFrame);
         PutDrawEnv((DRAWENV*)(g_GfxCurrentDisplayFrame + 0x14));
         DrawOTag((u_long*)(g_GfxCurrentDisplayFrame + 0x8C));
 
-        g_FrameBufferIndex       = g_FrameBufferIndex ^ 1;
+        g_FrameBufferIndex       = g_FrameBufferIndex ^ 0x1;
         g_GfxCurrentDisplayFrame = &g_GfxDisplayFrames[g_FrameBufferIndex * 0x90];
 
         ClearOTagR((u_long*)(g_GfxCurrentDisplayFrame + 0x70), 8);
@@ -59,7 +59,7 @@ MATCH void SYS_ShowException(void) {
         }
 
         x_label = 0xA0;
-        y       = 0x3C;
+        y       = 60;
         x_value = 0xC8;
 
         for (i = 18; i < 37; i++) {
