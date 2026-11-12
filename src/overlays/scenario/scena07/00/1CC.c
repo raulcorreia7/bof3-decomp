@@ -23,7 +23,7 @@ MATCH void func_801F6E54(void) {
 MATCH void func_801F6E90(void) {
     u8* row;
 
-    if ((g_Task->vx & 7) == 0) {
+    if ((g_Task->vx & 0x7) == 0) {
         row = func_801F8394();
         if (row != NULL) {
             func_801F83D0(row);
@@ -76,7 +76,7 @@ MATCH void func_801F7050(void) {
     actor      = work;
     actor->vz  = 0;
     for (i = 0; i < 16; i++) {
-        actor->vz += 0x800000;
+        actor->vz += 8388608;
         actor->pos.x.fixed += TO_COORD(1);
         actor->pos.y.fixed += 0;
         actor->pos.z.fixed += actor->vz;
@@ -394,7 +394,7 @@ MATCH void func_801F9DA8(void) {
     do {
         *row = 0;
         index += 1;
-        row += 0x20;
+        row += 32;
     } while ((index & BYTE_MASK) < 0x40U);
 }
 
@@ -407,7 +407,7 @@ MATCH u8* func_801F9DD4(void) {
         if (row[0] == 0) {
             return row;
         }
-        row += 0x20;
+        row += 32;
     }
     return NULL;
 }
@@ -516,7 +516,7 @@ MATCH void func_801FC1C4(void) {
 INCLUDE_ASM(func_801FC2D0);
 
 MATCH void func_801FCFB4(void) {
-    u8 cam                   = D_801FDE88[g_FrameCount & 3];
+    u8 cam                   = D_801FDE88[g_FrameCount & 0x3];
     g_AreaCameraRefreshCount = 2;
     g_AreaCameraOffsetY      = g_AreaCameraOffsetY + ((cam << 24) >> 22);
 }
@@ -539,20 +539,20 @@ MATCH void func_801FD35C(void) {
 #include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FD3FC(Actor* actor) {
-    SYS_SetFlag(g_SceneFlags, 0xA);
+    SYS_SetFlag(g_SceneFlags, 10);
     Game_SetScriptActive();
     SCENE_START_ACTOR(actor, 3, 0x5);
 }
 
 MATCH void func_801FD45C(Actor* actor) {
-    SYS_SetFlag(g_SceneFlags, 0xB);
+    SYS_SetFlag(g_SceneFlags, 11);
     Item_VitalAdd(VITAL_ITEM_GUILD_LETTER);
     Game_SetScriptActive();
     SCENE_START_ACTOR(actor, 4, 6);
 }
 
 MATCH void func_801FD4C4(Actor* actor) {
-    SYS_SetFlag(g_SceneFlags, 0xC);
+    SYS_SetFlag(g_SceneFlags, 12);
     Game_SetScriptActive();
     SCENE_START_ACTOR(actor, 9, 0x1D);
 }
@@ -563,7 +563,7 @@ MATCH void func_801FD524(void) {
     g_ScriptVars[1] = 0;
     g_ScriptVars[2] = 0;
     g_ScriptVars[3] = 0;
-    if (SYS_TestFlag(D_80144EB8, 0x22) == 0) {
+    if (SYS_TestFlag(D_80144EB8, 34) == 0) {
         g_SceneState.step_05 = 0;
     } else {
         g_SceneState.step_05 = 0x14;
@@ -577,7 +577,7 @@ MATCH void func_801FD5A0(void) {
     D_80146865      = 0;
     D_80146866      = 0;
     D_80146867      = 0;
-    if (SYS_TestFlag(D_80144EB8, 0x23)) {
+    if (SYS_TestFlag(D_80144EB8, 35)) {
         D_80146875 = 0x14;
     } else {
         D_80146875 = 0xA;
@@ -591,7 +591,7 @@ MATCH ActorSlot* func_801FD610(u8 mode) {
 
     index = Actor_FindFreeSlot() & BYTE_MASK;
     slot  = &g_ActorSlots[index];
-    if (index != 0xFF) {
+    if (index != GAME_NONE) {
         slot->header.flags = 1;
         slot->type         = 0x49;
         slot->header.mode  = mode;
@@ -606,7 +606,7 @@ MATCH s32 func_801FD960(s32 x, s32 y) {
 
     if (g_GameAreaId == AREA_ID_MOUNT_ZUBLO_GISSHAN) {
         if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (y <= TO_COORD(32))) {
-            if (((x >> 0x10) - 74) < 2U) {
+            if (((x >> 16) - 74) < 2U) {
                 Game_SetScriptActive();
                 value = g_SndBGMId * 4;
                 SND_StartDecrescendo(g_SelectionCues[value], g_SelectionCues[value + 1], 0x64, 0x20);
@@ -623,7 +623,7 @@ MATCH bool func_801FDA34(void) {
     u8 i;
 
     for (i = 0; i < g_Game.party_size; i++) {
-        if (g_Game.members[i].chr.character_id == 2) {
+        if (g_Game.members[i].chr.character_id == CHAR_ID_GARR) {
             return 1;
         }
     }

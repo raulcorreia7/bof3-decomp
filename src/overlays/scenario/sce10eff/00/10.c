@@ -93,7 +93,7 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
     rotation.vx = 0;
     rotation.vy = 0;
     rotation.vz = ONE / 4;
-    if ((scratch->flags & 1u) != 0u) {
+    if ((scratch->flags & 0x1u) != 0u) {
         rotation.vz = 0;
     }
 
@@ -110,7 +110,7 @@ MATCH void func_801D0FAC(void) {
     func_801D2658();
     if (g_Task->step_index != 0) {
         Scene_EffectSetMatrix();
-        Scene_DrawBands(0x60, 0x20, 7);
+        Scene_DrawBands(0x60, 32, 7);
         PopMatrix();
     }
 }
@@ -182,7 +182,7 @@ MATCH void func_801D1218(void) {
     func_801D2658();
     if (g_Task->step_index != 0) {
         Scene_EffectSetMatrix();
-        Scene_DrawBands(0x20, 0x50, 0x1F);
+        Scene_DrawBands(0x20, 80, 0x1F);
         func_801D240C();
         PopMatrix();
     }

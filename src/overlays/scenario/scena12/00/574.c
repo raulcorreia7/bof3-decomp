@@ -93,7 +93,7 @@ MATCH void func_801F75EC(void) {
     u8    value;
 
     buffer = (char*)g_UiFormatBuffer;
-    Menu_DrawHeaderBar(0x8A, 0x1E, 0x2D, 0x14, 1u);
+    Menu_DrawHeaderBar(138, 30, 45, 20, 1u);
     value = D_801FD288.bytes[0];
     fmt   = D_801F6C04;
     TEXT_Format(buffer, fmt, value);
@@ -294,7 +294,7 @@ MATCH s32 func_801FCCBC(void) {
     D_80146865      = 0;
     D_80146866      = 0;
     D_80146867      = 0;
-    if (g_Game.members[0].chr.character_id != 5) {
+    if (g_Game.members[0].chr.character_id != CHAR_ID_MOMO) {
         D_80146875 = 0;
         D_80146874 = 5;
         return 1;

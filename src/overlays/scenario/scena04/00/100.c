@@ -13,8 +13,8 @@ MATCH void func_801F6D44(void) {
     work                   = g_Task;
     work->vz               = 0x1000000;
     FIELD(s32, work, 0x2C) = 0x1000000;
-    work->vx               = 0x568000;
-    work->vy               = 0x128000;
+    work->vx               = 5668864;
+    work->vy               = 1212416;
     work->unk_1C           = 0;
     work->gravity          = 0x2200000;
     FIELD(s32, work, 0x24) = 0x568000;
@@ -102,7 +102,7 @@ MATCH void func_801F7B00(void) {
     s32 shade;
     s32 height;
 
-    if ((g_FrameCount & 7) == 0) {
+    if ((g_FrameCount & 0x7) == 0) {
         row   = func_801F7FF8();
         shade = 0x80;
         if (row != NULL) {
@@ -260,7 +260,7 @@ INCLUDE_ASM(func_801F8680);
 INCLUDE_ASM(func_801F8F98);
 
 MATCH void func_801F9CFC(void) {
-    s32 offset = D_801FA220[(g_FrameCount >> 1) & 3];
+    s32 offset = D_801FA220[(g_FrameCount >> 1) & 0x3];
 
     g_AreaCameraRefreshCount = 2;
     g_AreaCameraHeight += offset * 4;

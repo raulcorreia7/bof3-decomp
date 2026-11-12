@@ -137,7 +137,7 @@ MATCH void func_801D1420(void) {
 MATCH void func_801D1460(void) {
     g_Task->timer += 16;
     if (g_Task->timer == 0) {
-        Scene_DrawRedFade(0xFF);
+        Scene_DrawRedFade(255);
         g_Task->header.mode += 1;
     } else {
         Scene_DrawRedFade(g_Task->timer);
@@ -184,7 +184,7 @@ MATCH void func_801D16DC(void) {
         *(s8*)(tail)             = 0;
         tail += 0x18;
         index += 1;
-        row += 0x18;
+        row += 24;
     } while ((index & HALF_MASK) < 0x100U);
 }
 
@@ -217,7 +217,7 @@ MATCH void func_801D230C(void) {
     x     = g_Task->screen_x;
     y     = g_Task->screen_y;
     angle = g_Task->unk_32;
-    func_801D1FF8(&pos, x, y, angle, 0xC0, 0);
+    func_801D1FF8(&pos, x, y, angle, 192, 0);
 }
 
 /* func_801D23AC */
