@@ -6,7 +6,18 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/scenario/Scene_DispatchEntity.h"
 
-INCLUDE_ASM(func_801D0C48);
+MATCH void func_801D0C48(void) {
+    Actor* work;
+
+    work           = g_Task;
+    work->unk_64   = g_Game.members[0].pos.x.fixed;
+    work->unk_68   = g_Game.members[0].pos.y.fixed;
+    work->unk_6C   = g_Game.members[0].pos.z.fixed + TO_COORD(128);
+    work->timer    = 8;
+    work->screen_x = 0;
+    g_Task->header.mode += 1;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 11));
+}
 
 MATCH void func_801D0CC0(void) {
     u16 screen_x;
@@ -178,7 +189,25 @@ MATCH void func_801D1CD4(const void* spin) {
 
 #include "shared/Area_InitSpin.h"
 
-INCLUDE_ASM(func_801D2088);
+MATCH void func_801D2088(void) {
+    MATRIX     matrix;
+    WorldSpin* spin;
+    u16*       angle;
+    s32        i;
+
+    GFX_AddDitheredDrawMode(2, GetTPage(0, 1, 0x380, 0x100));
+    Area_SetCameraMatrix(&matrix);
+    spin  = g_WorldSpins;
+    i     = 0;
+    angle = &spin->spin_angle;
+    do {
+        func_801D1CD4(spin);
+        spin += 1;
+        *angle += 16;
+        i += 1;
+        angle += sizeof(WorldSpin) / sizeof(*angle);
+    } while ((i & 0xFF) < 0x20U);
+}
 
 MATCH void func_801D2138(s32* first, s32* second) {
     s32 folded;

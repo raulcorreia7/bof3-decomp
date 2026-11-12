@@ -1,3 +1,14 @@
 #include "area096_13.h"
 
-INCLUDE_ASM(func_801F32FC);
+#include "overlays/area/Area_StepToGround.h"
+
+MATCH void func_801F32FC(void) {
+    Actor* work;
+    s32    steps;
+    s32    x;
+    s32    y;
+    s16    ground;
+    s32    floor_height;
+
+    AREA_STEP_TO_GROUND();
+}

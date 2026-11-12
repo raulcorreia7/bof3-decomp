@@ -60,7 +60,7 @@ MATCH void func_801EF3C4(void) {
     if (count == 0) {
         g_Task->header.step++;
     }
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF79C(g_Task->param.unk_0B, 1);
 }
 
@@ -101,6 +101,24 @@ MATCH void func_801EF4B8(void) {
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
-INCLUDE_ASM(func_801EF6A4);
+MATCH void func_801EF6A4(void) {
+    VECTOR pos;
+    u8     count;
+
+    if (g_FrameCount & 1) {
+        g_Task->timer += 1;
+    }
+    pos.vx = g_Task->unk_0C;
+    pos.vy = g_Task->unk_10;
+    pos.vz = g_Task->unk_14;
+    func_800AF3A0(pos, 0x30);
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        g_Task->header.step -= 1;
+    }
+    func_800AF764();
+    func_801EF79C(g_Task->param.unk_0B, 0);
+}
 
 INCLUDE_ASM(func_801EF79C);

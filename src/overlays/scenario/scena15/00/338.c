@@ -62,13 +62,49 @@ MATCH void func_801F717C(void) {
 
 INCLUDE_ASM(func_801F71B0);
 
-INCLUDE_ASM(func_801F752C);
+MATCH void func_801F752C(AreaSpark* spark) {
+    DVECTOR screen;
+    TILE_1* tile;
+    u8      shade;
+
+    Area_ProjectPoint(&spark->pos.x, &screen);
+    tile = (TILE_1*)g_GfxPrimCursor;
+    SetTile1(tile);
+    SetSemiTrans(tile, 0);
+    setXY0(tile, screen.vx, screen.vy);
+    shade    = -RANDOM_MASK(1);
+    tile->b0 = shade;
+    tile->g0 = shade;
+    tile->r0 = shade;
+    GFX_AddPrim(1, sizeof(TILE_1));
+}
 
 #include "shared/Area_ClearWorkColumn.h"
 
 INCLUDE_ASM(func_801F75D8);
 
-INCLUDE_ASM(func_801F7748);
+MATCH bool func_801F7748(void) {
+    AreaSpark* spark;
+    u8         i;
+    bool       alive;
+
+    alive = false;
+    spark = MEM_PTR(AreaSpark, AREA_WORK);
+    i     = 0;
+    do {
+        if (spark->active != 0) {
+            spark->pos.z -= spark->fall_speed << 8;
+            func_801F752C(spark);
+            if (spark->pos.z < g_Task->pos.z.fixed) {
+                spark->active = 0;
+            }
+            alive = true;
+        }
+        spark++;
+        i++;
+    } while (i < AREA_SPARK_COUNT);
+    return alive;
+}
 
 MATCH void func_801F77F8(void) {
     SYS_DISPATCH_TASK(D_801FE590, 1, g_Task);
@@ -207,7 +243,24 @@ MATCH void func_801F85F0(void) {
 
 INCLUDE_ASM(func_801F8618);
 
-INCLUDE_ASM(func_801F8704);
+MATCH void func_801F8704(void) {
+    Actor*       actor;
+    PartyMember* member;
+    s32          shade;
+    u8           i;
+
+    actor = g_Task;
+    shade = -((s8)actor->tint.bytes.unk_5D / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); signed_bytes emits lb. */
+    for (i = 0; i < g_PartySize; i++) {
+        if (g_Game.members[i].chr.character_id != CHAR_ID_RYU_ADULT) {
+            member                   = &g_Game.members[i];
+            member->unk_5F           = shade;
+            member->unk_5E           = shade;
+            g_Game.members[i].unk_5D = shade;
+        }
+    }
+    TASK_SET(actor);
+}
 
 MATCH void func_801F87B4(void) {
     SYS_DISPATCH_TASK(D_801FE5C0, 1, g_Task);
@@ -220,7 +273,26 @@ MATCH void func_801F87F8(void) {
     SCENA15_PARTY_SETUP();
 }
 
-INCLUDE_ASM(func_801F8874);
+MATCH void func_801F8874(void) {
+    Actor* work;
+    u8*    counter;
+
+    work = g_Task;
+    if (work->tint.bytes.unk_5D < 0xF8) {
+        work->tint.bytes.unk_5D += 8;
+        g_Task->tint.bytes.unk_5E += 8;
+        g_Task->tint.bytes.unk_5F += 8;
+    } else {
+        work->tint.signed_bytes.unk_5F = -1;
+        work->tint.signed_bytes.unk_5E = -1;
+        work->tint.signed_bytes.unk_5D = -1;
+        counter                        = &g_SceneState.step_05;
+        *counter                       = *counter + 1;
+        g_Task->header.mode            = 2;
+    }
+    func_801F79C4();
+    func_801F8958();
+}
 
 MATCH void func_801F8930(void) {
     func_801F79C4();
@@ -235,7 +307,11 @@ MATCH void func_801F8A5C(void) {
 
 INCLUDE_ASM(func_801F8AA0);
 
-INCLUDE_ASM(func_801F8BC4);
+#include "overlays/scenario/Scene_AdvanceBandMotion.h"
+
+MATCH void func_801F8BC4(void) {
+    SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
+}
 
 INCLUDE_ASM(func_801F8C78);
 
@@ -260,7 +336,9 @@ MATCH void func_801F8EA8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8F4C);
+MATCH void func_801F8F4C(void) {
+    SCENE_ADVANCE_BAND_MOTION(-, func_801F9020);
+}
 
 /* func_801F9000 */
 MATCH void Scene_ClearActor(void) {

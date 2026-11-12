@@ -280,7 +280,7 @@ segments:
       - [0x1211C, c, func_801E2D1C]
       - [0x1215C, c, func_801E2D5C]
       - [0x121B4, c, Menu_EquipmentPanel]
-      - [0x12230, c, func_801E2E30]
+      - [0x12230, c, Battle_PickFormationTarget]
       - [0x12270, c, func_801E2E70]
       - [0x122B0, c, Menu_ItemsPanel]
       - [0x12304, c, Shop_DrawItems]

@@ -4,7 +4,26 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC14);
+MATCH void func_801EEC14(void) {
+    Magic010SharedSteps handlers = D_801EEC04;
+    PartyMember*        saved_task;
+    PartyMember*        saved_battler;
+    u8                  i;
+
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
+            func_801EFDB4();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED28);
 
@@ -45,7 +64,23 @@ MATCH void func_801EF014(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF0A4);
+MATCH void func_801EF0A4(void) {
+    g_Task->facing = g_BattleEffectBattler->facing;
+    g_Task->unk_0C = 0x20000;
+    g_Task->unk_10 = 0;
+    func_801DD350(g_Task);
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(256);
+    g_Task->unk_0C      = -0x6000;
+    g_Task->unk_10      = 0;
+    func_801DD350(g_Task);
+    g_Task->unk_04       = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 16;
+    g_Task->timer        = 4;
+    g_Task->header.step += 1;
+}
 
 #include "overlays/bmagic/Effect_CountUpWorkByteAndStep.h"
 
