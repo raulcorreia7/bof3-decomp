@@ -27,7 +27,6 @@ typedef struct Magic073Steps {
 } Magic073Steps;
 
 extern Magic073Steps D_801EEC1C;
-void                 Effect_DrawSparkleDisc(void);
 void                 func_801EFE2C(u16 angle, u16 radius);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
