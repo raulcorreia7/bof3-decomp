@@ -153,7 +153,7 @@ MATCH void func_801F08AC(void) {
 
     i = 0;
     do {
-        if (!(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK)) {
+        if (!(Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) & BYTE_MASK)) {
             g_Task->facing           = g_BattleEnemyBattlers[i].unk_08;
             g_Task->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
             g_Task->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;
