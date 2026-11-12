@@ -70,11 +70,11 @@ void func_800F6C5C(void);
 void func_800F6EE0(u16 x, u16 y);
 void func_800F7094(s32 x, s32 y, s32 kind, s32 value, u8 selected);
 void func_800F7100(void);
-/* func_801650B4 */
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 /* func_8016628C */
 s32  Item_Count(u8 category, u8 item, u8 mode);
-void func_801D799C(s16 x, s16 y, u8 height, u8 style);
-s32  func_801D9534(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
+/* func_801D799C */
+void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style);
+/* func_801D9534 */
+s32  Fishing_DrawWindowFrame(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
 
 #endif

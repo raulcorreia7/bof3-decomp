@@ -3,7 +3,8 @@
 /* Resets the AREA030 anchor flags, stores the probe height from the
  * scratch position pair and arms either the long or the short settle step before
  * stepping the work state. */
-MATCH void func_801D9B9C(void) {
+/* func_801D9B9C */
+MATCH void Fishing_EntryBegin(void) {
     FishingState* work;
     FishingState* state;
     u8*           panel;
