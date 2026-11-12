@@ -222,7 +222,21 @@ INCLUDE_ASM(func_801F026C);
 
 INCLUDE_ASM(func_801F0648);
 
-INCLUDE_ASM(func_801F0AC8);
+/* Runs the draw step that header.step selects, then sets the actor matrix, advances the effect timers and
+ * feeds the slot's archive row to func_801F0D0C while the step is running. */
+MATCH void func_801F0AC8(void) {
+    PartyMember* work;
+
+    SYS_DISPATCH_BYTE(D_801F24F0, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        Effect_SetActorMatrix();
+        work = g_Task;
+        work->unk_09 += 2;
+        work->unk_0C += 1;
+        func_801F0D0C(D_801F24D0[g_Task->unk_04][0] + g_Task->unk_09, D_801F24D0[g_Task->unk_04][1]);
+        PopMatrix();
+    }
+}
 
 MATCH void func_801F0BA8(void) {
     PartyMember* work;
