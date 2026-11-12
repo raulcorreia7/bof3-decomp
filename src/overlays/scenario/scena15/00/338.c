@@ -207,7 +207,24 @@ MATCH void func_801F85F0(void) {
 
 INCLUDE_ASM(func_801F8618);
 
-INCLUDE_ASM(func_801F8704);
+MATCH void func_801F8704(void) {
+    Actor*       actor;
+    PartyMember* member;
+    s32          shade;
+    u8           i;
+
+    actor = g_Task;
+    shade = -((s8)actor->tint.bytes.unk_5D / 2);
+    for (i = 0; i < g_PartySize; i++) {
+        if (g_Game.members[i].chr.character_id != CHAR_INDEX_WHELP) {
+            member                   = &g_Game.members[i];
+            member->unk_5F           = shade;
+            member->unk_5E           = shade;
+            g_Game.members[i].unk_5D = shade;
+        }
+    }
+    TASK_SET(actor);
+}
 
 MATCH void func_801F87B4(void) {
     SYS_DISPATCH_TASK(D_801FE5C0, 1, g_Task);
