@@ -17,7 +17,7 @@ typedef struct Magic096Steps {
 
 extern Magic096Steps D_801EEC10;
 extern u8            D_801F0488[];
-/* One byte per spawned effect: the start count its queued handler takes. */
+/* One byte per spawned effect. */
 extern u8            D_801F0498[];
 
 #endif
