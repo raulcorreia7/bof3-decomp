@@ -3,10 +3,5 @@
 MATCH void func_801E9AB0(void) {
     MenuPanelTask* task;
 
-    task = g_MenuCurrentPanel;
-    task->pos.x += 0x20;
-    if ((s16)task->pos.x >= 0x2E) {
-        task->pos.x = 0x2D;
-        task->state = 0;
-    }
+    MENU_STEP_PANEL_RIGHT();
 }

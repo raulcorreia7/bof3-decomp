@@ -211,8 +211,6 @@ extern u8              D_80145FC6;
 extern u8              D_80145FC7;
 extern u8              D_80145FC9;
 extern u8              D_801462E7;
-/* FAKE: g_Battle.party_count as a global of its own; the sites that use it match only with a separate symbol. */
-extern u8              g_BattlePartyCount;
 extern u8              D_801462F6[];
 extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */

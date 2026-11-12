@@ -18,7 +18,7 @@ MATCH s32 PAD_GetRepeatedButtons(s32 button_mask) {
     if (repeat_mask & g_InputHeld) {
         counter            = g_InputRepeatDelay - 1;
         g_InputRepeatDelay = counter;
-        if ((counter << 0x10) == 0) {
+        if ((counter << 16) == 0) {
             g_InputRepeatDelay   = 3;
             g_InputRepeatButtons = g_InputHeld;
             return g_InputHeld;

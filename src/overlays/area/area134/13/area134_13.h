@@ -64,4 +64,21 @@ extern s32   D_80146954;
 void func_801F48B0(void);
 void func_801F4B6C(void);
 
+/* Returns the area task to the first step of mode 1. */
+static inline void Area_EnterMode1(void) {
+    g_Task->timer       = 0;
+    g_Task->header.mode = 1;
+    ACTOR_CLEAR_STEP();
+}
+
+/* Counts the work byte 0x09 down and takes the given mode when it reaches zero.
+ * The member declares work and timer. */
+#define AREA_TICK_MODE_CHANGE(next_mode)   \
+    work    = (u8*)g_Task;                 \
+    timer   = work[9];                     \
+    work[9] = timer + 0xFF;                \
+    if (timer == 0) {                      \
+        g_Task->header.mode = (next_mode); \
+    }
+
 #endif

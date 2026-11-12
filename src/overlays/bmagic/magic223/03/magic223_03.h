@@ -7,6 +7,10 @@
 
 extern Callback D_801EFC40[];
 
+extern s32 D_1F800004;
+/* The four facing angle offsets the wind sway adds to the phase. */
+extern s32 D_801EFC50[];
+
 void func_801EF1E8(void);
 
 extern Callback     D_801EFC44[];

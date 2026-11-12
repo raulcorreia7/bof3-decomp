@@ -10,7 +10,7 @@ MATCH void SND_XaStateReadResult(void) {
     counter  = &D_8014681E;
     count    = *counter + 1;
     *counter = count;
-    if (count & 1) {
+    if (count & 0x1) {
         if (D_8014682E <= 0) {
             D_8014682E = 0;
             CdControlF(CdlGetlocL, 0);

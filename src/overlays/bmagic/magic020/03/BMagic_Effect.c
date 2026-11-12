@@ -8,7 +8,33 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EECC0);
 
-INCLUDE_ASM(func_801EF0F8);
+MATCH void func_801EF0F8(void) {
+    PartyMember* work;
+    u32          slot;
+    u8           i;
+    u8           count;
+
+    if (g_Task->param.unk_0B == 0xFF) {
+        func_801EFD88();
+        count          = g_Task->unk_09 + 4;
+        g_Task->unk_09 = count;
+        if (count == 16) {
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+            g_Task->param.unk_0B = 0;
+            g_Task->header.mode += 1;
+            for (i = 0; i < 8; i++) {
+                slot                               = Battle_AllocEffect(1, 46) & BYTE_MASK;
+                work                               = g_Task;
+                g_BattleEffects[slot].header.mode  = 2;
+                g_BattleEffects[slot].header.step  = 0;
+                g_BattleEffects[slot].unk_0B       = i;
+                g_BattleEffects[slot].arg.unk_09   = (i * 8) + 1;
+                g_BattleEffects[slot].target.party = work;
+                g_Task->param.unk_0B += 1;
+            }
+        }
+    }
+}
 
 MATCH void func_801EF234(void) {
     u8 timer;

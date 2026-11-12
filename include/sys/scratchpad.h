@@ -138,6 +138,9 @@ ASSERT_OFFSET(ScratchPad, view, 0x000);
 
 /* Scratchpad base + 1; battle/battle/03 and etc/game/00 write it directly. */
 extern u8  D_1F800001;
+/* The staged y coordinate that func_801B13BC writes, and the phase angle the KaiserBreath steps
+ * store before rcos loads it back. */
+extern s16 D_1F800006;
 extern s16 D_1F800034[2];
 /* The area emit slots: the pair extent and its mode. */
 extern s16 D_1F800038;

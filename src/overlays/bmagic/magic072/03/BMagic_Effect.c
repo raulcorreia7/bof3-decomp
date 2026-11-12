@@ -33,13 +33,9 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/Effect_DrawSparkleRays.h"
 
-#include "overlays/bmagic/BMagic_DrawSparkleLongRays.h"
+#include "overlays/bmagic/Effect_DrawSparkleWedges.h"
 
-MATCH void func_801EFA44(u16 angle, u16 radius) {
-    BMAGIC_DRAW_SPARKLE_LONG_RAYS(EFFECT_SPARKLE_TASK, angle, radius);
-}
-
-INCLUDE_ASM(func_801EFCDC);
+#include "overlays/bmagic/Effect_DrawSparkleDisc.h"
 
 #include "overlays/bmagic/func_801F0000.h"
 

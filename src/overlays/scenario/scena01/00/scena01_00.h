@@ -6,6 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
+#include "shared/AreaSpark.h"
 
 extern u8 D_80144E90[];
 
@@ -30,5 +31,8 @@ u8 func_801F7C54(void);
 void func_801F7678(s32 arg0);
 /* func_801F7AE4 */
 void Area_AddSpark(void);
+
+void func_801F7DCC(s32 red, s32 green, s32 blue);
+void func_801F7EDC(void);
 
 #endif
