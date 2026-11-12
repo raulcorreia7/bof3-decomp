@@ -12,6 +12,7 @@
 #include "battle/records.h"
 #include "common/handler.h"
 #include "sys/sched.h"
+#include <rand.h>
 
 /* The menu, shop and start overlays dispatch on the step, then the sub-step and
  * the state within it. */
@@ -305,7 +306,6 @@ extern s32 g_SaveCardStatus; /* CardEvent */
 extern s32 g_SaveCardPort;
 
 /* func_8017E3D4 */
-int rand(void); /* LIBC.LIB; no staged header declares it */
 
 /* Start scene event `event` at `step` with the script marked active. */
 static inline void Scene_StartEvent(s32 event, s32 step) {
