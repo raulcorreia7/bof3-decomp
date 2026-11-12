@@ -253,9 +253,9 @@ blocks, so a twin whose value is used after the first branch shares a statement 
 
 ## PsyQ
 
-The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.csv` records one
-row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few link
-retail split assembly because no member object reproduces them. The two
+The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.jsonl` records
+one row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few
+link retail split assembly because no member object reproduces them. The two
 executables link all their SDK code (`slus_004_22` and `logo`); the EMI overlays link none and call
 the main executable. Both executables carry the SCE 3.7 version word `DA 94 37 00`.
 
