@@ -238,7 +238,25 @@ MATCH void func_801EFF44(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFF94);
+MATCH void func_801EFF94(void) {
+    u32          slot;
+    PartyMember* work;
+
+    if ((g_FrameCount & 3) == 0) {
+        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].target.party = work;
+        g_BattleEffects[slot].unk_04       = g_Task->unk_04 & 0xF;
+        g_Task->param.unk_0B += 1;
+        g_Task->unk_04 += 1;
+    }
+    if (g_BattleEffectBattler->header.step == 5) {
+        if (--g_Task->timer == 0) {
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 #include "overlays/bmagic/Effect_StepOnZeroTick.h"
 
