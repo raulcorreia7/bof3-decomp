@@ -20,7 +20,7 @@ MATCH void Char_RunPersonalAction(void) {
                 /* FAKE: retail reads SND_PlayCue as void(s32). */
                 ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
             }
-            slot = func_801B5AE4();
+            slot = ((s8 (*)(void))Game_FindRockAhead)();
             if (slot != -1) {
                 u8 direction;
 

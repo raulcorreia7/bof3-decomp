@@ -41,6 +41,4 @@ void func_801CFF30(s32 kind, s32 x, s32 y, s32 code);
 
 s32 func_801CFD24(s16 x, s16 y);
 
-void Actor_BeginScript(s32 raw_selector, s32 raw_code);
-
 #endif
