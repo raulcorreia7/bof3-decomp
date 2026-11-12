@@ -91,9 +91,9 @@ MATCH void func_801F77EC(void) {
         work->points[i].y = work->y + D_801FA1C4[i];
         work->points[i].z = (s16)Area_SampleHeight(work->points[i].x, work->points[i].y) << 8;
         i++;
-    } while (i < 8);
+    } while (i < ARRAY_COUNT(work->points));
     func_801F7FCC();
-    g_Task->vx = 0x200;
+    g_Task->vx = 512;
     g_Task->header.mode++;
 }
 
