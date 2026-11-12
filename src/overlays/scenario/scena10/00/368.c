@@ -191,7 +191,21 @@ MATCH void func_801FD734(void) {
     } while (i < 16);
 }
 
-INCLUDE_ASM(func_801FD814);
+MATCH void func_801FD814(void) {
+    u8 saved_slot;
+
+    saved_slot               = g_Task->param.actor_slot;
+    g_Task->param.actor_slot = Actor_FindFreeSlot();
+    if (g_Task->param.actor_slot != GAME_NONE) {
+        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
+        g_ActorSlots[g_Task->param.actor_slot].type         = 0x5D;
+        g_ActorSlots[g_Task->param.actor_slot].unk_06       = saved_slot;
+        g_ActorSlots[g_Task->param.actor_slot].unk_07       = 0;
+    } else {
+        g_Task->param.actor_slot = saved_slot;
+        g_ScriptState->cursor -= 2;
+    }
+}
 
 MATCH void func_801FD95C(Actor* actor) {
     SCENA10_ACTOR_START(0xA, 0x1E, 0x13);
