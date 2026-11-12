@@ -604,7 +604,17 @@ INCLUDE_ASM(func_801FD400);
 
 INCLUDE_ASM(func_801FD704);
 
-INCLUDE_ASM(func_801FDF84);
+MATCH void func_801FDF84(void) {
+    g_Characters[CHAR_INDEX_REI].exp += 10000;
+    func_801ADDD4(CHAR_INDEX_REI);
+    g_Characters[CHAR_INDEX_REI].equip.weapon = 7;
+    g_Characters[CHAR_INDEX_REI].equip.shield = 56;
+    g_Characters[CHAR_INDEX_REI].equip.helmet = 33;
+    g_Characters[CHAR_INDEX_REI].equip.armor  = 14;
+    Char_RebuildStats(&g_Characters[CHAR_INDEX_REI]);
+    Char_RestoreHP(CHAR_INDEX_REI, 0, 0);
+    Char_RestoreAP(CHAR_INDEX_REI, 0, 0);
+}
 
 #include "overlays/scenario/Scene_DispatchActor.h"
 
