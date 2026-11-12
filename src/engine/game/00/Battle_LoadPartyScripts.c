@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* func_801BEE5C */
-MATCH s32 Battle_LoadPartyScripts(void) {
+MATCH bool Battle_LoadPartyScripts(void) {
     s32 slot;
     s32 off;
     u8  count;

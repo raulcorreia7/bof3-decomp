@@ -49,6 +49,72 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | One-line `/* */` comments that say what a name cannot                                             | A comment that restates the name, tells history or evidence   |
 | Adjacent globals as one struct, array or union, members by role                                   | Loose globals at one base or stride                           |
 
+## Base layer
+
+The header, macros, records and shared bodies follow the forms common to
+[sotn-decomp](https://github.com/Xeeynamo/sotn-decomp),
+[silent-hill-decomp](https://github.com/shdecompilations/silent-hill-decomp),
+[parasite-eve-decomp](https://github.com/khasinski/parasite-eve-decomp),
+[rood-reverse](https://github.com/ser-pounce/rood-reverse),
+[parasite-eve-2-decomp](https://github.com/GabeRealB/parasite-eve-2-decomp) and
+[psx_tomba](https://github.com/hansbonini/psx_tomba).
+
+### Header
+
+| Rule                                                   | Where              |
+| ------------------------------------------------------ | ------------------ |
+| One umbrella header every unit starts from             | `include/common.h` |
+| Fixed-width types and the type asserts                 | `include/types.h`  |
+| No second umbrella and no shared type in `include/psx` | `include/common.h` |
+
+### Utility macros
+
+| Rule                                                               | Where                   |
+| ------------------------------------------------------------------ | ----------------------- |
+| `ABS` has one definition, the vendored PsyQ form                   | `include/psyq/abs.h`    |
+| `ARRAY_COUNT`, `MIN`, `MAX`, `BIT` and the byte and halfword masks | `include/common/util.h` |
+| A macro earns its place by a use; no generic helper without one    | `include/common/util.h` |
+
+### Matching helpers
+
+| Rule                                                                               | Where                   |
+| ---------------------------------------------------------------------------------- | ----------------------- |
+| The 14 `FAKE_*` helpers are the only matching constraints; one form per constraint | `include/match/match.h` |
+| Every use carries `/* FAKE: reason. */`                                            | `include/match/match.h` |
+| No raw `__asm__`, `register ... asm` or `.word` outside this header                | `include/match/match.h` |
+
+### SDK names
+
+| Rule                                                            | Where                          |
+| --------------------------------------------------------------- | ------------------------------ |
+| Vendored PsyQ headers stay unmodified                           | `include/psyq`                 |
+| Use the SDK function, value and macro name; no second name      | `include/psx/psyq.h`           |
+| Use `setXY0` and the `gte_*` macros where the SDK provides them | `include/match/gte_macros.inc` |
+
+### Records
+
+| Rule                                                                           | Where               |
+| ------------------------------------------------------------------------------ | ------------------- |
+| `field_<OFF>` unknown role, `unk_<OFF>` unknown member, `pad_<OFF>` fill       | the owning header   |
+| `/* 0xNN */` before every member; `ASSERT_SIZE` and `ASSERT_OFFSET` per record | `include/types.h`   |
+| `FIELD` and `SP_REF` are seams, not a record style                             | `include/psx/mem.h` |
+
+### Shared bodies
+
+| Rule                                                                               | Where                        |
+| ---------------------------------------------------------------------------------- | ---------------------------- |
+| One body in a header included by a thin `MATCH` `.c` per image                     | `src/shared`, `src/overlays` |
+| A value that differs is a statement macro; a structural difference stays per image | the group header             |
+| Never `#include` a `.c` file                                                       | `src`                        |
+
+### Files and names
+
+| Rule                                                                                         | Where               |
+| -------------------------------------------------------------------------------------------- | ------------------- |
+| Functions `Tag_VerbObject`; `g_` globals; `s_` statics; PascalCase types; snake_case members | [naming](naming.md) |
+| Constants `SCREAMING_SNAKE`; files lower snake by role                                       | [naming](naming.md) |
+| No evidence: `func_<ADDR>`, `D_<ADDR>` or `unk_<OFF>`                                        | [naming](naming.md) |
+
 ## Write it as the original programmer did
 
 Every type, struct, member, value and helper reads the way the game's programmer wrote it in 1997:

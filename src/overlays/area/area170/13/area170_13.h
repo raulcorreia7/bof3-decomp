@@ -24,6 +24,7 @@
 /* The payload includes the per-state handler tables. */
 extern u8 D_801F57BC[];
 extern u8 D_801F5990[];
+extern u8 D_801F64B8[];
 
 extern void func_801F3994(void);
 

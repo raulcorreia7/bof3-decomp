@@ -35,12 +35,12 @@ MATCH void func_801A5B78(u8* script) {
 
     g_Actors[*counter].unk_88 = 0;
 
-    COORD_INT(g_Task->pos.z)  = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
-    g_Task->unk_06            = script[0] >> 4;
-    g_Task->direction_08      = script[0] & 0xF;
-    g_Task->header.mode       = script[0xA];
-    g_Task->header.step       = script[0xC];
-    FIELD(s32, g_Task, 0x70u) = script[0x11];
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    g_Task->unk_06           = script[0] >> 4;
+    g_Task->direction_08     = script[0] & 0xF;
+    g_Task->header.mode      = script[0xA];
+    g_Task->header.step      = script[0xC];
+    g_Task->state_70.word    = script[0x11];
 
     FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[4];
     FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[5];

@@ -82,7 +82,7 @@ MATCH void func_801EEF84(void) {
                 if (func_801EF70C(&g_BattleEnemyBattlers[i & BYTE_MASK]) != 0) {
                     if (g_Battle.active_battler != (i & BYTE_MASK) + BATTLE_PARTY_CHARACTERS_COUNT) {
                         D_801EF790[i & BYTE_MASK] = -1;
-                        func_800A9610(slot, 0x10);
+                        Battle_ApplyDamageFlags(slot, 0x10);
                     }
                 }
             }

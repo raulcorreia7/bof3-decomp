@@ -10,7 +10,38 @@ MATCH void func_801EEC04(void) {
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    PartyMember* work;
+    PartyMember* target;
+    u8           slot;
+    u32          first_slot;
+    u32          i;
+
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    g_Task->pos.x        = g_BattleEffectBattler->pos.x;
+    g_Task->pos.y        = g_BattleEffectBattler->pos.y;
+    g_Task->pos.z        = g_BattleEffectBattler->pos.z;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    first_slot                               = Battle_AllocEffect(1, 0x51) & BYTE_MASK;
+    work                                     = g_Task;
+    g_BattleEffects[first_slot].header.mode  = 0;
+    g_BattleEffects[first_slot].target.party = work;
+    g_Task->param.unk_0B += 1;
+    i = 0;
+    do {
+        slot                               = Battle_AllocEffect(1, 0x51);
+        target                             = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].unk_04       = first_slot;
+        g_BattleEffects[slot].arg.unk_09   = i + 1;
+        g_BattleEffects[slot].unk_0B       = i;
+        g_BattleEffects[slot].target.party = target;
+        g_Task->param.unk_0B += 1;
+        i++;
+    } while (i < 8);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
@@ -64,7 +95,26 @@ MATCH void func_801EF518(void) {
 
 INCLUDE_ASM(func_801EF590);
 
-INCLUDE_ASM(func_801EF650);
+/* Aims the effect at the selected actor, projects its screen point as the effect's range, and advances once the
+ * effect record's step is two. */
+MATCH void func_801EF650(void) {
+    PartyMember* actor;
+    VECTOR       pos;
+
+    if (g_Task->unk_09 < 0x10) {
+        g_Task->unk_09 += 4;
+    }
+    actor  = g_Battle.selected_actor;
+    pos.vx = (actor->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (actor->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = (actor->pos.z.fixed + TO_COORD(256)) >> 17;
+    func_800AF3A0(pos, 0x40);
+    g_Task->unk_10 = g_Task->unk_0C;
+    g_Task->unk_0C = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);
+    if (g_BattleEffects[g_Task->unk_04].header.step == 2) {
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickOnTimerNegative.h"
 

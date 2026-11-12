@@ -25,7 +25,30 @@ MATCH void Scene_EnterSaveArea(void) {
     D_80146872           = 1;
 }
 
-INCLUDE_ASM(func_801F77B4);
+MATCH void func_801F77B4(void) {
+    RECT rect;
+
+    if (g_GameAreaId == AREA_ID_END_GAME_SAVE) {
+        Game_SetScriptActive();
+        Party_HideBattlers();
+        g_AreaCameraAngle.vx = -0x2E4;
+        g_AreaCameraAngle.vz = 0x12C;
+        Area_AdvanceScroll(0x300);
+        Area_UpdateCamera();
+        func_801A0514();
+        Area_DrawScene();
+        rect.x = 0;
+        rect.y = g_FrameBufferIndex * SCREEN_HEIGHT;
+        rect.w = SCREEN_WIDTH;
+        rect.h = SCREEN_HEIGHT;
+        SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x2C0, 0);
+        GFX_AddPrim(5, sizeof(DR_MOVE));
+    }
+    g_AreaDrawFlags = 0;
+    SND_SetBankLayout(2);
+    g_SceneState.mode_02 = 2;
+    g_SceneState.unk_03  = 1;
+}
 
 MATCH void func_801F789C(void) {
     SYS_DISPATCH_BYTE(D_801F9748, D_80146873);
@@ -385,7 +408,21 @@ MATCH void func_801F8404(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8480);
+MATCH void func_801F8480(void) {
+    u8* timer;
+    u32 value;
+
+    timer  = &D_80146875;
+    value  = *timer + 2;
+    *timer = value;
+    if ((u8)value >= 127) {
+        *timer = 0;
+        D_80146874 += 1;
+        func_801F8B10(0x4B0, 0x80);
+    } else {
+        func_801F8B10(0x4B0, (u8)~value);
+    }
+}
 
 MATCH void func_801F84F4(void) {
     u8* timer;

@@ -15,7 +15,7 @@ segments:
       - [0x228, c, func_801F2E28]
       - [0x25C, c, func_801F2E5C]
       - [0x288, c, func_801F2E88]
-      - [0x2C4, c, func_801F2EC4]
+      - [0x2C4, c, Area_UpdateShots]
       - [0x3EC, c, func_801F2FEC]
       - [0x720, c, func_801F3320]
       - [0x778, c, func_801F3378]

@@ -39,4 +39,22 @@ extern u8 D_801F4E50[];
 /* The cells that start the scene events of func_801F4158. */
 extern SceneTrigger D_801F4DD4[];
 
+/* A block of map cells: the first and last column and row, all included. The
+ * upload step of func_801F2D2C reads one block per work x position. */
+typedef struct CellBlock {
+    u8 x0;
+    u8 y0;
+    u8 x1;
+    u8 y1;
+} CellBlock;
+
+ASSERT_SIZE(CellBlock, 0x04);
+ASSERT_OFFSET(CellBlock, y0, 0x01);
+ASSERT_OFFSET(CellBlock, x1, 0x02);
+ASSERT_OFFSET(CellBlock, y1, 0x03);
+
+extern CellBlock D_801F47D4[];
+/* The primitive rows one cell id selects, two per row. */
+extern POLY_FT4  g_AreaCellPrims[][2];
+
 #endif

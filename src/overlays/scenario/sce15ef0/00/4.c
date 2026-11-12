@@ -102,11 +102,62 @@ INCLUDE_ASM(func_801D1220);
 
 INCLUDE_ASM(func_801D1370);
 
-INCLUDE_ASM(func_801D1540);
+MATCH void func_801D1540(s32 x, s32 y, s16 radius, u16 angle) {
+    POLY_G3* prim;
+    u8       i;
+
+    i = 0;
+    do {
+        prim     = GFX_BeginPolyG3(1);
+        prim->x0 = x;
+        prim->y0 = y;
+        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
+        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        angle += 0x100;
+        prim->x2 = x + FIXED_MUL(radius, rcos(angle));
+        i += 1;
+        prim->y2 = y + FIXED_MUL(radius, rsin(angle));
+        setRGB0(prim, 64, 0, 0);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, 0, 0, 0);
+        GFX_AddPrim(3, sizeof(POLY_G3));
+    } while (i < 8);
+}
 
 INCLUDE_ASM(func_801D1690);
 
-INCLUDE_ASM(func_801D1914);
+MATCH void func_801D1914(s16 amount) {
+    VECTOR start;
+    VECTOR end;
+
+    start.vx = TO_COORD(48) + COORD_HALF;
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-768);
+    end.vx   = TO_COORD(48) + COORD_HALF;
+    end.vy   = TO_COORD(113) + COORD_HALF;
+    end.vz   = TO_COORD(-512);
+    func_801D1370(&start, &end, amount);
+
+    start.vx = TO_COORD(48);
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-384);
+    func_801D1370(&start, &end, amount);
+
+    end.vx = TO_COORD(48);
+    end.vy = TO_COORD(113) + COORD_HALF;
+    end.vz = TO_COORD(-256);
+    func_801D1370(&start, &end, amount);
+
+    start.vx = TO_COORD(48) + COORD_HALF;
+    start.vy = TO_COORD(113) + COORD_HALF;
+    start.vz = TO_COORD(-128);
+    func_801D1370(&start, &end, amount);
+
+    end.vx = TO_COORD(48) + COORD_HALF;
+    end.vy = TO_COORD(113) + COORD_HALF;
+    end.vz = 0;
+    func_801D1370(&start, &end, amount);
+}
 
 INCLUDE_ASM(func_801D1A20);
 
