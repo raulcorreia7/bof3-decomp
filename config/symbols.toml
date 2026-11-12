@@ -3144,6 +3144,7 @@ Scene_DispatchEntity = { addr = 0x801D0C04, type = "func", source = "dispatches 
 func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
 g_SceneEntityDispatch = { addr = 0x801D3918, source = "scenario entity dispatch table" }
+g_WorldSpins = { addr = 0x801D3B28, source = "The 32 spin-effect records the scene sprite pass steps and draws." }
 
 ["emi/scenario/sce15ef2/00"]
 func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "func_801D0C04+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
