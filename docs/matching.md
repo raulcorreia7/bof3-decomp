@@ -6,22 +6,22 @@ verdict; a score, a marker or a disassembler opinion is a lead.
 ## Route
 
 Take the cheapest route first and move on after one real attempt. `tools/worklist.py` ranks the open
-functions by route ([find work](../CONTRIBUTING.md#your-first-function)).
+functions by route, in the tool's order below ([find work](../CONTRIBUTING.md#your-first-match)).
 
-| # | Route           | Command                                                                   | Move on when                                            |
-| - | --------------- | ------------------------------------------------------------------------- | ------------------------------------------------------- |
-| 1 | Generator       | `tools/gen_body.py <shape> --dry-run`, then without `--dry-run`           | the shape is `branch`, or the body is not `EXACT`       |
-| 2 | Template        | `tools/template_try.py rows.tsv` (rows from `tools/dups.py near --full`)  | the row is `FAIL`, or the template has `diff_count` > 3 |
-| 3 | Template edit   | `tools/template_diff.py <target>@<func>`, then up to three edits          | three edits leave a difference                          |
-| 4 | m2c sweep, seed | `tools/m2c_sweep.py`, `tools/seed.py` ([tools](../tools/README.md))       | no exact body from the seed                             |
-| 5 | Hand loop       | m2c draft, `tools/match.sh`, [diagnose](#diagnose), [permuter](#permuter) | three structurally different tries fail                 |
+| # | Row         | Route                                                                                          | Move on when                                      |
+| - | ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| 1 | `template0` | `tools/template_try.py <target>@<func>`                                                        | the row is `FAIL`                                 |
+| 2 | `generator` | `tools/gen_body.py <shape>`, then without `--dry-run`                                          | the shape is `branch`, or the body is not `EXACT` |
+| 3 | `template`  | `tools/template_diff.py <target>@<func>`, then up to three edits                               | three edits leave a difference                    |
+| 4 | `plain`     | m2c draft from `tools/seed.py`, `tools/match.sh`, [diagnose](#diagnose), [permuter](#permuter) | three structurally different tries fail           |
 
-Budget: three structurally different tries per function (a different shape, not a tweak of the same
-one). Then record the attempt in `config/attempts.tsv` and report `BLOCKED <reason>`.
+A `template0` row is a matched template with no differing instruction; `template` has up to three.
+A `generator` row names its shape in the last column. Three structurally different tries per function
+— a different instruction count, or a different call or branch sequence — then delete the draft and
+record the attempt ([match](../.agents/skills/decomp/references/match.md)).
 
 A route that gives `EXACT` still needs `check-<image>`, a name from evidence and the shared-body
-treatment ([shared bodies](conventions.md#shared-bodies)). Record failed attempts in
-`config/attempts.tsv` with the function, forms tried, first difference and score when known.
+treatment ([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)).
 
 ## Order of work
 
@@ -46,20 +46,16 @@ Fix causes before functions.
 2. Draft the C in the ignored scratch folder `work/<image>/<ADDR>/`, then move it into the unit's
    `.c` as a `NON_MATCHING` draft ([markers](#markers-and-unmatched-bodies)).
 3. Compile it with the `cc` wrapper and diff it against the target object assembled from the split
-   asm ([toolchain](toolchain.md#compiler-wrapper), [objdiff](toolchain.md#objdiff)), or edit the
-   unit's `.c` and run `tools/match.sh <target> <func>`. It answers in a fraction of a second:
-   `match`, or the first differing instruction, retail against candidate
-   ([match.sh](toolchain.md#matchsh)). `tools/match.sh --diff <target>@<address>` prints the whole
-   function side by side, `!` marking differing rows.
+   asm ([toolchain](toolchain.md#compiler-wrapper), [objdiff](toolchain.md#objdiff)), or run
+   `tools/match.sh` ([match.sh](toolchain.md#matchsh)).
 4. Polish an exact candidate in place ([polish](#polish)).
 5. Replace the draft with a `MATCH` definition and run `check-<image>`. A new lift stays a
    `NON_MATCHING` draft until `tools/match.sh` reports `match` and `check-<image>` passes.
 
-Only the image link proves bytes; `match.sh` compares `.text` only and refuses a function with a
-jump table, string or data of its own. A score and an old comparison prove nothing.
+Only the image link proves bytes; a score and an old comparison prove nothing.
 
-After you add a `hand/` file, a header or a `NON_MATCHING` marker, run
-`meson setup --reconfigure build/meson` ([reconfigure](toolchain.md#reconfigure)).
+A new header, `hand/` file or `NON_MATCHING` marker changes the build graph
+([reconfigure](toolchain.md#reconfigure)).
 
 ## Gates
 
@@ -70,6 +66,7 @@ After you add a `hand/` file, a header or a `NON_MATCHING` marker, run
 | Hygiene           | `format-check`, `include-asm`, `markers`, `addrs`, `kept` | format passes; `INCLUDE_ASM` not above merge base; every definition marked; no recorded address lost; no named helper, define, global, type, member or function lost or degraded |
 
 A failed build or an unsupported flag is a failure, never a match. A percentage only ranks work.
+The full push list, with what fails each check: [tools: pre-push](../tools/README.md#pre-push).
 
 ## Markers and unmatched bodies
 
@@ -112,11 +109,88 @@ authored assembly), so the macro takes only the unit name. A match removes one `
 `include-asm` fails when the tree has more than the merge base with `origin/main` had. It prints
 the ref it used and exits 2 when no such ref exists (`git fetch origin main`).
 
+## Jump tables
+
+A dense `switch` compiles to a jump table in the unit's `.rodata`. Most overlays keep that table in
+the leading data run, before any code, so a lift matches only when the image's layout puts the C
+table there:
+
+1. The function's assembly names the table `jtbl_<ADDR>`. The table runs from that address to the
+   next row the manifest places (the next function or data row); each entry is a word that points
+   into the function.
+2. In `config/<image>/splat.yaml`, order `.rodata` where retail has the table (usually
+   `section_order: [.data, .rodata, .text, .bss]`) and place the table as its own subsegment at its
+   file offset: `- [0xOFFSET, .rodata, <function>]`.
+3. Delete those bytes from the data unit that held them.
+4. Write the `switch`. `splat` then emits the table into the function's own asm file (the text and
+   its table), and the C compiler's table replaces both once the function is `MATCH`.
+
+`tools/match.sh` refuses such a function: its own `.rodata` is not in the partial link. `check-<image>`
+is the proof, and the whole-image bytes are the verdict. Placed tables to read before editing:
+`world04/area168/13@0x801F4A0C` (a 13-entry table at file offset 0x4),
+`world02/area079/13@0x801F2D20` (PR #808) and `world03/area141/13@0x801F2F14` (PR #809).
+An image whose `target.toml` has a `[[matching.section_placements]]` row also repeats the address
+there (for example `emi/battle/battle/03`).
+
 ## Helpers
 
-The shared helpers, inline functions and macro forms, the address seams and the fake-match helpers
-with their `FAKE:` note: [helpers](conventions.md#helpers). Matched C keeps the coding conventions
-([matching code](conventions.md#matching-code)).
+The shared helpers, inline functions and macro forms: [helpers](conventions.md#helpers).
+
+### Address seams
+
+These are the only spellings that carry a literal address or offset. Each is a seam to replace with
+a symbol or a member once the evidence exists.
+
+| Seam                         | Use                                                                        |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `MEM(type, addr)`, `MEM_PTR` | a fixed RAM address with no symbol yet                                     |
+| `FIELD(type, base, off)`     | one access at an offset of a base whose type is not proven yet             |
+| `HW_REF(type, addr)`         | a hardware register (`include/psx/hw.h` names them)                        |
+| `SP*`                        | the scratchpad (`include/sys/scratchpad.h`)                                |
+| `VOL(type, x)`               | a volatile access the hardware or a shared buffer needs; not a fake helper |
+
+### Fake-match helpers
+
+Idiomatic C that matches comes first. A fake-match helper is a measured constraint for compiler
+behavior C cannot express; `include/match/match.h` defines them and they are inert outside the
+matching build. Try in order: correct types and signedness, the original control flow, temporary
+lifetimes and declaration order, casts and grouping, the unit's compiler profile, then a helper.
+
+| Group   | Helpers                                                                                                                                                                                       |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| benign  | `FAKE_VOLATILE_PTR`, `FAKE_BARRIER`, `FAKE_ORDER_LOCK`/`FAKE_ORDER_LOCK_BEGIN`…`FAKE_ORDER_LOCK_END`/`FAKE_ORDER_FENCE`, `FAKE_STACK_PADS` (retail frame bytes nothing explains), `FAKE_HOLD` |
+| harmful | `FAKE_REG` (register pin), `FAKE_CLOBBER_*`, `FAKE_OPAQUE`/`FAKE_USE`                                                                                                                         |
+
+Each use carries an adjacent `/* FAKE: <reason>. */`; a dummy local counts as one, and its note
+carries the best pure-C score. `FAKE_ORDER_LOCK(stmt)` holds one statement; a run of statements goes
+between `FAKE_ORDER_LOCK_BEGIN` and `FAKE_ORDER_LOCK_END;` instead of inside the macro's argument. `FAKE_ORDER_FENCE()` is the empty boundary; write it instead of a bare `do { } while (0);`. Every
+helper compiles away without `MATCHING`, and `check-plain` proves the sources build that way. Prefer benign over harmful: a pointer local, a
+recomputed address or a statement reorder usually moves the allocator before a pin does. A raw
+`__asm__`, a bare `register ... asm("reg")` or a `.word` is not source.
+
+## Matching code
+
+Matched C follows every rule on this page; a match is not a reason to keep the decompiler's shape.
+Restate the decompiler output as structured C, then add the least constraint the bytes need, with
+its reason. Process and diagnosis: [matching](#diagnose).
+
+**Do**: structured C, named locals, real members.
+
+```c
+MATCH void Party_RestoreHp(void) {
+    Character* character;
+    s32        i;
+
+    for (i = 0; i < PARTY_SLOT_COUNT; i++) {
+        character     = &g_Characters[g_PartyFieldOrder[i]];
+        character->hp = character->max_hp;
+    }
+}
+```
+
+A draft that does not match yet keeps the retail assembly as the build path and records its score
+and first mismatch ([markers](#markers-and-unmatched-bodies)). A fake helper is the last
+constraint and carries its `FAKE:` note ([helpers](conventions.md#helpers)).
 
 ## Diagnose
 
@@ -217,7 +291,7 @@ its original programmer wrote it ([the rule](conventions.md#write-it-as-the-orig
 with names still from evidence. It becomes the most human-accurate C that still byte-matches:
 
 - no cast the bytes do not need, and no pointer math: real types and fields (`FIELD` at most);
-- no `temp_v0` or `var_s1` names; evidence-backed names ([names](conventions.md#names)), with the
+- no `temp_v0` or `var_s1` names; evidence-backed names ([names](naming.md#names)), with the
   lint score breaking the last tie;
 - `g_Task` and its members, not a `WORK` or `SP_PTR` view; `g_Game.members[i]`, not `D_801461xx`;
 - named constants ([values](conventions.md#how-a-value-is-written)); decimal for timers, sizes,

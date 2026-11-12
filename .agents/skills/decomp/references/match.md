@@ -13,7 +13,7 @@ whole match; [matching](../../../../docs/matching.md) is the full reference.
    to see its few differences; a `plain` row starts from the seed's m2c draft.
    `tools/dups.py near --full` lists every template pair; `bin/coddog match <target> <func>` lists
    the matched bodies close to it (`-t 0.5` widens the list). A matched twin is shared through its
-   `Name.h` body, never pasted ([shared bodies](../../../../docs/conventions.md#shared-bodies)).
+   `Name.h` body, never pasted ([shared bodies](refactor.md#shared-bodies)).
 
 2. **Read.** `git grep -l 'func_<ADDR>' -- src` finds the unit's `.c`; read its `INCLUDE_ASM`
    line, its neighbours and the prototypes in the image header. `tools/seed.py <TARGET>@<func>`
@@ -59,7 +59,7 @@ whole match; [matching](../../../../docs/matching.md) is the full reference.
 
    On a miss, label the first hunk ([diagnose](../../../../docs/matching.md#diagnose)) and fix it
    by label. Helpers come after pure C fails, benign before harmful, each with its `FAKE:` note
-   ([helpers](../../../../docs/conventions.md#fake-match-helpers)); a near match goes to the
+   ([helpers](../../../../docs/matching.md#fake-match-helpers)); a near match goes to the
    [permuter](../../../../docs/matching.md#permuter).
 
 6. **Three tries, then stop.** A try is a structurally different draft of the whole function: a

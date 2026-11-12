@@ -49,6 +49,9 @@ extern u8  D_801F6B70;
 extern u8  D_801F6B74;
 
 void func_801F3778(s32 arg0, void* dst, RECT* rect);
+/* The spin-step draw reads six arguments from its two callers; the shared area.h cannot carry it
+ * because three other images give func_801F35E0 no arguments. */
+void func_801F35E0(s32 arg0, s32 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5);
 void func_801F3CB8(void);
 void func_801F41B4(void);
 void func_801F3B48(Point2D* pos, u8 shade);

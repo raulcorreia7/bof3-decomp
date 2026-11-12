@@ -124,16 +124,15 @@ if [ ! -s "$co" ]; then
 	die "the draft in $src does not compile (error above). Fix it and run again."
 fi
 
-# The function must come from C: an INCLUDE_ASM of this address makes the object equal retail.
-for f in $(grep -lE "^ +/\* [0-9A-F]+ $addr " "asm/$target"/*.s "asm/$target"/hand/*.s 2>/dev/null || :); do
-	if ninja -C "$B" -t deps "$cand" | grep -q "^ *\.\./\.\./$f\$"; then
-		die "$fname in $src is still INCLUDE_ASM$([ -z "$draft" ] || printf ' (the draft compiled it from %s)' "$f"): the object holds the retail assembly, not your C."
-	fi
-done
-
 # --- Candidate bytes -------------------------------------------------------------------
 
 "$BIN/nm" -S "$co" >"$tmp/nm.txt"
+# The function must come from C. The split assembly's `nonmatching` macro gives its address a
+# `<name>.NON_MATCHING` alias, so its presence proves the object still holds the retail assembly
+# whatever the build graph says about the object's inputs.
+if awk -v n="$fname.NON_MATCHING" '$NF == n { found = 1 } END { exit !found }' "$tmp/nm.txt"; then
+	die "$fname in $src is still INCLUDE_ASM$([ -z "$draft" ] || printf ' (the draft does not replace it)'): the object holds the retail assembly, not your C."
+fi
 # shellcheck disable=SC2046 # the output is a few fields to split
 set -- $(awk -v n="$fname" '$NF == n && $(NF - 1) ~ /^[Tt]$/ && NF == 4 { print $1, $2; exit }' "$tmp/nm.txt")
 [ $# -eq 2 ] || {

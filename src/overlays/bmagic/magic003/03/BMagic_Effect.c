@@ -76,7 +76,20 @@ MATCH void func_801EF0A8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF12C);
+MATCH void func_801EF12C(void) {
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    func_801EFD4C();
+    func_801EFEC8();
+    g_Task->unk_04 = g_Task->param.unk_0B;
+    g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
+    SND_QueueSelectionFx(0x100);
+}
 
 MATCH void func_801EF1FC(void) {
     if (g_Task->param.unk_0B == 0) {
