@@ -7,7 +7,8 @@
 
 extern SVECTOR D_1F800014[];
 
-/* Column views of g_BattleEffects: the effect slot's mode byte and target pointer. */
+/* Column views of g_BattleEffects: func_801EFC68 stores through them because the
+ * record form reuses the target store's g_Task load for the ticker bump. */
 extern u8 D_801EC331[];
 extern u8 D_801EC3A4[];
 
