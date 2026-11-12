@@ -30,7 +30,7 @@ MATCH void func_801EF000(void) {
     g_BattleEffects[slot].target.party = work;
     g_Task->param.unk_0B += 1;
     for (i = 0; i < 256; i++) {
-        MEM(u16, AREA_PALETTE_WORK + 0x400u + i * 2) = MEM(u16, AREA_PALETTE_ARENA_33C00 + i * 2);
+        MEM(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW + i * 2) = MEM(u16, AREA_PALETTE_ARENA_33C00 + i * 2);
     }
     g_GfxPalettePending = 1;
     g_Task->header.mode += 1;
