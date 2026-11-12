@@ -11,7 +11,7 @@ MATCH void func_8019CBD8(void) {
     record                           = g_Task;
     record->tint.signed_bytes.unk_5D = -0x80;
     other                            = g_Task;
-    FIELD(s32, record, 0x70u)        = 1;
+    record->state_70.word            = 1;
     other->tint.signed_bytes.unk_5E  = -0x80;
     g_Task->tint.signed_bytes.unk_5F = -0x80;
     work                             = g_Task;

@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 import check_names
-from check_names import offenders, unnamed_parameters
+from check_names import offenders, offset_macros, unnamed_parameters
 
 
 def test_an_invented_name_with_an_address_is_an_offender() -> None:
@@ -80,6 +80,69 @@ def test_a_diff_with_an_unnamed_parameter_fails(
     monkeypatch.chdir(tmp_path)
     assert check_names.main(["--diff", "HEAD~1"]) == 1
     assert "arg0: an unnamed parameter" in capsys.readouterr().err
+
+
+def test_offset_macros_are_refused_in_a_diff(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/a.c").write_text("void f(void);\n")
+    git("add", ".")
+    git("commit", "-qm", "base")
+    (tmp_path / "src/a.c").write_text(
+        "void f(void) { u8 v = FIELD(u8, base, 0x4u); SP_REF(u8, 0x0u) = v; }\n"
+    )
+    git("commit", "-qam", "add offset reads")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 1
+    err = capsys.readouterr().err
+    assert "FIELD(): 1 new offset access" in err
+    assert "SP_REF(): 1 new offset access" in err
+
+
+def test_a_diff_that_removes_an_offset_access_passes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/a.c").write_text(
+        "void f(void) { u8 v = FIELD(u8, base, 0x4u); }\n"
+    )
+    git("add", ".")
+    git("commit", "-qm", "base")
+    (tmp_path / "src/a.c").write_text("void f(void) { u8 v = base->unk_04; }\n")
+    git("commit", "-qam", "read the member")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 0
+
+
+def test_an_offset_access_in_a_comment_or_string_or_definition_is_not_refused() -> None:
+    assert (
+        offset_macros('/* FIELD(u8, base, 0x4u) */ char* s = "SP_REF(u8, 0x0u)";\n')
+        == set()
+    )
+    assert (
+        offset_macros("#define FIELD(type, base, off) (*FIELD_PTR(type, base, off))\n")
+        == set()
+    )
+    assert (
+        offset_macros("value = FIELD_PTR(u8, base, 0x4u); SP_PTR(u8, 0x0u);\n") == set()
+    )
+
+
+def test_the_offset_macros_are_named() -> None:
+    assert offset_macros("x = FIELD(u8, base, 0x4u); SP(0x18u);\n") == {"FIELD", "SP"}
 
 
 @pytest.fixture

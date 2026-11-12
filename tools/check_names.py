@@ -13,7 +13,10 @@ that no longer occurs, so the list only shrinks. Rename the identifier, then del
 ``--diff REF`` checks the lines a change adds. A new identifier must not use a word the
 vocabulary rejects where another word is decided ([vocabulary](../docs/naming.md#vocabulary)),
 and a parameter must be named. An identifier that already exists at ``REF`` is not a new name:
-this check only stops new debt, the rename map clears the old.
+this check only stops new debt, the rename map clears the old. A file that changes must not gain a
+``FIELD``/``SP_REF``/``SP`` use either: the member of the record or of the scratchpad view is the
+form to write, so those uses can only shrink (plan section AY). A rebuild that moves an existing
+use changes no count, so it passes.
 
 Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline from the tree)
 """
@@ -40,6 +43,11 @@ TOKEN = re.compile(
 ADDRESS = re.compile(r"[0-9A-Fa-f]{8}")
 DEFAULT = re.compile(r"(?:func|D)_[0-9A-F]{8}|L[0-9A-F]{8}|jtbl_\w*|jpt_\w*|s_gap_\w*")
 UNNAMED = re.compile(r"arg[0-9]+")
+OFFSET_MACRO = re.compile(r"\b(FIELD|SP_REF|SP)\s*\(")
+OFFSET_DEFINITION = re.compile(r"^[ \t]*\#[ \t]*define[ \t]+(?:FIELD|SP_REF|SP)\b")
+SKIP = re.compile(
+    r"/\*.*?\*/|//[^\n]*|\"(?:\\.|[^\"\\\n])*\"|'(?:\\.|[^'\\\n])*'", re.DOTALL
+)
 WORD = re.compile(r"[A-Z]+(?=[A-Z][a-z])|[A-Z]?[a-z]+|[A-Z]+|[0-9]+")
 
 # One word per concept: a new name that uses a rejected word takes the decided word instead.
@@ -155,6 +163,43 @@ def unnamed_parameters(text: str) -> set[str]:
     }
 
 
+def offset_macros(text: str) -> set[str]:
+    """``FIELD``, ``SP_REF`` and ``SP`` uses in code; comments and strings are skipped."""
+    if OFFSET_DEFINITION.match(text):
+        return set()
+    return {m.group(1) for m in OFFSET_MACRO.finditer(SKIP.sub(" ", text))}
+
+
+def macro_counts(text: str) -> dict[str, int]:
+    """``FIELD``/``SP_REF``/``SP`` uses in code, per macro name."""
+    counts: dict[str, int] = {}
+    for match in OFFSET_MACRO.finditer(SKIP.sub(" ", text)):
+        counts[match.group(1)] = counts.get(match.group(1), 0) + 1
+    return counts
+
+
+def changed_paths(ref: str) -> list[str]:
+    """The paths under include/ or src/ a change touches."""
+    out = subprocess.run(
+        ["git", "diff", "--name-only", f"{ref}...HEAD", "--", *ROOTS],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout
+    return [path for path in out.split() if path]
+
+
+def base_text(ref: str, path: str) -> str:
+    """The file at ``path`` as it is in the base revision; empty when new."""
+    result = subprocess.run(
+        ["git", "show", f"{ref}:{path}"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout if result.returncode == 0 else ""
+
+
 def added_lines(ref: str):
     """Yield (path, line, text) for each line a change adds under include/ or src/."""
     diff = subprocess.run(
@@ -246,11 +291,30 @@ def main(argv: list[str]) -> int:
                     file=sys.stderr,
                 )
                 bad = 1
+        for path in changed_paths(argv[1]):
+            before = macro_counts(base_text(argv[1], path))
+            after_text = Path(path).read_text(encoding="utf-8", errors="replace")
+            after = macro_counts(after_text)
+            grown = {name: after[name] - before.get(name, 0) for name in after}
+            for name, extra in sorted(grown.items()):
+                if extra <= 0:
+                    continue
+                where = [
+                    f"{path}:{number}"
+                    for number, text in enumerate(after_text.splitlines(), 1)
+                    if name in offset_macros(text)
+                ]
+                print(
+                    f"{where[0]}: {name}(): {extra} new offset access(es); "
+                    "write the member of the record or of the scratchpad view",
+                    file=sys.stderr,
+                )
+                bad = 1
         if bad:
             print(f"check-names: names against {argv[1]}", file=sys.stderr)
             return 1
         print(
-            f"check-names: no new rejected names or unnamed parameters against {argv[1]}"
+            f"check-names: no new rejected names, unnamed parameters or offset accesses against {argv[1]}"
         )
         return 0
     now = tree_entries()

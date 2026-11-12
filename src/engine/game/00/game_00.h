@@ -957,7 +957,7 @@ bool  Game_RequestPersonalAction(void);
 /* func_801B5F68 */
 bool  Game_RequestRockKick(s32 walk_speed);
 /* func_801B6044 */
-s32   Game_RequestGarrPush(void);
+bool  Game_RequestGarrPush(void);
 void  func_801B60DC(s32 actor_index);
 bool  func_801B6258(void);
 void  func_801B6418(void);
@@ -1057,12 +1057,12 @@ void  Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state);
 void  func_801BEBB0(void);
 void  func_801BEDD0(void);
 /* func_801BEE5C */
-s32   Battle_LoadPartyScripts(void);
-u8    func_801BF11C(void);
+bool  Battle_LoadPartyScripts(void);
+bool  func_801BF11C(void);
 /* func_801BF448 */
 void  Battle_PlaceMembers(void);
 void  func_801BF5A8(s32 x, s32 y, s32 party_slot);
-u8    func_801BF78C(void);
+bool  func_801BF78C(void);
 void  func_801BF8E0(void);
 void  func_801BFAC4(void);
 void  func_801BFB34(void);
@@ -1288,7 +1288,7 @@ void  func_801F30C8(void);
 void  func_801F30EC(void);
 s32   func_801F3118(s32, s32);
 void  func_801F3120(void);
-s32   func_801F315C(s32, s32);
+bool  func_801F315C(s32, s32);
 void  func_801F3180(void);
 void  func_801F3194(void);
 void  func_801F3198(void);

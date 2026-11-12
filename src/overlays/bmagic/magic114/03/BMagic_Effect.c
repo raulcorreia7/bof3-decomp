@@ -4,7 +4,34 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC44);
+MATCH void func_801EEC44(void) {
+    Callback handlers[7];
+    s32      tpage;
+
+    __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+    if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
+        func_801EF128();
+    }
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+}
 
 INCLUDE_ASM(func_801EEDA0);
 
