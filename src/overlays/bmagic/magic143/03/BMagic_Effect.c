@@ -33,7 +33,26 @@ MATCH void func_801EEC5C(void) {
 /* func_801EED70 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EEDB4);
+MATCH void func_801EEDB4(void) {
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), g_Task->header.step);
+    func_800AF764();
+    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
+        Effect_SetActorMatrixRolled();
+        func_801EF23C(0x30, 0x10, 3);
+        g_Task->param.unk_0B += 4;
+        func_801EF23C(0x20, 0x50, 0xF);
+        g_Task->param.unk_0B += 2;
+        Effect_DrawBolt();
+        g_Task->param.unk_0B += 4;
+        func_801EF23C(0x18, BOLT_RADIUS, BOLT_FLICKER_MASK);
+        g_Task->param.unk_0B -= 0xA;
+        g_Task->unk_2E.half += 0x10;
+        func_801EFC74();
+        g_Task->unk_2E.half -= 0x20;
+        func_801EFC74();
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EEF10(void) {
     g_Task->param.unk_0B = RANDOM_MASK(15);
