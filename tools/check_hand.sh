@@ -6,6 +6,9 @@
 # The build graph fixes where each C unit finds its assembly at configure time. A new
 # asm/<target>/hand/*.s file changes nothing until Meson is configured again.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,7p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.."
 
 now=$(find asm -path '*/hand/*.s' | sort)

@@ -152,6 +152,9 @@ def draft_rows(root: Path, rows: list[str]) -> list[str]:
 
 def main() -> int:
     """Split every stale target and print the Meson graph."""
+    if sys.argv[1:] in (["-h"], ["--help"]):
+        print(__doc__.strip())
+        return 0
     root = repo_layout().root
     try:
         symbols.generate(root)

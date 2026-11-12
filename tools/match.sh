@@ -16,6 +16,9 @@
 # Only .text is compared; `check-<image>` stays the acceptance gate. Method and limits:
 # docs/toolchain.md#matchsh.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.."
 
 B=build/meson

@@ -6,6 +6,9 @@
 #
 # BASE_REF defaults to the newer of refs/remotes/public/main and refs/remotes/origin/main.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,7p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.."
 
 ref=${1:-}

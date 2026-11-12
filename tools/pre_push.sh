@@ -8,6 +8,9 @@
 # public/main, origin/main and main. Each log is build/pre-push/<check>.log. Format first with
 # `meson compile -C build/meson format`.
 set -u
+case "${1:-}" in
+-h | --help) sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.." || exit 2
 bld=${BUILD_DIR:-build/meson}
 logs=build/pre-push

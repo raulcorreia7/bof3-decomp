@@ -14,6 +14,9 @@
 # `meson setup build/meson`. The retail files stay in <checkout>; do not delete it while the
 # worktree is in use.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 
 usage() {
 	sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//' >&2

@@ -5,6 +5,9 @@
 #
 #   tools/check_plain.sh [JOBS]
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,6p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.."
 
 gcc_dir=toolchains/gcc-2.7.2-psx
