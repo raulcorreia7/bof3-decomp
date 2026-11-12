@@ -109,7 +109,7 @@ MATCH void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha) {
     u16      angle;
     u16      next;
 
-    for (angle = 0; angle < 0x1000; angle += 0x100) {
+    for (angle = 0; angle < ONE; angle += 0x100) {
         prim     = GFX_BeginPolyG3(1);
         prim->x0 = x;
         prim->y0 = y;
