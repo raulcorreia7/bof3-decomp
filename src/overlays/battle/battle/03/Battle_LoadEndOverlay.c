@@ -46,7 +46,7 @@ MATCH void Battle_LoadEndOverlay(void) {
     if (BATTLE_IS_RANDOM()) {
         u8 flags = g_Battle.outcome.result;
 
-        if ((flags & 1u) != 0u) {
+        if ((flags & 0x1u) != 0u) {
             g_Battle.phase.step = 2u;
         }
         if ((flags & BATTLE_RESULT_VICTORY) != 0u) {

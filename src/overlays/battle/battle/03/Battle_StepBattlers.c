@@ -17,7 +17,7 @@ MATCH s32 Battle_StepBattlers(void) {
     do {
         if (!(func_801D64C4(index) & BYTE_MASK)) {
             flags = g_Game.members[index].u.turn.action_flags.volatile_value;
-            if (flags & 2) {
+            if (flags & 0x2) {
                 if (flags & 0x20) {
                     /* retail shares this clear block */
                     goto clear;

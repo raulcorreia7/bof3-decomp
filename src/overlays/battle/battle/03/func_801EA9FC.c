@@ -11,5 +11,5 @@ MATCH void func_801EA9FC(void) {
         g_MenuCurrentPanel->pos.y = y - 8;
     }
     func_801D7EB0((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
-    UI_DrawText((g_MenuCurrentPanel->pos.x + 4), (g_MenuCurrentPanel->pos.y + 3), 0, 0xFF, D_801EB5B4[((D_801EBF04 - 1) & 0xF) * 2]);
+    UI_DrawText((g_MenuCurrentPanel->pos.x + 4), (g_MenuCurrentPanel->pos.y + 3), 0, 255, D_801EB5B4[((D_801EBF04 - 1) & 0xF) * 2]);
 }

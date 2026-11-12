@@ -9,7 +9,7 @@ MATCH void func_800AD930(void) {
         work = (PartyMember*)g_Task;
         work->header.step--;
     }
-    if (!(D_80148624 & 1)) {
+    if (!(D_80148624 & 0x1)) {
         BATTLE_WORK->header.mode++;
         BATTLE_WORK->header.step = 0;
     }

@@ -18,7 +18,7 @@ MATCH void func_8009B828(void) {
             if (!Battle_SlotIsBlocked(i)) {
                 flags                         = g_Game.members[i].facing;
                 g_Game.members[i].header.mode = 2;
-                g_Game.members[i].facing      = flags ^ 2;
+                g_Game.members[i].facing      = flags ^ 0x2;
                 /* FAKE: keeps the slot argument move in the jal delay slot;
                  * pure-C best 91.25%, without this barrier 93.75%. */
                 FAKE_BARRIER();
@@ -28,7 +28,7 @@ MATCH void func_8009B828(void) {
             i++;
         }
         func_801D9484();
-        func_801DE560(2, 0, 0, 0x2D, Message_GetText(0xF));
+        func_801DE560(2, 0, 0, 45, Message_GetText(0xF));
         g_BattleMode    = BATTLE_MODE_TURNS;
         g_BattleStep    = 0;
         g_BattleSubStep = 0;

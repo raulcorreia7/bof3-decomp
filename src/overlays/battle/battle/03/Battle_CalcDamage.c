@@ -91,7 +91,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     } else {
         damage = Battle_RollHitOnEnemy(damage, attacker, target);
     }
-    if (flags & 2) {
+    if (flags & 0x2) {
         damage = (damage * spread.percent[RANDOM_MOD(8)]) / 100;
     }
     if (g_Battle.state & BATTLE_STATE_CRITICAL) {

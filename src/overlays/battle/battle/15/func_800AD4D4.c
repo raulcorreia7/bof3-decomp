@@ -13,7 +13,7 @@ MATCH void func_800AD4D4(void) {
     second            = work->param.unk_0B;
     remainder         = (u8)first % 6;
     work->unk_2E.half = D_80148628 + (remainder * 0x1E + 0x13);
-    work->unk_30.half = (second / 3 * 16 & 0x1FE0) + (0x30 + D_8014862A);
+    work->unk_30.half = (second / 3 * 0x10 & 0x1FE0) + (0x30 + D_8014862A);
     index             = 0;
     if (g_Battle.gene_count != 0) {
         do {

@@ -50,7 +50,7 @@ MATCH void func_800A60DC(void) {
                 cursor_words[0] = cursor_col - 1;
             }
         }
-    } else if (input & 4) {
+    } else if (input & 0x4) {
         if (cursor_row >= 3) {
             cursor_words[1] = cursor_row - 3;
         } else if (cursor_row == 0) {
@@ -67,7 +67,7 @@ MATCH void func_800A60DC(void) {
                 cursor_words[0] = cursor_col + 1;
             }
         }
-    } else if (input & 8) {
+    } else if (input & 0x8) {
         if (cursor_row == 9) {
             cursor_words[0] = 2;
         } else if (cursor_row + cursor_col + 3 < 0xA) {

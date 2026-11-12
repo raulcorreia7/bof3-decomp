@@ -6,6 +6,6 @@ MATCH void func_800B0118(void) {
 
     work         = (BattleWork*)g_Task;
     table_index  = D_800B6D00[g_Battle.dragon_form];
-    work->unk_0C = D_800B6C90[table_index].values[work->unk_08 & 3][0];
-    work->unk_10 = D_800B6C90[table_index].values[work->unk_08 & 3][1];
+    work->unk_0C = D_800B6C90[table_index].values[work->unk_08 & 0x3][0];
+    work->unk_10 = D_800B6C90[table_index].values[work->unk_08 & 0x3][1];
 }

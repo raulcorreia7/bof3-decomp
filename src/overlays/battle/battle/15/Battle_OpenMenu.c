@@ -35,7 +35,7 @@ MATCH void Battle_OpenMenu(void) {
     for (; row < 3U; row++) {
         for (col = 0; col < 6U; col++) {
             shifted_mask    = (*mask) >> (row * 6 + col);
-            flags[row][col] = shifted_mask & 1;
+            flags[row][col] = shifted_mask & 0x1;
         }
     }
     g_InputRepeatButtons        = 0;

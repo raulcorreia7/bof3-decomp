@@ -12,5 +12,5 @@ MATCH void Battle_AddMessage(s8 index, s8 record_kind, u8* text) {
     i                 = D_801EC328;
     off               = (int)(u8)i * 2;
     D_801EB5B4[off]   = text;
-    D_801EC328        = (i + 1u) & 0x0Fu;
+    D_801EC328        = (i + 1u) & 0xFu;
 }

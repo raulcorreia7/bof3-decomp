@@ -11,7 +11,7 @@ MATCH void func_801DD8AC(u32 battler_index) {
 
     battler_index &= BYTE_MASK;
     off = battler_index * 320u;
-    if ((((u8*)(g_Game.members))[off] & 1u) != 0u) {
+    if ((((u8*)(g_Game.members))[off] & 0x1u) != 0u) {
         character_offset                                                             = g_Game.members[battler_index].character_index * PARTY_RECORD_STRIDE;
         /* FAKE: volatile-drop keeps the original load and store order. */
         *FAKE_VOLATILE_PTR(u16, ((u8*)&g_Characters[0].hp + character_offset))       = g_Game.members[battler_index].chr.hp;

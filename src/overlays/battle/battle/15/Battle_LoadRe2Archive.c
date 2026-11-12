@@ -5,7 +5,7 @@ MATCH void Battle_LoadRe2Archive(void) {
     u8* lock;
 
     lock = &D_80148624;
-    if ((*lock & 1) == 0) {
+    if ((*lock & 0x1) == 0) {
         func_80097FE8();
         D_80148594 = 0;
         *lock      = 0;

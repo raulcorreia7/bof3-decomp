@@ -19,7 +19,7 @@ MATCH void func_801E679C(void) {
         } else {
             g_Task->unk_2A = 0;
         }
-    } else if (g_Task->facing & 1) {
+    } else if (g_Task->facing & 0x1) {
         g_Task->unk_2A = 1;
     } else {
         g_Task->unk_2A = 0;

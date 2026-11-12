@@ -7,10 +7,10 @@ MATCH void func_800AD808(void) {
     work = TASK_BYTES;
     funcs[work[0x02]]();
     work = TASK_BYTES;
-    if (!(work[0x00] & 1)) {
+    if (!(work[0x00] & 0x1)) {
         return;
     }
-    if (!(D_80148624 & 1)) {
+    if (!(D_80148624 & 0x1)) {
         work[0x01]               = 2;
         BATTLE_WORK->header.step = 0;
         return;

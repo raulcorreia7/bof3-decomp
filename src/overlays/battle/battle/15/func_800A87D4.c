@@ -12,7 +12,7 @@ MATCH void func_800A87D4(void) {
     BattleWorkImage* slot;
     u32              index;
 
-    index = Battle_AllocEffect(0, 0x12);
+    index = Battle_AllocEffect(0, 18);
     if ((index & BYTE_MASK) != GAME_NONE) {
         slot                                             = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
         /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell */

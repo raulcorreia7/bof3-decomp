@@ -3,7 +3,7 @@
 MATCH void func_801E6420(void) {
     BattleEffect* slot;
 
-    func_801DE560(1, 0, 0, 0x1E, BATTLER_IS_PLAYER(g_Battle.active_battler) ? D_801EB05B : D_801EB068);
+    func_801DE560(1, 0, 0, 30, BATTLER_IS_PLAYER(g_Battle.active_battler) ? D_801EB05B : D_801EB068);
     slot                 = D_801EC2E0;
     g_BattleMessageState = 1;
     slot->arg.unk_09     = 2;

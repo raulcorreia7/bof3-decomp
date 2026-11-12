@@ -52,7 +52,7 @@ MATCH void func_80097EC0(void) {
     if (flag_mask != 2u) {
         VOL(u16, g_BattleChoicePanel[0x14]) = 0u;
     } else {
-        VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 2u);
+        VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 0x2u);
     }
     init_work->scroll_base_x = 0x140u;
     init_work->scroll_base_y = 0x3Fu;

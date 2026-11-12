@@ -39,7 +39,7 @@ MATCH void func_801E10C8(void) {
             if (g_Task->unk_03 == 5) {
                 cue = 0x2E;
             }
-            func_801DE560(2, 0, 0, 0x2D, Message_GetText(cue));
+            func_801DE560(2, 0, 0, 45, Message_GetText(cue));
         }
         g_Task->unk_03 = 2;
         func_801DEDE4();

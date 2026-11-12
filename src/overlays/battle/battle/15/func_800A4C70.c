@@ -8,7 +8,7 @@ MATCH void func_800A4C70(void) {
     u8           count;
 
     flag = &D_80148624;
-    if ((*flag & 1) == 0) {
+    if ((*flag & 0x1) == 0) {
         *flag = 0;
         Menu_OpenPanelTask(0x12, 5);
         D_801485BA                               = 2;

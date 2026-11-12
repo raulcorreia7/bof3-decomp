@@ -2,7 +2,7 @@
 
 MATCH void func_800A58F4(void) {
     if (EMI_IsReady() != 0) {
-        GFX_CopyPalette(0x1B);
+        GFX_CopyPalette(27);
         g_GfxPalettePending                             = 1;
         g_Battle.selection_latch                        = 0;
         g_BattleActorTurn->command.type                 = BATTLE_COMMAND_ABILITY;

@@ -14,7 +14,7 @@ MATCH void func_8009B488(void) {
 
     index                 = 2;
     g_BattleEventSlots[0] = 0;
-    func_801DE560(1, 0, 0, 0x3C, (u8*)&D_801EB082);
+    func_801DE560(1, 0, 0, 60, (u8*)&D_801EB082);
     g_BattleMessageState = 1;
     speed_offset         = g_Battle.scroll_dir * index;
     g_AreaCameraStep     = 0x20;
@@ -48,7 +48,7 @@ MATCH void func_8009B488(void) {
                 g_Game.members[index].header.step         = 0;
                 g_Game.members[index].unk_03              = 0;
                 g_Game.members[index].unk_04              = 0;
-                g_Game.members[index].facing              = state ^ 2;
+                g_Game.members[index].facing              = state ^ 0x2;
             }
             count++;
         } while ((u32)(count & BYTE_MASK) < g_Battle.party_count);
