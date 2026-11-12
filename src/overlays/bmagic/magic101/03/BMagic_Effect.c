@@ -167,7 +167,7 @@ MATCH void func_801EF3DC(void) {
         work->unk_09         = work->unk_04 * 4 + 1;
         work->unk_0C         = value << 8;
         g_Task->timer        = 0;
-        g_Task->header.step  = g_Task->header.step + 1;
+        g_Task->header.step += 1;
     }
 }
 
