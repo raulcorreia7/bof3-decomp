@@ -27,7 +27,32 @@ MATCH void func_801EEC14(void) {
 
 INCLUDE_ASM(func_801EED28);
 
-INCLUDE_ASM(func_801EEE8C);
+MATCH void func_801EEE8C(void) {
+    u8           count;
+    u8           i;
+    u8           slot;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        i = 0;
+        do {
+            SND_QueueSelectionFx(0x100);
+            slot = BMagic_AllocEffect();
+            if (slot != 0xFF) {
+                work                                   = g_Task;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = ((i & BYTE_MASK) * 4) + 8;
+                BMAGIC_EFFECT_SLOTS[slot].target.party = work;
+                g_Task->param.unk_0B += 1;
+            }
+            i++;
+        } while (i < 16);
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEF8C);
 
