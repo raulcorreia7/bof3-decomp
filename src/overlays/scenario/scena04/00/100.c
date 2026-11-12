@@ -81,7 +81,7 @@ MATCH void func_801F77EC(void) {
     /* FAKE: retail reserves 16 bytes of unused stack. */
     FAKE_STACK_PADS(u8, 16);
 
-    work    = MEM_PTR(ScenePathWork, 0x800E5C00u);
+    work    = MEM_PTR(ScenePathWork, AREA_WORK + 0x1400);
     work->x = D_80147A8C;
     work->y = g_AreaFocusY;
     work->z = D_80147A94 >> 8;

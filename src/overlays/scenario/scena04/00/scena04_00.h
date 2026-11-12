@@ -10,8 +10,7 @@
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x25
 
-/* One point of the path func_801F77EC builds in the fixed work area at
- * 0x800E5C00. */
+/* One point of the path func_801F77EC builds in the area work memory. */
 typedef struct ScenePathPoint {
     s32 x;   /* 0x00 */
     s32 y;   /* 0x04 */
