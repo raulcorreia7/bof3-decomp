@@ -30,6 +30,6 @@ MATCH void func_801F3244(void) {
 
     RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
 
-    func_80155560(0x2378013Du, prim, 1);
+    func_80155560((0x2378u << 16) | 0x013Du, prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_FT4));
 }
