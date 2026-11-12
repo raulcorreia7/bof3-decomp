@@ -2,7 +2,8 @@
 
 /* Scans the table range, bumps the work phase when either mask is
  * set, then calls the shared tail with the second mask. */
-MATCH void func_801DA498(void) {
+/* func_801DA498 */
+MATCH void Fishing_CautionInput(void) {
     Fishing_DrawCautionBox(68, 78);
     if (g_InputPressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) {
         FISHING_STATE->sub_index_03 += 1;

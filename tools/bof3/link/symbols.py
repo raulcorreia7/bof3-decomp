@@ -25,16 +25,14 @@ from __future__ import annotations
 import re
 import subprocess
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, NamedTuple
+from typing import Any, NamedTuple
 
 from bof3.core.cache import file_memo
 from bof3.core.paths import BUILD, CONFIG
 
-if TYPE_CHECKING:
-    from bof3.state.rows import Row
-
 __all__ = [
     "ADDRESS_NAME",
+    "Entry",
     "LinkError",
     "address_of",
     "generate",
@@ -88,16 +86,20 @@ class Entry(NamedTuple):
             parts.append(f"size:0x{self.size:X}")
         return " ".join(parts)
 
-    def row(self) -> Row:
-        """The row in the form tools read: name, address and a Splat-style comment."""
+    @property
+    def address(self) -> int:
+        """The row's address."""
+        return self.addr
+
+    @property
+    def comment(self) -> str:
+        """The row comment: attributes, alias and source."""
         parts = [self.attributes]
         if self.alias:
             parts.append("alias:true")
         if self.source:
             parts.append(f'source="{self.source}"')
-        from bof3.state.rows import Row
-
-        return Row(self.name, self.addr, " ".join(p for p in parts if p))
+        return " ".join(p for p in parts if p)
 
 
 def address_of(name: str) -> int | None:
@@ -268,14 +270,14 @@ def load(root: Path) -> dict[str, list[Entry]]:
     return file_memo("symbols-table", [path], None, read)
 
 
-def target_rows(root: Path, target: str) -> list[Row]:
+def target_rows(root: Path, target: str) -> list[Entry]:
     """Return one target's own rows, sorted by address.
 
     Every reader of the table goes through this function, so the file format is a detail of
     this module.
     """
     entries = sorted(load(root).get(target, ()), key=lambda e: e.addr)
-    return [entry.row() for entry in entries]
+    return entries
 
 
 def generate(root: Path) -> None:

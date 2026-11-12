@@ -5,7 +5,8 @@
  * zero it sets the byte at +0x6 to 1 and increments the byte at +0x3; the frame
  * then redraws through Fishing_DrawDimScreen, Fishing_DrawWindowFrame and func_8014F800 (the
  * quit prompt message). */
-MATCH void func_801DA058(void) {
+/* func_801DA058 */
+MATCH void Fishing_QuitSlideIn(void) {
     FISHING_STATE->step_timer_09 = (FISHING_STATE->step_timer_09 - 1);
     Fishing_DrawPromptBox((s16)((FISHING_STATE->step_timer_09 * 0x50) + 0x6C), 0x56);
     if (FISHING_STATE->step_timer_09 == 0) {

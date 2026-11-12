@@ -5,7 +5,8 @@
 /* Draws the AREA030 prompt frame for the caret row, queues the cue the
  * pad pair selects and advances the panel step, then re-arms the panel window
  * and the prompt row. */
-MATCH void func_801DA168(void) {
+/* func_801DA168 */
+MATCH void Fishing_QuitInput(void) {
     u16*          pad;
     FishingState* work;
 

@@ -2,12 +2,12 @@
 """Try matched C functions as the bodies of assembly functions, and keep the exact ones.
 
     tools/template_try.py REF [--dry-run]
-    tools/template_try.py ROWS.tsv [--dry-run]
+    tools/template_try.py ROWS.jsonl [--dry-run]
 
 REF is `TARGET@NAME` or `TARGET@0xADDRESS`; the tool uses its closest lifted template
-(`tools/template_diff.py` finds it). Each row of ROWS.tsv is `TARGET@NAME`, a tab, then
-`TEMPLATE@NAME`: the assembly function and the lifted function it resembles (other columns are
-ignored). The tool lines up the template's instructions with the target's. Where
+(`tools/template_diff.py` finds it). Each line of ROWS.jsonl is an object with the keys `target`
+and `template`: the assembly function and the lifted function it resembles. A tab-separated row of
+the two refs is also read. The tool lines up the template's instructions with the target's. Where
 only a relocation symbol differs (`%hi/%lo(D_x)`, `jal func_x`), it names the target's symbol in
 the template's C and declares it like the template's; where only an immediate differs and that
 literal occurs once in the body, it writes the target's literal. It then puts the body in place of
@@ -22,6 +22,7 @@ treatment of docs/conventions.md.
 from __future__ import annotations
 
 import argparse
+import json
 import re
 from pathlib import Path
 
@@ -106,9 +107,20 @@ def closest_row(funcs: list[Func], ref: str) -> str:
     return f"{target.image}@{target.name}\t{template.image}@{template.name}"
 
 
-def attempt(funcs: list[Func], row: str, dry: bool) -> str:
-    """Try one row and return its report line."""
-    target_ref, template_ref = row.split("\t")[:2]
+def read_rows(path: Path) -> list[tuple[str, str]]:
+    """Return the target and template refs of a rows file."""
+    lines = [
+        line
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.startswith("#")
+    ]
+    if path.suffix == ".jsonl":
+        return [(row["target"], row["template"]) for row in map(json.loads, lines)]
+    return [tuple(line.split("\t")[:2]) for line in lines]  # type: ignore[misc]
+
+
+def attempt(funcs: list[Func], target_ref: str, template_ref: str, dry: bool) -> str:
+    """Try one pair and return its report line."""
     target, template = find(funcs, target_ref), find(funcs, template_ref)
     if target.status != "ASM" or not target.src:
         return f"SKIP {target_ref} is not an INCLUDE_ASM function"
@@ -152,7 +164,7 @@ def main(argv: list[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument(
-        "rows", help="TARGET@NAME, or a TSV of TARGET@NAME and TEMPLATE@NAME"
+        "rows", help="TARGET@NAME, or a JSON Lines file of target and template refs"
     )
     parser.add_argument(
         "--dry-run", action="store_true", help="print each body; change nothing"
@@ -161,14 +173,13 @@ def main(argv: list[str] | None = None) -> int:
     funcs = load_index(ROOT)
     source = Path(args.rows)
     if source.is_file():
-        lines = source.read_text(encoding="utf-8").splitlines()
+        pairs = read_rows(source)
     elif "@" in args.rows:
-        lines = [closest_row(funcs, args.rows)]
+        pairs = [tuple(closest_row(funcs, args.rows).split("\t"))]
     else:
         parser.error(f"{args.rows}: not a rows file and not a TARGET@NAME")
-    for row in lines:
-        if row.strip() and not row.startswith("#"):
-            print(attempt(funcs, row, args.dry_run), flush=True)
+    for target_ref, template_ref in pairs:
+        print(attempt(funcs, target_ref, template_ref, args.dry_run), flush=True)
     return 0
 
 

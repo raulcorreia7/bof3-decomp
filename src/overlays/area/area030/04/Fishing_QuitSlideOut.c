@@ -4,7 +4,8 @@
  * position to the row redraw, and on the last row resets the counter and bumps
  * the state counter selected by the record flag; the frame then redraws the
  * panel and the address-based cursor. */
-MATCH void func_801DA2A0(void) {
+/* func_801DA2A0 */
+MATCH void Fishing_QuitSlideOut(void) {
     u8*  work;
     u8*  byte_counter;
     u16* word_counter;
