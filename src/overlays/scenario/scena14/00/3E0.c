@@ -60,7 +60,28 @@ INCLUDE_ASM(func_801F88DC);
 
 INCLUDE_ASM(func_801F8CE4);
 
-INCLUDE_ASM(func_801F924C);
+MATCH void func_801F924C(void) {
+    s32* scroll;
+    s32* party;
+    s32* focus;
+    u16  height;
+
+    if (g_AreaCameraX == 0x77FF) {
+        g_AreaCameraX = 0x63FF;
+        scroll        = &g_AreaScrollTargetX;
+        party         = &g_PartyX;
+        focus         = &D_80147A8C;
+        g_AreaTileOriginX += 20;
+        *scroll += TO_COORD(20);
+        *party += TO_COORD(20);
+        height         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        g_ScrollHeight = height;
+        Area_AdvanceScroll(height);
+        Area_RefreshCellGrid();
+        *focus += TO_COORD(20);
+        D_80147A96 = Area_SampleHeight(*focus, g_AreaFocusY);
+    }
+}
 
 INCLUDE_ASM(func_801F9320);
 
