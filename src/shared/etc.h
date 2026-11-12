@@ -34,6 +34,8 @@ extern u8          D_8014554F[];
 extern u8          D_801455C3;
 extern u8          D_801455C4;
 extern u8          D_801455C5;
+/* The fairy job indices the room list draws; D_80145E44 counts them. */
+extern u8          D_80145E30[];
 extern s32         D_80145EC4; /* 0x80145EC4 */
 extern u8          D_8014842D;
 extern u8          D_8014842E;
