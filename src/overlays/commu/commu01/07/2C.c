@@ -103,7 +103,23 @@ MATCH u8 func_801D3A48(u8 arg) {
     return count;
 }
 
-INCLUDE_ASM(func_801D3AA0);
+MATCH u8 func_801D3AA0(s32 type, s32 index) {
+    s32 count;
+    s32 i;
+
+    count = 0;
+    for (i = 0; i < FAIRY_JOB_COUNT; i++) {
+        if (g_FairyJobs[i].active != 0) {
+            if (g_FairyJobs[i].type == (u8)type) {
+                if ((count & BYTE_MASK) == (u8)index) {
+                    return (u8)i;
+                }
+                count++;
+            }
+        }
+    }
+    return 0xFF;
+}
 
 INCLUDE_ASM(func_801D3B0C);
 
