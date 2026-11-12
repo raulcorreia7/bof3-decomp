@@ -116,7 +116,9 @@ def test_a_diff_that_removes_an_offset_access_passes(
     git("config", "user.email", "t@t")
     git("config", "user.name", "t")
     (tmp_path / "src").mkdir()
-    (tmp_path / "src/a.c").write_text("void f(void) { u8 v = FIELD(u8, base, 0x4u); }\n")
+    (tmp_path / "src/a.c").write_text(
+        "void f(void) { u8 v = FIELD(u8, base, 0x4u); }\n"
+    )
     git("add", ".")
     git("commit", "-qm", "base")
     (tmp_path / "src/a.c").write_text("void f(void) { u8 v = base->unk_04; }\n")
