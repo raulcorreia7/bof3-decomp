@@ -19,7 +19,6 @@ feeds the report only: the images link the compiled objects.
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import os
 import re
@@ -43,7 +42,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = "src"
 ASM = "asm"
 REPORT = "build/report.json"
-LIBRARY_UNITS = "config/sdk/library-units.csv"
+LIBRARY_UNITS = "config/sdk/library-units.jsonl"
 #: The pinned binutils wrappers and the flags the images assemble with.
 ASSEMBLER = "bin/internal/binutils/as"
 NM = "bin/internal/binutils/nm"
@@ -310,8 +309,11 @@ def _library_rows(root: Path) -> list[dict[str, Any]]:
     path = root / LIBRARY_UNITS
     if not path.is_file():
         return []
-    with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
 
 
 def _unit(
