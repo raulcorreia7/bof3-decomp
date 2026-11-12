@@ -132,7 +132,35 @@ MATCH void func_801D2298(void) {
 
 INCLUDE_ASM(func_801D2304);
 
-INCLUDE_ASM(func_801D259C);
+MATCH void func_801D259C(void) {
+    Character* character;
+    u8         i;
+
+    i = 0;
+    do {
+        D_801D8F00[i] = 0;
+        i++;
+    } while (i < 6);
+    D_801D8EE8[0] = D_801FE4EF;
+    D_801D8EE8[1] = D_801FE4E8;
+    D_801D8EE8[2] = D_801FE4F0;
+    D_801D8EE8[3] = D_801FE4EF;
+    D_801D8EE8[4] = D_801FE4E8 / 20;
+    if (D_801FE4F0 < 50) {
+        D_801D8EE8[5] = 2;
+    } else if (D_801FE4F0 - 50 < 30) {
+        D_801D8EE8[5] = 4;
+    } else if (D_801FE4F0 >= 80) {
+        D_801D8EE8[5] = 6;
+    }
+    character = &g_Characters[MENU_BATE_CHARACTER_RECORD];
+    Char_AddStat(&character->base.defense, (s16)D_801D8EE8[3]);
+    Char_AddStat(&character->stats.defense, (s16)D_801D8EE8[3]);
+    Char_AddCappedStat(&character->base.max_hp, (u16)D_801D8EE8[4]);
+    Char_AddCappedStat(&character->stats.max_hp, (u16)D_801D8EE8[4]);
+    Char_AddStat(&character->base.power, (s16)D_801D8EE8[5]);
+    Char_AddStat(&character->stats.power, (s16)D_801D8EE8[5]);
+}
 
 INCLUDE_ASM(func_801D26E0);
 
