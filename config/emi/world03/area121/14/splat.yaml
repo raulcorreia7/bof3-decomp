@@ -66,7 +66,7 @@ segments:
       - [0x2EA0, c, func_801F5AA0]
       - [0x2F90, c, func_801F5B90]
       - [0x307C, c, func_801F5C7C]
-      - [0x30D0, c, func_801F5CD0]
+      - [0x30D0, c, Area_SpawnSpinEffect]
       - [0x322C, c, Area_EndTurn]
       - [0x32CC, c, Area_StartTurn]
       - [0x33F8, c, Area_UpdateTurn]

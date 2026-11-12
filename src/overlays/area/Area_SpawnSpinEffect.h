@@ -1,6 +1,6 @@
-#include "area121_14.h"
-
-MATCH void func_801F5CD0(void) {
+/* Starts the effect row's scene step: seeds the party facing, the panel, the tint and the mode, then spawns four rows of type 0x5C eight frames apart; at the Tidal Caves entrance without the Sea Charts it spawns none. */
+/* func_801F578C (area104/14), func_801F5CD0 (area121/14) */
+MATCH void Area_SpawnSpinEffect(void) {
     s32 i;
     u8  slot;
 
