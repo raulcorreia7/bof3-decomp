@@ -80,7 +80,7 @@ extern u16       D_801FE9EC[];
 
 void func_801FE800(void);
 
-void func_801F8964(s32 arg0);
+void func_801F8964(Scena08Spark* spark);
 void func_801F8D98(void* table);
 void func_801F90C8(void* table);
 void func_801FA32C(void);
