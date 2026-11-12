@@ -23,16 +23,22 @@ extern u8       D_801D4DF4;
 extern u8       D_801D4DF8;
 extern u8       D_801D4DFC;
 
-extern u8  D_801D4E00;
-extern u8  D_801D4E04;
-extern u8  D_801D4E08;
-extern u16 D_801D4E0C;
+extern u8       D_801D4E00;
+extern u8       D_801D4E04;
+extern u8       D_801D4E08;
+extern u16      D_801D4E0C;
+extern u8       D_801D4E1C;
+extern u8       D_801D4E20;
+extern u8       D_801D4E2C;
+extern u8       D_801D4E30;
+/* The fairy village room records, eight bytes each. */
+extern const u8 g_FairyRooms[];
 
 extern u8 D_801D4E24;
 extern u8 D_801D4E28;
 
 void func_801D3038(void);
-void func_801D36FC(s32 arg0, s32 arg1);
+void func_801D36FC(s32 cell, s32 selected);
 u8   func_801D3AA0(s32 arg0, s32 arg1);
 void func_801D3984(s32 x, s32 y, s32 arg2);
 void func_801D3B0C(u8* arg0);

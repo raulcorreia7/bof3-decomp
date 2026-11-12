@@ -35,7 +35,73 @@ MATCH void func_801D1328(void) {
     SYS_DISPATCH_BYTE(g_Commu01Step2Sub1Funcs, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D1364);
+/* Reads the fairy room list input and draws the selected room. */
+MATCH void func_801D1364(void) {
+    u16 x;
+    s16 y;
+    u8* selection;
+    u8  old_row;
+    s8  row;
+    s32 count;
+    s32 room;
+    u16 buttons;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        D_801D4E0C = 0xB5;
+        D_801F294C--;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        row = D_801D4E24;
+        if (row != 0) {
+            D_801D4E0C = 0x44;
+            D_801D4E28 = g_SceneEventSelection;
+            D_801F294D++;
+        } else {
+            room = g_SceneEventSelection - 1;
+            if (g_FairyRooms[room * 8] == 0) {
+                D_801D4E28 = 0;
+            } else {
+                D_801D4E28 = g_FairyRooms[room * 8] - 4;
+            }
+            D_801D4E1C = 0xFF;
+            D_801D4E20 = 0xFF;
+            D_801D4E2C = 0;
+            D_801D4E30 = 0;
+            D_801F294D = 2;
+        }
+    } else {
+        buttons = INPUT_REPEATED(g_InputPressed, (PADLright | PADLleft));
+        old_row = D_801D4E24;
+        count   = func_801D3A48(g_SceneEventSelection);
+        if (buttons & PADLleft) {
+            D_801D4E24--;
+            if ((s8)D_801D4E24 < 0) {
+                D_801D4E24 = count;
+            }
+        } else if (buttons & PADLright) {
+            D_801D4E24++;
+            if ((count & BYTE_MASK) < (s8)D_801D4E24) {
+                D_801D4E24 = 0;
+            }
+        }
+        if (old_row != D_801D4E24) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        }
+    }
+
+    func_801D3038();
+    selection = &g_SceneEventSelection;
+    func_801D36FC(*selection, 1);
+    func_801D4694(&x, &y, *selection, D_801D4E24);
+    row = D_801D4E24;
+    if (row == 0) {
+        func_801D3984((s16)x, y, 0);
+    } else {
+        func_801D3984((s16)(x + 4), y, 0);
+        func_801D28A4((s16)(x + 0x10), (s16)(y - 8), func_801D3AA0(*selection, (D_801D4E24 - 1) & BYTE_MASK) & BYTE_MASK, 0);
+    }
+}
 
 MATCH void func_801D1630(void) {
     u16 x;
@@ -97,13 +163,13 @@ MATCH void func_801D3594(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D4030, 0xA8, 33, 20, 8);
 }
 
-/* Outlines cell arg0 with a top line and a left line, white when arg1 is set and blinking otherwise. */
-MATCH void func_801D36FC(s32 arg0, s32 arg1) {
+/* Outlines cell with a top line and a left line, white when selected is set and blinking otherwise. */
+MATCH void func_801D36FC(s32 cell, s32 selected) {
     LINE_F3* prim;
     s32      shade;
     s32      state;
 
-    if ((arg1 & BYTE_MASK) == 0) {
+    if ((selected & BYTE_MASK) == 0) {
         state = g_FrameCount;
         if (state & 8) {
             shade = (state & 6) << 5 | 0x3F;
@@ -116,31 +182,31 @@ MATCH void func_801D36FC(s32 arg0, s32 arg1) {
 
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
-    if ((u8)arg0 != 0 && (u8)arg0 < 9 && D_801F286D[g_GameAreaId] < (u8)arg0) {
-        prim->x0 = D_801D4C44[(u8)arg0][2];
+    if ((u8)cell != 0 && (u8)cell < 9 && D_801F286D[g_GameAreaId] < (u8)cell) {
+        prim->x0 = D_801D4C44[(u8)cell][2];
     } else {
-        prim->x0 = D_801D4C44[(u8)arg0][0];
+        prim->x0 = D_801D4C44[(u8)cell][0];
     }
-    prim->y0 = D_801D4C44[(u8)arg0][1];
-    prim->x1 = D_801D4C44[(u8)arg0][4];
-    prim->y1 = D_801D4C44[(u8)arg0][1];
-    prim->x2 = D_801D4C44[(u8)arg0][4];
-    prim->y2 = D_801D4C44[(u8)arg0][5];
+    prim->y0 = D_801D4C44[(u8)cell][1];
+    prim->x1 = D_801D4C44[(u8)cell][4];
+    prim->y1 = D_801D4C44[(u8)cell][1];
+    prim->x2 = D_801D4C44[(u8)cell][4];
+    prim->y2 = D_801D4C44[(u8)cell][5];
     setRGB0(prim, shade, shade, 0);
     GFX_AddPrim(1, sizeof(LINE_F3));
 
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
-    if ((u8)arg0 != 0 && (u8)arg0 < 9 && D_801F286D[g_GameAreaId] < (u8)arg0) {
-        prim->y0 = D_801D4C44[(u8)arg0][1];
+    if ((u8)cell != 0 && (u8)cell < 9 && D_801F286D[g_GameAreaId] < (u8)cell) {
+        prim->y0 = D_801D4C44[(u8)cell][1];
     } else {
-        prim->y0 = D_801D4C44[(u8)arg0][3];
+        prim->y0 = D_801D4C44[(u8)cell][3];
     }
-    prim->x0 = D_801D4C44[(u8)arg0][2];
-    prim->x1 = D_801D4C44[(u8)arg0][2];
-    prim->y1 = D_801D4C44[(u8)arg0][5];
-    prim->x2 = D_801D4C44[(u8)arg0][4];
-    prim->y2 = D_801D4C44[(u8)arg0][5];
+    prim->x0 = D_801D4C44[(u8)cell][2];
+    prim->x1 = D_801D4C44[(u8)cell][2];
+    prim->y1 = D_801D4C44[(u8)cell][5];
+    prim->x2 = D_801D4C44[(u8)cell][4];
+    prim->y2 = D_801D4C44[(u8)cell][5];
     setRGB0(prim, shade, shade, 0);
     GFX_AddPrim(1, sizeof(LINE_F3));
 }
