@@ -14,10 +14,11 @@ extern Callback D_801F1C24[];
 void            func_801F06B4(void);
 void            func_801F0D44(void);
 
-extern Callback         D_801F1C48[];
-extern PartyMember*     D_801F24E0;
-extern BMagicEffectWork D_801F1CA0[48];
-void                    func_801F0DF4(void);
+extern Callback          D_801F1C48[];
+extern Callback          D_801F1C94[];
+extern BMagicEffectWork* D_801F24E0;
+extern BMagicEffectWork  D_801F1CA0[48];
+void                     func_801F0DF4(void);
 
 void func_801F1844(void);
 void func_801F1B14(void);
