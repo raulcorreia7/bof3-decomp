@@ -13,6 +13,12 @@
 
 /* The battle record rows whose first byte is the slot tag. */
 extern u8                  D_801F41F8[];
+/* The four entry cells this image's entry hook watches, as the lanes it indexes by byte offset:
+   centre x, centre y, half width and half height. */
+extern u8                  D_801F492C[];
+extern u8                  D_801F492D[];
+extern u8                  D_801F492E[];
+extern u8                  D_801F492F[];
 /* D_801F48FC */
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern u8                  D_801F493C[];
