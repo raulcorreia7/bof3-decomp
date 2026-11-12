@@ -66,7 +66,21 @@ INCLUDE_ASM(func_801F9320);
 
 INCLUDE_ASM(func_801F9834);
 
-INCLUDE_ASM(func_801FA904);
+MATCH u16 func_801FA904(u8* tags, u16* messages) {
+    u8 i;
+    u8 j;
+
+    for (i = 0; i < PARTY_MEMBER_MESSAGE_COUNT; i++) {
+        for (j = 0; j < g_PartySize; j++) {
+            if (g_Game.members[j].chr.character_id == tags[i]) {
+                Message_StartAreaMessage((s16)messages[i]);
+                FAKE_ORDER_LOCK(g_GameStateIndex = GAME_REQUEST_MESSAGE); /* FAKE: keeps the state store before the return value's reload. */
+                return messages[i];
+            }
+        }
+    }
+    return 0xFFFF;
+}
 
 INCLUDE_ASM(func_801FA9C8);
 
