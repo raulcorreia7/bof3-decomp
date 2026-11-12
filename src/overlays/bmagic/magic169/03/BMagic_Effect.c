@@ -83,7 +83,7 @@ MATCH void func_801EF2CC(void) {
                 g_Task->param.unk_0B += 1;
             }
             i++;
-        } while (i < 0x18);
+        } while (i < 24);
     }
 }
 
