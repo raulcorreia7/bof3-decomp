@@ -1,5 +1,4 @@
 #include "area104_14.h"
-#include "scenario/state.h"
 
 MATCH void func_801F564C(void) {
     s32 value;
