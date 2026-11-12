@@ -18,12 +18,7 @@ MATCH void func_801EED8C(void) {
     }
     func_800AFD9C();
     g_Task->pos.z.fixed += TO_COORD(192);
-    i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    for (; i < 256; i++) {
-        dst[i] = src[i] | 0x8000u;
-    }
+    BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     MEM(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = MEM(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
     g_GfxPalettePending = 1;
     SND_QueueSelectionFx(0x100);

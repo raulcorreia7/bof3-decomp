@@ -30,12 +30,7 @@ MATCH void func_801EEC5C(void) {
     g_BattleEffects[slot].arg.unk_09   = 8;
     g_BattleEffects[slot].target.party = target;
     g_Task->param.unk_0B += 1;
-    i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    for (; i < 256; i++) {
-        dst[i] = src[i] | 0x8000u;
-    }
+    BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
     func_800A9610(g_Battle.target_selector, 0x10);
     SND_QueueSelectionFx(0x100);
