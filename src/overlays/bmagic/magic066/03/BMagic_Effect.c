@@ -6,7 +6,41 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    PartyMember* task;
+    PartyMember* battler;
+    u32          slot;
+    u32          i;
+    u16*         src;
+    u16*         dst;
+
+    battler                            = g_BattleEffectBattler;
+    task                               = g_Task;
+    task->pos.x.fixed                  = battler->pos.x.fixed;
+    task->pos.y.fixed                  = battler->pos.y.fixed;
+    task->pos.z.fixed                  = battler->pos.z.fixed;
+    slot                               = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    /* Copies arena palette rows 26 and 2 into the work copy with STP set, then restores row 2's color 0. */
+    for (i = 0, dst = MEM_PTR(u16, 0x8003AC00u), src = MEM_PTR(u16, 0x80036C00u); i < 0x100; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    {
+        u16* row_dst;
+        u16* row_src;
+
+        for (i = 0, row_dst = MEM_PTR(u16, 0x80037C00u), row_src = MEM_PTR(u16, 0x80033C00u); i < 0x10; i++) {
+            *row_dst++ = *row_src++ | 0x8000;
+        }
+    }
+    *MEM_PTR(u16, 0x80037C00u) = *MEM_PTR(u16, 0x80033C00u);
+    g_GfxPalettePending        = 1;
+    SND_PlayCue(0x100);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0x18;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEDB8(void) {
     u8           timer;
