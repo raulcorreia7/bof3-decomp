@@ -7,8 +7,8 @@ MATCH void func_801F312C(void) {
     g_Task->unk_0A += 1;
     if (g_Task->unk_0A == 0x1E) {
         actor = g_Task;
-        if (SYS_TestFlag(g_SceneEventFlags, 0x6B) == 0) {
-            SYS_SetFlag(g_SceneEventFlags, 0x6BU);
+        if (SYS_TestFlag(g_SceneEventFlags, 107) == 0) {
+            SYS_SetFlag(g_SceneEventFlags, 107U);
             value = 0;
         } else {
             value = 1;

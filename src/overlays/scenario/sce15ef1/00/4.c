@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801D0DD8);
 INCLUDE_ASM(func_801D0F10);
 
 MATCH void func_801D0FEC(void) {
-    if ((g_Task->unk_06++ & 3) == 0) {
+    if ((g_Task->unk_06++ & 0x3) == 0) {
         func_801D19C8();
     }
     func_801D2088();
@@ -206,7 +206,7 @@ MATCH void func_801D2088(void) {
         *angle += 16;
         i += 1;
         angle += sizeof(WorldSpin) / sizeof(*angle);
-    } while ((i & 0xFF) < 0x20U);
+    } while ((i & BYTE_MASK) < 0x20U);
 }
 
 MATCH void func_801D2138(s32* first, s32* second) {

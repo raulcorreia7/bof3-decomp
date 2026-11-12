@@ -18,7 +18,7 @@ MATCH void func_801C329C(void) {
     scratch_ptr = scratch;
     found       = 0;
     total       = Party_CountOrder(PARTY_ORDER_FIELD);
-    if (g_GameRequestFlags & 1) {
+    if (g_GameRequestFlags & 0x1) {
         index = 0;
         if ((s16)total > 0) {
             do {
@@ -40,7 +40,7 @@ MATCH void func_801C329C(void) {
         if (g_Game.current->u.field.flags_118 == 0) {
             g_Game.current->u.field.flags_118 = 0x0A;
             func_801C308C(1);
-            if (g_GameRequestFlags & 1) {
+            if (g_GameRequestFlags & 0x1) {
                 index = 0;
                 if ((s16)total > 0) {
                     do {

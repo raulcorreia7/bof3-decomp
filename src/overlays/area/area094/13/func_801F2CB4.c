@@ -9,8 +9,8 @@ MATCH void func_801F2CB4(void) {
             break;
 
         case 1:
-            if (!SYS_TestFlag(g_SceneFlags, 0x16)) {
-                SYS_SetFlag(g_SceneFlags, 0x16);
+            if (!SYS_TestFlag(g_SceneFlags, 22)) {
+                SYS_SetFlag(g_SceneFlags, 22);
                 Game_SetScriptActive();
                 g_ScriptVars[0]      = 0;
                 g_ScriptVars[1]      = 0;
@@ -20,7 +20,7 @@ MATCH void func_801F2CB4(void) {
                 value                = 7;
                 goto value_store;
             }
-            if (!SYS_TestFlag(g_SceneFlags, 0x1A)) {
+            if (!SYS_TestFlag(g_SceneFlags, 26)) {
                 Game_SetScriptActive();
                 value = 0x19;
             } else {

@@ -6,4 +6,7 @@
 
 #include "overlays/area/world03.h"
 
+/* Returns the script step the intro hands to the scene event. */
+s32 func_801F2E48(void);
+
 #endif

@@ -11,7 +11,7 @@ MATCH void func_801EECB0(void) {
     g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed;
     g_Task->pos.z.fixed = BATTLE_ACTIVE_WORK->pos.z.fixed;
-    GFX_CopyPalette(0x1A);
+    GFX_CopyPalette(26);
     g_GfxPalettePending += 1;
     g_Task->header.mode += 1;
 }
@@ -33,7 +33,7 @@ MATCH void func_801EED98(void) {
     g_Task = D_801EC2E0->target.party;
     Actor_SelectScript(3U);
     g_Task                             = work;
-    slot                               = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 65) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].header.step  = 0;
     g_BattleEffects[slot].target.party = g_Task;
@@ -82,7 +82,7 @@ MATCH void func_801EF08C(void) {
     handlers      = D_801EEC2C;
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
-    if (g_Task->header.flags & 1) {
+    if (g_Task->header.flags & 0x1) {
         func_8014D290();
     }
     g_ScriptTable = AREA_SCRIPT_TABLE;
@@ -149,7 +149,7 @@ MATCH void func_801EF83C(void) {
     handlers      = D_801EEC44;
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
-    if ((g_Task->header.flags & 1) && (g_BattleEffectBattler->timer == 0)) {
+    if ((g_Task->header.flags & 0x1) && (g_BattleEffectBattler->timer == 0)) {
         func_8014D290();
     }
     g_ScriptTable = AREA_SCRIPT_TABLE;
@@ -192,7 +192,7 @@ MATCH void func_801EFA38(void) {
     g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed - 1;
     x                        = g_Task->pos.x.fixed;
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(x, x);
-    if (!(1 & g_BattleEffectBattler->header.flags)) {
+    if (!(0x1 & g_BattleEffectBattler->header.flags)) {
         g_Task->header.step += 1;
     }
 }

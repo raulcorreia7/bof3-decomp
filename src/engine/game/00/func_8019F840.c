@@ -25,7 +25,7 @@ MATCH void func_8019F840(void) {
             i      = 0;
             offset = 0;
             do {
-                if ((g_Task->param.unk_0B >> i) & 1) {
+                if ((g_Task->param.unk_0B >> i) & 0x1) {
                     D_80145E91[offset] = 1;
                     if (i != 0) {
                         D_80145E92[offset] = 1;

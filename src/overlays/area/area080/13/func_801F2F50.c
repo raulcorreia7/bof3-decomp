@@ -12,7 +12,7 @@ MATCH void func_801F2F50(void) {
     func_801F3870();
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
-    if (!(remaining & 0xFF)) {
+    if (!(remaining & BYTE_MASK)) {
         g_Task->timer = AREA_RING_STEP_FRAMES;
         g_Task->header.mode += 1;
     }

@@ -5,7 +5,7 @@ MATCH void func_801F37C4(void) {
 
     direction = g_Task->direction_08;
     if (SYS_TestFlag(g_SceneEventFlags, (s32)g_Task->param.scene_event_flag) == 0) {
-        if ((direction ^ 1) != 0) {
+        if ((direction ^ 0x1) != 0) {
             goto replay; /* FAKE: both flag branches enter the same block; an if/else duplicate changes the frame */
         }
     } else if (direction != 0) {

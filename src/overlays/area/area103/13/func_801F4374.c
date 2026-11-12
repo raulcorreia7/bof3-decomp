@@ -7,6 +7,6 @@ MATCH void func_801F4374(void) {
     g_Task->unk_32           = 0x80;
     g_Task->timer            = 0;
     g_Task->param.unk_0B     = 1;
-    Area_SetCellPalette(0x55, 0x19);
+    Area_SetCellPalette(85, 25);
     g_Task->header.step += 1;
 }
