@@ -302,6 +302,10 @@ extern Callback          g_BMagicEffectModes[];
 extern BMagicEffectWork* D_801F17B0;
 extern BMagicEffectWork* D_801F17B4;
 
+/* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
+ * bytes, the scratchpad view does not. */
+extern SVECTOR D_1F800014[];
+
 void func_800A9610(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
