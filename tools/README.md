@@ -34,6 +34,9 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/naming.md#rename-steps)       |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
+| Find the symbol and member at an address | `tools/symbol.py at <target> 0x<ADDR>`                                   | [lookup](#lookup)                                         |
+| Find the member at a record offset       | `tools/symbol.py member <Type> 0x<OFF>`                                  | same                                                      |
+| List every reference to a symbol         | `tools/symbol.py uses <Name>` or `tools/symbol.py uses <target>@0x<ADDR>` | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
 | Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown [--update]`                         | [quality](#quality)                                       |
@@ -118,6 +121,16 @@ fold. `ripwire src --clones` lists token-normalized duplicate C bodies.
 
 `sigs.py scan` prints one row per prototype that disagrees with its definition, implicit
 declaration, call-through cast or return cast (`--kind` selects one). Run `check` after any edit it prompts.
+
+## Lookup
+
+`symbol.py at` prints the named owner of each address in one image: `NAME+0xOFF (type, size) [table]`,
+the member path when the owner is a record (`g_Game.members[2].pos.x`), or `no named owner`. It reads
+the image's table and the resident ones; `--diff [BASE]` reads the `D_` addresses the branch adds.
+`symbol.py member` prints the member path and type at a record offset from clang's own layout, and
+`symbol.py uses` lists the C uses, the open functions' assembly uses and the Rizin cross-references in
+one table; the first query in an image analyses its Rizin project and caches the references under
+`build/symbol-xrefs`.
 
 ## Type loss
 
