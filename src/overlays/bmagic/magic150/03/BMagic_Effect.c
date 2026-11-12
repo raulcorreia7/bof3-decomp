@@ -28,11 +28,11 @@ MATCH void func_801EEDCC(void) {
 }
 
 MATCH void func_801EEE24(void) {
-    s16* state;
+    s16* radius;
     u8   timer;
 
-    state = &D_801EFAAC;
-    *state += 0x40;
+    radius = &D_801EFAAC;
+    *radius += 0x40;
     D_801EFAAE += 0x60;
     func_801EF254();
     timer          = g_Task->unk_09 - 1;
