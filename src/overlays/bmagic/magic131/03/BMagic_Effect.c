@@ -343,15 +343,15 @@ MATCH void func_801F1138(void) {
 }
 
 MATCH void func_801F11B8(void) {
-    s16* angle;
+    s16* angle_cell;
     s32  z;
     u8   phase;
 
     phase                   = D_801F1C38[D_801F24E0->unk_07];
-    angle                   = &D_1F800006;
-    *angle                  = phase << 7;
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 7;
     D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) << 6) >> 3);
-    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle) << 6) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
     z                       = g_BattleEffectBattler->pos.z.fixed;
     D_801F24E0->pos.z.fixed = z;
     D_801F24E0->phase_0C    = 0x40;
@@ -361,16 +361,16 @@ MATCH void func_801F11B8(void) {
 }
 
 MATCH void func_801F12A0(void) {
-    s16* angle;
+    s16* angle_cell;
     u8   phase;
 
     D_801F24E0->unk_06 += 2;
     D_801F24E0->phase_0C += 0x20;
     phase                   = D_801F1C38[D_801F24E0->unk_07];
-    angle                   = &D_1F800006;
-    *angle                  = phase << 7;
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 7;
     D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) * (s16)D_801F24E0->phase_0C) >> 3);
-    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
     if ((s16)D_801F24E0->phase_0C == 0x200) {
         D_801F24E0->header.step++;
     }
@@ -444,16 +444,16 @@ MATCH void func_801F1644(void) {
 }
 
 MATCH void func_801F1748(void) {
-    s16* angle;
+    s16* angle_cell;
     u8   phase;
     u8   timer;
 
     D_801F24E0->phase_0C += 0x10;
     phase                   = D_801F1C54[D_801F24E0->unk_07];
-    angle                   = &D_1F800006;
-    *angle                  = phase << 6;
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 6;
     D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) * (s16)D_801F24E0->phase_0C) >> 3);
-    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
     timer                   = D_801F24E0->timer_05 - 2;
     D_801F24E0->timer_05    = timer;
     if ((timer & BYTE_MASK) == 0) {
