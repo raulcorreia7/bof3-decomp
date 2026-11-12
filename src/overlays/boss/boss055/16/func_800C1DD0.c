@@ -18,15 +18,15 @@ MATCH u8 func_800C1DD0(void) {
     if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
         g_Task->unk_09 = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->kind].unk_84[3];
         switch (g_Battle.action_id) {
-            case 0x3A:
+            case ABILITY_SANCTUARY:
                 func_800C2340(5, 4, 7);
                 func_801E2314(10);
                 break;
-            case 0x81:
+            case ABILITY_HOLOCAUST:
                 func_800C2340(6, 4, 6);
                 func_801E2314(10);
                 break;
-            case 0x82:
+            case ABILITY_VENOM:
                 func_800C2340(3, 4, 5);
                 func_801E2314(6);
                 break;
