@@ -16,6 +16,30 @@ extern u16 D_80146876;
 #define SCRATCH_COLUMN_OFFSET    0
 #define SCRATCH_COLUMN_STRIDE    0x28
 
+/* One 0x28-byte row of the area work window as the world03 sprites read it:
+ * area125 writes the size at +0x04 and the projected origin at +0x08
+ * (func_801F31B0), area134 draws the same cells (func_801F46EC). The
+ * AreaSprite in AreaSprite.h is another view of the window, used by world00
+ * to world02: it names +0x04 as its origin. */
+typedef struct AreaSprite {
+    u8       unk_00[3];
+    u8       flags_03;  /* the shade of the sprite */
+    u16      half_size; /* the projected half-size */
+    u8       unk_06[2];
+    Point2DL origin;
+    s32      unk_10;
+    s32      unk_14;
+    s32      unk_18;
+    s32      unk_1C;
+    s32      unk_20;
+    s32      unk_24;
+} AreaSprite;
+
+ASSERT_SIZE(AreaSprite, 0x28);
+ASSERT_OFFSET(AreaSprite, flags_03, 0x03);
+ASSERT_OFFSET(AreaSprite, half_size, 0x04);
+ASSERT_OFFSET(AreaSprite, origin, 0x08);
+
 /* The global state byte the area update gates on. */
 
 /* The scenario state byte the request writes. */
