@@ -9,9 +9,10 @@ segments:
     start: 0x0
     vram: 0x800C1800
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, bin, D_800C1800]
+      - [0x4, .rodata, func_800C2138]
       - [0x1C, c, func_800C181C]
       - [0x60, c, func_800C1860]
       - [0xFC, c, func_800C18FC]

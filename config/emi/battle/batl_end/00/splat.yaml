@@ -7,9 +7,11 @@ segments:
     start: 0x0
     vram: 0x801EEC00
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, bin, D_801EEC00]
+      - [0xC, .rodata, func_801EF928]
+      - [0x28, .rodata, D_801EEC28]
       - [0x60, c, func_801EEC60]
       - [0x94, c, func_801EEC94]
       - [0xD0, c, func_801EECD0]

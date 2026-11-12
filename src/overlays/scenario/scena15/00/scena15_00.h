@@ -7,6 +7,7 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 #include "battle/records.h"
+#include "shared/AreaSpark.h"
 
 extern u32      D_801F6C00;
 /* D_801FE57C */
@@ -32,6 +33,7 @@ void             func_801F8704(void);
 extern u8        D_801FE71C[];
 extern u8        D_801FE74C;
 void             func_801F8958(void);
+void             func_801F9020(Coord* position, s32* step);
 void             func_801F92F0(Coord* position, s32* step);
 
 extern u8 D_801FE750;

@@ -34,7 +34,7 @@ void        func_800AF814(u32 battler_index);
 void        func_800AFC98(s32 effect_0, s32 effect_1);
 void        func_800AFD9C(void);
 u8          func_800AFF98(void);
-/* func_801DB524 */
+u8          Battle_SlotIsBlocked(u32 slot);
 void        func_801DD350(void* work);
 u8          func_801DD7AC(s32 selector);
 void        func_801E257C(u32 enemy_index, u32 script_index);
