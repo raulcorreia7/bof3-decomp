@@ -53,7 +53,7 @@ MATCH void func_801F752C(void) {
     }
     func_801F7C54();
     if (--g_Task->timer == 0) {
-        g_Task->timer = 0xFC;
+        g_Task->timer = 252;
         g_Task->header.mode += 1;
     }
 }
