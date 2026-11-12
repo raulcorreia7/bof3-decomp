@@ -19,11 +19,12 @@ extern Callback D_801D2800[];
 
 extern Callback D_801D280C[];
 
-void        func_801D16DC(void);
-void        func_801D18CC(void);
-void        func_801D1A60(void);
-void        func_801D230C(void);
-extern void func_801D23AC(u8 arg);
+void func_801D16DC(void);
+void func_801D18CC(void);
+void func_801D1A60(void);
+void func_801D230C(void);
+/* func_801D23AC */
+void Scene_DrawRedFade(u8 red);
 
 void func_801D19A0(void);
 

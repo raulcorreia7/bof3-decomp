@@ -137,17 +137,17 @@ MATCH void func_801D1420(void) {
 MATCH void func_801D1460(void) {
     g_Task->timer += 16;
     if (g_Task->timer == 0) {
-        func_801D23AC(0xFF);
+        Scene_DrawRedFade(0xFF);
         g_Task->header.mode += 1;
     } else {
-        func_801D23AC(g_Task->timer);
+        Scene_DrawRedFade(g_Task->timer);
     }
 }
 
 MATCH void func_801D14DC(void) {
     g_Task->timer -= 16;
     if (g_AreaDrawFlags != 0) {
-        func_801D23AC(g_Task->timer);
+        Scene_DrawRedFade(g_Task->timer);
     }
     if (g_Task->timer == 0) {
         if (g_AreaDrawFlags == 0) {
@@ -206,7 +206,19 @@ INCLUDE_ASM(func_801D1FF8);
 
 INCLUDE_ASM(func_801D230C);
 
-INCLUDE_ASM(func_801D23AC);
+/* func_801D23AC */
+MATCH void Scene_DrawRedFade(u8 red) {
+    TILE* prim;
+
+    prim = (TILE*)g_GfxPrimCursor;
+    SetTile(prim);
+    SetSemiTrans(prim, 1);
+    prim->w = SCREEN_WIDTH;
+    setXY0(prim, 0, 0);
+    prim->h = SCREEN_HEIGHT;
+    setRGB0(prim, red, 0, 0);
+    GFX_AddPrim(1, sizeof(TILE));
+}
 
 INCLUDE_ASM(Scene_DrawScanBar);
 

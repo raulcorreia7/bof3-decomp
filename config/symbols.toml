@@ -3160,6 +3160,7 @@ func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntit
 Scene_EndScan = { addr = 0x801D15CC, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Area_FindFreeSpriteRow = { addr = 0x801D171C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
 Scene_DrawRedGradient = { addr = 0x801D1BAC, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
+Scene_DrawRedFade = { addr = 0x801D23AC, type = "func", source = "Draws the full-screen semi-transparent red fade tile at red intensity." }
 Scene_DrawScanBar = { addr = 0x801D2424, type = "func", source = "Draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity." }
 Scene_ClearScanBars = { addr = 0x801D25C0, type = "func", source = "Clears the in-use byte of each of the 16 scan bars." }
 Scene_ClaimScanBar = { addr = 0x801D25EC, type = "func", source = "Marks the first free of the 16 scan bars in use and resets its state byte." }
