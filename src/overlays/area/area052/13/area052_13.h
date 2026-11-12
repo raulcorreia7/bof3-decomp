@@ -44,7 +44,7 @@ void                   func_801F2EC8(AreaEffectRow* row);
 void                   func_801F3084(void);
 void                   func_801F3194(void);
 /* func_801F31C0 */
-s32                    Area_UpdateEffectRows();
+s32                    Area_UpdateEffectRows(void);
 void                   func_801F3C4C(s32 x, s32 y);
 
 void func_801F431C(void);
