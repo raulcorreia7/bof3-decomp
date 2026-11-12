@@ -5,6 +5,7 @@
 
 MATCH void func_801F2D2C(void) {
     AreaMapBundle* map;
+    u8*            base;
     u32            entry_base;
     u32*           entry;
     s32            row;
@@ -14,10 +15,11 @@ MATCH void func_801F2D2C(void) {
 
     g_Task->timer = 0;
     for (row = D_801F47D4[COORD_INT(g_Task->pos.x)].y0; row <= D_801F47D4[COORD_INT(g_Task->pos.x)].y1; row++) {
-        map = (AreaMapBundle*)MAP_BUNDLE_BASE;
+        map  = (AreaMapBundle*)MAP_BUNDLE_BASE;
+        base = (u8*)map;
         for (col = D_801F47D4[COORD_INT(g_Task->pos.x)].x0; col <= D_801F47D4[COORD_INT(g_Task->pos.x)].x1; col++) {
-            entry_base = MEM(u16, MAP_BUNDLE_BASE + 2) * 4 + (((map->width * MEM(u8, MAP_BUNDLE_BASE + 1) + 1) / 2) * 4 + (u32)map);
-            entry      = (u32*)(entry_base + MEM(u16, col * 2 + (row * map->width * 2 + MEM(u16, MAP_BUNDLE_BASE + 2) * 4) + (u32)map) * 4);
+            entry_base = MEM(u16, MAP_BUNDLE_BASE + 2) * 4 + (((map->width * MEM(u8, MAP_BUNDLE_BASE + 1) + 1) / 2) * 4 + (u32)base);
+            entry      = (u32*)(entry_base + MEM(u16, col * 2 + (row * map->width * 2 + MEM(u16, MAP_BUNDLE_BASE + 2) * 4) + (u32)base) * 4);
             value      = *entry;
             *entry     = value & CELL_UPLOAD_MASK;
             id         = Area_GetCellId(col, row);
