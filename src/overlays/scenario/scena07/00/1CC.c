@@ -229,7 +229,19 @@ MATCH void func_801F7EF8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7FA4);
+MATCH void func_801F7FA4(void) {
+    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
+    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
+    if (--g_Task->timer == 0) {
+        if (g_Task->unk_06 == 0) {
+            Actor_Clear();
+        } else {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x04));
+            g_Task->timer = 32;
+            g_Task->header.step++;
+        }
+    }
+}
 
 MATCH void func_801F805C(void) {
     SCENA07_PANEL_BRIGHTEN_STEP();
