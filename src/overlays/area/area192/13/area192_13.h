@@ -7,11 +7,17 @@
 #include "overlays/area/world04.h"
 
 /* The selection record and its two step tables. */
-extern u8 D_801F380C[];
-extern u8 D_801F380D[];
-extern u8 D_801F3890[];
+extern u8  D_801F380C[];
+extern u8  D_801F380D[];
+extern u8  D_801F3890[];
 /* The neighbour tables the cell lookup reads. */
-extern u8 D_801F38C0[];
+extern u8  D_801F38C0[];
+/* The area counter the selection pass reads. */
+extern u8  D_80144F56;
+/* The flag block base the selection pass reaches both scene flag rows through. */
+extern u8  D_80144982;
+/* The spawn-row table the selection pass walks, one row set per mode. */
+extern u8* D_801F3A08[];
 
 /* The area flag word, the cue timer and the three scene bytes. */
 
