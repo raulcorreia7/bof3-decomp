@@ -30,7 +30,7 @@ MATCH void func_801EF2DC(void) {
     u8 counter;
 
     if (g_Task->unk_09 == 4) {
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
     }
     SP_REF(s16, 0) = g_Task->unk_09 * 0x1C;
     counter        = g_Task->unk_09 + 1;

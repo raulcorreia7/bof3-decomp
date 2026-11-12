@@ -14,5 +14,5 @@ MATCH void func_800A22CC(void) {
         ENEMY_COMBATANT(battler_index).turn.action_flags.value |= COMBATANT_FLAG_CHARGING;
         ENEMY_COMBATANT(*battler_index_cell).unk_112 = 0;
     }
-    func_800A9BD8(g_Battle.target);
+    Battle_RescaleStats(g_Battle.target);
 }

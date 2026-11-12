@@ -51,7 +51,7 @@ MATCH void func_801EF078(void) {
         actor = &g_Battle.selected_actor;
         GFX_FreePaletteFadeTarget(*actor);
         GFX_AllocPaletteFade(*actor, -8, -8, -8, 1);
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
 }
@@ -84,7 +84,7 @@ MATCH void func_801EF510(void) {
 MATCH void func_801EF554(void) {
     SYS_DISPATCH_BYTE(D_801F04EC, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EF818();
     }
 }
@@ -108,7 +108,7 @@ MATCH void func_801EFF74(void) {
 
     SYS_DISPATCH_BYTE(D_801F04FC, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         work = g_Task;
         if (work->param.unk_0B == 1) {
             x = work->unk_2E.half - MAGIC092_STEP_X;

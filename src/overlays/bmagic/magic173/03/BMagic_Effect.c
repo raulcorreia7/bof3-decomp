@@ -40,7 +40,7 @@ MATCH void func_801EF3D8(void) {
     if (g_Task->timer < 8U) {
         g_Task->param.unk_0B += 1;
         g_Task->timer += 1;
-        func_800AF764();
+        Battle_ProjectRange();
         Effect_RecordTrail();
     }
     timer = g_Task->timer;
@@ -67,7 +67,7 @@ MATCH void func_801F0488(void) {
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F09A0, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F075C();
         if (g_Task->header.step < 3) {
             func_8014D290();

@@ -36,7 +36,7 @@ MATCH void func_800C20CC(void) {
         func_800AF2B4(&g_Game.members[*kind], 0x50);
         if (func_800AF5FC(&g_Game.members[*kind], 0x10000) != 0) {
             Actor_SelectScript(5);
-            func_800A9820(*kind);
+            Battle_MarkDamaged(*kind);
             work = TASK_BYTES;
             work[2]++;
         }
@@ -44,7 +44,7 @@ MATCH void func_800C20CC(void) {
         func_800AF2B4(&g_BattleEnemies[*kind * 0x118], 0x50);
         if (func_800AF5FC(&g_BattleEnemies[*kind * 0x118], 0x10000) != 0) {
             Actor_SelectScript(5);
-            func_800A9820(*kind);
+            Battle_MarkDamaged(*kind);
             work = TASK_BYTES;
             work[2]++;
         }

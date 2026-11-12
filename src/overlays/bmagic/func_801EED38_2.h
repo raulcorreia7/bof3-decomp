@@ -17,7 +17,7 @@ MATCH void func_801EED38(void) {
     g_Task->pos.x  = battler->pos.x;
     g_Task->pos.y  = battler->pos.y;
     g_Task->pos.z  = battler->pos.z;
-    func_800AF764();
+    Battle_ProjectRange();
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 8;
     g_Task->timer        = 0;

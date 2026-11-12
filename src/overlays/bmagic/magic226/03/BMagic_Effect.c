@@ -20,7 +20,7 @@ MATCH void func_801EF048(void) {
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0C44, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_8014D290();
         Effect_SetActiveActorMatrix();
         func_801EF814();
@@ -70,7 +70,7 @@ MATCH void func_801EFD84(void) {
 MATCH void func_801EFDC8(void) {
     SYS_DISPATCH_BYTE(D_801F0C78, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F01B8();
     }
 }
