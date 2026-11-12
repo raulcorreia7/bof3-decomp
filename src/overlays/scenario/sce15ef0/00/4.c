@@ -117,7 +117,7 @@ MATCH void func_801D1540(s32 x, s32 y, s16 radius, u16 angle) {
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
         i += 1;
         prim->y2 = y + FIXED_MUL(radius, rsin(angle));
-        setRGB0(prim, 0x40, 0, 0);
+        setRGB0(prim, 64, 0, 0);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
         GFX_AddPrim(3, sizeof(POLY_G3));
