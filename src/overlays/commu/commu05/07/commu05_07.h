@@ -24,13 +24,4 @@ extern OverlayHeader D_801D0C00;
 /* D_801D1950 */
 extern Callback      g_Commu05States[COMMU05_STEP_COUNT];
 
-/* The five-byte names of the fairy jobs the room list draws. */
-extern u8   D_801457E8[];
-/* "faeries" for several, "faery" for one, and the "%2d" count format. */
-extern u8   D_801D195C[];
-extern u8   D_801D1964[];
-extern char D_801D0C0C[];
-
-void func_801D0F50(s16 x, s16 y, s32 flags);
-
 #endif
