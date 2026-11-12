@@ -2,7 +2,6 @@
 
 MATCH void func_801F3C6C(void) {
     s32 slot;
-    s32 beat;
 
     if (*g_ScriptVars == 0xC) {
         g_Task->header.step++;
@@ -13,11 +12,5 @@ MATCH void func_801F3C6C(void) {
         g_ActorSlots[slot].header.mode  = 0x17;
         g_ActorSlots[slot].header.step  = 0x0A;
     }
-    beat = g_FrameCount / 5;
-    if (g_FrameCount == beat * 5) {
-        func_801F4E70(beat & 3);
-    }
-    func_801F49A0(0);
-    func_801F49A0(1);
-    func_801F482C();
+    Area_StepSceneFrame();
 }
