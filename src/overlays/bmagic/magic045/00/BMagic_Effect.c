@@ -94,7 +94,26 @@ MATCH void func_801EF4A4(void) {
 
 INCLUDE_ASM(func_801EF608);
 
-INCLUDE_ASM(func_801EF724);
+MATCH void func_801EF724(void) {
+    PartyMember* work;
+
+    if (g_FrameCount & 1) {
+        Actor_StepAnimLoop();
+    }
+    g_Task->unk_5D -= 3;
+    g_Task->unk_5E -= 3;
+    g_Task->unk_5F -= 3;
+    work                     = g_Task;
+    work->pos.x.fixed        = FIELD(s32, D_801EC364, work->param.unk_0B * BATTLE_EFFECT_STRIDE);
+    work->pos.y.fixed        = FIELD(s32, D_801EC368, work->param.unk_0B * BATTLE_EFFECT_STRIDE);
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    if (FIELD(s16, D_801EC36E, g_Task->param.unk_0B * BATTLE_EFFECT_STRIDE) < COORD_INT(g_Task->pos.z)) {
+        g_Task->pos.z.fixed = FIELD(s32, D_801EC36C, g_Task->param.unk_0B * BATTLE_EFFECT_STRIDE);
+    }
+    if (FIELD(u8, D_801EC332, g_Task->param.unk_0B * BATTLE_EFFECT_STRIDE) == 3) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void Effect_TickDownAndClear3(void) {
     EFFECT_TICK_DOWN_AND_CLEAR();
