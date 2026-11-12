@@ -47,7 +47,9 @@ jobs:
 
   disc-free:
     needs: checked
-    if: needs.checked.outputs.skip != 'true'
+    # `checked` is skipped on a pull request, and a job that needs a skipped job is skipped too
+    # unless its condition calls a status function: without !cancelled() a pull request runs nothing.
+    if: ${{ !cancelled() && needs.checked.outputs.skip != 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
