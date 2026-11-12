@@ -4,24 +4,36 @@
 #include "overlays/battle/battle.h"
 #include <stdio.h>
 
-extern volatile u16 D_801463B0;
-extern char         D_80149118[];
-extern u8*          D_801EB4F4;
-u8                  func_801DB524(u32 slot);
-extern const char   D_801EEC04[];
-extern const char   D_801EEC4C[];
-u8                  func_801EEDA8(void);
-u16                 func_801EF928(u8 id, u8 flag);
-extern void         func_801EFE5C(void);
-extern void         func_801F07C0(void);
-extern void         func_801F07E0(void);
-extern Callback     D_801F0C98[];
-extern Callback     D_801F0CA4[];
-extern Callback     D_801F0CB8[];
-extern Callback     D_801F0CC0[];
-extern char         D_801F0CD0[];
-extern void         func_801F09D4(void);
+/* Party item grant queue at D_80146327: the count byte, an unaligned run of
+ * item words at +0xD and each item's level byte at +0x2D. */
+typedef struct PartyGrantQueue {
+    u8 count; /* +0x00 */
+    u8 pad_01[0xC];
+    u8 items[32];  /* +0x0D u16 item words */
+    u8 levels[16]; /* +0x2D */
+} PartyGrantQueue;
+
+extern PartyGrantQueue D_80146327;
+extern volatile u16    D_801463B0;
+extern char            D_80149118[];
+extern u8*             D_801EB4F4;
+u8                     func_801DB524(u32 slot);
+extern const char      D_801EEC04[];
+extern const char      D_801EEC4C[];
+u8                     func_801EEDA8(void);
+u16                    func_801EF928(u8 id, u8 flag);
+extern void            func_801EFE5C(void);
+void                   func_801F039C(s16 x, s16 y, s32 width, s32 height);
+extern void            func_801F07C0(void);
+extern void            func_801F07E0(void);
+extern Callback        D_801F0C98[];
+extern Callback        D_801F0CA4[];
+extern Callback        D_801F0CB8[];
+extern Callback        D_801F0CC0[];
+extern char            D_801F0CD0[];
+extern void            func_801F09D4(void);
+void                   func_801F0A74(s16 x, s16 y, u8 clut, u8 category, u8 item, u8 amount, s32 unused);
 /* func_801F09F4 */
-extern void         Battle_DrawVictoryZenny(void);
+extern void            Battle_DrawVictoryZenny(void);
 
 #endif
