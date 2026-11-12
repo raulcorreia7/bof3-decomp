@@ -165,7 +165,7 @@ MATCH void func_801D1A20(s32* pos, s16 origin, s32 flags) {
         primitive->y0 = screen.vy;
         primitive->x1 = point.vx;
         primitive->y1 = point.vy;
-        angle += 0x80;
+        angle += 128;
         point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
         point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);
         primitive->x2 = point.vx;
@@ -175,7 +175,7 @@ MATCH void func_801D1A20(s32* pos, s16 origin, s32 flags) {
         setRGB2(primitive, 0, 0, 0);
         GFX_AddPrim(2u, sizeof(POLY_G3));
         i += 1;
-    } while ((i & BYTE_MASK) < 0x20U);
+    } while ((i & BYTE_MASK) < 32U);
 }
 
 INCLUDE_ASM(func_801D1C1C);
