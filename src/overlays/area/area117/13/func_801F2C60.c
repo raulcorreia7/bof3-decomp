@@ -14,9 +14,9 @@ MATCH void func_801F2C60(void) {
         g_Task->header.step += 1;
         if (abs(g_Game.members[0].pos.x.fixed - TO_COORD_HALF(2)) <= COORD_HALF) {
             if (abs(g_Game.members[0].pos.y.fixed - TO_COORD(0x15)) <= TO_COORD(1) || abs(g_Game.members[0].pos.y.fixed - TO_COORD(0x16)) <= TO_COORD(1)) {
-                /* FAKE: retail writes the row through a signed view (li -0x100). */
-                *(s16*)&g_Task->screen_y = -0x100;
-                g_Task->header.step      = 3;
+                screen_y            = -0x100;
+                g_Task->screen_y    = screen_y;
+                g_Task->header.step = 3;
             }
         }
     }
