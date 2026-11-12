@@ -20,7 +20,7 @@ MATCH void func_801EEF24(void) {
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0D64, g_Task->header.step);
     if ((g_Task->header.flags & 1) && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_8014D290();
     }
     g_ScriptTable = AREA_SCRIPT_TABLE;

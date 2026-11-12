@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801D2AFC);
+INCLUDE_ASM(func_801D2ADC);
 
 MATCH void func_801D2C0C(void) {
     SYS_DISPATCH_BYTE(D_801D9720, D_801DA049);

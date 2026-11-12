@@ -7,7 +7,7 @@ MATCH void func_801EA774(void) {
     if (state == -0x16) {
         u8* gate = &g_Battle.outcome.event_flags;
 
-        *gate &= ~D_801EB4DC->unk_01;
+        *gate &= ~D_801EB4DC->event_type;
         func_80158E20();
     } else {
         panel->pos.y = state - 8;

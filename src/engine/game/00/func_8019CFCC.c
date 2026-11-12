@@ -7,7 +7,7 @@ MATCH void func_8019CFCC(void) {
     g_Task->timer = value;
     if ((value & BYTE_MASK) == 0) {
         if (LOHU(g_GameAreaId) == AREA_ID_CONTAINER_YARD) {
-            SYS_SetFlag(g_SceneEventFlags, 0x44);
+            SYS_SetFlag(g_SceneEventFlags, 68);
         }
         Actor_Clear();
         return;

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Reject tracked retail media, files over 1 MiB, relative includes or imports, and struct members of enum type. Needs no build inputs.
+# Reject tracked retail media, files over 1 MiB, relative includes or imports, struct members of enum type, and sources no image layout compiles. Needs no build inputs.
 set -eu
 case "${1:-}" in
 -h | --help) sed -n '2,2p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
@@ -137,4 +137,5 @@ if [ -n "$base" ]; then
 	[ "$bad" = 0 ] || exit 1
 fi
 python3 tools/check_enum_members.py
+python3 tools/check_sources.py
 echo "check-tree: ok"

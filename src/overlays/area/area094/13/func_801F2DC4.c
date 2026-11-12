@@ -16,7 +16,7 @@ MATCH void func_801F2DC4(void) {
             break;
 
         case 2:
-            if (SYS_TestFlag(g_SceneFlags, 0x20)) {
+            if (SYS_TestFlag(g_SceneFlags, 32)) {
                 Game_SetScriptActive();
                 g_SceneState.step_05 = 2;
                 state                = 9;

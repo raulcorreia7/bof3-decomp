@@ -33,7 +33,7 @@ MATCH void func_801A3B7C(Actor* entity) {
     }
 
     sel = -1;
-    if (((target - current) & 7) < 4) {
+    if (((target - current) & 0x7) < 4) {
         sel = 1;
     }
 
@@ -41,6 +41,6 @@ MATCH void func_801A3B7C(Actor* entity) {
     current              = g_Task->direction_08;
     ((s32*)g_Task)[4]    = 0;
     ((s32*)g_Task)[3]    = 0;
-    g_Task->direction_08 = (current + sel) & 7u;
+    g_Task->direction_08 = (current + sel) & 0x7u;
     entity->interaction_flags |= ACTOR_FLAG_MOVING;
 }

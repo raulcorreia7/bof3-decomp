@@ -8,7 +8,7 @@ MATCH void Area_CountHudBannerHold(void) {
     if (scratch->param.unk_0B == 0) {
         scratch->timer++;
         scratch = g_Task;
-        if (scratch->timer >= 0x5A) {
+        if (scratch->timer >= 90) {
             scratch->param.unk_0B++;
         }
     }
@@ -25,5 +25,5 @@ MATCH void Area_CountHudBannerHold(void) {
 bump:
     g_Task->unk_03++;
 done:
-    Area_DrawHudBanner(0x5C, g_Task->screen_y);
+    Area_DrawHudBanner(92, g_Task->screen_y);
 }

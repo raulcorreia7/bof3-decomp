@@ -683,7 +683,8 @@ void                   func_801E2D1C(void);
 void                   func_801E2D5C(void);
 /* func_801E2DB4 */
 void                   Menu_EquipmentPanel(void);
-void                   func_801E2E30(void);
+/* func_801E2E30 */
+void                   Battle_PickFormationTarget(void);
 void                   func_801E2E70(void);
 /* func_801E2EB0 */
 void                   Menu_ItemsPanel(void);

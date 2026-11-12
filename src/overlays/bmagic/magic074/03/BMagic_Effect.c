@@ -79,7 +79,7 @@ MATCH void func_801EF754(void) {
     if ((D_801F20DC->header.flags & BMAGIC_EFFECT_IN_USE) && D_801F20DC->header.step != 0) {
         func_801F00B0();
         if (D_801F20DC->phase_0C & 3) {
-            func_801EFBE4(g_FrameCount >> 1, D_801F20DC->unk_06);
+            Effect_DrawSparkleRays(g_FrameCount >> 1, D_801F20DC->unk_06);
             radius = D_801F20DC->unk_06;
             func_801EFE18((g_FrameCount >> 1) + 4, radius + (radius >> 1));
         }
@@ -103,11 +103,9 @@ MATCH void func_801EFB00(void) {
     BMAGIC_SWAY_EFFECT_WORK(D_801F20DC, func_801F0440)
 }
 
-#include "overlays/bmagic/BMagic_DrawSparkleRays.h"
+#include "overlays/bmagic/Effect_DrawSparkleRays.h"
 
-MATCH void func_801EFBE4(u16 angle, u16 radius) {
-    BMAGIC_DRAW_SPARKLE_RAYS(EFFECT_SPARKLE_TASK, angle, radius);
-}
+#include "overlays/bmagic/BMagic_DrawSparkleLongRays.h"
 
 MATCH void func_801EFE18(u16 angle, u16 radius) {
     BMAGIC_DRAW_SPARKLE_LONG_RAYS(EFFECT_SPARKLE_TASK, angle, radius);

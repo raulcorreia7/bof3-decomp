@@ -815,7 +815,6 @@ void    func_801A6C98(u8* record);
 void    func_801A6F58(u8* script);
 void    func_801A72B0(void* packed_selector);
 void    func_801A72E8(void* selector);
-void    func_801A7330(const volatile u8* data);
 s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);

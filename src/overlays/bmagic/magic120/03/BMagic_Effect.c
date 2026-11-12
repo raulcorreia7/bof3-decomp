@@ -146,7 +146,32 @@ INCLUDE_ASM(func_801F0274);
 
 INCLUDE_ASM(func_801F04B0);
 
-INCLUDE_ASM(func_801F078C);
+MATCH void func_801F078C(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    rot.vz = 0;
+    rot.vy = 0;
+    rot.vx = 0;
+    switch (g_Task->facing) {
+        case 0:
+            rot.vy = 0xC00;
+            break;
+        case 1:
+            rot.vx = 0x400;
+            break;
+        case 2:
+            rot.vy = 0x400;
+            break;
+        case 3:
+            rot.vx = 0xC00;
+            break;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+}
 
 MATCH void func_801F08AC(void) {
     PartyMember* work;

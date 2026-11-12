@@ -12,7 +12,7 @@ MATCH void func_801BD394(void) {
     u8     flag;
 
     flag = 0;
-    if (((g_Game.members[0].chr.character_id == 3) || (g_Game.members[0].chr.character_id == 6)) && ((*(u32*)g_Game.members & 0xFFFF00) == 0x10A00)) {
+    if (((g_Game.members[0].chr.character_id == CHAR_ID_TEEPO) || (g_Game.members[0].chr.character_id == CHAR_ID_PECO)) && ((*(u32*)g_Game.members & 0xFFFF00) == 0x10A00)) {
         flag = 1;
     }
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {

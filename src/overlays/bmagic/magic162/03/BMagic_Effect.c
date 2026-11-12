@@ -31,11 +31,9 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/func_801EF728.h"
 
-#include "overlays/bmagic/BMagic_DrawSparkleRays.h"
+#include "overlays/bmagic/Effect_DrawSparkleRays.h"
 
-MATCH void func_801EF80C(u16 angle, u16 radius) {
-    BMAGIC_DRAW_SPARKLE_RAYS(EFFECT_SPARKLE_TASK, angle, radius);
-}
+#include "overlays/bmagic/BMagic_DrawSparkleLongRays.h"
 
 MATCH void func_801EFA40(u16 angle, u16 radius) {
     BMAGIC_DRAW_SPARKLE_LONG_RAYS(EFFECT_SPARKLE_TASK, angle, radius);

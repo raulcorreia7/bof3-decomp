@@ -4,7 +4,7 @@ MATCH void func_801F32E8(void) {
     u8 phase = g_Task->unk_06;
 
     g_Task->unk_06 = phase + 1;
-    if ((phase & 3) == 0) {
+    if ((phase & 0x3) == 0) {
         Area_ClaimSpawnSlot();
     }
     func_801F3FAC();

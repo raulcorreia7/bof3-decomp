@@ -15,7 +15,7 @@ MATCH void func_8019E2A8(void) {
     state                            = g_Task;
     state->tint.signed_bytes.unk_5D  = 0;
     other                            = g_Task;
-    state->vz                        = 0x40;
+    state->vz                        = 64;
     state->gravity                   = -8;
     other->tint.signed_bytes.unk_5E  = 0;
     g_Task->tint.signed_bytes.unk_5F = 0;

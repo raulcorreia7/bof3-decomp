@@ -24,6 +24,8 @@ extern Callback            D_801EEC48[];
 void func_801F014C(void);
 void func_801F0238(void);
 
+extern SVECTOR D_1F800014[];
+
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->param.unk_0B == 0) {
         func_800AFC54();

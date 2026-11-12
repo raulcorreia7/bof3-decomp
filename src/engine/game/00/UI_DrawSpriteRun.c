@@ -10,7 +10,7 @@ MATCH void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 f
     int       tpage;
 
     tpage = 832;
-    if (!(flags & 1)) {
+    if (!(flags & 0x1)) {
         tpage = 896;
     }
     shift = GetTPage(0, 0, tpage, 256);

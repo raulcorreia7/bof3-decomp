@@ -9,7 +9,7 @@ MATCH void func_801D42E4(void) {
 
     g_Task->direction_08 = FACING_UP_LEFT;
     g_Task->unk_06       = 0;
-    g_Task->option_flags = 0x80;
+    g_Task->option_flags = ACTOR_OPT_NO_TARGET;
     g_Task->timer        = 4;
     g_Task->unk_0A       = 0;
 

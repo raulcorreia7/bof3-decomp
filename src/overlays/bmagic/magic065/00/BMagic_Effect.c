@@ -76,7 +76,7 @@ MATCH void func_801EF328(void) {
 
 MATCH void func_801EF394(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }

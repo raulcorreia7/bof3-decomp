@@ -226,7 +226,7 @@ MATCH void func_801F2C58(void) {
 MATCH void func_801F2CB0(void) {
     func_801F3E48(((Area024Scratch*)g_Task)->step_count);
     ((Area024Scratch*)g_Task)->step_count = (((Area024Scratch*)g_Task)->step_count + 2u);
-    if (((Area024Scratch*)g_Task)->step_count >= 0x80u) {
+    if (((Area024Scratch*)g_Task)->step_count >= 128u) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 14));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
@@ -430,7 +430,7 @@ MATCH void func_801F362C(void) {
     count = 0;
     work  = (u16*)(WORLD00_AREA024_STATE_OFFSET);
     for (;; work += 12) {
-        work[4]  = (work[4] + (g_FrameCount & 1));
+        work[4]  = (work[4] + (g_FrameCount & 0x1));
         state[0] = (state[0] + work[2]);
         t0       = work[-1];
         tmp      = work[3];

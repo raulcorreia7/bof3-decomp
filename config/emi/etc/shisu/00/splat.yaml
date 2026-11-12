@@ -20,7 +20,6 @@ segments:
     subsegments:
       - [0x164, .data, g_SaveSlotLevelFormat]
       - [0x180, c, 180]
-  # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code
     start: 0x1EDC
@@ -28,8 +27,7 @@ segments:
     align: 4
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
-      - [0x1EDC, bin, D_801D2ADC]
-      - [0x1EFC, c, 1EFC]
+      - [0x1EDC, c, 1EFC]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2
     type: code

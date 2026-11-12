@@ -48,7 +48,7 @@ NON_MATCHING bool func_8009AC18(void) {
             i++;
         } while ((u8)i < g_Battle.party_count);
     }
-    func_800AAA74();
+    Battle_ApplyFormationStats();
     j = 0;
     do {
         row = D_80145F20 + j * BATTLE_PARTY_STRIDE;
@@ -69,7 +69,7 @@ NON_MATCHING bool func_8009AC18(void) {
     if (g_Battle.party_count != 0) {
         i = 0;
         do {
-            func_800A9BD8(i);
+            Battle_RescaleStats(i);
             i++;
         } while ((u8)i < g_Battle.party_count);
     }

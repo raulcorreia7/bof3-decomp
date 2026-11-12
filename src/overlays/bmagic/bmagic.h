@@ -45,7 +45,7 @@
     func_80196718(battler);                                                     \
     selector = (u8*)&g_Battle.target_selector;                                  \
     func_800AF814(*selector);                                                   \
-    func_800A9820(*selector);                                                   \
+    Battle_MarkDamaged(*selector);                                              \
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
     func_801E5988()
 
@@ -302,7 +302,12 @@ extern Callback          g_BMagicEffectModes[];
 extern BMagicEffectWork* D_801F17B0;
 extern BMagicEffectWork* D_801F17B4;
 
-void func_800A9610(u8 selector, u16 flags);
+/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
+ * the row's column and g_EmiLoadedCharacterIndex picks the id. */
+extern u16* D_800B499C[][2];
+
+/* func_800A9610 */
+void Battle_ApplyDamageFlags(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
 void func_800AFC54(void);
@@ -321,10 +326,16 @@ void func_801F0068(void);
 
 void func_801F006C(void);
 
+/* Defined in BMagic_AllocEffect.h, which a member includes after its first call. */
+u32  BMagic_AllocEffect(void);
+/* Defined in Effect_DrawBolt.h, which a member includes after its first call. */
+void Effect_DrawBolt(void);
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
 /* Defined in Effect_DrawScreenFade.h, which a member includes after its first call. */
 void Effect_DrawScreenFade(void);
+/* Defined in Effect_DrawSparkleRays.h, which a member includes after its first call. */
+void Effect_DrawSparkleRays(u16 angle, u16 radius);
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
     do {                                          \
