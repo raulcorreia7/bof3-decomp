@@ -29,7 +29,7 @@ MATCH void GFX_ExpandRgb555(u32* pixels, RECT rect) {
         remaining -= 6;
     }
     LoadImage(&rect, (u_long*)D_801459FC);
-    if (count & 3) {
+    if (count & 0x3) {
         count += 4 - count % 4;
     }
     D_801459FC += count;

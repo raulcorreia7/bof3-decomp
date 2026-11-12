@@ -149,7 +149,7 @@ MATCH void func_801F0140(void) {
     g_Task->scale.y += 0x800;
     g_Task->pos.x.fixed += rsin(g_Task->unk_14) * g_Task->unk_0C;
     g_Task->pos.y.fixed += rcos(g_Task->unk_14) * g_Task->unk_0C;
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         value = g_Task->unk_0C;
         if (value == 4) {
             g_Task->header.step += 1;

@@ -78,7 +78,7 @@ MATCH void func_801EFD80(void) {
     Effect_SetActorMatrix();
     func_801F026C();
     PopMatrix();
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
     }
     task         = g_Task;
@@ -106,7 +106,7 @@ MATCH void func_801EFE74(void) {
     Effect_SetActorMatrix();
     func_801F026C();
     PopMatrix();
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
     }
     task         = g_Task;
@@ -139,7 +139,7 @@ MATCH void func_801EFF68(void) {
     if (g_Task->unk_0C < 4) {
         value          = g_Task->unk_10 + 1;
         g_Task->unk_10 = value;
-        if (!(value & 7)) {
+        if (!(value & 0x7)) {
             g_Task->unk_0C += 1;
         }
     }
