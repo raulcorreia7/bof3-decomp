@@ -24,6 +24,7 @@ whole match; [matching](../../../../docs/matching.md) is the full reference.
    0x<ADDR>`, `tools/symbol.py member <Type> 0x<OFF>`, or `tools/symbol.py uses <Name>`
    ([lookup](../../../../tools/README.md#lookup)). A bare number:
    `tools/symbol.py value 0x<NN> --image <target>` names the enum member or macro that holds it.
+   A record's accesses: `tools/symbol.py accesses <Type>`; `tools/symbol.py records` ranks them.
 
 3. **Draft.** Write the body in `work/<image>/<ADDR>/`, then put it in the unit's `.c` to measure
    it. A draft is always under `NON_MATCHING`; without it the split assembly builds the function:

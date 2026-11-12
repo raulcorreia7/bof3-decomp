@@ -212,7 +212,7 @@ ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
 
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on mode. magic070-072 keep a pool of them, one
- * record per sparkle. */
+ * record per sparkle; magic131 keeps a pool of 48. */
 typedef struct BMagicEffectWork {
     /* 0x00 */ TaskHeader   header;
     /* 0x03 */ u8           unk_03;
@@ -227,7 +227,8 @@ typedef struct BMagicEffectWork {
     /* 0x14 */ WorldPos     pos;
     /* 0x20 */ s16          unk_20;
     /* 0x22 */ u16          unk_22;
-    /* 0x24 */ u8           pad_24[4];
+    /* 0x24 */ u8           pad_24[2];
+    /* 0x26 */ s16          unk_26;
     /* 0x28 */ PartyMember* battler;
 } BMagicEffectWork;
 
@@ -247,6 +248,7 @@ ASSERT_OFFSET(BMagicEffectWork, phase_0C, 0x0C);
 ASSERT_OFFSET(BMagicEffectWork, pos, 0x14);
 ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
 ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
+ASSERT_OFFSET(BMagicEffectWork, unk_26, 0x26);
 ASSERT_OFFSET(BMagicEffectWork, battler, 0x28);
 
 /* The record of an effect that orbits its battler: the angle advances every frame and the radius scales sin and cos. */
@@ -312,6 +314,7 @@ void Effect_StartOnZeroTick(void);
 void func_801EEEC8(void);
 void func_801EEF38(void);
 void func_801EF240(void);
+void func_801EF4F0(void);
 void func_801EF970(void);
 void func_801EFA48(void);
 void func_801F0068(void);

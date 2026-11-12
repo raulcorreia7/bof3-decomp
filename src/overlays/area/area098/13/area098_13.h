@@ -90,8 +90,9 @@ extern u8 D_80146865;
 extern u8 D_80146875;
 
 void func_801F40D0(s32 arg0);
-void func_801F42E8(void);
 void func_801F4220(AreaStreakSlot* slot);
+u8   func_801F42E8(void);
+void func_801F4490(WorldPos* pos, s32 vx, s32 vy);
 
 void func_801F40A4(void);
 void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
