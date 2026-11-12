@@ -4,6 +4,14 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+/* Four words, the copy unit of the effect work record's head. */
+typedef struct WorkChunk {
+    s32 w0;
+    s32 w1;
+    s32 w2;
+    s32 w3;
+} WorkChunk;
+
 /* func_801EEC7C */
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
@@ -76,7 +84,32 @@ MATCH void func_801EEFF8(void) {
 MATCH void func_801EF0D8(void) {
 }
 
-INCLUDE_ASM(func_801EF0E0);
+MATCH void func_801EF0E0(void) {
+    u32        effect_slot;
+    WorkChunk* src;
+    WorkChunk* dst;
+    WorkChunk* end;
+
+    effect_slot = Battle_AllocEffect(1, 58);
+    dst         = (WorkChunk*)&g_BattleEffects[effect_slot & BYTE_MASK];
+    src         = (WorkChunk*)&BATTLE_ACTIVE_PARTY;
+    end         = src + 7;
+    do {
+        *dst = *src;
+        src += 1;
+        dst += 1;
+    } while (src != end);
+    /* FAKE: hold tail store before tail. */
+    FAKE_ORDER_LOCK(dst->w0 = src->w0);
+    g_BattleEffects[effect_slot & BYTE_MASK].target.party  = g_Task;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_03        = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 58;
+    g_Task->unk_09                                         = 1;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF20C(void) {
     u8 timer;
