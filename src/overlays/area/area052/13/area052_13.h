@@ -35,6 +35,7 @@ typedef struct AreaTriggerRect {
 } AreaTriggerRect;
 
 extern AreaTriggerRect D_801F510C[2];
+void                   func_801F3084(void);
 s32                    func_801F31C0();
 void                   func_801F3C4C(s32 x, s32 y);
 
