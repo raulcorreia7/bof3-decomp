@@ -10,7 +10,30 @@ INCLUDE_ASM(func_801EEDEC);
 
 INCLUDE_ASM(func_801EEF64);
 
-INCLUDE_ASM(func_801EF000);
+MATCH void func_801EF000(void) {
+    u16          i;
+    u32          slot;
+    PartyMember* work;
+
+    if (!EMI_IsReady()) {
+        return;
+    }
+    g_Game.members[0].header.flags     = 0;
+    g_Game.members[1].header.flags     = 0;
+    g_Game.members[2].header.flags     = 0;
+    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].unk_04       = 0x21;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].arg.unk_09   = 0x18;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->param.unk_0B += 1;
+    for (i = 0; i < 256; i++) {
+        MEM(u16, AREA_PALETTE_WORK + 0x400u + i * 2) = MEM(u16, AREA_PALETTE_ARENA_33C00 + i * 2);
+    }
+    g_GfxPalettePending = 1;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EF110(void) {
     PartyMember* work;
