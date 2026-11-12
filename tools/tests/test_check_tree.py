@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -8,6 +9,8 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "tools/check_tree.sh"
 ENUM = ROOT / "tools/check_enum_members.py"
+SOURCES = ROOT / "tools/check_sources.py"
+PACKAGE = ROOT / "tools/bof3"
 
 
 def run_tree(
@@ -16,6 +19,21 @@ def run_tree(
     (repo / "tools").mkdir()
     (repo / "tools/check_tree.sh").write_text(SCRIPT.read_text())
     (repo / "tools/check_enum_members.py").write_text(ENUM.read_text())
+    (repo / "tools/check_sources.py").write_text(SOURCES.read_text())
+    shutil.copytree(
+        PACKAGE, repo / "tools/bof3", ignore=shutil.ignore_patterns("__pycache__")
+    )
+    # One image whose layout compiles the sources the cases add.
+    layout = repo / "config/emi/test/arc/00/splat.yaml"
+    layout.parent.mkdir(parents=True)
+    layout.write_text(
+        "segments:\n"
+        "  - type: code\n"
+        "    start: 0\n"
+        "    subsegments:\n"
+        "      - [0x0, c, a]\n"
+        "      - [0x4, c, b]\n"
+    )
 
     def git(*args: str) -> None:
         subprocess.run(["git", *args], cwd=repo, check=True, capture_output=True)
@@ -45,11 +63,11 @@ def run_tree(
 
 
 CASES = [
-    ("pass", {}, {"src/a.c": "void f(s32 x);\n"}, None),
+    ("pass", {}, {"src/overlays/test/arc/00/a.c": "void f(s32 x);\n"}, None),
     (
         "duplicate prototype",
         {"include/a.h": "void f(void);\n"},
-        {"src/b.h": "void f(void);\n"},
+        {"src/overlays/test/arc/00/b.h": "void f(void);\n"},
         "duplicate declaration",
     ),
     (
@@ -58,13 +76,28 @@ CASES = [
         {"include/new.h": "#ifndef WRONG\n#define WRONG\n#endif\n"},
         "header guard",
     ),
-    ("raw address", {}, {"src/a.c": "u32 x = 0x801D933C;\n"}, "raw address"),
-    ("register pin", {}, {"src/a.c": 'asm("$0");\n'}, "register pin"),
-    ("decompiler local", {}, {"src/a.c": "s32 temp_a;\n"}, "decompiler local"),
+    (
+        "raw address",
+        {},
+        {"src/overlays/test/arc/00/a.c": "u32 x = 0x801D933C;\n"},
+        "raw address",
+    ),
+    (
+        "register pin",
+        {},
+        {"src/overlays/test/arc/00/a.c": 'asm("$0");\n'},
+        "register pin",
+    ),
+    (
+        "decompiler local",
+        {},
+        {"src/overlays/test/arc/00/a.c": "s32 temp_a;\n"},
+        "decompiler local",
+    ),
     (
         "task offset",
         {},
-        {"src/a.c": "u8 *p = ((u8 *)g_Task);\n"},
+        {"src/overlays/test/arc/00/a.c": "u8 *p = ((u8 *)g_Task);\n"},
         "task read by offset",
     ),
 ]

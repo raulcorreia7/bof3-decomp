@@ -6,7 +6,26 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC38);
 
-INCLUDE_ASM(func_801EED8C);
+MATCH void func_801EED8C(void) {
+    u16* src;
+    u16* dst;
+    u16  i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    func_800AFD9C();
+    g_Task->pos.z.fixed += TO_COORD(192);
+    BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
+    MEM(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = MEM(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    g_GfxPalettePending                                 = 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    g_Task->unk_09       = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+}
 
 INCLUDE_ASM(func_801EEEB0);
 
@@ -54,7 +73,21 @@ MATCH void func_801EF444(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4FC);
+MATCH void func_801EF4FC(void) {
+    s32 cue;
+
+    g_PaletteFades[g_Task->timer].offset.red++;
+    g_PaletteFades[g_Task->timer].offset.green++;
+    g_PaletteFades[g_Task->timer].offset.blue++;
+    if (--g_Task->unk_09 == 0) {
+        cue = EMI_CUE_ID(SND_BANK_COMMON, 0x02);
+        if (g_Task->unk_04 & 1) {
+            cue = EMI_CUE_ID(SND_BANK_COMMON, 0x01);
+        }
+        SND_QueueSelectionFx(cue);
+        g_Task->header.step++;
+    }
+}
 
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
 

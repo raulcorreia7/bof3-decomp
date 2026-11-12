@@ -19,8 +19,11 @@ typedef struct Magic001SecondSteps {
 
 extern Magic001Steps       D_801EEC10;
 extern Magic001SecondSteps D_801EEC3C;
+extern Callback            D_801EEC48[];
 
-/* func_801F0238 */
+void func_801F014C(void);
+void func_801F0238(void);
+
 extern SVECTOR D_1F800014[];
 
 static inline void BMagic_ClearWorkFlagsAndStep(void) {

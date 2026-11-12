@@ -137,17 +137,17 @@ MATCH void func_801D1420(void) {
 MATCH void func_801D1460(void) {
     g_Task->timer += 16;
     if (g_Task->timer == 0) {
-        func_801D23AC(0xFF);
+        Scene_DrawRedFade(0xFF);
         g_Task->header.mode += 1;
     } else {
-        func_801D23AC(g_Task->timer);
+        Scene_DrawRedFade(g_Task->timer);
     }
 }
 
 MATCH void func_801D14DC(void) {
     g_Task->timer -= 16;
     if (g_AreaDrawFlags != 0) {
-        func_801D23AC(g_Task->timer);
+        Scene_DrawRedFade(g_Task->timer);
     }
     if (g_Task->timer == 0) {
         if (g_AreaDrawFlags == 0) {
@@ -204,17 +204,33 @@ INCLUDE_ASM(func_801D1D20);
 
 INCLUDE_ASM(func_801D1FF8);
 
-INCLUDE_ASM(func_801D230C);
+MATCH void func_801D230C(void) {
+    Point3DL pos;
+    s16      x;
+    s16      y;
+    u16      angle;
 
-MATCH void func_801D23AC(u8 shade) {
-    TILE* tile;
+    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 896, 256));
+    pos.x = g_Task->pos.x.fixed;
+    pos.y = g_Task->pos.y.fixed;
+    pos.z = g_Task->pos.z.fixed;
+    x     = g_Task->screen_x;
+    y     = g_Task->screen_y;
+    angle = g_Task->unk_32;
+    func_801D1FF8(&pos, x, y, angle, 0xC0, 0);
+}
 
-    tile = (TILE*)g_GfxPrimCursor;
-    SetTile(tile);
-    SetSemiTrans(tile, 1);
-    setXY0(tile, 0, 0);
-    setWH(tile, SCREEN_WIDTH, SCREEN_HEIGHT);
-    setRGB0(tile, shade, 0, 0);
+/* func_801D23AC */
+MATCH void Scene_DrawRedFade(u8 red) {
+    TILE* prim;
+
+    prim = (TILE*)g_GfxPrimCursor;
+    SetTile(prim);
+    SetSemiTrans(prim, 1);
+    prim->w = SCREEN_WIDTH;
+    setXY0(prim, 0, 0);
+    prim->h = SCREEN_HEIGHT;
+    setRGB0(prim, red, 0, 0);
     GFX_AddPrim(1, sizeof(TILE));
 }
 

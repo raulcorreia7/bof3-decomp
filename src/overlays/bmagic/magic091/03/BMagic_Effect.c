@@ -29,4 +29,4 @@ INCLUDE_ASM(func_801EF240);
 
 INCLUDE_ASM(func_801EF7B0);
 
-INCLUDE_ASM(func_801EF9E4);
+#include "overlays/bmagic/func_801EF9E4.h"

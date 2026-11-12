@@ -4,69 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801F72A0(void) {
-    /* Retail takes the handler index from the entry $v0; the uninitialised local reads it. */
-    u32 index;
-
-    /* FAKE: without the block the scheduler hoists the index shift above the
-       ra store (84.46%); the lock restores the retail order (99.85%). */
-    FAKE_ORDER_LOCK(D_801FE3D8[index]());
-}
-
-MATCH void func_801F72D4(void) {
-    func_801FD29C();
-    D_80146872 = 1;
-}
-
-INCLUDE_ASM(func_801F7300);
-
-MATCH void func_801F7A00(void) {
-    SYS_DISPATCH_BYTE(D_801FE3E4, g_SceneState.state_04);
-}
-
-MATCH void func_801F7A3C(void) {
-}
-
-INCLUDE_ASM(func_801F7A44);
-
-INCLUDE_ASM(func_801F7C6C);
-
-INCLUDE_ASM(func_801F8188);
-
-INCLUDE_ASM(func_801F8B50);
-
-INCLUDE_ASM(func_801F8F18);
-
-INCLUDE_ASM(func_801F90C0);
-
-INCLUDE_ASM(func_801F97C0);
-
-INCLUDE_ASM(func_801F9DF4);
-
-INCLUDE_ASM(func_801FA3D0);
-
-INCLUDE_ASM(func_801FA760);
-
-INCLUDE_ASM(func_801FA8EC);
-
-INCLUDE_ASM(func_801FAB08);
-
-INCLUDE_ASM(func_801FB014);
-
-INCLUDE_ASM(func_801FB30C);
-
-INCLUDE_ASM(func_801FBC88);
-
-INCLUDE_ASM(func_801FBD88);
-
-INCLUDE_ASM(func_801FC498);
-
-INCLUDE_ASM(func_801FC718);
-
-INCLUDE_ASM(func_801FCB80);
-
-INCLUDE_ASM(func_801FCD38);
-
 #include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FCE10(void) {

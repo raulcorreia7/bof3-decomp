@@ -284,7 +284,24 @@ INCLUDE_ASM(func_801F11B8);
 
 INCLUDE_ASM(func_801F12A0);
 
-INCLUDE_ASM(func_801F13A4);
+MATCH void func_801F13A4(void) {
+    s16* angle_cell;
+    u8   phase;
+    u8   timer;
+
+    D_801F24E0->phase_0C += 0x10;
+    phase                   = D_801F1C38[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 7;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
+    timer                   = D_801F24E0->timer_05 - 2;
+    D_801F24E0->timer_05    = timer;
+    if (timer == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801F1AC4();
+    }
+}
 
 MATCH void func_801F14A0(void) {
     s16 timer;
@@ -301,9 +318,38 @@ MATCH void func_801F14A0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F153C);
+MATCH void func_801F153C(void) {
+    s16* angle_cell;
+    u8   phase;
 
-INCLUDE_ASM(func_801F1644);
+    phase                   = D_801F1C54[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 6;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) << 6) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
+    D_801F24E0->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    COORD_INT(D_801F24E0->pos.z) += D_801F1C74[D_801F24E0->unk_07] << 6;
+    D_801F24E0->phase_0C = 0x40;
+    D_801F24E0->timer_05 = 16;
+    D_801F24E0->unk_06   = 8;
+    D_801F24E0->header.step += 1;
+}
+
+MATCH void func_801F1644(void) {
+    s16* angle_cell;
+    u8   phase;
+
+    D_801F24E0->unk_06 += 2;
+    D_801F24E0->phase_0C += 0x20;
+    phase                   = D_801F1C54[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 6;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
+    if ((s16)D_801F24E0->phase_0C == 0x200) {
+        D_801F24E0->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F1748);
 
