@@ -46,7 +46,7 @@ MATCH void func_801E0788(void) {
         g_Game.current->counter_137   = 0;
         g_Game.current->focus_counter = 0;
         g_Game.current->unk_139       = 0;
-        func_800A9BD8(g_Task->slot);
+        Battle_RescaleStats(g_Task->slot);
         if ((func_801E0E0C() & BYTE_MASK) || (g_Battle.living_party_count == 0)) {
             VOL(u8, g_Battle.outcome.result) |= BATTLE_RESULT_DEFEAT;
         }

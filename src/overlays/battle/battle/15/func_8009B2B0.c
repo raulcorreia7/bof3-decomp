@@ -26,7 +26,7 @@ MATCH void func_8009B2B0(void) {
         g_Battle.ui_step = 2;
     } else {
         for (slot = 3; slot < COMBATANT_COUNT; slot++) {
-            if (Battle_SlotIsBlocked(slot & BYTE_MASK) == 0) {
+            if (Battle_SlotIsBlocked((u8)slot) == 0) {
                 enemy_sum += g_BattleEnemyBattlers[slot].stats.agility;
             }
         }
@@ -34,7 +34,7 @@ MATCH void func_8009B2B0(void) {
         enemy_sum /= divisor;
 
         for (slot = 0; slot < (*(u8*)&g_Battle.party_count); slot++) {
-            if (Battle_SlotIsBlocked(slot & BYTE_MASK) == 0) {
+            if (Battle_SlotIsBlocked((u8)slot) == 0) {
                 player_sum += g_Game.members[slot].chr.stats.agility;
             }
         }

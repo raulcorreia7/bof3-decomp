@@ -4,7 +4,7 @@ MATCH void func_800B1504(void) {
     MenuPanelTask* task;
     s16            x;
 
-    func_800B1728();
+    Battle_DrawCommandList();
     task = g_MenuCurrentPanel;
     x    = task->pos.x;
     if (x >= 347) {

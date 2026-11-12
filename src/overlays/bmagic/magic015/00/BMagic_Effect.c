@@ -108,7 +108,22 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFDE8);
+MATCH void func_801EFDE8(void) {
+    u8 timer;
+
+    timer = g_Task->unk_09 - 1;
+    g_Task->scale.x -= 0x2000;
+    g_Task->scale.y += 0x3000;
+    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x20;
+    g_Task->unk_09             = timer;
+    if (timer == 0) {
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+        g_Task->unk_09      = 8;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFE84(void) {
     PartyMember* work = g_Task;

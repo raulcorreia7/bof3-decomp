@@ -53,7 +53,7 @@ NON_MATCHING void func_800A0EC4(void) {
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         index = 0;
-        func_800AAA74();
+        Battle_ApplyFormationStats();
         if (g_Battle.party_count != 0) {
             do {
                 row_offset                           = index * BATTLE_PARTY_STRIDE;
@@ -67,7 +67,7 @@ NON_MATCHING void func_800A0EC4(void) {
         func_800A4458();
         if (g_Battle.party_count != 0) {
             do {
-                func_800A9BD8(index & BYTE_MASK);
+                Battle_RescaleStats(index & BYTE_MASK);
                 index++;
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }

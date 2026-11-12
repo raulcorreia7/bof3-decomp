@@ -26,7 +26,7 @@ MATCH u8 func_801A2C94(Actor* actor) {
                 g_Task->timer = 0;
                 return 0xFFU;
             }
-            if ((route & 7) != (status & BYTE_MASK)) {
+            if ((route & 0x7) != (status & BYTE_MASK)) {
                 /* FAKE: basic-block boundary pins handler status. */
                 /* FAKE: FAKE_ORDER_LOCK keeps this statement in place; without it the match is 93.06%. */
                 FAKE_ORDER_LOCK(g_Task->direction_08 = status);

@@ -12,7 +12,7 @@ MATCH s32 func_801F4A18(void) {
     x                 = work->vx;
     y                 = work->vy;
     state             = work->header.step + 1;
-    work->vz          = 0x53020;
+    work->vz          = 340000;
     work->unk_32      = 0;
     work->screen_y    = 96;
     work->vy          = 0;

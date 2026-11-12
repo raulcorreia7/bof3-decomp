@@ -65,7 +65,21 @@ MATCH void func_801EEF24(void) {
     g_Task->unk_03 += 1;
 }
 
-INCLUDE_ASM(func_801EF070);
+/* Loads the character archive the active battler's facing selects from the dragon-form row when the effect
+ * ticker is one, then advances byte 0x03. */
+MATCH void func_801EF070(void) {
+    s32 archive_id;
+
+    if (g_Task->param.unk_0B == 1) {
+        if (g_BattleEffectBattler->facing < 2) {
+            archive_id = D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex];
+        } else {
+            archive_id = D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex];
+        }
+        EMI_LoadArchive(archive_id);
+        g_Task->unk_03 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF138);
 
@@ -238,7 +252,25 @@ MATCH void func_801EFF44(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFF94);
+MATCH void func_801EFF94(void) {
+    u32          slot;
+    PartyMember* work;
+
+    if ((g_FrameCount & 3) == 0) {
+        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].target.party = work;
+        g_BattleEffects[slot].unk_04       = g_Task->unk_04 & 0xF;
+        g_Task->param.unk_0B += 1;
+        g_Task->unk_04 += 1;
+    }
+    if (g_BattleEffectBattler->header.step == 5) {
+        if (--g_Task->timer == 0) {
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 #include "overlays/bmagic/Effect_StepOnZeroTick.h"
 
@@ -274,7 +306,21 @@ INCLUDE_ASM(func_801F026C);
 
 INCLUDE_ASM(func_801F0648);
 
-INCLUDE_ASM(func_801F0AC8);
+/* Draws the glow ring step header.step selects: sets the actor matrix, advances the effect timers and
+ * passes the slot's draw row to func_801F0D0C while the step is running. */
+MATCH void func_801F0AC8(void) {
+    PartyMember* work;
+
+    SYS_DISPATCH_BYTE(D_801F24F0, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        Effect_SetActorMatrix();
+        work = g_Task;
+        work->unk_09 += 2;
+        work->unk_0C += 1;
+        func_801F0D0C(D_801F24D0[g_Task->unk_04][0] + g_Task->unk_09, D_801F24D0[g_Task->unk_04][1]);
+        PopMatrix();
+    }
+}
 
 MATCH void func_801F0BA8(void) {
     PartyMember* work;

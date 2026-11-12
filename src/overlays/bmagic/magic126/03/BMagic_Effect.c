@@ -151,7 +151,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
 MATCH void func_801EFAF4(void) {
     SYS_DISPATCH_BYTE(D_801F1278, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EFD5C();
     }
 }
@@ -200,7 +200,7 @@ INCLUDE_ASM(func_801EFD5C);
 MATCH void func_801F01C0(void) {
     SYS_DISPATCH_BYTE(D_801F1288, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F06AC();
     }
 }
@@ -258,9 +258,46 @@ INCLUDE_ASM(func_801F09E0);
 
 INCLUDE_ASM(func_801F0B34);
 
-INCLUDE_ASM(func_801F0C7C);
+MATCH void func_801F0C7C(void) {
+    s16* angle_cell;
+    s32  angle;
 
-INCLUDE_ASM(func_801F0DA4);
+    if (g_FrameCount & 1) {
+        D_801F22BC->unk_07 += 1;
+    }
+    PARTY_MEMBER_WORD_08(D_801F22BC) += 0x80000;
+    angle              = D_801F22BC->unk_04 & 0xF;
+    angle_cell         = &D_1F800004;
+    *angle_cell        = angle << 8;
+    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
+    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
+    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
+    if ((s32)PARTY_MEMBER_WORD_08(D_801F22BC) > 0x7FFFFF) {
+        D_801F22BC->header.step += 1;
+    }
+}
+
+MATCH void func_801F0DA4(void) {
+    s16* angle_cell;
+    s32  angle;
+    u8   count;
+
+    if (g_FrameCount & 1) {
+        D_801F22BC->unk_07 += 1;
+    }
+    angle              = D_801F22BC->unk_04 & 0xF;
+    angle_cell         = &D_1F800004;
+    *angle_cell        = angle << 8;
+    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
+    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
+    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
+    count              = D_801F22BC->pad_06 - 1;
+    D_801F22BC->pad_06 = count;
+    if (count == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801F116C();
+    }
+}
 
 INCLUDE_ASM(func_801F0ED0);
 

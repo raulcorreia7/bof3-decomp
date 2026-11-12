@@ -28,27 +28,27 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
     action = ((u8*)target)[FIELD(u16, sub, 0xAu)];
     switch (action) {
         case ACTOR_SCRIPT_FACE_SELECT_BASE_14:
-            result = (g_Task->direction_08 & 7) + 0x14;
+            result = (g_Task->direction_08 & 0x7) + 0x14;
             break;
         case ACTOR_SCRIPT_FACE_SELECT_BASE_1C:
-            result = (g_Task->direction_08 & 7) + 0x1C;
+            result = (g_Task->direction_08 & 0x7) + 0x1C;
             break;
         case ACTOR_SCRIPT_FACE_SELECT_BASE_24:
-            result = (g_Task->direction_08 & 7) + 0x24;
+            result = (g_Task->direction_08 & 0x7) + 0x24;
             break;
         case ACTOR_SCRIPT_FACE_SELECT_BASE_2C:
-            result = (g_Task->direction_08 & 7) + 0x2C;
+            result = (g_Task->direction_08 & 0x7) + 0x2C;
             break;
         case ACTOR_SCRIPT_FACE_AXIS_BASE_34:
             work   = g_Task;
             mode   = work->direction_08;
-            result = ((mode >> 1) & 3) | 0x34;
+            result = ((mode >> 1) & 0x3) | 0x34;
             /* 0x65 and 0x66 share the route update at set_route. */
             goto set_route;
         case ACTOR_SCRIPT_FACE_AXIS_BASE_10:
             work   = g_Task;
             mode   = work->direction_08;
-            result = ((mode >> 1) & 3) | 0x10;
+            result = ((mode >> 1) & 0x3) | 0x10;
         set_route:
             mode &= 6;
             mode += 1;
@@ -56,7 +56,7 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
             break;
         case ACTOR_SCRIPT_FACE_SELECT_FACING:
         default:
-            result = g_Task->direction_08 & 7;
+            result = g_Task->direction_08 & 0x7;
             break;
     }
     FIELD(u8, sub, 0x0u) |= 0x40;

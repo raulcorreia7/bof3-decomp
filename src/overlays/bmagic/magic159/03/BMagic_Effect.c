@@ -32,7 +32,7 @@ MATCH void func_801EEC5C(void) {
     g_Task->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
-    func_800A9610(g_Battle.target_selector, 0x10);
+    Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
@@ -44,7 +44,7 @@ MATCH void func_801EEC5C(void) {
 MATCH void func_801EEE28(void) {
     SYS_DISPATCH_BYTE(D_801EF424, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         g_Task->unk_2E.half += 8;
         g_Task->unk_30.half -= 0x10;
         func_801EF08C();

@@ -48,7 +48,7 @@
     func_80196718(battler);                                                     \
     selector = (u8*)&g_Battle.target_selector;                                  \
     func_800AF814(*selector);                                                   \
-    func_800A9820(*selector);                                                   \
+    Battle_MarkDamaged(*selector);                                              \
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
     func_801E5988()
 
@@ -309,7 +309,11 @@ extern BMagicEffectWork* D_801F17B4;
  * bytes, the scratchpad view does not. */
 extern SVECTOR D_1F800014[];
 
-void func_800A9610(u8 selector, u16 flags);
+/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
+ * the row's column and g_EmiLoadedCharacterIndex picks the id. */
+extern u16* D_800B499C[][2];
+
+void Battle_ApplyDamageFlags(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
 void func_800AFC54(void);

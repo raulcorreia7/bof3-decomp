@@ -42,6 +42,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Build the call-graph layers              | `tools/symbol.py layers [--jsonl]`                                       | [lookup](#lookup)                                         |
 | Find where a record or global is accessed | `tools/symbol.py accesses <TypeOrGlobal> [--jsonl]`                     | [lookup](#lookup)                                         |
 | Rank records by unknown accesses         | `tools/symbol.py records [--jsonl]`                                      | same                                                      |
+| Scan matched bodies for bare values      | `tools/symbol.py values --scan [--jsonl]`                                | [values](../docs/conventions.md#how-a-value-is-written)   |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Check the symbol table                   | `tools/symbol.py check`                                                  | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
@@ -140,6 +141,9 @@ each function's layer, callers, callees, status, copies and shared flag. `--json
 per line. `symbol.py accesses` decodes every image and reports a record's or global's byte offsets,
 widths, members, examples, constants and call slots with their width, signedness and straddle
 problems; `symbol.py records` ranks every record by accesses times unknown members.
+`symbol.py values --scan` decides what each numeric literal of a matched body means from the
+declaration it is assigned to or compared with, and prints the family, the existing constant and the
+form the conventions prescribe; `--jsonl` writes one object per site.
 
 ## Quality
 

@@ -2,7 +2,7 @@
 
 MATCH void func_800C1F90(void) {
     if (func_801E30F8()) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         if (RANDOM_MASK(3) == 0) {
             g_Battle.state |= BATTLE_STATE_CRITICAL;
             g_Battle.boss_flags |= 0x10;

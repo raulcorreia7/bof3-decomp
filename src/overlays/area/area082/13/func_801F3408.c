@@ -1,7 +1,7 @@
 #include "area082_13.h"
 
 MATCH void func_801F3408(void) {
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         func_801F393C();
     }
     func_801F3AAC();

@@ -30,7 +30,7 @@ MATCH void func_801EEE60(void) {
         }
         GFX_FreePaletteFadeTarget(battler);
         GFX_AllocPaletteFade(battler, 6, 4, 8, 0);
-        func_800A9610(g_Battle.target_selector, 0x200);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x200);
     }
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;

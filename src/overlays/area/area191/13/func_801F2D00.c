@@ -5,12 +5,12 @@ MATCH void func_801F2D00(void) {
 
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
-    if (mode & 0xFF) {
+    if (mode & BYTE_MASK) {
         g_Task->tint.bytes.unk_5D += 1;
         g_Task->tint.bytes.unk_5E += 1;
         g_Task->tint.bytes.unk_5F += 1;
     } else {
-        Message_StartAreaMessage(0x86);
+        Message_StartAreaMessage(134);
         g_GameStateIndex    = GAME_REQUEST_MESSAGE;
         g_Task->header.mode = 2;
     }

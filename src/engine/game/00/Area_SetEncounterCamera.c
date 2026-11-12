@@ -46,8 +46,8 @@ loop_5:
     offset_x = D_801CD778[mode_index & BYTE_MASK].x;
     offset_y = D_801CD778[mode_index & BYTE_MASK].y;
     angle.vz = (D_801CD954 >> 1);
-    angle.vx = 0x4000 - ((g_EncounterOriginX + (offset_x << 0x10)) >> 9);
-    angle.vy = 0x4000 - ((g_EncounterOriginY + (offset_y << 0x10)) >> 9);
+    angle.vx = 16384 - ((g_EncounterOriginX + (offset_x << 0x10)) >> 9);
+    angle.vy = 16384 - ((g_EncounterOriginY + (offset_y << 0x10)) >> 9);
     ApplyMatrix(&matrix, &angle, &vec);
     matrix.t[0] = vec.vx + g_AreaCameraOffsetX;
     matrix.t[1] = vec.vy + g_AreaCameraOffsetY;

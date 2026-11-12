@@ -42,7 +42,7 @@ BattleEffect4Steps D_801D0F58 = {
 
 /* 0x801D0F6C */
 BattleSavedPreviewFuncs D_801D0F6C = {
-    (Callback)func_801E7888, (Callback)func_801E78F0, (Callback)func_801E7948,
+    (Callback)func_801E7888, (Callback)func_801E78F0, (Callback)Battle_PickStreamSlot,
     (Callback)func_801E7BA0, (Callback)func_801E8558,
 };
 
@@ -50,7 +50,7 @@ BattleSavedPreviewFuncs D_801D0F6C = {
 /* D_801D0F80 */
 BattlePanelFuncs g_BattlePanelFuncs = {
     (Callback)func_801E90FC, (Callback)func_801E91FC, (Callback)func_801E943C, (Callback)func_801E94D0,
-    (Callback)func_801E960C, (Callback)func_801E9B18, (Callback)func_801EA650, (Callback)func_801EA7DC,
+    (Callback)Battle_UpdateMenuPanel, (Callback)Battle_DispatchPanel, (Callback)func_801EA650, (Callback)func_801EA7DC,
 };
 
 /* 0x801D0FA0 */
@@ -62,7 +62,7 @@ BattlePanel0States D_801D0FA0 = {
 
 /* 0x801D0FAC */
 BattlePanel1States D_801D0FAC = {
-    (Callback)func_801E927C,
+    (Callback)Battle_DrawMenuRows,
     (Callback)func_801E9390,
     (Callback)func_801EAB64,
 };
@@ -91,9 +91,9 @@ Callback D_801D0FD0[4] = {
 
 /* 0x801D0FE0 */
 BattlePanel5States D_801D0FE0 = {
-    (Callback)func_801E9CA8,
+    (Callback)Battle_SetPanelGauges,
     (Callback)func_801E9F18,
-    (Callback)func_801E9FDC,
+    (Callback)Battle_MovePanel,
 };
 
 /* 0x801D0FEC */

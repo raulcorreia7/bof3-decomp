@@ -5,6 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* Scratchpad cells the line drawer stages: the shade byte it stamps into the line colours and the
+ * two screen coordinates it offsets. */
+extern volatile u16 D_1F800006;
+extern volatile u16 D_1F80000C;
+extern volatile u16 D_1F80000E;
+
 void func_801EEE30(void);
 
 void            func_801EFA84(void);
