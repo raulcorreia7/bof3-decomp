@@ -241,36 +241,14 @@ MATCH void func_801F01F8(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
+#include "overlays/bmagic/Effect_DrawFullScreenQuad.h"
+
 MATCH void func_801F030C(void) {
     POLY_F4* prim;
     s32      shade;
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
-    prim = (POLY_F4*)g_GfxPrimCursor;
-    SetPolyF4(prim);
-    SetSemiTrans(prim, 1);
-    setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);
-    shade = g_Task->unk_09 * 15;
-    setRGB0(prim, shade, shade, shade);
-    GFX_AddPrim(2, sizeof(POLY_F4));
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    EFFECT_DRAW_FULL_SCREEN_QUAD(2);
 }
 
 MATCH void func_801F0438(void) {
