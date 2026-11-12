@@ -1,4 +1,4 @@
-/* Runs the personal action's target step: after the turn wait it marks the rock the character faces, or probes the cell ahead for a field actor and a map-cell spawn, then advances the work state. */
+/* Runs the personal action's target step: after the turn wait it marks the rock the character faces, or probes the cell ahead for a field actor and a map-cell spawn, then advances the work state. Check every including image after changes. */
 /* Each image defines CHAR_CELL_PROBE as its map-cell probe and CHAR_PERSONAL_ACTION_CUE for its action's cue. */
 
 MATCH void Char_RunPersonalAction(void) {
