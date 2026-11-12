@@ -37,7 +37,16 @@ MATCH void func_801EEEB4(void) {
 
 #include "overlays/bmagic/Effect_NextStepOnWorkLastTick.h"
 
-INCLUDE_ASM(func_801EEFF8);
+MATCH void func_801EEFF8(void) {
+    g_PaletteFades[g_Task->unk_09].offset.red -= 2;
+    g_PaletteFades[g_Task->unk_09].offset.green -= 1;
+    g_PaletteFades[g_Task->unk_09].offset.blue -= 1;
+    if (--g_Task->timer == 0) {
+        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        func_800AF814(g_Battle.target_selector);
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
