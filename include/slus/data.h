@@ -88,12 +88,8 @@ extern u8  g_BattleSubStep;
 /* FAKE: g_Battle.state as a global of its own; the sites that use it match only with a separate symbol. */
 extern u16 g_BattleState;
 /* The bytes the battle code index; the bmagic images that copy its record
- * define BATTLE_PARTY_CELL_RECORD before their first include. A unit that
- * re-reads the cell for each position copy (bmagic/magic056/03) also defines
- * BATTLE_PARTY_CELL_RECORD_VOLATILE. */
-#if defined(BATTLE_PARTY_CELL_RECORD) && defined(BATTLE_PARTY_CELL_RECORD_VOLATILE)
-extern struct PartyMember* volatile D_8014637C;
-#elif defined(BATTLE_PARTY_CELL_RECORD)
+ * define BATTLE_PARTY_CELL_RECORD before their first include. */
+#ifdef BATTLE_PARTY_CELL_RECORD
 extern struct PartyMember* D_8014637C;
 #else
 extern u8* D_8014637C;

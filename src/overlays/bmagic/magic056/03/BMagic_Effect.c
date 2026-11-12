@@ -1,5 +1,3 @@
-/* Every position copy re-reads the party cell. */
-#define BATTLE_PARTY_CELL_RECORD_VOLATILE
 #include "magic056_03.h"
 
 #if BOF3_USE_ASM
@@ -164,11 +162,11 @@ MATCH void func_801F04EC(void) {
     if ((s8)g_Task->unk_5D == -0x80) {
         work              = g_Task;
         work->pos.x.fixed = D_8014637C->pos.x.fixed;
-        /* FAKE: retail schedules each copy's load and store together. */
-        FAKE_ORDER_FENCE();
+        /* FAKE: retail re-reads the party cell for the next copy. */
+        FAKE_BARRIER();
         work->pos.y.fixed = D_8014637C->pos.y.fixed;
-        /* FAKE: retail schedules each copy's load and store together. */
-        FAKE_ORDER_FENCE();
+        /* FAKE: retail re-reads the party cell for the next copy. */
+        FAKE_BARRIER();
         work->pos.z.fixed = D_8014637C->pos.z.fixed;
         if (g_Battle.active_battler < 3) {
             member = &g_Game.members[g_Battle.active_battler];
