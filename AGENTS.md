@@ -52,7 +52,7 @@ written as `+` (`check-exe+slus_004_22`). Without the disc only the disc-free ch
 - `meson compile -C build/meson format` rewrites C, Python, TOML and Markdown and needs clang-format,
   ruff and dprint; `pre-push` only checks.
 - In zsh quote word lists (`git grep -lz ... | xargs -0`) and overwrite with `>|`.
-- Record failed attempts in `config/attempts.tsv`: the forms tried and first differing instruction.
+- Record failed attempts in `config/attempts.jsonl`: the forms tried and first differing instruction.
   `tools/worklist.py` shows them.
 
 ## Task routing

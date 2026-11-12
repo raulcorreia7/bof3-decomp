@@ -17,11 +17,11 @@ functions by route ([find work](../CONTRIBUTING.md#your-first-function)).
 | 5 | Hand loop       | m2c draft, `tools/match.sh`, [diagnose](#diagnose), [permuter](#permuter) | three structurally different tries fail                 |
 
 Budget: three structurally different tries per function (a different shape, not a tweak of the same
-one). Then record the attempt in `config/attempts.tsv` and report `BLOCKED <reason>`.
+one). Then record the attempt in `config/attempts.jsonl` and report `BLOCKED <reason>`.
 
 A route that gives `EXACT` still needs `check-<image>`, a name from evidence and the shared-body
 treatment ([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)). Record failed attempts in
-`config/attempts.tsv` with the function, forms tried, first difference and score when known.
+`config/attempts.jsonl` with the function, forms tried, first difference and score when known.
 
 ## Order of work
 
@@ -90,7 +90,7 @@ INCLUDE_ASM(func_<ADDR>);
 #endif
 ```
 
-Keep a draft under `NON_MATCHING`. Record its attempts in `config/attempts.tsv`, never in source.
+Keep a draft under `NON_MATCHING`. Record its attempts in `config/attempts.jsonl`, never in source.
 
 ### Status markers
 

@@ -37,7 +37,7 @@ A function is `TARGET@0xADDRESS`; `<image>` is the target with `/` written as `+
    ```
 
    One row per function: `TARGET@0xADDRESS`, size in bytes, route, and `tried:` with the attempts
-   recorded in `config/attempts.tsv`. Rows are ordered cheapest route first, untried functions first.
+   recorded in `config/attempts.jsonl`. Rows are ordered cheapest route first, untried functions first.
    Take the first row. The route says which step to start with ([route](docs/matching.md#route)).
    `--route` and `--image` filter; `--tsv` prints the full attempt text.
 
@@ -83,8 +83,8 @@ A function is `TARGET@0xADDRESS`; `<image>` is the target with `/` written as `+
    Exit 0: equal. Exit 1: the first differing instruction for retail and for your code; label it and
    fix it by label ([diagnose](docs/matching.md#diagnose)). Exit 2: nothing was compared, and the
    message says why ([match.sh](docs/toolchain.md#matchsh)). Three structurally different tries
-   without a match end the attempt: add a row to `config/attempts.tsv` with the columns `function`,
-   `tried`, `first_diff` and `score` (tab-separated, quoted), then pick another function
+   without a match end the attempt: add a line to `config/attempts.jsonl` with the keys `function`,
+   `tried`, `first_diff` and `score`, then pick another function
    ([budget](docs/matching.md#route)).
 
 6. **Polish.** Make the code read well while it still matches: real types and members, named

@@ -141,7 +141,7 @@ other metrics. A commit message line `Quality-Allowed: <path> <metric>` accepts 
 `worklist.py` prints one row per `INCLUDE_ASM` function with its cheapest route: `template0` (a
 template with no differing instruction, for `template_try.py`), `generator` (a `gen_body.py`
 shape), `template` (up to three differing instructions, for `template_diff.py`) or `plain`. It
-reuses `gen_body.py` and `dups.py near --full`, sorts untried functions before those in `config/attempts.tsv`, and shows their attempts. `--route`, `--image`, `-n` and `--tsv` select and
+reuses `gen_body.py` and `dups.py near --full`, sorts untried functions before those in `config/attempts.jsonl`, and shows their attempts. `--route`, `--image`, `-n` and `--tsv` select and
 format the rows. It reads the function index, so build first.
 
 ## Pre-push
