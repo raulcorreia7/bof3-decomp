@@ -18,7 +18,7 @@ MATCH void func_801F3484(void) {
         g_Task->pos.x.fixed = g_Task->unk_64;
         g_Task->pos.y.fixed = g_Task->unk_68;
         g_Task->pos.z.fixed = g_Task->unk_6C;
-        spin                = 0x800E48C0;
+        spin                = AREA_WORK + 0xC0;
         i                   = 0;
         do {
             Area_InitSpin(spin);
