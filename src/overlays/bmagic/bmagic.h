@@ -308,7 +308,7 @@ void func_801F0068(void);
 void func_801F006C(void);
 
 /* Defined in BMagic_AllocEffect.h, which a member includes after its first call. */
-u32 BMagic_AllocEffect(void);
+u32  BMagic_AllocEffect(void);
 /* Defined in Effect_DrawBolt.h, which a member includes after its first call. */
 void Effect_DrawBolt(void);
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
