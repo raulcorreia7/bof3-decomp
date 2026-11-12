@@ -42,10 +42,12 @@ MATCH void func_801EED28(void) {
     Battle_CenterCamera();
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    /* Copies arena palette rows 2 and 26 into the work copy with STP set, then restores color 0 of each row. */
-    for (i = 0, row_dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW), row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00), dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW),
-        src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-         i < 256; i++) {
+    i       = 0;
+    row_dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+    row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    dst     = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src     = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 256; i++) {
         row_dst[i] = row_src[i] | 0x8000;
         dst[i]     = src[i] | 0x8000;
     }
