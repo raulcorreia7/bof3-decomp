@@ -39,7 +39,7 @@ MATCH void func_801EEFBC(void) {
         /* kept: (s16) types the rsin angle; without it GCC folds the two shifts and the body is 4 bytes short. */
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin((s16)(phase << 8)) * 0x8000) >> 12);
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle_cell) * 0x8000) >> 12);
-        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(0x480);
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(1152);
         entry               = RANDOM_MASK(7) * 3;
         g_Task->unk_5D      = D_801EF76C[entry];
         g_Task->unk_5E      = D_801EF76D[entry];

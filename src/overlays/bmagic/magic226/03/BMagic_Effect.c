@@ -38,7 +38,7 @@ MATCH void func_801EF10C(void) {
     g_Task->facing      = g_BattleEffectBattler->facing;
     g_Task->unk_0C      = 0x20000;
     g_Task->unk_10      = 0;
-    g_Task->unk_14      = TO_COORD(0x900);
+    g_Task->unk_14      = TO_COORD(2304);
     func_801DD350(g_Task);
     g_Task->pos.x.fixed += g_Task->unk_0C;
     g_Task->pos.y.fixed += g_Task->unk_10;
