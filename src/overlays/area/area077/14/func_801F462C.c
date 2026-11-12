@@ -4,7 +4,7 @@
 MATCH void func_801F462C(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
     DVECTOR  screen;
     Point2D  size;
-    u16      projected[2];
+    UPoint2D projected;
     POLY_G3* packet;
     u16      angle;
     u16      next;
@@ -14,22 +14,22 @@ MATCH void func_801F462C(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
 
     Area_ProjectPoint(pos, &screen);
     size.x = radius;
-    func_801AFFD8(pos, &size, projected);
+    func_801AFFD8(pos, &size, &projected);
 
-    screen_radius = projected[0] + (g_FrameCount & 1);
+    screen_radius = projected.x + (g_FrameCount & 1);
     angle         = 0;
     do {
         packet = GFX_BeginPolyG3(1);
-        next   = angle + 0x80;
-        other  = next & 0xFFF;
-        setXY2(packet, screen.vx, screen.vy, (s16)(screen.vx + ((screen_radius * rcos((u16)angle)) >> 0x0C)), (s16)(screen.vy + ((screen_radius * rsin((u16)angle)) >> 0x0C)));
-        packet->x2 = (s16)(screen.vx + ((screen_radius * rcos((u16)other)) >> 0x0C));
-        scale      = rsin((u16)other);
-        packet->y2 = (s16)(screen.vy + ((screen_radius * scale) >> 0x0C));
+        next   = angle + ONE / 32;
+        other  = next & ANGLE_MASK;
+        setXY2(packet, screen.vx, screen.vy, (s16)(screen.vx + (FIXED_MUL(screen_radius, rcos(angle)))), (s16)(screen.vy + (FIXED_MUL(screen_radius, rsin(angle)))));
+        packet->x2 = (s16)(screen.vx + (FIXED_MUL(screen_radius, rcos(other))));
+        scale      = rsin(other);
+        packet->y2 = (s16)(screen.vy + (FIXED_MUL(screen_radius, scale)));
         setRGB0(packet, center_shade, center_shade, center_shade);
         setRGB1(packet, rim_shade, rim_shade, rim_shade);
         setRGB2(packet, rim_shade, rim_shade, rim_shade);
         GFX_AddPrim(1u, sizeof(POLY_G3));
         angle = next;
-    } while ((u16)angle < 0x1000);
+    } while ((u16)angle < ONE);
 }

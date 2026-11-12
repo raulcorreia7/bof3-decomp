@@ -1,3 +1,3 @@
 #include "area188_13.h"
 
-INCLUDE_ASM(Area_DrawSpawnSlot);
+#include "overlays/area/Area_DrawSpawnSlot.h"
