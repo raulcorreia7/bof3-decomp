@@ -9,7 +9,7 @@ MATCH void func_801EEC18(void) {
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
     Effect_SetActorMatrix();
-    SYS_DISPATCH_BYTE(handlers, SP_REF(PartyMember*, 0x44)->header.mode);
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
     PopMatrix();
 }
 

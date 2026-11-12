@@ -8,7 +8,7 @@ MATCH void func_801EEC20(void) {
     Callback handlers[7];
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
-    SYS_DISPATCH_BYTE(handlers, SP_REF(PartyMember*, 0x44)->header.mode);
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EECA4);

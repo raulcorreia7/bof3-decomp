@@ -46,13 +46,13 @@ MATCH void func_801EF4EC(void) {
     s8 val;
 
     if (D_801EC2E4 == 0) {
-        g_Battle.state |= 4;
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
         return;
     }
-    val = SP_REF(PartyMember*, 0x44)->unk_09;
+    val = g_Task->unk_09;
     if (val > 0) {
-        SP_REF(PartyMember*, 0x44)->unk_09 = val - 8;
+        g_Task->unk_09 = val - 8;
         func_801EF55C();
     }
 }
