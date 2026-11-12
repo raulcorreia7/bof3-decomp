@@ -68,14 +68,14 @@
         return result;                                                                                    \
     } while (0)
 
-/* The party formation g_PartyFormation (0x80144F58): func_800AAA74 applies its stat changes. */
+/* The party formation g_PartyFormation: Battle_ApplyFormationStats applies its stat changes. */
 typedef enum PartyFormation {
     PARTY_FORMATION_NORMAL  = 0x00,
     PARTY_FORMATION_ATTACK  = 0x01,
     PARTY_FORMATION_DEFENSE = 0x02,
     PARTY_FORMATION_CHAIN   = 0x03,
     PARTY_FORMATION_MAGIC   = 0x04,
-    PARTY_FORMATION_REFUGE  = 0x05, /* battle/battle/03 func_801D5DCC tests g_PartyFormation == 5 */
+    PARTY_FORMATION_REFUGE  = 0x05, /* battle/battle/03 Battle_ApplyTurnDamage tests g_PartyFormation == 5 */
 } PartyFormation;
 
 /* The selection byte g_Battle.row_cursor: bit 7 marks an active selection, the low
@@ -127,7 +127,7 @@ typedef struct BattleWork {
     u32 range_axis_34;
     u32 range_axis_38;
     u8  pad_3C[2]; /* +0x3C .. +0x3D */
-    u16 unk_3E;    /* +0x3E vertical span; func_800AF764 projects it negated */
+    u16 unk_3E;    /* +0x3E vertical span; Battle_ProjectRange projects it negated */
 } BattleWork;
 
 typedef struct BattleStatDisplayTemplate {
@@ -244,7 +244,7 @@ ASSERT_SIZE(BattleEnemyEvents, ENEMY_STRIDE);
 /* The player battler's panel record (D_80145F04, stride 0x140): the panel
  * block of the local battler row, whose +0x74 the record's address is.
  *
- * func_800A9FC4 scales the four halfwords at +0x40 into the four halfwords at
+ * Battle_RescalePanel scales the four halfwords at +0x40 into the four halfwords at
  * +0x20, scales the four bytes at +0x55 into the four bytes at +0x35, and
  * mirrors the bytes at +0x4B..+0x53 into +0x2B..+0x33. */
 typedef struct BattlePanelRecord {
@@ -702,7 +702,8 @@ void        func_800A46C4(void);
 void        Battle_LoadDraArchive(void);
 /* func_800A4744 */
 void        Battle_FinishDraLoad(void);
-void        func_800A47AC(void);
+/* func_800A47AC */
+void        Battle_OpenMenu(void);
 void        func_800A4900(void);
 void        func_800A493C(void);
 void        func_800A4AD0(void);
@@ -807,7 +808,8 @@ void        func_800B155C(void);
 void        func_800B15BC(void);
 void        func_800B1664(void);
 void        func_800B16D0(void);
-extern void func_800B1728(void);
+/* func_800B1728 */
+extern void Battle_DrawCommandList(void);
 /* func_800B1A74 */
 extern void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_b, u8 title_index);
 void        func_800B20CC(void);
@@ -880,7 +882,8 @@ bool        func_800A4FD8(void);
 bool        func_800A5D00(void);
 u8          func_800A6C2C(void);
 s32         func_800A7B40(u8 combination, u8 count);
-void        func_800A9FC4(BattlePanelRecord* rec, s32 slot);
+/* func_800A9FC4 */
+void        Battle_RescalePanel(BattlePanelRecord* rec, s32 slot);
 bool        func_800AA5F4(s32 slot);
 bool        func_800AA7A0(u8 slot);
 /* func_800AD044 */
@@ -1030,14 +1033,14 @@ static inline void BattleSetSelectionFlag(u32 flag) {
         } else {
             ENEMY_COMBATANT(mode).turn.action_flags.value |= flag;
         }
-        func_800A9BD8(g_Battle.target);
+        Battle_RescaleStats(g_Battle.target);
     } else {
         record               = *(BattleTurn**)&g_Battle.target_record;
         /* FAKE: volatile-drop cell read keeps the constant load ahead of
          * the pointer load, so the branch delay slot takes it. */
         one                  = 1;
         record->target_flags = one;
-        func_800AAC88(0, g_Battle.target);
+        Battle_QueueAction(0, g_Battle.target);
     }
     func_800A3F28();
 }

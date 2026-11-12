@@ -27,8 +27,6 @@ MATCH void func_801EEC14(void) {
 
 INCLUDE_ASM(func_801EED28);
 
-u32 BMagic_AllocEffect(void);
-
 MATCH void func_801EEE50(void) {
     u8 i;
     u8 slot;
@@ -55,7 +53,7 @@ MATCH void func_801EEF54(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         SND_QueueSelectionFx(0x101);
-        func_800A9610(g_Battle.target_selector, 0x10);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

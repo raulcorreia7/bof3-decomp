@@ -19,6 +19,7 @@ extern u16   D_801F5384[];
 extern u16   D_801F5390[];
 extern u16   D_801F539C[];
 
-s32 func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
+s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
+void func_801F358C(void* rect);
 
 #endif

@@ -11,7 +11,7 @@ MATCH void func_801D4378(void) {
     FISHING_STATE->step_timer_09--;
     if (FISHING_STATE->step_timer_09 == 0) {
         FISHING_STATE->saved_index_0B = 1;
-        if (!(FISHING_STATE->counter_07 & 1)) {
+        if (!(FISHING_STATE->counter_07 & 0x1)) {
             FISHING_STATE->handler_index_01++;
         } else {
             FISHING_STATE->handler_index_01 = 4;
@@ -29,7 +29,7 @@ MATCH void func_801D4378(void) {
         func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
     }
     func_801D88E0(FISHING_EQUIP_PANEL_X - FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP, FISHING_PANEL_CONTENT_Y);
-    if (!(FISHING_STATE->counter_07 & 1)) {
+    if (!(FISHING_STATE->counter_07 & 0x1)) {
         func_801D7EB0((s16)(FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
     } else {
         func_801D8364(FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X, FISHING_PANEL_CONTENT_Y);

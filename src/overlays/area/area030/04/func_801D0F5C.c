@@ -24,7 +24,7 @@ MATCH void func_801D0F5C(void) {
         entry  = *selected;
         offset = i * 2;
         row    = ((entry >> 3) << 9) + palette;
-        color  = *(u16*)(offset + (((entry & 7) << 6) + row));
+        color  = *(u16*)(offset + (((entry & 0x7) << 6) + row));
         i += 1;
         *(u16*)(dst + 0xC0) = color | 0x8000;
         dst += 2;

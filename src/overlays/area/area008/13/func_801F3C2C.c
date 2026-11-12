@@ -4,7 +4,7 @@ MATCH void func_801F3C2C(void) {
     Actor* scratch;
     char*  buf;
 
-    Menu_DrawHeaderBar(0x78, 0x38, 0x46, 0x14, 1u);
+    Menu_DrawHeaderBar(120, 56, 70, 20, 1u);
 
     scratch = (Actor*)WORLD00_AREA008_SCRATCH_PTR;
     buf     = (char*)g_UiFormatBuffer;
@@ -15,6 +15,6 @@ MATCH void func_801F3C2C(void) {
     buf[0] = STRING_PERIOD;
     buf[1] = STRING_END;
 
-    UI_DrawText(0x97, 0x35, 0, 0xFFu, buf);
-    UI_DrawText(0x97, 0x39, 0, 0xFFu, buf);
+    UI_DrawText(151, 53, 0, 255u, buf);
+    UI_DrawText(151, 57, 0, 255u, buf);
 }

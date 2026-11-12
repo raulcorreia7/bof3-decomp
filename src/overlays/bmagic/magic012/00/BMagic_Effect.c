@@ -60,7 +60,7 @@ MATCH void func_801EF3C4(void) {
     if (count == 0) {
         g_Task->header.step++;
     }
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF79C(g_Task->param.unk_0B, 1);
 }
 

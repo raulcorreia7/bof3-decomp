@@ -24,7 +24,7 @@ MATCH void func_800AE82C(void) {
             value                 = ENEMY_COMBATANT(row_work->param.unk_0B).pos.z.fixed;
         }
         row_work->pos.z.fixed = value;
-        func_800AF764();
+        Battle_ProjectRange();
         tail_work         = BATTLE_WORK;
         tail_work->unk_10 = -0xE;
         tail_work->unk_09 = 0;

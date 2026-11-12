@@ -40,7 +40,7 @@ MATCH void func_801EF0A8(void) {
     if (g_Task->header.flags & 1) {
         if (g_Task->header.step != 0) {
             if (g_Task->header.step < 4) {
-                func_800AF764();
+                Battle_ProjectRange();
                 func_8014D290();
                 Effect_SetActiveActorMatrix();
                 func_801EF7E0();

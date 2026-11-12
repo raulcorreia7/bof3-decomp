@@ -14,10 +14,10 @@ MATCH void Battle_UpdateEvents(void) {
         for (event_slot = 0; event_slot < 8; event_slot++) {
             slot       = (BattleEventSlot*)&g_BattleEventSlots[event_slot * 12];
             D_801EB4DC = slot;
-            if ((slot->unk_00 != 0u) && (slot->unk_03 == group) && ((slot->unk_01 & g_Battle.outcome.event_flags) == 0u)) {
+            if ((slot->active != 0u) && (slot->group == group) && ((slot->event_type & g_Battle.outcome.event_flags) == 0u)) {
                 sp                       = SPAD(0u);
                 sp->view.battle.state_00 = event_slot;
-                handlers.events[slot->unk_01]();
+                handlers.events[slot->event_type]();
             }
         }
     }

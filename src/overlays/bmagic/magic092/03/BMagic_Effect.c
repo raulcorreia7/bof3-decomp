@@ -57,11 +57,11 @@ MATCH void func_801EF388(void) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
             func_800AF814((g_Task->unk_03 + 3) & BYTE_MASK);
-            func_800A9820((g_Task->unk_03 + 3) & BYTE_MASK);
+            Battle_MarkDamaged((g_Task->unk_03 + 3) & BYTE_MASK);
         } else {
             GFX_FreePaletteFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
             func_800AF814(g_Task->unk_03);
-            func_800A9820(g_Task->unk_03);
+            Battle_MarkDamaged(g_Task->unk_03);
         }
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
@@ -79,7 +79,7 @@ MATCH void func_801EF7FC(void) {
 MATCH void func_801EF840(void) {
     SYS_DISPATCH_BYTE(D_801F07D8, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EFB04();
     }
 }
@@ -103,7 +103,7 @@ MATCH void func_801F0260(void) {
 
     SYS_DISPATCH_BYTE(D_801F07E8, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         work = g_Task;
         if (work->param.unk_0B == 1) {
             x = work->unk_2E.half - MAGIC092_STEP_X;
