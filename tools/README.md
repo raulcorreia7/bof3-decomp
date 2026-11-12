@@ -182,7 +182,7 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `check`         | an image differs from its retail SHA-1                                                  | disc       |
 | `check-headers` | a public header does not compile alone                                                  | compiler   |
 | `check-plain`   | a source does not build as plain C                                                      | compiler   |
-| `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none |
+| `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a tracked file is game data or a binary over 1 MiB, a relative include or import, or an enum member | none |
 | `externs`       | a `.c` file gains an `extern` line                                                      | none       |
 | `include-asm`   | there are more `INCLUDE_ASM` lines than at the base ref, in total or in one image       | none       |
 | `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | the tools  |

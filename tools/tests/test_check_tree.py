@@ -14,7 +14,7 @@ PACKAGE = ROOT / "tools/bof3"
 
 
 def run_tree(
-    repo: Path, base_files: dict[str, str], change_files: dict[str, str]
+    repo: Path, base_files: dict[str, str | bytes], change_files: dict[str, str | bytes]
 ) -> subprocess.CompletedProcess[str]:
     (repo / "tools").mkdir()
     (repo / "tools/check_tree.sh").write_text(SCRIPT.read_text())
@@ -38,19 +38,23 @@ def run_tree(
     def git(*args: str) -> None:
         subprocess.run(["git", *args], cwd=repo, check=True, capture_output=True)
 
+    def write(name: str, text: str | bytes) -> None:
+        path = repo / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if isinstance(text, bytes):
+            path.write_bytes(text)
+        else:
+            path.write_text(text)
+
     git("init", "-q")
     git("config", "user.email", "t@t")
     git("config", "user.name", "t")
     for name, text in base_files.items():
-        path = repo / name
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text)
+        write(name, text)
     git("add", ".")
     git("commit", "-qm", "base")
     for name, text in change_files.items():
-        path = repo / name
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text)
+        write(name, text)
     git("add", ".")
     git("commit", "-qm", "change")
     return subprocess.run(
@@ -99,6 +103,24 @@ CASES = [
         {},
         {"src/overlays/test/arc/00/a.c": "u8 *p = ((u8 *)g_Task);\n"},
         "task read by offset",
+    ),
+    (
+        "oversized text",
+        {},
+        {"config/table.toml": "Name = { addr = 0x0 }\n" * 60000},
+        None,
+    ),
+    (
+        "oversized binary",
+        {},
+        {"config/blob.dat": b"\x00" * 1100000},
+        "retail data or oversized files",
+    ),
+    (
+        "retail media",
+        {},
+        {"config/small.bin": "x\n"},
+        "retail data or oversized files",
     ),
 ]
 
