@@ -30,7 +30,22 @@ MATCH void func_801EEEE4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF44);
+MATCH void func_801EEF44(void) {
+    u32 slot;
+    u8  count;
+
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) < 0x20U) {
+        return;
+    }
+    g_Task->header.mode += 1;
+    SND_QueueSelectionFx(0x101);
+    slot                               = Battle_AllocEffect(1, 7) & BYTE_MASK;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
+    g_BattleEffects[slot].target.party = g_BattleEffectBattler;
+}
 
 MATCH void func_801EEFFC(void) {
     u8 count;
