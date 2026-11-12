@@ -8,7 +8,7 @@ MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
     D_1F800000.view.effect.params[0] = EFFECT_SPARKLE_TASK->unk_20;
     D_1F800000.view.effect.params[1] = EFFECT_SPARKLE_TASK->unk_22;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    Area_AddCellPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, 12);
+    Area_AddCellPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[4] = EFFECT_SPARKLE_TASK->timer_05 * 6;
     D_1F800000.view.effect.params[5] = EFFECT_SPARKLE_TASK->timer_05 * 6;
     D_1F800000.view.effect.params[6] = EFFECT_SPARKLE_TASK->timer_05 * 6;
