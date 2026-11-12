@@ -698,6 +698,7 @@ MATCH void func_801FD07C(void) {
         return;
     }
     g_Actors[second].header.flags = 1;
+    /* kept: one base register for both writes; writing the view member directly adds four bytes. */
     counter                       = &D_1F800000.view.area.entity_counter;
     *counter                      = D_801FEA74;
     func_801A65A0(D_801FE9A0);
