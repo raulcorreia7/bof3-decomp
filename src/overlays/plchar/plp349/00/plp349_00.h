@@ -12,7 +12,7 @@
 #define CHAR_PERSONAL_ACTION_HAS_CUE 0
 
 /* The tail callback table's entry count in this image. */
-#define PLCHAR_STEP_TABLE_COUNT  22
+#define PLCHAR_STEP_TABLE_COUNT      22
 
 /* The field work row this overlay moves, at scratchpad 0x1F800044. */
 extern Callback D_801CF5EC[];

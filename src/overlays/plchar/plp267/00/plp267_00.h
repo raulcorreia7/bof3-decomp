@@ -12,10 +12,10 @@
 #define CHAR_PERSONAL_ACTION_HAS_CUE 1
 
 /* The cue id multiplier of this image's rare spawn cue. */
-#define CHAR_SPAWN_CUE_SCALE     20
+#define CHAR_SPAWN_CUE_SCALE         20
 
 /* The tail callback table's entry count in this image. */
-#define PLCHAR_STEP_TABLE_COUNT  30
+#define PLCHAR_STEP_TABLE_COUNT      30
 
 /* The field work row this overlay moves, at scratchpad 0x1F800044. */
 extern Callback D_801D0988[];
