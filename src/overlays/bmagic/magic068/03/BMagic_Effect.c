@@ -42,7 +42,20 @@ MATCH void func_801EF4A8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4EC);
+MATCH void func_801EF4EC(void) {
+    s8 val;
+
+    if (D_801EC2E4 == 0) {
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        func_801E5988();
+        return;
+    }
+    val = g_Task->unk_09;
+    if (val > 0) {
+        g_Task->unk_09 = val - 8;
+        func_801EF55C();
+    }
+}
 
 INCLUDE_ASM(func_801EF55C);
 

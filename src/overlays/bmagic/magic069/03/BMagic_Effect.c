@@ -15,7 +15,40 @@ INCLUDE_ASM(func_801EEC5C);
 /* func_801EEE90 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EEED4);
+MATCH void func_801EEED4(void) {
+    s32 tpage;
+
+    SYS_DISPATCH_BYTE(D_801F0504, g_Task->header.step);
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, 0xC);
+    if (g_Task->header.flags & 1) {
+        if (g_Task->header.step != 0) {
+            func_801EFF14();
+            func_801EFC00();
+        }
+    }
+    if (g_Task->header.flags & 1) {
+        if (g_Task->header.step >= 3) {
+            func_801F0104();
+        }
+    }
+    if (GetGraphType() == 1) {
+        tpage = 0x25;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, 0xC);
+}
 
 MATCH void func_801EF034(void) {
     PartyMember* src;
