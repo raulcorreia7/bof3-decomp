@@ -177,12 +177,12 @@ static inline void BMagic_AdvanceEffectStep(u8 limit) {
 /* Set the top bit of every halfword of palette row 26 — the BATL_OVR bank — in
  * the working palette. A statement macro: the member declares its pointers and
  * index, and the setup order is retail's. */
-#define BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i)                     \
-    (i)   = 0;                                                       \
-    (dst) = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW); \
+#define BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i)                      \
+    (i)   = 0;                                                        \
+    (dst) = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);  \
     (src) = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW); \
-    for (; (i) < 256; (i)++) {                                       \
-        (dst)[i] = (src)[i] | 0x8000u;                               \
+    for (; (i) < 256; (i)++) {                                        \
+        (dst)[i] = (src)[i] | 0x8000u;                                \
     }
 
 /* Swing the area camera pitch by 20 each tick, up on odd timer values and down

@@ -20,7 +20,7 @@ MATCH void func_801EED8C(void) {
     g_Task->pos.z.fixed += TO_COORD(192);
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     MEM(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = MEM(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    g_GfxPalettePending = 1;
+    g_GfxPalettePending                                 = 1;
     SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     g_Task->unk_09       = 0;
     g_Task->param.unk_0B = 0;
