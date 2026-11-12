@@ -5,7 +5,7 @@ MATCH void func_801F3CD0(void) {
 
     switch (g_SceneState.step_05) {
         case 0:
-            if (g_GameStateIndex == 2) {
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
             switch (g_Characters[CHAR_INDEX_WHELP].abilities.skill[0]) {
@@ -43,11 +43,11 @@ MATCH void func_801F3CD0(void) {
             g_TextVariables[0][12] = 0;
             g_TextVariables[1][8]  = 0;
             Message_StartAreaMessage(0x49);
-            g_GameStateIndex     = 2;
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
             g_SceneState.step_05 = 1;
             break;
         case 1:
-            if (g_GameStateIndex == 2) {
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
