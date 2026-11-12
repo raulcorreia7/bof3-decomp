@@ -8,6 +8,7 @@ MATCH void func_801F30CC(void) {
     u8           thirty;
     u8           three;
     u8           shade;
+    /* FAKE: the stores keep their source order behind one base; plain stores reorder and need a second base. */
     volatile u8* row;
     u16          i;
 
