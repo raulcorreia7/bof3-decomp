@@ -2,7 +2,6 @@
 """Write the seed bundle of one open function: everything to read before the first attempt.
 
     tools/seed.py TARGET@NAME            or TARGET@0xADDRESS
-    tools/seed.py TARGET@NAME --no-try   skip the draft trial (no compile)
 
 The bundle is `work/<image>/<ADDR>/`:
 
@@ -88,15 +87,12 @@ def twins(root: Path, funcs: list[Func], func: Func) -> str:
     return "\n\n".join(parts) + "\n"
 
 
-def draft(root: Path, func: Func, run: bool) -> tuple[str, str]:
+def draft(root: Path, func: Func) -> tuple[str, str]:
     """Return the best draft and the line that says how it fared."""
     ctx = m2c_sweep.context(root, func, {})
     found = m2c_sweep.drafts(root, func, ctx)
     if not found:
         return "", "no m2c draft compiles to a definition of the function\n"
-    if not run:
-        variant, body = next(iter(found.items()))
-        return body, f"{variant}: not tried\n"
     best = None
     for variant, body in found.items():
         status, detail, diff = try_body.trial(root, func, body)
@@ -116,9 +112,6 @@ def main(argv: list[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("target", help="TARGET@NAME or TARGET@0xADDRESS")
-    parser.add_argument(
-        "--no-try", action="store_true", help="do not compile the drafts"
-    )
     args = parser.parse_args(argv)
     funcs = load_index(ROOT)
     func = find(funcs, args.target)
@@ -131,7 +124,7 @@ def main(argv: list[str] | None = None) -> int:
     (folder / "ctx.c").write_text(
         m2c_sweep.context(ROOT, func, {}).read_text(encoding="utf-8"), encoding="utf-8"
     )
-    body, result = draft(ROOT, func, not args.no_try)
+    body, result = draft(ROOT, func)
     (folder / "draft.c").write_text(body, encoding="utf-8")
     (folder / "draft.txt").write_text(result, encoding="utf-8")
     (folder / "twins.txt").write_text(twins(ROOT, funcs, func), encoding="utf-8")

@@ -29,11 +29,12 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     void*  work_now;
     void*  work_row;
 
-    func_801E0C80(0, 2);
-    func_801E0DCC(0x11, 2, 135, 180);
+    Fishing_SetDrawMode(0, 2);
+    Fishing_DrawSprite(0x11, 2, 135, 180);
     work = g_Task;
-    if ((work->vy == 0) && ((origin_y = work->screen_y, limit = *(&D_80146892 + (g_FishingHookedFish * 0x98)), step = g_FishingRodRow->byte_03 * 4, (((origin_y + step + 12) < limit) != 0)) ||
-                            (limit < ((origin_y - step) - 12)))) {
+    if ((work->vy == 0) &&
+        ((origin_y = work->screen_y, limit = *(&D_80146892 + (g_FishingHookedFish * 0x98)), step = g_FishingRodRow->reel_cursor_size_03 * 4, (((origin_y + step + 12) < limit) != 0)) ||
+         (limit < ((origin_y - step) - 12)))) {
         timer = work->timer;
         if (timer >= 0xFU) {
             if (limit < origin_y) {
@@ -50,7 +51,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     work_row                    = g_Task;
     origin_y_now                = (u16)(FIELD(s16, work_row, 0x30u)) + FIELD(s32, work_row, 0x10u);
     FIELD(s16, work_row, 0x30u) = origin_y_now;
-    step_bytes                  = g_FishingRodRow->byte_03 * 4;
+    step_bytes                  = g_FishingRodRow->reel_cursor_size_03 * 4;
     cursor_limit                = step_bytes - 36;
     if (origin_y_now >= cursor_limit) {
         gap          = 36 - step_bytes;
@@ -72,7 +73,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     FIELD(s8, prim, 0x6u)  = 0x80;
     GFX_AddPrim(2U, sizeof(LINE_F2));
     work_now     = g_Task;
-    row_flags    = g_FishingRodRow->byte_03;
+    row_flags    = g_FishingRodRow->reel_cursor_size_03;
     span         = row_flags * 8;
     band         = span + 24;
     line         = ((u16)(FIELD(s16, work_now, 0x30u)) - (row_flags * 4)) + 173;

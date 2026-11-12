@@ -29,6 +29,31 @@ def test_rows_load_sorted_with_attributes(tmp_path: Path) -> None:
     rows = symbols.target_rows(root, "exe/a")
     assert [(r.name, r.address) for r in rows] == [("A", 0x10), ("B", 0x20)]
     assert rows[1].comment == "type:func size:0x8"
+    assert [(r.name, r.addr, r.type, r.size) for r in rows] == [
+        ("A", 0x10, "", 0),
+        ("B", 0x20, "func", 8),
+    ]
+
+
+def test_read_map_sizes_symbols_by_their_section(tmp_path: Path) -> None:
+    path = tmp_path / "a.map"
+    path.write_text(
+        " .text          0x80100000        0x10 src+a.c.o\n"
+        "                0x80100000                g_Code\n"
+        "                0x80100008                g_More\n"
+        " .data          0x80100010        0x8 src+b.c.o\n"
+        "                0x80100010                g_Data\n"
+        " .reginfo       0x00000000        0x18 src+c.c.o\n"
+        "                0x00000000                g_Unmapped\n"
+        "                0x1f800044                g_Task = 0x1f800044\n",
+        encoding="utf-8",
+    )
+    assert symbols.read_map(path) == [
+        symbols.MapSymbol("g_Code", 0x80100000, 8, True),
+        symbols.MapSymbol("g_More", 0x80100008, 8, True),
+        symbols.MapSymbol("g_Data", 0x80100010, 8, False),
+        symbols.MapSymbol("g_Task", 0x1F800044, 0, False),
+    ]
 
 
 @pytest.mark.parametrize(
@@ -123,8 +148,9 @@ def test_own_rows_are_proven_against_the_linked_address(tmp_path: Path) -> None:
     assert lines[0].startswith("ASSERT(g_One == 0x80100000,")
     linked = tmp_path / "a.map"
     linked.write_text(
-        "                0x0000000080100000                g_One\n"
-        "                0x0000000080100008                g_Two\n"
+        " .text          0x80100000        0x10 src+a.c.o\n"
+        "                0x80100000                g_One\n"
+        "                0x80100008                g_Two\n"
     )
     [message] = symbols.explain(tmp_path, "exe/a", linked)
     assert "g_Two" in message

@@ -23,5 +23,5 @@ MATCH void func_801D36F8(void) {
         record->row_4B                  = g_FishingPromptSets[record->cue_index_06][0];
         FISHING_STATE->handler_index_01 = FISHING_STATE->handler_index_01 + 1;
     }
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 }

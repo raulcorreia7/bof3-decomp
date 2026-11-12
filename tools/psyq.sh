@@ -8,6 +8,16 @@
 # A local copy of the archive is used when present; otherwise it is downloaded.
 set -eu
 
+usage() {
+	sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//' >&2
+	exit 2
+}
+case "${1:-}" in
+-h | --help) sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+-*) usage ;;
+esac
+[ "$#" -le 1 ] || usage
+
 URL=https://archive.org/download/psyq-370.7z/psyq-370.7z
 SHA256=9b3955ca74915a3e3b3eb18cf4fcf2210e75cac6985cb9a2ff90df8332e910e1
 LOCAL=inputs/external/private-assets/psyq/3.7/source-media/psyq-370.7z

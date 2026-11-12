@@ -1,6 +1,9 @@
 #!/bin/sh
 # Download a pinned tool atomically, verifying SHA-256 before installation.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,2p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 
 if [ "$#" -lt 3 ] || [ "$#" -gt 4 ]; then
     echo 'usage: sh tools/fetch_verified.sh URL SHA256 OUTPUT [--executable]' >&2

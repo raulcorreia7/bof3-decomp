@@ -18,7 +18,7 @@ segments:
       - [0x4B0, c, Area_ProjectRing]
       - [0x5A0, c, func_801F31A0]
       - [0x7DC, c, func_801F33DC]
-      - [0x92C, c, func_801F352C]
+      - [0x92C, c, Area_DrawSpark]
       - [0xC34, c, func_801F3834]
       - [0xC70, c, func_801F3870]
       - [0xD5C, c, func_801F395C]

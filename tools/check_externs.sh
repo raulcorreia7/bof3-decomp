@@ -4,18 +4,17 @@
 #
 #   tools/check_externs.sh [BASE_REF]
 #
-# BASE_REF defaults to the newer of refs/remotes/public/main and refs/remotes/origin/main.
+# BASE_REF defaults to the shared base ref in tools/lib/baseref.sh.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,7p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.."
 
 ref=${1:-}
 if [ -z "$ref" ]; then
-	for candidate in refs/remotes/public/main refs/remotes/origin/main; do
-		git rev-parse --verify --quiet "$candidate^{commit}" >/dev/null || continue
-		if [ -z "$ref" ] || git merge-base --is-ancestor "$ref" "$candidate"; then
-			ref=$candidate
-		fi
-	done
+	. tools/lib/baseref.sh
+	ref=$(newest_base_ref)
 fi
 if [ -z "$ref" ] || ! git rev-parse --verify --quiet "$ref^{commit}" >/dev/null; then
 	echo "check-externs: cannot compare with ${1:-main}: no such ref" >&2

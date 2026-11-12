@@ -8,7 +8,7 @@ MATCH void func_801E1004(s32 item, s32 count, s32 column) {
     u8*            src;
 
     anchors = D_801D0C30;
-    func_801E0C80(0, 1);
+    Fishing_SetDrawMode(0, 1);
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         s32 x;
         s32 y;
@@ -23,7 +23,7 @@ MATCH void func_801E1004(s32 item, s32 count, s32 column) {
             x              = pair[0] + ((column & BYTE_MASK) * 25);
             y              = pair[1];
         }
-        func_801E0DCC((i + 3) & BYTE_MASK, 1, x, y);
+        Fishing_DrawSprite((i + 3) & BYTE_MASK, 1, x, y);
     }
 
     dst = g_UiFormatBuffer;

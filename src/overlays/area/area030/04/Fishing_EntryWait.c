@@ -3,7 +3,8 @@
 /* When halfword `g_UiWindowEffectBusy` is clear, clears byte `D_8014419E`,
  * increments byte `D_80144199`, then increments byte 0x03 of the scratchpad
  * work object. */
-MATCH void func_801D9C4C(void) {
+/* func_801D9C4C */
+MATCH void Fishing_EntryWait(void) {
     u8* p;
 
     if (WINDOW_EFFECT_IDLE()) {
