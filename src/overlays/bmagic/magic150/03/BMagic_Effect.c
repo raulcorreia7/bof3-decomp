@@ -31,9 +31,9 @@ MATCH void func_801EEE24(void) {
     s16* radius;
     u8   timer;
 
-    radius = &D_801EFAAC;
+    radius = &D_801EFA9C.radius;
     *radius += 0x40;
-    D_801EFAAE += 0x60;
+    D_801EFA9C.offset += 96;
     func_801EF254();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
@@ -47,8 +47,8 @@ MATCH void func_801EEE24(void) {
 MATCH void func_801EEEC4(void) {
     u8 count;
 
-    D_801EFAAC = ((g_FrameCount & 0x1) * 0x10) + 0x100;
-    D_801EFAB0 -= 0x200;
+    D_801EFA9C.radius = ((g_FrameCount & 0x1) * 16) + 256;
+    D_801EFA9C.angle -= ANGLE_45;
     func_801EF254();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -88,17 +88,14 @@ INCLUDE_ASM(func_801EF324);
 INCLUDE_ASM(func_801EF4E0);
 
 MATCH void func_801EF6B0(void) {
-    u8   i;
-    u16* work;
+    u8 i;
 
-    D_801EFAF4 = D_801EFAB4;
+    D_801EFAF4 = D_801EFA9C.sparks;
     i          = 0;
     do {
-        work = (u16*)D_801EFAF4;
         i++;
-        *work = 0;
-        work += 4;
-        D_801EFAF4 = (u8*)work;
+        D_801EFAF4->active = 0;
+        D_801EFAF4 += 1;
     } while (i < 8);
 }
 
@@ -126,4 +123,32 @@ MATCH void func_801EF790(s16 x, s16 y, s16 radius, u8 red, u8 shade) {
     } while (angle < ONE);
 }
 
-INCLUDE_ASM(func_801EF8EC);
+MATCH u8 func_801EF8EC(void) {
+    s32     origin[3];
+    DVECTOR screen;
+    u8      i;
+    u8      drawn;
+
+    GFX_AddDrawMode(GetTPage(0, 1, 0x2C0, 0x100));
+    func_801AFE18();
+    drawn      = 0;
+    D_801EFAF4 = D_801EFA9C.sparks;
+    for (i = 0; i < 8; i++) {
+        if (D_801EFAF4->active != 0) {
+            origin[0] = D_801EFA9C.origin[0];
+            origin[1] = D_801EFA9C.origin[1] + ((D_801EFAF4->offset * rcos(D_801EFAF4->angle)) >> 4);
+            origin[2] = D_801EFA9C.origin[2] + ((D_801EFAF4->offset * rsin(D_801EFAF4->angle)) << 4);
+            Area_ProjectPoint(origin, &screen);
+            func_801EF790(screen.vx, screen.vy, D_801EFAF4->life, GFX_COLOR_NEUTRAL, 0);
+            drawn              = 1;
+            D_801EFAF4->angle  = D_801EFAF4->angle + 128;
+            D_801EFAF4->offset = D_801EFAF4->offset - 96;
+            D_801EFAF4->life   = D_801EFAF4->life - 1;
+            if (D_801EFAF4->offset == 0) {
+                D_801EFAF4->active = 0;
+            }
+        }
+        D_801EFAF4 += 1;
+    }
+    return drawn;
+}

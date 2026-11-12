@@ -139,7 +139,15 @@ MATCH void func_801EF2CC(void) {
 
 INCLUDE_ASM(func_801EF318);
 
-INCLUDE_ASM(func_801EFE14);
+MATCH void func_801EFE14(LINE_F4* prim, s32* out, SVECTOR v0, SVECTOR v1, SVECTOR v2, SVECTOR v3) {
+    long p;
+    long flag;
+
+    SetLineF4(prim);
+    SetSemiTrans(prim, 1);
+    setRGB0(prim, 0x40, 0x40, 0xC0);
+    *out = RotAverage4(&v0, &v1, &v2, &v3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+}
 
 MATCH void func_801EFEB8(void) {
     PartyMember* work;

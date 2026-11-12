@@ -334,13 +334,7 @@ MATCH void func_801FCB80(void) {
 }
 
 MATCH void func_801FCBD4(void) {
-    Game_SetScriptActive();
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 13;
+    SCENE_ENTER_STATE_13();
 }
 
 MATCH void func_801FCC28(void) {
@@ -371,13 +365,7 @@ MATCH void func_801FCCC0(void) {
 }
 
 MATCH void func_801FCD0C(void) {
-    Game_SetScriptActive();
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 13;
+    SCENE_ENTER_STATE_13();
 }
 
 MATCH s32 func_801FCD60(void) {
