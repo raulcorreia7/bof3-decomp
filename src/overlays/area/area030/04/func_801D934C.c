@@ -27,7 +27,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     val7 &= 0xF8;
     val2 = (u16)(val2 >> 7);
     val2 &= 0xF8;
-    func_801E0C80(6, 2);
+    Fishing_SetDrawMode(6, 2);
     val8 = &g_GfxPrimCursor;
     val8 = (u8**)g_GfxPrimCursor;
     SetPolyF4((POLY_F4*)val8);

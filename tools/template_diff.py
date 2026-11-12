@@ -113,7 +113,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "template", nargs="?", help="the template, TARGET@NAME (default: the closest)"
     )
-    parser.add_argument("--top", type=int, default=5, help="candidates to list (5)")
     parser.add_argument(
         "--rebuild", action="store_true", help="rebuild the function index first"
     )
@@ -123,7 +122,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.template:
         template = find(funcs, args.template)
     else:
-        ranked = candidates(funcs, target, args.top)
+        ranked = candidates(funcs, target, 5)
         for score, f in ranked:
             print(f"# {score:.3f} {f.image}@{f.name} ({f.size} bytes)")
         if not ranked:

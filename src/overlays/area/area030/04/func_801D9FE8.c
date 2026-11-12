@@ -8,5 +8,5 @@ MATCH void func_801D9FE8(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         FISHING_STATE->sub_index_03 += 1;
     }
-    func_801E16DC();
+    Fishing_DrawDimScreen();
 }

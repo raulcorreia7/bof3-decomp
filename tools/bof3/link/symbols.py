@@ -25,7 +25,7 @@ from __future__ import annotations
 import re
 import subprocess
 from pathlib import Path
-from typing import TYPE_CHECKING, NamedTuple
+from typing import TYPE_CHECKING, Any, NamedTuple
 
 from bof3.core.cache import file_memo
 from bof3.core.paths import BUILD, CONFIG
@@ -42,6 +42,7 @@ __all__ = [
     "imported_map",
     "link_owners",
     "load",
+    "read_text",
     "resolve",
     "splat_map",
     "splat_owners",
@@ -229,17 +230,22 @@ def _overlaps(target: str, entries: list[Entry]) -> list[str]:
     return problems
 
 
-def load(root: Path) -> dict[str, list[Entry]]:
-    """Return every target's rows in file order; a bad row is a :class:`LinkError`."""
+def read_text(text: str) -> dict[str, Any]:
+    """Parse a ``symbols.toml`` document; a bad one is a :class:`LinkError`."""
     import tomllib
 
+    try:
+        return tomllib.loads(text)
+    except tomllib.TOMLDecodeError as error:
+        raise LinkError(f"{TABLE}: {error}. Fix the line named above.") from None
+
+
+def load(root: Path) -> dict[str, list[Entry]]:
+    """Return every target's rows in file order; a bad row is a :class:`LinkError`."""
     path = root / TABLE
 
     def read() -> dict[str, list[Entry]]:
-        try:
-            document = tomllib.loads(path.read_text(encoding="utf-8"))
-        except tomllib.TOMLDecodeError as error:
-            raise LinkError(f"{TABLE}: {error}. Fix the line named above.") from None
+        document = read_text(path.read_text(encoding="utf-8"))
         tables: dict[str, list[Entry]] = {}
         problems: list[str] = []
         for target, rows in document.items():

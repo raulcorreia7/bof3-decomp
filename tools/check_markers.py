@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Fail when a function definition in src/ does not carry exactly one status marker.
 
 The rule is in include/match/match.h: every lifted function starts its definition with one
@@ -271,6 +272,9 @@ def tracked_hand_files() -> list[str]:
 
 
 def main(argv: list[str]) -> int:
+    if argv and argv[0] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
     paths = argv or tracked_sources()
     problems: list[Violation] = []
     if not argv:

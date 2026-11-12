@@ -12,6 +12,7 @@ case "${1:-}" in
 	check=1
 	mode="--dry-run --Werror"
 	;;
+-h | --help) sed -n '2,3p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 *)
 	echo "usage: tools/format.sh [--check]" >&2
 	exit 2

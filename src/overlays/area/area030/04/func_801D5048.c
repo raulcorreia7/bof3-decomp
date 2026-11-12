@@ -7,12 +7,12 @@ MATCH void func_801D5048(void) {
 
     height = MENU_HEADER_HEIGHT;
     if (FISHING_STATE->saved_index_0B == 0) {
-        func_801D9534(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * FISHING_HEADER_SLIDE_STEP)) & 0xFFFE, MENU_HEADER_WIDTH, height, 0);
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * FISHING_HEADER_SLIDE_STEP)) & 0xFFFE, MENU_HEADER_WIDTH, height, 0);
         mask = 0;
         func_801D7C10(((FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP) + FISHING_SHOP_COLUMNS_X) & HALF_MASK, FISHING_SHOP_COLUMNS_Y, 0);
         goto draw; /* the shared tail draws the row once, from either arm */
     }
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, height, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, height, 0);
     if (D_80145E93[0] >= 3) {
         mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
     } else {
@@ -21,12 +21,12 @@ MATCH void func_801D5048(void) {
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 draw:
     FISHING_STATE->step_timer_09++;
-    func_801E0ED0((-(FISHING_STATE->step_timer_09 * TO_COORD(80)) >> 0x10), FISHING_CATCH_BAR_Y);
+    Fishing_DrawCatchBar((-(FISHING_STATE->step_timer_09 * TO_COORD(80)) >> 0x10), FISHING_CATCH_BAR_Y);
     if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
-        func_801E0F4C(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK);
+        Fishing_DrawCatchIcon(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK);
         func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK, g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E], FISHING_STATE->step_timer_09);
     } else {
-        func_801E0F4C(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, 0xFF);
+        Fishing_DrawCatchIcon(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, 0xFF);
         func_801E1004(0xFF, 0, FISHING_STATE->step_timer_09);
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_STATE->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_RANK_Y);

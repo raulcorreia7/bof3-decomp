@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Find duplicate and similar functions across every built image.
 
-    tools/dups.py near [-t 0.9] [-m 6] [-o FILE]   groups of functions with alike opcodes,
+    tools/dups.py near                             groups of functions with alike opcodes,
                                                    and the matched template of each assembly one
-    tools/dups.py near --full [-o FILE]            one row per assembly function that has a
+    tools/dups.py near --full                      one row per assembly function that has a
                                                    template, cheapest first; the first two columns
                                                    are the input of tools/template_try.py
     tools/dups.py shared-names                     one name used in several places, worst first
     tools/dups.py split-names                      byte-equal bodies that carry several names
 
-Each verb prints tab-separated rows (or writes them to -o) and a summary on stderr. It reads the
+Each verb prints tab-separated rows and a summary on stderr. It reads the
 function index of the built images ({cache}); run `meson compile -C build/meson` first and add
 --rebuild after a build. Needs `rapidfuzz` (`tools/setup.sh --matching`). Within one image,
 `bin/coddog cluster` finds duplicate groups too; this tool compares across images and names.
@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import argparse
 import collections
-import contextlib
 import itertools
 import sys
 from pathlib import Path
@@ -29,6 +28,8 @@ from bof3.source.remap import diff_count
 
 ROOT = Path(__file__).resolve().parent.parent
 PLACEHOLDER = ("func_", "D_", "jtbl_")
+THRESHOLD = 0.9
+MIN_WORDS = 6
 
 
 def functions(args: argparse.Namespace, min_words: int = 0) -> list[Func]:
@@ -40,17 +41,11 @@ def functions(args: argparse.Namespace, min_words: int = 0) -> list[Func]:
     ]
 
 
-def emit(args: argparse.Namespace, header: list[str], rows: list[list]) -> None:
-    """Write the table to ``--out`` or stdout."""
-    with contextlib.ExitStack() as stack:
-        out = (
-            stack.enter_context(open(args.out, "w", encoding="utf-8"))
-            if args.out
-            else sys.stdout
-        )
-        print("\t".join(header), file=out)
-        for row in rows:
-            print("\t".join(map(str, row)), file=out)
+def emit(header: list[str], rows: list[list]) -> None:
+    """Write the table to stdout."""
+    print("\t".join(header))
+    for row in rows:
+        print("\t".join(map(str, row)))
 
 
 def import_rapidfuzz():
@@ -68,7 +63,7 @@ def import_rapidfuzz():
 def near(args: argparse.Namespace) -> int:
     """Group functions whose opcode sequences are alike; pair assembly with a C template."""
     process, indel = import_rapidfuzz()
-    funcs = functions(args, args.min_words)
+    funcs = functions(args, MIN_WORDS)
     by_seq: dict[str, list[Func]] = collections.defaultdict(list)
     for f in funcs:
         by_seq[opcode_string(f.words)].append(f)
@@ -79,7 +74,7 @@ def near(args: argparse.Namespace) -> int:
             s,
             seqs,
             scorer=indel.normalized_similarity,
-            score_cutoff=args.threshold,
+            score_cutoff=THRESHOLD,
             limit=None,
         ):
             if j != i:
@@ -107,7 +102,6 @@ def near(args: argparse.Namespace) -> int:
               "matched", "assembly", "candidate", "asm_with_template", "asm_bytes", "templates_top4",
               "member_list"]  # fmt: skip
     emit(
-        args,
         header,
         [[i, *(r[k] for k in header[1:])] for i, r in enumerate(rows, 1)],
     )
@@ -149,7 +143,7 @@ def near_full(args, by_seq, seqs, adjacent, groups) -> int:
                         diff_count(best[1].words, f.words), f.size, len(funcs),
                     ])  # fmt: skip
     rows.sort(key=lambda r: (r[3], r[4], r[0]))
-    emit(args, header, rows)
+    emit(header, rows)
     print(
         f"assembly functions with a template {len(rows)}, "
         f"with no instruction differing {sum(r[3] == 0 for r in rows)}",
@@ -234,7 +228,7 @@ def shared_names(args: argparse.Namespace) -> int:
             " | ".join(m.ref for m in members[:12]),
         ])  # fmt: skip
     rows.sort(key=lambda r: (r[0], r[1]))
-    emit(args, ["min_similarity", "name", "members", "images", "byte_classes", "opcode_classes",
+    emit(["min_similarity", "name", "members", "images", "byte_classes", "opcode_classes",
                 "size_min", "size_max", "members_first12"], rows)  # fmt: skip
     print(
         f"{len(rows)} shared names; opcode-identical {sum(r[5] == 1 for r in rows)}; "
@@ -260,7 +254,6 @@ def split_names(args: argparse.Namespace) -> int:
             ])  # fmt: skip
     rows.sort(key=lambda r: (-r[0], -r[1]))
     emit(
-        args,
         ["real_names", "placeholders", "members", "size", "names", "members_first10"],
         rows,
     )
@@ -288,18 +281,11 @@ def main(argv: list[str] | None = None) -> int:
         ("split-names", split_names, "one body, several names"),
     ):
         verb = verbs.add_parser(name, help=help_text)
-        verb.add_argument("-o", "--out", help="write the table here instead of stdout")
         if name == "near":
             verb.add_argument(
                 "--full",
                 action="store_true",
                 help="one row per assembly function with a template, by diff_count",
-            )
-            verb.add_argument(
-                "-t", "--threshold", type=float, default=0.9, help="similarity (0.9)"
-            )
-            verb.add_argument(
-                "-m", "--min-words", type=int, default=6, help="instructions (6)"
             )
         verb.set_defaults(run=run)
     args = parser.parse_args(argv)
