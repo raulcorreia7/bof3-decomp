@@ -77,7 +77,31 @@ MATCH void func_801EF4F4(void) {
 
 #include "overlays/bmagic/Effect_Drift.h"
 
-INCLUDE_ASM(func_801EF688);
+MATCH void func_801EF688(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    rot.vx = 0;
+    rot.vy = 0;
+    switch (g_Task->facing) {
+        case 0:
+            rot.vz = 0;
+            break;
+        case 1:
+            rot.vz = 0x400;
+            break;
+        case 2:
+            rot.vz = 0x800;
+            break;
+        case 3:
+            rot.vz = 0xC00;
+            break;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+}
 
 INCLUDE_ASM(func_801EF79C);
 
