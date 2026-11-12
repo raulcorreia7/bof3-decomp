@@ -842,7 +842,6 @@ void        func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 a
 /* func_801DB5CC */
 u8          Battle_TargetNext(s32 start_slot);
 /* func_801DB6F4 */
-u8          Battle_TargetPrev(u8 slot);
 s32         func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
 /* The panel scale helper lives in battle/battle/03 (src/overlays/battle/battle/03/
  * func_801DE0AC.c). Its retail body multiplies $a0 by $a1 and reads no other
@@ -856,7 +855,6 @@ void        Battle_AddMessage(u32 index, u32 record_kind, u8* text);
  * SetSprt8 / SetSemiTrans are declared by <libgpu.h> (via common.h);
  * GFX_AddPrim is a game primitive-append helper declared by gfx/prim.h. */
 /* func_801DE94C */
-void        Battle_SetTextActionName(u32 index, s8 queue_kind);
 /* func_801DEA64 */
 void        Battle_ShowMessage(void* message_slot);
 s32         func_801DEE4C();
