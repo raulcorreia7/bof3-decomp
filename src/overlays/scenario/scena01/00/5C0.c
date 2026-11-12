@@ -83,7 +83,36 @@ INCLUDE_ASM(func_801F7AE4);
 
 INCLUDE_ASM(func_801F7C54);
 
-INCLUDE_ASM(func_801F7D04);
+MATCH void func_801F7D04(void) {
+    s16 screen_x;
+    u16 next_x;
+    s32 x;
+    s32 color;
+
+    switch (g_AreaSceneMode) {
+        case 0:
+            break;
+        case 1:
+            g_Task->screen_x = 0;
+            func_801F7DCC(64, 90, 255);
+            break;
+        case 2:
+            screen_x = g_Task->screen_x;
+            if (screen_x < 191) {
+                next_x           = screen_x + 1;
+                g_Task->screen_x = next_x;
+            }
+            x     = (s16)g_Task->screen_x;
+            color = 255 - x * 2;
+            x += 64;
+            if (color < 0) {
+                color = 0;
+            }
+            func_801F7DCC(x, 90, color);
+            func_801F7EDC();
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F7DCC);
 
