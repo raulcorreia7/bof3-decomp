@@ -30,6 +30,7 @@ extern Magic064Steps       D_801EEC40;
 extern Magic064SecondSteps D_801EEC50;
 extern Magic064SecondSteps D_801EEC70;
 extern void*               D_801F28B4;
+extern u8                  D_801F13B4[];
 
 void func_801EF8F4(void);
 void func_801F001C(void);
