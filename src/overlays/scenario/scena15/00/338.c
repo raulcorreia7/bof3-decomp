@@ -62,7 +62,23 @@ MATCH void func_801F717C(void) {
 
 INCLUDE_ASM(func_801F71B0);
 
-INCLUDE_ASM(func_801F752C);
+MATCH void func_801F752C(AreaSpark* spark) {
+    DVECTOR screen;
+    TILE_1* tile;
+    u8      shade;
+
+    Area_ProjectPoint(&spark->pos.x, &screen);
+    tile = (TILE_1*)g_GfxPrimCursor;
+    SetTile1(tile);
+    SetSemiTrans(tile, 0);
+    tile->x0 = screen.vx;
+    tile->y0 = screen.vy;
+    shade    = -(rand() & 1);
+    tile->b0 = shade;
+    tile->g0 = shade;
+    tile->r0 = shade;
+    GFX_AddPrim(1, 12);
+}
 
 #include "shared/Area_ClearWorkColumn.h"
 

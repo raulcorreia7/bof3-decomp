@@ -8,6 +8,17 @@
 #include "area/spad.h"
 #include "battle/records.h"
 
+/* One of the 128 falling sparks at the area work base. */
+typedef struct AreaSpark {
+    u8       active;
+    u8       pad_01;
+    s16      fall_speed;
+    Point3DL pos;
+    s32      unk_10;
+} AreaSpark;
+
+ASSERT_SIZE(AreaSpark, 0x14);
+
 extern u32      D_801F6C00;
 /* D_801FE57C */
 extern Callback g_SceneEntityDispatch[];
