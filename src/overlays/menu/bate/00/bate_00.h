@@ -18,18 +18,22 @@ extern s16 D_801483AC;
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 
-extern s8            D_80144DE4;
-extern u8            D_80144DF2;
-extern u8            D_80144DF3;
-extern u8            D_80144DF4;
-extern char          g_MenuStatFormat[];
-extern char          g_MenuZennyFormat[];
+extern s8   D_80144DE4;
+extern u8   D_80144DF2;
+extern u8   D_80144DF3;
+extern u8   D_80144DF4;
+extern char g_MenuStatFormat[];
+extern char g_MenuZennyFormat[];
 /* D_801D0C48 */
-extern char          g_MenuNextExpBlank[];
-extern char          g_MenuClockFormat[];
-extern u8            D_80144DF5;
-extern u8            D_80144DF6;
-extern u8            D_80144DF7;
+extern char g_MenuNextExpBlank[];
+extern char g_MenuClockFormat[];
+extern u8   D_80144DF5;
+extern u8   D_80144DF6;
+extern u8   D_80144DF7;
+/* The item category of each equipment slot. */
+extern u8   D_801D875C[];
+/* The eighth character record is the equipment menu's work record. */
+#define MENU_BATE_CHARACTER_RECORD 7
 extern u8            D_80148338;
 extern s8            D_80148511;
 extern u8            D_80148656;
