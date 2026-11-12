@@ -161,7 +161,20 @@ MATCH void func_801EFAB8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EFAFC);
+MATCH void func_801EFAFC(void) {
+    Callback handlers[7];
+
+    __builtin_memcpy(handlers, D_801EEC48, sizeof(handlers));
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+        if (g_Task->header.step < 5) {
+            func_801F014C();
+            func_801F0238();
+            PopMatrix();
+        }
+    }
+}
 
 MATCH void func_801EFBEC(void) {
     g_Task->unk_27 = g_BattleEffectBattler->unk_27;
