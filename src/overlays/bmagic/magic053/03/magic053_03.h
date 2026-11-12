@@ -6,7 +6,10 @@
 #include "overlays/bmagic/bmagic.h"
 #include "sys/scene.h"
 
+/* The scratch words D_1F800000 read as halfwords: the fan radius and colour. */
+extern s16          D_1F800000_HALF[];
 extern s16          D_1F800004;
+extern SVECTOR      D_1F800014[];
 extern Callback     D_801F056C[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801F0578[];
