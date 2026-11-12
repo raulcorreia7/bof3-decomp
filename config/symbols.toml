@@ -1238,6 +1238,7 @@ Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "Raises BATTL
 BMagic_ProjectSpan = { addr = 0x801EF2C0, type = "func", source = "Projects the span position and the points half a unit left and right of it to the screen with Area_ProjectPoint, into screen[1], screen[0] and screen[2]." }
 
 ["emi/bmagic/magic151/03"]
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 BMagic_DispatchEffectMode = { addr = 0x801EF9F0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic151." }
 BMagic_DrawGlowRingInner = { addr = 0x801F1E70, type = "func", source = "draws 64 additive POLY_G4 quads from the effect radius (word 0x14) to 64 past it, shaded fifteen times byte 0x09 at the outer edge, in magic151 (Accession)" }
 BMagic_DrawGlowRingOuter = { addr = 0x801F2188, type = "func", source = "draws 64 additive POLY_G4 quads from 64 to 128 past the effect radius (word 0x14), shaded fifteen times byte 0x09 at the inner edge, in magic151 (Accession)" }

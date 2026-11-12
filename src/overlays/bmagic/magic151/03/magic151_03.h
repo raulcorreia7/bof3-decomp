@@ -7,6 +7,10 @@
 
 extern SVECTOR D_1F800014[];
 
+/* Column views of g_BattleEffects: the effect slot's mode byte and target pointer. */
+extern u8 D_801EC331[];
+extern u8 D_801EC3A4[];
+
 #define MAGIC151_STEP_COUNT 5
 
 typedef struct Magic151Steps {
