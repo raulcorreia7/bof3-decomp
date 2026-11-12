@@ -74,10 +74,10 @@ MATCH void func_801F7C6C(void) {
             break;
         case 16:
             if (g_ScriptVars[0] == 0x1A) {
-                slot                     = Actor_FindFreeSlot();
+                slot                   = Actor_FindFreeSlot();
                 D_1F800000.view.raw[0] = slot;
                 if ((slot & BYTE_MASK) != GAME_NONE) {
-                    g_ActorSlots[slot].header.flags                       = 1;
+                    g_ActorSlots[slot].header.flags                     = 1;
                     g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
                     g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = g_AreaCameraAngle.vx;
                     g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
@@ -97,10 +97,10 @@ MATCH void func_801F7C6C(void) {
             break;
         case 18:
             if (g_ScriptVars[0] == 0x1C) {
-                slot                     = Actor_FindFreeSlot();
+                slot                   = Actor_FindFreeSlot();
                 D_1F800000.view.raw[0] = slot;
                 if ((slot & BYTE_MASK) != GAME_NONE) {
-                    g_ActorSlots[slot].header.flags                       = 1;
+                    g_ActorSlots[slot].header.flags                     = 1;
                     g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
                     g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = g_AreaCameraAngle.vx;
                     g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
