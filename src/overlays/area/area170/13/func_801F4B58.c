@@ -178,8 +178,7 @@ MATCH void func_801F4B58(void) {
                 held            = *input;
                 SP_REF(u16, 0u) = held;
                 *input          = held & 0xFFF;
-                /* The direction remap table at the payload's +0xCFC. */
-                *input |= D_801F57BC[0xCFC + (held >> 12)] << 12;
+                *input |= D_801F64B8[held >> 12] << 12;
             }
             break;
         case 55:
