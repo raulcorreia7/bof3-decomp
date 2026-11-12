@@ -46,7 +46,7 @@ MATCH void func_801D6128(void) {
     prev = BANNER_INDEX;
     prev -= 1;
     delta = D_801E2026[prev * 3];
-    if (delta != 0x50 && !(g_FrameCount & 3)) {
+    if (delta != 0x50 && !(g_FrameCount & 0x3)) {
         BANNER_FRAME += delta;
         work  = FISHING_STATE;
         frame = work->cue_index_06;
@@ -64,7 +64,7 @@ MATCH void func_801D6128(void) {
     func_801D1744(236, 112, 1);
     func_801D1818(236, 128, 1);
     Fishing_SetDrawMode(0, 1);
-    Fishing_DrawSprite(0x14, 1, 228, 104);
+    Fishing_DrawSprite(20, 1, 228, 104);
     last = BANNER_INDEX;
     last -= 1;
     if (D_801E2026[last * 3] != 0) {

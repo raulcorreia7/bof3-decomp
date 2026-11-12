@@ -11,7 +11,8 @@
  * Char_AddStat moves a 0..999 stat by a delta; by formation (1=attack, 2=defense, 3=chain, 4=magic) the
  * base power, defence, reprisal chance, agility or intellect of the party rows is eased.
  */
-MATCH void func_800AAA74(void) {
+/* func_800AAA74 */
+MATCH void Battle_ApplyFormationStats(void) {
     u16 value;
     u16 copy;
     u8  slot;

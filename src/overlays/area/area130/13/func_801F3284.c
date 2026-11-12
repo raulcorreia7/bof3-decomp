@@ -6,13 +6,13 @@ MATCH void func_801F3284(void) {
 
     cell = &D_801469EA;
     *cell += 0xF00;
-    g_Task->vx += 0xF;
-    g_Task->vy += 0xA;
+    g_Task->vx += 15;
+    g_Task->vy += 10;
     func_801F3400(g_Task->screen_x, g_Task->screen_y, g_Task->vx, g_Task->vy);
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->timer = 0x3C;
+        g_Task->timer = 60;
         g_Task->header.mode++;
     }
 }

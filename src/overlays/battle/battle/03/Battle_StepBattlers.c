@@ -4,7 +4,8 @@
  * is compared with half the party size, then either its action is queued or
  * the countdown is reduced and its state advanced.
  */
-MATCH s32 func_801D62D8(void) {
+/* func_801D62D8 */
+MATCH s32 Battle_StepBattlers(void) {
     s32 count;
     u8  index;
     s32 step;

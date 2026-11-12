@@ -17,5 +17,5 @@ MATCH void Area_SlideHudBannerLeft(void) {
         scratch->header.step = mode;
     }
 
-    Area_DrawHud(0x10, (g_Task)->screen_x);
+    Area_DrawHud(16, (g_Task)->screen_x);
 }

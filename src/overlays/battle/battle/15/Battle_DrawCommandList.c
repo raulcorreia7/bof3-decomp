@@ -3,7 +3,8 @@
 /* Draws the battle command list: copies the command page, draws up to three rows with the affordability color
  * and the price text, and the cursor box.
  */
-MATCH void func_800B1728(void) {
+/* func_800B1728 */
+MATCH void Battle_DrawCommandList(void) {
     s32 entry;
     u16 line_y;
     s32 row;

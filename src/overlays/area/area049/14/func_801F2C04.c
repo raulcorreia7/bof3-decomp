@@ -6,6 +6,6 @@ MATCH s32 func_801F2C04(void) {
     sel              = g_MessageChoice;
     g_MessageRequest = D_801F5CD4[sel];
     if (sel == 0) {
-        SYS_SetFlag(g_SceneFlags, 0x3B);
+        SYS_SetFlag(g_SceneFlags, 59);
     }
 }

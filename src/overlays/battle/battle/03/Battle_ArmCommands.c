@@ -4,7 +4,8 @@
  * the overlay still holds, gates the selection flag and starts the overlay's
  * stream slot.
  */
-MATCH void func_801D25A0(void) {
+/* func_801D25A0 */
+MATCH void Battle_ArmCommands(void) {
     s32  i;
     u8   rank;
     u16* flags;

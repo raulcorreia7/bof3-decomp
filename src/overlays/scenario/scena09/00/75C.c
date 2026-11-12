@@ -188,7 +188,24 @@ MATCH void func_801FAC88(void) {
 
 INCLUDE_ASM(func_801FAE0C);
 
-INCLUDE_ASM(func_801FBC78);
+MATCH void func_801FBC78(void) {
+    u8* step = &D_80146875;
+
+    switch (*step) {
+        case 0:
+            func_801BE1B0(2);
+            *step = 1;
+            break;
+        case 1:
+            if (*g_ScriptVars == 3) {
+                SYS_SetFlag(g_SceneFlags, 0x24);
+                Game_ClearScriptActive();
+                *step      = 0;
+                D_80146874 = 0;
+            }
+            break;
+    }
+}
 
 MATCH void func_801FBD0C(void) {
     u8* timer;

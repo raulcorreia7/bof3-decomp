@@ -28,9 +28,9 @@ MATCH void func_801D5D88(void) {
     }
     Area_AddActor();
     Fishing_SetDrawMode(0, 1);
-    Fishing_DrawSprite(0x15, 1, 50, 122);
-    Fishing_DrawSprite(0x16, 1, 188, 122);
-    Fishing_DrawSprite(0x10, 1, 54, 128);
+    Fishing_DrawSprite(21, 1, 50, 122);
+    Fishing_DrawSprite(22, 1, 188, 122);
+    Fishing_DrawSprite(16, 1, 54, 128);
     work     = FISHING_STATE;
     previous = work->step_index_0A - 1;
     mode     = D_801E200A[previous * 3];
@@ -46,7 +46,7 @@ MATCH void func_801D5D88(void) {
             work->pos_x_0C      = 0;
             work->step_delta_18 = -work->step_delta_18;
         }
-    } else if (mode == 1 && !(g_FrameCount & 1)) {
+    } else if (mode == 0x1 && !(g_FrameCount & 1)) {
         work->cue_index_06 = work->cue_index_06 + 1;
     }
     Fishing_DrawGaugeFill(57, 151, FISHING_STATE->pos_x_0C, 1);

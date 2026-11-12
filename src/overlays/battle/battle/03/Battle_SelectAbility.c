@@ -3,7 +3,8 @@
 /* resolves the selected ability action, draws its panel and either
  * starts the confirm step or queues the failure cues.
  */
-MATCH void func_801D3304(void) {
+/* func_801D3304 */
+MATCH void Battle_SelectAbility(void) {
     u16 row;
     u16 flag;
     u16 action;

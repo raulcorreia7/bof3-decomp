@@ -3,10 +3,10 @@
 MATCH void func_801F2CC4(void) {
     u32* p;
 
-    if (SYS_TestFlag(D_80144EF8, 0x13) == 0) {
+    if (SYS_TestFlag(D_80144EF8, 19) == 0) {
         return;
     }
-    if (SYS_TestFlag(D_80144EF8, 0x14) != 0) {
+    if (SYS_TestFlag(D_80144EF8, 20) != 0) {
         return;
     }
     p = (u32*)(0x80104000 + (MEM(u16, 0x80104022) << 2));

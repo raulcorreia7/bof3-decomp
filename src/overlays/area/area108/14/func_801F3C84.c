@@ -11,7 +11,7 @@ MATCH void func_801F3C84(void) {
     for (i = 0; i < ACTOR_COUNT; i++) {
         actor = &g_Actors[i];
         TASK_SET(actor);
-        if (actor->header.flags & 1) {
+        if (actor->header.flags & 0x1) {
             actor->draw_layer = 5;
             func_8014D290();
         }

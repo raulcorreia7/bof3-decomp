@@ -35,14 +35,14 @@ MATCH void func_801DCDB8(void) {
         FISHING_STATE->flag_04 -= 1;
     }
 
-    if (!(D_80144287 & 1)) {
-        UI_DrawText(29, 20, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_EQUIP_ROD));
+    if (!(D_80144287 & 0x1)) {
+        UI_DrawText(29, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_EQUIP_ROD));
     } else {
-        UI_DrawText(29, 20, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_EQUIP_LURE));
+        UI_DrawText(29, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_EQUIP_LURE));
     }
 
     if (!(D_80144287 & 0x80)) {
-        if (!(D_80144287 & 1)) {
+        if (!(D_80144287 & 0x1)) {
             value = g_FishingRod;
             value = (value != 0) ? value + 4 : 0xFFFF;
         } else {
@@ -51,5 +51,5 @@ MATCH void func_801DCDB8(void) {
         }
         D_801442AC = value;
     }
-    Menu_DrawCursorSprite(28, (D_80144287 & 1) * 16 + 88, 0);
+    Menu_DrawCursorSprite(28, (D_80144287 & 0x1) * 16 + 88, 0);
 }

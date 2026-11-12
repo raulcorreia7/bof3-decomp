@@ -14,7 +14,7 @@ MATCH void func_801F435C(void) {
     func_801F4798(&g_Task->pos, &g_Task->unk_18);
     func_801F4614();
     if (g_Task->timer == 0) {
-        g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;
+        g_Task->direction_08 = (g_Task->direction_08 + 2) & 0x7;
         func_801F45C8();
         g_Task->timer  = 80;
         g_Task->unk_0A = RANDOM_MOD(45);

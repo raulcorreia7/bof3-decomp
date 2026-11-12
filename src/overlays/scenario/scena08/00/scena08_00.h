@@ -6,6 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
+#include "overlays/area/AreaSprite.h"
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x00
 

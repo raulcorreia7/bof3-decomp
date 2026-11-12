@@ -13,7 +13,7 @@ MATCH void func_801EEE70(void) {
     g_PaletteFades[g_Task->timer].offset.green--;
     g_PaletteFades[g_Task->timer].offset.blue--;
     if (--g_Task->unk_09 == 0) {
-        func_800A9610(g_Battle.target_selector, 16);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 16);
         g_Task->header.mode++;
     }
 }
@@ -35,7 +35,7 @@ MATCH void func_801EF0EC(void) {
     if (g_Task->param.unk_0B == 9) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
         func_800AF814(g_Battle.target_selector);
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
@@ -48,7 +48,7 @@ MATCH void func_801EF0EC(void) {
 
 MATCH void func_801EF264(void) {
     D_801F09A0[g_Task->header.step]();
-    func_800AF764();
+    Battle_ProjectRange();
     if (g_Task->header.step != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF8F0(0x60, 0x20, 7);
@@ -94,7 +94,7 @@ MATCH void func_801EF4C4(void) {
 
     work = g_Task;
     D_801F09B0[work->header.step]();
-    func_800AF764();
+    Battle_ProjectRange();
     if (g_Task->header.flags != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF8F0(0x20, 0x50, 0xF);
@@ -174,7 +174,7 @@ INCLUDE_ASM(func_801EF8F0);
 
 MATCH void func_801F0008(void) {
     D_801F09C0[g_Task->header.step]();
-    func_800AF764();
+    Battle_ProjectRange();
     if (g_Task->header.step != 0) {
         Effect_SetActorMatrixRolled();
         Effect_DrawBolt();

@@ -18,7 +18,7 @@ MATCH void func_801EF158(void) {
         if (cue != 0) {
             SND_QueueSelectionFx(cue);
         }
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->unk_09 = 0;
         g_Task->header.mode++;
     }

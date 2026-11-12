@@ -4,7 +4,8 @@
  * configured reset or reinitialises the panel rows, stream slot and first three battler slots and clears the battle
  * bits.
  */
-MATCH void func_801D656C(void) {
+/* func_801D656C */
+MATCH void Battle_WaitVoiceSlots(void) {
     u8 i;
 
     for (i = 16; i < 24; i++) {

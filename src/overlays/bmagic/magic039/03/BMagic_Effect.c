@@ -112,7 +112,7 @@ MATCH void func_801EF4E4(void) {
     handlers = D_801EEC28;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EF758();
     }
 }

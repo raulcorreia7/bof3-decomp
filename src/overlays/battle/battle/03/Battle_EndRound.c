@@ -2,7 +2,8 @@
 
 /* Ends the round for every sprite slot whose 0x4000 flag is set and whose state reached 3: clears the slot
  * flags, arms the 0x11/6/5 action bytes and opens the round-result overlay. */
-MATCH bool func_801D527C(void) {
+/* func_801D527C */
+MATCH bool Battle_EndRound(void) {
     s32 count;
     u8  slot;
 

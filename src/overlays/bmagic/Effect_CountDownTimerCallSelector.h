@@ -6,7 +6,7 @@ MATCH void Effect_CountDownTimerCallSelector(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9610(g_Battle.target_selector, 0x20);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x20);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

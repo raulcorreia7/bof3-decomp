@@ -6,7 +6,8 @@
  * word, then unpacks the 18-bit panel flag mask into the 3x6 flag table and
  * advances the battle frame step.
  */
-MATCH void func_800A47AC(void) {
+/* func_800A47AC */
+MATCH void Battle_OpenMenu(void) {
     u8 row;
     u8 col;
     /* FAKE: retain early menu argument. */

@@ -103,7 +103,7 @@ MATCH void func_801EF540(void) {
     g_Task->unk_0C = angle;
     g_Task->pos.x.fixed += (rsin(angle) * 0x7000) >> 0xC;
     g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF7E8();
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
@@ -123,7 +123,7 @@ MATCH void func_801EF660(void) {
     g_Task->unk_0C = angle;
     g_Task->pos.x.fixed += (rsin(angle) * 0x7000) >> 0xC;
     g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF7E8();
     g_Task->unk_09 += 1;
     timer_next    = g_Task->timer - 1;
