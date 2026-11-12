@@ -7,9 +7,7 @@ MATCH s32 func_801F3F48(void) {
     /* FAKE: the product needs the retail temporary registers. */
     FAKE_REG(s32, step, "v1");
     FAKE_REG(s32, part, "a0");
-    /* FAKE: pin carries the request code in a2 from the first store to the
-     * g_SceneEventMode store. */
-    FAKE_REG(s32, request, "a2");
+    s32    request;
     Actor* record1;
     Actor* record2;
     /* FAKE: pin carries the record row in a1 so the difference recycles

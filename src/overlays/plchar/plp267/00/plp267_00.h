@@ -29,4 +29,3 @@ extern s32  func_801CF99C(void);
 extern void func_801CFB40(void);
 
 #endif
-void func_801CF62C(s32 kind, s32 x, s32 y, s32 code);

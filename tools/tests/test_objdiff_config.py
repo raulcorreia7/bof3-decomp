@@ -68,9 +68,7 @@ def unit_object(path: Path) -> Path:
 
 
 def project(tmp_path: Path) -> objdiff_config.Project:
-    cfg = {"nonmatching_suffix": SUFFIX, "report_objects": str(tmp_path / "report")}
-    pattern = re.compile("")
-    return objdiff_config.Project(tmp_path, cfg, pattern, pattern, pattern, pattern)
+    return objdiff_config.Project(tmp_path, tmp_path)
 
 
 def test_an_include_asm_body_is_overwritten_and_a_compiled_body_is_kept(
@@ -166,17 +164,7 @@ def test_a_readable_data_name_is_defined_at_its_row_address(
         return ""
 
     monkeypatch.setattr(objdiff_config.Project, "command", command)
-    cfg = {
-        "assembler": "as",
-        "nm": "nm",
-        "objcopy": "objcopy",
-        "assembler_flags": [],
-        "asm_include": [],
-        "data_label": "dlabel",
-        "nonmatching_suffix": SUFFIX,
-    }
-    pattern = re.compile(r"^(?:D|T|jtbl)_([0-9A-Fa-f]+)$")
-    proj = objdiff_config.Project(tmp_path, cfg, pattern, pattern, pattern, pattern)
+    proj = objdiff_config.Project(tmp_path, tmp_path)
     source = tmp_path / "f.s"
     source.write_text("nop\n", encoding="utf-8")
     proj.assemble(
@@ -198,15 +186,11 @@ def test_a_function_or_unlisted_name_is_left_to_the_link() -> None:
 
 def test_a_unit_with_a_draft_is_not_marked_complete(tmp_path: Path) -> None:
     """A MATCH marker claims the unit, but a NON_MATCHING draft in it, or in a header it includes, does not."""
-    cfg = {"nonmatching_suffix": SUFFIX, "report_objects": str(tmp_path / "report")}
-    any_name = re.compile("")
     shared = objdiff_config.Project(
         tmp_path,
-        cfg,
+        tmp_path,
         re.compile(r"^[ \t]*MATCH\b", re.M),
         re.compile(r"^NON_MATCHING\s", re.M),
-        any_name,
-        any_name,
     )
     (tmp_path / "Draft.h").write_text("NON_MATCHING void func_B(void) {}\n")
     whole = tmp_path / "whole.c"

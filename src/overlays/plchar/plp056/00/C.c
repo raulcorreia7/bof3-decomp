@@ -8,7 +8,7 @@ MATCH void func_801CE404(void) {
     D_801D0858[g_Task->header.step]();
 }
 
-INCLUDE_ASM(func_801CE448);
+#include "overlays/plchar/func_801CE448.h"
 
 #include "overlays/plchar/func_801CE628.h"
 
@@ -81,10 +81,10 @@ INCLUDE_ASM(func_801CFADC);
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
 MATCH s32 func_801CFF4C(s16 x, s16 y) {
-    CHAR_PROBE_CELL_CODE(func_801D0158);
+    CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
-INCLUDE_ASM(func_801D0158);
+INCLUDE_ASM(Char_SpawnLinkedActor);
 
 MATCH void func_801D0244(void) {
     SYS_DISPATCH_TASK(D_801D08B0, 3, g_Task);

@@ -109,7 +109,9 @@ typedef struct ActorSlot {
     s32        unk_14;       /* 0x14 */
     s32        counter_18;   /* 0x18 */
     s32        counter_1C;   /* 0x1C */
-    u8         pad_20[7];    /* 0x20-0x26 */
+    u8         pad_20[4];    /* 0x20-0x23 */
+    u8         unk_24;       /* 0x24 */
+    u8         pad_25[2];    /* 0x25-0x26 */
     u8         unk_27;       /* 0x27 */
     u8         unk_28;       /* 0x28 */
     u8         unk_29;       /* 0x29 cleared when the slot is rebuilt */
