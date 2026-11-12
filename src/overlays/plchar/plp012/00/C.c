@@ -18,43 +18,7 @@ MATCH void func_801CE72C(void) {
 
 #include "overlays/plchar/func_801CE770.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801CEA94(void) {
-    s32 cx;
-    s32 cy;
-    s16 x;
-    s16 y;
-    s32 slot;
-    s32 probe;
-
-    g_Task->unk_0A--;
-    if (g_Task->unk_0A == 0) {
-        cx   = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;
-        cy   = g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;
-        slot = func_801BDE14(cx, cy, 0);
-        if (slot != -1) {
-            g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
-        }
-        x     = cx >> 16;
-        y     = cy >> 16;
-        probe = Char_ProbeCellSpawn(x, y);
-        if ((probe & BYTE_MASK) == 0) {
-            if ((cx & HALF_MASK) != 0) {
-                probe = Char_ProbeCellSpawn((s16)(x + 1), y);
-            }
-            if ((probe & BYTE_MASK) == 0) {
-                if ((cy & HALF_MASK) != 0) {
-                    Char_ProbeCellSpawn(x, (s16)(y + 1));
-                }
-            }
-        }
-        g_Task->header.step++;
-    }
-    Actor_StepAnimOnce();
-}
-#else
 INCLUDE_ASM(func_801CEA94);
-#endif
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
