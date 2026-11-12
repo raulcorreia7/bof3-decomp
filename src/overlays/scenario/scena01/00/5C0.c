@@ -87,7 +87,26 @@ INCLUDE_ASM(func_801F7D04);
 
 INCLUDE_ASM(func_801F7DCC);
 
-INCLUDE_ASM(func_801F7EDC);
+MATCH void func_801F7EDC(void) {
+    POLY_F4* prim;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0x2A5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x2A5;
+    } else {
+        tpage = 0xB5;
+    }
+    GFX_SET_DRAW_MODE(tpage);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+    prim = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(prim);
+    SetSemiTrans(prim, 1);
+    setXYWH(prim, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    setRGB0(prim, (s16)g_Task->screen_x / 8, 0, 0);
+    GFX_AddPrim(3, sizeof(POLY_F4));
+}
 
 MATCH void func_801F7FC4(void) {
     SYS_DISPATCH_BYTE(D_801FE29C, D_80146872);
