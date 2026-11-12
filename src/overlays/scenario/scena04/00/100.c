@@ -74,7 +74,28 @@ MATCH void func_801F77A8(void) {
     SYS_DISPATCH_TASK(D_801FA198, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F77EC);
+MATCH void func_801F77EC(void) {
+    ScenePathWork* work;
+    u8             i;
+
+    /* FAKE: retail reserves 16 bytes of unused stack. */
+    FAKE_STACK_PADS(u8, 16);
+
+    work    = MEM_PTR(ScenePathWork, 0x800E5C00u);
+    work->x = D_80147A8C;
+    work->y = g_AreaFocusY;
+    work->z = D_80147A94 >> 8;
+    i       = 0;
+    do {
+        work->points[i].x = work->x + D_801FA1A4[i];
+        work->points[i].y = work->y + D_801FA1C4[i];
+        work->points[i].z = (s16)Area_SampleHeight(work->points[i].x, work->points[i].y) << 8;
+        i++;
+    } while (i < 8);
+    func_801F7FCC();
+    g_Task->vx = 0x200;
+    g_Task->header.mode++;
+}
 
 INCLUDE_ASM(func_801F78F4);
 
