@@ -23,12 +23,12 @@ INCLUDE_ASM(func_801F7424);
 
 /* func_801F7574 */
 MATCH void Scene_ClearWorkRows(void) {
-    u8* row;
-    u8  i;
+    SceneWorkRow* row;
+    u8            i;
 
-    row = MEM_PTR(u8, 0x800E5000u) + g_Task->unk_06 * 0x500;
-    for (i = 0; i < 32; i++, row += 40) {
-        *row = 0;
+    row = (SceneWorkRow*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
+    for (i = 0; i < SCENE_WORK_ROW_COUNT; i++, row++) {
+        row->active = 0;
     }
 }
 
@@ -42,7 +42,7 @@ MATCH s32 func_801F75BC(void) {
     Area_SetCameraMatrix(&camera);
     alive = 0;
     row   = (SceneWorkRow*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
-    for (i = 0; i < 32; row++, i++) {
+    for (i = 0; i < SCENE_WORK_ROW_COUNT; row++, i++) {
         if (row->active == 0) {
             continue;
         }
