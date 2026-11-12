@@ -24,14 +24,14 @@ MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     height       = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (g_Task->vz < 0 && height > COORD_INT(g_Task->pos.z)) {
         COORD_INT(g_Task->pos.z) = height;
-        if (flags & 2) {
+        if (flags & 0x2) {
             g_Task->unk_04 = 0;
             return 0;
         }
     }
     if (g_Task->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
         if (g_Task->unk_06 != 6) {
-            g_Task->unk_2A = flags & 1;
+            g_Task->unk_2A = flags & 0x1;
         }
         Actor_RequestScript(landing_script);
     }

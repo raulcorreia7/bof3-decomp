@@ -37,7 +37,7 @@ MATCH void func_801DE200(void) {
     D_801E6250    = 0;
     do {
         order_index = 0;
-        if (((u8*)&g_Characters[0].unk_07)[record_offset] & 1) {
+        if (((u8*)&g_Characters[0].unk_07)[record_offset] & 0x1) {
             limit = search_limit;
             if (search_limit != 0) {
             loop_4:

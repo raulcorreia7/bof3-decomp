@@ -13,8 +13,8 @@ MATCH void func_801F6D44(void) {
     work                   = g_Task;
     work->vz               = 0x1000000;
     FIELD(s32, work, 0x2C) = 0x1000000;
-    work->vx               = 0x568000;
-    work->vy               = 0x128000;
+    work->vx               = 5668864;
+    work->vy               = 1212416;
     work->unk_1C           = 0;
     work->gravity          = 0x2200000;
     FIELD(s32, work, 0x24) = 0x568000;
@@ -74,7 +74,28 @@ MATCH void func_801F77A8(void) {
     SYS_DISPATCH_TASK(D_801FA198, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F77EC);
+MATCH void func_801F77EC(void) {
+    ScenePathWork* work;
+    u8             i;
+
+    /* FAKE: retail reserves 16 bytes of unused stack. */
+    FAKE_STACK_PADS(u8, 16);
+
+    work    = MEM_PTR(ScenePathWork, AREA_WORK + 0x1400);
+    work->x = D_80147A8C;
+    work->y = g_AreaFocusY;
+    work->z = D_80147A94 >> 8;
+    i       = 0;
+    do {
+        work->points[i].x = work->x + D_801FA1A4[i];
+        work->points[i].y = work->y + D_801FA1C4[i];
+        work->points[i].z = (s16)Area_SampleHeight(work->points[i].x, work->points[i].y) << 8;
+        i++;
+    } while (i < ARRAY_COUNT(work->points));
+    func_801F7FCC();
+    g_Task->vx = 512;
+    g_Task->header.mode++;
+}
 
 INCLUDE_ASM(func_801F78F4);
 
@@ -102,7 +123,7 @@ MATCH void func_801F7B00(void) {
     s32 shade;
     s32 height;
 
-    if ((g_FrameCount & 7) == 0) {
+    if ((g_FrameCount & 0x7) == 0) {
         row   = func_801F7FF8();
         shade = 0x80;
         if (row != NULL) {
@@ -260,7 +281,7 @@ INCLUDE_ASM(func_801F8680);
 INCLUDE_ASM(func_801F8F98);
 
 MATCH void func_801F9CFC(void) {
-    s32 offset = D_801FA220[(g_FrameCount >> 1) & 3];
+    s32 offset = D_801FA220[(g_FrameCount >> 1) & 0x3];
 
     g_AreaCameraRefreshCount = 2;
     g_AreaCameraHeight += offset * 4;

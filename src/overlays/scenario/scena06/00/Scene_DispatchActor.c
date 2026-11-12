@@ -54,7 +54,7 @@ MATCH void func_801FCF30(void) {
 }
 
 MATCH void func_801FCF98(void) {
-    SYS_SetFlag(g_SceneFlags, 0xCU);
+    SYS_SetFlag(g_SceneFlags, 12U);
 }
 
 MATCH void func_801FCFC0(void) {
@@ -121,7 +121,7 @@ MATCH void func_801FD1C8(void) {
     Game_SetScriptActive();
     *g_ScriptVars = 0;
     D_80146865    = 0;
-    if (SYS_TestFlag(g_SceneFlags, 0x22) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 34) == 0) {
         D_80146875 = 0;
     } else {
         D_80146875 = 0x14;
@@ -133,7 +133,7 @@ MATCH void func_801FD234(void) {
     Game_SetScriptActive();
     *g_ScriptVars = 0;
     D_80146865    = 0;
-    if (SYS_TestFlag(g_SceneFlags, 0x23) != 0) {
+    if (SYS_TestFlag(g_SceneFlags, 35) != 0) {
         D_80146875 = 0x14;
     } else {
         D_80146875 = 0xA;
@@ -217,7 +217,7 @@ MATCH void func_801FDE2C(void) {
 }
 
 MATCH s32 func_801FDE34(void) {
-    if (!SYS_TestFlag(g_SceneFlags, 0x27)) {
+    if (!SYS_TestFlag(g_SceneFlags, 39)) {
         Game_SetScriptActive();
         g_ScriptVars[0]       = 0;
         g_ScriptVars[1]       = 0;

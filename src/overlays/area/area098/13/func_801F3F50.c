@@ -14,9 +14,9 @@ MATCH void func_801F3F50(void) {
         if ((s16)fade >= 256) {
             fade = 255;
         }
-        func_801F5050(fade & 0xFF);
+        func_801F5050(fade & BYTE_MASK);
     }
-    if ((func_801F4E7C() & 0xFF) == 0) {
+    if ((func_801F4E7C() & BYTE_MASK) == 0) {
         g_Task->screen_x = 90;
         g_Task->header.mode++;
     }

@@ -25,8 +25,8 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     y = work_index;
     z = work_mode;
     g_GameFlags &= 0xEFFF;
-    if (!(g_Game.walk_flags & AREA_WALK_MAP_LOADING) && (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) || (LOHU(g_GameAreaId) == AREA_ID_ADULT_CAMP) ||
-                                                         (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 0x77U) == 0)))) {
+    if (!(g_Game.walk_flags & AREA_WALK_MAP_LOADING) && (((LOBU(g_GameRequestFlags) & 0x9) != 0) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) || (LOHU(g_GameAreaId) == AREA_ID_ADULT_CAMP) ||
+                                                         (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 119U) == 0)))) {
         count = Party_CountOrder(PARTY_ORDER_FIELD);
         for (i = 0; i < count; i++) {
             g_Characters[g_CharSlot[g_PartyFieldOrder[i]]].status &= ~STATUS_CONFUSED;
@@ -38,14 +38,14 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             }
         }
         TASK_SET(g_BattlePartyBattlers);
-        g_Game.party_size                 = 1;
-        g_Game.members[0].slot            = 0;
-        g_BattlePartyBattlers[0].chr      = g_Characters[0];
-        g_Game.members[0].character_index = 0;
+        g_Game.party_size                              = 1;
+        g_Game.members[0].slot                         = 0;
+        g_BattlePartyBattlers[0].chr                   = g_Characters[0];
+        g_Game.members[CHAR_INDEX_RYU].character_index = 0;
         /* D_80145FBC stays an address symbol: VOL takes a plain lvalue and the member view changes the code. */
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;
-        if (LOBU(g_GameRequestFlags) & 1) {
+        if (LOBU(g_GameRequestFlags) & 0x1) {
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x52;
                 goto set_mode; /* shared mode dispatch */
@@ -61,9 +61,9 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             }
             g_Task->active_flags = 0;
             g_GameFlags |= 0x1000;
-        } else if (LOBU(g_GameRequestFlags) & 8) {
+        } else if (LOBU(g_GameRequestFlags) & 0x8) {
             id = 0x1FD;
-            if (g_Game.members[0].chr.character_id == 0) {
+            if (g_Game.members[CHAR_ID_RYU_YOUNG].chr.character_id == 0) {
                 id = 0x47;
             }
             Area_FindSceneRecord(id);
@@ -102,7 +102,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     rec                                       = (Character*)(koff + (u32)base);
                     (&g_Game.members[0].character_index)[off] = kind;
                     *(Character*)dst                          = *rec;
-                    if (!(g_Task->active_flags & 1)) {
+                    if (!(g_Task->active_flags & 0x1)) {
                         Party_LoadMemberSprite(*order, i & BYTE_MASK);
                         FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
@@ -121,7 +121,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             }
         }
     }
-    if (!(g_GameRequestFlags & 8)) {
+    if (!(g_GameRequestFlags & 0x8)) {
         if (z & 0x80) {
             g_AreaScrollTargetX = x;
             g_AreaScrollTargetY = y;

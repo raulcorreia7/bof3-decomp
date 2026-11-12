@@ -45,8 +45,8 @@ MATCH void func_801A7E54(void) {
             if (*flag == 0x31) {
                 *flag = 0;
                 Game_ClearScriptActive();
-                SYS_ClearFlag(g_SceneEventFlags, 0x1E);
-                SYS_ClearFlag(g_SceneEventFlags, 0x1F);
+                SYS_ClearFlag(g_SceneEventFlags, 30);
+                SYS_ClearFlag(g_SceneEventFlags, 31);
                 g_SceneEventMode      = SCENE_EVENT_NONE;
                 g_SceneEventStep      = 0;
                 g_SceneEventSelection = 0;

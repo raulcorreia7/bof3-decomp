@@ -22,7 +22,7 @@ MATCH bool Char_TestAbilityRole(s32 bit, s32 role, ItemCategory category, s32 it
         default:
             return 0;
     }
-    if ((((Item_GetEquipability(category & BYTE_MASK, item_id & BYTE_MASK) & BYTE_MASK) >> bit) & 1) != 0) {
+    if ((((Item_GetEquipability(category & BYTE_MASK, item_id & BYTE_MASK) & BYTE_MASK) >> bit) & 0x1) != 0) {
         if ((equip_slot & BYTE_MASK) < 4u && (equip_slot & BYTE_MASK) == (role & BYTE_MASK)) {
             return 1;
         }

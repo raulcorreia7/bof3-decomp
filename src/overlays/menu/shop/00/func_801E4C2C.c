@@ -7,10 +7,10 @@ MATCH s32 func_801E4C2C(s32 item_class) {
 
     switch (item_class & BYTE_MASK) {
         case 11:
-            enabled = g_PartyMenuFlags & 8;
+            enabled = g_PartyMenuFlags & 0x8;
             break;
         case 12:
-            enabled = SYS_TestFlag(g_SceneEventFlags, 0x6C);
+            enabled = SYS_TestFlag(g_SceneEventFlags, 108);
             break;
         case 13:
             enabled = g_PartyMenuFlags & 0x10;

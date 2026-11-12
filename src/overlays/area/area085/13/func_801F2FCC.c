@@ -10,7 +10,7 @@ MATCH void func_801F2FCC(void) {
     do {
         record = &g_Actors[i & BYTE_MASK];
         g_Task = record;
-        if (record->header.flags & 1) {
+        if (record->header.flags & 0x1) {
             record->draw_layer = 5;
             func_8014D290();
         }

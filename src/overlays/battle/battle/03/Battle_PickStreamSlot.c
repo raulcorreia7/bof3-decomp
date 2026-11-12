@@ -14,30 +14,30 @@ MATCH void Battle_PickStreamSlot(void) {
     if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
         if (func_801E7B34() & BYTE_MASK) {
             if (g_EmiLoadedCharacterIndex == 7) {
-                slot = 0x205;
+                slot = 517;
                 if (g_BattleEffectBattler->facing < 2) {
-                    slot = 0x201;
+                    slot = 513;
                 }
                 EMI_LoadArchive(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xD) {
-                slot = 0x206;
+                slot = 518;
                 if (g_BattleEffectBattler->facing < 2) {
-                    slot = 0x202;
+                    slot = 514;
                 }
                 EMI_LoadArchive(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xE) {
-                slot = 0x207;
+                slot = 519;
                 if (g_BattleEffectBattler->facing < 2) {
-                    slot = 0x203;
+                    slot = 515;
                 }
                 EMI_LoadArchive(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xF) {
-                slot = 0x208;
+                slot = 520;
                 if (g_BattleEffectBattler->facing < 2) {
-                    slot = 0x204;
+                    slot = 516;
                 }
                 EMI_LoadArchive(slot);
             }

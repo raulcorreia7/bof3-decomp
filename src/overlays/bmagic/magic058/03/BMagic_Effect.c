@@ -94,7 +94,30 @@ MATCH void func_801EF3B0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF454);
+MATCH void func_801EF454(void) {
+    PartyMember* work;
+    u8           count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        work = g_Task;
+        if (BATTLER_IS_PLAYER(work->param.unk_0B)) {
+            work->pos.x.fixed = g_Game.members[work->param.unk_0B].pos.x.fixed;
+            work->pos.y.fixed = g_Game.members[work->param.unk_0B].pos.y.fixed;
+            work->pos.z.fixed = g_Game.members[work->param.unk_0B].pos.z.fixed;
+        } else {
+            work->pos.x.fixed = ENEMY_COMBATANT(work->param.unk_0B).pos.x.fixed;
+            work->pos.y.fixed = ENEMY_COMBATANT(work->param.unk_0B).pos.y.fixed;
+            work->pos.z.fixed = ENEMY_COMBATANT(work->param.unk_0B).pos.z.fixed;
+        }
+        g_Task->unk_0C = 16;
+        g_Task->unk_18 = 16;
+        g_Task->timer  = 16;
+        g_Task->header.step += 1;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF5D4(void) {
     PartyMember* work;

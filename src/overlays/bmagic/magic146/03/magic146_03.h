@@ -13,7 +13,6 @@ extern BattleEffect D_801EF9F4[];
 #define BMAGIC_EFFECT_SLOTS D_801EF9F4
 #define BMAGIC_EFFECT_COUNT 64
 
-void func_801EF604(void);
 void func_801EF2FC(void);
 
 #define MAGIC146_STEP_COUNT 3

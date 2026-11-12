@@ -13,14 +13,14 @@ MATCH void func_801B2DDC(void) {
     u16    result;
 
     sel = func_801B5C54();
-    if (g_GameRequestFlags & 1) {
+    if (g_GameRequestFlags & 0x1) {
         func_801B5BDC(g_Task->direction_08);
     } else {
         work = g_Task;
         Actor_RequestScript(((work->direction_08 >> 1) + 0x10));
     }
-    value = FIELD(s16, sel, 4u);
-    if (((value & 0x8000) != 0) && ((kind = FIELD(u8, sel, 6u)) != GAME_NONE)) {
+    value = FIELD(s16, sel, 0x4u);
+    if (((value & 0x8000) != 0) && ((kind = FIELD(u8, sel, 0x6u)) != GAME_NONE)) {
         switch (kind) {
             case 0:
                 Message_Request(value & 0xFFF);
@@ -31,8 +31,8 @@ MATCH void func_801B2DDC(void) {
             case 2:
                 FIELD(u8, &rec, 0x7Au) = 0xFF;
                 base                   = g_AreaLoads[LOHU(g_GameAreaId)];
-                list                   = FIELD(u32*, base, 4u);
-                entry                  = list[FIELD(u16, sel, 4u) & 0xFFF];
+                list                   = FIELD(u32*, base, 0x4u);
+                entry                  = list[FIELD(u16, sel, 0x4u) & 0xFFF];
                 g_CurrentActor         = &rec;
                 func_801A3F3C((u8*)entry);
                 result = FIELD(u16, &rec, 0x7Cu);
@@ -41,7 +41,7 @@ MATCH void func_801B2DDC(void) {
                 }
                 g_Game.current->u.field.kind_11E  = g_CurrentActor->callback_index;
                 state                             = g_Task;
-                g_Game.current->u.field.value_120 = FIELD(u16, sel, 4u);
+                g_Game.current->u.field.value_120 = FIELD(u16, sel, 0x4u);
                 state->header.step++;
         }
         g_Task->header.step++;

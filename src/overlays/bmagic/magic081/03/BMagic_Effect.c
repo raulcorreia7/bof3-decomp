@@ -53,7 +53,7 @@ MATCH void func_801EF0B8(void) {
     g_Task->pos.x.fixed                        = g_BattleEffectBattler->pos.x.fixed + TO_COORD(2);
     g_Task->pos.y.fixed                        = g_BattleEffectBattler->pos.y.fixed;
     COORD_INT(g_Task->pos.z)                   = COORD_INT(g_BattleEffectBattler->pos.z);
-    slot                                       = Battle_AllocEffect(1, 0x42);
+    slot                                       = Battle_AllocEffect(1, 66);
     effect_index                               = slot & BYTE_MASK;
     task                                       = g_Task;
     g_BattleEffects[effect_index].header.mode  = 1;
@@ -65,7 +65,28 @@ MATCH void func_801EF0B8(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EF18C);
+MATCH void func_801EF18C(void) {
+    u8 slot;
+    u8 tick;
+
+    if ((g_FrameCount & 3) == 3) {
+        slot                                   = BMagic_AllocEffect();
+        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = g_Task->unk_09;
+        tick                                   = g_Task->unk_09;
+        if (tick < 100) {
+            BMAGIC_EFFECT_SLOTS[slot].unk_0A = 8;
+        } else {
+            BMAGIC_EFFECT_SLOTS[slot].unk_0A = 8 - (tick - 100) / 4;
+        }
+        g_Task->param.unk_0B += 1;
+    }
+    tick           = g_Task->unk_09 + 1;
+    g_Task->unk_09 = tick;
+    if (tick >= 129U) {
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
