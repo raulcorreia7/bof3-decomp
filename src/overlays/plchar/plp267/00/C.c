@@ -103,7 +103,13 @@ MATCH void func_801CF7C8(void) {
 
 INCLUDE_ASM(func_801CF99C);
 
-INCLUDE_ASM(func_801CFB40);
+MATCH void func_801CFB40(void) {
+    s16 dist;
+    s32 x;
+    s32 y;
+
+    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)
+}
 
 MATCH void func_801CFCA4(void) {
     SYS_DISPATCH_TASK(D_801D09D0, 2, g_Task);
