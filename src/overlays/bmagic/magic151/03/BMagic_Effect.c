@@ -33,7 +33,37 @@ MATCH void func_801EEEA8(void) {
     saved_work->unk_03 += 1;
 }
 
-INCLUDE_ASM(func_801EEF24);
+MATCH void func_801EEF24(void) {
+    PartyMember* saved;
+    PartyMember* work;
+    u8           count;
+    s32          cue;
+    u32          slot;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        cue = 0x101;
+        if (g_Game.members[g_Battle.target_selector].chr.character_id == 0) {
+            cue = 0x100;
+        }
+        SND_QueueSelectionFx(cue);
+    }
+    saved  = g_Task;
+    g_Task = &g_Game.members[g_Battle.active_battler];
+    if (!(Actor_StepAnimOnce() & BYTE_MASK)) {
+        g_Task = saved;
+        return;
+    }
+    g_Task->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task                             = saved;
+    g_Task->param.unk_0B               = 0;
+    slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 4;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->unk_03 += 1;
+}
 
 INCLUDE_ASM(func_801EF070);
 
