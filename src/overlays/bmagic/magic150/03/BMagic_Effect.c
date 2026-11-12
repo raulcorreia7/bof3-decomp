@@ -101,26 +101,25 @@ MATCH void func_801EF6B0(void) {
 
 INCLUDE_ASM(func_801EF6F8);
 
-/* Draws a semi-transparent ring of sixteen Gouraud triangles from (x, y), one per sixteenth of a turn: the first
- * vertex red, the other two shaded. */
-MATCH void func_801EF790(s16 x, s16 y, s16 radius, u8 red, u8 shade) {
-    POLY_G3* packet;
+MATCH void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha) {
+    POLY_G3* prim;
     u16      angle;
     u16      next;
 
-    angle = 0;
-    do {
-        packet = GFX_BeginPolyG3(1);
-        setXY2(packet, x, y, (s16)(x + FIXED_MUL(radius, rcos(angle))), (s16)(y + FIXED_MUL(radius, rsin(angle))));
-        next       = angle + ONE / 16;
-        packet->x2 = (s16)(x + FIXED_MUL(radius, rcos(next)));
-        packet->y2 = (s16)(y + FIXED_MUL(radius, rsin(next)));
-        angle      = next;
-        setRGB0(packet, red, 0, 0);
-        setRGB1(packet, shade, 0, 0);
-        setRGB2(packet, shade, 0, 0);
-        GFX_AddPrim(1u, sizeof(POLY_G3));
-    } while (angle < ONE);
+    for (angle = 0; angle < ONE; angle += 0x100) {
+        prim     = GFX_BeginPolyG3(1);
+        prim->x0 = x;
+        prim->y0 = y;
+        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
+        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        next     = angle + 0x100;
+        prim->x2 = x + FIXED_MUL(radius, rcos(next));
+        prim->y2 = y + FIXED_MUL(radius, rsin(next));
+        setRGB0(prim, colour, 0, 0);
+        setRGB1(prim, alpha, 0, 0);
+        setRGB2(prim, alpha, 0, 0);
+        GFX_AddPrim(1, sizeof(POLY_G3));
+    }
 }
 
 MATCH u8 func_801EF8EC(void) {
