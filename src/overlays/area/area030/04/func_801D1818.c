@@ -9,7 +9,7 @@
 MATCH void func_801D1818(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     SPRT_16* primitive;
 
-    func_801E0C80(0, icon_index);
+    Fishing_SetDrawMode(0, icon_index);
     primitive = (SPRT_16*)g_GfxPrimCursor;
     SetSprt16(primitive);
     setRGB0(primitive, 128, 128, 128);

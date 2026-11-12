@@ -26,7 +26,22 @@ MATCH void func_801EF158(void) {
 
 INCLUDE_ASM(func_801EF1F0);
 
-INCLUDE_ASM(func_801EF3E0);
+MATCH void func_801EF3E0(void) {
+    u8           slot;
+    PartyMember* battler;
+
+    slot = g_Battle.target_selector;
+    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
+        battler = &g_Game.members[slot];
+    } else {
+        battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+    }
+    if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK) && battler->header.mode == 6) {
+        return;
+    }
+    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+    func_801E5988();
+}
 
 INCLUDE_ASM(func_801EF490);
 

@@ -2,17 +2,31 @@
 # Read retail bytes through a saved Rizin project, or use raw mapping for loose bytes.
 set -eu
 root=$(cd "$(dirname "$0")/.." && pwd)
-usage() {
-    echo "usage: bin/rz <target> [<cmd> ...] | bin/rz raw <target>" >&2
+help() {
+    cat <<'EOF'
+usage: bin/rz <target> [<cmd> ...] | bin/rz raw <target>
+
+  bin/rz exe/slus_004_22 'px 16 @ 0x8014AA04'          bytes at an address
+  bin/rz exe/slus_004_22 'aaa; axt @ g_AreaMapBundle'  references to a symbol
+  bin/rz exe/slus_004_22 'pdf @ SYS_Main'              the function at an address
+EOF
+}
+case "${1:-}" in
+-h | --help) help; exit 0 ;;
+esac
+[ "$#" -ge 1 ] || {
+    help >&2
     exit 2
 }
-[ "$#" -ge 1 ] || usage
 [ -x "$root/toolchains/rizin/bin/rizin" ] || {
     echo "bin/rz: rizin is missing; install it as docs/toolchain.md#matching-tools says" >&2
     exit 127
 }
 if [ "$1" = raw ]; then
-    [ "$#" -eq 2 ] || usage
+    [ "$#" -eq 2 ] || {
+        help >&2
+        exit 2
+    }
     target=$2
     if [ "${target%%/*}" = exe ]; then
         exec "$root/toolchains/rizin/bin/rizin" -q0 -N -a mips -b 32 -E little \

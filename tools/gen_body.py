@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Measure the shapes of the assembly functions and write typed C bodies for the mechanical ones.
 
-    tools/gen_body.py shapes [-o FILE]          count every INCLUDE_ASM function by shape
-    tools/gen_body.py show TARGET@NAME          print the lifted events of one function
+    tools/gen_body.py shapes                    count every INCLUDE_ASM function by shape
     tools/gen_body.py SHAPE [ROWS.tsv] [--dry-run]
                                                 write a body for each member of SHAPE (or for the
                                                 TARGET@NAME rows of ROWS.tsv), keep the exact ones
@@ -34,6 +33,8 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from bof3.link.symbols import read_text
+from bof3.source.ctext import mask
 from bof3.source.index import Func, find, load_index
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -431,7 +432,7 @@ class Tree:
         body = re.sub(
             r";[ \t]*/\*\s*\+?(0x[0-9A-Fa-f]+)\b.*?\*/", r" @\1;", body, flags=re.S
         )
-        body = re.sub(r"/\*.*?\*/|//[^\n]*", "", body, flags=re.S)
+        body = mask(body)
         decls, depth, start = [], 0, 0
         for i, ch in enumerate(body):
             depth += (ch == "{") - (ch == "}")
@@ -520,7 +521,7 @@ class Tree:
             )
             if not m:
                 continue
-            body = re.sub(r"/\*.*?\*/|//[^\n]*", "", m.group(1), flags=re.S)
+            body = mask(m.group(1))
             off, rows, biggest = 0, [], 1
             for decl in filter(None, (x.strip() for x in body.split(";"))):
                 d = re.fullmatch(r"(\w+)\s+(\w+)\s*(?:\[(\w+)\])?", decl)
@@ -569,11 +570,7 @@ class Names:
     ADDRESS = re.compile(r"^(?:func|D|jtbl)_([0-9A-F]{8})$")
 
     def __init__(self, root: Path = ROOT) -> None:
-        import tomllib
-
-        table = tomllib.loads(
-            (root / "config/symbols.toml").read_text(encoding="utf-8")
-        )
+        table = read_text((root / "config/symbols.toml").read_text(encoding="utf-8"))
         self.by_image: dict[str, dict[int, str]] = {}
         self.spans: dict[str, list[tuple[int, int, str]]] = {}
         for image, rows in table.items():
@@ -1074,22 +1071,10 @@ def cmd_shapes(args: argparse.Namespace) -> None:
             (r for r in rows if r[0] == shape), key=lambda r: (r[2], r[1].ref)
         )
         lines += [f"{shape}\t{f.image}\t{f.name}\t{n}" for _, f, n in ordered]
-    text = "\n".join(lines) + "\n"
-    if args.out:
-        Path(args.out).write_text(text, encoding="utf-8")
-    else:
-        sys.stdout.write(text)
+    sys.stdout.write("\n".join(lines) + "\n")
     for shape in SHAPES:
         print(f"{shape}\t{counts[shape]}", file=sys.stderr)
     print(f"total\t{len(rows)}", file=sys.stderr)
-
-
-def cmd_show(args: argparse.Namespace) -> None:
-    f = find(load_index(ROOT), args.ref)
-    lifted = lifted_function(f)
-    print(classify(lifted), sorted(lifted.flags))
-    for event in lifted.events:
-        print(event)
 
 
 def main() -> None:
@@ -1098,11 +1083,7 @@ def main() -> None:
     )
     sub = parser.add_subparsers(dest="verb", required=True)
     p = sub.add_parser("shapes")
-    p.add_argument("-o", "--out")
     p.set_defaults(run=cmd_shapes)
-    p = sub.add_parser("show")
-    p.add_argument("ref")
-    p.set_defaults(run=cmd_show)
     for shape in SHAPES:
         p = sub.add_parser(shape)
         p.add_argument(

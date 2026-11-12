@@ -46,8 +46,6 @@ void        func_800B2218(void);
 void        func_800B22AC(void);
 void        func_800B23B8(void);
 void        func_800B23F8(void);
-/* func_80166A10 */
-u8          Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 extern void func_801D8270(s32 x, s32 y);
 void        func_801D9484(void);
 void        func_801DAAE4(void);
@@ -60,6 +58,7 @@ s16         Battle_CalcDamage(u8 attacker, u8 target, u16 element);
 void        func_801DD14C(u8 battler_index);
 void        func_801DD858(u32 effect_index);
 void        func_801DDAB4(u32 status);
+u8          func_801DDF50(u16 entry_id, u32 table_kind);
 void        func_801DDFEC(u32 battler_index);
 s16         func_801DE0AC(s32 factor_a, s32 factor_b);
 void        Battle_SetSlotPending(u32 slot);

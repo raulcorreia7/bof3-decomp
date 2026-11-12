@@ -32,6 +32,10 @@ INCLUDE_ASM_RE = re.compile(
     re.MULTILINE,
 )
 
+#: A draft starts with `NON_MATCHING`; the rest of the line names the function.
+DRAFT_RE = re.compile(r"^NON_MATCHING\s", re.MULTILINE)
+DRAFT_BYTES = re.compile(rb"^NON_MATCHING\s", re.MULTILINE)
+
 QUOTE_INCLUDE_RE = re.compile(r'^[ \t]*#[ \t]*include[ \t]+"([^"]+)"', re.MULTILINE)
 
 
