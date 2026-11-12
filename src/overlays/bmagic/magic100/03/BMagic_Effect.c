@@ -100,10 +100,7 @@ MATCH void func_801EF8E8(void) {
         pos.vz = -(s16)Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
     }
     RotTransMatrix(&pos, matrix, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2(&g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
+    Camera_SetModelMatrix(&rot, &matrix);
 }
 
 INCLUDE_ASM(func_801EF9D4);
