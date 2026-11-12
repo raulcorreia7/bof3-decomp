@@ -34,6 +34,4 @@ void func_800C1D7C(void);
 
 extern BattleEffect* D_801EC2E0;
 
-u8 Battle_SlotIsBlocked(u32 slot);
-
 #endif

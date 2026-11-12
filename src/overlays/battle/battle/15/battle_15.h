@@ -1069,6 +1069,4 @@ u8 func_800A40D0(u8 battler_index);
 
 u8 func_800AED5C(s32 arg0, u32 battler_index);
 
-u8 Battle_SlotIsBlocked(u8 slot);
-
 #endif

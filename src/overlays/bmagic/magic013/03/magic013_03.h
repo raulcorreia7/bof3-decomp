@@ -18,6 +18,4 @@ void func_801EFAA8(void);
 void func_801F00A8(void);
 void func_801F0164(void);
 
-u8 Battle_SlotIsBlocked(u32 slot);
-
 #endif

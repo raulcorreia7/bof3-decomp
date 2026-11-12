@@ -12,7 +12,6 @@ extern Callback D_801F0CB0[];
 extern u8 D_801EB66E[];
 
 void BMagic_DrawWhelpBreath(void);
-u8   Battle_SlotIsBlocked(u32 slot);
 void func_801F0274(void);
 void func_801F08AC(void);
 void func_801F0974(void);
