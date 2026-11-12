@@ -104,7 +104,7 @@ MATCH void func_801EF6B0(void) {
 
 INCLUDE_ASM(func_801EF6F8);
 
-/* Draws a semi-transparent ring of sixteen Gouraud triangles from (x, y), one per 0x100 of the angle: the first
+/* Draws a semi-transparent ring of sixteen Gouraud triangles from (x, y), one per sixteenth of a turn: the first
  * vertex red, the other two shaded. */
 MATCH void func_801EF790(s16 x, s16 y, s16 radius, u8 red, u8 shade) {
     POLY_G3* packet;
@@ -115,7 +115,7 @@ MATCH void func_801EF790(s16 x, s16 y, s16 radius, u8 red, u8 shade) {
     do {
         packet = GFX_BeginPolyG3(1);
         setXY2(packet, x, y, (s16)(x + FIXED_MUL(radius, rcos(angle))), (s16)(y + FIXED_MUL(radius, rsin(angle))));
-        next       = angle + 0x100;
+        next       = angle + ONE / 16;
         packet->x2 = (s16)(x + FIXED_MUL(radius, rcos(next)));
         packet->y2 = (s16)(y + FIXED_MUL(radius, rsin(next)));
         angle      = next;
@@ -123,7 +123,7 @@ MATCH void func_801EF790(s16 x, s16 y, s16 radius, u8 red, u8 shade) {
         setRGB1(packet, shade, 0, 0);
         setRGB2(packet, shade, 0, 0);
         GFX_AddPrim(1u, sizeof(POLY_G3));
-    } while (angle < 0x1000);
+    } while (angle < ONE);
 }
 
 INCLUDE_ASM(func_801EF8EC);
