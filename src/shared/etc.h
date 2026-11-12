@@ -34,6 +34,8 @@ extern u8          D_8014554F[];
 extern u8          D_801455C3;
 extern u8          D_801455C4;
 extern u8          D_801455C5;
+/* The fairy village rooms, eight bytes each. */
+extern const u8    g_FairyRooms[];
 extern s32         D_80145EC4; /* 0x80145EC4 */
 extern u8          D_8014842D;
 extern u8          D_8014842E;

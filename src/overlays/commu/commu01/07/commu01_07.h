@@ -31,8 +31,6 @@ extern u8       D_801D4E1C;
 extern u8       D_801D4E20;
 extern u8       D_801D4E2C;
 extern u8       D_801D4E30;
-/* The fairy village room records, eight bytes each. */
-extern const u8 g_FairyRooms[];
 
 extern u8 D_801D4E24;
 extern u8 D_801D4E28;
