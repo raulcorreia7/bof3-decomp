@@ -51,7 +51,7 @@ MATCH void func_801EED28(void) {
         i++;
     } while (i < 16);
     g_GfxPalettePending                = 1;
-    slot                               = Battle_AllocEffect(1, 0x29) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 41) & BYTE_MASK;
     g_BattleEffects[slot].target.party = g_Task;
     g_Task->param.unk_0B               = 2;
     g_Task->header.mode += 1;
