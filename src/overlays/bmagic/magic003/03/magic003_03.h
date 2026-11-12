@@ -30,8 +30,11 @@ void func_801EFD4C(void);
 void func_801EFEC8(void);
 
 extern Magic003SecondSteps D_801EEC18;
-/* The effect slot table BMagic_AllocEffect scans, and its row count. */
+extern Callback            D_801F0AD8[];
+u32                        BMagic_AllocEffect(void);
+void                       BMagic_DispatchEffectMode(void);
 extern u8                  D_801F0A84[];
+/* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect        D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
 #define BMAGIC_EFFECT_COUNT 32

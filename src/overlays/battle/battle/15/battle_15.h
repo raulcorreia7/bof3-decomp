@@ -829,6 +829,8 @@ void        func_800B2C90(MenuPanelTask* task);
 void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
 void        func_800B3AE8(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
+/* func_801650B4 */
+bool        Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
@@ -1019,9 +1021,7 @@ static inline void BattleSelectionDelta(s32 mode) {
 static inline void BattleSetSelectionFlag(u32 flag) {
     u32         mode;
     BattleTurn* record;
-    /* FAKE: Pin the stored constant to $v0; clean C left the
-     * delay-slot constant in $v1 while $v0 stayed free. */
-    FAKE_REG(u8, one, "v0");
+    u8          one;
 
     if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *(u8*)&g_Battle.target;

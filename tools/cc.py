@@ -39,11 +39,54 @@ AS = f"{ROOT}/bin/internal/binutils/as"
 MASPSX = f"{ROOT}/third_party/maspsx/maspsx.py"
 #: INCLUDE_ASM pulls split assembly in through the assembler, which `gcc -MM` cannot see.
 ASM_INCLUDE = re.compile(r'^\s*\.include "([^"]+/[^"]+\.s)"', re.M)
-#: The same statements inside the preprocessed text, where the string literal escapes the quotes.
-INLINE_INCLUDE = re.compile(r'\.(?:include|incbin) \\"([^"\\]+)\\"')
+#: An assembler include statement in the preprocessed C text; its path may be split across
+#: adjacent string literals by the INCLUDE_ASM macro, so the path is joined by _inline_includes.
+INLINE_INCLUDE = re.compile(r"\.(?:include|incbin)\s+")
 CACHE_DIR = os.environ.get("BOF3_CC_CACHE_DIR") or os.path.expanduser(
     "~/.cache/bof3-cc"
 )
+
+
+def inline_includes(text: str) -> list[str]:
+    """Return the file names of the assembler includes in preprocessed C text.
+
+    A plain ``__asm__(".include \\"x.s\\"")`` reaches the preprocessed text as one string
+    literal; ``INCLUDE_ASM`` concatenates the assembly folder, the function name and ``.s``
+    into adjacent literals. Both spellings join back into one quoted path here.
+    """
+    names = []
+    for match in INLINE_INCLUDE.finditer(text):
+        i = match.end()
+        joined: list[str] = []
+        first = True
+        while i < len(text):
+            if not first:
+                while i < len(text) and text[i] in " \t\r\n":
+                    i += 1
+                if i >= len(text) or text[i] != '"':
+                    break
+                i += 1
+            first = False
+            closed = False
+            while i < len(text):
+                char = text[i]
+                if char == "\\" and i + 1 < len(text):
+                    joined.append(text[i + 1])
+                    i += 2
+                elif char == '"':
+                    i += 1
+                    closed = True
+                    break
+                else:
+                    joined.append(char)
+                    i += 1
+            value = "".join(joined)
+            if len(value) >= 2 and value[0] == '"' and '"' in value[1:]:
+                names.append(value[1 : value.index('"', 1)])
+                break
+            if not closed:
+                break
+    return names
 
 
 def parse(argv):
@@ -219,7 +262,7 @@ def cache_key(plan, gcc_args, env):
         *plan["as"],
     ]
     key = hashlib.sha1(text)
-    for name in sorted(set(INLINE_INCLUDE.findall(text.decode("utf-8", "replace")))):
+    for name in sorted(set(inline_includes(text.decode("utf-8", "replace")))):
         found = next(
             (f"{d}/{name}" for d in search if os.path.isfile(f"{d}/{name}")), None
         )

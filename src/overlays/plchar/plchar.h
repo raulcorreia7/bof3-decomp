@@ -104,6 +104,7 @@
     }
 
 void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
+void Char_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code);
 void Area_ClearCell(s32 x, s32 y);
 
 #define CHAR_PROBE_CELL_CODE(CALLEE)                                       \

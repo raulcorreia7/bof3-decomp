@@ -31,6 +31,22 @@ def test_a_changed_flag_or_header_changes_the_key(tmp_path: Path) -> None:
     assert key(tmp_path, "-O2") != first
 
 
+def test_the_split_assembly_of_include_asm_changes_the_key(tmp_path: Path) -> None:
+    asm = tmp_path / "asm" / "t"
+    asm.mkdir(parents=True)
+    (asm / "f.s").write_text(".section .text\nnop\n")
+    (tmp_path / "a.c").write_text(
+        '#define ASM_DIR "asm/t"\n'
+        '#define INCLUDE_ASM(name) __asm__(".section .text\\n.include \\"" ASM_DIR "/" #name ".s\\"\\n")\n'
+        "INCLUDE_ASM(f);\n"
+    )
+    flags = ("-O2", f"-Wa,-I{tmp_path}")
+    first = key(tmp_path, *flags)
+    assert first and key(tmp_path, *flags) == first
+    (asm / "f.s").write_text(".section .text\nnop\nnop\n")
+    assert key(tmp_path, *flags) != first
+
+
 def test_a_hit_copies_the_object_and_rewrites_the_depfile(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

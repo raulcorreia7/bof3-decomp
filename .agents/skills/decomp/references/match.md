@@ -18,8 +18,12 @@ whole match; [matching](../../../../docs/matching.md) is the full reference.
 2. **Read.** `git grep -l 'func_<ADDR>' -- src` finds the unit's `.c`; read its `INCLUDE_ASM`
    line, its neighbours and the prototypes in the image header. `tools/seed.py <TARGET>@<func>`
    writes `work/<image>/<ADDR>/` with the assembly (`asm.s`), the header context (`ctx.c`), the best
-   m2c draft, the nearest twins, and the callees and callers. `work/` is ignored: it is scratch, not
-   source.
+   m2c draft, the nearest twins, and the callees and callers. Read `hints.md` first: it names each
+   detected assembly fact and the `docs/matching.md#tactics-for-gcc-272` row it maps to. `work/` is
+   ignored: it is scratch, not source. An unknown address or offset: `tools/symbol.py at <target>
+   0x<ADDR>`, `tools/symbol.py member <Type> 0x<OFF>`, or `tools/symbol.py uses <Name>`
+   ([lookup](../../../../tools/README.md#lookup)). A bare number:
+   `tools/symbol.py value 0x<NN> --image <target>` names the enum member or macro that holds it.
 
 3. **Draft.** Write the body in `work/<image>/<ADDR>/`, then put it in the unit's `.c` to measure
    it. A draft is always under `NON_MATCHING`; without it the split assembly builds the function:

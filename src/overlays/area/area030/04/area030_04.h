@@ -494,7 +494,12 @@ extern FishingTarget*        g_FishingLureRow;
 /* D_801E3214 */
 extern u8                    g_FishingNewRecord;
 
-s32  func_800F7094(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
+/* func_800F7094 */
+s32  Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
+/* func_8014D6DC */
+void Actor_BeginScript(s32 raw_selector, s32 raw_code);
+/* func_801650B4 */
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 void func_801D0C90(void);
 void func_801D0CDC(void);
 void func_801D0DDC(void);
