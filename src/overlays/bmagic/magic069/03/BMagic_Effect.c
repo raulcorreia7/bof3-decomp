@@ -198,7 +198,43 @@ MATCH void func_801EF9C4(void) {
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
-INCLUDE_ASM(func_801EFA84);
+/* The effect's screen-cell quad: 48 wide, the timer tall, its texture page chosen by graph type. */
+MATCH void func_801EFA84(void) {
+    POLY_FT4* prim;
+    s32       tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0x25;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    prim->x0 = g_Task->unk_2E.half;
+    prim->y0 = g_Task->unk_30.half;
+    prim->x1 = g_Task->unk_2E.half + 48;
+    prim->y1 = g_Task->unk_30.half;
+    prim->x2 = g_Task->unk_2E.half;
+    prim->y2 = g_Task->unk_30.half + g_Task->timer;
+    prim->x3 = g_Task->unk_2E.half + 48;
+    prim->y3 = g_Task->unk_30.half + g_Task->timer;
+    setTPage(prim, 0, 0, 896, 256);
+    setClut(prim, 32, 506);
+    prim->u0 = 0;
+    prim->v0 = 32;
+    prim->u1 = 64;
+    prim->v1 = 32;
+    prim->u2 = 0;
+    prim->v2 = g_Task->timer + 32;
+    prim->u3 = 64;
+    prim->v3 = g_Task->timer + 32;
+    setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
+    GFX_AddPrim(2, sizeof(POLY_FT4));
+}
 
 INCLUDE_ASM(func_801EFC00);
 
