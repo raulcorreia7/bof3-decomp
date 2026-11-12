@@ -27,7 +27,7 @@ MATCH void func_801F390C(void) {
         case 3:
             if (g_GameStateIndex != 2) {
                 Game_ClearScriptActive();
-                SYS_SetFlag(state + 0x63C, 0x74);
+                SYS_SetFlag(state + 0x63C, 116);
                 g_SceneEventMode = 0;
                 *state           = 0;
             }

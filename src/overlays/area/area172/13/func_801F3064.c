@@ -9,7 +9,7 @@ MATCH void func_801F3064(void) {
     func_801F36C0(&g_Task->pos.x, (s16)screen_x, 7);
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
-    if (!(mode & 0xFF)) {
+    if (!(mode & BYTE_MASK)) {
         g_Task->timer = 64;
         g_Task->header.mode += 1;
     }

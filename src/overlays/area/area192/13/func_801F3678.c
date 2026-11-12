@@ -3,7 +3,7 @@
 MATCH void func_801F3678(void) {
     u8* flag;
 
-    if (SYS_TestFlag(g_SceneEventFlags, 0x77)) {
+    if (SYS_TestFlag(g_SceneEventFlags, 119)) {
         flag       = &g_SceneState.flags_01;
         D_80144F54 = 0x1E0;
         D_80146880 = 0;

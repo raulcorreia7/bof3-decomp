@@ -3,7 +3,7 @@
 MATCH void func_801F2CA8(void) {
     s32 result;
 
-    if (!(g_Task->timer & 7)) {
+    if (!(g_Task->timer & 0x7)) {
         result = func_801F2E88();
         if (result != 0) {
             func_801F3378(result);

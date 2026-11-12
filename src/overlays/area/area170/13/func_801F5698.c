@@ -7,6 +7,6 @@ MATCH s32 func_801F5698(void) {
     flags            = &g_SceneEventMode;
     *flags           = 0x25;
     g_SceneEventStep = 0x28;
-    SYS_ClearFlag(flags + 0x63D, 0x7EU);
+    SYS_ClearFlag(flags + 0x63D, 126U);
     return 1;
 }
