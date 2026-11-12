@@ -14,7 +14,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
     work  = (FishingState*)g_Task;
     speed = work->step_delta_18;
     if (speed != 0) {
-        switch (g_FishingRodRow->byte_01) {
+        switch (g_FishingRodRow->cast_sweep_direction_01) {
             case 0:
                 work->pos_x_0C = work->pos_x_0C + speed;
                 if ((s32)work->step_delta_18 > 0 && work->pos_x_0C >= 0xFF) {
@@ -61,8 +61,8 @@ MATCH void Fishing_CastGaugeSweep(void) {
                 break;
         }
     }
-    func_801E0C80(0, 2);
-    func_801E0DCC(0x10, 2, 135, 180);
+    Fishing_SetDrawMode(0, 2);
+    Fishing_DrawSprite(0x10, 2, 135, 180);
     Fishing_DrawGaugeFill(136, 203, ((FISHING_STATE->pos_x_0C * 96) / 255), 2);
     if (D_80145E92[0] == 3) {
         FISHING_STATE->origin_x_2E = 0xB8;

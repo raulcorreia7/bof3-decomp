@@ -122,12 +122,12 @@ def test_every_hand_file_needs_hand_asm_and_nothing_else_may_have_it() -> None:
 
 def test_attempt_notes_are_rejected() -> None:
     assert problems("/* blocker */\nINCLUDE_ASM(f);\n") == [
-        "comment above INCLUDE_ASM; record attempts in config/attempts.tsv"
+        "comment above INCLUDE_ASM; record attempts in config/attempts.jsonl"
     ]
     assert problems("/* First difference: register. */\nMATCH void f(void) {}\n") == [
-        "attempt note belongs in config/attempts.tsv"
+        "attempt note belongs in config/attempts.jsonl"
     ]
     assert problems("/* nonmatching unmeasured: draft. */\n") == [
-        "attempt note belongs in config/attempts.tsv"
+        "attempt note belongs in config/attempts.jsonl"
     ]
     assert problems('MATCH void f(void) { char *s = "First difference:"; }\n') == []

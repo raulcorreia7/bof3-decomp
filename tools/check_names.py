@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Fail when an invented identifier in include/ or src/ carries an 8-digit hex address.
 
 A name says what a thing is for the game, never where it lives. The default tool names are the
@@ -75,6 +76,9 @@ def baseline_entries() -> set[str]:
 
 
 def main(argv: list[str]) -> int:
+    if argv and argv[0] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
     now = tree_entries()
     if argv == ["--write"]:
         BASELINE.write_text(

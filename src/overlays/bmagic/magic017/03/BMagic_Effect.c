@@ -33,7 +33,16 @@ MATCH void func_801EF058(void) {
 
 INCLUDE_ASM(func_801EF11C);
 
-INCLUDE_ASM(func_801EF248);
+MATCH void func_801EF248(void) {
+    g_Task->pos.x.fixed += g_Task->unk_0C;
+    g_Task->pos.y.fixed += g_Task->unk_10;
+    g_Task->unk_5D -= 4;
+    g_Task->unk_5E -= 4;
+    g_Task->unk_5F -= 4;
+    if (--g_Task->unk_09 == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF300);
 

@@ -6,8 +6,8 @@ MATCH void func_801D7B64(void) {
     FishingState* record;
     u8*           buffer;
 
-    func_801E0C80(0, 1);
-    func_801E0DCC(0x12, 1, 240, 66);
+    Fishing_SetDrawMode(0, 1);
+    Fishing_DrawSprite(0x12, 1, 240, 66);
     UI_DrawAsciiString(284, 69, 0, D_801D0C10);
 
     buffer = g_UiFormatBuffer;

@@ -8,14 +8,6 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-typedef struct AreaSprite {
-    u8       unk_00[3];
-    u8       flags_03;  /* the shade of the sprite */
-    u16      half_size; /* the projected half-size */
-    u8       unk_06[2];
-    Point2DL origin;
-} AreaSprite;
-
 /* The row count this overlay clears. */
 #define SCRATCH_COLUMN_COUNT 32
 

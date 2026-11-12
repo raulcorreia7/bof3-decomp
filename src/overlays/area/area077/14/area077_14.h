@@ -48,12 +48,18 @@ extern u8  D_801F6B6C;
 extern u8  D_801F6B70;
 extern u8  D_801F6B74;
 
-void func_801F3778(s32 arg0, void* dst, RECT* rect);
-void func_801F3CB8(void);
-void func_801F41B4(void);
-void func_801F3B48(Point2D* pos, u8 shade);
-void func_801F30E8(s16 x0, s16 y0, s16 x1, s16 y1);
-void func_801F3BC4(s16 x, s16 y, s16 w, s16 h);
+void       func_801F3778(s32 arg0, void* dst, RECT* rect);
+/* The two sprite tables the step draws index by the timer's low two bits. */
+extern s32 D_801F62CC[];
+extern s32 D_801F62DC[];
+/* The spin-step draw reads six arguments from its two callers; the shared area.h cannot carry it
+ * because three other images give func_801F35E0 no arguments. */
+void       func_801F35E0(s32 arg0, s32 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5);
+void       func_801F3CB8(void);
+void       func_801F41B4(void);
+void       func_801F3B48(Point2D* pos, u8 shade);
+void       func_801F30E8(s16 x0, s16 y0, s16 x1, s16 y1);
+void       func_801F3BC4(s16 x, s16 y, s16 w, s16 h);
 
 void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y);
 

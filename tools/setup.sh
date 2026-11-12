@@ -67,8 +67,9 @@ modules="third_party/maspsx"
 [ -n "$matching" ] && modules="$modules third_party/decomp-permuter third_party/asm-differ third_party/m2c"
 need=
 for module in $modules; do
+	# A worktree copy has the files but no .git, so git reports it as uninitialized.
 	case $(git submodule status -- "$module") in
-	-*) need="$need $module" ;;
+	-*) [ -n "$(ls -A "$module" 2>/dev/null)" ] || need="$need $module" ;;
 	esac
 done
 if [ -n "$need" ]; then
