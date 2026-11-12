@@ -513,18 +513,18 @@ MATCH void func_801F9E00(void) {
 
     work              = g_Task;
     mode              = work->header.mode + 1;
-    work->pos.x.fixed = 0x198000;
-    work->pos.y.fixed = 0x198000;
-    work->pos.z.fixed = 0x4000000;
-    work->vx          = work->pos.x.fixed + 0x40000;
+    work->pos.x.fixed = TO_COORD(25) + COORD_HALF;
+    work->pos.y.fixed = TO_COORD(25) + COORD_HALF;
+    work->pos.z.fixed = TO_COORD(1024);
+    work->vx          = work->pos.x.fixed + TO_COORD(4);
     work->vy          = work->pos.y.fixed;
     work->vz          = work->pos.z.fixed;
     work->header.mode = mode;
 }
 
 MATCH void func_801F9E50(void) {
-    g_Task->pos.x.fixed -= 0x20000;
-    g_Task->vx -= 0x20000;
+    g_Task->pos.x.fixed -= TO_COORD(2);
+    g_Task->vx -= TO_COORD(2);
     func_801FA19C(&g_Task->pos, &g_Task->vx);
     if (g_Task->pos.x.fixed == 0x98000) {
         g_Task->header.mode += 1;
