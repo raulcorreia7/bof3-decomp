@@ -20,6 +20,9 @@ typedef struct Magic001SecondSteps {
 extern Magic001Steps       D_801EEC10;
 extern Magic001SecondSteps D_801EEC3C;
 
+/* func_801F0238 */
+extern SVECTOR D_1F800014[];
+
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->param.unk_0B == 0) {
         func_800AFC54();

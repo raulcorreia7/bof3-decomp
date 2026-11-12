@@ -257,4 +257,39 @@ MATCH void func_801F00A8(void) {
 
 INCLUDE_ASM(func_801F014C);
 
-INCLUDE_ASM(func_801F0238);
+/* The disc scratch: the rim radius and the centre shade, ahead of the triangle corners (D_1F800014). */
+#define DISC_RADIUS D_1F800000.view.effect.params[0]
+#define DISC_SHADE  D_1F800000.view.effect.params[1]
+
+/* A disc of 16 semi-transparent triangles whose rim and centre shade grow by eight a frame, then the
+ * draw mode back to plain blending. */
+MATCH void func_801F0238(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+
+    GFX_AddDitheredDrawMode(5, getTPage(0, 2, 320, 256));
+    DISC_SHADE       = g_Task->timer * 8;
+    DISC_RADIUS      = g_Task->timer * 8;
+    D_1F800014[2].vx = FIXED_MUL(rsin(0), DISC_RADIUS);
+    D_1F800014[2].vy = FIXED_MUL(rcos(0), DISC_RADIUS);
+    for (i = 1; i <= 16; i++) {
+        prim             = GFX_BeginPolyG3(1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), DISC_RADIUS);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), DISC_RADIUS);
+        D_1F800014[2].vz = 0;
+        D_1F800014[1].vz = 0;
+        D_1F800014[0].vz = 0;
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, DISC_SHADE, DISC_SHADE, DISC_SHADE);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+    GFX_AddDitheredDrawMode(5, getTPage(0, 0, 320, 256));
+}
