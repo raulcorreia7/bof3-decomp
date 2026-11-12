@@ -523,26 +523,20 @@ MATCH void func_801F8EF0(void) {
     GFX_AddPrim(1, sizeof(TILE));
 }
 
-MATCH void func_801F8FAC(s32 x, s32 y, s32 color, s32 semi_trans) {
+MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
     s32   tpage;
     SPRT* sprite;
 
     if (g_AreaDrawFlags == 0) {
         return;
     }
-    if (GetGraphType() == 1) {
-        tpage = 0x2AD;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x2AD;
-    } else {
-        tpage = 0xBD;
-    }
+    tpage = getTPage(1, 1, 832, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
-    SetSemiTrans(sprite, (u8)semi_trans);
-    setWH(sprite, 0x40, 0x20);
+    SetSemiTrans(sprite, semi_trans);
+    setWH(sprite, 64, 32);
     setXY0(sprite, x, y);
     setUV0(sprite, 0, 0);
     sprite->clut = getClut(0, 493);

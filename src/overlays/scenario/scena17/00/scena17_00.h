@@ -20,7 +20,7 @@ extern Callback D_801F9748[];
 void            func_801F88CC(s32 arg0, s32 arg1);
 void            func_801F8B10(s32 arg0, s32 arg1);
 void            func_801F8EF0(void);
-void            func_801F8FAC(s32 x, s32 y, s32 color, s32 semi_trans);
+void            func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans);
 u8              func_801F938C(void);
 /* func_801F9490 */
 void            Scene_RunSaveMenu(void);
