@@ -13,7 +13,8 @@ typedef struct Magic060Steps {
 
 extern Magic060Steps D_801EEC04;
 
-/* Twelve-glyph text rows the reward drawer stamps: WEAK, EXP, ITEM, POINT, GET and a bar. */
+/* The text rows func_801EF174 stamps beside the character name: WEAK, EXP, a single 0x60 glyph, ITEM,
+ * POINT and a bar. D_801F0B8C is the twelve-glyph bar four bytes into D_801F0B88, the one-glyph bar. */
 extern u8 D_801F0B64[];
 extern u8 D_801F0B6C[];
 extern u8 D_801F0B70[];
