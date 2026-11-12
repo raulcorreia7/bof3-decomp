@@ -5,7 +5,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8188(void) {
-    u8 id;
+    u8  id;
+    u8* char_slots;
 
     switch (g_SceneState.step_05) {
         case 0:
@@ -147,9 +148,9 @@ MATCH void func_801F8188(void) {
             g_SceneState.step_05 = 0xF;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             /* FAKE: retail reads g_CharSlot as u8[]. */
-            g_Characters[((u8*)g_CharSlot)[6]].unk_07 |= 1;
-            /* FAKE: retail reads g_CharSlot as u8[]. */
-            g_Characters[((u8*)g_CharSlot)[2]].unk_07 |= 1;
+            char_slots = (u8*)g_CharSlot;
+            g_Characters[char_slots[6]].unk_07 |= 1;
+            g_Characters[char_slots[2]].unk_07 |= 1;
             func_8019FA28(0x2D, 0x220000, 0x2A0000, 3);
             break;
         case 15:
