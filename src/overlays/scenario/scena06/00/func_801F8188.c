@@ -11,7 +11,7 @@ MATCH void func_801F8188(void) {
     switch (g_SceneState.step_05) {
         case 0:
             g_SceneState.step_05 = 1;
-            func_8019FA28(0x2F, 0x718000, 0x90000, 0x80);
+            Game_RequestAreaChange(0x2F, 0x718000, 0x90000, 0x80);
             g_GamePrevSelection = 0xFF;
             break;
         case 1:
@@ -100,7 +100,7 @@ MATCH void func_801F8188(void) {
             g_SceneState.step_05 = 0xB;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             SYS_SetFlag(g_SceneFlags, 0xA);
-            func_8019FA28(0x35, 0x230000, 0x290000, 0x80);
+            Game_RequestAreaChange(0x35, 0x230000, 0x290000, 0x80);
             break;
         case 11:
             func_801C601C(0);
@@ -151,7 +151,7 @@ MATCH void func_801F8188(void) {
             char_slots = (u8*)g_CharSlot;
             g_Characters[char_slots[6]].unk_07 |= 1;
             g_Characters[char_slots[2]].unk_07 |= 1;
-            func_8019FA28(0x2D, 0x220000, 0x2A0000, 3);
+            Game_RequestAreaChange(0x2D, 0x220000, 0x2A0000, 3);
             break;
         case 15:
             func_801C16B8();

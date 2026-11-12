@@ -51,7 +51,7 @@ MATCH void func_801F8B50(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 7;
                 SYS_SetFlag(g_SceneFlags, 0xD);
-                func_8019FA28(0x5E, 0x330000, 0x210000, 0x81);
+                Game_RequestAreaChange(0x5E, 0x330000, 0x210000, 0x81);
             }
             break;
         case 7:

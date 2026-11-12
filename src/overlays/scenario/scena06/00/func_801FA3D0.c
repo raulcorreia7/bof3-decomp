@@ -27,7 +27,7 @@ MATCH void func_801FA3D0(void) {
             SYS_SetFlag(g_SceneFlags, 0x1D);
             g_ScriptVars[2] = 4;
             g_SceneState.flags_01 |= 1;
-            func_8019FA28(0x5C, 0x180000, 0x3D0000, 0x89);
+            Game_RequestAreaChange(0x5C, 0x180000, 0x3D0000, 0x89);
             g_GamePrevSelection = 0x3C;
             break;
         case 5:
@@ -41,7 +41,7 @@ MATCH void func_801FA3D0(void) {
             func_801BE1B0(0xE);
             g_SceneState.step_05 = 0xA;
             SYS_SetFlag(g_SceneFlags, 0x1F);
-            func_8019FA28(0x5C, 0x180000, 0x3C0000, 0x8A);
+            Game_RequestAreaChange(0x5C, 0x180000, 0x3C0000, 0x8A);
             g_GamePrevSelection = 0xFF;
             break;
         case 10:
@@ -52,7 +52,7 @@ MATCH void func_801FA3D0(void) {
             g_ScriptVars[2]      = 2;
             g_SceneState.step_05 = 6;
             g_SceneState.flags_01 ^= 1;
-            func_8019FA28(0x57, 0x310000, 0x2D0000, 4);
+            Game_RequestAreaChange(0x57, 0x310000, 0x2D0000, 4);
             break;
         case 15:
             func_801BE1B0(0xB);
@@ -82,7 +82,7 @@ MATCH void func_801FA3D0(void) {
                 g_SceneState.step_05 = 6;
                 SYS_ClearFlag(g_SceneFlags, 0x1D);
                 g_SceneState.flags_01 ^= 1;
-                func_8019FA28(0x57, 0x310000, 0x2D0000, 4);
+                Game_RequestAreaChange(0x57, 0x310000, 0x2D0000, 4);
             }
             break;
         case 20:
@@ -113,7 +113,7 @@ MATCH void func_801FA3D0(void) {
                 g_SceneState.step_05 = 6;
                 SYS_ClearFlag(g_SceneFlags, 0x1D);
                 g_SceneState.flags_01 ^= 1;
-                func_8019FA28(0x57, 0x310000, 0x2D0000, 4);
+                Game_RequestAreaChange(0x57, 0x310000, 0x2D0000, 4);
             }
             break;
     }
