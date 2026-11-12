@@ -10,7 +10,6 @@
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 #define g_CurrentActor ((u8*)g_CurrentActor)
 
-/* The party position in 16.16 fixed point. */
 /* One three-byte colour row per actor row: D_801F442C holds the red byte of
  * each row, D_801F442D the green and D_801F442E the blue. */
 extern u8 D_801F442C[];
