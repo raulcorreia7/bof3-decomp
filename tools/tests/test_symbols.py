@@ -29,8 +29,7 @@ def test_rows_load_sorted_with_attributes(tmp_path: Path) -> None:
     rows = symbols.target_rows(root, "exe/a")
     assert [(r.name, r.address) for r in rows] == [("A", 0x10), ("B", 0x20)]
     assert rows[1].comment == "type:func size:0x8"
-    entries = symbols.target_entries(root, "exe/a")
-    assert [(e.name, e.addr, e.type, e.size) for e in entries] == [
+    assert [(r.name, r.addr, r.type, r.size) for r in rows] == [
         ("A", 0x10, "", 0),
         ("B", 0x20, "func", 8),
     ]

@@ -60,7 +60,7 @@ def read_rows(root: Path, manifest: TargetManifest) -> list[symbols.Entry]:
     return [
         row
         for owner in symbols.splat_owners(root, target)
-        for row in symbols.target_entries(root, owner)
+        for row in symbols.target_rows(root, owner)
         if not row.alias
     ]
 
