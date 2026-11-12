@@ -6,6 +6,7 @@
  * the file. */
 
 #include "overlays/area/world00.h"
+#include "area/fishing.h"
 #include "area/spad.h"
 #include "game/item.h"
 #include <stdio.h>
@@ -118,27 +119,6 @@ typedef struct FishingCueStep {
 
 ASSERT_SIZE(FishingCueStep, 0x08);
 
-/* One 10-byte character record row inside the PanelIcon table; g_FishingRodRow is
- * stepped to the selected row by Fishing_SelectGear. Bytes 0x04 through 0x07 are
- * read as signed (Fishing_HookedReel). */
-typedef struct FishingCharRow {
-    u8 byte_00;   /* 0x00 */
-    u8 byte_01;   /* 0x01 */
-    u8 byte_02;   /* 0x02 */
-    u8 byte_03;   /* 0x03 */
-    s8 sbyte_04;  /* 0x04 */
-    s8 sbyte_05;  /* 0x05 */
-    s8 sbyte_06;  /* 0x06 */
-    s8 sbyte_07;  /* 0x07 */
-    u8 pad_08[2]; /* 0x08 */
-} FishingCharRow;
-
-ASSERT_SIZE(FishingCharRow, 0x0A);
-ASSERT_OFFSET(FishingCharRow, sbyte_04, 0x04);
-ASSERT_OFFSET(FishingCharRow, sbyte_05, 0x05);
-ASSERT_OFFSET(FishingCharRow, sbyte_06, 0x06);
-ASSERT_OFFSET(FishingCharRow, sbyte_07, 0x07);
-
 /* The item pointer at 0x50 and the message text pointer at 0x54 are stored as
  * words and dereferenced as bytes. */
 typedef union FishingItemPointer {
@@ -241,7 +221,7 @@ typedef struct FishingSelectionState {
 } FishingSelectionState;
 
 /* One 0x10-byte panel icon row from D_801E2424: the CLUT x and y (unk_00 and
- * unk_04), the quad size and the U/V origin func_801E0DCC copies into a sprite. */
+ * unk_04), the quad size and the U/V origin Fishing_DrawSprite copies into a sprite. */
 typedef struct PanelIcon {
     s32 unk_00;
     s32 unk_04;
@@ -284,7 +264,7 @@ ASSERT_OFFSET(FishingTarget, pad_12, 0x12);
 
 /* One 0xA-byte panel texture cell: the U/V origin, the quad width, the extra V
  * span and the texture page word. The D_801E218C..D_801E2194 tables are
- * indexed by the panel style and read by func_801D799C. */
+ * indexed by the panel style and read by Fishing_DrawWindowFill. */
 typedef struct PanelTexture {
     u16 u;
     u16 v;
@@ -505,8 +485,9 @@ extern u8                    D_801E3200;
 extern u8                    g_FishingFullNoticeShown;
 /* D_801E3208 */
 extern u8                    g_FishingHookedFish;
+/* The equipped rod's row. */
 /* D_801E320C */
-extern FishingCharRow*       g_FishingRodRow;
+extern FishingRod*           g_FishingRodRow;
 /* D_801E3210 */
 extern FishingTarget*        g_FishingLureRow;
 /* D_801E3214 */
@@ -514,10 +495,6 @@ extern u8                    g_FishingNewRecord;
 
 /* func_800F7094 */
 s32  Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
-/* func_8014D6DC */
-void Actor_BeginScript(s32 raw_selector, s32 raw_code);
-/* func_801650B4 */
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 void func_801D0C90(void);
 void func_801D0CDC(void);
 void func_801D0DDC(void);
@@ -628,7 +605,8 @@ void func_801D6F08(void);
 void func_801D6F34(void);
 void func_801D72E4(s16 panel_x, s16 panel_y);
 void func_801D7784(u16 list_x, u16 list_y);
-void func_801D799C(s16 x, s16 y, u8 height, u8 style);
+/* func_801D799C */
+void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style);
 void func_801D7B64(void);
 void func_801D7C10(s32 x, s32 y, s32 flags);
 void func_801D7D68(s16 x, s16 y, u8 column_mode);
@@ -639,27 +617,40 @@ void func_801D88E0(s16 x, s16 y);
 void func_801D8D70(u16 x, u16 y);
 void func_801D90FC(s32 x, s16 y);
 void func_801D934C(s32 x, s32 y, s32 width, s32 height);
-s32  func_801D9534(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
+/* func_801D9534 */
+s32  Fishing_DrawWindowFrame(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
 void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade);
 void func_801D9740(s32 arg0, u8* arg1, s32 arg2, s32 arg3);
 /* func_801D9B58 */
 void Fishing_EntryRun(void);
-void func_801D9B9C(void);
-void func_801D9C4C(void);
-void func_801D9C9C(void);
+/* func_801D9B9C */
+void Fishing_EntryBegin(void);
+/* func_801D9C4C */
+void Fishing_EntryWait(void);
+/* func_801D9C9C */
+void Fishing_EntryDone(void);
 /* func_801D9CF4 */
 void Fishing_ReadyRun(void);
-void func_801D9D38(void);
-void func_801D9E08(void);
+/* func_801D9D38 */
+void Fishing_ReadyBegin(void);
+/* func_801D9E08 */
+void Fishing_ReadyWait(void);
 /* func_801D9E40 */
 void Fishing_ChooseAction(void);
-void func_801D9FE8(void);
-void func_801DA058(void);
-void func_801DA168(void);
-void func_801DA2A0(void);
-void func_801DA3F4(void);
-void func_801DA498(void);
-void func_801DA508(void);
+/* func_801D9FE8 */
+void Fishing_ReadyPrompt(void);
+/* func_801DA058 */
+void Fishing_QuitSlideIn(void);
+/* func_801DA168 */
+void Fishing_QuitInput(void);
+/* func_801DA2A0 */
+void Fishing_QuitSlideOut(void);
+/* func_801DA3F4 */
+void Fishing_CautionSlideIn(void);
+/* func_801DA498 */
+void Fishing_CautionInput(void);
+/* func_801DA508 */
+void Fishing_CautionSlideOut(void);
 /* func_801DA5B4 */
 void Fishing_CastRun(void);
 void func_801DA5F8(void);
@@ -765,15 +756,20 @@ void func_801E0A30(void);
 s32  Fishing_CatchScore(u8 row_index, u16 value);
 /* func_801E0B6C */
 s32  Fishing_TotalScore(void);
-void func_801E0ED0(s16 panel_x, s16 panel_y);
-void func_801E0F4C(s16 sprite_x, s16 sprite_y, u8 icon_index);
+/* func_801E0ED0 */
+void Fishing_DrawCatchBar(s16 panel_x, s16 panel_y);
+/* func_801E0F4C */
+void Fishing_DrawCatchIcon(s16 sprite_x, s16 sprite_y, u8 icon_index);
 void func_801E1004(s32 item, s32 count, s32 column);
 /* func_801E1320 */
 void Fishing_DrawRank(s16 x, s16 y);
 void Fishing_DrawIconRow(s16 cell_x, s16 cell_y, u16 icon_index);
-void func_801E16DC(void);
-void func_801E1758(s32 x, s32 y);
-void func_801E19CC(s32 x, s32 y);
+/* func_801E16DC */
+void Fishing_DrawDimScreen(void);
+/* func_801E1758 */
+void Fishing_DrawPromptBox(s32 x, s32 y);
+/* func_801E19CC */
+void Fishing_DrawCautionBox(s32 x, s32 y);
 /* func_801E1C10 */
 bool Fishing_FishStacksFull(void);
 void func_801E1C7C(void);
@@ -797,7 +793,7 @@ static inline void FishingDrawCue(u8 accessoryCue) {
     FishingState* record;
     s32           mask;
 
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3u) {
         record = FISHING_STATE;

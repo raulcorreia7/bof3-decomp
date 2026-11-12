@@ -547,7 +547,6 @@ void func_80117004(void);
 void func_80117610(void);
 void func_80117A30(void);
 void func_80117BF4(void);
-void Actor_BeginScript(u8 raw_selector, u8 raw_code);
 void Area_ClearCell(s32 x, s32 y);
 void func_8015A7E8(void);
 s32  func_8015AC8C(s32);
@@ -557,9 +556,7 @@ s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta,
 s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 void func_8015D820(u16 cue_id, u8 index);
 void func_80164020(u32 arg0, u32 arg1);
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);
-u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void Party_ResetBattlers(void);
 void Party_ClearActiveBattlers(void);
 void func_80167910(void);
@@ -1080,8 +1077,6 @@ void  func_801C0D34(void);
 void  func_801C0D54(void);
 s32   func_801C0E48(void);
 s32   func_801C0F9C(u8 source_row);
-/* func_801C1254 */
-void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 void  func_801C16B8(void);
 void  func_801C1840(void);
 void  func_801C1E88(s32 key, s32* counter);
@@ -1213,7 +1208,8 @@ void  func_801D1B10(void);
 void  func_801D20C8(void);
 void  func_801D2170(void);
 s32   func_801D25D8();
-void  func_801D2978(void);
+/* func_801D2978 */
+void  Fishing_ActorRun(void);
 void  func_801D2BF0(void);
 void  func_801D2DEC(void);
 void  func_801D3358(void);

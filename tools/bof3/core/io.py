@@ -10,41 +10,17 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, TypeGuard
 
-from bof3.core.paths import BUILD, INPUTS, TOOLCHAINS
-
-# Repo-relative top-level directories.
-
 
 @dataclass(frozen=True)
 class RepoLayout:
-    """One resolved path per repository top-level directory."""
+    """The resolved repository root."""
 
     root: Path
-    build_dir: Path
-    toolchains_dir: Path
-    inputs_dir: Path
-    downloads_dir: Path
-    private_assets_dir: Path
-    psn00b_toolchain_root: Path
-    gcc272_psx_root: Path
 
 
 def repo_layout(root: Path | None = None) -> RepoLayout:
-    """Return the repository layout derived from ``root``."""
-    resolved = (root or Path(__file__).resolve().parents[3]).resolve()
-    build = resolved / BUILD
-    toolchains = resolved / TOOLCHAINS
-    inputs = resolved / INPUTS
-    return RepoLayout(
-        root=resolved,
-        build_dir=build,
-        toolchains_dir=toolchains,
-        inputs_dir=inputs,
-        downloads_dir=toolchains / "downloads",
-        private_assets_dir=inputs / "external" / "private-assets",
-        psn00b_toolchain_root=toolchains / "psn00b_toolchain",
-        gcc272_psx_root=toolchains / "gcc-2.7.2-psx",
-    )
+    """Return the repository root."""
+    return RepoLayout((root or Path(__file__).resolve().parents[3]).resolve())
 
 
 def read_json(path: Path) -> dict[str, Any]:

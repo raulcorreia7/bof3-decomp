@@ -42,6 +42,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import json
 import re
 import subprocess
 from collections.abc import Iterable, Iterator
@@ -425,18 +426,30 @@ def write_markdown(source: Path, target: Path, rows: dict[str, dict[str, int]]) 
     return new != text
 
 
+def ranked(
+    rows: dict[str, dict[str, int]], limit: int
+) -> list[tuple[str, dict[str, int]]]:
+    """Return the scored rows worst first."""
+    ordered = sorted(rows.items(), key=lambda kv: (-score(kv[1]), kv[0]))
+    return [(key, row) for key, row in ordered[:limit] if score(row)]
+
+
+def queue_rows(rows: dict[str, dict[str, int]], limit: int) -> list[dict]:
+    """Return the queue rows as objects keyed like the table columns."""
+    return [
+        {"file": key, "score": score(row), **{c: row[c] for c in ("funcs", *METRICS)}}
+        for key, row in ranked(rows, limit)
+    ]
+
+
 def table(rows: dict[str, dict[str, int]], limit: int, label: str) -> str:
     """Return the rows worst first as aligned text."""
     cols = ("funcs", *METRICS)
     out = [f"{'score':>6} " + " ".join(f"{c:>7}" for c in cols) + f"  {label}"]
-    ranked = sorted(rows.items(), key=lambda kv: (-score(kv[1]), kv[0]))
-    for key, row in ranked[:limit]:
-        if score(row):
-            out.append(
-                f"{score(row):>6} "
-                + " ".join(f"{row[c]:>7}" for c in cols)
-                + f"  {key}"
-            )
+    for key, row in ranked(rows, limit):
+        out.append(
+            f"{score(row):>6} " + " ".join(f"{row[c]:>7}" for c in cols) + f"  {key}"
+        )
     return "\n".join(out)
 
 
@@ -450,6 +463,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--to", default="HEAD", help="revision to gate, or WORK (HEAD)")
     parser.add_argument("--queue", action="store_true", help="list files worst first")
+    parser.add_argument(
+        "--jsonl", action="store_true", help="with --queue: one JSON object per line"
+    )
     parser.add_argument(
         "--markdown",
         action="store_true",
@@ -500,7 +516,11 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
     if args.queue:
-        print(table(rows, args.n, "file"))
+        if args.jsonl:
+            for row in queue_rows(rows, args.n):
+                print(json.dumps(row, ensure_ascii=False))
+        else:
+            print(table(rows, args.n, "file"))
         return 0
     print(table(by_image(rows), 10**6, "directory"))
     total = totals(rows)

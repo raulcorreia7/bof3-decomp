@@ -2,7 +2,8 @@
 
 /* Builds the texture-page word for the selected AREA030 graphic and
  * appends its draw-mode primitive to the current ordering-table stream. */
-MATCH void func_801E0C80(s32 graphic, s32 layer) {
+/* func_801E0C80 */
+MATCH void Fishing_SetDrawMode(s32 graphic, s32 layer) {
     s32 tpage;
 
     tpage = getTPage(D_801E2384[(graphic & BYTE_MASK) << 2], D_801E2388[(graphic & BYTE_MASK) << 2], D_801E238C[(graphic & BYTE_MASK) << 2], D_801E2390[(graphic & BYTE_MASK) << 2]);

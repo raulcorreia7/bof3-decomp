@@ -38,7 +38,7 @@ MATCH void Fishing_ShopRun(void) {
 /* func_800F5048 */
 MATCH void Fishing_ShopOpen(void) {
     D_800F71F0[3 + s_Step]();
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     Fishing_ShopDrawTradeList(0);
     Fishing_ShopDrawNeeded();
     Fishing_ShopDrawBackdrop();
@@ -116,7 +116,7 @@ MATCH void Fishing_ShopChooseItem(void) {
         D_800F724C += 1;
     }
 tail:
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     if (((s8)s_ListCursor & 0xC0) == 0) {
         WinDrawCueText(0x18, 0x14, Item_GetDescription(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00) & 0xFFFF);
     }
@@ -182,7 +182,7 @@ MATCH void Fishing_ShopChooseQuantity(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         s_Step = s_Step - 1;
     }
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_QUANTITY_PROMPT));
     Fishing_ShopDrawTradeList(1);
     Fishing_ShopDrawQuantity();
@@ -216,7 +216,7 @@ MATCH void Fishing_ShopConfirm(void) {
         }
     }
 
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 
     if (s_Step == 2) {
         src = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][s_ListCursor & 0xF] * 8], D_801E2F7C[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]].cost_00);
@@ -237,7 +237,7 @@ MATCH void Fishing_ShopConfirm(void) {
 
 /* func_800F5AD8 */
 MATCH void Fishing_ShopTooGreedy(void) {
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     if ((g_InputPressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) != 0) {
         s_ListItemId = 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
@@ -292,7 +292,7 @@ MATCH void Fishing_ShopConfirmAllInput(void) {
             }
         }
     }
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ALL));
     Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
     Fishing_ShopDrawTradeList(0);
@@ -306,7 +306,7 @@ MATCH void Fishing_ShopExit(void) {
         g_GameEntrySubstate = 1;
         return;
     }
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ALL));
     Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
     Fishing_ShopDrawTradeList(0);
@@ -402,32 +402,32 @@ MATCH void Fishing_ShopDrawListWindow(u16 x, u16 y, u8 color) {
     s16 y2;
 
     UI_DrawWindow(x, (y + 1), 0x8C, 0xA0, (color | 0x80), g_WindowStyle);
-    func_801E0C80(9, 1);
-    func_801E0DCC(0x25, 1, x, y);
+    Fishing_SetDrawMode(9, 1);
+    Fishing_DrawSprite(0x25, 1, x, y);
 
     for (i = 0; i < 10; i++) {
         offset = i * 8 + 0x20;
-        func_801E0DCC(0x26, 1, (x + offset), y);
+        Fishing_DrawSprite(0x26, 1, (x + offset), y);
     }
 
-    func_801E0DCC(0x27, 1, (x + 0x70), y);
+    Fishing_DrawSprite(0x27, 1, (x + 0x70), y);
 
     x2 = x + 0x88;
-    func_801E0DCC(0x28, 1, x2, y);
+    Fishing_DrawSprite(0x28, 1, x2, y);
 
     y2 = y + 0x18;
-    func_801D799C(x, y2, 0x84, 0);
-    func_801D799C(x2, y2, 0x84, 1);
+    Fishing_DrawWindowFill(x, y2, 0x84, 0);
+    Fishing_DrawWindowFill(x2, y2, 0x84, 1);
 
     y2 = y + 0x9C;
-    func_801E0DCC(0x30, 1, x, y2);
+    Fishing_DrawSprite(0x30, 1, x, y2);
 
     for (i = 0; i < 16; i++) {
         offset = i * 8 + 0x8;
-        func_801E0DCC(0x31, 1, (x + offset), y2);
+        Fishing_DrawSprite(0x31, 1, (x + offset), y2);
     }
 
-    func_801E0DCC(0x32, 1, (x + 0x88), (y + 0x9C));
+    Fishing_DrawSprite(0x32, 1, (x + 0x88), (y + 0x9C));
 }
 
 /* func_800F65A8 */
@@ -506,35 +506,35 @@ MATCH void Fishing_ShopDrawNeededWindow(u16 x, u16 y) {
 
     UI_DrawWindow(x, (y + 1), 0x84, 0x42, 0x80, g_WindowStyle);
 
-    func_801E0C80(9, 1);
-    func_801E0DCC(0x25, 1, x, y);
+    Fishing_SetDrawMode(9, 1);
+    Fishing_DrawSprite(0x25, 1, x, y);
 
     for (i = 0; i < 9; i++) {
         offset = i * 8 + 0x20;
-        func_801E0DCC(0x26, 1, (x + offset), y);
+        Fishing_DrawSprite(0x26, 1, (x + offset), y);
     }
 
-    func_801E0DCC(0x27, 1, (x + 0x68), y);
+    Fishing_DrawSprite(0x27, 1, (x + 0x68), y);
 
     x2 = x + 0x80;
-    func_801E0DCC(0x28, 1, x2, y);
+    Fishing_DrawSprite(0x28, 1, x2, y);
 
     y2 = y + 0x18;
-    func_801D799C(x, y2, 0x28, 0);
-    func_801D799C(x2, y2, 0x28, 1);
+    Fishing_DrawWindowFill(x, y2, 0x28, 0);
+    Fishing_DrawWindowFill(x2, y2, 0x28, 1);
 
     y2 = y + 0x40;
-    func_801E0DCC(0x30, 1, x, y2);
+    Fishing_DrawSprite(0x30, 1, x, y2);
 
     i      = 0;
     offset = 8;
     do {
-        func_801E0DCC(0x31, 1, (x + offset), y2);
+        Fishing_DrawSprite(0x31, 1, (x + offset), y2);
         i += 1;
         offset += 8;
     } while (i < 15);
 
-    func_801E0DCC(0x32, 1, (x + 0x80), (y + 0x40));
+    Fishing_DrawSprite(0x32, 1, (x + 0x80), (y + 0x40));
 }
 
 /* func_800F6C5C */
@@ -576,28 +576,28 @@ MATCH void Fishing_ShopDrawQuantityWindow(u16 x, u16 y) {
     s16 y2;
 
     UI_DrawWindow(x, y, 0x88, 0x36, 0x80, g_WindowStyle);
-    func_801E0C80(8, 1);
-    func_801E0DCC(0x33, 1, x, y);
+    Fishing_SetDrawMode(8, 1);
+    Fishing_DrawSprite(0x33, 1, x, y);
 
     for (i = 0; i < 16; i++) {
         offset = i * 8 + 0x8;
-        func_801E0DCC(0x34, 1, (x + offset), y);
+        Fishing_DrawSprite(0x34, 1, (x + offset), y);
     }
 
-    func_801E0DCC(0x35, 1, (x + 0x84), y);
+    Fishing_DrawSprite(0x35, 1, (x + 0x84), y);
 
     y2 = y + 0x8;
-    func_801D799C(x, y2, 0x2C, 2);
-    func_801D799C((x + 0x84), y2, 0x2C, 3);
+    Fishing_DrawWindowFill(x, y2, 0x2C, 2);
+    Fishing_DrawWindowFill((x + 0x84), y2, 0x2C, 3);
 
-    func_801E0DCC(0x36, 1, x, (y + 0x34));
+    Fishing_DrawSprite(0x36, 1, x, (y + 0x34));
 
     for (i = 0; i < 16; i++) {
         offset = i * 8 + 0x8;
-        func_801E0DCC(0x37, 1, (x + offset), (y + 0x34));
+        Fishing_DrawSprite(0x37, 1, (x + offset), (y + 0x34));
     }
 
-    func_801E0DCC(0x38, 1, (x + 0x84), (y + 0x34));
+    Fishing_DrawSprite(0x38, 1, (x + 0x84), (y + 0x34));
 }
 
 /* func_800F7094 */

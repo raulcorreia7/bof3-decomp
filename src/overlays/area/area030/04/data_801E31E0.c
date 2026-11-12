@@ -28,7 +28,7 @@ u8 g_FishingFullNoticeShown __attribute__((aligned(4))) = 0;
 u8 g_FishingHookedFish __attribute__((aligned(4))) = 0;
 
 /* 0x801E320C */
-FishingCharRow *g_FishingRodRow = 0;
+FishingRod *g_FishingRodRow = 0;
 
 /* 0x801E3210 */
 FishingTarget *g_FishingLureRow = 0;

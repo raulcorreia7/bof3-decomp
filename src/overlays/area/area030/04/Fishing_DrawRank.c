@@ -13,9 +13,9 @@ MATCH void Fishing_DrawRank(s16 x, s16 y) {
     icons      = g_FishingRankIcons;
     thresholds = D_801D0C70;
 
-    func_801E0C80(3, 1);
-    func_801E0DCC(6, 1, x, y);
-    func_801E0DCC(7, 1, (x + 88), y);
+    Fishing_SetDrawMode(3, 1);
+    Fishing_DrawSprite(6, 1, x, y);
+    Fishing_DrawSprite(7, 1, (x + 88), y);
 
     value = Fishing_TotalScore();
     index = 0;
@@ -28,11 +28,11 @@ MATCH void Fishing_DrawRank(s16 x, s16 y) {
 
     record        = &icons.records[index];
     D_801454EC[0] = index;
-    func_801E0DCC(record->icon, 1, (x + 29), (y + 29));
+    Fishing_DrawSprite(record->icon, 1, (x + 29), (y + 29));
     if (record->first != 0) {
-        func_801E0DCC(0x48, 1, (record->offset + 29 + x), (y + 33));
+        Fishing_DrawSprite(0x48, 1, (record->offset + 29 + x), (y + 33));
         if (record->second != 0) {
-            func_801E0DCC(0x48, 1, (record->offset + x + 36), (y + 33));
+            Fishing_DrawSprite(0x48, 1, (record->offset + x + 36), (y + 33));
         }
     }
 
