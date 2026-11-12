@@ -1305,7 +1305,10 @@ g_BMagicEffectModes = { addr = 0x801F08DC, source = "Handlers of magic124 (Thund
 
 ["emi/bmagic/magic125/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnZeroTick = { addr = 0x801EEE60, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic125 (DivineBreath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEEC0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic125." }
 Effect_SetActorMatrix = { addr = 0x801EF1A8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic125 (DivineBreath)." }

@@ -24,7 +24,30 @@ MATCH void func_801EEC04(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED04);
+MATCH void func_801EED04(void) {
+    u8 slot;
+    u8 i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    Battle_CenterCamera();
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 92);
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].arg.unk_09   = 1;
+    g_Task->param.unk_0B += 1;
+    slot                               = Battle_AllocEffect(1, 92);
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].arg.unk_09   = 9;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(0x100);
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
