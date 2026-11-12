@@ -8,7 +8,7 @@ MATCH void func_801F38F4(void) {
     g_AreaScrollTargetY           = TO_COORD(36);
     func_80153DE8();
     COORD_INT(((Actor*)g_Task)->pos.z) = 0x1220;
-    Area_AdvanceScroll(0x1220);
+    Area_AdvanceScroll(4640);
     g_AreaCameraAngle.vx = -0x48A;
     D_801492DC           = 0xF8;
 }

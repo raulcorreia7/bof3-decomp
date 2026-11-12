@@ -36,10 +36,16 @@ def test_graph_inputs_list_config_files_and_extra_sources(
 ) -> None:
     (tmp_path / CONFIG / "t").mkdir(parents=True)
     (tmp_path / CONFIG / "t/target.toml").write_text("", encoding="utf-8")
+    (tmp_path / CONFIG / "link.toml").write_text("", encoding="utf-8")
+    # None of these can change a row of the graph.
+    for name in ("attempts.jsonl", "address_names.txt", "disc.toml"):
+        (tmp_path / CONFIG / name).write_text("", encoding="utf-8")
     (tmp_path / "tools").mkdir()
     monkeypatch.setattr(split, "__file__", str(tmp_path / "tools/split.py"))
     result = split.graph_inputs(tmp_path, {"src/z.c"})
-    assert result == sorted([f"{CONFIG}/t/target.toml", "tools/split.py", "src/z.c"])
+    assert result == sorted(
+        [f"{CONFIG}/t/target.toml", f"{CONFIG}/link.toml", "tools/split.py", "src/z.c"]
+    )
 
 
 def test_ensure_payload_returns_an_existing_binary(tmp_path: Path) -> None:

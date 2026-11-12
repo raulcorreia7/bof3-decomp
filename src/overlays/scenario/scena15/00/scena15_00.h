@@ -18,8 +18,9 @@ extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
 
 void             func_801F71B0(u8 arg);
+void             func_801F752C(AreaSpark* spark);
 void             func_801F75D8(void);
-s32              func_801F7748(void);
+bool             func_801F7748(void);
 void             func_801F79C4(void);
 void             func_801F81D8(s16 x, s16 y);
 extern Callback  D_801FE5CC[];
@@ -33,6 +34,7 @@ void             func_801F8704(void);
 extern u8        D_801FE71C[];
 extern u8        D_801FE74C;
 void             func_801F8958(void);
+void             func_801F9020(Coord* position, s32* step);
 void             func_801F92F0(Coord* position, s32* step);
 
 extern u8 D_801FE750;

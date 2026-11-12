@@ -124,7 +124,7 @@ MATCH void func_801EFF1C(void) {
 
     g_Task->unk_20 -= 5;
     if (g_Task->unk_14 == 0x30) {
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
     }
     value          = g_Task->unk_14 + 2;
     g_Task->unk_14 = value;

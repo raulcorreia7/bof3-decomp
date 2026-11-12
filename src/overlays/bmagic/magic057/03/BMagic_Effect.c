@@ -65,7 +65,7 @@ MATCH void func_801EEFEC(void) {
 
     battle_flags = &g_BattleState;
     *battle_flags |= 4;
-    func_800A9820(*(battle_flags = &g_Battle.target_selector));
+    Battle_MarkDamaged(*(battle_flags = &g_Battle.target_selector));
     func_801E5988();
 }
 

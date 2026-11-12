@@ -28,6 +28,6 @@ MATCH void func_8009EF28(void) {
     }
     record               = g_Battle.target_record;
     record->target_flags = 1;
-    func_800AAC88(0, g_Battle.target);
+    Battle_QueueAction(0, g_Battle.target);
     func_800A3F28();
 }

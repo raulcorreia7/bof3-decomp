@@ -27,6 +27,8 @@ extern Callback g_SceneEntityDispatch[];
 
 extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
 
+extern WorldSpin g_WorldSpins[];
+
 extern void func_801D1B10(AreaSpawnSlot* slot);
 
 void func_801D147C(void* arg0, s32 arg1, s32 arg2);

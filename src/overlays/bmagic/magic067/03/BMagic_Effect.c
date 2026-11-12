@@ -17,7 +17,7 @@ INCLUDE_ASM(func_801EEC94);
 
 MATCH void func_801EEFA4(void) {
     if (g_Task->param.phase == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->unk_09 = 0x1E;
         g_Task->header.mode += 1;
     }
