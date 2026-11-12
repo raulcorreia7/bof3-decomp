@@ -466,7 +466,49 @@ MATCH s32 func_801D5AD0(s32 limit) {
     return roll & BYTE_MASK;
 }
 
-INCLUDE_ASM(func_801D5B2C);
+MATCH void func_801D5B2C(void) {
+    u8* src;
+    u8  i;
+    s32 j;
+
+    g_UiFormatBuffer[0] = 0x2A;
+    i                   = 1;
+    src                 = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (0x100 + D_801DB0AD) * 2);
+    while (*src != 0) {
+        g_UiFormatBuffer[i] = *src;
+        i++;
+        if ((u8)(*src - STRING_SKIP) < 2) {
+            src++;
+            g_UiFormatBuffer[i] = *src;
+            i++;
+        }
+        src++;
+    }
+    if (D_801DB0AE != 0xFF) {
+        src = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (0x100 + D_801DB0AE) * 2);
+        while (*src != 0) {
+            g_UiFormatBuffer[i] = *src;
+            i++;
+            if ((u8)(*src - STRING_SKIP) < 2) {
+                src++;
+                g_UiFormatBuffer[i] = *src;
+                i++;
+            }
+            src++;
+        }
+    }
+    g_UiFormatBuffer[i] = 0x2B;
+    i++;
+    g_UiFormatBuffer[i] = STRING_SPACE;
+    i++;
+    for (j = 0; j < 5; j++) {
+        g_UiFormatBuffer[i] = D_801457E8[D_801F2948[5]][j];
+        i++;
+    }
+    g_UiFormatBuffer[i] = 0;
+    UI_DrawText(0x32, 0x1E, 0, 0xFF, g_UiFormatBuffer);
+    UI_DrawText(0x32, 0x42, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 0xE3 + (s8)D_801DB0B4));
+}
 
 MATCH void func_801D5D5C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3States, D_801F294C);

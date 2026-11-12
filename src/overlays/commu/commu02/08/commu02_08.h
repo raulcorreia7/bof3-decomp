@@ -6,6 +6,7 @@
 
 #include "shared/etc.h"
 
+extern u8            D_801457E8[][5];
 extern OverlayHeader D_801D0C00;
 extern u8            D_801DAAA8;
 /* Entries of the handler tables. */
@@ -73,6 +74,8 @@ extern s32      D_801DB07C;
 extern u8       D_801DB080[];
 /* The overlay's state byte the guarded step advances. */
 extern s8       D_801DB093;
+extern u8       D_801DB0AD;
+extern u8       D_801DB0AE;
 extern u8       D_801DB0B4;
 extern s8       D_801DB0B8;
 extern s8       D_801DB0C4;
@@ -85,6 +88,7 @@ extern u8       D_801DB0DC;
 extern u8       g_Fairies[][9];
 extern u8       D_801F2944;
 extern u8       D_801F2945;
+extern u8*      D_801F2948;
 
 void func_801D2E10(void);
 u8   func_801D7EA0(u8);
