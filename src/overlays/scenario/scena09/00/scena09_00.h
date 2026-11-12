@@ -25,7 +25,7 @@ extern u8       D_801FE430[4];
 
 #define SCENE_WORK_ROW_COUNT 32
 
-/* One of the SCENE_WORK_ROW_COUNT work rows at AREA_WORK + 0x800: a spark that falls by its velocity
+/* One of the 32 work rows at AREA_WORK + 0x800: a spark that falls by its velocity
  * and is drawn while its life runs. */
 typedef struct SceneWorkRow {
     u8       active; /* 0x00 */
