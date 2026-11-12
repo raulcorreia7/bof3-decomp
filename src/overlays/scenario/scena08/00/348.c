@@ -494,7 +494,20 @@ MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F9E00);
+MATCH void func_801F9E00(void) {
+    Actor* work;
+    u8     mode;
+
+    work              = g_Task;
+    mode              = work->header.mode + 1;
+    work->pos.x.fixed = 0x198000;
+    work->pos.y.fixed = 0x198000;
+    work->pos.z.fixed = 0x4000000;
+    work->vx          = work->pos.x.fixed + 0x40000;
+    work->vy          = work->pos.y.fixed;
+    work->vz          = work->pos.z.fixed;
+    work->header.mode = mode;
+}
 
 MATCH void func_801F9E50(void) {
     g_Task->pos.x.fixed -= 0x20000;
