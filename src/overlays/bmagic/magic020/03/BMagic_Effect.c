@@ -200,4 +200,28 @@ MATCH void func_801EFD10(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFD88);
+/* The full-screen tile's colour scratch, read back for the three channels. */
+#define SCREEN_SHADE D_1F800000.view.effect.params[1]
+
+/* A semi-transparent full-screen tile shaded fifteen times the effect counter, then the draw mode back
+ * to plain blending. */
+MATCH void func_801EFD88(void) {
+    TILE* tile;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    SetSemiTrans(tile, 1);
+    tile->w      = SCREEN_WIDTH;
+    tile->y0     = 0;
+    tile->x0     = 0;
+    tile->h      = SCREEN_HEIGHT;
+    SCREEN_SHADE = g_Task->unk_09 * 15;
+    tile->r0     = SCREEN_SHADE;
+    tile->g0     = SCREEN_SHADE;
+    tile->b0     = SCREEN_SHADE;
+    GFX_AddPrim(2, sizeof(TILE));
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, 320, 256), 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
