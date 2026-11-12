@@ -41,7 +41,7 @@ MATCH void func_801F3CD0(void) {
                     break;
             }
             g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
-            g_TextVariables[1][8]  = 0;
+            g_TextVariables[1][8]                = 0;
             Message_StartAreaMessage(0x49);
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;
             g_SceneState.step_05 = 1;
