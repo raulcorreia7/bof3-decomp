@@ -40,6 +40,8 @@ void                       BMagic_DispatchEffectMode(void);
 extern u8                  D_801F0A84[];
 extern u8                  D_801F0A98[];
 extern u8                  D_801F0B04[];
+/* The target column of g_BattleEffects: func_801EFD4C stores through it
+ * because a member store holds the slot base in one register. */
 extern u8                  D_801EC3A4[];
 void                       func_801F03F0(s32 dir);
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
