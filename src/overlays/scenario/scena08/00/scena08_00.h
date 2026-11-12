@@ -27,15 +27,9 @@ extern Callback D_801FE8D0[];
 extern Callback D_801FE8D8[];
 extern Callback D_801FE8E4[];
 
-void func_801F7DE8(void);
-s32  func_801F7E14(void);
-void func_801F8AE8(void);
-u8   func_801F8BF8(void);
-u8*  func_801F8B14(void);
-void func_801F8B50(u8* record);
-void func_801F81F4(u16 value);
+/* One of the SCENA08_SPARK_COUNT falling sparks at AREA_WORK: kind selects the per-frame handler in D_801FE8FC. */
+#define SCENA08_SPARK_COUNT 8U
 
-/* One of the eight falling sparks at AREA_WORK: kind selects the per-frame handler in D_801FE8FC. */
 typedef struct Scena08Spark {
     u8  active;      /* 0x00 - 0 marks a free slot */
     u8  kind;        /* 0x01 - selects the per-frame handler */
@@ -62,7 +56,15 @@ ASSERT_OFFSET(Scena08Spark, y, 0x10);
 ASSERT_OFFSET(Scena08Spark, z, 0x14);
 ASSERT_OFFSET(Scena08Spark, unk_18, 0x18);
 
-extern void (*D_801FE8FC[])(void* slot);
+extern void (*D_801FE8FC[])(Scena08Spark* spark);
+
+void          func_801F7DE8(void);
+s32           func_801F7E14(void);
+void          func_801F8AE8(void);
+u8            func_801F8BF8(void);
+Scena08Spark* func_801F8B14(void);
+void          func_801F8B50(Scena08Spark* spark);
+void          func_801F81F4(u16 value);
 
 void func_801F9688(void);
 

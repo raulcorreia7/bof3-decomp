@@ -140,7 +140,7 @@ MATCH void func_801F79B0(void) {
 }
 
 MATCH void func_801F79EC(void) {
-    u8* record;
+    Scena08Spark* record;
 
     if (g_Task->unk_5A == 4) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
@@ -295,28 +295,28 @@ INCLUDE_ASM(func_801F85F0);
 INCLUDE_ASM(func_801F8964);
 
 MATCH void func_801F8AE8(void) {
-    s32 index;
-    s8* cell;
+    s32           index;
+    Scena08Spark* spark;
 
-    cell  = (s8*)AREA_WORK;
+    spark = (Scena08Spark*)AREA_WORK;
     index = 0;
     do {
-        *cell = 0;
+        spark->active = 0;
         index += 1;
-        cell += 0x1C;
-    } while ((index & BYTE_MASK) < 8U);
+        spark += 1;
+    } while ((index & BYTE_MASK) < SCENA08_SPARK_COUNT);
 }
 
-MATCH u8* func_801F8B14(void) {
-    u8* p;
-    u8  i;
+MATCH Scena08Spark* func_801F8B14(void) {
+    Scena08Spark* spark;
+    u8            i;
 
-    p = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < 8; i++) {
-        if (*p == 0) {
-            return p;
+    spark = (Scena08Spark*)AREA_WORK;
+    for (i = 0; i < SCENA08_SPARK_COUNT; i++) {
+        if (spark->active == 0) {
+            return spark;
         }
-        p += 0x1C;
+        spark += 1;
     }
     return NULL;
 }
@@ -324,20 +324,20 @@ MATCH u8* func_801F8B14(void) {
 INCLUDE_ASM(func_801F8B50);
 
 MATCH u8 func_801F8BF8(void) {
-    u8  i;
-    s32 live;
-    u8* slot;
-    u8  buffer[0x20];
+    u8            i;
+    s32           live;
+    Scena08Spark* spark;
+    u8            buffer[0x20];
 
     live = 0;
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
     Area_SetCameraMatrix(buffer);
-    slot = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < 8; i += 1, slot += 0x1C) {
-        if (slot[0] != 0) {
-            D_801FE8FC[slot[1]](slot);
+    spark = (Scena08Spark*)AREA_WORK;
+    for (i = 0; i < SCENA08_SPARK_COUNT; i += 1, spark += 1) {
+        if (spark->active != 0) {
+            D_801FE8FC[spark->kind](spark);
             live = 1;
-            func_801F8964(slot);
+            func_801F8964(spark);
         }
     }
     return live;
