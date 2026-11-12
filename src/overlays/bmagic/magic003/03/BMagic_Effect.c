@@ -285,7 +285,11 @@ MATCH void func_801EF9FC(void) {
 /* func_801EFA9C */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EFAE0);
+#include "overlays/bmagic/BMagic_RunEffectStep.h"
+
+MATCH void func_801EFAE0(void) {
+    BMAGIC_RUN_EFFECT_STEP(func_801EFB8C, func_801EFCF8);
+}
 
 INCLUDE_ASM(func_801EFB8C);
 

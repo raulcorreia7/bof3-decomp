@@ -6,7 +6,18 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/scenario/Scene_DispatchEntity.h"
 
-INCLUDE_ASM(func_801D0C48);
+MATCH void func_801D0C48(void) {
+    Actor* work;
+
+    work           = g_Task;
+    work->unk_64   = g_Game.members[0].pos.x.fixed;
+    work->unk_68   = g_Game.members[0].pos.y.fixed;
+    work->unk_6C   = g_Game.members[0].pos.z.fixed + TO_COORD(128);
+    work->timer    = 8;
+    work->screen_x = 0;
+    g_Task->header.mode += 1;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 11));
+}
 
 MATCH void func_801D0CC0(void) {
     u16 screen_x;

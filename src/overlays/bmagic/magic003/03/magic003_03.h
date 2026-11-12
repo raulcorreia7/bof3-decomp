@@ -25,6 +25,10 @@ void func_801EF324(void);
 
 void func_801EF708(void);
 
+void func_801EFB8C(void);
+
+void func_801EFCF8(void);
+
 void func_801EFD4C(void);
 
 void func_801EFEC8(void);

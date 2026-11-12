@@ -1006,7 +1006,9 @@ D_801F0BC0 = { addr = 0x801F0BC0, source = "Step handlers of the bmagic/magic113
 D_801F0BCC = { addr = 0x801F0BCC, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801F0140." }
 
 ["emi/bmagic/magic114/03"]
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_CountDownAndPlay = { addr = 0x801EF0BC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic114 (Fire Whip)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF774, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic114." }
 g_BMagicEffectModes = { addr = 0x801F121C, source = "Handlers of magic114 (Fire Whip), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
@@ -1041,8 +1043,10 @@ BMagic_DrawBurnFlameTris = { addr = 0x801EFA1C, type = "func", source = "draws t
 D_801EFCD4 = { addr = 0x801EFCD4, source = "Mode handlers of the bmagic/magic118/03 effect, run by header.mode from BMagic_UpdateBurnSprites." }
 
 ["emi/bmagic/magic120/03"]
+Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 BMagic_DispatchMode = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic120 (Whelp Breath)." }
 Effect_PlayOnIdleTick = { addr = 0x801EEFB0, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic120 (Whelp Breath)." }
@@ -1246,7 +1250,9 @@ Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "Raises BATTL
 BMagic_ProjectSpan = { addr = 0x801EF2C0, type = "func", source = "Projects the span position and the points half a unit left and right of it to the screen with Area_ProjectPoint, into screen[1], screen[0] and screen[2]." }
 
 ["emi/bmagic/magic151/03"]
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 BMagic_DispatchMode = { addr = 0x801EEC50, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic151 (Accession)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF9F0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic151." }
 Effect_StepOnZeroTick = { addr = 0x801F00B4, type = "func", source = "Advances header.step (byte 0x02) when the effect ticker (byte 0x0B) is zero in magic151 (Accession)." }
@@ -1797,6 +1803,7 @@ g_SaveCardPortLabelSecond = { addr = 0x801D0D98, source = "Label of memory card 
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (g_MenuStep.step) through g_MenuBateStates." }
 Menu_ResetPanels = { addr = 0x801D0E04, type = "func", source = "resets menu panel tasks and advances the game entry substate" }
 Menu_StartFadeIn = { addr = 0x801D0EB0, type = "func", source = "sets fast fade-in mode and advances the menu step state" }
+Menu_ApplyEquipment = { addr = 0x801D1E8C, type = "func", source = "Applies the equipment menu's trial set to g_Characters[7]: for each slot whose chosen item changed it removes the new item from the inventory, returns the old one and stores the new one, then rebuilds the record's stats." }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D2F64, type = "func", source = "Draws the equipment panel of character record_index in the Bate menu: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
@@ -1920,6 +1927,7 @@ func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu
 Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
 Fairy_EndCommuSceneEvent3 = { addr = 0x801D7E30, type = "func", source = "Last slot of g_Commu02Event3States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_EndCommuScene." }
 Fairy_CountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
+Fairy_GenerateName = { addr = 0x801D8968, type = "func", source = "Builds the fairy's name in D_801DB080 from one random half of each of the two name tables in the loaded text bank." }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D9AC8, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }

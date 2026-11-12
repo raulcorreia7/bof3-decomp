@@ -5,9 +5,10 @@ segments:
     start: 0x0
     vram: 0x801F2C00
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, .data, D_801F2C00]
+      - [0x4, .rodata, func_801F2E98]
       - [0x80, c, func_801F2C80]
       - [0xA8, c, func_801F2CA8]
       - [0xFC, c, func_801F2CFC]

@@ -41,7 +41,34 @@ INCLUDE_ASM(func_801D1AB8);
 
 INCLUDE_ASM(func_801D1C90);
 
-INCLUDE_ASM(func_801D1E8C);
+/* Applies the equipment menu's trial set to the record it edits. */
+/* func_801D1E8C */
+MATCH void Menu_ApplyEquipment(void) {
+    u8* slots[EQUIP_SLOT_COUNT];
+    u8  item;
+    u8  slot;
+
+    slots[EQUIP_SLOT_WEAPON]      = &g_Characters[MENU_BATE_CHARACTER_RECORD].equip.weapon;
+    slots[EQUIP_SLOT_SHIELD]      = &g_Characters[MENU_BATE_CHARACTER_RECORD].equip.shield;
+    slots[EQUIP_SLOT_HELMET]      = &g_Characters[MENU_BATE_CHARACTER_RECORD].equip.helmet;
+    slots[EQUIP_SLOT_ARMOR]       = &g_Characters[MENU_BATE_CHARACTER_RECORD].equip.armor;
+    slots[EQUIP_SLOT_ACCESSORY_1] = &g_Characters[MENU_BATE_CHARACTER_RECORD].equip.accessories[0];
+    slots[EQUIP_SLOT_ACCESSORY_2] = &g_Characters[MENU_BATE_CHARACTER_RECORD].equip.accessories[1];
+
+    for (slot = 0; slot < EQUIP_SLOT_COUNT; slot++) {
+        item = D_801D8ED4.equipped_items[slot];
+        if (item == 0) {
+            continue;
+        }
+        if (item == *slots[slot]) {
+            continue;
+        }
+        Item_Remove(D_801D875C[slot], item, 1, 0);
+        Item_Add(D_801D875C[slot], *slots[slot], 1, 0);
+        *slots[slot] = D_801D8ED4.equipped_items[slot];
+    }
+    Char_RebuildStats(&g_Characters[MENU_BATE_CHARACTER_RECORD]);
+}
 
 MATCH void func_801D1FA0(void) {
     u8 slot;
@@ -57,6 +84,7 @@ MATCH void func_801D1FA0(void) {
     D_801D8ED4.equipped_items[2]          = D_80144DF4;
     D_801D8ED4.equipped_items[3]          = D_80144DF5;
     D_801D8ED4.equipped_items[4]          = D_80144DF6;
+    /* @bug The trial set stores both accessories to the first accessory slot, so the second keeps its old value. */
     D_801D8ED4.equipped_items[4]          = D_80144DF7;
     D_801D8ED4.equipped_items[D_8014835E] = slot;
 }
