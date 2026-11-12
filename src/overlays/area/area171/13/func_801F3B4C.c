@@ -14,7 +14,7 @@ MATCH void func_801F3B4C(void) {
             break;
         case 1:
             if (!WINDOW_EFFECT_BUSY()) {
-                SND_PlayCue(0x202);
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
                 func_801C16B8();
                 UI_SetMode(UI_MODE_WHITE_IN);
                 g_SceneEventStep = 2;
