@@ -85,6 +85,24 @@
     g_Task->unk_0A       = 0xB;                                                 \
     g_Task->unk_03       = 1
 
+/* Probes facing clearance for the character's free-direction choice; sets g_Task->unk_2B to 0 when blocked. */
+#define CHAR_PROBE_FACING_CLEARANCE(dist, x, y)                                           \
+    {                                                                                     \
+        g_Task->unk_2B = 1;                                                               \
+        x              = g_Task->pos.x.fixed + g_FacingSteps[FACING_RIGHT].x;             \
+        y              = g_Task->pos.y.fixed + g_FacingSteps[FACING_RIGHT].y;             \
+        dist           = Area_ReadStepHeight(x, y, FACING_RIGHT);                        \
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) { \
+            g_Task->unk_2B = 0;                                                           \
+        }                                                                                 \
+        x    = g_Task->pos.x.fixed + g_FacingSteps[FACING_DOWN].x;                       \
+        y    = g_Task->pos.y.fixed + g_FacingSteps[FACING_DOWN].y;                       \
+        dist = Area_ReadStepHeight(x, y, FACING_DOWN);                                    \
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) { \
+            g_Task->unk_2B = 0;                                                           \
+        }                                                                                 \
+    }
+
 void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
 void Area_ClearCell(s32 x, s32 y);
 

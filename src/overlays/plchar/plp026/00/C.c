@@ -132,19 +132,7 @@ MATCH void func_801D0868(void) {
     s32 x;
     s32 y;
 
-    g_Task->unk_2B = 1;
-    x              = g_Task->pos.x.fixed + g_FacingSteps[FACING_RIGHT].x;
-    y              = g_Task->pos.y.fixed + g_FacingSteps[FACING_RIGHT].y;
-    dist           = Area_ReadStepHeight(x, y, FACING_RIGHT);
-    if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) {
-        g_Task->unk_2B = 0;
-    }
-    x    = g_Task->pos.x.fixed + g_FacingSteps[FACING_DOWN].x;
-    y    = g_Task->pos.y.fixed + g_FacingSteps[FACING_DOWN].y;
-    dist = Area_ReadStepHeight(x, y, FACING_DOWN);
-    if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) {
-        g_Task->unk_2B = 0;
-    }
+    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)
 }
 
 MATCH void func_801D09CC(void) {
