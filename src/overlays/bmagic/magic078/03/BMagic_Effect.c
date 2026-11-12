@@ -140,9 +140,8 @@ MATCH void func_801EFEB8(void) {
     Camera_SetModelMatrix(&rot, &matrix);
 }
 
-void            func_801F02FC(void);
-void            Effect_SetActorMatrix(void);
-extern Callback D_801F08C4[];
+void func_801F02FC(void);
+void Effect_SetActorMatrix(void);
 
 MATCH void func_801EFF84(void) {
     s32 tpage;
