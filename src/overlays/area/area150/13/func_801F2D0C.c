@@ -49,7 +49,7 @@ MATCH void func_801F2D0C(void) {
             }
             break;
         case 22:
-            if (SND_IsXAIdle() & 0xFF) {
+            if (SND_IsXAIdle() & BYTE_MASK) {
                 g_ScriptVars[0] = 1;
                 SND_StartBGM(0x95, 100, 0x10);
                 UI_SetMode(UI_MODE_FADE_IN);
