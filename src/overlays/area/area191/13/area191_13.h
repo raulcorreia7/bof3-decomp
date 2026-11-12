@@ -26,7 +26,6 @@ extern u8 D_801F4290[];
 /* The published field work row and the state byte the reset writes. */
 
 /* The draw pass this image's entry runs. */
-void Area_DrawScreenTint(void);
 
 void func_801F39AC(void);
 void func_801F3AB0(void);

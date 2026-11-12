@@ -21,7 +21,6 @@ extern u8       D_801FBF20[];
 extern Callback D_801FBF48[];
 extern Callback D_801FBF54[];
 
-void Area_DrawScreenTint(void);
 void func_801F70DC(void);
 void func_801F7568(void);
 

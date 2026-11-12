@@ -113,7 +113,6 @@ void func_801F7A18(void);
 void Scene_ClearParty(void);
 void Scene_ClearScanBars(void);
 void Area_ClearWorkColumn(void);
-void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_shade);
 
 /* Scene dispatch table indexed by the mode byte at D_80146872. */
 extern s8 D_80146872;

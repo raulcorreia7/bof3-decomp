@@ -16,6 +16,5 @@ extern u8          D_801F4330[];
 
 void func_801F2FCC(void);
 void func_801F3C3C(s32 delta);
-void Area_DrawScreenTint(void);
 
 #endif
