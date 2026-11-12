@@ -7,6 +7,9 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+/* The scenario flag byte the answer path tests and clears. */
+extern u8 D_80144EF0[];
+
 /* The per-slot tag compared with the battle row byte. */
 
 /* The per-slot message index. */
