@@ -163,7 +163,7 @@ MATCH void func_801D3594(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D4030, 0xA8, 33, 20, 8);
 }
 
-/* Outlines cell with a top line and a left line, white when selected is set and blinking otherwise. */
+/* Outlines the cell with its top and right edges, then its left and bottom, yellow when selected and blinking with the frame count otherwise. */
 MATCH void func_801D36FC(s32 cell, s32 selected) {
     LINE_F3* prim;
     s32      shade;
