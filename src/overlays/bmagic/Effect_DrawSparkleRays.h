@@ -1,4 +1,5 @@
 /* Draws the rays of the current sparkle or effect as four LINE_G2 segments swept around its screen point. */
+/* Effect_DrawSparkleRays (magic070, magic071, magic072, magic073, magic074, magic162, magic168) */
 
 MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
     LINE_G2* prim;
