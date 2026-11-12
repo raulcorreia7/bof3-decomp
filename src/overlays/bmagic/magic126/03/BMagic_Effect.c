@@ -273,7 +273,7 @@ MATCH void func_801F0B34(void) {
     D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
     count              = D_801F22BC->pad_06 + 1;
     D_801F22BC->pad_06 = count;
-    if (count == 0x10) {
+    if (count == 16) {
         D_801F22BC->header.step += 1;
     }
 }
