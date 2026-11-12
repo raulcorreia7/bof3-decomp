@@ -81,7 +81,7 @@ MATCH void func_801D273C(s16 x, s16 y) {
     s32 i;
     s32 offset;
 
-    COMMU_DRAW_CELL_GRID(func_801D4030, 0x22, 7, 0x40, 4, 6);
+    COMMU_DRAW_CELL_GRID(func_801D4030, 0x22, 7, 4, 6);
 }
 
 INCLUDE_ASM(func_801D28A4);
@@ -94,7 +94,7 @@ MATCH void func_801D3594(s16 x, s16 y) {
     s32 i;
     s32 offset;
 
-    COMMU_DRAW_CELL_GRID(func_801D4030, 0xA8, 0x21, 0x110, 0x14, 8);
+    COMMU_DRAW_CELL_GRID(func_801D4030, 0xA8, 0x21, 0x14, 8);
 }
 
 INCLUDE_ASM(func_801D36FC);
