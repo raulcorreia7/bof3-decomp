@@ -26,6 +26,22 @@ extern Callback          D_801F1C94[];
 extern BMagicEffectWork* D_801F24E0;
 extern BMagicEffectWork  D_801F1CA0[48];
 
+/* The grow step of a KaiserBreath orbit: unk_06 advances by two, phase_0C by
+ * 0x20, and the orbit point follows the area scroll target at the angle
+ * TABLE[unk_07] shifted SHIFT; the step advances at phase 0x200. A statement
+ * macro: the member declares s16* angle_cell and u8 phase. */
+#define MAGIC131_ORBIT_GROW(TABLE, SHIFT)                                                                        \
+    D_801F24E0->unk_06 += 2;                                                                                     \
+    D_801F24E0->phase_0C += 0x20;                                                                                \
+    phase                   = TABLE[D_801F24E0->unk_07];                                                         \
+    angle_cell              = &D_1F800006;                                                                       \
+    *angle_cell             = phase << (SHIFT);                                                                  \
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << (SHIFT)) * (s16)D_801F24E0->phase_0C) >> 3); \
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);      \
+    if ((s16)D_801F24E0->phase_0C == 0x200) {                                                                    \
+        D_801F24E0->header.step++;                                                                               \
+    }
+
 void func_801F0DF4(void);
 
 void func_801F1844(void);
