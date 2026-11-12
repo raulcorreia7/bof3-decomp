@@ -549,7 +549,7 @@ MATCH void func_801F9E50(void) {
 }
 
 MATCH void func_801F9EC4(void) {
-    g_Task->vx -= 0x20000;
+    g_Task->vx -= TO_COORD(2);
     func_801FA19C(&g_Task->pos, &g_Task->vx);
     if (g_Task->vx == 0x98000) {
         g_Task->header.mode += 1;
