@@ -23,9 +23,5 @@ MATCH void Effect_SetFacingMatrix(void) {
             rot.vz = ANGLE_270;
             break;
     }
-    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -COORD_INT(g_Task->pos.z) / 2;
-    RotTransMatrix(&pos, matrix, &flags);
-    Camera_SetModelMatrix(&rot, &matrix);
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
