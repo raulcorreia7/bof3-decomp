@@ -1,4 +1,6 @@
 #include "scena07_00.h"
+
+#include "shared/SceneTrail.h"
 #include "area/map.h"
 
 #if BOF3_USE_ASM
@@ -355,9 +357,77 @@ MATCH void func_801F8804(u8 shade) {
     GFX_AddPrim(1, sizeof(TILE));
 }
 
+u32 AngleAverage12(u16 a, u16 b);
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F88B8(void* table) {
+    SceneTrail* trail;
+    u16         size[2];
+    u16         projected[2];
+    MATRIX      matrix;
+    s8          i;
+    s8          j;
+
+    trail = (SceneTrail*)table;
+    for (i = 0x1E; i >= 0; i--) {
+        trail->rows[i + 1] = trail->rows[i];
+    }
+    trail->rows[0].pos = g_Task->pos;
+    Area_SetCameraMatrix(&matrix);
+    for (i = 0; i < 0x20; i++) {
+        Area_ProjectPoint((s32*)&trail->rows[i].pos, (DVECTOR*)&trail->rows[i].screen_x);
+        size[0] = trail->size;
+        size[1] = trail->size;
+        func_801AFFD8(&trail->rows[i].pos, size, projected);
+        trail->rows[i].size = projected[0];
+    }
+    for (i = 0; i < 0x1F; i++) {
+        s16 dx = trail->rows[i].screen_x - trail->rows[i + 1].screen_x;
+        s16 dy = trail->rows[i].screen_y - trail->rows[i + 1].screen_y;
+
+        if (dx != 0 || dy != 0) {
+            trail->angle[i] = ratan2(dy, dx);
+        } else {
+            trail->angle[i] = 0x1000;
+        }
+    }
+    for (i = 0; i < 0x1F; i++) {
+        if (trail->angle[i] != 0x1000) {
+            continue;
+        }
+        j = i + 1;
+        while (j < 0x1F) {
+            if (trail->angle[j] != 0x1000) {
+                trail->angle[i] = trail->angle[j];
+                goto next;
+            }
+            j++;
+        }
+        if (i > 0) {
+            j = 0;
+            while (j < i) {
+                if (trail->angle[j] != 0x1000) {
+                    trail->angle[i] = trail->angle[j];
+                    goto next;
+                }
+                j++;
+            }
+        }
+        trail->angle[i] = 0;
+    next:;
+    }
+    trail->rows[0].angle = trail->angle[0];
+    for (i = 1; i < 0x1F; i++) {
+        trail->rows[i].angle = AngleAverage12(trail->angle[i - 1], trail->angle[i]);
+    }
+    trail->rows[0x1F].angle = trail->angle[0x1E];
+}
+#else
 INCLUDE_ASM(func_801F88B8);
+#endif
 
 INCLUDE_ASM(func_801F8BE8);
+
 
 #include "shared/AngleAverage12.h"
 
