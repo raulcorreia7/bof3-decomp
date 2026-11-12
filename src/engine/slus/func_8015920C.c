@@ -19,7 +19,7 @@ MATCH void func_8015920C(void) {
     if (panel->unk_0A < ((s16)panel->u.grow.width >> 4)) {
         switch (panel->mode) {
             case 0:
-                if (panel->flags & 2) {
+                if (panel->flags & 0x2) {
                     next_x = g_MenuPanelOrigins[16 + D_801490CE * 2] * 0x10;
                 } else {
                     next_x = g_MenuPanelOrigins[D_801490CE * 2] * 0x10;
@@ -45,7 +45,7 @@ MATCH void func_8015920C(void) {
     if (panel->unk_0B < ((s16)panel->u.grow.height >> 4)) {
         switch (panel->mode) {
             case 0:
-                if (panel->flags & 2) {
+                if (panel->flags & 0x2) {
                     next_y = g_MenuPanelOrigins[17 + D_801490CE * 2] * 0x10;
                 } else {
                     next_y = g_MenuPanelOrigins[1 + D_801490CE * 2] * 0x10;
@@ -63,7 +63,7 @@ MATCH void func_8015920C(void) {
         g_MenuCurrentPanel->u.grow.height = (g_MenuCurrentPanel->unk_0B * 0x10);
     }
 
-    if ((g_MenuCurrentPanel->flags & 1) == 0) {
+    if ((g_MenuCurrentPanel->flags & 0x1) == 0) {
         u32 width  = (g_MenuCurrentPanel->u.grow.width >> 4) & BYTE_MASK;
         u32 height = (g_MenuCurrentPanel->u.grow.height >> 4) & BYTE_MASK;
 

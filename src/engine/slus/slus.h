@@ -11,6 +11,7 @@
 #include "game.h"
 #include "sys/cd.h"
 #include "sys/exe.h"
+#include "sys/gameui.h"
 #include "sys/loader_tail.h"
 #include "sys/lz77.h"
 #include "sys/scene.h"
@@ -360,26 +361,6 @@ typedef union RecordKey {
     u8 ubyte; /* 0x00 */
 } RecordKey;
 
-/* The front-end step record behind g_MessageState: func_8015102C walks the timer,
- * phase, cursor and flag fields; the other units read only its first byte. */
-typedef struct FrontendStep {
-    u8  state_00;     /* 0x00 */
-    u8  selection_01; /* 0x01 */
-    u8  pad_02[2];    /* 0x02 */
-    u16 flags_04;     /* 0x04 */
-    u8  count_06;     /* 0x06 */
-    u8  pad_07[5];    /* 0x07 */
-    s32 entry_0C;     /* 0x0C */
-    s32 cursor_10;    /* 0x10 */
-    u8  pad_14[4];    /* 0x14 */
-    u8  phase_18;     /* 0x18 */
-    u8  index_19;     /* 0x19 */
-    u8  pad_1A[0x0E]; /* 0x1A */
-    u16 scroll_28;    /* 0x28 */
-} FrontendStep;
-
-ASSERT_SIZE(FrontendStep, 0x2C);
-
 /* The six-byte panel row view that starts at row +2: its last halfword is the
  * next row's +0. func_8015A1D8 indexes it by the selection byte. */
 typedef struct PanelRowWindow {
@@ -615,16 +596,11 @@ extern u16                         D_80148A0C;
 extern u16                         D_80148A0E;
 extern s32                         g_SndBankHeaders[7];
 extern s32                         g_SndBankSequences[7];
-extern u8                          g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 extern u16                         D_80149010[];
 extern u16                         D_80149040[];
 extern u16                         D_80149070[];
-/* D_801490A0 */
-extern FrontendStep                g_MessageState;
 /* D_801490A3 */
 extern u8                          g_MessageChoiceStep;
-/* D_801490A6 */
-extern u8                          g_MessageStateTimer[];
 /* D_801490AC */
 extern u32                         g_MessageScript;
 extern u8*                         D_801490B0;

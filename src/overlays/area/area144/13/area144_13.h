@@ -9,7 +9,9 @@
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
-/* The field status byte the timer bumps are gated on. */
+/* The scroll height the camera step advances, and the flag that gates it. */
+extern s32      D_80143F84;
+extern u8       D_80143FC3;
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F3E68[];
 /* The palette-dirty byte the setup step clears. */

@@ -59,6 +59,6 @@ void BMagic_ProjectSpan(ProjectedSpan* span);
 void func_801AFE18(void);
 void func_801EF040(void);
 void func_801EF6F8(void);
-void func_801EF790(s16 x, s16 y, s16 radius, u8 color, u8 edge_color);
+void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha);
 
 #endif

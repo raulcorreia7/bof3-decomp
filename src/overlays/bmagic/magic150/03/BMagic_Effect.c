@@ -47,7 +47,7 @@ MATCH void func_801EEE24(void) {
 MATCH void func_801EEEC4(void) {
     u8 count;
 
-    D_801EFA9C.radius = ((g_FrameCount & 1) * 16) + 256;
+    D_801EFA9C.radius = ((g_FrameCount & 0x1) * 16) + 256;
     D_801EFA9C.angle -= ANGLE_45;
     func_801EF254();
     count          = g_Task->unk_09 - 1;
@@ -101,7 +101,26 @@ MATCH void func_801EF6B0(void) {
 
 INCLUDE_ASM(func_801EF6F8);
 
-INCLUDE_ASM(func_801EF790);
+MATCH void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha) {
+    POLY_G3* prim;
+    u16      angle;
+    u16      next;
+
+    for (angle = 0; angle < ONE; angle += 0x100) {
+        prim     = GFX_BeginPolyG3(1);
+        prim->x0 = x;
+        prim->y0 = y;
+        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
+        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        next     = angle + 0x100;
+        prim->x2 = x + FIXED_MUL(radius, rcos(next));
+        prim->y2 = y + FIXED_MUL(radius, rsin(next));
+        setRGB0(prim, colour, 0, 0);
+        setRGB1(prim, alpha, 0, 0);
+        setRGB2(prim, alpha, 0, 0);
+        GFX_AddPrim(1, sizeof(POLY_G3));
+    }
+}
 
 MATCH u8 func_801EF8EC(void) {
     s32     origin[3];

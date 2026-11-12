@@ -24,7 +24,7 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
     clut   = (flags & 0xF) | STAGE_PALETTE_CLUT;
     index  = (flags & 0xF0) >> 3;
     shade  = g_NumberRowShades[index];
-    height = 0xC - g_NumberRowShades[index + 1];
+    height = 12 - g_NumberRowShades[index + 1];
 
     do {
         switch (*str) {

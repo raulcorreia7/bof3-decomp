@@ -12,7 +12,7 @@ MATCH s32 func_801DD59C(s32 amount) {
                 if ((g_Characters[func_801DD7AC(g_Game.members[index].chr.character_id)].exp + amount) <= 0x98967Eu) {
                     g_Characters[func_801DD7AC(g_Game.members[index].chr.character_id)].exp += amount;
                 } else {
-                    g_Characters[func_801DD7AC(g_Game.members[index].chr.character_id)].exp = 0x98967F;
+                    g_Characters[func_801DD7AC(g_Game.members[index].chr.character_id)].exp = 9999999;
                 }
             }
             i += 1u;
