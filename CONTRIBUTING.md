@@ -71,7 +71,7 @@ A function is `TARGET@0xADDRESS`; `<image>` is the target with `/` written as `+
    ```
 
    An unnamed function keeps its address name (`NON_MATCHING void func_<ADDR>(void)`). Names need
-   evidence: [conventions](docs/conventions.md#names). A draft needs
+   evidence: [conventions](docs/naming.md#names). A draft needs
    `meson setup --reconfigure build/meson` once ([reconfigure](docs/toolchain.md#reconfigure)).
 
 5. **Compare.** `tools/match.sh` builds the one object and compares the function with retail:

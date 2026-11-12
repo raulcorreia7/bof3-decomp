@@ -20,7 +20,7 @@ Budget: three structurally different tries per function (a different shape, not 
 one). Then record the attempt in `config/attempts.tsv` and report `BLOCKED <reason>`.
 
 A route that gives `EXACT` still needs `check-<image>`, a name from evidence and the shared-body
-treatment ([shared bodies](conventions.md#shared-bodies)). Record failed attempts in
+treatment ([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)). Record failed attempts in
 `config/attempts.tsv` with the function, forms tried, first difference and score when known.
 
 ## Order of work
@@ -114,9 +114,63 @@ the ref it used and exits 2 when no such ref exists (`git fetch origin main`).
 
 ## Helpers
 
-The shared helpers, inline functions and macro forms, the address seams and the fake-match helpers
-with their `FAKE:` note: [helpers](conventions.md#helpers). Matched C keeps the coding conventions
-([matching code](conventions.md#matching-code)).
+The shared helpers, inline functions and macro forms: [helpers](conventions.md#helpers).
+
+### Address seams
+
+These are the only spellings that carry a literal address or offset. Each is a seam to replace with
+a symbol or a member once the evidence exists.
+
+| Seam                         | Use                                                                        |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `MEM(type, addr)`, `MEM_PTR` | a fixed RAM address with no symbol yet                                     |
+| `FIELD(type, base, off)`     | one access at an offset of a base whose type is not proven yet             |
+| `HW_REF(type, addr)`         | a hardware register (`include/psx/hw.h` names them)                        |
+| `SP*`                        | the scratchpad (`include/sys/scratchpad.h`)                                |
+| `VOL(type, x)`               | a volatile access the hardware or a shared buffer needs; not a fake helper |
+
+### Fake-match helpers
+
+Idiomatic C that matches comes first. A fake-match helper is a measured constraint for compiler
+behavior C cannot express; `include/match/match.h` defines them and they are inert outside the
+matching build. Try in order: correct types and signedness, the original control flow, temporary
+lifetimes and declaration order, casts and grouping, the unit's compiler profile, then a helper.
+
+| Group   | Helpers                                                                                                                                                                                       |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| benign  | `FAKE_VOLATILE_PTR`, `FAKE_BARRIER`, `FAKE_ORDER_LOCK`/`FAKE_ORDER_LOCK_BEGIN`…`FAKE_ORDER_LOCK_END`/`FAKE_ORDER_FENCE`, `FAKE_STACK_PADS` (retail frame bytes nothing explains), `FAKE_HOLD` |
+| harmful | `FAKE_REG` (register pin), `FAKE_CLOBBER_*`, `FAKE_OPAQUE`/`FAKE_USE`                                                                                                                         |
+
+Each use carries an adjacent `/* FAKE: <reason>. */`; a dummy local counts as one, and its note
+carries the best pure-C score. `FAKE_ORDER_LOCK(stmt)` holds one statement; a run of statements goes
+between `FAKE_ORDER_LOCK_BEGIN` and `FAKE_ORDER_LOCK_END;` instead of inside the macro's argument. `FAKE_ORDER_FENCE()` is the empty boundary; write it instead of a bare `do { } while (0);`. Every
+helper compiles away without `MATCHING`, and `check-plain` proves the sources build that way. Prefer benign over harmful: a pointer local, a
+recomputed address or a statement reorder usually moves the allocator before a pin does. A raw
+`__asm__`, a bare `register ... asm("reg")` or a `.word` is not source.
+
+## Matching code
+
+Matched C follows every rule on this page; a match is not a reason to keep the decompiler's shape.
+Restate the decompiler output as structured C, then add the least constraint the bytes need, with
+its reason. Process and diagnosis: [matching](#diagnose).
+
+**Do**: structured C, named locals, real members.
+
+```c
+MATCH void Party_RestoreHp(void) {
+    Character* character;
+    s32        i;
+
+    for (i = 0; i < PARTY_SLOT_COUNT; i++) {
+        character     = &g_Characters[g_PartyFieldOrder[i]];
+        character->hp = character->max_hp;
+    }
+}
+```
+
+A draft that does not match yet keeps the retail assembly as the build path and records its score
+and first mismatch ([markers](#markers-and-unmatched-bodies)). A fake helper is the last
+constraint and carries its `FAKE:` note ([helpers](conventions.md#helpers)).
 
 ## Diagnose
 
@@ -217,7 +271,7 @@ its original programmer wrote it ([the rule](conventions.md#write-it-as-the-orig
 with names still from evidence. It becomes the most human-accurate C that still byte-matches:
 
 - no cast the bytes do not need, and no pointer math: real types and fields (`FIELD` at most);
-- no `temp_v0` or `var_s1` names; evidence-backed names ([names](conventions.md#names)), with the
+- no `temp_v0` or `var_s1` names; evidence-backed names ([names](naming.md#names)), with the
   lint score breaking the last tie;
 - `g_Task` and its members, not a `WORK` or `SP_PTR` view; `g_Game.members[i]`, not `D_801461xx`;
 - named constants ([values](conventions.md#how-a-value-is-written)); decimal for timers, sizes,

@@ -420,7 +420,7 @@ coddog compares instruction sequences and ignores relocations. Use `bin/coddog`,
 - `submatch` prints `query [a-b] matches F [insn c-d]`: an inlined helper or a repeated block.
 
 A twin is a candidate until `check-<image>` passes for every member. Sharing rules:
-[shared bodies](conventions.md#shared-bodies).
+[shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies).
 
 ### m2c
 
