@@ -1,11 +1,11 @@
 #include "battle_15.h"
 
 MATCH void func_800B1664(void) {
-    func_800B1728();
-    if ((s16)g_MenuCurrentPanel->pos.x >= 0xA4) {
+    Battle_DrawCommandList();
+    if ((s16)g_MenuCurrentPanel->pos.x >= 164) {
         g_MenuCurrentPanel->pos.x = g_MenuCurrentPanel->pos.x - 32;
     }
-    if ((s16)g_MenuCurrentPanel->pos.x < 0xA3) {
+    if ((s16)g_MenuCurrentPanel->pos.x < 163) {
         g_MenuCurrentPanel->pos.x = 163;
     }
 }

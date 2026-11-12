@@ -49,7 +49,7 @@ MATCH void func_801EEDF8(void) {
 MATCH void func_801EEF4C(void) {
     SYS_DISPATCH_BYTE(D_801EFAF0, g_Task->header.step);
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EF1B0();
         func_801EF4C4();
         func_801EF898();

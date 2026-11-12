@@ -10,7 +10,23 @@ MATCH void func_801EEC04(void) {
 
 INCLUDE_ASM(func_801EEC5C);
 
-INCLUDE_ASM(func_801EEEAC);
+MATCH void func_801EEEAC(void) {
+    if (g_Task->param.unk_0B == 0) {
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
+            g_Game.members[g_Battle.active_battler].chr.hp >>= 1;
+            if (g_Game.members[g_Battle.active_battler].chr.hp == 0) {
+                g_Game.members[g_Battle.active_battler].chr.hp = 1;
+            }
+        } else {
+            ENEMY_COMBATANT(g_Battle.active_battler).hp >>= 1;
+            if (ENEMY_COMBATANT(g_Battle.active_battler).hp == 0) {
+                ENEMY_COMBATANT(g_Battle.active_battler).hp = 1;
+            }
+        }
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        func_801E5988();
+    }
+}
 
 /* func_801EEFF8 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -60,7 +76,7 @@ MATCH void func_801EF3C4(void) {
     if (count == 0) {
         g_Task->header.step++;
     }
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF79C(g_Task->param.unk_0B, 1);
 }
 
@@ -105,7 +121,7 @@ MATCH void func_801EF6A4(void) {
     VECTOR pos;
     u8     count;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
     pos.vx = g_Task->unk_0C;

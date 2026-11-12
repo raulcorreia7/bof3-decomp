@@ -18,7 +18,40 @@ MATCH void BMagic_UpdateBurn(void) {
     }
 }
 
-INCLUDE_ASM(BMagic_SpawnBurnFlames);
+MATCH void BMagic_SpawnBurnFlames(void) {
+    u32          i;
+    u8           slot;
+    PartyMember* actor;
+    PartyMember* task;
+    PartyMember* work;
+    u16*         src;
+    u16*         dst;
+
+    actor = g_Battle.selected_actor;
+    task  = g_Task;
+    WorldPos_Copy(&task->pos, &actor->pos);
+    task->param.unk_0B = 0;
+    for (i = 0; i < 8; i++) {
+        slot                               = Battle_AllocEffect(1, 0x2F);
+        work                               = g_Task;
+        g_BattleEffects[slot].arg.unk_09   = (i + 1) * 4;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B++;
+    }
+    i   = 1;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i]      = src[i] | 0x8000;
+        dst[i + 16] = src[i + 16] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
+    g_GfxPalettePending                                             = 1;
+    SND_QueueSelectionFx(0x100);
+    g_Task->unk_09 = 0;
+    g_Task->header.mode += 1;
+}
 
 /* func_801EEE20 */
 MATCH void BMagic_SelectBurnTarget(void) {
@@ -27,7 +60,7 @@ MATCH void BMagic_SelectBurnTarget(void) {
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
     if (timer == 16) {
-        func_800A9610(g_Battle.target_selector, 0x10);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

@@ -11,7 +11,7 @@
    (magic219), func_801EEF18 (magic220), func_801EEE80 (magic222), func_801EF278 (magic225), func_801EEFA4 (magic226) */
 MATCH void Effect_PlayOnZeroTick(void) {
     if (g_Task->param.unk_0B == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }

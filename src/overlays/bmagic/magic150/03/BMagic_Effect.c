@@ -47,7 +47,7 @@ MATCH void func_801EEE24(void) {
 MATCH void func_801EEEC4(void) {
     u8 count;
 
-    D_801EFAAC = ((g_FrameCount & 1) * 0x10) + 0x100;
+    D_801EFAAC = ((g_FrameCount & 0x1) * 0x10) + 0x100;
     D_801EFAB0 -= 0x200;
     func_801EF254();
     count          = g_Task->unk_09 - 1;
@@ -55,7 +55,7 @@ MATCH void func_801EEEC4(void) {
     if (!(count & BYTE_MASK)) {
         g_Task->unk_09 = 4;
         g_Task->header.mode += 1;
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
     }
 }

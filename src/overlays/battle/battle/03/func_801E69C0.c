@@ -9,7 +9,7 @@ MATCH void func_801E69C0(void) {
     D_1F800002    = value;
     D_1F800001    = value;
     D_1F800000[0] = value;
-    func_801D99AC(0, 0, 0xB);
+    func_801D99AC(0, 0, 11);
     next           = g_Task->unk_09 + 1;
     g_Task->unk_09 = next;
     if (next == 0xFFu) {

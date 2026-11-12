@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
   pull_request:
+  # A run on `main` writes the caches where every pull request can read them: GitHub scopes a cache
+  # to the branch that saved it, and a pull request's run saves under `refs/pull/<n>/merge`.
+  schedule:
+    - cron: "17 4 * * *"
   workflow_dispatch:
 
 permissions:
@@ -86,6 +90,16 @@ jobs:
             toolchains/psyq-compilers
             toolchains/psn00b_toolchain
           key: toolchain-${{ runner.os }}-${{ hashFiles('tools/setup.sh') }}
+      # `check-plain` keeps one empty file per preprocessed source it compiled, a few megabytes in
+      # all. A file's name covers the compiler, the flags and the preprocessed text, so a stale
+      # entry cannot pass a changed source; restoring them replaces most compiles with a
+      # preprocess. The 9 GB object cache beside it is not restored.
+      - if: steps.changes.outputs.code == 'true'
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/bof3-cc/plain
+          key: plain-check-${{ runner.os }}-${{ hashFiles('tools/check_plain.sh', 'tools/setup.sh') }}
+          restore-keys: plain-check-${{ runner.os }}-
       # The compiler and tracked headers only: no SDK object is downloaded or built.
       - if: steps.changes.outputs.code == 'true'
         run: tools/setup.sh --dev --no-payloads --no-sdk
@@ -114,6 +128,9 @@ jobs:
       - if: steps.changes.outputs.code == 'true'
         env:
           DPRINT: "true"
+          # ubuntu-latest has four vCPUs. `check-plain` defaults to nproc/4 for a lane that shares a
+          # loaded host, which would leave this job one core and make its cold run ten minutes.
+          HEAVY_JOBS: "4"
         run: tools/pre_push.sh refs/remotes/origin/main
       # A failure before pre-push (for example shell lint) leaves no logs to print.
       - name: Failed check logs

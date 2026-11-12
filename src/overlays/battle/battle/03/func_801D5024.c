@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
-u8 func_801D527C(void);
-u8 func_801D62D8(void);
+u8 Battle_EndRound(void);
+u8 Battle_StepBattlers(void);
 
 MATCH void func_801D5024(void) {
     switch (g_Battle.phase.sub_step) {
@@ -9,7 +9,7 @@ MATCH void func_801D5024(void) {
             u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
-            if (func_801D527C() != 0) {
+            if (Battle_EndRound() != 0) {
                 return;
             }
             *counter += 1;
@@ -74,7 +74,7 @@ MATCH void func_801D5024(void) {
             u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
-            if (func_801D5DCC() != 0) {
+            if (Battle_ApplyTurnDamage() != 0) {
                 return;
             }
             *counter += 1;
@@ -84,7 +84,7 @@ MATCH void func_801D5024(void) {
             u8* counter = &g_Battle.phase.sub_step;
 
             *counter += 1;
-            if (func_801D62D8() != 0) {
+            if (Battle_StepBattlers() != 0) {
                 return;
             }
             *counter += 1;

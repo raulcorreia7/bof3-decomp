@@ -21,7 +21,7 @@ MATCH void func_800AE574(void) {
     source = g_BattleEffectBattler;
     second = (PartyMember*)g_Task;
     WorldPos_Copy(&second->pos, &source->pos);
-    func_800AF764();
+    Battle_ProjectRange();
 
     third                   = TASK_BYTES;
     FIELD(u32, third, 0x10) = -0xE;
@@ -33,7 +33,7 @@ MATCH void func_800AE574(void) {
     FAKE_BARRIER();
     base     = FIELD(u16, third, 0x30);
     third[9] = 0;
-    height -= 0x18;
+    height -= 24;
     FIELD(u16, third, 0x2E) = height;
     flag                    = (PartyMember*)g_Task;
     base -= next;

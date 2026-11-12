@@ -6,6 +6,6 @@ MATCH void func_800C1A54(void) {
 
     Actor_SelectScript(2);
     *value = 0x80;
-    func_800A9820(0x80);
+    Battle_MarkDamaged(0x80);
     g_Task->header.step++;
 }

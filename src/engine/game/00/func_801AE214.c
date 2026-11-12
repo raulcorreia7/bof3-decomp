@@ -16,9 +16,9 @@ MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode)
         delta = line_length;
         SetLineF2(line);
         mode  = line_mode;
-        color = 0x28;
+        color = 40;
         if (mode == 0) {
-            color = 0x8C;
+            color = 140;
         }
         line->r0 = color;
         line->g0 = color;

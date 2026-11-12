@@ -1,4 +1,5 @@
 #include "plp267_00.h"
+#include "engine/game/00/game_00.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -56,7 +57,7 @@ MATCH void Char_FaceFreeDirection(void) {
     CHAR_FACE_FREE_DIRECTION(func_801CF99C, func_801CFB40);
 }
 
-INCLUDE_ASM(func_801CEFB0);
+#include "overlays/plchar/Char_RunPersonalAction.h"
 
 #include "overlays/plchar/Char_AdvancePaletteScript.h"
 

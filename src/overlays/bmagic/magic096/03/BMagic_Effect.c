@@ -6,7 +6,36 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC84);
+MATCH void func_801EEC84(void) {
+    u16* dst;
+    u16* src;
+    u32  i;
+    u32  slot;
+
+    func_801F0164();
+    func_800AF764();
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 8;
+    g_Task->timer        = 0;
+    g_Task->header.mode += 1;
+    for (i = 0; i < 16; i++) {
+        slot                               = Battle_AllocEffect(1, 76) & BYTE_MASK;
+        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].arg.unk_09   = D_801F0498[i] + 1;
+        g_BattleEffects[slot].unk_04       = i;
+        g_Task->param.unk_0B += 1;
+    }
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    do {
+        *dst++ = *src++;
+        i++;
+    } while (i < 256);
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionFx(0x100);
+}
 
 MATCH void func_801EEDD8(void) {
     u8 timer;
@@ -14,7 +43,7 @@ MATCH void func_801EEDD8(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9610(g_Battle.target_selector, 0x200);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x200);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

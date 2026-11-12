@@ -31,7 +31,7 @@ MATCH u8 func_801D5658(void) {
             event_id = 0x25u;
         }
         text = Message_GetText(event_id);
-        func_801DE560(2u, 0u, 0u, 0x2Du, text);
+        func_801DE560(2u, 0u, 0u, 45u, text);
         return true;
     }
 

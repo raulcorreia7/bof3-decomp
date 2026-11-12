@@ -38,7 +38,7 @@ INCLUDE_ASM(func_801F7FB8);
 MATCH void func_801F8800(u8 amount) {
     s32 step;
 
-    step                     = D_801FC44C[g_FrameCount & 3] * amount;
+    step                     = D_801FC44C[g_FrameCount & 0x3] * amount;
     g_AreaCameraRefreshCount = 2;
     g_AreaCameraOffsetY += step;
 }
@@ -60,13 +60,48 @@ INCLUDE_ASM(func_801F88DC);
 
 INCLUDE_ASM(func_801F8CE4);
 
-INCLUDE_ASM(func_801F924C);
+MATCH void func_801F924C(void) {
+    s32* scroll;
+    s32* party;
+    s32* focus;
+    u16  height;
+
+    if (g_AreaCameraX == 0x77FF) {
+        g_AreaCameraX = 0x63FF;
+        scroll        = &g_AreaScrollTargetX;
+        party         = &g_PartyX;
+        focus         = &D_80147A8C;
+        g_AreaTileOriginX += 20;
+        *scroll += TO_COORD(20);
+        *party += TO_COORD(20);
+        height         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        g_ScrollHeight = height;
+        Area_AdvanceScroll(height);
+        Area_RefreshCellGrid();
+        *focus += TO_COORD(20);
+        D_80147A96 = Area_SampleHeight(*focus, g_AreaFocusY);
+    }
+}
 
 INCLUDE_ASM(func_801F9320);
 
 INCLUDE_ASM(func_801F9834);
 
-INCLUDE_ASM(func_801FA904);
+MATCH u16 func_801FA904(u8* tags, u16* messages) {
+    u8 i;
+    u8 j;
+
+    for (i = 0; i < PARTY_MEMBER_MESSAGE_COUNT; i++) {
+        for (j = 0; j < g_PartySize; j++) {
+            if (g_Game.members[j].chr.character_id == tags[i]) {
+                Message_StartAreaMessage((s16)messages[i]);
+                FAKE_ORDER_LOCK(g_GameStateIndex = GAME_REQUEST_MESSAGE); /* FAKE: keeps the state store before the return value's reload. */
+                return messages[i];
+            }
+        }
+    }
+    return MESSAGE_NONE;
+}
 
 INCLUDE_ASM(func_801FA9C8);
 
@@ -77,12 +112,12 @@ MATCH void func_801FB374(void) {
 
 /* Starts the area message `message`: the area overlay's own lookup (func_801F326C
  * for the second desert camp, func_801F37AC otherwise) maps it to a message index. */
-#define SCENA14_START_AREA_MESSAGE(message)               \
-    if (g_GameAreaId == AREA_ID_DESERT_CAMP_SECOND) {     \
-        Message_StartAreaMessage(func_801F326C(message)); \
-    } else {                                              \
-        Message_StartAreaMessage(func_801F37AC(message)); \
-    }                                                     \
+#define SCENA14_START_AREA_MESSAGE(message)                 \
+    if (LOHU(g_GameAreaId) == AREA_ID_DESERT_CAMP_SECOND) { \
+        Message_StartAreaMessage(func_801F326C(message));   \
+    } else {                                                \
+        Message_StartAreaMessage(func_801F37AC(message));   \
+    }                                                       \
     g_GameStateIndex = GAME_REQUEST_MESSAGE
 
 MATCH void func_801FB3BC(void) {
@@ -175,7 +210,7 @@ MATCH void func_801FBFA8(void) {
     Party_JoinMember(CHAR_ID_MOMO);
     Party_LoadPalettes();
     g_PartyBattleOrder[0] = 7;
-    D_80144F5E            = 8;
+    D_80144F5E[0]         = 8;
     D_80144F5F            = 5;
 }
 

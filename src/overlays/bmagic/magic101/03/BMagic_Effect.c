@@ -35,7 +35,7 @@ NON_MATCHING void func_801EECCC(void) {
     facing = ((PartyMember*)D_8014637C)->facing ^ 0x2;
 have_facing:
     g_Task->facing = facing;
-    func_800AFD9C();
+    Battle_CenterCamera();
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0x30;
     g_Task->timer        = 0;
@@ -64,7 +64,7 @@ MATCH void func_801EEE68(void) {
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
     if (timer == 16) {
-        func_800A9610(g_Battle.target_selector, 0x10);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
@@ -147,34 +147,29 @@ MATCH void func_801EF354(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF3DC(void) {
-    u8  counter;
-    u8  angle;
-    s32 value;
+MATCH void func_801EF3DC(void) {
+    PartyMember* work;
+    u8           counter;
+    s32          value;
 
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
-    if (!(counter & 0xFF)) {
+    if (counter == 0) {
         g_Task->facing       = g_BattleEffectBattler->facing;
         g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
-        angle                = g_Task->unk_04;
         g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
-        g_Task->param.unk_0B = angle * 4 & 0x3F;
         g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed + 0x01800000;
-        value                = D_801EFCC0[g_Task->unk_04];
-        g_Task->unk_10       = 0x60;
-        angle                = g_Task->unk_04;
-        g_Task->unk_14       = 0x20;
-        g_Task->unk_09       = angle * 4 + 1;
-        g_Task->unk_0C       = value << 8;
+        g_Task->param.unk_0B = g_Task->unk_04 * 0x4 & 0x3F;
+        work                 = g_Task;
+        value                = D_801EFCC0[work->unk_04];
+        work->unk_10         = 0x60;
+        work->unk_14         = 0x20;
+        work->unk_09         = work->unk_04 * 4 + 1;
+        work->unk_0C         = value << 8;
         g_Task->timer        = 0;
-        g_Task->header.step  = g_Task->header.step + 1;
+        g_Task->header.step += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EF3DC);
-#endif
 
 INCLUDE_ASM(func_801EF4DC);
 
@@ -189,7 +184,7 @@ MATCH void func_801EF690(void) {
     work->unk_10 += work->unk_1C;
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
-    if (!(counter & 0xFF)) {
+    if (!(counter & BYTE_MASK)) {
         g_Task->header.step += 1;
     }
 }
@@ -206,7 +201,7 @@ MATCH void func_801EF700(void) {
     work->timer  = counter;
     work->unk_1C = value;
     work->unk_10 += value;
-    if (!(counter & 0xFF)) {
+    if (!(counter & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
@@ -219,7 +214,7 @@ MATCH void func_801EF78C(void) {
     long    flags;
 
     PushMatrix();
-    if (BATTLE_ACTIVE_WORK->facing & 1) {
+    if (BATTLE_ACTIVE_WORK->facing & 0x1) {
         rot.vx = 0;
         rot.vy = g_Task->unk_0C;
         rot.vz = 0;

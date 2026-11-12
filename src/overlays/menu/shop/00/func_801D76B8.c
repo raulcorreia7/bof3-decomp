@@ -8,9 +8,9 @@ MATCH void func_801D76B8(void) {
     func_801D8050(0);
     cursor = &D_8014865D;
     WinDrawCueText(28, 21, (u16)((s8)*cursor + 0x65));
-    func_801D7E1C(D_80148656, 0x98, 0x3F, 0, 0xFF);
-    Menu_DrawCursorFrame(0x11, ((s8)D_80148656 * 0x36 + 0x3E) & 0xFFFE, 0x80, 0x34, 0, 6);
-    Menu_DrawCursorSprite(0x9B, (s8)*cursor * 0xD + 0x44, 0);
+    func_801D7E1C(D_80148656, 152, 63, 0, 0xFF);
+    Menu_DrawCursorFrame(17, ((s8)D_80148656 * 0x36 + 0x3E) & 0xFFFE, 128, 52, 0, 6);
+    Menu_DrawCursorSprite(155, (s8)*cursor * 0xD + 0x44, 0);
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));

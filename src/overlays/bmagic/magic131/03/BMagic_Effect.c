@@ -115,7 +115,7 @@ MATCH void func_801EFF48(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         direction = LOBU(g_Battle.scroll_dir);
         if (direction == 0 || direction == 3) {
             g_Task->unk_0C = 8;
@@ -139,7 +139,7 @@ MATCH void func_801F0034(void) {
     u8           count;
     PartyMember* work;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         count = g_Task->unk_09;
         if (count < 8U) {
             g_Task->unk_09 = count + 1;
@@ -179,7 +179,37 @@ MATCH void func_801F01F8(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
-INCLUDE_ASM(func_801F030C);
+MATCH void func_801F030C(void) {
+    POLY_F4* prim;
+    s32      shade;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    prim = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);
+    shade = g_Task->unk_09 * 15;
+    setRGB0(prim, shade, shade, shade);
+    GFX_AddPrim(2, sizeof(POLY_F4));
+    if (GetGraphType() == 1) {
+        tpage = 0x25;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
 
 MATCH void func_801F0438(void) {
     SYS_DISPATCH_BYTE(D_801F1C08, g_Task->header.step);
@@ -359,7 +389,7 @@ MATCH u8 func_801F1A58(void) {
     u8 i;
 
     for (i = 0; i < 48; i++) {
-        if (!(D_801F1CA0[i].header.flags & 1)) {
+        if (!(D_801F1CA0[i].header.flags & 0x1)) {
             D_801F1CA0[i].header.flags |= 1;
             return i;
         }

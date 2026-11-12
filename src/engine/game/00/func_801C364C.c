@@ -15,8 +15,8 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
     i = 0;
     if (enabled) {
         for (;;) {
-            route  = ((g_Task->direction_08 ^ 4) + i) & 7;
-            result = func_801C3E40(g_Task->pos.x.fixed + g_FacingSteps[route].x * 2, g_Task->pos.y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(g_Task->pos.z)) & 0xFF;
+            route  = ((g_Task->direction_08 ^ 0x4) + i) & 0x7;
+            result = func_801C3E40(g_Task->pos.x.fixed + g_FacingSteps[route].x * 2, g_Task->pos.y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(g_Task->pos.z)) & BYTE_MASK;
             /* FAKE: holds the increment after the probe call. */
             FAKE_BARRIER();
             i++;
@@ -27,7 +27,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
                 break;
             }
         }
-        g_Task->direction_08 = route ^ 4;
+        g_Task->direction_08 = route ^ 0x4;
     }
     g_Task->header.mode  = 2;
     g_Task->header.step  = 8;

@@ -10,7 +10,7 @@
 /* The global state byte the area update gates on. */
 
 /* The party position in 16.16 fixed point. */
-/* The payload's per-state handler table. */
+/* The payload's per-state handler table and its entry coordinate pairs. */
 extern u8 D_801F3420[];
 
 /* The scratchpad cell holding this mode's work pointer. */

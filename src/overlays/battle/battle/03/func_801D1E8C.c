@@ -63,7 +63,7 @@ NON_MATCHING void func_801D1E8C(void) {
         *(u8*)(&D_8014837B) = 2;
         D_80148357          = 2;
         D_8014839F          = 2;
-        func_801D7A40(D_8014837C, D_8014837E);
+        Battle_DrawPanelRows(D_8014837C, D_8014837E);
         func_801D8450((u32)g_Battle.panel_slot);
         func_801D750C((s32)D_80148358, (s32)D_8014835A);
         g_Battle.phase.step += 1;

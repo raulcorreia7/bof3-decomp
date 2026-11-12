@@ -1,4 +1,5 @@
 #include "scena06_00.h"
+#include "area/spad.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -53,7 +54,7 @@ MATCH void func_801FCF30(void) {
 }
 
 MATCH void func_801FCF98(void) {
-    SYS_SetFlag(g_SceneFlags, 0xCU);
+    SYS_SetFlag(g_SceneFlags, 12U);
 }
 
 MATCH void func_801FCFC0(void) {
@@ -120,7 +121,7 @@ MATCH void func_801FD1C8(void) {
     Game_SetScriptActive();
     *g_ScriptVars = 0;
     D_80146865    = 0;
-    if (SYS_TestFlag(g_SceneFlags, 0x22) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 34) == 0) {
         D_80146875 = 0;
     } else {
         D_80146875 = 0x14;
@@ -132,7 +133,7 @@ MATCH void func_801FD234(void) {
     Game_SetScriptActive();
     *g_ScriptVars = 0;
     D_80146865    = 0;
-    if (SYS_TestFlag(g_SceneFlags, 0x23) != 0) {
+    if (SYS_TestFlag(g_SceneFlags, 35) != 0) {
         D_80146875 = 0x14;
     } else {
         D_80146875 = 0xA;
@@ -168,7 +169,21 @@ INCLUDE_ASM(func_801FD3BC);
 
 INCLUDE_ASM(func_801FD568);
 
-INCLUDE_ASM(func_801FD748);
+MATCH s8 func_801FD748(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
+    s16 distance;
+    s16 z;
+
+    distance = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    z        = COORD_INT(g_Task->pos.z);
+    if (distance < z - 0x240) {
+        COORD_INT(g_Task->pos.z) = z + (g_Task->vz >> 8);
+        g_Task->vz += vz_delta;
+        return 1;
+    }
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x240;
+    g_Task->unk_04           = 0;
+    return 0;
+}
 
 INCLUDE_ASM(func_801FD800);
 
@@ -202,7 +217,7 @@ MATCH void func_801FDE2C(void) {
 }
 
 MATCH s32 func_801FDE34(void) {
-    if (!SYS_TestFlag(g_SceneFlags, 0x27)) {
+    if (!SYS_TestFlag(g_SceneFlags, 39)) {
         Game_SetScriptActive();
         g_ScriptVars[0]       = 0;
         g_ScriptVars[1]       = 0;

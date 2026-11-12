@@ -167,9 +167,11 @@ you add:
 WARNING: until Meson is configured again, a new `hand/` file does not enter the build graph. Without
 the check the image would not change and no error would appear.
 
-Meson regenerates the graph by itself when you edit a file under `config/`, a Python module that
-`tools/split.py` imports, or a source whose match marker decides a placed section. Regeneration
-takes seconds; a build with no change does not regenerate.
+Meson regenerates the graph by itself when you edit a config file that decides it (`splat.yaml`,
+`target.toml`, `link.toml`, `symbols.toml`), a Python module that `tools/split.py` imports, or a
+source whose match marker decides a placed section. Regeneration takes seconds; a build with no
+change does not regenerate, and the rest of `config/` (attempts, address names, the disc manifest,
+the SDK unit list) does not.
 
 ### decomp.me
 
