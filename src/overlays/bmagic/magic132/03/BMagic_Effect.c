@@ -8,7 +8,15 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC88);
 
-INCLUDE_ASM(func_801EEDD0);
+MATCH void func_801EEDD0(void) {
+    g_PaletteFades[g_Task->timer].offset.red++;
+    g_PaletteFades[g_Task->timer].offset.green++;
+    g_PaletteFades[g_Task->timer].offset.blue++;
+    if (++g_Task->unk_09 == 0x10) {
+        D_8014637C->unk_29 = 2;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EEEF4(void) {
     g_PaletteFades[g_Task->timer].offset.red--;
