@@ -43,6 +43,9 @@ void func_801F5B90(void);
 
 /* The value of area update step in the shared Area_Update body. */
 
+/* The panel setup the area route record seeds; the area callers pass the record's byte offset. */
+void func_8015AC8C(s32 panel);
+
 s32 func_801A79A4(s32, s32);
 
 u8 func_801F5028(s32 x, s32 y, u8 dir);
