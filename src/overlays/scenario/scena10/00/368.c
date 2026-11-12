@@ -191,7 +191,7 @@ MATCH void func_801FD734(void) {
     i = 0;
     do {
         if (D_801FE894[i].x == COORD_INT(g_Task->pos.x) && D_801FE894[i].y == COORD_INT(g_Task->pos.y)) {
-            if (SYS_TestFlag(g_SceneFlags, D_801FE894[i].flag + 0x20) == 0) {
+            if (SYS_TestFlag(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag) == 0) {
                 Actor_SelectScript(D_801FE894[i].script);
                 g_Task->unk_2A = 0;
             } else {
@@ -200,7 +200,7 @@ MATCH void func_801FD734(void) {
             return;
         }
         i++;
-    } while (i < 16);
+    } while (i < ARRAY_COUNT(D_801FE894));
 }
 
 MATCH void func_801FD814(void) {
