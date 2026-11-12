@@ -34,7 +34,7 @@ MATCH void Effect_NextStep(void) {
 
 INCLUDE_ASM(func_801EFA44);
 
-INCLUDE_ASM(func_801EFCDC);
+#include "overlays/bmagic/Effect_DrawSparkleDisc.h"
 
 #include "overlays/bmagic/func_801F0000.h"
 
