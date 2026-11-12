@@ -4,7 +4,17 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC24);
+MATCH void func_801EEC24(void) {
+    Magic113Steps handlers;
+
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);
+    if (g_Task->header.flags != 0) {
+        Effect_SetActorMatrix();
+        func_801EF4F0();
+        PopMatrix();
+    }
+}
+
 INCLUDE_ASM(func_801EECE0);
 
 INCLUDE_ASM(func_801EEE24);

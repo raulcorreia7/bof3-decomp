@@ -64,7 +64,14 @@ INCLUDE_ASM(func_801EF388);
 
 INCLUDE_ASM(func_801EF484);
 
-INCLUDE_ASM(func_801EF938);
+MATCH void func_801EF938(void) {
+    if (g_Task->param.unk_0B == 2) {
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_ACTION_UNK_5;
+        g_Game.members[g_Battle.active_battler].u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
+        func_801E5988();
+    }
+}
 
 /* func_801EF9F0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -79,7 +86,23 @@ INCLUDE_ASM(func_801EFAAC);
 
 INCLUDE_ASM(func_801EFBAC);
 
-INCLUDE_ASM(func_801EFC68);
+MATCH void func_801EFC68(void) {
+    PartyMember* work;
+    PartyMember* task;
+    u32          slot;
+
+    if (--g_Task->unk_09 == 0) {
+        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        task                               = g_Task;
+        g_BattleEffects[slot].target.party = work;
+        task->param.unk_0B += 1;
+        SND_QueueSelectionFx(0x103);
+        g_Task->unk_09 = 20;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFD24(void) {
     u8 count;
