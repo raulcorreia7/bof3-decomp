@@ -382,7 +382,28 @@ MATCH void func_801F0E90(void) {
     Area_UpdatePaletteTint((s8)g_Task->unk_09);
 }
 
-INCLUDE_ASM(func_801F0EEC);
+MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
+    SPRT* prim;
+    u16   tpage;
+
+    tpage = GetTPage(2, blend & BYTE_MASK, 0x340, 0x100);
+    GFX_SET_DRAW_MODE(tpage);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    prim = (SPRT*)g_GfxPrimCursor;
+    SetSprt(prim);
+    setRGB0(prim, color, color, color);
+    if ((sprite & BYTE_MASK) < 2) {
+        prim->x0 = g_Task->unk_2E.half - 0x20;
+        prim->y0 = g_Task->unk_30.half - 0x40;
+    } else {
+        prim->x0 = g_Task->unk_2E.half - 0x28;
+        prim->y0 = g_Task->unk_30.half - 0x40;
+    }
+    setUV0(prim, D_801F13A4[sprite & BYTE_MASK].u, D_801F13A4[sprite & BYTE_MASK].v);
+    setWH(prim, 0x50, 0x48);
+    SetSemiTrans(prim, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801F103C);
 
