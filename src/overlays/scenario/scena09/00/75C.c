@@ -162,7 +162,7 @@ MATCH void func_801FAC88(void) {
             }
             break;
         case 2:
-            if (g_UiWindowEffectBusy == 0) {
+            if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
                 if (SND_IsXAIdle() != 0) {
                     g_SceneState.step_05 = 3;

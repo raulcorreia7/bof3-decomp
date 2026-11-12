@@ -11,7 +11,7 @@ MATCH void func_801F8F18(void) {
             g_SceneState.step_05 = 1;
             break;
         case 1:
-            if (g_UiWindowEffectBusy == 0) {
+            if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags      = 0;
                 g_SceneState.step_05 = 2;
                 Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(18), TO_COORD(24), AREA_ENTRY_MAP_LOADING | FACING_UP);
@@ -27,7 +27,7 @@ MATCH void func_801F8F18(void) {
             }
             break;
         case 3:
-            if (g_UiWindowEffectBusy == 0) {
+            if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
                 SND_StartXAStream(0, 1);
                 g_SceneState.step_05 = 4;

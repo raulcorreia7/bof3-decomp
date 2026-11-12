@@ -42,7 +42,7 @@ MATCH void func_801F7A44(void) {
             }
             break;
         case 7:
-            if (g_UiWindowEffectBusy == 0) {
+            if (WINDOW_EFFECT_IDLE()) {
                 g_ScriptVars[0]      = 1;
                 g_SceneState.step_05 = 10;
             }
