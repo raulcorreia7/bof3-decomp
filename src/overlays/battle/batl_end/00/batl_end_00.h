@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 extern u16        D_801463B0;
-extern u16        D_80148628;
+extern s16        D_80148628;
 extern u16        D_8014862A;
 extern u8         D_8014862D;
 extern char       D_80149118[];
