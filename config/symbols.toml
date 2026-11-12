@@ -287,7 +287,9 @@ g_BMagicEffectModes = { addr = 0x801EF89C, source = "Handlers of magic009 (Chlor
 D_801EF8A4 = { addr = 0x801EF8A4, source = "Step handlers of magic009 (Chlorine), run by header.step (byte 0x02) from func_801EF120." }
 
 ["emi/bmagic/magic010/00"]
+g_PaletteFades = { addr = 0x80145BD4, alias = true }
 Effect_StartPaletteFade = { addr = 0x801EEC80, type = "func", source = "Frees the selected actor's palette fade, allocates a new one into the effect ticker (byte 0x0B), clears the effect timer (byte 0x09) and advances header.mode (byte 0x01) in magic010 (Unmotivate, Bad back, Watch Enemy…)." }
+Effect_BrightenPalette = { addr = 0x801EED0C, type = "func", source = "Raises the red, green and blue offsets of the palette fade row the effect ticker (byte 0x0B) names by one per frame and advances header.mode (byte 0x01) at sixteen in magic010 (Unmotivate, Bad back, Watch Enemy…)." }
 Effect_FadePaletteOut = { addr = 0x801EEE20, type = "func", source = "Darkens the palette fade row indexed by the effect timer by one per channel; on the last tick frees the fade of the selected battler and advances the mode." }
 Effect_PlayOnce = { addr = 0x801EEF58, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic010 (Unmotivate, Bad back, Watch Enemy…)." }
 
@@ -364,6 +366,7 @@ Effect_TickOnZeroTick = { addr = 0x801EF954, type = "func", source = "When the e
 g_BMagicEffectModes = { addr = 0x801EF9A4, source = "Handlers of magic038 (War Shout), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic039/03"]
+g_PaletteFades = { addr = 0x80145BD4, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_DispatchMode = { addr = 0x801EEC34, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic039 (Focus, Meditation)." }
 Effect_NextStepOnZeroTick = { addr = 0x801EEEA8, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is zero in magic039 (Focus, Meditation)." }
