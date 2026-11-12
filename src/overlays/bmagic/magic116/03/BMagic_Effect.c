@@ -73,18 +73,40 @@ MATCH void func_801EEFF4(void) {
     } while (index < 128);
 }
 
-INCLUDE_ASM(func_801EF020);
+MATCH void func_801EF020(u8* record) {
+    s32 offset;
+
+    record[0]                = 1;
+    record[1]                = 0;
+    record[2]                = 0x10;
+    offset                   = (RANDOM_MASK(0x1FF) - 0x100) << 8;
+    FIELD(s32, record, 0x04) = g_Task->pos.x.fixed + offset + offset;
+    FIELD(s32, record, 0x08) = g_Task->pos.y.fixed + 0x20000;
+    FIELD(s32, record, 0x0C) = g_Task->pos.z.fixed;
+    FIELD(s32, record, 0x14) = g_Task->pos.x.fixed + offset;
+    FIELD(s32, record, 0x18) = g_Task->pos.y.fixed;
+    FIELD(s32, record, 0x1C) = g_Task->pos.z.fixed;
+    record[0x34]             = RANDOM_MASK(1) << 7;
+    record[0x35]             = RANDOM_MASK(1) << 7;
+    record[0x36]             = RANDOM_MASK(1) << 7;
+    FIELD(s32, record, 0x24) = offset >> 1;
+    FIELD(s32, record, 0x28) = 0x10000;
+    FIELD(s32, record, 0x2C) = 0;
+    record[0x38]             = 0;
+    record[0x39]             = 0;
+    record[0x3A]             = 0;
+}
 
 INCLUDE_ASM(func_801EF118);
 
 MATCH void func_801EF258(void) {
-    s32 result;
+    u8* record;
     u8  i;
 
     for (i = 0; i < 8; i++) {
-        result = func_801EEFB8();
-        if (result != 0) {
-            func_801EF020(result);
+        record = func_801EEFB8();
+        if (record != NULL) {
+            func_801EF020(record);
         }
     }
 }
