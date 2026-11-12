@@ -4195,6 +4195,7 @@ g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted act
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world02/area111/13"]
+g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
 Message_SelectAnswer = { addr = 0x801F33D0, type = "func", source = "Sets g_MessageRequest to 3 when g_MessageChoice is nonzero, otherwise to 2." }
 
 ["emi/world02/area112/13"]

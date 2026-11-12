@@ -10,6 +10,8 @@
 extern Actor D_80147A58[];
 extern u8    D_801F4890[];
 extern u8    D_801F489C[];
+/* g_SceneEventStep read unsigned: func_801F3EE8 switches on a byte load. */
+extern u8    g_SceneEventStep_u8[];
 
 void func_801F2DA0(void* arg0, s32 arg1, s32 arg2);
 
