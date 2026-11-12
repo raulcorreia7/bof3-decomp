@@ -24,7 +24,7 @@ MATCH void func_801EEE94(void) {
         g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = actor->pos.z.fixed;
-        SND_QueueSelectionFx(0x100);
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         for (i = 0, anchor = 1; i < 6; i++) {
             slot                               = Battle_AllocEffect(1, 0x52) & BYTE_MASK;
             work                               = g_Task;
