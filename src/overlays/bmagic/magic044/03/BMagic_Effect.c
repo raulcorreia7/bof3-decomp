@@ -38,7 +38,8 @@ MATCH void func_801EEC5C(void) {
         src++;
     }
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + AREA_PALETTE_UNIT) = 0;
-    g_GfxPalettePending        = 1;
+
+    g_GfxPalettePending = 1;
     SND_QueueSelectionFx(0x100);
 }
 
