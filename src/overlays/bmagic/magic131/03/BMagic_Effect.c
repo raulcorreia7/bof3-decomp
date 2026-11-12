@@ -6,7 +6,33 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC24);
 
-INCLUDE_ASM(func_801EEDEC);
+MATCH void func_801EEDEC(void) {
+    PartyMember* target;
+    u16*         src;
+    u16*         dst;
+    u16          i;
+    u32          slot;
+
+    for (i = 0; i < ARRAY_COUNT(D_801F1CA0); i++) {
+        D_801F1CA0[i].header.flags = 0;
+        D_801F1CA0[i].header.mode  = 0;
+        D_801F1CA0[i].header.step  = 0;
+    }
+    g_Task->facing = g_BattleEffectBattler->facing;
+    Battle_CenterCamera();
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0xA;
+    g_Task->timer        = 0;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 105) & BYTE_MASK;
+    target                             = g_Task;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].target.party = target;
+    g_Task->param.unk_0B += 1;
+    BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionFx(0x102);
+}
 
 INCLUDE_ASM(func_801EEF64);
 

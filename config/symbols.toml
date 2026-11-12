@@ -1365,7 +1365,10 @@ D_801EFA6C = { addr = 0x801EFA6C, source = "Halfword table of magic130, indexed 
 
 ["emi/bmagic/magic131/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EF61C, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic131 (KaiserBreath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF668, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic131." }
 Effect_ClearTimerNextStep = { addr = 0x801F0178, type = "func", source = "Clears the effect timer (byte 0x09) and advances header.step (byte 0x02) in magic131 (KaiserBreath)." }
