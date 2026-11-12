@@ -32,6 +32,7 @@ extern u8             D_80146866;
 extern u8             D_80146867;
 extern u8             D_80146874;
 extern u8             D_80146875;
+extern u8             D_8018E244;
 extern u32            D_801F6C00;
 extern Callback       D_801FE3D8[];
 extern Callback       D_801FE3E4[];
@@ -42,5 +43,7 @@ extern Scena06Handler D_801FE46C[];
 
 extern u8 D_801FE478;
 extern s8 (*D_801FE48C[])(void);
+extern u8 D_801FE4E4;
+extern u8 D_801FE4EC[];
 
 #endif

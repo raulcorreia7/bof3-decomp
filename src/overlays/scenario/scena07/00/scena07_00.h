@@ -54,6 +54,9 @@ typedef struct Scena07Burst {
     u16 unk_10;
 } Scena07Burst;
 
+/* The burst position record the start step fills. */
+#define SCENA07_BURST_RECORD MEM_PTR(Scena07Burst, AREA_WORK + 0x948)
+
 extern Scena07Burst* D_801FDFBC;
 void                 func_801F97E0(Scena07Burst* burst);
 

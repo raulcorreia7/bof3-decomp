@@ -56,7 +56,10 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    On a miss, label the first hunk ([diagnose](../../../../docs/matching.md#diagnose)) and fix it
    by label. Helpers come after pure C fails, benign before harmful, each with its `FAKE:` note
    ([helpers](../../../../docs/matching.md#fake-match-helpers)); a near match goes to the
-   [permuter](../../../../docs/matching.md#permuter).
+   [permuter](../../../../docs/matching.md#permuter). `__builtin_memcpy` is not 1997 source: a
+   constant copy into a local is written `memcpy(dst, src, size)`, which this compiler expands to
+   the same bytes. A `FAKE_REG` is not source either: measure the plain, `register`, width,
+   declaration-order and inlined forms before keeping one.
 
 7. **Accept.** Replace the draft with a plain `MATCH` definition, or `HAND_ASM` for authored
    assembly ([markers](../../../../docs/matching.md#markers-and-unmatched-bodies)), and name it
