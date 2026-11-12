@@ -68,12 +68,12 @@ INCLUDE_ASM(func_801F752C);
 
 INCLUDE_ASM(func_801F75D8);
 
-MATCH s32 func_801F7748(void) {
+MATCH bool func_801F7748(void) {
     AreaSpark* spark;
     u8         i;
-    s32        alive;
+    bool       alive;
 
-    alive = 0;
+    alive = false;
     spark = MEM_PTR(AreaSpark, AREA_WORK);
     i     = 0;
     do {
@@ -83,7 +83,7 @@ MATCH s32 func_801F7748(void) {
             if (spark->pos.z < g_Task->pos.z.fixed) {
                 spark->active = 0;
             }
-            alive = 1;
+            alive = true;
         }
         spark++;
         i++;
