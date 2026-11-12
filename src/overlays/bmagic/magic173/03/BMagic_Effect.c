@@ -38,7 +38,7 @@ MATCH void func_801EEC5C(void) {
         *dst++ = *src++;
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
