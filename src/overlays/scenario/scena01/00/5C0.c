@@ -1,5 +1,6 @@
 #include "scena01_00.h"
 #include "area/map.h"
+#include "shared/AreaSpark.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -75,7 +76,24 @@ MATCH void func_801F7644(void) {
 
 INCLUDE_ASM(func_801F7678);
 
-INCLUDE_ASM(func_801F7A24);
+MATCH void func_801F7A24(AreaSpark* spark) {
+    DVECTOR screen;
+    s32     unused[4]; /* FAKE: pads the frame to retail size. */
+    TILE_1* tile;
+    u8      shade;
+
+    Area_ProjectPoint(&spark->pos.x, &screen);
+    tile = (TILE_1*)g_GfxPrimCursor;
+    SetTile1(tile);
+    SetSemiTrans(tile, 0);
+    tile->x0 = screen.vx;
+    tile->y0 = screen.vy;
+    shade    = -RANDOM_MASK(1);
+    tile->b0 = shade;
+    tile->g0 = shade;
+    tile->r0 = shade;
+    Area_AddCellPrim(spark->pos.x, spark->pos.y, 0, sizeof(TILE_1));
+}
 
 #include "shared/Area_ClearWorkColumn.h"
 
