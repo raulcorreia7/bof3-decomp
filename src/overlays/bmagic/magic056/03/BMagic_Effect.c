@@ -173,9 +173,9 @@ MATCH void func_801F04EC(void) {
         if (g_Battle.active_battler < 3) {
             member = &g_Game.members[g_Battle.active_battler];
             g_Task = member;
-            Actor_SelectScript((u8)(member->facing + 0x1C));
+            Actor_SelectScript(member->facing + 0x1C);
             g_Task = work;
-            Actor_SelectScript((u8)(work->facing + 0x1C));
+            Actor_SelectScript(work->facing + 0x1C);
         } else {
             func_801E257C(g_Battle.active_battler, 4);
         }
