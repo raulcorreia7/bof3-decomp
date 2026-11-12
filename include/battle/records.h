@@ -933,6 +933,8 @@ extern s16          D_801462AA;
 /* FAKE: g_Battle.row_cursor as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleRowCursor;
 extern u8           D_801462EE;
+/* FAKE: g_Battle.boss_flags as a global of its own; the sites that set a bit in it match only with a separate symbol. */
+extern u8           g_BattleBossFlags;
 /* FAKE: g_Battle.living_party_count as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleLivingPartyCount;
 

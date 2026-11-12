@@ -13,7 +13,7 @@ MATCH u8 func_801BF11C(void) {
     u16          color;
     s32          palette_offset;
 
-    if (g_Battle.outcome.options & 4) {
+    if (g_Battle.outcome.options & 0x4) {
         return 1;
     }
 

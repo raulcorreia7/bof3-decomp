@@ -13,7 +13,7 @@ MATCH void func_801F3F34(void) {
         Area_SetCellPalette(COORD_INT(actor->pos.x), COORD_INT(actor->pos.y));
     }
     if (g_Task->timer == 15) {
-        SYS_ClearFlag(g_SceneEventFlags, 0x1C);
+        SYS_ClearFlag(g_SceneEventFlags, 28);
         Actor_Clear();
     }
 }

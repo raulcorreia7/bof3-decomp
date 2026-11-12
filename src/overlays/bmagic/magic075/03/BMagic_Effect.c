@@ -33,7 +33,7 @@ MATCH void func_801EF0D0(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        angle                      = (g_Task->param.unk_0B & 7) << 9;
+        angle                      = (g_Task->param.unk_0B & 0x7) << 9;
         angle_cell                 = &D_1F800000;
         *angle_cell                = angle;
         g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle) * 0xA000) >> 12);

@@ -50,8 +50,8 @@ MATCH void func_801F6EB4(void) {
     cell3                                     = cell[3];
     FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 0;
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 0;
-    GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
-    GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
+    GFX_AllocPaletteFade(&g_Actors[work[3]], 15, 0, 0, 1);
+    GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 15, 1);
     g_Task->timer       = 4;
     g_Task->header.mode = 1;
 }
@@ -257,7 +257,7 @@ MATCH void func_801F8370(void) {
     s32        temp_v1;
     u8         temp_v0_2;
 
-    if (g_Task->timer & 4) {
+    if (g_Task->timer & 0x4) {
         temp_v1 = func_8019601C() & BYTE_MASK;
         if (temp_v1 != 0xFF) {
             temp_v0               = &g_ActorSlots[temp_v1];
@@ -316,7 +316,7 @@ MATCH void func_801F8710(void) {
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, g_Task->timer, 0x80, 0);
     g_Task->timer += 15;
     if (g_Task->timer >= 61) {
-        g_Task->timer = 0xFF;
+        g_Task->timer = 255;
         g_Task->header.mode += 1;
     }
 }
@@ -324,7 +324,7 @@ MATCH void func_801F8710(void) {
 MATCH void func_801F87A4(void) {
     u8 count;
 
-    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, (g_Task->timer & 1) | 0x3C, 0x80, 0);
+    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, (g_Task->timer & 0x1) | 0x3C, 0x80, 0);
     if (g_Task->timer == 215) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
     }
@@ -415,7 +415,7 @@ MATCH void func_801FC410(void) {
 
 MATCH void func_801FC4AC(void* entity, void* bits) {
     Game_SetScriptActive();
-    SYS_SetFlag(bits, 0x14U);
+    SYS_SetFlag(bits, 20U);
     g_SceneState.state_04 = 4;
     g_SceneState.step_05  = 0;
 }
@@ -448,7 +448,7 @@ MATCH s32 func_801FC5A4(void) {
 
 MATCH void func_801FC5FC(void) {
     Item_VitalAdd(VITAL_ITEM_FLIER);
-    Message_StartAreaMessage(0x2F);
+    Message_StartAreaMessage(47);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     SND_PauseBGM(g_SndBGMId);
     SND_StartXAStream(2, 1);
@@ -535,7 +535,7 @@ MATCH s32 func_801FC8AC(s32 entry_x, s32 entry_y) {
 }
 
 MATCH s8 func_801FC944(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 0x15) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 21) == 0) {
         if (entry_y == TO_COORD(65) + COORD_HALF) {
             if (((entry_x >> 0x10) - 32) < 4U) {
                 g_SceneState.state_04 = 4;
@@ -550,7 +550,7 @@ MATCH s8 func_801FC944(s32 entry_x, s32 entry_y) {
 }
 
 MATCH s8 func_801FC9DC(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 0x18) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 24) == 0) {
         if (entry_x == TO_COORD(58) + COORD_HALF) {
             if (((entry_y >> 0x10) - 60) >= 2U) {
                 goto block_4;
@@ -582,7 +582,7 @@ MATCH s8 func_801FC9DC(s32 entry_x, s32 entry_y) {
 }
 
 MATCH s8 func_801FCAB8(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 0x1A) != 0) {
+    if (SYS_TestFlag(g_SceneFlags, 26) != 0) {
         if ((entry_x >> 0x10) == 21) {
             if (((entry_y >> 0x10) - 52) < 2U) {
                 g_SceneState.state_04 = 5;
@@ -606,9 +606,9 @@ MATCH s32 func_801FCCDC(s32 x, s32 y) {
 }
 
 MATCH s8 func_801FCD1C(s32 x, s32 y) {
-    if (SYS_TestFlag(g_SceneFlags, 0x1E) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 30) == 0) {
         if (y == TO_COORD(73)) {
-            if (((x >> 0x10) - 14) < 4U) {
+            if (((x >> 16) - 14) < 4U) {
                 Game_SetScriptActive();
                 g_SceneState.state_04 = 8;
                 g_SceneState.step_05  = 2;

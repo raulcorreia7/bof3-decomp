@@ -7,7 +7,7 @@ MATCH void func_8019AB5C(void) {
     work  = g_Task;
     value = work->timer;
     if (value == 0) {
-        SYS_ClearFlag(g_SceneEventFlags, 0x1Cu);
+        SYS_ClearFlag(g_SceneEventFlags, 28u);
         Actor_Clear();
         return;
     }

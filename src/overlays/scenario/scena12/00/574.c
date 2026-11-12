@@ -93,7 +93,7 @@ MATCH void func_801F75EC(void) {
     u8    value;
 
     buffer = (char*)g_UiFormatBuffer;
-    Menu_DrawHeaderBar(0x8A, 0x1E, 0x2D, 0x14, 1u);
+    Menu_DrawHeaderBar(138, 30, 45, 20, 1u);
     value = D_801FD288.bytes[0];
     fmt   = D_801F6C04;
     TEXT_Format(buffer, fmt, value);
@@ -160,7 +160,29 @@ MATCH void func_801F88A8(void) {
 
 INCLUDE_ASM(func_801F88B0);
 
-INCLUDE_ASM(func_801F894C);
+MATCH void func_801F894C(void) {
+    switch (g_SceneState.step_05) {
+        case 51:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                Game_ClearScriptActive();
+                g_SceneState.step_05  = 0;
+                g_SceneState.state_04 = 0;
+            }
+            break;
+
+        case 50:
+            Message_StartAreaMessage(6);
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_SceneState.step_05 = 51;
+            break;
+
+        case 60:
+            Message_StartAreaMessage(7);
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_SceneState.step_05 = 51;
+            break;
+    }
+}
 
 MATCH void func_801F89FC(void) {
 }
@@ -290,7 +312,7 @@ MATCH s32 func_801FCCBC(void) {
     D_80146865      = 0;
     D_80146866      = 0;
     D_80146867      = 0;
-    if (g_Game.members[0].chr.character_id != 5) {
+    if (g_Game.members[0].chr.character_id != CHAR_ID_MOMO) {
         D_80146875 = 0;
         D_80146874 = 5;
         return 1;

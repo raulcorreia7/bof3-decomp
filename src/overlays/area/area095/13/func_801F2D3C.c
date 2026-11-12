@@ -1,7 +1,7 @@
 #include "area095_13.h"
 
 MATCH void func_801F2D3C(void) {
-    if ((SYS_TestFlag(g_SceneEventFlags, 0x22) != 0) || ((SYS_TestFlag(g_SceneEventFlags, 0x21) != 0) && (g_SceneState.scenario_id < 8))) {
+    if ((SYS_TestFlag(g_SceneEventFlags, 34) != 0) || ((SYS_TestFlag(g_SceneEventFlags, 33) != 0) && (g_SceneState.scenario_id < 8))) {
         g_AreaSceneMode      = 1;
         g_Task->pos.z.fixed  = -0x100;
         g_Task->param.unk_0B = 0x80;

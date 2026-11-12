@@ -14,13 +14,13 @@ MATCH void func_801D6818(void) {
                     ((g_Game.members[BATTLE_PARTY_CURSOR].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u)) {
                     g_Game.members[BATTLE_PARTY_CURSOR].u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
                     if (g_Game.members[BATTLE_PARTY_CURSOR].chr.character_id == CHAR_ID_REI) {
-                        slot                               = (u8)Battle_AllocEffect(0u, 0xBu);
+                        slot                               = (u8)Battle_AllocEffect(0u, 11u);
                         g_BattleEffects[slot].target.party = &g_Game.members[BATTLE_PARTY_CURSOR];
                     } else {
                         for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
                             s_BattleBattlerTemplates[index].u.turn.action_flags.value &= ~COMBATANT_FLAG_DRAGON_FORM_QUEUED;
                         }
-                        slot                               = (u8)Battle_AllocEffect(0u, 0xCu);
+                        slot                               = (u8)Battle_AllocEffect(0u, 12u);
                         g_BattleEffects[slot].target.party = &g_Game.members[BATTLE_PARTY_CURSOR];
                     }
                     BATTLE_PARTY_CURSOR += 1u;

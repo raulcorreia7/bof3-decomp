@@ -116,7 +116,7 @@ MATCH void func_80098450(void) {
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         value                         = D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C] + (g_MenuPanelTasks[16].unk_0A << 8);
         g_BattleActorTurn->command.id = value;
-        if ((func_801AF494(g_MenuPanelTasks[16].unk_08, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
+        if ((func_801AF494(g_MenuPanelTasks[16].unk_08, CHAR_ID_RYU_YOUNG, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }

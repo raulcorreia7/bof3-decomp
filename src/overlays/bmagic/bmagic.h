@@ -302,6 +302,10 @@ extern Callback          g_BMagicEffectModes[];
 extern BMagicEffectWork* D_801F17B0;
 extern BMagicEffectWork* D_801F17B4;
 
+/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
+ * the row's column and g_EmiLoadedCharacterIndex picks the id. */
+extern u16* D_800B499C[][2];
+
 /* func_800A9610 */
 void Battle_ApplyDamageFlags(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another

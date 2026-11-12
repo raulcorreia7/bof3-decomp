@@ -38,7 +38,7 @@ MATCH u32 Battle_ScaleDamage(u32 unused, u8 battler_index, s32 damage_value) {
     }
 
     if ((damage & BYTE_MASK) >= 0x80) {
-        damage += 0x100;
+        damage += 256;
     }
     return ((damage << 8) >> 16);
 }

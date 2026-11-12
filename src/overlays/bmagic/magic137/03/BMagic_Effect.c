@@ -41,12 +41,12 @@ MATCH void func_801EF174(void) {
     phase += 1;
     timer             = work->unk_09;
     work->param.phase = phase + (timer >> 6);
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
     count          = g_Task->unk_09 + 2;
     g_Task->unk_09 = count;
-    if (count == 0xC0) {
+    if (count == 192) {
         g_Task->header.step += 1;
     }
 }
@@ -59,12 +59,12 @@ MATCH void func_801EF21C(void) {
     phase += 1;
     timer             = work->unk_09;
     work->param.phase = phase + (timer >> 6);
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer -= 1;
     }
     count          = g_Task->unk_09 - 2;
     g_Task->unk_09 = count;
-    if (count == 0x60) {
+    if (count == 96) {
         g_Task->header.step += 1;
     }
 }

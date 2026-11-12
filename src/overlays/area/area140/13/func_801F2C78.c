@@ -7,7 +7,7 @@ MATCH void func_801F2C78(void) {
     COORD_INT(g_Task->pos.z) = -1472;
     g_Task->screen_y         = 0;
     g_Task->header.step++;
-    if (!SYS_TestFlag(g_SceneEventFlags, 0x54)) {
+    if (!SYS_TestFlag(g_SceneEventFlags, 84)) {
         g_Task->header.step = 5;
     } else {
         work = g_Task;

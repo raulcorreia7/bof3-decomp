@@ -18,7 +18,7 @@ MATCH void func_801EED68(void) {
     PartyMember* work;
 
     if (g_Task->param.unk_0B == 2) {
-        slot                               = Battle_AllocEffect(1, 0x12) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = 2;
         g_BattleEffects[slot].target.party = work;
@@ -81,7 +81,25 @@ MATCH bool Effect_TargetIsIdentified(void) {
     return BIT_ARRAY_TEST(g_IdentifiedEnemies, id) != 0;
 }
 
-INCLUDE_ASM(func_801EF174);
+MATCH void func_801EF174(void) {
+    u8 id;
+
+    /* kept: retail reloads the target row at each access; a PartyMember* local changes the bytes. */
+    id                                                        = g_Game.members[g_Battle.target_selector].chr.character_id;
+    g_Game.members[g_Battle.target_selector].chr.character_id = CHAR_ID_RYU_YOUNG;
+    func_801EF590(g_Game.members[g_Battle.target_selector].chr.name, 112, 48);
+    g_Game.members[g_Battle.target_selector].chr.character_id = id;
+    func_801EF76C(D_801F0B64, 90, 68);
+    func_801EF76C(D_801F0B7C, 128, 68);
+    func_801EF590(D_801F0B8C, 112, 80);
+    func_801EF590(D_801F0B88, 156, 100);
+    func_801EF590(D_801F0B6C, 176, 100);
+    func_801EF590(D_801F0B88, 156, 120);
+    func_801EF590(D_801F0B70, 176, 120);
+    func_801EF76C(D_801F0B74, 90, 138);
+    func_801EF590(D_801F0B8C, 112, 152);
+    func_801EF590(D_801F0B8C, 112, 172);
+}
 
 INCLUDE_ASM(func_801EF2DC);
 

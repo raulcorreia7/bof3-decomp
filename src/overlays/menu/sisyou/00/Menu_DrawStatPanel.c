@@ -21,7 +21,7 @@ MATCH void Menu_DrawStatPanel(s16 panel_x, s16 panel_y, u8 palette_index) {
     UI_DrawWindow((y15), ((panel_y + 3)), MENU_STAT_WINDOW_WIDTH, MENU_STAT_WINDOW_HEIGHT, 0, base[0]);
     xb     = panel_x + 0xB;
     y8     = panel_y + 8;
-    entryp = (Character*)(&g_WindowStyle + 0x16 + palette_index * 0xA4);
+    entryp = (Character*)(&g_WindowStyle + 22 + palette_index * 0xA4);
     UI_DrawText(xb, y8, 0, TEXT_LENGTH_MAX, g_MenuLabelPower);
     TEXT_Format(g_UiFormatBuffer, D_801D0C04, entryp->stats.power);
     x30 = panel_x + 0x30;

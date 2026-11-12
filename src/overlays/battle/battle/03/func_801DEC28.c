@@ -25,7 +25,7 @@ MATCH void func_801DEC28(u8* out, u8* text, s32 width, s32 max_chars) {
             }
         }
     }
-    pad = (((width & BYTE_MASK) - (used & BYTE_MASK)) / 2) + (used & 1);
+    pad = (((width & BYTE_MASK) - (used & BYTE_MASK)) / 2) + (used & 0x1);
     if (pad & BYTE_MASK) {
         do {
             dst += 1;

@@ -7,7 +7,7 @@ MATCH void func_801AD734(void) {
 
     choice = RANDOM_MASK(0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        func_8015BAC4(((g_Game.members[0].facing ^ 4) & 7));
+        func_8015BAC4(((g_Game.members[0].facing ^ 0x4) & 0x7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((FIELD(u8, GAME_WORK_AREA_PTR, 0x94u) & 0x80) == 0) {
