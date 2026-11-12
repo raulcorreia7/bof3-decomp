@@ -1,8 +1,7 @@
 /* Spawns one field record for the character: claims a free g_ActorSlots slot, writes the kind byte at +0x05, the caller's kind at +0x01, the 16.16 position words at +0x34/+0x38, the ground height at +0x3E and clears the link byte at +0x0B. */
 MATCH void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y) {
-    /* FAKE: retail keeps the kind in $s1 and the position words in $s2/$s3;
-     * gcc-2.7.2 assigns the first two registers by live length instead. */
-    FAKE_REG(s32, y, "s3");
+    /* FAKE: retail keeps the kind in $s1. */
+    s32 y;
     FAKE_REG(s32, kind, "s1");
     s32 x;
     u8  slot;
