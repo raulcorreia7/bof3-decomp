@@ -268,7 +268,21 @@ MATCH void func_801FD5C4(void) {
     g_SceneState.state_04 = 17;
 }
 
-INCLUDE_ASM(func_801FD60C);
+MATCH void func_801FD60C(Actor* actor) {
+    Game_SetScriptActive();
+    g_ScriptVars[0]      = 10;
+    g_ScriptVars[1]      = 0;
+    g_ScriptVars[2]      = 0;
+    actor->header.mode   = 4;
+    actor->unk_7E        = 0;
+    actor->unk_7B        = 0;
+    actor->unk_77        = 10;
+    g_Task->direction_08 = g_Game.members[0].facing ^ 4;
+    func_8015BAC4(g_Task->direction_08);
+    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    g_SceneState.step_05  = 10;
+    g_SceneState.state_04 = 13;
+}
 
 MATCH void func_801FD6CC(Actor* actor) {
     Game_SetScriptActive();
