@@ -15,12 +15,14 @@ names the split assembly that `INCLUDE_ASM` pulls in. A source under `src/` also
 
 Objects are cached in ~/.cache/bof3-cc (BOF3_CC_CACHE_DIR moves it), keyed on the preprocessed
 source, the arguments and the hashes of GCC, maspsx, DMPSX and the assembler, so every worktree
-shares them. BOF3_CC_CACHE=0 turns the cache off.
+shares them; the first compiler of a key writes it and the rest wait for its object.
+BOF3_CC_CACHE=0 turns the cache off.
 
 PSX_GCC=<path> picks the compiler binary. Run it as a script: `python -m` would put the
 working directory, a build directory that changes with every object, on the import path.
 """
 
+import fcntl
 import glob
 import hashlib
 import os
@@ -274,33 +276,58 @@ def cache_key(plan, gcc_args, env):
     return key.hexdigest()
 
 
+def take_cached(plan, stored, build_dir):
+    """Copy the cached object and its depfile to the output; false when either is missing."""
+    if not (os.path.isfile(f"{stored}.o") and os.path.isfile(f"{stored}.dep")):
+        return False
+    os.makedirs(os.path.dirname(plan["output"]) or ".", exist_ok=True)
+    shutil.copyfile(f"{stored}.o", plan["output"])
+    if plan["depfile"]:
+        with open(f"{stored}.dep", encoding="utf-8") as handle:
+            write_depfile(plan, handle.read().split("\n")[:-1], build_dir)
+    return True
+
+
+def store_cached(stored, plan, deps):
+    """Write one object and its depfile into the cache; a later writer replaces both."""
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    unique = f"{os.getpid()}.tmp"
+    shutil.copyfile(plan["output"], f"{stored}.o{unique}")
+    with open(f"{stored}.dep{unique}", "w", encoding="utf-8") as out:
+        out.write("".join(f"{dep}\n" for dep in deps or []))
+    os.replace(f"{stored}.dep{unique}", f"{stored}.dep")
+    os.replace(f"{stored}.o{unique}", f"{stored}.o")
+
+
 def cached_compile(plan, gcc_args, env, tmp, build_dir):
-    """Compile through the shared object cache; return the exit status."""
+    """Compile through the shared object cache; return the exit status.
+
+    A header change asks every worktree for the same keys at once. The first compiler of a key
+    holds its lock file, writes the object and releases it; the others wait and take that object
+    instead of compiling it again.
+    """
     key = None
     if os.environ.get("BOF3_CC_CACHE") != "0":
         key = cache_key(plan, gcc_args, env)
-    stored = os.path.join(CACHE_DIR, key) if key else None
-    if stored and os.path.isfile(f"{stored}.o") and os.path.isfile(f"{stored}.dep"):
-        os.makedirs(os.path.dirname(plan["output"]) or ".", exist_ok=True)
-        shutil.copyfile(f"{stored}.o", plan["output"])
-        if plan["depfile"]:
-            with open(f"{stored}.dep", encoding="utf-8") as handle:
-                write_depfile(plan, handle.read().split("\n")[:-1], build_dir)
-        return 0
-    status, deps = compile_one(plan, gcc_args, env, tmp)
-    if status == 0 and stored:
-        os.makedirs(CACHE_DIR, exist_ok=True)
-        unique = f"{os.getpid()}.tmp"
-        shutil.copyfile(plan["output"], f"{stored}.o{unique}")
-        with open(f"{stored}.dep{unique}", "w", encoding="utf-8") as out:
-            out.write("".join(f"{dep}\n" for dep in deps or []))
-        os.replace(f"{stored}.dep{unique}", f"{stored}.dep")
-        os.replace(f"{stored}.o{unique}", f"{stored}.o")
-        if plan["depfile"]:
+    if key is None:
+        status, deps = compile_one(plan, gcc_args, env, tmp)
+        if status == 0 and plan["depfile"]:
             write_depfile(plan, deps, build_dir)
-    elif status == 0 and plan["depfile"]:
-        write_depfile(plan, deps, build_dir)
-    return status
+        return status
+    stored = os.path.join(CACHE_DIR, key)
+    if take_cached(plan, stored, build_dir):
+        return 0
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    with open(f"{stored}.lock", "a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        if take_cached(plan, stored, build_dir):
+            return 0
+        status, deps = compile_one(plan, gcc_args, env, tmp)
+        if status == 0:
+            store_cached(stored, plan, deps)
+            if plan["depfile"]:
+                write_depfile(plan, deps, build_dir)
+        return status
 
 
 def main(argv):
