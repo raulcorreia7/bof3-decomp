@@ -109,7 +109,23 @@ MATCH void func_801EF8A8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF8EC);
+MATCH void func_801EF8EC(void) {
+    Magic076Steps handlers = D_801EEC1C;
+    s32           tpage;
+
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        Battle_ProjectRange();
+        func_801EFEA8();
+        func_801F00FC();
+    }
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+}
 
 INCLUDE_ASM(func_801EFA60);
 

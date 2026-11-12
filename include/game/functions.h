@@ -141,6 +141,8 @@ void* Area_SetCameraMatrix(void* out_matrix);
 void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 /* func_801AFF64 */
 void  Matrix_SetIdentity(MATRIX* matrix);
+/* func_801AFF90 */
+s16   func_801AFF90(Point2D* origin, Point2D* first_point, Point2D* second_point);
 /* func_801AFFD8 */
 void  func_801AFFD8(const void* world_position, void* screen_xy, void* projection);
 /* func_801B0DFC */

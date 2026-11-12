@@ -11,6 +11,20 @@
 #include <rand.h>
 
 extern u8* D_80147B40;
+/* The cell the party leader's choice commits and the bit the event sets. */
+extern s16 D_80147B26[];
+extern u8  D_80147CC8;
+
+/* One staged party cell: its x, y and facing. */
+typedef struct AreaCellEntry {
+    u8 x;
+    u8 y;
+    u8 facing;
+} AreaCellEntry;
+
+ASSERT_SIZE(AreaCellEntry, 0x03);
+
+extern AreaCellEntry D_801F636C[];
 
 void func_801F3588(u8* dst, u8* src, u16* state);
 

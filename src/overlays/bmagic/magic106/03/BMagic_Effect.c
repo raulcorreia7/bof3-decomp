@@ -47,7 +47,24 @@ MATCH void func_801EEF24(void) {
 /* func_801EEFAC */
 #include "overlays/bmagic/Effect_StartOrbit.h"
 
-INCLUDE_ASM(func_801EF16C);
+MATCH void func_801EF16C(void) {
+    s32 threshold;
+
+    g_BMagicOrbitWork->radius -= 2;
+    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
+    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
+    g_BMagicOrbitWork->unk_0B++;
+    if (g_BMagicOrbitWork->unk_09 < 16) {
+        g_BMagicOrbitWork->unk_09 += 2;
+    }
+    threshold = ((g_BMagicOrbitWork->unk_04 >> 5) * 8) + 0x20;
+    if (g_BMagicOrbitWork->radius <= threshold) {
+        g_BMagicOrbitWork->header.step++;
+        if (g_BMagicOrbitWork->unk_04 == 0) {
+            Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
+        }
+    }
+}
 
 /* func_801EF29C */
 #include "overlays/bmagic/Effect_StepOrbit.h"
