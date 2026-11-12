@@ -20,7 +20,7 @@ MATCH void func_801D8188(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = bar + (sel << 5) + 0xDE;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
     key                                                         = &g_InputPressed;
-    slot -= 0xB4;
+    slot -= 180;
     if (*key & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         *toggle ^= 1;
@@ -28,7 +28,7 @@ MATCH void func_801D8188(void) {
     if (*key & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
-            Char_AddAbility(*(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) + g_MenuPanelTasks[16].unk_0C), 0, 1, 0);
+            Char_AddAbility(*(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_MenuPanelTasks[16].unk_0C), 0, 1, 0);
             *(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) + g_MenuPanelTasks[16].unk_0C) = 0;
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));

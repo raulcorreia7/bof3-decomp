@@ -26,7 +26,7 @@ MATCH void func_801EEC5C(void) {
     WorldPos_Copy(&task->pos, &g_BattleEffectBattler->pos);
     task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 0x67) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 103) & BYTE_MASK;
     target                             = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 1;
@@ -89,7 +89,7 @@ MATCH void func_801EEF84(void) {
         }
         i++;
     } while ((u32)(i & BYTE_MASK) < 8);
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         if (g_Task->timer < 32) {
             g_Task->timer += 1;
         }
@@ -103,7 +103,7 @@ MATCH void func_801EF0F0(void) {
     u8 count;
     u8 timer;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         timer = g_Task->timer;
         if (timer < 32U) {
             g_Task->timer = timer + 1;
@@ -112,7 +112,7 @@ MATCH void func_801EF0F0(void) {
     g_Task->unk_09 += 1;
     count          = g_Task->unk_5D - 1;
     g_Task->unk_5D = count;
-    if ((count << 0x18) == 0) {
+    if ((count << 24) == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }

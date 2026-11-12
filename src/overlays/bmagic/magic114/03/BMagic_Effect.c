@@ -164,7 +164,7 @@ MATCH void func_801F0D6C(void) {
     g_Task->unk_26    = 0;
     g_Task->unk_27    = 0x1A;
     g_Task->unk_28    = 1;
-    g_Task->unk_2A    = (g_Task->facing - 1) & 1;
+    g_Task->unk_2A    = (g_Task->facing - 0x1) & 1;
     g_Task->unk_29    = 4;
     g_Task->unk_24    = 0;
     work              = g_Task;

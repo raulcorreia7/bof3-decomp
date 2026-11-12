@@ -42,7 +42,7 @@ MATCH void Battle_DrawCommandList(void) {
             }
             func_800B1DAC((g_MenuCurrentPanel->pos.x + 0x10), (g_MenuCurrentPanel->pos.y + (line_y + 0x18)), slot_a & 0x1F);
             line_y += 0x2D;
-            UI_DrawTextString((g_MenuCurrentPanel->pos.x + 16), (g_MenuCurrentPanel->pos.y + line_y), clut, 0xFF,
+            UI_DrawTextString((g_MenuCurrentPanel->pos.x + 16), (g_MenuCurrentPanel->pos.y + line_y), clut, 255,
                               Message_GetText(((u8*)&D_800B4C90)[D_80145518[(s16)g_MenuCurrentPanel->u.battle.row_base + row].gate_03 & 0x1F]));
             TEXT_Format(g_UiFormatBuffer, D_80096A2C, sum & BYTE_MASK);
             UI_DrawGlyphString((g_MenuCurrentPanel->pos.x + 88), (g_MenuCurrentPanel->pos.y + line_y), clut, g_UiFormatBuffer);

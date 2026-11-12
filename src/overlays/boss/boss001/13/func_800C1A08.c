@@ -12,7 +12,7 @@ MATCH void func_800C1A08(void) {
         g_Task->unk_2A               = 0;
         Actor_SelectScript(1U);
         g_BattleResult |= 4;
-        Area_SetCellPalette(0x64, 0x14);
+        Area_SetCellPalette(100, 20);
         g_Task->header.step += 1;
     }
     Actor_StepAnimLoop();

@@ -17,7 +17,7 @@ MATCH u8 func_801E8FA8(void) {
     mask &= 0x58u;
     index = (start_index + 1u) & 0xFu;
     while (index != start_index) {
-        if (((mask >> index) & 1) != 0) {
+        if (((mask >> index) & 0x1) != 0) {
             return index;
         }
         index = (index + 1u) & 0xFu;

@@ -95,7 +95,7 @@ MATCH void func_801EFF88(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        g_Task->unk_14 = D_801F0C68[g_Task->param.unk_0B & 3];
+        g_Task->unk_14 = D_801F0C68[g_Task->param.unk_0B & 0x3];
         g_Task->unk_20 = -(g_Task->unk_14 / 8);
         g_Task->unk_09 = 16;
         g_Task->header.step += 1;
