@@ -76,7 +76,36 @@ MATCH void func_801EFAD4(void) {
 
 #include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
 
-INCLUDE_ASM(func_801EFBEC);
+MATCH void func_801EFBEC(void) {
+    PartyMember* work;
+
+    work              = g_Task;
+    work->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
+    work->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
+    work->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed + 0x800000;
+    g_Task->unk_25    = 0x1D;
+    g_Task->unk_26    = 0;
+    if (g_Task->unk_03 != 0) {
+        g_Task->unk_27 = 0x1A;
+        g_Task->unk_28 = 1;
+        g_Task->unk_24 = 0;
+    } else {
+        g_Task->unk_27 = 0xA0;
+        g_Task->unk_28 = 0;
+        g_Task->unk_24 = 4;
+    }
+    g_Task->unk_5D      = 0;
+    g_Task->unk_5E      = 0;
+    g_Task->unk_5F      = 0;
+    g_Task->unk_5C      = 0;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 4;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = 1;
+    Actor_SelectScript(0);
+    g_Task->unk_09 = D_801EFE34[g_Task->unk_04];
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EFD84(void) {
     u8 count;
