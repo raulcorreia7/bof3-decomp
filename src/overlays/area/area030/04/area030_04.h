@@ -315,7 +315,8 @@ typedef struct FishingThresholdData {
 
 extern s16                   D_800396C0;
 extern s16                   D_800396FE;
-extern u8                    D_800F724C;
+/* D_800F724C */
+extern u8                    s_ShopMode;
 extern u8                    D_800F724D;
 extern u8                    D_800F724E;
 extern u8                    D_800F724F;
@@ -493,7 +494,8 @@ extern FishingTarget*        g_FishingLureRow;
 /* D_801E3214 */
 extern u8                    g_FishingNewRecord;
 
-s32  func_800F7094(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
+/* func_800F7094 */
+s32  Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
 void func_801D0C90(void);
 void func_801D0CDC(void);
 void func_801D0DDC(void);

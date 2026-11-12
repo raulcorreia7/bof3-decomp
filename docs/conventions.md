@@ -684,7 +684,7 @@ decomp-specific cases stay:
 - a `FAKE:` note on a fake helper;
 - `@bug`;
 - legal text and tool directives (`clang-format off`, the `M2CTX` and `PERMUTER` guards);
-- failed attempts in `config/attempts.tsv`, never in source.
+- failed attempts in `config/attempts.jsonl`, never in source.
 
 | Where                              | Says                                                                                                 |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------- |

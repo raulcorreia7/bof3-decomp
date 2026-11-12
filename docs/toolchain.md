@@ -190,6 +190,15 @@ how each is made. `meson.build` turns that into one Ninja edge per object, link 
   that Ninja reads.
 - `meson.build` defines the compile flags once and writes them to `build/meson/emit/cflags.txt`.
 
+## Data files
+
+A tracked data file with one record per row is JSON Lines (`.jsonl`): one JSON object per line,
+UTF-8, no trailing spaces, a fixed key order, and the row order the file keeps. Free text needs no
+quoting. `config/attempts.jsonl` holds the failed attempts and
+`config/sdk/library-units.jsonl` the SDK units. The build graph that `tools/split.py`
+prints for `meson.build` is the exception: it stays tab-separated, because Meson has no JSON parser
+and it is a pipe, not a file.
+
 ## Compiler chain
 
 GCC 2.7.2 PSX (decompals/old-gcc 0.13), then maspsx with ASPSX 2.56, `-O2 -G0`, C89. One compiler
@@ -253,9 +262,9 @@ blocks, so a twin whose value is used after the first branch shares a statement 
 
 ## PsyQ
 
-The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.csv` records one
-row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few link
-retail split assembly because no member object reproduces them. The two
+The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.jsonl` records
+one row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few
+link retail split assembly because no member object reproduces them. The two
 executables link all their SDK code (`slus_004_22` and `logo`); the EMI overlays link none and call
 the main executable. Both executables carry the SCE 3.7 version word `DA 94 37 00`.
 

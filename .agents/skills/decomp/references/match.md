@@ -19,7 +19,10 @@ whole match; [matching](../../../../docs/matching.md) is the full reference.
    line, its neighbours and the prototypes in the image header. `tools/seed.py <TARGET>@<func>`
    writes `work/<image>/<ADDR>/` with the assembly (`asm.s`), the header context (`ctx.c`), the best
    m2c draft, the nearest twins, and the callees and callers. `work/` is ignored: it is scratch, not
-   source.
+   source. An unknown address or offset: `tools/symbol.py at <target> 0x<ADDR>`,
+   `tools/symbol.py member <Type> 0x<OFF>`, or `tools/symbol.py uses <Name>`
+   ([lookup](../../../../tools/README.md#lookup)). A bare number:
+   `tools/symbol.py value 0x<NN> --image <target>` names the enum member or macro that holds it.
 
 3. **Draft.** Write the body in `work/<image>/<ADDR>/`, then put it in the unit's `.c` to measure
    it. A draft is always under `NON_MATCHING`; without it the split assembly builds the function:
@@ -67,13 +70,14 @@ whole match; [matching](../../../../docs/matching.md) is the full reference.
    a stub, an empty body or a `volatile` placeholder is not a try. After three tries, delete the
    draft, keep the bare `INCLUDE_ASM`, and record the function.
 
-7. **Record.** One line in `config/attempts.tsv`, in the header's columns:
-   `"function"`, `"tried"`, `"first_diff"`, `"score"`, tab-separated. `tried` lists the forms, one
-   clause each; `first_diff` is the first differing instruction or the blocker; `score` is the best
-   known, or empty. A real line:
+7. **Record.** One line in `config/attempts.jsonl`: an object with the keys `function`, `tried`,
+   `first_diff`, `score`, in that order. `tried` lists the forms, one clause each; `first_diff` is
+   the first differing instruction or the blocker; `score` is the best matching percentage as a
+   number, or `null`. A real line:
 
-   ```tsv
-   "emi/battle/battle/15@0x800AC01C"	"NON_MATCHING: local enemy, volatile task and direct array forms tried"	"0x800AC020, saved register."	""
+   <!-- dprint-ignore -->
+   ```json
+   {"function": "emi/battle/battle/15@0x800AC01C", "tried": "NON_MATCHING: local enemy, volatile task and direct array forms tried", "first_diff": "0x800AC020, saved register.", "score": null}
    ```
 
    Never add a hint or "tried" comment to `src/`.
