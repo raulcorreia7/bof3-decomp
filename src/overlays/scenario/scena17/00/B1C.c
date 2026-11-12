@@ -392,7 +392,7 @@ MATCH void func_801F8480(void) {
     timer  = &D_80146875;
     value  = *timer + 2;
     *timer = value;
-    if ((u8)value >= 0x7F) {
+    if ((u8)value >= 127) {
         *timer = 0;
         D_80146874 += 1;
         func_801F8B10(0x4B0, 0x80);
