@@ -1920,7 +1920,7 @@ g_FairyCommu02Events = { addr = 0x801F268C, source = "the 4 overlay entries of t
 g_FairyCommu03States = { addr = 0x801F269C, source = "the 5 step handlers of the commu03 scene that the village runs through func_801F1F9C, indexed by g_SceneEventStep; entry 2 is the commu03 overlay entry" }
 g_FairyCommu04States = { addr = 0x801F26B0, source = "the 7 step handlers of the commu04 scene that the village runs through func_801F2020, indexed by g_SceneEventStep; entry 4 is the commu04 overlay entry" }
 g_FairyCommu05States = { addr = 0x801F26EC, source = "the 5 step handlers of the commu05 scene that the village runs through func_801F228C, indexed by g_SceneEventStep; entry 2 is the commu05 overlay entry" }
-g_Fairies = { addr = 0x801F2700, source = "Fairy_JoinVillage copies the 5-byte name of a 9-byte roster row" }
+g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
 
 ["emi/etc/commu01/07"]
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01States." }
@@ -1957,7 +1957,7 @@ g_Commu02Event3Step2Funcs = { addr = 0x801DAE44, source = "9 sub-step handlers o
 g_Commu02Event3Step2Sub6Funcs = { addr = 0x801DAE68, source = "3 handlers of sub-step 6 of step 2 of the commu02 scene event 3, called by func_801D7474 (the sub-step 6 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_Commu02Event3Step2Sub7Funcs = { addr = 0x801DAE74, source = "5 handlers of sub-step 7 of step 2 of the commu02 scene event 3, called by func_801D7660 (the sub-step 7 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index." }
-g_Fairies = { addr = 0x801F2700, source = "Fairy_JoinVillage copies the 5-byte name of a 9-byte roster row" }
+g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
 
 ["emi/etc/commu03/06"]
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
