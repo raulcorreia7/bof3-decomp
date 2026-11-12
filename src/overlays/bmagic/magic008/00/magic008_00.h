@@ -50,4 +50,11 @@ extern Magic008EarlySteps D_801EECAC;
 extern Magic008Steps      D_801EECC8;
 extern Point2DL           D_801F1C04[];
 
+/* Columns of the battle effect table the spawned slot's index selects. */
+extern u8 D_801EC331[];
+extern u8 D_801EC332[];
+extern u8 D_801EC335[];
+extern u8 D_801EC336[];
+extern u8 D_801EC3A4[];
+
 #endif

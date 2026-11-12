@@ -97,7 +97,43 @@ MATCH void func_801EFA74(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EFAD4);
+/* The 0x74 bytes of a battler row that a queued effect slot copies. */
+typedef struct BattleWorkImage {
+    u32 words[29];
+} BattleWorkImage;
+
+MATCH void func_801EFAD4(void) {
+    BattleWorkImage* dst;
+    BattleWorkImage* src;
+    PartyMember*     effect_battler;
+    PartyMember*     work;
+    u32              offset;
+    u32              slot;
+    u8               battler;
+
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    slot    = Battle_AllocEffect(1, 0x1F);
+    battler = g_Battle.active_battler;
+    if (battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+        src  = (BattleWorkImage*)&g_Game.members[battler];
+        dst  = (BattleWorkImage*)&g_BattleEffects[slot & BYTE_MASK];
+        *dst = *src;
+    } else {
+        offset = (battler - BATTLE_PARTY_CHARACTERS_COUNT) * BATTLE_ENEMY_STRIDE;
+        dst    = (BattleWorkImage*)&g_BattleEffects[slot & BYTE_MASK];
+        *dst   = *(BattleWorkImage*)((u8*)g_BattleEnemyBattlers + offset);
+    }
+    work                                                                       = g_Task;
+    FIELD(u8, D_801EC331, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 5;
+    FIELD(u8, D_801EC336, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 1;
+    FIELD(u8, D_801EC332, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 0;
+    FIELD(u8, D_801EC335, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 0x1F;
+    effect_battler                                                             = g_BattleEffectBattler;
+    FIELD(PartyMember*, D_801EC3A4, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE) = work;
+    effect_battler->header.flags |= ACTOR_FLAG_HIDDEN;
+}
 
 MATCH void func_801EFC90(void) {
     if (g_Task->param.unk_0B == 0xFF) {
