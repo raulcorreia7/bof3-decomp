@@ -44,7 +44,39 @@ MATCH void func_801EF1F4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF294);
+MATCH void func_801EF294(void) {
+    PartyMember* battler;
+    PartyMember* work;
+    u8           i;
+    u8           slot;
+
+    if (--g_Task->unk_09 == 0) {
+        if (--g_Task->timer != 0) {
+            for (i = 0; i < 16; i++) {
+                slot = BMagic_AllocEffect();
+                if (slot != GAME_NONE) {
+                    battler                                = g_BattleEffectBattler;
+                    BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                    BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+                    BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
+                    g_BattleEffectBattler->param.unk_0B += 1;
+                }
+            }
+            if (g_Task->timer == 2) {
+                SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            }
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 2));
+            work         = g_Task;
+            work->unk_09 = 4;
+            work->unk_0C = 0x800;
+            g_Task->header.step += 1;
+        } else {
+            g_AreaCameraRefreshCount = 93;
+            g_Task->unk_09           = 60;
+            g_Task->header.step      = 4;
+        }
+    }
+}
 
 MATCH void func_801EF40C(void) {
     if (g_FrameCount & 1) {
