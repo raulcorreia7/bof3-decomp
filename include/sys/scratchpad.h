@@ -92,8 +92,8 @@ typedef struct ScratchPadEffect {
 ASSERT_SIZE(ScratchPadEffect, SCRATCH_PAD_EFFECT_VIEW_SIZE);
 ASSERT_OFFSET(ScratchPadEffect, vectors, 0x14);
 
-/* The sparkle-ray draw cells at 0x00: the effect position, the ray angle and the shade the rays fade
- * to. A second view of the effect cells, which the rings read as signed halfwords. */
+/* The sparkle ray cells at 0x00: the sparkle's screen point (0x00, 0x02), the sweep angle (0x06) and
+ * the RGB shade the rays fade to (0x08, 0x0A, 0x0C). */
 typedef struct ScratchPadRay {
     u16 x; /* 0x00 */
     u16 y; /* 0x02 */
