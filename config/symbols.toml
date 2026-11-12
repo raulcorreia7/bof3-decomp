@@ -399,6 +399,7 @@ BMagic_DispatchEffectMode = { addr = 0x801EF398, type = "func", source = "Runs t
 g_BMagicEffectModes = { addr = 0x801EFEB8, source = "Handlers of magic020 (Disembowel), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic021/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

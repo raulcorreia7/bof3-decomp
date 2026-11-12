@@ -133,9 +133,79 @@ MATCH void func_801EF484(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4F0);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF4F0(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
 
+    PushMatrix();
+    switch (g_Task->facing) {
+        case 0:
+            rot.vx = 0;
+            rot.vy = 0x1000 - (g_Task->unk_09 << 6);
+            break;
+        case 1:
+            rot.vx = g_Task->unk_09 << 6;
+            rot.vy = 0;
+            break;
+        case 2:
+            rot.vx = 0;
+            rot.vy = g_Task->unk_09 << 6;
+            break;
+        case 3:
+            rot.vx = 0x1000 - (g_Task->unk_09 << 6);
+            rot.vy = 0;
+            break;
+    }
+    rot.vz = 0;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x20) / 2;
+    RotTransMatrix(&pos, matrix, &flags);
+    Camera_SetModelMatrix(&rot, &matrix);
+}
+#else
+INCLUDE_ASM(func_801EF4F0);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF648(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    switch (g_Task->facing) {
+        case 0:
+            rot.vx = 0;
+            rot.vy = g_Task->unk_09 << 6;
+            break;
+        case 1:
+            rot.vx = 0x1000 - (g_Task->unk_09 << 6);
+            rot.vy = 0;
+            break;
+        case 2:
+            rot.vx = 0;
+            rot.vy = 0x1000 - (g_Task->unk_09 << 6);
+            break;
+        case 3:
+            rot.vx = g_Task->unk_09 << 6;
+            rot.vy = 0;
+            break;
+    }
+    rot.vz = 0;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -(COORD_INT(g_Task->pos.z)) / 2;
+    RotTransMatrix(&pos, matrix, &flags);
+    Camera_SetModelMatrix(&rot, &matrix);
+}
+#else
 INCLUDE_ASM(func_801EF648);
+#endif
 
 INCLUDE_ASM(func_801EF79C);
 

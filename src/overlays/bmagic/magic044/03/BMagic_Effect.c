@@ -63,7 +63,35 @@ INCLUDE_ASM(func_801EEEFC);
 
 INCLUDE_ASM(func_801EF138);
 
-INCLUDE_ASM(func_801EF320);
+MATCH void func_801EF320(void) {
+    PartyMember* work;
+    u32          slot;
+    u8           count;
+
+    if (g_Task->timer < 0x10) {
+        g_Task->param.unk_0B += 1;
+        g_Task->timer += 1;
+        Battle_ProjectRange();
+        Effect_RecordTrail();
+    }
+    if ((g_FrameCount & 0x3) == 0) {
+        slot = Battle_AllocEffect(1, 6) & BYTE_MASK;
+        if (slot != GAME_NONE) {
+            work                               = g_BattleEffectBattler;
+            g_BattleEffects[slot].header.mode  = 1;
+            g_BattleEffects[slot].target.party = work;
+            g_BattleEffects[slot].pos.x.fixed  = g_Task->pos.x.fixed;
+            g_BattleEffects[slot].pos.y.fixed  = g_Task->pos.y.fixed;
+            g_BattleEffects[slot].pos.z.fixed  = g_Task->pos.z.fixed;
+            g_BattleEffectBattler->param.unk_0B += 1;
+        }
+    }
+    count = g_Task->timer;
+    if ((count & BYTE_MASK) == 0x10) {
+        g_Task->unk_09 = count;
+        g_Task->header.step += 1;
+    }
+}
 
 /* func_801EF478 */
 #include "overlays/bmagic/Effect_FinishTrail.h"
