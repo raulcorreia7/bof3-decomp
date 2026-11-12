@@ -9,11 +9,11 @@ MATCH u8 func_800C1F30(u32 mode) {
             break;
         case BOSS_EVENT_ACTION_START:
             if (!(g_Battle.boss_flags & 2) && (g_Battle.boss_flags & 1) && (g_Battle.active_battler == D_800C2778)) {
-                g_Battle.action_type      = BATTLE_ACTION_ABILITY;
-                ((u8*)g_Battle.action)[1] = BATTLE_ACTION_ABILITY;
-                g_Battle.action->unk_02   = ABILITY_WERETIGER;
-                g_Battle.action_id        = ABILITY_WERETIGER;
-                g_Battle.target_selector  = D_800C2778;
+                g_Battle.action_type     = BATTLE_ACTION_ABILITY;
+                g_Battle.action->type    = BATTLE_ACTION_ABILITY;
+                g_Battle.action->unk_02  = ABILITY_WERETIGER;
+                g_Battle.action_id       = ABILITY_WERETIGER;
+                g_Battle.target_selector = D_800C2778;
                 g_Battle.boss_flags |= 2;
                 Char_AddAbility(ABILITY_WERETIGER, 4, 0, 0);
                 Char_AddAbility(ABILITY_WERETIGER, D_800C2778, 0, 1);
