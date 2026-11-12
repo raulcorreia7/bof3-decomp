@@ -32,13 +32,18 @@ extern Magic064SecondSteps D_801EEC70;
 extern void*               D_801F28B4;
 extern u8                  D_801F13B4[];
 
+/* One sprite cell's texture coordinates: u and v of the cell in the effect's texture page. */
+typedef UPoint2D Magic064SpriteUv;
+
+extern Magic064SpriteUv D_801F13A4[];
+
 void func_801EF8F4(void);
 void func_801F001C(void);
 void func_801F04A0(void);
 void func_801F05A4(void);
 
 void func_801F03D8(void);
-void func_801F0EEC(s32 arg0, s32 arg1, s32 arg2);
+void func_801F0EEC(u32 sprite, s32 blend, s32 color);
 void func_801F103C(void);
 
 #endif

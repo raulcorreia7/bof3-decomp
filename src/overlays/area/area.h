@@ -140,6 +140,18 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     }
 }
 
+/* Walk the map bundle's object list g_AreaMapBundle.object_list_28 through func_801576FC until its zero
+ * terminator. */
+static inline void Area_RunBundleObjects(void) {
+    u8* record;
+
+    record = MEM_PTR(u8, MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4);
+    while (FIELD(u32, record, 0) != 0) {
+        func_801576FC(record);
+        record += FIELD(u16, record, 2) * 4 + 4;
+    }
+}
+
 /* A cell and facing that starts a scene event at the given step. */
 typedef struct SceneTrigger {
     u8 x;

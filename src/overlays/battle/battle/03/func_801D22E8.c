@@ -11,5 +11,5 @@ MATCH void func_801D22E8(void) {
     }
     func_801D8450(g_Battle.panel_slot);
     func_801D750C(D_80148358, D_8014835A);
-    func_801D7A40(D_8014837C, D_8014837E);
+    Battle_DrawPanelRows(D_8014837C, D_8014837E);
 }
