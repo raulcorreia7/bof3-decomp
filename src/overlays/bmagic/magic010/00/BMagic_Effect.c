@@ -8,7 +8,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_StartPaletteFade.h"
 
-INCLUDE_ASM(func_801EED0C);
+MATCH void func_801EED0C(void) {
+    g_PaletteFades[MAGIC010_TASK->timer].offset.red++;
+    g_PaletteFades[MAGIC010_TASK->timer].offset.green++;
+    g_PaletteFades[MAGIC010_TASK->timer].offset.blue++;
+    if (++MAGIC010_TASK->unk_09 == 16) {
+        MAGIC010_TASK->header.mode++;
+    }
+}
 
 /* func_801EEE20 */
 MATCH void Effect_FadePaletteOut(void) {

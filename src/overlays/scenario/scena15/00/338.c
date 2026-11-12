@@ -286,17 +286,10 @@ MATCH void func_801F8A5C(void) {
 
 INCLUDE_ASM(func_801F8AA0);
 
-MATCH void func_801F8BC4(void) {
-    MATRIX matrix;
+#include "overlays/scenario/Scene_AdvanceBandMotion.h"
 
-    g_Task->vx += g_Task->unk_18;
-    g_Task->vy += g_Task->unk_1C;
-    g_Task->vz += g_Task->gravity;
-    Area_SetCameraMatrix(&matrix);
-    func_801F9020(&g_Task->pos, &g_Task->vx);
-    if (--g_Task->timer == 0) {
-        g_Task->header.mode++;
-    }
+MATCH void func_801F8BC4(void) {
+    SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
 }
 
 INCLUDE_ASM(func_801F8C78);
@@ -322,7 +315,9 @@ MATCH void func_801F8EA8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8F4C);
+MATCH void func_801F8F4C(void) {
+    SCENE_ADVANCE_BAND_MOTION(-, func_801F9020);
+}
 
 /* func_801F9000 */
 MATCH void Scene_ClearActor(void) {
