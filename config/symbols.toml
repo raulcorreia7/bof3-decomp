@@ -2647,6 +2647,7 @@ g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of s
 g_MenuStatusStep2Funcs = { addr = 0x801D9700, source = "3 sub-step handlers of step 2 of the status menu, called by func_801D11A4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStatusStep2Sub2Funcs = { addr = 0x801D970C, source = "5 handlers of sub-step 2 of step 2 of the status menu, called by func_801D1898 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_MenuStatusTaskFuncs = { addr = 0x801D974C, source = "Task state handlers of the status menu, dispatched by SYS_DISPATCH_TASK." }
+g_MenuStatusTask1StateFuncs = { addr = 0x801D975C, source = "the state handlers of panel task mode 1, indexed by the panel task state" }
 g_MenuStatusTask2StateFuncs = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
 g_MenuStatusTask3StateFuncs = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
 g_MenuStatFrameLeft = { addr = 0x801D9834, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -4965,6 +4966,7 @@ g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "Tag and mess
 
 ["emi/world04/area174/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_UpdateShots = { addr = 0x801F2EC4, type = "func", source = "Updates the active shots: moves them by their velocities, re-aims them, ages and frees them, and draws each; returns whether any was active." }
 Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "Runs Area_Update after World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F377C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
