@@ -86,8 +86,8 @@ INCLUDE_ASM(func_801F7C54);
 MATCH void func_801F7D04(void) {
     s16 screen_x;
     u16 next_x;
-    s32 x;
-    s32 color;
+    s32 red;
+    s32 blue;
 
     switch (g_AreaSceneMode) {
         case 0:
@@ -102,13 +102,13 @@ MATCH void func_801F7D04(void) {
                 next_x           = screen_x + 1;
                 g_Task->screen_x = next_x;
             }
-            x     = (s16)g_Task->screen_x;
-            color = 255 - x * 2;
-            x += 64;
-            if (color < 0) {
-                color = 0;
+            red  = (s16)g_Task->screen_x;
+            blue = 255 - red * 2;
+            red += 64;
+            if (blue < 0) {
+                blue = 0;
             }
-            func_801F7DCC(x, 90, color);
+            func_801F7DCC(red, 90, blue);
             func_801F7EDC();
             break;
     }
