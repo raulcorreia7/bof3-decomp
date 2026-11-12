@@ -9,10 +9,10 @@ MATCH s8 Area_TestCondition(s32 request) {
     s32 shifted = request << 16;
 
     if ((tag & 0xFF00) == 0x4000) {
-        return tag & 1;
+        return tag & 0x1;
     }
     if ((tag & 0xFF00) == 0xFF00) {
-        return D_8014933C ^ (tag & 1);
+        return D_8014933C ^ (tag & 0x1);
     }
     if ((tag & 0xFF00) == 0xFE00) {
         return ((request & BYTE_MASK) ^ g_AreaSceneMode) == 0;
@@ -21,13 +21,13 @@ MATCH s8 Area_TestCondition(s32 request) {
         return ((request & BYTE_MASK) ^ D_80143F03) != 0;
     }
     if ((tag & 0xFF00) == 0xFC00) {
-        return (tag & 1) ^ ((g_GameStateIndex == GAME_REQUEST_CAMERA_LOOK) | (g_GameEntryState == GAME_STATE_SHOP));
+        return (tag & 0x1) ^ ((g_GameStateIndex == GAME_REQUEST_CAMERA_LOOK) | (g_GameEntryState == GAME_STATE_SHOP));
     }
     if ((tag & 0xFF00) == 0xFB00) {
-        s32 bit = request & 1;
+        s32 bit = request & 0x1;
 
         if (((g_AreaCameraAngle.vz - 0x200) & ANGLE_MASK) < 0x801) {
-            return bit ^ 1;
+            return bit ^ 0x1;
         }
         return bit;
     }
@@ -40,5 +40,5 @@ MATCH s8 Area_TestCondition(s32 request) {
     if ((tag & 0xFF00) < 0x4000) {
         return SYS_TestFlag(&g_SceneFlagWords[(shifted >> 21) & 0xF8], request & BYTE_MASK) == 0;
     }
-    return tag & 1;
+    return tag & 0x1;
 }

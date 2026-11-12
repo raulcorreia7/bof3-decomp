@@ -10,7 +10,17 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-INCLUDE_ASM(func_801EEFB4);
+/* When the effect ticker is zero, marks the hit applied and the effect playing, tells the battle UI and
+ * runs the effect player's follow-up. */
+MATCH void func_801EEFB4(void) {
+    u16* flags;
+
+    if (g_Task->param.unk_0B == 0) {
+        BATTLE_RAISE_STATE(BATTLE_STATE_DAMAGE_APPLIED | BATTLE_STATE_EFFECT_PLAYING);
+        func_800A9820(g_Battle.target_selector);
+        func_801E5988();
+    }
+}
 
 /* func_801EF00C */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -43,7 +53,34 @@ MATCH void func_801EF404(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF47C);
+MATCH void func_801EF47C(void) {
+    s32* angle_cell;
+    s32  phase;
+
+    if (--g_Task->unk_09 == 0) {
+        g_Task->facing      = g_BattleEffectBattler->facing;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+        Battle_ProjectRange();
+        angle_cell  = &D_1F800004;
+        phase       = (g_Task->param.unk_0B & 7) << 8;
+        *angle_cell = phase;
+        phase += ANGLE_90;
+        *angle_cell = phase + D_801EFC50[g_Task->facing];
+        g_Task->unk_2E.half += (rsin(*angle_cell) * 72) >> 0xC;
+        g_Task->unk_30.half += (rcos(*angle_cell) * 72) >> 0xC;
+        g_Task->unk_14 = D_801EFC50[g_Task->facing];
+        if (LOHU(g_Battle.action_id) == ABILITY_TEMPEST) {
+            g_Task->param.unk_0B = 0;
+        } else {
+            g_Task->param.unk_0B = 0x10;
+        }
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF628(void) {
     s32 offset;

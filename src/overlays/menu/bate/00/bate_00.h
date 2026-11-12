@@ -135,6 +135,9 @@ typedef struct BateState {
 extern s8        D_80148659;
 extern BateState D_801D8ED4;
 extern u8        D_801D86F8[];
+/* The stat tally: the six targets it counts to and the six shown counters. */
+extern s32       D_801D8EE8[6];
+extern s32       D_801D8F00[6];
 
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);

@@ -38,7 +38,7 @@ MATCH void Game_ReturnFromMenu(void) {
     if (*request != 0u) {
         pending  = &D_8014504A;
         *request = 0u;
-        if ((*pending == 0u) && ((g_GameRequestFlags & 1u) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
+        if ((*pending == 0u) && ((g_GameRequestFlags & 0x1u) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
             *pending   = 1u;
             D_80145040 = g_Game.members[0].pos.x.fixed;
             D_80145044 = g_Game.members[0].pos.y.fixed;
@@ -49,7 +49,7 @@ MATCH void Game_ReturnFromMenu(void) {
             u8* clear = &D_8014504A;
 
             *clear = 0u;
-            SYS_ClearFlag(clear - 0x122, 0x77u);
+            SYS_ClearFlag(clear - 0x122, 119u);
             Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
         }
     } else if (D_8014869D != 0u) {

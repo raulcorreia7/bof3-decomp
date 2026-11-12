@@ -41,7 +41,7 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
             flags = c;
             flags |= 0xFF00;
         }
-        if (flags & 1) {
+        if (flags & 0x1) {
             /* FAKE: the order lock steers regalloc */
             FAKE_ORDER_LOCK_BEGIN
                 c = *src++;
@@ -65,7 +65,7 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
         }
     }
     LoadImage(&rect, (u_long*)D_801459FC);
-    if (count & 3) {
+    if (count & 0x3) {
         count += 4 - count % 4;
     }
     D_801459FC += count;

@@ -22,8 +22,8 @@ MATCH void func_801F342C(void) {
     scratch->unk_32 = 0x140;
     scratch->timer  = 16;
     check           = g_Task;
-    scratch->vx     = 0x100;
-    scratch->vy     = 0x100;
+    scratch->vx     = 256;
+    scratch->vy     = 256;
     check->header.mode++;
     g_AreaDrawFlags = 0x1F;
 }

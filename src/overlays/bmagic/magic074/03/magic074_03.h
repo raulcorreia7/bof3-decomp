@@ -24,8 +24,6 @@ typedef struct Magic074Steps {
 } Magic074Steps;
 
 extern Magic074Steps D_801EEC1C;
-void                 func_801F00B0(void);
-void                 func_801EFE18(u16 angle, u16 radius);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
 #define EFFECT_SPARKLE_TASK    D_801F20DC
@@ -33,5 +31,8 @@ void                 func_801EFE18(u16 angle, u16 radius);
 #define EFFECT_SPARKLE_RISE    D_801F0550
 extern Point2D D_801F0490[];
 extern u8      D_801F0550[];
+/* The colour rows of each kind. */
+#define EFFECT_SPARKLE_COLORS D_801F0530
+extern u8 D_801F0530[][4][3];
 
 #endif

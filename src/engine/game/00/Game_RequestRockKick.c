@@ -8,7 +8,7 @@ MATCH bool Game_RequestRockKick(s32 walk_speed) {
     kind = g_Game.current->chr.character_id;
     if (kind != CHAR_ID_TEEPO && kind != CHAR_ID_PECO)
         return false;
-    if (!(g_Task->direction_08 & 1))
+    if (!(g_Task->direction_08 & 0x1))
         return false;
     if ((walk_speed & BYTE_MASK) != FIELD_SPEED_RUN)
         return false;

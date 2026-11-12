@@ -18,7 +18,7 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
 
     enabled = style & BYTE_MASK;
     UI_DrawWindow(x + 3, y + 3, 158, 112, 0, enabled);
-    Menu_DrawPanelFrame(x, y, 0x12, 0xD);
+    Menu_DrawPanelFrame(x, y, 18, 13);
     item  = g_Game.members[slot].character_index;
     value = g_Characters[item].level * 10;
     xpos  = x;
@@ -26,15 +26,15 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     if (g_Zenny < value || g_Characters[item].inoculations != 0) {
         sel = 7;
     } else {
-        sel = -(enabled != 0) & 7;
+        sel = -(enabled != 0) & 0x7;
     }
     i   = 0;
     /* The x - x term keeps x live across the xpos copy, so the allocator keeps
      * the copy instruction instead of merging xpos with x. */
-    rec = item * 0xA4 + x - x;
+    rec = item * 164 + x - x;
     gx  = xpos + 8;
     do {
-        if (((((u8*)&g_Characters[0].inoculations)[rec] >> (u8)i) & 1) || (u8)i == cursor) {
+        if (((((u8*)&g_Characters[0].inoculations)[rec] >> (u8)i) & 0x1) || (u8)i == cursor) {
             UI_DrawText(gx, row_y, 2, TEXT_LENGTH_MAX, Message_GetText((i & BYTE_MASK) + 0xDE));
         } else {
             UI_DrawText(gx, row_y, sel & BYTE_MASK, TEXT_LENGTH_MAX, Message_GetText((i & BYTE_MASK) + 0xDE));

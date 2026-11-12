@@ -140,7 +140,7 @@ MATCH void func_801EF5FC(void) {
     PartyMember* work;
 
     work = g_Task;
-    if (!(work->param.unk_0B & 1)) {
+    if (!(work->param.unk_0B & 0x1)) {
         g_AreaScrollTargetX = work->pos.x.fixed;
         FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
         g_AreaScrollTargetY = work->pos.y.fixed;
@@ -239,7 +239,7 @@ MATCH void func_801F0278(void) {
     u8 ticks;
 
     func_801F03D8();
-    if (!(g_FrameCount & 1)) {
+    if (!(g_FrameCount & 0x1)) {
         ticks = g_Task->param.unk_0B;
         if (ticks >= 0x18U) {
             g_BattleEffectBattler->header.step += 1;
@@ -414,7 +414,8 @@ INCLUDE_ASM(func_801F103C);
 
 /* Report the map cell the projected point lands on: out[0] and out[1] receive
  * the cell, or zero when the probe leaves the map or hits an empty cell. */
-MATCH void func_801F12B8(s32 px, s32 py, u8* out) {
+/* func_801F12B8 */
+MATCH void BMagic_ProjectCell(s32 px, s32 py, u8* out) {
     u8* buffer;
     s32 width;
     s32 x2;

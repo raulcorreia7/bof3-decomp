@@ -44,13 +44,13 @@ MATCH void func_801A6C98(u8* record) {
     x    = script[2] << 16;
     work = g_Task;
     if (script[1] != 0) {
-        x |= 0x8000;
+        x |= 32768;
     }
     work->pos.x.fixed = x;
 
     y = script[4] << 16;
     if (script[3] != 0) {
-        y |= 0x8000;
+        y |= 32768;
     }
     work->pos.y.fixed        = y;
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, y);
