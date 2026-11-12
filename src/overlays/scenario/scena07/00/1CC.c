@@ -89,8 +89,8 @@ MATCH void func_801F7050(void) {
 INCLUDE_ASM(func_801F70F8);
 
 MATCH void func_801F71C0(void) {
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
+    func_801F88B8(SCENA07_PANEL_ROWS);
+    func_801F8BE8(SCENA07_PANEL_ROWS);
     if (--g_Task->timer == 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         g_Task->timer = 32;
@@ -219,7 +219,7 @@ MATCH void func_801F7E68(void) {
 
     D_800E4C1E = 0xC0;
     for (i = 0; i < 32; i++) {
-        func_801F88B8(MEM_PTR(void, 0x800E48E0u));
+        func_801F88B8(SCENA07_PANEL_ROWS);
     }
     if (g_Task->unk_06 != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
@@ -228,8 +228,8 @@ MATCH void func_801F7E68(void) {
 }
 
 MATCH void func_801F7EF8(void) {
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
+    func_801F88B8(SCENA07_PANEL_ROWS);
+    func_801F8BE8(SCENA07_PANEL_ROWS);
     g_Task->pos.x.fixed += g_Task->vx;
     g_Task->pos.y.fixed += g_Task->vy;
     g_Task->pos.z.fixed += g_Task->vz;
@@ -240,8 +240,8 @@ MATCH void func_801F7EF8(void) {
 }
 
 MATCH void func_801F7FA4(void) {
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
+    func_801F88B8(SCENA07_PANEL_ROWS);
+    func_801F8BE8(SCENA07_PANEL_ROWS);
     if (--g_Task->timer == 0) {
         if (g_Task->unk_06 == 0) {
             Actor_Clear();
