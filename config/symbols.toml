@@ -1614,7 +1614,9 @@ BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the fi
 
 ["emi/bmagic/magic169/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartPlaying = { addr = 0x801EF03C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic169 (Benediction)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF210, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic169." }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF640, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic169 (Benediction)." }
