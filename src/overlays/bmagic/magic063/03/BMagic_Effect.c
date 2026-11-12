@@ -187,7 +187,20 @@ MATCH void func_801EFFE8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F00F0);
+MATCH void func_801F00F0(void) {
+    if (g_BattleEffectBattler->header.step == 3) {
+        g_BMagicOrbitWork->unk_0B += 4;
+        g_BMagicOrbitWork->angle = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;
+    } else {
+        g_BMagicOrbitWork->unk_0B += 1;
+        g_BMagicOrbitWork->angle = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
+    }
+    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
+    if (--g_BMagicOrbitWork->unk_0A == 0) {
+        g_BMagicOrbitWork->header.step++;
+    }
+}
 
 MATCH void func_801F0220(void) {
     if (g_BattleEffectBattler->header.step == 3) {
