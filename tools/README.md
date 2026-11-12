@@ -47,7 +47,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Scan prototypes against definitions      | `tools/sigs.py scan`                                                     | `--help`                                                  |
 | Format                                   | `meson compile -C build/meson format` (or `tools/format.sh`)             | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Write the progress report                | `meson compile -C build/meson report`                                    | [toolchain: commands](../docs/toolchain.md#commands)      |
-| Set up a worktree for parallel work      | `tools/worktree.sh --from <checkout> <branch>`                           | [worktrees](#worktrees)                                   |
+| Set up a worktree for parallel work      | `tools/worktree.sh --from <checkout> [--dir <dir>] <branch>`             | [worktrees](#worktrees)                                   |
 | Read bytes through Rizin                 | `bin/rz <target> 'pdf @ <func>'`                                         | [rizin](../docs/toolchain.md#rizin)                       |
 
 ## Templates
@@ -170,9 +170,10 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 
 ## Worktrees
 
-`tools/worktree.sh --from <checkout> <branch>` adds a Git worktree under `.worktrees/<branch>` and
-links the local inputs, toolchains, `.venv` and extracted disc from a built checkout, so the new
-worktree builds without extracting again. Keep that checkout while the worktree exists.
+`tools/worktree.sh --from <checkout> [--dir <dir>] <branch>` adds a Git worktree under
+`.worktrees/<branch>` (or `--dir <dir>`) and links the local inputs, toolchains, `.venv` and
+extracted disc from a built checkout, so the new worktree builds without extracting again. Keep
+that checkout while the worktree exists.
 
 ## Build plumbing
 

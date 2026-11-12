@@ -1,12 +1,14 @@
 #!/bin/sh
 # Create a ready-to-build Git worktree for parallel work.
 #
-#   tools/worktree.sh --from <checkout> <branch> [<dir>]
+#   tools/worktree.sh --from <checkout> <branch> [<dir>] [--dir <dir>] [--base <ref>]
 #
 #   --from <checkout>  a built checkout of this repository (setup done, disc extracted); the new
 #                      worktree links its local inputs instead of extracting them again
 #   <branch>           the new branch
 #   <dir>              the worktree folder (default: .worktrees/<branch>, which Git ignores)
+#   --dir <dir>        the same worktree folder, named as an option
+#   --base <ref>       what the branch starts from (default: origin/main)
 #
 # Linked from <checkout>: inputs/, toolchains/, .venv/, build/disc and build/bin. The submodule
 # checkouts under third_party/ are copied, so Git sees no change in them. The script then runs
@@ -14,11 +16,11 @@
 # worktree is in use.
 set -eu
 case "${1:-}" in
--h | --help) sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+-h | --help) sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 esac
 
 usage() {
-	sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//' >&2
+	sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//' >&2
 	exit 2
 }
 die() {
@@ -33,6 +35,8 @@ dir=
 while [ $# -gt 0 ]; do
 	case $1 in
 	--from) from=${2:?--from needs a path}; shift 2 ;;
+	--dir) dir=${2:?--dir needs a path}; shift 2 ;;
+	--base) base=${2:?--base needs a ref}; shift 2 ;;
 	-h | --help) usage ;;
 	-*) die "unknown option $1 (see tools/worktree.sh --help)" ;;
 	*)
@@ -47,6 +51,7 @@ done
 [ -n "$from" ] && [ -n "$branch" ] || usage
 
 root=$(cd "$(dirname "$0")/.." && pwd)
+git -C "$root" fetch -q --no-recurse-submodules public 2>/dev/null || true
 from=$(cd "$from" 2>/dev/null && pwd) || die "no such checkout: $from"
 [ -d "$from/build/disc" ] && [ -d "$from/build/bin" ] ||
 	die "$from has no build/disc and build/bin: run tools/setup.sh there first"
