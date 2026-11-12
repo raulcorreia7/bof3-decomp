@@ -83,8 +83,8 @@ bytes.
 
 - Every `if`, `else`, `for`, `while` and `do` body has braces, even one statement.
 - A bitwise expression inside a comparison or a logical operator is in parentheses.
-- `for` has its init, condition and step; `do`-`while` only when the body must run first; `goto`
-  only for a proven shared exit.
+- `for` has its init, condition and step. A `do`-`while` or `goto` is allowed where the retail bytes
+  need one ([tactics](matching.md#tactics-for-gcc-272)).
 
 **Do**
 
