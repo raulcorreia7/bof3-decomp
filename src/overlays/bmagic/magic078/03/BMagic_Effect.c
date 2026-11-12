@@ -38,7 +38,45 @@ INCLUDE_ASM(func_801EECFC);
 /* func_801EEEE4 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EEF28);
+MATCH void func_801EEF28(void) {
+    s32 tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(4, 0xC);
+
+    if (g_Task->header.step < 3) {
+        if ((g_FrameCount & BYTE_MASK) == 0x40) {
+            g_Task->unk_0C = 0x1000;
+        } else {
+            g_Task->unk_0C = (g_FrameCount & 0x3F) << 6;
+        }
+    }
+
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 2), g_Task->header.step);
+
+    if (g_BattleEffectBattler->param.unk_0B != 0xFF) {
+        func_801EFEB8();
+        func_801EF318();
+        PopMatrix();
+    }
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(4, 0xC);
+}
 
 MATCH void func_801EF08C(void) {
     u8 count;
