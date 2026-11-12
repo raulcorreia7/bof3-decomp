@@ -281,8 +281,8 @@ ASSERT_OFFSET(BMagicOrbitWork, pos, 0x10);
 extern BMagicOrbitWork* g_BMagicOrbitWork;
 
 /* Steps the orbit work around its battler: the angle advances and the position follows it at the work's radius, the
- * phase advances by unk_0A, and every other frame the frame count drops; at zero the battler's ticker drops and CLEAR
- * runs. A statement macro. */
+ * vertical span grows by unk_0A, and every other frame the effect timer drops; at zero the battler's ticker drops and
+ * CLEAR runs. A statement macro. */
 #define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                              \
     g_BMagicOrbitWork->angle       = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;                                                            \
     g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;      \
