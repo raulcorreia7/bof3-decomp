@@ -22,6 +22,8 @@ extern u8       D_801F4FAC[];
 extern Callback D_801F66D4[17];
 /* The row table the step lookup reads through the load entry. */
 extern u8*      D_801F6748[];
+/* The signed per-step offsets the scripted move adds to x and subtracts from y, indexed by the 4-bit step. */
+extern s8       D_801F6754[];
 
 extern void Actor_BeginScript(u8 raw_selector, u16 raw_code);
 u8*         func_801F2E88(void);
