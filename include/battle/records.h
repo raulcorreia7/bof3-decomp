@@ -77,9 +77,10 @@ typedef struct BattleStatBlockPart {
 
 ASSERT_SIZE(BattleStatBlockPart, 0x10);
 
-/* Record behind the g_Battle.action cell; +0x02 is the action id. */
+/* Record behind the g_Battle.action cell; +0x01 is the action kind and +0x02 the action id. */
 typedef struct BattleAction {
-    u8  pad_00[2];
+    u8  pad_00[1];
+    u8  type; /* +0x01 mirrors g_Battle.action_type */
     u16 unk_02;
     u8  pad_04[4];
     u8  unk_08; /* +0x08 step byte: func_8009E248 sets 1, func_8009E500 sets 2 */
@@ -87,6 +88,7 @@ typedef struct BattleAction {
 
 ASSERT_SIZE(BattleAction, 0x0A);
 
+ASSERT_OFFSET(BattleAction, type, 0x01);
 ASSERT_OFFSET(BattleAction, unk_02, 0x02);
 ASSERT_OFFSET(BattleAction, unk_08, 0x08);
 
@@ -182,42 +184,43 @@ ASSERT_SIZE(BattleEffectArg, 1);
  * battle/battle/03 names the head fields, battle/battle/15 the tail, and the merged record
  * names the union of both. */
 typedef struct BattleEffect {
-    TaskHeader         header; /* 0x00 */
-    u8                 unk_03;
-    u8                 unk_04;
-    u8                 handler_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
-    u8                 unk_06;
-    u8                 unk_07;
-    u8                 unk_08;
-    BattleEffectArg    arg;
-    u8                 unk_0A;
-    u8                 unk_0B;
-    s32                unk_0C;
-    s32                unk_10;
-    u8                 pad_14[4];
-    s32                unk_18;
-    s32                unk_1C;
-    u8                 pad_20[7];
-    u8                 unk_27;
-    u8                 unk_28;
-    u8                 unk_29; /* +0x29 func_801DE1D4 stores an action step here */
-    u8                 pad_2A[4];
-    s16                unk_2E;
-    s16                unk_30;
-    u16                unk_32;
-    WorldPos           pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
-    u8                 pad_40[8];
-    u8                 unk_48;
-    u8                 pad_49[2];
-    u8                 unk_4B; /* +0x4B the panel cell index battle/battle/15 stores */
-    u8                 pad_4C[0x10];
-    u8                 unk_5C; /* +0x5C func_801DE1D4 clears it with the byte row below */
-    u8                 unk_5D;
-    u8                 unk_5E;
-    u8                 unk_5F;
-    BattleTargetIndex  word_60; /* +0x60 the target index: a word, a low halfword */
-    u8                 pad_64[0x10];
-    BattleEffectTarget target; /* +0x74 the battler the effect acts on */
+    TaskHeader          header; /* 0x00 */
+    u8                  unk_03;
+    u8                  unk_04;
+    u8                  handler_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
+    u8                  unk_06;
+    u8                  unk_07;
+    u8                  unk_08;
+    BattleEffectArg     arg;
+    u8                  unk_0A;
+    u8                  unk_0B;
+    s32                 unk_0C;
+    s32                 unk_10;
+    u8                  pad_14[4];
+    s32                 unk_18;
+    s32                 unk_1C;
+    u8                  pad_20[7];
+    u8                  unk_27;
+    u8                  unk_28;
+    u8                  unk_29; /* +0x29 func_801DE1D4 stores an action step here */
+    u8                  pad_2A[4];
+    s16                 unk_2E;
+    s16                 unk_30;
+    u16                 unk_32;
+    WorldPos            pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
+    u8                  pad_40[8];
+    u8                  unk_48;
+    u8                  pad_49[2];
+    u8                  unk_4B; /* +0x4B the panel cell index battle/battle/15 stores */
+    struct PartyMember* unk_4C; /* +0x4C a linked battle task; magic078 hands its phase to it through param */
+    u8                  pad_50[0xC];
+    u8                  unk_5C; /* +0x5C func_801DE1D4 clears it with the byte row below */
+    u8                  unk_5D;
+    u8                  unk_5E;
+    u8                  unk_5F;
+    BattleTargetIndex   word_60; /* +0x60 the target index: a word, a low halfword */
+    u8                  pad_64[0x10];
+    BattleEffectTarget  target; /* +0x74 the battler the effect acts on */
 } BattleEffect;
 
 ASSERT_SIZE(BattleEffect, 0x78);
@@ -230,6 +233,7 @@ ASSERT_OFFSET(BattleEffect, handler_index, 0x05);
 ASSERT_OFFSET(BattleEffect, unk_27, 0x27);
 ASSERT_OFFSET(BattleEffect, unk_29, 0x29);
 ASSERT_OFFSET(BattleEffect, unk_4B, 0x4B);
+ASSERT_OFFSET(BattleEffect, unk_4C, 0x4C);
 ASSERT_OFFSET(BattleEffect, unk_5C, 0x5C);
 ASSERT_OFFSET(BattleEffect, word_60, 0x60);
 ASSERT_OFFSET(BattleEffect, target, 0x74);
@@ -1104,5 +1108,9 @@ extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
 /* Enemy battler work record (stride 0x118, indexed by slot - 3). */
 extern EnemyBattler  g_BattleEnemyBattlers[];
+/* The last battle's stat gains, which the bate stat screen adds to its character. */
+extern u32           D_801FE4E8;
+extern u8            D_801FE4EF;
+extern u32           D_801FE4F0;
 
 #endif

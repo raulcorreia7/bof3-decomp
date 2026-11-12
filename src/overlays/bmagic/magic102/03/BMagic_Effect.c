@@ -33,7 +33,8 @@ INCLUDE_ASM(func_801EFEFC);
 
 /* Draws one Gouraud-shaded quadrangle per eight-word part in the list at parts, like the resident
  * Area_DrawGouraudQuads, but each vertex's depth adds func_801F0ADC of its x and y. */
-MATCH void func_801F016C(ScenePart* parts, s32 shift_x, s32 shift_y) {
+/* func_801F016C */
+MATCH void Effect_DrawShadedQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
     SVECTOR    verts[4];
     long       flag;
     long       p;

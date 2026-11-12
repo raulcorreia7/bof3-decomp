@@ -7,9 +7,27 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 
-extern u8       D_80144908[];
-extern u32      D_801F6C00;
-extern u8       D_80146875;
+extern u8  D_80144908[];
+extern u32 D_801F6C00;
+extern u8  D_80146875;
+
+/* A scene rectangle the panel draws: position and size. */
+typedef struct Scena10Rect {
+    s16 x;      /* 0x00 */
+    s16 y;      /* 0x02 */
+    u16 width;  /* 0x04 */
+    u16 height; /* 0x06 */
+} Scena10Rect;
+
+ASSERT_SIZE(Scena10Rect, 8);
+ASSERT_OFFSET(Scena10Rect, x, 0x00);
+ASSERT_OFFSET(Scena10Rect, y, 0x02);
+ASSERT_OFFSET(Scena10Rect, width, 0x04);
+ASSERT_OFFSET(Scena10Rect, height, 0x06);
+
+/* The panel draws entry 2. */
+extern Scena10Rect D_801FE7CC[];
+
 /* D_801FE80C */
 extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE820[];
@@ -53,6 +71,7 @@ extern SceneFunc g_SceneActorDispatch[];
     } while (0)
 
 void func_801F6FAC(void);
+void func_801F781C(u16 x, u16 y, u16 width, u16 height);
 
 s32 Item_Count(s32 category, s32 item, s32 mode);
 

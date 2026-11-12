@@ -28,7 +28,40 @@ MATCH void func_801EF2C0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF324);
+MATCH void func_801EF324(void) {
+    PartyMember* work;
+    u8           count;
+    u8           slot;
+    u8           timer;
+
+    if (g_Task->unk_04 == 0) {
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+    }
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        slot                                   = BMagic_AllocEffect();
+        work                                   = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 2;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = work;
+        slot                                   = BMagic_AllocEffect();
+        work                                   = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 3;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = work;
+        g_Task->unk_09                         = 8;
+        timer                                  = g_Task->timer - 1;
+        g_Task->timer                          = timer;
+        if (timer == 0) {
+            g_Task->param.unk_0B = 0x82;
+            g_Task->unk_09       = 0;
+            g_Task->header.step += 1;
+        }
+    }
+    g_Task->unk_04 += 1;
+    Battle_ProjectRange();
+    func_801EF580(0);
+    func_801EF580(0xF);
+}
 
 MATCH void func_801EF4A0(void) {
     u8 counter;

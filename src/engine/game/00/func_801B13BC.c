@@ -1,4 +1,5 @@
 #include "game_00.h"
+#include "sys/scratchpad.h"
 
 /* Scratchpad map-coordinate staging: the staged halfwords at 0x04/0x06, their
  * per-axis bias flags at 0x08/0x0C and the source halfwords at 0x0A/0x0E. */
@@ -9,7 +10,7 @@ MATCH void func_801B13BC(void) {
     u16* counter;
     u16  value2;
     s32  flag2;
-    u16* counter2;
+    s16* counter2;
 
     value    = D_1F80000A;
     flag     = D_1F800008;
