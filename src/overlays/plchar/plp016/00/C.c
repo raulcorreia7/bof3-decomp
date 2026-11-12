@@ -72,7 +72,7 @@ MATCH void Char_FaceFreeDirection(void) {
     CHAR_FACE_FREE_DIRECTION(func_801D02A0, func_801D0444);
 }
 
-INCLUDE_ASM(func_801CF8B4);
+#include "overlays/plchar/Char_RunPersonalAction.h"
 
 #include "overlays/plchar/Char_AdvancePaletteScript.h"
 

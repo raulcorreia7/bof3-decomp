@@ -7,8 +7,12 @@
 #include "overlays/plchar/plchar.h"
 #include "area/spad.h"
 
+/* The image's map-cell probe and the cue of its personal action. */
+#define CHAR_CELL_PROBE          func_801CEC18
+#define CHAR_PERSONAL_ACTION_CUE 0
+
 /* The tail callback table's entry count in this image. */
-#define PLCHAR_STEP_TABLE_COUNT 22
+#define PLCHAR_STEP_TABLE_COUNT  22
 
 /* The field work row this overlay moves, at scratchpad 0x1F800044. */
 extern Callback D_801CF5EC[];
@@ -19,5 +23,8 @@ extern Callback D_801CF620[];
 extern Callback D_801CF62C[];
 extern Callback D_801CF638[];
 
-#endif
 void func_801CEE24(s32 kind, s32 x, s32 y, s32 code);
+
+s32 func_801CEC18(s16 x, s16 y);
+
+#endif

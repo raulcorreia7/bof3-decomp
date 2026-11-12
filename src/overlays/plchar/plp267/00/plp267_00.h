@@ -7,11 +7,15 @@
 #include "overlays/plchar/plchar.h"
 #include "area/spad.h"
 
+/* The image's map-cell probe and the cue of its personal action. */
+#define CHAR_CELL_PROBE          func_801CF420
+#define CHAR_PERSONAL_ACTION_CUE 1
+
 /* The cue id multiplier of this image's rare spawn cue. */
-#define CHAR_SPAWN_CUE_SCALE    20
+#define CHAR_SPAWN_CUE_SCALE     20
 
 /* The tail callback table's entry count in this image. */
-#define PLCHAR_STEP_TABLE_COUNT 30
+#define PLCHAR_STEP_TABLE_COUNT  30
 
 /* The field work row this overlay moves, at scratchpad 0x1F800044. */
 extern Callback D_801D0988[];
@@ -28,5 +32,8 @@ extern Callback D_801D09F4[];
 extern s32  func_801CF99C(void);
 extern void func_801CFB40(void);
 
-#endif
 void func_801CF62C(s32 kind, s32 x, s32 y, s32 code);
+
+s32 func_801CF420(s16 x, s16 y);
+
+#endif

@@ -44,7 +44,7 @@ MATCH void func_801CE698(void) {
     g_Task->unk_03       = 1;
 }
 
-INCLUDE_ASM(func_801CE7B8);
+#include "overlays/plchar/Char_RunPersonalAction.h"
 
 #include "overlays/plchar/Char_AdvancePaletteScript.h"
 
