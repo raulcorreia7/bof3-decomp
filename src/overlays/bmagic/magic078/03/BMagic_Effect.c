@@ -4,7 +4,35 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC04);
+void func_801EECFC(void);
+void Effect_PlayOnIdleTick(void);
+
+MATCH void func_801EEC04(void) {
+    Callback handlers[2] = {func_801EECFC, Effect_PlayOnIdleTick};
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(4, 0xC);
+
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(4, 0xC);
+}
 
 INCLUDE_ASM(func_801EECFC);
 
