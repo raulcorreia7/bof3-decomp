@@ -221,7 +221,7 @@ MATCH void func_801FCC24(void) {
     switch (g_SceneState.step_05) {
         case 0:
             SND_StopSequence(0, 0);
-            SND_PlayBGM(0x1A, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_PlayBGM(26, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_GameFlags |= 0x80;
             func_801BE1B0(0xB);
             g_SceneState.step_05 = 1;
