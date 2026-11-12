@@ -39,7 +39,7 @@ MATCH void func_801F33C8(void) {
                 /* FAKE: barrier keeps the flag load below the zero stores. */
                 FAKE_BARRIER();
                 flag_value = *flag;
-                counter    = counter + 1;
+                counter++;
                 flag_value |= 1;
                 D_80144F56 = counter;
                 *flag      = flag_value;
