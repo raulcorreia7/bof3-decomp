@@ -17,16 +17,8 @@
 extern u8 D_80146920[];
 extern u8 D_801F45C4[];
 
-/* One spawn position: x and y in cells. */
-typedef struct AreaSpawnCell {
-    u16 x;
-    u16 y;
-} AreaSpawnCell;
-
-ASSERT_SIZE(AreaSpawnCell, 0x04);
-
 /* The eight spawn positions the overlay cycles through. */
-extern AreaSpawnCell D_801F4614[8];
+extern UPoint2D D_801F4614[8];
 
 void func_801F3324(void);
 void func_801F369C(s32 level);
