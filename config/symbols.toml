@@ -633,6 +633,7 @@ Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "Lowers t
 g_BMagicEffectModes = { addr = 0x801F04F8, source = "Handlers of magic069 (Influence), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic070/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic070 (Absorb, Heal)." }
 Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic070 (Absorb, Heal)." }
@@ -641,6 +642,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF47C, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 
 ["emi/bmagic/magic071/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic071 (Healing Herb, Rejuvenate)." }
 Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic071 (Healing Herb, Rejuvenate)." }
@@ -649,6 +651,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 Effect_LaunchSparkle = { addr = 0x801EF47C, type = "func", source = "Counts the launch delay (byte 0x05) down; at zero places the sparkle at the battler's screen point plus a random launch offset, picks its drift (byte 0x08), sway phase (+0x0C), rise (byte 0x07), resets the delay to 16 and advances header.step (byte 0x02)." }
 
 ["emi/bmagic/magic072/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic072 (Restore)." }
 Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic072 (Restore)." }

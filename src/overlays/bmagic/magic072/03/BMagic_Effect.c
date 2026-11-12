@@ -31,9 +31,9 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/func_801EF72C.h"
 
-INCLUDE_ASM(func_801EF810);
+#include "overlays/bmagic/func_801EF810.h"
 
-INCLUDE_ASM(func_801EFA44);
+#include "overlays/bmagic/func_801EFA44.h"
 
 INCLUDE_ASM(func_801EFCDC);
 
