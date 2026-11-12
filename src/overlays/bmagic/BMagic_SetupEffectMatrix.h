@@ -31,4 +31,5 @@ MATCH void BMAGIC_SETUP_EFFECT_MATRIX(void) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 }
+
 #undef BMAGIC_SETUP_EFFECT_MATRIX
