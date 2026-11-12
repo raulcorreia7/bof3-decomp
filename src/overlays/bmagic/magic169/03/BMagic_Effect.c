@@ -6,7 +6,31 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC38);
 
-INCLUDE_ASM(func_801EED8C);
+MATCH void func_801EED8C(void) {
+    u16* src;
+    u16* dst;
+    u16  i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    func_800AFD9C();
+    g_Task->pos.z.fixed += TO_COORD(192);
+    i   = 0;
+    dst = MEM_PTR(u16, 0x8003AC00u);
+    src = MEM_PTR(u16, 0x80036C00u);
+    for (; i < 256; i++) {
+        dst[i] = src[i] | 0x8000u;
+    }
+    MEM(u16, 0x8003AC00u) = MEM(u16, 0x80036C00u);
+    g_GfxPalettePending   = 1;
+    SND_QueueSelectionFx(0x100);
+    g_Task->unk_09       = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+}
 
 INCLUDE_ASM(func_801EEEB0);
 
