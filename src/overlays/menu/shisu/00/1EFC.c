@@ -4,7 +4,40 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801D2ADC);
+MATCH void func_801D2ADC(void) {
+    u8  saved[3];
+    s8  shade;
+    u8* green;
+    u8* blue;
+
+    D_801DA100 = D_801D9688[g_MenuStatusItems.unk_0B];
+    saved[0]   = D_801DA11D;
+    saved[1]   = D_801DA11E;
+    saved[2]   = D_801DA11F;
+    if (D_801DA11D > g_MenuStatusItems.used[3] * 3) {
+        D_801DA11D -= g_MenuStatusItems.used[3] * 3;
+    } else {
+        D_801DA11D = 0;
+    }
+    green = &D_801DA11E;
+    if (0xFF - *green > g_MenuStatusItems.used[3] * 3) {
+        shade = *green + g_MenuStatusItems.used[3] * 3;
+    } else {
+        shade = -1;
+    }
+    *green = shade;
+    FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
+    blue = &D_801DA11F;
+    if (*blue > g_MenuStatusItems.used[3] * 3) {
+        *blue -= g_MenuStatusItems.used[3] * 3;
+    } else {
+        *blue = 0;
+    }
+    func_801D2308(&D_801DA0C0);
+    D_801DA11D = saved[0];
+    D_801DA11E = saved[1];
+    D_801DA11F = saved[2];
+}
 
 MATCH void func_801D2C0C(void) {
     SYS_DISPATCH_BYTE(D_801D9720, D_801DA049);
