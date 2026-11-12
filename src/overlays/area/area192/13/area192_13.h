@@ -14,8 +14,6 @@ extern u8  D_801F3890[];
 extern u8  D_801F38C0[];
 /* The area counter the selection pass reads. */
 extern u8  D_80144F56;
-/* The flag block base the selection pass reaches both scene flag rows through. */
-extern u8  D_80144982;
 /* The spawn-row table the selection pass walks, one row set per mode. */
 extern u8* D_801F3A08[];
 

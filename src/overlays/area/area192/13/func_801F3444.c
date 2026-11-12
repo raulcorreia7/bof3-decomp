@@ -1,19 +1,19 @@
 #include "area192_13.h"
 
 MATCH void func_801F3444(void) {
-    u8* base;
+    u8* flags;
     u8  fatigue;
     u8  mode;
     u8  i;
     s16 slot;
 
-    /* Retail takes its base at the fatigue byte and reaches both flag rows from it. */
-    base    = &D_80144982;
-    fatigue = base[0];
-    if (SYS_TestFlag(base + 0x5A6, 0x77) != 0) {
+    /* The flag rows lie in the save block above the record; retail reaches them from its base. */
+    flags   = &g_Characters[0].fatigue;
+    fatigue = flags[0];
+    if (SYS_TestFlag(flags + 0x5A6, 0x77) != 0) {
         return;
     }
-    if (!SYS_TestFlag(base + 0x576, 0xA)) {
+    if (!SYS_TestFlag(flags + 0x576, 0xA)) {
         if (fatigue < 9) {
             if (fatigue < 5) {
                 mode = D_80144F56 >= 5;
@@ -31,7 +31,7 @@ MATCH void func_801F3444(void) {
     for (i = 0; i < 6; i++) {
         slot              = Actor_FindFree();
         SP_REF(s16, 0x0u) = slot;
-        if (slot != 0xFF) {
+        if (slot != GAME_NONE) {
             func_801A4D54(D_801F3A08[mode] + i * 17);
         }
     }
