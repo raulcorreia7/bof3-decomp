@@ -92,7 +92,7 @@ MATCH void func_801F71C0(void) {
     func_801F88B8(MEM_PTR(void, 0x800E48E0u));
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
     if (--g_Task->timer == 0) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         g_Task->timer = 32;
         g_Task->header.step++;
     }
@@ -236,7 +236,7 @@ MATCH void func_801F7FA4(void) {
         if (g_Task->unk_06 == 0) {
             Actor_Clear();
         } else {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x04));
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
             g_Task->timer = 32;
             g_Task->header.step++;
         }
