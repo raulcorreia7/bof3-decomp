@@ -11,6 +11,10 @@ extern u8 D_8014686B;
 extern u8 D_80146874;
 extern u8 D_80146875;
 extern u8 D_80147CC8;
+/* The disc's colour rows: one byte table per channel, indexed by the work record's byte 6. */
+extern u8 D_801F4D5C[];
+extern u8 D_801F4D5D[];
+extern u8 D_801F4D5E[];
 extern u8 D_801F4D68[];
 s32       func_801F3AE4(s32, s32, s32);
 

@@ -9,6 +9,11 @@
 
 void func_801F37A8(s32 arg0, s32 arg1);
 
+/* The disc's colour rows: one byte table per channel, indexed by the work record's byte 6. */
+extern u8 D_801F52C4[];
+extern u8 D_801F52C5[];
+extern u8 D_801F52C6[];
+
 extern u8 D_801F52D0[];
 extern u8 D_801F52E0[];
 extern u8 D_801F52E8[];
