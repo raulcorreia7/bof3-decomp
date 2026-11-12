@@ -222,7 +222,22 @@ MATCH void func_801F7E34(void) {
 
 INCLUDE_ASM(func_801F7E6C);
 
-INCLUDE_ASM(func_801F7F84);
+MATCH void func_801F7F84(void) {
+    ActorSlot** spawned;
+    u8          i;
+
+    /* the controller keeps the five slots it spawned in its velocity words */
+    spawned = (ActorSlot**)&g_Task->vx;
+    i       = 0;
+    do {
+        if (spawned[i]->unk_06 == 0) {
+            return;
+        }
+        i++;
+    } while (i < 5);
+    g_ScriptVars[0]++;
+    Actor_Clear();
+}
 
 INCLUDE_ASM(func_801F7FFC);
 
