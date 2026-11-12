@@ -54,17 +54,17 @@ MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    point[0] = segment->head[0] + 0x1000;
-    point[1] = segment->head[1];
-    point[2] = segment->head[2];
+    point[0] = segment->head.x + 0x1000;
+    point[1] = segment->head.y;
+    point[2] = segment->head.z;
     Area_ProjectPoint(point, POLY_XY(prim, 0));
-    point[0] = segment->head[0] - 0x1000;
+    point[0] = segment->head.x - 0x1000;
     Area_ProjectPoint(point, POLY_XY(prim, 1));
-    point[0] = segment->tail[0] + 0x1000;
-    point[1] = segment->tail[1];
-    point[2] = segment->tail[2];
+    point[0] = segment->tail.x + 0x1000;
+    point[1] = segment->tail.y;
+    point[2] = segment->tail.z;
     Area_ProjectPoint(point, POLY_XY(prim, 2));
-    point[0] = segment->tail[0] - 0x1000;
+    point[0] = segment->tail.x - 0x1000;
     Area_ProjectPoint(point, POLY_XY(prim, 3));
     prim->r0 = prim->r1 = segment->head_red;
     prim->g0 = prim->g1 = segment->head_green;
@@ -75,13 +75,13 @@ MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
     GFX_AddPrim(3, sizeof(POLY_G4));
 }
 
-MATCH u8* func_801EEFB8(void) {
-    u8* record;
-    u8  index;
+MATCH BMagicStreakSegment* func_801EEFB8(void) {
+    BMagicStreakSegment* record;
+    u8                   index;
 
     record = D_801EF2A8;
-    for (index = 0; index < 128; index++, record += 0x3C) {
-        if (*record == 0) {
+    for (index = 0; index < 128; index++, record++) {
+        if (record->active == 0) {
             return record;
         }
     }
@@ -89,15 +89,15 @@ MATCH u8* func_801EEFB8(void) {
 }
 
 MATCH void func_801EEFF4(void) {
-    u8* record;
-    u8  index;
+    BMagicStreakSegment* record;
+    u8                   index;
 
     record = D_801EF2A8;
     index  = 0;
     do {
-        *record = 0;
+        record->active = 0;
         index++;
-        record += 0x3C;
+        record++;
     } while (index < 128);
 }
 
@@ -106,12 +106,12 @@ INCLUDE_ASM(func_801EF020);
 INCLUDE_ASM(func_801EF118);
 
 MATCH void func_801EF258(void) {
-    s32 result;
-    u8  i;
+    BMagicStreakSegment* result;
+    u8                   i;
 
     for (i = 0; i < 8; i++) {
         result = func_801EEFB8();
-        if (result != 0) {
+        if (result != NULL) {
             func_801EF020(result);
         }
     }
