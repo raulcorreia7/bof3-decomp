@@ -22,7 +22,8 @@ MATCH u32 Battle_ApplyDamage(u8 attacker_slot, u8 target_slot) {
                 g_Game.members[target_slot].chr.hp -= damage;
             } else {
                 if (damage - g_Game.members[target_slot].chr.hp < g_Game.members[target_slot].chr.willpower) {
-                    if (!(g_Game.members[target_slot].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) && !(g_Game.members[target_slot].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+                    if (!(g_Game.members[target_slot].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) &&
+                        !(g_Game.members[target_slot].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
                         g_Game.members[target_slot].u.turn.damage_flags.value |= COMBATANT_FLAG_WILLPOWER_SURVIVED;
                     }
                 }

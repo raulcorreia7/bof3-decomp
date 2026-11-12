@@ -22,7 +22,7 @@ MATCH s32 GFX_AllocPaletteFade(void* owner, s32 red, s32 green, s32 blue, s32 fa
             tmp_a                             = PALETTE_OWNER(owner)->saved_byte;
             g_PaletteFades[slot].saved_byte   = tmp_a;
             tmp_b                             = PALETTE_OWNER(owner)->palette_kind;
-            g_PaletteFades[slot].target      = owner;
+            g_PaletteFades[slot].target       = owner;
             g_PaletteFades[slot].offset.red   = red;
             g_PaletteFades[slot].offset.green = green;
             g_PaletteFades[slot].offset.blue  = blue;

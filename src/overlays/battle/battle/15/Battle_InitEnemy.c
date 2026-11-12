@@ -1,10 +1,10 @@
 #include "battle_15.h"
 
-/* The enemy record the enemy_index id is read from. */
+/* The enemy record the enemy id is read from. */
 #define BATTLE_ENEMY_RECORD_SIZE 0x88
 
-/* Arms one enemy battler enemy_slot: installs the work pointer in the scratchpad, resets the enemy_slot record, copies
- * the enemy_index id, then queues the enemy_index's script and bit flag. */
+/* Arms one enemy battler slot: installs the work pointer in the scratchpad, resets the slot record, copies the
+ * enemy id, then queues the enemy's script and bit flag. */
 /* func_800ABCE0 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y) {

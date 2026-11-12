@@ -15,9 +15,9 @@ MATCH u8* UI_DrawTextGlyphs(u8 palette, u8 byte_count, u8* text) {
     u32 index;
     s32 glyph_y;
 
-    str     = text;
-    count   = byte_count;
-    saved   = 0;
+    str   = text;
+    count = byte_count;
+    saved = 0;
     func_8014FC00(0);
     clut   = (palette & 0xF) | STAGE_PALETTE_CLUT;
     index  = (palette & 0xF0) >> 3;

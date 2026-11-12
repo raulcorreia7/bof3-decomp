@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* arms the panel task selected by the menu id and reports
- * 0xFF when it is already armed, otherwise the menu id.
+/* arms the panel task selected by the panel index and reports
+ * 0xFF when it is already armed, otherwise the panel index.
  */
 MATCH u8 Menu_OpenPanelTask(u8 panel_index, u8 handler_index) {
     u32 index;
