@@ -12,6 +12,7 @@ void            func_801F030C(void);
 
 extern Callback D_801F1C24[];
 extern u8       D_801F1C38[];
+extern u8       D_801F1C54[];
 void            func_801F06B4(void);
 void            func_801F0D44(void);
 
@@ -28,6 +29,7 @@ extern BMagicEffectWork  D_801F1CA0[48];
 void                     func_801F0DF4(void);
 
 void func_801F1844(void);
+void func_801F1AC4(void);
 void func_801F1B14(void);
 
 #endif
