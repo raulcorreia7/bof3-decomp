@@ -112,6 +112,29 @@ authored assembly), so the macro takes only the unit name. A match removes one `
 `include-asm` fails when the tree has more than the merge base with `origin/main` had. It prints
 the ref it used and exits 2 when no such ref exists (`git fetch origin main`).
 
+## Jump tables
+
+A dense `switch` compiles to a jump table in the unit's `.rodata`. Most overlays keep that table in
+the leading data run, before any code, so a lift matches only when the image's layout puts the C
+table there:
+
+1. The function's assembly names the table `jtbl_<ADDR>`. The table runs from that address to the
+   next row the manifest places (the next function or data row); each entry is a word that points
+   into the function.
+2. In `config/<image>/splat.yaml`, order `.rodata` where retail has the table (usually
+   `section_order: [.data, .rodata, .text, .bss]`) and place the table as its own subsegment at its
+   file offset: `- [0xOFFSET, .rodata, <function>]`.
+3. Delete those bytes from the data unit that held them.
+4. Write the `switch`. `splat` then emits the table into the function's own asm file (the text and
+   its table), and the C compiler's table replaces both once the function is `MATCH`.
+
+`tools/match.sh` refuses such a function: its own `.rodata` is not in the partial link. `check-<image>`
+is the proof, and the whole-image bytes are the verdict. Placed tables to read before editing:
+`world04/area168/13@0x801F4A0C` (a 13-entry table at file offset 0x4),
+`world02/area079/13@0x801F2D20` (PR #808) and `world03/area141/13@0x801F2F14` (PR #809).
+An image whose `target.toml` has a `[[matching.section_placements]]` row also repeats the address
+there (for example `emi/battle/battle/03`).
+
 ## Helpers
 
 The shared helpers, inline functions and macro forms, the address seams and the fake-match helpers
