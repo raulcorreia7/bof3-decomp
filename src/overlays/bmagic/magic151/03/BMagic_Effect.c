@@ -370,7 +370,7 @@ INCLUDE_ASM(func_801F0D0C);
  * matrix and draws its three bands. */
 MATCH void func_801F10E8(void) {
     SYS_DISPATCH_BYTE(D_801F24FC, g_Task->header.step);
-    func_800AF764();
+    Battle_ProjectRange();
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Effect_SetActorMatrixQuarterRoll();
         func_801F14D0(32, 32, 0x7);
