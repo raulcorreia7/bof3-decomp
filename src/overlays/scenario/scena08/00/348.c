@@ -580,7 +580,27 @@ MATCH void func_801F9F6C(void) {
 
 INCLUDE_ASM(func_801F9F8C);
 
-INCLUDE_ASM(func_801FA19C);
+MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
+    LINE_G2* prim;
+    DVECTOR  xy;
+    MATRIX   camera;
+
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 256));
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    prim = (LINE_G2*)g_GfxPrimCursor;
+    SetLineG2(prim);
+    SetSemiTrans(prim, 1);
+    Area_SetCameraMatrix(&camera);
+    Area_ProjectPoint(&pos->x.fixed, &xy);
+    prim->x0 = xy.vx;
+    prim->y0 = xy.vy;
+    Area_ProjectPoint(vx, &xy);
+    prim->x1 = xy.vx;
+    prim->y1 = xy.vy;
+    setRGB0(prim, 64, 64, 64);
+    setRGB1(prim, 0, 0, 0);
+    GFX_AddPrim(1, sizeof(LINE_G2));
+}
 
 MATCH void func_801FA294(void) {
     SYS_DISPATCH_BYTE(D_801FE964, D_80146872);
