@@ -101,6 +101,30 @@ MATCH void func_801F082C(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801F08B8);
+MATCH void func_801F08B8(void) {
+    if (g_FrameCount & 1) {
+        g_PaletteFades[g_Task->param.unk_0B].offset.red += 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.green += 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.blue += 1;
+    }
+    if (g_PaletteFades[g_Task->param.unk_0B].offset.red == 8) {
+        g_Task->header.step += 1;
+    }
+}
 
-INCLUDE_ASM(func_801F09E0);
+MATCH void func_801F09E0(void) {
+    if (g_FrameCount & 1) {
+        g_PaletteFades[g_Task->param.unk_0B].offset.red -= 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.green -= 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.blue -= 1;
+    }
+    if (g_PaletteFades[g_Task->param.unk_0B].offset.red == 0) {
+        g_Task->header.step = 1;
+    }
+    if (g_BattleEffectBattler->param.unk_0B & 0x80) {
+        func_80196718(g_Battle.selected_actor);
+        func_800AF814(g_Battle.target_selector);
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
