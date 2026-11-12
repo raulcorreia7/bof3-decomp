@@ -386,7 +386,7 @@ MATCH void func_801F0EEC(s32 variant, s32 abr, s32 color) {
     SPRT* sprt;
     u32   index;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, (u8)abr, 0x340, 0x100), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, (u8)abr, 832, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
@@ -403,8 +403,8 @@ MATCH void func_801F0EEC(s32 variant, s32 abr, s32 color) {
     index    = variant & BYTE_MASK;
     sprt->u0 = D_801F13A4[index].u;
     sprt->v0 = D_801F13A4[index].v;
-    sprt->w  = 0x50;
-    sprt->h  = 0x48;
+    sprt->w  = 80;
+    sprt->h  = 72;
     SetSemiTrans(sprt, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
 }
