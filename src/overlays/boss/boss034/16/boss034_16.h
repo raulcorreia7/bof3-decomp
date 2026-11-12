@@ -9,6 +9,12 @@
 /* The scratchpad work area is a PartyMember record in this image. */
 #define g_Task ((PartyMember*)g_Task)
 
+/* This boss's bits of g_Battle.boss_flags, each set once. */
+typedef enum Boss034Flags {
+    BOSS034_FLAG_FIRST_TURN_INSERTED = 1 << 0,
+    BOSS034_FLAG_WERETIGER_GRANTED   = 1 << 1,
+} Boss034Flags;
+
 extern s8 D_80146875;
 
 extern u8       D_800C26B8[];

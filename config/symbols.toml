@@ -1498,6 +1498,7 @@ BMagic_ProjectSpan = { addr = 0x801EF2C0, type = "func", source = "Projects the 
 
 ["emi/bmagic/magic151/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
@@ -1681,6 +1682,7 @@ g_BMagicEffectModes = { addr = 0x801EF770, source = "Handlers of magic218 (Aura 
 ["emi/bmagic/magic219/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC04 = { addr = 0x801EEC04, type = "Magic219Steps", source = "Step handlers of magic219, run by header.mode (byte 0x01) from func_801EEC14." }
 Effect_PlayOnZeroTick = { addr = 0x801EEFC4, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic219 (Magma Breath)." }

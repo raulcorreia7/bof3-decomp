@@ -10,6 +10,7 @@
 
 extern Callback D_801F0B90[];
 
+void func_800AF3A0(VECTOR pos, s16 step);
 void func_801EEDD8(void);
 void func_801F0908(void);
 
