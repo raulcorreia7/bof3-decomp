@@ -44,6 +44,17 @@ INCLUDE_ASM(func_801D129C);
 
 INCLUDE_ASM(func_801D14C8);
 
-INCLUDE_ASM(func_801D1670);
+MATCH void func_801D1670(s16 x, s16 y, u8 u, u8 v, u8 width) {
+    SPRT* sprite;
+
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x, y);
+    setUV0(sprite, u, v);
+    setWH(sprite, (width << 4) + 0x10, 0x10);
+    sprite->clut = 0x7883;
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801D1724);
