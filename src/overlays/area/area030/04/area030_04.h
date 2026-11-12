@@ -626,22 +626,34 @@ void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade);
 void func_801D9740(s32 arg0, u8* arg1, s32 arg2, s32 arg3);
 /* func_801D9B58 */
 void Fishing_EntryRun(void);
-void func_801D9B9C(void);
-void func_801D9C4C(void);
-void func_801D9C9C(void);
+/* func_801D9B9C */
+void Fishing_EntryBegin(void);
+/* func_801D9C4C */
+void Fishing_EntryWait(void);
+/* func_801D9C9C */
+void Fishing_EntryDone(void);
 /* func_801D9CF4 */
 void Fishing_ReadyRun(void);
-void func_801D9D38(void);
-void func_801D9E08(void);
+/* func_801D9D38 */
+void Fishing_ReadyBegin(void);
+/* func_801D9E08 */
+void Fishing_ReadyWait(void);
 /* func_801D9E40 */
 void Fishing_ChooseAction(void);
-void func_801D9FE8(void);
-void func_801DA058(void);
-void func_801DA168(void);
-void func_801DA2A0(void);
-void func_801DA3F4(void);
-void func_801DA498(void);
-void func_801DA508(void);
+/* func_801D9FE8 */
+void Fishing_ReadyPrompt(void);
+/* func_801DA058 */
+void Fishing_QuitSlideIn(void);
+/* func_801DA168 */
+void Fishing_QuitInput(void);
+/* func_801DA2A0 */
+void Fishing_QuitSlideOut(void);
+/* func_801DA3F4 */
+void Fishing_CautionSlideIn(void);
+/* func_801DA498 */
+void Fishing_CautionInput(void);
+/* func_801DA508 */
+void Fishing_CautionSlideOut(void);
 /* func_801DA5B4 */
 void Fishing_CastRun(void);
 void func_801DA5F8(void);

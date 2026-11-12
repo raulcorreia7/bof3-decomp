@@ -3579,8 +3579,20 @@ Fishing_DrawWindowFill = { addr = 0x801D799C, type = "func", source = "Fills a f
 Fishing_DrawWindowFrame = { addr = 0x801D9534, type = "func", source = "Draws a fishing window frame and its inset shadow." }
 Fishing_SceneRun = { addr = 0x801D9B14, type = "func", source = "runs the fishing scene: g_FishingSceneModes[mode_index_02]" }
 Fishing_EntryRun = { addr = 0x801D9B58, type = "func", source = "scene mode 0: runs g_FishingEntryStates[sub_index_03]" }
+Fishing_EntryBegin = { addr = 0x801D9B9C, type = "func", source = "Runs the fishing entry's begin step." }
+Fishing_EntryWait = { addr = 0x801D9C4C, type = "func", source = "Waits for the entry window effect." }
+Fishing_EntryDone = { addr = 0x801D9C9C, type = "func", source = "Finishes the entry once the anchor count reaches four." }
 Fishing_ReadyRun = { addr = 0x801D9CF4, type = "func", source = "scene mode 1: runs g_FishingReadyStates[sub_index_03]" }
+Fishing_ReadyBegin = { addr = 0x801D9D38, type = "func", source = "Resets the fishing work record and starts the ready script." }
+Fishing_ReadyWait = { addr = 0x801D9E08, type = "func", source = "Waits for the ready state." }
 Fishing_ChooseAction = { addr = 0x801D9E40, type = "func", source = "ready step 2: Triangle starts the quit prompt, Square opens the gear menu (mode 9), X casts (mode 2) when a lure and rod are equipped and otherwise opens the gear menu, L1 enters mode 10" }
+Fishing_ReadyPrompt = { addr = 0x801D9FE8, type = "func", source = "Starts the fishing prompt for the selected step." }
+Fishing_QuitSlideIn = { addr = 0x801DA058, type = "func", source = "Slides the quit prompt into place." }
+Fishing_QuitInput = { addr = 0x801DA168, type = "func", source = "Reads the quit prompt's yes or no." }
+Fishing_QuitSlideOut = { addr = 0x801DA2A0, type = "func", source = "Slides the quit prompt away." }
+Fishing_CautionSlideIn = { addr = 0x801DA3F4, type = "func", source = "Slides the caution box into place." }
+Fishing_CautionInput = { addr = 0x801DA498, type = "func", source = "Reads the caution prompt's answer." }
+Fishing_CautionSlideOut = { addr = 0x801DA508, type = "func", source = "Slides the caution box away." }
 Fishing_CastRun = { addr = 0x801DA5B4, type = "func", source = "scene mode 2: runs g_FishingCastStates[sub_index_03]" }
 Fishing_CastInput = { addr = 0x801DA638, type = "func", source = "cast step 1: FISHING_INPUT_CAST throws the lure (sub step 2) and FISHING_INPUT_CANCEL goes back to the ready mode" }
 Fishing_HookedRun = { addr = 0x801DAED4, type = "func", source = "scene mode 4: runs g_FishingHookedStates[sub_index_03]" }
