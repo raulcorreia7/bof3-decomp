@@ -6,7 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 
-extern s16 g_ScrollHeight; /* 0x80143F86 */
+extern s16 g_ScrollHeight;
 
 extern u8 D_80144908[];
 extern u8 D_80144F5E;
@@ -16,7 +16,7 @@ extern u8 D_80144F5F;
 extern u8 D_80145FF4;
 extern u8 D_80146134;
 
-extern s32 g_AreaFocusY; /* 0x80147A90 */
+extern s32 g_AreaFocusY;
 extern u16 D_80147A96;
 
 /* kept: written as g_SceneState.flags_01, func_801F8850 changes size and the image symbols move. */
