@@ -335,7 +335,7 @@ MATCH u8* func_801F8B14(void) {
     u8  i;
 
     p = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < CHARACTER_COUNT; i++) {
         if (*p == 0) {
             return p;
         }
@@ -581,11 +581,11 @@ MATCH void func_801FA2D0(void) {
 MATCH void func_801FA32C(void) {
     u8 i;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < CHARACTER_COUNT; i++) {
         g_Characters[i].unk_07 |= 1;
     }
     func_801C16B8();
-    for (i = 1; i < 8; i++) {
+    for (i = 1; i < CHARACTER_COUNT; i++) {
         g_Characters[i].unk_07 &= 0xFE;
     }
 }
