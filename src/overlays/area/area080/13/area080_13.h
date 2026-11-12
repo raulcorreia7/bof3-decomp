@@ -7,18 +7,39 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-extern WorldPos  D_80146954;
-extern u8        D_801F3DAC[];
-extern u16       D_801F4494[];
-extern u16       D_801F4498[];
-extern u16       D_801F449C[];
-extern AreaRing* D_801F44A0;
-extern s8*       D_801F44A4;
+/* One of the eight sparks the area keeps after the ring in its work area:
+ * it drifts by its velocity and settles on the ground. */
+typedef struct AreaSparkSlot {
+    u8       active;       /* 0x00 */
+    u8       life;         /* 0x01 - frames left; the slot frees at 0 */
+    u8       pad_02[6];    /* 0x02 */
+    s32      velocity_x;   /* 0x08 */
+    s32      velocity_y;   /* 0x0C */
+    u8       pad_10[0x18]; /* 0x10 */
+    WorldPos pos;          /* 0x28 */
+    u8       pad_34[0x2C]; /* 0x34 */
+} AreaSparkSlot;
+
+ASSERT_SIZE(AreaSparkSlot, 0x60);
+ASSERT_OFFSET(AreaSparkSlot, velocity_x, 0x08);
+ASSERT_OFFSET(AreaSparkSlot, pos, 0x28);
+
+#define AREA_SPARK_SLOT_COUNT 8u
+#define g_AreaSparks          ((AreaSparkSlot*)(AREA_WORK + sizeof(AreaRing)))
+
+extern WorldPos       D_80146954;
+extern u8             D_801F3DAC[];
+extern u16            D_801F4494[];
+extern u16            D_801F4498[];
+extern u16            D_801F449C[];
+extern AreaRing*      D_801F44A0;
+extern AreaSparkSlot* D_801F44A4;
 
 /* func_801F30B0 */
 void Area_ProjectRing(AreaRing* ring);
 void func_801F31A0(s32 arg0);
 void func_801F33DC(AreaRing* ring);
+void func_801F352C(AreaSparkSlot* spark);
 void func_801F3834(void);
 void func_801F3870(void);
 
