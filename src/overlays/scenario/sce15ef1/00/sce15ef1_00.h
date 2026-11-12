@@ -29,8 +29,6 @@ extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
 
 extern WorldSpin g_WorldSpins[];
 
-extern void func_801D1B10(AreaSpawnSlot* slot);
-
 void func_801D147C(void* arg0, s32 arg1, s32 arg2);
 void func_801D1678(void* arg0, void* arg1, s32 arg2);
 void func_801D36BC(s32* pos, s32 vx, s32 vy);
