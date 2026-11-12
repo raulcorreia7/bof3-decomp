@@ -13,7 +13,7 @@ MATCH void Menu_DrawMasterPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     /* FAKE: the record base is formed straight from the byte symbol; folding the offset through the pointer local
      * places the address pair too early. */
     record = (Character*)(&g_WindowStyle + 0x16) + entry;
-    Menu_DrawPortrait((x + 86), (y + 2), record->character_id, ((record->status >> 6) & 2));
+    Menu_DrawPortrait((x + 86), (y + 0x2), record->character_id, ((record->status >> 6) & 2));
     UI_DrawText((x + 20), (y + 3), 0, 5, (u8*)record);
     TEXT_Format(g_UiFormatBuffer, D_801D0C04, record->level);
     UI_DrawGlyphString((x + 22), (y + 23), 0, g_UiFormatBuffer);
@@ -21,18 +21,18 @@ MATCH void Menu_DrawMasterPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     /* Retail reads the status halfword and the next one as a word. */
     if ((LOWU(record->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
-            UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelPoison);
+            UI_DrawTextString((x + 46), (y + 23), 1, 16, g_MenuLabelPoison);
         } else {
-            UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelConfusion);
+            UI_DrawTextString((x + 46), (y + 23), 1, 16, g_MenuLabelConfusion);
         }
     } else if (record->status & STATUS_POISONED) {
-        UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelPoison);
+        UI_DrawTextString((x + 46), (y + 23), 1, 16, g_MenuLabelPoison);
     } else if (record->status & STATUS_CONFUSED) {
-        UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelConfusion);
+        UI_DrawTextString((x + 46), (y + 23), 1, 16, g_MenuLabelConfusion);
     }
 
     value = record->hp;
-    align = (record->status >> 11) & 4;
+    align = (record->status >> 11) & 0x4;
     if (value < 2U) {
         align = 2;
     }

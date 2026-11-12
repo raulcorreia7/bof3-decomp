@@ -15,10 +15,10 @@ MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
         UI_DrawText(row_x + 6, y + 1, 6, 3, (data + 6));
     } else if (row_flags & 0x80) {
         UI_DrawText(row_x + 6, y + 1, 5, 3, (data + 9));
-    } else if (row_flags & 4) {
+    } else if (row_flags & 0x4) {
         UI_DrawText(row_x + 4, y + 1, 0, 3, (data + 0xC));
         UI_DrawTextString(row_x + 12, y + 5, 0, 1, data + 0x12);
-    } else if (row_flags & 8) {
+    } else if (row_flags & 0x8) {
         UI_DrawText(row_x + 4, y + 1, 0, 3, (data + 0xF));
         UI_DrawTextString(row_x + 12, y + 5, 0, 1, data + 0x12);
     } else if (row_flags & 0x100) {

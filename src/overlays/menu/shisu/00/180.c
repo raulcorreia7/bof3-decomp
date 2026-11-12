@@ -177,10 +177,10 @@ MATCH void func_801D1CA4(void) {
 INCLUDE_ASM(func_801D1D1C);
 
 MATCH void func_801D1E34(void) {
-    FIELD(u8, g_MenuPanelTasks, 0) = 0;
-    D_80148357                     = 1;
-    D_8014837B                     = 1;
-    D_8014839F                     = 1;
+    FIELD(u8, g_MenuPanelTasks, 0x0) = 0;
+    D_80148357                       = 1;
+    D_8014837B                       = 1;
+    D_8014839F                       = 1;
 }
 
 MATCH s32 func_801D1E60(void) {

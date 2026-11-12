@@ -24,5 +24,5 @@ MATCH s32 func_801E8088(s32 character_index, s32 record_index) {
     } else {
         result = value & BYTE_MASK;
     }
-    return -(result == 0) & 3;
+    return -(result == 0) & 0x3;
 }

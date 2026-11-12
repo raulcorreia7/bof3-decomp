@@ -22,7 +22,7 @@ MATCH void func_801D1FDC(void) {
         panel->active  = 1;
         panel->mode    = MENU_START_MODE_CHARACTER;
         panel->state   = 0;
-        panel->pos.x   = 0x62;
+        panel->pos.x   = 98;
         panel->pos.y   = index * 0x36 + 0x3E;
         panel->unk_0B  = 0;
         panel->unk_0C  = 0;
@@ -33,8 +33,8 @@ MATCH void func_801D1FDC(void) {
     panel->state   = 0;
     panel->active  = 1;
     panel++;
-    g_MenuPanelTasks[7].pos.x = 0xC8;
-    g_MenuPanelTasks[7].pos.y = 0x10;
+    g_MenuPanelTasks[7].pos.x = 200;
+    g_MenuPanelTasks[7].pos.y = 16;
     panel->handler            = 6;
     panel->mode               = MENU_START_MODE_PLAY_TIME;
     panel->state              = 0;
@@ -46,8 +46,8 @@ MATCH void func_801D1FDC(void) {
     panel->handler       = 6;
     panel->state         = 0;
     panel->active        = 1;
-    panel->pos.x         = 0x68;
-    panel->pos.y         = 0x2A;
+    panel->pos.x         = 104;
+    panel->pos.y         = 42;
     D_8014849A           = 4;
     panel->unk_0A        = 0;
     panel->unk_0B        = 0;
@@ -57,7 +57,7 @@ MATCH void func_801D1FDC(void) {
     D_8014849B           = 0;
     panel++;
     panel->active        = 1;
-    panel->pos.x         = 0x73;
-    panel->pos.y         = 0x10;
+    panel->pos.x         = 115;
+    panel->pos.y         = 16;
     panel->u.addr.unk_10 = 0;
 }

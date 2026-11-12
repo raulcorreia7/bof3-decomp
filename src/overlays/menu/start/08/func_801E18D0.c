@@ -8,11 +8,11 @@ MATCH void func_801E18D0(void) {
 
     D_80148654 = 0;
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, 16, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     WinDrawCueText(28, 19, (u16)((s8)D_80148655 + 0xBC));
     func_801E26A8(0x1C, 0x40);
     func_801E2668(0xFF, 0x70, 0x26);
-    Menu_DrawCursorSprite((((s8)D_80148655 * 0x30) + 0x76) & 0xFFFE, 0x2A, 0);
+    Menu_DrawCursorSprite((((s8)D_80148655 * 0x30) + 0x76) & 0xFFFE, 42, 0);
     pressed = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     if (pressed & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
@@ -50,7 +50,7 @@ MATCH void func_801E18D0(void) {
         }
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         func_801E2668((u8)*mode, 0x70, 0x26);
-        Menu_DrawCursorSprite(((*mode * 0x30) + 0x76) & 0xFFFE, 0x2A, 0);
+        Menu_DrawCursorSprite(((*mode * 0x30) + 0x76) & 0xFFFE, 42, 0);
         D_80144950                      = 1;
         g_InputMasks[INPUT_SLOT_SPEAK]  = PADRdown | PADL2 | PADR2;
         g_InputMasks[INPUT_SLOT_MOVE]   = PADRright;

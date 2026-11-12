@@ -17,8 +17,8 @@ MATCH void func_801DAA68(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
     record[0]                                                   = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 0x14;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 0x10;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 16;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     while (i < 2) {
         /* FAKE: retail adds the row offset and `rows` in this operand order; plain forms swap it. */
@@ -38,7 +38,7 @@ MATCH void func_801DAA68(void) {
         panel->mode    = 0;
         panel->state   = 0;
         panel->active  = 1;
-        panel->pos.x   = 0x11;
+        panel->pos.x   = 17;
         panel->pos.y   = i * 54 + 62;
         panel->unk_0B  = 1;
         panel->unk_0C  = 0;

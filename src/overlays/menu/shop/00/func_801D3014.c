@@ -25,7 +25,7 @@ MATCH void func_801D3014(void) {
             wallet  = &g_Zenny;
             price   = *wallet + g_ShopItemCount * g_ShopItemPrice;
             *wallet = price;
-            if (price > 0x98967F) {
+            if (price > 9999999) {
                 *wallet = 0x98967F;
             }
             stock = D_801C8950[g_ShopItemCategory] + g_ShopStockIndex;

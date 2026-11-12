@@ -30,7 +30,7 @@ MATCH void func_801E1710(MenuPanelTask* task) {
             }
         }
         n++;
-        y += 0xD;
+        y += 13;
         list++;
     } while (n < 10);
     record     = g_Characters[task->unk_0A].name;

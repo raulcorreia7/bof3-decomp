@@ -16,7 +16,7 @@ MATCH void func_801D1000(void) {
     if (index >= 0) {
         slot = (u8*)g_Actors + index * ACTOR_SIZE;
         TASK_SET(slot);
-        if ((slot[7] & 8) == 0) {
+        if ((slot[7] & 0x8) == 0) {
             slot[8] = slot[0x79];
             func_8015BAC4(g_Task->direction_08);
             slot[0x74] |= 8;

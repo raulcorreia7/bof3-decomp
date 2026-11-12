@@ -9,7 +9,7 @@ MATCH void func_801E2D84(s16 x, s32 y) {
     s32  i;
 
     memcpy(data, D_801D0E20, sizeof(data));
-    Menu_DrawWindowFrame(x, y, 0xC, 0xF);
+    Menu_DrawWindowFrame(x, y, 12, 15);
     i          = 0;
     row_y      = y + 6;
     flag_table = g_InputMasks;

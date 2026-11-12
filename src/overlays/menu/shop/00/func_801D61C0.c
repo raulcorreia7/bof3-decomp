@@ -8,13 +8,13 @@ MATCH void func_801D61C0(void) {
     s16 i;
     s16 next;
 
-    if (SYS_TestFlag(g_SceneEventFlags, 0x77) != 0) {
+    if (SYS_TestFlag(g_SceneEventFlags, 119) != 0) {
         g_MenuStep.sub_step = 6;
-        Message_StartAreaMessage(0xEF);
+        Message_StartAreaMessage(239);
         return;
     }
     if (g_SceneState.scenario_id != 0xE || SYS_TestFlag(*g_SceneFlags, 5) == 0) {
-        SYS_SetFlag(g_SceneEventFlags, 0x77);
+        SYS_SetFlag(g_SceneEventFlags, 119);
     }
     i = 0;
     do {

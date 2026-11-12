@@ -10,8 +10,8 @@ MATCH void func_801D7208(void) {
     s32          offset;
 
     first                       = &g_SaveSlots[0].source_index;
-    g_SaveSlots[2].source_index = 0xFF;
-    g_SaveSlots[1].source_index = 0xFF;
+    g_SaveSlots[2].source_index = GAME_NONE;
+    g_SaveSlots[1].source_index = GAME_NONE;
     *first                      = 0xFF;
     row                         = g_SaveSlots;
     for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {

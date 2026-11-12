@@ -163,7 +163,7 @@ MATCH void SAVE_PollCardInfo(void) { /* func_801EF040 */
     s32 count;
     s32 status;
 
-    count  = 0x3C;
+    count  = 60;
     status = -1;
     do {
         if (_card_info(g_SaveCardPort * 0x10) != 0) {
@@ -182,7 +182,7 @@ MATCH void SAVE_PollCardLoad(void) { /* func_801EF0B4 */
     s32 count;
     s32 status;
 
-    count  = 0x3C;
+    count  = 60;
     status = -1;
     do {
         if (_card_load(g_SaveCardPort * 0x10) != 0) {
@@ -201,7 +201,7 @@ MATCH void func_801EF148(void) {
     s32 count;
     s32 status;
 
-    count = 0x3C;
+    count = 60;
     SAVE_PollHardwareEvents();
     status = -1;
     do {
@@ -344,7 +344,7 @@ MATCH s32 SAVE_TransferFile(s32 fd, s32 mode, s32 size, s32 offset) { /* func_80
     s32 minus_one;
     s32 remain;
 
-    count = 0x3C;
+    count = 60;
     if (size & 0x7F) {
         size = (size & ~0x7F) + 0x80;
     }

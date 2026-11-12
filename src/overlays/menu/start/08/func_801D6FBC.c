@@ -8,7 +8,7 @@ MATCH void func_801D6FBC(void) {
 
     index     = g_MenuPanelTasks[14].flags;
     bit_index = g_CharSlot[g_PartyFieldOrder[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]];
-    if (((s32)(Item_GetEquipability(g_MenuPanelTasks[14].unk_08, index) & BYTE_MASK) >> bit_index) & 1) {
+    if (((s32)(Item_GetEquipability(g_MenuPanelTasks[14].unk_08, index) & BYTE_MASK) >> bit_index) & 0x1) {
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags = 0;
         record_index                                   = bit_index & BYTE_MASK;
     } else {

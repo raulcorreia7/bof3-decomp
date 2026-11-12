@@ -34,7 +34,7 @@ MATCH void func_801D3D00(void) {
         if (D_80148510 >= g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
-    } else if (pressed & 4) {
+    } else if (pressed & 0x4) {
         if ((D_8014850F & BYTE_MASK) == 0) {
             D_80148510 = 0;
         } else if ((u32)(D_8014850F & BYTE_MASK) < 9U) {
@@ -44,7 +44,7 @@ MATCH void func_801D3D00(void) {
             D_80148510 = cursor - 9;
             D_8014850F = D_8014850F - 9;
         }
-    } else if (pressed & 8) {
+    } else if (pressed & 0x8) {
         page_start        = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         page_start_masked = page_start & BYTE_MASK;
         if (page_start_masked == 0x77) {

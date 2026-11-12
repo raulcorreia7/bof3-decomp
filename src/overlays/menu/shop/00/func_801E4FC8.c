@@ -10,7 +10,7 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
     u16                 clut;
 
     if (atlas_index == 4 && g_SceneState.scenario_id >= 8) {
-        atlas_index = 0xB;
+        atlas_index = 11;
     }
     entry = &g_ShopPortraitAtlas[atlas_index & BYTE_MASK];
 

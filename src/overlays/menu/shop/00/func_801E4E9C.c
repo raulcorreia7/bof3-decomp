@@ -17,16 +17,16 @@ MATCH void func_801E4E9C(MenuPanelTask* panel_task) {
     do {
         /* FAKE: steer item read through base. */
         base = (u8*)slot;
-        if ((slot[2] & 1) && (slot[0x16] == D_80148361)) {
+        if ((slot[2] & 0x1) && (slot[0x16] == D_80148361)) {
             func_801E4FC8((u16)(panel_task->pos.x + col + 4), (u16)(panel_task->pos.y + row + 5), base[0], 0);
             col += 0x25;
             if (col >= 75) {
                 col = 0;
-                row += 0x2A;
+                row += 42;
             }
         }
         i += 1;
-        slot += 0xA4;
+        slot += 164;
     } while ((i & BYTE_MASK) < 8U);
-    Menu_DrawPanelFrame(panel_task->pos.x, panel_task->pos.y, 0xD, 0xA);
+    Menu_DrawPanelFrame(panel_task->pos.x, panel_task->pos.y, 13, 10);
 }

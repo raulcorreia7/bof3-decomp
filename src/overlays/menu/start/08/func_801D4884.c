@@ -8,7 +8,7 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
     *ptr                                                        = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 0x14;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
     D_801484C2                                                  = -0x14;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     ptr += 0x24;
@@ -17,7 +17,7 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state   = 2;
     *ptr                                                = 1;
     D_801484E6                                          = -0x14;
-    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x   = 0x40;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x   = 64;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A  = 0;
     {
         /* FAKE: keep the retail byte value in $a0 across both stores. */
@@ -36,7 +36,7 @@ MATCH void func_801D4884(void) {
     }
     value                                                   = *s_ChoiceMenuValues;
     D_80148508                                              = -0xC8;
-    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y          = 0x3E;
+    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y          = 62;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].mode    = MENU_START_MODE_CURSOR_FRAME;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A         = 0;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_08         = 0;

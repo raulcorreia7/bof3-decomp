@@ -29,7 +29,7 @@ MATCH void func_801D62DC(void) {
         *selection_ptr = 0xFF;
         selection      = 0;
         if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
-            SYS_ClearFlag(selection_ptr - 0x101, 0x77);
+            SYS_ClearFlag(selection_ptr - 0x101, 119);
             selection = 1;
         }
         if (g_GameAreaId == AREA_ID_DESERT_CAMP_FIRST) {

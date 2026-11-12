@@ -17,7 +17,7 @@ MATCH void func_801D1F74(void) {
     D_8014862A = D_80148336 + 5;
     if (*pad & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
-        *mode = *mode ^ 1;
+        *mode = *mode ^ 0x1;
     }
     pad_state = *pad;
     if ((pad_state & g_InputMasks[MENU_INPUT_CONFIRM]) == 0) {

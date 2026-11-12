@@ -74,7 +74,7 @@ MATCH void func_801D1FA0(void) {
     u8 slot;
 
     slot = D_8014833D;
-    if (Item_GetEquipability(D_80148338, slot) & 1) {
+    if (Item_GetEquipability(D_80148338, slot) & 0x1) {
         D_80148511 = 0;
     } else {
         D_80148511 = 1;

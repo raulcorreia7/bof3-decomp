@@ -10,8 +10,8 @@ MATCH void func_801D7444(void) {
     func_801D8050(0);
     WinDrawCueText(28, 21, 0x63);
     cursor = &D_80148656;
-    func_801D7E1C(*cursor, 0x98, 0x3F, 0, 0xFF);
-    Menu_DrawCursorFrame(0x11, ((s8)*cursor * 0x36 + 0x3E) & 0xFFFE, 0x80, 0x34, 1, 6);
+    func_801D7E1C(*cursor, 152, 63, 0, 0xFF);
+    Menu_DrawCursorFrame(17, ((s8)*cursor * 0x36 + 0x3E) & 0xFFFE, 128, 52, 1, 6);
 
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {

@@ -26,7 +26,7 @@ MATCH void func_801DE944(void) {
     actor = &g_Game.members[0].chr.character_id;
     mode  = actor[0];
     EMI_LoadPartyArchives(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
-    if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 0x77) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) || g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
+    if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 119) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) || g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         Party_BuildBattlers(PARTY_ORDER_FIELD);
         i = 0;
@@ -46,7 +46,7 @@ MATCH void func_801DE944(void) {
                 i++;
             } while (i < g_PartySize);
         }
-        if (mode != 2 && g_Game.members[0].chr.character_id == 2) {
+        if (mode != CHAR_ID_GARR && g_Game.members[0].chr.character_id == 2) {
             g_Game.members[0].pos.x.fixed += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4) << 15;
             g_Game.members[0].pos.y.fixed += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4 + 2) << 15;
         }

@@ -14,7 +14,7 @@ MATCH void Menu_DrawCampIcons(void) {
     }
     for (i = 0; (u8)i < 7; i++) {
         if ((u8)i != g_MenuCurrentPanel->unk_0A) {
-            func_801644D8(s_CampMenuPanelIds[(u8)i], (g_MenuCurrentPanel->pos.x + (u8)i * 0x10) & HALF_MASK, g_MenuCurrentPanel->pos.y, 0x10, 0x10,
+            func_801644D8(s_CampMenuPanelIds[(u8)i], (g_MenuCurrentPanel->pos.x + (u8)i * 16) & HALF_MASK, g_MenuCurrentPanel->pos.y, 16, 0x10,
                           ((u8)i == 6 && g_MenuCurrentPanel->unk_0C) ? 0x40 : 0x80);
         }
     }
