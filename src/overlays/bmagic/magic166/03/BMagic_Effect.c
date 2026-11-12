@@ -24,7 +24,7 @@ MATCH void func_801EEC04(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED04);
+#include "overlays/bmagic/func_801EED04.h"
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 

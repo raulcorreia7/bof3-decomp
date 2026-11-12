@@ -16,6 +16,7 @@ extern u8           D_801EF76E[];
 extern BattleEffect D_801EF794[];
 #define BMAGIC_EFFECT_SLOTS         D_801EF794
 #define BMAGIC_EFFECT_COUNT         64
+#define BMAGIC_EFFECT_SPAWN_COUNT   16
 #define BMAGIC_EFFECT_START_HANDLER Effect_PlayOnZeroTick
 void func_801EED04(void);
 #define BMAGIC_EFFECT_SLOT_STEP BMagic_DispatchEffectMode
