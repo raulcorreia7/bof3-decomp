@@ -384,7 +384,9 @@ MATCH void func_801F0E90(void) {
 
 MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     SPRT* prim;
-    u16   tpage;
+    /* FAKE: the task pointer crosses the branch; an unpinned local lands in v1, the best pure C being 0x14C against retail's 0x150. */
+    FAKE_REG(PartyMember*, task, "v0");
+    u16 tpage;
 
     tpage = GetTPage(2, blend & BYTE_MASK, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
@@ -393,12 +395,15 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     SetSprt(prim);
     setRGB0(prim, color, color, color);
     if ((sprite & BYTE_MASK) < 2) {
-        prim->x0 = g_Task->unk_2E.half - 32;
-        prim->y0 = g_Task->unk_30.half - 64;
+        task     = g_Task;
+        prim->x0 = task->unk_2E.half - 32;
     } else {
-        prim->x0 = g_Task->unk_2E.half - 40;
-        prim->y0 = g_Task->unk_30.half - 64;
+        task     = g_Task;
+        prim->x0 = task->unk_2E.half - 40;
     }
+    prim->y0 = task->unk_30.half - 64;
+    /* FAKE: the barrier keeps the prim copy out of the load delay, as retail. */
+    FAKE_BARRIER();
     setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);
     setWH(prim, 80, 72);
     SetSemiTrans(prim, 1);
