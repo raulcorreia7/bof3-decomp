@@ -19,7 +19,6 @@ extern s16     D_1F800018;
 
 void Effect_SetActorMatrixRolled(void);
 void func_801EF5C4(s32 band_height, u16 radius, u16 jitter_mask);
-void Effect_DrawBolt(void);
 void func_801F083C(void);
 
 #endif

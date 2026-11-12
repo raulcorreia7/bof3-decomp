@@ -14,7 +14,6 @@ extern s16          D_1F800004;
 #define BMAGIC_EFFECT_SLOTS D_801F04A4
 #define BMAGIC_EFFECT_COUNT 64
 
-u32  BMagic_AllocEffect(void);
 void func_801EF698(void);
 
 #endif
