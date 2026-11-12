@@ -27,7 +27,8 @@ extern s8       D_801F6754[];
 
 extern void Actor_BeginScript(u8 raw_selector, u16 raw_code);
 u8*         func_801F2E88(void);
-extern u8   func_801F2EC4(void);
+/* func_801F2EC4 */
+extern u8   Area_UpdateShots(void);
 extern void func_801F4A5C(u8* pairs, u8 flag);
 extern void func_801F4B0C(void);
 
@@ -46,8 +47,15 @@ typedef struct AreaShot {
     WorldPos pos;
     u8       pad_18[4];
     Point3DL velocity;
+    u8       pad_28[4];
 } AreaShot;
 
+ASSERT_SIZE(AreaShot, 0x2C);
+ASSERT_OFFSET(AreaShot, angle, 0x06);
+ASSERT_OFFSET(AreaShot, pos, 0x0C);
+ASSERT_OFFSET(AreaShot, velocity, 0x1C);
+
+void func_801F2FEC(s32* pos, s16 width, s16 height, u16 angle, u8 color0, u8 color1);
 void func_801F3378(AreaShot* shot);
 
 #endif
