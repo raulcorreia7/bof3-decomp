@@ -15,7 +15,7 @@ MATCH void func_801F2EA0(void) {
 
                 SYS_ClearFlag(g_SceneEventFlags, 0x77);
                 Game_ClearScriptActive();
-                Game_RequestAreaChange(AREA_ID_DESERT_OF_DEATH_MAP, 0x12000000, 0x17FF0000, FACING_UP_RIGHT);
+                Game_RequestAreaChange(AREA_ID_DESERT_OF_DEATH_MAP, TO_COORD(0x1200), TO_COORD(0x17FF), FACING_UP_RIGHT);
                 D_8014504B = 2;
                 D_80144F57 = 0xF0;
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
