@@ -173,10 +173,10 @@ MATCH void func_801D36FC(s32 cell, s32 selected) {
     cell_index = cell;
     if ((selected & BYTE_MASK) == 0) {
         state = g_FrameCount;
-        if (state & 8) {
-            shade = (state & 6) << 5 | 0x3F;
+        if (state & 0x8) {
+            shade = (state & 0x6) << 5 | 0x3F;
         } else {
-            shade = (~state & 6) << 5 | 0x3F;
+            shade = (~state & 0x6) << 5 | 0x3F;
         }
     } else {
         shade = 0xFF;
