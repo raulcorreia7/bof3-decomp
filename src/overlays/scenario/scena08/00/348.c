@@ -343,15 +343,15 @@ MATCH u8 func_801F8BF8(void) {
     return live;
 }
 
-MATCH void func_801F8CDC(Actor* actor) {
-    u8 state;
+MATCH void func_801F8CDC(Scena08Spark* spark) {
+    u8 life;
 
-    state = actor->header.step - 1;
-    actor->unk_03 += 6;
-    actor->header.step = state;
-    if (state == 0) {
-        actor->header.step = actor->unk_04;
-        actor->header.mode += 1;
+    life        = spark->life - 1;
+    spark->fade += 6;
+    spark->life = life;
+    if (life == 0) {
+        spark->life = spark->life_reload;
+        spark->kind += 1;
     }
 }
 
