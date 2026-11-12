@@ -267,13 +267,13 @@ MATCH void func_801FE5B0(void) {
 #include "overlays/scenario/Scene_RemoveMomo.h"
 
 MATCH void func_801FE63C(void) {
-    u8 ids[3];
+    u8 ids[PARTY_SLOT_COUNT];
     u8 slot;
 
-    for (slot = 0; slot < 3; slot++) {
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         ids[slot] = g_Game.members[slot].chr.character_id;
     }
-    for (slot = 0; slot < 3; slot++) {
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         if (ids[slot] != CHAR_ID_RYU_ADULT) {
             Party_RemoveMember(ids[slot]);
         }
