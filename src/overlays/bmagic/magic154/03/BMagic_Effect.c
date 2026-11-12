@@ -19,7 +19,7 @@ MATCH void func_801EEE94(void) {
         actor          = g_Battle.selected_actor;
         g_Task->facing = actor->facing;
         g_Task->unk_0C = 0;
-        g_Task->unk_10 = 0xFFFE8000;
+        g_Task->unk_10 = -TO_COORD_HALF(1);
         func_801DD350(g_Task);
         g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
