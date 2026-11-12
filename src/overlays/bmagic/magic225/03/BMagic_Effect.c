@@ -40,7 +40,7 @@ MATCH void func_801EEE8C(void) {
         do {
             SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
             slot = BMagic_AllocEffect();
-            if (slot != 0xFF) {
+            if (slot != GAME_NONE) {
                 work                                   = g_Task;
                 BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
