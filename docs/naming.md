@@ -107,8 +107,8 @@ UI parts:
 ## Vocabulary
 
 One word per concept. A new name uses the `Word`; `Rejected` lists the words that name the same
-concept. Two words stay only where the definitions differ. A word the SDK, the hardware or the game's own
-records own keeps its meaning (`Callback`, `Bank`, `Slot`, `Cell`); the game never renames it.
+concept. Two words stay only where the definitions differ. A word the SDK, the hardware or one of the
+game's own records owns keeps its meaning (`Callback`, `Bank`, `Slot`, `Cell`); the game never renames it.
 
 | Concept                       | Word                                        | Definition                                                                              | Rejected                                                                               |
 | ----------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
