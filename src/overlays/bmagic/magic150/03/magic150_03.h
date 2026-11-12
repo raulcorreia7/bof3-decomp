@@ -51,8 +51,20 @@ typedef struct ProjectedSpan {
     DVECTOR screen[3]; /* 0x10 left, 0x14 centre, 0x18 right */
 } ProjectedSpan;
 
+/* The two projected spans a beam segment joins: the previous span and the one
+ * the segment ends in. */
+typedef struct Magic150SpanPair {
+    ProjectedSpan previous; /* 0x00 */
+    ProjectedSpan current;  /* 0x1C */
+} Magic150SpanPair;
+
+ASSERT_SIZE(Magic150SpanPair, 0x38);
+ASSERT_OFFSET(Magic150SpanPair, current, 0x1C);
+
 void func_801EF254(void);
 u8   func_801EF8EC(void);
+/* func_801EF324 */
+void func_801EF324(Magic150SpanPair* pair);
 /* func_801EF2C0 */
 void BMagic_ProjectSpan(ProjectedSpan* span);
 
