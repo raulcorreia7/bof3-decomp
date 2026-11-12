@@ -2336,6 +2336,7 @@ g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of s
 g_MenuStatusStep2Funcs = { addr = 0x801D9700, source = "3 sub-step handlers of step 2 of the status menu, called by func_801D11A4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStatusStep2Sub2Funcs = { addr = 0x801D970C, source = "5 handlers of sub-step 2 of step 2 of the status menu, called by func_801D1898 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_MenuStatusTaskFuncs = { addr = 0x801D974C, source = "Task state handlers of the status menu, dispatched by SYS_DISPATCH_TASK." }
+g_MenuStatusTask1StateFuncs = { addr = 0x801D975C, source = "the state handlers of panel task mode 1, indexed by the panel task state" }
 g_MenuStatusTask2StateFuncs = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
 g_MenuStatusTask3StateFuncs = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
 g_MenuStatFrameLeft = { addr = 0x801D9834, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
