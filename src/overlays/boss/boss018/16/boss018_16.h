@@ -32,9 +32,18 @@ extern Callback D_800C2D60[];
 extern Callback D_800C2D94[];
 extern Callback D_800C2DAC[];
 extern Callback D_800C2DB8[];
-extern u8       D_800C2DC4[];
-extern u8       D_800C2DC5[];
-extern u32      D_800C2DC8[];
+/* The stamped block's corner: one map cell per pattern. */
+typedef struct Boss018MapCell {
+    u8 column;
+    u8 row;
+} Boss018MapCell;
+
+ASSERT_SIZE(Boss018MapCell, 2);
+ASSERT_OFFSET(Boss018MapCell, column, 0x00);
+ASSERT_OFFSET(Boss018MapCell, row, 0x01);
+
+extern Boss018MapCell D_800C2DC4[];
+extern u32            D_800C2DC8[];
 extern u16      D_801EB6C4;
 extern u16      D_801EB6C6;
 extern u16      D_801EB7DC;
