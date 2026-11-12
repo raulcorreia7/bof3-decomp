@@ -1070,4 +1070,10 @@ u8 func_800A40D0(u8 battler_index);
 
 u8 func_800AED5C(s32 arg0, u32 battler_index);
 
+/* Add the queued text message and advance the battle UI state. The member declares temp. */
+#define BATTLE_ADD_MESSAGE_AND_STEP() \
+    temp = Message_GetText(0x4000);   \
+    Battle_AddMessage(2, 0xFF, temp); \
+    *(u8*)&g_Battle.ui_state += 1;
+
 #endif
