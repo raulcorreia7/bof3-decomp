@@ -75,7 +75,27 @@ MATCH void func_801EFA34(void) {
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC38, header.step);
 }
 
-INCLUDE_ASM(func_801EFAAC);
+MATCH void func_801EFAAC(void) {
+    PartyMember* work;
+    s32          y;
+    u32          slot;
+
+    g_Task->facing           = g_BattleSelectedActor->facing;
+    g_Task->pos.x.fixed      = g_EncounterOriginX;
+    y                        = g_EncounterOriginY;
+    g_Task->pos.y.fixed      = y;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, y);
+    g_Task->param.unk_0B     = 0;
+    g_Task->unk_09           = 4;
+    g_Task->header.step += 1;
+    slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 2;
+    g_BattleEffects[slot].arg.unk_09   = 1;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(0x102);
+}
 
 MATCH void func_801EFBAC(void) {
     u8           count;
