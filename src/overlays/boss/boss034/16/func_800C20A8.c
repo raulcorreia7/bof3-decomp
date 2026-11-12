@@ -7,7 +7,7 @@ MATCH void func_800C20A8(void) {
         BOSS_SEND_PARTY_TO_ENDING_POSE(0)
         BOSS_SEND_PARTY_TO_ENDING_POSE(1)
         BOSS_SEND_PARTY_TO_ENDING_POSE(2)
-        if (!(g_Battle.boss_flags & 2)) {
+        if (!(g_Battle.boss_flags & BOSS034_FLAG_WERETIGER_GRANTED)) {
             Char_AddAbility(ABILITY_WERETIGER, 4, 0, 0);
             Char_AddAbility(ABILITY_WERETIGER, D_800C2778, 0, 1);
         }
