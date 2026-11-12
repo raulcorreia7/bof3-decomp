@@ -141,7 +141,31 @@ MATCH void func_801F00A8(void) {
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
-INCLUDE_ASM(func_801F0164);
+MATCH void func_801F0164(void) {
+    POLY_F3* prim;
+    long     depth;
+    long     flag;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), NULL);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, 0xC);
+    prim = (POLY_F3*)g_GfxPrimCursor;
+    SetPolyF3(prim);
+    SetSemiTrans(prim, 1);
+    D_1F800014[0].vx = (u32)rsin(0) >> 8;
+    D_1F800014[0].vy = (u32)rcos(0) >> 8;
+    D_1F800014[0].vz = 0;
+    D_1F800014[1].vx = (u32)rsin(DEG(120)) >> 8;
+    D_1F800014[1].vy = (u32)rcos(DEG(120)) >> 8;
+    D_1F800014[1].vz = 0;
+    D_1F800014[2].vx = (u32)rsin(DEG(240)) >> 8;
+    D_1F800014[2].vy = (u32)rcos(DEG(240)) >> 8;
+    D_1F800014[2].vz = 0;
+    RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+    prim->r0 = (rand() & 0xF) * g_Task->unk_09;
+    prim->g0 = (rand() & 0xF) * g_Task->unk_09;
+    prim->b0 = (rand() & 0xF) * g_Task->unk_09;
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, 0x14);
+}
 
 /* func_801F0358 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"
