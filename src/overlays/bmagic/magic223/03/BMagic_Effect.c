@@ -66,10 +66,10 @@ MATCH void func_801EF47C(void) {
         angle_cell  = &D_1F800004;
         phase       = (g_Task->param.unk_0B & 7) << 8;
         *angle_cell = phase;
-        phase += 0x400;
+        phase += ANGLE_90;
         *angle_cell = phase + D_801EFC50[g_Task->facing];
-        g_Task->unk_2E.half += (rsin(*angle_cell) * 0x48) >> 0xC;
-        g_Task->unk_30.half += (rcos(*angle_cell) * 0x48) >> 0xC;
+        g_Task->unk_2E.half += (rsin(*angle_cell) * 72) >> 0xC;
+        g_Task->unk_30.half += (rcos(*angle_cell) * 72) >> 0xC;
         g_Task->unk_14 = D_801EFC50[g_Task->facing];
         if (LOHU(g_Battle.action_id) == ABILITY_TEMPEST) {
             g_Task->param.unk_0B = 0;
