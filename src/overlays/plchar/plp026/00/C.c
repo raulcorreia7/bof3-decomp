@@ -92,7 +92,30 @@ MATCH s32 func_801D0148(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(func_801D0354);
 }
 
-INCLUDE_ASM(func_801D0354);
+MATCH void func_801D0354(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code) {
+    /* FAKE: retail keeps the spawn kind in $s2 and the y word in $s4;
+     * gcc-2.7.2 assigns the kind and x the other way round. */
+    FAKE_REG(s32, y, "s4");
+    FAKE_REG(s32, kind, "s2");
+    u8  slot;
+    s32 x_word;
+    s32 y_word;
+
+    y    = spawn_y;
+    kind = spawn_kind;
+    slot = Actor_FindFreeSlot();
+    if (slot != GAME_NONE) {
+        g_ActorSlots[slot].header.flags     = 1;
+        g_ActorSlots[slot].type             = 0x34;
+        x_word                              = spawn_x << 16;
+        g_ActorSlots[slot].pos.x.fixed      = x_word;
+        y_word                              = y << 16;
+        g_ActorSlots[slot].header.mode      = kind;
+        g_ActorSlots[slot].pos.y.fixed      = y_word;
+        COORD_INT(g_ActorSlots[slot].pos.z) = Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y_word) + 0x200;
+        g_ActorSlots[slot].link             = 1;
+    }
+}
 
 MATCH void func_801D0440(void) {
     SYS_DISPATCH_TASK(D_801D0AA8, 3, g_Task);
