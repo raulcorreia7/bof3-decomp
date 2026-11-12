@@ -100,7 +100,9 @@ extern u8       g_MenuCommandRows[][5];
 extern char*    D_801D9EA4[];
 extern u8       D_801DA049;
 extern s32      D_801DA0B4;
+extern s32      D_801DA088;
 extern u8       D_801DA0C1;
+extern s32      D_801DA0FC;
 extern s32      D_801DA12C;
 
 extern const char g_MenuInventoryCountFormat[];
