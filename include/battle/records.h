@@ -464,6 +464,15 @@ typedef struct BattleOwnerKind {
 
 ASSERT_SIZE(BattleOwnerKind, 0x24);
 
+/* Ability category records at 0x801CA719 have a 0x14-byte stride: the ability byte at
+ * +0x00, the rest unnamed. Char_GetAbilities reads the low two bits. */
+typedef volatile struct BattleAbilityCategory {
+    u8 value;
+    u8 pad_001[0x13];
+} BattleAbilityCategory;
+
+ASSERT_SIZE(BattleAbilityCategory, 0x14);
+
 typedef enum PartyMemberFlags {
     PARTY_MEMBER_FLAG_OCCUPIED     = 1 << 0,
     PARTY_MEMBER_FLAG_HANDLER_BUSY = 1 << 6,

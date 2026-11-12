@@ -303,13 +303,6 @@ typedef struct SystemDispatchFuncs {
 
 ASSERT_SIZE(SystemDispatchFuncs, 0x18);
 
-/* Ability category records at 0x801CA719 have a 0x14-byte stride. */
-typedef volatile struct BattleAbilityCategory {
-    u8 value;
-    u8 pad_001[0x13];
-} BattleAbilityCategory;
-
-ASSERT_SIZE(BattleAbilityCategory, 0x14);
 typedef void (*CellFunc)(u8* record, s32 cell_x, s32 cell_y);
 
 /* Record of the D_8017F5B4 table; no field meaning is proven. */
@@ -1040,6 +1033,7 @@ extern const MenuPanelFuncs  g_MenuPanels;
 
 void                    func_8014C47C(struct Vec3W* a, struct Vec3W* b);
 extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
+extern void             Actor_BeginScript(s32 raw_selector, s32 raw_code);
 /* func_8014DB98 */
 extern void             Actor_StageAnimStep(void);
 /* Retail function prototypes (one declaration each). */
@@ -1248,6 +1242,8 @@ void                    SND_QuitSpu(void);
 extern const ObjectFunc g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8               D_8017F90D;
 void                    func_801A17A0(u8* entry_record);
+/* func_801C1254 */
+void                    Party_LoadMemberSprite(s32 character_id, s32 party_slot, s32 ignored);
 void                    func_801D0C04(void);
 extern s32              func_801F2C04(void);
 
