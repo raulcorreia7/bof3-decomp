@@ -104,7 +104,8 @@ curl -fL https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1
 
 Run each as `meson compile -C build/meson <name>`. `<image>` is a target id with `/` written as `+`.
 A check that compares with a base ref uses the newest of `public/main`, `origin/main` and `main`,
-the rule in `tools/lib/baseref.sh`.
+the rule in `tools/lib/baseref.sh`, and compares its merge base with HEAD, so a branch that is
+behind does not look as if it dropped what the newer commits added.
 
 | Name              | Does                                                                                                                                                                                                                                                                                                         |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
