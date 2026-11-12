@@ -361,7 +361,17 @@ MATCH Scena08Spark* func_801F8B14(void) {
     return NULL;
 }
 
-INCLUDE_ASM(func_801F8B50);
+MATCH void func_801F8B50(Scena08Spark* spark) {
+    spark->active      = 1;
+    spark->life        = 8;
+    spark->kind        = 0;
+    spark->fade        = 0;
+    spark->speed       = 0;
+    spark->life_reload = 0x40;
+    spark->x           = g_Task->pos.x.fixed + ((rand() & BYTE_MASK) << 11) - 0x40000;
+    spark->y           = g_Task->pos.y.fixed + ((rand() & BYTE_MASK) << 11) - 0x40000;
+    spark->z           = g_Task->pos.z.fixed;
+}
 
 MATCH u8 func_801F8BF8(void) {
     u8            i;
