@@ -270,17 +270,17 @@ MATCH void func_801F7DE8(void) {
 INCLUDE_ASM(func_801F7E14);
 
 MATCH void func_801F802C(void) {
-    u8* work;
-    u32 angle;
+    AreaSprite* work;
+    u32         angle;
 
-    work = func_801F7DAC();
+    work = (AreaSprite*)func_801F7DAC();
     if (work != NULL) {
-        work[0]               = 1;
-        work[2]               = 0;
-        FIELD(s32, work, 0x4) = g_Task->pos.x.fixed;
-        FIELD(s32, work, 0x8) = g_Task->pos.y.fixed;
-        FIELD(s32, work, 0xC) = g_Task->pos.z.fixed >> 8;
-        angle                 = (u32)rsin(g_Task->vx) >> 4;
+        work->flags    = 1;
+        work->flags_02 = 0;
+        work->origin.x = g_Task->pos.x.fixed;
+        work->origin.y = g_Task->pos.y.fixed;
+        work->origin.z = g_Task->pos.z.fixed >> 8;
+        angle          = (u32)rsin(g_Task->vx) >> 4;
         if (g_Task->unk_06 == 7) {
             angle = (u16)angle;
             angle += 0x800;
@@ -288,9 +288,9 @@ MATCH void func_801F802C(void) {
             angle = (u16)angle;
             angle += 0x400;
         }
-        FIELD(s32, work, 0x14) = rcos(angle) * 3;
-        FIELD(s32, work, 0x18) = rsin(angle) * 3;
-        FIELD(s32, work, 0x1C) = 0;
+        work->normal.vx = rcos(angle) * 3;
+        work->normal.vy = rsin(angle) * 3;
+        work->normal.vz = 0;
     }
 }
 
