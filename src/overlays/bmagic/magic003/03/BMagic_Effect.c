@@ -68,7 +68,35 @@ MATCH void func_801EEEA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF4C);
+MATCH void func_801EEF4C(void) {
+    u8 count;
+    u8 timer;
+
+    func_801F07B0(4);
+    func_801F03F0(g_Task->param.unk_0B);
+    if (g_InputPressed & (PADRup | PADRdown | PADRleft | PADRright)) {
+        if (g_InputPressed != D_801F0A98[g_Task->param.unk_0B]) {
+            g_Task->unk_09      = 6;
+            g_Task->header.mode = 5;
+        } else {
+            g_Task->unk_09 = 6;
+            count          = g_Task->timer + 1;
+            g_Task->timer  = count;
+            if (count < 32) {
+                g_Task->header.mode = 3;
+            } else {
+                g_Task->header.mode = 5;
+            }
+        }
+    } else {
+        timer          = g_Task->unk_09 - 1;
+        g_Task->unk_09 = timer;
+        if (timer == 0) {
+            g_Task->unk_09      = 6;
+            g_Task->header.mode = 5;
+        }
+    }
+}
 
 MATCH void func_801EF04C(void) {
     u8 timer;
@@ -285,7 +313,11 @@ MATCH void func_801EF9FC(void) {
 /* func_801EFA9C */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EFAE0);
+#include "overlays/bmagic/BMagic_RunEffectStep.h"
+
+MATCH void func_801EFAE0(void) {
+    BMAGIC_RUN_EFFECT_STEP(func_801EFB8C, func_801EFCF8);
+}
 
 INCLUDE_ASM(func_801EFB8C);
 

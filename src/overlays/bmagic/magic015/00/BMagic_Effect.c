@@ -108,7 +108,22 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFDE8);
+MATCH void func_801EFDE8(void) {
+    u8 timer;
+
+    timer = g_Task->unk_09 - 1;
+    g_Task->scale.x -= 0x2000;
+    g_Task->scale.y += 0x3000;
+    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x20;
+    g_Task->unk_09             = timer;
+    if (timer == 0) {
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+        g_Task->unk_09      = 8;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFE84(void) {
     PartyMember* work = g_Task;
@@ -346,4 +361,51 @@ MATCH void func_801F131C(void) {
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Battle.selected_actor);
 }
 
-INCLUDE_ASM(func_801F13D4);
+MATCH void func_801F13D4(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0x125;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x125;
+    } else {
+        tpage = 0x55;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = g_Task->unk_09 << 2;
+    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+
+    for (i = 1; i <= 8; i++) {
+        prim             = GFX_BeginPolyG3(1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vz = 0;
+        D_1F800014[1].vz = 0;
+        D_1F800014[0].vz = 0;
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, 128, 128, 128);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+
+    if (GetGraphType() == 1) {
+        tpage = 0x25;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+}
