@@ -68,7 +68,36 @@ MATCH void func_801EEEE4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF84);
+MATCH void func_801EEF84(void) {
+    s32 i;
+    u8  slot;
+
+    g_Task->unk_09 += 2;
+    SP_REF(s16, 0) = g_Task->unk_09 << 4;
+    i              = 0;
+    do {
+        if (D_801EF790[i & BYTE_MASK] == 0) {
+            slot = (i + 3) & BYTE_MASK;
+            if (!(Battle_SlotIsBlocked(slot) & BYTE_MASK)) {
+                if (func_801EF70C(&g_BattleEnemyBattlers[i & BYTE_MASK]) != 0) {
+                    if (g_Battle.active_battler != (i & BYTE_MASK) + 3) {
+                        D_801EF790[i & BYTE_MASK] = -1;
+                        func_800A9610(slot, 0x10);
+                    }
+                }
+            }
+        }
+        i++;
+    } while ((u32)(i & BYTE_MASK) < 8);
+    if (g_FrameCount & 1) {
+        if (g_Task->timer < 0x20) {
+            g_Task->timer += 1;
+        }
+    }
+    if (g_Task->unk_09 == 0x60) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF0F0(void) {
     u8 count;
