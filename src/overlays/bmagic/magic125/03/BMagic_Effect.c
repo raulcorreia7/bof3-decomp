@@ -149,7 +149,30 @@ MATCH void func_801EFB48(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 8), 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EFB8C);
+MATCH void func_801EFB8C(void) {
+    s32 tpage;
+
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 9), g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0xA5;
+        } else {
+            tpage = 0x35;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        func_800AF764();
+        func_801EFFC8();
+        func_801F020C();
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0x25;
+        } else {
+            tpage = 0x15;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    }
+}
 
 INCLUDE_ASM(func_801EFCE4);
 
