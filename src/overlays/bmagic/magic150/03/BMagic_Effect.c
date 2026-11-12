@@ -33,7 +33,7 @@ MATCH void func_801EEE24(void) {
 
     radius = &D_801EFA9C.radius;
     *radius += 0x40;
-    D_801EFA9C.offset += 0x60;
+    D_801EFA9C.offset += 96;
     func_801EF254();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
@@ -47,8 +47,8 @@ MATCH void func_801EEE24(void) {
 MATCH void func_801EEEC4(void) {
     u8 count;
 
-    D_801EFA9C.radius = ((g_FrameCount & 1) * 0x10) + 0x100;
-    D_801EFA9C.angle -= 0x200;
+    D_801EFA9C.radius = ((g_FrameCount & 1) * 16) + 256;
+    D_801EFA9C.angle -= ANGLE_45;
     func_801EF254();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -124,8 +124,8 @@ MATCH u8 func_801EF8EC(void) {
             Area_ProjectPoint(origin, &screen);
             func_801EF790(screen.vx, screen.vy, D_801EFAF4->life, GFX_COLOR_NEUTRAL, 0);
             drawn              = 1;
-            D_801EFAF4->angle  = D_801EFAF4->angle + 0x80;
-            D_801EFAF4->offset = D_801EFAF4->offset - 0x60;
+            D_801EFAF4->angle  = D_801EFAF4->angle + 128;
+            D_801EFAF4->offset = D_801EFAF4->offset - 96;
             D_801EFAF4->life   = D_801EFAF4->life - 1;
             if (D_801EFAF4->offset == 0) {
                 D_801EFAF4->active = 0;
