@@ -208,3 +208,9 @@ def test_scan_reports_the_family_without_a_constant(
             "confidence": "typed",
         }
     ]
+
+
+def test_fixed_point_value_has_no_one_name() -> None:
+    index = {"families": {}, "names": {"ONE", "COORD_HALF"}}
+    signal = symbol.ValueSignal("fixed", "", "typed", "16.16", "s32")
+    assert symbol._value_role_constant(index, signal, 0x10000) == ("", "")
