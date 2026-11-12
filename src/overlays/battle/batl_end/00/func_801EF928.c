@@ -27,7 +27,7 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             if (new_level - level <= 0) {
                 return 0;
             }
-            return (new_level - level) & 0xFFFF;
+            return new_level - level;
         case 1:
             modifier = g_Characters[id].level_up_modifiers[0];
             for (i = level; i < new_level; i++) {
@@ -74,7 +74,7 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
     if ((s16)delta < 0) {
         return 0;
     }
-    return delta & 0xFFFF;
+    return delta;
 }
 #else
 INCLUDE_ASM(func_801EF928);
