@@ -19,7 +19,7 @@ MATCH void func_801F8B50(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 1) {
-                g_AreaScrollTargetX  = 0x350000;
+                g_AreaScrollTargetX  = TO_COORD(53);
                 g_AreaCameraStep     = 0x20;
                 g_SceneState.step_05 = 3;
                 g_AreaScrollTargetY  = g_Game.members[0].pos.y.fixed;
@@ -51,7 +51,7 @@ MATCH void func_801F8B50(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 7;
                 SYS_SetFlag(g_SceneFlags, 0xD);
-                Game_RequestAreaChange(0x5E, 0x330000, 0x210000, 0x81);
+                Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(51), TO_COORD(33), AREA_ENTRY_MAP_LOADING | FACING_UP);
             }
             break;
         case 7:

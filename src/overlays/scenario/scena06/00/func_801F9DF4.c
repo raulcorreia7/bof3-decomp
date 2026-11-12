@@ -44,7 +44,7 @@ MATCH void func_801F9DF4(void) {
             func_801C16B8();
             g_ScriptVars[2]      = 2;
             g_SceneState.step_05 = 5;
-            Game_RequestAreaChange(0x5C, 0x190000, 0x3C0000, 0x85);
+            Game_RequestAreaChange(AREA_ID_BEYD_TRAINING, TO_COORD(25), TO_COORD(60), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
             break;
         case 5:
             if (g_ScriptVars[0] != 4) {
@@ -85,7 +85,7 @@ MATCH void func_801F9DF4(void) {
             }
             g_ScriptVars[2]      = 2;
             g_SceneState.step_05 = 0xE;
-            Game_RequestAreaChange(0x5C, 0x190000, 0x3C0000, 0x87);
+            Game_RequestAreaChange(AREA_ID_BEYD_TRAINING, TO_COORD(25), TO_COORD(60), AREA_ENTRY_MAP_LOADING | FACING_LEFT);
             break;
         case 14:
             if (g_ScriptVars[0] != 0xA) {
@@ -114,7 +114,7 @@ MATCH void func_801F9DF4(void) {
             func_801C16B8();
             g_SceneState.flags_01 ^= 1;
             SYS_SetFlag(g_SceneFlags, 0x1C);
-            Game_RequestAreaChange(0x57, 0x310000, 0x2D0000, 4);
+            Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);
             break;
         case 18:
             Game_ClearScriptActive();
@@ -187,7 +187,7 @@ MATCH void func_801F9DF4(void) {
             g_SceneState.step_05 = 0x29;
             func_801C16B8();
             g_SceneState.flags_01 ^= 1;
-            Game_RequestAreaChange(0x57, 0x310000, 0x2D0000, 4);
+            Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);
             break;
         case 41:
             Game_ClearScriptActive();

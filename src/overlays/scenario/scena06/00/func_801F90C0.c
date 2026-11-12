@@ -20,7 +20,7 @@ MATCH void func_801F90C0(void) {
             g_SceneState.step_05 = 2;
             g_ScriptVars[2]      = 2;
             SYS_SetFlag(g_SceneFlags, 0x12);
-            Game_RequestAreaChange(0x5E, 0x2E0000, 0x2E0000, 0x84);
+            Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(46), TO_COORD(46), AREA_ENTRY_MAP_LOADING | FACING_DOWN_RIGHT);
             break;
         case 2:
             Message_StartAreaMessage(0x38);
@@ -102,7 +102,7 @@ MATCH void func_801F90C0(void) {
             }
             g_SceneState.step_05 = 0xA;
             SYS_SetFlag(g_SceneFlags, 0x13);
-            Game_RequestAreaChange(0x5E, 0x2C0000, 0x290000, 0x85);
+            Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(44), TO_COORD(41), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
             g_GamePrevSelection = 0x42;
             break;
         case 10:
@@ -160,7 +160,7 @@ MATCH void func_801F90C0(void) {
             break;
         case 30:
             g_SceneState.step_05 = 0x1F;
-            Game_RequestAreaChange(0x5E, 0x520000, 0x330000, 0x8E);
+            Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(82), TO_COORD(51), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_DOWN_LEFT);
             break;
         case 31:
             g_AreaDrawFlags      = 0x1F;
