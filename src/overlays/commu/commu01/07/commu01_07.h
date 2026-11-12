@@ -49,16 +49,16 @@ extern u8             D_801D4E2C;
 extern u8             D_801D4E30;
 extern u8             D_801F286D[];
 
-void func_801D28A4(s32 x, s32 y, s32 arg2, s32 arg3);
+void func_801D28A4(s32 x, s32 y, s32 fairy_index, s32 selected);
 void func_801D3038(void);
 void func_801D36FC(s32 cell, s32 selected);
 void func_801D3984(s32 x, s32 y, s32 arg2);
 u8   func_801D3A48(u8 arg);
-u8   func_801D3AA0(s32 arg0, s32 arg1);
+u8   func_801D3AA0(s32 job_type, s32 job_number);
 void func_801D3B0C(u8* arg0);
 void func_801D4694(u16* arg0, s16* arg1, s32 arg2, s32 arg3);
 s32  func_801D482C(s32 arg0);
 void func_801D49C4(void);
-void func_801D4AAC(u8* arg0);
+void func_801D4AAC(u8* room);
 
 #endif
