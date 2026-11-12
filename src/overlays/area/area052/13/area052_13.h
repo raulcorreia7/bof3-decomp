@@ -40,7 +40,6 @@ typedef struct AreaTriggerRect {
 ASSERT_SIZE(AreaTriggerRect, 4);
 
 extern AreaTriggerRect D_801F510C[2];
-void                   func_801A4BC0(s32 x, s32 y, s32 value);
 void                   func_801F2EC8(AreaEffectRow* row);
 void                   func_801F3084(void);
 void                   func_801F3194(void);
