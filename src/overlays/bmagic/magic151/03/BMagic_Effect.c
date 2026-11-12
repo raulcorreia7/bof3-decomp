@@ -64,7 +64,14 @@ INCLUDE_ASM(func_801EF388);
 
 INCLUDE_ASM(func_801EF484);
 
-INCLUDE_ASM(func_801EF938);
+MATCH void func_801EF938(void) {
+    if (g_Task->param.unk_0B == 2) {
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_ACTION_UNK_5;
+        g_Game.members[g_Battle.active_battler].u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
+        func_801E5988();
+    }
+}
 
 /* func_801EF9F0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
