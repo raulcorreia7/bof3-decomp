@@ -362,27 +362,27 @@ INCLUDE_ASM(func_801D4AE0);
 
 INCLUDE_ASM(func_801D4EA4);
 
-MATCH void func_801D4F88(s32 arg0, s32 arg1, s32 arg2) {
+MATCH void func_801D4F88(s32 x, s32 y, s32 show_values) {
     s32 i;
-    s32 x;
-    s32 y;
+    s32 draw_x;
+    s32 draw_y;
 
-    if ((u8)arg2) {
-        i = 0;
-        y = arg1 << 16;
-        x = arg0;
+    if ((u8)show_values) {
+        i      = 0;
+        draw_y = y << 16;
+        draw_x = x;
         do {
-            func_801D2CF8((s16)x, y >> 16, D_801DB080[i]);
-            x += 0x20;
+            func_801D2CF8((s16)draw_x, draw_y >> 16, D_801DB080[i]);
+            draw_x += 0x20;
             i++;
         } while (i < 3);
     } else {
-        i = 0;
-        y = arg1 << 16;
-        x = arg0;
+        i      = 0;
+        draw_y = y << 16;
+        draw_x = x;
         do {
-            func_801D2CF8((s16)x, y >> 16, 0xFF);
-            x += 0x20;
+            func_801D2CF8((s16)draw_x, draw_y >> 16, 0xFF);
+            draw_x += 0x20;
             i++;
         } while (i < 3);
     }
