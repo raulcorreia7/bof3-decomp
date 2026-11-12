@@ -75,7 +75,26 @@ MATCH void func_801EFDC8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFE48);
+/* Starts the meteor's arc: places it on a radius-24 ring at the ticker's angle, picks the rise speed and its fall
+ * rate, then waits 32 frames. */
+MATCH void func_801EFE48(void) {
+    s16* angle_cell;
+    s32  phase;
+
+    if (--g_Task->unk_09 == 0) {
+        angle_cell          = &D_1F800004;
+        phase               = (g_Task->param.unk_0B - 2) & 0xF;
+        *angle_cell         = phase << 8;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(phase << 8)) * 24;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * 24;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+        g_Task->unk_14      = D_801F0C68[g_Task->param.unk_0B & 0x3];
+        g_Task->unk_20      = -(g_Task->unk_14 / 16);
+        g_Task->unk_5E      = 16;
+        g_Task->unk_09      = 32;
+        g_Task->header.step += 1;
+    }
+}
 
 /* Moves the effect in a circle of radius 2 around its origin by the angle byte 0x0B, arcs it in z with its
  * velocity, and relaunches the arc every 16 frames from the rise speed the ticker picks. */
