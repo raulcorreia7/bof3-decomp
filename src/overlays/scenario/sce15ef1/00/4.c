@@ -282,7 +282,7 @@ MATCH void func_801D2FD8(void) {
         rect.h = D_801D3940[D_801D40AC].h;
         StoreImage(&rect, (u32*)AREA_WORK);
         D_801D40B0    = AREA_WORK;
-        D_801D40B4    = 0x800EA200;
+        D_801D40B4    = AREA_WORK + 0x5A00;
         D_801D40A8    = 0;
         g_Task->timer = 0;
         g_Task->header.mode++;
