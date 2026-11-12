@@ -223,10 +223,10 @@ MATCH void func_801F7E34(void) {
 INCLUDE_ASM(func_801F7E6C);
 
 MATCH void func_801F7F84(void) {
-    Actor** effects; /* the five effect actors spawned at +0x0C */
-    u8      i;
+    ActorSlot** effects; /* the five effect slots spawned at +0x0C */
+    u8          i;
 
-    effects = (Actor**)&g_Task->vx;
+    effects = (ActorSlot**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
         if (effects[i]->unk_06 == 0) {
             return;
