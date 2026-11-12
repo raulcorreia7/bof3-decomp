@@ -19,8 +19,6 @@ extern u16 D_80144F54;
 extern u8  D_80144F56;
 extern u8  D_80144F57;
 extern u8  D_8014504B;
-extern u8  D_80146880;
-extern u8  D_80146881;
 /* The shop and save start the field scene. */
 void       func_801C16B8(void);
 
