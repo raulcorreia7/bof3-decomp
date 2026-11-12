@@ -138,10 +138,6 @@ extern u8        D_801D86F8[];
 /* The stat tally: the six targets it counts to and the six shown counters. */
 extern s32       D_801D8EE8[6];
 extern s32       D_801D8F00[6];
-/* The tally's sources, written by the scena06 image. */
-extern u32       D_801FE4E8;
-extern u8        D_801FE4EF;
-extern u32       D_801FE4F0;
 
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);
