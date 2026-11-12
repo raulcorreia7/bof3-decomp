@@ -6,6 +6,6 @@ MATCH void Boss_ChooseBattleEnding(void) {
     g_SndBGMId         = 0x6A;
     g_BattlePartyOrder = 3;
     g_Battle.outcome.result |= BATTLE_RESULT_NO_BGM;
-    g_Battle.outcome.options &= ~0x40;
+    g_Battle.outcome.options &= ~BATTLE_OPT_KEEP_BGM;
     func_801DDF28();
 }
