@@ -1,3 +1,9 @@
+/* Every step re-reads the scratchpad cell. */
+#define TASK_VOLATILE
 #include "area165_13.h"
 
-INCLUDE_ASM(func_801F2C48);
+#include "overlays/area/func_801F2C48.h"
+
+MATCH void func_801F2C48(void) {
+    FUNC_801F2C48_BODY(D_801F3594, 256);
+}

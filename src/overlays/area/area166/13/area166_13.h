@@ -9,7 +9,7 @@
 
 /* The party position in 16.16 fixed point. */
 /* The scratchpad cell holding this mode's work pointer. */
-/* The payload's first words: the per-state handler pointers. */
+/* The payload's first words: the per-state handler pointers and its entry coordinate pairs. */
 extern u8 D_801F3718[];
 /* The two step tables this pass indexes by the menu selection. */
 extern u8 D_801F3940[];
