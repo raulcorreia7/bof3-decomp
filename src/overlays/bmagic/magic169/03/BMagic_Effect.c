@@ -78,7 +78,21 @@ MATCH void func_801EF444(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4FC);
+MATCH void func_801EF4FC(void) {
+    s32 cue;
+
+    g_PaletteFades[g_Task->timer].offset.red++;
+    g_PaletteFades[g_Task->timer].offset.green++;
+    g_PaletteFades[g_Task->timer].offset.blue++;
+    if (--g_Task->unk_09 == 0) {
+        cue = 0x102;
+        if (g_Task->unk_04 & 1) {
+            cue = 0x101;
+        }
+        SND_QueueSelectionFx(cue);
+        g_Task->header.step++;
+    }
+}
 
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
 
