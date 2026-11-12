@@ -208,7 +208,7 @@ MATCH void func_801D230C(void) {
     Point3DL pos;
     s16      x;
     s16      y;
-    u16      z;
+    u16      angle;
 
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x380, 0x100));
     pos.x = g_Task->pos.x.fixed;
@@ -216,8 +216,8 @@ MATCH void func_801D230C(void) {
     pos.z = g_Task->pos.z.fixed;
     x     = g_Task->screen_x;
     y     = g_Task->screen_y;
-    z     = g_Task->unk_32;
-    func_801D1FF8(&pos, x, y, z, 0xC0, 0);
+    angle = g_Task->unk_32;
+    func_801D1FF8(&pos, x, y, angle, 0xC0, 0);
 }
 
 /* func_801D23AC */
