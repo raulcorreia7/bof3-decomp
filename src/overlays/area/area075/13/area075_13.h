@@ -24,7 +24,6 @@ extern u16      D_801F58C4;
 extern u8       D_801F58C6;
 extern u8       D_801F58C7;
 extern u8       D_801F58C8;
-extern u8       D_801F58C9;
 extern u16      D_801F58CA;
 extern u16      D_801F58CC;
 extern u8       D_801F58CE[2];
@@ -33,10 +32,7 @@ extern u8       D_801F58D1;
 extern u8       D_801F58D2;
 extern u8       D_801F58D3;
 
-void func_801F4034(void);
-void func_801F4080(void);
-
-void func_801F4874(void);
+extern void func_801F4874(void);
 
 void func_801F2E64(s32 arg0, s32 arg1);
 
