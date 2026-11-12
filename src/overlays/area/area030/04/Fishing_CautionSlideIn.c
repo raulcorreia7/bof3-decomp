@@ -3,7 +3,8 @@
 /* Decrements the panel animation counter, draws the current
  * sub-state cell through the later helper, and advances the panel state once
  * the counter reaches zero. */
-MATCH void func_801DA3F4(void) {
+/* func_801DA3F4 */
+MATCH void Fishing_CautionSlideIn(void) {
     FishingState* record;
 
     record                = FISHING_STATE;

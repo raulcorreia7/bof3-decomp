@@ -13,6 +13,8 @@ extern u8       D_800C1B18[];
 extern u16      D_800C1B24[];
 extern Callback D_800C1B2C[];
 extern Callback D_800C1B5C[];
+/* FAKE: g_Game.battle_order as a global of its own; the stores match only through a separate symbol. */
+extern u8       g_BattlePartyOrder;
 
 void func_800C19B8(s32 mode);
 

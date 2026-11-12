@@ -42,7 +42,7 @@ is `exe+slus_004_22`). This walkthrough needs a built checkout ([check](README.m
    ([match.sh](docs/toolchain.md#matchsh)).
 
 5. **Three tries, then record.** A try is a structurally different draft; after three, delete the
-   draft and add one line to `config/attempts.tsv` ([match](.agents/skills/decomp/references/match.md)).
+   draft and add one line to `config/attempts.jsonl` ([match](.agents/skills/decomp/references/match.md)).
 
 6. **Accept.** Replace the draft with a `MATCH` definition and run
    `meson compile -C build/meson check-emi+etc+commu01+07`. `: OK` is the acceptance
