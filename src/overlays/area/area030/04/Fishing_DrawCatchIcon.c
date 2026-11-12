@@ -2,13 +2,14 @@
 
 /* Configures the requested AREA030 sprite and its CLUT entry after
  * selecting graphics mode 1. */
-MATCH void func_801E0F4C(s16 sprite_x, s16 sprite_y, u8 icon_index) {
+/* func_801E0F4C */
+MATCH void Fishing_DrawCatchIcon(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     u16   clut;
     u32   sprite_index;
     SPRT* sprite;
 
-    func_801E0C80(1, 1);
-    sprite       = (SPRT*)func_801E0DCC(2, 1, sprite_x, sprite_y);
+    Fishing_SetDrawMode(1, 1);
+    sprite       = (SPRT*)Fishing_DrawSprite(2, 1, sprite_x, sprite_y);
     sprite_index = icon_index & BYTE_MASK;
     if (sprite_index != GAME_NONE) {
         /* FAKE: base-hoist retains CLUT construction register order. */

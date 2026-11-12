@@ -12,7 +12,8 @@ Usage: python3 tools/check_addrs.py REF [HEAD]
 
 import subprocess
 import sys
-import tomllib
+
+from bof3.link.symbols import read_text
 
 SYMBOLS = "config/symbols.toml"
 
@@ -20,7 +21,7 @@ SYMBOLS = "config/symbols.toml"
 def addresses(rev):
     text = subprocess.check_output(["git", "show", f"{rev}:{SYMBOLS}"])
     found = {}
-    for target, rows in tomllib.loads(text.decode()).items():
+    for target, rows in read_text(text.decode()).items():
         for name, row in rows.items():
             if isinstance(row, dict) and "addr" in row:
                 found[(target, row["addr"])] = name

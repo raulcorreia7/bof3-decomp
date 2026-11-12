@@ -33,6 +33,8 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from bof3.link.symbols import read_text
+from bof3.source.ctext import mask
 from bof3.source.index import Func, find, load_index
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -430,7 +432,7 @@ class Tree:
         body = re.sub(
             r";[ \t]*/\*\s*\+?(0x[0-9A-Fa-f]+)\b.*?\*/", r" @\1;", body, flags=re.S
         )
-        body = re.sub(r"/\*.*?\*/|//[^\n]*", "", body, flags=re.S)
+        body = mask(body)
         decls, depth, start = [], 0, 0
         for i, ch in enumerate(body):
             depth += (ch == "{") - (ch == "}")
@@ -519,7 +521,7 @@ class Tree:
             )
             if not m:
                 continue
-            body = re.sub(r"/\*.*?\*/|//[^\n]*", "", m.group(1), flags=re.S)
+            body = mask(m.group(1))
             off, rows, biggest = 0, [], 1
             for decl in filter(None, (x.strip() for x in body.split(";"))):
                 d = re.fullmatch(r"(\w+)\s+(\w+)\s*(?:\[(\w+)\])?", decl)
@@ -568,11 +570,7 @@ class Names:
     ADDRESS = re.compile(r"^(?:func|D|jtbl)_([0-9A-F]{8})$")
 
     def __init__(self, root: Path = ROOT) -> None:
-        import tomllib
-
-        table = tomllib.loads(
-            (root / "config/symbols.toml").read_text(encoding="utf-8")
-        )
+        table = read_text((root / "config/symbols.toml").read_text(encoding="utf-8"))
         self.by_image: dict[str, dict[int, str]] = {}
         self.spans: dict[str, list[tuple[int, int, str]]] = {}
         for image, rows in table.items():

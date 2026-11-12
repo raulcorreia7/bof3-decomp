@@ -25,8 +25,8 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 
 ## Setup
 
-Install the host tools above, then run the [README set up](../README.md#set-up) and
-[build](../README.md#build) commands. Add `--matching` to `tools/setup.sh` for the permuter, the
+Install the host tools above, then run the [README commands](../README.md#commands). Add
+`--matching` to `tools/setup.sh` for the permuter, the
 differ and m2c.
 
 Put your disc in `inputs/external/` before `tools/setup.sh` ([inputs](../inputs/README.md)). The
@@ -169,6 +169,15 @@ Meson regenerates the graph by itself when you edit a file under `config/`, a Py
 `tools/split.py` imports, or a source whose match marker decides a placed section. Regeneration
 takes seconds; a build with no change does not regenerate.
 
+### decomp.me
+
+For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and `gcc2.7.2-psx`. The project
+flags are in `build/meson/emit/cflags.txt`; the base set is
+`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`, and the
+scenario `sce10eff/00` adds `-fno-cse-follow-jumps -fno-cse-skip-blocks`. Define `MATCHING` and
+supply the required declarations in the scratch context. A scratch is a comparison tool;
+`check` verifies the project build.
+
 ### How the build works
 
 `tools/split.py` runs at configure time. It splits the targets whose Splat inputs changed, writes
@@ -180,6 +189,15 @@ how each is made. `meson.build` turns that into one Ninja edge per object, link 
 - `tools/cc.py` is the compile wrapper. It runs from the repository root and writes the depfile
   that Ninja reads.
 - `meson.build` defines the compile flags once and writes them to `build/meson/emit/cflags.txt`.
+
+## Data files
+
+A tracked data file with one record per row is JSON Lines (`.jsonl`): one JSON object per line,
+UTF-8, no trailing spaces, a fixed key order, and the row order the file keeps. Free text needs no
+quoting. `config/attempts.jsonl` holds the failed attempts and
+`config/sdk/library-units.jsonl` the SDK units. The build graph that `tools/split.py`
+prints for `meson.build` is the exception: it stays tab-separated, because Meson has no JSON parser
+and it is a pipe, not a file.
 
 ## Compiler chain
 
@@ -244,9 +262,9 @@ blocks, so a twin whose value is used after the first branch shares a statement 
 
 ## PsyQ
 
-The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.csv` records one
-row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few link
-retail split assembly because no member object reproduces them. The two
+The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.jsonl` records
+one row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few
+link retail split assembly because no member object reproduces them. The two
 executables link all their SDK code (`slus_004_22` and `logo`); the EMI overlays link none and call
 the main executable. Both executables carry the SCE 3.7 version word `DA 94 37 00`.
 

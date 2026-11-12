@@ -159,12 +159,6 @@ typedef struct BattlePanelFrame {
     u8  pad_04[4];
 } BattlePanelFrame;
 
-/* Ability category record at 0x801CA719, stride 0x14. */
-typedef volatile struct BattleAbilityCategory {
-    u8 value;
-    u8 pad_001[0x13];
-} BattleAbilityCategory;
-
 /* Ranked owner entries at 0x801EB550 (value at +0, battler index at +2). */
 typedef struct BattleRank {
     s16 value;
@@ -762,7 +756,6 @@ void               func_801DDAF0(void);
 void               func_801DDB7C(void);
 u8                 func_801DDCB4(u32 battler_index);
 u8                 func_801DDE7C(u32 counter_index, u32 packed_value);
-u8                 func_801DDF50(u16 entry_id, u32 table_kind);
 void               func_801DE1D4(void);
 /* func_801DE43C */
 void               Battle_UpdateEvents(void);

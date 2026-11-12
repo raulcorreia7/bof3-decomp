@@ -8,7 +8,7 @@ MATCH void func_801DDC54(void) {
 
     if (WINDOW_EFFECT_IDLE()) {
         spad                = FISHING_STATE;
-        D_800F724C          = 0;
+        s_ShopMode          = 0;
         D_800F724D          = 0;
         D_800F724E          = 0;
         D_800F724F          = 0;

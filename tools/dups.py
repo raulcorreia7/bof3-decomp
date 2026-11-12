@@ -9,8 +9,8 @@
     tools/dups.py shared-names                     one name used in several places, worst first
     tools/dups.py split-names                      byte-equal bodies that carry several names
 
-Each verb prints tab-separated rows and a summary on stderr. It reads the
-function index of the built images ({cache}); run `meson compile -C build/meson` first and add
+Each verb prints tab-separated rows, or one JSON object per line with --jsonl, and a summary on
+stderr. It reads the function index of the built images ({cache}); run `meson compile -C build/meson` first and add
 --rebuild after a build. Needs `rapidfuzz` (`tools/setup.sh --matching`). Within one image,
 `bin/coddog cluster` finds duplicate groups too; this tool compares across images and names.
 """
@@ -20,7 +20,9 @@ from __future__ import annotations
 import argparse
 import collections
 import itertools
+import json
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
 from bof3.source.index import CACHE, Func, load_index, opcode_string
@@ -41,11 +43,22 @@ def functions(args: argparse.Namespace, min_words: int = 0) -> list[Func]:
     ]
 
 
-def emit(header: list[str], rows: list[list]) -> None:
-    """Write the table to stdout."""
+def emit(
+    header: list[str],
+    rows: list[dict],
+    jsonl: bool = False,
+    formats: dict[str, Callable[[object], str]] | None = None,
+) -> None:
+    """Write the table to stdout, tab-separated, or one JSON object per line."""
+    keys = [name.lstrip("#") for name in header]
+    if jsonl:
+        for row in rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return
+    show = formats or {}
     print("\t".join(header))
     for row in rows:
-        print("\t".join(map(str, row)))
+        print("\t".join(str(show.get(key, str)(row[key])) for key in keys))
 
 
 def import_rapidfuzz():
@@ -101,10 +114,8 @@ def near(args: argparse.Namespace) -> int:
     header = ["rank", "kind", "members", "byte_classes", "size_min", "size_max", "min_similarity",
               "matched", "assembly", "candidate", "asm_with_template", "asm_bytes", "templates_top4",
               "member_list"]  # fmt: skip
-    emit(
-        header,
-        [[i, *(r[k] for k in header[1:])] for i, r in enumerate(rows, 1)],
-    )
+    body = [{"rank": i, **row} for i, row in enumerate(rows, 1)]
+    emit(header, body, args.jsonl, {"min_similarity": lambda value: f"{value:.3f}"})
     candidates = [r for r in rows if r["candidate"]]
     print(
         f"groups {len(rows)}, with a matched and an assembly member {len(candidates)}, "
@@ -138,15 +149,21 @@ def near_full(args, by_seq, seqs, adjacent, groups) -> int:
                     default=None,
                 )
                 if best:
-                    rows.append([
-                        f.ref, best[1].ref, f"{best[0]:.3f}",
-                        diff_count(best[1].words, f.words), f.size, len(funcs),
-                    ])  # fmt: skip
-    rows.sort(key=lambda r: (r[3], r[4], r[0]))
-    emit(header, rows)
+                    rows.append(
+                        {
+                            "target": f.ref,
+                            "template": best[1].ref,
+                            "similarity": best[0],
+                            "diff_count": diff_count(best[1].words, f.words),
+                            "size": f.size,
+                            "group_size": len(funcs),
+                        }
+                    )
+    rows.sort(key=lambda r: (r["diff_count"], r["size"], r["target"]))
+    emit(header, rows, args.jsonl, {"similarity": lambda value: f"{value:.3f}"})
     print(
         f"assembly functions with a template {len(rows)}, "
-        f"with no instruction differing {sum(r[3] == 0 for r in rows)}",
+        f"with no instruction differing {sum(r['diff_count'] == 0 for r in rows)}",
         file=sys.stderr,
     )
     return 0
@@ -187,7 +204,7 @@ def near_row(by_seq, seqs, adjacent, centre, members) -> dict | None:
         "byte_classes": len(hashes),
         "size_min": min(sizes),
         "size_max": max(sizes),
-        "min_similarity": f"{min(sims):.3f}",
+        "min_similarity": min(sims),
         "matched": lifted,
         "assembly": assembly,
         "candidate": int(bool(lifted and assembly)),
@@ -222,17 +239,31 @@ def shared_names(args: argparse.Namespace) -> int:
             default=1.0,
         )
         sizes = [m.size for m in members]
-        rows.append([
-            round(sim, 3), name, len(members), len({m.image for m in members}),
-            len({m.sha1 for m in members}), len(distinct), min(sizes), max(sizes),
-            " | ".join(m.ref for m in members[:12]),
-        ])  # fmt: skip
-    rows.sort(key=lambda r: (r[0], r[1]))
-    emit(["min_similarity", "name", "members", "images", "byte_classes", "opcode_classes",
-                "size_min", "size_max", "members_first12"], rows)  # fmt: skip
+        rows.append(
+            {
+                "min_similarity": sim,
+                "name": name,
+                "members": len(members),
+                "images": len({m.image for m in members}),
+                "byte_classes": len({m.sha1 for m in members}),
+                "opcode_classes": len(distinct),
+                "size_min": min(sizes),
+                "size_max": max(sizes),
+                "members_first12": " | ".join(m.ref for m in members[:12]),
+            }
+        )
+    rows.sort(key=lambda r: (round(r["min_similarity"], 3), r["name"]))
+    header = ["min_similarity", "name", "members", "images", "byte_classes", "opcode_classes",
+              "size_min", "size_max", "members_first12"]  # fmt: skip
+    emit(
+        header,
+        rows,
+        args.jsonl,
+        {"min_similarity": lambda value: str(round(value, 3))},
+    )
     print(
-        f"{len(rows)} shared names; opcode-identical {sum(r[5] == 1 for r in rows)}; "
-        f"below 0.9 {sum(r[0] < 0.9 for r in rows)}",
+        f"{len(rows)} shared names; opcode-identical {sum(r['opcode_classes'] == 1 for r in rows)}; "
+        f"below 0.9 {sum(round(r['min_similarity'], 3) < 0.9 for r in rows)}",
         file=sys.stderr,
     )
     return 0
@@ -248,18 +279,26 @@ def split_names(args: argparse.Namespace) -> int:
         names = {m.name for m in members if not m.name.startswith(PLACEHOLDER)}
         placeholders = sum(m.name.startswith("func_") for m in members)
         if len(names) > 1 or (names and placeholders):
-            rows.append([
-                len(names), placeholders, len(members), members[0].size,
-                " ".join(sorted(names)), " | ".join(m.ref for m in members[:10]),
-            ])  # fmt: skip
-    rows.sort(key=lambda r: (-r[0], -r[1]))
+            rows.append(
+                {
+                    "real_names": len(names),
+                    "placeholders": placeholders,
+                    "members": len(members),
+                    "size": members[0].size,
+                    "names": " ".join(sorted(names)),
+                    "members_first10": " | ".join(m.ref for m in members[:10]),
+                }
+            )
+    rows.sort(key=lambda r: (-r["real_names"], -r["placeholders"]))
     emit(
         ["real_names", "placeholders", "members", "size", "names", "members_first10"],
         rows,
+        args.jsonl,
     )
     print(
-        f"{sum(r[0] > 1 for r in rows)} bodies with several real names; "
-        f"{sum(r[0] == 1 and bool(r[1]) for r in rows)} with one name and placeholder copies",
+        f"{sum(r['real_names'] > 1 for r in rows)} bodies with several real names; "
+        f"{sum(r['real_names'] == 1 and bool(r['placeholders']) for r in rows)} with one name "
+        "and placeholder copies",
         file=sys.stderr,
     )
     return 0
@@ -281,6 +320,9 @@ def main(argv: list[str] | None = None) -> int:
         ("split-names", split_names, "one body, several names"),
     ):
         verb = verbs.add_parser(name, help=help_text)
+        verb.add_argument(
+            "--jsonl", action="store_true", help="one JSON object per line"
+        )
         if name == "near":
             verb.add_argument(
                 "--full",

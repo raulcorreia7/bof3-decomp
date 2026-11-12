@@ -126,7 +126,7 @@ def check_text(text: str, path: str = "<text>") -> list[Violation]:
                         path,
                         tok_line,
                         "comment",
-                        "comment above INCLUDE_ASM; record attempts in config/attempts.tsv",
+                        "comment above INCLUDE_ASM; record attempts in config/attempts.jsonl",
                     )
                 )
             elif re.search(
@@ -139,7 +139,7 @@ def check_text(text: str, path: str = "<text>") -> list[Violation]:
                         path,
                         tok_line,
                         "comment",
-                        "attempt note belongs in config/attempts.tsv",
+                        "attempt note belongs in config/attempts.jsonl",
                     )
                 )
             continue

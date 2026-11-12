@@ -5,103 +5,45 @@
 [![License: CC0 1.0](https://img.shields.io/badge/license-CC0--1.0-blue.svg)](LICENSE)
 
 A matching decompilation of *Breath of Fire III* (US, PlayStation). Each game function becomes
-readable C89 that compiles to the retail bytes with the period compiler (GCC 2.7.2 PSX with
-maspsx). The build reproduces all 428 code images of the game byte for byte.
+readable C89 that compiles to the retail bytes with the period compiler (GCC 2.7.2 PSX with maspsx).
+The build reproduces all 428 code images of the game byte for byte.
 
-A function is named `TARGET@0xADDRESS`, for example `exe/slus_004_22@0x8014AA04`. The same address
-in two targets is two unrelated functions. Progress: [live status](https://raulcorreia7.github.io/bof3-status/).
+A function is named `TARGET@0xADDRESS`, for example `exe/slus_004_22@0x8014AA04`; the same address in
+two targets is two unrelated functions. Progress: [live status](https://raulcorreia7.github.io/bof3-status/).
 
 ## Requirements
 
-Linux x86_64. On Windows use WSL2.
+Linux x86_64; on Windows use WSL2. You need `git`, `curl`, `tar`, `unzip`, `7z`, Python 3.12 or
+later, [`uv`](https://docs.astral.sh/uv/), Rust with a C compiler, Meson 1.3 or later, Ninja,
+`clang-format` 23.1.3 and [`dprint`](https://dprint.dev/) 0.64.3. `tools/setup.sh` downloads GCC
+2.7.2 PSX, maspsx, MIPS binutils and PsyQ 3.7 and checks each by SHA-256. Versions and install
+commands: [toolchain: host tools](docs/toolchain.md#host-tools).
 
-| Tool                                | Version             | Install                                                                               |
-| ----------------------------------- | ------------------- | ------------------------------------------------------------------------------------- |
-| `git`, `curl`, `tar`, `unzip`, `7z` | any                 | system package (`7z` is `p7zip`; `tools/setup.sh --no-sdk` does not need it)          |
-| Python                              | 3.12 or later       | system package; `uv` does not download one                                            |
-| [`uv`](https://docs.astral.sh/uv/)  | any                 | `curl -LsSf https://astral.sh/uv/install.sh \| sh`                                    |
-| Rust and a C compiler               | Rust 1.99 or later  | [rustup](https://rustup.rs/); `cc` from the system package `build-essential` or `gcc` |
-| Meson and Ninja                     | Meson 1.3 or later  | system package, or `uv tool install meson ninja`                                      |
-| `clang-format`                      | 23.1.3 (the CI pin) | `uv tool install clang-format==23.1.3`                                                |
-| [`dprint`](https://dprint.dev/)     | 0.64.3 (the CI pin) | [install page](https://dprint.dev/install/); the binary goes on `PATH`                |
+The disc is a dump of the US release, serial `SLUS-00422`: a CUE sheet and two BIN tracks in
+`inputs/external/` ([sizes and hashes](inputs/README.md)). Without a disc you can edit code and docs
+and run the disc-free checks ([without a disc](docs/toolchain.md#without-a-disc)).
 
-`tools/setup.sh` downloads the rest and checks each download by SHA-256: the GCC 2.7.2 PSX compiler,
-maspsx, MIPS binutils and PsyQ 3.7 (Sony's SDK). The permuter, `coddog`, `objdiff-cli` and `rizin`
-for matching are listed under [matching tools](docs/toolchain.md#matching-tools).
-
-The disc is a dump of the US release, serial `SLUS-00422`: a CUE sheet and two BIN tracks. Put all
-three files in `inputs/external/`; [inputs/README.md](inputs/README.md) lists their sizes and hashes.
-Without a disc you can still edit code and docs and run the checks that need no game data
-([without a disc](docs/toolchain.md#without-a-disc)).
-
-## Set up
+## Commands
 
 ```sh
-git clone https://github.com/raulcorreia7/bof3-decomp.git
-cd bof3-decomp
-cp /path/to/disc/*.cue /path/to/disc/*.bin inputs/external/
-tools/setup.sh --dev
+tools/setup.sh --dev                   # .venv, toolchain and disc extraction; --matching adds the matching tools
+meson setup build/meson                # the build graph; run again after a header or marker change
+meson compile -C build/meson           # every image to build/meson/<image>.bin
+meson compile -C build/meson check     # 428 images against the retail SHA-1; pre-push without a disc
 ```
 
-Setup creates `.venv`, downloads and verifies the toolchain, builds the disc extractor, extracts the
-disc to `build/disc` and checks every extracted file. It is safe to run again. Without a disc, run
-`tools/setup.sh --dev --no-payloads --no-sdk` instead.
-
-## Build
-
-```sh
-meson setup build/meson
-meson compile -C build/meson
-```
-
-The build writes one file per code image to `build/meson/<image>.bin`.
-
-## Check
-
-```sh
-meson compile -C build/meson check
-```
-
-Passes when all 428 images equal their retail SHA-1. Without a disc,
-`meson compile -C build/meson pre-push` runs every check that needs no game data.
+The repository holds no disc image, executable, audio or other game media and no SDK object. Setup
+keeps everything under `build/`, `inputs/` and `toolchains/`, which Git ignores; never commit or
+share those files ([third-party tools](third_party/README.md)).
 
 ## Next
 
-- [Your first function](CONTRIBUTING.md#your-first-function): find one, match it, open a pull request.
-- [Documentation index](docs/README.md): toolchain, matching, conventions.
+- [Your first match](CONTRIBUTING.md#your-first-match): find a function, match it, open a pull request.
+- [Documentation](docs/README.md): toolchain, matching, naming, layout and the rest.
 - [Tools](tools/README.md): every routine task as one command.
-
-## The data
-
-The repository holds no disc image, executable, audio or other game media, and no SDK object. Setup
-keeps everything it extracts or downloads under `build/`, `inputs/` and `toolchains/`, which Git
-ignores. Never commit or share those files ([third-party tools](third_party/README.md)).
-
-## Layout
-
-| Path                                     | Holds                                                                     |
-| ---------------------------------------- | ------------------------------------------------------------------------- |
-| `src/`, `include/`                       | The recovered C and its headers                                           |
-| `config/`                                | One manifest per image (`splat.yaml`, `target.toml`) and the symbol table |
-| `asm/`                                   | Split assembly (generated by `meson setup`) and authored `hand/` files    |
-| `tools/`, `bin/`                         | Build scripts, `tools/match.sh` and the analysis wrappers                 |
-| `docs/`                                  | The project guides ([index](docs/README.md))                              |
-| `third_party/`, `toolchains/`, `inputs/` | Pinned tools, downloaded compilers, your disc (local only)                |
-
-## Links
-
-- [BOF3 wiki](https://raulcorreia7.github.io/bof3-wiki/): game and file-format facts. A source
-  comment `@source: wiki:data/records` names a page of it.
-- [bof3-tools](https://github.com/raulcorreia7/bof3-tools): the `bof3` disc and archive CLI that
-  setup builds, pinned as `tools/bof3-tools`.
-- [bof3-status](https://github.com/raulcorreia7/bof3-status): the progress site.
-- [Discussions](https://github.com/raulcorreia7/bof3-decomp/discussions) for questions;
-  [issues](https://github.com/raulcorreia7/bof3-decomp/issues) for bugs and mismatches.
-- Coding agents: [AGENTS.md](AGENTS.md).
 
 ## License
 
 [CC0 1.0](LICENSE) for what contributors wrote, to the extent they own the rights. *Breath of Fire
 III* belongs to Capcom; this project claims no rights over Capcom's code, data or marks. The PsyQ
-headers in `include/psyq/` are Sony's, included unmodified for interoperability. See
-[NOTICE](NOTICE).
+headers in `include/psyq/` are Sony's, included unmodified for interoperability. See [NOTICE](NOTICE).

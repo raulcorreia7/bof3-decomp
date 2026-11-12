@@ -63,8 +63,8 @@ MATCH void func_801D6128(void) {
     }
     func_801D1744(236, 112, 1);
     func_801D1818(236, 128, 1);
-    func_801E0C80(0, 1);
-    func_801E0DCC(0x14, 1, 228, 104);
+    Fishing_SetDrawMode(0, 1);
+    Fishing_DrawSprite(0x14, 1, 228, 104);
     last = BANNER_INDEX;
     last -= 1;
     if (D_801E2026[last * 3] != 0) {

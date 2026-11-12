@@ -2,10 +2,11 @@
 
 /* Configures the dim semi-transparent AREA030 tile and appends it
  * after selecting graphics mode 4. */
-MATCH void func_801E16DC(void) {
+/* func_801E16DC */
+MATCH void Fishing_DrawDimScreen(void) {
     TILE* primitive;
 
-    func_801E0C80(4, 2);
+    Fishing_SetDrawMode(4, 2);
     primitive = (TILE*)g_GfxPrimCursor;
     SetTile(primitive);
     primitive->b0 = 32;
