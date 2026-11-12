@@ -14,7 +14,7 @@ MATCH void func_801F2CE0(void) {
         Actor* work   = g_Task;
         work->vy      = D_801F4B44[i].from;
         work->unk_1C  = D_801F4B44[i].to;
-        z             = TO_COORD(COORD_INT(work->pos.z) + 0x80);
+        z             = TO_COORD(COORD_INT(work->pos.z) + 128);
         work->gravity = z;
         work->vz      = z;
         func_801F2E10(&work->vx, &work->unk_18);
