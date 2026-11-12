@@ -42,11 +42,7 @@ MATCH void func_801F8F18(void) {
         case 5:
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
     }
 }

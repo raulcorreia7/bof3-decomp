@@ -42,11 +42,7 @@ MATCH void func_801FA760(void) {
         case 6:
             if (g_ScriptVars[0] == 0x17) {
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                Scene_ClearScriptState(&g_SceneState.step_05);
             }
             break;
     }

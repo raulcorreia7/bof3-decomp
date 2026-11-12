@@ -178,12 +178,8 @@ MATCH void func_801FAC88(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             g_GameFlags ^= 0x0E;
             Game_ClearScriptActive();
-            g_ScriptVars[0]       = 0;
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            g_ScriptVars[0] = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 14:
             break;
