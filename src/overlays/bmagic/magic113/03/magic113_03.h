@@ -41,6 +41,7 @@ void            func_801EF4F0(void);
 void            func_801EFDA0(void);
 
 extern Callback D_801F0BCC[];
+extern Callback D_801F0BD8[];
 void            func_801F02CC(void);
 
 #endif
