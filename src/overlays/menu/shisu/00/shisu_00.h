@@ -174,8 +174,6 @@ extern u8              D_801DA04E;
 extern s32             D_801DA084;
 extern u8              D_801DA0C6;
 
-s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
-
 /* The clut strip tables of this overlay, bound in config/symbols.toml. */
 extern UvRect g_MenuClutStripCells[];
 extern u8     g_MenuClutStripEntries[];

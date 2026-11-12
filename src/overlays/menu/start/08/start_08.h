@@ -468,13 +468,10 @@ extern u8  g_NameEntryControlsFrame[];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
-extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern s16  Char_AddStat(u16* value, s16 delta);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
 bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 s32         func_801B6470(u8 arg0);
-/* func_801C1254 */
-void        Party_LoadMemberSprite(s32 character_id, s32 save_slot);
 /* The start overlay's handler tables call these functions. */
 void        func_801D177C(void);
 void        func_801D1B24(void);
@@ -868,7 +865,6 @@ void Menu_SetGlyphPage(u16 line_index);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
-s32  Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 void func_801D9304(s32 handler_index);
 u8   func_801DB04C(void);
 

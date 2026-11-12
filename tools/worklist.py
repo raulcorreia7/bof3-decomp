@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """Rank the functions that are still assembly, cheapest route first.
 
-    tools/worklist.py [-n 30] [--image SUBSTR] [--route ROUTE] [--tsv]
+    tools/worklist.py [-n 30] [--image SUBSTR] [--route ROUTE] [--tsv | --jsonl]
 
 One row per `INCLUDE_ASM` function; a `HAND_ASM` unit is done and has no row. The route
 is the cheapest known way in, in the order docs/matching.md tries them:
 
-    template0   a matched template with no differing instruction: tools/template_try.py
+    template0   a matched template with no differing instruction: tools/template_try.py REF
     generator   a mechanical shape that tools/gen_body.py can write a body for
-    template    a template with a few differing instructions: tools/template_diff.py
+    template    a template with a few differing instructions: tools/template_try.py REF,
+                or tools/template_diff.py REF to see them
     plain       no known route: m2c draft, diagnose loop, permuter
 
 A function recorded in `config/attempts.tsv` sorts after the untried ones of
 its route and shows its attempts. Build first (`meson compile -C build/meson`): the function index
-comes from the built images. Templates need `rapidfuzz` (`tools/setup.sh --matching`).
+comes from the built images. Templates need `rapidfuzz`; without it the command stops with exit 2
+and the install step (`tools/setup.sh --dev --matching`).
 """
 
 from __future__ import annotations
@@ -22,6 +24,7 @@ import argparse
 import contextlib
 import csv
 import io
+import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -69,14 +72,19 @@ def templates() -> dict[str, tuple[str, int]]:
     out, err = io.StringIO(), io.StringIO()
     try:
         with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
-            dups.main(["near", "--full"])
-    except SystemExit:
-        print(
-            "worklist: no templates (" + err.getvalue().strip() + ")", file=sys.stderr
-        )
+            dups.main(["near", "--full", "--jsonl"])
+    except SystemExit as error:
+        message = str(error.code) if error.code else err.getvalue().strip()
+        if "rapidfuzz" in message:
+            print(
+                "worklist: needs rapidfuzz. Run: tools/setup.sh --dev --matching",
+                file=sys.stderr,
+            )
+            raise SystemExit(2) from None
+        print("worklist: no templates (" + message + ")", file=sys.stderr)
         return {}
-    rows = (line.split("\t") for line in out.getvalue().splitlines()[1:])
-    return {r[0]: (r[1], int(r[3])) for r in rows}
+    rows = (json.loads(line) for line in out.getvalue().splitlines())
+    return {r["target"]: (r["template"], r["diff_count"]) for r in rows}
 
 
 def writable(f: gen_body.Func, tree: gen_body.Tree, names: gen_body.Names) -> bool:
@@ -128,13 +136,31 @@ def main(argv: list[str] | None = None) -> int:
         "--image", default="", help="keep images whose name contains this"
     )
     parser.add_argument("--route", choices=ROUTES, default="", help="keep one route")
-    parser.add_argument(
+    output = parser.add_mutually_exclusive_group()
+    output.add_argument(
         "--tsv", action="store_true", help="tab-separated, with the full attempts"
+    )
+    output.add_argument(
+        "--jsonl", action="store_true", help="one JSON object per row, keys as --tsv"
     )
     args = parser.parse_args(argv)
     rows = rank(args.image, args.route)
     shown = rows[: args.n] if args.n else rows
     for r in shown:
+        if args.jsonl:
+            print(
+                json.dumps(
+                    {
+                        "function": r.ref,
+                        "words": r.words,
+                        "route": r.route,
+                        "how": r.how,
+                        "hint": r.hint,
+                    },
+                    ensure_ascii=False,
+                )
+            )
+            continue
         if args.tsv:
             print(f"{r.ref}\t{r.words}\t{r.route}\t{r.how}\t{r.hint}")
             continue

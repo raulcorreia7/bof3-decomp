@@ -13,7 +13,7 @@ import os
 import re
 from dataclasses import dataclass, field
 
-from bof3.source.ctext import split_args
+from bof3.source.ctext import mask, split_args
 
 _KEYWORDS = frozenset(
     "if while for switch return sizeof else do case goto defined typeof __attribute__".split()
@@ -71,15 +71,12 @@ class Problem:
 
 def strip_comments(text: str) -> str:
     """Blank comments, ``extern "C"`` wrappers and preprocessor lines; keep line numbers."""
-    text = re.sub(
-        r"/\*.*?\*/", lambda m: re.sub(r"[^\n]", "", m.group()), text, flags=re.S
-    )
-    text = re.sub(r"//[^\n]*", "", text)
     if re.search(r'extern\s+"C"\s*\{', text):
         text = re.sub(r'extern\s+"C"\s*\{', "", text)
         end = text.rfind("\n}")
         if end >= 0:
             text = text[:end] + text[end + 2 :]
+    text = mask(text)
     out, continued = [], False
     for line in text.split("\n"):
         if continued or line.lstrip().startswith("#"):

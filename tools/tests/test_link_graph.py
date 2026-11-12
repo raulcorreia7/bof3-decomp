@@ -16,6 +16,12 @@ def test_flat_names() -> None:
         graph.flat("build/src/a+b.c.o")
 
 
+def test_a_prebuilt_object_has_no_row() -> None:
+    objects = ("toolchains/psyq/3.7/LIBGPU.OBJ/x.o", "build/src/engine/slus/a.c.o")
+    rows = graph.rows(ROOT, "target", objects)
+    assert [row[0] for row in rows] == ["c"]
+
+
 def test_link_script_renames_objects_and_keeps_directives() -> None:
     text = (
         "    .text 0x80010000 : AT(0)\n"

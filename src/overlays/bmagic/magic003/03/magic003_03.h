@@ -25,6 +25,10 @@ void func_801EF324(void);
 
 void func_801EF708(void);
 
+void func_801EFD4C(void);
+
+void func_801EFEC8(void);
+
 extern Magic003SecondSteps D_801EEC18;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern u8                  D_801F0A84[];

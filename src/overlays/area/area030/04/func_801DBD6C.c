@@ -13,8 +13,8 @@ MATCH void func_801DBD6C(void) {
     work                = FISHING_STATE;
     work->step_timer_09 = (work->step_timer_09 - 1);
 
-    func_801E0ED0(0, FISHING_CATCH_BAR_Y);
-    func_801E0F4C(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
+    Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
+    Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
 
     offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
@@ -42,5 +42,5 @@ MATCH void func_801DBD6C(void) {
         }
     }
     Actor_StepAnimLoop();
-    func_801E16DC();
+    Fishing_DrawDimScreen();
 }

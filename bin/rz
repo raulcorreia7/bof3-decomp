@@ -6,6 +6,9 @@ usage() {
     echo "usage: bin/rz <target> [<cmd> ...] | bin/rz raw <target>" >&2
     exit 2
 }
+case "${1:-}" in
+-h | --help) echo "usage: bin/rz <target> [<cmd> ...] | bin/rz raw <target>"; exit 0 ;;
+esac
 [ "$#" -ge 1 ] || usage
 [ -x "$root/toolchains/rizin/bin/rizin" ] || {
     echo "bin/rz: rizin is missing; install it as docs/toolchain.md#matching-tools says" >&2
