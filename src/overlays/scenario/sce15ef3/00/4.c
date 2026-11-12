@@ -105,9 +105,33 @@ MATCH void func_801D11C8(void) {
     }
 }
 
-INCLUDE_ASM(func_801D1250);
+MATCH void func_801D1250(void) {
+    u8 timer;
 
-INCLUDE_ASM(func_801D12E0);
+    g_Task->screen_x += 0x40;
+    g_Task->screen_y -= 0x40;
+    func_801D230C();
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
+        g_Task->timer = 2;
+        g_Task->header.mode += 1;
+    }
+}
+
+MATCH void func_801D12E0(void) {
+    u8 timer;
+
+    g_Task->screen_x -= 0x40;
+    g_Task->screen_y += 0x40;
+    func_801D230C();
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
+        g_Task->timer = 0x10;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801D1370(void) {
     Actor* work;
