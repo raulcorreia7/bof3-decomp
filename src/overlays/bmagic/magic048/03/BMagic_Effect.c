@@ -41,7 +41,7 @@ MATCH void func_801EF5C8(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = ratan2(g_Task->unk_10 - g_Task->pos.y.fixed, g_Task->unk_0C - g_Task->pos.x.fixed) & 0xFFF;
+    rot.vz = ratan2(g_Task->unk_10 - g_Task->pos.y.fixed, g_Task->unk_0C - g_Task->pos.x.fixed) & ANGLE_MASK;
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
