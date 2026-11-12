@@ -124,6 +124,9 @@ jobs:
       - if: steps.changes.outputs.code == 'true'
         env:
           DPRINT: "true"
+          # ubuntu-latest has four vCPUs. `check-plain` defaults to nproc/4 for a lane that shares a
+          # loaded host, which would leave this job one core and make its cold run ten minutes.
+          HEAVY_JOBS: "4"
         run: tools/pre_push.sh refs/remotes/origin/main
       # A failure before pre-push (for example shell lint) leaves no logs to print.
       - name: Failed check logs
