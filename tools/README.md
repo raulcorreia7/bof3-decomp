@@ -176,6 +176,10 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
 | `subsystems`    | never fails; writes the debt table to `build/subsystems.md`                             | none       |
 
+`check-plain` skips a source whose plain preprocessed text compiled before: the keys are empty files
+under `~/.cache/bof3-cc/plain`, shared like the object cache, so a header change recompiles only the
+sources that include it. `BOF3_CC_CACHE=0` turns that off, and `HEAVY_JOBS` caps its jobs.
+
 ## Worktrees
 
 `tools/worktree.sh --from <checkout> [--dir <dir>] <branch>` adds a Git worktree under

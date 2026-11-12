@@ -31,7 +31,6 @@ extern u8                 D_801F01A8[];
 extern BMagicEffectWork   D_801F01B4[EFFECT_SPARKLE_COUNT];
 
 void func_801EF33C(void);
-void func_801EF810(u16 angle, u16 radius);
 void func_801EFA44(u16 angle, u16 radius);
 void func_801EFCDC(void);
 u8   func_801F0000(void);
