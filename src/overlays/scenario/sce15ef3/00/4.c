@@ -108,8 +108,8 @@ MATCH void func_801D11C8(void) {
 MATCH void func_801D1250(void) {
     u8 timer;
 
-    g_Task->screen_x += 0x40;
-    g_Task->screen_y -= 0x40;
+    g_Task->screen_x += 64;
+    g_Task->screen_y -= 64;
     func_801D230C();
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
@@ -122,13 +122,13 @@ MATCH void func_801D1250(void) {
 MATCH void func_801D12E0(void) {
     u8 timer;
 
-    g_Task->screen_x -= 0x40;
-    g_Task->screen_y += 0x40;
+    g_Task->screen_x -= 64;
+    g_Task->screen_y += 64;
     func_801D230C();
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->timer = 0x10;
+        g_Task->timer = 16;
         g_Task->header.mode += 1;
     }
 }
