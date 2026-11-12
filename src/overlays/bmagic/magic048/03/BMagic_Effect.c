@@ -29,14 +29,13 @@ INCLUDE_ASM(func_801EEF3C);
 INCLUDE_ASM(func_801EF05C);
 
 MATCH void func_801EF158(void) {
-    s32 vec[4];
-    u8  count;
+    VECTOR pos;
+    u8     count;
 
-    vec[0] = (g_Task->unk_0C >> 9) - 0x4000;
-    vec[1] = (g_Task->unk_10 >> 9) - 0x4000;
-    vec[2] = g_Task->unk_14 >> 1;
-    /* The retail build passes the never-written slot after the vector. */
-    func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x10);
+    pos.vx = (g_Task->unk_0C >> 9) - 0x4000;
+    pos.vy = (g_Task->unk_10 >> 9) - 0x4000;
+    pos.vz = g_Task->unk_14 >> 1;
+    func_800AF3A0(pos, 0x10);
     g_Task->unk_09 = g_Task->unk_09 + 1;
     count          = g_Task->timer - 1;
     g_Task->timer  = count;
