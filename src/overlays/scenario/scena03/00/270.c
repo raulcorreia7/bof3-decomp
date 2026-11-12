@@ -551,14 +551,27 @@ INCLUDE_ASM(func_801FCB4C);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-MATCH s32 func_801FCCDC(void) {
+MATCH s32 func_801FCCDC(s32 arg0, s32 arg1) {
     if (MEM(u16, GAME_AREA_ID_ADDR) == AREA_ID_MOUNT_BOUMORE_SECOND) {
-        return func_801FCD1C();
+        return func_801FCD1C(arg0, arg1);
     }
     return 0;
 }
 
-INCLUDE_ASM(func_801FCD1C);
+MATCH s8 func_801FCD1C(s32 arg0, s32 arg1) {
+    if (SYS_TestFlag(g_SceneFlags, 0x1E) == 0) {
+        if (arg1 == TO_COORD(73)) {
+            if (((arg0 >> 0x10) - 14) < 4U) {
+                Game_SetScriptActive();
+                g_SceneState.state_04 = 8;
+                g_SceneState.step_05  = 2;
+                g_SceneState.timer_06 = 30;
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 /* needs: D_801FD030 and D_801FD038 declarations. */
 MATCH s32 func_801FCDB4(s32 arg0, s32 arg1) {

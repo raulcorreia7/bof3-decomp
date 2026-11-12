@@ -64,7 +64,7 @@ extern Callback D_801FD038[];
         D_8014600E += (table)[dir] * 16;  \
     } while (0)
 
-s8 func_801FCD1C(void);
+s8 func_801FCD1C(s32 arg0, s32 arg1);
 
 void func_801F8170(s32 arg0);
 
