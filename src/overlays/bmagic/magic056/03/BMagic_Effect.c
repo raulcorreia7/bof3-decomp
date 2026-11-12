@@ -1,3 +1,5 @@
+/* Every position copy re-reads the party cell. */
+#define BATTLE_PARTY_CELL_RECORD_VOLATILE
 #include "magic056_03.h"
 
 #if BOF3_USE_ASM

@@ -4,7 +4,6 @@
 /* The bmagic/magic056/03 overlay. Only this image includes the file. */
 
 #define BATTLE_PARTY_CELL_RECORD
-#define BATTLE_PARTY_CELL_RECORD_VOLATILE
 
 #include "overlays/bmagic/bmagic.h"
 
