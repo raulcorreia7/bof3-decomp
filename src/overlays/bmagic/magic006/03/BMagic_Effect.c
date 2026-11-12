@@ -208,6 +208,7 @@ MATCH void func_801F0790(void) {
     D_1F800014[2].vz                 = 0;
     D_1F800014[1].vz                 = 0;
     D_1F800014[0].vz                 = 0;
+
     for (i = 1; i <= 16; i++) {
         prim             = GFX_BeginPolyG3(1);
         D_1F800014[0].vx = 0;
@@ -222,6 +223,7 @@ MATCH void func_801F0790(void) {
         setRGB2(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
+
     if (GetGraphType() == 1) {
         tpage = 0x25;
     } else if (GetGraphType() == 2) {

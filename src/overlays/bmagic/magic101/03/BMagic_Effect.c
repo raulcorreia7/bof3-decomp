@@ -105,6 +105,7 @@ MATCH void func_801EF07C(void) {
     D_1F800000.view.effect.params[4] = g_Task->timer * 6;
     D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
     D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+
     for (i = 1; i <= 8; i++) {
         prim             = GFX_BeginPolyG3(1);
         D_1F800014[0].vx = 0;
@@ -122,6 +123,7 @@ MATCH void func_801EF07C(void) {
         setRGB2(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
+
     if (GetGraphType() == 1) {
         tpage = 0x25;
     } else if (GetGraphType() == 2) {
