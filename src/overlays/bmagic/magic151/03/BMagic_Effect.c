@@ -348,7 +348,22 @@ MATCH void func_801F0CB0(void) {
 
 INCLUDE_ASM(func_801F0D0C);
 
-INCLUDE_ASM(func_801F10E8);
+/* Runs the step's handler, projects the battle range and, once the effect is live, sets the rolled actor
+ * matrix and draws its three bands. */
+MATCH void func_801F10E8(void) {
+    SYS_DISPATCH_BYTE(D_801F24FC, g_Task->header.step);
+    func_800AF764();
+    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
+        Effect_SetActorMatrixQuarterRoll();
+        func_801F14D0(32, 32, 0x7);
+        g_Task->param.unk_0B += 4;
+        func_801F14D0(16, 64, 0xF);
+        g_Task->param.unk_0B += 4;
+        func_801F14D0(16, 96, 0x1F);
+        g_Task->param.unk_0B -= 8;
+        PopMatrix();
+    }
+}
 
 MATCH void func_801F11E0(void) {
     u8 count;

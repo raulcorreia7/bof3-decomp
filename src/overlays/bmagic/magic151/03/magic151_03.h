@@ -25,7 +25,9 @@ extern Callback D_801F24B8[];
 /* The draw step's handler table and its two-byte row per effect slot. */
 extern u8       D_801F24D0[][2];
 extern Callback D_801F24F0[];
+extern Callback D_801F24FC[];
 extern Callback D_801F250C[];
+void            Effect_SetActorMatrixQuarterRoll(void);
 void            func_801F1DC0(void);
 void            BMagic_DrawGlowRingInner(void);
 void            BMagic_DrawGlowRingOuter(void);
