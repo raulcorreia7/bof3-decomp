@@ -14,8 +14,6 @@ MATCH void func_8009F0A4(void) {
     volatile u16* counter;
     /* FAKE: pin the counter sample to retail v0. */
     FAKE_REG(u16, raw, "v0");
-    /* FAKE: pin the halved counter to retail v1. */
-    FAKE_REG(s32, shifted, "v1");
     /* FAKE: pin the clamped level to retail v0. */
     FAKE_REG(u8, level, "v0");
 
@@ -31,12 +29,11 @@ MATCH void func_8009F0A4(void) {
         row    = slot - 3;
         action = g_BattleEnemyBattlers[row].base.power;
     }
-    raw     = D_801EC310;
-    shifted = raw >> 1;
-    if ((shifted + 0x1E) >= 0x65) {
+    raw = D_801EC310;
+    if (((raw >> 1) + 0x1E) >= 0x65) {
         level = 0x64;
     } else {
-        level = (shifted + 0x1E);
+        level = ((raw >> 1) + 0x1E);
     }
     D_801EC324 = level;
     /* FAKE: keep the level store ahead of the counter store. */

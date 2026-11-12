@@ -30,7 +30,19 @@ MATCH void func_801F755C(void) {
 
 INCLUDE_ASM(func_801F7590);
 
-INCLUDE_ASM(func_801F7758);
+MATCH void func_801F7758(void) {
+    Scena10Rect* rect;
+
+    rect = &D_801FE7CC[2];
+    func_80159B9C(rect->x, rect->y, (u8)rect->width, (u8)rect->height);
+    func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
+    if (g_Task->unk_0A != 0) {
+        g_Task->unk_0A--;
+    } else if (g_InputPressed != 0) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
+        g_Task->header.mode = 1;
+    }
+}
 
 INCLUDE_ASM(func_801F781C);
 

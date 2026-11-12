@@ -34,10 +34,7 @@ extern volatile u8  D_80146322;
 extern s8           D_80146875;
 extern u8           D_80148603;
 extern u8           D_801FE4E4;
-extern u32          D_801FE4E8;
 extern u8           D_801FE4EC[];
-extern u8           D_801FE4EF;
-extern u32          D_801FE4F0;
 extern EnemyBattler D_801EB748[];
 
 void func_800C1D2C(s32 mode);
