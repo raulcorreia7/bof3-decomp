@@ -20,7 +20,7 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
 
     target_x = g_Game.members[0].pos.x.fixed + g_Game.members[0].unk_0C * g_Game.members[0].unk_09;
     target_y = g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09;
-    if ((WORK->direction_08 & 1) == 0) {
+    if ((WORK->direction_08 & 0x1) == 0) {
         WORK->direction_08++;
     }
     best = 0xFF;
@@ -56,7 +56,7 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
                 best           = WORK->direction_08;
             }
         }
-        WORK->direction_08 = (WORK->direction_08 + 2) & 7;
+        WORK->direction_08 = (WORK->direction_08 + 2) & 0x7;
     }
     return best;
 }

@@ -11,6 +11,6 @@ MATCH u8 func_800A40D0(u8 battler_index) {
     }
     index = g_BattleActionId;
     func_800A39B4(D_801CA71B[index * 0x14], battler_index);
-    func_800A9BD8(g_Battle.target);
+    Battle_RescaleStats(g_Battle.target);
     return false;
 }

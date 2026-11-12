@@ -171,7 +171,7 @@ MATCH void func_801EF69C(void) {
     g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_QUEUED;
     g_Game.members[g_Battle.active_battler].counter_136 = 0;
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-    func_800A9820(g_Battle.target_selector);
+    Battle_MarkDamaged(g_Battle.target_selector);
     func_801E5988();
 }
 

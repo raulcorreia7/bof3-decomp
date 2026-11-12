@@ -15,6 +15,6 @@ MATCH void func_801D1818(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     setRGB0(primitive, 128, 128, 128);
     primitive->clut = getClut(0, 489);
     setXY0(primitive, sprite_x, sprite_y);
-    setUV0(primitive, D_801E1D0C[(g_FrameCount >> 3) & 3], 72);
+    setUV0(primitive, D_801E1D0C[(g_FrameCount >> 0x3) & 3], 72);
     GFX_AddPrim(icon_index, sizeof(SPRT_16));
 }

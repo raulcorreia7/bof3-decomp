@@ -73,7 +73,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
     for (i = 0; i < ENEMY_SKILL_COUNT; i++) {
         work->skills[i] = event->unk_08[i];
     }
-    func_800A9BD8(work->slot);
+    Battle_RescaleStats(work->slot);
     if (work->hp != 0 && event->panel_id != 0 && D_801EB5A8 < 8) {
         D_801ED9B0[D_801EB5A8].owner_index = work->slot - 3;
         D_801ED9B0[D_801EB5A8].panel_id    = event->panel_id;

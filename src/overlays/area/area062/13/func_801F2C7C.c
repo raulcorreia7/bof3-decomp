@@ -20,10 +20,10 @@ MATCH void func_801F2C7C(void) {
                     g_TextVariables[0][i] = record[i];
                 }
                 D_801490E4[0] = 0;
-                if (Item_Add(0, 0x59, 1, 0) & 0xFF) {
+                if (Item_Add(0, 0x59, 1, 0) & BYTE_MASK) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
                     Message_Request(2);
-                    SYS_SetFlag(g_SceneEventFlags, 0x68);
+                    SYS_SetFlag(g_SceneEventFlags, 104);
                 } else {
                     Message_Request(3);
                 }

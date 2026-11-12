@@ -20,7 +20,7 @@ MATCH void func_800A68A4(void) {
     g_Game.members[*battler].u.turn.damage_flags.volatile_value &= ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
     g_Game.members[*battler].u.turn.action_flags.volatile_value &= ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO | COMBATANT_FLAG_SELECTION_BONUS |
                                                                      COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_SELECTED);
-    func_800A9BD8(*battler);
+    Battle_RescaleStats(*battler);
     index                                                    = *battler;
     flags                                                    = g_Game.members[index].u.turn.action_flags.volatile_value;
     D_800B6F58                                               = 0;
@@ -58,5 +58,5 @@ MATCH void func_800A68A4(void) {
     g_BattleTargetRows[0].gate_03 = (D_800B6F5C << 5) + (D_800B6F58 & 0x1F);
     g_Battle.dragon_form          = D_800B6F58;
     D_801463B9                    = D_800B6F5C;
-    func_800A9BD8(g_Battle.active_battler);
+    Battle_RescaleStats(g_Battle.active_battler);
 }

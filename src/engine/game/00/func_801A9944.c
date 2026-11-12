@@ -43,11 +43,11 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
         case 0xE0:
             state->unk_05  = g_Task->direction_08;
             state->flag_00 = (state->flag_00 | ACTOR_FLAG_MOVING);
-            selection      = g_Game.members[0].facing ^ 4;
+            selection      = g_Game.members[0].facing ^ 0x4;
             func_8015BAC4(selection);
             goto block_5; /* E0 and E3 share the operand-read tail */
         case 0xE3:
-            state->unk_05 = (g_Task->direction_08 & 7);
+            state->unk_05 = (g_Task->direction_08 & 0x7);
         block_5:
             next_cursor_e0e3 = state->cursor + 1;
             state->cursor    = next_cursor_e0e3;

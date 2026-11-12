@@ -15,7 +15,7 @@ MATCH void func_801DCCF4(void) {
         record->flag_04 = (record->flag_04 + 1);
     }
 
-    if ((D_80144287 & 1) == 0) {
+    if ((D_80144287 & 0x1) == 0) {
         UI_DrawText(29, 20, 0, 0xFF, (u8*)(MEM(u16, 0x800100A2u) + 0x80010000u));
     } else {
         UI_DrawText(29, 20, 0, 0xFF, (u8*)(MEM(u16, 0x800100A4u) + 0x80010000u));

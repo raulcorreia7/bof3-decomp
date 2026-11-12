@@ -50,7 +50,7 @@ MATCH void func_801E1004(s32 item, s32 count, s32 column) {
         }
     }
     *dst = 0;
-    UI_DrawText(112, 69 - ((u8)column * 20), 0, 0xF, g_UiFormatBuffer);
+    UI_DrawText(112, 69 - ((u8)column * 20), 0, 15, g_UiFormatBuffer);
 
     if ((item & BYTE_MASK) != GAME_NONE) {
         TEXT_Format(g_UiFormatBuffer, D_801D0C38, count & BYTE_MASK);

@@ -17,14 +17,14 @@ NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
             if (flags & 1) {
                 picked = func_801E30B8(index);
                 if (picked == GAME_NONE) {
-                    return func_801E2E30();
+                    return Battle_PickFormationTarget();
                 }
                 return picked;
             }
             if (flags & 0x10) {
                 return func_801E2D90(index);
             }
-            return func_801E2E30();
+            return Battle_PickFormationTarget();
         case 4:
             targeting_flags = D_801CA718[g_BattleEnemyBattlers[index].turn.command.id][0];
             flags           = g_BattleEnemyBattlers[index].event_flags;
@@ -49,7 +49,7 @@ NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
                 if (flags & 0x10) {
                     return func_801E2D90(index);
                 }
-                return func_801E2E30();
+                return Battle_PickFormationTarget();
             }
             if (targeting_flags & ABILITY_TARGET_ALL) {
                 if (targeting_flags & ABILITY_TARGET_BOTH_SIDES) {
@@ -71,7 +71,7 @@ NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
             if (flags & 0x10) {
                 return func_801E2D90(index);
             }
-            return func_801E2E30();
+            return Battle_PickFormationTarget();
         default:
             return g_BattleEnemyBattlers[enemy_index].slot;
     }

@@ -52,7 +52,7 @@ MATCH u8 func_801EF2E8(void) {
 MATCH void func_801EF374(void) {
     SYS_DISPATCH_BYTE(D_801F048C, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801EF698();
     }
 }

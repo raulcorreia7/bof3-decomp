@@ -21,7 +21,7 @@ MATCH void func_801EEE48(void) {
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         if (g_Task->param.unk_0B != 0) {
             func_801EFB6C();
         } else {
@@ -40,7 +40,7 @@ MATCH void func_801EEF28(void) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(128);
-        func_800AF764();
+        Battle_ProjectRange();
         battler        = g_Battle.selected_actor;
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_10 = 0;
@@ -92,7 +92,7 @@ MATCH void func_801F0064(void) {
     handlers = D_801EEC1C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F0308();
     }
 }

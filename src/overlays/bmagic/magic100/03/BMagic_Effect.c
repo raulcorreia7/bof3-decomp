@@ -45,7 +45,7 @@ INCLUDE_ASM(func_801EEC70);
 
 MATCH void func_801EED9C(void) {
     if (g_Task->unk_09 != 0) {
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->header.mode += 1;
     }
 }

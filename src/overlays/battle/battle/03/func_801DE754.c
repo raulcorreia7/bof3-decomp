@@ -9,14 +9,14 @@ MATCH void func_801DE754(void) {
 
     panel = D_801EB4DC;
     gate  = &g_Battle.outcome.event_flags;
-    *gate |= panel->unk_01;
-    half = panel->unk_08;
+    *gate |= panel->event_type;
+    half = panel->timer;
     if (half != 0xFFu) {
-        panel->unk_08 = half - 1;
+        panel->timer = half - 1;
     }
     panel2 = D_801EB4DC;
-    if (panel2->unk_08 == 0u) {
-        panel2->unk_00 = 0;
+    if (panel2->timer == 0u) {
+        panel2->active = 0;
         if (func_801DE858(4) != 0u) {
             g_MenuPanelTasks[0].state = 2;
         }

@@ -21,5 +21,5 @@ MATCH void func_801F3788(void) {
 force:
     g_Task->unk_03 = 3;
 done:
-    func_801F40FC(0x5C, g_Task->screen_y);
+    func_801F40FC(92, g_Task->screen_y);
 }

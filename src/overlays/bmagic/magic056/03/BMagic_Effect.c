@@ -1,3 +1,5 @@
+/* Every position copy re-reads the party cell. */
+#define BATTLE_PARTY_CELL_RECORD_VOLATILE
 #include "magic056_03.h"
 
 #if BOF3_USE_ASM
@@ -30,7 +32,7 @@ MATCH void func_801EF2DC(void) {
     u8 counter;
 
     if (g_Task->unk_09 == 4) {
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
     }
     SP_REF(s16, 0) = g_Task->unk_09 * 0x1C;
     counter        = g_Task->unk_09 + 1;
@@ -151,7 +153,35 @@ MATCH void func_801F042C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F04EC);
+MATCH void func_801F04EC(void) {
+    PartyMember* member;
+    PartyMember* work;
+
+    Actor_StepAnimLoop();
+    g_Task->unk_5D -= 0x10;
+    g_Task->unk_5E -= 0x10;
+    g_Task->unk_5F -= 0x10;
+    if ((s8)g_Task->unk_5D == -0x80) {
+        work              = g_Task;
+        work->pos.x.fixed = D_8014637C->pos.x.fixed;
+        /* FAKE: retail schedules each copy's load and store together. */
+        FAKE_ORDER_FENCE();
+        work->pos.y.fixed = D_8014637C->pos.y.fixed;
+        /* FAKE: retail schedules each copy's load and store together. */
+        FAKE_ORDER_FENCE();
+        work->pos.z.fixed = D_8014637C->pos.z.fixed;
+        if (g_Battle.active_battler < 3) {
+            member = &g_Game.members[g_Battle.active_battler];
+            g_Task = member;
+            Actor_SelectScript(member->facing + 0x1C);
+            g_Task = work;
+            Actor_SelectScript(work->facing + 0x1C);
+        } else {
+            func_801E257C(g_Battle.active_battler, 4);
+        }
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F0658(void) {
     if (g_BattleEffectBattler->param.unk_0B == 1) {

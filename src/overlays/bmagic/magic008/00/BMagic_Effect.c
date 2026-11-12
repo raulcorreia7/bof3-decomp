@@ -172,7 +172,7 @@ MATCH void func_801F03FC(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         func_800AFC98(2, 4);
         g_Task->header.step += 1;
     }
@@ -238,7 +238,7 @@ MATCH void func_801F07D4(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
@@ -299,7 +299,7 @@ MATCH void func_801F0A20(void) {
 
 MATCH void func_801F0AC8(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
@@ -364,7 +364,7 @@ MATCH void func_801F1090(void) {
         if (!(value & BYTE_MASK)) {
             if (g_Task->param.unk_0B == 0) {
                 func_800AFC98(2, 4);
-                func_800A9820(g_BattleTargetSelector);
+                Battle_MarkDamaged(g_BattleTargetSelector);
             }
             g_Task->header.step += 1;
         }
@@ -414,7 +414,7 @@ MATCH void func_801F1384(void) {
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         func_800AFC98(2, 0);
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
 }
@@ -456,7 +456,7 @@ MATCH void func_801F1804(void) {
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         func_800AFC98(2, 0);
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
 }

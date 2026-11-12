@@ -14,7 +14,7 @@ MATCH void func_801E05EC(void) {
     if (work->timer == 0) {
         battle = g_Game.current;
         if (battle->u.turn.target_flags & BATTLE_HIT_HP_LANDED) {
-            func_800AAC88(battle->u.turn.hp_change, work->slot);
+            Battle_QueueAction(battle->u.turn.hp_change, work->slot);
         } else {
             slot                               = Battle_AllocEffect(0U, 1U) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_Task;

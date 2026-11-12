@@ -1,7 +1,7 @@
 #include "area197_13.h"
 
 MATCH void func_801F368C(void) {
-    if (SYS_TestFlag(D_80144EF8, 0xE)) {
+    if (SYS_TestFlag(D_80144EF8, 14)) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }

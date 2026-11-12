@@ -23,7 +23,7 @@ MATCH void func_801C2018(void) {
         party_state[0x54F3] = (party_state[0x54F3] + 1);
     }
     if (g_SceneState.scenario_id >= 8) {
-        bit_index     = 0xF6;
+        bit_index     = 246;
         gate_byte_ptr = &D_801455C3;
         if (*gate_byte_ptr != 0) {
             record_kind_10 = 0xA;
@@ -78,7 +78,7 @@ MATCH void func_801C2018(void) {
             func_801C1F4C(0xB);
         }
     }
-    if ((SYS_TestFlag(g_SceneEventFlags, 0xF5U) == 0) && (D_801455C4 >= 4U)) {
-        SYS_SetFlag(g_SceneEventFlags, 0xF5U);
+    if ((SYS_TestFlag(g_SceneEventFlags, 245U) == 0) && (D_801455C4 >= 4U)) {
+        SYS_SetFlag(g_SceneEventFlags, 245U);
     }
 }

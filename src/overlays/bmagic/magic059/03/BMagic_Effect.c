@@ -10,7 +10,7 @@ MATCH void func_801EEC04(void) {
     u8           i;
 
     BMagic_DispatchTaskPair(func_801EED0C, func_801EF118);
-    func_800AF764();
+    Battle_ProjectRange();
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (D_801F0694[i].header.flags & BMAGIC_EFFECT_IN_USE) {
