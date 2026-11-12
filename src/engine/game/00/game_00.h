@@ -276,7 +276,6 @@ ASSERT_SIZE(GameCursorState, 0x0C);
 extern u16                       D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
 extern u8                        D_1F800003;
 extern u16                       D_1F800004; /* 0x1F800004 */
-extern u16                       D_1F800006; /* 0x1F800006 */
 extern s16                       D_1F800008; /* 0x1F800008 */
 extern u16                       D_1F80000A; /* 0x1F80000A */
 extern s16                       D_1F80000C; /* 0x1F80000C */

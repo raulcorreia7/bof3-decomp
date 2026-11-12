@@ -380,6 +380,8 @@ extern u8           D_8014842C;
 extern s8           g_SndVabIds[SND_SLOT_COUNT];
 extern s8           g_SndVoiceVolume[SND_VOICE_COUNT];
 extern u8           D_80148FE0[SND_VOICE_COUNT];
+/* D_80148FF8 */
+extern u8           g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 /* D_801490A0 */
 extern FrontendStep g_MessageState;
 /* D_801490A2 */

@@ -6,7 +6,7 @@ MATCH void func_801E2444(void) {
 
     Menu_DrawClutStrip(D_80144953);
     if (g_GameEntryState == 2) {
-        Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+        Menu_DrawHeaderBar(MENU_HEADER_X, 16, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
         func_801E26A8(0x1C, 0x40);
         func_801E2668(0, 0x70, 0x26);
         UI_SetMode(UI_MODE_FADE_OUT);

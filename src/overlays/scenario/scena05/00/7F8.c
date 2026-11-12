@@ -20,8 +20,8 @@ MATCH void func_801F745C(void) {
 
     work = g_Task;
     func_801F7660(work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed, work->vx);
-    g_Task->vx += 0x10;
-    if (g_Task->vx > 0x500) {
+    g_Task->vx += 16;
+    if (g_Task->vx > 1280) {
         g_Task->header.mode += 1;
     }
 }
@@ -38,7 +38,7 @@ MATCH void func_801F7530(void) {
     Actor* actor;
 
     actor              = g_Task;
-    actor->vx          = 0x1000;
+    actor->vx          = 4096;
     actor->header.mode = actor->header.mode + 1;
 }
 
@@ -134,7 +134,7 @@ INCLUDE_ASM(func_801F87C4);
 MATCH void func_801F8B94(void) {
     if (g_SceneState.step_05 == 0) {
         if (g_ScriptVars[0] == 0x18) {
-            SYS_SetFlag(g_SceneFlags, 0xA);
+            SYS_SetFlag(g_SceneFlags, 10);
             Game_ClearScriptActive();
             D_80146865            = 0;
             D_80146866            = 0;
@@ -151,7 +151,7 @@ MATCH void func_801F8C1C(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x26);
+            Message_StartAreaMessage(38);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -181,24 +181,24 @@ MATCH void func_801F9148(void) {
         case 1:
             if (*g_ScriptVars == 0x23) {
                 *step = 4;
-                SYS_SetFlag(g_SceneFlags, 0x18);
-                if (SYS_TestFlag(g_SceneFlags, 0x17) == 0) {
+                SYS_SetFlag(g_SceneFlags, 24);
+                if (SYS_TestFlag(g_SceneFlags, 23) == 0) {
                     D_80146866 = 4;
-                    Game_RequestAreaChange(0x4E, 0x270000, 0xAD0000, FACING_RIGHT);
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, 0x270000, 0xAD0000, FACING_RIGHT);
                     g_GamePrevSelection = 0xFF;
                 }
-                if (SYS_TestFlag(g_SceneFlags, 0x16) == 0) {
+                if (SYS_TestFlag(g_SceneFlags, 22) == 0) {
                     D_80146866 = 1;
-                    Game_RequestAreaChange(0x4E, 0x270000, 0xAD0000, 0x83);
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, 0x270000, 0xAD0000, 0x83);
                     g_GamePrevSelection = 0xFF;
                 }
             }
             break;
         case 4:
             if (*g_ScriptVars == 3) {
-                SYS_SetFlag(g_SceneFlags, 0x19);
-                SYS_SetFlag(g_SceneFlags, 0x14);
-                SYS_SetFlag(g_SceneFlags, 0x1A);
+                SYS_SetFlag(g_SceneFlags, 25);
+                SYS_SetFlag(g_SceneFlags, 20);
+                SYS_SetFlag(g_SceneFlags, 26);
                 D_80146865 = 0;
                 D_80146866 = 0;
                 D_80146867 = 0;
@@ -252,7 +252,7 @@ MATCH void func_801FC2F0(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x84);
+            Message_StartAreaMessage(132);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -268,7 +268,34 @@ MATCH void func_801FC2F0(void) {
 
 INCLUDE_ASM(func_801FC380);
 
-INCLUDE_ASM(func_801FC6A8);
+MATCH void func_801FC6A8(void) {
+    u8* state;
+    u8  next;
+
+    state = &g_SceneState.step_05;
+    switch (*state) {
+        case 0:
+            if (!(g_UiWindowChannel & FRONTEND_FLAG_CONFIRM)) {
+                break;
+            }
+            next            = 1;
+            g_ScriptVars[0] = next;
+            SYS_SetFlag(g_SceneFlags, 0x3A);
+            func_801BE1B0(3);
+            func_801C601C(0);
+            *state = next;
+            break;
+        case 1:
+            if (g_ScriptVars[0] != 0x1C) {
+                break;
+            }
+            SYS_ClearFlag(g_SceneFlags, 0x3A);
+            Game_ClearScriptActive();
+            *state                = 0;
+            g_SceneState.state_04 = 0;
+            break;
+    }
+}
 
 MATCH void func_801FC778(void) {
     u8* state;
@@ -276,7 +303,7 @@ MATCH void func_801FC778(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x4C);
+            Message_StartAreaMessage(76);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -334,13 +361,7 @@ MATCH void func_801FCB80(void) {
 }
 
 MATCH void func_801FCBD4(void) {
-    Game_SetScriptActive();
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 13;
+    SCENE_ENTER_STATE_13();
 }
 
 MATCH void func_801FCC28(void) {
@@ -371,13 +392,7 @@ MATCH void func_801FCCC0(void) {
 }
 
 MATCH void func_801FCD0C(void) {
-    Game_SetScriptActive();
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 13;
+    SCENE_ENTER_STATE_13();
 }
 
 MATCH s32 func_801FCD60(void) {

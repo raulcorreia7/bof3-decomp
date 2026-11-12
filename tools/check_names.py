@@ -10,6 +10,11 @@ The check is a ratchet. ``config/address_names.txt`` lists the offenders that ex
 ``<file><TAB><identifier>``. A name that is not on the list fails, and so does a listed entry
 that no longer occurs, so the list only shrinks. Rename the identifier, then delete its line.
 
+``--diff REF`` checks the lines a change adds. A new identifier must not use a word the
+vocabulary rejects where another word is decided ([vocabulary](../docs/naming.md#vocabulary)),
+and a parameter must be named. An identifier that already exists at ``REF`` is not a new name:
+this check only stops new debt, the rename map clears the old.
+
 Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline from the tree)
 """
 
@@ -35,6 +40,110 @@ TOKEN = re.compile(
 ADDRESS = re.compile(r"[0-9A-Fa-f]{8}")
 DEFAULT = re.compile(r"(?:func|D)_[0-9A-F]{8}|L[0-9A-F]{8}|jtbl_\w*|jpt_\w*|s_gap_\w*")
 UNNAMED = re.compile(r"arg[0-9]+")
+WORD = re.compile(r"[A-Z]+(?=[A-Z][a-z])|[A-Z]?[a-z]+|[A-Z]+|[0-9]+")
+
+# One word per concept: a new name that uses a rejected word takes the decided word instead.
+# See docs/naming.md#vocabulary. Only words with no second sense are here; data/work/record and
+# the other nouns with a game sense are reviewed through the rename map.
+REJECTED = {
+    "array": "name a table for the plural of what its index selects",
+    "table": "name a table for the plural of what its index selects",
+    "handler": "name the action; Callback is the void (*)(void) type, Func a table element",
+    "proc": "name the action",
+    "routine": "name the action",
+    "fn": "name the action",
+    "cb": "name the action",
+    "data": "the game noun",
+    "info": "the game noun",
+    "work": "the game noun",
+    "misc": "the game noun",
+    "rec": "the game noun",
+    "buf": "buffer",
+    "idx": "index",
+    "cnt": "count",
+    "num": "count or id",
+    "tmp": "the value it holds",
+    "temp": "the value it holds",
+    "cur": "current",
+    "ptr": "the pointee's game noun",
+    "obj": "the object's game noun",
+    "object": "the object's game noun",
+    "ctrl": "the role it controls",
+    "mgr": "the role it manages",
+    "spr": "sprite",
+    "chara": "character",
+    "monster": "enemy",
+    "goods": "item",
+    "spell": "magic or ability",
+    "fx": "effect",
+    "render": "draw",
+    "lookup": "find or get",
+    "fetch": "load or get",
+    "put": "set or write",
+    "make": "create or alloc",
+    "kill": "free",
+    "delete": "remove",
+    "destroy": "free or remove",
+    "check": "is, has, can, test or find",
+    "handle": "dispatch, run or update",
+    "finish": "end",
+    "store": "set or write",
+    "kind": "type",
+    "class": "type",
+    "bits": "flags",
+    "len": "length",
+    "colour": "color",
+    "amount": "count or value",
+    "quantity": "count or value",
+}
+
+# A tag with one spelling per system; a new name with the left side takes the right side.
+PREFIXES = (
+    (re.compile(r"^World_"), "WorldMap_"),
+    (re.compile(r"^Plchar"), "PlChar"),
+    (re.compile(r"^PAD_"), "INPUT_"),
+    (re.compile(r"^Mem_"), "SYS_"),
+    (re.compile(r"^Matrix_"), "MATH_"),
+    (re.compile(r"^Fish_"), "Fishing_"),
+    (re.compile(r"^CD_"), "EMI_ or DISC_"),
+)
+
+
+def split_words(name: str) -> list[str]:
+    """Split an identifier at underscores and camel humps, lower case."""
+    return [token.lower() for chunk in name.split("_") for token in WORD.findall(chunk)]
+
+
+def rejected_reason(name: str) -> str | None:
+    """Why a new identifier breaks the vocabulary, or ``None`` when it follows it."""
+    for pattern, replacement in PREFIXES:
+        if pattern.search(name):
+            return f"the system tag is {replacement}"
+    for word in split_words(name):
+        if word in REJECTED:
+            return REJECTED[word]
+    return None
+
+
+def rejected_names(text: str) -> set[str]:
+    """Identifiers in ``text`` that use a rejected word or an old tag."""
+    return {
+        m.group()
+        for m in TOKEN.finditer(text)
+        if m.lastgroup == "ident"
+        and not ADDRESS.fullmatch(m.group())
+        and rejected_reason(m.group()) is not None
+    }
+
+
+def in_ref(ref: str, name: str) -> bool:
+    """Whether ``name`` occurs as a word in the tracked tree at ``ref``."""
+    found = subprocess.run(
+        ["git", "grep", "-q", "-w", "-F", "-e", name, ref, "--", "."],
+        check=False,
+        capture_output=True,
+    )
+    return found.returncode == 0
 
 
 def unnamed_parameters(text: str) -> set[str]:
@@ -116,6 +225,7 @@ def main(argv: list[str]) -> int:
             print("usage: python3 tools/check_names.py --diff REF", file=sys.stderr)
             return 2
         bad = 0
+        seen: set[str] = set()
         for path, line, text in added_lines(argv[1]):
             for name in unnamed_parameters(text):
                 print(
@@ -123,10 +233,25 @@ def main(argv: list[str]) -> int:
                     file=sys.stderr,
                 )
                 bad = 1
+            if path.startswith(("include/psyq", "include/psx")):
+                continue
+            if path == "include/common/util.h":
+                continue  # the generic helpers may name arrays and bits directly
+            for name in rejected_names(text):
+                if name in seen or in_ref(argv[1], name):
+                    continue
+                seen.add(name)
+                print(
+                    f"{path}:{line}: {name}: {rejected_reason(name)} (new name)",
+                    file=sys.stderr,
+                )
+                bad = 1
         if bad:
-            print(f"check-names: unnamed parameters against {argv[1]}", file=sys.stderr)
+            print(f"check-names: names against {argv[1]}", file=sys.stderr)
             return 1
-        print(f"check-names: no unnamed parameters against {argv[1]}")
+        print(
+            f"check-names: no new rejected names or unnamed parameters against {argv[1]}"
+        )
         return 0
     now = tree_entries()
     if argv == ["--write"]:

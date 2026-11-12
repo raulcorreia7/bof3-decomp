@@ -872,4 +872,22 @@ s32  Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 void func_801D9304(s32 handler_index);
 u8   func_801DB04C(void);
 
+/* Step the master panel up 16 pixels and stop it at y 62. The member declares task. */
+#define MENU_STEP_PANEL_UP()     \
+    task = g_MenuCurrentPanel;   \
+    task->pos.y -= 16;           \
+    if ((s16)task->pos.y < 63) { \
+        task->pos.y = 62;        \
+        task->state = 0;         \
+    }
+
+/* Step the master panel right 32 pixels and stop it at x 45. The member declares task. */
+#define MENU_STEP_PANEL_RIGHT()   \
+    task = g_MenuCurrentPanel;    \
+    task->pos.x += 32;            \
+    if ((s16)task->pos.x >= 46) { \
+        task->pos.x = 45;         \
+        task->state = 0;          \
+    }
+
 #endif

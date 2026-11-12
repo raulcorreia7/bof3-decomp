@@ -6,10 +6,10 @@ MATCH void func_800C1934(void) {
     if (g_Battle.encounter != 0x10) {
         return;
     }
-    if ((g_Battle.boss_flags & 1) && !(g_Battle.boss_flags & 2)) {
+    if ((g_Battle.boss_flags & 0x1) && !(g_Battle.boss_flags & 0x2)) {
         g_Battle.action_type = 0;
         g_MenuPanelMode      = 2;
-        Message_StartAreaMessage(0x26);
+        Message_StartAreaMessage(38);
         g_Battle.boss_flags |= 2;
     }
     flags = &g_Battle.boss_flags;
@@ -21,6 +21,6 @@ MATCH void func_800C1934(void) {
     }
     g_Battle.action_type = 3;
     g_MenuPanelMode      = 2;
-    Message_StartAreaMessage(0x29);
+    Message_StartAreaMessage(41);
     *flags |= 0x20;
 }

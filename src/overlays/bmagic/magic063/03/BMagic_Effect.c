@@ -12,7 +12,7 @@ MATCH void func_801EEC18(void) {
     BMagic_DispatchTaskPair(func_801EECF8, Effect_StartOnZeroTick);
     count = 0;
     do {
-        if (D_801F0454[(u8)count << 5] & 1) {
+        if (D_801F0454[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801F0470, (u8)count << 5);
             g_BMagicOrbitWork     = D_801F0454 + ((u8)count << 5);
@@ -74,7 +74,7 @@ MATCH void func_801EF1C8(void) {
     i = 0;
     do {
         slot = func_801F0354();
-        if (slot != 0xFF) {
+        if (slot != GAME_NONE) {
             off                                  = slot << 5;
             task                                 = g_Task;
             D_801F0454[off + 1]                  = 0;
@@ -138,7 +138,7 @@ MATCH void func_801EF880(void) {
     g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
     FIELD(u16, g_BMagicOrbitWork, 0x1A) += g_BMagicOrbitWork->unk_0A;
     g_BMagicOrbitWork->unk_0B++;
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         if (--g_BMagicOrbitWork->unk_09 == 0) {
             g_BattleEffectBattler->param.unk_0B--;
             func_801F03B0();
@@ -239,7 +239,7 @@ MATCH u32 func_801F0354(void) {
     u8 index;
 
     for (index = 0u; index < 96; index++) {
-        if ((D_801F0454[index << 5] & 1) == 0) {
+        if ((D_801F0454[index << 5] & 0x1) == 0) {
             D_801F0454[index << 5] |= 1;
             return index;
         }

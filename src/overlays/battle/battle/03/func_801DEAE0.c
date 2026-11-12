@@ -5,7 +5,7 @@ MATCH void func_801DEAE0(void) {
     u32 x;
     u32 mode;
 
-    __builtin_memcpy(local_18, s_BattleCueIds, sizeof(local_18));
+    memcpy(local_18, s_BattleCueIds, sizeof(local_18));
     mode = D_801463D0;
     switch (mode) {
         case 1u:
@@ -30,5 +30,5 @@ MATCH void func_801DEAE0(void) {
     FAKE_CLOBBER_A2();
     /* FAKE: keeps a3 staged before arg4. */
     FAKE_CLOBBER_A3();
-    func_801DE60C(0u, 2u, 0u, 0u, 0xFFu, Message_GetText(x));
+    func_801DE60C(0u, 2u, 0u, 0u, 255u, Message_GetText(x));
 }

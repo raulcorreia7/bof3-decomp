@@ -23,9 +23,9 @@ MATCH void Area_AddScenePrim(s32 scene) {
     offset = (g_FrameBufferIndex + 2) * 8 + scene * 0x30;
     entry  = *(u32*)(D_80142CC0 + offset);
     if (entry != 0) {
-        slot    = (u32*)&D_801459D0[g_AreaDrawMode];
-        packet  = (u32*)*slot;
-        *packet = (*packet & 0xFF000000) | (entry & 0xFFFFFF);
-        *slot   = *(u32*)(D_80142CC4 + offset);
+        slot   = (u32*)&D_801459D0[g_AreaDrawMode];
+        packet = (u32*)*slot;
+        setaddr(packet, entry);
+        *slot = *(u32*)(D_80142CC4 + offset);
     }
 }

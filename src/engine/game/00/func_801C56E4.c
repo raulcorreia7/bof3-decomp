@@ -6,10 +6,10 @@ MATCH void func_801C56E4(void) {
     Actor* state;
 
     work               = g_Task;
-    work->direction_08 = (work->direction_08 ^ 4);
-    index              = 0x3B;
+    work->direction_08 = (work->direction_08 ^ 0x4);
+    index              = 59;
     if (g_Task->direction_08 == FACING_RIGHT) {
-        index = 0x3A;
+        index = 58;
     }
     Actor_RequestScript(index);
     GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);

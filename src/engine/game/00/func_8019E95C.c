@@ -20,7 +20,7 @@ MATCH void func_8019E95C(void) {
     other                     = g_Task;
     work->vy                  = -0x2000;
     work->vx                  = 0;
-    work->vz                  = 0x40;
+    work->vz                  = 64;
     other->tint.bytes.unk_5E  = 0;
     g_Task->tint.bytes.unk_5F = 0;
     Actor_SelectScript(0);

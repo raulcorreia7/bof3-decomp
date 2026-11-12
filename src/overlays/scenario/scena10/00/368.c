@@ -30,7 +30,19 @@ MATCH void func_801F755C(void) {
 
 INCLUDE_ASM(func_801F7590);
 
-INCLUDE_ASM(func_801F7758);
+MATCH void func_801F7758(void) {
+    Scena10Rect* rect;
+
+    rect = &D_801FE7CC[2];
+    func_80159B9C(rect->x, rect->y, (u8)rect->width, (u8)rect->height);
+    func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
+    if (g_Task->unk_0A != 0) {
+        g_Task->unk_0A--;
+    } else if (g_InputPressed != 0) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
+        g_Task->header.mode = 1;
+    }
+}
 
 INCLUDE_ASM(func_801F781C);
 
@@ -69,7 +81,7 @@ INCLUDE_ASM(func_801F95B8);
 
 MATCH void func_801F9FC4(void) {
     D_1F800000.view.area.entity_counter = Actor_FindFree();
-    if (D_1F800000.view.area.entity_counter != 0xFF) {
+    if (D_1F800000.view.area.entity_counter != 255) {
         func_801A4D54(D_801FE938);
     }
 }
@@ -97,7 +109,7 @@ INCLUDE_ASM(func_801FA98C);
 
 MATCH void func_801FC220(void) {
     if (D_801FE9DC != 0) {
-        s8 step                  = D_801FE94C[g_FrameCount & 3];
+        s8 step                  = D_801FE94C[g_FrameCount & 0x3];
         g_AreaCameraRefreshCount = 2;
         g_AreaCameraOffsetY += step * 4;
     }
@@ -109,7 +121,7 @@ MATCH void func_801FC830(void) {
     if (g_SceneState.step_05 == 1) {
         if (g_GameStateIndex != 2) {
             func_801BE1B0(2);
-            SYS_SetFlag(g_SceneFlags, 0x34);
+            SYS_SetFlag(g_SceneFlags, 52);
             g_SceneState.state_04 = 0;
             g_SceneState.step_05  = 0;
         }
@@ -190,14 +202,14 @@ MATCH void func_801FDA0C(Actor* actor) {
 
     Game_SetScriptActive();
     func_801BE1B0(1);
-    SYS_SetFlag(g_SceneFlags, 0x15);
+    SYS_SetFlag(g_SceneFlags, 21);
     state = &D_80146875;
     *state += 1;
     actor->unk_7E += 1;
 }
 
 MATCH void func_801FDA74(void) {
-    SYS_SetFlag(g_SceneFlags, 0x19U);
+    SYS_SetFlag(g_SceneFlags, 25U);
 }
 
 MATCH void func_801FDA9C(void) {

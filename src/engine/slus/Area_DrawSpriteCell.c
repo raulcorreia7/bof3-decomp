@@ -31,7 +31,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     if ((GetGraphType() == 1) || (GetGraphType() == 2)) {
         work       = g_Task;
         draw_value = work->tint.bytes.flags;
-        mode_bit   = (draw_value & 3) << 7;
+        mode_bit   = (draw_value & 0x3) << 7;
         scratch    = work->unk_25;
         draw_value = scratch * 2;
         packed     = draw_value & 0x60;
@@ -45,7 +45,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     } else {
         scratch    = g_Task;
         draw_value = ((Actor*)scratch)->tint.bytes.flags;
-        mode_flags = (draw_value & 3) << 5;
+        mode_flags = (draw_value & 0x3) << 5;
         packed     = ((Actor*)scratch)->unk_25;
         draw_value = ((u32)packed >> 4) << 8;
         mode_bits  = draw_value & 0x100;
@@ -85,6 +85,6 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     } else {
         sprite->x0 = (SPAD_CURSOR->screen_x - (s8)sprite_cell->x) - sprite->w;
     }
-    SetSemiTrans(sprite, (SPAD_CURSOR->header.flags >> 5) & 1);
+    SetSemiTrans(sprite, (SPAD_CURSOR->header.flags >> 5) & 0x1);
     GFX_AddPrim(SPAD_CURSOR->draw_layer, sizeof(SPRT));
 }

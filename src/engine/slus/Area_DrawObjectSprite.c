@@ -39,7 +39,7 @@ MATCH void Area_DrawObjectSprite(void) {
         return;
     }
     g_Task->header.flags &= ~ACTOR_FLAG_OFFSCREEN;
-    if (g_Task->active_flags & 8) {
+    if (g_Task->active_flags & 0x8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
         rect->x = 832;
@@ -49,7 +49,7 @@ MATCH void Area_DrawObjectSprite(void) {
         GFX_AddPrim(g_Task->draw_layer, sizeof(DR_AREA));
         g_Task->screen_x += 0x340;
         y                = g_Task->screen_y + 0x10;
-        g_Task->screen_y = y + (g_FrameBufferIndex ^ 1) * 0xF0;
+        g_Task->screen_y = y + (g_FrameBufferIndex ^ 0x1) * 0xF0;
     }
     list  = g_Task->range_54.table + g_Task->unk_5A;
     count = *list;
@@ -121,7 +121,7 @@ MATCH void Area_DrawObjectSprite(void) {
             prim->x3 = prim->x1;
             prim->u2 = prim->u0;
             prim->u3 = prim->u1;
-            if (mode & 4) {
+            if (mode & 0x4) {
                 prim->y0 = g_Task->screen_y + Area_RoundSpriteCoordinate((s8)cell->y * g_Task->scale.y, g_Task->scale.y);
                 prim->y2 = prim->y0 + Area_RoundSpriteCoordinate(height * g_Task->scale.y, g_Task->scale.y);
             } else {
@@ -154,7 +154,7 @@ MATCH void Area_DrawObjectSprite(void) {
             GFX_AddPrim(g_Task->draw_layer, sizeof(POLY_FT4));
         }
     }
-    if (g_Task->active_flags & 8) {
+    if (g_Task->active_flags & 0x8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
         *rect = *(RECT*)(g_GfxCurrentDisplayFrame + 0x14);

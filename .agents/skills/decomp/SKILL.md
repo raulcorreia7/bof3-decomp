@@ -14,9 +14,13 @@ Find the job in the table, read its reference, run its chain. Each chain ends in
 2. Bytes stay identical. Every touched image stays EXACT. Only `check-<image>` exit 0 accepts a
    change; a score, a marker or `tools/match.sh` is a lead ([gates](../../../docs/matching.md#gates)).
 3. Gates: `check-<image>` for each touched image ([commands](../../../docs/toolchain.md#commands)),
-   then `meson compile -C build/meson pre-push`. `pre-push` runs `check` and every other push check.
+   then `meson compile -C build/meson pre-push`, which runs `check` and the other push checks
+   (`check_names`, `check_markers`, `check_tree`, `quality`, `kept`); a failure names its check and
+   leaves `build/pre-push/<check>.log`.
 4. Report: the result and the evidence for it. A chain gives one report. Last line
    `READY <sha>` or `BLOCKED <reason>`.
+5. Game knowledge: the [wiki](https://raulcorreia7.github.io/bof3-wiki/) for a name, a mechanic or
+   a table; cite each hit where it is used.
 
 ## Jobs
 

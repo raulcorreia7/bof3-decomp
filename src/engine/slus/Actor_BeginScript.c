@@ -16,7 +16,7 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
     selector = raw_selector;
     code     = raw_code;
     if (raw_selector & 0x80) {
-        if (!(g_Task->active_flags & 2)) {
+        if (!(g_Task->active_flags & 0x2)) {
             modes          = (u8(*)[3])D_80181B34;
             hint           = g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK;
             g_Task->unk_64 = modes[hint][g_Task->unk_2C];
@@ -30,14 +30,14 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
         g_Task->unk_2A = *(u8*)(entry + 3);
     } else {
         flags = g_Task->active_flags;
-        if (flags & 2) {
+        if (flags & 0x2) {
             flags &= 0xFC;
             Party_LoadMemberSprite((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, raw_selector);
             g_Task->active_flags = g_Task->active_flags | flags;
         }
         g_Task->unk_4B = selector;
     }
-    if (g_Task->active_flags & 1) {
+    if (g_Task->active_flags & 0x1) {
         Actor_SelectSprite(g_Task->unk_4B);
     } else {
         table = (u8*)g_ScriptTable;

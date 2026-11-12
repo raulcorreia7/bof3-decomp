@@ -16,7 +16,7 @@ MATCH void func_801EEC5C(void) {
     u32          offset;
 
     Battle_CenterCamera();
-    offset                                  = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    offset                                  = (Battle_AllocEffect(1, 25) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     FIELD(PartyMember*, D_801EC3A4, offset) = g_Task;
     FIELD(u8, D_801EC338, offset)           = ((PartyMember*)D_8014637C)->facing;
     scroll_x                                = g_AreaScrollTargetX;
@@ -84,7 +84,7 @@ MATCH void func_801EEFD4(void) {
     u8      angle;
 
     PushMatrix();
-    if (g_Task->facing & 1) {
+    if (g_Task->facing & 0x1) {
         rot.vx = 0;
         angle  = g_Task->unk_09 & 0x3F;
         rot.vy = (u32)rsin(angle << 6) >> 3;

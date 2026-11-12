@@ -57,7 +57,7 @@ MATCH void func_801F70DC(void) {
     do {
         actor2 = &g_Actors[i & BYTE_MASK];
         g_Task = actor2;
-        if ((actor2->header.flags & 1) && (actor2->unk_06 == 6)) {
+        if ((actor2->header.flags & 0x1) && (actor2->unk_06 == 6)) {
             actor2->draw_layer = 5;
             func_8014D290();
         }
@@ -179,13 +179,22 @@ MATCH void func_801F763C(void) {
     cell3                                     = cell[3];
     FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 1;
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 1;
-    GFX_AllocPaletteFade(&g_Actors[work[3]], 0xF, 0, 0, 1);
-    GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 0xF, 1);
+    GFX_AllocPaletteFade(&g_Actors[work[3]], 15, 0, 0, 1);
+    GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 15, 1);
     g_Task->timer       = 32;
     g_Task->header.mode = 1;
 }
 
-INCLUDE_ASM(func_801F7958);
+MATCH void func_801F7958(void) {
+    if (g_Task->timer != 0) {
+        g_Actors[g_Task->unk_03].pos.y.fixed += 0x800;
+        g_Actors[g_Task->unk_04].pos.y.fixed -= 0x800;
+        g_Task->timer -= 1;
+    } else {
+        g_Task->timer       = 15;
+        g_Task->header.mode = 2;
+    }
+}
 
 INCLUDE_ASM(func_801F7A1C);
 

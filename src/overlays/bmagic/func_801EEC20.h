@@ -3,6 +3,6 @@
 MATCH void func_801EEC20(void) {
     Callback handlers[7];
 
-    __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
+    memcpy(handlers, D_801EEC04, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
 }
