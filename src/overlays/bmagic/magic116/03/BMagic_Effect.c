@@ -45,7 +45,35 @@ MATCH void func_801EEE34(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE7C);
+MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
+    POLY_G4* prim;
+    /* FAKE: retail reserves 8 bytes below point[] that no statement uses; pure C 60 of 79 instructions. */
+    FAKE_STACK_PADS(u8, 8);
+    s32 point[3];
+
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    point[0] = segment->head[0] + 0x1000;
+    point[1] = segment->head[1];
+    point[2] = segment->head[2];
+    Area_ProjectPoint(point, POLY_XY(prim, 0));
+    point[0] = segment->head[0] - 0x1000;
+    Area_ProjectPoint(point, POLY_XY(prim, 1));
+    point[0] = segment->tail[0] + 0x1000;
+    point[1] = segment->tail[1];
+    point[2] = segment->tail[2];
+    Area_ProjectPoint(point, POLY_XY(prim, 2));
+    point[0] = segment->tail[0] - 0x1000;
+    Area_ProjectPoint(point, POLY_XY(prim, 3));
+    prim->r0 = prim->r1 = segment->head_red;
+    prim->g0 = prim->g1 = segment->head_green;
+    prim->b0 = prim->b1 = segment->head_blue;
+    prim->r2 = prim->r3 = segment->tail_red;
+    prim->g2 = prim->g3 = segment->tail_green;
+    prim->b2 = prim->b3 = segment->tail_blue;
+    GFX_AddPrim(3, sizeof(POLY_G4));
+}
 
 MATCH u8* func_801EEFB8(void) {
     u8* record;
