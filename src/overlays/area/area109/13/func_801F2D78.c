@@ -4,23 +4,23 @@ MATCH s32 func_801F2D78(s32 arg0, s32 arg1) {
     s32 roll;
     u8* flag_id;
 
-    if ((arg0 & BYTE_MASK) != 0x1C) {
+    if ((arg0 & 0xFF) != 0x1C) {
         return 0;
     }
-    if ((arg1 & BYTE_MASK) != 6) {
+    if ((arg1 & 0xFF) != 6) {
         return 0;
     }
     if (g_Game.members[0].facing != FACING_RIGHT) {
         return 0;
     }
-    if (SYS_TestFlag(g_SceneEventFlags, 28) != 0) {
+    if (SYS_TestFlag(g_SceneEventFlags, 0x1C) != 0) {
         return 0;
     }
     flag_id = D_801F2E90;
     roll    = func_801F2D04() % 6;
     do {
         SYS_ClearFlag(g_SceneEventFlags, *flag_id);
-        if (roll & 0x1) {
+        if (roll & 1) {
             SYS_SetFlag(g_SceneEventFlags, *flag_id);
         }
         flag_id += 1;
