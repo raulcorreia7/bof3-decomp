@@ -347,7 +347,7 @@ MATCH void func_801F0078(void) {
         BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[slot].header.step  = 0;
         BMAGIC_EFFECT_SLOTS[slot].unk_04       = i;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = (i / 2) & 7;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = (i / 2) & 0x7;
         BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (i * 4) + 1;
         BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
         g_BattleEffectBattler->param.unk_0B += 1;

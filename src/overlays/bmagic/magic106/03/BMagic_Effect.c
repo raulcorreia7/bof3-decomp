@@ -12,7 +12,7 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
     count = 0;
     do {
-        if (D_801EF9F8[(u8)count << 5] & 1) {
+        if (D_801EF9F8[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801EFA14, (u8)count << 5);
             g_BMagicOrbitWork     = D_801EF9F8 + ((u8)count << 5);
@@ -21,7 +21,7 @@ MATCH void func_801EEC04(void) {
             g_BattleEffectBattler = saved;
         }
         count += 1;
-    } while ((u8)count < 0x60);
+    } while ((u8)count < 96);
 }
 
 INCLUDE_ASM(func_801EECE4);
@@ -47,7 +47,24 @@ MATCH void func_801EEF24(void) {
 /* func_801EEFAC */
 #include "overlays/bmagic/Effect_StartOrbit.h"
 
-INCLUDE_ASM(func_801EF16C);
+MATCH void func_801EF16C(void) {
+    s32 threshold;
+
+    g_BMagicOrbitWork->radius -= 2;
+    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
+    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
+    g_BMagicOrbitWork->unk_0B++;
+    if (g_BMagicOrbitWork->unk_09 < 16) {
+        g_BMagicOrbitWork->unk_09 += 2;
+    }
+    threshold = ((g_BMagicOrbitWork->unk_04 >> 5) * 8) + 0x20;
+    if (g_BMagicOrbitWork->radius <= threshold) {
+        g_BMagicOrbitWork->header.step++;
+        if (g_BMagicOrbitWork->unk_04 == 0) {
+            Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
+        }
+    }
+}
 
 /* func_801EF29C */
 #include "overlays/bmagic/Effect_StepOrbit.h"
@@ -106,8 +123,8 @@ INCLUDE_ASM(func_801EF5F4);
 MATCH u32 func_801EF914(void) {
     u8 index;
 
-    for (index = 0u; index < 0x60; index++) {
-        if ((D_801EF9F8[index << 5] & 1) == 0) {
+    for (index = 0u; index < 96; index++) {
+        if ((D_801EF9F8[index << 5] & 0x1) == 0) {
             D_801EF9F8[index << 5] |= 1;
             return index;
         }

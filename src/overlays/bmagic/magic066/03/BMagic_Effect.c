@@ -19,7 +19,7 @@ MATCH void func_801EEC70(void) {
     task->pos.x.fixed                  = battler->pos.x.fixed;
     task->pos.y.fixed                  = battler->pos.y.fixed;
     task->pos.z.fixed                  = battler->pos.z.fixed;
-    slot                               = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 17) & BYTE_MASK;
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     /* Copies arena palette rows 26 and 2 into the work copy with STP set, then restores row 2's color 0. */
@@ -50,7 +50,7 @@ MATCH void func_801EEDB8(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        slot                               = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 17) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;

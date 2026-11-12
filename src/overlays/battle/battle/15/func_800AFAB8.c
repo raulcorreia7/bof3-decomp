@@ -24,7 +24,7 @@ MATCH void func_800AFAB8(u8* record) {
     scale     = s_BattleCellRowScale[slot];
     product   = scale * remainder;
     row       = quotient;
-    if (flags & 4) {
+    if (flags & 0x4) {
         row = quotient + 0x10;
     }
     clut                               = g_GraphicsPaletteDst + ((row & BYTE_MASK) << 8);

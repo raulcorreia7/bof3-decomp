@@ -19,6 +19,6 @@ MATCH void func_800B0250(void) {
             }
         }
     }
-    Battle_AllocEffect(0, 0xA);
+    Battle_AllocEffect(0, 10);
     g_MenuCurrentPanel->state++;
 }

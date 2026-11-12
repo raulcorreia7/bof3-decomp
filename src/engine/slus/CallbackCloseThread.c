@@ -4,7 +4,7 @@
  * critical section.
  */
 MATCH void CallbackCloseThread(s32 callback_slot) {
-    D_80143B40[callback_slot].state = 0;
+    D_80143B40[callback_slot].state = CALLBACK_SLOT_EMPTY;
     EnterCriticalSection();
     CloseTh(D_80143B40[callback_slot].thread_id);
     ExitCriticalSection();

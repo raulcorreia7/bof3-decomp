@@ -1,7 +1,7 @@
 #include "boss018_16.h"
 
 MATCH void func_800C1DC4(void) {
-    if ((SYS_TestFlag(g_SceneFlags, 0x1E) != 0) || (SYS_TestFlag(g_SceneFlags, 0x23) != 0)) {
+    if ((SYS_TestFlag(g_SceneFlags, 30) != 0) || (SYS_TestFlag(g_SceneFlags, 35) != 0)) {
         if (((PartyMember*)g_Task)->slot == 4) {
             g_BattleCurrentEnemy->hp = D_801FD702;
         } else {

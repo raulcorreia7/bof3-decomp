@@ -8,7 +8,28 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC98);
 
-INCLUDE_ASM(func_801EEF08);
+MATCH void func_801EEF08(void) {
+    u32 slot;
+    u32 i;
+
+    if (g_Task->param.unk_0B == 0) {
+        i = 0;
+        do {
+            slot                               = Battle_AllocEffect(1, 42) & BYTE_MASK;
+            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].header.mode  = 0;
+            g_BattleEffects[slot].unk_0B       = i;
+            g_BattleEffects[slot].arg.unk_09   = i * 4 + 1;
+            g_Task->param.unk_0B += 1;
+            i++;
+        } while (i < 3);
+        func_800AEF98(4, 0);
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        g_Task->unk_09 = 8;
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
 
