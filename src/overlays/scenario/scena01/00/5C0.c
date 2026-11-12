@@ -235,7 +235,27 @@ MATCH void func_801FC890(void) {
 
 INCLUDE_ASM(func_801FC898);
 
-INCLUDE_ASM(func_801FCC24);
+MATCH void func_801FCC24(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            SND_StopSequence(0, 0);
+            SND_PlayBGM(0x1A, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            g_GameFlags |= 0x80;
+            func_801BE1B0(0xB);
+            g_SceneState.step_05 = 1;
+            break;
+        case 1:
+            if (g_ScriptVars[0] != 2) {
+                break;
+            }
+            Game_ClearScriptActive();
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_SceneState.step_05  = 0x2D;
+            g_SceneState.state_04 = 9;
+            break;
+    }
+}
 
 MATCH void func_801FCCF4(void) {
 }
