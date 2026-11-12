@@ -14,6 +14,12 @@ typedef struct PartyGrantQueue {
 } PartyGrantQueue;
 
 extern PartyGrantQueue D_80146327;
+
+/* A queue row's item word sits at an odd offset from the queue's odd base, so the row stays bytes. */
+static inline u16 PartyGrantQueue_Item(u8 slot) {
+    return *(u16*)&D_80146327.items[slot * 2];
+}
+
 extern volatile u16    D_801463B0;
 extern char            D_80149118[];
 extern u8*             D_801EB4F4;
@@ -36,6 +42,6 @@ extern u8              D_801F0CD4[]; /* item icon texture index, by Item_GetIcon
 extern void            func_801F09D4(void);
 void                   func_801F0A74(s16 x, s16 y, u8 clut, u8 category, u8 item, u8 amount, u8 unused);
 /* func_801F09F4 */
-extern void            Battle_DrawVictoryZenny(void);
+extern void         Battle_DrawVictoryZenny(void);
 
 #endif

@@ -8,7 +8,7 @@ MATCH void func_801F0650(void) {
 
     func_801F039C(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 280, g_MenuCurrentPanel->unk_09);
     for (slot = 0; slot < D_80146327.count; slot++) {
-        item = *(u16*)&D_80146327.items[slot * 2];
+        item = PartyGrantQueue_Item(slot);
         if (item != 0) {
             x_offset = (slot & 1) * 138 + 5;
             y_offset = (slot >> 1) * 13 + 4;
