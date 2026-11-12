@@ -8,7 +8,7 @@ MATCH void func_800C1A78(void) {
     if (g_Battle.encounter == 0xD) {
         g_BattleCurrentEnemy->base.max_hp  = 0xFFFF;
         g_BattleCurrentEnemy->stats.max_hp = 0xFFFF;
-        g_BattleCurrentEnemy->hp           = 0xFFFF;
+        g_BattleCurrentEnemy->hp           = 65535;
     }
     Area_FindSceneRecord(0xEF);
     Actor_SelectScript(0U);

@@ -9,8 +9,8 @@ MATCH void func_800C1AB4(void) {
     if (work->unk_09 == 0x30) {
         work->unk_48  = 2;
         spad          = g_Task;
-        spad->scale.x = 0x10000;
-        spad->scale.y = 0x10000;
+        spad->scale.x = ONE;
+        spad->scale.y = ONE;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_ENEMY, 2));
         g_Task->unk_04++;
     } else {
