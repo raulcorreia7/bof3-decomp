@@ -84,6 +84,7 @@ MATCH void func_801D1FA0(void) {
     D_801D8ED4.equipped_items[2]          = D_80144DF4;
     D_801D8ED4.equipped_items[3]          = D_80144DF5;
     D_801D8ED4.equipped_items[4]          = D_80144DF6;
+    /* @bug The trial set stores both accessories to the first accessory slot, so the second keeps its old value. */
     D_801D8ED4.equipped_items[4]          = D_80144DF7;
     D_801D8ED4.equipped_items[D_8014835E] = slot;
 }
