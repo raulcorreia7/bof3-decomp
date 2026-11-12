@@ -268,7 +268,34 @@ MATCH void func_801FC2F0(void) {
 
 INCLUDE_ASM(func_801FC380);
 
-INCLUDE_ASM(func_801FC6A8);
+MATCH void func_801FC6A8(void) {
+    u8* state;
+    u8  next;
+
+    state = &g_SceneState.step_05;
+    switch (*state) {
+        case 0:
+            if (!(g_UiWindowChannel & FRONTEND_FLAG_CONFIRM)) {
+                break;
+            }
+            next            = 1;
+            g_ScriptVars[0] = next;
+            SYS_SetFlag(g_SceneFlags, 0x3A);
+            func_801BE1B0(3);
+            func_801C601C(0);
+            *state = next;
+            break;
+        case 1:
+            if (g_ScriptVars[0] != 0x1C) {
+                break;
+            }
+            SYS_ClearFlag(g_SceneFlags, 0x3A);
+            Game_ClearScriptActive();
+            *state                = 0;
+            g_SceneState.state_04 = 0;
+            break;
+    }
+}
 
 MATCH void func_801FC778(void) {
     u8* state;
