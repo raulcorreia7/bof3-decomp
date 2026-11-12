@@ -522,7 +522,7 @@ void               func_800AC964(void);
 void               func_800AD074(u8 bit_index);
 s32                func_800AE108(u8 battler_index, s32 work_ptr);
 /* func_800AE1F8 */
- /* defined by the battle/battle/15 chain */
+/* defined by the battle/battle/15 chain */
 extern s32         D_80145FB4;
 /* func_800AE260 */
 void               func_800C1804(void);

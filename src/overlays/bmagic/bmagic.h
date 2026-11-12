@@ -362,7 +362,7 @@ void Effect_DrawTexturedQuad(void);
 void func_801F07A8(void);
 
 /* Prototypes the images of this group share. */
-u32 func_800AF6B8(u32, u32, s32, u32);
+u32  func_800AF6B8(u32, u32, s32, u32);
 void func_801EED38();
 void func_801EF174();
 void func_801EF250();
@@ -380,7 +380,7 @@ void func_801F00A8();
 void func_801F014C();
 void Effect_RecordTrail();
 void Effect_ClearTrail();
-u32 BMagic_AllocEffect();
+u32  BMagic_AllocEffect();
 void func_801F0454();
 void func_801F05A4();
 
