@@ -43,7 +43,19 @@ MATCH void func_801EEEF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF98);
+MATCH void func_801EEF98(void) {
+    u8 count;
+
+    g_PaletteFades[g_Task->timer].offset.red += 2;
+    g_PaletteFades[g_Task->timer].offset.green += 2;
+    g_PaletteFades[g_Task->timer].offset.blue += 2;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        g_Task->unk_09 = 4;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF0B4);
 
