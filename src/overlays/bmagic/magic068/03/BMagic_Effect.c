@@ -42,7 +42,7 @@ MATCH void func_801EF4A8(void) {
     }
 }
 
-void func_801EF4EC(void) {
+MATCH void func_801EF4EC(void) {
     s8 val;
 
     if (D_801EC2E4 == 0) {

@@ -257,7 +257,7 @@ MATCH void func_801F0310(void) {
     func_801F03D8();
 }
 
-void func_801F0364(void) {
+MATCH void func_801F0364(void) {
     u16 i;
     u32 off;
 
@@ -273,7 +273,7 @@ void func_801F0364(void) {
     func_801E5988();
 }
 
-void func_801F03D8(void) {
+MATCH void func_801F03D8(void) {
     u16 count;
     u16 i;
     u32 off;

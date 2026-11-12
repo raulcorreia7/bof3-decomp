@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-void func_801EEC18(void) {
+MATCH void func_801EEC18(void) {
     Callback handlers[5];
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
