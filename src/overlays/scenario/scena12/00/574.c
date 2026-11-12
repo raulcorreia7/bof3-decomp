@@ -158,7 +158,29 @@ MATCH void func_801F886C(void) {
 MATCH void func_801F88A8(void) {
 }
 
-INCLUDE_ASM(func_801F88B0);
+MATCH void func_801F88B0(void) {
+    u8* state;
+    u8* script;
+
+    state = &D_80146875;
+    switch (*state) {
+        case 0xA:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                g_ScriptVars[0] = 0x32;
+                *state          = 0xB;
+            }
+            return;
+        case 0xB:
+            script = &D_80146865;
+            if (*script == 0xA) {
+                *script = 0;
+                Game_ClearScriptActive();
+                *state     = 0;
+                D_80146874 = 0;
+            }
+            return;
+    }
+}
 
 MATCH void func_801F894C(void) {
     switch (g_SceneState.step_05) {
