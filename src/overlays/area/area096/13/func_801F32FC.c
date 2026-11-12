@@ -1,3 +1,7 @@
 #include "area096_13.h"
 
-INCLUDE_ASM(func_801F32FC);
+#include "overlays/area/Area_StepToGround.h"
+
+MATCH void func_801F32FC(void) {
+    AREA_STEP_TO_GROUND();
+}
