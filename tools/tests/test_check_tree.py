@@ -38,6 +38,7 @@ def run_tree(
     return subprocess.run(
         ["sh", "tools/check_tree.sh", "HEAD~1"],
         cwd=repo,
+        check=False,
         capture_output=True,
         text=True,
     )

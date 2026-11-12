@@ -50,6 +50,7 @@ def added_lines(ref: str):
     """Yield (path, line, text) for each line a change adds under include/ or src/."""
     diff = subprocess.run(
         ["git", "diff", "-U0", f"{ref}...HEAD", "--", *ROOTS],
+        check=False,
         capture_output=True,
         text=True,
     ).stdout
