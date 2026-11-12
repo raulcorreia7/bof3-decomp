@@ -1,11 +1,11 @@
 #include "engine/slus/slus.h"
 
-/* walks a message control stream (the switch is on the control byte) and draws the stream it describes: control
+/* walks a message control stream (the switch is on the control byte) and draws the text it describes: control
  * bytes 1, 3-9 select the glyph source (item, character or party tables) and advance the cursor; returns the stream
  * position after the last byte it consumed.
  */
 #ifdef NON_MATCHING
-NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* stream) {
+NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
     s32 temp_v0_136;
     s32 var_s1;
     s32 var_s3;
@@ -19,7 +19,7 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* stream) {
     u8  temp_v1_32;
     u8  var_s5;
 
-    var_s0 = stream;
+    var_s0 = text;
     var_s7 = x;
     var_s6 = y;
     var_s1 = 0;

@@ -1160,7 +1160,7 @@ extern void             func_8015A1D8(void);
 extern void             func_8015A264(void);
 /* func_8015A2B0 */
 void                    UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
-extern u8*              UI_DrawTextAt(s32 x, s32 y, u8* stream);
+extern u8*              UI_DrawTextAt(s32 x, s32 y, u8* text);
 void                    func_8015A554(void);
 extern void             func_8015A9A4(void);
 s8                      func_8015AD00(PanelSortItem* sort_list);
