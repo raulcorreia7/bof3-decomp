@@ -227,6 +227,8 @@ void         func_8015B4B0(void* matrix);
 s8           Actor_FindScriptSlot(s32 code);
 /* func_8015A944 */
 void         func_8015A944(void);
+/* func_8015AC8C */
+void         func_8015AC8C(u8* panel);
 /* func_8015B580 */
 void         SYS_SetFlag(void* bits, u8 bit_index);
 /* func_8015B5A8 */

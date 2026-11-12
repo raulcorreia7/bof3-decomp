@@ -550,7 +550,6 @@ void func_80117BF4(void);
 void Actor_BeginScript(u8 raw_selector, u8 raw_code);
 void Area_ClearCell(s32 x, s32 y);
 void func_8015A7E8(void);
-s32  func_8015AC8C(s32);
 s32  func_8015B870(u8 value);
 void Party_ShowBattlers(void);
 s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);

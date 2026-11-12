@@ -5,7 +5,7 @@ MATCH void func_801F5CD0(void) {
     u8  slot;
 
     g_Task->direction_08 = g_Game.members[0].facing;
-    func_8015AC8C(FIELD(s32, g_AreaLoads[g_GameAreaId], 0x8u) + 8);
+    func_8015AC8C((u8*)(FIELD(s32, g_AreaLoads[g_GameAreaId], 0x8u) + 8));
     g_Task->tint.signed_bytes.unk_5D = -0x80;
     g_Task->tint.signed_bytes.unk_5E = -0x80;
     g_Task->tint.signed_bytes.unk_5F = -0x80;

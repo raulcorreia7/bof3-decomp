@@ -24,7 +24,7 @@ MATCH void func_801A68C0(u8* script) {
     tile                 = FIELD(s32, g_AreaLoads[tile], 8u) + offset;
     g_Task->direction_08 = script[0] & 0xF;
     func_801A4AA8();
-    func_8015AC8C(tile);
+    func_8015AC8C((u8*)tile);
     func_801A4B80(4);
 
     work = g_Task;
