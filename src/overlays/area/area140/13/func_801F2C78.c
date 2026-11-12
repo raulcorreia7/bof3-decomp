@@ -11,10 +11,10 @@ MATCH void func_801F2C78(void) {
         g_Task->header.step = 5;
     } else {
         work = g_Task;
-        if (abs(g_Game.members[0].pos.x.fixed - ((((s32)COORD_INT(work->pos.x) + 1) << 16) | COORD_HALF)) > COORD_HALF) {
+        if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(work->pos.x) + 1) | COORD_HALF)) > COORD_HALF) {
             goto call;
         }
-        if (abs(g_Game.members[0].pos.y.fixed - ((s32)COORD_INT(work->pos.y) << 16)) > TO_COORD(1) && abs(g_Game.members[0].pos.y.fixed - (((s32)COORD_INT(work->pos.y) + 1) << 16)) > TO_COORD(1)) {
+        if (abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(work->pos.y))) > TO_COORD(1) && abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(work->pos.y) + 1)) > TO_COORD(1)) {
             goto call;
         }
         screen_y          = -256;
