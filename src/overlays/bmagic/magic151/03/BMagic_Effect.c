@@ -104,7 +104,25 @@ MATCH void func_801EF318(void) {
     SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
-INCLUDE_ASM(func_801EF388);
+/* When the effect ticker is one, marks every party member's handler busy and loads the dragon-form archive
+ * the battler's facing selects. */
+MATCH void func_801EF388(void) {
+    s32 archive_id;
+    u8  i;
+
+    if (g_Task->param.unk_0B == 1) {
+        for (i = 0; i < 3; i++) {
+            g_Game.members[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        }
+        if (g_BattleEffectBattler->facing < 2) {
+            archive_id = D_800B499C[g_Battle.dragon_form][0][0];
+        } else {
+            archive_id = D_800B499C[g_Battle.dragon_form][1][0];
+        }
+        EMI_LoadArchive(archive_id);
+        g_Task->unk_03 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF484);
 
