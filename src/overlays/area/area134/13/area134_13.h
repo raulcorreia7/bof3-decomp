@@ -72,7 +72,4 @@ extern s32   D_80146954;
 void func_801F48B0(void);
 void func_801F4B6C(void);
 
-extern PartyMember* D_80146250;
-extern s32          D_80146144;
-
 #endif

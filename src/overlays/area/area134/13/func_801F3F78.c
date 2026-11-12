@@ -11,10 +11,10 @@ MATCH void func_801F3F78(void) {
     if (*state == 0xFE) {
         func_80196070();
     }
-    actor      = g_Task;
-    D_80146250 = (PartyMember*)&D_80146110;
+    actor          = g_Task;
+    g_Game.current = (PartyMember*)&D_80146110;
     TASK_SET(&D_80146110);
-    if (D_80146144 > 0x33FFFF) {
+    if (g_Game.members[2].pos.x.fixed > 0x33FFFF) {
         *state     = 0xFF;
         D_80146866 = 0;
         D_80146867 = 0;
