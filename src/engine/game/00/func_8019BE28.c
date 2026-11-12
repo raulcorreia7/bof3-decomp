@@ -12,7 +12,7 @@ MATCH void func_8019BE28(void) {
             work->timer = (work->timer - 1);
         }
     }
-    if (g_Task->scale.x > 0x1FFFF) {
+    if (g_Task->scale.x > 131071) {
         if ((g_AreaCameraMoving == 0) && (g_Task->timer == 0)) {
             func_8019BFD4();
             Actor_Clear();

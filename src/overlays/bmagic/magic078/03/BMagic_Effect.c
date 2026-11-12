@@ -31,7 +31,33 @@ MATCH void func_801EEC04(void) {
     GFX_AddPrim(4, 0xC);
 }
 
-INCLUDE_ASM(func_801EECFC);
+MATCH void func_801EECFC(void) {
+    PartyMember* actor;
+    PartyMember* battler;
+    u8           first;
+    u8           slot;
+
+    actor                               = g_Battle.selected_actor;
+    first                               = Battle_AllocEffect(1, 0xD);
+    g_BattleEffects[first].target.party = g_Task;
+    g_BattleEffects[first].header.mode  = 0;
+    g_BattleEffects[first].arg.unk_09   = 0;
+    battler                             = g_BattleEffectBattler;
+    g_BattleEffects[first].pos.x.fixed  = battler->pos.x.fixed;
+    g_BattleEffects[first].pos.y.fixed  = battler->pos.y.fixed;
+    g_BattleEffects[first].pos.z.fixed  = battler->pos.z.fixed + TO_COORD(512);
+    slot                                = Battle_AllocEffect(1, 0xD);
+    g_BattleEffects[slot].target.effect = &g_BattleEffects[first];
+    g_BattleEffects[slot].unk_4C        = g_Task;
+    g_BattleEffects[slot].header.mode   = 1;
+    g_BattleEffects[slot].arg.unk_09    = 0;
+    g_BattleEffects[slot].pos.x.fixed   = actor->pos.x.fixed;
+    g_BattleEffects[slot].pos.y.fixed   = actor->pos.y.fixed;
+    g_BattleEffects[slot].pos.z.fixed   = actor->pos.z.fixed + TO_COORD(256);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+}
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
@@ -127,7 +153,7 @@ MATCH void func_801EFEB8(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    if (work->slot == 0xD) {
+    if (work->slot == 13) {
         rot.vz = work->unk_0C;
     }
     pos.vx = (work->pos.x.fixed >> 9) - 0x4000;

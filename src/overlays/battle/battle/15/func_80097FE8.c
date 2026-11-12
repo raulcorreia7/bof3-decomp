@@ -26,7 +26,7 @@ MATCH void func_80097FE8(void) {
     active_selection_flags              = actor_turn->action_flags.value;
     VOL(u16, g_BattleChoicePanel[4])    = 0x140u;
     VOL(u16, g_BattleChoicePanel[6])    = 0x3Fu;
-    VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 2u);
+    VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 0x2u);
     D_80148656                          = message_slot[5];
     /* FAKE: alias keeps the work base in the register. */
     FAKE_OPAQUE(work);

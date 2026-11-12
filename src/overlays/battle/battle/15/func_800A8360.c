@@ -25,7 +25,7 @@ MATCH void func_800A8360(void) {
     g_MenuPanelTasks[16].unk_0C       = 0u;
     g_MenuPanelTasks[16].unk_09       = 0u;
     g_MenuPanelTasks[16].u.message.id = 0;
-    g_MenuPanelTasks[16].pos.y        = 0x3Fu;
+    g_MenuPanelTasks[16].pos.y        = 63u;
     work += 0x6C;
     *work      = 0u;
     D_801485DD = eight;

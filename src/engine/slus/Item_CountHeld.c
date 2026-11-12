@@ -11,9 +11,9 @@ MATCH u8 Item_CountHeld(u32 category) {
     count = 0;
     p     = D_801C893C[category & BYTE_MASK];
     if ((category & BYTE_MASK) < 4u) {
-        limit = 0x80;
+        limit = 128;
     } else {
-        limit = 0x20;
+        limit = 32;
     }
     index = 0;
     if (limit != 0) {

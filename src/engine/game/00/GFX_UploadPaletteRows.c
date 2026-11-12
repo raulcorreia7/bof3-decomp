@@ -28,7 +28,7 @@ MATCH void GFX_UploadPaletteRows(void) {
     flags       = work[0x24];
     stride      = s_PaletteFadeStrides[table_index];
     product     = stride * remainder;
-    if ((flags & 4u) != 0u) {
+    if ((flags & 0x4u) != 0u) {
         start = quotient + 0x10u;
     } else {
         start = quotient;

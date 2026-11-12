@@ -8,7 +8,7 @@ MATCH void func_801F4A0C(void) {
             }
             break;
         case 1:
-            Game_RequestAreaChange(0xA7, 0xB0000, 0x698000, 0x89);
+            Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, 0xB0000, 0x698000, 0x89);
             g_SceneEventMode = SCENE_EVENT_NONE;
             g_SceneEventStep = 0;
             break;
@@ -19,7 +19,7 @@ MATCH void func_801F4A0C(void) {
         case 11:
             if (g_ScriptVars[0] == 1) {
                 SND_PlayCue(0x204);
-                SYS_SetFlag(g_SceneEventFlags, 0x91);
+                SYS_SetFlag(g_SceneEventFlags, 145);
                 g_SceneEventStep = 12;
             }
             break;

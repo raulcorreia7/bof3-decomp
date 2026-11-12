@@ -6,7 +6,7 @@ MATCH void func_800ADB74(void) {
     BattleSlot*  row;
     s32          slot;
 
-    if ((g_MenuPanelTasks[18].active & 1) == 0) {
+    if ((g_MenuPanelTasks[18].active & 0x1) == 0) {
         BATTLE_WORK->header.mode = 2;
         BATTLE_WORK->header.step = 0;
         return;

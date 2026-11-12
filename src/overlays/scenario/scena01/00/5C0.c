@@ -35,7 +35,7 @@ MATCH void func_801F73FC(void) {
 
 MATCH void func_801F7480(void) {
     func_801F7678(g_Task->timer);
-    if ((g_FrameCount & 1) == 0) {
+    if ((g_FrameCount & 0x1) == 0) {
         func_801F7AE4();
     }
     func_801F7C54();
@@ -48,7 +48,7 @@ MATCH void func_801F7480(void) {
 
 MATCH void func_801F752C(void) {
     func_801F7678(0xFF);
-    if ((g_FrameCount & 1) == 0) {
+    if ((g_FrameCount & 0x1) == 0) {
         func_801F7AE4();
     }
     func_801F7C54();
@@ -75,7 +75,7 @@ MATCH void func_801F7644(void) {
 
 INCLUDE_ASM(func_801F7678);
 
-INCLUDE_ASM(func_801F7A24);
+#include "shared/Area_DrawSparkCell.h"
 
 #include "shared/Area_ClearWorkColumn.h"
 
@@ -83,11 +83,53 @@ INCLUDE_ASM(func_801F7AE4);
 
 INCLUDE_ASM(func_801F7C54);
 
-INCLUDE_ASM(func_801F7D04);
+MATCH void func_801F7D04(void) {
+    s16 screen_x;
+    u16 next_x;
+    s32 red;
+    s32 blue;
+
+    switch (g_AreaSceneMode) {
+        case 0:
+            break;
+        case 1:
+            g_Task->screen_x = 0;
+            func_801F7DCC(64, 90, 255);
+            break;
+        case 2:
+            screen_x = g_Task->screen_x;
+            if (screen_x < 191) {
+                next_x           = screen_x + 1;
+                g_Task->screen_x = next_x;
+            }
+            red  = (s16)g_Task->screen_x;
+            blue = 255 - red * 2;
+            red += 64;
+            if (blue < 0) {
+                blue = 0;
+            }
+            func_801F7DCC(red, 90, blue);
+            func_801F7EDC();
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F7DCC);
 
-INCLUDE_ASM(func_801F7EDC);
+MATCH void func_801F7EDC(void) {
+    POLY_F4* prim;
+    s32      tpage;
+
+    tpage = getTPage(1, 1, 320, 256);
+    GFX_SET_DRAW_MODE(tpage);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+    prim = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(prim);
+    SetSemiTrans(prim, 1);
+    setXYWH(prim, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    setRGB0(prim, (s16)g_Task->screen_x / 8, 0, 0);
+    GFX_AddPrim(3, sizeof(POLY_F4));
+}
 
 MATCH void func_801F7FC4(void) {
     SYS_DISPATCH_BYTE(D_801FE29C, D_80146872);
@@ -111,7 +153,34 @@ MATCH void func_801F8AA0(void) {
 MATCH void func_801F8ADC(void) {
 }
 
-INCLUDE_ASM(func_801F8AE4);
+MATCH void func_801F8AE4(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            if (g_ScriptVars[0] == 1) {
+                g_ScriptVars[1]      = 1;
+                g_ScriptVars[2]      = 1;
+                g_SceneState.step_05 = 1;
+                func_8019FA28(0x9, 0x470000, 0x1D0000, 3);
+            }
+            break;
+        case 1:
+            g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+            func_801C601C(0);
+            g_SceneState.step_05 = 2;
+            break;
+        case 2:
+            if (g_ScriptVars[0] == 0x1E) {
+                SYS_SetFlag(g_SceneFlags, 0);
+                g_ScriptVars[0]       = 0;
+                g_ScriptVars[1]       = 0;
+                g_ScriptVars[2]       = 0;
+                g_SceneState.step_05  = 0;
+                g_SceneState.state_04 = 0;
+                func_8019FA28(0xA, 0x2B0000, 0x200000, 3);
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F8C0C);
 
@@ -159,7 +228,7 @@ MATCH void func_801FCCFC(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x18);
+            Message_StartAreaMessage(24);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -181,7 +250,7 @@ MATCH void func_801FCD9C(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x34);
+            Message_StartAreaMessage(52);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -201,7 +270,7 @@ MATCH void func_801FCE30(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(0x34);
+            Message_StartAreaMessage(52);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = 1;
             return;
@@ -227,12 +296,12 @@ MATCH void func_801FD484(void) {
 }
 
 MATCH void func_801FD48C(void) {
-    if (SYS_TestFlag(g_SceneFlags, 0x14) == 0) {
+    if (SYS_TestFlag(g_SceneFlags, 20) == 0) {
         *g_ScriptVars = 0;
         Game_SetScriptActive();
         D_80146875 = 0;
         D_80146874 = 0x12;
-        SYS_SetFlag(g_SceneFlags, 0x14U);
+        SYS_SetFlag(g_SceneFlags, 20U);
     }
 }
 
@@ -268,9 +337,37 @@ MATCH void func_801FD5C4(void) {
     g_SceneState.state_04 = 17;
 }
 
-INCLUDE_ASM(func_801FD60C);
+MATCH void func_801FD60C(Actor* actor) {
+    Game_SetScriptActive();
+    g_ScriptVars[0]      = 10;
+    g_ScriptVars[1]      = 0;
+    g_ScriptVars[2]      = 0;
+    actor->header.mode   = 4;
+    actor->unk_7E        = 0;
+    actor->unk_7B        = 0;
+    actor->unk_77        = 10;
+    g_Task->direction_08 = g_Game.members[0].facing ^ 4;
+    func_8015BAC4(g_Task->direction_08);
+    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    g_SceneState.step_05  = 10;
+    g_SceneState.state_04 = 13;
+}
 
-INCLUDE_ASM(func_801FD6CC);
+MATCH void func_801FD6CC(Actor* actor) {
+    Game_SetScriptActive();
+    actor->header.mode   = 4;
+    actor->unk_7B        = 0;
+    actor->unk_77        = 0xA;
+    g_Task->direction_08 = g_Game.members[0].facing ^ 0x4;
+    func_8015BAC4(g_Task->direction_08);
+    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    g_ScriptVars[0]       = 0;
+    g_ScriptVars[1]       = 0;
+    g_ScriptVars[2]       = 0;
+    g_ScriptVars[3]       = 0;
+    g_SceneState.step_05  = 13;
+    g_SceneState.state_04 = 13;
+}
 
 MATCH void func_801FD788(Actor* actor) {
     Game_SetScriptActive();
@@ -289,7 +386,19 @@ MATCH void func_801FD788(Actor* actor) {
     g_SceneState.state_04 = 13;
 }
 
-INCLUDE_ASM(func_801FD84C);
+MATCH void func_801FD84C(Actor* actor) {
+    Game_SetScriptActive();
+    actor->header.mode   = 4;
+    actor->unk_7E        = 0;
+    actor->unk_7B        = 0;
+    actor->unk_77        = 0xB;
+    g_Task->direction_08 = g_Game.members[0].facing ^ 0x4;
+    func_8015BAC4(g_Task->direction_08);
+    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    g_SceneState.step_05  = 16;
+    g_ScriptVars[3]       = 0;
+    g_SceneState.state_04 = 13;
+}
 
 MATCH void func_801FD8F8(void) {
     g_ScriptVars[0] = 0x64;

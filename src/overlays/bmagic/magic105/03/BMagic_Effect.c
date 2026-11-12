@@ -13,7 +13,7 @@ MATCH void func_801EEC14(void) {
     BMagic_DispatchTaskPair(func_801EED1C, Effect_PlayOnZeroTick);
     count = 0;
     do {
-        if (BMAGIC_EFFECT_SLOTS[(u8)count].header.flags & 1) {
+        if (BMAGIC_EFFECT_SLOTS[(u8)count].header.flags & 0x1) {
             saved_work            = g_Task;
             saved_active          = g_BattleEffectBattler;
             swap                  = BMAGIC_EFFECT_SLOTS[(u8)count].target.party;
@@ -65,7 +65,29 @@ MATCH void func_801EF06C(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EF124);
+MATCH void func_801EF124(void) {
+    u8 slot;
+    u8 tick;
+
+    if ((g_FrameCount & 0x3) == (g_Task->unk_04 & 0x3)) {
+        slot = BMagic_AllocEffect();
+        if (slot != GAME_NONE) {
+            BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+            BMAGIC_EFFECT_SLOTS[slot].header.step  = 0;
+            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = g_Task->unk_09;
+            BMAGIC_EFFECT_SLOTS[slot].unk_10       = g_Task->unk_10;
+            g_Task->param.unk_0B += 1;
+        }
+    }
+    if (g_FrameCount & 0x1) {
+        tick           = g_Task->unk_09 + 1;
+        g_Task->unk_09 = tick;
+        if (tick == 0x20) {
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 MATCH void func_801EF250(void) {
     u8 timer;

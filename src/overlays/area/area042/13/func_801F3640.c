@@ -3,7 +3,7 @@
 MATCH void func_801F3640(void) {
     Actor* actor;
 
-    if (SYS_TestFlag(g_SceneEventFlags, 0x11)) {
+    if (SYS_TestFlag(g_SceneEventFlags, 17)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
         actor               = g_Task;
         actor->param.unk_0B = 0x80;

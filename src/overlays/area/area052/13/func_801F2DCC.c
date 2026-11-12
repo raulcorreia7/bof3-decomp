@@ -9,7 +9,7 @@ MATCH void func_801F2DCC(void) {
         g_Task->timer = 0;
         g_Task->unk_06 += 1;
     }
-    func_801F31C0();
+    Area_UpdateEffectRows();
     if (g_Task->unk_06 == g_Task->param.unk_0B) {
         g_Task->header.mode += 1;
     }

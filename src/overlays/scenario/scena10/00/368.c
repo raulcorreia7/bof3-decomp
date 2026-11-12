@@ -81,7 +81,7 @@ INCLUDE_ASM(func_801F95B8);
 
 MATCH void func_801F9FC4(void) {
     D_1F800000.view.area.entity_counter = Actor_FindFree();
-    if (D_1F800000.view.area.entity_counter != 0xFF) {
+    if (D_1F800000.view.area.entity_counter != 255) {
         func_801A4D54(D_801FE938);
     }
 }
@@ -109,7 +109,7 @@ INCLUDE_ASM(func_801FA98C);
 
 MATCH void func_801FC220(void) {
     if (D_801FE9DC != 0) {
-        s8 step                  = D_801FE94C[g_FrameCount & 3];
+        s8 step                  = D_801FE94C[g_FrameCount & 0x3];
         g_AreaCameraRefreshCount = 2;
         g_AreaCameraOffsetY += step * 4;
     }
@@ -121,7 +121,7 @@ MATCH void func_801FC830(void) {
     if (g_SceneState.step_05 == 1) {
         if (g_GameStateIndex != 2) {
             func_801BE1B0(2);
-            SYS_SetFlag(g_SceneFlags, 0x34);
+            SYS_SetFlag(g_SceneFlags, 52);
             g_SceneState.state_04 = 0;
             g_SceneState.step_05  = 0;
         }
@@ -202,14 +202,14 @@ MATCH void func_801FDA0C(Actor* actor) {
 
     Game_SetScriptActive();
     func_801BE1B0(1);
-    SYS_SetFlag(g_SceneFlags, 0x15);
+    SYS_SetFlag(g_SceneFlags, 21);
     state = &D_80146875;
     *state += 1;
     actor->unk_7E += 1;
 }
 
 MATCH void func_801FDA74(void) {
-    SYS_SetFlag(g_SceneFlags, 0x19U);
+    SYS_SetFlag(g_SceneFlags, 25U);
 }
 
 MATCH void func_801FDA9C(void) {
@@ -291,6 +291,19 @@ MATCH void func_801FE5B0(void) {
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 
-INCLUDE_ASM(func_801FE63C);
+MATCH void func_801FE63C(void) {
+    u8 ids[PARTY_SLOT_COUNT];
+    u8 slot;
+
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        ids[slot] = g_Game.members[slot].chr.character_id;
+    }
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        if (ids[slot] != CHAR_ID_RYU_ADULT) {
+            Party_RemoveMember(ids[slot]);
+        }
+    }
+    Party_LoadPalettes();
+}
 
 #include "overlays/scenario/Scene_StashPartyExceptRyuAdult.h"

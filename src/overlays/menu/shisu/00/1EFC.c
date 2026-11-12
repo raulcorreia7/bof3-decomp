@@ -4,7 +4,40 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801D2ADC);
+MATCH void func_801D2ADC(void) {
+    u8  saved[3];
+    s8  shade;
+    u8* green;
+    u8* blue;
+
+    D_801DA100 = D_801D9688[g_MenuStatusItems.unk_0B];
+    saved[0]   = D_801DA11D;
+    saved[1]   = D_801DA11E;
+    saved[2]   = D_801DA11F;
+    if (D_801DA11D > g_MenuStatusItems.used[3] * 3) {
+        D_801DA11D -= g_MenuStatusItems.used[3] * 3;
+    } else {
+        D_801DA11D = 0;
+    }
+    green = &D_801DA11E;
+    if (0xFF - *green > g_MenuStatusItems.used[3] * 3) {
+        shade = *green + g_MenuStatusItems.used[3] * 3;
+    } else {
+        shade = -1;
+    }
+    *green = shade;
+    FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
+    blue = &D_801DA11F;
+    if (*blue > g_MenuStatusItems.used[3] * 3) {
+        *blue -= g_MenuStatusItems.used[3] * 3;
+    } else {
+        *blue = 0;
+    }
+    func_801D2308(&D_801DA0C0);
+    D_801DA11D = saved[0];
+    D_801DA11E = saved[1];
+    D_801DA11F = saved[2];
+}
 
 MATCH void func_801D2C0C(void) {
     SYS_DISPATCH_BYTE(D_801D9720, D_801DA049);
@@ -105,7 +138,16 @@ MATCH void Menu_DrawPanelCursor(void) {
     Menu_DrawCursorSprite(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 0);
 }
 
-INCLUDE_ASM(func_801D3018);
+MATCH void func_801D3018(void) {
+    s16 id;
+
+    g_MenuStatusTask1StateFuncs[g_MenuCurrentPanel->state]();
+    Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    id = (s16)g_MenuCurrentPanel->u.message.id;
+    if (id != 0) {
+        UI_DrawText((s16)(g_MenuCurrentPanel->pos.x + 7), (s16)(g_MenuCurrentPanel->pos.y + 3), 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
+    }
+}
 
 MATCH void func_801D30E4(void) {
     Menu_SlidePanelUp();
@@ -272,11 +314,11 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             }
         }
         n++;
-        y += 0xD;
+        y += 13;
         list++;
     } while (n < 10);
     x = panel->pos.x + 0x4E;
-    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 0x10, D_801D9EA4[panel->group_first]);
+    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 16, D_801D9EA4[panel->group_first]);
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, 1);
     flags = FIELD(u8, panel, 0x9u);

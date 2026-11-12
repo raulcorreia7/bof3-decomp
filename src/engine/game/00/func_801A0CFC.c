@@ -35,8 +35,8 @@ MATCH void func_801A0CFC(Actor* entity) {
     if (((value & BYTE_MASK) != GAME_NONE) && (g_Task->timer != 0)) {
         g_Task->unk_03       = g_Task->header.mode;
         g_Task->header.mode  = 0x0A;
-        entity->unk_79       = (value & 7);
-        g_Task->direction_08 = (saved & 7);
+        entity->unk_79       = (value & 0x7);
+        g_Task->direction_08 = (saved & 0x7);
         work                 = (u8*)g_Task;
         work[0x0A]           = 0;
         work[9]              = 0;

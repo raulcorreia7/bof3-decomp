@@ -12,6 +12,7 @@
 #define SCRATCH_ROW_STRIDE 0x18
 
 extern u8 D_801F44B8[];
+extern s8 D_801F5071;
 
 /* One of the sixteen effect rows at the area work window: a rising, fading
  * textured quad. */
@@ -40,8 +41,11 @@ typedef struct AreaTriggerRect {
 ASSERT_SIZE(AreaTriggerRect, 4);
 
 extern AreaTriggerRect D_801F510C[2];
+void                   func_801F2EC8(AreaEffectRow* row);
 void                   func_801F3084(void);
-s32                    func_801F31C0();
+void                   func_801F3194(void);
+/* func_801F31C0 */
+s32                    Area_UpdateEffectRows(void);
 void                   func_801F3C4C(s32 x, s32 y);
 
 void func_801F431C(void);

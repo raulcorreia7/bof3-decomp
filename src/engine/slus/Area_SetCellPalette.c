@@ -54,7 +54,7 @@ MATCH s32 Area_SetCellPalette(s32 x, s32 y) {
                 object         = (s32*)((*MEM_PTR(u16, (MAP_BUNDLE_BASE + 0x28)) * 4) + MAP_BUNDLE_BASE + (command & HALF_MASK) * 4);
                 value          = *object;
                 if ((value & 0xF001) == 0x8000) {
-                    *object = value | 1;
+                    *object = value | 0x1;
                     changed = 1;
                 }
             }

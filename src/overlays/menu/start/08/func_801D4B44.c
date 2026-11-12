@@ -23,7 +23,7 @@ MATCH void func_801D4B44(void) {
                 c0 = *row;
                 if (c0 != 0) {
                     c1 = *nxt;
-                    if ((c1 != 0) && !(g_Items[c0].flags & 1) && (g_Items[c1].flags & 1)) {
+                    if ((c1 != 0) && !(g_Items[c0].flags & 0x1) && (g_Items[c1].flags & 0x1)) {
                         Menu_SwapBytes(row, nxt);
                         Menu_SwapBytes(mirror, mirror + 1);
                     }

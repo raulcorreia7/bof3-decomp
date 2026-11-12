@@ -14,8 +14,8 @@ MATCH void Fishing_DrawCatchIcon(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     if (sprite_index != GAME_NONE) {
         /* FAKE: base-hoist retains CLUT construction register order. */
         clut = (((icon_index >> 4) + 0x1EB) << 6);
-        clut |= icon_index & 0x0F;
+        clut |= icon_index & 0xF;
         sprite->clut = clut;
-        setUV0(sprite, ((sprite_index & 3) << 6), ((sprite_index >> 2) * 40));
+        setUV0(sprite, ((sprite_index & 0x3) << 6), ((sprite_index >> 2) * 40));
     }
 }

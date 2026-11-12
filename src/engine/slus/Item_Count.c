@@ -25,7 +25,7 @@ MATCH s32 Item_Count(u8 category, u8 item, u8 mode) {
     count = 0;
     for (i = 0; i < CHARACTER_COUNT; i++) {
         record = &g_Characters[i];
-        if (record->unk_07 & 1) {
+        if (record->unk_07 & 0x1) {
             switch (category) {
                 case ITEM_CAT_ITEM:
                 default:

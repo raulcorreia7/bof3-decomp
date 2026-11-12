@@ -26,7 +26,7 @@ MATCH void func_801D98BC(void) {
     if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (D_801ED68C == 0) {
             func_801DAC1C(*pad);
-        } else if (g_GameRequestFlags & 1) {
+        } else if (g_GameRequestFlags & 0x1) {
             func_801DAE14(*pad);
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
