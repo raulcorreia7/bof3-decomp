@@ -104,7 +104,9 @@ curl -fL https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1
 
 Run each as `meson compile -C build/meson <name>`. `<image>` is a target id with `/` written as `+`.
 A check that compares with a base ref uses the newest of `public/main`, `origin/main` and `main`,
-the rule in `tools/lib/baseref.sh`.
+the rule in `tools/lib/baseref.sh`, and compares its merge base with HEAD, so a branch that is
+behind does not look as if it dropped what the newer commits added. CI has no disc and runs no byte
+check: the local `check` on every touched image is the proof.
 
 | Name              | Does                                                                                                                                                                                                                                                                                                         |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -194,7 +196,8 @@ how each is made. `meson.build` turns that into one Ninja edge per object, link 
 
 A tracked data file with one record per row is JSON Lines (`.jsonl`): one JSON object per line,
 UTF-8, no trailing spaces, a fixed key order, and the row order the file keeps. Free text needs no
-quoting. `config/attempts.jsonl` holds the failed attempts. The build graph that `tools/split.py`
+quoting. `config/attempts.jsonl` holds the failed attempts and
+`config/sdk/library-units.jsonl` the SDK units. The build graph that `tools/split.py`
 prints for `meson.build` is the exception: it stays tab-separated, because Meson has no JSON parser
 and it is a pipe, not a file.
 
@@ -261,9 +264,9 @@ blocks, so a twin whose value is used after the first branch shares a statement 
 
 ## PsyQ
 
-The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.csv` records one
-row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few link
-retail split assembly because no member object reproduces them. The two
+The retail link used PsyQ 3.7 for every runtime library. `config/sdk/library-units.jsonl` records
+one row per SDK unit and each target's split: units reproduce from a 3.7 member object, and a few
+link retail split assembly because no member object reproduces them. The two
 executables link all their SDK code (`slus_004_22` and `logo`); the EMI overlays link none and call
 the main executable. Both executables carry the SCE 3.7 version word `DA 94 37 00`.
 
@@ -318,10 +321,9 @@ and `INCLUDE_RODATA(D_<ADDR>)` resolve through the image's `-DASM_DIR`.
 ### Build model
 
 One source file builds one object. One image target links the objects through splat's `linker.ld`,
-in section order, and compares the flat payload with the retail bytes. A `target.toml` may declare
-a load reservation (`[[regions]]`) instead of extracting it: the link writes the window's fill and
-stamped words and includes the rest of the binary verbatim. `meson compile` and `check-<image>`
-use the same source and flags.
+in section order, and compares the flat payload with the retail bytes. A gap between code segments
+is a Splat `bin` row over the retail payload, so the link compares that window's bytes verbatim.
+`meson compile` and `check-<image>` use the same source and flags.
 
 ### objdiff
 
