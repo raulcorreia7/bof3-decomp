@@ -8,7 +8,7 @@ evidence = "0x801E0C28 direct jal in reviewed func_801E0C20 assembly"
 
 [companion_overlays.abi]
 target_address = 0x800f500c
-prototype = "void func_800F500C(void)"
+prototype = "void Fishing_ShopRun(void)"
 evidence = "Scoped to 0x801E0C20: no a0-a3 setup or v0-v1 use; companion dispatch stub preserves the call-site ABI."
 
 [[companion_overlays.static_calls]]
