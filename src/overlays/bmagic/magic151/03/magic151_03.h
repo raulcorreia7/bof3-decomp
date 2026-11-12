@@ -7,9 +7,6 @@
 
 extern SVECTOR D_1F800014[];
 
-/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form. */
-extern u16* D_800B499C[][2];
-
 #define MAGIC151_STEP_COUNT 5
 
 typedef struct Magic151Steps {

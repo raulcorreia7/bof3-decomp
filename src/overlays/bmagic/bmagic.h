@@ -291,6 +291,10 @@ extern Callback          g_BMagicEffectModes[];
 extern BMagicEffectWork* D_801F17B0;
 extern BMagicEffectWork* D_801F17B4;
 
+/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
+ * the row's column and g_EmiLoadedCharacterIndex picks the id. */
+extern u16* D_800B499C[][2];
+
 void func_800A9610(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
