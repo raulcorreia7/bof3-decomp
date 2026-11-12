@@ -216,7 +216,7 @@ MATCH void func_801F8704(void) {
     actor = g_Task;
     shade = -((s8)actor->tint.bytes.unk_5D / 2);
     for (i = 0; i < g_PartySize; i++) {
-        if (g_Game.members[i].chr.character_id != CHAR_INDEX_WHELP) {
+        if (g_Game.members[i].chr.character_id != CHAR_ID_RYU_ADULT) {
             member                   = &g_Game.members[i];
             member->unk_5F           = shade;
             member->unk_5E           = shade;
