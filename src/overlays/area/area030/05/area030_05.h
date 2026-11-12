@@ -92,6 +92,8 @@ void Fishing_ShopDrawQuantityWindow(u16 x, u16 y);
 void Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 kind, s32 value, u8 selected);
 /* func_800F7100 */
 void Fishing_ShopTakeTradeItems(void);
+/* func_801650B4 */
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 /* func_8016628C */
 s32  Item_Count(u8 category, u8 item, u8 mode);
 /* func_801D799C */
