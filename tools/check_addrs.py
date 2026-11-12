@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Fail when a symbol address that config/symbols.toml records at REF is gone at HEAD.
 
 Every function and data address found so far stays findable: a rename keeps its row's
@@ -27,6 +28,9 @@ def addresses(rev):
 
 
 def main(argv):
+    if len(argv) == 2 and argv[1] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
     if len(argv) not in (2, 3):
         print(__doc__.strip(), file=sys.stderr)
         return 2

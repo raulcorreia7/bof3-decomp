@@ -56,7 +56,7 @@ def _tracks(cue: Path) -> list[tuple[int, str]]:
 def manifest(args: argparse.Namespace) -> int:
     """Hash the dump and the extracted files, then write the manifest."""
     cue, bins = _find_cue(args.cue)
-    folder = Path(args.extracted)
+    folder = ROOT / disc.EXTRACTED
     project = next(iter(sorted(folder.glob("*.xml"))), None)
     if project is None or not (folder / "SYSTEM.CNF").is_file():
         sys.exit(f"disc: {folder} is not an extracted disc; run tools/setup.sh first")
@@ -67,7 +67,7 @@ def manifest(args: argparse.Namespace) -> int:
     with tempfile.TemporaryDirectory() as temp:
         table = Path(temp) / "lba.json"
         subprocess.run(
-            [args.cli, "disc", "lba-json", "-q", "-i", str(cue), "-o", str(table),
+            ["bof3", "disc", "lba-json", "-q", "-i", str(cue), "-o", str(table),
              "-x", str(folder), "-p", str(project)],
             check=True,
         )  # fmt: skip
@@ -78,7 +78,7 @@ def manifest(args: argparse.Namespace) -> int:
         got = disc.digest_file(folder / path)
         files.append((path.as_posix(), entry["lba"], got.size, got.sha1))
     text = disc.render(
-        title=args.title,
+        title="Breath of Fire III",
         region=REGIONS.get(prefix, prefix),
         serial=f"{prefix}-{serial[2]}{serial[3]}",
         redump=cue.stem,
@@ -131,11 +131,6 @@ def main(argv: list[str] | None = None) -> int:
     make.add_argument(
         "--cue", help="the cue sheet (default: the set under inputs/external)"
     )
-    make.add_argument(
-        "--extracted", default=str(ROOT / disc.EXTRACTED), help="extracted disc folder"
-    )
-    make.add_argument("--cli", default="bof3", help="the bof3 CLI (default: from PATH)")
-    make.add_argument("--title", default="Breath of Fire III")
     make.add_argument("--output", default=str(ROOT / disc.MANIFEST))
     make.set_defaults(run=manifest)
     check = sub.add_parser("verify", help="check the dump, extracted files and images")

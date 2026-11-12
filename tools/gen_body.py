@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Measure the shapes of the assembly functions and write typed C bodies for the mechanical ones.
 
-    tools/gen_body.py shapes [-o FILE]          count every INCLUDE_ASM function by shape
-    tools/gen_body.py show TARGET@NAME          print the lifted events of one function
+    tools/gen_body.py shapes                    count every INCLUDE_ASM function by shape
     tools/gen_body.py SHAPE [ROWS.tsv] [--dry-run]
                                                 write a body for each member of SHAPE (or for the
                                                 TARGET@NAME rows of ROWS.tsv), keep the exact ones
@@ -1074,22 +1073,10 @@ def cmd_shapes(args: argparse.Namespace) -> None:
             (r for r in rows if r[0] == shape), key=lambda r: (r[2], r[1].ref)
         )
         lines += [f"{shape}\t{f.image}\t{f.name}\t{n}" for _, f, n in ordered]
-    text = "\n".join(lines) + "\n"
-    if args.out:
-        Path(args.out).write_text(text, encoding="utf-8")
-    else:
-        sys.stdout.write(text)
+    sys.stdout.write("\n".join(lines) + "\n")
     for shape in SHAPES:
         print(f"{shape}\t{counts[shape]}", file=sys.stderr)
     print(f"total\t{len(rows)}", file=sys.stderr)
-
-
-def cmd_show(args: argparse.Namespace) -> None:
-    f = find(load_index(ROOT), args.ref)
-    lifted = lifted_function(f)
-    print(classify(lifted), sorted(lifted.flags))
-    for event in lifted.events:
-        print(event)
 
 
 def main() -> None:
@@ -1098,11 +1085,7 @@ def main() -> None:
     )
     sub = parser.add_subparsers(dest="verb", required=True)
     p = sub.add_parser("shapes")
-    p.add_argument("-o", "--out")
     p.set_defaults(run=cmd_shapes)
-    p = sub.add_parser("show")
-    p.add_argument("ref")
-    p.set_defaults(run=cmd_show)
     for shape in SHAPES:
         p = sub.add_parser(shape)
         p.add_argument(

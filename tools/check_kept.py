@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Fail when a change loses or degrades a named thing that the merge base has.
 
 The check reads every C source and header under `src/` and `include/` (not `include/psyq`)
@@ -622,6 +623,9 @@ def record_files(tree: Path, names: set[str]) -> set[str]:
 
 
 def main(argv: list[str]) -> int:
+    if len(argv) == 2 and argv[1] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
     if len(argv) not in (2, 3):
         print(__doc__.strip(), file=sys.stderr)
         return 2

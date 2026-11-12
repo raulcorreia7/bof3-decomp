@@ -112,6 +112,29 @@ authored assembly), so the macro takes only the unit name. A match removes one `
 `include-asm` fails when the tree has more than the merge base with `origin/main` had. It prints
 the ref it used and exits 2 when no such ref exists (`git fetch origin main`).
 
+## Jump tables
+
+A dense `switch` compiles to a jump table in the unit's `.rodata`. Most overlays keep that table in
+the leading data run, before any code, so a lift matches only when the image's layout puts the C
+table there:
+
+1. The function's assembly names the table `jtbl_<ADDR>`. The table runs from that address to the
+   next row the manifest places (the next function or data row); each entry is a word that points
+   into the function.
+2. In `config/<image>/splat.yaml`, order `.rodata` where retail has the table (usually
+   `section_order: [.data, .rodata, .text, .bss]`) and place the table as its own subsegment at its
+   file offset: `- [0xOFFSET, .rodata, <function>]`.
+3. Delete those bytes from the data unit that held them.
+4. Write the `switch`. `splat` then emits the table into the function's own asm file (the text and
+   its table), and the C compiler's table replaces both once the function is `MATCH`.
+
+`tools/match.sh` refuses such a function: its own `.rodata` is not in the partial link. `check-<image>`
+is the proof, and the whole-image bytes are the verdict. Placed tables to read before editing:
+`world04/area168/13@0x801F4A0C` (a 13-entry table at file offset 0x4),
+`world02/area079/13@0x801F2D20` (PR #808) and `world03/area141/13@0x801F2F14` (PR #809).
+An image whose `target.toml` has a `[[matching.section_placements]]` row also repeats the address
+there (for example `emi/battle/battle/03`).
+
 ## Helpers
 
 The shared helpers, inline functions and macro forms, the address seams and the fake-match helpers
@@ -178,6 +201,31 @@ Source model, size, control flow and accesses are right; scheduling, allocation 
 Test one supported profile at a time against the same source. The chain and the override files are
 in [toolchain](toolchain.md#compiler-chain). Never rewrite C to fake an assembler expansion.
 
+## Tactics for GCC 2.7.2
+
+The diff says what retail does; this table says what to write for it. Each example is matched C in
+`src/`.
+
+| Asm shows                                                    | Write                                                                                                                                                            | Example                               |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| the scratchpad pointer loaded once, then reused after a call | assign the pointer to a local after the call, then use the local                                                                                                 | boss051 `func_800C1900`               |
+| `lui 0x1F800044` and a load before every access              | a symbol for the cell (`tools/symbol.py add`), read directly each time; a cast of a constant address or of `D_1F800000` makes GCC hoist the base into a register | scena08 `func_801F7B2C`               |
+| `andi a0, 0xff` on an argument                               | parameter `s32`, cast at the use: `(u8)dir`                                                                                                                      | area104 `func_801F4AE4.c`             |
+| a loop with no entry test, its back edge in the delay slot   | `i = 0; do { ...; i++; } while (i < N);`                                                                                                                         | commu02 `func_801D4F88`               |
+| a load, an add, a store, then a test of the old value        | `val = *p; *p = val + 1; if (val < N)`                                                                                                                           | area134 `func_801F3F78.c`             |
+| one `lui` base for a read-modify-write                       | `p = &GLOBAL; *p += k;`                                                                                                                                          | shisu `func_801D2CE4`                 |
+| two `jal`s with the same arguments                           | write the call twice, no cached local                                                                                                                            | magic069 `func_801EEED4`              |
+| N words copied from rodata to the stack, then `jalr`         | `Callback h[N]; __builtin_memcpy(h, TABLE, sizeof(h)); SYS_DISPATCH_BYTE(h, mode);`                                                                              | magic088 `func_801EEC20`              |
+| a store, then a reload of the member for the test            | `g_Task->m = f(); if (g_Task->m != 0xFF)`                                                                                                                        | `plchar/Char_ClaimHelperSlotStep.h`   |
+| the argument setup disagrees with the prototype              | cast the callee at the call with a `FAKE:` note; the shared prototype stays                                                                                      | `plchar/Char_ClaimHelperSlotStep.h`   |
+| a `beq` chain on a state byte                                | `switch` with dense small cases                                                                                                                                  | area197 `func_801F4164.c`             |
+| an `andi` mask after a counter update                        | the local is `u8` (likewise `u16` or `s16` for their shifts); plain `char` is unsigned (`-funsigned-char`)                                                       | `engine/game/00/Actor_FindFreeSlot.c` |
+| a decrement, a store, then a test of the new value           | decrement inside the test: `if (--x == 0)`                                                                                                                       | scena08 `func_801F7C08`               |
+
+A `do`-`while` with a counter and a `goto` are allowed where the bytes need them: `git grep -c
+'do {' -- src` totals 558 lines and `git grep -c 'goto ' -- src` 729. `FAKE_REG` is the last
+resort, after these forms, and a pin needs its `FAKE:` note and byte proof.
+
 ## Permuter
 
 For clean C with the right structure whose difference is mostly register allocation; poor at stack
@@ -191,12 +239,15 @@ Polish is part of every match, not a later pass: an exact function lands only af
 its original programmer wrote it ([the rule](conventions.md#write-it-as-the-original-programmer-did)),
 with names still from evidence. It becomes the most human-accurate C that still byte-matches:
 
-- no pointer math; real types and fields;
-- named constants ([values](conventions.md#how-a-value-is-written));
-- `for` with init, condition and step; `do`-`while` only when the body must run first; `goto` only
-  for a proven shared exit;
-- fewest casts and locals;
-- evidence-backed names ([names](conventions.md#names)), with the lint score breaking the last tie.
+- no cast the bytes do not need, and no pointer math: real types and fields (`FIELD` at most);
+- no `temp_v0` or `var_s1` names; evidence-backed names ([names](conventions.md#names)), with the
+  lint score breaking the last tie;
+- `g_Task` and its members, not a `WORK` or `SP_PTR` view; `g_Game.members[i]`, not `D_801461xx`;
+- named constants ([values](conventions.md#how-a-value-is-written)); decimal for timers, sizes,
+  positions and colours; `sizeof` for sizes;
+- `for` with init, condition and step; a `do`-`while` or `goto` where the bytes need one
+  ([tactics](#tactics-for-gcc-272));
+- run `bin/coddog` before matching a function that may have twins ([coddog](toolchain.md#coddog)).
 
 Style: [language and formatting](conventions.md#language-and-formatting).
 

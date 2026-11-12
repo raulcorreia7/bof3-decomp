@@ -112,7 +112,7 @@ A function is `TARGET@0xADDRESS`; `<image>` is the target with `/` written as `+
 ## Before you open a pull request
 
 `pre-push` runs every check below, one line each, and writes a log per check to `build/pre-push/`.
-It compares with the newer of `public/main` and `origin/main`. Without a disc Meson has no `check`;
+It compares with the [base ref](docs/toolchain.md#commands). Without a disc Meson has no `check`;
 `pre-push` skips it.
 
 | Check                    | Fails when                                                                             |

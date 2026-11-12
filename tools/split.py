@@ -10,7 +10,6 @@ The link scripts go into ``build/ld``. The graph goes to stdout, one tab-separat
 ``c NAME SOURCE ASM_DIR``        compile SOURCE to the object NAME
 ``s NAME SOURCE``                assemble SOURCE
 ``b NAME SOURCE``                wrap the binary SOURCE
-``o PATH``                       link the prebuilt object PATH
 ``m PATH``                       a symbol map the image's names may come from
 
 Rows after a ``target`` row belong to it, in link order. The ``dep`` and ``d`` rows come first.
@@ -152,6 +151,9 @@ def draft_rows(root: Path, rows: list[str]) -> list[str]:
 
 def main() -> int:
     """Split every stale target and print the Meson graph."""
+    if sys.argv[1:] in (["-h"], ["--help"]):
+        print(__doc__.strip())
+        return 0
     root = repo_layout().root
     try:
         symbols.generate(root)
