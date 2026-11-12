@@ -122,13 +122,13 @@ MATCH void func_801EF4A4(void) {
     rot.vy = 0;
     switch (g_Task->facing) {
         case 0:
-            rot.vz = 0x400;
+            rot.vz = 1024;
             break;
         case 1:
-            rot.vz = 0x800;
+            rot.vz = 2048;
             break;
         case 2:
-            rot.vz = 0xC00;
+            rot.vz = 3072;
             break;
         default:
             rot.vz = 0;

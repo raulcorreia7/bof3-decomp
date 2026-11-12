@@ -337,7 +337,7 @@ INCLUDE_ASM(func_801F0E54);
 MATCH void func_801F0FA4(void) {
     u8 value;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         Actor_StepAnimOnce();
@@ -356,7 +356,7 @@ MATCH void func_801F0FA4(void) {
 MATCH void func_801F1090(void) {
     u8 value;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         value               = g_Task->unk_09 - 1;

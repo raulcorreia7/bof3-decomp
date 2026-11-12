@@ -28,13 +28,13 @@ MATCH void func_801EEED4(void) {
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, 0xC);
-    if (g_Task->header.flags & 1) {
+    if (g_Task->header.flags & 0x1) {
         if (g_Task->header.step != 0) {
             func_801EFF14();
             func_801EFC00();
         }
     }
-    if (g_Task->header.flags & 1) {
+    if (g_Task->header.flags & 0x1) {
         if (g_Task->header.step >= 3) {
             func_801F0104();
         }
@@ -135,7 +135,7 @@ MATCH void func_801EF2AC(void) {
 MATCH void func_801EF30C(void) {
     SYS_DISPATCH_BYTE(D_801F0518, g_Task->header.step);
     GFX_AddDitheredDrawMode(3, getTPage(0, 1, 320, 256));
-    if (g_Task->header.flags & 1 && g_Task->header.step != 0) {
+    if (g_Task->header.flags & 0x1 && g_Task->header.step != 0) {
         func_801EFF14();
         func_801EFC00();
     }

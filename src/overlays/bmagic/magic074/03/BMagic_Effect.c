@@ -78,7 +78,7 @@ MATCH void func_801EF754(void) {
     handlers.steps[D_801F20DC->header.step]();
     if ((D_801F20DC->header.flags & BMAGIC_EFFECT_IN_USE) && D_801F20DC->header.step != 0) {
         func_801F00B0();
-        if (D_801F20DC->phase_0C & 3) {
+        if (D_801F20DC->phase_0C & 0x3) {
             Effect_DrawSparkleRays(g_FrameCount >> 1, D_801F20DC->unk_06);
             radius = D_801F20DC->unk_06;
             func_801EFE18((g_FrameCount >> 1) + 4, radius + (radius >> 1));

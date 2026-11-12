@@ -61,7 +61,7 @@ MATCH void func_801EEF84(void) {
     timer             = g_Task->unk_09;
     if (timer != 0) {
         cue = 0x100;
-        if (timer & 1) {
+        if (timer & 0x1) {
             cue = 0x101;
         }
     } else {

@@ -14,7 +14,7 @@ MATCH void func_801EEC5C(void) {
     u32          slot;
 
     src                                = g_Battle.selected_actor;
-    slot                               = Battle_AllocEffect(1, 0x1A) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 26) & BYTE_MASK;
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].unk_08       = src->facing;
     g_BattleEffects[slot].pos.x.fixed  = src->pos.x.fixed;
@@ -168,11 +168,11 @@ MATCH void func_801EF5C0(void) {
     u8      angle;
 
     PushMatrix();
-    if (g_Task->facing & 1) {
+    if (g_Task->facing & 0x1) {
         rot.vx = 0;
         angle  = g_Task->timer & 0x1F;
         rot.vy = (s16)(angle << 7);
-        rot.vz = 0x400;
+        rot.vz = 1024;
     } else {
         angle  = g_Task->timer & 0x1F;
         rot.vx = (s16)(angle << 7);

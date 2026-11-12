@@ -28,7 +28,7 @@ MATCH void func_801EF01C(void) {
 }
 
 MATCH void func_801EF0E8(void) {
-    func_801E257C(g_Battle.active_battler, 0xAU);
+    func_801E257C(g_Battle.active_battler, 10U);
     g_Task->unk_27 = g_BattleEffectBattler->unk_27;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
@@ -38,7 +38,7 @@ MATCH void func_801EF0E8(void) {
 MATCH void func_801EF164(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800AFC98(2, 0);
-        func_801E257C(g_Battle.active_battler, 0xBU);
+        func_801E257C(g_Battle.active_battler, 11U);
         g_Task->unk_14 = 0x100;
         g_Task->unk_20 = -8;
         g_Task->header.step += 1;
@@ -58,7 +58,7 @@ MATCH void func_801EF280(void) {
     COORD_INT(work->pos.z) += work->unk_14;
     if (timer == 0) {
         SND_QueueSelectionFx(0x203);
-        func_801E257C(g_Battle.active_battler, 0xC);
+        func_801E257C(g_Battle.active_battler, 12);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->unk_09 = 3;
         g_Task->header.step++;
@@ -67,7 +67,7 @@ MATCH void func_801EF280(void) {
 
 MATCH void func_801EF324(void) {
     if (Actor_StepAnimOnce() != 0u) {
-        func_801E257C(g_Battle.active_battler, 0xA);
+        func_801E257C(g_Battle.active_battler, 10);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -79,7 +79,7 @@ MATCH void func_801EF37C(void) {
     Actor_StepAnimOnce();
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         func_800AFC98(2, 0);
-        func_801E257C(g_Battle.active_battler, 0xB);
+        func_801E257C(g_Battle.active_battler, 11);
         work         = g_Task;
         work->unk_14 = 0x140;
         work->timer  = 9;
@@ -107,7 +107,7 @@ MATCH void func_801EF468(void) {
     Actor_StepAnimOnce();
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         SND_QueueSelectionFx(0x203);
-        func_801E257C(g_Battle.active_battler, 0xC);
+        func_801E257C(g_Battle.active_battler, 12);
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
         if (timer != 0) {

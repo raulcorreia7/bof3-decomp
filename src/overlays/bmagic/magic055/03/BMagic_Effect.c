@@ -22,7 +22,7 @@ MATCH void func_801EECCC(void) {
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0, anchor = 1; i < 6; i++) {
-        slot                               = Battle_AllocEffect(1, 0x34);
+        slot                               = Battle_AllocEffect(1, 52);
         work                               = g_Task;
         g_BattleEffects[slot].arg.unk_09   = anchor;
         g_BattleEffects[slot].target.party = work;

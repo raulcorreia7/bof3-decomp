@@ -47,7 +47,7 @@ MATCH void func_801EF1F4(void) {
 INCLUDE_ASM(func_801EF294);
 
 MATCH void func_801EF40C(void) {
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed - g_Task->unk_0C;
     } else {

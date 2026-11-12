@@ -48,7 +48,7 @@ MATCH void func_801EF55C(void) {
     g_Task->pos.y.fixed += g_Task->unk_10;
     g_Task->unk_09 += 1;
     g_Task->timer += 2;
-    if (g_Task->timer == 0x10) {
+    if (g_Task->timer == 16) {
         g_Task->header.step += 1;
     }
 }
@@ -85,7 +85,7 @@ MATCH void func_801EF72C(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0x400;
+    rot.vx = 1024;
     rot.vy = D_801EFC9C[g_Task->facing];
     rot.vz = 0;
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);

@@ -37,7 +37,7 @@ INCLUDE_ASM(func_801EED18);
 MATCH void func_801EF0A8(void) {
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0554, g_Task->header.step);
-    if (g_Task->header.flags & 1) {
+    if (g_Task->header.flags & 0x1) {
         if (g_Task->header.step != 0) {
             if (g_Task->header.step < 4) {
                 Battle_ProjectRange();
@@ -62,7 +62,7 @@ MATCH void func_801EF5C0(void) {
     u8   timer;
 
     Actor_StepAnimOnce();
-    if (g_Task->unk_09 & 1) {
+    if (g_Task->unk_09 & 0x1) {
         state = &g_AreaCameraAngle.vx;
         angle = *state + 0x14;
     } else {
@@ -126,7 +126,7 @@ MATCH void func_801EFE1C(void) {
 
     r                   = rand();
     direction           = g_Task->param.unk_0B;
-    g_Task->unk_0C      = (r & 7) + 8;
+    g_Task->unk_0C      = (r & 0x7) + 8;
     *angle              = direction << 9;
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(*angle) * g_Task->unk_0C);
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);

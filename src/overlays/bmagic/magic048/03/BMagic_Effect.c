@@ -34,7 +34,7 @@ MATCH void func_801EF05C(void) {
     pos.vy = (g_Task->unk_10 >> 9) - 0x4000;
     pos.vz = g_Task->unk_14 >> 1;
     func_800AF3A0(pos, 0x10);
-    if (g_Task->timer != 0x10) {
+    if (g_Task->timer != 16) {
         g_Task->timer += 1;
     }
     if (func_800AF6B8(g_Task->unk_0C, g_Task->unk_10, g_Task->pos.z.fixed, 0x60000) != 0) {

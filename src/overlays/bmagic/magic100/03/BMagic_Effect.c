@@ -80,7 +80,7 @@ MATCH void func_801EF0D8(void) {
     } else {
         battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
-    if (g_Task->param.unk_0B & 1) {
+    if (g_Task->param.unk_0B & 0x1) {
         g_Task->unk_20 = (g_Task->unk_20 + 0x200) & 0xFFF;
     } else {
         g_Task->unk_20 = (g_Task->unk_20 - 0x200) & 0xFFF;
@@ -88,7 +88,7 @@ MATCH void func_801EF0D8(void) {
     g_Task->unk_14 = func_800AF4A0(battler, 0xC000, g_Task->unk_18 << 6);
     timer          = g_Task->timer + 4;
     g_Task->timer  = timer;
-    if (timer == 0x10) {
+    if (timer == 16) {
         g_Task->header.step++;
     }
 }

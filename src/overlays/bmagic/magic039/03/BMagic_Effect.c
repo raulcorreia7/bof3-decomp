@@ -33,7 +33,7 @@ MATCH void func_801EEFA8(void) {
 
     handlers = D_801EEC10;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
-    if ((g_Task->header.flags & 1) && g_Task->header.step != 0) {
+    if ((g_Task->header.flags & 0x1) && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFAA4();
         func_801F0054();

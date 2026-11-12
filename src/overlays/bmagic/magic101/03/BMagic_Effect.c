@@ -159,7 +159,7 @@ MATCH void func_801EF3DC(void) {
         g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
         g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed + 0x01800000;
-        g_Task->param.unk_0B = g_Task->unk_04 * 4 & 0x3F;
+        g_Task->param.unk_0B = g_Task->unk_04 * 0x4 & 0x3F;
         work                 = g_Task;
         value                = D_801EFCC0[work->unk_04];
         work->unk_10         = 0x60;
@@ -184,7 +184,7 @@ MATCH void func_801EF690(void) {
     work->unk_10 += work->unk_1C;
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
-    if (!(counter & 0xFF)) {
+    if (!(counter & BYTE_MASK)) {
         g_Task->header.step += 1;
     }
 }
@@ -201,7 +201,7 @@ MATCH void func_801EF700(void) {
     work->timer  = counter;
     work->unk_1C = value;
     work->unk_10 += value;
-    if (!(counter & 0xFF)) {
+    if (!(counter & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
@@ -214,7 +214,7 @@ MATCH void func_801EF78C(void) {
     long    flags;
 
     PushMatrix();
-    if (BATTLE_ACTIVE_WORK->facing & 1) {
+    if (BATTLE_ACTIVE_WORK->facing & 0x1) {
         rot.vx = 0;
         rot.vy = g_Task->unk_0C;
         rot.vz = 0;

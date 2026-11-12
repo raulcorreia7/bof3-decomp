@@ -139,7 +139,7 @@ MATCH void func_801F0034(void) {
     u8           count;
     PartyMember* work;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         count = g_Task->unk_09;
         if (count < 8U) {
             g_Task->unk_09 = count + 1;
@@ -389,7 +389,7 @@ MATCH u8 func_801F1A58(void) {
     u8 i;
 
     for (i = 0; i < 48; i++) {
-        if (!(D_801F1CA0[i].header.flags & 1)) {
+        if (!(D_801F1CA0[i].header.flags & 0x1)) {
             D_801F1CA0[i].header.flags |= 1;
             return i;
         }

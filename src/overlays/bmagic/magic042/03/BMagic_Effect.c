@@ -17,7 +17,7 @@ MATCH void func_801EEC70(void) {
     g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 0x3E) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 62) & BYTE_MASK;
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_Task->param.unk_0B += 1;
@@ -34,7 +34,7 @@ MATCH void func_801EEDE8(void) {
 
     handlers = D_801EEC04;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
-    if (g_Task->header.flags & 1 && g_Task->header.step != 0) {
+    if (g_Task->header.flags & 0x1 && g_Task->header.step != 0) {
         func_801EF920();
         func_801EF380(0, g_Task->unk_09);
         func_801EF71C(g_Task->param.unk_0B + 8, g_Task->timer);

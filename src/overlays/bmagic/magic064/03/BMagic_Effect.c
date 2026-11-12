@@ -140,7 +140,7 @@ MATCH void func_801EF5FC(void) {
     PartyMember* work;
 
     work = g_Task;
-    if (!(work->param.unk_0B & 1)) {
+    if (!(work->param.unk_0B & 0x1)) {
         g_AreaScrollTargetX = work->pos.x.fixed;
         FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
         g_AreaScrollTargetY = work->pos.y.fixed;
@@ -239,7 +239,7 @@ MATCH void func_801F0278(void) {
     u8 ticks;
 
     func_801F03D8();
-    if (!(g_FrameCount & 1)) {
+    if (!(g_FrameCount & 0x1)) {
         ticks = g_Task->param.unk_0B;
         if (ticks >= 0x18U) {
             g_BattleEffectBattler->header.step += 1;

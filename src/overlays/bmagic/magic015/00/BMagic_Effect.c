@@ -295,7 +295,7 @@ MATCH void func_801F0F2C(void) {
         if (timer < 20) {
             g_Task->unk_09 = timer + 1;
         }
-    } else if (g_FrameCount & 1) {
+    } else if (g_FrameCount & 0x1) {
         g_Task->unk_09 -= 1;
     }
     if ((g_Task->unk_14 < 0) && (g_Task->pos.z.fixed < g_Battle.selected_actor->pos.z.fixed)) {

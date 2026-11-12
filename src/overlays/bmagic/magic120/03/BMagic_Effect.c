@@ -14,12 +14,12 @@ MATCH void func_801EEEC8(void) {
     PartyMember* task2;
 
     if (g_Task->param.unk_0B == 1) {
-        slot                               = Battle_AllocEffect(1, 0xF) & 0xFF;
+        slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
         task                               = g_Task;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = 2;
         g_BattleEffects[slot].target.party = task;
-        slot                               = Battle_AllocEffect(1, 0xF) & 0xFF;
+        slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
         task2                              = g_Task;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = 3;
@@ -158,16 +158,16 @@ MATCH void func_801F078C(void) {
     rot.vx = 0;
     switch (g_Task->facing) {
         case 0:
-            rot.vy = 0xC00;
+            rot.vy = 3072;
             break;
         case 1:
-            rot.vx = 0x400;
+            rot.vx = 1024;
             break;
         case 2:
-            rot.vy = 0x400;
+            rot.vy = 1024;
             break;
         case 3:
-            rot.vx = 0xC00;
+            rot.vx = 3072;
             break;
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);

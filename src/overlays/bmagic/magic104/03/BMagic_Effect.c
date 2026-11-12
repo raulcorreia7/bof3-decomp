@@ -47,7 +47,7 @@ MATCH void func_801EF178(void) {
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
         cue = 0x100;
-        if (g_Task->param.unk_0B & 1) {
+        if (g_Task->param.unk_0B & 0x1) {
             cue = 0x101;
         }
         SND_QueueSelectionFx(cue);
@@ -107,7 +107,7 @@ MATCH void func_801EFA54(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    if (g_Task->slot == 0xC) {
+    if (g_Task->slot == 12) {
         rot.vz = (g_FrameCount & 0xF) << 8;
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
@@ -129,7 +129,7 @@ MATCH void func_801F02F4(void) {
     work = g_Task;
     if (work->timer == 0) {
         work->unk_09 = 8;
-        COORD_INT(work->pos.z) += 0x200;
+        COORD_INT(work->pos.z) += 512;
         BMagic_NextStep();
     } else {
         work->timer = work->timer - 1;
@@ -145,7 +145,7 @@ MATCH void func_801F034C(void) {
     PopMatrix();
     work = g_Task;
     next = work->unk_09 - 1;
-    COORD_INT(work->pos.z) -= 0x40;
+    COORD_INT(work->pos.z) -= 64;
     work->unk_09 = next;
     if (next == 0) {
         g_BattleEffectBattler->param.unk_0B = g_Task->param.unk_0B;

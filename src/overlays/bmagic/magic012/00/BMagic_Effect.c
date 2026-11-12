@@ -105,7 +105,7 @@ MATCH void func_801EF6A4(void) {
     VECTOR pos;
     u8     count;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
     pos.vx = g_Task->unk_0C;

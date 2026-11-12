@@ -51,7 +51,7 @@ MATCH void func_801EF3DC(void) {
     u8           slot;
     u8           timer;
 
-    if (g_Task->unk_09 >= 17 && (g_FrameCount & 3) == 0) {
+    if (g_Task->unk_09 >= 17 && (g_FrameCount & 0x3) == 0) {
         slot                                   = BMagic_AllocEffect();
         battler                                = g_BattleEffectBattler;
         BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
