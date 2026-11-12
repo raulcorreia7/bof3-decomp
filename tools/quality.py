@@ -47,6 +47,8 @@ import subprocess
 from collections.abc import Iterable, Iterator
 from pathlib import Path
 
+from bof3.source.ctext import mask
+
 ROOT = Path(__file__).resolve().parent.parent
 METRICS = ("addr", "names", "casts", "harmful", "notes", "twins", "pasted")
 GATED = ("casts", "harmful", "pasted", "addr", "names")
@@ -80,7 +82,6 @@ WEIGHT = {
     "pasted": 4,
 }
 
-COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
 FUNC = re.compile(r"^MATCH\s[^;{}()]*?\b(\w+)\s*\([^;{}]*\)\s*\{", re.M)
 ADDR_NAME = re.compile(r"func_[0-9A-Fa-f]{8}")
 PLACEHOLDER = re.compile(r"\b(?:D_[0-9A-Fa-f]{8}|unk_[0-9A-Fa-f]+|FIELD(?=\s*\())\b")
@@ -109,8 +110,8 @@ MACRO_CALL = re.compile(r"[A-Z][A-Z0-9_]*\s*\(.*\)", re.S)
 
 
 def strip_comments(text: str) -> str:
-    """Return ``text`` without comments, keeping the line count."""
-    return COMMENT.sub(lambda m: "\n" * m.group().count("\n"), text)
+    """Return ``text`` with comments and strings blank, keeping the line count."""
+    return mask(text)
 
 
 def bodies(text: str) -> Iterator[tuple[str, str]]:

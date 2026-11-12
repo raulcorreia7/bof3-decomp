@@ -33,6 +33,7 @@ from bof3.link.inputs import write_if_changed
 from bof3.link.script import prepare_link
 from bof3.resolve import TargetManifest, load_target_manifests
 from bof3.resolve.manifests import load_target_manifest
+from bof3.status.claims import DRAFT_BYTES
 from bof3.toolchain.splat import splat_output_current, split_target
 
 #: Bounded so a split leaves cores free for the rest of the build.
@@ -136,15 +137,12 @@ def run_jobs(jobs: list[tuple[str, str]]) -> list[Done]:
         return list(pool.map(split_one, jobs, chunksize=8))
 
 
-DRAFT = re.compile(rb"^NON_MATCHING\s", re.MULTILINE)
-
-
 def draft_rows(root: Path, rows: list[str]) -> list[str]:
     """Return a ``d`` row for each compiled source that holds a draft function."""
     result = []
     for row in rows:
         fields = row.split("\t")
-        if fields[0] == "c" and DRAFT.search((root / fields[2]).read_bytes()):
+        if fields[0] == "c" and DRAFT_BYTES.search((root / fields[2]).read_bytes()):
             name = graph.source_object(Path(fields[2]).relative_to("src"), draft=True)
             result.append("\t".join(("d", name, fields[2], fields[3])))
     return result
