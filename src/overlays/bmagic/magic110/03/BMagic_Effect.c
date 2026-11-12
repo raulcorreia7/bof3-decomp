@@ -50,7 +50,7 @@ MATCH void func_801EF068(void) {
         count          = g_Task->unk_09 - 1;
         g_Task->unk_09 = count;
         if (!(count & BYTE_MASK)) {
-            func_800A9820(g_Battle.target_selector);
+            Battle_MarkDamaged(g_Battle.target_selector);
             g_Task->header.mode += 1;
         }
     }

@@ -7,7 +7,7 @@ MATCH void func_801F3264(void) {
         g_Task->tint.bytes.unk_5E += 6;
         g_Task->tint.bytes.unk_5F += 6;
     } else {
-        Message_StartAreaMessage(0x1F);
+        Message_StartAreaMessage(31);
         g_GameStateIndex    = GAME_REQUEST_MESSAGE;
         g_Task->header.mode = 2;
     }

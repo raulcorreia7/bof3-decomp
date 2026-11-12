@@ -26,14 +26,14 @@ static u32 s_gap_801EABCC[3] = {
 /* 0x801EABD8 */
 Callback D_801EABD8[3] = {
     (Callback)func_801D22E8,
-    (Callback)func_801D238C,
+    (Callback)Battle_DrawEntrances,
     (Callback)func_801D2480,
 };
 
 /* 0x801EABE4 */
 Callback D_801EABE4[8] = {
     (Callback)func_80096A74, (Callback)func_80096F00, (Callback)func_8009834C, (Callback)func_800980A8,
-    (Callback)func_801D251C, (Callback)func_801D25A0, (Callback)func_8009B274, (Callback)func_800A4688,
+    (Callback)func_801D251C, (Callback)Battle_ArmCommands, (Callback)func_8009B274, (Callback)func_800A4688,
 };
 
 /* 0x801EAC04 */
@@ -69,7 +69,7 @@ Callback D_801EAC44[2] = {
 
 /* 0x801EAC4C */
 Callback D_801EAC4C[3] = {
-    (Callback)func_801D3304,
+    (Callback)Battle_SelectAbility,
     (Callback)func_801D3624,
     (Callback)func_801D39BC,
 };
@@ -119,14 +119,14 @@ Callback D_801EACB0[3] = {
 Callback D_801EACBC[3] = {
     (Callback)func_801D4AFC,
     (Callback)func_801D5024,
-    (Callback)func_801D656C,
+    (Callback)Battle_WaitVoiceSlots,
 };
 
 /* 0x801EACC8 */
 Callback D_801EACC8[3] = {
     (Callback)func_801D4B38,
     (Callback)func_801D5008,
-    (Callback)func_801D656C,
+    (Callback)Battle_WaitVoiceSlots,
 };
 
 /* 0x801EACD4 */

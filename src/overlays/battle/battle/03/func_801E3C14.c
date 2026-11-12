@@ -62,7 +62,7 @@ MATCH void func_801E3C14(void) {
     }
     hit_work = g_BattleCurrentEnemy;
     if (hit_work->turn.target_flags & BATTLE_HIT_HP) {
-        func_800AAC88(hit_work->turn.hp_change, g_Task->slot);
+        Battle_QueueAction(hit_work->turn.hp_change, g_Task->slot);
         hit_work = g_BattleCurrentEnemy;
     }
     if (hit_work->turn.target_flags & BATTLE_HIT_AP) {

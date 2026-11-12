@@ -55,7 +55,7 @@ MATCH void func_801F0478(void) {
 }
 
 MATCH void func_801F04F0(void) {
-    func_800AF764();
+    Battle_ProjectRange();
     g_Task->unk_30.half += 8;
     g_Task->unk_5D = (RANDOM_MASK(3)) + 1;
     g_Task->unk_5E = (RANDOM_MASK(3)) + 1;

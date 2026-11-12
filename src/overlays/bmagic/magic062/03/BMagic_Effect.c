@@ -73,7 +73,7 @@ MATCH void func_801EFD80(void) {
     PartyMember* task;
     PartyMember* reset;
 
-    func_800AF764();
+    Battle_ProjectRange();
     func_801F0910((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F026C();
@@ -101,7 +101,7 @@ MATCH void func_801EFE74(void) {
     s32          vel;
     PartyMember* task;
 
-    func_800AF764();
+    Battle_ProjectRange();
     func_801F0910((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F026C();
@@ -126,7 +126,7 @@ MATCH void func_801EFF68(void) {
     s32 value2;
     u8  value3;
 
-    func_800AF764();
+    Battle_ProjectRange();
     if ((g_Task->unk_0C == 4) && (g_Task->timer < 5U)) {
         value2 = RANDOM_MASK(3) | 0x40;
     } else {

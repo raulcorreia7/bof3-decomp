@@ -3,7 +3,7 @@
    Effect_PlayOnce2 (magic117) */
 /* The statements of Effect_PlayOnce; each member has no locals. */
 #define BATTLE_PLAY_ONCE()                                  \
-    func_800A9820(g_Battle.target_selector);                \
+    Battle_MarkDamaged(g_Battle.target_selector);           \
     /* FAKE: keeps the flag load after the request call. */ \
     FAKE_BARRIER();                                         \
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;          \

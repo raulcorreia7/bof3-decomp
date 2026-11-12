@@ -21,7 +21,7 @@ MATCH void func_801A68C0(u8* script) {
     GAME_WORK_AREA_PTR = &g_Actors[slot];
     rows               = g_Actors;
 
-    tile                 = FIELD(s32, g_AreaLoads[tile], 8u) + offset;
+    tile                 = FIELD(s32, g_AreaLoads[tile], 0x8u) + offset;
     g_Task->direction_08 = script[0] & 0xF;
     func_801A4AA8();
     func_8015AC8C(tile);
@@ -30,12 +30,12 @@ MATCH void func_801A68C0(u8* script) {
     work = g_Task;
     x    = script[2] << 16;
     if (script[1] != 0) {
-        x |= 0x8000;
+        x |= 32768;
     }
     work->pos.x.fixed = x;
     y                 = script[4] << 16;
     if (script[3] != 0) {
-        y |= 0x8000;
+        y |= 32768;
     }
     work->pos.y.fixed = y;
 

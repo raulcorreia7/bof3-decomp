@@ -92,7 +92,7 @@ NON_MATCHING void func_801D1228(void) {
         index = slot & BYTE_MASK;
     } while ((u32)(slot & BYTE_MASK) < 3U);
     slot = 0;
-    func_800AAA74();
+    Battle_ApplyFormationStats();
     index = 0;
     do {
         row_offset = index * BATTLE_PARTY_STRIDE;

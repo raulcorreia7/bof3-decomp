@@ -204,6 +204,47 @@ INCLUDE_ASM(func_801EFC00);
 
 INCLUDE_ASM(func_801EFF14);
 
-INCLUDE_ASM(func_801F0104);
+MATCH void func_801F0104(void) {
+    LINE_F2*      line;
+    volatile u16* shade;
+
+    shade      = &D_1F800006;
+    line       = (LINE_F2*)g_GfxPrimCursor;
+    *shade     = 0x80;
+    D_1F80000C = g_Task->unk_2E.half;
+    /* FAKE: retail stores each staged coordinate before loading the next. */
+    FAKE_ORDER_FENCE();
+    D_1F80000E = g_Task->unk_30.half;
+    /* FAKE: retail keeps the argument move in the call's delay slot. */
+    FAKE_ORDER_FENCE();
+    SetLineF2(line);
+    SetSemiTrans(line, 1);
+    line->x0 = D_1F80000C - 4;
+    /* FAKE: retail keeps each staged coordinate access in order. */
+    FAKE_ORDER_FENCE();
+    line->y0 = D_1F80000E;
+    FAKE_ORDER_FENCE();
+    line->x1 = D_1F80000C + 4;
+    FAKE_ORDER_FENCE();
+    line->y1 = D_1F80000E;
+    line->r0 = *shade;
+    line->g0 = *shade;
+    line->b0 = *shade;
+    GFX_AddPrim(3, sizeof(LINE_F2));
+    line = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(line);
+    SetSemiTrans(line, 1);
+    line->x0 = D_1F80000C;
+    FAKE_ORDER_FENCE();
+    line->y0 = D_1F80000E + 4;
+    FAKE_ORDER_FENCE();
+    line->x1 = D_1F80000C;
+    FAKE_ORDER_FENCE();
+    line->y1 = D_1F80000E - 4;
+    line->r0 = *shade;
+    line->g0 = *shade;
+    line->b0 = *shade;
+    GFX_AddPrim(3, sizeof(LINE_F2));
+}
 
 INCLUDE_ASM(func_801F0274);

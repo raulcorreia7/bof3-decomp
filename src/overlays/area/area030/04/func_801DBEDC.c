@@ -13,7 +13,7 @@ MATCH void func_801DBEDC(void) {
     offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
-    Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 0x42);
+    Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 66);
 
     if ((g_InputPressed & (PADRup | PADRdown)) != 0) {
         FISHING_STATE->sub_index_03 = 0xE;

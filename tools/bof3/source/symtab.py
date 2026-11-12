@@ -86,6 +86,19 @@ def add_row(text: str, image: str, name: str, row: str, addr: int) -> str:
     return "\n".join(lines)
 
 
+def remove_row(text: str, image: str, name: str) -> str | None:
+    """Remove the row ``name`` of the image's table; None when it has no such row."""
+    lines = text.split("\n")
+    span = _section(lines, image)
+    if span is None:
+        return None
+    for k in range(*span):
+        if lines[k].startswith(name + " = "):
+            del lines[k]
+            return "\n".join(lines)
+    return None
+
+
 def rename_row(text: str, image: str, old: str, new: str) -> str | None:
     """Rename the row ``old`` of the image's table; None when it has no such row."""
     lines = text.split("\n")

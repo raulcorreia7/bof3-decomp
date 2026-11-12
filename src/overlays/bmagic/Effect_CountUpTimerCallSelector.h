@@ -10,7 +10,7 @@ MATCH void Effect_CountUpTimerCallSelector(void) {
     timer              = work->unk_09 + 1;
     work->unk_09       = timer;
     if (timer == 24) {
-        func_800A9610(g_Battle.target_selector, 0x10);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         work              = g_Task;
         work->header.step = work->header.step + 1;
     }

@@ -28,7 +28,7 @@ MATCH void func_801EEF30(void) {
     timer         = g_Task->timer;
     g_Task->timer = timer + 0xFF;
     if (timer == 0) {
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->header.mode += 1;
     }
     func_801EF0F8(g_Task->unk_64);
@@ -54,7 +54,7 @@ MATCH void func_801EF008(void) {
     timer          = g_Task->unk_09 - 2;
     g_Task->unk_09 = timer;
     if (timer == 2) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
         return;

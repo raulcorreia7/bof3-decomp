@@ -24,7 +24,7 @@ NON_MATCHING void func_801E0B64(void) {
             dst_word[i] = src_word[i];
         }
     }
-    func_800AAA74();
+    Battle_ApplyFormationStats();
     for (slot = 0; slot < g_Battle.party_count; slot++) {
         dst      = &D_80145F20[slot * BATTLE_PARTY_STRIDE];
         src      = dst + 0x20;
@@ -36,7 +36,7 @@ NON_MATCHING void func_801E0B64(void) {
     }
     func_800A4458();
     for (slot = 0; slot < g_Battle.party_count; slot++) {
-        func_800A9BD8(slot);
+        Battle_RescaleStats(slot);
     }
 }
 #else

@@ -17,7 +17,7 @@ INCLUDE_ASM(func_801EEEF4);
 MATCH void func_801EF0A4(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         D_8014637C->unk_29 = 4;
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }

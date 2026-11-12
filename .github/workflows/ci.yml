@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
   pull_request:
+  # A run on `main` writes the caches where every pull request can read them: GitHub scopes a cache
+  # to the branch that saved it, and a pull request's run saves under `refs/pull/<n>/merge`.
+  schedule:
+    - cron: "17 4 * * *"
   workflow_dispatch:
 
 permissions:

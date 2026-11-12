@@ -90,7 +90,6 @@ extern u8       D_801F2DD4[];
 void            Area_StartDirectionalScript(Actor* actor);
 void            func_801F34A0(void);
 void            func_801F34E0(void);
-void            func_801F358C(void);
 void            func_801F35FC(void);
 void            func_801F3690(void);
 void            func_801F36A4(void);

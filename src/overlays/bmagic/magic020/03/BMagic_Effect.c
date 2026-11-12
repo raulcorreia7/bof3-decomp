@@ -223,7 +223,7 @@ INCLUDE_ASM(func_801EFBA0);
 MATCH void func_801EFD10(void) {
     if (Actor_StepAnimLoop() & BYTE_MASK) {
         if (g_Task->param.unk_0B == 7) {
-            func_800A9820(g_Battle.target_selector);
+            Battle_MarkDamaged(g_Battle.target_selector);
         }
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();

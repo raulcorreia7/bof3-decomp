@@ -40,7 +40,7 @@ MATCH void func_801EF09C(void) {
 
     battle_flags = &g_BattleState;
     *battle_flags |= 0x2004;
-    func_800A9820(*(battle_flags = &g_Battle.target_selector));
+    Battle_MarkDamaged(*(battle_flags = &g_Battle.target_selector));
     func_801E5988();
 }
 

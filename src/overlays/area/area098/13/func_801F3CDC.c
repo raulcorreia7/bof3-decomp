@@ -5,7 +5,7 @@ MATCH void func_801F3CDC(void) {
 
     value          = g_Task->unk_06;
     g_Task->unk_06 = value + 1;
-    if (!(value & 3)) {
+    if (!(value & 0x3)) {
         Area_ClaimSpawnSlot();
     }
     Area_UpdateSpawnSlots();
