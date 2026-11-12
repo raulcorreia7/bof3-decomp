@@ -722,11 +722,11 @@ MATCH void func_801D68AC(void) {
                     D_801DB080[i] = g_Fairies[func_801D7EA0(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
-            Message_StartAreaMessage(0xF4);
+            Message_StartAreaMessage(244);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             D_801F294E += 1;
         } else {
-            Message_StartAreaMessage(0xF7);
+            Message_StartAreaMessage(247);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             D_801F294C       = 4;
             D_801F294D       = 0;
