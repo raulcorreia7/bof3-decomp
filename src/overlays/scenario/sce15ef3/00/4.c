@@ -210,7 +210,7 @@ MATCH void func_801D230C(void) {
     s16      y;
     u16      angle;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x380, 0x100));
+    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 896, 256));
     pos.x = g_Task->pos.x.fixed;
     pos.y = g_Task->pos.y.fixed;
     pos.z = g_Task->pos.z.fixed;
