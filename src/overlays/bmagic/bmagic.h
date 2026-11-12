@@ -332,6 +332,8 @@ u32  BMagic_AllocEffect(void);
 void Effect_DrawBolt(void);
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
+/* Defined in Effect_SetActorMatrixQuarterRoll.h, which a member includes after its first call. */
+void Effect_SetActorMatrixQuarterRoll(void);
 /* Defined in Effect_DrawScreenFade.h, which a member includes after its first call. */
 void Effect_DrawScreenFade(void);
 /* Defined in Effect_DrawSparkleRays.h, which a member includes after its first call. */
