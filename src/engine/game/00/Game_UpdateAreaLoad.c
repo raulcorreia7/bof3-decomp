@@ -18,7 +18,7 @@ MATCH void Game_UpdateAreaLoad(void) {
     g_Game.walk_flags = world_flags & ~AREA_WALK_ENTRY_ACTIVE;
     func_8019FAA0(context_seed, context_a, context_b, context_kind);
 
-    if (g_GameRequestFlags & 8u) {
+    if (g_GameRequestFlags & 0x8u) {
         g_GameEntryState = GAME_STATE_FISHING;
         return;
     }
@@ -27,14 +27,14 @@ MATCH void Game_UpdateAreaLoad(void) {
     if ((u8)(request_kind + 2u) >= 2u) {
         UI_SetMode(request_kind);
         func_80198BC4(1u);
-        if (LOBU(g_GameRequestFlags) & 1u) {
+        if (LOBU(g_GameRequestFlags) & 0x1u) {
             func_801A0048(g_AreaTargetCellX, g_AreaTargetCellY);
         }
     } else if (request_kind == 0xFEu) {
         g_AreaDrawFlags = 0u;
     }
 
-    if (LOBU(g_GameRequestFlags) & 1u) {
+    if (LOBU(g_GameRequestFlags) & 0x1u) {
         g_GameEntryMode = 10u;
     } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {
         g_GameEntryMode = 20u;

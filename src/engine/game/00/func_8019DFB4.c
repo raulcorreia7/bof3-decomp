@@ -57,7 +57,7 @@ loop_1: /* scan the world-id table down from index 8 */
     value      = RANDOM_MASK(0xFFF);
     work_f     = g_Task;
     work_f->vy = value;
-    if (work_f->vx >= 0x801) {
+    if (work_f->vx >= 2049) {
         active = 1;
     } else if (value >= 0x801) {
         work_f->unk_2A = 1;

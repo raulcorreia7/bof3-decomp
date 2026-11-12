@@ -23,7 +23,7 @@ MATCH bool func_801BD938(void) {
         return 0;
     }
     slot = g_Task->unk_05;
-    if (g_Game.members[slot ^ 3].u.field.mode_12B.u8_value == 9) {
+    if (g_Game.members[slot ^ 0x3].u.field.mode_12B.u8_value == 9) {
         return 0;
     }
     if (slot == (RANDOM_MASK(1) + 1)) {

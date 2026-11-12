@@ -18,7 +18,7 @@ MATCH void func_801B9478(void) {
     if (countdown != 0) {
         work->unk_0A = (countdown - 1);
         flag_work    = g_Task;
-        if (flag_work->unk_0A & 1) {
+        if (flag_work->unk_0A & 0x1) {
             flag_work->header.flags = (flag_work->header.flags & ~ACTOR_FLAG_HIDDEN);
             return;
         }

@@ -40,7 +40,7 @@ MATCH void func_801A114C(Actor* record) {
             spad_c->unk_03       = spad_c->header.mode;
             g_Task->header.mode  = 0xAU;
             record->unk_79       = result;
-            g_Task->direction_08 = (saved & 7);
+            g_Task->direction_08 = (saved & 0x7);
             spad_d               = g_Task;
             spad_d->unk_0A       = 0;
             spad_d->timer        = 0U;

@@ -13,7 +13,7 @@ MATCH u32 func_801C6FD4(s32 map_column, s32 map_row) {
     index  = map_column + (g_AreaMapBundle.width * (s16)map_row);
     tile   = index;
     offset = tile >> 1;
-    if ((tile & 1) != 0) {
+    if ((tile & 0x1) != 0) {
         return MEM_PTR(u8, 0x80032000u)[offset] & 0xF;
     }
     return (MEM_PTR(u8, 0x80032000u)[offset] >> 4) & 0xF;

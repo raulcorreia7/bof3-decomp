@@ -49,7 +49,7 @@ MATCH bool func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 s
             tmp    = step_a;
             step_a = step_b;
             step_b = -tmp;
-            sel    = (sel + 1) & 3;
+            sel    = (sel + 1) & 0x3;
             tmp    = cur_a;
         } while (sel != two);
     }

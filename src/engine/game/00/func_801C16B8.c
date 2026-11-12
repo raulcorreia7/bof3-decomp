@@ -15,7 +15,7 @@ MATCH void func_801C16B8(void) {
     count      = 0;
     record     = g_Characters;
     do {
-        if (g_Characters[count].unk_07 & 1) {
+        if (g_Characters[count].unk_07 & 0x1) {
             g_Characters[count].fatigue = 0;
             Char_RebuildStats(record);
             g_Characters[count].status    = 0;

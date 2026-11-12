@@ -13,8 +13,8 @@ MATCH void func_801A4AA8(void) {
     step->timer                    = 0;
     motion                         = g_Task;
     animation                      = g_CurrentActor;
-    motion->scale.y                = 0x10000;
-    motion->scale.x                = 0x10000;
+    motion->scale.y                = ONE;
+    motion->scale.x                = ONE;
     motion->unk_6C                 = 0;
     motion->unk_68                 = 0;
     motion->unk_64                 = 0;

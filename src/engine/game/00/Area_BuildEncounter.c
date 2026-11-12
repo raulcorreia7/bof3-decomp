@@ -17,7 +17,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     result = 1;
     TASK_SET(D_801CD8D0);
     if ((work_mode & BYTE_MASK) >= 4U) {
-        D_801CD8C8 = (D_801CD8C8 + 1) & 3;
+        D_801CD8C8 = (D_801CD8C8 + 1) & 0x3;
     } else {
         D_801CD8C8 = work_mode;
     }
@@ -59,7 +59,7 @@ loop_16:
         } else {
             reach = 0;
         }
-        if (!(func_801C7064(x, y, reach, 0x20) & BYTE_MASK)) {
+        if (!(func_801C7064(x, y, reach, 32) & BYTE_MASK)) {
             goto block_29; /* the scan found its entry */
         }
         i += 1;
@@ -72,7 +72,7 @@ loop_18:
     slot = fields[-7];
     off  = slot * ENEMY_STRIDE;
     if (entry->active != 0) {
-        if (!(func_801C7064(*(s32*)(fields - 4), *(s32*)(fields), ENCOUNTER_ENEMY_AT(off)->reach, ENCOUNTER_ENEMY_AT(off)->height) & 0xFF)) {
+        if (!(func_801C7064(*(s32*)(fields - 4), *(s32*)(fields), ENCOUNTER_ENEMY_AT(off)->reach, ENCOUNTER_ENEMY_AT(off)->height) & BYTE_MASK)) {
             entry->active = 0;
             D_801CD8C4 -= 1;
         }

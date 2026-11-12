@@ -23,7 +23,7 @@ MATCH void func_801C5874(void) {
     g_Task     = (Actor*)(base - 0x75);
     sel        = func_801A8D38(base - 1, target);
     D_80143F50 = sel;
-    if (base[-1] & 8) {
+    if (base[-1] & 0x8) {
         base[-1] &= 0xF7;
         D_80143F49 = 0;
         D_80143F4A = 0;
@@ -32,7 +32,7 @@ MATCH void func_801C5874(void) {
         return;
     }
     if (sel == GAME_NONE) {
-        if (base[-1] & 4) {
+        if (base[-1] & 0x4) {
             px    = &g_AreaScrollTargetX;
             py    = &g_AreaScrollTargetY;
             dx    = *px - g_PartyX;

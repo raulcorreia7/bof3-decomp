@@ -11,11 +11,11 @@ MATCH void func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_he
     u8  mode_b;
 
     mode_a = 2;
-    if ((mode_pair_flag & 1) == 0) {
+    if ((mode_pair_flag & 0x1) == 0) {
         mode_a = 1;
     }
     mode_b = 1;
-    if ((mode_pair_flag & 1) == 0) {
+    if ((mode_pair_flag & 0x1) == 0) {
         mode_b = 2;
     }
 

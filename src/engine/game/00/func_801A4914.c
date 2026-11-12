@@ -8,7 +8,7 @@ MATCH void func_801A4914(void) {
     work           = g_Task;
     flags          = work->option_flags;
     if (flags & ACTOR_OPT_ROUTE_LOCKED) {
-        work->unk_2A = (flags >> 4) & 1;
+        work->unk_2A = (flags >> 4) & 0x1;
         Actor_SelectScript(g_Task->direction_08);
         return;
     }

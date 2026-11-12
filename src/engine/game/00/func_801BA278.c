@@ -55,7 +55,7 @@ done:
         if (cells[1] == 0xA0)
             return 0x10;
         if (cells[0] == 0xA2 || cells[1] == 0xA2) {
-            if ((g_Task->direction_08 & 1) == 0)
+            if ((g_Task->direction_08 & 0x1) == 0)
                 return 0x10;
         }
         if (cells[0] == 0xA3) {
@@ -72,7 +72,7 @@ done:
         if (cells[0] == 0xA3 || cells[1] == 0xA3 || cells[2] == 0xA3)
             return 0x10;
         if (cells[0] == 0xA2 || cells[1] == 0xA2 || cells[2] == 0xA2) {
-            if ((g_Task->direction_08 & 1) == 0)
+            if ((g_Task->direction_08 & 0x1) == 0)
                 return 0x10;
         }
         if ((cells[0] & 0xF0) == 0xA0 || (cells[1] & 0xF0) == 0xA0 || (cells[2] & 0xF0) == 0xA0) {

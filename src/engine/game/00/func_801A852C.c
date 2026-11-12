@@ -22,7 +22,7 @@ MATCH void func_801A852C(void) {
             break;
         case 2:
             if (g_GameStateIndex != *state) {
-                bit_index = 0xFF;
+                bit_index = GAME_NONE;
                 seed      = 0xB9;
                 state += 0x63C;
                 for (;;) {

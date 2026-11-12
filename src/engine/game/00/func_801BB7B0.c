@@ -3,7 +3,7 @@
 MATCH s32 func_801BB7B0(s32 selector) {
     s32 value;
 
-    value = ((u8*)&D_1F800000)[selector & BYTE_MASK] & 0x0F;
+    value = ((u8*)&D_1F800000)[selector & BYTE_MASK] & 0xF;
     switch (value) {
         case 0x0F:
             return 2;

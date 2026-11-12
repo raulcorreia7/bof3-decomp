@@ -15,7 +15,7 @@ MATCH void func_801AE2B0(s16 quad_x, s16 quad_y, s32 quad_width, s32 quad_height
     width  = quad_width;
     height = quad_height;
     if (use_frame_shade != 0) {
-        shade = (((g_FrameCount & 8) ? (g_FrameCount & 6) : (~g_FrameCount & 6)) << 5) | 0x3F;
+        shade = (((g_FrameCount & 0x8) ? (g_FrameCount & 0x6) : (~g_FrameCount & 0x6)) << 5) | 0x3F;
     } else {
         shade = 0xFF;
     }

@@ -7,7 +7,7 @@ MATCH bool func_801A1AE4(Actor* arg) {
     s32 x;
     s32 y;
 
-    route = arg->direction_08 & 7;
+    route = arg->direction_08 & 0x7;
     pos_x = arg->pos.x.fixed + g_FacingSteps[route].x;
     x     = pos_x;
     pos_y = arg->pos.y.fixed + g_FacingStepY[route * 2];

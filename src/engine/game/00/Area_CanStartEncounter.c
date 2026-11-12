@@ -26,10 +26,10 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (value < D_80145FB8) {
         return 0;
     }
-    if (g_Game.members[0].status.field.flags_12C.u8_value & 1) {
+    if (g_Game.members[0].status.field.flags_12C.u8_value & 0x1) {
         return 0;
     }
-    if (!(g_GameRequestFlags & 1) && D_80143EFC >= 0xF1) {
+    if (!(g_GameRequestFlags & 0x1) && D_80143EFC >= 0xF1) {
         return 0;
     }
     for (i = 0; i < g_Game.party_size; i++) {
@@ -37,7 +37,7 @@ MATCH s32 Area_CanStartEncounter(void) {
             return 0;
         }
     }
-    if (!(g_GameRequestFlags & 1)) {
+    if (!(g_GameRequestFlags & 0x1)) {
         work   = g_Task;
         ok     = Area_BuildEncounter(4, 0);
         g_Task = work;

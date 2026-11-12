@@ -6,7 +6,7 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     u8*   rect;
     SPRT* sprt;
 
-    rect = UI_GetSpriteRect(sprite_id, flags & 1);
+    rect = UI_GetSpriteRect(sprite_id, flags & 0x1);
     sprt = (SPRT*)g_GfxPrimCursor;
 
     SetSprt(sprt);
@@ -17,7 +17,7 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     setUV0(sprt, rect[0], rect[1]);
     setWH(sprt, rect[2], rect[3]);
 
-    if (!(flags & 2)) {
+    if (!(flags & 0x2)) {
         setClut(sprt, 176, STAGE_PALETTE_Y + 1);
     } else {
         setClut(sprt, 128, STAGE_PALETTE_Y + 2);

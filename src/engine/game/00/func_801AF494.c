@@ -3,7 +3,7 @@
 MATCH bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id) {
     u8 index;
 
-    if (item_id == 0) {
+    if (item_id == ITEM_NOTHING) {
         return false;
     }
     switch (test) {
@@ -14,7 +14,7 @@ MATCH bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id) {
                 return false;
             }
             index = item_id;
-            if ((g_Items[index].flags & 1) == 0) {
+            if ((g_Items[index].flags & 0x1) == 0) {
                 return false;
             }
             if (index != ITEM_FAERIE_TIARA) {
@@ -26,19 +26,19 @@ MATCH bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id) {
             }
             return false;
         case 2:
-            if (Item_GetFlags(category, item_id) & 2) {
+            if (Item_GetFlags(category, item_id) & 0x2) {
                 /* record bit 1 set */
                 goto ret1;
             }
             return false;
         case 3:
-            if ((Item_GetFlags(category, item_id) & 8) == 0) {
+            if ((Item_GetFlags(category, item_id) & 0x8) == 0) {
                 /* record bit 3 clear */
                 goto ret1;
             }
             return false;
         case 4:
-            if (((Item_GetEquipability(category, item_id) & BYTE_MASK) >> character_id) & 1) {
+            if (((Item_GetEquipability(category, item_id) & BYTE_MASK) >> character_id) & 0x1) {
                 /* selected record bit set */
                 goto ret1;
             }

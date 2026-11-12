@@ -23,7 +23,7 @@ MATCH void func_801B0C88(void) {
     if (!(g_Game.flags & 0x200)) {
         flag = g_AutoRun;
         if (g_Game.input & g_InputMasks[FIELD_INPUT_RUN]) {
-            if ((flag ^ 1) == 0) {
+            if ((flag ^ 0x1) == 0) {
                 /* confirm pressed with the flag set: use mode 3 */
                 goto store3;
             }

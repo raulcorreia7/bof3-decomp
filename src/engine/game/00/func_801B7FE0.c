@@ -7,7 +7,7 @@ MATCH void func_801B7FE0(void) {
     u8     arg;
 
     work = g_Task;
-    COORD_INT(work->pos.z) -= 0x10;
+    COORD_INT(work->pos.z) -= 16;
     if ((s16)COORD_INT(work->pos.z) < Area_ReadHeight(work->pos.x.fixed, work->pos.y.fixed)) {
         value                   = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
         store                   = g_Task;

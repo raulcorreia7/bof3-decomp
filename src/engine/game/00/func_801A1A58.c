@@ -17,9 +17,9 @@ MATCH bool func_801A1A58(Actor* actor) {
     /* FAKE: retail loads the route byte before the coordinate loads. */
     FAKE_BARRIER();
     dx = entity->pos.x.fixed;
-    dx += g_FacingSteps[(route & 7)].x;
+    dx += g_FacingSteps[(route & 0x7)].x;
     dy_sum = entity->pos.y.fixed;
-    dy_sum += g_FacingStepY[(route & 7) * 2];
+    dy_sum += g_FacingStepY[(route & 0x7) * 2];
     dx = (dx >> 16) - FIELD(s16, entity, 0x82u);
     /* FAKE: retail loads the x bound after the delta. */
     FAKE_BARRIER();

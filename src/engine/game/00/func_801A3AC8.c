@@ -9,7 +9,7 @@ MATCH bool func_801A3AC8(Actor* record) {
     s32    pos_y;
 
     rec   = record;
-    route = rec->direction_08 & 7;
+    route = rec->direction_08 & 0x7;
     pos_x = rec->pos.x.fixed + g_FacingSteps[route].x;
     x     = pos_x;
     pos_y = rec->pos.y.fixed + g_FacingStepY[route * 2];
