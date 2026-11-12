@@ -6,13 +6,13 @@ MATCH void func_801F345C(void) {
     s32    index;
     s16    screen_y;
 
-    scratch                  = g_Task;
-    index                    = COORD_INT(scratch->pos.x) * 2;
-    scratch->direction_08    = (COORD_INT(scratch->pos.y) == 0);
-    work                     = g_Task;
-    work->pos.x.part.integer = D_801F3748[index];
-    work->pos.y.part.integer = D_801F3749[index];
-    COORD_INT(work->pos.z)   = -128;
+    scratch                = g_Task;
+    index                  = COORD_INT(scratch->pos.x);
+    scratch->direction_08  = (COORD_INT(scratch->pos.y) == 0);
+    work                   = g_Task;
+    COORD_INT(work->pos.x) = D_801F3748[index][0];
+    COORD_INT(work->pos.y) = D_801F3748[index][1];
+    COORD_INT(work->pos.z) = -128;
 
     if (abs(g_Game.members[0].pos.y.fixed - (TO_COORD(COORD_INT(work->pos.y) + 1) | COORD_HALF)) > COORD_HALF) {
         goto reset;

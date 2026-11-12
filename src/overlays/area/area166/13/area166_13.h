@@ -15,9 +15,8 @@ extern u8 D_801F3718[];
 extern u8 D_801F3940[];
 extern u8 D_801F3941[];
 
-/* The destination x and y bytes this pass indexes by the current x cell. */
-extern u8 D_801F3748[];
-extern u8 D_801F3749[];
+/* The destination x and y byte pairs this pass indexes by the current x cell. */
+extern u8 D_801F3748[][2];
 
 /* The game-overlay state bytes the cancel path resets. */
 
