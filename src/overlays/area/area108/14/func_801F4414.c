@@ -14,7 +14,7 @@ NON_MATCHING void func_801F4414(void) {
     }
     facing = g_Game.members[0].facing & 7;
     for (index = 0; index < 5; index++) {
-        if (facing == D_801F636C[index * 3 + 2] && D_80147B26[0] == D_801F636C[index * 3] && D_80147B26[2] == D_801F636C[index * 3 + 1]) {
+        if (facing == D_801F636C[index].facing && D_80147B26[0] == D_801F636C[index].x && D_80147B26[2] == D_801F636C[index].y) {
             break;
         }
     }
