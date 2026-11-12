@@ -8,7 +8,26 @@ MATCH void func_801EEC04(void) {
     ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EED60);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    PartyMember* actor;
+    u32          effect_slot;
+
+    actor                                     = g_Battle.selected_actor;
+    g_Task->pos.x.fixed                       = actor->pos.x.fixed;
+    g_Task->pos.y.fixed                       = actor->pos.y.fixed;
+    g_Task->pos.z.fixed                       = actor->pos.z.fixed;
+    g_Task->unk_2E.half                       = actor->unk_2E.half;
+    g_Task->unk_30.half                       = actor->unk_30.half - 16;
+    effect_slot                               = Battle_AllocEffect(1, 21) & BYTE_MASK;
+    g_BattleEffects[effect_slot].target.party = g_Task;
+    g_BattleEffects[effect_slot].unk_08       = actor->facing;
+    g_BattleEffects[effect_slot].pos.x.fixed  = actor->pos.x.fixed;
+    g_BattleEffects[effect_slot].pos.y.fixed  = actor->pos.y.fixed;
+    g_BattleEffects[effect_slot].pos.z.fixed  = actor->pos.z.fixed;
+    g_Task->param.unk_0B                      = 0;
+    g_Task->header.mode++;
+    SND_QueueSelectionFx(0x100);
+}
 
 /* Copies the selected actor's unk_2E and unk_30 - 0x10; at unk_0B 0xFF releases the target and plays. */
 MATCH void func_801EED60(void) {
