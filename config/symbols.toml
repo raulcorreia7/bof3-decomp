@@ -601,6 +601,7 @@ BMagic_DispatchMode = { addr = 0x801EEC50, type = "func", source = "Runs the han
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 BMagic_DispatchEffectMode = { addr = 0x801EEF30, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic058." }
 Effect_TickDownAndClear = { addr = 0x801EF338, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic058 (Sanctuary)." }
 Effect_SetActorMatrix = { addr = 0x801EF69C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic058 (Sanctuary)." }
