@@ -18,7 +18,7 @@ MATCH void func_801EF0F8(void) {
         func_801EFD88();
         count          = g_Task->unk_09 + 4;
         g_Task->unk_09 = count;
-        if (count == 0x10) {
+        if (count == 16) {
             SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
             g_Task->param.unk_0B = 0;
             g_Task->header.mode += 1;
