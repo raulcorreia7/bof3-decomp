@@ -5,6 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The work record whose rays this image draws. */
+#define EFFECT_DRAW_WORK D_801F21F0
+
 extern BMagicEffectFuncs D_801EEC04;
 extern BMagicEffectWork* D_801F21F0;
 
@@ -28,7 +31,7 @@ typedef struct Magic073Steps {
 
 extern Magic073Steps D_801EEC1C;
 void                 func_801F00C4(void);
-void                 func_801EFBF8(u16 angle, u16 radius);
+void                 Effect_DrawSparkleRays(u16 angle, u16 radius);
 void                 func_801EFE2C(u16 angle, u16 radius);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
