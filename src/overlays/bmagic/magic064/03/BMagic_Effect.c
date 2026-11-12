@@ -382,7 +382,32 @@ MATCH void func_801F0E90(void) {
     Area_UpdatePaletteTint((s8)g_Task->unk_09);
 }
 
-INCLUDE_ASM(func_801F0EEC);
+MATCH void func_801F0EEC(s32 variant, s32 abr, s32 color) {
+    SPRT* sprt;
+    u32   index;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, (u8)abr, 0x340, 0x100), 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    sprt = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprt);
+    sprt->r0 = color;
+    sprt->g0 = color;
+    sprt->b0 = color;
+    if ((u8)variant < 2) {
+        sprt->x0 = g_Task->unk_2E.half - 0x20;
+        sprt->y0 = g_Task->unk_30.half - 0x40;
+    } else {
+        sprt->x0 = g_Task->unk_2E.half - 0x28;
+        sprt->y0 = g_Task->unk_30.half - 0x40;
+    }
+    index    = variant & BYTE_MASK;
+    sprt->u0 = D_801F13A4[index].u;
+    sprt->v0 = D_801F13A4[index].v;
+    sprt->w  = 0x50;
+    sprt->h  = 0x48;
+    SetSemiTrans(sprt, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801F103C);
 
