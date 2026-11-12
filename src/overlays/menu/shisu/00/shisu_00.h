@@ -177,6 +177,8 @@ extern s32             D_801DA084;
 extern u8              D_801DA0C0;
 extern u8              D_801DA0C6;
 extern u32             D_801DA100;
+/* kept: the tint bytes stay separate globals; one array shares their base register and leaves
+   func_801D2ADC eight bytes short. */
 extern u8              D_801DA11D;
 extern u8              D_801DA11E;
 extern u8              D_801DA11F;
