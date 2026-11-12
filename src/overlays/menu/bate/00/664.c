@@ -170,7 +170,41 @@ INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Shop_DrawEquipment.h"
 
-INCLUDE_ASM(func_801D31B0);
+MATCH void func_801D31B0(s16 x, s16 y, u8 index, u8 flag) {
+    Character* character;
+    u8*        base;
+    u8*        base16;
+    u8*        entryp;
+    s16        tx;
+    s32        pos_x;
+    s32        value;
+    s32        index_off;
+    /* FAKE: retail reserves 24 frame bytes between the outgoing arguments and
+     * the saved registers that no statement in the body uses. */
+    FAKE_STACK_PADS(u8, 24);
+
+    base = &g_WindowStyle;
+    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), MENU_EXPERIENCE_WINDOW_WIDTH, MENU_EXPERIENCE_WINDOW_HEIGHT, 0, base[0]);
+    index_off = index * PARTY_RECORD_STRIDE;
+    base16    = base + CHARACTER_BLOCK_RECORDS;
+    entryp    = base16 + index_off;
+    character = (Character*)entryp;
+    pos_x     = x;
+    tx        = pos_x + MENU_EXPERIENCE_NEXT_X;
+    UI_DrawText((flag == 0) ? pos_x + MENU_EXPERIENCE_EXP_X : tx, (s16)(y + MENU_EXPERIENCE_CAPTION_Y), 0, TEXT_LENGTH_MAX, (flag == 0) ? D_801D8B48 : D_801D8B4C);
+    if (flag == 0) {
+        value = character->exp;
+    } else {
+        value = Char_GetExpForLevel(index, (character->level + 1) & BYTE_MASK);
+    }
+    if (value != -1) {
+        TEXT_Format(g_UiFormatBuffer, g_MenuExperienceFormat, value);
+    } else {
+        TEXT_FormatLiteral(g_UiFormatBuffer, g_MenuExperienceBlank);
+    }
+    UI_DrawAsciiString((s16)(x + MENU_EXPERIENCE_VALUE_X), (s16)(y + MENU_EXPERIENCE_VALUE_Y), 0, g_UiFormatBuffer);
+    UI_DrawSpriteRun(x, y, D_801D8984, 1);
+}
 
 #include "overlays/menu/Menu_DrawCursorFrame.h"
 
