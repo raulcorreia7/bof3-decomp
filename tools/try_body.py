@@ -15,8 +15,8 @@ build/meson check-<image>`, then name and share it (docs/conventions.md).
 
 A body is tried once per function: the tool hashes the body text and records every failed result
 in `build/try_body_seen.json`. The same body again prints `REPEAT` with the earlier result and
-does not compile; `--force` tries it anyway. A `FAIL` line leads with the number of differing
-instructions when the candidate compiled and linked.
+does not compile. A `FAIL` line leads with the number of differing instructions when the
+candidate compiled and linked.
 """
 
 from __future__ import annotations
@@ -186,23 +186,21 @@ def match(ref: str, root: Path = ROOT) -> tuple[bool, str]:
     return result.returncode == 0, " | ".join(x.strip() for x in tail)[:230]
 
 
-def attempt(root: Path, func: Func, text: str, force: bool = False) -> tuple[str, str]:
+def attempt(root: Path, func: Func, text: str) -> tuple[str, str]:
     """Try the body ``text`` for ``func``; return (status, detail)."""
-    status, detail, _ = trial(root, func, text, force)
+    status, detail, _ = trial(root, func, text)
     return status, detail
 
 
-def trial(
-    root: Path, func: Func, text: str, force: bool = False
-) -> tuple[str, str, int | None]:
+def trial(root: Path, func: Func, text: str) -> tuple[str, str, int | None]:
     """Try the body; return (status, detail, differing instructions or None).
 
-    A failed body is recorded per function; the same body again returns ``REPEAT`` unless ``force``.
+    A failed body is recorded per function; the same body again returns ``REPEAT``.
     """
     key, ref = body_key(text), func.ref
     seen = load_seen(root)
     old = seen.get(ref, {}).get(key)
-    if old and not force:
+    if old:
         return "REPEAT", f"{old['status']} {old['detail']}".strip(), old["diff"]
     status, detail, diff = _trial(root, func, text)
     if status == "FAIL":
@@ -252,12 +250,10 @@ def restore(touched: dict[Path, str]) -> None:
         path.write_text(text, encoding="utf-8")
 
 
-def run_one(
-    funcs: list[Func], ref: str, source: Path | None, force: bool = False
-) -> str:
+def run_one(funcs: list[Func], ref: str, source: Path | None) -> str:
     """Try one body and return its report line."""
     text = sys.stdin.read() if source is None else source.read_text(encoding="utf-8")
-    status, detail = attempt(ROOT, find(funcs, ref), text, force)
+    status, detail = attempt(ROOT, find(funcs, ref), text)
     return f"{status} {ref}" + (f": {detail}" if detail else "")
 
 
@@ -269,21 +265,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("target", nargs="?", help="TARGET@NAME or TARGET@0xADDRESS")
     parser.add_argument("body", nargs="?", help="body file; - or omitted reads stdin")
     parser.add_argument("--batch", type=Path, help="TSV of TARGET@NAME, BODY.c")
-    parser.add_argument(
-        "--force", action="store_true", help="try a body already tried for the function"
-    )
     args = parser.parse_args(argv)
     funcs = load_index(ROOT)
     if args.batch:
         for row in args.batch.read_text(encoding="utf-8").splitlines():
             if row.strip() and not row.startswith("#"):
                 ref, body = row.split("\t")[:2]
-                print(run_one(funcs, ref, Path(body), args.force), flush=True)
+                print(run_one(funcs, ref, Path(body)), flush=True)
         return 0
     if not args.target:
         parser.error("give TARGET@NAME or --batch ROWS.tsv")
     source = None if args.body in (None, "-") else Path(args.body)
-    line = run_one(funcs, args.target, source, args.force)
+    line = run_one(funcs, args.target, source)
     print(line)
     return 0 if line.startswith("EXACT") else 1
 

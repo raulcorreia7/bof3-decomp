@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from bof3.resolve import load_target_manifests
-from cc import asm_dir
+from bof3.resolve.ids import asm_dir
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -11,11 +11,11 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_every_image_folder_follows_from_its_source_folder() -> None:
     for target, manifest in load_target_manifests(ROOT).items():
         source = ROOT / manifest.source_dir / "func_80000000.c"
-        assert asm_dir(source) == f"asm/{target}"
+        assert asm_dir(source, ROOT) == f"asm/{target}"
 
 
 def test_a_source_outside_src_has_no_asm_dir() -> None:
-    assert asm_dir(ROOT / "emit/empty.c") is None
+    assert asm_dir(ROOT / "emit/empty.c", ROOT) is None
 
 
 def test_authored_assembly_selects_the_hand_folder(tmp_path: Path) -> None:

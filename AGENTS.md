@@ -57,15 +57,15 @@ written as `+` (`check-exe+slus_004_22`). Without the disc only the disc-free ch
 
 ## Task routing
 
-| Task                                      | Read                                                                                                                                                             |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Match or polish one function              | [matching](docs/matching.md), [`decomp` match](.agents/skills/decomp/references/match.md)                                                                        |
-| Type, share a twin, restructure, helpers  | [types](docs/conventions.md#types-and-values), [files](docs/conventions.md#files-and-headers), [`decomp` refactor](.agents/skills/decomp/references/refactor.md) |
-| Name a function, global, type or constant | [names](docs/conventions.md#names), [`decomp` name](.agents/skills/decomp/references/name.md)                                                                    |
-| Tools, build files, docs, prompts         | [toolchain](docs/toolchain.md), [`decomp` tool](.agents/skills/decomp/references/tool.md)                                                                        |
-| Bytes, callers, strings, a question       | [toolchain](docs/toolchain.md#native-tools), [`decomp` research](.agents/skills/decomp/references/research.md)                                                   |
-| Review a diff or a landed range           | [`decomp` review](.agents/skills/decomp/references/review.md)                                                                                                    |
-| Target, compiler, PsyQ, any command       | [toolchain](docs/toolchain.md)                                                                                                                                   |
+| Task                                      | Read                                                                                                                                                        |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Match or polish one function              | [matching](docs/matching.md), [`decomp` match](.agents/skills/decomp/references/match.md)                                                                   |
+| Type, share a twin, restructure, helpers  | [types](docs/conventions.md#types-and-values), [files](docs/layout.md#files-and-headers), [`decomp` refactor](.agents/skills/decomp/references/refactor.md) |
+| Name a function, global, type or constant | [names](docs/naming.md#names), [`decomp` name](.agents/skills/decomp/references/name.md)                                                                    |
+| Tools, build files, docs, prompts         | [toolchain](docs/toolchain.md), [`decomp` tool](.agents/skills/decomp/references/tool.md)                                                                   |
+| Bytes, callers, strings, a question       | [toolchain](docs/toolchain.md#native-tools), [`decomp` research](.agents/skills/decomp/references/research.md)                                              |
+| Review a diff or a landed range           | [`decomp` review](.agents/skills/decomp/references/review.md)                                                                                               |
+| Target, compiler, PsyQ, any command       | [toolchain](docs/toolchain.md)                                                                                                                              |
 
 Every page: [docs/README.md](docs/README.md). Run the quality pass
 ([review](.agents/skills/decomp/references/review.md#quality-pass)) on your diff before every report.

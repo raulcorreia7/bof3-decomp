@@ -30,6 +30,8 @@ import subprocess
 import sys
 import tempfile
 
+from bof3.resolve.ids import asm_dir
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GCC = os.environ.get("PSX_GCC") or f"{ROOT}/toolchains/gcc-2.7.2-psx/gcc"
 GCC_DIR = os.path.dirname(os.path.realpath(GCC))
@@ -85,31 +87,6 @@ def parse(argv):
     return plan
 
 
-def asm_dir(source, root=ROOT):
-    """Return the `ASM_DIR` of a source under `src/`: its image folder, or its hand folder.
-
-    The image follows from the source folder: `src/engine/slus`, `src/logo`, and
-    `.../<archive>/<slot>/<file>` for the one `emi/<family>/<archive>/<slot>` under `config/`.
-    """
-    parts = os.path.relpath(os.path.abspath(source), root).split(os.sep)
-    if parts[0] != "src":
-        return None
-    if parts[1:3] == ["engine", "slus"]:
-        target = "exe/slus_004_22"
-    elif parts[1] == "logo":
-        target = "exe/logo"
-    elif len(parts) >= 5:
-        found = glob.glob(f"{root}/config/emi/*/{parts[-3]}/{parts[-2]}/splat.yaml")
-        if len(found) != 1:
-            return None
-        target = os.path.relpath(os.path.dirname(found[0]), f"{root}/config")
-    else:
-        return None
-    stem = os.path.splitext(parts[-1])[0]
-    hand = f"asm/{target}/hand"
-    return hand if os.path.isfile(f"{root}/{hand}/{stem}.s") else f"asm/{target}"
-
-
 def run(argv, **kw):
     return subprocess.run(argv, check=False, **kw)
 
@@ -144,7 +121,7 @@ def gcc_arguments(plan):
     """Return GCC's arguments for the source: the plan's plus its folder and `ASM_DIR`."""
     source, gcc_args = plan["source"], plan["gcc"]
     if not any(a.startswith("-DASM_DIR=") for a in gcc_args):
-        directory = asm_dir(source)
+        directory = asm_dir(source, ROOT)
         if directory:
             gcc_args = [*gcc_args, f'-DASM_DIR="{directory}"']
     if os.path.relpath(os.path.abspath(source), ROOT).startswith("src" + os.sep):

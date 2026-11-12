@@ -31,10 +31,10 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find repeated instruction runs in functions | `tools/chunks.py -w 24 -o chunks.tsv`                                 | [duplicates](#duplicates-and-names)                       |
 | Mark each run asm, shared or pasted      | `tools/classify.py chunks.tsv out.tsv`                                   | same                                                      |
 | Find repeated C bodies in the source     | `ripwire src --clones`                                                   | same                                                      |
-| Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/conventions.md#rename-steps)       |
+| Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/naming.md#rename-steps)       |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
-| Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/conventions.md#symbols-and-the-link)    |
+| Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
 | Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown [--update]`                         | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | [type loss](#type-loss)                                   |
@@ -64,7 +64,7 @@ target's value. It declares what the body now uses in the image header, then cal
 Each row prints `EXACT`, `REMAP-EXACT` (after a rename or literal), `FAIL` with the number of
 differing instructions and the first difference, or `SKIP`. A kept body is a lead: run
 `check-<image>`, then name it from evidence and share it
-([shared bodies](../docs/conventions.md#shared-bodies)). Both tools read the function index
+([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)). Both tools read the function index
 `build/func_index.json.gz`, built from the images on first use; add `--rebuild` after a build.
 They need `rapidfuzz` for the search (`tools/setup.sh --matching`).
 
@@ -166,7 +166,7 @@ Meson, setup or another tool calls these. A contributor does not run them.
 | `split.py`, `link_symbols.py`, `decomp_yaml.py` | Split an image, write its link script, and write the coddog settings    |
 | `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper (it caches objects in `~/.cache/bof3-cc`; `BOF3_CC_CACHE=0` turns that off) and the DMPSX rewrite |
 | `objdiff_config.py`, `rzproject.py`          | Build the objdiff project and the Rizin projects                        |
-| `check_addrs.py`, `check_kept.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_hand.sh`, `check_headers.sh`, `check_plain.sh`, `check_tree.sh`, `check_enum_members.py` | The bodies of the `addrs`, `kept`, `markers`, `names`, `include-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
+| `check_addrs.py`, `check_kept.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_configured.sh`, `check_plain.sh`, `check_tree.sh`, `check_enum_members.py` | The bodies of the `addrs`, `kept`, `markers`, `names`, `include-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
 | `format.sh`                                  | The body of `format` and `format-check`                                 |
 
 `bin/coddog` finds twins and `bin/rz` reads retail bytes; no other tool does either. `bin/internal/` holds `find-tool` and the binutils wrappers (`as`, `ld`, `nm`, `objcopy`, `objdump`) that the build uses.
