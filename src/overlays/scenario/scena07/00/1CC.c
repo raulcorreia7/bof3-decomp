@@ -428,7 +428,6 @@ INCLUDE_ASM(func_801F88B8);
 
 INCLUDE_ASM(func_801F8BE8);
 
-
 #include "shared/AngleAverage12.h"
 
 INCLUDE_ASM(func_801F8F90);

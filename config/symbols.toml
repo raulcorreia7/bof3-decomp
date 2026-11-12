@@ -551,6 +551,7 @@ Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "Counts th
 g_BMagicEffectModes = { addr = 0x801F0BB0, source = "Handlers of magic060 (Identify), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic062/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "The scratchpad effect cell at 0x1F800000 read as a halfword: the magic062 spiral step stages its radius there." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic062 (Celerity)." }
 Effect_ReplacePaletteFade = { addr = 0x801EEEC0, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic062 (Celerity)." }
