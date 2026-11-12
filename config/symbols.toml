@@ -680,6 +680,7 @@ g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC50 = { addr = 0x801EEC50, type = "Magic064SecondSteps", size = 0x0c, source = "Handler table of the magic064 effect, run by header.step (byte 0x02)." }
 BMagic_DispatchMode = { addr = 0x801EEC7C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic064 (Weretiger)." }
 Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "Clears the effect timer (byte 0x09) and runs the next-step routine in magic064 (Weretiger)." }
+BMagic_ProjectCell = { addr = 0x801F12B8, type = "func", source = "Projects the map cell a projected point lands on." }
 g_BMagicEffectModes = { addr = 0x801F1394, source = "Handlers of magic064 (Weretiger), run by header.step (byte 0x02)." }
 
 ["emi/bmagic/magic065/00"]
@@ -1090,6 +1091,7 @@ g_BMagicEffectModes = { addr = 0x801EFCBC, source = "Handlers of magic101 (Typho
 ["emi/bmagic/magic102/03"]
 D_1F800034_U16 = { addr = 0x1F800034, type = "u16", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Effect_DrawShadedQuads = { addr = 0x801F016C, type = "func", source = "Draws the effect's Gouraud-shaded quads with a depth offset." }
 Area_DrawGroundSceneSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_DrawSceneSprite, with its depth from Area_SampleHeight under its origin, so the sprite stands on the ground." }
 
 ["emi/bmagic/magic103/03"]
