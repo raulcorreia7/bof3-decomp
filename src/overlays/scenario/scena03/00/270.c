@@ -477,7 +477,26 @@ MATCH s32 func_801FC6C4(void) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FC704);
+MATCH s8 func_801FC704(void) {
+    s32 kind;
+
+    kind = LOHU(g_GameAreaId);
+    switch (kind) {
+        case AREA_ID_WYNDIA_LOWER:
+            return func_801FC944();
+        case AREA_ID_WYNDIA_CASTLE_BASEMENT:
+            return func_801FC8AC();
+        case AREA_ID_GENMEL:
+            return func_801FCAB8();
+        case AREA_ID_MOUNT_MYRNEG:
+            return func_801FC7EC();
+        case AREA_ID_EYGNOCK_ROAD:
+            return func_801FC9DC();
+        case AREA_ID_MOUNT_BOUMORE_FIRST:
+            return func_801FCB4C();
+    }
+    return 0;
+}
 
 MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
     u8 var_v0;
