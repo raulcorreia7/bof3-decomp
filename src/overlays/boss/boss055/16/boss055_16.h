@@ -58,5 +58,6 @@ void func_800C2340(u8 arg0, u8 index, u8 value);
 u8   func_801DDF50(u16 entry_id, u32 table_kind);
 
 extern Callback D_800C35D8[];
+extern Point2D  D_800C34D4[];
 
 #endif
