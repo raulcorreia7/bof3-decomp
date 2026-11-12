@@ -48,7 +48,7 @@ MATCH void func_801D3624(void) {
             D_80146386              = work->unk_2E.half + ENEMY_COMBATANT(kind_index).panel_offset_x;
             D_80146388              = work->unk_30.half + ENEMY_COMBATANT(kind_index).panel_offset_y;
         }
-        D_8014638A = FIELD(u16, work, 0x32);
+        D_8014638A = work->depth;
     }
     Battle_LoadSelectionEffect((*(u8*)&g_Battle.action_id));
     g_Battle.ui_step += 1;
