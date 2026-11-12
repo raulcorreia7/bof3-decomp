@@ -69,7 +69,7 @@ MATCH void func_801EF18C(void) {
     u8 slot;
     u8 tick;
 
-    if ((g_FrameCount & 3) == 3) {
+    if ((g_FrameCount & 0x3) == 0x3) {
         slot                                   = BMagic_AllocEffect();
         BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
         BMAGIC_EFFECT_SLOTS[slot].unk_0B       = g_Task->unk_09;
