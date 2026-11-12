@@ -100,6 +100,15 @@ void func_801F88FC(Scena03Line* line);
 
 void func_801F7FFC(s32 arg0);
 
+/* The area probes func_801FC704 dispatches to: each tests the entry coordinates against the cells
+ * of its area. */
+s32 func_801FC7EC(s32 entry_x, s32 entry_y);
+s32 func_801FC8AC(s32 entry_x, s32 entry_y);
+s8  func_801FC944(s32 entry_x, s32 entry_y);
+s8  func_801FC9DC(s32 entry_x, s32 entry_y);
+s8  func_801FCAB8(s32 entry_x, s32 entry_y);
+s8  func_801FCB4C(s32 entry_x, s32 entry_y);
+
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
 #endif
