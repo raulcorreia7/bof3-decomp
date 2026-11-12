@@ -53,6 +53,9 @@ ASSERT_OFFSET(CellBlock, y0, 0x01);
 ASSERT_OFFSET(CellBlock, x1, 0x02);
 ASSERT_OFFSET(CellBlock, y1, 0x03);
 
+/* The part-word bits the upload steps clear before a cell re-stages its rows. */
+#define CELL_UPLOAD_MASK (~(0x1F << 19))
+
 extern CellBlock D_801F47D4[];
 /* The primitive rows one cell id selects, two per row. */
 extern POLY_FT4  g_AreaCellPrims[][2];
