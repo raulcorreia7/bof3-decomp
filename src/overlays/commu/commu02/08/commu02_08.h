@@ -40,6 +40,7 @@ extern Callback g_Commu02Event0Step1Funcs[COMMU02_EVENT0_STEP1_COUNT];
 extern Callback g_Commu02Event0Step1Sub2Funcs[COMMU02_EVENT0_STEP1_SUB2_COUNT];
 /* D_801DAC20 */
 extern Callback g_Commu02Event0Step1Sub3Funcs[COMMU02_EVENT0_STEP1_SUB3_COUNT];
+extern u8       D_801DAC54[][4];
 /* D_801DACB8 */
 extern Callback g_Commu02Event1States[COMMU02_EVENT1_STEP_COUNT];
 /* D_801DACC4 */
@@ -91,6 +92,7 @@ extern u8       D_801F2945;
 extern u8*      D_801F2948;
 
 void func_801D2E10(void);
+void func_801D2EDC(s16 x, s16 y, u8 index);
 u8   func_801D7EA0(u8);
 
 u8 func_801D92F4(u8);

@@ -207,7 +207,28 @@ MATCH void func_801D2870(void) {
 
 INCLUDE_ASM(func_801D2908);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2AC4(s32 x, s32 y, s32 index, s32 style) {
+    UI_DrawWindow(x, y, 0x2A, 0x14, 0, g_WindowStyle);
+    GFX_AddDrawMode(getTPage(0, 0, 832, 256));
+    switch (style & BYTE_MASK) {
+        case 0:
+            func_801D2EDC((s16)x, (s16)y, 0xA);
+            UI_DrawText((s16)x + ((index & BYTE_MASK) ? 0xA : 6), (s16)y + 3, 0, 4, D_801DAC54[index & BYTE_MASK]);
+            break;
+        case 1:
+            func_801D2EDC((s16)x, (s16)y, 9);
+            UI_DrawText((s16)x + ((index & BYTE_MASK) ? 0xA : 6), (s16)y + 3, 0, 3, D_801DAC54[index & BYTE_MASK]);
+            break;
+        case 2:
+            func_801D2EDC((s16)x, (s16)y, 0xA);
+            UI_DrawText((s16)x + ((index & BYTE_MASK) ? 0xA : 6), (s16)y + 3, 7, 3, D_801DAC54[index & BYTE_MASK]);
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801D2AC4);
+#endif
 
 INCLUDE_ASM(func_801D2CF8);
 
