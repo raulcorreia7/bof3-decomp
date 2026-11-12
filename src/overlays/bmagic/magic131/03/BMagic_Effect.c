@@ -16,7 +16,17 @@ INCLUDE_ASM(func_801EF110);
 
 INCLUDE_ASM(func_801EF1C0);
 
-INCLUDE_ASM(func_801EF3D0);
+MATCH void func_801EF3D0(void) {
+    if (!EMI_IsReady()) {
+        return;
+    }
+    if (g_Battle.scroll_dir & 0x2) {
+        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex]);
+    } else {
+        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex]);
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EF488(void) {
     PartyMember* prev;
@@ -276,7 +286,20 @@ INCLUDE_ASM(func_801F12A0);
 
 INCLUDE_ASM(func_801F13A4);
 
-INCLUDE_ASM(func_801F14A0);
+MATCH void func_801F14A0(void) {
+    s16 timer;
+
+    SYS_DISPATCH_BYTE(D_801F1C94, D_801F24E0->header.step);
+    timer = D_801F24E0->unk_26;
+    if (timer != 0) {
+        D_801F24E0->unk_26 = timer - 1;
+        return;
+    }
+    if (D_801F24E0->header.flags != 0 && D_801F24E0->header.step != 0) {
+        func_801F1B14();
+        func_801F1844();
+    }
+}
 
 INCLUDE_ASM(func_801F153C);
 
@@ -307,17 +330,17 @@ MATCH void func_801F1AC4(void) {
 }
 
 MATCH void func_801F1B14(void) {
-    PartyMember* work;
-    s16          vec[3];
-    TILE_1*      primitive;
+    BMagicEffectWork* work;
+    s16               vec[3];
+    TILE_1*           primitive;
 
     work      = D_801F24E0;
-    vec[0]    = (work->unk_14 >> 9) - 0x4000;
+    vec[0]    = (work->pos.x.fixed >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (work->unk_18 >> 9) - 0x4000;
-    vec[2]    = -((s16)(*(u16*)((u8*)work + 0x1E)) / 2);
+    vec[1]    = (work->pos.y.fixed >> 9) - 0x4000;
+    vec[2]    = -(COORD_INT(work->pos.z) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
-    ((s16*)&D_801F24E0->unk_20)[0] = primitive->x0;
-    ((s16*)&D_801F24E0->unk_20)[1] = primitive->y0;
+    D_801F24E0->unk_20 = primitive->x0;
+    D_801F24E0->unk_22 = primitive->y0;
 }

@@ -4,12 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC20(void) {
-    Callback handlers[7];
-
-    __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
-    SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
-}
+#include "overlays/bmagic/func_801EEC20.h"
 
 INCLUDE_ASM(func_801EECA4);
 

@@ -39,6 +39,9 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find the member at a record offset       | `tools/symbol.py member <Type> 0x<OFF>`                                  | same                                                      |
 | List every reference to a symbol         | `tools/symbol.py uses <Name>` or `tools/symbol.py uses <target>@0x<ADDR>` | same                                                      |
 | Find the name of a bare number           | `tools/symbol.py value 0x<NN> [--image <target>] [--type <EnumOrPrefix>]` | same                                                      |
+| Build the call-graph layers              | `tools/symbol.py layers [--jsonl]`                                       | [lookup](#lookup)                                         |
+| Find where a record or global is accessed | `tools/symbol.py accesses <TypeOrGlobal> [--jsonl]`                     | [lookup](#lookup)                                         |
+| Rank records by unknown accesses         | `tools/symbol.py records [--jsonl]`                                      | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Check the symbol table                   | `tools/symbol.py check`                                                  | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
@@ -47,7 +50,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Scan prototypes against definitions      | `tools/sigs.py scan`                                                     | `--help`                                                  |
 | Format                                   | `meson compile -C build/meson format` (or `tools/format.sh`)             | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Write the progress report                | `meson compile -C build/meson report`                                    | [toolchain: commands](../docs/toolchain.md#commands)      |
-| Set up a worktree for parallel work      | `tools/worktree.sh --from <checkout> <branch>`                           | [worktrees](#worktrees)                                   |
+| Set up a worktree for parallel work      | `tools/worktree.sh --from <checkout> [--dir <dir>] <branch>`             | [worktrees](#worktrees)                                   |
 | Read bytes through Rizin                 | `bin/rz <target> 'pdf @ <func>'`                                         | [rizin](../docs/toolchain.md#rizin)                       |
 
 ## Templates
@@ -132,6 +135,11 @@ the image's table and the resident ones; `--diff [BASE]` reads the `D_` addresse
 one table; the first query in an image analyses its Rizin project and caches the references under
 `build/symbol-xrefs`. `symbol.py value` lists every enum member and numeric macro with one value
 among the headers the image sees, nearest scope first, so a bare `0x3A` becomes `ABILITY_SANCTUARY`.
+`symbol.py layers` builds the game call graph over every image, including table dispatch, and prints
+each function's layer, callers, callees, status, copies and shared flag. `--jsonl` writes one object
+per line. `symbol.py accesses` decodes every image and reports a record's or global's byte offsets,
+widths, members, examples, constants and call slots with their width, signedness and straddle
+problems; `symbol.py records` ranks every record by accesses times unknown members.
 
 ## Quality
 
@@ -155,14 +163,14 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `check`         | an image differs from its retail SHA-1                                                  | disc       |
 | `check-headers` | a public header does not compile alone                                                  | compiler   |
 | `check-plain`   | a source does not build as plain C                                                      | compiler   |
-| `check-tree`    | a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none    |
+| `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none |
 | `externs`       | a `.c` file gains an `extern` line                                                      | none       |
 | `include-asm`   | there are more `INCLUDE_ASM` lines than at the base ref, in total or in one image       | none       |
 | `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | the tools  |
 | `meson test`    | a tool test fails                                                                       | Python     |
 | `typeloss`      | a rename, move or retype weakens a type                                                 | none       |
-| `markers`       | a definition in `src/` lacks exactly one status marker                                  | none       |
-| `names`         | a new name carries an 8-digit address, or a listed legacy one is gone                   | none       |
+| `markers`       | a definition in `src/` lacks exactly one status marker, or a change adds a `NON_MATCHING` draft | none |
+| `names`         | a new name carries an 8-digit address, a listed legacy one is gone, or an added line names a parameter `argN` | none |
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
@@ -170,9 +178,10 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 
 ## Worktrees
 
-`tools/worktree.sh --from <checkout> <branch>` adds a Git worktree under `.worktrees/<branch>` and
-links the local inputs, toolchains, `.venv` and extracted disc from a built checkout, so the new
-worktree builds without extracting again. Keep that checkout while the worktree exists.
+`tools/worktree.sh --from <checkout> [--dir <dir>] <branch>` adds a Git worktree under
+`.worktrees/<branch>` (or `--dir <dir>`) and links the local inputs, toolchains, `.venv` and
+extracted disc from a built checkout, so the new worktree builds without extracting again. Keep
+that checkout while the worktree exists.
 
 ## Build plumbing
 

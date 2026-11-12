@@ -86,7 +86,7 @@ MATCH void func_801F73BC(void) {
         g_Task->timer      = g_Task->header.mode;
         GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MOVE));
         if (g_Task->header.mode == 4) {
-            func_80196070();
+            Actor_Clear();
         }
     } else {
         g_Task->timer--;
@@ -222,7 +222,19 @@ MATCH void func_801F7E34(void) {
 
 INCLUDE_ASM(func_801F7E6C);
 
-INCLUDE_ASM(func_801F7F84);
+MATCH void func_801F7F84(void) {
+    ActorSlot** effects; /* the five effect slots spawned at +0x0C */
+    u8          i;
+
+    effects = (ActorSlot**)&g_Task->vx;
+    for (i = 0; i < 5; i++) {
+        if (effects[i]->unk_06 == 0) {
+            return;
+        }
+    }
+    g_ScriptVars[0] += 1;
+    Actor_Clear();
+}
 
 INCLUDE_ASM(func_801F7FFC);
 
@@ -270,7 +282,25 @@ MATCH void func_801F844C(void) {
 
 INCLUDE_ASM(func_801F8490);
 
-INCLUDE_ASM(func_801F853C);
+MATCH void func_801F853C(void) {
+    Scena03Work* work;
+    s16          value;
+
+    work = SCN_LINE;
+    func_801F88FC(&work->line);
+    value             = work->line.unk_06 - 0x10;
+    work->line.unk_06 = value;
+    if (value < 0) {
+        work->line.unk_06 = 0;
+    }
+    if (work->line.unk_06 < 0x80) {
+        work->line.unk_08 -= 0x10;
+    }
+    if (work->line.unk_08 < 0) {
+        work->line.unk_06 = 0;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F85DC(void) {
     Actor_Clear();
@@ -551,14 +581,27 @@ INCLUDE_ASM(func_801FCB4C);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-MATCH s32 func_801FCCDC(void) {
+MATCH s32 func_801FCCDC(s32 x, s32 y) {
     if (MEM(u16, GAME_AREA_ID_ADDR) == AREA_ID_MOUNT_BOUMORE_SECOND) {
-        return func_801FCD1C();
+        return func_801FCD1C(x, y);
     }
     return 0;
 }
 
-INCLUDE_ASM(func_801FCD1C);
+MATCH s8 func_801FCD1C(s32 x, s32 y) {
+    if (SYS_TestFlag(g_SceneFlags, 0x1E) == 0) {
+        if (y == TO_COORD(73)) {
+            if (((x >> 0x10) - 14) < 4U) {
+                Game_SetScriptActive();
+                g_SceneState.state_04 = 8;
+                g_SceneState.step_05  = 2;
+                g_SceneState.timer_06 = 30;
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 /* needs: D_801FD030 and D_801FD038 declarations. */
 MATCH s32 func_801FCDB4(s32 arg0, s32 arg1) {
