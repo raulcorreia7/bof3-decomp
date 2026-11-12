@@ -162,7 +162,7 @@ MATCH void func_801F88B0(void) {
     u8* state;
     u8* script;
 
-    state = &D_80146875;
+    state = &g_SceneState.step_05;
     switch (*state) {
         case 0xA:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -171,12 +171,12 @@ MATCH void func_801F88B0(void) {
             }
             return;
         case 0xB:
-            script = &D_80146865;
+            script = &g_ScriptVars[1];
             if (*script == 0xA) {
                 *script = 0;
                 Game_ClearScriptActive();
-                *state     = 0;
-                D_80146874 = 0;
+                *state                = 0;
+                g_SceneState.state_04 = 0;
             }
             return;
     }
