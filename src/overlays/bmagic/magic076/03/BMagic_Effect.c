@@ -75,7 +75,29 @@ MATCH void func_801EF3F4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4A8);
+MATCH void func_801EF4A8(void) {
+    PartyMember* battler;
+    u8           tick;
+    u8           i;
+    u8           slot;
+
+    tick           = g_Task->unk_09 + 1;
+    g_Task->unk_09 = tick;
+    if (tick == 0x10) {
+        for (i = 0; i < D_801F049C[g_Task->unk_04]; i++) {
+            slot = BMagic_AllocEffect();
+            if (slot != GAME_NONE) {
+                battler                                = g_BattleEffectBattler;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+                BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = RANDOM_MASK(0xF) + 0x10;
+                g_BattleEffectBattler->param.unk_0B += 1;
+            }
+        }
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
