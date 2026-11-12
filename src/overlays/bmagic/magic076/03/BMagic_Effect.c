@@ -83,7 +83,7 @@ MATCH void func_801EF4A8(void) {
 
     tick           = g_Task->unk_09 + 1;
     g_Task->unk_09 = tick;
-    if (tick == 0x10) {
+    if (tick == 16) {
         for (i = 0; i < D_801F049C[g_Task->unk_04]; i++) {
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
@@ -91,7 +91,7 @@ MATCH void func_801EF4A8(void) {
                 BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
                 BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
-                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = RANDOM_MASK(0xF) + 0x10;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = RANDOM_MASK(0xF) + 16;
                 g_BattleEffectBattler->param.unk_0B += 1;
             }
         }
