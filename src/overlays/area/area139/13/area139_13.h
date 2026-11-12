@@ -13,6 +13,9 @@
 /* The party position in 16.16 fixed point. */
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F4430[];
+/* The four cells of the party line: y at one x, x at one y. */
+extern u8       D_801F4440[];
+extern u8       D_801F4444[];
 extern Callback D_801F4448[];
 
 #endif
