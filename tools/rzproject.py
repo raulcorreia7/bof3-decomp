@@ -35,13 +35,10 @@ from bof3.resolve import load_target_manifests
 from bof3.resolve.ids import image_header
 from bof3.resolve.layout import parse_splat_layout
 from bof3.resolve.manifests import TargetManifest
-from bof3.state.rows import Row
 
 ROOT = Path(__file__).resolve().parent.parent
 RIZIN = ROOT / "toolchains/rizin/bin/rizin"
 RZ_SIGN = ROOT / "toolchains/rizin/bin/rz-sign"
-SIZE = re.compile(r"\bsize:(0x[0-9A-Fa-f]+)\b")
-TYPE = re.compile(r"\btype:(\w+)\b")
 WIDTH = {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}
 MAP_DIR = "build/meson"
 
@@ -57,97 +54,32 @@ class Outputs:
     log: Path
 
 
-def read_rows(root: Path, manifest: TargetManifest) -> list[Row]:
+def read_rows(root: Path, manifest: TargetManifest) -> list[symbols.Entry]:
     """Return the rows Splat reads for this target, in map order."""
     target = manifest.id.value
     return [
         row
         for owner in symbols.splat_owners(root, target)
-        for row in symbols.target_rows(root, owner)
+        for row in symbols.target_entries(root, owner)
         if not row.alias
     ]
 
 
-@dataclass(frozen=True, slots=True)
-class MapSymbol:
-    """One symbol a linker map places: its name, address, size and kind."""
-
-    name: str
-    address: int
-    size: int
-    function: bool
-
-
-_CONTRIBUTION = re.compile(
-    r"^\s+(?:(\.\S+)\s+)?0x([0-9a-f]+)\s+0x([0-9a-f]+)\s+\S+\.o$"
-)
-_MAP_SECTION = re.compile(r"^ (\.\S+)$")
-_MAP_SYMBOL = re.compile(r"^\s+0x([0-9a-f]{8})\s+([A-Za-z_]\w*)$")
-_MAP_ABSOLUTE = re.compile(r"^\s+0x([0-9a-f]{8})\s+([A-Za-z_]\w*)\s+=\s+0x([0-9a-f]+)$")
-_PLACED = (".text", ".data", ".rodata", ".sdata", ".bss", ".sbss", ".rdata")
-
-
-def read_map(path: Path) -> list[MapSymbol]:
-    """Return the symbols a linker map lists under placed input sections.
-
-    A symbol runs to the next symbol of its input section, or to the section's end.
-    A fixed-address assignment (``D_80123456 = 0x80123456``, from the symbol tables) is a symbol
-    of unknown size; other linker-script assignments and discarded sections are skipped.
-    """
-    symbols: list[MapSymbol] = []
-    section = ""
-    pending = ""
-    start = end = 0
-    names: list[tuple[int, str]] = []
-
-    def flush() -> None:
-        for index, (address, name) in enumerate(names):
-            top = names[index + 1][0] if index + 1 < len(names) else end
-            symbols.append(MapSymbol(name, address, top - address, section == ".text"))
-        names.clear()
-
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        wrapped = _MAP_SECTION.match(line)
-        if wrapped is not None:
-            pending = wrapped[1]
-            continue
-        match = _CONTRIBUTION.match(line)
-        if match is not None:
-            flush()
-            name = match[1] or pending
-            pending = ""
-            start, size = int(match[2], 16), int(match[3], 16)
-            section = name if name in _PLACED else ""
-            end = start + size
-            if start < 0x80000000 or not size:
-                section = ""
-            continue
-        absolute = _MAP_ABSOLUTE.match(line)
-        if absolute is not None and int(absolute[1], 16) == int(absolute[3], 16):
-            symbols.append(MapSymbol(absolute[2], int(absolute[1], 16), 0, False))
-            continue
-        match = _MAP_SYMBOL.match(line)
-        if section and match is not None and start <= int(match[1], 16) < end:
-            names.append((int(match[1], 16), match[2]))
-    flush()
-    return symbols
-
-
 def read_maps(
     root: Path, targets: tuple[str, ...], spans: list[tuple[int, int]]
-) -> list[MapSymbol]:
+) -> list[symbols.MapSymbol]:
     """Return the map symbols inside the mapped images' ``spans`` (start, end).
 
     Every mapped image with a linker map adds its symbols; a fixed address outside the spans
     names bytes this project does not hold. A missing map is reported on stderr: that project holds rows and layouts only.
     """
-    symbols: list[MapSymbol] = []
+    found: list[symbols.MapSymbol] = []
     for target in targets:
         path = root / MAP_DIR / f"{target.replace('/', '+')}.map"
         if path.is_file():
-            symbols.extend(
+            found.extend(
                 symbol
-                for symbol in read_map(path)
+                for symbol in symbols.read_map(path)
                 if any(low <= symbol.address < high for low, high in spans)
             )
         else:
@@ -156,7 +88,7 @@ def read_maps(
                 "rows and Splat layouts only (build the image to add the map)",
                 file=sys.stderr,
             )
-    return symbols
+    return found
 
 
 def mapped_targets(
@@ -426,12 +358,6 @@ _ASM_SIZE = re.compile(r"^\s*nonmatching\s+\S+,\s*(0x[0-9A-Fa-f]+)", re.M)
 _SIZE_DIRECTIVE = re.compile(r"^\s*\.size\s+\S+,\s*(0x[0-9A-Fa-f]+)", re.M)
 
 
-def _row_size(comment: str) -> int | None:
-    """Return a row's ``size:0x...`` value, or None when it names none."""
-    match = SIZE.search(comment)
-    return int(match.group(1), 16) if match is not None else None
-
-
 def function_size(root: Path, targets: tuple[str, ...], name: str) -> int | None:
     """Return a function's split-assembly size, or None when no file names it."""
     for target in targets:
@@ -450,15 +376,15 @@ def function_size(root: Path, targets: tuple[str, ...], name: str) -> int | None
 def write_function_commands(
     lines: list[str],
     targets: tuple[str, ...],
-    rows: list[Row],
+    rows: list[symbols.Entry],
     functions: list[tuple[str, int, int]],
-    mapped: list[MapSymbol],
+    mapped: list[symbols.MapSymbol],
 ) -> list[str]:
     """Write Rizin function analysis commands; return the name flags to set after FLIRT.
 
     FLIRT renames a matched function, so the game name goes in a flag of its own afterwards.
     """
-    names = {row.address: row.name for row in rows if "type:func" in row.comment}
+    names = {row.addr: row.name for row in rows if row.type == "func"}
     defined: set[int] = set()
     owners: dict[str, int] = {}
 
@@ -475,14 +401,12 @@ def write_function_commands(
         lines.extend([f"s 0x{address:08X}", f"af+ {symbol_name}"])
         lines.append(f"afb+ 0x{address:08X} 0x{address:08X} 0x{size:x}")
     for row in rows:
-        if "type:func" not in row.comment or row.address in defined:
+        if row.type != "func" or row.addr in defined:
             continue
-        size = function_size(ROOT, targets, row.name) or _row_size(row.comment)
-        if size is None:
-            size = 1
-        defined.add(row.address)
-        lines.extend([f"s 0x{row.address:08X}", f"af+ {unique(row.name, row.address)}"])
-        lines.append(f"afb+ 0x{row.address:08X} 0x{row.address:08X} 0x{size:x}")
+        size = function_size(ROOT, targets, row.name) or row.size or 1
+        defined.add(row.addr)
+        lines.extend([f"s 0x{row.addr:08X}", f"af+ {unique(row.name, row.addr)}"])
+        lines.append(f"afb+ 0x{row.addr:08X} 0x{row.addr:08X} 0x{size:x}")
     for symbol in mapped:
         if not symbol.function or symbol.address in defined:
             continue
@@ -496,10 +420,10 @@ def write_function_commands(
         )
     flags = [f"f {name} {size} @ 0x{address:08X}" for name, address, size in functions]
     for row in rows:
-        if "type:func" not in row.comment:
+        if row.type != "func":
             continue
-        size = function_size(ROOT, targets, row.name) or _row_size(row.comment) or 1
-        flags.append(f"f {row.name} {size} @ 0x{row.address:08X}")
+        size = function_size(ROOT, targets, row.name) or row.size or 1
+        flags.append(f"f {row.name} {size} @ 0x{row.addr:08X}")
     return flags
 
 
@@ -529,7 +453,7 @@ def unique_flags(lines: list[str]) -> list[str]:
     return kept
 
 
-def map_flags(mapped: list[MapSymbol]) -> list[str]:
+def map_flags(mapped: list[symbols.MapSymbol]) -> list[str]:
     """Return the commands that flag every map symbol, one flagspace per name at an address.
 
     Rizin keeps one flag per address in a flagspace, and a row or layout name may already hold
@@ -556,9 +480,9 @@ def map_flags(mapped: list[MapSymbol]) -> list[str]:
 def write_script(
     outputs: Outputs,
     targets: tuple[str, ...],
-    rows: list[Row],
+    rows: list[symbols.Entry],
     functions: list[tuple[str, int, int]],
-    mapped: list[MapSymbol],
+    mapped: list[symbols.MapSymbol],
     sigs: list[Path],
 ) -> None:
     """Write the native Rizin command script."""
@@ -579,18 +503,17 @@ def write_script(
     lines.append("fs bof3_data")
     sizes = {symbol.address: symbol.size for symbol in mapped}
     for row in rows:
-        if "type:func" in row.comment:
+        if row.type == "func":
             continue
-        kind = TYPE.search(row.comment)
         size = (
-            _row_size(row.comment)
-            or (WIDTH.get(kind[1]) if kind else None)
-            or sizes.get(row.address)
+            row.size
+            or (WIDTH.get(row.type) if row.type else None)
+            or sizes.get(row.addr)
             or 1
         )
-        lines.append(f"f {row.name} {size} @ 0x{row.address:08X}")
-        if kind is not None:
-            lines.append(f"CCu type:{kind[1]} @ 0x{row.address:08X}")
+        lines.append(f"f {row.name} {size} @ 0x{row.addr:08X}")
+        if row.type:
+            lines.append(f"CCu type:{row.type} @ 0x{row.addr:08X}")
     lines[:] = unique_flags(lines)
     lines.extend(map_flags(mapped))
     lines.extend(

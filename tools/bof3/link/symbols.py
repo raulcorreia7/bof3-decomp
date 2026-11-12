@@ -17,7 +17,8 @@ An image's objects name two kinds of external symbols. An address name (``D_8014
 row of a map the image can see. :func:`resolve` answers for one image from its objects; a name
 that cannot be resolved for certain is an error that names the row and the fix.
 
-:func:`target_rows` is the one function that reads a target's rows from the table.
+:func:`target_entries` is the one function that reads a target's rows from the table;
+:func:`read_map` is the one parser of an image's ``-Map`` file.
 """
 
 from __future__ import annotations
@@ -35,17 +36,21 @@ if TYPE_CHECKING:
 
 __all__ = [
     "ADDRESS_NAME",
+    "Entry",
     "LinkError",
+    "MapSymbol",
     "address_of",
     "generate",
     "link_map",
     "imported_map",
     "link_owners",
     "load",
+    "read_map",
     "read_text",
     "resolve",
     "splat_map",
     "splat_owners",
+    "target_entries",
     "target_rows",
 ]
 
@@ -268,14 +273,18 @@ def load(root: Path) -> dict[str, list[Entry]]:
     return file_memo("symbols-table", [path], None, read)
 
 
-def target_rows(root: Path, target: str) -> list[Row]:
+def target_entries(root: Path, target: str) -> list[Entry]:
     """Return one target's own rows, sorted by address.
 
     Every reader of the table goes through this function, so the file format is a detail of
     this module.
     """
-    entries = sorted(load(root).get(target, ()), key=lambda e: e.addr)
-    return [entry.row() for entry in entries]
+    return sorted(load(root).get(target, ()), key=lambda e: e.addr)
+
+
+def target_rows(root: Path, target: str) -> list[Row]:
+    """Return one target's own rows in the Splat-style form: name, address and comment."""
+    return [entry.row() for entry in target_entries(root, target)]
 
 
 def generate(root: Path) -> None:
@@ -356,6 +365,70 @@ def scan_objects(nm: Path, objects: list[str]) -> Scan:
             elif kind not in ("w", "v", "W", "V"):
                 defined.add(name)
     return Scan(frozenset(defined), needed)
+
+
+class MapSymbol(NamedTuple):
+    """One symbol a linker map places: its name, address, size and kind."""
+
+    name: str
+    address: int
+    size: int
+    function: bool
+
+
+_CONTRIBUTION = re.compile(
+    r"^\s+(?:(\.\S+)\s+)?0x([0-9a-f]+)\s+0x([0-9a-f]+)\s+\S+\.o$"
+)
+_MAP_SECTION = re.compile(r"^ (\.\S+)$")
+_MAP_SYMBOL = re.compile(r"^\s+0x([0-9a-f]+)\s+([A-Za-z_]\w*)\s*$")
+_MAP_ABSOLUTE = re.compile(r"^\s+0x([0-9a-f]{8})\s+([A-Za-z_]\w*)\s+=\s+0x([0-9a-f]+)$")
+_PLACED = (".text", ".data", ".rodata", ".sdata", ".bss", ".sbss", ".rdata")
+
+
+def read_map(path: Path) -> list[MapSymbol]:
+    """Return the symbols a linker map lists under placed input sections.
+
+    A symbol runs to the next symbol of its input section, or to the section's end.
+    A fixed-address assignment (``D_80123456 = 0x80123456``, from the symbol tables) is a symbol
+    of unknown size; other linker-script assignments and discarded sections are skipped.
+    """
+    symbols: list[MapSymbol] = []
+    section = ""
+    pending = ""
+    start = end = 0
+    names: list[tuple[int, str]] = []
+
+    def flush() -> None:
+        for index, (address, name) in enumerate(names):
+            top = names[index + 1][0] if index + 1 < len(names) else end
+            symbols.append(MapSymbol(name, address, top - address, section == ".text"))
+        names.clear()
+
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        wrapped = _MAP_SECTION.match(line)
+        if wrapped is not None:
+            pending = wrapped[1]
+            continue
+        match = _CONTRIBUTION.match(line)
+        if match is not None:
+            flush()
+            name = match[1] or pending
+            pending = ""
+            start, size = int(match[2], 16), int(match[3], 16)
+            section = name if name in _PLACED else ""
+            end = start + size
+            if start < 0x80000000 or not size:
+                section = ""
+            continue
+        absolute = _MAP_ABSOLUTE.match(line)
+        if absolute is not None and int(absolute[1], 16) == int(absolute[3], 16):
+            symbols.append(MapSymbol(absolute[2], int(absolute[1], 16), 0, False))
+            continue
+        match = _MAP_SYMBOL.match(line)
+        if section and match is not None and start <= int(match[1], 16) < end:
+            names.append((int(match[1], 16), match[2]))
+    flush()
+    return symbols
 
 
 def read_maps(root: Path, maps: list[str]) -> dict[str, dict[int, str]]:
@@ -472,24 +545,20 @@ def own_checks(
     ]
 
 
-_MAP_SYMBOL = re.compile(r"^\s+0x([0-9a-f]+)\s+([A-Za-z_]\w*)\s*$")
-
-
 def explain(root: Path, target: str, map_path: Path) -> list[str]:
     """Return a message per row of ``target``'s table that the linked image places elsewhere.
 
     ``map_path`` is the ``-Map`` file ld writes even when an ``ASSERT`` fails the link.
     """
     own = read_maps(root, [link_map(target)])
-    placed: dict[str, int] = {}
     try:
-        text = map_path.read_text(encoding="utf-8", errors="replace")
+        mapped = read_map(map_path)
     except OSError:
         return []
-    for line in text.splitlines():
-        match = _MAP_SYMBOL.match(line)
-        if match and match[2] in own:
-            placed.setdefault(match[2], int(match[1], 16) & 0xFFFFFFFF)
+    placed: dict[str, int] = {}
+    for symbol in mapped:
+        if symbol.name in own:
+            placed.setdefault(symbol.name, symbol.address)
     return [
         f"{TABLE} [{target}] {name}: the row says 0x{want:08X} but the image links it at "
         f"0x{placed[name]:08X}. Fix the row's address, or the source that moved the symbol."
