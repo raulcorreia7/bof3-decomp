@@ -1,3 +1,27 @@
 #include "area141_13.h"
 
-INCLUDE_ASM(func_801F2D2C);
+MATCH void func_801F2D2C(void) {
+    AreaMapBundle* map;
+    u32            entry_base;
+    u8*            entry;
+    s32            row;
+    s32            col;
+    s32            id;
+    u32            value;
+
+    g_Task->timer = 0;
+    for (row = D_801F47D4[COORD_INT(g_Task->pos.x)].y0; row <= D_801F47D4[COORD_INT(g_Task->pos.x)].y1; row++) {
+        map = (AreaMapBundle*)MAP_BUNDLE_BASE;
+        for (col = D_801F47D4[COORD_INT(g_Task->pos.x)].x0; col <= D_801F47D4[COORD_INT(g_Task->pos.x)].x1; col++) {
+            entry_base   = MEM(u16, MAP_BUNDLE_BASE + 2) * 4 + (((map->width * MEM(u8, MAP_BUNDLE_BASE + 1) + 1) / 2) * 4 + (u32)map);
+            entry        = (u8*)(entry_base + *(u16*)(col * 2 + (row * map->width * 2 + MEM(u16, MAP_BUNDLE_BASE + 2) * 4) + (u32)map) * 4);
+            value        = *(u32*)entry;
+            *(u32*)entry = value & 0xFF07FFFF;
+            id           = Area_GetCellId(col, row);
+            if (id != 0) {
+                func_80155560(*(u32*)entry, &g_AreaCellPrims[id][0], 2);
+            }
+        }
+    }
+    g_Task->header.step++;
+}
