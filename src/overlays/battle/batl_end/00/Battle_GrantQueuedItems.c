@@ -6,9 +6,9 @@ MATCH void Battle_GrantQueuedItems(void) {
     u16 item;
 
     if (EMI_IsReady() != 0) {
-        for (slot = 0; slot < D_80146327.count; slot++) {
-            item = PartyGrantQueue_Item(slot);
-            Item_Add(item >> 8, item & BYTE_MASK, D_80146327.amounts[slot], 0);
+        for (slot = 0; slot < g_Battle.outcome.drop_count; slot++) {
+            item = g_Battle.outcome.drops.items[slot];
+            Item_Add(item >> 8, item & BYTE_MASK, g_Battle.outcome.drops.item_counts[slot], 0);
         }
 
         g_Battle.phase.step     = 4;
