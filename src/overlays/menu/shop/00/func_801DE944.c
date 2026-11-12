@@ -34,8 +34,7 @@ MATCH void func_801DE944(void) {
             row = 0;
             do {
                 TASK_SET(((u8*)g_Game.members + row));
-                /* FAKE: retail reads Party_LoadMemberSprite as void(u8, u8). */
-                ((void (*)(u8, u8))Party_LoadMemberSprite)(FIELD(u8, &g_Game.members[0].chr.character_id, row), i);
+                Party_LoadMemberSprite(FIELD(u8, &g_Game.members[0].chr.character_id, row), i);
                 Actor_SelectScript(g_Task->direction_08);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
