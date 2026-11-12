@@ -8,7 +8,8 @@
 #include "area/spad.h"
 
 /* The party position in 16.16 fixed point. */
-/* The payload's per-state handler table. */
+/* The payload's per-state handler table and its entry coordinate pairs. */
+extern u8 D_801F3424[];
 
 /* The scratchpad cell holding this mode's work pointer. */
 /* The overlay's frame handler. */

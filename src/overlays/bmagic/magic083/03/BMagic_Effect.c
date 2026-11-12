@@ -79,12 +79,12 @@ MATCH void func_801F0010(void) {
     PartyMember* task;
     PartyMember* reset;
 
-    func_800AF764();
+    Battle_ProjectRange();
     func_801F0BA8((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
     }
     task         = g_Task;
@@ -107,12 +107,12 @@ MATCH void func_801F0104(void) {
     s32          vel;
     PartyMember* task;
 
-    func_800AF764();
+    Battle_ProjectRange();
     func_801F0BA8((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
     }
     task         = g_Task;
@@ -134,7 +134,7 @@ MATCH void func_801F01F8(void) {
     u8  value4;
     u8  value5;
 
-    func_800AF764();
+    Battle_ProjectRange();
     if ((g_Task->unk_0C == 4) && (g_Task->timer < 5U)) {
         value2 = (RANDOM_MASK(3)) | 0x40;
     } else {
@@ -147,7 +147,7 @@ MATCH void func_801F01F8(void) {
     if (g_Task->unk_0C < 4) {
         value          = g_Task->unk_10 + 1;
         g_Task->unk_10 = value;
-        if (!(value & 7)) {
+        if (!(value & 0x7)) {
             g_Task->unk_0C += 1;
         }
     }
@@ -159,7 +159,7 @@ MATCH void func_801F01F8(void) {
             value5 = g_Task->unk_03;
             if (!(value5 & 0xF0)) {
                 value3 = 0x102;
-                if (value5 & 1) {
+                if (value5 & 0x1) {
                     value3 = 0x101;
                 }
                 SND_QueueSelectionFx(value3);

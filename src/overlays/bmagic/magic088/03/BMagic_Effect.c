@@ -42,7 +42,29 @@ MATCH void func_801EEFA0(void) {
 
 INCLUDE_ASM(func_801EF0A8);
 
-INCLUDE_ASM(func_801EF1AC);
+MATCH void func_801EF1AC(void) {
+    u32 slot;
+
+    if (g_Task->param.unk_0B != 0) {
+        return;
+    }
+    if (func_800AED5C(D_800B6BF0[g_Task->unk_04], g_Battle.target_selector) & BYTE_MASK) {
+        slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
+        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].unk_04       = g_Task->unk_04 + 4;
+        g_BattleEffects[slot].arg.unk_09   = 1;
+        g_BattleEffects[slot].unk_0A       = 0;
+        g_Task->param.unk_0B++;
+    } else {
+        slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
+        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].unk_04       = 8;
+        g_BattleEffects[slot].arg.unk_09   = 1;
+        g_BattleEffects[slot].unk_0A       = 0;
+        g_Task->param.unk_0B++;
+    }
+    g_Task->header.mode++;
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
@@ -139,7 +161,7 @@ MATCH void func_801EFAE8(void) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        if (i & 1) {
+        if (i & 0x1) {
             D_801F003C[i] = D_801F003C[i] - 1;
         } else {
             D_801F003C[i] = D_801F003C[i] + 1;

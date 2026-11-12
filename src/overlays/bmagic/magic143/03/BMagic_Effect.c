@@ -16,7 +16,7 @@ MATCH void func_801EEC5C(void) {
     PartyMember* task;
 
     src                                = g_Battle.selected_actor;
-    slot                               = Battle_AllocEffect(1, 0x35) & 0xFF;
+    slot                               = Battle_AllocEffect(1, 53) & BYTE_MASK;
     task                               = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = task;
@@ -51,7 +51,7 @@ MATCH void func_801EEF78(void) {
     if (timer == 16) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
         GFX_AllocPaletteFade(g_Battle.selected_actor, -8, -8, -8, 1);
-        func_800A9610(g_Battle.target_selector, 16);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 16);
         g_Task->unk_09 = 32;
         g_Task->header.step += 1;
     }
@@ -66,7 +66,7 @@ MATCH void func_801EF054(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         selector = &g_BattleTargetSelector;
-        func_800A9820(*selector);
+        Battle_MarkDamaged(*selector);
         func_80196718(g_BattleSelectedActor);
         func_800AF814(*selector);
         g_Task->header.step++;

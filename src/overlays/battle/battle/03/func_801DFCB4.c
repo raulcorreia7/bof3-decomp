@@ -58,7 +58,7 @@ MATCH void func_801DFCB4(void) {
     if (!(g_Game.current->u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
         switch (LOBU(g_Battle.action_type)) {
             case BATTLE_ACTION_ITEM:
-                if (!(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 4)) {
+                if (!(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 0x4)) {
                     func_801DF34C();
                 }
                 break;
@@ -74,7 +74,7 @@ MATCH void func_801DFCB4(void) {
     }
     hit_work = g_GameState;
     if (hit_work->u.turn.target_flags & BATTLE_HIT_HP) {
-        func_800AAC88(hit_work->u.turn.hp_change, g_Task->slot);
+        Battle_QueueAction(hit_work->u.turn.hp_change, g_Task->slot);
         hit_work = g_Game.current;
     }
     if (hit_work->u.turn.target_flags & BATTLE_HIT_AP) {

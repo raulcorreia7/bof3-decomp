@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801D0DD8);
 INCLUDE_ASM(func_801D0F10);
 
 MATCH void func_801D0FEC(void) {
-    if ((g_Task->unk_06++ & 3) == 0) {
+    if ((g_Task->unk_06++ & 0x3) == 0) {
         func_801D19C8();
     }
     func_801D2088();
@@ -189,7 +189,25 @@ MATCH void func_801D1CD4(const void* spin) {
 
 #include "shared/Area_InitSpin.h"
 
-INCLUDE_ASM(func_801D2088);
+MATCH void func_801D2088(void) {
+    MATRIX     matrix;
+    WorldSpin* spin;
+    u16*       angle;
+    s32        i;
+
+    GFX_AddDitheredDrawMode(2, GetTPage(0, 1, 0x380, 0x100));
+    Area_SetCameraMatrix(&matrix);
+    spin  = g_WorldSpins;
+    i     = 0;
+    angle = &spin->spin_angle;
+    do {
+        func_801D1CD4(spin);
+        spin += 1;
+        *angle += 16;
+        i += 1;
+        angle += sizeof(WorldSpin) / sizeof(*angle);
+    } while ((i & BYTE_MASK) < 0x20U);
+}
 
 MATCH void func_801D2138(s32* first, s32* second) {
     s32 folded;

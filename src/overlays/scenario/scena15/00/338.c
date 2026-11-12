@@ -22,7 +22,7 @@ MATCH void Scene_InitTaskArea(void) {
 
 MATCH void func_801F6FCC(void) {
     func_801F71B0(g_Task->timer);
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         func_801F75D8();
     }
     func_801F7748();
@@ -35,7 +35,7 @@ MATCH void func_801F6FCC(void) {
 
 MATCH void func_801F7078(void) {
     func_801F71B0(0xFF);
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         func_801F75D8();
     }
     func_801F7748();
@@ -83,7 +83,28 @@ MATCH void func_801F752C(AreaSpark* spark) {
 
 INCLUDE_ASM(func_801F75D8);
 
-INCLUDE_ASM(func_801F7748);
+MATCH bool func_801F7748(void) {
+    AreaSpark* spark;
+    u8         i;
+    bool       alive;
+
+    alive = false;
+    spark = MEM_PTR(AreaSpark, AREA_WORK);
+    i     = 0;
+    do {
+        if (spark->active != 0) {
+            spark->pos.z -= spark->fall_speed << 8;
+            func_801F752C(spark);
+            if (spark->pos.z < g_Task->pos.z.fixed) {
+                spark->active = 0;
+            }
+            alive = true;
+        }
+        spark++;
+        i++;
+    } while (i < AREA_SPARK_COUNT);
+    return alive;
+}
 
 MATCH void func_801F77F8(void) {
     SYS_DISPATCH_TASK(D_801FE590, 1, g_Task);
@@ -153,16 +174,16 @@ INCLUDE_ASM(func_801F7D1C);
 INCLUDE_ASM(func_801F7E2C);
 
 MATCH void func_801F7F5C(void) {
-    s16 pos[2];
+    UPoint2D pos;
 
-    func_801F83AC(pos);
+    func_801F83AC(&pos);
     if (g_Task->tint.signed_bytes.unk_5D != 0) {
         g_Task->tint.signed_bytes.unk_5D -= 2;
     }
     if (g_Task->tint.signed_bytes.unk_5E != 0) {
         g_Task->tint.signed_bytes.unk_5E -= 1;
     }
-    func_801F81D8(pos[0], pos[1]);
+    func_801F81D8(pos.x, pos.y);
     if ((g_Task->tint.word & 0xFFFF00) == 0) {
         Actor_Clear();
     }
@@ -172,7 +193,22 @@ INCLUDE_ASM(func_801F7FFC);
 
 INCLUDE_ASM(func_801F81D8);
 
-INCLUDE_ASM(func_801F83AC);
+MATCH void func_801F83AC(UPoint2D* out) {
+    SVECTOR vec;
+    long    depth;
+    long    flag;
+    u8      slot;
+
+    slot                    = g_Task->param.actor_slot;
+    g_Actors[slot].screen_x = g_Task->screen_x;
+    g_Actors[slot].screen_y = g_Task->screen_y;
+    vec.vx                  = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    vec.vy                  = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
+    vec.vz                  = -COORD_INT(g_Task->pos.z) / 2;
+    g_Task->unk_60          = RotTransPers(&vec, (long*)out, &depth, &flag);
+    out->x -= 12;
+    out->y -= 37;
+}
 
 MATCH void func_801F8488(void) {
     SYS_DISPATCH_TASK(D_801FE5B0, 1, g_Task);
@@ -222,7 +258,24 @@ MATCH void func_801F85F0(void) {
 
 INCLUDE_ASM(func_801F8618);
 
-INCLUDE_ASM(func_801F8704);
+MATCH void func_801F8704(void) {
+    Actor*       actor;
+    PartyMember* member;
+    s32          shade;
+    u8           i;
+
+    actor = g_Task;
+    shade = -((s8)actor->tint.bytes.unk_5D / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); signed_bytes emits lb. */
+    for (i = 0; i < g_PartySize; i++) {
+        if (g_Game.members[i].chr.character_id != CHAR_ID_RYU_ADULT) {
+            member                   = &g_Game.members[i];
+            member->unk_5F           = shade;
+            member->unk_5E           = shade;
+            g_Game.members[i].unk_5D = shade;
+        }
+    }
+    TASK_SET(actor);
+}
 
 MATCH void func_801F87B4(void) {
     SYS_DISPATCH_TASK(D_801FE5C0, 1, g_Task);
@@ -235,7 +288,26 @@ MATCH void func_801F87F8(void) {
     SCENA15_PARTY_SETUP();
 }
 
-INCLUDE_ASM(func_801F8874);
+MATCH void func_801F8874(void) {
+    Actor* work;
+    u8*    counter;
+
+    work = g_Task;
+    if (work->tint.bytes.unk_5D < 0xF8) {
+        work->tint.bytes.unk_5D += 8;
+        g_Task->tint.bytes.unk_5E += 8;
+        g_Task->tint.bytes.unk_5F += 8;
+    } else {
+        work->tint.signed_bytes.unk_5F = -1;
+        work->tint.signed_bytes.unk_5E = -1;
+        work->tint.signed_bytes.unk_5D = -1;
+        counter                        = &g_SceneState.step_05;
+        *counter                       = *counter + 1;
+        g_Task->header.mode            = 2;
+    }
+    func_801F79C4();
+    func_801F8958();
+}
 
 MATCH void func_801F8930(void) {
     func_801F79C4();
@@ -250,7 +322,11 @@ MATCH void func_801F8A5C(void) {
 
 INCLUDE_ASM(func_801F8AA0);
 
-INCLUDE_ASM(func_801F8BC4);
+#include "overlays/scenario/Scene_AdvanceBandMotion.h"
+
+MATCH void func_801F8BC4(void) {
+    SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
+}
 
 INCLUDE_ASM(func_801F8C78);
 
@@ -266,16 +342,18 @@ MATCH void func_801F8EA8(void) {
     func_801F92F0(&work->pos.x, &work->vx);
     g_Task->timer       = 8;
     g_Task->header.mode = g_Task->header.mode + 1;
-    if (!(g_Task->param.unk_0B & 2)) {
+    if (!(g_Task->param.unk_0B & 0x2)) {
         cue = 0x203;
-        if (!(g_Task->unk_06 & 4)) {
+        if (!(g_Task->unk_06 & 0x4)) {
             cue = 0x208;
         }
         SND_PlayCue(cue);
     }
 }
 
-INCLUDE_ASM(func_801F8F4C);
+MATCH void func_801F8F4C(void) {
+    SCENE_ADVANCE_BAND_MOTION(-, func_801F9020);
+}
 
 /* func_801F9000 */
 MATCH void Scene_ClearActor(void) {
@@ -342,7 +420,7 @@ MATCH void func_801FDC10(s32 shift) {
     s32 offset;
 
     if (D_801FE750 != 0) {
-        offset                   = D_801FE6E8[g_FrameCount & 3];
+        offset                   = D_801FE6E8[g_FrameCount & 0x3];
         g_AreaCameraRefreshCount = 2;
         g_AreaCameraOffsetY += offset << shift;
     }
@@ -376,7 +454,7 @@ MATCH void func_801FDE64(void* entity) {
 
     actor = entity;
     Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 0xD);
+    SYS_SetFlag(g_SceneFlags, 13);
     func_801BE1B0(11);
     actor->unk_7E = actor->unk_7E + 1;
 }
@@ -386,7 +464,7 @@ MATCH void func_801FDEB4(void* entity) {
 
     actor = entity;
     Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 0xE);
+    SYS_SetFlag(g_SceneFlags, 14);
     func_801BE1B0(12);
     actor->unk_7E = actor->unk_7E + 1;
 }
@@ -396,7 +474,7 @@ MATCH void func_801FDF04(void* entity) {
 
     actor = entity;
     Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 0xC);
+    SYS_SetFlag(g_SceneFlags, 12);
     actor->unk_7E = actor->unk_7E + 1;
 }
 
@@ -405,7 +483,7 @@ MATCH void func_801FDF4C(void* entity) {
 
     actor = entity;
     Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 0x10);
+    SYS_SetFlag(g_SceneFlags, 16);
     func_801BE1B0(14);
     actor->unk_7E = actor->unk_7E + 1;
 }
@@ -415,7 +493,7 @@ MATCH void func_801FDF9C(void* entity) {
 
     actor = entity;
     Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 0xF);
+    SYS_SetFlag(g_SceneFlags, 15);
     func_801BE1B0(13);
     actor->unk_7E = actor->unk_7E + 1;
 }
@@ -433,7 +511,7 @@ INCLUDE_ASM(func_801FE024);
 MATCH s32 func_801FE18C(s32 x, s32 y) {
     if (g_GameAreaId == 0xAE) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
-            if (x > 0x43FFFF && (u32)((y >> 16) - 3) < 2) {
+            if (x > 4456447 && (u32)((y >> 16) - 3) < 2) {
                 Game_SetScriptActive();
                 g_SceneState.state_04 = 3;
                 g_SceneState.step_05  = 0x14;
@@ -441,7 +519,7 @@ MATCH s32 func_801FE18C(s32 x, s32 y) {
             return 0;
         }
         if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
-            if (x <= 0x530000 && (u32)((y >> 16) - 0x2E) < 3) {
+            if (x <= 5439488 && (u32)((y >> 16) - 0x2E) < 3) {
                 Game_SetScriptActive();
                 g_SceneState.state_04 = 3;
                 g_SceneState.step_05  = 0x1E;
@@ -449,15 +527,15 @@ MATCH s32 func_801FE18C(s32 x, s32 y) {
             return 0;
         }
         if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
-            if (y <= 0x3A0000 && (u32)((x >> 16) - 0x23) < 4) {
+            if (y <= 3801088 && (u32)((x >> 16) - 0x23) < 4) {
                 Game_SetScriptActive();
                 g_SceneState.state_04 = 3;
                 g_SceneState.step_05  = 0x28;
             }
             return 0;
         }
-        if (x == 0x310000 && (u32)((y >> 16) - 0x27) < 2) {
-            if (SYS_TestFlag(g_SceneFlags, 0xC) && SYS_TestFlag(g_SceneFlags, 0xE) && SYS_TestFlag(g_SceneFlags, 0xD) && SYS_TestFlag(g_SceneFlags, 0xF) && SYS_TestFlag(g_SceneFlags, 0x10)) {
+        if (x == 3211264 && (u32)((y >> 16) - 0x27) < 2) {
+            if (SYS_TestFlag(g_SceneFlags, 12) && SYS_TestFlag(g_SceneFlags, 14) && SYS_TestFlag(g_SceneFlags, 13) && SYS_TestFlag(g_SceneFlags, 15) && SYS_TestFlag(g_SceneFlags, 16)) {
                 Game_SetScriptActive();
                 g_SceneState.state_04 = 5;
                 g_SceneState.step_05  = 5;

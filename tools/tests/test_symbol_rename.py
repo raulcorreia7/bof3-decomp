@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import subprocess
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -183,6 +184,50 @@ def test_address_renames_keep_provenance_and_other_images(repo: Path) -> None:
     assert "/* func_80000000 */" in (repo / "src/a/New.c").read_text()
     assert "/* func_80000000 */" in (repo / "include/a.h").read_text()
     assert "func_80000000" in unrelated.read_text()
+
+
+def test_renaming_an_address_name_drops_its_alias_row(repo: Path) -> None:
+    for name, content in snapshot(repo)[0].items():
+        (repo / name).write_bytes(content.replace(b"Old", b"func_80000000"))
+    (repo / "src/a/Old.c").rename(repo / "src/a/func_80000000.c")
+    (repo / "config/symbols.toml").write_text(
+        '["exe/a"]\nfunc_80000000 = { addr = 0x80000000, type = "func", alias = true }\n'
+    )
+    symbol.git("add", ".")
+    assert (
+        symbol.main(
+            [
+                "rename",
+                "func_80000000",
+                "New",
+                "--image",
+                "exe/a",
+                "--scope",
+                "src/a",
+                "include",
+                "config",
+                "--source",
+                "test purpose",
+            ]
+        )
+        == 0
+    )
+    assert tomllib.loads((repo / "config/symbols.toml").read_text()) == {
+        "exe/a": {
+            "New": {
+                "addr": 0x80000000,
+                "type": "func",
+                "source": "test purpose",
+            }
+        }
+    }
+
+
+def test_add_refuses_an_image_that_is_not_a_target(repo: Path) -> None:
+    table = repo / "config/symbols.toml"
+    before = table.read_bytes()
+    assert symbol.main(["add", "exe/b", "New", "0x80000010", "--source", "x"]) == 2
+    assert table.read_bytes() == before
 
 
 def test_index_publication_failure_rolls_back_the_whole_rename(

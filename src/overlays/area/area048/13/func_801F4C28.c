@@ -7,7 +7,7 @@ MATCH s32 func_801F4C28(s32 x, s32 y) {
         Game_SetScriptActive();
     }
 
-    if ((y >> 16) == 6 || y == 0x58000) {
+    if ((y >> 16) == 6 || y == 360448) {
         if ((u32)((x >> 16) - 0xC) < 2) {
             g_SceneEventMode      = 3;
             g_SceneEventSelection = 1;
@@ -15,7 +15,7 @@ MATCH s32 func_801F4C28(s32 x, s32 y) {
         }
     }
 
-    if ((y >> 16) == 0xB || y == 0xA8000) {
+    if ((y >> 16) == 0xB || y == 688128) {
         if ((u32)((x >> 16) - 0x13) < 2) {
             g_SceneEventMode      = 3;
             g_SceneEventSelection = 2;

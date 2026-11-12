@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801D2AFC);
+INCLUDE_ASM(func_801D2ADC);
 
 MATCH void func_801D2C0C(void) {
     SYS_DISPATCH_BYTE(D_801D9720, D_801DA049);
@@ -281,11 +281,11 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             }
         }
         n++;
-        y += 0xD;
+        y += 13;
         list++;
     } while (n < 10);
     x = panel->pos.x + 0x4E;
-    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 0x10, D_801D9EA4[panel->group_first]);
+    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 16, D_801D9EA4[panel->group_first]);
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, 1);
     flags = FIELD(u8, panel, 0x9u);

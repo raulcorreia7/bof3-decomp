@@ -13,7 +13,7 @@ MATCH void func_801F2C04(void) {
         height                   = g_AreaVariantHeights[g_Task->header.step];
         COORD_INT(g_Task->pos.z) = height;
         shade                    = ((s16)height != -0x80) << 4;
-        for (row = 0x3; row < 0x7; row++) {
+        for (row = 3; row < 7; row++) {
             for (col = 0x42; col < 0x45; col++) {
                 *(g_AreaCellCodes + row * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width + col) = shade;
             }

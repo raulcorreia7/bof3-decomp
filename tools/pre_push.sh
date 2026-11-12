@@ -72,14 +72,14 @@ if [ -x toolchains/gcc-2.7.2-psx/gcc ]; then
 else
 	echo "skip  check-plain (no toolchains/gcc-2.7.2-psx)"
 fi
-start check-tree tools/check_tree.sh
+start check-tree tools/check_tree.sh "$ref"
 start externs tools/check_externs.sh "$ref"
 start include-asm tools/check_asm.sh "$ref"
 start format-check tools/format.sh --check
 start test meson test -C "$bld" --no-rebuild --print-errorlogs
 start typeloss python3 tools/typeloss.py "$base" HEAD
-start markers python3 tools/check_markers.py
-start names python3 tools/check_names.py
+start markers python3 tools/check_markers.py --diff "$ref"
+start names python3 tools/check_names.py --diff "$ref"
 start addrs python3 tools/check_addrs.py "$ref" HEAD
 start kept python3 tools/check_kept.py "$ref" HEAD
 start quality python3 tools/quality.py --diff "$ref"

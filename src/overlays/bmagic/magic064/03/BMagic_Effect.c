@@ -140,7 +140,7 @@ MATCH void func_801EF5FC(void) {
     PartyMember* work;
 
     work = g_Task;
-    if (!(work->param.unk_0B & 1)) {
+    if (!(work->param.unk_0B & 0x1)) {
         g_AreaScrollTargetX = work->pos.x.fixed;
         FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
         g_AreaScrollTargetY = work->pos.y.fixed;
@@ -171,7 +171,7 @@ MATCH void func_801EF69C(void) {
     g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_QUEUED;
     g_Game.members[g_Battle.active_battler].counter_136 = 0;
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-    func_800A9820(g_Battle.target_selector);
+    Battle_MarkDamaged(g_Battle.target_selector);
     func_801E5988();
 }
 
@@ -239,7 +239,7 @@ MATCH void func_801F0278(void) {
     u8 ticks;
 
     func_801F03D8();
-    if (!(g_FrameCount & 1)) {
+    if (!(g_FrameCount & 0x1)) {
         ticks = g_Task->param.unk_0B;
         if (ticks >= 0x18U) {
             g_BattleEffectBattler->header.step += 1;
@@ -382,7 +382,33 @@ MATCH void func_801F0E90(void) {
     Area_UpdatePaletteTint((s8)g_Task->unk_09);
 }
 
-INCLUDE_ASM(func_801F0EEC);
+MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
+    SPRT* prim;
+    /* FAKE: the task pointer must stay in v0 across the branch; an unpinned local lands in v1, and the best pure-C body is 0x14C against retail's 0x150. */
+    FAKE_REG(PartyMember*, task, "v0");
+    u16 tpage;
+
+    tpage = GetTPage(2, blend & BYTE_MASK, 832, 256);
+    GFX_SET_DRAW_MODE(tpage);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    prim = (SPRT*)g_GfxPrimCursor;
+    SetSprt(prim);
+    setRGB0(prim, color, color, color);
+    if ((sprite & BYTE_MASK) < 2) {
+        task     = g_Task;
+        prim->x0 = task->unk_2E.half - 32;
+    } else {
+        task     = g_Task;
+        prim->x0 = task->unk_2E.half - 40;
+    }
+    prim->y0 = task->unk_30.half - 64;
+    /* FAKE: the barrier keeps the prim copy out of the load delay, as retail. */
+    FAKE_BARRIER();
+    setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);
+    setWH(prim, 80, 72);
+    SetSemiTrans(prim, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801F103C);
 

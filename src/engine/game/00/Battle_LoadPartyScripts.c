@@ -61,7 +61,7 @@ found:
                     g_Task->param.unk_0B = 0;
                 }
             } else {
-                rec[0x08] = (sel + rec[0x0B]) & 7;
+                rec[0x08] = (sel + rec[0x0B]) & 0x7;
                 Actor_StageScriptRecord(g_Task->direction_08, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             }
             Actor_StepAnimLoop();
@@ -70,7 +70,7 @@ found:
     } while (++slot < g_Game.party_size);
     return 0;
 phase2:
-    if ((g_Battle.outcome.options & 4) != 0)
+    if ((g_Battle.outcome.options & 0x4) != 0)
         return 1;
     phase2_count = g_Game.party_size;
     slot         = 0;

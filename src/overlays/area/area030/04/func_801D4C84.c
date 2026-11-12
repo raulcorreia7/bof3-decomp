@@ -18,17 +18,17 @@ MATCH void func_801D4C84(void) {
         if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
             Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E);
         } else {
-            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP, FISHING_CATCH_ICON_Y, 0xFF);
+            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP, FISHING_CATCH_ICON_Y, GAME_NONE);
         }
     } else {
         if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
             Fishing_DrawCatchIcon(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce_3C.half.key_3E);
         } else {
-            Fishing_DrawCatchIcon(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, 0xFF);
+            Fishing_DrawCatchIcon(FISHING_STATE->step_timer_09 * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, GAME_NONE);
         }
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
-    Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 0xFFFF);
+    Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 65535);
     func_801D7B64();
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;

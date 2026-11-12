@@ -68,7 +68,35 @@ MATCH void func_801EEEA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF4C);
+MATCH void func_801EEF4C(void) {
+    u8 count;
+    u8 timer;
+
+    func_801F07B0(4);
+    func_801F03F0(g_Task->param.unk_0B);
+    if (g_InputPressed & (PADRup | PADRdown | PADRleft | PADRright)) {
+        if (g_InputPressed != D_801F0A98[g_Task->param.unk_0B]) {
+            g_Task->unk_09      = 6;
+            g_Task->header.mode = 5;
+        } else {
+            g_Task->unk_09 = 6;
+            count          = g_Task->timer + 1;
+            g_Task->timer  = count;
+            if (count < 32) {
+                g_Task->header.mode = 3;
+            } else {
+                g_Task->header.mode = 5;
+            }
+        }
+    } else {
+        timer          = g_Task->unk_09 - 1;
+        g_Task->unk_09 = timer;
+        if (timer == 0) {
+            g_Task->unk_09      = 6;
+            g_Task->header.mode = 5;
+        }
+    }
+}
 
 MATCH void func_801EF04C(void) {
     u8 timer;
@@ -120,7 +148,7 @@ MATCH void func_801EF1FC(void) {
 MATCH void func_801EF268(void) {
     SND_QueueSelectionFx(258);
     D_801463D6 = g_Task->timer;
-    func_800A9820(g_BattleTargetSelector);
+    Battle_MarkDamaged(g_BattleTargetSelector);
     g_BattleState = g_Battle.state | BATTLE_STATE_EFFECT_PLAYING;
     func_801E5988();
 }
@@ -180,7 +208,7 @@ MATCH void func_801EF478(void) {
         SND_QueueSelectionFx(0x101);
         func_800AFC98(2, 0);
         func_801F0078();
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->unk_09 = 0xFF;
     }
     g_Task->pos.x.fixed += g_Task->unk_0C;
@@ -207,7 +235,7 @@ MATCH void func_801EF578(void) {
         SND_QueueSelectionFx(0x101);
         func_800AFC98(2, 0);
         func_801F0078();
-        func_800A9610(g_Battle.target_selector, 0x10U);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->unk_09 = 0xFF;
     }
     Actor_StepAnimOnce();
@@ -285,7 +313,11 @@ MATCH void func_801EF9FC(void) {
 /* func_801EFA9C */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EFAE0);
+#include "overlays/bmagic/BMagic_RunEffectStep.h"
+
+MATCH void func_801EFAE0(void) {
+    BMAGIC_RUN_EFFECT_STEP(func_801EFB8C, func_801EFCF8);
+}
 
 INCLUDE_ASM(func_801EFB8C);
 
@@ -315,7 +347,7 @@ MATCH void func_801F0078(void) {
         BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[slot].header.step  = 0;
         BMAGIC_EFFECT_SLOTS[slot].unk_04       = i;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = (i / 2) & 7;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = (i / 2) & 0x7;
         BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (i * 4) + 1;
         BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
         g_BattleEffectBattler->param.unk_0B += 1;

@@ -75,6 +75,7 @@ void            func_801F5F28(void);
 
 extern Callback D_801F6B48[];
 extern Callback D_801F6B6C[];
+extern u8       D_801F6B74[][13];
 extern u8       D_801F6B3C[];
 
 void func_80159B9C(s32 x, s32 y, s32 w, s32 h);

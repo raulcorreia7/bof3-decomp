@@ -32,7 +32,7 @@ MATCH void func_801EF000(void) {
         facing                                 = g_BattleEffectBattler->facing;
         g_BattleEffects[slot].arg.unk_09       = 0;
         g_BattleEffects[slot].unk_0A           = 0;
-        g_BattleEffects[slot].unk_08           = (facing + 2) & 3;
+        g_BattleEffects[slot].unk_08           = (facing + 2) & 0x3;
         g_BattleEffects[slot].pos.x            = g_Task->pos.x;
         g_BattleEffects[slot].pos.y            = g_Task->pos.y;
         COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);
@@ -186,7 +186,13 @@ MATCH void func_801F026C(void) {
 
 INCLUDE_ASM(func_801F02CC);
 
-INCLUDE_ASM(func_801F0764);
+MATCH void func_801F0764(void) {
+    GFX_AddDitheredDrawMode(3, getTPage(1, 1, 320, 256));
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    SYS_DISPATCH_BYTE(D_801F0BD8, g_Task->header.step);
+    g_ScriptTable = AREA_SCRIPT_TABLE;
+    GFX_AddDitheredDrawMode(3, getTPage(1, 0, 320, 256));
+}
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
@@ -238,7 +244,7 @@ MATCH void func_801F0A80(void) {
             func_801E5988();
             return;
         }
-        g_Task->unk_2A = (g_Task->unk_2A + 1) & 1;
+        g_Task->unk_2A = (g_Task->unk_2A + 0x1) & 1;
         Actor_SelectScript(g_Task->param.unk_0B);
         func_8014D290();
         if (g_Task->param.unk_0B == 0) {

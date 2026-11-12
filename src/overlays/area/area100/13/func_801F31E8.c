@@ -20,7 +20,7 @@ MATCH void func_801F31E8(Point3DL* pos, s32 height) {
     Area_ProjectPoint(point, &inner);
     point[2] = pos->z + height;
     Area_ProjectPoint(point, &outer);
-    shade = ((g_FrameCount & 1) << 2) | 0x20;
+    shade = ((g_FrameCount & 0x1) << 2) | 0x20;
     for (i = 0; i < AREA_RING_POINTS; i++) {
         last_inner = inner;
         last_outer = outer;

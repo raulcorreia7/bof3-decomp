@@ -28,7 +28,7 @@ MATCH void func_800B0498(void) {
 
     UI_DrawWindow((u16)(g_MenuCurrentPanel->pos.x + 135u), (u16)(g_MenuCurrentPanel->pos.y + 10u), 48, 16, 0, *style);
 
-    panel_count = -(BATTLE_ACTIVE_ROW->chr.ap < D_801463B8[0]) & 7;
+    panel_count = -(BATTLE_ACTIVE_ROW->chr.ap < D_801463B8[0]) & 0x7;
     UI_DrawAsciiString((u16)(g_MenuCurrentPanel->pos.x + 136u), (u16)(g_MenuCurrentPanel->pos.y + 12u), panel_count, (const void*)(D_800B6D1C));
 
     TEXT_Format(g_UiFormatBuffer, D_80096A04, D_801463B8[0]);

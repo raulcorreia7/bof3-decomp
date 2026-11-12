@@ -33,9 +33,53 @@ MATCH void func_801EEEA8(void) {
     saved_work->unk_03 += 1;
 }
 
-INCLUDE_ASM(func_801EEF24);
+MATCH void func_801EEF24(void) {
+    PartyMember* saved;
+    PartyMember* work;
+    u8           count;
+    s32          cue;
+    u32          slot;
 
-INCLUDE_ASM(func_801EF070);
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        cue = EMI_CUE_ID(SND_BANK_COMMON, 0x01);
+        if (g_Game.members[g_Battle.target_selector].chr.character_id == CHAR_ID_RYU_YOUNG) {
+            cue = EMI_CUE_ID(SND_BANK_COMMON, 0x00);
+        }
+        SND_QueueSelectionFx(cue);
+    }
+    saved  = g_Task;
+    g_Task = &g_Game.members[g_Battle.active_battler];
+    if (!(Actor_StepAnimOnce() & BYTE_MASK)) {
+        g_Task = saved;
+        return;
+    }
+    g_Task->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task                             = saved;
+    g_Task->param.unk_0B               = 0;
+    slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 4;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->unk_03 += 1;
+}
+
+/* Loads the character archive the active battler's facing selects from the dragon-form row when the effect
+ * ticker is one, then advances byte 0x03. */
+MATCH void func_801EF070(void) {
+    s32 archive_id;
+
+    if (g_Task->param.unk_0B == 1) {
+        if (g_BattleEffectBattler->facing < 2) {
+            archive_id = D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex];
+        } else {
+            archive_id = D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex];
+        }
+        EMI_LoadArchive(archive_id);
+        g_Task->unk_03 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF138);
 
@@ -82,9 +126,45 @@ MATCH void func_801EFA34(void) {
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC38, header.step);
 }
 
-INCLUDE_ASM(func_801EFAAC);
+MATCH void func_801EFAAC(void) {
+    PartyMember* work;
+    s32          y;
+    u32          slot;
 
-INCLUDE_ASM(func_801EFBAC);
+    g_Task->facing           = g_BattleSelectedActor->facing;
+    g_Task->pos.x.fixed      = g_EncounterOriginX;
+    y                        = g_EncounterOriginY;
+    g_Task->pos.y.fixed      = y;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, y);
+    g_Task->param.unk_0B     = 0;
+    g_Task->unk_09           = 4;
+    g_Task->header.step += 1;
+    slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 2;
+    g_BattleEffects[slot].arg.unk_09   = 1;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+}
+
+MATCH void func_801EFBAC(void) {
+    u8           count;
+    u32          slot;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 3;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+        g_Task->unk_09 = 4;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFC68(void) {
     PartyMember* work;
@@ -92,7 +172,7 @@ MATCH void func_801EFC68(void) {
     u32          slot;
 
     if (--g_Task->unk_09 == 0) {
-        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = 0;
         task                               = g_Task;
@@ -172,7 +252,25 @@ MATCH void func_801EFF44(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFF94);
+MATCH void func_801EFF94(void) {
+    u32          slot;
+    PartyMember* work;
+
+    if ((g_FrameCount & 0x3) == 0) {
+        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].target.party = work;
+        g_BattleEffects[slot].unk_04       = g_Task->unk_04 & 0xF;
+        g_Task->param.unk_0B += 1;
+        g_Task->unk_04 += 1;
+    }
+    if (g_BattleEffectBattler->header.step == 5) {
+        if (--g_Task->timer == 0) {
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 #include "overlays/bmagic/Effect_StepOnZeroTick.h"
 
@@ -208,7 +306,21 @@ INCLUDE_ASM(func_801F026C);
 
 INCLUDE_ASM(func_801F0648);
 
-INCLUDE_ASM(func_801F0AC8);
+/* Draws the glow ring step header.step selects: sets the actor matrix, advances the effect timers and
+ * passes the slot's draw row to func_801F0D0C while the step is running. */
+MATCH void func_801F0AC8(void) {
+    PartyMember* work;
+
+    SYS_DISPATCH_BYTE(D_801F24F0, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        Effect_SetActorMatrix();
+        work = g_Task;
+        work->unk_09 += 2;
+        work->unk_0C += 1;
+        func_801F0D0C(D_801F24D0[g_Task->unk_04][0] + g_Task->unk_09, D_801F24D0[g_Task->unk_04][1]);
+        PopMatrix();
+    }
+}
 
 MATCH void func_801F0BA8(void) {
     PartyMember* work;

@@ -22,7 +22,7 @@ MATCH void func_801EECCC(void) {
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0, anchor = 1; i < 6; i++) {
-        slot                               = Battle_AllocEffect(1, 0x34);
+        slot                               = Battle_AllocEffect(1, 52);
         work                               = g_Task;
         g_BattleEffects[slot].arg.unk_09   = anchor;
         g_BattleEffects[slot].target.party = work;
@@ -38,7 +38,7 @@ MATCH void func_801EECCC(void) {
     *MEM_PTR(u16, 0x8003AC00u) = 0;
     g_GfxPalettePending        = 1;
     SND_QueueSelectionFx(0x100);
-    func_800A9610(g_Battle.target_selector, 0x10);
+    Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     g_Task->unk_09 = 1;
     g_Task->timer  = 1;
     g_Task->header.mode += 1;
@@ -65,4 +65,4 @@ INCLUDE_ASM(func_801EF240);
 
 INCLUDE_ASM(func_801EF7B0);
 
-INCLUDE_ASM(func_801EF9E4);
+#include "overlays/bmagic/func_801EF9E4.h"

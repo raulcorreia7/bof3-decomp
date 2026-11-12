@@ -6,7 +6,7 @@ MATCH void Actor_InitSlot(s32 type) {
     u8         slot;
 
     slot = Actor_FindFreeSlot();
-    if (slot != 0xFF) {
+    if (slot != GAME_NONE) {
         record               = &g_ActorSlots[slot];
         record->header.flags = 1;
         record->type         = type;

@@ -5,10 +5,13 @@ segments:
     start: 0x0
     vram: 0x801EEC00
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, bin, D_801EEC00]
-      - [0x34, c, BMagic_Effect]
+      - [0x1C, .rodata, func_801EFCE8]
+      - [0x34, c, func_801EEC34]
+      - [0x10E8, c, func_801EFCE8]
+      - [0x1344, c, BMagic_DispatchEffectMode]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

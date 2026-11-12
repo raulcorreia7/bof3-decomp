@@ -6,7 +6,41 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    PartyMember* task;
+    PartyMember* battler;
+    u32          slot;
+    u32          i;
+    u16*         src;
+    u16*         dst;
+
+    battler                            = g_BattleEffectBattler;
+    task                               = g_Task;
+    task->pos.x.fixed                  = battler->pos.x.fixed;
+    task->pos.y.fixed                  = battler->pos.y.fixed;
+    task->pos.z.fixed                  = battler->pos.z.fixed;
+    slot                               = Battle_AllocEffect(1, 17) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    /* Copies arena palette rows 26 and 2 into the work copy with STP set, then restores row 2's color 0. */
+    for (i = 0, dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW), src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW); i < 256; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    {
+        u16* row_dst;
+        u16* row_src;
+
+        for (i = 0, row_dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW), row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00); i < 16; i++) {
+            *row_dst++ = *row_src++ | 0x8000;
+        }
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                     = 1;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 24;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEDB8(void) {
     u8           timer;
@@ -16,13 +50,13 @@ MATCH void func_801EEDB8(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        slot                               = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 17) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
         /* FAKE: keeps the target selector read after the slot stores, as retail orders it. */
         FAKE_BARRIER();
-        func_800A9610(g_Battle.target_selector, 0x20);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x20);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

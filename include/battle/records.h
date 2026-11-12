@@ -289,7 +289,7 @@ typedef union BattlePanelCell0A {
 } BattlePanelCell0A;
 
 /* The byte view of a battle panel task's +0x12 and +0x14 cells. battle/battle/15
- * reads those cells as bytes (func_800B1728, func_800B0F9C) and as
+ * reads those cells as bytes (Battle_DrawCommandList, func_800B0F9C) and as
  * halfwords, so the cells keep two views. This view starts at the panel
  * task's base, so a unit that holds the panel pointer reads the bytes
  * through it. */
@@ -326,7 +326,7 @@ typedef struct BattlePanelTask {
     u8                unk_0C;
     u8                cursor;    /* +0x0D cleared on panel entry */
     u8                pad_0E[4]; /* +0x0E .. +0x11 */
-    u16               row_base;  /* +0x12 the panel list's first row (func_800B1728) */
+    u16               row_base;  /* +0x12 the panel list's first row (Battle_DrawCommandList) */
     u16               hp;        /* +0x14 copied from EnemyBattler.hp; the HP bar's numerator */
     u8                pad_16[6]; /* +0x16 .. +0x1B */
     u16               max_hp;    /* +0x1C copied from EnemyBattler.stats.max_hp; the HP bar's divisor */
@@ -888,7 +888,7 @@ ASSERT_OFFSET(BattlePhase, sub_step, 0x02);
 
 /* The battle state word g_Battle.state, read and written by both battle overlays
  * and the boss/bmagic handlers. Bit 3 (0x0008) is set by func_801D277C and
- * func_8009B828 and cleared by func_801D656C; no reader is known, so
+ * func_8009B828 and cleared by Battle_WaitVoiceSlots; no reader is known, so
  * it has no member. */
 typedef enum BattleStateFlags {
     BATTLE_STATE_WINDOW_BUSY      = 1 << 1,
@@ -905,7 +905,7 @@ typedef enum BattleStateFlags {
     BATTLE_STATE_RELOAD_PARTY     = 1 << 15,
 } BattleStateFlags;
 
-/* The side mask func_800A9820 writes into D_80146384; the low values are one
+/* The side mask Battle_MarkDamaged writes into D_80146384; the low values are one
  * battler slot (0-10). */
 typedef enum BattleTargetFlags {
     BATTLE_TARGET_ENEMY_SIDE = 1 << 6,
@@ -933,6 +933,8 @@ extern s16          D_801462AA;
 /* FAKE: g_Battle.row_cursor as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleRowCursor;
 extern u8           D_801462EE;
+/* FAKE: g_Battle.boss_flags as a global of its own; the sites that set a bit in it match only with a separate symbol. */
+extern u8           g_BattleBossFlags;
 /* FAKE: g_Battle.living_party_count as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleLivingPartyCount;
 

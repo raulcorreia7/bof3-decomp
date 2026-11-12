@@ -879,13 +879,25 @@ MATCH u8 func_801D7EA0(u8 arg) {
     return 0xFF;
 }
 
-INCLUDE_ASM(func_801D7EF0);
+#include "overlays/commu/Commu_CellGrid.h"
+
+MATCH void func_801D7EF0(s16 x, s16 y) {
+    s32 i;
+    s32 offset;
+
+    COMMU_DRAW_CELL_GRID(func_801D875C, 0x16, 20, 2, 6);
+}
 
 INCLUDE_ASM(func_801D8058);
 
 INCLUDE_ASM(func_801D812C);
 
-INCLUDE_ASM(func_801D81A4);
+MATCH void func_801D81A4(s16 x, s16 y) {
+    s32 i;
+    s32 offset;
+
+    COMMU_DRAW_CELL_GRID(func_801D875C, 0x22, 7, 4, 6);
+}
 
 INCLUDE_ASM(func_801D830C);
 

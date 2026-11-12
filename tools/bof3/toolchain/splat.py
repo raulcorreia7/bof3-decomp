@@ -179,7 +179,9 @@ def _flatten_asm_tree(base: Path) -> None:
     A TU whose stem is also a function name writes both the full disassembly
     ``<stem>.s`` and the per-function ``<stem>/<stem>.s``. The full file is the
     one a C stub includes, so it wins; the matching per-function copy is
-    dropped. Any other duplicate is a layout error.
+    dropped. A copy of a function that the TU's full disassembly already gave a
+    file, with the same text, is dropped too; a differing duplicate is a layout
+    error.
     """
     for path in sorted(base.rglob("*.s")):
         relative = path.relative_to(base)
@@ -187,7 +189,9 @@ def _flatten_asm_tree(base: Path) -> None:
             continue
         destination = base / path.name
         if destination.exists():
-            if path.parent.name != path.stem:
+            if path.parent.name != path.stem and destination.read_text(
+                encoding="utf-8", errors="replace"
+            ) != path.read_text(encoding="utf-8", errors="replace"):
                 raise RuntimeError(f"duplicate split assembly: {destination}")
             path.unlink()
             continue

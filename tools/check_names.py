@@ -34,6 +34,38 @@ TOKEN = re.compile(
 )
 ADDRESS = re.compile(r"[0-9A-Fa-f]{8}")
 DEFAULT = re.compile(r"(?:func|D)_[0-9A-F]{8}|L[0-9A-F]{8}|jtbl_\w*|jpt_\w*|s_gap_\w*")
+UNNAMED = re.compile(r"arg[0-9]+")
+
+
+def unnamed_parameters(text: str) -> set[str]:
+    """``argN`` identifiers in code; comments, strings and hex literals are skipped."""
+    return {
+        m.group()
+        for m in TOKEN.finditer(text)
+        if m.lastgroup == "ident" and UNNAMED.fullmatch(m.group())
+    }
+
+
+def added_lines(ref: str):
+    """Yield (path, line, text) for each line a change adds under include/ or src/."""
+    diff = subprocess.run(
+        ["git", "diff", "-U0", f"{ref}...HEAD", "--", *ROOTS],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout
+    path, line = "", 0
+    for row in diff.splitlines():
+        if row.startswith("+++ b/"):
+            path = row[6:]
+        elif row.startswith("@@"):
+            m = re.search(r"\+(\d+)", row)
+            line = int(m.group(1)) if m else 0
+        elif row.startswith("+") and not row.startswith("+++"):
+            yield path, line, row[1:]
+            line += 1
+        elif row.startswith(" "):
+            line += 1
 
 
 def offenders(text: str) -> set[str]:
@@ -78,6 +110,23 @@ def baseline_entries() -> set[str]:
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
+        return 0
+    if argv and argv[0] == "--diff":
+        if len(argv) != 2:
+            print("usage: python3 tools/check_names.py --diff REF", file=sys.stderr)
+            return 2
+        bad = 0
+        for path, line, text in added_lines(argv[1]):
+            for name in unnamed_parameters(text):
+                print(
+                    f"{path}:{line}: {name}: an unnamed parameter; rename it to what it holds",
+                    file=sys.stderr,
+                )
+                bad = 1
+        if bad:
+            print(f"check-names: unnamed parameters against {argv[1]}", file=sys.stderr)
+            return 1
+        print(f"check-names: no unnamed parameters against {argv[1]}")
         return 0
     now = tree_entries()
     if argv == ["--write"]:

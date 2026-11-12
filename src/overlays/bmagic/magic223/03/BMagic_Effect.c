@@ -10,7 +10,17 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-INCLUDE_ASM(func_801EEFB4);
+/* When the effect ticker is zero, marks the hit applied and the effect playing, tells the battle UI and
+ * runs the effect player's follow-up. */
+MATCH void func_801EEFB4(void) {
+    u16* flags;
+
+    if (g_Task->param.unk_0B == 0) {
+        BATTLE_RAISE_STATE(BATTLE_STATE_DAMAGE_APPLIED | BATTLE_STATE_EFFECT_PLAYING);
+        func_800A9820(g_Battle.target_selector);
+        func_801E5988();
+    }
+}
 
 /* func_801EF00C */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

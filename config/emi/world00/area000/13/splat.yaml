@@ -12,5 +12,5 @@ segments:
       - [0x4C, c, Message_SelectAnswerValue]
       - [0x8C, c, func_801F2C8C]
       - [0xD8, c, func_801F2CD8]
-      - [0x118, c, D_801F2D18]
+      - {start: 0x118, type: bin, name: D_801F2D18, linker_section_order: .text}
   - [0x143C]

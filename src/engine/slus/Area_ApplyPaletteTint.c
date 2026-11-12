@@ -21,12 +21,12 @@ MATCH void Area_ApplyPaletteTint(s32 column_mask, s32 row_mask, s32 red, s32 gre
     dst   = (u16*)(AREA_PALETTE_WORK + 0x600);
     src   = (u16*)AREA_PALETTE_ARENA_33E00;
     for (; plane < 15; plane++) {
-        if (row_mask & 1) {
+        if (row_mask & 0x1) {
             row = 0;
             s   = src;
             d   = dst;
             for (; row < 16; row++) {
-                if (plane != 3 || (column_mask & 1)) {
+                if (plane != 3 || (column_mask & 0x1)) {
                     for (cell_index = 0; cell_index < 16; cell_index++) {
                         cell = s[row * 16 + cell_index];
                         r    = cell & 0x1F;

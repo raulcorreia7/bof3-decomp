@@ -8,6 +8,34 @@
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 
+/* The line record func_801F88FC draws at +0x0C of the task row: five
+ * halfwords it rotates and projects, then the line colour. */
+typedef struct Scena03Line {
+    s16 unk_00; /* +0x00 */
+    s16 unk_02; /* +0x02 */
+    s16 unk_04; /* +0x04 */
+    s16 unk_06; /* +0x06 */
+    s16 unk_08; /* +0x08 */
+    u8  red;    /* +0x0A */
+    u8  green;  /* +0x0B */
+    u8  blue;   /* +0x0C */
+} Scena03Line;
+
+ASSERT_SIZE(Scena03Line, 0x0E);
+ASSERT_OFFSET(Scena03Line, unk_06, 0x06);
+ASSERT_OFFSET(Scena03Line, red, 0x0A);
+
+/* The head of the task row this scene reads as its line record. */
+typedef struct Scena03Work {
+    u8          pad_00[0x0C];
+    Scena03Line line; /* +0x0C */
+} Scena03Work;
+
+ASSERT_SIZE(Scena03Work, 0x1A);
+ASSERT_OFFSET(Scena03Work, line, 0x0C);
+
+#define SCN_LINE ((Scena03Work*)g_Task)
+
 extern SVECTOR  D_1F800014[];
 extern s8       D_80144EA0;
 extern u8       D_801468E4[];
@@ -64,11 +92,22 @@ extern Callback D_801FD038[];
         D_8014600E += (table)[dir] * 16;  \
     } while (0)
 
-s8 func_801FCD1C(void);
+s8 func_801FCD1C(s32 x, s32 y);
 
 void func_801F8170(s32 arg0);
 
+void func_801F88FC(Scena03Line* line);
+
 void func_801F7FFC(s32 arg0);
+
+/* The area probes func_801FC704 dispatches to: each tests the entry coordinates against the cells
+ * of its area. */
+s32 func_801FC7EC(s32 entry_x, s32 entry_y);
+s32 func_801FC8AC(s32 entry_x, s32 entry_y);
+s8  func_801FC944(s32 entry_x, s32 entry_y);
+s8  func_801FC9DC(s32 entry_x, s32 entry_y);
+s8  func_801FCAB8(s32 entry_x, s32 entry_y);
+s8  func_801FCB4C(s32 entry_x, s32 entry_y);
 
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 

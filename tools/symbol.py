@@ -12,13 +12,18 @@
     tools/symbol.py uses NAME|IMAGE@0xADDR
     tools/symbol.py value 0xNN [--image IMAGE] [--type ENUM_OR_PREFIX]
     tools/symbol.py layers [--jsonl]
+    tools/symbol.py accesses NAME [--jsonl]
+    tools/symbol.py records [--jsonl]
+    tools/symbol.py values --scan [--jsonl]
 
-`add` writes one row of config/symbols.toml in address order.
+`add` writes one row of config/symbols.toml in address order. The image is a folder under
+`config/` that holds a `splat.yaml`; any other id is refused.
 
 `rename` changes a function or global in every tracked file of the scope: the definition, each
 prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). It writes the
 row of config/symbols.toml: a new row for an address name (`--source` describes the symbol), or the
-renamed key of an existing row. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
+renamed key of an existing row. Naming an address replaces the row already keyed with its address
+name, so no key repeats. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
 above its definition and declaration. A named symbol is one name in every image: with no
 `--image` its row is renamed in every table that has it. An address name is unique only per
 image, so give `--image` once per image that holds the twin; `--local` limits the files to those
@@ -68,6 +73,28 @@ shares one layer. Each row carries the image, name, address, layer, caller count
 (`MATCH`, `INCLUDE_ASM`, `NON_MATCHING`), whether the name is real, how many images hold a byte-equal
 body, and whether the body is already one shared header. `--jsonl` writes one object per line.
 
+`accesses` lists every load and store that reaches a record type or a global, decoded from the
+built function index: direct globals, globals that point at the type, and the image's `g_Task` view
+are followed. Each row gives the byte offset, the widths seen, reads and writes, the member the
+current definition has there, up to five examples, the constants it is compared with or assigned,
+the callee argument slots it is passed to, and a problem (`unknown member`, `width differs`,
+`signedness differs`, `straddles members`, `past the end`, `never accessed`). A coverage line on
+stderr says how many base-register memory operations the trace followed.
+
+`records` summarises every struct, union and typedef in `include/` and `src/**/*.h`: the compiler
+size, member count, `unk_`/`pad_` count, how many times the name is defined, how many other names
+share its layout, the globals and parameters of the type, and its direct access count. Rows are
+ordered by accesses times unknown members, so the records that need work first come first.
+
+`values --scan` reads every `MATCH` body in `src/` and decides what each numeric literal means from
+the declaration around it: the member, global, parameter or call slot the literal is assigned to or
+compared with, its comment and its type. A literal whose declaration names a family (an enum tag in
+a member comment, an enum-typed parameter, a `<thing>_id` name) gets that family and the one member
+of it with the value; a member name that states the role (`timer`, `index`, `x`, `color`) gets the
+form the conventions prescribe. `--jsonl` writes one object per site with the file, line, literal,
+role, family, existing constant, rewritten form and confidence (`typed` when the declaration proves
+the role). A form rewrite keeps the value and its suffix, so it never changes the bytes.
+
 Run `meson compile -C build/meson check-<image>` for every touched image afterwards.
 """
 
@@ -75,6 +102,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import bisect
 import collections
 import hashlib
 import json
@@ -114,6 +142,13 @@ def grep_files(word: str, scope: list[str]) -> list[str]:
 
 def add(args: argparse.Namespace) -> int:
     """Insert one row."""
+    if not (ROOT / "config" / args.image / "splat.yaml").is_file():
+        print(
+            f"symbol: no image {args.image}; "
+            "use a folder id under config/ that holds a splat.yaml",
+            file=sys.stderr,
+        )
+        return 2
     addr = int(args.addr, 16)
     row = symtab.format_row(
         args.name, addr, type=args.type, size=int(args.size, 0) if args.size else None,
@@ -310,6 +345,9 @@ def rename(args: argparse.Namespace) -> int:
             source=args.source,
         )
         for image in images:
+            # A row already keyed with the address name would be rewritten by the source
+            # substitution below and repeat the new key.
+            text = symtab.remove_row(text, image, old) or text
             text = symtab.add_row(text, image, new, row, addr)
     else:
         for image in images:
@@ -1671,6 +1709,1037 @@ def value(args: argparse.Namespace) -> int:
     return 0
 
 
+# --- Values: what each numeric literal means ------------------------------------------------
+
+VALUE_LITERAL = re.compile(r"(?<![\w.])(0[xX][0-9A-Fa-f]+|\d+)([uUlL]*)(?![\w.])")
+VALUE_BODY = re.compile(
+    r"\b(MATCH|NON_MATCHING|HAND_ASM)\b([^;{}]*?)\b(\w+)\s*\(([^;{}]*)\)\s*\{"
+)
+VALUE_MEMBER_LINE = re.compile(
+    r"^\s*(?:const\s+|volatile\s+)*(?:(struct|union)\s+)?"
+    r"([A-Za-z_]\w*(?:\s*\*+)?)\s+(\w+)\s*((?:\[[^\]]*\]\s*)*)"
+    r"\s*(?::\s*\d+)?\s*;\s*(?:/\*\s*(.*?)\s*\*/)?\s*$"
+)
+VALUE_ANON_LINE = re.compile(r"\b(?:struct|union)\s*\{([^{}]*)\}\s*(\w+)\s*;")
+VALUE_GLOBAL_LINE = re.compile(
+    r"^\s*extern\s+(?:const\s+|volatile\s+)*"
+    r"((?:struct\s+|union\s+)?\w+(?:\s*\*+)?(?:\s+(?:const|volatile))*)"
+    r"\s+(\w+)\s*((?:\[[^\]]*\]\s*)*)\s*;",
+    re.M,
+)
+VALUE_TYPEDEF_LINE = re.compile(r"^\s*typedef\s+([^;{}()]+?)\s+(\w+)\s*;", re.M)
+VALUE_VIEW_ANY = re.compile(
+    r"#\s*define\s+(\w+)\s+\(\(\s*(?:volatile\s+)?(\w+)\s*\*\s*\)\s*\1\s*\)"
+)
+VALUE_PROTO = re.compile(
+    r"^[ \t]*(?:const\s+|volatile\s+)*"
+    r"((?:struct\s+|union\s+)?[A-Za-z_]\w*(?:\s*\*+)?)"
+    r"\s+(\w+)\s*\(([^;{}()]*)\)\s*;",
+    re.M,
+)
+VALUE_LOCAL_LINE = re.compile(
+    r"^\s*(?:const\s+|volatile\s+)*((?:struct\s+|union\s+)?[A-Za-z_]\w*)"
+    r"\s*(\*?)\s*(\w+)\s*((?:\[[^\]]*\]\s*)*)\s*(?:=[^;]*)?;",
+    re.M,
+)
+VALUE_CAST = re.compile(
+    r"^\(\s*(?:volatile\s+|const\s+)*(?:struct\s+|union\s+)?(\w+)\s*(\*+)\s*\)"
+)
+VALUE_LEFTOVER = re.compile(
+    r"(\([^()]*\)|[A-Za-z_][\w.\[\]\->]*?)\s*"
+    r"(==|!=|<=|>=|<|>|=|\+=|-=|\*=|/=|&=|\|=|\^=|<<|>>)\s*$"
+)
+VALUE_RIGHT_OPERATOR = re.compile(
+    r"^\s*(==|!=|<=|>=|<|>|\+|-|\*|/|&|\||\^|<<|>>)\s*([A-Za-z_][\w.\[\]\->]*)"
+)
+VALUE_SWITCH = re.compile(r"\bswitch\s*\(")
+VALUE_CASE = re.compile(r"\bcase\s+(0[xX][0-9A-Fa-f]+|\d+)[uUlL]*\s*:")
+VALUE_COUNT_NAME = re.compile(
+    r"(?:^count$|_count$|^counter$|_counter$|^timer$|_timer$|^limit$|^total$|"
+    r"^wait$|^amount$|^radius$|^distance$|^frames$|^steps$|^hp$|^mp$|"
+    r"^damage$|^price$|^exp$|^gold$|^percent$|^percentage$)"
+)
+VALUE_INDEX_NAME = re.compile(
+    r"(?:^index$|_index$|^slot$|_slot$|^row$|_row$|^column$|_column$|^position$)"
+)
+VALUE_COORD_NAME = re.compile(r"(?:^x$|^y$|^z$|^vx$|^vy$|^vz$|^width$|^height$)")
+VALUE_COLOUR_NAME = re.compile(r"(?:^colou?r$|_colou?r$|^red$|^green$|^blue$)")
+VALUE_FLAGS_NAME = re.compile(r"(?:^flags$|_flags$)")
+VALUE_STATE_NAME = re.compile(r"(?:^state$|_state$|^mode$|_mode$|^step$|_step$)")
+VALUE_ANGLE_NAME = re.compile(r"(?:^angle$|_angle$)", re.I)
+VALUE_FIXED_COMMENT = re.compile(r"\b16\.16\b")
+VALUE_ANGLE_CONSTANTS = (
+    (512, "ANGLE_45"),
+    (1024, "ANGLE_90"),
+    (2048, "ANGLE_180"),
+    (3072, "ANGLE_270"),
+)
+VALUE_ALL_ONES = {1: "BYTE_MASK", 2: "HALF_MASK"}
+
+
+@dataclass(frozen=True)
+class ValueFamily:
+    """One enum: its tag, the name prefix its members share, and their values."""
+
+    tag: str
+    prefix: str
+    members: tuple[tuple[str, int], ...]
+    header: str
+
+
+@dataclass(frozen=True)
+class ValueSignal:
+    """What the declaration around one literal says about its role."""
+
+    role: str
+    family: str
+    confidence: str
+    comment: str
+    ctype: str
+
+
+@dataclass(frozen=True)
+class ValueSite:
+    """One numeric literal of a matched body and what its role is."""
+
+    file: str
+    line: int
+    literal: str
+    role: str
+    family: str
+    constant: str
+    form: str
+    confidence: str
+
+
+def _value_prefix(names: list[str]) -> str:
+    """Return the common ``TAG_`` prefix of the names."""
+    if not names:
+        return ""
+    prefix = names[0]
+    for name in names[1:]:
+        while prefix and not name.startswith(prefix):
+            prefix = prefix[:-1]
+    return prefix[: prefix.rfind("_") + 1] if "_" in prefix else ""
+
+
+def _header_values(
+    headers: list[str],
+) -> tuple[list, list, dict[str, int]]:
+    """Return each header's enums, macros and the resolved value of every name."""
+    enums = []
+    defines = []
+    for header in headers:
+        try:
+            text = (ROOT / header).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        enums.extend(
+            (header, family, members) for family, members in _enum_values(text)
+        )
+        defines.extend(
+            (header, name, body, line) for name, body, line in _define_values(text)
+        )
+    values: dict[str, int] = {}
+    for _ in range(5):
+        changed = False
+        for _, name, body, _ in defines:
+            if name in values:
+                continue
+            value = _c_expression(body, values)
+            if value is not None:
+                values[name] = value
+                changed = True
+        for _, _, members in enums:
+            previous: int | None = -1
+            for name, body, _ in members:
+                if name in values:
+                    previous = values[name]
+                    continue
+                value = (
+                    _c_expression(body, values)
+                    if body is not None
+                    else (previous + 1 if previous is not None else None)
+                )
+                if value is not None:
+                    values[name] = value
+                    previous = value
+                    changed = True
+                else:
+                    previous = None
+        if not changed:
+            break
+    return enums, defines, values
+
+
+def _value_families(headers: list[str]) -> tuple[dict[str, ValueFamily], set[str]]:
+    """Return each visible enum by its tag, and every visible constant's name."""
+    enums, _, values = _header_values(headers)
+    families: dict[str, ValueFamily] = {}
+    for header, tag, members in enums:
+        if not tag:
+            continue
+        resolved = tuple(
+            (name, values[name]) for name, _, _ in members if name in values
+        )
+        if not resolved:
+            continue
+        family = ValueFamily(
+            tag, _value_prefix([name for name, _ in resolved]), resolved, header
+        )
+        existing = families.get(tag)
+        if existing is None or len(resolved) > len(existing.members):
+            families[tag] = family
+    return families, set(values)
+
+
+def _value_members(
+    body: str, records: dict[str, dict[str, tuple[str, str]]]
+) -> dict[str, tuple[str, str]]:
+    """Return the members of one aggregate body, registering its anonymous ones."""
+    members: dict[str, tuple[str, str]] = {}
+    stack = [members]
+    pending: list[str] = []
+    count = 0
+    for line in body.split("\n"):
+        for match in VALUE_ANON_LINE.finditer(line):
+            count += 1
+            name = f"value_anon_{count}"
+            inner = _value_members(match.group(1), records)
+            records[name] = inner
+            stack[-1][match.group(2)] = (name, "")
+        if VALUE_ANON_LINE.search(line):
+            continue
+        match = VALUE_MEMBER_LINE.match(line)
+        if match is not None and "{" not in line and not line.strip().startswith("}"):
+            ctype = (match.group(2) + match.group(4)).strip()
+            stack[-1][match.group(3)] = (ctype, (match.group(5) or "").strip())
+            continue
+        if re.search(r"\b(?:struct|union)\s*\{", line):
+            count += 1
+            name = f"value_anon_{count}"
+            inner: dict[str, tuple[str, str]] = {}
+            records[name] = inner
+            stack.append(inner)
+            pending.append(name)
+            continue
+        closing = re.match(r"\}\s*(\w+)?\s*(?:\[[^\]]*\])?\s*;", line.strip())
+        if closing is not None and len(stack) > 1:
+            stack.pop()
+            name = pending.pop()
+            if closing.group(1):
+                stack[-1][closing.group(1)] = (name, "")
+    return members
+
+
+def _value_records() -> tuple[dict[str, dict[str, tuple[str, str]]], dict[str, str]]:
+    """Return each record's members and each typedef alias's type, from every header."""
+    records: dict[str, dict[str, tuple[str, str]]] = {}
+    typedefs: dict[str, str] = {}
+    for path in ctext.tracked_c(ROOT):
+        if not path.endswith(".h") or path.startswith("include/psyq/"):
+            continue
+        text = ctext.read(ROOT, path)
+        masked = ctext.mask(text)
+        for match in RECORD_HEAD.finditer(masked):
+            opening = match.end() - 1
+            closing = _match_brace(masked, opening)
+            if closing < 0:
+                continue
+            tag = match.group(1) or ""
+            tail = re.match(r"\s*(\w+)\s*;", masked[closing + 1 :])
+            alias = tail.group(1) if tail else ""
+            members = _value_members(text[opening + 1 : closing], records)
+            for name in {part for part in (tag, alias) if part}:
+                if name not in records or len(members) > len(records[name]):
+                    records[name] = members
+        for match in VALUE_TYPEDEF_LINE.finditer(masked):
+            base = match.group(1).strip()
+            if base.split()[0] in ("struct", "union", "enum"):
+                continue
+            typedefs.setdefault(match.group(2), base)
+    return records, typedefs
+
+
+def _value_globals() -> dict[str, str]:
+    """Return each ``extern`` global's declared type."""
+    found: dict[str, str] = {}
+    for path in ctext.tracked_c(ROOT):
+        if not path.endswith(".h") or path.startswith("include/psyq/"):
+            continue
+        text = ctext.read(ROOT, path)
+        for match in VALUE_GLOBAL_LINE.finditer(ctext.mask(text)):
+            found.setdefault(match.group(2), (match.group(1) + match.group(3)).strip())
+    return found
+
+
+def _value_prototypes() -> tuple[dict[str, list[tuple[str, str]]], dict[str, str]]:
+    """Return each function's parameters and return type from its prototypes."""
+    from bof3.source import decls
+
+    params: dict[str, list[tuple[str, str]]] = {}
+    returns: dict[str, str] = {}
+    for path in ctext.tracked_c(ROOT):
+        if not path.endswith(".h") or path.startswith("include/psyq/"):
+            continue
+        text = ctext.read(ROOT, path)
+        for match in VALUE_PROTO.finditer(ctext.mask(text)):
+            name = match.group(2)
+            if name in ("if", "while", "for", "switch", "sizeof", "return"):
+                continue
+            found = [
+                decls.split_param(part) for part in decls.split_args(match.group(3))
+            ]
+            params.setdefault(name, found)
+            returns.setdefault(name, match.group(1).strip())
+    return params, returns
+
+
+def _value_views() -> list[tuple[str, str, str]]:
+    """Return ``(folder, macro, type)`` for each macro that views a global as a record."""
+    found = []
+    for path in ctext.tracked_c(ROOT):
+        if not path.endswith(".h") or path.startswith("include/psyq/"):
+            continue
+        text = ctext.read(ROOT, path)
+        for match in VALUE_VIEW_ANY.finditer(text):
+            found.append((str(Path(path).parent), match.group(1), match.group(2)))
+    return found
+
+
+def _value_dereference(ctype: str) -> str | None:
+    """Return what one ``*`` or one array subscript of the type gives."""
+    text = " ".join(ctype.split())
+    index = text.find("[")
+    if index >= 0:
+        return text[:index].strip()
+    if text.endswith("*"):
+        return text[:-1].strip() or None
+    return None
+
+
+def _value_element(ctype: str) -> str | None:
+    """Return the element type of an array or pointer type."""
+    return _value_dereference(ctype)
+
+
+def _value_member(
+    index: dict,
+    ctype: str,
+    name: str,
+) -> tuple[str, str] | None:
+    """Return the ``(type, comment)`` of one member of ``ctype``."""
+    text = " ".join(ctype.split())
+    text = re.sub(r"\b(?:const|volatile)\b", " ", text)
+    for _ in range(4):
+        text = " ".join(text.split())
+        stripped = _value_dereference(text)
+        if stripped is not None:
+            text = stripped
+            continue
+        base = re.sub(r"^(?:struct|union)\s+", "", text)
+        base = index["typedefs"].get(base, base)
+        base = re.sub(r"^(?:struct|union)\s+", "", base)
+        record = index["records"].get(base)
+        if record is None:
+            return None
+        found = record.get(name)
+        if found is not None:
+            return found
+        # A member of an anonymous union shares its enclosing record's scope.
+        for member_type, _ in record.values():
+            inner = index["records"].get(member_type)
+            if inner is not None and name in inner:
+                return inner[name]
+        return None
+    return None
+
+
+def _value_type(
+    expression: str,
+    index: dict,
+    scope: dict[str, str],
+    depth: int = 0,
+) -> str | None:
+    """Return the declared type of an expression, or None when it cannot be resolved."""
+    if depth > 8:
+        return None
+    text = expression.strip()
+    while text.startswith("(") and text.endswith(")"):
+        inner = text[1:-1]
+        if not _value_balanced(inner):
+            break
+        text = inner.strip()
+    if not text:
+        return None
+    cast = VALUE_CAST.match(text)
+    if cast is not None:
+        return cast.group(1) + cast.group(2)
+    if text.startswith("*"):
+        base = _value_type(text[1:], index, scope, depth + 1)
+        return _value_dereference(base) if base else None
+    if text.startswith("&"):
+        base = _value_type(text[1:], index, scope, depth + 1)
+        return base + "*" if base else None
+    identifier = re.fullmatch(r"[A-Za-z_]\w*", text)
+    if identifier is not None:
+        name = identifier.group(0)
+        if name in scope:
+            return scope[name]
+        view = index["views"].get(name)
+        if view is not None:
+            return view + "*"
+        if name in index["globals"]:
+            return index["globals"][name]
+        return None
+    call = re.match(r"^([A-Za-z_]\w*)\s*\(", text)
+    if call is not None:
+        return index["returns"].get(call.group(1))
+    # The last top-level member access decides the type.
+    split = _value_last_access(text)
+    if split is not None:
+        base, operator, name = split
+        ctype = _value_type(base, index, scope, depth + 1)
+        if ctype is None:
+            return None
+        if operator == "->":
+            ctype = _value_dereference(ctype)
+            if ctype is None:
+                return None
+        found = _value_member(index, ctype, name)
+        return found[0] if found is not None else None
+    # A trailing subscript takes the element type of what it indexes.
+    subscript = re.match(r"^(.*)\[[^\]]*\]\s*$", text, re.S)
+    if subscript is not None:
+        base = _value_type(subscript.group(1), index, scope, depth + 1)
+        return _value_element(base) if base else None
+    return None
+
+
+def _value_balanced(text: str) -> bool:
+    """True when every bracket of the text is closed inside it."""
+    depth = 0
+    for char in text:
+        depth += char in "([{"
+        depth -= char in ")]}"
+        if depth < 0:
+            return False
+    return depth == 0
+
+
+def _value_last_access(text: str) -> tuple[str, str, str] | None:
+    """Split an expression at its last top-level ``.`` or ``->``."""
+    depth = 0
+    found = None
+    index = 0
+    while index < len(text):
+        char = text[index]
+        if char in "([{":
+            depth += 1
+        elif char in ")]}":
+            depth -= 1
+        elif depth == 0 and char == ".":
+            found = (index, ".")
+        elif depth == 0 and char == "-" and text[index + 1 : index + 2] == ">":
+            found = (index, "->")
+            index += 1
+        index += 1
+    if found is None:
+        return None
+    position, operator = found
+    name = re.match(r"\s*(\w+)", text[position + len(operator) :])
+    if name is None:
+        return None
+    return text[:position], operator, name.group(1)
+
+
+def _value_member_map(
+    index: dict,
+) -> dict[str, list[tuple[str, str]]]:
+    """Return each member name's ``(type, comment)`` in every record that declares it."""
+    found: dict[str, list[tuple[str, str]]] = collections.defaultdict(list)
+    for record in index["records"].values():
+        for name, info in record.items():
+            found[name].append(info)
+    return found
+
+
+def _value_signal(
+    index: dict,
+    target: str,
+    scope: dict[str, str],
+) -> ValueSignal | None:
+    """Return what the declaration of ``target`` says about a literal beside it."""
+    text = target.strip()
+    while text.startswith("(") and text.endswith(")") and _value_balanced(text[1:-1]):
+        text = text[1:-1].strip()
+    if not text or text.count("[") != text.count("]"):
+        return None
+    if not re.fullmatch(r"[A-Za-z_][\w.\[\]\->]*", text):
+        return None
+    split = _value_last_access(text)
+    name = split[2] if split is not None else text
+    ctype = _value_type(text, index, scope)
+    member = None
+    if split is not None:
+        base = _value_type(split[0], index, scope)
+        if base is not None:
+            if split[1] == "->":
+                base = _value_dereference(base) or base
+            member = _value_member(index, base, name)
+    if member is None and ctype is None:
+        candidates = set(index["member_map"].get(name, []))
+        if len(candidates) == 1:
+            member = candidates.pop()
+    comment = member[1] if member is not None else ""
+    if not ctype and member is not None:
+        ctype = member[0]
+    comments = _value_chain_comments(index, text, scope)
+    return _value_name_signal(
+        name,
+        comment,
+        ctype or "",
+        index["families"],
+        any(VALUE_FIXED_COMMENT.search(item) for item in comments),
+    )
+
+
+def _value_chain_comments(index: dict, text: str, scope: dict[str, str]) -> list[str]:
+    """Return the comments of each record member on an access chain."""
+    comments = []
+    current = text
+    for _ in range(8):
+        split = _value_last_access(current)
+        if split is None:
+            break
+        base, operator, name = split
+        ctype = _value_type(base, index, scope)
+        if ctype is not None:
+            if operator == "->":
+                ctype = _value_dereference(ctype) or ctype
+            member = _value_member(index, ctype, name)
+            if member is not None:
+                comments.append(member[1])
+        current = base
+    return comments
+
+
+def _value_family_role(tag: str) -> str:
+    """Return the role an enum tag's name declares."""
+    if tag.endswith("Flags"):
+        return "flags"
+    if tag.endswith("Id"):
+        return "id"
+    if tag.endswith("Index"):
+        return "index"
+    if tag.endswith(("Type", "Category", "Kind")):
+        return "type"
+    return "state"
+
+
+def _value_camel(stem: str) -> str:
+    """Return ``item`` as ``Item``, for the enum tag an id family takes."""
+    return "".join(part.capitalize() for part in stem.split("_"))
+
+
+def _value_name_signal(
+    name: str,
+    comment: str,
+    ctype: str,
+    families: dict[str, ValueFamily],
+    fixed: bool = False,
+) -> ValueSignal | None:
+    """Return the role a member's name, comment or type declares."""
+    for word in re.findall(r"[A-Za-z_]\w*", comment):
+        if word not in families:
+            continue
+        return ValueSignal(_value_family_role(word), word, "typed", comment, ctype)
+    enum_type = re.sub(r"^(?:struct|union)\s+", "", " ".join(ctype.split()))
+    if enum_type in families:
+        return ValueSignal(
+            _value_family_role(enum_type), enum_type, "typed", comment, ctype
+        )
+    if name.endswith("_id"):
+        tag = _value_camel(name[: -len("_id")]) + "Id"
+        if tag in families:
+            return ValueSignal("id", tag, "typed", comment, ctype)
+        return ValueSignal("id", "", "family", comment, ctype)
+    if name.endswith("_index") or VALUE_INDEX_NAME.search(name):
+        stem = name[: -len("_index")] if name.endswith("_index") else ""
+        tag = _value_camel(stem) + "Index" if stem else ""
+        if tag in families:
+            return ValueSignal("index", tag, "typed", comment, ctype)
+        return ValueSignal("index", "", "typed", comment, ctype)
+    if fixed or name == "fixed" or VALUE_FIXED_COMMENT.search(comment):
+        return ValueSignal("fixed", "", "typed", comment, ctype)
+    if "*" in ctype or "[" in ctype:
+        return None
+    if VALUE_COUNT_NAME.search(name) and not VALUE_FLAGS_NAME.search(name):
+        return ValueSignal("count", "", "typed", comment, ctype)
+    if VALUE_COORD_NAME.search(name):
+        return ValueSignal("coordinate", "", "typed", comment, ctype)
+    if VALUE_COLOUR_NAME.search(name):
+        return ValueSignal("colour", "", "typed", comment, ctype)
+    if VALUE_ANGLE_NAME.search(name):
+        return ValueSignal("angle", "", "typed", comment, ctype)
+    if ctype.strip() == "bool":
+        return ValueSignal("bool", "", "typed", comment, ctype)
+    if VALUE_FLAGS_NAME.search(name):
+        return ValueSignal("flags", "", "family", comment, ctype)
+    if VALUE_STATE_NAME.search(name):
+        return ValueSignal("state", "", "family", comment, ctype)
+    return None
+
+
+def _value_family_member(family: ValueFamily, value: int) -> str:
+    """Return the one member of the family with ``value``, else empty."""
+    names = {name for name, member_value in family.members if member_value == value}
+    return names.pop() if len(names) == 1 else ""
+
+
+def _value_operator(masked: str, start: int, end: int) -> str:
+    """Return the operator the literal is an operand of: ``mask``, ``shift`` or empty."""
+    before = masked[max(0, start - 40) : start]
+    after = masked[end : end + 40]
+    if re.search(r"<<\s*$", before) or re.match(r"\s*>>", after):
+        return "shift"
+    left = re.search(r"([&|^])=?\s*$", before)
+    if left is not None:
+        operator = left.group(1)
+        if operator == "&" and before[max(0, left.start() - 1) : left.start()] == "&":
+            return ""
+        if operator == "|" and before[max(0, left.start() - 1) : left.start()] == "|":
+            return ""
+        if before[left.start() + 1 : left.start() + 2] == "=":
+            return ""
+        return "mask"
+    right = re.match(r"\s*([&|^])(?![&=|])", after)
+    if right is not None:
+        return "mask"
+    return ""
+
+
+def _value_target(masked: str, start: int, end: int) -> str:
+    """Return the expression the literal is an operand of or is compared with."""
+    before = masked[max(0, start - 90) : start]
+    after = masked[end : end + 70]
+    left = VALUE_LEFTOVER.search(before)
+    if left is not None:
+        return left.group(1).strip()
+    right = VALUE_RIGHT_OPERATOR.match(after)
+    if right is not None:
+        return right.group(2).strip()
+    return ""
+
+
+def _value_call_argument(masked: str, start: int, end: int) -> tuple[str, int] | None:
+    """Return the callee and argument index when the literal is a whole call argument."""
+    depth = 0
+    opening = -1
+    for index in range(start - 1, -1, -1):
+        char = masked[index]
+        if char in ")]}":
+            depth += 1
+        elif char in "([{":
+            if depth == 0:
+                if char != "(":
+                    return None
+                opening = index
+                break
+            depth -= 1
+    if opening < 0:
+        return None
+    callee = re.search(r"([A-Za-z_]\w*)\s*$", masked[:opening])
+    if callee is None:
+        return None
+    keyword = callee.group(1)
+    if keyword in ("if", "while", "for", "switch", "sizeof", "return", "do"):
+        return None
+    inner = masked[opening + 1 : start]
+    commas = 0
+    brackets = 0
+    last = 0
+    for offset, char in enumerate(inner):
+        if char in "([{":
+            brackets += 1
+        elif char in ")]}":
+            brackets -= 1
+        elif char == "," and brackets == 0:
+            commas += 1
+            last = offset + 1
+    before_argument = inner[last:]
+    if before_argument.strip() and not re.fullmatch(
+        r"\s*(?:\(?\s*(?:u|s)(?:8|16|32)\s*\)?)?\s*", before_argument
+    ):
+        return None
+    after = re.match(r"\s*([,)])", masked[end:])
+    if after is None:
+        return None
+    return keyword, commas
+
+
+def _value_form(literal: str, value: int, signal: ValueSignal) -> str:
+    """Return the rewrite when only the form is wrong, else empty."""
+    suffix = re.search(r"[uUlL]+$", literal)
+    tail = suffix.group(0) if suffix else ""
+    if signal.role == "index" and value == 0xFF:
+        return ""
+    if signal.role in ("count", "index", "coordinate", "colour"):
+        return str(value) + tail if not _is_decimal(literal) else ""
+    if signal.role == "mask":
+        width = _value_width(signal.ctype)
+        if width is not None and value == (1 << (8 * width)) - 1:
+            return ""
+        return f"0x{value:X}{tail}"
+    if signal.role == "offset":
+        if _is_decimal(literal):
+            return f"0x{value:X}{tail}"
+        return ""
+    return ""
+
+
+def _is_decimal(literal: str) -> bool:
+    return not literal.lower().startswith("0x")
+
+
+def _value_width(ctype: str) -> int | None:
+    """Return the byte width a declared type names, when it is a plain integer."""
+    text = " ".join(ctype.split())
+    return {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}.get(text)
+
+
+def _value_role_constant(
+    index: dict, signal: ValueSignal, value: int
+) -> tuple[str, str]:
+    """Return the ``(constant, form)`` a signal gives one value."""
+    families = index["families"]
+    if signal.family:
+        family = families.get(signal.family)
+        if family is not None:
+            constant = _value_family_member(family, value)
+            if constant:
+                return constant, ""
+    if signal.role == "mask":
+        width = _value_width(signal.ctype)
+        name = VALUE_ALL_ONES.get(width) if width is not None else None
+        if name is None:
+            name = {0xFF: "BYTE_MASK", 0xFFFF: "HALF_MASK"}.get(value)
+        if name and name in index["names"]:
+            return name, ""
+    if signal.role == "angle":
+        for angle, name in VALUE_ANGLE_CONSTANTS:
+            if angle == value and name in index["names"]:
+                return name, ""
+    if signal.role == "index" and value == 0xFF and "GAME_NONE" in index["names"]:
+        return "GAME_NONE", ""
+    if signal.role == "bool":
+        if value == 1:
+            return "true", ""
+        if value == 0:
+            return "false", ""
+    return "", ""
+
+
+def _value_scan_file(path: str, image: str | None, index: dict) -> list[ValueSite]:
+    """Return every classified literal of one source file."""
+    text = ctext.read(ROOT, path)
+    masked = ctext.mask(text)
+    found: list[ValueSite] = []
+    for match in VALUE_BODY.finditer(masked):
+        if match.group(1) != "MATCH":
+            continue
+        body_start = match.end()
+        depth = 1
+        position = body_start
+        while position < len(masked) and depth:
+            depth += (masked[position] == "{") - (masked[position] == "}")
+            position += 1
+        body = masked[body_start:position]
+        scope: dict[str, str] = {}
+        for local in VALUE_LOCAL_LINE.finditer(body):
+            ctype = (local.group(1) + local.group(2) + local.group(4)).strip()
+            scope.setdefault(local.group(3), ctype)
+        from bof3.source import decls
+
+        for part in decls.split_args(match.group(4)):
+            ctype, name = decls.split_param(part)
+            if name:
+                scope.setdefault(name, ctype)
+        _value_scan_body(path, text, body_start, body, scope, index, found)
+        _value_switch_sites(path, text, body_start, body, scope, index, found)
+    return found
+
+
+def _value_number(literal: str) -> int:
+    """Return the value of a C numeric literal, without its suffix."""
+    text = re.sub(r"[uUlL]+$", "", literal)
+    return int(text, 0)
+
+
+def _value_scan_body(
+    path: str,
+    text: str,
+    body_start: int,
+    body: str,
+    scope: dict[str, str],
+    index: dict,
+    found: list[ValueSite],
+) -> None:
+    """Classify the literals of one matched body into ``found``."""
+    for literal_match in VALUE_LITERAL.finditer(body):
+        literal = literal_match.group(0)
+        value = _value_number(literal)
+        start, end = literal_match.start(), literal_match.end()
+        signal = None
+        target = _value_target(body, start, end)
+        if target:
+            signal = _value_signal(index, target, scope)
+        operator = _value_operator(body, start, end)
+        if signal is None and operator == "mask":
+            signal = ValueSignal("mask", "", "typed", "", "")
+        argument = None
+        if signal is None:
+            argument = _value_call_argument(body, start, end)
+            if argument is not None:
+                callee, slot = argument
+                if callee == "FIELD" and slot == 2:
+                    signal = ValueSignal("offset", "", "typed", "", "u32")
+                else:
+                    params = index["prototypes"].get(callee)
+                    if params is not None and slot < len(params):
+                        ctype, name = params[slot]
+                        if name:
+                            signal = _value_signal(index, name, {name: ctype})
+                            if signal is not None:
+                                signal = ValueSignal(
+                                    signal.role,
+                                    signal.family,
+                                    signal.confidence,
+                                    signal.comment,
+                                    ctype,
+                                )
+        if signal is not None and signal.role == "mask" and operator != "mask":
+            continue
+        if signal is None:
+            continue
+        constant, role_form = _value_role_constant(index, signal, value)
+        if not constant and operator == "mask" and signal.role != "mask":
+            signal = ValueSignal(
+                "mask", signal.family, "typed", signal.comment, signal.ctype
+            )
+        form = role_form or _value_form(literal, value, signal)
+        if form.lower() == literal.lower():
+            form = ""
+        if not constant and not form and not signal.family:
+            continue
+        line = text.count("\n", 0, body_start + start) + 1
+        found.append(
+            ValueSite(
+                path,
+                line,
+                literal,
+                signal.role,
+                signal.family,
+                constant,
+                form,
+                signal.confidence,
+            )
+        )
+
+
+def _value_switch_sites(
+    path: str,
+    text: str,
+    body_start: int,
+    body: str,
+    scope: dict[str, str],
+    index: dict,
+    found: list[ValueSite],
+) -> None:
+    """Classify the ``case`` labels of each switch by what the switch tests."""
+    for switch in VALUE_SWITCH.finditer(body):
+        close = body.find(")", switch.end())
+        if close < 0:
+            continue
+        target = body[switch.end() : close]
+        signal = _value_signal(index, target, scope)
+        if signal is None:
+            continue
+        opening = body.find("{", close)
+        if opening < 0:
+            continue
+        depth, position = 1, opening + 1
+        while position < len(body) and depth:
+            depth += (body[position] == "{") - (body[position] == "}")
+            position += 1
+        region = body[opening:position]
+        for case in VALUE_CASE.finditer(region):
+            literal = case.group(1)
+            value = _value_number(literal)
+            constant, form = _value_role_constant(index, signal, value)
+            if not constant and not form and not signal.family:
+                continue
+            offset = opening + case.start(1)
+            found.append(
+                ValueSite(
+                    path,
+                    text.count("\n", 0, body_start + offset) + 1,
+                    literal,
+                    signal.role,
+                    signal.family,
+                    constant,
+                    form,
+                    signal.confidence,
+                )
+            )
+
+
+def _value_index(image: str | None) -> dict:
+    """Return the declarations and constants one source file sees."""
+    key = image or ""
+    cached = _VALUE_INDEX.get(key)
+    if cached is not None:
+        return cached
+    shared = _VALUE_SHARED
+    if image is None:
+        headers = [
+            name
+            for name in ctext.tracked(ROOT, "include")
+            if name.endswith(".h") and not name.startswith("include/psyq/")
+        ]
+    else:
+        headers = _value_headers(image)
+    families, names = _value_families(headers)
+    index = {
+        "records": shared["records"],
+        "typedefs": shared["typedefs"],
+        "globals": shared["globals"],
+        "prototypes": shared["prototypes"],
+        "returns": shared["returns"],
+        "member_map": shared["member_map"],
+        "families": families,
+        "names": names,
+        "views": _value_views_for(image),
+    }
+    _VALUE_INDEX[key] = index
+    return index
+
+
+def _value_views_for(image: str | None) -> dict[str, str]:
+    """Return the globals a source of ``image`` reads through a record-view macro."""
+    if image is None:
+        return {}
+    found: dict[str, str] = {}
+    from bof3.resolve.ids import source_folder
+
+    folder = f"src/{source_folder(image)}"
+    for parent, macro, ctype in _VALUE_VIEWS:
+        if parent == "" or folder == parent or folder.startswith(parent + "/"):
+            found[macro] = ctype
+    task = _task_types().get(image)
+    if task is not None:
+        found["g_Task"] = task
+    return found
+
+
+def _value_images() -> dict[str, str]:
+    """Return source folder -> the image whose sources it holds."""
+    found: dict[str, str] = {}
+    for image, manifest in _layer_manifests().items():
+        found.setdefault(manifest.source_dir, image)
+    return found
+
+
+def _value_image_of(path: str, images: dict[str, str]) -> str | None:
+    """Return the image whose source folder holds ``path``, longest folder first."""
+    parts = path.split("/")
+    for length in range(len(parts) - 1, 0, -1):
+        folder = "/".join(parts[:length])
+        if folder in images:
+            return images[folder]
+    return None
+
+
+def _value_sites() -> list[ValueSite]:
+    """Return every classified literal of every matched body."""
+    images = _value_images()
+    sites: list[ValueSite] = []
+    for path in ctext.tracked(ROOT, "src"):
+        if not path.endswith((".c", ".h")):
+            continue
+        image = _value_image_of(path, images)
+        index = _value_index(image)
+        sites.extend(_value_scan_file(path, image, index))
+    return sites
+
+
+_VALUE_SHARED: dict = {}
+_VALUE_INDEX: dict[str, dict] = {}
+_VALUE_VIEWS: list[tuple[str, str, str]] = []
+
+
+def values(args: argparse.Namespace) -> int:
+    """Scan the matched bodies for numeric literals whose role is declared."""
+    global _VALUE_SHARED, _VALUE_VIEWS
+    if not _VALUE_SHARED:
+        records, typedefs = _value_records()
+        prototypes, returns = _value_prototypes()
+        _VALUE_SHARED = {
+            "records": records,
+            "typedefs": typedefs,
+            "globals": _value_globals(),
+            "prototypes": prototypes,
+            "returns": returns,
+            "member_map": _value_member_map({"records": records, "typedefs": typedefs}),
+        }
+        _VALUE_VIEWS = _value_views()
+    sites = _value_sites()
+    sites.sort(key=lambda site: (site.file, site.line, site.literal))
+    if args.jsonl:
+        for site in sites:
+            print(
+                json.dumps(
+                    {
+                        "file": site.file,
+                        "line": site.line,
+                        "literal": site.literal,
+                        "role": site.role,
+                        "family": site.family,
+                        "constant": site.constant,
+                        "form": site.form,
+                        "confidence": site.confidence,
+                    },
+                    ensure_ascii=False,
+                )
+            )
+        return 0
+    by_role = collections.Counter(site.role for site in sites)
+    by_family = collections.Counter(site.family for site in sites if site.family)
+    by_confidence = collections.Counter(site.confidence for site in sites)
+    by_subsystem = collections.Counter(_value_subsystem(site.file) for site in sites)
+    print(f"{len(sites)} sites")
+    for title, counter in (
+        ("role", by_role),
+        ("family", by_family),
+        ("confidence", by_confidence),
+        ("subsystem", by_subsystem),
+    ):
+        print(f"\n{title}")
+        for key, count in counter.most_common():
+            print(f"{count}\t{key}")
+    return 0
+
+
+def _value_subsystem(path: str) -> str:
+    """Return the overlay or engine group a source belongs to."""
+    parts = path.split("/")
+    if len(parts) > 3 and parts[1] == "overlays":
+        return parts[2]
+    if len(parts) > 3 and parts[1] == "engine":
+        return parts[2]
+    return parts[0]
+
+
 # --- Call-graph layers ----------------------------------------------------------------------
 
 LAYER_RESIDENT = RESIDENT
@@ -2307,6 +3376,987 @@ def layers(args: argparse.Namespace) -> int:
     return 0
 
 
+# --- Record accesses ------------------------------------------------------------------------
+
+MIPS_READ = {
+    "lb": (1, True),
+    "lbu": (1, False),
+    "lh": (2, True),
+    "lhu": (2, False),
+    "lw": (4, None),
+}
+MIPS_WRITE = {"sb": 1, "sh": 2, "sw": 4}
+MIPS_READ_OPS = {0x20, 0x21, 0x23, 0x24, 0x25}
+MIPS_WRITE_OPS = {0x28, 0x29, 0x2B}
+MIPS_OPCODES = {
+    0x08: "addi",
+    0x09: "addiu",
+    0x0A: "slti",
+    0x0B: "sltiu",
+    0x0C: "andi",
+    0x0D: "ori",
+    0x0F: "lui",
+    0x20: "lb",
+    0x21: "lh",
+    0x23: "lw",
+    0x24: "lbu",
+    0x25: "lhu",
+    0x28: "sb",
+    0x29: "sh",
+    0x2B: "sw",
+    0x04: "beq",
+    0x05: "bne",
+    0x03: "jal",
+}
+REG_NAMES = [
+    "zero", "at", "v0", "v1", "a0", "a1", "a2", "a3",
+    "t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7",
+    "s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7",
+    "t8", "t9", "k0", "k1", "gp", "sp", "fp", "ra",
+]  # fmt: skip
+CALLER_SAVED = set(range(1, 16)) | {24, 25}
+
+
+@dataclass(frozen=True)
+class AccessRange:
+    """A global object an instruction can address: its extent, name and record type."""
+
+    start: int
+    end: int
+    name: str
+    type_name: str | None
+
+
+@dataclass
+class MipsAccess:
+    """One load or store that lands in a target object or a traced pointer."""
+
+    image: str
+    function: str
+    offset: int
+    width: int
+    mnemonic: str
+    write: bool
+    signed: bool | None
+    instruction: str
+    global_name: str | None = None
+    type_name: str | None = None
+    constant: int | None = None
+    slot: str | None = None
+
+
+def _signed16(value: int) -> int:
+    return value - 0x10000 if value & 0x8000 else value
+
+
+def _signed32(value: int) -> int:
+    return value - 0x100000000 if value & 0x80000000 else value
+
+
+def _reg_name(number: int) -> str:
+    return REG_NAMES[number] if 0 <= number < len(REG_NAMES) else f"r{number}"
+
+
+def _offset_text(offset: int) -> str:
+    return f"-0x{-offset:x}" if offset < 0 else f"0x{offset:x}"
+
+
+def _instruction(word: int, call_name: str | None = None) -> str:
+    op = word >> 26
+    rs = (word >> 21) & 31
+    rt = (word >> 16) & 31
+    rd = (word >> 11) & 31
+    imm = word & 0xFFFF
+    funct = word & 63
+    name = MIPS_OPCODES.get(op)
+    if op == 0:
+        if funct in (0x20, 0x21):
+            return f"{'add' if funct == 0x20 else 'addu'} {_reg_name(rd)}, {_reg_name(rs)}, {_reg_name(rt)}"
+        if funct == 0x08:
+            return f"jr {_reg_name(rs)}"
+        if funct == 0x09:
+            return f"jalr {_reg_name(rs)}"
+        return f"0x{word:08x}"
+    if name == "lui":
+        return f"lui {_reg_name(rt)}, 0x{imm:x}"
+    if name in MIPS_READ or name in MIPS_WRITE:
+        return (
+            f"{name} {_reg_name(rt)}, {_offset_text(_signed16(imm))}({_reg_name(rs)})"
+        )
+    if name == "jal":
+        return f"jal {call_name or f'0x{word & 0x03FFFFFF:08x}'}"
+    if name in ("addi", "addiu", "slti", "sltiu"):
+        return (
+            f"{name} {_reg_name(rt)}, {_reg_name(rs)}, {_offset_text(_signed16(imm))}"
+        )
+    if name in ("andi", "ori"):
+        return f"{name} {_reg_name(rt)}, {_reg_name(rs)}, 0x{imm:x}"
+    if name in ("beq", "bne"):
+        return (
+            f"{name} {_reg_name(rs)}, {_reg_name(rt)}, {_offset_text(_signed16(imm))}"
+        )
+    return f"0x{word:08x}"
+
+
+def _range_at(
+    ranges: list[AccessRange], starts: list[int], address: int
+) -> AccessRange | None:
+    index = bisect.bisect_right(starts, address) - 1
+    if index >= 0:
+        found = ranges[index]
+        if address < found.end:
+            return found
+    return None
+
+
+def decode_accesses(
+    image: str,
+    function: str,
+    address: int,
+    words: tuple[int, ...],
+    ranges: list[AccessRange],
+    pointer_cells: dict[int, str],
+    function_names: dict[int, str],
+) -> tuple[list[MipsAccess], int, int]:
+    """Decode one function: the accesses it makes into ranges or traced pointer types.
+
+    Returns the accesses, the number of traced memory operations, and the number of
+    base-register operations whose base could not be followed.
+    """
+    starts = [item.start for item in ranges]
+    registers: dict[int, object] = {}
+    loaded: dict[int, int] = {}
+    moves: dict[int, tuple[int, int]] = {}
+    accesses: list[MipsAccess] = []
+    traced = 0
+    untraced = 0
+    for index, word in enumerate(words):
+        op = word >> 26
+        rs = (word >> 21) & 31
+        rt = (word >> 16) & 31
+        rd = (word >> 11) & 31
+        imm = word & 0xFFFF
+        simm = _signed16(imm)
+        funct = word & 63
+        pc = address + index * 4
+        if op == 0x0F:
+            registers[rt] = imm << 16
+            loaded.pop(rt, None)
+            moves.pop(rt, None)
+            continue
+        if op == 0x09:
+            base = registers.get(rs)
+            if isinstance(base, int):
+                registers[rt] = base + simm
+            elif isinstance(base, tuple):
+                registers[rt] = (base[0], base[1] + simm)
+            elif rs == 0:
+                registers[rt] = simm
+            else:
+                registers.pop(rt, None)
+            loaded.pop(rt, None)
+            moves.pop(rt, None)
+            continue
+        if op == 0x0D:
+            base = registers.get(rs)
+            if isinstance(base, int):
+                registers[rt] = base | imm
+            elif rs == 0:
+                registers[rt] = imm
+            else:
+                registers.pop(rt, None)
+            loaded.pop(rt, None)
+            moves.pop(rt, None)
+            continue
+        if op in (0x0A, 0x0B, 0x0C):
+            if rs in loaded:
+                access = accesses[loaded[rs]]
+                if access.constant is None:
+                    access.constant = simm if op in (0x0A, 0x0B) else imm
+            registers.pop(rt, None)
+            loaded.pop(rt, None)
+            continue
+        if op == 0:
+            if funct in (0x20, 0x21):
+                first = registers.get(rs)
+                second = registers.get(rt)
+                if rs == 0:
+                    value = second
+                elif rt == 0:
+                    value = first
+                else:
+                    value = None
+                if value is None:
+                    registers.pop(rd, None)
+                else:
+                    registers[rd] = value
+                loaded.pop(rd, None)
+                if rd in (4, 5, 6, 7) and (rs == 0 or rt == 0):
+                    moves[rd] = (rt if rs == 0 else rs, index)
+                continue
+            if funct == 0x08 and rs == 31:
+                break
+            if funct == 0x09:
+                _attach_slots(accesses, moves, loaded, index, "jalr")
+                _after_call(registers, loaded, moves)
+                continue
+            continue
+        if op in (0x20, 0x21, 0x23, 0x24, 0x25, 0x28, 0x29, 0x2B):
+            mnemonic = MIPS_OPCODES[op]
+            base = registers.get(rs)
+            found: AccessRange | None = None
+            access: MipsAccess | None = None
+            address_value = 0
+            if isinstance(base, int):
+                address_value = base + simm
+                found = _range_at(ranges, starts, address_value)
+                if found is not None:
+                    traced += 1
+                    access = MipsAccess(
+                        image,
+                        function,
+                        address_value - found.start,
+                        4,
+                        mnemonic,
+                        op in MIPS_WRITE_OPS,
+                        None,
+                        _instruction(word),
+                        found.name,
+                        found.type_name,
+                    )
+            elif isinstance(base, tuple):
+                type_name, base_offset = base
+                traced += 1
+                access = MipsAccess(
+                    image,
+                    function,
+                    base_offset + simm,
+                    4,
+                    mnemonic,
+                    op in MIPS_WRITE_OPS,
+                    None,
+                    _instruction(word),
+                    None,
+                    type_name,
+                )
+            elif rs not in (29, 30):
+                untraced += 1
+            if access is not None:
+                if mnemonic in MIPS_READ:
+                    access.width, access.signed = MIPS_READ[mnemonic]
+                else:
+                    access.width = MIPS_WRITE[mnemonic]
+                if access.write and isinstance(registers.get(rt), int):
+                    access.constant = registers[rt]
+                accesses.append(access)
+                if not access.write:
+                    loaded[rt] = len(accesses) - 1
+                elif rt in loaded:
+                    loaded.pop(rt, None)
+            else:
+                loaded.pop(rt, None)
+            if isinstance(base, int) and address_value in pointer_cells:
+                registers[rt] = (pointer_cells[address_value], 0)
+            else:
+                registers.pop(rt, None)
+            continue
+        if op == 0x03:
+            target = ((word & 0x03FFFFFF) << 2) | (pc & 0xF0000000)
+            name = function_names.get(target)
+            _attach_slots(accesses, moves, loaded, index, name or f"0x{target:08X}")
+            registers[31] = None
+            _after_call(registers, loaded, moves)
+            continue
+        if op in (0x04, 0x05):
+            if rs == 0 or rt == 0:
+                other = rt if rs == 0 else rs
+                if other in loaded:
+                    access = accesses[loaded[other]]
+                    if access.constant is None:
+                        access.constant = 0
+            else:
+                first, second = registers.get(rs), registers.get(rt)
+                if isinstance(first, int) and rt in loaded:
+                    accesses[loaded[rt]].constant = first
+                elif isinstance(second, int) and rs in loaded:
+                    accesses[loaded[rs]].constant = second
+            continue
+    return accesses, traced, untraced
+
+
+def _attach_slots(
+    accesses: list[MipsAccess],
+    moves: dict[int, tuple[int, int]],
+    loaded: dict[int, int],
+    index: int,
+    callee: str,
+) -> None:
+    for slot, (source, position) in moves.items():
+        if index - position > 4 or source not in loaded:
+            continue
+        access = accesses[loaded[source]]
+        label = f"{callee}[{_reg_name(slot)}]"
+        if access.slot is None:
+            access.slot = label
+        elif label not in access.slot.split(","):
+            access.slot += "," + label
+
+
+def _after_call(
+    registers: dict[int, object],
+    loaded: dict[int, int],
+    moves: dict[int, tuple[int, int]],
+) -> None:
+    for reg in list(registers):
+        if reg in CALLER_SAVED or isinstance(registers[reg], tuple):
+            registers.pop(reg, None)
+    for reg in list(loaded):
+        if reg in CALLER_SAVED:
+            loaded.pop(reg, None)
+    moves.clear()
+
+
+def _normalized_type(value: str) -> str:
+    return " ".join(value.replace("*", " * ").split())
+
+
+def _pointer_target(value: str) -> str | None:
+    text = _normalized_type(value)
+    return text[:-2].strip() if text.endswith(" *") else None
+
+
+def _task_types() -> dict[str, str]:
+    """Return image -> the record type its g_Task macro reads the scratchpad cell as.
+
+    A family header (``src/overlays/battle/battle.h``) casts the cell for every image under
+    its folder; an image header is more specific and wins.
+    """
+    pattern = re.compile(
+        r"#\s*define\s+g_Task\s+\(\(\s*(?:volatile\s+)?(\w+)\s*\*\s*\)\s*g_Task\s*\)"
+    )
+    headers = []
+    for path in (ROOT / "src").rglob("*.h"):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        match = pattern.search(text)
+        if match is not None:
+            headers.append((path.parent.relative_to(ROOT).as_posix(), match.group(1)))
+    found: dict[str, str] = {}
+    for image, manifest in _layer_manifests().items():
+        folder = manifest.source_dir
+        best: tuple[int, str] | None = None
+        for parent, type_name in headers:
+            if folder == parent or folder.startswith(parent + "/"):
+                if best is None or len(parent) > best[0]:
+                    best = (len(parent), type_name)
+        if best is not None:
+            found[image] = best[1]
+    return found
+
+
+def _c_member_uses(names: set[str]) -> dict[str, list[tuple[str, int, str]]]:
+    """Return one entry per ``.member``/``->member`` use of the names, comments masked."""
+    pattern = re.compile(r"(?:->|\.)\s*(\w+)")
+    found: dict[str, list[tuple[str, int, str]]] = collections.defaultdict(list)
+    if not names:
+        return found
+    for path in ctext.tracked_c(ROOT):
+        if path.startswith("include/psyq/"):
+            continue
+        text = ctext.read(ROOT, path)
+        masked = ctext.mask(text)
+        for number, line in enumerate(masked.split("\n"), 1):
+            for match in pattern.finditer(line):
+                if match.group(1) in names:
+                    raw = text.split("\n")[number - 1]
+                    found[match.group(1)].append((path, number, raw))
+    return found
+
+
+def _member_constants(line: str, member: str) -> list[int]:
+    """Return the numeric constants a C line compares with or assigns to a member."""
+    token = r"(0[xX][0-9A-Fa-f]+|\d+)[uUlL]*\b"
+    escaped = re.escape(member)
+    patterns = (
+        rf"\b{escaped}\b\s*(?:==|!=|<=|>=|<|>|&|\||\^|=)\s*{token}",
+        rf"{token}\s*(?:==|!=|<=|>=|<|>|&|\||\^|=)\s*\b{escaped}\b",
+    )
+    out = []
+    for pattern in patterns:
+        for match in re.finditer(pattern, line):
+            token = match.group(1)
+            try:
+                if token.lower().startswith("0x"):
+                    value = int(token, 16)
+                elif len(token) > 1 and token.startswith("0"):
+                    value = int(token, 8)
+                else:
+                    value = int(token, 10)
+            except ValueError:
+                continue
+            if value not in out:
+                out.append(value)
+    return out
+
+
+def _aggregate_accesses(
+    layout,
+    accesses: list[MipsAccess],
+    c_uses: dict[str, list[tuple[str, int, str]]],
+) -> list[dict]:
+    """Aggregate accesses by byte offset and attach the current member and problems."""
+    rows: dict[int, dict] = {}
+
+    def row(offset: int) -> dict:
+        return rows.setdefault(
+            offset,
+            {
+                "offset": offset,
+                "widths": collections.Counter(),
+                "reads": 0,
+                "writes": 0,
+                "examples": [],
+                "constants": [],
+                "slots": [],
+            },
+        )
+
+    for access in accesses:
+        item = row(access.offset)
+        item["widths"][access.mnemonic] += 1
+        item["reads"] += not access.write
+        item["writes"] += access.write
+        example = f"{access.image}@{access.function} {access.instruction}"
+        if example not in item["examples"] and len(item["examples"]) < 5:
+            item["examples"].append(example)
+        if access.constant is not None and access.constant not in item["constants"]:
+            item["constants"].append(access.constant)
+        if access.slot and access.slot not in item["slots"]:
+            item["slots"].append(access.slot)
+    member_offsets = set()
+    if layout is not None:
+        for member in layout.members:
+            member_offsets.add(member.offset)
+            leaf = member.path.rsplit(".", 1)[-1]
+            for path, number, line in c_uses.get(leaf, ()):
+                item = row(member.offset)
+                example = f"{path}:{number}"
+                if example not in item["examples"] and len(item["examples"]) < 5:
+                    item["examples"].append(example)
+                for value in _member_constants(line, leaf):
+                    if value not in item["constants"]:
+                        item["constants"].append(value)
+    for offset in member_offsets:
+        row(offset)
+    out = []
+    for offset in sorted(rows):
+        item = rows[offset]
+        problems = []
+        member = None
+        member_type = None
+        if layout is not None:
+            found = locate(layout, offset)
+            if found:
+                path, _, ctype = found[0]
+                member, member_type = path, ctype
+            else:
+                containing = [
+                    entry
+                    for entry in layout.members
+                    if entry.offset <= offset < entry.offset + entry.size
+                ]
+                containing.sort(key=lambda entry: -entry.path.count("."))
+                if containing:
+                    member, member_type = containing[0].path, containing[0].ctype
+            if member is None:
+                problems.append("unknown member")
+            elif member.rsplit(".", 1)[-1].startswith(("unk_", "pad_", "field_")):
+                problems.append("unknown member")
+        if not item["reads"] and not item["writes"]:
+            problems.append("never accessed")
+        for mnemonic in item["widths"]:
+            width = MIPS_READ.get(mnemonic, (MIPS_WRITE.get(mnemonic, 4), None))[0]
+            if offset + width > layout.size if layout is not None else False:
+                problems.append("past the end")
+            if layout is not None and member_type is not None:
+                leaf_width = _known_width(member_type)
+                if leaf_width is None:
+                    found = [entry for entry in layout.members if entry.path == member]
+                    leaf_width = found[0].size if found else None
+                if leaf_width is not None and leaf_width != width:
+                    problems.append("width differs")
+                signed = MIPS_READ.get(mnemonic, (0, None))[1]
+                if signed is not None and member_type:
+                    base = _normalized_type(member_type)
+                    if base in ("u8", "u16", "u32") and signed:
+                        problems.append("signedness differs")
+                    elif base in ("s8", "s16", "s32") and not signed:
+                        problems.append("signedness differs")
+            if layout is not None and offset + width <= layout.size:
+                last = locate(layout, offset + width - 1)
+                first = locate(layout, offset)
+                if first and last and first[0][0] != last[0][0]:
+                    problems.append("straddles members")
+        item["member"] = member
+        item["member_type"] = member_type
+        item["problem"] = ", ".join(dict.fromkeys(problems))
+        out.append(item)
+    return out
+
+
+def _index_by_image() -> dict[str, list]:
+    """Return every indexed function grouped by image; accesses need the built images."""
+    from bof3.source.index import load_index
+
+    try:
+        funcs = load_index(ROOT)
+    except SystemExit:
+        raise SystemExit(
+            "accesses: no built images. Run: meson compile -C build/meson -j 4"
+        ) from None
+    groups: dict[str, list] = collections.defaultdict(list)
+    for func in funcs:
+        groups[func.image].append(func)
+    return groups
+
+
+def _row_extent(row: dict, layout) -> int:
+    size = row.get("size")
+    if size is not None:
+        return int(size)
+    if layout is not None:
+        return layout.size
+    text = _normalized_type(str(row.get("type", "")))
+    if text.endswith(" *"):
+        return 4
+    width = SCALAR_WIDTH.get(text)
+    if width is not None:
+        return width
+    return 0x100
+
+
+def _visible_images(table: str, images: list[str]) -> list[str]:
+    return images if table in LAYER_RESIDENT else [table]
+
+
+def _scan_image(
+    image: str,
+    functions: dict[str, list],
+    ranges: list[AccessRange],
+    pointer_cells: dict[int, str],
+    names: dict[int, str],
+) -> tuple[list[MipsAccess], int, int]:
+    found: list[MipsAccess] = []
+    traced = 0
+    untraced = 0
+    for func in functions.get(image, ()):
+        accesses, part_traced, part_untraced = decode_accesses(
+            image,
+            func.name,
+            func.addr,
+            func.words,
+            ranges,
+            pointer_cells,
+            names,
+        )
+        found.extend(accesses)
+        traced += part_traced
+        untraced += part_untraced
+    return found, traced, untraced
+
+
+def _access_rows(
+    name: str,
+    layout,
+    accesses: list[MipsAccess],
+    c_uses: dict[str, list[tuple[str, int, str]]],
+    kind: str,
+) -> list[dict]:
+    rows = _aggregate_accesses(layout, accesses, c_uses)
+    for row in rows:
+        row["name"] = name
+        row["kind"] = kind
+    return rows
+
+
+def accesses(args: argparse.Namespace) -> int:
+    """List the reads and writes of a record type or a global, per offset."""
+    name = args.name
+    data = symbol_tables()
+    globals_found: list[tuple[str, dict]] = []
+    for table, rows in data.items():
+        row = rows.get(name)
+        if isinstance(row, dict) and "addr" in row and not row.get("alias"):
+            globals_found.append((table, row))
+    functions = _index_by_image()
+    images = sorted(functions)
+    task_types = _task_types()
+    all_accesses: list[MipsAccess] = []
+    traced = 0
+    untraced = 0
+    layout = None
+    c_uses: dict[str, list[tuple[str, int, str]]] = {}
+    if globals_found:
+        kind = "global"
+        seen = set()
+        for table, row in globals_found:
+            if (table, int(row["addr"])) in seen:
+                continue
+            seen.add((table, int(row["addr"])))
+            type_name = str(row.get("type", "")) or None
+            row_layout = type_layout(type_name) if type_name else None
+            if row_layout is not None and row_layout.record:
+                layout = row_layout
+            extent = _row_extent(row, row_layout)
+            start = int(row["addr"])
+            item_range = AccessRange(start, start + extent, name, type_name)
+            for image in _visible_images(table, images):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [item_range],
+                    {},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        member_names = (
+            {member.path.rsplit(".", 1)[-1] for member in layout.members}
+            if layout is not None
+            else set()
+        )
+        if member_names:
+            all_uses = _c_member_uses(member_names)
+            for member, uses in all_uses.items():
+                kept = [
+                    use
+                    for use in uses
+                    if re.search(
+                        r"\b"
+                        + re.escape(name)
+                        + r"\s*(?:->|\.)\s*"
+                        + re.escape(member)
+                        + r"\b",
+                        use[2],
+                    )
+                ]
+                if kept:
+                    c_uses[member] = kept
+    else:
+        kind = "type"
+        layout = type_layout(name)
+        if layout is None or not layout.record:
+            raise SystemExit(f"symbol: {name} is neither a global nor a record type")
+        direct_rows = [
+            (table, row_name, row)
+            for table, rows in data.items()
+            for row_name, row in rows.items()
+            if isinstance(row, dict)
+            and "addr" in row
+            and not row.get("alias")
+            and _normalized_type(str(row.get("type", ""))) == _normalized_type(name)
+        ]
+        pointer_rows = [
+            (table, row)
+            for table, rows in data.items()
+            for row_name, row in rows.items()
+            if isinstance(row, dict)
+            and "addr" in row
+            and not row.get("alias")
+            and _pointer_target(str(row.get("type", ""))) == _normalized_type(name)
+        ]
+        for table, row_name, row in direct_rows:
+            start = int(row["addr"])
+            item_range = AccessRange(
+                start, start + _row_extent(row, layout), row_name, name
+            )
+            for image in _visible_images(table, images):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [item_range],
+                    {},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        for table, row in pointer_rows:
+            cell = int(row["addr"])
+            for image in _visible_images(table, images):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [],
+                    {cell: name},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        for image, task_type in task_types.items():
+            if task_type == _normalized_type(name):
+                found, part_traced, part_untraced = _scan_image(
+                    image,
+                    functions,
+                    [],
+                    {0x1F800044: name},
+                    {func.addr: func.name for func in functions.get(image, ())},
+                )
+                all_accesses.extend(found)
+                traced += part_traced
+                untraced += part_untraced
+        member_names = {member.path.rsplit(".", 1)[-1] for member in layout.members}
+        c_uses = _c_member_uses(member_names)
+        all_accesses = [access for access in all_accesses if access.type_name == name]
+    rows = _access_rows(name, layout, all_accesses, c_uses, kind)
+    if traced + untraced:
+        share = 100.0 * traced / (traced + untraced)
+        print(
+            f"accesses: traced {traced} of {traced + untraced} memory operations "
+            f"({share:.1f}%)",
+            file=sys.stderr,
+        )
+    keys = [
+        "name",
+        "kind",
+        "offset",
+        "widths",
+        "reads",
+        "writes",
+        "member",
+        "member_type",
+        "examples",
+        "constants",
+        "slots",
+        "problem",
+    ]
+    if args.jsonl:
+        for row in rows:
+            item = {key: row[key] for key in keys}
+            item["widths"] = dict(row["widths"])
+            print(json.dumps(item, ensure_ascii=False))
+        return 0
+    print("\t".join(keys))
+    for row in rows:
+        widths = ",".join(
+            f"{key}:{value}" for key, value in sorted(row["widths"].items())
+        )
+        print(
+            "\t".join(
+                [
+                    row["name"],
+                    row["kind"],
+                    f"0x{row['offset']:X}",
+                    widths,
+                    str(row["reads"]),
+                    str(row["writes"]),
+                    row["member"] or "",
+                    row["member_type"] or "",
+                    "; ".join(row["examples"]),
+                    ",".join(f"0x{value:X}" for value in row["constants"]),
+                    ",".join(row["slots"]),
+                    row["problem"],
+                ]
+            )
+        )
+    return 0
+
+
+RECORD_HEAD = re.compile(r"(?m)\b(?:typedef\s+)?(?:struct|union)\s*(?:(\w+)\s*)?\{")
+TYPEDEF_RECORD = re.compile(r"(?m)^\s*typedef\s+(?:struct|union)\s+(\w+)\s+(\w+)\s*;")
+
+
+def _record_definitions() -> tuple[dict[str, int], dict[str, str], set[str]]:
+    """Return each record name's definition count, its first header, and the record names."""
+    counts: dict[str, int] = collections.Counter()
+    header: dict[str, str] = {}
+    names: set[str] = set()
+    for path in ctext.tracked_c(ROOT):
+        if not path.endswith(".h"):
+            continue
+        text = ctext.read(ROOT, path)
+        masked = ctext.mask(text)
+        for match in RECORD_HEAD.finditer(masked):
+            opening = match.end() - 1
+            closing = _match_brace(masked, opening)
+            if closing < 0:
+                continue
+            tag = match.group(1) or ""
+            tail = re.match(r"\s*(\w+)\s*;", masked[closing + 1 :])
+            alias = tail.group(1) if tail else ""
+            for name in {part for part in (tag, alias) if part}:
+                counts[name] += 1
+                header.setdefault(name, path)
+                names.add(name)
+        for match in TYPEDEF_RECORD.finditer(masked):
+            name = match.group(2)
+            counts[name] += 1
+            header.setdefault(name, path)
+            names.add(name)
+    return dict(counts), header, names
+
+
+def _record_members(layout) -> list:
+    return list(layout.members)
+
+
+def _record_globals(symbols: dict, names: set[str]) -> dict[str, int]:
+    found: dict[str, int] = collections.Counter()
+    for rows in symbols.values():
+        for row in rows.values():
+            if not isinstance(row, dict):
+                continue
+            text = _normalized_type(str(row.get("type", "")))
+            if text in names:
+                found[text] += 1
+            else:
+                target = _pointer_target(text)
+                if target in names:
+                    found[target] += 1
+    return dict(found)
+
+
+def _record_params(tree, names: set[str]) -> dict[str, int]:
+    found: dict[str, int] = collections.Counter()
+    for decls_list in tree.decls.values():
+        for decl in decls_list:
+            for ctype, _ in decl.params:
+                for name in names:
+                    if re.search(r"\b" + re.escape(name) + r"\b", ctype):
+                        found[name] += 1
+    return dict(found)
+
+
+def _record_direct_accesses(
+    names: set[str],
+    layouts: dict,
+    symbols: dict,
+    functions: dict[str, list],
+    images: list[str],
+) -> dict[str, int]:
+    """Decode every image once and count the direct accesses to each record's globals."""
+    own: dict[str, list[AccessRange]] = collections.defaultdict(list)
+    resident: list[AccessRange] = []
+    for table, rows in symbols.items():
+        for row_name, row in rows.items():
+            if not isinstance(row, dict) or "addr" not in row or row.get("alias"):
+                continue
+            text = _normalized_type(str(row.get("type", "")))
+            if text not in names:
+                continue
+            layout = layouts.get(text)
+            start = int(row["addr"])
+            item = AccessRange(start, start + _row_extent(row, layout), row_name, text)
+            if table in LAYER_RESIDENT:
+                resident.append(item)
+            else:
+                own[table].append(item)
+    counts: dict[str, int] = collections.Counter()
+    for image in images:
+        ranges = own.get(image, []) + resident
+        if not ranges:
+            continue
+        for func in functions.get(image, ()):
+            found, _, _ = decode_accesses(
+                image,
+                func.name,
+                func.addr,
+                func.words,
+                ranges,
+                {},
+                {},
+            )
+            for access in found:
+                if access.type_name in names:
+                    counts[access.type_name] += 1
+    return dict(counts)
+
+
+def records(args: argparse.Namespace) -> int:
+    """Summarise every record: size, members, duplicates, globals, parameters and accesses."""
+    counts, header, names = _record_definitions()
+    layouts = {}
+    for name in sorted(names):
+        layout = type_layout(name)
+        if layout is not None and layout.record:
+            layouts[name] = layout
+    symbols = symbol_tables()
+    global_counts = _record_globals(symbols, set(layouts))
+    tree = _layer_tree()
+    param_counts = _record_params(tree, set(layouts))
+    member_names = {
+        member.path.rsplit(".", 1)[-1]
+        for layout in layouts.values()
+        for member in layout.members
+    }
+    c_uses = _c_member_uses(member_names)
+    functions = _index_by_image()
+    direct = _record_direct_accesses(
+        set(layouts), layouts, symbols, functions, sorted(functions)
+    )
+    signatures: dict[tuple, list[str]] = collections.defaultdict(list)
+    owners: dict[str, set[str]] = collections.defaultdict(set)
+    for name, layout in layouts.items():
+        signature = (layout.size, tuple((m.offset, m.ctype) for m in layout.members))
+        signatures[signature].append(name)
+        for member in layout.members:
+            owners[member.path.rsplit(".", 1)[-1]].add(name)
+    rows = []
+    for name, layout in layouts.items():
+        members = _record_members(layout)
+        unknown = sum(
+            1
+            for member in members
+            if member.path.rsplit(".", 1)[-1].startswith(("unk_", "pad_", "field_"))
+        )
+        c_count = sum(
+            len(c_uses.get(member.path.rsplit(".", 1)[-1], ())) for member in members
+        )
+        signature = (layout.size, tuple((m.offset, m.ctype) for m in members))
+        rows.append(
+            {
+                "record": name,
+                "size": layout.size,
+                "members": len(members),
+                "unknown": unknown,
+                "definitions": counts.get(name, 0),
+                "same_layout": len(signatures[signature]) - 1,
+                "globals": global_counts.get(name, 0),
+                "params": param_counts.get(name, 0),
+                "accesses": direct.get(name, 0) + c_count,
+                "header": header.get(name, ""),
+            }
+        )
+    rows.sort(
+        key=lambda row: (
+            -row["accesses"] * row["unknown"],
+            -row["accesses"],
+            row["record"],
+        )
+    )
+    keys = [
+        "record",
+        "size",
+        "members",
+        "unknown",
+        "definitions",
+        "same_layout",
+        "globals",
+        "params",
+        "accesses",
+        "header",
+    ]
+    if args.jsonl:
+        for row in rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return 0
+    print("\t".join(keys))
+    for row in rows:
+        print("\t".join(str(row[key]) for key in keys))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     """Run one verb."""
     parser = argparse.ArgumentParser(
@@ -2412,6 +4462,37 @@ def main(argv: list[str] | None = None) -> int:
     )
     nine.add_argument("--jsonl", action="store_true", help="one JSON object per line")
     nine.set_defaults(run=layers)
+    ten = verbs.add_parser(
+        "accesses",
+        help="list the reads and writes of a record or global",
+        epilog="Example: tools/symbol.py accesses PartyMember --jsonl",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    ten.add_argument("name", help="a record type or a config/symbols.toml global")
+    ten.add_argument("--jsonl", action="store_true", help="one JSON object per line")
+    ten.set_defaults(run=accesses)
+    eleven = verbs.add_parser(
+        "records",
+        help="summarise every record and its accesses",
+        epilog="Example: tools/symbol.py records --jsonl",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    eleven.add_argument("--jsonl", action="store_true", help="one JSON object per line")
+    eleven.set_defaults(run=records)
+    twelve = verbs.add_parser(
+        "values",
+        help="scan matched bodies for literals whose role is declared",
+        epilog=(
+            "Example: tools/symbol.py values --scan --jsonl > values.jsonl\n"
+            "         tools/symbol.py values --scan"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    twelve.add_argument(
+        "--scan", action="store_true", help="scan the matched bodies (the only mode)"
+    )
+    twelve.add_argument("--jsonl", action="store_true", help="one JSON object per line")
+    twelve.set_defaults(run=values)
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
         parser.error("add needs --source (a description) or --alias")

@@ -21,7 +21,7 @@ MATCH void func_801EEE48(void) {
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         if (g_Task->param.unk_0B != 0) {
             func_801EFB6C();
         } else {
@@ -40,7 +40,7 @@ MATCH void func_801EEF28(void) {
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(128);
-        func_800AF764();
+        Battle_ProjectRange();
         battler        = g_Battle.selected_actor;
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_10 = 0;
@@ -92,7 +92,7 @@ MATCH void func_801F0064(void) {
     handlers = D_801EEC1C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F0308();
     }
 }
@@ -123,7 +123,7 @@ MATCH void func_801F0100(void) {
 MATCH void func_801F020C(void) {
     u8 counter;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
     counter        = g_Task->unk_09 + 0x10;
@@ -183,4 +183,54 @@ MATCH void Effect_TickOnTimerZero3(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801F0790);
+MATCH void func_801F0790(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = 0x100;
+    D_1F800000.view.effect.params[5] = g_Task->unk_09 << 3;
+    D_1F800000.view.effect.params[6] = g_Task->unk_09 << 1;
+    D_1F800000.view.effect.params[7] = 1;
+    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vz                 = 0;
+    D_1F800014[1].vz                 = 0;
+    D_1F800014[0].vz                 = 0;
+
+    for (i = 1; i <= 16; i++) {
+        prim             = GFX_BeginPolyG3(1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+
+    if (GetGraphType() == 1) {
+        tpage = 0x25;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+}

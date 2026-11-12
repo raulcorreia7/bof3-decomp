@@ -19,8 +19,8 @@ INCLUDE_ASM(func_801EEC70);
 MATCH void func_801EEF24(void) {
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0D64, g_Task->header.step);
-    if ((g_Task->header.flags & 1) && g_Task->header.step != 0) {
-        func_800AF764();
+    if ((g_Task->header.flags & 0x1) && g_Task->header.step != 0) {
+        Battle_ProjectRange();
         func_8014D290();
     }
     g_ScriptTable = AREA_SCRIPT_TABLE;
@@ -35,7 +35,29 @@ MATCH void Effect_SwingCameraAngle(void) {
     BMAGIC_SWING_CAMERA(22);
 }
 
-INCLUDE_ASM(func_801EF324);
+MATCH void func_801EF324(void) {
+    u8           count;
+    u32          slot;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
+        work                               = g_BattleEffectBattler;
+        g_BattleEffects[slot].header.mode  = 3;
+        g_BattleEffects[slot].target.party = work;
+        g_BattleEffectBattler->param.unk_0B += 1;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->unk_5C = 1;
+        g_Task->unk_5D = 0x40;
+        g_Task->unk_5E = 0x40;
+        g_Task->unk_5F = 0x40;
+        g_Task->unk_09 = 12;
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_StartTint.h"
 
@@ -120,7 +142,7 @@ MATCH void func_801EFE74(void) {
 
     r                   = rand();
     phase               = g_Task->param.unk_0B;
-    g_Task->unk_0C      = (r & 7) + 8;
+    g_Task->unk_0C      = (r & 0x7) + 8;
     *angle              = phase << 9;
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(*angle) * g_Task->unk_0C);
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);

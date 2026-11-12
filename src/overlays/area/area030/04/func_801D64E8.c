@@ -11,7 +11,7 @@ MATCH void func_801D64E8(void) {
         Actor_Clear();
         return;
     }
-    if (count & 8) {
+    if (count & 0x8) {
         Area_AddActor();
     }
 }

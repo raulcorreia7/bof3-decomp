@@ -18,7 +18,7 @@ MATCH void func_801EEED8(void) {
     Actor_StepAnimLoop();
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
@@ -33,7 +33,7 @@ MATCH void func_801EEFA4(void) {
     handlers      = D_801EEC10;
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
-    if (g_Task->header.flags & 1) {
+    if (g_Task->header.flags & 0x1) {
         Area_AddActor();
     }
     g_ScriptTable = AREA_SCRIPT_TABLE;
@@ -72,7 +72,7 @@ MATCH void func_801EF5D0(void) {
     work->unk_2C.half = 0;
     g_Task->unk_2A    = 0;
     Actor_SelectScript(5);
-    SND_PlayCue((g_Task->timer & 1) | 0x100);
+    SND_PlayCue((g_Task->timer & 0x1) | 0x100);
     g_Task->header.step += 1;
 }
 

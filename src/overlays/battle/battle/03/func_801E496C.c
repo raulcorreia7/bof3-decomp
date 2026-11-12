@@ -20,7 +20,7 @@ MATCH void func_801E496C(void) {
         }
     }
     if ((g_BattleCurrentEnemy->turn.target_flags & BATTLE_HIT_HP) != 0) {
-        func_800AAC88(g_BattleCurrentEnemy->turn.hp_change, g_Task->slot);
+        Battle_QueueAction(g_BattleCurrentEnemy->turn.hp_change, g_Task->slot);
     }
     func_801E30F8();
     g_Task->unk_03 = g_Task->unk_03 + 1;

@@ -27,7 +27,32 @@ MATCH void func_801EEC14(void) {
 
 INCLUDE_ASM(func_801EED28);
 
-INCLUDE_ASM(func_801EEE8C);
+MATCH void func_801EEE8C(void) {
+    u8           count;
+    u8           i;
+    u8           slot;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        i = 0;
+        do {
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+            slot = BMagic_AllocEffect();
+            if (slot != GAME_NONE) {
+                work                                   = g_Task;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = ((i & BYTE_MASK) * 4) + 8;
+                BMAGIC_EFFECT_SLOTS[slot].target.party = work;
+                g_Task->param.unk_0B += 1;
+            }
+            i++;
+        } while (i < 16);
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEF8C);
 
@@ -49,7 +74,20 @@ MATCH void func_801EF31C(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF404);
+MATCH void func_801EF404(void) {
+    s32 i;
+
+    BMAGIC_MARK_SELECTED_SIDE(2);
+    if (g_Battle.encounter == 55) {
+        g_Task->unk_29 = 7;
+    } else {
+        g_Task->unk_29 = 3;
+    }
+    g_Task->param.unk_0B = 1;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF578(void) {
     u8 timer_next;
@@ -71,7 +109,18 @@ MATCH void func_801EF628(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF67C);
+MATCH void func_801EF67C(void) {
+    s32 i;
+
+    if (g_Task->unk_09 != 0) {
+        g_Task->unk_09 -= 2;
+    }
+    if (--g_Task->timer == 0) {
+        BMAGIC_MARK_SELECTED_SIDE(4);
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF7D4);
 
@@ -100,7 +149,7 @@ MATCH void func_801F0140(void) {
     g_Task->scale.y += 0x800;
     g_Task->pos.x.fixed += rsin(g_Task->unk_14) * g_Task->unk_0C;
     g_Task->pos.y.fixed += rcos(g_Task->unk_14) * g_Task->unk_0C;
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         value = g_Task->unk_0C;
         if (value == 4) {
             g_Task->header.step += 1;

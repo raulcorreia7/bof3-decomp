@@ -40,7 +40,7 @@ MATCH void UI_DrawMessageScript(void) {
         cursor = (u16*)(base + 0x10);
         state  = (GameUITextState*)(base - 8);
         do {
-            if (flags & 1) {
+            if (flags & 0x1) {
                 if (--count == 0) {
                     p = saved + 1;
                     flags &= 0xFE;
@@ -54,7 +54,7 @@ MATCH void UI_DrawMessageScript(void) {
                     p++;
                     break;
                 case STRING_END:
-                    if (flags & 1) {
+                    if (flags & 0x1) {
                         p = saved++;
                         flags &= 0xFE;
                     }

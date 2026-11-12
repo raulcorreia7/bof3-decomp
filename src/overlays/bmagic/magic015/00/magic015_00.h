@@ -5,6 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern SVECTOR D_1F800014[];
+
 #define MAGIC015_STEP_COUNT 4
 
 typedef struct Magic015Steps {
@@ -29,6 +31,11 @@ extern Magic015Steps       D_801EEC14;
 extern Magic015Steps       D_801EEC24;
 extern Magic015ThirdSteps  D_801EEC54;
 extern Magic015SecondSteps D_801EEC34;
+extern Callback            D_801EEC68[];
+
+void func_801F1250(void);
+void func_801F131C(void);
+void func_801F13D4(void);
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the fade is done, moves the effect onto that battler and advances. Needs a local `s8 tint`. */
 #define EFFECT_APPEAR_AT_BATTLER()                                                                                           \

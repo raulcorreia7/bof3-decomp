@@ -115,7 +115,7 @@ MATCH void func_801EFF48(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         direction = LOBU(g_Battle.scroll_dir);
         if (direction == 0 || direction == 3) {
             g_Task->unk_0C = 8;
@@ -139,7 +139,7 @@ MATCH void func_801F0034(void) {
     u8           count;
     PartyMember* work;
 
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         count = g_Task->unk_09;
         if (count < 8U) {
             g_Task->unk_09 = count + 1;
@@ -179,7 +179,37 @@ MATCH void func_801F01F8(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
-INCLUDE_ASM(func_801F030C);
+MATCH void func_801F030C(void) {
+    POLY_F4* prim;
+    s32      shade;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    prim = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);
+    shade = g_Task->unk_09 * 15;
+    setRGB0(prim, shade, shade, shade);
+    GFX_AddPrim(2, sizeof(POLY_F4));
+    if (GetGraphType() == 1) {
+        tpage = 0x25;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
 
 MATCH void func_801F0438(void) {
     SYS_DISPATCH_BYTE(D_801F1C08, g_Task->header.step);
@@ -284,7 +314,24 @@ INCLUDE_ASM(func_801F11B8);
 
 INCLUDE_ASM(func_801F12A0);
 
-INCLUDE_ASM(func_801F13A4);
+MATCH void func_801F13A4(void) {
+    s16* angle_cell;
+    u8   phase;
+    u8   timer;
+
+    D_801F24E0->phase_0C += 0x10;
+    phase                   = D_801F1C38[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 7;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
+    timer                   = D_801F24E0->timer_05 - 2;
+    D_801F24E0->timer_05    = timer;
+    if (timer == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801F1AC4();
+    }
+}
 
 MATCH void func_801F14A0(void) {
     s16 timer;
@@ -301,9 +348,38 @@ MATCH void func_801F14A0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F153C);
+MATCH void func_801F153C(void) {
+    s16* angle_cell;
+    u8   phase;
 
-INCLUDE_ASM(func_801F1644);
+    phase                   = D_801F1C54[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 6;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) << 6) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
+    D_801F24E0->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    COORD_INT(D_801F24E0->pos.z) += D_801F1C74[D_801F24E0->unk_07] << 6;
+    D_801F24E0->phase_0C = 0x40;
+    D_801F24E0->timer_05 = 16;
+    D_801F24E0->unk_06   = 8;
+    D_801F24E0->header.step += 1;
+}
+
+MATCH void func_801F1644(void) {
+    s16* angle_cell;
+    u8   phase;
+
+    D_801F24E0->unk_06 += 2;
+    D_801F24E0->phase_0C += 0x20;
+    phase                   = D_801F1C54[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 6;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
+    if ((s16)D_801F24E0->phase_0C == 0x200) {
+        D_801F24E0->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F1748);
 
@@ -313,7 +389,7 @@ MATCH u8 func_801F1A58(void) {
     u8 i;
 
     for (i = 0; i < 48; i++) {
-        if (!(D_801F1CA0[i].header.flags & 1)) {
+        if (!(D_801F1CA0[i].header.flags & 0x1)) {
             D_801F1CA0[i].header.flags |= 1;
             return i;
         }

@@ -27,20 +27,18 @@ MATCH void func_801EEC14(void) {
 
 INCLUDE_ASM(func_801EED28);
 
-u32 BMagic_AllocEffect(void);
-
 MATCH void func_801EEE50(void) {
     u8 i;
     u8 slot;
 
     for (i = 0; i < 24; i++) {
         slot = BMagic_AllocEffect();
-        if (slot != 0xFF) {
+        if (slot != GAME_NONE) {
             volatile void* task           = g_Task;
             D_801EFA14[slot].header.mode  = 0;
             D_801EFA14[slot].unk_0B       = i;
             D_801EFA14[slot].target.party = (PartyMember*)task;
-            D_801EFA14[slot].arg.unk_09   = D_801EF9E8[i] + (rand() & 1) + 1;
+            D_801EFA14[slot].arg.unk_09   = D_801EF9E8[i] + (rand() & 0x1) + 1;
             g_Task->param.unk_0B++;
         }
     }
@@ -55,7 +53,7 @@ MATCH void func_801EEF54(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         SND_QueueSelectionFx(0x101);
-        func_800A9610(g_Battle.target_selector, 0x10);
+        Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

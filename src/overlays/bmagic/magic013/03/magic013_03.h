@@ -5,6 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern Magic010SharedSteps D_801EEC04;
+
 extern Callback     D_801F03C0[];
 extern Callback     D_801F03DC[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
@@ -15,6 +17,7 @@ s32  func_800AED5C(s32 arg0, u32 battler_index);
 void func_801EF79C(void);
 void func_801EF648(void);
 void func_801EFAA8(void);
+void func_801EFDB4(void);
 void func_801F00A8(void);
 void func_801F0164(void);
 

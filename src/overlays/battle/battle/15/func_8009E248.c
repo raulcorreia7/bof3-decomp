@@ -32,13 +32,13 @@ NON_MATCHING void func_8009E248(void) {
             if (g_Game.members[id].chr.stats.max_hp < g_Game.members[id].chr.hp + hp_bar) {
                 g_Battle.action->unk_08 |= 4;
             }
-            func_800AAC88((s16)-Char_AddPoints(&g_Game.members[id].chr.hp, g_Game.members[id].chr.stats.max_hp, hp_bar), id);
+            Battle_QueueAction((s16)-Char_AddPoints(&g_Game.members[id].chr.hp, g_Game.members[id].chr.stats.max_hp, hp_bar), id);
         } else {
             enemy = id - 3;
             if (g_BattleEnemyBattlers[enemy].stats.max_hp < g_BattleEnemyBattlers[enemy].hp + hp_bar) {
                 g_Battle.action->unk_08 |= 4;
             }
-            func_800AAC88((s16)-Char_AddPoints(&g_BattleEnemyBattlers[enemy].hp, g_BattleEnemyBattlers[enemy].stats.max_hp, hp_bar), id);
+            Battle_QueueAction((s16)-Char_AddPoints(&g_BattleEnemyBattlers[enemy].hp, g_BattleEnemyBattlers[enemy].stats.max_hp, hp_bar), id);
         }
         g_Battle.action->unk_08 = 0;
         return;
