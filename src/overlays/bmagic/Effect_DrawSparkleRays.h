@@ -1,17 +1,16 @@
 /* Draws the rays of the current sparkle or effect as four LINE_G2 segments swept around its screen point. */
-/* Each image defines EFFECT_DRAW_WORK as the work record the rays come from. */
 
 MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
     LINE_G2* prim;
     s32      i;
 
-    D_1F800000.view.effect.params[0] = EFFECT_DRAW_WORK->unk_20;
-    D_1F800000.view.effect.params[1] = EFFECT_DRAW_WORK->unk_22;
+    D_1F800000.view.effect.params[0] = EFFECT_SPARKLE_TASK->unk_20;
+    D_1F800000.view.effect.params[1] = EFFECT_SPARKLE_TASK->unk_22;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
-    Area_AddCellPrim(EFFECT_DRAW_WORK->pos.x.fixed, EFFECT_DRAW_WORK->pos.y.fixed, 2, 12);
-    D_1F800000.view.effect.params[4] = EFFECT_DRAW_WORK->timer_05 * 6;
-    D_1F800000.view.effect.params[5] = EFFECT_DRAW_WORK->timer_05 * 6;
-    D_1F800000.view.effect.params[6] = EFFECT_DRAW_WORK->timer_05 * 6;
+    Area_AddCellPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, 12);
+    D_1F800000.view.effect.params[4] = EFFECT_SPARKLE_TASK->timer_05 * 6;
+    D_1F800000.view.effect.params[5] = EFFECT_SPARKLE_TASK->timer_05 * 6;
+    D_1F800000.view.effect.params[6] = EFFECT_SPARKLE_TASK->timer_05 * 6;
     for (i = angle; i < angle + 0x20; i += 8) {
         prim = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(prim);
@@ -27,6 +26,6 @@ MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
         prim->r1                         = 1;
         prim->g1                         = 1;
         prim->b1                         = 1;
-        Area_AddCellPrim(EFFECT_DRAW_WORK->pos.x.fixed, EFFECT_DRAW_WORK->pos.y.fixed, 2, 32);
+        Area_AddCellPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, 32);
     }
 }

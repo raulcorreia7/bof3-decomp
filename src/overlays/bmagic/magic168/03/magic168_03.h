@@ -5,9 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The work record whose rays this image draws. */
-#define EFFECT_DRAW_WORK D_801F17B0
-
 extern void (*D_801F01AC[])(void);
 
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */

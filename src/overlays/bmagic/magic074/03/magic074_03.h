@@ -5,9 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The work record whose rays this image draws. */
-#define EFFECT_DRAW_WORK D_801F20DC
-
 extern BMagicEffectFuncs D_801EEC04;
 extern BMagicEffectWork* D_801F20DC;
 
