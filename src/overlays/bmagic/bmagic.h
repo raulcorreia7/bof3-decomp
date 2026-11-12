@@ -10,6 +10,9 @@
 #define BMAGIC_PHASE_ANGLE(phase) ((phase) << 6)
 #define BMAGIC_PHASE_MASK         0x3F
 
+/* The bytes a sparkle ray reserves in its cell packet. */
+#define BMAGIC_RAY_CELL_SIZE 32
+
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */

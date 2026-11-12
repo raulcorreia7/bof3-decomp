@@ -37,6 +37,6 @@ MATCH void func_801EFA44(u16 angle, u16 radius) {
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, LOHU(D_1F800000.view.effect.params[4]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[6]));
         setRGB2(prim, 1, 1, 1);
-        Area_AddCellPrim(D_801F17B4->pos.x.fixed, D_801F17B4->pos.y.fixed, 2, 32);
+        Area_AddCellPrim(D_801F17B4->pos.x.fixed, D_801F17B4->pos.y.fixed, 2, BMAGIC_RAY_CELL_SIZE);
     }
 }

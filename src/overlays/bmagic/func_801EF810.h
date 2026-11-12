@@ -33,6 +33,6 @@ MATCH void func_801EF810(u16 angle, u16 radius) {
         prim->y1                         = LOHU(D_1F800000.view.effect.params[1]) + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), radius);
         setRGB0(prim, LOHU(D_1F800000.view.effect.params[4]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[6]));
         setRGB1(prim, 1, 1, 1);
-        Area_AddCellPrim(D_801F17B4->pos.x.fixed, D_801F17B4->pos.y.fixed, 2, 32);
+        Area_AddCellPrim(D_801F17B4->pos.x.fixed, D_801F17B4->pos.y.fixed, 2, BMAGIC_RAY_CELL_SIZE);
     }
 }
