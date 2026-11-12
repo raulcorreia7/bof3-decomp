@@ -164,7 +164,28 @@ MATCH void func_801D1588(void) {
 
 #include "overlays/scenario/Scene_EndScan.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1614(void) {
+    u8 timer;
+
+    timer = g_Task->timer;
+    if (timer == 0) {
+        Scene_ClaimScanBar();
+        timer = (rand() & 0xF) + 0x18;
+    } else {
+        timer--;
+    }
+    g_Task->timer = timer;
+    if (g_AreaDrawFlags != 0) {
+        Scene_UpdateScanBars(0xF0);
+    }
+    if (g_AreaDrawFlags == 0) {
+        g_Task->header.mode++;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1614);
+#endif
 
 MATCH void func_801D16BC(void) {
     Actor_Clear();
