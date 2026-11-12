@@ -35,7 +35,7 @@ MATCH void Fishing_HookedReel(void) {
         if (g_InputPressed & (PADLleft | PADLdown)) {
             D_801E31F8                   = 2;
             FISHING_STATE->step_timer_09 = 8;
-            D_8014421C                   = g_FishingRodRow->sbyte_05;
+            D_8014421C                   = g_FishingRodRow->cursor_left_speed_05;
             Actor_RequestScript(8);
             goto counted; /* the pad press counts as one state change */
         }
@@ -51,7 +51,7 @@ MATCH void Fishing_HookedReel(void) {
             Actor_RequestScript(7);
         }
         if (g_InputPressed & PADRdown) {
-            D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->byte_03 + 2));
+            D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->reel_cursor_size_03 + 2));
             Actor_RequestScript(7);
             func_801DB04C();
             goto counted_again; /* the slot timer moved, so the state changed */
@@ -68,18 +68,18 @@ MATCH void Fishing_HookedReel(void) {
         s32* word = (s32*)((u8*)D_801468A4 + g_FishingHookedFish * sizeof(FishingSelectionState));
 
         D_801E31F8 = 0;
-        D_8014421C = g_FishingRodRow->sbyte_06;
+        D_8014421C = g_FishingRodRow->cursor_right_speed_06;
         *word      = 0;
         Actor_RequestScript(0);
         D_80144216 -= 1;
     } else if (g_InputHeld & PADRdown) {
         if (g_InputPressed & PADRdown) {
-            D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->byte_03 + 2));
+            D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->reel_cursor_size_03 + 2));
         } else {
             func_801DB0AC();
         }
         D_801E31F8 = 1;
-        D_8014421C = g_FishingRodRow->sbyte_04;
+        D_8014421C = g_FishingRodRow->cursor_return_speed_04;
         Actor_RequestScript(7);
         Actor_StepAnimLoop();
         D_80144216 += 1;

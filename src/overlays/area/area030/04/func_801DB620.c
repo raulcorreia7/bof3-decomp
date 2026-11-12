@@ -11,7 +11,7 @@ MATCH void func_801DB620(void) {
 
     record                = FISHING_STATE;
     record->step_timer_09 = (record->step_timer_09 - 1);
-    func_801E0ED0((-(FISHING_STATE->step_timer_09 * TO_COORD(40)) >> 16), FISHING_CATCH_BAR_Y);
+    Fishing_DrawCatchBar((-(FISHING_STATE->step_timer_09 * TO_COORD(40)) >> 16), FISHING_CATCH_BAR_Y);
     if (FISHING_STATE->step_timer_09 == 0) {
         slot = D_8014688E[g_FishingHookedFish * 0x98];
         cue  = 0x20B;
@@ -24,5 +24,5 @@ MATCH void func_801DB620(void) {
         record->sub_index_03         = (record->sub_index_03 + 1);
     }
     Actor_StepAnimLoop();
-    func_801E16DC();
+    Fishing_DrawDimScreen();
 }

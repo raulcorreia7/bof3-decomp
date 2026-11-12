@@ -37,7 +37,7 @@ import quality
 from bof3.link import symbols
 from bof3.link.graph import source_object
 from bof3.resolve import load_target_manifests
-from bof3.status.claims import source_text
+from bof3.status.claims import DRAFT_RE, source_text
 
 #: objdiff's own project schema; the generated file is not a tracked config.
 SCHEMA_URL = (
@@ -640,7 +640,7 @@ def generate(config_path: Path, root: Path | None, build_dir: Path) -> int:
         base,
         cfg,
         re.compile(str(cfg["match_marker"]), re.MULTILINE),
-        re.compile(r"^NON_MATCHING\s", re.MULTILINE),
+        DRAFT_RE,
         re.compile(str(cfg["func_address"])),
         re.compile(str(cfg["data_address"])),
     )

@@ -11,7 +11,7 @@ MATCH bool func_801E02D4(u8 current_byte, u8 target_byte) {
     s32 masked_flag;
     s32 flag;
 
-    raw = (g_FishingRodRow->byte_03 * 8 + 0x18) * target_byte;
+    raw = (g_FishingRodRow->reel_cursor_size_03 * 8 + 0x18) * target_byte;
     /* FAKE: retail evaluates the threshold before the scratch read. */
     FAKE_BARRIER();
     /* FAKE: retail reads the byte at +0x0A signed (lb). */

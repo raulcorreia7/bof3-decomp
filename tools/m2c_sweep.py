@@ -2,11 +2,9 @@
 """Draft every open function with m2c, try each draft, and keep the exact ones.
 
     tools/m2c_sweep.py                        every INCLUDE_ASM function without a template
-    tools/m2c_sweep.py --sample 200           200 functions, in a fixed random order (--seed)
+    tools/m2c_sweep.py --sample 200           200 functions in a fixed random order
     tools/m2c_sweep.py --image emi/bmagic     one image or image prefix (repeatable)
-    tools/m2c_sweep.py --tsv ROWS.tsv         the TARGET@NAME refs in the first column
     tools/m2c_sweep.py REF...                 TARGET@NAME or TARGET@0xADDRESS refs
-    tools/m2c_sweep.py --residual FILE        write the finished rows, fewest differing first
 
 For each function the tool preprocesses the context of the image header (`tools/m2ctx.py`), runs
 `third_party/m2c` with a few flag variants (`default`, `no-andor`, `gotos-only`, `no-casts`) and
@@ -15,10 +13,10 @@ so polish it (docs/matching.md#polish) and run `meson compile -C build/meson che
 A function that no draft matches is left as it was. Each function prints one line, `EXACT`
 or `BEST` with the fewest differing instructions of any draft that compiled (`NONE` when none
 did), and goes to `build/m2c_sweep/results.tsv` (ref, differing, variant). A run skips a
-function already in that file; `--again` drafts it anew. The drafts are in `build/m2c_sweep/`.
+function already in that file. The drafts are in `build/m2c_sweep/`.
 
 Functions that `tools/dups.py near --full` pairs with a matched template are skipped: use
-`tools/template_try.py` for them (`--templates` adds them to the sweep). Needs `rapidfuzz`
+`tools/template_try.py` for them. Needs `rapidfuzz`
 (`tools/setup.sh --matching`) and `third_party/m2c` (`tools/setup.sh --matching`).
 """
 
@@ -39,6 +37,8 @@ from bof3.source.index import Func, find, load_index
 
 ROOT = Path(__file__).resolve().parent.parent
 WORK = "build/m2c_sweep"
+SAMPLE_SEED = 1
+JOBS = 8
 RESULTS = f"{WORK}/results.tsv"
 VARIANTS = {
     "default": [],
@@ -231,62 +231,43 @@ def read_results(root: Path) -> dict[str, tuple[str, str]]:
 
 def templated(root: Path) -> set[str]:
     """Return the refs that ``dups.py near --full`` pairs with a matched template."""
-    out = root / WORK / "templates.tsv"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(
-        [sys.executable, str(root / "tools/dups.py"), "near", "--full", "-o", str(out)],
+    result = subprocess.run(
+        [sys.executable, str(root / "tools/dups.py"), "near", "--full"],
         cwd=root,
         capture_output=True,
         check=True,
+        text=True,
     )
-    rows = out.read_text(encoding="utf-8").splitlines()[1:]
+    rows = result.stdout.splitlines()[1:]
     return {r.split("\t")[0] for r in rows if r.strip()}
 
 
 def select(args: argparse.Namespace, funcs: list[Func]) -> list[Func]:
     """Return the functions to sweep, smaller first."""
-    if args.refs or args.tsv:
-        refs = list(args.refs)
-        if args.tsv:
-            refs += [
-                ln.split("\t")[0]
-                for ln in args.tsv.read_text(encoding="utf-8").splitlines()
-                if ln.strip() and not ln.startswith("#")
-            ]
-        chosen = [find(funcs, r) for r in refs]
+    if args.refs:
+        chosen = [find(funcs, r) for r in args.refs]
     else:
         chosen = [f for f in funcs if f.status == "ASM" and f.src]
     if args.image:
         chosen = [f for f in chosen if any(f.image.startswith(i) for i in args.image)]
     chosen = [f for f in chosen if asm_path(ROOT, f)]
-    if not args.templates and not (args.refs or args.tsv):
+    if not args.refs:
         skip = templated(ROOT)
         chosen = [f for f in chosen if f.ref not in skip]
-    if not args.again:
-        done = read_results(ROOT)
-        chosen = [f for f in chosen if f.ref not in done]
+    done = read_results(ROOT)
+    chosen = [f for f in chosen if f.ref not in done]
     if args.sample:
-        chosen = random.Random(args.seed).sample(chosen, min(args.sample, len(chosen)))
+        chosen = random.Random(SAMPLE_SEED).sample(
+            chosen, min(args.sample, len(chosen))
+        )
     return sorted(chosen, key=lambda f: (f.size, f.ref))
 
 
-def residual(root: Path, out: Path) -> int:
-    """Write the finished rows without an exact match, fewest differing first."""
-    rows = [(r, d) for r, (d, _) in read_results(root).items() if d != "EXACT"]
-    rows.sort(key=lambda x: (int(x[1]) if x[1].isdigit() else 10**9, x[0]))
-    out.parent.mkdir(parents=True, exist_ok=True)
-    with out.open("w", encoding="utf-8") as fh:
-        fh.write("function\tbest_diff\n")
-        for ref, diff in rows:
-            fh.write(f"{ref}\t{diff or 'none'}\n")
-    return len(rows)
-
-
-def stream(root: Path, funcs: list[Func], jobs: int) -> Iterator[tuple[Func, dict]]:
-    """Yield each function with its drafts; m2c runs ``jobs`` at a time, in order."""
+def stream(root: Path, funcs: list[Func]) -> Iterator[tuple[Func, dict]]:
+    """Yield each function with its drafts; m2c runs ``JOBS`` at a time, in order."""
     cache: dict[str, Path] = {}
     contexts = {id(f): context(root, f, cache) for f in funcs}
-    with ThreadPoolExecutor(jobs) as pool:
+    with ThreadPoolExecutor(JOBS) as pool:
         yield from zip(
             funcs,
             pool.map(lambda f: drafts(root, f, contexts[id(f)]), funcs),
@@ -300,27 +281,16 @@ def main(argv: list[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("refs", nargs="*", help="TARGET@NAME or TARGET@0xADDRESS")
-    parser.add_argument("--tsv", type=Path, help="refs in the first column")
     parser.add_argument("--image", action="append", help="image id or prefix")
     parser.add_argument("--sample", type=int, help="sweep N functions at random")
-    parser.add_argument("--seed", type=int, default=1, help="sample seed (1)")
-    parser.add_argument("-j", "--jobs", type=int, default=8, help="m2c processes (8)")
-    parser.add_argument(
-        "--templates", action="store_true", help="keep templated functions"
-    )
-    parser.add_argument("--again", action="store_true", help="redo finished functions")
-    parser.add_argument("--residual", type=Path, help="write the residual TSV and exit")
     args = parser.parse_args(argv)
-    if args.residual:
-        print(f"{residual(ROOT, args.residual)} rows -> {args.residual}")
-        return 0
     funcs = select(args, load_index(ROOT))
     print(f"sweeping {len(funcs)} functions", file=sys.stderr, flush=True)
     path = ROOT / RESULTS
     path.parent.mkdir(parents=True, exist_ok=True)
     hits = 0
     with path.open("a", encoding="utf-8") as log:
-        for func, found in stream(ROOT, funcs, args.jobs):
+        for func, found in stream(ROOT, funcs):
             save_drafts(ROOT, func, found)
             status, diff, variant = sweep_one(ROOT, func, found)
             hits += status == "EXACT"

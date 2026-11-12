@@ -1,19 +1,21 @@
 #!/bin/sh
 # Create a ready-to-build Git worktree for parallel work.
 #
-#   tools/worktree.sh --from <checkout> <branch> [<dir>] [--base <ref>]
+#   tools/worktree.sh --from <checkout> <branch> [<dir>]
 #
 #   --from <checkout>  a built checkout of this repository (setup done, disc extracted); the new
 #                      worktree links its local inputs instead of extracting them again
 #   <branch>           the new branch
 #   <dir>              the worktree folder (default: .worktrees/<branch>, which Git ignores)
-#   --base <ref>       what the branch starts from (default: origin/main)
 #
 # Linked from <checkout>: inputs/, toolchains/, .venv/, build/disc and build/bin. The submodule
 # checkouts under third_party/ are copied, so Git sees no change in them. The script then runs
 # `meson setup build/meson`. The retail files stay in <checkout>; do not delete it while the
 # worktree is in use.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 
 usage() {
 	sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//' >&2
@@ -31,7 +33,6 @@ dir=
 while [ $# -gt 0 ]; do
 	case $1 in
 	--from) from=${2:?--from needs a path}; shift 2 ;;
-	--base) base=${2:?--base needs a ref}; shift 2 ;;
 	-h | --help) usage ;;
 	-*) die "unknown option $1 (see tools/worktree.sh --help)" ;;
 	*)

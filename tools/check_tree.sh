@@ -1,6 +1,9 @@
 #!/bin/sh
 # Reject tracked retail media, files over 1 MiB, relative includes or imports, and struct members of enum type. Needs no build inputs.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,2p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.."
 
 bad=$(git ls-files -z | xargs -0 stat -c '%s %n' | awk '{

@@ -10,7 +10,6 @@ The link scripts go into ``build/ld``. The graph goes to stdout, one tab-separat
 ``c NAME SOURCE ASM_DIR``        compile SOURCE to the object NAME
 ``s NAME SOURCE``                assemble SOURCE
 ``b NAME SOURCE``                wrap the binary SOURCE
-``o PATH``                       link the prebuilt object PATH
 ``m PATH``                       a symbol map the image's names may come from
 
 Rows after a ``target`` row belong to it, in link order. The ``dep`` and ``d`` rows come first.
@@ -33,6 +32,7 @@ from bof3.link.inputs import write_if_changed
 from bof3.link.script import prepare_link
 from bof3.resolve import TargetManifest, load_target_manifests
 from bof3.resolve.manifests import load_target_manifest
+from bof3.status.claims import DRAFT_BYTES
 from bof3.toolchain.splat import splat_output_current, split_target
 
 #: Bounded so a split leaves cores free for the rest of the build.
@@ -136,15 +136,12 @@ def run_jobs(jobs: list[tuple[str, str]]) -> list[Done]:
         return list(pool.map(split_one, jobs, chunksize=8))
 
 
-DRAFT = re.compile(rb"^NON_MATCHING\s", re.MULTILINE)
-
-
 def draft_rows(root: Path, rows: list[str]) -> list[str]:
     """Return a ``d`` row for each compiled source that holds a draft function."""
     result = []
     for row in rows:
         fields = row.split("\t")
-        if fields[0] == "c" and DRAFT.search((root / fields[2]).read_bytes()):
+        if fields[0] == "c" and DRAFT_BYTES.search((root / fields[2]).read_bytes()):
             name = graph.source_object(Path(fields[2]).relative_to("src"), draft=True)
             result.append("\t".join(("d", name, fields[2], fields[3])))
     return result
@@ -152,6 +149,9 @@ def draft_rows(root: Path, rows: list[str]) -> list[str]:
 
 def main() -> int:
     """Split every stale target and print the Meson graph."""
+    if sys.argv[1:] in (["-h"], ["--help"]):
+        print(__doc__.strip())
+        return 0
     root = repo_layout().root
     try:
         symbols.generate(root)

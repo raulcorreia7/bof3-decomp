@@ -25,8 +25,8 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 
 ## Setup
 
-Install the host tools above, then run the [README set up](../README.md#set-up) and
-[build](../README.md#build) commands. Add `--matching` to `tools/setup.sh` for the permuter, the
+Install the host tools above, then run the [README commands](../README.md#commands). Add
+`--matching` to `tools/setup.sh` for the permuter, the
 differ and m2c.
 
 Put your disc in `inputs/external/` before `tools/setup.sh` ([inputs](../inputs/README.md)). The
@@ -103,20 +103,22 @@ curl -fL https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1
 ## Commands
 
 Run each as `meson compile -C build/meson <name>`. `<image>` is a target id with `/` written as `+`.
+A check that compares with a base ref uses the newest of `public/main`, `origin/main` and `main`,
+the rule in `tools/lib/baseref.sh`.
 
-| Name              | Does                                                                                                                                                                                                                                                                                                                             |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| (none)            | Build every image to `build/meson/<image>.bin`.                                                                                                                                                                                                                                                                                  |
-| `check`           | Build, then compare every image with its retail SHA-1. Passes when 428 images match.                                                                                                                                                                                                                                             |
-| `check-<image>`   | The same for one image, for example `check-exe+slus_004_22`.                                                                                                                                                                                                                                                                     |
-| `check-headers`   | Compile every public header on its own.                                                                                                                                                                                                                                                                                          |
-| `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                                                                                                                                                |
-| `check-tree`      | Reject tracked retail data, files over 1 MiB and struct members of enum type.                                                                                                                                                                                                                                                    |
-| `include-asm`     | Reject more `INCLUDE_ASM` lines than at the merge base with `origin/main` (or `main`), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone), so a lost match hidden by a new one elsewhere still fails and the key survives a folder move. |
-| `format`          | Format C, Python, TOML and Markdown.                                                                                                                                                                                                                                                                                             |
-| `format-check`    | The same steps in check mode; no file changes.                                                                                                                                                                                                                                                                                   |
-| `report`          | Write `build/report.json`, the input of the status site. Needs `objdiff-cli`.                                                                                                                                                                                                                                                    |
-| `rz+<image>.rzdb` | The Rizin project that `bin/rz` opens.                                                                                                                                                                                                                                                                                           |
+| Name              | Does                                                                                                                                                                                                                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| (none)            | Build every image to `build/meson/<image>.bin`.                                                                                                                                                                                                                                                              |
+| `check`           | Build, then compare every image with its retail SHA-1. Passes when 428 images match.                                                                                                                                                                                                                         |
+| `check-<image>`   | The same for one image, for example `check-exe+slus_004_22`.                                                                                                                                                                                                                                                 |
+| `check-headers`   | Compile every public header on its own.                                                                                                                                                                                                                                                                      |
+| `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                                                                                                                            |
+| `check-tree`      | Reject tracked retail data, files over 1 MiB and struct members of enum type.                                                                                                                                                                                                                                |
+| `include-asm`     | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone), so a lost match hidden by a new one elsewhere still fails and the key survives a folder move. |
+| `format`          | Format C, Python, TOML and Markdown.                                                                                                                                                                                                                                                                         |
+| `format-check`    | The same steps in check mode; no file changes.                                                                                                                                                                                                                                                               |
+| `report`          | Write `build/report.json`, the input of the status site. Needs `objdiff-cli`.                                                                                                                                                                                                                                |
+| `rz+<image>.rzdb` | The Rizin project that `bin/rz` opens.                                                                                                                                                                                                                                                                       |
 
 `meson test -C build/meson` runs the Python tool tests (`tools/setup.sh --dev`). To start over,
 delete `build/meson` and run `meson setup build/meson`; the extracted disc stays in `build/disc`.
@@ -166,6 +168,15 @@ the check the image would not change and no error would appear.
 Meson regenerates the graph by itself when you edit a file under `config/`, a Python module that
 `tools/split.py` imports, or a source whose match marker decides a placed section. Regeneration
 takes seconds; a build with no change does not regenerate.
+
+### decomp.me
+
+For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and `gcc2.7.2-psx`. The project
+flags are in `build/meson/emit/cflags.txt`; the base set is
+`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`, and the
+scenario `sce10eff/00` adds `-fno-cse-follow-jumps -fno-cse-skip-blocks`. Define `MATCHING` and
+supply the required declarations in the scratch context. A scratch is a comparison tool;
+`check` verifies the project build.
 
 ### How the build works
 
@@ -418,7 +429,7 @@ coddog compares instruction sequences and ignores relocations. Use `bin/coddog`,
 - `submatch` prints `query [a-b] matches F [insn c-d]`: an inlined helper or a repeated block.
 
 A twin is a candidate until `check-<image>` passes for every member. Sharing rules:
-[shared bodies](conventions.md#shared-bodies).
+[shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies).
 
 ### m2c
 
@@ -463,9 +474,9 @@ size = 133316
 ```
 
 The row's load address must equal the declaring target's, be word aligned and fall in the game's RAM
-range. The entry cannot be the target's own entry, and a `disc_id` appears once. `tools/setup.py` builds
-the catalog and checks every row against the disc: the entry's SHA-256 must equal both the row's hash
-and the declaring target's payload, and its load address and size must equal the row's. A mismatch
+range. The entry cannot be the target's own entry, and a `disc_id` appears once. `tools/setup.py`
+checks every row against the extracted disc: the entry's SHA-256 must equal both the row's hash and
+the declaring target's payload, and its load address and size must equal the row's. A mismatch
 fails the setup. Program families: [runtime](https://raulcorreia7.github.io/bof3-wiki/data/programs.html#program-families).
 
 ## Settings

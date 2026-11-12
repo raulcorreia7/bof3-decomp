@@ -1213,7 +1213,8 @@ void  func_801D1B10(void);
 void  func_801D20C8(void);
 void  func_801D2170(void);
 s32   func_801D25D8();
-void  func_801D2978(void);
+/* func_801D2978 */
+void  Fishing_ActorRun(void);
 void  func_801D2BF0(void);
 void  func_801D2DEC(void);
 void  func_801D3358(void);

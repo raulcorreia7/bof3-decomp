@@ -52,6 +52,9 @@ def kind(idx: dict, image: str, name: str, status: str) -> str:
 
 
 def main() -> None:
+    if sys.argv[1:] in (["-h"], ["--help"]):
+        print(__doc__.strip())
+        return
     if len(sys.argv) != 3:
         sys.exit(__doc__)
     idx = {(f.image, f.name): f for f in load_index(ROOT, False)}

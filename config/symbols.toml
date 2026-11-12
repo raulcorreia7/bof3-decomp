@@ -231,6 +231,8 @@ g_BMagicEffectModes = { addr = 0x801F0B00, source = "Handlers of magic003 (Super
 D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 effect, scanned by BMagic_AllocEffect and cleared by a loop over its 0x78-byte records." }
 
 ["emi/bmagic/magic004/03"]
+Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true }
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_DrawScreenFade = { addr = 0x801EF6E0, type = "func", source = "Draws the two-part screen fade whose shade is the effect timer (byte 0x09) times 16 in magic004 (ThundrStrike)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF8CC, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic004." }
@@ -394,6 +396,8 @@ Effect_SetActorMatrix = { addr = 0x801EF5C0, type = "func", source = "Sets the a
 g_BMagicEffectModes = { addr = 0x801EFD8C, source = "Handlers of magic041 (Berserk), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic042/03"]
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC04 = { addr = 0x801EEC04, type = "Magic042Steps", source = "Step handlers of magic042 (Counter), run by header.step (byte 0x02) from func_801EEDE8." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EED44, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic042 (Counter, Minds Eye)." }
@@ -2241,6 +2245,7 @@ s_PartySlotOrder = { addr = 0x801CD950, size = 0x4, source = "Order Area_PlaceEn
 D_801CD954 = { addr = 0x801CD954, size = 0x4 }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Runs the shop step handler selected by the menu step byte g_MenuStep.step from D_801E5144." }
 Menu_DispatchStep = { addr = 0x801D1740, type = "func", source = "Runs the menu step handler selected by the menu step byte g_MenuStep.step from D_801EC35C." }
+Fishing_ActorRun = { addr = 0x801D2978, type = "func", source = "Runs the fishing actor's init and update states." }
 Fishing_ShowLocation = { addr = 0x801F2C38, type = "func", source = "Prints the fish listed for the player position from g_FishingBestCatch with Message_StartAreaMessage, steps D_801448EC from 0 to 1, and clears it when the message closes." }
 
 ["emi/etc/game/01"]
@@ -3559,6 +3564,7 @@ Fishing_LureFly = { addr = 0x801D23F4, type = "func", source = "lure step 2: mov
 Fishing_LureSettle = { addr = 0x801D25F0, type = "func", source = "lure step 3: waits for the splash animation to end, then plays the float script and steps on" }
 Fishing_LureFloat = { addr = 0x801D2648, type = "func", source = "lure step 4: lets the lure bob and drift on the water, picks its script from the drift direction and ticks the lure's counter_07" }
 Fishing_LureHooked = { addr = 0x801D28DC, type = "func", source = "lure step 5: puts the lure at the hooked fish's position (g_FishingHookedFish) and picks its script from the line direction" }
+Fishing_ActorRun = { addr = 0x801D2978, type = "func", source = "Runs the fishing actor's init and update states." }
 Fishing_ReelGaugeRun = { addr = 0x801D2BF0, type = "func", source = "runs the reel gauge actor: g_FishingReelGaugeStates[handler_index_01]" }
 Fishing_DrawFishArrow = { addr = 0x801D2C34, type = "func", source = "draws the 16x8 arrow of the hooked fish on the reel gauge, flipped by its direction" }
 Fishing_ReelGaugeInit = { addr = 0x801D2D74, type = "func", source = "reel gauge step 1: clears the gauge timers and the cursor and steps on" }
@@ -3569,6 +3575,8 @@ Fishing_PromptSlideIn = { addr = 0x801D3684, type = "func", source = "prompt bar
 Fishing_PromptSlideOut = { addr = 0x801D3938, type = "func", source = "prompt bar step 7: moves the bar up out of view, then goes to idle (or step 1 while counter_07 is set)" }
 Fishing_DataRun = { addr = 0x801D42A0, type = "func", source = "runs the Data page actor: g_FishingDataStates[handler_index_01]" }
 Fishing_DataNextFish = { addr = 0x801D4884, type = "func", source = "Data page step: finds the next recorded fish in g_FishingBestCatch (key_3E) and starts the page slide" }
+Fishing_DrawWindowFill = { addr = 0x801D799C, type = "func", source = "Fills a fishing window with its interior texture." }
+Fishing_DrawWindowFrame = { addr = 0x801D9534, type = "func", source = "Draws a fishing window frame and its inset shadow." }
 Fishing_SceneRun = { addr = 0x801D9B14, type = "func", source = "runs the fishing scene: g_FishingSceneModes[mode_index_02]" }
 Fishing_EntryRun = { addr = 0x801D9B58, type = "func", source = "scene mode 0: runs g_FishingEntryStates[sub_index_03]" }
 Fishing_ReadyRun = { addr = 0x801D9CF4, type = "func", source = "scene mode 1: runs g_FishingReadyStates[sub_index_03]" }
@@ -3589,8 +3597,15 @@ Fishing_MoveFish = { addr = 0x801E0394, type = "func", source = "While the fish 
 Fishing_LureInRange = { addr = 0x801E0680, type = "func", source = "true when the lure (actor slot 0) is in mode 4 with no fish hooked and the fish at the work position is within the lure row's reach; otherwise puts the fish back to its swim step" }
 Fishing_CatchScore = { addr = 0x801E0ABC, type = "func", source = "score of one fish catch: the species row's maximum score (+0x12) scaled by length over the species maximum length (+0x0F), full score from the maximum length up" }
 Fishing_TotalScore = { addr = 0x801E0B6C, type = "func", source = "the player's fishing points: sums Fishing_CatchScore over the 32 g_FishingBestCatch lengths" }
+Fishing_SetDrawMode = { addr = 0x801E0C80, type = "func", source = "Sets the draw mode of one fishing graphic." }
+Fishing_DrawSprite = { addr = 0x801E0DCC, type = "func", source = "Draws a fishing panel sprite at the given position." }
+Fishing_DrawCatchBar = { addr = 0x801E0ED0, type = "func", source = "Draws the catch bar's two end panels." }
+Fishing_DrawCatchIcon = { addr = 0x801E0F4C, type = "func", source = "Draws the hooked fish's icon at the catch position." }
 Fishing_DrawRank = { addr = 0x801E1320, type = "func", source = "draws the rank panel: picks the rank row of g_FishingRankIcons by the total fishing points against the rank score bounds at 0x801D0C70 and prints the points in five digits" }
-Fishing_DrawIconRow = { addr = 0x801E162C, type = "func", source = "Draws one catch-list row: the panel icon cell 0xC (func_801E0DCC) at the given cell and, unless the icon index is 0xFFFF, its text line." }
+Fishing_DrawIconRow = { addr = 0x801E162C, type = "func", source = "Draws one catch-list row: the panel icon cell 0xC (Fishing_DrawSprite) at the given cell and, unless the icon index is 0xFFFF, its text line." }
+Fishing_DrawDimScreen = { addr = 0x801E16DC, type = "func", source = "Dims the screen behind a fishing prompt." }
+Fishing_DrawPromptBox = { addr = 0x801E1758, type = "func", source = "Draws the fish, retry and exit prompt box." }
+Fishing_DrawCautionBox = { addr = 0x801E19CC, type = "func", source = "Draws the caution and full-inventory box." }
 Fishing_FishStacksFull = { addr = 0x801E1C10, type = "func", source = "reports whether every fish species (ITEM_JELLYFISH through ITEM_MACKEREL) is held at the 99-item stack limit; Fishing_ChooseAction diverts to sub step 7 once before the cast while it is true" }
 g_FishingCastGaugeStates = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
 g_FishingLureStates = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
@@ -3611,6 +3626,12 @@ g_FishingHookedFish = { addr = 0x801E3208, source = "pond row index of the fish 
 g_FishingRodRow = { addr = 0x801E320C, source = "the equipped rod's row of the rod table, set by Fishing_SelectGear" }
 g_FishingLureRow = { addr = 0x801E3210, source = "the equipped lure's row of the lure table, set by Fishing_SelectGear" }
 g_FishingNewRecord = { addr = 0x801E3214, source = "set by Fishing_CatchRecord when a catch is longer than the species' g_FishingBestCatch length, cleared when the catch page is confirmed" }
+
+["emi/world00/area030/05"]
+Fishing_DrawWindowFill = { addr = 0x801D799C, type = "func", source = "Fills a fishing window with its interior texture." }
+Fishing_DrawWindowFrame = { addr = 0x801D9534, type = "func", source = "Draws a fishing window frame and its inset shadow." }
+Fishing_SetDrawMode = { addr = 0x801E0C80, type = "func", source = "Sets the draw mode of one fishing graphic." }
+Fishing_DrawSprite = { addr = 0x801E0DCC, type = "func", source = "Draws a fishing panel sprite at the given position." }
 
 ["emi/world00/area032/13"]
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "Appends the current primitive to one ordering-table head and advances the shared primitive cursor while the requested byte count fits the active buffer." }

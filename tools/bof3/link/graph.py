@@ -12,7 +12,7 @@ from pathlib import Path
 
 from bof3.core.paths import ASM, BUILD, TOOLCHAINS
 from bof3.link.script import parse
-from cc import asm_dir
+from bof3.resolve.ids import asm_dir
 
 __all__ = ["Row", "flat", "link_script", "object_name", "rows", "source_object"]
 
@@ -59,16 +59,16 @@ def link_script(root: Path, text: str) -> str:
 def rows(root: Path, target: str, objects: tuple[str, ...]) -> list[Row]:
     """Return how to build each object of one target.
 
-    ``c`` compiles a source, ``s`` assembles one, ``b`` wraps a binary asset, and
-    ``o`` is a prebuilt PsyQ object that is only linked.
+    ``c`` compiles a source, ``s`` assembles one, and ``b`` wraps a binary asset. A
+    prebuilt PsyQ object has no row: the link script names it by path.
     """
     result: list[Row] = []
     for obj in objects:
-        name = object_name(root, obj)
         stem = obj.removesuffix(".o")
         if obj.startswith(TOOLCHAINS + "/"):
-            result.append(("o", name))
-        elif obj.startswith(f"{BUILD}/src/") and obj.endswith(".c.o"):
+            continue
+        name = object_name(root, obj)
+        if obj.startswith(f"{BUILD}/src/") and obj.endswith(".c.o"):
             source = stem.removeprefix(BUILD + "/")
             result.append(("c", name, source, asm_dir(root / source, root)))
         elif obj.startswith(f"{BUILD}/{ASM}/") and obj.endswith(".s.o"):
