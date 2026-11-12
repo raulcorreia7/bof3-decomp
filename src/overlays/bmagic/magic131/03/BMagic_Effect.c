@@ -336,7 +336,21 @@ MATCH void func_801F11B8(void) {
     D_801F24E0->header.step++;
 }
 
-INCLUDE_ASM(func_801F12A0);
+MATCH void func_801F12A0(void) {
+    s16* angle;
+    u8   phase;
+
+    D_801F24E0->unk_06 += 2;
+    D_801F24E0->phase_0C += 0x20;
+    phase                   = D_801F1C38[D_801F24E0->unk_07];
+    angle                   = &D_1F800006;
+    *angle                  = phase << 7;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle) * (s16)D_801F24E0->phase_0C) >> 3);
+    if ((s16)D_801F24E0->phase_0C == 0x200) {
+        D_801F24E0->header.step++;
+    }
+}
 
 INCLUDE_ASM(func_801F13A4);
 
