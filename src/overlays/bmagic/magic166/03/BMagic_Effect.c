@@ -44,8 +44,11 @@ INCLUDE_ASM(func_801EEFBC);
 
 INCLUDE_ASM(func_801EF138);
 
-#define BMAGIC_SETUP_EFFECT_MATRIX func_801EF284
 #include "overlays/bmagic/BMagic_SetupEffectMatrix.h"
+
+MATCH void func_801EF284(void) {
+    BMAGIC_SETUP_EFFECT_MATRIX();
+}
 
 INCLUDE_ASM(func_801EF380);
 
