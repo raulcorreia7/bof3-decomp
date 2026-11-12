@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail when an invented identifier in include/ or src/ carries an 8-digit hex address.
+"""Fail on an address in an invented identifier, an unnamed parameter, or a new offset access.
 
 A name says what a thing is for the game, never where it lives. The default tool names are the
 only identifiers allowed to hold an address: ``func_<ADDR>``, ``D_<ADDR>``, ``L<ADDR>``,
@@ -9,6 +9,10 @@ checked.
 The check is a ratchet. ``config/address_names.txt`` lists the offenders that exist today as
 ``<file><TAB><identifier>``. A name that is not on the list fails, and so does a listed entry
 that no longer occurs, so the list only shrinks. Rename the identifier, then delete its line.
+
+``--diff REF`` checks only the lines a change adds: no unnamed ``argN`` parameter, and no new
+``FIELD``/``SP_REF``/``SP`` use. A record or scratchpad member is the form to write; the existing
+uses shrink record by record (plan section AY).
 
 Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline from the tree)
 """
@@ -35,6 +39,11 @@ TOKEN = re.compile(
 ADDRESS = re.compile(r"[0-9A-Fa-f]{8}")
 DEFAULT = re.compile(r"(?:func|D)_[0-9A-F]{8}|L[0-9A-F]{8}|jtbl_\w*|jpt_\w*|s_gap_\w*")
 UNNAMED = re.compile(r"arg[0-9]+")
+OFFSET_MACRO = re.compile(r"\b(FIELD|SP_REF|SP)\s*\(")
+OFFSET_DEFINITION = re.compile(r"^[ \t]*\#[ \t]*define[ \t]+(?:FIELD|SP_REF|SP)\b")
+SKIP = re.compile(
+    r"/\*.*?\*/|//[^\n]*|\"(?:\\.|[^\"\\\n])*\"|'(?:\\.|[^'\\\n])*'", re.DOTALL
+)
 
 
 def unnamed_parameters(text: str) -> set[str]:
@@ -44,6 +53,13 @@ def unnamed_parameters(text: str) -> set[str]:
         for m in TOKEN.finditer(text)
         if m.lastgroup == "ident" and UNNAMED.fullmatch(m.group())
     }
+
+
+def offset_macros(text: str) -> set[str]:
+    """``FIELD``, ``SP_REF`` and ``SP`` uses in code; comments and strings are skipped."""
+    if OFFSET_DEFINITION.match(text):
+        return set()
+    return {m.group(1) for m in OFFSET_MACRO.finditer(SKIP.sub(" ", text))}
 
 
 def added_lines(ref: str):
@@ -123,10 +139,19 @@ def main(argv: list[str]) -> int:
                     file=sys.stderr,
                 )
                 bad = 1
+            for name in sorted(offset_macros(text)):
+                print(
+                    f"{path}:{line}: {name}(): a new offset access; "
+                    "write the member of the record or of the scratchpad view",
+                    file=sys.stderr,
+                )
+                bad = 1
         if bad:
-            print(f"check-names: unnamed parameters against {argv[1]}", file=sys.stderr)
+            print(f"check-names: failed against {argv[1]}", file=sys.stderr)
             return 1
-        print(f"check-names: no unnamed parameters against {argv[1]}")
+        print(
+            f"check-names: no unnamed parameters or new offset accesses against {argv[1]}"
+        )
         return 0
     now = tree_entries()
     if argv == ["--write"]:
