@@ -902,8 +902,8 @@ MATCH void Fairy_GenerateName(void) {
         dst -= 1;
     } while (i >= 0);
 
-    offset = MEM_PTR(const u16, 0x800103E0u)[RANDOM_MASK(0x3F)];
-    src    = MEM_PTR(u8, 0x80010000u) + offset;
+    offset = AREA_MESSAGE_TABLE->offsets[FAIRY_NAME_FIRST_HALF_INDEX + RANDOM_MASK(0x3F)];
+    src    = (u8*)AREA_MESSAGE_TABLE + offset;
     for (;;) {
         u8 ch;
 
@@ -916,8 +916,8 @@ MATCH void Fairy_GenerateName(void) {
         src++;
     }
 
-    offset = MEM_PTR(const u16, 0x80010460u)[RANDOM_MASK(0x3F)];
-    src    = MEM_PTR(u8, 0x80010000u) + offset;
+    offset = AREA_MESSAGE_TABLE->offsets[FAIRY_NAME_SECOND_HALF_INDEX + RANDOM_MASK(0x3F)];
+    src    = (u8*)AREA_MESSAGE_TABLE + offset;
     for (;;) {
         u8 ch;
 
