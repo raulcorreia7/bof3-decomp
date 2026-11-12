@@ -38,6 +38,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find the symbol and member at an address | `tools/symbol.py at <target> 0x<ADDR>`                                   | [lookup](#lookup)                                         |
 | Find the member at a record offset       | `tools/symbol.py member <Type> 0x<OFF>`                                  | same                                                      |
 | List every reference to a symbol         | `tools/symbol.py uses <Name>` or `tools/symbol.py uses <target>@0x<ADDR>` | same                                                      |
+| Find the name of a bare number           | `tools/symbol.py value 0x<NN> [--image <target>] [--type <EnumOrPrefix>]` | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Check the symbol table                   | `tools/symbol.py check`                                                  | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
@@ -129,7 +130,8 @@ the image's table and the resident ones; `--diff [BASE]` reads the `D_` addresse
 `symbol.py member` prints the member path and type at a record offset from clang's own layout, and
 `symbol.py uses` lists the C uses, the open functions' assembly uses and the Rizin cross-references in
 one table; the first query in an image analyses its Rizin project and caches the references under
-`build/symbol-xrefs`.
+`build/symbol-xrefs`. `symbol.py value` lists every enum member and numeric macro with one value
+among the headers the image sees, nearest scope first, so a bare `0x3A` becomes `ABILITY_SANCTUARY`.
 
 ## Quality
 

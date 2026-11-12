@@ -55,6 +55,31 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
             "  - [0x100]\n"
         ),
         "include/common.h": "typedef unsigned char u8;\ntypedef unsigned short u16;\n",
+        "include/game/values.h": (
+            "typedef enum Ability {\n"
+            "    ABILITY_SANCTUARY = 0x3A,\n"
+            "    ABILITY_OTHER = 0x3B,\n"
+            "} Ability;\n"
+            "\n"
+            "typedef enum Counts {\n"
+            "    COUNT_ZERO,\n"
+            "    COUNT_ONE = 0x3A,\n"
+            "    COUNT_TWO,\n"
+            "} Counts;\n"
+            "\n"
+            "#define STRING_COLON 0x3A\n"
+            "#define FLAG_SHIFT (1 << 3)\n"
+        ),
+        "include/other.h": "#define OTHER_VALUE 0x3A\n",
+        "include/psyq/sdk.h": "#define SDK_VALUE 0x3A\n",
+        "src/a/a.h": (
+            "#define IMAGE_VALUE 0x3A\n"
+            "#define ALIAS_VALUE IMAGE_VALUE\n"
+            '#include "group.h"\n'
+            '#include "game/values.h"\n'
+            "#include <psyq/sdk.h>\n"
+        ),
+        "src/group.h": "#define GROUP_VALUE 0x3A\n",
         "include/fixture.h": (
             "typedef struct Inner { u8 a; u16 b; } Inner;\n"
             "typedef struct State { Inner rows[2]; u8 flags; u8 pad_09[7]; } State;\n"
@@ -66,6 +91,7 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
             "/* Game is a comment. */\n"
             'static const char *kName = "Game";\n'
             "void f(void) { Game.flags = 1; }\n"
+            '#include "a.h"\n'
         ),
         "asm/exe/a/func_80000020.s": (
             '.include "macro.inc"\n'
@@ -298,3 +324,58 @@ def test_uses_rizin_xrefs_and_caches_the_map(
 def test_foreign_table_outside_its_payload_is_ignored(repo: Path) -> None:
     assert symbol.foreign_visible("exe/a", "emi/etc/game/00", 0x80000010)
     assert not symbol.foreign_visible("exe/a", "emi/etc/game/00", 0x80000100)
+
+
+def test_value_lists_scopes_nearest_first(
+    repo: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    assert symbol.main(["value", "0x3A", "--image", "exe/a"]) == 0
+    assert capsys.readouterr().out.splitlines() == [
+        "IMAGE_VALUE\tsrc/a/a.h:1\tIMAGE_",
+        "ALIAS_VALUE\tsrc/a/a.h:2\tALIAS_",
+        "GROUP_VALUE\tsrc/group.h:1\tGROUP_",
+        "ABILITY_SANCTUARY\tinclude/game/values.h:2\tenum Ability",
+        "COUNT_ONE\tinclude/game/values.h:8\tenum Counts",
+        "STRING_COLON\tinclude/game/values.h:12\tSTRING_",
+        "SDK_VALUE\tinclude/psyq/sdk.h:1\tSDK_",
+    ]
+
+
+def test_value_type_keeps_an_enum_or_a_prefix(
+    repo: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    assert symbol.main(["value", "0x3A", "--image", "exe/a", "--type", "ABILITY_"]) == 0
+    assert capsys.readouterr().out.splitlines() == [
+        "ABILITY_SANCTUARY\tinclude/game/values.h:2\tenum Ability"
+    ]
+    assert symbol.main(["value", "0x3A", "--image", "exe/a", "--type", "Ability"]) == 0
+    assert capsys.readouterr().out.splitlines() == [
+        "ABILITY_SANCTUARY\tinclude/game/values.h:2\tenum Ability"
+    ]
+
+
+def test_value_evaluates_shifts_and_implicit_members(
+    repo: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    assert symbol.main(["value", "0x8", "--image", "exe/a"]) == 0
+    assert capsys.readouterr().out.splitlines() == [
+        "FLAG_SHIFT\tinclude/game/values.h:13\tFLAG_"
+    ]
+    assert symbol.main(["value", "0x3B", "--image", "exe/a", "--type", "COUNT_"]) == 0
+    assert capsys.readouterr().out.splitlines() == [
+        "COUNT_TWO\tinclude/game/values.h:9\tenum Counts"
+    ]
+
+
+def test_value_skips_a_header_the_image_does_not_include(
+    repo: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    assert symbol.main(["value", "0x3A", "--image", "exe/a"]) == 0
+    assert "OTHER_VALUE" not in capsys.readouterr().out
+    assert symbol.main(["value", "0x3A"]) == 0
+    assert "OTHER_VALUE\tinclude/other.h:1\tOTHER_" in capsys.readouterr().out
+
+
+def test_value_rejects_an_unknown_image(repo: Path) -> None:
+    with pytest.raises(SystemExit, match="not a target"):
+        symbol.main(["value", "0x3A", "--image", "bad"])
