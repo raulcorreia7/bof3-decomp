@@ -13,7 +13,26 @@ MATCH void func_801D0C8C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event0Step0Funcs, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D0CC8);
+MATCH void func_801D0CC8(void) {
+    u8* cues;
+    u8* sequences;
+    u8* dst;
+    s32 i;
+    u8  space = STRING_SPACE;
+
+    i   = 9;
+    dst = &D_801DB080[9];
+    while (i >= 0) {
+        *dst-- = space;
+        i--;
+    }
+    D_801DB0CC = g_SndBGMId;
+    cues       = g_SelectionCues + g_SndBGMId * 4;
+    sequences  = g_SelectionSequences + g_SndBGMId * 4;
+    SND_StopSequence(*cues, *sequences);
+    SND_RequestBGM(BGM_COMMU02);
+    D_801F294D += 1;
+}
 
 MATCH void func_801D0D54(void) {
     if (EMI_IsReady() != 0) {
