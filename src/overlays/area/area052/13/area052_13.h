@@ -15,16 +15,18 @@ extern u8 D_801F44B8[];
 
 /* A row of the area work window this overlay hands to its effects. */
 typedef struct AreaWorkRow {
-    s32 x;      /* 0x00 */
-    s32 y;      /* 0x04 */
-    s32 z;      /* 0x08 */
-    s32 unk_0C; /* 0x0C */
-    s32 unk_10; /* 0x10 */
-    u8  unk_14; /* 0x14 */
-    u8  active; /* 0x15 nonzero while the row is in use */
-    u8  unk_16; /* 0x16 */
-    u8  unk_17; /* 0x17 */
+    WorldPos pos;    /* 0x00 */
+    s32      unk_0C; /* 0x0C */
+    s32      unk_10; /* 0x10 */
+    u8       unk_14; /* 0x14 */
+    u8       active; /* 0x15 nonzero while the row is in use */
+    u8       unk_16; /* 0x16 */
+    u8       unk_17; /* 0x17 */
 } AreaWorkRow;
+
+ASSERT_OFFSET(AreaWorkRow, pos, 0x00);
+ASSERT_OFFSET(AreaWorkRow, active, 0x15);
+ASSERT_SIZE(AreaWorkRow, 0x18);
 
 /* A rectangle of world cells that a scene event step tests the party against. */
 typedef struct AreaTriggerRect {

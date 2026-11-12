@@ -9,13 +9,13 @@ MATCH void func_801F3084(void) {
     for (i = 0; i < 4; i++) {
         row = (AreaWorkRow*)Area_FindFreeWorkRow();
         if (row != NULL) {
-            row->active = 1;
-            row->unk_16 = 8;
-            row->x      = g_Task->pos.x.fixed + (rcos(angle) << 4);
-            row->y      = g_Task->pos.y.fixed + (rsin(angle) << 4);
-            row->z      = g_Task->pos.z.fixed;
-            row->unk_10 = 0x1800;
-            row->unk_14 = 0xC0;
+            row->active      = 1;
+            row->unk_16      = 8;
+            row->pos.x.fixed = g_Task->pos.x.fixed + (rcos(angle) << 4);
+            row->pos.y.fixed = g_Task->pos.y.fixed + (rsin(angle) << 4);
+            row->pos.z.fixed = g_Task->pos.z.fixed;
+            row->unk_10      = 0x1800;
+            row->unk_14      = 0xC0;
         }
         angle += 0x100;
     }
