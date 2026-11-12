@@ -26,7 +26,7 @@ MATCH void func_801EEEB4(void) {
 
 MATCH s32 func_801EEF3C(void) {
     PartyMember* work;
-    FAKE_REG(s32, scroll, "a1"); /* FAKE: pins the scroll offset to retail a1; clean C picks v1. */
+    FAKE_REG(s32, scroll, "a1"); /* FAKE: pins the scroll offset to retail a1; the best plain form differs in 6 instructions (scroll and battler registers). */
     u8 count;
 
     count          = g_Task->unk_09 - 1;
