@@ -17,7 +17,7 @@ An image's objects name two kinds of external symbols. An address name (``D_8014
 row of a map the image can see. :func:`resolve` answers for one image from its objects; a name
 that cannot be resolved for certain is an error that names the row and the fix.
 
-:func:`target_entries` is the one function that reads a target's rows from the table;
+:func:`target_rows` is the one function that reads a target's rows from the table;
 :func:`read_map` is the one parser of an image's ``-Map`` file.
 """
 
@@ -26,13 +26,10 @@ from __future__ import annotations
 import re
 import subprocess
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, NamedTuple
+from typing import Any, NamedTuple
 
 from bof3.core.cache import file_memo
 from bof3.core.paths import BUILD, CONFIG
-
-if TYPE_CHECKING:
-    from bof3.state.rows import Row
 
 __all__ = [
     "ADDRESS_NAME",
@@ -50,7 +47,6 @@ __all__ = [
     "resolve",
     "splat_map",
     "splat_owners",
-    "target_entries",
     "target_rows",
 ]
 
@@ -93,16 +89,20 @@ class Entry(NamedTuple):
             parts.append(f"size:0x{self.size:X}")
         return " ".join(parts)
 
-    def row(self) -> Row:
-        """The row in the form tools read: name, address and a Splat-style comment."""
+    @property
+    def address(self) -> int:
+        """The row's address."""
+        return self.addr
+
+    @property
+    def comment(self) -> str:
+        """The row comment: attributes, alias and source."""
         parts = [self.attributes]
         if self.alias:
             parts.append("alias:true")
         if self.source:
             parts.append(f'source="{self.source}"')
-        from bof3.state.rows import Row
-
-        return Row(self.name, self.addr, " ".join(p for p in parts if p))
+        return " ".join(p for p in parts if p)
 
 
 def address_of(name: str) -> int | None:
@@ -273,18 +273,13 @@ def load(root: Path) -> dict[str, list[Entry]]:
     return file_memo("symbols-table", [path], None, read)
 
 
-def target_entries(root: Path, target: str) -> list[Entry]:
+def target_rows(root: Path, target: str) -> list[Entry]:
     """Return one target's own rows, sorted by address.
 
     Every reader of the table goes through this function, so the file format is a detail of
     this module.
     """
     return sorted(load(root).get(target, ()), key=lambda e: e.addr)
-
-
-def target_rows(root: Path, target: str) -> list[Row]:
-    """Return one target's own rows in the Splat-style form: name, address and comment."""
-    return [entry.row() for entry in target_entries(root, target)]
 
 
 def generate(root: Path) -> None:

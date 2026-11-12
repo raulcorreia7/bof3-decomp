@@ -5290,6 +5290,16 @@ CF_DVLC = { addr = 0x801DAC24, source = "LIBPRESS table.o CF_DVLC, 65536 bytes e
 s_LogoCDVolume = { addr = 0x801EB470, source = "CdMix attenuator bytes of the movie audio: left volume at 0, right volume at 2, cross-channel 0 at 1 and 3." }
 
 ["exe/slus_004_22"]
+D_1F800000 = { addr = 0x1F800000, source = "Scratchpad base: the field entity counter and entry-data halves at 0x00/0x02 and the scene math words at 0x00-0x0C; the game, area and scene overlays read it as ScratchPad, bytes or a word." }
+D_1F800002 = { addr = 0x1F800002, source = "Scratchpad staging halfword: the spawn record's packed word and the area entity entry data (GAME_ENTITY_ENTRY_DATA)." }
+D_1F800004 = { addr = 0x1F800004, source = "Scratchpad staging word: a map-coordinate counter (func_801B13BC) and the party archive load's temporary word." }
+D_1F800006 = { addr = 0x1F800006, source = "Scratchpad staging word: the second map-coordinate counter (func_801B13BC)." }
+D_1F800008 = { addr = 0x1F800008, source = "Scratchpad word: the staged x coordinate and its per-axis bias flag (func_801B13BC, func_801B0E44)." }
+D_1F80000A = { addr = 0x1F80000A, source = "Scratchpad word: the staged x source halfword (func_801B13BC)." }
+D_1F80000C = { addr = 0x1F80000C, source = "Scratchpad word: the staged y bias flag, the tile-window half-width (func_801530D0) and the scene math word." }
+D_1F80000E = { addr = 0x1F80000E, source = "Scratchpad word: the staged y source halfword (func_801B13BC)." }
+D_1F800010 = { addr = 0x1F800010, source = "Scratchpad halfword-pointer cell: scena00 points it at the area load record's rotation offset and steps the camera through it." }
+D_1F800014 = { addr = 0x1F800014, source = "The four SVECTORs RotTransPers4 projects; the area sprite and effect passes write the vertices here and the engine's sprite draw reads them back as D_1F800034." }
 g_Task = { addr = 0x1F800044, size = 0x4, source = "The current task work record." }
 g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, source = "Header of the area map bundle." }
 g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
