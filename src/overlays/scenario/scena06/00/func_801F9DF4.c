@@ -126,6 +126,7 @@ MATCH void func_801F9DF4(void) {
             g_SceneState.state_04 = 0;
             break;
         case 20: {
+            /* FAKE: retail reads the request byte through a register. */
             u8* state;
 
             state = &g_GameStateIndex;
@@ -152,6 +153,7 @@ MATCH void func_801F9DF4(void) {
             g_SceneState.state_04 = 0;
             break;
         case 30: {
+            /* FAKE: retail reads the request byte through a register. */
             u8* state;
 
             state = &g_GameStateIndex;
