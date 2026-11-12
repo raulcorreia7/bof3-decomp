@@ -76,7 +76,7 @@ MATCH void func_801EF650(void) {
     actor  = g_Battle.selected_actor;
     vec[0] = (actor->pos.x.fixed >> 9) - 0x4000;
     vec[1] = (actor->pos.y.fixed >> 9) - 0x4000;
-    vec[2] = (actor->pos.z.fixed + 0x1000000) >> 17;
+    vec[2] = (actor->pos.z.fixed + TO_COORD(256)) >> 17;
     /* The retail build passes the never-written slot after the vector. */
     func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x40);
     g_Task->unk_10 = g_Task->unk_0C;
