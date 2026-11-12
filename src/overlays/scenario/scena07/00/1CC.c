@@ -261,7 +261,11 @@ MATCH void func_801F81B4(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F81D4);
+#include "shared/GFX_DrawProjectedDisc.h"
+
+MATCH void func_801F81D4(u8* row) {
+    GFX_DRAW_PROJECTED_DISC(row, 0x20, 1);
+}
 
 MATCH void func_801F8358(void) {
     u8* p;
