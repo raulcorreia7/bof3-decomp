@@ -35,7 +35,6 @@ from bof3.resolve import load_target_manifests
 from bof3.resolve.ids import image_header
 from bof3.resolve.layout import parse_splat_layout
 from bof3.resolve.manifests import TargetManifest
-from bof3.state.rows import Row
 
 ROOT = Path(__file__).resolve().parent.parent
 RIZIN = ROOT / "toolchains/rizin/bin/rizin"
@@ -57,7 +56,7 @@ class Outputs:
     log: Path
 
 
-def read_rows(root: Path, manifest: TargetManifest) -> list[Row]:
+def read_rows(root: Path, manifest: TargetManifest) -> list[symbols.Entry]:
     """Return the rows Splat reads for this target, in map order."""
     target = manifest.id.value
     return [
@@ -450,7 +449,7 @@ def function_size(root: Path, targets: tuple[str, ...], name: str) -> int | None
 def write_function_commands(
     lines: list[str],
     targets: tuple[str, ...],
-    rows: list[Row],
+    rows: list[symbols.Entry],
     functions: list[tuple[str, int, int]],
     mapped: list[MapSymbol],
 ) -> list[str]:
@@ -556,7 +555,7 @@ def map_flags(mapped: list[MapSymbol]) -> list[str]:
 def write_script(
     outputs: Outputs,
     targets: tuple[str, ...],
-    rows: list[Row],
+    rows: list[symbols.Entry],
     functions: list[tuple[str, int, int]],
     mapped: list[MapSymbol],
     sigs: list[Path],

@@ -88,12 +88,6 @@ class TargetManifest:
     binary: str
     splat: str
     load_address: int
-    psyq_space: str = "slus"
-    sdk_default: str = "3.7"
-    sdk_libs: dict[str, str] = field(default_factory=dict)
-    libraries: dict[str, tuple[str, ...]] = field(default_factory=dict)
-    library_confidence: dict[str, str] = field(default_factory=dict)
-    library_evidence: dict[str, tuple[str, ...]] = field(default_factory=dict)
     section_placements: dict[int, tuple[SectionPlacement, ...]] = field(
         default_factory=dict
     )
@@ -103,8 +97,6 @@ class TargetManifest:
     def __post_init__(self) -> None:
         if self.kind not in {"executable", "emi"}:
             raise ValueError(f"unsupported target kind: {self.kind}")
-        if self.psyq_space not in {"slus", "logo"}:
-            raise ValueError(f"unsupported psyq space: {self.psyq_space}")
         if self.companions and self.kind != "emi":
             raise ValueError("only EMI targets may declare companion overlays")
         if self.copies and self.kind != "emi":
@@ -429,42 +421,11 @@ def _parse_target_manifest(path: Path, target_id: TargetId) -> TargetManifest:
     except (OSError, ValueError) as exc:
         raise ValueError(f"cannot read the target layout {path.parent}: {exc}") from exc
 
-    psyq = raw.get("psyq", {})
-    if not isinstance(psyq, dict):
-        raise ValueError(f"psyq must be a table in {path}")
-    raw_libraries = psyq.get("libraries", {})
-    if not isinstance(raw_libraries, dict):
-        raise ValueError(f"psyq.libraries must be a table in {path}")
-    libraries: dict[str, tuple[str, ...]] = {}
-    library_confidence: dict[str, str] = {}
-    library_evidence: dict[str, tuple[str, ...]] = {}
-    for name, value in raw_libraries.items():
-        if not isinstance(name, str) or not isinstance(value, dict):
-            raise ValueError(f"invalid PsyQ library table in {path}")
-        members = value.get("members", [])
-        evidence = value.get("evidence", [])
-        if not isinstance(members, list) or not isinstance(evidence, list):
-            raise ValueError(f"invalid PsyQ library members or evidence in {path}")
-        libraries[name] = tuple(str(member) for member in members)
-        if value.get("confidence") is not None:
-            library_confidence[name] = str(value["confidence"])
-        if evidence:
-            library_evidence[name] = tuple(str(item) for item in evidence)
-
     sdk = raw.get("sdk", {})
     if not isinstance(sdk, dict):
         raise ValueError(f"sdk must be a table in {path}")
     if "surface" in sdk:
         raise ValueError(f"sdk.surface is derived from the link; remove it from {path}")
-    sdk_default = str(sdk.get("default", "3.7"))
-    sdk_libs = {str(k): str(v) for k, v in sdk.get("libs", {}).items()}
-    for name, members in libraries.items():
-        version = sdk_libs.get(name, sdk_default)
-        for member in members:
-            if member.split("/")[:2] != ["psyq", version]:
-                raise ValueError(
-                    f"{name} member {member} is not PsyQ {version} in {path}"
-                )
 
     matching = raw.get("matching", {})
     if not isinstance(matching, dict):
@@ -511,12 +472,6 @@ def _parse_target_manifest(path: Path, target_id: TargetId) -> TargetManifest:
             binary=_manifest_path(facts.binary, "binary", path),
             splat=f"config/{target_id.value}/splat.yaml",
             load_address=load_address,
-            psyq_space=str(psyq.get("space", "slus")),
-            sdk_default=sdk_default,
-            sdk_libs=sdk_libs,
-            libraries=libraries,
-            library_confidence=library_confidence,
-            library_evidence=library_evidence,
             section_placements={
                 function: tuple(values) for function, values in placements.items()
             },
