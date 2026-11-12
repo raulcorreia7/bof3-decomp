@@ -88,17 +88,13 @@ MATCH void func_801F7C6C(void) {
                 }
             }
             break;
-        case 17: {
-            u8* slot;
-
-            slot = &g_ScriptVars[1];
-            if (g_ActorSlots[*slot].header.flags == 0) {
+        case 17:
+            if (g_ActorSlots[g_ScriptVars[1]].header.flags == 0) {
                 g_ScriptVars[0]      = 0x1B;
-                *slot                = 0;
+                g_ScriptVars[1]      = 0;
                 g_SceneState.step_05 = 0x12;
             }
             break;
-        }
         case 18:
             if (g_ScriptVars[0] == 0x1C) {
                 id                     = func_8019601C();
