@@ -35,7 +35,21 @@ MATCH void func_801EEEA8(void) {
 
 INCLUDE_ASM(func_801EEF24);
 
-INCLUDE_ASM(func_801EF070);
+/* Loads the character archive the active battler's facing selects from the dragon-form row when the effect
+ * ticker is one, then advances byte 0x03. */
+MATCH void func_801EF070(void) {
+    s32 archive;
+
+    if (g_Task->param.unk_0B == 1) {
+        if (g_BattleEffectBattler->facing < 2) {
+            archive = D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex];
+        } else {
+            archive = D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex];
+        }
+        EMI_LoadArchive(archive);
+        g_Task->unk_03 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF138);
 
