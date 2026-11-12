@@ -90,7 +90,6 @@ extern u8       D_801F2DD4[];
 void            Area_StartDirectionalScript(Actor* actor);
 void            func_801F34A0(void);
 void            func_801F34E0(void);
-void            func_801F358C(void);
 void            func_801F35FC(void);
 void            func_801F3690(void);
 void            func_801F36A4(void);
@@ -138,6 +137,18 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     if ((u8)result != GAME_NONE) {
         battler               = (PartyMember*)g_Task;
         battler->param.unk_0B = (u8)result;
+    }
+}
+
+/* Walk the map bundle's object list g_AreaMapBundle.object_list_28 through func_801576FC until its zero
+ * terminator. */
+static inline void Area_RunBundleObjects(void) {
+    u8* record;
+
+    record = MEM_PTR(u8, MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4);
+    while (FIELD(u32, record, 0) != 0) {
+        func_801576FC(record);
+        record += FIELD(u16, record, 2) * 4 + 4;
     }
 }
 

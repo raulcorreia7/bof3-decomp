@@ -26,7 +26,21 @@ MATCH void func_801EEEB4(void) {
 
 INCLUDE_ASM(func_801EEF3C);
 
-INCLUDE_ASM(func_801EF05C);
+MATCH void func_801EF05C(void) {
+    VECTOR pos;
+
+    g_Task->unk_09 += 1;
+    pos.vx = (g_Task->unk_0C >> 9) - 0x4000;
+    pos.vy = (g_Task->unk_10 >> 9) - 0x4000;
+    pos.vz = g_Task->unk_14 >> 1;
+    func_800AF3A0(pos, 0x10);
+    if (g_Task->timer != 0x10) {
+        g_Task->timer += 1;
+    }
+    if (func_800AF6B8(g_Task->unk_0C, g_Task->unk_10, g_Task->pos.z.fixed, 0x60000) != 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF158(void) {
     VECTOR pos;

@@ -29,7 +29,7 @@ MATCH void func_801EEF88(void) {
     Actor_StepAnimOnce();
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
@@ -73,7 +73,7 @@ MATCH void func_801EF2F0(void) {
     if (g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) {
         func_801E5988();
     } else {
-        func_800AFD9C();
+        Battle_CenterCamera();
     }
 }
 
@@ -107,7 +107,7 @@ MATCH void func_801EF44C(void) {
     g_Task->unk_0C = angle;
     g_Task->pos.x.fixed += (rsin(angle) * 0x7000) >> 0xC;
     g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF6A0();
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
@@ -120,7 +120,7 @@ MATCH void func_801EF44C(void) {
 INCLUDE_ASM(func_801EF57C);
 
 MATCH void func_801EF614(void) {
-    func_800AF764();
+    Battle_ProjectRange();
     func_801EF6A0();
     BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
     g_Task->header.flags = 0;

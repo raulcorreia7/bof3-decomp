@@ -181,7 +181,7 @@ MATCH void func_801F2C74(void) {
         i++;
     } while ((i & BYTE_MASK) < 3u);
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
-    g_Task->timer = 0x40;
+    g_Task->timer = 64;
     g_Task->header.mode++;
 }
 
@@ -261,11 +261,11 @@ MATCH void func_801F2F0C(const void* trail) {
         setXY2(primitive, *(s16*)(((const u8*)work + (index << 2) + 24)), *(s16*)(((const u8*)work + (index << 2) + 26)), *(s16*)(((const u8*)work + ((index + 1) << 2) + 24)),
                *(s16*)(((const u8*)work + ((index + 1) << 2) + 26)));
 
-        red = ((0x20u - index) * 8u);
+        red = ((32u - index) * 8u);
         red = MIN(red, 0xFFu);
         setRGB0(primitive, red, 0u, 0u);
 
-        red = ((0x1Fu - index) * 8u);
+        red = ((31u - index) * 8u);
         red = MIN(red, 0xFFu);
         setRGB1(primitive, red, 0u, 0u);
 
@@ -296,7 +296,7 @@ MATCH void func_801F3120(void) {
 }
 
 MATCH void func_801F3164(void) {
-    if (SYS_TestFlag(g_Scenario2Flags, 0x17) != 0) {
+    if (SYS_TestFlag(g_Scenario2Flags, 23) != 0) {
         g_Task->header.step = 3u;
         func_801F33A8();
     } else {
@@ -308,7 +308,7 @@ MATCH void func_801F3164(void) {
 MATCH void func_801F31CC(void) {
     s16 point[3];
 
-    if (SYS_TestFlag(g_Scenario2Flags, 0x17) != 0) {
+    if (SYS_TestFlag(g_Scenario2Flags, 23) != 0) {
         g_Task->header.step += 1u;
         g_Task->vx = 0u;
     }
@@ -394,8 +394,8 @@ MATCH POLY_FT4* func_801F3480(const Point3D* point, s32 angle, u32 texture) {
     q2->vx     = 0;
     q1->vx     = 0;
     quad[0].vx = 0;
-    quad[2].vy = 0x80;
-    quad[0].vy = 0x80;
+    quad[2].vy = 128;
+    quad[0].vy = 128;
     quad[1].vz = -382;
     quad[0].vz = -382;
 
@@ -413,7 +413,7 @@ MATCH POLY_FT4* func_801F3480(const Point3D* point, s32 angle, u32 texture) {
 
 MATCH void func_801F35E0(void) {
     g_MessageRequest = RESET_SENTINEL;
-    if ((g_MessageChoice & 1) == 0) {
+    if ((g_MessageChoice & 0x1) == 0) {
         g_SceneEventMode = 1;
         g_SceneEventStep = 0;
     }
@@ -421,7 +421,7 @@ MATCH void func_801F35E0(void) {
 
 MATCH void func_801F3618(void) {
     g_MessageRequest = RESET_SENTINEL;
-    if ((g_MessageChoice & 1) == 0) {
+    if ((g_MessageChoice & 0x1) == 0) {
         g_SceneEventMode = 2;
         g_SceneEventStep = 0;
     }
@@ -495,12 +495,12 @@ MATCH void func_801F3710(void) {
 }
 
 MATCH void func_801F376C(void) {
-    Area_SetCellCode(0x27, 0x25, 0);
-    Area_SetCellCode(0x27, 0x26, 0);
-    Area_SetCellCode(0x27, 0x27, 0);
-    Area_SetCellCode(0x28, 0x25, 0);
-    Area_SetCellCode(0x28, 0x26, 0);
-    Area_SetCellCode(0x28, 0x27, 0);
+    Area_SetCellCode(39, 37, 0);
+    Area_SetCellCode(39, 38, 0);
+    Area_SetCellCode(39, 39, 0);
+    Area_SetCellCode(40, 37, 0);
+    Area_SetCellCode(40, 38, 0);
+    Area_SetCellCode(40, 39, 0);
 }
 
 MATCH void func_801F37E4(void) {

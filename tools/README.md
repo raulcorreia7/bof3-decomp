@@ -40,6 +40,9 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | List every reference to a symbol         | `tools/symbol.py uses <Name>` or `tools/symbol.py uses <target>@0x<ADDR>` | same                                                      |
 | Find the name of a bare number           | `tools/symbol.py value 0x<NN> [--image <target>] [--type <EnumOrPrefix>]` | same                                                      |
 | Build the call-graph layers              | `tools/symbol.py layers [--jsonl]`                                       | [lookup](#lookup)                                         |
+| Find where a record or global is accessed | `tools/symbol.py accesses <TypeOrGlobal> [--jsonl]`                     | [lookup](#lookup)                                         |
+| Rank records by unknown accesses         | `tools/symbol.py records [--jsonl]`                                      | same                                                      |
+| Scan matched bodies for bare values      | `tools/symbol.py values --scan [--jsonl]`                                | [values](../docs/conventions.md#how-a-value-is-written)   |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Check the symbol table                   | `tools/symbol.py check`                                                  | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
@@ -135,7 +138,12 @@ one table; the first query in an image analyses its Rizin project and caches the
 among the headers the image sees, nearest scope first, so a bare `0x3A` becomes `ABILITY_SANCTUARY`.
 `symbol.py layers` builds the game call graph over every image, including table dispatch, and prints
 each function's layer, callers, callees, status, copies and shared flag. `--jsonl` writes one object
-per line.
+per line. `symbol.py accesses` decodes every image and reports a record's or global's byte offsets,
+widths, members, examples, constants and call slots with their width, signedness and straddle
+problems; `symbol.py records` ranks every record by accesses times unknown members.
+`symbol.py values --scan` decides what each numeric literal of a matched body means from the
+declaration it is assigned to or compared with, and prints the family, the existing constant and the
+form the conventions prescribe; `--jsonl` writes one object per site.
 
 ## Quality
 
@@ -159,18 +167,22 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `check`         | an image differs from its retail SHA-1                                                  | disc       |
 | `check-headers` | a public header does not compile alone                                                  | compiler   |
 | `check-plain`   | a source does not build as plain C                                                      | compiler   |
-| `check-tree`    | a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none    |
+| `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none |
 | `externs`       | a `.c` file gains an `extern` line                                                      | none       |
 | `include-asm`   | there are more `INCLUDE_ASM` lines than at the base ref, in total or in one image       | none       |
 | `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | the tools  |
 | `meson test`    | a tool test fails                                                                       | Python     |
 | `typeloss`      | a rename, move or retype weakens a type                                                 | none       |
-| `markers`       | a definition in `src/` lacks exactly one status marker                                  | none       |
-| `names`         | a new name carries an 8-digit address, or a listed legacy one is gone                   | none       |
+| `markers`       | a definition in `src/` lacks exactly one status marker, or a change adds a `NON_MATCHING` draft | none |
+| `names`         | a new name carries an 8-digit address, a listed legacy one is gone, or an added line names a parameter `argN` | none |
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
 | `subsystems`    | never fails; writes the debt table to `build/subsystems.md`                             | none       |
+
+`check-plain` skips a source whose plain preprocessed text compiled before: the keys are empty files
+under `~/.cache/bof3-cc/plain`, shared like the object cache, so a header change recompiles only the
+sources that include it. `BOF3_CC_CACHE=0` turns that off, and `HEAVY_JOBS` caps its jobs.
 
 ## Worktrees
 

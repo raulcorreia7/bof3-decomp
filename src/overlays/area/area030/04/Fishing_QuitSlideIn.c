@@ -8,12 +8,12 @@
 /* func_801DA058 */
 MATCH void Fishing_QuitSlideIn(void) {
     FISHING_STATE->step_timer_09 = (FISHING_STATE->step_timer_09 - 1);
-    Fishing_DrawPromptBox((s16)((FISHING_STATE->step_timer_09 * 0x50) + 0x6C), 0x56);
+    Fishing_DrawPromptBox((s16)((FISHING_STATE->step_timer_09 * 0x50) + 0x6C), 86);
     if (FISHING_STATE->step_timer_09 == 0) {
         FISHING_STATE->cue_index_06 = 1;
         FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 + 1);
     }
     Fishing_DrawDimScreen();
     Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
-    UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 0xFFU, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
+    UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 255U, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
 }

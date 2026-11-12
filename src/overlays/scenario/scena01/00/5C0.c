@@ -46,7 +46,17 @@ MATCH void func_801F7480(void) {
     }
 }
 
-INCLUDE_ASM(func_801F752C);
+MATCH void func_801F752C(void) {
+    func_801F7678(0xFF);
+    if ((g_FrameCount & 1) == 0) {
+        func_801F7AE4();
+    }
+    func_801F7C54();
+    if (--g_Task->timer == 0) {
+        g_Task->timer = 252;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F75C8(void) {
     func_801F7678(g_Task->timer);

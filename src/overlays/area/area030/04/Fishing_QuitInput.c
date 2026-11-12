@@ -16,7 +16,7 @@ MATCH void Fishing_QuitInput(void) {
     if ((*pad & (PADLup | PADLdown)) != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         work               = FISHING_STATE;
-        work->cue_index_06 = (work->cue_index_06 ^ 1);
+        work->cue_index_06 = (work->cue_index_06 ^ 0x1);
     }
 
     if ((*pad & (PADRup | PADRdown)) != 0) {
@@ -33,5 +33,5 @@ MATCH void Fishing_QuitInput(void) {
     Menu_DrawCursorSprite(112, (130 - FISHING_STATE->cue_index_06 * 16) & 0xFFFE, 0);
     Fishing_DrawDimScreen();
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(29, 21, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
+    UI_DrawText(29, 21, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
 }
