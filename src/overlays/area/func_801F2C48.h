@@ -2,7 +2,7 @@
  * banner and starts the away step when the party already stands in that cell. */
 /* func_801F2C48 (area158), func_801F2C48 (area160), func_801F2C48 (area161), func_801F2C48 (area162),
  * func_801F2C48 (area163), func_801F2C48 (area164), func_801F2C48 (area165), func_801F2C48 (area166) */
-#define FUNC_801F2C48_BODY(payload, screen_y_value)                                                                   \
+#define AREA_START_WORK_AT_ENTRY_CELL_BODY(payload, screen_y_value)                                                   \
     Actor* work;                                                                                                      \
     Actor* cell;                                                                                                      \
     Actor* row;                                                                                                       \
