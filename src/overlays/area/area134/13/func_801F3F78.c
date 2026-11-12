@@ -20,7 +20,7 @@ MATCH void func_801F3F78(void) {
         D_80146867 = 0;
         D_80146875 = 0x14;
         TASK_SET(actor);
-        func_80196070();
+        Actor_Clear();
         return;
     }
     TASK_SET(actor);
@@ -29,7 +29,7 @@ MATCH void func_801F3F78(void) {
         g_Task->header.mode = 3;
         return;
     }
-    if (g_InputHeld == 0x3000 || g_InputHeld == 0x6000 || g_InputHeld == 0x2000) {
+    if (g_InputHeld == (PADLup | PADLright) || g_InputHeld == (PADLright | PADLdown) || g_InputHeld == PADLright) {
         p   = &D_80146866;
         val = *p;
         *p  = val + 1;
@@ -37,6 +37,6 @@ MATCH void func_801F3F78(void) {
             return;
         }
         *p = 0x80;
-        func_80196070();
+        Actor_Clear();
     }
 }
