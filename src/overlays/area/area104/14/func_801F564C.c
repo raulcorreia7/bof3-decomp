@@ -12,7 +12,7 @@ MATCH void func_801F564C(void) {
                 func_801F5418(0x40, 0);
                 flag  = 1;
                 value = 0x40;
-                value -= D_80145E9B;
+                value -= g_Game.members[0].param.unk_0B;
                 value &= 0xFF;
             } else {
                 if (g_FrameCount & 2) {
