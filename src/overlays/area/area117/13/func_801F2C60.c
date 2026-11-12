@@ -1,6 +1,8 @@
 #include "area117_13.h"
 
 MATCH void func_801F2C60(void) {
+    s16 screen_y;
+
     g_Task->screen_y = 0;
     if (!SYS_TestFlag(D_80144ED0, 0xC)) {
         g_AreaCellCodes[((AreaMapBundle*)MAP_BUNDLE_BASE)->width * 0x15 + 1] = 0x50;
