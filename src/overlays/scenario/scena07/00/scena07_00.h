@@ -46,6 +46,12 @@ void                 func_801F97E0(Scena07Burst* burst);
 
 void func_801F81D4(u8* row);
 
+/* The position setup func_801F7A30 and func_801F7D6C share: place the actor at the lead member's position, sample the ground there and advance the step. */
+#define SCENA07_PLACE_AT_LEAD()                                                             \
+    g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;                                    \
+    g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;                                    \
+    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16
+
 u8*       func_801F8394(void);
 void      func_801F83D0(u8* row);
 void      func_801F88B8(void* table);

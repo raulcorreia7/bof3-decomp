@@ -178,7 +178,18 @@ MATCH void func_801F79EC(void) {
     SYS_DISPATCH_TASK(D_801FDDB4, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801F7A30);
+MATCH void func_801F7A30(void) {
+    /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
+    FAKE_STACK_PADS(u8, 0x10);
+    Actor* work;
+
+    SCENA07_PLACE_AT_LEAD();
+    func_801F8358();
+    work         = g_Task;
+    work->unk_06 = 1;
+    work->vx     = 40;
+    g_Task->header.step += 1;
+}
 
 INCLUDE_ASM(func_801F7AB0);
 
@@ -203,9 +214,8 @@ MATCH void func_801F7D28(void) {
 MATCH void func_801F7D6C(void) {
     /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
     FAKE_STACK_PADS(u8, 0x10);
-    g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
-    g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+
+    SCENA07_PLACE_AT_LEAD();
     func_801FA01C();
     g_Task->vx = 120;
     g_Task->header.step += 1;
