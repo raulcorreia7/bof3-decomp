@@ -467,7 +467,7 @@ MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
         g_ActorSlots[slot].pos.x.fixed  = x;
         g_ActorSlots[slot].type         = 0x9E;
         g_ActorSlots[slot].pos.y.fixed  = y;
-        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + TO_COORD(0x200);
+        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
         g_ActorSlots[slot].unk_06       = unk_06;
         g_ActorSlots[slot].unk_07       = unk_07;
         g_ActorSlots[slot].link         = link;
