@@ -36,7 +36,7 @@ MATCH void func_801EEEA0(void) {
 
     selector = (u8*)&g_Battle.target_selector;
     if (!(Battle_SlotIsBlocked(*selector) & BYTE_MASK) && (func_800AED5C(1, *selector) & BYTE_MASK)) {
-        slot                               = Battle_AllocEffect(1, 0x48) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].unk_04       = 4;
         g_BattleEffects[slot].arg.unk_09   = 0x18;
@@ -124,7 +124,28 @@ MATCH void func_801EFDF8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFE80);
+MATCH void func_801EFE80(void) {
+    PartyMember* actor;
+    s32*         angle_cell;
+    u8           count;
+    u8           phase;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        phase               = g_Task->param.unk_0B;
+        angle_cell          = &D_1F800004;
+        *angle_cell         = phase << 7;
+        actor               = g_Battle.selected_actor;
+        g_Task->pos.x.fixed = actor->pos.x.fixed + ((rsin(*angle_cell) * 0x100) >> 9);
+        g_Task->pos.y.fixed = actor->pos.y.fixed + ((rcos(*angle_cell) * 0x100) >> 9);
+        g_Task->pos.z.fixed = actor->pos.z.fixed;
+        g_Task->unk_14      = RANDOM_MASK(7) + 0x80;
+        g_Task->unk_20      = -0xC;
+        g_Task->unk_09      = 16;
+        g_Task->header.step++;
+    }
+}
 
 INCLUDE_ASM(func_801EFF88);
 

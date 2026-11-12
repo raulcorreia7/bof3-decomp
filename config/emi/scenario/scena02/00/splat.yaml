@@ -21,7 +21,7 @@ segments:
       - [0x1A0, .rodata, D_801F6DA0]
       - [0x1A4, .rodata, D_801F6DA4]
       - [0x208, .rodata, D_801F6E08]
-      - [0x20C, .rodata, D_801F6E0C]
+      - [0x20C, .rodata, 5A4]
       - [0x220, .rodata, D_801F6E20]
       - [0x224, .rodata, D_801F6E24]
       - [0x240, .rodata, D_801F6E40]

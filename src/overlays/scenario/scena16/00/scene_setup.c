@@ -81,17 +81,17 @@ MATCH void func_801F6D90(void) {
     area_id = g_GameAreaId;
 
     switch (area_id) {
-        case 2:
+        case AREA_ID_DAUNA_MINE_WORKER:
             func_801F6F30();
             LOBU(g_UiPopupRequest) = 1u;
             break;
 
-        case 4:
+        case AREA_ID_DAUNA_MINE_INTRO:
             func_801F6EB0();
             LOBU(g_UiPopupRequest) = 1u;
             break;
 
-        case 0x1F:
+        case AREA_ID_TITLE_INTRO:
             func_801F6E30();
             LOBU(g_UiPopupRequest) = 0u;
             break;
@@ -140,7 +140,7 @@ MATCH void func_801F6F30(void) {
 
     if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
         g_ScriptVarsReq.word = 0u;
-        Area_AdvanceScroll(0x300u);
+        Area_AdvanceScroll(768u);
         func_801C601C(0u);
         /* The cell is advanced through an unsigned view and read back signed
          * for x: the two views of g_AreaCameraAngle.vx are not interchangeable. */
@@ -149,7 +149,7 @@ MATCH void func_801F6F30(void) {
         object_index  = Actor_FindFreeSlot();
         D_1F800000[0] = object_index;
 
-        if (object_index != 0xFFu) {
+        if (object_index != GAME_NONE) {
             g_ActorSlots[object_index].header.flags    = 1u;
             g_ActorSlots[D_1F800000[0]].type           = 0x13u;
             g_ActorSlots[D_1F800000[0]].camera_angle.x = ((s16)*base - 170);
@@ -232,7 +232,7 @@ MATCH void func_801F7230(void) {
         }
 
         case 1:
-            UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
+            UI_DrawText(122, 100, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0u;
                 g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
@@ -244,7 +244,7 @@ MATCH void func_801F7230(void) {
 
             *timer = (*timer + 1u);
             SsSetMVol((s16)*timer, (s16)*timer);
-            UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
+            UI_DrawText(122, 100, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
             if (*timer == 127u) {
                 UI_SetMode(UI_MODE_FADE_OUT);
                 *timer               = 0u;
@@ -255,7 +255,7 @@ MATCH void func_801F7230(void) {
 
         case 3:
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
+                UI_DrawText(122, 100, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
                 break;
             }
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
@@ -291,7 +291,7 @@ MATCH void func_801F7230(void) {
         }
 
         case 6:
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
+            UI_DrawText(80, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0x7Fu;
                 g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
@@ -301,7 +301,7 @@ MATCH void func_801F7230(void) {
         case 7: {
             u16* timer = &g_SceneState.timer_06;
 
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
+            UI_DrawText(80, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
             *timer = (*timer - 1u);
             if (*timer == 0u) {
                 UI_SetMode(UI_MODE_FADE_OUT);
@@ -314,7 +314,7 @@ MATCH void func_801F7230(void) {
             u8* next;
 
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
+                UI_DrawText(80, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
                 break;
             }
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(68), TO_COORD(8), FACING_DOWN);
@@ -347,7 +347,7 @@ MATCH void func_801F7230(void) {
             object_index  = Actor_FindFreeSlot();
             D_1F800000[0] = object_index;
 
-            if (object_index != 0xFFu) {
+            if (object_index != GAME_NONE) {
                 g_ActorSlots[object_index].header.flags    = 1u;
                 g_ActorSlots[D_1F800000[0]].type           = 0x13u;
                 g_ActorSlots[D_1F800000[0]].camera_angle.x = (g_AreaCameraAngle.vx + 384);
@@ -388,7 +388,7 @@ MATCH void func_801F7790(void) {
             break;
 
         case 1:
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
+            UI_DrawText(80, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0x7Fu;
                 g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
@@ -397,7 +397,7 @@ MATCH void func_801F7790(void) {
 
         case 2: {
             u16* timer;
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
+            UI_DrawText(80, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
             timer = &g_SceneState.timer_06;
             if (--*timer == 0u) {
                 UI_SetMode(UI_MODE_FADE_OUT);
@@ -408,7 +408,7 @@ MATCH void func_801F7790(void) {
 
         case 3:
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
+                UI_DrawText(80, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
                 break;
             }
 
@@ -418,7 +418,7 @@ MATCH void func_801F7790(void) {
             object_index    = Actor_FindFreeSlot();
             D_1F800000[0]   = object_index;
 
-            if (object_index != 0xFFu) {
+            if (object_index != GAME_NONE) {
                 g_ActorSlots[object_index].header.flags    = 1u;
                 g_ActorSlots[D_1F800000[0]].type           = 0x13u;
                 g_ActorSlots[D_1F800000[0]].camera_angle.x = (g_AreaCameraAngle.vx + 448);
@@ -440,7 +440,7 @@ MATCH void func_801F7790(void) {
 
         case 5: {
             u16* timer;
-            UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+            UI_DrawText(72, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
             timer = &g_SceneState.timer_06;
             if (++*timer == 32u) {
                 func_801F845C();
@@ -454,7 +454,7 @@ MATCH void func_801F7790(void) {
 
         case 6: {
             u16* timer;
-            UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+            UI_DrawText(72, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
             timer = &g_SceneState.timer_06;
             if (--*timer == 0u) {
                 g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
@@ -467,7 +467,7 @@ MATCH void func_801F7790(void) {
             u16* timer;
             timer = &g_SceneState.timer_06;
             if (--*timer != 0u) {
-                UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+                UI_DrawText(72, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
                 GFX_CopyPaletteCapped((u8)*timer);
                 break;
             }
@@ -573,7 +573,7 @@ MATCH void func_801F7CC4(void) {
             progress  = (u16*)D_1F800000;
             *progress = (0x130u - g_SceneState.timer_06);
             if (*progress < 191u) {
-                UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+                UI_DrawText(72, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
                 if (*progress < 32u) {
                     GFX_CopyPaletteCapped((*progress & BYTE_MASK));
                 } else if (*progress == 32u) {
@@ -605,7 +605,7 @@ MATCH void func_801F7CC4(void) {
             }
             object_index  = Actor_FindFreeSlot();
             D_1F800000[0] = object_index;
-            if (object_index != 0xFFu) {
+            if (object_index != GAME_NONE) {
                 g_ActorSlots[object_index].header.flags    = 1u;
                 g_ActorSlots[D_1F800000[0]].type           = 0x13u;
                 g_ActorSlots[D_1F800000[0]].camera_angle.x = -842;
@@ -623,7 +623,7 @@ MATCH void func_801F7CC4(void) {
             }
             object_index  = Actor_FindFreeSlot();
             D_1F800000[0] = object_index;
-            if (object_index != 0xFFu) {
+            if (object_index != GAME_NONE) {
                 g_ActorSlots[object_index].header.flags    = 1u;
                 g_ActorSlots[D_1F800000[0]].type           = 0x13u;
                 g_ActorSlots[D_1F800000[0]].camera_angle.x = -684;
@@ -669,7 +669,7 @@ MATCH void func_801F7CC4(void) {
             break;
 
         case 10:
-            UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
+            UI_DrawText(70, 100, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0x7Fu;
                 g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
@@ -679,7 +679,7 @@ MATCH void func_801F7CC4(void) {
         case 11: {
             u16* timer;
 
-            UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
+            UI_DrawText(70, 100, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             timer  = &g_SceneState.timer_06;
             *timer = (*timer - 1u);
             if (*timer != 0u) {
@@ -695,7 +695,7 @@ MATCH void func_801F7CC4(void) {
                 g_SceneState.state_04 = 1;
                 g_SceneState.step_05  = 0u;
             } else {
-                UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
+                UI_DrawText(70, 100, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             }
             break;
     }

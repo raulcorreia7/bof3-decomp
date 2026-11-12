@@ -33,16 +33,16 @@ MATCH void Char_RebuildStats(Character* record) {
         record->hp = cur;
     }
 
-    if (record->inoculations & 1) {
+    if (record->inoculations & 0x1) {
         Char_AddResistance(&record->stats.resistances[0], 2);
     }
-    if (record->inoculations & 2) {
+    if (record->inoculations & 0x2) {
         Char_AddResistance(&record->stats.resistances[1], 2);
     }
-    if (record->inoculations & 4) {
+    if (record->inoculations & 0x4) {
         Char_AddResistance(&record->stats.resistances[2], 2);
     }
-    if (record->inoculations & 8) {
+    if (record->inoculations & 0x8) {
         Char_AddResistance(&record->stats.resistances[3], 2);
     }
     if (record->inoculations & 0x10) {

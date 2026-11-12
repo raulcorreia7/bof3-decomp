@@ -12,6 +12,7 @@
 #define SCRATCH_ROW_STRIDE 0x18
 
 extern u8 D_801F44B8[];
+extern s8 D_801F5071;
 
 /* One of the sixteen effect rows at the area work window: a rising, fading
  * textured quad. */

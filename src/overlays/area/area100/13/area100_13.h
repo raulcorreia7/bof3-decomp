@@ -7,9 +7,10 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-extern u8 D_801F407C[];
-extern u8 D_801F4084[];
-extern u8 D_801F4F68[];
+extern u8  D_801F407C[];
+extern u8  D_801F4084[];
+extern u8  D_801F4F68[];
+extern u16 D_801F4F5C[];
 
 void func_801F2D60(void*);
 void func_801F31E8(Point3DL* pos, s32 height);

@@ -3,7 +3,7 @@
 MATCH void func_801B5BDC(u8 route_index) {
     u32 index;
 
-    if (!(g_GameRequestFlags & 1)) {
+    if (!(g_GameRequestFlags & 0x1)) {
         Actor_RequestScript(route_index);
         return;
     }

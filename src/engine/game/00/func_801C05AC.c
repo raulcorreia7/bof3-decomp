@@ -6,7 +6,7 @@ MATCH void func_801C05AC(void) {
 
     if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING)) {
         Party_ClearActiveBattlers();
-        if (g_GameRequestFlags & 8) {
+        if (g_GameRequestFlags & 0x8) {
             g_Game.members[0].header.mode = 9;
         } else {
             for (i = 0; i < g_PartySize; i++) {
@@ -15,7 +15,7 @@ MATCH void func_801C05AC(void) {
         }
         for (i = 0; i < g_PartySize; i++) {
             row = &g_Game.members[i];
-            if (!((g_GameFlags >> i) & 1)) {
+            if (!((g_GameFlags >> i) & 0x1)) {
                 g_GameState = row;
                 TASK_SET(row);
                 if (g_Game.members[i].slot == 0) {

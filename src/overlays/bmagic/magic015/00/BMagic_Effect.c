@@ -189,7 +189,24 @@ INCLUDE_ASM(func_801F0248);
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
-INCLUDE_ASM(func_801F0334);
+MATCH void func_801F0334(void) {
+    Callback handlers[7];
+
+    __builtin_memcpy(handlers, D_801EEC68, sizeof(handlers));
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+        if (g_Task->unk_09 != 0 && g_Task->param.unk_0B == 0 && g_Task->header.step < 5) {
+            if (g_Task->header.step < 4) {
+                func_801F1250();
+            } else {
+                func_801F131C();
+            }
+            func_801F13D4();
+            PopMatrix();
+        }
+    }
+}
 
 MATCH void func_801F045C(void) {
     PartyMember* task;
@@ -295,7 +312,7 @@ MATCH void func_801F0F2C(void) {
         if (timer < 20) {
             g_Task->unk_09 = timer + 1;
         }
-    } else if (g_FrameCount & 1) {
+    } else if (g_FrameCount & 0x1) {
         g_Task->unk_09 -= 1;
     }
     if ((g_Task->unk_14 < 0) && (g_Task->pos.z.fixed < g_Battle.selected_actor->pos.z.fixed)) {

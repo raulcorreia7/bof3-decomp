@@ -7,11 +7,11 @@ MATCH void func_801EF380(void) {
     handlers = D_801EEC1C;
     handlers.steps[D_801F17B4->header.step]();
     if ((D_801F17B4->header.flags & EFFECT_SPARKLE_IN_USE) && D_801F17B4->header.step != 0) {
-        func_801EFCDC();
+        Effect_DrawSparkleDisc();
         if (D_801F17B4->phase_0C & 3) {
             Effect_DrawSparkleRays(g_FrameCount >> 1, D_801F17B4->unk_06);
             radius = D_801F17B4->unk_06;
-            func_801EFA44((g_FrameCount >> 1) + 4, radius + (radius >> 1));
+            Effect_DrawSparkleWedges((g_FrameCount >> 1) + 4, radius + (radius >> 1));
         }
     }
 }

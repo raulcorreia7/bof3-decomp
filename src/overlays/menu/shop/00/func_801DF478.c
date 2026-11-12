@@ -22,11 +22,11 @@ MATCH s32 func_801DF478(void) {
         standby_id = D_801E6244[D_80148659];
     }
     record_off = g_CharSlot[field_id] * 0xA4;
-    if (((u8*)&g_Characters[0].unk_07)[record_off] & 2) {
+    if (((u8*)&g_Characters[0].unk_07)[record_off] & 0x2) {
         return field_id;
     }
     record_off = g_CharSlot[standby_id] * 0xA4;
-    if (((u8*)&g_Characters[0].unk_07)[record_off] & 2) {
+    if (((u8*)&g_Characters[0].unk_07)[record_off] & 0x2) {
         return standby_id;
     }
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));

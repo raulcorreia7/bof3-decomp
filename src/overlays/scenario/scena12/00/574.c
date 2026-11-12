@@ -93,7 +93,7 @@ MATCH void func_801F75EC(void) {
     u8    value;
 
     buffer = (char*)g_UiFormatBuffer;
-    Menu_DrawHeaderBar(0x8A, 0x1E, 0x2D, 0x14, 1u);
+    Menu_DrawHeaderBar(138, 30, 45, 20, 1u);
     value = D_801FD288.bytes[0];
     fmt   = D_801F6C04;
     TEXT_Format(buffer, fmt, value);
@@ -121,7 +121,25 @@ MATCH void func_801F7E14(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F7E34);
+MATCH void func_801F7E34(s32* pos_a, s32* pos_b, u8 shade) {
+    LINE_F2* prim;
+    DVECTOR  xy;
+    MATRIX   matrix;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    Area_SetCameraMatrix(&matrix);
+    prim = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(pos_a, &xy);
+    setXY0(prim, (u16)xy.vx, (u16)xy.vy);
+    Area_ProjectPoint(pos_b, &xy);
+    prim->x1 = (u16)xy.vx;
+    prim->y1 = (u16)xy.vy;
+    setRGB0(prim, shade, shade, 0);
+    GFX_AddPrim(1, sizeof(LINE_F2));
+}
 
 MATCH void func_801F7F28(void) {
     SYS_DISPATCH_BYTE(D_801FD1B8, D_80146872);
@@ -294,7 +312,7 @@ MATCH s32 func_801FCCBC(void) {
     D_80146865      = 0;
     D_80146866      = 0;
     D_80146867      = 0;
-    if (g_Game.members[0].chr.character_id != 5) {
+    if (g_Game.members[0].chr.character_id != CHAR_ID_MOMO) {
         D_80146875 = 0;
         D_80146874 = 5;
         return 1;

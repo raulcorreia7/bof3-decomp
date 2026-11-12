@@ -9,7 +9,7 @@ MATCH s32 func_801C2BEC(void) {
 
     table = D_80195FEC;
     if (flags & 0x400) {
-        index = 0xFF;
+        index = GAME_NONE;
     } else {
         if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x80, 0) & BYTE_MASK) {
             index = 0;

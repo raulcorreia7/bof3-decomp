@@ -3,8 +3,8 @@
 /* func_800A4744 */
 MATCH void Battle_FinishDraLoad(void) {
     if (EMI_IsReady() != 0) {
-        GFX_CopyPalette(0x1A);
-        GFX_CopyPalette(0x1B);
+        GFX_CopyPalette(26);
+        GFX_CopyPalette(27);
         g_BattleUIState = 0;
         g_GfxPalettePending++;
         /* Plain view: a volatile access pins the increment and blocks the
