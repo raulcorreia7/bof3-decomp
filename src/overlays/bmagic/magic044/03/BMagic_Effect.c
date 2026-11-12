@@ -30,12 +30,10 @@ MATCH void func_801EEC5C(void) {
         g_Task->param.unk_0B += 1;
     }
     i   = 1;
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW) + 1;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) + 1;
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
     for (; i < 16; i++) {
-        *(dst + AREA_PALETTE_UNIT / sizeof(u16)) = *(src + AREA_PALETTE_UNIT / sizeof(u16)) | 0x8000;
-        dst++;
-        src++;
+        dst[i + AREA_PALETTE_UNIT / sizeof(u16)] = src[i + AREA_PALETTE_UNIT / sizeof(u16)] | 0x8000;
     }
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + AREA_PALETTE_UNIT) = 0;
 
