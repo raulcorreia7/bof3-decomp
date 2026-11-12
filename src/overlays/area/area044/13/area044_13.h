@@ -10,6 +10,6 @@ extern u8 D_80147A61;
 extern u8 D_80147AF9;
 
 void func_801F2DF4(void);
-void func_801F318C(u8 direction, u8 actor_index);
+void func_801F318C(u8 facing, u8 actor_index);
 
 #endif

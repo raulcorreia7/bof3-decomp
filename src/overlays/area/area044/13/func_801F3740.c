@@ -14,7 +14,7 @@ MATCH void func_801F3740(void) {
         case 0:
             if (slot == 0) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x17) != 0) {
-                    func_801F318C(7, 1);
+                    func_801F318C(FACING_LEFT, 1);
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
                     g_ScriptVars[3]  = (g_ScriptVars[3] & 0x0F) | 0x20;
                     g_SceneEventStep = 1;
@@ -22,7 +22,7 @@ MATCH void func_801F3740(void) {
                 }
             } else if (slot == 2) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x17) == 0) {
-                    func_801F318C(3, 1);
+                    func_801F318C(FACING_RIGHT, 1);
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
                     g_ScriptVars[3] &= 0x0F;
                     g_SceneEventStep = 1;
@@ -43,13 +43,13 @@ MATCH void func_801F3740(void) {
 
             if (kind == 0) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x17) != 0) {
-                    func_801F318C(5, 0);
+                    func_801F318C(FACING_DOWN, 0);
                     g_ScriptVars[3] = (g_ScriptVars[3] & 0xF0) | 2;
                     goto advance;
                 }
             } else if (kind == 2) {
                 if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x17) == 0) {
-                    func_801F318C(1, 0);
+                    func_801F318C(FACING_UP, 0);
                     g_ScriptVars[3] &= 0xF0;
                     goto advance;
                 }
