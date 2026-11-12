@@ -465,9 +465,9 @@ size = 133316
 ```
 
 The row's load address must equal the declaring target's, be word aligned and fall in the game's RAM
-range. The entry cannot be the target's own entry, and a `disc_id` appears once. `tools/setup.py` builds
-the catalog and checks every row against the disc: the entry's SHA-256 must equal both the row's hash
-and the declaring target's payload, and its load address and size must equal the row's. A mismatch
+range. The entry cannot be the target's own entry, and a `disc_id` appears once. `tools/setup.py`
+checks every row against the extracted disc: the entry's SHA-256 must equal both the row's hash and
+the declaring target's payload, and its load address and size must equal the row's. A mismatch
 fails the setup. Program families: [runtime](https://raulcorreia7.github.io/bof3-wiki/data/programs.html#program-families).
 
 ## Settings
