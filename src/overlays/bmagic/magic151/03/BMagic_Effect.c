@@ -89,14 +89,14 @@ INCLUDE_ASM(func_801EFBAC);
 MATCH void func_801EFC68(void) {
     PartyMember* work;
     PartyMember* task;
-    u32          offset;
+    u32          slot;
 
     if (--g_Task->unk_09 == 0) {
-        offset                                  = (Battle_AllocEffect(1, 0x44) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-        work                                    = g_Task;
-        FIELD(u8, D_801EC331, offset)           = 0;
-        task                                    = g_Task;
-        FIELD(PartyMember*, D_801EC3A4, offset) = work;
+        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        task                               = g_Task;
+        g_BattleEffects[slot].target.party = work;
         task->param.unk_0B += 1;
         SND_QueueSelectionFx(0x103);
         g_Task->unk_09 = 20;
