@@ -27,7 +27,22 @@ MATCH void func_801EEDCC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE24);
+MATCH void func_801EEE24(void) {
+    u16* state;
+    u8   timer;
+
+    state = &D_801EFAAC;
+    *state += 0x40;
+    D_801EFAAE += 0x60;
+    func_801EF254();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->unk_09 = 120;
+        g_Task->header.mode += 1;
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
+    }
+}
 
 MATCH void func_801EEEC4(void) {
     u8 count;
