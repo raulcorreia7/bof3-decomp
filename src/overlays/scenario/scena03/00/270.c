@@ -238,9 +238,33 @@ MATCH void func_801F7F84(void) {
 
 INCLUDE_ASM(func_801F7FFC);
 
-INCLUDE_ASM(func_801F8170);
+MATCH void func_801F8170(s32* vertices) {
+    MATRIX camera;
 
-INCLUDE_ASM(func_801F8200);
+    GFX_AddDitheredDrawMode(1u, GetTPage(0, 1, 0x3C0, 0));
+    Area_SetCameraMatrix(&camera);
+    func_801F8200(vertices, 0, 1, 2);
+    func_801F8200(vertices, 0, 3, 2);
+}
+
+MATCH void func_801F8200(s32* vertices, s32 v0, s32 v1, s32 v2) {
+    POLY_G3* primitive;
+    s32*     point_0;
+    s32*     point_1;
+    s32*     point_2;
+
+    point_0   = (s32*)((u8*)vertices + (((u8)v0 << 4) + 0xC));
+    point_1   = (s32*)((u8*)vertices + (((u8)v1 << 4) + 0xC));
+    point_2   = (s32*)((u8*)vertices + (((u8)v2 << 4) + 0xC));
+    primitive = GFX_BeginPolyG3(1);
+    Area_ProjectPoint(point_0, (DVECTOR*)&primitive->x0);
+    Area_ProjectPoint(point_1, (DVECTOR*)&primitive->x1);
+    Area_ProjectPoint(point_2, (DVECTOR*)&primitive->x2);
+    setRGB0(primitive, 0x40, 0x40, 0x40);
+    setRGB1(primitive, 0, 0, 0);
+    setRGB2(primitive, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1u, sizeof(POLY_G3));
+}
 
 MATCH void func_801F82E4(void) {
     SYS_DISPATCH_TASK(D_801FCF94, 1, g_Task);

@@ -94,7 +94,8 @@ extern Callback D_801FD038[];
 
 s8 func_801FCD1C(s32 x, s32 y);
 
-void func_801F8170(s32 arg0);
+void func_801F8170(s32* vertices);
+void func_801F8200(s32* vertices, s32 v0, s32 v1, s32 v2);
 
 void func_801F88FC(Scena03Line* line);
 
