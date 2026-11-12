@@ -22,7 +22,7 @@ extern Callback D_801F0AC4[4];
 
 void Effect_DrawBolt(void);
 void Effect_SetActorMatrixRolled(void);
-void func_801EF5C4(s32 arg0, s32 arg1, s16 arg2);
+void func_801EF5C4(s32 band_height, s32 radius, s16 jitter_mask);
 void func_801F083C(void);
 
 #endif
