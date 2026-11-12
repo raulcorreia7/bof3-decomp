@@ -47,9 +47,9 @@ MATCH void func_801F3198(void) {
         case 12:
             if (g_ScriptVars[3] == 0x28) {
                 if (g_SceneEventSelection == 0) {
-                    Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(0x33), TO_COORD(0x47), AREA_ENTRY_MAP_LOADING | FACING_UP);
+                    Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(51), TO_COORD(71), AREA_ENTRY_MAP_LOADING | FACING_UP);
                 } else {
-                    Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(0x8), TO_COORD(0x22), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
+                    Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(8), TO_COORD(34), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
                 }
                 g_SceneEventStep = 0xD;
             }
