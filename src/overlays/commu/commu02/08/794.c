@@ -710,12 +710,12 @@ MATCH void func_801D68AC(void) {
     if (D_801DB0DC != 0) {
         func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
     } else {
-        func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+        func_801D830C(0x44 - (D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
     }
-    func_801D97C8(D_801DAAA8, ((u8)D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
-    func_801D9B80(0x12, ((u8)D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
-    func_801D94D0(D_801DAAA8, 0x18, ((u8)D_801DB0C4 * 0x1E) + 0x67, D_801DB0D4, D_801DB0D8);
-    if ((u8)D_801DB0C4 == 4) {
+    func_801D97C8(D_801DAAA8, (D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
+    func_801D9B80(0x12, (D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, (D_801DB0C4 * 0x1E) + 0x67, D_801DB0D4, D_801DB0D8);
+    if (D_801DB0C4 == 4) {
         if (D_801DB0DC != 0) {
             if (D_801DB080[0] == 0) {
                 for (i = 0; i < 5; i++) {
