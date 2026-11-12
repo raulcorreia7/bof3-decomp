@@ -8,6 +8,8 @@
 #include "area/spad.h"
 #include "battle/records.h"
 
+#include "shared/AreaSpark.h"
+
 extern u32      D_801F6C00;
 /* D_801FE57C */
 extern Callback g_SceneEntityDispatch[];

@@ -7,6 +7,8 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+#include "shared/AreaSpark.h"
+
 extern SVECTOR  D_1F800014[];
 extern u8       D_801F5734[];
 extern Callback D_801F576C[];
@@ -21,19 +23,6 @@ void func_801F5428(s32 arg0);
 extern Callback D_801F57D0[];
 
 extern u8 D_80145EED[3];
-
-/* One of the 128 falling sparks at AREA_WORK. */
-typedef struct AreaSpark {
-    u8       active;
-    u8       pad_01;
-    s16      fall_speed;
-    Point3DL pos;
-    s32      unk_10;
-} AreaSpark;
-
-ASSERT_SIZE(AreaSpark, 0x14);
-
-#define AREA_SPARK_COUNT 128
 
 void func_801F387C(AreaSpark* spark);
 
