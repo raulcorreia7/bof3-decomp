@@ -8,6 +8,7 @@
 void func_801EEDB8(void);
 
 extern Callback D_801EF774[];
+extern u8       D_801EF790[];
 void            func_801EF250(void);
 
 #endif
