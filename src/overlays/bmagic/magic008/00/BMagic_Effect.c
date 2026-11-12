@@ -17,10 +17,8 @@ MATCH void func_801EED5C(void) {
     u32           index;
     u8            active;
 
-    g_Task->facing       = g_BattleEffectBattler->facing;
-    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
-    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
-    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
@@ -103,10 +101,8 @@ MATCH void func_801EF7C8(void) {
     u32           index;
     u8            active;
 
-    g_Task->facing       = g_BattleEffectBattler->facing;
-    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
-    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
-    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
