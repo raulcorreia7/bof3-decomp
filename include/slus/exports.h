@@ -212,8 +212,6 @@ extern u8             D_8014866C[];
 extern u8             D_80148A50[];
 /* D_80148FC0 */
 extern s8             g_SelectionFxVoices[SND_SLOT_COUNT];
-/* D_80148FF8 */
-extern u8             g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 /* D_801490A1 */
 extern u8             g_UiWindowStep;
 /* D_801490D8 */
