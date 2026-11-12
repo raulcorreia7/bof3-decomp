@@ -10,6 +10,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* Raises the red, green and blue offsets of the palette fade row the byte at +0x0B names by one per
  * frame and advances header.mode (byte 0x01) at sixteen. */
+/* func_801EED0C */
 MATCH void Effect_BrightenPalette(void) {
     g_PaletteFades[MAGIC010_TASK->timer].offset.red++;
     g_PaletteFades[MAGIC010_TASK->timer].offset.green++;
