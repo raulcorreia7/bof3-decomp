@@ -30,7 +30,7 @@ MATCH void PlChar_RunGarrFieldTask(void) {
 
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 
-INCLUDE_ASM(func_801CEAE0);
+#include "overlays/plchar/Plchar_ProbeFacingFollower.h"
 
 MATCH void func_801CEBFC(void) {
     SYS_DISPATCH_TASK(D_801CFCC8, 2, g_Task);
