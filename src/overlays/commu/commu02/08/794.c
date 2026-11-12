@@ -219,7 +219,18 @@ MATCH void func_801D2E10(void) {
     D_801F294C++;
 }
 
-INCLUDE_ASM(func_801D2E60);
+MATCH void func_801D2E60(s16 x, s16 y) {
+    LINE_F2* primitive;
+
+    primitive = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(primitive);
+    primitive->x0 = x;
+    primitive->x1 = x + 8;
+    primitive->y0 = y;
+    primitive->y1 = y;
+    setRGB0(primitive, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(LINE_F2));
+}
 
 INCLUDE_ASM(func_801D2EDC);
 
