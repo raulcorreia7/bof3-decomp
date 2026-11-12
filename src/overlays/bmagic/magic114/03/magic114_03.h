@@ -5,11 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* Column views of g_BattleEffects. */
-extern u8 D_801EC331[];
-extern u8 D_801EC338[];
-extern u8 D_801EC3A4[];
-
 extern Callback D_801F1230[];
 
 void func_801F04D4(s32 arg0);
