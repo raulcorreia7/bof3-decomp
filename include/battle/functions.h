@@ -70,7 +70,7 @@ u8          func_801DDF50(u16 entry_id, u32 table_kind);
 void        func_801DDFEC(u32 battler_index);
 s16         func_801DE0AC(s32 factor_a, s32 factor_b);
 void        Battle_SetSlotPending(u32 slot);
-void        func_801DE560(u8 event_kind, u8 arg1, u8 group, u8 timer, u8* payload);
+void        func_801DE560(u8 event_kind, u8 event_value, u8 group, u8 timer, u8* payload);
 /* func_801E52F0 */
 void        Battle_PlayEnemyCue(u16 cue_id);
 /* func_801E590C */

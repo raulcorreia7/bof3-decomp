@@ -770,7 +770,7 @@ u8                 func_801DDE7C(u32 counter_index, u32 packed_value);
 void               func_801DE1D4(void);
 /* func_801DE43C */
 void               Battle_UpdateEvents(void);
-void               func_801DE60C(u32 slot, u8 event_type, u8 arg2, u8 group, u8 timer, u8* payload);
+void               func_801DE60C(u32 slot, u8 event_type, u8 event_value, u8 group, u8 timer, u8* payload);
 void               func_801DE690(void);
 extern void        func_801DE698(void);
 extern void        func_801DE754(void);

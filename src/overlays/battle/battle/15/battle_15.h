@@ -68,7 +68,7 @@
         return result;                                                                                    \
     } while (0)
 
-/* The party formation g_PartyFormation (0x80144F58): Battle_ApplyFormationStats applies its stat changes. */
+/* The party formation g_PartyFormation: Battle_ApplyFormationStats applies its stat changes. */
 typedef enum PartyFormation {
     PARTY_FORMATION_NORMAL  = 0x00,
     PARTY_FORMATION_ATTACK  = 0x01,
