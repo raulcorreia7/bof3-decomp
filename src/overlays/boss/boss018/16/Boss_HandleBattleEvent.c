@@ -1,3 +1,8 @@
 #include "boss018_16.h"
 
-INCLUDE_ASM(Boss_HandleBattleEvent);
+#include "Boss_TallyPartDefeatsBody.h"
+
+MATCH u8 Boss_HandleBattleEvent(u32 mode) {
+    BOSS_TALLY_PART_DEFEATS_BODY();
+    return 0;
+}

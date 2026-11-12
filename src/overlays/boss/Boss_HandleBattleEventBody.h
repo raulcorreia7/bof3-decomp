@@ -1,8 +1,7 @@
 /* Handles a boss's battle events: arms the restart flag on a pending reprisal, resets the two whelp
  * HP cells when Whelp Breath starts, queues Whelp Breath after the restart, clears or restores the
  * lead member's dragon-form flag, and clears it while the lead member is down. */
-/* Boss_HandleBattleEvent (boss004 0x800C1C44), Boss_HandleBattleEvent2 (boss004 0x800C1FE8),
- * Boss_HandleBattleEvent3 (boss004 0x800C2384) */
+/* Boss_HandleBattleEvent (boss004), Boss_HandleBattleEvent2 (boss004), Boss_HandleBattleEvent3 (boss004) */
 #define BOSS_HANDLE_BATTLE_EVENT_BODY()                                                                \
     switch ((u8)mode) {                                                                                \
         case BOSS_EVENT_ACTION_START:                                                                  \
