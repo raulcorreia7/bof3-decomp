@@ -49,7 +49,7 @@ MATCH void func_801EF2FC(void) {
 MATCH void func_801EF340(void) {
     SYS_DISPATCH_BYTE(D_801EF9C4, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_801EF604();
+        Effect_DrawTexturedQuad();
     }
 }
 
@@ -74,7 +74,7 @@ MATCH void func_801EF58C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF604);
+#include "overlays/bmagic/Effect_DrawTexturedQuad.h"
 
 /* func_801EF900 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"
