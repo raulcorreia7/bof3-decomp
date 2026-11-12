@@ -13,8 +13,8 @@ MATCH void func_801F4414(void) {
 
     g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
     leader = &g_Game.members[0].chr.character_id;
-    /* FAKE: keeps the leader id's address in one register; retail reads the facing at -0x71, and the
-     * direct member loads fold to absolute addresses. */
+    /* FAKE: the leader id's address must stay in a0 for the facing read at -0x71(a0); a plain
+     * member load folds to an absolute lui/lbu and grows the body by 4 bytes (0x508 against 0x504). */
     FAKE_OPAQUE(leader);
     if (*leader != CHAR_ID_GARR) {
         return;
