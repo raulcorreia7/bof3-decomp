@@ -487,7 +487,7 @@ MATCH void func_801FC094(void) {
     u8 i;
     u8 slot_index;
 
-    for (i = 0; i < 12; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_801FDE40); i++) {
         if (D_801FDE40[i].timer != g_SceneState.timer_06) {
             continue;
         }
