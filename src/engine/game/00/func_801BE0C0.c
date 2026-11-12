@@ -2,7 +2,7 @@
 
 MATCH s8 func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode) {
     s16 v;
-    FAKE_REG(s32, a1v, "a1");
+    s32 a1v;
     /* FAKE: loop bound in the retail register. */
     FAKE_REG(s32, limit, "v0");
     /* FAKE: unused frame, 8 bytes. */
