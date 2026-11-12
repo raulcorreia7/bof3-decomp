@@ -34,7 +34,7 @@ MATCH void func_801EF3E0(void) {
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         battler = &g_Game.members[slot];
     } else {
-        battler = (PartyMember*)((EnemyBattler*)g_BattleEnemies + slot);
+        battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
     if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK) && battler->header.mode == 6) {
         return;
