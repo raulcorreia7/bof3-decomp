@@ -40,11 +40,17 @@ MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801D0A78, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801CF37C);
+/* func_801CF37C */
+#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
+
+MATCH void PlChar_RunGarrFieldTask(void) {
+    PLCHAR_RUN_GARR_FIELD_TASK(func_801CF808);
+}
 
 #include "overlays/plchar/func_801CF564.h"
 
-INCLUDE_ASM(func_801CF5D4);
+/* func_801CF5D4 */
+#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
 
 #include "overlays/plchar/Plchar_FollowerInReach.h"
 
