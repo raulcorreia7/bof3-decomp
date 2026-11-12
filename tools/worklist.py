@@ -49,6 +49,13 @@ class Row:
     hint: str
 
 
+def _score(score: object) -> str:
+    """A percent number, or a string that states its own unit."""
+    if score is None:
+        return ""
+    return f"{score:g}%" if isinstance(score, (int, float)) else str(score)
+
+
 def attempts(path: Path = ROOT / "config/attempts.jsonl") -> dict[str, str]:
     """Return the recorded attempts for each function."""
     result: dict[str, list[str]] = {}
@@ -56,14 +63,9 @@ def attempts(path: Path = ROOT / "config/attempts.jsonl") -> dict[str, str]:
         if not line.strip():
             continue
         row = json.loads(line)
-        score = row["score"]
         note = "; ".join(
             part
-            for part in (
-                row["tried"],
-                row["first_diff"],
-                f"{score:g}%" if score is not None else "",
-            )
+            for part in (row["tried"], row["first_diff"], _score(row["score"]))
             if part
         )
         result.setdefault(row["function"], []).append(note or "attempt recorded")

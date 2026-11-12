@@ -9,7 +9,7 @@ MATCH bool func_801B544C(void) {
     if (g_Characters[index].status & STATUS_CONFUSED) {
         return false;
     }
-    if (g_GameRequestFlags & 1) {
+    if (g_GameRequestFlags & 0x1) {
         return false;
     }
     g_Game.current->u.field.step_12A.u8_value++;

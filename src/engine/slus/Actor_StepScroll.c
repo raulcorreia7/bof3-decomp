@@ -17,7 +17,7 @@ MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_de
         Area_AdvanceScroll(limit);
         /* FAKE: the single-pass block homes flags in s1 and entry in s2. */
         FAKE_ORDER_LOCK_BEGIN
-            if (flags & 2) {
+            if (flags & 0x2) {
                 g_Task->unk_04 = 0;
             }
         FAKE_ORDER_LOCK_END;

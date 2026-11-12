@@ -3,6 +3,8 @@
 
 /* The bmagic/magic056/03 overlay. Only this image includes the file. */
 
+#define BATTLE_PARTY_CELL_RECORD
+
 #include "overlays/bmagic/bmagic.h"
 
 #define MAGIC056_STEP_COUNT 9

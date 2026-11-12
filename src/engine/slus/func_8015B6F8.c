@@ -4,7 +4,7 @@
  */
 MATCH s32 func_8015B6F8(u8** cursor) {
     if (**cursor != 1) {
-        return (g_SceneState.flags_01 & 1) ^ 1;
+        return (g_SceneState.flags_01 & 0x1) ^ 0x1;
     }
-    return g_SceneState.flags_01 & 1;
+    return g_SceneState.flags_01 & 0x1;
 }

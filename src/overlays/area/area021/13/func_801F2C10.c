@@ -9,7 +9,7 @@ MATCH void func_801F2C10(void) {
         if (g_Zenny < 20) {
             request = 0x17;
         } else {
-            Party_SpendZenny(0x14, 0);
+            Party_SpendZenny(20, 0);
             request = 0x11;
         }
     } else {

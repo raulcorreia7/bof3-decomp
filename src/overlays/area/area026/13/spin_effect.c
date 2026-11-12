@@ -351,43 +351,43 @@ MATCH void Message_SelectAnswerValue(void) {
 }
 
 MATCH void func_801F309C(void) {
-    SYS_SetFlag(g_SceneFlags, 0x29u);
-    SYS_ClearFlag(g_SceneFlags, 0x28u);
+    SYS_SetFlag(g_SceneFlags, 41u);
+    SYS_ClearFlag(g_SceneFlags, 40u);
 }
 
 MATCH void func_801F30D4(void) {
-    SYS_ClearFlag(g_SceneFlags, 0x29u);
+    SYS_ClearFlag(g_SceneFlags, 41u);
 }
 
 MATCH void func_801F30FC(void) {
-    SYS_SetFlag(g_SceneFlags, 0x28u);
+    SYS_SetFlag(g_SceneFlags, 40u);
 }
 
 MATCH void func_801F3124(void) {
-    SYS_ClearFlag(g_SceneFlags, 0x28u);
+    SYS_ClearFlag(g_SceneFlags, 40u);
 }
 
 MATCH void func_801F314C(void) {
-    SYS_SetFlag(g_SceneFlags, 0x2Bu);
+    SYS_SetFlag(g_SceneFlags, 43u);
 }
 
 MATCH void func_801F3174(void) {
-    SYS_ClearFlag(g_SceneFlags, 0x2Bu);
+    SYS_ClearFlag(g_SceneFlags, 43u);
 }
 
 MATCH void func_801F319C(void) {
-    SYS_SetFlag(g_SceneFlags, 0x2Cu);
+    SYS_SetFlag(g_SceneFlags, 44u);
 }
 
 MATCH void func_801F31C4(void) {
-    SYS_ClearFlag(g_SceneFlags, 0x2Cu);
+    SYS_ClearFlag(g_SceneFlags, 44u);
 }
 
 /* func_801F31EC */
 MATCH void Scene_GiveEgg(void) {
     Item_Add(ITEM_CAT_VITAL, VITAL_ITEM_EGG, 1, 0);
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-    SYS_SetFlag(g_SceneFlags, 0x33u);
+    SYS_SetFlag(g_SceneFlags, 51u);
 }
 
 #include "overlays/area/Area_SubCameraOffsetY20.h"
@@ -422,7 +422,7 @@ MATCH void func_801F32B8(void) {
 }
 
 MATCH void func_801F3338(void) {
-    SYS_SetFlag(g_SceneFlags, 0x2Eu);
+    SYS_SetFlag(g_SceneFlags, 46u);
 }
 
 /* Original sets no mode argument (etc/game/00 revision ignores it); declared

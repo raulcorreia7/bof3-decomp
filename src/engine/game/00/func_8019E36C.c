@@ -15,7 +15,7 @@ MATCH void func_8019E36C(void) {
         Actor_Clear();
         return;
     }
-    if ((dist + 0x100 < limit) || (g_FrameCount & 1)) {
+    if ((dist + 256 < limit) || (g_FrameCount & 0x1)) {
         Area_SetDrawMode();
     }
 }

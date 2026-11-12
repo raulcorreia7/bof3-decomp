@@ -2,7 +2,7 @@
 #include "area/spad.h"
 
 MATCH void func_801F2D04(void) {
-    if (SYS_TestFlag(g_SceneEventFlags, 0x20) != 0) {
+    if (SYS_TestFlag(g_SceneEventFlags, 32) != 0) {
         g_AreaSceneMode      = 1;
         g_Task->pos.z.fixed  = -0x100;
         g_Task->param.unk_0B = 0x80;

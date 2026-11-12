@@ -46,20 +46,20 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             }
             break;
         case 5:
-            if (event->selector & 2) {
+            if (event->selector & 0x2) {
                 work->drops[0].rate = event->value;
             }
-            if (event->selector & 1) {
+            if (event->selector & 0x1) {
                 work->drops[1].rate = event->value;
             }
             break;
         case 6:
-            if (event->selector & 2) {
+            if (event->selector & 0x2) {
                 factor    = event->value * 100;
                 scaled    = work->exp * factor / 1000;
                 work->exp = (u32)scaled > 0xFFFF ? 0xFFFF : scaled;
             }
-            if (event->selector & 1) {
+            if (event->selector & 0x1) {
                 factor      = event->value * 100;
                 scaled      = work->zenny * factor / 1000;
                 work->zenny = (u32)scaled > 0xFFFF ? 0xFFFF : scaled;

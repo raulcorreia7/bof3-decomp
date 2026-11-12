@@ -2,10 +2,10 @@
 
 MATCH void func_800B0F30(void) {
     func_800B0F9C();
-    if ((s16)g_MenuCurrentPanel->pos.x < 0x5B) {
+    if ((s16)g_MenuCurrentPanel->pos.x < 91) {
         g_MenuCurrentPanel->pos.x = g_MenuCurrentPanel->pos.x + 32;
     }
-    if ((s16)g_MenuCurrentPanel->pos.x >= 0x5C) {
+    if ((s16)g_MenuCurrentPanel->pos.x >= 92) {
         g_MenuCurrentPanel->pos.x = 91;
     }
 }

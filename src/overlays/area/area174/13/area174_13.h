@@ -27,9 +27,8 @@ extern s8       D_801F6754[];
 
 extern void Actor_BeginScript(u8 raw_selector, u16 raw_code);
 u8*         func_801F2E88(void);
-/* func_801F2EC4 */
 extern u8   Area_UpdateShots(void);
-extern void func_801F4A5C(u8* pairs, u8 flag);
+extern void func_801F4A5C(u8* pairs, s32 facing);
 extern void func_801F4B0C(void);
 
 extern void func_801F4C68(void);

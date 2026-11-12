@@ -33,7 +33,7 @@ MATCH void func_800AE574(void) {
     FAKE_BARRIER();
     base     = FIELD(u16, third, 0x30);
     third[9] = 0;
-    height -= 0x18;
+    height -= 24;
     FIELD(u16, third, 0x2E) = height;
     flag                    = (PartyMember*)g_Task;
     base -= next;

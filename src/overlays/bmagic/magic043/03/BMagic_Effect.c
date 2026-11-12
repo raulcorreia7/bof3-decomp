@@ -4,7 +4,27 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC18);
+MATCH void func_801EEC18(void) {
+    Magic043Steps handlers;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
+    u8            i;
+
+    handlers = D_801EEC04;
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
+            BMagic_DispatchEffectMode();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED30);
 
@@ -23,7 +43,19 @@ MATCH void func_801EEEF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF98);
+MATCH void func_801EEF98(void) {
+    u8 count;
+
+    g_PaletteFades[g_Task->timer].offset.red += 2;
+    g_PaletteFades[g_Task->timer].offset.green += 2;
+    g_PaletteFades[g_Task->timer].offset.blue += 2;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        g_Task->unk_09 = 4;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF0B4);
 
@@ -41,14 +73,35 @@ MATCH void func_801EF3A4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF42C);
+MATCH void func_801EF42C(void) {
+    u8 count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0) {
+        g_Task->facing = g_BattleEffectBattler->facing;
+        g_Task->unk_0C = 0x20000;
+        g_Task->unk_10 = 0;
+        func_801DD350(g_Task);
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(256);
+        g_Task->unk_0C      = -0x1000;
+        g_Task->unk_10      = 0;
+        func_801DD350(g_Task);
+        g_Task->unk_14 = ratan2(g_BattleEffectBattler->pos.x.fixed - g_AreaScrollTargetX, g_BattleEffectBattler->pos.y.fixed - g_AreaScrollTargetY);
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF55C(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;
     g_Task->pos.y.fixed += g_Task->unk_10;
     g_Task->unk_09 += 1;
     g_Task->timer += 2;
-    if (g_Task->timer == 0x10) {
+    if (g_Task->timer == 16) {
         g_Task->header.step += 1;
     }
 }
@@ -85,7 +138,7 @@ MATCH void func_801EF72C(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0x400;
+    rot.vx = 1024;
     rot.vy = D_801EFC9C[g_Task->facing];
     rot.vz = 0;
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);

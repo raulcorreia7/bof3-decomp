@@ -10,7 +10,36 @@ MATCH void func_801EEC04(void) {
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    u32          i;
+    u8           slot;
+    PartyMember* task;
+    PartyMember* work;
+    u16*         src;
+    u16*         dst;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    task           = g_Task;
+    WorldPos_Copy(&task->pos, &g_BattleEffectBattler->pos);
+    task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    for (i = 0; i < 2; i++) {
+        slot                               = Battle_AllocEffect(1, 24);
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].unk_04       = i;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+    }
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 256; i++) {
+        *dst++ = *src++;
+    }
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
