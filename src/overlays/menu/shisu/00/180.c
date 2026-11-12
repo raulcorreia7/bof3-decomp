@@ -180,7 +180,7 @@ MATCH void func_801D11F4(void) {
     }
 
     g_MenuPanelTasks[0].active = 1;
-    D_80148334                 = D_8014837C + g_MenuStatusItems.unk_09 * 0x30;
+    D_80148334                 = D_8014837C + g_MenuStatusItems.unk_09 * 48;
     D_80148336                 = D_8014837E + 4;
     if (g_MenuStatusItems.unk_08 != 0) {
         D_801DA0FC = D_801DA084 + D_801DA088 * 0xA00;
