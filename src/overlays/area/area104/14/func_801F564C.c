@@ -1,9 +1,6 @@
 #include "area104_14.h"
 #include "scenario/state.h"
 
-extern u8 D_80146871;
-extern u8 D_80145E9B;
-
 MATCH void func_801F564C(void) {
     s32 value;
     s32 flag;
