@@ -32,6 +32,9 @@ extern Callback D_800C2D60[];
 extern Callback D_800C2D94[];
 extern Callback D_800C2DAC[];
 extern Callback D_800C2DB8[];
+extern u8       D_800C2DC4[];
+extern u8       D_800C2DC5[];
+extern u32      D_800C2DC8[];
 extern u16      D_801EB6C4;
 extern u16      D_801EB6C6;
 extern u16      D_801EB7DC;
@@ -46,7 +49,7 @@ void func_800C197C(s32 mode);
 void func_800C1C6C(s32 mode);
 void func_800C2074(s32 mode);
 
-void func_800C29AC(s32 arg0, s32 arg1);
+void func_800C29AC(s32 base, s32 pattern);
 
 void func_800C2A40(void);
 
