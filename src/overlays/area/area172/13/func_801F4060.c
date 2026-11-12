@@ -6,7 +6,7 @@ MATCH void func_801F4060(s16 level) {
 
     if (level < 0) {
         shade = 0;
-    } else if (level >= 0x100) {
+    } else if (level >= 256) {
         shade = 0xFF;
     } else {
         shade = level;
