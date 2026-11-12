@@ -8,11 +8,11 @@
 MATCH void Fishing_DrawHud(s16 panel_x, s16 panel_y) {
     s8 value;
 
-    func_801E0C80(5, 3);
-    func_801E0DCC(0xD, 3, (panel_x + 24), (panel_y + 8));
-    func_801E0C80(0, 3);
-    func_801E0DCC(0xE, 3, panel_x, panel_y);
-    func_801E0DCC(0xF, 3, (panel_x + 256), panel_y);
+    Fishing_SetDrawMode(5, 3);
+    Fishing_DrawSprite(0xD, 3, (panel_x + 24), (panel_y + 8));
+    Fishing_SetDrawMode(0, 3);
+    Fishing_DrawSprite(0xE, 3, panel_x, panel_y);
+    Fishing_DrawSprite(0xF, 3, (panel_x + 256), panel_y);
 
     if (g_ActorSlots[0].header.mode == 0) {
         value = 0;

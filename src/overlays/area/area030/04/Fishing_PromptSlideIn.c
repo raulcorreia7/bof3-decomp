@@ -15,5 +15,5 @@ MATCH void Fishing_PromptSlideIn(void) {
         FISHING_STATE->handler_index_01 = (FISHING_STATE->handler_index_01 + 1);
     }
 
-    func_801D9534(MENU_HEADER_X, FISHING_STATE->origin_y_30, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, FISHING_STATE->origin_y_30, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 }

@@ -3,7 +3,8 @@
 /* Draws a 0x28-byte textured quad at (x, y): the graph type selects
  * the tpage bits and the style-selected texture entry fills the UV and size
  * fields of the primitive. */
-MATCH void func_801D799C(s16 x, s16 y, u8 height, u8 style) {
+/* func_801D799C */
+MATCH void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style) {
     POLY_FT4* prim;
     u16       tpage;
     u16       x1;
