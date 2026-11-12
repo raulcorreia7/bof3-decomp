@@ -54,7 +54,7 @@ MATCH void func_801BF8E0(void) {
             }
         }
     }
-    if (!(g_Battle.outcome.options & 2)) {
+    if (!(g_Battle.outcome.options & 0x2)) {
         row              = index * BATTLE_PARTY_STRIDE;
         px               = &g_AreaScrollTargetX;
         dx               = *px;

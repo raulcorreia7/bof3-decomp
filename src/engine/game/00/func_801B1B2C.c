@@ -23,7 +23,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
     if (distance < 0) {
         distance = -distance;
     }
-    if (distance < 0x41) {
+    if (distance < 65) {
         SP_REF(s32, 0x8) = px;
         SP_REF(s32, 0xC) = py;
         SP_REF(s16, 0x2) = Area_ReadHeight(px, py);

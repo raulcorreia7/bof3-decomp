@@ -14,7 +14,7 @@ MATCH s32 GFX_AllocPaletteFade(void* target, s32 red, s32 green, s32 blue, s32 f
     for (slot = 0; slot < PALETTE_FADE_COUNT; slot++) {
         if ((g_PaletteFades[slot].flags & PALETTE_FADE_ACTIVE) == 0) {
             g_PaletteFades[slot].flags = value;
-            if ((PALETTE_OWNER(target)->palette_kind == PALETTE_KIND_CELL) && ((PALETTE_OWNER(target)->flags & 4) == 0)) {
+            if ((PALETTE_OWNER(target)->palette_kind == PALETTE_KIND_CELL) && ((PALETTE_OWNER(target)->flags & 0x4) == 0)) {
                 g_PaletteFades[slot].flags = flagged;
             }
             result                            = slot & BYTE_MASK;

@@ -112,7 +112,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             }
             state->index_0A += 2;
             work  = g_Task;
-            value = work->direction_08 & 7;
+            value = work->direction_08 & 0x7;
             break;
         }
         case ACTOR_SCRIPT_MOTION_SET_Z_POSITION: {

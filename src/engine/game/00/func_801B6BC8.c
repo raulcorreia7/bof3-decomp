@@ -14,7 +14,7 @@ MATCH void func_801B6BC8(void) {
     sel = func_801A8D38(&g_GameState->u.field.flags_118, g_GameState->u.field.index_124);
     if (sel != GAME_NONE) {
         flags = g_GameState->u.field.flags_118;
-        if (flags & 8) {
+        if (flags & 0x8) {
             g_GameState->u.field.flags_118 = (flags & 0xF7);
             if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
@@ -41,7 +41,7 @@ MATCH void func_801B6BC8(void) {
             }
         }
         flags = g_GameState->u.field.flags_118;
-        if (flags & 2) {
+        if (flags & 0x2) {
             g_Task->direction_08 = sel;
             func_801C2438();
             g_Task->tint.signed_bytes.unk_5D = -0x40;
@@ -52,7 +52,7 @@ MATCH void func_801B6BC8(void) {
             g_Task->unk_03 = 4;
             return;
         }
-        if (flags & 4) {
+        if (flags & 0x4) {
             g_Task->direction_08 = sel;
             func_801C2438();
             g_Task->tint.bytes.flags = 1;

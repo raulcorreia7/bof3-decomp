@@ -7,7 +7,7 @@ MATCH void func_801BDBC4(void) {
     u8  found;
 
     found = 0;
-    if (g_GameRequestFlags & 1) {
+    if (g_GameRequestFlags & 0x1) {
         i = 0;
         if (i < g_Game.party_size) {
             count  = g_Game.party_size;

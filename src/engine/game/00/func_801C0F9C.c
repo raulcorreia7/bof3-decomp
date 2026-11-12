@@ -8,9 +8,9 @@ MATCH s32 func_801C0F9C(u8 source_row) {
     s32 prev;
 
     if (D_80146262 != 0) {
-        if (((g_Game.flags >> D_80146262) & 1) == 0) {
+        if (((g_Game.flags >> D_80146262) & 0x1) == 0) {
             prev = D_80146262 - 1;
-            if (((g_Game.flags >> prev) & 1) != 0) {
+            if (((g_Game.flags >> prev) & 0x1) != 0) {
                 goto select_slot; /* the previous slot is active, take it */
             }
             if (g_Game.members[prev].header.mode != 1) {
@@ -22,7 +22,7 @@ MATCH s32 func_801C0F9C(u8 source_row) {
      * head and at check_prev share select_slot, and select_slot falls back into
      * the reloaded cursor. */
 check_prev:
-    if (((g_Game.flags >> (D_80146262 - 1)) & 1) == 0) {
+    if (((g_Game.flags >> (D_80146262 - 0x1)) & 1) == 0) {
         goto reload_slot; /* the previous slot is free, reload the cursor */
     }
 select_slot:
@@ -37,9 +37,9 @@ reload_slot:
     i = D_80146262;
 scan_slot:
     if (i != 0) {
-        if (((g_Game.flags >> i) & 1) == 0) {
+        if (((g_Game.flags >> i) & 0x1) == 0) {
             prev = i - 1;
-            if (((g_Game.flags >> prev) & 1) != 0) {
+            if (((g_Game.flags >> prev) & 0x1) != 0) {
                 goto clear_bit; /* the slot's active bit is clear, clear the selection bit */
             }
             if (g_Game.members[prev].header.mode != 1) {
@@ -52,7 +52,7 @@ scan_slot:
     {
         u8* cursor = &D_80146262;
 
-        if (((g_Game.flags >> *cursor) & 1) == 0) {
+        if (((g_Game.flags >> *cursor) & 0x1) == 0) {
             g_Game.members[*cursor].header.flags &= ~ACTOR_FLAG_HIDDEN;
             g_Game.members[*cursor].header.mode = D_801CD4AC[source_row].unk_00;
             g_Game.members[*cursor].header.step = D_801CD4AC[source_row].unk_01;

@@ -13,7 +13,7 @@ MATCH void func_8019ADE8(void) {
     s32              z;
     GameRouteRequest request;
 
-    g_Task->direction_08 = g_Game.members[0].facing & 7;
+    g_Task->direction_08 = g_Game.members[0].facing & 0x7;
     Area_FindSceneRecord(0x18);
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;

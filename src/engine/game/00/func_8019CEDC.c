@@ -12,9 +12,9 @@ MATCH void func_8019CEDC(void) {
     if (work->timer == 0) {
         if (LOHU(g_GameAreaId) == AREA_ID_ANGEL_TOWER_LOWER) {
             if ((work->pos.x.fixed == TO_COORD(17) + COORD_HALF) && (moved == TO_COORD(74) + COORD_HALF)) {
-                SYS_SetFlag(g_SceneEventFlags, 0x36);
+                SYS_SetFlag(g_SceneEventFlags, 54);
             } else {
-                SYS_ClearFlag(g_SceneEventFlags, 0x36);
+                SYS_ClearFlag(g_SceneEventFlags, 54);
             }
         }
         func_8019D270();

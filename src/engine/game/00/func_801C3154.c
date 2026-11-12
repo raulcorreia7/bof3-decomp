@@ -15,7 +15,7 @@ MATCH void func_801C3154(void) {
     s32             off;
     u8              sel;
 
-    if ((g_Game.current->status.field.flags_12C.u8_value & 8) != 0) {
+    if ((g_Game.current->status.field.flags_12C.u8_value & 0x8) != 0) {
         index    = 1;
         work     = g_Task;
         base_dst = AREA_PALETTE_WORK;
@@ -26,7 +26,7 @@ MATCH void func_801C3154(void) {
             index += 1;
             page                            = (sel >> 3) << 9;
             addr_dst                        = page + base_dst;
-            row                             = (sel & 7) << 6;
+            row                             = (sel & 0x7) << 6;
             *(u16*)(off + (row + addr_dst)) = *(const u16*)(off + (row + (page + base_src)));
         } while (index < 32);
         g_GfxPalettePending = 1;

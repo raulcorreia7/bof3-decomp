@@ -76,7 +76,7 @@ MATCH void func_801B0568(void) {
             func_801C24D0();
             func_801C4C48();
             g_Task->param.unk_0B = 0;
-            if (g_GameRequestFlags & 1) {
+            if (g_GameRequestFlags & 0x1) {
                 if (g_Game.walk_flags & (AREA_WALK_TRANSITION | 0x2000)) {
                     tmp5         = g_Task;
                     tmp1         = tmp5->timer;
@@ -130,7 +130,7 @@ MATCH void func_801B0568(void) {
                 tmp7->unk_03 = 1;
             }
             g_Game.current->u.field.mode_12B.s8_value       = 3;
-            g_Game.current->status.field.flags_12C.u8_value = (g_Game.current->status.field.flags_12C.u8_value | 2);
+            g_Game.current->status.field.flags_12C.u8_value = (g_Game.current->status.field.flags_12C.u8_value | 0x2);
             g_AreaWalkFlags |= 0x80;
             return;
         case_3:
@@ -140,7 +140,7 @@ MATCH void func_801B0568(void) {
             g_Task->header.mode                             = 2;
             g_Task->header.step                             = 5;
             g_Game.current->u.field.mode_12B.s8_value       = 2;
-            g_Game.current->status.field.flags_12C.u8_value = (g_Game.current->status.field.flags_12C.u8_value | 2);
+            g_Game.current->status.field.flags_12C.u8_value = (g_Game.current->status.field.flags_12C.u8_value | 0x2);
             g_Game.walk_flags |= 0x100;
             return;
         case_5:

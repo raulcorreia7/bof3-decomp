@@ -1774,7 +1774,6 @@ VALUE_ANGLE_CONSTANTS = (
     (2048, "ANGLE_180"),
     (3072, "ANGLE_270"),
 )
-VALUE_FIXED_CONSTANTS = ((0x10000, "ONE"), (0x8000, "ONE / 2"), (0x4000, "ONE / 4"))
 VALUE_ALL_ONES = {1: "BYTE_MASK", 2: "HALF_MASK"}
 
 
@@ -2430,10 +2429,6 @@ def _value_role_constant(
     if signal.role == "angle":
         for angle, name in VALUE_ANGLE_CONSTANTS:
             if angle == value and name in index["names"]:
-                return name, ""
-    if signal.role == "fixed":
-        for fixed, name in VALUE_FIXED_CONSTANTS:
-            if fixed == value and name in index["names"]:
                 return name, ""
     if signal.role == "index" and value == 0xFF and "GAME_NONE" in index["names"]:
         return "GAME_NONE", ""

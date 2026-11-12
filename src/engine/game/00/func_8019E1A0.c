@@ -21,7 +21,7 @@ MATCH void func_8019E1A0(void) {
     stepTimer = record->unk_0A;
     if (stepTimer != 0) {
         record->unk_0A = (u8)(stepTimer - 1);
-        if (g_FrameCount & 1) {
+        if (g_FrameCount & 0x1) {
             Area_SetDrawMode();
         }
     } else {

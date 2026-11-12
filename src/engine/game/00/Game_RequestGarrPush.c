@@ -5,7 +5,7 @@ MATCH s32 Game_RequestGarrPush(void) {
     if (g_Game.current->chr.character_id != CHAR_ID_GARR) {
         return 0;
     }
-    if ((g_Task->direction_08 & 1) == 0) {
+    if ((g_Task->direction_08 & 0x1) == 0) {
         return 0;
     }
     g_Task->param.unk_0B++;

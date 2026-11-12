@@ -21,7 +21,7 @@ MATCH void func_801A253C(Actor* entity) {
             entity->roll_90 = 0;
             mode            = work->header.step;
             if (mode - 1 < 3) {
-                entity->timer_75 = (mode & 3) * 30;
+                entity->timer_75 = (mode & 0x3) * 30;
                 if ((entity->timer_75 & 0xFE) != 0) {
                     func_801A275C(&entity->interaction_flags);
                     if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {

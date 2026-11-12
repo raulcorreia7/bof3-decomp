@@ -24,7 +24,7 @@ loop:
             offset += 2;
         }
     } else if ((opcode - 14) < 2U) {
-        if (record[3] & 2) {
+        if (record[3] & 0x2) {
             offset += 5;
         } else {
             offset += 4;

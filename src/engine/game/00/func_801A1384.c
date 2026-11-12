@@ -73,7 +73,7 @@ MATCH void func_801A1384(void* entity) {
         }
         g_Task->unk_0A = (0x10 / rate);
         rec[0x7B]--;
-        func_801ABBA8(rec + 0x74, g_Task->direction_08 & 7);
+        func_801ABBA8(rec + 0x74, g_Task->direction_08 & 0x7);
         g_Task->direction_08 |= 8;
         rec[0x74] |= ACTOR_FLAG_MOVING;
     }

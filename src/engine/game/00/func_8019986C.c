@@ -9,6 +9,6 @@ MATCH void func_8019986C(void) {
     value = (s16)g_MenuCurrentPanel->u.message.id;
     if (value != 0) {
         color = Message_GetText((u32)(u16)value);
-        UI_DrawText((s16)(g_MenuCurrentPanel->pos.x + 7), (s16)(g_MenuCurrentPanel->pos.y + 3), 0, 0xFF, color);
+        UI_DrawText((s16)(g_MenuCurrentPanel->pos.x + 7), (s16)(g_MenuCurrentPanel->pos.y + 3), 0, 255, color);
     }
 }

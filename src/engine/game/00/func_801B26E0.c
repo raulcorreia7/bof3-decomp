@@ -5,7 +5,7 @@ MATCH void func_801B26E0(void) {
     u8 level;
 
     g_Task->timer -= 1;
-    g_Task->direction_08 = (g_Task->direction_08 + 1) & 7;
+    g_Task->direction_08 = (g_Task->direction_08 + 1) & 0x7;
     Actor_SelectScript(g_Task->direction_08);
     i     = 1;
     level = g_Task->timer;

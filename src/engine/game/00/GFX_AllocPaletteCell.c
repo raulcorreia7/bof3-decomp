@@ -33,7 +33,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                         }
                         break;
                     case PALETTE_KIND_CELLS_2:
-                        if ((column & 1u) != 0u) {
+                        if ((column & 0x1u) != 0u) {
                             break;
                         }
                         end = column;
@@ -48,7 +48,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                         }
                         break;
                     case PALETTE_KIND_CELLS_4:
-                        if ((column & 3u) != 0u) {
+                        if ((column & 0x3u) != 0u) {
                             break;
                         }
                         end = column;
@@ -63,7 +63,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                         }
                         break;
                     case PALETTE_KIND_CELLS_8:
-                        if ((column & 7u) != 0u) {
+                        if ((column & 0x7u) != 0u) {
                             break;
                         }
                         end = column;

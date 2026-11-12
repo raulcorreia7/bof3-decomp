@@ -11,7 +11,7 @@ MATCH void func_8019F4F8(void) {
         timer--;
         g_Task->timer = timer;
         step          = g_Task->vy + 0x14000;
-        active        = (s32)(g_FrameCount & 1u);
+        active        = (s32)(g_FrameCount & 0x1u);
         g_Task->pos.y.fixed += step;
         g_Task->vy = step;
         if (active != 0) {

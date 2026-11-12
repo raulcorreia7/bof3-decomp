@@ -60,7 +60,7 @@ MATCH bool func_801B8D18(void) {
         if (SPAD_ACTIVE == 0 || value < 0x41) {
             return false;
         }
-        y |= 0x8000;
+        y |= 32768;
         value = Area_ReadStepHeight(x, y, 3);
         if (SPAD_ACTIVE == 0 || value < 0x41) {
             return false;
@@ -83,7 +83,7 @@ MATCH bool func_801B8D18(void) {
         if (SPAD_ACTIVE == 0 || value < 0x41) {
             return false;
         }
-        x |= 0x8000;
+        x |= 32768;
         value = Area_ReadStepHeight(x, y, 5);
         if (SPAD_ACTIVE == 0 || value < 0x41) {
             return false;
