@@ -7,6 +7,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern SVECTOR D_1F800014[];
+extern s32     D_801F037C[];
+
 void func_801EED38(void);
 
 extern Callback D_801F02B4[];

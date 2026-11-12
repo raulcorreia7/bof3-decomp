@@ -33,7 +33,37 @@ MATCH void func_801EEEA8(void) {
     saved_work->unk_03 += 1;
 }
 
-INCLUDE_ASM(func_801EEF24);
+MATCH void func_801EEF24(void) {
+    PartyMember* saved;
+    PartyMember* work;
+    u8           count;
+    s32          cue;
+    u32          slot;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        cue = EMI_CUE_ID(SND_BANK_COMMON, 0x01);
+        if (g_Game.members[g_Battle.target_selector].chr.character_id == 0) {
+            cue = EMI_CUE_ID(SND_BANK_COMMON, 0x00);
+        }
+        SND_QueueSelectionFx(cue);
+    }
+    saved  = g_Task;
+    g_Task = &g_Game.members[g_Battle.active_battler];
+    if (!(Actor_StepAnimOnce() & BYTE_MASK)) {
+        g_Task = saved;
+        return;
+    }
+    g_Task->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task                             = saved;
+    g_Task->param.unk_0B               = 0;
+    slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 4;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->unk_03 += 1;
+}
 
 INCLUDE_ASM(func_801EF070);
 
@@ -64,7 +94,14 @@ INCLUDE_ASM(func_801EF388);
 
 INCLUDE_ASM(func_801EF484);
 
-INCLUDE_ASM(func_801EF938);
+MATCH void func_801EF938(void) {
+    if (g_Task->param.unk_0B == 2) {
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_ACTION_UNK_5;
+        g_Game.members[g_Battle.active_battler].u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
+        func_801E5988();
+    }
+}
 
 /* func_801EF9F0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -75,11 +112,63 @@ MATCH void func_801EFA34(void) {
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC38, header.step);
 }
 
-INCLUDE_ASM(func_801EFAAC);
+MATCH void func_801EFAAC(void) {
+    PartyMember* work;
+    s32          y;
+    u32          slot;
 
-INCLUDE_ASM(func_801EFBAC);
+    g_Task->facing           = g_BattleSelectedActor->facing;
+    g_Task->pos.x.fixed      = g_EncounterOriginX;
+    y                        = g_EncounterOriginY;
+    g_Task->pos.y.fixed      = y;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, y);
+    g_Task->param.unk_0B     = 0;
+    g_Task->unk_09           = 4;
+    g_Task->header.step += 1;
+    slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 2;
+    g_BattleEffects[slot].arg.unk_09   = 1;
+    g_BattleEffects[slot].target.party = work;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+}
 
-INCLUDE_ASM(func_801EFC68);
+MATCH void func_801EFBAC(void) {
+    u8           count;
+    u32          slot;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 3;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+        g_Task->unk_09 = 4;
+        g_Task->header.step += 1;
+    }
+}
+
+MATCH void func_801EFC68(void) {
+    PartyMember* work;
+    PartyMember* task;
+    u32          slot;
+
+    if (--g_Task->unk_09 == 0) {
+        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        task                               = g_Task;
+        g_BattleEffects[slot].target.party = work;
+        task->param.unk_0B += 1;
+        SND_QueueSelectionFx(0x103);
+        g_Task->unk_09 = 20;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFD24(void) {
     u8 count;

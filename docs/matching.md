@@ -115,9 +115,9 @@ A dense `switch` compiles to a jump table in the unit's `.rodata`. Most overlays
 the leading data run, before any code, so a lift matches only when the image's layout puts the C
 table there:
 
-1. The function's assembly names the table `jtbl_<ADDR>`. The table runs from that address to the
-   next row the manifest places (the next function or data row); each entry is a word that points
-   into the function.
+1. The function's assembly names the table `jtbl_<ADDR>`. Each entry is a word that points into
+   the function; the table ends at the first word that does not, which is not always the next row
+   the manifest places (two tables can share one data unit).
 2. In `config/<image>/splat.yaml`, order `.rodata` where retail has the table (usually
    `section_order: [.data, .rodata, .text, .bss]`) and place the table as its own subsegment at its
    file offset: `- [0xOFFSET, .rodata, <function>]`.
@@ -131,6 +131,27 @@ is the proof, and the whole-image bytes are the verdict. Placed tables to read b
 `world02/area079/13@0x801F2D20` (PR #808) and `world03/area141/13@0x801F2F14` (PR #809).
 An image whose `target.toml` has a `[[matching.section_placements]]` row also repeats the address
 there (for example `emi/battle/battle/03`).
+
+### A function in a file with other functions
+
+The row pairs the table with the function's own C file: the linker selects
+`<function>.c.o(.rodata)`. A function inside a multi-function unit needs its own file first. The
+units are contiguous and their files define no statics or data, so split the unit at the table
+functions:
+
+1. One `.c` file and one `c` row per block that defines a table function; adjacent blocks without a
+   table stay together in a run named after its first function. Copy the unit's preamble (image
+   header, the `#if BOF3_USE_ASM` block) into every file and keep each block's comments.
+2. Replace the unit's row with one `c` row per piece at the piece's first function address.
+3. Place each table as above. While the function is `INCLUDE_ASM`, splat pairs the row with the
+   function's text and emits the table into the function's asm file; once the function is `MATCH`,
+   the compiler's table occupies the same `.rodata`, selected by the same row.
+
+Worked examples: `scenario/scena06/00`'s `6A0` unit (70 functions, 22 pieces, 18 tables) and
+`bmagic/magic060/00`'s `BMagic_Effect` unit (34 functions, 3 pieces, 1 table). `check-<image>`
+proves both states. A table in a different segment from its function does not pair
+(`etc/start/08`): that one needs the table bytes in the function's own C file until the switch is
+written.
 
 ## Helpers
 
