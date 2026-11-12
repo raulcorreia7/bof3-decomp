@@ -46,7 +46,7 @@ MATCH void func_801EED04(void) {
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].arg.unk_09   = 9;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
