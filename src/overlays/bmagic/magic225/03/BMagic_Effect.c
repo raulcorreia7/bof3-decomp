@@ -38,7 +38,7 @@ MATCH void func_801EEE8C(void) {
     if (count == 0) {
         i = 0;
         do {
-            SND_QueueSelectionFx(0x100);
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
             slot = BMagic_AllocEffect();
             if (slot != 0xFF) {
                 work                                   = g_Task;

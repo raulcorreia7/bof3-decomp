@@ -43,9 +43,9 @@ MATCH void func_801EEF24(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        cue = 0x101;
+        cue = EMI_CUE_ID(SND_BANK_COMMON, 0x01);
         if (g_Game.members[g_Battle.target_selector].chr.character_id == 0) {
-            cue = 0x100;
+            cue = EMI_CUE_ID(SND_BANK_COMMON, 0x00);
         }
         SND_QueueSelectionFx(cue);
     }
@@ -124,7 +124,7 @@ MATCH void func_801EFAAC(void) {
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = work;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionFx(0x102);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
 }
 
 MATCH void func_801EFBAC(void) {

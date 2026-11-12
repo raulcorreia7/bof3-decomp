@@ -43,7 +43,7 @@ MATCH void func_801EF324(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        SND_QueueSelectionFx(0x102);
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
         slot                               = Battle_AllocEffect(1, 0x60) & BYTE_MASK;
         work                               = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 3;
