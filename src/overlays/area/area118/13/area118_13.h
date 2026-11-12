@@ -8,15 +8,17 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-extern u8  D_80144ED0[];
-extern u8  D_801F511C[];
-extern u8  D_801F5198[];
-extern u16 D_801F59E4;
-extern u8  D_801F59E8;
-extern u8  D_801F59EC;
-extern u8  D_801F5138[];
-extern u8  D_801F5994[];
-void       func_801F381C(s32 arg0);
+extern u8      D_80144ED0[];
+/* The four corner vectors the scratchpad holds for RotTransPers4. */
+extern SVECTOR D_1F800014[];
+extern u8      D_801F511C[];
+extern u8      D_801F5198[];
+extern u16     D_801F59E4;
+extern u8      D_801F59E8;
+extern u8      D_801F59EC;
+extern u8      D_801F5138[];
+extern u8      D_801F5994[];
+void           func_801F381C(s32 arg0);
 
 void func_801F33A4(void);
 void func_801F4634(s32, s32);
