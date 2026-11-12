@@ -59,7 +59,24 @@ MATCH void func_801F7200(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7268);
+MATCH void func_801F7268(void) {
+    u16 timer;
+
+    func_801F8534();
+    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
+    if ((g_Task->unk_5A & 3) == 0) {
+        g_Task->unk_2C -= 1;
+    }
+    if (g_Task->unk_5A == 2) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
+    }
+    timer          = g_Task->unk_5A - 1;
+    g_Task->unk_5A = timer;
+    if (timer == 0) {
+        g_Task->unk_5A = 0x40;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7320);
 
