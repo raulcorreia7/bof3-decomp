@@ -1,5 +1,5 @@
-#ifndef OVERLAY_BMAGIC_BMAGIC_RUN_EFFECT_STEP_H
-#define OVERLAY_BMAGIC_BMAGIC_RUN_EFFECT_STEP_H
+#ifndef BMAGIC_RUN_EFFECT_STEP_H
+#define BMAGIC_RUN_EFFECT_STEP_H
 
 /* Runs the effect step the work step byte selects with the battle script table installed, then adds the
  * actor once the effect starts. The image passes its two step callbacks. A statement macro: the local
