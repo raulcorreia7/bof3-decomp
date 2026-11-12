@@ -384,7 +384,7 @@ MATCH void func_801F0E90(void) {
 
 MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     SPRT* prim;
-    /* FAKE: the task pointer crosses the branch; an unpinned local lands in v1, the best pure C being 0x14C against retail's 0x150. */
+    /* FAKE: the task pointer must stay in v0 across the branch; an unpinned local lands in v1, and the best pure-C body is 0x14C against retail's 0x150. */
     FAKE_REG(PartyMember*, task, "v0");
     u16 tpage;
 
