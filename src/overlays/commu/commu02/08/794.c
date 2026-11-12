@@ -895,11 +895,11 @@ MATCH void Fairy_GenerateName(void) {
     count = 0;
     i     = 5;
     dst   = &D_801DB080[5];
-    while (i >= 0) {
+    do {
         *dst = 0;
-        dst--;
-        i--;
-    }
+        i -= 1;
+        dst -= 1;
+    } while (i >= 0);
 
     offset = MEM_PTR(const u16, 0x800103E0u)[RANDOM_MASK(0x3F)];
     src    = MEM_PTR(u8, 0x80010000u) + offset;
