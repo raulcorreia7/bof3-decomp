@@ -25,22 +25,22 @@ MATCH void func_801EF000(void) {
     u8           facing;
 
     if (g_Task->param.unk_0B == 3) {
-        slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
-        work                                   = g_Task;
-        g_BattleEffects[slot].header.mode      = 1;
-        g_BattleEffects[slot].target.party     = work;
-        facing                                 = g_BattleEffectBattler->facing;
-        g_BattleEffects[slot].arg.unk_09       = 0;
-        g_BattleEffects[slot].unk_0A           = 0;
-        g_BattleEffects[slot].unk_08           = (facing + 2) & 0x3;
-        g_BattleEffects[slot].pos.x            = g_Task->pos.x;
-        g_BattleEffects[slot].pos.y            = g_Task->pos.y;
-        COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);
-        g_Task->header.mode += 1;
+        MAGIC113_SPAWN_EFFECT(1);
     }
 }
 
-INCLUDE_ASM(func_801EF0F0);
+MATCH void func_801EF0F0(void) {
+    u32          slot;
+    PartyMember* work;
+    u8           facing;
+
+    if (g_Task->param.unk_0B == 4) {
+        MAGIC113_SPAWN_EFFECT(2);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        g_SndVoiceTargetVolume[20] = 0x7F;
+        g_SndVoiceVolume[20]       = 0;
+    }
+}
 
 INCLUDE_ASM(func_801EF1F8);
 

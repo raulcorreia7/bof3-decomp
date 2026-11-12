@@ -596,7 +596,6 @@ extern u16                         D_80148A0C;
 extern u16                         D_80148A0E;
 extern s32                         g_SndBankHeaders[7];
 extern s32                         g_SndBankSequences[7];
-extern u8                          g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 extern u16                         D_80149010[];
 extern u16                         D_80149040[];
 extern u16                         D_80149070[];

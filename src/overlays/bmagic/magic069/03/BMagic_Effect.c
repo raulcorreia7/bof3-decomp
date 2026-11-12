@@ -244,7 +244,7 @@ MATCH void func_801F0104(void) {
     LINE_F2*      line;
     volatile u16* shade;
 
-    shade      = &D_1F800006;
+    shade      = (volatile u16*)&D_1F800006;
     line       = (LINE_F2*)g_GfxPrimCursor;
     *shade     = 0x80;
     D_1F80000C = g_Task->unk_2E.half;
