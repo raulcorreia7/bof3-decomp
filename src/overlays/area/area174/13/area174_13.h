@@ -12,9 +12,6 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0x80
 
-/* The fixed-point scale that turns a g_Actors byte span into its row index. */
-#define ACTOR_ROW_INDEX_SCALE    3616814565u
-
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The current map row in the field-loader table. */

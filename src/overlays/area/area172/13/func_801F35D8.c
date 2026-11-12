@@ -17,12 +17,12 @@ MATCH void func_801F35D8(void) {
     work           = g_Task;
     work->screen_x = screen.vx;
     work->screen_y = screen.vy;
-    work->vx -= 0x10;
-    work->unk_32 -= 0x14;
+    work->vx -= 16;
+    work->unk_32 -= 20;
     func_801F4138((s16)work->screen_x, (s16)work->screen_y, (s16)work->unk_32, (s16)work->vx, (s16)work->vy);
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
     if (!(remaining & BYTE_MASK)) {
-        func_80196070();
+        Actor_Clear();
     }
 }

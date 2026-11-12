@@ -17,12 +17,12 @@ MATCH void func_801F34D8(void) {
     work           = g_Task;
     work->screen_x = screen.vx;
     work->screen_y = screen.vy;
-    work->vy -= 0x10;
+    work->vy -= 16;
     func_801F4138((s16)work->screen_x, (s16)work->screen_y, (s16)work->unk_32, (s16)work->vx, (s16)work->vy);
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
     if (!(remaining & BYTE_MASK)) {
-        g_Task->timer = 0x10;
+        g_Task->timer = 16;
         g_Task->header.mode += 1;
     }
 }
