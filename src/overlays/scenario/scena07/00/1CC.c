@@ -200,7 +200,16 @@ MATCH void func_801F7D28(void) {
     SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801F7D6C);
+MATCH void func_801F7D6C(void) {
+    /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
+    FAKE_STACK_PADS(u8, 0x10);
+    g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
+    g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
+    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    func_801FA01C();
+    g_Task->vx = 120;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801F7DDC(void) {
     func_801FA38C();
