@@ -1,3 +1,8 @@
 #include "boss004_13.h"
 
-INCLUDE_ASM(Boss_HandleBattleEvent3);
+#include "overlays/boss/Boss_HandleBattleEventBody.h"
+
+MATCH u8 Boss_HandleBattleEvent3(u32 mode) {
+    BOSS_HANDLE_BATTLE_EVENT_BODY(mode);
+    return 0;
+}
