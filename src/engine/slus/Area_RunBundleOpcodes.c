@@ -7,7 +7,7 @@ MATCH void Area_RunBundleOpcodes(void) {
     u8* record;
 
     record     = (u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.list_base_20 * 4;
-    D_8014933C = g_SceneState.flags_01 & 1;
+    D_8014933C = g_SceneState.flags_01 & 0x1;
     while (*(u32*)record != 0) {
         g_BundleOpcodes[record[3] & 0x3F](record);
         record += record[2] * 4;

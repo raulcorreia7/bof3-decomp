@@ -17,7 +17,7 @@ INCLUDE_ASM(func_801EEC94);
 
 MATCH void func_801EEFA4(void) {
     if (g_Task->param.phase == 0) {
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->unk_09 = 0x1E;
         g_Task->header.mode += 1;
     }
@@ -48,7 +48,7 @@ MATCH void func_801EF44C(void) {
     count = g_Task->param.phase + 1;
     count += g_Task->unk_09 >> 6;
     g_Task->param.phase = count;
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
     count_next     = g_Task->unk_09 + 2;
@@ -65,7 +65,7 @@ MATCH void func_801EF4F4(void) {
     count = g_Task->param.phase + 1;
     count += g_Task->unk_09 >> 6;
     g_Task->param.phase = count;
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         g_Task->timer -= 1;
     }
     count_next     = g_Task->unk_09 - 2;

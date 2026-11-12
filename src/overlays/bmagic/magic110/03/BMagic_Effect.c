@@ -22,7 +22,7 @@ MATCH void func_801EEEDC(void) {
     u8 count;
 
     func_801EF148();
-    if (g_FrameCount & 1) {
+    if (g_FrameCount & 0x1) {
         timer = g_Task->timer;
         if (timer < 16U) {
             g_Task->timer = timer + 2;
@@ -42,7 +42,7 @@ MATCH void func_801EF068(void) {
     u8 count;
 
     func_801EF148();
-    if (!(g_FrameCount & 3)) {
+    if (!(g_FrameCount & 0x3)) {
         timer = g_Task->timer;
         if (timer != 0) {
             g_Task->timer = timer - 1;
@@ -50,7 +50,7 @@ MATCH void func_801EF068(void) {
         count          = g_Task->unk_09 - 1;
         g_Task->unk_09 = count;
         if (!(count & BYTE_MASK)) {
-            func_800A9820(g_Battle.target_selector);
+            Battle_MarkDamaged(g_Battle.target_selector);
             g_Task->header.mode += 1;
         }
     }
@@ -66,7 +66,7 @@ INCLUDE_ASM(func_801EF148);
 MATCH void func_801EF43C(void) {
     g_ScriptTable = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0478, g_Task->header.step);
-    if ((g_Task->header.flags & 1) && g_Task->header.step >= 2) {
+    if ((g_Task->header.flags & 0x1) && g_Task->header.step >= 2) {
         func_8014D290();
     }
     g_ScriptTable = AREA_SCRIPT_TABLE;
@@ -94,7 +94,7 @@ MATCH void func_801EF6B4(void) {
     g_Task->unk_2E.half = RANDOM_MASK(3) + 0x9F;
     position            = g_Task->unk_30.half - 4;
     g_Task->unk_30.half = position;
-    if ((s16)position < 0xB2) {
+    if ((s16)position < 178) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
@@ -106,7 +106,7 @@ MATCH void func_801EF740(void) {
     g_Task->unk_2E.half = RANDOM_MASK(3) + 0x9F;
     position            = g_Task->unk_30.half - 2;
     g_Task->unk_30.half = position;
-    if ((s16)position < 0x80) {
+    if ((s16)position < 128) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }

@@ -53,7 +53,7 @@ MATCH void func_801E3C14(void) {
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ATTACK) {
             func_801E2314(4);
         }
-        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ITEM && !(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 4)) {
+        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ITEM && !(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 0x4)) {
             func_801E2314(4);
         }
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY && !(D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_NO_HIT_REACT)) {
@@ -62,7 +62,7 @@ MATCH void func_801E3C14(void) {
     }
     hit_work = g_BattleCurrentEnemy;
     if (hit_work->turn.target_flags & BATTLE_HIT_HP) {
-        func_800AAC88(hit_work->turn.hp_change, g_Task->slot);
+        Battle_QueueAction(hit_work->turn.hp_change, g_Task->slot);
         hit_work = g_BattleCurrentEnemy;
     }
     if (hit_work->turn.target_flags & BATTLE_HIT_AP) {
@@ -77,7 +77,7 @@ MATCH void func_801E3C14(void) {
         if (tail_work->hp == 0) {
             g_Task->unk_09 = 0;
             if (g_Battle.state & BATTLE_STATE_CRITICAL) {
-                GFX_AllocPaletteFade(g_Task, 0x10, 0x10, 0x10, 0);
+                GFX_AllocPaletteFade(g_Task, 16, 16, 16, 0);
             }
             g_BattleCurrentEnemy->status = STATUS_KO;
         } else if (BATTLE_IS_SCRIPTED()) {

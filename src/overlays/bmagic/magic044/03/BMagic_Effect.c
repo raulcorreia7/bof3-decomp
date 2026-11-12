@@ -8,7 +8,38 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EEC5C, func_801EEDA0);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    PartyMember* task;
+    PartyMember* work;
+    u16*         src;
+    u16*         dst;
+    u32          i;
+    u8           slot;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    task           = g_Task;
+    WorldPos_Copy(&task->pos, &g_BattleEffectBattler->pos);
+    task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    for (i = 0; i < 2; i++) {
+        slot                               = Battle_AllocEffect(1, 6) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].unk_04       = i;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+    }
+    i   = 1;
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i + AREA_PALETTE_UNIT / sizeof(u16)] = src[i + AREA_PALETTE_UNIT / sizeof(u16)] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + AREA_PALETTE_UNIT) = 0;
+
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
@@ -55,7 +86,7 @@ MATCH void func_801F0478(void) {
 }
 
 MATCH void func_801F04F0(void) {
-    func_800AF764();
+    Battle_ProjectRange();
     g_Task->unk_30.half += 8;
     g_Task->unk_5D = (RANDOM_MASK(3)) + 1;
     g_Task->unk_5E = (RANDOM_MASK(3)) + 1;

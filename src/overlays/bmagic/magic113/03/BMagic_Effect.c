@@ -244,7 +244,7 @@ MATCH void func_801F0A80(void) {
             func_801E5988();
             return;
         }
-        g_Task->unk_2A = (g_Task->unk_2A + 1) & 1;
+        g_Task->unk_2A = (g_Task->unk_2A + 0x1) & 1;
         Actor_SelectScript(g_Task->param.unk_0B);
         func_8014D290();
         if (g_Task->param.unk_0B == 0) {

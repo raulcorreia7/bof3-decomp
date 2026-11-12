@@ -125,7 +125,7 @@ MATCH void func_80117A30(void) {
 }
 
 MATCH void func_80117A74(void) {
-    if (SYS_TestFlag(D_80144ED0, 0x3E) != 0) {
+    if (SYS_TestFlag(D_80144ED0, 62) != 0) {
         func_80117B60(0x40);
         func_80196070();
     }
@@ -133,10 +133,10 @@ MATCH void func_80117A74(void) {
 }
 
 MATCH void func_80117ACC(void) {
-    if (SYS_TestFlag(D_80144ED0, 0x3E) != 0) {
+    if (SYS_TestFlag(D_80144ED0, 62) != 0) {
         g_Task->timer++;
         func_80117B60(0x80 - (g_Task->timer >> 1));
-        if (g_Task->timer >= 0x80) {
+        if (g_Task->timer >= 128) {
             func_80196070();
         }
     }
@@ -155,7 +155,7 @@ MATCH void func_80117C38(void) {
 INCLUDE_ASM(func_80117C58);
 
 MATCH void func_80117DF0(void) {
-    if (!(g_FrameCount & 1)) {
+    if (!(g_FrameCount & 0x1)) {
         ((Actor*)g_Task)->timer += 1;
     }
     if (((Actor*)g_Task)->timer >= 128U) {

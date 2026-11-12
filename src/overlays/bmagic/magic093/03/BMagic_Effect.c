@@ -30,11 +30,11 @@ INCLUDE_ASM(func_801EF108);
 MATCH void func_801EF264(void) {
     if (g_BattleEffectBattler->param.unk_0B < 8U) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            func_800A9820((g_Task->unk_03 + 3) & BYTE_MASK);
+            Battle_MarkDamaged((g_Task->unk_03 + 3) & BYTE_MASK);
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
             func_800AF814((g_Task->unk_03 + 3) & BYTE_MASK);
         } else {
-            func_800A9820(g_Task->unk_03);
+            Battle_MarkDamaged(g_Task->unk_03);
             GFX_FreePaletteFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
             func_800AF814(g_Task->unk_03);
         }
@@ -98,7 +98,7 @@ INCLUDE_ASM(func_801EFAE8);
 MATCH void func_801EFE5C(void) {
     SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F01F0();
     }
 }

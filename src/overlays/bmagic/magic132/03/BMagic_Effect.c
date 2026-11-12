@@ -17,7 +17,7 @@ INCLUDE_ASM(func_801EEEF4);
 MATCH void func_801EF0A4(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         D_8014637C->unk_29 = 4;
-        func_800A9820(g_Battle.target_selector);
+        Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
@@ -122,13 +122,13 @@ MATCH void func_801EF4A4(void) {
     rot.vy = 0;
     switch (g_Task->facing) {
         case 0:
-            rot.vz = 0x400;
+            rot.vz = 1024;
             break;
         case 1:
-            rot.vz = 0x800;
+            rot.vz = 2048;
             break;
         case 2:
-            rot.vz = 0xC00;
+            rot.vz = 3072;
             break;
         default:
             rot.vz = 0;

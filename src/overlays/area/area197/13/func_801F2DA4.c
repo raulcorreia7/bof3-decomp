@@ -7,7 +7,7 @@ MATCH void func_801F2DA4(void) {
 
     if (g_Task->header.step == 0) {
         g_AreaSceneMode = 1;
-        Area_SetCellPalette(2, 0x77);
+        Area_SetCellPalette(2, 119);
         g_Task->header.step++;
     }
     Area_SetCameraMatrix(&matrix);

@@ -28,8 +28,8 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
     if ((Area_TestCondition(((ScenePart*)part_list)[0].head.id) << 24) == 0) {
         return;
     }
-    pos.vx = ((x - 0x80) << 7) + FIELD(s8, part_list, 7) * 2;
-    pos.vy = ((y - 0x80) << 7) + FIELD(s8, part_list, 6) * 2;
+    pos.vx = ((x - 0x80) << 0x7) + FIELD(s8, part_list, 7) * 2;
+    pos.vy = ((y - 0x80) << 7) + FIELD(s8, part_list, 0x6) * 2;
     pos.vz = ((ScenePart*)part_list)[1].raw;
     scale  = (g_FrameCount & 0xFFF) * 4;
     rot.vx = (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * scale;

@@ -32,5 +32,5 @@ MATCH void func_801D6CB0(void) {
     }
     func_801D6B28(direction);
     Fishing_DrawReelCursor(0xCE, 0x5C, 0x20, 0, 1, 0);
-    Fishing_DrawFishArrow(0xE3, 0x69, 0, 1);
+    Fishing_DrawFishArrow(227, 105, 0, 1);
 }

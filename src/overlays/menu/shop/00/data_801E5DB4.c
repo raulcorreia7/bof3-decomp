@@ -30,7 +30,7 @@ Callback g_ShopEquipStatStates[SHOP_PANEL5_STATE_COUNT] = {
 
 Callback g_ShopEquipmentStates[SHOP_PANEL6_STATE_COUNT] = {
     func_801E2800,
-    func_801E2E30,
+    Battle_PickFormationTarget,
     func_801E2E70,
 };
 

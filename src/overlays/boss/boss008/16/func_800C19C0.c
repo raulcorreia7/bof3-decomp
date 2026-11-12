@@ -13,7 +13,7 @@ MATCH void func_800C19C0(void) {
         b1    = D_800C2641[idx] >> 3;
         b2    = D_800C2642[idx] >> 3;
         color = (b0 << 10) + (b1 << 5);
-        func_801D9DBC(0, 0, 0xB, b2 | color, 1);
+        func_801D9DBC(0, 0, 11, b2 | color, 1);
         g_Task->timer >>= 1;
     } else {
         g_Task->unk_09 -= 1;

@@ -20,7 +20,7 @@ MATCH void func_8019C794(void) {
     report:
         Actor_SelectScript(code);
         g_Task->header.mode += 1;
-    } else if ((g_Task->unk_0A & 1) == 0) {
+    } else if ((g_Task->unk_0A & 0x1) == 0) {
         index = Actor_FindFreeSlot();
         if (index != GAME_NONE) {
             g_ActorSlots[index].header.flags = 1;

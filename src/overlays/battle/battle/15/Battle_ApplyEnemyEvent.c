@@ -46,20 +46,20 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             }
             break;
         case 5:
-            if (event->selector & 2) {
+            if (event->selector & 0x2) {
                 work->drops[0].rate = event->value;
             }
-            if (event->selector & 1) {
+            if (event->selector & 0x1) {
                 work->drops[1].rate = event->value;
             }
             break;
         case 6:
-            if (event->selector & 2) {
+            if (event->selector & 0x2) {
                 factor    = event->value * 100;
                 scaled    = work->exp * factor / 1000;
                 work->exp = (u32)scaled > 0xFFFF ? 0xFFFF : scaled;
             }
-            if (event->selector & 1) {
+            if (event->selector & 0x1) {
                 factor      = event->value * 100;
                 scaled      = work->zenny * factor / 1000;
                 work->zenny = (u32)scaled > 0xFFFF ? 0xFFFF : scaled;
@@ -73,7 +73,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
     for (i = 0; i < ENEMY_SKILL_COUNT; i++) {
         work->skills[i] = event->unk_08[i];
     }
-    func_800A9BD8(work->slot);
+    Battle_RescaleStats(work->slot);
     if (work->hp != 0 && event->panel_id != 0 && D_801EB5A8 < 8) {
         D_801ED9B0[D_801EB5A8].owner_index = work->slot - 3;
         D_801ED9B0[D_801EB5A8].panel_id    = event->panel_id;

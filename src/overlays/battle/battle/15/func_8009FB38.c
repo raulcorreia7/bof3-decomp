@@ -40,7 +40,7 @@ NON_MATCHING void func_8009FB38(void) {
                 row_index++;
             } while (((u32)(row_index & BYTE_MASK)) < (*active_count));
         }
-        func_800AAA74();
+        Battle_ApplyFormationStats();
         active_count = &g_Battle.party_count;
         FAKE_ORDER_LOCK_BEGIN
             for (row_index = 0; ((u32)(row_index & BYTE_MASK)) < (*active_count); row_index++) {
@@ -52,7 +52,7 @@ NON_MATCHING void func_8009FB38(void) {
         func_800A4458();
         if (g_Battle.party_count != 0) {
             do {
-                func_800A9BD8(row_index);
+                Battle_RescaleStats(row_index);
                 row_index++;
             } while (((u32)(row_index & BYTE_MASK)) < g_Battle.party_count);
         }

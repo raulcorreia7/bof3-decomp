@@ -5,7 +5,7 @@ MATCH void func_800A5874(void) {
     volatile u8* counter;
 
     latch = &D_80148624;
-    if ((*latch & 1) == 0) {
+    if ((*latch & 0x1) == 0) {
         func_80097FE8();
         D_80148594            = 0;
         *latch                = 0;

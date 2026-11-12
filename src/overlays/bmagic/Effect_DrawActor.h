@@ -9,7 +9,7 @@ MATCH void Effect_DrawActor(void) {
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     if (g_Task->header.flags != 0) {
-        func_800AF764();
+        Battle_ProjectRange();
         g_Task->unk_30.half -= 0x10;
         func_801EF7B0();
         Effect_SetActorMatrix();

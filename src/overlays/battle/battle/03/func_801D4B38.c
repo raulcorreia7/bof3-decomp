@@ -47,7 +47,7 @@ MATCH void func_801D4B38(void) {
     }
     D_801463BA = 0;
     D_801463D0 += 1;
-    func_801D4D44();
+    Battle_TickCountdowns();
     g_Battle.phase.sub_step = 0;
     g_Battle.phase.step += 1;
 }

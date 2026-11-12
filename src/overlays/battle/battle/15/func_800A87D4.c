@@ -12,7 +12,7 @@ MATCH void func_800A87D4(void) {
     BattleWorkImage* slot;
     u32              index;
 
-    index = Battle_AllocEffect(0, 0x12);
+    index = Battle_AllocEffect(0, 18);
     if ((index & BYTE_MASK) != GAME_NONE) {
         slot                                             = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
         /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell */
@@ -37,7 +37,7 @@ MATCH void func_800A87D4(void) {
         func_800AF2B4((BattleRange*)&g_Game.members[*kind], 0x50);
         if (func_800AF5FC((BattleRange*)&g_Game.members[*kind], 0x10000) != 0) {
             Actor_SelectScript((TASK_BYTES[8] + 0x44) & BYTE_MASK);
-            func_800A9820(*kind);
+            Battle_MarkDamaged(*kind);
             work = TASK_BYTES;
             work[1]++;
         }
@@ -45,7 +45,7 @@ MATCH void func_800A87D4(void) {
         func_800AF2B4((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x50);
         if (func_800AF5FC((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x10000) != 0) {
             Actor_SelectScript((TASK_BYTES[8] + 0x44) & BYTE_MASK);
-            func_800A9820(*kind);
+            Battle_MarkDamaged(*kind);
             work = TASK_BYTES;
             work[1]++;
         }

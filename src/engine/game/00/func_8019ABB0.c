@@ -12,6 +12,6 @@ MATCH void func_8019ABB0(s32 mode) {
         FAKE_ORDER_FENCE();
         g_ActorSlots[index].type  = 4;
         g_ActorSlots[index].layer = mode;
-        SYS_SetFlag(g_SceneEventFlags, 0x1C);
+        SYS_SetFlag(g_SceneEventFlags, 28);
     }
 }

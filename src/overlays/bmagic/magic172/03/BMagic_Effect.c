@@ -57,7 +57,7 @@ MATCH void func_801EF430(void) {
 MATCH void func_801EF518(void) {
     D_801F0B90[g_Task->header.step]();
     if (g_Task->header.flags & g_Task->header.step) {
-        func_800AF764();
+        Battle_ProjectRange();
         func_801F0908();
     }
 }

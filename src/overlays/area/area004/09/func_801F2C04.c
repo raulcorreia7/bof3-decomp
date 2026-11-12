@@ -17,5 +17,5 @@ MATCH void func_801F2C04(void) {
     }
     step  = &g_SceneEventMode;
     *step = 5;
-    SYS_SetFlag(step + 0x63D, 0x1F);
+    SYS_SetFlag(step + 0x63D, 31);
 }

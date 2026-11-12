@@ -23,8 +23,6 @@ extern Callback D_801F57D0[];
 
 extern u8 D_80145EED[3];
 
-#define AREA_SPARK_COUNT 128
-
 void func_801F387C(AreaSpark* spark);
 
 void func_801F393C(void);

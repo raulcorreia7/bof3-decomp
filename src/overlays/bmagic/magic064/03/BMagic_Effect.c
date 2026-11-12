@@ -140,7 +140,7 @@ MATCH void func_801EF5FC(void) {
     PartyMember* work;
 
     work = g_Task;
-    if (!(work->param.unk_0B & 1)) {
+    if (!(work->param.unk_0B & 0x1)) {
         g_AreaScrollTargetX = work->pos.x.fixed;
         FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
         g_AreaScrollTargetY = work->pos.y.fixed;
@@ -171,7 +171,7 @@ MATCH void func_801EF69C(void) {
     g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_QUEUED;
     g_Game.members[g_Battle.active_battler].counter_136 = 0;
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-    func_800A9820(g_Battle.target_selector);
+    Battle_MarkDamaged(g_Battle.target_selector);
     func_801E5988();
 }
 
@@ -239,7 +239,7 @@ MATCH void func_801F0278(void) {
     u8 ticks;
 
     func_801F03D8();
-    if (!(g_FrameCount & 1)) {
+    if (!(g_FrameCount & 0x1)) {
         ticks = g_Task->param.unk_0B;
         if (ticks >= 0x18U) {
             g_BattleEffectBattler->header.step += 1;
