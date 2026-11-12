@@ -363,30 +363,14 @@ MATCH void func_801EFCF8(void) {
     }
 }
 
-/* The 0x74 bytes of a battler row that a queued effect slot copies. */
-typedef struct BattleWorkImage {
-    u32 words[29];
-} BattleWorkImage;
+#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EFD4C(void) {
-    BattleEffect*    image;
-    BattleWorkImage* dst;
-    BattleWorkImage* src;
-    u32              offset;
-    u32              slot;
-    u8               battler;
+    BattleEffect* image;
+    u32           slot;
 
-    slot    = Battle_AllocEffect(1, 1);
-    battler = g_Battle.active_battler;
-    if (battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-        src  = (BattleWorkImage*)&g_Game.members[battler];
-        dst  = (BattleWorkImage*)&g_BattleEffects[slot & BYTE_MASK];
-        *dst = *src;
-    } else {
-        offset = (battler - BATTLE_PARTY_CHARACTERS_COUNT) * BATTLE_ENEMY_STRIDE;
-        dst    = (BattleWorkImage*)&g_BattleEffects[slot & BYTE_MASK];
-        *dst   = *(BattleWorkImage*)((u8*)g_BattleEnemyBattlers + offset);
-    }
+    slot = Battle_AllocEffect(1, 1);
+    Effect_CopyActiveBattlerToSlot(slot);
     FIELD(PartyMember*, D_801EC3A4, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE) = g_Task;
     image                                                                      = &g_BattleEffects[slot & BYTE_MASK];
     image->unk_06                                                              = 1;
