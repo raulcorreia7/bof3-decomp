@@ -19,7 +19,7 @@ MATCH void func_801F3B98(void) {
         g_ActorSlots[index].header.step  = 0;
         g_ActorSlots[index].pos.x.fixed  = D_801F4614[g_Task->param.unk_0B].x << 12;
         g_ActorSlots[index].pos.y.fixed  = D_801F4614[g_Task->param.unk_0B].y << 12;
-        g_Task->timer                    = RANDOM_MASK(15) + 0x14;
+        g_Task->timer                    = RANDOM_MASK(15) + 20;
         g_Task->param.unk_0B             = (g_Task->param.unk_0B + 1) & 7;
     }
 }
