@@ -257,7 +257,21 @@ MATCH void func_801F0310(void) {
     func_801F03D8();
 }
 
-INCLUDE_ASM(func_801F0364);
+void func_801F0364(void) {
+    u16 i;
+    u32 off;
+
+    i = 0;
+    do {
+        off = (u16)i * 0x1C;
+        if (FIELD(u8, D_801F13B4, off) != 0) {
+            return;
+        }
+        i++;
+    } while (i < 0xC0);
+    g_BattleEffectBattler->param.unk_0B &= 0xFE;
+    func_801E5988();
+}
 
 void func_801F03D8(void) {
     u16 count;
