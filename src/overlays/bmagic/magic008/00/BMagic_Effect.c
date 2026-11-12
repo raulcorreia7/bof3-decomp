@@ -11,47 +11,7 @@ MATCH void func_801EECF0(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-#ifdef NON_MATCHING
-/* The 0x74 bytes of the work record that a queued slot copies. */
-typedef struct BattleWorkImage {
-    u32 words[29];
-} BattleWorkImage;
-
-/* Makes the effect work follow the acting battler and hands the battler's row to a queued effect slot
- * armed for handler 0x1F. */
-NON_MATCHING void func_801EED5C(void) {
-    BattleWorkImage* slot;
-    u32              index;
-    u32              row;
-
-    g_Task->facing       = g_BattleEffectBattler->facing;
-    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
-    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
-    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0;
-    g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
-    index = Battle_AllocEffect(1, 0x1F);
-    if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-        slot  = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
-        *slot = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    } else {
-        row   = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
-        slot  = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
-        *slot = *(BattleWorkImage*)&g_BattleEnemyBattlers[row];
-    }
-    g_BattleEffects[index & BYTE_MASK].target.party  = g_Task;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 0x1F;
-    g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
-    SND_QueueSelectionFx(0x100);
-}
-#else
 INCLUDE_ASM(func_801EED5C);
-#endif
 
 MATCH void func_801EEF6C(void) {
     if (g_Task->param.unk_0B == 0xFF) {
