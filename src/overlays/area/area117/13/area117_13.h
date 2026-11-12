@@ -8,18 +8,16 @@
 #include "area/spad.h"
 
 /* The event-flag table the step checks. */
-extern u8      D_80144ED0[];
-/* The four corner vectors the scratchpad holds for RotTransPers4. */
-extern SVECTOR D_1F800014[];
+extern u8  D_80144ED0[];
 /* The party position in 16.16 fixed point. */
-extern u16     D_801F55D8[];
-extern u16     D_801F55E4[];
-extern u8      D_801F463C[];
-extern u8      D_801F4640[];
-extern u8      D_801F558C[];
+extern u16 D_801F55D8[];
+extern u16 D_801F55E4[];
+extern u8  D_801F463C[];
+extern u8  D_801F4640[];
+extern u8  D_801F558C[];
 /* The x/y byte pairs of the cell table indexed by the actor param. */
-extern u8      D_801F4658[];
-extern u8      D_801F4659[];
+extern u8  D_801F4658[];
+extern u8  D_801F4659[];
 
 void func_801F3884(s32, s32);
 void func_801F34C8(void);
