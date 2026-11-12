@@ -86,6 +86,7 @@ MATCH void func_801EFF88(void) {
 
     angle_cell  = &D_1F800004;
     phase       = (g_Task->param.unk_0B - 2) & 0xF;
+    /* kept: (s16) types the rsin angle; without it GCC loads the ticker into a0 and the body is 4 bytes short. */
     *angle_cell = phase << 8;
     g_Task->pos.x.fixed += rsin((s16)(phase << 8)) * 2;
     g_Task->pos.y.fixed += rcos(*angle_cell) * 2;
