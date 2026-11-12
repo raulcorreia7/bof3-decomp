@@ -42,6 +42,6 @@ extern Callback g_SceneEntityDispatch[];
 
 void func_801D1220(s32 value);
 void func_801D1914(s16 amount);
-void func_801D1A20(s32* pos, s16 origin, s32 count);
+void func_801D1A20(s32* pos, s16 origin, s32 flags);
 void func_801D1C1C(s32* pos, s32* counter, u8 channel);
 #endif
