@@ -10,7 +10,6 @@ The link scripts go into ``build/ld``. The graph goes to stdout, one tab-separat
 ``c NAME SOURCE ASM_DIR``        compile SOURCE to the object NAME
 ``s NAME SOURCE``                assemble SOURCE
 ``b NAME SOURCE``                wrap the binary SOURCE
-``o PATH``                       link the prebuilt object PATH
 ``m PATH``                       a symbol map the image's names may come from
 
 Rows after a ``target`` row belong to it, in link order. The ``dep`` and ``d`` rows come first.

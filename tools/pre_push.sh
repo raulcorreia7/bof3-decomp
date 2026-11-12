@@ -63,7 +63,7 @@ fi
 names="$names check-headers"
 build_chain &
 if [ -x toolchains/gcc-2.7.2-psx/gcc ]; then
-	start check-plain tools/check_plain.sh
+	start check-plain tools/check_plain.sh "$bld/plain-flags.txt"
 else
 	echo "skip  check-plain (no toolchains/gcc-2.7.2-psx)"
 fi
