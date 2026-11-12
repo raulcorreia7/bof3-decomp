@@ -238,6 +238,7 @@ MATCH void func_801D35A4(void) {
 }
 
 MATCH void func_801D35E0(void) {
+    /* Plain pointers: const lifts the two reads above the D_801DB0CC store. */
     u8* cues;
     u8* sequences;
 
