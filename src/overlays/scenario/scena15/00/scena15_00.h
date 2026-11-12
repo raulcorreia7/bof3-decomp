@@ -11,7 +11,7 @@
 /* One of the 128 falling sparks at the area work base. */
 typedef struct AreaSpark {
     u8       active;
-    u8       pad_01;
+    u8       unk_01;
     s16      fall_speed;
     Point3DL pos;
     s32      unk_10;
