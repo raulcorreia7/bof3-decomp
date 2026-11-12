@@ -1,7 +1,7 @@
 #include "batl_end_00.h"
 
-/* Adds the battle's reward experience a step at a time; the skip input adds the rest
- * at once, and either finishes by clearing the count and advancing the UI state. */
+/* Adds the battle's reward experience a step at a time; a held input pays the rest
+ * at once, and either branch clears the amount and advances the UI state. */
 MATCH void func_801EEF14(void) {
     if (g_InputHeld != 0 && EMI_IsReady()) {
         func_801DD59C(g_Battle.outcome.reward_exp);
