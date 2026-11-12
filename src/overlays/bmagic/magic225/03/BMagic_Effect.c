@@ -74,7 +74,36 @@ MATCH void func_801EF31C(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF404);
+MATCH void func_801EF404(void) {
+    s32 i;
+
+    D_8014637C->unk_29 = 2;
+    i                  = 0;
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        do {
+            if (!(Battle_SlotIsBlocked((i + 3) & BYTE_MASK) & BYTE_MASK)) {
+                g_BattleEnemyBattlers[i & BYTE_MASK].unk_29 = 2;
+            }
+            i++;
+        } while ((u32)(i & BYTE_MASK) < 8);
+    } else {
+        do {
+            if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK)) {
+                g_Game.members[i & BYTE_MASK].unk_29 = 2;
+            }
+            i++;
+        } while ((u32)(i & BYTE_MASK) < 3);
+    }
+    if (g_Battle.encounter == 0x37) {
+        g_Task->unk_29 = 7;
+    } else {
+        g_Task->unk_29 = 3;
+    }
+    g_Task->param.unk_0B = 1;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF578(void) {
     u8 timer_next;
