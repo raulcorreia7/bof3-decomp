@@ -16,7 +16,7 @@ MATCH u8 func_800C1DD0(void) {
         g_Task->unk_09 = 0;
     }
     if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
-        g_Task->unk_09 = MEM_PTR(u8, 0x800E40CFu)[g_BattleCurrentEnemy->kind * 0x88u];
+        g_Task->unk_09 = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->kind].unk_84[3];
         switch (g_Battle.action_id) {
             case 0x3A:
                 func_800C2340(5, 4, 7);
