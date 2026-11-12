@@ -40,7 +40,7 @@ MATCH void func_801EEF44(void) {
         return;
     }
     g_Task->header.mode += 1;
-    SND_QueueSelectionFx(0x101);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
     slot                               = Battle_AllocEffect(1, 7) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
