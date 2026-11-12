@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail on an address in an invented identifier, an unnamed parameter, or a new offset access.
+"""Fail when an invented identifier in include/ or src/ carries an 8-digit hex address.
 
 A name says what a thing is for the game, never where it lives. The default tool names are the
 only identifiers allowed to hold an address: ``func_<ADDR>``, ``D_<ADDR>``, ``L<ADDR>``,
@@ -10,10 +10,13 @@ The check is a ratchet. ``config/address_names.txt`` lists the offenders that ex
 ``<file><TAB><identifier>``. A name that is not on the list fails, and so does a listed entry
 that no longer occurs, so the list only shrinks. Rename the identifier, then delete its line.
 
-``--diff REF`` checks only the lines a change adds: no unnamed ``argN`` parameter, and no file
-gains a ``FIELD``/``SP_REF``/``SP`` use. A record or scratchpad member is the form to write; the
-existing uses shrink record by record (plan section AY). A rebuild that moves an existing use
-changes no count, so it passes.
+``--diff REF`` checks the lines a change adds. A new identifier must not use a word the
+vocabulary rejects where another word is decided ([vocabulary](../docs/naming.md#vocabulary)),
+and a parameter must be named. An identifier that already exists at ``REF`` is not a new name:
+this check only stops new debt, the rename map clears the old. A file that changes must not gain a
+``FIELD``/``SP_REF``/``SP`` use either: the member of the record or of the scratchpad view is the
+form to write, so those uses can only shrink (plan section AY). A rebuild that moves an existing
+use changes no count, so it passes.
 
 Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline from the tree)
 """
@@ -45,6 +48,110 @@ OFFSET_DEFINITION = re.compile(r"^[ \t]*\#[ \t]*define[ \t]+(?:FIELD|SP_REF|SP)\
 SKIP = re.compile(
     r"/\*.*?\*/|//[^\n]*|\"(?:\\.|[^\"\\\n])*\"|'(?:\\.|[^'\\\n])*'", re.DOTALL
 )
+WORD = re.compile(r"[A-Z]+(?=[A-Z][a-z])|[A-Z]?[a-z]+|[A-Z]+|[0-9]+")
+
+# One word per concept: a new name that uses a rejected word takes the decided word instead.
+# See docs/naming.md#vocabulary. Only words with no second sense are here; data/work/record and
+# the other nouns with a game sense are reviewed through the rename map.
+REJECTED = {
+    "array": "name a table for the plural of what its index selects",
+    "table": "name a table for the plural of what its index selects",
+    "handler": "name the action; Callback is the void (*)(void) type, Func a table element",
+    "proc": "name the action",
+    "routine": "name the action",
+    "fn": "name the action",
+    "cb": "name the action",
+    "data": "the game noun",
+    "info": "the game noun",
+    "work": "the game noun",
+    "misc": "the game noun",
+    "rec": "the game noun",
+    "buf": "buffer",
+    "idx": "index",
+    "cnt": "count",
+    "num": "count or id",
+    "tmp": "the value it holds",
+    "temp": "the value it holds",
+    "cur": "current",
+    "ptr": "the pointee's game noun",
+    "obj": "the object's game noun",
+    "object": "the object's game noun",
+    "ctrl": "the role it controls",
+    "mgr": "the role it manages",
+    "spr": "sprite",
+    "chara": "character",
+    "monster": "enemy",
+    "goods": "item",
+    "spell": "magic or ability",
+    "fx": "effect",
+    "render": "draw",
+    "lookup": "find or get",
+    "fetch": "load or get",
+    "put": "set or write",
+    "make": "create or alloc",
+    "kill": "free",
+    "delete": "remove",
+    "destroy": "free or remove",
+    "check": "is, has, can, test or find",
+    "handle": "dispatch, run or update",
+    "finish": "end",
+    "store": "set or write",
+    "kind": "type",
+    "class": "type",
+    "bits": "flags",
+    "len": "length",
+    "colour": "color",
+    "amount": "count or value",
+    "quantity": "count or value",
+}
+
+# A tag with one spelling per system; a new name with the left side takes the right side.
+PREFIXES = (
+    (re.compile(r"^World_"), "WorldMap_"),
+    (re.compile(r"^Plchar"), "PlChar"),
+    (re.compile(r"^PAD_"), "INPUT_"),
+    (re.compile(r"^Mem_"), "SYS_"),
+    (re.compile(r"^Matrix_"), "MATH_"),
+    (re.compile(r"^Fish_"), "Fishing_"),
+    (re.compile(r"^CD_"), "EMI_ or DISC_"),
+)
+
+
+def split_words(name: str) -> list[str]:
+    """Split an identifier at underscores and camel humps, lower case."""
+    return [token.lower() for chunk in name.split("_") for token in WORD.findall(chunk)]
+
+
+def rejected_reason(name: str) -> str | None:
+    """Why a new identifier breaks the vocabulary, or ``None`` when it follows it."""
+    for pattern, replacement in PREFIXES:
+        if pattern.search(name):
+            return f"the system tag is {replacement}"
+    for word in split_words(name):
+        if word in REJECTED:
+            return REJECTED[word]
+    return None
+
+
+def rejected_names(text: str) -> set[str]:
+    """Identifiers in ``text`` that use a rejected word or an old tag."""
+    return {
+        m.group()
+        for m in TOKEN.finditer(text)
+        if m.lastgroup == "ident"
+        and not ADDRESS.fullmatch(m.group())
+        and rejected_reason(m.group()) is not None
+    }
+
+
+def in_ref(ref: str, name: str) -> bool:
+    """Whether ``name`` occurs as a word in the tracked tree at ``ref``."""
+    found = subprocess.run(
+        ["git", "grep", "-q", "-w", "-F", "-e", name, ref, "--", "."],
+        check=False,
+        capture_output=True,
+    )
+    return found.returncode == 0
 
 
 def unnamed_parameters(text: str) -> set[str]:
@@ -63,14 +170,40 @@ def offset_macros(text: str) -> set[str]:
     return {m.group(1) for m in OFFSET_MACRO.finditer(SKIP.sub(" ", text))}
 
 
-def added_lines(ref: str):
-    """Yield (path, line, text) for each line a change adds under include/ or src/.
+def macro_counts(text: str) -> dict[str, int]:
+    """``FIELD``/``SP_REF``/``SP`` uses in code, per macro name."""
+    counts: dict[str, int] = {}
+    for match in OFFSET_MACRO.finditer(SKIP.sub(" ", text)):
+        counts[match.group(1)] = counts.get(match.group(1), 0) + 1
+    return counts
 
-    Whitespace-only edits do not count as adding a line: reindenting an existing
-    ``FIELD`` use must not read as a new one.
-    """
+
+def changed_paths(ref: str) -> list[str]:
+    """The paths under include/ or src/ a change touches."""
+    out = subprocess.run(
+        ["git", "diff", "--name-only", f"{ref}...HEAD", "--", *ROOTS],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout
+    return [path for path in out.split() if path]
+
+
+def base_text(ref: str, path: str) -> str:
+    """The file at ``path`` as it is in the base revision; empty when new."""
+    result = subprocess.run(
+        ["git", "show", f"{ref}:{path}"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout if result.returncode == 0 else ""
+
+
+def added_lines(ref: str):
+    """Yield (path, line, text) for each line a change adds under include/ or src/."""
     diff = subprocess.run(
-        ["git", "diff", "-w", "-U0", f"{ref}...HEAD", "--", *ROOTS],
+        ["git", "diff", "-U0", f"{ref}...HEAD", "--", *ROOTS],
         check=False,
         capture_output=True,
         text=True,
@@ -128,36 +261,6 @@ def baseline_entries() -> set[str]:
     }
 
 
-def macro_counts(text: str) -> dict[str, int]:
-    """``FIELD``/``SP_REF``/``SP`` uses in code, per macro name."""
-    counts: dict[str, int] = {}
-    for match in OFFSET_MACRO.finditer(SKIP.sub(" ", text)):
-        counts[match.group(1)] = counts.get(match.group(1), 0) + 1
-    return counts
-
-
-def changed_paths(ref: str) -> list[str]:
-    """The paths under include/ or src/ a change touches."""
-    out = subprocess.run(
-        ["git", "diff", "--name-only", f"{ref}...HEAD", "--", *ROOTS],
-        check=False,
-        capture_output=True,
-        text=True,
-    ).stdout
-    return [path for path in out.split() if path]
-
-
-def base_text(ref: str, path: str) -> str:
-    """The file at ``path`` as it is in the base revision; empty when new."""
-    result = subprocess.run(
-        ["git", "show", f"{ref}:{path}"],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    return result.stdout if result.returncode == 0 else ""
-
-
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
@@ -167,10 +270,24 @@ def main(argv: list[str]) -> int:
             print("usage: python3 tools/check_names.py --diff REF", file=sys.stderr)
             return 2
         bad = 0
+        seen: set[str] = set()
         for path, line, text in added_lines(argv[1]):
             for name in unnamed_parameters(text):
                 print(
                     f"{path}:{line}: {name}: an unnamed parameter; rename it to what it holds",
+                    file=sys.stderr,
+                )
+                bad = 1
+            if path.startswith(("include/psyq", "include/psx")):
+                continue
+            if path == "include/common/util.h":
+                continue  # the generic helpers may name arrays and bits directly
+            for name in rejected_names(text):
+                if name in seen or in_ref(argv[1], name):
+                    continue
+                seen.add(name)
+                print(
+                    f"{path}:{line}: {name}: {rejected_reason(name)} (new name)",
                     file=sys.stderr,
                 )
                 bad = 1
@@ -194,10 +311,10 @@ def main(argv: list[str]) -> int:
                 )
                 bad = 1
         if bad:
-            print(f"check-names: failed against {argv[1]}", file=sys.stderr)
+            print(f"check-names: names against {argv[1]}", file=sys.stderr)
             return 1
         print(
-            f"check-names: no unnamed parameters or new offset accesses against {argv[1]}"
+            f"check-names: no new rejected names, unnamed parameters or offset accesses against {argv[1]}"
         )
         return 0
     now = tree_entries()
