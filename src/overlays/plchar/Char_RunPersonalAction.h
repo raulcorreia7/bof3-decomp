@@ -10,7 +10,7 @@ MATCH void Char_RunPersonalAction(void) {
     s32 hit;
     s32 x;
     s32 y;
-    /* FAKE: retail keeps the slot index in $s0; gcc-2.7.2 assigns $s1. */
+    /* FAKE: retail keeps the slot byte in $s0 and its sign-extended index in $s1; pure C swaps the pair (best 10 of 147 rows differ). */
     FAKE_REG(s8, slot, "s0");
 
     if (g_Task->unk_0A != 0) {
