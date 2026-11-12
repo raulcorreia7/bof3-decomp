@@ -400,19 +400,19 @@ if have_game
   objdiff_json = custom_target('objdiff.json',
     output: ['objdiff.json', 'sdk.json'],
     depends: image_bins + draft_targets,
-    depend_files: ['config/project.toml', 'config/sdk/library-units.csv', 'tools/objdiff_config.py'],
+    depend_files: ['config/sdk/library-units.jsonl', 'tools/objdiff_config.py'],
     command: [venv_python, tools / 'objdiff_config.py', 'generate', '--root', root,
-              '--config', root / 'config/project.toml', '--build-dir', bld])
+              '--build-dir', bld])
   # The report names the commit that wrote it, so it is always rewritten.
   run_target('report',
     command: [venv_python, tools / 'objdiff_config.py', 'report', '--root', root,
-              '--config', root / 'config/project.toml', '--build-dir', bld],
+              '--build-dir', bld],
     depends: objdiff_json)
 
   rz_inputs = custom_target('rz-inputs',
     output: 'rz-inputs.stamp',
     command: [touch, '@OUTPUT@'],
-    depend_files: headers + ['config/link.toml', 'config/sdk/library-units.csv',
+    depend_files: headers + ['config/link.toml', 'config/sdk/library-units.jsonl',
       'config/emi/etc/game/00/splat.yaml', 'config/exe/slus_004_22/splat.yaml',
       'build/symbols/emi+etc+game+00.link', 'build/symbols/exe+slus_004_22.link',
       root / payload_of['exe/slus_004_22'],

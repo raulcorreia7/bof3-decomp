@@ -303,13 +303,6 @@ typedef struct SystemDispatchFuncs {
 
 ASSERT_SIZE(SystemDispatchFuncs, 0x18);
 
-/* Ability category records at 0x801CA719 have a 0x14-byte stride. */
-typedef volatile struct BattleAbilityCategory {
-    u8 value;
-    u8 pad_001[0x13];
-} BattleAbilityCategory;
-
-ASSERT_SIZE(BattleAbilityCategory, 0x14);
 typedef void (*CellFunc)(u8* record, s32 cell_x, s32 cell_y);
 
 /* Record of the D_8017F5B4 table; no field meaning is proven. */
