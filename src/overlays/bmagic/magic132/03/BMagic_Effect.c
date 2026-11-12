@@ -44,8 +44,6 @@ MATCH void func_801EF0A4(void) {
 /* func_801EF114 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-extern Callback D_801EFD5C[];
-
 MATCH void func_801EF158(void) {
     D_801EFD5C[g_Task->header.step]();
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {

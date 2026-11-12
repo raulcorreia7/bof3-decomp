@@ -51,8 +51,8 @@ MATCH void func_801EF16C(void) {
     s32 threshold;
 
     g_BMagicOrbitWork->radius -= 2;
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
+    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
+    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
     g_BMagicOrbitWork->unk_0B++;
     if (g_BMagicOrbitWork->unk_09 < 16) {
         g_BMagicOrbitWork->unk_09 += 2;
@@ -83,11 +83,11 @@ MATCH void func_801EF52C(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    off    = FIELD(u16, g_BMagicOrbitWork, 0xE) + 0x800;
+    off    = g_BMagicOrbitWork->angle + 0x800;
     rot.vz = ((g_BMagicOrbitWork->unk_03 << 7) - off) & 0xFFF;
-    pos.vx = (FIELD(s32, g_BMagicOrbitWork, 0x10) >> 9) - 0x4000;
-    pos.vy = (FIELD(s32, g_BMagicOrbitWork, 0x14) >> 9) - 0x4000;
-    pos.vz = -FIELD(s16, g_BMagicOrbitWork, 0x1A) / 2;
+    pos.vx = (g_BMagicOrbitWork->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_BMagicOrbitWork->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -COORD_INT(g_BMagicOrbitWork->pos.z) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }

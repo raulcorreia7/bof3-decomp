@@ -713,6 +713,7 @@ Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source =
 Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic067 (Chill)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF2D0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic067." }
 Effect_Drift = { addr = 0x801EF59C, type = "func", source = "Drifts the effect actor each frame along its phase (header.param.phase) and at effect timer (byte 0x09) value 0x30 lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic067 (Chill)." }
+Effect_SetFacingMatrix = { addr = 0x801EF688, type = "func", source = "Sets the GTE model matrix from the effect's facing and its position, half its height span deep, viewed through the camera in magic067." }
 Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "Clears the effect timer (byte 0x09), loads the effect counter (byte 0x0A) with 0x88 and runs the next-step routine in magic067 (Chill)." }
 Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic067 (Chill)." }
 Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic067 (Chill)." }
@@ -1411,6 +1412,7 @@ BMagic_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the han
 Effect_CountDownTimerCallSelector = { addr = 0x801EEEFC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (Battle_ApplyDamageFlags with 0x20) and advances header.mode (byte 0x01) in magic137 (Corona)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEFD4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic137." }
 Effect_Drift = { addr = 0x801EF2C4, type = "func", source = "Drifts the effect actor each frame along its phase (header.param.phase) and at effect timer (byte 0x09) value 0x30 lowers the ticker (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic137 (Corona)." }
+Effect_SetFacingMatrix = { addr = 0x801EF3B0, type = "func", source = "Sets the GTE model matrix from the effect's facing and its position, half its height span deep, viewed through the camera in magic137." }
 Effect_ArmCounterNextStep = { addr = 0x801EFCC0, type = "func", source = "Clears the effect timer (byte 0x09), loads the effect counter (byte 0x0A) with 0x88 and advances header.step (byte 0x02) in magic137 (Corona)." }
 Effect_CountUpAndStep = { addr = 0x801EFD00, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic137 (Corona)." }
 Effect_CountDownAndStep = { addr = 0x801EFD50, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic137 (Corona)." }

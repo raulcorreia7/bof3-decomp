@@ -268,14 +268,14 @@ typedef struct BMagicOrbitWork {
     /* 0x0B */ u8         unk_0B;
     /* 0x0C */ s16        radius;
     /* 0x0E */ u16        angle;
-    /* 0x10 */ s32        unk_10;
-    /* 0x14 */ s32        unk_14;
-    /* 0x18 */ s32        unk_18;
+    /* 0x10 */ WorldPos   pos;
 } BMagicOrbitWork;
+
+ASSERT_SIZE(BMagicOrbitWork, 0x1C);
 
 ASSERT_OFFSET(BMagicOrbitWork, radius, 0x0C);
 ASSERT_OFFSET(BMagicOrbitWork, angle, 0x0E);
-ASSERT_OFFSET(BMagicOrbitWork, unk_14, 0x14);
+ASSERT_OFFSET(BMagicOrbitWork, pos, 0x10);
 
 /* D_801F05F8 (magic106), D_801F1054 (magic063) */
 extern BMagicOrbitWork* g_BMagicOrbitWork;
@@ -283,17 +283,17 @@ extern BMagicOrbitWork* g_BMagicOrbitWork;
 /* Steps the orbit work around its battler: the angle advances and the position follows it at the work's radius, the
  * phase advances by unk_0A, and every other frame the frame count drops; at zero the battler's ticker drops and CLEAR
  * runs. A statement macro. */
-#define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                           \
-    g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;                                                              \
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);      \
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius); \
-    FIELD(u16, g_BMagicOrbitWork, 0x1A) += g_BMagicOrbitWork->unk_0A;                                                                   \
-    g_BMagicOrbitWork->unk_0B++;                                                                                                        \
-    if (g_FrameCount & 0x1) {                                                                                                           \
-        if (--g_BMagicOrbitWork->unk_09 == 0) {                                                                                         \
-            g_BattleEffectBattler->param.unk_0B--;                                                                                      \
-            CLEAR();                                                                                                                    \
-        }                                                                                                                               \
+#define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                              \
+    g_BMagicOrbitWork->angle       = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;                                                            \
+    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;      \
+    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius; \
+    COORD_INT(g_BMagicOrbitWork->pos.z) += g_BMagicOrbitWork->unk_0A;                                                                      \
+    g_BMagicOrbitWork->unk_0B++;                                                                                                           \
+    if (g_FrameCount & 0x1) {                                                                                                              \
+        if (--g_BMagicOrbitWork->unk_09 == 0) {                                                                                            \
+            g_BattleEffectBattler->param.unk_0B--;                                                                                         \
+            CLEAR();                                                                                                                       \
+        }                                                                                                                                  \
     }
 
 extern MagicModule       D_801EEC00;

@@ -7,9 +7,9 @@ MATCH void Effect_StartOrbit(void) {
         D_1F800000.view.effect.params[0] = (g_BMagicOrbitWork->unk_04 >> 5) * 16 + 0x60;
         phase                            = g_BMagicOrbitWork->unk_04 & 0x1F;
         D_1F800000.view.effect.params[2] = phase << 7;
-        g_BMagicOrbitWork->unk_10        = g_BattleEffectBattler->pos.x.fixed + rsin(phase << 7) * D_1F800000.view.effect.params[0];
-        g_BMagicOrbitWork->unk_14        = g_BattleEffectBattler->pos.y.fixed + rcos(D_1F800000.view.effect.params[2]) * D_1F800000.view.effect.params[0];
-        g_BMagicOrbitWork->unk_18        = g_BattleEffectBattler->pos.z.fixed;
+        g_BMagicOrbitWork->pos.x.fixed   = g_BattleEffectBattler->pos.x.fixed + rsin(phase << 7) * D_1F800000.view.effect.params[0];
+        g_BMagicOrbitWork->pos.y.fixed   = g_BattleEffectBattler->pos.y.fixed + rcos(D_1F800000.view.effect.params[2]) * D_1F800000.view.effect.params[0];
+        g_BMagicOrbitWork->pos.z.fixed   = g_BattleEffectBattler->pos.z.fixed;
         g_BMagicOrbitWork->angle         = D_1F800000.view.effect.params[2];
         g_BMagicOrbitWork->timer_05      = (rand() & 7) + 5;
         g_BMagicOrbitWork->timer_06      = (rand() & 7) + 5;

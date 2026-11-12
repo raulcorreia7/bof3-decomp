@@ -22,7 +22,8 @@ extern Magic067SecondSteps D_801EEC18;
 extern Callback            D_801F04C8[];
 extern Callback            D_801F04D8[];
 
-void func_801EF688(void);
+/* func_801EF688 */
+void Effect_SetFacingMatrix(void);
 void func_801EF79C(void);
 void func_801F00C4(void);
 
