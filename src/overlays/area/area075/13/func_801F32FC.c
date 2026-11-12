@@ -15,7 +15,7 @@ MATCH void func_801F32FC(void) {
     for (i = 0; i < 5; i++) {
         slot = SP_REF(s16, 0x0u) = Actor_FindFree();
         if (slot != 0xFF) {
-            func_801A4D54(&D_801F57B0[i * 0x11]);
+            func_801A4D54(D_801F57B0[i]);
             work               = (Actor*)g_Task;
             work->pos.x.fixed  = actor->pos.x.fixed + TO_COORD(3);
             work->pos.y.fixed  = actor->pos.y.fixed;
