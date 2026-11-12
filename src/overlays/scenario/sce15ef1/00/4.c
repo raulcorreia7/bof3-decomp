@@ -207,7 +207,7 @@ MATCH void func_801D2088(void) {
     do {
         func_801D1CD4(spin);
         spin += 1;
-        *angle += 0x10;
+        *angle += 16;
         i += 1;
         angle += sizeof(WorldSpin) / sizeof(*angle);
     } while ((i & 0xFF) < 0x20U);
