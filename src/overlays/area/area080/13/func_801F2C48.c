@@ -4,10 +4,8 @@ MATCH void func_801F2C48(void) {
     Actor*    work;
     AreaRing* ring;
 
-    work              = g_Task;
-    work->pos.x.fixed = D_80146954.x.fixed;
-    work->pos.y.fixed = D_80146954.y.fixed;
-    work->pos.z.fixed = D_80146954.z.fixed;
+    work = g_Task;
+    WorldPos_Copy(&work->pos, &D_80146954);
 
     ring            = (AreaRing*)AREA_WORK;
     D_801F44A0      = ring;
