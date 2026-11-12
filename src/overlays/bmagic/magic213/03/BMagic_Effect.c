@@ -21,7 +21,16 @@ INCLUDE_ASM(func_801EF048);
 
 INCLUDE_ASM(func_801EF23C);
 
-INCLUDE_ASM(func_801EF348);
+MATCH void func_801EF348(void) {
+    g_PaletteFades[g_Task->timer].offset.red -= 1;
+    g_PaletteFades[g_Task->timer].offset.green -= 1;
+    g_PaletteFades[g_Task->timer].offset.blue -= 1;
+    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+        GFX_FreePaletteFade(g_Task->timer);
+        Battle_MarkDamaged(g_Task->unk_04);
+        g_Task->header.step++;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
