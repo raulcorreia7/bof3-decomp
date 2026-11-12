@@ -293,6 +293,10 @@ The diff says what retail does; this table says what to write for it. Each examp
 | a `beq` chain on a state byte                                | `switch` with dense small cases                                                                                                                                  | area197 `func_801F4164.c`             |
 | an `andi` mask after a counter update                        | the local is `u8` (likewise `u16` or `s16` for their shifts); plain `char` is unsigned (`-funsigned-char`)                                                       | `engine/game/00/Actor_FindFreeSlot.c` |
 | a decrement, a store, then a test of the new value           | decrement inside the test: `if (--x == 0)`                                                                                                                       | scena08 `func_801F7C08`               |
+| `bgez` and a `negu` on one value                             | `abs(v)` or `ABS(v)` from `<abs.h>`; retail never calls libc `abs`, so the pair is the inline form and either spelling gives it                                  | `Actor_InitMovement` 0x8015C31C       |
+| `bgez` and a `negu` after one computation of a difference    | `abs(a - b)`: `ABS` would recompute the difference on the negative path                                                                                          | `func_80154ABC` 0x80154EA0            |
+| `bgez` and a `negu` that writes the destination variable     | the hand-written `if (v < 0) v = -v;`; `ABS(v)` gives a different register                                                                                       | `func_801B21E8`                       |
+| `slt` with `beqz` and a `move`                               | `MAX(a, b)` or `MIN(a, b)`; the compare-and-assign `if` gives the same bytes                                                                                     | `func_801BF8E0` 0x801BF8E0            |
 
 A `do`-`while` with a counter and a `goto` are allowed where the bytes need them: `git grep -c
 'do {' -- src` totals 558 lines and `git grep -c 'goto ' -- src` 729. `FAKE_REG` is the last
