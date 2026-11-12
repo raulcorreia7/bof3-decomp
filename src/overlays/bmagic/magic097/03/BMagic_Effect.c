@@ -16,7 +16,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFC8(void) {
-    D_801F0AC4[g_Task->header.step]();
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), g_Task->header.step);
     func_800AF764();
     if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Effect_SetActorMatrixRolled();

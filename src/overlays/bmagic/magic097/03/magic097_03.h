@@ -17,9 +17,6 @@ extern s16     D_1F800014_HALF[];
 extern s16     D_1F800016;
 extern s16     D_1F800018;
 
-/* The step handlers of func_801EEFC8. */
-extern Callback D_801F0AC4[4];
-
 void Effect_DrawBolt(void);
 void Effect_SetActorMatrixRolled(void);
 void func_801EF5C4(s32 band_height, s32 radius, s16 jitter_mask);
