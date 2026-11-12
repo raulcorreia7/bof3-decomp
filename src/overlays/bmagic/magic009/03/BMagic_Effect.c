@@ -15,7 +15,7 @@ MATCH void func_801EEF08(void) {
     if (g_Task->param.unk_0B == 0) {
         i = 0;
         do {
-            slot                               = Battle_AllocEffect(1, 0x2A) & BYTE_MASK;
+            slot                               = Battle_AllocEffect(1, 42) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_Task;
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_0B       = i;

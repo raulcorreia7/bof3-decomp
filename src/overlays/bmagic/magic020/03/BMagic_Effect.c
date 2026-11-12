@@ -23,7 +23,7 @@ MATCH void func_801EF0F8(void) {
             g_Task->param.unk_0B = 0;
             g_Task->header.mode += 1;
             for (i = 0; i < 8; i++) {
-                slot                               = Battle_AllocEffect(1, 0x2E) & BYTE_MASK;
+                slot                               = Battle_AllocEffect(1, 46) & BYTE_MASK;
                 work                               = g_Task;
                 g_BattleEffects[slot].header.mode  = 2;
                 g_BattleEffects[slot].header.step  = 0;
