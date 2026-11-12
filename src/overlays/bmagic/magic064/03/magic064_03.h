@@ -40,7 +40,6 @@ extern Magic064SpriteUv D_801F13A4[];
 void func_801EF8F4(void);
 void func_801F001C(void);
 void func_801F04A0(void);
-void func_801F05A4(void);
 
 void func_801F03D8(void);
 void func_801F0EEC(u32 sprite, s32 blend, s32 color);

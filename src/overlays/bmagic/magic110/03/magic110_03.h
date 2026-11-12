@@ -9,7 +9,6 @@ extern BMagicEffectFuncs D_801EEC04;
 
 extern Callback D_801F0478[];
 extern Callback D_801F048C[];
-void            BMagic_DrawDarkRing(void);
 
 extern Callback D_801F049C[];
 void            func_801F0138(void);

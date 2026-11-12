@@ -10,7 +10,6 @@ extern Callback     D_801EFE08[];
 extern BattleEffect D_801EFE14[];
 #define BMAGIC_EFFECT_SLOTS D_801EFE14
 #define BMAGIC_EFFECT_COUNT 64
-u32  BMagic_AllocEffect(void);
 void func_801EF7FC(void);
 void func_801EF534(void);
 

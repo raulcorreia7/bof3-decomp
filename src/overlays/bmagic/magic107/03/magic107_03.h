@@ -21,7 +21,6 @@ void func_801EED40(void);
 void func_801EF0E4(void);
 void func_801EF290(void);
 void func_801EF544(void);
-void Effect_SetActorMatrixQuarterRoll(void);
 void func_801EFAE0(void);
 void func_801EFEA8(void);
 void func_801F01AC(void);

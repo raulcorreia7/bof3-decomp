@@ -35,7 +35,6 @@ void func_801EFEC8(void);
 
 extern Magic003SecondSteps D_801EEC18;
 extern Callback            D_801F0AD8[];
-u32                        BMagic_AllocEffect(void);
 void                       BMagic_DispatchEffectMode(void);
 extern u8                  D_801F0A84[];
 extern u8                  D_801F0A98[];

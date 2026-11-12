@@ -8,8 +8,6 @@
 extern s16      D_1F800004;
 extern Callback D_801F0D64[];
 extern Callback D_801F0D7C[];
-void            func_801EF87C(void);
-void            BMagic_DrawDarkRing(void);
 
 extern Callback D_801F0D8C[];
 void            func_801F0168(void);

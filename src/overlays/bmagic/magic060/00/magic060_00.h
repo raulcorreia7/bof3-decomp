@@ -29,7 +29,6 @@ void            func_801F012C(void);
 extern Callback D_801F0BCC[];
 void            func_801F0428(void);
 
-void func_801EF174(void);
 void func_801EF2DC(void);
 void func_801EF590(u8* text, s32 x, s32 y);
 void func_801EF76C(u8* text, s32 x, s32 y);
