@@ -9,6 +9,8 @@
 
 #include "shared/WorldSpin.h"
 
+#include <string.h>
+
 #define AREA_SPIN_RADIUS     32
 #define AREA_SPIN_PITCH      RANDOM_MASK(0x3FF)
 #define AREA_SPIN_SCALE_MASK 0x7
@@ -28,5 +30,7 @@ extern u16 D_801F5058[];
 extern u16 D_801469EA;
 
 void func_801F3400(s16 x, s16 y, s16 z, s16 w);
+
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 
 #endif
