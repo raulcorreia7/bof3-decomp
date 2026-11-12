@@ -53,7 +53,29 @@ MATCH void func_801F83D8(void) {
 MATCH void func_801F8414(void) {
 }
 
-INCLUDE_ASM(func_801F841C);
+MATCH void func_801F841C(void) {
+    u8* step = &D_80146875;
+
+    switch (*step) {
+        case 0:
+            *step = 1;
+            SYS_SetFlag(g_SceneFlags, 0);
+            Game_RequestAreaChange(AREA_ID_EYGNOCK_ROAD, 0x1F8000, 0x4C0000, 0x86);
+            break;
+        case 1:
+            g_AreaDrawFlags = 0x1F;
+            *step           = 2;
+            break;
+        case 2:
+            if (*g_ScriptVars == 0x11) {
+                SYS_SetFlag(g_SceneFlags, 1);
+                Game_ClearScriptActive();
+                *step      = 0;
+                D_80146874 = 0;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F8504);
 
