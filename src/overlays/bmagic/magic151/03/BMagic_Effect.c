@@ -77,7 +77,23 @@ MATCH void func_801EFA34(void) {
 
 INCLUDE_ASM(func_801EFAAC);
 
-INCLUDE_ASM(func_801EFBAC);
+MATCH void func_801EFBAC(void) {
+    u8           count;
+    u32          slot;
+    PartyMember* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        slot                               = Battle_AllocEffect(1, 0x44) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 3;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+        g_Task->unk_09 = 4;
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EFC68);
 
