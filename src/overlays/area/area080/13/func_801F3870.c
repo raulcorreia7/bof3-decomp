@@ -14,7 +14,7 @@ MATCH void func_801F3870(void) {
             D_801F44A4->pos.y.fixed += D_801F44A4->velocity_y;
             height                  = Area_SampleHeight(D_801F44A4->pos.x.fixed, D_801F44A4->pos.y.fixed);
             D_801F44A4->pos.z.fixed = TO_COORD(height);
-            func_801F352C(D_801F44A4);
+            Area_DrawSpark(D_801F44A4);
             if (--D_801F44A4->life == 0) {
                 D_801F44A4->active = 0;
             }

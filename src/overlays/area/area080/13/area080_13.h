@@ -52,7 +52,8 @@ extern AreaSparkSlot* D_801F44A4;
 void Area_ProjectRing(AreaRing* ring);
 void func_801F31A0(s32 arg0);
 void func_801F33DC(AreaRing* ring);
-void func_801F352C(AreaSparkSlot* spark);
+/* func_801F352C */
+void Area_DrawSpark(AreaSparkSlot* spark);
 void func_801F3834(void);
 void func_801F3870(void);
 
