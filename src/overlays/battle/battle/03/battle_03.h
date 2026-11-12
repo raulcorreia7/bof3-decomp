@@ -1147,6 +1147,4 @@ static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 
     func_801DA4B4((s16)(x + 2), (s16)(y + 0x10), (s16)(x + width), (s16)(y + 0x10), r, g, b);
 }
 
-u8 Battle_SlotIsBlocked(u32 slot);
-
 #endif

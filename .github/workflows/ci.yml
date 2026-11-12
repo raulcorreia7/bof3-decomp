@@ -13,10 +13,43 @@ permissions:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  # A newer commit replaces the run for the same branch; `verify-main.sh` runs the byte-exact check
+  # on main and reverts a merge that fails it, so a cancelled push run loses nothing.
+  cancel-in-progress: true
 
 jobs:
+  # A squash merge carries the file content the pull request's `disc-free` run already checked.
+  # Skip the push run when that check passed, so main is checked only when the content differs.
+  checked:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      checks: read
+      pull-requests: read
+    outputs:
+      skip: ${{ steps.pr.outputs.skip }}
+    steps:
+      - id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          skip=false
+          number=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" --jq '.[0].number // empty') || number=
+          if [ -n "$number" ]; then
+            head=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$number" --jq .head.sha)
+            passed=$(gh api "repos/$GITHUB_REPOSITORY/commits/$head/check-runs?per_page=100" \
+              --jq '[.check_runs[] | select(.name == "disc-free" and .conclusion == "success")] | length > 0')
+            if [ "$passed" = true ]; then skip=true; fi
+          fi
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+
   disc-free:
+    needs: checked
+    # `checked` is skipped on a pull request, and a job that needs a skipped job is skipped too
+    # unless its condition calls a status function: without !cancelled() a pull request runs nothing.
+    if: ${{ !cancelled() && needs.checked.outputs.skip != 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -31,7 +64,8 @@ jobs:
         run: |
           code=true
           if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            files=$(git diff --name-only HEAD^1 HEAD) || files=unknown
+            # The base commit and every commit of the pull request are in the clone (fetch-depth: 0).
+            files=$(git diff --name-only "${{ github.event.pull_request.base.sha }}...HEAD") || files=unknown
             code=false
             if printf '%s\n' "$files" | grep -qvE '^(.*\.md|docs/.*|LICENSE[^/]*|NOTICE|\.github/ISSUE_TEMPLATE/.*|\.agents/.*)$'; then code=true; fi
             if printf '%s\n' "$files" | grep -qE '^\.github/workflows/'; then code=true; fi

@@ -4,7 +4,17 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC24);
+MATCH void func_801EEC24(void) {
+    Magic113Steps handlers;
+
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);
+    if (g_Task->header.flags != 0) {
+        Effect_SetActorMatrix();
+        func_801EF4F0();
+        PopMatrix();
+    }
+}
+
 INCLUDE_ASM(func_801EECE0);
 
 INCLUDE_ASM(func_801EEE24);
@@ -176,7 +186,13 @@ MATCH void func_801F026C(void) {
 
 INCLUDE_ASM(func_801F02CC);
 
-INCLUDE_ASM(func_801F0764);
+MATCH void func_801F0764(void) {
+    GFX_AddDitheredDrawMode(3, getTPage(1, 1, 320, 256));
+    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    SYS_DISPATCH_BYTE(D_801F0BD8, g_Task->header.step);
+    g_ScriptTable = AREA_SCRIPT_TABLE;
+    GFX_AddDitheredDrawMode(3, getTPage(1, 0, 320, 256));
+}
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 

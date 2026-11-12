@@ -7,6 +7,28 @@ from bof3.toolchain.splat import (
 )
 
 
+def test_a_nested_copy_of_an_extracted_function_is_dropped(tmp_path: Path) -> None:
+    base = tmp_path / "asm" / "emi" / "test" / "00"
+    nested = base / "764"
+    nested.mkdir(parents=True)
+    body = (
+        "nonmatching func_80000030, 0x8\n"
+        "glabel func_80000030\n"
+        "jr $ra\n"
+        "nop\n"
+        "endlabel func_80000030\n"
+    )
+    (nested / "func_80000030.s").write_text(body)
+    (base / "764.s").write_text(body)
+
+    _extract_functions(base)
+    assert (base / "func_80000030.s").read_text() == body
+    _flatten_asm_tree(base)
+
+    assert (base / "func_80000030.s").read_text() == body
+    assert not nested.exists()
+
+
 def test_split_tree_is_flattened_and_keeps_hand_and_data(tmp_path: Path) -> None:
     base = tmp_path / "asm" / "emi" / "test" / "00"
     hand = base / "hand"

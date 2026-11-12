@@ -30,6 +30,8 @@ extern char          g_MenuClockFormat[];
 extern u8            D_80144DF5;
 extern u8            D_80144DF6;
 extern u8            D_80144DF7;
+/* The item category of each equipment slot. */
+extern u8            D_801D875C[];
 extern u8            D_80148338;
 extern s8            D_80148511;
 extern u8            D_80148656;
@@ -50,6 +52,10 @@ extern u8            g_SaveSlotTimeColon[];
 extern u8            g_SaveCardPortLabelFirst[];
 /* D_801D0D98 */
 extern u8            g_SaveCardPortLabelSecond[];
+
+/* The eighth character record is the equipment menu's work record. */
+#define MENU_BATE_CHARACTER_RECORD 7
+
 /* Entries of the handler tables. */
 #define MENU_BATE_STEP_COUNT       4
 #define MENU_BATE_STEP2_COUNT      3
@@ -123,7 +129,7 @@ typedef struct BateState {
     u8 unk_08;
     u8 pad_09[3];
     /* The equipped item in each slot before the change. */
-    u8 equipped_items[6];
+    u8 equipped_items[EQUIP_SLOT_COUNT];
 } BateState;
 
 extern s8        D_80148659;

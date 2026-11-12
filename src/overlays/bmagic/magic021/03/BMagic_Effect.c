@@ -46,7 +46,30 @@ MATCH void func_801EF020(void) {
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 
-INCLUDE_ASM(func_801EF104);
+MATCH void func_801EF104(void) {
+    PartyMember* work;
+    u32          slot;
+    u8           i;
+    u8           timer;
+
+    Actor_StepAnimOnce();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer != 0) {
+        return;
+    }
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    g_Task->unk_09       = 0;
+    g_Task->param.unk_0B = 0;
+    for (i = 0; i < 12; i++) {
+        slot                                   = BMagic_AllocEffect() & BYTE_MASK;
+        work                                   = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (i >> 1) * 3 + 1;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+    }
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF208(void) {
     if (Actor_StepAnimOnce() != 0u) {

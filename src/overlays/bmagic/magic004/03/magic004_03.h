@@ -5,8 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-u8 Battle_SlotIsBlocked(u32 slot);
-
 extern Magic004SharedSteps D_801EEC04;
 
 #define MAGIC004_STEP_COUNT 4

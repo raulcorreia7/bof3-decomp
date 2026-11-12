@@ -27,8 +27,6 @@ MATCH void func_801EEC14(void) {
 
 INCLUDE_ASM(func_801EED28);
 
-u32 BMagic_AllocEffect(void);
-
 MATCH void func_801EEE50(void) {
     u8 i;
     u8 slot;

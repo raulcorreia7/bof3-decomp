@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC20);
+#include "overlays/bmagic/func_801EEC20.h"
 
 INCLUDE_ASM(func_801EECA4);
 
@@ -27,7 +27,22 @@ MATCH void func_801EEDCC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE24);
+MATCH void func_801EEE24(void) {
+    s16* radius;
+    u8   timer;
+
+    radius = &D_801EFAAC;
+    *radius += 0x40;
+    D_801EFAAE += 0x60;
+    func_801EF254();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->unk_09 = 120;
+        g_Task->header.mode += 1;
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
+    }
+}
 
 MATCH void func_801EEEC4(void) {
     u8 count;

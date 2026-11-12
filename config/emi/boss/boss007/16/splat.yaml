@@ -9,9 +9,10 @@ segments:
     start: 0x0
     vram: 0x800C1800
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, bin, D_800C1800]
+      - [0x4, .rodata, Boss_HandleBattleEvent]
       - [0x20, c, func_800C1820]
       - [0x64, c, func_800C1864]
       - [0xBC, c, func_800C18BC]

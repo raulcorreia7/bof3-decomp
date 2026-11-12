@@ -5,6 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern SVECTOR D_1F800014[];
+
 #define MAGIC015_STEP_COUNT 4
 
 typedef struct Magic015Steps {
