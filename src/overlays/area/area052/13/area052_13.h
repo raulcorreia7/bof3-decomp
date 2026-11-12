@@ -13,8 +13,9 @@
 
 extern u8 D_801F44B8[];
 
-/* A row of the area work window this overlay hands to its effects. */
-typedef struct AreaWorkRow {
+/* One of the sixteen effect rows at the area work window: a rising, fading
+ * textured quad. */
+typedef struct AreaEffectRow {
     WorldPos pos;    /* 0x00 */
     s32      unk_0C; /* 0x0C */
     s32      unk_10; /* 0x10 */
@@ -22,11 +23,11 @@ typedef struct AreaWorkRow {
     u8       active; /* 0x15 nonzero while the row is in use */
     u8       unk_16; /* 0x16 */
     u8       unk_17; /* 0x17 */
-} AreaWorkRow;
+} AreaEffectRow;
 
-ASSERT_OFFSET(AreaWorkRow, pos, 0x00);
-ASSERT_OFFSET(AreaWorkRow, active, 0x15);
-ASSERT_SIZE(AreaWorkRow, 0x18);
+ASSERT_OFFSET(AreaEffectRow, pos, 0x00);
+ASSERT_OFFSET(AreaEffectRow, active, 0x15);
+ASSERT_SIZE(AreaEffectRow, 0x18);
 
 /* A rectangle of world cells that a scene event step tests the party against. */
 typedef struct AreaTriggerRect {
