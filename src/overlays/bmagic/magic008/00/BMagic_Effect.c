@@ -353,7 +353,26 @@ MATCH void func_801F0FA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F1090);
+MATCH void func_801F1090(void) {
+    u8 value;
+
+    if (g_FrameCount & 1) {
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        value               = g_Task->unk_09 - 1;
+        g_Task->unk_09      = value;
+        if (!(value & BYTE_MASK)) {
+            if (g_Task->param.unk_0B == 0) {
+                func_800AFC98(2, 4);
+                func_800A9820(g_BattleTargetSelector);
+            }
+            g_Task->header.step += 1;
+        }
+    } else {
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+    }
+}
 
 MATCH void func_801F117C(void) {
     if ((Actor_StepAnimOnce() & BYTE_MASK) != 0u) {

@@ -18,7 +18,7 @@ MATCH void Actor_BeginScriptFromAreaTableAtStart(void) {
         row += g_ScriptState->cursor;
         step = row[2];
         arg  = row[3];
-        Actor_BeginScript(step, pc - 2);
+        Actor_BeginScript(step, (u16)(pc - 2));
         g_Task->unk_2A = arg;
         g_ScriptState->cursor += 2;
     } else {

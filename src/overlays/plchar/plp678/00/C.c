@@ -39,10 +39,10 @@ MATCH void Char_FaceFreeDirection(void) {
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
 MATCH s32 func_801CEC28(s16 x, s16 y) {
-    CHAR_PROBE_CELL_CODE(func_801CEE34);
+    CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
-INCLUDE_ASM(func_801CEE34);
+INCLUDE_ASM(Char_SpawnLinkedActor);
 
 MATCH void func_801CEF20(void) {
     SYS_DISPATCH_TASK(D_801D058C, 3, g_Task);

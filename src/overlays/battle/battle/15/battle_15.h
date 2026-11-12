@@ -1021,9 +1021,7 @@ static inline void BattleSelectionDelta(s32 mode) {
 static inline void BattleSetSelectionFlag(u32 flag) {
     u32         mode;
     BattleTurn* record;
-    /* FAKE: Pin the stored constant to $v0; clean C left the
-     * delay-slot constant in $v1 while $v0 stayed free. */
-    FAKE_REG(u8, one, "v0");
+    u8          one;
 
     if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *(u8*)&g_Battle.target;
@@ -1068,7 +1066,5 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 u8 func_800A40D0(u8 battler_index);
 
 u8 func_800AED5C(s32 arg0, u32 battler_index);
-
-u8 Battle_SlotIsBlocked(u8 slot);
 
 #endif

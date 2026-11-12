@@ -29,7 +29,6 @@ extern Callback D_801D05BC[];
 extern Callback D_801D05C4[];
 extern Callback D_801D05D0[];
 
-void func_801CEE34(s32 kind, s32 x, s32 y, s32 code);
 s32  func_801CF1A4(void);
 void func_801CF348(void);
 

@@ -9,7 +9,7 @@ MATCH void func_801CE404(void) {
     D_801D0A54[g_Task->header.step]();
 }
 
-INCLUDE_ASM(func_801CE448);
+#include "overlays/plchar/func_801CE448.h"
 
 #include "overlays/plchar/func_801CE628.h"
 
@@ -90,10 +90,10 @@ MATCH void Char_FaceFreeDirection(void) {
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
 MATCH s32 func_801D0148(s16 x, s16 y) {
-    CHAR_PROBE_CELL_CODE(func_801D0354);
+    CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
-INCLUDE_ASM(func_801D0354);
+INCLUDE_ASM(Char_SpawnLinkedActor);
 
 MATCH void func_801D0440(void) {
     SYS_DISPATCH_TASK(D_801D0AA8, 3, g_Task);

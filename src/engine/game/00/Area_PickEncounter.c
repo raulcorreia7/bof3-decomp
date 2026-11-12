@@ -5,13 +5,10 @@ MATCH s32 Area_PickEncounter(void) {
     s32 sum;
     u8* base;
     s32 index;
-    /* FAKE: limit pinned to v0; keeps the masked copy from folding. */
-    FAKE_REG(s32, limit, "v0");
+    u8  limit;
     s32 masked;
 
-    limit = rand();
-    limit &= 0xF;
-    limit += 1;
+    limit  = (rand() & 0xF) + 1;
     sum    = 0;
     base   = MEM_PTR(u8, 0x800E4000u);
     index  = 0;

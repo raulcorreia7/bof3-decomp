@@ -15,7 +15,26 @@ INCLUDE_ASM(func_801EEC5C);
 /* func_801EEF84 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EEFC8);
+MATCH void func_801EEFC8(void) {
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), g_Task->header.step);
+    func_800AF764();
+    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
+        Effect_SetActorMatrixRolled();
+        func_801EF5C4(MAGIC097_BAND_HEIGHT, 32, 0x7);
+        g_Task->param.unk_0B += 4;
+        func_801EF5C4(MAGIC097_BAND_HEIGHT, 64, 0xF);
+        Effect_DrawBolt();
+        g_Task->param.unk_0B += 4;
+        func_801EF5C4(MAGIC097_BAND_HEIGHT, 96, 0x1F);
+        Effect_DrawBolt();
+        g_Task->param.unk_0B -= 8;
+        g_Task->unk_2E.half += 16;
+        func_801F083C();
+        g_Task->unk_2E.half -= 32;
+        func_801F083C();
+        PopMatrix();
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownAndPickRandom.h"
 

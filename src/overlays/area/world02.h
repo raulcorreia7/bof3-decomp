@@ -10,6 +10,10 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0x10
 
+/* The per-actor 16-byte turn records. */
+extern s8  D_80147CB9[];
+extern s32 D_80147CBC[];
+
 extern Callback D_801F5750[];
 
 #endif

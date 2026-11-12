@@ -15,12 +15,14 @@ names the split assembly that `INCLUDE_ASM` pulls in. A source under `src/` also
 
 Objects are cached in ~/.cache/bof3-cc (BOF3_CC_CACHE_DIR moves it), keyed on the preprocessed
 source, the arguments and the hashes of GCC, maspsx, DMPSX and the assembler, so every worktree
-shares them. BOF3_CC_CACHE=0 turns the cache off.
+shares them; the first compiler of a key writes it and the rest wait for its object.
+BOF3_CC_CACHE=0 turns the cache off.
 
 PSX_GCC=<path> picks the compiler binary. Run it as a script: `python -m` would put the
 working directory, a build directory that changes with every object, on the import path.
 """
 
+import fcntl
 import glob
 import hashlib
 import os
@@ -39,11 +41,54 @@ AS = f"{ROOT}/bin/internal/binutils/as"
 MASPSX = f"{ROOT}/third_party/maspsx/maspsx.py"
 #: INCLUDE_ASM pulls split assembly in through the assembler, which `gcc -MM` cannot see.
 ASM_INCLUDE = re.compile(r'^\s*\.include "([^"]+/[^"]+\.s)"', re.M)
-#: The same statements inside the preprocessed text, where the string literal escapes the quotes.
-INLINE_INCLUDE = re.compile(r'\.(?:include|incbin) \\"([^"\\]+)\\"')
+#: An assembler include statement in the preprocessed C text; its path may be split across
+#: adjacent string literals by the INCLUDE_ASM macro, so the path is joined by _inline_includes.
+INLINE_INCLUDE = re.compile(r"\.(?:include|incbin)\s+")
 CACHE_DIR = os.environ.get("BOF3_CC_CACHE_DIR") or os.path.expanduser(
     "~/.cache/bof3-cc"
 )
+
+
+def inline_includes(text: str) -> list[str]:
+    """Return the file names of the assembler includes in preprocessed C text.
+
+    A plain ``__asm__(".include \\"x.s\\"")`` reaches the preprocessed text as one string
+    literal; ``INCLUDE_ASM`` concatenates the assembly folder, the function name and ``.s``
+    into adjacent literals. Both spellings join back into one quoted path here.
+    """
+    names = []
+    for match in INLINE_INCLUDE.finditer(text):
+        i = match.end()
+        joined: list[str] = []
+        first = True
+        while i < len(text):
+            if not first:
+                while i < len(text) and text[i] in " \t\r\n":
+                    i += 1
+                if i >= len(text) or text[i] != '"':
+                    break
+                i += 1
+            first = False
+            closed = False
+            while i < len(text):
+                char = text[i]
+                if char == "\\" and i + 1 < len(text):
+                    joined.append(text[i + 1])
+                    i += 2
+                elif char == '"':
+                    i += 1
+                    closed = True
+                    break
+                else:
+                    joined.append(char)
+                    i += 1
+            value = "".join(joined)
+            if len(value) >= 2 and value[0] == '"' and '"' in value[1:]:
+                names.append(value[1 : value.index('"', 1)])
+                break
+            if not closed:
+                break
+    return names
 
 
 def parse(argv):
@@ -219,7 +264,7 @@ def cache_key(plan, gcc_args, env):
         *plan["as"],
     ]
     key = hashlib.sha1(text)
-    for name in sorted(set(INLINE_INCLUDE.findall(text.decode("utf-8", "replace")))):
+    for name in sorted(set(inline_includes(text.decode("utf-8", "replace")))):
         found = next(
             (f"{d}/{name}" for d in search if os.path.isfile(f"{d}/{name}")), None
         )
@@ -231,33 +276,58 @@ def cache_key(plan, gcc_args, env):
     return key.hexdigest()
 
 
+def take_cached(plan, stored, build_dir):
+    """Copy the cached object and its depfile to the output; false when either is missing."""
+    if not (os.path.isfile(f"{stored}.o") and os.path.isfile(f"{stored}.dep")):
+        return False
+    os.makedirs(os.path.dirname(plan["output"]) or ".", exist_ok=True)
+    shutil.copyfile(f"{stored}.o", plan["output"])
+    if plan["depfile"]:
+        with open(f"{stored}.dep", encoding="utf-8") as handle:
+            write_depfile(plan, handle.read().split("\n")[:-1], build_dir)
+    return True
+
+
+def store_cached(stored, plan, deps):
+    """Write one object and its depfile into the cache; a later writer replaces both."""
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    unique = f"{os.getpid()}.tmp"
+    shutil.copyfile(plan["output"], f"{stored}.o{unique}")
+    with open(f"{stored}.dep{unique}", "w", encoding="utf-8") as out:
+        out.write("".join(f"{dep}\n" for dep in deps or []))
+    os.replace(f"{stored}.dep{unique}", f"{stored}.dep")
+    os.replace(f"{stored}.o{unique}", f"{stored}.o")
+
+
 def cached_compile(plan, gcc_args, env, tmp, build_dir):
-    """Compile through the shared object cache; return the exit status."""
+    """Compile through the shared object cache; return the exit status.
+
+    A header change asks every worktree for the same keys at once. The first compiler of a key
+    holds its lock file, writes the object and releases it; the others wait and take that object
+    instead of compiling it again.
+    """
     key = None
     if os.environ.get("BOF3_CC_CACHE") != "0":
         key = cache_key(plan, gcc_args, env)
-    stored = os.path.join(CACHE_DIR, key) if key else None
-    if stored and os.path.isfile(f"{stored}.o") and os.path.isfile(f"{stored}.dep"):
-        os.makedirs(os.path.dirname(plan["output"]) or ".", exist_ok=True)
-        shutil.copyfile(f"{stored}.o", plan["output"])
-        if plan["depfile"]:
-            with open(f"{stored}.dep", encoding="utf-8") as handle:
-                write_depfile(plan, handle.read().split("\n")[:-1], build_dir)
-        return 0
-    status, deps = compile_one(plan, gcc_args, env, tmp)
-    if status == 0 and stored:
-        os.makedirs(CACHE_DIR, exist_ok=True)
-        unique = f"{os.getpid()}.tmp"
-        shutil.copyfile(plan["output"], f"{stored}.o{unique}")
-        with open(f"{stored}.dep{unique}", "w", encoding="utf-8") as out:
-            out.write("".join(f"{dep}\n" for dep in deps or []))
-        os.replace(f"{stored}.dep{unique}", f"{stored}.dep")
-        os.replace(f"{stored}.o{unique}", f"{stored}.o")
-        if plan["depfile"]:
+    if key is None:
+        status, deps = compile_one(plan, gcc_args, env, tmp)
+        if status == 0 and plan["depfile"]:
             write_depfile(plan, deps, build_dir)
-    elif status == 0 and plan["depfile"]:
-        write_depfile(plan, deps, build_dir)
-    return status
+        return status
+    stored = os.path.join(CACHE_DIR, key)
+    if take_cached(plan, stored, build_dir):
+        return 0
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    with open(f"{stored}.lock", "a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        if take_cached(plan, stored, build_dir):
+            return 0
+        status, deps = compile_one(plan, gcc_args, env, tmp)
+        if status == 0:
+            store_cached(stored, plan, deps)
+            if plan["depfile"]:
+                write_depfile(plan, deps, build_dir)
+        return status
 
 
 def main(argv):
