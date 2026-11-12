@@ -1451,7 +1451,9 @@ Actor_Clear = { addr = 0x801EFBDC, type = "func", source = "Clears the effect wo
 g_BMagicEffectModes = { addr = 0x801EFC2C, source = "Handlers of magic223 (Tempest, Hurricane), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic225/03"]
+Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 Effect_PlayOnZeroTick = { addr = 0x801EF278, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic225 (Temptation)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF2D8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic225." }
 Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic225 (Temptation)." }

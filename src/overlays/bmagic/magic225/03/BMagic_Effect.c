@@ -96,7 +96,34 @@ MATCH void func_801EF628(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF67C);
+MATCH void func_801EF67C(void) {
+    s32 i;
+
+    if (g_Task->unk_09 != 0) {
+        g_Task->unk_09 -= 2;
+    }
+    if (--g_Task->timer == 0) {
+        D_8014637C->unk_29 = 4;
+        i                  = 0;
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+            do {
+                if (!(Battle_SlotIsBlocked((i + 3) & BYTE_MASK) & BYTE_MASK)) {
+                    g_BattleEnemyBattlers[i & BYTE_MASK].unk_29 = 4;
+                }
+                i++;
+            } while ((u32)(i & BYTE_MASK) < 8);
+        } else {
+            do {
+                if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK)) {
+                    g_Game.members[i & BYTE_MASK].unk_29 = 4;
+                }
+                i++;
+            } while ((u32)(i & BYTE_MASK) < 3);
+        }
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF7D4);
 
