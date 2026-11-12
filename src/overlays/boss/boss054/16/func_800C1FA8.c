@@ -1,13 +1,13 @@
 #include "boss054_16.h"
 
-MATCH void func_800C1FA8(void) {
-    PartyMember* task;
+/* The scratchpad work area is the party member this landing moves; each use reloads the cell. */
+#define BOSS054_PARTY ((PartyMember*)g_Task)
 
-    task = (PartyMember*)g_Task;
-    COORD_INT(task->pos.z) += task->unk_14;
-    task->unk_14 += task->unk_20;
+MATCH void func_800C1FA8(void) {
+    COORD_INT(BOSS054_PARTY->pos.z) += BOSS054_PARTY->unk_14;
+    BOSS054_PARTY->unk_14 += BOSS054_PARTY->unk_20;
     /* FAKE: the s16 return is read as s32; retail adds 0x180 to the raw register. */
-    if (COORD_INT(task->pos.z) < ((s32 (*)(s32, s32))Area_SampleHeight)(task->pos.x.fixed, task->pos.y.fixed) + 0x180) {
-        ((PartyMember*)g_Task)->header.step++;
+    if (COORD_INT(BOSS054_PARTY->pos.z) < ((s32 (*)(s32, s32))Area_SampleHeight)(BOSS054_PARTY->pos.x.fixed, BOSS054_PARTY->pos.y.fixed) + 0x180) {
+        BOSS054_PARTY->header.step++;
     }
 }
