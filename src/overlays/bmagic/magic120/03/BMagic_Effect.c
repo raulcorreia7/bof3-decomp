@@ -153,7 +153,7 @@ MATCH void func_801F08AC(void) {
     u32          i;
 
     for (i = 0; i < 8; i++) {
-        if (func_801DB524((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) != 0) {
+        if (Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) != 0) {
             continue;
         }
         work                     = g_Task;
