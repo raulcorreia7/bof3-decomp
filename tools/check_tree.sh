@@ -1,5 +1,5 @@
 #!/bin/sh
-# Reject tracked retail media, files over 1 MiB, relative includes or imports, struct members of enum type, and sources no image layout compiles. Needs no build inputs.
+# Reject tracked retail media, files over 1 MiB (config/symbols.toml, the one table of every symbol: 4 MiB), relative includes or imports, struct members of enum type, and sources no image layout compiles. Needs no build inputs.
 set -eu
 case "${1:-}" in
 -h | --help) sed -n '2,2p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
@@ -8,7 +8,8 @@ cd "$(dirname "$0")/.."
 
 bad=$(git ls-files -z | xargs -0 stat -c '%s %n' | awk '{
 	name = substr($0, length($1) + 2)
-	if ($1 > 1048576 || tolower(name) ~ /\.(bin|iso|img|cue|exe|psx|7z|mdf|ccd|ecm)$/) print name
+	cap = (name == "config/symbols.toml") ? 4194304 : 1048576
+	if ($1 > cap || tolower(name) ~ /\.(bin|iso|img|cue|exe|psx|7z|mdf|ccd|ecm)$/) print name
 }')
 if [ -n "$bad" ]; then
 	echo "check-tree: retail data or oversized files tracked:"
