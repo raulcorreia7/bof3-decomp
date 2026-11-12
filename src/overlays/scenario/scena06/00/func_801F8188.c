@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8188(void) {
-    u8  id;
+    u8  slot;
     u8* char_slots;
 
     switch (g_SceneState.step_05) {
@@ -26,10 +26,10 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 3) {
                 break;
             }
-            id                     = func_8019601C();
-            D_1F800000.view.raw[0] = id;
-            if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags                       = 1;
+            slot                     = Actor_FindFreeSlot();
+            D_1F800000.view.raw[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x31;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = g_AreaCameraAngle.vx;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
@@ -51,10 +51,10 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0xA) {
                 break;
             }
-            id                     = func_8019601C();
-            D_1F800000.view.raw[0] = id;
-            if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags                       = 1;
+            slot                     = Actor_FindFreeSlot();
+            D_1F800000.view.raw[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -0x3B5;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
@@ -81,10 +81,10 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0xD) {
                 break;
             }
-            id                     = func_8019601C();
-            D_1F800000.view.raw[0] = id;
-            if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags                       = 1;
+            slot                     = Actor_FindFreeSlot();
+            D_1F800000.view.raw[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -0x2AA;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
@@ -104,10 +104,10 @@ MATCH void func_801F8188(void) {
             break;
         case 11:
             func_801C601C(0);
-            id                     = func_8019601C();
-            D_1F800000.view.raw[0] = id;
-            if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags                       = 1;
+            slot                     = Actor_FindFreeSlot();
+            D_1F800000.view.raw[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = 0;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
@@ -120,10 +120,10 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            id                     = func_8019601C();
-            D_1F800000.view.raw[0] = id;
-            if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags                       = 1;
+            slot                     = Actor_FindFreeSlot();
+            D_1F800000.view.raw[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -0x2AA;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
