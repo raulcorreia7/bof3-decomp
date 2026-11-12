@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Fail when a change loses or degrades a named thing that the merge base has.
 
 The check reads every C source and header under `src/` and `include/` (not `include/psyq`)
@@ -34,11 +35,13 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import tomllib
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from bof3.link.symbols import read_text
+from bof3.source.ctext import mask
 
 ROOT = Path(__file__).resolve().parent.parent
 SYMBOLS = "config/symbols.toml"
@@ -123,7 +126,7 @@ class Entities:
 
 
 def strip_comments(text: str) -> str:
-    return COMMENT_OR_STRING.sub(" ", text)
+    return mask(text)
 
 
 def defines_in(text: str) -> dict[str, str]:
@@ -421,7 +424,7 @@ def addresses(
     text = subprocess.check_output(["git", "show", f"{rev}:{SYMBOLS}"], cwd=ROOT)
     by_name: dict[str, set[tuple[str, int]]] = defaultdict(set)
     by_addr: dict[tuple[str, int], str] = {}
-    for target, rows in tomllib.loads(text.decode()).items():
+    for target, rows in read_text(text.decode()).items():
         for name, row in rows.items():
             if isinstance(row, dict) and "addr" in row:
                 by_name[name].add((target, row["addr"]))
@@ -622,6 +625,9 @@ def record_files(tree: Path, names: set[str]) -> set[str]:
 
 
 def main(argv: list[str]) -> int:
+    if len(argv) == 2 and argv[1] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
     if len(argv) not in (2, 3):
         print(__doc__.strip(), file=sys.stderr)
         return 2

@@ -9,7 +9,7 @@ MATCH void func_801D5398(void) {
     s32           index;
     s32           mask;
 
-    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 
     mask = 0;
     if (D_80145E93[0] >= 3) {

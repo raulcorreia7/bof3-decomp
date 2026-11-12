@@ -63,6 +63,9 @@ def find_members(files):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
     files = {f: Path(f).read_text(errors="replace") for f in tracked()}
     bad = find_members(files)
     for f, line in bad:

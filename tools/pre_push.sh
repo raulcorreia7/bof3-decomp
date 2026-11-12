@@ -8,6 +8,9 @@
 # public/main, origin/main and main. Each log is build/pre-push/<check>.log. Format first with
 # `meson compile -C build/meson format`.
 set -u
+case "${1:-}" in
+-h | --help) sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.." || exit 2
 bld=${BUILD_DIR:-build/meson}
 logs=build/pre-push
@@ -60,7 +63,7 @@ fi
 names="$names check-headers"
 build_chain &
 if [ -x toolchains/gcc-2.7.2-psx/gcc ]; then
-	start check-plain tools/check_plain.sh
+	start check-plain tools/check_plain.sh "$bld/plain-flags.txt"
 else
 	echo "skip  check-plain (no toolchains/gcc-2.7.2-psx)"
 fi

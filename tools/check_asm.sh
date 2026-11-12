@@ -10,6 +10,9 @@
 # of public/main, origin/main and main (a local main that was never updated falls behind); the output names the
 # ref and commit it used. With no such ref the check fails, because it cannot compare.
 set -eu
+case "${1:-}" in
+-h | --help) sed -n '2,11p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
 cd "$(dirname "$0")/.."
 
 status=0

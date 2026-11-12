@@ -8,7 +8,7 @@ MATCH void Fishing_CastGaugeInit(void) {
     u8            value;
 
     record                   = FISHING_STATE;
-    value                    = g_FishingRodRow->byte_00;
+    value                    = g_FishingRodRow->cast_power_speed_00;
     record->pos_x_0C         = 0;
     record->cursor_10        = 0;
     record->unk_1C           = 0;

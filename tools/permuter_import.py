@@ -19,8 +19,8 @@ import sys
 from pathlib import Path
 
 from bof3.core.io import write_atomic
+from bof3.resolve.ids import asm_dir
 from bof3.status.claims import source_text
-from cc import asm_dir
 
 ROOT = Path(__file__).resolve().parent.parent
 # The permuter's MIPS flags (its MIPS_SETTINGS). A set objdump_command replaces its default arguments.
@@ -79,7 +79,7 @@ def main() -> int:
         ) from None
     assembler_command = f"{ROOT}/bin/internal/binutils/as {assembler_flags}"
     source = args.func if args.func.is_absolute() else ROOT / args.func
-    directory = asm_dir(source)
+    directory = asm_dir(source, ROOT)
     if directory is None:
         raise SystemExit(f"{source}: outside every target's source folder")
     name = function_name(source)

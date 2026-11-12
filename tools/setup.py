@@ -2,7 +2,7 @@
 """Extract the retail payloads for the build; ``tools/setup.sh`` runs this last.
 
 Finds the US disc image under ``inputs/external``, extracts it into ``build/disc``,
-unpacks every EMI archive, writes the catalog and materializes each target's payload.
+unpacks every EMI archive and materializes each target's payload.
 Prints what is missing and what to do when the media is absent.
 """
 
@@ -16,9 +16,8 @@ import sys
 from pathlib import Path
 
 from bof3.core import disc
-from bof3.core.io import write_json
 from bof3.core.paths import BUILD
-from bof3.emi.catalog import load_catalog, materialize_reviewed_targets
+from bof3.emi.catalog import materialize_reviewed_targets
 from bof3.resolve import load_target_manifests
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,30 +74,35 @@ def main(argv: list[str] | None = None) -> int:
     ).parse_args(argv)
     manifests = load_target_manifests(ROOT)
     extracted = ROOT / BUILD / "disc"
-    catalog_path = ROOT / BUILD / "catalog/emi.json"
-    if catalog_path.is_file() and all(
+    if extracted.is_dir() and all(
         (ROOT / manifest.binary).is_file() for manifest in manifests.values()
     ):
         print("payloads: current")
         return 0
     expected = disc.load_manifest(ROOT)
-    cue, bins = find_media()
-    refuse(disc.verify_tracks(expected, bins), "the disc dump")
-    cli = extractor()
-    subprocess.run(
-        [cli, "disc", "extract", "-i", str(cue), "-o", str(extracted)], check=True
-    )
-    refuse(disc.verify_files(expected, extracted), "the extracted disc")
+    client = None
+    if extracted.is_dir() and not disc.verify_files(expected, extracted):
+        print("disc: current")
+    else:
+        cue, bins = find_media()
+        refuse(disc.verify_tracks(expected, bins), "the disc dump")
+        client = extractor()
+        subprocess.run(
+            [client, "disc", "extract", "-i", str(cue), "-o", str(extracted)],
+            check=True,
+        )  # fmt: skip
+        refuse(disc.verify_files(expected, extracted), "the extracted disc")
     for archive in sorted(extracted.rglob("*.EMI")):
         out = extracted / archive.relative_to(extracted).with_suffix("")
+        if (out / "emi.json").is_file():
+            continue
         out.parent.mkdir(parents=True, exist_ok=True)
+        client = client or extractor()
         subprocess.run(
-            [cli, "emi", "extract", "--quiet", "-J", "-o", str(out), str(archive)],
+            [client, "emi", "extract", "--quiet", "-J", "-o", str(out), str(archive)],
             check=True,
         )
-    catalog = load_catalog(ROOT)
-    write_json(catalog_path, catalog)
-    materialize_reviewed_targets(root=ROOT, catalog=catalog)
+    materialize_reviewed_targets(root=ROOT)
     for manifest in manifests.values():
         if manifest.kind == "executable" and not (ROOT / manifest.binary).is_file():
             (ROOT / manifest.binary).parent.mkdir(parents=True, exist_ok=True)
