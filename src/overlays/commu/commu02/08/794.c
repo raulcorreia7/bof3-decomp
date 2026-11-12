@@ -873,7 +873,7 @@ MATCH void func_801D7EF0(s16 x, s16 y) {
     s32 i;
     s32 offset;
 
-    COMMU_DRAW_CELL_GRID(func_801D875C, 0x16, 0x14, 2, 6);
+    COMMU_DRAW_CELL_GRID(func_801D875C, 0x16, 20, 2, 6);
 }
 
 INCLUDE_ASM(func_801D8058);

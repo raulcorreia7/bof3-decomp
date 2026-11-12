@@ -1,5 +1,5 @@
-/* The cell-grid border of the commu overlays: the cell function draws one 0x8-pitch row along the top
- * edge, one 0x8-pitch column down the left edge and the two closing corners. The member passes its cell
+/* The cell-grid border of the commu overlays: the cell function draws one 8-pitch row along the top
+ * edge, one 8-pitch column down the left edge and the two closing corners. The member passes its cell
  * function, the bottom gap, the column and row counts and the row pitch, and declares `s16 x, s16 y`,
  * `s32 i` and `s32 offset`.
  * Members: commu01/07 func_801D273C and func_801D3594, commu02/08 func_801D7EF0 and func_801D81A4. */
