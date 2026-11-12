@@ -184,7 +184,15 @@ MATCH void func_801F7B9C(void) {
 
 INCLUDE_ASM(func_801F7BE0);
 
-INCLUDE_ASM(func_801F7C9C);
+MATCH void func_801F7C9C(void) {
+    func_801F9330(D_801FDFC0);
+    if (g_Task->vx >= 9) {
+        D_801FDFC0->angle -= 0x40;
+    }
+    if (--g_Task->vx == 0) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F7D28(void) {
     SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Task);
