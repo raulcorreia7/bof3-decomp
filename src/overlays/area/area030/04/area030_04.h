@@ -335,7 +335,8 @@ typedef struct FishingThresholdData {
 
 extern s16                   D_800396C0;
 extern s16                   D_800396FE;
-extern u8                    D_800F724C;
+/* D_800F724C */
+extern u8                    s_ShopMode;
 extern u8                    D_800F724D;
 extern u8                    D_800F724E;
 extern u8                    D_800F724F;
