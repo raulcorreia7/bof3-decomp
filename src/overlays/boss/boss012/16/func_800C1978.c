@@ -12,6 +12,6 @@ MATCH void func_800C1978(s32 mode) {
     g_Task->screen_y = 65;
     g_Task->gravity  = 0;
     g_Task->active_flags |= 0x88;
-    func_800C1C08(FIELD(u16, g_Task, 0x20));
+    func_800C1C08(LOHU(g_Task->gravity));
     g_Task->unk_03 = 2;
 }
