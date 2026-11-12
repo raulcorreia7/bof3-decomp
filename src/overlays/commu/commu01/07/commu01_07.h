@@ -17,18 +17,19 @@
 typedef struct CommuCellFrame {
     u16 points[3][2];
 } CommuCellFrame;
+
 ASSERT_OFFSET(CommuCellFrame, points, 0x00);
 ASSERT_SIZE(CommuCellFrame, 0xC);
 
-extern u8            D_801455C9[];
-extern OverlayHeader D_801D0C00;
+extern u8             D_801455C9[];
+extern OverlayHeader  D_801D0C00;
 /* D_801D4BCC */
-extern Callback g_Commu01States[COMMU01_STEP_COUNT];
+extern Callback       g_Commu01States[COMMU01_STEP_COUNT];
 /* D_801D4BD8 */
-extern Callback g_Commu01Step2Funcs[COMMU01_STEP2_COUNT];
-extern Callback D_801D4BE4[];
+extern Callback       g_Commu01Step2Funcs[COMMU01_STEP2_COUNT];
+extern Callback       D_801D4BE4[];
 /* D_801D4BEC */
-extern Callback g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
+extern Callback       g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
 extern CommuCellFrame D_801D4C44[COMMU_CELL_FRAME_COUNT];
 extern u8             D_801D4DF4;
 extern u8             D_801D4DF8;
