@@ -697,8 +697,8 @@ MATCH void func_801FD07C(void) {
         return;
     }
     g_Actors[second].header.flags = 1;
-    counter                       = (s16*)&D_1F800000;
-    *counter                      = D_801FEA74;
+    counter                             = &D_1F800000.view.area.entity_counter;
+    *counter                            = D_801FEA74;
     func_801A65A0(D_801FE9A0);
     Actor_BeginScript(0x4C, 0);
     *counter = D_801FEA78;
