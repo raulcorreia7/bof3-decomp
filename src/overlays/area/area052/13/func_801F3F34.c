@@ -29,12 +29,12 @@ MATCH void func_801F3F34(void) {
 
         case 10:
             Message_StartAreaMessage(57);
-            g_GameStateIndex = 2;
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
             g_SceneEventStep = 11;
             break;
 
         case 11:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
                 g_SceneEventMode = SCENE_EVENT_NONE;
                 g_SceneEventStep = 0;
