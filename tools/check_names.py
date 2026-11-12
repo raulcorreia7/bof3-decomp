@@ -10,9 +10,10 @@ The check is a ratchet. ``config/address_names.txt`` lists the offenders that ex
 ``<file><TAB><identifier>``. A name that is not on the list fails, and so does a listed entry
 that no longer occurs, so the list only shrinks. Rename the identifier, then delete its line.
 
-``--diff REF`` checks only the lines a change adds: no unnamed ``argN`` parameter, and no new
-``FIELD``/``SP_REF``/``SP`` use. A record or scratchpad member is the form to write; the existing
-uses shrink record by record (plan section AY).
+``--diff REF`` checks only the lines a change adds: no unnamed ``argN`` parameter, and no file
+gains a ``FIELD``/``SP_REF``/``SP`` use. A record or scratchpad member is the form to write; the
+existing uses shrink record by record (plan section AY). A rebuild that moves an existing use
+changes no count, so it passes.
 
 Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline from the tree)
 """
@@ -63,9 +64,13 @@ def offset_macros(text: str) -> set[str]:
 
 
 def added_lines(ref: str):
-    """Yield (path, line, text) for each line a change adds under include/ or src/."""
+    """Yield (path, line, text) for each line a change adds under include/ or src/.
+
+    Whitespace-only edits do not count as adding a line: reindenting an existing
+    ``FIELD`` use must not read as a new one.
+    """
     diff = subprocess.run(
-        ["git", "diff", "-U0", f"{ref}...HEAD", "--", *ROOTS],
+        ["git", "diff", "-w", "-U0", f"{ref}...HEAD", "--", *ROOTS],
         check=False,
         capture_output=True,
         text=True,
@@ -123,6 +128,36 @@ def baseline_entries() -> set[str]:
     }
 
 
+def macro_counts(text: str) -> dict[str, int]:
+    """``FIELD``/``SP_REF``/``SP`` uses in code, per macro name."""
+    counts: dict[str, int] = {}
+    for match in OFFSET_MACRO.finditer(SKIP.sub(" ", text)):
+        counts[match.group(1)] = counts.get(match.group(1), 0) + 1
+    return counts
+
+
+def changed_paths(ref: str) -> list[str]:
+    """The paths under include/ or src/ a change touches."""
+    out = subprocess.run(
+        ["git", "diff", "--name-only", f"{ref}...HEAD", "--", *ROOTS],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout
+    return [path for path in out.split() if path]
+
+
+def base_text(ref: str, path: str) -> str:
+    """The file at ``path`` as it is in the base revision; empty when new."""
+    result = subprocess.run(
+        ["git", "show", f"{ref}:{path}"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout if result.returncode == 0 else ""
+
+
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
@@ -139,9 +174,21 @@ def main(argv: list[str]) -> int:
                     file=sys.stderr,
                 )
                 bad = 1
-            for name in sorted(offset_macros(text)):
+        for path in changed_paths(argv[1]):
+            before = macro_counts(base_text(argv[1], path))
+            after_text = Path(path).read_text(encoding="utf-8", errors="replace")
+            after = macro_counts(after_text)
+            grown = {name: after[name] - before.get(name, 0) for name in after}
+            for name, extra in sorted(grown.items()):
+                if extra <= 0:
+                    continue
+                where = [
+                    f"{path}:{number}"
+                    for number, text in enumerate(after_text.splitlines(), 1)
+                    if name in offset_macros(text)
+                ]
                 print(
-                    f"{path}:{line}: {name}(): a new offset access; "
+                    f"{where[0]}: {name}(): {extra} new offset access(es); "
                     "write the member of the record or of the scratchpad view",
                     file=sys.stderr,
                 )

@@ -102,8 +102,27 @@ def test_offset_macros_are_refused_in_a_diff(
     monkeypatch.chdir(tmp_path)
     assert check_names.main(["--diff", "HEAD~1"]) == 1
     err = capsys.readouterr().err
-    assert "FIELD(): a new offset access" in err
-    assert "SP_REF(): a new offset access" in err
+    assert "FIELD(): 1 new offset access" in err
+    assert "SP_REF(): 1 new offset access" in err
+
+
+def test_a_diff_that_removes_an_offset_access_passes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/a.c").write_text("void f(void) { u8 v = FIELD(u8, base, 0x4u); }\n")
+    git("add", ".")
+    git("commit", "-qm", "base")
+    (tmp_path / "src/a.c").write_text("void f(void) { u8 v = base->unk_04; }\n")
+    git("commit", "-qam", "read the member")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 0
 
 
 def test_an_offset_access_in_a_comment_or_string_or_definition_is_not_refused() -> None:
