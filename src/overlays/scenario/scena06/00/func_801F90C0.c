@@ -111,11 +111,7 @@ MATCH void func_801F90C0(void) {
             }
             SYS_SetFlag(g_SceneFlags, 16);
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 20:
             func_801BE1B0(6);
@@ -152,11 +148,7 @@ MATCH void func_801F90C0(void) {
             }
             SYS_SetFlag(g_SceneFlags, 20);
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 30:
             g_SceneState.step_05 = 31;
