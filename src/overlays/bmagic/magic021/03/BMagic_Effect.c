@@ -116,7 +116,7 @@ MATCH void func_801EF578(void) {
 MATCH void func_801EF600(void) {
     PartyMember* actor;
     PartyMember* work;
-    s16*         cell;
+    s16*         radius_cell;
     u32          offset;
     u16          phase;
     u8           count;
@@ -130,13 +130,13 @@ MATCH void func_801EF600(void) {
         work->pos.x.fixed      = actor->pos.x.fixed;
         work->pos.y.fixed      = actor->pos.y.fixed;
         COORD_INT(work->pos.z) = (s16)((u16)COORD_INT(actor->pos.z) + (offset << 5));
-        cell                   = &D_1F800000_HALF;
-        *cell                  = 0xC0 - (offset << 4);
+        radius_cell            = &D_1F800000_HALF;
+        *radius_cell           = 0xC0 - (offset << 4);
         phase                  = rand() & 0x7;
         D_1F800004             = phase << 9;
-        g_Task->pos.x.fixed += (rsin(phase << 9) * *cell) >> 3;
+        g_Task->pos.x.fixed += (rsin(phase << 9) * *radius_cell) >> 3;
         FAKE_BARRIER(); /* FAKE: keeps the angle load after the x update, as retail does. */
-        g_Task->pos.y.fixed += (rcos(D_1F800004) * *cell) >> 3;
+        g_Task->pos.y.fixed += (rcos(D_1F800004) * *radius_cell) >> 3;
         g_Task->unk_09 = 0;
         g_Task->timer  = 16;
         g_Task->header.step += 1;
