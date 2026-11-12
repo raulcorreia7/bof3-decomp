@@ -181,8 +181,8 @@ MATCH void func_801F83AC(UPoint2D* out) {
     slot                    = g_Task->param.actor_slot;
     g_Actors[slot].screen_x = g_Task->screen_x;
     g_Actors[slot].screen_y = g_Task->screen_y;
-    vec.vx                  = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    vec.vy                  = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    vec.vx                  = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    vec.vy                  = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     vec.vz                  = -COORD_INT(g_Task->pos.z) / 2;
     g_Task->unk_60          = RotTransPers(&vec, (long*)out, &depth, &flag);
     out->x -= 12;
