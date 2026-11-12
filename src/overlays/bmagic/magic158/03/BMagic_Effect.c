@@ -44,7 +44,11 @@ MATCH void func_801EF140(void) {
 
 INCLUDE_ASM(func_801EF1C8);
 
-INCLUDE_ASM(func_801EF2F0);
+#include "overlays/bmagic/BMagic_SetupEffectMatrix.h"
+
+MATCH void func_801EF2F0(void) {
+    BMAGIC_SETUP_EFFECT_MATRIX();
+}
 
 INCLUDE_ASM(func_801EF3EC);
 

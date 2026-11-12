@@ -19,6 +19,9 @@ extern u8       D_801F6AA0[];
 extern u8 D_801F6B10[];
 extern u8 D_801F6B18[];
 
+void func_801F5418(s32 value, s32 flag);
+void func_801F555C(s16 x, s16 y, u8 row);
+
 /* func_801F367C */
 void Area_Update(void);
 /* func_801F3BC4 */
