@@ -8,7 +8,7 @@ MATCH void func_801FA8EC(void) {
     switch (g_SceneState.step_05) {
         case 0:
             g_SceneState.step_05 = 1;
-            if (!SYS_TestFlag(g_SceneFlags, 0x27)) {
+            if (!SYS_TestFlag(g_SceneFlags, 39)) {
                 Message_StartAreaMessage(8);
             } else {
                 Message_StartAreaMessage(0xA);
@@ -27,9 +27,9 @@ MATCH void func_801FA8EC(void) {
             }
             break;
         case 5:
-            if (SYS_TestFlag(g_SceneFlags, 0x27)) {
+            if (SYS_TestFlag(g_SceneFlags, 39)) {
                 Message_StartAreaMessage(0xA);
-            } else if (SYS_TestFlag(g_SceneFlags, 0x25)) {
+            } else if (SYS_TestFlag(g_SceneFlags, 37)) {
                 Message_StartAreaMessage(8);
             } else {
                 Message_StartAreaMessage(9);
@@ -69,7 +69,7 @@ MATCH void func_801FA8EC(void) {
             if (g_ScriptVars[0] != 3) {
                 break;
             }
-            SYS_SetFlag(g_SceneFlags, 0x25);
+            SYS_SetFlag(g_SceneFlags, 37);
             Game_ClearScriptActive();
             g_ScriptVars[1]       = 0;
             g_ScriptVars[2]       = 0;

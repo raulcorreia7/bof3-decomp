@@ -33,7 +33,7 @@ MATCH void func_801F8188(void) {
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x31;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = g_AreaCameraAngle.vx;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.z = 0x124;
+                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.z = 292;
                 g_ActorSlots[D_1F800000.view.raw[0]].scene_step     = 0x700;
                 g_ActorSlots[D_1F800000.view.raw[0]].layer          = 0x5A;
                 g_SceneState.step_05                                = 4;
@@ -43,7 +43,7 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 7) {
                 break;
             }
-            SND_PlayBGM(0x27, 0x64, 8);
+            SND_PlayBGM(0x27, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_SceneState.step_05 = 5;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             break;
@@ -56,7 +56,7 @@ MATCH void func_801F8188(void) {
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
-                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -0x3B5;
+                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -949;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000.view.raw[0]].layer          = 0x1E;
@@ -72,7 +72,7 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0xC) {
                 break;
             }
-            SND_PlayBGM(0x24, 0x64, 8);
+            SND_PlayBGM(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
             g_SceneState.step_05 = 9;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
@@ -86,20 +86,20 @@ MATCH void func_801F8188(void) {
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
-                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -0x2AA;
+                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -682;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000.view.raw[0]].layer          = 0x1E;
-                g_SceneState.step_05                                = 0xA;
+                g_SceneState.step_05                                = 10;
             }
             break;
         case 10:
             if (g_ScriptVars[0] != 0xE) {
                 break;
             }
-            g_SceneState.step_05 = 0xB;
+            g_SceneState.step_05 = 11;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-            SYS_SetFlag(g_SceneFlags, 0xA);
+            SYS_SetFlag(g_SceneFlags, 10);
             Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(35), TO_COORD(41), AREA_ENTRY_MAP_LOADING);
             break;
         case 11:
@@ -113,7 +113,7 @@ MATCH void func_801F8188(void) {
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000.view.raw[0]].layer          = 2;
-                g_SceneState.step_05                                = 0xC;
+                g_SceneState.step_05                                = 12;
             }
             break;
         case 12:
@@ -125,19 +125,19 @@ MATCH void func_801F8188(void) {
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_ActorSlots[slot].header.flags                       = 1;
                 g_ActorSlots[D_1F800000.view.raw[0]].type           = 0x13;
-                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -0x2AA;
+                g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.x = -682;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_ActorSlots[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000.view.raw[0]].layer          = 0x78;
-                g_SceneState.step_05                                = 0xD;
+                g_SceneState.step_05                                = 13;
             }
             break;
         case 13:
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            g_SceneState.step_05 = 0xE;
-            SYS_SetFlag(g_SceneFlags, 0xB);
+            g_SceneState.step_05 = 14;
+            SYS_SetFlag(g_SceneFlags, 11);
             SYS_SetFlag(g_SceneFlags, 9);
             Item_VitalAdd(VITAL_ITEM_PASSPORT);
             break;
@@ -145,7 +145,7 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0x32) {
                 break;
             }
-            g_SceneState.step_05 = 0xF;
+            g_SceneState.step_05 = 15;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             /* FAKE: retail reads g_CharSlot as u8[]. */
             char_slots = (u8*)g_CharSlot;
