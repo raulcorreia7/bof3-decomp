@@ -9,8 +9,7 @@ MATCH void func_800C23D4(s32 angle) {
     POLY_FT4* poly;
     s32       lift;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, 0, 832, 256), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddDrawMode(GetTPage(2, 0, 832, 256));
 
     PushMatrix();
     lift   = 40;
@@ -28,7 +27,7 @@ MATCH void func_800C23D4(s32 angle) {
 
     poly        = (POLY_FT4*)g_GfxPrimCursor;
     poly->tpage = GetTPage(2, 0, 832, 256);
-    setRGB0(poly, 128, 128, 128);
+    setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
 
     vec.vx = -(g_Task->unk_0C / 2);
     vec.vy = -(g_Task->unk_10 / 2);
@@ -54,14 +53,7 @@ MATCH void func_800C23D4(s32 angle) {
     poly->x3 = g_Task->unk_18 + out.vx;
     poly->y3 = g_Task->unk_1C + (out.vy - lift);
 
-    poly->u0 = 0;
-    poly->v0 = 0;
-    poly->u1 = 191;
-    poly->v1 = 0;
-    poly->u2 = 0;
-    poly->v2 = 104;
-    poly->u3 = 191;
-    poly->v3 = 104;
+    setUV4(poly, 0, 0, 191, 0, 0, 104, 191, 104);
     SetPolyFT4(poly);
     GFX_AddPrim(1, sizeof(POLY_FT4));
     PopMatrix();
