@@ -13,7 +13,8 @@ is the cheapest known way in, in the order docs/matching.md tries them:
 
 A function recorded in `config/attempts.tsv` sorts after the untried ones of
 its route and shows its attempts. Build first (`meson compile -C build/meson`): the function index
-comes from the built images. Templates need `rapidfuzz` (`tools/setup.sh --matching`).
+comes from the built images. Templates need `rapidfuzz`; without it the command stops with exit 2
+and the install step (`tools/setup.sh --dev --matching`).
 """
 
 from __future__ import annotations
@@ -70,10 +71,15 @@ def templates() -> dict[str, tuple[str, int]]:
     try:
         with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
             dups.main(["near", "--full"])
-    except SystemExit:
-        print(
-            "worklist: no templates (" + err.getvalue().strip() + ")", file=sys.stderr
-        )
+    except SystemExit as error:
+        message = str(error.code) if error.code else err.getvalue().strip()
+        if "rapidfuzz" in message:
+            print(
+                "worklist: needs rapidfuzz. Run: tools/setup.sh --dev --matching",
+                file=sys.stderr,
+            )
+            raise SystemExit(2) from None
+        print("worklist: no templates (" + message + ")", file=sys.stderr)
         return {}
     rows = (line.split("\t") for line in out.getvalue().splitlines()[1:])
     return {r[0]: (r[1], int(r[3])) for r in rows}
