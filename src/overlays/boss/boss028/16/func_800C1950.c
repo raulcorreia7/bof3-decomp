@@ -5,8 +5,8 @@ MATCH void func_800C1950(void) {
     u8 timer;
     u8 index;
 
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    timer                           = ((PartyMember*)g_Task)->unk_09 - 1;
+    ((PartyMember*)g_Task)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         Battle_PlayEnemyCue(*g_BattleCurrentEnemy->unk_E8);
     }
