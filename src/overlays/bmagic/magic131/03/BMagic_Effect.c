@@ -279,14 +279,14 @@ MATCH void func_801F13A4(void) {
     u8   phase;
     u8   timer;
 
-    g_BMagicEffectWork->phase_0C += 0x10;
-    phase                           = D_801F1C38[g_BMagicEffectWork->unk_07];
-    angle_cell                      = &D_1F800006;
-    *angle_cell                     = phase << 7;
-    g_BMagicEffectWork->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) * (s16)g_BMagicEffectWork->phase_0C) >> 3);
-    g_BMagicEffectWork->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)g_BMagicEffectWork->phase_0C) >> 3);
-    timer                           = g_BMagicEffectWork->timer_05 - 2;
-    g_BMagicEffectWork->timer_05    = timer;
+    D_801F24E0->phase_0C += 0x10;
+    phase                   = D_801F1C38[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 7;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
+    timer                   = D_801F24E0->timer_05 - 2;
+    D_801F24E0->timer_05    = timer;
     if (timer == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         func_801F1AC4();
@@ -299,32 +299,32 @@ MATCH void func_801F153C(void) {
     s16* angle_cell;
     u8   phase;
 
-    phase                           = D_801F1C54[g_BMagicEffectWork->unk_07];
-    angle_cell                      = &D_1F800006;
-    *angle_cell                     = phase << 6;
-    g_BMagicEffectWork->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) << 6) >> 3);
-    g_BMagicEffectWork->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
-    g_BMagicEffectWork->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-    COORD_INT(g_BMagicEffectWork->pos.z) += D_801F1C74[g_BMagicEffectWork->unk_07] << 6;
-    g_BMagicEffectWork->phase_0C = 0x40;
-    g_BMagicEffectWork->timer_05 = 0x10;
-    g_BMagicEffectWork->unk_06   = 8;
-    g_BMagicEffectWork->header.step += 1;
+    phase                   = D_801F1C54[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 6;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) << 6) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
+    D_801F24E0->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    COORD_INT(D_801F24E0->pos.z) += D_801F1C74[D_801F24E0->unk_07] << 6;
+    D_801F24E0->phase_0C = 0x40;
+    D_801F24E0->timer_05 = 0x10;
+    D_801F24E0->unk_06   = 8;
+    D_801F24E0->header.step += 1;
 }
 
 MATCH void func_801F1644(void) {
     s16* angle_cell;
     u8   phase;
 
-    g_BMagicEffectWork->unk_06 += 2;
-    g_BMagicEffectWork->phase_0C += 0x20;
-    phase                           = D_801F1C54[g_BMagicEffectWork->unk_07];
-    angle_cell                      = &D_1F800006;
-    *angle_cell                     = phase << 6;
-    g_BMagicEffectWork->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) * (s16)g_BMagicEffectWork->phase_0C) >> 3);
-    g_BMagicEffectWork->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)g_BMagicEffectWork->phase_0C) >> 3);
-    if ((s16)g_BMagicEffectWork->phase_0C == 0x200) {
-        g_BMagicEffectWork->header.step += 1;
+    D_801F24E0->unk_06 += 2;
+    D_801F24E0->phase_0C += 0x20;
+    phase                   = D_801F1C54[D_801F24E0->unk_07];
+    angle_cell              = &D_1F800006;
+    *angle_cell             = phase << 6;
+    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) * (s16)D_801F24E0->phase_0C) >> 3);
+    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) * (s16)D_801F24E0->phase_0C) >> 3);
+    if ((s16)D_801F24E0->phase_0C == 0x200) {
+        D_801F24E0->header.step += 1;
     }
 }
 
@@ -353,17 +353,17 @@ MATCH void func_801F1AC4(void) {
 }
 
 MATCH void func_801F1B14(void) {
-    PartyMember* work;
-    s16          vec[3];
-    TILE_1*      primitive;
+    BMagicEffectWork* work;
+    s16               vec[3];
+    TILE_1*           primitive;
 
     work      = D_801F24E0;
-    vec[0]    = (work->unk_14 >> 9) - 0x4000;
+    vec[0]    = (work->pos.x.fixed >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (work->unk_18 >> 9) - 0x4000;
+    vec[1]    = (work->pos.y.fixed >> 9) - 0x4000;
     vec[2]    = -((s16)(*(u16*)((u8*)work + 0x1E)) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
-    ((s16*)&D_801F24E0->unk_20)[0] = primitive->x0;
-    ((s16*)&D_801F24E0->unk_20)[1] = primitive->y0;
+    D_801F24E0->unk_20 = primitive->x0;
+    D_801F24E0->unk_22 = primitive->y0;
 }
