@@ -4,7 +4,6 @@ MATCH void func_801F2E98(void) {
     Actor* actor;
     u16*   rect;
     u16    value;
-    u8     timer;
 
     actor   = g_Task;
     /* The quad a mode draws lives in the task's velocity words. */
@@ -16,9 +15,7 @@ MATCH void func_801F2E98(void) {
     }
     rect[3] += 0x40;
     func_801F358C(rect);
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
-    if ((timer & 0xFF) == 0) {
+    if (--g_Task->timer == 0) {
         func_801F39AC();
         rect[4]       = 0;
         g_Task->timer = 0;
