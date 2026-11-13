@@ -108,7 +108,26 @@ MATCH void func_801EF608(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF724);
+MATCH void func_801EF724(void) {
+    PartyMember* work;
+
+    if (g_FrameCount & 1) {
+        Actor_StepAnimLoop();
+    }
+    g_Task->unk_5D -= 3;
+    g_Task->unk_5E -= 3;
+    g_Task->unk_5F -= 3;
+    work                     = g_Task;
+    work->pos.x.fixed        = g_BattleEffects[work->param.unk_0B].pos.x.fixed;
+    work->pos.y.fixed        = g_BattleEffects[work->param.unk_0B].pos.y.fixed;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    if (g_BattleEffects[g_Task->param.unk_0B].pos.z.part.integer < COORD_INT(g_Task->pos.z)) {
+        g_Task->pos.z.fixed = g_BattleEffects[g_Task->param.unk_0B].pos.z.fixed;
+    }
+    if (g_BattleEffects[g_Task->param.unk_0B].header.step == 3) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void Effect_TickDownAndClear3(void) {
     EFFECT_TICK_DOWN_AND_CLEAR();

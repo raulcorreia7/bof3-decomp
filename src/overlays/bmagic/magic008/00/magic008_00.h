@@ -50,4 +50,11 @@ extern Magic008EarlySteps D_801EECAC;
 extern Magic008Steps      D_801EECC8;
 extern Point2DL           D_801F1C04[];
 
+/* The columns of g_BattleEffects: the retail code forms one slot base per store. */
+extern BattleEffectByteColumn   D_801EC331[];
+extern BattleEffectByteColumn   D_801EC332[];
+extern BattleEffectByteColumn   D_801EC335[];
+extern BattleEffectByteColumn   D_801EC336[];
+extern BattleEffectTargetColumn D_801EC3A4[];
+
 #endif

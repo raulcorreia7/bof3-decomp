@@ -14,6 +14,10 @@ typedef struct Magic004Steps {
 } Magic004Steps;
 
 extern Magic004Steps D_801EEC18;
+extern u8            D_801EFE10[];
+extern u8            D_801EFE11[];
+extern u8            D_801EFE12[];
+extern u8            D_801EFE34[];
 extern u16           D_801EFE40[];
 
 /* D_801EFE60 */

@@ -138,6 +138,8 @@ MATCH void func_801EFA74(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
+#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+
 MATCH void func_801EFAD4(void) {
     BattleEffect* slot;
     PartyMember*  work;
