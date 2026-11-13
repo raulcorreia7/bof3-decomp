@@ -49,6 +49,11 @@ enum {
 #define SCRATCH_COLUMN_STRIDE 0x18
 
 extern u16 D_80144F54;
+/* The area state bytes the request paths write. */
+extern u8  D_80144F56;
+extern u8  D_80144F57;
+extern s8  D_8014504A;
+extern s8  D_8014504B;
 extern u8  D_801455C7;
 /* The battle record rows whose first byte is a slot tag. */
 /* The global state byte the area update gates on. */
@@ -63,6 +68,8 @@ extern u8  D_801F3418[];
 
 /* The scenario state byte the request writes. */
 
+/* Restores the party after a battle and copies it in field order into the battle records. */
+void func_801C16B8(void);
 void Fairy_InitVillage(void);
 /* The overlay's frame update; the bounds checks and origin step run it. */
 /* func_801F30D4 (area158), func_801F30D4 (area160), func_801F30D4 (area161), func_801F30D4 (area162), func_801F30D4

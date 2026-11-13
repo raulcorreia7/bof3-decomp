@@ -24,7 +24,30 @@ MATCH void func_801EEC04(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED04);
+MATCH void func_801EED04(void) {
+    u8 slot;
+    u8 i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    Battle_CenterCamera();
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 92);
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].arg.unk_09   = 1;
+    g_Task->param.unk_0B += 1;
+    slot                               = Battle_AllocEffect(1, 92);
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].arg.unk_09   = 9;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
@@ -149,7 +172,30 @@ MATCH void func_801EFB48(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 8), 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EFB8C);
+MATCH void func_801EFB8C(void) {
+    s32 tpage;
+
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 9), g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0xA5;
+        } else {
+            tpage = 0x35;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        func_800AF764();
+        func_801EFFC8();
+        func_801F020C();
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0x25;
+        } else {
+            tpage = 0x15;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    }
+}
 
 INCLUDE_ASM(func_801EFCE4);
 

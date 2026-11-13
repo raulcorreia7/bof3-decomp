@@ -29,13 +29,13 @@ MATCH void func_801B2DDC(void) {
                 Message_StartAreaMessage(value & 0xFFF);
                 break;
             case 2:
-                FIELD(u8, &rec, 0x7Au) = 0xFF;
-                base                   = g_AreaLoads[LOHU(g_GameAreaId)];
-                list                   = FIELD(u32*, base, 0x4u);
-                entry                  = list[FIELD(u16, sel, 0x4u) & 0xFFF];
-                g_CurrentActor         = &rec;
+                rec.callback_index = 0xFF;
+                base               = g_AreaLoads[LOHU(g_GameAreaId)];
+                list               = FIELD(u32*, base, 0x4u);
+                entry              = list[FIELD(u16, sel, 0x4u) & 0xFFF];
+                g_CurrentActor     = &rec;
                 func_801A3F3C((u8*)entry);
-                result = FIELD(u16, &rec, 0x7Cu);
+                result = rec.unk_7C;
                 if (result != 0xFFFF) {
                     Message_StartAreaMessage(result & 0xFFF);
                 }

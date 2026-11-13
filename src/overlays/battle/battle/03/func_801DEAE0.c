@@ -5,7 +5,7 @@ MATCH void func_801DEAE0(void) {
     u32 x;
     u32 mode;
 
-    __builtin_memcpy(local_18, s_BattleCueIds, sizeof(local_18));
+    memcpy(local_18, s_BattleCueIds, sizeof(local_18));
     mode = D_801463D0;
     switch (mode) {
         case 1u:
