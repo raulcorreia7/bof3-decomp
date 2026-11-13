@@ -83,7 +83,45 @@ MATCH void BMagic_ProjectSpan(ProjectedSpan* span) {
     Area_ProjectPoint(span->pos, &span->screen[2]);
 }
 
-INCLUDE_ASM(func_801EF324);
+/* Draws the beam segment between two projected spans: two gouraud quads join
+ * their left and right cells and a flat line joins their centres. */
+MATCH void func_801EF324(Magic150SpanPair* pair) {
+    POLY_G4* quad;
+    LINE_F2* line;
+
+    quad     = GFX_BeginPolyG4(1);
+    quad->x0 = pair->previous.screen[1].vx;
+    quad->y0 = pair->previous.screen[1].vy;
+    quad->x1 = pair->previous.screen[0].vx;
+    quad->y1 = pair->previous.screen[0].vy;
+    quad->x2 = pair->current.screen[1].vx;
+    quad->y2 = pair->current.screen[1].vy;
+    quad->x3 = pair->current.screen[0].vx;
+    quad->y3 = pair->current.screen[0].vy;
+    setRGB0(quad, 64, 64, 0);
+    setRGB1(quad, 0, 0, 0);
+    setRGB2(quad, 64, 64, 0);
+    setRGB3(quad, 0, 0, 0);
+    GFX_AddPrim(1, sizeof(POLY_G4));
+
+    quad     = GFX_CURSOR(POLY_G4);
+    *quad    = quad[-1];
+    quad->x1 = pair->previous.screen[2].vx;
+    quad->y1 = pair->previous.screen[2].vy;
+    quad->x3 = pair->current.screen[2].vx;
+    quad->y3 = pair->current.screen[2].vy;
+    GFX_AddPrim(1, sizeof(POLY_G4));
+
+    line = GFX_CURSOR(LINE_F2);
+    SetLineF2(line);
+    SetSemiTrans(line, 1);
+    line->x0 = pair->previous.screen[1].vx;
+    line->y0 = pair->previous.screen[1].vy;
+    line->x1 = pair->current.screen[1].vx;
+    line->y1 = pair->current.screen[1].vy;
+    setRGB0(line, 32, 32, 0);
+    GFX_AddPrim(1, sizeof(LINE_F2));
+}
 
 INCLUDE_ASM(func_801EF4E0);
 

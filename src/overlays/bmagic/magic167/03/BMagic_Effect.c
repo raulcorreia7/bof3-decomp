@@ -6,7 +6,48 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC94);
+/* Copies the selected battler's pose into the effect, spawns one battle effect
+ * at that position and eight more in a four-column grid, and queues the
+ * selection sound. */
+MATCH void func_801EEC94(void) {
+    PartyMember* battler;
+    PartyMember* target;
+    u32          first_slot;
+    u8           i;
+    u8           slot;
+
+    battler              = g_BattleSelectedActor;
+    g_Task->facing       = battler->facing;
+    g_Task->pos.x        = battler->pos.x;
+    g_Task->pos.y        = battler->pos.y;
+    g_Task->pos.z        = battler->pos.z;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 16;
+    g_Task->header.mode += 1;
+    first_slot                                   = Battle_AllocEffect(1, 0x47) & BYTE_MASK;
+    g_BattleEffects[first_slot].target.party     = g_Task;
+    g_BattleEffects[first_slot].header.mode      = 0;
+    g_BattleEffects[first_slot].arg.unk_09       = 0;
+    g_BattleEffects[first_slot].pos.x            = g_Task->pos.x;
+    g_BattleEffects[first_slot].pos.y            = g_Task->pos.y;
+    COORD_INT(g_BattleEffects[first_slot].pos.z) = COORD_INT(g_Task->pos.z);
+    g_Task->param.unk_0B += 1;
+    i = 0;
+    do {
+        slot                               = Battle_AllocEffect(1, 0x47);
+        target                             = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].unk_0B       = (i & 0x3) * 8;
+        g_BattleEffects[slot].arg.unk_09   = ((i >> 2) * 40) + 17;
+        g_BattleEffects[slot].target.party = target;
+        g_BattleEffects[slot].pos.x        = g_Task->pos.x;
+        g_BattleEffects[slot].pos.y        = g_Task->pos.y;
+        g_BattleEffects[slot].pos.z        = g_Task->pos.z;
+        g_Task->param.unk_0B += 1;
+        i++;
+    } while (i < 8);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+}
 
 /* func_801EEE88 */
 #include "overlays/bmagic/Effect_PreparePalette.h"
