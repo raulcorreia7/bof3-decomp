@@ -54,7 +54,28 @@ MATCH void func_801EF120(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF198);
+MATCH void func_801EF198(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    u8           count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        actor          = g_BattleSelectedActor;
+        g_Task->facing = actor->facing;
+        work           = g_Task;
+        work->unk_0C   = D_801EF8B0[work->param.unk_0B].x;
+        work->unk_10   = D_801EF8B0[work->param.unk_0B].y;
+        func_801DD350(work);
+        g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.z.fixed = actor->pos.z.fixed + D_801EF8B0[g_Task->param.unk_0B].z;
+        func_800AF764();
+        g_Task->timer = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
 

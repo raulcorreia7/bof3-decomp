@@ -25,7 +25,37 @@ MATCH void func_801EEC14(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED28);
+MATCH void func_801EED28(void) {
+    PartyMember* actor;
+    PartyMember* task;
+    u16*         dst;
+    u16*         src;
+    u32          slot;
+    u8           i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    actor          = g_BattleSelectedActor;
+    g_Task->facing = actor->facing;
+    task           = g_Task;
+    WorldPos_Copy(&task->pos, &actor->pos);
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    do {
+        dst[i]      = src[i];
+        dst[i + 16] = src[i + 16];
+        i++;
+    } while (i < 16);
+    g_GfxPalettePending                = 1;
+    slot                               = Battle_AllocEffect(1, 41) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_Task->param.unk_0B               = 2;
+    g_Task->header.mode += 1;
+}
 
 #include "overlays/bmagic/Effect_Pause.h"
 
@@ -103,9 +133,67 @@ MATCH void func_801EF484(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4F0);
+MATCH void func_801EF4F0(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
 
-INCLUDE_ASM(func_801EF648);
+    PushMatrix();
+    switch (g_Task->facing) {
+        case 0:
+            rot.vx = 0;
+            rot.vy = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            break;
+        case 1:
+            rot.vx = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            rot.vy = 0;
+            break;
+        case 2:
+            rot.vx = 0;
+            rot.vy = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            break;
+        case 3:
+            rot.vx = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            rot.vy = 0;
+            break;
+    }
+    rot.vz = 0;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x20) / 2;
+    RotTransMatrix(&pos, matrix, &flags);
+    Camera_SetModelMatrix(&rot, &matrix);
+}
+
+MATCH void func_801EF648(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    switch (g_Task->facing) {
+        case 0:
+            rot.vx = 0;
+            rot.vy = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            break;
+        case 1:
+            rot.vx = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            rot.vy = 0;
+            break;
+        case 2:
+            rot.vx = 0;
+            rot.vy = ONE - BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            break;
+        case 3:
+            rot.vx = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+            rot.vy = 0;
+            break;
+    }
+    rot.vz = 0;
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+}
 
 INCLUDE_ASM(func_801EF79C);
 
@@ -158,7 +246,7 @@ MATCH void func_801F00A8(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = g_Task->unk_09 << 6;
+    rot.vz = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 

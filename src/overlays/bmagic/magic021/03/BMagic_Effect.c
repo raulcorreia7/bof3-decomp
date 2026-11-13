@@ -113,7 +113,35 @@ MATCH void func_801EF578(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF600);
+MATCH void func_801EF600(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    s16*         radius_cell;
+    u32          offset;
+    u16          phase;
+    u8           count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        offset                 = rand() & 0x7;
+        actor                  = g_BattleSelectedActor;
+        work                   = g_Task;
+        work->pos.x.fixed      = actor->pos.x.fixed;
+        work->pos.y.fixed      = actor->pos.y.fixed;
+        COORD_INT(work->pos.z) = (s16)((u16)COORD_INT(actor->pos.z) + (offset << 5));
+        radius_cell            = &D_1F800000_HALF;
+        *radius_cell           = 0xC0 - (offset << 4);
+        phase                  = rand() & 0x7;
+        D_1F800004             = phase << 9;
+        g_Task->pos.x.fixed += (rsin(phase << 9) * *radius_cell) >> 3;
+        FAKE_BARRIER(); /* FAKE: keeps the angle load after the x update, as retail does. */
+        g_Task->pos.y.fixed += (rcos(D_1F800004) * *radius_cell) >> 3;
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 16;
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 

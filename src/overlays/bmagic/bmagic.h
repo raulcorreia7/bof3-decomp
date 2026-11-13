@@ -122,6 +122,35 @@ typedef Point2D TrailPoint;
     handlers.handlers[g_Task->field]()
 #define g_Task ((PartyMember*)g_Task)
 
+/* The 0x74 bytes of a battler's work record that a queued effect slot copies;
+ * GCC expands the copy into its 16-byte block-move loop. */
+typedef struct BattleWorkImage {
+    u32 words[29];
+} BattleWorkImage;
+
+ASSERT_SIZE(BattleWorkImage, 0x74);
+
+/* Copy the active battler's work image into a free effect slot. A statement
+ * macro: the member declares u32 index, u8 active and BattleEffect* slot. */
+#define BMAGIC_QUEUE_WORK_IMAGE()                                                  \
+    index  = Battle_AllocEffect(1, 31);                                            \
+    active = g_Battle.active_battler;                                              \
+    if (BATTLER_IS_PLAYER(active)) {                                               \
+        BattleWorkImage* row;                                                      \
+                                                                                   \
+        row                     = (BattleWorkImage*)&g_Game.members[active];       \
+        slot                    = &g_BattleEffects[index & BYTE_MASK];             \
+        *(BattleWorkImage*)slot = *row;                                            \
+    } else {                                                                       \
+        BattleWorkImage* row;                                                      \
+        u32              enemy;                                                    \
+                                                                                   \
+        slot                    = &g_BattleEffects[index & BYTE_MASK];             \
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;          \
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy]; \
+        *(BattleWorkImage*)slot = *row;                                            \
+    }
+
 /* Go to the effect's next step. */
 static inline void BMagic_NextStep(void) {
     PartyMember* work = g_Task;

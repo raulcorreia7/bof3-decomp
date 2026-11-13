@@ -11,7 +11,28 @@ MATCH void func_801EECF0(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EED5C);
+MATCH void func_801EED5C(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    BMAGIC_QUEUE_WORK_IMAGE();
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    SND_QueueSelectionFx(0x100);
+}
 
 MATCH void func_801EEF6C(void) {
     if (g_Task->param.unk_0B == 0xFF) {
@@ -74,7 +95,27 @@ MATCH void func_801EF75C(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF7C8);
+MATCH void func_801EF7C8(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    BMAGIC_QUEUE_WORK_IMAGE();
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 4;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
 
 MATCH void func_801EF9D4(void) {
     if (g_Task->param.unk_0B == 0xFF) {
@@ -97,7 +138,24 @@ MATCH void func_801EFA74(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EFAD4);
+MATCH void func_801EFAD4(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    BMAGIC_QUEUE_WORK_IMAGE();
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 5;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
 
 MATCH void func_801EFC90(void) {
     if (g_Task->param.unk_0B == 0xFF) {
