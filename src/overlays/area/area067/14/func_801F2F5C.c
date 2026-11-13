@@ -8,13 +8,13 @@ MATCH void func_801F2F5C(void) {
     quad          = (AreaRippleQuad*)&g_Task->vx;
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
-    quad->height += 0x40;
+    quad->height += 64;
     quad->angle += 2;
-    if (timer == 0xF) {
+    if (timer == 15) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
     }
     func_801F358C(quad);
-    /* area.h declares the family's three-argument form; this image's step takes none. */
+    /* kept: the group header types the family's three-argument form, so this image's no-argument step keeps the cast. */
     ((void (*)(void))func_801F39D8)();
     func_801F3AD8(quad);
     if ((g_FrameCount & 1) != 0) {
