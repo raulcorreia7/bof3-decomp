@@ -14,7 +14,7 @@ MATCH void func_801C1E88(s32 key, s32* counter) {
     key &= BYTE_MASK;
     step = 0;
     do {
-        if ((*(&g_FairyRooms + step) == val) && (*(&g_FairyRooms + 1 + step) == key)) {
+        if ((g_FairyRooms[step] == val) && (g_FairyRooms[1 + step] == key)) {
             next  = outer + 1;
             inner = 0;
             do {

@@ -206,7 +206,6 @@ extern s32              D_801455BC;
 extern u16              D_801455C0;
 extern s8               D_801455C2;
 extern u8               D_801455C6;
-extern const u8         g_FairyRooms[];
 extern u8               D_801457A9[];
 extern u8               D_801457AA[];
 extern u8               D_801457AB[];

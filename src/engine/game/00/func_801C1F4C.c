@@ -14,7 +14,7 @@ MATCH void func_801C1F4C(s32 key) {
     step    = 0;
     do {
         total = 0;
-        if ((*(&g_FairyRooms + step) == key) && (*(&D_801457AB + step) != 0)) {
+        if ((g_FairyRooms[step] == key) && (*(&D_801457AB + step) != 0)) {
             next  = outer + 1;
             inner = 0;
             do {

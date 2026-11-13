@@ -319,7 +319,6 @@ extern u8                        D_80144FC4[]; /* 0x80144FC4; per-slot spawn-gat
 extern u8                        D_80145004[]; /* 0x80145004 */
 extern s32                       D_8014503C;   /* 0x8014503C */
 extern s8                        D_8014504B;   /* 0x8014504B */
-extern u8                        g_FairyRooms;
 extern u8                        D_801457AB;
 extern u8                        D_80145E9B;
 extern u16                       D_80145EBC; /* 0x80145EBC */

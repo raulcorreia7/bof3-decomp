@@ -183,6 +183,8 @@ extern MenuStatusItems g_MenuStatusItems;
 extern s32             D_801DA044;
 extern u8              D_801DA04E;
 extern s32             D_801DA084;
+extern s32             D_801DA088;
+extern s32             D_801DA0FC;
 extern u8              D_801DA0C0;
 extern u8              D_801DA0C6;
 extern u32             D_801DA100;

@@ -125,7 +125,69 @@ MATCH void func_801D11A4(void) {
     g_MenuStatusStep2Funcs[g_MenuStep.sub_step]();
 }
 
-INCLUDE_ASM(func_801D11F4);
+/* Reads the status item input, advances the step and places the panel task. */
+MATCH void func_801D11F4(void) {
+    u16* input;
+    u8*  step;
+    u8   cur;
+    u16  buttons;
+
+    input   = &g_InputPressed;
+    buttons = INPUT_REPEATED(*input, INPUT_DIRECTIONAL);
+    if (buttons & (PADLright | PADLleft)) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        g_MenuStatusItems.unk_09 ^= 1;
+        D_80148364 = g_MenuStatusItems.unk_09 + 0x2B;
+    } else if (buttons & PADLup) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        D_80148364               = 0x2A;
+        g_MenuStatusItems.unk_0A = 3;
+        g_MenuStep.sub_step++;
+    } else if (buttons & PADLdown) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        D_80148364               = 0x2A;
+        g_MenuStatusItems.unk_0A = 0;
+        g_MenuStep.sub_step++;
+    } else if (*input & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (g_MenuStatusItems.unk_09 != 0) {
+            goto advance;
+        }
+        if (g_MenuStatusItems.unk_08 < 8) {
+            if (g_MenuStatusItems.unk_08 == 0) {
+                if (g_MenuStatusItems.used[0] != 0 && g_MenuStatusItems.used[1] != 0) {
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+                    g_MenuStep.sub_step += 2;
+                    g_MenuStep.state = g_MenuStep.state; /* FAKE: retail reloads and stores state. */
+                } else {
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                    D_80148364 = 0x31;
+                }
+            } else {
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+                g_MenuStatusItems.unk_08++;
+            }
+        } else {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+        }
+    } else if (*input & g_InputMasks[MENU_INPUT_CANCEL]) {
+    advance:
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        step                       = &g_MenuStep.step;
+        cur                        = *step;
+        g_MenuPanelTasks[0].active = 0;
+        g_MenuStep.sub_step        = 0;
+        *step                      = cur + 1;
+    }
+
+    g_MenuPanelTasks[0].active = 1;
+    D_80148334                 = D_8014837C + g_MenuStatusItems.unk_09 * 48;
+    D_80148336                 = D_8014837E + 4;
+    if (g_MenuStatusItems.unk_08 != 0) {
+        D_801DA0FC = D_801DA084 + D_801DA088 * 0xA00;
+    }
+    func_801D2C0C();
+    func_801D2DA8();
+}
 
 INCLUDE_ASM(func_801D14C0);
 
