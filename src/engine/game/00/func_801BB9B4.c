@@ -40,7 +40,7 @@ MATCH void func_801BB9B4(s16 probe_x, s16 probe_y) {
     if (route & 0x1) {
         return;
     }
-    if ((route == 0) || (route == 6)) {
+    if ((route == FACING_UP_LEFT) || (route == FACING_DOWN_LEFT)) {
         if (func_801BB86C(COORD_INT(g_Task->pos.x), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
             func_801BB8E8(2, 4, 3);
         }

@@ -15,7 +15,7 @@ MATCH void func_801F35B0(void) {
         g_Task->unk_0A = count + 1;
     }
     func_801F42E8();
-    if (g_GameStateIndex != 2 && g_MessageRequest == 0x12 && D_80146875 == 0xC) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_MessageRequest == 0x12 && D_80146875 == 0xC) {
         task         = g_Task;
         task->timer  = 0;
         task->vx     = 40960;

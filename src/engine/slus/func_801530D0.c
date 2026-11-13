@@ -62,7 +62,7 @@ NON_MATCHING s32 func_801530D0(void) {
         tmp = width - (s16)cell;
     }
     D_1F80000C = tmp;
-    if (g_GameRequestFlags & 1) {
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
         v = 0;
         if (tmp >= 2) {
             v = tmp - 2;

@@ -25,7 +25,7 @@ MATCH void func_801B016C(void) {
     g_Game.current->u.field.mode_12B.s8_value       = 0;
     g_Game.current->status.field.flags_12C.s8_value = 0;
     g_Task->unk_4B                                  = 0xFF;
-    if (g_GameRequestFlags & 0x20) {
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT) {
         g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
         g_Task->header.mode = 0xC;
     } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {

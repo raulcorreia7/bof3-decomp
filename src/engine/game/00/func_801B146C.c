@@ -33,7 +33,7 @@ MATCH void func_801B146C(void) {
         g_Task->option_flags = 0U;
     }
     level_flag = g_Game.current->u.field.counter_11C.u8_value;
-    if (!(g_GameRequestFlags & 0x1)) {
+    if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
         func_801C3828();
     }
     func_801C3598();
@@ -45,7 +45,7 @@ MATCH void func_801B146C(void) {
             return;
         }
         state_flags = g_GameRequestFlags;
-        if (state_flags & 0x1) {
+        if (state_flags & AREA_LOAD_FLAG_WORLD_MAP) {
             work_c = g_Task;
             if ((Area_GetCellCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & BYTE_MASK) == 0xAF) {
                 func_801B5BDC(g_Task->direction_08);
@@ -102,13 +102,13 @@ MATCH void func_801B146C(void) {
         counter          = g_EncounterSteps;
         g_EncounterSteps = counter + 1;
         route_id         = g_Task->direction_08;
-        if ((route_id == 2) || (route_id == 6)) {
+        if ((route_id == FACING_UP_RIGHT) || (route_id == FACING_DOWN_LEFT)) {
             g_EncounterSteps = counter + 2;
         }
         Actor_ClearVelocity();
         g_AreaCameraStep       = 0;
         g_AreaCameraHeightStep = 0;
-        if (!(g_GameRequestFlags & 0x1) && !(g_Game.walk_flags & (0x20 | AREA_WALK_ENTRY_PENDING))) {
+        if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) && !(g_Game.walk_flags & (0x20 | AREA_WALK_ENTRY_PENDING))) {
             if (Area_CanStartEncounter() & BYTE_MASK) {
                 g_Game.current->u.field.counter_11C.u8_value = 3U;
                 Actor_RequestScript(g_Task->direction_08);

@@ -59,12 +59,12 @@ NON_MATCHING void func_80153DE8(void) {
     g_AreaCameraY                  = 0x8000 - ((s32)g_AreaScrollTargetY >> 8);
     g_AreaTileOriginX              = ((s32)g_AreaScrollTargetX >> 0x10) - 24;
     g_AreaTileOriginY              = ((s32)g_AreaScrollTargetY >> 0x10) + 3;
-    if (g_GameRequestFlags & 8) {
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
         g_AreaCameraHeight = 0;
     } else {
         g_AreaCameraHeight = (s32)Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
     }
-    if (g_GameRequestFlags & 1) {
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
         D_8014933A = 0x80;
     } else {
         D_8014933A = 0;

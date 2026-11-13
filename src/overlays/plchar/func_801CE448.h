@@ -4,7 +4,7 @@ MATCH void func_801CE448(void) {
     s32 direction;
 
     if (SYS_TestFlag(&g_SceneFlagWords[8], 0x16)) {
-        if (Party_CountOrder(PARTY_ORDER_FIELD) == 1 && !(g_GameRequestFlags & 0x40)) {
+        if (Party_CountOrder(PARTY_ORDER_FIELD) == 1 && !(g_GameRequestFlags & AREA_LOAD_FLAG_SHOP)) {
             g_Task->unk_04 = 0x50;
         } else {
             g_Task->unk_04 = 0x40;

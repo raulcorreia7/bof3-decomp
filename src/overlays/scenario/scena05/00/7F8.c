@@ -96,11 +96,11 @@ MATCH void func_801F8430(void) {
     switch (*step) {
         case 0:
             Message_StartAreaMessage(5);
-            g_GameStateIndex = 2;
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *step            = 1;
             break;
         case 1:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 D_80146866 = 1;
                 *step      = 2;
                 SYS_SetFlag(g_SceneFlags, 0);

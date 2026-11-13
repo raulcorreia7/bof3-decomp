@@ -13,7 +13,7 @@ MATCH bool func_801BB6F0(s32 command) {
             }
         } else if (value == 8) {
             route = g_Task->direction_08;
-            if ((route == 3) || (route == 5)) {
+            if ((route == FACING_RIGHT) || (route == FACING_DOWN)) {
                 return 1;
             }
         }

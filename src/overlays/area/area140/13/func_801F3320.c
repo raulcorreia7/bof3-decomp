@@ -8,7 +8,7 @@ MATCH void func_801F3320(void) {
     COORD_INT(g_Task->pos.y) = D_801F47F4[i].y;
     g_Task->direction_08     = D_801F47F4[i].direction;
     g_Task->param.unk_0B     = D_801F47F4[i].param;
-    if (g_Task->direction_08 == 0) {
+    if (g_Task->direction_08 == FACING_UP_LEFT) {
         COORD_INT(g_Task->pos.z) = 0;
         g_Task->header.step++;
     } else {

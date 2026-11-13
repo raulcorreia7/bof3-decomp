@@ -214,8 +214,14 @@ typedef enum AreaId {
 
 #define GAME_TABLE_ENTRY_SIZE  0x44
 
+/* AreaLoad.flag_32, the behaviors the area runs in place of the ordinary field
+ * code. The game copies it to g_GameRequestFlags at area entry. */
 typedef enum AreaLoadFlags {
-    AREA_LOAD_FLAG_FAIRY_VILLAGE = 1 << 4,
+    AREA_LOAD_FLAG_WORLD_MAP       = 1 << 0, /* the area runs the world map */
+    AREA_LOAD_FLAG_FISHING         = 1 << 3, /* the area runs the fishing minigame */
+    AREA_LOAD_FLAG_FAIRY_VILLAGE   = 1 << 4,
+    AREA_LOAD_FLAG_NO_ACTOR_SCRIPT = 1 << 5, /* actors keep their own mode and request no talk script */
+    AREA_LOAD_FLAG_SHOP            = 1 << 6, /* a travelling shop opens with the area */
 } AreaLoadFlags;
 
 typedef struct AreaLoad {

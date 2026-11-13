@@ -136,7 +136,7 @@ MATCH void func_801F9354(void) {
 
     switch (*step) {
         case 0:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 *g_ScriptVars = 1;
                 func_801BE1B0(0xC);
                 *step = 1;
@@ -154,7 +154,7 @@ MATCH void func_801F9354(void) {
             }
             break;
         case 5:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 *g_ScriptVars = 1;
                 *step         = 6;
             }
@@ -187,7 +187,7 @@ MATCH void func_801FA08C(void) {
             }
             break;
         case 1:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 SYS_SetFlag(g_SceneFlags, 0x13);
                 Game_ClearScriptActive();
                 *step      = 0;
@@ -195,14 +195,14 @@ MATCH void func_801FA08C(void) {
             }
             break;
         case 5:
-            if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_MENU]) && g_GameStateIndex == 0) {
+            if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_MENU]) && g_GameStateIndex == GAME_REQUEST_IDLE) {
                 *g_ScriptVars = 0;
                 *step         = 6;
                 Game_RequestAreaChange(0x76, 0x490000, 0x188000, 0x81);
             }
             break;
         case 6:
-            if (*g_ScriptVars == 1 && g_GameStateIndex != 2) {
+            if (*g_ScriptVars == 1 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 *g_ScriptVars = 0;
                 Game_ClearScriptActive();
                 *step      = 0;

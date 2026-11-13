@@ -241,15 +241,15 @@ extern u16 g_GameEntryState;
 /* The request code, a GameRequest value. */
 /* D_80143BB0 */
 extern u8  g_GameStateIndex;
-/* D_80143F02. A unit that reads it as volatile (etc/game/00) defines
- * GAME_REQUEST_FLAGS_VOLATILE before its first include. */
+/* D_80143F02, a copy of the current AreaLoad.flag_32 (AreaLoadFlags). A unit
+ * that reads it as volatile (etc/game/00) defines GAME_REQUEST_FLAGS_VOLATILE
+ * before its first include. */
 #ifdef GAME_REQUEST_FLAGS_VOLATILE
 extern volatile u8 g_GameRequestFlags;
 #else
 extern u8 g_GameRequestFlags;
 #endif
-/* Map kind bit of g_GameRequestFlags: the area runs the world map. */
-#define GAME_REQUEST_FLAG_WORLD_MAP 0x01
+
 /* Not volatile: the qualifier changes the generated order in the scena00 drawer. */
 /* D_80143C40 */
 extern u16 g_UiWindowEffectBusy;

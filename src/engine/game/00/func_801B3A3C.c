@@ -28,7 +28,7 @@ MATCH void func_801B3A3C(void) {
             Area_SetCellCode(FIELD(s16, D_801468BE, off), FIELD(s16, D_801468C2, off), 0x10);
         }
     }
-    if (g_GameRequestFlags & 0x20u) {
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT) {
         work              = g_Task;
         work->header.mode = 0x0Cu;
     } else {

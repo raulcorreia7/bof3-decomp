@@ -120,27 +120,31 @@ typedef union MenuListSource {
 ASSERT_SIZE(MenuListSource, 2);
 
 /* The text shade a menu row is drawn with (UI_DrawText and func_801AF930). */
-#define MENU_SHADE_NORMAL                   0
-#define MENU_SHADE_SELECTED                 2
-#define MENU_SHADE_DIM                      7
+enum {
+    MENU_SHADE_NORMAL   = 0,
+    MENU_SHADE_SELECTED = 2,
+    MENU_SHADE_DIM      = 7,
+};
 
 /* The frame sprites of a panel border: the top edge and its corners, the side edges, and the flat bottom edge
  * that closes the short panels. */
-#define MENU_FRAME_SPRITE_TOP_LEFT          0x28
-#define MENU_FRAME_SPRITE_TOP               0x29
-#define MENU_FRAME_SPRITE_TOP_RIGHT         0x2A
-#define MENU_FRAME_SPRITE_LEFT              0x2B
-#define MENU_FRAME_SPRITE_RIGHT             0x2C
-#define MENU_FRAME_SPRITE_FLAT_BOTTOM_LEFT  0x3A
-#define MENU_FRAME_SPRITE_FLAT_BOTTOM       0x3B
-#define MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT 0x3C
+enum {
+    MENU_FRAME_SPRITE_TOP_LEFT          = 0x28,
+    MENU_FRAME_SPRITE_TOP               = 0x29,
+    MENU_FRAME_SPRITE_TOP_RIGHT         = 0x2A,
+    MENU_FRAME_SPRITE_LEFT              = 0x2B,
+    MENU_FRAME_SPRITE_RIGHT             = 0x2C,
+    MENU_FRAME_SPRITE_FLAT_BOTTOM_LEFT  = 0x3A,
+    MENU_FRAME_SPRITE_FLAT_BOTTOM       = 0x3B,
+    MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT = 0x3C,
+};
 
 /* MenuListPanel.flags: two cursor-tab bits, and a frame countdown in the high
  * nibble that the drawer steps down once per draw. */
-#define MENU_LIST_FLAG_TAB_1                0x01
-#define MENU_LIST_FLAG_TAB_2                0x02
-#define MENU_LIST_FRAME_MASK                0xF0
-#define MENU_LIST_FRAME_STEP                0x10
+#define MENU_LIST_FLAG_TAB_1 0x01
+#define MENU_LIST_FLAG_TAB_2 0x02
+#define MENU_LIST_FRAME_MASK 0xF0
+#define MENU_LIST_FRAME_STEP 0x10
 
 /* The list panel record, handed to the panel drawers as a pointer: the
  * shop's ability and item lists (Shop_DrawAbilities, Shop_DrawItems) and the

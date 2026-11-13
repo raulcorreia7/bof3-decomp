@@ -18,7 +18,7 @@ MATCH void Game_UpdateAreaLoad(void) {
     g_Game.walk_flags = world_flags & ~AREA_WALK_ENTRY_ACTIVE;
     func_8019FAA0(context_seed, context_a, context_b, context_kind);
 
-    if (g_GameRequestFlags & 0x8u) {
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
         g_GameEntryState = GAME_STATE_FISHING;
         return;
     }

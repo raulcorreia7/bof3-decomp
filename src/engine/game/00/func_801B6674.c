@@ -11,7 +11,7 @@ NON_MATCHING bool func_801B6674(void) {
 
     temp   = Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
     status = g_GameRequestFlags;
-    if (!(status & GAME_REQUEST_FLAG_WORLD_MAP)) {
+    if (!(status & AREA_LOAD_FLAG_WORLD_MAP)) {
         return 0;
     }
     if (g_InputPressed & g_InputMasks[WORLD_INPUT_ENTER]) {
@@ -21,7 +21,7 @@ NON_MATCHING bool func_801B6674(void) {
                     return 0;
                 }
             }
-            if (!(status & 0x20)) {
+            if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
                 func_801B5BDC(g_Task->direction_08);
             }
             func_801B690C();
@@ -46,7 +46,7 @@ NON_MATCHING bool func_801B6674(void) {
         if ((func_801B6470(temp, status) & BYTE_MASK) == 0) {
             return 0;
         }
-        if (!(g_GameRequestFlags & 0x20)) {
+        if (!(g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
             func_801B5BDC(g_Task->direction_08);
         }
         D_8014504A += 1;
@@ -59,7 +59,7 @@ NON_MATCHING bool func_801B6674(void) {
     }
     if ((g_InputPressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && ((u8)(temp + 0x60) < 2)) {
         g_SceneEventMode = 0x1B;
-        if (!(status & 0x20)) {
+        if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
             func_801B5BDC(g_Task->direction_08);
         }
         ACTOR_CLEAR_STEP();

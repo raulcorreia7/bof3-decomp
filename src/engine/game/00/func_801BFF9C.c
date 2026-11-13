@@ -121,7 +121,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             }
         }
     }
-    if (!(g_GameRequestFlags & 0x8)) {
+    if (!(g_GameRequestFlags & AREA_LOAD_FLAG_FISHING)) {
         if (z & 0x80) {
             g_AreaScrollTargetX = x;
             g_AreaScrollTargetY = y;

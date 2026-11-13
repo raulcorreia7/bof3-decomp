@@ -31,7 +31,7 @@ NON_MATCHING s32 func_801B95E0(void) {
     y_arg = y = FIELD(u16, g_Task, 0x3Au) + (s8)D_80181B01[WDIR * 2];
     func_801BBBC8(x, y_arg);
 
-    if (!(WDIR & 1)) {
+    if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
         if (COORD_FRAC(g_Task->pos.x) == 0) {
             if (COORD_FRAC(g_Task->pos.y) == 0) {
                 pad    = (u8*)&D_1F800008;
@@ -54,7 +54,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                             g_Task->direction_08 = (WDIR + 1) & 7;
                         }
                     }
-                    if (!(g_GameRequestFlags & 1)) {
+                    if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
                         if ((PAD_B & 0xF0) == 0xA0 && (WDIR == 1 || WDIR == 5)) {
                             return func_801BB7B0(9) & BYTE_MASK;
                         }
@@ -73,7 +73,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                         }
                     }
                     ret = 3;
-                    if (WDIR & 1) {
+                    if (WDIR & AREA_LOAD_FLAG_WORLD_MAP) {
                         return ret;
                     }
                     probe = Area_ReadStepHeight(STEP_TILE_X(x), y << 0x10, 3) << 0x10;
@@ -82,7 +82,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                         return 1;
                     }
                     ret = 3;
-                    if (WDIR & 1) {
+                    if (WDIR & AREA_LOAD_FLAG_WORLD_MAP) {
                         return ret;
                     }
                     probe = Area_ReadStepHeight(x << 0x10, (((s16)FIELD(u16, g_Task, 0x3Au) + y) << 0x10) >> 1, 1) << 0x10;
@@ -111,7 +111,7 @@ NON_MATCHING s32 func_801B95E0(void) {
             if ((PAD_A & 0xF0) != 0xA0) {
                 return 3;
             }
-            if (!(WDIR & 1)) {
+            if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
                 func_801BB8E8(4, 6, 5);
             }
             return func_801BB7B0(8) & BYTE_MASK;
@@ -132,7 +132,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         if ((PAD_A & 0xF0) != 0xA0) {
             return 3;
         }
-        if (!(WDIR & 1)) {
+        if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
             func_801BB8E8(2, 4, 3);
         }
         return func_801BB7B0(8) & BYTE_MASK;
