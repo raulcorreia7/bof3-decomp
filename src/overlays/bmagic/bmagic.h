@@ -132,7 +132,7 @@ ASSERT_SIZE(BattleWorkImage, 0x74);
 
 /* Copy the active battler's work image into a free effect slot. A statement
  * macro: the member declares u32 index, u8 active and BattleEffect* slot. */
-#define BMAGIC_QUEUE_WORK_IMAGE()                                                  \
+#define BMAGIC_ALLOC_BATTLER_EFFECT()                                              \
     index  = Battle_AllocEffect(1, 31);                                            \
     active = g_Battle.active_battler;                                              \
     if (BATTLER_IS_PLAYER(active)) {                                               \

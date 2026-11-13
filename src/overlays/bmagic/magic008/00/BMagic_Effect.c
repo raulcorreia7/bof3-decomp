@@ -23,7 +23,7 @@ MATCH void func_801EED5C(void) {
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
     func_800AEF98(0xC, 2);
-    BMAGIC_QUEUE_WORK_IMAGE();
+    BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
@@ -107,7 +107,7 @@ MATCH void func_801EF7C8(void) {
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
     func_800AEF98(0xC, 2);
-    BMAGIC_QUEUE_WORK_IMAGE();
+    BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 4;
     g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
@@ -147,7 +147,7 @@ MATCH void func_801EFAD4(void) {
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
     func_800AEF98(0xC, 2);
-    BMAGIC_QUEUE_WORK_IMAGE();
+    BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 5;
     g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
