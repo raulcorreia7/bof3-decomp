@@ -835,6 +835,7 @@ g_BMagicEffectModes = { addr = 0x801EF7A0, source = "Handlers of magic075 (Purif
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+BMagic_EffectSteps = { addr = 0x801EEC1C, source = "Step handlers of magic076, run by header.step (byte 0x02) through Effect_DrawRings." }
 Effect_PreparePalette = { addr = 0x801EEF5C, type = "func", source = "Prepares the selected battler palette fade after the effect timer reaches zero in magic076." }
 Effect_BrightenPalette = { addr = 0x801EF00C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic076." }
 Effect_NextStep = { addr = 0x801EF11C, type = "func", source = "While the effect ticker (byte 0x0B) is under 1, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic076." }
@@ -843,6 +844,9 @@ Effect_PlayOnZeroTick = { addr = 0x801EF288, type = "func", source = "When the e
 BMagic_DispatchEffectMode = { addr = 0x801EF330, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic076." }
 Effect_CountDownAndStep = { addr = 0x801EF5F0, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic076." }
 Effect_TickOnTimerZero = { addr = 0x801EF63C, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic076." }
+Effect_DrawRings = { addr = 0x801EF8EC, type = "func", source = "Runs the step handler header.step (byte 0x02) selects, draws the effect's two translucent ring layers and projects the battle range in magic076." }
+BMagic_DrawRingTriangles = { addr = 0x801EFEA8, type = "func", source = "draws 8 semi-transparent POLY_G3 triangles in a ring around the effect's screen point with sine and cosine offsets; one body shared with the other bmagic overlays" }
+BMagic_DrawRingQuads = { addr = 0x801F00FC, type = "func", source = "draws 8 semi-transparent POLY_G4 quads in a ring around the effect's screen point with sine and cosine offsets; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801F03D4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic076." }
 Actor_Clear = { addr = 0x801F0438, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0488, source = "Handlers of magic076, run by header.mode (byte 0x01)." }
@@ -1624,10 +1628,15 @@ BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the fi
 
 ["emi/bmagic/magic169/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+BMagic_EffectSteps = { addr = 0x801EEC2C, source = "Step handlers of magic169, run by header.step (byte 0x02) through Effect_DrawRings." }
 Effect_StartPlaying = { addr = 0x801EF03C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic169 (Benediction)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF210, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic169." }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF640, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic169 (Benediction)." }
+Effect_DrawRings = { addr = 0x801EF8A4, type = "func", source = "Runs the step handler header.step (byte 0x02) selects, draws the effect's two translucent ring layers and projects the battle range in magic169 (Benediction)." }
+BMagic_DrawRingTriangles = { addr = 0x801EFE3C, type = "func", source = "draws 8 semi-transparent POLY_G3 triangles in a ring around the effect's screen point with sine and cosine offsets; one body shared with the other bmagic overlays" }
+BMagic_DrawRingQuads = { addr = 0x801F0090, type = "func", source = "draws 8 semi-transparent POLY_G4 quads in a ring around the effect's screen point with sine and cosine offsets; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801F0368, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 80 slots are in use in magic169 (Benediction)." }
 Actor_Clear = { addr = 0x801F03CC, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F041C, source = "Handlers of magic169 (Benediction), run by header.mode (byte 0x01)." }

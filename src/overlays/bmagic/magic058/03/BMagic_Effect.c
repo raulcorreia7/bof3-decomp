@@ -102,6 +102,7 @@ MATCH void func_801EF454(void) {
     g_Task->unk_09 = count;
     if (count == 0) {
         work = g_Task;
+        /* kept: retail reloads the battler row at each access; a PartyMember* local changes the bytes. */
         if (BATTLER_IS_PLAYER(work->param.unk_0B)) {
             work->pos.x.fixed = g_Game.members[work->param.unk_0B].pos.x.fixed;
             work->pos.y.fixed = g_Game.members[work->param.unk_0B].pos.y.fixed;

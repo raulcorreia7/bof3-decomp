@@ -37,6 +37,8 @@ MATCH void func_801EECFC(void) {
     u8           first;
     u8           slot;
 
+    /* kept: retail rescales the slot index and re-reads g_BattleEffects at every store; a row
+     * pointer changes the bytes. */
     actor                               = g_Battle.selected_actor;
     first                               = Battle_AllocEffect(1, 0xD);
     g_BattleEffects[first].target.party = g_Task;
