@@ -185,9 +185,39 @@ MATCH void func_801FD568(Actor* actor) {
 
 INCLUDE_ASM(func_801FD5C0);
 
-INCLUDE_ASM(func_801FD734);
+MATCH void func_801FD734(void) {
+    u8 i;
 
-INCLUDE_ASM(func_801FD814);
+    i = 0;
+    do {
+        if (D_801FE894[i].x == COORD_INT(g_Task->pos.x) && D_801FE894[i].y == COORD_INT(g_Task->pos.y)) {
+            if (SYS_TestFlag(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag) == 0) {
+                Actor_SelectScript(D_801FE894[i].script);
+                g_Task->unk_2A = 0;
+            } else {
+                g_Task->header.flags = 0;
+            }
+            return;
+        }
+        i++;
+    } while (i < ARRAY_COUNT(D_801FE894));
+}
+
+MATCH void func_801FD814(void) {
+    u8 saved_slot;
+
+    saved_slot               = g_Task->param.actor_slot;
+    g_Task->param.actor_slot = Actor_FindFreeSlot();
+    if (g_Task->param.actor_slot != GAME_NONE) {
+        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
+        g_ActorSlots[g_Task->param.actor_slot].type         = 0x5D;
+        g_ActorSlots[g_Task->param.actor_slot].unk_06       = saved_slot;
+        g_ActorSlots[g_Task->param.actor_slot].unk_07       = 0;
+    } else {
+        g_Task->param.actor_slot = saved_slot;
+        g_ScriptState->cursor -= 2;
+    }
+}
 
 MATCH void func_801FD95C(Actor* actor) {
     SCENA10_ACTOR_START(0xA, 0x1E, 0x13);

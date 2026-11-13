@@ -4,8 +4,8 @@ MATCH void func_801F2CB4(void) {
     Actor* work;
 
     if (g_AreaSceneMode == 1) {
-        FIELD(u8, g_Task, 0x9u) = 0;
-        work                    = g_Task;
+        g_Task->timer = 0;
+        work          = g_Task;
         work->header.step++;
         func_801F2F38(0, 0);
     }

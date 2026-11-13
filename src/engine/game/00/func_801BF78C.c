@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH u8 func_801BF78C(void) {
+MATCH bool func_801BF78C(void) {
     u8* work;
     s32 off;
     s32 i;
