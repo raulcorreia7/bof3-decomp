@@ -1,6 +1,7 @@
 #define AREA_SCROLL_TARGET_VOLATILE
 #include "scena17_00.h"
 #include "area/map.h"
+#include "shared/etc.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -570,7 +571,40 @@ MATCH void Scene_RunSaveMenu(void) {
     }
 }
 
-INCLUDE_ASM(func_801F9504);
+/* func_801F9504 */
+MATCH void Scene_EnterSaveMenu(void) {
+    s32 i;
+
+    SYS_SetFlag(g_SceneEventFlags, 146);
+    for (i = 9; i < 23; i++) {
+        /* FAKE: retail passes the index as a word; the header's u8 parameter forces an andi. */
+        ((void (*)(void*, s32))SYS_ClearFlag)(g_Scenario2Flags + 0x68, i);
+    }
+    func_801C16B8();
+    g_GameAreaId = AREA_ID_DRAGNIER_SURFACE;
+    Game_ClearScriptActive();
+    g_Game.members[0].pos.x.fixed = TO_COORD(15);
+    g_Game.members[0].facing      = 3;
+    g_SndBGMId                    = 0x6F;
+    g_SceneState.scenario_id      = 15;
+    D_8014865C                    = -2;
+    g_Game.members[0].pos.y.fixed = TO_COORD_HALF(33);
+    D_80146873                    = 0;
+    D_80146874                    = 0;
+    D_80146875                    = 0;
+    g_MenuStep.step               = 0;
+    D_80148698                    = 1;
+    D_80148699                    = 0;
+    D_80143BB4                    = 1;
+    EMI_LoadArchive(EMI_SLOT_SHOP);
+    while (EMI_IsReady() == 0) {
+        CallbackWait(1);
+    }
+    GFX_CopyPalette(1);
+    GFX_CopyPalette(2);
+    g_GfxPalettePending = 1;
+    VOL(u16, g_GameEntrySubstate) += 1;
+}
 
 /* func_801F9654 */
 MATCH void Scene_UpdateSaveMenu(void) {

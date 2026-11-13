@@ -3780,6 +3780,7 @@ Scene_StartEndingXa = { addr = 0x801F80CC, type = "func", source = "starts XA st
 Scene_WaitEndingXa = { addr = 0x801F8110, type = "func", source = "waits for the ending XA stream and scene ready state, then starts the long fade out and advances the scene step" }
 Scene_DispatchActor = { addr = 0x801F887C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_RunSaveMenu = { addr = 0x801F9490, type = "func", source = "replaces the callback with a loop that resets menu panel tasks and dispatches the save menu step table" }
+Scene_EnterSaveMenu = { addr = 0x801F9504, type = "func", source = "The save menu's first step: clears the save flags, places the party at the Dragnier surface save point, loads the shop archive and advances the substate." }
 Scene_UpdateSaveMenu = { addr = 0x801F9654, type = "func", source = "updates menu panel tasks and dispatches the shop step" }
 Scene_ExitToTitle = { addr = 0x801F967C, type = "func", source = "clears scene script variables, exits sound and replaces the callback with the frontend start" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
