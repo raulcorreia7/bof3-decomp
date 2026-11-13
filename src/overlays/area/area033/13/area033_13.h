@@ -16,6 +16,20 @@ extern u8      D_8014496D;
 /* The party focus point: the camera-scroll targets, x then y, in 16.16. */
 /* The tile map scan: four byte records per work row, the map offset and code. */
 extern u8      D_801F4CB0[];
+
+/* One row of the world map message table: the context seed it answers, over the
+ * message the scenario id selects. */
+typedef union WorldMapMessageRow {
+    u16 seed;
+    s16 messages[16];
+} WorldMapMessageRow;
+
+ASSERT_SIZE(WorldMapMessageRow, 0x20);
+ASSERT_OFFSET(WorldMapMessageRow, seed, 0x00);
+ASSERT_OFFSET(WorldMapMessageRow, messages, 0x00);
+
+#define WORLD_MAP_MESSAGE_ROWS 6
+extern WorldMapMessageRow D_801F4EA4[WORLD_MAP_MESSAGE_ROWS];
 /* The work-step handler table indexed by the record's step byte. */
 /* Handler tables the step bytes select. */
 extern void (*D_801F4F78[])(void);
