@@ -12,7 +12,7 @@ extern u8 D_80146874;
 extern u8 D_80146875;
 extern u8 D_80147CC8;
 extern u8 D_801F4D68[];
-s32       func_801F3AE4(s32, s32, s32);
+void      func_801F3AE4(s32, s32, s32);
 
 extern u8 D_801F4D80[];
 

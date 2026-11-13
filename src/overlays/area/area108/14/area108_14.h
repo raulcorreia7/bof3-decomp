@@ -73,7 +73,7 @@ extern u8*      D_801F63EC;
 void func_801F2D40(const void* sprite);
 void func_801F2F1C(void* sprite);
 void func_801F2FC8(void);
-u8   func_801F321C(void);
+void func_801F321C(void);
 void Area_DrawScreenTint(void);
 void func_801F3C84(void);
 

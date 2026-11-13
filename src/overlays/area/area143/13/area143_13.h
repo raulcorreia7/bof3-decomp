@@ -40,7 +40,7 @@ extern s8                  D_801F42E8[][2];
 s32  func_801F2EF0();
 void func_801F2FE0(void);
 /* The focus-point projection and the frame step the handlers enter. */
-void func_801F30A0(void);
+s32  func_801F30A0(void);
 /* The draw step that reads the three-word work position. */
 void Area_DrawLightPillar(s32* pos);
 
