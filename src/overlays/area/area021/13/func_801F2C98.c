@@ -17,8 +17,8 @@ MATCH void func_801F2C98(void) {
         }
         value = 0x32;
     } else {
-        count            = g_ScriptVars[3] + 1;
-        g_ScriptVars[3]  = count;
+        count           = g_ScriptVars[3] + 1;
+        g_ScriptVars[3] = count;
         if (count == 8) {
             value           = 0x34;
             g_ScriptVars[3] = 0;
