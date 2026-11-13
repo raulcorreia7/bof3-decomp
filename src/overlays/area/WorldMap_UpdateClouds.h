@@ -1,5 +1,5 @@
 /* The world map cloud layer: drifts it down the map and draws it over the cells around its position, with the image's g_WorldCloudTexture. */
-MATCH void World_UpdateClouds(void) {
+MATCH void WorldMap_UpdateClouds(void) {
     POLY_FT4* prim;
     POLY_FT4* cell;
     SVECTOR*  quad;

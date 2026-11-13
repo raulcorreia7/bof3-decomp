@@ -430,7 +430,7 @@ INCLUDE_ASM(func_801F8D98);
 
 INCLUDE_ASM(func_801F90C8);
 
-#include "shared/AngleAverage12.h"
+#include "shared/MATH_AverageAngle.h"
 
 #include "shared/GFX_DrawFan.h"
 
@@ -608,11 +608,11 @@ MATCH void func_801F9EC4(void) {
 }
 
 MATCH void func_801F9F2C(void) {
-    Scene_AdvanceActorStep();
+    Scene_AdvanceActorMode();
 }
 
 MATCH void func_801F9F4C(void) {
-    Scene_AdvanceActorStep();
+    Scene_AdvanceActorMode();
 }
 
 MATCH void func_801F9F6C(void) {

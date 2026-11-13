@@ -30,7 +30,7 @@ MATCH u8 func_801A8D38(void* sub, s32 target) {
             value &= 7;
             ((GameScriptState*)sub)->unk_07 = value;
             if (value != 0) {
-                if (Actor_GetType() != 2) {
+                if (Actor_GetOwner() != 2) {
                     func_801ABBA8(sub, sel);
                 } else {
                     func_801C5DFC(sel);

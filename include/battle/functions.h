@@ -16,7 +16,7 @@ void        Battle_StartAbilityPose(void);
 u8          func_800A9304(u8 slot);
 /* Stages the selection cell for the next battle step. */
 /* func_800A9820 */
-void        Battle_MarkDamaged(u8 selector);
+void        Battle_MarkDamaged(u8 target_mask);
 /* func_800A9BD8 */
 void        Battle_RescaleStats(u8 slot);
 /* func_800AAA74 */
@@ -63,7 +63,7 @@ void        func_801DAAE4(void);
 
 /* One hit's damage, defined by the battle/battle/03 overlay at this address. */
 /* func_801DC044 */
-s16         Battle_CalcDamage(u8 attacker, u8 target, u16 element);
+s16         Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id);
 void        func_801DD14C(u8 battler_index);
 void        func_801DD858(u32 effect_index);
 void        func_801DDAB4(u32 status);

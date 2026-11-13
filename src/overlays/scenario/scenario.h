@@ -67,16 +67,16 @@ ASSERT_OFFSET(ScanBar, y, 0x04);
 /* The scene context record the entity dispatchers pass to their handler. */
 #define g_SceneFlags ((void*)g_SceneFlags)
 
-/* Advance the current actor's state byte. */
-static inline void Scene_AdvanceActorState(void) {
+/* Advance the current actor's step byte. */
+static inline void Scene_AdvanceActorStep(void) {
     Actor* actor;
 
     actor              = SP_REF(Actor*, 0x44);
     actor->header.step = (u8)(actor->header.step + 1);
 }
 
-/* Advance the current actor's step index. */
-static inline void Scene_AdvanceActorStep(void) {
+/* Advance the current actor's mode byte. */
+static inline void Scene_AdvanceActorMode(void) {
     Actor* actor;
 
     actor              = SP_REF(Actor*, 0x44);

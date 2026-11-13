@@ -7,7 +7,7 @@ MATCH void func_800C1A4C(void) {
     timer                          = ((PartyMember*)g_Task)->unk_09 - 1;
     ((PartyMember*)g_Task)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        Area_FindSceneRecord(0x5F);
+        Area_SelectSceneRecord(0x5F);
         if (g_Battle.encounter == 5) {
             ((PartyMember*)g_Task)->unk_2A = 0;
             ((PartyMember*)g_Task)->pos.y.fixed += TO_COORD(1) + COORD_HALF;

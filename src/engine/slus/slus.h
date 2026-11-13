@@ -1009,7 +1009,7 @@ extern const MenuPanelFuncs  g_MenuPanels;
 
 void                    func_8014C47C(struct Vec3W* a, struct Vec3W* b);
 extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
-extern void             Actor_BeginScript(s32 raw_selector, s32 raw_code);
+extern void             Actor_BeginScript(s32 script_index, s32 position);
 /* func_8014DB98 */
 extern void             Actor_StageAnimStep(void);
 /* Retail function prototypes (one declaration each). */

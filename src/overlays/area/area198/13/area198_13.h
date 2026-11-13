@@ -20,7 +20,7 @@ extern Callback D_801F4324[17];
 /* The palette source bytes passed to the slot claim. */
 extern u8       D_801F4368[];
 
-void            Actor_BeginScript(u8 raw_selector, u16 raw_code);
+void            Actor_BeginScript(u8 script_index, u16 position);
 extern Callback D_801F43EC[];
 
 /* The state update's fallback handler. */

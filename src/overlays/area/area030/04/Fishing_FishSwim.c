@@ -21,7 +21,7 @@ MATCH void Fishing_FishSwim(void) {
                 work = FISHING_STATE;
                 if (work->bounce_3C.half.key_3E == 0 && !(roll & 0x3) && D_80145E92[0] != 4 && work->cue_index_06 != FISHING_IDLE_CUE) {
                     D_801E3200 = 1;
-                    Area_FindSceneRecord(*(u16*)(D_801E2ACA + work->cue_index_06 * sizeof(FishingSceneCue)));
+                    Area_SelectSceneRecord(*(u16*)(D_801E2ACA + work->cue_index_06 * sizeof(FishingSceneCue)));
                     if (!(*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN)) {
                         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
                     }

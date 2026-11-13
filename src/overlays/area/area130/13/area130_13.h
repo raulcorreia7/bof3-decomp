@@ -31,6 +31,6 @@ extern u16 D_801469EA;
 
 void func_801F3400(s16 x, s16 y, s16 z, s16 w);
 
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 
 #endif

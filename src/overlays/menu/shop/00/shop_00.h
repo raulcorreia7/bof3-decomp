@@ -453,8 +453,8 @@ extern u8                 D_801E625C;
 extern volatile u8        D_801E6260;
 extern u8                 D_801E6264[];
 
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-s32  Item_Count(u8 category, u8 item, u8 mode);
+bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
+s32  Item_Count(u8 category, u8 item_id, u8 mode);
 s32  Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 
@@ -599,7 +599,7 @@ void                   Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */
 void                   Menu_DrawInventoryWindow(MenuPanelTask* arg0);
 void                   SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
-void                   SAVE_DrawPortTabs(s16 x, s16 y, u32 flags, u8 row, u8 variant);
+void                   SAVE_DrawPortTabs(s16 x, s16 y, u32 tab_flags, u8 port, u8 variant);
 void                   func_801DE188(void);
 void                   func_801DE1C4(void);
 void                   func_801DE200(void);

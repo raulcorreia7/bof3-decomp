@@ -10,7 +10,7 @@ MATCH void func_801F4544(void) {
         return;
     }
     Game_FindAreaHandler();
-    Area_FindSceneRecord(0x205);
+    Area_SelectSceneRecord(0x205);
 
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;

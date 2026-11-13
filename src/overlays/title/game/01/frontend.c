@@ -3,13 +3,13 @@
 /* The eight frontend state handlers are indexed by the state byte in
  * Game_RunFrontend. The table ends where the glyph geometry records begin. */
 static Callback s_TitleStates[8] = {
-    Game_BeginTitle, Game_WaitTitleFade, Game_AdvanceTitleFade, SND_StartTitleBGM, Game_StartSelectedGame, UI_WaitTitleInput, UI_UpdateChoicePrompt, Game_LeaveTitle,
+    Game_BeginTitle, Game_WaitTitleFade, Game_AdvanceTitleFade, Game_StartTitleFade, Game_StartSelectedGame, UI_WaitTitleInput, UI_UpdateChoicePrompt, Game_LeaveTitle,
 };
 
 /* Initializes the frontend overlay state, then runs its perpetual input,
  * state-dispatch, and render/update loop. */
 /* func_801D0C04 */
-MATCH void Game_UpdateTitle(void) { /* func_801D0C04 */
+MATCH void Game_RunTitle(void) { /* func_801D0C04 */
     g_UiTitleState    = 0u;
     g_UiTitleSubstate = 0u;
     func_8014BA04();

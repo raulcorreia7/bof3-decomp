@@ -3,6 +3,6 @@
 /* Dispatches the AREA030 scratchpad state byte through the overlay's
  * jump table. */
 /* func_801D42A0 */
-MATCH void Fishing_DataRun(void) {
+MATCH void Fishing_CatchPageRun(void) {
     g_FishingDataStates[FISHING_STATE->handler_index_01]();
 }

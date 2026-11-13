@@ -468,7 +468,7 @@ extern u8  g_NameEntryControlsFrame[];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
-extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+extern bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 extern s16  Char_AddStat(u16* value, s16 delta);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
 bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
@@ -552,7 +552,7 @@ extern void Menu_DrawAbilitiesPanel(MenuPanelTask* task);
 extern void Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
-void        SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
+void        SAVE_DrawSlot(u8 slot, s32 x, s32 y, MenuListRow* row);
 void        func_801E18D0(void);
 void        func_801E1C20(void);
 void        func_801E206C(void);
@@ -744,7 +744,7 @@ extern u8        D_801485BA;
 extern s8        D_80148659;
 extern u8        D_8014865A;
 extern u8        D_80181B1A;
-extern s32       Item_Count(u8 category, u8 item, u8 mode);
+extern s32       Item_Count(u8 category, u8 item_id, u8 mode);
 extern u8*       D_801C8940;
 extern u8*       D_801C8944;
 /* D_801D0C50 */

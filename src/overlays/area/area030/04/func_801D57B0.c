@@ -24,7 +24,7 @@ MATCH void func_801D57B0(void) {
         g_ActorSlots[index].unk_03       = 4;
     }
 
-    Area_FindSceneRecord(0x47);
+    Area_SelectSceneRecord(0x47);
     FISHING_STATE->active_flags = 0x80;
     FISHING_STATE->state_29     = 1;
     FISHING_STATE->state_2A     = 0;

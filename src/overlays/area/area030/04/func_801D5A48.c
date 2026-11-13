@@ -7,7 +7,7 @@ MATCH void func_801D5A48(void) {
     FishingState* retired;
     FishingState* tail;
 
-    Area_FindSceneRecord(0x21);
+    Area_SelectSceneRecord(0x21);
     FISHING_STATE->active_flags = 0x80;
     FISHING_STATE->state_29     = 1;
     FISHING_STATE->state_2A     = 1;

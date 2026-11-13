@@ -9,7 +9,7 @@ MATCH void func_800C1B48(void) {
     value3 = g_Task->unk_09;
     if (value3 == 0) {
         g_Task->unk_48 = 0;
-        Area_FindSceneRecord(0x83);
+        Area_SelectSceneRecord(0x83);
         Actor_SelectScript(0U);
         Battle_DefeatEnemy();
         g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;

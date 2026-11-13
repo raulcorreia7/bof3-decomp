@@ -1,10 +1,10 @@
 #include "game_00.h"
 
 /* Opcodes 0xF0 to 0xFF of the actor script table: the record group that moves
- * the task (or the camera, Actor_GetType() == 2) in z, walks it to a cell,
+ * the task (or the camera, Actor_GetOwner() == 2) in z, walks it to a cell,
  * waits, and touches the cell palette. Named from the case bodies. */
 /* Opcodes 0xF0 to 0xFF of the actor script table: the record group that moves
- * the task (or the camera, Actor_GetType() == 2) in z, walks it to a cell,
+ * the task (or the camera, Actor_GetOwner() == 2) in z, walks it to a cell,
  * waits, and touches the cell palette. Named from the case bodies. */
 typedef enum ActorScriptMotionOp {
     ACTOR_SCRIPT_MOTION_CLEAR_SCRIPT_ACTIVE = 0xF0, /* clear GAME_FLAG_SCRIPT_ACTIVE */
@@ -46,7 +46,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             next          = *(table + state->index_0A + 2);
             state->unk_07 = next;
             if (next != 0) {
-                if (Actor_GetType() != 2)
+                if (Actor_GetOwner() != 2)
                     func_801ABBA8(state, value);
                 else
                     func_801C5DFC(value);
@@ -61,7 +61,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             next          = *(table + state->index_0A + 2);
             state->unk_07 = next;
             if (next != 0) {
-                if (Actor_GetType() != 2) {
+                if (Actor_GetOwner() != 2) {
                     Actor* work;
                     s32    den;
 
@@ -123,7 +123,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             next          = *(table + state->index_0A + 2);
             state->unk_07 = next;
             if (next != 0) {
-                if (Actor_GetType() != 2) {
+                if (Actor_GetOwner() != 2) {
                     func_801ABBA8(state, value);
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
                 } else {
@@ -172,7 +172,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             lo = (*(table + state->index_0A + 3) << 16) | (*(table + state->index_0A + 4) << 8);
             func_801ABD68(hi, lo, *(table + state->index_0A + 5), state);
             value = *(table + state->index_0A + 6);
-            if (Actor_GetType() == 1)
+            if (Actor_GetOwner() == 1)
                 state->unk_07 = 1;
             state->index_0A += 6;
             break;

@@ -1,16 +1,16 @@
 #include "battle_15.h"
 
-/* marks battlers as damaged: bit 0x80 of the selector loops over
- * the three player rows, bit 0x40 over the eleven enemy rows, and a selector
+/* marks battlers as damaged: bit 0x80 of the target_mask loops over
+ * the three player rows, bit 0x40 over the eleven enemy rows, and a target_mask
  * without bits 0xC0 marks only the one indexed battler.
  */
 /* func_800A9820 */
-MATCH void Battle_MarkDamaged(u8 selector) {
+MATCH void Battle_MarkDamaged(u8 target_mask) {
     s32 i;
     u8  index;
 
-    if (selector & 0xC0) {
-        if (selector & 0x80) {
+    if (target_mask & 0xC0) {
+        if (target_mask & 0x80) {
             for (i = 0; (u32)(i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 index = i & BYTE_MASK;
                 if ((Battle_SlotIsBlocked(index) & BYTE_MASK) == 0) {
@@ -18,7 +18,7 @@ MATCH void Battle_MarkDamaged(u8 selector) {
                 }
             }
         }
-        if (selector & 0x40) {
+        if (target_mask & 0x40) {
             for (i = 3; (u32)(i & BYTE_MASK) < COMBATANT_COUNT; i++) {
                 index = i & BYTE_MASK;
                 if ((Battle_SlotIsBlocked(index) & BYTE_MASK) == 0) {
@@ -27,7 +27,7 @@ MATCH void Battle_MarkDamaged(u8 selector) {
             }
         }
     } else {
-        index = selector & BYTE_MASK;
+        index = target_mask & BYTE_MASK;
         if (index < 3U) {
             g_Game.members[index].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
             return;

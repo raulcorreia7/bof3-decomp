@@ -24,6 +24,6 @@ extern Callback D_801CFFE0[];
 extern Callback D_801CFFEC[];
 extern Callback D_801CFFF8[];
 
-void Actor_BeginScript(s32 raw_selector, s32 raw_code);
+void Actor_BeginScript(s32 script_index, s32 position);
 
 #endif

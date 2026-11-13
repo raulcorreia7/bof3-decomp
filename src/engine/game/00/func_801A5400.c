@@ -21,7 +21,7 @@ MATCH void func_801A5400(u8* script) {
         g_CurrentActor            = slot_record;
         FIELD(u16, counter, 0x2u) = data[0x2] | (data[0x1] << 8);
         func_801A4AA8();
-        Area_FindSceneRecord(FIELD(u16, counter, 0x2u));
+        Area_SelectSceneRecord(FIELD(u16, counter, 0x2u));
         g_Task->header.flags           = ACTOR_FLAG_IN_USE;
         coord_record                   = g_Task;
         g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);

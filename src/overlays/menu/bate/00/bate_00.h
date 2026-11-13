@@ -145,8 +145,8 @@ extern u8        D_801D86F8[];
 extern s32       D_801D8EE8[6];
 extern s32       D_801D8F00[6];
 
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-s32  Item_Count(u8 category, u8 item, u8 mode);
+bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
+s32  Item_Count(u8 category, u8 item_id, u8 mode);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 s32  Char_GetExpForLevel(s32 character, s32 level);

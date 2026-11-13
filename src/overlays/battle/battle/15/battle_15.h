@@ -834,7 +834,7 @@ void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
 void        func_800B3AE8(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
 /* func_801650B4 */
-bool        Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+bool        Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);

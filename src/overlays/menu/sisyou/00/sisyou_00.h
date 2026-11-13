@@ -139,7 +139,7 @@ extern Callback           g_MasterMenuStates[MASTER_MENU_STEP_COUNT];
 extern Callback           g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT];
 
 /* Functions, in address order. */
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 void UI_DrawSpriteRun(s16 arg0, s16 arg1, const u8* arg2, u8 arg3);
 void Menu_ResetMasterPanel(void);
 void func_801D0C48(void);

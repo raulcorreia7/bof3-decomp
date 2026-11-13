@@ -50,7 +50,7 @@ NON_MATCHING void Fishing_LureCast(void) {
     FISHING_STATE->unk_6C         = 0;
     FISHING_STATE->counter_48     = 1;
 
-    Area_FindSceneRecord(g_FishingLureRow->unk_0C);
+    Area_SelectSceneRecord(g_FishingLureRow->unk_0C);
     Actor_SelectScript(1);
     index = (u32)Actor_FindFreeSlot() & BYTE_MASK;
     if (index != GAME_NONE) {

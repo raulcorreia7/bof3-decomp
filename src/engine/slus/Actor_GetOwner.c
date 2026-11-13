@@ -2,7 +2,7 @@
 
 /* classifies the active scratchpad work area.
  */
-MATCH s32 Actor_GetType(void) {
+MATCH s32 Actor_GetOwner(void) {
     u8* work;
 
     work = (u8*)g_Task;

@@ -29,7 +29,7 @@ MATCH s8 Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     g_Task->unk_0A = 16 / size;
     g_Task->vz     = vz_start << 8;
 
-    if ((u8)(Actor_GetType()) != 2) {
+    if ((u8)(Actor_GetOwner()) != 2) {
         if (span != 0) {
             g_Task->vx = (dir_x << 15) / (g_Task->unk_0A * span);
             g_Task->vy = (dir_y << 15) / (g_Task->unk_0A * span);

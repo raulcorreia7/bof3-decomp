@@ -4,7 +4,7 @@
  * word, advancing the key until it hits an occupied entry or wraps back to the
  * start, then seeds the menu panel, the cue mask and the step timer. */
 /* func_801D4884 */
-MATCH void Fishing_DataNextFish(void) {
+MATCH void Fishing_CatchPageNext(void) {
     FishingState* record;
     FishingState* scan;
     s16           index;

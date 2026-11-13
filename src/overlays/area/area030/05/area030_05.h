@@ -93,9 +93,9 @@ void Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 kind, s32 value, u8 selected);
 /* func_800F7100 */
 void Fishing_ShopTakeTradeItems(void);
 /* func_801650B4 */
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 /* func_8016628C */
-s32  Item_Count(u8 category, u8 item, u8 mode);
+s32  Item_Count(u8 category, u8 item_id, u8 mode);
 /* func_801D799C */
 void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style);
 /* func_801D9534 */

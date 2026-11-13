@@ -347,7 +347,7 @@ MATCH void func_801F300C(void) {
 
 /* func_801F305C */
 MATCH void Message_SelectAnswerValue(void) {
-    World_SelectAnswerValue(0xFFFFu, 0x08, 0x0F);
+    WorldMap_SelectAnswerValue(0xFFFFu, 0x08, 0x0F);
 }
 
 MATCH void func_801F309C(void) {

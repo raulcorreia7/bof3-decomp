@@ -6,7 +6,7 @@
  * 31-column sheet; glyphs are 8 wide. The fourth argument budgets the bytes
  * drawn; returns the byte after the terminator.
  */
-MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* text) {
+MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 palette, u8 byte_count, const u8* text) {
     u8* str;
     s16 left;
     u16 clut;
@@ -19,15 +19,15 @@ MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* t
     left = x;
     str  = (u8*)text;
     func_8014FC00(0);
-    clut  = (flags & 0xF) | STAGE_PALETTE_CLUT;
-    index = ((u32)flags & 0xF0) >> 3;
+    clut  = (palette & 0xF) | STAGE_PALETTE_CLUT;
+    index = ((u32)palette & 0xF0) >> 3;
     c     = *str;
     /* FAKE: the non-const read keeps the retail load order of the table bytes. */
     shade = ((u8*)g_TextRowShades)[index];
     trim  = ((u8*)g_TextRowShades)[index + 1];
 
     while (c != 0) {
-        if ((count & BYTE_MASK) == 0) {
+        if ((byte_count & BYTE_MASK) == 0) {
             break;
         }
         switch (c) {
@@ -58,7 +58,7 @@ MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* t
         }
         str++;
         c = *str;
-        count--;
+        byte_count--;
     }
     return str + 1;
 }

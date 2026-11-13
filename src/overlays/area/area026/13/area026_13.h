@@ -11,7 +11,7 @@ extern u8 D_801F341C[6336];
 extern u8 D_801F4CE4;
 
 /* func_801650B4 */
-bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 void func_801F2C94(void);
 void func_801F2D5C(s32* center, s32 radius);
 void func_801F2E04(s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y);

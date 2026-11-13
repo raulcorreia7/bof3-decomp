@@ -5,9 +5,9 @@
  * 0x20-byte row, STRING_NUM selects a glyph from the 21-column sheet, and ordinary bytes use the 31-column sheet;
  * glyphs are 8 wide with height from D_8017F580. The second argument budgets the bytes consumed.
  */
-MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
+MATCH u8* UI_DrawTextGlyphs(u8 palette, u8 byte_count, u8* text) {
     u8* str;
-    u8  palette;
+    u8  current_palette;
     u8  saved;
     u8  count;
     u8  shade;
@@ -16,13 +16,13 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
     u32 index;
     s32 glyph_y;
 
-    str     = record;
-    palette = flags;
-    count   = len;
-    saved   = 0;
+    str             = text;
+    current_palette = palette;
+    count           = byte_count;
+    saved           = 0;
     func_8014FC00(0);
-    clut   = (flags & 0xF) | STAGE_PALETTE_CLUT;
-    index  = (flags & 0xF0) >> 3;
+    clut   = (palette & 0xF) | STAGE_PALETTE_CLUT;
+    index  = (palette & 0xF0) >> 3;
     shade  = g_NumberRowShades[index];
     height = 12 - g_NumberRowShades[index + 1];
 
@@ -30,13 +30,13 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
         switch (*str) {
             case STRING_COLOR:
                 str++;
-                saved   = palette;
-                palette = *str;
-                clut    = (palette & 0xF) | STAGE_PALETTE_CLUT;
+                saved           = current_palette;
+                current_palette = *str;
+                clut            = (current_palette & 0xF) | STAGE_PALETTE_CLUT;
                 break;
             case STRING_NOCOLOR:
-                palette = saved;
-                clut    = (palette & 0xF) | STAGE_PALETTE_CLUT;
+                current_palette = saved;
+                clut            = (current_palette & 0xF) | STAGE_PALETTE_CLUT;
                 break;
             case STRING_NEWLINE:
                 D_80145ACA = D_80145ACE;
@@ -53,7 +53,7 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
                 break;
             case STRING_VAR:
                 str++;
-                UI_DrawTextGlyphs(palette & BYTE_MASK, 0x20, &g_TextVariables[*str][0]);
+                UI_DrawTextGlyphs(current_palette & BYTE_MASK, 0x20, &g_TextVariables[*str][0]);
                 break;
             case STRING_SPACE:
                 D_80145ACA += 8;

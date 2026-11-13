@@ -24,7 +24,7 @@ MATCH void Game_AdvanceTitleFade(void) { /* func_801D0D94 */
  * `0`, opens selection FX, and advances the title state.
  */
 /* func_801D0DF0 */
-MATCH void SND_StartTitleBGM(void) { /* func_801D0DF0 */
+MATCH void Game_StartTitleFade(void) { /* func_801D0DF0 */
     volatile u16* timer_ptr;
     u16           timer;
 

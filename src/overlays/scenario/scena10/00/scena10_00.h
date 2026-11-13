@@ -92,6 +92,6 @@ extern SceneFunc g_SceneActorDispatch[];
 void func_801F6FAC(void);
 void func_801F781C(u16 x, u16 y, u16 width, u16 height);
 
-s32 Item_Count(s32 category, s32 item, s32 mode);
+s32 Item_Count(s32 category, s32 item_id, s32 mode);
 
 #endif

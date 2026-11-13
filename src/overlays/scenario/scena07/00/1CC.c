@@ -121,11 +121,11 @@ MATCH void func_801F72E0(void) {
 }
 
 MATCH void func_801F7364(void) {
-    Scene_AdvanceActorState();
+    Scene_AdvanceActorStep();
 }
 
 MATCH void func_801F7384(void) {
-    Scene_AdvanceActorState();
+    Scene_AdvanceActorStep();
 }
 
 MATCH void func_801F73A4(void) {
@@ -318,11 +318,11 @@ MATCH void func_801F80F0(void) {
 }
 
 MATCH void func_801F8174(void) {
-    Scene_AdvanceActorState();
+    Scene_AdvanceActorStep();
 }
 
 MATCH void func_801F8194(void) {
-    Scene_AdvanceActorState();
+    Scene_AdvanceActorStep();
 }
 
 MATCH void func_801F81B4(void) {
@@ -427,7 +427,7 @@ INCLUDE_ASM(func_801F88B8);
 
 INCLUDE_ASM(func_801F8BE8);
 
-#include "shared/AngleAverage12.h"
+#include "shared/MATH_AverageAngle.h"
 
 #include "shared/GFX_DrawFan.h"
 

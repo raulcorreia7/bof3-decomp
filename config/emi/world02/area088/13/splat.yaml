@@ -20,7 +20,7 @@ segments:
       - [0x308, c, func_801F2F08]
       - [0x328, c, func_801F2F28]
       - [0x658, c, func_801F3258]
-      - [0x9B0, c, AngleAverage12]
+      - [0x9B0, c, MATH_AverageAngle]
       - [0xA00, c, func_801F3600]
       - [0xB64, c, Message_ClearOnCancel]
       - [0xB98, c, Fishing_ShowLocation]
@@ -55,7 +55,7 @@ segments:
       - [0x252C, c, func_801F512C]
       - [0x2570, c, func_801F5170]
       - [0x26A0, c, Area_StepStreamSetDrawMode]
-      - [0x26C8, c, World_UpdateClouds]
+      - [0x26C8, c, WorldMap_UpdateClouds]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

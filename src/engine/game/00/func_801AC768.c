@@ -4,7 +4,7 @@ MATCH void func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value
     s32    status;
     Actor* slot;
 
-    status = Actor_GetType();
+    status = Actor_GetOwner();
     if (status != 1) {
         if (g_Task->header.mode == 7) {
             func_801ABEE0();

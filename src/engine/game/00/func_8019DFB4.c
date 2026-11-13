@@ -31,7 +31,7 @@ loop_1: /* scan the world-id table down from index 8 */
     if (index < 0) {
         cue_id = 0x1B;
     }
-    if (Area_FindSceneRecord(cue_id) & BYTE_MASK) {
+    if (Area_SelectSceneRecord(cue_id) & BYTE_MASK) {
         Actor_Clear();
         return;
     }

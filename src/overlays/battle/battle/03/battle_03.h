@@ -691,12 +691,12 @@ u8                 func_801DB844(u32 battler_index);
 u8                 func_801DB9E4(u32 battler_index);
 PartyMember*       func_801DBB20(u8 selector);
 /* func_801DBB78 */
-u32                Battle_ApplyDamage(u8 attacker, u8 target);
+u32                Battle_ApplyDamage(u8 attacker_slot, u8 target_slot);
 /* func_801DC73C */
 u32                Battle_RollHitOnParty(s16 damage, u32 battler_index, u32 target_index);
 /* func_801DC894 */
 u32                Battle_RollHitOnEnemy(s16 damage, u8 attacker, u8 target);
-u32                Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction);
+u32                Battle_RollBaseDamage(u8 attacker_slot, u8 target_slot, u8 skip_reduction);
 /* func_801DCCB0 */
 u32                Battle_CalcPartyDefense(void);
 /* func_801DCD50 */

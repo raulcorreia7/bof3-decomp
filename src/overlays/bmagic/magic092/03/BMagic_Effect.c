@@ -152,7 +152,7 @@ MATCH void func_801F038C(void) {
 
 #include "overlays/bmagic/Effect_StepOnTickFlag.h"
 
-#include "overlays/bmagic/Effect_CountDownCounterAndFinish.h"
+#include "overlays/bmagic/Effect_TickCounter.h"
 
 INCLUDE_ASM(func_801F04BC);
 

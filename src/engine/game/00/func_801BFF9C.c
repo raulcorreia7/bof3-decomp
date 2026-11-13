@@ -57,7 +57,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             id = 0x27A;
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_ADULT) {
             set_mode:
-                Area_FindSceneRecord(id);
+                Area_SelectSceneRecord(id);
             }
             g_Task->active_flags = 0;
             g_GameFlags |= 0x1000;
@@ -66,7 +66,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             if (g_Game.members[CHAR_ID_RYU_YOUNG].chr.character_id == 0) {
                 id = 0x47;
             }
-            Area_FindSceneRecord(id);
+            Area_SelectSceneRecord(id);
             g_Task->unk_2A       = 0;
             g_Task->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
