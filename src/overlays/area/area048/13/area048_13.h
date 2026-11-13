@@ -50,7 +50,7 @@ static inline void Area_StartScriptedMove(u8 facing) {
         }
     }
     g_Task->vz               = 0;
-    COORD_INT(g_Task->pos.z) = 0x480;
+    COORD_INT(g_Task->pos.z) = 1152;
 }
 
 #endif
