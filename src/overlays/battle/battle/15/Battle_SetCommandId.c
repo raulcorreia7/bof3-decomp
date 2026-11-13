@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_80097778(void) {
+/* func_80097778 */
+MATCH void Battle_SetCommandId(void) {
     u16 kind;
 
     kind = g_BattleActorTurn->command.id;

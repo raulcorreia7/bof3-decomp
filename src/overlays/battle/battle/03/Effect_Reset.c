@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E5988(void) {
+/* func_801E5988 */
+MATCH void Effect_Reset(void) {
     ((u8*)(D_801EC2E0))[0x00] = 0u;
     ((u8*)(D_801EC2E0))[0x05] = 0u;
     ((u8*)(D_801EC2E0))[0x06] = 0u;

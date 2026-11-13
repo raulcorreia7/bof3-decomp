@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH u8 func_801E3160(void) {
+/* func_801E3160 */
+MATCH u8 Battle_IsEnemyBlockedOnce(void) {
     volatile EnemyBattler* ew            = BATTLE_CURRENT_ENEMY_PTR;
     volatile u8*           battle_global = (u8*)(PARTY_STATE_PTR);
 

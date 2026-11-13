@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800A82F8(void) {
+/* func_800A82F8 */
+MATCH void Battle_SetGeneCount(void) {
     s32 index;
 
     index         = 0;

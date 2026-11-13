@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801DE560(u8 event_kind, u8 event_value, u8 group, u8 timer, u8* payload) {
+/* func_801DE560 */
+MATCH void Battle_QueueEvent(u8 event_kind, u8 event_value, u8 group, u8 timer, u8* payload) {
     u8 index;
     u8 value;
 

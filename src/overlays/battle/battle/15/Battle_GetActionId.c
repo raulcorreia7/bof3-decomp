@@ -5,7 +5,8 @@
  */
 #include "battle_15.h"
 
-MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_flag) {
+/* func_800A2880 */
+MATCH s16 Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag) {
     u32 rate_scale;
     u32 rate_variance;
     s32 scale;
@@ -29,7 +30,7 @@ MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_
         if (element_flag != 0) {
             element_mod = func_800A2EF0(battler_index, rule_mask);
         } else {
-            element_mod = func_800A2AE0(battler_index, rule_mask);
+            element_mod = Battle_GetFireResistance(battler_index, rule_mask);
         }
         damage = (damage * element_mod) / 100;
     }

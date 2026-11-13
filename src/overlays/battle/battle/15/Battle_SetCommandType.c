@@ -2,7 +2,8 @@
 
 /* g_BattleChoicePanel byte 0x0B is the panel page base. */
 
-MATCH void func_80096FBC(void) {
+/* func_80096FBC */
+MATCH void Battle_SetCommandType(void) {
     u32 flags;
     u8  stage;
     u8  message_slot;

@@ -1,7 +1,8 @@
 #include "battle_03.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D750C(s32 x, s32 y) {
+/* func_801D750C */
+NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
     s32 u;
     s32 v_tex;
     s16 var_a0_255;
@@ -34,7 +35,7 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
     var_s0 = (s16)var_s2;
     func_801D9AB4(var_s0, (s16)var_s3, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);
     func_801D9AB4(var_s0, (s16)(var_s3 + 0x18), ((g_Battle.party_count * 2) + 0xB) & BYTE_MASK, 1);
-    func_801D9C80(var_s0, (s16)(var_s3 + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1U);
+    Battle_DrawWindowTile(var_s0, (s16)(var_s3 + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1U);
     var_s4     = var_s2;
     var_s5     = 0;
     temp_v0_81 = *(((g_WindowStyle << 6) | 0x20) + &D_80033A08);
@@ -115,5 +116,5 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
     }
 }
 #else
-INCLUDE_ASM(func_801D750C);
+INCLUDE_ASM(Battle_SetPartyCount);
 #endif

@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AF2B4(BattleRange* target, s32 step) {
+/* func_800AF2B4 */
+MATCH void Battle_MoveRangeToward(BattleRange* target, s32 step) {
     BattleRange* work;
     BattleRange* store;
     s16          out[3];

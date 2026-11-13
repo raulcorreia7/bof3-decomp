@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D9C80(s16 x, s16 y, u8 template_index, u8 shade) {
+/* func_801D9C80 */
+MATCH void Battle_DrawWindowTile(s16 x, s16 y, u8 template_index, u8 shade) {
     TILE* tile;
     s8*   selector;
 

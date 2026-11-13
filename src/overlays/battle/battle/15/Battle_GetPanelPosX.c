@@ -18,7 +18,8 @@ typedef struct BattleSelectionScratch {
 
 #ifdef NON_MATCHING
 /* FAKE: retail reads D_801454F4 as flat bytes; the owner declares rows. */
-NON_MATCHING void func_8009704C(void) {
+/* func_8009704C */
+NON_MATCHING void Battle_GetPanelPosX(void) {
     u8*                     phase;
     BattleSelectionScratch* sel;
     BattleSelectionGroup*   group;
@@ -152,5 +153,5 @@ NON_MATCHING void func_8009704C(void) {
     }
 }
 #else
-INCLUDE_ASM(func_8009704C);
+INCLUDE_ASM(Battle_GetPanelPosX);
 #endif

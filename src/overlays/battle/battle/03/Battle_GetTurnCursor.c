@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801DDFEC(u32 battler_index) {
+/* func_801DDFEC */
+MATCH void Battle_GetTurnCursor(u32 battler_index) {
     u32 index;
     u32 battler;
     u32 substate;

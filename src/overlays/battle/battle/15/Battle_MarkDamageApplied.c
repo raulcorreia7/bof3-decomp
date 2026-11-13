@@ -7,7 +7,8 @@
  * damage-status row present and clears its pending-select bit: player rows
  * below index 3, enemy rows above.
  */
-MATCH void func_800A3F28(void) {
+/* func_800A3F28 */
+MATCH void Battle_MarkDamageApplied(void) {
     u32           battler_index;
     volatile u16* pFlag;
     u16           flag;

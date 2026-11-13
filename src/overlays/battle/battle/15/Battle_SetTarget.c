@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800A39B4(s16 delta, u8 battler_index) {
+/* func_800A39B4 */
+MATCH void Battle_SetTarget(s16 delta, u8 battler_index) {
     s8* record;
     s8  value;
     s32 total;

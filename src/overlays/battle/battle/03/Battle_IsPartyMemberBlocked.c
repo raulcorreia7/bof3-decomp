@@ -3,7 +3,8 @@
 /* returns ready immediately when the local work flags allow it;
  * otherwise delegates to the second EXE-side readiness helper.
  */
-MATCH u8 func_801DEE4C(void) {
+/* func_801DEE4C */
+MATCH u8 Battle_IsPartyMemberBlocked(void) {
     volatile PartyMember* battle_work = g_Game.current;
     volatile u8*          global_base = ((volatile u8*)&D_80140000);
 

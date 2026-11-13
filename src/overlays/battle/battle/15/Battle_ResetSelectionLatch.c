@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_80097C0C(void) {
+/* func_80097C0C */
+MATCH void Battle_ResetSelectionLatch(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     g_Battle.selection_latch        = 0;
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ABILITY;

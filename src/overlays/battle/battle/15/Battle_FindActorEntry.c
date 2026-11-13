@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH volatile u8* func_800AC754(u8 entry_id) {
+/* func_800AC754 */
+MATCH volatile u8* Battle_FindActorEntry(u8 entry_id) {
     s32 index;
     s32 offset;
 

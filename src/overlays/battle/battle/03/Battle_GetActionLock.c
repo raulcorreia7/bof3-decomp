@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH u8 func_801D64C4(u8 battler_index) {
+/* func_801D64C4 */
+MATCH u8 Battle_GetActionLock(u8 battler_index) {
     u16 flags;
 
     if (BATTLER_IS_PLAYER(battler_index)) {

@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_80097CBC(void) {
+/* func_80097CBC */
+MATCH void Battle_SetPhaseStep(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
     Battle_ShowMessage((void*)BATTLE_ACTIVE_MESSAGE_SLOT_PTR);
     g_Battle.phase.step      = 4u;
