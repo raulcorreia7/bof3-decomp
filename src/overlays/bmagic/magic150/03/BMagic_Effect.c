@@ -98,9 +98,9 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     quad->y2 = pair->current.screen[1].vy;
     quad->x3 = pair->current.screen[0].vx;
     quad->y3 = pair->current.screen[0].vy;
-    setRGB0(quad, 0x40, 0x40, 0);
+    setRGB0(quad, 64, 64, 0);
     setRGB1(quad, 0, 0, 0);
-    setRGB2(quad, 0x40, 0x40, 0);
+    setRGB2(quad, 64, 64, 0);
     setRGB3(quad, 0, 0, 0);
     GFX_AddPrim(1, sizeof(POLY_G4));
 
@@ -119,7 +119,7 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     line->y0 = pair->previous.screen[1].vy;
     line->x1 = pair->current.screen[1].vx;
     line->y1 = pair->current.screen[1].vy;
-    setRGB0(line, 0x20, 0x20, 0);
+    setRGB0(line, 32, 32, 0);
     GFX_AddPrim(1, sizeof(LINE_F2));
 }
 
