@@ -23,7 +23,7 @@
         packet->y0 = screen.vy;                                      \
         packet->x1 = screen.vx + ((scale * rcos((u16)angle)) >> 12); \
         packet->y1 = screen.vy + ((scale * rsin((u16)angle)) >> 12); \
-        angle += 0x100;                                              \
+        angle += 256;                                                \
         packet->x2 = screen.vx + ((scale * rcos((u16)angle)) >> 12); \
         packet->y2 = screen.vy + ((scale * rsin((u16)angle)) >> 12); \
         shade      = (SHADE);                                        \
