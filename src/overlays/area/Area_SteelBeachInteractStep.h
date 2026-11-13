@@ -1,7 +1,6 @@
 /* On the Steel Beach map, when running and the actor in the cell ahead faces the same way, queues that actor's
  * interaction and returns; otherwise turns the actor toward a target through PROBE and, when it finds one, runs the
  * field reset calls, lowers the timer, flags field mode 1 and sets step 1. */
-/* AREA_STEEL_BEACH_INTERACT_STEP (area104 0x801F4BB0, area121 0x801F50F4) */
 #define AREA_STEEL_BEACH_INTERACT_STEP(PROBE)                                       \
     s32 x;                                                                          \
     s32 y;                                                                          \
