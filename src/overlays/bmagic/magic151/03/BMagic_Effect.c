@@ -104,7 +104,25 @@ MATCH void func_801EF318(void) {
     SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
-INCLUDE_ASM(func_801EF388);
+/* When the effect ticker is one, marks every party member's handler busy and loads the dragon-form archive
+ * the battler's facing selects. */
+MATCH void func_801EF388(void) {
+    s32 archive_id;
+    u8  i;
+
+    if (g_Task->param.unk_0B == 1) {
+        for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+            g_Game.members[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        }
+        if (g_BattleEffectBattler->facing < 2) {
+            archive_id = D_800B499C[g_Battle.dragon_form][0][0];
+        } else {
+            archive_id = D_800B499C[g_Battle.dragon_form][1][0];
+        }
+        EMI_LoadArchive(archive_id);
+        g_Task->unk_03 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF484);
 
@@ -366,7 +384,22 @@ MATCH void func_801F0CB0(void) {
 
 INCLUDE_ASM(func_801F0D0C);
 
-INCLUDE_ASM(func_801F10E8);
+/* Runs the step's handler, projects the battle range and, once the effect is live, sets the rolled actor
+ * matrix and draws its three bands. */
+MATCH void func_801F10E8(void) {
+    SYS_DISPATCH_BYTE(D_801F24FC, g_Task->header.step);
+    Battle_ProjectRange();
+    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
+        Effect_SetActorMatrixQuarterRoll();
+        func_801F14D0(32, 32, 0x7);
+        g_Task->param.unk_0B += 4;
+        func_801F14D0(16, 64, 0xF);
+        g_Task->param.unk_0B += 4;
+        func_801F14D0(16, 96, 0x1F);
+        g_Task->param.unk_0B -= 8;
+        PopMatrix();
+    }
+}
 
 MATCH void func_801F11E0(void) {
     u8 count;

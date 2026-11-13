@@ -15,6 +15,8 @@
 #define EFFECT_SPARKLE_OFFSETS D_801F00BC
 /* The shortest rise of each kind. */
 #define EFFECT_SPARKLE_RISE    D_801F01A8
+/* The colour rows of each kind. */
+#define EFFECT_SPARKLE_COLORS  D_801F015C
 
 extern BMagicEffectFuncs  D_801EEC04;
 extern SparkleEffectSteps D_801EEC1C;
@@ -31,7 +33,6 @@ extern u8                 D_801F01A8[];
 extern BMagicEffectWork   D_801F01B4[EFFECT_SPARKLE_COUNT];
 
 void func_801EF33C(void);
-void func_801EFCDC(void);
 u8   func_801F0000(void);
 
 #endif

@@ -25,5 +25,7 @@ extern s32     D_1F80000C;
 extern s32     D_1F800004;
 
 void func_801EED24(void);
+void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask);
+void func_801EFC74(void);
 
 #endif

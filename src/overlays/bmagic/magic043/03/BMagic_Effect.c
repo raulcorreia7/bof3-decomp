@@ -4,7 +4,27 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC18);
+MATCH void func_801EEC18(void) {
+    Magic043Steps handlers;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
+    u8            i;
+
+    handlers = D_801EEC04;
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
+            BMagic_DispatchEffectMode();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED30);
 
@@ -23,7 +43,19 @@ MATCH void func_801EEEF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF98);
+MATCH void func_801EEF98(void) {
+    u8 count;
+
+    g_PaletteFades[g_Task->timer].offset.red += 2;
+    g_PaletteFades[g_Task->timer].offset.green += 2;
+    g_PaletteFades[g_Task->timer].offset.blue += 2;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        g_Task->unk_09 = 4;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF0B4);
 

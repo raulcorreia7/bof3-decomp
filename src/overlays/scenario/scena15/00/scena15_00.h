@@ -33,6 +33,9 @@ extern SceneFunc g_SceneActorDispatch[];
 void             func_801F83AC(UPoint2D* out);
 void             func_801F8704(void);
 extern u8        D_801FE71C[];
+/* The scene band's velocity. */
+extern Point3DL  D_801FE738;
+extern u8        D_801FE748;
 extern u8        D_801FE74C;
 void             func_801F8958(void);
 void             func_801F9020(Coord* position, s32* step);

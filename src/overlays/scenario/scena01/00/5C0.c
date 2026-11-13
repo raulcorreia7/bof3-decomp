@@ -75,7 +75,7 @@ MATCH void func_801F7644(void) {
 
 INCLUDE_ASM(func_801F7678);
 
-INCLUDE_ASM(func_801F7A24);
+#include "shared/Area_DrawSparkCell.h"
 
 #include "shared/Area_ClearWorkColumn.h"
 
@@ -217,7 +217,27 @@ MATCH void func_801FC890(void) {
 
 INCLUDE_ASM(func_801FC898);
 
-INCLUDE_ASM(func_801FCC24);
+MATCH void func_801FCC24(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            SND_StopSequence(0, 0);
+            SND_PlayBGM(26, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            g_GameFlags |= 0x80;
+            func_801BE1B0(0xB);
+            g_SceneState.step_05 = 1;
+            break;
+        case 1:
+            if (g_ScriptVars[0] != 2) {
+                break;
+            }
+            Game_ClearScriptActive();
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_SceneState.step_05  = 0x2D;
+            g_SceneState.state_04 = 9;
+            break;
+    }
+}
 
 MATCH void func_801FCCF4(void) {
 }
@@ -369,7 +389,22 @@ MATCH void func_801FD6CC(Actor* actor) {
     g_SceneState.state_04 = 13;
 }
 
-INCLUDE_ASM(func_801FD788);
+MATCH void func_801FD788(Actor* actor) {
+    Game_SetScriptActive();
+    actor->header.mode   = 4;
+    actor->unk_7E        = 0;
+    actor->unk_7B        = 0;
+    actor->unk_77        = 11;
+    g_Task->direction_08 = g_Game.members[0].facing ^ 4;
+    func_8015BAC4(g_Task->direction_08);
+    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    g_SceneState.step_05  = 16;
+    g_ScriptVars[0]       = 0;
+    g_ScriptVars[1]       = 0;
+    g_ScriptVars[2]       = 0;
+    g_ScriptVars[3]       = 0;
+    g_SceneState.state_04 = 13;
+}
 
 MATCH void func_801FD84C(Actor* actor) {
     Game_SetScriptActive();

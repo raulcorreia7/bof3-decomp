@@ -22,10 +22,12 @@ extern u8       D_801F4FAC[];
 extern Callback D_801F66D4[17];
 /* The row table the step lookup reads through the load entry. */
 extern u8*      D_801F6748[];
+/* The signed per-step offsets the scripted move adds to x and subtracts from y, indexed by the 4-bit step. */
+extern s8       D_801F6754[];
 
 extern void Actor_BeginScript(u8 raw_selector, u16 raw_code);
 u8*         func_801F2E88(void);
-extern u8   func_801F2EC4(void);
+extern u8   Area_UpdateShots(void);
 extern void func_801F4A5C(u8* pairs, s32 facing);
 extern void func_801F4B0C(void);
 
@@ -35,17 +37,24 @@ void func_801F2E5C(void);
 
 typedef struct AreaShot {
     u8       pad_00[3];
-    u8       unk_03;
+    u8       active;
     u8       unk_04;
-    u8       unk_05;
+    u8       timer;
     u16      angle;
     s16      unk_08;
     s16      unk_0A;
     WorldPos pos;
     u8       pad_18[4];
     Point3DL velocity;
+    u8       pad_28[4];
 } AreaShot;
 
+ASSERT_SIZE(AreaShot, 0x2C);
+ASSERT_OFFSET(AreaShot, angle, 0x06);
+ASSERT_OFFSET(AreaShot, pos, 0x0C);
+ASSERT_OFFSET(AreaShot, velocity, 0x1C);
+
+void func_801F2FEC(s32* pos, s16, s16, u16 angle, u8, u8);
 void func_801F3378(AreaShot* shot);
 
 #endif

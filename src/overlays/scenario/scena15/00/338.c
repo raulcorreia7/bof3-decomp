@@ -360,7 +360,20 @@ MATCH void func_801F8BC4(void) {
     SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
 }
 
-INCLUDE_ASM(func_801F8C78);
+MATCH void func_801F8C78(void) {
+    MATRIX matrix;
+    Actor* work;
+
+    Area_SetCameraMatrix(&matrix);
+    func_801F9020(&g_Task->pos.x, &g_Task->vx);
+    func_801F92F0(&g_Task->pos.x, &g_Task->vx);
+    work         = g_Task;
+    D_801FE738.x = -work->vx;
+    D_801FE738.y = -work->vy;
+    D_801FE738.z = -work->vz;
+    work->timer  = 128;
+    g_Task->header.mode++;
+}
 
 INCLUDE_ASM(func_801F8D30);
 
@@ -414,7 +427,24 @@ INCLUDE_ASM(func_801F9CFC);
 
 INCLUDE_ASM(func_801FA6BC);
 
-INCLUDE_ASM(func_801FA854);
+MATCH bool func_801FA854(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step) {
+    u8 slot;
+
+    slot       = Actor_FindFreeSlot();
+    D_801FE748 = slot;
+    if (slot != GAME_NONE) {
+        g_ActorSlots[slot].header.flags         = 1;
+        g_ActorSlots[D_801FE748].type           = type;
+        g_ActorSlots[D_801FE748].camera_angle.x = angle_x;
+        g_ActorSlots[D_801FE748].camera_angle.y = angle_y;
+        g_ActorSlots[D_801FE748].camera_angle.z = angle_z;
+        g_ActorSlots[D_801FE748].scene_step     = scene_step;
+        g_ActorSlots[D_801FE748].layer          = layer;
+    } else {
+        return false;
+    }
+    return true;
+}
 
 MATCH void func_801FA998(void) {
     SYS_DISPATCH_BYTE(D_801FE678, g_SceneState.state_04);

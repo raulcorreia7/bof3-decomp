@@ -56,16 +56,16 @@ MATCH void func_801A6C98(u8* record) {
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, y);
     data                     = (WorkScript*)script;
 
-    work                   = g_Task;
-    work->header.mode      = data->unk_05;
-    g_Task->header.step    = data->unk_07;
-    g_Task->unk_06         = (data->unk_00 >> 4) - 1;
-    tail                   = g_Task;
-    shared                 = tail->range_54.table;
-    tail->gravity          = 0;
-    tail->unk_1C           = 0;
-    tail->unk_18           = 0;
-    FIELD(s32, tail, 0x70) = *(u8*)((u8*)shared + 2);
+    work                = g_Task;
+    work->header.mode   = data->unk_05;
+    g_Task->header.step = data->unk_07;
+    g_Task->unk_06      = (data->unk_00 >> 4) - 1;
+    tail                = g_Task;
+    shared              = tail->range_54.table;
+    tail->gravity       = 0;
+    tail->unk_1C        = 0;
+    tail->unk_18        = 0;
+    tail->state_70.word = *(u8*)((u8*)shared + 2);
 
     index                           = data->unk_0B;
     entry                           = &D_80147A58[index];
