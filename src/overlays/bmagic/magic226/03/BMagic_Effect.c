@@ -30,8 +30,9 @@ MATCH void func_801EF048(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-/* Starts the meteor above the battler: copies its pose, integrates the z rise,
- * then sets the drift, tint, scale, timer and script. */
+/* Starts the meteor above the battler: copies its pose, rotates the unk_0C/unk_10 pair by the
+ * facing and adds it to x and y, puts z at the battler's z plus 2304, then sets the drift, tint,
+ * scale, timer and script. */
 MATCH void func_801EF10C(void) {
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
@@ -66,8 +67,8 @@ MATCH void func_801EF10C(void) {
     Actor_SelectScript(0);
     g_Task->unk_04       = 0;
     g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0x20;
-    g_Task->timer        = 0x10;
+    g_Task->unk_09       = 32;
+    g_Task->timer        = 16;
     g_Task->header.step += 1;
 }
 
