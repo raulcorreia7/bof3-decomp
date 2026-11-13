@@ -162,7 +162,26 @@ MATCH void func_801D259C(void) {
     Char_AddStat(&character->stats.power, (s16)D_801D8EE8[5]);
 }
 
-INCLUDE_ASM(func_801D26E0);
+MATCH void func_801D26E0(s16 x, s16 y) {
+    LINE_F2* line;
+
+    line = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(line);
+    SetSemiTrans(line, 1);
+    setXY2(line, x + 5, y, x + 5, y + 0xA);
+    line->b0 = 0x80;
+    line->g0 = 0x80;
+    line->r0 = 0x80;
+    GFX_AddPrim(1, sizeof(LINE_F2));
+    line = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(line);
+    SetSemiTrans(line, 1);
+    setXY2(line, x, y + 5, x + 0xA, y + 5);
+    line->b0 = 0x80;
+    line->g0 = 0x80;
+    line->r0 = 0x80;
+    GFX_AddPrim(1, sizeof(LINE_F2));
+}
 
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 
