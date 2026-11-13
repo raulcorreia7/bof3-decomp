@@ -21,6 +21,5 @@ extern u8  D_80144F57;
 extern u8  D_8014504B;
 /* The shop and save start the field scene. */
 /* func_801C16B8 */
-void       Char_RebuildPartyStats(void);
 
 #endif

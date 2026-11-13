@@ -70,6 +70,7 @@ extern u8  D_801F3418[];
 
 /* Restores the party after a battle and copies it in field order into the battle records. */
 /* func_801C16B8 */
+void Char_RebuildPartyStats(void);
 void Fairy_InitVillage(void);
 /* The overlay's frame update; the bounds checks and origin step run it. */
 /* func_801F30D4 (area158), func_801F30D4 (area160), func_801F30D4 (area161), func_801F30D4 (area162), func_801F30D4
