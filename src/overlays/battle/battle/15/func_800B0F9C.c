@@ -1,8 +1,5 @@
 #include "battle_15.h"
 
-extern u8   D_800B70AC[];
-extern char D_80096A28[];
-
 /* Draws the dragon gene list: marks the occupied gene rows, draws the panel, then the three visible
  * rows with the gene icon, its name, the AP cost in the affordability color and the cursor box or
  * the party highlight.
@@ -19,6 +16,7 @@ MATCH void func_800B0F9C(void) {
     u8  slot_c;
     u8  sum;
     u8  step;
+    s16 cursor;
 
     Battle_DrawTitledFrame((s16)g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_08, g_MenuCurrentPanel->unk_09, 0);
     for (i = 0; (i & BYTE_MASK) < 6U; i++) {
@@ -50,15 +48,17 @@ MATCH void func_800B0F9C(void) {
             func_800B1DAC((g_MenuCurrentPanel->pos.x + 0x10), (g_MenuCurrentPanel->pos.y + (line_y + 0x18)), slot_a & 0x1F);
             line_y += 0x2D;
             UI_DrawTextString((g_MenuCurrentPanel->pos.x + 16), (g_MenuCurrentPanel->pos.y + line_y), clut, 255,
-                              Message_GetText(((u8*)&D_800B4C90)[g_BattleTargetRows[(s16)g_MenuCurrentPanel->u.battle.row_base + row].gate_03 & 0x1F]));
+                              Message_GetText(D_800B4C90[g_BattleTargetRows[(s16)g_MenuCurrentPanel->u.battle.row_base + row].gate_03 & 0x1F]));
             TEXT_Format(g_UiFormatBuffer, D_80096A2C, sum & BYTE_MASK);
             UI_DrawGlyphString((g_MenuCurrentPanel->pos.x + 88), (g_MenuCurrentPanel->pos.y + line_y), clut, g_UiFormatBuffer);
         }
     }
-    step = *(u8*)&g_Battle.ui_step;
-    if ((step == 6) && (*(u8*)&g_Battle.ui_state != 5)) {
-        func_800B1F04((g_MenuCurrentPanel->pos.x + 5) & HALF_MASK, (g_MenuCurrentPanel->pos.y + (*(s16*)&g_MenuCurrentPanel->u.battle.cursor * 32 + 0x18)) & HALF_MASK, 121, 32, 0, step);
+    step = g_Battle.ui_step;
+    if ((step == 6) && (g_Battle.ui_state != 5)) {
+        cursor = g_MenuCurrentPanel->u.battle.cursor;
+        func_800B1F04((g_MenuCurrentPanel->pos.x + 5) & HALF_MASK, (g_MenuCurrentPanel->pos.y + (cursor * 32 + 0x18)) & HALF_MASK, 121, 32, 0, step);
     } else {
-        Menu_DrawCursorSprite((g_MenuCurrentPanel->pos.x + 7) & HALF_MASK, (g_MenuCurrentPanel->pos.y + 0x20 + *(s16*)&g_MenuCurrentPanel->u.battle.cursor * 32) & HALF_MASK, 0);
+        cursor = g_MenuCurrentPanel->u.battle.cursor;
+        Menu_DrawCursorSprite((g_MenuCurrentPanel->pos.x + 7) & HALF_MASK, (g_MenuCurrentPanel->pos.y + 0x20 + cursor * 32) & HALF_MASK, 0);
     }
 }

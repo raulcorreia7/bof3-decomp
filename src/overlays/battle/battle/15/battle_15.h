@@ -371,6 +371,7 @@ extern volatile u8                       D_80096A04[4];
 extern BattleMenuPanel1States            D_80096A08;
 extern BattleMenuPanel2States            D_80096A14;
 /* Main-executable battle state consumed by target-local lifts. */
+extern char                              D_80096A28[];
 extern char                              D_80096A2C[];
 extern BattleMenuPanel3States            D_80096A34;
 extern BattleMenuPanel4States            D_80096A40;
@@ -397,7 +398,8 @@ extern s16                               D_800B495C[8];
 extern s16                               D_800B496C[8];
 extern s16                               D_800B497C[8];
 extern s16                               D_800B498C[400];
-extern s32                               D_800B4C90;
+extern u8                                D_800B4C90[];
+extern u8                                D_800B70AC[];
 extern Callback                          D_800B4CAC[7];
 extern Callback                          D_800B4CC8[2];
 extern Callback                          D_800B4CD0[5];
