@@ -39,14 +39,14 @@ MATCH void func_801A68C0(u8* script) {
     }
     work->pos.y.fixed = y;
 
-    COORD_INT(g_Task->pos.z)  = Area_SampleHeight(work->pos.x.fixed, y);
-    g_Task->header.mode       = script[5];
-    g_Task->header.step       = script[7];
-    g_Task->unk_06            = script[0] >> 4;
-    g_Task->gravity           = 0;
-    g_Task->unk_1C            = 0;
-    g_Task->unk_18            = 0;
-    FIELD(s32, g_Task, 0x70u) = FIELD(u8, g_Task->range_54.table, 0x2u);
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, y);
+    g_Task->header.mode      = script[5];
+    g_Task->header.step      = script[7];
+    g_Task->unk_06           = script[0] >> 4;
+    g_Task->gravity          = 0;
+    g_Task->unk_1C           = 0;
+    g_Task->unk_18           = 0;
+    g_Task->state_70.word    = FIELD(u8, g_Task->range_54.table, 0x2u);
 
     rows[*counter].unk_88                               = 0;
     rows[*counter].walk_dest_y                          = 0;

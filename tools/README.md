@@ -40,6 +40,9 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | List every reference to a symbol         | `tools/symbol.py uses <Name>` or `tools/symbol.py uses <target>@0x<ADDR>` | same                                                      |
 | Find the name of a bare number           | `tools/symbol.py value 0x<NN> [--image <target>] [--type <EnumOrPrefix>]` | same                                                      |
 | Build the call-graph layers              | `tools/symbol.py layers [--jsonl]`                                       | [lookup](#lookup)                                         |
+| Prove a signature from the bytes         | `tools/symbol.py signatures [FUNC\|--all] [--jsonl]`                      | [lookup](#lookup)                                         |
+| Find a global's real extent              | `tools/symbol.py extents [<target>] [--jsonl]`                            | same                                                      |
+| Read a function's system from the graph  | `tools/symbol.py homes [--jsonl]`                                        | same                                                      |
 | Find where a record or global is accessed | `tools/symbol.py accesses <TypeOrGlobal> [--jsonl]`                     | [lookup](#lookup)                                         |
 | Rank records by unknown accesses         | `tools/symbol.py records [--jsonl]`                                      | same                                                      |
 | Scan matched bodies for bare values      | `tools/symbol.py values --scan [--jsonl]`                                | [values](../docs/conventions.md#how-a-value-is-written)   |
@@ -144,6 +147,18 @@ problems; `symbol.py records` ranks every record by accesses times unknown membe
 `symbol.py values --scan` decides what each numeric literal of a matched body means from the
 declaration it is assigned to or compared with, and prints the family, the existing constant and the
 form the conventions prescribe; `--jsonl` writes one object per site.
+`symbol.py signatures` reads every split function and interprets its register dataflow as the
+signature GCC 2.7.2 would compile from it: the argument registers read before they are written, the
+stack arguments, each argument's kind and record, and the returned value or void, cross-checked
+against the argument registers and the returned `v0` of every caller. Each row carries the declared
+prototype, the found signature and a confidence; `proven` needs every caller to agree and every
+pointer and narrowing claim proved on both sides. `symbol.py extents` gives each data and bss
+symbol its distance to the next symbol, the size its declaration states, the accesses past that
+size, its index stride and the neighbours only reached as `base + constant` from it. `symbol.py
+homes` reads the call and data graph: a function moves to a system only by a caller majority, by
+being the single writer of a global its readers share, or by sitting between two of its functions
+in address order; a global belongs to the system all its writers are in; file rows cover
+`src/**/*.c` units. `--jsonl` writes one object per line for each of the three.
 
 ## Quality
 

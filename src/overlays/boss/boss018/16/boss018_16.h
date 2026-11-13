@@ -32,21 +32,34 @@ extern Callback D_800C2D60[];
 extern Callback D_800C2D94[];
 extern Callback D_800C2DAC[];
 extern Callback D_800C2DB8[];
-extern u16      D_801EB6C4;
-extern u16      D_801EB6C6;
-extern u16      D_801EB7DC;
-extern u16      D_801EB8F4;
-extern u16      D_801FD6FC;
-extern u16      D_801FD6FE;
+
+/* The stamped block's corner: one map cell per pattern. */
+typedef struct Boss018MapCell {
+    u8 column;
+    u8 row;
+} Boss018MapCell;
+
+ASSERT_SIZE(Boss018MapCell, 2);
+ASSERT_OFFSET(Boss018MapCell, column, 0x00);
+ASSERT_OFFSET(Boss018MapCell, row, 0x01);
+
+extern Boss018MapCell D_800C2DC4[];
+extern u32            D_800C2DC8[];
+extern u16            D_801EB6C4;
+extern u16            D_801EB6C6;
+extern u16            D_801EB7DC;
+extern u16            D_801EB8F4;
+extern u16            D_801FD6FC;
+extern u16            D_801FD6FE;
 /* Frame-state word owned by the main executable; the boss018 step reads bit 0. */
-extern u16      D_801FD700;
-extern u16      D_801FD702;
+extern u16            D_801FD700;
+extern u16            D_801FD702;
 
 void func_800C197C(s32 mode);
 void func_800C1C6C(s32 mode);
 void func_800C2074(s32 mode);
 
-void func_800C29AC(s32 arg0, s32 arg1);
+void func_800C29AC(s32 base, s32 pattern);
 
 void func_800C2A40(void);
 

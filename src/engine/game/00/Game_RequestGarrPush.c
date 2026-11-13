@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* func_801B6044 */
-MATCH s32 Game_RequestGarrPush(void) {
+MATCH bool Game_RequestGarrPush(void) {
     if (g_Game.current->chr.character_id != CHAR_ID_GARR) {
         return 0;
     }

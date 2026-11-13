@@ -102,7 +102,29 @@ MATCH void func_801EFF88(void) {
     }
 }
 
-INCLUDE_ASM(func_801F00B0);
+/* Rocks the effect by the angle its ticker selects, drifts it along z by its velocity, and clears it when its
+ * counter runs out. */
+MATCH void func_801F00B0(void) {
+    s16* angle_cell;
+    s32  angle;
+    s8   timer;
+
+    angle_cell  = &D_1F800004;
+    angle       = (g_Task->param.unk_0B - 2) & 0xF;
+    *angle_cell = angle << 8;
+    g_Task->pos.x.fixed += rsin((s16)(angle << 8));
+    g_Task->pos.y.fixed += rcos(*angle_cell);
+    g_Task->pos.z.fixed += g_Task->unk_14;
+    g_Task->unk_14 += g_Task->unk_20;
+    timer = g_Task->unk_5E;
+    if (timer != 0) {
+        g_Task->unk_5E = timer - 1;
+    }
+    if (--g_Task->unk_09 == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801F01B8(void) {
     POLY_FT4* prim;
