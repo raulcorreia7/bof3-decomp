@@ -1,4 +1,5 @@
 #include "commu02_08.h"
+#include "overlays/commu/Commu_CursorTriangle.h"
 #include "common/util.h"
 
 #if BOF3_USE_ASM
@@ -987,7 +988,12 @@ INCLUDE_ASM(func_801D851C);
 
 INCLUDE_ASM(func_801D875C);
 
-INCLUDE_ASM(func_801D88A4);
+MATCH void func_801D88A4(s32 x, s32 y, s32 bright) {
+    POLY_F3* poly;
+    u8       colour;
+
+    COMMU_DRAW_CURSOR_TRIANGLE(x, y, bright);
+}
 
 /* Fills D_801DB080 with a name built from one random half of each of the two name tables in the loaded text bank. */
 /* func_801D8968 */

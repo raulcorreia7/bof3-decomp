@@ -1,4 +1,5 @@
 #include "commu01_07.h"
+#include "overlays/commu/Commu_CursorTriangle.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -99,7 +100,12 @@ MATCH void func_801D3594(s16 x, s16 y) {
 
 INCLUDE_ASM(func_801D36FC);
 
-INCLUDE_ASM(func_801D3984);
+MATCH void func_801D3984(s32 x, s32 y, s32 bright) {
+    POLY_F3* poly;
+    u8       colour;
+
+    COMMU_DRAW_CURSOR_TRIANGLE(x, y, bright);
+}
 
 MATCH u8 func_801D3A48(u8 arg) {
     s32 count = 0;

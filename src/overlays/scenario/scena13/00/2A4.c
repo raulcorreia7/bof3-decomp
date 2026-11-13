@@ -282,7 +282,56 @@ MATCH void Scene_RestorePalette(void) {
     g_GfxPalettePending = (g_GfxPalettePending + 1u);
 }
 
-INCLUDE_ASM(func_801FB1B4);
+MATCH void func_801FB1B4(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            if (g_Game.members[1].u.field.mode_12B.s8_value == 0 && g_Game.members[2].u.field.mode_12B.s8_value == 0) {
+                func_801BE1B0(10);
+                SYS_SetFlag(g_SceneFlags, 0x1D);
+                g_SceneState.state_04 = 0;
+                g_SceneState.step_05  = 0;
+            }
+            break;
+        case 4:
+            Message_StartAreaMessage(1);
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_SceneState.step_05 = 6;
+            break;
+        case 5:
+            Message_StartAreaMessage(0x4E);
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_SceneState.step_05 = 6;
+            break;
+        case 6:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                Game_ClearScriptActive();
+                g_SceneState.state_04 = 0;
+                g_SceneState.step_05  = 0;
+            }
+            break;
+        case 8:
+            if (g_ScriptVars[0] == 0x28) {
+                g_ScriptVars[0]      = 0;
+                g_SceneState.step_05 = 10;
+            }
+            break;
+        case 10:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                Game_RequestAreaChange(AREA_ID_KOMBINAT_WORLD_MAP, TO_COORD(54), TO_COORD(29), FACING_RIGHT);
+                g_SceneState.step_05 = 11;
+            }
+            break;
+        case 11:
+            if (g_GameStateIndex == GAME_REQUEST_IDLE) {
+                SYS_SetFlag(g_SceneFlags, 0x1E);
+                Game_ClearScriptActive();
+                g_SceneState.state_04 = 0;
+                g_SceneState.step_05  = 0;
+                Scene_RequestChapterAdvance();
+            }
+            break;
+    }
+}
 
 #include "overlays/scenario/Scene_DispatchActor.h"
 
