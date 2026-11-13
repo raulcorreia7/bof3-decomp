@@ -1,24 +1,15 @@
 #!/bin/sh
-# Reject tracked retail media, binary files over 1 MiB, relative includes or imports, struct members of enum type, and sources no image layout compiles. Needs no build inputs.
+# Reject tracked retail media, files over 1 MiB, relative includes or imports, struct members of enum type, and sources no image layout compiles. Needs no build inputs.
 set -eu
 case "${1:-}" in
 -h | --help) sed -n '2,2p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 esac
 cd "$(dirname "$0")/.."
 
-# Retail media is game data at any size; any other binary over 1 MiB is too large for a diff to
-# read. A text file that size is a table the repo keeps, such as config/symbols.toml.
-sizes=$(git ls-files -z | xargs -0 stat -c '%s %n')
-bad=$(
-	printf '%s\n' "$sizes" | awk '{
-		name = substr($0, length($1) + 2)
-		if (tolower(name) ~ /\.(bin|iso|img|cue|exe|psx|7z|mdf|ccd|ecm)$/) print name
-	}'
-	printf '%s\n' "$sizes" | awk '$1 > 1048576 { print substr($0, length($1) + 2) }' |
-		while IFS= read -r name; do
-			[ -z "$name" ] || LC_ALL=C grep -qI '' "$name" || printf '%s\n' "$name"
-		done
-)
+bad=$(git ls-files -z | xargs -0 stat -c '%s %n' | awk '{
+	name = substr($0, length($1) + 2)
+	if ($1 > 1048576 || tolower(name) ~ /\.(bin|iso|img|cue|exe|psx|7z|mdf|ccd|ecm)$/) print name
+}')
 if [ -n "$bad" ]; then
 	echo "check-tree: retail data or oversized files tracked:"
 	echo "$bad"
