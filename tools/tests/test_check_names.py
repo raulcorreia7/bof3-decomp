@@ -301,3 +301,54 @@ def test_a_diff_that_deletes_a_file_does_not_crash(
     monkeypatch.chdir(tmp_path)
     assert check_names.main(["--diff", "HEAD~1"]) == 0
     assert "no new rejected names" in capsys.readouterr().out
+
+
+RENAMED_OFFSET_BODY = (
+    "void func_801D9C80(void) { u8 v = FIELD(u8, base, 0x4u); Battle_DrawTile(v); }\n"
+)
+
+
+def _renamed_offset_repo(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, after: str
+) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/func_801D9C80.c").write_text(RENAMED_OFFSET_BODY)
+    git("add", ".")
+    git("commit", "-qm", "base")
+    git("mv", "src/func_801D9C80.c", "src/Battle_DrawTile.c")
+    (tmp_path / "src/Battle_DrawTile.c").write_text(after)
+    git("add", ".")
+    git("commit", "-qm", "rename the file")
+    monkeypatch.chdir(tmp_path)
+
+
+def test_a_renamed_file_with_one_offset_access_and_a_one_word_change_passes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _renamed_offset_repo(
+        tmp_path,
+        monkeypatch,
+        RENAMED_OFFSET_BODY.replace("Battle_DrawTile", "Battle_DrawPanel"),
+    )
+    assert check_names.main(["--diff", "HEAD~1"]) == 0
+
+
+def test_a_renamed_file_that_gains_an_offset_access_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    _renamed_offset_repo(
+        tmp_path,
+        monkeypatch,
+        RENAMED_OFFSET_BODY.replace(
+            "Battle_DrawTile(v); }",
+            "Battle_DrawTile(v); u8 w = FIELD(u8, base, 0x8u); }",
+        ),
+    )
+    assert check_names.main(["--diff", "HEAD~1"]) == 1
+    assert "FIELD(): 1 new offset access" in capsys.readouterr().err
