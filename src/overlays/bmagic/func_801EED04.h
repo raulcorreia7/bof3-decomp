@@ -32,5 +32,5 @@ MATCH void func_801EED04(void) {
             g_Task->param.unk_0B++;
         }
     }
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
