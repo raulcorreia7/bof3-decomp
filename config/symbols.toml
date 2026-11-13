@@ -2124,6 +2124,8 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 
 ["emi/etc/bate/00"]
 g_MenuStatFormat = { addr = 0x801D0C20, source = "Format string of the four stat values of the Bate menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuExperienceFormat = { addr = 0x801D0C34, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
+g_MenuExperienceBlank = { addr = 0x801D0C38, source = "Dashes the experience panel prints in place of the value when it is -1." }
 g_MenuZennyFormat = { addr = 0x801D0C44, source = "Format string of the Bate menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C48, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
 g_MenuFormations = { addr = 0x801D0C50, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }

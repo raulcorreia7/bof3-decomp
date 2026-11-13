@@ -89,6 +89,7 @@ extern u8       D_801F2944;
 extern u8       D_801F2945;
 
 void func_801D2E10(void);
+void func_801D2E60(s16 x, s16 y);
 u8   func_801D7EA0(u8);
 
 u8 func_801D92F4(u8);

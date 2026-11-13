@@ -219,7 +219,18 @@ MATCH void func_801D2E10(void) {
     D_801F294C++;
 }
 
-INCLUDE_ASM(func_801D2E60);
+MATCH void func_801D2E60(s16 x, s16 y) {
+    LINE_F2* primitive;
+
+    primitive = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(primitive);
+    primitive->x0 = x;
+    primitive->x1 = x + 8;
+    primitive->y0 = y;
+    primitive->y1 = y;
+    setRGB0(primitive, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(LINE_F2));
+}
 
 INCLUDE_ASM(func_801D2EDC);
 
@@ -1028,7 +1039,18 @@ INCLUDE_ASM(Menu_DrawHeaderBar);
 
 INCLUDE_ASM(func_801D90D8);
 
-INCLUDE_ASM(func_801D9210);
+MATCH void func_801D9210(void) {
+    s32 drawn;
+    u32 i;
+
+    drawn = 0;
+    for (i = 0; i < 7; i++) {
+        if (g_Characters[i].unk_07 & 1) {
+            func_801D90D8(((drawn & 1) * 0x88) + 0x20, (((u8)drawn >> 1) * 0x38) + 0x2B, (u8)i, 0);
+            drawn++;
+        }
+    }
+}
 
 MATCH u8 func_801D92B0(void) {
     s32 count = 0;

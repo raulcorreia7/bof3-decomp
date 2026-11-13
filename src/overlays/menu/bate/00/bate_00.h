@@ -23,6 +23,8 @@ extern u8            D_80144DF2;
 extern u8            D_80144DF3;
 extern u8            D_80144DF4;
 extern char          g_MenuStatFormat[];
+extern char          g_MenuExperienceFormat[];
+extern char          g_MenuExperienceBlank[];
 extern char          g_MenuZennyFormat[];
 /* D_801D0C48 */
 extern char          g_MenuNextExpBlank[];
@@ -75,6 +77,8 @@ extern u8       g_MenuLabelAgility[];
 extern u8       g_MenuEquipRowIcons[];
 /* D_801D8B40 */
 extern u8       g_MenuLabelEquip[];
+extern u8       D_801D8B48[];
+extern u8       D_801D8B4C[];
 extern u8       g_MenuPortraitAtlas[];
 /* D_801D8700 */
 extern Callback g_MenuBateStep2Funcs[MENU_BATE_STEP2_COUNT];
@@ -113,6 +117,8 @@ extern u8       g_MenuInventoryTab1OnSprites[];
 extern u8       g_MenuListTab1OffSprites[];
 /* D_801D8978 */
 extern u8       g_MenuListTab1OnSprites[];
+/* D_801D8984 */
+extern u8       D_801D8984[];
 /* D_801D8A3C */
 extern u8       g_SaveSlotFrameSprites[];
 extern u8       D_801D8B84[];
@@ -170,5 +176,6 @@ s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 
 void func_801D2304(s32 arg0, s32 arg1);
 void func_801D259C(void);
+void func_801D31B0(s16 x, s16 y, u8 index, u8 flag);
 
 #endif

@@ -131,6 +131,13 @@ typedef struct MessageTable {
 #define MENU_SAVE_SLOT_WINDOW_HEIGHT  48
 #define MENU_FORMATION_WINDOW_WIDTH   69
 #define MENU_FORMATION_WINDOW_HEIGHT  48
+#define MENU_EXPERIENCE_WINDOW_WIDTH  101
+#define MENU_EXPERIENCE_WINDOW_HEIGHT 37
+#define MENU_EXPERIENCE_NEXT_X        0x26 /* caption column of the NEXT value */
+#define MENU_EXPERIENCE_EXP_X         0x2C /* caption column of the EXP value */
+#define MENU_EXPERIENCE_CAPTION_Y     7
+#define MENU_EXPERIENCE_VALUE_X       0x15
+#define MENU_EXPERIENCE_VALUE_Y       0x1A
 
 /* The requested message id: 0xFFFF means no message. ResourceRequestMessage
  * stores a message index in the slot and Message_StartRequest reads the slot as that
