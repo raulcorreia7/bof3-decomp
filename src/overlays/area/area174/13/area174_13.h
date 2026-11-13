@@ -12,6 +12,9 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0x80
 
+/* The multiplier that derives the link byte from the current actor's byte offset. */
+#define ACTOR_LINK_MULTIPLIER    3616814565u
+
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The current map row in the field-loader table. */

@@ -24,6 +24,7 @@ extern s8 D_801F6780[];
 
 extern void func_801F2DF4(s32 blend_mode);
 void        func_801F4060(s16 level);
+void        func_801F4138(s16 x, s16 y, s16 radius, s16 color0, s16 color1);
 void        func_801F47F0(void);
 void        func_801F4E8C(s32 x, s32 y);
 
@@ -38,6 +39,6 @@ void func_801F36C0(void* arg0, s32 arg1, s32 arg2);
 void func_801F3BFC(const void* spin);
 void func_801F3FAC(void);
 
-void func_801F4F70(s32 arg0, s32 arg1);
+void func_801F4F70(s32 x, s32 y);
 
 #endif
