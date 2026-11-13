@@ -220,7 +220,36 @@ MATCH void func_801F7E34(void) {
     FIELD(u8, work, 0x1u) = (FIELD(u8, work, 0x1u) + 1);
 }
 
-INCLUDE_ASM(func_801F7E6C);
+MATCH void func_801F7E6C(void) {
+    ActorSlot** effects;
+    ActorSlot*  spawned;
+    Actor*      record;
+    Actor*      actor;
+    u8          i;
+    u8          slot;
+
+    effects = (ActorSlot**)&g_Task->vx;
+    for (i = 0; i < 5; i++) {
+        slot = Actor_FindFreeSlot();
+        if (slot != GAME_NONE) {
+            spawned                    = &g_ActorSlots[slot];
+            effects[i]                 = spawned;
+            spawned->header.flags      = 1;
+            spawned->unk_06            = 0;
+            spawned->type              = 0x21;
+            actor                      = g_Task;
+            spawned->scene_step        = actor->pos.x.fixed;
+            spawned->selection         = actor->pos.y.fixed;
+            spawned->unk_14            = actor->pos.z.fixed;
+            record                     = (Actor*)spawned;
+            record->script_pc          = 6;
+            record->unk_5A             = 0;
+            record->tint.halves.unk_5C = i * 819;
+            record->tint.halves.unk_5E = 0;
+        }
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801F7F84(void) {
     ActorSlot** effects; /* the five effect slots spawned at +0x0C */
@@ -618,7 +647,36 @@ MATCH s8 func_801FCAB8(s32 entry_x, s32 entry_y) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FCB4C);
+MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
+    if (SYS_TestFlag(g_SceneFlags, 0x1B) == 0) {
+        if (D_80143F03 != 2) {
+            return 0;
+        }
+        if (entry_x != TO_COORD(10) + COORD_HALF) {
+            return 0;
+        }
+        if (((entry_y >> 16) - 36) >= 2U) {
+            return 0;
+        }
+        g_ScriptVars[1]       = 1;
+        g_SceneState.state_04 = 6;
+        g_SceneState.step_05  = 5;
+        return Scene_ShowMessage(0xC);
+    }
+    if (D_80143F03 == 3 && entry_y == TO_COORD(11) + COORD_HALF && ((entry_x >> 16) - 5) < 2U) {
+        if (SYS_TestFlag(g_SceneFlags, 0x1C) == 0) {
+            Game_SetScriptActive();
+            g_SceneState.step_05  = 0xF;
+            g_SceneState.state_04 = 6;
+            return 1;
+        } else {
+            g_SceneState.step_05  = 0xD;
+            g_SceneState.state_04 = 6;
+            return Scene_ShowMessage(0x11);
+        }
+    }
+    return 0;
+}
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 

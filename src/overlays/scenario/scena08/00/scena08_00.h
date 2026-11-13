@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "engine/game/00/game_00.h"
 #include "area/spad.h"
 #include "overlays/area/AreaSprite.h"
 #define SCRATCH_ROW_STRIDE 0x28
@@ -12,7 +13,6 @@
 
 extern u16      D_800E4C1E;
 extern u8       D_80144EC8[];
-extern u8       g_VitalItemIds;
 extern s16      D_801448EE;
 extern u8       D_80146867;
 extern s8       D_80147ACF;
@@ -75,9 +75,12 @@ extern Callback D_801FE938[];
 extern Callback D_801FE964[];
 
 extern Callback  D_801FE970[];
+extern u8        D_801FE9A0[];
 /* D_801FE9C0 */
 extern SceneFunc g_SceneActorDispatch[];
 extern u16       D_801FE9EC[];
+extern s32       D_801FEA74;
+extern s32       D_801FEA78;
 
 void func_801FE800(void);
 

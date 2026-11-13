@@ -169,9 +169,41 @@ MATCH void func_801F7AA8(void) {
 
 INCLUDE_ASM(func_801F7AEC);
 
-INCLUDE_ASM(func_801F7D1C);
+MATCH void func_801F7D1C(void) {
+    UPoint2D pos;
 
-INCLUDE_ASM(func_801F7E2C);
+    if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
+        g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
+        g_Task->header.mode = 0;
+    } else {
+        func_801F83AC(&pos);
+        g_Task->timer += 8;
+        g_Task->tint.signed_bytes.unk_5D = rsin(g_Task->timer << 4) >> 7;
+        g_Task->tint.signed_bytes.unk_5E = rcos(g_Task->timer << 4) >> 7;
+        func_801F7FFC(pos.x, pos.y);
+    }
+}
+
+MATCH void func_801F7E2C(void) {
+    UPoint2D pos;
+
+    func_801F83AC(&pos);
+    if (g_Task->tint.signed_bytes.unk_5D < 0x70) {
+        g_Task->tint.signed_bytes.unk_5D += 2;
+    }
+    if (g_Task->tint.signed_bytes.unk_5E < 0x30) {
+        g_Task->tint.signed_bytes.unk_5E += 1;
+    }
+    func_801F81D8(pos.x, pos.y);
+    if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
+        g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
+        g_Task->header.mode = 0;
+    }
+    if ((g_Task->tint.word & 0xFFFF00) == 0x307000) {
+        g_Task->unk_06      = 0;
+        g_Task->header.mode = 1;
+    }
+}
 
 MATCH void func_801F7F5C(void) {
     UPoint2D pos;
@@ -477,7 +509,23 @@ MATCH void func_801FDC10(s32 shift) {
     }
 }
 
-INCLUDE_ASM(func_801FDC6C);
+MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
+    u8 slot;
+
+    slot = Actor_FindFreeSlot();
+    if (slot != GAME_NONE) {
+        g_ActorSlots[slot].header.flags = 1;
+        g_ActorSlots[slot].pos.x.fixed  = x;
+        g_ActorSlots[slot].type         = 0x9E;
+        g_ActorSlots[slot].pos.y.fixed  = y;
+        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
+        g_ActorSlots[slot].unk_06       = unk_06;
+        g_ActorSlots[slot].unk_07       = unk_07;
+        g_ActorSlots[slot].link         = link;
+        return 1;
+    }
+    return 0;
+}
 
 #include "overlays/scenario/Scene_DispatchActor.h"
 

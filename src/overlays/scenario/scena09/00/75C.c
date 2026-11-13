@@ -41,16 +41,45 @@ MATCH void func_801F7424(Actor* actor) {
 
 /* func_801F7574 */
 MATCH void Scene_ClearWorkRows(void) {
-    u8* row;
-    u8  i;
+    SceneSpark* row;
+    u8          i;
 
-    row = MEM_PTR(u8, 0x800E5000u) + g_Task->unk_06 * 0x500;
-    for (i = 0; i < 32; i++, row += 40) {
-        *row = 0;
+    row = (SceneSpark*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
+    for (i = 0; i < SCENE_SPARK_COUNT; i++, row++) {
+        row->active = 0;
     }
 }
 
-INCLUDE_ASM(func_801F75BC);
+MATCH s32 func_801F75BC(void) {
+    MATRIX      camera;
+    SceneSpark* row;
+    u8          i;
+    u8          life;
+    s32         alive;
+
+    Area_SetCameraMatrix(&camera);
+    alive = 0;
+    row   = (SceneSpark*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
+    for (i = 0; i < SCENE_SPARK_COUNT; row++, i++) {
+        if (row->active == 0) {
+            continue;
+        }
+        row->pos.x += row->vx;
+        row->pos.y += row->vy;
+        row->pos.z += row->vz;
+        row->vz -= 0x40000;
+        row->shade -= 4;
+        row->frame = rand() & 7;
+        life       = row->life - 1;
+        row->life  = life;
+        if (life == 0) {
+            row->active = 0;
+        }
+        func_801F7424(row);
+        alive = 1;
+    }
+    return alive;
+}
 
 INCLUDE_ASM(func_801F76D0);
 
