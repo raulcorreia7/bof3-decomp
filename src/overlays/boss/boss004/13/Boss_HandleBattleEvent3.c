@@ -1,3 +1,5 @@
 #include "boss004_13.h"
 
-INCLUDE_ASM(Boss_HandleBattleEvent3);
+MATCH u8 Boss_HandleBattleEvent3(u32 mode) {
+    BOSS_RUN_BATTLE_EVENT_BODY(mode);
+}
