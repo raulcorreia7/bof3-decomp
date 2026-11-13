@@ -6,7 +6,7 @@ MATCH void func_801C05AC(void) {
 
     if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING)) {
         Party_ClearActiveBattlers();
-        if (g_GameRequestFlags & 0x8) {
+        if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
             g_Game.members[0].header.mode = 9;
         } else {
             for (i = 0; i < g_PartySize; i++) {

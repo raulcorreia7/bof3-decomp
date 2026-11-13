@@ -17,13 +17,13 @@ MATCH void func_801F2E1C(void) {
                 }
             }
             Message_StartAreaMessage((s16)(i + 1));
-            g_GameStateIndex = 2;
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
             counter          = (u8*)&g_SceneEventStep;
             *counter += 1;
             break;
 
         case 1:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
                 g_SceneEventMode      = 0;
                 *step                 = 0;

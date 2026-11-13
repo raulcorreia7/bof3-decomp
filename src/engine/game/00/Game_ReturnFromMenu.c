@@ -38,7 +38,7 @@ MATCH void Game_ReturnFromMenu(void) {
     if (*request != 0u) {
         pending  = &D_8014504A;
         *request = 0u;
-        if ((*pending == 0u) && ((g_GameRequestFlags & 0x1u) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
+        if ((*pending == 0u) && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
             *pending   = 1u;
             D_80145040 = g_Game.members[0].pos.x.fixed;
             D_80145044 = g_Game.members[0].pos.y.fixed;

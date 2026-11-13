@@ -76,7 +76,7 @@ MATCH void func_801B0568(void) {
             func_801C24D0();
             func_801C4C48();
             g_Task->param.unk_0B = 0;
-            if (g_GameRequestFlags & 0x1) {
+            if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
                 if (g_Game.walk_flags & (AREA_WALK_TRANSITION | 0x2000)) {
                     tmp5         = g_Task;
                     tmp1         = tmp5->timer;
@@ -124,7 +124,7 @@ MATCH void func_801B0568(void) {
             g_Task->header.step = 4;
             tmp7                = g_Task;
             tmp2                = tmp7->direction_08;
-            if ((tmp2 == 1) || (tmp2 == 7)) {
+            if ((tmp2 == FACING_UP) || (tmp2 == FACING_LEFT)) {
                 tmp7->unk_03 = 0;
             } else {
                 tmp7->unk_03 = 1;
@@ -159,7 +159,7 @@ MATCH void func_801B0568(void) {
             g_Task->header.mode                       = FIELD_TASK_MODE_CLIMB;
             tmp8                                      = g_Task;
             tmp3                                      = tmp8->direction_08;
-            if ((tmp3 == 1) || (tmp3 == 7)) {
+            if ((tmp3 == FACING_UP) || (tmp3 == FACING_LEFT)) {
                 tmp8->header.step = 0;
                 return;
             }

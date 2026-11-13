@@ -36,7 +36,7 @@ MATCH void func_801F7178(void) {
     g_AreaCameraAngle.vy = angle + 4;
     Area_AdvanceScroll(scroll);
     if (g_AreaCameraAngle.vy >= 241) {
-        if (g_GameStateIndex == 0) {
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         }
         g_Task->header.mode = 2;
@@ -52,7 +52,7 @@ MATCH void func_801F7200(void) {
     g_AreaCameraAngle.vy = angle - 4;
     Area_AdvanceScroll(scroll);
     if (g_AreaCameraAngle.vy < -240) {
-        if (g_GameStateIndex == 0) {
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
         }
         g_Task->header.mode = 1;
@@ -86,7 +86,7 @@ MATCH void func_801F7BFC(void) {
     state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
-            if (g_GameStateIndex == 2) {
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
             next            = 1;

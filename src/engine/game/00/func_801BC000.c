@@ -113,7 +113,7 @@ MATCH void func_801BC000(void) {
                     g_Task->header.mode                       = FIELD_TASK_MODE_CLIMB;
                     tmp12                                     = g_Task;
                     tmp4                                      = tmp12->direction_08;
-                    if ((tmp4 == 1) || (tmp4 == 7)) {
+                    if ((tmp4 == FACING_UP) || (tmp4 == FACING_LEFT)) {
                         tmp12->header.step = 0;
                         return;
                     }

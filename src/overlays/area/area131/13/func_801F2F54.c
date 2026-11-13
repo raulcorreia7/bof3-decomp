@@ -8,12 +8,12 @@ MATCH void func_801F2F54(void) {
         case 0:
             Game_SetScriptActive();
             Message_StartAreaMessage(2);
-            g_GameStateIndex = 2;
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = (u8)*state + 1;
             break;
 
         case 1:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Scene_ClearEventState();
             }
             break;

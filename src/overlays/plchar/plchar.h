@@ -145,10 +145,10 @@ void Area_ClearCell(s32 x, s32 y);
             func_801C308C(0);                                              \
             Char_LoseHP(1, g_Game.current->chr.character_id);              \
             Message_Request(0xD9);                                         \
-            g_GameStateIndex     = 2;                                      \
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;                   \
             g_Task->param.unk_0B = 1;                                      \
         }                                                                  \
-        g_GameStateIndex = 2;                                              \
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;                           \
         return 1;                                                          \
     }                                                                      \
     return 0;

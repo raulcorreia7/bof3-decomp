@@ -13,7 +13,7 @@ MATCH void func_801B2DDC(void) {
     u16    result;
 
     sel = func_801B5C54();
-    if (g_GameRequestFlags & 0x1) {
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
         func_801B5BDC(g_Task->direction_08);
     } else {
         work = g_Task;

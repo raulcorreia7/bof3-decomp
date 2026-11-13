@@ -496,12 +496,12 @@ MATCH void func_801FAA70(void) {
         case 0:
             if (g_UiWindowEffectBusy == 0) {
                 Message_StartAreaMessage(1);
-                g_GameStateIndex = 2;
+                g_GameStateIndex = GAME_REQUEST_MESSAGE;
                 *step            = 1;
             }
             break;
         case 1:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 UI_SetMode(1);
                 g_AreaScrollTargetX = 0x2D8000;
                 g_AreaScrollTargetY = 0x5D0000;

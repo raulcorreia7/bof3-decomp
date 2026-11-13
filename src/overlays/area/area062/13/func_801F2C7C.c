@@ -27,7 +27,7 @@ MATCH void func_801F2C7C(void) {
                 } else {
                     Message_Request(3);
                 }
-                g_GameStateIndex = 2;
+                g_GameStateIndex = GAME_REQUEST_MESSAGE;
                 g_SceneEventStep = 2;
             }
             break;

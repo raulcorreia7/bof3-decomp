@@ -3,7 +3,7 @@
 MATCH void func_801F4A0C(void) {
     switch (g_SceneEventStep) {
         case 0:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_SceneEventStep = 1;
             }
             break;

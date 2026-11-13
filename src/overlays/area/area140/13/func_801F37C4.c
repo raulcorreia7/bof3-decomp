@@ -8,7 +8,7 @@ MATCH void func_801F37C4(void) {
         if ((direction ^ 0x1) != 0) {
             goto replay; /* FAKE: both flag branches enter the same block; an if/else duplicate changes the frame */
         }
-    } else if (direction != 0) {
+    } else if (direction != FACING_UP_LEFT) {
     replay:
         Area_SetCellPalette((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y));
         Area_SetCellPalette((s32)(s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));

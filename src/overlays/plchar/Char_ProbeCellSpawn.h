@@ -40,7 +40,7 @@ MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
         } else {
             Message_Request(3);
         }
-        g_GameStateIndex     = 2;
+        g_GameStateIndex     = GAME_REQUEST_MESSAGE;
         g_Task->param.unk_0B = 1;
         Area_ClearCell(x, y);
         return 1;

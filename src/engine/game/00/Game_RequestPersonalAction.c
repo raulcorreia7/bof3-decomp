@@ -11,7 +11,7 @@ MATCH bool Game_RequestPersonalAction(void) {
         return 0;
     if (!(g_InputPressed & g_InputMasks[FIELD_INPUT_PERSONAL_ACTION]))
         return 0;
-    if (g_GameRequestFlags & GAME_REQUEST_FLAG_WORLD_MAP)
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)
         return 0;
     g_Task->header.mode = FIELD_TASK_MODE_PERSONAL_ACTION;
     ACTOR_CLEAR_STEP();

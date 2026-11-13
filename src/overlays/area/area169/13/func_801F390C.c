@@ -20,12 +20,12 @@ MATCH void func_801F390C(void) {
         case 2:
             if (WINDOW_EFFECT_IDLE()) {
                 Message_StartAreaMessage(1);
-                g_GameStateIndex = 2;
+                g_GameStateIndex = GAME_REQUEST_MESSAGE;
                 *state           = 3;
             }
             return;
         case 3:
-            if (g_GameStateIndex != 2) {
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
                 SYS_SetFlag(state + 0x63C, 116);
                 g_SceneEventMode = 0;

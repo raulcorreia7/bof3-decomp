@@ -167,7 +167,7 @@ retFF:
 caseA0:
     if ((code2 & BYTE_MASK) == 0xC0) {
         low = code1 & BYTE_MASK;
-        if ((g_GameRequestFlags & 1) != 0) {
+        if ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) != 0) {
             if (low == key)
                 return 0;
             low = code1 & BYTE_MASK;

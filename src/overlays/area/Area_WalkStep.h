@@ -6,7 +6,7 @@
     u8  value3;                                                                                                             \
     func_801C3598();                                                                                                        \
     func_801C2BEC();                                                                                                        \
-    if (g_GameRequestFlags & 1) {                                                                                           \
+    if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {                                                                    \
         if ((Area_GetCellCode((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y)) & 0xFF) == 0xAF) {              \
             Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);                 \
             g_GameEntryMode   = 0;                                                                                          \
