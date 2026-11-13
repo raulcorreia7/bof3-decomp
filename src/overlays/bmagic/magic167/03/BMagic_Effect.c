@@ -22,7 +22,7 @@ MATCH void func_801EEC94(void) {
     g_Task->pos.y        = battler->pos.y;
     g_Task->pos.z        = battler->pos.z;
     g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0x10;
+    g_Task->unk_09       = 16;
     g_Task->header.mode += 1;
     first_slot                                   = Battle_AllocEffect(1, 0x47) & BYTE_MASK;
     g_BattleEffects[first_slot].target.party     = g_Task;
@@ -38,7 +38,7 @@ MATCH void func_801EEC94(void) {
         target                             = g_Task;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = (i & 0x3) * 8;
-        g_BattleEffects[slot].arg.unk_09   = ((i >> 2) * 0x28) + 0x11;
+        g_BattleEffects[slot].arg.unk_09   = ((i >> 2) * 40) + 17;
         g_BattleEffects[slot].target.party = target;
         g_BattleEffects[slot].pos.x        = g_Task->pos.x;
         g_BattleEffects[slot].pos.y        = g_Task->pos.y;
@@ -46,7 +46,7 @@ MATCH void func_801EEC94(void) {
         g_Task->param.unk_0B += 1;
         i++;
     } while (i < 8);
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
 /* func_801EEE88 */
