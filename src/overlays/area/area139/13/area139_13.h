@@ -12,9 +12,9 @@
 
 /* One three-byte colour row per actor row: D_801F442C holds the red byte of
  * each row, D_801F442D the green and D_801F442E the blue. */
-extern u8 D_801F442C[];
-extern u8 D_801F442D[];
-extern u8 D_801F442E[];
+extern u8       D_801F442C[];
+extern u8       D_801F442D[];
+extern u8       D_801F442E[];
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F4430[];
 extern Callback D_801F4448[];
