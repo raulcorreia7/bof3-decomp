@@ -61,8 +61,10 @@ void func_801F431C(void);
     do {                                                                     \
         s32 x;                                                               \
         s32 y;                                                               \
+        u8  ok;                                                              \
                                                                              \
-        if ((u8)func_801F3980(&x, &y) != 0) {                                \
+        ok = func_801F3980(&x, &y);                                          \
+        if (ok != 0) {                                                       \
             if (g_ScriptVars[3] == 10) {                                     \
                 if (g_Task->pos.x.fixed != (stop_x)) {                       \
                     func_801F3BA0(x, y);                                     \
