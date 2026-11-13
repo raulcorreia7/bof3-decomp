@@ -1,3 +1,5 @@
 #include "area048_13.h"
 
-INCLUDE_ASM(func_801F48DC);
+MATCH void func_801F48DC(void) {
+    Area_StartScriptedMove(FACING_DOWN);
+}

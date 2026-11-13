@@ -1,3 +1,5 @@
 #include "area052_13.h"
 
-INCLUDE_ASM(func_801F3894);
+MATCH void func_801F3894(void) {
+    AREA_STEP_PARTY_TO_BRIDGE(TO_COORD_HALF(102));
+}
