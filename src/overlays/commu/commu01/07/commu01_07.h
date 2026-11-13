@@ -34,7 +34,7 @@ extern u8 D_801D4E28;
 void func_801D3038(void);
 void func_801D36FC(s32 arg0, s32 arg1);
 u8   func_801D3AA0(u8 type, u8 index);
-void func_801D3984(s32 x, s32 y, s32 arg2);
+void func_801D3984(s32 x, s32 y, s32 bright);
 void func_801D3B0C(u8* arg0);
 void func_801D4694(u16* arg0, s16* arg1, s32 arg2, s32 arg3);
 void func_801D49C4(void);

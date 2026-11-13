@@ -100,11 +100,11 @@ MATCH void func_801D3594(s16 x, s16 y) {
 
 INCLUDE_ASM(func_801D36FC);
 
-MATCH void func_801D3984(s32 x, s32 y, s32 arg2) {
+MATCH void func_801D3984(s32 x, s32 y, s32 bright) {
     POLY_F3* poly;
     u8       colour;
 
-    COMMU_DRAW_CURSOR_TRIANGLE(x, y, arg2);
+    COMMU_DRAW_CURSOR_TRIANGLE(x, y, bright);
 }
 
 MATCH u8 func_801D3A48(u8 arg) {
