@@ -6,7 +6,6 @@
 /* PS1 scratchpad RAM: 0x1F800000-0x1F8003FF. Offsets are byte offsets. */
 #define SCRATCH_PAD                         0x1F800000u
 #define SCRATCH_PAD_SIZE                    0x400u
-#define SCRATCH_PAD_END                     0x1F8003FFu
 
 /* Address conversion: no memory access occurs. Add const and volatile to the
  * type directly, e.g. MEM_PTR(const volatile u32, address). */

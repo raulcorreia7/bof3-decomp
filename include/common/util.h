@@ -2,6 +2,7 @@
 #define COMMON_UTIL_H
 
 #include "types.h"
+#include "psyq/abs.h" /* ABS(a - b) recomputes the difference on the negative path; abs() negates it. */
 
 /* LO/HI read the little-endian halves of an object without copying. */
 
@@ -28,11 +29,6 @@
 #define BIT(n)                   (1 << (n))
 #define MIN(a, b)                (((a) < (b)) ? (a) : (b))
 #define MAX(a, b)                (((a) > (b)) ? (a) : (b))
-
-/* The same ABS as PsyQ <abs.h>. Not abs(): ABS(a - b) recomputes the difference on the negative path, abs() negates it. */
-#ifndef ABS
-#define ABS(x) (((x) >= 0) ? (x) : (-(x)))
-#endif
 
 /* A random value below the next power of two: the mask must be 2^n - 1. */
 #define RANDOM_MASK(mask) (rand() & (mask))
