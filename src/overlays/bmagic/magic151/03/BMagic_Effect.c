@@ -98,7 +98,29 @@ MATCH void func_801EF070(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF138);
+/* Installs the active party member as the work record, releases its fades, copies its template byte, loads its
+ * action-block palette and status, requests its facing script, then restores the previous record. */
+MATCH void func_801EF138(void) {
+    PartyMember* saved;
+
+    if (EMI_IsReady()) {
+        if (g_Battle.state & BATTLE_STATE_OVER) {
+            if (g_Battle.unk_EA[0] == g_Battle.active_battler) {
+                g_Battle.state &= ~BATTLE_STATE_OVER;
+            }
+        }
+        saved  = g_Task;
+        g_Task = &g_Game.members[g_Battle.active_battler];
+        GFX_FreePaletteFadeTarget(g_Task);
+        s_BattleBattlerTemplates[g_Battle.active_battler].unk_27 = g_Game.members[g_Battle.active_battler].unk_27;
+        GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
+        func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
+        GFX_UploadPaletteRows();
+        Actor_RequestScript((g_Task->facing + 4) & BYTE_MASK);
+        g_Task = saved;
+        saved->unk_03 += 1;
+    }
+}
 
 MATCH void func_801EF2A0(void) {
     PartyMember* saved_work;
