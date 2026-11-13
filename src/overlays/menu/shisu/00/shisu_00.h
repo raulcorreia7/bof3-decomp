@@ -39,6 +39,9 @@ extern char          g_SaveCardPortLabelSecond[];
 #define MENU_STATUS_TASK2_STATE_COUNT 3
 #define MENU_STATUS_TASK3_STATE_COUNT 3
 
+/* The height the status display settles above the ground it follows, in 16.16. */
+#define MENU_STATUS_HEIGHT_BIAS       (512 << 16)
+
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step byte. */
 /* D_801D96DC */

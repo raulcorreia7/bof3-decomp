@@ -119,7 +119,7 @@ MATCH void func_801D2E80(void) {
     s32  delta;
 
     target = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + D_801DA088 * 0xA00;
-    delta  = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + 0x02000000 - target;
+    delta  = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + MENU_STATUS_HEIGHT_BIAS - target;
     follow = &D_801DA0FC;
     *follow -= delta / 16;
     if (*follow < target) {
