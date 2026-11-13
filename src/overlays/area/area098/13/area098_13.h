@@ -99,7 +99,7 @@ void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
 s32  func_801F4E7C(void);
 
 void func_801F48E8(void* arg0, void* arg1, s32 arg2);
-void func_801F4BC0(void* slot);
+void func_801F4BC0(AreaBurstSlot* slot);
 void func_801F4FEC(AreaBurstSlot* slot);
 void func_801F4DBC(AreaBurstSlot* slot);
 void func_801F5580(s32 arg0);

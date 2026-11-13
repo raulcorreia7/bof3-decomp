@@ -23,7 +23,7 @@ MATCH void Scene_InitTaskArea(void) {
 MATCH void func_801F6FCC(void) {
     func_801F71B0(g_Task->timer);
     if (g_FrameCount & 0x1) {
-        func_801F75D8();
+        Area_AddSpark();
     }
     func_801F7748();
     g_Task->timer = (g_Task)->timer + 4;
@@ -36,7 +36,7 @@ MATCH void func_801F6FCC(void) {
 MATCH void func_801F7078(void) {
     func_801F71B0(0xFF);
     if (g_FrameCount & 0x1) {
-        func_801F75D8();
+        Area_AddSpark();
     }
     func_801F7748();
     if (g_ScriptVars[0] == 0x1F) {
@@ -81,7 +81,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
 
 #include "shared/Area_ClearWorkColumn.h"
 
-INCLUDE_ASM(func_801F75D8);
+#include "shared/Area_AddSpark.h"
 
 MATCH bool func_801F7748(void) {
     AreaSpark* spark;

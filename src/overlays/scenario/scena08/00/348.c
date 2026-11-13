@@ -332,7 +332,11 @@ INCLUDE_ASM(func_801F8534);
 
 INCLUDE_ASM(func_801F85F0);
 
-INCLUDE_ASM(func_801F8964);
+#include "shared/GFX_DrawProjectedDisc.h"
+
+MATCH void func_801F8964(Scena08Spark* spark) {
+    GFX_DRAW_PROJECTED_DISC(&spark->x, spark->fade, 0x20, 1);
+}
 
 MATCH void func_801F8AE8(void) {
     s32           index;

@@ -29,7 +29,8 @@ extern s8 (*D_801FE35C[])(void);
 u8 func_801F7C54(void);
 
 void func_801F7678(s32 arg0);
-void func_801F7AE4(void);
+/* func_801F7AE4 */
+void Area_AddSpark(void);
 
 void func_801F7DCC(s32 red, s32 green, s32 blue);
 void func_801F7EDC(void);

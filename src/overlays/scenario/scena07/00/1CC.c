@@ -1,4 +1,5 @@
 #include "scena07_00.h"
+
 #include "area/map.h"
 
 #if BOF3_USE_ASM
@@ -328,7 +329,11 @@ MATCH void func_801F81B4(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F81D4);
+#include "shared/GFX_DrawProjectedDisc.h"
+
+MATCH void func_801F81D4(u8* row) {
+    GFX_DRAW_PROJECTED_DISC((s32*)(row + 0x0C), row[3], 0x20, 1);
+}
 
 MATCH void func_801F8358(void) {
     u8* p;
