@@ -36,7 +36,23 @@ MATCH void func_801D0F34(void) {
     ((u8*)&g_SceneEventStep)[0] += 1;
 }
 
-INCLUDE_ASM(func_801D0F50);
+MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
+    SPRT* sprite;
+    s32   tpage;
+
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x2E : 0x1E;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = GFX_CURSOR(SPRT);
+    SetSprt(sprite);
+    setXY0(sprite, x, y);
+    sprite->u0 = row * 12 - 0x38;
+    sprite->v0 = 0xF0;
+    setWH(sprite, 0xC, 0xC);
+    sprite->clut = 0x7849;
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801D1048);
 
