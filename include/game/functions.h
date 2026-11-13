@@ -194,7 +194,7 @@ void  func_801C24D0(void);
 /* func_801C29A0 */
 bool  func_801C29A0(s8 tuning_delta);
 /* func_801C2BEC */
-s32   func_801C2BEC(void);
+void  func_801C2BEC(void);
 /* func_801C329C */
 void  func_801C329C(void);
 /* func_801C3598 */

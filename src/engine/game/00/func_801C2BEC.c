@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801C2BEC(void) {
+MATCH void func_801C2BEC(void) {
     u16       flags;
     GameSlots table;
     u8        index;
