@@ -19,9 +19,11 @@ extern u8 D_801F3C54[];
 extern u8 D_801F41D0[];
 extern u8 D_801F41D1[];
 
-extern u8 D_801F4260[];
+extern u8  D_801F4260[];
 /* The neighbour tables the cell lookup reads. */
-extern u8 D_801F4290[];
+extern u8  D_801F4290[];
+/* The spawn-row table the selection pass walks, one row set per mode. */
+extern u8* D_801F43D8[];
 
 /* The published field work row and the state byte the reset writes. */
 

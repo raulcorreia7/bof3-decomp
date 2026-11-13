@@ -19,6 +19,9 @@
 /* The payload's first words: the per-state handler pointers. */
 extern u8 D_801F3A90[];
 
+/* The quad's blue level by step, in units of 8. */
+extern u8 D_801F3AB0[];
+
 extern TriggerBox D_801F3B9C[2];
 
 /* The target's final handler. */
