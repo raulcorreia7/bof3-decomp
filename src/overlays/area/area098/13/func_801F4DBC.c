@@ -7,7 +7,7 @@ MATCH void func_801F4DBC(AreaBurstSlot* slot) {
     slot->fade     = 0;
     slot->speed    = 0;
     slot->unk_04   = 0x20;
-    slot->unk_0C   = g_Task->pos.x.fixed + ((rand() & BYTE_MASK) << 10) - 0x20000;
+    slot->unk_0C   = g_Task->pos.x.fixed + ((RANDOM_MASK(BYTE_MASK)) << 10) - 0x20000;
     slot->distance = g_Task->pos.y.fixed;
-    slot->unk_14   = g_Task->pos.z.fixed + ((rand() % 0x300) << 16);
+    slot->unk_14   = g_Task->pos.z.fixed + ((RANDOM_MOD(0x300)) << 16);
 }

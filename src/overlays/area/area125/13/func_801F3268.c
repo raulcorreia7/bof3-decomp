@@ -11,7 +11,7 @@ MATCH void func_801F3268(u8 count) {
         order[i] = i;
     }
     for (i = 0; i < 16; i++) {
-        a        = rand() & 0xF;
+        a        = RANDOM_MASK(0xF);
         b        = rand() & 0xF;
         tmp      = order[a];
         order[a] = order[b];

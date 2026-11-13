@@ -68,7 +68,7 @@ MATCH void func_801EEE50(void) {
             D_801EFA14[slot].header.mode  = 0;
             D_801EFA14[slot].unk_0B       = i;
             D_801EFA14[slot].target.party = (PartyMember*)task;
-            D_801EFA14[slot].arg.unk_09   = D_801EF9E8[i] + (rand() & 0x1) + 1;
+            D_801EFA14[slot].arg.unk_09   = D_801EF9E8[i] + (RANDOM_MASK(0x1)) + 1;
             g_Task->param.unk_0B++;
         }
     }

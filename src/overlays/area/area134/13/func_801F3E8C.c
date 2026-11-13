@@ -21,7 +21,7 @@ MATCH void func_801F3E8C(void) {
         func_80196070();
     } else {
         TASK_SET(actor);
-        *state              = D_801F5724[rand() & 0xF];
+        *state              = D_801F5724[RANDOM_MASK(0xF)];
         g_Task->header.mode = 2;
     }
 }

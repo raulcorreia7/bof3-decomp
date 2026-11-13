@@ -18,6 +18,7 @@
 #include "scenario/effect.h"
 #include "scenario/runtime.h"
 #include "slus/facing.h"
+#include <abs.h>
 #include <strings.h>
 
 extern s8          D_801448EA[1];
@@ -149,7 +150,6 @@ void        func_801F1E74(void);
 void        func_801F1F9C(void);
 void        func_801F2020(void);
 void        func_801F228C(void);
-int         abs(int); /* SDK libc, no staged abs.h */
 
 extern s32 D_801457AC;
 

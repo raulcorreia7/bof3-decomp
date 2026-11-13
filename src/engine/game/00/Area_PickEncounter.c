@@ -8,7 +8,7 @@ MATCH s32 Area_PickEncounter(void) {
     u8  limit;
     s32 masked;
 
-    limit  = (rand() & 0xF) + 1;
+    limit  = (RANDOM_MASK(0xF)) + 1;
     sum    = 0;
     base   = MEM_PTR(u8, 0x800E4000u);
     index  = 0;

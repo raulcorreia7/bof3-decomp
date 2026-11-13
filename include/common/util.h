@@ -4,6 +4,10 @@
 #include "types.h"
 #include "psyq/abs.h" /* ABS(a - b) recomputes the difference on the negative path; abs() negates it. */
 
+/* ABS comes from PsyQ <abs.h>. Not abs(): ABS(a - b) recomputes the difference on the
+ * negative path, abs() negates the computed value. */
+#include <abs.h>
+
 /* LO/HI read the little-endian halves of an object without copying. */
 
 /* The byte value that means no slot, index or result in a byte field. It is
@@ -31,23 +35,23 @@
 #define MAX(a, b)                (((a) > (b)) ? (a) : (b))
 
 /* A random value below the next power of two: the mask must be 2^n - 1. */
-#define RANDOM_MASK(mask) (rand() & (mask))
+#define RANDOM_MASK(mask)        (rand() & (mask))
 
 /* A random value from 0 to count - 1; rand() % count, which compiles apart from a mask. */
-#define RANDOM_MOD(count) (rand() % (count))
+#define RANDOM_MOD(count)        (rand() % (count))
 
 /* A percentage roll from 0 to 99, tested against a chance in percent. */
-#define RANDOM_PERCENT()  RANDOM_MOD(100)
+#define RANDOM_PERCENT()         RANDOM_MOD(100)
 
 /* LO/HI name the little-endian half or byte of the object: the expansion is
  * the same cast-and-dereference expression the retail code compiles. The
  * argument stays addressable, so these are lvalues. */
-#define LOB(x)            (*(s8*)&(x))
-#define LOBU(x)           (*(u8*)&(x))
-#define LOH(x)            (*(s16*)&(x))
-#define LOHU(x)           (*(u16*)&(x))
-#define HIH(x)            (((s16*)&(x))[1])
-#define LOW(x)            (*(s32*)&(x))
-#define LOWU(x)           (*(u32*)&(x))
+#define LOB(x)                   (*(s8*)&(x))
+#define LOBU(x)                  (*(u8*)&(x))
+#define LOH(x)                   (*(s16*)&(x))
+#define LOHU(x)                  (*(u16*)&(x))
+#define HIH(x)                   (((s16*)&(x))[1])
+#define LOW(x)                   (*(s32*)&(x))
+#define LOWU(x)                  (*(u32*)&(x))
 
 #endif

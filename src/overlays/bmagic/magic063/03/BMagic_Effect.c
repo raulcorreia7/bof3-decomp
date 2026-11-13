@@ -80,7 +80,7 @@ MATCH void func_801EF1C8(void) {
             D_801F0454[off + 1]                  = 0;
             D_801F0454[off + 4]                  = i;
             FIELD(PartyMember*, D_801F0470, off) = task;
-            val                                  = ((i >> 1) & 0x70) + (rand() & 0xF) + 1;
+            val                                  = ((i >> 1) & 0x70) + (RANDOM_MASK(0xF)) + 1;
             D_801F0454[off + 10]                 = val;
             D_801F0454[off + 8]                  = 0x40 - val;
             g_Task->param.unk_0B++;
