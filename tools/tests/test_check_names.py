@@ -280,3 +280,24 @@ def test_a_diff_that_only_uses_an_existing_name_passes(
     git("commit", "-qam", "use the existing name")
     monkeypatch.chdir(tmp_path)
     assert check_names.main(["--diff", "HEAD~1"]) == 0
+
+
+def test_a_diff_that_deletes_a_file_does_not_crash(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/a.c").write_text("void f(void);\n")
+    (tmp_path / "src/gone.c").write_text("void g(void);\n")
+    git("add", ".")
+    git("commit", "-qm", "base")
+    git("rm", "-q", "src/gone.c")
+    git("commit", "-qm", "delete a file")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 0
+    assert "no new rejected names" in capsys.readouterr().out
