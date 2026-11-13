@@ -8,4 +8,6 @@
 
 extern u16 D_801F33B4[];
 
+extern char D_801F2C04[];
+
 #endif

@@ -258,4 +258,23 @@ MATCH void func_801FC280(void) {
     Party_LoadPalettes();
 }
 
-INCLUDE_ASM(func_801FC328);
+MATCH void func_801FC328(void) {
+    u8 ids[PARTY_SLOT_COUNT];
+    u8 slot;
+    u8 count;
+
+    slot  = 0;
+    count = 0;
+    for (; slot < PARTY_SLOT_COUNT; slot++) {
+        if (g_Game.members[slot].header.flags & PARTY_MEMBER_FLAG_OCCUPIED) {
+            count++;
+        }
+        ids[slot] = g_Game.members[slot].chr.character_id;
+    }
+    g_Game.party_size = count;
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        if (ids[slot] != CHAR_ID_RYU_ADULT) {
+            Party_RemoveMember(ids[slot]);
+        }
+    }
+}

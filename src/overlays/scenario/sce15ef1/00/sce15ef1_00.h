@@ -27,6 +27,21 @@ extern Callback g_SceneEntityDispatch[];
 
 extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
 
+/* The screen-capture size for one row of the scene's capture table. */
+typedef struct CaptureSize {
+    s16 w;
+    s16 h;
+    s16 unk_04[2];
+} CaptureSize;
+
+ASSERT_SIZE(CaptureSize, 8);
+
+extern CaptureSize D_801D3940[];
+extern u16         D_801D40A8;
+extern u8          D_801D40AC;
+extern u32         D_801D40B0;
+extern u32         D_801D40B4;
+
 extern WorldSpin g_WorldSpins[];
 
 void func_801D147C(void* arg0, s32 arg1, s32 arg2);
