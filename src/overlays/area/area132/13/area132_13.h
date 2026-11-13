@@ -15,6 +15,9 @@ extern Callback D_801F3DF8[];
 extern Callback D_801F3E00[];
 extern u8*      D_801F4A88;
 
+/* The effect row's draw and step; the update passes the row it advances. */
+void func_801F3560(u8* effect);
+
 void func_801F37A4(u8* effect);
 u8*  func_801F3800(void);
 u8   func_801F38B0(void);

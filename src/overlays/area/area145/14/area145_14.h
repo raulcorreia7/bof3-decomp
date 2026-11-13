@@ -4,6 +4,8 @@
 /* The world03/area145/14 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
+#define GAME_SCRATCH_BASE_SCALAR
+#include "game/spawn.h"
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
@@ -28,6 +30,9 @@ extern PartyMemberMessages g_PartyMemberMessages[3];
 void func_801F332C(u8* first, u8* second);
 /* The draw step that reads the three-word work position. */
 void func_801F3980(u32* pos);
+
+/* Claims an actor slot of type 0x3F, seeds its two points and returns 1 when no slot is free. */
+u8 func_801F5190(s32 x1, s32 y1, s32 x2, s32 y2);
 
 /* The two corner cells of each of the four areas the step covers. */
 typedef struct CellBox {

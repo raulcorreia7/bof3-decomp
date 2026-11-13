@@ -109,7 +109,7 @@ typedef struct ActorSlot {
     s32        unk_14;       /* 0x14 */
     s32        counter_18;   /* 0x18 */
     s32        counter_1C;   /* 0x1C */
-    u8         pad_20[4];    /* 0x20-0x23 */
+    s32        unk_20;       /* 0x20 - seeded with 0x500000 */
     u8         unk_24;       /* 0x24 */
     u8         pad_25[2];    /* 0x25-0x26 */
     u8         unk_27;       /* 0x27 */
@@ -135,6 +135,7 @@ ASSERT_OFFSET(ActorSlot, layer, 0x09);
 ASSERT_OFFSET(ActorSlot, unk_2C, 0x2C);
 ASSERT_OFFSET(ActorSlot, scene_step, 0x0C);
 ASSERT_OFFSET(ActorSlot, selection, 0x10);
+ASSERT_OFFSET(ActorSlot, unk_20, 0x20);
 ASSERT_OFFSET(ActorSlot, pos, 0x34);
 ASSERT_OFFSET(ActorSlot, camera_angle, 0x64);
 

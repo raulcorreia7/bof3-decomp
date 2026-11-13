@@ -41,8 +41,6 @@ void func_801F5380(void);
 void func_801F595C(s32 value, s32 flag);
 void func_801F5B90(void);
 
-/* The value of area update step in the shared Area_Update body. */
-
 s32 func_801A79A4(s32, s32);
 
 u8 func_801F5028(s32 x, s32 y, u8 dir);
