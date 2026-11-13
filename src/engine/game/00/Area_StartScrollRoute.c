@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801C601C(s8 route_index) {
+/* func_801C601C */
+MATCH void Area_StartScrollRoute(s8 route_index) {
     s32 first;
     s16 dist;
 

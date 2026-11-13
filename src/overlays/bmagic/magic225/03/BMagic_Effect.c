@@ -177,7 +177,8 @@ MATCH void func_801EFE50(void) {
 
 INCLUDE_ASM(func_801EFEE8);
 
-MATCH void func_801F0140(void) {
+/* func_801F0140 */
+MATCH void BMagic_GetScaleX(void) {
     s32 value;
 
     Actor_StepAnimLoop();
@@ -195,7 +196,8 @@ MATCH void func_801F0140(void) {
     }
 }
 
-MATCH void func_801F021C(void) {
+/* func_801F021C */
+MATCH void BMagic_SetScaleX(void) {
     Actor_StepAnimLoop();
     g_Task->scale.x += 0x800;
     g_Task->scale.y += 0x800;

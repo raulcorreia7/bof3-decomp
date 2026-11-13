@@ -80,7 +80,7 @@ MATCH void func_801F0010(void) {
     PartyMember* reset;
 
     Battle_ProjectRange();
-    func_801F0BA8((RANDOM_MASK(3)) | 0x18);
+    BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -108,7 +108,7 @@ MATCH void func_801F0104(void) {
     PartyMember* task;
 
     Battle_ProjectRange();
-    func_801F0BA8((RANDOM_MASK(3)) | 0x18);
+    BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -140,7 +140,7 @@ MATCH void func_801F01F8(void) {
     } else {
         value2 = (RANDOM_MASK(3)) | 0x18;
     }
-    func_801F0BA8(value2);
+    BMagic_SetXFixed(value2);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -176,7 +176,7 @@ INCLUDE_ASM(func_801F038C);
 
 INCLUDE_ASM(func_801F050C);
 
-INCLUDE_ASM(func_801F0BA8);
+INCLUDE_ASM(BMagic_SetXFixed);
 
 /* func_801F0DC0 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

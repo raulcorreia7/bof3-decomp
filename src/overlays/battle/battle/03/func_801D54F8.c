@@ -8,7 +8,7 @@ MATCH u8 func_801D54F8(void) {
     count      = 0u;
     last_index = 0u;
     for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
-        if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_Game.members[index], 0x800u)) && (g_Game.members[index].counter_137 == 5u)) {
+        if ((Battle_GetActionLock(index) == 0u) && (HAS_STATUS(g_Game.members[index], 0x800u)) && (g_Game.members[index].counter_137 == 5u)) {
             last_index = index;
             count += 1u;
             g_Game.members[index].counter_137   = 0u;
@@ -23,14 +23,14 @@ MATCH u8 func_801D54F8(void) {
         u32 event_id;
         u8* text;
 
-        func_801D9484();
+        Battle_OpenPanel();
         event_id = 0x2Cu;
         if (count == 1u) {
             Battle_SetTextPartyName(last_index);
             event_id = 0x2Bu;
         }
         text = Message_GetText(event_id);
-        func_801DE560(2u, 0u, 0u, 45u, text);
+        Battle_QueueEvent(2u, 0u, 0u, 45u, text);
         return true;
     }
 

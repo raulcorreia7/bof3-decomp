@@ -5,7 +5,7 @@ MATCH void func_8009DD50(void) {
     BattlePanelTask* panel;
 
     if (g_Game.members[g_Battle.active_battler].chr.character_id == CHAR_ID_WHELP) {
-        func_800A3F28();
+        Battle_MarkDamageApplied();
         ((BattlePanelTask*)g_Battle.target_record)->x.signed_half = 0x270F;
     } else {
         value                                                     = func_800A4294(3) - ENEMY_COMBATANT(g_Battle.target).stats.defense;

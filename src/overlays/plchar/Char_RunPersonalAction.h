@@ -35,7 +35,7 @@ MATCH void Char_RunPersonalAction(void) {
             } else {
                 x   = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;
                 y   = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction_08 * 2] * 2;
-                hit = func_801BDE14(x, y, 0);
+                hit = Actor_FindInRange(x, y, 0);
                 if (hit != slot) {
                     g_Actors[hit].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));

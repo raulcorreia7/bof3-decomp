@@ -63,17 +63,17 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
         if (i == task->unk_0B) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
             func_801AEA80((u16)(left + 6), (u16)(top + i * 13 + 85), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_SELECTED, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_SELECTED, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
         } else if (i == task->unk_0A) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
             func_801AEA80((u16)(left + 6), (u16)(top + i * 13 + 85), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_NORMAL, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_NORMAL, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
         } else {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_NORMAL, func_801AF20C(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_NORMAL, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
         }
     }
 

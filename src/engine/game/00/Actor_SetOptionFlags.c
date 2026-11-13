@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801A4990(u8* script) {
+/* func_801A4990 */
+MATCH void Actor_SetOptionFlags(u8* script) {
     u8 mode;
 
     g_Task->option_flags = script[0];

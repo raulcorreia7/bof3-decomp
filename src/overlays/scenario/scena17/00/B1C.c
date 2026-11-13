@@ -599,7 +599,7 @@ MATCH void Scene_EnterSaveMenu(void) {
         /* FAKE: retail passes the index as a word; the header's u8 parameter forces an andi. */
         ((void (*)(void*, s32))SYS_ClearFlag)(g_Scenario2Flags + 0x68, i);
     }
-    func_801C16B8();
+    Char_RebuildPartyStats();
     g_GameAreaId = AREA_ID_DRAGNIER_SURFACE;
     Game_ClearScriptActive();
     g_Game.members[0].pos.x.fixed = TO_COORD(15);

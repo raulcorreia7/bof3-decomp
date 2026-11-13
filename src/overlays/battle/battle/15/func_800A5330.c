@@ -42,7 +42,7 @@ NON_MATCHING void func_800A5330(void) {
             g_Battle.gene_count--;
             gene                                                           = g_Battle.genes[g_Battle.gene_count];
             D_800B7070[gene / GENE_GRID_COLUMNS][gene % GENE_GRID_COLUMNS] = 1;
-            func_800A82F8();
+            Battle_SetGeneCount();
         } else {
             D_80148597           = 1;
             g_BattleMessageState = 2;
@@ -65,7 +65,7 @@ NON_MATCHING void func_800A5330(void) {
                 *cell                               = 0;
                 g_Battle.genes[g_Battle.gene_count] = g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
                 g_Battle.gene_count++;
-                func_800A82F8();
+                Battle_SetGeneCount();
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                 if (g_Battle.gene_count == GENE_PICK_MAX) {
                     g_Battle.cursor.gene.row = -1;

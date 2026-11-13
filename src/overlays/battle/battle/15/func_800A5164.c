@@ -20,7 +20,7 @@ MATCH void func_800A5164(void) {
         i = i + 1;
     } while ((i & BYTE_MASK) < 3U);
 
-    func_800A82F8();
+    Battle_SetGeneCount();
     g_BattlePanelMode = 2;
     BATTLE_ACTIVE_ROW->u.turn.action_flags.volatile_value |= COMBATANT_FLAG_ABILITY_ALT_POSE;
     counter  = (u8*)&g_Battle.ui_state;

@@ -28,7 +28,7 @@ MATCH void func_801B9210(void) {
     g_Task->direction_08 = saved ^ 0x4;
     mode                 = func_801B9598();
     if (mode == 1 || mode == 3) {
-        if ((func_801BDF08() << 24) != 0) {
+        if ((Area_GetActorFacingStepX() << 24) != 0) {
             g_Task->timer = 0;
             Actor_ClearVelocity();
         } else {
@@ -39,7 +39,7 @@ MATCH void func_801B9210(void) {
     } else {
         Actor_ClearVelocity();
     }
-    func_801C2E34(g_Task->param.unk_0B);
+    Char_SetCharacterId(g_Task->param.unk_0B);
     g_Task->direction_08 = saved;
     g_Task->unk_0A       = 8;
     Actor_RequestScript(g_Task->direction_08);

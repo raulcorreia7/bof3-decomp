@@ -10,7 +10,7 @@ NON_MATCHING void func_8009E248(void) {
     u16 hp;
 
     id = g_Battle.active_battler;
-    if (!(func_800A3A10(id, g_Battle.target) & BYTE_MASK)) {
+    if (!(Battle_PickAbility(id, g_Battle.target) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
             if (!(g_Game.members[g_Battle.target].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {
                 hp = g_Game.members[g_Battle.target].chr.hp;

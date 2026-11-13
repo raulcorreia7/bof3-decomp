@@ -14,7 +14,7 @@ MATCH void Scene_StartShopSave(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            func_801C16B8();
+            Char_RebuildPartyStats();
             SND_PauseBGM(g_SndBGMId);
             SND_StartXAStream(0, 1);
             g_SceneEventStep = 2;
@@ -82,7 +82,7 @@ MATCH void Scene_StartShopSave(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            func_801C16B8();
+            Char_RebuildPartyStats();
             SND_PauseBGM(g_SndBGMId);
             SND_StartXAStream(0, 1);
             g_SceneEventStep = 22;

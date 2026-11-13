@@ -2,8 +2,9 @@
 
 /* lifted draft, best score 46.74%; semantics unverified
  */
+/* func_80154ABC */
 #ifdef NON_MATCHING
-NON_MATCHING s32 func_80154ABC(s32 x, s32 y, u8 mode) {
+NON_MATCHING s32 Area_GetHeight(s32 x, s32 y, u8 mode) {
     s8   sp[4];
     s32  tmp0;
     s32  tmp1;
@@ -126,5 +127,5 @@ block_23:
     return (s16)(val3 >> 0x10);
 }
 #else
-INCLUDE_ASM(func_80154ABC);
+INCLUDE_ASM(Area_GetHeight);
 #endif

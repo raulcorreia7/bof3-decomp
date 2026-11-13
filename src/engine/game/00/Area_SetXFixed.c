@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801A253C(Actor* entity) {
+/* func_801A253C */
+MATCH void Area_SetXFixed(Actor* entity) {
     s32    start_x;
     Actor* work;
     u8     mode;

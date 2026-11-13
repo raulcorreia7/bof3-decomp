@@ -59,7 +59,7 @@ NON_MATCHING void func_80167428(void) {
         FIELD(s8, (g_Task), 0x2u) = 0;
         return;
     }
-    if (!(func_801B59B4() & BYTE_MASK)) {
+    if (!(Game_GetInput() & BYTE_MASK)) {
         FIELD(s8, g_Game.current, 0x11Cu) = 3;
         tmp9                              = g_Task;
         FIELD(u8, tmp9, 0x9u)             = 0U;
@@ -113,7 +113,7 @@ NON_MATCHING void func_80167428(void) {
             func_801C4C48();
             tmp11                  = g_Task;
             FIELD(u8, tmp11, 0x9u) = (u8)(FIELD(u8, tmp11, 0x9u) - 1);
-            func_801B0DFC();
+            Actor_UpdateMovement();
             val4 = 2;
         }
     } else {

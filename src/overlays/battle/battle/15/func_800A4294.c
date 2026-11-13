@@ -18,7 +18,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
     mod          = 100;
     element_mask = kind_mask & ELEM_ALL;
     if ((kind_mask & (ELEM_FIRE | ELEM_FROST | ELEM_ELECTRIC | ELEM_EARTH | ELEM_WIND)) != 0u) {
-        mod = func_800A2AE0((*(u8*)&g_Battle.target), element_mask);
+        mod = Battle_GetFireResistance((*(u8*)&g_Battle.target), element_mask);
     }
     mod     = (((base / input_kind) * D_800B498C[RANDOM_MASK(7)]) * mod) / 10000;
     battler = (*(u8*)&g_Battle.target);

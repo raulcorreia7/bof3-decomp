@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AFFD8(const void* world_position, void* screen_xy, void* projection) {
+/* func_801AFFD8 */
+MATCH void Game_ProjectWorldPoint(const void* world_position, void* screen_xy, void* projection) {
     VECTOR  projected;
     SVECTOR rot;
     long    flag;

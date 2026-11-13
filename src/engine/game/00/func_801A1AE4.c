@@ -17,8 +17,8 @@ MATCH bool func_801A1AE4(Actor* arg) {
         return 1;
     }
 
-    if (func_801BDE14(pos_x, pos_y, g_Task->state_70.byte) == -1) {
-        return func_801BE0C0(x, y, g_Task->state_70.byte) != -1;
+    if (Actor_FindInRange(pos_x, pos_y, g_Task->state_70.byte) == -1) {
+        return Game_GetPartySize(x, y, g_Task->state_70.byte) != -1;
     }
 
     return 1;

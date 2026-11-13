@@ -4,7 +4,7 @@ MATCH s32 func_801B43D0(s32 x, s32 y, s32 dir) {
     s8  slot;
     s32 diff;
 
-    slot = func_801BDE14(x, y, g_Task->state_70.byte);
+    slot = Actor_FindInRange(x, y, g_Task->state_70.byte);
     if (slot != -1) {
         if ((g_Actors[slot].unk_06 != 8) && (g_Actors[slot].unk_7C != 0xFFFF)) {
             diff = COORD_INT(g_Actors[slot].pos.z);

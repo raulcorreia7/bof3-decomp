@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801C2E34(u8 index) {
+/* func_801C2E34 */
+MATCH void Char_SetCharacterId(u8 index) {
     GameMenuSlots table;
     u8*           entry;
     s32           record_index1;

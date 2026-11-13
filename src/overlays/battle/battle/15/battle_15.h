@@ -31,7 +31,7 @@
 
 /* Entry table at D_8014688E with its parallel id byte table at D_8014691A:
  * thirty records of stride 0x98, kind 7 marks a live entry
- * (func_800AC754, func_800AC7D0). */
+ * (Battle_FindActorEntry, func_800AC7D0). */
 #define BATTLE_ENTRY_STRIDE            0x98
 #define BATTLE_ENTRY_COUNT             30
 /* The kind byte of a live entry; the other kinds are unproven. */

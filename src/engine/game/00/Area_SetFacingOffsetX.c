@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801C5DFC(u8 route_index) {
+/* func_801C5DFC */
+MATCH void Area_SetFacingOffsetX(u8 route_index) {
     s16 step;
     s32 scale;
     s32 x;

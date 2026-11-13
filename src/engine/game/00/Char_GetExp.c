@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801ADDD4(s32 char_id) {
+/* func_801ADDD4 */
+MATCH void Char_GetExp(s32 char_id) {
     u8  new_level;
     u8  current_level;
     u8  level;

@@ -4,7 +4,8 @@
  * header, the two signed words, the id byte and the two halfword fields.
  */
 /* The head stays unprototyped: retail callers pass whole words and the callee narrows them itself. */
-MATCH s32 func_8015CB18(id, step, selection, x, y)
+/* func_8015CB18 */
+MATCH s32 Actor_ClaimSlot(id, step, selection, x, y)
 u16       id;
 s8        step;
 s8        selection;

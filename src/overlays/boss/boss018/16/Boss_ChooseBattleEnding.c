@@ -27,11 +27,11 @@ block_7:
     func_801DDF00();
     goto block_11;
 block_8:
-    func_800C2A40();
+    Boss_SetCharacterId();
     var_v0_2 = 0x3A;
     goto block_10;
 block_9:
-    func_800C2A40();
+    Boss_SetCharacterId();
     var_v0_2 = 0x1C;
 block_10:
     g_SceneState.step_05 = var_v0_2;

@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s32 func_801BDF08(void) {
+/* func_801BDF08 */
+MATCH s32 Area_GetActorFacingStepX(void) {
     Actor* work;
     Actor* rec;
     s32    step_x;

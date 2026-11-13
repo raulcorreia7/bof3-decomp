@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s32 func_8019C344(s32 x, s32 y) {
+/* func_8019C344 */
+MATCH s32 Area_GetVx(s32 x, s32 y) {
     /* FAKE: retail homes the x high half in $s4. */
     FAKE_REG(s32, xh, "s4");
     /* FAKE: retail homes the y high half in $s1. */
@@ -22,7 +23,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
             goto fail; /* miss: return 0 */
         }
         pos = (xh << 16) | 0x8000;
-        func_80154ABC(pos, y, g_Task->direction_08);
+        Area_GetHeight(pos, y, g_Task->direction_08);
         if (SP_REF(u8, 0x0u) != 0) {
             if (COORD_INT(g_Task->pos.z) < Area_SampleHeight(pos, y)) {
                 return 1;
@@ -38,7 +39,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
             goto fail; /* miss: return 0 */
         }
         pos = (yh << 16) | 0x8000;
-        func_80154ABC(x, pos, g_Task->direction_08);
+        Area_GetHeight(x, pos, g_Task->direction_08);
         if (SP_REF(u8, 0x0u) != 0) {
             if (COORD_INT(g_Task->pos.z) < Area_SampleHeight(x, pos)) {
                 return 1;

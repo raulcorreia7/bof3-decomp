@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s8 func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode) {
+/* func_801BE0C0 */
+MATCH s8 Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode) {
     s16 v;
     s32 a1v;
     /* FAKE: loop bound in the retail register. */

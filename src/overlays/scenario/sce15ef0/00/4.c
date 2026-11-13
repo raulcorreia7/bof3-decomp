@@ -173,7 +173,7 @@ MATCH void func_801D1A20(s32* pos, s16 origin, s32 flags) {
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(pos, &screen);
     size.vx = size.vy = origin;
-    func_801AFFD8(pos, &size, &scale);
+    Game_ProjectWorldPoint(pos, &size, &scale);
     scale.vx += g_FrameCount & 1;
     point.vx = screen.vx + scale.vx;
     point.vy = screen.vy;

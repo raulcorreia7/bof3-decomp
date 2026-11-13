@@ -156,8 +156,9 @@ void         func_80153DE8(void);
 extern void  Area_RefreshCellGrid(void);
 /* func_8015477C */
 s16          Area_SampleHeight(s32 x, s32 y);
+/* Area_GetHeight */
 /* func_80154ABC */
-s32          func_80154ABC(s32 x, s32 y, u8 mode);
+s32          Area_GetHeight(s32 x, s32 y, u8 mode);
 /* func_80154ED0 */
 extern void  Area_EnableHeightOffset(void);
 /* func_80154F28 */
@@ -214,7 +215,8 @@ void         Area_DrawGouraudQuad(u32* record);
 void         Area_IndexCells(void);
 /* func_80158C80 */
 void         Menu_UpdatePanelTasks(void);
-void         func_80158E20(void);
+/* func_80158E20 */
+void         Menu_ClearPanel(void);
 /* func_80158DB8 */
 u8           Menu_OpenPanelTask(u8 panel_index, u8 handler_index);
 /* func_80158E50 */
@@ -227,8 +229,9 @@ void         func_8015B4B0(void* matrix);
 s8           Actor_FindScriptSlot(s32 code);
 /* func_8015A944 */
 void         func_8015A944(void);
+/* SYS_InitScratchpad */
 /* func_8015AC8C */
-void         func_8015AC8C(u8* panel);
+void         SYS_InitScratchpad(u8* panel);
 /* func_8015B580 */
 void         SYS_SetFlag(void* bits, u8 bit_index);
 /* func_8015B5A8 */

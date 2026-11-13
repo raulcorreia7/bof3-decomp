@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801C16B8(void) {
+/* func_801C16B8 */
+MATCH void Char_RebuildPartyStats(void) {
     Character* record;
     s32        count;
     s32        dst_off;

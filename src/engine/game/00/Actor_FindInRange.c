@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s8 func_801BDE14(s32 pos_x, s32 pos_y, s32 range_mode) {
+/* func_801BDE14 */
+MATCH s8 Actor_FindInRange(s32 pos_x, s32 pos_y, s32 range_mode) {
     s16 kind;
     s32 index;
     s32 off;

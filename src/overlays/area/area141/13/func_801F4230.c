@@ -8,7 +8,7 @@ MATCH void func_801F4230(Actor* actor) {
             break;
         case 0xC001:
             Game_SetScriptActive();
-            func_801C16B8();
+            Char_RebuildPartyStats();
             g_SceneEventMode = 0x34;
             g_SceneEventStep = 0;
             break;

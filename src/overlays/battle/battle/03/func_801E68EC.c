@@ -2,7 +2,7 @@
 
 MATCH void func_801E68EC(void) {
     if (Actor_StepAnimLoop() & BYTE_MASK) {
-        func_801E5988();
+        Effect_Reset();
         return;
     }
     Area_AddActor();

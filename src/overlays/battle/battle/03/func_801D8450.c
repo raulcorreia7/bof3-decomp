@@ -21,7 +21,7 @@ MATCH void func_801D8450(u32 panel_index) {
     r     = PSX_COLOR_R(color) << 3;
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;
-    func_801D9C80(x, (y + 2), 5, 1);
+    Battle_DrawWindowTile(x, (y + 2), 5, 1);
     func_801D9AB4(x, y, 10, 1);
     func_801D9AB4(x, (y + 0x11), 11, 1);
     func_801DA5A8((x + 2), (y + 2), (x + 0x25), (y + 2), r, g, b);

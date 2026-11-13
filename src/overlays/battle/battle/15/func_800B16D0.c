@@ -6,7 +6,7 @@ MATCH void func_800B16D0(void) {
     Battle_DrawCommandList();
     value = g_MenuCurrentPanel->pos.x;
     if (value >= 0x143) {
-        func_80158E20();
+        Menu_ClearPanel();
     } else {
         g_MenuCurrentPanel->pos.x = (value + 32);
     }

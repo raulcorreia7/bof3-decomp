@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH bool func_801B59B4(void) {
+/* func_801B59B4 */
+MATCH bool Game_GetInput(void) {
     s32 kind;
 
     kind = g_Game.input & INPUT_DIRECTIONAL;

@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s32 func_801AF20C(u8* command_stream) {
+/* func_801AF20C */
+MATCH s32 Game_ReadCommand(u8* command_stream) {
     s32 command;
     s32 count;
     s32 index;

@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH u32 func_801C6FD4(s32 map_column, s32 map_row) {
+/* func_801C6FD4 */
+MATCH u32 Area_GetWidth(s32 map_column, s32 map_row) {
     u16 row;
     s32 index;
     u16 tile;

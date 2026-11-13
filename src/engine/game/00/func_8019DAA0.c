@@ -15,7 +15,7 @@ MATCH s32 func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count) {
     Area_ProjectPoint(spawn_record, &screen);
     size[0] = spawn_offset;
     size[1] = spawn_offset;
-    func_801AFFD8(spawn_record, size, size);
+    Game_ProjectWorldPoint(spawn_record, size, size);
 
     setXY4(primitive, (u16)screen.vx - ((s16)size[0] >> 1), (u16)screen.vy - ((s16)size[1] >> 1), ((u16)screen.vx - ((s16)size[0] >> 1)) + size[0], (u16)screen.vy - ((s16)size[1] >> 1),
            (u16)screen.vx - ((s16)size[0] >> 1), ((u16)screen.vy - ((s16)size[1] >> 1)) + size[1], ((u16)screen.vx - ((s16)size[0] >> 1)) + size[0], ((u16)screen.vy - ((s16)size[1] >> 1)) + size[1]);
