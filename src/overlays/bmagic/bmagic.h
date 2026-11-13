@@ -371,8 +371,14 @@ void Effect_DrawSparkleRays(u16 angle, u16 radius);
 void Effect_DrawSparkleWedges(u16 angle, u16 radius);
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
+/* Defined in Effect_SetActorMatrixQuarterRoll.h, which a member includes after its first call. */
+void Effect_SetActorMatrixQuarterRoll(void);
 /* Defined in Effect_DrawScreenFade.h, which a member includes after its first call. */
 void Effect_DrawScreenFade(void);
+/* Defined in Effect_DrawSparkleDisc.h, which a member includes after its first call. */
+void Effect_DrawSparkleDisc(void);
+/* Defined in Effect_DrawTexturedQuad.h, which a member includes after its first call. */
+void Effect_DrawTexturedQuad(void);
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
     do {                                          \

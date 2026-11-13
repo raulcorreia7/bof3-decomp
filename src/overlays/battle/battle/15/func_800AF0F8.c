@@ -48,11 +48,11 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, s32 base, u8 
                     }
                 }
                 if (values[best] != 0) {
-                    values[best]                   = 0;
-                    packet                         = FIELD(u8*, D_80142CC4, offset);
-                    word                           = (u32*)packet;
-                    address                        = (u32)base + best * slot;
-                    *word                          = (*word & 0xFF000000) | (address & 0xFFFFFF);
+                    values[best] = 0;
+                    packet       = FIELD(u8*, D_80142CC4, offset);
+                    word         = (u32*)packet;
+                    address      = (u32)base + best * slot;
+                    setaddr(word, address);
                     FIELD(u8*, D_80142CC4, offset) = (u8*)address;
                 }
                 claim += 1;

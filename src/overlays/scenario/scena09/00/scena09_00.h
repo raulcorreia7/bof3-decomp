@@ -19,9 +19,25 @@ extern u16      D_80146876;
 extern u32      D_801F6C00;
 /* D_801FE384 */
 extern Callback g_SceneEntityDispatch[];
-extern Callback D_801FE3E0[];
-extern Callback D_801FE3EC[];
-extern u8       D_801FE430[4];
+
+/* The triangle rows func_801F7424 offsets the projected point by: the second
+ * and third vertex relative to the first, in screen space. */
+typedef struct SceneTriangleOffset {
+    u16 dx1;
+    u16 dy1;
+    u16 dx2;
+    u16 dy2;
+} SceneTriangleOffset;
+
+ASSERT_SIZE(SceneTriangleOffset, 8);
+ASSERT_OFFSET(SceneTriangleOffset, dy1, 0x02);
+ASSERT_OFFSET(SceneTriangleOffset, dx2, 0x04);
+ASSERT_OFFSET(SceneTriangleOffset, dy2, 0x06);
+
+extern SceneTriangleOffset D_801FE38C[];
+extern Callback            D_801FE3E0[];
+extern Callback            D_801FE3EC[];
+extern u8                  D_801FE430[4];
 
 /* func_801F7574 */
 void Scene_ClearWorkRows(void);

@@ -15,6 +15,9 @@
     tools/symbol.py accesses NAME [--jsonl]
     tools/symbol.py records [--jsonl]
     tools/symbol.py values --scan [--jsonl]
+    tools/symbol.py signatures [FUNC|--all] [--jsonl]
+    tools/symbol.py extents [IMAGE] [--jsonl]
+    tools/symbol.py homes [--jsonl]
 
 `add` writes one row of config/symbols.toml in address order. The image is a folder under
 `config/` that holds a `splat.yaml`; any other id is refused.
@@ -95,6 +98,39 @@ form the conventions prescribe. `--jsonl` writes one object per site with the fi
 role, family, existing constant, rewritten form and confidence (`typed` when the declaration proves
 the role). A form rewrite keeps the value and its suffix, so it never changes the bytes.
 
+`signatures` reads every split function under `asm/` and interprets its register dataflow as a
+GCC 2.7.2 MIPS o32 signature: the argument registers read before written (the highest plus one),
+the stack arguments, the kind of each argument and the value or void the function returns. An
+argument is a pointer when the callee uses it as a base, when the callee forwards it to a declared
+pointer parameter, or when every caller passes an address or a pointer returned by a call; a stack
+argument read from the frame and used as a base is a pointer too. The returned value is the nearest
+write of `v0` that no later instruction consumes: a write whose value a store, a branch or an
+argument move reads is scratch, and a delay-slot write counts when its branch targets the epilogue
+or the write only moves or loads a value. A value written in a loop's delay slot can be scratch on
+the fall-through path; that row is `likely` at most. Every call site is cross-checked: the argument
+registers a caller sets and how it uses the returned v0. Each row gives the declared prototype,
+the found signature, `callee_args`, the callers' minimum and maximum, `disagree`, the evidence and a
+confidence. `proven` needs every direct caller to set the callee's argument count, no stack argument,
+and every pointer or narrowing claim proved on both sides: a pointer only the callers pass, a
+pointer the declaration types as a word, and a narrowing one side does not perform are `likely` at
+most. A function reached through a table counts the table's row as a caller. `--jsonl` writes one
+object per line.
+
+`extents` gives every data and bss symbol of a target: the gap to the next symbol, the size its
+declaration states, the access offsets beyond that size, the index stride the code uses on it, and
+the neighbours only reached as `base + constant` from it (members of one record, not globals). It
+also names the section the symbol sits in. `--jsonl` writes one object per line.
+
+`homes` reads the call and data graph. A function's found home differs from its declared one only
+by rule a (80% of at least three callers are in that system), rule b (it is the only writer of a
+global whose other readers are all in that system) or rule c (it sits in address order between two
+functions of that system and no caller is from its declared system); two rules are `proven`, one is
+`likely`. A function of an `emi` image whose declared system lives in that image moves only by rule
+c. A global's owner is the one system all its writers are in, and a global written from two systems
+gets no row. File rows cover `src/**/*.c` units only, with the address runs that continue another
+file of the same system or that another system's units interrupt. `--jsonl` writes one object per
+line.
+
 Run `meson compile -C build/meson check-<image>` for every touched image afterwards.
 """
 
@@ -118,7 +154,7 @@ from pathlib import Path
 
 from bof3.link import symbols
 from bof3.resolve.ids import source_folder
-from bof3.source import ctext, symtab
+from bof3.source import asmtext, ctext, symtab
 
 ROOT = Path(__file__).resolve().parent.parent
 SYMBOLS = ROOT / "config/symbols.toml"
@@ -4357,6 +4393,1514 @@ def records(args: argparse.Namespace) -> int:
     return 0
 
 
+# --- Signatures, extents and homes from the split assembly -----------------------------------
+
+ASM_ROOT = ROOT / "asm"
+SYSTEM_FOLDERS = {
+    "engine/slus": "Executable",
+    "engine/game": "Game",
+    "logo": "Logo",
+    "shared": "Shared",
+    "overlays/area": "Area",
+    "overlays/battle": "Battle",
+    "overlays/bmagic": "Battle magic",
+    "overlays/boss": "Boss",
+    "overlays/commu": "Fairy Village",
+    "overlays/menu": "Menu",
+    "overlays/plchar": "Player character",
+    "overlays/scenario": "Scenario",
+    "overlays/title": "Title",
+}
+ADDRESS_SYMBOL = re.compile(r"(?:func|unk|D|jtbl)_[0-9A-F]{8}$")
+UNNAMED_PREFIXES = ("func_", "unk_", "D_", "jtbl_", "g_")
+
+
+class SymbolIndex:
+    """A row lookup over config/symbols.toml: by name, by address and per image."""
+
+    def __init__(self, data: dict[str, dict[str, dict]]) -> None:
+        self.rows: dict[str, list[Row]] = {}
+        self.following: dict[str, dict[int, int]] = {}
+        self.by_name: dict[str, list[Row]] = collections.defaultdict(list)
+        for table in data:
+            rows = table_rows(data, table)
+            rows.sort(key=lambda row: (row.addr, row.name))
+            self.rows[table] = rows
+            self.following[table] = next_addresses(rows)
+            for row in rows:
+                self.by_name[row.name].append(row)
+        self._visible: dict[str, dict[str, Row]] = {}
+        self._spans: dict[tuple[str, int], int] = {}
+
+    def span(self, row: Row) -> int:
+        """Return a row's extent in bytes."""
+        key = (row.table, row.addr)
+        if key not in self._spans:
+            self._spans[key] = row_span(row, self.following.get(row.table, {}))
+        return self._spans[key]
+
+    def visible(self, image: str) -> dict[str, Row]:
+        """Return the rows an image can name: its own first, then the resident images."""
+        found = self._visible.get(image)
+        if found is None:
+            found = {}
+            for table in (image, *RESIDENT):
+                for row in self.rows.get(table, ()):
+                    found.setdefault(row.name, row)
+            self._visible[image] = found
+        return found
+
+    def resolve(self, image: str, name: str) -> Row | None:
+        """Return the row a name has in one image, else None."""
+        return self.visible(image).get(name)
+
+    def canonical(self, name: str, address: int) -> str:
+        """Return the table that owns an address of a symbol."""
+        candidates = [
+            row.table for row in self.by_name.get(name, ()) if row.addr == address
+        ]
+        for table in RESIDENT:
+            if table in candidates:
+                return table
+        for table in candidates:
+            bounds = table_range(table)
+            if bounds is not None and bounds[0] <= address < bounds[1]:
+                return table
+        return candidates[0] if candidates else ""
+
+    def owner(self, image: str):
+        """Return a function mapping an address to ``(table, name, offset)``."""
+        rows = [row for row in self.visible(image).values() if row.type != "func"]
+        rows.sort(key=lambda row: row.addr)
+        starts = [row.addr for row in rows]
+        spans = [self.span(row) for row in rows]
+
+        def find(address: int):
+            index = bisect.bisect_right(starts, address) - 1
+            if index >= 0 and address < starts[index] + spans[index]:
+                row = rows[index]
+                return row.table, row.name, address - row.addr
+            return None
+
+        return find
+
+
+@dataclass
+class Assembly:
+    """Every split function with its decoded facts, and the indexes the verbs share."""
+
+    functions: dict[str, list]
+    facts: dict[tuple[str, str], object]
+    by_image: dict[str, dict[str, object]]
+    by_name: dict[str, list]
+    callers: dict[tuple[str, str], list] | None = None
+    systems: frozenset[str] = frozenset()
+
+    def resolve(self, image: str, name: str):
+        """Return the function a name calls, else None when the name is ambiguous."""
+        found = self.by_image.get(image, {}).get(name)
+        if found is not None:
+            return found
+        for resident in RESIDENT:
+            found = self.by_image.get(resident, {}).get(name)
+            if found is not None:
+                return found
+        candidates = self.by_name.get(name, ())
+        return candidates[0] if len(candidates) == 1 else None
+
+
+_ASM_FUNCTIONS: dict[str, list] = {}
+_ASSEMBLY: Assembly | None = None
+_EXTENT_ROWS: list[dict] | None = None
+
+
+def _asm_functions(image: str) -> list:
+    """Return every split function of one image, read once per process."""
+    if image in _ASM_FUNCTIONS:
+        return _ASM_FUNCTIONS[image]
+    found: list = []
+    folder = ASM_ROOT / image
+    if folder.is_dir():
+        for path in sorted(folder.rglob("*.s")):
+            if "data" in path.relative_to(folder).parts:
+                continue
+            try:
+                text = path.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            found.extend(
+                asmtext.functions(text, image, path.relative_to(ROOT).as_posix())
+            )
+    _ASM_FUNCTIONS[image] = found
+    return found
+
+
+def _assembly() -> Assembly:
+    """Read every split function of every image and decode its facts, once per process."""
+    global _ASSEMBLY
+    if _ASSEMBLY is not None:
+        return _ASSEMBLY
+    manifests = _layer_manifests()
+    index = SymbolIndex(symbol_tables())
+    functions = {image: _asm_functions(image) for image in sorted(manifests)}
+    facts: dict[tuple[str, str], object] = {}
+    by_image: dict[str, dict[str, object]] = {}
+    by_name: dict[str, list] = collections.defaultdict(list)
+    for image, found in functions.items():
+        visible = index.visible(image)
+        symbols = {name: (row.table, row.addr) for name, row in visible.items()}
+        owner = index.owner(image)
+        by_image[image] = {function.name: function for function in found}
+        for function in found:
+            facts[(image, function.name)] = asmtext.decode(function, symbols, owner)
+            by_name[function.name].append(function)
+    systems = frozenset(
+        system
+        for functions in functions.values()
+        for function in functions
+        for system in (_name_system(function.name),)
+        if system
+    )
+    _ASSEMBLY = Assembly(functions, facts, by_image, dict(by_name), systems=systems)
+    return _ASSEMBLY
+
+
+def _visible_sources(tree, manifests: dict) -> dict[str, set[str]]:
+    """Return each image's visible C files."""
+    return {
+        image: _visible_files(tree, manifest) for image, manifest in manifests.items()
+    }
+
+
+def _declared_prototype(tree, name: str, visible: set[str]):
+    """Return the prototype or definition a function's image sees, else any of them."""
+    options = tree.decls.get(name) or []
+    if not options:
+        return None
+    for kind in ("def", "proto"):
+        for decl in options:
+            if decl.kind == kind and decl.file in visible:
+                return decl
+    return options[0]
+
+
+def _render_declared(name: str, decl) -> str | None:
+    """Write one declaration as its readers see it."""
+    if decl is None:
+        return None
+    if decl.unspecified:
+        return f"{decl.ret} {name}()"
+    params = ", ".join(f"{ctype} {param}".strip() for ctype, param in decl.params)
+    return f"{decl.ret} {name}({params or 'void'})"
+
+
+def _declared_kind(ctype: str) -> str:
+    """Return the kind a declared C parameter states."""
+    text = _normalized_type(re.sub(r"\bHAND_ASM\b", "", ctype))
+    if text.endswith(" *"):
+        return "pointer"
+    if text == "bool":
+        return "bool"
+    return {
+        "u8": "u8",
+        "u_char": "u8",
+        "unsigned char": "u8",
+        "char": "s8",
+        "s8": "s8",
+        "u16": "u16",
+        "u_short": "u16",
+        "unsigned short": "u16",
+        "s16": "s16",
+        "short": "s16",
+    }.get(text, "s32")
+
+
+def _declared_return_kind(ret: str) -> str:
+    """Return the kind a declared return type states."""
+    text = _normalized_type(re.sub(r"\bHAND_ASM\b", "", ret))
+    if text == "void":
+        return "void"
+    if text == "bool":
+        return "bool"
+    if text.endswith(" *"):
+        return "pointer"
+    return "value"
+
+
+def _name_system(name: str) -> str | None:
+    """Return the system a name's prefix states, else None for an address name."""
+    stem = name
+    for prefix in UNNAMED_PREFIXES:
+        if stem.startswith(prefix):
+            if ADDRESS_SYMBOL.match(stem):
+                return None
+            stem = stem[len(prefix) :]
+            break
+    head = stem.split("_", 1)[0]
+    if not head or len(head) < 2 or not head[0].isupper():
+        return None
+    return head
+
+
+def _symbol_system(name: str, systems: frozenset[str] | set[str]) -> str | None:
+    """Return the system a global or record name starts with, from the names the code uses."""
+    if ADDRESS_SYMBOL.match(name):
+        return None
+    stem = name[2:] if name.startswith(("g_",)) else name
+    for system in sorted(systems, key=len, reverse=True):
+        if not stem.startswith(system):
+            continue
+        if len(stem) == len(system) or stem[len(system)].isupper():
+            return system
+    return None
+
+
+def _folder_system(source_dir: str) -> str:
+    """Return the subsystem a source folder belongs to."""
+    relative = source_dir[4:] if source_dir.startswith("src/") else source_dir
+    for prefix, system in sorted(
+        SYSTEM_FOLDERS.items(), key=lambda item: -len(item[0])
+    ):
+        if relative == prefix or relative.startswith(prefix + "/"):
+            return system
+    return "Other"
+
+
+def _declared_extent(row: Row) -> int | None:
+    """Return the byte extent a row's own declaration states."""
+    if row.size is not None:
+        return row.size
+    text = _normalized_type(row.type)
+    if text.endswith(" *"):
+        return 4
+    width = SCALAR_WIDTH.get(text)
+    if width is not None:
+        return width
+    layout = type_layout(text) if text and text != "func" else None
+    return layout.size if layout else None
+
+
+def _symbol_uses(assembly: Assembly, index: SymbolIndex) -> dict[tuple[str, int], list]:
+    """Group every symbol access by ``(name, address)``, from the images that can see it."""
+    grouped: dict[tuple[str, int], list] = collections.defaultdict(list)
+    for (image, function_name), facts in assembly.facts.items():
+        for access in facts.accesses:
+            if not access.name:
+                continue
+            row = index.resolve(image, access.name)
+            if row is None:
+                continue
+            grouped[(access.name, row.addr)].append((image, function_name, access))
+    return grouped
+
+
+def _symbol_strides(assembly: Assembly) -> dict[str, set[int]]:
+    """Group the index stride every function uses on a symbol, by symbol name."""
+    grouped: dict[str, set[int]] = collections.defaultdict(set)
+    for facts in assembly.facts.values():
+        for key, values in facts.strides.items():
+            grouped[key[-1]].update(values)
+    return grouped
+
+
+def _unique_data_rows(index: SymbolIndex) -> list[Row]:
+    """Return each data and bss symbol once, preferring the resident table's declaration."""
+    order = {
+        table: position
+        for position, table in enumerate(
+            [*RESIDENT] + sorted(t for t in index.rows if t not in RESIDENT)
+        )
+    }
+    seen: dict[tuple[str, int], Row] = {}
+    for table in sorted(index.rows, key=lambda table: order.get(table, len(order))):
+        for row in index.rows[table]:
+            if row.type == "func":
+                continue
+            seen.setdefault((row.name, row.addr), row)
+    return list(seen.values())
+
+
+def _section_of(layout, address: int) -> str:
+    """Return the section kind an address sits in for its target layout."""
+    if layout is None:
+        return "unknown"
+    for boundary in layout.boundaries:
+        if boundary.virtual_start <= address < (boundary.virtual_end or 0):
+            return {
+                ".data": "data",
+                ".rodata": "rodata",
+                ".bss": "bss",
+            }.get(boundary.kind, "other")
+    return "unknown"
+
+
+def _extent_rows(assembly: Assembly, index: SymbolIndex, manifests: dict) -> list[dict]:
+    """Build one extent row per data and bss symbol the images hold."""
+    global _EXTENT_ROWS
+    if _EXTENT_ROWS is not None:
+        return _EXTENT_ROWS
+    from bof3.resolve.layout import parse_splat_layout
+
+    uses = _symbol_uses(assembly, index)
+    strides = _symbol_strides(assembly)
+    used_names = {name for (name, _address), found in uses.items() if found}
+    universes: dict[str, list[int]] = {}
+    ladders: dict[tuple[str, int], int] = {}
+    for table, table_rows in index.rows.items():
+        addresses = sorted({row.addr for row in table_rows if row.type != "func"})
+        universes[table] = addresses
+        for position, address in enumerate(addresses[:-1]):
+            ladders[(table, address)] = addresses[position + 1]
+    rows: list[dict] = []
+    for row in _unique_data_rows(index):
+        image = index.canonical(row.name, row.addr) or row.table
+        manifest = manifests.get(image)
+        layout = None
+        if manifest is not None:
+            try:
+                layout = parse_splat_layout(
+                    ROOT / manifest.splat, manifest.load_address
+                )
+            except (OSError, ValueError):
+                layout = None
+        following_address = ladders.get((row.table, row.addr))
+        if following_address is not None:
+            gap = following_address - row.addr
+        else:
+            addresses = universes.get(row.table, [])
+            gap = addresses[-1] - row.addr if addresses else None
+        declared = _declared_extent(row)
+        found = uses.get((row.name, row.addr), [])
+        beyond = [
+            {
+                "offset": f"0x{access.offset:X}",
+                "width": access.width,
+                "signed": access.signed,
+                "mnemonic": access.mnemonic,
+                "function": function,
+                "address": f"0x{access.address:08X}",
+            }
+            for _image, function, access in found
+            if declared is not None and access.offset >= declared
+        ]
+        item = {
+            "symbol": row.name,
+            "image": image,
+            "address": f"0x{row.addr:08X}",
+            "gap": gap,
+            "declared_size": declared,
+            "stride": sorted(strides.get(row.name, set())),
+            "beyond": beyond[:20],
+            "beyond_count": len(beyond),
+            "absorbs": [],
+            "section": _section_of(layout, row.addr),
+            "type": row.type,
+            "evidence": [
+                f"{use_image}@0x{access.address:08X} {function} {access.mnemonic}"
+                for use_image, function, access in found[:5]
+            ],
+        }
+        start = row.addr
+        end = start + (gap or 0)
+        hit = {
+            start + access.offset
+            for _image, _function, access in uses.get((row.name, start), ())
+        }
+        for other in index.rows.get(row.table, ()):
+            if other.type == "func" or not start < other.addr < end:
+                continue
+            if other.name == row.name or other.name in used_names:
+                continue
+            size = index.span(other)
+            if any(other.addr <= address < other.addr + size for address in hit):
+                item["absorbs"].append(other.name)
+        rows.append(item)
+    _EXTENT_ROWS = rows
+    return rows
+
+
+def _pointer_record(
+    use, index: SymbolIndex, callers: list, position: int, declared
+) -> str | None:
+    """Return the record a pointer argument's accesses and callers support, else None."""
+    accesses = [access for access in use.accesses if access.width]
+    if not accesses:
+        return None
+    if (
+        declared is not None
+        and not declared.unspecified
+        and position < len(declared.params)
+    ):
+        ctype = declared.params[position][0]
+        text = _normalized_type(ctype)
+        if text.endswith(" *") and "*" not in text[:-2]:
+            record = text[:-2].strip()
+            if _fits(record, accesses):
+                return record
+    for caller, call in callers:
+        if 4 + position not in call.arguments:
+            continue
+        row = _argument_global(index, caller, call, position)
+        if row is None:
+            continue
+        record = _record_type(row)
+        if record and _fits(record, accesses):
+            return record
+    return None
+
+
+def _argument_global(index: SymbolIndex, caller, call, position: int):
+    """Return the global whose address one caller puts in one argument register, if any."""
+    insns = caller.insns
+    start = next(
+        (number for number, insn in enumerate(insns) if insn.address == call.address),
+        None,
+    )
+    if start is None:
+        return None
+    for number in range(start - 1, max(-1, start - 20), -1):
+        insn = insns[number]
+        if insn.mnemonic in ("jal", "jalr", "jr"):
+            break
+        ops = asmtext.operands(insn.operands)
+        dest, _reads = asmtext.read_write(insn.mnemonic, ops)
+        if dest != 4 + position or insn.mnemonic != "lui" or len(ops) < 2:
+            continue
+        named = asmtext.symbol(ops[1])
+        if named is None:
+            continue
+        row = index.resolve(caller.image, named[0])
+        if row is not None:
+            return row
+    return None
+
+
+def _record_type(row: Row) -> str | None:
+    """Return the record a global row is or points at, when its type names one."""
+    text = _normalized_type(row.type)
+    if not text:
+        return None
+    if text.endswith(" *"):
+        text = text[:-2].strip()
+    layout = type_layout(text) if text else None
+    return text if layout is not None and layout.record else None
+
+
+def _fits(record: str, accesses: list) -> bool:
+    """Whether every access of a pointer argument lands on a member of one record."""
+    layout = type_layout(record)
+    if layout is None or not layout.record:
+        return False
+    for access in accesses:
+        if access.offset < 0 or access.offset + access.width > layout.size:
+            return False
+        if not locate(layout, access.offset):
+            return False
+    return True
+
+
+def _v0_after_call(caller, call) -> str | None:
+    """Return how a caller uses the value a call returns, else None."""
+    insns = caller.insns
+    start = next(
+        (number for number, insn in enumerate(insns) if insn.address == call.address),
+        None,
+    )
+    if start is None:
+        return None
+    for insn in insns[start + 2 : start + 9]:
+        mnemonic = insn.mnemonic
+        ops = asmtext.operands(insn.operands)
+        dest, reads = asmtext.read_write(mnemonic, ops)
+        if 2 in reads:
+            for operand in ops:
+                part = asmtext.memory(operand)
+                if part is not None and part[1] == 2:
+                    return "pointer"
+            if mnemonic in ("slt", "sltu", "slti", "sltiu"):
+                return "bool"
+            if mnemonic in ("beq", "bne", "beqz", "bnez", "bgez", "blez", "bltz"):
+                return "bool"
+            return "value"
+        if mnemonic in ("jal", "jalr", "jr", "j") or dest == 2:
+            break
+    return None
+
+
+def _caller_map(assembly: Assembly) -> dict[tuple[str, str], list]:
+    """Return, per function, its direct callers with the call's evidence."""
+    if assembly.callers is not None:
+        return assembly.callers
+    found: dict[tuple[str, str], list] = collections.defaultdict(list)
+    for (image, name), facts in assembly.facts.items():
+        caller = assembly.by_image[image][name]
+        for call in facts.calls:
+            target = assembly.resolve(image, call.callee)
+            if target is None:
+                continue
+            found[(target.image, target.name)].append((caller, call))
+    assembly.callers = dict(found)
+    return assembly.callers
+
+
+def _table_callees(
+    assembly: Assembly, manifests: dict, tree
+) -> dict[tuple[str, str], list]:
+    """Return the function names each function's indirect calls reach through a table."""
+    known = {
+        function.name
+        for functions in assembly.functions.values()
+        for function in functions
+    }
+    tables, names = _layer_tables(tree, known, manifests)
+    symbols = symbol_tables()
+    for rows in symbols.values():
+        for name, row in rows.items():
+            if isinstance(row, dict) and _looks_like_table(row):
+                names.add(name)
+    referenced: dict[str, set[str]] = collections.defaultdict(set)
+    for (image, _name), facts in assembly.facts.items():
+        if facts.indirect:
+            referenced[image].update(name for _table, name in facts.symbols)
+    wanted = names & {name for values in referenced.values() for name in values}
+    if not wanted:
+        return {}
+    layouts, payloads = _layer_layouts(manifests)
+    by_address: dict[int, list] = collections.defaultdict(list)
+    for functions in assembly.functions.values():
+        for function in functions:
+            by_address[function.address].append(function)
+    found: dict[tuple[str, str], list[str]] = {}
+
+    def resolve_table(image: str, name: str) -> list[str]:
+        entries = _table_entries(tables, image, name)
+        if not entries:
+            entries = _retail_table_entries(
+                image, name, symbols, layouts, payloads, by_address
+            )
+        return entries
+
+    for image, names_here in sorted(referenced.items()):
+        for name in sorted(names_here & wanted):
+            found[(image, name)] = resolve_table(image, name)
+    return found
+
+
+def _table_callers(
+    assembly: Assembly, table_callees: dict[tuple[str, str], list]
+) -> dict[tuple[str, str], list]:
+    """Return, per function, the functions whose indirect calls reach it through a table."""
+    reverse: dict[tuple[str, str], list] = collections.defaultdict(list)
+    for (image, caller_name), names in table_callees.items():
+        for callee in names:
+            target = assembly.resolve(image, callee)
+            if target is not None:
+                reverse[(target.image, target.name)].append((image, caller_name))
+    return reverse
+
+
+def _layers(
+    assembly: Assembly,
+    table_callees: dict[tuple[str, str], list],
+) -> dict[tuple[str, str], int]:
+    """Return every function's call-graph layer."""
+    nodes = [
+        (image, function.name)
+        for image, functions in sorted(assembly.functions.items())
+        for function in functions
+    ]
+    position = {node: index for index, node in enumerate(nodes)}
+    edges: list[set[int]] = [set() for _ in nodes]
+    for index, (image, name) in enumerate(nodes):
+        facts = assembly.facts[(image, name)]
+        callees = [call.callee for call in facts.calls]
+        callees.extend(table_callees.get((image, name), ()))
+        for callee in callees:
+            target = assembly.resolve(image, callee)
+            other = position.get((target.image, target.name)) if target else None
+            if other is not None:
+                edges[index].add(other)
+    levels = assign_layers(len(nodes), edges)
+    return {node: levels[index] for index, node in enumerate(nodes)}
+
+
+def _majority(votes: collections.Counter, lowest: dict[str, int], tiebreak: int) -> str:
+    """Return the system with the most votes; a tie goes to the lowest layer, then the name."""
+    if not votes:
+        return ""
+    return min(
+        votes,
+        key=lambda system: (-votes[system], lowest.get(system, tiebreak), system),
+    )
+
+
+def _confidence(votes: collections.Counter, found_home: str) -> str:
+    """Return proven when every vote agrees, likely over 80% and open otherwise."""
+    total = sum(votes.values())
+    if not total or not found_home:
+        return "open"
+    share = votes[found_home] / total
+    if share == 1.0 and total >= 2:
+        return "proven"
+    if share >= 0.8:
+        return "likely"
+    return "open"
+
+
+def _function_home(function, manifests: dict) -> str:
+    """Return the system a function belongs to by its name prefix or its folder."""
+    return _name_system(function.name) or _folder_system(
+        manifests[function.image].source_dir
+    )
+
+
+def _call_window(caller, call) -> list[int]:
+    """Return the instructions a caller writes an argument in, nearest first."""
+    insns = caller.insns
+    start = next(
+        (number for number, insn in enumerate(insns) if insn.address == call.address),
+        None,
+    )
+    if start is None:
+        return []
+    positions = [start + 1] if start + 1 < len(insns) else []
+    for step in range(1, 13):
+        position = start - step
+        if position < 0:
+            break
+        if insns[position].mnemonic in ("jal", "jalr", "jr", "j"):
+            break
+        positions.append(position)
+    return positions
+
+
+def _call_sources(caller, call) -> dict[int, int]:
+    """Return, per callee argument position, the register its value was copied from."""
+    sources: dict[int, int] = {}
+    for position in _call_window(caller, call):
+        insn = caller.insns[position]
+        dest, reads = asmtext.read_write(insn.mnemonic, asmtext.operands(insn.operands))
+        if dest is None or dest not in asmtext.ARG_REGISTERS or dest - 4 in sources:
+            continue
+        source = next(
+            (register for register in reads if register in asmtext.ARG_REGISTERS),
+            -1,
+        )
+        sources[dest - 4] = source
+    return sources
+
+
+def _previous_call(insns, index: int, skip: int) -> str | None:
+    """Return the callee of the call whose result a register still holds, if any."""
+    for position in range(index - 1, max(-1, index - 10), -1):
+        if position == skip:
+            continue
+        insn = insns[position]
+        if insn.mnemonic in ("jal", "jalr"):
+            ops = asmtext.operands(insn.operands)
+            named = asmtext.symbol(ops[0]) if ops else None
+            return named[0] if named is not None else None
+        if insn.mnemonic in ("jr", "j"):
+            break
+    return None
+
+
+def _caller_argument_kind(caller, call, position: int, tree, visible: set[str]) -> str:
+    """Return the type a caller's argument register holds before one call."""
+    narrow = {"lb": "s8", "lbu": "u8", "lh": "s16", "lhu": "u16"}
+    start = next(
+        (
+            number
+            for number, insn in enumerate(caller.insns)
+            if insn.address == call.address
+        ),
+        None,
+    )
+    for index in _call_window(caller, call):
+        insn = caller.insns[index]
+        ops = asmtext.operands(insn.operands)
+        dest, reads = asmtext.read_write(insn.mnemonic, ops)
+        if dest != 4 + position:
+            continue
+        if 2 in reads:
+            callee = _previous_call(caller.insns, index, start)
+            if callee:
+                decl = _declared_prototype(tree, callee, visible)
+                if decl is not None and _declared_return_kind(decl.ret) == "pointer":
+                    return "pointer"
+        if insn.mnemonic in narrow:
+            return narrow[insn.mnemonic]
+        if insn.mnemonic == "andi" and len(ops) >= 3:
+            mask = asmtext.integer(ops[2])
+            if mask == 0xFF:
+                return "u8"
+            if mask == 0xFFFF:
+                return "u16"
+        if insn.mnemonic in ("sll", "sra", "srl") and len(ops) >= 3:
+            amount = asmtext.integer(ops[2])
+            if amount == 24:
+                return "s8"
+            if amount == 16:
+                return "s16"
+        if insn.mnemonic == "lui" or any(
+            "%hi(" in operand or "%lo(" in operand for operand in ops
+        ):
+            return "pointer"
+        return "s32"
+    return "s32"
+
+
+def _argument_live_at(function, call, position: int) -> bool:
+    """Whether an argument register still holds the caller's value when a call copies it."""
+    insns = function.insns
+    writer = None
+    for index in _call_window(function, call):
+        dest, _reads = asmtext.read_write(
+            insns[index].mnemonic, asmtext.operands(insns[index].operands)
+        )
+        if dest == 4 + position:
+            writer = index
+            break
+    if writer is None:
+        return True
+    for insn in insns[:writer]:
+        if insn.mnemonic in ("jal", "jalr"):
+            return False
+        dest, _reads = asmtext.read_write(
+            insn.mnemonic, asmtext.operands(insn.operands)
+        )
+        if dest == 4 + position:
+            return False
+    return True
+
+
+def _forwarded_pointer(
+    function, facts, position: int, tree, visible: set[str]
+) -> str | None:
+    """Return the pointer type an argument is forwarded as to one declared callee parameter."""
+    for call in facts.calls:
+        if not _argument_live_at(function, call, position):
+            continue
+        declared = _declared_prototype(tree, call.callee, visible)
+        if declared is None or declared.unspecified:
+            continue
+        params = [
+            ctype
+            for ctype, param in declared.params
+            if not (ctype == "void" and not param) and ctype != "..."
+        ]
+        sources = _call_sources(function, call)
+        for callee_position, ctype in enumerate(params):
+            text = _normalized_type(ctype)
+            if not text.endswith(" *"):
+                continue
+            if sources.get(callee_position) == 4 + position:
+                return text[:-2].strip() or "void"
+    return None
+
+
+def _function_signature(
+    function,
+    facts,
+    callers: list,
+    index: SymbolIndex,
+    tree,
+    visible: set[str],
+    table_callers: list = (),
+) -> dict:
+    """Build one signature row from a function's facts and its callers."""
+    declared = _declared_prototype(tree, function.name, visible)
+    arguments = []
+    counts = [
+        max(call.arguments) - 3 if call.arguments else 0 for _caller, call in callers
+    ]
+    used = max(facts.args) + 1 if facts.args else 0
+    for position in range(used):
+        use = facts.args.get(position)
+        record = None
+        forwarded = None
+        proof = None
+        if use and use.accesses:
+            kind = "pointer"
+            proof = "callee"
+            record = _pointer_record(use, index, callers, position, declared)
+        else:
+            forwarded = _forwarded_pointer(function, facts, position, tree, visible)
+            caller_kinds = [
+                _caller_argument_kind(caller, call, position, tree, visible)
+                for caller, call in callers
+            ]
+            if forwarded is not None:
+                kind = "pointer"
+                proof = "forwarded"
+                layout = type_layout(forwarded) if forwarded != "void" else None
+                record = forwarded if layout is not None and layout.record else None
+            elif callers and all(value == "pointer" for value in caller_kinds):
+                kind = "pointer"
+                proof = "callers"
+                forwarded = "void"
+            else:
+                kind = use.narrow if use and use.narrow else "s32"
+                proof = "callee" if use and use.narrow else None
+        arguments.append(
+            {
+                "index": position,
+                "register": _reg_name(4 + position),
+                "kind": kind,
+                "type": f"{record}*" if record else ("void*" if forwarded else kind),
+                "record": record,
+                "narrow": use.narrow if use else None,
+                "proof": proof,
+                "used": use is not None,
+                "accesses": [
+                    {
+                        "offset": f"0x{access.offset:X}",
+                        "width": access.width,
+                        "signed": access.signed,
+                        "mnemonic": access.mnemonic,
+                        "write": access.write,
+                    }
+                    for access in use.accesses
+                ]
+                if use
+                else [],
+            }
+        )
+    for position in range(facts.stack_arguments):
+        pointer = position in facts.stack_pointers
+        arguments.append(
+            {
+                "index": 4 + position,
+                "register": f"0x{0x10 + position * 4:X}(sp)",
+                "kind": "pointer" if pointer else "s32",
+                "type": "void*" if pointer else "s32",
+                "record": None,
+                "narrow": None,
+                "accesses": [],
+            }
+        )
+    caller_uses = [_v0_after_call(caller, call) for caller, call in callers]
+    returns = list(facts.return_writes)
+    if not returns:
+        returned = {"kind": "void", "width": None, "sign": None}
+    elif all(asmtext.bool_write(mnemonic, text) for mnemonic, text in returns):
+        returned = {"kind": "bool", "width": 1, "sign": False}
+    elif any(kind == "pointer" for kind in caller_uses):
+        returned = {"kind": "pointer", "width": 4, "sign": None}
+    else:
+        width, sign = facts.return_width or (None, None)
+        returned = {"kind": "value", "width": width, "sign": sign}
+    declared_text = _render_declared(function.name, declared)
+    found_text = _render_found(function.name, arguments, returned)
+    differs = []
+    declared_params: list = []
+    if declared is not None and not declared.unspecified:
+        declared_params = [
+            (ctype, param)
+            for ctype, param in declared.params
+            if not (ctype == "void" and not param) and ctype != "..."
+        ]
+        if len(declared_params) != len(arguments):
+            differs.append(
+                f"arguments {len(declared_params)} declared, {len(arguments)} found"
+            )
+        for position, (ctype, _param) in enumerate(declared_params):
+            if position >= len(arguments):
+                break
+            kind = _declared_kind(ctype)
+            if kind != arguments[position]["kind"]:
+                differs.append(
+                    f"arg{position} {kind} declared, "
+                    f"{arguments[position]['kind']} found"
+                )
+        declared_return = _declared_return_kind(declared.ret)
+        if declared_return != returned["kind"]:
+            differs.append(
+                f"return {declared_return} declared, {returned['kind']} found"
+            )
+    confidence = "open"
+    if counts:
+        share = sum(1 for count in counts if count == used) / len(counts)
+        if share == 1.0 and not facts.stack_arguments:
+            confidence = "proven"
+        elif share >= 0.8:
+            confidence = "likely"
+    elif facts.args or returns:
+        confidence = "likely"
+    narrow = {"u8", "s8", "u16", "s16"}
+    if any(
+        argument["kind"] == "pointer" and argument.get("proof") == "callers"
+        for argument in arguments
+    ):
+        confidence = "likely" if confidence == "proven" else confidence
+    if not returns and facts.ambiguous_return:
+        confidence = "likely" if confidence == "proven" else confidence
+    for position, argument in enumerate(arguments):
+        declared_kind = (
+            _declared_kind(declared_params[position][0])
+            if declared_params and position < len(declared_params)
+            else None
+        )
+        if argument["kind"] in narrow:
+            caller_kinds = [
+                _caller_argument_kind(caller, call, position, tree, visible)
+                for caller, call in callers
+            ]
+            if not all(kind in narrow for kind in caller_kinds):
+                confidence = "likely" if confidence == "proven" else confidence
+        elif declared_kind in narrow and argument["kind"] == "s32":
+            confidence = "likely" if confidence == "proven" else confidence
+        elif declared_kind == "pointer" and argument["kind"] != "pointer":
+            confidence = "likely" if confidence == "proven" else confidence
+    evidence = [
+        f"{caller.image}@0x{call.address:08X} {caller.name} "
+        f"args={','.join(_reg_name(register) for register in call.arguments)}"
+        for caller, call in callers[:5]
+    ]
+    evidence.extend(f"table caller {image}:{name}" for image, name in table_callers[:3])
+    for access in facts.accesses[:5]:
+        offset = f"+0x{access.offset:X}" if access.offset else ""
+        evidence.append(
+            f"{function.image}@0x{access.address:08X} {access.mnemonic} "
+            f"{access.name or 'argument'}{offset}"
+        )
+    return {
+        "function": function.name,
+        "image": function.image,
+        "address": f"0x{function.address:08X}",
+        "declared": declared_text,
+        "found": found_text,
+        "callee_args": used,
+        "stack_args": facts.stack_arguments,
+        "caller_args_min": min(counts) if counts else None,
+        "caller_args_max": max(counts) if counts else None,
+        "disagree": bool(differs),
+        "differs": differs,
+        "args": arguments,
+        "return": returned,
+        "callers": len(callers) + len(table_callers),
+        "evidence": evidence,
+        "confidence": confidence,
+    }
+
+
+def _render_found(name: str, arguments: list[dict], returned: dict) -> str:
+    params = ", ".join(argument["type"] for argument in arguments)
+    return f"{_return_type(returned)} {name}({params or 'void'})"
+
+
+def _return_type(returned: dict) -> str:
+    """Write a returned kind as the C type its width and sign state."""
+    kind = returned["kind"]
+    if kind in ("void", "bool"):
+        return kind
+    if kind == "pointer":
+        return "void*"
+    width = returned["width"]
+    sign = returned["sign"]
+    if width == 1:
+        return "u8" if sign is False else "s8"
+    if width == 2:
+        return "u16" if sign is False else "s16"
+    return "s32"
+
+
+def _home_of(manifests: dict, key: tuple[str, str]) -> str:
+    """Return a function's declared system from its name prefix or its folder."""
+    image, name = key
+    return _name_system(name) or _folder_system(manifests[image].source_dir)
+
+
+def _function_candidates(
+    function,
+    facts,
+    index: SymbolIndex,
+    manifests: dict,
+    callers: dict[tuple[str, str], list],
+    writers: dict,
+    readers: dict,
+    previous,
+    following,
+    declared: str,
+    local: bool,
+) -> dict[str, list[str]]:
+    """Return the systems a function's bytes move it to, each with its rule evidence."""
+    rules: dict[str, list[str]] = collections.defaultdict(list)
+    sites = callers.get((function.image, function.name), ())
+    caller_systems = collections.Counter(
+        _function_home(caller, manifests) for caller, _call in sites
+    )
+    if not local and sum(caller_systems.values()) >= 3:
+        system, count = caller_systems.most_common(1)[0]
+        if count / sum(caller_systems.values()) >= 0.8:
+            rules[system].append(
+                f"rule a: {count} of {sum(caller_systems.values())} callers are {system}"
+            )
+    if not local:
+        for access in facts.accesses:
+            if not access.write or not access.name:
+                continue
+            row = index.resolve(function.image, access.name)
+            if row is None:
+                continue
+            key = (access.name, row.addr)
+            if writers.get(key) != {(function.image, function.name)}:
+                continue
+            others = readers.get(key, set()) - {(function.image, function.name)}
+            if not others:
+                continue
+            systems = {_home_of(manifests, other) for other in others}
+            if len(systems) == 1:
+                system = next(iter(systems))
+                rules[system].append(
+                    f"rule b: only writer of {access.name}, read by "
+                    f"{len(others)} function(s) in {system}"
+                )
+    if previous is not None and following is not None:
+        left = _function_home(previous, manifests)
+        right = _function_home(following, manifests)
+        if left == right and left != declared:
+            declared_callers = [
+                caller
+                for caller, _call in sites
+                if _function_home(caller, manifests) == declared
+            ]
+            if not declared_callers:
+                rules[left].append(
+                    f"rule c: between {previous.name} and {following.name} in address "
+                    f"order and no {declared} caller"
+                )
+    return rules
+
+
+def _function_rows(
+    assembly: Assembly,
+    manifests: dict,
+    index: SymbolIndex,
+    layers: dict[tuple[str, str], int],
+    callers: dict[tuple[str, str], list],
+    table_callees: dict[tuple[str, str], list],
+    writers: dict,
+    readers: dict,
+) -> list[dict]:
+    """Build one home row per function, from the call and data graph."""
+    rows = []
+    for image, functions in sorted(assembly.functions.items()):
+        folder = _folder_system(manifests[image].source_dir)
+        order = sorted(functions, key=lambda function: function.address)
+        prefixes = {_name_system(function.name) for function in functions}
+        for position, function in enumerate(order):
+            key = (image, function.name)
+            facts = assembly.facts[key]
+            declared = _name_system(function.name) or folder
+            local = image.startswith("emi/") and declared in prefixes
+            rules = _function_candidates(
+                function,
+                facts,
+                index,
+                manifests,
+                callers,
+                writers,
+                readers,
+                order[position - 1] if position else None,
+                order[position + 1] if position + 1 < len(order) else None,
+                declared,
+                local,
+            )
+            if rules:
+                found_home = min(
+                    rules, key=lambda system: (-len(rules[system]), system)
+                )
+                evidence = rules[found_home]
+            else:
+                found_home = declared
+                evidence = []
+            sites = callers.get(key, ())
+            rows.append(
+                {
+                    "kind": "function",
+                    "name": function.name,
+                    "image": image,
+                    "address": f"0x{function.address:08X}",
+                    "layer": layers.get(key, 0),
+                    "declared_home": declared,
+                    "found_home": found_home,
+                    "folder": folder,
+                    "counts": {
+                        "callers": len(sites),
+                        "callees": len(facts.calls),
+                        "data": sum(1 for table, _name in facts.symbols if table),
+                        "systems": dict(
+                            collections.Counter(
+                                _function_home(caller, manifests)
+                                for caller, _call in sites
+                            )
+                        ),
+                    },
+                    "evidence": evidence[:4],
+                    "confidence": "proven"
+                    if len(evidence) >= 2
+                    else "likely"
+                    if evidence
+                    else "open",
+                }
+            )
+    return rows
+
+
+def _global_rows(
+    assembly: Assembly,
+    manifests: dict,
+    index: SymbolIndex,
+    layers: dict[tuple[str, str], int],
+    functions: dict[tuple[str, str], dict],
+    extents: list[dict],
+    uses: dict,
+    writers: dict,
+    readers: dict,
+) -> list[dict]:
+    """Build one home row per global whose writers all sit in one system."""
+    absorbed: dict[tuple[str, int], str] = {}
+    for row in extents:
+        start = int(row["address"], 16)
+        for name in row["absorbs"]:
+            absorbed[(name, start)] = row["symbol"]
+    rows = []
+    for row in _unique_data_rows(index):
+        key = (row.name, row.addr)
+        written_by = writers.get(key)
+        if not written_by:
+            continue
+        systems = {
+            functions.get(item, {}).get("found_home") or _home_of(manifests, item)
+            for item in written_by
+        }
+        if len(systems) != 1:
+            continue
+        found_home = next(iter(systems))
+        image = index.canonical(row.name, row.addr) or row.table
+        declared = _symbol_system(row.name, assembly.systems) or _folder_system(
+            manifests[image].source_dir if image in manifests else row.table
+        )
+        read_by = readers.get(key, set())
+        found = uses.get(key, ())
+        rows.append(
+            {
+                "kind": "global",
+                "name": row.name,
+                "image": image,
+                "address": f"0x{row.addr:08X}",
+                "declared_home": declared,
+                "found_home": found_home,
+                "member_of": absorbed.get(key),
+                "counts": {
+                    "reads": sum(1 for _i, _f, access in found if not access.write),
+                    "writes": sum(1 for _i, _f, access in found if access.write),
+                    "writers": len(written_by),
+                    "readers": len(read_by),
+                    "images": len(assembly.functions) if image in RESIDENT else 1,
+                    "systems": {
+                        system: sum(
+                            1
+                            for item in written_by
+                            if (
+                                functions.get(item, {}).get("found_home")
+                                or _home_of(manifests, item)
+                            )
+                            == system
+                        )
+                        for system in systems
+                    },
+                },
+                "evidence": [
+                    f"writer {item[0]}:{item[1]}" for item in sorted(written_by)[:4]
+                ],
+                "confidence": "proven",
+            }
+        )
+    return rows
+
+
+def _unit_of(tree, visible: set[str], function) -> str:
+    """Return the source file a function belongs to: its C unit, else its split unit."""
+    for decl in tree.decls.get(function.name, ()):
+        if decl.kind == "def" and decl.file in visible:
+            return decl.file
+    return function.source
+
+
+def _is_split_unit(unit: str) -> bool:
+    """Whether a unit is a split assembly file rather than a C file."""
+    return unit.startswith("asm/")
+
+
+def _file_rows(
+    assembly: Assembly,
+    manifests: dict,
+    tree,
+    visible: dict[str, set[str]],
+    function_rows: list[dict],
+) -> list[dict]:
+    """Build one home row per source file, with contiguity evidence from the address order."""
+    homes = {(row["image"], row["name"]): row["found_home"] for row in function_rows}
+    rows: list[dict] = []
+    for image, functions in sorted(assembly.functions.items()):
+        order = sorted(functions, key=lambda function: function.address)
+        systems: dict[str, collections.Counter] = collections.defaultdict(
+            collections.Counter
+        )
+        names: dict[str, list[str]] = collections.defaultdict(list)
+        unit_runs: list[tuple[str, str]] = []
+        system_runs: list[str] = []
+        folder = _folder_system(manifests[image].source_dir)
+        for function in order:
+            unit = _unit_of(tree, visible.get(image, set()), function)
+            system = homes.get((image, function.name)) or folder
+            systems[unit][system] += 1
+            names[unit].append(function.name)
+            if not unit_runs or unit_runs[-1][0] != unit:
+                unit_runs.append((unit, system))
+            if not system_runs or system_runs[-1] != system:
+                system_runs.append(system)
+        evidence: dict[str, list[str]] = collections.defaultdict(list)
+        for position in range(len(unit_runs) - 1):
+            unit, system = unit_runs[position]
+            other_unit, other_system = unit_runs[position + 1]
+            if not (_is_split_unit(unit) or _is_split_unit(other_unit)):
+                continue
+            if system != other_system:
+                continue
+            if len(names[unit]) < 2 and len(names[other_unit]) < 2:
+                continue
+            evidence[unit].append(
+                f"continues {other_unit} in the address order: one unit split"
+            )
+            evidence[other_unit].append(
+                f"continues {unit} in the address order: one unit split"
+            )
+        if len(system_runs) > 1 and all(
+            _name_system(function.name) for function in order
+        ):
+            evidence_for_all = (
+                f"the systems are split into {len(system_runs)} address runs: "
+                "another system's units sit between"
+            )
+            for unit, _system in unit_runs:
+                evidence[unit].append(evidence_for_all)
+        for unit, counter in systems.items():
+            declared = _folder_system(manifests[image].source_dir)
+            found_home = _majority(counter, {}, 0) or declared
+            for name in names[unit][:4]:
+                if homes.get((image, name)) != found_home:
+                    evidence[unit].append(f"{name} is {homes.get((image, name))}")
+            rows.append(
+                {
+                    "kind": "file",
+                    "name": unit,
+                    "image": image,
+                    "declared_home": declared,
+                    "found_home": found_home,
+                    "counts": {
+                        "functions": len(names[unit]),
+                        "systems": dict(counter),
+                    },
+                    "evidence": evidence.get(unit, [])[:6],
+                    "confidence": _confidence(counter, found_home),
+                }
+            )
+    return [row for row in rows if not row["name"].startswith("asm/")]
+
+
+def signatures(args: argparse.Namespace) -> int:
+    """Print the signature the bytes prove for each function, beside its declaration."""
+    assembly = _assembly()
+    index = SymbolIndex(symbol_tables())
+    manifests = _layer_manifests()
+    tree = _layer_tree()
+    visible = _visible_sources(tree, manifests)
+    callers = _caller_map(assembly)
+    table_callers = _table_callers(assembly, _table_callees(assembly, manifests, tree))
+    rows = []
+    for image, functions in sorted(assembly.functions.items()):
+        for function in functions:
+            if args.function and function.name != args.function:
+                continue
+            rows.append(
+                _function_signature(
+                    function,
+                    assembly.facts[(image, function.name)],
+                    callers.get((image, function.name), ()),
+                    index,
+                    tree,
+                    visible.get(image, set()),
+                    table_callers.get((image, function.name), ()),
+                )
+            )
+    keys = [
+        "function",
+        "image",
+        "address",
+        "declared",
+        "found",
+        "callee_args",
+        "stack_args",
+        "caller_args_min",
+        "caller_args_max",
+        "disagree",
+        "differs",
+        "args",
+        "return",
+        "callers",
+        "evidence",
+        "confidence",
+    ]
+    if args.jsonl:
+        for row in rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return 0
+    print(
+        "\t".join(
+            [
+                "function",
+                "image",
+                "address",
+                "declared",
+                "found",
+                "callers",
+                "confidence",
+            ]
+        )
+    )
+    for row in rows:
+        print(
+            "\t".join(
+                [
+                    row["function"],
+                    row["image"],
+                    row["address"],
+                    row["declared"] or "",
+                    row["found"],
+                    str(row["callers"]),
+                    row["confidence"],
+                ]
+            )
+        )
+    return 0
+
+
+def extents(args: argparse.Namespace) -> int:
+    """Print each global's extent and the accesses beyond it the bytes prove."""
+    assembly = _assembly()
+    index = SymbolIndex(symbol_tables())
+    manifests = _layer_manifests()
+    if args.image and args.image not in manifests:
+        raise SystemExit(f"extents: no target {args.image}")
+    rows = _extent_rows(assembly, index, manifests)
+    if args.image:
+        rows = [row for row in rows if row["image"] == args.image]
+    keys = [
+        "symbol",
+        "image",
+        "address",
+        "gap",
+        "declared_size",
+        "stride",
+        "beyond",
+        "beyond_count",
+        "absorbs",
+        "section",
+        "type",
+        "evidence",
+    ]
+    if args.jsonl:
+        for row in rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return 0
+    print("\t".join(keys))
+    for row in rows:
+        print(
+            "\t".join(
+                json.dumps(row[key])
+                if isinstance(row[key], (list, dict))
+                else str(row[key] if row[key] is not None else "")
+                for key in keys
+            )
+        )
+    return 0
+
+
+def homes(args: argparse.Namespace) -> int:
+    """Print each function's, global's and file's home from the call and data graph."""
+    assembly = _assembly()
+    index = SymbolIndex(symbol_tables())
+    manifests = _layer_manifests()
+    tree = _layer_tree()
+    visible = _visible_sources(tree, manifests)
+    callers = _caller_map(assembly)
+    table_callees = _table_callees(assembly, manifests, tree)
+    layers = _layers(assembly, table_callees)
+    uses = _symbol_uses(assembly, index)
+    writers: dict[tuple[str, int], set] = collections.defaultdict(set)
+    readers: dict[tuple[str, int], set] = collections.defaultdict(set)
+    for key, found in uses.items():
+        for use_image, function_name, access in found:
+            target = writers if access.write else readers
+            target[key].add((use_image, function_name))
+    function_list = _function_rows(
+        assembly,
+        manifests,
+        index,
+        layers,
+        callers,
+        table_callees,
+        writers,
+        readers,
+    )
+    extent_list = _extent_rows(assembly, index, manifests)
+    global_list = _global_rows(
+        assembly,
+        manifests,
+        index,
+        layers,
+        {(row["image"], row["name"]): row for row in function_list},
+        extent_list,
+        uses,
+        writers,
+        readers,
+    )
+    file_list = _file_rows(assembly, manifests, tree, visible, function_list)
+    rows = sorted(
+        function_list, key=lambda row: (row["layer"], row["image"], row["name"])
+    )
+    rows.extend(sorted(global_list, key=lambda row: (row["name"], row["image"])))
+    rows.extend(sorted(file_list, key=lambda row: (row["name"], row["image"])))
+    keys = [
+        "kind",
+        "name",
+        "image",
+        "declared_home",
+        "found_home",
+        "counts",
+        "evidence",
+        "confidence",
+    ]
+    if args.jsonl:
+        for row in rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return 0
+    print("\t".join(keys))
+    for row in rows:
+        print(
+            "\t".join(
+                json.dumps(row[key])
+                if isinstance(row[key], (list, dict))
+                else str(row[key])
+                for key in keys
+            )
+        )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     """Run one verb."""
     parser = argparse.ArgumentParser(
@@ -4493,6 +6037,44 @@ def main(argv: list[str] | None = None) -> int:
     )
     twelve.add_argument("--jsonl", action="store_true", help="one JSON object per line")
     twelve.set_defaults(run=values)
+    thirteen = verbs.add_parser(
+        "signatures",
+        help="print the signature the bytes prove for each function",
+        epilog=(
+            "Example: tools/symbol.py signatures Battle_Update\n"
+            "         tools/symbol.py signatures --all --jsonl > signatures.jsonl"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    thirteen.add_argument("function", nargs="?", help="one function name")
+    thirteen.add_argument(
+        "--all", action="store_true", help="every function of every image"
+    )
+    thirteen.add_argument(
+        "--jsonl", action="store_true", help="one JSON object per line"
+    )
+    thirteen.set_defaults(run=signatures)
+    fourteen = verbs.add_parser(
+        "extents",
+        help="print each global's extent and the accesses beyond it",
+        epilog="Example: tools/symbol.py extents emi/battle/battle/03 --jsonl",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    fourteen.add_argument("image", nargs="?", help="a symbols.toml table")
+    fourteen.add_argument(
+        "--jsonl", action="store_true", help="one JSON object per line"
+    )
+    fourteen.set_defaults(run=extents)
+    fifteen = verbs.add_parser(
+        "homes",
+        help="print each function's, global's and file's home from the graph",
+        epilog="Example: tools/symbol.py homes --jsonl > homes.jsonl",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    fifteen.add_argument(
+        "--jsonl", action="store_true", help="one JSON object per line"
+    )
+    fifteen.set_defaults(run=homes)
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
         parser.error("add needs --source (a description) or --alias")

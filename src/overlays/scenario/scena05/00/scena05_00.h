@@ -47,4 +47,14 @@ extern s8 (*D_801FD674[])(void);
 
 void func_801F7660(s32 x, s32 y, s32 z, u16 angle);
 
+/* Start the scene script at state 13 with its variables and first step cleared. */
+#define SCENE_ENTER_STATE_13()  \
+    Game_SetScriptActive();     \
+    g_ScriptVars[0]       = 0;  \
+    g_ScriptVars[1]       = 0;  \
+    g_ScriptVars[2]       = 0;  \
+    g_ScriptVars[3]       = 0;  \
+    g_SceneState.step_05  = 0;  \
+    g_SceneState.state_04 = 13;
+
 #endif

@@ -8,6 +8,11 @@
 #include "area/spad.h"
 #include "shared/AreaSpark.h"
 
+/* The work-window byte offset, row stride and row count this overlay clears. */
+#define SCRATCH_COLUMN_OFFSET 0
+#define SCRATCH_COLUMN_STRIDE 0x14
+#define SCRATCH_COLUMN_COUNT  0x80
+
 extern SVECTOR  D_1F800014[];
 extern u8       D_801F5734[];
 extern Callback D_801F576C[];
