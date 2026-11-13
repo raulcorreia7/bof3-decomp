@@ -50,7 +50,31 @@ MATCH void func_801EED8C(void) {
     g_Task->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801EEEB0);
+MATCH void func_801EEEB0(void) {
+    u8           i;
+    u8           row = 0;
+    u32          slot;
+    PartyMember* work;
+
+    if (++g_Task->unk_09 == 16) {
+        if (g_Battle.target_selector & BATTLE_TARGET_PARTY_SIDE) {
+            i = 0;
+            if (g_Battle.party_count != 0) {
+                do {
+                    slot                               = Battle_AllocEffect(1, 8) & BYTE_MASK;
+                    work                               = g_Task;
+                    g_BattleEffects[slot].header.mode  = 0;
+                    g_BattleEffects[slot].unk_04       = i;
+                    g_BattleEffects[slot].arg.unk_09   = row * 0x28 + 1;
+                    g_BattleEffects[slot].target.party = work;
+                    g_Task->param.unk_0B += 1;
+                    row++, i++;
+                } while (i < g_Battle.party_count);
+            }
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801EEFE0(void) {
     u8 timer;
@@ -145,7 +169,29 @@ MATCH void func_801EF4FC(void) {
 
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
 
-INCLUDE_ASM(func_801EF688);
+/* Darkens the palette fade row the effect timer indexes and, when its wait runs out, frees the battler byte 0x04
+ * names and tells the battle UI. */
+MATCH void func_801EF688(void) {
+    u8           count;
+    u8           unk04;
+    PartyMember* battler;
+
+    /* FAKE: retail frame reserves 0x10 bytes no statement uses. */
+    FAKE_STACK_PADS(u8, 0x10);
+
+    unk04 = g_Task->unk_04;
+    g_PaletteFades[g_Task->timer].offset.red -= 1;
+    g_PaletteFades[g_Task->timer].offset.green -= 1;
+    g_PaletteFades[g_Task->timer].offset.blue -= 1;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    battler        = &g_Game.members[unk04];
+    if (!(count & BYTE_MASK)) {
+        GFX_FreePaletteFadeTarget(battler);
+        func_800AF814(g_Task->unk_04);
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF7D0(void) {
     if (g_Task->param.unk_0B == 0) {

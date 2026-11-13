@@ -5,7 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern SVECTOR D_1F800014[];
+extern SVECTOR     D_1F800014[];
+extern u8          D_800B4C90[];
+extern u8          D_80149298[];
+extern PartyMember s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT];
 
 #define MAGIC151_STEP_COUNT 5
 
@@ -17,6 +20,7 @@ extern Magic151Steps D_801EEC10;
 extern Magic151Steps D_801EEC24;
 
 extern BMagicEffectFuncs D_801EEC38;
+void                     func_800A68A4(void);
 void                     func_801F026C(void);
 void                     func_801F0648(void);
 void                     func_801F0D0C(u8 angle0, u8 angle1);

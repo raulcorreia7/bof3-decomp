@@ -6,7 +6,24 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EECB0);
+MATCH void func_801EECB0(void) {
+    u8* text;
+
+    func_800A68A4();
+    g_BattleMessageState = 1;
+    text                 = Message_GetText(D_800B4C90[g_Battle.dragon_form]);
+    SYS_CopyString(D_80149298, text, 8);
+    func_801DE560(1, 1, 0, 60, D_80149298);
+    if (g_Battle.dragon_form == 3 || g_Battle.dragon_form == DRAGON_FORM_TIAMAT || g_Battle.dragon_form == DRAGON_FORM_MAMMOTH) {
+        g_Task->header.step += 1;
+    }
+    if (g_Game.members[g_Battle.target_selector].chr.character_id == 0) {
+        g_Task->unk_09 = 3;
+    } else {
+        g_Task->unk_09 = 30;
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEDE0(void) {
     Callback handlers[2] = {func_801EEE38, func_801EF318};
@@ -81,7 +98,29 @@ MATCH void func_801EF070(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF138);
+/* Installs the active party member as the work record, releases its fades, copies its template byte, loads its
+ * action-block palette and status, requests its facing script, then restores the previous record. */
+MATCH void func_801EF138(void) {
+    PartyMember* saved;
+
+    if (EMI_IsReady()) {
+        if (g_Battle.state & BATTLE_STATE_OVER) {
+            if (g_Battle.unk_EA[0] == g_Battle.active_battler) {
+                g_Battle.state &= ~BATTLE_STATE_OVER;
+            }
+        }
+        saved  = g_Task;
+        g_Task = &g_Game.members[g_Battle.active_battler];
+        GFX_FreePaletteFadeTarget(g_Task);
+        s_BattleBattlerTemplates[g_Battle.active_battler].unk_27 = g_Game.members[g_Battle.active_battler].unk_27;
+        GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
+        func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
+        GFX_UploadPaletteRows();
+        Actor_RequestScript((g_Task->facing + 4) & BYTE_MASK);
+        g_Task = saved;
+        saved->unk_03 += 1;
+    }
+}
 
 MATCH void func_801EF2A0(void) {
     PartyMember* saved_work;
