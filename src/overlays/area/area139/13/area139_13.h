@@ -15,7 +15,6 @@
 extern u8 D_801F442C[];
 extern u8 D_801F442D[];
 extern u8 D_801F442E[];
-
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F4430[];
 extern Callback D_801F4448[];
