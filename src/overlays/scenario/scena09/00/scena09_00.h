@@ -39,11 +39,11 @@ extern Callback            D_801FE3E0[];
 extern Callback            D_801FE3EC[];
 extern u8                  D_801FE430[4];
 
-#define SCENE_WORK_ROW_COUNT 32
+#define SCENE_SPARK_COUNT 32
 
-/* One of the 32 work rows at AREA_WORK + 0x800: a spark that falls by its velocity
- * and is drawn while its life runs. */
-typedef struct SceneWorkRow {
+/* One of the 32 sparks at AREA_WORK + 0x800: it falls by its velocity and is drawn
+ * while its life runs. */
+typedef struct SceneSpark {
     u8       active; /* 0x00 */
     u8       unk_01; /* 0x01 */
     u8       life;   /* 0x02 */
@@ -56,12 +56,12 @@ typedef struct SceneWorkRow {
     u8       pad_14[4];
     Point3DL pos;       /* 0x18 */
     u8       pad_24[4]; /* 0x24 */
-} SceneWorkRow;
+} SceneSpark;
 
-ASSERT_SIZE(SceneWorkRow, 0x28);
-ASSERT_OFFSET(SceneWorkRow, vx, 0x08);
-ASSERT_OFFSET(SceneWorkRow, vz, 0x10);
-ASSERT_OFFSET(SceneWorkRow, pos, 0x18);
+ASSERT_SIZE(SceneSpark, 0x28);
+ASSERT_OFFSET(SceneSpark, vx, 0x08);
+ASSERT_OFFSET(SceneSpark, vz, 0x10);
+ASSERT_OFFSET(SceneSpark, pos, 0x18);
 
 /* func_801F7574 */
 void Scene_ClearWorkRows(void);

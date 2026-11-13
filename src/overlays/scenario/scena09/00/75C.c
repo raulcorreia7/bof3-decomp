@@ -41,26 +41,26 @@ MATCH void func_801F7424(Actor* actor) {
 
 /* func_801F7574 */
 MATCH void Scene_ClearWorkRows(void) {
-    SceneWorkRow* row;
+    SceneSpark* row;
     u8            i;
 
-    row = (SceneWorkRow*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
-    for (i = 0; i < SCENE_WORK_ROW_COUNT; i++, row++) {
+    row = (SceneSpark*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
+    for (i = 0; i < SCENE_SPARK_COUNT; i++, row++) {
         row->active = 0;
     }
 }
 
 MATCH s32 func_801F75BC(void) {
     MATRIX        camera;
-    SceneWorkRow* row;
+    SceneSpark* row;
     u8            i;
     u8            life;
     s32           alive;
 
     Area_SetCameraMatrix(&camera);
     alive = 0;
-    row   = (SceneWorkRow*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
-    for (i = 0; i < SCENE_WORK_ROW_COUNT; row++, i++) {
+    row   = (SceneSpark*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
+    for (i = 0; i < SCENE_SPARK_COUNT; row++, i++) {
         if (row->active == 0) {
             continue;
         }
