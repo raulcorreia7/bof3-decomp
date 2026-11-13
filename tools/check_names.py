@@ -181,7 +181,15 @@ def macro_counts(text: str) -> dict[str, int]:
 def changed_paths(ref: str) -> list[str]:
     """The paths under include/ or src/ a change adds, changes or renames; deleted paths add no name."""
     out = subprocess.run(
-        ["git", "diff", "--name-only", "--diff-filter=d", f"{ref}...HEAD", "--", *ROOTS],
+        [
+            "git",
+            "diff",
+            "--name-only",
+            "--diff-filter=d",
+            f"{ref}...HEAD",
+            "--",
+            *ROOTS,
+        ],
         check=False,
         capture_output=True,
         text=True,
