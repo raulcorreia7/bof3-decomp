@@ -371,13 +371,13 @@ MATCH void func_801EFD4C(void) {
 
     slot = Battle_AllocEffect(1, 1);
     Effect_CopyActiveBattlerToSlot(slot);
-    FIELD(PartyMember*, D_801EC3A4, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE) = g_Task;
-    image                                                                      = &g_BattleEffects[slot & BYTE_MASK];
-    image->unk_06                                                              = 1;
-    image->handler_index                                                       = 1;
-    image->header.mode                                                         = 0;
-    image->header.step                                                         = 0;
-    image->arg.unk_09                                                          = 1;
+    D_801EC3A4[slot & BYTE_MASK].target.party = g_Task;
+    image                                     = &g_BattleEffects[slot & BYTE_MASK];
+    image->unk_06                             = 1;
+    image->handler_index                      = 1;
+    image->header.mode                        = 0;
+    image->header.step                        = 0;
+    image->arg.unk_09                         = 1;
     g_Task->param.unk_0B += 1;
 }
 

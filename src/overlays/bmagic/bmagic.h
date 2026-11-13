@@ -13,6 +13,21 @@
 /* The bytes a sparkle ray reserves in its cell packet. */
 #define BMAGIC_RAY_CELL_SIZE      32
 
+/* Per-slot column views over the 0x78-byte effect slots: the trailing padding
+ * carries the slot stride so each column keeps its own field base. */
+typedef struct BattleEffectByteColumn {
+    u8 value;
+    u8 pad[BATTLE_EFFECT_STRIDE - 1];
+} BattleEffectByteColumn;
+
+typedef struct BattleEffectTargetColumn {
+    BattleEffectTarget target;
+    u8                 pad[BATTLE_EFFECT_STRIDE - sizeof(BattleEffectTarget)];
+} BattleEffectTargetColumn;
+
+ASSERT_SIZE(BattleEffectByteColumn, BATTLE_EFFECT_STRIDE);
+ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
+
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */

@@ -109,13 +109,13 @@ MATCH void func_801EFAD4(void) {
     func_800AEF98(0xC, 2);
     slot = Battle_AllocEffect(1, 0x1F);
     Effect_CopyActiveBattlerToSlot(slot);
-    work                                                                       = g_Task;
-    FIELD(u8, D_801EC331, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 5;
-    FIELD(u8, D_801EC336, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 1;
-    FIELD(u8, D_801EC332, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 0;
-    FIELD(u8, D_801EC335, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE)           = 0x1F;
-    effect_battler                                                             = g_BattleEffectBattler;
-    FIELD(PartyMember*, D_801EC3A4, (slot & BYTE_MASK) * BATTLE_EFFECT_STRIDE) = work;
+    work                                      = g_Task;
+    D_801EC331[slot & BYTE_MASK].value        = 5;
+    D_801EC336[slot & BYTE_MASK].value        = 1;
+    D_801EC332[slot & BYTE_MASK].value        = 0;
+    D_801EC335[slot & BYTE_MASK].value        = 0x1F;
+    effect_battler                            = g_BattleEffectBattler;
+    D_801EC3A4[slot & BYTE_MASK].target.party = work;
     effect_battler->header.flags |= ACTOR_FLAG_HIDDEN;
 }
 
