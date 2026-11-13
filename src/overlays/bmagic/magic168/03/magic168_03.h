@@ -25,7 +25,6 @@ extern u8 D_801F0158[][4][3];
 
 extern BMagicEffectWorkSteps D_801EEC1C;
 extern BMagicEffectFuncs     D_801EEC04;
-void                         func_801EF338(void);
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
 #define EFFECT_SPARKLE_TASK    D_801F17B0

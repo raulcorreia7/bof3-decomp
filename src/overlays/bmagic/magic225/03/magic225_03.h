@@ -7,8 +7,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-u32 BMagic_AllocEffect(void);
-
 /* The step table the effect handler copies onto its stack by value, as retail does. */
 typedef struct Magic225Steps {
     void (*steps[4])(void);

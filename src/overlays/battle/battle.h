@@ -86,4 +86,48 @@ extern u8           D_80145FC8;
 extern BattleEffect g_BattleEffects[];
 
 extern PanelOwner D_801ED9B0[];
+/* Prototypes the images of this group share. */
+void              func_80096A74();
+void              func_80096F00();
+void              func_800980A8();
+void              func_8009834C();
+void              func_8009B274();
+void              Battle_TriggerEnemyEvents();
+void              func_800A4688();
+void              func_800A8540();
+void              func_800A8C60();
+void              func_800A8D80();
+u8                func_800A94A8();
+u8                func_800A955C();
+s32               func_800A99AC();
+s32               func_800A9A84();
+s32               func_800A9B44();
+s32               func_800AA8FC();
+void              func_800AB834();
+void              func_800AD69C();
+void              func_800AD9CC();
+void              func_800ADCC4();
+void              func_800ADFBC();
+void              Battle_LoadSelectionEffect(s32);
+void              Battle_AllocActionEffect(u16, u32);
+void              func_800AE2D4(u32);
+void              func_800AE34C();
+void              func_800AE4D0();
+void              func_800AE788();
+void              func_800C1814();
+void              func_800C1820();
+void              func_800C1838();
+void              func_800C184C();
+void              func_800C1850();
+void              func_800C1860();
+void              func_800C1864();
+void              func_800C18F0();
+void              func_800C190C();
+void              func_800C193C();
+void              func_800C1950();
+void              func_800C19E4();
+void              func_800C19E8();
+u8                Battle_TargetPrev(u8);
+void              Battle_SetTextActionName(u32, s8);
+
 #endif

@@ -418,4 +418,45 @@ ASSERT_OFFSET(PartyMemberMessages, messages, 0x04);
 /* Finds the scene-table record for a wanted scene id and fills its palette and
  * tile fields (exe/slus_004_22@0x8014DD3C). */
 
+/* The area functions the resident tables and the area images call. */
+void Message_RunAreaMessage();
+void Actor_ClearVelocity();
+void func_801CF564();
+void func_801CFB40();
+void func_801CFF20();
+void func_801F2C14();
+void Fishing_ShowLocation();
+void func_801F2C3C();
+void func_801F32C0();
+void func_801F341C();
+void func_801F34A0();
+void func_801F36D4();
+void func_801F38C0();
+void func_801F3A8C();
+void func_801F3F80();
+void func_801F40AC();
+void func_801F418C();
+void func_801F41B0();
+void func_801F41D0();
+void func_801F4494();
+void func_801F4C84();
+void func_801F4D80();
+void func_801F512C();
+void func_801F52F8();
+
+/* The area functions the resident tables and the area images call. */
+void func_801F3224();
+void Actor_NextStep(void);
+void func_801F3608();
+void func_801F37B4();
+void func_801F3DCC();
+void Actor_Fly(void);
+void func_801F45E4();
+void Area_DrawScreenTint();
+void Actor_FreePaletteFades();
+void Actor_Reveal();
+void Actor_TrackFocus();
+void GFX_DrawShadedDisc(s16, s16, s16, u8, u8);
+void Scene_ClearActor();
+
 #endif

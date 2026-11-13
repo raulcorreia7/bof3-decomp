@@ -19,6 +19,5 @@ extern Callback D_800C1D20[];
 
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C198C(s32 mode);
-void func_800C1A80(s32 mode);
 
 #endif

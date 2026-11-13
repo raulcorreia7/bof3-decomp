@@ -20,7 +20,6 @@ extern s16     D_1F800018;
 /* The height in pixels of the band each bolt segment spans. */
 #define MAGIC097_BAND_HEIGHT 12
 
-void Effect_SetActorMatrixRolled(void);
 void func_801EF5C4(s32 band_height, u16 radius, u16 jitter_mask);
 void func_801F083C(void);
 

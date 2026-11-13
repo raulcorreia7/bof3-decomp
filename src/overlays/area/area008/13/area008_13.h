@@ -48,7 +48,6 @@ void func_801F357C(void);
 void func_801F3654(void);
 void func_801F365C(void);
 void func_801F36DC(void);
-void func_801F37B4(void);
 void func_801F37BC(void);
 void func_801F39B4(void);
 void func_801F3AA8(void);
@@ -65,7 +64,6 @@ void func_801F4424(void);
 /* func_801F450C */
 void Area_AddCameraOffsetX20(void);
 void Area_ResetCameraOffsetY(void);
-void func_801F45E4(void);
 void func_801F4600(void);
 void func_801F461C(void);
 

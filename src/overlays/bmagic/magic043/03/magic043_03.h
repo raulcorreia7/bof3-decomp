@@ -20,7 +20,6 @@ extern BattleEffect D_801EFCA4[];
 #define BMAGIC_EFFECT_SLOTS D_801EFCA4
 #define BMAGIC_EFFECT_COUNT 64
 void BMagic_DispatchEffectMode(void);
-void func_801EF72C(void);
 void func_801EF7F8(void);
 
 #endif

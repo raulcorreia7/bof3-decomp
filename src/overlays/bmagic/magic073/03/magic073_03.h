@@ -10,8 +10,6 @@ extern BMagicEffectWork* D_801F21F0;
 
 void func_801EED18(void);
 void func_801EEF50(void);
-void func_801EF724(void);
-void func_801F0454(void);
 
 u8 func_801F04A4(void);
 

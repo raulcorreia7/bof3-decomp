@@ -15,8 +15,6 @@ extern Callback   D_801F09A0[];
 
 void func_801EED90(void);
 /* func_801F02B0 */
-void Effect_RecordTrail(void);
 /* func_801F03A0 */
-void Effect_ClearTrail(void);
 
 #endif

@@ -16,7 +16,6 @@ extern BattleEffect D_801F0578[];
 void func_801F01C0(void);
 void Actor_Clear(void);
 void func_801EFD50(void);
-void BMagic_DrawDarkRing(void);
 
 #define MAGIC053_STEP_COUNT 3
 

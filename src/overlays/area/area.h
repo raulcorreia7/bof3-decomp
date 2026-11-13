@@ -56,11 +56,9 @@ extern s16      D_801448EE;
 extern u8       D_80146867;
 extern u8       D_80147ACF;
 void            Area_SpawnWeightedActor(void);
-void            func_801F2C14(void);
 void            func_801F2C18(void);
 void            func_801F2C30(void);
 /* func_801F2C38 */
-void            Fishing_ShowLocation(void);
 void            func_801F2C48(void);
 void            func_801F2C5C(void);
 s32             Area_CheckStepTrigger(s32 x, s32 y);
@@ -85,10 +83,8 @@ void            Actor_CenterOnScreen(void);
 /* func_801F3360 */
 void            Actor_ZoomOut(void);
 void            func_801F33A8(void);
-void            func_801F341C(void);
 extern u8       D_801F2DD4[];
 void            Area_StartDirectionalScript(Actor* actor);
-void            func_801F34A0(void);
 void            func_801F34E0(void);
 void            func_801F35FC(void);
 void            func_801F3690(void);

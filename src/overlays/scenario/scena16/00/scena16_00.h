@@ -44,17 +44,11 @@ void func_801F6E30(void);
 void func_801F6EB0(void);
 void func_801F6F30(void);
 void func_801F7144(void);
-void func_801F7180(void);
 void func_801F7188(void);
 void func_801F7230(void);
 void func_801F7790(void);
 void func_801F7CC4(void);
 void func_801F8358(void* record);
-s32  func_801F8398(void);
-s32  func_801F83A0(void);
 s32  func_801F83A8(void);
-void GFX_CopyPaletteCapped(u32 intensity);
-void func_801F845C(void);
-void func_801F8530(void);
 
 #endif

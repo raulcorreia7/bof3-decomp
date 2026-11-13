@@ -133,4 +133,10 @@ void Boss_EndBattle3(void);
         g_Task->unk_03      = 0;                                          \
     } while (0)
 
+/* Prototypes the images of this group share. */
+void func_800C18C4(s32);
+void func_800C1A80(s32);
+void func_800C1C88(s32);
+u8   Boss_HandleBattleEvent4(u32);
+
 #endif

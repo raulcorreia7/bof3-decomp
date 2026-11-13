@@ -113,8 +113,22 @@ void func_801F7A18(void);
 void Scene_ClearParty(void);
 void Scene_ClearScanBars(void);
 void Area_ClearWorkColumn(void);
-void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_shade);
 
 /* Scene dispatch table indexed by the mode byte at D_80146872. */
 extern s8 D_80146872;
+/* Prototypes the images of this group share. */
+void      func_801D16DC();
+void      func_801F7180();
+void      func_801F78CC();
+u8*       func_801F8394();
+s32       func_801F8398();
+s32       func_801F83A0();
+void      func_801F845C();
+void      func_801F8530();
+void      func_801F9BD4();
+void      func_801F9BDC();
+void      GFX_CopyPaletteCapped(u32);
+void      func_801FC810();
+s32       func_801FC8F4();
+
 #endif
