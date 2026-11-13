@@ -126,7 +126,7 @@ def test_source_rules_on_added_lines(
 
 
 RENAMED_BODY = (
-    "#include \"battle_03.h\"\n"
+    '#include "battle_03.h"\n'
     "MATCH void func_801D9C80(void) {\n"
     "    s16 var_s0 = 1;\n"
     "    FIELD(g_Task, 0x10) = var_s0;\n"
@@ -135,9 +135,7 @@ RENAMED_BODY = (
 )
 
 
-def run_rename(
-    tmp_path: Path, changed_body: str
-) -> subprocess.CompletedProcess[str]:
+def run_rename(tmp_path: Path, changed_body: str) -> subprocess.CompletedProcess[str]:
     return run_tree(
         tmp_path,
         {"src/overlays/test/arc/00/func_801D9C80.c": RENAMED_BODY},
