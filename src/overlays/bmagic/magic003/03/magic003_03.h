@@ -42,6 +42,7 @@ extern u8                       D_801F0B04[];
 /* The target column of g_BattleEffects: each store forms its own slot base. */
 extern BattleEffectTargetColumn D_801EC3A4[];
 void                            func_801F03F0(s32 dir);
+/* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect             D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
 #define BMAGIC_EFFECT_COUNT 32
