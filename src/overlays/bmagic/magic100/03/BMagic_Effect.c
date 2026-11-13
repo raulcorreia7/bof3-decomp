@@ -6,42 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEC70(void) {
-    PartyMember* src;
-    PartyMember* work;
-    u32          slot;
-    u32          counter;
-    u32          value;
-    s32          span;
-
-    src                  = BATTLE_ACTIVE_WORK;
-    g_Task->facing       = src->facing;
-    g_Task->pos.x.fixed  = src->pos.x.fixed;
-    g_Task->pos.y.fixed  = src->pos.y.fixed;
-    span                 = g_Battle.selected_actor->pos.z.fixed;
-    g_Task->unk_09       = 0;
-    g_Task->pos.z.fixed  = span;
-    g_Task->param.unk_0B = 0;
-    g_Task->header.mode += 1;
-    slot    = Battle_AllocEffect(1, 0xA) & BYTE_MASK;
-    counter = 0;
-    value   = 1;
-    do {
-        g_BattleEffects[slot].header.mode  = 0;
-        g_BattleEffects[slot].unk_0B       = counter;
-        g_BattleEffects[slot].arg.unk_09   = value;
-        work                               = g_Task;
-        g_BattleEffects[slot].target.party = work;
-        work->param.unk_0B += 1;
-        counter += 1;
-        value += 2;
-    } while (counter < 8);
-    SND_QueueSelectionFx(0x100);
-}
-#else
 INCLUDE_ASM(func_801EEC70);
-#endif
 
 MATCH void func_801EED9C(void) {
     if (g_Task->unk_09 != 0) {
@@ -117,33 +82,25 @@ MATCH void func_801EF434(void) {
 
 INCLUDE_ASM(func_801EF4E8);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF8E8(void) {
-    SVECTOR      pos;
-    SVECTOR      rot;
-    MATRIX       matrix;
-    long         flags;
-    s32          height;
-    PartyMember* work;
+MATCH void func_801EF8E8(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
 
     PushMatrix();
-    work   = g_Task;
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
-    if (work->header.step < 3) {
-        height = -COORD_INT(work->pos.z);
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    if (g_Task->header.step < 3) {
+        pos.vz = -COORD_INT(g_Task->pos.z) / 2;
     } else {
-        height = -(s16)Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+        pos.vz = -(s16)Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
     }
-    pos.vz = height / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
-#else
-INCLUDE_ASM(func_801EF8E8);
-#endif
 
 INCLUDE_ASM(func_801EF9D4);

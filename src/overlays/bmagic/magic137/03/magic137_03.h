@@ -8,7 +8,8 @@
 
 extern EffectDispatchSteps D_801EEC10;
 
-void func_801EF3B0(void);
+/* func_801EF3B0 */
+void Effect_SetFacingMatrix(void);
 
 extern Callback D_801F0104[];
 void            func_801EFDF8(void);

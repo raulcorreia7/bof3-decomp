@@ -25,7 +25,7 @@ MATCH void func_801EEF64(void) {
 MATCH void func_801EF018(void) {
     SYS_DISPATCH_BYTE(D_801F0104, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_801EF3B0();
+        Effect_SetFacingMatrix();
         func_801EF4C4();
         PopMatrix();
     }
@@ -71,7 +71,7 @@ MATCH void func_801EF21C(void) {
 
 #include "overlays/bmagic/Effect_Drift.h"
 
-INCLUDE_ASM(func_801EF3B0);
+#include "overlays/bmagic/Effect_SetFacingMatrix.h"
 
 INCLUDE_ASM(func_801EF4C4);
 

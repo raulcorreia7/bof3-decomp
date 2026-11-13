@@ -33,7 +33,7 @@ INCLUDE_ASM(func_801EF010);
 MATCH void func_801EF314(void) {
     SYS_DISPATCH_BYTE(D_801F04C8, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_801EF688();
+        Effect_SetFacingMatrix();
         func_801EF79C();
         PopMatrix();
     }
@@ -77,31 +77,7 @@ MATCH void func_801EF4F4(void) {
 
 #include "overlays/bmagic/Effect_Drift.h"
 
-MATCH void func_801EF688(void) {
-    SVECTOR pos;
-    SVECTOR rot;
-    MATRIX  matrix;
-    long    flags;
-
-    PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    switch (g_Task->facing) {
-        case 0:
-            rot.vz = 0;
-            break;
-        case 1:
-            rot.vz = 0x400;
-            break;
-        case 2:
-            rot.vz = 0x800;
-            break;
-        case 3:
-            rot.vz = 0xC00;
-            break;
-    }
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
-}
+#include "overlays/bmagic/Effect_SetFacingMatrix.h"
 
 INCLUDE_ASM(func_801EF79C);
 

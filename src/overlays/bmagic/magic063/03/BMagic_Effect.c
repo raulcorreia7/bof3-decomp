@@ -114,8 +114,8 @@ MATCH void func_801EF5CC(void) {
     s32 threshold;
 
     g_BMagicOrbitWork->radius -= 2;
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
+    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
+    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
     g_BMagicOrbitWork->unk_0B++;
     if (g_BMagicOrbitWork->unk_09 < 0x10) {
         g_BMagicOrbitWork->unk_09 += 2;
@@ -133,17 +133,7 @@ MATCH void func_801EF5CC(void) {
 #include "overlays/bmagic/Effect_StepOrbit.h"
 
 MATCH void func_801EF880(void) {
-    g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius);
-    FIELD(u16, g_BMagicOrbitWork, 0x1A) += g_BMagicOrbitWork->unk_0A;
-    g_BMagicOrbitWork->unk_0B++;
-    if (g_FrameCount & 0x1) {
-        if (--g_BMagicOrbitWork->unk_09 == 0) {
-            g_BattleEffectBattler->param.unk_0B--;
-            func_801F03B0();
-        }
-    }
+    BMAGIC_ORBIT_BATTLER_AND_CLEAR(func_801F03B0);
 }
 
 MATCH void func_801EF994(void) {
@@ -156,11 +146,11 @@ MATCH void func_801EF994(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    off    = FIELD(u16, g_BMagicOrbitWork, 0xE) + 0x800;
-    rot.vz = (((g_BMagicOrbitWork)->unk_03 << 7) - off) & 0xFFF;
-    pos.vx = ((g_BMagicOrbitWork)->unk_10 >> 9) - 0x4000;
-    pos.vy = ((g_BMagicOrbitWork)->unk_14 >> 9) - 0x4000;
-    pos.vz = -FIELD(s16, g_BMagicOrbitWork, 0x1A) / 2;
+    off    = g_BMagicOrbitWork->angle + 0x800;
+    rot.vz = ((g_BMagicOrbitWork->unk_03 << 7) - off) & 0xFFF;
+    pos.vx = (g_BMagicOrbitWork->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_BMagicOrbitWork->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -COORD_INT(g_BMagicOrbitWork->pos.z) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -179,9 +169,9 @@ MATCH void func_801EFD7C(void) {
 INCLUDE_ASM(func_801EFE04);
 
 MATCH void func_801EFF18(void) {
-    g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->angle       = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
+    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
     g_BMagicOrbitWork->unk_09 += 2;
     g_BMagicOrbitWork->unk_0B++;
     if (g_BMagicOrbitWork->unk_09 == 0x10) {
@@ -190,9 +180,9 @@ MATCH void func_801EFF18(void) {
 }
 
 MATCH void func_801EFFE8(void) {
-    g_BMagicOrbitWork->angle  = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin(g_BMagicOrbitWork->angle) << 5);
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->angle       = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
+    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
     g_BMagicOrbitWork->unk_0B++;
     if (--g_BMagicOrbitWork->unk_0A == 0) {
         if (g_BattleEffectBattler->header.step == 3) {
@@ -212,8 +202,8 @@ MATCH void func_801F00F0(void) {
         g_BMagicOrbitWork->unk_0B += 1;
         g_BMagicOrbitWork->angle = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
     }
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
     if (--g_BMagicOrbitWork->unk_0A == 0) {
         g_BMagicOrbitWork->header.step++;
     }
@@ -227,8 +217,8 @@ MATCH void func_801F0220(void) {
         g_BMagicOrbitWork->unk_0B += 1;
         g_BMagicOrbitWork->angle = (g_BMagicOrbitWork->angle + 0x20) & 0xFFF;
     }
-    g_BMagicOrbitWork->unk_10 = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
-    g_BMagicOrbitWork->unk_14 = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbitWork->angle) << 5);
+    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbitWork->angle) << 5);
     if (--g_BMagicOrbitWork->unk_09 == 0) {
         g_BattleEffectBattler->param.unk_0B--;
         func_801F03B0();

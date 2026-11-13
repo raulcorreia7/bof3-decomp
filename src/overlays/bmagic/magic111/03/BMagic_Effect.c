@@ -107,4 +107,12 @@ MATCH void Effect_TickOnTimerZero2(void) {
     BMAGIC_TICK_ON_TIMER_ZERO(2);
 }
 
-INCLUDE_ASM(func_801EF970);
+#include "overlays/bmagic/Effect_DrawFullScreenQuad.h"
+
+MATCH void func_801EF970(void) {
+    POLY_F4* prim;
+    s32      shade;
+    s32      tpage;
+
+    EFFECT_DRAW_FULL_SCREEN_QUAD(3);
+}

@@ -8,7 +8,15 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC88);
 
-INCLUDE_ASM(func_801EEDD0);
+MATCH void func_801EEDD0(void) {
+    g_PaletteFades[g_Task->timer].offset.red++;
+    g_PaletteFades[g_Task->timer].offset.green++;
+    g_PaletteFades[g_Task->timer].offset.blue++;
+    if (++g_Task->unk_09 == 16) {
+        D_8014637C->unk_29 = 2;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EEEF4(void) {
     g_PaletteFades[g_Task->timer].offset.red--;
@@ -35,8 +43,6 @@ MATCH void func_801EF0A4(void) {
 
 /* func_801EF114 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
-
-extern Callback D_801EFD5C[];
 
 MATCH void func_801EF158(void) {
     D_801EFD5C[g_Task->header.step]();
