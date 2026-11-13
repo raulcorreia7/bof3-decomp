@@ -103,7 +103,31 @@ MATCH void func_801EF174(void) {
 
 INCLUDE_ASM(func_801EF2DC);
 
-INCLUDE_ASM(func_801EF470);
+MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
+    /* FAKE: the record pointer must stay in s0 through the switch; an unpinned local scales the table index in v1, and the best pure-C body differs in 11 instructions at the same 0x120-byte size. */
+    FAKE_REG(u8*, record, "s0");
+
+    if (g_Task->unk_04 != 0) {
+        switch (category) {
+            case ITEM_CAT_ITEM:
+            default:
+                record = (u8*)&g_Items[item_id];
+                break;
+            case ITEM_CAT_WEAPON:
+                record = (u8*)&g_Weapons[item_id];
+                break;
+            case ITEM_CAT_ARMOR:
+                record = (u8*)&g_Armors[item_id];
+                break;
+            case ITEM_CAT_ACCESSORY:
+                record = (u8*)&g_Accessories[item_id];
+                break;
+        }
+        UI_DrawText(112, (s16)y, 0, func_801AF20C(record) & BYTE_MASK, record);
+    } else {
+        func_801EF590(D_801F0B8C, 112, (s16)y);
+    }
+}
 
 INCLUDE_ASM(func_801EF590);
 

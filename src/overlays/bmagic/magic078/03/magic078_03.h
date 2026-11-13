@@ -7,6 +7,7 @@
 
 void func_801EECFC(void);
 void Effect_PlayOnIdleTick(void);
+void func_801EFEB8(void);
 void func_801F02FC(void);
 
 extern Callback D_801F08C4[];
