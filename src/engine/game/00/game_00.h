@@ -677,7 +677,8 @@ void    func_8019BFD4(void);
 bool    func_8019C028(void);
 void    func_8019C124(s32 step_byte);
 s32     func_8019C1E4(void);
-s32     func_8019C344(s32 x, s32 y);
+/* func_8019C344 */
+s32     Area_GetVx(s32 x, s32 y);
 s32     func_8019C4F0();
 void    func_8019C620(void);
 void    func_8019C664(void);
@@ -760,10 +761,11 @@ s32     func_801A225C(s32 unused, s32 divisor, s32 flag_bits);
 s32     func_801A22CC(Actor* value_a, s32 value_b, u8 flag_bits);
 s32     func_801A239C(Actor* value_a, s32 value_b, u8 flag_bits);
 s32     func_801A246C(s32 value_a, s32 value_b, s32 flag_bits);
-void    func_801A253C(Actor* entity);
+/* func_801A253C */
+void    Area_SetXFixed(Actor* entity);
 void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
- * that instruction is dropped (func_801A253C) or the frame shrinks by 8 bytes (func_801A1384). */
+ * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (func_801A1384). */
 void    func_801A275C(void* unused);
 void    func_801A2788(s32 handler_index);
 void    func_801A27C4(Actor* entity);
@@ -785,7 +787,8 @@ void    Game_StartFadeBlack(void);
 void    func_801A386C(void);
 bool    func_801A3AC8(Actor* record);
 void    func_801A3B7C(Actor* entity);
-void    func_801A3F3C(u8* script);
+/* func_801A3F3C */
+void    Area_SetScenarioId(u8* script);
 void    func_801A3FC0(u8* cursor);
 void    func_801A4158(u8* cursor);
 u8*     func_801A42F0(u8* cursor, s8* flag, u8* counter);
@@ -798,7 +801,8 @@ u8*     func_801A46E8(u8* cursor);
 u8*     func_801A4798(u8* script);
 u8*     func_801A4844(u8* script);
 void    func_801A4914(void);
-void    func_801A4990(u8* script);
+/* func_801A4990 */
+void    Actor_SetOptionFlags(u8* script);
 void    func_801A4AA8(void);
 void    func_801A4B80(s32 index);
 u8*     func_801A4BF8(u8* script);
@@ -1050,7 +1054,8 @@ void  func_801BD83C(void);
 bool  func_801BD938(void);
 void  func_801BDBC4(void);
 s16   func_801BDCF8(s32 x, s32 y);
-s32   func_801BDF08(void);
+/* func_801BDF08 */
+s32   Area_GetActorFacingStepX(void);
 void  func_801BE574(s32 count, u8* ids);
 void  func_801BE710(GameResetRecord* record);
 void  Party_SwapMembers(u32 slot_a, u32 slot_b, u32 skip_state);
@@ -1080,7 +1085,8 @@ s32   func_801C0E48(void);
 s32   func_801C0F9C(u8 source_row);
 /* func_801C1254 */
 void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
-void  func_801C16B8(void);
+/* func_801C16B8 */
+void  Char_RebuildPartyStats(void);
 void  func_801C1840(void);
 void  func_801C1E88(s32 key, s32* counter);
 void  func_801C1F4C(s32 key);
@@ -1092,7 +1098,8 @@ bool  func_801C27E0(s8 tuning_delta);
 bool  func_801C2894(s8 tuning_delta);
 s32   func_801C2AAC(void);
 s32   func_801C2B4C(void);
-void  func_801C2E34(u8 index);
+/* func_801C2E34 */
+void  Char_SetCharacterId(u8 index);
 void  func_801C308C(s32 arg);
 void  func_801C3154(void);
 void  func_801C3204(void);
@@ -1148,7 +1155,8 @@ s32   Area_RollEncounterEnemies(s32 candidate_id);
 bool  Area_PlaceEncounterEnemies(void);
 bool  func_801C6DCC(void);
 bool  func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach);
-u32   func_801C6FD4(s32 map_column, s32 map_row);
+/* func_801C6FD4 */
+u32   Area_GetWidth(s32 map_column, s32 map_row);
 bool  func_801C7064(s32 x, s32 y, s32 reach, s32 height);
 s16   func_801C7188(s16 value);
 s32   func_801C71AC(s32 delta);

@@ -3,7 +3,7 @@
 MATCH void func_800AC870(s32 entry_id, PartyMember* source_record, s32 mode) {
     PartyMember* dst;
 
-    dst = (PartyMember*)func_800AC754(entry_id & BYTE_MASK);
+    dst = (PartyMember*)Battle_FindActorEntry(entry_id & BYTE_MASK);
     switch (mode & BYTE_MASK) {
         case 0:
             dst->unk_4B = source_record->unk_4B;

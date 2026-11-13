@@ -71,7 +71,7 @@ segments:
       - [0x1934, c, func_800C3134]
       - [0x19F0, c, func_800C31F0]
       - [0x1A54, c, Area_RoundSpriteCoordinate]
-      - [0x1A84, c, func_800C3284]
+      - [0x1A84, c, Boss_CopyEffectTransform]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

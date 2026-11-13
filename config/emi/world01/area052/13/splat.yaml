@@ -23,7 +23,7 @@ segments:
       - [0x9A0, c, func_801F35A0]
       - [0xBA8, c, func_801F37A8]
       - [0xC94, c, func_801F3894]
-      - [0xD80, c, func_801F3980]
+      - [0xD80, c, Area_GetCursor]
       - [0xE14, c, func_801F3A14]
       - [0xFA0, c, func_801F3BA0]
       - [0x104C, c, func_801F3C4C]

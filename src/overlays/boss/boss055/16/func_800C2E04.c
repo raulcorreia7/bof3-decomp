@@ -8,5 +8,5 @@ MATCH void func_800C2E04(void) {
         return;
     }
     Area_AddActor();
-    func_800C3284();
+    Boss_CopyEffectTransform();
 }

@@ -16,7 +16,8 @@ void func_801EED04(void);
 void func_801EF844(void);
 void func_801EFB24(void);
 
-void func_801F0BA8(s32 arg0);
+/* func_801F0BA8 */
+void BMagic_SetXFixed(s32 arg0);
 
 void func_801F050C(void);
 

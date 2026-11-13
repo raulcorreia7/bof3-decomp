@@ -60,7 +60,7 @@ segments:
       - [0x1020, c, Boss_ChooseBattleEnding3]
       - [0x112C, c, Boss_EndBattle3]
       - [0x11AC, c, func_800C29AC]
-      - [0x1240, c, func_800C2A40]
+      - [0x1240, c, Boss_SetCharacterId]
       - [0x12A4, c, func_800C2AA4]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

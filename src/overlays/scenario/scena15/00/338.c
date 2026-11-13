@@ -25,7 +25,7 @@ MATCH void func_801F6FCC(void) {
     if (g_FrameCount & 0x1) {
         func_801F75D8();
     }
-    func_801F7748();
+    Scene_GetZFixed();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 32;
@@ -38,7 +38,7 @@ MATCH void func_801F7078(void) {
     if (g_FrameCount & 0x1) {
         func_801F75D8();
     }
-    func_801F7748();
+    Scene_GetZFixed();
     if (g_ScriptVars[0] == 0x1F) {
         g_Task->timer       = 252;
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -47,7 +47,7 @@ MATCH void func_801F7078(void) {
 
 MATCH void func_801F7100(void) {
     func_801F71B0(g_Task->timer);
-    func_801F7748();
+    Scene_GetZFixed();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -55,7 +55,7 @@ MATCH void func_801F7100(void) {
 }
 
 MATCH void func_801F717C(void) {
-    if (!(func_801F7748() & BYTE_MASK)) {
+    if (!(Scene_GetZFixed() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -83,7 +83,8 @@ MATCH void func_801F752C(AreaSpark* spark) {
 
 INCLUDE_ASM(func_801F75D8);
 
-MATCH bool func_801F7748(void) {
+/* func_801F7748 */
+MATCH bool Scene_GetZFixed(void) {
     AreaSpark* spark;
     u8         i;
     bool       alive;

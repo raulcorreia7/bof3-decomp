@@ -51,7 +51,8 @@ void func_800C2D2C(void);
 void func_800C2E04(void);
 void func_800C2ECC(void);
 void func_800C2FA4(void);
-void func_800C3284(void);
+/* func_800C3284 */
+void Boss_CopyEffectTransform(void);
 
 void func_800C227C(void);
 void func_800C2340(u8 arg0, u8 index, u8 value);

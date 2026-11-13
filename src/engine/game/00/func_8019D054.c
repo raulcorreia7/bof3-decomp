@@ -14,7 +14,7 @@ MATCH bool func_8019D054(s32 point_x, s32 point_y) {
 
     x     = point_x;
     y     = point_y;
-    index = func_801BDE14(x, y, 1) & BYTE_MASK;
+    index = Actor_FindInRange(x, y, 1) & BYTE_MASK;
     if (index != GAME_NONE) {
         g_Actors[index].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
     }

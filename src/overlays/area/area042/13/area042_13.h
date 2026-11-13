@@ -15,7 +15,8 @@ extern u8 D_801F52E0[];
 extern u8 D_801F52E8[];
 extern u8 D_801F532C[];
 
-void func_801F3D18(s32);
+/* func_801F3D18 */
+void Area_SetPosX(s32);
 
 extern u8  D_801F5350[];
 extern u8  D_801F5354[];

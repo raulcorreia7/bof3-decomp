@@ -59,7 +59,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 153, 20, task->unk_09, *(u8*)((s8*)&g_WindowStyle));
     UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 146), 153, 8, task->unk_09, *(u8*)((s8*)&g_WindowStyle));
     slotp  = &D_801C7C5C[task->unk_0A];
-    value  = func_801AF20C(*slotp) & BYTE_MASK;
+    value  = Game_ReadCommand(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;
     UI_DrawText((task->pos.x - offset), (task->pos.y + 0x7), -(task->unk_09 != 0) & 7, 16, *slotp);
     TEXT_Format(g_UiFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK, (task->unk_0A != 4) ? 0x80 : 0x20);

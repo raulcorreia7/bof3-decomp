@@ -525,7 +525,8 @@ MATCH void func_801D5D5C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3States, D_801F294C);
 }
 
-MATCH void func_801D5D98(void) {
+/* func_801D5D98 */
+MATCH void Menu_StartFairyEventMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != 2) {
@@ -539,7 +540,8 @@ MATCH void func_801D5DF4(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step1Funcs, D_801F294D);
 }
 
-MATCH void func_801D5E30(void) {
+/* func_801D5E30 */
+MATCH void Menu_ConfirmFairy(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         D_801DB0C4 = 4;
@@ -556,7 +558,7 @@ MATCH void func_801D5E94(void) {
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((count & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     check = D_801DB0C4;
     if (check == 0) {
@@ -593,7 +595,7 @@ MATCH void func_801D5F7C(void) {
         }
     }
     func_801D812C();
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64);
     func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 0);
 }
@@ -629,7 +631,7 @@ MATCH void func_801D6124(void) {
         func_801D8058(0x4A, 0x64);
         func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 1);
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D62C8(void) {
@@ -639,7 +641,7 @@ MATCH void func_801D62C8(void) {
     D_801DB0C4 = step;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801D8058(0x4A, ((u8)D_801DB0C4 * 0x28) + 0x64);
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         D_801DB0C4 = 5;
         D_801F294D = 7;
@@ -658,7 +660,7 @@ MATCH void func_801D6390(void) {
         }
         D_801F294D = value;
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D640C(void) {
@@ -675,7 +677,7 @@ MATCH void func_801D6448(void) {
     Message_StartAreaMessage(0xF3);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     D_801F294E++;
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D64E0(void) {
@@ -688,12 +690,12 @@ MATCH void func_801D64E0(void) {
             D_801F294E = 0;
         }
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D6574(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA8E8();
     }
@@ -706,7 +708,7 @@ MATCH void func_801D65F8(void) {
 INCLUDE_ASM(func_801D6634);
 
 MATCH void func_801D67F0(void) {
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     func_801AE214((D_801DB0D0 * 8) + 0x4A, 0x42, 8, 0);
     func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
     func_801D9B80(0x12, 0x61, 0x24, 0x11);
@@ -719,9 +721,9 @@ MATCH void func_801D68AC(void) {
 
     D_801DB0C4 = D_801DB0C4 + 1;
     if (D_801DB0DC != 0) {
-        func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+        func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     } else {
-        func_801D830C(0x44 - (D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+        func_801D830C(0x44 - (D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     }
     func_801D97C8(D_801DAAA8, (D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
     func_801D9B80(0x12, (D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
@@ -730,7 +732,7 @@ MATCH void func_801D68AC(void) {
         if (D_801DB0DC != 0) {
             if (D_801DB080[0] == 0) {
                 for (i = 0; i < 5; i++) {
-                    D_801DB080[i] = g_Fairies[func_801D7EA0(D_801DB0B4) & BYTE_MASK][i];
+                    D_801DB080[i] = g_Fairies[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
             Message_StartAreaMessage(244);
@@ -746,7 +748,7 @@ MATCH void func_801D68AC(void) {
 }
 
 MATCH void func_801D6AC8(void) {
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 == 0) {
             D_801DB0C4 = 0;
@@ -760,7 +762,7 @@ MATCH void func_801D6AC8(void) {
 
 MATCH void func_801D6B60(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA8E8();
     }
@@ -772,7 +774,7 @@ MATCH void func_801D6BE4(void) {
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
-    func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {
         Message_StartAreaMessage(0xF7);
@@ -918,7 +920,8 @@ MATCH void func_801D7BE8(void) {
 
 INCLUDE_ASM(func_801D7C6C);
 
-MATCH void func_801D7DD4(void) {
+/* func_801D7DD4 */
+MATCH void Menu_StartFairyEndMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != 2 && D_801F294D == 0) {
@@ -934,7 +937,8 @@ MATCH void Fairy_EndCommuSceneEvent3(void) {
 
 #include "overlays/commu/Fairy_CountFairies.h"
 
-MATCH u8 func_801D7EA0(u8 arg) {
+/* func_801D7EA0 */
+MATCH u8 Fairy_FindActiveJob(u8 arg) {
     s32 active_count;
     s32 i;
 

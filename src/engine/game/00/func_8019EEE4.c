@@ -9,7 +9,7 @@ MATCH u8 func_8019EEE4(void) {
 
     found    = 0;
     distance = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    slot     = func_801BDE14(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
+    slot     = Actor_FindInRange(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
     if (slot != -1) {
         g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
         return true;

@@ -43,7 +43,7 @@ MATCH void func_801A5400(u8* script) {
         FAKE_BARRIER();
         *D_80146900[*counter] = data[0x9];
         *D_8014691C[*counter] = 0x7F;
-        func_801A4990(data + 0xB);
+        Actor_SetOptionFlags(data + 0xB);
         if (data[0x3] & 0x80) {
             flags_record = g_Task;
             flags_record->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

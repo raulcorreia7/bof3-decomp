@@ -10,7 +10,7 @@ MATCH u8 Battle_ApplyTurnDamage(void) {
     s16 delta;
 
     for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
-        if (!(func_801D64C4(slot) & BYTE_MASK)) {
+        if (!(Battle_GetActionLock(slot) & BYTE_MASK)) {
             g_Game.members[slot].u.turn.hp_change = 0;
             g_Game.members[slot].u.turn.ap_change = 0;
             /* FAKE: keeps the mode byte load after the two stores (the scheduler hoists it above them). */
@@ -64,7 +64,7 @@ MATCH u8 Battle_ApplyTurnDamage(void) {
         }
     }
     for (slot = 3; slot < COMBATANT_COUNT; slot++) {
-        if (!(func_801D64C4(slot) & BYTE_MASK)) {
+        if (!(Battle_GetActionLock(slot) & BYTE_MASK)) {
             if (ENEMY_COMBATANT(slot).status & STATUS_UNK_0) {
                 ENEMY_COMBATANT(slot).header.mode       = 6;
                 ENEMY_COMBATANT(slot).header.step       = 5;

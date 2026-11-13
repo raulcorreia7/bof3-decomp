@@ -86,7 +86,7 @@ NON_MATCHING void func_800A0EC4(void) {
             }
         }
     }
-    if (!(func_800A3A10(*(u8*)&g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
+    if (!(Battle_PickAbility(*(u8*)&g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
         if ((u8)g_Battle.target < 3U) {
             value = g_Game.members[g_Battle.target].chr.hp;
         } else {

@@ -30,7 +30,7 @@ segments:
       - [0xF24, c, func_801F3B24]
       - [0xFF8, c, func_801F3BF8]
       - [0x1088, c, func_801F3C88]
-      - [0x1118, c, func_801F3D18]
+      - [0x1118, c, Area_SetPosX]
       - [0x1190, c, Message_SetAnswerMessage]
       - [0x11BC, c, func_801F3DBC]
       - [0x1280, c, func_801F3E80]

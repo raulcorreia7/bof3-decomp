@@ -24,7 +24,7 @@ segments:
       - [0x5E8, c, func_801F31E8]
       - [0x8FC, c, func_801F34FC]
       - [0x9D4, c, Actor_RunAreaStep]
-      - [0xA08, c, func_801F3608]
+      - [0xA08, c, Area_SetFlag]
       - [0xA30, c, Area_AddCameraOffsetY4]
       - [0xA58, c, Area_SubCameraOffsetY4]
       - [0xA80, c, Area_ResetCameraOffsetY]

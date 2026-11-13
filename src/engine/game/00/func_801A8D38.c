@@ -31,9 +31,9 @@ MATCH u8 func_801A8D38(void* sub, s32 target) {
             ((GameScriptState*)sub)->unk_07 = value;
             if (value != 0) {
                 if (Actor_GetType() != 2) {
-                    func_801ABBA8(sub, sel);
+                    Area_MoveActorRoute(sub, sel);
                 } else {
-                    func_801C5DFC(sel);
+                    Area_SetFacingOffsetX(sel);
                 }
             }
             break;

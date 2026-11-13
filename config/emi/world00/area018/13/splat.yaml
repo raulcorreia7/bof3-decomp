@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, g_AreaModuleId]
-      - [0x4, c, func_801F2C04]
+      - [0x4, c, Actor_SetScenarioId]
       - [0x68, c, func_801F2C68]
       - [0xA8, c, func_801F2CA8]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

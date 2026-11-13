@@ -68,7 +68,7 @@ MATCH void func_801BC000(void) {
                     }
                     return;
                 case_a:
-                    if ((func_801BDF08() << 0x18) != 0) {
+                    if ((Area_GetActorFacingStepX() << 0x18) != 0) {
                         Actor_RequestScript(g_Task->direction_08);
                         goto block_26; /* retail branch */
                     }
@@ -85,7 +85,7 @@ MATCH void func_801BC000(void) {
                     }
                     tmp11        = g_Task;
                     tmp11->timer = (tmp11->timer - 1);
-                    func_801B0DFC();
+                    Actor_UpdateMovement();
                     g_Game.current->u.field.mode_12B.s8_value = 1;
                     tmp6                                      = g_Task;
                     tmp6->header.step                         = 1;

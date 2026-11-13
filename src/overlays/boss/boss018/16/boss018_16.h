@@ -61,6 +61,7 @@ void func_800C2074(s32 mode);
 
 void func_800C29AC(s32 base, s32 pattern);
 
-void func_800C2A40(void);
+/* func_800C2A40 */
+void Boss_SetCharacterId(void);
 
 #endif

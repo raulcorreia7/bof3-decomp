@@ -56,7 +56,7 @@ MATCH void func_801A68C0(u8* script) {
     FIELD(u16, D_80146904, *counter * ACTOR_SIZE)       = script[0xD] | (script[0xC] << 8);
     FIELD(u8, D_8014691C, *counter * ACTOR_SIZE)        = 0x7F;
 
-    func_801A4990(script + 8);
+    Actor_SetOptionFlags(script + 8);
 
     g_Task->tint.signed_bytes.unk_5D = -0x80;
     g_Task->tint.signed_bytes.unk_5F = -0x80;

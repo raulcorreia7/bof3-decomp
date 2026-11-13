@@ -38,7 +38,7 @@ MATCH void func_801F7480(void) {
     if ((g_FrameCount & 0x1) == 0) {
         func_801F7AE4();
     }
-    func_801F7C54();
+    Scene_DrawSparkCell();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 32;
@@ -51,7 +51,7 @@ MATCH void func_801F752C(void) {
     if ((g_FrameCount & 0x1) == 0) {
         func_801F7AE4();
     }
-    func_801F7C54();
+    Scene_DrawSparkCell();
     if (--g_Task->timer == 0) {
         g_Task->timer = 252;
         g_Task->header.mode += 1;
@@ -60,7 +60,7 @@ MATCH void func_801F752C(void) {
 
 MATCH void func_801F75C8(void) {
     func_801F7678(g_Task->timer);
-    func_801F7C54();
+    Scene_DrawSparkCell();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -68,7 +68,7 @@ MATCH void func_801F75C8(void) {
 }
 
 MATCH void func_801F7644(void) {
-    if (!(func_801F7C54() & BYTE_MASK)) {
+    if (!(Scene_DrawSparkCell() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -81,7 +81,7 @@ INCLUDE_ASM(func_801F7678);
 
 INCLUDE_ASM(func_801F7AE4);
 
-INCLUDE_ASM(func_801F7C54);
+INCLUDE_ASM(Scene_DrawSparkCell);
 
 MATCH void func_801F7D04(void) {
     s16 screen_x;

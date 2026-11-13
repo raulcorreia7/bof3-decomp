@@ -55,7 +55,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     D_80146900[*counter][0] = 0;
     D_8014691C[*counter][0] = 0x7F;
 
-    func_801A4990((u8*)(data + 0xB));
+    Actor_SetOptionFlags((u8*)(data + 0xB));
 
     if (data[3] & 0x80) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

@@ -101,7 +101,8 @@ INCLUDE_ASM(func_801D36FC);
 
 INCLUDE_ASM(func_801D3984);
 
-MATCH u8 func_801D3A48(u8 arg) {
+/* func_801D3A48 */
+MATCH u8 Fairy_GetJobActive(u8 arg) {
     s32 count = 0;
     s32 i;
 

@@ -27,7 +27,7 @@ segments:
       - [0x724, c, func_801F3324]
       - [0x98C, c, func_801F358C]
       - [0x9D0, c, func_801F35D0]
-      - [0xA08, c, func_801F3608]
+      - [0xA08, c, Area_SetTimer]
       - [0xA9C, c, func_801F369C]
       - [0xEFC, c, func_801F3AFC]
       - [0xF40, c, func_801F3B40]
