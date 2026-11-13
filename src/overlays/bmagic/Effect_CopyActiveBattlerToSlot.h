@@ -1,13 +1,6 @@
 /* Copies the 0x74 bytes of the active battler's work record into a queued effect slot: a party row below BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row. */
 /* func_801EFD4C (magic003), func_801EFAD4 (magic008) */
 
-/* The 0x74 bytes of a battler row that a queued effect slot copies. */
-typedef struct BattleWorkImage {
-    u32 words[29];
-} BattleWorkImage;
-
-ASSERT_SIZE(BattleWorkImage, 0x74);
-
 static inline void Effect_CopyActiveBattlerToSlot(u32 slot) {
     BattleWorkImage* dst;
     BattleWorkImage* src;
