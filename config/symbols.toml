@@ -1325,7 +1325,10 @@ g_BMagicEffectModes = { addr = 0x801F08DC, source = "Handlers of magic124 (Thund
 
 ["emi/bmagic/magic125/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnZeroTick = { addr = 0x801EEE60, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic125 (DivineBreath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEEC0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic125." }
 Effect_SetActorMatrix = { addr = 0x801EF1A8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic125 (DivineBreath)." }
@@ -1382,6 +1385,7 @@ D_801EFA6C = { addr = 0x801EFA6C, source = "Halfword table of magic130, indexed 
 
 ["emi/bmagic/magic131/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
@@ -1502,6 +1506,7 @@ BMagic_ProjectSpan = { addr = 0x801EF2C0, type = "func", source = "Projects the 
 
 ["emi/bmagic/magic151/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
@@ -1628,7 +1633,9 @@ g_BMagicEffectModes = { addr = 0x801F041C, source = "Handlers of magic169 (Bened
 ["emi/bmagic/magic172/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnZeroTick = { addr = 0x801EEDD8, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic172 (Magic Ball)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE38, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic172." }
 Effect_TickOnTimerZero = { addr = 0x801EF4BC, type = "func", source = "Counts the effect timer (byte 0x09) down by 2 per frame; at zero lowers the ticker (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic172 (Magic Ball)." }
@@ -1683,6 +1690,7 @@ g_BMagicEffectModes = { addr = 0x801EF770, source = "Handlers of magic218 (Aura 
 ["emi/bmagic/magic219/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC04 = { addr = 0x801EEC04, type = "Magic219Steps", source = "Step handlers of magic219, run by header.mode (byte 0x01) from func_801EEC14." }
 Effect_PlayOnZeroTick = { addr = 0x801EEFC4, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic219 (Magma Breath)." }
@@ -1732,6 +1740,7 @@ g_BMagicEffectModes = { addr = 0x801F0D54, source = "Handlers of magic222 (Combu
 ["emi/bmagic/magic223/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true }
+Battle_ProjectRange = { addr = 0x800AF764, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF4C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (Battle_ApplyDamageFlags with 0x10) and advances header.mode (byte 0x01) in magic223 (Tempest, Hurricane)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF00C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic223." }
@@ -2651,6 +2660,7 @@ g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of s
 g_MenuStatusStep2Funcs = { addr = 0x801D9700, source = "3 sub-step handlers of step 2 of the status menu, called by func_801D11A4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStatusStep2Sub2Funcs = { addr = 0x801D970C, source = "5 handlers of sub-step 2 of step 2 of the status menu, called by func_801D1898 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_MenuStatusTaskFuncs = { addr = 0x801D974C, source = "Task state handlers of the status menu, dispatched by SYS_DISPATCH_TASK." }
+g_MenuStatusTask1StateFuncs = { addr = 0x801D975C, source = "the state handlers of panel task mode 1, indexed by the panel task state" }
 g_MenuStatusTask2StateFuncs = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
 g_MenuStatusTask3StateFuncs = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
 g_MenuStatFrameLeft = { addr = 0x801D9834, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -4761,6 +4771,8 @@ Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "Looks through 
 Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "Sets g_MessageRequest to 6 when g_MessageChoice is nonzero, otherwise to 4." }
 Area_SampleForwardHeight = { addr = 0x801F4544, type = "func", source = "Samples the terrain height 5 steps ahead of the task along its facing, stores that point in unk_18 and unk_1C and the height in gravity; called by func_801F42C0 when it starts its motion." }
 g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
+g_PartyTrailStep = { addr = 0x801F616C, size = 0x14, source = "The trail step of each follower per walk phase, ten rows of two step indexes into g_PartyTrailOffset; func_801F4614 probes the cell of each follower of the walking leader." }
+g_PartyTrailOffset = { addr = 0x801F6180, size = 0x40, source = "The cell offset from the walking leader of a trail step: four blocks of eight signed byte offsets, one block per facing pair, winding once around the leader; func_801F4614 adds one to the leader position to find each follower." }
 
 ["emi/world03/area149/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -4969,6 +4981,7 @@ g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "Tag and mess
 
 ["emi/world04/area174/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_UpdateShots = { addr = 0x801F2EC4, type = "func", source = "Updates the active shots: moves them by their velocities, re-aims them, ages and frees them, and draws each; returns whether any was active." }
 Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "Runs Area_Update after World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F377C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }

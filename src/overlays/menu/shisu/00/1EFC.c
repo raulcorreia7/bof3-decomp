@@ -138,7 +138,16 @@ MATCH void Menu_DrawPanelCursor(void) {
     Menu_DrawCursorSprite(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 0);
 }
 
-INCLUDE_ASM(func_801D3018);
+MATCH void func_801D3018(void) {
+    s16 id;
+
+    g_MenuStatusTask1StateFuncs[g_MenuCurrentPanel->state]();
+    Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    id = (s16)g_MenuCurrentPanel->u.message.id;
+    if (id != 0) {
+        UI_DrawText((s16)(g_MenuCurrentPanel->pos.x + 7), (s16)(g_MenuCurrentPanel->pos.y + 3), 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
+    }
+}
 
 MATCH void func_801D30E4(void) {
     Menu_SlidePanelUp();

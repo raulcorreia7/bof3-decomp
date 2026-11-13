@@ -77,9 +77,10 @@ typedef struct BattleStatBlockPart {
 
 ASSERT_SIZE(BattleStatBlockPart, 0x10);
 
-/* Record behind the g_Battle.action cell; +0x02 is the action id. */
+/* Record behind the g_Battle.action cell; +0x01 is the action kind and +0x02 the action id. */
 typedef struct BattleAction {
-    u8  pad_00[2];
+    u8  pad_00[1];
+    u8  type; /* +0x01 mirrors g_Battle.action_type */
     u16 unk_02;
     u8  pad_04[4];
     u8  unk_08; /* +0x08 step byte: func_8009E248 sets 1, func_8009E500 sets 2 */
@@ -87,6 +88,7 @@ typedef struct BattleAction {
 
 ASSERT_SIZE(BattleAction, 0x0A);
 
+ASSERT_OFFSET(BattleAction, type, 0x01);
 ASSERT_OFFSET(BattleAction, unk_02, 0x02);
 ASSERT_OFFSET(BattleAction, unk_08, 0x08);
 
@@ -1106,5 +1108,9 @@ extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
 /* Enemy battler work record (stride 0x118, indexed by slot - 3). */
 extern EnemyBattler  g_BattleEnemyBattlers[];
+/* The last battle's stat gains, which the bate stat screen adds to its character. */
+extern u32           D_801FE4E8;
+extern u8            D_801FE4EF;
+extern u32           D_801FE4F0;
 
 #endif

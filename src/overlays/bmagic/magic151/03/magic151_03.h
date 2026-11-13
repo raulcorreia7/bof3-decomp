@@ -20,11 +20,13 @@ extern BMagicEffectFuncs D_801EEC38;
 void                     func_801F026C(void);
 void                     func_801F0648(void);
 void                     func_801F0D0C(u8 angle0, u8 angle1);
+void                     func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask);
 
 extern Callback D_801F24B8[];
 /* The draw step's handler table and its two-byte row per effect slot. */
 extern u8       D_801F24D0[][2];
 extern Callback D_801F24F0[];
+extern Callback D_801F24FC[];
 extern Callback D_801F250C[];
 void            func_801F1DC0(void);
 void            BMagic_DrawGlowRingInner(void);
