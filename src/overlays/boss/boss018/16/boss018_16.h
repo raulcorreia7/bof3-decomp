@@ -68,36 +68,36 @@ void func_800C2AA4(void);
  * enemy status words select, and the restart end runs func_800C2AA4. Kept as a statement macro:
  * the inline form picks a different address form for the first result store. Every change must
  * verify Boss_HandleBattleEvent, Boss_HandleBattleEvent2 and Boss_HandleBattleEvent3. */
-#define BOSS_RUN_BATTLE_EVENT_BODY(mode)                    \
-    switch ((u8)(mode)) {                                   \
-        case BOSS_EVENT_RESTART_BEGIN:                      \
-            if (g_BattleEnemyBattlers[0].status & 0x4000) { \
-                g_Battle.outcome.result |= 2;               \
-            }                                               \
-            if (g_BattleEnemyBattlers[1].status & 0x4000) { \
-                g_Battle.boss_flags |= 2;                   \
-                g_Battle.outcome.result |= 2;               \
-            }                                               \
-            if (g_BattleEnemyBattlers[2].status & 0x4000) { \
-                g_Battle.boss_flags |= 1;                   \
-                g_Battle.outcome.result |= 1;               \
-            }                                               \
-            if (g_Battle.outcome.result != 0) {             \
-                func_800C2AA4();                            \
-            }                                               \
-            break;                                          \
-        case BOSS_EVENT_ACTION_START:                       \
-            break;                                          \
-        case BOSS_EVENT_TURN_END:                           \
-            break;                                          \
-        case BOSS_EVENT_TICK:                               \
-            break;                                          \
-        case BOSS_EVENT_EFFECTS_LOADED:                     \
-            break;                                          \
-        case BOSS_EVENT_RESTART_END:                        \
-            func_800C2AA4();                                \
-            break;                                          \
-    }                                                       \
+#define BOSS_RUN_BATTLE_EVENT_BODY(mode)                          \
+    switch ((mode) & BYTE_MASK) {                                 \
+        case BOSS_EVENT_RESTART_BEGIN:                            \
+            if (g_BattleEnemyBattlers[0].status & STATUS_KO) {    \
+                g_Battle.outcome.result |= BATTLE_RESULT_VICTORY; \
+            }                                                     \
+            if (g_BattleEnemyBattlers[1].status & STATUS_KO) {    \
+                g_Battle.boss_flags |= 2;                         \
+                g_Battle.outcome.result |= BATTLE_RESULT_VICTORY; \
+            }                                                     \
+            if (g_BattleEnemyBattlers[2].status & STATUS_KO) {    \
+                g_Battle.boss_flags |= 1;                         \
+                g_Battle.outcome.result |= BATTLE_RESULT_DEFEAT;  \
+            }                                                     \
+            if (g_Battle.outcome.result != 0) {                   \
+                func_800C2AA4();                                  \
+            }                                                     \
+            break;                                                \
+        case BOSS_EVENT_ACTION_START:                             \
+            break;                                                \
+        case BOSS_EVENT_TURN_END:                                 \
+            break;                                                \
+        case BOSS_EVENT_TICK:                                     \
+            break;                                                \
+        case BOSS_EVENT_EFFECTS_LOADED:                           \
+            break;                                                \
+        case BOSS_EVENT_RESTART_END:                              \
+            func_800C2AA4();                                      \
+            break;                                                \
+    }                                                             \
     return 0
 
 #endif
