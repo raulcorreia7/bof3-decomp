@@ -6,9 +6,6 @@
 
 #include "overlays/area/world04.h"
 
-/* The published field work row and the scene bytes the request paths write. */
-
-/* The area flag word and the two scene bytes the bit paths write. */
 /* D_80143F1D */
 extern u8  g_GameRequestKind;
 /* The selection pairs at the payload start. */

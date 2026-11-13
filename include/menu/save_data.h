@@ -30,7 +30,8 @@ typedef struct SaveData {
     /* 0x000 */ SceneState      scene_state; /* a snapshot of g_SceneState */
     /* 0x010 */ u8              unk_10[3];
     /* 0x013 */ SceneEventState scene_event;
-    /* 0x016 */ u8              unk_16[0xA];
+    /* 0x016 */ u16             scene_event_timer; /* the scene event countdown, in thirtieths of a second */
+    /* 0x018 */ u8              unk_18[8];
     /* 0x020 */ u8              script_vars[4]; /* a copy of g_ScriptVars[0..3] */
     /* 0x024 */ u16             area_id;        /* the area the save resumes in */
     /* 0x026 */ u8              unk_26;
@@ -75,6 +76,7 @@ typedef struct SaveData {
 
 ASSERT_SIZE(SaveData, SAVE_BLOCK_SIZE);
 ASSERT_OFFSET(SaveData, scene_event, 0x013);
+ASSERT_OFFSET(SaveData, scene_event_timer, 0x016);
 ASSERT_OFFSET(SaveData, script_vars, 0x020);
 ASSERT_OFFSET(SaveData, area_id, 0x024);
 ASSERT_OFFSET(SaveData, entry_facing, 0x027);

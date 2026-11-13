@@ -48,4 +48,11 @@ void func_801F38E0(void* arg0, s32 arg1, s32 arg2);
 void func_801F3ADC(void* arg0, void* arg1, s32 arg2);
 void func_801F40F4(s32 arg0);
 
+/* Restarts the area task at mode 1 and clears the two sticky state bytes. */
+#define AREA_RESET_TASK_TO_MODE1() \
+    g_Task->timer       = 0;       \
+    g_Task->header.mode = 1;       \
+    D_801F68A0          = 0xF;     \
+    D_801F689C          = 0;
+
 #endif

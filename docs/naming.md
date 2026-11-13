@@ -59,22 +59,33 @@ void PartyAddItem(u16 itemId, u8 nCount);    /* no tag, camelCase, Hungarian */
 Every function, global, static, constant and macro carries the tag of the system that owns it.
 System tags are capitals, as SDL writes them; game tags are words.
 
-| Kind   | Tags                                                                                                                                                            | Global word                                                                         |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| System | `SYS_ GFX_ SND_ DISC_ EMI_ SAVE_ STRING_ UI_ INPUT_`: engine, platform and I/O                                                                                  | `g_Sys`, `g_Gfx`, `g_Snd`, `g_Disc`, `g_Emi`, `g_Save`, `g_Text`, `g_Ui`, `g_Input` |
-| Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ Fish_ Game_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
+| Kind   | Tags                                                                                                                                                                                                                | Global word                                                                         |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| System | `SYS_ GFX_ SND_ DISC_ EMI_ SAVE_ STRING_ UI_ INPUT_ MATH_ LZ77_`: engine, platform and I/O                                                                                                                          | `g_Sys`, `g_Gfx`, `g_Snd`, `g_Disc`, `g_Emi`, `g_Save`, `g_Text`, `g_Ui`, `g_Input` |
+| Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ Well_ Fishing_ Game_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
 
 A constant or macro takes the tag in capitals: `BATTLE_`, `BMAGIC_`, `PLCHAR_`, `WORLDMAP_`,
-`SCENE_`. `MATH_` names only the game's own math routines.
+`SCENE_`, `FISHING_`. `MATH_` names only the game's own math routines; `LZ77_` names the decoder.
 
 `Field`, `World` and `Etc` are not tags. The disc has `BIN/WORLD##/AREA###` and no other map word:
 one resident map engine runs every area, and the world map is 11 AREA images whose map-load entry
 sets bit 0 of `flag_32`.
 
-| Tag         | Code                                                                      |
-| ----------- | ------------------------------------------------------------------------- |
-| `Area_`     | The map engine and the area maps: towns, dungeons and the world map alike |
-| `WorldMap_` | Code and data only the world-map areas use                                |
+| Tag              | Code                                                                      |
+| ---------------- | ------------------------------------------------------------------------- |
+| `Area_`          | The map engine and the area maps: towns, dungeons and the world map alike |
+| `WorldMap_`      | Code and data only the world-map areas use                                |
+| `Char_`          | Character records, stats and ids                                          |
+| `PlChar_`        | The player-character overlay; the disc label is `PLCHAR`                  |
+| `Fishing_`       | The fishing pond and its shop                                             |
+| `FairyCasino_`   | The casino scene in the fairy village                                     |
+| `FairyNickname_` | The nickname scene in the fairy village                                   |
+| `FairyCopyShop_` | The copy shop scene in the fairy village                                  |
+| `Well_`          | The well minigame                                                         |
+
+`World_`, `PAD_`, `Mem_`, `Matrix_`, `Data`, `Info` and `Work` are not tags. The world-map code is
+`WorldMap_`, the pad wrapper is `INPUT_`, the memory helper is `SYS_` and the matrix helpers are
+`MATH_`. `World01_` and `WORLD00_` are disc and area labels, not tags.
 
 A disc folder number is a tag only until the area's game term is proven.
 
@@ -93,6 +104,63 @@ UI parts:
 | A screen's own UI                                                    | The screen tag: `Shop_`, `Master_`, `Fairy_`, `SAVE_`, or `Menu_` for title and start |
 | Numbers, gauges and list rows                                        | The tag of the screen that draws them                                                 |
 
+## Vocabulary
+
+One word per concept. A new name uses the `Word`; `Rejected` lists the words that name the same
+concept. Two words stay only where the definitions differ. A word the SDK, the hardware or one of the
+game's own records owns keeps its meaning (`Callback`, `Bank`, `Slot`, `Cell`); the game never renames it.
+
+| Concept                       | Word                                        | Definition                                                                              | Rejected                                                                               |
+| ----------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Data table                    | the element plural                          | An indexed sequence in memory, named for the plural of what its index selects           | `Table`, `Array`, `Set`, `Pool`, `Funcs`, `Steps`, `Handlers`; `List` for a data table |
+| Sound bank                    | `Bank`                                      | A VAB loaded into one SPU bank slot                                                     | —                                                                                      |
+| Buffer                        | `Buffer`                                    | A byte region that data passes through                                                  | `Buf`                                                                                  |
+| Queue                         | `Queue`                                     | A first-in first-out list of requests                                                   | —                                                                                      |
+| Index                         | `Index`                                     | A position in a runtime array                                                           | `Idx`                                                                                  |
+| Id                            | `Id`                                        | The value the retail data stores to identify a thing                                    | —                                                                                      |
+| Slot                          | `Slot`                                      | A filled position in a fixed container the player sees                                  | —                                                                                      |
+| Count and value               | `Count`, `Value`                            | How many elements a collection holds; a generic number whose role the type names        | `Cnt`, `Num`, `Amount`, `Quantity`                                                     |
+| Size                          | `Size`                                      | Bytes of storage a record, buffer or primitive takes                                    | `Len` for bytes                                                                        |
+| Length                        | `Length`                                    | The number of elements or characters in a run                                           | `Len`                                                                                  |
+| Max and limit                 | `Max`, `Limit`                              | The largest value of a quantity; a bound one operation stays within                     | —                                                                                      |
+| Function-pointer element      | `<Thing>Func`                               | A function pointer stored in a table, typed for one signature                           | `Handler`, `Proc`, `Routine`, `Fn`, `Cb`                                               |
+| Callback type                 | `Callback`                                  | The no-argument `void (*)(void)` entry                                                  | —                                                                                      |
+| Scheduler thread              | `Thread`                                    | One cooperative task the main loop runs each frame                                      | `CallbackSlot`, `Callback` for the slot                                                |
+| Event hook                    | `Hook`                                      | A function pointer the engine calls at one event                                        | `Callback` for the pointer                                                             |
+| State phase                   | `Mode`, `Step`                              | The phase a mode byte selects; the index a state machine advances                       | `Kind` for either                                                                      |
+| Dispatch                      | `Dispatch`                                  | Call one entry of a table by index                                                      | `Handle`                                                                               |
+| Initialize                    | `Init`                                      | Bring a system or record to ready for first use                                         | `Setup`, `Create`, `New` as a lifecycle verb                                           |
+| Start and begin               | `Start`, `Begin`                            | Begin an ongoing operation; enter a discrete script or record                           | —                                                                                      |
+| End                           | `End`                                       | Finish a phase or record                                                                | `Finish`                                                                               |
+| Stop, exit, close             | `Stop`, `Exit`, `Close`                     | Stop a playback; leave a system; close a window                                         | —                                                                                      |
+| Free, release, remove         | `Free`, `Release`, `Remove`                 | Release a slot; give up a claim; take an element out of a collection                    | `Delete`, `Destroy`, `Kill`                                                            |
+| Reset and clear               | `Reset`, `Clear`                            | Restart a system; zero one record's fields                                              | —                                                                                      |
+| Open                          | `Open`                                      | Open a player-visible window, panel or shop                                             | —                                                                                      |
+| Update, tick, run             | `Update`, `Tick`, `Run`                     | Run a frame; advance a countdown; execute one named action                              | `Exec`, `Process`, `Do`, `Handle` for a frame                                          |
+| Read and load                 | `Read`, `Load`                              | Transfer bytes from the device; bring a resource into memory                            | `Fetch`                                                                                |
+| Get and find                  | `Get`, `Find`                               | Read one known value; search and return `GAME_NONE`                                     | `Lookup`, `Search` as a verb                                                           |
+| Set, write and save           | `Set`, `Write`, `Save`                      | Write one value by key; write a record back; write the memory card                      | `Store`, `Put`                                                                         |
+| Yes/no questions              | `Is`, `Has`, `Can`, `Test`                  | A property, a possession, an ability, a flag                                            | `Check`                                                                                |
+| Create, alloc, spawn, add     | `Create`, `Alloc`, `Spawn`, `Add`           | Construct an object; claim a slot; place it in the world; append an element             | `Make`, `New` as a creation verb, `Append`, `Insert`                                   |
+| Type                          | `Type`                                      | The category a retail value selects                                                     | `Kind`, `Class`                                                                        |
+| Flag and flags                | `Flag`, `Flags`                             | One bit; a word of packed bits                                                          | `Bits`                                                                                 |
+| Mask                          | `Mask`                                      | A bit pattern that selects bits                                                         | —                                                                                      |
+| Timer, counter, frame         | `Timer`, `Counter`, `Frame`                 | A countdown; a count of events; a count of rendered frames                              | `Tick` as a noun for the value                                                         |
+| Wait and delay                | `Wait`, `Delay`                             | Hold until a condition; a count of frames before an action                              | —                                                                                      |
+| Draw, show, display           | `Draw`, `Show`, `Display`                   | Queue primitives; make a message visible; the hardware display buffer                   | `Render`                                                                               |
+| Character and char            | `Character`, `Char`                         | The record and its id; the function and constant tag                                    | `Chara`                                                                                |
+| Party, party member, player   | `Party`, `PartyMember`, `Player`            | The group; one member record; a playback object                                         | `Member` for a party member                                                            |
+| Enemy and boss                | `Enemy`, `Boss`                             | The BENEMY definition and its battle row; a boss battle module                          | `Monster`                                                                              |
+| Message, text and string      | `Message`, `Text`, `String`                 | A message request or window; game text content; a byte sequence                         | `Msg`                                                                                  |
+| Anim, animation, motion       | `Anim`, `Animation`, `Motion`               | The actor's animation stream; a frame sequence; physical movement                       | —                                                                                      |
+| Effect, magic, ability, skill | `Effect`, `Magic`, `Ability`, `Skill`       | A visual effect; the battle magic program; the ability record; an ability of type SKILL | `Fx`, `Spell`                                                                          |
+| Item                          | `Item`                                      | The item records and their ids                                                          | `Goods`                                                                                |
+| Area, map, scene, field       | `Area`, `Map`, `Scene`, `Field`             | The level; its grid data; what the scene window runs; the field state                   | —                                                                                      |
+| World map                     | `WorldMap`                                  | Code and data only the world-map areas use                                              | `World` in a code name                                                                 |
+| Position and geometry         | `Pos`, `Point`, `Coord`, `Vector`, `Offset` | A position value; a point type; a fixed-point coordinate; a math vector; a displacement | —                                                                                      |
+| Color, tint, RGB              | `Color`, `Tint`, `RGB`                      | A colour value; a colour delta; the packed pixel format                                 | `Colour`                                                                               |
+| Abbreviations                 | the full word                               | A name says the thing, not a saved keystroke                                            | `Ptr`, `Buf`, `Tmp`, `Cur`, `Num`, `Idx`, `Cnt`, `Obj`, `Ctrl`, `Mgr`, `Spr`           |
+
 ## Functions
 
 A function name takes one of two orders:
@@ -109,19 +177,27 @@ name, rename the other two in the same change. A qualifier goes last when two fu
 (`Battle_TargetNext`, `Battle_TargetPrev`). The subject is the tag, never a word glued to the verb
 (`Message_SelectAnswer`). One verb per concept:
 
-| Verb                            | Meaning                                          |
-| ------------------------------- | ------------------------------------------------ |
-| `Update` / `Draw`               | per-frame logic and rendering                    |
-| `Dispatch`                      | calls one entry of a table                       |
-| `NextStep` / `SetState`         | advance a step counter; set a state              |
-| `Init` / `Reset` / `Exit`       | lifecycle of a system                            |
-| `Start` / `End`, `Load`         | begin and finish; read from disc or memory       |
-| `Alloc` / `Free`                | take and release a slot                          |
-| `Get` / `Set`                   | read and write one value by a known key          |
-| `Find`                          | search; returns `GAME_NONE` when nothing matches |
-| `Is` / `Has` / `Can`            | yes/no questions                                 |
-| `Add`, `Remove`, `Count`        | edit a collection; count its members             |
-| `Play`, `Stop`, `Wait`, `Apply` | as the word says                                 |
+| Verb                            | Meaning                                                  |
+| ------------------------------- | -------------------------------------------------------- |
+| `Update` / `Draw`               | per-frame logic and rendering                            |
+| `Tick`                          | advance a countdown timer                                |
+| `Run`                           | execute one named action or task                         |
+| `Dispatch`                      | call one entry of a table                                |
+| `NextStep` / `SetState`         | advance a step counter; set a state                      |
+| `Init` / `Reset` / `Exit`       | lifecycle of a system                                    |
+| `Start` / `End`                 | begin and finish an ongoing operation                    |
+| `Begin` / `End`                 | enter and finish a discrete script or record             |
+| `Open` / `Close`                | open and close a player-visible window                   |
+| `Load` / `Read`                 | bring a resource into memory; read bytes from disc or CD |
+| `Alloc` / `Free`                | take and release a slot                                  |
+| `Release`                       | give up a claimed target or actor                        |
+| `Get` / `Set`                   | read and write one value by a known key                  |
+| `Write` / `Save`                | write a record back; write the memory card               |
+| `Find`                          | search; returns `GAME_NONE` when nothing matches         |
+| `Is` / `Has` / `Can` / `Test`   | yes/no questions; test a flag                            |
+| `Add`, `Remove`, `Count`        | edit a collection; count its members                     |
+| `Create` / `Spawn`              | construct an object; place it in the world               |
+| `Play`, `Stop`, `Wait`, `Apply` | as the word says                                         |
 
 A function the game calls through a table or a hook takes a plain name for what it does, never a
 `Cb`, `Callback` or `Handler` suffix: in PsyQ, `Callback` names the function that registers one. One
@@ -299,6 +375,9 @@ usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, 
 | a second view  | `View`, `As<Type>`                                       | a union member named by role; a byte or half of one value is `LOBU(x)`, `LOH(x)` (`include/common/util.h`) |
 | nothing        | `Data`, `Info`, `Obj`, `Object`, `Work`, `Misc`          | what it holds: `FishingState`, not `Area030Work`                                                           |
 | a number       | `Table6`, `Area016`, `Callback3`                         | what the index selects (`g_BattleCommands`); the place or system once proven (`Fishing`, `Town`)           |
+| a category     | `Kind`, `Class`                                          | `Type`: `BattleOwnerType`, not `BattleOwnerKind`                                                           |
+| a saved key    | `Ptr`, `Buf`, `Tmp`, `Cur`, `Num`, `Idx`, `Cnt`, `Obj`   | the word: `index`, `count`, `buffer`, `current`, the thing a pointer names                                 |
+| a callable     | `Handler`, `Proc`, `Routine`, `Cb`                       | the action the function runs; `Func` for a table element, `Callback` for `void (*)(void)`                  |
 
 A storage word stays when it is the game's or the hardware's own term: a save `Slot`, a menu `Row`
 the player sees, the PlayStation `Scratchpad`, an SDK name.
@@ -308,7 +387,9 @@ the player sees, the PlayStation `Scratchpad`, an SDK name.
 - A table is the plural of what its index selects, in game terms: `g_Weapons`, `g_AreaEncounters`,
   `g_BattleTurnPhases`, `g_SceneEvents`.
 - A sequence is named for what happens: `g_MenuStatusOpen`.
-- No `Table`, `List`, `Map`, `Funcs`, `Steps`, `Handlers` or `Callback` word, and no wrapper type.
+- No `Table`, `Array`, `Set`, `Pool`, `Funcs`, `Steps`, `Handlers` or `Callback` word for a data
+  table, and no wrapper type. A player-visible menu list keeps `List`; a map's grid data keeps
+  `Map` (`MapCell`, `AreaMapBundle`).
 - The element type carries the mechanism: `<Thing>Func`, one type per signature. The no-argument
   entry `void (*)(void)` is `Callback` (`include/common/handler.h`).
 - Until the index is known, a table keeps its address name. Per-image tables of different tasks

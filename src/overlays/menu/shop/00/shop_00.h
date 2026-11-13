@@ -766,4 +766,14 @@ static inline void MenuClearScreenTile(void) {
     GFX_AddPrim(1, sizeof(TILE));
 }
 
+/* Counts the cue counter down and steps the shop when it reaches zero.
+ * The member declares p and val. */
+#define SHOP_TICK_COUNTDOWN_AND_STEP() \
+    p   = &D_80148654;                 \
+    val = *p - 1;                      \
+    *p  = val;                         \
+    if (val == 0) {                    \
+        D_80148652 += 1;               \
+    }
+
 #endif

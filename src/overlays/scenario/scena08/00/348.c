@@ -428,7 +428,7 @@ INCLUDE_ASM(func_801F90C8);
 
 #include "shared/AngleAverage12.h"
 
-INCLUDE_ASM(func_801F9470);
+#include "shared/GFX_DrawFan.h"
 
 MATCH void func_801F95D4(void) {
     SYS_DISPATCH_TASK(D_801FE908, 1, g_Task);

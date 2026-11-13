@@ -24,4 +24,6 @@ u16  func_801F33E4(s32 base, s32 arg1, s32 row, s32 mode);
 /* The selection pass this image's update entry runs. */
 void func_801F3444(void);
 
+void func_801F3548(void);
+
 #endif

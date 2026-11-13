@@ -2,8 +2,6 @@
 
 extern u8 D_80145F20[];
 
-/* Each battler row is 0x140 bytes; each colour cell inside a row is 0xA4. */
-#define BATTLE_CELL_STRIDE      0xA4
 /* The active battler index selects one of three rows. */
 #define BATTLE_ACTIVE_ROW_COUNT 3
 /* The timer counts up to this value before it stops. */

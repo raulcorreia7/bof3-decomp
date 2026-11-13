@@ -6,28 +6,29 @@
  */
 MATCH void func_8014EF80(void) {
     s32  flag;
-    u16* coordinates;
+    u16* level;
     u16  value;
-    /* FAKE: allocator picks the countdown cell first; retail reuses v0 as the coordinate accumulator. */
-    FAKE_REG(u16, coordinate, "v0");
-    u16 countdown;
+    u16  first_coordinate;
+    u16  second_coordinate;
+    u16  countdown;
 
-    flag        = 2;
-    coordinates = (u16*)&g_AreaCameraAngle.vx;
-    value       = 0;
+    flag  = 2;
+    level = (u16*)&g_AreaCameraAngle.vx;
+    value = 0;
 
 loop:
     if ((GFX_UpdateScreenFade(&value, 0x400, 1, 0, flag) & BYTE_MASK) == 0) {
-        coordinate               = coordinates[0];
+        first_coordinate         = level[0];
         countdown                = g_AreaCameraOffsetZ;
         g_AreaCameraRefreshCount = flag;
-        coordinate += 0xB;
-        coordinates[0] = coordinate;
-        coordinate     = coordinates[2];
+        first_coordinate += 0xB;
+        level[0] = first_coordinate;
+        /* FAKE: hold the second coordinate load after the first store. */
+        FAKE_ORDER_LOCK(second_coordinate = level[2]);
         countdown -= 0x32;
-        g_AreaCameraOffsetZ = countdown;
-        coordinate += 0xB;
-        coordinates[2] = coordinate;
+        /* FAKE: hold the count store ahead of the coordinate add. */
+        FAKE_ORDER_LOCK(g_AreaCameraOffsetZ = countdown);
+        level[2] = second_coordinate + 0xB;
         CallbackWait(1);
         /* Retail keeps this spin as a goto loop (as in func_8014F460). */
         goto loop;
