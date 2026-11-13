@@ -272,16 +272,15 @@ def worse(
 
 def functions(
     files: dict[str, str], paths: Iterable[str]
-) -> dict[str, tuple[int, str, bool]]:
-    """Return ``name -> (most placeholder tokens in one copy, body shape, is func_<ADDR>)`` for the
-    ``MATCH`` functions in ``paths``; copies of one name (a body pasted into images) keep the worst."""
-    out: dict[str, tuple[int, str, bool]] = {}
+) -> dict[tuple[str, str], tuple[int, str, bool]]:
+    """Return ``(path, name) -> (placeholder tokens, body shape, is func_<ADDR>)`` for the ``MATCH``
+    functions in ``paths``; a name repeated in one file keeps the worst copy."""
+    out: dict[tuple[str, str], tuple[int, str, bool]] = {}
     for path in sorted(set(paths) & files.keys()):
         for name, body in bodies(strip_comments(files[path])):
-            tokens = unnamed(body)
-            prior = out.get(name, (0, "", False))
-            out[name] = (
-                max(tokens, prior[0]),
+            prior = out.get((path, name), (0, "", False))
+            out[path, name] = (
+                max(unnamed(body), prior[0]),
                 shape(name, body),
                 bool(ADDR_NAME.fullmatch(name)),
             )
@@ -299,47 +298,39 @@ def unnamed(body: str) -> int:
     return len(PLACEHOLDER.findall(body)) + len(RAW_CAST.findall(body)) + views
 
 
-def placeholders(
-    files: dict[str, str], paths: Iterable[str]
-) -> dict[tuple[str, str], int]:
-    """Return ``(path, name) -> most placeholder tokens in one copy`` for the ``MATCH`` functions
-    in ``paths``."""
-    out: dict[tuple[str, str], int] = {}
-    for path in sorted(set(paths) & files.keys()):
-        for name, body in bodies(strip_comments(files[path])):
-            out[path, name] = max(unnamed(body), out.get((path, name), 0))
-    return out
-
-
 def ratchet(
     old: dict[str, str],
     new: dict[str, str],
     changed: Iterable[str],
     gate: Iterable[str] = PER_FUNCTION,
 ) -> list[str]:
-    """Return one line per function that got worse in the touched files, by name.
+    """Return one line per function that got worse in the touched files.
 
-    ``names`` compares a function present in both revisions, in the same file, or in its new
-    file when the body moved. ``addr`` flags a ``func_<ADDR>``
-    function whose body was matched under a real name before. A new ``MATCH`` body is exempt.
+    Functions are keyed by file and name. ``names`` compares a function present in both
+    revisions in the same file, or a real-named body that moved to another file. An address
+    name is file-scoped, since overlays reuse addresses: a moved ``func_<ADDR>`` is a new body.
+    ``addr`` flags a ``func_<ADDR>`` function whose body was matched under a real name before.
+    A new ``MATCH`` body is exempt.
     """
     changed = list(changed)
     before, after = functions(old, changed), functions(new, changed)
     named = {sh for _, sh, addr in before.values() if not addr}
+    gone = {
+        name
+        for _, name in before.keys() - after.keys()
+        if not ADDR_NAME.fullmatch(name)
+    }
     lines = []
-    # Overlays reuse addresses, so one func_<ADDR> name can be two functions in two images:
-    # compare the copy in the same file, and fall back to the name only for a body that moved.
-    was, now = placeholders(old, changed), placeholders(new, changed)
-    gone = {name for path, name in was.keys() - now.keys()}
-    for path, name in sorted(now):
-        tokens = now[path, name]
-        prior = was.get((path, name))
-        if prior is None and name in gone and name in before:
-            prior = before[name][0]
+    for (path, name), (tokens, _, _) in sorted(after.items()):
+        prior = before[path, name][0] if (path, name) in before else None
+        if prior is None and name in gone:
+            prior = max(
+                (v[0] for (_, n), v in before.items() if n == name), default=None
+            )
         if "names" in gate and prior is not None and tokens > prior:
             lines.append(f"{name}: names {prior} -> {tokens}")
-    for name, (_, sh, addr) in sorted(after.items()):
-        if "addr" in gate and addr and name not in before and sh in named:
+    for (path, name), (_, sh, addr) in sorted(after.items()):
+        if "addr" in gate and addr and (path, name) not in before and sh in named:
             lines.append(f"{name}: addr named -> func_<ADDR>")
     return lines
 

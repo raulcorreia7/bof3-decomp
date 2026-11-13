@@ -191,3 +191,32 @@ def test_a_quality_allowed_line_accepts_one_metric_in_one_file() -> None:
     text = "Subject\n\nQuality-Allowed: src/a/x.c harmful\nQuality-Allowed: src/b/y.c casts\n"
     found = quality.ALLOWED.findall(text)
     assert found == [("src/a/x.c", "harmful"), ("src/b/y.c", "casts")]
+
+
+def test_an_address_name_is_file_scoped_so_a_new_copy_in_another_image_is_exempt() -> (
+    None
+):
+    old = {"src/a/x.c": "MATCH void func_801EF688(void) { a = 1; b = 2; }\n"}
+    new = {
+        "src/a/x.c": old["src/a/x.c"],
+        "src/b/x.c": "MATCH void func_801EF688(void) { a = D_80123456; b = unk_04; c = 2; }\n",
+    }
+    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == []
+    new["src/a/x.c"] = (
+        "MATCH void func_801EF688(void) { a = D_80123456; b = unk_04; }\n"
+    )
+    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == [
+        "func_801EF688: names 0 -> 2"
+    ]
+
+
+def test_an_address_name_moved_to_another_image_is_exempt() -> None:
+    old = {
+        "src/a/x.c": "MATCH void func_801EF688(void) { a = 1; b = 2; }\n",
+        "src/b/x.c": "",
+    }
+    new = {
+        "src/a/x.c": "",
+        "src/b/x.c": "MATCH void func_801EF688(void) { a = D_80123456; b = unk_04; c = 2; }\n",
+    }
+    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == []
