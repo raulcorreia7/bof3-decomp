@@ -109,7 +109,7 @@ MATCH void func_801EF4EC(void) {
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_0C;
     }
     if ((g_FrameCount & 0x7) == 0) {
-        SND_QueueSelectionFx(0x102);
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 2));
         for (i = 0; i < 16; i++) {
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
@@ -122,14 +122,14 @@ MATCH void func_801EF4EC(void) {
         }
     }
     if (g_Task->unk_09 & 0x1) {
-        g_AreaCameraOffsetX = 0x10;
+        g_AreaCameraOffsetX = 16;
     } else {
         g_AreaCameraOffsetX = 0;
     }
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 0x20;
+        g_Task->unk_09 = 32;
         g_Task->header.step += 1;
     }
 }
