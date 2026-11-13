@@ -29,8 +29,8 @@ MATCH void func_801F39AC(void) {
         mode = 2;
     }
     for (i = 0; i < 6; i++) {
-        slot              = Actor_FindFree();
-        SP_REF(s16, 0x0u) = slot;
+        slot                                = Actor_FindFree();
+        D_1F800000.view.area.entity_counter = slot;
         if (slot != GAME_NONE) {
             func_801A4D54(D_801F43D8[mode] + i * 17);
         }
