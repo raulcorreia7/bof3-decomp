@@ -66,7 +66,7 @@ void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y);
 extern void func_801F54B8(void);
 
 void Actor_InitSlot(s32 type);
-void func_801F462C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801F462C(s32* pos, s16 radius, u8 center_shade, u8 rim_shade);
 
 /* func_801F3198 */
 void GFX_AddBlendDrawMode(u8 blend_mode);
