@@ -226,9 +226,11 @@ typedef enum AreaLoadFlags {
 
 typedef struct AreaLoad {
     /* 0x00 */ void*     handler;
-    /* 0x04 */ u8        pad_04[0x08];
+    /* 0x04 */ u8        pad_04[0x04];
+    /* 0x08 */ u8*       field_08;
     /* 0x0C */ u8*       unk_0C;
-    /* 0x10 */ u8        pad_10[0x22];
+    /* 0x10 */ u8*       field_10;
+    /* 0x14 */ u8        pad_14[0x1E];
     /* 0x32 */ u8        flag_32;
     u8                   pad_33;
     /* 0x34 */ Callback* steps;

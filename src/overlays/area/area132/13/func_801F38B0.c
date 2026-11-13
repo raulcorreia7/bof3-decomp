@@ -12,13 +12,13 @@ MATCH u8 func_801F38B0(void) {
     do {
         if (D_801F4A88[0] != 0u) {
             if (g_Task->header.mode == 0) {
-                FIELD(s32, D_801F4A88, 0x4) += 8192;
-                FIELD(u16, D_801F4A88, 0x14) += 8;
+                ((AreaSpawnSlot*)D_801F4A88)->pos.x.fixed += 8192;
+                ((AreaSpawnSlot*)D_801F4A88)->radius_14 += 8;
                 D_801F4A88[3] -= 2;
             } else {
-                FIELD(s32, D_801F4A88, 0x4) += 8192;
-                FIELD(s32, D_801F4A88, 0x4) += rcos(D_801F4A88[0x17] << 8);
-                FIELD(s32, D_801F4A88, 0xC) += rsin(D_801F4A88[0x17] << 8) << 8;
+                ((AreaSpawnSlot*)D_801F4A88)->pos.x.fixed += 8192;
+                ((AreaSpawnSlot*)D_801F4A88)->pos.x.fixed += rcos(D_801F4A88[0x17] << 8);
+                ((AreaSpawnSlot*)D_801F4A88)->pos.z.fixed += rsin(D_801F4A88[0x17] << 8) << 8;
                 D_801F4A88[3] -= 2;
             }
             if (--D_801F4A88[2] == 0) {
