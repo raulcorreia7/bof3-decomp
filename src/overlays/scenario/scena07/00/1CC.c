@@ -181,7 +181,19 @@ MATCH void func_801F7638(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801F76D0);
+MATCH void func_801F76D0(void) {
+    if ((g_Task->vx & D_801FDD9C[g_Task->timer]) == 0) {
+        D_801FDFBC->unk_10 += D_801FDDA4[g_Task->timer];
+    }
+    if ((g_Task->vx & 0xF) == 0) {
+        g_Task->timer++;
+    }
+    func_801F97E0(D_801FDFBC);
+    if (--g_Task->vx == 0) {
+        g_Task->vx = 0x10;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F77AC(void) {
     D_801FDFBC->unk_10 += 4;
@@ -226,7 +238,21 @@ MATCH void func_801F7A30(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801F7AB0);
+MATCH void func_801F7AB0(void) {
+    u8* row;
+
+    func_801F9330(D_801FDFC0);
+    if (g_Task->vx >= 9) {
+        row = func_801F8394();
+        if (((g_Task->vx & 3) == 0) && (row != NULL)) {
+            func_801F8478(row);
+        }
+    }
+    func_801F85D8();
+    if (--g_Task->vx == 0) {
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F7B68(void) {
     if (!(func_801F85D8() & BYTE_MASK)) {
@@ -596,7 +622,24 @@ MATCH void func_801FCFB4(void) {
     g_AreaCameraOffsetY      = g_AreaCameraOffsetY + ((cam << 24) >> 22);
 }
 
-INCLUDE_ASM(func_801FD000);
+MATCH void func_801FD000(void) {
+    u8 i;
+    u8 idx;
+
+    for (i = 0; i < 0xE; i++) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
+            idx = i;
+            func_801A4D54(&D_801FDE8C[idx * 17]);
+            g_Task->pos.z.part.integer = 0xA00;
+            if (D_801FDF7C[idx] != 0) {
+                g_CurrentActor->timer_75 = D_801FDF7C[idx];
+                g_Task->unk_03           = g_Task->header.mode;
+                g_Task->header.mode      = 5;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FD0DC);
 

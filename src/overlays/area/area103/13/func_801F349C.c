@@ -1,8 +1,8 @@
 #include "area103_13.h"
 
 MATCH void func_801F349C(void) {
-    AreaEffectRow* row = (AreaEffectRow*)AREA_WORK;
-    u8             i;
+    AreaSpinEffect* row = (AreaSpinEffect*)AREA_WORK;
+    u8              i;
     /* FAKE: retail reserves 0x10 frame bytes nothing in the body uses. */
     FAKE_STACK_PADS(u8, 16);
 

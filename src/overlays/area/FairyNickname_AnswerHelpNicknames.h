@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* func_801F3D18, func_801F30C4 */
 MATCH void FairyNickname_AnswerHelpNicknames(void) {

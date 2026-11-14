@@ -9,6 +9,8 @@
 #include "game/character.h"
 #include "game/item.h"
 #include "common/handler.h"
+#include "gfx/palette.h"
+#include "gfx/prim.h"
 
 volatile u8* func_800AC754(u8 entry_id);
 /* Functions. */
@@ -69,6 +71,8 @@ void         Actor_SwitchScript(u8 value, u8* dst, s32 size);
 void         Actor_StageScript(s32 script_index, s32 position, u8* staging, s32 size);
 /* func_8014D6B8 */
 void         Actor_SelectScript(u8 script_index);
+/* func_8014D6DC */
+void         Actor_BeginScript(s32 script_index, s32 position);
 /* func_8014D8D4 */
 u32          Actor_RequestScript(u8 script_index);
 /* func_8014D910 */
@@ -83,34 +87,14 @@ extern void  Actor_SelectSprite(u32 record_index);
 bool         Area_SelectSceneRecord(s32 wanted_id);
 /* func_8014E0A8 */
 extern s32   SYS_ReadCD(s32 size, void* buffer, s32 sectors);
-/* func_8014E284 */
-void         GFX_ResetPalette(void);
-/* func_8014E3A0 */
-void         GFX_CopyPalette(s32 slot);
-/* func_8014E3F4 */
-void         GFX_ResetPaletteFades(void);
-/* func_8014E484 */
-extern void  GFX_FreePaletteSlot(s32 slot);
-/* func_8014E4BC */
-void         GFX_FreePaletteSlotOwner(void* owner);
-/* func_8014E528 */
-extern void  GFX_FreeAllPaletteSlots(void);
-/* func_8014E564 */
-void         GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
-/* func_8014E5A0 */
-void         GFX_AddPrim(u32 ot_index, u32 primitive_size);
 /* func_8014E640 */
 s32          INPUT_GetRepeatedButtons(s32 button_mask);
-/* func_8014E6D0 */
-void         GFX_UpdateTransferQueue(void);
 /* func_8014EA80 */
 void         SYS_StartFrontend(void);
 /* func_8014EC64 */
 void         SYS_EnterFrontend(void);
 /* func_8014ECAC */
 void         UI_SetMode(u16 local_mode);
-/* func_8014F704 */
-s32          GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
 /* func_8014F800 */
 void         UI_DrawText(s16 x, s16 y, s32 palette, u32 byte_count, u8* text);
 /* func_8014F84C */
@@ -409,6 +393,8 @@ void         Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
 void         Char_RebuildStats(Character* record);
 /* func_80164D2C */
 void         Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
+/* func_801650B4 */
+bool         Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 /* func_801651DC */
 s32          Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
 /* func_80165280 */
@@ -419,6 +405,8 @@ s32          Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy
 s32          Char_AddCappedStat(u16* value, s32 delta);
 /* func_801654B0 */
 s32          Char_AddWillpower(u8* value, u16 delta);
+/* func_801654F4 */
+s16          Char_AddStat(u16* value, s16 delta);
 /* func_80165570 */
 s16          Char_AddPoints(u16* value, u16 limit, s16 delta);
 /* func_80165694 */
@@ -444,6 +432,8 @@ void         Message_SetVariable(u8 slot, u8 length, const u8* text);
 /* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))
+/* func_8016628C */
+s32  Item_Count(u8 category, u8 item_id, u8 mode);
 /* func_80166438 */
 u8   Item_CountHeld(u32 category);
 /* func_801664A0 */
@@ -456,6 +446,8 @@ bool Party_SpendZenny(u32 amount, s32 unused);
 s32  Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_801666C8 */
 s32  Item_GetDescription(s32 category, s32 item_id);
+/* func_80166A10 */
+u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
 u8*  Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
@@ -463,8 +455,6 @@ u8*  Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* 0x40-byte palette staging entries; GFX_LoadPalette copies them out, the second copy lands 0x4000 above. */
 #define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
 #define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)
-/* func_80166C48 */
-void       GFX_LoadPalette(u8* dst, s32 field);
 /* func_80166CB0 */
 s32        Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */

@@ -11,8 +11,8 @@
 #include "sys/actor.h"
 #include "menu/inventory.h"
 #include "menu/panel.h"
-#include "menu/party.h"
-#include "slus/facing.h"
+#include "scenario/party.h"
+#include "common/facing.h"
 #include "scenario/runtime.h"
 #include "common/util.h"
 

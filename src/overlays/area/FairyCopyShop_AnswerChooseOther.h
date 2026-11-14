@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* func_801F3998, func_801F2D44 */
 MATCH void FairyCopyShop_AnswerChooseOther(void) {

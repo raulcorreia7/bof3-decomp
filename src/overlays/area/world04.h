@@ -1,7 +1,7 @@
 #ifndef WORLD04_FAMILY_H
 #define WORLD04_FAMILY_H
 
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 #include "overlays/area/area.h"
 #include "overlays/area/Message_ShowParty.h"
 #include "overlays/area/WorldAreaRequest.h"

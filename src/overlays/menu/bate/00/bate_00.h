@@ -4,10 +4,13 @@
 /* The etc/bate/00 overlay's local declarations. Only this image
  * includes the file. */
 
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "shared/etc.h"
 #include <stdio.h>
-#include "menu/party.h"
+#include "scenario/party.h"
+
+/* FAKE: the callers pass and read the cost as s32, the width the real prototype (u8) lacks. */
+#define Char_GetAbilityCost ((s32 (*)(s32, s32, s32))Char_GetAbilityCost)
 
 extern u8  D_80148654;
 extern u8  D_80148339;
@@ -145,13 +148,9 @@ extern u8        D_801D86F8[];
 extern s32       D_801D8EE8[6];
 extern s32       D_801D8F00[6];
 
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-s32  Item_Count(u8 category, u8 item_id, u8 mode);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 s32  Char_GetExpForLevel(s32 character, s32 level);
-
-void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 
 extern FormationLayout g_MenuFormations[FORMATION_COUNT];
 extern FormationOrder  g_MenuFormationOrder;
@@ -171,8 +170,6 @@ void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s3
 
 /* func_801D73B4 */
 void Menu_DrawAbilityList(MenuListPanel* panel);
-
-s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 
 void func_801D2304(s32 arg0, s32 arg1);
 void func_801D259C(void);

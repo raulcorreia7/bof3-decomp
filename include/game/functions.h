@@ -5,6 +5,8 @@
 #include "area/map.h"
 #include "sys/actor.h"
 #include "psx/psyq.h"
+#include "gfx/palette.h"
+#include "gfx/prim.h"
 
 /* The resident game overlay's functions the other images call, in address order. */
 
@@ -20,26 +22,6 @@ void  Actor_ClearAll(void);
 void  Actor_Create(u8* request);
 /* func_8019625C */
 void  func_8019625C(void);
-/* func_8019651C */
-s32   GFX_AllocPaletteFade(void* owner, s32 red, s32 green, s32 blue, s32 fade_flags);
-/* func_80196670 */
-void  GFX_FreePaletteFade(u8 index);
-/* func_80196718 */
-void  GFX_FreePaletteFadeTarget(void* owner);
-/* func_80196784 */
-u8    GFX_MarkPaletteCells(u8 mode, u8 value, u8 search);
-/* func_801968BC */
-u8    GFX_FindFreePaletteCell(u8 mode);
-/* func_80196B20 */
-u8    GFX_FindPaletteCell(u8 value);
-/* func_80196B9C */
-void  GFX_UploadPaletteRows(void);
-/* func_80196C8C */
-void  GFX_UpdatePaletteAnimations(void);
-/* func_80196CF0 */
-u8    GFX_StartPaletteAnimation(u8* owner, u8* source_table);
-/* func_80196D84 */
-void  GFX_StepPaletteAnimation(u8 palette_slot);
 /* func_80196F78 */
 void  Game_RunCampMenu(void);
 /* func_80196FFC */
@@ -133,6 +115,8 @@ u8*   UI_GetSpriteRect(u8 sprite_id, u8 flags);
 void  UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 /* func_801AF390 */
 s32   func_801AF390(s16 x, s16 y, u8* table, s32 flags);
+/* func_801AF390 */
+void  UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 /* func_801AF5B0 */
 u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 /* func_801AFD10 */
@@ -180,6 +164,8 @@ s8    Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode);
 s32   func_801BE1B0(u32 index);
 /* func_801BFE34 */
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
+/* func_801C1254 */
+void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 order);
 /* Party_LoadPalettes */

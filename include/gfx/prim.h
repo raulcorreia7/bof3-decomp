@@ -8,6 +8,15 @@
 /* The shared primitive cursor and color packing used by the menu, field and
  * effect drawers. */
 
+/* func_8014E564 */
+void GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
+/* func_8014E5A0 */
+void GFX_AddPrim(u32 ot_index, u32 primitive_size);
+/* func_8014E6D0 */
+void GFX_UpdateTransferQueue(void);
+/* func_8014F704 */
+s32  GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
+
 /* A sprite rectangle in texture bytes: origin u, v and size w, h. The sprite
  * drawers copy it into a SPRT. */
 typedef struct UvRect {
@@ -75,12 +84,7 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
 }
 
 /* The shared cursor viewed as the primitive it is about to receive. */
-/* The texture-page word getTPage builds, one macro per layout: GetGraphType() 1 and 2
- * keep the colour mode and blend in bits 9-10 and 7-8, the others in bits 7-8 and 5-6. */
-#define GFX_TPAGE_STANDARD(tp, abr, x, y)       ((((tp) & 0x3) << 7) | (((abr) & 0x3) << 5) | (((y) & 0x100) >> 4) | (((x) & 0x3FF) >> 6) | (((y) & 0x200) << 2))
-#define GFX_TPAGE_GRAPH_TYPE_1_2(tp, abr, x, y) ((((tp) & 0x3) << 9) | (((abr) & 0x3) << 7) | (((y) >> 3) & 0x60) | (((x) >> 6) & 0xF))
-
-#define GFX_CURSOR(type)                        ((type*)g_GfxPrimCursor)
+#define GFX_CURSOR(type) ((type*)g_GfxPrimCursor)
 
 /* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared
  * cursor and return it. */

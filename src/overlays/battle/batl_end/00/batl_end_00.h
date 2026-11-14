@@ -10,7 +10,6 @@ extern u16        D_8014862A;
 extern u8         D_8014862D;
 extern char       D_80149118[];
 extern u8*        D_801EB4F4;
-extern bool       Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 /* func_801ADDD4 */
 void              Char_GetExp(s32 char_id);
 u8                func_801DB524(u32 slot);

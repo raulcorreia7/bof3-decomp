@@ -2,11 +2,14 @@
 #define OVERLAY_ETC_START_08_H
 
 #include "game/character.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "shared/etc.h"
 #include "menu/save_data.h"
 #include <string.h>
 #include <stdio.h>
+
+/* FAKE: the callers pass and read the cost as s32, the width the real prototype (u8) lacks. */
+#define Char_GetAbilityCost           ((s32 (*)(s32, s32, s32))Char_GetAbilityCost)
 
 /* The save-image buffer the card writer clears and then checksums. */
 #define SAVE_IMAGE_ADDR               0x800C1A00u
@@ -468,13 +471,9 @@ extern u8  g_NameEntryControlsFrame[];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
-extern bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-extern s16  Char_AddStat(u16* value, s16 delta);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
 bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 s32         func_801B6470(u8 arg0);
-/* func_801C1254 */
-void        Party_LoadMemberSprite(s32 character_id, s32 save_slot);
 /* The start overlay's handler tables call these functions. */
 void        func_801D177C(void);
 void        func_801D1B24(void);
@@ -744,7 +743,6 @@ extern u8        D_801485BA;
 extern s8        D_80148659;
 extern u8        D_8014865A;
 extern u8        D_80181B1A;
-extern s32       Item_Count(u8 category, u8 item_id, u8 mode);
 extern u8*       D_801C8940;
 extern u8*       D_801C8944;
 /* D_801D0C50 */
@@ -843,8 +841,6 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
 
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
-void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
-
 extern FormationLayout g_MenuFormations[FORMATION_COUNT];
 extern FormationOrder  g_MenuFormationOrder;
 extern s32             g_MenuFormationArrow[3][2];
@@ -872,7 +868,6 @@ void func_801E7608(void);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
-s32  Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 void func_801D9304(s32 handler_index);
 u8   func_801DB04C(void);
 

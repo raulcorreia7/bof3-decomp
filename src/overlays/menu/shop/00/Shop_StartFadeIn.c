@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
 /* File-local declaration: UI_SetMode is the game UI mode setter owned by
- * the game UI contract (include/sys/gameui.h) and is not declared by
+ * the game UI contract (include/menu/gameui.h) and is not declared by
  * shop_00.h. */
 
 /* func_801DE3C8 */

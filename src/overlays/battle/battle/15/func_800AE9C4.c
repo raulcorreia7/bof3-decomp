@@ -24,9 +24,6 @@ ASSERT_OFFSET(BattlePanelGeometry, origin, 0x2E);
 #define BATTLE_PANEL_TPAGE_Y    0x100
 #define BATTLE_PANEL_CLUT_X     0x10
 #define BATTLE_PANEL_CLUT_Y     (STAGE_PALETTE_Y + 26)
-/* The draw mode's texture window: the lit and the dim panel palette. */
-#define BATTLE_PANEL_MODE_LIT   0x25
-#define BATTLE_PANEL_MODE_DIM   0x15
 
 /* Draws the two panel quads at the active battle-work origin, one normal and one dark. */
 MATCH void func_800AE9C4(u8 texture_index) {
@@ -37,15 +34,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
     /* The second quad reads the work record again, the way the retail code does. */
     BattlePanelGeometry* panel2;
 
-    if (GetGraphType() == 1) {
-        mode = BATTLE_PANEL_MODE_LIT;
-    } else {
-        if (GetGraphType() == 2) {
-            mode = BATTLE_PANEL_MODE_LIT;
-        } else {
-            mode = BATTLE_PANEL_MODE_DIM;
-        }
-    }
+    mode = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(2, mode);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);

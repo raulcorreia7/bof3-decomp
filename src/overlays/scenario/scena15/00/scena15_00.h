@@ -43,6 +43,8 @@ void             func_801F8958(void);
 void             func_801F9020(Coord* position, s32* step);
 void             func_801F92F0(Coord* position, s32* step);
 
+extern u8 D_801FE694[];
+extern u8 D_801FE6C8[];
 extern u8 D_801FE750;
 
 #endif

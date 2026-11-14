@@ -7,7 +7,7 @@
 #include "sys/actor.h"
 #include "overlays/area/world03.h"
 #include "area/spad.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

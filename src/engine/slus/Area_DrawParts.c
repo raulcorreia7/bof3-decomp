@@ -28,18 +28,13 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
     if ((Area_TestCondition(((ScenePart*)part_list)[0].head.id) << 24) == 0) {
         return;
     }
-    pos.vx = ((x - 0x80) << 0x7) + FIELD(s8, part_list, 7) * 2;
-    pos.vy = ((y - 0x80) << 7) + FIELD(s8, part_list, 0x6) * 2;
-    pos.vz = ((ScenePart*)part_list)[1].raw;
-    scale  = (g_FrameCount & 0xFFF) * 4;
-    rot.vx = (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * scale;
-    rot.vy = (((ScenePart*)part_list)[2].raw >> 0xA & 0x3FF) * scale;
-    rot.vz = (((ScenePart*)part_list)[2].raw & 0x3FF) * scale;
+    setVector(&pos, ((x - 0x80) << 0x7) + FIELD(s8, part_list, 7) * 2, ((y - 0x80) << 7) + FIELD(s8, part_list, 0x6) * 2, ((ScenePart*)part_list)[1].raw);
+    scale = (g_FrameCount & 0xFFF) * 4;
+    setVector(&rot, (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * scale, (((ScenePart*)part_list)[2].raw >> 0xA & 0x3FF) * scale, (((ScenePart*)part_list)[2].raw & 0x3FF) * scale);
     for (part_word_offset = 3; part_word_offset != (FIELD(u8, part_list, 0x2u)); part_word_offset += 6) {
         PushMatrix();
-        part_rotation.vx = (rot.vx + (((((ScenePart*)part_list)[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK;
-        part_rotation.vy = (rot.vy + (((((ScenePart*)part_list)[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK;
-        part_rotation.vz = (rot.vz + (((((ScenePart*)part_list)[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK;
+        setVector(&part_rotation, (rot.vx + (((((ScenePart*)part_list)[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK,
+                  (rot.vy + (((((ScenePart*)part_list)[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK, (rot.vz + (((((ScenePart*)part_list)[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK);
         RotTransMatrix(&pos, matrix, &flag);
         Camera_SetModelMatrix(&part_rotation, &matrix);
         prim = (POLY_FT4*)g_GfxPrimCursor;
