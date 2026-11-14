@@ -161,7 +161,7 @@ MATCH void func_801F77B4(AreaSprite* sprite) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    screen.vx = *(u32*)&sprite->half_size >> 6;
+    screen.vx = sprite->half_size >> 6;
     pos       = *(VECTOR*)&sprite->origin;
     pos.vz <<= 8;
     Game_ProjectWorldPoint(&pos, &screen, &scale);
