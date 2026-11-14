@@ -5,8 +5,47 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 #include "overlays/bmagic/Effect_DispatchMode.h"
+#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
 
-INCLUDE_ASM(func_801EECC0);
+/* Start the magic020 effect: four copies of the caster in mode 1 (arg 4 down to 1), one more
+ * in mode 0, then the caster sprite cell, and func_800AFC98(2, 0) for a party caster. */
+MATCH void func_801EECC0(void) {
+    u32 index;
+    s32 i;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    for (i = 0; (u32)(i & BYTE_MASK) < 4; i++) {
+        index = Battle_AllocEffect(1, 0x2E);
+        Effect_CopyActiveBattlerToSlot(index);
+        g_BattleEffects[index & BYTE_MASK].target.party  = g_Task;
+        g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
+        g_BattleEffects[index & BYTE_MASK].handler_index = 0x2E;
+        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+        g_BattleEffects[index & BYTE_MASK].arg.unk_09    = (i ^ 3) + 1;
+        g_BattleEffects[index & BYTE_MASK].unk_0B        = i ^ 3;
+    }
+    index = Battle_AllocEffect(1, 0x2E);
+    Effect_CopyActiveBattlerToSlot(index);
+    g_BattleEffects[index & BYTE_MASK].target.party  = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 0x2E;
+    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+        func_800AFC98(2, 0);
+    }
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
 
 MATCH void func_801EF0F8(void) {
     PartyMember* work;
@@ -218,7 +257,38 @@ MATCH void func_801EFAF4(void) {
     BMAGIC_RUN_EFFECT_STEP(func_801EFBA0, func_801EFD10);
 }
 
-INCLUDE_ASM(func_801EFBA0);
+MATCH void func_801EFBA0(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    u8           timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
+        actor               = g_BattleSelectedActor;
+        g_Task->facing      = actor->facing;
+        g_Task->pos.x.fixed = actor->pos.x.fixed;
+        g_Task->pos.y.fixed = actor->pos.y.fixed;
+        g_Task->pos.z.fixed = actor->pos.z.fixed;
+        Battle_ProjectRange();
+        g_Task->unk_29    = 0;
+        g_Task->unk_25    = 0x1D;
+        g_Task->unk_26    = 0;
+        g_Task->unk_24    = 0x84;
+        work              = g_Task;
+        work->unk_2B      = 0;
+        work->unk_2C.half = 0;
+        g_Task->unk_28    = 0;
+        g_Task->unk_27    = D_801EFEC4[g_Task->param.unk_0B] + 0xB0;
+        if (g_Task->facing == 1 || g_Task->facing == 2) {
+            g_Task->unk_2A = 1;
+        } else {
+            g_Task->unk_2A = 0;
+        }
+        Actor_SelectScript(g_Task->param.unk_0B);
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFD10(void) {
     if (Actor_StepAnimLoop() & BYTE_MASK) {

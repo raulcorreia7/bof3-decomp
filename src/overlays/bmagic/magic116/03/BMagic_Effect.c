@@ -125,7 +125,32 @@ MATCH void func_801EF020(BMagicStreakSegment* record) {
     record->tail_blue  = 0;
 }
 
-INCLUDE_ASM(func_801EF118);
+MATCH u8 func_801EF118(void) {
+    BMagicStreakSegment* record;
+    u8                   i;
+    u8                   drawn;
+
+    drawn = 0;
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 0x2C0, 0x100) & HALF_MASK);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+    func_801AFE18();
+    for (record = D_801EF2A8, i = 0; i < 128; record++, i++) {
+        if (record->active != 0) {
+            func_801EEE7C(record);
+            drawn = 1;
+            record->head.x += record->velocity.x;
+            record->head.y += record->velocity.y;
+            record->head.z += record->velocity.z;
+            record->tail.x += record->velocity.x;
+            record->tail.y += record->velocity.y;
+            record->tail.z += record->velocity.z;
+            if (--record->life == 0) {
+                record->active = 0;
+            }
+        }
+    }
+    return drawn;
+}
 
 MATCH void func_801EF258(void) {
     BMagicStreakSegment* record;

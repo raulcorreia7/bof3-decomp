@@ -32,7 +32,29 @@ INCLUDE_ASM(func_801EF118);
 /* func_801EF1E0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EF224);
+MATCH void func_801EF224(void) {
+    SYS_DISPATCH_BYTE(D_801F0670, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_801EF638();
+        func_801EF70C(-g_Task->unk_09 & 0x3F, 0x20);
+        func_801EF70C((8 - g_Task->unk_09) & 0x3F, 0x20);
+        func_801EF70C((16 - g_Task->unk_09) & 0x3F, 0x20);
+        func_801EF70C((24 - g_Task->unk_09) & 0x3F, 0x20);
+        func_801EF70C((32 - g_Task->unk_09) & 0x3F, 0x20);
+        func_801EF70C((40 - g_Task->unk_09) & 0x3F, 0x20);
+        func_801EF70C((48 - g_Task->unk_09) & 0x3F, 0x20);
+        func_801EF70C((56 - g_Task->unk_09) & 0x3F, 0x20);
+        func_801EF70C((4 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        func_801EF70C((12 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        func_801EF70C((20 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        func_801EF70C((28 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        func_801EF70C((36 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        func_801EF70C((44 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        func_801EF70C((52 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        func_801EF70C((60 - g_Task->unk_09 * 2) & 0x3E, 0x50);
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EF4C4(void) {
     u8* work;
@@ -99,7 +121,21 @@ MATCH void func_801EFE48(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 5, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EFE8C);
+MATCH void func_801EFE8C(void) {
+    s16* angle;
+
+    SYS_DISPATCH_BYTE(D_801F0684, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        angle                            = &D_1F800000.view.effect.params[7];
+        *angle                           = ((g_Task->unk_09 * 3) & 0x3F) << 6;
+        D_1F800000.view.effect.params[0] = g_Task->unk_0C + ((rsin((g_FrameCount & 0xF) << 6) * 16) >> 12);
+        g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rcos(*angle) * D_1F800000.view.effect.params[0]) >> 3);
+        g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + ((rsin(*angle) * D_1F800000.view.effect.params[0]) >> 3);
+        g_Task->pos.y.fixed += (rcos((g_FrameCount & 0x3F) << 6) * 128) >> 3;
+        Battle_ProjectRange();
+        func_801F01A4();
+    }
+}
 
 MATCH void func_801F0018(void) {
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;

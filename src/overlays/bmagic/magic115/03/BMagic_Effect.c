@@ -6,7 +6,37 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC14.h"
 
-INCLUDE_ASM(func_801EEC80);
+MATCH void func_801EEC80(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    u32          slot;
+    u8           i;
+    u16*         dst;
+    u16*         src;
+
+    actor                              = g_Battle.selected_actor;
+    g_Task->pos.x.fixed                = actor->pos.x.fixed;
+    g_Task->pos.y.fixed                = actor->pos.y.fixed;
+    g_Task->pos.z.fixed                = actor->pos.z.fixed;
+    slot                               = Battle_AllocEffect(1, 48) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = work;
+    GFX_FreePaletteFadeTarget(actor);
+    g_Task->timer = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
+    i             = 0;
+    dst           = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src           = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i] = src[i] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    g_GfxPalettePending                                      = 1;
+    SND_QueueSelectionFx(0x100);
+    g_Task->param.unk_0B = 1;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode++;
+}
 
 MATCH void func_801EEDDC(void) {
     g_PaletteFades[g_Task->timer].offset.red   = g_Task->unk_09 * 2;
@@ -17,7 +47,17 @@ MATCH void func_801EEDDC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEEB0);
+MATCH void func_801EEEB0(void) {
+    if (g_FrameCount & 1) {
+        g_PaletteFades[g_Task->timer].offset.red -= 1;
+        g_PaletteFades[g_Task->timer].offset.green -= 1;
+        g_PaletteFades[g_Task->timer].offset.blue -= 1;
+    }
+    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+        GFX_FreePaletteFade(g_Task->timer);
+        g_Task->header.mode++;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
@@ -35,7 +75,44 @@ MATCH void func_801EF098(void) {
 
 INCLUDE_ASM(func_801EF130);
 
-INCLUDE_ASM(func_801EF27C);
+MATCH void func_801EF27C(void) {
+    s32          angle;
+    s32*         angle_cell;
+    u8           count;
+    u32          slot;
+    s8           tint;
+    PartyMember* battler;
+
+    Actor_StepAnimLoop();
+    count               = g_Task->unk_09 + 1;
+    g_Task->unk_09      = count;
+    angle               = (count & 0x3F) << 6;
+    angle_cell          = &D_1F800000;
+    *angle_cell         = angle;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle) * 0xC000) >> 12);
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle_cell) * 0xC000) >> 12);
+    if ((g_Task->unk_09 & 7) == 0) {
+        slot                               = Battle_AllocEffect(1, 48) & BYTE_MASK;
+        battler                            = g_BattleEffectBattler;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].target.party = battler;
+        g_BattleEffects[slot].arg.unk_09   = (g_Task->unk_09 & 0xFC) + 8;
+        g_BattleEffects[slot].pos.x.fixed  = g_Task->pos.x.fixed;
+        g_BattleEffects[slot].pos.y.fixed  = g_Task->pos.y.fixed;
+        g_BattleEffects[slot].pos.z.fixed  = g_Task->pos.z.fixed;
+        g_BattleEffectBattler->unk_09++;
+        g_BattleEffectBattler->param.unk_0B++;
+    }
+    if (g_Task->unk_09 == 0x40) {
+        g_Task->header.flags |= 0x20;
+        g_Task->unk_5C = 1;
+        tint           = -0x40;
+        g_Task->unk_5D = tint;
+        g_Task->unk_5E = tint;
+        g_Task->unk_5F = tint;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801EF49C(void) {
     s32  value = -0x80;

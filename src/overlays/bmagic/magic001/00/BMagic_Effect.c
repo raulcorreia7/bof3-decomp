@@ -6,7 +6,46 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EECC4);
+MATCH void func_801EECC4(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 1;
+    index                = Battle_AllocEffect(1, 73);
+    active               = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        BattleWorkImage* row;
+
+        row                     = (BattleWorkImage*)&g_Game.members[active];
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        *(BattleWorkImage*)slot = *row;
+    } else {
+        BattleWorkImage* row;
+        u32              enemy;
+
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *row;
+    }
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 73;
+    g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEF34(void) {
     BMagic_ClearWorkFlagsAndStep();
@@ -145,7 +184,50 @@ MATCH void func_801EF72C(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF78C);
+/* Copy the active battler into a new effect as func_801EECC4 does, then take the battler sprite
+ * cell and pass it to func_800AF8F0 and func_800AFAB8. */
+MATCH void func_801EF78C(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 1;
+    func_800AEF98(8, 0);
+    index  = Battle_AllocEffect(1, 79);
+    active = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        BattleWorkImage* row;
+
+        row                     = (BattleWorkImage*)&g_Game.members[active];
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        *(BattleWorkImage*)slot = *row;
+    } else {
+        BattleWorkImage* row;
+        u32              enemy;
+
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *row;
+    }
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 79;
+    g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    func_800AFAB8(g_Task);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EFA14(void) {
     BMagic_ClearWorkFlagsAndStep();

@@ -24,7 +24,41 @@ MATCH void func_801EEC18(void) {
     } while ((u8)count < 96);
 }
 
-INCLUDE_ASM(func_801EECF8);
+MATCH void func_801EECF8(void) {
+    u8 slot;
+    u8 i;
+    u8 battler;
+
+    for (i = 0; i < 0x60; i++) {
+        D_801F0454[i << 5]       = 0;
+        D_801F0454[(i << 5) + 1] = 0;
+        D_801F0454[(i << 5) + 2] = 0;
+    }
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    for (i = 0; i < 8; i++) {
+        battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
+        if (!Battle_SlotIsBlocked(battler) && g_Battle.active_battler != i + BATTLE_PARTY_CHARACTERS_COUNT) {
+            slot                               = Battle_AllocEffect(1, 0x68);
+            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].header.mode  = 0;
+            g_BattleEffects[slot].unk_04       = battler;
+            g_Task->param.unk_0B += 1;
+        }
+    }
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        battler = i;
+        if (!Battle_SlotIsBlocked(battler) && g_Battle.active_battler != battler) {
+            slot                               = Battle_AllocEffect(1, 0x68);
+            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].header.mode  = 0;
+            g_BattleEffects[slot].unk_04       = i;
+            g_Task->param.unk_0B += 1;
+        }
+    }
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
@@ -155,7 +189,44 @@ MATCH void func_801EF994(void) {
     Camera_SetModelMatrix(&rot, &matrix);
 }
 
-INCLUDE_ASM(func_801EFA5C);
+/* Draws the four sparkle wedges round the orbiting effect: each a shaded triangle from
+ * the centre to two corners from the wedge tables, lifted by a sine of the effect tick. */
+MATCH void func_801EFA5C(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    SVECTOR* vec;
+    u8       i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    Area_AddCellPrim(g_BMagicOrbitWork->pos.x.fixed, g_BMagicOrbitWork->pos.y.fixed, 2, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[5] = g_BMagicOrbitWork->timer_05 * g_BMagicOrbitWork->unk_09;
+    D_1F800000.view.effect.params[6] = g_BMagicOrbitWork->timer_06 * g_BMagicOrbitWork->unk_09;
+    D_1F800000.view.effect.params[7] = g_BMagicOrbitWork->timer_07 * g_BMagicOrbitWork->unk_09;
+    /* kept: the vector base in a local makes the centre vector the register base of the corner writes. */
+    vec                              = D_1F800014;
+    D_1F800014[0].vz                 = 0;
+    D_1F800014[0].vy                 = 0;
+    vec[0].vx                        = 0;
+    for (i = 0; i < 4; i++) {
+        D_1F800000.view.effect.params[0] = D_801F041C[i];
+        D_1F800000.view.effect.params[1] = D_801F0424[i];
+        D_1F800000.view.effect.params[2] = D_801F042C[i];
+        D_1F800000.view.effect.params[3] = D_801F0434[i];
+        D_1F800000.view.effect.params[4] = ((g_BMagicOrbitWork->unk_0B + D_801F043C[i]) & 0xF) << 8;
+        prim                             = GFX_BeginPolyG3(1);
+        D_1F800014[1].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]);
+        D_1F800014[2].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]);
+        D_1F800014[2].vz = D_1F800014[1].vz = (u32)rsin(D_1F800000.view.effect.params[4]) >> 7;
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[5]);
+        setRGB1(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        Area_AddCellPrim(g_BMagicOrbitWork->pos.x.fixed, g_BMagicOrbitWork->pos.y.fixed, 2, sizeof(POLY_G3));
+    }
+}
 
 MATCH void func_801EFD7C(void) {
     SYS_DISPATCH_BYTE(D_801F0440, g_BMagicOrbitWork->header.step);

@@ -7,6 +7,15 @@
 
 extern Callback D_801F0CB0[];
 
+extern u8 D_801F0D0C[];
+
+/* The offset of each of the three rows of breath pieces from an enemy, in 16.16. */
+extern Point3DL D_801F0CE4[];
+
+void func_801F078C(void);
+
+void func_800B0118(void);
+
 /* The z half of an enemy battler row: func_801F08AC loads it unsigned (lhu),
  * where a part.integer load sign-extends. */
 extern u8 D_801EB66E[];

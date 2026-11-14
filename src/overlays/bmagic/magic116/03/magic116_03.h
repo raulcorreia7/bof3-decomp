@@ -8,8 +8,8 @@
 extern BattleEffect*       D_801EC2E0;
 extern Magic010SharedSteps D_801EEC04;
 
-/* The guard the record reset waits on, the battle flag it raises, and the
- * request hand-off that follows. */
+/* Draws every live streak segment and moves it one frame; returns 1 while any
+ * segment is live. */
 u8 func_801EF118(void);
 
 /* One segment of the streak pool at D_801EF2A8: two points that fall together
@@ -47,5 +47,6 @@ extern BMagicStreakSegment D_801EF2A8[];
 
 BMagicStreakSegment* func_801EEFB8(void);
 void                 func_801EF020(BMagicStreakSegment* record);
+void                 func_801AFE18(void);
 
 #endif

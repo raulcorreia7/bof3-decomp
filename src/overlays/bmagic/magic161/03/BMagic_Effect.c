@@ -6,7 +6,43 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC84);
+MATCH void func_801EEC84(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    index  = Battle_AllocEffect(1, 84);
+    active = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        BattleWorkImage* row;
+
+        row                     = (BattleWorkImage*)&g_Game.members[active];
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        *(BattleWorkImage*)slot = *row;
+    } else {
+        BattleWorkImage* row;
+        u32              enemy;
+
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *row;
+    }
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 84;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->param.unk_0B += 1;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
 
 MATCH void func_801EEE9C(void) {
     if (g_Task->param.unk_0B == 0) {
@@ -67,4 +103,44 @@ MATCH void func_801EF1BC(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EF1DC);
+MATCH void func_801EF1DC(void) {
+    POLY_G4* prim;
+    s32      tpage;
+    s32      red;
+    s32      shade;
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    prim  = (POLY_G4*)g_GfxPrimCursor;
+    red   = g_Task->unk_09 * 12;
+    shade = g_Task->unk_09 * 6;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, 0, 0, 0x13F, 0, 0, 0x78, 0x13F, 0x78);
+    setRGB0(prim, 0xC0, 0x60, 0x60);
+    setRGB1(prim, 0xC0, 0x60, 0x60);
+    setRGB2(prim, red, shade, shade);
+    setRGB3(prim, red, shade, shade);
+    GFX_AddPrim(1, sizeof(POLY_G4));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, 0, 0x78, 0x13F, 0x78, 0, 0x167, 0x13F, 0x167);
+    setRGB0(prim, red, shade, shade);
+    setRGB1(prim, red, shade, shade);
+    setRGB2(prim, 0xC0, 0x60, 0x60);
+    setRGB3(prim, 0xC0, 0x60, 0x60);
+    GFX_AddPrim(1, sizeof(POLY_G4));
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+}

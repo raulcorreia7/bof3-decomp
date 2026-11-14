@@ -6,7 +6,53 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC28.h"
 
-INCLUDE_ASM(func_801EEC98);
+#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+
+MATCH void func_801EEC98(void) {
+    PartyMember* battler;
+    PartyMember* task;
+    PartyMember* owner;
+    PartyMember* parent;
+    u16*         dst;
+    u16*         src;
+    u32          slot;
+    s32          i;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    battler        = g_BattleEffectBattler;
+    task           = g_Task;
+    WorldPos_Copy(&task->pos, &battler->pos);
+    task->param.unk_0B = 0;
+    g_Task->unk_09     = 0;
+    g_Task->header.mode++;
+    func_800AEF98(12, 2);
+    func_801EF490();
+    slot = Battle_AllocEffect(1, 70) & BYTE_MASK;
+    Effect_CopyActiveBattlerToSlot(slot);
+    owner                               = g_Task;
+    g_BattleEffects[slot].header.mode   = 0;
+    g_BattleEffects[slot].header.step   = 0;
+    g_BattleEffects[slot].unk_06        = 1;
+    g_BattleEffects[slot].handler_index = 70;
+    g_BattleEffects[slot].target.party  = owner;
+    g_Task->param.unk_0B++;
+    slot                               = Battle_AllocEffect(1, 70) & BYTE_MASK;
+    parent                             = g_Task;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].target.party = parent;
+    g_BattleEffects[slot].unk_03       = g_Task->unk_03;
+    g_BattleEffects[slot].unk_04       = g_Task->unk_04;
+    g_Task->param.unk_0B++;
+    g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
+    g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 256; i++) {
+        *dst++ = *src++;
+    }
+    g_GfxPalettePending = 1;
+}
 
 MATCH void func_801EEF8C(void) {
     PartyMember* battler;
@@ -44,7 +90,33 @@ MATCH void func_801EF158(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1F0);
+MATCH void func_801EF1F0(void) {
+    PartyMember* battler;
+    u8           selector;
+
+    if (g_Task->unk_09 < 12) {
+        Effect_DrawScreenFade();
+        g_Task->unk_09 += 4;
+    }
+    if ((s8)g_Task->unk_5D != 0) {
+        g_Task->unk_5D -= 2;
+    }
+    if ((s8)g_Task->unk_5E != 0) {
+        g_Task->unk_5E -= 2;
+    }
+    if ((s8)g_Task->unk_5F != 0) {
+        g_Task->unk_5F -= 2;
+    }
+    g_PaletteFades[g_Task->timer].offset.red   = g_Task->unk_5D;
+    g_PaletteFades[g_Task->timer].offset.green = g_Task->unk_5E;
+    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->unk_5F;
+    if ((LOWU(g_Task->unk_5C) & ~0xFF) == 0) {
+        BMAGIC_SELECT_TARGET_BATTLER();
+        GFX_FreePaletteFadeTarget(battler);
+        func_800AF814(g_Battle.target_selector);
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EF3E0(void) {
     u8           slot;
@@ -63,7 +135,60 @@ MATCH void func_801EF3E0(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EF490);
+MATCH void func_801EF490(void) {
+    switch (g_Battle.action_id) {
+        case 0x04:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 0;
+            break;
+        case 0x05:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 1;
+            break;
+        case 0x07:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 2;
+            break;
+        case 0x1D:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 3;
+            break;
+        case 0x31:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 4;
+            break;
+        case 0x9B:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 5;
+            break;
+        case 0x9C:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 6;
+            break;
+        /* kept: retail bounds the tree above 0x9C, so one id there shares the default; 0x9D is the nearest. */
+        case 0x9D:
+        default:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 7;
+            break;
+        case 0x85:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 8;
+            break;
+        case 0x86:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 9;
+            break;
+        case 0x87:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 10;
+            break;
+        case 0x88:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 11;
+            break;
+    }
+}
 
 /* func_801EF6E0 */
 #include "overlays/bmagic/Effect_DrawScreenFade.h"

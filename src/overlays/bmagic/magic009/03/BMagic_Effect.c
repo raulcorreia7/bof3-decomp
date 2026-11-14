@@ -6,7 +6,60 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC28.h"
 
-INCLUDE_ASM(func_801EEC98);
+MATCH void func_801EEC98(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u16*          dst;
+    u16*          src;
+    u32           index;
+    u32           i;
+    u8            active;
+
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    active = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        g_Game.members[active].unk_4B = 0xFF;
+    } else {
+        g_BattleEnemyBattlers[active - BATTLE_PARTY_CHARACTERS_COUNT].unk_4B = 0xFF;
+    }
+    func_800AEF98(0x2C, 6);
+    index  = Battle_AllocEffect(1, 42) & BYTE_MASK;
+    active = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        BattleWorkImage* row;
+
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        row                     = (BattleWorkImage*)&g_Game.members[active];
+        *(BattleWorkImage*)slot = *row;
+    } else {
+        BattleWorkImage* row;
+        u32              enemy;
+
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *row;
+    }
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 42;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->param.unk_0B += 1;
+    i   = 1;
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 0x3402u);
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 0x3402u);
+    for (; i < 16; i++) {
+        dst[0x20] = src[0x20] | 0x8000;
+        src++;
+        dst++;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 0x3440u) = 0;
+    g_GfxPalettePending                        = 1;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
 
 MATCH void func_801EEF08(void) {
     u32 slot;
@@ -84,7 +137,44 @@ MATCH void Effect_CountDownTimer(void) {
     BMagic_CountDownEffectTimer(1);
 }
 
-INCLUDE_ASM(func_801EF3B8);
+MATCH void func_801EF3B8(void) {
+    POLY_FT4* prim;
+    s32       tpage;
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    D_1F800000.view.scenario.math_00 = g_Task->unk_09 << 1;
+    prim                             = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    SetSemiTrans(prim, 1);
+    prim->x0    = g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.view.scenario.math_00);
+    prim->y0    = g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.view.scenario.math_00);
+    prim->x1    = g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.view.scenario.math_00);
+    prim->y1    = g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.view.scenario.math_00);
+    prim->x2    = g_Task->unk_2E.half + FIXED_MUL(rcos(3584), D_1F800000.view.scenario.math_00);
+    prim->y2    = g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.view.scenario.math_00);
+    prim->x3    = g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.view.scenario.math_00);
+    prim->y3    = g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.view.scenario.math_00);
+    prim->tpage = GetTPage(0, 1, 832, 256);
+    prim->clut  = GetClut(32, 506);
+    prim->u0    = 128;
+    prim->v0    = 32;
+    prim->u1    = 160;
+    prim->v1    = 32;
+    prim->u2    = 128;
+    prim->v2    = 64;
+    prim->u3    = 160;
+    prim->v3    = 64;
+    prim->r0    = g_Task->timer * 10;
+    prim->g0    = 0;
+    prim->b0    = g_Task->timer * 9;
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
+}
 
 MATCH void func_801EF6B0(void) {
     Magic009Steps handlers;

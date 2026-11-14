@@ -151,7 +151,59 @@ MATCH void func_801EF614(void) {
     g_Task->unk_04       = 0;
 }
 
-INCLUDE_ASM(func_801EF6A0);
+/* Draws the effect glow as one textured quad around its screen point; the radius grows with the timer up to 0x40. */
+MATCH void func_801EF6A0(void) {
+    POLY_GT4* prim;
+    s16*      shade;
+    s32       tpage;
+
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    prim = (POLY_GT4*)g_GfxPrimCursor;
+    SetPolyGT4(prim);
+    if (g_Task->unk_09 < 8) {
+        D_1F800000.view.effect.params[0] = (g_Task->unk_09 + 1) * 8;
+    } else {
+        D_1F800000.view.effect.params[0] = 0x40;
+    }
+    shade                            = &D_1F800000.view.effect.params[4];
+    *shade                           = 0x80;
+    D_1F800000.view.effect.params[2] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[3] = g_Task->unk_30.half;
+    prim->x0                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0xC00), D_1F800000.view.effect.params[0]);
+    prim->y0                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0xC00), D_1F800000.view.effect.params[0]);
+    prim->x1                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x800), D_1F800000.view.effect.params[0]);
+    prim->y1                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x800), D_1F800000.view.effect.params[0]);
+    prim->x2                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    prim->y2                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    prim->x3                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x400), D_1F800000.view.effect.params[0]);
+    prim->y3                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x400), D_1F800000.view.effect.params[0]);
+    prim->tpage                      = GetTPage(0, 2, 832, 256);
+    prim->clut                       = GetClut(0, 506);
+    prim->u0                         = 1;
+    prim->v0                         = 1;
+    prim->u1                         = 31;
+    prim->v1                         = 1;
+    prim->u2                         = 1;
+    prim->v2                         = 31;
+    prim->u3                         = 31;
+    prim->v3                         = 31;
+    prim->r0                         = *shade;
+    prim->g0                         = *shade;
+    prim->b0                         = *shade;
+    prim->r1                         = *shade;
+    prim->g1                         = *shade;
+    prim->b1                         = *shade;
+    prim->r2                         = *shade;
+    prim->g2                         = *shade;
+    prim->b2                         = *shade;
+    prim->r3                         = *shade;
+    prim->g3                         = *shade;
+    prim->b3                         = *shade;
+    SetSemiTrans(prim, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
+}
 
 /* func_801EFA20 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

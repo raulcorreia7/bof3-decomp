@@ -10,7 +10,48 @@ MATCH void func_801EECA0(void) {
     SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EED0C);
+#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+
+MATCH void func_801EED0C(void) {
+    PartyMember* work;
+    u32          index;
+    PartyMember* owner;
+    u8           i;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(8, 2);
+    for (i = 0; i < 4; i++) {
+        index = Battle_AllocEffect(1, 35);
+        Effect_CopyActiveBattlerToSlot(index);
+        work                                             = g_Task;
+        g_BattleEffects[index & BYTE_MASK].handler_index = 35;
+        g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
+        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+        g_BattleEffects[index & BYTE_MASK].arg.unk_09    = (i ^ 3) + 1;
+        g_BattleEffects[index & BYTE_MASK].unk_0B        = i ^ 3;
+        g_BattleEffects[index & BYTE_MASK].target.party  = work;
+        g_Task->param.unk_0B++;
+    }
+    index = Battle_AllocEffect(1, 35);
+    Effect_CopyActiveBattlerToSlot(index);
+    owner                                            = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 35;
+    g_BattleEffects[index & BYTE_MASK].target.party  = owner;
+    g_Task->param.unk_0B++;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task->unk_27 = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28 = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24 = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+}
 
 #include "overlays/bmagic/Effect_RestorePaletteAndReleaseActive.h"
 
@@ -28,7 +69,37 @@ MATCH void func_801EF248(void) {
     SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF2B4);
+MATCH void func_801EF2B4(void) {
+    PartyMember* work;
+    u32          index;
+    u8           i;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->unk_27 = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28 = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24 = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    func_800AFAB8(g_Task);
+    func_800AEF98(8, 2);
+    g_Task->param.unk_0B = 0;
+    for (i = 0; i < 3; i++) {
+        index = Battle_AllocEffect(1, 35);
+        Effect_CopyActiveBattlerToSlot(index);
+        work                                             = g_Task;
+        g_BattleEffects[index & BYTE_MASK].header.mode   = 2;
+        g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+        g_BattleEffects[index & BYTE_MASK].handler_index = 35;
+        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_0B        = i;
+        g_BattleEffects[index & BYTE_MASK].arg.unk_09    = i * 2 + 1;
+        g_BattleEffects[index & BYTE_MASK].target.party  = work;
+        g_Task->param.unk_0B++;
+    }
+    SND_QueueSelectionFx(0x100);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task->header.mode++;
+}
 
 MATCH void func_801EF594(void) {
     EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
@@ -46,7 +117,33 @@ MATCH void func_801EF644(void) {
     SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF6B0);
+MATCH void func_801EF6B0(void) {
+    PartyMember* work;
+    u32          index;
+
+    g_Task->facing             = g_BattleEffectBattler->facing;
+    g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.part.integer = g_BattleEffectBattler->pos.z.part.integer;
+    g_Task->param.unk_0B       = 1;
+    func_800AEF98(8, 0);
+    index = Battle_AllocEffect(1, 35);
+    Effect_CopyActiveBattlerToSlot(index);
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 3;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 35;
+    g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    func_800AFAB8(g_Task);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task->header.mode++;
+}
 
 MATCH void func_801EF93C(void) {
     if (g_Task->param.unk_0B == 0) {
@@ -269,7 +366,43 @@ MATCH void func_801F0654(void) {
 
 INCLUDE_ASM(func_801F0770);
 
-INCLUDE_ASM(func_801F0864);
+MATCH void func_801F0864(void) {
+    s32 speed;
+
+    if (g_Task->param.unk_0B != 0) {
+        if ((s8)g_Task->unk_5D != -0x80) {
+            g_Task->unk_5D -= D_801F1640[g_Task->param.unk_0B - 1][0];
+            g_Task->unk_5E -= D_801F1640[g_Task->param.unk_0B - 1][1];
+            g_Task->unk_5F -= D_801F1640[g_Task->param.unk_0B - 1][1];
+        }
+    } else {
+        if ((s8)g_Task->unk_5D != 0) {
+            g_Task->unk_5D -= 3;
+            g_Task->unk_5E += 4;
+            g_Task->unk_5F += 4;
+        }
+    }
+    if (g_Task->unk_09 != 16) {
+        g_Task->unk_09--;
+    }
+    Actor_StepAnimOnce();
+    func_800AF4A0(D_8014637C, 0x2000, 0);
+    speed                      = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14             = speed;
+    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + speed;
+    if ((g_Task->unk_14 < 0) && (g_Task->pos.z.fixed < g_Battle.selected_actor->pos.z.fixed)) {
+        if (g_Task->param.unk_0B != 0) {
+            g_BattleEffectBattler->param.unk_0B--;
+            func_801E5988();
+        } else {
+            g_Task->unk_5D      = 0;
+            g_Task->unk_5E      = 0;
+            g_Task->unk_5F      = 0;
+            g_Task->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed;
+            g_Task->header.step++;
+        }
+    }
+}
 
 MATCH void func_801F0A94(void) {
     s8 tint;

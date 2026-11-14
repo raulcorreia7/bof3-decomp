@@ -3,7 +3,16 @@
 
 /* The bmagic/magic219/03 overlay. Only this image includes the file. */
 
+#define BATTLE_PARTY_CELL_RECORD
+
 #include "overlays/bmagic/bmagic.h"
+
+extern SVECTOR D_1F800014[];
+/* The ring radius, a word at scratch 0x00: the effect view names only halfwords there, so the word goes through
+ * the scratch math word view. */
+#define MAGIC219_RING_RADIUS D_1F800000.view.scenario.math_00
+/* The orbit angle, the word after it. */
+#define MAGIC219_ORBIT_ANGLE D_1F800000.view.scenario.math_04
 
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern Callback     D_801EFA04[];

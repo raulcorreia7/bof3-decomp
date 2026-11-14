@@ -32,6 +32,12 @@ extern Magic015Steps       D_801EEC24;
 extern Magic015ThirdSteps  D_801EEC54;
 extern Magic015SecondSteps D_801EEC34;
 extern Callback            D_801EEC68[];
+/* Per-strength tint steps of the magic015 landing effect: the red step, then the green and blue step. */
+extern u8                  D_801F1640[][2];
+/* The battle/battle/15 sprite-cell routines, called with a battler or the effect work record. */
+u32                        func_800AFB48(PartyMember* record);
+void                       func_800AF8F0(PartyMember* record);
+void                       func_800AFAB8(PartyMember* record);
 /* The seven step handlers of the magic015 landing effect (func_801F0C30). */
 extern Callback            D_801EEC84[];
 

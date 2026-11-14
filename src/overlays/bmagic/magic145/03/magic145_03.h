@@ -7,4 +7,8 @@
 
 extern Callback D_801EF418[];
 
+/* The per-ticker position offset func_801EEEE8 adds to the selected actor: x,
+ * y and z in 16.16. */
+extern Point3DL D_801EF424[];
+
 #endif

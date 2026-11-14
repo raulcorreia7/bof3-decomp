@@ -4,9 +4,65 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC14);
+MATCH void func_801EEC14(void) {
+    Magic010SharedSteps handlers;
+    PartyMember*        saved_task;
+    PartyMember*        saved_battler;
+    s32                 tpage;
+    u8                  i;
 
-INCLUDE_ASM(func_801EEDD8);
+    handlers = D_801EEC04;
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    GFX_AddDitheredDrawMode(3, tpage);
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
+            BMagic_DispatchEffectMode();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+    func_801EF0B0();
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    GFX_AddDitheredDrawMode(3, tpage);
+}
+
+MATCH void func_801EEDD8(void) {
+    PartyMember* task;
+    u32          slot;
+    u32          i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    Battle_ProjectRange();
+    func_800B0118();
+    g_Task->unk_2E.half += g_Task->unk_0C;
+    g_Task->unk_30.half += g_Task->unk_10;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 8;
+    g_Task->timer        = 16;
+    g_Task->header.mode++;
+    for (i = 0; i < 32; i++) {
+        slot                                   = BMagic_AllocEffect() & BYTE_MASK;
+        task                                   = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].unk_04       = i;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 0;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i * 4 + 1;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = task;
+        g_Task->param.unk_0B++;
+    }
+    SND_QueueSelectionFx(0x100);
+}
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
@@ -24,7 +80,40 @@ MATCH void func_801EEFF0(void) {
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-INCLUDE_ASM(func_801EF0B0);
+MATCH void func_801EF0B0(void) {
+    POLY_G3* poly;
+    s32      radius;
+    u8       red;
+    u8       green;
+    u8       blue;
+    u8       i;
+
+    i    = 0;
+    blue = red = green = g_Task->timer * 15;
+    radius             = (rand() & 3) | 0x20;
+    do {
+        poly = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(poly);
+        SetSemiTrans(poly, 1);
+        poly->x0 = g_Task->unk_2E.half;
+        poly->y0 = g_Task->unk_30.half;
+        poly->x1 = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12);
+        poly->y1 = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12);
+        poly->x2 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12);
+        poly->y2 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12);
+        poly->r0 = red;
+        poly->g0 = green;
+        poly->b0 = blue;
+        poly->r1 = 1;
+        poly->g1 = 1;
+        poly->b1 = 1;
+        poly->r2 = 1;
+        poly->g2 = 1;
+        poly->b2 = 1;
+        GFX_AddPrim(3, sizeof(POLY_G3));
+        i++;
+    } while (i < 8);
+}
 
 MATCH void func_801EF268(void) {
 }
@@ -58,7 +147,30 @@ MATCH void func_801EF2B4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF3FC);
+MATCH void func_801EF3FC(void) {
+    PartyMember* battler;
+
+    if (--g_Task->unk_09 == 0) {
+        Battle_CenterCamera();
+        Battle_ProjectRange();
+        battler                          = g_BattleEffectBattler;
+        D_1F800000.view.effect.params[6] = g_Task->unk_2E.half;
+        D_1F800000.view.effect.params[7] = g_Task->unk_30.half;
+        D_1F800000.view.effect.params[4] = g_Task->unk_2E.half = battler->unk_2E.half;
+        D_1F800000.view.effect.params[5] = g_Task->unk_30.half = battler->unk_30.half;
+        g_Task->unk_14 = ratan2(D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[7] - D_1F800000.view.effect.params[5]);
+        if (g_Task->unk_04 & 1) {
+            g_Task->unk_14 += (rand() & 7) << 6;
+        } else {
+            g_Task->unk_14 -= (rand() & 7) << 6;
+        }
+        g_Task->unk_0C       = 0;
+        g_Task->param.unk_0B = rand() & 0x3F;
+        g_Task->unk_09       = 0x10;
+        g_Task->timer        = 0;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801EF588(void) {
     u8 timer;
@@ -137,9 +249,88 @@ MATCH void func_801F0368(void) {
     }
 }
 
-INCLUDE_ASM(func_801F03E0);
+MATCH void func_801F03E0(void) {
+    POLY_G3* poly;
+    s32      radius;
+    u8       red;
+    u8       green;
+    u8       blue;
+    u8       centre;
+    u8       i;
 
-INCLUDE_ASM(func_801F05B4);
+    red    = g_Task->unk_09 * (s8)g_Task->unk_5D;
+    green  = g_Task->unk_09 * (s8)g_Task->unk_5E;
+    i      = 0;
+    centre = g_Task->unk_09 * 15;
+    radius = g_Task->timer * 2;
+    blue   = g_Task->unk_09 * (s8)g_Task->unk_5F;
+    do {
+        poly = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(poly);
+        SetSemiTrans(poly, 1);
+        poly->x0 = g_Task->unk_2E.half;
+        poly->y0 = g_Task->unk_30.half;
+        poly->x1 = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12);
+        poly->y1 = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12);
+        poly->x2 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12);
+        poly->y2 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12);
+        poly->r0 = centre;
+        poly->g0 = centre;
+        poly->b0 = centre;
+        poly->r1 = red;
+        poly->g1 = green;
+        poly->b1 = blue;
+        poly->r2 = red;
+        poly->g2 = green;
+        poly->b2 = blue;
+        GFX_AddPrim(3, sizeof(POLY_G3));
+        i++;
+    } while (i < 8);
+}
+
+MATCH void func_801F05B4(void) {
+    POLY_G4* poly;
+    s32      outer;
+    s32      inner;
+    u8       red;
+    u8       green;
+    u8       blue;
+    u8       i;
+
+    red   = g_Task->unk_09 * (s8)g_Task->unk_5D;
+    green = g_Task->unk_09 * (s8)g_Task->unk_5E;
+    i     = 0;
+    outer = g_Task->timer * 3;
+    inner = g_Task->timer * 2;
+    blue  = g_Task->unk_09 * (s8)g_Task->unk_5F;
+    do {
+        poly = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        poly->x0 = g_Task->unk_2E.half + ((rsin(i << 9) * outer) >> 12);
+        poly->y0 = g_Task->unk_30.half + ((rcos(i << 9) * outer) >> 12);
+        poly->x1 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * outer) >> 12);
+        poly->y1 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * outer) >> 12);
+        poly->x2 = g_Task->unk_2E.half + ((rsin(i << 9) * inner) >> 12);
+        poly->y2 = g_Task->unk_30.half + ((rcos(i << 9) * inner) >> 12);
+        poly->x3 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * inner) >> 12);
+        poly->y3 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * inner) >> 12);
+        poly->r0 = 1;
+        poly->g0 = 1;
+        poly->b0 = 1;
+        poly->r1 = 1;
+        poly->g1 = 1;
+        poly->b1 = 1;
+        poly->r2 = red;
+        poly->g2 = green;
+        poly->b2 = blue;
+        poly->r3 = red;
+        poly->g3 = green;
+        poly->b3 = blue;
+        GFX_AddPrim(3, sizeof(POLY_G4));
+        i++;
+    } while (i < 8);
+}
 
 /* func_801F0828 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

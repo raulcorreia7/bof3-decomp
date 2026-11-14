@@ -6,7 +6,36 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC24.h"
 
-INCLUDE_ASM(func_801EEC90);
+#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+
+MATCH void func_801EEC90(void) {
+    PartyMember* work;
+    u32          slot;
+    u32          i;
+    u16*         dst;
+    u16*         src;
+
+    func_800AEF98(12, 2);
+    slot = Battle_AllocEffect(1, 82) & BYTE_MASK;
+    Effect_CopyActiveBattlerToSlot(slot);
+    i                                   = 0;
+    dst                                 = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src                                 = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    work                                = g_Task;
+    g_BattleEffects[slot].header.mode   = 1;
+    g_BattleEffects[slot].unk_06        = 1;
+    g_BattleEffects[slot].header.step   = 0;
+    g_BattleEffects[slot].handler_index = 82;
+    g_BattleEffects[slot].target.party  = work;
+    for (; i < 16; i++) {
+        *dst++ = *src++;
+    }
+    g_GfxPalettePending = 1;
+    g_BattleEffectBattler->header.flags |= 0x40;
+    g_Task->param.unk_0B = 1;
+    g_Task->unk_09       = 1;
+    g_Task->header.mode++;
+}
 
 MATCH void func_801EEE94(void) {
     u32          i;

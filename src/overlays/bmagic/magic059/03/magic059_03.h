@@ -12,5 +12,12 @@ extern BattleEffect D_801F0694[];
 void func_801EED0C(void);
 void func_801EF118(void);
 void func_801EFE48(void);
+void func_801F01A4(void);
+void func_801EF638(void);
+void func_801EF70C(s32 phase, s32 radius);
+
+extern Callback D_801F0670[];
+
+extern Callback D_801F0684[];
 
 #endif

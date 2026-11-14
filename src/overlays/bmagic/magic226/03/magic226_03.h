@@ -1,6 +1,8 @@
 #ifndef OVERLAY_BMAGIC_MAGIC226_03_H
 #define OVERLAY_BMAGIC_MAGIC226_03_H
 
+#define BATTLE_PARTY_CELL_RECORD
+
 /* The bmagic/magic226/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"

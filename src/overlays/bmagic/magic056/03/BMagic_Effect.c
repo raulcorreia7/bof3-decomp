@@ -6,9 +6,84 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC94);
+/* Starts the effect: centres the camera, queues a copy of the acting battler as effect
+ * 0x55 in mode 3, sets STP on colours 1 to 15 of the first two palettes of work row 26
+ * and clears their colour 0, then fills bytes 0x24, 0x27 and 0x28 of the effect from the
+ * effect battler and marks the battler busy. */
+MATCH void func_801EEC94(void) {
+    PartyMember*     work;
+    u16*             dst;
+    u16*             src;
+    u32              i;
+    u32              index;
+    u8               active;
+    BattleWorkImage* slot;
+    BattleWorkImage* row;
+    u32              enemy;
+    PartyMember*     member;
 
-INCLUDE_ASM(func_801EEF3C);
+    Battle_CenterCamera();
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(8, 0);
+    index  = Battle_AllocEffect(1, 0x55) & BYTE_MASK;
+    active = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        slot   = (BattleWorkImage*)&g_BattleEffects[index];
+        member = &g_Game.members[active];
+        *slot  = *(BattleWorkImage*)member;
+    } else {
+        slot  = (BattleWorkImage*)&g_BattleEffects[index];
+        enemy = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *slot = *row;
+    }
+    work                                 = g_Task;
+    g_BattleEffects[index].header.mode   = 3;
+    g_BattleEffects[index].unk_06        = 1;
+    g_BattleEffects[index].header.step   = 0;
+    g_BattleEffects[index].handler_index = 0x55;
+    g_BattleEffects[index].target.party  = work;
+    g_Task->param.unk_0B += 1;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (i = 1; i < 16; i++) {
+        dst[i]      = src[i] | 0x8000;
+        dst[i + 16] = src[i + 16] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
+    g_GfxPalettePending                                             = 1;
+    g_Task->unk_27                                                  = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                                  = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                                  = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
+
+MATCH s32 func_801EEF3C(void) {
+    if (g_Task->param.unk_0B == 0) {
+        g_BattleEffectBattler->header.flags &= ~0x40;
+        func_800AFC54();
+        func_800AEF98(0x1C, 0);
+        Battle_MarkDamaged(g_Battle.target_selector);
+        if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+            g_Game.members[g_Battle.active_battler].header.mode = 6;
+            g_Game.members[g_Battle.active_battler].header.step = 4;
+            g_Game.members[g_Battle.active_battler].chr.hp      = 0;
+            g_Game.members[g_Battle.active_battler].chr.status  = STATUS_KO;
+            GFX_FreePaletteFadeTarget(&g_Game.members[g_Battle.active_battler]);
+        } else {
+            ENEMY_COMBATANT(g_Battle.active_battler).header.mode = 6;
+            ENEMY_COMBATANT(g_Battle.active_battler).header.step = 4;
+            ENEMY_COMBATANT(g_Battle.active_battler).hp          = 0;
+            ENEMY_COMBATANT(g_Battle.active_battler).status      = STATUS_KO;
+            GFX_FreePaletteFadeTarget(g_BattleEnemies + g_Battle.active_battler * BATTLE_ENEMY_STRIDE);
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 
@@ -87,7 +162,45 @@ MATCH void func_801EFB38(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerCapped.h"
 
-INCLUDE_ASM(func_801EFC74);
+/* Draws the glow disc of sixteen shaded triangles round the effect point; the radius
+ * follows byte 0x09 (a wider rule from step 2 on) and the centre colour the effect timer. */
+MATCH void func_801EFC74(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      scale;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    if (g_Task->header.step >= 2) {
+        D_1F800000.view.effect.params[0] = ((g_Task->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;
+    } else {
+        scale                            = rcos(0x800) * 48;
+        D_1F800000.view.effect.params[0] = (scale * g_Task->unk_09) >> 12;
+    }
+    D_1F800000.view.effect.params[3] = g_Task->timer * 8;
+    D_1F800000.view.effect.params[4] = g_Task->timer * 6;
+    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vz                 = 0;
+    D_1F800014[1].vz                 = 0;
+    D_1F800014[0].vz                 = 0;
+    for (i = 1; i <= 16; i++) {
+        prim             = GFX_BeginPolyG3(1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
+        setRGB0(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, 0, 0, 0);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+}
 
 MATCH void func_801EFF28(void) {
     Magic056Steps handlers;
@@ -133,7 +246,43 @@ MATCH void func_801F0178(void) {
     }
 }
 
-INCLUDE_ASM(func_801F023C);
+MATCH void func_801F023C(void) {
+    PartyMember* saved;
+    PartyMember* task;
+    u8           slot;
+    u8           count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        slot                               = Battle_AllocEffect(1, 0x55);
+        g_BattleEffects[slot].target.party = g_BattleEffectBattler;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffectBattler->param.unk_0B += 1;
+        slot                               = Battle_AllocEffect(1, 0x55);
+        g_BattleEffects[slot].target.party = g_BattleEffectBattler;
+        g_BattleEffects[slot].header.mode  = 2;
+        g_BattleEffectBattler->param.unk_0B += 1;
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+            saved       = g_GameState;
+            g_GameState = &g_Game.members[g_Battle.active_battler];
+            func_801DD858(0);
+            g_GameState = saved;
+        }
+        if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+            task = g_Task;
+            TASK_SET(&g_Game.members[g_Battle.active_battler]);
+            Actor_SelectScript(g_Task->facing + 16);
+            TASK_SET(task);
+            Actor_SelectScript(task->facing + 16);
+        } else {
+            func_801E257C(g_Battle.active_battler, 4);
+        }
+        g_Task->unk_09 = 30;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F042C(void) {
     u8 count;

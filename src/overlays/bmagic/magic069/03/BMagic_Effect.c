@@ -8,7 +8,52 @@ MATCH void func_801EEC04(void) {
     ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EEE30);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    u8           i;
+    u8           slot;
+    PartyMember* actor;
+    u16*         dst;
+    u16*         src;
+
+    actor                = g_Battle.selected_actor;
+    g_Task->unk_2E.half  = actor->unk_2E.half;
+    g_Task->unk_30.half  = actor->unk_30.half;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    for (i = 0; i < 3; i++) {
+        PartyMember* work;
+
+        slot                               = Battle_AllocEffect(1, 57);
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].unk_0B       = i;
+        g_BattleEffects[slot].arg.unk_09   = i + 1;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+    }
+    for (i = 0; i < 3; i++) {
+        PartyMember* work;
+
+        slot                               = Battle_AllocEffect(1, 57);
+        work                               = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].unk_0B       = i;
+        g_BattleEffects[slot].arg.unk_09   = i + 1;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+    }
+    /* Copies the first three CLUTs of arena palette row 26 into the work copy. */
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i]      = src[i];
+        dst[i + 16] = src[i + 16];
+        dst[i + 32] = src[i + 32];
+    }
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
@@ -174,11 +219,52 @@ MATCH void func_801EF520(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 10, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801EF564);
+MATCH void func_801EF564(void) {
+    PartyMember* battler;
+    u8           slot;
+    u16          y;
+
+    if (g_Task->param.unk_0B < BATTLE_PARTY_CHARACTERS_COUNT) {
+        battler = &g_Game.members[g_Task->param.unk_0B];
+    } else {
+        battler = (PartyMember*)(g_BattleEnemies + g_Task->param.unk_0B * BATTLE_ENEMY_STRIDE);
+    }
+    GFX_FreePaletteFadeTarget(battler);
+    g_Task->timer       = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+    g_Task->unk_2E.half = battler->unk_2E.half - 32;
+    y                   = battler->unk_30.half - 12;
+    g_Task->unk_30.half = y;
+    slot                = g_Task->param.unk_0B;
+    if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
+        if (g_Game.members[slot].facing < 2) {
+            g_Task->unk_30.half = y - s_BattlePanelYOffsets[g_Game.members[slot].chr.character_id * 2];
+        } else {
+            g_Task->unk_30.half = y - D_801EB109[g_Game.members[slot].chr.character_id * 2];
+        }
+    } else {
+        g_Task->unk_30.half = y - ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT].kind].height;
+    }
+    g_Task->unk_09 = 0;
+    g_Task->header.step += 1;
+}
 
 INCLUDE_ASM(func_801EF724);
 
-INCLUDE_ASM(func_801EF834);
+MATCH void func_801EF834(void) {
+    g_PaletteFades[g_Task->timer].offset.red -= 1;
+    g_PaletteFades[g_Task->timer].offset.green -= 1;
+    g_PaletteFades[g_Task->timer].offset.blue -= 1;
+    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+        if (g_Task->unk_04 == 0) {
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        }
+        GFX_FreePaletteFade(g_Task->timer);
+        func_800AF814(g_Task->param.unk_0B);
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 4;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF9C4(void) {
     u8 timer;
@@ -236,9 +322,84 @@ MATCH void func_801EFA84(void) {
     GFX_AddPrim(2, sizeof(POLY_FT4));
 }
 
-INCLUDE_ASM(func_801EFC00);
+/* Draw four fans of three shaded triangles round the effect screen point, one per quarter turn
+ * at the timer radius; their red and green shades fade in by step. */
+MATCH void func_801EFC00(void) {
+    POLY_G3* prim;
+    s32      i;
+    s32      j;
 
-INCLUDE_ASM(func_801EFF14);
+    D_1F800000.view.effect.params[0] = g_Task->timer;
+    D_1F800000.view.effect.params[1] = (g_Task->timer >> 2) + 1;
+    if (g_Task->header.step < 2) {
+        D_1F800000.view.effect.params[3] = 0x80 - g_Task->param.unk_0B * 48;
+        D_1F800000.view.effect.params[4] = 0x80 - g_Task->param.unk_0B * 48;
+    } else {
+        D_1F800000.view.effect.params[3] = g_Task->unk_09 * 6 + 0x80;
+        D_1F800000.view.effect.params[4] = 0x80 - g_Task->unk_09 * 6;
+    }
+    for (i = 0; i < 4; i++) {
+        D_1F800000.view.effect.params[6] = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 10), D_1F800000.view.effect.params[0]);
+        D_1F800000.view.effect.params[7] = g_Task->unk_30.half + FIXED_MUL(rcos(i << 10), D_1F800000.view.effect.params[0]);
+        for (j = 0; j < 3; j++) {
+            prim = (POLY_G3*)g_GfxPrimCursor;
+            SetPolyG3(prim);
+            SetSemiTrans(prim, 1);
+            prim->x0                         = D_1F800000.view.effect.params[6];
+            prim->y0                         = D_1F800000.view.effect.params[7];
+            D_1F800000.view.effect.params[2] = ((D_801F0534[j] + i * 16) & 0x3F) << 6;
+            prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+            prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+            D_1F800000.view.effect.params[2] = ((D_801F0534[j + 1] + i * 16) & 0x3F) << 6;
+            prim->x2                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+            prim->y2                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+            prim->r0                         = D_1F800000.view.effect.params[3];
+            prim->g0                         = D_1F800000.view.effect.params[4];
+            prim->b0                         = 1;
+            prim->r1                         = D_1F800000.view.effect.params[3];
+            prim->g1                         = D_1F800000.view.effect.params[4];
+            prim->b1                         = 1;
+            prim->r2                         = D_1F800000.view.effect.params[3];
+            prim->g2                         = D_1F800000.view.effect.params[4];
+            prim->b2                         = 1;
+            GFX_AddPrim(3, sizeof(POLY_G3));
+        }
+    }
+}
+
+/* Draws a ring of the timer radius round the effect's screen point as 64 line segments, keeping
+ * the middle half of every sixteen; the scratchpad holds the radius, angle, shade and centre. */
+MATCH void func_801EFF14(void) {
+    LINE_F2* prim;
+    s32      i;
+    s32      segment;
+
+    D_1F800000.view.effect.params[0] = g_Task->timer;
+    D_1F800000.view.effect.params[6] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[7] = g_Task->unk_30.half;
+    if (g_Task->header.step < 2) {
+        D_1F800000.view.effect.params[3] = 0x80 - g_Task->param.unk_0B * 48;
+    } else {
+        D_1F800000.view.effect.params[3] = 0x80;
+    }
+    for (segment = 0, i = 0; i < 64; i++, segment++) {
+        if ((segment & 0xC) == 4 || (segment & 0xC) == 8) {
+            prim = (LINE_F2*)g_GfxPrimCursor;
+            SetLineF2(prim);
+            SetSemiTrans(prim, 1);
+            D_1F800000.view.effect.params[2] = i << 6;
+            prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            D_1F800000.view.effect.params[2] = (i + 1) << 6;
+            prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            prim->r0                         = D_1F800000.view.effect.params[3];
+            prim->g0                         = D_1F800000.view.effect.params[3];
+            prim->b0                         = D_1F800000.view.effect.params[3];
+            GFX_AddPrim(3, sizeof(LINE_F2));
+        }
+    }
+}
 
 MATCH void func_801F0104(void) {
     LINE_F2*      line;
@@ -283,4 +444,43 @@ MATCH void func_801F0104(void) {
     GFX_AddPrim(3, sizeof(LINE_F2));
 }
 
-INCLUDE_ASM(func_801F0274);
+/* Spawn a piece on every selectable battler other than the actor and the target that is
+ * confused, charging or under 2 intellect, counting the pieces in the effect battler ticker. */
+MATCH void func_801F0274(void) {
+    s32          i;
+    s32          count;
+    s32          slot;
+    PartyMember* work;
+
+    count = 0;
+    for (i = 0; i < 8; i++) {
+        if (Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) == 0 && g_Battle.active_battler != i + BATTLE_PARTY_CHARACTERS_COUNT &&
+            g_Battle.target_selector != i + BATTLE_PARTY_CHARACTERS_COUNT) {
+            if (g_BattleEnemyBattlers[i].stats.intellect < 2 || (g_BattleEnemyBattlers[i].status & STATUS_CONFUSED) || (g_BattleEnemyBattlers[i].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
+                slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
+                work                               = g_BattleEffectBattler;
+                g_BattleEffects[slot].header.mode  = 2;
+                g_BattleEffects[slot].unk_04       = count;
+                g_BattleEffects[slot].unk_0B       = i + BATTLE_PARTY_CHARACTERS_COUNT;
+                g_BattleEffects[slot].target.party = work;
+                g_BattleEffectBattler->param.unk_0B += 1;
+                count++;
+            }
+        }
+    }
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        if (Battle_SlotIsBlocked((u8)i) == 0 && g_Battle.active_battler != i && g_Battle.target_selector != i) {
+            if (g_Game.members[i].chr.stats.intellect < 2 || (g_Game.members[i].chr.status & STATUS_CONFUSED) || (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) ||
+                (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED)) {
+                slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
+                work                               = g_BattleEffectBattler;
+                g_BattleEffects[slot].header.mode  = 2;
+                g_BattleEffects[slot].unk_04       = count;
+                g_BattleEffects[slot].unk_0B       = i;
+                g_BattleEffects[slot].target.party = work;
+                g_BattleEffectBattler->param.unk_0B += 1;
+                count++;
+            }
+        }
+    }
+}

@@ -32,7 +32,25 @@ MATCH void func_801EF19C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF238);
+MATCH void func_801EF238(void) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        g_Task->pos.x.fixed = g_BattleEnemyBattlers[g_Task->param.unk_0B].pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEnemyBattlers[g_Task->param.unk_0B].pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEnemyBattlers[g_Task->param.unk_0B].pos.z.fixed;
+    } else {
+        g_Task->pos.x.fixed = g_Game.members[g_Task->param.unk_0B].pos.x.fixed;
+        g_Task->pos.y.fixed = g_Game.members[g_Task->param.unk_0B].pos.y.fixed;
+        g_Task->pos.z.fixed = g_Game.members[g_Task->param.unk_0B].pos.z.fixed;
+    }
+    g_Task->scale.x = 0x10000;
+    g_Task->scale.y = 0x10000;
+    g_Task->unk_48  = 2;
+    g_Task->unk_0C  = -0xC60;
+    g_Task->unk_10  = 0x1080;
+    g_Task->unk_18  = 0x60;
+    g_Task->unk_1C  = -0x80;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EF3A4(void) {
     Actor_StepAnimLoop();

@@ -10,6 +10,10 @@
 extern volatile u16 D_1F80000C;
 extern volatile u16 D_1F80000E;
 
+/* The battle panel row offsets of battle/battle/03, two bytes per character, picked by the battler facing. */
+extern u8 s_BattlePanelYOffsets[];
+extern u8 D_801EB109[];
+
 void func_801EEE30(void);
 
 void            func_801EFA84(void);
@@ -18,5 +22,8 @@ extern Callback D_801F0518[];
 extern Callback D_801F0504[];
 void            func_801EFC00(void);
 void            func_801EFF14(void);
+
+/* The edge phases of the three triangles of each fan, in 64ths of a turn. */
+extern u8 D_801F0534[];
 
 #endif

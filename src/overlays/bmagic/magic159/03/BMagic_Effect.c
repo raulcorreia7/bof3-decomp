@@ -107,4 +107,44 @@ MATCH void func_801EF014(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF08C);
+MATCH void func_801EF08C(void) {
+    POLY_GT4* prim;
+    s32       tpage;
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = g_Task->unk_09 << 1;
+    D_1F800000.view.effect.params[1] = g_Task->timer << 3;
+    D_1F800000.view.effect.params[2] = g_Task->timer;
+    prim                             = (POLY_GT4*)g_GfxPrimCursor;
+    SetPolyGT4(prim);
+    SetSemiTrans(prim, 1);
+    prim->x0    = g_Task->unk_2E.half + FIXED_MUL(rcos(3584), D_1F800000.view.effect.params[0]);
+    prim->y0    = g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.view.effect.params[0]);
+    prim->x1    = g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]);
+    prim->y1    = g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]);
+    prim->x2    = g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.view.effect.params[0]);
+    prim->y2    = g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.view.effect.params[0]);
+    prim->x3    = g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]);
+    prim->y3    = g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]);
+    prim->tpage = GetTPage(0, 1, 832, 256);
+    prim->clut  = GetClut(0, 506);
+    prim->u0    = 8;
+    prim->v0    = 8;
+    prim->u1    = 87;
+    prim->v1    = 8;
+    prim->u2    = 8;
+    prim->v2    = 72;
+    prim->u3    = 87;
+    prim->v3    = 72;
+    setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+    setRGB1(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+    setRGB2(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+    setRGB3(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
+}
