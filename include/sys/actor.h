@@ -139,7 +139,7 @@ ASSERT_SIZE(ActorTint, 0x04);
 /* The word at +0x70: the scene flag-table byte alone, or the whole word. The word
  * packs voice numbers above the byte (SND_QueueSelectionFx ORs them in,
  * Area_SelectSceneRecord masks and loads it); area code clears it or passes it
- * whole as the range mode of func_801BE0C0. */
+ * whole as the range mode of Game_GetPartySize. */
 typedef union ActorStateWord {
     u32 word;
     u8  byte;

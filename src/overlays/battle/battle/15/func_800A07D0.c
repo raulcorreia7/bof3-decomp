@@ -13,7 +13,7 @@ MATCH void func_800A07D0(void) {
     u16                     second;
     u32                     index;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     ctx           = (BattleSelectionContext*)&g_Battle.target;
     index         = ctx->sel - 3u;
     first         = g_BattleEnemyBattlers[index].zenny;

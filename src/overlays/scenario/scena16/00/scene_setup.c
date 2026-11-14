@@ -52,7 +52,7 @@ MATCH void func_801F6C90(void) {
 MATCH void func_801F6CCC(void) {
     u16 flags;
 
-    func_801C1DF0(0u);
+    Scene_RunScenario(0u);
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(26), TO_COORD(8) + COORD_HALF, FACING_DOWN);
     g_SaveAreaId      = 4u;
@@ -141,7 +141,7 @@ MATCH void func_801F6F30(void) {
     if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
         g_ScriptVarsReq.word = 0u;
         Area_AdvanceScroll(768u);
-        func_801C601C(0u);
+        Area_StartScrollRoute(0u);
         /* The cell is advanced through an unsigned view and read back signed
          * for x: the two views of g_AreaCameraAngle.vx are not interchangeable. */
         base          = (u16*)&g_AreaCameraAngle.vx;

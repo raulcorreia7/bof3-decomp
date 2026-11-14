@@ -27,7 +27,7 @@ MATCH void Battle_SelectAbility(void) {
             /* a plain store: the volatile one blocks the func_801501E4 delay-slot fill */
             *(u8*)&g_BattleMessageState = 1;
             SYS_CopyString((u8*)&D_80149298, (u8*)&g_Abilities[*battle_half], 12);
-            func_801DE560(1, 1, 0, 60, (u8*)&D_80149298);
+            Battle_QueueEvent(1, 1, 0, 60, (u8*)&D_80149298);
         }
     }
     if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
@@ -38,8 +38,8 @@ MATCH void Battle_SelectAbility(void) {
         flag = ENEMY_COMBATANT(g_Battle.active_battler).status;
     }
     if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_Battle.action_id].mask & 0x400)) {
-        func_801D9484();
-        func_801DE560(2, 0, 0, 45, Message_GetText(0x37));
+        Battle_OpenPanel();
+        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(0x37));
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
         return;
@@ -55,8 +55,8 @@ MATCH void Battle_SelectAbility(void) {
         D_801463C8 = D_801463B8[0];
     }
     if (row < D_801463C8) {
-        func_801D9484();
-        func_801DE560(2, 0, 0, 45, Message_GetText(0x36));
+        Battle_OpenPanel();
+        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(0x36));
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
         return;

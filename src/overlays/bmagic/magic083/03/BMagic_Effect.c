@@ -291,7 +291,7 @@ MATCH void func_801F0010(void) {
     PartyMember* reset;
 
     Battle_ProjectRange();
-    func_801F0BA8((RANDOM_MASK(3)) | 0x18);
+    BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -319,7 +319,7 @@ MATCH void func_801F0104(void) {
     PartyMember* task;
 
     Battle_ProjectRange();
-    func_801F0BA8((RANDOM_MASK(3)) | 0x18);
+    BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -351,7 +351,7 @@ MATCH void func_801F01F8(void) {
     } else {
         value2 = (RANDOM_MASK(3)) | 0x18;
     }
-    func_801F0BA8(value2);
+    BMagic_SetXFixed(value2);
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
@@ -466,7 +466,7 @@ MATCH void func_801F050C(void) {
     func_800AF0F8(x, y, depths, start, 4, sizeof(POLY_G3), 0);
 }
 
-MATCH void func_801F0BA8(s32 radius) {
+MATCH void BMagic_SetXFixed(s32 radius) {
     POLY_G3* poly;
     s32      tpage;
     s32      i;

@@ -63,7 +63,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 153, 20, task->unk_09, CHARACTER_BLOCK->window_style);
     UI_DrawWindow(task->pos.x + 3, task->pos.y + 122, 153, 8, task->unk_09, CHARACTER_BLOCK->window_style);
     title   = &g_MenuInventoryTitles[task->unk_0A];
-    length  = func_801AF20C(*title);
+    length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
     UI_DrawText(task->pos.x - title_x, task->pos.y + 7, -(task->unk_09 != 0) & MENU_SHADE_DIM, 16, *title);
     sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);

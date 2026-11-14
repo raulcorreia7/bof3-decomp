@@ -14,7 +14,10 @@ PACKAGE = ROOT / "tools/bof3"
 
 
 def run_tree(
-    repo: Path, base_files: dict[str, str], change_files: dict[str, str]
+    repo: Path,
+    base_files: dict[str, str],
+    change_files: dict[str, str],
+    removed: tuple[str, ...] = (),
 ) -> subprocess.CompletedProcess[str]:
     (repo / "tools").mkdir()
     (repo / "tools/check_tree.sh").write_text(SCRIPT.read_text())
@@ -47,11 +50,13 @@ def run_tree(
         path.write_text(text)
     git("add", ".")
     git("commit", "-qm", "base")
+    for name in removed:
+        (repo / name).unlink()
     for name, text in change_files.items():
         path = repo / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
-    git("add", ".")
+    git("add", "-A")
     git("commit", "-qm", "change")
     return subprocess.run(
         ["sh", "tools/check_tree.sh", "HEAD~1"],
@@ -118,3 +123,41 @@ def test_source_rules_on_added_lines(
     else:
         assert result.returncode == 1, output
         assert message in output, output
+
+
+RENAMED_BODY = (
+    '#include "battle_03.h"\n'
+    "MATCH void func_801D9C80(void) {\n"
+    "    s16 var_s0 = 1;\n"
+    "    FIELD(g_Task, 0x10) = var_s0;\n"
+    "    Battle_DrawWindowTile(var_s0, 2, 8U, 1U);\n"
+    "}\n"
+)
+
+
+def run_rename(tmp_path: Path, changed_body: str) -> subprocess.CompletedProcess[str]:
+    return run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/func_801D9C80.c": RENAMED_BODY},
+        {"src/overlays/test/arc/00/b.c": changed_body},
+        removed=("src/overlays/test/arc/00/func_801D9C80.c",),
+    )
+
+
+def test_renamed_file_with_one_word_change_passes(tmp_path: Path) -> None:
+    body = RENAMED_BODY.replace("Battle_DrawWindowTile(", "Battle_DrawTile(")
+    result = run_rename(tmp_path, body)
+    output = result.stdout + result.stderr
+    assert result.returncode == 0, output
+    assert "decompiler local" not in output, output
+
+
+def test_renamed_file_gaining_a_local_fails(tmp_path: Path) -> None:
+    body = RENAMED_BODY.replace(
+        "    Battle_DrawWindowTile(var_s0, 2, 8U, 1U);\n",
+        "    s16 var_s1 = 2;\n    Battle_DrawWindowTile(var_s0, var_s1, 8U, 1U);\n",
+    )
+    result = run_rename(tmp_path, body)
+    output = result.stdout + result.stderr
+    assert result.returncode == 1, output
+    assert "decompiler local" in output and "var_s1" in output, output

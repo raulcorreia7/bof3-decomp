@@ -9,7 +9,7 @@ MATCH void func_800A0920(void) {
     s32 base;
     u32 slot;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     g_Game.members[g_Battle.target].u.turn.action_flags.volatile_value |= COMBATANT_FLAG_SUPPRESSION_EXEMPT;
     base                 = g_Battle.turn_cursor - 1;
     g_Battle.action_lock = 4;

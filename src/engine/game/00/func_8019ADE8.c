@@ -31,6 +31,6 @@ MATCH void func_8019ADE8(void) {
     work2->tint.bytes.unk_5D = 0;
     request.unk_04           = 3;
     request.unk_00           = 0;
-    func_801ABBA8(&request, g_Task->direction_08);
+    Area_MoveActorRoute(&request, g_Task->direction_08);
     func_8019AF1C();
 }

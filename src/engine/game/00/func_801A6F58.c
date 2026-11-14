@@ -48,7 +48,7 @@ MATCH void func_801A6F58(u8* script) {
     D_80146900[*counter][0]                = script[0xA];
     D_8014691C[*counter][0]                = 0x7F;
 
-    func_801A4990(script + 0xC);
+    Actor_SetOptionFlags(script + 0xC);
 
     g_Task->tint.bytes.unk_5D = 0;
     g_Task->tint.bytes.unk_5F = 0;

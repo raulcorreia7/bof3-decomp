@@ -55,7 +55,7 @@ MATCH void func_801F2EA0(void) {
             break;
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                func_801C16B8();
+                Char_RebuildPartyStats();
                 SND_StartXAStream(0, 1);
                 g_SceneEventStep = 0x16;
             }

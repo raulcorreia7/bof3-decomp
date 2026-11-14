@@ -6,7 +6,7 @@ MATCH u8 func_8019CAB4(void) {
     u8     walkable;
 
     work = g_Task;
-    id   = func_801BDE14(work->pos.x.fixed, work->pos.y.fixed, 0);
+    id   = Actor_FindInRange(work->pos.x.fixed, work->pos.y.fixed, 0);
     if (id != -1) {
         g_Actors[id].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
         return 1;

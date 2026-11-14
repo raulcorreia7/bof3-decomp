@@ -51,16 +51,20 @@ Battle_TickCountdowns = { addr = 0x801D4D44, type = "func", source = "Ticks the 
 Battle_EndRound = { addr = 0x801D527C, type = "func", source = "Ends the round for the charging battlers." }
 Battle_ApplyTurnDamage = { addr = 0x801D5DCC, type = "func", source = "Applies the turn's hit point changes." }
 Battle_StepBattlers = { addr = 0x801D62D8, type = "func", source = "Steps the local battler rows." }
+Battle_GetActionLock = { addr = 0x801D64C4, type = "func", source = "the body returns g_Battle.action_lock" }
 Battle_WaitVoiceSlots = { addr = 0x801D656C, type = "func", source = "Waits for the voice slots to clear." }
 Battle_UpdateResult = { addr = 0x801D6774, type = "func", source = "Battle mode 5: runs the g_BattleStep handler of the battle result." }
 Battle_LoadEndOverlay = { addr = 0x801D6A14, type = "func", source = "Finishes the battle setup pass: returns while a party battler has COMBATANT_FLAG_FORM_EFFECT_PLAYING, steps g_BattleSubStep back when g_BattleRowCursor differs from g_BattlePartyCount, otherwise on no defeat revives or cures each party battler, sets g_BattleStep to 2 or 1 by the result flags and starts the EMI_SLOT_BATL_END load." }
 Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "Step after Battle_ReloadAreaAudio in the D_801EABB8 step table: when EMI_IsReady, moves the battle phase to step 4 with sub_step 0." }
 Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the party's battle state back to the field characters." }
+Battle_SetPartyCount = { addr = 0x801D750C, type = "func", source = "the body stores into g_Battle.party_count" }
 Battle_DrawPanelRows = { addr = 0x801D7A40, type = "func", source = "Draws the queued battle panel rows." }
 Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws the 0x4B-pixel name panel of enemy slot minus 3 at (x, y) in the window style colour, with the enemy name text when func_801DA69C allows it and an icon in place when its unk_7F is 1." }
 Battle_OpenPartyPanel = { addr = 0x801D9304, type = "func", source = "Opens panel task 1 for the party list: sizes it from the party count through D_801EAF27 and places it at x 0xF0. Called by Battle_OpenPanels." }
+Battle_OpenPanel = { addr = 0x801D9484, type = "func", source = "writes g_MenuPanelTasks through Menu_OpenPanelTask from every battle end and ability path" }
 Battle_DrawNumber = { addr = 0x801D9684, type = "func", source = "Draws a number with digit sprites." }
 Battle_DrawDimOverlay = { addr = 0x801D9900, type = "func", source = "Draws a semi-transparent dark grey tile of 960x240 on the font texture page; called by Battle_DrawEntrances." }
+Battle_DrawWindowTile = { addr = 0x801D9C80, type = "func", source = "draws one shaded TILE at x/y from the window template and style palette" }
 Battle_DrawTileSprite = { addr = 0x801DA14C, type = "func", source = "Draws the battle tile sprite." }
 Battle_DrawLine = { addr = 0x801DA408, type = "func", source = "Queues one flat-coloured LINE_F2 from (x0, y0) to (x1, y1) in the given r, g, b; draws the panel edges in func_801D8690 and func_801D8DF8 (UI_DrawLine is the grey-level resident variant)." }
 Battle_BuildTurnOrder = { addr = 0x801DAAE4, type = "func", source = "Builds the turn order: ranks every active battler by agility, command and a random value, sorts the BattleRank rows high to low and writes the battler indexes into g_BattleTurnOrder." }
@@ -76,9 +80,12 @@ Battle_CalcPartyDefense = { addr = 0x801DCCB0, type = "func", source = "Averages
 Battle_ScaleDamage = { addr = 0x801DCD50, type = "func", source = "Scales the base damage Battle_RollBaseDamage computed: a falloff for large values, the random spread D_801EAFA0, the element resistance and the holy resistance of the target; returns the result rounded to 16 bits." }
 Battle_CancelTurn = { addr = 0x801DD14C, type = "func", source = "Cancels a battler's queued command and removes it from the turn order by overwriting its g_BattleTurnOrder entry with 0xFF." }
 Battle_InsertTurnFirst = { addr = 0x801DD26C, type = "func", source = "Puts battler arg0 at the head of the turn order: steps g_BattleTurnCursor back one and stores the battler there." }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "the symbols source says it integrates the effect velocity pairs that func_801F0E54 reads by the ticker; body moves the work record" }
+Battle_GetTurnCursor = { addr = 0x801DDFEC, type = "func", source = "the body returns g_Battle.turn_cursor" }
 Battle_SetSlotPending = { addr = 0x801DE190, type = "func", source = "Marks a battler action as pending." }
 Battle_ClearSlotPending = { addr = 0x801DE1B0, type = "func", source = "Clears a battler's pending action." }
 Battle_UpdateEvents = { addr = 0x801DE43C, type = "func", source = "Clears g_BattleEventFlags, then over two passes (group 0, then 1) walks the 8 twelve-byte g_BattleEventSlots and calls handlers[unk_01] for each slot whose unk_00 is set, unk_03 equals the pass and whose unk_01 bit is clear in g_BattleEventFlags, after storing the slot index in the scratchpad." }
+Battle_QueueEvent = { addr = 0x801DE560, type = "func", source = "takes the event kind, value, group, timer and payload and appends them to g_BattleEventSlots" }
 Battle_AddMessage = { addr = 0x801DE8C0, type = "func", source = "Appends a record to the battle selection ring." }
 Battle_SetTextActionName = { addr = 0x801DE94C, type = "func", source = "Copies an action name into the message staging area." }
 Battle_SetTextPartyName = { addr = 0x801DE9A8, type = "func", source = "Sets the party battler name for battle messages." }
@@ -86,12 +93,15 @@ Battle_SetTextEnemyName = { addr = 0x801DEA18, type = "func", source = "Sets the
 Battle_ShowMessage = { addr = 0x801DEA64, type = "func", source = "Submits a battle message slot to the message system." }
 Battle_UpdateParty = { addr = 0x801DECE0, type = "func", source = "Runs active party members in battle." }
 Battle_UpdatePartyActors = { addr = 0x801DED54, type = "func", source = "Redraws the active party members in battle." }
+Battle_IsPartyMemberBlocked = { addr = 0x801DEE4C, type = "func", source = "returns 1 while the party member is paralyzed or suppressed, else steps its animation once" }
 Battle_UpdateEnemies = { addr = 0x801E2170, type = "func", source = "Runs active enemies in battle." }
 Battle_UpdateEnemyActors = { addr = 0x801E2284, type = "func", source = "Reprojects each active enemy." }
 Battle_PickRandomTarget = { addr = 0x801E29B4, type = "func", source = "Picks a random selectable battler." }
 Battle_PickEnemyTarget = { addr = 0x801E2A88, type = "func", source = "Chooses the target of one enemy." }
 Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Returns the selectable battler with the lowest hp." }
 Battle_PickFormationTarget = { addr = 0x801E2E30, type = "func", source = "Picks a random live target by formation weight." }
+Battle_IsEnemyBlocked = { addr = 0x801E30F8, type = "func", source = "returns 1 while the current enemy is paralyzed, sleeping or suppressed, else steps its animation loop" }
+Battle_IsEnemyBlockedOnce = { addr = 0x801E3160, type = "func", source = "the enemy form of func_801DEE4C: status and suppression checks, then one animation step" }
 Battle_PlayEnemyCue = { addr = 0x801E52F0, type = "func", source = "Plays the cue id through SND_PlayCue unless it is the 0xFFFF none value; the callers pass the enemy cue words EnemyBattler.unk_E8 in scripted battles, where other battles play cue 0x600 + kind * 2 instead." }
 Battle_RollEnemyDrops = { addr = 0x801E531C, type = "func", source = "Rolls and collects item drops from a defeated enemy." }
 Battle_DefeatEnemy = { addr = 0x801E54EC, type = "func", source = "Defeats an enemy and collects its rewards." }
@@ -99,6 +109,7 @@ Battle_TriggerCritical = { addr = 0x801E5704, type = "func", source = "When the 
 Battle_HandleDesertDefeat = { addr = 0x801E5768, type = "func", source = "Installed as g_Battle.choose_ending_hook by func_801E320C: on a defeat in AREA_ID_DESERT_OF_DEATH_MAP it sets scene state 1, step 0x19 and the script-active flag." }
 Battle_UpdateEffects = { addr = 0x801E5824, type = "func", source = "Runs active battle effects." }
 Battle_AllocEffect = { addr = 0x801E590C, type = "func", source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "clears every timer, state and flag byte of the shared BattleEffect work record (0x00-0x06, 0x48, 0x5D-0x5F); every effect countdown calls it first" }
 Battle_DrawRollingDigits = { addr = 0x801E62BC, type = "func", source = "Draws rolling digits." }
 Battle_PickStreamSlot = { addr = 0x801E7948, type = "func", source = "Picks the next battle stream slot." }
 Battle_DrawMenuRows = { addr = 0x801E927C, type = "func", source = "Draws the battle menu panel rows." }
@@ -150,7 +161,12 @@ jtbl_80096954 = { addr = 0x80096954, type = "Callback", source = "The switch tab
 jtbl_80096974 = { addr = 0x80096974, type = "Callback", source = "The switch table of func_800A805C: the jump targets of its jr dispatch." }
 g_MenuInventoryCountFormat = { addr = 0x80096A4C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 jtbl_80096A5C = { addr = 0x80096A5C, type = "Callback", source = "The switch table of func_800B3AE8: the jump targets of its jr dispatch." }
+Battle_SetCommandType = { addr = 0x80096FBC, type = "func", source = "the body stores into g_BattleActorTurn->command.type" }
+Battle_GetPanelPosX = { addr = 0x8009704C, type = "func", source = "the body returns g_MenuPanelTasks[16].pos.x" }
 Battle_IsAbilityLocked = { addr = 0x80097574, type = "func", source = "returns true when the selected ability cannot be used in battle" }
+Battle_SetCommandId = { addr = 0x80097778, type = "func", source = "the body stores into g_BattleActorTurn->command.id" }
+Battle_ResetSelectionLatch = { addr = 0x80097C0C, type = "func", source = "the body stores into g_Battle.selection_latch" }
+Battle_SetPhaseStep = { addr = 0x80097CBC, type = "func", source = "the body stores into g_Battle.phase.step" }
 Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
 Battle_EnemyEventTriggered = { addr = 0x8009C868, type = "func", source = "Tells whether the event packet at an index has already been triggered for the enemy." }
 Battle_SetEnemyEventTriggered = { addr = 0x8009C87C, type = "func", source = "Sets or clears the triggered bit of an event packet index for the enemy." }
@@ -158,16 +174,23 @@ Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells wh
 Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
 Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
 Battle_MergeEnemyPanels = { addr = 0x8009CFEC, type = "func", source = "Removes the entries of the enemy panel list D_801ED9B0 that repeat an enemy kind and panel id, keeping the first; called after the enemy events trigger." }
+Battle_ApplyAbilityDamage = { addr = 0x8009DCC8, type = "func", source = "reads the ability row and stores the computed hp_change into g_Battle.target_record" }
 Battle_HalveDamage = { addr = 0x8009F320, type = "func", source = "sets the damage-halved action flag on the current target" }
 Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the reprisal damage flag on the active battler" }
 Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
 Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
+Battle_GetActionId = { addr = 0x800A2880, type = "func", source = "the body returns g_Battle.action_id" }
+Battle_GetFireResistance = { addr = 0x800A2AE0, type = "func", source = "the body returns g_Game.members[battler_index].chr.stats.resistances[0]" }
+Battle_SetTarget = { addr = 0x800A39B4, type = "func", source = "the body stores into g_Battle.target_record" }
+Battle_PickAbility = { addr = 0x800A3A10, type = "func", source = "picks an ability for the battler and selection kind, using g_Abilities and rand" }
+Battle_MarkDamageApplied = { addr = 0x800A3F28, type = "func", source = "existing bottom-up proposal: ORs BATTLE_STATE_DAMAGE_APPLIED into g_Battle.state and marks the damage row" }
 Battle_LoadDraArchive = { addr = 0x800A4700, type = "func", source = "Loads the BATL_DRA archive when no choice phase is pending and advances ui_state; step 0 of the D_800B4CAC battle UI step table. The archive's job is not proven, so the name keeps the disc label." }
 Battle_FinishDraLoad = { addr = 0x800A4744, type = "func", source = "Waits EMI_IsReady for the BATL_DRA stream started by Battle_LoadDraArchive, copies palette rows 0x1A and 0x1B and raises g_GfxPalettePending; step 1 of D_800B4CC8." }
 Battle_OpenMenu = { addr = 0x800A47AC, type = "func", source = "Opens the battle menu." }
 Battle_LoadRe2Archive = { addr = 0x800A4B2C, type = "func", source = "Shows the battle message, then streams EMI_SLOT_BATL_RE2 and advances ui_state; step 3 of D_800B4CD0. The archive's job is not proven, so the name keeps the disc label." }
 Battle_FinishRe2Load = { addr = 0x800A4BB4, type = "func", source = "Waits EMI_IsReady for the BATL_RE2 stream started by Battle_LoadRe2Archive, copies palette row 0x1B, raises g_GfxPalettePending and resets the UI step; step 4 of D_800B4CD0." }
 Battle_StartAbilityPose = { addr = 0x800A581C, type = "func", source = "Step 2 of the ability panel step table D_800B4D00: plays common cue 4, sets D_80148627 to 2 and COMBATANT_FLAG_ABILITY_ALT_POSE on the active row, and advances ui_state." }
+Battle_SetGeneCount = { addr = 0x800A82F8, type = "func", source = "the body stores into g_Battle.gene_count" }
 Effect_ShakeScreen = { addr = 0x800A8EB8, type = "func", source = "Sets the three screen shake offsets (bytes 0x5D to 0x5F) to -16 times the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) down, clearing the effect at the wrap past zero in the shared battle effects." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
@@ -181,13 +204,16 @@ Battle_InitEnemy = { addr = 0x800ABCE0, type = "func", source = "Sets up an enem
 Battle_LoadEncounterEnemies = { addr = 0x800ABF5C, type = "func", source = "Adds the enemies of the encounter to the battle." }
 Battle_AddEnemy = { addr = 0x800AC01C, type = "func", source = "Adds an enemy to the battle." }
 Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads an area enemy's stats into its battler." }
+Battle_FindActorEntry = { addr = 0x800AC754, type = "func", source = "existing proposal: finds the battle actor entry for a battler" }
 Actor_Clear = { addr = 0x800ACFF4, type = "func", source = "Clears an actor record." }
 Battle_IsEnemyDefeated = { addr = 0x800AD044, type = "func", source = "Tests the bit of an enemy kind in the bit set D_80144F60 that Battle_DefeatEnemy fills; Battle_InitEnemy stores the result in the battler's unk_7F, which the enemy name panel reads." }
 Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the bit of an enemy kind in the bit set D_80144F60; Battle_DefeatEnemy calls it and Battle_IsEnemyDefeated reads it." }
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", source = "Loads the effect module of a battle selection: the row of g_BattleSelections that the action selects gives the EMI slot, which the loader streams in." }
 Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
+Battle_MoveRangeToward = { addr = 0x800AF2B4, type = "func", source = "moves the range work toward the target along a normalized vector by the step" }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+Battle_SelectStepRule = { addr = 0x800AFF98, type = "func", source = "existing proposal: selects a battle step rule for a player battler" }
 Battle_DrawCommandList = { addr = 0x800B1728, type = "func", source = "Draws the battle command list." }
 Battle_DrawTitledFrame = { addr = 0x800B1A74, type = "func", source = "Draws a bordered battle panel with a title." }
 Menu_DrawPanelCursor = { addr = 0x800B20D4, type = "func", source = "Draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite." }
@@ -1033,6 +1059,7 @@ BMagic_DispatchEffectMode = { addr = 0x801EF108, type = "func", source = "Runs t
 Effect_StepOnZeroTick = { addr = 0x801EF528, type = "func", source = "Advances header.step (byte 0x02) when the effect ticker (byte 0x0B) is zero in magic083 (Shield)." }
 Effect_TickOnZeroTick = { addr = 0x801EF744, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic083 (Shield)." }
 Effect_SetActorMatrix = { addr = 0x801EF794, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic083 (Shield)." }
+BMagic_SetXFixed = { addr = 0x801F0BA8, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 BMagic_AllocEffect = { addr = 0x801F0DC0, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 24 slots are in use in magic083 (Shield)." }
 Actor_Clear = { addr = 0x801F0E24, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0EEC, source = "Handlers of magic083 (Shield), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
@@ -1385,6 +1412,7 @@ g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect wor
 jtbl_801EEC24 = { addr = 0x801EEC24, type = "Callback", source = "The switch table of func_801EF280: the jump targets of its jr dispatch." }
 Effect_CountDownAndPlay = { addr = 0x801EF0BC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic114 (Fire Whip)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF774, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic114." }
+BMagic_ApplyDamageFlags = { addr = 0x801EFF1C, type = "func", source = "wraps Battle_ApplyDamageFlags" }
 g_BMagicEffectModes = { addr = 0x801F121C, source = "Handlers of magic114 (Fire Whip), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 D_801F1230 = { addr = 0x801F1230, source = "Step handlers of the bmagic/magic114/03 effect, run by header.step from func_801EFDD8." }
 
@@ -2007,6 +2035,8 @@ g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnZeroTick = { addr = 0x801EF278, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic225 (Temptation)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF2D8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic225." }
 Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic225 (Temptation)." }
+BMagic_GetScaleX = { addr = 0x801F0140, type = "func", source = "the body returns g_Task->scale.x" }
+BMagic_SetScaleX = { addr = 0x801F021C, type = "func", source = "the body stores into g_Task->scale.x" }
 BMagic_AllocEffect = { addr = 0x801F02D4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic225 (Temptation)." }
 Actor_Clear = { addr = 0x801F0338, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0388, source = "Handlers of magic225 (Temptation), run by header.mode (byte 0x01)." }
@@ -2161,6 +2191,7 @@ Boss_InstallBattleHooks3 = { addr = 0x800C26DC, type = "func", source = "Install
 Boss_HandleBattleEvent3 = { addr = 0x800C2714, type = "func", source = "Handles the boss battle events of boss018 (set 3): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
 Boss_ChooseBattleEnding3 = { addr = 0x800C2820, type = "func", source = "Chooses how the boss battle of boss018 (set 3) ends: the ending hook (g_BattleChooseEndingHook) of this set." }
 Boss_EndBattle3 = { addr = 0x800C292C, type = "func", source = "Ends the boss battle of boss018 (set 3) (g_BattleEndHook): when bit 0x4000 of the halfword at D_801EB6B2 is clear, runs func_800AC870 and func_800AC844 for battle slot 2; always runs both for slots 3 and 4." }
+Boss_SetCharacterId = { addr = 0x800C2A40, type = "func", source = "the body stores into g_Game.members[0].chr.character_id" }
 
 ["emi/boss/boss021/16"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of Boss_HandleBattleEvent: 6 jump targets of its jr dispatch." }
@@ -2374,6 +2405,7 @@ Boss_HandleBattleEvent = { addr = 0x800C24D8, type = "func", source = "Handles t
 Boss_ChooseBattleEnding = { addr = 0x800C24E0, type = "func", source = "Chooses how the boss battle of boss055 ends: g_BattleChooseEndingHook runs it from Battle_LoadEndOverlay once the battle result is set; the body is not decompiled." }
 Boss_EndBattle = { addr = 0x800C26B4, type = "func", source = "Ends the boss battle of boss055 (g_BattleEndHook): runs func_800AC844(0)." }
 Area_RoundSpriteCoordinate = { addr = 0x800C3254, type = "func", source = "Rounds a 16.16 sprite cell coordinate up to the next whole unit when its fraction is nonzero and step is not negative, and returns the whole part." }
+Boss_CopyEffectTransform = { addr = 0x800C3284, type = "func", source = "copies the g_BattleEffectBattler transform, scale and flags into the task and rounds the sprite coordinates" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 
 ["emi/etc/bate/00"]
@@ -2512,6 +2544,7 @@ g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy,
 
 ["emi/etc/commu01/07"]
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01States." }
+Fairy_GetJobActive = { addr = 0x801D3A48, type = "func", source = "the body returns g_FairyJobs[i].active" }
 g_Commu01States = { addr = 0x801D4BCC, source = "the 3 step handlers of the commu01 scene, called by func_801D0C2C (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu01Step2Funcs = { addr = 0x801D4BD8, source = "3 sub-step handlers of step 2 of the commu01 scene, called by func_801D0E44 (the step 2 handler) and indexed by the commu01 phase byte D_801D4E08" }
 g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "6 handlers of sub-step 1 of step 2 of the commu01 scene, called by func_801D1328 (the sub-step 1 handler of step 2) and indexed by the commu sub-step byte D_801F294D" }
@@ -2519,8 +2552,12 @@ g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "6 handlers of sub-step 
 ["emi/etc/commu02/08"]
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu02 scene: dispatches on the step byte D_801F294C through g_Commu02Event0States." }
 Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
+Menu_StartFairyEventMessage = { addr = 0x801D5D98, type = "func", source = "starts area message 0xEE and advances the event step once" }
+Menu_ConfirmFairy = { addr = 0x801D5E30, type = "func", source = "confirm and cancel cues set the list offset and the selected job row" }
+Menu_StartFairyEndMessage = { addr = 0x801D7DD4, type = "func", source = "starts area message 0xF6 when the sub-step is zero" }
 Fairy_EndCommuSceneEvent3 = { addr = 0x801D7E30, type = "func", source = "Last slot of g_Commu02Event3States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_EndCommuScene." }
 Fairy_CountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
+Fairy_FindActiveJob = { addr = 0x801D7EA0, type = "func", source = "walks the 0x3C g_FairyJobs rows and returns the index of the Nth active job, or 0xFF" }
 Fairy_GenerateName = { addr = 0x801D8968, type = "func", source = "Builds the fairy's name in D_801DB080 from one random half of each of the two name tables in the loaded text bank." }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
@@ -2634,10 +2671,14 @@ Menu_SlidePanelLeft = { addr = 0x8019973C, type = "func", source = "Moves the ma
 Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "Runs g_ActorTypes[type] for each of the g_ActorSlots entries whose header.flags is set." }
 Game_FindAreaHandler = { addr = 0x8019A194, type = "func", source = "Returns the index of the AreaHandler whose key_18 equals g_GameAreaId, or GAME_AREA_HANDLER_COUNT (11) when none matches." }
 Game_GetAreaMapPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points_14 of the current area handler row (D_801C7F5C indexed by Game_FindAreaHandler); func_801B690C searches those rows by actor cell." }
+Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the entry seed and position in g_GameContextSeed, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
+Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 Game_StartFadeWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_AllocPaletteFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
 Game_StartFadeBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_AllocPaletteFade 0, 0, 0) on the running task." }
-Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four D_80147A58 rows, runs func_801A3F3C over the stream and clears the unused g_Actors entries." }
+Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four D_80147A58 rows, runs Area_SetScenarioId over the stream and clears the unused g_Actors entries." }
+Area_SetScenarioId = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_SceneState.scenario_id" }
+Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Task->option_flags" }
 Area_SetCellCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_GetCellCode reads the same index." }
 Scene_Start = { addr = 0x801A7704, type = "func", source = "Scenario start: loads the overlay of g_SceneState.scenario_id, waits for its SCENA payload, then dispatches the scenario entry." }
 Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the overlay slot 661 + scenario id and waits for the loader; Scene_Start calls it before the scenario handler runs." }
@@ -2654,15 +2695,20 @@ Scene_StartShopSave = { addr = 0x801A802C, type = "func", source = "Scene event 
 Message_RunAreaMessage = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallAreaHandler = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table D_801C86F8 and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenarioHandler." }
+Area_MoveActorRoute = { addr = 0x801ABBA8, type = "func", source = "samples the height along the route, paces it with g_RouteSpeedScale and moves the actor" }
+Char_GetExp = { addr = 0x801ADDD4, type = "func", source = "the body returns g_LevelGrowth[(u8)char_id][new_level].exp" }
 UI_DrawWindow = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
 UI_DrawWindowOutline = { addr = 0x801AED54, type = "func", source = "Draws the four edges and the cut corners of a rectangle through GFX_DrawLine in the colour row of g_WindowStyle; the high nibble of the flag byte picks the cut corners." }
 GFX_DrawLine = { addr = 0x801AF0F4, type = "func", source = "Queues a draw mode and one semi-transparent LINE_F2 between two points." }
+Game_ReadCommand = { addr = 0x801AF20C, type = "func", source = "comment: read the next command; every menu and battle draw reads its command stream through it" }
 UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
 UI_DrawSprite = { addr = 0x801AF2A0, type = "func", source = "Appends one SPRT at x, y with the rectangle of sprite_id; bit 2 of flags picks the CLUT." }
 UI_DrawSpriteRun = { addr = 0x801AF390, type = "func", source = "Draws the (x offset, y offset, sprite id) triples of record_table from base_x, base_y through UI_DrawSprite until the id 0xFF; bit 0 of flags picks the sprite page." }
 Area_SetCameraMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Area_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 Matrix_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
+Game_ProjectWorldPoint = { addr = 0x801AFFD8, type = "func", source = "projects a world position through RotTrans and stores the screen pair; existing bottom-up proposal" }
+Actor_UpdateMovement = { addr = 0x801B0DFC, type = "func", source = "moves and animates the current actor rows, called by every area and scene timer" }
 Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task mode FIELD_TASK_MODE_LEADER_SWITCH (slot 3 of D_801CD0AC): runs the leader-switch step table D_801CD0FC, which Game_RequestLeaderSwitch starts" }
 Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
 Actor_GetTurnStep = { addr = 0x801B2D00, type = "func", source = "Returns -1 when the target facing lies 1 to 4 steps past the current selector, else 1; the caller adds it to direction_08 each step." }
@@ -2673,6 +2719,7 @@ Area_RollEncounterThreshold = { addr = 0x801B3CCC, type = "func", source = "Roll
 Area_CanStartEncounter = { addr = 0x801B3EB0, type = "func", source = "Returns 0 when D_80145FB8 is 0 or above the limit; otherwise starts an encounter with Area_BuildEncounter(4, 0)." }
 Party_CanSwitchLeader = { addr = 0x801B55C0, type = "func", source = "Reports whether the leader may be switched: false while a walk-busy flag is set or a party row of kind 2 holds none of s_MenuBattlerKinds" }
 Game_RequestLeaderSwitch = { addr = 0x801B5684, type = "func", source = "Starts the leader switch when FIELD_INPUT_SWITCH_LEADER is pressed with two or more party members: sets FIELD_TASK_MODE_LEADER_SWITCH, whose last step scrolls to the new lead" }
+Game_GetInput = { addr = 0x801B59B4, type = "func", source = "the body returns g_Game.input" }
 Game_FindRockAhead = { addr = 0x801B5AE4, type = "func", source = "Returns the g_ActorSlots index of the type 0x17 rock actor on the cell the leader faces, or -1" }
 Game_RewardZenny = { addr = 0x801B5E58, type = "func", source = "Plays common cue 6, formats the zenny amount into message 5, requests the message and adds the amount to the party zenny through Party_AddZenny; called by func_8019EEE4, func_801B2FC8, func_801B3768 and Char_ProbeCellSpawn." }
 Game_RequestPersonalAction = { addr = 0x801B5EBC, type = "func", source = "Starts the lead character's personal action when FIELD_INPUT_PERSONAL_ACTION is pressed outside the world map, except for Garr, Rei, Ryu in pajamas and Whelp: sets FIELD_TASK_MODE_PERSONAL_ACTION, whose handler is picked from g_PersonalActions" }
@@ -2681,6 +2728,9 @@ Game_RequestGarrPush = { addr = 0x801B6044, type = "func", source = "Starts Garr
 Area_StepSceneTimer = { addr = 0x801BC3B8, type = "func", source = "Counts the scene timer down each frame and calls Area_ResetScene when it expires." }
 Area_ResetScene = { addr = 0x801BC400, type = "func", source = "Clears the scene scroll counters and the work words at +0x0C to +0x14." }
 Party_CountOrder = { addr = 0x801BDB7C, type = "func", source = "Returns the number of leading entries of the field order (mode 0) or battle order (mode 1), three bytes each at D_80144F5A, that are not 0xFF." }
+Actor_FindInRange = { addr = 0x801BDE14, type = "func", source = "walks the g_Actors rows and returns the first actor the range test accepts, else -1" }
+Area_GetActorFacingStepX = { addr = 0x801BDF08, type = "func", source = "the body returns g_FacingSteps[work->direction_08].x" }
+Game_GetPartySize = { addr = 0x801BE0C0, type = "func", source = "the body returns g_Game.party_size" }
 Party_SwapMembers = { addr = 0x801BE738, type = "func", source = "Swaps two party members: swaps their battler rows with Party_SwapBattlerRows, reloads both g_Game.members rows from g_Characters and restages their palettes." }
 Party_SwapBattlerRows = { addr = 0x801BE920, type = "func", source = "Swaps two g_Game.members rows: id (+0x79), words +0x0C to +0x14 and bytes +0x118 and +0x119, also +0x08, +0x29, +0x34, +0x38, +0x3C and +0x12C when skip_state is 0, then writes 0xFF to +0x4B of both." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
@@ -2688,15 +2738,21 @@ Battle_PlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each pa
 Party_LoadMemberSprite = { addr = 0x801C1254, type = "func", source = "Loads a party member's field sprite: finds the section of the character sprites at 0x8003B800 whose entry in the 3-byte row of the loaded character index equals the character id, points the work record's bank pointer (+0x4C) at it, sets its sprite page, sheet row, CLUT selector and palette kind (+0x25..+0x28) from the party slot, and loads the slot's palette at GAME_PALETTE_STAGE. Called by Party_JoinMember, Party_BuildBattlers, the shop and Actor_BeginScript." }
 Party_BuildBattlers = { addr = 0x801C1400, type = "func", source = "Fills the g_Game.members rows from the order bytes at D_80144F5A + mode * 3." }
 Party_LoadPalettes = { addr = 0x801C1630, type = "func", source = "Frees the fade target and stages the palette block of each of the g_Game.party_size party battlers; runs after every party join or removal." }
+Char_RebuildPartyStats = { addr = 0x801C16B8, type = "func", source = "reads g_CharSlot and the party order, writes g_Characters and calls Char_RebuildStats" }
 Party_JoinMember = { addr = 0x801C187C, type = "func", source = "Appends char_id to the party order at D_80144F5A and D_80144F5D at index g_Game.party_size and fills its g_Game.members row; with a full party it sets g_GameStateIndex to 6 and returns 1." }
 Party_RemoveMember = { addr = 0x801C1ABC, type = "func", source = "Scene_RemoveGarr/Peco/Nina/Rei and scena08 pass a CHAR_ID_* to it; the body clears the id from the walking and battle orders, compacts the battler rows and shrinks g_Game.party_size" }
+Scene_RunScenario = { addr = 0x801C1DF0, type = "func", source = "indexes D_801CD4C0 by g_SceneState.scenario_id and calls the handler at the requested index" }
+Char_SetCharacterId = { addr = 0x801C2E34, type = "func", source = "the body stores into g_Game.current->chr.character_id" }
 Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
 Actor_Move = { addr = 0x801C57B4, type = "func", source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
+Area_SetFacingOffsetX = { addr = 0x801C5DFC, type = "func", source = "the body stores into g_FacingOffsets[route_index].x" }
+Area_StartScrollRoute = { addr = 0x801C601C, type = "func", source = "writes the route record at D_80143FBC, copies the party position and scroll target and calls Area_AdvanceScroll" }
 Area_BuildEncounter = { addr = 0x801C60E0, type = "func", source = "Rolls an encounter formation, copies its enemies, places them around the party and returns 0 when none fits." }
 Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
 Area_PickEncounter = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
 Area_RollEncounterEnemies = { addr = 0x801C6AEC, type = "func", source = "Copies the 8 enemy ids of the chosen encounter into the encounter list and keeps each by a random roll against its spawn chance in s_EntitySpawnChances; returns how many stayed. Called by Area_BuildEncounter." }
 Area_PlaceEncounterEnemies = { addr = 0x801C6BB4, type = "func", source = "Finds a cell for each kept encounter enemy around the origin, rotated for the scroll direction; an enemy with no open cell is dropped. Returns whether any enemy remains. Called by Area_BuildEncounter." }
+Area_GetWidth = { addr = 0x801C6FD4, type = "func", source = "the body returns g_AreaMapBundle.width" }
 Area_SetEncounterCamera = { addr = 0x801C7244, type = "func", source = "Averages the ground height under the kept enemies and the party and installs the battle camera matrix from the area camera angle. Called by Area_BuildEncounter." }
 Battle_StartScripted = { addr = 0x801C7A54, type = "func", source = "Starts a scripted battle: stores mode_byte in g_BattleEncounter, sets D_80145E91 to 5 and copies the first byte of s_BattleModeRecords[mode_byte * 4] to g_BattleOptions." }
 s_PaletteFadeCounts = { addr = 0x801C7AC0, size = 0x8, source = "Colour count of a palette fade by palette table index; func_8019625C shifts the entry left by 4." }
@@ -2846,7 +2902,7 @@ D_801CD47C = { addr = 0x801CD47C, size = 0x20, source = "The eight x offsets fun
 D_801CD480 = { addr = 0x801CD480, size = 0x1, alias = true, source = "The eight y offsets func_801C0758 and func_801C090C add to the party position; func_801C090C reaches them through a s32 base with FIELD." }
 D_801CD49C = { addr = 0x801CD49C, size = 0x10, source = "The four handlers func_801C0A68 runs by D_80146261." }
 D_801CD4AC = { addr = 0x801CD4AC, size = 0x14, source = "The five slot source rows func_801C0F9C copies into a party member's header." }
-D_801CD4C0 = { addr = 0x801CD4C0, size = 0x50, source = "The 20 scene handler pointers per scenario id that func_801C1DF0 runs by handler index." }
+D_801CD4C0 = { addr = 0x801CD4C0, size = 0x50, source = "The 20 scene handler pointers per scenario id that Scene_RunScenario runs by handler index." }
 D_801CD510 = { addr = 0x801CD510, size = 0x50, source = "The 20 scene handler pointers per scenario id that func_801C1E3C runs by handler index." }
 s_AreaProbeCellCodes = { addr = 0x801CD560, size = 0x8, source = "0xFF-terminated list of map cell codes probed around a point by func_801C472C, func_801C476C and func_801C48FC." }
 D_801CD568 = { addr = 0x801CD568, size = 0x8, source = "The two handlers func_801C57F4 dispatches by D_80143F49." }
@@ -2919,8 +2975,11 @@ g_SaveSlotTimeColon = { addr = 0x801D0D74, source = "Colon glyphs between the ho
 g_SaveCardPortLabelFirst = { addr = 0x801D0D78, source = "Label of memory card port 1 in the port tabs." }
 g_SaveCardPortLabelSecond = { addr = 0x801D0D7C, source = "Label of memory card port 2 in the port tabs." }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte g_MenuStep.step through the D_801D96DC handlers." }
+Menu_SetState = { addr = 0x801D18E4, type = "func", source = "the body stores into g_MenuStep.state" }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_StatusCommandsPanel = { addr = 0x801D3164, type = "func", source = "Entry at 0x801D9754 of the shisu step table: runs the g_MenuStatusTask2StateFuncs handler of the panel state and draws the command row, like Menu_CommandsPanel in the start menu." }
+Menu_SetPosY = { addr = 0x801D320C, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.y" }
+Menu_SetPosX = { addr = 0x801D32E0, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.x" }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D3BD4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D3F0C, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
@@ -3449,7 +3508,7 @@ SAVE_ScanDirectory = { addr = 0x801EFCA8, type = "func", source = "Copies the fi
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CED1C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
 Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
@@ -3464,7 +3523,7 @@ Plchar_ProbeFacingFollower = { addr = 0x801CFBDC, type = "func", source = "Probe
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CED1C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
 Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
@@ -3477,7 +3536,7 @@ Char_PollScriptRequest = { addr = 0x801CFA28, type = "func", source = "With opti
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CED1C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
 Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
@@ -3495,7 +3554,7 @@ Char_ClearModeIfUnused = { addr = 0x801D0204, type = "func", source = "When the 
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CED1C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script." }
 PlChar_RunGarrFieldTask = { addr = 0x801CF37C, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
@@ -3511,7 +3570,7 @@ Char_PollScriptRequest = { addr = 0x801CFE4C, type = "func", source = "With opti
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CED1C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScriptGarr = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 1 of this image's party row (the task's byte 0x2C selects the route)." }
 PlChar_RunGarrFieldTask = { addr = 0x801CF37C, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
@@ -3531,7 +3590,7 @@ Char_ClearModeIfUnused = { addr = 0x801D0628, type = "func", source = "When the 
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CED1C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScriptTeepo = { addr = 0x801CF23C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Teepo, route 1 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunPersonalAction = { addr = 0x801CF4E0, type = "func", source = "Runs the personal action's target step after the turn wait: marks the actor slot of the rock the character faces (byte 0x0A set to 1, byte 0x08 to the facing) for the action, else probes the cell ahead for a field actor and a map-cell spawn; stores the slot in work byte 0x06 and adds 2 to work byte 0x03 when a rock is found, 1 otherwise." }
@@ -3548,7 +3607,7 @@ Char_RunStepScript = { addr = 0x801D0160, type = "func", source = "Runs one step
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CED1C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_AdvanceFacingTurn = { addr = 0x801CF23C, type = "func", source = "Turns the character to the target facing in byte 0x03: on a match requests script 0x41 (facing down) or 0x40 (facing right) and advances header.step; otherwise counts timer down and at 0 reloads it with 2, steps direction_08 by turn_step and requests that direction script." }
 Char_ClaimLinkSlot = { addr = 0x801CF548, type = "func", source = "When script_pc reaches CHAR_LAUNCH_SCRIPT_PC (10): claims a free actor slot as an ACTOR_TYPE_FACING_PROBE into param.actor_slot, plays the cue of byte 0x2C, clears option_flags and advances header.step." }
@@ -3567,7 +3626,7 @@ Char_ClearModeIfUnused = { addr = 0x801D042C, type = "func", source = "When the 
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
-Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling Actor_UpdateMovement; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
 PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CEA10, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
@@ -3579,13 +3638,13 @@ Char_WalkStep = { addr = 0x801CF090, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CF578, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CF664, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CF85C, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CF940, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CF940, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 
 ["emi/plchar/plp257/00"]
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
-Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling Actor_UpdateMovement; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
 PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
@@ -3598,13 +3657,13 @@ Char_WalkStep = { addr = 0x801CF470, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CF958, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CFA44, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CFC3C, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CFD20, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CFD20, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 
 ["emi/plchar/plp267/00"]
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
-Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling Actor_UpdateMovement; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
 PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
@@ -3622,13 +3681,13 @@ Char_WalkStep = { addr = 0x801CFF1C, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801D0404, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801D04F0, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801D06E8, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801D07CC, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801D07CC, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 
 ["emi/plchar/plp278/00"]
 Char_StartTurnGarr = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
-Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling Actor_UpdateMovement; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
 PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CEA10, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
@@ -3638,7 +3697,7 @@ Char_WalkStep = { addr = 0x801CEE74, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CF35C, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CF448, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CF640, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CF724, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CF724, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF89C, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScriptNinaAdult = { addr = 0x801CF968, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of adult Nina, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_ClearModeIfSlotFree = { addr = 0x801CFBC0, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
@@ -3647,7 +3706,7 @@ Char_ClearModeIfSlotFree = { addr = 0x801CFBC0, type = "func", source = "Clears 
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScriptGarr = { addr = 0x801CE514, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of Garr, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
 PlChar_RunGarrFieldTask = { addr = 0x801CE654, type = "func", size = 0x1E8, source = "Runs Garr's field task: handles the located actor or queues interaction with the actor two facing steps ahead." }
-Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling func_801B0DFC; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
+Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "Counts timer down each frame, calling Actor_UpdateMovement; at 0 clears the panel mode byte and game flag 0x1000. Always runs Actor_StepAnimLoop." }
 PlChar_FindGarrActorSlot = { addr = 0x801CE8AC, type = "func", source = "Finds the actor slot the Garr field task checks with Plchar_FollowerInReach." }
 Plchar_FollowerInReach = { addr = 0x801CEA10, type = "func", source = "Returns 1 when a party member after the leader is within reach of the record at the index" }
 Plchar_ProbeFacingFollower = { addr = 0x801CEAE0, type = "func", source = "Probes the cell one facing step (doubled) from the indexed route record for a party member." }
@@ -3657,7 +3716,7 @@ Char_WalkStep = { addr = 0x801CEE74, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CF35C, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CF448, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CF640, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CF724, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CF724, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 
 ["emi/plchar/plp349/00"]
 Char_StartTurnTeepo = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Teepo, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
@@ -3685,7 +3744,7 @@ Char_WalkStep = { addr = 0x801CEE94, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CF37C, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CF468, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CF660, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CF744, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CF744, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 
 ["emi/plchar/plp467/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
@@ -3705,7 +3764,7 @@ Char_WalkStep = { addr = 0x801CF940, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CFE28, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CFF14, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801D010C, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801D01F0, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801D01F0, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 
 ["emi/plchar/plp478/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
@@ -3716,7 +3775,7 @@ Char_WalkStep = { addr = 0x801CE898, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CED80, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CEE6C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CF064, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CF148, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CF148, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurnNinaAdult = { addr = 0x801CF2C0, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of adult Nina, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptNinaAdult = { addr = 0x801CF38C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of adult Nina, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_ClearModeIfSlotFree = { addr = 0x801CF5E4, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
@@ -3741,7 +3800,7 @@ Char_WalkStep = { addr = 0x801CFD20, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801D0208, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801D02F4, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801D04EC, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801D05D0, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801D05D0, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 
 ["emi/plchar/plp578/00"]
 Char_StartTurnMomo = { addr = 0x801CE448, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of Momo, route 0 of this image's party row (the task's byte 0x2C selects the route)." }
@@ -3754,7 +3813,7 @@ Char_WalkStep = { addr = 0x801CEC78, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CF160, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CF24C, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CF444, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CF528, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CF528, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurn = { addr = 0x801CF6A0, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step." }
 Char_RunStepScriptNinaAdult = { addr = 0x801CF76C, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of adult Nina, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_ClearModeIfSlotFree = { addr = 0x801CF9C4, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
@@ -3775,7 +3834,7 @@ Char_WalkStep = { addr = 0x801CF724, type = "func", source = "Runs one route ste
 Char_AdvanceScript = { addr = 0x801CFC0C, type = "func", source = "Advances the character script by its phase in byte 0x0B: phase 0 and the final phase wait for Actor_StepAnimOnce; on completion it clears the marker at byte 0x2B and the panel mode byte of g_Game.current." }
 Char_ProbeCellSpawn = { addr = 0x801CFCF8, type = "func", source = "Probes a map cell for the character: cell 0xF2 claims a free actor slot, spawns a field record (sometimes a second) and clears the cell; cell 0xF8 spawns a record, hands out item 0x56 with a message and clears the cell. Returns 1 when it handled the cell." }
 Char_SpawnActor = { addr = 0x801CFEF0, type = "func", source = "Claims a free g_ActorSlots entry for a character proximity actor: header.flags 1, type 0x34, header.mode from the kind argument, position from the x and y arguments (16.16) and z one 0x100 above the ground height." }
-Char_ProbeFacingCell = { addr = 0x801CFFD4, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (func_801BDE14) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
+Char_ProbeFacingCell = { addr = 0x801CFFD4, type = "func", source = "Returns 1 when the cell two facing steps ahead of the character holds a record (Actor_FindInRange) or has map cell code 0xF2, also testing the next cell when the x or y fraction is nonzero." }
 Char_StartTurnNinaAdult = { addr = 0x801D014C, type = "func", source = "Starts the character turn: picks the farther of this image's two turn facings from direction_08, stores it in byte 0x03 and its Actor_GetTurnStep sign in param.turn_step, sets timer to 2 and advances header.step. It is the step-table copy of adult Nina, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_RunStepScriptNinaAdult = { addr = 0x801D0218, type = "func", source = "Runs one step of the character route script with this image's turn facings: selects the turn script of direction_08, or counts the step timer down and runs the next script. It is the step-table copy of adult Nina, route 2 of this image's party row (the task's byte 0x2C selects the route)." }
 Char_ClearModeIfSlotFree = { addr = 0x801D0470, type = "func", source = "Clears the panel mode byte of g_Game.current when the actor slot in param.actor_slot has header.flags 0; always runs Actor_StepAnimLoop." }
@@ -3816,6 +3875,7 @@ func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntit
 Scene_EndScan = { addr = 0x801D15CC, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Area_FindFreeSpriteRow = { addr = 0x801D171C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
 Scene_DrawRedGradient = { addr = 0x801D1BAC, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
+Scene_SetXFixed = { addr = 0x801D230C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 Scene_DrawRedFade = { addr = 0x801D23AC, type = "func", source = "Draws the full-screen semi-transparent red fade tile at red intensity." }
 Scene_DrawScanBar = { addr = 0x801D2424, type = "func", source = "Draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity." }
 Scene_ClearScanBars = { addr = 0x801D25C0, type = "func", source = "Clears the in-use byte of each of the 16 scan bars." }
@@ -3859,6 +3919,7 @@ jtbl_801F715C = { addr = 0x801F715C, type = "Callback", source = "The switch tab
 Area_DrawSparkCell = { addr = 0x801F7A24, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
 Area_ClearWorkColumn = { addr = 0x801F7AB8, type = "func", source = "Clears one byte of each row in the actor window." }
 Area_AddSpark = { addr = 0x801F7AE4, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
+Scene_DrawSparkCell = { addr = 0x801F7C54, type = "func", source = "wraps Area_DrawSparkCell" }
 Scene_EnterCedarWoods = { addr = 0x801F8000, type = "func", source = "requests the area change to Cedar Woods before Nue and resets scene script state in scena01" }
 Scene_InitOpeningParty = { addr = 0x801FE10C, type = "func", source = "loads Ryu pajamas, Teepo, and Rei archives and joins Ryu pajamas as the opening party in scena01" }
 Scene_SetPartyRyuTeepoRei = { addr = 0x801FE1B0, type = "func", source = "sets young Ryu's character id, streams party archives and joins Ryu, Teepo and Rei for the scene setup" }
@@ -4250,6 +4311,7 @@ func_801F6F40 = { addr = 0x801F6F40, alias = true, source = "Scene_DispatchEntit
 Scene_InitTaskArea = { addr = 0x801F6F7C, type = "func", source = "sets the task screen position and timer, clears the work column and advances the task mode" }
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "Clears one byte of each row in the actor window." }
 Area_AddSpark = { addr = 0x801F75D8, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
+Scene_GetZFixed = { addr = 0x801F7748, type = "func", source = "the body returns g_Task->pos.z.fixed" }
 Scene_ClearActor = { addr = 0x801F9000, type = "func", source = "clears the current actor" }
 Scene_DispatchActor = { addr = 0x801FDD80, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowEntityMessage = { addr = 0x801FDDC0, type = "func", source = "starts the entity callback-indexed area message for the current desert camp area and enters the message state" }
@@ -4628,6 +4690,7 @@ Area_ResetCameraOffsetZ = { addr = 0x801F3E20, type = "func", source = "Zeroes g
 
 ["emi/world01/area042/13"]
 jtbl_801F2C14 = { addr = 0x801F2C14, type = "Callback", size = 0x2C, source = "The switch table of func_801F4378: 11 jump targets of its jr dispatch." }
+Area_SetPosX = { addr = 0x801F3D18, type = "func", source = "the body stores into g_Task->pos.x" }
 Message_SetAnswerMessage = { addr = 0x801F3D90, type = "func", source = "Stores the message id the answer table D_801F56C4 holds for the menu choice g_MessageChoice in g_MessageRequest." }
 
 ["emi/world01/area043/13"]
@@ -4696,6 +4759,7 @@ Message_SelectAnswer = { addr = 0x801F2CD8, type = "func", source = "Sets g_Mess
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0xC0, source = "The switch table of func_801F3F34: 48 jump targets of its jr dispatch." }
 Area_FindFreeWorkRow = { addr = 0x801F3158, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
 Area_UpdateEffectRows = { addr = 0x801F31C0, type = "func", source = "Ages the sixteen effect rows at the work window: draws each active row, raises its z by 0x3000, shrinks its 0x14 byte by 0x18, frees the row when its life byte reaches zero, and returns whether any row was active." }
+Area_GetCursor = { addr = 0x801F3980, type = "func", source = "the body returns g_ScriptState->cursor" }
 
 ["emi/world01/area053/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -5250,7 +5314,7 @@ jtbl_801F2C0C = { addr = 0x801F2C0C, type = "Callback", size = 0x80, source = "T
 
 ["emi/world03/area136/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x38, source = "The switch table of func_801F3198: 14 jump targets of its jr dispatch." }
-Actor_WalkWhileWithinLimit = { addr = 0x801F2D68, type = "func", source = "While the actor y plus the y step of its facing is at most the scene limit table entry for g_SceneEventSelection << 16, sets script unk_07 to 1, starts the script walk toward facing 5 with func_801ABBA8 and backs the script cursor up by 2." }
+Actor_WalkWhileWithinLimit = { addr = 0x801F2D68, type = "func", source = "While the actor y plus the y step of its facing is at most the scene limit table entry for g_SceneEventSelection << 16, sets script unk_07 to 1, starts the script walk toward facing 5 with Area_MoveActorRoute and backs the script cursor up by 2." }
 Area_SubCameraOffsetY2 = { addr = 0x801F3148, source = "Subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_AddCameraOffsetY2 = { addr = 0x801F3170, source = "Adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 
@@ -5961,7 +6025,7 @@ Area_UpdateSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "Ages every
 Area_DrawSpawnSlot = { addr = 0x801F3F30, type = "func", source = "Draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot position (its +0x14 halfword is the radius, +0x16 the centre shade, +0x17 the rim shade)." }
 Area_DrawSpinTriangle = { addr = 0x801F40F4, type = "func", source = "Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin." }
 Area_InitSpin = { addr = 0x801F4394, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
-Actor_WalkWhileWithinLimit = { addr = 0x801F4840, type = "func", source = "While the actor y plus the y step of its facing is at most the scene limit table entry for g_SceneEventSelection << 16, sets script unk_07 to 1, starts the script walk toward facing 5 with func_801ABBA8 and backs the script cursor up by 2." }
+Actor_WalkWhileWithinLimit = { addr = 0x801F4840, type = "func", source = "While the actor y plus the y step of its facing is at most the scene limit table entry for g_SceneEventSelection << 16, sets script unk_07 to 1, starts the script walk toward facing 5 with Area_MoveActorRoute and backs the script cursor up by 2." }
 Area_AddCameraOffsetY2 = { addr = 0x801F48E0, type = "func", source = "Adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_SubCameraOffsetY2 = { addr = 0x801F4908, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F4930, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
@@ -5989,6 +6053,7 @@ Area_RefillWaterJugs = { addr = 0x801F2CFC, type = "func", source = "Refills the
 
 ["emi/world04/area196/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Game_SetCurrentActor = { addr = 0x801F3030, type = "func", source = "the body stores into g_Game.current" }
 Message_ShowParty = { addr = 0x801F3F90, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 g_PartyMemberMessages = { addr = 0x801F42F4, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }
 
@@ -6720,6 +6785,7 @@ Area_RequestCellRows = { addr = 0x801545B4, type = "func", source = "Queues the 
 Area_FreeCellPrimRow = { addr = 0x80154664, type = "func", source = "Frees a primitive row of the area cells." }
 Area_RefreshCellGrid = { addr = 0x80154698, type = "func", source = "Refreshes the area cell grid." }
 Area_SampleHeight = { addr = 0x8015477C, type = "func", source = "Returns the ground height at a point." }
+Area_GetHeight = { addr = 0x80154ABC, type = "func", source = "the body returns g_AreaMapBundle.height" }
 Area_EnableHeightOffset = { addr = 0x80154ED0, type = "func", source = "Enables the height offset of the active mode." }
 Area_ReadHeight = { addr = 0x80154F28, type = "func", source = "Reads the height of a point with the mode height offset." }
 Area_ReadStepHeight = { addr = 0x80154F78, type = "func", source = "Reads the height of a step." }
@@ -6753,12 +6819,14 @@ Area_DrawGouraudQuad = { addr = 0x8015864C, type = "func", source = "Draws a Gou
 Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area map records to cells." }
 Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }
 Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
+Menu_ClearPanel = { addr = 0x80158E20, type = "func", source = "existing proposal: clears the menu panel" }
 Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
 Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
 UI_DrawTextRows = { addr = 0x8015A170, type = "func", source = "Draws each row of the message window up to g_MessageWindow.last_row through UI_DrawTextAt, carrying the text cursor from row to row." }
 UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
+SYS_InitScratchpad = { addr = 0x8015AC8C, type = "func", source = "comment: initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state (+0x48) bytes, seeds the +0x40/+0x44 scroll pair " }
 Actor_FindScriptSlot = { addr = 0x8015B4F4, type = "func", source = "Resolves a script's actor reference to a slot: without bit 0x80 the low six bits plus 30, with it the code-th actor record whose first byte is 10. Called by Actor_ReadValue." }
 SYS_SetFlag = { addr = 0x8015B580, type = "func", source = "Sets a flag bit." }
 SYS_ClearFlag = { addr = 0x8015B5A8, type = "func", source = "Clears a flag bit." }
@@ -6798,6 +6866,7 @@ Actor_RiseToGround = { addr = 0x8015C940, type = "func", source = "Advances the 
 Actor_ApplyVelocity = { addr = 0x8015C9CC, type = "func", source = "Moves an actor by its velocity." }
 Actor_FindFree = { addr = 0x8015CA48, type = "func", source = "Returns the first free field actor." }
 Actor_ReadState = { addr = 0x8015CA9C, type = "func", source = "Reads the script state of an actor." }
+Actor_ClaimSlot = { addr = 0x8015CB18, type = "func", source = "claims the free record slot, fills its header, id, step and halfword fields; comment says the same" }
 SND_Init = { addr = 0x8015CD00, type = "func", source = "Initializes the sound system." }
 SND_Start = { addr = 0x8015CE70, type = "func", source = "Starts the sound system." }
 SND_Exit = { addr = 0x8015CEBC, type = "func", source = "Shuts down the sound system." }

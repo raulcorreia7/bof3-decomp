@@ -3,5 +3,5 @@
 MATCH void func_8009FF7C(void) {
     g_Battle.action_type = BATTLE_ACTION_ABILITY;
     g_Battle.action_id   = ABILITY_MYOLLNIR;
-    func_8009DCC8();
+    Battle_ApplyAbilityDamage();
 }

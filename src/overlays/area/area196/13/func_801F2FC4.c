@@ -5,5 +5,5 @@ MATCH void func_801F2FC4(void) {
     if (g_Task->timer == 0) {
         Actor_Clear();
     }
-    func_801F3030(g_Task->timer);
+    Game_SetCurrentActor(g_Task->timer);
 }

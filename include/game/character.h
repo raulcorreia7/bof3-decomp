@@ -19,7 +19,7 @@
 /* The block at its retail address; an image header declares g_WindowStyle. */
 #define CHARACTER_BLOCK         ((Char_Block*)&g_WindowStyle)
 
-/* func_801ADDD4 applies the six stat gains and learns both abilities. */
+/* Char_GetExp applies the six stat gains and learns both abilities. */
 #define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intellect, ability, extra_ability)                   \
     {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intellect), (ability), (extra_ability)}
 
@@ -284,7 +284,7 @@ typedef struct LevelGrowth {
     u8  power_defense;
     u8  agility_intellect;
     u8  ability;
-    u8  extra_ability; /* func_801ADDD4 learns both ability bytes through Char_AddAbility */
+    u8  extra_ability; /* Char_GetExp learns both ability bytes through Char_AddAbility */
 } LevelGrowth;
 
 ASSERT_SIZE(LevelGrowth, LEVEL_STRIDE);

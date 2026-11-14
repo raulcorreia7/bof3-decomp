@@ -27,7 +27,7 @@ MATCH void func_801E50C0(void) {
                     motion_work->pos.x.fixed += motion_work->unk_0C;
                     motion_work->pos.y.fixed += motion_work->unk_10;
                 }
-                func_801E30F8();
+                Battle_IsEnemyBlocked();
             } else {
                 g_Task->header.step += 1;
             }

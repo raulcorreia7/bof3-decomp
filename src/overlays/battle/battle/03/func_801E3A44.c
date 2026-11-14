@@ -4,7 +4,7 @@ MATCH void func_801E3A44(void) {
     PartyMember* work;
     u8           count;
 
-    func_801E30F8();
+    Battle_IsEnemyBlocked();
     work         = g_Task;
     count        = work->unk_09 - 1;
     work->unk_09 = count;

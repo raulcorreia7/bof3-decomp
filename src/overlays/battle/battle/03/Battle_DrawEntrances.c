@@ -19,7 +19,7 @@ MATCH void Battle_DrawEntrances(void) {
         D_8014839F = 1;
         (*count)++;
     }
-    func_801D750C(D_80148358, D_8014835A);
+    Battle_SetPartyCount(D_80148358, D_8014835A);
     Battle_DrawDimOverlay();
     for (panel_index = 0; panel_index < 7; panel_index++) {
         func_801D8450(panel_index);

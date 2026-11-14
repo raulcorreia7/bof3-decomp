@@ -74,7 +74,7 @@ MATCH void func_801D1364(void) {
     } else {
         buttons = INPUT_REPEATED(g_InputPressed, (PADLright | PADLleft));
         old_row = D_801D4E24;
-        count   = func_801D3A48(g_SceneEventSelection);
+        count   = Fairy_GetJobActive(g_SceneEventSelection);
         if (buttons & PADLleft) {
             D_801D4E24--;
             if ((s8)D_801D4E24 < 0) {
@@ -221,7 +221,8 @@ MATCH void func_801D3984(s32 x, s32 y, s32 bright) {
     COMMU_DRAW_CURSOR_TRIANGLE(x, y, bright);
 }
 
-MATCH u8 func_801D3A48(u8 arg) {
+/* func_801D3A48 */
+MATCH u8 Fairy_GetJobActive(u8 arg) {
     s32 count = 0;
     s32 i;
 

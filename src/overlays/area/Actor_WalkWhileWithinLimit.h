@@ -3,7 +3,7 @@
 static inline void Area_WalkWhileWithinLimit(const u8* limits) {
     if ((u32)(g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08 & 7].y) <= (u32)(limits[g_SceneEventSelection] << 16)) {
         g_ScriptState->unk_07 = 1;
-        func_801ABBA8(g_ScriptState, 5);
+        Area_MoveActorRoute(g_ScriptState, 5);
         g_ScriptState->cursor -= 2;
     }
 }

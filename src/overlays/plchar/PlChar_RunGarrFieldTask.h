@@ -19,7 +19,7 @@ s32 Plchar_FollowerInReach(u8 index);
             g_GameFlags |= 0x1000;                                                                                 \
             func_801C24D0();                                                                                       \
             g_Task->timer--;                                                                                       \
-            func_801B0DFC();                                                                                       \
+            Actor_UpdateMovement();                                                                                \
             g_GameState->u.field.mode_12B.u8_value = 1;                                                            \
             g_Task->header.step++;                                                                                 \
             return;                                                                                                \
@@ -28,7 +28,7 @@ s32 Plchar_FollowerInReach(u8 index);
         pos_x = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;                                   \
         pos_y = g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;                                   \
         if ((g_GameState->status.field.flags_12C.u8_value & 0x01) == 0) {                                          \
-            other_slot = (u8)func_801BDE14(pos_x, pos_y, 1);                                                       \
+            other_slot = (u8)Actor_FindInRange(pos_x, pos_y, 1);                                                   \
             if (other_slot != actor_slot) {                                                                        \
                 g_Actors[other_slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;                          \
             }                                                                                                      \

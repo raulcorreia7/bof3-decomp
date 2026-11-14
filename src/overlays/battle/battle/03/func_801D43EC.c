@@ -58,9 +58,9 @@ NON_MATCHING void func_801D43EC(void) {
                 flags                         = ENEMY_COMBATANT(index).turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
             }
             if (flags != 0) {
-                func_801DE560(1, 0, 0, 0xF, (u8*)&D_801EB08F);
+                Battle_QueueEvent(1, 0, 0, 0xF, (u8*)&D_801EB08F);
             } else {
-                func_801DE560(1, 0, 0, 0xF, (u8*)&D_801EB04E);
+                Battle_QueueEvent(1, 0, 0, 0xF, (u8*)&D_801EB04E);
             }
             g_BattleMessageState    = 1;
             g_Battle.phase.step     = 0;

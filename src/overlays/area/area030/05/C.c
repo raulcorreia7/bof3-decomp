@@ -382,17 +382,17 @@ MATCH void Fishing_ShopDrawTradeList(s32 draw_all) {
         h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)], ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
         w = Fishing_ShopTradeBlocked(i & BYTE_MASK, 1);
         if ((draw_all & BYTE_MASK) != 0) {
-            UI_DrawText(37, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(37, (0x51 + (i * 13)), 7, Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
             Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
         } else if (i == ((s8)s_ListCursor)) {
             if ((w & BYTE_MASK) == 0) {
-                UI_DrawText(37, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+                UI_DrawText(37, (0x51 + (i * 13)), 7, Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
                 Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
             }
-            UI_DrawText(37, (0x4F + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(37, (0x4F + (i * 13)), (u8)(w * 7), Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
             Fishing_ShopDrawItemIcon(28, (s16)(0x52 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
         } else {
-            UI_DrawText(37, (0x51 + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(37, (0x51 + (i * 13)), (u8)(w * 7), Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
             Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
         }
     }
@@ -485,16 +485,16 @@ MATCH void Fishing_ShopDrawNeeded(void) {
             break;
         }
         value = Item_GetRecord(ITEM_CAT_ITEM, (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
-        UI_DrawText(173, (0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+        UI_DrawText(173, (0x58 + i * 13), 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
         TEXT_Format(g_UiFormatBuffer, D_800F5000.format, D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
         UI_DrawGlyphString(272, (0x5C + i * 13), 0, g_UiFormatBuffer);
         cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
         if (cost < D_801E2F81[D_801E3134[g_GameContextKind][slot]][i]) {
-            UI_DrawText(173, (0xA4 + i * 13), 7, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+            UI_DrawText(173, (0xA4 + i * 13), 7, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
             TEXT_Format(g_UiFormatBuffer, D_800F5000.format, cost);
             UI_DrawGlyphString(272, (0xA8 + i * 13), 7, g_UiFormatBuffer);
         } else {
-            UI_DrawText(173, (0xA4 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+            UI_DrawText(173, (0xA4 + i * 13), 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
             TEXT_Format(g_UiFormatBuffer, D_800F5000.format, cost);
             UI_DrawGlyphString(272, (0xA8 + i * 13), 0, g_UiFormatBuffer);
         }
@@ -552,7 +552,7 @@ MATCH void Fishing_ShopDrawQuantity(void) {
 
     entry = D_801E3134[g_GameContextKind][slot];
     value = Item_GetRecord(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00);
-    UI_DrawText(33, 104, 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+    UI_DrawText(33, 104, 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
 
     TEXT_Format(g_UiFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
     UI_DrawGlyphString(132, 108, 0, g_UiFormatBuffer);

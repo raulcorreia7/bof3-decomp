@@ -6,7 +6,7 @@ MATCH void func_801E352C(void) {
     s32          y;
     s16          value;
 
-    func_801E30F8();
+    Battle_IsEnemyBlocked();
     work = g_Task;
     work->pos.x.fixed += work->unk_0C;
     y                       = work->pos.y.fixed + work->unk_10;

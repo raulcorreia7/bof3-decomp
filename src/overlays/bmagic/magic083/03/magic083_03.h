@@ -17,7 +17,8 @@ s32  func_801EF0CC(void);
 void func_801EF844(void);
 void func_801EFB24(void);
 
-void func_801F0BA8(s32 arg0);
+/* func_801F0BA8 */
+void BMagic_SetXFixed(s32 radius);
 
 void func_801F050C(void);
 void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 count, u8 size, u8 seed);

@@ -108,8 +108,9 @@ void  Scene_ResetEventState(void);
 void  Scene_UpdateEvent(void);
 /* func_801A86D4 */
 void  Scene_DispatchObject(void* record);
+/* Area_MoveActorRoute */
 /* func_801ABBA8 */
-void  func_801ABBA8(void* sub, s32 route);
+void  Area_MoveActorRoute(void* sub, s32 route);
 /* func_801AC1DC */
 void  func_801AC1DC(s32* out, u8 selector);
 /* func_801AE214 */
@@ -122,8 +123,9 @@ void  func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shade_mod
 void  func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
 /* func_801AED54 */
 void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
+/* Game_ReadCommand */
 /* func_801AF20C */
-s32   func_801AF20C(u8* command_stream);
+s32   Game_ReadCommand(u8* command_stream);
 /* UI_GetSpriteRect */
 /* func_801AF270 */
 u8*   UI_GetSpriteRect(u8 sprite_id, u8 flags);
@@ -143,16 +145,19 @@ void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 void  Matrix_SetIdentity(MATRIX* matrix);
 /* func_801AFF90 */
 s16   func_801AFF90(Point2D* origin, Point2D* first_point, Point2D* second_point);
+/* Game_ProjectWorldPoint */
 /* func_801AFFD8 */
-void  func_801AFFD8(const void* world_position, void* screen_xy, void* projection);
+void  Game_ProjectWorldPoint(const void* world_position, void* screen_xy, void* projection);
+/* Actor_UpdateMovement */
 /* func_801B0DFC */
-void  func_801B0DFC(void);
+void  Actor_UpdateMovement(void);
 /* func_801B0E44 */
 u8    func_801B0E44(void);
 /* func_801B2D00 */
 s32   Actor_GetTurnStep(s32 target_facing);
+/* Game_GetInput */
 /* func_801B59B4 */
-bool  func_801B59B4(void);
+bool  Game_GetInput(void);
 /* func_801B5E58 */
 void  Game_RewardZenny(s32 zenny);
 /* func_801B6610 */
@@ -165,10 +170,12 @@ void  func_801BDAB8(void);
 u8    Party_CountOrder(u8 order);
 /* func_801BDD58 */
 u8    func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
+/* Actor_FindInRange */
 /* func_801BDE14 */
-s8    func_801BDE14(s32 pos_x, s32 pos_y, s32 range_mode);
+s8    Actor_FindInRange(s32 pos_x, s32 pos_y, s32 range_mode);
+/* Game_GetPartySize */
 /* func_801BE0C0 */
-s8    func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode);
+s8    Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode);
 /* func_801BE1B0 */
 s32   func_801BE1B0(u32 index);
 /* func_801BFE34 */
@@ -183,8 +190,9 @@ s32   Party_JoinMember(s32 char_id);
 /* Party_RemoveMember */
 /* func_801C1ABC */
 void  Party_RemoveMember(s32 character_id);
+/* Scene_RunScenario */
 /* func_801C1DF0 */
-void  func_801C1DF0(s32 handler_index);
+void  Scene_RunScenario(s32 handler_index);
 /* func_801C1E3C */
 void  func_801C1E3C(s32 handler_index);
 /* func_801C2438 */
@@ -201,10 +209,12 @@ void  func_801C329C(void);
 void  func_801C3598(void);
 /* func_801C4C48 */
 void  func_801C4C48(void);
+/* Area_SetFacingOffsetX */
 /* func_801C5DFC */
-void  func_801C5DFC(u8 route_index);
+void  Area_SetFacingOffsetX(u8 route_index);
+/* Area_StartScrollRoute */
 /* func_801C601C */
-void  func_801C601C(s8 route_index);
+void  Area_StartScrollRoute(s8 route_index);
 /* func_801C7A54 */
 void  Battle_StartScripted(u8 mode_byte);
 

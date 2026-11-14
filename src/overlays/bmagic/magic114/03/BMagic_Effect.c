@@ -253,7 +253,8 @@ MATCH void func_801EFDD8(void) {
 
 INCLUDE_ASM(func_801EFE70);
 
-MATCH void func_801EFF1C(void) {
+/* func_801EFF1C */
+MATCH void BMagic_ApplyDamageFlags(void) {
     s32 value;
 
     g_Task->unk_20 -= 5;

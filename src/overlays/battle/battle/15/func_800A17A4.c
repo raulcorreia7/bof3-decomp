@@ -10,7 +10,7 @@
 MATCH void func_800A17A4(void) {
     u8 i;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     if (BATTLER_IS_PLAYER(ACTIVE_BATTLER)) {
         for (i = 0; i < 8; i++) {
             D_80145FB4[ACTIVE_BATTLER].pad_08[i] = 0;

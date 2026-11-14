@@ -10,10 +10,10 @@ MATCH void Area_StartDirectionalScript(Actor* actor) {
     g_ScriptState->unk_07 = 2;
     if (direction == 7) {
         direction = 3;
-        func_801ABBA8(g_ScriptState, 3);
+        Area_MoveActorRoute(g_ScriptState, 3);
     } else {
         direction = 7;
-        func_801ABBA8(g_ScriptState, 7);
+        Area_MoveActorRoute(g_ScriptState, 7);
     }
     g_Task->direction_08 = direction;
 }

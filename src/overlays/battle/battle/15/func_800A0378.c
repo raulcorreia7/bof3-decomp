@@ -8,7 +8,7 @@ MATCH void func_800A0378(void) {
     /* FAKE: keeps the flag constant in v0 for the bnez delay slot. */
     FAKE_REG(u8, flag, "v0");
 
-    if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
+    if (Battle_PickAbility(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *MEM_PTR(u8, &g_Battle.target);
         if (mode < 3u) {
             base = g_Game.members[mode].chr.hp;

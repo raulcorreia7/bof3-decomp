@@ -35,6 +35,6 @@ MATCH void func_801E16B4(void) {
         } else {
             g_Task->header.mode = g_Task->header.mode + 1;
         }
-        func_801DEE4C();
+        Battle_IsPartyMemberBlocked();
     }
 }

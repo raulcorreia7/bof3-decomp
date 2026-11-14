@@ -20,7 +20,7 @@ MATCH void func_801F8F18(void) {
         case 2:
             if (g_ScriptVars[0] == 0x0C) {
                 UI_SetMode(UI_MODE_LONG_FADE_OUT);
-                func_801C16B8();
+                Char_RebuildPartyStats();
                 g_SceneState.step_05 = 3;
                 SYS_SetFlag(g_SceneFlags, 0x11);
                 SND_FadeOutSequence(0, 0, 4, 0x1E);

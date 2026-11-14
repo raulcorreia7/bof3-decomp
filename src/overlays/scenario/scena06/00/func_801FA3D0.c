@@ -48,7 +48,7 @@ MATCH void func_801FA3D0(void) {
             if (g_ScriptVars[0] != 0x14) {
                 break;
             }
-            func_801C16B8();
+            Char_RebuildPartyStats();
             g_ScriptVars[2]      = 2;
             g_SceneState.step_05 = 6;
             g_SceneState.flags_01 ^= 0x01;
@@ -77,7 +77,7 @@ MATCH void func_801FA3D0(void) {
             break;
         case 18:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                func_801C16B8();
+                Char_RebuildPartyStats();
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 6;
                 SYS_ClearFlag(g_SceneFlags, 29);
@@ -108,7 +108,7 @@ MATCH void func_801FA3D0(void) {
             break;
         case 23:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                func_801C16B8();
+                Char_RebuildPartyStats();
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 6;
                 SYS_ClearFlag(g_SceneFlags, 29);

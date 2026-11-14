@@ -16,7 +16,7 @@ MATCH void func_800A0D64(void) {
 
     index                             = g_Battle.action_id;
     base_value                        = D_801CA71B[4 * (5 * index)];
-    g_Battle.target_record->hp_change = func_800A2880(g_BattleActiveBattler_nv, g_BattleTarget_nv, base_value, 0);
+    g_Battle.target_record->hp_change = Battle_GetActionId(g_BattleActiveBattler_nv, g_BattleTarget_nv, base_value, 0);
     /* FAKE: keeps the record store ahead of the selector read. */
     FAKE_BARRIER();
     battler = g_BattleTarget_nv;

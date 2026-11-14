@@ -38,7 +38,7 @@ MATCH void func_801F7480(void) {
     if ((g_FrameCount & 0x1) == 0) {
         Area_AddSpark();
     }
-    func_801F7C54();
+    Scene_DrawSparkCell();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 32;
@@ -51,7 +51,7 @@ MATCH void func_801F752C(void) {
     if ((g_FrameCount & 0x1) == 0) {
         Area_AddSpark();
     }
-    func_801F7C54();
+    Scene_DrawSparkCell();
     if (--g_Task->timer == 0) {
         g_Task->timer = 252;
         g_Task->header.mode += 1;
@@ -60,7 +60,7 @@ MATCH void func_801F752C(void) {
 
 MATCH void func_801F75C8(void) {
     func_801F7678(g_Task->timer);
-    func_801F7C54();
+    Scene_DrawSparkCell();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -68,7 +68,7 @@ MATCH void func_801F75C8(void) {
 }
 
 MATCH void func_801F7644(void) {
-    if (!(func_801F7C54() & BYTE_MASK)) {
+    if (!(Scene_DrawSparkCell() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -81,7 +81,7 @@ INCLUDE_ASM(func_801F7678);
 
 #include "shared/Area_AddSpark.h"
 
-INCLUDE_ASM(func_801F7C54);
+INCLUDE_ASM(Scene_DrawSparkCell);
 
 MATCH void func_801F7D04(void) {
     s16 screen_x;
@@ -137,7 +137,7 @@ MATCH void func_801F7FC4(void) {
 
 /* func_801F8000 */
 MATCH void Scene_EnterCedarWoods(void) {
-    func_801C1DF0(0);
+    Scene_RunScenario(0);
     Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, TO_COORD(87), TO_COORD(4), FACING_LEFT);
     *D_80144E90          = 0;
     g_ScriptVarsReq.word = 0;
@@ -165,7 +165,7 @@ MATCH void func_801F8AE4(void) {
             break;
         case 1:
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             g_SceneState.step_05 = 2;
             break;
         case 2:

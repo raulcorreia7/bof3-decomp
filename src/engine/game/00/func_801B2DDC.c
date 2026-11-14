@@ -34,7 +34,7 @@ MATCH void func_801B2DDC(void) {
                 list               = FIELD(u32*, base, 0x4u);
                 entry              = list[FIELD(u16, sel, 0x4u) & 0xFFF];
                 g_CurrentActor     = &rec;
-                func_801A3F3C((u8*)entry);
+                Area_SetScenarioId((u8*)entry);
                 result = rec.unk_7C;
                 if (result != 0xFFFF) {
                     Message_StartAreaMessage(result & 0xFFF);
