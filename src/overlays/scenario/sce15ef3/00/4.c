@@ -227,7 +227,40 @@ MATCH void func_801D16DC(void) {
 
 #include "shared/Area_FindFreeSpriteRow.h"
 
-INCLUDE_ASM(func_801D1758);
+/* Draw a spark as a lit dot with a dim box behind it; the flag picks grey or red. */
+MATCH void func_801D1758(SceneSpark* spark) {
+    TILE_1* dot;
+    TILE*   box;
+    DVECTOR xy;
+    /* FAKE: retail reserves 48 bytes of unused stack. */
+    FAKE_STACK_PADS(u8, 48);
+
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 0));
+    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(DR_MODE));
+    Area_ProjectPoint(&spark->x, &xy);
+    dot = (TILE_1*)g_GfxPrimCursor;
+    SetTile1(dot);
+    SetSemiTrans(dot, 1);
+    setXY0(dot, xy.vx, xy.vy);
+    if (spark->unk_3 != 0) {
+        setRGB0(dot, 128, 128, 128);
+    } else {
+        setRGB0(dot, 128, 0, 0);
+    }
+    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE_1));
+    box = (TILE*)g_GfxPrimCursor;
+    SetTile(box);
+    SetSemiTrans(box, 1);
+    setXY0(box, xy.vx - 1, xy.vy - 1);
+    box->w = 3;
+    box->h = 3;
+    if (spark->unk_3 != 0) {
+        setRGB0(box, 32, 32, 32);
+    } else {
+        setRGB0(box, 32, 0, 0);
+    }
+    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE));
+}
 
 INCLUDE_ASM(func_801D18CC);
 

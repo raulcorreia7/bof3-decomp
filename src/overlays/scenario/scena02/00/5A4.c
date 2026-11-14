@@ -361,7 +361,8 @@ MATCH void func_801FCBDC(s32 delta) {
     }
 }
 
-INCLUDE_ASM(func_801FCD14);
+/* Give the lead party member a field actor of type 6: claim a free slot and seed its row from the member. */
+MATCH void func_801FCD14(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FE26C, 6, variant + 112)}
 
 /* Give the lead party member a field actor of type 25: claim a free slot and seed its row from the member. */
 MATCH void func_801FCECC(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FE26C, 25, variant + 104)}

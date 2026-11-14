@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "sys/exe.h"
 #include "area/spad.h"
 
 extern u8 D_80146874;
@@ -36,6 +37,7 @@ extern u32      D_801F6C00;
 extern Callback g_SceneEntityDispatch[];
 
 extern Callback D_801FD5B4[];
+extern u8       D_801FD5C0[];
 
 extern Callback  D_801FD5DC[];
 extern Callback  D_801FD5E8[];
