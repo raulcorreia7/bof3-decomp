@@ -487,14 +487,14 @@ MATCH void func_801FC100(void) {
     u8 i;
 
     for (i = 0; i < 3; i++) {
-        SP_REF(s16, 0x0) = Actor_FindFreeField();
-        if (SP_REF(s16, 0x0) != GAME_NONE) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
             func_801A4D54(&D_801FE694[i * 17]);
         }
     }
     for (i = 0; i < 2; i++) {
-        SP_REF(s16, 0x0) = Actor_FindFreeField();
-        if (SP_REF(s16, 0x0) != GAME_NONE) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
             func_801A65A0(&D_801FE6C8[i * 16]);
         }
     }
