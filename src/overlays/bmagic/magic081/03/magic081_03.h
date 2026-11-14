@@ -28,7 +28,6 @@ extern BattleEffect        D_801EFA8C[];
 #define BMAGIC_EFFECT_SLOTS D_801EFA8C
 #define BMAGIC_EFFECT_COUNT BATTLE_EFFECT_COUNT
 
-void func_801EF330(void);
 void func_801EF6A0(void);
 
 #endif
