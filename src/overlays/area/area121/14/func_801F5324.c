@@ -11,6 +11,6 @@ MATCH void func_801F5324(void) {
         func_801F5380();
     } else {
         work[0x09] = count - 1;
-        func_801B0DFC();
+        Actor_UpdateMovement();
     }
 }

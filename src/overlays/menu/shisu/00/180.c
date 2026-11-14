@@ -200,7 +200,8 @@ MATCH void func_801D1898(void) {
     func_801D2DA8();
 }
 
-MATCH void func_801D18E4(void) {
+/* func_801D18E4 */
+MATCH void Menu_SetState(void) {
     u8* count;
     u8  value;
 

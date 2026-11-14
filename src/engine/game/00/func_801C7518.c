@@ -20,7 +20,7 @@ MATCH s32 func_801C7518(s32 pos_x, s32 pos_y, s32 reach) {
     py    = ya;
     xa    = xa >> 0x10;
     ya    = ya >> 0x10;
-    tile  = func_801C6FD4(xa, ya) & BYTE_MASK;
+    tile  = Area_GetWidth(xa, ya) & BYTE_MASK;
     index = ((reach << 2) | 0x1) & BYTE_MASK;
     if (tile < index) {
         return 0;

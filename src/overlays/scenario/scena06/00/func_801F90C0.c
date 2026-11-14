@@ -76,7 +76,7 @@ MATCH void func_801F90C0(void) {
             if (g_ScriptVars[0] != 0x13) {
                 break;
             }
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             slot                   = Actor_FindFreeSlot();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
@@ -115,7 +115,7 @@ MATCH void func_801F90C0(void) {
             break;
         case 20:
             func_801BE1B0(6);
-            func_801C601C(1);
+            Area_StartScrollRoute(1);
             g_SceneState.step_05 = 21;
             break;
         case 21:

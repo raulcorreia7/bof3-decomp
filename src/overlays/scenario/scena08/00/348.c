@@ -662,7 +662,7 @@ MATCH void func_801FA32C(void) {
     for (i = 0; i < CHARACTER_COUNT; i++) {
         g_Characters[i].unk_07 |= 1;
     }
-    func_801C16B8();
+    Char_RebuildPartyStats();
     for (i = 1; i < CHARACTER_COUNT; i++) {
         g_Characters[i].unk_07 &= 0xFE;
     }
@@ -756,7 +756,7 @@ INCLUDE_ASM(func_801FD704);
 
 MATCH void func_801FDF84(void) {
     g_Characters[CHAR_INDEX_REI].exp += 10000;
-    func_801ADDD4(CHAR_INDEX_REI);
+    Char_GetExp(CHAR_INDEX_REI);
     g_Characters[CHAR_INDEX_REI].equip.weapon = WEAPON_MOON_SWORD;
     g_Characters[CHAR_INDEX_REI].equip.shield = ARMOR_STEEL_GAUNTLETS;
     g_Characters[CHAR_INDEX_REI].equip.helmet = ARMOR_BANDANA;

@@ -14,7 +14,7 @@ MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
 
     GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x3C0, 0));
     size[0] = slot->radius_14;
-    func_801AFFD8(&slot->pos, size, scale);
+    Game_ProjectWorldPoint(&slot->pos, size, scale);
     Area_ProjectPoint(&slot->pos.x.fixed, &screen);
     radius = scale[0] + (g_FrameCount & 1);
     angle  = 0;

@@ -18,7 +18,7 @@ MATCH void func_801F46EC(const void* sprite) {
     Area_ProjectPoint(object, &screen);
     size[0] = VOL(u16, work->half_size);
     size[1] = VOL(u16, work->half_size);
-    func_801AFFD8(object, size, size);
+    Game_ProjectWorldPoint(object, size, size);
 
     setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1), screen.vx - ((s16)size[0] >> 1),
            (screen.vy - ((s16)size[1] >> 1)) + size[1], (screen.vx - ((s16)size[0] >> 1)) + size[0], (screen.vy - ((s16)size[1] >> 1)) + size[1]);

@@ -10,7 +10,7 @@ MATCH void func_801A0CFC(Actor* entity) {
     saved = g_Task->direction_08;
     D_801C83BC[g_Task->header.step](entity, 0, 1);
     if (g_Task->timer != 0) {
-        func_801A253C(entity);
+        Area_SetXFixed(entity);
         return;
     }
     mode  = entity->unk_78;
@@ -50,5 +50,5 @@ MATCH void func_801A0CFC(Actor* entity) {
         g_Task->direction_08 = saved;
     }
     func_801A2AE4(entity, saved);
-    func_801A253C(entity);
+    Area_SetXFixed(entity);
 }

@@ -19,7 +19,7 @@ MATCH void func_801F8188(void) {
                 break;
             }
             g_ScriptVars[0] = 1;
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             g_SceneState.step_05 = 3;
             break;
         case 3:
@@ -103,7 +103,7 @@ MATCH void func_801F8188(void) {
             Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(35), TO_COORD(41), AREA_ENTRY_MAP_LOADING);
             break;
         case 11:
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             slot                   = Actor_FindFreeSlot();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
@@ -154,7 +154,7 @@ MATCH void func_801F8188(void) {
             Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(34), TO_COORD(42), FACING_RIGHT);
             break;
         case 15:
-            func_801C16B8();
+            Char_RebuildPartyStats();
             Game_ClearScriptActive();
             g_ScriptVars[0]       = 0;
             D_80146865            = 0;

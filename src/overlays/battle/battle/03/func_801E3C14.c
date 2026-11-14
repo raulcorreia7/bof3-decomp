@@ -100,6 +100,6 @@ MATCH void func_801E3C14(void) {
     }
     flags = &g_Battle.state;
     *flags &= ~0x80;
-    func_801E30F8();
+    Battle_IsEnemyBlocked();
     g_Task->unk_03 += 1;
 }

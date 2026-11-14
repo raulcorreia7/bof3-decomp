@@ -61,6 +61,6 @@ MATCH void func_801A0AE4(Actor* record) {
         }
     } else {
     block_15:
-        func_801A253C(record);
+        Area_SetXFixed(record);
     }
 }

@@ -36,13 +36,13 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s6     = (temp_v0_61 >> 2) & 0xF8;
     var_s5     = (temp_v0_61 >> 7) & 0xF8;
     tex_u      = (temp_v0_57 & 0x1F) * 8;
-    func_801D9C80((s16)var_s0, (s16)(var_s1 + 8), 8U, 1U);
+    Battle_DrawWindowTile((s16)var_s0, (s16)(var_s1 + 8), 8U, 1U);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 6), 2, 1);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 0x19), 3, 1);
     GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     var_s0 = var_s2 << 0x10;
     var_s0 = (s32)(s16)var_s2;
-    func_801D9C80((s16)var_s0, (s16)(var_s1 + 2), 8U, 0U);
+    Battle_DrawWindowTile((s16)var_s0, (s16)(var_s1 + 2), 8U, 0U);
     var_s3 = var_s2 + 6;
     func_801D9DBC(var_s3, (s16)(var_s1 + 0xB), 9, 0, 0U);
     func_801D9AB4((s16)var_s0, (s16)var_s1, 2, 0);

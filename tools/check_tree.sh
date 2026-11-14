@@ -27,6 +27,27 @@ if [ -n "$relative" ]; then
 	echo "check-tree: include from the source root (\"overlays/area/X.h\") and import as bof3.<module>"
 	exit 1
 fi
+# Lists the decompiler locals (temp_, var_, phi_, saved_reg_) that a file has at HEAD and lacks at the base.
+local_locals() {
+	tmp=$(mktemp)
+	tmp2=$(mktemp)
+	git diff -M --name-status "$base...HEAD" -- src include | while IFS='	' read -r st a b; do
+		case $st in
+		A) old='' new=$a ;;
+		D) continue ;;
+		R*) old=$a new=$b ;;
+		*) old=$a new=$a ;;
+		esac
+		if [ -n "$old" ]; then git show "$base:$old" >"$tmp" 2>/dev/null || : >"$tmp"; else : >"$tmp"; fi
+		git show "HEAD:$new" >"$tmp2" 2>/dev/null || : >"$tmp2"
+		awk -v f="$new" -v re='(temp|var|phi|saved_reg)_[a-z0-9]+' '
+			FILENAME == ARGV[1] { s = $0; while (match(s, re)) { known[substr(s, RSTART, RLENGTH)] = 1; s = substr(s, RSTART + RLENGTH) }; next }
+			{ s = $0; while (match(s, re)) { if (!(substr(s, RSTART, RLENGTH) in known)) { print f ":" FNR ": " $0; break }; s = substr(s, RSTART + RLENGTH) } }
+		' "$tmp" "$tmp2"
+	done
+	rm -f "$tmp" "$tmp2"
+}
+
 # Source rules on the lines a change adds, against the base ref.
 base=${1:-}
 if [ -n "$base" ]; then
@@ -38,7 +59,6 @@ if [ -n "$base" ]; then
 		done
 	}
 	for spec in 'asm\("\$|register pin' 'goto L[0-9A-Fa-f]{4,}|decompiler label' \
-		'\b(temp|var|phi|saved_reg)_[a-z0-9]|decompiler local' \
 		'\bsp[0-9][0-9A-F]*\b|stack-offset name' '\bTASK_BYTES\b|\(\(u8 ?\*\) ?g_Task\)|task read by offset' \
 		'\bM2C_|m2c macro' '0x[0-9A-Fa-f]{7,8}|raw address'; do
 		out=$(rule "${spec%|*}" "${spec#*|}")
@@ -47,6 +67,12 @@ if [ -n "$base" ]; then
 			bad=1
 		fi
 	done
+	# A decompiler local is new to its file when the base copy of the file (following renames) lacks it.
+	locals=$(local_locals)
+	if [ -n "$locals" ]; then
+		printf '%s\n' "$locals" | sed 's/^/check-tree: decompiler local: /'
+		bad=1
+	fi
 	# A prototype added to a header must be the only declaration of that name in a visible header.
 	dups=$(git diff -U0 "$base...HEAD" -- include src | awk '
 		/^\+\+\+ b\// { f = substr($0, 7); next }

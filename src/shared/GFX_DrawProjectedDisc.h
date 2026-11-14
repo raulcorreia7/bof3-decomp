@@ -13,7 +13,7 @@
     u8       shade;                                                  \
                                                                      \
     size[0] = (SCALE);                                               \
-    func_801AFFD8((POS), size, radius);                              \
+    Game_ProjectWorldPoint((POS), size, radius);                     \
     Area_ProjectPoint((POS), &screen);                               \
     scale = (s16)(radius[0] + (g_FrameCount & 1));                   \
     angle = 0;                                                       \

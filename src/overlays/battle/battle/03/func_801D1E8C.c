@@ -65,7 +65,7 @@ NON_MATCHING void func_801D1E8C(void) {
         D_8014839F          = 2;
         Battle_DrawPanelRows(D_8014837C, D_8014837E);
         func_801D8450((u32)g_Battle.panel_slot);
-        func_801D750C((s32)D_80148358, (s32)D_8014835A);
+        Battle_SetPartyCount((s32)D_80148358, (s32)D_8014835A);
         g_Battle.phase.step += 1;
         return;
     }

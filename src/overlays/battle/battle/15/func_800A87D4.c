@@ -34,7 +34,7 @@ MATCH void func_800A87D4(void) {
     }
     kind = (u8*)&g_Battle.target_selector;
     if (*kind < 3) {
-        func_800AF2B4((BattleRange*)&g_Game.members[*kind], 0x50);
+        Battle_MoveRangeToward((BattleRange*)&g_Game.members[*kind], 0x50);
         if (func_800AF5FC((BattleRange*)&g_Game.members[*kind], 0x10000) != 0) {
             Actor_SelectScript((TASK_BYTES[8] + 0x44) & BYTE_MASK);
             Battle_MarkDamaged(*kind);
@@ -42,7 +42,7 @@ MATCH void func_800A87D4(void) {
             work[1]++;
         }
     } else {
-        func_800AF2B4((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x50);
+        Battle_MoveRangeToward((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x50);
         if (func_800AF5FC((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x10000) != 0) {
             Actor_SelectScript((TASK_BYTES[8] + 0x44) & BYTE_MASK);
             Battle_MarkDamaged(*kind);

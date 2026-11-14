@@ -225,7 +225,7 @@ MATCH void func_801FAC88(void) {
         case 1:
             if (g_ScriptVars[0] == 0x0F) {
                 UI_SetMode(UI_MODE_LONG_FADE_OUT);
-                func_801C16B8();
+                Char_RebuildPartyStats();
                 SND_StartXAStream(0, 1);
                 g_SceneState.step_05 = 2;
             }

@@ -8,7 +8,7 @@ MATCH void func_800B1504(void) {
     task = g_MenuCurrentPanel;
     x    = task->pos.x;
     if (x >= 347) {
-        func_80158E20();
+        Menu_ClearPanel();
     } else {
         task->pos.x = x + 32;
     }

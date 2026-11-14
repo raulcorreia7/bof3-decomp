@@ -27,7 +27,7 @@ MATCH void func_800C243C(void) {
         g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;
         g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
     }
-    func_801C1DF0(1);
+    Scene_RunScenario(1);
     g_Game.members[1].header.flags |= 0x40;
     if (*g_ScriptVars == 0x14) {
         g_Game.battle_order = 6;

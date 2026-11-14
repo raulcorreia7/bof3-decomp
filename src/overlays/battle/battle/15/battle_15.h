@@ -31,7 +31,7 @@
 
 /* Entry table at D_8014688E with its parallel id byte table at D_8014691A:
  * thirty records of stride 0x98, kind 7 marks a live entry
- * (func_800AC754, func_800AC7D0). */
+ * (Battle_FindActorEntry, func_800AC7D0). */
 #define BATTLE_ENTRY_STRIDE            0x98
 #define BATTLE_ENTRY_COUNT             30
 /* The kind byte of a live entry; the other kinds are unproven. */
@@ -146,7 +146,7 @@ ASSERT_SIZE(BattleStatDisplayTemplate, 0x18);
  * are the g_Task stores in func_800ADD44 (retail asm byte/half/word
  * widths, matching its exact twin func_800ADA4C). +0x120/+0x124/+0x128 alias
  * D_80145FB0 (u8), D_80145FB4[i].flags (u32) and D_80145FB8[i].flags
- * (u32); 0x9F..0xA3 is the element-slot byte run func_800A2AE0 reads. */
+ * (u32); 0x9F..0xA3 is the element-slot byte run Battle_GetFireResistance reads. */
 typedef struct BattlePlayerDamageStatus {
     volatile u32 flags;
     volatile u32 flags_04;
@@ -614,15 +614,15 @@ extern BattleTemplateStats  g_BattleTemplateStats[]; /* 0x801EC364 */
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
 void        func_80096F78(void);
-void        func_80096FBC(void);
-void        func_8009704C(void);
+void        Battle_SetCommandType(void);
+void        Battle_GetPanelPosX(void);
 void        func_8009761C(void);
 void        func_8009773C(void);
-void        func_80097778(void);
+void        Battle_SetCommandId(void);
 void        func_80097844(void);
 void        func_800979E4(void);
-void        func_80097C0C(void);
-void        func_80097CBC(void);
+void        Battle_ResetSelectionLatch(void);
+void        Battle_SetPhaseStep(void);
 void        func_80097D1C(void);
 void        func_80097D58(void);
 void        func_80097DC0(void);
@@ -675,7 +675,7 @@ void        Battle_ScaleEnemyStat(void* battler, s32 rate_type, s32 rate_percent
 void        func_8009CF80(u8* record, s32 index, s32 new_value);
 /* func_8009CFEC */
 void        Battle_MergeEnemyPanels(void);
-void        func_8009DCC8(void);
+void        Battle_ApplyAbilityDamage(void);
 extern void func_8009DE18(void);
 void        func_8009DE8C(void);
 extern void func_8009E500(void);
@@ -683,18 +683,18 @@ extern void func_8009E500(void);
 void        Battle_HalveDamage(void);
 void        func_8009F6EC(void);
 extern void func_800A0378(void);
-s16         func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
-s16         func_800A2AE0(u8 battler_index, u16 element_mask);
+s16         Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
+s16         Battle_GetFireResistance(u8 battler_index, u16 element_mask);
 s16         func_800A2EF0(u8 battler_index, u16 element_mask);
 s32         func_800A30E8(u8 unused, u8 battler_index);
 void        func_800A31E0(u8 selection_kind, u16 input_mask);
 bool        func_800A3638(s32 battler_index, s32 compare_value);
 u8          func_800A36BC(s32 battler_index, s32 compare_value);
 u16         func_800A36F0(u8 battler_index, u16 flags);
-extern void func_800A39B4(s16 delta, u8 battler_index);
-u8          func_800A3A10(u8 battler_index, u8 selection_kind);
+extern void Battle_SetTarget(s16 delta, u8 battler_index);
+u8          Battle_PickAbility(u8 battler_index, u8 selection_kind);
 u8          func_800A3C9C(u8 battler_index, u8 selection_kind);
-void        func_800A3F28(void);
+void        Battle_MarkDamageApplied(void);
 u8          func_800A403C(u8 battler_index);
 u8          func_800A41D8(s32 input_mask);
 u8          func_800A4238(s32 input_mask);
@@ -741,7 +741,7 @@ u8          func_800A6D84(void);
 void        func_800A6E14(u8 value);
 void        func_800A7C14(u8 slot);
 extern u8   func_800A805C(void);
-extern void func_800A82F8(void);
+extern void Battle_SetGeneCount(void);
 void        func_800A83F8(void);
 void        func_800A8450(void);
 void        func_800A84FC(void);
@@ -1026,7 +1026,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     BattleTurn* record;
     u8          one;
 
-    if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
+    if (Battle_PickAbility(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *(u8*)&g_Battle.target;
         if (mode < 3u) {
             g_Game.members[mode].u.turn.action_flags.value |= flag;
@@ -1042,7 +1042,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
         record->target_flags = one;
         Battle_QueueAction(0, g_Battle.target);
     }
-    func_800A3F28();
+    Battle_MarkDamageApplied();
 }
 
 /* Run the handler-quad row at offset with the spad step. */
@@ -1069,6 +1069,10 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 u8 func_800A40D0(u8 battler_index);
 
 u8 func_800AED5C(s32 arg0, u32 battler_index);
+
+volatile u8* Battle_FindActorEntry(u8 entry_id);
+void         Battle_MoveRangeToward(BattleRange* target, s32 step);
+u8           Battle_SelectStepRule(void);
 
 /* Add the queued text message and advance the battle UI state. The member declares temp. */
 #define BATTLE_ADD_MESSAGE_AND_STEP() \

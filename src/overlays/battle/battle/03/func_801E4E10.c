@@ -14,7 +14,7 @@ MATCH void func_801E4E10(void) {
     *battle_flags |= 0x800;
     g_BattleCurrentEnemy->turn.command.type = 0;
     if ((D_801CA71C[g_Battle.action_id].mask & 0x800u) == 0u) {
-        func_801E3160();
+        Battle_IsEnemyBlockedOnce();
     }
     g_Task->header.step += 1;
 }

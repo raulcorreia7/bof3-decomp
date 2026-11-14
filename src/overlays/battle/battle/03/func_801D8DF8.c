@@ -35,13 +35,13 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;
-    func_801D9C80(draw_x, (panel_y + 8), 8U, 1U);
+    Battle_DrawWindowTile(draw_x, (panel_y + 8), 8U, 1U);
     func_801D9AB4(draw_x, (panel_y + 6), 2, 1);
     func_801D9AB4(draw_x, (panel_y + 0x19), 3, 1);
     GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     draw_x = panel_x << 0x10;
     draw_x = (s16)panel_x;
-    func_801D9C80(draw_x, (panel_y + 2), 8U, 0U);
+    Battle_DrawWindowTile(draw_x, (panel_y + 2), 8U, 0U);
     func_801D9AB4(draw_x, panel_y, 2, 0);
     func_801D9AB4(draw_x, (panel_y + 0x13), 3, 0);
     panel_status = g_Game.members[index & BYTE_MASK].chr.status;

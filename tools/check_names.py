@@ -197,6 +197,22 @@ def changed_paths(ref: str) -> list[str]:
     return [path for path in out.split() if path]
 
 
+def renamed_from(ref: str) -> dict[str, str]:
+    """Maps each path under include/ or src/ that a change renames to its path at ``ref``."""
+    out = subprocess.run(
+        ["git", "diff", "--name-status", "-M", f"{ref}...HEAD", "--", *ROOTS],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout
+    moved: dict[str, str] = {}
+    for line in out.splitlines():
+        fields = line.split("\t")
+        if fields[0].startswith("R") and len(fields) == 3:
+            moved[fields[2]] = fields[1]
+    return moved
+
+
 def base_text(ref: str, path: str) -> str:
     """The file at ``path`` as it is in the base revision; empty when new."""
     result = subprocess.run(
@@ -299,8 +315,9 @@ def main(argv: list[str]) -> int:
                     file=sys.stderr,
                 )
                 bad = 1
+        moved = renamed_from(argv[1])
         for path in changed_paths(argv[1]):
-            before = macro_counts(base_text(argv[1], path))
+            before = macro_counts(base_text(argv[1], moved.get(path, path)))
             after_text = Path(path).read_text(encoding="utf-8", errors="replace")
             after = macro_counts(after_text)
             grown = {name: after[name] - before.get(name, 0) for name in after}

@@ -21,7 +21,8 @@ void             func_801F71B0(u8 arg);
 void             func_801F752C(AreaSpark* spark);
 /* func_801F75D8 */
 void             Area_AddSpark(void);
-bool             func_801F7748(void);
+/* func_801F7748 */
+bool             Scene_GetZFixed(void);
 void             func_801F79C4(void);
 void             func_801F7FFC(s16 x, s16 y);
 void             func_801F81D8(s16 x, s16 y);

@@ -4,7 +4,7 @@ MATCH void func_801F3F18(void) {
     s16 result;
 
     g_Task->vz += g_Task->gravity;
-    func_801B0DFC();
+    Actor_UpdateMovement();
     result = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (COORD_INT(g_Task->pos.z) < result) {
         COORD_INT(g_Task->pos.z) = result;

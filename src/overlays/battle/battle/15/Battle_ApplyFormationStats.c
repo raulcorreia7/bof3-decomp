@@ -5,7 +5,7 @@
  * the original object code; definitions resolve via the module symbol list. */
 
 /* Party formation shared with the camera task; 1=attack, 2=defense, 3=chain,
- * 4=magic. Read once per selection-phase tick (see func_800A2880.c). */
+ * 4=magic. Read once per selection-phase tick (see Battle_GetActionId.c). */
 
 /* applies the formation's stat changes to the party during the selection phase.
  * Char_AddStat moves a 0..999 stat by a delta; by formation (1=attack, 2=defense, 3=chain, 4=magic) the

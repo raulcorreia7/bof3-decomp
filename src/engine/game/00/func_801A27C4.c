@@ -29,7 +29,7 @@ MATCH void func_801A27C4(Actor* entity) {
                 entity->timer_75    = 0;
                 g_Task->header.mode = g_Task->unk_03;
             }
-            func_801ABBA8(&entity->interaction_flags, g_Task->direction_08);
+            Area_MoveActorRoute(&entity->interaction_flags, g_Task->direction_08);
             g_Task->direction_08 |= 8;
             if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                 entity->interaction_flags |= ACTOR_FLAG_MOVING;

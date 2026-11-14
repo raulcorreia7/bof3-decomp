@@ -61,7 +61,7 @@ MATCH void func_801A57F0(u8* script) {
     FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE) = script[0x10];
     D_8014691C[*counter][0]                       = 0x7F;
 
-    func_801A4990(script + 0xD);
+    Actor_SetOptionFlags(script + 0xD);
 
     if (script[3] & 0x80) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

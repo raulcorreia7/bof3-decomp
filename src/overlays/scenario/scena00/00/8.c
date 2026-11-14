@@ -989,7 +989,7 @@ MATCH void func_801F9178(void) {
     u8 i;
     u8 j;
 
-    func_801C1DF0(0);
+    Scene_RunScenario(0);
     Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, TO_COORD(99), TO_COORD(12), FACING_RIGHT);
     /* FAKE: place loop init early. */
     i                     = 0;
@@ -1114,7 +1114,7 @@ MATCH void func_801F9644(void) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
             g_ScriptVarsReq.word = 0;
             Area_AdvanceScroll(768);
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             timer       = &g_AreaCameraAngle.vx;
             *timer      = (*timer + 0xAA);
             id          = Actor_FindFreeSlot();
@@ -1165,7 +1165,7 @@ MATCH void func_801F9868(void) {
                     g_AreaCameraOffsetZ  = 0x480;
                     g_AreaCameraAngle.vz = 848;
                     func_801BE1B0(0U);
-                    func_801C601C(0);
+                    Area_StartScrollRoute(0);
                     free_slot   = Actor_FindFreeSlot();
                     slot        = free_slot & BYTE_MASK;
                     *D_1F800000 = free_slot;
@@ -1869,7 +1869,7 @@ MATCH void func_801FB204(void) {
         case 0:
             g_ScriptVarsReq.byte = 0xA;
             func_801BE1B0(1);
-            func_801C601C(1);
+            Area_StartScrollRoute(1);
             g_SceneState.step_05 = 1;
             break;
 
@@ -1917,7 +1917,7 @@ MATCH void func_801FB204(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 countdown = &g_SceneState.timer_06;
                 if (TIMER_EXPIRED(*countdown)) {
-                    func_801C601C(2);
+                    Area_StartScrollRoute(2);
                     D_80143F84.raw = TO_COORD(1408);
                     Area_AdvanceScroll(D_80143F84.half[1]);
                     slot          = Actor_FindFreeSlot();

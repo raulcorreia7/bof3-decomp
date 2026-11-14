@@ -13,5 +13,5 @@ MATCH void func_801F3C78(void) {
     mode       = g_ScriptState->unk_04;
     D_80143FC3 = 1;
     D_80143FC0 = mode;
-    func_801C5DFC(3);
+    Area_SetFacingOffsetX(3);
 }

@@ -115,7 +115,7 @@ extern u8       D_801F5364[];
 
 extern Callback D_801F5804[];
 
-/* Ask func_8015CB18 what the party battler in `slot` finds at its position: aim the task at the battler, look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the battler's unk_0B. */
+/* Ask Actor_ClaimSlot what the party battler in `slot` finds at its position: aim the task at the battler, look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the battler's unk_0B. */
 static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     PartyMember* battler;
     u8           index;
@@ -129,7 +129,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     y         = g_Game.members[slot].unk_30.signed_half;
     x         = g_Game.members[slot].unk_2E.signed_half;
     selection = table[index];
-    result    = func_8015CB18(kind, 0, selection, x, y);
+    result    = Actor_ClaimSlot(kind, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
         battler               = (PartyMember*)g_Task;
         battler->param.unk_0B = (u8)result;

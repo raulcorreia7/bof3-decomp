@@ -107,7 +107,7 @@ MATCH void func_801F9678(void) {
         case 0:
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             func_801BE1B0(26);
-            func_801C601C(1);
+            Area_StartScrollRoute(1);
             g_SceneState.step_05 = 1;
             break;
         case 1:

@@ -190,7 +190,8 @@ MATCH void func_801D31CC(void) {
     Menu_SlidePanelUp();
 }
 
-MATCH void func_801D320C(void) {
+/* func_801D320C */
+MATCH void Menu_SetPosY(void) {
     u16 next_pos;
 
     next_pos                  = g_MenuCurrentPanel->pos.y + 0x10;
@@ -217,7 +218,8 @@ MATCH void func_801D32A0(void) {
     }
 }
 
-MATCH void func_801D32E0(void) {
+/* func_801D32E0 */
+MATCH void Menu_SetPosX(void) {
     u16 next_pos;
 
     next_pos                  = g_MenuCurrentPanel->pos.x + 0x20;

@@ -282,7 +282,7 @@ MATCH void func_801FC6A8(void) {
             g_ScriptVars[0] = next;
             SYS_SetFlag(g_SceneFlags, 0x3A);
             func_801BE1B0(3);
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             *state = next;
             break;
         case 1:

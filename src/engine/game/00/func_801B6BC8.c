@@ -70,7 +70,7 @@ MATCH void func_801B6BC8(void) {
             g_Task->unk_03       = 2;
             sel += 8;
             g_Task->timer = (g_Task->timer - 1);
-            func_801B0DFC();
+            Actor_UpdateMovement();
         } else {
             work->direction_08 = sel;
             g_Task->unk_03     = 1;

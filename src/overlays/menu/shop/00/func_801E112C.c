@@ -54,7 +54,7 @@ NON_MATCHING void func_801E112C(MenuPanelTask* task) {
     }
     UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, (s32)task->unk_09, (s32)g_WindowStyle);
     UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, (s32)task->unk_09, (s32)g_WindowStyle);
-    UI_DrawText((s16)(task->pos.x - (((func_801AF20C(&D_801E5D1C) & BYTE_MASK) * 4) - 78)), (s16)(task->pos.y + 7), 0, 0x10U, (&D_801E5D1C));
+    UI_DrawText((s16)(task->pos.x - (((Game_ReadCommand(&D_801E5D1C) & BYTE_MASK) * 4) - 78)), (s16)(task->pos.y + 7), 0, 0x10U, (&D_801E5D1C));
     TEXT_Format(g_UiFormatBuffer, D_801D0E7C, Party_CountAbilities(0U, 0xFFU, 0U) & BYTE_MASK, 0x80);
     UI_DrawGlyphString((s16)(task->pos.x + 85), (s16)(task->pos.y + 146), 0U, g_UiFormatBuffer);
     UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, &D_801E5C78, 1);

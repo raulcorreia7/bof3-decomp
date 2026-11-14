@@ -34,7 +34,7 @@ MATCH void func_801E0F0C(void) {
         Actor_SelectScript((spad2->facing + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
         if (g_Battle.outcome.event_flags == 0) {
-            func_801D9484();
+            Battle_OpenPanel();
             Battle_SetTextPartyName(g_Task->slot);
             func_801DEBC4(0, g_Game.current->chr.character_id);
         }

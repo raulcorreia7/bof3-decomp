@@ -192,7 +192,7 @@ extern u8              D_80145F22[];
  * names. */
 extern u8              D_80145FB1;
 extern u8              D_80145FB2[];
-/* FAKE: func_801D4B38 and func_801D64C4 only match with the flags cell as its own volatile word row. */
+/* FAKE: func_801D4B38 and Battle_GetActionLock only match with the flags cell as its own volatile word row. */
 extern volatile u32    D_80145FB8[][80];
 extern u8              D_80145FC6;
 extern u8              D_80145FC7;
@@ -622,7 +622,7 @@ u8                 func_801D5A60(void);
 u8                 func_801D5BC0(void);
 /* func_801D5DCC */
 u8                 Battle_ApplyTurnDamage(void);
-u8                 func_801D64C4(u8 battler_index);
+u8                 Battle_GetActionLock(u8 battler_index);
 /* func_801D656C */
 extern void        Battle_WaitVoiceSlots(void);
 /* func_801D6774 */
@@ -649,7 +649,7 @@ extern void        Battle_ReloadMusicBank(void);
 /* func_801D7350 */
 extern void        Battle_WriteBackParty(void);
 extern void        func_801D74D4(void);
-void               func_801D750C(s32 x, s32 y);
+void               Battle_SetPartyCount(s32 x, s32 y);
 /* func_801D7A40 */
 void               Battle_DrawPanelRows(s16 x, s16 y);
 void               func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 shade);
@@ -671,7 +671,7 @@ void               func_801D9804(s32 x, s32 y, s32 clut_index, s32 glyph_index);
 void               Battle_DrawDimOverlay(void);
 void               func_801D99AC(s16 x, s16 y, u8 template_index);
 void               func_801D9AB4(s16 x, s16 y, s32 shape_index, s32 shade);
-void               func_801D9C80(s16 x, s16 y, u8 template_index, u8 shade);
+void               Battle_DrawWindowTile(s16 x, s16 y, u8 template_index, u8 shade);
 void               func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
 void               func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4);
 void               func_801DA078(s32 x, s32 y, s32 u_index);
@@ -737,7 +737,14 @@ void               Battle_UpdateParty(void);
 /* func_801DED54 */
 void               Battle_UpdatePartyActors(void);
 u8                 func_801DEDE4(void);
-u8                 func_801DEE4C(void);
+u8                 Battle_IsPartyMemberBlocked(void);
+u8                 Battle_IsEnemyBlocked(void);
+u8                 Battle_IsEnemyBlockedOnce(void);
+void               Battle_OpenPanel(void);
+void               Effect_RotatePosition(void* work);
+void               Battle_GetTurnCursor(u32 battler_index);
+void               Battle_QueueEvent(u8 event_kind, u8 event_value, u8 group, u8 timer, u8* payload);
+void               Effect_Reset(void);
 void               func_801DEEB4(void);
 void               func_801DEF0C(void);
 extern void        func_801DEFDC(void);
@@ -1084,7 +1091,7 @@ static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 
     r     = PSX_COLOR_R(color) << 3;
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;
-    func_801D9C80((s16)x, (s16)(y + 2), kind, 1);
+    Battle_DrawWindowTile((s16)x, (s16)(y + 2), kind, 1);
     func_801D9AB4((s16)x, (s16)y, glyph0, 1);
     func_801D9AB4((s16)x, (s16)(y + 0x11), glyph1, 1);
     func_801DA5A8((s16)(x + 2), (s16)(y + 2), (s16)(x + width), (s16)(y + 2), r, g, b);
