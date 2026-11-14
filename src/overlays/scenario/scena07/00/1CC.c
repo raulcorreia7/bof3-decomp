@@ -568,22 +568,25 @@ MATCH u8* func_801F9DD4(void) {
 }
 
 /* Starts a burst row at a random distance and angle around the actor, on the ground. */
-MATCH void func_801F9E10(SceneEffectRow* row) {
-    s32 radius;
-    s32 angle;
-    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
-    FAKE_STACK_PADS(u8, 0x10);
+MATCH void func_801F9E10(u8* row) {
+    s32  radius;
+    u32  angle;
+    s32* cell;
+    /* FAKE: the retail frame holds 16 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 16);
 
-    row->active = 1;
-    row->unk_1  = 0;
-    row->unk_2  = 16;
-    row->unk_18 = 0;
-    row->unk_14 = 0;
-    radius      = ((rand() % 2) << 16) | ((rand() & 0xFF) << 8);
-    angle       = rand() & 0xFC0;
-    row->x      = g_Task->pos.x.fixed + FIXED_MUL(radius, rcos(angle));
-    row->y      = g_Task->pos.y.fixed + FIXED_MUL(radius, rsin(angle));
-    row->unk_C = row->unk_1C = Area_SampleHeight(row->x, row->y) << 16;
+    cell    = (s32*)row;
+    row[0]  = 1;
+    row[1]  = 0;
+    row[2]  = 16;
+    cell[6] = 0;
+    cell[5] = 0;
+    radius  = ((rand() % 2) << 16) | ((rand() & BYTE_MASK) << 8);
+    angle   = rand() & 0xFC0;
+    cell[1] = g_Task->pos.x.fixed + ((radius * rcos(angle)) >> 12);
+    cell[2] = g_Task->pos.y.fixed + ((radius * rsin(angle)) >> 12);
+    cell[7] = Area_SampleHeight(cell[1], cell[2]) << 16;
+    cell[3] = cell[7];
 }
 
 INCLUDE_ASM(func_801F9EFC);
