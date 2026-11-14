@@ -2,15 +2,15 @@
 
 #include <inline_c.h>
 
-#define PAD_AT(type, off)           ((type*)((u8*)&D_1F800000 + (off)))
-#define PAD(type, off)              (*PAD_AT(type, off))
+#define SCRATCH_AT(type, off)       ((type*)((u8*)&D_1F800000 + (off)))
+#define SCRATCH(type, off)          (*SCRATCH_AT(type, off))
 
 /* Appends the packet to a list of the cell ordering table. */
 #define LINK_PACKET(row, list, pkt) (setaddr(g_AreaCellPacketLists[row][list].tail, pkt), g_AreaCellPacketLists[row][list].tail = (P_TAG*)(pkt))
 
 /* Draws the visible window of the 0x37 by 0x1C tile ring: each cell is projected through the GTE, culled against the
  * screen box, given a packet pair (plus linked rows at +0x46/+0x4E) and linked into the ordering table by depth.
- * The scratch words behind PAD(s32, 0xC) hold the window half-width.
+ * The scratch words behind SCRATCH(s32, 0xC) hold the window half-width.
  */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801530D0(void) {
@@ -62,42 +62,42 @@ NON_MATCHING s32 func_801530D0(void) {
     origin_y   = g_AreaTileOriginY;
     D_8014933D = 0;
     D_8014933A &= 0xFE;
-    ring            = (0x160 - tilt) / 50;
-    PAD(s32, 0xC)   = ring;
-    depth_threshold = (g_AreaTargetCellX - origin_x) + (g_AreaTargetCellY - origin_y) + 8;
-    width           = 0;
+    ring              = (0x160 - tilt) / 50;
+    SCRATCH(s32, 0xC) = ring;
+    depth_threshold   = (g_AreaTargetCellX - origin_x) + (g_AreaTargetCellY - origin_y) + 8;
+    width             = 0;
     if (ring > 0) {
         width = ring - 1;
     }
-    PAD(s32, 0xC) = width;
-    ring_cell     = (s16)g_AreaCameraOffsetZ / 650;
-    inner         = 0;
+    SCRATCH(s32, 0xC) = width;
+    ring_cell         = (s16)g_AreaCameraOffsetZ / 650;
+    inner             = 0;
     if (width >= (s16)ring_cell) {
         inner = width - (s16)ring_cell;
     }
-    PAD(s32, 0xC) = inner;
+    SCRATCH(s32, 0xC) = inner;
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
         outer = 0;
         if (inner >= 2) {
             outer = inner - 2;
         }
-        PAD(s32, 0xC) = outer;
+        SCRATCH(s32, 0xC) = outer;
     }
     s6 = 0;
     if (g_AreaSceneMode == 0x23) {
-        PAD(s32, 0xC) = 0;
+        SCRATCH(s32, 0xC) = 0;
     }
     map_width_ptr = MEM_PTR(u8, MAP_BUNDLE_BASE);
     sp10_row      = g_AreaGridRowCursor;
-    D_80149341    = PAD(s32, 0xC);
-    low_min       = PAD_AT(u8, 0);
+    D_80149341    = SCRATCH(s32, 0xC);
+    low_min       = SCRATCH_AT(u8, 0);
     vert          = D_1F800014;
     do {
         next_row = 0;
         if (sp10_row != 0x37) {
             next_row = sp10_row + 1;
         }
-        window   = PAD(s32, 0xC);
+        window   = SCRATCH(s32, 0xC);
         sp10_row = next_row;
         col      = g_AreaGridColCursor + window;
         wrapped  = col;
@@ -251,7 +251,7 @@ NON_MATCHING s32 func_801530D0(void) {
                     }
                 }
                 fp += 1;
-            } while (fp < (0x1C - (PAD(s32, 0xC) * 2)));
+            } while (fp < (0x1C - (SCRATCH(s32, 0xC) * 2)));
         }
         s6 += 1;
     } while (s6 < 0x37);
