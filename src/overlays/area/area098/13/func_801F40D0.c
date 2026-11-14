@@ -11,23 +11,23 @@ MATCH void func_801F40D0(s32 arg0) {
     i    = 0;
     do {
         if (slot->active == 0) {
-            slot->active            = 1;
-            slot->kind              = 0;
-            slot->life              = 8;
-            angle                   = rand() & 0xFFF;
-            speed                   = ((rand() & 0xFFF) << 5) + 0x10000;
-            shade                   = speed / 0x300;
-            slot->tail_shade        = shade;
-            slot->head_shade        = shade;
-            slot->tail[0]           = g_Task->pos.x.fixed + ((speed * rcos(angle)) >> 12);
-            slot->head[0]           = slot->tail[0];
-            slot->tail[1]           = g_Task->pos.y.fixed + ((speed * rsin(angle)) >> 12);
-            slot->head[1]           = slot->tail[1];
-            slot->tail[2]           = g_Task->pos.z.fixed;
-            slot->head[2]           = slot->tail[2];
-            ((s32*)slot->unk_24)[1] = (-rcos(angle)) << 1;
-            ((s32*)slot->unk_24)[2] = (-rsin(angle)) << 1;
-            ((s32*)slot->unk_24)[3] = 0;
+            slot->active     = 1;
+            slot->kind       = 0;
+            slot->life       = 8;
+            angle            = rand() & 0xFFF;
+            speed            = ((rand() & 0xFFF) << 5) + 0x10000;
+            shade            = speed / 0x300;
+            slot->tail_shade = shade;
+            slot->head_shade = shade;
+            slot->tail[0]    = g_Task->pos.x.fixed + ((speed * rcos(angle)) >> 12);
+            slot->head[0]    = slot->tail[0];
+            slot->tail[1]    = g_Task->pos.y.fixed + ((speed * rsin(angle)) >> 12);
+            slot->head[1]    = slot->tail[1];
+            slot->tail[2]    = g_Task->pos.z.fixed;
+            slot->head[2]    = slot->tail[2];
+            slot->vel[0]     = (-rcos(angle)) << 1;
+            slot->vel[1]     = (-rsin(angle)) << 1;
+            slot->vel[2]     = 0;
             return;
         }
         i++;

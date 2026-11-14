@@ -59,7 +59,9 @@ typedef struct AreaStreakSlot {
     s32 head[3]; /* 0x08 */
     s32 unk_14;
     s32 tail[3]; /* 0x18 */
-    u8  unk_24[0x14];
+    s32 unk_24;
+    s32 vel[3]; /* 0x28 */
+    s32 unk_34;
 } AreaStreakSlot;
 
 ASSERT_SIZE(AreaStreakSlot, 0x38);
