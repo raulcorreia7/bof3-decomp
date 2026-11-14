@@ -274,7 +274,24 @@ MATCH void func_801D2C00(void) {
 
 INCLUDE_ASM(func_801D2C94);
 
-INCLUDE_ASM(func_801D2D5C);
+MATCH void func_801D2D5C(void) {
+    Actor* work;
+    Actor* work2;
+    u8     timer;
+
+    work = g_Task;
+    func_801D36BC(&work->pos.x.fixed, work->vx, work->vy);
+    work2        = g_Task;
+    timer        = work2->timer - 1;
+    work2->timer = timer;
+    work2->vx += work2->unk_18;
+    work2->vy += work2->unk_1C;
+    work2->unk_18 -= 0x100;
+    work2->unk_1C -= 0x200;
+    if (timer == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801D2DEC(void) {
     SYS_DISPATCH_TASK(D_801D397C, 1, g_Task);
