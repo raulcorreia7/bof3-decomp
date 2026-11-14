@@ -1,3 +1,5 @@
 #include "area173_14.h"
 
-INCLUDE_ASM(func_801F3498);
+MATCH void func_801F3498(void) {
+    AREA_SWEEP_STEP(9);
+}

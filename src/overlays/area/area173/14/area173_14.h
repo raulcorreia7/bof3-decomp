@@ -45,4 +45,24 @@ void func_801F3324(s32 source_y, s32 dest_y);
         func_801F3324(D_801F4ED4[(offset) + g_Task->timer / 6], dest_y); \
     }
 
+/* Sweeps the three func_801F3954 frames by the step timer and moves to the next step after limit ticks. */
+#define AREA_SWEEP_STEP(limit)      \
+    s16* slot;                      \
+    u8   x;                         \
+                                    \
+    slot       = &D_1F800038;       \
+    x          = g_Task->timer;     \
+    D_1F80003A = 0;                 \
+    *slot      = -(x * 8);          \
+    func_801F3954(0);               \
+    *slot = g_Task->timer * 8;      \
+    func_801F3954(1);               \
+    *slot = 0;                      \
+    func_801F3954(2);               \
+    g_Task->timer += 1;             \
+    if (g_Task->timer >= (limit)) { \
+        g_Task->timer = 0;          \
+        g_Task->header.step += 1;   \
+    }
+
 #endif
