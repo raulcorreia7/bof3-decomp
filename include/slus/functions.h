@@ -9,6 +9,8 @@
 #include "game/character.h"
 #include "game/item.h"
 #include "common/handler.h"
+#include "gfx/palette.h"
+#include "gfx/prim.h"
 
 volatile u8* func_800AC754(u8 entry_id);
 /* Functions. */
@@ -83,34 +85,14 @@ extern void  Actor_SelectSprite(u32 record_index);
 bool         Area_SelectSceneRecord(s32 wanted_id);
 /* func_8014E0A8 */
 extern s32   SYS_ReadCD(s32 size, void* buffer, s32 sectors);
-/* func_8014E284 */
-void         GFX_ResetPalette(void);
-/* func_8014E3A0 */
-void         GFX_CopyPalette(s32 slot);
-/* func_8014E3F4 */
-void         GFX_ResetPaletteFades(void);
-/* func_8014E484 */
-extern void  GFX_FreePaletteSlot(s32 slot);
-/* func_8014E4BC */
-void         GFX_FreePaletteSlotOwner(void* owner);
-/* func_8014E528 */
-extern void  GFX_FreeAllPaletteSlots(void);
-/* func_8014E564 */
-void         GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
-/* func_8014E5A0 */
-void         GFX_AddPrim(u32 ot_index, u32 primitive_size);
 /* func_8014E640 */
 s32          INPUT_GetRepeatedButtons(s32 button_mask);
-/* func_8014E6D0 */
-void         GFX_UpdateTransferQueue(void);
 /* func_8014EA80 */
 void         SYS_StartFrontend(void);
 /* func_8014EC64 */
 void         SYS_EnterFrontend(void);
 /* func_8014ECAC */
 void         UI_SetMode(u16 local_mode);
-/* func_8014F704 */
-s32          GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
 /* func_8014F800 */
 void         UI_DrawText(s16 x, s16 y, s32 palette, u32 byte_count, u8* text);
 /* func_8014F84C */
@@ -463,8 +445,6 @@ u8*  Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* 0x40-byte palette staging entries; GFX_LoadPalette copies them out, the second copy lands 0x4000 above. */
 #define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
 #define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)
-/* func_80166C48 */
-void       GFX_LoadPalette(u8* dst, s32 field);
 /* func_80166CB0 */
 s32        Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */

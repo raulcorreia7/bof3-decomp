@@ -4,7 +4,6 @@
 #include "common/vector.h"
 #include "gfx/prim.h"
 #include "psx/psyq.h"
-#include "slus/exports.h"
 #include "types.h"
 
 /* The menu system: a screen is a set of panel task records animated into place,
