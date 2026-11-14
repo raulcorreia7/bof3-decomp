@@ -16,13 +16,7 @@ extern Callback D_801F1278[];
 
 extern Callback D_801F1288[];
 
-/* The red and blue weight of one ring shade; the green follows the effect timer alone. */
-typedef struct Magic126Shade {
-    u8 red;
-    u8 blue;
-} Magic126Shade;
-
-extern Magic126Shade D_801F1298[];
+extern BMagicRingShade D_801F1298[];
 
 extern Callback D_801F12AC[];
 

@@ -44,14 +44,8 @@ extern BattleEffectTargetColumn D_801EC3A4[];
 void                            func_801F03F0(s32 dir);
 extern u8                       D_801F0AD4[];
 
-/* A palette fade colour: the signed red, green and blue steps. */
-typedef struct Magic003FadeColor {
-    s8 red;
-    s8 green;
-    s8 blue;
-} Magic003FadeColor;
-
-extern Magic003FadeColor D_801F0A78[];
+/* A palette fade colour per row: the signed red, green and blue steps. */
+extern ColorOffset D_801F0A78[];
 
 /* A screen rectangle: the corner and the size. */
 typedef struct Magic003Rect {
