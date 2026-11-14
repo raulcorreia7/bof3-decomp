@@ -907,7 +907,36 @@ MATCH void func_801D7878(void) {
     D_801DB0DC = func_801DA114();
 }
 
-INCLUDE_ASM(func_801D7934);
+MATCH void func_801D7934(void) {
+    s32 i;
+
+    D_801DB0C4 = D_801DB0C4 + 1;
+    if (D_801DB0DC != 0) {
+        func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+    } else {
+        func_801D90D8(0x20 - (D_801DB0C4 * 0x1E), 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+    }
+    func_801D97C8(D_801DAAA8, (D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
+    func_801D9B80(0x12, (D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, (D_801DB0C4 * 0x1E) + 0x67, D_801DB0D4, D_801DB0D8);
+    if (D_801DB0C4 == 4) {
+        if (D_801DB0DC != 0) {
+            if (D_801DB080[0] == 0) {
+                for (i = 0; i < 5; i++) {
+                    D_801DB080[i] = D_801DB058[func_801D92F4(D_801DB0B4) & BYTE_MASK][i];
+                }
+            }
+            Message_StartAreaMessage(244);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_801F294E += 1;
+        } else {
+            Message_StartAreaMessage(247);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_801F294C       = 4;
+            D_801F294D       = 0;
+        }
+    }
+}
 
 MATCH void func_801D7B50(void) {
     func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
