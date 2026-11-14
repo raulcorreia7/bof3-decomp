@@ -38,16 +38,16 @@ MATCH void func_801F7590(void) {
             g_Task->header.step++;
         }
         g_Task->header.step &= 7;
-        SND_PlayCue(0x206);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
         g_Task->unk_06 = (g_Task->header.step & 7) + 0x4E;
         Actor_SelectScript(g_Task->unk_06 - 0x4E);
     }
     if (g_InputPressed & PADRleft) {
-        SND_PlayCue(0x209);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
         g_Task->unk_0A      = 20;
         g_Task->header.mode = 2;
     } else if (g_InputPressed & PADRup) {
-        SND_PlayCue(0x20C);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
         g_Task->header.mode = 3;
     } else if (g_InputPressed & PADRdown) {
         if (Item_Count(0, g_Task->unk_06, 0) & 0xFFFF) {
@@ -55,9 +55,9 @@ MATCH void func_801F7590(void) {
                 D_80144908[g_Task->header.step]++;
             }
             Item_Remove(0, g_Task->unk_06, 1, 0);
-            SND_PlayCue(0x20A);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 10));
         } else {
-            SND_PlayCue(0x20D);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
         }
     }
 }
@@ -248,7 +248,7 @@ MATCH void func_801FD5C0(Actor* actor) {
                 /* FAKE: retail passes the bit index unmasked, as s32. */
                 ((void (*)(void*, s32))SYS_SetFlag)(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag);
                 Message_Request(2);
-                SND_PlayCue(0x106);
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
                 actor->unk_7E++;
                 Game_SetScriptActive();
             } else {
