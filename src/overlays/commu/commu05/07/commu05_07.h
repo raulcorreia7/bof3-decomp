@@ -20,7 +20,8 @@ typedef struct {
 
 extern Commu05State D_801D19F0;
 
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 /* D_801D1950 */
 extern Callback      g_Commu05States[COMMU05_STEP_COUNT];
 
