@@ -208,7 +208,21 @@ MATCH void func_801EF910(void) {
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 
-INCLUDE_ASM(func_801EF9E8);
+MATCH void func_801EF9E8(void) {
+    u8 counter;
+
+    Actor_StepAnimOnce();
+    counter        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = counter;
+    if (!(counter & BYTE_MASK)) {
+        if (g_Battle.action_id > 0x84) {
+            func_800AFC98(2, 4);
+        } else {
+            func_800AFC98(0, 4);
+        }
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
 
