@@ -30,4 +30,25 @@ void func_801F3768(s32 arg0, s32 arg1);
 s32 func_801F2FC4(void);
 s32 func_801F3368(void);
 
+/* One of the 128 falling sparks at AREA_WORK: it falls, bounces off the ground and fades out. */
+typedef struct AreaSparkRow {
+    u8      active; /* 0x00 - 0 marks a free spark */
+    u8      unk_01; /* 0x01 */
+    u8      life;   /* 0x02 - frames left; clears the spark at 0 */
+    u8      shade;  /* 0x03 - fades to black as the spark dies */
+    u8      frame;  /* 0x04 - indexes the draw routine's corner table */
+    u8      pad_05[3];
+    s32     vx; /* 0x08 */
+    s32     vy; /* 0x0C */
+    s32     vz; /* 0x10 - the fall speed and the bounce */
+    u8      pad_14[4];
+    Point3l pos;       /* 0x18 */
+    u8      pad_24[4]; /* 0x24 */
+} AreaSparkRow;
+
+ASSERT_SIZE(AreaSparkRow, 0x28);
+ASSERT_OFFSET(AreaSparkRow, pos, 0x18);
+
+void func_801F2E74(AreaSparkRow* spark);
+
 #endif
