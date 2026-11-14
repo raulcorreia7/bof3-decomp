@@ -1,14 +1,14 @@
 #include "area134_13.h"
 
 MATCH void func_801F46EC(const void* sprite) {
-    DVECTOR           screen;
-    u16               size[2];
-    const AreaSprite* work;
-    s32*              object;
-    POLY_FT4*         primitive;
-    u8                shade;
+    DVECTOR               screen;
+    u16                   size[2];
+    const AreaQuadSprite* work;
+    s32*                  object;
+    POLY_FT4*             primitive;
+    u8                    shade;
 
-    work      = (const AreaSprite*)sprite;
+    work      = (const AreaQuadSprite*)sprite;
     object    = (const void*)((const u8*)sprite + 8u);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 

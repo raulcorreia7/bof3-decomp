@@ -21,7 +21,7 @@ extern u16 D_80146876;
  * (func_801F31B0), area134 draws the same cells (func_801F46EC). The
  * AreaSprite in AreaSprite.h is another view of the window, used by world00
  * to world02: it names +0x04 as its origin. */
-typedef struct AreaSprite {
+typedef struct AreaQuadSprite {
     u8      unk_00[3];
     u8      flags_03;  /* the shade of the sprite */
     u16     half_size; /* the projected half-size */
@@ -33,12 +33,12 @@ typedef struct AreaSprite {
     s32     unk_1C;
     s32     unk_20;
     s32     unk_24;
-} AreaSprite;
+} AreaQuadSprite;
 
-ASSERT_SIZE(AreaSprite, 0x28);
-ASSERT_OFFSET(AreaSprite, flags_03, 0x03);
-ASSERT_OFFSET(AreaSprite, half_size, 0x04);
-ASSERT_OFFSET(AreaSprite, origin, 0x08);
+ASSERT_SIZE(AreaQuadSprite, 0x28);
+ASSERT_OFFSET(AreaQuadSprite, flags_03, 0x03);
+ASSERT_OFFSET(AreaQuadSprite, half_size, 0x04);
+ASSERT_OFFSET(AreaQuadSprite, origin, 0x08);
 
 /* The global state byte the area update gates on. */
 
