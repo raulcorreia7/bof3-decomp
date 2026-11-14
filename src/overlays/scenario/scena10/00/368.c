@@ -202,7 +202,32 @@ MATCH void func_801FD568(Actor* actor) {
     SCENA10_ACTOR_START(0, 5, 0xF);
 }
 
-INCLUDE_ASM(func_801FD5C0);
+/* Pick up the item hidden at the actor's cell: add it to the inventory, mark its trigger and show the message. */
+MATCH void func_801FD5C0(Actor* actor) {
+    u8 i;
+
+    i = 0;
+    do {
+        if (D_801FE894[i].x == COORD_INT(g_Task->pos.x) && D_801FE894[i].y == COORD_INT(g_Task->pos.y)) {
+            g_Task->param.unk_0B = D_801FE894[i].script + 0x4E;
+            strncpy(g_TextVariables[0], Item_GetRecord(0, g_Task->param.unk_0B), 12);
+            g_TextVariables[0][12] = 0;
+            if (Item_Add(0, g_Task->param.unk_0B, 1, 0)) {
+                /* FAKE: retail passes the bit index unmasked, as s32. */
+                ((void (*)(void*, s32))SYS_SetFlag)(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag);
+                Message_Request(2);
+                SND_PlayCue(0x106);
+                actor->unk_7E++;
+                Game_SetScriptActive();
+            } else {
+                Message_Request(3);
+            }
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            return;
+        }
+        i++;
+    } while (i < ARRAY_COUNT(D_801FE894));
+}
 
 MATCH void func_801FD734(void) {
     u8 i;
