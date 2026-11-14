@@ -28,7 +28,7 @@ extern Magic080Cell D_801EF13C[];
         setRGB0(prim, 0x80, 0x80, 0x80);                                                                                                                                                 \
         prim->tpage = GetTPage(0, 1, 0x3C0, PAGE_Y);                                                                                                                                     \
         prim->clut  = GetClut(0, 0x1E0);                                                                                                                                                 \
-        setUV4(prim, CELLS[i].u, CELLS[i].v, CELLS[i].u + 12, CELLS[i].v, CELLS[i].u, CELLS[i].v + 12, CELLS[i].u + 12, CELLS[i].v + 12);                                                \
+        setUVWH(prim, CELLS[i].u, CELLS[i].v, 12, 12);                                                                                                                                   \
         GFX_AddPrim(2, sizeof(POLY_FT4));                                                                                                                                                \
     }
 

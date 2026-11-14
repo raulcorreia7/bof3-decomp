@@ -97,11 +97,7 @@ MATCH void func_801EF070(void) {
     s16       x;
     s16       y;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    tpage = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     shade  = &D_1F800006;
@@ -111,27 +107,11 @@ MATCH void func_801EF070(void) {
     y      = g_Task->unk_30.half;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0    = x - 0x38;
-    prim->y0    = y - 0x60;
-    prim->x1    = x + 0x38;
-    prim->y1    = y - 0x60;
-    prim->x2    = x - 0x38;
-    prim->y2    = y;
-    prim->x3    = x + 0x38;
-    prim->y3    = y;
+    setXY4(prim, x - 0x38, y - 0x60, x + 0x38, y - 0x60, x - 0x38, y, x + 0x38, y);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
-    prim->u0    = 8;
-    prim->v0    = 8;
-    prim->u1    = 120;
-    prim->v1    = 8;
-    prim->u2    = 8;
-    prim->v2    = 104;
-    prim->u3    = 120;
-    prim->v3    = 104;
-    prim->r0    = *shade;
-    prim->g0    = *shade;
-    prim->b0    = *shade;
+    setUVWH(prim, 8, 8, 112, 96);
+    setRGB0(prim, *shade, *shade, *shade);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
 
@@ -348,21 +328,11 @@ MATCH void BMagic_DrawRingTriangles(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
-        prim->y1 = y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
-        prim->x2 = x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]);
-        prim->y2 = y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]);
-        prim->r0 = D_1F800000.view.effect.params[3];
-        prim->g0 = D_1F800000.view.effect.params[3];
-        prim->b0 = D_1F800000.view.effect.params[3];
-        prim->r1 = D_1F800000.view.effect.params[4];
-        prim->g1 = D_1F800000.view.effect.params[5];
-        prim->b1 = D_1F800000.view.effect.params[6];
-        prim->r2 = D_1F800000.view.effect.params[4];
-        prim->g2 = D_1F800000.view.effect.params[5];
-        prim->b2 = D_1F800000.view.effect.params[6];
+        setXY3(prim, x, y, x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]), y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]),
+               x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]), y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]));
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB1(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }
@@ -384,8 +354,7 @@ MATCH void BMagic_DrawRingQuads(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[1]);
-        prim->y0 = y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[1]);
+        setXY0(prim, x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[1]), y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[1]));
         prim->x2 = x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
         prim->y2 = y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
         prim->x1 = x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[1]);
@@ -394,12 +363,8 @@ MATCH void BMagic_DrawRingQuads(void) {
         prim->y3 = y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
-        prim->r2 = D_1F800000.view.effect.params[4];
-        prim->g2 = D_1F800000.view.effect.params[5];
-        prim->b2 = D_1F800000.view.effect.params[6];
-        prim->r3 = D_1F800000.view.effect.params[4];
-        prim->g3 = D_1F800000.view.effect.params[5];
-        prim->b3 = D_1F800000.view.effect.params[6];
+        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB3(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }

@@ -220,9 +220,7 @@ MATCH void func_801EF72C(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 1024;
-    rot.vy = D_801EFC9C[g_Task->facing];
-    rot.vz = 0;
+    setVector(&rot, 1024, D_801EFC9C[g_Task->facing], 0);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 

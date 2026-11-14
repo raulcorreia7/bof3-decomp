@@ -106,7 +106,7 @@ MATCH void func_801EFC74(void) {
     s32      i;
 
     D_1F800000 = (rand() & 7) + g_Task->timer * 4;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     i      = 0;
     radius = &D_1F800000;
@@ -114,15 +114,9 @@ MATCH void func_801EFC74(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_Task->unk_2E.half;
-        prim->y0 = g_Task->unk_30.half;
-        prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), *radius);
-        prim->y1 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), *radius);
-        prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), *radius);
-        prim->y2 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), *radius);
-        prim->r0 = g_Task->timer * 8;
-        prim->g0 = g_Task->timer * 8;
-        prim->b0 = g_Task->timer * 6;
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), *radius),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), *radius));
+        setRGB0(prim, g_Task->timer * 8, g_Task->timer * 8, g_Task->timer * 6);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));

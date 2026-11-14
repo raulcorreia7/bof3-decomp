@@ -27,7 +27,7 @@ void            func_801F0908(void);
  * random share of SPREAD; before step 3 the shade falls with the length past FADE, and the line ends once it is
  * shorter than MIN. A statement macro: the member declares LINE_G2* prim, u16 x and y, and s32 i, sine and tpage. */
 #define MAGIC172_DRAW_JAGGED_LINE(ANGLE, SPREAD, WOBBLE, FADE, MIN)                                                                 \
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;                                                               \
+    tpage = getTPage(0, 1, 320, 256);                                                                                               \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                         \
     GFX_AddPrim(3, sizeof(DR_MODE));                                                                                                \
     D_1F800000.view.effect.params[0] = 16;                                                                                          \
@@ -40,8 +40,8 @@ void            func_801F0908(void);
         prim = (LINE_G2*)g_GfxPrimCursor;                                                                                           \
         SetLineG2(prim);                                                                                                            \
         SetSemiTrans(prim, 1);                                                                                                      \
-        prim->x0                         = x + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]); \
-        prim->y0                         = y + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]); \
+        setXY0(prim, x + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),                       \
+               y + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));                            \
         D_1F800000.view.effect.params[1] = (i & 0x1F) << 7;                                                                         \
         sine                             = rsin(D_1F800000.view.effect.params[1]);                                                  \
         D_1F800000.view.effect.params[0] += FIXED_MUL(sine, rand() & (s16)SPREAD);                                                  \

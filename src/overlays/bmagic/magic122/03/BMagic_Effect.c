@@ -154,7 +154,7 @@ MATCH void func_801EF324(void) {
     s32       outer;
     s32       swing;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
     D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;
     D_1F800000.view.effect.params[5] = g_Task->unk_30.half;
@@ -181,20 +181,12 @@ MATCH void func_801EF324(void) {
         D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
         prim->x3                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
         prim->y3                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->x0                         = D_1F800000.view.effect.params[6];
-        prim->y0                         = D_1F800000.view.effect.params[7];
-        prim->x2                         = D_1F800000.view.effect.params[4];
-        prim->y2                         = D_1F800000.view.effect.params[5];
-        prim->clut                       = GetClut(0, 0x1FA);
-        prim->tpage                      = GetTPage(0, 1, 0x380, 0x100);
-        prim->u0                         = 0x40;
-        prim->v0                         = i * 8 - g_Task->unk_09 * 16;
-        prim->u1                         = 0x80;
-        prim->v1                         = i * 8 - g_Task->unk_09 * 16;
-        prim->u2                         = 0x40;
-        prim->v2                         = i * 8 - g_Task->unk_09 * 16 + 8;
-        prim->u3                         = 0x80;
-        prim->v3                         = i * 8 - g_Task->unk_09 * 16 + 8;
+        setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        prim->x2    = D_1F800000.view.effect.params[4];
+        prim->y2    = D_1F800000.view.effect.params[5];
+        prim->clut  = GetClut(0, 0x1FA);
+        prim->tpage = GetTPage(0, 1, 0x380, 0x100);
+        setUV4(prim, 0x40, i * 8 - g_Task->unk_09 * 16, 0x80, i * 8 - g_Task->unk_09 * 16, 0x40, i * 8 - g_Task->unk_09 * 16 + 8, 0x80, i * 8 - g_Task->unk_09 * 16 + 8);
         D_1F800000.view.effect.params[3] = g_Task->unk_04 * 8;
         setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
         setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
@@ -209,8 +201,8 @@ MATCH void func_801EF324(void) {
         swing                            = FIXED_MUL(rsin(inner), 2) + 4;
         D_1F800000.view.effect.params[0] = (i - 1) * 9 + swing;
         D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
-        prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
         swing                            = FIXED_MUL(rsin(outer), 2) + 4;
         D_1F800000.view.effect.params[0] = i * 9 + swing;
         D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
@@ -222,14 +214,7 @@ MATCH void func_801EF324(void) {
         prim->y3                         = D_1F800000.view.effect.params[5];
         prim->clut                       = GetClut(0, 0x1FA);
         prim->tpage                      = GetTPage(0, 1, 0x380, 0x100);
-        prim->u0                         = 0;
-        prim->v0                         = i * 8 - g_Task->unk_09 * 16;
-        prim->u1                         = 0x40;
-        prim->v1                         = i * 8 - g_Task->unk_09 * 16;
-        prim->u2                         = 0;
-        prim->v2                         = i * 8 - g_Task->unk_09 * 16 + 8;
-        prim->u3                         = 0x40;
-        prim->v3                         = i * 8 - g_Task->unk_09 * 16 + 8;
+        setUV4(prim, 0, i * 8 - g_Task->unk_09 * 16, 0x40, i * 8 - g_Task->unk_09 * 16, 0, i * 8 - g_Task->unk_09 * 16 + 8, 0x40, i * 8 - g_Task->unk_09 * 16 + 8);
         D_1F800000.view.effect.params[3] = g_Task->unk_04 * 8;
         setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
         setRGB3(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
@@ -238,7 +223,7 @@ MATCH void func_801EF324(void) {
         setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
         GFX_AddPrim(3, sizeof(POLY_GT4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
 }
 

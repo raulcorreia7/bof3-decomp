@@ -131,11 +131,7 @@ MATCH void func_801EF678(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800000.view.effect.params[3] = g_Task->unk_09 * 5;
@@ -163,11 +159,7 @@ MATCH void func_801EF678(void) {
         setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 }
@@ -179,11 +171,7 @@ MATCH void func_801EF934(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800014[1].vx = FIXED_MUL(rsin(0), 128U);
@@ -213,11 +201,7 @@ MATCH void func_801EF934(void) {
         setRGB3(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 }
@@ -335,11 +319,7 @@ MATCH void func_801F026C(void) {
     s32      tpage;
     s32      i;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     first = g_GfxPrimCursor;

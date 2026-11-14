@@ -210,9 +210,7 @@ MATCH void func_801EF4F0(void) {
             break;
     }
     rot.vz = 0;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x20) / 2;
+    setVector(&pos, (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -(COORD_INT(g_Task->pos.z) + 0x20) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -328,9 +326,7 @@ MATCH void func_801F00A8(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+    setVector(&rot, 0, 0, BMAGIC_PHASE_ANGLE(g_Task->unk_09));
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
@@ -344,19 +340,11 @@ MATCH void func_801F0164(void) {
     prim = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(prim);
     SetSemiTrans(prim, 1);
-    D_1F800014[0].vx = (u32)rsin(0) >> 8;
-    D_1F800014[0].vy = (u32)rcos(0) >> 8;
-    D_1F800014[0].vz = 0;
-    D_1F800014[1].vx = (u32)rsin(DEG(120)) >> 8;
-    D_1F800014[1].vy = (u32)rcos(DEG(120)) >> 8;
-    D_1F800014[1].vz = 0;
-    D_1F800014[2].vx = (u32)rsin(DEG(240)) >> 8;
-    D_1F800014[2].vy = (u32)rcos(DEG(240)) >> 8;
-    D_1F800014[2].vz = 0;
+    setVector(&D_1F800014[0], (u32)rsin(0) >> 8, (u32)rcos(0) >> 8, 0);
+    setVector(&D_1F800014[1], (u32)rsin(DEG(120)) >> 8, (u32)rcos(DEG(120)) >> 8, 0);
+    setVector(&D_1F800014[2], (u32)rsin(DEG(240)) >> 8, (u32)rcos(DEG(240)) >> 8, 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-    prim->r0 = (rand() & 0xF) * g_Task->unk_09;
-    prim->g0 = (rand() & 0xF) * g_Task->unk_09;
-    prim->b0 = (rand() & 0xF) * g_Task->unk_09;
+    setRGB0(prim, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_F3));
 }
 

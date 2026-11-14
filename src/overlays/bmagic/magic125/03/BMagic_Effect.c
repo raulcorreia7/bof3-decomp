@@ -122,11 +122,7 @@ MATCH void func_801EF258(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = g_Task->unk_14;
@@ -140,9 +136,7 @@ MATCH void func_801EF258(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         prim             = (POLY_G3*)g_GfxPrimCursor;
@@ -154,11 +148,7 @@ MATCH void func_801EF258(void) {
         setRGB2(prim, 0x10, 0x10, 0x10);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 }
@@ -192,7 +182,7 @@ MATCH void func_801EF508(void) {
         D_1F800014[3].vz = 0;
         x                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[1].vy << 9) + g_Task->pos.y.fixed;
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35, 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -289,21 +279,13 @@ MATCH void func_801EFB8C(void) {
 
     SYS_DISPATCH_BYTE((g_BMagicEffectModes + 9), g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         func_800AF764();
         func_801EFFC8();
         func_801F020C();
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0x25;
-        } else {
-            tpage = 0x15;
-        }
+        tpage = getTPage(0, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     }
@@ -327,10 +309,7 @@ MATCH void func_801EFFC8(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0         = g_Task->unk_2E.half;
-        prim->y0         = g_Task->unk_30.half;
-        prim->x1         = D_1F800014[0].vx;
-        prim->y1         = D_1F800014[0].vy;
+        setXY2(prim, g_Task->unk_2E.half, g_Task->unk_30.half, D_1F800014[0].vx, D_1F800014[0].vy);
         D_1F800014[0].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
         prim->x2         = D_1F800014[0].vx;
         D_1F800014[0].vy = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
@@ -356,8 +335,7 @@ MATCH void func_801F020C(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0         = D_1F800014[0].vx;
-        prim->y0         = D_1F800014[0].vy;
+        setXY0(prim, D_1F800014[0].vx, D_1F800014[0].vy);
         prim->x2         = D_1F800014[1].vx;
         prim->y2         = D_1F800014[1].vy;
         D_1F800014[0].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[1]);

@@ -147,7 +147,7 @@ MATCH void func_801EF698(void) {
     s16       half_w;
     s16       height;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(1, 1, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     if (g_Task->unk_04 != 0) {
         height = 0x60;
@@ -166,9 +166,9 @@ MATCH void func_801EF698(void) {
     prim->tpage = GetTPage(1, 1, 0x340, 0x100);
     prim->clut  = GetClut(0, 0x1FA);
     if (g_Task->unk_04 != 0) {
-        setUV4(prim, 8, 8, 0x78, 8, 8, 0x68, 0x78, 0x68);
+        setUVWH(prim, 8, 8, 112, 96);
     } else {
-        setUV4(prim, 0x78, 8, 0xA8, 8, 0x78, 0x48, 0xA8, 0x48);
+        setUVWH(prim, 0x78, 8, 48, 64);
     }
     setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));

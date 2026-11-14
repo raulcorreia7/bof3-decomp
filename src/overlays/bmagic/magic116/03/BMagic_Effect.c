@@ -66,12 +66,8 @@ MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
     Area_ProjectPoint(point, POLY_XY(prim, 2));
     point[0] = segment->tail.x - 0x1000;
     Area_ProjectPoint(point, POLY_XY(prim, 3));
-    prim->r0 = prim->r1 = segment->head_red;
-    prim->g0 = prim->g1 = segment->head_green;
-    prim->b0 = prim->b1 = segment->head_blue;
-    prim->r2 = prim->r3 = segment->tail_red;
-    prim->g2 = prim->g3 = segment->tail_green;
-    prim->b2 = prim->b3 = segment->tail_blue;
+    setRGB0(prim, prim->r1 = segment->head_red, prim->g1 = segment->head_green, prim->b1 = segment->head_blue);
+    setRGB2(prim, prim->r3 = segment->tail_red, prim->g3 = segment->tail_green, prim->b3 = segment->tail_blue);
     GFX_AddPrim(3, sizeof(POLY_G4));
 }
 

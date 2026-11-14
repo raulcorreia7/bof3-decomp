@@ -9,26 +9,14 @@ MATCH void func_801EEC44(void) {
     s32      tpage;
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         func_801EF128();
     }
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
@@ -140,13 +128,9 @@ MATCH void func_801EF6A8(void) {
     long         flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = ((g_Task->timer & 0x1F) - 2) << 7;
-    src    = (PartyMember*)g_BattleEffectBattler;
-    pos.vx = (src->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (src->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = -(COORD_INT(src->pos.z) + 0x200) / 2;
+    setVector(&rot, 0, 0, ((g_Task->timer & 0x1F) - 2) << 7);
+    src = (PartyMember*)g_BattleEffectBattler;
+    setVector(&pos, (src->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (src->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -(COORD_INT(src->pos.z) + 0x200) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -201,13 +185,9 @@ MATCH void func_801EFA80(void) {
     g_Task->unk_0C = 0x28000;
     g_Task->unk_10 = 0xA0000 - (g_Task->unk_09 << 17);
     func_801DD350(g_Task);
-    x = g_AreaScrollTargetX + g_Task->unk_0C;
-    y = g_AreaScrollTargetY + g_Task->unk_10;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    x     = g_AreaScrollTargetX + g_Task->unk_0C;
+    y     = g_AreaScrollTargetY + g_Task->unk_10;
+    tpage = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
@@ -216,24 +196,16 @@ MATCH void func_801EFA80(void) {
     g_Task->unk_0C = 0;
     g_Task->unk_10 = -0x1000;
     func_801DD350(g_Task);
-    D_1F800014[0].vx = ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[0].vy = ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[0].vz = -COORD_INT(g_Task->pos.z) / 2;
-    g_Task->unk_0C   = 0;
-    g_Task->unk_10   = 0x1000;
+    setVector(&D_1F800014[0], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    g_Task->unk_0C = 0;
+    g_Task->unk_10 = 0x1000;
     func_801DD350(g_Task);
-    D_1F800014[1].vx = ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[1].vy = ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[1].vz = -COORD_INT(g_Task->pos.z) / 2;
-    g_Task->unk_10   = 0xA8000 - ((g_Task->unk_09 * 3) << 15);
-    g_Task->unk_0C   = 0x28000;
+    setVector(&D_1F800014[1], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    g_Task->unk_10 = 0xA8000 - ((g_Task->unk_09 * 3) << 15);
+    g_Task->unk_0C = 0x28000;
     func_801DD350(g_Task);
-    D_1F800014[3].vx = ((g_AreaScrollTargetX + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[3].vy = ((g_AreaScrollTargetY + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[3].vz = -g_Task->unk_14 / 2;
-    D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[2].vz = -g_Task->unk_14 / 2;
+    setVector(&D_1F800014[3], ((g_AreaScrollTargetX + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_AreaScrollTargetY + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
+    setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
     RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     setRGB0(prim, 16, 1, 1);
     setRGB1(prim, 16, 1, 1);
@@ -290,29 +262,21 @@ MATCH void func_801F0004(void) {
     s32       x;
     s32       y;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    tpage = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
     func_801DD350(g_Task);
-    x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-    y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
-    g_Task->unk_0C   = -0x30000;
-    g_Task->unk_10   = 0;
+    x = g_Task->pos.x.fixed + g_Task->unk_0C;
+    y = g_Task->pos.y.fixed + g_Task->unk_10;
+    setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    g_Task->unk_0C = -0x30000;
+    g_Task->unk_10 = 0;
     func_801DD350(g_Task);
-    x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-    y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[3].vz = -COORD_INT(g_Task->pos.z) / 2;
+    x = g_Task->pos.x.fixed + g_Task->unk_0C;
+    y = g_Task->pos.y.fixed + g_Task->unk_10;
+    setVector(&D_1F800014[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     for (i = 1; i < g_Task->unk_14 && i < 56; i++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
@@ -352,14 +316,7 @@ MATCH void func_801F0004(void) {
         prim->tpage                      = GetTPage(1, 1, 832, 256);
         prim->clut                       = GetClut(0, 482);
         D_1F800000.view.effect.params[0] = (u32)(g_Task->unk_20 + i * 4) % 188 + 64;
-        prim->u0                         = 64;
-        prim->v0                         = D_1F800000.view.effect.params[0];
-        prim->u1                         = 192;
-        prim->v1                         = D_1F800000.view.effect.params[0];
-        prim->u2                         = 64;
-        prim->v2                         = D_1F800000.view.effect.params[0] + 3;
-        prim->u3                         = 192;
-        prim->v3                         = D_1F800000.view.effect.params[0] + 3;
+        setUV4(prim, 64, D_1F800000.view.effect.params[0], 192, D_1F800000.view.effect.params[0], 64, D_1F800000.view.effect.params[0] + 3, 192, D_1F800000.view.effect.params[0] + 3);
         RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         if (g_Task->header.step < 2) {
             D_1F800000.view.effect.params[1] = (rsin(((g_FrameCount + i) & 0x3F) << 6) * 32 >> 12) + 160;
@@ -384,29 +341,21 @@ MATCH void func_801F04D4(s32 semi) {
     u8        trans;
 
     trans = semi;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = ((semi & 3) << 7) | 0x225;
-    } else {
-        tpage = ((semi & 3) << 5) | 0x95;
-    }
+    tpage = getTPage(1, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
     func_801DD350(g_Task);
-    x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-    y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
-    g_Task->unk_0C   = -0x30000;
-    g_Task->unk_10   = 0;
+    x = g_Task->pos.x.fixed + g_Task->unk_0C;
+    y = g_Task->pos.y.fixed + g_Task->unk_10;
+    setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    g_Task->unk_0C = -0x30000;
+    g_Task->unk_10 = 0;
     func_801DD350(g_Task);
-    x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-    y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[3].vz = -COORD_INT(g_Task->pos.z) / 2;
+    x = g_Task->pos.x.fixed + g_Task->unk_0C;
+    y = g_Task->pos.y.fixed + g_Task->unk_10;
+    setVector(&D_1F800014[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     for (i = 1; i < g_Task->unk_14; i++) {
         if (i >= 56) {
             break;
@@ -449,14 +398,7 @@ MATCH void func_801F04D4(s32 semi) {
         prim->tpage                      = GetTPage(1, trans, 832, 256);
         prim->clut                       = GetClut(0, 482);
         D_1F800000.view.effect.params[0] = (i & 0xF) * 12 + 64;
-        prim->u0                         = 0;
-        prim->v0                         = D_1F800000.view.effect.params[0];
-        prim->u1                         = 196;
-        prim->v1                         = D_1F800000.view.effect.params[0];
-        prim->u2                         = 0;
-        prim->v2                         = D_1F800000.view.effect.params[0] + 11;
-        prim->u3                         = 196;
-        prim->v3                         = D_1F800000.view.effect.params[0] + 11;
+        setUV4(prim, 0, D_1F800000.view.effect.params[0], 196, D_1F800000.view.effect.params[0], 0, D_1F800000.view.effect.params[0] + 11, 196, D_1F800000.view.effect.params[0] + 11);
         RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         D_1F800000.view.effect.params[1] = g_Task->unk_09 << 3;
         setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
@@ -474,11 +416,7 @@ MATCH void func_801F093C(void) {
     s32      x;
     s32      y;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     g_Task->unk_0C = -0x30000;
@@ -599,9 +537,7 @@ MATCH void func_801F0E90(void) {
     work->pos.x.fixed      = battler->pos.x.fixed + work->unk_0C;
     work->pos.y.fixed      = battler->pos.y.fixed + work->unk_10;
     COORD_INT(work->pos.z) = COORD_INT(battler->pos.z) + 0x200;
-    pos.vx                 = (work->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy                 = (work->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz                 = -COORD_INT(work->pos.z) / 2;
+    setVector(&pos, (work->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (work->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(work->pos.z) / 2);
     RotTrans(&pos, (VECTOR*)matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);

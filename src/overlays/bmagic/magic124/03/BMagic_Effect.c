@@ -13,7 +13,7 @@ MATCH void func_801EEC14(void) {
 
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -27,7 +27,7 @@ MATCH void func_801EEC14(void) {
         }
     }
     func_801EF0B0();
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
 }
 
@@ -95,21 +95,11 @@ MATCH void func_801EF0B0(void) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = g_Task->unk_2E.half;
-        poly->y0 = g_Task->unk_30.half;
-        poly->x1 = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12);
-        poly->y1 = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12);
-        poly->x2 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12);
-        poly->y2 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12);
-        poly->r0 = red;
-        poly->g0 = green;
-        poly->b0 = blue;
-        poly->r1 = 1;
-        poly->g1 = 1;
-        poly->b1 = 1;
-        poly->r2 = 1;
-        poly->g2 = 1;
-        poly->b2 = 1;
+        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
+               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
+        setRGB0(poly, red, green, blue);
+        setRGB1(poly, 1, 1, 1);
+        setRGB2(poly, 1, 1, 1);
         GFX_AddPrim(3, sizeof(POLY_G3));
         i++;
     } while (i < 8);
@@ -268,21 +258,11 @@ MATCH void func_801F03E0(void) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = g_Task->unk_2E.half;
-        poly->y0 = g_Task->unk_30.half;
-        poly->x1 = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12);
-        poly->y1 = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12);
-        poly->x2 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12);
-        poly->y2 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12);
-        poly->r0 = centre;
-        poly->g0 = centre;
-        poly->b0 = centre;
-        poly->r1 = red;
-        poly->g1 = green;
-        poly->b1 = blue;
-        poly->r2 = red;
-        poly->g2 = green;
-        poly->b2 = blue;
+        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
+               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
+        setRGB0(poly, centre, centre, centre);
+        setRGB1(poly, red, green, blue);
+        setRGB2(poly, red, green, blue);
         GFX_AddPrim(3, sizeof(POLY_G3));
         i++;
     } while (i < 8);
@@ -307,26 +287,13 @@ MATCH void func_801F05B4(void) {
         poly = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = g_Task->unk_2E.half + ((rsin(i << 9) * outer) >> 12);
-        poly->y0 = g_Task->unk_30.half + ((rcos(i << 9) * outer) >> 12);
-        poly->x1 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * outer) >> 12);
-        poly->y1 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * outer) >> 12);
-        poly->x2 = g_Task->unk_2E.half + ((rsin(i << 9) * inner) >> 12);
-        poly->y2 = g_Task->unk_30.half + ((rcos(i << 9) * inner) >> 12);
-        poly->x3 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * inner) >> 12);
-        poly->y3 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * inner) >> 12);
-        poly->r0 = 1;
-        poly->g0 = 1;
-        poly->b0 = 1;
-        poly->r1 = 1;
-        poly->g1 = 1;
-        poly->b1 = 1;
-        poly->r2 = red;
-        poly->g2 = green;
-        poly->b2 = blue;
-        poly->r3 = red;
-        poly->g3 = green;
-        poly->b3 = blue;
+        setXY4(poly, g_Task->unk_2E.half + ((rsin(i << 9) * outer) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin((i + 1) << 9) * outer) >> 12),
+               g_Task->unk_30.half + ((rcos((i + 1) << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin(i << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * inner) >> 12),
+               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * inner) >> 12));
+        setRGB0(poly, 1, 1, 1);
+        setRGB1(poly, 1, 1, 1);
+        setRGB2(poly, red, green, blue);
+        setRGB3(poly, red, green, blue);
         GFX_AddPrim(3, sizeof(POLY_G4));
         i++;
     } while (i < 8);

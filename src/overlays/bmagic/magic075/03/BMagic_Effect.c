@@ -109,22 +109,14 @@ MATCH void func_801EF2F4(s32 radius) {
 
     radius += g_FrameCount & 1;
     for (i = 0; i < 16; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_Task->unk_2E.half;
-        prim->y0 = g_Task->unk_30.half;
-        prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), radius);
-        prim->y1 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), radius);
-        prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), radius);
-        prim->y2 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), radius);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), radius), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), radius),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), radius), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), radius));
         setRGB0(prim, 0x60, 0x60, 0x60);
         setRGB1(prim, 0x20, 0x20, 0x40);
         setRGB2(prim, 0x20, 0x20, 0x40);
@@ -140,24 +132,15 @@ MATCH void func_801EF500(s32 outer, s32 inner) {
     outer += g_FrameCount & 1;
     inner += g_FrameCount & 1;
     for (i = 0; i < 16; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), outer);
-        prim->y0 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), outer);
-        prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), outer);
-        prim->y1 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), outer);
-        prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), inner);
-        prim->y2 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), inner);
-        prim->x3 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), inner);
-        prim->y3 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), inner);
+        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), outer), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), outer), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), outer),
+               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), outer), g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), inner), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), inner),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), inner), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), inner));
         setRGB0(prim, 0x20, 0x20, 0x40);
         setRGB1(prim, 0x20, 0x20, 0x40);
         setRGB2(prim, 1, 1, 1);

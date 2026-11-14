@@ -67,9 +67,7 @@ MATCH void func_801EF188(void) {
     } else {
         target = &g_Game.members[g_Task->unk_04];
     }
-    pos.vx = (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = (COORD_INT(target->pos.z) + 0xC0) >> 1;
+    setVector(&pos, (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (COORD_INT(target->pos.z) + 0xC0) >> 1);
     if (Battle_SlotIsBlocked(g_Task->unk_03) & BYTE_MASK) {
         g_Task->unk_0C      = (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
         g_Task->unk_10      = (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
@@ -157,9 +155,7 @@ MATCH void func_801EF6A4(void) {
     if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
-    pos.vx = g_Task->unk_0C;
-    pos.vy = g_Task->unk_10;
-    pos.vz = g_Task->unk_14;
+    setVector(&pos, g_Task->unk_0C, g_Task->unk_10, g_Task->unk_14);
     func_800AF3A0(pos, 0x30);
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -176,11 +172,7 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     u8        trans;
 
     trans = semi;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = ((semi & 3) << 7) | 0x25;
-    } else {
-        tpage = ((semi & 3) << 5) | 0x15;
-    }
+    tpage = getTPage(0, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.scenario.math_00 = 36;
@@ -189,8 +181,8 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, trans);
     D_1F800000.view.scenario.math_08 = ((g_Task->timer + 13) & 0xF) << 8;
-    prim->x0                         = g_Task->unk_2E.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00);
-    prim->y0                         = g_Task->unk_30.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00);
+    setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00),
+           g_Task->unk_30.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00));
     D_1F800000.view.scenario.math_08 = ((g_Task->timer + 11) & 0xF) << 8;
     prim->x1                         = g_Task->unk_2E.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00);
     prim->y1                         = g_Task->unk_30.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00);
@@ -202,14 +194,7 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     prim->y3                         = g_Task->unk_30.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00);
     prim->tpage                      = GetTPage(1, trans, 832, 256);
     prim->clut                       = GetClut(0, 506);
-    prim->u0                         = g_Task->param.unk_0B << 5;
-    prim->v0                         = 0;
-    prim->u1                         = (g_Task->param.unk_0B << 5) + 31;
-    prim->v1                         = 0;
-    prim->u2                         = g_Task->param.unk_0B << 5;
-    prim->v2                         = 64;
-    prim->u3                         = (g_Task->param.unk_0B << 5) + 31;
-    prim->v3                         = 64;
+    setUV4(prim, g_Task->param.unk_0B << 5, 0, (g_Task->param.unk_0B << 5) + 31, 0, g_Task->param.unk_0B << 5, 64, (g_Task->param.unk_0B << 5) + 31, 64);
     setRGB0(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }

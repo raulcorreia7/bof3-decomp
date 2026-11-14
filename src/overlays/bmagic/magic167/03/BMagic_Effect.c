@@ -104,7 +104,7 @@ MATCH void func_801EF4B0(void) {
     long     depth;
     s32*     shade;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
     D_1F800014[2].vx = (rsin(0) * 3U) >> 6;
     D_1F800014[2].vy = (rcos(0) * 3U) >> 6;
@@ -113,28 +113,20 @@ MATCH void func_801EF4B0(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = (rsin(i << 8) * 3U) >> 6;
-        D_1F800014[2].vy = (rcos(i << 8) * 3U) >> 6;
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], (rsin(i << 8) * 3U) >> 6, (rcos(i << 8) * 3U) >> 6, 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         poly             = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, &depth, &flag);
-        shade    = &D_1F800004;
-        poly->r0 = *shade;
-        poly->g0 = *shade;
-        poly->b0 = *shade;
-        poly->r1 = *shade;
-        poly->g1 = *shade / 2;
-        poly->b1 = 1;
-        poly->r2 = *shade;
-        poly->g2 = *shade / 2;
-        poly->b2 = 1;
+        shade = &D_1F800004;
+        setRGB0(poly, *shade, *shade, *shade);
+        setRGB1(poly, *shade, *shade / 2, 1);
+        setRGB2(poly, *shade, *shade / 2, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
 }
 
@@ -146,7 +138,7 @@ MATCH void func_801EF708(void) {
     long     flag;
     s32*     shade;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
     D_1F800014[1].vx = (rsin(0) * 3U) >> 6;
     D_1F800014[1].vy = (rcos(0) * 3U) >> 6;
@@ -159,9 +151,7 @@ MATCH void func_801EF708(void) {
         D_1F800014[2].vy = D_1F800014[3].vy;
         D_1F800014[1].vx = (rsin(i << 8) * 3U) >> 6;
         D_1F800014[1].vy = (rcos(i << 8) * 3U) >> 6;
-        D_1F800014[3].vx = (u32)rsin(i << 8) >> 4;
-        D_1F800014[3].vy = (u32)rcos(i << 8) >> 4;
-        D_1F800014[3].vz = 0;
+        setVector(&D_1F800014[3], (u32)rsin(i << 8) >> 4, (u32)rcos(i << 8) >> 4, 0);
         D_1F800014[2].vz = 0;
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
@@ -169,22 +159,14 @@ MATCH void func_801EF708(void) {
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
-        shade    = &D_1F800004;
-        poly->r0 = *shade;
-        poly->g0 = *shade / 2;
-        poly->b0 = 1;
-        poly->r1 = *shade;
-        poly->g1 = *shade / 2;
-        poly->b1 = 1;
-        poly->r2 = 1;
-        poly->g2 = 1;
-        poly->b2 = 1;
-        poly->r3 = 1;
-        poly->g3 = 1;
-        poly->b3 = 1;
+        shade = &D_1F800004;
+        setRGB0(poly, *shade, *shade / 2, 1);
+        setRGB1(poly, *shade, *shade / 2, 1);
+        setRGB2(poly, 1, 1, 1);
+        setRGB3(poly, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
 }
 
@@ -300,17 +282,15 @@ MATCH void func_801F05C8(s32 step) {
         }
         x     = (D_1F800014[0].vx << 9) + g_Task->pos.x.fixed;
         y     = (D_1F800014[0].vy << 9) + g_Task->pos.y.fixed;
-        tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         primitive = (TILE_1*)g_GfxPrimCursor;
         SetTile1(primitive);
         SetSemiTrans(primitive, 1);
         RotTransPers(D_1F800014, (long*)&primitive->x0, &p, &flag);
-        shade         = &D_1F800004;
-        primitive->r0 = *shade;
-        primitive->g0 = *shade;
-        primitive->b0 = *shade;
+        shade = &D_1F800004;
+        setRGB0(primitive, *shade, *shade, *shade);
         /* Retail advances the cell by 0x24 bytes here, more than the tile takes. */
         Area_AddCellPrim(x, y, 0, 0x24);
     }

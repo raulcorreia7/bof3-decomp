@@ -167,18 +167,16 @@ MATCH void func_801EF85C(void) {
     s32      green;
     s32      blue;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = ((rsin((g_Task->param.unk_0B & 0x1F) << 7) * 16) >> 12) + 0x100;
     red                              = g_Task->unk_09 * 10;
     core                             = g_Task->unk_09 * 9;
     blue                             = g_Task->unk_09 * 2;
     green                            = g_Task->unk_09 * 4;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
     for (i = 1; i <= 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
@@ -207,11 +205,7 @@ MATCH void func_801EFAE8(void) {
     u8       green;
     u8       blue;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = ((rsin((g_Task->param.unk_0B & 0x1F) << 7) * 16) >> 12) + 0x100;
@@ -343,52 +337,40 @@ MATCH void func_801F01F0(void) {
     D_1F800000.view.effect.params[7] = g_Task->timer;
     D_1F800000.view.effect.params[3] = g_Task->unk_2E.half;
     D_1F800000.view.effect.params[4] = g_Task->unk_30.half;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    tpage                            = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
 
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y0 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
-    prim->x1 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y1 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
-    prim->x2 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y2 = D_1F800000.view.effect.params[4];
-    prim->x3 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y3 = D_1F800000.view.effect.params[4];
+    setXY4(prim, D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6],
+           D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6],
+           D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7],
+           D_1F800000.view.effect.params[4]);
     setRGB0(prim, shade, shade, shade);
     setRGB1(prim, shade, shade, shade);
     setRGB2(prim, shade, shade, shade);
     setRGB3(prim, shade, shade, shade);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
-    setUV4(prim, 0x40, 0x40, 0xC0, 0x40, 0x40, 0xFF, 0xC0, 0xFF);
+    setUVWH(prim, 0x40, 0x40, 128, 191);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_GT4));
 
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y0 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16;
-    prim->x1 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y1 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16;
-    prim->x2 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y2 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
-    prim->x3 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y3 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
+    setXY4(prim, D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16,
+           D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16,
+           D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6],
+           D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6]);
     setRGB0(prim, 1, 1, 1);
     setRGB1(prim, 1, 1, 1);
     setRGB2(prim, shade, shade, shade);
     setRGB3(prim, shade, shade, shade);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
-    setUV4(prim, 0x40, 0x30, 0xC0, 0x30, 0x40, 0x40, 0xC0, 0x40);
+    setUVWH(prim, 0x40, 0x30, 128, 16);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_GT4));
 }
 

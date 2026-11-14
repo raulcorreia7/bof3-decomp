@@ -181,11 +181,9 @@ MATCH void func_801EFC74(void) {
     }
     D_1F800000.view.effect.params[3] = g_Task->timer * 8;
     D_1F800000.view.effect.params[4] = g_Task->timer * 6;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
     for (i = 1; i <= 16; i++) {
         prim             = GFX_BeginPolyG3(1);
         D_1F800014[0].vx = 0;

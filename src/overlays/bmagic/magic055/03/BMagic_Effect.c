@@ -71,7 +71,7 @@ MATCH void func_801EF240(void) {
     s32       y;
     s32       phase;
 
-    BMAGIC_DRAW_RING_BAND(0x125, 0x55, 2);
+    BMAGIC_DRAW_RING_BAND(2);
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
