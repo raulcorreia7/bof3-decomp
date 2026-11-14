@@ -90,16 +90,12 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
 
     scratch = g_Task;
 
-    rotation.vx = 0;
-    rotation.vy = 0;
-    rotation.vz = ONE / 4;
+    setVector(&rotation, 0, 0, ONE / 4);
     if ((scratch->flags & 0x1u) != 0u) {
         rotation.vz = 0;
     }
 
-    vertex.vx = (scratch->proj.x >> 9) - 0x4000;
-    vertex.vy = (scratch->proj.y >> 9) - 0x4000;
-    vertex.vz = (-scratch->proj_z / 2);
+    setVector(&vertex, (scratch->proj.x >> 9) - 0x4000, (scratch->proj.y >> 9) - 0x4000, (-scratch->proj_z / 2));
 
     RotTransMatrix(&vertex, matrix, &flag);
     Camera_SetModelMatrix(&rotation, &matrix);

@@ -1,11 +1,11 @@
 #include "engine/slus/slus.h"
 
-/* clears one callback slot and closes its thread inside the scheduler
- * critical section.
+/* clears one thread and closes its OS thread inside the scheduler critical
+ * section.
  */
-MATCH void SYS_ThreadClose(s32 callback_slot) {
-    D_80143B40[callback_slot].state = CALLBACK_SLOT_EMPTY;
+MATCH void SYS_ThreadClose(s32 thread_index) {
+    g_SysThreads[thread_index].state = SYS_THREAD_EMPTY;
     EnterCriticalSection();
-    CloseTh(D_80143B40[callback_slot].thread_id);
+    CloseTh(g_SysThreads[thread_index].thread_id);
     ExitCriticalSection();
 }

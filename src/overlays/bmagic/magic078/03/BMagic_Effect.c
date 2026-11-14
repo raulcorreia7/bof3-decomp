@@ -8,25 +8,13 @@ MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EECFC, Effect_PlayOnIdleTick};
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }
@@ -69,13 +57,7 @@ MATCH void func_801EECFC(void) {
 MATCH void func_801EEF28(void) {
     s32 tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
@@ -95,13 +77,7 @@ MATCH void func_801EEF28(void) {
         PopMatrix();
     }
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }
@@ -197,16 +173,12 @@ MATCH void func_801EFEB8(void) {
     long         flags;
 
     PushMatrix();
-    work   = g_Task;
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
+    work = g_Task;
+    setVector(&rot, 0, 0, 0);
     if (work->slot == 13) {
         rot.vz = work->unk_0C;
     }
-    pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -COORD_INT(work->pos.z) / 2;
+    setVector(&pos, (work->pos.x.fixed >> 9) - 0x4000, (work->pos.y.fixed >> 9) - 0x4000, -COORD_INT(work->pos.z) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -214,13 +186,7 @@ MATCH void func_801EFEB8(void) {
 MATCH void func_801EFF84(void) {
     s32 tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
@@ -232,13 +198,7 @@ MATCH void func_801EFF84(void) {
 
     SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }

@@ -8,16 +8,11 @@ MATCH void func_801F4220(AreaStreakSlot* slot) {
     SetLineG2(prim);
     SetSemiTrans(prim, 1);
     Area_ProjectPoint(slot->head, &xy);
-    prim->x0 = xy.vx;
-    prim->y0 = xy.vy;
+    setXY0(prim, xy.vx, xy.vy);
     Area_ProjectPoint(slot->tail, &xy);
     prim->x1 = xy.vx;
     prim->y1 = xy.vy;
-    prim->r0 = slot->head_shade;
-    prim->g0 = slot->head_shade >> 1;
-    prim->b0 = 0;
-    prim->r1 = slot->tail_shade;
-    prim->g1 = slot->tail_shade >> 1;
-    prim->b1 = 0;
+    setRGB0(prim, slot->head_shade, slot->head_shade >> 1, 0);
+    setRGB1(prim, slot->tail_shade, slot->tail_shade >> 1, 0);
     GFX_AddPrim(2, sizeof(LINE_G2));
 }

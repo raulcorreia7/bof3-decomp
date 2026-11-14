@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern void func_801D49F8(s32 handler_index);
-
 MATCH void func_801D3A98(void) {
     MenuPanelTask* task;
     s32            input;
