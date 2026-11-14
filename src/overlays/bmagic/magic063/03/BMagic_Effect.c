@@ -15,7 +15,7 @@ MATCH void func_801EEC18(void) {
         if (D_801F0454[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801F0470, (u8)count << 5);
-            g_BMagicOrbit     = D_801F0454 + ((u8)count << 5);
+            g_BMagicOrbit         = D_801F0454 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EF340();
             g_BattleEffectBattler = saved;
