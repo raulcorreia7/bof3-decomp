@@ -52,6 +52,7 @@ extern u16            D_801EB6C4;
 extern u16            D_801EB6C6;
 extern u16            D_801EB7DC;
 extern u16            D_801EB8F4;
+extern s32            D_801EBF5C;
 extern u16            D_801FD6FC;
 extern u16            D_801FD6FE;
 /* Frame-state word owned by the main executable; the boss018 step reads bit 0. */
