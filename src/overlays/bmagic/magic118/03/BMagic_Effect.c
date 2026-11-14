@@ -82,7 +82,26 @@ MATCH void BMagic_UpdateBurnSprites(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFF4);
+MATCH void func_801EEFF4(void) {
+    PartyMember* src;
+    PartyMember* dst;
+    s32          z;
+
+    if (--g_Task->unk_09 == 0) {
+        src                  = BATTLE_ACTIVE_WORK;
+        dst                  = g_Task;
+        dst->pos.x.fixed     = src->pos.x.fixed;
+        dst->pos.y.fixed     = src->pos.y.fixed;
+        z                    = src->pos.z.fixed;
+        dst->unk_20          = 8;
+        dst->timer           = 2;
+        dst->pos.z.fixed     = z;
+        dst->unk_14          = 0;
+        g_Task->param.unk_0B = 0x10;
+        g_Task->unk_09       = 0x20;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EF0A4(void) {
     PartyMember* work;

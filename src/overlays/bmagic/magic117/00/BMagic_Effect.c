@@ -6,7 +6,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC24.h"
 
-INCLUDE_ASM(func_801EEC90);
+MATCH void func_801EEC90(void) {
+    PartyMember** actor;
+
+    actor = &g_Battle.selected_actor;
+    GFX_FreePaletteFadeTarget(*actor);
+    g_Task->param.unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 2;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EED2C(void) {
     /* kept: a helper taking the step shares func_801EF0F8's body but drops retail's 16-byte frame here, 4 bytes

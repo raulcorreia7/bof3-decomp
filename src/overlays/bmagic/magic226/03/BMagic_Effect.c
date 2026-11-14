@@ -263,7 +263,25 @@ MATCH void func_801F04D4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F055C);
+MATCH void func_801F055C(void) {
+    PartyMember* src;
+    PartyMember* dst;
+    s32          z;
+
+    if (--g_Task->unk_09 == 0) {
+        g_Task->facing   = BATTLE_ACTIVE_WORK->facing;
+        src              = BATTLE_ACTIVE_WORK;
+        dst              = g_Task;
+        dst->pos.x.fixed = src->pos.x.fixed;
+        dst->pos.y.fixed = src->pos.y.fixed;
+        z                = src->pos.z.fixed;
+        dst->unk_14      = 0x60000;
+        dst->unk_09      = 8;
+        dst->pos.z.fixed = z - (3 << 24);
+        g_Task->timer    = 16;
+        g_Task->header.step++;
+    }
+}
 
 INCLUDE_ASM(func_801F061C);
 
