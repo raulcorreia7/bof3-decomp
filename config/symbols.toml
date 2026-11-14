@@ -160,7 +160,7 @@ jtbl_80096934 = { addr = 0x80096934, type = "Callback", source = "The switch tab
 jtbl_80096954 = { addr = 0x80096954, type = "Callback", source = "The switch table of func_8009CF80: the jump targets of its jr dispatch." }
 jtbl_80096974 = { addr = 0x80096974, type = "Callback", source = "The switch table of func_800A805C: the jump targets of its jr dispatch." }
 g_MenuInventoryCountFormat = { addr = 0x80096A4C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
-jtbl_80096A5C = { addr = 0x80096A5C, type = "Callback", source = "The switch table of func_800B3AE8: the jump targets of its jr dispatch." }
+jtbl_80096A5C = { addr = 0x80096A5C, type = "Callback", source = "The switch table of Menu_DrawEquipChoiceWindow: the jump targets of its jr dispatch." }
 Battle_SetCommandType = { addr = 0x80096FBC, type = "func", source = "the body stores into g_BattleActorTurn->command.type" }
 Battle_GetPanelPosX = { addr = 0x8009704C, type = "func", source = "the body returns g_MenuPanelTasks[16].pos.x" }
 Battle_IsAbilityLocked = { addr = 0x80097574, type = "func", source = "returns true when the selected ability cannot be used in battle" }
@@ -221,6 +221,7 @@ Battle_DrawInventoryPanel = { addr = 0x800B2104, type = "func", source = "runs t
 Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "Slides the menu panel to the left." }
 Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "Draws one MenuIconPrim from uv/clut." }
+Menu_DrawEquipChoiceWindow = { addr = 0x800B3AE8, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "Escape chances by party and enemy agility difference." }
 s_BattleAffinityLevelBonus = { addr = 0x800B4E94, source = "Affinity bonus by affinity level." }
 D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Mode handlers of queued battle effect handler 0x0F: select the facing script, close on the target, hop until the vertical speed reaches -0x40, then restore the battler." }
@@ -248,9 +249,12 @@ s_BattlePanelSelectedMarker = { addr = 0x800B6DCC, source = "Sprite run marking 
 s_BattlePanelUnselectedMarker = { addr = 0x800B6DD4, source = "Sprite run marking an unselected panel slot." }
 s_BattlePanelValueRun = { addr = 0x800B6DDC, source = "Sprite run for the battle panel values." }
 g_MenuInventoryTitles = { addr = 0x800B6E88, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuEquipTitles = { addr = 0x800B6F28, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 s_BattlePanelUseLabel = { addr = 0x800B6F3C, source = "Label for the use entry of a battle panel." }
 s_BattlePanelEquipLabel = { addr = 0x800B6F40, source = "Label for the equip entry of a battle panel." }
 s_BattleEquipment = { addr = 0x800B6F50, source = "The six equipment item ids of the battle panel character: weapon, shield, helmet, armor and two accessories." }
+g_MenuEquipChoiceIds = { addr = 0x800B6F70, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x800B6FF0, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 g_BattleEnemyEvents = { addr = 0x800E407C, source = "The event packets of each enemy kind record of the encounter block, one 0x88-byte record per kind; Battle_TriggerEnemyEvents walks them." }
 D_801454F4 = { addr = 0x801454F4, source = "Group index of each battle selection row, 3 bytes per row, row number D_8014857A." }
 D_80145F04 = { addr = 0x80145F04, source = "The battle panel records, stride 0x140, one per party slot: Battle_RescaleStats and the battle overlays read a member's stats, name and command state from a row." }
@@ -1111,9 +1115,13 @@ Effect_CountUpAndStepAt32 = { addr = 0x801EF9DC, type = "func", source = "Counts
 g_BMagicEffectModes = { addr = 0x801F0028, source = "Handlers of magic088 (Molasses, Tarbaby, Slow…), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic091/03"]
+g_BattleEffectPalette = { addr = 0x8003AC00, source = "the palette row the magic091 effect fills from g_BattlePalettes: entries 1 to 15 with the high bit set, entry 0 clear" }
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 D_801EEC04 = { addr = 0x801EEC04, type = "ActorEffectSteps", source = "Step handlers of magic091, run by header.mode (byte 0x01) from Effect_DrawActor; the three Callback slots are copied to a local table first." }
 Effect_DecayTimersAndPlay = { addr = 0x801EEEA8, type = "func", source = "Counts the effect timer (byte 0x09) down while the ticker (byte 0x0B) is under 4 and the counter (byte 0x0A) down while it is under 3; once the top halfword of work word 0x08 is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic091 (Flare)." }
 Effect_FollowTarget = { addr = 0x801EEFFC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero copies the active battler's position into the effect, reloads the timer with 0x40, clears the counter (byte 0x0A) and ticker (byte 0x0B) and advances header.mode (byte 0x01) in magic091 (Flare)." }
@@ -3418,6 +3426,7 @@ g_MenuListTab2OnSprites = { addr = 0x801EC76C, source = "the sprite run of the l
 g_MenuInventoryTab1OnSprites = { addr = 0x801EC778, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuListTab1OffSprites = { addr = 0x801EC784, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801EC790, source = "the sprite run of the list panel's first tab while its flag is set" }
+g_MenuExperienceSprites = { addr = 0x801EC79C, source = "Sprite run drawn over the experience window by the experience window draw." }
 g_MenuEquipStatSprites = { addr = 0x801EC7F8, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801EC940, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
@@ -3851,6 +3860,7 @@ Scene_DrawBands = { addr = 0x801D165C, type = "func", source = "Draws 17 depth s
 ["emi/scenario/sce15ef0/00"]
 Scene_DispatchEntity = { addr = 0x801D0C04, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+GFX_DrawColorFan = { addr = 0x801D1A20, type = "func", source = "Draws a ring of 32 semi-transparent triangles around a projected point, the radius the point projected at the given size plus the frame parity, the centre corner coloured by the low three bits of the flags; one body shared by sce15ef0 and area098." }
 g_SceneEntityDispatch = { addr = 0x801D1F88, source = "scenario entity dispatch table" }
 
 ["emi/scenario/sce15ef1/00"]
@@ -3875,6 +3885,7 @@ Scene_DispatchEntity = { addr = 0x801D0C04, type = "func", source = "dispatches 
 func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_EndScan = { addr = 0x801D15CC, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Area_FindFreeSpriteRow = { addr = 0x801D171C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
+Area_StepSparkEmitters = { addr = 0x801D1A60, type = "func", source = "Counts down every active spark emitter and spawns two sprite sparks near it as its timer runs out; returns whether any is active; one body shared by sce15ef3 and area143." }
 Scene_DrawRedGradient = { addr = 0x801D1BAC, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
 Scene_SetXFixed = { addr = 0x801D230C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 Scene_DrawRedFade = { addr = 0x801D23AC, type = "func", source = "Draws the full-screen semi-transparent red fade tile at red intensity." }
@@ -3920,7 +3931,7 @@ jtbl_801F715C = { addr = 0x801F715C, type = "Callback", source = "The switch tab
 Area_DrawSparkCell = { addr = 0x801F7A24, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
 Area_ClearWorkColumn = { addr = 0x801F7AB8, type = "func", source = "Clears one byte of each row in the actor window." }
 Area_AddSpark = { addr = 0x801F7AE4, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
-Scene_DrawSparkCell = { addr = 0x801F7C54, type = "func", source = "wraps Area_DrawSparkCell" }
+Area_StepSparks = { addr = 0x801F7C54, type = "func", source = "Steps every live spark: drops it by its fall speed, draws it and frees it below the work floor; one body shared by scena01 and area082." }
 Scene_EnterCedarWoods = { addr = 0x801F8000, type = "func", source = "requests the area change to Cedar Woods before Nue and resets scene script state in scena01" }
 Scene_InitOpeningParty = { addr = 0x801FE10C, type = "func", source = "loads Ryu pajamas, Teepo, and Rei archives and joins Ryu pajamas as the opening party in scena01" }
 Scene_SetPartyRyuTeepoRei = { addr = 0x801FE1B0, type = "func", source = "sets young Ryu's character id, streams party archives and joins Ryu, Teepo and Rei for the scene setup" }
@@ -4092,6 +4103,7 @@ jtbl_801F6CD4 = { addr = 0x801F6CD4, type = "Callback", source = "The switch tab
 jtbl_801F6D74 = { addr = 0x801F6D74, type = "Callback", source = "The switch table of func_801FD0DC: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6DCC, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801F6DD4 = { addr = 0x801F6DD4, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_InitSpark = { addr = 0x801F83D0, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 MATH_AverageAngle = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F8F90, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
@@ -4115,6 +4127,7 @@ jtbl_801F6D94 = { addr = 0x801F6D94, type = "Callback", source = "The switch tab
 jtbl_801F6DB4 = { addr = 0x801F6DB4, type = "Callback", source = "The switch table of func_801FD704: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6F48, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_InitSpark = { addr = 0x801F8B50, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 MATH_AverageAngle = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F9470, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
@@ -4291,6 +4304,7 @@ jtbl_801F6D3C = { addr = 0x801F6D3C, type = "Callback", source = "The switch tab
 jtbl_801F6DA4 = { addr = 0x801F6DA4, type = "Callback", source = "The switch table of func_801F9320: the jump targets of its jr dispatch." }
 jtbl_801F6E2C = { addr = 0x801F6E2C, type = "Callback", source = "The switch table of func_801F9834: the jump targets of its jr dispatch." }
 jtbl_801F6F54 = { addr = 0x801F6F54, type = "Callback", source = "The switch table of func_801FA9C8: the jump targets of its jr dispatch." }
+Scene_SpawnActor = { addr = 0x801F7A18, type = "func", source = "Claims a free actor slot and seeds its type, camera angles, scene step and layer; returns whether a slot was free; one role shared by scena14 and scena15." }
 Scene_DispatchActor = { addr = 0x801FB37C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultReiNinaAdult = { addr = 0x801FBD2C, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size and joins adult Ryu, Rei then adult Nina with Party_JoinMember, without the palette restage and in a different join order than Scene_SetPartyRyuAdultNinaAdultRei." }
 Scene_SetPartyRyuAdultReiPeco = { addr = 0x801FBD78, type = "func", source = "Streams the EMI family for adult Ryu, Rei and Peco, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
@@ -4314,6 +4328,7 @@ Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "Clears one 
 Area_AddSpark = { addr = 0x801F75D8, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
 Scene_GetZFixed = { addr = 0x801F7748, type = "func", source = "the body returns g_Task->pos.z.fixed" }
 Scene_ClearActor = { addr = 0x801F9000, type = "func", source = "clears the current actor" }
+Scene_SpawnActor = { addr = 0x801FA854, type = "func", source = "Claims a free actor slot and seeds its type, camera angles, scene step and layer; returns whether a slot was free; one role shared by scena14 and scena15." }
 Scene_DispatchActor = { addr = 0x801FDD80, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowEntityMessage = { addr = 0x801FDDC0, type = "func", source = "starts the entity callback-indexed area message for the current desert camp area and enters the message state" }
 Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Garr, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
@@ -4938,6 +4953,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 Area_DrawSparkCell = { addr = 0x801F387C, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
 Area_ClearWorkColumn = { addr = 0x801F3910, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 Area_AddSpark = { addr = 0x801F393C, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
+Area_StepSparks = { addr = 0x801F3AAC, type = "func", source = "Steps every live spark: drops it by its fall speed, draws it and frees it below the work floor; one body shared by scena01 and area082." }
 
 ["emi/world02/area084/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -5049,6 +5065,7 @@ g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master men
 g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_UpdateSpawn = { addr = 0x801F3AA8, type = "func", source = "Runs one frame of the spawn work: claims a slot every fourth frame of g_Task +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_Task +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)." }
+GFX_DrawColorFan = { addr = 0x801F46EC, type = "func", source = "Draws a ring of 32 semi-transparent triangles around a projected point, the radius the point projected at the given size plus the frame parity, the centre corner coloured by the low three bits of the flags; one body shared by sce15ef0 and area098." }
 Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 Area_ClaimSpawnSlot = { addr = 0x801F526C, type = "func", source = "Claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_UpdateSpawnSlots." }
@@ -5063,6 +5080,7 @@ Area_ResetCameraOffsetZ = { addr = 0x801F2C24, type = "func", source = "Zeroes g
 ["emi/world02/area100/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x14, source = "The switch table of func_801F37AC: 5 jump targets of its jr dispatch." }
 jtbl_801F2C1C = { addr = 0x801F2C1C, type = "Callback", size = 0x14, source = "The switch table of func_801F38D8: 5 jump targets of its jr dispatch." }
+Area_DrawMatrixLightPillar = { addr = 0x801F2D60, type = "func", source = "Draws a pillar of light at pos like Area_DrawLightPillar, with the camera matrix in a local of its own; one body shared by area100 and area145." }
 Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Area_AddCameraOffsetY4 = { addr = 0x801F3630, type = "func", source = "Adds 4 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_SubCameraOffsetY4 = { addr = 0x801F3658, type = "func", source = "Subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
@@ -5343,6 +5361,7 @@ g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master men
 g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_FindFreeSpriteRow = { addr = 0x801F2D7C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
+Area_StepSparkEmitters = { addr = 0x801F30A0, type = "func", source = "Counts down every active spark emitter and spawns two sprite sparks near it as its timer runs out; returns whether any is active; one body shared by sce15ef3 and area143." }
 Message_SelectAnswer = { addr = 0x801F3ACC, type = "func", source = "Sets g_MessageRequest to 0x4A when g_MessageChoice is nonzero, otherwise to 0x49." }
 Message_ClearRequest = { addr = 0x801F3B8C, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
 Message_Clear = { addr = 0x801F3BCC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
@@ -5359,6 +5378,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world03/area145/14"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x8C, source = "The switch table of func_801F45EC: 35 jump targets of its jr dispatch." }
+Area_DrawMatrixLightPillar = { addr = 0x801F3980, type = "func", source = "Draws a pillar of light at pos like Area_DrawLightPillar, with the camera matrix in a local of its own; one body shared by area100 and area145." }
 Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 Message_ShowParty = { addr = 0x801F403C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Area_SkipIfHasKey = { addr = 0x801F4304, type = "func", source = "Script branch: skips the next 3 script bytes when Item_VitalHas(VITAL_ITEM_KEY) reports the key; no C caller, it is reached through the area145 script tables." }

@@ -17,16 +17,7 @@ extern u8      D_8014496D;
 /* The tile map scan: four byte records per work row, the map offset and code. */
 extern u8      D_801F4CB0[];
 
-/* One row of the world map message table: the context seed it answers, over the
- * message the scenario id selects. */
-typedef union WorldMapMessageRow {
-    u16 seed;
-    s16 messages[16];
-} WorldMapMessageRow;
-
-ASSERT_SIZE(WorldMapMessageRow, 0x20);
-ASSERT_OFFSET(WorldMapMessageRow, seed, 0x00);
-ASSERT_OFFSET(WorldMapMessageRow, messages, 0x00);
+#include "overlays/area/WorldMapMessage.h"
 
 #define WORLD_MAP_MESSAGE_ROWS 6
 extern WorldMapMessageRow D_801F4EA4[WORLD_MAP_MESSAGE_ROWS];

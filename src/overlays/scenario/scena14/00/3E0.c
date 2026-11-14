@@ -22,7 +22,9 @@ INCLUDE_ASM(func_801F7028);
 
 INCLUDE_ASM(func_801F7960);
 
-INCLUDE_ASM(func_801F7A18);
+#include "overlays/scenario/Scene_SpawnActor.h"
+
+MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FC4C0)}
 
 MATCH void func_801F7B5C(void) {
     SYS_DISPATCH_BYTE(D_801FC424, g_SceneState.state_04);
