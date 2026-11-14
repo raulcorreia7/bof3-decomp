@@ -20,6 +20,8 @@ g_BGMTracks = { addr = 0x80181EB8, size = 0x294, source = "Music tracks: the BGM
 g_BattlePhases = { addr = 0x801D0C04, source = "Battle mode handlers, one per battle mode." }
 g_BattleEntrances = { addr = 0x801D0C1C, source = "Battle entrance handlers." }
 jtbl_801D0C2C = { addr = 0x801D0C2C, type = "Callback", source = "The switch table of func_801D5024: the jump targets of its jr dispatch." }
+g_BattleIconPalette = { addr = 0x801D0C64, source = "The palette entries of the battle icon CLUT row." }
+g_BattleDamageSpread = { addr = 0x801D0C7C, source = "The eight random damage percentages Battle_CalcDamage picks from." }
 g_BattleEvents = { addr = 0x801D0C84, source = "Battle event handlers." }
 s_BattleCueIds = { addr = 0x801D0C98, source = "Picks a random battle cue id for the battle mode." }
 jtbl_801D0CA0 = { addr = 0x801D0CA0, type = "Callback", source = "The switch table of func_801DEFE4: the jump targets of its jr dispatch." }
@@ -222,6 +224,7 @@ Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "Slides the m
 Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "Draws one MenuIconPrim from uv/clut." }
 Menu_DrawEquipChoiceWindow = { addr = 0x800B3AE8, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+g_BattleScrollDeltas = { addr = 0x800B44C0, source = "The camera scroll step of each scroll direction; the battle scroll routines add one entry indexed by g_Battle.scroll_dir." }
 g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "Escape chances by party and enemy agility difference." }
 s_BattleAffinityLevelBonus = { addr = 0x800B4E94, source = "Affinity bonus by affinity level." }
 D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Mode handlers of queued battle effect handler 0x0F: select the facing script, close on the target, hop until the vertical speed reaches -0x40, then restore the battler." }
@@ -2282,6 +2285,7 @@ Boss_EndBattle = { addr = 0x800C1BEC, type = "func", source = "Ends the boss bat
 
 ["emi/boss/boss033/16"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+g_BattleScrollDeltas = { addr = 0x800B44C0, alias = true, source = "The camera scroll step of each scroll direction." }
 Boss_InstallBattleHooks = { addr = 0x800C1D70, type = "func", source = "Installs the boss battle hooks of boss033: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
 Boss_HandleBattleEvent = { addr = 0x800C1DA8, type = "func", source = "Handles the boss battle events of boss033: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C1DB0, type = "func", source = "Chooses how the boss battle of boss033 ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC934(0), sets D_80146875 to 8, copies D_80145EC4 and D_80145EC8 into g_AreaScrollTargetX and g_AreaScrollTargetY and runs func_801DDED8; otherwise runs func_801DDF00." }
@@ -2418,6 +2422,7 @@ Boss_CopyEffectTransform = { addr = 0x800C3284, type = "func", source = "copies 
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 
 ["emi/etc/bate/00"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 g_MenuStatFormat = { addr = 0x801D0C20, source = "Format string of the four stat values of the Bate menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuExperienceFormat = { addr = 0x801D0C34, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
 g_MenuExperienceBlank = { addr = 0x801D0C38, source = "Dashes the experience panel prints in place of the value when it is -1." }
@@ -2526,6 +2531,7 @@ g_MenuEquipChoiceIds = { addr = 0x801D8F48, source = "the item ids of the equip 
 g_MenuEquipChoiceCounts = { addr = 0x801D8FC8, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 
 ["emi/etc/commu00/00"]
+g_FairyVillageHead = { addr = 0x801EEC00, source = "The fairy village overlay's payload prologue: its overlay id, the exploration success thresholds and the label caps." }
 jtbl_801EEC0C = { addr = 0x801EEC0C, type = "Callback", source = "The switch table of Fairy_SpawnWorker: the jump targets of its jr dispatch." }
 g_FairyGifts = { addr = 0x801EEC48, source = "Fairy_GrantGift copies the FairyGift table" }
 Fairy_InitVillage = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
@@ -2552,6 +2558,7 @@ g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy,
 # Fairy table extents; the types are in include/game/fairy.h.
 
 ["emi/etc/commu01/07"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01States." }
 Fairy_GetJobActive = { addr = 0x801D3A48, type = "func", source = "the body returns g_FairyJobs[i].active" }
 g_Commu01States = { addr = 0x801D4BCC, source = "the 3 step handlers of the commu01 scene, called by func_801D0C2C (the overlay entry) and indexed by the commu step byte D_801F294C" }
@@ -2559,6 +2566,7 @@ g_Commu01Step2Funcs = { addr = 0x801D4BD8, source = "3 sub-step handlers of step
 g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "6 handlers of sub-step 1 of step 2 of the commu01 scene, called by func_801D1328 (the sub-step 1 handler of step 2) and indexed by the commu sub-step byte D_801F294D" }
 
 ["emi/etc/commu02/08"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu02 scene: dispatches on the step byte D_801F294C through g_Commu02Event0States." }
 Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
 Menu_StartFairyEventMessage = { addr = 0x801D5D98, type = "func", source = "starts area message 0xEE and advances the event step once" }
@@ -2594,6 +2602,7 @@ g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas recor
 g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
 
 ["emi/etc/commu03/06"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
 Fairy_EndCommuScene = { addr = 0x801D121C, type = "func", source = "Last slot of g_Commu03Step2Funcs; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
 g_Commu03States = { addr = 0x801D18C8, source = "the 3 step handlers of the commu03 scene, called by func_801D0C44 (the overlay entry) and indexed by the commu step byte D_801F294C" }
@@ -2602,12 +2611,14 @@ g_Commu03Step1Funcs = { addr = 0x801D18DC, source = "2 sub-step handlers of step
 g_Commu03Step2Funcs = { addr = 0x801D18E4, source = "4 sub-step handlers of step 2 of the commu03 scene, called by func_801D1058 (the step 2 handler) and indexed by the commu sub-step byte D_801F294D" }
 
 ["emi/etc/commu04/06"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C04 = { addr = 0x801D0C04, type = "func", source = "Entry of the commu04 scene: dispatches on the step byte D_801F294C through the D_801D1750 handlers, then refreshes the panels when the game state is 0." }
 Fairy_EndCommuScene = { addr = 0x801D1670, type = "func", source = "Last slot of g_Commu04States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
 g_Commu04States = { addr = 0x801D1750, source = "the 2 step handlers of the commu04 scene, called by func_801D0C04 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu04Step0Funcs = { addr = 0x801D1758, source = "7 sub-step handlers of step 0 of the commu04 scene, called by func_801D0C5C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
 
 ["emi/etc/commu05/07"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C10 = { addr = 0x801D0C10, type = "func", source = "Entry of the commu05 scene: dispatches on the step byte D_801F294C through the D_801D1950 handlers." }
 g_Commu05States = { addr = 0x801D1950, source = "the 3 step handlers of the commu05 scene, called by func_801D0C10 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 
@@ -2969,6 +2980,7 @@ UI_UpdateBannerFade = { addr = 0x801D18F8, type = "func", source = "Advances the
 UI_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "Advances the two window alpha channels and draws the visible prompt layers." }
 
 ["emi/etc/shisu/00"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 g_MenuStatFormat = { addr = 0x801D0C04, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuZennyFormat = { addr = 0x801D0C28, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C2C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
@@ -3266,6 +3278,7 @@ SAVE_AccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes 
 SAVE_ScanDirectory = { addr = 0x801EFCA8, alias = true, source = "Copies the firstfile and nextfile entries that match prefix into the 15-slot g_SaveCardDirectory table." }
 
 ["emi/etc/sisyou/00"]
+g_MasterMenuHead = { addr = 0x801D0C00, source = "The master menu overlay's payload prologue: its overlay id and the three number formats of its panels." }
 g_MenuCurrentValueFormat = { addr = 0x801D0C08, source = "Format of the current value of an HP or AP pair printed in a party row (Menu_DrawMasterPartyRow); the maximum follows through g_MenuMaxValueFormat." }
 g_MenuMaxValueFormat = { addr = 0x801D0C10, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
 Menu_ResetMasterPanel = { addr = 0x801D0C18, type = "func", source = "Clears the master panel step, sub-step, lock and scroll bytes D_801D4285 to D_801D4289; the game overlay calls it after streaming slot 0x267." }
@@ -7569,6 +7582,7 @@ g_MenuPanelOrigins = { addr = 0x8017F90C, source = "Origins of the menu panels."
 g_AreaLoads = { addr = 0x8017F974, type = "AreaLoad", source = "The area load records." }
 g_AreaEncounterZones = { addr = 0x8017FC94, source = "The area encounter zones." }
 g_EncounterZones = { addr = 0x80181164, source = "Encounter zone lists, one per map." }
+g_SceneFlagPairs = { addr = 0x80181484, source = "Two flag bytes per scene id; Area_SelectSceneRecord copies the pair of the matched scene id into the task." }
 g_FacingOffsets = { addr = 0x80181AC0, type = "FacingStep", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
 g_CharSlot = { addr = 0x80181B10, size = 12, source = "Character slot map." }
 g_FacingSteps = { addr = 0x80181B94, type = "FacingStep", source = "8 facing steps, Char_ProbeFacingCell adds step x and y to a position" }
