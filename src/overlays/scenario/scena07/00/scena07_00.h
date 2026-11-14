@@ -108,6 +108,8 @@ static inline void Scene_PlaceAtLead(void) {
 }
 
 void      func_801F83D0(u8* row);
+u8*       func_801F8394(void);
+void      func_801F8478(u8* row);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);
 void      func_801FA38C(void);

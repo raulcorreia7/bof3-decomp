@@ -238,7 +238,21 @@ MATCH void func_801F7A30(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801F7AB0);
+MATCH void func_801F7AB0(void) {
+    u8* row;
+
+    func_801F9330(D_801FDFC0);
+    if (g_Task->vx >= 9) {
+        row = func_801F8394();
+        if (((g_Task->vx & 3) == 0) && (row != NULL)) {
+            func_801F8478(row);
+        }
+    }
+    func_801F85D8();
+    if (--g_Task->vx == 0) {
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F7B68(void) {
     if (!(func_801F85D8() & BYTE_MASK)) {
