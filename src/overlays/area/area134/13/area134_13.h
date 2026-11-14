@@ -34,13 +34,13 @@ s32 func_801F49A0(void);
 /* The request bytes the selection clear tests. */
 /* Spawn an actor record at the focus point and copy the work position into it. */
 static inline void World_SpawnActorAtFocus(void) {
-    ActorSlot* slot;
+    SpawnedActor* slot;
     Actor*     work;
     u8         index;
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {
-        slot               = &g_ActorSlots[index];
+        slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;
         slot->type         = 0x90;
         slot->header.mode  = 0;

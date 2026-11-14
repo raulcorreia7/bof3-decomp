@@ -13,7 +13,7 @@ MATCH void func_801F2C40(void) {
     slot                     = Actor_FindFreeSlot();
     g_Task->param.actor_slot = slot;
     if (g_Task->param.actor_slot != GAME_NONE) {
-        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
-        g_ActorSlots[g_Task->param.actor_slot].type         = 0x1B;
+        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
+        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x1B;
     }
 }

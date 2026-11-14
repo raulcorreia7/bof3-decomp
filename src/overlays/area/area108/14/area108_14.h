@@ -33,7 +33,7 @@ void func_801F3588(u8* dst, u8* src, u16* state);
 
 typedef struct Area108Scratch {
     u8       unk_00[0x34];
-    Point3DL pos;
+    Point3l pos;
 } Area108Scratch;
 
 ASSERT_SIZE(Area108Scratch, 0x40);
@@ -77,7 +77,7 @@ void func_801F321C(void);
 void Area_DrawScreenTint(void);
 void func_801F3C84(void);
 
-extern Point2D D_801F63DC[];
+extern Point2s D_801F63DC[];
 
 void func_801F55F0(u8 raise);
 

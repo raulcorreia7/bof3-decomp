@@ -54,7 +54,7 @@ typedef struct SceneSpark {
     s32      vy; /* 0x0C */
     s32      vz; /* 0x10 */
     u8       pad_14[4];
-    Point3DL pos;       /* 0x18 */
+    Point3l pos;       /* 0x18 */
     u8       pad_24[4]; /* 0x24 */
 } SceneSpark;
 

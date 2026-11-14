@@ -7,13 +7,13 @@ MATCH void Actor_Create(u8* request) {
 
     slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags      = 1;
-        g_ActorSlots[slot].type              = request[1];
-        COORD_INT(g_ActorSlots[slot].pos.x)  = request[3];
-        COORD_FRAC(g_ActorSlots[slot].pos.x) = (request[2] != 0) << 0xF;
-        COORD_INT(g_ActorSlots[slot].pos.y)  = request[5];
-        COORD_FRAC(g_ActorSlots[slot].pos.y) = (request[4] != 0) << 0xF;
-        COORD_INT(g_ActorSlots[slot].pos.z)  = Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, g_ActorSlots[slot].pos.y.fixed);
-        g_ActorSlots[slot].link              = request[6];
+        g_SpawnedActors[slot].header.flags      = 1;
+        g_SpawnedActors[slot].type              = request[1];
+        COORD_INT(g_SpawnedActors[slot].pos.x)  = request[3];
+        COORD_FRAC(g_SpawnedActors[slot].pos.x) = (request[2] != 0) << 0xF;
+        COORD_INT(g_SpawnedActors[slot].pos.y)  = request[5];
+        COORD_FRAC(g_SpawnedActors[slot].pos.y) = (request[4] != 0) << 0xF;
+        COORD_INT(g_SpawnedActors[slot].pos.z)  = Area_SampleHeight(g_SpawnedActors[slot].pos.x.fixed, g_SpawnedActors[slot].pos.y.fixed);
+        g_SpawnedActors[slot].link              = request[6];
     }
 }

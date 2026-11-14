@@ -1,7 +1,7 @@
 #include "area100_13.h"
 
 MATCH void func_801F38D8(void) {
-    ActorSlot* slot;
+    SpawnedActor* slot;
     u8         index;
 
     switch (g_SceneEventStep) {
@@ -13,7 +13,7 @@ MATCH void func_801F38D8(void) {
             if (g_ScriptVars[0] == 1) {
                 index = Actor_FindFreeSlot() & BYTE_MASK;
                 if (index != 0xFF) {
-                    slot               = &g_ActorSlots[index];
+                    slot               = &g_SpawnedActors[index];
                     slot->header.flags = ACTOR_FLAG_IN_USE;
                     slot->type         = 0x9B;
                     slot->pos.x.fixed  = 0x460000;

@@ -109,7 +109,7 @@ typedef struct EncounterEnemy {
     u8       active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
     u8       id;     /* 0x01 - the enemy-record index; 0xFF means none */
     u8       pad_02[2];
-    Point2DL pos; /* 0x04 encounter position, 16.16 */
+    Point2l pos; /* 0x04 encounter position, 16.16 */
 } EncounterEnemy;
 
 ASSERT_SIZE(EncounterEnemy, 0x0C);

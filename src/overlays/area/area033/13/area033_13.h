@@ -45,7 +45,7 @@ extern u8             D_801F4FA3[];
 extern WorldMapMarker D_801F4FF8[6];
 extern void (*D_801F5010[])(void);
 /* D_801F501C */
-extern UPoint2D g_FlockVelocity[4];
+extern Point2u g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
 /* D_801F502C */
 extern u8       g_FlockScript[4][2];

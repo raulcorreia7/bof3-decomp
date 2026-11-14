@@ -1,7 +1,7 @@
 #include "area082_13.h"
 
 MATCH void func_801F3264(void) {
-    Point3DL pos;
+    Point3l pos;
     s16      x;
     s16      y;
     u16      z;

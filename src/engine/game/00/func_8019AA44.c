@@ -2,7 +2,7 @@
 
 MATCH void func_8019AA44(void) {
     Actor*    work;
-    Point3DL* angle;
+    Point3l* angle;
 
     work = g_Task;
     if (work->timer != 0) {

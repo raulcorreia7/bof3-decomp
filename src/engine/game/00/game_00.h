@@ -212,7 +212,7 @@ typedef struct FieldSearchSpotFadeStates {
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
-    Point3D pos;
+    Point3s pos;
     u8      unk_06[0x0A];
     SVECTOR rotation; /* 0x10 */
     SVECTOR corners[4];
@@ -380,15 +380,15 @@ extern s32                       D_80147CBC[];
 extern s32                       D_80147CC0[];
 extern s32                       D_80147CC4[];
 extern u16                       D_801481D8;
-extern Point3DL                  D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Point3DL                  D_801481F8;   /* per-frame step of D_801481E8 */
+extern Point3l                  D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Point3l                  D_801481F8;   /* per-frame step of D_801481E8 */
 extern s16                       D_8014820C;   /* 0x8014820C */
 extern s8                        D_80148654;   /* 0x80148654 */
 extern s8                        D_80148656;   /* 0x80148656 */
 extern s8                        D_801490E0;   /* 0x801490E0 */
 extern u8                        D_801581E0[]; /* 0x801581E0 */
 extern u8*                       g_EncounterZones[];
-extern Point2DL                  g_FacingOffsets[]; /* 0x80181AC0 */
+extern Point2l                  g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                        D_80181B00[];
 extern s8                        D_80181B01[];
 extern u8                        D_80181B1C[];   /* 0x80181B1C */

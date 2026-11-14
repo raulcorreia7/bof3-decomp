@@ -551,11 +551,11 @@ MATCH void func_801FC094(void) {
         if (slot_index == GAME_NONE) {
             break;
         }
-        g_ActorSlots[slot_index].header.flags     = 1;
-        g_ActorSlots[slot_index].type             = 0x18;
-        g_ActorSlots[slot_index].link             = 0x18;
-        COORD_INT(g_ActorSlots[slot_index].pos.x) = D_801FDE40[i].x;
-        COORD_INT(g_ActorSlots[slot_index].pos.y) = D_801FDE40[i].y;
+        g_SpawnedActors[slot_index].header.flags     = 1;
+        g_SpawnedActors[slot_index].type             = 0x18;
+        g_SpawnedActors[slot_index].link             = 0x18;
+        COORD_INT(g_SpawnedActors[slot_index].pos.x) = D_801FDE40[i].x;
+        COORD_INT(g_SpawnedActors[slot_index].pos.y) = D_801FDE40[i].y;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2) + i % 3);
     }
 }
@@ -660,12 +660,12 @@ MATCH void func_801FD5A0(void) {
     D_80146874 = 7;
 }
 
-MATCH ActorSlot* func_801FD610(u8 mode) {
-    ActorSlot* slot;
+MATCH SpawnedActor* func_801FD610(u8 mode) {
+    SpawnedActor* slot;
     s32        index;
 
     index = Actor_FindFreeSlot() & BYTE_MASK;
-    slot  = &g_ActorSlots[index];
+    slot  = &g_SpawnedActors[index];
     if (index != GAME_NONE) {
         slot->header.flags = 1;
         slot->type         = 0x49;

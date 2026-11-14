@@ -42,10 +42,10 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                 FISHING_STATE->step_timer_09             = 0U;
                 FISHING_STATE->counter_08                = 0U;
                 member                                   = Actor_FindFreeSlot() & BYTE_MASK;
-                g_ActorSlots[member].header.flags        = 1;
-                g_ActorSlots[member].type                = 0x1A;
-                g_ActorSlots[member].header.mode         = 0x10;
-                *(s16*)&g_ActorSlots[member].header.step = (s16)FISHING_STATE->bounce_3C.half.key_3E;
+                g_SpawnedActors[member].header.flags        = 1;
+                g_SpawnedActors[member].type                = 0x1A;
+                g_SpawnedActors[member].header.mode         = 0x10;
+                *(s16*)&g_SpawnedActors[member].header.step = (s16)FISHING_STATE->bounce_3C.half.key_3E;
             } else {
                 scroll_pos = scroll_pos - 1;
                 if ((s8)FISHING_STATE->counter_08 > 0) {

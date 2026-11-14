@@ -9,7 +9,7 @@ typedef struct AreaSpark {
     u8       active;     /* 0x00 - 0 marks a free spark */
     u8       unk_01;     /* 0x01 */
     s16      fall_speed; /* 0x02 - 16.8 fall per frame */
-    Point3DL pos;        /* 0x04 */
+    Point3l pos;        /* 0x04 */
     s32      unk_10;     /* 0x10 */
 } AreaSpark;
 

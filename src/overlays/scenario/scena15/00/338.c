@@ -171,7 +171,7 @@ MATCH void func_801F7AA8(void) {
 INCLUDE_ASM(func_801F7AEC);
 
 MATCH void func_801F7D1C(void) {
-    UPoint2D pos;
+    Point2u pos;
 
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
         g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
@@ -186,7 +186,7 @@ MATCH void func_801F7D1C(void) {
 }
 
 MATCH void func_801F7E2C(void) {
-    UPoint2D pos;
+    Point2u pos;
 
     func_801F83AC(&pos);
     if (g_Task->tint.signed_bytes.unk_5D < 0x70) {
@@ -207,7 +207,7 @@ MATCH void func_801F7E2C(void) {
 }
 
 MATCH void func_801F7F5C(void) {
-    UPoint2D pos;
+    Point2u pos;
 
     func_801F83AC(&pos);
     if (g_Task->tint.signed_bytes.unk_5D != 0) {
@@ -226,7 +226,7 @@ INCLUDE_ASM(func_801F7FFC);
 
 INCLUDE_ASM(func_801F81D8);
 
-MATCH void func_801F83AC(UPoint2D* out) {
+MATCH void func_801F83AC(Point2u* out) {
     SVECTOR vec;
     long    depth;
     long    flag;
@@ -455,13 +455,13 @@ MATCH bool func_801FA854(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 laye
     slot       = Actor_FindFreeSlot();
     D_801FE748 = slot;
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags         = 1;
-        g_ActorSlots[D_801FE748].type           = type;
-        g_ActorSlots[D_801FE748].camera_angle.x = angle_x;
-        g_ActorSlots[D_801FE748].camera_angle.y = angle_y;
-        g_ActorSlots[D_801FE748].camera_angle.z = angle_z;
-        g_ActorSlots[D_801FE748].scene_step     = scene_step;
-        g_ActorSlots[D_801FE748].layer          = layer;
+        g_SpawnedActors[slot].header.flags         = 1;
+        g_SpawnedActors[D_801FE748].type           = type;
+        g_SpawnedActors[D_801FE748].camera_angle.x = angle_x;
+        g_SpawnedActors[D_801FE748].camera_angle.y = angle_y;
+        g_SpawnedActors[D_801FE748].camera_angle.z = angle_z;
+        g_SpawnedActors[D_801FE748].scene_step     = scene_step;
+        g_SpawnedActors[D_801FE748].layer          = layer;
     } else {
         return false;
     }
@@ -515,14 +515,14 @@ MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
 
     slot = Actor_FindFreeSlot();
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags = 1;
-        g_ActorSlots[slot].pos.x.fixed  = x;
-        g_ActorSlots[slot].type         = 0x9E;
-        g_ActorSlots[slot].pos.y.fixed  = y;
-        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
-        g_ActorSlots[slot].unk_06       = unk_06;
-        g_ActorSlots[slot].unk_07       = unk_07;
-        g_ActorSlots[slot].link         = link;
+        g_SpawnedActors[slot].header.flags = 1;
+        g_SpawnedActors[slot].pos.x.fixed  = x;
+        g_SpawnedActors[slot].type         = 0x9E;
+        g_SpawnedActors[slot].pos.y.fixed  = y;
+        g_SpawnedActors[slot].pos.z.fixed  = (Area_SampleHeight(g_SpawnedActors[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
+        g_SpawnedActors[slot].unk_06       = unk_06;
+        g_SpawnedActors[slot].unk_07       = unk_07;
+        g_SpawnedActors[slot].link         = link;
         return 1;
     }
     return 0;

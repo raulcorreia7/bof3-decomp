@@ -82,7 +82,7 @@
 typedef struct MenuChoicePanel {
     u8       active; /* 0x00: set while the panel is armed */
     u8       pad_01[0x03];
-    UPoint2D pos;          /* 0x04 */
+    Point2u pos;          /* 0x04 */
     u8       kind;         /* 0x08: the panel's kind, the first argument of func_801AF494 */
     u8       pad_09;       /* 0x09 */
     u8       group;        /* 0x0A: the group the cursor walks */
@@ -152,7 +152,7 @@ enum {
  * is unknown; 0x24, the names pointer, is the last known cell. */
 typedef struct MenuListPanel {
     u8             pad_00[4];
-    UPoint2D       pos;         /* 0x04 */
+    Point2u       pos;         /* 0x04 */
     u8             use_context; /* 0x08 the ability list passes it to func_801AF5B0: 1 outside battle, 2 in battle */
     u8             flags;       /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
     MenuListSource source;      /* 0x0A */
@@ -223,7 +223,7 @@ typedef struct MenuPanelTask {
     /* x and y are screen positions. Most readers load them with lhu; the slide
      * code compares them as s16 and stores signed constants through LOH, so the
      * field stays u16 and each slide keeps its s16 view. */
-    UPoint2D pos;
+    Point2u pos;
     u8       unk_08;
     u8       unk_09;
     u8       unk_0A; /* x 16 is the horizontal half-centre */

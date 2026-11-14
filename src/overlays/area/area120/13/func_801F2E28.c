@@ -2,15 +2,15 @@
 
 /* Spawns a copy of the g_Actors[2] row in a free actor slot and advances the current task's mode. */
 MATCH void func_801F2E28(void) {
-    ActorSlot* slot;
+    SpawnedActor* slot;
     Actor*     previous;
     u8         index;
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {
-        slot = &g_ActorSlots[index];
+        slot = &g_SpawnedActors[index];
         GFX_ClearRect(832, 256, 128, 256);
-        *slot              = *(ActorSlot*)&g_Actors[2];
+        *slot              = *(SpawnedActor*)&g_Actors[2];
         slot->header.flags = 1;
         slot->pos.x.fixed  = g_Actors[2].pos.x.fixed;
         slot->pos.y.fixed  = g_Actors[2].pos.y.fixed;

@@ -179,8 +179,8 @@
 
 /* The text, panel and cue handlers share this state block. */
 typedef struct MenuState {
-    UPoint2D text;
-    UPoint2D origin;
+    Point2u text;
+    Point2u origin;
     u8       step_id;         /* 0x08 */
     u8       panel_index;     /* 0x09 */
     s8       last_row;        /* 0x0A */

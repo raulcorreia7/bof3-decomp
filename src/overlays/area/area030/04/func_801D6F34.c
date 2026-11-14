@@ -20,13 +20,13 @@ MATCH void func_801D6F34(void) {
         if ((D_801E20CC[FISHING_STATE->step_index_0A].anim_id & 0x7F) == 9) {
             slot = Actor_FindFreeSlot();
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].header.flags = 1;
-                g_ActorSlots[slot].type         = 0x1A;
-                g_ActorSlots[slot].header.mode  = 0x10;
-                g_ActorSlots[slot].header.step  = 2;
-                g_ActorSlots[slot].unk_03       = 2;
-                g_ActorSlots[slot].unk_2E       = 0xF2;
-                g_ActorSlots[slot].unk_30       = 0x9E;
+                g_SpawnedActors[slot].header.flags = 1;
+                g_SpawnedActors[slot].type         = 0x1A;
+                g_SpawnedActors[slot].header.mode  = 0x10;
+                g_SpawnedActors[slot].header.step  = 2;
+                g_SpawnedActors[slot].unk_03       = 2;
+                g_SpawnedActors[slot].unk_2E       = 0xF2;
+                g_SpawnedActors[slot].unk_30       = 0x9E;
             }
         }
         FISHING_STATE->step_timer_09 = D_801E20CC[FISHING_STATE->step_index_0A].next_step;

@@ -22,7 +22,7 @@ MATCH void func_801F4424(void) {
     if (actor_slot == GAME_NONE) {
         return;
     }
-    g_ActorSlots[actor_slot].header.flags = 1;
-    g_ActorSlots[D_1F800000[0]].type      = 0x54;
-    g_ActorSlots[D_1F800000[0]].link      = ((s32)(-((g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
+    g_SpawnedActors[actor_slot].header.flags = 1;
+    g_SpawnedActors[D_1F800000[0]].type      = 0x54;
+    g_SpawnedActors[D_1F800000[0]].link      = ((s32)(-((g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
 }

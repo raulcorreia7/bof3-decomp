@@ -26,7 +26,7 @@ extern Magic096Steps D_801EEC10;
 extern u8            D_801F0488[];
 
 /* The x and y offset from the battler each spawned effect starts at, one row per effect index (byte 0x04). */
-extern Point2DL D_801F0408[];
+extern Point2l D_801F0408[];
 /* One byte per spawned effect. */
 extern u8       D_801F0498[];
 

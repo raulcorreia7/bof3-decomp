@@ -7,10 +7,10 @@ MATCH void func_801F3C6C(void) {
         g_Task->header.step++;
         g_AreaSceneMode                 = 0x23;
         slot                            = Actor_FindFreeSlot() & BYTE_MASK;
-        g_ActorSlots[slot].header.flags = 1;
-        g_ActorSlots[slot].type         = 0x18;
-        g_ActorSlots[slot].header.mode  = 0x17;
-        g_ActorSlots[slot].header.step  = 0x0A;
+        g_SpawnedActors[slot].header.flags = 1;
+        g_SpawnedActors[slot].type         = 0x18;
+        g_SpawnedActors[slot].header.mode  = 0x17;
+        g_SpawnedActors[slot].header.step  = 0x0A;
     }
     Area_StepSceneFrame();
 }

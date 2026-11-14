@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* The flag word is reached through the non-volatile FrontendStep view; the volatile g_UiWindowChannel spelling changes
+/* The flag word is reached through the non-volatile MessageState view; the volatile g_UiWindowChannel spelling changes
  * the load/store sequence. */
 
 /* when D_80148357 is 4, arms the mode byte g_MessageState with 2, clears

@@ -25,7 +25,7 @@ extern SVECTOR D_1F800014[];
 extern u8      D_801F4C3C[];
 #define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
 /* D_801F4E10 */
-extern UPoint2D g_FlockVelocity[4];
+extern Point2u g_FlockVelocity[4];
 /* D_801F4E20 */
 extern u8       g_FlockScript[4][2];
 

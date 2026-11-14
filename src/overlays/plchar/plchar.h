@@ -169,10 +169,10 @@ s32 Char_ProbeFacingCell(void);
 #define PLCHAR_PROBE_FACING_FOLLOWER(index)                                                                             \
     {                                                                                                                   \
         s32 i;                                                                                                          \
-        s32 x = g_ActorSlots[index].pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;                            \
-        s32 y = g_ActorSlots[index].pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;                            \
+        s32 x = g_SpawnedActors[index].pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;                            \
+        s32 y = g_SpawnedActors[index].pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;                            \
         for (i = 1; i < g_PartySize; i++) {                                                                             \
-            if (func_801BDD58(x, y, COORD_INT(g_ActorSlots[index].pos.z), 1, (Actor*)&g_Game.members[i]) & BYTE_MASK) { \
+            if (func_801BDD58(x, y, COORD_INT(g_SpawnedActors[index].pos.z), 1, (Actor*)&g_Game.members[i]) & BYTE_MASK) { \
                 return 1;                                                                                               \
             }                                                                                                           \
         }                                                                                                               \

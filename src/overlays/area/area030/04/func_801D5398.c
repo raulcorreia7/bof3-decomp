@@ -23,10 +23,10 @@ MATCH void func_801D5398(void) {
 
     if (FISHING_STATE->step_timer_09 == 0) {
         index                            = Actor_FindFreeSlot() & BYTE_MASK;
-        g_ActorSlots[index].header.flags = 1;
-        g_ActorSlots[index].type         = 0x1A;
-        g_ActorSlots[index].header.mode  = 0x10;
-        g_ActorSlots[index].header.step  = (u8) * (u16*)&COORD_INT(g_Task->pos.z);
+        g_SpawnedActors[index].header.flags = 1;
+        g_SpawnedActors[index].type         = 0x1A;
+        g_SpawnedActors[index].header.mode  = 0x10;
+        g_SpawnedActors[index].header.step  = (u8) * (u16*)&COORD_INT(g_Task->pos.z);
 
         work                   = FISHING_STATE;
         work->handler_index_01 = (u8)(work->handler_index_01 + 1);

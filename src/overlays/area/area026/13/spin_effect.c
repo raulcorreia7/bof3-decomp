@@ -426,17 +426,17 @@ MATCH void func_801F3338(void) {
 }
 
 /* Original sets no mode argument (etc/game/00 revision ignores it); declared
- * arg-less to match. Table is the etc/game/00 ActorSlot table. */
+ * arg-less to match. Table is the etc/game/00 SpawnedActor table. */
 
 MATCH void func_801F3360(void) {
     s32        actor_slot;
-    ActorSlot* slot;
+    SpawnedActor* slot;
 
     actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (actor_slot == GAME_NONE) {
         return;
     }
-    slot               = &g_ActorSlots[actor_slot];
+    slot               = &g_SpawnedActors[actor_slot];
     slot->header.flags = 1;
     slot->type         = 0x33;
     slot->pos.x.fixed  = TO_COORD(7);

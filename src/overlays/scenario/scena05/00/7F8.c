@@ -43,14 +43,14 @@ MATCH void func_801F7530(void) {
 }
 
 MATCH void func_801F7554(void) {
-    ActorSlot* spawned;
+    SpawnedActor* spawned;
     Actor*     actor;
     u8         slot;
 
     if ((SP_REF(Actor*, 0x44)->vx & 0xF) == 0) {
         slot = Actor_FindFreeSlot();
         if (slot != GAME_NONE) {
-            spawned               = &g_ActorSlots[slot];
+            spawned               = &g_SpawnedActors[slot];
             spawned->header.flags = 1;
             spawned->type         = 0x26;
             actor                 = g_Task;

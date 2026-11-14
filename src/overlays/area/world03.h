@@ -26,7 +26,7 @@ typedef struct AreaSprite {
     u8       flags_03;  /* the shade of the sprite */
     u16      half_size; /* the projected half-size */
     u8       unk_06[2];
-    Point2DL origin;
+    Point2l origin;
     s32      unk_10;
     s32      unk_14;
     s32      unk_18;

@@ -19,6 +19,6 @@ typedef enum Facing {
  * direction, read as a whole word pair by both the game overlay
  * (src/engine/game/00) and the world overlay (src/overlays/area/area030/04). */
 /* D_80181B94 */
-extern const Point2DL g_FacingSteps[8];
+extern const Point2l g_FacingSteps[8];
 
 #endif

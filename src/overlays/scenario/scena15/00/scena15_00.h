@@ -32,11 +32,11 @@ extern Callback  D_801FE678[];
 extern s8        D_801FE6E8[];
 /* D_801FE6EC */
 extern SceneFunc g_SceneActorDispatch[];
-void             func_801F83AC(UPoint2D* out);
+void             func_801F83AC(Point2u* out);
 void             func_801F8704(void);
 extern u8        D_801FE71C[];
 /* The scene band's velocity. */
-extern Point3DL  D_801FE738;
+extern Point3l  D_801FE738;
 extern u8        D_801FE748;
 extern u8        D_801FE74C;
 void             func_801F8958(void);

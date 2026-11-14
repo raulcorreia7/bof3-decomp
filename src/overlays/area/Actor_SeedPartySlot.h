@@ -11,11 +11,11 @@
         if (g_Task->param.actor_slot == GAME_NONE) {                                              \
             return;                                                                               \
         }                                                                                         \
-        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;                                  \
-        g_ActorSlots[g_Task->param.actor_slot].type         = 6;                                  \
-        g_ActorSlots[g_Task->param.actor_slot].unk_06       = unk06;                              \
-        g_ActorSlots[g_Task->param.actor_slot].scene_step   = 0;                                  \
-        g_ActorSlots[g_Task->param.actor_slot].selection    = (table)[g_PartyFieldOrder[member]]; \
-        g_ActorSlots[g_Task->param.actor_slot].unk_2E       = g_Task->screen_x;                   \
-        g_ActorSlots[g_Task->param.actor_slot].unk_30       = g_Task->screen_y;                   \
+        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;                                  \
+        g_SpawnedActors[g_Task->param.actor_slot].type         = 6;                                  \
+        g_SpawnedActors[g_Task->param.actor_slot].unk_06       = unk06;                              \
+        g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;                                  \
+        g_SpawnedActors[g_Task->param.actor_slot].selection    = (table)[g_PartyFieldOrder[member]]; \
+        g_SpawnedActors[g_Task->param.actor_slot].unk_2E       = g_Task->screen_x;                   \
+        g_SpawnedActors[g_Task->param.actor_slot].unk_30       = g_Task->screen_y;                   \
     }

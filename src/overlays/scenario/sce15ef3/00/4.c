@@ -243,7 +243,7 @@ INCLUDE_ASM(func_801D1FF8);
 
 /* func_801D230C */
 MATCH void Scene_SetXFixed(void) {
-    Point3DL pos;
+    Point3l pos;
     s16      x;
     s16      y;
     u16      angle;

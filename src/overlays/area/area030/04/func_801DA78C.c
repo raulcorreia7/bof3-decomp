@@ -6,18 +6,18 @@
  * speed word, or releases the record once the direction is no longer held and
  * its 0x34 word leaves the accepted range; it then runs the shared refresh. */
 MATCH void func_801DA78C(void) {
-    ActorSlot*    record;
+    SpawnedActor*    record;
     FishingState* work;
     s32           direction;
     s32           speed;
 
-    record = g_ActorSlots;
-    if (g_ActorSlots[0].header.mode == 3) {
+    record = g_SpawnedActors;
+    if (g_SpawnedActors[0].header.mode == 3) {
         FISHING_STATE->mode_index_02 = 3;
         FISHING_STATE->sub_index_03  = 0;
     } else {
-        if ((g_ActorSlots[0].unk_14 == 0) && (g_InputPressed & PADRdown) && (g_ActorSlots[0].selection > 0x110000)) {
-            g_ActorSlots[0].selection -= 0x4000;
+        if ((g_SpawnedActors[0].unk_14 == 0) && (g_InputPressed & PADRdown) && (g_SpawnedActors[0].selection > 0x110000)) {
+            g_SpawnedActors[0].selection -= 0x4000;
         }
         work = FISHING_STATE;
         if (work->saved_index_0B == 0) {

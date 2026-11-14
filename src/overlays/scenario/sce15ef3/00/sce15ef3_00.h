@@ -24,7 +24,7 @@ void func_801D16DC(void);
 void Scene_ClaimScanBar(void);
 s32  func_801D18CC(void);
 s32  func_801D1A60(void);
-void func_801D1FF8(Point3DL* pos, s16 x, s16 y, u16 angle, u8 colour, u8 shade);
+void func_801D1FF8(Point3l* pos, s16 x, s16 y, u16 angle, u8 colour, u8 shade);
 /* func_801D230C */
 void Scene_SetXFixed(void);
 /* func_801D23AC */

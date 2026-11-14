@@ -11,7 +11,7 @@ s32 PlChar_FollowerInReach(u8 index);
     actor_slot = (u8)PlChar_FindGarrActorSlot();                                                                   \
     if (actor_slot != 0xFF) {                                                                                      \
         if ((PlChar_FollowerInReach(actor_slot) & BYTE_MASK) == 0 && (check_actor(actor_slot) & BYTE_MASK) == 0) { \
-            g_ActorSlots[actor_slot].link = 1;                                                                     \
+            g_SpawnedActors[actor_slot].link = 1;                                                                     \
             /* FAKE: retail reads SND_PlayCue as void(s32). */                                                     \
             ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);                                                  \
             Actor_RequestScript(g_Task->direction_08 + 8);                                                         \

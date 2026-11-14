@@ -31,34 +31,34 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
     D_801D2744 = g_Task;
 
     slot                            = Actor_FindFreeSlot();
-    g_ActorSlots[slot].header.flags = 1;
-    g_ActorSlots[slot].type         = 0x69;
-    g_ActorSlots[slot].header.mode  = 2;
-    g_ActorSlots[slot].header.step  = 0;
-    g_ActorSlots[slot].unk_03       = 0;
+    g_SpawnedActors[slot].header.flags = 1;
+    g_SpawnedActors[slot].type         = 0x69;
+    g_SpawnedActors[slot].header.mode  = 2;
+    g_SpawnedActors[slot].header.step  = 0;
+    g_SpawnedActors[slot].unk_03       = 0;
 
     i = 0;
     do {
         slot                      = Actor_FindFreeSlot();
-        g_ActorSlots[slot].unk_04 = i;
+        g_SpawnedActors[slot].unk_04 = i;
         i++;
-        g_ActorSlots[slot].header.flags = 1;
-        g_ActorSlots[slot].type         = 0x69;
-        g_ActorSlots[slot].header.mode  = 2;
-        g_ActorSlots[slot].header.step  = 1;
-        g_ActorSlots[slot].unk_03       = 0;
+        g_SpawnedActors[slot].header.flags = 1;
+        g_SpawnedActors[slot].type         = 0x69;
+        g_SpawnedActors[slot].header.mode  = 2;
+        g_SpawnedActors[slot].header.step  = 1;
+        g_SpawnedActors[slot].unk_03       = 0;
     } while (i < 4);
 
     i = 0;
     do {
         slot                      = Actor_FindFreeSlot();
-        g_ActorSlots[slot].unk_04 = i;
+        g_SpawnedActors[slot].unk_04 = i;
         i++;
-        g_ActorSlots[slot].header.flags = 1;
-        g_ActorSlots[slot].type         = 0x69;
-        g_ActorSlots[slot].header.mode  = 2;
-        g_ActorSlots[slot].header.step  = 2;
-        g_ActorSlots[slot].unk_03       = 0;
+        g_SpawnedActors[slot].header.flags = 1;
+        g_SpawnedActors[slot].type         = 0x69;
+        g_SpawnedActors[slot].header.mode  = 2;
+        g_SpawnedActors[slot].header.step  = 2;
+        g_SpawnedActors[slot].unk_03       = 0;
     } while (i < 4);
 
     g_Task->ticker = 0;
