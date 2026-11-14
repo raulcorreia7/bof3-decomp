@@ -32,6 +32,8 @@ ASSERT_OFFSET(Scena10Rect, height, 0x06);
 /* The panel draws entry 2. */
 extern Scena10Rect D_801FE7CC[];
 extern u8          D_801FE804[2];
+extern u8          D_801FE830[8][3];
+extern Point2s     D_801FE848[];
 extern u8          D_801FE808[2];
 extern u8          D_801FE874[];
 
@@ -99,5 +101,6 @@ extern SceneFunc g_SceneActorDispatch[];
 
 void func_801F6FAC(void);
 void func_801F781C(u16 x, u16 y, u16 width, u16 height);
+void func_801F79E8(u16 x, u16 y);
 
 #endif

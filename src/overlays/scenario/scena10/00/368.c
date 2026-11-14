@@ -76,7 +76,37 @@ MATCH void func_801F7758(void) {
     }
 }
 
-INCLUDE_ASM(func_801F781C);
+/* Draw the item panel background at (x, y) and, on each of the eight rows, the glyph for each owned item up to three. */
+MATCH void func_801F781C(u16 x, u16 y, u16 width, u16 height) {
+    POLY_FT4* prim;
+    u8        i;
+    u8        j;
+    u8        count;
+    u8        glyph;
+
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    prim->tpage = GetTPage(0, 0, 704, 256);
+    setClut(prim, 64, 483);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    setXY4(prim, x, y, x + width, y, x, y + height, x + width, y + height);
+    setUV4(prim, 0, 0x98, 0x80, 0x98, 0, 0xFF, 0x80, 0xFF);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
+    i = 0;
+    do {
+        count = D_80144908[i];
+        if (count > 3) {
+            count = 3;
+        }
+        for (j = 0; j < count; j++) {
+            glyph = D_801FE830[i][j];
+            if (glyph != 10) {
+                func_801F79E8(D_801FE848[glyph].x + x, D_801FE848[glyph].y + y);
+            }
+        }
+        i++;
+    } while (i < 8);
+}
 
 INCLUDE_ASM(func_801F79E8);
 
