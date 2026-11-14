@@ -319,9 +319,7 @@ MATCH void func_801F802C(void) {
             angle = (u16)angle;
             angle += ANGLE_90;
         }
-        work->normal.vx = rcos(angle) * 3;
-        work->normal.vy = rsin(angle) * 3;
-        work->normal.vz = 0;
+        setVector(&work->normal, rcos(angle) * 3, rsin(angle) * 3, 0);
     }
 }
 
@@ -494,9 +492,7 @@ MATCH void func_801F995C(void) {
     g_Task->vz -= 2097152;
     func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
     if (g_Task->pos.x.fixed == 0x490000) {
-        g_Task->vx = 14563;
-        g_Task->vy = 65536;
-        g_Task->vz = 12116878;
+        setVector(g_Task, 14563, 65536, 12116878);
         g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
@@ -520,9 +516,7 @@ MATCH void func_801F9AC0(void) {
         g_Task->pos.x = 4915200;
         g_Task->pos.y = 4915200;
         g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 4915200) << 16;
-        g_Task->vx    = 0xFFFF4925;
-        g_Task->vy    = 0xFFFF0000;
-        g_Task->vz    = 4993220;
+        setVector(g_Task, 0xFFFF4925, 0xFFFF0000, 4993220);
         g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
@@ -598,9 +592,7 @@ MATCH void func_801F9E00(void) {
     work->pos.x.fixed = TO_COORD(25) + COORD_HALF;
     work->pos.y.fixed = TO_COORD(25) + COORD_HALF;
     work->pos.z.fixed = TO_COORD(1024);
-    work->vx          = work->pos.x.fixed + TO_COORD(4);
-    work->vy          = work->pos.y.fixed;
-    work->vz          = work->pos.z.fixed;
+    setVector(work, work->pos.x.fixed + TO_COORD(4), work->pos.y.fixed, work->pos.z.fixed);
     work->header.mode = mode;
 }
 
@@ -647,8 +639,7 @@ MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
     SetSemiTrans(prim, 1);
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(&pos->x.fixed, &xy);
-    prim->x0 = xy.vx;
-    prim->y0 = xy.vy;
+    setXY0(prim, xy.vx, xy.vy);
     Area_ProjectPoint(vx, &xy);
     prim->x1 = xy.vx;
     prim->y1 = xy.vy;

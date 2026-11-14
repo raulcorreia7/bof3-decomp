@@ -9,9 +9,7 @@ MATCH void func_801F32C8(void) {
     actor                   = g_Task;
     COORD_INT(actor->pos.z) = height + 0x7D0;
     actor->unk_04           = 1;
-    actor->vx               = 0;
-    actor->vy               = 0;
-    actor->vz               = 0;
-    actor->gravity          = -8;
+    setVector(actor, 0, 0, 0);
+    actor->gravity = -8;
     g_GameState->u.field.unk_122 -= 2;
 }
