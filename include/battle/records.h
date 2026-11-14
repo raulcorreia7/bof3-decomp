@@ -87,8 +87,9 @@ typedef struct WorkChunk {
 
 ASSERT_SIZE(WorkChunk, 0x10);
 
-/* Half of a 0x20-byte battler stat block. The retail copies each half with an
- * unaligned word pair, so the two halves stay one 16-byte type. */
+/* Half of a Stats record: max_hp to unk_0C (+0x00) or willpower to
+ * critical_chance (+0x10). The retail copies each half with an unaligned word
+ * pair from a byte pointer, so the two halves stay one 16-byte type. */
 typedef struct BattleStatBlockPart {
     u8 bytes[0x10];
 } BattleStatBlockPart;
