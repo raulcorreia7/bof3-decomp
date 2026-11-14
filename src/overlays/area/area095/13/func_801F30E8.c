@@ -4,7 +4,7 @@ MATCH void func_801F30E8(void) {
     u8 i;
 
     for (i = 0; i < ACTOR_SLOT_COUNT; i++) {
-        if ((g_ActorSlots[i].header.flags & ACTOR_FLAG_IN_USE) && g_ActorSlots[i].pos.x.part.integer == 0x41 && g_ActorSlots[i].pos.y.part.integer == 0x3A) {
+        if ((g_SpawnedActors[i].header.flags & ACTOR_FLAG_IN_USE) && g_SpawnedActors[i].pos.x.part.integer == 0x41 && g_SpawnedActors[i].pos.y.part.integer == 0x3A) {
             break;
         }
     }

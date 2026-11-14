@@ -98,7 +98,7 @@ MATCH void func_801EF040(void) {
         prim->y3 = screen.vy;
         setRGB0(prim, 128, 0, 0);
         /* FAKE: retail tests the whole return register, as for a call with no prototype; the shared s16 prototype adds a sign extension. */
-        if (((s32 (*)(Point2D*, Point2D*, Point2D*))func_801AFF90)((Point2D*)&prim->x0, (Point2D*)&prim->x1, (Point2D*)&prim->x2) < 0) {
+        if (((s32 (*)(Point2s*, Point2s*, Point2s*))func_801AFF90)((Point2s*)&prim->x0, (Point2s*)&prim->x1, (Point2s*)&prim->x2) < 0) {
             GFX_AddPrim(1, sizeof(POLY_F4));
         }
     }

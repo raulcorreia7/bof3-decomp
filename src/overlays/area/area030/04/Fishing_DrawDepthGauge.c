@@ -15,10 +15,10 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
 
     func_801D1744((panel_x + 88), (panel_y + 8), 4);
 
-    if (g_ActorSlots[0].header.mode == 0) {
+    if (g_SpawnedActors[0].header.mode == 0) {
         y = panel_y;
     } else {
-        y = panel_y - Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed) / 32;
+        y = panel_y - Area_SampleHeight(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed) / 32;
     }
     base = panel_y;
     CLAMP_MIN(y, base);
@@ -37,10 +37,10 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
     primitive->x3 = primitive->x1;
     GFX_AddPrim(4, sizeof(POLY_F4));
 
-    if (g_ActorSlots[0].header.mode == 4) {
+    if (g_SpawnedActors[0].header.mode == 4) {
         y = 180;
-        if (COORD_INT(g_ActorSlots[0].pos.z) <= 0) {
-            y = 180 - COORD_INT(g_ActorSlots[0].pos.z) / 32;
+        if (COORD_INT(g_SpawnedActors[0].pos.z) <= 0) {
+            y = 180 - COORD_INT(g_SpawnedActors[0].pos.z) / 32;
         }
         Fishing_DrawIcon((panel_x + 105), y, 2);
     }

@@ -8,7 +8,7 @@ MATCH void func_8019C954(void) {
     index = D_80145E9B;
     g_Task->header.flags |= ACTOR_FLAG_SKIP_PALETTE_STAGE;
     g_Task->active_flags = 1;
-    record               = (Actor*)&g_ActorSlots[index];
+    record               = (Actor*)&g_SpawnedActors[index];
     g_Task->unk_2C       = record->unk_2C;
     g_Task->unk_27       = 0x7B;
     g_Task->unk_28       = PALETTE_KIND_CELLS_2;

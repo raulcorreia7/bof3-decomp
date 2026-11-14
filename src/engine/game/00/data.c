@@ -33,7 +33,7 @@ u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
 Callback g_GameBattleSubstates[8] = {func_80197A60, Battle_LoadPartySprites, func_80197C1C, Battle_LoadBattleArchive, func_80197E54, func_801D1014, func_80197EFC, func_80197F48};
 
-Offset2DB s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
+Offset2b s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
 Callback g_GameShopSubstates[3] = {Game_LoadShopOverlay, func_80199398, Game_ReturnFromShop};
 
@@ -2263,7 +2263,7 @@ Callback D_801CD440[2] = {func_801BC000, Area_StepSceneTimer};
 
 Callback D_801CD448[4] = {func_801B32A4, Area_ClimbMount, func_801BD83C, Area_ClimbDismount};
 
-Offset2DB s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
+Offset2b s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
     {-CAMERA_SCROLL_STEP, 0},
     {0, -CAMERA_SCROLL_STEP},
     {CAMERA_SCROLL_STEP, 0},
@@ -2312,7 +2312,7 @@ u8 D_801CD584[56] = {0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x02, 0x01,
                      0x02, 0x03, 0x00, 0x00, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x00, 0x00, 0x04, 0x03,
                      0x00, 0x00, 0x03, 0x04, 0x00, 0x00, 0x04, 0x03, 0x03, 0x04, 0x04, 0x04, 0x00, 0x00};
 
-Offset2DB s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT] = {
+Offset2b s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT] = {
     {0, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0},
     {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-2, -2},
     {-1, -2}, {0, -2}, {1, -2}, {2, -2}, {2, -1},
@@ -2325,7 +2325,7 @@ Offset2DB s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT] = {
     {-3, 1}, {-3, 0}, {-3, -1}, {-3, -2}, {0, 0},
 };
 
-Point2DL s_EncounterEnemyOffsets[36] = {
+Point2l s_EncounterEnemyOffsets[36] = {
     {TO_COORD(3), 0},     {TO_COORD(2), TO_COORD_HALF(1)}, {TO_COORD(2), -TO_COORD_HALF(1)},  {TO_COORD(3), 0},
     {TO_COORD(1), TO_COORD(3)}, {TO_COORD(1), -TO_COORD(3)}, {TO_COORD(4), TO_COORD_HALF(1)}, {TO_COORD(4), -TO_COORD_HALF(1)},
     {TO_COORD(1), TO_COORD(3)}, {TO_COORD(1), -TO_COORD(3)}, {TO_COORD(1), 0},     {TO_COORD(1), TO_COORD(3)},
@@ -2337,13 +2337,13 @@ Point2DL s_EncounterEnemyOffsets[36] = {
     {TO_COORD_HALF(3), TO_COORD_HALF(1)}, {TO_COORD_HALF(3), -TO_COORD_HALF(1)},  {TO_COORD_HALF(3), TO_COORD_HALF(4)}, {TO_COORD_HALF(3), -TO_COORD_HALF(4)},
 };
 
-Point2DL s_EncounterOriginNudges[6] = {{0, 0},     {TO_COORD(1), 0},  {-TO_COORD(1), 0},
+Point2l s_EncounterOriginNudges[6] = {{0, 0},     {TO_COORD(1), 0},  {-TO_COORD(1), 0},
                          {0, TO_COORD(1)}, {0, -TO_COORD(1)}, {0, 0}};
 
 u8 s_EntitySpawnChances[8] = {0x10, 0x10, 0x10, 0x0A, 0x08, 0x06, 0x04, 0x02};
 
 /* Camera offsets per mode: x, y pairs. */
-Point2D D_801CD778[5] = {
+Point2s D_801CD778[5] = {
     {4, 0}, {0, 4}, {-4, 0}, {0, -4}, {0, 0},
 };
 

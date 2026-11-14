@@ -29,7 +29,7 @@ extern Magic074Steps D_801EEC1C;
 #define EFFECT_SPARKLE_TASK    D_801F20DC
 #define EFFECT_SPARKLE_OFFSETS D_801F0490
 #define EFFECT_SPARKLE_RISE    D_801F0550
-extern Point2D D_801F0490[];
+extern Point2s D_801F0490[];
 extern u8      D_801F0550[];
 /* The sparkle count of each kind, and the launch delay step between its groups of four. */
 #define EFFECT_SPARKLE_COUNTS D_801F0548

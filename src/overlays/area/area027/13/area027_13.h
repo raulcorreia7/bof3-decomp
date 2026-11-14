@@ -31,7 +31,7 @@ void      func_801F304C(AreaTrail* trail);
 void      func_801F3164(void);
 void      func_801F31CC(void);
 void      func_801F32B0(void);
-POLY_FT4* func_801F3480(const Point3D* point, s32 angle, u32 texture);
+POLY_FT4* func_801F3480(const Point3s* point, s32 angle, u32 texture);
 void      func_801F3618(void);
 void      func_801F3650(void);
 void      func_801F3710(void);

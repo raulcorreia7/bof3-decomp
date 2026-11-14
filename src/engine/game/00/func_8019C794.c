@@ -23,9 +23,9 @@ MATCH void func_8019C794(void) {
     } else if ((g_Task->unk_0A & 0x1) == 0) {
         index = Actor_FindFreeSlot();
         if (index != GAME_NONE) {
-            g_ActorSlots[index].header.flags = 1;
-            g_ActorSlots[index].type         = 0x1B;
-            g_ActorSlots[index].header.mode  = 3;
+            g_SpawnedActors[index].header.flags = 1;
+            g_SpawnedActors[index].type         = 0x1B;
+            g_SpawnedActors[index].header.mode  = 3;
         }
     }
     Actor_StepAnimLoop();

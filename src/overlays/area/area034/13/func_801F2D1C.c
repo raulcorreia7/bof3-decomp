@@ -1,13 +1,13 @@
 #include "area034_13.h"
 
 MATCH void func_801F2D1C(void) {
-    ActorSlot* slot;
-    u8         index;
+    SpawnedActor* slot;
+    u8            index;
 
     g_Task->param.actor_slot = Actor_FindFreeSlot();
     index                    = g_Task->param.actor_slot;
     if (index != GAME_NONE) {
-        slot               = &g_ActorSlots[index];
+        slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;
         slot->type         = 0x51;
         slot->header.mode  = 6;

@@ -40,7 +40,7 @@ static inline void Menu_SwapEntries(u8* first, u8* second) {
 typedef struct FormationLayout {
     char    name[7];
     u8      name_length;
-    Point2D offsets[PARTY_SLOT_COUNT];
+    Point2s offsets[PARTY_SLOT_COUNT];
 } FormationLayout;
 
 ASSERT_SIZE(FormationLayout, 0x14);

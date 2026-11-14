@@ -13,7 +13,7 @@ extern Callback            D_801F08F0[];
 extern Callback            D_801F0900[];
 
 /* The x and y offset of each of the eight spawned effects. */
-extern Point2DL D_801F08A8[];
+extern Point2l D_801F08A8[];
 
 void func_801EF370(void);
 void func_801EFA54(void);

@@ -96,8 +96,8 @@ MATCH void func_801EF2B8(void) {
         }
     }
     for (i = 0; i < 20; i++) {
-        if (g_ActorSlots[i].header.flags && g_ActorSlots[i].type == 0x17) {
-            COORD_INT(g_ActorSlots[i].pos.z) = D_801F0F18[i] + Area_SampleHeight(g_ActorSlots[i].pos.x.fixed, g_ActorSlots[i].pos.y.fixed);
+        if (g_SpawnedActors[i].header.flags && g_SpawnedActors[i].type == 0x17) {
+            COORD_INT(g_SpawnedActors[i].pos.z) = D_801F0F18[i] + Area_SampleHeight(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
         }
     }
     g_AreaCameraRefreshCount = 2;

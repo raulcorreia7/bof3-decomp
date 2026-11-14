@@ -63,11 +63,11 @@ MATCH void func_801CEFD0(void) {
         if (g_Task->unk_0A == 0) {
             /* FAKE: retail reads SND_PlayCue as void(s32). */
             ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
-            g_ActorSlots[g_Task->param.actor_slot].unk_08 = g_Task->direction_08;
+            g_SpawnedActors[g_Task->param.actor_slot].unk_08 = g_Task->direction_08;
             if (g_Task->option_flags == 0) {
                 g_Task->option_flags = 1;
             }
-            g_ActorSlots[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
+            g_SpawnedActors[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
         }
     }
@@ -130,8 +130,8 @@ MATCH void func_801D0358(void) {
     slot                     = func_8019601C();
     g_Task->param.actor_slot = slot;
     if (g_Task->param.actor_slot != 0xFF) {
-        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
-        g_ActorSlots[g_Task->param.actor_slot].type         = 0x1B;
+        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
+        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x1B;
     }
     Actor_RequestScript((g_Task->direction_08 >> 1) + 0x42);
     /* FAKE: retail reads SND_PlayCue as void(s32). */

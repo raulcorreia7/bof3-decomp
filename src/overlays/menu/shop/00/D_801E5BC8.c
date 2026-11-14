@@ -22,7 +22,7 @@ BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT] = {
 };
 
 /* The step each facing walks, by Facing; read by func_801DE944 (0x801DE944). */
-Point2D g_ShopFacingSteps[8] = {
+Point2s g_ShopFacingSteps[8] = {
     {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0},
 };
 

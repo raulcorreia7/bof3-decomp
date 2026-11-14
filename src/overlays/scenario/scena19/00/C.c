@@ -26,13 +26,13 @@ MATCH void func_801F6C68(void) {
 }
 
 MATCH void func_801F6CA4(void) {
-    ActorSlot* slot;
-    s32        index;
+    SpawnedActor* slot;
+    s32           index;
 
     if (g_InputPressed & PADR1) {
         index = Actor_FindFreeSlot();
         if (index != GAME_NONE) {
-            slot               = &g_ActorSlots[index];
+            slot               = &g_SpawnedActors[index];
             slot->header.flags = 1;
             slot->type         = 0x2F;
         }

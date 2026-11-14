@@ -25,7 +25,7 @@ extern u8            D_801F4F84[]; /* one four-byte sprite cell per id: w, h, u0
 extern WorldMapMarker D_801F4FDC[6];
 #define AREA_HUD_MASK_TABLE D_801F4FDC
 extern Callback D_801F4FF4[];
-extern UPoint2D g_FlockVelocity[4];
+extern Point2u  g_FlockVelocity[4];
 extern u8       g_FlockScript[4][2];
 extern Callback D_801F5018[];
 

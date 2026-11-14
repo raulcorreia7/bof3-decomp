@@ -24,9 +24,9 @@ MATCH void Char_RunPersonalAction(void) {
                 if (CHAR_PERSONAL_ACTION_HAS_CUE) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
-                direction                 = g_Task->direction_08;
-                g_ActorSlots[slot].unk_0A = 1;
-                g_ActorSlots[slot].unk_08 = direction;
+                direction                    = g_Task->direction_08;
+                g_SpawnedActors[slot].unk_0A = 1;
+                g_SpawnedActors[slot].unk_08 = direction;
                 if (!CHAR_PERSONAL_ACTION_HAS_CUE) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }

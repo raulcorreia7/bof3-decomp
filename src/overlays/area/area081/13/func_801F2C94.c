@@ -2,12 +2,12 @@
 #include "area/spad.h"
 
 MATCH void func_801F2C94(void) {
-    ActorSlot* slot;
-    u8         index;
+    SpawnedActor* slot;
+    u8            index;
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {
-        slot               = &g_ActorSlots[index];
+        slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;
         slot->type         = 0x27;
         slot->pos.x.fixed  = g_Task->pos.x.fixed;

@@ -1,12 +1,12 @@
 #include "area132_13.h"
 
 MATCH void func_801F3A64(void) {
-    ActorSlot* actor;
-    s32        slot;
+    SpawnedActor* actor;
+    s32           slot;
 
     slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (slot != GAME_NONE) {
-        actor               = &g_ActorSlots[slot];
+        actor               = &g_SpawnedActors[slot];
         actor->header.flags = 1;
         actor->type         = 0x73;
         actor->pos.x.fixed  = TO_COORD(42);

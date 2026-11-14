@@ -106,10 +106,10 @@ ASSERT_OFFSET(BattleAction, unk_08, 0x08);
  * The id is the index of one 0x88-byte enemy record (Battle_InitEnemy reads
  * &D_800E405E + id * 0x88), so +0x01 is that index and 0xFF means none. */
 typedef struct EncounterEnemy {
-    u8       active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
-    u8       id;     /* 0x01 - the enemy-record index; 0xFF means none */
-    u8       pad_02[2];
-    Point2DL pos; /* 0x04 encounter position, 16.16 */
+    u8      active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
+    u8      id;     /* 0x01 - the enemy-record index; 0xFF means none */
+    u8      pad_02[2];
+    Point2l pos; /* 0x04 encounter position, 16.16 */
 } EncounterEnemy;
 
 ASSERT_SIZE(EncounterEnemy, 0x0C);

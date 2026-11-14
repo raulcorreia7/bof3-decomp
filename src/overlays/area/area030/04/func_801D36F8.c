@@ -10,13 +10,13 @@ MATCH void func_801D36F8(void) {
     if (g_FishingPromptSets[record->cue_index_06][3] != 0) {
         slot = Actor_FindFreeSlot();
         if (slot != -1) {
-            g_ActorSlots[slot].header.flags = 1;
-            g_ActorSlots[slot].type         = 0xF;
-            area                            = FISHING_STATE->cue_index_06;
-            g_ActorSlots[slot].unk_4A       = 0;
-            g_ActorSlots[slot].link         = 0;
-            g_ActorSlots[slot].header.mode  = 8;
-            g_ActorSlots[slot].unk_06       = area;
+            g_SpawnedActors[slot].header.flags = 1;
+            g_SpawnedActors[slot].type         = 0xF;
+            area                               = FISHING_STATE->cue_index_06;
+            g_SpawnedActors[slot].unk_4A       = 0;
+            g_SpawnedActors[slot].link         = 0;
+            g_SpawnedActors[slot].header.mode  = 8;
+            g_SpawnedActors[slot].unk_06       = area;
         }
         FISHING_STATE->handler_index_01 = 6;
     } else {

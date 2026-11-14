@@ -12,8 +12,8 @@ typedef struct Magic040Steps {
 } Magic040Steps;
 
 extern Magic040Steps D_801EEC10;
-extern Point2D       D_801EFC74[][2];
-extern Point2D       D_801EFCCC[][2];
+extern Point2s       D_801EFC74[][2];
+extern Point2s       D_801EFCCC[][2];
 extern u8            D_801EFD24[];
 
 void func_801EF430(void* task);
