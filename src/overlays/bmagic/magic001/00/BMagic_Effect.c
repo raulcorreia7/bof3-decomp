@@ -169,7 +169,24 @@ MATCH void func_801EF518(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF5CC);
+MATCH void func_801EF5CC(void) {
+    PartyMember* work;
+    PartyMember* source;
+    s8           count;
+
+    count = g_Task->unk_5D;
+    if (count != -0x80) {
+        g_Task->unk_5D = count - 0x10;
+        g_Task->unk_5E -= 16;
+        g_Task->unk_5F -= 16;
+    }
+    if ((s8)g_Task->unk_5D == -128) {
+        work   = g_Task;
+        source = BATTLE_ACTIVE_WORK;
+        WorldPos_Copy(&work->pos, &source->pos);
+        work->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_RampTintAndFinish.h"
 

@@ -60,7 +60,20 @@ MATCH void func_801EEEC4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF80);
+MATCH void func_801EEF80(void) {
+    s16* radius;
+    u8   timer;
+
+    radius = &D_801EFA9C.radius;
+    *radius -= 0x40;
+    D_801EFA9C.offset -= 96;
+    func_801EF254();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 

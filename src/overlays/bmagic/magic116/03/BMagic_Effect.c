@@ -34,7 +34,19 @@ MATCH void func_801EED2C(void) {
     g_Task = saved;
 }
 
-INCLUDE_ASM(func_801EEDB0);
+MATCH void func_801EEDB0(void) {
+    u8 timer;
+
+    func_801EF258();
+    func_801EF118();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->header.mode = g_Task->header.mode + 1;
+        func_800A9820(g_Battle.target_selector);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+    }
+}
 
 MATCH void func_801EEE34(void) {
     u16* flags;

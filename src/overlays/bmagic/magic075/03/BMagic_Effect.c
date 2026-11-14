@@ -51,7 +51,19 @@ MATCH void func_801EEDE0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEEB0);
+MATCH void func_801EEEB0(void) {
+    u16* flags;
+
+    g_PaletteFades[g_Task->timer].offset.red -= 2;
+    g_PaletteFades[g_Task->timer].offset.green -= 2;
+    g_PaletteFades[g_Task->timer].offset.blue -= 2;
+    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+        GFX_FreePaletteFade(g_Task->timer);
+        Battle_MarkDamaged(g_Battle.target_selector);
+        BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
+        func_801E5988();
+    }
+}
 
 /* func_801EEFF4 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
