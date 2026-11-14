@@ -342,14 +342,14 @@ MATCH void func_801F8490(void) {
     work->line.unk_08 = 0x100;
     work->line.unk_02 = rand() & 0x700;
     work->line.unk_04 = rand() & 0xF00;
-    work->line.blue   = 255;
-    work->line.green  = 255;
-    work->line.red    = 255;
+    work->line.color.blue   = 255;
+    work->line.color.green  = 255;
+    work->line.color.red    = 255;
     if (rand() & 1) {
-        work->line.red = 0;
+        work->line.color.red = 0;
     }
     if (rand() & 1) {
-        work->line.blue = 0;
+        work->line.color.blue = 0;
     }
     g_Task->header.mode++;
 }
