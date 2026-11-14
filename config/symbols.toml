@@ -6643,7 +6643,7 @@ jtbl_80149F28 = { addr = 0x80149F28, type = "Callback", source = "The switch tab
 jtbl_80149F40 = { addr = 0x80149F40, type = "Callback", source = "The switch table of Item_GetEquipability: the jump targets of its jr dispatch." }
 jtbl_80149F58 = { addr = 0x80149F58, type = "Callback", source = "The switch table of Item_GetFlags: the jump targets of its jr dispatch." }
 jtbl_80149F70 = { addr = 0x80149F70, type = "Callback", source = "The switch table of Item_GetDescription: the jump targets of its jr dispatch." }
-jtbl_80149F88 = { addr = 0x80149F88, type = "Callback", source = "The switch table of Char_TestAbilityRole: the jump targets of its jr dispatch." }
+jtbl_80149F88 = { addr = 0x80149F88, type = "Callback", source = "The switch table of Item_CanEquip: the jump targets of its jr dispatch." }
 jtbl_8014A008 = { addr = 0x8014A008, type = "Callback", source = "The switch table of _SpuSetVoiceAttr: the jump targets of its jr dispatch." }
 jtbl_8014A028 = { addr = 0x8014A028, type = "Callback", source = "The switch table of _SpuSetVoiceAttr: the jump targets of its jr dispatch." }
 jtbl_8014A084 = { addr = 0x8014A084, type = "Callback", source = "The switch table of SpuSetCommonAttr: the jump targets of its jr dispatch." }
@@ -6993,7 +6993,7 @@ Party_SpendZenny = { addr = 0x8016663C, type = "func", source = "Subtracts the a
 Party_AddZenny = { addr = 0x8016666C, type = "func", source = "Adds zenny to the party, capped at 9999999." }
 Item_GetDescription = { addr = 0x801666C8, type = "func", source = "Returns the resource id of a choice entry." }
 Party_AddMember = { addr = 0x801667A4, type = "func", source = "Appends a character to the field and battle order arrays - replacing a free field slot after three." }
-Char_TestAbilityRole = { addr = 0x80166904, type = "func", source = "Tests an ability role of a record." }
+Item_CanEquip = { addr = 0x80166904, type = "func", source = "Returns whether the character with equip bit bit can equip the item in the slot role: the item icon selects the equip slot, its equipability byte must have the bit." }
 Char_GetAbilityCost = { addr = 0x80166A10, type = "func", source = "Returns the AP cost of an ability." }
 Party_GetAbilities = { addr = 0x80166AE4, type = "func", source = "Resolves the party record a slot kind points at and returns its ability panel." }
 Char_GetAbilities = { addr = 0x80166B94, type = "func", source = "Resolves the character record and returns the panel its ability-kind record selects." }

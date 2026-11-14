@@ -58,7 +58,7 @@ segments:
       - [0xB3F70, .rodata, Item_GetDescription]
       # Keep split: 4-byte alignment fill follows Item_GetDescription's bounded table; next table is 8-aligned.
       - {start: 0xB3F84, type: data, name: D_80149F84, linker_section_order: .rodata}
-      - [0xB3F88, .rodata, Char_TestAbilityRole]
+      - [0xB3F88, .rodata, Item_CanEquip]
       - [0xB3F9C, .rodata, data_80149F9C]
       # Keep split: these SPU diagnostic literals belong to SDK library units.
       - {start: 0xB3FC0, type: data, name: D_80149FC0, linker_section_order: .rodata}
@@ -551,7 +551,7 @@ segments:
       - [0xD066C, c, Party_AddZenny]
       - [0xD06C8, c, Item_GetDescription]
       - [0xD07A4, c, Party_AddMember]
-      - [0xD0904, c, Char_TestAbilityRole]
+      - [0xD0904, c, Item_CanEquip]
       - [0xD0A10, c, Char_GetAbilityCost]
       - [0xD0AE4, c, Party_GetAbilities]
       - [0xD0B94, c, Char_GetAbilities]
