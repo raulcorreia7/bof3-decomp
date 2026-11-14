@@ -1,5 +1,5 @@
-#ifndef MENU_PARTY_H
-#define MENU_PARTY_H
+#ifndef SCENARIO_PARTY_H
+#define SCENARIO_PARTY_H
 
 #include "common/vector.h"
 #include "types.h"

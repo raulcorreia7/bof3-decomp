@@ -7,7 +7,7 @@
 
 #include "types.h"
 #include "common/fixed.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 #include "slus/functions.h"
 #include "battle/records.h"
 #include "common/handler.h"

@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* Clears the message request and sets the game overlay state bytes when the menu choice is zero. */
 /* func_801F2C04 (area001), func_801F2C04 (area023), func_801F3074 (area040), func_801F36A0 (area032), func_801F3AC0

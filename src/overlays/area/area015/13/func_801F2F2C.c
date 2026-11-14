@@ -1,7 +1,7 @@
 #include "area015_13.h"
 #include "area/spad.h"
 #include "common/util.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 MATCH void func_801F2F2C(void) {
     s32 idx;

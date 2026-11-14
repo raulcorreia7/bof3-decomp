@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* func_801F389C, func_801F2C48 */
 MATCH void Fairy_AnswerReplayScene(void) {

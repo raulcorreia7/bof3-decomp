@@ -6,7 +6,7 @@
  * image includes the file. */
 
 #include "game/character.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "shared/etc.h"
 #include "menu/save_data.h"
 #include <string.h>

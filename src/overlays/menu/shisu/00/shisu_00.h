@@ -4,10 +4,10 @@
 /* The etc/shisu/00 overlay's local declarations. Only this image
  * includes the file. */
 
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "shared/etc.h"
 #include <stdio.h>
-#include "menu/party.h"
+#include "scenario/party.h"
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 

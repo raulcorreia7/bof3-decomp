@@ -5,7 +5,7 @@
  * includes the file. */
 
 #include "common/vector.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 #include "overlays/scenario/scenario.h"
 
 #define g_Task ((Sce15ef0Work*)g_Task)

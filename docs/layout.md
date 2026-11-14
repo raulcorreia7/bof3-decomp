@@ -235,7 +235,7 @@ void      EMI_Init(void);   /* code in a format header */
 | Disc and file formats   | `include/sys/{cd_format,emi,lz77,str}.h`, `include/audio/{bank,bgm,cue,sep,vab}.h`                  | one self-contained header per format ([format headers](#format-headers))       |
 | Text                    | `include/game/{encoding,text}.h`                                                                    | text encodings, control codes, text records                                    |
 | Game records            | `include/game/*.h`                                                                                  | shared database records: items, abilities, characters, enemies, genes, fairies |
-| Menu                    | `include/menu/*.h`, `include/sys/gameui.h`                                                          | menu panels, inventory, party selection, saves, shops                          |
+| Menu                    | `include/menu/*.h`                                                          | menu panels, inventory, party selection, saves, shops                          |
 | Area                    | `include/area/*.h`                                                                                  | area tasks, maps, area data                                                    |
 | Battle                  | `include/battle/*.h`                                                                                | battle handlers, actors, work records, battle state                            |
 | Scene                   | `include/scenario/*.h`                                                                              | scene steps and effects shared across images                                   |

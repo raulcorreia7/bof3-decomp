@@ -2,7 +2,7 @@
 #define OVERLAY_ETC_START_08_H
 
 #include "game/character.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "shared/etc.h"
 #include "menu/save_data.h"
 #include <string.h>
