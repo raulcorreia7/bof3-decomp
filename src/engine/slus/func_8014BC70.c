@@ -18,7 +18,6 @@ NON_MATCHING void func_8014BC70(void) {
     s32  count;
     s32  sum_a;
     s32  sum_b;
-    s32  draw_mode;
     s32  tmp;
     s32  merged;
     s32  limit;
@@ -30,6 +29,9 @@ NON_MATCHING void func_8014BC70(void) {
     u8*  obj;
     u32  word;
     s8   var_s0;
+    s32  first;
+    s32  lowest;
+    s32  tpage;
     s8   var_s6;
     u32* var_s3;
     u32  var_s2;
@@ -45,9 +47,9 @@ NON_MATCHING void func_8014BC70(void) {
         do {
             var_s4    = count - 1;
             var_t0_34 = var_s4 & BYTE_MASK;
-            tmp       = (s8)((var_s7 & BYTE_MASK) + 1);
-            if (var_t0_34 >= tmp) {
-                var_s0 = tmp;
+            first     = (var_s7 & BYTE_MASK) + 1;
+            if (var_t0_34 >= first) {
+                lowest = first;
                 do {
                     a2 = OBJ(var_t0_34);
                     a3 = OBJ(var_t0_34 - 1);
@@ -58,22 +60,17 @@ NON_MATCHING void func_8014BC70(void) {
                     }
                     var_s4 -= 1;
                     var_t0_34 = var_s4 & BYTE_MASK;
-                } while (var_t0_34 >= var_s0);
+                } while (var_t0_34 >= lowest);
             }
             var_s7 += 1;
-        } while ((var_s7 & BYTE_MASK) < (D_8014832D - 1));
+            count = D_8014832D;
+        } while ((var_s7 & BYTE_MASK) < (count - 1));
     }
-    draw_mode = 0x225;
-    if (GetGraphType() != 1) {
-        draw_mode = 0x95;
-        if (GetGraphType() == 2) {
-            draw_mode = 0x225;
-        }
-    }
+    tpage  = getTPage(1, 0, 320, 256);
     var_s7 = 0;
     var_s4 = 0;
     var_fp = 0;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, draw_mode, NULL);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
     GFX_AddPrim(6U, sizeof(DR_MODE));
     do {
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
