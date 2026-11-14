@@ -22,8 +22,8 @@ MATCH void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        next  = angle + 0x80;
-        other = next & 0xFFF;
+        next  = angle + (ONE / 32);
+        other = next & ANGLE_MASK;
         setXY0(prim, screen.vx, screen.vy);
         prim->x1 = (s16)(screen.vx + FIXED_MUL(screen_radius, rcos(angle)));
         prim->y1 = (s16)(screen.vy + FIXED_MUL(screen_radius, rsin(angle)));
@@ -34,5 +34,5 @@ MATCH void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
         setRGB2(prim, rim_shade, rim_shade, rim_shade);
         GFX_AddPrim(1, sizeof(POLY_G3));
         angle = next;
-    } while ((u16)angle < 0x1000);
+    } while ((u16)angle < ONE);
 }
