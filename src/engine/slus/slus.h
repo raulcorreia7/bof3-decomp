@@ -386,16 +386,28 @@ struct Vec3W {
 /* Data. */
 
 /* Retail data D_80180000-D_801DFFFF and scratchpad (one declaration each). */
-extern u8               D_1F800004;
-extern u32              D_1F80000C;
-extern SVECTOR          D_1F800014[];
-extern u8               D_8000005A;
-extern u8               D_80000307;
-extern u8               D_800013B5;
+extern u8  D_1F800004;
+extern u32 D_1F80000C;
+
+/* One list of the cell ordering table: the last packet linked. */
+typedef struct AreaCellPacketList {
+    P_TAG* tail;
+    s32    unk_04;
+} AreaCellPacketList;
+
+/* D_80142CC4 as lists: six per grid row. */
+extern AreaCellPacketList g_AreaCellPacketLists[][6];
+extern SVECTOR            D_1F800014[];
+extern SVECTOR            D_1F80001C;
+extern SVECTOR            D_1F800024;
+extern SVECTOR            D_1F80002C;
+extern u8                 D_8000005A;
+extern u8                 D_80000307;
+extern u8                 D_800013B5;
 /* Retail data below D_80145000 (one declaration each). */
-extern s32              D_80010004;
-extern EMIDecodeContext D_800327A0[];
-extern u8               D_800E3800;
+extern s32                D_80010004;
+extern EMIDecodeContext   D_800327A0[];
+extern u8                 D_800E3800;
 
 extern u16                         g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 extern u8                          D_80142CC0[];
@@ -1099,7 +1111,9 @@ void                    Area_LoadCellRowsPrev(void);
 /* func_80152FB0 */
 void                    Area_LoadCellRowsNext(void);
 extern s32              func_801530D0(void);
-extern void             func_80153CC4(u32 unused);
+extern void             func_80153CC4(void);
+/* The cell record the tile-ring draw is working on. */
+extern s8*              D_1F800010;
 extern void             func_80153D34(void);
 extern void             Area_GetCell(s32 px, s32 py, AreaCell* out);
 extern s32              Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
