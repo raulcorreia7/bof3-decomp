@@ -92,6 +92,10 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    source until those numbers put the registers where retail has them.
    For a large function compare opcode sequences first (registers and offsets ignored) and fix the
    structural hunks top-down before reading any register.
+   `-dL` prints what the loop pass moved out of each loop and why: a value moves when
+   `threshold * uses * life >= loop size`, and each move lowers the threshold by 3 for the values
+   after it. A register that holds a constant in the draft and a counter in retail is usually one
+   move too many or too few earlier in the loop.
 
    Script the forms: write the body once with its variable parts as a table, build each with
    `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.

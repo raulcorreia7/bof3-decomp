@@ -386,8 +386,9 @@ struct Vec3W {
 /* Data. */
 
 /* Retail data D_80180000-D_801DFFFF and scratchpad (one declaration each). */
-extern u8               D_1F800004;
-extern u32              D_1F80000C;
+extern u8  D_1F800004;
+extern u32 D_1F80000C;
+
 /* One list of the cell ordering table: the last packet linked. */
 typedef struct AreaCellPacketList {
     P_TAG* tail;
@@ -396,17 +397,17 @@ typedef struct AreaCellPacketList {
 
 /* D_80142CC4 as lists: six per grid row. */
 extern AreaCellPacketList g_AreaCellPacketLists[][6];
-extern SVECTOR          D_1F800014[];
-extern SVECTOR          D_1F80001C;
-extern SVECTOR          D_1F800024;
-extern SVECTOR          D_1F80002C;
-extern u8               D_8000005A;
-extern u8               D_80000307;
-extern u8               D_800013B5;
+extern SVECTOR            D_1F800014[];
+extern SVECTOR            D_1F80001C;
+extern SVECTOR            D_1F800024;
+extern SVECTOR            D_1F80002C;
+extern u8                 D_8000005A;
+extern u8                 D_80000307;
+extern u8                 D_800013B5;
 /* Retail data below D_80145000 (one declaration each). */
-extern s32              D_80010004;
-extern EMIDecodeContext D_800327A0[];
-extern u8               D_800E3800;
+extern s32                D_80010004;
+extern EMIDecodeContext   D_800327A0[];
+extern u8                 D_800E3800;
 
 extern u16                         g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 extern u8                          D_80142CC0[];

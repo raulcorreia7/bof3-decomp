@@ -2,8 +2,8 @@
 
 #include <inline_c.h>
 
-#define PAD_AT(type, off) ((type*)((u8*)&D_1F800000 + (off)))
-#define PAD(type, off)    (*PAD_AT(type, off))
+#define PAD_AT(type, off)           ((type*)((u8*)&D_1F800000 + (off)))
+#define PAD(type, off)              (*PAD_AT(type, off))
 
 /* Appends the packet to a list of the cell ordering table. */
 #define LINK_PACKET(row, list, pkt) (setaddr(g_AreaCellPacketLists[row][list].tail, pkt), g_AreaCellPacketLists[row][list].tail = (P_TAG*)(pkt))
@@ -14,46 +14,46 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801530D0(void) {
-    s32 sp10_row;
-    s32 origin_x;
-    s32 next_row;
-    s32 next_col;
-    s32 window;
-    s32 wrapped;
-    s32 tilt;
-    s32 ring;
-    s32 inner;
-    s32 outer;
-    s32 origin_y;
-    s32 depth_threshold;
-    u8* map_width_ptr;
-    s8* rec;
-    s32 width;
-    s32 v;
-    s32 tmp;
-    s32 row;
-    s32 col;
-    s32 col_count;
-    s32 fp;
-    s32 s6;
-    s32 s2;
-    u16 v16;
-    u8  low;
-    u32 word;
+    s32       sp10_row;
+    s32       origin_x;
+    s32       next_row;
+    s32       next_col;
+    s32       window;
+    s32       wrapped;
+    s32       tilt;
+    s32       ring;
+    s32       inner;
+    s32       outer;
+    s32       origin_y;
+    s32       depth_threshold;
+    u8*       map_width_ptr;
+    s8*       rec;
+    s32       width;
+    s32       v;
+    s32       tmp;
+    s32       row;
+    s32       col;
+    s32       col_count;
+    s32       fp;
+    s32       s6;
+    s32       s2;
+    u16       v16;
+    u8        low;
+    u32       word;
     AreaCell* cell;
     POLY_FT4* prim;
     POLY_FT4* pkt;
     POLY_FT4* pkt2;
     POLY_FT4* link;
-    s32 x;
-    u16 ux;
-    u16 uy;
-    s32 y;
-    s32 ring_cell;
-    s32 sword;
-    s8* below;
-    u8* low_min;
-    SVECTOR* vert;
+    s32       x;
+    u16       ux;
+    u16       uy;
+    s32       y;
+    s32       ring_cell;
+    s32       sword;
+    s8*       below;
+    u8*       low_min;
+    SVECTOR*  vert;
 
     func_80153CC4();
     tilt       = g_AreaCameraAngle.vz - 0x200;
@@ -112,7 +112,7 @@ NON_MATCHING s32 func_801530D0(void) {
                 if (col != 27) {
                     next_col = col + 1;
                 }
-                col = next_col;
+                col  = next_col;
                 cell = &g_AreaCells[sp10_row][col];
                 if ((cell->tile_x == 0) || (cell->tile_y == 0)) {
                     Area_RequestCellRows(cell);
@@ -162,20 +162,20 @@ NON_MATCHING s32 func_801530D0(void) {
                             }
                             prim[0].pad1 = v;
                         block_38:
-                            pkt                = &prim[g_FrameBufferIndex];
-                            *(u32*)&pkt->x0    = *(u32*)D_1F800034;
-                            ux                 = D_1F800014[0].vx;
-                            uy                 = D_1F800014[0].vy;
-                            rec                = D_1F800010;
-                            D_1F80001C.vx = ux + 0x80;
-                            D_1F800024.vx = ux;
-                            D_1F80002C.vx = ux + 0x80;
-                            D_1F80002C.vy = uy + 0x80;
-                            D_1F80002C.vz = -(rec[3] * 0x10);
-                            D_1F80001C.vy = uy;
-                            D_1F800024.vy = uy + 0x80;
-                            D_1F80001C.vz = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
-                            D_1F800024.vz = -(rec[2] * 0x10);
+                            pkt             = &prim[g_FrameBufferIndex];
+                            *(u32*)&pkt->x0 = *(u32*)D_1F800034;
+                            ux              = D_1F800014[0].vx;
+                            uy              = D_1F800014[0].vy;
+                            rec             = D_1F800010;
+                            D_1F80001C.vx   = ux + 0x80;
+                            D_1F800024.vx   = ux;
+                            D_1F80002C.vx   = ux + 0x80;
+                            D_1F80002C.vy   = uy + 0x80;
+                            D_1F80002C.vz   = -(rec[3] * 0x10);
+                            D_1F80001C.vy   = uy;
+                            D_1F800024.vy   = uy + 0x80;
+                            D_1F80001C.vz   = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
+                            D_1F800024.vz   = -(rec[2] * 0x10);
                             gte_ldv3c(&D_1F80001C);
                             pkt2 = &g_AreaCellPrims[s2][g_FrameBufferIndex];
                             gte_rtpt();
