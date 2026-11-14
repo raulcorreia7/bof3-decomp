@@ -245,7 +245,7 @@ MATCH void func_801FAC88(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             g_GameFlags ^= 0x0E;
             Game_ClearScriptActive();
-            g_ScriptVars[0] = 0;
+            *g_ScriptVars = 0;
             Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 14:
@@ -480,7 +480,42 @@ MATCH s32 func_801FD498(void) {
     }
 }
 
-INCLUDE_ASM(func_801FD5A8);
+MATCH s32 func_801FD5A8(void) {
+    if (D_80145F09 == 5) {
+        if (SYS_TestFlag(g_SceneFlags, 0x10) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 2;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 3;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0x1D) == 0) {
+            Game_SetScriptActive();
+            D_80146875    = 50;
+            *g_ScriptVars = 0;
+            D_80146874    = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0x11) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 7;
+            D_80146874 = 6;
+            return 1;
+        } else {
+            Game_SetScriptActive();
+            D_80146875 = 5;
+            D_80146874 = 6;
+            return 1;
+        }
+    } else {
+        Game_SetScriptActive();
+        D_80146875 = 0;
+        D_80146874 = 6;
+        return 1;
+    }
+}
 
 MATCH s32 func_801FD6F8(void) {
     if (D_80145F09 == 5) {

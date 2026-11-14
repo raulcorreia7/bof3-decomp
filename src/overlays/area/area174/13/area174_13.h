@@ -28,6 +28,20 @@ extern u8*      D_801F6748[];
 /* The signed per-step offsets the scripted move adds to x and subtracts from y, indexed by the 4-bit step. */
 extern s8       D_801F6754[];
 
+/* Claims a spawn slot for an actor of the given actor_type linked to the current actor; with no slot free it backs the script cursor up by 2. func_801F43FC and func_801F4D90 share it; every change must verify both. A statement macro: an inline function loads actor_type before the call and moves the bytes. */
+#define AREA_SPAWN_LINKED_ACTOR(actor_type)                                         \
+    g_Task->param.actor_slot = Actor_FindFreeSpawned();                             \
+    if (g_Task->param.actor_slot != GAME_NONE) {                                    \
+        g_SpawnedActors[g_Task->param.actor_slot].header.flags      = 1;            \
+        g_SpawnedActors[g_Task->param.actor_slot].type              = (actor_type); \
+        g_SpawnedActors[g_Task->param.actor_slot].unk_06            = 1;            \
+        g_SpawnedActors[g_Task->param.actor_slot].unk_07            = 0;            \
+        g_SpawnedActors[g_Task->param.actor_slot].link              = 1;            \
+        *(s32*)&g_SpawnedActors[g_Task->param.actor_slot].pad_4B[1] = (s32)g_Task;  \
+    } else {                                                                        \
+        g_ScriptState->cursor -= 2;                                                 \
+    }
+
 u8*         func_801F2E88(void);
 extern u8   Area_UpdateShots(void);
 extern void func_801F4A5C(u8* pairs, s32 facing);

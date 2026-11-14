@@ -129,7 +129,7 @@ MATCH void func_801F7B10(void) {
 
     actor = g_Task;
     ptr   = &actor->vx;
-    func_801F7FFC(ptr);
+    func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->tint.halves.unk_5E += 1;
     value         = g_Task->timer - 1;
@@ -147,7 +147,7 @@ MATCH void func_801F7BB0(void) {
 
     actor = g_Task;
     ptr   = &actor->vx;
-    func_801F7FFC(ptr);
+    func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->script_pc += 4;
     value         = g_Task->timer - 1;
@@ -163,7 +163,7 @@ MATCH void func_801F7C50(void) {
     u8   temp_v0;
 
     temp_s0 = &g_Task->vx;
-    func_801F7FFC(temp_s0);
+    func_801F7FFC((Scena03Quad*)temp_s0);
     func_801F8170(temp_s0);
     temp_v0       = g_Task->timer - 1;
     g_Task->timer = temp_v0;
@@ -180,7 +180,7 @@ MATCH void func_801F7CE0(void) {
 
     work = g_Task;
     pos  = &work->vx;
-    func_801F7FFC(pos);
+    func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     work->unk_5A -= 8;
     work->tint.halves.unk_5C -= 0x40;
@@ -198,7 +198,7 @@ MATCH void func_801F7D80(void) {
 
     work = g_Task;
     pos  = &work->vx;
-    func_801F7FFC(pos);
+    func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     step            = work->script_pc - 8;
     work->script_pc = step;
@@ -265,7 +265,49 @@ MATCH void func_801F7F84(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F7FFC);
+MATCH void func_801F7FFC(Scena03Quad* quad) {
+    MATRIX mat;
+    VECTOR in;
+    VECTOR out;
+    s32    dx;
+    s32    dy;
+    u8     i;
+
+    i  = 0;
+    dx = (quad->length * rcos(quad->angle)) << 4;
+    dy = (quad->length * rsin(quad->angle)) << 4;
+    MATH_SetIdentity(&mat);
+    RotMatrixY(quad->rotation_y, &mat);
+    RotMatrixZ(quad->rotation_z, &mat);
+    /* Retail applies the matrix once to the uninitialised vector before the loop. */
+    ApplyMatrixLV(&mat, &in, &out);
+    in.vz = 0;
+    do {
+        switch (i) {
+            case 0:
+                in.vx = 0;
+                in.vy = 0;
+                break;
+            case 1:
+                in.vx = dx;
+                in.vy = dy;
+                break;
+            case 2:
+                in.vx = dx;
+                in.vy = 0;
+                break;
+            default:
+                in.vx = dx;
+                in.vy = -dy;
+                break;
+        }
+        ApplyMatrixLV(&mat, &in, &out);
+        quad->corner[i].x = quad->x + out.vx;
+        quad->corner[i].y = quad->y + out.vy;
+        quad->corner[i].z = quad->z + (out.vz << 8);
+        i++;
+    } while (i < 4);
+}
 
 MATCH void func_801F8170(s32* vertices) {
     MATRIX camera;

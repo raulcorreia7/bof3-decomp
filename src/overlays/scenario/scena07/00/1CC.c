@@ -392,7 +392,27 @@ MATCH u8* func_801F8394(void) {
 
 INCLUDE_ASM(func_801F83D0);
 
-INCLUDE_ASM(func_801F8478);
+/* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
+MATCH void func_801F8478(u8* row) {
+    s32* cell;
+    u16  yaw;
+    u16  pitch;
+    s16  radius;
+
+    cell    = (s32*)row;
+    row[0]  = 1;
+    row[1]  = 0;
+    row[2]  = 8;
+    row[3]  = 0;
+    cell[2] = 0;
+    row[4]  = 1;
+    yaw     = rand() & 0x7FF;
+    pitch   = rand() & 0xFFF;
+    radius  = ((rand() % 2) << 12) | (rand() & 0xFFF);
+    cell[3] = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    cell[4] = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    cell[5] = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
+}
 
 MATCH u8 func_801F85D8(void) {
     u8     active;
@@ -494,7 +514,27 @@ MATCH u8* func_801F9DD4(void) {
     return NULL;
 }
 
-INCLUDE_ASM(func_801F9E10);
+/* Starts a burst row at a random distance and angle around the actor, on the ground. */
+MATCH void func_801F9E10(u8* row) {
+    s32  radius;
+    u32  angle;
+    s32* cell;
+    /* FAKE: the retail frame holds 16 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 16);
+
+    cell    = (s32*)row;
+    row[0]  = 1;
+    row[1]  = 0;
+    row[2]  = 16;
+    cell[6] = 0;
+    cell[5] = 0;
+    radius  = ((rand() % 2) << 16) | ((rand() & BYTE_MASK) << 8);
+    angle   = rand() & 0xFC0;
+    cell[1] = g_Task->pos.x.fixed + ((radius * rcos(angle)) >> 12);
+    cell[2] = g_Task->pos.y.fixed + ((radius * rsin(angle)) >> 12);
+    cell[7] = Area_SampleHeight(cell[1], cell[2]) << 16;
+    cell[3] = cell[7];
+}
 
 INCLUDE_ASM(func_801F9EFC);
 
