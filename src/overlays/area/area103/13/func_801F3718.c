@@ -11,7 +11,7 @@ MATCH void func_801F3718(void) {
     work2                  = g_Task;
     /* FAKE: indexed stores across gravity and active_flags preserve the coordinate load order. */
     MEM_PTR(s16, work)[16] = 0;
-    MEM_PTR(s32, work)[9]  = 0x1000000;
+    MEM_PTR(s32, work)[9]  = AREA_EFFECT_ACTIVE_WORD;
     setVector(work, x, y, z);
     work->unk_1C = z;
     work2->header.mode++;
