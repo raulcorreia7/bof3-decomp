@@ -11,10 +11,8 @@ MATCH void func_8015B2AC(s16* out, s32* in) {
     SVECTOR rot;
     long    flag;
 
-    vec           = D_80149BF0;
-    D_801481D8.vx = D_801481E0;
-    D_801481D8.vy = D_801481E2;
-    D_801481D8.vz = D_801481E4;
+    vec = D_80149BF0;
+    setVector(&D_801481D8, D_801481E0, D_801481E2, D_801481E4);
     PushMatrix();
     RotMatrix(&D_801481D8, &matrix);
     TransMatrix(&matrix, &vec);
@@ -24,9 +22,7 @@ MATCH void func_8015B2AC(s16* out, s32* in) {
     rot.vx = 0;
     rot.vz = D_801481E6;
     RotTrans(&rot, &vec, &flag);
-    rot.vx = in[0];
-    rot.vy = in[1];
-    rot.vz = in[2];
+    setVector(&rot, in[0], in[1], in[2]);
     RotMatrix(&rot, &matrix);
     TransposeMatrix(&matrix, &matrix);
     ApplyMatrixLV(&matrix, &vec, &vec);

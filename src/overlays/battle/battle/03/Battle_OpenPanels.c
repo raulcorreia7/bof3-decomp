@@ -31,10 +31,8 @@ MATCH void Battle_OpenPanels(void) {
     for (battler = 0; battler < BATTLE_PARTY_CHARACTERS_COUNT; battler++) {
         if (ACTOR_IN_USE(g_Game.members[battler])) {
             Menu_OpenPanelTask((battler + 0xD) & BYTE_MASK, 3);
-            D_80148332[battler + 0xD].mode_00 = 5;
-            D_80148332[0xD + battler].unk_01  = 0;
-            /* FAKE: barrier keeps the row-byte load after the two panel byte stores. */
-            FAKE_BARRIER();
+            D_80148332[battler + 0xD].mode_00    = 5;
+            D_80148332[0xD + battler].unk_01     = 0;
             first                                = g_Game.members[battler].facing;
             index                                = first * CHAR_ID_GARR + g_Game.members[battler].chr.character_id * 8;
             panel_x                              = g_Game.members[battler].unk_2E.half + g_BattlePanelOffsets[index];

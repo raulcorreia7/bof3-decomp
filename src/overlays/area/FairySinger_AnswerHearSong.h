@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* func_801F3EB4, func_801F3260 */
 MATCH void FairySinger_AnswerHearSong(void) {

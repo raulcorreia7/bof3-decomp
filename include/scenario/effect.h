@@ -3,7 +3,7 @@
 
 #include "psx/mem.h"
 #include "types.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 
 #define PARTY_STATE_BASE 0x80140000u
 
@@ -28,7 +28,7 @@ typedef struct PartyState {
 
 ASSERT_SIZE(PartyState, 0x6255);
 
-/* The party bytes agree with the addresses menu/party.h owns. */
+/* The party bytes agree with the addresses scenario/party.h owns. */
 ASSERT_OFFSET(PartyState, menu_flags, PARTY_FLAGS - PARTY_STATE_BASE);
 ASSERT_OFFSET(PartyState, field_order, PARTY_FIELD_ORDER_BASE - PARTY_STATE_BASE);
 ASSERT_OFFSET(PartyState, battle_order, PARTY_BATTLE_ORDER_BASE - PARTY_STATE_BASE);

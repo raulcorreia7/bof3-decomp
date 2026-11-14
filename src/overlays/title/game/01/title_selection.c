@@ -80,8 +80,6 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
         UI_SetMode(UI_MODE_SLOW_FADE_OUT);
         sel  = g_SndBGMId;
         bank = D_80143F20;
-        /* FAKE: barrier stages args deferring a2 into slot. */
-        FAKE_BARRIER();
         SND_FadeOutBGM(sel, bank, 8);
         g_UiTitleState = g_UiTitleState + 1u;
     }
@@ -103,7 +101,7 @@ MATCH void UI_UpdateChoicePrompt(void) { /* func_801D0FB8 */
 }
 
 /* Closes the current selection FX, restores layout bank 0, installs the
- * alternate frontend callback loop, then exits the active EXE callback thread. */
+ * alternate frontend callback loop, then exits the active scheduler thread. */
 /* func_801D1000 */
 MATCH void Game_LeaveTitle(void) { /* func_801D1000 */
     if (WINDOW_EFFECT_BUSY()) {

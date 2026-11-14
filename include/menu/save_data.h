@@ -7,7 +7,7 @@
 #include "game/fairy.h"
 #include "menu/clock.h"
 #include "menu/inventory.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "scenario/state.h"
 
 /* The persistent block: 4,272 bytes. */

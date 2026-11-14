@@ -28,6 +28,4 @@ extern Callback D_801CFBBC[];
 extern Callback D_801CFBC8[];
 extern Callback D_801CFBD4[];
 
-void Actor_BeginScript(s32 script_index, s32 position);
-
 #endif

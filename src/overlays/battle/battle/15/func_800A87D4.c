@@ -1,10 +1,5 @@
 #include "battle_15.h"
 
-/* The 0x74 bytes of the work record that a queued slot copies. */
-typedef struct BattleWorkImage {
-    u32 words[29];
-} BattleWorkImage;
-
 /* Copies the battle work record into a queued slot and arms the active actor. */
 MATCH void func_800A87D4(void) {
     u8*              kind;

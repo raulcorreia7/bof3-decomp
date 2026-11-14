@@ -235,10 +235,10 @@ void      EMI_Init(void);   /* code in a format header */
 | Disc and file formats   | `include/sys/{cd_format,emi,lz77,str}.h`, `include/audio/{bank,bgm,cue,sep,vab}.h`                  | one self-contained header per format ([format headers](#format-headers))       |
 | Text                    | `include/game/{encoding,text}.h`                                                                    | text encodings, control codes, text records                                    |
 | Game records            | `include/game/*.h`                                                                                  | shared database records: items, abilities, characters, enemies, genes, fairies |
-| Menu                    | `include/menu/*.h`, `include/sys/gameui.h`                                                          | menu panels, inventory, party selection, saves, shops                          |
+| Menu                    | `include/menu/*.h`                                                                                  | menu panels, inventory, saves, shops                                           |
 | Area                    | `include/area/*.h`                                                                                  | area tasks, maps, area data                                                    |
 | Battle                  | `include/battle/*.h`                                                                                | battle handlers, actors, work records, battle state                            |
-| Scene                   | `include/scenario/*.h`                                                                              | scene steps and effects shared across images                                   |
+| Scene                   | `include/scenario/*.h`                                                                              | scene steps, effects and the party formation shared across images              |
 | Overlay loading         | `include/sys/{emi,exe,loader_tail}.h`, `include/etc/overlay.h`                                      | EMI and executable loading, overlay tables                                     |
 | Main executable exports | `include/slus/*.h`                                                                                  | `SLUS_004.22` symbols the overlays read or call                                |
 | Platform and matching   | `include/types.h`, `include/common/*.h`, `include/psx/*.h`, `include/psyq/*.h`, `include/match/*.h` | C widths, shared helpers, PSX and PsyQ interfaces, match-only helpers          |
@@ -254,12 +254,14 @@ or moves down to the lowest layer that covers its users ([lowest scope wins](#lo
 | L0    | `psyq`                             |
 | L1    | `types.h`                          |
 | L2    | `common/`, `audio`, `psx`, `match` |
-| L3    | `sys`, `gfx`, `area`               |
-| L4    | `common.h`, `etc`, `menu`          |
-| L5    | `game`, `scenario`                 |
+| L3    | `gfx`, `sys`                       |
+| L4    | `common.h`, `area`, `etc`          |
+| L5    | `game`                             |
 | L6    | `battle`                           |
-| L7    | `slus`                             |
-| L8    | `game.h`                           |
+| L7    | `scenario`                         |
+| L8    | `menu`                             |
+| L9    | `slus`                             |
+| L10   | `game.h`                           |
 
 `game.h` stays small: the base and the headers every group needs. A group header
 (`src/overlays/<group>/<group>.h`, `src/shared/etc.h`, `src/engine/slus/slus.h`) includes `game.h`

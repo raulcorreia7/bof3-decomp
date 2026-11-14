@@ -6,7 +6,7 @@
 
 #include "overlays/area/world03.h"
 #include "area/spad.h"
-#define AREA_SPARKS        ((AreaSpark*)0x800E6000)
+#define AREA_SPARKS        ((AreaGroundSpark*)0x800E6000)
 
 /* The shop panel step the request sets. */
 
@@ -44,7 +44,8 @@ s32  func_801F30A0(void);
 /* The draw step that reads the three-word work position. */
 void Area_DrawLightPillar(s32* pos);
 
-typedef struct AreaSpark {
+/* One of the 16 sparks seeded at fixed cells, resting at the ground height. */
+typedef struct AreaGroundSpark {
     u8  live;
     u8  unk_01;
     u8  unk_02;
@@ -53,6 +54,8 @@ typedef struct AreaSpark {
     s32 y;
     s32 z;
     s32 pad;
-} AreaSpark;
+} AreaGroundSpark;
+
+ASSERT_SIZE(AreaGroundSpark, 0x14);
 
 #endif

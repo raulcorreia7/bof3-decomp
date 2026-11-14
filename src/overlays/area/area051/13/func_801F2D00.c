@@ -1,3 +1,26 @@
 #include "area051_13.h"
 
-INCLUDE_ASM(func_801F2D00);
+MATCH void func_801F2D00(void) {
+    u32* p;
+
+    if (SYS_TestFlag(D_80144EF8, 19) == 0) {
+        return;
+    }
+    if (SYS_TestFlag(D_80144EF8, 20) != 0) {
+        return;
+    }
+    p = (u32*)(MAP_BUNDLE_BASE + (((AreaMapBundle*)MAP_BUNDLE_BASE)->list_base_22 << 2));
+    if (*p == 0) {
+        return;
+    }
+    while (*p != 0) {
+        u32 v = *p;
+        if ((v & (0xFFu << 24)) == (0x81u << 24)) { /* the 0x81 record */
+            p += 2;
+            p[1] = AREA051_RECORD_81_WORD;
+            p[0] = AREA051_RECORD_81_WORD;
+            return;
+        }
+        p = (u32*)((u8*)p + ((v >> 14) & 0x3FC));
+    }
+}

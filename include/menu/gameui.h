@@ -1,5 +1,5 @@
-#ifndef SYSTEM_GAMEUI_H
-#define SYSTEM_GAMEUI_H
+#ifndef MENU_GAMEUI_H
+#define MENU_GAMEUI_H
 
 #include "types.h"
 #include "game/character.h"

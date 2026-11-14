@@ -31,13 +31,11 @@ MATCH void func_801D3174(void) {
     base -= 8;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     pad                                                         = g_InputPressed;
-    /* FAKE: keeps the pad load ahead of the panel stores. */
-    FAKE_BARRIER();
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
-    offset                                           = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + offset;
-    trigger                                          = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    offset                                                      = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + offset;
+    trigger                                                     = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs                 = 0x32;

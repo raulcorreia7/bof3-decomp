@@ -23,7 +23,7 @@
 #include "common/handler.h"
 #include "psx/mem.h"
 #include "common/vector.h"
-#include "slus/facing.h"
+#include "common/facing.h"
 #include "types.h"
 #include "sys/task.h"
 

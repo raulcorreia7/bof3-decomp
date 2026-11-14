@@ -496,10 +496,6 @@ extern u8                    g_FishingNewRecord;
 
 /* func_800F7094 */
 s32  Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
-/* func_8014D6DC */
-void Actor_BeginScript(s32 script_index, s32 position);
-/* func_801650B4 */
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 void func_801D0C90(void);
 void func_801D0CDC(void);
 void func_801D0DDC(void);

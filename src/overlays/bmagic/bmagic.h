@@ -148,14 +148,6 @@ typedef Point2s TrailPoint;
     handlers.handlers[g_Task->field]()
 #define g_Task ((PartyMember*)g_Task)
 
-/* The 0x74 bytes of a battler's work record that a queued effect slot copies;
- * GCC expands the copy into its 16-byte block-move loop. */
-typedef struct BattleWorkImage {
-    u32 words[29];
-} BattleWorkImage;
-
-ASSERT_SIZE(BattleWorkImage, 0x74);
-
 /* Copy the active battler's work image into a free effect slot. A statement
  * macro: the member declares u32 index, u8 active and BattleEffect* slot. */
 #define BMAGIC_ALLOC_BATTLER_EFFECT()                                              \

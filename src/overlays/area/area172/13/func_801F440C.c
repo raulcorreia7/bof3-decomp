@@ -11,9 +11,7 @@ MATCH void func_801F440C(void) {
     g_Task->tint.signed_bytes.delta.blue  = -0x80;
     work                                  = g_Task;
     work->unk_04                          = 1;
-    work->vx                              = 0;
-    work->vy                              = 0;
-    work->vz                              = 0;
-    work->gravity                         = -8;
+    setVector(work, 0, 0, 0);
+    work->gravity = -8;
     g_ScriptState->cursor -= 2;
 }

@@ -13,7 +13,6 @@ extern volatile u8 g_BattleActiveBattler;
 /* The steal chance of each drop rate index. */
 extern s8 D_801EF078[];
 
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 /* Battle_AddMessage */
 void func_801DE8C0(s32 index, s32 record_kind, u8* text);
 void func_801EEF98(s32 index, s32 category);

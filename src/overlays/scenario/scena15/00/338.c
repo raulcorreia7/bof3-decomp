@@ -235,10 +235,8 @@ MATCH void func_801F83AC(Point2u* out) {
     slot                    = g_Task->param.actor_slot;
     g_Actors[slot].screen_x = g_Task->screen_x;
     g_Actors[slot].screen_y = g_Task->screen_y;
-    vec.vx                  = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    vec.vy                  = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    vec.vz                  = -COORD_INT(g_Task->pos.z) / 2;
-    g_Task->unk_60          = RotTransPers(&vec, (long*)out, &depth, &flag);
+    setVector(&vec, (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    g_Task->unk_60 = RotTransPers(&vec, (long*)out, &depth, &flag);
     out->x -= 12;
     out->y -= 37;
 }
@@ -483,7 +481,22 @@ INCLUDE_ASM(func_801FAFA8);
 
 INCLUDE_ASM(func_801FB788);
 
-INCLUDE_ASM(func_801FC100);
+MATCH void func_801FC100(void) {
+    u8 i;
+
+    for (i = 0; i < 3; i++) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
+            func_801A4D54(&D_801FE694[i * 17]);
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
+            func_801A65A0(&D_801FE6C8[i * 16]);
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FC1D8);
 

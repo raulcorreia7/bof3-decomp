@@ -33,7 +33,7 @@ MATCH void func_801DFCB4(void) {
     *(s16*)((u8*)self + 0x11C)               = 0;
     *(s16*)((u32)g_Battle.target_record + 6) = 0;
     *((u8*)g_Battle.target_record + 8)       = 0;
-    D_801EC2E8                               = *(BattleStatBlock*)&g_Game.current->chr.stats.max_hp;
+    D_801EC2E8                               = g_Game.current->chr.stats;
     stats_work                               = g_Game.current;
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;

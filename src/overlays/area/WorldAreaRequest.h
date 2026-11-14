@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 #include "scenario/runtime.h"
 #include "common/util.h"
 
