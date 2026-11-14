@@ -6837,7 +6837,7 @@ Game_IsAreaEqual = { addr = 0x8015B644, type = "func", source = "Tests whether t
 Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "Tests a scene flag." }
 Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene event flag." }
 Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
-Game_IsScenarioAtLeast = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
+Game_IsScenarioAtMost = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
 func_8015B83C = { addr = 0x8015B83C, type = "func", source = "Entry of the script condition table data_8018214C: tests bit **cursor of the D_80145548 mask, whose owner is not proven." }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
