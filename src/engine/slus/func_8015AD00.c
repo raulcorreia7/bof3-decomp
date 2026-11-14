@@ -173,9 +173,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             sort_list->work      = (u8*)g_Task;
             sort_list->primitive = p;
-            quad->ft4.r0         = g_Task->tint.bytes.rgb.red;
-            quad->ft4.g0         = g_Task->tint.bytes.rgb.green;
-            quad->ft4.b0         = g_Task->tint.bytes.rgb.blue;
+            setRGB0(&quad->ft4, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
             if ((g_Task->range_54.table[3] & 0x80) != 0) {
                 VectorNormalS(&normal, D_1F800014);
                 color.r  = g_Task->tint.bytes.rgb.red;

@@ -15,7 +15,5 @@
     poly = g_GfxPrimCursor;                                     \
     SetPolyF3(poly);                                            \
     setXY3(poly, (X), (Y), (X) - 4, (Y) - 4, (X) + 4, (Y) - 4); \
-    poly->r0 = 0;                                               \
-    poly->g0 = colour;                                          \
-    poly->b0 = 0;                                               \
+    setRGB0(poly, 0, colour, 0);                                \
     GFX_AddPrim(1, sizeof(POLY_F3))
