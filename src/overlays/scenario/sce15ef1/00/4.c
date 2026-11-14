@@ -79,7 +79,7 @@ MATCH void func_801D13F4(void) {
     }
 }
 
-MATCH void func_801D147C(void* arg0, s32 arg1, s32 arg2) {
+MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
     DVECTOR  screen;
     DVECTOR  point;
     DVECTOR  size;
@@ -88,13 +88,7 @@ MATCH void func_801D147C(void* arg0, s32 arg1, s32 arg2) {
     POLY_G3* primitive;
     s32      angle;
     s32      i;
-    void*    pos;
-    s16      origin;
-    s32      flags;
 
-    pos    = arg0;
-    origin = arg1;
-    flags  = arg2;
     GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x2C0, 0x100));
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(pos, &screen);
