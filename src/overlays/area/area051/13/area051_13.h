@@ -7,4 +7,6 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
+extern u8 D_80144EF8[];
+
 #endif
