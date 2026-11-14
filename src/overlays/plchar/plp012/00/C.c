@@ -18,8 +18,9 @@ MATCH void func_801CE72C(void) {
 
 #include "overlays/plchar/func_801CE770.h"
 
-INCLUDE_ASM(func_801CEA94);
+#include "overlays/plchar/Char_RunFacingProbe.h"
 
+MATCH void func_801CEA94(void){CHAR_RUN_FACING_PROBE()}
 #include "overlays/plchar/Char_AdvanceScript.h"
 
 #include "overlays/plchar/Char_ProbeCellSpawn.h"
