@@ -289,8 +289,6 @@ MATCH void func_801EFD28(void) {
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;
         g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
-        /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
-        FAKE_BARRIER();
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
