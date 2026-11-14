@@ -23,5 +23,4 @@ extern s16     D_1F800018;
 void func_801EF5C4(s16 band_height, u16 radius, u16 jitter_mask);
 void func_801F083C(void);
 
-
 #endif

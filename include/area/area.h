@@ -91,8 +91,8 @@
  * a cell's centre is half a cell past its corner. */
 #define AREA_CELL_ORIGIN           0x4000
 #define AREA_CELL_HALF             0x40
-#define AREA_CELL_GRID_ROWS        56 /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
-#define AREA_CELL_GRID_COLS        28 /* columns of the cell grids */
+#define AREA_CELL_GRID_ROWS        56          /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
+#define AREA_CELL_GRID_COLS        28          /* columns of the cell grids */
 #define MAP_BUNDLE_BASE            0x80104000u /* the map bundle */
 
 /* The payload-head id convention: an area program is 52 + area, an auxiliary

@@ -90,8 +90,8 @@ void func_801F0B8C(s16 x0, s16 y0, s16 x1, s16 y1);
 void func_801F0EEC(u32 sprite, s32 blend, s32 color);
 void func_801F103C(void);
 
-extern u16      D_80149336;
-extern u8       D_8014933D;
+extern u16 D_80149336;
+extern u8  D_8014933D;
 
 void Area_LoadCellRowsNext(void);
 void Area_LoadCellRowsPrev(void);

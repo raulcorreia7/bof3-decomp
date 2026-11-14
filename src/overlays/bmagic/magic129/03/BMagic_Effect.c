@@ -197,8 +197,9 @@ MATCH void func_801EF54C(void) {
         D_1F800000.view.effect.params[4] += FIXED_MUL(rsin(angle), sway);
         D_1F800000.view.effect.params[5] += FIXED_MUL(rcos(angle), sway);
         D_1F800000.view.effect.params[2] = D_1F800000.view.effect.params[3];
-        D_1F800000.view.effect.params[3] = ratan2(D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[7] - D_1F800000.view.effect.params[5]) & ANGLE_MASK;
-        prim                             = (POLY_G4*)g_GfxPrimCursor;
+        D_1F800000.view.effect.params[3] =
+            ratan2(D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[7] - D_1F800000.view.effect.params[5]) & ANGLE_MASK;
+        prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         sway     = (LOHU(D_1F800000.view.effect.params[2]) + 0x400) & ANGLE_MASK;
