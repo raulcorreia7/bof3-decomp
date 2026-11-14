@@ -1,6 +1,6 @@
 /* Draws a ring of 32 semi-transparent triangles around the projected point: the radius is the point projected at the given size plus the frame parity, and the centre corner takes its colour from the low three bits of the flags (red, green, blue). Every change must verify sce15ef0 and area098. */
-/* GFX_DrawColourFan (sce15ef0, area098) */
-MATCH void GFX_DrawColourFan(s32* pos, s16 origin, s32 flags) {
+/* GFX_DrawColorFan (sce15ef0, area098) */
+MATCH void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags) {
     DVECTOR  screen;
     DVECTOR  point;
     DVECTOR  size;

@@ -25,7 +25,7 @@ MATCH void func_801D0CEC(void) {
     work->color_r += 8;
     work->origin_x += 0x10;
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    GFX_DrawColourFan(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
@@ -36,7 +36,7 @@ MATCH void func_801D0CEC(void) {
 
 MATCH void func_801D0DB0(void) {
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    GFX_DrawColourFan(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->color_g = 0;
@@ -53,7 +53,7 @@ MATCH void func_801D0E5C(void) {
         func_801D1220(0xFF);
     }
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    GFX_DrawColourFan(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 4;
         g_Task->header.mode += 1;
@@ -64,7 +64,7 @@ MATCH void func_801D0F44(void) {
     g_Task->color_g -= 0x40;
     func_801D1220(g_Task->color_g);
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    GFX_DrawColourFan(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -75,7 +75,7 @@ MATCH void func_801D0F44(void) {
 
 MATCH void func_801D101C(void) {
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    GFX_DrawColourFan(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -93,7 +93,7 @@ MATCH void func_801D10C4(void) {
         g_Task->color_r -= 8;
     }
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    GFX_DrawColourFan(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -190,6 +190,6 @@ MATCH void func_801D1914(s16 amount) {
 }
 
 /* func_801D1A20 */
-#include "shared/GFX_DrawColourFan.h"
+#include "shared/GFX_DrawColorFan.h"
 
 INCLUDE_ASM(func_801D1C1C);
