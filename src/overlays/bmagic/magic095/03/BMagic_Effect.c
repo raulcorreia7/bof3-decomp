@@ -159,14 +159,12 @@ MATCH void func_801EF1FC(void) {
             D_1F800014[3].vz                 = D_1F800014[0].vz;
             D_1F800000.view.scenario.math_04 = 0x100 - row * 41;
             D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8 + (i & 7)];
-            D_1F800014[0].vx                 = FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[0].vy                 = FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[0].vz                 = -(D_801F065C[row * 8 + (i & 7)] + row * 72);
+            setVector(&D_1F800014[0], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
+                      -(D_801F065C[row * 8 + (i & 7)] + row * 72));
             D_1F800000.view.scenario.math_04 = 0x100 - (row + 1) * 41;
             D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[(row + 1) * 8 + (i & 7)];
-            D_1F800014[1].vx                 = FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[1].vy                 = FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[1].vz                 = -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72);
+            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
+                      -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72));
             if (row == 5) {
                 D_1F800014[1].vy = 0;
                 D_1F800014[1].vx = 0;
@@ -241,14 +239,12 @@ MATCH void func_801EF804(void) {
             D_1F800014[3].vz                 = D_1F800014[1].vz;
             D_1F800000.view.scenario.math_04 = 0x100 - row * 41;
             D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8 + (i & 7)];
-            D_1F800014[0].vx                 = FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[0].vy                 = FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[0].vz                 = -(D_801F065C[row * 8 + (i & 7)] + row * 72);
+            setVector(&D_1F800014[0], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
+                      -(D_801F065C[row * 8 + (i & 7)] + row * 72));
             D_1F800000.view.scenario.math_04 = 0x100 - (row + 1) * 41;
             D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[(row + 1) * 8 + (i & 7)];
-            D_1F800014[1].vx                 = FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[1].vy                 = FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00);
-            D_1F800014[1].vz                 = -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72);
+            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
+                      -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72));
             if (row == 5) {
                 D_1F800014[1].vy = 0;
                 D_1F800014[1].vx = 0;
@@ -378,9 +374,7 @@ MATCH void func_801F012C(void) {
         } else {
             D_1F800000.view.scenario.math_00 += g_Task->unk_09 * 4;
         }
-        center.vx = FIXED_MUL(rsin(i << 7), D_1F800000.view.scenario.math_00);
-        center.vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.scenario.math_00);
-        center.vz = -(D_801F065C[row * 8 + (i / 8 & 7)] + row * 72);
+        setVector(&center, FIXED_MUL(rsin(i << 7), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 7), D_1F800000.view.scenario.math_00), -(D_801F065C[row * 8 + (i / 8 & 7)] + row * 72));
         if (g_Task->param.unk_0B & 1) {
             center.vz -= 0x24;
         }

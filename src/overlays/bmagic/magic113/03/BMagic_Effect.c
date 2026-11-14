@@ -169,9 +169,7 @@ MATCH void func_801EF4F0(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 7), s_Magic113OrbitRadius);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 7), s_Magic113OrbitRadius);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 7), s_Magic113OrbitRadius), FIXED_MUL(rcos(i << 7), s_Magic113OrbitRadius), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -237,9 +235,7 @@ MATCH void func_801EF944(void) {
     tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
-    D_1F800014[0].vx = FIXED_MUL(rsin(0), s_Magic113OrbitRadius);
-    D_1F800014[0].vy = FIXED_MUL(rcos(0), s_Magic113OrbitRadius);
-    D_1F800014[0].vz = 0;
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0), s_Magic113OrbitRadius), FIXED_MUL(rcos(0), s_Magic113OrbitRadius), 0);
     for (i = 1; i <= 32; i++) {
         if (i < g_Task->unk_09) {
             prim = (LINE_F2*)g_GfxPrimCursor;
@@ -248,9 +244,7 @@ MATCH void func_801EF944(void) {
                 SetSemiTrans(prim, 1);
             }
             RotTransPers(&D_1F800014[0], (long*)&prim->x0, &depth, &flag);
-            D_1F800014[0].vx = FIXED_MUL(rsin(i << 7), s_Magic113OrbitRadius);
-            D_1F800014[0].vy = FIXED_MUL(rcos(i << 7), s_Magic113OrbitRadius);
-            D_1F800014[0].vz = 0;
+            setVector(&D_1F800014[0], FIXED_MUL(rsin(i << 7), s_Magic113OrbitRadius), FIXED_MUL(rcos(i << 7), s_Magic113OrbitRadius), 0);
             RotTransPers(&D_1F800014[0], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, 240, 170, 200);
             if (g_Task->header.step == 2) {
@@ -331,9 +325,7 @@ MATCH void func_801EFDA0(void) {
             RotTransPers(&D_1F800014[0], (long*)&prim->x0, &depth, &flag);
             D_1F800014[1].vx = FIXED_MUL(rsin(D_801F0BB8[i + 1] * 273), 288);
             D_1F800014[1].vy = FIXED_MUL(rcos(D_801F0BB8[i + 1] * 273), 288);
-            D_1F800014[1].vx = D_1F800014[0].vx + ((D_1F800014[1].vx - D_1F800014[0].vx) / 8) * length;
-            D_1F800014[1].vy = D_1F800014[0].vy + ((D_1F800014[1].vy - D_1F800014[0].vy) / 8) * length;
-            D_1F800014[1].vz = 0;
+            setVector(&D_1F800014[1], D_1F800014[0].vx + ((D_1F800014[1].vx - D_1F800014[0].vx) / 8) * length, D_1F800014[0].vy + ((D_1F800014[1].vy - D_1F800014[0].vy) / 8) * length, 0);
             RotTransPers(&D_1F800014[1], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, 240, 170, 200);
             if (g_Task->header.step == 2) {
@@ -403,12 +395,8 @@ MATCH void func_801F02CC(void) {
     } else {
         D_1F800000.view.scenario.math_08 = 0x200;
     }
-    D_1F800014[1].vx = FIXED_MUL(rcos(0), 304);
-    D_1F800014[1].vy = FIXED_MUL(rsin(0), 304);
-    D_1F800014[1].vz = g_Task->timer * 8 - D_1F800000.view.scenario.math_08;
-    D_1F800014[3].vx = FIXED_MUL(rcos(0), 304);
-    D_1F800014[3].vy = FIXED_MUL(rsin(0), 304);
-    D_1F800014[3].vz = 0;
+    setVector(&D_1F800014[1], FIXED_MUL(rcos(0), 304), FIXED_MUL(rsin(0), 304), g_Task->timer * 8 - D_1F800000.view.scenario.math_08);
+    setVector(&D_1F800014[3], FIXED_MUL(rcos(0), 304), FIXED_MUL(rsin(0), 304), 0);
     for (i = 1; i <= 32; i++) {
         if (i < g_Task->unk_09) {
             if (g_Task->unk_09 - i < 16) {
@@ -425,9 +413,7 @@ MATCH void func_801F02CC(void) {
             D_1F800014[2].vx = D_1F800014[3].vx;
             D_1F800014[2].vy = D_1F800014[3].vy;
             D_1F800014[2].vz = 0;
-            D_1F800014[1].vx = FIXED_MUL(rcos(i << 7), 304);
-            D_1F800014[1].vy = FIXED_MUL(rsin(i << 7), 304);
-            D_1F800014[1].vz = g_Task->timer * 8 - D_1F800000.view.scenario.math_08;
+            setVector(&D_1F800014[1], FIXED_MUL(rcos(i << 7), 304), FIXED_MUL(rsin(i << 7), 304), g_Task->timer * 8 - D_1F800000.view.scenario.math_08);
             D_1F800014[3].vx = FIXED_MUL(rcos(i << 7), 304);
             D_1F800014[3].vy = FIXED_MUL(rsin(i << 7), 304);
             D_1F800014[3].vz = 0;

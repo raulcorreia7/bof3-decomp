@@ -155,9 +155,7 @@ MATCH void func_801EF43C(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = g_Task->unk_18;
-    rot.vy = g_Task->unk_1C;
-    rot.vz = 0;
+    setVector(&rot, g_Task->unk_18, g_Task->unk_1C, 0);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
@@ -202,21 +200,13 @@ MATCH void func_801EF4FC(void) {
         D_1F800000.view.effect.params[7] = 128 - j * 16;
         setRGB0(tri, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7]);
         Area_AddCellPrim(x, y, 0, sizeof(POLY_FT3));
-        D_1F800014[0].vx = D_1F800014[1].vx;
-        D_1F800014[0].vy = D_1F800014[1].vy;
-        D_1F800014[0].vz = D_1F800014[1].vz;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[1].vz = D_1F800014[2].vz;
-        D_1F800014[2].vx = FIXED_MUL(rsin(j << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(j << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[2].vz = 0;
-        D_1F800014[3].vx = FIXED_MUL(rsin((j + 1) << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vy = FIXED_MUL(rcos((j + 1) << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vz = 0;
-        x                = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
-        y                = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
-        tpage            = getTPage(1, 0, 320, 256);
+        setVector(&D_1F800014[0], D_1F800014[1].vx, D_1F800014[1].vy, D_1F800014[1].vz);
+        setVector(&D_1F800014[1], D_1F800014[2].vx, D_1F800014[2].vy, D_1F800014[2].vz);
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(j << 10), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(j << 10), D_1F800000.view.effect.params[1]), 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin((j + 1) << 10), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos((j + 1) << 10), D_1F800000.view.effect.params[1]), 0);
+        x     = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
+        y     = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
+        tpage = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         quad = (POLY_FT4*)g_GfxPrimCursor;
@@ -246,11 +236,9 @@ MATCH void func_801EFB3C(void) {
     D_1F800000.view.effect.params[5] = g_Task->timer * 8;
     D_1F800000.view.effect.params[6] = g_Task->timer * 9;
     D_1F800000.view.effect.params[7] = g_Task->timer * 7;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
     for (i = 1; i <= 8; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);

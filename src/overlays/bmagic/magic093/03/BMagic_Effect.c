@@ -174,11 +174,9 @@ MATCH void func_801EF85C(void) {
     core                             = g_Task->unk_09 * 9;
     blue                             = g_Task->unk_09 * 2;
     green                            = g_Task->unk_09 * 4;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
     for (i = 1; i <= 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);

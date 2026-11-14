@@ -137,9 +137,7 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
     DARK_RING_SHADE  = g_Task->unk_09 * 6;
     D_1F800014[1].vx = FIXED_MUL(rsin(0), DARK_RING_OUTER);
     D_1F800014[1].vy = FIXED_MUL(rcos(0), DARK_RING_OUTER);
-    D_1F800014[3].vx = FIXED_MUL(rsin(0), DARK_RING_INNER);
-    D_1F800014[3].vy = FIXED_MUL(rcos(0), DARK_RING_INNER);
-    D_1F800014[3].vz = 0;
+    setVector(&D_1F800014[3], FIXED_MUL(rsin(0), DARK_RING_INNER), FIXED_MUL(rcos(0), DARK_RING_INNER), 0);
     D_1F800014[2].vz = 0;
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;
@@ -176,11 +174,9 @@ MATCH void BMagic_DrawBurnFlameTris(void) {
     D_1F800000.view.effect.params[0] = 0x80;
     D_1F800000.view.effect.params[5] = g_Task->unk_09 * 4;
     D_1F800000.view.effect.params[6] = g_Task->unk_09 * 6;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
 
     for (i = 1; i <= 32; i++) {
         prim             = GFX_BeginPolyG3(1);

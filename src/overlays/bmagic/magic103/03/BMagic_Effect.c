@@ -134,12 +134,10 @@ MATCH void func_801EF1D8(void) {
         }
         D_1F800000.view.effect.params[1] = FIXED_MUL(rcos((band - 1) << 7), D_1F800000.view.effect.params[0]);
         D_1F800000.view.effect.params[2] = FIXED_MUL(rcos(band << 7), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
-        D_1F800014[1].vz = D_1F800014[0].vz = FIXED_MUL(rsin((band - 1) << 7), D_1F800000.view.effect.params[0]);
-        D_1F800014[3].vx                    = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[2]);
-        D_1F800014[3].vy                    = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[2]);
-        D_1F800014[3].vz = D_1F800014[2].vz = FIXED_MUL(rsin(band << 7), D_1F800000.view.effect.params[0]);
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]),
+                  D_1F800014[0].vz = FIXED_MUL(rsin((band - 1) << 7), D_1F800000.view.effect.params[0]));
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[2]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[2]),
+                  D_1F800014[2].vz = FIXED_MUL(rsin(band << 7), D_1F800000.view.effect.params[0]));
         for (i = 1; i <= 32; i++) {
             D_1F800014[0].vx = D_1F800014[1].vx;
             D_1F800014[0].vy = D_1F800014[1].vy;
@@ -194,19 +192,13 @@ MATCH void func_801EF7CC(void) {
     GFX_AddPrim(5, sizeof(DR_MODE));
 
     for (i = 1; i <= 32; i++) {
-        prim                             = GFX_BeginPolyG4(1);
-        D_1F800014[0].vx                 = D_1F800014[1].vx;
-        D_1F800014[0].vy                 = D_1F800014[1].vy;
-        D_1F800014[0].vz                 = 0;
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vz                 = 0;
-        D_1F800014[2].vx                 = D_1F800014[3].vx;
-        D_1F800014[2].vy                 = D_1F800014[3].vy;
-        D_1F800014[2].vz                 = 0;
-        D_1F800014[3].vx                 = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vy                 = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vz                 = 0;
+        prim             = GFX_BeginPolyG4(1);
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[0].vz = 0;
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]), 0);
+        setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[1]), 0);
         D_1F800000.view.effect.params[3] = 0x29 - g_Task->unk_09;
         setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
         setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
@@ -382,11 +374,9 @@ MATCH void func_801F04E0(void) {
     }
     D_1F800000.view.effect.params[3] = g_Task->timer << 3;
     D_1F800000.view.effect.params[4] = g_Task->timer * 6;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
 
     for (i = 1; i <= 16; i++) {
         prim             = GFX_BeginPolyG3(1);

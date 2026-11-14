@@ -118,9 +118,7 @@ MATCH void func_801EF654(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = g_Task->timer << 4;
+    setVector(&rot, 0, 0, g_Task->timer << 4);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 

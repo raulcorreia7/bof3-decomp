@@ -124,12 +124,8 @@ MATCH void func_801EF434(void) {
 
     ;
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x100) / 2;
+    setVector(&rot, 0, 0, 0);
+    setVector(&pos, (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -(COORD_INT(g_Task->pos.z) + 0x100) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -162,16 +158,12 @@ MATCH void func_801EF4E8(void) {
         D_1F800014[0].vx                 = D_1F800014[1].vx;
         D_1F800014[0].vy                 = D_1F800014[1].vy;
         D_1F800014[0].vz                 = 0;
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vz                 = 0;
-        D_1F800014[2].vx                 = D_1F800014[3].vx;
-        D_1F800014[2].vy                 = D_1F800014[3].vy;
-        D_1F800014[2].vz                 = 0;
-        D_1F800014[3].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vz                 = 0;
-        prim                             = (POLY_G4*)g_GfxPrimCursor;
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]),
+                  FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]), 0);
+        setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]),
+                  FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]), 0);
+        prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
@@ -190,9 +182,7 @@ MATCH void func_801EF8E8(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
+    setVector(&rot, 0, 0, 0);
     pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     if (g_Task->header.step < 3) {
@@ -230,16 +220,12 @@ MATCH void func_801EF9D4(void) {
         D_1F800014[0].vx                 = D_1F800014[1].vx;
         D_1F800014[0].vy                 = D_1F800014[1].vy;
         D_1F800014[0].vz                 = 0;
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vz                 = 0;
-        D_1F800014[2].vx                 = D_1F800014[3].vx;
-        D_1F800014[2].vy                 = D_1F800014[3].vy;
-        D_1F800014[2].vz                 = 0;
-        D_1F800014[3].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vz                 = 0;
-        prim                             = GFX_BeginPolyG4(1);
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]),
+                  FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[0]), 0);
+        setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]),
+                  FIXED_MUL(rcos(D_1F800000.view.effect.params[5]), D_1F800000.view.effect.params[1]), 0);
+        prim = GFX_BeginPolyG4(1);
         setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
         setRGB1(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
         setRGB2(prim, 1, 1, 1);

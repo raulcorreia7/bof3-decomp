@@ -90,13 +90,11 @@ MATCH void func_801EF5D4(s16 band_height, u16 radius, u16 jitter_mask) {
         D_1F800014[3].vx                 = 0;
         D_1F800014[3].vy                 = D_1F800014[0].vy - D_1F800000.view.effect.params[5] * 2;
         D_1F800014[3].vz                 = D_1F800014[0].vz;
-        D_1F800014[0].vx                 = 0;
-        D_1F800014[0].vy                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[1]), D_1F800000.view.effect.params[0]);
-        D_1F800014[0].vz                 = -(i << 6);
-        D_1F800014[1].vx                 = 0;
-        D_1F800014[1].vy                 = D_1F800014[0].vy - D_1F800000.view.effect.params[6] * 2;
-        D_1F800014[1].vz                 = -(i << 6);
-        prim                             = (POLY_G4*)g_GfxPrimCursor;
+        setVector(&D_1F800014[0], 0, FIXED_MUL(rsin(D_1F800000.view.effect.params[1]), D_1F800000.view.effect.params[0]), -(i << 6));
+        D_1F800014[1].vx = 0;
+        D_1F800014[1].vy = D_1F800014[0].vy - D_1F800000.view.effect.params[6] * 2;
+        D_1F800014[1].vz = -(i << 6);
+        prim             = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);

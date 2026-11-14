@@ -140,9 +140,7 @@ MATCH void func_801EF424(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 7), D_1F800000_WORD[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 7), D_1F800000_WORD[0]);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 7), D_1F800000_WORD[0]), FIXED_MUL(rcos(i << 7), D_1F800000_WORD[0]), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         prim             = GFX_BeginPolyG3(1);
@@ -245,23 +243,15 @@ MATCH void func_801EF9E0(void) {
     D_1F800000_WORD[3] = g_Task->timer << 4;
     spark              = g_FrameCount & 7;
     next               = (g_FrameCount + 1) & 7;
-    D_1F800014[3].vx   = FIXED_MUL(rcos(0), D_1F800000_WORD[0]);
-    D_1F800014[3].vy   = FIXED_MUL(rsin(0), D_1F800000_WORD[0]);
-    D_1F800014[3].vz   = 0;
+    setVector(&D_1F800014[3], FIXED_MUL(rcos(0), D_1F800000_WORD[0]), FIXED_MUL(rsin(0), D_1F800000_WORD[0]), 0);
     for (i = 1; i <= 64; i++) {
         if ((i & 7) == spark || (i & 7) == next || g_Task->header.step == 0) {
             D_1F800014[0].vx = FIXED_MUL(rcos((i - 1) << 6), D_1F800000_WORD[1]);
             D_1F800014[0].vy = FIXED_MUL(rsin((i - 1) << 6), D_1F800000_WORD[1]);
             D_1F800014[0].vz = 0;
-            D_1F800014[1].vx = FIXED_MUL(rcos(i << 6), D_1F800000_WORD[1]);
-            D_1F800014[1].vy = FIXED_MUL(rsin(i << 6), D_1F800000_WORD[1]);
-            D_1F800014[1].vz = 0;
-            D_1F800014[2].vx = D_1F800014[3].vx;
-            D_1F800014[2].vy = D_1F800014[3].vy;
-            D_1F800014[2].vz = 0;
-            D_1F800014[3].vx = FIXED_MUL(rcos(i << 6), D_1F800000_WORD[0]);
-            D_1F800014[3].vy = FIXED_MUL(rsin(i << 6), D_1F800000_WORD[0]);
-            D_1F800014[3].vz = 0;
+            setVector(&D_1F800014[1], FIXED_MUL(rcos(i << 6), D_1F800000_WORD[1]), FIXED_MUL(rsin(i << 6), D_1F800000_WORD[1]), 0);
+            setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
+            setVector(&D_1F800014[3], FIXED_MUL(rcos(i << 6), D_1F800000_WORD[0]), FIXED_MUL(rsin(i << 6), D_1F800000_WORD[0]), 0);
         } else {
             wave             = ((i + g_FrameCount) & 0x1F) << 7;
             D_1F800014[0].vx = FIXED_MUL(rcos((i - 1) << 6), D_1F800000_WORD[0]);
@@ -345,12 +335,10 @@ MATCH void func_801F01A8(void) {
     long     depth;
     long     flag;
 
-    D_1F800014[0].vx = D_1F800014[1].vx = D_1F800014[2].vx = rsin(g_Task->param.unk_0B << 9) >> 5;
-    D_1F800014[0].vy = D_1F800014[1].vy = D_1F800014[2].vy = rcos(g_Task->param.unk_0B << 9) >> 5;
-    D_1F800014[0].vz                                       = 32;
-    D_1F800014[1].vz                                       = 24;
-    D_1F800014[2].vz                                       = 0;
-    tpage                                                  = getTPage(0, 1, 320, 256);
+    setVector(&D_1F800014[0], D_1F800014[1].vx = D_1F800014[2].vx = rsin(g_Task->param.unk_0B << 9) >> 5, D_1F800014[1].vy = D_1F800014[2].vy = rcos(g_Task->param.unk_0B << 9) >> 5, 32);
+    D_1F800014[1].vz = 24;
+    D_1F800014[2].vz = 0;
+    tpage            = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (LINE_G3*)g_GfxPrimCursor;

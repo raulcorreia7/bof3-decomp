@@ -241,9 +241,7 @@ MATCH void func_801EFAA4(void) {
         D_1F800000.view.effect.params[1] = D_801F0414[g_Task->unk_04][1] * 16;
         D_1F800000.view.effect.params[2] = D_801F0414[g_Task->unk_04][2] * 16;
     }
-    D_1F800014[1].vx = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[7]);
-    D_1F800014[1].vy = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[7]);
-    D_1F800014[1].vz = D_1F800000.view.effect.params[3];
+    setVector(&D_1F800014[1], FIXED_MUL(rcos(0), D_1F800000.view.effect.params[7]), FIXED_MUL(rsin(0), D_1F800000.view.effect.params[7]), D_1F800000.view.effect.params[3]);
     D_1F800014[3].vx = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[6]);
     D_1F800014[3].vy = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[6]);
     D_1F800014[2].vz = 0;
@@ -256,16 +254,14 @@ MATCH void func_801EFAA4(void) {
         D_1F800014[0].vx                 = D_1F800014[1].vx;
         D_1F800014[0].vy                 = D_1F800014[1].vy;
         D_1F800014[0].vz                 = D_1F800014[1].vz;
-        D_1F800014[1].vx                 = FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[7]);
-        D_1F800014[1].vy                 = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[7]);
-        D_1F800014[1].vz                 = D_1F800000.view.effect.params[3];
-        D_1F800014[2].vx                 = D_1F800014[3].vx;
-        D_1F800014[2].vy                 = D_1F800014[3].vy;
-        D_1F800014[3].vx                 = FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[6]);
-        D_1F800014[3].vy                 = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[6]);
-        x                                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
-        y                                = (D_1F800014[3].vx << 9) + g_Task->pos.y.fixed;
-        tpage                            = getTPage(0, 1, 320, 256);
+        setVector(&D_1F800014[1], FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[7]), FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[7]), D_1F800000.view.effect.params[3]);
+        D_1F800014[2].vx = D_1F800014[3].vx;
+        D_1F800014[2].vy = D_1F800014[3].vy;
+        D_1F800014[3].vx = FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[6]);
+        D_1F800014[3].vy = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[6]);
+        x                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
+        y                = (D_1F800014[3].vx << 9) + g_Task->pos.y.fixed;
+        tpage            = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -302,9 +298,7 @@ MATCH void func_801F0054(void) {
         D_1F800000.view.effect.params[1] = D_801F0404[g_Task->unk_04][1] * 16;
         D_1F800000.view.effect.params[2] = D_801F0404[g_Task->unk_04][2] * 16;
     }
-    D_1F800014[2].vx = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[3]);
-    D_1F800014[2].vy = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[3]);
-    D_1F800014[2].vz = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[3]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[3]), 0);
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;
     for (i = 1; i <= 16; i++) {

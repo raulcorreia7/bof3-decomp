@@ -67,9 +67,7 @@ MATCH void func_801EF188(void) {
     } else {
         target = &g_Game.members[g_Task->unk_04];
     }
-    pos.vx = (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = (COORD_INT(target->pos.z) + 0xC0) >> 1;
+    setVector(&pos, (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (COORD_INT(target->pos.z) + 0xC0) >> 1);
     if (Battle_SlotIsBlocked(g_Task->unk_03) & BYTE_MASK) {
         g_Task->unk_0C      = (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
         g_Task->unk_10      = (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
@@ -157,9 +155,7 @@ MATCH void func_801EF6A4(void) {
     if (g_FrameCount & 0x1) {
         g_Task->timer += 1;
     }
-    pos.vx = g_Task->unk_0C;
-    pos.vy = g_Task->unk_10;
-    pos.vz = g_Task->unk_14;
+    setVector(&pos, g_Task->unk_0C, g_Task->unk_10, g_Task->unk_14);
     func_800AF3A0(pos, 0x30);
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;

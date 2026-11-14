@@ -99,10 +99,8 @@ MATCH void func_801EF118(void) {
     s32          diff;
     u8           ticker;
 
-    actor  = g_BattleSelectedActor;
-    pos.vx = (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = (actor->pos.z.fixed + 0x800000) >> 17;
+    actor = g_BattleSelectedActor;
+    setVector(&pos, (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.z.fixed + 0x800000) >> 17);
     func_800AF3A0(pos, 0x60);
     g_Task->unk_10 = g_Task->unk_0C;
     g_Task->unk_0C = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);
@@ -425,11 +423,9 @@ MATCH void func_801F0790(void) {
     D_1F800000.view.effect.params[5] = g_Task->unk_09 << 3;
     D_1F800000.view.effect.params[6] = g_Task->unk_09 << 1;
     D_1F800000.view.effect.params[7] = 1;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
 
     for (i = 1; i <= 16; i++) {
         prim             = GFX_BeginPolyG3(1);

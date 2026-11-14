@@ -534,9 +534,8 @@ MATCH void func_801F0D0C(u8 angle0, u8 angle1) {
     D_1F800000.view.effect.params[5] = (s8)g_Task->unk_5D * 12;
     D_1F800000.view.effect.params[0] = 0x200;
     D_1F800000.view.effect.params[1] = FIXED_MUL(rsin(angle1 << 4), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vx                 = FIXED_MUL(rsin(angle0 << 4), D_1F800000.view.effect.params[1]);
-    D_1F800014[1].vy                 = FIXED_MUL(rcos(angle0 << 4), D_1F800000.view.effect.params[1]);
-    D_1F800014[1].vz                 = FIXED_MUL(rcos(angle1 << 4), D_1F800000.view.effect.params[0]);
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(angle0 << 4), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(angle0 << 4), D_1F800000.view.effect.params[1]),
+              FIXED_MUL(rcos(angle1 << 4), D_1F800000.view.effect.params[0]));
     for (i = 0; i < g_Task->timer; i++) {
         D_1F800014[0].vx                 = D_1F800014[1].vx;
         D_1F800014[0].vy                 = D_1F800014[1].vy;
@@ -693,9 +692,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     GLOW_RING_SHADE  = g_Task->unk_09 * 15;
     D_1F800014[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
     D_1F800014[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
-    D_1F800014[3].vx = FIXED_MUL(rsin(0), GLOW_RING_INNER);
-    D_1F800014[3].vy = FIXED_MUL(rcos(0), GLOW_RING_INNER);
-    D_1F800014[3].vz = 0;
+    setVector(&D_1F800014[3], FIXED_MUL(rsin(0), GLOW_RING_INNER), FIXED_MUL(rcos(0), GLOW_RING_INNER), 0);
     D_1F800014[2].vz = 0;
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;
@@ -731,9 +728,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     GLOW_RING_SHADE  = g_Task->unk_09 * 15;
     D_1F800014[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
     D_1F800014[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
-    D_1F800014[3].vx = FIXED_MUL(rsin(0), GLOW_RING_INNER);
-    D_1F800014[3].vy = FIXED_MUL(rcos(0), GLOW_RING_INNER);
-    D_1F800014[3].vz = 0;
+    setVector(&D_1F800014[3], FIXED_MUL(rsin(0), GLOW_RING_INNER), FIXED_MUL(rcos(0), GLOW_RING_INNER), 0);
     D_1F800014[2].vz = 0;
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;

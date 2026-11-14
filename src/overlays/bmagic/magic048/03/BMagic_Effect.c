@@ -80,9 +80,7 @@ MATCH void func_801EF05C(void) {
     VECTOR pos;
 
     g_Task->unk_09 += 1;
-    pos.vx = (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = g_Task->unk_14 >> 1;
+    setVector(&pos, (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN, (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN, g_Task->unk_14 >> 1);
     func_800AF3A0(pos, 0x10);
     if (g_Task->timer != 16) {
         g_Task->timer += 1;
@@ -96,9 +94,7 @@ MATCH void func_801EF158(void) {
     VECTOR pos;
     u8     count;
 
-    pos.vx = (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = g_Task->unk_14 >> 1;
+    setVector(&pos, (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN, (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN, g_Task->unk_14 >> 1);
     func_800AF3A0(pos, 0x10);
     g_Task->unk_09 = g_Task->unk_09 + 1;
     count          = g_Task->timer - 1;
@@ -130,13 +126,9 @@ MATCH void func_801EF234(void) {
     D_1F800000.view.effect.params[4]     = g_Task->timer * 4;
     /* FAKE: the first corner through the scratchpad view keeps the base register on the second corner, as retail does; through D_1F800014 it moves to the first. */
     D_1F800000.view.effect.vectors[0].vx = 0;
-    D_1F800014[1].vx                     = 0;
-    D_1F800014[1].vy                     = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[2]);
-    D_1F800014[1].vz                     = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[2]);
-    D_1F800014[2].vx                     = 0;
-    D_1F800014[3].vx                     = 0;
-    D_1F800014[3].vy                     = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
-    D_1F800014[3].vz                     = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
+    setVector(&D_1F800014[1], 0, FIXED_MUL(rcos(0), D_1F800000.view.effect.params[2]), FIXED_MUL(rsin(0), D_1F800000.view.effect.params[2]));
+    D_1F800014[2].vx = 0;
+    setVector(&D_1F800014[3], 0, FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]), FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]));
     for (i = 1; i <= 32; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -165,9 +157,7 @@ MATCH void func_801EF5C8(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = ratan2(g_Task->unk_10 - g_Task->pos.y.fixed, g_Task->unk_0C - g_Task->pos.x.fixed) & ANGLE_MASK;
+    setVector(&rot, 0, 0, ratan2(g_Task->unk_10 - g_Task->pos.y.fixed, g_Task->unk_0C - g_Task->pos.x.fixed) & ANGLE_MASK);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 

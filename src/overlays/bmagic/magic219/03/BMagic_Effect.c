@@ -197,11 +197,9 @@ MATCH void func_801EF71C(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     MAGIC219_RING_RADIUS = g_Task->timer << 4;
-    D_1F800014[2].vx     = FIXED_MUL(rsin(0), MAGIC219_RING_RADIUS);
-    D_1F800014[2].vy     = FIXED_MUL(rcos(0), MAGIC219_RING_RADIUS);
-    D_1F800014[2].vz     = 0;
-    D_1F800014[1].vz     = 0;
-    D_1F800014[0].vz     = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), MAGIC219_RING_RADIUS), FIXED_MUL(rcos(0), MAGIC219_RING_RADIUS), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
     for (i = 1; i <= 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);

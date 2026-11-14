@@ -179,9 +179,7 @@ MATCH void func_801EF68C(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         prim             = (POLY_G3*)g_GfxPrimCursor;
@@ -276,17 +274,15 @@ MATCH void func_801EFB34(void) {
             D_1F800014[0].vx                 = D_1F800014[1].vx;
             D_1F800014[0].vy                 = D_1F800014[1].vy;
             D_1F800014[0].vz                 = D_1F800014[1].vz;
-            D_1F800014[2].vx                 = D_1F800014[3].vx;
-            D_1F800014[2].vy                 = D_1F800014[3].vy;
-            D_1F800014[2].vz                 = D_1F800014[3].vz;
-            D_1F800014[1].vx                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
-            D_1F800014[1].vy                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
-            D_1F800014[1].vz                 = -(D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[4]));
+            setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, D_1F800014[3].vz);
+            setVector(&D_1F800014[1], FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]),
+                      FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]),
+                      -(D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[4])));
             D_1F800000.view.effect.params[3] = ((i + D_801F003C[band] + 1) & 0xF) << 8;
-            D_1F800014[3].vx                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-            D_1F800014[3].vy                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-            D_1F800014[3].vz                 = -(D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[4]));
-            prim                             = (POLY_F4*)g_GfxPrimCursor;
+            setVector(&D_1F800014[3], FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+                      FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+                      -(D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[4])));
+            prim = (POLY_F4*)g_GfxPrimCursor;
             SetPolyF4(prim);
             SetSemiTrans(prim, 1);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);

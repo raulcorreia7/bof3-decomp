@@ -121,9 +121,7 @@ MATCH void func_801EF52C(void) {
     rot.vy = 0;
     off    = g_BMagicOrbit->angle + 0x800;
     rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & ANGLE_MASK;
-    pos.vx = (g_BMagicOrbit->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (g_BMagicOrbit->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = -COORD_INT(g_BMagicOrbit->pos.z) / 2;
+    setVector(&pos, (g_BMagicOrbit->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_BMagicOrbit->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_BMagicOrbit->pos.z) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -156,9 +154,8 @@ MATCH void func_801EF5F4(void) {
         SetSemiTrans(prim, 1);
         D_1F800014[1].vx = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
         D_1F800014[1].vy = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vx = FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]);
-        D_1F800014[2].vz = D_1F800014[1].vz = (u32)rsin(D_1F800000.view.effect.params[4]) >> 7;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]),
+                  FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]), D_1F800014[1].vz = (u32)rsin(D_1F800000.view.effect.params[4]) >> 7);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         setRGB0(prim, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[5]);
         setRGB1(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);

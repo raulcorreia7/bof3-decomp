@@ -361,12 +361,8 @@ MATCH void func_801EFF50(void) {
 
     ;
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = (g_Task->param.unk_0B & 0x3f) << 6;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x200) / 2;
+    setVector(&rot, 0, 0, (g_Task->param.unk_0B & 0x3f) << 6);
+    setVector(&pos, (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -(COORD_INT(g_Task->pos.z) + 0x200) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -392,15 +388,9 @@ MATCH void func_801F0014(void) {
     } else {
         D_1F800000.view.scenario.math_00 = g_Task->unk_09 * 4 + 0x80;
     }
-    D_1F800014[0].vx = FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vy = FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vz = 0;
-    D_1F800014[1].vx = FIXED_MUL(rsin(0x600), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vy = FIXED_MUL(rcos(0x600), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vz = 0;
-    D_1F800014[2].vx = FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vy = FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vz = 0;
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(0x600), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x600), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00), 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     D_1F800000.view.scenario.math_08 = g_Task->timer * D_801F0548[g_Task->unk_04];
     setRGB0(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
@@ -411,15 +401,9 @@ MATCH void func_801F0014(void) {
     prim = GFX_CURSOR(LINE_G3);
     SetLineG3(prim);
     SetSemiTrans(prim, 1);
-    D_1F800014[0].vx = FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vy = FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vz = 0;
-    D_1F800014[1].vx = FIXED_MUL(rsin(0xE00), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vy = FIXED_MUL(rcos(0xE00), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vz = 0;
-    D_1F800014[2].vx = FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vy = FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vz = 0;
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(0xE00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xE00), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00), 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
     setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, 1);

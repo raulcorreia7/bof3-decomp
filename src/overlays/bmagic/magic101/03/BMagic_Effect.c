@@ -106,9 +106,7 @@ MATCH void func_801EF07C(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -203,13 +201,9 @@ MATCH void func_801EF78C(void) {
 
     PushMatrix();
     if (BATTLE_ACTIVE_WORK->facing & 0x1) {
-        rot.vx = 0;
-        rot.vy = g_Task->unk_0C;
-        rot.vz = 0;
+        setVector(&rot, 0, g_Task->unk_0C, 0);
     } else {
-        rot.vx = g_Task->unk_0C;
-        rot.vy = 0;
-        rot.vz = 0;
+        setVector(&rot, g_Task->unk_0C, 0, 0);
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }

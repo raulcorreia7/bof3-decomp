@@ -559,16 +559,14 @@ MATCH void func_801F07B0(s32 index) {
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 4), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 4));
-    tile->w = D_801F0B10[(u8)index].w + 8;
-    tile->h = D_801F0B10[(u8)index].h + 8;
+    setWH(tile, D_801F0B10[(u8)index].w + 8, D_801F0B10[(u8)index].h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(2, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 6), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 6));
-    tile->w = D_801F0B10[(u8)index].w + 12;
-    tile->h = D_801F0B10[(u8)index].h + 12;
+    setWH(tile, D_801F0B10[(u8)index].w + 12, D_801F0B10[(u8)index].h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(2, sizeof(TILE));
     tpage = getTPage(0, 0, 320, 256);

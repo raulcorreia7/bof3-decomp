@@ -281,17 +281,11 @@ MATCH void func_801EFCC8(void) {
             D_1F800014[0].vx                 = (rcos(0x200) * D_1F800000.view.effect.params[0]) >> 12;
             D_1F800014[0].vy                 = (rsin(0x200) * D_1F800000.view.effect.params[0]) >> 12;
             D_1F800014[0].vz                 = -D_1F800000.view.effect.params[2];
-            D_1F800014[1].vx                 = (rcos(0x600) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[1].vy                 = (rsin(0x600) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[1].vz                 = -D_1F800000.view.effect.params[2];
-            D_1F800014[2].vx                 = (rcos(0xE00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[2].vy                 = (rsin(0xE00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[2].vz                 = -D_1F800000.view.effect.params[2];
-            D_1F800014[3].vx                 = (rcos(0xA00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[3].vy                 = (rsin(0xA00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[3].vz                 = -D_1F800000.view.effect.params[2];
-            poly->tpage                      = GetTPage(0, 1, 0x340, 0x100);
-            poly->clut                       = GetClut(0, 0x1E2);
+            setVector(&D_1F800014[1], (rcos(0x600) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0x600) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            setVector(&D_1F800014[2], (rcos(0xE00) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0xE00) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            setVector(&D_1F800014[3], (rcos(0xA00) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0xA00) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            poly->tpage = GetTPage(0, 1, 0x340, 0x100);
+            poly->clut  = GetClut(0, 0x1E2);
             setUVWH(poly, 0, 0, 32, 32);
             D_1F800000.view.effect.params[1] = 0x41 - (D_801F00B0[i] >> 1) * 4;
             setRGB0(poly, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
@@ -308,8 +302,6 @@ MATCH void func_801EFFB0(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 3072;
-    rot.vy = 0;
-    rot.vz = 0;
+    setVector(&rot, 3072, 0, 0);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }

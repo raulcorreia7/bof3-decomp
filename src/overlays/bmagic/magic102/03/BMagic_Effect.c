@@ -135,9 +135,7 @@ MATCH void func_801EFEFC(ScenePart* parts, s32 shift_x, s32 shift_y) {
     shift_y = (shift_y - 0x80) << 7;
     func_801F0ADC(shift_x - 0x80, shift_y);
     for (n = 1; n != parts->head.count; n += 5) {
-        verts[0].vx = shift_x + parts[n].vertex.x * 2;
-        verts[0].vy = shift_y + parts[n].vertex.y * 2;
-        verts[0].vz = func_801F0ADC(verts[0].vx, verts[0].vy) + parts[n].raw;
+        setVector(&verts[0], shift_x + parts[n].vertex.x * 2, shift_y + parts[n].vertex.y * 2, func_801F0ADC(verts[0].vx, verts[0].vy) + parts[n].raw);
         gte_ldv0(&verts[0]);
         gte_rtps();
         p    = &parts[n];
@@ -251,17 +249,13 @@ MATCH void func_801F0488(u8* part_list, s32 x, s32 y) {
     if ((Area_TestCondition(((ScenePart*)part_list)[0].head.id) << 24) == 0) {
         return;
     }
-    pos.vx = ((x - 0x80) << 0x7) + FIELD(s8, part_list, 7) * 2;
-    pos.vy = ((y - 0x80) << 7) + FIELD(s8, part_list, 0x6) * 2;
-    pos.vz = func_801F0ADC(pos.vx, pos.vy) + ((ScenePart*)part_list)[1].raw;
-    rot.vx = (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * (scale = (g_FrameCount & 0xFFF) * 4);
-    rot.vy = (((ScenePart*)part_list)[2].raw >> 0xA & 0x3FF) * scale;
-    rot.vz = (((ScenePart*)part_list)[2].raw & 0x3FF) * scale;
+    setVector(&pos, ((x - 0x80) << 0x7) + FIELD(s8, part_list, 7) * 2, ((y - 0x80) << 7) + FIELD(s8, part_list, 0x6) * 2, func_801F0ADC(pos.vx, pos.vy) + ((ScenePart*)part_list)[1].raw);
+    setVector(&rot, (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * (scale = (g_FrameCount & 0xFFF) * 4), (((ScenePart*)part_list)[2].raw >> 0xA & 0x3FF) * scale,
+              (((ScenePart*)part_list)[2].raw & 0x3FF) * scale);
     for (part_word_offset = 3; part_word_offset != (FIELD(u8, part_list, 0x2u)); part_word_offset += 6) {
         PushMatrix();
-        part_rotation.vx = (rot.vx + (((((ScenePart*)part_list)[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK;
-        part_rotation.vy = (rot.vy + (((((ScenePart*)part_list)[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK;
-        part_rotation.vz = (rot.vz + (((((ScenePart*)part_list)[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK;
+        setVector(&part_rotation, (rot.vx + (((((ScenePart*)part_list)[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK,
+                  (rot.vy + (((((ScenePart*)part_list)[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK, (rot.vz + (((((ScenePart*)part_list)[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK);
         RotTransMatrix(&pos, matrix, &flag);
         Camera_SetModelMatrix(&part_rotation, &matrix);
         prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -317,10 +311,9 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     if ((Area_TestCondition(FIELD(s16, record, 0x0)) << 24) == 0) {
         return;
     }
-    D_1F800014->vx = ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2;
-    D_1F800014->vy = ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2;
-    D_1F800014->vz = -Area_SampleHeight((D_1F800014->vx + AREA_CELL_ORIGIN) << 9, (D_1F800014->vy + AREA_CELL_ORIGIN) << 9) / 2;
-    z              = RotTransPers(D_1F800014, (long*)D_1F800034_U16, &depth, &flag);
+    setVector(D_1F800014, ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2, ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2,
+              -Area_SampleHeight((D_1F800014->vx + AREA_CELL_ORIGIN) << 9, (D_1F800014->vy + AREA_CELL_ORIGIN) << 9) / 2);
+    z = RotTransPers(D_1F800014, (long*)D_1F800034_U16, &depth, &flag);
     if (((u32)(D_1F800034_U16[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
     }

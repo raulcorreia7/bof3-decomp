@@ -71,10 +71,8 @@ MATCH void func_801EF138(void) {
     if (count < 16) {
         g_Task->timer = count + 1;
     }
-    actor  = g_Battle.selected_actor;
-    pos.vx = (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = (actor->pos.z.fixed + 0x800000) >> 17;
+    actor = g_Battle.selected_actor;
+    setVector(&pos, (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.z.fixed + 0x800000) >> 17);
     func_800AF3A0(pos, 0xC0);
     g_Task->unk_10 = g_Task->unk_0C;
     g_Task->unk_0C = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);

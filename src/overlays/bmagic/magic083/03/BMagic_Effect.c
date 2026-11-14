@@ -199,9 +199,7 @@ MATCH void func_801EF844(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = (u32)rsin(i << 8) >> 5;
-        D_1F800014[2].vy = (u32)rcos(i << 8) >> 5;
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], (u32)rsin(i << 8) >> 5, (u32)rcos(i << 8) >> 5, 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         poly             = (POLY_G3*)g_GfxPrimCursor;
@@ -240,9 +238,7 @@ MATCH void func_801EFB24(void) {
         D_1F800014[2].vy = D_1F800014[3].vy;
         D_1F800014[1].vx = (u32)rsin(i << 8) >> 5;
         D_1F800014[1].vy = (u32)rcos(i << 8) >> 5;
-        D_1F800014[3].vx = (u32)rsin(i << 8) >> 4;
-        D_1F800014[3].vy = (u32)rcos(i << 8) >> 4;
-        D_1F800014[3].vz = 0;
+        setVector(&D_1F800014[3], (u32)rsin(i << 8) >> 4, (u32)rcos(i << 8) >> 4, 0);
         D_1F800014[2].vz = 0;
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
