@@ -1,3 +1,25 @@
 #include "area157_13.h"
 
-INCLUDE_ASM(func_801F2C48);
+#include "overlays/area/func_801F2C48.h"
+
+MATCH void func_801F2C48(void) {
+    Actor* work;
+    Actor* cell;
+    Actor* row;
+    s32    entry;
+    s32    pair;
+    s16    screen_y;
+    work                     = g_Task;
+    work->unk_0A             = ((u16)work->pos.y.part.integer >> 1) & 1;
+    entry                    = work->pos.x.part.integer;
+    pair                     = entry * 2;
+    g_Task->direction_08     = (g_Task->pos.y.part.integer ^ 1) & 1;
+    cell                     = g_Task;
+    cell->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u8, 0x14, pair);
+    cell->pos.y.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u8, 0x15, pair);
+    cell->pos.z.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u16, 0x34, pair);
+    cell->screen_y           = 0;
+    cell->header.step += 1;
+    AREA_ENTRY_CELL_AWAY_STEP(256, 1)
+    Area_Update();
+}

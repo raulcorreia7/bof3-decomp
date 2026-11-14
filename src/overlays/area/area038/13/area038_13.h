@@ -5,6 +5,9 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world01.h"
+#include "area/spad.h"
+
+extern u8 D_801F302C[];
 
 /* Retail calls it with int-width arguments in this image. */
 

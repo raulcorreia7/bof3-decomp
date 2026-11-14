@@ -16,9 +16,13 @@
 #include "scenario/runtime.h"
 #include "common/util.h"
 
+/* One cell of a payload's data tables: `offset` is the table's byte offset and
+ * `index` the byte offset of the row. */
+#define AREA_PAYLOAD_FIELD(payload, type, offset, index) (*(type*)&(payload)[(offset) + (index)])
+
 /* The first payload word of a world area overlay, at its load address: the module id the
  * loader checks against the archive TOC (@source: wiki:formats/emi#code-overlays). */
-#define AREA_MODULE_ID(area) (52 + (area))
+#define AREA_MODULE_ID(area)                             (52 + (area))
 
 /* One panel marker row selected by a controller mask: the mask, the panel
  * step it selects and an unused byte. */

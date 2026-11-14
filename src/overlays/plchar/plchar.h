@@ -103,6 +103,23 @@
         }                                                                                              \
     }
 
+/* Turns an even facing one step back, probes the clearance ahead and requests the script of the facing the character
+ * now holds, then advances the step. The body of every plchar program's free-facing start. */
+/* func_801CF750 (plp015), func_801CEE4C (plp257), func_801CE870 (plp457), func_801CF37C (plp056), func_801CE654 (plp567 and plp578), func_801CFB74 (plp025) */
+#define CHAR_START_FREE_FACING                               \
+    s16 dist;                                                \
+    s32 x;                                                   \
+    s32 y;                                                   \
+    u8  direction;                                           \
+                                                             \
+    direction = g_Task->direction_08;                        \
+    if (!(direction & 1)) {                                  \
+        g_Task->direction_08 = (direction - 1) & 7;          \
+    }                                                        \
+    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)                  \
+    Actor_RequestScript((g_Task->direction_08 >> 1) + 0x42); \
+    g_Task->header.step++
+
 void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
 void Char_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code);
 void Area_ClearCell(s32 x, s32 y);

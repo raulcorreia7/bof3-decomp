@@ -120,7 +120,74 @@ MATCH void func_801EF4F4(void) {
 
 #include "overlays/bmagic/Effect_SetFacingMatrix.h"
 
-INCLUDE_ASM(func_801EF79C);
+MATCH void func_801EF79C(void) {
+    POLY_GT4* prim;
+    long      depth;
+    long      flag;
+    s32       i;
+    s32       tpage;
+
+    tpage = getTPage(1, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[1] = 128;
+    D_1F800000.view.effect.params[0] = g_Task->unk_09;
+    D_1F800000.view.effect.params[2] = 512;
+    D_1F800000.view.effect.params[3] = g_Task->timer;
+    D_1F800000.view.effect.params[4] = (g_Task->param.unk_0B & 0x3F) << 6;
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0x580), D_1F800000.view.effect.params[2]), FIXED_MUL(rcos(0x580), D_1F800000.view.effect.params[2]),
+              FIXED_MUL(rsin(D_1F800000.view.effect.params[4]), D_1F800000.view.effect.params[3]));
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(0x280), D_1F800000.view.effect.params[2]), FIXED_MUL(rcos(0x280), D_1F800000.view.effect.params[2]),
+              FIXED_MUL(rsin(D_1F800000.view.effect.params[4]), D_1F800000.view.effect.params[3]));
+    for (i = 1; i < D_1F800000.view.effect.params[0]; i++) {
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800000.view.effect.params[2] = (i << 5) + 512;
+        D_1F800000.view.effect.params[4] = ((g_Task->param.unk_0B + i) & 0x3F) << 6;
+        D_1F800014[2].vx                 = D_1F800014[0].vx;
+        D_1F800014[2].vy                 = D_1F800014[0].vy;
+        D_1F800014[2].vz                 = D_1F800014[0].vz;
+        D_1F800014[3].vx                 = D_1F800014[1].vx;
+        D_1F800014[3].vy                 = D_1F800014[1].vy;
+        D_1F800014[3].vz                 = D_1F800014[1].vz;
+        setVector(&D_1F800014[0], FIXED_MUL(rsin(0x580), D_1F800000.view.effect.params[2]), FIXED_MUL(rcos(0x580), D_1F800000.view.effect.params[2]),
+                  FIXED_MUL(rsin(D_1F800000.view.effect.params[4]), D_1F800000.view.effect.params[3]));
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(0x280), D_1F800000.view.effect.params[2]), FIXED_MUL(rcos(0x280), D_1F800000.view.effect.params[2]),
+                  FIXED_MUL(rsin(D_1F800000.view.effect.params[4]), D_1F800000.view.effect.params[3]));
+        if (g_Task->header.step == 3) {
+            D_1F800000.view.effect.params[1] = (g_Task->unk_09 - 48) / 3 * 8;
+        }
+        setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+        setRGB1(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+        setRGB2(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+        setRGB3(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+        if (i < 16) {
+            setRGB0(prim, D_1F800000.view.effect.params[1] / 16 * (i + 1), D_1F800000.view.effect.params[1] / 16 * (i + 1), D_1F800000.view.effect.params[1] / 16 * (i + 1));
+            setRGB1(prim, prim->r0, prim->g0, prim->b0);
+            setRGB2(prim, D_1F800000.view.effect.params[1] / 16 * i, D_1F800000.view.effect.params[1] / 16 * i, D_1F800000.view.effect.params[1] / 16 * i);
+            setRGB3(prim, prim->r2, prim->g2, prim->b2);
+        }
+        if (D_1F800000.view.effect.params[0] - 8 < i) {
+            D_1F800000.view.effect.params[5] = D_1F800000.view.effect.params[1];
+            D_1F800000.view.effect.params[1] = D_1F800000.view.effect.params[1] / 8 * (D_1F800000.view.effect.params[0] - i);
+            setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+            setRGB1(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+            D_1F800000.view.effect.params[1] = D_1F800000.view.effect.params[5] / 8 * (D_1F800000.view.effect.params[0] - (i - 1));
+            setRGB2(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+            setRGB3(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+        }
+        prim->tpage                      = GetTPage(1, 1, 832, 256);
+        prim->clut                       = GetClut(0, 482);
+        D_1F800000.view.effect.params[7] = 252 - ((((g_FrameCount * 2) ^ 0xFFFF) + i) & 0x3F) * 3;
+        setUV4(prim, 0, D_1F800000.view.effect.params[7], 255, D_1F800000.view.effect.params[7], 0, D_1F800000.view.effect.params[7] + 3, 255, D_1F800000.view.effect.params[7] + 3);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+    }
+    tpage = getTPage(0, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
 
 MATCH void func_801EFF24(void) {
     D_801F04D8[g_Task->header.step]();
