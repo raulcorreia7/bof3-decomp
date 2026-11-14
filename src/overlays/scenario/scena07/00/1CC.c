@@ -392,7 +392,27 @@ MATCH u8* func_801F8394(void) {
 
 INCLUDE_ASM(func_801F83D0);
 
-INCLUDE_ASM(func_801F8478);
+/* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
+MATCH void func_801F8478(u8* row) {
+    s32* cell;
+    u16  yaw;
+    u16  pitch;
+    s16  radius;
+
+    cell    = (s32*)row;
+    row[0]  = 1;
+    row[1]  = 0;
+    row[2]  = 8;
+    row[3]  = 0;
+    cell[2] = 0;
+    row[4]  = 1;
+    yaw     = rand() & 0x7FF;
+    pitch   = rand() & 0xFFF;
+    radius  = ((rand() % 2) << 12) | (rand() & 0xFFF);
+    cell[3] = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    cell[4] = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    cell[5] = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
+}
 
 MATCH u8 func_801F85D8(void) {
     u8     active;
