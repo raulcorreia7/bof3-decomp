@@ -38,8 +38,8 @@ MATCH void func_801EF2B8(void) {
     s32 fall;
 
     for (i = 0; i < 16; i++) {
-        rise = (rsin(((g_Task->unk_09 << 7) + (i << 8)) & 0xFFF) >> 8) - (rsin((((g_Task->unk_09 - 1) << 7) + (i << 8)) & 0xFFF) >> 8);
-        fall = (rsin(((g_Task->unk_09 << 7) + ((i + 1) << 8)) & 0xFFF) >> 8) - (rsin((((g_Task->unk_09 - 1) << 7) + ((i + 1) << 8)) & 0xFFF) >> 8);
+        rise = (rsin(((g_Task->unk_09 << 7) + (i << 8)) & ANGLE_MASK) >> 8) - (rsin((((g_Task->unk_09 - 1) << 7) + (i << 8)) & ANGLE_MASK) >> 8);
+        fall = (rsin(((g_Task->unk_09 << 7) + ((i + 1) << 8)) & ANGLE_MASK) >> 8) - (rsin((((g_Task->unk_09 - 1) << 7) + ((i + 1) << 8)) & ANGLE_MASK) >> 8);
         if (i == 0) {
             rise = 0;
         }
@@ -319,7 +319,7 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     }
     D_1F800014->vx = ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2;
     D_1F800014->vy = ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2;
-    D_1F800014->vz = -Area_SampleHeight((D_1F800014->vx + 0x4000) << 9, (D_1F800014->vy + 0x4000) << 9) / 2;
+    D_1F800014->vz = -Area_SampleHeight((D_1F800014->vx + AREA_CELL_ORIGIN) << 9, (D_1F800014->vy + AREA_CELL_ORIGIN) << 9) / 2;
     z              = RotTransPers(D_1F800014, (long*)D_1F800034_U16, &depth, &flag);
     if (((u32)(D_1F800034_U16[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;

@@ -67,12 +67,12 @@ MATCH void func_801EF188(void) {
     } else {
         target = &g_Game.members[g_Task->unk_04];
     }
-    pos.vx = (target->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (target->pos.y.fixed >> 9) - 0x4000;
+    pos.vx = (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = (COORD_INT(target->pos.z) + 0xC0) >> 1;
     if (Battle_SlotIsBlocked(g_Task->unk_03) & BYTE_MASK) {
-        g_Task->unk_0C      = (target->pos.x.fixed >> 9) - 0x4000;
-        g_Task->unk_10      = (target->pos.y.fixed >> 9) - 0x4000;
+        g_Task->unk_0C      = (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+        g_Task->unk_10      = (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
         g_Task->unk_14      = (COORD_INT(target->pos.z) + 0xC0) >> 1;
         g_Task->header.step = 0xB;
     }

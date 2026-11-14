@@ -378,7 +378,7 @@ MATCH void func_801F037C(void) {
         return;
     }
 
-    diff           = (g_Task->unk_10 & 0xFFF) - (g_Task->unk_0C & 0xFFF);
+    diff           = (g_Task->unk_10 & ANGLE_MASK) - (g_Task->unk_0C & ANGLE_MASK);
     g_Task->unk_10 = diff;
     if (diff < 0) {
         g_Task->unk_10 = ~diff + 1;
@@ -546,9 +546,9 @@ MATCH void func_801F11AC(void) {
     TILE_1*      primitive;
 
     work      = D_801F22BC;
-    vec[0]    = (work->unk_10 >> 9) - 0x4000;
+    vec[0]    = (work->unk_10 >> 9) - AREA_CELL_ORIGIN;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (work->unk_14 >> 9) - 0x4000;
+    vec[1]    = (work->unk_14 >> 9) - AREA_CELL_ORIGIN;
     vec[2]    = -((s16)(*(u16*)((u8*)work + 0x1A)) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);

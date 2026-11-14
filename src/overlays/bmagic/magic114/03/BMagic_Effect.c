@@ -144,8 +144,8 @@ MATCH void func_801EF6A8(void) {
     rot.vy = 0;
     rot.vz = ((g_Task->timer & 0x1F) - 2) << 7;
     src    = (PartyMember*)g_BattleEffectBattler;
-    pos.vx = (src->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (src->pos.y.fixed >> 9) - 0x4000;
+    pos.vx = (src->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (src->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = -(COORD_INT(src->pos.z) + 0x200) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
@@ -216,23 +216,23 @@ MATCH void func_801EFA80(void) {
     g_Task->unk_0C = 0;
     g_Task->unk_10 = -0x1000;
     func_801DD350(g_Task);
-    D_1F800014[0].vx = ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - 0x4000;
-    D_1F800014[0].vy = ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - 0x4000;
+    D_1F800014[0].vx = ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[0].vy = ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[0].vz = -COORD_INT(g_Task->pos.z) / 2;
     g_Task->unk_0C   = 0;
     g_Task->unk_10   = 0x1000;
     func_801DD350(g_Task);
-    D_1F800014[1].vx = ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - 0x4000;
-    D_1F800014[1].vy = ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - 0x4000;
+    D_1F800014[1].vx = ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[1].vy = ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[1].vz = -COORD_INT(g_Task->pos.z) / 2;
     g_Task->unk_10   = 0xA8000 - ((g_Task->unk_09 * 3) << 15);
     g_Task->unk_0C   = 0x28000;
     func_801DD350(g_Task);
-    D_1F800014[3].vx = ((g_AreaScrollTargetX + g_Task->unk_0C) >> 9) - 0x4000;
-    D_1F800014[3].vy = ((g_AreaScrollTargetY + g_Task->unk_10) >> 9) - 0x4000;
+    D_1F800014[3].vx = ((g_AreaScrollTargetX + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[3].vy = ((g_AreaScrollTargetY + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[3].vz = -g_Task->unk_14 / 2;
-    D_1F800014[2].vx = (x >> 9) - 0x4000;
-    D_1F800014[2].vy = (y >> 9) - 0x4000;
+    D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[2].vz = -g_Task->unk_14 / 2;
     RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     setRGB0(prim, 16, 1, 1);
@@ -301,16 +301,16 @@ MATCH void func_801F0004(void) {
     func_801DD350(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[2].vx = (x >> 9) - 0x4000;
-    D_1F800014[2].vy = (y >> 9) - 0x4000;
+    D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
     g_Task->unk_0C   = -0x30000;
     g_Task->unk_10   = 0;
     func_801DD350(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[3].vx = (x >> 9) - 0x4000;
-    D_1F800014[3].vy = (y >> 9) - 0x4000;
+    D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[3].vz = -COORD_INT(g_Task->pos.z) / 2;
     for (i = 1; i < g_Task->unk_14 && i < 56; i++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -332,8 +332,8 @@ MATCH void func_801F0004(void) {
         func_801DD350(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[2].vx = (x >> 9) - 0x4000;
-        D_1F800014[2].vy = (y >> 9) - 0x4000;
+        D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
         left             = g_Task->unk_14 - i;
         if (left < 8) {
@@ -345,8 +345,8 @@ MATCH void func_801F0004(void) {
         func_801DD350(g_Task);
         x                                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[3].vx                 = (x >> 9) - 0x4000;
-        D_1F800014[3].vy                 = (y >> 9) - 0x4000;
+        D_1F800014[3].vx                 = (x >> 9) - AREA_CELL_ORIGIN;
+        D_1F800014[3].vy                 = (y >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[3].vz                 = -COORD_INT(g_Task->pos.z) / 2;
         prim->tpage                      = GetTPage(1, 1, 832, 256);
         prim->clut                       = GetClut(0, 482);
@@ -395,16 +395,16 @@ MATCH void func_801F04D4(s32 semi) {
     func_801DD350(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[2].vx = (x >> 9) - 0x4000;
-    D_1F800014[2].vy = (y >> 9) - 0x4000;
+    D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
     g_Task->unk_0C   = -0x30000;
     g_Task->unk_10   = 0;
     func_801DD350(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[3].vx = (x >> 9) - 0x4000;
-    D_1F800014[3].vy = (y >> 9) - 0x4000;
+    D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[3].vz = -COORD_INT(g_Task->pos.z) / 2;
     for (i = 1; i < g_Task->unk_14; i++) {
         if (i >= 56) {
@@ -429,8 +429,8 @@ MATCH void func_801F04D4(s32 semi) {
         func_801DD350(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[2].vx = (x >> 9) - 0x4000;
-        D_1F800014[2].vy = (y >> 9) - 0x4000;
+        D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
         left             = g_Task->unk_14 - i;
         if (left < 8) {
@@ -442,8 +442,8 @@ MATCH void func_801F04D4(s32 semi) {
         func_801DD350(g_Task);
         x                                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[3].vx                 = (x >> 9) - 0x4000;
-        D_1F800014[3].vy                 = (y >> 9) - 0x4000;
+        D_1F800014[3].vx                 = (x >> 9) - AREA_CELL_ORIGIN;
+        D_1F800014[3].vy                 = (y >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[3].vz                 = -COORD_INT(g_Task->pos.z) / 2;
         prim->tpage                      = GetTPage(1, trans, 832, 256);
         prim->clut                       = GetClut(0, 482);
@@ -485,15 +485,15 @@ MATCH void func_801F093C(void) {
     func_801DD350(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[1].vx = (x >> 9) - 0x4000;
-    D_1F800014[1].vy = (y >> 9) - 0x4000;
+    D_1F800014[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[1].vy = (y >> 9) - AREA_CELL_ORIGIN;
     g_Task->unk_0C   = -0x50000;
     g_Task->unk_10   = 0;
     func_801DD350(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[3].vx = (x >> 9) - 0x4000;
-    D_1F800014[3].vy = (y >> 9) - 0x4000;
+    D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[0].vz = D_1F800014[1].vz = D_1F800014[2].vz = D_1F800014[3].vz = -COORD_INT(g_Task->pos.z) / 2;
     for (i = 1; i < g_Task->unk_14; i++) {
         if (i >= 56) {
@@ -516,8 +516,8 @@ MATCH void func_801F093C(void) {
         func_801DD350(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[1].vx = (x >> 9) - 0x4000;
-        D_1F800014[1].vy = (y >> 9) - 0x4000;
+        D_1F800014[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        D_1F800014[1].vy = (y >> 9) - AREA_CELL_ORIGIN;
         left             = g_Task->unk_14 - i;
         if (left < 8) {
             g_Task->unk_0C = -((left * 5) << 13);
@@ -528,8 +528,8 @@ MATCH void func_801F093C(void) {
         func_801DD350(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[3].vx = (x >> 9) - 0x4000;
-        D_1F800014[3].vy = (y >> 9) - 0x4000;
+        D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
         RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         D_1F800000.view.effect.params[1] = g_Task->unk_09 << 2;
         setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
@@ -598,8 +598,8 @@ MATCH void func_801F0E90(void) {
     work->pos.x.fixed      = battler->pos.x.fixed + work->unk_0C;
     work->pos.y.fixed      = battler->pos.y.fixed + work->unk_10;
     COORD_INT(work->pos.z) = COORD_INT(battler->pos.z) + 0x200;
-    pos.vx                 = (work->pos.x.fixed >> 9) - 0x4000;
-    pos.vy                 = (work->pos.y.fixed >> 9) - 0x4000;
+    pos.vx                 = (work->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy                 = (work->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz                 = -COORD_INT(work->pos.z) / 2;
     RotTrans(&pos, (VECTOR*)matrix.t, &flags);
     RotMatrix(&rot, &matrix);

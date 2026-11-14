@@ -55,6 +55,11 @@ typedef struct Magic003Rect {
     u16 h;
 } Magic003Rect;
 
+ASSERT_SIZE(Magic003Rect, 0x08);
+ASSERT_OFFSET(Magic003Rect, y, 0x02);
+ASSERT_OFFSET(Magic003Rect, w, 0x04);
+ASSERT_OFFSET(Magic003Rect, h, 0x06);
+
 extern Magic003Rect D_801F0B10[];
 /* The length of each label and its glyph codes, 0 at the end and 0xFF for a space. */
 extern u8           D_801F0A9C[];
