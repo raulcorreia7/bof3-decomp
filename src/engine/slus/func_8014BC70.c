@@ -37,6 +37,7 @@ NON_MATCHING void func_8014BC70(void) {
     s8   rows;
     s8   row;
     s8   other;
+    s8   last;
     s32  lowest;
     s32  tpage;
     s8   var_s6;
@@ -138,26 +139,40 @@ NON_MATCHING void func_8014BC70(void) {
                 object_index += 1;
                 merged = OBJ_KEY(object_index & BYTE_MASK) < *(u16*)((u8*)var_s3 + 2);
             }
+            row = 0;
             if ((rows - 1) > 0) {
-                for (row = 0; row < (rows - 1); row++) {
-                    for (other = rows - 1; other >= (row + 1); other--) {
-                        if ((s16)D_80147D08[other - 1].z < (s16)D_80147D08[other].z) {
-                            func_8014C47C((struct Vec3W*)&D_80147D08[other], (struct Vec3W*)&D_80147CFC[other]);
-                        }
+                last = rows - 1;
+                do {
+                    other = last;
+                    first = row + 1;
+                    if (last >= first) {
+                        lowest = first;
+                        do {
+                            if ((s16)D_80147D08[other - 1].z < (s16)D_80147D08[other].z) {
+                                func_8014C47C((struct Vec3W*)&D_80147D08[other], (struct Vec3W*)&D_80147CFC[other]);
+                            }
+                            other--;
+                        } while (other >= lowest);
                     }
-                }
+                    row++;
+                } while (row < (rows - 1));
             }
-            for (row = 0; row < rows; row++) {
-                if (D_80147D0C[row].depth < 0) {
-                    if (g_AreaDrawFlags & AREA_DRAW_NEGATIVE_DEPTH) {
-                        TASK_SET(D_80147D08[row].primitive);
-                        Area_DrawObjectSprite();
+            row = 0;
+            if (rows > 0) {
+                limit = rows;
+                do {
+                    if (D_80147D0C[row].depth < 0) {
+                        if (g_AreaDrawFlags & AREA_DRAW_NEGATIVE_DEPTH) {
+                            TASK_SET(D_80147D08[row].primitive);
+                            Area_DrawObjectSprite();
+                        }
+                    } else if (g_AreaDrawFlags & AREA_DRAW_APPEND_ACTOR_PRIMITIVES) {
+                        TASK_SET(D_80147D08[row].work);
+                        CatPrim(D_801459D0[TASK_BYTES[0x29]], D_80147D08[row].primitive);
+                        D_801459D0[TASK_BYTES[0x29]] = (u32*)D_80147D08[row].primitive;
                     }
-                } else if (g_AreaDrawFlags & AREA_DRAW_APPEND_ACTOR_PRIMITIVES) {
-                    TASK_SET(D_80147D08[row].work);
-                    CatPrim(D_801459D0[TASK_BYTES[0x29]], D_80147D08[row].primitive);
-                    D_801459D0[TASK_BYTES[0x29]] = (u32*)D_80147D08[row].primitive;
-                }
+                    row++;
+                } while (row < limit);
             }
         }
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
