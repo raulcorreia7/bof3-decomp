@@ -238,7 +238,41 @@ INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Shop_DrawEquipment.h"
 
-INCLUDE_ASM(func_801D4158);
+MATCH void func_801D4158(s16 x, s16 y, u8 index, u8 flag) {
+    Character* character;
+    u8*        base;
+    u8*        base16;
+    u8*        entryp;
+    s16        tx;
+    s32        pos_x;
+    s32        value;
+    s32        index_off;
+    /* FAKE: retail reserves 24 frame bytes between the outgoing arguments and
+     * the saved registers that no statement in the body uses. */
+    FAKE_STACK_PADS(u8, 24);
+
+    base = &g_WindowStyle;
+    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x65, 0x25, 0, base[0]);
+    index_off = index * PARTY_RECORD_STRIDE;
+    base16    = base + 0x16;
+    entryp    = base16 + index_off;
+    character = (Character*)entryp;
+    pos_x     = x;
+    tx        = pos_x + 0x26;
+    UI_DrawText((flag == 0) ? pos_x + 0x2C : tx, (s16)(y + 7), 0, 0xFF, (flag == 0) ? (u8*)&g_MenuLabelEquip[8] : (u8*)&g_MenuLabelEquip[0xC]);
+    if (flag == 0) {
+        value = character->exp;
+    } else {
+        value = Char_GetExpForLevel(index, (character->level + 1) & 0xFF);
+    }
+    if (value != -1) {
+        sprintf(g_UiFormatBuffer, &g_MenuStatFormat[0x14], value);
+    } else {
+        sprintf(g_UiFormatBuffer, &g_MenuStatFormat[0x18]);
+    }
+    UI_DrawAsciiString((s16)(x + 0x15), (s16)(y + 0x1A), 0, g_UiFormatBuffer);
+    UI_DrawSpriteRun(x, y, &g_MenuInventoryTab1OnSprites[0x24], 1);
+}
 
 #include "overlays/menu/Menu_DrawCursorFrame.h"
 
