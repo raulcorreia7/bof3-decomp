@@ -181,7 +181,19 @@ MATCH void func_801F7638(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801F76D0);
+MATCH void func_801F76D0(void) {
+    if ((g_Task->vx & D_801FDD9C[g_Task->timer]) == 0) {
+        D_801FDFBC->unk_10 += D_801FDDA4[g_Task->timer];
+    }
+    if ((g_Task->vx & 0xF) == 0) {
+        g_Task->timer++;
+    }
+    func_801F97E0(D_801FDFBC);
+    if (--g_Task->vx == 0) {
+        g_Task->vx = 0x10;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F77AC(void) {
     D_801FDFBC->unk_10 += 4;
