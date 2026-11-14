@@ -33,7 +33,7 @@ local_locals() {
 	tmp2=$(mktemp)
 	git diff -M --name-status "$base...HEAD" -- src include | while IFS='	' read -r st a b; do
 		case $st in
-		A) old= new=$a ;;
+		A) old='' new=$a ;;
 		D) continue ;;
 		R*) old=$a new=$b ;;
 		*) old=$a new=$a ;;
