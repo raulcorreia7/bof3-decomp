@@ -251,6 +251,8 @@ extern u8              g_SaveCardDirectory[];
 extern u8*             D_801C893C[];
 extern u8*             D_801C8950[];
 extern char            g_MenuStatFormat[4];
+extern char            g_MenuExperienceFormat[4];
+extern char            g_MenuExperienceBlank[12];
 extern char            g_MenuZennyFormat[4];
 /* D_801D0C74 */
 extern char            g_MenuNextExpBlank[];
@@ -348,6 +350,7 @@ extern u8       g_MenuInventoryTab1OnSprites[];
 extern u8       g_MenuListTab1OffSprites[];
 /* D_801EC790 */
 extern u8       g_MenuListTab1OnSprites[];
+extern u8       g_MenuExperienceSprites[];
 extern u8       g_SaveSlotFrameSprites[];
 extern u8       g_MenuLabelAgility[4];
 extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
@@ -536,7 +539,7 @@ void        func_801DB550(void);
 void        func_801DB5AC(void);
 /* func_801DBF04 */
 extern void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
-extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
+extern void func_801DC150(s16 x, s16 y, u8 index, u8 flag);
 /* func_801DCDB8 */
 void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);

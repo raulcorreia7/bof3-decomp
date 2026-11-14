@@ -38,7 +38,7 @@ segments:
       - [0x1620, c, func_801F4220]
       - [0x16E8, c, func_801F42E8]
       - [0x1890, c, func_801F4490]
-      - [0x1AEC, c, func_801F46EC]
+      - [0x1AEC, c, GFX_DrawColorFan]
       - [0x1CE8, c, func_801F48E8]
       - [0x1FC0, c, func_801F4BC0]
       - [0x2144, c, func_801F4D44]

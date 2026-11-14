@@ -25,7 +25,7 @@ MATCH void func_801D0CEC(void) {
     work->color_r += 8;
     work->origin_x += 0x10;
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
@@ -36,7 +36,7 @@ MATCH void func_801D0CEC(void) {
 
 MATCH void func_801D0DB0(void) {
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->color_g = 0;
@@ -53,7 +53,7 @@ MATCH void func_801D0E5C(void) {
         func_801D1220(0xFF);
     }
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 4;
         g_Task->header.mode += 1;
@@ -64,7 +64,7 @@ MATCH void func_801D0F44(void) {
     g_Task->color_g -= 0x40;
     func_801D1220(g_Task->color_g);
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -75,7 +75,7 @@ MATCH void func_801D0F44(void) {
 
 MATCH void func_801D101C(void) {
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -93,7 +93,7 @@ MATCH void func_801D10C4(void) {
         g_Task->color_r -= 8;
     }
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -189,40 +189,7 @@ MATCH void func_801D1914(s16 amount) {
     func_801D1370(&start, &end, amount);
 }
 
-MATCH void func_801D1A20(s32* pos, s16 origin, s32 flags) {
-    DVECTOR  screen;
-    DVECTOR  point;
-    DVECTOR  size;
-    DVECTOR  scale;
-    MATRIX   camera;
-    POLY_G3* primitive;
-    s32      angle;
-    s32      i;
-
-    GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x2C0, 0x100));
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint(pos, &screen);
-    size.vx = size.vy = origin;
-    Game_ProjectWorldPoint(pos, &size, &scale);
-    scale.vx += g_FrameCount & 1;
-    point.vx = screen.vx + scale.vx;
-    point.vy = screen.vy;
-    angle    = 0;
-    i        = 0;
-    do {
-        primitive = GFX_BeginPolyG3(1);
-        setXY2(primitive, screen.vx, screen.vy, point.vx, point.vy);
-        angle += 128;
-        point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
-        point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);
-        primitive->x2 = point.vx;
-        primitive->y2 = point.vy;
-        setRGB0(primitive, (flags & 4) << 5, (flags & 2) << 6, (flags & 1) << 7);
-        setRGB1(primitive, 0, 0, 0);
-        setRGB2(primitive, 0, 0, 0);
-        GFX_AddPrim(2u, sizeof(POLY_G3));
-        i += 1;
-    } while ((i & BYTE_MASK) < 32U);
-}
+/* func_801D1A20 */
+#include "shared/GFX_DrawColorFan.h"
 
 INCLUDE_ASM(func_801D1C1C);

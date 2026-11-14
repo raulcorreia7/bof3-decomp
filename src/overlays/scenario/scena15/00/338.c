@@ -507,24 +507,9 @@ INCLUDE_ASM(func_801F9CFC);
 
 INCLUDE_ASM(func_801FA6BC);
 
-MATCH bool func_801FA854(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step) {
-    u8 slot;
+#include "overlays/scenario/Scene_SpawnActor.h"
 
-    slot       = Actor_FindFreeSpawned();
-    D_801FE748 = slot;
-    if (slot != GAME_NONE) {
-        g_SpawnedActors[slot].header.flags         = 1;
-        g_SpawnedActors[D_801FE748].type           = type;
-        g_SpawnedActors[D_801FE748].camera_angle.x = angle_x;
-        g_SpawnedActors[D_801FE748].camera_angle.y = angle_y;
-        g_SpawnedActors[D_801FE748].camera_angle.z = angle_z;
-        g_SpawnedActors[D_801FE748].scene_step     = scene_step;
-        g_SpawnedActors[D_801FE748].layer          = layer;
-    } else {
-        return false;
-    }
-    return true;
-}
+MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FE748)}
 
 MATCH void func_801FA998(void) {
     SYS_DISPATCH_BYTE(D_801FE678, g_SceneState.state_04);

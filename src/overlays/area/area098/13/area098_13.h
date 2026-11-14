@@ -91,7 +91,7 @@ u8   func_801F42E8(void);
 void func_801F4490(WorldPos* pos, s32 vx, s32 vy);
 
 void func_801F40A4(void);
-void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
+void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags);
 s32  func_801F4E7C(void);
 
 void func_801F48E8(void* arg0, void* arg1, s32 arg2);

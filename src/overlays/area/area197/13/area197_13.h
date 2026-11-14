@@ -49,6 +49,19 @@ typedef struct AreaSparkRow {
 ASSERT_SIZE(AreaSparkRow, 0x28);
 ASSERT_OFFSET(AreaSparkRow, pos, 0x18);
 
+/* The triangle rows func_801F2E74 offsets the projected point by: the second
+ * and third vertex relative to the first, in screen space. */
+typedef struct AreaTriangleOffset {
+    u16 dx1;
+    u16 dy1;
+    u16 dx2;
+    u16 dy2;
+} AreaTriangleOffset;
+
+ASSERT_SIZE(AreaTriangleOffset, 8);
+
+extern AreaTriangleOffset D_801F4328[];
+
 void func_801F2E74(AreaSparkRow* spark);
 
 /* The dropped sparks follow the 128 sparks at AREA_WORK. */

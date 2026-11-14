@@ -195,7 +195,7 @@ MATCH void func_801F79B0(void) {
 }
 
 MATCH void func_801F79EC(void) {
-    Scena08Spark* spark;
+    FallingSpark* spark;
 
     if (g_Task->unk_5A == 4) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
@@ -203,7 +203,7 @@ MATCH void func_801F79EC(void) {
     if ((g_Task->unk_5A & 0x7) == 0) {
         spark = func_801F8B14();
         if (spark != NULL) {
-            func_801F8B50(spark);
+            Scene_InitSpark(spark);
         }
     }
     func_801F8BF8();
@@ -370,15 +370,15 @@ INCLUDE_ASM(func_801F85F0);
 
 #include "shared/GFX_DrawProjectedDisc.h"
 
-MATCH void func_801F8964(Scena08Spark* spark) {
+MATCH void func_801F8964(FallingSpark* spark) {
     GFX_DRAW_PROJECTED_DISC(&spark->x, spark->fade, 0x20, 1);
 }
 
 MATCH void func_801F8AE8(void) {
     s32           index;
-    Scena08Spark* spark;
+    FallingSpark* spark;
 
-    spark = (Scena08Spark*)AREA_WORK;
+    spark = (FallingSpark*)AREA_WORK;
     index = 0;
     do {
         spark->active = 0;
@@ -387,11 +387,11 @@ MATCH void func_801F8AE8(void) {
     } while ((index & BYTE_MASK) < SCENA08_SPARK_COUNT);
 }
 
-MATCH Scena08Spark* func_801F8B14(void) {
-    Scena08Spark* spark;
+MATCH FallingSpark* func_801F8B14(void) {
+    FallingSpark* spark;
     u8            i;
 
-    spark = (Scena08Spark*)AREA_WORK;
+    spark = (FallingSpark*)AREA_WORK;
     for (i = 0; i < SCENA08_SPARK_COUNT; i++) {
         if (spark->active == 0) {
             return spark;
@@ -401,28 +401,18 @@ MATCH Scena08Spark* func_801F8B14(void) {
     return NULL;
 }
 
-MATCH void func_801F8B50(Scena08Spark* spark) {
-    spark->active      = 1;
-    spark->life        = 8;
-    spark->kind        = 0;
-    spark->fade        = 0;
-    spark->speed       = 0;
-    spark->life_reload = 64;
-    spark->x           = g_Task->pos.x.fixed + (RANDOM_MASK(BYTE_MASK) << 11) - TO_COORD(4);
-    spark->y           = g_Task->pos.y.fixed + (RANDOM_MASK(BYTE_MASK) << 11) - TO_COORD(4);
-    spark->z           = g_Task->pos.z.fixed;
-}
+#include "overlays/scenario/Scene_InitSpark.h"
 
 MATCH u8 func_801F8BF8(void) {
     u8            i;
     s32           live;
-    Scena08Spark* spark;
+    FallingSpark* spark;
     u8            buffer[0x20];
 
     live = 0;
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
     Area_SetCameraMatrix(buffer);
-    spark = (Scena08Spark*)AREA_WORK;
+    spark = (FallingSpark*)AREA_WORK;
     for (i = 0; i < SCENA08_SPARK_COUNT; i += 1, spark += 1) {
         if (spark->active != 0) {
             D_801FE8FC[spark->kind](spark);
@@ -433,7 +423,7 @@ MATCH u8 func_801F8BF8(void) {
     return live;
 }
 
-MATCH void func_801F8CDC(Scena08Spark* spark) {
+MATCH void func_801F8CDC(FallingSpark* spark) {
     u8 life;
 
     life = spark->life - 1;
@@ -447,7 +437,7 @@ MATCH void func_801F8CDC(Scena08Spark* spark) {
 
 #include "overlays/scenario/Actor_Wait.h"
 
-MATCH void func_801F8D4C(Scena08Spark* spark) {
+MATCH void func_801F8D4C(FallingSpark* spark) {
     u8  life;
     s32 speed;
 
