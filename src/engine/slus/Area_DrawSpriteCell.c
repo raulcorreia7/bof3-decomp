@@ -36,7 +36,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         draw_value = scratch * 2;
         packed     = draw_value & 0x60;
         scratch    = scratch & 0xF;
-        if (work->unk_28 != PALETTE_KIND_CELL) {
+        if (work->unk_28 != PALETTE_TYPE_CELL) {
             draw_value = packed | 0x200;
             draw_value = mode_bit | draw_value;
         } else {

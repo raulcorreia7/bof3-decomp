@@ -29,10 +29,10 @@ loop:
         /* FAKE: hold the count store ahead of the coordinate add. */
         FAKE_ORDER_LOCK(g_AreaCameraOffsetZ = countdown);
         level[2] = second_coordinate + 0xB;
-        CallbackWait(1);
+        SYS_ThreadWait(1);
         /* Retail keeps this spin as a goto loop (as in func_8014F460). */
         goto loop;
     }
 
-    CallbackExit();
+    SYS_ThreadExit();
 }

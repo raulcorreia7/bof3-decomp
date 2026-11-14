@@ -52,7 +52,7 @@ have_facing:
         g_Task->param.unk_0B += 1;
         counter += 1;
     } while (counter < 0x10);
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 #else
 INCLUDE_ASM(func_801EECCC);

@@ -16,12 +16,12 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEE8(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF8DC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EEF80);
@@ -41,7 +41,7 @@ MATCH void func_801EF118(void) {
     if (func_800AF66C(*selected, 0x8000)) {
         BATTLE_RAISE_STATE(BATTLE_STATE_DAMAGE_APPLIED);
         Battle_MarkDamaged(g_Battle.target_selector);
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_AREA, 0x03));
         g_Task->header.flags |= 0x20;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;
@@ -85,12 +85,12 @@ MATCH void func_801EF2B0(void) {
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF40C(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF8EC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF4A4(void) {

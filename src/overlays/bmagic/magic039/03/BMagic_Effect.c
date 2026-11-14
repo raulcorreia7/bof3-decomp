@@ -46,7 +46,7 @@ MATCH void func_801EEC94(void) {
         dst[i + 16] = src[i + 16];
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
 #include "overlays/bmagic/Effect_NextStepOnZeroTick.h"

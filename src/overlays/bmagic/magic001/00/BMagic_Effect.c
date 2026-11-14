@@ -96,7 +96,7 @@ MATCH void func_801EF280(void) {
     work->unk_14 += work->unk_20;
     COORD_INT(work->pos.z) += work->unk_14;
     if (timer == 0) {
-        SND_QueueSelectionFx(0x203);
+        SND_QueueSelectionEffect(0x203);
         func_801E257C(g_Battle.active_battler, 12);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->unk_09 = 3;
@@ -145,7 +145,7 @@ MATCH void func_801EF468(void) {
     Actor_StepAnimOnce();
     Actor_StepAnimOnce();
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        SND_QueueSelectionFx(0x203);
+        SND_QueueSelectionEffect(0x203);
         func_801E257C(g_Battle.active_battler, 12);
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
@@ -285,7 +285,7 @@ MATCH void func_801EFD28(void) {
     g_Task->unk_09 = next;
     if (!(next & BYTE_MASK)) {
         func_800AFC98(2, 0);
-        SND_QueueSelectionFx(0x203);
+        SND_QueueSelectionEffect(0x203);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;
         g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);

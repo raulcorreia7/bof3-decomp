@@ -19,7 +19,7 @@ NON_MATCHING void func_801D8680(void) {
     g_MenuPanelTasks[16].unk_0C                      = 0xFF;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = g_MenuPanelTasks[18].pos.x + 5;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = g_MenuPanelTasks[18].pos.y + ((g_MenuPanelTasks[18].unk_0B * 0x10) + 0x1A);
-    tmp0                                             = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    tmp0                                             = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     val1                                             = g_MenuPanelTasks[16].unk_0B == 3;
     if (tmp0 & PADLup) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));

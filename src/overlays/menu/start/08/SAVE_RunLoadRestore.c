@@ -24,11 +24,11 @@ MATCH void SAVE_RunLoadRestore(void) {
         g_Game.party_size = Party_CountOrder(PARTY_ORDER_FIELD);
         EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
         while (EMI_IsReady() == 0) {
-            CallbackWait(1);
+            SYS_ThreadWait(1);
         }
         EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
         while (EMI_IsReady() == 0) {
-            CallbackWait(1);
+            SYS_ThreadWait(1);
         }
         Party_BuildBattlers(PARTY_ORDER_FIELD);
         {
@@ -46,7 +46,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         g_ScriptVars[3] = g_SavedScriptVars[3];
         Scene_LoadOverlay();
         while (EMI_IsReady() == 0) {
-            CallbackWait(1);
+            SYS_ThreadWait(1);
         }
         g_GameEntrySubstate = 4;
         g_MenuStartStep     = 0;

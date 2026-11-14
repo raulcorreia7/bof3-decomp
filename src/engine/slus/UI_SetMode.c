@@ -7,5 +7,5 @@ MATCH void UI_SetMode(u16 local_mode) {
         return;
     }
     g_UiLocalMode = local_mode & BYTE_MASK;
-    CallbackRegister(2, UI_DispatchLocalMode);
+    SYS_ThreadRegister(2, UI_DispatchLocalMode);
 }

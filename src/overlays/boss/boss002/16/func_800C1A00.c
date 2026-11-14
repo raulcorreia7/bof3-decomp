@@ -8,6 +8,6 @@ MATCH void func_800C1A00(void) {
     if (work->hp == 65535) {
         g_Battle.action_type = 3;
         g_Task->unk_04       = 0;
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_ENEMY, 2));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_ENEMY, 2));
     }
 }

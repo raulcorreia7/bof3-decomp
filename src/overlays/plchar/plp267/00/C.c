@@ -29,9 +29,9 @@ MATCH void PlChar_RunGarrFieldTask(void) {
 /* func_801CE8AC */
 #include "overlays/plchar/PlChar_FindGarrActorSlot.h"
 
-#include "overlays/plchar/Plchar_FollowerInReach.h"
+#include "overlays/plchar/PlChar_FollowerInReach.h"
 
-#include "overlays/plchar/Plchar_ProbeFacingFollower.h"
+#include "overlays/plchar/PlChar_ProbeFacingFollower.h"
 
 MATCH void func_801CEBFC(void) {
     SYS_DISPATCH_TASK(D_801D099C, 2, g_Task);

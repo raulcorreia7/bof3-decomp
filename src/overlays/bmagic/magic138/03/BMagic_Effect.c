@@ -58,12 +58,12 @@ MATCH void func_801EEFA4(void) {
     Magic138Steps handlers;
 
     handlers      = D_801EEC10;
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 0x1) {
         Area_AddActor();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF04C(void) {
@@ -152,12 +152,12 @@ MATCH void func_801EF52C(void) {
     Magic138Steps handlers;
 
     handlers      = D_801EEC1C;
-    g_ScriptTable = BATTLE_SCRIPT_TABLE;
+    g_Scripts = BATTLE_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF5D0(void) {

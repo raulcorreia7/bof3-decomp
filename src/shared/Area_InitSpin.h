@@ -22,7 +22,7 @@ MATCH void Area_InitSpin(void* spin) {
     work->vertex_b.vy = rsin(-AREA_SPIN_RADIUS);
     work->vertex_b.vz = 0;
 
-    Matrix_SetIdentity(&matrix);
+    MATH_SetIdentity(&matrix);
     RotMatrixX(rot[0], &matrix);
     RotMatrixY(-rot[1], &matrix);
     RotMatrixZ(rot[2], &matrix);

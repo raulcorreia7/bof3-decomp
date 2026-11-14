@@ -67,7 +67,7 @@ MATCH void func_801EEDEC(void) {
     g_Task->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
 }
 
 INCLUDE_ASM(func_801EEF64);
@@ -264,7 +264,7 @@ MATCH void func_801EF7FC(void) {
     g_Task->unk_2C.half = 0;
     g_Task->unk_2B      = 0;
     Actor_SelectScript(0);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
     g_Task->unk_09 = 0x10;
     g_Task->header.step += 1;
 }
@@ -692,7 +692,7 @@ MATCH void func_801F1AC4(void) {
 }
 
 MATCH void func_801F1B14(void) {
-    BMagicEffectWork* work;
+    BMagicEffect* work;
     s16               vec[3];
     TILE_1*           primitive;
 

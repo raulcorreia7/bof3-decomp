@@ -5,7 +5,7 @@ MATCH void func_800C1978(s32 mode) {
     g_Battle.state |= BATTLE_STATE_EFFECT_LOADING;
     Actor_StepAnimOnce();
     GFX_ClearRect(832, 256, 128, 256);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_ENEMY, 1));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_ENEMY, 1));
     g_Task->unk_18   = (s16)g_Task->screen_x;
     g_Task->unk_1C   = (s16)g_Task->screen_y;
     g_Task->screen_x = 50;

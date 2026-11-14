@@ -8,7 +8,7 @@ MATCH void Game_LoadCampMenu(void) {
     EMI_LoadArchive(EMI_SLOT_START);
 
     while (!EMI_IsReady()) {
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
     }
 
     GFX_ResetPalette();

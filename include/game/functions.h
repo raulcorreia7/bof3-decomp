@@ -57,7 +57,7 @@ void  Menu_SlidePanelLeft(void);
 /* func_8019A0E4 */
 void  Actor_DispatchAll(void);
 /* func_8019A194 */
-u8    Game_FindAreaHandler(void);
+u8    Game_FindArea(void);
 /* func_8019ABB0 */
 void  func_8019ABB0(s32 mode);
 /* func_8019F75C */
@@ -99,7 +99,7 @@ void  Game_DispatchScenarioRecord(void* object);
 /* func_801A78F8 */
 void  Scene_RequestChapterAdvance(void);
 /* func_801A7A34 */
-s8    Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1);
+s8    Game_CallScenario(u16 handler_arg0, u16 handler_arg1);
 /* func_801A7BF0 */
 void  Game_UpdateScene(void);
 /* func_801A7C2C */
@@ -142,7 +142,7 @@ void* Area_SetCameraMatrix(void* out_matrix);
 /* func_801AFF04 */
 void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 /* func_801AFF64 */
-void  Matrix_SetIdentity(MATRIX* matrix);
+void  MATH_SetIdentity(MATRIX* matrix);
 /* func_801AFF90 */
 s16   func_801AFF90(Point2D* origin, Point2D* first_point, Point2D* second_point);
 /* Game_ProjectWorldPoint */

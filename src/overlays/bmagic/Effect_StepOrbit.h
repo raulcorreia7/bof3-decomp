@@ -3,25 +3,25 @@
 MATCH void Effect_StepOrbit(void) {
     u8 timer;
 
-    g_BMagicOrbitWork->angle       = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;
-    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
-    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
-    g_BMagicOrbitWork->unk_0B++;
-    if (g_BMagicOrbitWork->timer_05 < 12) {
-        g_BMagicOrbitWork->timer_05++;
+    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x40) & 0xFFF;
+    g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(g_BMagicOrbit->angle) * g_BMagicOrbit->radius;
+    g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbit->angle) * g_BMagicOrbit->radius;
+    g_BMagicOrbit->unk_0B++;
+    if (g_BMagicOrbit->timer_05 < 12) {
+        g_BMagicOrbit->timer_05++;
     }
-    if (g_BMagicOrbitWork->timer_06 >= 5) {
-        g_BMagicOrbitWork->timer_06--;
+    if (g_BMagicOrbit->timer_06 >= 5) {
+        g_BMagicOrbit->timer_06--;
     }
-    if (g_BMagicOrbitWork->timer_07 >= 5) {
-        g_BMagicOrbitWork->timer_07--;
+    if (g_BMagicOrbit->timer_07 >= 5) {
+        g_BMagicOrbit->timer_07--;
     }
-    if (g_BMagicOrbitWork->unk_03 < 7) {
-        g_BMagicOrbitWork->unk_03++;
+    if (g_BMagicOrbit->unk_03 < 7) {
+        g_BMagicOrbit->unk_03++;
     }
-    timer                          = g_BMagicOrbitWork->frames_left - 1;
-    g_BMagicOrbitWork->frames_left = timer;
+    timer                          = g_BMagicOrbit->frames_left - 1;
+    g_BMagicOrbit->frames_left = timer;
     if (timer == 0) {
-        g_BMagicOrbitWork->header.step++;
+        g_BMagicOrbit->header.step++;
     }
 }

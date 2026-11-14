@@ -563,7 +563,7 @@ void                   func_801D6D6C(s32 strip_x, s32 strip_y);
 void                   func_801D6E94(void);
 void                   func_801D6F00(void);
 /* func_801D7080 */
-void                   SAVE_FormatSlotInfo(void);
+void                   SAVE_FormatSlot(void);
 void                   func_801D7208(void);
 void                   func_801D7344(void);
 void                   func_801D7380(void);

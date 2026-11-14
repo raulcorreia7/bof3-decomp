@@ -28,7 +28,7 @@ MATCH void func_801EEC88(void) {
     g_GfxPalettePending = 1;
     GFX_FreePaletteFadeTarget(*selected);
     g_Task->timer = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;

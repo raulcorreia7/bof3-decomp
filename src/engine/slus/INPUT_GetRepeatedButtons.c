@@ -4,7 +4,7 @@
  * held buttons, returned this frame; later, while a snapshotted button stays held, it counts down and returns the
  * held buttons again on the 3-frame repeat; 0 when nothing is due.
  */
-MATCH s32 PAD_GetRepeatedButtons(s32 button_mask) {
+MATCH s32 INPUT_GetRepeatedButtons(s32 button_mask) {
     u16 repeat_mask;
     u16 counter;
 

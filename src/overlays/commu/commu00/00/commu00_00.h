@@ -136,19 +136,19 @@ ASSERT_OFFSET(FairyRewardRoll, weights, 0x01);
 /* The 96-byte header-data block: the "%d" format, the 20 gift rows
  * Fairy_GrantGift copies, and the 3 exploration reward rows Fairy_RollExploreReward
  * copies. */
-typedef struct FairyVillageHeaderData {
+typedef struct FairyVillageHeader {
     char            fmt[FAIRY_VILLAGE_FMT_SIZE];     /* 0x00 D_801EEC44 "%d" */
     FairyGift       gifts[FAIRY_GIFT_COUNT];         /* 0x04 D_801EEC48 */
     FairyRewardRoll rolls[FAIRY_EXPLORE_TRIP_COUNT]; /* 0x54 D_801EEC98 */
-} FairyVillageHeaderData;
+} FairyVillageHeader;
 
-ASSERT_SIZE(FairyVillageHeaderData, FAIRY_VILLAGE_HEADER_DATA_SIZE);
-ASSERT_OFFSET(FairyVillageHeaderData, gifts, 0x04);
-ASSERT_OFFSET(FairyVillageHeaderData, rolls, 0x54);
+ASSERT_SIZE(FairyVillageHeader, FAIRY_VILLAGE_HEADER_DATA_SIZE);
+ASSERT_OFFSET(FairyVillageHeader, gifts, 0x04);
+ASSERT_OFFSET(FairyVillageHeader, rolls, 0x54);
 
 /* The overlay's shared data block, read through the symbol views listed
  * beside each member. The step arrays are the scene step tables the village dispatches through. */
-typedef struct FairyVillageData {
+typedef struct FairyVillage {
     u16                 resource_ids[FAIRY_VILLAGE_RESOURCE_ID_COUNT]; /* 0x000 D_801F24FC; source_index % 6 */
     u8                  unk_00C[12];                                   /* 0x00C; no static reader */
     u16                 culture_threshold[FAIRY_CULTURE_LEVEL_COUNT];  /* 0x018 D_801F2514; 15,18,21,24,27,30,40 */
@@ -179,19 +179,19 @@ typedef struct FairyVillageData {
     u8                  pad_44A[2];
     void*               active_ui;    /* 0x44C D_801F2948 (FAIRY_VILLAGE_ACTIVE_UI) */
     u8                  state_450[4]; /* 0x450 D_801F294C..D_801F294F */
-} FairyVillageData;
+} FairyVillage;
 
-ASSERT_SIZE(FairyVillageData, FAIRY_VILLAGE_DATA_SIZE);
-ASSERT_OFFSET(FairyVillageData, culture_threshold, 0x018);
-ASSERT_OFFSET(FairyVillageData, job_progress_cap, 0x027);
-ASSERT_OFFSET(FairyVillageData, copy_class, 0x034);
-ASSERT_OFFSET(FairyVillageData, music_level_cap, 0x064);
-ASSERT_OFFSET(FairyVillageData, task_rows, 0x06C);
-ASSERT_OFFSET(FairyVillageData, variant_rows, 0x0A8);
-ASSERT_OFFSET(FairyVillageData, explore_rewards, 0x11C);
-ASSERT_OFFSET(FairyVillageData, fairies, 0x204);
-ASSERT_OFFSET(FairyVillageData, variant_counter, 0x42C);
-ASSERT_OFFSET(FairyVillageData, labels, 0x434);
+ASSERT_SIZE(FairyVillage, FAIRY_VILLAGE_DATA_SIZE);
+ASSERT_OFFSET(FairyVillage, culture_threshold, 0x018);
+ASSERT_OFFSET(FairyVillage, job_progress_cap, 0x027);
+ASSERT_OFFSET(FairyVillage, copy_class, 0x034);
+ASSERT_OFFSET(FairyVillage, music_level_cap, 0x064);
+ASSERT_OFFSET(FairyVillage, task_rows, 0x06C);
+ASSERT_OFFSET(FairyVillage, variant_rows, 0x0A8);
+ASSERT_OFFSET(FairyVillage, explore_rewards, 0x11C);
+ASSERT_OFFSET(FairyVillage, fairies, 0x204);
+ASSERT_OFFSET(FairyVillage, variant_counter, 0x42C);
+ASSERT_OFFSET(FairyVillage, labels, 0x434);
 
 /* Retail-address data symbols, in address order. */
 extern u8               D_801448F2;
@@ -257,7 +257,7 @@ extern u16              D_801F2930[][3];
 extern u8               D_801F2944;
 extern u8               D_801F2945;
 extern u8               D_801F294F;
-extern FairyVillageData D_801F24FC_Data;
+extern FairyVillage D_801F24FC_Data;
 
 /* The scratchpad work pointer; each overlay types the pointee for its mode. */
 

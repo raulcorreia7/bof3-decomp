@@ -499,9 +499,9 @@ MATCH void func_801F02CC(void) {
 
 MATCH void func_801F0764(void) {
     GFX_AddDitheredDrawMode(3, getTPage(1, 1, 320, 256));
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0BD8, g_Task->header.step);
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
     GFX_AddDitheredDrawMode(3, getTPage(1, 0, 320, 256));
 }
 

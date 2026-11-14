@@ -4,7 +4,7 @@
 /* func_801E1320 */
 MATCH void Fishing_DrawRank(s16 x, s16 y) {
     FishingIconData      icons;
-    FishingThresholdData thresholds;
+    FishingThreshold thresholds;
     u32                  value;
     u32                  index;
     FishingIcon*         record;

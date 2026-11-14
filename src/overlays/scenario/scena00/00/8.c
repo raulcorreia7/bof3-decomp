@@ -1013,7 +1013,7 @@ MATCH void func_801F9178(void) {
     }
     g_GameFlags |= GAME_FLAG_MENU_LOCK;
     while (EMI_IsReady() == 0) {
-        CallbackWait(1U);
+        SYS_ThreadWait(1U);
     }
     g_ScriptVarsReq.word = 0;
     D_80146872           = 1;
@@ -1155,7 +1155,7 @@ MATCH void func_801F9868(void) {
                     SND_RequestBGM(3);
                 loop_10:
                     if (EMI_IsReady() == 0) {
-                        CallbackWait(1U);
+                        SYS_ThreadWait(1U);
                         goto loop_10;
                     }
                     g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
@@ -2256,7 +2256,7 @@ MATCH void func_801FBE88(void) {
 }
 
 MATCH void func_801FC01C(void) {
-    SceneSampleRecord* rec;
+    SceneSample* rec;
     u8*                base;
     s8                 i;
     s32                shift;
@@ -2268,60 +2268,60 @@ MATCH void func_801FC01C(void) {
     if (*D_80147BDC > 0) {
         do {
             shift                                    = 0xB - RANDOM_MASK(3);
-            slot                                     = i * sizeof(SceneFxSlot);
-            rec                                      = (SceneSampleRecord*)(i * sizeof(SceneSampleRecord) + (s32)base);
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 0)  = rec->sample[0] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 0)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 1)  = rec->sample[1] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 1)  = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 2)  = rec->sample[2] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 2)  = rec->weight[2] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 3)  = rec->sample[3] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 3)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 4)  = rec->sample[4] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 4)  = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 5)  = rec->sample[5] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 5)  = rec->weight[2] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 6)  = rec->sample[6] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 6)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 7)  = rec->sample[7] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 7)  = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 8)  = rec->sample[8] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 8)  = rec->weight[2] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 9)  = rec->sample[9] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 9)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 10) = rec->sample[10] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 10) = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 11) = rec->sample[11] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 11) = rec->weight[2] << shift;
+            slot                                     = i * sizeof(SceneEffectSlot);
+            rec                                      = (SceneSample*)(i * sizeof(SceneSample) + (s32)base);
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 0)  = rec->sample[0] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 0)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 1)  = rec->sample[1] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 1)  = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 2)  = rec->sample[2] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 2)  = rec->weight[2] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 3)  = rec->sample[3] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 3)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 4)  = rec->sample[4] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 4)  = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 5)  = rec->sample[5] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 5)  = rec->weight[2] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 6)  = rec->sample[6] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 6)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 7)  = rec->sample[7] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 7)  = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 8)  = rec->sample[8] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 8)  = rec->weight[2] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 9)  = rec->sample[9] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 9)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 10) = rec->sample[10] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 10) = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 11) = rec->sample[11] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 11) = rec->weight[2] << shift;
 
             lifetime                                     = RANDOM_MASK(7) + 1;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 0)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 1)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 2)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 3)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 4)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 5)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 6)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 7)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 8)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 9)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 10) = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 11) = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 0)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 1)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 2)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 3)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 4)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 5)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 6)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 7)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 8)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 9)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 10) = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 11) = lifetime;
             i++;
         } while (i < *D_80147BDC);
     }
 }
 
-typedef struct SceneLifeRecord {
+typedef struct SceneLife {
     u8  unk_00[2];
-    u16 lifetime[SCENE_FX_CELL_COUNT];
+    u16 lifetime[SCENE_EFFECT_CELL_COUNT];
     u8  unk_1A[0x0E];
-} SceneLifeRecord;
+} SceneLife;
 
 MATCH void func_801FC3A0(void) {
-    SceneSampleRecord* rec;
-    SceneLifeRecord*   dst;
+    SceneSample* rec;
+    SceneLife*   dst;
     u8*                src_base;
     u8*                dst_base;
     s8                 i;
@@ -2331,46 +2331,46 @@ MATCH void func_801FC3A0(void) {
     i        = 0;
     if ((*D_80147BDC) > 0) {
         do {
-            rec = (SceneSampleRecord*)(i * sizeof(SceneSampleRecord) + ((s32)src_base));
-            dst = (SceneLifeRecord*)(i * sizeof(SceneLifeRecord) + ((s32)dst_base));
+            rec = (SceneSample*)(i * sizeof(SceneSample) + ((s32)src_base));
+            dst = (SceneLife*)(i * sizeof(SceneLife) + ((s32)dst_base));
 
-            g_SceneFx.accum[i].cell[0] += g_SceneFx.delta[i].cell[0];
-            rec->sample[0] = g_SceneFx.accum[i].cell[0] >> 16;
-            g_SceneFx.accum[i].cell[1] += g_SceneFx.delta[i].cell[1];
-            rec->sample[1] = g_SceneFx.accum[i].cell[1] >> 16;
-            g_SceneFx.accum[i].cell[2] += g_SceneFx.delta[i].cell[2];
-            rec->sample[2] = g_SceneFx.accum[i].cell[2] >> 16;
-            g_SceneFx.accum[i].cell[3] += g_SceneFx.delta[i].cell[3];
-            rec->sample[3] = g_SceneFx.accum[i].cell[3] >> 16;
-            g_SceneFx.accum[i].cell[4] += g_SceneFx.delta[i].cell[4];
-            rec->sample[4] = g_SceneFx.accum[i].cell[4] >> 16;
-            g_SceneFx.accum[i].cell[5] += g_SceneFx.delta[i].cell[5];
-            rec->sample[5] = g_SceneFx.accum[i].cell[5] >> 16;
-            g_SceneFx.accum[i].cell[6] += g_SceneFx.delta[i].cell[6];
-            rec->sample[6] = g_SceneFx.accum[i].cell[6] >> 16;
-            g_SceneFx.accum[i].cell[7] += g_SceneFx.delta[i].cell[7];
-            rec->sample[7] = g_SceneFx.accum[i].cell[7] >> 16;
-            g_SceneFx.accum[i].cell[8] += g_SceneFx.delta[i].cell[8];
-            rec->sample[8] = g_SceneFx.accum[i].cell[8] >> 16;
-            g_SceneFx.accum[i].cell[9] += g_SceneFx.delta[i].cell[9];
-            rec->sample[9] = g_SceneFx.accum[i].cell[9] >> 16;
-            g_SceneFx.accum[i].cell[10] += g_SceneFx.delta[i].cell[10];
-            rec->sample[10] = g_SceneFx.accum[i].cell[10] >> 16;
-            g_SceneFx.accum[i].cell[11] += g_SceneFx.delta[i].cell[11];
-            rec->sample[11] = g_SceneFx.accum[i].cell[11] >> 16;
+            g_SceneEffect.accum[i].cell[0] += g_SceneEffect.delta[i].cell[0];
+            rec->sample[0] = g_SceneEffect.accum[i].cell[0] >> 16;
+            g_SceneEffect.accum[i].cell[1] += g_SceneEffect.delta[i].cell[1];
+            rec->sample[1] = g_SceneEffect.accum[i].cell[1] >> 16;
+            g_SceneEffect.accum[i].cell[2] += g_SceneEffect.delta[i].cell[2];
+            rec->sample[2] = g_SceneEffect.accum[i].cell[2] >> 16;
+            g_SceneEffect.accum[i].cell[3] += g_SceneEffect.delta[i].cell[3];
+            rec->sample[3] = g_SceneEffect.accum[i].cell[3] >> 16;
+            g_SceneEffect.accum[i].cell[4] += g_SceneEffect.delta[i].cell[4];
+            rec->sample[4] = g_SceneEffect.accum[i].cell[4] >> 16;
+            g_SceneEffect.accum[i].cell[5] += g_SceneEffect.delta[i].cell[5];
+            rec->sample[5] = g_SceneEffect.accum[i].cell[5] >> 16;
+            g_SceneEffect.accum[i].cell[6] += g_SceneEffect.delta[i].cell[6];
+            rec->sample[6] = g_SceneEffect.accum[i].cell[6] >> 16;
+            g_SceneEffect.accum[i].cell[7] += g_SceneEffect.delta[i].cell[7];
+            rec->sample[7] = g_SceneEffect.accum[i].cell[7] >> 16;
+            g_SceneEffect.accum[i].cell[8] += g_SceneEffect.delta[i].cell[8];
+            rec->sample[8] = g_SceneEffect.accum[i].cell[8] >> 16;
+            g_SceneEffect.accum[i].cell[9] += g_SceneEffect.delta[i].cell[9];
+            rec->sample[9] = g_SceneEffect.accum[i].cell[9] >> 16;
+            g_SceneEffect.accum[i].cell[10] += g_SceneEffect.delta[i].cell[10];
+            rec->sample[10] = g_SceneEffect.accum[i].cell[10] >> 16;
+            g_SceneEffect.accum[i].cell[11] += g_SceneEffect.delta[i].cell[11];
+            rec->sample[11] = g_SceneEffect.accum[i].cell[11] >> 16;
 
-            dst->lifetime[0] -= g_SceneFx.life_step[i].cell[0];
-            dst->lifetime[1] -= g_SceneFx.life_step[i].cell[1];
-            dst->lifetime[2] -= g_SceneFx.life_step[i].cell[2];
-            dst->lifetime[3] -= g_SceneFx.life_step[i].cell[3];
-            dst->lifetime[4] -= g_SceneFx.life_step[i].cell[4];
-            dst->lifetime[5] -= g_SceneFx.life_step[i].cell[5];
-            dst->lifetime[6] -= g_SceneFx.life_step[i].cell[6];
-            dst->lifetime[7] -= g_SceneFx.life_step[i].cell[7];
-            dst->lifetime[8] -= g_SceneFx.life_step[i].cell[8];
-            dst->lifetime[9] -= g_SceneFx.life_step[i].cell[9];
-            dst->lifetime[10] -= g_SceneFx.life_step[i].cell[10];
-            dst->lifetime[11] -= g_SceneFx.life_step[i].cell[11];
+            dst->lifetime[0] -= g_SceneEffect.life_step[i].cell[0];
+            dst->lifetime[1] -= g_SceneEffect.life_step[i].cell[1];
+            dst->lifetime[2] -= g_SceneEffect.life_step[i].cell[2];
+            dst->lifetime[3] -= g_SceneEffect.life_step[i].cell[3];
+            dst->lifetime[4] -= g_SceneEffect.life_step[i].cell[4];
+            dst->lifetime[5] -= g_SceneEffect.life_step[i].cell[5];
+            dst->lifetime[6] -= g_SceneEffect.life_step[i].cell[6];
+            dst->lifetime[7] -= g_SceneEffect.life_step[i].cell[7];
+            dst->lifetime[8] -= g_SceneEffect.life_step[i].cell[8];
+            dst->lifetime[9] -= g_SceneEffect.life_step[i].cell[9];
+            dst->lifetime[10] -= g_SceneEffect.life_step[i].cell[10];
+            dst->lifetime[11] -= g_SceneEffect.life_step[i].cell[11];
             i++;
         } while (i < (*D_80147BDC));
     }

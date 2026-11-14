@@ -39,8 +39,8 @@ MATCH void func_801EEC70(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
     g_GfxPalettePending                                      = 1;
-    SND_QueueSelectionFx(0x100);
-    SND_QueueSelectionFx(0x101);
+    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionEffect(0x101);
 }
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
@@ -51,12 +51,12 @@ MATCH void func_801EEC70(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF18(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     D_801EFA4C[g_Task->header.step]();
     if ((g_Task->header.flags & ACTOR_FLAG_IN_USE) && (g_Task->header.step != 0)) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EEFB4);

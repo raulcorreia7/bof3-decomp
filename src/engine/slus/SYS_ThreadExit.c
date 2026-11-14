@@ -5,10 +5,10 @@
  * scheduler critical section, then forces a scheduler switch away from the
  * current callback.
  */
-MATCH void CallbackExit(void) {
+MATCH void SYS_ThreadExit(void) {
     g_CallbackSlot->state = CALLBACK_SLOT_EMPTY;
     EnterCriticalSection();
     CloseTh(g_CallbackSlot->thread_id);
     ExitCriticalSection();
-    ChangeTh(CALLBACK_FORCE_SWITCH);
+    ChangeTh(SYS_THREAD_FORCE_SWITCH);
 }

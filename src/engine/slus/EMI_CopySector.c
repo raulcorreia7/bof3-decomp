@@ -3,7 +3,7 @@
 /* copies the next EMI transfer chunk from the CD sector buffer,
  * wrapping into the active slot's sector when a partial sector remains.
  */
-MATCH void EMI_CopySectorData(void) {
+MATCH void EMI_CopySector(void) {
     u32  transfer_words;
     u32  transfer_size;
     u32  transfer_address;

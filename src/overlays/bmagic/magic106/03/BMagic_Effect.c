@@ -15,7 +15,7 @@ MATCH void func_801EEC04(void) {
         if (D_801EF9F8[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801EFA14, (u8)count << 5);
-            g_BMagicOrbitWork     = D_801EF9F8 + ((u8)count << 5);
+            g_BMagicOrbit     = D_801EF9F8 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EEEE0();
             g_BattleEffectBattler = saved;
@@ -58,22 +58,22 @@ MATCH void func_801EECE4(void) {
         D_801EF9F8[row + 8]   = 0x40 - growth;
         g_Task->param.unk_0B += 1;
     }
-    SND_QueueSelectionFx(0x100);
-    SND_QueueSelectionFx(0x101);
+    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionEffect(0x101);
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEE0(void) {
-    BMagicOrbitWork* work;
+    BMagicOrbit* work;
 
-    work = g_BMagicOrbitWork;
+    work = g_BMagicOrbit;
     D_801EF9C0[work->header.mode]();
 }
 
 MATCH void func_801EEF24(void) {
-    SYS_DISPATCH_BYTE(D_801EF9C4, g_BMagicOrbitWork->header.step);
-    if (g_BMagicOrbitWork->header.flags != 0 && g_BMagicOrbitWork->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801EF9C4, g_BMagicOrbit->header.step);
+    if (g_BMagicOrbit->header.flags != 0 && g_BMagicOrbit->header.step != 0) {
         func_801EF52C();
         func_801EF5F4();
         PopMatrix();
@@ -86,17 +86,17 @@ MATCH void func_801EEF24(void) {
 MATCH void func_801EF16C(void) {
     s32 threshold;
 
-    g_BMagicOrbitWork->radius -= 2;
-    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
-    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;
-    g_BMagicOrbitWork->unk_0B++;
-    if (g_BMagicOrbitWork->unk_09 < 16) {
-        g_BMagicOrbitWork->unk_09 += 2;
+    g_BMagicOrbit->radius -= 2;
+    g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin((s16)g_BMagicOrbit->angle) * g_BMagicOrbit->radius;
+    g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbit->angle) * g_BMagicOrbit->radius;
+    g_BMagicOrbit->unk_0B++;
+    if (g_BMagicOrbit->unk_09 < 16) {
+        g_BMagicOrbit->unk_09 += 2;
     }
-    threshold = ((g_BMagicOrbitWork->unk_04 >> 5) * 8) + 0x20;
-    if (g_BMagicOrbitWork->radius <= threshold) {
-        g_BMagicOrbitWork->header.step++;
-        if (g_BMagicOrbitWork->unk_04 == 0) {
+    threshold = ((g_BMagicOrbit->unk_04 >> 5) * 8) + 0x20;
+    if (g_BMagicOrbit->radius <= threshold) {
+        g_BMagicOrbit->header.step++;
+        if (g_BMagicOrbit->unk_04 == 0) {
             Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         }
     }
@@ -119,11 +119,11 @@ MATCH void func_801EF52C(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    off    = g_BMagicOrbitWork->angle + 0x800;
-    rot.vz = ((g_BMagicOrbitWork->unk_03 << 7) - off) & 0xFFF;
-    pos.vx = (g_BMagicOrbitWork->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_BMagicOrbitWork->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -COORD_INT(g_BMagicOrbitWork->pos.z) / 2;
+    off    = g_BMagicOrbit->angle + 0x800;
+    rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & 0xFFF;
+    pos.vx = (g_BMagicOrbit->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_BMagicOrbit->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -COORD_INT(g_BMagicOrbit->pos.z) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -137,10 +137,10 @@ MATCH void func_801EF5F4(void) {
 
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_BMagicOrbitWork->pos.x.fixed, g_BMagicOrbitWork->pos.y.fixed, 2, sizeof(DR_MODE));
-    D_1F800000.view.effect.params[5]     = g_BMagicOrbitWork->timer_05 * g_BMagicOrbitWork->unk_09;
-    D_1F800000.view.effect.params[6]     = g_BMagicOrbitWork->timer_06 * g_BMagicOrbitWork->unk_09;
-    D_1F800000.view.effect.params[7]     = g_BMagicOrbitWork->timer_07 * g_BMagicOrbitWork->unk_09;
+    Area_AddCellPrim(g_BMagicOrbit->pos.x.fixed, g_BMagicOrbit->pos.y.fixed, 2, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[5]     = g_BMagicOrbit->timer_05 * g_BMagicOrbit->unk_09;
+    D_1F800000.view.effect.params[6]     = g_BMagicOrbit->timer_06 * g_BMagicOrbit->unk_09;
+    D_1F800000.view.effect.params[7]     = g_BMagicOrbit->timer_07 * g_BMagicOrbit->unk_09;
     /* FAKE: retail stores vz and vy of the first corner through the scratch view, and only vx through D_1F800014. */
     D_1F800000.view.effect.vectors[0].vz = 0;
     D_1F800000.view.effect.vectors[0].vy = 0;
@@ -150,7 +150,7 @@ MATCH void func_801EF5F4(void) {
         D_1F800000.view.effect.params[1] = D_801EF9DC[i];
         D_1F800000.view.effect.params[2] = D_801EF9E4[i];
         D_1F800000.view.effect.params[3] = D_801EF9EC[i];
-        D_1F800000.view.effect.params[4] = ((g_BMagicOrbitWork->unk_0B + D_801EF9F4[i]) & 0xF) << 8;
+        D_1F800000.view.effect.params[4] = ((g_BMagicOrbit->unk_0B + D_801EF9F4[i]) & 0xF) << 8;
         prim                             = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
@@ -163,7 +163,7 @@ MATCH void func_801EF5F4(void) {
         setRGB0(prim, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[5]);
         setRGB1(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
         setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
-        Area_AddCellPrim(g_BMagicOrbitWork->pos.x.fixed, g_BMagicOrbitWork->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_AddCellPrim(g_BMagicOrbit->pos.x.fixed, g_BMagicOrbit->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }
 
@@ -180,9 +180,9 @@ MATCH u32 func_801EF914(void) {
 }
 
 MATCH void func_801EF970(void) {
-    g_BMagicOrbitWork->header.flags = 0;
-    g_BMagicOrbitWork->header.mode  = 0;
-    g_BMagicOrbitWork->header.step  = 0;
-    g_BMagicOrbitWork->unk_03       = 0;
-    g_BMagicOrbitWork->unk_04       = 0;
+    g_BMagicOrbit->header.flags = 0;
+    g_BMagicOrbit->header.mode  = 0;
+    g_BMagicOrbit->header.step  = 0;
+    g_BMagicOrbit->unk_03       = 0;
+    g_BMagicOrbit->unk_04       = 0;
 }

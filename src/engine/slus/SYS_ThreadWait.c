@@ -5,11 +5,11 @@
  * scheduler switch through thread id `0xFF000000`.
  */
 
-MATCH void CallbackWait(u16 countdown) {
-    CallbackSlot* slot;
+MATCH void SYS_ThreadWait(u16 countdown) {
+    Thread* slot;
 
     slot            = g_CallbackSlot;
     slot->countdown = countdown;
     slot->state     = CALLBACK_SLOT_YIELD;
-    ChangeTh(CALLBACK_FORCE_SWITCH);
+    ChangeTh(SYS_THREAD_FORCE_SWITCH);
 }

@@ -22,7 +22,7 @@ MATCH void func_801EED38(void) {
     g_Task->unk_09       = 8;
     g_Task->timer        = 0;
     g_Task->header.mode++;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 
     for (i = 0; i < D_801F0194[g_Task->unk_04]; i++) {
         sparkle_index = BMagic_AllocEffect();

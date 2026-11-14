@@ -7,6 +7,6 @@
 MATCH void Message_DispatchTableStep(void) {
     HandlerTable table;
 
-    table = g_MessageStepTable;
+    table = g_MessageSteps;
     table.handlers[g_MessageWindow.step_id - 0x80]();
 }

@@ -37,7 +37,7 @@ MATCH void func_801EEC98(void) {
     g_Task->unk_24 = g_BattleEffectBattler->unk_24;
     func_800AF8F0(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 #include "overlays/bmagic/Effect_ReleaseActiveBattlerOnTickerZero.h"

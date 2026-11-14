@@ -110,7 +110,7 @@ MATCH void func_801EF058(void) {
         g_Task->unk_09 = 0x96;
         g_Task->timer  = 0;
         g_Task->header.step += 1;
-        SND_QueueSelectionFx(0x100);
+        SND_QueueSelectionEffect(0x100);
     }
 }
 

@@ -29,5 +29,5 @@ segments:
       - [0x1858, bin, D_801F0458]
       - [0x185C, bin, D_801F045E]
       - [0x1870, bin, D_801F0470]
-      - [0x2454, bin, g_BMagicOrbitWork]
+      - [0x2454, bin, g_BMagicOrbit]
   - [0x2458]

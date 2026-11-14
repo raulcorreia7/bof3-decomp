@@ -30,7 +30,7 @@ extern BattleEffect D_801F0710[];
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_0C; \
     }                                                                              \
     if ((g_FrameCount & 0x7) == 0) {                                               \
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 2));                      \
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));                      \
         for (i = 0; i < 16; i++) {                                                 \
             slot = BMagic_AllocEffect();                                           \
             if (slot != GAME_NONE) {                                               \

@@ -53,7 +53,7 @@ MATCH void func_801EEE94(void) {
         g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = actor->pos.z.fixed;
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         for (i = 0, anchor = 1; i < 6; i++) {
             slot                               = Battle_AllocEffect(1, 82) & BYTE_MASK;
             work                               = g_Task;
@@ -84,12 +84,12 @@ MATCH void func_801EEFE0(void) {
 
 MATCH void func_801EF104(void) {
     GFX_AddDitheredDrawMode(3, getTPage(0, 1, 320, 256));
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF1EC(void) {

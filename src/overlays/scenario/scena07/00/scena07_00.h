@@ -150,7 +150,7 @@ extern u8       D_80146867;
 extern u8       D_80146874;
 extern u8       D_80146875;
 /* D_801FDFA0 */
-extern u8       g_ScenePositionTable;
+extern u8       g_ScenePositions;
 /* D_801FDFA8 */
 extern Callback g_ScenePositionDispatch[];
 extern void (*D_801FDDF0[])(u8* row);

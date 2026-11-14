@@ -5,7 +5,7 @@
  * effect, and starts the matching field cue. */
 MATCH void func_801DC74C(void) {
     if (WINDOW_EFFECT_IDLE()) {
-        CallbackWait(1);
+        SYS_ThreadWait(1);
         g_AreaScrollTargetX = TO_COORD(15);
         g_AreaScrollTargetY = TO_COORD(60);
         func_80153DE8();

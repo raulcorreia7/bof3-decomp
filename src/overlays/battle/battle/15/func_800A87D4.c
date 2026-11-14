@@ -42,8 +42,8 @@ MATCH void func_800A87D4(void) {
             work[1]++;
         }
     } else {
-        Battle_MoveRangeToward((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x50);
-        if (func_800AF5FC((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x10000) != 0) {
+        Battle_MoveRangeToward((BattleRange*)&((volatile BattleEnemy*)g_BattleEnemies)[*kind], 0x50);
+        if (func_800AF5FC((BattleRange*)&((volatile BattleEnemy*)g_BattleEnemies)[*kind], 0x10000) != 0) {
             Actor_SelectScript((TASK_BYTES[8] + 0x44) & BYTE_MASK);
             Battle_MarkDamaged(*kind);
             work = TASK_BYTES;

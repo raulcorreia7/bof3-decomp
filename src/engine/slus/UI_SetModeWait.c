@@ -8,10 +8,10 @@ MATCH void UI_SetModeWait(u16 local_mode) {
         return;
     }
     g_UiLocalMode = local_mode & BYTE_MASK;
-    CallbackRegister(2, UI_DispatchLocalMode);
+    SYS_ThreadRegister(2, UI_DispatchLocalMode);
     if (*busy != 0) {
         do {
-            CallbackWait(1);
+            SYS_ThreadWait(1);
         } while (WINDOW_EFFECT_BUSY());
     }
 }

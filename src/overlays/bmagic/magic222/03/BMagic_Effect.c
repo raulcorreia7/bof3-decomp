@@ -45,7 +45,7 @@ MATCH void func_801EEC70(void) {
     *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerQueueFx.h"
+#include "overlays/bmagic/Effect_CountDownTimerQueueEffect.h"
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
@@ -53,13 +53,13 @@ MATCH void func_801EEC70(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF24(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0D64, g_Task->header.step);
     if ((g_Task->header.flags & 0x1) && g_Task->header.step != 0) {
         Battle_ProjectRange();
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EEFC8);
@@ -73,7 +73,7 @@ MATCH void func_801EF148(void) {
     g_Task->unk_14 -= g_Task->unk_20;
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
     if (--g_Task->unk_09 == 0) {
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
         for (i = 0; i < 8; i++) {
             slot                               = Battle_AllocEffect(1, 0x60) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
@@ -100,7 +100,7 @@ MATCH void func_801EF324(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
         slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
         work                               = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 3;

@@ -17,14 +17,14 @@
 
 /* Four SVECTORs at 0x14. The scenario overlay indexes them as the argument vector for RotTransPers4
  * (func_801D165C) and the common executable stores halfword coordinates at 0x1C-0x30. */
-typedef struct ScratchPadVector {
+typedef struct ScratchPadVectors {
     u8      pad_00[0x14];
     SVECTOR vectors[4]; /* 0x14 */
-} ScratchPadVector;
+} ScratchPadVectors;
 
 #define SCRATCH_PAD_VECTOR_VIEW_SIZE 0x34
-ASSERT_SIZE(ScratchPadVector, SCRATCH_PAD_VECTOR_VIEW_SIZE);
-ASSERT_OFFSET(ScratchPadVector, vectors, 0x14);
+ASSERT_SIZE(ScratchPadVectors, SCRATCH_PAD_VECTOR_VIEW_SIZE);
+ASSERT_OFFSET(ScratchPadVectors, vectors, 0x14);
 
 /* Battle overlays: bytes 0-2 stage the current local-work byte 9 (func_801E6A54), byte 0 advances the
  * slot index (written by func_801DE43C, read by func_801DE754). Byte 0x03 has no battle access yet. */
@@ -117,7 +117,7 @@ typedef union ScratchPadViews {
     ScratchPadBattle   battle;                /* 0x000 */
     ScratchPadArea     area;                  /* 0x000 */
     ScratchPadScenario scenario;              /* 0x000 */
-    ScratchPadVector   vector;                /* 0x000 */
+    ScratchPadVectors   vector;                /* 0x000 */
     ScratchPadEffect   effect;                /* 0x000 */
     ScratchPadRay      ray;                   /* 0x000 */
 } ScratchPadViews;

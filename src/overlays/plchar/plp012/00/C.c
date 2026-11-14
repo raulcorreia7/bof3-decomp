@@ -82,9 +82,9 @@ MATCH void func_801CF938(void) {
 #include "overlays/plchar/PlChar_FindGarrActorSlot.h"
 
 /* func_801CFB0C */
-#include "overlays/plchar/Plchar_FollowerInReach.h"
+#include "overlays/plchar/PlChar_FollowerInReach.h"
 
-#include "overlays/plchar/Plchar_ProbeFacingFollower.h"
+#include "overlays/plchar/PlChar_ProbeFacingFollower.h"
 
 MATCH void func_801CFCF8(void) {
     D_801CFDC0[g_Task->unk_2C]();

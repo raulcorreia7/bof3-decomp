@@ -33,7 +33,7 @@ MATCH void func_801EED48(void) {
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = owner;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     for (i = 0; i < 256; i++) {
         MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[i] | 0x8000;
     }
@@ -190,7 +190,7 @@ MATCH void func_801EFA60(void) {
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         if (g_Task->param.unk_0B == 0) {
-            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
         }
         g_Task->unk_0C      = 8;
         angle               = &D_1F800000.view.effect.params[2];

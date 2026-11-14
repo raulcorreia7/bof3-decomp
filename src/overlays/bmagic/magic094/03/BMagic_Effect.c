@@ -26,7 +26,7 @@ MATCH void func_801EEC5C(void) {
     g_BattleEffects[effect_slot].pos.z.fixed  = actor->pos.z.fixed;
     g_Task->param.unk_0B                      = 0;
     g_Task->header.mode++;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 /* Copies the selected actor's unk_2E and unk_30 - 0x10; at unk_0B 0xFF releases the target and plays. */

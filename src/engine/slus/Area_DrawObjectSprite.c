@@ -74,7 +74,7 @@ MATCH void Area_DrawObjectSprite(void) {
                 clip_y = 0;
             }
             page_offset = 0;
-            if (g_Task->unk_28 != PALETTE_KIND_CELL) {
+            if (g_Task->unk_28 != PALETTE_TYPE_CELL) {
                 page_offset = -1;
                 if (cell->u >= 0x28) {
                     page_offset = cell->u >= 0xA1;

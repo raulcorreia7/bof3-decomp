@@ -3,7 +3,7 @@
 MATCH void func_801E6724(void) {
     Callback handlers[2] = {func_801E679C, func_801E68EC};
 
-    g_ScriptTable = BATTLE_SCRIPT_TABLE;
+    g_Scripts = BATTLE_SCRIPT_TABLE;
     handlers[g_Task->header.mode]();
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }

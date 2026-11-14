@@ -46,7 +46,7 @@ MATCH void func_801EED04(void) {
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].arg.unk_09   = 9;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
@@ -248,7 +248,7 @@ MATCH void func_801EF960(void) {
     g_Task->unk_14 -= g_Task->unk_20;
     if (g_Task->unk_14 < 0x30) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
         for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
             slot                                   = BMagic_AllocEffect();
             battler                                = g_BattleEffectBattler;

@@ -8,7 +8,7 @@
 
 /* The spawn column count, the kind row stride and the state row stride. */
 #define FISHING_SPAWN_COLUMNS 0x17
-#define FISHING_KIND_STRIDE   0x24
+#define FISHING_TYPE_STRIDE   0x24
 #define FISHING_ROW_STRIDE    0x98
 
 /* Fields of the row published through g_CurrentActor. */
@@ -57,7 +57,7 @@ NON_MATCHING void Fishing_SpawnFish(void) {
             loop_4:
                 ROW_ROLL    = roll;
                 roll        = ROW_ROLL;
-                limit       = *(LIMIT_TABLE + (g_Task->unk_06 * FISHING_KIND_STRIDE));
+                limit       = *(LIMIT_TABLE + (g_Task->unk_06 * FISHING_TYPE_STRIDE));
                 roll_masked = roll & HALF_MASK;
                 if (limit < roll_masked) {
                     roll = roll - (limit >> 1);
@@ -70,13 +70,13 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                 }
                 ROW_ROLL    = clamped;
                 cur         = g_Task;
-                kind_offset = FIELD(u8, cur, 0x6u) * FISHING_KIND_STRIDE;
+                kind_offset = FIELD(u8, cur, 0x6u) * FISHING_TYPE_STRIDE;
                 hit_value   = (KIND_TABLE[kind_offset] * ((s32)(ROW_ROLL * 0xA) / (s32)LIMIT_TABLE[kind_offset])) / 10;
                 ROW_VALUE   = hit_value;
                 ROW_VALUE2  = hit_value;
                 kind        = FIELD(u8, cur, 0x6u);
                 if (kind != 0x15) {
-                    limits = MEM_PTR(u8, D_801E2AD7) + (kind * FISHING_KIND_STRIDE);
+                    limits = MEM_PTR(u8, D_801E2AD7) + (kind * FISHING_TYPE_STRIDE);
                     if (ROW_ROLL == *limits) {
                         steps = (*limits / 10) & BYTE_MASK;
                         walk  = 0;

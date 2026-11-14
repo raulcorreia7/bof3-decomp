@@ -65,7 +65,7 @@ MATCH void func_801EEE0C(void) {
     g_Task->unk_09       = 0;
     g_Task->timer        = 0;
     g_Task->header.mode += 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 MATCH void func_801EEF48(void) {
@@ -88,7 +88,7 @@ MATCH void func_801EF020(void) {
     temp_v0       = g_Task->timer + 1;
     g_Task->timer = temp_v0;
     if (!(temp_v0 & 0x1F)) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         g_Task->timer = 0;
         g_Task->header.mode += 1;
     }

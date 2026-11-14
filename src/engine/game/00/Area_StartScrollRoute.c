@@ -5,7 +5,7 @@ MATCH void Area_StartScrollRoute(s8 route_index) {
     s32 first;
     s16 dist;
 
-    func_801BE710((GameResetRecord*)&D_80143FBC);
+    func_801BE710((GameReset*)&D_80143FBC);
     first      = g_AreaScrollTargetX;
     D_80143FC0 = 3;
     D_80143FBF = route_index;

@@ -8,7 +8,7 @@ MATCH void func_801985C8(void) {
     EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_IsReady() == 0) {
         func_801E0C40();
-        CallbackWait(1);
+        SYS_ThreadWait(1);
     }
     selection = g_SndBGMId;
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
@@ -17,7 +17,7 @@ MATCH void func_801985C8(void) {
     UI_SetMode(0);
     while (WINDOW_EFFECT_BUSY()) {
         func_801E0C40();
-        CallbackWait(1);
+        SYS_ThreadWait(1);
     }
     Game_RequestAreaChange(*(u16*)&D_80143F04, *(u32*)&D_80143F08, *(u32*)&D_80143F0C, FACING_DOWN_RIGHT);
     selection = g_SndBGMId;

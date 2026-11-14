@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-MATCH u32 func_800AFB48(BattleSpriteCellRecord* record) {
+MATCH u32 func_800AFB48(BattleSpriteCell* record) {
     u8  index;
     u32 quotient;
     u32 remainder;

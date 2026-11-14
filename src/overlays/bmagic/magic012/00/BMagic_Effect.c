@@ -80,7 +80,7 @@ MATCH void func_801EF188(void) {
     if (func_800AF66C((BattleRange*)target, 0x8000)) {
         g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
         Battle_MarkDamaged(g_Task->unk_03);
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_AREA, 0x03));
         g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;

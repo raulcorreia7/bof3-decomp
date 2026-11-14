@@ -72,7 +72,7 @@ extern volatile u8   g_UiTitleChoicePhase;
 /* D_80143C33 */
 extern u8            g_UiTitleInputGate;
 /* D_80143D40 */
-extern CallbackSlot* g_CallbackSlot;
+extern Thread* g_CallbackSlot;
 /* D_80143D44 */
 extern u8            g_FrameBufferIndex;
 /* D_80143D48 */
@@ -212,7 +212,7 @@ extern u8             D_80148652;
 extern u8             D_8014866C[];
 extern u8             D_80148A50[];
 /* D_80148FC0 */
-extern s8             g_SelectionFxVoices[SND_SLOT_COUNT];
+extern s8             g_SelectionEffectVoices[SND_SLOT_COUNT];
 /* D_801490A1 */
 extern u8             g_UiWindowStep;
 /* D_801490D8 */

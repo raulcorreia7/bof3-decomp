@@ -3,21 +3,21 @@
 
 #include "battle/records.h"
 
-typedef struct PlcharCheckRecord {
+typedef struct PlCharCheck {
     s32 pos_x; /* 0x00 */
     s32 pos_y; /* 0x04 */
     u8  pad_08[2];
     s16 z; /* 0x0A */
     u8  pad_0C[0x74 - 0x0C];
-} PlcharCheckRecord;
+} PlCharCheck;
 
-ASSERT_SIZE(PlcharCheckRecord, 0x74);
-ASSERT_OFFSET(PlcharCheckRecord, pos_y, 0x04);
-ASSERT_OFFSET(PlcharCheckRecord, z, 0x0A);
+ASSERT_SIZE(PlCharCheck, 0x74);
+ASSERT_OFFSET(PlCharCheck, pos_y, 0x04);
+ASSERT_OFFSET(PlCharCheck, z, 0x0A);
 
-extern PlcharCheckRecord D_80143FFC[];
+extern PlCharCheck D_80143FFC[];
 
-MATCH s32 Plchar_FollowerInReach(u8 index) {
+MATCH s32 PlChar_FollowerInReach(u8 index) {
     s32 i;
 
     for (i = 1; i < g_PartySize; i++) {

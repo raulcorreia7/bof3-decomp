@@ -17,6 +17,6 @@ MATCH void func_801E04B0(void) {
     Effect_RotatePosition(work);
     g_Task->timer = 4;
     Battle_IsPartyMemberBlocked();
-    SND_QueueSelectionFx(0x205);
+    SND_QueueSelectionEffect(0x205);
     g_Task->unk_03 += 1;
 }

@@ -1,14 +1,14 @@
 #include "battle_03.h"
 
 /* The actor record the panel rows are measured against. */
-typedef struct BattleActorRecord {
+typedef struct BattleActor {
     u8  pad_00[8];
     u8  unk_08;
     u8  pad_09[0x25];
     u16 unk_2E;
     u16 unk_30;
     u16 unk_32;
-} BattleActorRecord;
+} BattleActor;
 
 /* The panel row the battle state is written into. */
 typedef struct BattlePanelState {
@@ -27,7 +27,7 @@ typedef struct BattlePanelState {
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2B58(void) {
-    BattleActorRecord* actor;
+    BattleActor* actor;
     BattlePanelState*  row;
     u8*                table;
     u8*                state;
@@ -75,7 +75,7 @@ NON_MATCHING void func_801D2B58(void) {
             row           = row1;
             row->index_00 = index;
             if (kind < 3U) {
-                actor         = (BattleActorRecord*)D_8014637C;
+                actor         = (BattleActor*)D_8014637C;
                 offset        = kind * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
@@ -84,7 +84,7 @@ NON_MATCHING void func_801D2B58(void) {
                 depth         = actor->unk_32;
                 state         = fa8_88 + offset;
             } else {
-                actor         = (BattleActorRecord*)D_8014637C;
+                actor         = (BattleActor*)D_8014637C;
                 state_offset  = kind * 0x118;
                 row->work_0C  = (void*)(eb3dc + state_offset);
                 row->state_08 = (void*)(eb3dc - 0xF4 + state_offset);
@@ -104,7 +104,7 @@ NON_MATCHING void func_801D2B58(void) {
             *(s32*)(D_801EC308 + 0x1C) = *(s32*)(state + 0x1C);
             row                        = row2;
             if (cursor[0] < 3U) {
-                actor         = (BattleActorRecord*)g_Battle.selected_actor;
+                actor         = (BattleActor*)g_Battle.selected_actor;
                 offset        = cursor[0] * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);

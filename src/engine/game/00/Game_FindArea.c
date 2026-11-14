@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH u8 Game_FindAreaHandler(void) {
+MATCH u8 Game_FindArea(void) {
     s32 count;
     s32 offset;
     u16 cur;

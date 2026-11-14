@@ -46,7 +46,7 @@ MATCH void func_801EEC94(void) {
         g_Task->param.unk_0B += 1;
         i++;
     } while (i < 8);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
 /* func_801EEE88 */

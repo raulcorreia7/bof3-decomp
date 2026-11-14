@@ -336,7 +336,7 @@ MATCH void func_801F81F8(void) {
     g_AreaScrollTargetY = TO_COORD(27);
     func_80153DE8();
     UI_SetMode(UI_MODE_FADE_IN);
-    CallbackWait(1);
+    SYS_ThreadWait(1);
     g_AreaDrawFlags = 0x1F;
     SND_PlayBGM(0xA0, 0x64, 0x8);
     step = &D_80146874;
@@ -486,14 +486,14 @@ MATCH void func_801F87D0(void) {
             return;
         }
         SND_Exit();
-        CallbackReplace(SYS_StartFrontend);
+        SYS_ThreadReplace(SYS_StartFrontend);
     }
 }
 
 MATCH void func_801F8844(void) {
     D_80146873            = 0;
     g_SceneState.state_04 = 0;
-    CallbackReplace(Scene_RunSaveMenu);
+    SYS_ThreadReplace(Scene_RunSaveMenu);
 }
 
 #include "overlays/scenario/Scene_DispatchActor.h"
@@ -586,7 +586,7 @@ MATCH void Scene_RunSaveMenu(void) {
     Menu_ResetPanelTasks();
     while (1) {
         SYS_DISPATCH_BYTE(D_801F9DBC, g_GameEntrySubstate);
-        CallbackWait(1);
+        SYS_ThreadWait(1);
     }
 }
 
@@ -617,7 +617,7 @@ MATCH void Scene_EnterSaveMenu(void) {
     D_80143BB4                    = 1;
     EMI_LoadArchive(EMI_SLOT_SHOP);
     while (EMI_IsReady() == 0) {
-        CallbackWait(1);
+        SYS_ThreadWait(1);
     }
     GFX_CopyPalette(1);
     GFX_CopyPalette(2);
@@ -638,7 +638,7 @@ MATCH void Scene_ExitToTitle(void) {
     D_80146866      = 0;
     D_80146867      = 0;
     SND_Exit();
-    CallbackReplace(SYS_StartFrontend);
+    SYS_ThreadReplace(SYS_StartFrontend);
 }
 
 MATCH s32 func_801F96CC(void) {

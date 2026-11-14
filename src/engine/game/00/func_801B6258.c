@@ -21,7 +21,7 @@ MATCH bool func_801B6258(void) {
         func_801B60DC(cur & BYTE_MASK);
         return 1;
     }
-    if ((((s32 (*)(s32))func_801B4494)(0x51) & BYTE_MASK) && (((s32 (*)(u16, u16))Game_CallScenarioHandler)(SP_REF(u16, 0x0u), GAME_ENTITY_ENTRY_DATA) != 0)) {
+    if ((((s32 (*)(s32))func_801B4494)(0x51) & BYTE_MASK) && (((s32 (*)(u16, u16))Game_CallScenario)(SP_REF(u16, 0x0u), GAME_ENTITY_ENTRY_DATA) != 0)) {
         func_801B5BDC(g_Task->direction_08);
         ACTOR_CLEAR_STEP();
         return 1;

@@ -3,7 +3,7 @@
 /* Semantic view of the shared battle-selection scratch band
  * (g_BattleChoicePanel, 0x80148570): word-sized cursor coordinates and
  * ring state sit beside byte-sized panel fields. */
-typedef struct BattleSelectionInitWork {
+typedef struct BattleSelectionInit {
     volatile u8  selection_kind;  /* +0x00 */
     volatile u8  panel_rows;      /* +0x01 */
     volatile u8  primary_kind;    /* +0x02 */
@@ -18,11 +18,11 @@ typedef struct BattleSelectionInitWork {
     volatile u8  cursor_limit;    /* +0x0D */
     volatile u16 ring_cursor;     /* +0x0E */
     volatile u16 ring_handle;     /* +0x10 */
-} BattleSelectionInitWork;
+} BattleSelectionInit;
 
 /* FAKE: retail reads D_801454F4 as flat bytes; the owner declares rows. */
 MATCH void func_80097EC0(void) {
-    BattleSelectionInitWork* init_work;
+    BattleSelectionInit* init_work;
     volatile BattleTurn*     actor_turn;
     u32                      source_slot_offset;
     u32                      active_selection_flags;
@@ -31,7 +31,7 @@ MATCH void func_80097EC0(void) {
     u8                       entry_value;
     u8                       tail_byte;
 
-    init_work                           = (BattleSelectionInitWork*)g_BattleChoicePanel;
+    init_work                           = (BattleSelectionInit*)g_BattleChoicePanel;
     init_work->selection_kind           = 1u;
     g_BattleChoicePanel[1]              = 8u;
     g_BattleChoicePanel[2]              = 2u;

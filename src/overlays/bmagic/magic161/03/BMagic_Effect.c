@@ -88,7 +88,7 @@ MATCH void func_801EF0E8(void) {
 
     count = g_Task->unk_09;
     if ((count & BYTE_MASK) == 0x10) {
-        SND_QueueSelectionFx(0x100);
+        SND_QueueSelectionEffect(0x100);
         g_Task->header.step += 1;
     } else {
         g_Task->unk_09 = count + 4;

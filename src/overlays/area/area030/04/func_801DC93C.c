@@ -91,16 +91,16 @@ NON_MATCHING void func_801DC93C(void) {
             default:
                 if (row_mod != frame_now) {
                 } else {
-                    message_id = FISHING_MSG_HOW_TO_FISH;
+                    message_id = FISHING_MESSAGE_HOW_TO_FISH;
                 block_39:
                     UI_DrawText(29, 20, 0, 0xFFU, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
                 }
                 break;
             case 0:
-                message_id = FISHING_MSG_EQUIP_ROD_LURE;
+                message_id = FISHING_MESSAGE_EQUIP_ROD_LURE;
                 goto block_39; /* shared selection join */
             case 1:
-                message_id = FISHING_MSG_DATA_TITLE;
+                message_id = FISHING_MESSAGE_DATA_TITLE;
                 goto block_39; /* shared selection join */
         }
         Menu_DrawCursorSprite((D_80144286 * 48) + 88, 46U, 0);

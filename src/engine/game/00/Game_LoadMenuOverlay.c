@@ -6,7 +6,7 @@ MATCH void Game_LoadMenuOverlay(void) {
 
     EMI_LoadArchive(EMI_SLOT_STATUS);
     while (EMI_IsReady() == 0) {
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
     }
     GFX_CopyPalette(1u);
     GFX_CopyPalette(2u);
@@ -16,7 +16,7 @@ MATCH void Game_LoadMenuOverlay(void) {
     /* FAKE: keep the mode argument in the call delay slot. */
     FAKE_ORDER_LOCK(UI_SetMode(3));
     func_80198C38(1u);
-    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sep_index, &seq_index) & BYTE_MASK)) {
+    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeEffectVoice(&sep_index, &seq_index) & BYTE_MASK)) {
         SND_StartDecrescendo(sep_index, seq_index, 0x14, 0x10);
     }
     {

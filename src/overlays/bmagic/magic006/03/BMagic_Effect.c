@@ -62,7 +62,7 @@ MATCH void func_801EEF28(void) {
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_10 = 0;
         g_Task->unk_14 = (ratan2((s16)battler->unk_2E.half - (s16)g_Task->unk_2E.half, (s16)battler->unk_30.half - (s16)g_Task->unk_30.half) - 0x200) & 0xFFF;
-        SND_QueueSelectionFx(0x100);
+        SND_QueueSelectionEffect(0x100);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
     }
@@ -88,7 +88,7 @@ MATCH void func_801EF0B8(void) {
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -144,7 +144,7 @@ MATCH void func_801EF298(void) {
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 2;
         g_BattleEffectBattler->param.unk_0B += 1;
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     } else {

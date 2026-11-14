@@ -22,7 +22,7 @@
  *
  * - `AreaMapBundle` and its cell rows: map bundle.
  * - `AreaActorDef`, `AreaActorDefs`: scene/step table.
- * - `AreaScriptTable`, `AreaScriptSection`: area script table.
+ * - `AreaScripts`, `AreaScriptSection`: area script table.
  * - `AreaTrail`, `AreaSlotWork`, `UPoint2D`: neighboring buffers; the
  *   area program owns them.
  *
@@ -80,7 +80,7 @@
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
 #define AREA_PALETTE_WORK          0x80037800u
-/* The script tables g_ScriptTable alternates between: the field's, the battle's and the battle magic's. */
+/* The script tables g_Scripts alternates between: the field's, the battle's and the battle magic's. */
 #define AREA_SCRIPT_TABLE          0x800D3800u
 #define BATTLE_SCRIPT_TABLE        0x800F0800u
 #define BMAGIC_SCRIPT_TABLE        0x800C3800u
@@ -235,13 +235,13 @@ typedef struct AreaTileQuad {
 ASSERT_SIZE(AreaTileQuad, AREA_TILE_QUAD_SIZE);
 
 /* +0x20/+0x22 list entry header; the body follows as u32 words. */
-typedef struct AreaMapListRecordHeader {
+typedef struct AreaMapListHeader {
     u8 operand_00[2];
     u8 word_count_02; /* includes this 4-byte header */
     u8 opcode_03;
-} AreaMapListRecordHeader;
+} AreaMapListHeader;
 
-ASSERT_SIZE(AreaMapListRecordHeader, AREA_MAP_LIST_RECORD_HEADER_SIZE);
+ASSERT_SIZE(AreaMapListHeader, AREA_MAP_LIST_RECORD_HEADER_SIZE);
 
 /* +0x24 cell header; words_02 includes this header and its record chain. */
 typedef struct AreaMapCellHeader {
@@ -266,14 +266,14 @@ ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
- * the block through `g_ScriptTable`: `section = u32[table + 4*lhu(work+0x2C)]`,
+ * the block through `g_Scripts`: `section = u32[table + 4*lhu(work+0x2C)]`,
  * `record = table + section + u16[table + section + 2*lbu(work+0x4B)]`, stored to
  * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_TABLE` in for the duration of a
  * battle handler. */
-typedef struct AreaScriptTable {
+typedef struct AreaScripts {
     u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */
     u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
-} AreaScriptTable;
+} AreaScripts;
 
 /* One section: `slots_bytes == 2 * M`, and the distinct `record_off` values
  * increase strictly and tile the section, one stream each. The last section
@@ -315,7 +315,7 @@ typedef struct AreaActorDefs {
 } AreaActorDefs;
 
 /* `0x801459F0` - the four pointers the loader publishes together. Each word has
- * its own name in the tree (`g_ScriptTable` the script table, `D_801459F4` the scene
+ * its own name in the tree (`g_Scripts` the script table, `D_801459F4` the scene
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {

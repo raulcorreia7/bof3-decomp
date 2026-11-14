@@ -2,7 +2,7 @@
 
 MATCH void* func_801B5C54(void) {
     Actor*      work;
-    TileRunSet* entry;
+    TileRuns* entry;
     TileRun*    run;
     TileRun*    cur;
     s32         index;

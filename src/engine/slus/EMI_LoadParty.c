@@ -4,7 +4,7 @@
  * and streams it through EMI_GetArchiveId unless it is already loaded (g_EmiLoadedCharacterIndex). Family 0
  * is the PLxxx bank (the loaded index carries EMI_LOADED_PL); the other families compare the plain index.
  */
-MATCH void EMI_LoadPartyData(u8 member_a, u8 member_b, u8 member_c, u8 family) {
+MATCH void EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family) {
     u8  slot;
     s32 hint;
 

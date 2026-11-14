@@ -101,7 +101,7 @@ MATCH void func_801DFCB4(void) {
     }
     check_work = g_Game.current;
     if (check_work->u.turn.hp_change < 0 || check_work->u.turn.ap_change < 0) {
-        SND_QueueSelectionFx(0x206);
+        SND_QueueSelectionEffect(0x206);
     }
     if (!(g_Battle.state & BATTLE_STATE_DAMAGE_APPLIED)) {
         action_type = g_BattleActionType_nv;

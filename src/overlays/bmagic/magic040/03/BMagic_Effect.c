@@ -41,7 +41,7 @@ MATCH void func_801EEC80(void) {
         i++;
     } while (i < 16);
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 INCLUDE_ASM(func_801EEDFC);

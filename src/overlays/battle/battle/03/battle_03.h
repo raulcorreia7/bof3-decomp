@@ -139,9 +139,9 @@ typedef struct {
 } BattlePhases;
 
 /* Seven-byte palette table copied from the icon CLUT source at 0x801D0C64. */
-typedef struct BattleIconColors {
+typedef struct BattleIconPalette {
     u8 bytes[7];
-} BattleIconColors;
+} BattleIconPalette;
 
 /* 8-byte panel frame record: origin of the frame drawn for one panel id. */
 typedef struct BattlePanelFrame {
@@ -227,7 +227,7 @@ extern volatile u8      D_801CA718[][20];
 extern BattlePhases     g_BattlePhases;
 /* D_801D0C1C */
 extern BattleEntrances  g_BattleEntrances;
-extern BattleIconColors D_801D0C64;
+extern BattleIconPalette D_801D0C64;
 /* The overlay head keeps these in .data, so their definitions are non-const. */
 extern char             D_801D0C6C[];
 extern char             D_801D0C70[];

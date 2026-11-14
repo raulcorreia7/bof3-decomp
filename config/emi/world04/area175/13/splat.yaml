@@ -66,7 +66,7 @@ segments:
       - [0x1250, c, Message_SetAnswerMessage]
       - [0x12B4, c, func_801F3EB4]
       - [0x132C, c, func_801F3F2C]
-      - [0x13BC, c, Area_QueueSelectFx]
+      - [0x13BC, c, Area_QueueSelectEffect]
       - [0x13DC, c, func_801F3FDC]
       - [0x140C, c, func_801F400C]
       - [0x14AC, c, func_801F40AC]

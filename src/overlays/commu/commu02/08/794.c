@@ -452,7 +452,7 @@ MATCH void func_801D5978(void) {
         SND_RequestBGM(D_801DB0CC);
     loop_2:
         if (EMI_IsReady() == 0) {
-            CallbackWait(1U);
+            SYS_ThreadWait(1U);
             goto loop_2;
         }
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
@@ -590,7 +590,7 @@ MATCH void func_801D5F7C(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
         D_801F294D = 8;
     } else {
-        pressed = PAD_GetRepeatedButtons(g_InputPressed & 0xA000);
+        pressed = INPUT_GetRepeatedButtons(g_InputPressed & 0xA000);
         if (pressed & HALF_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         }
@@ -631,7 +631,7 @@ MATCH void func_801D6124(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     }
@@ -823,7 +823,7 @@ MATCH void func_801D708C(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     }

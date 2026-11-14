@@ -59,7 +59,7 @@ MATCH void func_801EF0B8(void) {
     g_BattleEffects[effect_index].header.mode  = 1;
     g_BattleEffects[effect_index].target.party = task;
     g_Task->timer                              = slot;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.step += 1;

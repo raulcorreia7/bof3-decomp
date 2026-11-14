@@ -2,10 +2,10 @@
 
 /* marks the four selection voice slots free (-1), queues cue cue_id through SND_PlayCue (which keys the
  * voices on), then packs the voice numbers' low five bits into the work record's state word at +0x70 (bits 8, 13, 18,
- * 23) and sets ACTOR_FLAG_SELECTION_FX in its flag byte.
+ * 23) and sets ACTOR_FLAG_SELECTION_EFFECT in its flag byte.
  */
 /* FAKE: retail accesses the word at +0x70 whole; the member is the byte the entity rows use. */
-MATCH void SND_QueueSelectionFx(s32 cue_id) {
+MATCH void SND_QueueSelectionEffect(s32 cue_id) {
     u32    packed;
     Actor* work;
 
@@ -20,5 +20,5 @@ MATCH void SND_QueueSelectionFx(s32 cue_id) {
     packed |= (*(u8*)&D_8018B394 & 0x1F) << 23;
     work                = g_Task;
     work->state_70.word = work->state_70.word | packed;
-    work->header.flags  = (work->header.flags | ACTOR_FLAG_SELECTION_FX);
+    work->header.flags  = (work->header.flags | ACTOR_FLAG_SELECTION_EFFECT);
 }

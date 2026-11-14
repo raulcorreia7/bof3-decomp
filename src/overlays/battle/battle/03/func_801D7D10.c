@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 shade) {
-    BattleIconColors clut_table;
+    BattleIconPalette clut_table;
     POLY_FT4*        primitive;
     s32              u0;
 

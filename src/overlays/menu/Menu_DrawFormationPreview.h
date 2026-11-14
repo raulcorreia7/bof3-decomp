@@ -1,9 +1,9 @@
 /* The formation preview of the party formation menu. */
 
 /* The formation table as one block, so the preview copies all of it to the stack. */
-typedef struct FormationTable {
+typedef struct Formations {
     FormationLayout layouts[FORMATION_COUNT];
-} FormationTable;
+} Formations;
 
 /* Centre of the preview inside its frame; the ground arrow sits one pixel left of it. */
 #define FORMATION_PREVIEW_CENTER_X 39
@@ -19,7 +19,7 @@ typedef struct FormationTable {
 
 /* func_801DCDB8 (start), func_801D98C0 (shop), func_801D3E18 (bate), func_801D4DC0 (shisu) */
 MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle) {
-    FormationTable   table;
+    Formations   table;
     FormationOrder   order;
     u8               shade[PARTY_SLOT_COUNT];
     FormationLayout* layout;
@@ -29,7 +29,7 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
     POLY_G3*         poly;
     s8               swap;
 
-    table = *(FormationTable*)g_MenuFormations;
+    table = *(Formations*)g_MenuFormations;
     order = g_MenuFormationOrder;
     UI_DrawWindow(x + 3, y + 3, MENU_FORMATION_WINDOW_WIDTH, MENU_FORMATION_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
 

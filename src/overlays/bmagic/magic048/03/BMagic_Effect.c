@@ -30,7 +30,7 @@ MATCH void func_801EEC70(void) {
     } while (i < 12);
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerQueueFx.h"
+#include "overlays/bmagic/Effect_CountDownTimerQueueEffect.h"
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 

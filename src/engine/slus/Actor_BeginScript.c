@@ -40,7 +40,7 @@ MATCH void Actor_BeginScript(s32 script_index, s32 position) {
     if (g_Task->active_flags & 0x1) {
         Actor_SelectSprite(g_Task->unk_4B);
     } else {
-        table = (u8*)g_ScriptTable;
+        table = (u8*)g_Scripts;
         table += ((s32*)table)[g_Task->unk_2C];
         g_Task->script = table + ((u16*)table)[g_Task->unk_4B];
     }

@@ -9,11 +9,11 @@ typedef struct WorldCloudTexture {
 } WorldCloudTexture;
 
 /* The layer is skipped when the target cell is this many cells or more away on both axes. */
-#define WORLD_CLOUD_DRAW_RANGE 26
+#define WORLDMAP_CLOUD_DRAW_RANGE 26
 
 /* The view-space depth of the cloud quad. */
 #define WORLD_CLOUD_DEPTH      (-0x300)
 
-extern WorldCloudTexture g_WorldCloudTexture;
+extern WorldCloudTexture g_WorldMapCloudTexture;
 
 #endif

@@ -154,11 +154,11 @@ extern s8 g_MessageChoice;
 #define MENU_SELECTION_IDLE()            (g_MessageChoice == 0)
 #define MENU_SELECTION_ARMED()           (g_MessageChoice != 0)
 
-/* The repeatable buttons of a pad mask: PAD_GetRepeatedButtons sees the held keys
+/* The repeatable buttons of a pad mask: INPUT_GetRepeatedButtons sees the held keys
  * filtered to the buttons that repeat. */
 #define INPUT_DIRECTIONAL                (PADLup | PADLright | PADLdown | PADLleft)
 #define INPUT_ACTION_BUTTONS             (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADL2 | PADR1 | PADR2 | PADstart | PADselect)
-#define INPUT_REPEATED(pressed, buttons) (PAD_GetRepeatedButtons((pressed) & (buttons)))
+#define INPUT_REPEATED(pressed, buttons) (INPUT_GetRepeatedButtons((pressed) & (buttons)))
 
 /* The window effect has finished (idle) or is still running (busy). */
 #define WINDOW_EFFECT_IDLE()             (g_UiWindowEffectBusy == 0)

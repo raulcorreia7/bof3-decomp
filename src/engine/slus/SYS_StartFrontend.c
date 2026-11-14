@@ -16,12 +16,12 @@ MATCH void SYS_StartFrontend(void) {
     FAKE_REG(u8*, clear, "v1");
 
     GFX_ClearRect(0, 0, 1024, 512);
-    CallbackWait(1U);
+    SYS_ThreadWait(1U);
     SND_Init();
     SND_SetBankLayout(0U);
     EMI_LoadArchive(EMI_SLOT_FIRST);
     while (EMI_IsReady() == 0)
-        CallbackWait(1U);
+        SYS_ThreadWait(1U);
     SsUtSetReverbDepth(0x28, 0x28);
     SsSetRVol(0x28, 0x28);
     SND_Start();
@@ -52,7 +52,7 @@ MATCH void SYS_StartFrontend(void) {
     GFX_FreeAllPaletteSlots();
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     g_AreaDrawMode  = 6;
-    g_ScriptTable   = AREA_SCRIPT_TABLE;
+    g_Scripts   = AREA_SCRIPT_TABLE;
     D_801459F4      = MEM_PTR(u8, (SCENE_TABLE_BASE + 4));
     D_80143E07      = 0;
     D_80143E06      = 0;
@@ -62,6 +62,6 @@ MATCH void SYS_StartFrontend(void) {
     D_80143D75      = 0;
     GFX_ResetPalette();
     g_GfxPalettePending += 1;
-    CallbackRegister(1, SYS_EnterFrontend);
-    CallbackExit();
+    SYS_ThreadRegister(1, SYS_EnterFrontend);
+    SYS_ThreadExit();
 }

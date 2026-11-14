@@ -3,7 +3,7 @@
 extern s8 D_80148656;
 
 /* The stride of one D_801CA71E kind entry. */
-#define START08_KIND_STRIDE 0x14
+#define START08_TYPE_STRIDE 0x14
 
 MATCH void func_801D8908(void) {
     SkillOrder* rec;
@@ -28,8 +28,8 @@ MATCH void func_801D8908(void) {
     index                                                       = Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0);
     pick                                                        = index + g_MenuPanelTasks[16].unk_0C;
     kind                                                        = *pick;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = *(u16*)(D_801CA71E + kind * START08_KIND_STRIDE);
-    buttons                                                     = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = *(u16*)(D_801CA71E + kind * START08_TYPE_STRIDE);
+    buttons                                                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     value                                                       = g_MenuPanelTasks[16].unk_0C;
     if (buttons & PADLup) {
         if (value != 0) {

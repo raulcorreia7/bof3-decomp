@@ -28,14 +28,14 @@ MATCH void EMI_LoadVabHeader(void) {
         /* FAKE: keeps the owner-byte reload below both table stores. */
         FAKE_BARRIER();
 
-        if (g_SelectionFxVoices[D_80146483] != -1) {
+        if (g_SelectionEffectVoices[D_80146483] != -1) {
             SsUtAllKeyOff(0);
-            SsSepClose(g_SelectionFxVoices[D_80146482]);
-            g_SelectionFxVoices[D_80146483] = -1;
+            SsSepClose(g_SelectionEffectVoices[D_80146482]);
+            g_SelectionEffectVoices[D_80146483] = -1;
         }
     }
 
-    EMI_CopySectorData();
+    EMI_CopySector();
     {
         u32* loader_step;
         loader_step  = &g_EmiStep;

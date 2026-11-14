@@ -48,7 +48,7 @@ MATCH void BMagic_SpawnBurnFlames(void) {
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
     g_GfxPalettePending                                             = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_Task->unk_09 = 0;
     g_Task->header.mode += 1;
 }

@@ -96,7 +96,7 @@ MATCH void func_801EF2B4(void) {
         g_BattleEffects[index & BYTE_MASK].target.party  = work;
         g_Task->param.unk_0B++;
     }
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task->header.mode++;
 }

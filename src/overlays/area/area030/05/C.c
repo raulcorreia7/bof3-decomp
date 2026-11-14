@@ -81,7 +81,7 @@ MATCH void Fishing_ShopChooseItem(void) {
     s32 r;
     u8  total;
 
-    r = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    r = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     if ((r & PADLup) != 0) {
         s_ListCursor -= 1;
         if ((s8)s_ListCursor < 0) {
@@ -137,7 +137,7 @@ MATCH void Fishing_ShopChooseQuantity(void) {
     u8  s3;
 
     s0 = 0;
-    switch (PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & HALF_MASK) {
+    switch (INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & HALF_MASK) {
         case 0x2000:
             s0 = 1;
             break;
@@ -189,7 +189,7 @@ MATCH void Fishing_ShopChooseQuantity(void) {
         s_Step = s_Step - 1;
     }
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_QUANTITY_PROMPT));
+    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_QUANTITY_PROMPT));
     Fishing_ShopDrawTradeList(1);
     Fishing_ShopDrawQuantity();
     Menu_DrawCursorSprite(26, 107, 0);
@@ -230,8 +230,8 @@ MATCH void Fishing_ShopConfirm(void) {
             g_TextVariables[0][i] = src[i];
         }
         D_801490E4[0] = 0;
-        UI_DrawText(40, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ITEM));
-        UI_DrawText(238, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_YES_NO));
+        UI_DrawText(40, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_CONFIRM_ITEM));
+        UI_DrawText(238, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_YES_NO));
         Menu_DrawCursorSprite((s_ShopDeclined << 5) + 0xED, 22, 0);
     }
 
@@ -251,7 +251,7 @@ MATCH void Fishing_ShopTooGreedy(void) {
         s_ListCursor &= 0x7F;
         Fishing_ShopDrawTradeList(0);
     } else {
-        UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_TOO_GREEDY));
+        UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_TOO_GREEDY));
         Fishing_ShopDrawTradeList(1);
         Fishing_ShopDrawQuantity();
     }
@@ -299,7 +299,7 @@ MATCH void Fishing_ShopConfirmAllInput(void) {
         }
     }
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ALL));
+    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_CONFIRM_ALL));
     Menu_DrawCursorSprite(s_ShopDeclined * 32 + 0xEE, 22, 0);
     Fishing_ShopDrawTradeList(0);
     Fishing_ShopDrawNeeded();
@@ -313,7 +313,7 @@ MATCH void Fishing_ShopExit(void) {
         return;
     }
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_CONFIRM_ALL));
+    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_CONFIRM_ALL));
     Menu_DrawCursorSprite(s_ShopDeclined * 32 + 0xEE, 22, 0);
     Fishing_ShopDrawTradeList(0);
     Fishing_ShopDrawNeeded();
@@ -377,7 +377,7 @@ MATCH void Fishing_ShopDrawTradeList(s32 draw_all) {
     u8  n;
     n = draw_all & BYTE_MASK;
     Fishing_ShopDrawListWindow(20, 56, n);
-    UI_DrawText(54, 62, (u8)(n * 7), 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_TRADE_ITEM_LABEL));
+    UI_DrawText(54, 62, (u8)(n * 7), 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_TRADE_ITEM_LABEL));
     for (i = 0; i < s_ShopItemCount; i++) {
         h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)], ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
         w = Fishing_ShopTradeBlocked(i & BYTE_MASK, 1);
@@ -474,9 +474,9 @@ MATCH void Fishing_ShopDrawNeeded(void) {
 
     slot = s_ListCursor & 0xF;
     Fishing_ShopDrawNeededWindow(168, 64);
-    UI_DrawText(210, 71, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_NEEDED_LABEL));
+    UI_DrawText(210, 71, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_NEEDED_LABEL));
     Fishing_ShopDrawNeededWindow(168, 140);
-    UI_DrawText(215, 147, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_OWNED_LABEL));
+    UI_DrawText(215, 147, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_OWNED_LABEL));
     if ((s8)s_ListCursor & 0x80) {
         return;
     }
@@ -560,13 +560,13 @@ MATCH void Fishing_ShopDrawQuantity(void) {
     entry = D_801E3134[g_GameContextKind][slot];
     Fishing_ShopDrawItemIcon(24, 108, D_801E2F7C[entry].cost_00, D_801E2F7C[entry].cost_01, 0);
 
-    UI_DrawText(33, 124, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_NONE_OWNED));
+    UI_DrawText(33, 124, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_NONE_OWNED));
 
     entry = D_801E3134[g_GameContextKind][slot];
     TEXT_Format(g_UiFormatBuffer, D_800F5000.format, Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & HALF_MASK);
     UI_DrawGlyphString(132, 128, 0, g_UiFormatBuffer);
 
-    UI_DrawText(33, 136, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MSG_NONE_EQUIPPED));
+    UI_DrawText(33, 136, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_NONE_EQUIPPED));
 
     entry = D_801E3134[g_GameContextKind][slot];
     TEXT_Format(g_UiFormatBuffer, D_800F5000.format, Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & HALF_MASK);

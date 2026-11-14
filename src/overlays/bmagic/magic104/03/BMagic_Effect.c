@@ -39,7 +39,7 @@ MATCH void func_801EEC80(void) {
         g_BattleEffects[slot].pos.x.fixed = g_AreaScrollTargetX + g_Task->unk_0C;
         g_BattleEffects[slot].pos.y.fixed = g_AreaScrollTargetY + g_Task->unk_10;
         g_BattleEffects[slot].pos.z.fixed = g_Task->pos.z.fixed;
-        SND_QueueSelectionFx(0x102);
+        SND_QueueSelectionEffect(0x102);
     }
 }
 
@@ -110,7 +110,7 @@ MATCH void func_801EF178(void) {
         if (g_Task->param.unk_0B & 0x1) {
             cue = 0x101;
         }
-        SND_QueueSelectionFx(cue);
+        SND_QueueSelectionEffect(cue);
         g_Task->unk_09 = 0;
         g_Task->timer  = 0;
         g_Task->header.step += 1;
