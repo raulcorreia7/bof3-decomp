@@ -2946,7 +2946,7 @@ Game_StartTitleFade = { addr = 0x801D0DF0, type = "func", source = "Title state:
 Game_StartSelectedGame = { addr = 0x801D0E54, type = "func", source = "Title state: waits for the selection effect to close, resets the title phases and requests scenario 16." }
 UI_WaitTitleInput = { addr = 0x801D0F00, type = "func", source = "Title prompt state: reads the pad input and starts the cue of the selected entry." }
 UI_UpdateChoicePrompt = { addr = 0x801D0FB8, type = "func", source = "Updates the title prompt while the EXE gate is open, else returns to title state 0." }
-Game_LeaveTitle = { addr = 0x801D1000, type = "func", source = "Closes the selection effect, restores layout bank 0 and exits the EXE callback thread." }
+Game_LeaveTitle = { addr = 0x801D1000, type = "func", source = "Closes the selection effect, restores layout bank 0 and exits the scheduler thread." }
 UI_HandleStartButton = { addr = 0x801D104C, type = "func", source = "Intercepts the Start button on the title: redirects to state 2 early, or to the popup close and state 7." }
 SND_StartSelectionEffect = { addr = 0x801D1134, type = "func", source = "Starts the g_SndBGMId decrescendo through SND_StartDecrescendo with g_SelectionCues[selection]." }
 SND_StopSelectionEffect = { addr = 0x801D1184, type = "func", source = "Stops the g_SndBGMId effect and clears the selection byte." }
@@ -6369,6 +6369,7 @@ g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
 g_AreaCellGrid = { addr = 0x80141880, type = "u16", size = 0xC40, source = "The grid of area cells." }
 g_AreaCellPrimFreeIds = { addr = 0x801424C0, type = "u16", size = 0x800, source = "Free primitive row ids of the area cells." }
+g_SysThreads = { addr = 0x80143B40, type = "Thread", source = "The scheduler's thread records, indexed by thread index." }
 g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_LoadShopOverlay to 2 and Game_UpdateAreaLoad to 8." }
 g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current game state; the state handlers read it to pick their stage and add 1 as they advance." }
 g_GameStateIndex = { addr = 0x80143BB0, source = "Game request code that picks the next game state." }
@@ -6385,7 +6386,7 @@ g_UiTitleChoicePhase = { addr = 0x80143C32, source = "Phase of the title choices
 g_UiTitleInputGate = { addr = 0x80143C33, source = "Gate of the title start button: 1 from the title screen start until the button is accepted or the game starts, then 0." }
 g_UiWindowEffectBusy = { addr = 0x80143C40, source = "Tells whether a window effect is running." }
 g_UiLocalMode = { addr = 0x80143C90, source = "Set by UI_SetMode, which arms UI_DispatchLocalMode." }
-g_CallbackSlot = { addr = 0x80143D40, type = "Thread", source = "The callback slots." }
+g_SysCurrentThread = { addr = 0x80143D40, type = "Thread", source = "The thread record the scheduler runs now." }
 g_FrameBufferIndex = { addr = 0x80143D44, source = "Index of the frame buffer being drawn." }
 g_GfxDisplayFrames = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the display frames and SYS_Main selects one by g_FrameBufferIndex" }
 g_GfxCurrentDisplayFrame = { addr = 0x80143E68, source = "SYS_Main selects a display frame and passes its display and draw environments to PsyQ" }
@@ -6666,14 +6667,14 @@ SYS_PrepareFrame = { addr = 0x8014B020, type = "func", source = "Rebuilds the ac
 SYS_SubmitFrame = { addr = 0x8014B0F0, type = "func", source = "AddPrims links the eight OT heads to the packet chain" }
 SYS_CaptureDrawTime = { addr = 0x8014B17C, type = "func", source = "Records the time taken to draw." }
 SYS_InitCard = { addr = 0x8014B1A4, type = "func", source = "Opens and enables the seven SwCARD and HwCARD events, InitCARD and StartCARD." }
-SYS_ThreadStopAll = { addr = 0x8014B33C, type = "func", source = "Closes every non-empty callback slot before a boot hand-over." }
+SYS_ThreadStopAll = { addr = 0x8014B33C, type = "func", source = "Closes every non-empty scheduler thread before a boot hand-over." }
 SYS_ShowException = { addr = 0x8014B3C4, type = "func", source = "HwCPU EvSpTRAP handler, register dump on the debug screen" }
-SYS_ThreadInit = { addr = 0x8014B6B4, type = "func", source = "Sets up the callback threads." }
-SYS_ThreadRun = { addr = 0x8014B73C, type = "func", source = "Runs the callback threads." }
-SYS_ThreadRegister = { addr = 0x8014B854, type = "func", source = "Stores a callback in one slot and marks it CALLBACK_SLOT_OPEN." }
-SYS_ThreadWait = { addr = 0x8014B87C, type = "func", source = "Arms the current slot's countdown and forces a switch." }
-SYS_ThreadExit = { addr = 0x8014B8B0, type = "func", source = "Empties the current slot, closes its thread, switches away." }
-SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one slot and closes its thread." }
+SYS_ThreadInit = { addr = 0x8014B6B4, type = "func", source = "Sets up the scheduler threads." }
+SYS_ThreadRun = { addr = 0x8014B73C, type = "func", source = "Runs the scheduler threads." }
+SYS_ThreadRegister = { addr = 0x8014B854, type = "func", source = "Stores a callback in one thread and marks it SYS_THREAD_OPEN." }
+SYS_ThreadWait = { addr = 0x8014B87C, type = "func", source = "Arms the current thread's countdown and forces a switch." }
+SYS_ThreadExit = { addr = 0x8014B8B0, type = "func", source = "Empties the current thread, closes it, switches away." }
+SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one thread and closes it." }
 SYS_ThreadReplace = { addr = 0x8014B954, type = "func", source = "Replaces the running callback." }
 Area_DrawScene = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
 Area_SwapObjects = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
@@ -6719,19 +6720,19 @@ SYS_EnterFrontend = { addr = 0x8014EC64, type = "func", source = "Loads the fron
 UI_SetMode = { addr = 0x8014ECAC, type = "func", source = "Sets the UI mode." }
 UI_SetModeWait = { addr = 0x8014ECEC, type = "func", source = "Sets the UI mode and waits for the window effect." }
 UI_DispatchLocalMode = { addr = 0x8014ED6C, type = "func", source = "Runs the handler of the current UI mode." }
-GFX_FadeToBlack = { addr = 0x8014EDF0, type = "func", source = "Fades the screen to black at the normal speed (callback thread)." }
-GFX_FadeFromBlack = { addr = 0x8014EE18, type = "func", source = "Fades the screen back in from black at the normal speed (callback thread)." }
-GFX_FadeToBlackFast = { addr = 0x8014EE40, type = "func", source = "Fades the screen to black at the fast speed (callback thread)." }
-GFX_FadeFromBlackFast = { addr = 0x8014EE68, type = "func", source = "Fades the screen back in from black at the fast speed (callback thread)." }
-GFX_FadeToBlackSlow = { addr = 0x8014EE90, type = "func", source = "Fades the screen to black at the slow speed (callback thread)." }
-GFX_FadeFromBlackSlow = { addr = 0x8014EEB8, type = "func", source = "Fades the screen back in from black at the slow speed (callback thread)." }
-GFX_FadeToWhite = { addr = 0x8014EF30, type = "func", source = "Fades the screen to white at the normal speed (callback thread)." }
-GFX_FadeFromWhite = { addr = 0x8014EF58, type = "func", source = "Fades the screen back in from white at the normal speed (callback thread)." }
-GFX_FadeToBlackSlower = { addr = 0x8014F1AC, type = "func", source = "Fades the screen to black at the slower speed (callback thread)." }
-GFX_FadeFromBlackSlower = { addr = 0x8014F1D4, type = "func", source = "Fades the screen back in from black at the slower speed (callback thread)." }
-GFX_FadeToWhiteSlower = { addr = 0x8014F1FC, type = "func", source = "Fades the screen to white at the slower speed (callback thread)." }
-GFX_FadeFromWhiteSlower = { addr = 0x8014F224, type = "func", source = "Fades the screen back in from white at the slower speed (callback thread)." }
-GFX_FadeToBlackSlowest = { addr = 0x8014F438, type = "func", source = "Fades the screen to black at the slowest speed (callback thread)." }
+GFX_FadeToBlack = { addr = 0x8014EDF0, type = "func", source = "Fades the screen to black at the normal speed (scheduler thread)." }
+GFX_FadeFromBlack = { addr = 0x8014EE18, type = "func", source = "Fades the screen back in from black at the normal speed (scheduler thread)." }
+GFX_FadeToBlackFast = { addr = 0x8014EE40, type = "func", source = "Fades the screen to black at the fast speed (scheduler thread)." }
+GFX_FadeFromBlackFast = { addr = 0x8014EE68, type = "func", source = "Fades the screen back in from black at the fast speed (scheduler thread)." }
+GFX_FadeToBlackSlow = { addr = 0x8014EE90, type = "func", source = "Fades the screen to black at the slow speed (scheduler thread)." }
+GFX_FadeFromBlackSlow = { addr = 0x8014EEB8, type = "func", source = "Fades the screen back in from black at the slow speed (scheduler thread)." }
+GFX_FadeToWhite = { addr = 0x8014EF30, type = "func", source = "Fades the screen to white at the normal speed (scheduler thread)." }
+GFX_FadeFromWhite = { addr = 0x8014EF58, type = "func", source = "Fades the screen back in from white at the normal speed (scheduler thread)." }
+GFX_FadeToBlackSlower = { addr = 0x8014F1AC, type = "func", source = "Fades the screen to black at the slower speed (scheduler thread)." }
+GFX_FadeFromBlackSlower = { addr = 0x8014F1D4, type = "func", source = "Fades the screen back in from black at the slower speed (scheduler thread)." }
+GFX_FadeToWhiteSlower = { addr = 0x8014F1FC, type = "func", source = "Fades the screen to white at the slower speed (scheduler thread)." }
+GFX_FadeFromWhiteSlower = { addr = 0x8014F224, type = "func", source = "Fades the screen back in from white at the slower speed (scheduler thread)." }
+GFX_FadeToBlackSlowest = { addr = 0x8014F438, type = "func", source = "Fades the screen to black at the slowest speed (scheduler thread)." }
 GFX_RunBlackFade = { addr = 0x8014F514, type = "func", source = "Fades the screen to black." }
 GFX_RunWhiteFade = { addr = 0x8014F5F0, type = "func", source = "Fades the screen to white." }
 GFX_UpdateScreenFade = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }

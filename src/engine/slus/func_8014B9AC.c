@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* sets bit 6 of the callback slot word for callback_slot.
+/* sets bit 6 of the state word of thread_index.
  */
-MATCH void func_8014B9AC(s32 callback_slot) {
-    D_80143B40[callback_slot].state |= 0x40;
+MATCH void func_8014B9AC(s32 thread_index) {
+    g_SysThreads[thread_index].state |= 0x40;
 }
