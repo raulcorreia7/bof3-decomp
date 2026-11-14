@@ -168,8 +168,7 @@ MATCH void func_801D11A4(void) {
     SCENE_RED_GRADIENT_FADE(timer, 0x10, 4);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
+MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
     DVECTOR  screen;
     DVECTOR  point;
     DVECTOR  size;
@@ -193,20 +192,17 @@ NON_MATCHING void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
         primitive = GFX_BeginPolyG3(0);
         setXY2(primitive, screen.vx, screen.vy, point.vx, point.vy);
         angle += 128;
-        point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
-        point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);
+        point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 12);
+        point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 12);
         primitive->x2 = point.vx;
         primitive->y2 = point.vy;
         setRGB0(primitive, (mode & 4) << 5, (mode & 2) << 6, (mode & 1) << 7);
         setRGB1(primitive, 0, 0, 0);
         setRGB2(primitive, 0, 0, 0);
         GFX_AddPrim(7u, sizeof(POLY_G3));
-        i += 1;
+        i++;
     } while ((i & BYTE_MASK) < 32U);
 }
-#else
-INCLUDE_ASM(func_801D1218);
-#endif
 
 INCLUDE_ASM(Scene_DrawScanBar);
 
