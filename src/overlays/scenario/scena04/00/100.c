@@ -97,7 +97,40 @@ MATCH void func_801F77EC(void) {
     g_Task->header.mode++;
 }
 
-INCLUDE_ASM(func_801F78F4);
+/* Every 16 ticks, spawn a particle from the path origin toward each path point; then follow the focus and leave on the last tick. */
+MATCH void func_801F78F4(void) {
+    /* FAKE: retail reserves 16 bytes of unused stack. */
+    FAKE_STACK_PADS(u8, 16);
+    ScenePathWork* work;
+    SceneParticle* row;
+    u8             i;
+
+    work = MEM_PTR(ScenePathWork, AREA_WORK + 0x1400);
+    if ((g_Task->vx & 0xF) == 0) {
+        i = 0;
+        do {
+            row = (SceneParticle*)func_801F7FF8();
+            if (row != NULL) {
+                *(ScenePathPoint*)row = *(ScenePathPoint*)work;
+                row->vx               = (work->points[i].x - work->x) >> 4;
+                row->vy               = (work->points[i].y - work->y) >> 4;
+                row->vz               = (work->points[i].z - work->z) >> 4;
+                VectorNormal(&row->vx, &row->vx);
+                row->unk_24 = 0x80;
+                row->unk_20 = 0x1000;
+                row->life   = 0x80;
+            }
+            i++;
+        } while (i < 8);
+    }
+    work->x = D_80147A8C;
+    work->y = g_AreaFocusY;
+    work->z = D_80147A94 >> 8;
+    func_801F7EC0();
+    if (--g_Task->vx == 0) {
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801F7A64(void) {
     Actor_Clear();
