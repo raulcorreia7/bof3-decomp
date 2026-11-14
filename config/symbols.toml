@@ -6397,6 +6397,9 @@ D_1F80000C = { addr = 0x1F80000C, source = "Scratchpad word: the staged y bias f
 D_1F80000E = { addr = 0x1F80000E, source = "Scratchpad word: the staged y source halfword (func_801B13BC)." }
 D_1F800010 = { addr = 0x1F800010, source = "Scratchpad halfword-pointer cell: scena00 points it at the area load record's rotation offset and steps the camera through it." }
 D_1F800014 = { addr = 0x1F800014, source = "The four SVECTORs RotTransPers4 projects; the area sprite and effect passes write the vertices here and the engine's sprite draw reads them back as D_1F800034." }
+D_1F80001C = { addr = 0x1F80001C, type = "SVECTOR", source = "The second corner vector of the RotTransPers4 block at 0x1F800014, written on its own by the tile-ring draw (func_801530D0)." }
+D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "The third corner vector of the RotTransPers4 block at 0x1F800014, written on its own by the tile-ring draw (func_801530D0)." }
+D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "The fourth corner vector of the RotTransPers4 block at 0x1F800014, written on its own by the tile-ring draw (func_801530D0)." }
 g_Task = { addr = 0x1F800044, size = 0x4, source = "The current task work record." }
 jtbl_800327B0 = { addr = 0x800327B0, type = "Callback", source = "The switch table of LZ77_DecodeStep: the jump targets of its jr dispatch." }
 g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, source = "Header of the area map bundle." }
@@ -6404,6 +6407,7 @@ g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
 g_AreaCellGrid = { addr = 0x80141880, type = "u16", size = 0xC40, source = "The grid of area cells." }
 g_AreaCellPrimFreeIds = { addr = 0x801424C0, type = "u16", size = 0x800, source = "Free primitive row ids of the area cells." }
+g_AreaCellPacketLists = { addr = 0x80142CC4, type = "AreaCellPacketList", alias = true, source = "D_80142CC4 as the cell ordering lists: per grid row, six lists of 8 bytes whose first word is the last packet linked (func_801530D0 appends to them)." }
 g_SysThreads = { addr = 0x80143B40, type = "Thread", source = "The scheduler's thread records, indexed by thread index." }
 g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_LoadShopOverlay to 2 and Game_UpdateAreaLoad to 8." }
 g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current game state; the state handlers read it to pick their stage and add 1 as they advance." }

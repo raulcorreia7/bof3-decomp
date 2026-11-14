@@ -97,6 +97,10 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    sequences (registers and offsets ignored), and the structural hunks are fixed top-down before
    any register is read. `tools/match_context.sh <target>@0x<ADDR>` prints the assembly, the
    recorded attempts and the C file in one go.
+   `tools/rtl_dump.sh <file.c> L <function>` prints what the loop pass moved out of each loop and
+   why: a value moves when `threshold * uses * life >= loop size`, and each move lowers the
+   threshold by 3 for the values after it. A register that holds a constant in the draft and a
+   counter in retail is usually one move too many or too few earlier in the loop.
 
    Script the forms: write the body once with its variable parts as a table, build each with
    `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.
