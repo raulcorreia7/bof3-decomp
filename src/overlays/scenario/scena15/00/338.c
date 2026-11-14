@@ -425,7 +425,37 @@ MATCH void func_801F8C78(void) {
     g_Task->header.mode++;
 }
 
-INCLUDE_ASM(func_801F8D30);
+/* Spin the actor's sweep value, shift its position on alternate frames, and advance when the script variable equals its option. */
+MATCH void func_801F8D30(void) {
+    MATRIX camera;
+    s32*   cell;
+
+    cell = &D_801FE740;
+    *cell += g_Task->gravity >> 1;
+    if (*cell == g_Task->vz) {
+        *cell = -*cell;
+    }
+    Area_SetCameraMatrix(&camera);
+    if (g_FrameCount & 1) {
+        func_801F9A20(&g_Task->pos, &g_Task->vx);
+        if (!(g_Task->unk_06 & 1)) {
+            g_Task->pos.x.fixed += 0x4000;
+        } else {
+            g_Task->pos.y.fixed += 0x4000;
+        }
+        func_801F9500(&g_Task->pos, &g_Task->vx);
+        if (!(g_Task->unk_06 & 1)) {
+            g_Task->pos.x.fixed -= 0x4000;
+        } else {
+            g_Task->pos.y.fixed -= 0x4000;
+        }
+    } else {
+        func_801F97CC(&g_Task->pos, cell - 2);
+    }
+    if (g_ScriptVarsReq.byte == g_Task->option_flags) {
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801F8EA8(void) {
     MATRIX matrix;

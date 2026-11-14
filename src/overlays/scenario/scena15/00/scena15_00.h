@@ -10,6 +10,7 @@
 #include "shared/AreaSpark.h"
 
 extern u32      D_801F6C00;
+extern s32      D_801FE740;
 /* D_801FE57C */
 extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE590[];
@@ -24,6 +25,9 @@ void             Area_AddSpark(void);
 /* func_801F7748 */
 bool             Scene_GetZFixed(void);
 void             func_801F79C4(void);
+void             func_801F9500(WorldPos* pos, s32* vx);
+void             func_801F97CC(WorldPos* pos, s32* arg);
+void             func_801F9A20(WorldPos* pos, s32* vx);
 void             func_801F7FFC(s16 x, s16 y);
 void             func_801F81D8(s16 x, s16 y);
 extern Callback  D_801FE5CC[];
