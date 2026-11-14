@@ -21,6 +21,7 @@ extern Callback D_800C2080[];
 extern Callback D_800C20B0[];
 extern Callback D_800C20BC[];
 
+u8   Battle_IsEnemyBlocked(void);
 void func_800C1B24(s32 mode);
 void func_800C1D40(s32 mode);
 
