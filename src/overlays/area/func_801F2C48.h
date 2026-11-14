@@ -26,22 +26,22 @@
  * banner and starts the away step when the party already stands in that cell. The BODY form also runs the area update. */
 /* func_801F2C48 (area158), func_801F2C48 (area160), func_801F2C48 (area161), func_801F2C48 (area162),
  * func_801F2C48 (area163), func_801F2C48 (area164), func_801F2C48 (area165), func_801F2C48 (area166), func_801F3484 (area157) */
-#define AREA_START_ENTRY_CELL(payload, screen_y_value, edge)                 \
-    Actor* work;                                                             \
-    Actor* cell;                                                             \
-    Actor* row;                                                              \
-    s32    entry;                                                            \
-    s32    pair;                                                             \
-    s16    screen_y;                                                         \
-    work                     = g_Task;                                       \
-    entry                    = work->pos.x.part.integer;                     \
-    pair                     = entry * 2;                                    \
-    work->direction_08       = work->pos.y.part.integer == 0;                \
-    cell                     = g_Task;                                       \
-    cell->pos.x.part.integer = WORLD04_ENTRY_TABLE(payload, u8, 0x14, pair); \
-    cell->pos.y.part.integer = WORLD04_ENTRY_TABLE(payload, u8, 0x15, pair); \
-    cell->screen_y           = 0;                                            \
-    cell->header.step += 1;                                                  \
+#define AREA_START_ENTRY_CELL(payload, screen_y_value, edge)              \
+    Actor* work;                                                          \
+    Actor* cell;                                                          \
+    Actor* row;                                                           \
+    s32    entry;                                                         \
+    s32    pair;                                                          \
+    s16    screen_y;                                                      \
+    work                     = g_Task;                                    \
+    entry                    = work->pos.x.part.integer;                  \
+    pair                     = entry * 2;                                 \
+    work->direction_08       = work->pos.y.part.integer == 0;             \
+    cell                     = g_Task;                                    \
+    cell->pos.x.part.integer = AREA_ENTRY_TABLE(payload, u8, 0x14, pair); \
+    cell->pos.y.part.integer = AREA_ENTRY_TABLE(payload, u8, 0x15, pair); \
+    cell->screen_y           = 0;                                         \
+    cell->header.step += 1;                                               \
     AREA_ENTRY_CELL_AWAY_STEP(screen_y_value, edge)
 
 #define AREA_START_WORK_AT_ENTRY_CELL_BODY(payload, screen_y_value) \

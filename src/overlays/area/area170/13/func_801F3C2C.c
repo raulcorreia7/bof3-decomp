@@ -15,10 +15,10 @@ MATCH void func_801F3C2C(void) {
     pair                       = entry * 2;
     work->direction_08         = work->pos.y.part.integer == 0;
     cell                       = g_Task;
-    cell->pos.x.part.integer   = WORLD04_ENTRY_TABLE(D_801F57BC, u8, 0xF0, pair);
-    cell->pos.y.part.integer   = WORLD04_ENTRY_TABLE(D_801F57BC, u8, 0xF1, pair);
+    cell->pos.x.part.integer   = AREA_ENTRY_TABLE(D_801F57BC, u8, 0xF0, pair);
+    cell->pos.y.part.integer   = AREA_ENTRY_TABLE(D_801F57BC, u8, 0xF1, pair);
     height                     = Area_SampleHeight(cell->pos.x.fixed, cell->pos.y.fixed);
-    g_Task->pos.z.part.integer = -height / 2 - WORLD04_ENTRY_TABLE(D_801F57BC, u16, 0xE4, pair);
+    g_Task->pos.z.part.integer = -height / 2 - AREA_ENTRY_TABLE(D_801F57BC, u16, 0xE4, pair);
     g_Task->screen_y           = 0;
     g_Task->header.step += 1;
     AREA_ENTRY_CELL_AWAY_STEP(192, 1)
