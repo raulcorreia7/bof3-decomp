@@ -5,7 +5,7 @@ MATCH void func_801F3224(void) {
     Actor* scratch2;
     u8     timer;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
 
     scratch                    = g_Task;
     timer                      = *(u8*)(((u8*)scratch + 9));

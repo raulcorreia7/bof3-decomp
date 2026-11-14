@@ -78,7 +78,21 @@ MATCH void func_801F7268(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7320);
+MATCH void func_801F7320(void) {
+    u16 timer;
+
+    func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32);
+    if ((g_Task->unk_5A & 3) == 0) {
+        g_Task->unk_32--;
+    }
+    timer          = g_Task->unk_5A - 1;
+    g_Task->unk_5A = timer;
+    if (timer == 0) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
+        g_Task->unk_5A = 20;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801F73D4(void) {
     Actor* work;
@@ -725,13 +739,13 @@ MATCH void func_801FD07C(void) {
     s32  first;
     s32  second;
 
-    first      = Actor_FindFree();
+    first      = Actor_FindFreeField();
     D_801FEA74 = first;
     if (first == GAME_NONE) {
         return;
     }
     g_Actors[first].header.flags = 1;
-    second                       = Actor_FindFree();
+    second                       = Actor_FindFreeField();
     D_801FEA78                   = second;
     if (second == GAME_NONE) {
         g_Actors[D_801FEA74].header.flags = 0;

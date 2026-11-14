@@ -31,7 +31,7 @@ MATCH void Game_ReturnFromMenu(void) {
     }
     UI_SetMode(3u);
     func_80198BC4(1u);
-    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeEffectVoice(&sep_index, &seq_index) & BYTE_MASK)) {
+    if ((D_80143F20 == 0x6Eu) && !(SND_TestEffectVoicesBusy(&sep_index, &seq_index) & BYTE_MASK)) {
         SND_FadeInSequence(sep_index, seq_index, 0x14, 0x10);
     }
     request = &D_8014869C;

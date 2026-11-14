@@ -14,7 +14,7 @@ MATCH void func_801BD5A4(void) {
             }
             break;
         case 1:
-            g_Task->param.unk_0B = Actor_FindFreeSlot();
+            g_Task->param.unk_0B = Actor_FindFreeSpawned();
             if (g_Task->param.unk_0B != GAME_NONE) {
                 g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
                 g_SpawnedActors[g_Task->param.actor_slot].type         = 6;

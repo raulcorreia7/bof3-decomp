@@ -3,7 +3,7 @@
 MATCH void func_801F39F4(void) {
     u8 slot;
 
-    g_Task->param.actor_slot = Actor_FindFreeSlot();
+    g_Task->param.actor_slot = Actor_FindFreeSpawned();
     slot                     = g_Task->param.actor_slot;
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags             = 1;

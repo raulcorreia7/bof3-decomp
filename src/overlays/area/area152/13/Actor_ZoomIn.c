@@ -5,7 +5,7 @@ MATCH void Actor_ZoomIn(void) {
     u8* scratch;
     u8* check;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
 
     scratch = (u8*)g_Task;
     scratch[0x09] -= 1;

@@ -12,7 +12,7 @@ extern Callback     D_801F0540[];
 extern BattleEffect D_801F054C[];
 #define BMAGIC_EFFECT_SLOTS         D_801F054C
 #define BMAGIC_EFFECT_COUNT         80
-#define BMAGIC_EFFECT_START_HANDLER Effect_PlayOnZeroTick
+#define BMAGIC_EFFECT_START_HANDLER Effect_MarkDamagedOnZeroTick
 void func_801EED04(void);
 #define BMAGIC_EFFECT_SLOT_STEP func_801EF958
 void      func_801EFF50(void);

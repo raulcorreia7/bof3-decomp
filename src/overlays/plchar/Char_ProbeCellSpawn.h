@@ -8,7 +8,7 @@ MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
 
     cell = Area_GetCellCode(x, y) & BYTE_MASK;
     if (cell == 0xF2) {
-        if ((Actor_FindFreeSlot() & BYTE_MASK) != GAME_NONE) {
+        if ((Actor_FindFreeSpawned() & BYTE_MASK) != GAME_NONE) {
             Char_SpawnActor(0, x, y);
             roll = RANDOM_MASK(0xF);
             if (roll >= 13) {
