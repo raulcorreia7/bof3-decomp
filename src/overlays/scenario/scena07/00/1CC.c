@@ -27,7 +27,7 @@ MATCH void func_801F6E90(void) {
     if ((g_Task->vx & 0x7) == 0) {
         row = func_801F8394();
         if (row != NULL) {
-            func_801F83D0(row);
+            Scene_InitSpark((FallingSpark*)row);
         }
     }
     func_801F85D8();
@@ -410,7 +410,7 @@ MATCH u8* func_801F8394(void) {
     return NULL;
 }
 
-INCLUDE_ASM(func_801F83D0);
+#include "overlays/scenario/Scene_InitSpark.h"
 
 /* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
 MATCH void func_801F8478(u8* row) {

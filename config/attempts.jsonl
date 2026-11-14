@@ -314,7 +314,6 @@
 {"function": "emi/scenario/scena07/00@0x801F7A30", "tried": "blocker: position setup load order", "first_diff": "+0x00 (prologue).", "score": null}
 {"function": "emi/scenario/scena07/00@0x801F7D6C", "tried": "blocker: same position setup as func_801F7A30", "first_diff": "+0x00 (load order).", "score": null}
 {"function": "emi/scenario/scena07/00@0x801F81D4", "tried": "needs: camera transform declarations and drawing record type.", "first_diff": "", "score": null}
-{"function": "emi/scenario/scena07/00@0x801F83D0", "tried": "needs: particle record type.", "first_diff": "", "score": null}
 {"function": "emi/scenario/scena07/00@0x801F86BC", "tried": "Hint: operates on a0 as a byte record (bytes 0x02, 0x03, 0x01, 0x04 and a flag at D_801FDFC4); the record type is not declared, so the draft needs it first.", "first_diff": "", "score": null}
 {"function": "emi/scenario/scena07/00@0x801F8764", "tried": "blocker: 0x40000 constant register", "first_diff": "lui v0,4 (retail) against a0 or a1 (candidate).", "score": null}
 {"function": "emi/scenario/scena07/00@0x801F88B8", "tried": "needs: table record type.", "first_diff": "", "score": null}

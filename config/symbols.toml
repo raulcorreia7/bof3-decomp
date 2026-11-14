@@ -4093,6 +4093,7 @@ jtbl_801F6CD4 = { addr = 0x801F6CD4, type = "Callback", source = "The switch tab
 jtbl_801F6D74 = { addr = 0x801F6D74, type = "Callback", source = "The switch table of func_801FD0DC: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6DCC, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801F6DD4 = { addr = 0x801F6DD4, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_InitSpark = { addr = 0x801F83D0, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 MATH_AverageAngle = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F8F90, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
@@ -4116,6 +4117,7 @@ jtbl_801F6D94 = { addr = 0x801F6D94, type = "Callback", source = "The switch tab
 jtbl_801F6DB4 = { addr = 0x801F6DB4, type = "Callback", source = "The switch table of func_801FD704: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6F48, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_InitSpark = { addr = 0x801F8B50, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 MATH_AverageAngle = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F9470, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
