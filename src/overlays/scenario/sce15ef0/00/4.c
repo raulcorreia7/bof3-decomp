@@ -45,7 +45,20 @@ MATCH void func_801D0DB0(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0E5C);
+MATCH void func_801D0E5C(void) {
+    g_Task->color_g += 0x40;
+    if ((s8)g_Task->color_g != 0) {
+        func_801D1220((u8)g_Task->color_g);
+    } else {
+        func_801D1220(0xFF);
+    }
+    func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    if (TIMER_EXPIRED(g_Task->timer)) {
+        g_Task->timer = 4;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801D0F44(void) {
     g_Task->color_g -= 0x40;

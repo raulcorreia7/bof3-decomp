@@ -7,7 +7,31 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801F71C0);
 
-INCLUDE_ASM(func_801F729C);
+MATCH void func_801F729C(void) {
+    POLY_G4* prim;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(1, 2, 0x140, 0) & 0xFFFF, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 100, SCREEN_WIDTH, 100);
+    prim->r1 = 0xC8;
+    prim->r0 = 0xC8;
+    prim->g1 = 0xC8;
+    prim->g0 = 0xC8;
+    prim->b1 = 0xC8;
+    prim->b0 = 0xC8;
+    prim->r3 = 0;
+    prim->r2 = 0;
+    prim->g3 = 0;
+    prim->g2 = 0;
+    prim->b3 = 0;
+    prim->b2 = 0;
+    GFX_AddPrim(2, sizeof(POLY_G4));
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, 3, 0x140, 0x140) & 0xFFFF, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
 
 MATCH void func_801F73B8(void) {
     SYS_DISPATCH_TASK(D_801FE26C, 1, g_Task);
