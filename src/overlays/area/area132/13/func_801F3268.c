@@ -1,3 +1,6 @@
 #include "area132_13.h"
+#include "overlays/area/Area_DrawRingColumn.h"
 
-INCLUDE_ASM(func_801F3268);
+MATCH void func_801F3268(void) {
+    AREA_DRAW_RING_COLUMN(128);
+}
