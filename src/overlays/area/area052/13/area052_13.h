@@ -41,6 +41,19 @@ typedef struct AreaTriggerRect {
 ASSERT_SIZE(AreaTriggerRect, 4);
 
 extern AreaTriggerRect D_801F510C[2];
+
+/* A cell and facing that starts a scene event at the given step and toggles the scene flag. */
+typedef struct AreaFlagTrigger {
+    u8 x;
+    u8 y;
+    u8 facing;
+    u8 flag;
+    u8 step;
+} AreaFlagTrigger;
+
+ASSERT_SIZE(AreaFlagTrigger, 0x05);
+
+extern AreaFlagTrigger D_801F5114[4];
 void                   func_801F2EC8(AreaEffectRow* row);
 void                   func_801F3084(void);
 void                   func_801F3194(void);

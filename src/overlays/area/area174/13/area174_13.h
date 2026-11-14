@@ -42,6 +42,20 @@ extern s8       D_801F6754[];
         g_ScriptState->cursor -= 2;                                                 \
     }
 
+/* Claims a spawn slot for an 0xA2 actor placed 256 units ahead of the current actor and sets its mode; with no slot free it backs the script cursor up by 2. func_801F4278 and func_801F4688 share it; every change must verify both. */
+#define AREA_SPAWN_AHEAD_ACTOR(actor_mode)                                                            \
+    g_Task->param.actor_slot = Actor_FindFreeSpawned();                                               \
+    if (g_Task->param.actor_slot != GAME_NONE) {                                                      \
+        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;                                   \
+        g_SpawnedActors[g_Task->param.actor_slot].type         = 0xA2;                                \
+        g_SpawnedActors[g_Task->param.actor_slot].pos.x.fixed  = g_Task->pos.x.fixed;                 \
+        g_SpawnedActors[g_Task->param.actor_slot].pos.y.fixed  = g_Task->pos.y.fixed;                 \
+        g_SpawnedActors[g_Task->param.actor_slot].pos.z.fixed  = g_Task->pos.z.fixed + TO_COORD(256); \
+        g_SpawnedActors[g_Task->param.actor_slot].header.mode  = (actor_mode);                        \
+    } else {                                                                                          \
+        g_ScriptState->cursor -= 2;                                                                   \
+    }
+
 u8*         func_801F2E88(void);
 extern u8   Area_UpdateShots(void);
 extern void func_801F4A5C(u8* pairs, s32 facing);

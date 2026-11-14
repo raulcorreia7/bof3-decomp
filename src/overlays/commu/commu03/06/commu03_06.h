@@ -6,7 +6,8 @@
 
 #include "shared/etc.h"
 
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 /* Entries of the handler tables. */
 #define COMMU03_STEP_COUNT  3
 #define COMMU03_STEP0_COUNT 2
