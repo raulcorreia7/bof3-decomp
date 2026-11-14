@@ -7,7 +7,7 @@ MATCH void func_801F2C04(void) {
     if (g_FrameCount & 0x3) {
         return;
     }
-    actor_slot             = Actor_FindFreeSlot();
+    actor_slot             = Actor_FindFreeSpawned();
     D_1F800000.view.raw[0] = actor_slot;
     if (actor_slot == GAME_NONE) {
         return;

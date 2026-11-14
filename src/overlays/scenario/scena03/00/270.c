@@ -15,13 +15,13 @@ MATCH void func_801F6EB4(void) {
     u32  cell3;
     s16* scratch;
 
-    g_Task->unk_03 = Actor_FindFree();
+    g_Task->unk_03 = Actor_FindFreeField();
     if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
     g_Actors[g_Task->unk_03].header.flags = 1;
-    g_Task->unk_04                        = Actor_FindFree();
+    g_Task->unk_04                        = Actor_FindFreeField();
     if (g_Task->unk_04 == GAME_NONE) {
         g_Actors[g_Task->unk_03].header.flags = 0;
         return;
@@ -230,7 +230,7 @@ MATCH void func_801F7E6C(void) {
 
     effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
-        slot = Actor_FindFreeSlot();
+        slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
             spawned                    = &g_SpawnedActors[slot];
             effects[i]                 = spawned;
@@ -333,7 +333,26 @@ MATCH void func_801F844C(void) {
     SYS_DISPATCH_TASK(D_801FCFA0, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F8490);
+MATCH void func_801F8490(void) {
+    Scena03Work* work;
+
+    work                   = SCN_LINE;
+    work->line.unk_00      = 0x600;
+    work->line.unk_06      = 0x100;
+    work->line.unk_08      = 0x100;
+    work->line.unk_02      = rand() & 0x700;
+    work->line.unk_04      = rand() & 0xF00;
+    work->line.color.blue  = 255;
+    work->line.color.green = 255;
+    work->line.color.red   = 255;
+    if (rand() & 1) {
+        work->line.color.red = 0;
+    }
+    if (rand() & 1) {
+        work->line.color.blue = 0;
+    }
+    g_Task->header.mode++;
+}
 
 MATCH void func_801F853C(void) {
     Scena03Work* work;

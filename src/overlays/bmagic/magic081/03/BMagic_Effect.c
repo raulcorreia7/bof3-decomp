@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(SAVE_AccessFile);
+INCLUDE_ASM(BMagic_UpdateRottenBreath);
 
 INCLUDE_ASM(func_801EED44);
 

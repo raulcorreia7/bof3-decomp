@@ -6,7 +6,7 @@ MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
     u8 column;
 
     if (search != 0) {
-        result = GFX_AllocPaletteCell(mode);
+        result = GFX_FindFreePaletteCell(mode);
     } else {
         result = GFX_FindPaletteCell(value);
         value  = 0xFF;

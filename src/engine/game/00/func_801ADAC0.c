@@ -6,7 +6,7 @@
 MATCH void func_801ADAC0(s8 actor_slot) {
     s8 value;
 
-    g_Task->param.unk_0B = Actor_FindFreeSlot();
+    g_Task->param.unk_0B = Actor_FindFreeSpawned();
     if (g_Task->param.unk_0B != GAME_NONE) {
         g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
         g_SpawnedActors[g_Task->param.actor_slot].type         = 0x19;

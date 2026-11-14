@@ -5,7 +5,7 @@ MATCH void func_801F5698(void) {
     Actor*        work;
     u8            index;
 
-    index = Actor_FindFreeSlot();
+    index = Actor_FindFreeSpawned();
     if (index != GAME_NONE) {
         slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;

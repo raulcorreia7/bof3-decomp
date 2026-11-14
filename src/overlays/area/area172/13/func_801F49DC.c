@@ -3,7 +3,7 @@
 MATCH void func_801F49DC(void) {
     s32 actor_index;
 
-    actor_index = Actor_FindFreeSlot() & BYTE_MASK;
+    actor_index = Actor_FindFreeSpawned() & BYTE_MASK;
     if (actor_index != GAME_NONE) {
         g_SpawnedActors[actor_index].header.flags = ACTOR_FLAG_IN_USE;
         g_SpawnedActors[actor_index].type         = 0x92;

@@ -11,6 +11,7 @@
  * Volatility is a per-access property, not part of the layout: code that must reload the cell on every
  * evaluation keeps its volatile spelling; the views below are the non-volatile layout. */
 
+#include "common/vector.h"
 #include "psx/mem.h"
 #include "psx/psyq.h"
 #include "types.h"
@@ -95,20 +96,17 @@ ASSERT_OFFSET(ScratchPadEffect, vectors, 0x14);
 /* The sparkle ray cells at 0x00: the sparkle's screen point (0x00, 0x02), the sweep angle (0x06) and
  * the RGB shade the rays fade to (0x08, 0x0A, 0x0C). */
 typedef struct ScratchPadRay {
-    u16 x; /* 0x00 */
-    u16 y; /* 0x02 */
-    u8  pad_04[2];
-    s16 angle; /* 0x06 */
-    u16 red;   /* 0x08 */
-    u16 green; /* 0x0A */
-    u16 blue;  /* 0x0C */
+    u16        x; /* 0x00 */
+    u16        y; /* 0x02 */
+    u8         pad_04[2];
+    s16        angle; /* 0x06 */
+    ColorRGB16 shade; /* 0x08 */
 } ScratchPadRay;
 
 #define SCRATCH_PAD_RAY_VIEW_SIZE 0x0E
 ASSERT_SIZE(ScratchPadRay, SCRATCH_PAD_RAY_VIEW_SIZE);
 ASSERT_OFFSET(ScratchPadRay, angle, 0x06);
-ASSERT_OFFSET(ScratchPadRay, red, 0x08);
-ASSERT_OFFSET(ScratchPadRay, blue, 0x0C);
+ASSERT_OFFSET(ScratchPadRay, shade, 0x08);
 
 /* The scratchpad seen as one object: the raw byte view the loader streams through, plus one member per
  * mode. The views are prefixes (0x48 or less); the raw view is the full 1 KiB. */

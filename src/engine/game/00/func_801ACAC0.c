@@ -9,18 +9,18 @@ MATCH void func_801ACAC0(void) {
     s8     tint_5F;
 
     work_5D = g_Task;
-    tint_5D = work_5D->tint.signed_bytes.unk_5D;
+    tint_5D = work_5D->tint.signed_bytes.delta.red;
     if (tint_5D != -0x80) {
-        work_5D->tint.signed_bytes.unk_5D = (tint_5D - 4);
+        work_5D->tint.signed_bytes.delta.red = (tint_5D - 4);
     }
     work_5E = g_Task;
-    tint_5E = work_5E->tint.signed_bytes.unk_5E;
+    tint_5E = work_5E->tint.signed_bytes.delta.green;
     if (tint_5E != -0x80) {
-        work_5E->tint.signed_bytes.unk_5E = (tint_5E - 4);
+        work_5E->tint.signed_bytes.delta.green = (tint_5E - 4);
     }
-    tint_5F = g_Task->tint.signed_bytes.unk_5F;
+    tint_5F = g_Task->tint.signed_bytes.delta.blue;
     if (tint_5F != -0x80) {
-        g_Task->tint.signed_bytes.unk_5F = (tint_5F - 4);
+        g_Task->tint.signed_bytes.delta.blue = (tint_5F - 4);
     }
     if ((g_Task->tint.word & ~0xFF) == 0x80808000) {
         GFX_FreePaletteFade(g_CurrentActor->unk_93);

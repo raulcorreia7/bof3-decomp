@@ -46,7 +46,7 @@ MATCH void func_801F90C0(void) {
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            slot                   = Actor_FindFreeSlot();
+            slot                   = Actor_FindFreeSpawned();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags                     = 1;
@@ -77,7 +77,7 @@ MATCH void func_801F90C0(void) {
                 break;
             }
             Area_StartScrollRoute(0);
-            slot                   = Actor_FindFreeSlot();
+            slot                   = Actor_FindFreeSpawned();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags                     = 1;

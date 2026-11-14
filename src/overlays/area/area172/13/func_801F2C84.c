@@ -9,10 +9,10 @@ MATCH void func_801F2C84(void) {
     work = g_Task;
     step = work->timer;
     if (step != 0) {
-        shade                   = ~(step * 255 / 90);
-        work->tint.bytes.unk_5F = shade;
-        work->tint.bytes.unk_5E = shade;
-        work->tint.bytes.unk_5D = shade;
+        shade                      = ~(step * 255 / 90);
+        work->tint.bytes.rgb.blue  = shade;
+        work->tint.bytes.rgb.green = shade;
+        work->tint.bytes.rgb.red   = shade;
     } else {
         work->header.mode = 2;
     }

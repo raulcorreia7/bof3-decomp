@@ -67,10 +67,10 @@ MATCH void func_801A57F0(u8* script) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5F = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.flags  = script[3] & 0xF;
+    g_Task->tint.bytes.rgb.red   = 0;
+    g_Task->tint.bytes.rgb.blue  = 0;
+    g_Task->tint.bytes.rgb.green = 0;
+    g_Task->tint.bytes.flags     = script[3] & 0xF;
 
     func_801A4914();
 

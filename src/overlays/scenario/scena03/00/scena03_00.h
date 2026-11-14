@@ -11,19 +11,17 @@
 /* The line record func_801F88FC draws at +0x0C of the task row: five
  * halfwords it rotates and projects, then the line colour. */
 typedef struct Scena03Line {
-    s16 unk_00; /* +0x00 */
-    s16 unk_02; /* +0x02 */
-    s16 unk_04; /* +0x04 */
-    s16 unk_06; /* +0x06 */
-    s16 unk_08; /* +0x08 */
-    u8  red;    /* +0x0A */
-    u8  green;  /* +0x0B */
-    u8  blue;   /* +0x0C */
+    s16       unk_00; /* +0x00 */
+    s16       unk_02; /* +0x02 */
+    s16       unk_04; /* +0x04 */
+    s16       unk_06; /* +0x06 */
+    s16       unk_08; /* +0x08 */
+    ColorRGB8 color;  /* +0x0A */
 } Scena03Line;
 
 ASSERT_SIZE(Scena03Line, 0x0E);
 ASSERT_OFFSET(Scena03Line, unk_06, 0x06);
-ASSERT_OFFSET(Scena03Line, red, 0x0A);
+ASSERT_OFFSET(Scena03Line, color, 0x0A);
 
 /* The head of the task row this scene reads as its line record. */
 typedef struct Scena03Work {

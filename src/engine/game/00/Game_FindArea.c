@@ -1,5 +1,6 @@
 #include "game_00.h"
 
+/* returns the index of the handler row of g_GameAreaId, or GAME_AREA_HANDLER_COUNT when no row matches. */
 MATCH u8 Game_FindArea(void) {
     s32 count;
     s32 offset;
