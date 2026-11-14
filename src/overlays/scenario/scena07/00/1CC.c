@@ -538,7 +538,47 @@ MATCH s32 func_801F9A80(SceneEffectRow* row) {
     return landed;
 }
 
-INCLUDE_ASM(func_801F9BDC);
+/* Draw a ring of 16 translucent triangles around the row, on the ground below it. */
+MATCH void func_801F9BDC(SceneEffectRow* row) {
+    DVECTOR  center;
+    DVECTOR  edge;
+    s32      pos[3];
+    POLY_G3* prim;
+    u8       i;
+    u16      angle;
+
+    pos[0] = row->x;
+    pos[1] = row->y;
+    pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+    Area_ProjectPoint(pos, &center);
+    angle  = 0;
+    i      = 0;
+    pos[0] = row->x + (rcos(0) << 2);
+    pos[1] = row->y + (rsin(0) << 2);
+    pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+    Area_ProjectPoint(pos, &edge);
+    do {
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = center.vx;
+        prim->y0 = center.vy;
+        angle += 256;
+        prim->x1 = edge.vx;
+        prim->y1 = edge.vy;
+        pos[0]   = row->x + (rcos(angle) << 2);
+        pos[1]   = row->y + (rsin(angle) << 2);
+        i++;
+        pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+        Area_ProjectPoint(pos, &edge);
+        prim->x2 = edge.vx;
+        prim->y2 = edge.vy;
+        setRGB0(prim, 64, 64, 64);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, 0, 0, 0);
+        GFX_AddPrim(1, sizeof(POLY_G3));
+    } while (i < 16);
+}
 
 MATCH void func_801F9DA8(void) {
     s32 index;
