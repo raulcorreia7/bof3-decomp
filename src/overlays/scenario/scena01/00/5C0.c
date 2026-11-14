@@ -65,7 +65,7 @@ MATCH void func_801F7480(void) {
     if ((g_FrameCount & 0x1) == 0) {
         Area_AddSpark();
     }
-    Scene_DrawSparkCell();
+    Area_StepSparks();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 32;
@@ -78,7 +78,7 @@ MATCH void func_801F752C(void) {
     if ((g_FrameCount & 0x1) == 0) {
         Area_AddSpark();
     }
-    Scene_DrawSparkCell();
+    Area_StepSparks();
     if (--g_Task->timer == 0) {
         g_Task->timer = 252;
         g_Task->header.mode += 1;
@@ -87,7 +87,7 @@ MATCH void func_801F752C(void) {
 
 MATCH void func_801F75C8(void) {
     func_801F7678(g_Task->timer);
-    Scene_DrawSparkCell();
+    Area_StepSparks();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -95,7 +95,7 @@ MATCH void func_801F75C8(void) {
 }
 
 MATCH void func_801F7644(void) {
-    if (!(Scene_DrawSparkCell() & BYTE_MASK)) {
+    if (!(Area_StepSparks() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -108,7 +108,7 @@ INCLUDE_ASM(func_801F7678);
 
 #include "shared/Area_AddSpark.h"
 
-INCLUDE_ASM(Scene_DrawSparkCell);
+#include "shared/Area_StepSparks.h"
 
 MATCH void func_801F7D04(void) {
     s16 screen_x;

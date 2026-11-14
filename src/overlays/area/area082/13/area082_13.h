@@ -18,7 +18,7 @@ extern u8       D_801F5734[];
 extern Callback D_801F576C[];
 
 void func_801F3500(void);
-u8   func_801F3AAC(void);
+u8   Area_StepSparks(void);
 void func_801F4430(void);
 void func_801F5388(s32 arg0);
 

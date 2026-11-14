@@ -28,7 +28,7 @@ segments:
       - [0xC7C, c, func_801F387C]
       - [0xD10, c, Area_ClearWorkColumn]
       - [0xD3C, c, Area_AddSpark]
-      - [0xEAC, c, func_801F3AAC]
+      - [0xEAC, c, Area_StepSparks]
       - [0xF5C, c, func_801F3B5C]
       - [0xFA0, c, func_801F3BA0]
       - [0x107C, c, func_801F3C7C]

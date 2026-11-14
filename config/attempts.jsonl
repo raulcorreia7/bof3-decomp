@@ -300,7 +300,6 @@
 {"function": "emi/scenario/sce15ef3/00@0x801D2634", "tried": "blocker: case constant 1 kept in v0", "first_diff": "+0x8C.", "score": null}
 {"function": "emi/scenario/scena01/00@0x801F729C", "tried": "blocker: constant order", "first_diff": "+0x68 li v0,100 (candidate) against li v1,320 (retail).", "score": null}
 {"function": "emi/scenario/scena01/00@0x801F7AE4", "tried": "needs: particle record type at 0x800E4800.", "first_diff": "", "score": null}
-{"function": "emi/scenario/scena01/00@0x801F7C54", "tried": "needs: particle record type at 0x800E4800.", "first_diff": "", "score": null}
 {"function": "emi/scenario/scena01/00@0x801FD28C", "tried": "needs: D_801FE280 declaration.", "first_diff": "", "score": null}
 {"function": "emi/scenario/scena02/00@0x801FE1C0", "tried": "blocker: nops after each lbu [v0]", "first_diff": "0x801FE1F0 nop against lui a0.", "score": null}
 {"function": "emi/scenario/scena04/00@0x801F6DD4", "tried": "blocker: schedule", "first_diff": "+4 li a0,0x10 before the s0 save.", "score": null}
@@ -384,7 +383,6 @@
 {"function": "emi/world02/area077/14@0x801F41B4", "tried": "tried: raw pointer loops over 0x800E4800/0x800E4830 with fixed strides; didn't match", "first_diff": "", "score": null}
 {"function": "emi/world02/area079/13@0x801F2CB4", "tried": "blocker: jump table is in existing .data, not generated .rodata.", "first_diff": "", "score": null}
 {"function": "emi/world02/area082/13@0x801F3398", "tried": "blocker: register allocation", "first_diff": "lui 0x1f80 work register v0 (retail) against a0.", "score": null}
-{"function": "emi/world02/area082/13@0x801F3AAC", "tried": "for loop over spark rows; live flag order; i init forms; score: structure matches, regalloc only", "first_diff": "live flag in a0 not v1 (move v1,zero)", "score": null}
 {"function": "emi/world02/area082/13@0x801F4334", "tried": "blocker: register allocation", "first_diff": "+0xA0 lui v0 against v1.", "score": null}
 {"function": "emi/world02/area082/13@0x801F4C90", "tried": "blocker: expression grouping", "first_diff": "0x801F4CB0 mfhi a1 against a2.", "score": null}
 {"function": "emi/world02/area082/13@0x801F5388", "tried": "blocker: channel order", "first_diff": "andi v1,a0,0xFFFF (candidate) where retail multiplies the red channel first.", "score": null}

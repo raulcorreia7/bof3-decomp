@@ -3921,7 +3921,7 @@ jtbl_801F715C = { addr = 0x801F715C, type = "Callback", source = "The switch tab
 Area_DrawSparkCell = { addr = 0x801F7A24, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
 Area_ClearWorkColumn = { addr = 0x801F7AB8, type = "func", source = "Clears one byte of each row in the actor window." }
 Area_AddSpark = { addr = 0x801F7AE4, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
-Scene_DrawSparkCell = { addr = 0x801F7C54, type = "func", source = "wraps Area_DrawSparkCell" }
+Area_StepSparks = { addr = 0x801F7C54, type = "func", source = "Steps every live spark: drops it by its fall speed, draws it and frees it below the work floor; one body shared by scena01 and area082." }
 Scene_EnterCedarWoods = { addr = 0x801F8000, type = "func", source = "requests the area change to Cedar Woods before Nue and resets scene script state in scena01" }
 Scene_InitOpeningParty = { addr = 0x801FE10C, type = "func", source = "loads Ryu pajamas, Teepo, and Rei archives and joins Ryu pajamas as the opening party in scena01" }
 Scene_SetPartyRyuTeepoRei = { addr = 0x801FE1B0, type = "func", source = "sets young Ryu's character id, streams party archives and joins Ryu, Teepo and Rei for the scene setup" }
@@ -4941,6 +4941,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 Area_DrawSparkCell = { addr = 0x801F387C, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
 Area_ClearWorkColumn = { addr = 0x801F3910, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 Area_AddSpark = { addr = 0x801F393C, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
+Area_StepSparks = { addr = 0x801F3AAC, type = "func", source = "Steps every live spark: drops it by its fall speed, draws it and frees it below the work floor; one body shared by scena01 and area082." }
 
 ["emi/world02/area084/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
