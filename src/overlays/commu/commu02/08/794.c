@@ -174,7 +174,21 @@ MATCH void func_801D25CC(void) {
     }
 }
 
-INCLUDE_ASM(func_801D269C);
+MATCH void func_801D269C(s32 x, s32 y) {
+    POLY_F3* poly;
+    u8       colour;
+
+    if ((g_FrameCount & 8) != 0) {
+        colour = ((g_FrameCount & 6) << 5) | 0x3F;
+    } else {
+        colour = ((~g_FrameCount & 6) << 5) | 0x3F;
+    }
+    poly = g_GfxPrimCursor;
+    SetPolyF3(poly);
+    setXY3(poly, x, y, x - 6, y - 6, x + 6, y - 6);
+    setRGB0(poly, 0, colour, 0);
+    GFX_AddPrim(1, sizeof(POLY_F3));
+}
 
 MATCH s32 func_801D2750(s32 limit) {
     s32 roll;
