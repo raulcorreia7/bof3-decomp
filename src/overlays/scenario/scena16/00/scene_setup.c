@@ -14,16 +14,16 @@ typedef struct SceneEventDispatch {
 ASSERT_SIZE(SceneEventDispatch, 0x40);
 ASSERT_OFFSET(SceneEventDispatch, handlers, 0x34);
 
-typedef union SceneSlots {
+typedef union ScenarioSlots {
     Callback           handlers[16];
     SceneEventDispatch event;
-} SceneSlots;
+} ScenarioSlots;
 
-ASSERT_SIZE(SceneSlots, 0x40);
+ASSERT_SIZE(ScenarioSlots, 0x40);
 
 /* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from
  * entries 5 and 8; func_801F8358 calls entries 13-15 as (record, state). */
-static SceneSlots D_801F8538 = {{
+static ScenarioSlots D_801F8538 = {{
     func_801F6C90,
     (Callback)func_801F8358,
     (Callback)func_801F83A0,
