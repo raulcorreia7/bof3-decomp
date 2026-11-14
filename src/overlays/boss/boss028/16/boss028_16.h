@@ -7,6 +7,9 @@
 #include "overlays/boss/boss.h"
 #include "overlays/battle/battle.h"
 
+/* The scratchpad work area is the party member the boss moves; each use reloads the cell. */
+#define BOSS028_PARTY ((PartyMember*)g_Task)
+
 extern u8       D_800C2140[];
 extern u16      D_800C214C[];
 extern Callback D_800C2154[];

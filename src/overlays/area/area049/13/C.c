@@ -31,7 +31,31 @@ INCLUDE_ASM(func_801170D8);
 
 INCLUDE_ASM(func_801172D0);
 
-INCLUDE_ASM(func_80117410);
+MATCH u8 func_80117410(void) {
+    u8  scratch[32];
+    u8  i;
+    s32 result;
+
+    Area_SetCameraMatrix(scratch);
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 0));
+    GFX_AddPrim(2, 12);
+
+    result     = 0;
+    D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
+    i          = 0;
+
+    do {
+        if (D_801181DC->flags != 0) {
+            D_80118194[D_801181DC->flags_01]();
+            func_801170D8(D_801181DC);
+            result = 1;
+        }
+        D_801181DC++;
+        i++;
+    } while (i < 16);
+
+    return result;
+}
 
 MATCH void func_80117514(void) {
     AreaSprite* work = D_801181DC;

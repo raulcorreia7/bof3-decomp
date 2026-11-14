@@ -45,25 +45,6 @@ ASSERT_SIZE(SceneEffectRow, 0x20);
 ASSERT_OFFSET(SceneEffectRow, x, 0x04);
 ASSERT_OFFSET(SceneEffectRow, unk_1C, 0x1C);
 
-/* One 0x1C-byte row of the burst table at AREA_WORK; a row is free while active is 0. */
-typedef struct SceneBurstRow {
-    u8  active; /* +0x00 */
-    u8  unk_1;  /* +0x01 */
-    u8  life;   /* +0x02 */
-    u8  unk_3;  /* +0x03 */
-    u8  unk_4;  /* +0x04 */
-    u8  pad_5[3];
-    s32 unk_8;  /* +0x08 */
-    s32 x;      /* +0x0C */
-    s32 y;      /* +0x10 */
-    s32 z;      /* +0x14 */
-    s32 unk_18; /* +0x18 */
-} SceneBurstRow;
-
-ASSERT_SIZE(SceneBurstRow, SCRATCH_ROW_STRIDE);
-ASSERT_OFFSET(SceneBurstRow, x, 0x0C);
-ASSERT_OFFSET(SceneBurstRow, z, 0x14);
-
 /* The spawn rows func_801FC094 reads: the cell position and the scene timer value that spawn an
  * actor there. Twelve rows fill the span up to D_801FDE88. */
 typedef struct SceneTimerSpawn {
@@ -150,7 +131,7 @@ static inline void Scene_PlaceAtLead(void) {
 }
 
 void      func_801F83D0(u8* row);
-void      func_801F8478(SceneBurstRow* row);
+void      func_801F8478(u8* row);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);
 void      func_801FA38C(void);

@@ -265,7 +265,7 @@ MATCH void func_801F7AB0(void) {
     if (g_Task->vx >= 9) {
         row = func_801F8394();
         if (((g_Task->vx & 3) == 0) && (row != NULL)) {
-            func_801F8478((SceneBurstRow*)row);
+            func_801F8478(row);
         }
     }
     func_801F85D8();
@@ -412,23 +412,26 @@ MATCH u8* func_801F8394(void) {
 
 INCLUDE_ASM(func_801F83D0);
 
-MATCH void func_801F8478(SceneBurstRow* row) {
-    u16 elevation;
-    u16 azimuth;
-    s16 radius;
+/* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
+MATCH void func_801F8478(u8* row) {
+    s32* cell;
+    u16  yaw;
+    u16  pitch;
+    s16  radius;
 
-    row->active = 1;
-    row->unk_1  = 0;
-    row->life   = 8;
-    row->unk_3  = 0;
-    row->unk_8  = 0;
-    row->unk_4  = 1;
-    elevation   = rand() & 0x7FF;
-    azimuth     = rand() & 0xFFF;
-    radius      = ((rand() % 2) << 12) | (rand() & 0xFFF);
-    row->x      = g_Task->pos.x.fixed + ((radius * FIXED_MUL(rsin(elevation), rcos(azimuth))) >> 8);
-    row->y      = g_Task->pos.y.fixed + ((radius * FIXED_MUL(rsin(elevation), rsin(azimuth))) >> 8);
-    row->z      = g_Task->pos.z.fixed + radius * rcos(elevation) + (2 << 24);
+    cell    = (s32*)row;
+    row[0]  = 1;
+    row[1]  = 0;
+    row[2]  = 8;
+    row[3]  = 0;
+    cell[2] = 0;
+    row[4]  = 1;
+    yaw     = rand() & 0x7FF;
+    pitch   = rand() & 0xFFF;
+    radius  = ((rand() % 2) << 12) | (rand() & 0xFFF);
+    cell[3] = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    cell[4] = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    cell[5] = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
 }
 
 MATCH u8 func_801F85D8(void) {

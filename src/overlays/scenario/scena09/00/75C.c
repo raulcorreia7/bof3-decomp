@@ -245,7 +245,7 @@ MATCH void func_801FAC88(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             g_GameFlags ^= 0x0E;
             Game_ClearScriptActive();
-            g_ScriptVars[0] = 0;
+            *g_ScriptVars = 0;
             Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 14:
@@ -494,9 +494,9 @@ MATCH s32 func_801FD5A8(void) {
             return 1;
         } else if (SYS_TestFlag(g_SceneFlags, 0x1D) == 0) {
             Game_SetScriptActive();
-            D_80146875      = 50;
-            g_ScriptVars[0] = 0;
-            D_80146874      = 6;
+            D_80146875    = 50;
+            *g_ScriptVars = 0;
+            D_80146874    = 6;
             return 1;
         } else if (SYS_TestFlag(g_SceneFlags, 0x11) == 0) {
             Game_SetScriptActive();
