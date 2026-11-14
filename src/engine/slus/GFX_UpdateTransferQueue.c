@@ -22,9 +22,8 @@ MATCH void GFX_UpdateTransferQueue(void) {
             rect.x = table1[index];
             rect.y = table2[index];
             record = (u16*)(&D_80145A04)[index];
-            rect.w = *record++;
-            rect.h = *record++;
-            kind   = *(s32*)record;
+            setWH(&rect, *record++, *record++);
+            kind = *(s32*)record;
             if (kind == 1) {
                 GFX_ExpandRgb555((u32*)(record + 2), rect);
             } else if (kind == 2) {
