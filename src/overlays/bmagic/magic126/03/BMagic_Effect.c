@@ -404,7 +404,7 @@ MATCH void func_801F0494(void) {
         g_BattleEffects[slot].arg.unk_09   = 46;
         g_BattleEffectBattler->param.unk_0B += 1;
         for (i = 0; i < 64; i++) {
-            slot                         = func_801F1110();
+            slot                         = BMagic_AllocEffect();
             D_801F12BC[slot].battler     = g_BattleEffectBattler;
             D_801F12BC[slot].header.mode = 0;
             D_801F12BC[slot].unk_04      = i;
@@ -530,17 +530,8 @@ MATCH void func_801F0DA4(void) {
 
 INCLUDE_ASM(func_801F0ED0);
 
-MATCH u32 func_801F1110(void) {
-    u8 index;
-
-    for (index = 0u; index < 128; index++) {
-        if ((D_801F12BC[index].header.flags & 0x1) == 0) {
-            D_801F12BC[index].header.flags |= 1;
-            return index;
-        }
-    }
-    return 0xFFu;
-}
+/* func_801F1110 */
+#include "overlays/bmagic/BMagic_AllocEffect.h"
 
 MATCH void func_801F116C(void) {
     D_801F22BC->header.flags = 0;

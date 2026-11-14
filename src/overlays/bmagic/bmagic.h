@@ -436,6 +436,8 @@ void Effect_SetActorMatrixQuarterRoll(void);
 void Effect_DrawScreenFade(void);
 /* Defined in Effect_DrawSparkleDisc.h, which a member includes after its first call. */
 void Effect_DrawSparkleDisc(void);
+/* Defined in Effect_DrawShadedDisc.h, which a member includes after its first call. */
+void Effect_DrawShadedDisc(void);
 /* Defined in Effect_DrawTexturedQuad.h, which a member includes after its first call. */
 void Effect_DrawTexturedQuad(void);
 

@@ -623,6 +623,7 @@ Effect_RequestTargetOnTimerZero = { addr = 0x801EEF9C, type = "func", source = "
 Effect_PlayOnZeroTick = { addr = 0x801EF004, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic053 (Lavaburst)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF064, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic053." }
 Effect_SetActiveActorMatrix = { addr = 0x801EF728, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler, times the camera in magic053 (Lavaburst)." }
+Effect_DrawShadedDisc = { addr = 0x801EF7E0, type = "func", source = "Draws a disc of 64 shaded triangles around the effect cell, its shade the timer times 4, in magic053 (Lavaburst)." }
 BMagic_DrawDarkRing = { addr = 0x801EFA30, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 Effect_SetActorMatrix = { addr = 0x801F0110, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic053 (Lavaburst)." }
 BMagic_AllocEffect = { addr = 0x801F0494, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic053 (Lavaburst)." }
@@ -1539,6 +1540,7 @@ BMagic_DrawGlowRingInner = { addr = 0x801EF7A4, type = "func", source = "draws 1
 Effect_CountUpTimersAndStep = { addr = 0x801EFC28, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up and advances header.step (byte 0x02) when the counter reaches 16 in magic126 (ShadowBreath)." }
 Effect_CountDownTimer = { addr = 0x801EFCE4, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic126 (ShadowBreath)." }
 Effect_TickOnTimerNegative = { addr = 0x801F0650, type = "func", source = "Counts the effect timer (byte 0x09) down by two; once negative lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic126 (ShadowBreath)." }
+BMagic_AllocEffect = { addr = 0x801F1110, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 128 slots are in use in magic126 (ShadowBreath)." }
 g_BMagicEffectModes = { addr = 0x801F125C, source = "Handlers of magic126 (ShadowBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic129/03"]
@@ -2027,6 +2029,7 @@ BMagic_DispatchEffectMode = { addr = 0x801EF004, type = "func", source = "Runs t
 Effect_SwingCameraAngle = { addr = 0x801EF540, type = "func", source = "Swings the area camera pitch by 20 per frame, up on odd effect timer (byte 0x09) values and down on even ones; at zero resets the pitch, reloads the timer with the image's swing ticks and advances header.step (byte 0x02) in magic226 (MeteorStrike)." }
 Effect_StartTint = { addr = 0x801EF5F0, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero sets ACTOR_FLAG_SEMI_TRANSPARENT in header.flags, loads the tint selector (byte 0x5C) with 1, clears the tint colours (bytes 0x5D to 0x5F) and advances header.step (byte 0x02) in magic226 (MeteorStrike)." }
 Effect_SetActiveActorMatrix = { addr = 0x801EF75C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler, times the camera in magic226 (MeteorStrike)." }
+Effect_DrawShadedDisc = { addr = 0x801EF814, type = "func", source = "Draws a disc of 64 shaded triangles around the effect cell, its shade the timer times 4, in magic226 (MeteorStrike)." }
 BMagic_DrawDarkRing = { addr = 0x801EFA64, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 Effect_SetActorMatrix = { addr = 0x801F0724, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic226 (MeteorStrike)." }
 BMagic_AllocEffect = { addr = 0x801F0B8C, type = "func", source = "Claims the first free slot of the 48-entry effect table (bit 0 of header.flags) and returns its index, or 0xFF when every slot is in use in magic226 (MeteorStrike)." }
