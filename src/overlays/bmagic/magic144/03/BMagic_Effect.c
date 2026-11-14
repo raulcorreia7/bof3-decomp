@@ -135,13 +135,7 @@ MATCH void func_801EF294(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x125;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = 0x180;
@@ -159,9 +153,7 @@ MATCH void func_801EF294(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -171,13 +163,7 @@ MATCH void func_801EF294(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 }
@@ -247,25 +233,16 @@ MATCH void func_801F01D0(void) {
     D_1F800000.view.effect.params[0] = (rand() & 0xF) + 0x40;
     D_1F800000.view.effect.params[7] = g_Task->unk_09 * 10;
     for (i = 0; i < 8; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_Task->unk_2E.half;
-        prim->y0 = g_Task->unk_30.half;
-        prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
-        prim->y1 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
-        prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]);
-        prim->y2 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]);
-        prim->r0 = D_1F800000.view.effect.params[7];
-        prim->g0 = D_1F800000.view.effect.params[7] / 5;
-        prim->b0 = D_1F800000.view.effect.params[7] / 5;
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]),
+               g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]),
+               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]));
+        setRGB0(prim, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7] / 5, D_1F800000.view.effect.params[7] / 5);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));

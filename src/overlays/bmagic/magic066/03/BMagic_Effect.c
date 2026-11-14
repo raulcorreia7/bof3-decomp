@@ -140,7 +140,7 @@ MATCH void func_801EF158(void) {
     s32       i;
     s16       angle;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x2A5 : 0xB5;
+    tpage = getTPage(1, 1, 320, 256);
     GFX_AddDitheredDrawMode(2, tpage);
     D_1F800000.view.effect.params[0] = g_Task->unk_14;
     angle                            = g_Task->param.unk_0B;
@@ -176,14 +176,7 @@ MATCH void func_801EF158(void) {
         poly->tpage                      = GetTPage(1, 1, 0x340, 0x100);
         poly->clut                       = GetClut(0, 0x1FA);
         D_1F800000.view.effect.params[4] = 0xE0 - (((g_Task->param.unk_0B + i) & 7) << 4);
-        poly->u0                         = 0;
-        poly->v0                         = D_1F800000.view.effect.params[4];
-        poly->u1                         = 0xF8;
-        poly->v1                         = D_1F800000.view.effect.params[4];
-        poly->u2                         = 0;
-        poly->v2                         = D_1F800000.view.effect.params[4] + 0x10;
-        poly->u3                         = 0xF8;
-        poly->v3                         = D_1F800000.view.effect.params[4] + 0x10;
+        setUV4(poly, 0, D_1F800000.view.effect.params[4], 0xF8, D_1F800000.view.effect.params[4], 0, D_1F800000.view.effect.params[4] + 0x10, 0xF8, D_1F800000.view.effect.params[4] + 0x10);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_FT4));
     }
@@ -228,7 +221,7 @@ MATCH void func_801EF158(void) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x225 : 0x95;
+    tpage = getTPage(1, 0, 320, 256);
     GFX_AddDitheredDrawMode(2, tpage);
 }
 
@@ -288,29 +281,14 @@ MATCH void func_801EFCC8(void) {
             D_1F800014[0].vx                 = (rcos(0x200) * D_1F800000.view.effect.params[0]) >> 12;
             D_1F800014[0].vy                 = (rsin(0x200) * D_1F800000.view.effect.params[0]) >> 12;
             D_1F800014[0].vz                 = -D_1F800000.view.effect.params[2];
-            D_1F800014[1].vx                 = (rcos(0x600) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[1].vy                 = (rsin(0x600) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[1].vz                 = -D_1F800000.view.effect.params[2];
-            D_1F800014[2].vx                 = (rcos(0xE00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[2].vy                 = (rsin(0xE00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[2].vz                 = -D_1F800000.view.effect.params[2];
-            D_1F800014[3].vx                 = (rcos(0xA00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[3].vy                 = (rsin(0xA00) * D_1F800000.view.effect.params[0]) >> 12;
-            D_1F800014[3].vz                 = -D_1F800000.view.effect.params[2];
-            poly->tpage                      = GetTPage(0, 1, 0x340, 0x100);
-            poly->clut                       = GetClut(0, 0x1E2);
-            poly->u0                         = 0;
-            poly->v0                         = 0;
-            poly->u1                         = 0x20;
-            poly->v1                         = 0;
-            poly->u2                         = 0;
-            poly->v2                         = 0x20;
-            poly->u3                         = 0x20;
-            poly->v3                         = 0x20;
+            setVector(&D_1F800014[1], (rcos(0x600) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0x600) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            setVector(&D_1F800014[2], (rcos(0xE00) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0xE00) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            setVector(&D_1F800014[3], (rcos(0xA00) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0xA00) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            poly->tpage = GetTPage(0, 1, 0x340, 0x100);
+            poly->clut  = GetClut(0, 0x1E2);
+            setUVWH(poly, 0, 0, 32, 32);
             D_1F800000.view.effect.params[1] = 0x41 - (D_801F00B0[i] >> 1) * 4;
-            poly->r0                         = D_1F800000.view.effect.params[1];
-            poly->g0                         = D_1F800000.view.effect.params[1];
-            poly->b0                         = D_1F800000.view.effect.params[1];
+            setRGB0(poly, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
             GFX_AddPrim(3, sizeof(POLY_FT4));
         }
@@ -324,8 +302,6 @@ MATCH void func_801EFFB0(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 3072;
-    rot.vy = 0;
-    rot.vz = 0;
+    setVector(&rot, 3072, 0, 0);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }

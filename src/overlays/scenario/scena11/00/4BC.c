@@ -121,14 +121,14 @@ MATCH void func_801F82D8(s32 slot) {
     g_Task->unk_2B       = (g_Task->unk_2B + 1);
     g_Task->unk_48       = 0;
 
-    work                     = g_Task;
-    work->tint.bytes.unk_5D  = 0;
-    other                    = g_Task;
-    work->vz                 = 0;
-    work->gravity            = -8;
-    other->tint.bytes.unk_5E = 0;
+    work                        = g_Task;
+    work->tint.bytes.rgb.red    = 0;
+    other                       = g_Task;
+    work->vz                    = 0;
+    work->gravity               = -8;
+    other->tint.bytes.rgb.green = 0;
 
-    g_Task->tint.bytes.unk_5F = 0;
+    g_Task->tint.bytes.rgb.blue = 0;
     Actor_SelectScript(0xE);
 
     g_Task->header.mode = 3;

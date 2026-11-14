@@ -95,8 +95,7 @@ MATCH void func_801F0428(void) {
     prim                             = GFX_BeginPolyG4(1);
     D_1F800000.view.scenario.math_00 = g_Task->unk_09 * 3 + 18;
     D_1F800000.view.scenario.math_08 = ((g_Task->unk_09 + 6) & 0x1F) << 7;
-    prim->x0                         = FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 160;
-    prim->y0                         = FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 120;
+    setXY0(prim, FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 160, FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 120);
     D_1F800000.view.scenario.math_08 = ((g_Task->unk_09 + 14) & 0x1F) << 7;
     prim->x1                         = FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 160;
     prim->y1                         = FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 120;

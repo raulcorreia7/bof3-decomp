@@ -50,10 +50,10 @@ MATCH void func_801A6F58(u8* script) {
 
     Actor_SetOptionFlags(script + 0xC);
 
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5F = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.flags  = 2;
+    g_Task->tint.bytes.rgb.red   = 0;
+    g_Task->tint.bytes.rgb.blue  = 0;
+    g_Task->tint.bytes.rgb.green = 0;
+    g_Task->tint.bytes.flags     = 2;
 
     func_801A4914();
 

@@ -118,9 +118,7 @@ MATCH void func_801EF654(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = g_Task->timer << 4;
+    setVector(&rot, 0, 0, g_Task->timer << 4);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
@@ -146,18 +144,13 @@ MATCH void func_801EF710(void) {
     }
     i = 0;
     do {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_BattleEffectBattler->unk_2E.half;
-        prim->y0 = g_BattleEffectBattler->unk_30.half;
+        setXY0(prim, g_BattleEffectBattler->unk_2E.half, g_BattleEffectBattler->unk_30.half);
         angle    = i << 7;
         prim->x1 = g_BattleEffectBattler->unk_2E.half + FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);
         prim->y1 = g_BattleEffectBattler->unk_30.half + FIXED_MUL(rcos(angle), D_1F800000_WORD[0]);

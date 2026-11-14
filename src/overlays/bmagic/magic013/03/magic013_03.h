@@ -32,7 +32,7 @@ void func_801F0164(void);
 /* Draws the wave band of 16 shaded quads around the effect cell, turned by the facing table; LIFT is added to the
  * band height for the first and second corners. The caller declares prim, depth, flag, i and tpage. */
 #define MAGIC013_DRAW_WAVE_BAND(lift)                                                                                                                                         \
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;                                                                                                         \
+    tpage = getTPage(0, 1, 320, 256);                                                                                                                                         \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                                   \
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));                                                                                           \
     WAVE_SHADE       = g_Task->unk_04 * 12;                                                                                                                                   \

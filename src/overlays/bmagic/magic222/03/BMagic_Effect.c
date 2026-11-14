@@ -177,22 +177,14 @@ MATCH void func_801EF87C(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x125;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = g_Task->unk_14;
     D_1F800000.view.effect.params[5] = g_Task->unk_09 << 2;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
 
     for (i = 1; i <= 64; i++) {
         prim             = GFX_BeginPolyG3(1);
@@ -301,11 +293,7 @@ MATCH void func_801F0218(void) {
     long      flag;
     s32       tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -313,22 +301,14 @@ MATCH void func_801F0218(void) {
     SetSemiTrans(prim, 1);
     D_1F800000.view.effect.params[0] = 0x100;
     D_1F80000A                       = g_Task->timer << 3;
-    D_1F800014[0].vx                 = FIXED_MUL(rcos(ANGLE_45), D_1F800000.view.effect.params[0]);
-    D_1F800014[0].vy                 = FIXED_MUL(rsin(ANGLE_45), D_1F800000.view.effect.params[0]);
-    D_1F800014[0].vz                 = 0;
-    D_1F800014[1].vx                 = FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vy                 = FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[2].vx                 = FIXED_MUL(rcos(3584), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rsin(3584), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[3].vx                 = FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]);
-    D_1F800014[3].vy                 = FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]);
-    D_1F800014[3].vz                 = 0;
+    setVector(&D_1F800014[0], FIXED_MUL(rcos(ANGLE_45), D_1F800000.view.effect.params[0]), FIXED_MUL(rsin(ANGLE_45), D_1F800000.view.effect.params[0]), 0);
+    setVector(&D_1F800014[1], FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]), FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]), 0);
+    setVector(&D_1F800014[2], FIXED_MUL(rcos(3584), D_1F800000.view.effect.params[0]), FIXED_MUL(rsin(3584), D_1F800000.view.effect.params[0]), 0);
+    setVector(&D_1F800014[3], FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]), FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]), 0);
     setTPage(prim, 0, 1, 832, 256);
     /* FAKE: a volatile store keeps the clut write ahead of the texture-point stores; the best pure-C body is 0x2C8 against retail's 0x2D4. */
     *FAKE_VOLATILE_PTR(u16, &prim->clut) = GetClut(0, 482);
-    setUV4(prim, 0, 128, 32, 128, 0, 160, 32, 160);
+    setUVWH(prim, 0, 128, 32, 32);
     setRGB0(prim, D_1F80000A, D_1F80000A, D_1F80000A);
     RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
@@ -398,13 +378,7 @@ MATCH void func_801F07A8(void) {
     s16          x;
     s16          y;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     work                             = g_Task;
@@ -419,8 +393,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
+        setXY0(prim, x, y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]));
         prim->x2 = x;
         prim->y2 = y;
         prim->x1 = x + 16;
@@ -436,8 +409,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]);
+        setXY0(prim, x, y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]));
         prim->x2 = x;
         prim->y2 = y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
         prim->x1 = x + 16;
@@ -453,8 +425,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
+        setXY0(prim, x, y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]));
         prim->x2 = x;
         prim->y2 = y;
         prim->x1 = x + 16;
@@ -470,8 +441,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]);
+        setXY0(prim, x, y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]));
         prim->x2 = x;
         prim->y2 = y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
         prim->x1 = x + 16;

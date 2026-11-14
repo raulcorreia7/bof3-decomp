@@ -26,9 +26,9 @@ MATCH void func_801F6EE8(void) {
 MATCH void func_801F6F24(void) {
     g_Task->timer -= 1;
     if (g_Task->timer != 0) {
-        g_Task->tint.bytes.unk_5D += 7;
-        g_Task->tint.bytes.unk_5E += 7;
-        g_Task->tint.bytes.unk_5F += 7;
+        g_Task->tint.bytes.rgb.red += 7;
+        g_Task->tint.bytes.rgb.green += 7;
+        g_Task->tint.bytes.rgb.blue += 7;
     } else {
         g_Task->header.mode = 2;
     }
@@ -73,11 +73,11 @@ MATCH void func_801F7198(void) {
 MATCH void func_801F71DC(void) {
     Actor* work;
 
-    work                    = g_Task;
-    work->tint.bytes.unk_5F = 0;
-    work->tint.bytes.unk_5E = 0;
-    work->tint.bytes.unk_5D = 0;
-    g_Task->param.unk_0B    = 0x33;
+    work                       = g_Task;
+    work->tint.bytes.rgb.blue  = 0;
+    work->tint.bytes.rgb.green = 0;
+    work->tint.bytes.rgb.red   = 0;
+    g_Task->param.unk_0B       = 0x33;
     Message_StartAreaMessage(g_Task->param.unk_0B);
     g_GameStateIndex    = GAME_REQUEST_MESSAGE;
     g_Task->header.mode = 1;
@@ -95,9 +95,9 @@ MATCH void func_801F7248(void) {
 MATCH void func_801F72A0(void) {
     g_Task->timer -= 1;
     if (g_Task->timer != 0) {
-        g_Task->tint.bytes.unk_5D += 2;
-        g_Task->tint.bytes.unk_5E += 2;
-        g_Task->tint.bytes.unk_5F += 2;
+        g_Task->tint.bytes.rgb.red += 2;
+        g_Task->tint.bytes.rgb.green += 2;
+        g_Task->tint.bytes.rgb.blue += 2;
     } else {
         g_Task->timer       = 30;
         g_Task->header.mode = 3;

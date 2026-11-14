@@ -80,9 +80,8 @@ MATCH void func_801EF040(void) {
         pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.radius * rcos(angle)) >> 4);
         pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.radius * rsin(angle)) << 4);
         Area_ProjectPoint(pos, &screen);
-        prim->x0 = screen.vx;
-        prim->y0 = screen.vy;
-        pos[0]   = D_801EFA9C.origin[0] + TO_COORD(16);
+        setXY0(prim, screen.vx, screen.vy);
+        pos[0] = D_801EFA9C.origin[0] + TO_COORD(16);
         Area_ProjectPoint(pos, &screen);
         prim->x1 = screen.vx;
         prim->y1 = screen.vy;
@@ -128,15 +127,9 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     POLY_G4* quad;
     LINE_F2* line;
 
-    quad     = GFX_BeginPolyG4(1);
-    quad->x0 = pair->previous.screen[1].vx;
-    quad->y0 = pair->previous.screen[1].vy;
-    quad->x1 = pair->previous.screen[0].vx;
-    quad->y1 = pair->previous.screen[0].vy;
-    quad->x2 = pair->current.screen[1].vx;
-    quad->y2 = pair->current.screen[1].vy;
-    quad->x3 = pair->current.screen[0].vx;
-    quad->y3 = pair->current.screen[0].vy;
+    quad = GFX_BeginPolyG4(1);
+    setXY4(quad, pair->previous.screen[1].vx, pair->previous.screen[1].vy, pair->previous.screen[0].vx, pair->previous.screen[0].vy, pair->current.screen[1].vx, pair->current.screen[1].vy,
+           pair->current.screen[0].vx, pair->current.screen[0].vy);
     setRGB0(quad, 64, 64, 0);
     setRGB1(quad, 0, 0, 0);
     setRGB2(quad, 64, 64, 0);
@@ -154,10 +147,7 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     line = GFX_CURSOR(LINE_F2);
     SetLineF2(line);
     SetSemiTrans(line, 1);
-    line->x0 = pair->previous.screen[1].vx;
-    line->y0 = pair->previous.screen[1].vy;
-    line->x1 = pair->current.screen[1].vx;
-    line->y1 = pair->current.screen[1].vy;
+    setXY2(line, pair->previous.screen[1].vx, pair->previous.screen[1].vy, pair->current.screen[1].vx, pair->current.screen[1].vy);
     setRGB0(line, 32, 32, 0);
     GFX_AddPrim(1, sizeof(LINE_F2));
 }
@@ -213,11 +203,8 @@ MATCH void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha) {
     u16      next;
 
     for (angle = 0; angle < ONE; angle += 0x100) {
-        prim     = GFX_BeginPolyG3(1);
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
-        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        prim = GFX_BeginPolyG3(1);
+        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));
         next     = angle + 0x100;
         prim->x2 = x + FIXED_MUL(radius, rcos(next));
         prim->y2 = y + FIXED_MUL(radius, rsin(next));

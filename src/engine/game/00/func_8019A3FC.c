@@ -33,22 +33,22 @@ MATCH void func_8019A3FC(void) {
 
     if (g_Task->unk_06 == 3) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        work                           = g_Task;
-        work->tint.bytes.flags         = 1;
-        work                           = g_Task;
-        work->tint.signed_bytes.unk_5F = -8;
-        work->tint.signed_bytes.unk_5E = -8;
-        work->tint.signed_bytes.unk_5D = -8;
-        work                           = g_Task;
-        work->timer                    = 20;
+        work                                = g_Task;
+        work->tint.bytes.flags              = 1;
+        work                                = g_Task;
+        work->tint.signed_bytes.delta.blue  = -8;
+        work->tint.signed_bytes.delta.green = -8;
+        work->tint.signed_bytes.delta.red   = -8;
+        work                                = g_Task;
+        work->timer                         = 20;
     } else {
-        g_Task->tint.bytes.flags = 0;
-        ptr                      = g_Task;
-        ptr->tint.bytes.unk_5F   = 0;
-        ptr->tint.bytes.unk_5E   = 0;
-        ptr->tint.bytes.unk_5D   = 0;
-        work                     = g_Task;
-        work->timer              = 16;
+        g_Task->tint.bytes.flags  = 0;
+        ptr                       = g_Task;
+        ptr->tint.bytes.rgb.blue  = 0;
+        ptr->tint.bytes.rgb.green = 0;
+        ptr->tint.bytes.rgb.red   = 0;
+        work                      = g_Task;
+        work->timer               = 16;
     }
 
     ((void (*)(u8, Actor*))Actor_SelectScript)(s_SceneHandlerIds[g_Task->unk_06], other);

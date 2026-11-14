@@ -10,19 +10,19 @@ MATCH void func_801F3740(void) {
     spad = g_Task;
     spad->pos.x.fixed += spad->vx;
     spad->pos.y.fixed += spad->vy;
-    tuneA = spad->tint.signed_bytes.unk_5D;
+    tuneA = spad->tint.signed_bytes.delta.red;
     if (tuneA != -0x80) {
-        spad->tint.signed_bytes.unk_5D = (tuneA - 2);
+        spad->tint.signed_bytes.delta.red = (tuneA - 2);
     }
     spad2 = g_Task;
-    tuneB = spad2->tint.signed_bytes.unk_5E;
+    tuneB = spad2->tint.signed_bytes.delta.green;
     if (tuneB != -0x80) {
-        spad2->tint.signed_bytes.unk_5E = (tuneB - 2);
-        spad2                           = g_Task;
+        spad2->tint.signed_bytes.delta.green = (tuneB - 2);
+        spad2                                = g_Task;
     }
-    tuneC = spad2->tint.signed_bytes.unk_5F;
+    tuneC = spad2->tint.signed_bytes.delta.blue;
     if (tuneC != -0x80) {
-        spad2->tint.signed_bytes.unk_5F = (tuneC - 2);
+        spad2->tint.signed_bytes.delta.blue = (tuneC - 2);
     }
     if ((g_Task->tint.word & ~0xFF) == 0x80808000) {
         g_Task->header.flags |= 0x40;

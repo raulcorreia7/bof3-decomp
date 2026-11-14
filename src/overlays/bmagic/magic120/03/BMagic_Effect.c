@@ -288,11 +288,7 @@ MATCH void func_801F0274(void) {
     u32          i;
     u8           enemy;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     for (j = 0; j < 3; j++) {
@@ -345,29 +341,14 @@ MATCH void func_801F04B0(void) {
             D_1F800014[0].vx                 = FIXED_MUL(rcos(512), D_1F800000.view.effect.params[0]);
             D_1F800014[0].vy                 = FIXED_MUL(rsin(512), D_1F800000.view.effect.params[0]);
             D_1F800014[0].vz                 = z;
-            D_1F800014[1].vx                 = FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]);
-            D_1F800014[1].vy                 = FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]);
-            D_1F800014[1].vz                 = z;
-            D_1F800014[2].vx                 = FIXED_MUL(rcos(3584), D_1F800000.view.effect.params[0]);
-            D_1F800014[2].vy                 = FIXED_MUL(rsin(3584), D_1F800000.view.effect.params[0]);
-            D_1F800014[2].vz                 = z;
-            D_1F800014[3].vx                 = FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]);
-            D_1F800014[3].vy                 = FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]);
-            D_1F800014[3].vz                 = z;
-            prim->tpage                      = GetTPage(0, 1, 832, 256);
-            prim->clut                       = GetClut(32, 506);
-            prim->u0                         = 8;
-            prim->v0                         = 64;
-            prim->u1                         = 40;
-            prim->v1                         = 64;
-            prim->u2                         = 8;
-            prim->v2                         = 96;
-            prim->u3                         = 40;
-            prim->v3                         = 96;
+            setVector(&D_1F800014[1], FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]), FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]), z);
+            setVector(&D_1F800014[2], FIXED_MUL(rcos(3584), D_1F800000.view.effect.params[0]), FIXED_MUL(rsin(3584), D_1F800000.view.effect.params[0]), z);
+            setVector(&D_1F800014[3], FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]), FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]), z);
+            prim->tpage = GetTPage(0, 1, 832, 256);
+            prim->clut  = GetClut(32, 506);
+            setUVWH(prim, 8, 64, 32, 32);
             D_1F800000.view.effect.params[3] = 97 - D_801F0D0C[i] * 6;
-            prim->r0                         = D_1F800000.view.effect.params[3];
-            prim->g0                         = D_1F800000.view.effect.params[3];
-            prim->b0                         = D_1F800000.view.effect.params[3];
+            setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
             GFX_AddPrim(3, sizeof(POLY_FT4));
         }
