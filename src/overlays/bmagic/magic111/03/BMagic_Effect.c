@@ -138,7 +138,7 @@ MATCH void func_801EF330(void) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);
+    setXYWH(prim, 0, 0, 319, 239);
     D_1F800000_HALF[0] = (g_Task->unk_0C & 0x3F) << 6;
     D_1F800002         = (g_Task->unk_10 & 0x3F) << 6;
     r                  = g_Task->unk_09 * (FIXED_MUL(rsin(D_1F800000_HALF[0]), 6) + 8);

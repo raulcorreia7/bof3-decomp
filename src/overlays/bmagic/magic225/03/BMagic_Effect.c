@@ -298,7 +298,7 @@ MATCH void func_801EFCA0(void) {
     SetSemiTrans(prim, g_Task->param.unk_0B);
     shade  = &D_1F80000C;
     *shade = g_Task->timer * 15 + 15;
-    setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);
+    setXYWH(prim, 0, 0, 319, 239);
     setRGB0(prim, *shade, *shade, *shade);
     GFX_AddPrim((u8)g_Task->unk_29, sizeof(POLY_F4));
 }

@@ -364,7 +364,7 @@ MATCH void func_801F01F0(void) {
     setRGB3(prim, shade, shade, shade);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
-    setUV4(prim, 0x40, 0x40, 0xC0, 0x40, 0x40, 0xFF, 0xC0, 0xFF);
+    setUVWH(prim, 0x40, 0x40, 128, 191);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_GT4));
 
     prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -380,7 +380,7 @@ MATCH void func_801F01F0(void) {
     setRGB3(prim, shade, shade, shade);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
-    setUV4(prim, 0x40, 0x30, 0xC0, 0x30, 0x40, 0x40, 0xC0, 0x40);
+    setUVWH(prim, 0x40, 0x30, 128, 16);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_GT4));
 }
 

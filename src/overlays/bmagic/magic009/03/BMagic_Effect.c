@@ -158,7 +158,7 @@ MATCH void func_801EF3B8(void) {
            g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.view.scenario.math_00));
     prim->tpage = GetTPage(0, 1, 832, 256);
     prim->clut  = GetClut(32, 506);
-    setUV4(prim, 128, 32, 160, 32, 128, 64, 160, 64);
+    setUVWH(prim, 128, 32, 32, 32);
     setRGB0(prim, g_Task->timer * 10, 0, g_Task->timer * 9);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }

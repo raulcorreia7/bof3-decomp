@@ -292,7 +292,7 @@ MATCH void func_801EFCC8(void) {
             D_1F800014[3].vz                 = -D_1F800000.view.effect.params[2];
             poly->tpage                      = GetTPage(0, 1, 0x340, 0x100);
             poly->clut                       = GetClut(0, 0x1E2);
-            setUV4(poly, 0, 0, 0x20, 0, 0, 0x20, 0x20, 0x20);
+            setUVWH(poly, 0, 0, 32, 32);
             D_1F800000.view.effect.params[1] = 0x41 - (D_801F00B0[i] >> 1) * 4;
             setRGB0(poly, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);

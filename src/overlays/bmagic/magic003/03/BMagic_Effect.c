@@ -469,7 +469,7 @@ MATCH void func_801F0164(s32 index) {
         if (D_801F0AA0[(u8)index][i] != 0xFF) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
-            setXY4(prim, x, y, x + 12, y, x, y + 12, x + 12, y + 12);
+            setXYWH(prim, x, y, 12, 12);
             prim->tpage = GetTPage(0, 0, 0x3C0, 0);
             prim->clut  = GetClut(0, 0x1E0);
             setRGB0(prim, 0x80, 0x80, 0x80);
@@ -498,7 +498,7 @@ MATCH void func_801F03F0(s32 dir) {
     x    = g_Task->unk_2E.half;
     y    = g_Task->unk_30.half;
     SetPolyFT4(prim);
-    setXY4(prim, x, y, x + 12, y, x, y + 12, x + 12, y + 12);
+    setXYWH(prim, x, y, 12, 12);
     prim->tpage = GetTPage(0, 0, 0x3C0, 0);
     prim->clut  = GetClut(D_801F0AD4[(u8)dir], 0x1E0);
     u           = ((u8)dir + 15) * 12;

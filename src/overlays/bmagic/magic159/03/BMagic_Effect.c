@@ -130,7 +130,7 @@ MATCH void func_801EF08C(void) {
            g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]));
     prim->tpage = GetTPage(0, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
-    setUV4(prim, 8, 8, 87, 8, 8, 72, 87, 72);
+    setUVWH(prim, 8, 8, 79, 64);
     setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
     setRGB1(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
     setRGB2(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);

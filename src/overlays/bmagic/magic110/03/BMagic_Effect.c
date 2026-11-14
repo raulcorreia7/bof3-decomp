@@ -109,7 +109,7 @@ MATCH void func_801EF148(void) {
     *shade = g_Task->timer * 15;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, 0, 0, 0x13F, 0, 0, 0x78, 0x13F, 0x78);
+    setXYWH(prim, 0, 0, 319, 120);
     setRGB0(prim, *shade, *shade, *shade);
     setRGB1(prim, *shade, *shade, *shade);
     setRGB2(prim, *shade, *shade, *shade);
@@ -118,7 +118,7 @@ MATCH void func_801EF148(void) {
     prim = GFX_CURSOR(POLY_G4);
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, 0, 0x78, 0x13F, 0x78, 0, 0x167, 0x13F, 0x167);
+    setXYWH(prim, 0, 0x78, 319, 239);
     setRGB0(prim, *shade, *shade, *shade);
     setRGB1(prim, *shade, *shade, *shade);
     setRGB2(prim, *shade, *shade, *shade);
@@ -314,7 +314,7 @@ MATCH void func_801F01E8(void) {
     setTPage(prim, 0, 1, 832, 256);
     /* FAKE: a volatile store keeps the clut write ahead of the texture-point stores; the plain setClut sinks it below them. */
     *FAKE_VOLATILE_PTR(u16, &prim->clut) = GetClut(0, 482);
-    setUV4(prim, 0, 128, 32, 128, 0, 160, 32, 160);
+    setUVWH(prim, 0, 128, 32, 32);
     setRGB0(prim, LOHU(D_1F800000.view.effect.params[2]), LOHU(D_1F800000.view.effect.params[2]), LOHU(D_1F800000.view.effect.params[2]));
     RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     GFX_AddPrim(3, sizeof(POLY_FT4));

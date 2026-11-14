@@ -145,7 +145,7 @@ MATCH void func_801F00C4(void) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     if (g_BattleEffectBattler->facing & 1) {
-        setXY4(prim, 0, 0, 319, 0, 0, 239, 319, 239);
+        setXYWH(prim, 0, 0, 319, 239);
     } else {
         setXY4(prim, 319, 0, 0, 0, 319, 239, 0, 239);
     }

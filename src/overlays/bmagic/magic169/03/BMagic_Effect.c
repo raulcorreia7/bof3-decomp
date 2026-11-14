@@ -114,7 +114,7 @@ MATCH void func_801EF070(void) {
     setXY4(prim, x - 0x38, y - 0x60, x + 0x38, y - 0x60, x - 0x38, y, x + 0x38, y);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
-    setUV4(prim, 8, 8, 120, 8, 8, 104, 120, 104);
+    setUVWH(prim, 8, 8, 112, 96);
     setRGB0(prim, *shade, *shade, *shade);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
