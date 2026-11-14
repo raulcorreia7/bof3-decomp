@@ -1,3 +1,36 @@
 #include "area197_13.h"
 
-INCLUDE_ASM(func_801F2FC4);
+MATCH s32 func_801F2FC4(void) {
+    AreaSparkRow* spark;
+    s32           alive;
+    u16           i;
+    u8            life;
+
+    alive = 0;
+    spark = MEM_PTR(AreaSparkRow, AREA_WORK);
+    i     = 0;
+    do {
+        if (spark->active != 0) {
+            spark->pos.x += spark->vx;
+            spark->pos.y += spark->vy;
+            spark->pos.z += spark->vz;
+            spark->vz -= TO_COORD(4);
+            if (spark->pos.z < -TO_COORD(512)) {
+                spark->pos.z = -TO_COORD(512);
+                spark->vz    = -spark->vz;
+            }
+            spark->shade -= 2;
+            spark->frame = rand() & 7;
+            life         = spark->life - 1;
+            spark->life  = life;
+            if (life == 0) {
+                spark->active = 0;
+            }
+            func_801F2E74(spark);
+            alive = 1;
+        }
+        spark++;
+        i++;
+    } while (i < 128);
+    return alive;
+}

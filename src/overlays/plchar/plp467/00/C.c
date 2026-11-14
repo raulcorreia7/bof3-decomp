@@ -110,8 +110,9 @@ MATCH void func_801CF8FC(void) {
 
 #include "overlays/plchar/Char_WalkStep.h"
 
-INCLUDE_ASM(func_801CFC8C);
+#include "overlays/plchar/Char_RunFacingProbe.h"
 
+MATCH void func_801CFC8C(void){CHAR_RUN_FACING_PROBE()}
 #include "overlays/plchar/Char_AdvanceScript.h"
 
 #include "overlays/plchar/Char_ProbeCellSpawn.h"

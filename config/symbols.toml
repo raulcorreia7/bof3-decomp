@@ -2226,6 +2226,7 @@ Boss_EndBattle2 = { addr = 0x800C1B3C, type = "func", source = "Ends the boss ba
 
 ["emi/boss/boss025/13"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads the area enemy record enemy_index into the EnemyBattler row of battle slot slot." }
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of func_800C2208: 6 jump targets of its jr dispatch." }
 jtbl_800C181C = { addr = 0x800C181C, type = "Callback", size = 0x18, source = "The switch table of Boss_HandleBattleEvent2: 6 jump targets of its jr dispatch." }
 jtbl_800C1834 = { addr = 0x800C1834, type = "Callback", size = 0x18, source = "The switch table of Boss_HandleBattleEvent: 6 jump targets of its jr dispatch." }
