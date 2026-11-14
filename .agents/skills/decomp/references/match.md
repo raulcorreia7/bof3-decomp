@@ -85,6 +85,12 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
      source (a raw `andi` beside an `andi 0xFF` copy is an `s32` parameter with a `u8` local),
      then fix the registers it disturbs with the rules above.
 
+   Ask the compiler before guessing: GCC's own dumps say what it decided. Compile the file with
+   `-dl -dg` added to its flags from `build/meson/compile_commands.json`: `<file>.lreg` lists each
+   pseudo-register with its uses, the insns it lives across and its hard register; `<file>.greg`
+   gives the order the global allocator took them in, their conflicts and each spill. Change the
+   source until those numbers put the registers where retail has them.
+
    Script the forms: write the body once with its variable parts as a table, build each with
    `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.
 
