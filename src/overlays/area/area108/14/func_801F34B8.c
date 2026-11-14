@@ -19,7 +19,7 @@ MATCH void func_801F34B8(void) {
     dst   = AREA108_VERTEX_DST;
     state = AREA108_STATE_BASE;
     count = 0;
-    work  = AREA108_STATE_WORK;
+    work  = AREA108_STATE_OFFSET;
     for (;; work += 12) {
         phase    = work[4];
         step     = work[2];
