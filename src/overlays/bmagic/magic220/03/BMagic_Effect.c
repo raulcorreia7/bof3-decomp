@@ -212,7 +212,22 @@ MATCH void func_801EFFA4(void) {
 
 INCLUDE_ASM(func_801F002C);
 
-INCLUDE_ASM(func_801F010C);
+MATCH void func_801F010C(void) {
+    s16* angle_cell;
+    s32  phase;
+    u8   count;
+
+    angle_cell  = &D_1F800004;
+    phase       = g_Task->param.unk_0B;
+    *angle_cell = phase << 8;
+    g_Task->pos.x.fixed += rsin((s16)(phase << 8)) * 3;
+    g_Task->pos.y.fixed += rcos(*angle_cell) * 3;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F01C8(void) {
     s16* angle_cell;
