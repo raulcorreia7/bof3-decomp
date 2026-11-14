@@ -494,7 +494,23 @@ MATCH u8* func_801F9DD4(void) {
     return NULL;
 }
 
-INCLUDE_ASM(func_801F9E10);
+MATCH void func_801F9E10(SceneEffectRow* row) {
+    s32 radius;
+    s32 angle;
+    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 0x10);
+
+    row->active = 1;
+    row->unk_1  = 0;
+    row->unk_2  = 16;
+    row->unk_18 = 0;
+    row->unk_14 = 0;
+    radius      = ((rand() % 2) << 16) | ((rand() & 0xFF) << 8);
+    angle       = rand() & 0xFC0;
+    row->x      = g_Task->pos.x.fixed + FIXED_MUL(radius, rcos(angle));
+    row->y      = g_Task->pos.y.fixed + FIXED_MUL(radius, rsin(angle));
+    row->unk_C = row->unk_1C = Area_SampleHeight(row->x, row->y) << 16;
+}
 
 INCLUDE_ASM(func_801F9EFC);
 

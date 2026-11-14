@@ -26,6 +26,25 @@ extern Callback D_801FDDC8[];
 extern Callback D_801FDDD0[];
 extern void (*D_801FDDF0[])(u8* row);
 
+/* One 32-byte row of the effect table at AREA_WORK + 0x95C; a row is free while active is 0. */
+typedef struct SceneEffectRow {
+    u8  active; /* +0x00 */
+    u8  unk_1;  /* +0x01 */
+    u8  unk_2;  /* +0x02 */
+    u8  unk_3;  /* +0x03 */
+    s32 x;      /* +0x04 */
+    s32 y;      /* +0x08 */
+    s32 unk_C;  /* +0x0C */
+    s32 unk_10; /* +0x10 */
+    s32 unk_14; /* +0x14 */
+    s32 unk_18; /* +0x18 */
+    s32 unk_1C; /* +0x1C */
+} SceneEffectRow;
+
+ASSERT_SIZE(SceneEffectRow, 0x20);
+ASSERT_OFFSET(SceneEffectRow, x, 0x04);
+ASSERT_OFFSET(SceneEffectRow, unk_1C, 0x1C);
+
 /* The spawn rows func_801FC094 reads: the cell position and the scene timer value that spawn an
  * actor there. Twelve rows fill the span up to D_801FDE88. */
 typedef struct SceneTimerSpawn {
