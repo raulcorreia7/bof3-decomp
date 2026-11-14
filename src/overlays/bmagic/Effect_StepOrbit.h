@@ -19,7 +19,7 @@ MATCH void Effect_StepOrbit(void) {
     if (g_BMagicOrbit->unk_03 < 7) {
         g_BMagicOrbit->unk_03++;
     }
-    timer                          = g_BMagicOrbit->frames_left - 1;
+    timer                      = g_BMagicOrbit->frames_left - 1;
     g_BMagicOrbit->frames_left = timer;
     if (timer == 0) {
         g_BMagicOrbit->header.step++;

@@ -24,8 +24,8 @@
  * pointer also move bytes). */
 extern u8 D_80146866;
 
-#define g_AreaScrollTargetY   ((u32*)&g_AreaScrollTargetY)
-#define g_AreaLoads           ((void**)g_AreaLoads)
+#define g_AreaScrollTargetY       ((u32*)&g_AreaScrollTargetY)
+#define g_AreaLoads               ((void**)g_AreaLoads)
 
 #define SCENE_EFFECT_SLOT_COUNT   30
 #define SCENE_EFFECT_CELL_COUNT   12

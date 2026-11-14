@@ -2,8 +2,8 @@
 
 MATCH void func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 shade) {
     BattleIconPalette clut_table;
-    POLY_FT4*        primitive;
-    s32              u0;
+    POLY_FT4*         primitive;
+    s32               u0;
 
     clut_table = D_801D0C64;
     GFX_AddDrawMode(GetTPage(0, 0, 256, 256));

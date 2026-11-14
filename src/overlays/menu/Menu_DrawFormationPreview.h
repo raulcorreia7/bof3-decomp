@@ -19,7 +19,7 @@ typedef struct Formations {
 
 /* func_801DCDB8 (start), func_801D98C0 (shop), func_801D3E18 (bate), func_801D4DC0 (shisu) */
 MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle) {
-    Formations   table;
+    Formations       table;
     FormationOrder   order;
     u8               shade[PARTY_SLOT_COUNT];
     FormationLayout* layout;

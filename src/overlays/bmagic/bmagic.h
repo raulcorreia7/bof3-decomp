@@ -347,20 +347,20 @@ extern BMagicOrbit* g_BMagicOrbit;
 /* Steps the orbit work around its battler: the angle advances and the position follows it at the work's radius, the
  * vertical span grows by unk_0A, and every other frame the effect timer drops; at zero the battler's ticker drops and
  * CLEAR runs. A statement macro. */
-#define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                              \
-    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x40) & 0xFFF;                                                            \
+#define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                  \
+    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x40) & 0xFFF;                                                        \
     g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(g_BMagicOrbit->angle) * g_BMagicOrbit->radius;      \
     g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbit->angle) * g_BMagicOrbit->radius; \
-    COORD_INT(g_BMagicOrbit->pos.z) += g_BMagicOrbit->unk_0A;                                                                      \
-    g_BMagicOrbit->unk_0B++;                                                                                                           \
-    if (g_FrameCount & 0x1) {                                                                                                              \
-        if (--g_BMagicOrbit->unk_09 == 0) {                                                                                            \
-            g_BattleEffectBattler->param.unk_0B--;                                                                                         \
-            CLEAR();                                                                                                                       \
-        }                                                                                                                                  \
+    COORD_INT(g_BMagicOrbit->pos.z) += g_BMagicOrbit->unk_0A;                                                                  \
+    g_BMagicOrbit->unk_0B++;                                                                                                   \
+    if (g_FrameCount & 0x1) {                                                                                                  \
+        if (--g_BMagicOrbit->unk_09 == 0) {                                                                                    \
+            g_BattleEffectBattler->param.unk_0B--;                                                                             \
+            CLEAR();                                                                                                           \
+        }                                                                                                                      \
     }
 
-extern MagicModule       D_801EEC00;
+extern MagicModule   D_801EEC00;
 /* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054),
    D_801EF6CC (magic154), D_801EF718 (magic166), D_801EF72C (magic138), D_801EF770 (magic218), D_801EF784 (magic158),
    D_801EF7A0 (magic075), D_801EF818 (magic048), D_801EF89C (magic009), D_801EF8A0 (magic213), D_801EF8BC (magic115),
@@ -381,7 +381,7 @@ extern MagicModule       D_801EEC00;
    D_801F0BB0 (magic060), D_801F0C10 (magic062), D_801F0C38 (magic121), D_801F0C40 (magic226), D_801F0CA8 (magic120),
    D_801F0D14 (magic082), D_801F0D54 (magic222), D_801F0EEC (magic083), D_801F121C (magic114), D_801F125C (magic126),
    D_801F1394 (magic064), D_801F1630 (magic015), D_801F1BC4 (magic131), D_801F1BEC (magic008), D_801F24A4 (magic151) */
-extern Callback          g_BMagicEffectModes[];
+extern Callback      g_BMagicEffectModes[];
 extern BMagicEffect* D_801F17B0;
 extern BMagicEffect* D_801F17B4;
 

@@ -194,70 +194,70 @@ ASSERT_OFFSET(FairyVillage, variant_counter, 0x42C);
 ASSERT_OFFSET(FairyVillage, labels, 0x434);
 
 /* Retail-address data symbols, in address order. */
-extern u8               D_801448F2;
-extern s32              D_80145030;
-extern s32              D_8014503C;
-extern s32              D_801455A8;
-extern u32              D_801455AC;
-extern u32              D_801455B0;
-extern u32              D_801455B4;
-extern s32              D_801455B8;
-extern s32              D_801455BC;
-extern u16              D_801455C0;
-extern s8               D_801455C2;
-extern u8               D_801455C6;
-extern u8               D_801457A9[];
-extern u8               D_801457AA[];
-extern u8               D_801457AB[];
-extern s32              D_801457EC; /* end of the group table at 0x801457AC; func_801EF52C and func_801EFEA8 compare a row pointer
+extern u8             D_801448F2;
+extern s32            D_80145030;
+extern s32            D_8014503C;
+extern s32            D_801455A8;
+extern u32            D_801455AC;
+extern u32            D_801455B0;
+extern u32            D_801455B4;
+extern s32            D_801455B8;
+extern s32            D_801455BC;
+extern u16            D_801455C0;
+extern s8             D_801455C2;
+extern u8             D_801455C6;
+extern u8             D_801457A9[];
+extern u8             D_801457AA[];
+extern u8             D_801457AB[];
+extern s32            D_801457EC; /* end of the group table at 0x801457AC; func_801EF52C and func_801EFEA8 compare a row pointer
                            against it */
-extern u8               D_80145E30[];
-extern u8               D_80145E48[];
-extern u8               D_80145E60[];
-extern ShopStock        g_GameShopStock[SHOP_COUNT];
-extern s8               D_801EEC08[];
-extern char             D_801EEC44[];
-extern u8               g_FairyGifts[];
-extern u8               D_801EEC98[];
-extern u8               D_801F2458[];
-extern const u16        D_801F24FC[];
-extern u16              D_801F2514[];
-extern u8               D_801F2523[];
+extern u8             D_80145E30[];
+extern u8             D_80145E48[];
+extern u8             D_80145E60[];
+extern ShopStock      g_GameShopStock[SHOP_COUNT];
+extern s8             D_801EEC08[];
+extern char           D_801EEC44[];
+extern u8             g_FairyGifts[];
+extern u8             D_801EEC98[];
+extern u8             D_801F2458[];
+extern const u16      D_801F24FC[];
+extern u16            D_801F2514[];
+extern u8             D_801F2523[];
 /* The copy-class cells of the overlay's data block: each class's max price,
  * battle count and multiplier. The retail materializes every cell through its
  * own symbol and steps six bytes per class (func_801EFA50). */
-extern u8               D_801F2560; /* the bar limit byte; func_801EFEA8 reads it with lbu at 0x801EFF14 and 0x801EFFE8 */
-extern u8               D_801F2568[][3];
-extern u8               D_801F25A4[][3][3];
+extern u8             D_801F2560; /* the bar limit byte; func_801EFEA8 reads it with lbu at 0x801EFF14 and 0x801EFFE8 */
+extern u8             D_801F2568[][3];
+extern u8             D_801F25A4[][3][3];
 /* D_801F25EC */
-extern Callback         g_FairyCommu01States[FAIRY_COMMU01_STEP_COUNT];
+extern Callback       g_FairyCommu01States[FAIRY_COMMU01_STEP_COUNT];
 /* D_801F2604 */
-extern Callback         g_FairyGiftStates[FAIRY_GIFT_STEP_COUNT];
+extern Callback       g_FairyGiftStates[FAIRY_GIFT_STEP_COUNT];
 /* D_801F2610 */
-extern Callback         g_FairyExploreRewardStates[FAIRY_EXPLORE_REWARD_STEP_COUNT];
-extern u8               g_FairyExploreRewards[];
-extern u8               D_801F2619[];
+extern Callback       g_FairyExploreRewardStates[FAIRY_EXPLORE_REWARD_STEP_COUNT];
+extern u8             g_FairyExploreRewards[];
+extern u8             D_801F2619[];
 /* D_801F2678 */
-extern Callback         g_FairyCommu02States[FAIRY_COMMU02_STEP_COUNT];
+extern Callback       g_FairyCommu02States[FAIRY_COMMU02_STEP_COUNT];
 /* D_801F268C */
-extern const Callback   g_FairyCommu02Events[FAIRY_COMMU02_ENTRY_COUNT];
+extern const Callback g_FairyCommu02Events[FAIRY_COMMU02_ENTRY_COUNT];
 /* D_801F269C */
-extern Callback         g_FairyCommu03States[FAIRY_COMMU03_STEP_COUNT];
+extern Callback       g_FairyCommu03States[FAIRY_COMMU03_STEP_COUNT];
 /* D_801F26B0 */
-extern Callback         g_FairyCommu04States[FAIRY_COMMU04_STEP_COUNT];
-extern FairyVariant     D_801F26CC[1];
+extern Callback       g_FairyCommu04States[FAIRY_COMMU04_STEP_COUNT];
+extern FairyVariant   D_801F26CC[1];
 /* D_801F26EC */
-extern Callback         g_FairyCommu05States[FAIRY_COMMU05_STEP_COUNT];
-extern u8               D_801F2706[][9];
-extern u8               D_801F2708[];
-extern volatile u8      D_801F2928[1];
+extern Callback       g_FairyCommu05States[FAIRY_COMMU05_STEP_COUNT];
+extern u8             D_801F2706[][9];
+extern u8             D_801F2708[];
+extern volatile u8    D_801F2928[1];
 /* Label table rows are the three age buckets; each row holds one entry per
  * record variant. */
-extern u16              D_801F2930[][3];
-extern u8               D_801F2944;
-extern u8               D_801F2945;
-extern u8               D_801F294F;
-extern FairyVillage D_801F24FC_Data;
+extern u16            D_801F2930[][3];
+extern u8             D_801F2944;
+extern u8             D_801F2945;
+extern u8             D_801F294F;
+extern FairyVillage   D_801F24FC_Data;
 
 /* The scratchpad work pointer; each overlay types the pointee for its mode. */
 

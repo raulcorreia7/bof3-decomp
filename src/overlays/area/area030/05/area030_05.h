@@ -21,7 +21,7 @@ typedef enum FishingShopMessageId {
     FISHING_SHOP_MESSAGE_NONE_OWNED       = 75,
     FISHING_SHOP_MESSAGE_NONE_EQUIPPED    = 76,
     FISHING_SHOP_MESSAGE_TOO_GREEDY       = 77,
-    FISHING_SHOP_MESSAGE_QUANTITY_PROMPT  = 78,
+    FISHING_SHOP_MESSAGE_COUNT_PROMPT     = 78,
 } FishingShopMessageId;
 
 /* Work-cost row: two cost bytes followed by two three-byte runs. */

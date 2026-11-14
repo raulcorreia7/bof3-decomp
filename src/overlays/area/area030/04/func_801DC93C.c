@@ -100,7 +100,7 @@ NON_MATCHING void func_801DC93C(void) {
                 message_id = FISHING_MESSAGE_EQUIP_ROD_LURE;
                 goto block_39; /* shared selection join */
             case 1:
-                message_id = FISHING_MESSAGE_DATA_TITLE;
+                message_id = FISHING_MSG_DATA_TITLE;
                 goto block_39; /* shared selection join */
         }
         Menu_DrawCursorSprite((D_80144286 * 48) + 88, 46U, 0);

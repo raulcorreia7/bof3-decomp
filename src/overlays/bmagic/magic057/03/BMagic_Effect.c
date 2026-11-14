@@ -79,7 +79,7 @@ MATCH void func_801EF02C(void) {
 MATCH void func_801EF08C(void) {
     Magic057SecondSteps handlers;
 
-    handlers      = D_801EEC2C;
+    handlers  = D_801EEC2C;
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 0x1) {
@@ -146,7 +146,7 @@ MATCH void func_801EF81C(void) {
 MATCH void func_801EF83C(void) {
     Magic057SecondSteps handlers;
 
-    handlers      = D_801EEC44;
+    handlers  = D_801EEC44;
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((g_Task->header.flags & 0x1) && (g_BattleEffectBattler->timer == 0)) {

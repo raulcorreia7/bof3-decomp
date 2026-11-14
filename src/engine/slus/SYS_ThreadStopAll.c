@@ -6,7 +6,7 @@
 MATCH void SYS_ThreadStopAll(void) {
     Thread*          slot_end;
     volatile Thread* next_slot;
-    s32                    callback_slot;
+    s32              callback_slot;
 
     callback_slot  = 0;
     g_CallbackSlot = D_80143B40;

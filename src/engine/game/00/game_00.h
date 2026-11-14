@@ -52,14 +52,14 @@
     if (WINDOW_EFFECT_BUSY()) {                   \
         do {                                      \
             func_801992B8();                      \
-            SYS_ThreadWait(1u);                     \
+            SYS_ThreadWait(1u);                   \
         } while (WINDOW_EFFECT_BUSY());           \
     }                                             \
-    SYS_ThreadWait(1u);                             \
-    SYS_ThreadWait(1u);                             \
+    SYS_ThreadWait(1u);                           \
+    SYS_ThreadWait(1u);                           \
     EMI_LoadArchive(slot);                        \
     while (EMI_IsReady() == 0) {                  \
-        SYS_ThreadWait(1u);                         \
+        SYS_ThreadWait(1u);                       \
     }                                             \
     GFX_CopyPalette(1u);                          \
     GFX_CopyPalette(2u);                          \

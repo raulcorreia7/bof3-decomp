@@ -189,7 +189,7 @@ MATCH void Fishing_ShopChooseQuantity(void) {
         s_Step = s_Step - 1;
     }
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_QUANTITY_PROMPT));
+    UI_DrawText(24, 20, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_COUNT_PROMPT));
     Fishing_ShopDrawTradeList(1);
     Fishing_ShopDrawQuantity();
     Menu_DrawCursorSprite(26, 107, 0);

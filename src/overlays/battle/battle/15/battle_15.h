@@ -939,8 +939,8 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     BattleEffectSteps handlers;
     PartyMember*      work;
 
-    handlers      = *table;
-    work          = (PartyMember*)g_Task;
+    handlers  = *table;
+    work      = (PartyMember*)g_Task;
     g_Scripts = BATTLE_SCRIPT_TABLE;
     ((Callback*)&handlers)[work->header.mode]();
     g_Scripts = AREA_SCRIPT_TABLE;

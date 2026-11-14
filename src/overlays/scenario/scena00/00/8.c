@@ -2257,19 +2257,19 @@ MATCH void func_801FBE88(void) {
 
 MATCH void func_801FC01C(void) {
     SceneSample* rec;
-    u8*                base;
-    s8                 i;
-    s32                shift;
-    s32                lifetime;
-    s32                slot;
+    u8*          base;
+    s8           i;
+    s32          shift;
+    s32          lifetime;
+    s32          slot;
 
     base = D_80147BD8;
     i    = 0;
     if (*D_80147BDC > 0) {
         do {
-            shift                                    = 0xB - RANDOM_MASK(3);
-            slot                                     = i * sizeof(SceneEffectSlot);
-            rec                                      = (SceneSample*)(i * sizeof(SceneSample) + (s32)base);
+            shift                                            = 0xB - RANDOM_MASK(3);
+            slot                                             = i * sizeof(SceneEffectSlot);
+            rec                                              = (SceneSample*)(i * sizeof(SceneSample) + (s32)base);
             SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 0)  = rec->sample[0] << 16;
             SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 0)  = rec->weight[0] << shift;
             SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 1)  = rec->sample[1] << 16;
@@ -2295,7 +2295,7 @@ MATCH void func_801FC01C(void) {
             SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 11) = rec->sample[11] << 16;
             SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 11) = rec->weight[2] << shift;
 
-            lifetime                                     = RANDOM_MASK(7) + 1;
+            lifetime                                             = RANDOM_MASK(7) + 1;
             SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 0)  = lifetime;
             SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 1)  = lifetime;
             SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 2)  = lifetime;
@@ -2322,9 +2322,9 @@ typedef struct SceneLife {
 MATCH void func_801FC3A0(void) {
     SceneSample* rec;
     SceneLife*   dst;
-    u8*                src_base;
-    u8*                dst_base;
-    s8                 i;
+    u8*          src_base;
+    u8*          dst_base;
+    s8           i;
 
     src_base = D_80147BD8;
     dst_base = D_80147AA8;

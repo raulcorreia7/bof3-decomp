@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BMagicEffectFuncs D_801EEC04;
-extern BMagicEffect* D_801F20DC;
+extern BMagicEffect*     D_801F20DC;
 
 void func_801EED18(void);
 void func_801EF710(void);

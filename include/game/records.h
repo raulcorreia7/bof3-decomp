@@ -120,7 +120,7 @@ typedef struct ActorSlot {
     s16        unk_2E;       /* 0x2E */
     s16        unk_30;       /* 0x30 */
     u8         pad_32[2];    /* 0x32-0x33 */
-    Coord3    pos;          /* 0x34 world position */
+    Coord3     pos;          /* 0x34 world position */
     u8         pad_40[0x0A]; /* 0x40-0x49 */
     u8         unk_4A;       /* 0x4A */
     u8         pad_4B[0x19]; /* 0x4B-0x63 */

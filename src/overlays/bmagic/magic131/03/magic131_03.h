@@ -23,8 +23,8 @@ void            func_801F0D44(void);
  * scroll direction picks the row's first or second pointer and g_EmiLoadedCharacterIndex picks the id. */
 extern u16* D_800B499C[][2];
 
-extern Callback          D_801F1C48[];
-extern Callback          D_801F1C94[];
+extern Callback      D_801F1C48[];
+extern Callback      D_801F1C94[];
 extern BMagicEffect* D_801F24E0;
 extern BMagicEffect  D_801F1CA0[48];
 

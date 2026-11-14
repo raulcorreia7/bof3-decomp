@@ -321,8 +321,8 @@ ASSERT_OFFSET(BattlePanelByteCells, rows, 0x14);
 typedef struct BattlePanelTask {
     u8                unk_00[3]; /* +0x00 */
     u8                state;     /* +0x03 short-menu state word */
-    ScreenCoord x;         /* +0x04 the panel x; battle/battle/15 reads it signed */
-    ScreenCoord y;         /* +0x06 the panel y; battle/battle/15 reads it signed */
+    ScreenCoord       x;         /* +0x04 the panel x; battle/battle/15 reads it signed */
+    ScreenCoord       y;         /* +0x06 the panel y; battle/battle/15 reads it signed */
     u8                unk_08;
     u8                unk_09;
     BattlePanelCell0A cell_0A; /* +0x0A the selected battler slot, or the slide mode */
@@ -555,9 +555,9 @@ typedef struct PartyMember {
     s8                  unk_29; /* +0x29 the byte both overlays read */
     s8                  unk_2A; /* +0x2A the byte both overlays read */
     s8                  unk_2B; /* +0x2B the byte both overlays read */
-    ScreenCoord   unk_2C; /* +0x2C the halfword both overlays read */
-    ScreenCoord   unk_2E; /* +0x2E the field overlays read it signed */
-    ScreenCoord   unk_30; /* +0x30 the field overlays read it signed */
+    ScreenCoord         unk_2C; /* +0x2C the halfword both overlays read */
+    ScreenCoord         unk_2E; /* +0x2E the field overlays read it signed */
+    ScreenCoord         unk_30; /* +0x30 the field overlays read it signed */
     u16                 depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
     WorldPos            pos;
     SpriteScale         scale;  /* +0x40 16.16, 0x10000 at setup */
@@ -585,13 +585,13 @@ typedef struct PartyMember {
 
     /* +0x118 battle keeps the action the player has queued and its outcome; the field reuses the bytes as counters */
     union {
-        BattleTurn    turn;
-        FieldMode field;
+        BattleTurn turn;
+        FieldMode  field;
     } u;
 
     /* +0x12C battle clears all eight cells when the battler falls; the field names two of them */
     union {
-        u8             unk_12C[8];
+        u8         unk_12C[8];
         FieldEntry field;
     } status;
 
@@ -724,14 +724,14 @@ extern GameState g_Game;
 
 /* FAKE: the members of g_Game as globals of their own. A function that touches one of them beside other globals
  * matches only when the compiler sees a separate symbol for it, and some sites read it through another width. */
-extern PartyMember*    g_GameState;
-extern PartyMember     g_BattlePartyBattlers[3];
-extern u8              g_PartySize;
-extern u16             g_GameFlags;
-extern u16             g_AreaWalkFlags;
+extern PartyMember* g_GameState;
+extern PartyMember  g_BattlePartyBattlers[3];
+extern u8           g_PartySize;
+extern u16          g_GameFlags;
+extern u16          g_AreaWalkFlags;
 /* The mode byte of each 0x24-byte owner record; the kind byte sits at +0x07. */
-extern u8              D_80148333[];
-extern BattleOwner D_8014833A[];
+extern u8           D_80148333[];
+extern BattleOwner  D_8014833A[];
 
 typedef struct BattleRange {
     u8  unk_00[0x34];

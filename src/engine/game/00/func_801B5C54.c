@@ -1,19 +1,19 @@
 #include "game_00.h"
 
 MATCH void* func_801B5C54(void) {
-    Actor*      work;
+    Actor*    work;
     TileRuns* entry;
-    TileRun*    run;
-    TileRun*    cur;
-    s32         index;
-    s32         sub;
-    s32         limit;
-    s32         step;
-    s32         pos;
-    s32         x;
-    s32         y;
-    s32         origin;
-    s8          delta;
+    TileRun*  run;
+    TileRun*  cur;
+    s32       index;
+    s32       sub;
+    s32       limit;
+    s32       step;
+    s32       pos;
+    s32       x;
+    s32       y;
+    s32       origin;
+    s8        delta;
 
     entry = GAME_TILE_RUN(g_GameAreaId);
     index = entry->last_run;

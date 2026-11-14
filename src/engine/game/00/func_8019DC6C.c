@@ -18,10 +18,10 @@ typedef struct GameSpawn {
 } GameSpawn;
 
 MATCH void func_8019DC6C(void) {
-    u8               scratch[32];
-    GameSpawn* rec;
-    GameSpawnState*  state;
-    s32              i;
+    u8              scratch[32];
+    GameSpawn*      rec;
+    GameSpawnState* state;
+    s32             i;
 
     Area_SetCameraMatrix(scratch);
     state = MEM_PTR(GameSpawnState, 0x800E4D40u);

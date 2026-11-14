@@ -23,13 +23,13 @@ typedef struct BattleSelectionInit {
 /* FAKE: retail reads D_801454F4 as flat bytes; the owner declares rows. */
 MATCH void func_80097EC0(void) {
     BattleSelectionInit* init_work;
-    volatile BattleTurn*     actor_turn;
-    u32                      source_slot_offset;
-    u32                      active_selection_flags;
-    u32                      flag_mask;
-    u8                       entry_index;
-    u8                       entry_value;
-    u8                       tail_byte;
+    volatile BattleTurn* actor_turn;
+    u32                  source_slot_offset;
+    u32                  active_selection_flags;
+    u32                  flag_mask;
+    u8                   entry_index;
+    u8                   entry_value;
+    u8                   tail_byte;
 
     init_work                           = (BattleSelectionInit*)g_BattleChoicePanel;
     init_work->selection_kind           = 1u;

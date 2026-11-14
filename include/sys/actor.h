@@ -61,7 +61,7 @@
 typedef enum ActorFlags {
     ACTOR_FLAG_IN_USE             = 1 << 0,
     ACTOR_FLAG_SKIP_PALETTE_STAGE = 1 << 1,
-    ACTOR_FLAG_SELECTION_EFFECT       = 1 << 3,
+    ACTOR_FLAG_SELECTION_EFFECT   = 1 << 3,
     ACTOR_FLAG_STEP_MOVE          = 1 << 4,
     ACTOR_FLAG_SEMI_TRANSPARENT   = 1 << 5,
     ACTOR_FLAG_HIDDEN             = 1 << 6,

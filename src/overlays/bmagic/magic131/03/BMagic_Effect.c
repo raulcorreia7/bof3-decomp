@@ -693,8 +693,8 @@ MATCH void func_801F1AC4(void) {
 
 MATCH void func_801F1B14(void) {
     BMagicEffect* work;
-    s16               vec[3];
-    TILE_1*           primitive;
+    s16           vec[3];
+    TILE_1*       primitive;
 
     work      = D_801F24E0;
     vec[0]    = (work->pos.x.fixed >> 9) - 0x4000;

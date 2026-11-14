@@ -12,7 +12,7 @@ typedef struct WorldCloudTexture {
 #define WORLDMAP_CLOUD_DRAW_RANGE 26
 
 /* The view-space depth of the cloud quad. */
-#define WORLD_CLOUD_DEPTH      (-0x300)
+#define WORLD_CLOUD_DEPTH         (-0x300)
 
 extern WorldCloudTexture g_WorldMapCloudTexture;
 

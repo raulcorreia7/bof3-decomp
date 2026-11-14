@@ -7,7 +7,7 @@
 /* func_801EFAE0 (magic003), func_801EFAF4 (magic020) */
 #define BMAGIC_RUN_EFFECT_STEP(FIRST, SECOND)                    \
     Callback table[2] = {FIRST, SECOND};                         \
-    g_Scripts     = BATTLE_SCRIPT_TABLE;                     \
+    g_Scripts         = BATTLE_SCRIPT_TABLE;                     \
     table[g_Task->header.step]();                                \
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) { \
         Area_AddActor();                                         \

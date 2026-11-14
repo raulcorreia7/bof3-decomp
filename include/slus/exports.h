@@ -46,51 +46,51 @@ typedef enum SNDXaState {
 } SNDXaState;
 
 /* The area message table offset the HUD value text reads (AREA_MESSAGE_TABLE slot 4). */
-extern u16           D_80010008;
+extern u16          D_80010008;
 /* 0x80143xxx: shared area and UI state. */
-extern u8            D_80142CC4[];
+extern u8           D_80142CC4[];
 /* D_80143B92 */
-extern u16           g_GameEntrySubstate;
+extern u16          g_GameEntrySubstate;
 /* D_80143C10 */
-extern volatile u16  g_UiTitleState;
+extern volatile u16 g_UiTitleState;
 /* D_80143C12 */
-extern volatile u16  g_UiTitleSubstate;
+extern volatile u16 g_UiTitleSubstate;
 /* D_80143C20 */
-extern u16           g_UiTitleTimer;
+extern u16          g_UiTitleTimer;
 /* D_80143C22 */
-extern volatile u16  g_UiTitleBannerScroll;
+extern volatile u16 g_UiTitleBannerScroll;
 /* D_80143C24 */
-extern volatile u16  g_UiTitleBannerAlpha;
+extern volatile u16 g_UiTitleBannerAlpha;
 /* D_80143C26 */
-extern volatile u16  g_UiTitlePrimaryAlpha;
+extern volatile u16 g_UiTitlePrimaryAlpha;
 /* D_80143C28 */
-extern volatile u16  g_UiTitleSecondaryAlpha;
+extern volatile u16 g_UiTitleSecondaryAlpha;
 /* D_80143C31 */
-extern volatile u8   g_UiTitleFadePhase;
+extern volatile u8  g_UiTitleFadePhase;
 /* D_80143C32 */
-extern volatile u8   g_UiTitleChoicePhase;
+extern volatile u8  g_UiTitleChoicePhase;
 /* D_80143C33 */
-extern u8            g_UiTitleInputGate;
+extern u8           g_UiTitleInputGate;
 /* D_80143D40 */
-extern Thread* g_CallbackSlot;
+extern Thread*      g_CallbackSlot;
 /* D_80143D44 */
-extern u8            g_FrameBufferIndex;
+extern u8           g_FrameBufferIndex;
 /* D_80143D48 */
-extern u8            g_GfxDisplayFrames[];
+extern u8           g_GfxDisplayFrames[];
 /* D_80143E68 */
-extern u8*           g_GfxCurrentDisplayFrame;
+extern u8*          g_GfxCurrentDisplayFrame;
 /* D_80143E6C */
-extern u32           g_FrameCount;
+extern u32          g_FrameCount;
 /* D_80143EF8 */
-extern s32           g_SysLastVSync;
-extern s32           D_80143EFC;
-extern u8            D_80143F03;
+extern s32          g_SysLastVSync;
+extern s32          D_80143EFC;
+extern u8           D_80143F03;
 /* D_80143F10 */
-extern u16           g_GameContextSeed;
+extern u16          g_GameContextSeed;
 /* D_80143F1C */
-extern u8            g_GameContextKind;
+extern u8           g_GameContextKind;
 /* 0x80144xxx: party and menu state. */
-extern u16           D_80143F20;
+extern u16          D_80143F20;
 
 /* Field-battle placement: the formation origin and one start position per party order slot. */
 typedef struct FormationPos {

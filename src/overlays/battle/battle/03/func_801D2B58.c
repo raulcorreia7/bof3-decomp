@@ -27,24 +27,24 @@ typedef struct BattlePanelState {
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2B58(void) {
-    BattleActor* actor;
-    BattlePanelState*  row;
-    u8*                table;
-    u8*                state;
-    u8                 kind;
-    u8                 index;
-    u32                offset;
-    s32                state_offset;
-    u8                 value;
-    u16                depth;
-    u8*                cursor;
-    u8*                fa8;
-    u8*                fa8_118;
-    u8*                fa8_88;
-    u8*                eb3dc;
-    u8*                eb3dc_2f4;
-    BattlePanelState*  row1;
-    BattlePanelState*  row2;
+    BattleActor*      actor;
+    BattlePanelState* row;
+    u8*               table;
+    u8*               state;
+    u8                kind;
+    u8                index;
+    u32               offset;
+    s32               state_offset;
+    u8                value;
+    u16               depth;
+    u8*               cursor;
+    u8*               fa8;
+    u8*               fa8_118;
+    u8*               fa8_88;
+    u8*               eb3dc;
+    u8*               eb3dc_2f4;
+    BattlePanelState* row1;
+    BattlePanelState* row2;
 
     cursor    = (u8*)&g_Battle.turn_cursor;
     fa8       = D_80145FA8;

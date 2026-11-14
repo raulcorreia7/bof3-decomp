@@ -43,7 +43,7 @@
     g_Task->pos.x.fixed = g_BattleEffects[slot].pos.x.fixed;                                    \
     g_Task->pos.y.fixed = g_BattleEffects[slot].pos.y.fixed;                                    \
     g_Task->pos.z.fixed = g_BattleEffects[slot].pos.z.fixed;                                    \
-    SND_QueueSelectionEffect(0x100);                                                                \
+    SND_QueueSelectionEffect(0x100);                                                            \
     g_Task->header.mode++;
 
 #endif

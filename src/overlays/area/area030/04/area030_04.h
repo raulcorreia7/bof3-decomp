@@ -27,8 +27,8 @@ typedef enum FishingMessageId {
     FISHING_MESSAGE_EQUIP_ROD_LURE   = 80,
     FISHING_MESSAGE_EQUIP_ROD        = 81,
     FISHING_MESSAGE_EQUIP_LURE       = 82,
-    FISHING_MESSAGE_DATA_TITLE       = 96,
-    FISHING_MESSAGE_DATA_PAGE_HINT   = 97,
+    FISHING_MSG_DATA_TITLE           = 96,
+    FISHING_MSG_DATA_PAGE_HINT       = 97,
     FISHING_MESSAGE_HOW_TO_FISH      = 111,
     FISHING_MESSAGE_HOW_TO_PAGE_HINT = 112,
 } FishingMessageId;
@@ -366,7 +366,7 @@ extern FishingAnchors        D_801D0C30;
 extern char                  D_801D0C38[];
 /* D_801D0C3C */
 extern FishingIconData       g_FishingRankIcons;
-extern FishingThreshold  D_801D0C70;
+extern FishingThreshold      D_801D0C70;
 extern u8                    D_801D0C8C[];
 extern Callback              D_801E1CD4[];
 extern Callback              D_801E1CE8[];

@@ -421,7 +421,7 @@ extern u8                          D_80142CE0[];
 extern u32                         D_80143740[];
 /* SLUS-only state: overlays declare these addresses with their own views, so
  * the registry does not emit them. */
-extern Thread                D_80143B40[]; /* four slots, 0x80 bytes each */
+extern Thread                      D_80143B40[]; /* four slots, 0x80 bytes each */
 extern u8                          D_80143D75;
 extern u8                          D_80143D76;
 extern u8                          D_80143D77;

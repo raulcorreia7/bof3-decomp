@@ -117,7 +117,7 @@ typedef union ScratchPadViews {
     ScratchPadBattle   battle;                /* 0x000 */
     ScratchPadArea     area;                  /* 0x000 */
     ScratchPadScenario scenario;              /* 0x000 */
-    ScratchPadVectors   vector;                /* 0x000 */
+    ScratchPadVectors  vector;                /* 0x000 */
     ScratchPadEffect   effect;                /* 0x000 */
     ScratchPadRay      ray;                   /* 0x000 */
 } ScratchPadViews;
