@@ -16,10 +16,10 @@ MATCH void func_801F34B8(void) {
     volatile u16* work;
 
     src   = D_80147B40;
-    dst   = (u8*)0x800E4FA8;
-    state = (u16*)0x800E4A80;
+    dst   = AREA108_VERTEX_DST;
+    state = AREA108_STATE_BASE;
     count = 0;
-    work  = (u16*)0x800E4A84;
+    work  = AREA108_STATE_OFFSET;
     for (;; work += 12) {
         phase    = work[4];
         step     = work[2];
