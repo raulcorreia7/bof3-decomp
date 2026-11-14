@@ -628,7 +628,7 @@ MATCH void func_801FD000(void) {
 
     for (i = 0; i < 0xE; i++) {
         MEM(s16, 0x1F800000) = Actor_FindFreeField();
-        if (MEM(s16, 0x1F800000) != 0xFF) {
+        if (MEM(s16, 0x1F800000) != GAME_NONE) {
             idx = i;
             func_801A4D54(&D_801FDE8C[idx * 17]);
             g_Task->pos.z.part.integer = 0xA00;
