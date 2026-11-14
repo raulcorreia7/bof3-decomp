@@ -23,7 +23,7 @@ extern Callback    D_801181AC[];
 extern Callback    D_801181B4[];
 extern AreaSprite* D_801181DC;
 
-void func_801170D8(void* arg0);
+void func_801170D8(AreaSprite* sprite);
 u8   func_80117410(void);
 u8   func_80117900(void);
 
