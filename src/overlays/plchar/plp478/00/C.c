@@ -30,8 +30,9 @@ MATCH void func_801CE854(void) {
 
 #include "overlays/plchar/Char_WalkStep.h"
 
-INCLUDE_ASM(func_801CEBE4);
+#include "overlays/plchar/Char_RunFacingProbe.h"
 
+MATCH void func_801CEBE4(void){CHAR_RUN_FACING_PROBE()}
 #include "overlays/plchar/Char_AdvanceScript.h"
 
 #include "overlays/plchar/Char_ProbeCellSpawn.h"
