@@ -389,6 +389,9 @@ struct Vec3W {
 extern u8               D_1F800004;
 extern u32              D_1F80000C;
 extern SVECTOR          D_1F800014[];
+extern SVECTOR          D_1F80001C;
+extern SVECTOR          D_1F800024;
+extern SVECTOR          D_1F80002C;
 extern u8               D_8000005A;
 extern u8               D_80000307;
 extern u8               D_800013B5;
