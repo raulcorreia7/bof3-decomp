@@ -97,6 +97,8 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
 7. **Accept.** Replace the draft with a plain `MATCH` definition, or `HAND_ASM` for authored
    assembly ([markers](../../../../docs/matching.md#markers-and-unmatched-bodies)), and name it
    from evidence or keep `func_<ADDR>` ([natural names](name.md#natural-names)). After three
-   structurally different tries, delete the draft, keep the bare `INCLUDE_ASM` and record the first
-   difference where the run keeps records. Then `format` and `pre-push` decide
+   structurally different tries, keep the closest draft under `NON_MATCHING` (it must compile with
+   `-DNON_MATCHING`) and add an object to `config/attempts.jsonl` with the form reached and the
+   first differing instruction; `check-markers` refuses a new draft without one. A later pass
+   starts from that draft and replaces it only with a closer one. Then `format` and `pre-push` decide
    ([gates](../SKILL.md#rules-for-every-job)).

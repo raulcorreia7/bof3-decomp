@@ -188,7 +188,7 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | the tools  |
 | `meson test`    | a tool test fails                                                                       | Python     |
 | `typeloss`      | a rename, move or retype weakens a type                                                 | none       |
-| `markers`       | a definition in `src/` lacks exactly one status marker, or a change adds a `NON_MATCHING` draft | none |
+| `markers`       | a definition in `src/` lacks exactly one status marker, or a change adds a `NON_MATCHING` draft with no `config/attempts.jsonl` object | none |
 | `names`         | a new name carries an 8-digit address, a listed legacy one is gone, or an added line names a parameter `argN` | none |
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |

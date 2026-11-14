@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from check_markers import check_hand_units, check_text, has_hand_asm
+import check_markers
+from check_markers import check_hand_units, check_text, draft_ref, has_hand_asm
 
 
 def problems(text: str) -> list[str]:
@@ -139,3 +140,48 @@ def test_a_hand_asm_file_may_land_its_switch(tmp_path) -> None:
     draft.write_text(DRAFT.replace("HAND_ASM", "NON_MATCHING"))
     assert has_hand_asm(str(hand))
     assert not has_hand_asm(str(draft))
+
+
+def _tree(tmp_path, attempts: str):
+    (tmp_path / "config/emi/bmagic/magic058/03").mkdir(parents=True)
+    (tmp_path / "config/emi/bmagic/magic058/03/splat.yaml").write_text("")
+    (tmp_path / "config/symbols.toml").write_text(
+        '["emi/bmagic/magic058/03"]\nNamed = { addr = 0x801EFDD4, type = "func" }\n'
+    )
+    (tmp_path / "config/attempts.jsonl").write_text(attempts)
+    return tmp_path
+
+
+def test_a_draft_names_its_function_by_image_and_address(tmp_path) -> None:
+    root = _tree(tmp_path, "")
+    path = "src/overlays/bmagic/magic058/03/a.c"
+    want = "emi/bmagic/magic058/03@0x801EFDD4"
+    assert draft_ref(path, "NON_MATCHING s32 func_801efdd4(void) {\n", root) == want
+    assert draft_ref(path, "NON_MATCHING s32 Named(void) {\n", root) == want
+    assert draft_ref(path, "NON_MATCHING s32 Other(void) {\n", root) is None
+
+
+def _land(monkeypatch, tmp_path, attempts: str, capsys) -> int:
+    root = _tree(tmp_path, attempts)
+    src = root / "src/overlays/bmagic/magic058/03/a.c"
+    src.parent.mkdir(parents=True)
+    src.write_text(
+        DRAFT.replace("HAND_ASM", "NON_MATCHING").replace("f(", "func_801EFDD4(")
+    )
+    added = [(str(src.relative_to(root)), 1, "#ifdef NON_MATCHING")]
+    monkeypatch.chdir(root)
+    monkeypatch.setattr(check_markers, "ROOT", root)
+    monkeypatch.setattr(check_markers, "added_lines", lambda ref: added)
+    return check_markers.main(["--diff", "REF"])
+
+
+def test_a_draft_lands_with_an_attempts_object(monkeypatch, tmp_path, capsys) -> None:
+    row = '{"function": "emi/bmagic/magic058/03@0x801EFDD4", "tried": "t", "first_diff": "d", "score": null}\n'
+    assert _land(monkeypatch, tmp_path, row, capsys) == 0
+
+
+def test_a_draft_without_an_attempts_object_fails(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    assert _land(monkeypatch, tmp_path, "", capsys) == 1
+    assert "emi/bmagic/magic058/03@0x801EFDD4" in capsys.readouterr().err

@@ -17,8 +17,8 @@ functions by route, in the tool's order below ([find work](../CONTRIBUTING.md#yo
 
 A `template0` row is a matched template with no differing instruction; `template` has up to three.
 A `generator` row names its shape in the last column. Three structurally different tries per function
-— a different instruction count, or a different call or branch sequence — then delete the draft and
-record the attempt ([match](../.agents/skills/decomp/references/match.md)).
+— a different instruction count, or a different call or branch sequence — then keep the closest draft
+under `NON_MATCHING` and record the attempt ([match](../.agents/skills/decomp/references/match.md)).
 
 A route that gives `EXACT` still needs `check-<image>`, a name from evidence and the shared-body
 treatment ([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)).
@@ -87,7 +87,10 @@ INCLUDE_ASM(func_<ADDR>);
 #endif
 ```
 
-Keep a draft under `NON_MATCHING`. Record its attempts in `config/attempts.jsonl`, never in source.
+Every unmatched function keeps its closest draft under `NON_MATCHING`; it must compile with
+`-DNON_MATCHING`. Record its attempts in `config/attempts.jsonl`, never in source: the object states
+the form reached and the first differing instruction, and `check-markers` refuses a new draft
+without one. A later pass starts from that draft and replaces it only with a closer one.
 
 ### Status markers
 
