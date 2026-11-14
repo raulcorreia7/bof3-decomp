@@ -58,6 +58,8 @@ NON_MATCHING s32 func_801530D0(void) {
     s32 slot;
     s32 slot2;
     s32 x;
+    u16 ux;
+    u16 uy;
     s32 y;
     s32 ring_cell;
     s32 sword;
@@ -177,16 +179,16 @@ NON_MATCHING s32 func_801530D0(void) {
                         block_38:
                             pkt                = &prim[g_FrameBufferIndex];
                             *(u32*)&pkt->x0    = *(u32*)D_1F800034;
-                            x                  = D_1F800014[0].vx;
-                            y                  = D_1F800014[0].vy;
+                            ux                 = D_1F800014[0].vx;
+                            uy                 = D_1F800014[0].vy;
                             rec                = D_1F800010;
-                            D_1F80001C.vx      = x + 0x80;
-                            D_1F80001C.vy      = y;
-                            D_1F800024.vx      = x;
-                            D_1F800024.vy      = y + 0x80;
+                            D_1F80001C.vx      = ux + 0x80;
+                            D_1F80001C.vy      = uy;
+                            D_1F800024.vx      = ux;
+                            D_1F800024.vy      = uy + 0x80;
                             D_1F80001C.vz      = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
-                            D_1F80002C.vx      = x + 0x80;
-                            D_1F80002C.vy      = y + 0x80;
+                            D_1F80002C.vx      = ux + 0x80;
+                            D_1F80002C.vy      = uy + 0x80;
                             D_1F800024.vz      = -(rec[2] * 0x10);
                             D_1F80002C.vz      = -(rec[3] * 0x10);
                             gte_ldv3c(&D_1F80001C);
@@ -248,9 +250,11 @@ NON_MATCHING s32 func_801530D0(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 vert[1].vz       = -((s8) * (u16*)(rec + 2) * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
-                                setaddr(SLOT((g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2)) * 8 + s5), link);
+                                slot = (g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2)) * 8 + s5;
+                                setaddr(SLOT(slot), link);
                                 gte_rtpt();
-                                SLOT((g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2)) * 8 + s5) = (P_TAG*)link;
+                                slot2       = (g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2)) * 8 + s5;
+                                SLOT(slot2) = (P_TAG*)link;
                                 gte_stsxy3((s32*)&link->x3, (s32*)&link->x2, (s32*)D_1F800034);
                             }
                             v16 = g_AreaCellPrims[s2][1].pad2;
@@ -269,9 +273,11 @@ NON_MATCHING s32 func_801530D0(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 D_1F80001C.vz    = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
-                                setaddr(SLOT((g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2)) * 8 + s5), link);
+                                slot = (g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2)) * 8 + s5;
+                                setaddr(SLOT(slot), link);
                                 gte_rtpt();
-                                SLOT((g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2)) * 8 + s5) = (P_TAG*)link;
+                                slot2       = (g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2)) * 8 + s5;
+                                SLOT(slot2) = (P_TAG*)link;
                                 gte_stsxy3((s32*)&link->x2, (s32*)&link->x3, (s32*)D_1F800034);
                             }
                         }
