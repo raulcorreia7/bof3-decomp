@@ -70,7 +70,7 @@ MATCH void func_801EF188(void) {
     pos.vx = (target->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (target->pos.y.fixed >> 9) - 0x4000;
     pos.vz = (COORD_INT(target->pos.z) + 0xC0) >> 1;
-    if (func_801DB524(g_Task->unk_03) & BYTE_MASK) {
+    if (Battle_SlotIsBlocked(g_Task->unk_03) & BYTE_MASK) {
         g_Task->unk_0C      = (target->pos.x.fixed >> 9) - 0x4000;
         g_Task->unk_10      = (target->pos.y.fixed >> 9) - 0x4000;
         g_Task->unk_14      = (COORD_INT(target->pos.z) + 0xC0) >> 1;
@@ -118,7 +118,7 @@ MATCH void func_801EF4B8(void) {
     u8  ready;
 
     ready = 0;
-    if (func_801DB524(g_Task->unk_03) & BYTE_MASK) {
+    if (Battle_SlotIsBlocked(g_Task->unk_03) & BYTE_MASK) {
         g_Task->header.step = 0xA;
         return;
     }

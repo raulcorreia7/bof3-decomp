@@ -80,7 +80,7 @@ MATCH void func_801EED50(void) {
         enemy_count  = 0;
         enemy_levels = 0;
         for (i = 0; i < 8; i++) {
-            if (func_801DB524(i + 3) == 0) {
+            if (Battle_SlotIsBlocked((u8)(i + 3)) == 0) {
                 percent = g_BattleEnemyBattlers[i].hp * 100 / g_BattleEnemyBattlers[i].stats.max_hp;
                 enemy_count++;
                 enemy_levels += g_BattleEnemyBattlers[i].level;
@@ -183,7 +183,7 @@ MATCH void func_801EED50(void) {
             func_801DE8C0(1, 60, Message_GetText(0x40));
         }
         for (i = 0; i < 8; i++) {
-            if (func_801DB524(i + 3) == 0) {
+            if (Battle_SlotIsBlocked((u8)(i + 3)) == 0) {
                 if (g_BattleEnemyBattlers[i].stats.resistances[RES_INDEX_FIRE] < 2) {
                     g_Task->param.unk_0B |= 1;
                 }

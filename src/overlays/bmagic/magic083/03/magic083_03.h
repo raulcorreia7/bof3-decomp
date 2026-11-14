@@ -29,6 +29,5 @@ extern u8 D_801F0EA4[][4][3];
 /* One RGB row per effect kind, scaled by the effect timer. */
 extern u8      D_801F0ED4[][3];
 extern u8      D_801F0EE0[][3];
-extern SVECTOR D_1F800014[];
 
 #endif

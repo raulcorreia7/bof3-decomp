@@ -57,14 +57,13 @@ void                      func_800AF8F0(PartyMember* record);
 void                      func_800AFAB8(PartyMember* record);
 /* One halfword per entry of the sprite upload queue. */
 extern u16                D_80145A54[];
-s32                       func_801DB524(u8);
 
 /* Unless the target check fails, a target still standing makes the caster play its hit script (a party
  * caster also drops its last queued sprite upload) and the effect advances; a failed check marks the
  * battler and jumps to ABORT_STEP. A statement macro: the member declares u8 count. */
 /* func_801F1474, func_801F18F4 */
 #define MAGIC008_HIT_OR_ABORT(ABORT_STEP)                                                                           \
-    if (!(func_801DB524(g_Battle.target_selector) & BYTE_MASK)) {                                                   \
+    if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK)) {                                                   \
         if (g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT) {                                             \
             if (g_Game.members[g_Battle.target_selector].header.mode != 6) {                                        \
                 if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {                                      \

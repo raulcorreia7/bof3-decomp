@@ -11,7 +11,7 @@
     g_Task->param.unk_0B = 0;                                                                   \
     if (g_Battle.target_selector & 0x40) {                                                      \
         for (i = 0; i < 8; i++) {                                                               \
-            if (!(func_801DB524(i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK)) {              \
+            if (!(Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) & BYTE_MASK)) {              \
                 slot                               = Battle_AllocEffect(1, (PART)) & BYTE_MASK; \
                 work                               = g_Task;                                    \
                 g_BattleEffects[slot].header.mode  = 0;                                         \
@@ -26,7 +26,7 @@
         }                                                                                       \
     } else {                                                                                    \
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {                                   \
-            if (!(func_801DB524(i) & BYTE_MASK)) {                                              \
+            if (!(Battle_SlotIsBlocked((u8)i) & BYTE_MASK)) {                                              \
                 slot                               = Battle_AllocEffect(1, (PART)) & BYTE_MASK; \
                 work                               = g_Task;                                    \
                 g_BattleEffects[slot].header.mode  = 0;                                         \

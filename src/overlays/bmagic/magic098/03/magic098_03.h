@@ -11,7 +11,6 @@ extern s16     D_1F800002;
 extern s16     D_1F800004;
 extern s16     D_1F800008;
 /* The bolt point D_1F800014, also read as halfwords. */
-extern SVECTOR D_1F800014[];
 extern s16     D_1F800014_HALF[];
 extern s16     D_1F800016;
 extern s16     D_1F800018;
@@ -20,6 +19,5 @@ void func_801EF5D4(s16 band_height, u16 radius, u16 jitter_mask);
 void func_801EFE24(void);
 void func_801F00C4(void);
 
-s32 func_801DB524(u8);
 
 #endif

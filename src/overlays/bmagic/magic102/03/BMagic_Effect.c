@@ -76,7 +76,7 @@ MATCH void func_801EF2B8(void) {
         }
     } else {
         for (i = 0; i < 8; i++) {
-            if (!(func_801DB524(i + 3) & BYTE_MASK)) {
+            if (!(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK)) {
                 if (D_801F0CC0 && D_801F0F50[i] > Area_SampleHeight(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed)) {
                     COORD_INT(g_BattleEnemyBattlers[i].pos.z) = D_801F0F50[i];
                 } else {

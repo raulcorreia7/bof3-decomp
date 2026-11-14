@@ -189,7 +189,7 @@ MATCH void func_801EF488(void) {
                 if (g_Game.members[slot].chr.status & 0x800) {
                     Actor_SelectScript((g_Task->facing + 0x30) & BYTE_MASK);
                 }
-                if (func_801DB524(slot) & BYTE_MASK) {
+                if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
                     Actor_SelectScript((g_Task->facing + 0x1C) & BYTE_MASK);
                 }
                 i++;

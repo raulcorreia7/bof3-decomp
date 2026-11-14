@@ -10,6 +10,5 @@ extern u8 D_801F00B0[];
 
 void func_801EF984(void);
 
-extern SVECTOR D_1F800014[];
 
 #endif
