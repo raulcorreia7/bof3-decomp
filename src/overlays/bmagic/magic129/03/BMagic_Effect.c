@@ -166,13 +166,7 @@ MATCH void func_801EF54C(void) {
     s32      power;
     u8       i;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     power                            = (s8)g_Task->unk_5D;
@@ -300,13 +294,7 @@ MATCH void func_801EF54C(void) {
         }
         GFX_AddPrim(2, sizeof(POLY_G4));
     }
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 }
@@ -320,20 +308,12 @@ MATCH void func_801EFF84(void) {
 
     SYS_DISPATCH_BYTE((g_BMagicEffectModes + 6), g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         func_800AF764();
         func_801F030C();
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0x25;
-        } else {
-            tpage = 0x15;
-        }
+        tpage = getTPage(0, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     }

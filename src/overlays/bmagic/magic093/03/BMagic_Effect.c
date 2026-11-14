@@ -167,7 +167,7 @@ MATCH void func_801EF85C(void) {
     s32      green;
     s32      blue;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = ((rsin((g_Task->param.unk_0B & 0x1F) << 7) * 16) >> 12) + 0x100;
     red                              = g_Task->unk_09 * 10;
@@ -207,11 +207,7 @@ MATCH void func_801EFAE8(void) {
     u8       green;
     u8       blue;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = ((rsin((g_Task->param.unk_0B & 0x1F) << 7) * 16) >> 12) + 0x100;
@@ -343,11 +339,7 @@ MATCH void func_801F01F0(void) {
     D_1F800000.view.effect.params[7] = g_Task->timer;
     D_1F800000.view.effect.params[3] = g_Task->unk_2E.half;
     D_1F800000.view.effect.params[4] = g_Task->unk_30.half;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    tpage                            = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
 

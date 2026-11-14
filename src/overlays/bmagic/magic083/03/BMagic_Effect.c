@@ -186,7 +186,7 @@ MATCH void func_801EF844(void) {
     long     depth;
     long     flag;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
     D_1F800000.view.effect.params[3] = g_Task->unk_09 * 5;
     D_1F800000.view.effect.params[4] = D_801F0ED4[g_Task->unk_04][0] * g_Task->unk_09;
@@ -213,7 +213,7 @@ MATCH void func_801EF844(void) {
         setRGB2(poly, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
 }
 
@@ -224,7 +224,7 @@ MATCH void func_801EFB24(void) {
     long     depth;
     long     flag;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
     D_1F800000.view.effect.params[4] = D_801F0EE0[g_Task->unk_04][0] * g_Task->unk_09;
     D_1F800000.view.effect.params[5] = D_801F0EE0[g_Task->unk_04][1] * g_Task->unk_09;
@@ -256,7 +256,7 @@ MATCH void func_801EFB24(void) {
         setRGB3(poly, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
 }
 
@@ -383,7 +383,7 @@ MATCH void func_801F050C(void) {
     s32      y;
     s16      angle;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     start = g_GfxPrimCursor;
@@ -460,7 +460,7 @@ MATCH void BMagic_SetXFixed(s32 radius) {
     D_1F800000.view.effect.params[0] = radius;
     i                                = 0;
     do {
-        tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         poly = (POLY_G3*)g_GfxPrimCursor;

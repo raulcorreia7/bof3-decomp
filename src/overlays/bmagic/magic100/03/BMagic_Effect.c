@@ -142,7 +142,7 @@ MATCH void func_801EF4E8(void) {
     s32      i;
     s16      phase;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = g_Task->unk_1C + FIXED_MUL(rsin(0), g_Task->unk_1C / 2);
@@ -212,7 +212,7 @@ MATCH void func_801EF9D4(void) {
     s32      i;
     s16      phase;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    tpage = getTPage(0, 2, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
     D_1F800000.view.effect.params[1] = g_Task->unk_1C - 0x20;
     D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[1] + FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1] / 2);
@@ -247,6 +247,6 @@ MATCH void func_801EF9D4(void) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
 }

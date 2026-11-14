@@ -104,7 +104,7 @@ MATCH void func_801EF4B0(void) {
     long     depth;
     s32*     shade;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
     D_1F800014[2].vx = (rsin(0) * 3U) >> 6;
     D_1F800014[2].vy = (rcos(0) * 3U) >> 6;
@@ -128,7 +128,7 @@ MATCH void func_801EF4B0(void) {
         setRGB2(poly, *shade, *shade / 2, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
 }
 
@@ -140,7 +140,7 @@ MATCH void func_801EF708(void) {
     long     flag;
     s32*     shade;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
     D_1F800014[1].vx = (rsin(0) * 3U) >> 6;
     D_1F800014[1].vy = (rcos(0) * 3U) >> 6;
@@ -170,7 +170,7 @@ MATCH void func_801EF708(void) {
         setRGB3(poly, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(5, tpage);
 }
 
@@ -286,7 +286,7 @@ MATCH void func_801F05C8(s32 step) {
         }
         x     = (D_1F800014[0].vx << 9) + g_Task->pos.x.fixed;
         y     = (D_1F800014[0].vy << 9) + g_Task->pos.y.fixed;
-        tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         primitive = (TILE_1*)g_GfxPrimCursor;

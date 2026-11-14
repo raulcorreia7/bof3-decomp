@@ -1,9 +1,8 @@
 /* The textured ring band of magic055 (func_801EF240) and magic091 (func_801EF240): 32 GT4 quads around the
  * effect cell, each under its own draw mode, the outer edge rising and falling with the phase (byte 0x0B) and
- * the inner edge shaded by it. TPAGE_HW and TPAGE_SW are the draw-mode pages for graph types 1 and 2 and for
- * the others; ABR is the blend rate of the quads. The caller declares prim, depth, flag, i, tpage, x, y and
+ * the inner edge shaded by it. ABR is the blend rate of the quads and of their draw mode. The caller declares prim, depth, flag, i, tpage, x, y and
  * phase. Every change must verify both member images. */
-#define BMAGIC_DRAW_RING_BAND(TPAGE_HW, TPAGE_SW, ABR)                                                                                                                                \
+#define BMAGIC_DRAW_RING_BAND(ABR)                                                                                                                                                    \
     D_1F800000.view.effect.params[0] = g_Task->unk_09 * 4;                                                                                                                            \
     D_1F800000.view.effect.params[2] = g_Task->unk_09 * 3;                                                                                                                            \
     D_1F800000.view.effect.params[3] = (g_Task->timer + 16) * 4;                                                                                                                      \
@@ -31,7 +30,7 @@
         D_1F800014[3].vz                 = 0;                                                                                                                                         \
         x                                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;                                                                                             \
         y                                = (D_1F800014[1].vx << 9) + g_Task->pos.y.fixed;                                                                                             \
-        tpage                            = GetGraphType() == 1 || GetGraphType() == 2 ? (TPAGE_HW) : (TPAGE_SW);                                                                      \
+        tpage                            = getTPage(0, (ABR), 320, 256);                                                                                                              \
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                                       \
         Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));                                                                                                                                   \
         prim = (POLY_GT4*)g_GfxPrimCursor;                                                                                                                                            \

@@ -126,13 +126,7 @@ MATCH void func_801EF330(void) {
     u8       g;
     u8       b;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x125;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
@@ -164,13 +158,7 @@ MATCH void func_801EF330(void) {
     b                  = g_Task->unk_09 * (FIXED_MUL(rsin(D_1F800002), 6) + 8);
     setRGB3(prim, r, g, b);
     GFX_AddPrim(3, sizeof(POLY_G4));
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }

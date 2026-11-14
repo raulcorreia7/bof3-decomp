@@ -195,11 +195,7 @@ MATCH void func_801EF758(void) {
     D_1F800000.view.effect.params[0] = D_801F040C[g_Task->unk_04][0];
     D_1F800000.view.effect.params[1] = D_801F040C[g_Task->unk_04][1];
     D_1F800000.view.effect.params[2] = D_801F040C[g_Task->unk_04][2];
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage                            = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
@@ -269,11 +265,7 @@ MATCH void func_801EFAA4(void) {
         D_1F800014[3].vy                 = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[6]);
         x                                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
         y                                = (D_1F800014[3].vx << 9) + g_Task->pos.y.fixed;
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage                            = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -297,11 +289,7 @@ MATCH void func_801F0054(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800000.view.effect.params[3] = 0x88;
@@ -335,11 +323,7 @@ MATCH void func_801F0054(void) {
         setRGB2(prim, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[2]);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 }

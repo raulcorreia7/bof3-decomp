@@ -64,13 +64,7 @@ MATCH void func_801EEED4(void) {
     s32 tpage;
 
     SYS_DISPATCH_BYTE(D_801F0504, g_Task->header.step);
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, 0xC);
     if (g_Task->header.flags & 0x1) {
@@ -84,13 +78,7 @@ MATCH void func_801EEED4(void) {
             func_801F0104();
         }
     }
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, 0xC);
 }
@@ -184,7 +172,7 @@ MATCH void func_801EF30C(void) {
         func_801EFF14();
         func_801EFC00();
     }
-    GFX_AddDitheredDrawMode(3, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0x25 : 0x15) : 0x25);
+    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
 }
 
 MATCH void func_801EF430(void) {
@@ -289,13 +277,7 @@ MATCH void func_801EFA84(void) {
     POLY_FT4* prim;
     s32       tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;

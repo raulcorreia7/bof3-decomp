@@ -176,11 +176,7 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     u8        trans;
 
     trans = semi;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = ((semi & 3) << 7) | 0x25;
-    } else {
-        tpage = ((semi & 3) << 5) | 0x15;
-    }
+    tpage = getTPage(0, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.scenario.math_00 = 36;

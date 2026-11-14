@@ -157,7 +157,7 @@ MATCH void func_801EF6A0(void) {
     s16*      shade;
     s32       tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_GT4*)g_GfxPrimCursor;

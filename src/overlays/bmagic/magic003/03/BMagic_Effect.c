@@ -458,7 +458,7 @@ MATCH void func_801F0164(s32 index) {
     s32       u;
     s32       v;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     length = D_801F0A9C[(u8)index];
@@ -491,7 +491,7 @@ MATCH void func_801F03F0(s32 dir) {
     u16       y;
     s32       u;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -517,7 +517,7 @@ MATCH void func_801F0550(s32 value) {
     s32       u;
     u16       left;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     tens = (u8)value / 10;
@@ -552,7 +552,7 @@ MATCH void func_801F07B0(s32 index) {
     TILE* tile;
     s32   tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     tile = (TILE*)g_GfxPrimCursor;
@@ -571,7 +571,7 @@ MATCH void func_801F07B0(s32 index) {
     tile->h = D_801F0B10[(u8)index].h + 12;
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(2, sizeof(TILE));
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 }

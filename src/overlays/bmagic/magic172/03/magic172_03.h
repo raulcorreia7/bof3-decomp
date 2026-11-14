@@ -27,7 +27,7 @@ void            func_801F0908(void);
  * random share of SPREAD; before step 3 the shade falls with the length past FADE, and the line ends once it is
  * shorter than MIN. A statement macro: the member declares LINE_G2* prim, u16 x and y, and s32 i, sine and tpage. */
 #define MAGIC172_DRAW_JAGGED_LINE(ANGLE, SPREAD, WOBBLE, FADE, MIN)                                                                 \
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;                                                               \
+    tpage = getTPage(0, 1, 320, 256);                                                                                               \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                         \
     GFX_AddPrim(3, sizeof(DR_MODE));                                                                                                \
     D_1F800000.view.effect.params[0] = 16;                                                                                          \

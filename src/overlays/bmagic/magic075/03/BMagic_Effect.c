@@ -109,11 +109,7 @@ MATCH void func_801EF2F4(s32 radius) {
 
     radius += g_FrameCount & 1;
     for (i = 0; i < 16; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
@@ -136,11 +132,7 @@ MATCH void func_801EF500(s32 outer, s32 inner) {
     outer += g_FrameCount & 1;
     inner += g_FrameCount & 1;
     for (i = 0; i < 16; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;

@@ -139,7 +139,7 @@ MATCH void func_801EF4E0(void) {
     s32      k;
     s32      tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     k = g_Task->param.unk_0B;
@@ -185,7 +185,7 @@ MATCH void func_801EF4E0(void) {
         setRGB3(prim, 1, 1, D_1F800000.view.effect.params[3]);
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
@@ -195,7 +195,7 @@ MATCH void func_801EFA4C(void) {
     s32      k;
     s32      tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = 12;
@@ -275,7 +275,7 @@ MATCH void func_801EFA4C(void) {
         setRGB3(prim, D_1F800000.view.effect.params[3], 1, D_1F800000.view.effect.params[3]);
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }

@@ -117,11 +117,7 @@ MATCH void func_801EF898(void) {
     D_1F800000.view.scenario.math_08 = g_Task->unk_09 * 6;
     D_1F800000.view.scenario.math_0C = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (TILE_1*)g_GfxPrimCursor;

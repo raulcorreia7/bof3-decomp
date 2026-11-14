@@ -97,11 +97,7 @@ MATCH void func_801EF070(void) {
     s16       x;
     s16       y;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    tpage = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     shade  = &D_1F800006;

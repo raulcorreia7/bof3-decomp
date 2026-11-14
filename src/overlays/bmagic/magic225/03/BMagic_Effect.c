@@ -243,13 +243,7 @@ MATCH void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color) {
     s32      tpage;
     s32      i;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x125;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim((u8)g_Task->unk_29, sizeof(DR_MODE));
     D_1F800000_WORD[0] = (s16)radius;
@@ -286,11 +280,7 @@ MATCH void func_801EFCA0(void) {
     s32           tpage;
     volatile s32* shade;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = ((g_Task->param.unk_0B & 3) << 7) | 0x25;
-    } else {
-        tpage = ((g_Task->param.unk_0B & 3) << 5) | 0x15;
-    }
+    tpage = getTPage(0, g_Task->param.unk_0B, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim((u8)g_Task->unk_29, sizeof(DR_MODE));
     prim = (POLY_F4*)g_GfxPrimCursor;

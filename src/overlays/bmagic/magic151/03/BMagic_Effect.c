@@ -398,11 +398,7 @@ MATCH void func_801F026C(void) {
             D_1F800014[3].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[7]), D_1F800000.view.effect.params[2]);
             x                                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y                                = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            if (GetGraphType() == 1 || GetGraphType() == 2) {
-                tpage = 0x125;
-            } else {
-                tpage = 0x55;
-            }
+            tpage                            = getTPage(0, 2, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
             prim = (POLY_F4*)g_GfxPrimCursor;
@@ -453,11 +449,7 @@ MATCH void func_801F0648(void) {
         D_1F800014[3].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[7]), D_1F800000.view.effect.params[2]);
         x                                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
         y                                = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage                            = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -559,11 +551,7 @@ MATCH void func_801F0D0C(u8 angle0, u8 angle1) {
         D_1F800014[1].vy = FIXED_MUL(rcos(angle0 << 4), D_1F800000.view.effect.params[1]);
         x                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[1].vy << 9) + g_Task->pos.y.fixed;
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = ((g_Task->param.unk_0B & 3) << 7) | 0x25;
-        } else {
-            tpage = ((g_Task->param.unk_0B & 3) << 5) | 0x15;
-        }
+        tpage            = getTPage(0, g_Task->param.unk_0B, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
         prim = (LINE_F2*)g_GfxPrimCursor;

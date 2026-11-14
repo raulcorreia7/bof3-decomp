@@ -174,11 +174,7 @@ MATCH void func_801EF2D4(void) {
     D_1F800014[0].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00);
     D_1F800014[0].vz                 = FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00);
     for (i = 1; D_1F800000.view.scenario.math_00 < g_Task->unk_09; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = ((semi & 3) << 7) | 0x25;
-        } else {
-            tpage = ((semi & 3) << 5) | 0x15;
-        }
+        tpage = getTPage(0, semi, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
         prim = (LINE_F2*)g_GfxPrimCursor;
@@ -235,11 +231,7 @@ MATCH void func_801EF6C0(void) {
     long     flag;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
@@ -276,11 +268,7 @@ MATCH void func_801EF6C0(void) {
     setRGB2(prim, D_1F800000.view.scenario.math_04, 1, D_1F800000.view.scenario.math_04);
     setRGB3(prim, D_1F800000.view.scenario.math_04, 1, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;

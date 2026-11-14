@@ -7,11 +7,7 @@
 /* func_801F083C (magic097), func_801F00C4 (magic098) */
 #define BMAGIC_DRAW_FLICKER_RING(RED_STEP, GREEN_STEP, BLUE_STEP)                                                                                                                      \
     D_1F800000.view.effect.params[0] = (rand() & 7) + g_Task->timer * 4;                                                                                                               \
-    if (GetGraphType() == 1 || GetGraphType() == 2) {                                                                                                                                  \
-        tpage = 0xA5;                                                                                                                                                                  \
-    } else {                                                                                                                                                                           \
-        tpage = 0x35;                                                                                                                                                                  \
-    }                                                                                                                                                                                  \
+    tpage                            = getTPage(0, 1, 320, 256);                                                                                                                       \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                                            \
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));                                                                                                    \
     for (i = 0; i < 8; i++) {                                                                                                                                                          \

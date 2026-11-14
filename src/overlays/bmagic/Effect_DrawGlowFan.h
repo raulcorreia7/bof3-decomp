@@ -2,7 +2,7 @@
  * between a draw mode on each side. A statement macro: the member declares POLY_G3* poly, s32 tpage and s32 i. */
 /* func_801EF7FC (magic040), func_801EF920 (magic042) */
 #define EFFECT_DRAW_GLOW_FAN(RADIUS, SHADE)                                                                                                                                            \
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;                                                                                                                  \
+    tpage = getTPage(0, 1, 320, 256);                                                                                                                                                  \
     GFX_AddDitheredDrawMode(3, tpage);                                                                                                                                                 \
     i                                = 0;                                                                                                                                              \
     D_1F800000.view.effect.params[2] = (RADIUS);                                                                                                                                       \
@@ -22,5 +22,5 @@
         GFX_AddPrim(3, sizeof(POLY_G3));                                                                                                                                               \
         i++;                                                                                                                                                                           \
     } while (i < 16);                                                                                                                                                                  \
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;                                                                                                                  \
+    tpage = getTPage(0, 0, 320, 256);                                                                                                                                                  \
     GFX_AddDitheredDrawMode(3, tpage)

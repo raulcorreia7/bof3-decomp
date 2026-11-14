@@ -162,7 +162,7 @@ MATCH void func_801EF250(void) {
             D_1F800014[3].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[2]);
             x                                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y                                = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage                            = GetGraphType() == 1 || GetGraphType() == 2 ? 0x2A5 : 0xB5;
+            tpage                            = getTPage(1, 1, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
             poly = (POLY_FT4*)g_GfxPrimCursor;

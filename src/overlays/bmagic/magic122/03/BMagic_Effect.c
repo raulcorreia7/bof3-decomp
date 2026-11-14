@@ -154,7 +154,7 @@ MATCH void func_801EF324(void) {
     s32       outer;
     s32       swing;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
     D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;
     D_1F800000.view.effect.params[5] = g_Task->unk_30.half;
@@ -223,7 +223,7 @@ MATCH void func_801EF324(void) {
         setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
         GFX_AddPrim(3, sizeof(POLY_GT4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
 }
 

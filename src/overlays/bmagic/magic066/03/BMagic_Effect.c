@@ -140,7 +140,7 @@ MATCH void func_801EF158(void) {
     s32       i;
     s16       angle;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x2A5 : 0xB5;
+    tpage = getTPage(1, 1, 320, 256);
     GFX_AddDitheredDrawMode(2, tpage);
     D_1F800000.view.effect.params[0] = g_Task->unk_14;
     angle                            = g_Task->param.unk_0B;
@@ -221,7 +221,7 @@ MATCH void func_801EF158(void) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_G4));
     }
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x225 : 0x95;
+    tpage = getTPage(1, 0, 320, 256);
     GFX_AddDitheredDrawMode(2, tpage);
 }
 

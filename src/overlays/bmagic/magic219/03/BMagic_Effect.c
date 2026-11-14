@@ -193,7 +193,7 @@ MATCH void func_801EF71C(void) {
     s32      i;
     s32      tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     MAGIC219_RING_RADIUS = g_Task->timer << 4;

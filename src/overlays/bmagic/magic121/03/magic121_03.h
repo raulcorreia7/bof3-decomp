@@ -18,14 +18,8 @@ extern s16 D_1F800008[];
  * across the bolt by a sine, offset 32 to the side at heading + TURN. A statement macro: the member declares
  * line, tpage, i, run and wave. */
 #define MAGIC121_DRAW_BOLT(COUNT, TURN)                                                                                                                        \
-    run = 0;                                                                                                                                                   \
-    if (GetGraphType() == 1) {                                                                                                                                 \
-        tpage = 0xA5;                                                                                                                                          \
-    } else if (GetGraphType() == 2) {                                                                                                                          \
-        tpage = 0xA5;                                                                                                                                          \
-    } else {                                                                                                                                                   \
-        tpage = 0x35;                                                                                                                                          \
-    }                                                                                                                                                          \
+    run   = 0;                                                                                                                                                 \
+    tpage = getTPage(0, 1, 320, 256);                                                                                                                          \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                    \
     GFX_AddPrim(3, sizeof(DR_MODE));                                                                                                                           \
     D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;                                                                                                    \
@@ -74,13 +68,7 @@ extern s16 D_1F800008[];
         setRGB0(line, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3] / 3);                               \
         GFX_AddPrim(3, sizeof(LINE_F2));                                                                                                                       \
     }                                                                                                                                                          \
-    if (GetGraphType() == 1) {                                                                                                                                 \
-        tpage = 0x25;                                                                                                                                          \
-    } else if (GetGraphType() == 2) {                                                                                                                          \
-        tpage = 0x25;                                                                                                                                          \
-    } else {                                                                                                                                                   \
-        tpage = 0x15;                                                                                                                                          \
-    }                                                                                                                                                          \
+    tpage = getTPage(0, 0, 320, 256);                                                                                                                          \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                    \
     GFX_AddPrim(3, sizeof(DR_MODE));
 

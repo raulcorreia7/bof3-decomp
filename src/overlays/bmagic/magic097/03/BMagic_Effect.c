@@ -72,11 +72,7 @@ MATCH void func_801EF5C4(s16 band_height, u16 radius, u16 jitter_mask) {
     D_1F800000.view.effect.params[6] = band_height - RANDOM_MASK(3);
     D_1F800014[0].vy                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[1]), D_1F800000.view.effect.params[0]);
     D_1F800014[0].vz                 = 0;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage                            = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 18; i++) {

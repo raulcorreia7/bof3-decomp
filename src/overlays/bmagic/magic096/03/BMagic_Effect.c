@@ -190,7 +190,7 @@ MATCH void func_801EF4FC(void) {
         D_1F800014[2].vz = -D_1F800000.view.effect.params[3];
         x                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[1].vy << 9) + g_Task->pos.y.fixed;
-        tpage            = GetGraphType() == 1 || GetGraphType() == 2 ? 0x225 : 0x95;
+        tpage            = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         tri = (POLY_FT3*)g_GfxPrimCursor;
@@ -216,7 +216,7 @@ MATCH void func_801EF4FC(void) {
         D_1F800014[3].vz = 0;
         x                = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
-        tpage            = GetGraphType() == 1 || GetGraphType() == 2 ? 0x225 : 0x95;
+        tpage            = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         quad = (POLY_FT4*)g_GfxPrimCursor;
@@ -239,11 +239,7 @@ MATCH void func_801EFB3C(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = g_Task->timer * 16 + 16;

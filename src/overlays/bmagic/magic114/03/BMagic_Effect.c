@@ -9,26 +9,14 @@ MATCH void func_801EEC44(void) {
     s32      tpage;
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         func_801EF128();
     }
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
@@ -201,13 +189,9 @@ MATCH void func_801EFA80(void) {
     g_Task->unk_0C = 0x28000;
     g_Task->unk_10 = 0xA0000 - (g_Task->unk_09 << 17);
     func_801DD350(g_Task);
-    x = g_AreaScrollTargetX + g_Task->unk_0C;
-    y = g_AreaScrollTargetY + g_Task->unk_10;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    x     = g_AreaScrollTargetX + g_Task->unk_0C;
+    y     = g_AreaScrollTargetY + g_Task->unk_10;
+    tpage = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
@@ -290,11 +274,7 @@ MATCH void func_801F0004(void) {
     s32       x;
     s32       y;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2A5;
-    } else {
-        tpage = 0xB5;
-    }
+    tpage = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     g_Task->unk_0C = 0x80000;
@@ -377,11 +357,7 @@ MATCH void func_801F04D4(s32 semi) {
     u8        trans;
 
     trans = semi;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = ((semi & 3) << 7) | 0x225;
-    } else {
-        tpage = ((semi & 3) << 5) | 0x95;
-    }
+    tpage = getTPage(1, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     g_Task->unk_0C = 0x80000;
@@ -460,11 +436,7 @@ MATCH void func_801F093C(void) {
     s32      x;
     s32      y;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     g_Task->unk_0C = -0x30000;
