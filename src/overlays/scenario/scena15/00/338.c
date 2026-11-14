@@ -372,7 +372,37 @@ MATCH void func_801F8A5C(void) {
     SYS_DISPATCH_TASK(D_801FE5CC, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F8AA0);
+MATCH void func_801F8AA0(void) {
+    s32 cue;
+
+    g_Task->vx = 0;
+    g_Task->vy = 0;
+    g_Task->vz = 0;
+    if (!(g_Task->unk_06 & 0x1)) {
+        g_Task->unk_18 = 0x3000;
+        g_Task->unk_1C = 0;
+    } else {
+        g_Task->unk_18 = 0;
+        g_Task->unk_1C = 0x3000;
+    }
+    g_Task->gravity = 0x200000;
+    if (g_Task->unk_06 & 0x8) {
+        g_Task->vx += g_Task->unk_18 << 3;
+        g_Task->vy += g_Task->unk_1C << 3;
+        g_Task->vz += g_Task->gravity << 3;
+        g_Task->header.mode += 3;
+    } else {
+        g_Task->timer       = 8;
+        g_Task->header.mode = g_Task->header.mode + 1;
+    }
+    if (!(g_Task->param.unk_0B & 0x1)) {
+        cue = 0x202;
+        if (!(g_Task->unk_06 & 0x4)) {
+            cue = 0x207;
+        }
+        SND_PlayCue(cue);
+    }
+}
 
 #include "overlays/scenario/Scene_AdvanceBandMotion.h"
 

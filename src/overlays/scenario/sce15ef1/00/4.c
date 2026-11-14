@@ -95,7 +95,27 @@ MATCH void func_801D0FEC(void) {
 
 INCLUDE_ASM(func_801D106C);
 
-INCLUDE_ASM(func_801D12A0);
+MATCH void func_801D12A0(void) {
+    if ((g_Task->unk_06++ & 0x3) == 0) {
+        func_801D19C8();
+        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
+        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
+        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
+        func_801D19C8();
+        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
+        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
+        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
+    }
+    func_801D1A60();
+    func_801D2088();
+    func_801D1678(&g_Task->unk_18, &g_Task->pos.x, 0x40);
+    if (g_ScriptVars[0] == 0x17) {
+        g_Task->unk_03 = 0x80;
+        g_Task->timer  = 8;
+        g_Task->header.mode += 1;
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0A));
+    }
+}
 
 MATCH void func_801D13F4(void) {
     u8 remaining;
