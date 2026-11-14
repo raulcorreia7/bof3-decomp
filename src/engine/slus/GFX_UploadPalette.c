@@ -6,10 +6,7 @@
 MATCH void GFX_UploadPalette(void) {
     RECT rect;
 
-    rect.x = 0;
-    rect.y = 480;
-    rect.w = 256;
-    rect.h = 32;
+    setRECT(&rect, 0, 480, 256, 32);
     if (g_GfxPalettePending != 0) {
         LoadImage(&rect, (u_long*)AREA_PALETTE_WORK);
         g_GfxPalettePending = 0;
