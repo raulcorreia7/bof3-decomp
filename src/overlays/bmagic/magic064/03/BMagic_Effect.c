@@ -4,14 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* Four words, the copy unit of the effect work record's head. */
-typedef struct WorkChunk {
-    s32 w0;
-    s32 w1;
-    s32 w2;
-    s32 w3;
-} WorkChunk;
-
 /* func_801EEC7C */
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
