@@ -21,7 +21,7 @@ MATCH u8 func_801F3E14(u8 x, u8 y) {
         g_SceneEventStep = 10;
     } else {
         SYS_ToggleFlag(mode + 0x63D, D_801F5114[i].flag);
-        SND_PlayCue(0x202);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
     }
     return 1;
 }

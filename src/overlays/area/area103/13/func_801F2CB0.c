@@ -22,7 +22,7 @@ MATCH void func_801F2CB0(void) {
             row->unk_14    = 0x80;
         }
         row->pos.z -= 0x70000;
-        row->angle += 0x40;
+        row->angle += 64;
         row->scale -= 0x18;
         row++;
     }
