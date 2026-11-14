@@ -5,6 +5,5 @@
 #include "overlays/area/func_801F2C48.h"
 
 MATCH void func_801F2C48(void) {
-    AREA_START_WORK_AT_ENTRY_CELL_BODY(D_801F3594, 256, 1);
-    Area_Update();
+    AREA_START_WORK_AT_ENTRY_CELL_BODY(D_801F3594, 256);
 }

@@ -167,7 +167,41 @@ MATCH s8 func_801FD34C(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
 
 INCLUDE_ASM(func_801FD3BC);
 
-INCLUDE_ASM(func_801FD568);
+MATCH s8 func_801FD568(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
+    Actor* work;
+    s32    speed;
+    s16    height;
+    u8     count;
+    s32    sum;
+
+    work              = g_Task;
+    speed             = work->vz;
+    sum               = work->pos.x.fixed;
+    count             = work->unk_0A - 1;
+    work->pos.x.fixed = sum + work->vx;
+    work->pos.y.fixed += work->vy;
+    COORD_INT(work->pos.z) += work->vz >> 8;
+    work->unk_0A = count;
+    work->vz     = speed + vz_delta;
+    height       = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    if (g_Task->vz < 0 && height > COORD_INT(g_Task->pos.z) + 576) {
+        COORD_INT(g_Task->pos.z) = height + 576;
+    }
+    if (g_Task->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
+        g_Task->unk_2A = flags != 0;
+        Actor_RequestScript(landing_script);
+    }
+    if (g_Task->unk_0A == 0) {
+        if (g_Task->param.unk_0B != 0) {
+            g_Task->unk_0A = 0x10 / g_RouteSpeedScale[((Actor*)entry)->unk_04];
+            g_Task->param.unk_0B -= 1;
+        } else {
+            Actor_ApplyVelocity();
+            g_Task->unk_04 = 2;
+        }
+    }
+    return 1;
+}
 
 MATCH s8 func_801FD748(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
     s16 distance;
