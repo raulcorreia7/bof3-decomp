@@ -388,7 +388,6 @@
 {"function": "emi/world02/area098/13@0x801F48E8", "tried": "blocker: register allocation", "first_diff": "saved s2/s0.", "score": null}
 {"function": "emi/world02/area098/13@0x801F4FEC", "tried": "needs: union over Actor direction_08, unk_09, unk_0A and unk_0B.", "first_diff": "", "score": null}
 {"function": "emi/world02/area099/13@0x801F2FD4", "tried": "blocker: instruction scheduling", "first_diff": "0x801F2FE4.", "score": null}
-{"function": "emi/world02/area100/13@0x801F2D60", "tried": "Matches as Area_DrawLightPillar's body with u8 camera[0x50] passed to Area_SetCameraMatrix (twin: area145/14 func_801F3980); a shared body needs a name of its own beside Area_DrawLightPillar in this image.", "first_diff": "", "score": null}
 {"function": "emi/world02/area103/13@0x801F3718", "tried": "blocker: Actor gravity and active_flags widths", "first_diff": "lw a1,0x34(v0) (retail) against lw a0 (candidate).", "score": null}
 {"function": "emi/world02/area103/13@0x801F482C", "tried": "hint: retail keeps 0x170, 0x1A0, 0x270 and 0x120 in s-regs (frame 56, s0-s6); the plain draft uses frame 48 and fewer saves.", "first_diff": "", "score": null}
 {"function": "emi/world02/area104/14@0x801F4238", "tried": "blocker: load and store order", "first_diff": "lbu step against lui frame count.", "score": null}
@@ -447,7 +446,6 @@
 {"function": "emi/world03/area143/13@0x801F3E60", "tried": "blocker: entry and temp register permutation", "first_diff": "lhu v1,0(a2) against lhu a1 at 0x801F3E84.", "score": null}
 {"function": "emi/world03/area144/13@0x801F30CC", "tried": "blocker: unexplained 0x10-byte frame", "first_diff": "addiu sp,sp,-16.", "score": null}
 {"function": "emi/world03/area144/13@0x801F3C78", "tried": "tried: copy g_Task pos to globals, read g_ScriptState+4, call Area_SetFacingOffsetX; register allocation differs", "first_diff": "", "score": null}
-{"function": "emi/world03/area145/14@0x801F3980", "tried": "Matches as Area_DrawLightPillar's body with u8 camera[0x50] passed to Area_SetCameraMatrix (twin: area100/13 func_801F2D60); a shared body needs a name of its own.", "first_diff": "", "score": null}
 {"function": "emi/world03/area147/13@0x801F313C", "tried": "func_801F313C", "first_diff": "", "score": null}
 {"function": "emi/world03/area148/13@0x801F31AC", "tried": "func_801F31AC", "first_diff": "", "score": null}
 {"function": "emi/world03/area149/13@0x801F3140", "tried": "hint: two-slot spawn loop; the 0x194 draft with SpawnedActor unk_2C is 12 bytes over, retail copies the raw slot into a1 where ours masks (", "first_diff": "+0x48)", "score": null}

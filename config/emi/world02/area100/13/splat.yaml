@@ -16,7 +16,7 @@ segments:
       - [0x7C, c, func_801F2C7C]
       - [0xC0, c, func_801F2CC0]
       - [0x118, c, func_801F2D18]
-      - [0x160, c, func_801F2D60]
+      - [0x160, c, Area_DrawMatrixLightPillar]
       - [0x470, c, func_801F3070]
       - [0x4B4, c, func_801F30B4]
       - [0x508, c, func_801F3108]
