@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""Build several full bodies of one function in turn and stop at the first exact match.
+
+    tools/try_variants.py TARGET@0xADDRESS SOURCE.c VARIANTS.py
+
+VARIANTS.py is Python that defines `NAME` (the function name) and `V`, a dict of tag to the
+complete function text. Each variant replaces the `INCLUDE_ASM(NAME);` line of SOURCE.c, or the
+existing `MATCH`/`NON_MATCHING` definition of NAME, and `tools/match.sh --diff` judges it. A line
+per variant: `<tag> => MATCH`, `<tag> => N diff | <first difference>` or `<tag> => ERR ...`.
+The first match stays in SOURCE.c and ends the run; otherwise SOURCE.c is restored and the last
+line is `best (N, tag)`. Run `check-<image>` on a match.
+
+    tools/try_variants.py exe/slus_004_22@0x801530D0 src/engine/slus/func_801530D0.c variants.py
+"""
+
+import argparse
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def function_span(source, name):
+    """Return the start and end of the line or definition to replace."""
+    found = re.search(rf"INCLUDE_ASM\({name}\);\n", source)
+    if not found:
+        found = re.search(
+            rf"^(?:MATCH|NON_MATCHING)[^\n]*\b{name}\([^\n]*\{{\n.*?^\}}\n",
+            source,
+            re.S | re.M,
+        )
+    return found.start(), found.end()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser.add_argument("function", help="TARGET@0xADDRESS")
+    parser.add_argument("source", help="C file of the function")
+    parser.add_argument("variants", help="Python file that defines NAME and V")
+    args = parser.parse_args()
+    scope = {}
+    exec(Path(args.variants).read_text(), scope)
+    name, variants = scope["NAME"], scope["V"]
+    path = Path(args.source)
+    base = path.read_text()
+    start, end = function_span(base, name)
+    best = None
+    try:
+        for tag, text in variants.items():
+            path.write_text(base[:start] + text.rstrip("\n") + "\n" + base[end:])
+            lines = subprocess.run(
+                ["sh", str(ROOT / "tools/match.sh"), "--diff", args.function],
+                check=False,
+                cwd=ROOT,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+            ).stdout.splitlines()
+            differing = [line for line in lines if line.startswith("!")]
+            if any(line.startswith("match: ") for line in lines):
+                print(tag, "=> MATCH")
+                sys.exit(0)
+            if not differing:
+                print(tag, "=> ERR", "\n".join(lines)[-260:].replace("\n", " / "))
+                continue
+            first = differing[0]
+            print(f"{tag} => {len(differing)} diff | {first[2:38]} <> {first[47:84]}")
+            if best is None or len(differing) < best[0]:
+                best = (len(differing), tag)
+    except BaseException:
+        path.write_text(base)
+        raise
+    path.write_text(base)
+    print("best", best)
+
+
+if __name__ == "__main__":
+    main()
