@@ -300,7 +300,6 @@
 {"function": "emi/scenario/sce15ef3/00@0x801D2634", "tried": "blocker: case constant 1 kept in v0", "first_diff": "+0x8C.", "score": null}
 {"function": "emi/scenario/scena01/00@0x801F729C", "tried": "blocker: constant order", "first_diff": "+0x68 li v0,100 (candidate) against li v1,320 (retail).", "score": null}
 {"function": "emi/scenario/scena01/00@0x801F7AE4", "tried": "needs: particle record type at 0x800E4800.", "first_diff": "", "score": null}
-{"function": "emi/scenario/scena01/00@0x801FD28C", "tried": "needs: D_801FE280 declaration.", "first_diff": "", "score": null}
 {"function": "emi/scenario/scena02/00@0x801FE1C0", "tried": "blocker: nops after each lbu [v0]", "first_diff": "0x801FE1F0 nop against lui a0.", "score": null}
 {"function": "emi/scenario/scena04/00@0x801F6DD4", "tried": "blocker: schedule", "first_diff": "+4 li a0,0x10 before the s0 save.", "score": null}
 {"function": "emi/scenario/scena04/00@0x801F6F2C", "tried": "blocker: unk_09 value register", "first_diff": "+0x40 lbu a1,9(v0) (candidate) against lbu a0,9(v0) (retail).", "score": null}
