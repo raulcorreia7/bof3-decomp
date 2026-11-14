@@ -236,7 +236,14 @@ MATCH void func_801EF564(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EF724);
+MATCH void func_801EF724(void) {
+    g_PaletteFades[g_Task->timer].offset.red += 1;
+    g_PaletteFades[g_Task->timer].offset.green += 1;
+    g_PaletteFades[g_Task->timer].offset.blue += 1;
+    if (g_PaletteFades[g_Task->timer].offset.red == 16) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF834(void) {
     g_PaletteFades[g_Task->timer].offset.red -= 1;

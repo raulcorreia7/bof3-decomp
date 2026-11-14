@@ -105,7 +105,14 @@ MATCH void func_801EF048(void) {
     g_Task->timer = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
 }
 
-INCLUDE_ASM(func_801EF23C);
+MATCH void func_801EF23C(void) {
+    g_PaletteFades[g_Task->timer].offset.red += 1;
+    g_PaletteFades[g_Task->timer].offset.green += 1;
+    g_PaletteFades[g_Task->timer].offset.blue += 1;
+    if (--g_Task->unk_09 == 0) {
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801EF348(void) {
     g_PaletteFades[g_Task->timer].offset.red -= 1;

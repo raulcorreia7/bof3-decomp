@@ -38,7 +38,25 @@ MATCH void func_801F0090(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
-INCLUDE_ASM(func_801F012C);
+/* The shade the screen tile fades to. */
+#define SCREEN_SHADE D_1F800000.view.scenario.math_04
+
+MATCH void func_801F012C(void) {
+    TILE* tile;
+
+    GFX_AddDitheredDrawMode(3, getTPage(0, 2, 320, 256));
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    SetSemiTrans(tile, 1);
+    tile->w      = SCREEN_WIDTH;
+    tile->y0     = 0;
+    tile->x0     = 0;
+    tile->h      = SCREEN_HEIGHT;
+    SCREEN_SHADE = g_Task->unk_09;
+    setRGB0(tile, SCREEN_SHADE, SCREEN_SHADE, SCREEN_SHADE);
+    GFX_AddPrim(3, sizeof(TILE));
+    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
+}
 
 MATCH void func_801F0254(void) {
     SYS_DISPATCH_BYTE(D_801F0BCC, g_Task->header.step);

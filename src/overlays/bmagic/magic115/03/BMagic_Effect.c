@@ -73,7 +73,30 @@ MATCH void func_801EF098(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF130);
+MATCH void func_801EF130(void) {
+    g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.part.integer = g_BattleEffectBattler->pos.z.part.integer + 0x2C0;
+    g_Task->unk_25             = 0x1D;
+    g_Task->unk_26             = 0;
+    g_Task->scale.x            = 0x10000;
+    g_Task->scale.y            = 0x10000;
+    g_Task->unk_48             = 1;
+    g_Task->unk_27             = 0xA0;
+    g_Task->unk_28             = 0;
+    g_Task->unk_24             = 4;
+    g_Task->unk_5D             = 0;
+    g_Task->unk_5E             = 0;
+    g_Task->unk_5F             = 0;
+    g_Task->unk_5C             = 0;
+    g_Task->unk_2A             = 0;
+    g_Task->unk_29             = 4;
+    g_Task->unk_2C.half        = 0;
+    g_Task->unk_2B             = 0;
+    Actor_SelectScript(0U);
+    g_Task->unk_09 = 0xFF;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF27C(void) {
     s32          angle;

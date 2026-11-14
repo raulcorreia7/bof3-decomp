@@ -262,9 +262,9 @@ MATCH void func_801EFD60(void) {
     }
 }
 
-INCLUDE_ASM(BMagic_DrawRingTriangles);
+#include "overlays/bmagic/BMagic_DrawRingTriangles.h"
 
-INCLUDE_ASM(BMagic_DrawRingQuads);
+#include "overlays/bmagic/BMagic_DrawRingQuads.h"
 
 /* func_801F03D4 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"
