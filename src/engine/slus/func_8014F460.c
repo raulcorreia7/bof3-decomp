@@ -2,7 +2,7 @@
 
 /* spins the shared tint step on the g_AreaCameraAngle.vz rotation cell until
  * the step reports completion, then clears the six tint bytes and releases the
- * callback thread.
+ * thread.
  */
 MATCH void func_8014F460(void) {
     s32  flag;
