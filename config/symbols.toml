@@ -2332,6 +2332,7 @@ Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss bat
 
 ["emi/boss/boss038/16"]
 Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads the area enemy record enemy_index into the EnemyBattler row of battle slot slot." }
+Battle_CenterCamera = { addr = 0x800AFD9C, alias = true }
 Boss_SetEnemyScript = { addr = 0x800C1980, type = "func", source = "sets boss038 enemy script, mode handler and action table and starts task mode 2" }
 Boss_EnemyScriptMode = { addr = 0x800C19E4, type = "func", source = "boss038 enemy script mode handler" }
 Boss_InstallBattleHooks = { addr = 0x800C1B7C, type = "func", source = "Installs the boss battle hooks of boss038: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }

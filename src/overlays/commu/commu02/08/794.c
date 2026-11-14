@@ -48,9 +48,47 @@ MATCH void func_801D150C(void) {
 
 INCLUDE_ASM(func_801D15A4);
 
-INCLUDE_ASM(func_801D1774);
+MATCH void func_801D1774(void) {
+    s32 i;
+    s32 j;
+    s32 x;
 
-INCLUDE_ASM(func_801D184C);
+    func_801D2794(9, 1, 0);
+    for (i = 0; i < 8; i++) {
+        if ((D_801DB0B8 >> i) & 1) {
+            j = i + 1;
+            x = (s16)(0x30 + i * 0x20);
+            func_801D2CF8(x, 0x6C, D_801DB080[j]);
+        }
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    Message_StartAreaMessage(0x73);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    D_801F294E += 1;
+}
+
+MATCH void func_801D184C(void) {
+    s32 i;
+    s32 j;
+    s32 x;
+
+    func_801D2794(9, 1, 0);
+    for (i = 0; i < 8; i++) {
+        if ((D_801DB0B8 >> i) & 1) {
+            j = i + 1;
+            x = (s16)(0x30 + i * 0x20);
+            func_801D2CF8(x, 0x6C, D_801DB080[j]);
+        }
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x102));
+        D_801DB0C4 = 4;
+        D_801F294E += 1;
+    }
+}
 
 MATCH void func_801D1938(void) {
     s8 count;
@@ -245,7 +283,27 @@ INCLUDE_ASM(func_801D2908);
 
 INCLUDE_ASM(func_801D2AC4);
 
-INCLUDE_ASM(func_801D2CF8);
+MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
+    SPRT* sprite;
+    u8    index;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 896, 256), NULL);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x, y);
+    setWH(sprite, 32, 40);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    index = icon;
+    if (index == 0xFF) {
+        setUV0(sprite, 0, 0);
+        sprite->clut = 0x7BC8;
+    } else {
+        setUV0(sprite, (icon & 7) * 32, (index / 8) * 40);
+        sprite->clut = 0x7BC9;
+    }
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 MATCH void func_801D2E10(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
