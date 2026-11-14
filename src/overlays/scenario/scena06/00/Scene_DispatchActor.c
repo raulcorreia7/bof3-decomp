@@ -230,7 +230,41 @@ MATCH s32 func_801FDE34(void) {
     return 1;
 }
 
-INCLUDE_ASM(func_801FDEA4);
+MATCH s32 func_801FDEA4(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x27) == 0) {
+        Game_SetScriptActive();
+        g_ScriptVars[0]       = 0;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 15;
+        return 1;
+    } else if (SYS_TestFlag(g_SceneEventFlags, 5) == 0 || SYS_TestFlag(g_SceneEventFlags, 6) == 0) {
+        Game_SetScriptActive();
+        g_ScriptVars[0]       = 0;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 15;
+        return 1;
+    } else if (SYS_TestFlag(g_SceneFlags, 0x2C) == 0) {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 5;
+        g_ScriptVars[0]       = 0;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.state_04 = 15;
+        return 1;
+    } else {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 30;
+        g_SceneState.state_04 = 15;
+        return 1;
+    }
+}
 
 MATCH void func_801FDFFC(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
