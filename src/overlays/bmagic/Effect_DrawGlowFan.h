@@ -16,15 +16,9 @@
                D_1F800000.view.effect.params[1] + ((rcos(i << 9) * D_1F800000.view.effect.params[2]) >> 12),                                                                           \
                D_1F800000.view.effect.params[0] + ((rsin((i + 1) << 9) * D_1F800000.view.effect.params[2]) >> 12),                                                                     \
                D_1F800000.view.effect.params[1] + ((rcos((i + 1) << 9) * D_1F800000.view.effect.params[2]) >> 12));                                                                    \
-        poly->r0 = (SHADE);                                                                                                                                                            \
-        poly->g0 = (SHADE);                                                                                                                                                            \
-        poly->b0 = (SHADE);                                                                                                                                                            \
-        poly->r1 = 1;                                                                                                                                                                  \
-        poly->g1 = 1;                                                                                                                                                                  \
-        poly->b1 = 1;                                                                                                                                                                  \
-        poly->r2 = 1;                                                                                                                                                                  \
-        poly->g2 = 1;                                                                                                                                                                  \
-        poly->b2 = 1;                                                                                                                                                                  \
+        setRGB0(poly, (SHADE), (SHADE), (SHADE));                                                                                                                                      \
+        setRGB1(poly, 1, 1, 1);                                                                                                                                                        \
+        setRGB2(poly, 1, 1, 1);                                                                                                                                                        \
         GFX_AddPrim(3, sizeof(POLY_G3));                                                                                                                                               \
         i++;                                                                                                                                                                           \
     } while (i < 16);                                                                                                                                                                  \

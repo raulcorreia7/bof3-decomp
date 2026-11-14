@@ -222,9 +222,7 @@ MATCH void func_801EF5B0(void) {
         D_1F800014[3].vx                 = 0xE00;
         D_1F800014[3].vy                 = D_1F800014[2].vy;
         D_1F800014[3].vz                 = D_1F800014[2].vz;
-        prim->r0                         = D_1F800000.view.effect.params[2];
-        prim->g0                         = D_1F800000.view.effect.params[2];
-        prim->b0                         = D_1F800000.view.effect.params[2];
+        setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
         prim->tpage                      = GetTPage(1, 1, 832, 256);
         prim->clut                       = GetClut(0, 506);
         D_1F800000.view.effect.params[3] = ((g_Task->timer + i) % 14) * 16 + 8;

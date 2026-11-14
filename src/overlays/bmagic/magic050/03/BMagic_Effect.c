@@ -129,13 +129,9 @@ MATCH void func_801EF898(void) {
         SetSemiTrans(prim, 1);
         setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_00));
         if (g_Battle.action_id == 50) {
-            prim->r0 = D_1F800000.view.scenario.math_08;
-            prim->g0 = D_1F800000.view.scenario.math_08;
-            prim->b0 = D_1F800000.view.scenario.math_0C;
+            setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C);
         } else {
-            prim->r0 = D_1F800000.view.scenario.math_08;
-            prim->g0 = D_1F800000.view.scenario.math_0C;
-            prim->b0 = D_1F800000.view.scenario.math_08;
+            setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_08);
         }
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(TILE_1));
     }

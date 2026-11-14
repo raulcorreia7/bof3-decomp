@@ -409,9 +409,7 @@ MATCH void func_801F026C(void) {
             SetPolyF4(prim);
             SetSemiTrans(prim, 1);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-            prim->r0 = D_1F800000.view.effect.params[5];
-            prim->g0 = D_1F800000.view.effect.params[5];
-            prim->b0 = D_1F800000.view.effect.params[5];
+            setRGB0(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
             Area_AddCellPrim(x, y, 1, sizeof(POLY_F4));
         }
     }
@@ -573,9 +571,7 @@ MATCH void func_801F0D0C(u8 angle0, u8 angle1) {
         SetSemiTrans(prim, g_Task->param.unk_0B);
         RotTransPers(&D_1F800014[0], (long*)&prim->x0, &depth, &flag);
         RotTransPers(&D_1F800014[1], (long*)&prim->x1, &depth, &flag);
-        prim->r0 = D_1F800000.view.effect.params[5];
-        prim->g0 = D_1F800000.view.effect.params[5];
-        prim->b0 = D_1F800000.view.effect.params[5];
+        setRGB0(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
         Area_AddCellPrim(x, y, 2, sizeof(LINE_F2));
     }
 }

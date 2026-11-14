@@ -179,9 +179,7 @@ MATCH void func_801EF250(void) {
             poly->u3    = (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F;
             poly->v3    = D_801EF788[ring - 1] - 1 + D_801EF780[ring - 1];
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
-            poly->r0 = D_1F800000.view.effect.params[4];
-            poly->g0 = D_1F800000.view.effect.params[5];
-            poly->b0 = D_1F800000.view.effect.params[6];
+            setRGB0(poly, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
             Area_AddCellPrim(x, y, 1, sizeof(POLY_FT4));
         }
     }

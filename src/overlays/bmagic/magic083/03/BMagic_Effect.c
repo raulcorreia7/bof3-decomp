@@ -208,15 +208,9 @@ MATCH void func_801EF844(void) {
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, &depth, &flag);
-        poly->r0 = D_1F800000.view.effect.params[3];
-        poly->g0 = D_1F800000.view.effect.params[3];
-        poly->b0 = D_1F800000.view.effect.params[3];
-        poly->r1 = D_1F800000.view.effect.params[4];
-        poly->g1 = D_1F800000.view.effect.params[5];
-        poly->b1 = D_1F800000.view.effect.params[6];
-        poly->r2 = D_1F800000.view.effect.params[4];
-        poly->g2 = D_1F800000.view.effect.params[5];
-        poly->b2 = D_1F800000.view.effect.params[6];
+        setRGB0(poly, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB1(poly, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB2(poly, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
@@ -256,18 +250,10 @@ MATCH void func_801EFB24(void) {
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
-        poly->r0 = D_1F800000.view.effect.params[4];
-        poly->g0 = D_1F800000.view.effect.params[5];
-        poly->b0 = D_1F800000.view.effect.params[6];
-        poly->r1 = D_1F800000.view.effect.params[4];
-        poly->g1 = D_1F800000.view.effect.params[5];
-        poly->b1 = D_1F800000.view.effect.params[6];
-        poly->r2 = 1;
-        poly->g2 = 1;
-        poly->b2 = 1;
-        poly->r3 = 1;
-        poly->g3 = 1;
-        poly->b3 = 1;
+        setRGB0(poly, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB1(poly, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB2(poly, 1, 1, 1);
+        setRGB3(poly, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
@@ -483,15 +469,9 @@ MATCH void BMagic_SetXFixed(s32 radius) {
         setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * D_1F800000.view.effect.params[0]) >> 12),
                g_Task->unk_30.half + ((rcos(i << 9) * D_1F800000.view.effect.params[0]) >> 12), g_Task->unk_2E.half + ((rsin((i + 1) << 9) * D_1F800000.view.effect.params[0]) >> 12),
                g_Task->unk_30.half + ((rcos((i + 1) << 9) * D_1F800000.view.effect.params[0]) >> 12));
-        poly->r0 = 0x80;
-        poly->g0 = 0x80;
-        poly->b0 = 0x80;
-        poly->r1 = 1;
-        poly->g1 = 1;
-        poly->b1 = 1;
-        poly->r2 = 1;
-        poly->g2 = 1;
-        poly->b2 = 1;
+        setRGB0(poly, 0x80, 0x80, 0x80);
+        setRGB1(poly, 1, 1, 1);
+        setRGB2(poly, 1, 1, 1);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
         i++;
     } while (i < 8);

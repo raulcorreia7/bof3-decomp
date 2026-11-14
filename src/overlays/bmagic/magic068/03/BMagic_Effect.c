@@ -265,11 +265,9 @@ MATCH void func_801EF55C(void) {
             SetTile(prim);
             setXY0(prim, D_1F800000.view.scenario.math_00, D_1F800000.view.scenario.math_04);
             D_1F800000.view.scenario.math_00 += 10;
-            prim->w  = 8;
-            prim->h  = 12;
-            prim->r0 = D_801EFCA4[i][0];
-            prim->g0 = D_801EFCA4[i][1];
-            prim->b0 = D_801EFCA4[i][2];
+            prim->w = 8;
+            prim->h = 12;
+            setRGB0(prim, D_801EFCA4[i][0], D_801EFCA4[i][1], D_801EFCA4[i][2]);
             GFX_AddPrim(0, sizeof(TILE));
         }
     }

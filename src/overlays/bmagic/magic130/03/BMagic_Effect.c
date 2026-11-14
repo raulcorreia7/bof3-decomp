@@ -138,15 +138,9 @@ MATCH void func_801EF4D4(void) {
         SetSemiTrans(prim, 1);
         setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, D_1F800014[0].vx, D_1F800014[0].vy, D_1F800014[0].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]),
                D_1F800014[0].vy = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]));
-        prim->r0 = D_1F800000.view.effect.params[2];
-        prim->g0 = D_1F800000.view.effect.params[2];
-        prim->b0 = D_1F800000.view.effect.params[2];
-        prim->r1 = D_1F800000.view.effect.params[3];
-        prim->g1 = D_1F800000.view.effect.params[4];
-        prim->b1 = D_1F800000.view.effect.params[5];
-        prim->r2 = D_1F800000.view.effect.params[3];
-        prim->g2 = D_1F800000.view.effect.params[4];
-        prim->b2 = D_1F800000.view.effect.params[5];
+        setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
+        setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
         GFX_AddPrim(2, sizeof(POLY_G3));
     }
 }
@@ -174,12 +168,8 @@ MATCH void func_801EF730(void) {
         prim->y3 = D_1F800014[1].vy = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
-        prim->r2 = D_1F800000.view.effect.params[3];
-        prim->g2 = D_1F800000.view.effect.params[4];
-        prim->b2 = D_1F800000.view.effect.params[5];
-        prim->r3 = D_1F800000.view.effect.params[3];
-        prim->g3 = D_1F800000.view.effect.params[4];
-        prim->b3 = D_1F800000.view.effect.params[5];
+        setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
+        setRGB3(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
         GFX_AddPrim(2, sizeof(POLY_G4));
     }
 }

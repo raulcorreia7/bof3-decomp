@@ -63,12 +63,8 @@ MATCH void func_801EF1E8(void) {
     dark       = &D_1F800008;
     *dark      = g_Task->unk_09;
     D_1F80000C = g_Task->unk_09 * 8;
-    prim->r0 = prim->r3 = D_1F80000C;
-    prim->g0 = prim->g3 = D_1F80000C;
-    prim->b0 = prim->b3 = D_1F80000C;
-    prim->r1 = prim->r2 = *dark;
-    prim->g1 = prim->g2 = *dark;
-    prim->b1 = prim->b2 = *dark;
+    setRGB0(prim, prim->r3 = D_1F80000C, prim->g3 = D_1F80000C, prim->b3 = D_1F80000C);
+    setRGB1(prim, prim->r2 = *dark, prim->g2 = *dark, prim->b2 = *dark);
     GFX_AddPrim(2, sizeof(POLY_G4));
     if (GetGraphType() == 1 || GetGraphType() == 2) {
         tpage = 0x25;
@@ -185,9 +181,7 @@ MATCH void func_801EF7A8(void) {
     prim->v2                         = (g_Task->unk_09 & 3) * 32 + 0x28;
     prim->u3                         = 0x98;
     prim->v3                         = (g_Task->unk_09 & 3) * 32 + 0x28;
-    prim->r0                         = D_1F800000.view.scenario.math_08;
-    prim->g0                         = D_1F800000.view.scenario.math_08;
-    prim->b0                         = D_1F800000.view.scenario.math_08;
+    setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
     GFX_AddPrim(3, sizeof(POLY_FT4));
 }
 

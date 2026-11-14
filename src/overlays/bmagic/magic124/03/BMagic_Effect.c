@@ -97,15 +97,9 @@ MATCH void func_801EF0B0(void) {
         SetSemiTrans(poly, 1);
         setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
                g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
-        poly->r0 = red;
-        poly->g0 = green;
-        poly->b0 = blue;
-        poly->r1 = 1;
-        poly->g1 = 1;
-        poly->b1 = 1;
-        poly->r2 = 1;
-        poly->g2 = 1;
-        poly->b2 = 1;
+        setRGB0(poly, red, green, blue);
+        setRGB1(poly, 1, 1, 1);
+        setRGB2(poly, 1, 1, 1);
         GFX_AddPrim(3, sizeof(POLY_G3));
         i++;
     } while (i < 8);
@@ -266,15 +260,9 @@ MATCH void func_801F03E0(void) {
         SetSemiTrans(poly, 1);
         setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
                g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
-        poly->r0 = centre;
-        poly->g0 = centre;
-        poly->b0 = centre;
-        poly->r1 = red;
-        poly->g1 = green;
-        poly->b1 = blue;
-        poly->r2 = red;
-        poly->g2 = green;
-        poly->b2 = blue;
+        setRGB0(poly, centre, centre, centre);
+        setRGB1(poly, red, green, blue);
+        setRGB2(poly, red, green, blue);
         GFX_AddPrim(3, sizeof(POLY_G3));
         i++;
     } while (i < 8);
@@ -302,18 +290,10 @@ MATCH void func_801F05B4(void) {
         setXY4(poly, g_Task->unk_2E.half + ((rsin(i << 9) * outer) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin((i + 1) << 9) * outer) >> 12),
                g_Task->unk_30.half + ((rcos((i + 1) << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin(i << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * inner) >> 12),
                g_Task->unk_2E.half + ((rsin((i + 1) << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * inner) >> 12));
-        poly->r0 = 1;
-        poly->g0 = 1;
-        poly->b0 = 1;
-        poly->r1 = 1;
-        poly->g1 = 1;
-        poly->b1 = 1;
-        poly->r2 = red;
-        poly->g2 = green;
-        poly->b2 = blue;
-        poly->r3 = red;
-        poly->g3 = green;
-        poly->b3 = blue;
+        setRGB0(poly, 1, 1, 1);
+        setRGB1(poly, 1, 1, 1);
+        setRGB2(poly, red, green, blue);
+        setRGB3(poly, red, green, blue);
         GFX_AddPrim(3, sizeof(POLY_G4));
         i++;
     } while (i < 8);

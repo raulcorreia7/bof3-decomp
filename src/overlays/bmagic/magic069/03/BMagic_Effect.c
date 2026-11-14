@@ -346,15 +346,9 @@ MATCH void func_801EFC00(void) {
             D_1F800000.view.effect.params[2] = ((D_801F0534[j + 1] + i * 16) & 0x3F) << 6;
             prim->x2                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
             prim->y2                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
-            prim->r0                         = D_1F800000.view.effect.params[3];
-            prim->g0                         = D_1F800000.view.effect.params[4];
-            prim->b0                         = 1;
-            prim->r1                         = D_1F800000.view.effect.params[3];
-            prim->g1                         = D_1F800000.view.effect.params[4];
-            prim->b1                         = 1;
-            prim->r2                         = D_1F800000.view.effect.params[3];
-            prim->g2                         = D_1F800000.view.effect.params[4];
-            prim->b2                         = 1;
+            setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], 1);
+            setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], 1);
+            setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], 1);
             GFX_AddPrim(3, sizeof(POLY_G3));
         }
     }
@@ -386,9 +380,7 @@ MATCH void func_801EFF14(void) {
             D_1F800000.view.effect.params[2] = (i + 1) << 6;
             prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
             prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-            prim->r0                         = D_1F800000.view.effect.params[3];
-            prim->g0                         = D_1F800000.view.effect.params[3];
-            prim->b0                         = D_1F800000.view.effect.params[3];
+            setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
             GFX_AddPrim(3, sizeof(LINE_F2));
         }
     }
@@ -417,9 +409,7 @@ MATCH void func_801F0104(void) {
     line->x1 = D_1F80000C + 4;
     FAKE_ORDER_FENCE();
     line->y1 = D_1F80000E;
-    line->r0 = *shade;
-    line->g0 = *shade;
-    line->b0 = *shade;
+    setRGB0(line, *shade, *shade, *shade);
     GFX_AddPrim(3, sizeof(LINE_F2));
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
@@ -431,9 +421,7 @@ MATCH void func_801F0104(void) {
     line->x1 = D_1F80000C;
     FAKE_ORDER_FENCE();
     line->y1 = D_1F80000E - 4;
-    line->r0 = *shade;
-    line->g0 = *shade;
-    line->b0 = *shade;
+    setRGB0(line, *shade, *shade, *shade);
     GFX_AddPrim(3, sizeof(LINE_F2));
 }
 

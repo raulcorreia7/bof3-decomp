@@ -203,23 +203,15 @@ MATCH void func_801EF580(s32 phase) {
         prim->y2                         = g_Task->unk_30.half - i * 8;
         prim->x3                         = prim->x2 + 8;
         prim->y3                         = g_Task->unk_30.half - i * 8;
-        prim->r2                         = D_1F800000.view.scenario.math_08;
-        prim->g2                         = D_1F800000.view.scenario.math_08;
-        prim->b2                         = D_1F800000.view.scenario.math_08;
-        prim->r3                         = D_1F800000.view.scenario.math_08;
-        prim->g3                         = D_1F800000.view.scenario.math_08;
-        prim->b3                         = D_1F800000.view.scenario.math_08;
+        setRGB2(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+        setRGB3(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
         if (i < 6) {
             D_1F800000.view.scenario.math_08 = (i + 1) * 16;
         } else {
             D_1F800000.view.scenario.math_08 = 0x61 - (i - 5) * 48;
         }
-        prim->r0    = D_1F800000.view.scenario.math_08;
-        prim->g0    = D_1F800000.view.scenario.math_08;
-        prim->b0    = D_1F800000.view.scenario.math_08;
-        prim->r1    = D_1F800000.view.scenario.math_08;
-        prim->g1    = D_1F800000.view.scenario.math_08;
-        prim->b1    = D_1F800000.view.scenario.math_08;
+        setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+        setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
         prim->tpage = GetTPage(0, 1, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
         prim->u0    = 0;

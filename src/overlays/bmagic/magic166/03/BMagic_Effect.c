@@ -93,9 +93,7 @@ MATCH void func_801EF380(void) {
         D_1F800014[3].vy = 0;
         D_1F800014[3].vz = 0;
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        prim->r0 = D_1F800000.view.effect.params[3];
-        prim->g0 = D_1F800000.view.effect.params[4];
-        prim->b0 = D_1F800000.view.effect.params[5];
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_F4));
     }
 }

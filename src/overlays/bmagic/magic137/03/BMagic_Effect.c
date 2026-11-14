@@ -124,18 +124,10 @@ MATCH void func_801EF4C4(void) {
         setRGB2(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
         setRGB3(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
         if (i < 16) {
-            prim->r0 = D_1F800000.view.effect.params[1] / 16 * (i + 1);
-            prim->g0 = D_1F800000.view.effect.params[1] / 16 * (i + 1);
-            prim->b0 = D_1F800000.view.effect.params[1] / 16 * (i + 1);
-            prim->r1 = prim->r0;
-            prim->g1 = prim->g0;
-            prim->b1 = prim->b0;
-            prim->r2 = D_1F800000.view.effect.params[1] / 16 * i;
-            prim->g2 = D_1F800000.view.effect.params[1] / 16 * i;
-            prim->b2 = D_1F800000.view.effect.params[1] / 16 * i;
-            prim->r3 = prim->r2;
-            prim->g3 = prim->g2;
-            prim->b3 = prim->b2;
+            setRGB0(prim, D_1F800000.view.effect.params[1] / 16 * (i + 1), D_1F800000.view.effect.params[1] / 16 * (i + 1), D_1F800000.view.effect.params[1] / 16 * (i + 1));
+            setRGB1(prim, prim->r0, prim->g0, prim->b0);
+            setRGB2(prim, D_1F800000.view.effect.params[1] / 16 * i, D_1F800000.view.effect.params[1] / 16 * i, D_1F800000.view.effect.params[1] / 16 * i);
+            setRGB3(prim, prim->r2, prim->g2, prim->b2);
         }
         if (D_1F800000.view.effect.params[0] - 8 < i) {
             D_1F800000.view.effect.params[5] = D_1F800000.view.effect.params[1];

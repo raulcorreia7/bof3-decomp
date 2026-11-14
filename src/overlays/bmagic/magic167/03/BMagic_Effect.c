@@ -122,16 +122,10 @@ MATCH void func_801EF4B0(void) {
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, &depth, &flag);
-        shade    = &D_1F800004;
-        poly->r0 = *shade;
-        poly->g0 = *shade;
-        poly->b0 = *shade;
-        poly->r1 = *shade;
-        poly->g1 = *shade / 2;
-        poly->b1 = 1;
-        poly->r2 = *shade;
-        poly->g2 = *shade / 2;
-        poly->b2 = 1;
+        shade = &D_1F800004;
+        setRGB0(poly, *shade, *shade, *shade);
+        setRGB1(poly, *shade, *shade / 2, 1);
+        setRGB2(poly, *shade, *shade / 2, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
@@ -169,19 +163,11 @@ MATCH void func_801EF708(void) {
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
-        shade    = &D_1F800004;
-        poly->r0 = *shade;
-        poly->g0 = *shade / 2;
-        poly->b0 = 1;
-        poly->r1 = *shade;
-        poly->g1 = *shade / 2;
-        poly->b1 = 1;
-        poly->r2 = 1;
-        poly->g2 = 1;
-        poly->b2 = 1;
-        poly->r3 = 1;
-        poly->g3 = 1;
-        poly->b3 = 1;
+        shade = &D_1F800004;
+        setRGB0(poly, *shade, *shade / 2, 1);
+        setRGB1(poly, *shade, *shade / 2, 1);
+        setRGB2(poly, 1, 1, 1);
+        setRGB3(poly, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
@@ -307,10 +293,8 @@ MATCH void func_801F05C8(s32 step) {
         SetTile1(primitive);
         SetSemiTrans(primitive, 1);
         RotTransPers(D_1F800014, (long*)&primitive->x0, &p, &flag);
-        shade         = &D_1F800004;
-        primitive->r0 = *shade;
-        primitive->g0 = *shade;
-        primitive->b0 = *shade;
+        shade = &D_1F800004;
+        setRGB0(primitive, *shade, *shade, *shade);
         /* Retail advances the cell by 0x24 bytes here, more than the tile takes. */
         Area_AddCellPrim(x, y, 0, 0x24);
     }

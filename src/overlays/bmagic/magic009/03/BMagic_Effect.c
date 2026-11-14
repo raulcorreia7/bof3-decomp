@@ -166,9 +166,7 @@ MATCH void func_801EF3B8(void) {
     prim->v2    = 64;
     prim->u3    = 160;
     prim->v3    = 64;
-    prim->r0    = g_Task->timer * 10;
-    prim->g0    = 0;
-    prim->b0    = g_Task->timer * 9;
+    setRGB0(prim, g_Task->timer * 10, 0, g_Task->timer * 9);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }
 

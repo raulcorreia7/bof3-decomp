@@ -260,9 +260,7 @@ MATCH void func_801F01D0(void) {
         setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]),
                g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]),
                g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]));
-        prim->r0 = D_1F800000.view.effect.params[7];
-        prim->g0 = D_1F800000.view.effect.params[7] / 5;
-        prim->b0 = D_1F800000.view.effect.params[7] / 5;
+        setRGB0(prim, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7] / 5, D_1F800000.view.effect.params[7] / 5);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));

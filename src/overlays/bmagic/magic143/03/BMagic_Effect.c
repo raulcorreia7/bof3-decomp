@@ -116,9 +116,7 @@ MATCH void func_801EFC74(void) {
         SetSemiTrans(prim, 1);
         setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), *radius),
                g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), *radius));
-        prim->r0 = g_Task->timer * 8;
-        prim->g0 = g_Task->timer * 8;
-        prim->b0 = g_Task->timer * 6;
+        setRGB0(prim, g_Task->timer * 8, g_Task->timer * 8, g_Task->timer * 6);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));

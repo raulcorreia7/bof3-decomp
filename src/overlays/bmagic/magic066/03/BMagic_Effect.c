@@ -308,9 +308,7 @@ MATCH void func_801EFCC8(void) {
             poly->u3                         = 0x20;
             poly->v3                         = 0x20;
             D_1F800000.view.effect.params[1] = 0x41 - (D_801F00B0[i] >> 1) * 4;
-            poly->r0                         = D_1F800000.view.effect.params[1];
-            poly->g0                         = D_1F800000.view.effect.params[1];
-            poly->b0                         = D_1F800000.view.effect.params[1];
+            setRGB0(poly, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
             GFX_AddPrim(3, sizeof(POLY_FT4));
         }

@@ -151,12 +151,8 @@ MATCH void func_801F00C4(void) {
     }
     D_1F800000.view.effect.params[0] = g_Task->unk_09;
     D_1F800000.view.effect.params[1] = g_Task->unk_09 * 8;
-    prim->r0 = prim->r3 = D_1F800000.view.effect.params[0];
-    prim->g0 = prim->g3 = D_1F800000.view.effect.params[0];
-    prim->b0 = prim->b3 = D_1F800000.view.effect.params[0];
-    prim->r1 = prim->r2 = D_1F800000.view.effect.params[1];
-    prim->g1 = prim->g2 = D_1F800000.view.effect.params[1];
-    prim->b1 = prim->b2 = D_1F800000.view.effect.params[1];
+    setRGB0(prim, prim->r3 = D_1F800000.view.effect.params[0], prim->g3 = D_1F800000.view.effect.params[0], prim->b3 = D_1F800000.view.effect.params[0]);
+    setRGB1(prim, prim->r2 = D_1F800000.view.effect.params[1], prim->g2 = D_1F800000.view.effect.params[1], prim->b2 = D_1F800000.view.effect.params[1]);
     GFX_AddPrim(2, sizeof(POLY_G4));
     GFX_AddDitheredDrawMode(2, getTPage(0, 0, 320, 256));
 }

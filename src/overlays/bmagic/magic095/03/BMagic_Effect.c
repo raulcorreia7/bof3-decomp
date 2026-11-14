@@ -414,9 +414,7 @@ MATCH void func_801F012C(void) {
                 g_Task->timer = g_Task->unk_09;
             }
         }
-        prim->r0 = 0x40;
-        prim->g0 = 0x40;
-        prim->b0 = (rand() & 0x7F) + 0x40;
+        setRGB0(prim, 0x40, 0x40, (rand() & 0x7F) + 0x40);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         Area_AddCellPrim(x, y, 0, sizeof(POLY_F3));
     }

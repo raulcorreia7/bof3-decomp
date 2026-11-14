@@ -71,9 +71,7 @@ extern s16 D_1F800008[];
         line->x1         = D_1F800014[0].vx;                                                                                                                   \
         D_1F800014[0].vy = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);             \
         line->y1         = D_1F800014[0].vy;                                                                                                                   \
-        line->r0         = D_1F800000.view.effect.params[3];                                                                                                   \
-        line->g0         = D_1F800000.view.effect.params[3];                                                                                                   \
-        line->b0         = D_1F800000.view.effect.params[3] / 3;                                                                                               \
+        setRGB0(line, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3] / 3);                               \
         GFX_AddPrim(3, sizeof(LINE_F2));                                                                                                                       \
     }                                                                                                                                                          \
     if (GetGraphType() == 1) {                                                                                                                                 \

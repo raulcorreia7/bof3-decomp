@@ -209,18 +209,10 @@ MATCH void func_801EF758(void) {
            D_1F800000.view.effect.params[5] + D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[3],
            D_1F800000.view.effect.params[5] - D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[5] + D_1F800000.view.effect.params[4],
            D_1F800000.view.effect.params[6]);
-    prim->r0 = 1;
-    prim->g0 = 1;
-    prim->b0 = 1;
-    prim->r1 = 1;
-    prim->g1 = 1;
-    prim->b1 = 1;
-    prim->r2 = D_1F800000.view.effect.params[0];
-    prim->g2 = D_1F800000.view.effect.params[1];
-    prim->b2 = D_1F800000.view.effect.params[2];
-    prim->r3 = D_1F800000.view.effect.params[0];
-    prim->g3 = D_1F800000.view.effect.params[1];
-    prim->b3 = D_1F800000.view.effect.params[2];
+    setRGB0(prim, 1, 1, 1);
+    setRGB1(prim, 1, 1, 1);
+    setRGB2(prim, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[2]);
+    setRGB3(prim, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[2]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
 }
 

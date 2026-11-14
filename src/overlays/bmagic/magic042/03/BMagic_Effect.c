@@ -137,12 +137,8 @@ MATCH void func_801EF380(u8 start, u16 radius) {
         D_1F800000.view.effect.params[4] = (i & 0x1F) << 7;
         setXY2(line, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[0] + ((rcos(D_1F800000.view.effect.params[4]) * radius) >> 12),
                D_1F800000.view.effect.params[1] + ((rsin(D_1F800000.view.effect.params[4]) * radius) >> 12));
-        line->r0 = 0xC0;
-        line->g0 = 0xC0;
-        line->b0 = 0xC0;
-        line->r1 = 1;
-        line->g1 = 1;
-        line->b1 = 1;
+        setRGB0(line, 0xC0, 0xC0, 0xC0);
+        setRGB1(line, 1, 1, 1);
         GFX_AddPrim(3, sizeof(LINE_G2));
         D_1F800000.view.effect.params[2] = radius / 3 * 2;
         line                             = (LINE_G2*)g_GfxPrimCursor;
@@ -152,12 +148,8 @@ MATCH void func_801EF380(u8 start, u16 radius) {
         setXY2(line, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1] - 1,
                D_1F800000.view.effect.params[0] + ((rcos(D_1F800000.view.effect.params[4]) * D_1F800000.view.effect.params[2]) >> 12),
                D_1F800000.view.effect.params[1] + ((rsin(D_1F800000.view.effect.params[4]) * D_1F800000.view.effect.params[2]) >> 12) - 1);
-        line->r0 = 0x80;
-        line->g0 = 0x80;
-        line->b0 = 0x80;
-        line->r1 = 1;
-        line->g1 = 1;
-        line->b1 = 1;
+        setRGB0(line, 0x80, 0x80, 0x80);
+        setRGB1(line, 1, 1, 1);
         GFX_AddPrim(3, sizeof(LINE_G2));
         line = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(line);
@@ -166,12 +158,8 @@ MATCH void func_801EF380(u8 start, u16 radius) {
         setXY2(line, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1] + 1,
                D_1F800000.view.effect.params[0] + ((rcos(D_1F800000.view.effect.params[4]) * D_1F800000.view.effect.params[2]) >> 12),
                D_1F800000.view.effect.params[1] + ((rsin(D_1F800000.view.effect.params[4]) * D_1F800000.view.effect.params[2]) >> 12) + 1);
-        line->r0 = 0x80;
-        line->g0 = 0x80;
-        line->b0 = 0x80;
-        line->r1 = 1;
-        line->g1 = 1;
-        line->b1 = 1;
+        setRGB0(line, 0x80, 0x80, 0x80);
+        setRGB1(line, 1, 1, 1);
         GFX_AddPrim(3, sizeof(LINE_G2));
     }
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
@@ -194,12 +182,8 @@ MATCH void func_801EF71C(u8 start, u16 radius) {
         D_1F800000.view.effect.params[4] = (i & 0x7F) << 5;
         setXY2(line, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[0] + ((rcos(D_1F800000.view.effect.params[4]) * radius) >> 12),
                D_1F800000.view.effect.params[1] + ((rsin(D_1F800000.view.effect.params[4]) * radius) >> 12));
-        line->r0 = 0x80;
-        line->g0 = 0x80;
-        line->b0 = 0x20;
-        line->r1 = 1;
-        line->g1 = 1;
-        line->b1 = 1;
+        setRGB0(line, 0x80, 0x80, 0x20);
+        setRGB1(line, 1, 1, 1);
         GFX_AddPrim(3, sizeof(LINE_G2));
     }
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;

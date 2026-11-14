@@ -186,18 +186,10 @@ MATCH void func_801EF6A0(void) {
     prim->v2    = 31;
     prim->u3    = 31;
     prim->v3    = 31;
-    prim->r0    = *shade;
-    prim->g0    = *shade;
-    prim->b0    = *shade;
-    prim->r1    = *shade;
-    prim->g1    = *shade;
-    prim->b1    = *shade;
-    prim->r2    = *shade;
-    prim->g2    = *shade;
-    prim->b2    = *shade;
-    prim->r3    = *shade;
-    prim->g3    = *shade;
-    prim->b3    = *shade;
+    setRGB0(prim, *shade, *shade, *shade);
+    setRGB1(prim, *shade, *shade, *shade);
+    setRGB2(prim, *shade, *shade, *shade);
+    setRGB3(prim, *shade, *shade, *shade);
     SetSemiTrans(prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 }

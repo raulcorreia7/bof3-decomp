@@ -443,9 +443,7 @@ MATCH void func_801F075C(void) {
         setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]),
                g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]),
                g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]));
-        prim->r0 = D_1F800000.view.effect.params[3];
-        prim->g0 = D_1F800000.view.effect.params[3];
-        prim->b0 = D_1F800000.view.effect.params[3];
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         GFX_AddPrim(3, sizeof(POLY_G3));

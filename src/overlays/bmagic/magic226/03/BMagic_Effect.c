@@ -257,9 +257,7 @@ MATCH void func_801F01B8(void) {
     prim->v2    = 160;
     prim->u3    = 32;
     prim->v3    = 160;
-    prim->r0    = g_Task->unk_5D + D_1F800000.view.effect.params[5];
-    prim->g0    = D_1F800000.view.effect.params[5];
-    prim->b0    = D_1F800000.view.effect.params[5];
+    setRGB0(prim, g_Task->unk_5D + D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }
 

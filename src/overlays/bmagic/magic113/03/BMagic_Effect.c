@@ -268,13 +268,9 @@ MATCH void func_801EF944(void) {
             D_1F800014[0].vy = FIXED_MUL(rcos(i << 7), s_Magic113OrbitRadius);
             D_1F800014[0].vz = 0;
             RotTransPers(&D_1F800014[0], (long*)&prim->x1, &depth, &flag);
-            prim->r0 = 240;
-            prim->g0 = 170;
-            prim->b0 = 200;
+            setRGB0(prim, 240, 170, 200);
             if (g_Task->header.step == 2) {
-                prim->r0 = 240 - g_Task->timer * 20;
-                prim->g0 = 170 - g_Task->timer * 14;
-                prim->b0 = 200 - g_Task->timer * 16;
+                setRGB0(prim, 240 - g_Task->timer * 20, 170 - g_Task->timer * 14, 200 - g_Task->timer * 16);
             }
             GFX_AddPrim(5, sizeof(LINE_F2));
         }
@@ -363,13 +359,9 @@ MATCH void func_801EFDA0(void) {
             D_1F800014[1].vy = D_1F800014[0].vy + ((D_1F800014[1].vy - D_1F800014[0].vy) / 8) * length;
             D_1F800014[1].vz = 0;
             RotTransPers(&D_1F800014[1], (long*)&prim->x1, &depth, &flag);
-            prim->r0 = 240;
-            prim->g0 = 170;
-            prim->b0 = 200;
+            setRGB0(prim, 240, 170, 200);
             if (g_Task->header.step == 2) {
-                prim->r0 = 240 - g_Task->timer * 20;
-                prim->g0 = 170 - g_Task->timer * 14;
-                prim->b0 = 200 - g_Task->timer * 16;
+                setRGB0(prim, 240 - g_Task->timer * 20, 170 - g_Task->timer * 14, 200 - g_Task->timer * 16);
             }
             GFX_AddPrim(5, sizeof(LINE_F2));
         }

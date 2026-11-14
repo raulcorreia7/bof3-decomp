@@ -122,9 +122,7 @@ MATCH void func_801EF070(void) {
     prim->v2    = 104;
     prim->u3    = 120;
     prim->v3    = 104;
-    prim->r0    = *shade;
-    prim->g0    = *shade;
-    prim->b0    = *shade;
+    setRGB0(prim, *shade, *shade, *shade);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
 
@@ -343,15 +341,9 @@ MATCH void BMagic_DrawRingTriangles(void) {
         SetSemiTrans(prim, 1);
         setXY3(prim, x, y, x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]), y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]),
                x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]), y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]));
-        prim->r0 = D_1F800000.view.effect.params[3];
-        prim->g0 = D_1F800000.view.effect.params[3];
-        prim->b0 = D_1F800000.view.effect.params[3];
-        prim->r1 = D_1F800000.view.effect.params[4];
-        prim->g1 = D_1F800000.view.effect.params[5];
-        prim->b1 = D_1F800000.view.effect.params[6];
-        prim->r2 = D_1F800000.view.effect.params[4];
-        prim->g2 = D_1F800000.view.effect.params[5];
-        prim->b2 = D_1F800000.view.effect.params[6];
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB1(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }
@@ -382,12 +374,8 @@ MATCH void BMagic_DrawRingQuads(void) {
         prim->y3 = y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
-        prim->r2 = D_1F800000.view.effect.params[4];
-        prim->g2 = D_1F800000.view.effect.params[5];
-        prim->b2 = D_1F800000.view.effect.params[6];
-        prim->r3 = D_1F800000.view.effect.params[4];
-        prim->g3 = D_1F800000.view.effect.params[5];
-        prim->b3 = D_1F800000.view.effect.params[6];
+        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB3(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
