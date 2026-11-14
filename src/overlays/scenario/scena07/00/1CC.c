@@ -148,7 +148,27 @@ MATCH void func_801F7408(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
 }
 
-INCLUDE_ASM(func_801F7480);
+MATCH void func_801F7480(void) {
+    u8  i;
+    u8* row;
+
+    if ((g_Task->vx & D_801FDD7C[g_Task->timer]) == 0) {
+        D_801FDFBC->unk_10 += D_801FDD84[g_Task->timer];
+        for (i = 0; i < D_801FDD84[g_Task->timer]; i++) {
+            row = func_801F9DD4();
+            if (row != NULL) {
+                func_801F9E10(row);
+            }
+        }
+    }
+    if ((g_Task->vx & 0xF) == 0) {
+        g_Task->timer++;
+    }
+    func_801F9EFC();
+    if (--g_Task->vx == 0) {
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F75C0(void) {
     if (!(func_801F9EFC() & BYTE_MASK)) {

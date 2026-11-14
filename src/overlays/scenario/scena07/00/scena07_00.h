@@ -60,6 +60,8 @@ extern Callback        D_801FDE10[];
 extern Callback        D_801FDE1C[];
 extern SceneTimerSpawn D_801FDE40[12];
 extern u8              D_801FDE88[4];
+extern u8              D_801FDD7C[];
+extern u8              D_801FDD84[];
 extern u8              D_801FDD9C[];
 extern u8              D_801FDDA4[];
 extern u8              D_801FDE8C[];
