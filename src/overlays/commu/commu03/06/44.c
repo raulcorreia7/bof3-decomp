@@ -13,7 +13,21 @@ MATCH void func_801D0C80(void) {
     SYS_DISPATCH_BYTE(g_Commu03Step0Funcs, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D0CBC);
+MATCH void func_801D0CBC(void) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 7; i++) {
+        for (j = 0; j < 5; j++) {
+            g_TextVariables[i][j] = g_Characters[i].name[j];
+        }
+        g_TextVariables[i][5] = 0;
+    }
+    D_801D1948 = 4;
+    D_801D1940 = 0;
+    D_801D1944 = g_SndBGMId;
+    D_801F294D++;
+}
 
 MATCH void func_801D0D60(void) {
     u8 value;

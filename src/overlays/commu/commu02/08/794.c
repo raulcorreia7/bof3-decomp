@@ -174,7 +174,21 @@ MATCH void func_801D25CC(void) {
     }
 }
 
-INCLUDE_ASM(func_801D269C);
+MATCH void func_801D269C(s32 x, s32 y) {
+    POLY_F3* poly;
+    u8       colour;
+
+    if ((g_FrameCount & 8) != 0) {
+        colour = ((g_FrameCount & 6) << 5) | 0x3F;
+    } else {
+        colour = ((~g_FrameCount & 6) << 5) | 0x3F;
+    }
+    poly = g_GfxPrimCursor;
+    SetPolyF3(poly);
+    setXY3(poly, x, y, x - 6, y - 6, x + 6, y - 6);
+    setRGB0(poly, 0, colour, 0);
+    GFX_AddPrim(1, sizeof(POLY_F3));
+}
 
 MATCH s32 func_801D2750(s32 limit) {
     s32 roll;
@@ -185,7 +199,28 @@ MATCH s32 func_801D2750(s32 limit) {
     return roll;
 }
 
-INCLUDE_ASM(func_801D2794);
+MATCH void func_801D2794(s32 count, s32 shown, s32 chosen) {
+    s32 i;
+    s32 y;
+    u8  selected;
+
+    selected = chosen;
+    for (i = 0; i < (u8)count; i++) {
+        y = 0x6C;
+        if (i <= selected && selected != 0 && i != 0) {
+            if (D_801DB089[i] == 0) {
+                y = 0x64;
+            } else {
+                y = 0x74;
+            }
+        }
+        if (i < (u8)shown) {
+            func_801D2CF8((s16)(0x10 + i * 0x20), y, D_801DB080[i]);
+        } else {
+            func_801D2CF8((s16)(0x10 + i * 0x20), y, 0xFF);
+        }
+    }
+}
 
 MATCH void func_801D2870(void) {
     s32 i;
@@ -233,7 +268,20 @@ MATCH void func_801D2E60(s16 x, s16 y) {
     GFX_AddPrim(1, sizeof(LINE_F2));
 }
 
-INCLUDE_ASM(func_801D2EDC);
+/* Queues the 128-grey sprite whose source rectangle is entry index of the rectangle table. */
+MATCH void func_801D2EDC(s32 x, s32 y, s32 index) {
+    SPRT* sprt;
+
+    sprt = g_GfxPrimCursor;
+    SetSprt(sprt);
+    index = (u8)index * 4;
+    setXY0(sprt, x, y);
+    setWH(sprt, D_801DAC60[index + 2], D_801DAC60[index + 3]);
+    setRGB0(sprt, 128, 128, 128);
+    setUV0(sprt, D_801DAC60[index], D_801DAC60[index + 1]);
+    sprt->clut = 0x7887;
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801D2FA4);
 

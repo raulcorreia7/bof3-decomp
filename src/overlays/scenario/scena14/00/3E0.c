@@ -190,7 +190,24 @@ MATCH void Scene_SetPartyRyuAdultMomoPeco(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_PECO);
 }
 
-INCLUDE_ASM(func_801FBE10);
+MATCH void func_801FBE10(void) {
+    u8 ids[3];
+    u8 slot;
+
+    for (slot = 0; slot < 3; slot++) {
+        if (g_Game.members[slot].chr.character_id != CHAR_ID_RYU_ADULT && g_Game.members[slot].chr.character_id != CHAR_ID_REI) {
+            D_80144908[0] = g_Game.members[slot].chr.character_id;
+        }
+        ids[slot] = g_Game.members[slot].chr.character_id;
+    }
+    for (slot = 0; slot < 3; slot++) {
+        Party_RemoveMember(ids[slot]);
+    }
+    EMI_LoadPartyArchives(CHAR_ID_WHELP, CHAR_ID_BLANK, CHAR_ID_BLANK, 0);
+    g_Game.party_size = 0;
+    Party_JoinMember(CHAR_ID_WHELP);
+    Party_LoadPalettes();
+}
 
 MATCH void func_801FBF18(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
