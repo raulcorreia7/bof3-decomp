@@ -27,11 +27,8 @@ static inline void Area_DrawRadialLight(void* position, s32 radius, s32 colors, 
     angle    = 0;
     i        = 0;
     do {
-        primitive     = GFX_BeginPolyG3(1);
-        primitive->x0 = screen.vx;
-        primitive->y0 = screen.vy;
-        primitive->x1 = point.vx;
-        primitive->y1 = point.vy;
+        primitive = GFX_BeginPolyG3(1);
+        setXY2(primitive, screen.vx, screen.vy, point.vx, point.vy);
         angle += 128;
         point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
         point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);

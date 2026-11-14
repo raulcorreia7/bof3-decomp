@@ -91,9 +91,7 @@ MATCH void Area_UpdateCamera(void) {
         *(SVECTOR*)&D_801492E0   = *&g_AreaCameraAngle;
     }
     RotMatrix(&g_AreaCameraAngle, &g_CameraMatrix);
-    view.vx = (u32)g_AreaCameraX >> 1;
-    view.vy = g_AreaCameraY >> 1;
-    view.vz = (u32)g_AreaCameraHeight >> 1;
+    setVector(&view, (u32)g_AreaCameraX >> 1, g_AreaCameraY >> 1, (u32)g_AreaCameraHeight >> 1);
     ApplyMatrix(&g_CameraMatrix, &view, &trans);
     D_801492FC = trans.vx + g_AreaCameraOffsetX;
     D_80149300 = trans.vy + g_AreaCameraOffsetY;

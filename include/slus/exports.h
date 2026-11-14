@@ -72,7 +72,7 @@ extern volatile u8  g_UiTitleChoicePhase;
 /* D_80143C33 */
 extern u8           g_UiTitleInputGate;
 /* D_80143D40 */
-extern Thread*      g_CallbackSlot;
+extern Thread*      g_SysCurrentThread;
 /* D_80143D44 */
 extern u8           g_FrameBufferIndex;
 /* D_80143D48 */

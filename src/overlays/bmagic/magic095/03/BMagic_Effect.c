@@ -317,8 +317,6 @@ MATCH void func_801EFDDC(void) {
     }
 }
 
-extern Callback D_801F0654[];
-
 MATCH void func_801F0018(void) {
     Effect_SetActorMatrix();
     D_801F0654[g_Task->header.mode]();

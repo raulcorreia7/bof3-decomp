@@ -891,6 +891,7 @@ extern u32  Battle_IsEnemyDefeated(u32 bit_index);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
 s32         func_801DDE7C(u8 index, u16 packed_value);
 extern u8   g_BattleUIStep_nv;
+extern u8   D_80145F20[];
 
 /* Store half the calculated damage and queue its animation. */
 static inline void BattleApplyHalfDamage(s32 anim) {

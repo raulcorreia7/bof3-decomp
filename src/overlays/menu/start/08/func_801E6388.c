@@ -2,8 +2,6 @@
 
 /* Start-overlay state bytes and the prompt bank this unit walks. */
 
-extern void Menu_DrawPortrait(u16 overlay_x, u16 overlay_y, u8 sprite_id, u8 shade);
-
 MATCH void func_801E6388(s32 overlay_x, s32 overlay_y) {
     s32 base_x = overlay_x;
     s32 base_y = overlay_y;

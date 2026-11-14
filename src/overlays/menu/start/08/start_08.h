@@ -866,6 +866,10 @@ void func_801E2D84(s16 x, s32 y);
 /* func_801E3E34 */
 void Menu_SetGlyphPage(u16 line_index);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
+void func_801D49F8(s32 handler_index);
+void func_801E2E90(s32 x, s32 y, s32 row_index);
+void func_801E7608(void);
+void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
 s32  Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);

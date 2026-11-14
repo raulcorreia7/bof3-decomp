@@ -18,11 +18,9 @@ MATCH void Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     if ((Area_TestCondition(FIELD(s16, record, 0x0)) << 24) == 0) {
         return;
     }
-    D_1F800014->vx = ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2;
-    D_1F800014->vy = ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2;
-    D_1F800014->vz = FIELD(s32, record, 0x4);
+    setVector(D_1F800014, ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2, ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2, FIELD(s32, record, 0x4));
     /* FAKE: retail reads D_1F800034 as u16[]. */
-    z              = RotTransPers(D_1F800014, (long*)((u16*)D_1F800034), &depth, &flag);
+    z = RotTransPers(D_1F800014, (long*)((u16*)D_1F800034), &depth, &flag);
     if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
     }
