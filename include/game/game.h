@@ -41,13 +41,6 @@ ASSERT_OFFSET(PaletteOwner, palette_kind, 0x28);
 /* Largest value of one 5-bit colour channel of a palette cell. */
 #define COLOR_CHANNEL_MAX     31
 
-/* Signed per-channel colour shift of a palette fade; each channel is added to the colours it fades. */
-typedef struct ColorDelta8 {
-    s8 red;
-    s8 green;
-    s8 blue;
-} ColorDelta8;
-
 /* One 0xC-byte row of the palette fade table g_PaletteFades. */
 typedef struct PaletteFade {
     u8            flags;      /* PaletteFadeFlags */
