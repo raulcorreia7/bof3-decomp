@@ -2645,9 +2645,9 @@ GFX_UpdatePaletteAnimations = { addr = 0x80196C8C, type = "func", source = "Step
 GFX_StartPaletteAnimation = { addr = 0x80196CF0, type = "func", source = "Claims a free palette animation slot of D_80145D94 for an owner and its source colour table." }
 GFX_StepPaletteAnimation = { addr = 0x80196D84, type = "func", source = "Advances the animation entry of one D_80145D94 palette slot and copies its colours through GFX_CopyPaletteAnimationColors." }
 GFX_CopyPaletteAnimationColors = { addr = 0x80196E74, type = "func", source = "Copies the colours of one palette animation entry into g_GraphicsPaletteDst, with the divisor and stride read from s_PaletteSlotDivisors and s_PaletteSlotStrides, and sets g_GfxPalettePending." }
-Game_UpdateCampMenu = { addr = 0x80196F78, type = "func", source = "Runs the camp menu: the g_GameCampMenuLoad handler for the current step, then Menu_UpdatePanelTasks." }
+Game_RunCampMenu = { addr = 0x80196F78, type = "func", source = "Thread body that never returns: waits a frame, runs the g_GameCampMenuLoad handler of the current step, then Menu_UpdatePanelTasks." }
 Game_LoadCampMenu = { addr = 0x80196FFC, type = "func", source = "Camp menu step 0: loads the menu overlay slot 0x268, resets the palette and advances the camp menu step." }
-Game_UpdateMain = { addr = 0x80197068, type = "func", source = "Runs the main game loop: the g_GameStates handler selected by the game state index." }
+Game_RunMain = { addr = 0x80197068, type = "func", source = "Thread body that never returns: runs the g_GameStates handler the game state index selects, updates the clock and waits a frame." }
 Game_NewGame = { addr = 0x801970EC, type = "func", source = "Game state loop step 0: clears the new-game flags, resets g_GameAreaId and builds the party battlers for a new game." }
 Game_UpdateAreaLoad = { addr = 0x801971E8, type = "func", source = "Game state 1: loads the requested area, then sets g_GameEntryState to 8 when g_GameRequestFlags bit 3 is set, else to 2." }
 Game_UpdateField = { addr = 0x80197378, type = "func", source = "Game state 2: runs Game_UpdateScenario and Area_RunFrame, then maps g_GameStateIndex to the next g_GameEntryState." }
@@ -2763,8 +2763,8 @@ s_PaletteFadeRowDivisors = { addr = 0x801C7AE0, size = 0x8, source = "Divisor pe
 s_PaletteFadeStrides = { addr = 0x801C7AE8, size = 0x10, source = "Stride per palette row that GFX_UploadPaletteRows steps the colour row by." }
 s_PaletteSlotDivisors = { addr = 0x801C7AF8, size = 0x8, source = "Divisor per palette slot that GFX_CopyPaletteAnimationColors applies to the colour value." }
 s_PaletteSlotStrides = { addr = 0x801C7B00, size = 0x8, source = "Stride per palette slot that GFX_CopyPaletteAnimationColors steps the colour row by." }
-g_GameCampMenuLoad = { addr = 0x801C7B08, size = 0xC, source = "3 handlers of the camp menu load, called by Game_UpdateCampMenu in order." }
-g_GameStates = { addr = 0x801C7B14, size = 0x30, source = "12 game state handlers, called by Game_UpdateMain and indexed by the game state." }
+g_GameCampMenuLoad = { addr = 0x801C7B08, size = 0xC, source = "3 handlers of the camp menu load, called by Game_RunCampMenu in order." }
+g_GameStates = { addr = 0x801C7B14, size = 0x30, source = "12 game state handlers, called by Game_RunMain and indexed by the game state." }
 g_GameMenuSubstates = { addr = 0x801C7B44, size = 0xC, source = "3 handlers of game state 3 (menu), indexed by g_GameEntrySubstate by Game_UpdateMenu." }
 s_DirectionJitters = { addr = 0x801C7B50, size = 0x4, source = "Random offsets Game_ReturnFromMenu adds to the palette index when it picks a direction." }
 g_GameBattleSubstates = { addr = 0x801C7B54, size = 0x20, source = "8 handlers of game state 5 (battle), indexed by g_GameEntrySubstate by Game_UpdateBattle." }
@@ -3357,14 +3357,14 @@ Menu_DrawAbilitiesPanel = { addr = 0x801E0354, type = "func", source = "Draws th
 Menu_DrawPanelFrame = { addr = 0x801E0848, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 Menu_DrawEquipChoiceWindow = { addr = 0x801E0A70, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 SAVE_DrawSlot = { addr = 0x801E11A8, type = "func", source = "Draws one row of the save file list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
-Menu_StartNewGame = { addr = 0x801E2584, type = "func", source = "Starts a new game: clears g_GameAreaId, calls Scene_Start(0) and replaces the callback with Game_UpdateMain." }
+Menu_StartNewGame = { addr = 0x801E2584, type = "func", source = "Starts a new game: clears g_GameAreaId, calls Scene_Start(0) and replaces the callback with Game_RunMain." }
 Menu_DrawOptionRow = { addr = 0x801E2898, type = "func", source = "Draws one row of the options menu (rows 0 to 5): a window grown by the selection step, the option name centred at x + 58 (Msg Speed, Window Clr, Background, Sound, Autorun or Controller) and the divider line." }
 Menu_DrawGlyphAt = { addr = 0x801E33E8, type = "func", source = "Draws the glyph of one text code as a POLY_FT4 from the 21-per-row glyph atlas and returns the cursor past the code; bytes 0x12 and 0x13 select the second atlas page, 0x15 adds 0x64 and codes from 0x5B add 0x23." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
 Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "Slot 2 of g_MenuCampSubstates, before Menu_ExitCamp: runs the D_801ED138[g_MenuStartStep] handler and draws the area scene through Area_DrawScene." }
 SAVE_RunLoadVerify = { addr = 0x801E5A00, type = "func", source = "Reads the save file through SAVE_AccessFile, copies the image to D_801448D8 and compares the masked byte sum with the stored word D_800C1A70." }
 SAVE_RunLoadRestore = { addr = 0x801E5FD4, type = "func", source = "Restores the game from the loaded save: g_InputMasks from D_80145594, g_Game.party_size from Party_CountOrder(0), the PLP and PL archives of g_EmiLoadedCharacterIndex, then Party_BuildBattlers(0)." }
-Menu_ExitCamp = { addr = 0x801E62A8, type = "func", source = "Camp menu step 4: calls Char_RebuildStats on each of the eight g_Characters entries, then replaces the callback with Game_UpdateMain." }
+Menu_ExitCamp = { addr = 0x801E62A8, type = "func", source = "Camp menu step 4: calls Char_RebuildStats on each of the eight g_Characters entries, then replaces the callback with Game_RunMain." }
 Menu_DrawNameEntryGrid = { addr = 0x801E6490, type = "func", source = "Draws the name entry window: the 8 by 12 character grid of the page in D_801ED7E8 from D_801ECDBC, the Next, Back, Quit and Start labels and the cursor at D_801ED7E0 and D_801ED7E4." }
 Menu_DrawNameEntryControls = { addr = 0x801E6784, type = "func", source = "draws the name entry screen's command window: the OK, Del, Next and Back labels with the button icon beside each, the footer icons and the dot grid, framed by g_NameEntryControlsFrame" }
 SAVE_DrawSlots = { addr = 0x801E6C68, type = "func", source = "Draws the visible rows of the save file list and the panel header." }

@@ -41,11 +41,11 @@ u8    GFX_StartPaletteAnimation(u8* owner, u8* source_table);
 /* func_80196D84 */
 void  GFX_StepPaletteAnimation(u8 palette_slot);
 /* func_80196F78 */
-void  Game_UpdateCampMenu(void);
+void  Game_RunCampMenu(void);
 /* func_80196FFC */
 void  Game_LoadCampMenu(void);
 /* func_80197068 */
-void  Game_UpdateMain(void);
+void  Game_RunMain(void);
 /* func_801970EC */
 void  Game_NewGame(void);
 /* func_80199440 */
